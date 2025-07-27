@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/pacti620/geekndragon.com
-    - /usr/bin/rsync -av --delete --exclude=".git" . "$DEPLOYPATH"/
+    - export DEPLOYPATH=/home/pacti620/public_html/geekndragon.com/
+    - /usr/bin/rsync -av --delete --exclude='.git/' . "$DEPLOYPATH"
