@@ -1,0 +1,184 @@
+/* -------------------------------------------------------
+   Geek & Dragon – Styles additionnels
+   -------------------------------------------------------
+   • Utilise Tailwind CDN : classes utilitaires déjà actives
+   • Ici : petits raffinements UX / marketing
+-------------------------------------------------------- */
+
+/* 1. Palette – pour harmoniser les CTA et survols */
+:root{
+  --gd-primary:#6d28d9;       /* indigo-700 */
+  --gd-primary-hover:#7c3aed; /* indigo-600 */
+  --gd-secondary:#d97706;     /* amber-600  */
+  --gd-dark:#111827;          /* gray-900   */
+}
+
+/* 2. Boutons call-to-action  -------------------------- */
+.btn-primary {
+  display: inline-block;
+  padding: 0.75rem 2rem; /* px-8 py-3 */
+  font-size: 1.125rem;   /* text-lg */
+  font-weight: 600;      /* font-semibold */
+  letter-spacing: 0.025em; /* tracking-wide */
+  color: white;
+  background-image: linear-gradient(to right, #4338ca, #6b21a8); /* indigo-700 → purple-700 */
+  border: 2px solid #3730a3; /* border-indigo-800 */
+  border-radius: 9999px;  /* rounded-full */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); /* shadow-lg */
+  transition: all 0.3s ease-in-out;
+  transform: translateY(0) scale(1);
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background-image: linear-gradient(to right, #4f46e5, #7e22ce); /* indigo-600 → purple-600 */
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 28px -4px rgba(94, 58, 237, 0.5);
+  border-color: #4f46e5;
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.4);
+}
+
+
+.btn-outline {
+  display: inline-block;
+  padding: 0.75rem 2rem;          /* px-8 py-3 */
+  font-size: 1.125rem;            /* text-lg */
+  font-weight: 600;              /* font-semibold */
+  letter-spacing: 0.025em;       /* tracking-wide */
+  color: #c7d2fe;                /* text-indigo-200 */
+  border: 2px solid #818cf8;     /* border-indigo-400 */
+  border-radius: 9999px;         /* rounded-full */
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  transform: translateY(0) scale(1);
+}
+
+.btn-outline:hover {
+  background-color: rgba(129, 140, 248, 0.1); /* indigo-400/10 */
+  transform: translateY(-3px) scale(1.05);
+}
+
+.btn-outline:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.4); /* indigo-400 */
+}
+
+
+/* 3. Cartes produits : léger zoom au survol ----------- */
+.card-product{
+  @apply bg-gray-800 p-6 rounded-xl shadow-lg transition
+          duration-200;
+}
+.card-product:hover{
+  transform:translateY(-5px) scale(1.02);
+  box-shadow:0 12px 30px -8px rgba(0,0,0,.6);
+}
+
+/* 4. Anim fade-in rapide (sans dépendance externe) ---- */
+@keyframes fadeUp{
+  0%{opacity:0; transform:translateY(20px);}
+  100%{opacity:1; transform:translateY(0);}
+}
+.fade-up{animation:fadeUp .6s ease-out both;}
+
+/* 5. Fix mobile menu z-index -------------------------- */
+#mobile-menu{z-index:60;}
+
+/* 6. Formulaire contact ------------------------------- */
+input.gd-field, textarea.gd-field{
+  @apply w-full rounded-lg bg-gray-700 text-gray-200
+          placeholder-gray-400 p-3 mb-4 focus:outline-none
+          focus:ring-2 focus:ring-indigo-500;
+}
+
+.logo-lighten {
+  filter: brightness(1.3) contrast(1.1);
+}
+
+/* -- Boutique enhancements ---------------------------- */
+/* Quantity picker styles */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.quantity-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;  /* text-lg */
+  font-weight: 700;
+  color: #e0e7ff;       /* indigo-100 */
+  background: linear-gradient(to right, #3730a3, #4f46e5); /* indigo-800 → indigo-600 */
+  border: 2px solid #4338ca; /* indigo-700 */
+  border-radius: 9999px; /* full circle */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.quantity-btn:hover {
+  background: linear-gradient(to right, #4f46e5, #6366f1); /* indigo-600 → indigo-500 */
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px -4px rgba(99, 102, 241, 0.4);
+}
+
+.quantity-btn:active {
+  transform: scale(0.95);
+  box-shadow: none;
+}
+
+.qty-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #c7d2fe; /* indigo-200 */
+  text-align: center;
+  min-width: 2rem;
+}
+
+/* Shop call-to-action buttons */
+.btn-shop {
+  display: inline-block;
+  padding: 0.75rem 2rem; /* px-8 py-3 */
+  font-size: 1.125rem;   /* text-lg */
+  font-weight: 600;      /* font-semibold */
+  letter-spacing: 0.025em; /* tracking-wide */
+  color: white;
+  background-image: linear-gradient(to right, #4338ca, #6b21a8); /* indigo-700 → purple-700 */
+  border: 2px solid #3730a3; /* border-indigo-800 */
+  border-radius: 9999px;  /* rounded-full */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); /* shadow-lg */
+  transition: all 0.3s ease-in-out;
+  transform: translateY(0) scale(1);
+  text-align: center;
+}
+
+.btn-shop:hover {
+  background-image: linear-gradient(to right, #4f46e5, #7e22ce); /* indigo-600 → purple-600 */
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 28px -4px rgba(94, 58, 237, 0.5);
+  border-color: #4f46e5;
+}
+
+.btn-shop:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.4);
+}
+
+.btn-shop:disabled {
+  background-color: #4b5563; /* gris atténué */
+  color: #d1d5db;            /* gris clair */
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
