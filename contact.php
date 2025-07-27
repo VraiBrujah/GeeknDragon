@@ -6,14 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Demande de devis | Geek & Dragon</title>
 
-  <!-- Tailwind CDN + Police Cinzel -->
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 
   <style>
     body {
-      font-family: 'Cinzel', serif;
       background: url('images/bg_texture.jpg') center/cover fixed;
       color: #1e1b16;
     }
@@ -21,9 +19,6 @@
       background: #fdf8e4 url('images/parchment_fibers.png') repeat;
       box-shadow: 0 15px 40px -10px rgba(0,0,0,.7);
       border: 3px solid #c4a36d;
-    }
-    input, textarea {
-      font-family: 'Cinzel', serif;
     }
     label {
       color: #4b3e2c;

@@ -16,9 +16,8 @@ function inStock(string $id): bool
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Boutique | Geek & Dragon</title>
 
-  <!-- Tailwind + Cinzel -->
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- Snipcart styles -->
@@ -26,7 +25,7 @@ function inStock(string $id): bool
   <!-- Snipcart script is loaded asynchronously below in the body to avoid blocking the page -->
 
   <style>
-    body{font-family:'Cinzel',serif;background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
+    body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
     .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
     .btn{@apply bg-gradient-to-r from-indigo-700 to-purple-700 text-white font-bold px-5 py-2 rounded-full transition hover:from-indigo-600 hover:to-purple-600 hover:scale-105;}
     .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
