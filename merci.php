@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Merci !!! | Geek & Dragon</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
   <style>
-    body{font-family:'Cinzel',serif;background:url('images/bg_texture.jpg') center/cover fixed;color:#fef9e7;}
+    body{background:url('images/bg_texture.jpg') center/cover fixed;color:#fef9e7;}
   </style>
 </head>
 <body class="bg-cover bg-fixed">
