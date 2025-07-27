@@ -1,15 +1,15 @@
-<?php $active='contact'; ?>
+<?php
+$active='contact';
+$title = 'Merci !!! | Geek & Dragon';
+$extraHead = <<<HTML
+<style>
+  body{background:url('images/bg_texture.jpg') center/cover fixed;color:#fef9e7;}
+</style>
+HTML;
+?>
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Merci !!! | Geek & Dragon</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body{background:url('images/bg_texture.jpg') center/cover fixed;color:#fef9e7;}
-  </style>
-</head>
+<?php include 'head-common.php'; ?>
 <body class="bg-cover bg-fixed">
   <?php include 'header.php'; ?>
 

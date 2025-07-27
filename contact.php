@@ -1,16 +1,8 @@
-<?php $active = 'contact'; ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Demande de devis | Geek & Dragon</title>
-
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
-
-  <style>
+<?php
+$active = 'contact';
+$title  = 'Demande de devis | Geek & Dragon';
+$extraHead = <<<HTML
+<style>
     body {
       background: url('images/bg_texture.jpg') center/cover fixed;
       color: #1e1b16;
@@ -25,7 +17,11 @@
       font-weight: 600;
     }
   </style>
-</head>
+HTML;
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<?php include 'head-common.php'; ?>
 
 <body class="bg-[url('images/bg_texture.jpg')] bg-cover bg-fixed text-gray-100">
 

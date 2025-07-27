@@ -1,5 +1,20 @@
 <?php
 $active = 'boutique';
+$title  = 'Boutique | Geek & Dragon';
+$extraHead = <<<HTML
+<!-- Snipcart styles -->
+<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+<!-- Snipcart script is loaded asynchronously below in the body to avoid blocking the page -->
+<style>
+  body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
+  .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
+  .btn{@apply bg-gradient-to-r from-indigo-700 to-purple-700 text-white font-bold px-5 py-2 rounded-full transition hover:from-indigo-600 hover:to-purple-600 hover:scale-105;}
+  .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
+  .snipcart-modal__container{background:#1f2937!important;}
+  .snipcart .snipcart-button-primary{background-image:linear-gradient(to right,#4f46e5,#7c3aed)!important;border:none;}
+  .snipcart .snipcart-button-primary:hover{background-image:linear-gradient(to right,#6366f1,#8b5cf6)!important;}
+</style>
+HTML;
 
 /* ───── STOCK ───── */
 $stock    = json_decode(file_get_contents(__DIR__ . '/stock.json'), true) ?? [];
@@ -11,29 +26,7 @@ function inStock(string $id): bool
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Boutique | Geek & Dragon</title>
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
-
-  <!-- Snipcart styles -->
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
-  <!-- Snipcart script is loaded asynchronously below in the body to avoid blocking the page -->
-
-  <style>
-    body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
-    .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
-    .btn{@apply bg-gradient-to-r from-indigo-700 to-purple-700 text-white font-bold px-5 py-2 rounded-full transition hover:from-indigo-600 hover:to-purple-600 hover:scale-105;}
-    .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
-    .snipcart-modal__container{background:#1f2937!important;}
-    .snipcart .snipcart-button-primary{background-image:linear-gradient(to right,#4f46e5,#7c3aed)!important;border:none;}
-    .snipcart .snipcart-button-primary:hover{background-image:linear-gradient(to right,#6366f1,#8b5cf6)!important;}
-  </style>
-</head>
+<?php include 'head-common.php'; ?>
 
 <body>
 <?php include 'header.php'; ?>
