@@ -1,19 +1,10 @@
-<?php $active = 'contact'; ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Demande de devis | Geek & Dragon</title>
-
-  <!-- Tailwind CDN + Police Cinzel -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-
-  <style>
+<?php
+$active = 'contact';
+$title  = 'Demande de devis | Geek & Dragon';
+$metaDescription = "Demande de devis et informations pour vos projets immersifs.";
+$extraHead = <<<HTML
+<style>
     body {
-      font-family: 'Cinzel', serif;
       background: url('images/bg_texture.jpg') center/cover fixed;
       color: #1e1b16;
     }
@@ -22,15 +13,16 @@
       box-shadow: 0 15px 40px -10px rgba(0,0,0,.7);
       border: 3px solid #c4a36d;
     }
-    input, textarea {
-      font-family: 'Cinzel', serif;
-    }
     label {
       color: #4b3e2c;
       font-weight: 600;
     }
   </style>
-</head>
+HTML;
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<?php include 'head-common.php'; ?>
 
 <body class="bg-[url('images/bg_texture.jpg')] bg-cover bg-fixed text-gray-100">
 

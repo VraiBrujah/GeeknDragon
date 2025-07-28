@@ -1,15 +1,11 @@
-<?php $active = 'index'; ?>
+<?php
+$active = 'index';
+$title  = 'Geek & Dragon | Aides de jeu immersives';
+$metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D.";
+?>
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Geek & Dragon | Aides de jeu immersives</title>
-
-  <!-- Tailwind CDN + styles perso -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
+<?php include 'head-common.php'; ?>
 
 <body class="bg-[url('images/bg_texture.jpg')] bg-cover bg-fixed text-gray-100">
 
