@@ -19,7 +19,8 @@
  */
 
 define('STOCK_FILE', __DIR__ . '/stock.json');
-define('WEBHOOK_SECRET', 'YOUR_ORDER_SECRET');   // <— À REMPLACER !
+// Le secret est lu depuis la variable d'environnement ORDER_SECRET
+define('WEBHOOK_SECRET', getenv('ORDER_SECRET'));   // <— À REMPLACER !
 
 // ────────────────────────────
 function respond($code, $msg = '')

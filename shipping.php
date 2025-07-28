@@ -7,7 +7,8 @@
 header('Content-Type: application/json');
 
 // ⬇️ facultatif : vérifie la signature Snipcart
-$secret = 'YOUR_SHIPPING_SECRET';
+// Le secret est récupéré depuis la variable d'environnement SHIPPING_SECRET
+$secret = getenv('SHIPPING_SECRET');
 $signature = $_SERVER['HTTP_X_SNIPCART_SIGNATURE'] ?? '';
 $raw = file_get_contents("php://input");
 if (!hash_equals(hash_hmac('sha256', $raw, $secret), $signature)) {
