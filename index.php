@@ -1,6 +1,7 @@
 <?php
 $active = 'index';
 $title  = 'Geek & Dragon | Aides de jeu immersives';
+$metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D.";
 ?>
 <!DOCTYPE html>
 <html lang="fr">

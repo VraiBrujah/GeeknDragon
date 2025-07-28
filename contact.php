@@ -1,6 +1,7 @@
 <?php
 $active = 'contact';
 $title  = 'Demande de devis | Geek & Dragon';
+$metaDescription = "Demande de devis et informations pour vos projets immersifs.";
 $extraHead = <<<HTML
 <style>
     body {
