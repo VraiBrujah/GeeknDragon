@@ -39,10 +39,10 @@ function inStock(string $id): bool
 </div>
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 
-<main class="pt-32">
+<main class="pt-24 md:pt-32">
 
   <!-- ===== Bannière d'ouverture ===== -->
-  <section class="relative h-72 md:h-96">
+  <section class="relative min-h-[24rem] md:min-h-[32rem]">
     <img src="images/banner_luxe_coins.jpg" alt="Pluie de pièces luxueuses" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
