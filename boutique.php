@@ -1,6 +1,7 @@
 <?php
 $active = 'boutique';
 $title  = 'Boutique | Geek & Dragon';
+$metaDescription = "Achetez nos cartes et accessoires immersifs pour D&D.";
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
