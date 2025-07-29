@@ -13,6 +13,7 @@ The application expects a few secrets to be provided through the environment:
 - `SNIPCART_API_KEY` – your public Snipcart API key.
 - `SHIPPING_SECRET` – secret used by `shipping.php` to verify Snipcart webhook signatures.
 - `ORDER_SECRET` – secret used by `decrement-stock.php` when handling the "order completed" webhook.
+- `SNIPCART_API_KEY` – public API key used by `boutique.php` for the Snipcart integration.
 
 ## Local setup
 
@@ -22,11 +23,12 @@ The application expects a few secrets to be provided through the environment:
 3. Edit `boutique.php` and replace the value of `data-api-key` with the same Snipcart public API key.
 4. Start a local server from the project root:
 
+
    ```bash
    php -S localhost:8000
    ```
 
-5. Browse to <http://localhost:8000> to view the site.
+4. Browse to <http://localhost:8000> to view the site.
 
 Make sure that the domain you are using is allowed in your Snipcart dashboard; otherwise the cart may remain stuck at the "préparation" step.
 
