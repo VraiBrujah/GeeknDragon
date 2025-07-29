@@ -19,6 +19,7 @@ HTML;
 
 /* ───── STOCK ───── */
 $stock    = json_decode(file_get_contents(__DIR__ . '/stock.json'), true) ?? [];
+$snipcartKey = getenv('SNIPCART_API_KEY');
 function inStock(string $id): bool
 {
     global $stock;
@@ -34,9 +35,12 @@ function inStock(string $id): bool
 
 <!-- Snipcart: placer le conteneur dans le body pour éviter des comportements inattendus -->
 <div hidden id="snipcart"
-     data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1"
+     data-api-key="<?= htmlspecialchars($snipcartKey ?? '') ?>"
      data-config-add-product-behavior="overlay">
 </div>
+<?php if (!$snipcartKey): ?>
+<p class="text-red-500 text-center">SNIPCART_API_KEY missing</p>
+<?php endif; ?>
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 
 <main class="pt-24 md:pt-32">
