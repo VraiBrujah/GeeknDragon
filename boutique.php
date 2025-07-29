@@ -34,7 +34,7 @@ function inStock(string $id): bool
 
 <!-- Snipcart: placer le conteneur dans le body pour éviter des comportements inattendus -->
 <div hidden id="snipcart"
-     data-api-key="ST_MjAzMzkxM2MtMDcxNi00ODViLWE0N2UtZmM2NThhNTdiYmRjNjM4ODkyMDkxNzI3ODUwMjYz"
+     data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1"
      data-config-add-product-behavior="overlay">
 </div>
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
