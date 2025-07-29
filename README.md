@@ -8,16 +8,18 @@ GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart
 
 ## Environment variables
 
-The application expects a couple of secrets to be provided through the environment:
+The application expects a few secrets to be provided through the environment:
 
+- `SNIPCART_API_KEY` – your public Snipcart API key.
 - `SHIPPING_SECRET` – secret used by `shipping.php` to verify Snipcart webhook signatures.
 - `ORDER_SECRET` – secret used by `decrement-stock.php` when handling the "order completed" webhook.
 
 ## Local setup
 
 1. Install PHP (7.4 or newer) and clone this repository.
-2. Set the environment variables listed above. They can be exported in your shell or stored in a local `.env` file that you load before running the server.
-3. Edit `boutique.php` and replace the value of `data-api-key` with your own Snipcart public API key.
+2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SHIPPING_SECRET` and `ORDER_SECRET`.
+   Load these variables in your shell with `source .env`.
+3. Edit `boutique.php` and replace the value of `data-api-key` with the same Snipcart public API key.
 4. Start a local server from the project root:
 
    ```bash
@@ -25,6 +27,8 @@ The application expects a couple of secrets to be provided through the environme
    ```
 
 5. Browse to <http://localhost:8000> to view the site.
+
+Make sure that the domain you are using is allowed in your Snipcart dashboard; otherwise the cart may remain stuck at the "préparation" step.
 
 The Snipcart webhooks (`shipping.php` and `decrement-stock.php`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
 
