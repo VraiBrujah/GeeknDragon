@@ -1,6 +1,0 @@
-[26-Jul-2025 11:07:13 UTC] PHP Warning:  include(boutique-sections.php): Failed to open stream: No such file or directory in /home/pacti620/geekndragon.com/boutique.php on line 132
-[26-Jul-2025 11:07:13 UTC] PHP Warning:  include(boutique-sections.php): Failed to open stream: No such file or directory in /home/pacti620/geekndragon.com/boutique.php on line 132
-[26-Jul-2025 11:07:13 UTC] PHP Warning:  include(): Failed opening 'boutique-sections.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/pacti620/geekndragon.com/boutique.php on line 132
-[26-Jul-2025 11:07:34 UTC] PHP Warning:  include(boutique-sections.php): Failed to open stream: No such file or directory in /home/pacti620/geekndragon.com/boutique.php on line 132
-[26-Jul-2025 11:07:34 UTC] PHP Warning:  include(boutique-sections.php): Failed to open stream: No such file or directory in /home/pacti620/geekndragon.com/boutique.php on line 132
-[26-Jul-2025 11:07:34 UTC] PHP Warning:  include(): Failed opening 'boutique-sections.php' for inclusion (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/pacti620/geekndragon.com/boutique.php on line 132
