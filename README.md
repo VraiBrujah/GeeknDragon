@@ -19,9 +19,8 @@ The application expects a few secrets to be provided through the environment:
 
 1. Install PHP (7.4 or newer) and clone this repository.
 2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SHIPPING_SECRET` and `ORDER_SECRET`.
-   Load these variables in your shell with `source .env`.
-3. Edit `boutique.php` and replace the value of `data-api-key` with the same Snipcart public API key.
-4. Start a local server from the project root:
+   Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
+3. Start a local server from the project root:
 
 
    ```bash
