@@ -97,7 +97,7 @@ function inStock(string $id): bool
                   data-item-custom1-name="Multiplicateur"
                   data-item-custom1-options="1|10|100|1000|10000"
                   data-item-custom1-value="1">
-            Ajouter
+            Ajouter — 60 $
           </button>
         </div>
         <?php endif; ?>
@@ -121,7 +121,7 @@ function inStock(string $id): bool
                   data-item-price="145" data-item-url="boutique.php"
                   data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
                   data-item-quantity="1">
-            Ajouter
+            Ajouter — 145 $
           </button>
         </div>
         <?php endif; ?>
@@ -145,7 +145,7 @@ function inStock(string $id): bool
                   data-item-price="275" data-item-url="boutique.php"
                   data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
                   data-item-quantity="1">
-            Ajouter
+            Ajouter — 275 $
           </button>
         </div>
         <?php endif; ?>
@@ -182,7 +182,7 @@ function inStock(string $id): bool
                   data-item-custom1-name="Multiplicateur"
                   data-item-custom1-options="1|10|100|1000|10000"
                   data-item-custom1-value="1">
-            Ajouter
+            Ajouter — 275 $
           </button>
         </div>
         <?php endif; ?>

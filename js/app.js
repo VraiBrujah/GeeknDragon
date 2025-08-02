@@ -120,6 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Gestion des sélecteurs de quantité sur la boutique
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialiser le texte des boutons avec le prix de base
+  document.querySelectorAll('.btn-shop[data-item-price]').forEach(btn => {
+    const price = parseFloat(btn.getAttribute('data-item-price') || '0');
+    const qty = parseInt(btn.getAttribute('data-item-quantity') || '1', 10);
+    btn.innerHTML = `Ajouter — ${price * qty} $`;
+  });
+
   // Pour chaque bouton + ou –
   document.querySelectorAll('.quantity-btn').forEach(btn => {
     btn.addEventListener('click', () => {
