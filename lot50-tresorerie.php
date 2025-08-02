@@ -39,9 +39,18 @@ function inStock(string $id): bool
     <div class="card">
       <div class="gallery flex mb-6">
         <div class="thumbnails flex flex-col">
-          <img class="thumb" src="images/Piece/pro/lot100Piece.jpg" data-full="images/Piece/pro/lot100Piece.jpg" alt="Lot de 50 – La Trésorerie du Seigneur Marchand">
+          <img class="thumb active" loading="lazy"
+               src="images/Piece/pro/lot100Piece-300.jpg"
+               srcset="images/Piece/pro/lot100Piece-300.jpg 300w, images/Piece/pro/lot100Piece.jpg 1222w"
+               sizes="(max-width: 640px) 48px, 64px"
+               data-full="images/Piece/pro/lot100Piece.jpg"
+               alt="Lot de 50 – La Trésorerie du Seigneur Marchand">
         </div>
-        <div class="main-image flex-1"><img id="main-img-lot50-tresorerie" src="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded w-full"></div>
+        <div class="main-image flex-1"><img id="main-img-lot50-tresorerie" loading="lazy"
+             src="images/Piece/pro/a10000-400.png"
+             srcset="images/Piece/pro/a10000-200.png 200w, images/Piece/pro/a10000-400.png 400w, images/Piece/pro/a10000.png 1024w"
+             sizes="(max-width: 640px) 200px, 400px"
+             alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded w-full"></div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50&nbsp;– La Trésorerie du Seigneur Marchand</h1>
       <p class="mb-6 text-gray-300 text-center">10 pièces de chaque métal, multiplicateur au choix.</p>
