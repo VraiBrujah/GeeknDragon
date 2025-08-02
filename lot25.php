@@ -36,6 +36,7 @@ function inStock(string $id): bool
 
 <main class="pt-32 pb-20">
   <section class="max-w-md mx-auto px-6">
+    <a href="boutique.php" class="btn btn-outline mb-6 block mx-auto">&larr; Retour à la boutique</a>
     <div class="card">
       <div class="gallery flex mb-6">
         <div class="thumbnails flex flex-col">
