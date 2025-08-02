@@ -51,7 +51,7 @@ function inStock(string $id): bool
              src="images/Piece/pro/argent/a10000.png"
              alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded w-full"></div>
       </div>
-      <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50&nbsp;– La Trésorerie du Seigneur Marchand</h1>
+      <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50<br>La Trésorerie du Seigneur Marchand</h1>
       <p class="mb-6 text-gray-300 text-center">10 pièces de chaque métal, multiplicateur au choix.</p>
       <?php if(inStock('lot50-tresorerie')): ?>
       <div class="quantity-selector justify-center mb-4" data-id="lot50-tresorerie">

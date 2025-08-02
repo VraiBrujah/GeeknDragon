@@ -51,7 +51,7 @@ function inStock(string $id): bool
              src="images/Piece/pro/argent/a100.png"
              alt="Lot de 25 – La Monnaie des Royaumes" class="rounded w-full"></div>
       </div>
-      <h1 class="text-3xl font-bold mb-4 text-center">Lot de 25&nbsp;– La Monnaie des Royaumes</h1>
+      <h1 class="text-3xl font-bold mb-4 text-center">Lot de 25<br>La Monnaie des Royaumes</h1>
       <p class="mb-6 text-gray-300 text-center">1 pièce de chaque métal pour chaque multiplicateur.</p>
       <?php if(inStock('lot25')): ?>
       <div class="quantity-selector justify-center mb-4" data-id="lot25">
