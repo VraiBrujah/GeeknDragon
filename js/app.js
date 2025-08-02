@@ -133,15 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
         qty++;
       }
       qtySpan.textContent = qty;
-      // mettre à jour l'attribut data-item-quantity et le prix affiché
+      // mettre à jour l'attribut data-item-quantity et l'affichage du nombre de lots
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
       if(addBtn){
         addBtn.setAttribute('data-item-quantity', qty.toString());
-        const price = parseFloat(addBtn.dataset.itemPrice);
-        if(!isNaN(price)){
-          const total = (price * qty).toFixed(0);
-          // Mettre à jour le texte en indiquant le total
-          addBtn.innerHTML = `Ajouter — ${total} $`;
+        const countSpan = document.getElementById('count-' + id);
+        if(countSpan){
+          countSpan.textContent = `${qty} lot${qty > 1 ? 's' : ''}`;
         }
       }
     });
