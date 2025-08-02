@@ -40,14 +40,14 @@ function inStock(string $id): bool
     <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline mb-6 block mx-auto">&larr; Retour à la boutique</a>
     <div class="card">
       <div class="swiper mb-6">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/argent/a1000.png" alt="Lot de 50 – L’Essence des Royaumes" class="rounded"></div>
-          <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot50Piece.jpg" alt="Lot de 50 – L’Essence des Royaumes" class="rounded"></div>
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-      </div>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/argent/a1000.png" alt="Vue rapprochée d’une pièce du lot de 50" width="1024" height="1024" class="rounded"></div>
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot50Piece.jpg" alt="Vue d’ensemble du lot de 50 pièces" width="1364" height="1194" class="rounded"></div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
+          <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
+          </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50<br>L’Essence des Royaumes</h1>
       <p class="mb-6 text-gray-300 text-center">2 pièces de chaque métal pour chaque multiplicateur.</p>
       <?php if(inStock('lot50-essence')): ?>
