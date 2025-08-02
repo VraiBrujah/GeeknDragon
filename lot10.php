@@ -35,14 +35,13 @@ function inStock(string $id): bool
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 
 <main class="pt-32 pb-20">
-  <section class="max-w-4xl mx-auto px-6">
+  <section class="max-w-md mx-auto px-6">
     <div class="card">
       <div class="gallery flex mb-6">
         <div class="thumbnails flex flex-col">
-          <img class="thumb" src="images/Piece/pro/p10.png" data-full="images/Piece/pro/p10.png" alt="Lot de 10 – L’Offrande du Vagabond">
           <img class="thumb" src="images/Piece/pro/lot10Piece.jpg" data-full="images/Piece/pro/lot10Piece.jpg" alt="Lot de 10 – L’Offrande du Vagabond">
         </div>
-        <div class="main-image flex-1"><img id="main-img-lot10" src="images/Piece/pro/p10.png" alt="Lot de 10 – L’Offrande du Vagabond" class="rounded w-full h-64 object-cover"></div>
+        <div class="main-image flex-1"><img id="main-img-lot10" src="images/Piece/pro/p10.png" alt="Lot de 10 – L’Offrande du Vagabond" class="rounded w-full"></div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 10&nbsp;– L’Offrande du Vagabond</h1>
       <p class="mb-6 text-gray-300 text-center">2 pièces de chaque métal, multiplicateur au choix.</p>
