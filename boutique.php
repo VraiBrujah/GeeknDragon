@@ -68,7 +68,7 @@ function inStock(string $id): bool
         <!-- Lot de 10 – L’Offrande du Vagabond -->
         <?php if(inStock('lot10')): ?>
         <div class="card flex flex-col">
-          <a href="lot10.php">
+          <a href="lot10.php?from=pieces">
             <img src="images/Piece/pro/p10.png" alt="Lot de 10<br>L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
@@ -105,7 +105,7 @@ function inStock(string $id): bool
         <!-- Lot de 25 – La Monnaie des Royaumes -->
         <?php if(inStock('lot25')): ?>
         <div class="card flex flex-col">
-          <a href="lot25.php">
+          <a href="lot25.php?from=pieces">
             <img src="images/Piece/pro/p25.png" alt="Lot de 25–La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
@@ -129,7 +129,7 @@ function inStock(string $id): bool
         <!-- Lot de 50 – L’Essence des Royaumes -->
         <?php if(inStock('lot50-essence')): ?>
         <div class="card flex flex-col">
-          <a href="lot50-essence.php">
+          <a href="lot50-essence.php?from=pieces">
             <img src="images/Piece/pro/p50.png" alt="Lot de 50–L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>L’Essence des Royaumes</h4>
@@ -153,7 +153,7 @@ function inStock(string $id): bool
         <!-- Lot de 50 – La Trésorerie du Seigneur Marchand -->
         <?php if(inStock('lot50-tresorerie')): ?>
         <div class="card flex flex-col">
-          <a href="lot50-tresorerie.php">
+          <a href="lot50-tresorerie.php?from=pieces">
             <img src="images/Piece/pro/p50.png" alt="Lot de 50–La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>La Trésorerie du Seigneur Marchand</h4>
