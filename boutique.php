@@ -71,7 +71,7 @@ function inStock(string $id): bool
           <a href="lot10.php">
             <img src="images/Piece/pro/p10.png" alt="Lot de 10<br>L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover">
           </a>
-          <h4 class="text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
           <p class="mb-4 text-gray-300">2 pièces de chaque métal, multiplicateur au choix.</p>
           <div class="quantity-selector" data-id="lot10-vagabond">
             <button type="button" class="quantity-btn minus" data-target="lot10-vagabond">−</button>
@@ -96,7 +96,7 @@ function inStock(string $id): bool
           <a href="lot25.php">
             <img src="images/Piece/pro/p25.png" alt="Lot de 25–La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
           </a>
-          <h4 class="text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
           <p class="mb-4 text-gray-300">1 pièce de chaque métal pour chaque multiplicateur.</p>
           <div class="quantity-selector" data-id="lot25-royaumes">
             <button type="button" class="quantity-btn minus" data-target="lot25-royaumes">−</button>
@@ -119,7 +119,7 @@ function inStock(string $id): bool
           <a href="lot50-essence.php">
             <img src="images/Piece/pro/p50.png" alt="Lot de 50–L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
           </a>
-          <h4 class="text-2xl font-semibold mb-2">Lot de 50<br>L’Essence des Royaumes</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>L’Essence des Royaumes</h4>
           <p class="mb-4 text-gray-300">2 pièces de chaque métal pour chaque multiplicateur.</p>
           <div class="quantity-selector" data-id="lot50-essence">
             <button type="button" class="quantity-btn minus" data-target="lot50-essence">−</button>
@@ -142,7 +142,7 @@ function inStock(string $id): bool
           <a href="lot50-tresorerie.php">
             <img src="images/Piece/pro/p50.png" alt="Lot de 50–La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover">
           </a>
-          <h4 class="text-2xl font-semibold mb-2">Lot de 50<br>La Trésorerie du Seigneur Marchand</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>La Trésorerie du Seigneur Marchand</h4>
           <p class="mb-4 text-gray-300">10 pièces de chaque métal, multiplicateur au choix.</p>
           <div class="quantity-selector" data-id="lot50-tresorerie">
             <button type="button" class="quantity-btn minus" data-target="lot50-tresorerie">−</button>
@@ -190,7 +190,7 @@ function inStock(string $id): bool
         <!-- Booster 15 -->
         <div class="card flex flex-col">
           <img src="images/cartes_booster.jpg" alt="Booster 15 cartes" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Booster 15 cartes</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Booster 15 cartes</h4>
           <p class="mb-4 text-gray-300">15 cartes ciblées façon TCG&nbsp;: armes, vivres, potions… un booster pour enrichir immédiatement vos sessions.</p>
           <?php if(inStock('booster15')): ?>
             <div class="quantity-selector" data-id="booster15">
@@ -210,7 +210,7 @@ function inStock(string $id): bool
         <!-- Pack 60 -->
         <div class="card flex flex-col">
           <img src="images/cartes_pack60.jpg" alt="Pile marchande 60 cartes" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Pile marchande 60&nbsp;cartes</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Pile marchande 60&nbsp;cartes</h4>
           <p class="mb-4 text-gray-300">Une pile marchande de 60&nbsp;cartes idéale pour simuler une échoppe itinérante et surprendre vos joueurs.</p>
           <?php if(inStock('pack60')): ?>
             <div class="quantity-selector" data-id="pack60">
@@ -230,7 +230,7 @@ function inStock(string $id): bool
         <!-- Mystère 100 -->
         <div class="card flex flex-col">
           <img src="images/cartes_mystere100.jpg" alt="Mystère 100 cartes" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Mystère 100 cartes</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Mystère 100 cartes</h4>
           <p class="mb-4 text-gray-300">Le coffre ultime&nbsp;: 100&nbsp;cartes dont de rares exemplaires, en tirage limité. Osez l’inconnu&nbsp;!</p>
           <?php if(inStock('mystere100')): ?>
             <div class="quantity-selector" data-id="mystere100">
@@ -275,7 +275,7 @@ function inStock(string $id): bool
         <!-- Triptyque unitaire -->
         <div class="card flex flex-col">
           <img src="images/triptyque_unitaire.jpg" alt="Triptyque unitaire" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Triptyque unitaire</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Triptyque unitaire</h4>
           <p class="mb-4 text-gray-300">Classe de base, équipement et pièces de départ inclus. Tout pour créer un personnage instantanément.</p>
           <?php if(inStock('triptyque-unit')): ?>
             <div class="quantity-selector" data-id="triptyque-unit">
@@ -295,7 +295,7 @@ function inStock(string $id): bool
         <!-- Triptyque spécialisé -->
         <div class="card flex flex-col">
           <img src="images/triptyque_spec.jpg" alt="Triptyque spécialisé" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Triptyque spécialisé</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Triptyque spécialisé</h4>
           <p class="mb-4 text-gray-300">Sous‑classe, espèce ou historique précis&nbsp;: personnalisez votre héros avec style.</p>
           <?php if(inStock('triptyque-spec')): ?>
             <div class="quantity-selector" data-id="triptyque-spec">
@@ -315,7 +315,7 @@ function inStock(string $id): bool
         <!-- Pack étoiles -->
         <div class="card flex flex-col">
           <img src="images/triptyque_pack_etoile.jpg" alt="Pack étoiles" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Pack “Guidé par les étoiles”</h4>
+          <h4 class="text-center text-2xl font-semibold mb-2">Pack “Guidé par les étoiles”</h4>
           <p class="mb-4 text-gray-300">3&nbsp;triptyques aléatoires et une aide cartonnée dans une pochette opaque&nbsp;: l’option parfaite pour des cadeaux surprises.</p>
           <?php if(inStock('pack-etoile')): ?>
             <div class="quantity-selector" data-id="pack-etoile">
