@@ -109,6 +109,11 @@ input.gd-field, textarea.gd-field{
 }
 
 /* -- Boutique enhancements ---------------------------- */
+/* Ensure product cards stretch vertically */
+.card {
+  display: flex;
+  flex-direction: column;
+}
 /* Quantity picker styles */
 .quantity-selector {
   display: flex;

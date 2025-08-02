@@ -73,32 +73,35 @@ function inStock(string $id): bool
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
           <p class="text-center mb-4 text-gray-300">2 pièces de chaque métal, multiplicateur au choix.</p>
-            <div class="quantity-selector mx-auto" data-id="lot10">
-            <button type="button" class="quantity-btn minus" data-target="lot10">−</button>
-            <span class="qty-value" id="qty-lot10">1</span>
-            <button type="button" class="quantity-btn plus" data-target="lot10">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="lot10">
+                <button type="button" class="quantity-btn minus" data-target="lot10">−</button>
+                <span class="qty-value" id="qty-lot10">1</span>
+                <button type="button" class="quantity-btn plus" data-target="lot10">+</button>
+              </div>
+              <label for="multiplier-lot10" class="mt-2 mb-2 text-center">
+                <span class="sr-only">Multiplicateur</span>
+                <select id="multiplier-lot10" class="multiplier-select text-black" data-target="lot10">
+                  <option value="1">unitaire</option>
+                  <option value="10">x10</option>
+                  <option value="100">x100</option>
+                  <option value="1000">x1000</option>
+                  <option value="10000">x10000</option>
+                </select>
+              </label>
+            </div>
+          <div class="mt-auto">
+            <button class="snipcart-add-item btn btn-shop"
+                    data-item-id="lot10" data-item-name="Lot de 10–L’Offrande du Vagabond"
+                    data-item-price="60" data-item-url="boutique.php"
+                    data-item-description="2 pièces de chaque métal, multiplicateur au choix"
+                    data-item-quantity="1"
+                    data-item-custom1-name="Multiplicateur"
+                    data-item-custom1-options="1|10|100|1000|10000"
+                    data-item-custom1-value="1">
+              Ajouter
+            </button>
           </div>
-            <label for="multiplier-lot10" class="mt-2 mb-2 text-center">
-            <span class="sr-only">Multiplicateur</span>
-            <select id="multiplier-lot10" class="multiplier-select text-black" data-target="lot10">
-              <option value="1">unitaire</option>
-              <option value="10">x10</option>
-              <option value="100">x100</option>
-              <option value="1000">x1000</option>
-              <option value="10000">x10000</option>
-            </select>
-          </label>
-          <span id="count-lot10">1 lot</span>
-          <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot10" data-item-name="Lot de 10–L’Offrande du Vagabond"
-                  data-item-price="60" data-item-url="boutique.php"
-                  data-item-description="2 pièces de chaque métal, multiplicateur au choix"
-                  data-item-quantity="1"
-                  data-item-custom1-name="Multiplicateur"
-                  data-item-custom1-options="1|10|100|1000|10000"
-                  data-item-custom1-value="1">
-            Ajouter
-          </button>
         </div>
         <?php endif; ?>
 
@@ -110,19 +113,22 @@ function inStock(string $id): bool
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
           <p class="text-center mb-4 text-gray-300">1 pièce de chaque métal pour chaque multiplicateur.</p>
-            <div class="quantity-selector mx-auto" data-id="lot25">
-            <button type="button" class="quantity-btn minus" data-target="lot25">−</button>
-            <span class="qty-value" id="qty-lot25">1</span>
-            <button type="button" class="quantity-btn plus" data-target="lot25">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="lot25">
+                <button type="button" class="quantity-btn minus" data-target="lot25">−</button>
+                <span class="qty-value" id="qty-lot25">1</span>
+                <button type="button" class="quantity-btn plus" data-target="lot25">+</button>
+              </div>
+            </div>
+          <div class="mt-auto">
+            <button class="snipcart-add-item btn btn-shop"
+                    data-item-id="lot25" data-item-name="Lot de 25–La Monnaie des Royaumes"
+                    data-item-price="145" data-item-url="boutique.php"
+                    data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
+                    data-item-quantity="1">
+              Ajouter
+            </button>
           </div>
-          <span id="count-lot25">1 lot</span>
-          <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot25" data-item-name="Lot de 25–La Monnaie des Royaumes"
-                  data-item-price="145" data-item-url="boutique.php"
-                  data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
-                  data-item-quantity="1">
-            Ajouter
-          </button>
         </div>
         <?php endif; ?>
 
@@ -134,19 +140,22 @@ function inStock(string $id): bool
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>L’Essence des Royaumes</h4>
           <p class="text-center mb-4 text-gray-300">2 pièces de chaque métal pour chaque multiplicateur.</p>
-            <div class="quantity-selector mx-auto" data-id="lot50-essence">
-            <button type="button" class="quantity-btn minus" data-target="lot50-essence">−</button>
-            <span class="qty-value" id="qty-lot50-essence">1</span>
-            <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="lot50-essence">
+                <button type="button" class="quantity-btn minus" data-target="lot50-essence">−</button>
+                <span class="qty-value" id="qty-lot50-essence">1</span>
+                <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
+              </div>
+            </div>
+          <div class="mt-auto">
+            <button class="snipcart-add-item btn btn-shop"
+                    data-item-id="lot50-essence" data-item-name="Lot de 50–L’Essence des Royaumes"
+                    data-item-price="275" data-item-url="boutique.php"
+                    data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
+                    data-item-quantity="1">
+              Ajouter
+            </button>
           </div>
-          <span id="count-lot50-essence">1 lot</span>
-          <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot50-essence" data-item-name="Lot de 50–L’Essence des Royaumes"
-                  data-item-price="275" data-item-url="boutique.php"
-                  data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
-                  data-item-quantity="1">
-            Ajouter
-          </button>
         </div>
         <?php endif; ?>
 
@@ -158,32 +167,35 @@ function inStock(string $id): bool
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>La Trésorerie du Seigneur Marchand</h4>
           <p class="text-center mb-4 text-gray-300">10 pièces de chaque métal, multiplicateur au choix.</p>
-            <div class="quantity-selector mx-auto" data-id="lot50-tresorerie">
-            <button type="button" class="quantity-btn minus" data-target="lot50-tresorerie">−</button>
-            <span class="qty-value" id="qty-lot50-tresorerie">1</span>
-            <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="lot50-tresorerie">
+                <button type="button" class="quantity-btn minus" data-target="lot50-tresorerie">−</button>
+                <span class="qty-value" id="qty-lot50-tresorerie">1</span>
+                <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
+              </div>
+              <label for="multiplier-lot50-tresorerie" class="mt-2 mb-2 text-center">
+                <span class="sr-only">Multiplicateur</span>
+                <select id="multiplier-lot50-tresorerie" class="multiplier-select text-black" data-target="lot50-tresorerie">
+                  <option value="1">unitaire</option>
+                  <option value="10">x10</option>
+                  <option value="100">x100</option>
+                  <option value="1000">x1000</option>
+                  <option value="10000">x10000</option>
+                </select>
+              </label>
+            </div>
+          <div class="mt-auto">
+            <button class="snipcart-add-item btn btn-shop"
+                    data-item-id="lot50-tresorerie" data-item-name="Lot de 50–La Trésorerie du Seigneur Marchand"
+                    data-item-price="275" data-item-url="boutique.php"
+                    data-item-description="10 pièces de chaque métal, multiplicateur au choix"
+                    data-item-quantity="1"
+                    data-item-custom1-name="Multiplicateur"
+                    data-item-custom1-options="1|10|100|1000|10000"
+                    data-item-custom1-value="1">
+              Ajouter
+            </button>
           </div>
-            <label for="multiplier-lot50-tresorerie" class="mt-2 mb-2 text-center">
-            <span class="sr-only">Multiplicateur</span>
-            <select id="multiplier-lot50-tresorerie" class="multiplier-select text-black" data-target="lot50-tresorerie">
-              <option value="1">unitaire</option>
-              <option value="10">x10</option>
-              <option value="100">x100</option>
-              <option value="1000">x1000</option>
-              <option value="10000">x10000</option>
-            </select>
-          </label>
-          <span id="count-lot50-tresorerie">1 lot</span>
-          <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot50-tresorerie" data-item-name="Lot de 50–La Trésorerie du Seigneur Marchand"
-                  data-item-price="275" data-item-url="boutique.php"
-                  data-item-description="10 pièces de chaque métal, multiplicateur au choix"
-                  data-item-quantity="1"
-                  data-item-custom1-name="Multiplicateur"
-                  data-item-custom1-options="1|10|100|1000|10000"
-                  data-item-custom1-value="1">
-            Ajouter
-          </button>
         </div>
         <?php endif; ?>
       </div>
@@ -219,19 +231,24 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Booster 15 cartes</h4>
           <p class="text-center mb-4 text-gray-300">15 cartes ciblées façon TCG&nbsp;: armes, vivres, potions… un booster pour enrichir immédiatement vos sessions.</p>
           <?php if(inStock('booster15')): ?>
-              <div class="quantity-selector mx-auto" data-id="booster15">
-              <button type="button" class="quantity-btn minus" data-target="booster15">−</button>
-              <span class="qty-value" id="qty-booster15">1</span>
-              <button type="button" class="quantity-btn plus" data-target="booster15">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="booster15">
+                <button type="button" class="quantity-btn minus" data-target="booster15">−</button>
+                <span class="qty-value" id="qty-booster15">1</span>
+                <button type="button" class="quantity-btn plus" data-target="booster15">+</button>
+              </div>
             </div>
-            <span id="count-booster15">1 lot</span>
-            <button class="snipcart-add-item btn btn-shop"
-                    data-item-id="booster15" data-item-name="Booster 15 cartes"
-                    data-item-price="15" data-item-weight="100" data-item-url="boutique.php"
-                    data-item-description="15 cartes illustrées thématiques" data-item-quantity="1">
-              Ajouter
-            </button>
-          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+            <div class="mt-auto">
+              <button class="snipcart-add-item btn btn-shop"
+                      data-item-id="booster15" data-item-name="Booster 15 cartes"
+                      data-item-price="15" data-item-weight="100" data-item-url="boutique.php"
+                      data-item-description="15 cartes illustrées thématiques" data-item-quantity="1">
+                Ajouter
+              </button>
+            </div>
+          <?php else: ?>
+            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+          <?php endif; ?>
         </div>
 
         <!-- Pack 60 -->
@@ -240,19 +257,24 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Pile marchande 60&nbsp;cartes</h4>
           <p class="text-center mb-4 text-gray-300">Une pile marchande de 60&nbsp;cartes idéale pour simuler une échoppe itinérante et surprendre vos joueurs.</p>
           <?php if(inStock('pack60')): ?>
-              <div class="quantity-selector mx-auto" data-id="pack60">
-              <button type="button" class="quantity-btn minus" data-target="pack60">−</button>
-              <span class="qty-value" id="qty-pack60">1</span>
-              <button type="button" class="quantity-btn plus" data-target="pack60">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="pack60">
+                <button type="button" class="quantity-btn minus" data-target="pack60">−</button>
+                <span class="qty-value" id="qty-pack60">1</span>
+                <button type="button" class="quantity-btn plus" data-target="pack60">+</button>
+              </div>
             </div>
-            <span id="count-pack60">1 lot</span>
-            <button class="snipcart-add-item btn btn-shop"
-                    data-item-id="pack60" data-item-name="Pack 60 cartes"
-                    data-item-price="45" data-item-weight="350" data-item-url="boutique.php"
-                    data-item-description="60 cartes d’équipement variées" data-item-quantity="1">
-              Ajouter
-            </button>
-          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+            <div class="mt-auto">
+              <button class="snipcart-add-item btn btn-shop"
+                      data-item-id="pack60" data-item-name="Pack 60 cartes"
+                      data-item-price="45" data-item-weight="350" data-item-url="boutique.php"
+                      data-item-description="60 cartes d’équipement variées" data-item-quantity="1">
+                Ajouter
+              </button>
+            </div>
+          <?php else: ?>
+            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+          <?php endif; ?>
         </div>
 
         <!-- Mystère 100 -->
@@ -261,19 +283,24 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Mystère 100 cartes</h4>
           <p class="text-center mb-4 text-gray-300">Le coffre ultime&nbsp;: 100&nbsp;cartes dont de rares exemplaires, en tirage limité. Osez l’inconnu&nbsp;!</p>
           <?php if(inStock('mystere100')): ?>
-              <div class="quantity-selector mx-auto" data-id="mystere100">
-              <button type="button" class="quantity-btn minus" data-target="mystere100">−</button>
-              <span class="qty-value" id="qty-mystere100">1</span>
-              <button type="button" class="quantity-btn plus" data-target="mystere100">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="mystere100">
+                <button type="button" class="quantity-btn minus" data-target="mystere100">−</button>
+                <span class="qty-value" id="qty-mystere100">1</span>
+                <button type="button" class="quantity-btn plus" data-target="mystere100">+</button>
+              </div>
             </div>
-            <span id="count-mystere100">1 lot</span>
-            <button class="snipcart-add-item btn btn-shop"
-                    data-item-id="mystere100" data-item-name="Mystère 100 cartes"
-                    data-item-price="65" data-item-weight="550" data-item-url="boutique.php"
-                    data-item-description="100 cartes d’équipement (rares incluses)" data-item-quantity="1">
-              Ajouter
-            </button>
-          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+            <div class="mt-auto">
+              <button class="snipcart-add-item btn btn-shop"
+                      data-item-id="mystere100" data-item-name="Mystère 100 cartes"
+                      data-item-price="65" data-item-weight="550" data-item-url="boutique.php"
+                      data-item-description="100 cartes d’équipement (rares incluses)" data-item-quantity="1">
+                Ajouter
+              </button>
+            </div>
+          <?php else: ?>
+            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+          <?php endif; ?>
         </div>
 
       </div>
@@ -307,19 +334,24 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Triptyque unitaire</h4>
           <p class="text-center mb-4 text-gray-300">Classe de base, équipement et pièces de départ inclus. Tout pour créer un personnage instantanément.</p>
           <?php if(inStock('triptyque-unit')): ?>
-              <div class="quantity-selector mx-auto" data-id="triptyque-unit">
-              <button type="button" class="quantity-btn minus" data-target="triptyque-unit">−</button>
-              <span class="qty-value" id="qty-triptyque-unit">1</span>
-              <button type="button" class="quantity-btn plus" data-target="triptyque-unit">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="triptyque-unit">
+                <button type="button" class="quantity-btn minus" data-target="triptyque-unit">−</button>
+                <span class="qty-value" id="qty-triptyque-unit">1</span>
+                <button type="button" class="quantity-btn plus" data-target="triptyque-unit">+</button>
+              </div>
             </div>
-            <span id="count-triptyque-unit">1 lot</span>
-            <button class="snipcart-add-item btn btn-shop"
-                    data-item-id="triptyque-unit" data-item-name="Triptyque unitaire"
-                    data-item-price="30" data-item-weight="120" data-item-url="boutique.php"
-                    data-item-description="Triptyque rigide classe au choix" data-item-quantity="1">
-              Ajouter
-            </button>
-          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+            <div class="mt-auto">
+              <button class="snipcart-add-item btn btn-shop"
+                      data-item-id="triptyque-unit" data-item-name="Triptyque unitaire"
+                      data-item-price="30" data-item-weight="120" data-item-url="boutique.php"
+                      data-item-description="Triptyque rigide classe au choix" data-item-quantity="1">
+                Ajouter
+              </button>
+            </div>
+          <?php else: ?>
+            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+          <?php endif; ?>
         </div>
 
         <!-- Triptyque spécialisé -->
@@ -328,19 +360,24 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Triptyque spécialisé</h4>
           <p class="text-center mb-4 text-gray-300">Sous‑classe, espèce ou historique précis&nbsp;: personnalisez votre héros avec style.</p>
           <?php if(inStock('triptyque-spec')): ?>
-              <div class="quantity-selector mx-auto" data-id="triptyque-spec">
-              <button type="button" class="quantity-btn minus" data-target="triptyque-spec">−</button>
-              <span class="qty-value" id="qty-triptyque-spec">1</span>
-              <button type="button" class="quantity-btn plus" data-target="triptyque-spec">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="triptyque-spec">
+                <button type="button" class="quantity-btn minus" data-target="triptyque-spec">−</button>
+                <span class="qty-value" id="qty-triptyque-spec">1</span>
+                <button type="button" class="quantity-btn plus" data-target="triptyque-spec">+</button>
+              </div>
             </div>
-            <span id="count-triptyque-spec">1 lot</span>
-            <button class="snipcart-add-item btn btn-shop"
-                    data-item-id="triptyque-spec" data-item-name="Triptyque spécialisé"
-                    data-item-price="40" data-item-weight="120" data-item-url="boutique.php"
-                    data-item-description="Triptyque spécialisé + équipement" data-item-quantity="1">
-              Ajouter
-            </button>
-          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+            <div class="mt-auto">
+              <button class="snipcart-add-item btn btn-shop"
+                      data-item-id="triptyque-spec" data-item-name="Triptyque spécialisé"
+                      data-item-price="40" data-item-weight="120" data-item-url="boutique.php"
+                      data-item-description="Triptyque spécialisé + équipement" data-item-quantity="1">
+                Ajouter
+              </button>
+            </div>
+          <?php else: ?>
+            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+          <?php endif; ?>
         </div>
 
         <!-- Pack étoiles -->
@@ -349,19 +386,24 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Pack “Guidé par les étoiles”</h4>
           <p class="text-center mb-4 text-gray-300">3&nbsp;triptyques aléatoires et une aide cartonnée dans une pochette opaque&nbsp;: l’option parfaite pour des cadeaux surprises.</p>
           <?php if(inStock('pack-etoile')): ?>
-              <div class="quantity-selector mx-auto" data-id="pack-etoile">
-              <button type="button" class="quantity-btn minus" data-target="pack-etoile">−</button>
-              <span class="qty-value" id="qty-pack-etoile">1</span>
-              <button type="button" class="quantity-btn plus" data-target="pack-etoile">+</button>
+            <div class="flex flex-col items-center">
+              <div class="quantity-selector" data-id="pack-etoile">
+                <button type="button" class="quantity-btn minus" data-target="pack-etoile">−</button>
+                <span class="qty-value" id="qty-pack-etoile">1</span>
+                <button type="button" class="quantity-btn plus" data-target="pack-etoile">+</button>
+              </div>
             </div>
-            <span id="count-pack-etoile">1 lot</span>
-            <button class="snipcart-add-item btn btn-shop"
-                    data-item-id="pack-etoile" data-item-name="Pack triptyques & aide"
-                    data-item-price="110" data-item-weight="420" data-item-url="boutique.php"
-                    data-item-description="3 triptyques aléatoires + cheat-sheet classe" data-item-quantity="1">
-              Ajouter
-            </button>
-          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+            <div class="mt-auto">
+              <button class="snipcart-add-item btn btn-shop"
+                      data-item-id="pack-etoile" data-item-name="Pack triptyques & aide"
+                      data-item-price="110" data-item-weight="420" data-item-url="boutique.php"
+                      data-item-description="3 triptyques aléatoires + cheat-sheet classe" data-item-quantity="1">
+                Ajouter
+              </button>
+            </div>
+          <?php else: ?>
+            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+          <?php endif; ?>
         </div>
 
       </div>
@@ -371,6 +413,7 @@ function inStock(string $id): bool
 </main>
 
 <?php include 'footer.php'; ?>
+  <script>window.stock = <?= json_encode($stock) ?>;</script>
   <script src="js/app.js"></script>
 </body>
 </html>

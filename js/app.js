@@ -120,39 +120,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Gestion des sélecteurs de quantité sur la boutique
 document.addEventListener('DOMContentLoaded', () => {
-  // Pour chaque bouton + ou –
+  const stock = window.stock || {};
+
+  const updatePlus = (id) => {
+    const max = stock[id];
+    const qty = parseInt(document.getElementById('qty-' + id)?.textContent || '1', 10);
+    const plusBtn = document.querySelector(`.quantity-btn.plus[data-target="${id}"]`);
+    if (plusBtn) {
+      plusBtn.disabled = max != null && qty >= max;
+    }
+  };
+
   document.querySelectorAll('.quantity-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.target;
       const qtySpan = document.getElementById('qty-' + id);
-      if(!qtySpan) return;
+      if (!qtySpan) return;
       let qty = parseInt(qtySpan.textContent, 10) || 1;
-      if(btn.classList.contains('minus')){
+      const max = stock[id];
+      if (btn.classList.contains('minus')) {
         qty = Math.max(1, qty - 1);
-      } else {
+      } else if (max == null || qty < max) {
         qty++;
       }
       qtySpan.textContent = qty;
-      // mettre à jour l'attribut data-item-quantity et l'affichage du nombre de lots
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
-      if(addBtn){
+      if (addBtn) {
         addBtn.setAttribute('data-item-quantity', qty.toString());
-        const price = parseFloat(addBtn.getAttribute('data-item-price') || '0');
-        const total = price * qty;
-        addBtn.innerHTML = `Ajouter — ${total} $`;
       }
-      const countSpan = document.getElementById('count-' + id);
-      if(countSpan){
-        countSpan.textContent = qty + ' lots';
-      }
+      updatePlus(id);
     });
   });
-  // Pour chaque sélecteur de multiplicateur
+
+  document.querySelectorAll('.quantity-selector').forEach(sel => {
+    updatePlus(sel.dataset.id);
+  });
+
   document.querySelectorAll('.multiplier-select').forEach(sel => {
     const id = sel.dataset.target;
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
     const update = () => {
-      if(addBtn){
+      if (addBtn) {
         addBtn.setAttribute('data-item-custom1-value', sel.value);
       }
     };
