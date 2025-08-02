@@ -171,6 +171,15 @@ function inStock(string $id): bool
     </div>
   </section>
 
+  <!-- ░░░ COFFRES SUR MESURE ░░░ -->
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h3 class="text-4xl font-bold mb-6">Coffres sur mesure</h3>
+      <p class="mb-6 text-gray-300">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
+      <a href="contact.php" class="btn btn-primary">Demander un devis</a>
+    </div>
+  </section>
+
   <!-- ░░░ CARTES ░░░ -->
   <section class="py-16">
     <div class="max-w-6xl mx-auto px-6">
