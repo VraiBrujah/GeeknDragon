@@ -147,6 +147,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // Sélection du multiplicateur
+  document.querySelectorAll('.multiplier-select').forEach(sel => {
+    const id = sel.dataset.target;
+    const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
+    if(addBtn){
+      // valeur par défaut
+      addBtn.setAttribute('data-item-custom1-value', sel.value);
+      sel.addEventListener('change', () => {
+        addBtn.setAttribute('data-item-custom1-value', sel.value);
+      });
+    }
+  });
 });
 
 // Galerie produit : miniatures et zoom
