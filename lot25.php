@@ -54,14 +54,14 @@ function inStock(string $id): bool
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 25&nbsp;– La Monnaie des Royaumes</h1>
       <p class="mb-6 text-gray-300 text-center">1 pièce de chaque métal pour chaque multiplicateur.</p>
-      <?php if(inStock('lot25-royaumes')): ?>
-      <div class="quantity-selector justify-center mb-4" data-id="lot25-royaumes">
-        <button type="button" class="quantity-btn minus" data-target="lot25-royaumes">−</button>
-        <span class="qty-value" id="qty-lot25-royaumes">1</span>
-        <button type="button" class="quantity-btn plus" data-target="lot25-royaumes">+</button>
+      <?php if(inStock('lot25')): ?>
+      <div class="quantity-selector justify-center mb-4" data-id="lot25">
+        <button type="button" class="quantity-btn minus" data-target="lot25">−</button>
+        <span class="qty-value" id="qty-lot25">1</span>
+        <button type="button" class="quantity-btn plus" data-target="lot25">+</button>
       </div>
       <button class="snipcart-add-item btn btn-shop mx-auto block"
-              data-item-id="lot25-royaumes" data-item-name="Lot de 25 – La Monnaie des Royaumes"
+              data-item-id="lot25" data-item-name="Lot de 25 – La Monnaie des Royaumes"
               data-item-price="145" data-item-url="lot25.php"
               data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
               data-item-quantity="1">

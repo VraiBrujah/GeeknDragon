@@ -1,8 +1,8 @@
 {
-  "lot10-vagabond":   1,
-  "lot25-royaumes":   1,
-  "lot50-essence":    1,
-  "lot50-tresorerie": 1,
+  "lot10":            null,
+  "lot25":            null,
+  "lot50-essence":    null,
+  "lot50-tresorerie": null,
   "booster15":        1,
   "pack60":           1,
   "mystere100":       1,
