@@ -133,16 +133,10 @@ document.addEventListener('DOMContentLoaded', () => {
         qty++;
       }
       qtySpan.textContent = qty;
-      // mettre à jour l'attribut data-item-quantity et le prix affiché
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
       if(addBtn){
         addBtn.setAttribute('data-item-quantity', qty.toString());
-        const price = parseFloat(addBtn.dataset.itemPrice);
-        if(!isNaN(price)){
-          const total = (price * qty).toFixed(0);
-          // Mettre à jour le texte en indiquant le total
-          addBtn.innerHTML = `Ajouter — ${total} $`;
-        }
+        document.getElementById('count-' + id).textContent = qty + ' lots';
       }
     });
   });
