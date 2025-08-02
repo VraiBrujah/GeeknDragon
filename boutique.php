@@ -79,7 +79,7 @@ function inStock(string $id): bool
             <button type="button" class="quantity-btn plus" data-target="lot10-vagabond">+</button>
           </div>
           <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot10-vagabond" data-item-name="Lot de 10 – L’Offrande du Vagabond"
+                  data-item-id="lot10-vagabond" data-item-name="Lot de 10<br>L’Offrande du Vagabond"
                   data-item-price="60" data-item-url="boutique.php"
                   data-item-description="2 pièces de chaque métal, multiplicateur au choix"
                   data-item-quantity="1"
@@ -104,7 +104,7 @@ function inStock(string $id): bool
             <button type="button" class="quantity-btn plus" data-target="lot25-royaumes">+</button>
           </div>
           <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot25-royaumes" data-item-name="Lot de 25 – La Monnaie des Royaumes"
+                  data-item-id="lot25-royaumes" data-item-name="Lot de 25<br>La Monnaie des Royaumes"
                   data-item-price="145" data-item-url="boutique.php"
                   data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
                   data-item-quantity="1">
@@ -127,7 +127,7 @@ function inStock(string $id): bool
             <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
           </div>
           <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot50-essence" data-item-name="Lot de 50 – L’Essence des Royaumes"
+                  data-item-id="lot50-essence" data-item-name="Lot de 50<br>L’Essence des Royaumes"
                   data-item-price="275" data-item-url="boutique.php"
                   data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
                   data-item-quantity="1">
@@ -150,7 +150,7 @@ function inStock(string $id): bool
             <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
           </div>
           <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot50-tresorerie" data-item-name="Lot de 50 – La Trésorerie du Seigneur Marchand"
+                  data-item-id="lot50-tresorerie" data-item-name="Lot de 50<br>La Trésorerie du Seigneur Marchand"
                   data-item-price="275" data-item-url="boutique.php"
                   data-item-description="10 pièces de chaque métal, multiplicateur au choix"
                   data-item-quantity="1"
