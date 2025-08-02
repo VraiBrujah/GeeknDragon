@@ -32,7 +32,7 @@ HTML;
 
     <div class="parchment rounded-3xl p-10 md:p-14 w-full max-w-2xl text-gray-900">
       <h1 class="text-4xl font-bold text-center mb-6">Demande de devis</h1>
-      <p class="text-center mb-8 text-lg">Pour recevoir une offre personnalisée, remplis ce formulaire magique.</p>
+        <p class="text-center mb-8 text-lg txt-court">Pour recevoir une offre personnalisée, remplis ce formulaire magique.</p>
 
       <form action="https://formsubmit.co/contact@geekndragon.com" method="POST" class="space-y-6">
 
@@ -60,16 +60,16 @@ HTML;
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_next" value="https://geekndragon.com/merci.php" />
 
-        <button type="submit" class="w-full bg-indigo-700 hover:bg-indigo-600 text-white font-semibold py-3 rounded-full transition">
-          Envoyer ma demande
-        </button>
+          <button type="submit" class="btn w-full bg-indigo-700 hover:bg-indigo-600 text-white font-semibold py-3 rounded-full transition">
+            Envoyer ma demande
+          </button>
       </form>
 
-      <div class="text-center mt-10 text-sm">
-        <p><strong>Brujah</strong> — Responsable produit</p>
-        <p><a href="mailto:contact@geekndragon.com" class="text-indigo-700 hover:underline">contact@geekndragon.com</a></p>
-        <p><a href="tel:+14387642612" class="text-indigo-700 hover:underline">+1 438 764-2612</a></p>
-      </div>
+        <div class="text-center mt-10 text-sm">
+          <p class="txt-court"><strong>Brujah</strong> — Responsable produit</p>
+          <p class="txt-court"><a href="mailto:contact@geekndragon.com" class="text-indigo-700 hover:underline">contact@geekndragon.com</a></p>
+          <p class="txt-court"><a href="tel:+14387642612" class="text-indigo-700 hover:underline">+1 438 764-2612</a></p>
+        </div>
     </div>
 
   </main>
