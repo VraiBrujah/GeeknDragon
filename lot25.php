@@ -38,18 +38,13 @@ function inStock(string $id): bool
   <section class="max-w-md mx-auto px-6">
     <a href="boutique.php" class="btn btn-outline mb-6 block mx-auto">&larr; Retour à la boutique</a>
     <div class="card">
-      <div class="gallery flex mb-6">
-        <div class="thumbnails flex flex-col">
-          <img class="thumb active" loading="lazy"
-               src="images/Piece/pro/lot250Piece-300.jpg"
-               srcset="images/Piece/pro/lot250Piece-300.jpg 300w, images/Piece/pro/lot250Piece.jpg 1189w"
-               sizes="(max-width: 640px) 48px, 64px"
-               data-full="images/Piece/pro/lot250Piece.jpg"
-               alt="Lot de 25 – La Monnaie des Royaumes">
+      <div class="slider mb-6">
+        <button class="slide-prev">❮</button>
+        <div class="slide-frame">
+          <img loading="lazy" src="images/Piece/pro/argent/a100.png" alt="Lot de 25 – La Monnaie des Royaumes" class="slide rounded">
+          <img loading="lazy" src="images/Piece/pro/lot250Piece.jpg" alt="Lot de 25 – La Monnaie des Royaumes" class="slide rounded">
         </div>
-        <div class="main-image flex-1"><img id="main-img-lot25" loading="lazy"
-             src="images/Piece/pro/argent/a100.png"
-             alt="Lot de 25 – La Monnaie des Royaumes" class="rounded w-full"></div>
+        <button class="slide-next">❯</button>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 25<br>La Monnaie des Royaumes</h1>
       <p class="mb-6 text-gray-300 text-center">1 pièce de chaque métal pour chaque multiplicateur.</p>

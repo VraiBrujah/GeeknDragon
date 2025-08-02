@@ -161,23 +161,34 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Galerie produit : miniatures et zoom
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.gallery').forEach(gallery => {
-    const mainImg = gallery.querySelector('.main-image img');
-    gallery.querySelectorAll('.thumb').forEach(thumb => {
-      thumb.addEventListener('click', () => {
-        if (mainImg) {
-          mainImg.src = thumb.dataset.full;
-          gallery.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-          thumb.classList.add('active');
-        }
+// Slider: navigation et zoom
+function initSlider(selector) {
+  document.querySelectorAll(selector).forEach(slider => {
+    const slides = Array.from(slider.querySelectorAll('.slide-frame .slide'));
+    if (!slides.length) return;
+    let index = 0;
+
+    const show = (i) => {
+      slides[index].classList.remove('active');
+      index = (i + slides.length) % slides.length;
+      slides[index].classList.add('active');
+    };
+
+    const prev = slider.querySelector('.slide-prev');
+    const next = slider.querySelector('.slide-next');
+    prev && prev.addEventListener('click', () => show(index - 1));
+    next && next.addEventListener('click', () => show(index + 1));
+
+    slides.forEach(img => {
+      img.addEventListener('click', () => {
+        img.classList.toggle('zoomed');
       });
     });
-    if (mainImg) {
-      mainImg.addEventListener('click', () => {
-        mainImg.classList.toggle('zoomed');
-      });
-    }
+
+    slides[0].classList.add('active');
   });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initSlider('.slider');
 });
