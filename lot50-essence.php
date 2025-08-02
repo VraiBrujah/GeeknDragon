@@ -68,5 +68,6 @@ function inStock(string $id): bool
 </main>
 
 <?php include 'footer.php'; ?>
+<script src="js/app.js"></script>
 </body>
 </html>
