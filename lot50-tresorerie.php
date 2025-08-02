@@ -60,13 +60,24 @@ function inStock(string $id): bool
         <span class="qty-value" id="qty-lot50-tresorerie">1</span>
         <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
       </div>
+      <label for="multiplier-lot50-tresorerie" class="block mb-4">
+        <span class="sr-only">Multiplicateur</span>
+        <select id="multiplier-lot50-tresorerie" class="multiplier-select text-black" data-target="lot50-tresorerie">
+          <option value="1">unitaire</option>
+          <option value="10">x10</option>
+          <option value="100">x100</option>
+          <option value="1000">x1000</option>
+          <option value="10000">x10000</option>
+        </select>
+      </label>
       <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="lot50-tresorerie" data-item-name="Lot de 50 – La Trésorerie du Seigneur Marchand"
               data-item-price="275" data-item-url="lot50-tresorerie.php"
               data-item-description="10 pièces de chaque métal, multiplicateur au choix"
               data-item-quantity="1"
               data-item-custom1-name="Multiplicateur"
-              data-item-custom1-options="1|10|100|1000|10000">
+              data-item-custom1-options="1|10|100|1000|10000"
+              data-item-custom1-value="1">
         Ajouter — 275 $
       </button>
       <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>

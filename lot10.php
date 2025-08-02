@@ -60,13 +60,24 @@ function inStock(string $id): bool
         <span class="qty-value" id="qty-lot10">1</span>
         <button type="button" class="quantity-btn plus" data-target="lot10">+</button>
       </div>
+      <label for="multiplier-lot10" class="block mb-4">
+        <span class="sr-only">Multiplicateur</span>
+        <select id="multiplier-lot10" class="multiplier-select text-black" data-target="lot10">
+          <option value="1">unitaire</option>
+          <option value="10">x10</option>
+          <option value="100">x100</option>
+          <option value="1000">x1000</option>
+          <option value="10000">x10000</option>
+        </select>
+      </label>
       <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="lot10" data-item-name="Lot de 10 – L’Offrande du Vagabond"
               data-item-price="60" data-item-url="lot10.php"
               data-item-description="2 pièces de chaque métal, multiplicateur au choix"
               data-item-quantity="1"
               data-item-custom1-name="Multiplicateur"
-              data-item-custom1-options="1|10|100|1000|10000">
+              data-item-custom1-options="1|10|100|1000|10000"
+              data-item-custom1-value="1">
         Ajouter — 60 $
       </button>
       <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>

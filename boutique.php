@@ -78,6 +78,16 @@ function inStock(string $id): bool
             <span class="qty-value" id="qty-lot10">1</span>
             <button type="button" class="quantity-btn plus" data-target="lot10">+</button>
           </div>
+          <label for="multiplier-lot10" class="mt-2 mb-2">
+            <span class="sr-only">Multiplicateur</span>
+            <select id="multiplier-lot10" class="multiplier-select text-black" data-target="lot10">
+              <option value="1">unitaire</option>
+              <option value="10">x10</option>
+              <option value="100">x100</option>
+              <option value="1000">x1000</option>
+              <option value="10000">x10000</option>
+            </select>
+          </label>
           <span id="count-lot10">1 lot</span>
           <button class="snipcart-add-item btn btn-shop"
                   data-item-id="lot10" data-item-name="Lot de 10–L’Offrande du Vagabond"
@@ -85,7 +95,8 @@ function inStock(string $id): bool
                   data-item-description="2 pièces de chaque métal, multiplicateur au choix"
                   data-item-quantity="1"
                   data-item-custom1-name="Multiplicateur"
-                  data-item-custom1-options="1|10|100|1000|10000">
+                  data-item-custom1-options="1|10|100|1000|10000"
+                  data-item-custom1-value="1">
             Ajouter
           </button>
         </div>
@@ -152,6 +163,16 @@ function inStock(string $id): bool
             <span class="qty-value" id="qty-lot50-tresorerie">1</span>
             <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
           </div>
+          <label for="multiplier-lot50-tresorerie" class="mt-2 mb-2">
+            <span class="sr-only">Multiplicateur</span>
+            <select id="multiplier-lot50-tresorerie" class="multiplier-select text-black" data-target="lot50-tresorerie">
+              <option value="1">unitaire</option>
+              <option value="10">x10</option>
+              <option value="100">x100</option>
+              <option value="1000">x1000</option>
+              <option value="10000">x10000</option>
+            </select>
+          </label>
           <span id="count-lot50-tresorerie">1 lot</span>
           <button class="snipcart-add-item btn btn-shop"
                   data-item-id="lot50-tresorerie" data-item-name="Lot de 50–La Trésorerie du Seigneur Marchand"
@@ -159,7 +180,8 @@ function inStock(string $id): bool
                   data-item-description="10 pièces de chaque métal, multiplicateur au choix"
                   data-item-quantity="1"
                   data-item-custom1-name="Multiplicateur"
-                  data-item-custom1-options="1|10|100|1000|10000">
+                  data-item-custom1-options="1|10|100|1000|10000"
+                  data-item-custom1-value="1">
             Ajouter
           </button>
         </div>
