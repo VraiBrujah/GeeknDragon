@@ -9,7 +9,6 @@ $extraHead = <<<HTML
 <style>
   body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
-  .btn{@apply bg-gradient-to-r from-indigo-700 to-purple-700 text-white font-bold px-5 py-2 rounded-full transition hover:from-indigo-600 hover:to-purple-600 hover:scale-105;}
   .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
   .snipcart-modal__container{background:#1f2937!important;}
   .snipcart .snipcart-button-primary{background-image:linear-gradient(to right,#4f46e5,#7c3aed)!important;border:none;}
@@ -51,7 +50,7 @@ function inStock(string $id): bool
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
         <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Des pièces et cartes d'équipement plus luxueuses qu'une figurine de dragon à 300 $ : utilisées à chaque session et conçues au&nbsp;Québec.</p>
-      <a href="#pieces" class="btn-primary">Choisir mes trésors</a>
+      <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
     </div>
   </section>
 
@@ -65,63 +64,99 @@ function inStock(string $id): bool
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Pièces métalliques</h3>
-      <div class="grid md:grid-cols-3 gap-10">
-        <!-- Pièce unitaire -->
-        <?php if(inStock('coin-single')): ?>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <!-- Lot de 10 – L’Offrande du Vagabond -->
+        <?php if(inStock('lot10-vagabond')): ?>
         <div class="card flex flex-col">
-          <img src="images/piece_unitaire.jpg" alt="Pièce unitaire" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Pièce unitaire</h4>
-          <p class="mb-4 text-gray-300">Alliage haute densité et finition antique : une pièce unique pour influencer la chance à votre table.</p>
-          <div class="quantity-selector" data-id="coin-single">
-            <button type="button" class="quantity-btn minus" data-target="coin-single">−</button>
-            <span class="qty-value" id="qty-coin-single">1</span>
-            <button type="button" class="quantity-btn plus" data-target="coin-single">+</button>
+          <a href="lot10.php">
+            <img src="images/Piece/pro/p10.png" alt="Lot de 10 – L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover">
+          </a>
+          <h4 class="text-2xl font-semibold mb-2">Lot de 10&nbsp;– L’Offrande du Vagabond</h4>
+          <p class="mb-4 text-gray-300">2 pièces de chaque métal, multiplicateur au choix.</p>
+          <div class="quantity-selector" data-id="lot10-vagabond">
+            <button type="button" class="quantity-btn minus" data-target="lot10-vagabond">−</button>
+            <span class="qty-value" id="qty-lot10-vagabond">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot10-vagabond">+</button>
           </div>
-          <button class="snipcart-add-item btn-shop"
-                  data-item-id="coin-single" data-item-name="Pièce métal Geek & Dragon"
-                  data-item-price="6" data-item-weight="25" data-item-url="boutique.php"
-                  data-item-description="Pièce de jeu recto–verso, 25 mm" data-item-quantity="1">
-            Ajouter — 6 $
+          <button class="snipcart-add-item btn btn-shop"
+                  data-item-id="lot10-vagabond" data-item-name="Lot de 10 – L’Offrande du Vagabond"
+                  data-item-price="60" data-item-url="boutique.php"
+                  data-item-description="2 pièces de chaque métal, multiplicateur au choix"
+                  data-item-quantity="1"
+                  data-item-custom1-name="Multiplicateur"
+                  data-item-custom1-options="1|10|100|1000|10000">
+            Ajouter — 60 $
           </button>
         </div>
         <?php endif; ?>
 
-        <!-- Coffre Noble -->
-        <?php if(inStock('coffre-noble')): ?>
+        <!-- Lot de 25 – La Monnaie des Royaumes -->
+        <?php if(inStock('lot25-royaumes')): ?>
         <div class="card flex flex-col">
-          <img src="images/coffre_noble.jpg" alt="Coffre du Noble" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Coffre du Noble&nbsp;(830&nbsp;pièces)</h4>
-          <p class="mb-4 text-gray-300">830&nbsp;pièces et multiplicateurs jusqu’à ×10 000 dans un coffret en bois numéroté&nbsp;: ressentez la noblesse du trésor.</p>
-          <div class="quantity-selector" data-id="coffre-noble">
-            <button type="button" class="quantity-btn minus" data-target="coffre-noble">−</button>
-            <span class="qty-value" id="qty-coffre-noble">1</span>
-            <button type="button" class="quantity-btn plus" data-target="coffre-noble">+</button>
+          <a href="lot25.php">
+            <img src="images/Piece/pro/a100.png" alt="Lot de 25 – La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
+          </a>
+          <h4 class="text-2xl font-semibold mb-2">Lot de 25&nbsp;– La Monnaie des Royaumes</h4>
+          <p class="mb-4 text-gray-300">1 pièce de chaque métal pour chaque multiplicateur.</p>
+          <div class="quantity-selector" data-id="lot25-royaumes">
+            <button type="button" class="quantity-btn minus" data-target="lot25-royaumes">−</button>
+            <span class="qty-value" id="qty-lot25-royaumes">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot25-royaumes">+</button>
           </div>
-          <button class="btn-primary"
-                  data-item-id="coffre-noble" data-item-name="Coffre du Noble — 830 pièces"
-                  data-item-price="3500" data-item-weight="3000" data-item-url="boutique.php"
-                  data-item-description="830 pièces premium de tous métaux dans coffret sérigraphié" data-item-quantity="1">
-            Ajouter — 3&nbsp;500&nbsp;$
+          <button class="snipcart-add-item btn btn-shop"
+                  data-item-id="lot25-royaumes" data-item-name="Lot de 25 – La Monnaie des Royaumes"
+                  data-item-price="145" data-item-url="boutique.php"
+                  data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
+                  data-item-quantity="1">
+            Ajouter — 145 $
           </button>
         </div>
         <?php endif; ?>
 
-        <!-- Coffre Mage -->
-        <?php if(inStock('coffre-mage')): ?>
+        <!-- Lot de 50 – L’Essence des Royaumes -->
+        <?php if(inStock('lot50-essence')): ?>
         <div class="card flex flex-col">
-          <img src="images/coffre_mage.jpg" alt="Coffre du Mage Dément" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Coffre du Mage Dément&nbsp;(1 312&nbsp;pièces)</h4>
-          <p class="mb-4 text-gray-300">Édition suprême : 1 312 pièces dont 25&nbsp;GP × 100 000 — un coffret démesuré pour collectionneurs passionnés.</p>
-          <div class="quantity-selector" data-id="coffre-mage">
-            <button type="button" class="quantity-btn minus" data-target="coffre-mage">−</button>
-            <span class="qty-value" id="qty-coffre-mage">1</span>
-            <button type="button" class="quantity-btn plus" data-target="coffre-mage">+</button>
+          <a href="lot50-essence.php">
+            <img src="images/Piece/pro/a1000.png" alt="Lot de 50 – L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
+          </a>
+          <h4 class="text-2xl font-semibold mb-2">Lot de 50&nbsp;– L’Essence des Royaumes</h4>
+          <p class="mb-4 text-gray-300">2 pièces de chaque métal pour chaque multiplicateur.</p>
+          <div class="quantity-selector" data-id="lot50-essence">
+            <button type="button" class="quantity-btn minus" data-target="lot50-essence">−</button>
+            <span class="qty-value" id="qty-lot50-essence">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
           </div>
-          <button class="snipcart-add-item btn-shop"
-                  data-item-id="coffre-mage" data-item-name="Coffre du Mage Dément — 1 312 pièces"
-                  data-item-price="5000" data-item-weight="4500" data-item-url="boutique.php"
-                  data-item-description="1 312 pièces dont 25 GP × 100 000, coffret luxe" data-item-quantity="1">
-            Ajouter — 5&nbsp;000&nbsp;$
+          <button class="snipcart-add-item btn btn-shop"
+                  data-item-id="lot50-essence" data-item-name="Lot de 50 – L’Essence des Royaumes"
+                  data-item-price="275" data-item-url="boutique.php"
+                  data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
+                  data-item-quantity="1">
+            Ajouter — 275 $
+          </button>
+        </div>
+        <?php endif; ?>
+
+        <!-- Lot de 50 – La Trésorerie du Seigneur Marchand -->
+        <?php if(inStock('lot50-tresorerie')): ?>
+        <div class="card flex flex-col">
+          <a href="lot50-tresorerie.php">
+            <img src="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover">
+          </a>
+          <h4 class="text-2xl font-semibold mb-2">Lot de 50&nbsp;– La Trésorerie du Seigneur Marchand</h4>
+          <p class="mb-4 text-gray-300">10 pièces de chaque métal, multiplicateur au choix.</p>
+          <div class="quantity-selector" data-id="lot50-tresorerie">
+            <button type="button" class="quantity-btn minus" data-target="lot50-tresorerie">−</button>
+            <span class="qty-value" id="qty-lot50-tresorerie">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
+          </div>
+          <button class="snipcart-add-item btn btn-shop"
+                  data-item-id="lot50-tresorerie" data-item-name="Lot de 50 – La Trésorerie du Seigneur Marchand"
+                  data-item-price="275" data-item-url="boutique.php"
+                  data-item-description="10 pièces de chaque métal, multiplicateur au choix"
+                  data-item-quantity="1"
+                  data-item-custom1-name="Multiplicateur"
+                  data-item-custom1-options="1|10|100|1000|10000">
+            Ajouter — 275 $
           </button>
         </div>
         <?php endif; ?>
@@ -153,13 +188,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-booster15">1</span>
               <button type="button" class="quantity-btn plus" data-target="booster15">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="booster15" data-item-name="Booster 15 cartes"
                     data-item-price="15" data-item-weight="100" data-item-url="boutique.php"
                     data-item-description="15 cartes illustrées thématiques" data-item-quantity="1">
               Ajouter — 15&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
         <!-- Pack 60 -->
@@ -173,13 +208,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-pack60">1</span>
               <button type="button" class="quantity-btn plus" data-target="pack60">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="pack60" data-item-name="Pack 60 cartes"
                     data-item-price="45" data-item-weight="350" data-item-url="boutique.php"
                     data-item-description="60 cartes d’équipement variées" data-item-quantity="1">
               Ajouter — 45&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
         <!-- Mystère 100 -->
@@ -193,13 +228,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-mystere100">1</span>
               <button type="button" class="quantity-btn plus" data-target="mystere100">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="mystere100" data-item-name="Mystère 100 cartes"
                     data-item-price="65" data-item-weight="550" data-item-url="boutique.php"
                     data-item-description="100 cartes d’équipement (rares incluses)" data-item-quantity="1">
               Ajouter — 65&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
       </div>
@@ -238,13 +273,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-triptyque-unit">1</span>
               <button type="button" class="quantity-btn plus" data-target="triptyque-unit">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="triptyque-unit" data-item-name="Triptyque unitaire"
                     data-item-price="30" data-item-weight="120" data-item-url="boutique.php"
                     data-item-description="Triptyque rigide classe au choix" data-item-quantity="1">
               Ajouter — 30&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
         <!-- Triptyque spécialisé -->
@@ -258,13 +293,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-triptyque-spec">1</span>
               <button type="button" class="quantity-btn plus" data-target="triptyque-spec">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="triptyque-spec" data-item-name="Triptyque spécialisé"
                     data-item-price="40" data-item-weight="120" data-item-url="boutique.php"
                     data-item-description="Triptyque spécialisé + équipement" data-item-quantity="1">
               Ajouter — 40&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
         <!-- Pack étoiles -->
@@ -278,13 +313,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-pack-etoile">1</span>
               <button type="button" class="quantity-btn plus" data-target="pack-etoile">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="pack-etoile" data-item-name="Pack triptyques & aide"
                     data-item-price="110" data-item-weight="420" data-item-url="boutique.php"
                     data-item-description="3 triptyques aléatoires + cheat-sheet classe" data-item-quantity="1">
               Ajouter — 110&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
       </div>
