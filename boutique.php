@@ -85,7 +85,7 @@ function inStock(string $id): bool
                   data-item-quantity="1"
                   data-item-custom1-name="Multiplicateur"
                   data-item-custom1-options="1|10|100|1000|10000">
-            Ajouter — 60 $
+            Ajouter<br><span id="count-lot10-vagabond" class="text-sm">1 lot</span>
           </button>
         </div>
         <?php endif; ?>
@@ -108,7 +108,7 @@ function inStock(string $id): bool
                   data-item-price="145" data-item-url="boutique.php"
                   data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
                   data-item-quantity="1">
-            Ajouter — 145 $
+            Ajouter<br><span id="count-lot25-royaumes" class="text-sm">1 lot</span>
           </button>
         </div>
         <?php endif; ?>
@@ -131,7 +131,7 @@ function inStock(string $id): bool
                   data-item-price="275" data-item-url="boutique.php"
                   data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
                   data-item-quantity="1">
-            Ajouter — 275 $
+            Ajouter<br><span id="count-lot50-essence" class="text-sm">1 lot</span>
           </button>
         </div>
         <?php endif; ?>
@@ -156,7 +156,7 @@ function inStock(string $id): bool
                   data-item-quantity="1"
                   data-item-custom1-name="Multiplicateur"
                   data-item-custom1-options="1|10|100|1000|10000">
-            Ajouter — 275 $
+            Ajouter<br><span id="count-lot50-tresorerie" class="text-sm">1 lot</span>
           </button>
         </div>
         <?php endif; ?>
@@ -202,7 +202,7 @@ function inStock(string $id): bool
                     data-item-id="booster15" data-item-name="Booster 15 cartes"
                     data-item-price="15" data-item-weight="100" data-item-url="boutique.php"
                     data-item-description="15 cartes illustrées thématiques" data-item-quantity="1">
-              Ajouter — 15&nbsp;$
+              Ajouter<br><span id="count-booster15" class="text-sm">1 lot</span>
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -222,7 +222,7 @@ function inStock(string $id): bool
                     data-item-id="pack60" data-item-name="Pack 60 cartes"
                     data-item-price="45" data-item-weight="350" data-item-url="boutique.php"
                     data-item-description="60 cartes d’équipement variées" data-item-quantity="1">
-              Ajouter — 45&nbsp;$
+              Ajouter<br><span id="count-pack60" class="text-sm">1 lot</span>
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -242,7 +242,7 @@ function inStock(string $id): bool
                     data-item-id="mystere100" data-item-name="Mystère 100 cartes"
                     data-item-price="65" data-item-weight="550" data-item-url="boutique.php"
                     data-item-description="100 cartes d’équipement (rares incluses)" data-item-quantity="1">
-              Ajouter — 65&nbsp;$
+              Ajouter<br><span id="count-mystere100" class="text-sm">1 lot</span>
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -287,7 +287,7 @@ function inStock(string $id): bool
                     data-item-id="triptyque-unit" data-item-name="Triptyque unitaire"
                     data-item-price="30" data-item-weight="120" data-item-url="boutique.php"
                     data-item-description="Triptyque rigide classe au choix" data-item-quantity="1">
-              Ajouter — 30&nbsp;$
+              Ajouter<br><span id="count-triptyque-unit" class="text-sm">1 lot</span>
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -307,7 +307,7 @@ function inStock(string $id): bool
                     data-item-id="triptyque-spec" data-item-name="Triptyque spécialisé"
                     data-item-price="40" data-item-weight="120" data-item-url="boutique.php"
                     data-item-description="Triptyque spécialisé + équipement" data-item-quantity="1">
-              Ajouter — 40&nbsp;$
+              Ajouter<br><span id="count-triptyque-spec" class="text-sm">1 lot</span>
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -327,7 +327,7 @@ function inStock(string $id): bool
                     data-item-id="pack-etoile" data-item-name="Pack triptyques & aide"
                     data-item-price="110" data-item-weight="420" data-item-url="boutique.php"
                     data-item-description="3 triptyques aléatoires + cheat-sheet classe" data-item-quantity="1">
-              Ajouter — 110&nbsp;$
+              Ajouter<br><span id="count-pack-etoile" class="text-sm">1 lot</span>
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
