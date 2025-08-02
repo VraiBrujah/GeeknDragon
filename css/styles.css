@@ -6,7 +6,7 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6,
-.btn,.btn-primary,.btn-outline,.btn-shop,
+.btn,
 .txt-court {
   font-family: 'Cinzel', serif;
 }
@@ -27,20 +27,24 @@ h1,h2,h3,h4,h5,h6,
 }
 
 /* 2. Boutons call-to-action  -------------------------- */
-.btn-primary {
+.btn {
   display: inline-block;
   padding: 0.75rem 2rem; /* px-8 py-3 */
   font-size: 1.125rem;   /* text-lg */
   font-weight: 600;      /* font-semibold */
   letter-spacing: 0.025em; /* tracking-wide */
-  color: white;
-  background-image: linear-gradient(to right, #4338ca, #6b21a8); /* indigo-700 → purple-700 */
-  border: 2px solid #3730a3; /* border-indigo-800 */
   border-radius: 9999px;  /* rounded-full */
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); /* shadow-lg */
   transition: all 0.3s ease-in-out;
   transform: translateY(0) scale(1);
   text-align: center;
+  font-family: 'Cinzel', serif;
+}
+
+.btn-primary {
+  color: white;
+  background-image: linear-gradient(to right, #4338ca, #6b21a8); /* indigo-700 → purple-700 */
+  border: 2px solid #3730a3; /* border-indigo-800 */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); /* shadow-lg */
 }
 
 .btn-primary:hover {
@@ -57,18 +61,9 @@ h1,h2,h3,h4,h5,h6,
 
 
 .btn-outline {
-  display: inline-block;
-  padding: 0.75rem 2rem;          /* px-8 py-3 */
-  font-size: 1.125rem;            /* text-lg */
-  font-weight: 600;              /* font-semibold */
-  letter-spacing: 0.025em;       /* tracking-wide */
   color: #c7d2fe;                /* text-indigo-200 */
   border: 2px solid #818cf8;     /* border-indigo-400 */
-  border-radius: 9999px;         /* rounded-full */
   background-color: transparent;
-  transition: all 0.3s ease-in-out;
-  text-align: center;
-  transform: translateY(0) scale(1);
 }
 
 .btn-outline:hover {
@@ -161,19 +156,10 @@ input.gd-field, textarea.gd-field{
 
 /* Shop call-to-action buttons */
 .btn-shop {
-  display: inline-block;
-  padding: 0.75rem 2rem; /* px-8 py-3 */
-  font-size: 1.125rem;   /* text-lg */
-  font-weight: 600;      /* font-semibold */
-  letter-spacing: 0.025em; /* tracking-wide */
   color: white;
   background-image: linear-gradient(to right, #4338ca, #6b21a8); /* indigo-700 → purple-700 */
   border: 2px solid #3730a3; /* border-indigo-800 */
-  border-radius: 9999px;  /* rounded-full */
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); /* shadow-lg */
-  transition: all 0.3s ease-in-out;
-  transform: translateY(0) scale(1);
-  text-align: center;
 }
 
 .btn-shop:hover {

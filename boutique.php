@@ -9,7 +9,6 @@ $extraHead = <<<HTML
 <style>
   body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
-  .btn{@apply bg-gradient-to-r from-indigo-700 to-purple-700 text-white font-bold px-5 py-2 rounded-full transition hover:from-indigo-600 hover:to-purple-600 hover:scale-105;}
   .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
   .snipcart-modal__container{background:#1f2937!important;}
   .snipcart .snipcart-button-primary{background-image:linear-gradient(to right,#4f46e5,#7c3aed)!important;border:none;}
@@ -51,7 +50,7 @@ function inStock(string $id): bool
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
         <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Des pièces et cartes d'équipement plus luxueuses qu'une figurine de dragon à 300 $ : utilisées à chaque session et conçues au&nbsp;Québec.</p>
-      <a href="#pieces" class="btn-primary">Choisir mes trésors</a>
+      <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
     </div>
   </section>
 
@@ -77,7 +76,7 @@ function inStock(string $id): bool
             <span class="qty-value" id="qty-coin-single">1</span>
             <button type="button" class="quantity-btn plus" data-target="coin-single">+</button>
           </div>
-          <button class="snipcart-add-item btn-shop"
+          <button class="snipcart-add-item btn btn-shop"
                   data-item-id="coin-single" data-item-name="Pièce métal Geek & Dragon"
                   data-item-price="6" data-item-weight="25" data-item-url="boutique.php"
                   data-item-description="Pièce de jeu recto–verso, 25 mm" data-item-quantity="1">
@@ -97,7 +96,7 @@ function inStock(string $id): bool
             <span class="qty-value" id="qty-coffre-noble">1</span>
             <button type="button" class="quantity-btn plus" data-target="coffre-noble">+</button>
           </div>
-          <button class="btn-primary"
+          <button class="btn btn-primary"
                   data-item-id="coffre-noble" data-item-name="Coffre du Noble — 830 pièces"
                   data-item-price="3500" data-item-weight="3000" data-item-url="boutique.php"
                   data-item-description="830 pièces premium de tous métaux dans coffret sérigraphié" data-item-quantity="1">
@@ -117,7 +116,7 @@ function inStock(string $id): bool
             <span class="qty-value" id="qty-coffre-mage">1</span>
             <button type="button" class="quantity-btn plus" data-target="coffre-mage">+</button>
           </div>
-          <button class="snipcart-add-item btn-shop"
+          <button class="snipcart-add-item btn btn-shop"
                   data-item-id="coffre-mage" data-item-name="Coffre du Mage Dément — 1 312 pièces"
                   data-item-price="5000" data-item-weight="4500" data-item-url="boutique.php"
                   data-item-description="1 312 pièces dont 25 GP × 100 000, coffret luxe" data-item-quantity="1">
@@ -153,13 +152,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-booster15">1</span>
               <button type="button" class="quantity-btn plus" data-target="booster15">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="booster15" data-item-name="Booster 15 cartes"
                     data-item-price="15" data-item-weight="100" data-item-url="boutique.php"
                     data-item-description="15 cartes illustrées thématiques" data-item-quantity="1">
               Ajouter — 15&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
         <!-- Pack 60 -->
@@ -173,13 +172,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-pack60">1</span>
               <button type="button" class="quantity-btn plus" data-target="pack60">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="pack60" data-item-name="Pack 60 cartes"
                     data-item-price="45" data-item-weight="350" data-item-url="boutique.php"
                     data-item-description="60 cartes d’équipement variées" data-item-quantity="1">
               Ajouter — 45&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
         <!-- Mystère 100 -->
@@ -193,13 +192,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-mystere100">1</span>
               <button type="button" class="quantity-btn plus" data-target="mystere100">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="mystere100" data-item-name="Mystère 100 cartes"
                     data-item-price="65" data-item-weight="550" data-item-url="boutique.php"
                     data-item-description="100 cartes d’équipement (rares incluses)" data-item-quantity="1">
               Ajouter — 65&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
       </div>
@@ -238,13 +237,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-triptyque-unit">1</span>
               <button type="button" class="quantity-btn plus" data-target="triptyque-unit">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="triptyque-unit" data-item-name="Triptyque unitaire"
                     data-item-price="30" data-item-weight="120" data-item-url="boutique.php"
                     data-item-description="Triptyque rigide classe au choix" data-item-quantity="1">
               Ajouter — 30&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
         <!-- Triptyque spécialisé -->
@@ -258,13 +257,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-triptyque-spec">1</span>
               <button type="button" class="quantity-btn plus" data-target="triptyque-spec">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="triptyque-spec" data-item-name="Triptyque spécialisé"
                     data-item-price="40" data-item-weight="120" data-item-url="boutique.php"
                     data-item-description="Triptyque spécialisé + équipement" data-item-quantity="1">
               Ajouter — 40&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
         <!-- Pack étoiles -->
@@ -278,13 +277,13 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-pack-etoile">1</span>
               <button type="button" class="quantity-btn plus" data-target="pack-etoile">+</button>
             </div>
-            <button class="snipcart-add-item btn-shop"
+            <button class="snipcart-add-item btn btn-shop"
                     data-item-id="pack-etoile" data-item-name="Pack triptyques & aide"
                     data-item-price="110" data-item-weight="420" data-item-url="boutique.php"
                     data-item-description="3 triptyques aléatoires + cheat-sheet classe" data-item-quantity="1">
               Ajouter — 110&nbsp;$
             </button>
-          <?php else: ?><span class="btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+          <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
 
       </div>
