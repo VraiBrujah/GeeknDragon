@@ -175,8 +175,9 @@ function inStock(string $id): bool
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h3 class="text-4xl font-bold mb-6">Coffres sur mesure</h3>
+	  <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Le coffre du mage dément" class="rounded mb-4 w-full h-48 object-cover"></a>
       <p class="mb-6 text-gray-300">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
-      <a href="contact.php" class="btn btn-primary">Demander un devis</a>
+      <a href="contact.php" class="btn btn-primary">Demander un devis</a>	  
     </div>
   </section>
 
