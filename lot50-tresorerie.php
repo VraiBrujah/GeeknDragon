@@ -37,7 +37,13 @@ function inStock(string $id): bool
 <main class="pt-32 pb-20">
   <section class="max-w-4xl mx-auto px-6">
     <div class="card">
-      <img src="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded mb-6 w-full h-64 object-cover">
+      <div class="gallery flex mb-6">
+        <div class="thumbnails flex flex-col">
+          <img class="thumb" src="images/Piece/pro/a10000.png" data-full="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand">
+          <img class="thumb" src="images/Piece/pro/lot100Piece.jpg" data-full="images/Piece/pro/lot100Piece.jpg" alt="Lot de 50 – La Trésorerie du Seigneur Marchand">
+        </div>
+        <div class="main-image flex-1"><img id="main-img-lot50-tresorerie" src="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded w-full h-64 object-cover"></div>
+      </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50&nbsp;– La Trésorerie du Seigneur Marchand</h1>
       <p class="mb-6 text-gray-300 text-center">10 pièces de chaque métal, multiplicateur au choix.</p>
       <?php if(inStock('lot50-tresorerie')): ?>
@@ -46,7 +52,7 @@ function inStock(string $id): bool
         <span class="qty-value" id="qty-lot50-tresorerie">1</span>
         <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
       </div>
-      <button class="snipcart-add-item btn btn-shop"
+      <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="lot50-tresorerie" data-item-name="Lot de 50 – La Trésorerie du Seigneur Marchand"
               data-item-price="275" data-item-url="lot50-tresorerie.php"
               data-item-description="10 pièces de chaque métal, multiplicateur au choix"

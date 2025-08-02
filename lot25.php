@@ -37,7 +37,13 @@ function inStock(string $id): bool
 <main class="pt-32 pb-20">
   <section class="max-w-4xl mx-auto px-6">
     <div class="card">
-      <img src="images/Piece/pro/a100.png" alt="Lot de 25 – La Monnaie des Royaumes" class="rounded mb-6 w-full h-64 object-cover">
+      <div class="gallery flex mb-6">
+        <div class="thumbnails flex flex-col">
+          <img class="thumb" src="images/Piece/pro/a100.png" data-full="images/Piece/pro/a100.png" alt="Lot de 25 – La Monnaie des Royaumes">
+          <img class="thumb" src="images/Piece/pro/lot250Piece.jpg" data-full="images/Piece/pro/lot250Piece.jpg" alt="Lot de 25 – La Monnaie des Royaumes">
+        </div>
+        <div class="main-image flex-1"><img id="main-img-lot25" src="images/Piece/pro/a100.png" alt="Lot de 25 – La Monnaie des Royaumes" class="rounded w-full h-64 object-cover"></div>
+      </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 25&nbsp;– La Monnaie des Royaumes</h1>
       <p class="mb-6 text-gray-300 text-center">1 pièce de chaque métal pour chaque multiplicateur.</p>
       <?php if(inStock('lot25-royaumes')): ?>
@@ -46,7 +52,7 @@ function inStock(string $id): bool
         <span class="qty-value" id="qty-lot25-royaumes">1</span>
         <button type="button" class="quantity-btn plus" data-target="lot25-royaumes">+</button>
       </div>
-      <button class="snipcart-add-item btn btn-shop"
+      <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="lot25-royaumes" data-item-name="Lot de 25 – La Monnaie des Royaumes"
               data-item-price="145" data-item-url="lot25.php"
               data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
