@@ -74,12 +74,12 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
           <p class="text-center mb-4 text-gray-300">2 pièces de chaque métal, multiplicateur au choix.</p>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="lot10">
+              <div class="quantity-selector mx-auto text-center" data-id="lot10">
                 <button type="button" class="quantity-btn minus" data-target="lot10">−</button>
                 <span class="qty-value" id="qty-lot10">1</span>
                 <button type="button" class="quantity-btn plus" data-target="lot10">+</button>
               </div>
-              <label for="multiplier-lot10" class="mt-2 mb-2 text-center">
+              <label for="multiplier-lot10" class="mt-2 mb-2 mx-auto text-center">
                 <span class="sr-only">Multiplicateur</span>
                 <select id="multiplier-lot10" class="multiplier-select text-black" data-target="lot10">
                   <option value="1">unitaire</option>
@@ -114,7 +114,7 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
           <p class="text-center mb-4 text-gray-300">1 pièce de chaque métal pour chaque multiplicateur.</p>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="lot25">
+              <div class="quantity-selector mx-auto text-center" data-id="lot25">
                 <button type="button" class="quantity-btn minus" data-target="lot25">−</button>
                 <span class="qty-value" id="qty-lot25">1</span>
                 <button type="button" class="quantity-btn plus" data-target="lot25">+</button>
@@ -141,7 +141,7 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>L’Essence des Royaumes</h4>
           <p class="text-center mb-4 text-gray-300">2 pièces de chaque métal pour chaque multiplicateur.</p>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="lot50-essence">
+              <div class="quantity-selector mx-auto text-center" data-id="lot50-essence">
                 <button type="button" class="quantity-btn minus" data-target="lot50-essence">−</button>
                 <span class="qty-value" id="qty-lot50-essence">1</span>
                 <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
@@ -168,12 +168,12 @@ function inStock(string $id): bool
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>La Trésorerie du Seigneur Marchand</h4>
           <p class="text-center mb-4 text-gray-300">10 pièces de chaque métal, multiplicateur au choix.</p>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="lot50-tresorerie">
+              <div class="quantity-selector mx-auto text-center" data-id="lot50-tresorerie">
                 <button type="button" class="quantity-btn minus" data-target="lot50-tresorerie">−</button>
                 <span class="qty-value" id="qty-lot50-tresorerie">1</span>
                 <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
               </div>
-              <label for="multiplier-lot50-tresorerie" class="mt-2 mb-2 text-center">
+              <label for="multiplier-lot50-tresorerie" class="mt-2 mb-2 mx-auto text-center">
                 <span class="sr-only">Multiplicateur</span>
                 <select id="multiplier-lot50-tresorerie" class="multiplier-select text-black" data-target="lot50-tresorerie">
                   <option value="1">unitaire</option>
@@ -232,7 +232,7 @@ function inStock(string $id): bool
           <p class="text-center mb-4 text-gray-300">15 cartes ciblées façon TCG&nbsp;: armes, vivres, potions… un booster pour enrichir immédiatement vos sessions.</p>
           <?php if(inStock('booster15')): ?>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="booster15">
+              <div class="quantity-selector mx-auto text-center" data-id="booster15">
                 <button type="button" class="quantity-btn minus" data-target="booster15">−</button>
                 <span class="qty-value" id="qty-booster15">1</span>
                 <button type="button" class="quantity-btn plus" data-target="booster15">+</button>
@@ -258,7 +258,7 @@ function inStock(string $id): bool
           <p class="text-center mb-4 text-gray-300">Une pile marchande de 60&nbsp;cartes idéale pour simuler une échoppe itinérante et surprendre vos joueurs.</p>
           <?php if(inStock('pack60')): ?>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="pack60">
+              <div class="quantity-selector mx-auto text-center" data-id="pack60">
                 <button type="button" class="quantity-btn minus" data-target="pack60">−</button>
                 <span class="qty-value" id="qty-pack60">1</span>
                 <button type="button" class="quantity-btn plus" data-target="pack60">+</button>
@@ -284,7 +284,7 @@ function inStock(string $id): bool
           <p class="text-center mb-4 text-gray-300">Le coffre ultime&nbsp;: 100&nbsp;cartes dont de rares exemplaires, en tirage limité. Osez l’inconnu&nbsp;!</p>
           <?php if(inStock('mystere100')): ?>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="mystere100">
+              <div class="quantity-selector mx-auto text-center" data-id="mystere100">
                 <button type="button" class="quantity-btn minus" data-target="mystere100">−</button>
                 <span class="qty-value" id="qty-mystere100">1</span>
                 <button type="button" class="quantity-btn plus" data-target="mystere100">+</button>
@@ -335,7 +335,7 @@ function inStock(string $id): bool
           <p class="text-center mb-4 text-gray-300">Classe de base, équipement et pièces de départ inclus. Tout pour créer un personnage instantanément.</p>
           <?php if(inStock('triptyque-unit')): ?>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="triptyque-unit">
+              <div class="quantity-selector mx-auto text-center" data-id="triptyque-unit">
                 <button type="button" class="quantity-btn minus" data-target="triptyque-unit">−</button>
                 <span class="qty-value" id="qty-triptyque-unit">1</span>
                 <button type="button" class="quantity-btn plus" data-target="triptyque-unit">+</button>
@@ -361,7 +361,7 @@ function inStock(string $id): bool
           <p class="text-center mb-4 text-gray-300">Sous‑classe, espèce ou historique précis&nbsp;: personnalisez votre héros avec style.</p>
           <?php if(inStock('triptyque-spec')): ?>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="triptyque-spec">
+              <div class="quantity-selector mx-auto text-center" data-id="triptyque-spec">
                 <button type="button" class="quantity-btn minus" data-target="triptyque-spec">−</button>
                 <span class="qty-value" id="qty-triptyque-spec">1</span>
                 <button type="button" class="quantity-btn plus" data-target="triptyque-spec">+</button>
@@ -387,7 +387,7 @@ function inStock(string $id): bool
           <p class="text-center mb-4 text-gray-300">3&nbsp;triptyques aléatoires et une aide cartonnée dans une pochette opaque&nbsp;: l’option parfaite pour des cadeaux surprises.</p>
           <?php if(inStock('pack-etoile')): ?>
             <div class="flex flex-col items-center">
-              <div class="quantity-selector" data-id="pack-etoile">
+              <div class="quantity-selector mx-auto text-center" data-id="pack-etoile">
                 <button type="button" class="quantity-btn minus" data-target="pack-etoile">−</button>
                 <span class="qty-value" id="qty-pack-etoile">1</span>
                 <button type="button" class="quantity-btn plus" data-target="pack-etoile">+</button>

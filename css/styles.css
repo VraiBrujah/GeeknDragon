@@ -130,6 +130,15 @@ input.gd-field, textarea.gd-field{
   display: block;
 }
 
+/* Center quantity selector and multiplier */
+.quantity-selector,
+.multiplier-select {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+}
+
 .quantity-btn {
   width: 2.5rem;
   height: 2.5rem;
