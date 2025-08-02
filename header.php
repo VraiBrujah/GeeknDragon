@@ -18,10 +18,10 @@ function navClass($key, $active) {
 
     <!-- Navigation -->
     <nav class="hidden md:flex gap-6 uppercase tracking-wide">
-      <a href="index.php#produits"  class="<?= navClass('index',$active)  ?>">Produits</a>
-      <a href="index.php#actus"     class="<?= navClass('index',$active)  ?>">Actualités</a>
-      <a href="boutique.php"        class="<?= navClass('boutique',$active)?>">Boutique</a>
-      <a href="index.php#contact"   class="<?= navClass('index',$active)  ?>">Contact</a>
+      <a href="index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>">Produits</a>
+      <a href="index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>">Actualités</a>
+      <a href="boutique.php"        class="txt-court <?= navClass('boutique',$active)?>">Boutique</a>
+      <a href="index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>">Contact</a>
     </nav>
   </div>
 </header>

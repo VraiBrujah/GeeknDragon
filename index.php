@@ -18,8 +18,8 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
       <img src="images/hero_flbg.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="">
       <div class="relative z-10 max-w-3xl p-6">
         <h2 class="text-5xl font-extrabold mb-6">L'immersion au cœur du jeu</h2>
-        <p class="text-xl mb-2">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
-        <p class="text-xl mb-8">Conçues au Québec</p>
+          <p class="text-xl mb-2 txt-court">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
+          <p class="text-xl mb-8 txt-court">Conçues au Québec</p>
 <a href="boutique.php" class="btn-primary">
             Visiter la boutique
           </a>
@@ -55,7 +55,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-32">
       <div class="max-w-6xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold mb-12">Boutique</h3>
-        <p class="mb-8">Paiement sécurisé &nbsp;|&nbsp; Stocks mis à jour en temps réel.</p>
+          <p class="mb-8 txt-court">Paiement sécurisé &nbsp;|&nbsp; Stocks mis à jour en temps réel.</p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
           <a href="boutique.php" class="btn-primary">
             Visiter la boutique
@@ -145,9 +145,9 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                    bg-black/60 text-white text-sm px-2 py-1 rounded"
             data-video="video2">🔊</button>
-    <p class="text-center text-sm mt-2 text-gray-300">
-      Le maire rend hommage aux trois héros en argent véritable
-    </p>
+      <p class="text-center text-sm mt-2 text-gray-300 txt-court">
+        Le maire rend hommage aux trois héros en argent véritable
+      </p>
   </div>
 
   <div class="relative group">
@@ -156,9 +156,9 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     <button class="mute-btn hidden group-hover:block
                    absolute top-2 right-2 z-10 bg-black/60 text-white text-sm px-2 py-1 rounded"
             data-video="video1">🔊</button>
-    <p class="text-center text-sm mt-2 text-gray-300">
-      Quand tout se joue sur une pièce… dragon ou étoile ?
-    </p>
+      <p class="text-center text-sm mt-2 text-gray-300 txt-court">
+        Quand tout se joue sur une pièce… dragon ou étoile ?
+      </p>
   </div>
 
   <div class="relative group">
@@ -167,9 +167,9 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                    bg-black/60 text-white text-sm px-2 py-1 rounded"
             data-video="video3">🔊</button>
-    <p class="text-center text-sm mt-2 text-gray-300">
-      Final de la game : Le raton, les étoiles… et le chaos
-    </p>
+      <p class="text-center text-sm mt-2 text-gray-300 txt-court">
+        Final de la game : Le raton, les étoiles… et le chaos
+      </p>
   </div>
 
 </div>
@@ -203,9 +203,9 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
       <div class="max-w-xl mx-auto text-center">
         <h3 class="text-4xl font-bold mb-6">Contact</h3>
         <img src="images/team_brujah.jpg" alt="Brujah" class="mx-auto h-32 w-32 rounded-full mb-4">
-        <p class="mb-2"><strong>Brujah</strong> — Responsable produit & communauté</p>
-        <p class="mb-2"><a href="mailto:contact@geekndragon.com" class="text-indigo-400 hover:underline">contact@geekndragon.com</a></p>
-        <p><a href="tel:+14387642612" class="text-indigo-400 hover:underline">+1 438 764-2612</a></p>
+          <p class="mb-2 txt-court"><strong>Brujah</strong> — Responsable produit & communauté</p>
+          <p class="mb-2 txt-court"><a href="mailto:contact@geekndragon.com" class="text-indigo-400 hover:underline">contact@geekndragon.com</a></p>
+          <p class="txt-court"><a href="tel:+14387642612" class="text-indigo-400 hover:underline">+1 438 764-2612</a></p>
       </div>
     </section>
 

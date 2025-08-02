@@ -50,7 +50,7 @@ function inStock(string $id): bool
     <img src="images/banner_luxe_coins.jpg" alt="Pluie de pièces luxueuses" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
-      <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6">Des pièces et cartes d'équipement plus luxueuses qu'une figurine de dragon à 300 $ : utilisées à chaque session et conçues au&nbsp;Québec.</p>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Des pièces et cartes d'équipement plus luxueuses qu'une figurine de dragon à 300 $ : utilisées à chaque session et conçues au&nbsp;Québec.</p>
       <a href="#pieces" class="btn-primary">Choisir mes trésors</a>
     </div>
   </section>
@@ -58,7 +58,7 @@ function inStock(string $id): bool
   <!-- ░░░ EN-TÊTE ░░░ -->
   <section class="text-center max-w-4xl mx-auto px-6 my-16" id="pieces">
     <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Boutique officielle</h2>
-    <p class="text-lg md:text-xl">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
+      <p class="text-lg md:text-xl txt-court">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
   </section>
 
   <!-- ░░░ PIÈCES ░░░ -->
