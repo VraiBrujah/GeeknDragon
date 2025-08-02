@@ -6,6 +6,25 @@ Site web Geek&Dragon
 
 GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart.com/). It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and Snipcart handles the shopping cart and checkout. Stock levels are stored in `stock.json` and are automatically updated through webhooks when an order is completed.
 
+## Product lots and custom chests
+
+The shop offers several coin bundles:
+
+- **Lot de 10 – L’Offrande du Vagabond** – 60 $ (2 coins of each metal with a selectable multiplier)
+- **Lot de 25 – La Monnaie des Royaumes** – 145 $ (1 coin of each metal for each multiplier)
+- **Lot de 50 – L’Essence des Royaumes** – 275 $ (2 coins of each metal for each multiplier)
+- **Lot de 50 – La Trésorerie du Seigneur Marchand** – 275 $ (10 coins of each metal with a selectable multiplier)
+
+Need more than 50 pieces or a custom assortment? Request a personalized chest through the [quote form](contact.php).
+
+### Adding product images
+
+Place product photos under `images/Piece/pro/`. Each item typically uses a full‑resolution image and a 300 px thumbnail (e.g. `lot10Piece.jpg` and `lot10Piece-300.jpg`).
+
+### Configuring multipliers in Snipcart
+
+Multipliers are handled with Snipcart custom fields. Add a `<select>` with the class `multiplier-select` and set the `data-item-custom1-name`, `data-item-custom1-options` (such as `1|10|100|1000|10000`) and `data-item-custom1-value` attributes on the `snipcart-add-item` button to let customers choose the desired multiplier.
+
 ## Environment variables
 
 The application expects a few secrets to be provided through the environment:
