@@ -203,6 +203,10 @@ input.gd-field, textarea.gd-field{
   border-radius: 0.375rem;
 }
 
+.thumb.active {
+  outline: 2px solid var(--gd-secondary);
+}
+
 .main-image {
   overflow: hidden;
 }

@@ -39,9 +39,18 @@ function inStock(string $id): bool
     <div class="card">
       <div class="gallery flex mb-6">
         <div class="thumbnails flex flex-col">
-          <img class="thumb" src="images/Piece/pro/lot10Piece.jpg" data-full="images/Piece/pro/lot10Piece.jpg" alt="Lot de 10 – L’Offrande du Vagabond">
+          <img class="thumb active" loading="lazy"
+               src="images/Piece/pro/lot10Piece-300.jpg"
+               srcset="images/Piece/pro/lot10Piece-300.jpg 300w, images/Piece/pro/lot10Piece.jpg 1452w"
+               sizes="(max-width: 640px) 48px, 64px"
+               data-full="images/Piece/pro/lot10Piece.jpg"
+               alt="Lot de 10 – L’Offrande du Vagabond">
         </div>
-        <div class="main-image flex-1"><img id="main-img-lot10" src="images/Piece/pro/p10.png" alt="Lot de 10 – L’Offrande du Vagabond" class="rounded w-full"></div>
+        <div class="main-image flex-1"><img id="main-img-lot10" loading="lazy"
+             src="images/Piece/pro/p10.png"
+             srcset="images/Piece/pro/p10-200.png 200w, images/Piece/pro/p10.png 400w"
+             sizes="(max-width: 640px) 200px, 400px"
+             alt="Lot de 10 – L’Offrande du Vagabond" class="rounded w-full"></div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 10&nbsp;– L’Offrande du Vagabond</h1>
       <p class="mb-6 text-gray-300 text-center">2 pièces de chaque métal, multiplicateur au choix.</p>

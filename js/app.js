@@ -154,6 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
       thumb.addEventListener('click', () => {
         if (mainImg) {
           mainImg.src = thumb.dataset.full;
+          gallery.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
         }
       });
     });
