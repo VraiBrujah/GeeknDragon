@@ -64,63 +64,99 @@ function inStock(string $id): bool
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Pièces métalliques</h3>
-      <div class="grid md:grid-cols-3 gap-10">
-        <!-- Pièce unitaire -->
-        <?php if(inStock('coin-single')): ?>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <!-- Lot de 10 – L’Offrande du Vagabond -->
+        <?php if(inStock('lot10-vagabond')): ?>
         <div class="card flex flex-col">
-          <img src="images/piece_unitaire.jpg" alt="Pièce unitaire" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Pièce unitaire</h4>
-          <p class="mb-4 text-gray-300">Alliage haute densité et finition antique : une pièce unique pour influencer la chance à votre table.</p>
-          <div class="quantity-selector" data-id="coin-single">
-            <button type="button" class="quantity-btn minus" data-target="coin-single">−</button>
-            <span class="qty-value" id="qty-coin-single">1</span>
-            <button type="button" class="quantity-btn plus" data-target="coin-single">+</button>
+          <a href="lot10.php">
+            <img src="images/Piece/pro/p10.png" alt="Lot de 10 – L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover">
+          </a>
+          <h4 class="text-2xl font-semibold mb-2">Lot de 10&nbsp;– L’Offrande du Vagabond</h4>
+          <p class="mb-4 text-gray-300">2 pièces de chaque métal, multiplicateur au choix.</p>
+          <div class="quantity-selector" data-id="lot10-vagabond">
+            <button type="button" class="quantity-btn minus" data-target="lot10-vagabond">−</button>
+            <span class="qty-value" id="qty-lot10-vagabond">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot10-vagabond">+</button>
           </div>
           <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="coin-single" data-item-name="Pièce métal Geek & Dragon"
-                  data-item-price="6" data-item-weight="25" data-item-url="boutique.php"
-                  data-item-description="Pièce de jeu recto–verso, 25 mm" data-item-quantity="1">
-            Ajouter — 6 $
+                  data-item-id="lot10-vagabond" data-item-name="Lot de 10 – L’Offrande du Vagabond"
+                  data-item-price="60" data-item-url="boutique.php"
+                  data-item-description="2 pièces de chaque métal, multiplicateur au choix"
+                  data-item-quantity="1"
+                  data-item-custom1-name="Multiplicateur"
+                  data-item-custom1-options="1|10|100|1000|10000">
+            Ajouter — 60 $
           </button>
         </div>
         <?php endif; ?>
 
-        <!-- Coffre Noble -->
-        <?php if(inStock('coffre-noble')): ?>
+        <!-- Lot de 25 – La Monnaie des Royaumes -->
+        <?php if(inStock('lot25-royaumes')): ?>
         <div class="card flex flex-col">
-          <img src="images/coffre_noble.jpg" alt="Coffre du Noble" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Coffre du Noble&nbsp;(830&nbsp;pièces)</h4>
-          <p class="mb-4 text-gray-300">830&nbsp;pièces et multiplicateurs jusqu’à ×10 000 dans un coffret en bois numéroté&nbsp;: ressentez la noblesse du trésor.</p>
-          <div class="quantity-selector" data-id="coffre-noble">
-            <button type="button" class="quantity-btn minus" data-target="coffre-noble">−</button>
-            <span class="qty-value" id="qty-coffre-noble">1</span>
-            <button type="button" class="quantity-btn plus" data-target="coffre-noble">+</button>
+          <a href="lot25.php">
+            <img src="images/Piece/pro/a100.png" alt="Lot de 25 – La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
+          </a>
+          <h4 class="text-2xl font-semibold mb-2">Lot de 25&nbsp;– La Monnaie des Royaumes</h4>
+          <p class="mb-4 text-gray-300">1 pièce de chaque métal pour chaque multiplicateur.</p>
+          <div class="quantity-selector" data-id="lot25-royaumes">
+            <button type="button" class="quantity-btn minus" data-target="lot25-royaumes">−</button>
+            <span class="qty-value" id="qty-lot25-royaumes">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot25-royaumes">+</button>
           </div>
-          <button class="btn btn-primary"
-                  data-item-id="coffre-noble" data-item-name="Coffre du Noble — 830 pièces"
-                  data-item-price="3500" data-item-weight="3000" data-item-url="boutique.php"
-                  data-item-description="830 pièces premium de tous métaux dans coffret sérigraphié" data-item-quantity="1">
-            Ajouter — 3&nbsp;500&nbsp;$
+          <button class="snipcart-add-item btn btn-shop"
+                  data-item-id="lot25-royaumes" data-item-name="Lot de 25 – La Monnaie des Royaumes"
+                  data-item-price="145" data-item-url="boutique.php"
+                  data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
+                  data-item-quantity="1">
+            Ajouter — 145 $
           </button>
         </div>
         <?php endif; ?>
 
-        <!-- Coffre Mage -->
-        <?php if(inStock('coffre-mage')): ?>
+        <!-- Lot de 50 – L’Essence des Royaumes -->
+        <?php if(inStock('lot50-essence')): ?>
         <div class="card flex flex-col">
-          <img src="images/coffre_mage.jpg" alt="Coffre du Mage Dément" class="rounded mb-4 w-full h-48 object-cover">
-          <h4 class="text-2xl font-semibold mb-2">Coffre du Mage Dément&nbsp;(1 312&nbsp;pièces)</h4>
-          <p class="mb-4 text-gray-300">Édition suprême : 1 312 pièces dont 25&nbsp;GP × 100 000 — un coffret démesuré pour collectionneurs passionnés.</p>
-          <div class="quantity-selector" data-id="coffre-mage">
-            <button type="button" class="quantity-btn minus" data-target="coffre-mage">−</button>
-            <span class="qty-value" id="qty-coffre-mage">1</span>
-            <button type="button" class="quantity-btn plus" data-target="coffre-mage">+</button>
+          <a href="lot50-essence.php">
+            <img src="images/Piece/pro/a1000.png" alt="Lot de 50 – L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
+          </a>
+          <h4 class="text-2xl font-semibold mb-2">Lot de 50&nbsp;– L’Essence des Royaumes</h4>
+          <p class="mb-4 text-gray-300">2 pièces de chaque métal pour chaque multiplicateur.</p>
+          <div class="quantity-selector" data-id="lot50-essence">
+            <button type="button" class="quantity-btn minus" data-target="lot50-essence">−</button>
+            <span class="qty-value" id="qty-lot50-essence">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
           </div>
           <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="coffre-mage" data-item-name="Coffre du Mage Dément — 1 312 pièces"
-                  data-item-price="5000" data-item-weight="4500" data-item-url="boutique.php"
-                  data-item-description="1 312 pièces dont 25 GP × 100 000, coffret luxe" data-item-quantity="1">
-            Ajouter — 5&nbsp;000&nbsp;$
+                  data-item-id="lot50-essence" data-item-name="Lot de 50 – L’Essence des Royaumes"
+                  data-item-price="275" data-item-url="boutique.php"
+                  data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
+                  data-item-quantity="1">
+            Ajouter — 275 $
+          </button>
+        </div>
+        <?php endif; ?>
+
+        <!-- Lot de 50 – La Trésorerie du Seigneur Marchand -->
+        <?php if(inStock('lot50-tresorerie')): ?>
+        <div class="card flex flex-col">
+          <a href="lot50-tresorerie.php">
+            <img src="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover">
+          </a>
+          <h4 class="text-2xl font-semibold mb-2">Lot de 50&nbsp;– La Trésorerie du Seigneur Marchand</h4>
+          <p class="mb-4 text-gray-300">10 pièces de chaque métal, multiplicateur au choix.</p>
+          <div class="quantity-selector" data-id="lot50-tresorerie">
+            <button type="button" class="quantity-btn minus" data-target="lot50-tresorerie">−</button>
+            <span class="qty-value" id="qty-lot50-tresorerie">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
+          </div>
+          <button class="snipcart-add-item btn btn-shop"
+                  data-item-id="lot50-tresorerie" data-item-name="Lot de 50 – La Trésorerie du Seigneur Marchand"
+                  data-item-price="275" data-item-url="boutique.php"
+                  data-item-description="10 pièces de chaque métal, multiplicateur au choix"
+                  data-item-quantity="1"
+                  data-item-custom1-name="Multiplicateur"
+                  data-item-custom1-options="1|10|100|1000|10000">
+            Ajouter — 275 $
           </button>
         </div>
         <?php endif; ?>
