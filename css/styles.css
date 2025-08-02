@@ -118,6 +118,13 @@ input.gd-field, textarea.gd-field{
   margin: 1rem 0;
 }
 
+/* Center multiplier dropdown */
+.multiplier-select {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 .quantity-btn {
   width: 2.5rem;
   height: 2.5rem;
