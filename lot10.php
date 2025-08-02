@@ -54,14 +54,14 @@ function inStock(string $id): bool
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 10&nbsp;– L’Offrande du Vagabond</h1>
       <p class="mb-6 text-gray-300 text-center">2 pièces de chaque métal, multiplicateur au choix.</p>
-      <?php if(inStock('lot10-vagabond')): ?>
-      <div class="quantity-selector justify-center mb-4" data-id="lot10-vagabond">
-        <button type="button" class="quantity-btn minus" data-target="lot10-vagabond">−</button>
-        <span class="qty-value" id="qty-lot10-vagabond">1</span>
-        <button type="button" class="quantity-btn plus" data-target="lot10-vagabond">+</button>
+      <?php if(inStock('lot10')): ?>
+      <div class="quantity-selector justify-center mb-4" data-id="lot10">
+        <button type="button" class="quantity-btn minus" data-target="lot10">−</button>
+        <span class="qty-value" id="qty-lot10">1</span>
+        <button type="button" class="quantity-btn plus" data-target="lot10">+</button>
       </div>
       <button class="snipcart-add-item btn btn-shop mx-auto block"
-              data-item-id="lot10-vagabond" data-item-name="Lot de 10 – L’Offrande du Vagabond"
+              data-item-id="lot10" data-item-name="Lot de 10 – L’Offrande du Vagabond"
               data-item-price="60" data-item-url="lot10.php"
               data-item-description="2 pièces de chaque métal, multiplicateur au choix"
               data-item-quantity="1"

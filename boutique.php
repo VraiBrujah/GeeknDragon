@@ -66,21 +66,21 @@ function inStock(string $id): bool
       <h3 class="text-4xl font-bold text-center mb-12">Pièces métalliques</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
         <!-- Lot de 10 – L’Offrande du Vagabond -->
-        <?php if(inStock('lot10-vagabond')): ?>
+        <?php if(inStock('lot10')): ?>
         <div class="card flex flex-col">
           <a href="lot10.php">
             <img src="images/Piece/pro/p10.png" alt="Lot de 10<br>L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
           <p class="text-center mb-4 text-gray-300">2 pièces de chaque métal, multiplicateur au choix.</p>
-          <div class="quantity-selector" data-id="lot10-vagabond">
-            <button type="button" class="quantity-btn minus" data-target="lot10-vagabond">−</button>
-            <span class="qty-value" id="qty-lot10-vagabond">1</span>
-            <button type="button" class="quantity-btn plus" data-target="lot10-vagabond">+</button>
+          <div class="quantity-selector" data-id="lot10">
+            <button type="button" class="quantity-btn minus" data-target="lot10">−</button>
+            <span class="qty-value" id="qty-lot10">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot10">+</button>
           </div>
-          <span id="count-lot10-vagabond">1 lot</span>
+          <span id="count-lot10">1 lot</span>
           <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot10-vagabond" data-item-name="Lot de 10–L’Offrande du Vagabond"
+                  data-item-id="lot10" data-item-name="Lot de 10–L’Offrande du Vagabond"
                   data-item-price="60" data-item-url="boutique.php"
                   data-item-description="2 pièces de chaque métal, multiplicateur au choix"
                   data-item-quantity="1"
@@ -92,21 +92,21 @@ function inStock(string $id): bool
         <?php endif; ?>
 
         <!-- Lot de 25 – La Monnaie des Royaumes -->
-        <?php if(inStock('lot25-royaumes')): ?>
+        <?php if(inStock('lot25')): ?>
         <div class="card flex flex-col">
           <a href="lot25.php">
             <img src="images/Piece/pro/p25.png" alt="Lot de 25–La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
           <p class="text-center mb-4 text-gray-300">1 pièce de chaque métal pour chaque multiplicateur.</p>
-          <div class="quantity-selector" data-id="lot25-royaumes">
-            <button type="button" class="quantity-btn minus" data-target="lot25-royaumes">−</button>
-            <span class="qty-value" id="qty-lot25-royaumes">1</span>
-            <button type="button" class="quantity-btn plus" data-target="lot25-royaumes">+</button>
+          <div class="quantity-selector" data-id="lot25">
+            <button type="button" class="quantity-btn minus" data-target="lot25">−</button>
+            <span class="qty-value" id="qty-lot25">1</span>
+            <button type="button" class="quantity-btn plus" data-target="lot25">+</button>
           </div>
-          <span id="count-lot25-royaumes">1 lot</span>
+          <span id="count-lot25">1 lot</span>
           <button class="snipcart-add-item btn btn-shop"
-                  data-item-id="lot25-royaumes" data-item-name="Lot de 25–La Monnaie des Royaumes"
+                  data-item-id="lot25" data-item-name="Lot de 25–La Monnaie des Royaumes"
                   data-item-price="145" data-item-url="boutique.php"
                   data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
                   data-item-quantity="1">
