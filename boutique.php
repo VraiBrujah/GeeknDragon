@@ -78,6 +78,7 @@ function inStock(string $id): bool
             <span class="qty-value" id="qty-lot10-vagabond">1</span>
             <button type="button" class="quantity-btn plus" data-target="lot10-vagabond">+</button>
           </div>
+          <span id="count-lot10-vagabond">1 lot</span>
           <button class="snipcart-add-item btn btn-shop"
                   data-item-id="lot10-vagabond" data-item-name="Lot de 10–L’Offrande du Vagabond"
                   data-item-price="60" data-item-url="boutique.php"
@@ -85,7 +86,7 @@ function inStock(string $id): bool
                   data-item-quantity="1"
                   data-item-custom1-name="Multiplicateur"
                   data-item-custom1-options="1|10|100|1000|10000">
-            Ajouter<br><span id="count-lot10-vagabond" class="text-sm">1 lot</span>
+            Ajouter
           </button>
         </div>
         <?php endif; ?>
@@ -103,12 +104,13 @@ function inStock(string $id): bool
             <span class="qty-value" id="qty-lot25-royaumes">1</span>
             <button type="button" class="quantity-btn plus" data-target="lot25-royaumes">+</button>
           </div>
+          <span id="count-lot25-royaumes">1 lot</span>
           <button class="snipcart-add-item btn btn-shop"
                   data-item-id="lot25-royaumes" data-item-name="Lot de 25–La Monnaie des Royaumes"
                   data-item-price="145" data-item-url="boutique.php"
                   data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
                   data-item-quantity="1">
-            Ajouter<br><span id="count-lot25-royaumes" class="text-sm">1 lot</span>
+            Ajouter
           </button>
         </div>
         <?php endif; ?>
@@ -126,12 +128,13 @@ function inStock(string $id): bool
             <span class="qty-value" id="qty-lot50-essence">1</span>
             <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
           </div>
+          <span id="count-lot50-essence">1 lot</span>
           <button class="snipcart-add-item btn btn-shop"
                   data-item-id="lot50-essence" data-item-name="Lot de 50–L’Essence des Royaumes"
                   data-item-price="275" data-item-url="boutique.php"
                   data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
                   data-item-quantity="1">
-            Ajouter<br><span id="count-lot50-essence" class="text-sm">1 lot</span>
+            Ajouter
           </button>
         </div>
         <?php endif; ?>
@@ -149,6 +152,7 @@ function inStock(string $id): bool
             <span class="qty-value" id="qty-lot50-tresorerie">1</span>
             <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
           </div>
+          <span id="count-lot50-tresorerie">1 lot</span>
           <button class="snipcart-add-item btn btn-shop"
                   data-item-id="lot50-tresorerie" data-item-name="Lot de 50–La Trésorerie du Seigneur Marchand"
                   data-item-price="275" data-item-url="boutique.php"
@@ -156,7 +160,7 @@ function inStock(string $id): bool
                   data-item-quantity="1"
                   data-item-custom1-name="Multiplicateur"
                   data-item-custom1-options="1|10|100|1000|10000">
-            Ajouter<br><span id="count-lot50-tresorerie" class="text-sm">1 lot</span>
+            Ajouter
           </button>
         </div>
         <?php endif; ?>
@@ -198,11 +202,12 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-booster15">1</span>
               <button type="button" class="quantity-btn plus" data-target="booster15">+</button>
             </div>
+            <span id="count-booster15">1 lot</span>
             <button class="snipcart-add-item btn btn-shop"
                     data-item-id="booster15" data-item-name="Booster 15 cartes"
                     data-item-price="15" data-item-weight="100" data-item-url="boutique.php"
                     data-item-description="15 cartes illustrées thématiques" data-item-quantity="1">
-              Ajouter<br><span id="count-booster15" class="text-sm">1 lot</span>
+              Ajouter
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -218,11 +223,12 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-pack60">1</span>
               <button type="button" class="quantity-btn plus" data-target="pack60">+</button>
             </div>
+            <span id="count-pack60">1 lot</span>
             <button class="snipcart-add-item btn btn-shop"
                     data-item-id="pack60" data-item-name="Pack 60 cartes"
                     data-item-price="45" data-item-weight="350" data-item-url="boutique.php"
                     data-item-description="60 cartes d’équipement variées" data-item-quantity="1">
-              Ajouter<br><span id="count-pack60" class="text-sm">1 lot</span>
+              Ajouter
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -238,11 +244,12 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-mystere100">1</span>
               <button type="button" class="quantity-btn plus" data-target="mystere100">+</button>
             </div>
+            <span id="count-mystere100">1 lot</span>
             <button class="snipcart-add-item btn btn-shop"
                     data-item-id="mystere100" data-item-name="Mystère 100 cartes"
                     data-item-price="65" data-item-weight="550" data-item-url="boutique.php"
                     data-item-description="100 cartes d’équipement (rares incluses)" data-item-quantity="1">
-              Ajouter<br><span id="count-mystere100" class="text-sm">1 lot</span>
+              Ajouter
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -283,11 +290,12 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-triptyque-unit">1</span>
               <button type="button" class="quantity-btn plus" data-target="triptyque-unit">+</button>
             </div>
+            <span id="count-triptyque-unit">1 lot</span>
             <button class="snipcart-add-item btn btn-shop"
                     data-item-id="triptyque-unit" data-item-name="Triptyque unitaire"
                     data-item-price="30" data-item-weight="120" data-item-url="boutique.php"
                     data-item-description="Triptyque rigide classe au choix" data-item-quantity="1">
-              Ajouter<br><span id="count-triptyque-unit" class="text-sm">1 lot</span>
+              Ajouter
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -303,11 +311,12 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-triptyque-spec">1</span>
               <button type="button" class="quantity-btn plus" data-target="triptyque-spec">+</button>
             </div>
+            <span id="count-triptyque-spec">1 lot</span>
             <button class="snipcart-add-item btn btn-shop"
                     data-item-id="triptyque-spec" data-item-name="Triptyque spécialisé"
                     data-item-price="40" data-item-weight="120" data-item-url="boutique.php"
                     data-item-description="Triptyque spécialisé + équipement" data-item-quantity="1">
-              Ajouter<br><span id="count-triptyque-spec" class="text-sm">1 lot</span>
+              Ajouter
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
@@ -323,11 +332,12 @@ function inStock(string $id): bool
               <span class="qty-value" id="qty-pack-etoile">1</span>
               <button type="button" class="quantity-btn plus" data-target="pack-etoile">+</button>
             </div>
+            <span id="count-pack-etoile">1 lot</span>
             <button class="snipcart-add-item btn btn-shop"
                     data-item-id="pack-etoile" data-item-name="Pack triptyques & aide"
                     data-item-price="110" data-item-weight="420" data-item-url="boutique.php"
                     data-item-description="3 triptyques aléatoires + cheat-sheet classe" data-item-quantity="1">
-              Ajouter<br><span id="count-pack-etoile" class="text-sm">1 lot</span>
+              Ajouter
             </button>
           <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
         </div>
