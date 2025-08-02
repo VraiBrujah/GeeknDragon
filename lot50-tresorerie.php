@@ -39,13 +39,14 @@ function inStock(string $id): bool
   <section class="max-w-md mx-auto px-6">
     <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline mb-6 block mx-auto">&larr; Retour à la boutique</a>
     <div class="card">
-      <div class="slider mb-6">
-        <button class="slide-prev">❮</button>
-        <div class="slide-frame">
-          <img loading="lazy" src="images/Piece/pro/argent/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="slide rounded">
-          <img loading="lazy" src="images/Piece/pro/lot100Piece.jpg" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="slide rounded">
+      <div class="swiper mb-6">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/argent/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded"></div>
+          <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot100Piece.jpg" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded"></div>
         </div>
-        <button class="slide-next">❯</button>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50<br>La Trésorerie du Seigneur Marchand</h1>
       <p class="mb-6 text-gray-300 text-center">10 pièces de chaque métal, multiplicateur au choix.</p>

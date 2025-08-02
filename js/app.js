@@ -169,34 +169,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Slider: navigation et zoom
-function initSlider(selector) {
-  document.querySelectorAll(selector).forEach(slider => {
-    const slides = Array.from(slider.querySelectorAll('.slide-frame .slide'));
-    if (!slides.length) return;
-    let index = 0;
-
-    const show = (i) => {
-      slides[index].classList.remove('active');
-      index = (i + slides.length) % slides.length;
-      slides[index].classList.add('active');
-    };
-
-    const prev = slider.querySelector('.slide-prev');
-    const next = slider.querySelector('.slide-next');
-    prev && prev.addEventListener('click', () => show(index - 1));
-    next && next.addEventListener('click', () => show(index + 1));
-
-    slides.forEach(img => {
-      img.addEventListener('click', () => {
-        img.classList.toggle('zoomed');
-      });
-    });
-
-    slides[0].classList.add('active');
-  });
-}
-
+// Initialisation des carrousels Swiper
 document.addEventListener('DOMContentLoaded', () => {
-  initSlider('.slider');
+  document.querySelectorAll('.swiper').forEach(sw => {
+    new Swiper(sw, {
+      loop: true,
+      autoplay: { delay: 5000 },
+      pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
+      navigation: {
+        nextEl: sw.querySelector('.swiper-button-next'),
+        prevEl: sw.querySelector('.swiper-button-prev'),
+      },
+    });
+  });
 });
