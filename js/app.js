@@ -147,3 +147,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+// Galerie produit : miniatures et zoom
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.gallery').forEach(gallery => {
+    const mainImg = gallery.querySelector('.main-image img');
+    gallery.querySelectorAll('.thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        if (mainImg) {
+          mainImg.src = thumb.dataset.full;
+        }
+      });
+    });
+    if (mainImg) {
+      mainImg.addEventListener('click', () => {
+        mainImg.classList.toggle('zoomed');
+      });
+    }
+  });
+});
