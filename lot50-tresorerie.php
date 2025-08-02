@@ -54,12 +54,12 @@ function inStock(string $id): bool
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50<br>La Trésorerie du Seigneur Marchand</h1>
       <p class="mb-6 text-gray-300 text-center">10 pièces de chaque métal, multiplicateur au choix.</p>
       <?php if(inStock('lot50-tresorerie')): ?>
-      <div class="quantity-selector justify-center mb-4" data-id="lot50-tresorerie">
+      <div class="quantity-selector justify-center mx-auto mb-4" data-id="lot50-tresorerie">
         <button type="button" class="quantity-btn minus" data-target="lot50-tresorerie">−</button>
         <span class="qty-value" id="qty-lot50-tresorerie">1</span>
         <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
       </div>
-      <label for="multiplier-lot50-tresorerie" class="block mb-4">
+      <label for="multiplier-lot50-tresorerie" class="block mb-4 text-center">
         <span class="sr-only">Multiplicateur</span>
         <select id="multiplier-lot50-tresorerie" class="multiplier-select text-black" data-target="lot50-tresorerie">
           <option value="1">unitaire</option>

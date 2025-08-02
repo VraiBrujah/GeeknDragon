@@ -54,7 +54,7 @@ function inStock(string $id): bool
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50<br>L’Essence des Royaumes</h1>
       <p class="mb-6 text-gray-300 text-center">2 pièces de chaque métal pour chaque multiplicateur.</p>
       <?php if(inStock('lot50-essence')): ?>
-      <div class="quantity-selector justify-center mb-4" data-id="lot50-essence">
+      <div class="quantity-selector justify-center mx-auto mb-4" data-id="lot50-essence">
         <button type="button" class="quantity-btn minus" data-target="lot50-essence">−</button>
         <span class="qty-value" id="qty-lot50-essence">1</span>
         <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
