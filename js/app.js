@@ -137,10 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
       if(addBtn){
         addBtn.setAttribute('data-item-quantity', qty.toString());
-        const countSpan = document.getElementById('count-' + id);
-        if(countSpan){
-          countSpan.textContent = `${qty} lot${qty > 1 ? 's' : ''}`;
-        }
+        const price = parseFloat(addBtn.getAttribute('data-item-price') || '0');
+        const total = price * qty;
+        addBtn.innerHTML = `Ajouter — ${total} $`;
+      }
+      const countSpan = document.getElementById('count-' + id);
+      if(countSpan){
+        countSpan.textContent = qty + ' lots';
       }
     });
   });
