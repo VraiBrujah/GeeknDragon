@@ -90,8 +90,8 @@ function inStock(string $id): bool
                 </select>
               </label>
             </div>
-          <div class="mt-auto">
-            <button class="snipcart-add-item btn btn-shop"
+          <div class="mt-auto text-center">
+            <button class="snipcart-add-item btn btn-shop mx-auto"
                     data-item-id="lot10" data-item-name="Lot de 10–L’Offrande du Vagabond"
                     data-item-price="60" data-item-url="boutique.php"
                     data-item-description="2 pièces de chaque métal, multiplicateur au choix"
@@ -120,8 +120,8 @@ function inStock(string $id): bool
                 <button type="button" class="quantity-btn plus" data-target="lot25">+</button>
               </div>
             </div>
-          <div class="mt-auto">
-            <button class="snipcart-add-item btn btn-shop"
+          <div class="mt-auto text-center">
+            <button class="snipcart-add-item btn btn-shop mx-auto"
                     data-item-id="lot25" data-item-name="Lot de 25–La Monnaie des Royaumes"
                     data-item-price="145" data-item-url="boutique.php"
                     data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
@@ -147,8 +147,8 @@ function inStock(string $id): bool
                 <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
               </div>
             </div>
-          <div class="mt-auto">
-            <button class="snipcart-add-item btn btn-shop"
+          <div class="mt-auto text-center">
+            <button class="snipcart-add-item btn btn-shop mx-auto"
                     data-item-id="lot50-essence" data-item-name="Lot de 50–L’Essence des Royaumes"
                     data-item-price="275" data-item-url="boutique.php"
                     data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
@@ -184,8 +184,8 @@ function inStock(string $id): bool
                 </select>
               </label>
             </div>
-          <div class="mt-auto">
-            <button class="snipcart-add-item btn btn-shop"
+          <div class="mt-auto text-center">
+            <button class="snipcart-add-item btn btn-shop mx-auto"
                     data-item-id="lot50-tresorerie" data-item-name="Lot de 50–La Trésorerie du Seigneur Marchand"
                     data-item-price="275" data-item-url="boutique.php"
                     data-item-description="10 pièces de chaque métal, multiplicateur au choix"
@@ -238,8 +238,8 @@ function inStock(string $id): bool
                 <button type="button" class="quantity-btn plus" data-target="booster15">+</button>
               </div>
             </div>
-            <div class="mt-auto">
-              <button class="snipcart-add-item btn btn-shop"
+            <div class="mt-auto text-center">
+              <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="booster15" data-item-name="Booster 15 cartes"
                       data-item-price="15" data-item-weight="100" data-item-url="boutique.php"
                       data-item-description="15 cartes illustrées thématiques" data-item-quantity="1">
@@ -247,7 +247,7 @@ function inStock(string $id): bool
               </button>
             </div>
           <?php else: ?>
-            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
           <?php endif; ?>
         </div>
 
@@ -264,8 +264,8 @@ function inStock(string $id): bool
                 <button type="button" class="quantity-btn plus" data-target="pack60">+</button>
               </div>
             </div>
-            <div class="mt-auto">
-              <button class="snipcart-add-item btn btn-shop"
+            <div class="mt-auto text-center">
+              <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="pack60" data-item-name="Pack 60 cartes"
                       data-item-price="45" data-item-weight="350" data-item-url="boutique.php"
                       data-item-description="60 cartes d’équipement variées" data-item-quantity="1">
@@ -273,7 +273,7 @@ function inStock(string $id): bool
               </button>
             </div>
           <?php else: ?>
-            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
           <?php endif; ?>
         </div>
 
@@ -290,8 +290,8 @@ function inStock(string $id): bool
                 <button type="button" class="quantity-btn plus" data-target="mystere100">+</button>
               </div>
             </div>
-            <div class="mt-auto">
-              <button class="snipcart-add-item btn btn-shop"
+            <div class="mt-auto text-center">
+              <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="mystere100" data-item-name="Mystère 100 cartes"
                       data-item-price="65" data-item-weight="550" data-item-url="boutique.php"
                       data-item-description="100 cartes d’équipement (rares incluses)" data-item-quantity="1">
@@ -299,7 +299,7 @@ function inStock(string $id): bool
               </button>
             </div>
           <?php else: ?>
-            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
           <?php endif; ?>
         </div>
 
@@ -341,8 +341,8 @@ function inStock(string $id): bool
                 <button type="button" class="quantity-btn plus" data-target="triptyque-unit">+</button>
               </div>
             </div>
-            <div class="mt-auto">
-              <button class="snipcart-add-item btn btn-shop"
+            <div class="mt-auto text-center">
+              <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="triptyque-unit" data-item-name="Triptyque unitaire"
                       data-item-price="30" data-item-weight="120" data-item-url="boutique.php"
                       data-item-description="Triptyque rigide classe au choix" data-item-quantity="1">
@@ -350,7 +350,7 @@ function inStock(string $id): bool
               </button>
             </div>
           <?php else: ?>
-            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
           <?php endif; ?>
         </div>
 
@@ -367,8 +367,8 @@ function inStock(string $id): bool
                 <button type="button" class="quantity-btn plus" data-target="triptyque-spec">+</button>
               </div>
             </div>
-            <div class="mt-auto">
-              <button class="snipcart-add-item btn btn-shop"
+            <div class="mt-auto text-center">
+              <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="triptyque-spec" data-item-name="Triptyque spécialisé"
                       data-item-price="40" data-item-weight="120" data-item-url="boutique.php"
                       data-item-description="Triptyque spécialisé + équipement" data-item-quantity="1">
@@ -376,7 +376,7 @@ function inStock(string $id): bool
               </button>
             </div>
           <?php else: ?>
-            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
           <?php endif; ?>
         </div>
 
@@ -393,8 +393,8 @@ function inStock(string $id): bool
                 <button type="button" class="quantity-btn plus" data-target="pack-etoile">+</button>
               </div>
             </div>
-            <div class="mt-auto">
-              <button class="snipcart-add-item btn btn-shop"
+            <div class="mt-auto text-center">
+              <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="pack-etoile" data-item-name="Pack triptyques & aide"
                       data-item-price="110" data-item-weight="420" data-item-url="boutique.php"
                       data-item-description="3 triptyques aléatoires + cheat-sheet classe" data-item-quantity="1">
@@ -402,7 +402,7 @@ function inStock(string $id): bool
               </button>
             </div>
           <?php else: ?>
-            <div class="mt-auto"><span class="btn btn-shop" disabled>Rupture de stock</span></div>
+            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
           <?php endif; ?>
         </div>
 
