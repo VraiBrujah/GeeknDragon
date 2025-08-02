@@ -15,6 +15,7 @@ $extraHead = <<<HTML
 HTML;
 $stock    = json_decode(file_get_contents(__DIR__ . '/stock.json'), true) ?? [];
 $snipcartKey = getenv('SNIPCART_API_KEY');
+$from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 function inStock(string $id): bool
 {
     global $stock;
@@ -36,7 +37,7 @@ function inStock(string $id): bool
 
 <main class="pt-32 pb-20">
   <section class="max-w-md mx-auto px-6">
-    <a href="boutique.php" class="btn btn-outline mb-6 block mx-auto">&larr; Retour à la boutique</a>
+    <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline mb-6 block mx-auto">&larr; Retour à la boutique</a>
     <div class="card">
       <div class="slider mb-6">
         <button class="slide-prev">❮</button>
