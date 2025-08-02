@@ -94,7 +94,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot25-royaumes')): ?>
         <div class="card flex flex-col">
           <a href="lot25.php">
-            <img src="images/Piece/pro/a100.png" alt="Lot de 25 – La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
+            <img src="images/Piece/pro/p25.png" alt="Lot de 25 – La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-2xl font-semibold mb-2">Lot de 25&nbsp;– La Monnaie des Royaumes</h4>
           <p class="mb-4 text-gray-300">1 pièce de chaque métal pour chaque multiplicateur.</p>
@@ -117,7 +117,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot50-essence')): ?>
         <div class="card flex flex-col">
           <a href="lot50-essence.php">
-            <img src="images/Piece/pro/a1000.png" alt="Lot de 50 – L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
+            <img src="images/Piece/pro/p50.png" alt="Lot de 50 – L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-2xl font-semibold mb-2">Lot de 50&nbsp;– L’Essence des Royaumes</h4>
           <p class="mb-4 text-gray-300">2 pièces de chaque métal pour chaque multiplicateur.</p>
@@ -140,7 +140,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot50-tresorerie')): ?>
         <div class="card flex flex-col">
           <a href="lot50-tresorerie.php">
-            <img src="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover">
+            <img src="images/Piece/pro/p50.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-2xl font-semibold mb-2">Lot de 50&nbsp;– La Trésorerie du Seigneur Marchand</h4>
           <p class="mb-4 text-gray-300">10 pièces de chaque métal, multiplicateur au choix.</p>
