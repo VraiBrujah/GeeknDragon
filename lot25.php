@@ -47,9 +47,7 @@ function inStock(string $id): bool
                alt="Lot de 25 – La Monnaie des Royaumes">
         </div>
         <div class="main-image flex-1"><img id="main-img-lot25" loading="lazy"
-             src="images/Piece/pro/a100-400.png"
-             srcset="images/Piece/pro/a100-200.png 200w, images/Piece/pro/a100-400.png 400w, images/Piece/pro/a100.png 1024w"
-             sizes="(max-width: 640px) 200px, 400px"
+             src="images/Piece/pro/argent/a100.png"
              alt="Lot de 25 – La Monnaie des Royaumes" class="rounded w-full"></div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 25&nbsp;– La Monnaie des Royaumes</h1>

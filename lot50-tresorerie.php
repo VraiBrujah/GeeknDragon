@@ -47,9 +47,7 @@ function inStock(string $id): bool
                alt="Lot de 50 – La Trésorerie du Seigneur Marchand">
         </div>
         <div class="main-image flex-1"><img id="main-img-lot50-tresorerie" loading="lazy"
-             src="images/Piece/pro/a10000-400.png"
-             srcset="images/Piece/pro/a10000-200.png 200w, images/Piece/pro/a10000-400.png 400w, images/Piece/pro/a10000.png 1024w"
-             sizes="(max-width: 640px) 200px, 400px"
+             src="images/Piece/pro/argent/a10000.png"
              alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded w-full"></div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50&nbsp;– La Trésorerie du Seigneur Marchand</h1>

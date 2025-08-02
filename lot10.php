@@ -48,8 +48,6 @@ function inStock(string $id): bool
         </div>
         <div class="main-image flex-1"><img id="main-img-lot10" loading="lazy"
              src="images/Piece/pro/p10.png"
-             srcset="images/Piece/pro/p10-200.png 200w, images/Piece/pro/p10.png 400w"
-             sizes="(max-width: 640px) 200px, 400px"
              alt="Lot de 10 – L’Offrande du Vagabond" class="rounded w-full"></div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 10&nbsp;– L’Offrande du Vagabond</h1>
