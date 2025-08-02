@@ -35,14 +35,13 @@ function inStock(string $id): bool
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 
 <main class="pt-32 pb-20">
-  <section class="max-w-4xl mx-auto px-6">
+  <section class="max-w-md mx-auto px-6">
     <div class="card">
       <div class="gallery flex mb-6">
         <div class="thumbnails flex flex-col">
-          <img class="thumb" src="images/Piece/pro/a10000.png" data-full="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand">
           <img class="thumb" src="images/Piece/pro/lot100Piece.jpg" data-full="images/Piece/pro/lot100Piece.jpg" alt="Lot de 50 – La Trésorerie du Seigneur Marchand">
         </div>
-        <div class="main-image flex-1"><img id="main-img-lot50-tresorerie" src="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded w-full h-64 object-cover"></div>
+        <div class="main-image flex-1"><img id="main-img-lot50-tresorerie" src="images/Piece/pro/a10000.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded w-full"></div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50&nbsp;– La Trésorerie du Seigneur Marchand</h1>
       <p class="mb-6 text-gray-300 text-center">10 pièces de chaque métal, multiplicateur au choix.</p>
