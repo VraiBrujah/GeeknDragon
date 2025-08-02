@@ -51,7 +51,7 @@ function inStock(string $id): bool
              src="images/Piece/pro/p10.png"
              alt="Lot de 10 – L’Offrande du Vagabond" class="rounded w-full"></div>
       </div>
-      <h1 class="text-3xl font-bold mb-4 text-center">Lot de 10&nbsp;– L’Offrande du Vagabond</h1>
+      <h1 class="text-3xl font-bold mb-4 text-center">Lot de 10<br>L’Offrande du Vagabond</h1>
       <p class="mb-6 text-gray-300 text-center">2 pièces de chaque métal, multiplicateur au choix.</p>
       <?php if(inStock('lot10')): ?>
       <div class="quantity-selector justify-center mb-4" data-id="lot10">
