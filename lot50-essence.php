@@ -47,9 +47,7 @@ function inStock(string $id): bool
                alt="Lot de 50 – L’Essence des Royaumes">
         </div>
         <div class="main-image flex-1"><img id="main-img-lot50-essence" loading="lazy"
-             src="images/Piece/pro/a1000-400.png"
-             srcset="images/Piece/pro/a1000-200.png 200w, images/Piece/pro/a1000-400.png 400w, images/Piece/pro/a1000.png 1024w"
-             sizes="(max-width: 640px) 200px, 400px"
+             src="images/Piece/pro/argent/a1000.png"
              alt="Lot de 50 – L’Essence des Royaumes" class="rounded w-full"></div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50&nbsp;– L’Essence des Royaumes</h1>
