@@ -129,10 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const total = qty * multiplier;
     const plusBtn = document.querySelector(`.quantity-btn.plus[data-target="${id}"]`);
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
-    const over = max != null && total > max;
+    const over = max != null && (max <= 0 || total >= max);
     if (plusBtn) {
       const nextTotal = (qty + 1) * multiplier;
-      plusBtn.disabled = max != null && nextTotal > max;
+      plusBtn.disabled = max != null && (max <= 0 || nextTotal > max);
       plusBtn.title = plusBtn.disabled ? 'Stock insuffisant' : '';
     }
     if (addBtn) {
