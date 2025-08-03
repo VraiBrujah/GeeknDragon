@@ -226,7 +226,7 @@ function inStock(string $id): bool
   </section>
 
   <!-- ░░░ CARTES ░░░ -->
-  <section class="py-16">
+  <section id="cartes" class="py-16">
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Cartes d’équipement</h3>
       <div class="grid md:grid-cols-3 gap-10">
@@ -332,7 +332,7 @@ function inStock(string $id): bool
   </section>
 
   <!-- ░░░ TRIPTYQUES ░░░ -->
-  <section class="py-16 bg-gray-900/80">
+  <section id="triptyques" class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Triptyques de personnage</h3>
       <div class="grid md:grid-cols-3 gap-10">
