@@ -120,7 +120,7 @@ input.gd-field, textarea.gd-field{
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin: 1rem 0;
+  margin: 1rem auto;
 }
 
 /* Center multiplier dropdown */
@@ -135,14 +135,6 @@ input.gd-field, textarea.gd-field{
   height: 3rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-/* Center quantity selector */
-.quantity-selector {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
   justify-content: center;
 }
 
