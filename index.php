@@ -83,7 +83,9 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
           <p class="text-lg text-gray-200 mb-4">
             Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.
           </p>
-          <a href="actualites/es-tu-game.php" class="btn btn-primary">Lire l’article</a>
+          <div class="text-center">
+            <a href="actualites/es-tu-game.php" class="btn btn-primary">Lire l’article</a>
+          </div>
         </article>
     
         <!-- Bloc témoignage -->
