@@ -125,9 +125,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const updatePlus = (id) => {
     const max = stock[id];
     const qty = parseInt(document.getElementById('qty-' + id)?.textContent || '1', 10);
+    const multiplier = parseInt(document.querySelector(`.multiplier-select[data-target="${id}"]`)?.value || '1', 10);
+    const total = qty * multiplier;
     const plusBtn = document.querySelector(`.quantity-btn.plus[data-target="${id}"]`);
+    const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
+    const over = max != null && total > max;
     if (plusBtn) {
-      plusBtn.disabled = max != null && qty >= max;
+      const nextTotal = (qty + 1) * multiplier;
+      plusBtn.disabled = max != null && nextTotal > max;
+      plusBtn.title = plusBtn.disabled ? 'Stock insuffisant' : '';
+    }
+    if (addBtn) {
+      addBtn.disabled = over;
+      addBtn.title = over ? 'Stock insuffisant' : '';
+      if (over) {
+        addBtn.textContent = 'Stock insuffisant';
+      } else if (addBtn.textContent === 'Stock insuffisant') {
+        addBtn.textContent = 'Ajouter';
+      }
     }
   };
 
@@ -138,15 +153,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!qtySpan) return;
       let qty = parseInt(qtySpan.textContent, 10) || 1;
       const max = stock[id];
+      const multiplier = parseInt(document.querySelector(`.multiplier-select[data-target="${id}"]`)?.value || '1', 10);
       if (btn.classList.contains('minus')) {
         qty = Math.max(1, qty - 1);
-      } else if (max == null || qty < max) {
+      } else if (max == null || (qty + 1) * multiplier <= max) {
         qty++;
       }
       qtySpan.textContent = qty;
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
+      const total = qty * multiplier;
       if (addBtn) {
-        addBtn.setAttribute('data-item-quantity', qty.toString());
+        addBtn.setAttribute('data-item-quantity', total.toString());
         addBtn.textContent = 'Ajouter';
       }
       updatePlus(id);
@@ -161,9 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = sel.dataset.target;
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
     const update = () => {
+      const qty = parseInt(document.getElementById('qty-' + id)?.textContent || '1', 10);
+      const mult = parseInt(sel.value, 10);
       if (addBtn) {
         addBtn.setAttribute('data-item-custom1-value', sel.value);
+        addBtn.setAttribute('data-item-quantity', (qty * mult).toString());
+        addBtn.textContent = 'Ajouter';
       }
+      updatePlus(id);
     };
     update();
     sel.addEventListener('change', update);
