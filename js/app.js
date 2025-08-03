@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
       if (addBtn) {
         addBtn.setAttribute('data-item-quantity', qty.toString());
+        addBtn.textContent = 'Ajouter';
       }
       updatePlus(id);
     });
@@ -182,4 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     });
   });
+});
+
+// Réinitialise les boutons après actions Snipcart
+document.addEventListener('snipcart.ready', () => {
+  const reset = item => {
+    const id = item.id || item.item?.id;
+    if (!id) return;
+    const btn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
+    if (btn) btn.textContent = 'Ajouter';
+  };
+  Snipcart.events.on('item.added', reset);
+  Snipcart.events.on('item.updated', reset);
 });
