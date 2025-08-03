@@ -20,7 +20,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
         <h2 class="text-5xl font-extrabold mb-6">L'immersion au cœur du jeu</h2>
           <p class="text-xl mb-2 txt-court">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
           <p class="text-xl mb-8 txt-court">Conçues au Québec</p>
-<a href="boutique.php" class="btn btn-primary">
+<a href="boutique.php" class="btn btn-primary" data-hide-price="1">
             Visiter la boutique
           </a>
       </div>
@@ -60,7 +60,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
         <h3 class="text-4xl font-bold mb-12">Boutique</h3>
           <p class="mb-8 txt-court">Paiement sécurisé &nbsp;|&nbsp; Stocks mis à jour en temps réel.</p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
-          <a href="boutique.php" class="btn btn-primary">
+          <a href="boutique.php" class="btn btn-primary" data-hide-price="1">
             Visiter la boutique
           </a>
           <a href="contact.php" class="btn btn-outline">

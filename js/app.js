@@ -130,6 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const plusBtn = document.querySelector(`.quantity-btn.plus[data-target="${id}"]`);
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
     const over = max != null && (max <= 0 || total >= max);
+    const hidePrice = addBtn?.dataset.hidePrice !== undefined;
+    const unitPrice = addBtn ? parseFloat(addBtn.dataset.itemPrice || '0') : 0;
+    const priceText = unitPrice ? `Ajouter — ${unitPrice * total} $` : 'Ajouter';
     if (plusBtn) {
       const nextTotal = (qty + 1) * multiplier;
       plusBtn.disabled = max != null && (max <= 0 || nextTotal > max);
@@ -140,11 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
       addBtn.title = over ? 'Stock insuffisant' : '';
       if (over) {
         addBtn.textContent = 'Stock insuffisant';
-      } else if (addBtn.textContent === 'Stock insuffisant') {
-        addBtn.textContent = 'Ajouter';
+      } else {
+        addBtn.textContent = hidePrice ? 'Ajouter' : priceText;
       }
     }
   };
+  window.updatePlus = updatePlus;
 
   document.querySelectorAll('.quantity-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -164,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const total = qty * multiplier;
       if (addBtn) {
         addBtn.setAttribute('data-item-quantity', total.toString());
-        addBtn.textContent = 'Ajouter';
       }
       updatePlus(id);
     });
@@ -183,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (addBtn) {
         addBtn.setAttribute('data-item-custom1-value', sel.value);
         addBtn.setAttribute('data-item-quantity', (qty * mult).toString());
-        addBtn.textContent = 'Ajouter';
       }
       updatePlus(id);
     };
@@ -213,7 +215,7 @@ document.addEventListener('snipcart.ready', () => {
     const id = item.id || item.item?.id;
     if (!id) return;
     const btn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
-    if (btn) btn.textContent = 'Ajouter';
+    if (btn && window.updatePlus) window.updatePlus(id);
   };
   Snipcart.events.on('item.added', reset);
   Snipcart.events.on('item.updated', reset);
