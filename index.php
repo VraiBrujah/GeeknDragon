@@ -39,7 +39,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
           <div class="card-product">
             <h4 class="text-2xl font-semibold mb-2">Pièces métalliques</h4>
             <p>Monnaie physique pour ressentir chaque trésor et influencer la chance à la table.</p>
-            <img src="images/pieces_metalliques.png" alt="Pièces métalliques" class="rounded mb-4">
+            <img src="images/piece.png" alt="Pièces métalliques" class="rounded mb-4">
           </div>
           <div class="card-product">
             <h4 class="text-2xl font-semibold mb-2">Fiche Triptyque</h4>
