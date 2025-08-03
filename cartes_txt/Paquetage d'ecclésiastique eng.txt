@@ -1,0 +1,83 @@
+nom: Backpack
+nom 1: Backpack
+prix: **2 gp**
+prix 1: **2 gp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/backpack.png
+description: \n\n---\n\nThis leather or reinforced cloth backpack is designed for adventurers to carry essential gear during their travels. It is lightweight but not optimized for use with heavier armor.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Can hold up to **30 pounds or 1 cubic foot (15 kg)**.\n\n>- **Usage**: Using this backpack while wearing **medium or heavy armor** imposes **disadvantage** on all **Dexterity** checks, including **Stealth**.
+
+nom: Blanket
+nom 1: Blanket
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **3 lb**\n\n**(1.5 kg)**
+poids 1: **3 lb**\n\n**(1.5 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/blanket.png
+description: \n\n---\n\nA large, warm covering made of wool or a similar material, essential for staying warm during rest and survival in cold climates.\n\n---\n\n**Mechanics**:\n\n>- **Effect**: While wrapped in a blanket, you gain **Advantage** on saving throws against **extreme cold**.\n\n>- **Extreme Cold Rules**: When the temperature is **0°F (-20°C)** or lower, a creature exposed to the cold must succeed on a **DC 10 Constitution saving throw** at the end of each hour or gain **1 level of Exhaustion**. Creatures with Resistance or Immunity to Cold damage automatically succeed on this saving throw.\n\n---\n\n**Exhaustion Condition**:\n\n>  - **Cumulative Levels**: Each time you gain Exhaustion, you receive **1 level of Exhaustion**. At **6 levels**, the character dies.\n\n>  - **D20 Tests Affected**: Reduce the result of all **D20 Tests** (ability checks, saving throws, and attack rolls) by **2 × your Exhaustion level**.\n\n>  - **Speed Reduced**: Reduce your **Speed** by **5 feet (1.5 m, 1 case)** per Exhaustion level.\n\n>  - **Recovery**: A **Long Rest** removes **1 level of Exhaustion**. Once your Exhaustion level reaches **0**, the condition ends.
+
+nom: Holy Water
+nom 1: Holy Water
+prix: **25 gp**
+prix 1: **25 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/holy_water.png
+description: \n\n---\n\nA vial of consecrated water imbued with divine power, effective against fiends and undead.\n\n---\n\n**Mechanics**:\n\n>- **Attack Usage**: As part of the **Attack action**, you can replace one of your attacks to throw a flask of Holy Water at a target within **20ft (6 m, 4c)**.\n\n>- **Effect**: The target must succeed on a **Dexterity saving throw (DC = 8 + your **Dexterity** modifier + your Proficiency Bonus)** or take **2d8 Radiant damage** if it is a **Fiend** or **Undead**.\n\n>- **Special**: Requires a Cleric or Paladin to bless and create during preparation.
+
+nom: Lamp
+nom 1: Lamp
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/lamp.png
+description: \n\n---\n\nA small metal lamp designed to illuminate dark areas by burning oil.\n\n---\n\n**Mechanics**:\n\n>- **Light Radius**: Casts **Bright Light** in a **15 ft (4.5 m, 3c)** radius and **Dim Light** for an additional **30ft (9 m, 6c)**.\n\n>- **Fuel Consumption**: Requires **Oil** to function. A single flask of oil lasts for **6 hours** of continuous use.\n\n>- **Use**: Provides light in dark environments and can be placed on a surface or carried in one hand.\n\n>- **Special**: Can be extinguished or relit as a **Utilize action**.\n\n>- **Effect**: Useful for exploring dungeons, caves, or any area with poor visibility.
+
+nom: Ration (7)
+nom 1: Ration (7)
+prix: **35 sp**
+prix 1: **35 sp**
+poids: **14 lb**\n\n**(7 kg)**
+poids 1: **14 lb**\n\n**(7 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)<br><br>![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/ration.png
+description: \n\n---\n\nRations are travel-ready food supplies, including **jerky**, **dried fruit**, **hardtack**, and **nuts**. They are compact, durable, and essential for sustaining adventurers on long journeys.\n\n---\n\n**Mechanics:**\n\n>- **Daily Sustenance:** One ration provides enough food to meet the daily requirement for a **Small** or **Medium** creature.**Malnutrition Hazard:**\n\n>- A creature must consume at least **half** its required daily food to avoid **Exhaustion**.\n\n>- Eating less than half requires a **DC 10 Constitution saving throw** or the creature gains **1 level of Exhaustion** at the end of the day.\n\n>- A creature eating nothing for **5 consecutive days** gains **1 level of Exhaustion automatically** on the fifth day, and an additional level for each subsequent day without food.\n\n>- **Exhaustion Recovery:** Eating a full day’s worth of food removes malnutrition-related Exhaustion.\n\n>- **Flavor:** While functional and compact, rations are bland and repetitive. They are meant for survival, not enjoyment.\n\n---\n\n**Food Needs per Day**: A **Tiny** creature requires **1/4 lb (0.1 kg)** of food per day, a **Small or Medium** creature **1 lb (0.5 kg)**, a **Large** creature **4 lb (2 kg)**, a **Huge** creature **16 lb (8 kg)**, and a **Gargantuan** creature **64 lb (32 kg)**.  \n\n---\n\n**Exhaustion Condition**:\n\n>  - **Cumulative Levels**: Each time you gain Exhaustion, you receive **1 level of Exhaustion**. At **6 levels**, the character dies.\n\n>  - **D20 Tests Affected**: Reduce the result of all **D20 Tests** (ability checks, saving throws, and attack rolls) by **2 × your Exhaustion level**.\n\n>  - **Speed Reduced**: Reduce your **Speed** by **5 feet (1.5 m, 1 case)** per Exhaustion level.
+
+nom: Robe
+nom 1: Robe
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **4 lb**\n\n**(2 kg)**
+poids 1: **4 lb**\n\n**(2 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/robe.png
+description: \n\n---\n\nA simple garment that can serve ceremonial, practical, or religious purposes.\n\n---\n\n**Mechanics**:\n\n>- **Effect**: Functions as basic clothing, often required for specific ceremonies, roles, or events.\n\n>- **Customizable**: Can be tailored to show heraldry, colors, or religious symbols.\n\n>- **Roleplay**: Ideal for monks, scholars, or characters of faith who rely on minimalistic attire.\n\n>- **Capacity**: Can be folded and stored in a **backpack** without occupying significant space.
+
+nom: Tinderbox
+nom 1: Tinderbox
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/tinderbox.png
+description: \n\n---\n\nA small container holding the tools necessary to kindle a fire.\n\n---\n\n**Mechanics**:\n\n>- **Contents**: Includes flint, fire steel, and lightly oiled tinder.**Effect**: \n\n> - As a **Bonus Action**, light a **candle**, **lamp**, **lantern**, or **torch**.\n\n> - Lighting any other exposed fuel (e.g., campfire) takes **1 minute**.\n\n>- **Use**: Essential for survival in dark dungeons, wilderness camping, or preparing light sources.

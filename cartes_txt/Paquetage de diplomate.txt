@@ -1,0 +1,143 @@
+nom: Coffre
+nom 1: Coffre
+prix: **5 po**
+prix 1: **5 po**
+poids: **12.5 kg**\n\n**(25 lb)**
+poids 1: **12.5 kg**\n\n**(25 lb)**
+type: Équipement d'aventurier
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/chest.png
+description: \n\n---\n\nUn grand coffre en bois renforcé par des ferrures en fer, idéal pour stocker des objets lourds ou volumineux.\n\n---\n\n**Mécanique** :\n\n>- **Capacité** : Peut contenir jusqu’à **340 litres**, **200 kg (440 lb)** ou 0.36 m³.\n\n>- **Protection** : Protège le contenu contre les dommages environnementaux, mais pas contre le vol à moins d’être verrouillé (cadenas vendu séparément).\n\n>- **Utilisation** : Convient pour transporter des trésors, des fournitures ou du matériel important sur de longues distances.
+
+nom: Beaux habits
+nom 1: Beaux habits
+prix: **15 po**
+prix 1: **15 po**
+poids: **3 kg**\n\n**(6 lb)**
+poids 1: **3 kg**\n\n**(6 lb)**
+type: Équipement d'aventurier
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/fine_clothes.png
+description: \n\n---\n\nDes vêtements de haute qualité faits de tissus coûteux, conçus pour des rassemblements nobles et des événements formels.\n\n---\n\n**Mécanique** :\n\n>- **Effet** : Accorde un **avantage** aux tests de **Charisme (Persuasion)** lors d’événements formels ou nobles où l’apparence est essentielle.\n\n>- **Utilisation** : Idéal pour impressionner des dignitaires, accéder à des événements exclusifs ou incarner un personnage noble.
+
+nom: Encre
+nom 1: Encre
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.1 kg**\n\n**(0.2 lb)**
+poids 1: **0.1 kg**\n\n**(0.2 lb)**
+type: Équipement d'aventurier
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/ink.png
+description: \n\n---\n\nUne petite bouteille d'encre de haute qualité, utilisée pour écrire, dessiner ou inscrire des sorts magiques.\n\n---\n\n**Mécanismes** :\n\n>- **Capacité** : Une bouteille permet d’écrire environ **500 pages** de texte.\n\n>- **Utilisation** : Essentielle pour créer des documents écrits, des parchemins ou des inscriptions magiques.\n\n>- **Spécial** : Nécessaire pour les Magiciens pour inscrire des sorts dans un grimoire.
+
+nom: Porte-plume (5)
+nom 1: Porte-plume (5)
+prix: **1 pa**
+prix 1: **1 pa**
+poids: **0.25 kg**\n\n**(0.5 lb)**
+poids 1: **0.25 kg**\n\n**(0.5 lb)**
+type: Équipement d'aventurier
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/ink_pen.png
+description: \n\n---\n\nUne petite plume soigneusement taillée, utilisée avec de l'encre pour écrire lettres et documents.\n\n---\n\n**Mécaniques :**\n\n>- **Utilisation** : Nécessite de l'**Encre** pour fonctionner.\n\n>- **Effet** : Permet d'écrire des lettres, des notes ou tout autre type de communication écrite.\n\n>- **Usage Magique** : Indispensable pour des écrits magiques précis lorsqu'utilisée avec de l'encre de haute qualité.
+
+nom: Lampe
+nom 1: Lampe
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Équipement d'Aventure
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/lamp.png
+description: \n\n---\n\nUne petite lampe en métal conçue pour éclairer les zones sombres en brûlant de l'huile.\n\n---\n\n**Mécanique** :\n\n>- **Rayon lumineux** : Émet une **lumière vive** dans un rayon de <br>**45 m (15', 3c)** et une **lumière faible** dans un rayon supplémentaire de <br>**9 m (30', 6c)**.\n\n>- **Consommation de carburant** : Nécessite de l'**huile** pour fonctionner. Une seule fiole d'huile dure **6 heures** en utilisation continue.\n\n>- **Utilisation** : Fournit de la lumière dans des environnements sombres et peut être placée sur une surface ou transportée à une main.\n\n>- **Spécial** : Peut être éteinte ou rallumée durant l'**action utiliser un objet**.\n\n>- **Effet** : Utile pour explorer des donjons, des grottes ou toute zone à faible visibilité.
+
+nom: Étui à Cartes
+nom 1: Étui à Cartes
+prix: **1 po**
+prix 1: **1 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Équipement d'Aventurier
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/map_case.png
+description: \n\n---\n\nUn étui cylindrique robuste conçu pour protéger les cartes des dommages causés par les intempéries ou une manipulation brutale. C'est un outil essentiel pour les explorateurs et cartographes.\n\n---\n\n**Mécanique** :\n\n>- **Capacité** : Peut contenir jusqu’à **10 feuilles de papier** ou **cartes roulées**.\n\n>- **Effet** : Les cartes dans l’étui sont protégées des **dégâts d’eau**, plis ou déchirures.\n\n>- **Utilisation** : Peut être attaché à une **ceinture**, un **sac à dos** ou une **selle** pour un accès facile.
+
+nom: Étui à Parchemin
+nom 1: Étui à Parchemin
+prix: **1 po**
+prix 1: **1 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Équipement d'Aventurier
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/scroll_case.png
+description: \n\n---\n\nUn tube soigneusement conçu pour contenir et protéger des parchemins ou des documents délicats. Il est largement utilisé par les mages, érudits et archivistes.\n\n---\n\n**Mécanique** :\n\n>- **Capacité** : Peut contenir jusqu’à **5 parchemins** ou **documents roulés**.\n\n>- **Effet** : Les parchemins dans l’étui sont protégés des **dégâts d’eau**, **du feu**, ou des déchirures.\n\n>- **Utilisation** : Peut être fixé à une **ceinture** ou un **sac à dos**, permettant un accès rapide aux parchemins en combat ou exploration.
+
+nom: Huile (4)
+nom 1: Huile (4)
+prix: **4 pa**
+prix 1: **4 pa**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Équipement d'Aventure
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)<br><br>![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/oil4.png
+description: \n\n---\n\nUne fiole polyvalente d'huile, utile pour allumer des feux, alimenter des lanternes ou créer des surfaces glissantes.\n\n---\n\n**Mécaniques :**\n\n>- **Couvrir une Cible** : Lancer de l'huile durant une **Action Attaquer** couvre une créature ou un objet dans un rayon de **6 m (20', 4c)**. La cible doit réussir un **Jet de sauvegarde de Dextérité DD 8 + modificateur de Dextérité + Bonus de Maîtrise** ou être couverte d'huile. Si enflammée, la cible subit **5 dégâts de feu** supplémentaires.\n\n>- **Créer une Surface Glissante** : Verser de l'huile durant l'**action utiliser un objet** crée une zone glissante de  **1.5 m (5', 1c)** .\n\n>- **Source de Carburant** : Une fiole d'huile brûle pendant **6 heures** dans une lampe ou une lanterne.
+
+nom: Papier (5)
+nom 1: Papier (5)
+prix: **1 po**
+prix 1: **1 po**
+poids: **0.25 kg**\n\n**(0.5 lb)**
+poids 1: **0.25 kg**\n\n**(0.5 lb)**
+type: Équipement d'aventurier
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/paper.png
+description: \n\n---\n\nUne feuille de papier de haute qualité, utilisée pour écrire, dessiner ou rédiger des documents.\n\n---\n\n**Mécaniques :**\n\n>- **Capacité** : Chaque feuille peut contenir jusqu'à **250 mots manuscrits**.\n\n>- **Utilité** : Essentielle pour prendre des notes, dessiner des cartes ou rédiger des lettres.\n\n>- **Effet** : Un outil simple mais essentiel pour les aventuriers nécessitant des documents ou des communications.\n\n---\n\n **Note** : \n\n![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)
+
+nom: Parchemin (5)
+nom 1: Parchemin (5)
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **0.25 kg**\n\n**(0.5 lb)**
+poids 1: **0.25 kg**\n\n**(0.5 lb)**
+type: Équipement d'aventurier
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/parchment.png
+description: \n\n---\n\nUne feuille résistante faite de peau d'animal traitée, souvent utilisée pour écrire dans des conditions difficiles.\n\n---\n\n**Mécaniques :**\n\n>- **Capacité** : Chaque feuille peut contenir jusqu'à **250 mots manuscrits**.\n\n>- **Utilité** : Idéal pour des notes sur le terrain, des contrats ou des messages durables.\n\n>- **Effet** : Plus résistant que le papier, ce qui le rend adapté à une utilisation en extérieur ou dans des environnements difficiles.\n\n>- **Utilisation spéciale** : Peut être utilisé pour créer des cartes durables ou des documents officiels nécessitant une longue conservation.\n\n---\n\n **Note** : \n\n![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)
+
+nom: Parfum
+nom 1: Parfum
+prix: **5 po**
+prix 1: **5 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Équipement d'aventurier
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/perfume.png
+description: \n\n---\n\nUne fiole de liquide parfumé destinée à renforcer votre présence ou masquer des odeurs désagréables.\n\n---\n\n**Mécaniques :**\n\n>- **Durée** : Une application dure **1 heure**.\n\n>- **Effet** : Confère **Avantage aux tests de Charisme (Persuasion)** visant à influencer des humanoïdes **indifférents dans un rayon de 1.5 m (5', 1c)**.\n\n>- **Utilisation** : Idéal pour les interactions sociales, les occasions formelles ou pour masquer des odeurs désagréables.\n\n>- **Spécial** : Peut attirer ou repousser des créatures sensibles aux odeurs.
+
+nom: Boîte à amadou
+nom 1: Boîte à amadou
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Équipement d'aventurier
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/tinderbox.png
+description: \n\n---\n\nUn petit récipient contenant les outils nécessaires pour allumer un feu.\n\n---\n\n**Mécanique** :\n\n>- **Contenu** : Comprend un silex, un acier à feu et de l’amadou légèrement huilé.\n\n>- **Effet** :\n\n> - En tant qu'**action bonus**, allumez une **bougie**, **lampe**, **lanterne** ou **torche**.\n\n> - Allumer tout autre combustible exposé (ex. : feu de camp) prend **1 minute**.\n\n>- **Utilisation** : Essentiel pour survivre dans les donjons sombres, camper dans la nature ou préparer des sources de lumière.

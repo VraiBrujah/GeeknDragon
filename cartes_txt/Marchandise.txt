@@ -1,0 +1,285 @@
+nom: Lingot d'argent (1 kg)
+nom 1: Lingot d'argent (1 kg)
+prix: **10 po**
+prix 1: **10 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Lingot de commerce
+charge:
+image: image/Trade/silver_bar_2 lb.png
+description: \n\n---\n\nCe lingot rectangulaire d'argent pur pèse 1 kg et est largement utilisé par les marchands comme moyen d'échange standardisé. Mesurant environ 127 cm de long, 5 cm de large et 13 cm d'épaisseur, il est estampillé avec le sceau d'une monnaie ou d'une guilde de marchands réputée. Les barres de commerce comme celle-ci garantissent des transactions équitables lors des échanges de grande envergure entre marchés éloignés.
+
+nom: Lingot d'argent (2.5 kg)
+nom 1: Lingot d'argent (2.5 kg)
+prix: **25 po**
+prix 1: **25 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Lingot de commerce
+charge:
+image: image/Trade/silver_bar_5lb.png
+description: \n\n---\n\nPesant 2.5 kg, ce lingot d'argent est une monnaie pratique et fiable dans les régions où les pièces sont encombrantes. Il mesure 15 cm de long, 5 cm de large et 25 cm d'épaisseur, avec des bords lisses et une surface polie. Ces barres portent souvent des marques d'origine et de pureté, garantissant leur valeur auprès des commerçants.
+
+nom: Lingot d'or de 2.5 kg
+nom 1: Lingot d'or de 2.5 kg
+prix: **250 po**
+prix 1: **250 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Lingot de commerce
+charge:
+image: image/Trade/gold_bar_5lb.png
+description: \n\n---\n\nFabriqué à partir d'or pur, ce lingot lourd représente une fortune significative sous une forme compacte. Mesurant 127 cm de long, 5 cm de large et 19 cm d'épaisseur, sa surface brillante et polie brille d'un éclat inégalé. Appréciée pour sa rareté et sa beauté, cette barre de commerce est souvent conservée dans des coffres verrouillés ou des voûtes lors de longs voyages.
+
+nom: 500 g de blé
+nom 1: 500 g de blé
+prix: **1 pc**
+prix 1: **1 pc**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/wheat.png
+description: \n\n---\n\nCe humble sac de blé représente une journée de subsistance pour une petite famille ou des graines pour planter de futures récoltes. C'est une pierre angulaire du commerce agricole et un aliment de base pour d'innombrables communautés.
+
+nom: 500 g de farine
+nom 1: 500 g de farine
+prix: **2 pc**
+prix 1: **2 pc**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/flour.png
+description: \n\n---\n\nCette farine finement moulue, stockée dans un sac en tissu robuste, est essentielle pour cuire du pain, préparer des pâtisseries et créer des repas copieux. Sa qualité constante en fait un article de commerce fiable parmi les fermiers et les boulangers.
+
+nom: Poulet
+nom 1: Poulet
+prix: **2 pc**
+prix 1: **2 pc**
+poids: **2,5 kg**\n\n**(5 lb)**
+poids 1: **2,5 kg**\n\n**(5 lb)**
+type: Bête
+charge:
+image: image/Trade/chicken.png
+description: \n\n---\n\nUn **Poulet** est un animal de ferme courant, apprécié pour ses œufs, sa viande et ses faibles besoins en entretien. Les poules pondent régulièrement des œufs, tandis que les coqs sont souvent gardés pour la reproduction ou comme systèmes d'alerte.\n\n---\n\n**Classe d'Armure :** 12 (Armure Naturelle)  \n\n **Points de Vie :** 1 (1d4 - 1)  \n\n **Vitesse :** 3 m (10', 2 cases)  \n\n---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 3 (-4)  | 14 (+2) | 8 (-1)  | 2 (-4)  | 12 (+1) | 5 (-3)  |\n\n---\n\n **Sens :** Perception Passive 11  \n\n**Actions**\n\n **Becquetage :** *Attaque d'Arme de Mêlée :* +4 pour toucher, portée 1,5 m (5', 1 case), une cible. *Touché :* 1 dégât perforant.
+
+nom: 500 g de sel
+nom 1: 500 g de sel
+prix: **5 pc**
+prix 1: **5 pc**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/salt.png
+description: \n\n---\n\nCe petit sac de sel, un conservateur et assaisonnement vital, a une valeur incroyable dans les régions éloignées de la mer. Le sel est très prisé comme bien de commerce et symbole de richesse dans de nombreuses cultures.
+
+nom: 500 g de fer
+nom 1: 500 g de fer
+prix: **1 pa**
+prix 1: **1 pa**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/iron.png
+description: \n\n---\n\nUn lingot brut de fer, essentiel pour forger des outils, des armes et des structures. Ce métal durable constitue l'épine dorsale de nombreuses économies et est un produit de base pour les forgerons.
+
+nom: 1 m² de toile
+nom 1: 1 m² de toile
+prix: **1 pa**
+prix 1: **1 pa**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/canvas.png
+description: \n\n---\n\nCette feuille robuste de tissu tissé est idéale pour les tentes, les voiles ou les sacs résistants. Sa polyvalence et sa résistance à l'usure en font un bien précieux dans les marchés urbains et ruraux.
+
+nom: 500 g de cuivre
+nom 1: 500 g de cuivre
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/copper.png
+description: \n\n---\n\nUn morceau brillant de cuivre raffiné, souvent utilisé dans la fabrication d'ustensiles, de pièces de monnaie et d'objets décoratifs. La conductivité du cuivre le rend également essentiel dans les appareils magiques ou alchimiques.
+
+nom: 1 m² de tissu de coton
+nom 1: 1 m² de tissu de coton
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **0.25 kg**\n\n**(0.5 lb)**
+poids 1: **0.25 kg**\n\n**(0.5 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/cotton_cloth.png
+description: \n\n---\n\nUn morceau de tissu de coton doux et respirant, largement utilisé pour les vêtements, le rembourrage et la literie. Sa disponibilité et son confort en font un article de commerce incontournable dans la plupart des marchés.
+
+nom: 500 g de gingembre
+nom 1: 500 g de gingembre
+prix: **1 po**
+prix 1: **1 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/ginger.png
+description: \n\n---\n\nUne racine parfumée et épicée, prisée pour ses usages culinaires et médicinaux. Le gingembre est une épice recherchée, souvent transportée le long des routes commerciales animées vers des destinations exotiques.
+
+nom: Chèvre
+nom 1: Chèvre
+prix: **1 po**
+prix 1: **1 po**
+poids: **25 kg**\n\n**(55 lb)**
+poids 1: **25 kg**\n\n**(55 lb)**
+type: Bête
+charge:
+image: image/Trade/goat.png
+description: \n\n---\n\nUne **Chèvre** est un animal robuste et adaptable, apprécié pour son lait, sa viande et sa peau. Connues pour leurs capacités d'escalade, les chèvres sont souvent présentes dans les terrains vallonnés ou montagneux.\n\n---\n\n**Classe d'Armure :** 10  \n\n **Points de Vie :** 4 (1d8)  \n\n **Vitesse :** 12 m (40', 8 cases), Escalade 9 m (30', 6 cases)  \n\n---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 11 (+0) | 10 (+0) | 11 (+0) | 2 (-4)  | 10 (+0) | 5 (-3)  |\n\n---\n\n **Sens :** Vision dans le Noir 18 m (60'), Perception Passive 12  \n\n**Actions**\n\n **Charge :** *Attaque d'Arme de Mêlée :* +2 pour toucher, portée 1,5 m (5', 1 case), une cible. *Touché :* 1 dégât contondant. Si la chèvre a parcouru au moins 6 m (20') en ligne droite avant l'attaque, elle inflige 2 (1d4) dégâts contondants.
+
+nom: 500 g de cannelle
+nom 1: 500 g de cannelle
+prix: **2 po**
+prix 1: **2 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/cinnamon.png
+description: \n\n---\n\nUne épice parfumée dérivée de l'écorce d'arbres tropicaux, la cannelle ajoute une saveur chaude et aromatique aux plats et boissons. Sa valeur réside dans sa rareté et son association au luxe.
+
+nom: 500 g de poivre
+nom 1: 500 g de poivre
+prix: **2 po**
+prix 1: **2 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/pepper.png
+description: \n\n---\n\nConnu sous le nom d'**or noir**, le poivre est une épice très prisée qui a conduit des explorateurs vers des terres lointaines. Sa saveur intense en fait un ingrédient essentiel dans la cuisine raffinée.
+
+nom: Mouton
+nom 1: Mouton
+prix: **2 po**
+prix 1: **2 po**
+poids: **54 kg**\n\n**(120 lb)**
+poids 1: **54 kg**\n\n**(120 lb)**
+type: Bête
+charge:
+image: image/Trade/sheep.png
+description: \n\n---\n\nUn **Mouton** est principalement apprécié pour sa laine, sa viande et son lait. Sa toison est une marchandise cruciale dans de nombreuses économies agricoles.\n\n---\n\n**Classe d'Armure :** 11 (Armure Naturelle)  \n\n **Points de Vie :** 5 (1d8)  \n\n **Vitesse :** 12 m (40', 8 cases)  \n\n---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 10 (+0) | 12 (+1) | 11 (+0) | 2 (-4)  | 10 (+0) | 6 (-2)  |\n\n---\n\n **Sens :** Perception Passive 10  \n\n**Actions**\n\n **Coup de Tête :** *Attaque d'Arme de Mêlée :* +2 pour toucher, portée 1,5 m (5', 1 case), une cible. *Touché :* 2 (1d4) dégâts contondants.
+
+nom: 500 g de clous de girofle
+nom 1: 500 g de clous de girofle
+prix: **3 po**
+prix 1: **3 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/cloves.png
+description: \n\n---\n\nCes bourgeons floraux aromatiques sont connus pour leur saveur intense et leurs propriétés médicinales. Les clous de girofle sont une épice de luxe, souvent échangée le long des routes commerciales les plus riches.
+
+nom: Cochon
+nom 1: Cochon
+prix: **3 po**
+prix 1: **3 po**
+poids: **90 kg**\n\n**(200 lb)**
+poids 1: **90 kg**\n\n**(200 lb)**
+type: Bête
+charge:
+image: image/Trade/pig.png
+description: \n\n---\n\nUn **Cochon** est un animal de ferme polyvalent, fournissant viande, cuir et parfois compagnie. Ils sont très adaptables et prospèrent dans divers environnements.\n\n---\n\n**Classe d'Armure :** 11  \n\n **Points de Vie :** 13 (2d8 + 4)  \n\n **Vitesse :** 12 m (40', 8 cases)  \n\n---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 13 (+1) | 11 (+0) | 14 (+2) | 2 (-4)  | 9 (-1)  | 5 (-3)  |\n\n---\n\n **Sens :** Perception Passive 9  \n\n**Actions**\n\n **Morsure :** *Attaque d'Arme de Mêlée :* +3 pour toucher, portée 1,5 m (5', 1 case), une cible. *Touché :* 4 (1d6 + 1) dégâts perforants.
+
+nom: 500 g d'argent
+nom 1: 500 g d'argent
+prix: **5 po**
+prix 1: **5 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/silver.png
+description: \n\n---\n\nUn métal brillant qui sert de monnaie, de matériau de fabrication et de symbole de richesse. L'argent est particulièrement apprécié pour la création d'armes destinées à nuire aux créatures surnaturelles.
+
+nom: 1 m² de lin
+nom 1: 1 m² de lin
+prix: **5 po**
+prix 1: **5 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/linen.png
+description: \n\n---\n\nUn tissu fin et lisse dérivé des plantes de lin, utilisé pour des vêtements élégants, de la literie et des tapisseries. Sa durabilité et son raffinement en font un favori parmi les riches.
+
+nom: 500 g de soie
+nom 1: 500 g de soie
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/silk.png
+description: \n\n---\n\nUn tissu luxueux filé à partir des fils des vers à soie, la soie est synonyme de richesse et d'opulence. Elle est prisée pour sa douceur, son éclat et sa rareté.
+
+nom: Vache
+nom 1: Vache
+prix: **10 po**
+prix 1: **10 po**
+poids: **450 kg**\n\n**(1 000 lb)**
+poids 1: **450 kg**\n\n**(1 000 lb)**
+type: Bête
+charge:
+image: image/Trade/cow.png
+description: \n\n---\n\nUne **Vache** est un pilier de l'agriculture, précieuse pour son lait, sa viande et son cuir. Elle est souvent vue comme un symbole d'abondance et de prospérité.\n\n---\n\n**Classe d'Armure :** 10  \n\n **Points de Vie :** 15 (2d10 + 4)  \n\n **Vitesse :** 9 m (30', 6 cases)  \n\n---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 18 (+4) | 10 (+0) | 16 (+3) | 2 (-4)  | 10 (+0) | 6 (-2)  |\n\n---\n\n **Sens :** Perception Passive 10  \n\n**Actions**\n\n **Coup de Corne :** *Attaque d'Arme de Mêlée :* +6 pour toucher, portée 1,5 m (5', 1 case), une cible. *Touché :* 9 (1d10 + 4) dégâts contondants.
+
+nom: 500 g de safran
+nom 1: 500 g de safran
+prix: **15 po**
+prix 1: **15 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/saffron.png
+description: \n\n---\n\nCette épice vive est dérivée des stigmates des fleurs de crocus. Sa saveur intense, sa couleur brillante et ses propriétés médicinales font du safran l'un des biens de commerce les plus coûteux.
+
+nom: Bœuf
+nom 1: Bœuf
+prix: **15 po**
+prix 1: **15 po**
+poids: **540 kg**\n\n**(1 200 lb)**
+poids 1: **540 kg**\n\n**(1 200 lb)**
+type: Bête
+charge:
+image: image/Trade/ox.png
+description: \n\n---\n\nLe **Bœuf** est un animal de trait robuste et endurant, essentiel dans les travaux agricoles et les opérations commerciales. Il est capable de tirer de lourdes charges sur de longues distances.\n\n---\n\n**Classe d'Armure :** 11 (Armure Naturelle)  \n\n **Points de Vie :** 22 (3d10 + 6)  \n\n **Vitesse :** 15 m (50', 10 cases)  \n\n---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 20 (+5) | 10 (+0) | 18 (+4) | 2 (-4)  | 11 (+0) | 6 (-2)  |\n\n---\n\n **Sens :** Perception Passive 11  \n\n---\n\n**Traits**\n\n **Charge Piétinante :** Si le bœuf parcourt au moins **6 m (20')** en ligne droite vers une créature et la touche avec une attaque de **Coup de Corne** pendant le même tour, la cible doit réussir un **Jet de Sauvegarde de Force DC 14** ou être **renversée au sol**. Si la cible est au sol, le bœuf peut effectuer une attaque de **Sabots** contre elle en tant qu'**action bonus**.\n\n---\n\n**Actions**\n\n **Coup de Corne :** *Attaque d'Arme de Mêlée :* +6 pour toucher, portée 1,5 m (5', 1 case), une cible. *Touché :* 13 (2d8 + 4) dégâts contondants.\n\n **Sabots :** *Attaque d'Arme de Mêlée :* +6 pour toucher, portée 1,5 m (5', 1 case), une cible. *Touché :* 10 (1d12 + 4) dégâts contondants.
+
+nom: 500 g d'or
+nom 1: 500 g d'or
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/gold.png
+description: \n\n---\n\nL'or est la norme ultime de la richesse, apprécié non seulement pour sa rareté, mais aussi pour sa polyvalence dans l'artisanat, le commerce et l'art. Son éclat brillant et sa malléabilité en font un bien précieux pour les marchands et les nobles.
+
+nom: 500 g de platine
+nom 1: 500 g de platine
+prix: **500 po**
+prix 1: **500 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Bien de commerce
+charge:
+image: image/Trade/platinum.png
+description: \n\n---\n\nLe platine est un métal rare et précieux qui dépasse même l'or en valeur. Souvent utilisé dans des articles de luxe et des créations magiques avancées, le platine est un symbole de richesse et de statut inégalé.

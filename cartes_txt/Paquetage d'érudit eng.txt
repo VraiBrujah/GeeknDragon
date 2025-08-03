@@ -1,0 +1,95 @@
+nom: Backpack
+nom 1: Backpack
+prix: **2 gp**
+prix 1: **2 gp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/backpack.png
+description: \n\n---\n\nThis leather or reinforced cloth backpack is designed for adventurers to carry essential gear during their travels. It is lightweight but not optimized for use with heavier armor.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Can hold up to **30 pounds or 1 cubic foot (15 kg)**.\n\n>- **Usage**: Using this backpack while wearing **medium or heavy armor** imposes **disadvantage** on all **Dexterity** checks, including **Stealth**.
+
+nom: Book
+nom 1: Book
+prix: **25 gp**
+prix 1: **25 gp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/book.png
+description: \n\n---\n\nA collection of written pages bound together, often filled with knowledge or tales.\n\n---\n\n**Mechanics**:\n\n>- **Use**: Consult the book for specific knowledge.\n\n>- **Effect**: Grants a **+5 bonus** to **Intelligence (Arcana, History, Nature, or Religion)** checks related to the book’s topic, provided the book is accurate: ![Ligne!](symbole/LigneD1.png)\n\n>- **Special**: Can contain magical or forbidden knowledge, depending on its content.
+
+nom: Ink
+nom 1: Ink
+prix: **10 gp**
+prix 1: **10 gp**
+poids: **0.2 lb**\n\n**(0.1 kg)**
+poids 1: **0.2 lb**\n\n**(0.1 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/ink.png
+description: \n\n---\n\nA small bottle of high-quality ink, used for writing, drawing, or scribing magical spells.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: A bottle provides enough ink to write approximately **500 pages** of text.\n\n>- **Use**: Essential for creating written documents, scrolls, or magical inscriptions.\n\n>- **Special**: Required by Wizards for scribing spells into a spellbook.
+
+nom: Ink Pen
+nom 1: Ink Pen
+prix: **2 cp**
+prix 1: **2 cp**
+poids: **0.1 lb**\n\n**(0.05 kg)**
+poids 1: **0.1 lb**\n\n**(0.05 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/ink_pen.png
+description: \n\n---\n\nA small, finely crafted pen designed for use with ink. Essential for writing documents and magical texts.\n\n---\n\n**Mechanics**:\n\n>- **Use**: Requires **Ink** to function.\n\n>- **Effect**: Can be used to write letters, notes, or any written form of communication.\n\n>- **Special**: Allows precise writing for magical purposes when combined with high-quality ink.
+
+nom: Lamp
+nom 1: Lamp
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/lamp.png
+description: \n\n---\n\nA small metal lamp designed to illuminate dark areas by burning oil.\n\n---\n\n**Mechanics**:\n\n>- **Light Radius**: Casts **Bright Light** in a **15 ft (4.5 m, 3c)** radius and **Dim Light** for an additional **30ft (9 m, 6c)**.\n\n>- **Fuel Consumption**: Requires **Oil** to function. A single flask of oil lasts for **6 hours** of continuous use.\n\n>- **Use**: Provides light in dark environments and can be placed on a surface or carried in one hand.\n\n>- **Special**: Can be extinguished or relit as a **Utilize action**.\n\n>- **Effect**: Useful for exploring dungeons, caves, or any area with poor visibility.
+
+nom: Oil (10)
+nom 1: Oil (10)
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **10 lb**\n\n**(5 kg)**
+poids 1: **10 lb**\n\n**(5 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)<br><br>![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/oil10.png
+description: \n\n---\n\nA versatile flask of oil, useful for lighting fires, fueling lanterns, or creating slick surfaces.\n\n---\n\n**Mechanics**:\n\n>- **Dousing Targets**: Throwing oil as part of an attack covers a creature or object within **20ft (6 m, 4c)**. The target must succeed on a **DC 8 **Dexterity** saving throw** (plus your **Dexterity** modifier and Proficiency Bonus) or be covered in oil. If ignited, the target takes an additional **5 Fire damage**.\n\n>- **Creating Slick Surfaces**: Pouring oil as a **Utilize action** creates a slippery **5 ft (1.5 m, 1c)** square area.\n\n>- **Fuel Source**: A flask of oil burns for **6 hours** in a lamp or lantern.
+
+nom: Parchment (10)
+nom 1: Parchment (10)
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)\n\n![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/parchment.png
+description: \n\n---\n\nA durable sheet of treated animal skin, often used for writing in harsher conditions.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Each sheet can hold up to **250 handwritten words**.\n\n>- **Utility**: Ideal for field notes, contracts, or durable messages.\n\n>- **Effect**: More resilient than paper, making it suitable for outdoor or rugged use.\n\n---\n\n **Note**: \n\n![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)
+
+nom: Tinderbox
+nom 1: Tinderbox
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/tinderbox.png
+description: \n\n---\n\nA small container holding the tools necessary to kindle a fire.\n\n---\n\n**Mechanics**:\n\n>- **Contents**: Includes flint, fire steel, and lightly oiled tinder.**Effect**: \n\n> - As a **Bonus Action**, light a **candle**, **lamp**, **lantern**, or **torch**.\n\n> - Lighting any other exposed fuel (e.g., campfire) takes **1 minute**.\n\n>- **Use**: Essential for survival in dark dungeons, wilderness camping, or preparing light sources.

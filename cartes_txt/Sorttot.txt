@@ -1,0 +1,1236 @@
+nom: **Lumières Dansantes (Barde)**  
+nom 1: **Lumières Dansantes (Barde)**  
+classe: **Barde**<br>**(p302 MdJ 24)**  
+classe 1: **Barde**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**36 m (120', 24c)**  
+composantes: *V, S, M (un peu de phosphore)*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Illusion Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Lumieres_Dansantes_Barde.png 
+symbole 1: symbole/Illusion.png  
+symbole 4: symbole/Barde.png  
+description: \n\n---\n\nVous créez jusqu’à **quatre lumières mobiles** à portée, ayant chacune la taille d’une torche. Ces lumières peuvent prendre l’apparence de **torches**, de **lanternes** ou de **globes lumineux** flottant doucement dans l’air.<br>\n\nAlternativement, vous pouvez les **fusionner** pour former une silhouette **lumineuse vaguement humanoïde** de taille M.<br>\n\nChaque lumière émet une **lumière faible** dans un rayon de **3 m (10', 5c)**.\n\n>- Par une **action bonus**, vous pouvez déplacer les lumières jusqu’à **18 m (60', 12c)** dans la portée du sort.\n>- Chaque lumière doit toujours rester à **moins de 6 m (20', 10c)** d’une autre ; au-delà, elle **s’éteint immédiatement**.<br>\n\nLes lumières disparaissent si elles quittent la portée ou à la fin de la concentration.
+
+nom: **Moquerie Cruelle (Barde)**  
+nom 1: **Moquerie Cruelle (Barde)**  
+classe: **Barde**<br>**(p309 MdJ 24)**  
+classe 1: **Barde**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V*  
+duree: DURÉE\n\nInstantanée  
+type: Enchantement Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Moquerie_Cruelle_Barde.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Barde.png  
+description: \n\n---\n\nVous prononcez une **rafale d’insultes piquantes**, subtilement imprégnées de magie, à l’encontre d’une **créature que vous voyez ou entendez à portée**. La cible doit réussir un **jet de sauvegarde de Sagesse** sous peine de subir **1d6 dégâts psychiques**.\n\n>- En cas d’échec, elle subit également un **Désavantage** à son **prochain jet d’attaque** avant la fin de son prochain tour.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts de ce sort augmentent à mesure que vous gagnez en puissance :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d6** | **3d6** | **4d6** |
+
+nom: **Charme-Personne (Barde)**  
+nom 1: **Charme-Personne (Barde)**  
+classe: **Barde**<br>**(p254 MdJ 24)**  
+classe 1: **Barde**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S*  
+duree: DURÉE\n\n1 heure  
+type: Enchantement de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Charme_Personne_Barde.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Barde.png  
+description: \n\n---\n\nVous tentez de **charmer un Humanoïde** que vous voyez à portée. La cible doit réussir un **jet de sauvegarde de Sagesse**.\n\n>- Si vous ou un allié **l’affrontez**, elle effectue ce jet **avec Avantage**.\n>- En cas d’échec, elle est **Charmée** pour toute la durée, ou jusqu’à ce qu’elle subisse des dégâts.\n>- Une créature charmée vous considère comme **Amicale**.<br>\n\nLorsque le sort prend fin, la cible **sait qu’elle a été charmée**.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, vous **ciblez une créature supplémentaire** à portée **par niveau d’emplacement au-delà du 1<sup>er</sup>**.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **2 cibles** | **3 cibles** | **4 cibles** | **5 cibles** | **6 cibles** | **7 cibles** | **8 cibles** | **9 cibles** |
+
+nom: **Couleurs Dansantes (Barde)**  
+nom 1: **Couleurs Dansantes (Barde)**  
+classe: **Barde**<br>**(p270 MdJ 24)**  
+classe 1: **Barde**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S, M (une pincée de sable coloré)*  
+duree: DURÉE\n\nInstantanée  
+type: Illusion de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Couleurs_Dansantes_Barde.png  
+symbole 1: symbole/Illusion.png  
+symbole 4: symbole/Barde.png  
+description: \n\n---\n\nVous projetez une **gerbe éblouissante de lumière colorée**. Chaque créature prise dans un **Cône de 4,50 m** émanant de vous doit réussir un **jet de sauvegarde de Constitution** sous peine d’être **Aveuglée** jusqu’à la fin de **votre tour suivant**.
+
+nom: **Mot de Guérison (Barde)**  
+nom 1: **Mot de Guérison (Barde)**  
+classe: **Barde**<br>**(p309 MdJ 24)**  
+classe 1: **Barde**  
+incantation: INCANTATION\n\n1 Action Bonus  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V*  
+duree: DURÉE\n\nInstantanée  
+type: Abjuration de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Mot_de_Guérison_Barde.png  
+symbole 1: symbole/Abjuration.png  
+symbole 4: symbole/Barde.png  
+description: \n\n---\n\nVous prononcez des **mots empreints de magie bienveillante** à l’intention d’une créature visible à portée. Elle récupère **2d4 + votre modificateur de caractéristique d’incantation** points de vie.<br>\n\nCe sort **n’affecte ni les objets, ni les morts-vivants**.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement de niveau supérieur**, les soins augmentent de **2d4 par niveau d’emplacement au-delà du 1<sup>er</sup>**.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **4d8** PV | **6d8** PV | **8d8** PV | **10d8** PV | **12d8** PV | **14d8** PV | **16d8** PV | **18d8** PV |
+
+nom: **Murmures Dissonants (Barde)**  
+nom 1: **Murmures Dissonants (Barde)**  
+classe: **Barde**<br>**(p313 MdJ 24)**  
+classe 1: **Barde**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V*  
+duree: DURÉE\n\nInstantanée  
+type: Enchantement de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Murmures_Dissonants_Barde.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Barde.png  
+description: \n\n---\n\nVous implantez une **mélodie discordante** dans l’esprit d’une créature visible. Elle effectue un **jet de sauvegarde de Sagesse**.\n\n>- **Échec** : **3d6 dégâts psychiques** et la cible doit aussitôt utiliser sa **Réaction** pour **s’éloigner** de vous par le chemin le plus sûr.\n>- **Réussite** : la cible subit **la moitié** de ces dégâts et ne bouge pas.<br>\n\nCe déplacement forcé **n’occasionne pas** d’attaques d’opportunité.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, les dégâts augmentent de **1d6 par niveau au-delà du 1<sup>er</sup>**.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **4d6** | **5d6** | **6d6** | **7d6** | **8d6** | **9d6** | **10d6** | **11d6** |
+
+nom: **Assistance (Clerc)**  
+nom 1: **Assistance (Clerc)**  
+classe: **Clerc**<br>**(p246 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Divination Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Assistance_Clerc.png  
+symbole 1: symbole/Divination.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous touchez **physiquement** une **créature consentante** et choisissez une **compétence spécifique**. Pour toute la durée du sort, la créature **ajoute 1d4** à chaque **test de caractéristique** associé à cette compétence.\n\n>- Le bonus reste actif **tant que vous maintenez votre concentration**.\n>- Le sort est **sans effet** sur une créature **non consentante** ou **inconsciente**.<br>\n\nIdéal pour **renforcer subtilement un allié** dans une tâche précise, en exploration, négociation ou infiltration.
+
+nom: **Flamme Sacrée (Clerc)**  
+nom 1: **Flamme Sacrée (Clerc)**  
+classe: **Clerc**<br>**(p286 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Flamme_Sacree_Clerc.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nUne **radiance embrasée** s’abat sur une créature que vous voyez à portée. La cible effectue un **jet de sauvegarde de Dextérité** :\n\n>- **Échec** : **1d8 dégâts radiants**.\n>- **Réussite** : aucun dégât.<br>\n\nLes **Abris partiels ou supérieurs** ne procurent **aucun avantage** à ce jet.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent de **1d8** lorsque vous atteignez certains niveaux\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d8** | **3d8** | **4d8** |
+
+nom: **Glas (Clerc)**  
+nom 1: **Glas (Clerc)**  
+classe: **Clerc**<br>**(p291 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Nécromancie Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Glas_Clerc.png  
+symbole 1: symbole/Nécromancie.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous désignez une créature ; un **tintement funèbre** retentit (audible sur **3 m**). La cible fait un **jet de Sagesse** :\n\n>- **Pleine santé** : **1d8 dégâts nécrotiques**.\n>- **Déjà blessée** : **1d12 dégâts nécrotiques**.<br>\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent d’**un dé** lorsque vous atteignez certains niveaux\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d8 / 2d12** | **3d8 / 3d12** | **4d8 / 4d12** |
+
+nom: **Lumière (Clerc)**  
+nom 1: **Lumière (Clerc)**  
+classe: **Clerc**<br>**(p301 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, M (une luciole ou de la mousse phosphorescente)*  
+duree: DURÉE\n\n1 heure  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Lumiere_Clerc.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous touchez un **objet non porté** de **taille G ou inférieure**. Il commence à émettre une **lumière vive** dans un rayon de **6 m (20', 4c)** et une **lumière faible** sur **6 m (20', 4c)** supplémentaires.<br>\n\n>- La **couleur** de cette lumière peut être **choisie librement** au moment de l'incantation.\n>- Si l’objet est ensuite **recouvert par une surface opaque**, la lumière est **obstruée sans être dissipée**.<br><br>\n\nLe sort prend fin **automatiquement** si vous le **relancez sur un autre objet**, ou **si vous terminez volontairement sa durée**.<br>\n\nCe sort est souvent utilisé comme **torche magique permanente**, utile pour l’exploration, l’identification d’objets, ou comme **balise lumineuse** dans les ténèbres.
+
+nom: **Mot de Radiance (Clerc)**  
+nom 1: **Mot de Radiance (Clerc)**  
+classe: **Clerc**<br>**(p310 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, M (un symbole en forme de soleil)*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Mot_de_Radiance_Clerc.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous invoquez une **lueur éclatante d'énergie sacrée** qui émane de votre corps dans une **Émanation de 1,50 m (5', 1c)**. Chaque créature que vous **choisissez** parmi celles que vous **voyez dans cette zone** doit effectuer un **jet de sauvegarde de Constitution**.\n\n>- En cas d’échec, la créature subit **1d6 dégâts radiants**.\n>- En cas de réussite, elle ne subit **aucun effet**.<br>\n\nCe sort est idéal pour **repousser les ennemis proches** tout en préservant vos alliés à proximité.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts de ce sort augmentent à mesure que vous progressez en niveau :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d6** | **3d6** | **4d6** |
+
+nom: **Réparation (Clerc)**  
+nom 1: **Réparation (Clerc)**  
+classe: **Clerc**<br>**(p324 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Minute  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S, M (deux magnétites)*  
+duree: DURÉE\n\nInstantanée  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Reparation_Clerc.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nCe sort restaure une **détérioration physique mineure** d’un **objet que vous touchez**. Vous pouvez ainsi réparer une **clé brisée**, un **maillon de chaîne fendu**, une **cape déchirée**, ou toute autre dégradation **tant que celle-ci ne dépasse pas 30 cm** dans sa plus grande dimension.\n\n>- La réparation est **immédiate** et **sans trace visible**.\n>- L’objet retrouve sa **fonctionnalité initiale**, comme s’il n’avait jamais été endommagé.<br>\n\nCe sort peut **restaurer la structure matérielle** d’un objet magique, **mais ne ravive pas ses propriétés magiques**.
+
+nom: **Résistance (Clerc)**  
+nom 1: **Résistance (Clerc)**  
+classe: **Clerc**<br>**(p325 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Abjuration Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Resistance_Clerc.png  
+symbole 1: symbole/Abjuration.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous touchez une **créature consentante**, puis choisissez **un type de dégâts** parmi les suivants. La créature bénéficie d'une **protection contre ce type** :<br>\n\n| ![Case!](symbole/caseDcocher.png) **Contondants** | ![Case!](symbole/caseDcocher.png) **Perforants** | ![Case!](symbole/caseDcocher.png) **Tranchants** |\n|:--------------------------------------------|:--------------------------------------------------|:--------------------------------------|\n| ![Case!](symbole/caseDcocher.png) **Feu** | ![Case!](symbole/caseDcocher.png) **Froid** | ![Case!](symbole/caseDcocher.png) **Foudre** |\n| ![Case!](symbole/caseDcocher.png) **Acide** | ![Case!](symbole/caseDcocher.png) **Poison** | ![Case!](symbole/caseDcocher.png) **Radiants** |\n| ![Case!](symbole/caseDcocher.png) **Tonnerre** | ![Case!](symbole/caseDcocher.png) **Nécrotiques** | |\n\n<br>\n\n>- Jusqu’à la fin du sort, lorsqu’elle subit des dégâts de ce type, elle **réduit les dégâts subis de 1d4**.\n>- Une **même créature ne peut bénéficier de cet effet qu'une seule fois par tour**.<br>\n\nCe sort offre une **protection ciblée et temporaire**, idéale face à une menace prévisible ou répétée.
+
+nom: **Stabilisation (Clerc)**  
+nom 1: **Stabilisation (Clerc)**  
+classe: **Clerc**<br>**(p333 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**4,50 m (15', 3c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Nécromancie Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Stabilisation_Clerc.png  
+symbole 1: symbole/Nécromancie.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous choisissez une **créature à portée** ayant **0 point de vie**, mais **qui n’est pas morte**. Cette créature est immédiatement **Stabilisée** : elle cesse de faire des jets de sauvegarde contre la mort.\n\n>- Ce sort **n’a aucun effet sur une créature morte**, ni sur celles disposant encore de points de vie.<br>\n\nUn sort crucial pour **éviter la perte d’un allié inconscient** sans consommer de ressources curatives.\n\n---\n\n**Amélioration de sort mineur**\n\nLa portée du sort augmente à mesure que vous progressez en niveau :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **9 m (30', 6c)** | **18 m (60', 12c)** | **36 m (120', 24c)** |
+
+nom: **Thaumaturgie (Clerc)**  
+nom 1: **Thaumaturgie (Clerc)**  
+classe: **Clerc**<br>**(p339 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V*  
+duree: DURÉE\n\nJusqu'à 1 minute  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Thaumaturgie_Clerc.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous déclenchez une **manifestation magique mineure et surnaturelle** à portée. Vous pouvez choisir l’un des effets suivants. Si vous relancez ce sort, vous pouvez **maintenir jusqu’à trois effets actifs en même temps** pour une durée maximale d'une minute.\n\n>- **Bruit fantôme** : Vous faites surgir un son bref d’un point à portée (tonnerre, murmures, croassement, etc.).\n>- **Jeu avec le feu** : Vous modifiez une flamme visible pendant 1 minute (intensité, couleur, vacillement).\n>- **Main invisible** : Vous ouvrez ou faites claquer une **porte ou fenêtre non verrouillée**.\n>- **Secousse** : Vous provoquez une **légère vibration inoffensive du sol** durant 1 minute.\n>- **Voix retentissante** : Votre voix devient **trois fois plus forte**, et vous avez **Avantage aux tests de Charisme (Intimidation)** pendant 1 minute.\n>- **Yeux modifiés** : Vous **altérez l’aspect de vos yeux** (forme, couleur, éclat) durant 1 minute.<br>\n\nCe sort permet de créer des **effets dramatiques ou intimidants**, parfaits pour attirer l’attention, impressionner ou créer de l’ambiance.
+
+nom: **Bénédiction (Clerc)**  
+nom 1: **Bénédiction (Clerc)**  
+classe: **Clerc**<br>**(p248 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S, M (un symbole sacré d’une valeur minimale de 5 po)*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Enchantement de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Benediction_Clerc.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous accordez une **bénédiction divine** jusqu’à **trois créatures** à portée. Jusqu’à la fin du sort, chaque cible bénéficie du bonus suivant :\n\n>- Lorsqu’elle effectue un **jet d’attaque** ou un **jet de sauvegarde**, elle ajoute **1d4** au résultat du dé.<br>\n\nCe soutien magique peut faire la différence entre un échec et une réussite dans les moments cruciaux.<br>\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement de sort supérieur**, vous pouvez cibler **une créature supplémentaire par niveau d’emplacement au-delà du 1<sup>er</sup>**.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **4 cibles** | **5 cibles** | **6 cibles** | **7 cibles** | **8 cibles** | **9 cibles** | **10 cibles** | **11 cibles** |
+
+nom: **Bouclier de la Foi (Clerc)**  
+nom 1: **Bouclier de la Foi (Clerc)**  
+classe: **Clerc**<br>**(p250 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action Bonus  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S, M (un parchemin de prière)*  
+duree: DURÉE\n\nConcentration, jusqu'à 10 minutes  
+type: Abjuration de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Bouclier_de_la_Foi_Clerc.png  
+symbole 1: symbole/Abjuration.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous invoquez un **champ de protection magique scintillant** qui entoure une **créature de votre choix** visible à portée.\n\n>- Tant que le sort est actif, cette créature bénéficie d’un **bonus de +2 à sa CA**.\n>- Ce champ protecteur dure tant que vous maintenez la concentration, ou jusqu’à la fin des **10 minutes**.<br>\n\nCe sort constitue une **défense précieuse** pour protéger un allié exposé ou assurer la survie d’un compagnon au cœur du danger.
+
+nom: **Rayon Traçant (Clerc)**  
+nom 1: **Rayon Traçant (Clerc)**  
+classe: **Clerc**<br>**(p324 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**36 m (120', 24c)**  
+composantes: *V, S*  
+duree: DURÉE\n\n1 round  
+type: Évocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Rayon_Traçant_Clerc.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous projetez un **rayon de lumière éclatante** vers une créature visible à portée. Effectuez une **attaque de sort à distance** contre la cible.\n\n>- Si l’attaque touche, la cible subit **4d6 dégâts radiants**.\n>- Jusqu’à la fin de **votre tour suivant**, le **prochain jet d’attaque** lancé contre cette cible bénéficie de **l’Avantage**.<br>\n\nCe sort combine **dégâts puissants** et **tactique de soutien**, parfait pour préparer une frappe décisive d’un allié.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, les dégâts augmentent de **1d6 par niveau au-delà du 1<sup>er</sup>**.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **5d6** | **6d6** | **7d6** | **8d6** | **9d6** | **10d6** | **11d6** | **12d6** |
+
+nom: **Soins (Clerc)**  
+nom 1: **Soins (Clerc)**  
+classe: **Clerc**<br>**(p330 MdJ 24)**  
+classe 1: **Clerc**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Abjuration de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Soins_Clerc.png  
+symbole 1: symbole/Abjuration.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nVous canalisez une **énergie curative sacrée** dans une créature que vous **touchez physiquement**. Elle récupère un nombre de **points de vie égal à 2d8 + votre modificateur de caractéristique d’incantation**.\n\n>- Ce sort est **inefficace sur les morts-vivants** et les **créatures artificielles**.<br>\n\nUn sort simple, direct, et vital pour restaurer rapidement la vitalité d’un compagnon blessé.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, les **soins augmentent de 2d8** par niveau au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **4d8** PV | **6d8** PV | **8d8** PV | **10d8** PV | **12d8** PV | **14d8** PV | **16d8** PV | **18d8** PV |
+
+nom: **Druidisme (Druide)**  
+nom 1: **Druidisme (Druide)**  
+classe: **Druide**<br>**(p279 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Druidisme_Druide.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous invoquez les **esprits de la nature** pour produire un **petit effet magique** à portée, en choisissant l’une des manifestations suivantes :\n\n>- **Capteur climatique** : vous créez un **effet visuel inoffensif** (taille TP) représentant la météo prévue dans votre zone pour les **24 prochaines heures** : un **globe doré** pour un ciel clair, un **nuage** pour la pluie, ou des **flocons** pour la neige. Cet effet persiste **1 round**.\n>- **Floraison** : vous faites **fleurir immédiatement** un **bourgeon**, une **cosse** ou une **fleur en devenir**.\n>- **Effet sensoriel** : vous créez un **phénomène naturel mineur** dans un **Cube de 1,50 m (5', 1c)** : des **feuilles tombantes**, des **fées spectrales dansantes**, une **brise douce**, un **bruit animal**, une **vague odeur de scone**, etc.\n>- **Jeu avec le feu** : vous **allumez ou éteignez** une **bougie**, une **torche**, ou un **petit feu de camp**.<br>\n\nCes effets sont **inoffensifs**, mais peuvent se révéler utiles pour **communiquer, signaler, décorer** ou explorer de manière subtile.
+
+nom: **Flammes (Druide)**  
+nom 1: **Flammes (Druide)**  
+classe: **Druide**<br>**(p286 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action Bonus  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\n10 minutes  
+type: Invocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Flammes_Druide.png  
+symbole 1: symbole/Invocation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nUne **flamme dansante** prend vie dans votre main et y reste pendant toute la durée du sort. Tant qu’elle y est maintenue :\n\n>- Elle **ne produit pas de chaleur** et **n’embrase rien**.\n>- Elle éclaire dans un rayon de **6 m (20', 4c)** en **lumière vive**, puis **6 m supplémentaires** en **lumière faible**.\n>- Le sort prend fin si vous le **lancez à nouveau**.<br>\n\nÀ tout moment pendant la durée, vous pouvez utiliser **l’action Magie** pour **projeter les flammes** vers une **créature ou un objet dans un rayon de 18 m (60', 12c)**. Effectuez alors une **attaque de sort à distance**.\n\n>- Si l’attaque touche, la cible subit **1d8 dégâts de feu**.<br>\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent à mesure que vous progressez en niveau :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d8** | **3d8** | **4d8** |
+
+nom: **Amitié avec les Animaux (Druide)**  
+nom 1: **Amitié avec les Animaux (Druide)**  
+classe: **Druide**<br>**(p240 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S, M (un peu de nourriture)*  
+duree: DURÉE\n\n24 heures  
+type: Enchantement de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Amitie_Animaux_Druide.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous tentez de **lier amitié avec une Bête** visible à portée. Elle doit effectuer un **jet de sauvegarde de Sagesse**.\n\n>- En cas d’échec, la Bête est **Charmée** par vous pendant **24 heures**.\n>- Le sort prend fin si **vous ou un de vos alliés infligez des dégâts** à la cible.<br>\n\nTant qu’elle est charmée, la créature vous perçoit comme **amicale**, ce qui vous permet de **l’apaiser**, **la guider**, voire **interagir pacifiquement** avec elle dans un environnement sauvage ou hostile.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, vous pouvez **cibler une Bête supplémentaire** par niveau d’emplacement au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **2 Bêtes** | **3 Bêtes** | **4 Bêtes** | **5 Bêtes** | **6 Bêtes** | **7 Bêtes** | **8 Bêtes** | **9 Bêtes** |
+
+nom: **Lueurs Féeriques (Druide)**  
+nom 1: **Lueurs Féeriques (Druide)**  
+classe: **Druide**<br>**(p301 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Évocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Lueurs_Feeriques_Druide.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous illuminez de **lueurs surnaturelles** le contour de tous les objets dans un **Cube de 6 m (20', 4c)** centré à portée. Vous choisissez la **couleur du halo** : **bleu**, **vert** ou **violet**.\n\nChaque créature dans la zone effectue un **jet de sauvegarde de Dextérité** :\n\n>- En cas d’échec, elle est **nimbée de lumière** pour toute la durée du sort.\n>- Les créatures et objets affectés **projettent une lumière faible** dans un rayon de **3 m (10', 2c)**.\n>- Les créatures affectées **ne peuvent pas devenir Invisibles**.\n>- Tous les **jets d’attaque** effectués contre elles bénéficient de **l’Avantage**, à condition que l’assaillant puisse les voir.<br>\n\nCe sort est redoutable pour **révéler les ennemis camouflés** ou **neutraliser les effets d’invisibilité**, en plus d’accorder un **bonus stratégique** en combat de groupe.
+
+nom: **Vague Tonnante (Druide)**  
+nom 1: **Vague Tonnante (Druide)**  
+classe: **Druide**<br>**(p341 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Vague_Tonnante_Druide.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous libérez une **décharge de force tonitruante** sous la forme d’une vague émanant de vous dans un **Cube de 4,50 m (15', 3c)**.\n\nChaque créature prise dans la zone effectue un **jet de sauvegarde de Constitution** : \n\n>- **Échec** : la cible subit **2d8 dégâts de tonnerre** et est **repoussée de 3 m (10', 2c)**.\n\n>- **Réussite** : la cible subit **la moitié des dégâts** et **n’est pas repoussée**.<br>\n\n>- Tous les **objets non fixés** entièrement contenus dans la zone sont également **repoussés de 3 m (10', 2c)**.\n\n>- Le **fracas assourdissant** du sort peut être entendu jusqu’à **90 m (300', 60c)**.<br>\n\nCe sort est idéal pour **se dégager en mêlée**, **briser des formations ennemies**, ou **attirer l’attention** à distance.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, les **dégâts augmentent de 1d8** par niveau au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **3d8** | **4d8** | **5d8** | **6d8** | **7d8** | **8d8** | **9d8** | **10d8** |
+
+nom: **Soins (Druide)**  
+nom 1: **Soins (Druide)**  
+classe: **Druide**<br>**(p330 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Abjuration de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Soins_Druide.png  
+symbole 1: symbole/Abjuration.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous canalisez une **énergie curative naturelle** dans une créature que vous **touchez physiquement**. Elle récupère un nombre de **points de vie égal à 2d8 + votre modificateur de caractéristique d’incantation**.\n\n>- Ce sort est **sans effet sur les morts-vivants** et les **créatures artificielles**.<br>\n\nSimple et efficace, ce sort vous permet de **réparer rapidement les blessures** de vos alliés en pleine nature ou en combat.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, les **soins augmentent de 2d8** par niveau au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **4d8** PV | **6d8** PV | **8d8** PV | **10d8** PV | **12d8** PV | **14d8** PV | **16d8** PV | **18d8** PV |
+
+nom: **Communication avec les Animaux (Druide)**  
+nom 1: **Communication avec les Animaux (Druide)**  
+classe: **Druide**<br>**(p258 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\n10 minutes  
+type: Divination de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Communication_Animaux_Druide.png  
+symbole 1: symbole/Divination.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nPour toute la durée du sort, vous êtes capable de **comprendre les Bêtes** et de **communiquer verbalement avec elles**.\n\n>- De plus, toutes les options de **compétence liées à l’action Influence** vous sont accessibles lorsqu’elles sont dirigées vers une Bête.\n\n>- La plupart des Bêtes ne s’expriment que sur des sujets de **survie** ou d’**affection**, mais elles peuvent fournir des informations sur les **alentours**, les **monstres proches**, ou ce qu’elles ont **perçu durant les dernières 24 heures**.<br>\n\nCe sort est un outil essentiel pour **explorateurs**, **rôdeurs** ou **diplomates sylvestres**, facilitant la coopération avec la faune locale.
+
+nom: **Assistance (Druide)**  
+nom 1: **Assistance (Druide)**  
+classe: **Druide**<br>**(p246 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Divination Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Assistance_Druide.png  
+symbole 1: symbole/Divination.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous touchez **physiquement** une **créature consentante** et choisissez une **compétence spécifique**. Pour toute la durée du sort, la créature **ajoute 1d4** à chaque **test de caractéristique** associé à cette compétence.\n\n>- Le bonus reste actif **tant que vous maintenez votre concentration**.\n>- Le sort est **sans effet** sur une créature **non consentante** ou **inconsciente**.<br>\n\nIdéal pour **renforcer subtilement un allié** dans une tâche précise, en exploration, négociation ou infiltration.
+
+nom: **Bouffée de Poison (Druide)**  
+nom 1: **Bouffée de Poison (Druide)**  
+classe: **Druide**<br>**(p250 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Nécromancie Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Bouffee_Poison_Druide.png  
+symbole 1: symbole/Nécromancie.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous projetez une **brume empoisonnée** vers une créature que vous voyez à portée. Effectuez une **attaque de sort à distance** contre la cible.\n\n>- En cas de succès, elle subit **1d12 dégâts de poison**.<br>\n\nCe sort est une arme simple et dangereuse, capable d’infliger une douleur **toxique immédiate**, tout en contournant les protections physiques.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts de ce sort augmentent lorsque vous progressez en niveau :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d12** | **3d12** | **4d12** |
+
+nom: **Coup de Tonnerre (Druide)**  
+nom 1: **Coup de Tonnerre (Druide)**  
+classe: **Druide**<br>**(p271 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Coup_de_Tonnerre_Druide.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous déclenchez un **fracas sonore brutal** autour de vous. Chaque créature dans une **Émanation de 1,50 m (5', 1c)** dont vous êtes le centre effectue un **jet de sauvegarde de Constitution** :\n\n>- **Échec** : la créature subit **1d6 dégâts de tonnerre**.\n\n>- **Réussite** : aucun dégât.<br>\n\n>- Le **bruit assourdissant** du sort s’entend jusqu’à **30 m (100', 20c)**.<br>\n\nCe sort est particulièrement efficace dans les espaces restreints ou contre des adversaires regroupés à portée immédiate.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent lorsque vous atteignez certains niveaux :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d6** | **3d6** | **4d6** |
+
+nom: **Crosse des Druides (Druide)**  
+nom 1: **Crosse des Druides (Druide)**  
+classe: **Druide**<br>**(p273 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action Bonus  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S, M (du gui)*  
+duree: DURÉE\n\n1 minute  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Crosse_Druides_Druide.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous imprégnez un **gourdin ou un bâton de combat** que vous tenez du **pouvoir de la nature**.\n\nPour toute la durée du sort :\n\n>- Vous pouvez utiliser **votre caractéristique d’incantation** à la place de la **Force** pour vos **jets d’attaque et de dégâts** avec cette arme.\n\n>- Le **dé de dégâts** de l’arme devient **1d8**.\n\n>- Lorsque vous infligez des dégâts, vous pouvez choisir entre des **dégâts de force** ou les **dégâts normaux** de l’arme.\n\n>- Le sort **prend fin prématurément** si vous **lâchez l’arme** ou si vous **relancez le sort**.<br>\n\nCe sort transforme votre arme naturelle en **prolongement magique de votre volonté druidique**.\n\n---\n\n**Amélioration de sort mineur**\n\nLe **dé de dégâts de l’arme** évolue lorsque vous atteignez certains niveaux :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **1d10** | **1d12** | **2d6** |
+
+nom: **Élémentalisme (Moine)**  
+nom 1: **Élémentalisme (Moine)**  
+classe: **Moine Voie des Quatre Éléments<br>(p280 MdJ 24)**  
+classe 1: **Moine Voie des Quatre Éléments**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Elementalisme_Moine.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Moine.png  
+description: \n\n---\n\nVous **altérez les éléments à portée de 9 m (30', 6c)** pour produire **l’un des cinq effets suivants** :\n\n>- **Appel d’air** : Une **brise légère** souffle dans un **cube de 1,50 m (5', 1c)**, faisant **onduler les vêtements**, **soulever la poussière**, **bruire les feuilles** et **claquer les portes ou volets non maintenus**.\n\n>- **Appel d’eau** : Dans un **cube de 1,50 m (5', 1c)**, vous générez des **embruns frais** qui **humectent créatures et objets**, ou créez **20 cl d’eau claire** dans un récipient ou sur une surface. Cette eau **s’évapore après 1 minute**.\n\n>- **Appel de feu** : Vous emplissez un **cube de 1,50 m (5', 1c)** d’une **fumée colorée, parfumée et chaude**, sans danger. Vous en choisissez la **teinte et l’arôme**. La fumée **persiste 1 minute**. Des **flammes éphémères embrasent chandelles, torches ou lanternes**.\n\n>- **Appel de terre** : Sur une **zone de 1,50 m (5', 1c)**, vous étendez un **linceul de poussière ou de sable**, ou vous **inscrivez un mot unique** dans la terre ou le sable, en utilisant votre propre **écriture**.\n\n>- **Façonnage élémentaire** : Dans un **cube de 30 cm (1', 0,2c)**, vous modelez de la **terre, du sable, de la flamme, de la brume, de la fumée ou de l’eau** sous forme d’une **figure simple** (créature, symbole, etc.) qui **dure 1 heure** sans mouvement ni son.<br>\n\nUn outil polyvalent et élégant, parfait pour **altérer votre environnement**, **attirer l’attention** ou **marquer votre passage** avec subtilité.
+
+nom: **Fouet Épineux (Druide)**  
+nom 1: **Fouet Épineux (Druide)**  
+classe: **Druide**<br>**(p289 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S, M (une tige de plante épineuse)*  
+duree: DURÉE\n\nInstantanée  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Fouet_Epineux_Druide.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous invoquez un **fouet végétal hérissé d’épines** qui jaillit dans la direction d’une créature visible à portée. Effectuez une **attaque de sort de mêlée** contre la cible.\n\n>- Si l’attaque touche, la créature subit **1d6 dégâts perforants**.\n>- Si la cible est de **taille G ou inférieure**, vous pouvez la **tirer vers vous jusqu’à 3 m (10', 2c)**.<br>\n\nCe sort est idéal pour **attirer un ennemi isolé**, **interrompre une fuite**, ou créer un **effet de contrôle naturel** en combat rapproché.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts de ce sort augmentent à mesure que vous gagnez en niveau :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d6** | **3d6** | **4d6** |
+
+nom: **Message (Druide)**  
+nom 1: **Message (Druide)**  
+classe: **Druide**<br>**(p305 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**36 m (120', 24c)**  
+composantes: *S, M (du fil de cuivre)*  
+duree: DURÉE\n\n1 round  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Message_Druide.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous **pointez une créature visible ou connue à portée** et **murmurez un message**. La cible perçoit **seule** votre message dans son esprit, même si elle ne peut pas vous voir.\n\n>- Elle peut **répondre par un murmure**, que vous **êtes le seul à entendre**.<br>\n\nCe sort peut traverser des **objets solides**, à condition que :\n\n>- Vous **connaissiez la position de la cible**.\n>- Vous soyez **certain qu’elle se trouve derrière l’obstacle**.<br>\n\nCependant, le message est bloqué par :\n\n>- Un **silence magique**,\n>- **30 cm** de **pierre, métal ou bois**,\n>- Une **feuille de plomb**, même mince.<br>\n\nUn sort discret, idéal pour **communiquer en infiltration**, **négociation secrète** ou **planification silencieuse**.
+
+nom: **Poussière d’Étoile (Druide)**  
+nom 1: **Poussière d’Étoile (Druide)**  
+classe: **Druide**<br>**(p319 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Poussiere_Etoile_Druide.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous projetez une **particule de lumière astrale** vers une **créature ou un objet** visible à portée. Effectuez une **attaque de sort à distance** contre la cible.\n\n>- Si l’attaque touche, la cible subit **1d8 dégâts radiants**.\n\n>- Jusqu’à la fin de votre tour suivant, elle **émet une Lumière faible dans un rayon de 3 m (10', 2c)** et **ne peut bénéficier de l’état Invisible**.<br>\n\nCe sort révèle efficacement les **ennemis dissimulés** ou **objets camouflés**, tout en infligeant une **lumière céleste purificatrice**.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent à mesure que vous progressez en niveau :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d8** | **3d8** | **4d8** |
+
+nom: **Réparation (Druide)**  
+nom 1: **Réparation (Druide)**  
+classe: **Druide**<br>**(p324 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Minute  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S, M (deux magnétites)*  
+duree: DURÉE\n\nInstantanée  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Reparation_Druide.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nCe sort restaure une **détérioration physique mineure** d’un **objet que vous touchez**. Vous pouvez ainsi réparer une **clé brisée**, un **maillon de chaîne fendu**, une **cape déchirée**, ou toute autre dégradation **tant que celle-ci ne dépasse pas 30 cm** dans sa plus grande dimension.\n\n>- La réparation est **immédiate** et **sans trace visible**.\n>- L’objet retrouve sa **fonctionnalité initiale**, comme s’il n’avait jamais été endommagé.<br>\n\nCe sort peut **restaurer la structure matérielle** d’un objet magique, **mais ne ravive pas ses propriétés magiques**.
+
+nom: **Résistance (Druide)**  
+nom 1: **Résistance (Druide)**  
+classe: **Druide**<br>**(p325 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Abjuration Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Resistance_Druide.png  
+symbole 1: symbole/Abjuration.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous touchez une **créature consentante**, puis choisissez **un type de dégâts** parmi les suivants. La créature bénéficie d'une **protection contre ce type** :<br>\n\n| ![Case!](symbole/caseDcocher.png) **Contondants** | ![Case!](symbole/caseDcocher.png) **Perforants** | ![Case!](symbole/caseDcocher.png) **Tranchants** |\n|:--------------------------------------------|:--------------------------------------------------|:--------------------------------------|\n| ![Case!](symbole/caseDcocher.png) **Feu** | ![Case!](symbole/caseDcocher.png) **Froid** | ![Case!](symbole/caseDcocher.png) **Foudre** |\n| ![Case!](symbole/caseDcocher.png) **Acide** | ![Case!](symbole/caseDcocher.png) **Poison** | ![Case!](symbole/caseDcocher.png) **Radiants** |\n| ![Case!](symbole/caseDcocher.png) **Tonnerre** | ![Case!](symbole/caseDcocher.png) **Nécrotiques** | |\n\n<br>\n\n>- Jusqu’à la fin du sort, lorsqu’elle subit des dégâts de ce type, elle **réduit les dégâts subis de 1d4**.\n>- Une **même créature ne peut bénéficier de cet effet qu'une seule fois par tour**.<br>\n\nIdéal pour **protéger un allié exposé à une menace spécifique** ou **atténuer un danger prévisible**.
+
+nom: **Stabilisation (Druide)**  
+nom 1: **Stabilisation (Druide)**  
+classe: **Druide**<br>**(p333 MdJ 24)**  
+classe 1: **Druide**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**4,50 m (15', 3c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Nécromancie Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Stabilisation_Druide.png  
+symbole 1: symbole/Nécromancie.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous choisissez une **créature à portée** ayant **0 point de vie**, mais **qui n’est pas morte**. Cette créature est immédiatement **Stabilisée** : elle cesse de faire des jets de sauvegarde contre la mort.\n\n>- Ce sort **n’a aucun effet sur une créature morte**, ni sur celles disposant encore de points de vie.<br>\n\nUn sort crucial pour **éviter la perte d’un allié inconscient** sans consommer de ressources curatives.\n\n---\n\n**Amélioration de sort mineur**\n\nLa portée du sort augmente à mesure que vous progressez en niveau :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **9 m (30', 6c)** | **18 m (60', 12c)** | **36 m (120', 24c)** |
+
+nom: **Éruption Ensorcelée (Ensorceleur)**  
+nom 1: **Éruption Ensorcelée (Ensorceleur)**  
+classe: **Ensorceleur**<br>**(p283 MdJ 24)**  
+classe 1: **Ensorceleur**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**36 m (120', 24c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Eruption_Ensorcelee_Ensorceleur.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Ensorceleur.png  
+description: \n\n---\n\nVous projetez des **énergies ensorcelées** vers une **créature ou un objet** à portée, puis choisissez **un type de dégâts** à l'aide des cases ci-dessous :<br>\n\n| ![Case!](symbole/caseDcocher.png) **Acide** | ![Case!](symbole/caseDcocher.png) **Feu** | ![Case!](symbole/caseDcocher.png) **Foudre** |\n|:---------------------------------------------|:-------------------------------------------|:------------------------------------------|\n| ![Case!](symbole/caseDcocher.png) **Froid** | ![Case!](symbole/caseDcocher.png) **Poison** | ![Case!](symbole/caseDcocher.png) **Psychiques** |\n| ![Case!](symbole/caseDcocher.png) **Tonnerre** |  |  |\n\n\nEffectuez une **attaque de sort à distance** contre la cible.\n\n>- Si l’attaque touche, la cible subit **1d8 dégâts** du type sélectionné.\n\n>- À chaque fois que vous lancez ce sort, si vous obtenez un **8 sur un d8**, vous pouvez **lancer un d8 supplémentaire** et l’**ajouter aux dégâts**. Le **nombre maximum** de d8 supplémentaires que vous pouvez ainsi ajouter est **égal à votre modificateur de caractéristique d’incantation**.<br>\n\nCe sort offre une **flexibilité élémentaire** ainsi qu’un **potentiel explosif** grâce à son mécanisme de relance.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent à mesure que vous progressez en niveau :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d8** | **3d8** | **4d8** |
+
+nom: **Lumière (Ensorceleur)**  
+nom 1: **Lumière (Ensorceleur)**  
+classe: **Ensorceleur**<br>**(p301 MdJ 24)**  
+classe 1: **Ensorceleur**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, M (une luciole ou de la mousse phosphorescente)*  
+duree: DURÉE\n\n1 heure  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Lumiere_Ensorceleur.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Ensorceleur.png  
+description: \n\n---\n\nVous touchez un **objet non porté** de **taille G ou inférieure**. Jusqu’à la fin du sort, l’objet émet :\n\n>- Une **lumière vive** dans un rayon de **6 m (20', 4c)**.\n>- Une **lumière faible** dans les **6 m** supplémentaires.\n\nVous choisissez librement la **couleur** de cette lumière.<br>\n\n>- Si l’objet est **recouvert d’une surface opaque**, la lumière est bloquée sans être dissipée.\n>- Le sort **prend fin prématurément** si vous le **lancez à nouveau**.<br>\n\nPratique comme **torche magique**, balise ou moyen d’identifier des objets dans les ténèbres.
+
+nom: **Poigne Électrique (Ensorceleur)**  
+nom 1: **Poigne Électrique (Ensorceleur)**  
+classe: **Ensorceleur**<br>**(p318 MdJ 24)**  
+classe 1: **Ensorceleur**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Poigne_Electrique_Ensorceleur.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Ensorceleur.png  
+description: \n\n---\n\nUne **décharge de foudre** jaillit de votre main vers une créature que vous tentez de toucher. Effectuez une **attaque de sort de mêlée** contre la cible.\n\n>- Si l’attaque touche, la cible subit **1d8 dégâts de foudre**.\n>- Elle **ne peut pas effectuer d’attaques d’Opportunité** jusqu’au début de son prochain tour.<br>\n\nSort idéal pour **asséner un choc rapide** et **se dégager sans risque** d’une zone de mêlée.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent lorsque vous atteignez certains niveaux :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d8** | **3d8** | **4d8** |
+
+nom: **Prestidigitation (Ensorceleur)**  
+nom 1: **Prestidigitation (Ensorceleur)**  
+classe: **Ensorceleur**<br>**(p320 MdJ 24)**  
+classe 1: **Ensorceleur**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**3 m (10', 2c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nJusqu'à 1 heure  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Prestidigitation_Ensorceleur.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Ensorceleur.png  
+description: \n\n---\n\nVous créez un **petit tour de magie** à portée. Choisissez **l’un des effets** ci-après. Si vous lancez ce sort plusieurs fois, vous pouvez maintenir **jusqu’à trois effets non instantanés** simultanément.\n\n>- **Effet sensoriel** : un phénomène instantané et inoffensif (pluie d’étincelles, rafale d’air, notes de musique, odeur étrange).\n>- **Jeu avec le feu** : vous **allumez ou éteignez** une **bougie, torche ou petit feu de camp**.\n>- **Nettoyage ou maculage** : vous **nettoyez ou souillez** instantanément un objet ne dépassant pas **30 litres (ou 0,03 m³)**.\n>- **Sensation mineure** : vous **refroidissez, réchauffez ou parfumez** de la matière inerte ne dépassant pas **30 litres (ou 0,03 m³)** pour **1 heure**.\n>- **Marque magique** : vous faites apparaître, pendant **1 heure**, une **couleur, marque ou symbole** sur un objet ou une surface.\n>- **Création mineure** : vous façonnez une **babiole non magique** ou une **image illusoire** tenant dans votre main ; elle persiste jusqu’à la fin de votre **tour suivant** et n’a **ni valeur, ni potentiel de dégâts**.<br>\n\nSimple mais polyvalent, ce sort fournit une **boîte à outils magique** pour les petites tâches, illusions et effets de scène.
+
+nom: **Détection de la Magie (Ensorceleur)**  
+nom 1: **Détection de la Magie (Ensorceleur)**  
+classe: **Ensorceleur**<br>**(p274 MdJ 24)**  
+classe 1: **Ensorceleur**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\nConcentration, jusqu'à 10 minutes  
+type: Divination de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Detection_Magie_Ensorceleur.png  
+symbole 1: symbole/Divination.png  
+symbole 4: symbole/Ensorceleur.png  
+description: \n\n---\n\nPour toute la durée du sort, vous **percevez la présence d’effets magiques** dans un rayon de **9 m (30', 6c)** autour de vous.\n\n>- Lorsque vous détectez de la magie, vous pouvez utiliser **l’action Magie** pour **voir une faible aura** entourant chaque **créature ou objet visible** porteur de magie dans la zone.\n>- Si l’effet provient d’un **sort**, vous **apprenez son école de magie**.<br>\n\nLe sort est **bloqué** par :\n\n>- **30 cm** de **pierre, terre ou bois**;\n>- **2,5 cm** de **métal** (ou une simple **feuille de plomb**).<br>\n\nUn outil essentiel pour **repérer les enchantements**, **déjouer les pièges magiques** ou **identifier des objets imprégnés de pouvoir mystique**.
+
+nom: **Mains Brûlantes (Ensorceleur)**  
+nom 1: **Mains Brûlantes (Ensorceleur)**  
+classe: **Ensorceleur**<br>**(p303 MdJ 24)**  
+classe 1: **Ensorceleur**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Mains_Brulantes_Ensorceleur.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Ensorceleur.png  
+description: \n\n---\n\nVous déchaînez une **nappe de flammes ardentes** sous la forme d’un **Cône de 4,50 m (15', 3c)** émanant de vous. <br><br>Chaque créature prise dans la zone effectue un **jet de sauvegarde de Dextérité** :\n\n>- **Échec** : la cible subit **3d6 dégâts de feu**.\n\n>- **Réussite** : la cible subit **la moitié des dégâts**.<br>\n\n>- Les **objets inflammables** dans le cône **s’embrasent** s’ils ne sont portés par personne.<br>\n\nUn sort offensif idéal pour **balayer un groupe compact d’ennemis** et **mettre le feu** à des obstacles légers.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, les dégâts augmentent de **1d6** par niveau d’emplacement au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **4d6** | **5d6** | **6d6** | **7d6** | **8d6** | **9d6** | **10d6** | **11d6** |
+
+nom: **Lumière (Magicien)**  
+nom 1: **Lumière (Magicien)**  
+classe: **Magicien**<br>**(p301 MdJ 24)**  
+classe 1: **Magicien**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, M (une luciole ou de la mousse phosphorescente)*  
+duree: DURÉE\n\n1 heure  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Lumiere_Magicien.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous touchez un **objet non porté** de **taille G ou inférieure**. Jusqu’à la fin du sort, l’objet émet :\n\n>- Une **lumière vive** dans un rayon de **6 m (20', 4c)**.\n>- Une **lumière faible** dans les **6 m** supplémentaires.<br>\n\nVous choisissez librement la **couleur** de cette lumière.<br>\n\n>- Si l’objet est **recouvert d’une surface opaque**, la lumière est bloquée sans être dissipée.\n>- Le sort **prend fin prématurément** si vous le **lancez à nouveau**.<br>\n\nPratique comme **torche magique**, balise ou marqueur pour repérer des objets dans l’obscurité.
+
+nom: **Main du Mage (Magicien)**  
+nom 1: **Main du Mage (Magicien)**  
+classe: **Magicien**<br>**(p303 MdJ 24)**  
+classe 1: **Magicien**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S*  
+duree: DURÉE\n\n1 minute  
+type: Invocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Main_du_Mage_Magicien.png  
+symbole 1: symbole/Invocation.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous faites apparaître une **main spectrale flottante** en un point de votre choix à portée. Elle persiste **1 minute**, mais disparaît si elle dépasse **9 m (30', 6c)** de vous ou si vous **relancez le sort**.\n\n>- **À l’incantation** : la main peut **manipuler un objet**, **ouvrir** une porte ou un récipient **non verrouillés**, **ranger ou récupérer** un objet dans un conteneur ouvert, ou **verser le contenu** d’une fiole.\n>- **À chacun de vos tours suivants** (action Magie), vous pouvez **déplacer la main jusqu’à 9 m (30', 6c)** et répéter l’une de ces manipulations.\n>- La main **ne peut pas attaquer**, **activer d’objet magique**, ni **porter plus de 5 kg (11 lb)**.<br>\n\nIdéale pour effectuer des **tâches délicates à distance** ou **interagir avec des objets** sans vous exposer au danger.
+
+nom: **Rayon de Givre (Magicien)**  
+nom 1: **Rayon de Givre (Magicien)**  
+classe: **Magicien**<br>**(p323 MdJ 24)**  
+classe 1: **Magicien**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Rayon_de_Givre_Magicien.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous projetez un **rayon bleuâtre glacé** vers une créature visible à portée. Effectuez une **attaque de sort à distance** contre la cible.\n\n>- Si l’attaque touche, la cible subit **1d8 dégâts de froid**.\n>- Sa **Vitesse est réduite de 3 m (10', 2c)** jusqu’au début de votre tour suivant.<br>\n\nUn sort idéal pour **freiner un adversaire** et infliger un **choc glacial**.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent lorsque vous atteignez certains niveaux :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d8** | **3d8** | **4d8** |
+
+nom: **Armure du Mage (Magicien)**  
+nom 1: **Armure du Mage (Magicien)**  
+classe: **Magicien**<br>**(p245 MdJ 24)**  
+classe 1: **Magicien**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S, M (un morceau de cuir traité)*  
+duree: DURÉE\n\n8 heures  
+type: Abjuration de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Armure_du_Mage_Magicien.png  
+symbole 1: symbole/Abjuration.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous touchez une **créature consentante** qui **ne porte pas d’armure**. Jusqu’à la fin du sort :\n\n>- Sa **CA de base devient 13 + modificateur de Dextérité**.\n>- Le sort **prend fin prématurément** si la cible **enfile une armure**.<br>\n\nUne protection magique légère, idéale pour les **lanceurs de sorts dépourvus d’armure**.
+
+nom: **Détection de la Magie (Magicien)**  
+nom 1: **Détection de la Magie (Magicien)**  
+classe: **Magicien**<br>**(p274 MdJ 24)**  
+classe 1: **Magicien**  
+incantation: INCANTATION\n\n1 Action ou Rituel  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\nConcentration, jusqu'à 10 minutes  
+type: Divination de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Detection_Magie_Magicien.png  
+symbole 1: symbole/Divination.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nPour toute la durée, vous **percevez la présence d’effets magiques** dans un rayon de **9 m (30', 6c)** autour de vous.\n\n>- Lorsque vous détectez de la magie, vous pouvez utiliser **l’action Magie** pour **voir une faible aura** entourant chaque **créature ou objet visible** porteur de magie dans la zone.\n>- Si l’effet provient d’un **sort**, vous **apprenez son école de magie**.<br>\n\nLe sort est **bloqué** par :\n\n>- **30 cm** de **pierre, terre ou bois** ;\n>- **2,5 cm** de **métal** (ou une simple **feuille de plomb**).<br>\n\nUn rituel indispensable pour **déceler les enchantements**, **identifier les objets occultes** et **déjouer les pièges magiques**.
+
+nom: **Feuille Morte (Magicien)**  
+nom 1: **Feuille Morte (Magicien)**  
+classe: **Magicien**<br>**(p286 MdJ 24)**  
+classe 1: **Magicien**  
+incantation: INCANTATION\n\nRéaction (lorsqu’une créature dans un rayon de 18 m chute)  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, M (une petite plume ou un peu de duvet)*  
+duree: DURÉE\n\n1 minute  
+type: Transmutation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Feuille_Morte_Magicien.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous choisissez **jusqu’à cinq créatures chutant** à portée. Pour chacune :\n\n>- Sa **Vitesse de chute** devient **18 m par round (60', 12c)** jusqu’à la fin du sort.\n>- Si elle **atterrit avant** la fin du sort, elle **ne subit aucun dégât de chute** et l’effet prend fin pour elle.<br>\n\nUn sort salvateur pour **ralentir une chute mortelle** et préserver vos alliés (ou vous-même) d’un impact fatal.
+
+nom: **Projectile Magique (Magicien)**  
+nom 1: **Projectile Magique (Magicien)**  
+classe: **Magicien**<br>**(p320 MdJ 24)**  
+classe 1: **Magicien**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**36 m (120', 24c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Projectile_Magique_Magicien.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous créez **trois traits scintillants de force pure** qui **atteignent automatiquement** leur cible.\n\n>- Vous pouvez **répartir** les projectiles entre une ou plusieurs créatures visibles à portée.\n>- Chaque projectile inflige **1d4 + 1 dégâts de force** et tous **frappent simultanément**.<br>\n\nUne option fiable pour **assurer des dégâts garantis** ou **achever des ennemis blessés** sans risque d’échec.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, vous créez **un projectile supplémentaire** par niveau d’emplacement au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **4 traits** | **5 traits** | **6 traits** | **7 traits** | **8 traits** | **9 traits** | **10 traits** | **11 traits** |
+
+nom: **Sommeil (Magicien)**  
+nom 1: **Sommeil (Magicien)**  
+classe: **Magicien**<br>**(p330 MdJ 24)**  
+classe 1: **Magicien**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S, M (une pincée de sable ou des pétales de rose)*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Enchantement de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Sommeil_Magicien.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous désignez un point à portée ; chaque créature que vous **choisissez** dans une **Sphère de 1,50 m (5', 1c) de rayon** centrée sur ce point effectue un **jet de sauvegarde de Sagesse** :\n\n>- **Échec (1<sup>er</sup> JdS)** : la cible est **Neutralisée** jusqu’à la fin de son prochain tour.\n>\n>- **À la fin de cet intervalle**, elle réitère le **même JdS** ; si elle **échoue à nouveau**, elle devient **Inconsciente** pour toute la durée restante du sort.\n\n>- Le sort **prend fin immédiatement** sur une créature si :\n>  - Elle **subit des dégâts** ;\n>  - Ou reçoit une **secousse vigoureuse** d’une autre créature située à **1,50 m (5', 1c)** ou moins d’elle.<br>\n\nCertaines créatures **résistent naturellement** :\n\n>- Les créatures **incapables de dormir**.\n>- Celles disposant de l’**Immunité à l’Épuisement**.\n\nCes créatures **réussissent automatiquement** leur jet de sauvegarde contre ce sort.<br>\n\nUn sort tactique pour **neutraliser discrètement** les adversaires avant qu’ils puissent réagir.
+
+nom: **Vague Tonnante (Magicien)**  
+nom 1: **Vague Tonnante (Magicien)**  
+classe: **Magicien**<br>**(p341 MdJ 24)**  
+classe 1: **Magicien**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Vague_Tonnante_Magicien.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous libérez une **décharge de force tonitruante** sous la forme d’une vague émanant de vous dans un **Cube de 4,50 m (15', 3c)**.\n\nChaque créature prise dans la zone effectue un **jet de sauvegarde de Constitution** : \n\n>- **Échec** : la cible subit **2d8 dégâts de tonnerre** et est **repoussée de 3 m (10', 2c)**.\n\n>- **Réussite** : la cible subit **la moitié des dégâts** et **n’est pas repoussée**.<br>\n\n>- Tous les **objets non fixés** entièrement contenus dans la zone sont également **repoussés de 3 m (10', 2c)**.\n\n>- Le **fracas assourdissant** du sort peut être entendu jusqu’à **90 m (300', 60c)**.<br>\n\nCe sort est idéal pour **se dégager en mêlée**, **briser des formations ennemies**, ou **attirer l’attention** à distance.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, les **dégâts augmentent de 1d8** par niveau au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **3d8** | **4d8** | **5d8** | **6d8** | **7d8** | **8d8** | **9d8** | **10d8** |
+
+nom: **Décharge Occulte (Occultiste)**  
+nom 1: **Décharge Occulte (Occultiste)**  
+classe: **Occultiste**<br>**(p273 MdJ 24)**  
+classe 1: **Occultiste**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**36 m (120', 24c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Decharge_Occulte_Occultiste.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Occultiste.png  
+description: \n\n---\n\nVous projetez un **rayon d’énergie crépitante** vers une créature ou un objet à portée. Effectuez une **attaque de sort à distance** contre la cible.\n\n>- Si l’attaque touche, la cible subit **1d10 dégâts de force**.<br>\n\n---\n\n**Amélioration de sort mineur**\n\nLe nombre de rayons augmente avec vos niveaux ; effectuez un **jet d’attaque séparé pour chaque rayon** et répartissez-les librement :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2 rayons** | **3 rayons** | **4 rayons** |
+
+nom: **Prestidigitation (Occultiste)**  
+nom 1: **Prestidigitation (Occultiste)**  
+classe: **Occultiste**<br>**(p320 MdJ 24)**  
+classe 1: **Occultiste**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**3 m (10', 2c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nJusqu'à 1 heure  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Prestidigitation_Occultiste.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Occultiste.png  
+description: \n\n---\n\nVous créez un **petit tour de magie** à portée. Choisissez **l’un des effets** ci-après. Si vous lancez ce sort plusieurs fois, vous pouvez maintenir **jusqu’à trois effets non instantanés** simultanément.\n\n>- **Effet sensoriel** : un phénomène instantané et inoffensif (pluie d’étincelles, petite rafale, notes de musique, odeur étrange).\n>- **Jeu avec le feu** : vous **allumez ou éteignez** instantanément une **bougie, torche ou petit feu de camp**.\n>- **Nettoyage ou maculage** : vous **nettoyez ou souillez** instantanément un objet ne dépassant pas **30 litres (0,03 m³)**.\n>- **Sensation mineure** : vous **refroidissez, réchauffez ou parfumez** de la matière inerte (≤ 30 l / 0,03 m³) pendant **1 heure**.\n>- **Marque magique** : vous faites apparaître, pendant **1 heure**, une **couleur, marque ou symbole** sur un objet ou une surface.\n>- **Création mineure** : vous façonnez une **babiole non magique** ou une **image illusoire** tenant dans votre main ; elle persiste jusqu’à la fin de votre **tour suivant** et n’a **ni valeur monétaire, ni potentiel de dégâts**.<br>\n\nSort polyvalent offrant une **boîte à outils magique** pour les petites tâches, distractions et effets de scène.
+
+nom: **Charme-Personne (Occultiste)**  
+nom 1: **Charme-Personne (Occultiste)**  
+classe: **Occultiste**<br>**(p254 MdJ 24)**  
+classe 1: **Occultiste**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S*  
+duree: DURÉE\n\n1 heure  
+type: Enchantement de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Charme_Personne_Occultiste.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Occultiste.png  
+description: \n\n---\n\nVous tentez de **charmer un Humanoïde** que vous voyez à portée. La cible effectue un **jet de sauvegarde de Sagesse** :\n\n>- Le jet s’effectue **avec Avantage** si vous ou vos alliés l’**affrontez** actuellement.\n\n>>- **Échec** : la cible est **Charmée** pour toute la durée, ou jusqu’à ce que vous ou vos alliés lui infligiez des **dégâts**.\n>- **Réussite** : le sort n’a pas d’effet.<br>\n\nUne créature **Charmée** vous considère comme **Amicale**. Lorsque le sort prend fin, elle **sait** que vous l’avez charmée.<br>\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, vous pouvez **cibler une créature supplémentaire** à portée **par niveau d’emplacement** au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **2 cibles** | **3 cibles** | **4 cibles** | **5 cibles** | **6 cibles** | **7 cibles** | **8 cibles** | **9 cibles** |
+
+nom: **Maléfice (Occultiste)**  
+nom 1: **Maléfice (Occultiste)**  
+classe: **Occultiste**<br>**(p303 MdJ 24)**  
+classe 1: **Occultiste**  
+incantation: INCANTATION\n\n1 Action Bonus  
+portee: PORTÉE\n\n**27 m (90', 18c)**  
+composantes: *V, S, M (un œil pétrifié de triton)*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 heure  
+type: Enchantement de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Malefice_Occultiste.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Occultiste.png  
+description: \n\n---\n\nVous **maudissez** une **créature visible** à portée.\n\n>- Jusqu’à la fin du sort, chaque fois que vous **touchez** la cible avec un **jet d’attaque**, elle subit **1d6 dégâts nécrotiques supplémentaires**.\n>- Lors de l’incantation, vous choisissez **une caractéristique** ; la cible a **Désavantage** aux **tests** associés à cette caractéristique.<br>\n\nSi la cible tombe à **0 PV** avant la fin du sort, vous pouvez, par une **action Bonus** lors d’un de vos tours suivants, **transférer la malédiction** à une nouvelle créature visible dans la portée.<br>\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, la durée maximale de votre **Concentration** augmente :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 2** | **Niv 3–4** | **Niv 5+** |\n| **4 h** | **8 h** | **24 h** |
+
+nom: **Héroïsme (Paladin)**  
+nom 1: **Héroïsme (Paladin)**  
+classe: **Paladin**<br>**(p293 MdJ 24)**  
+classe 1: **Paladin**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Enchantement de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Heroisme_Paladin.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Paladin.png  
+description: \n\n---\n\nVous touchez une **créature consentante** et l’investissez d’une **vaillance héroïque** :\n\n>- Elle devient **immunisée à l’état Effrayé**.\n>- Au **début de chacun de ses tours**, elle gagne **des points de vie temporaires** égaux à votre **modificateur de caractéristique d’incantation**.\n>- Les points de vie temporaires **se cumulent** chaque tour ; ils expirent à la fin du sort.<br>\n\nUn sort parfait pour **soutenir un allié en première ligne**, en lui offrant **courage et endurance** face aux menaces.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, vous pouvez **cibler une créature supplémentaire** par niveau d’emplacement au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **2 cibles** | **3 cibles** | **4 cibles** | **5 cibles** | **6 cibles** | **7 cibles** | **8 cibles** | **9 cibles** |
+
+nom: **Châtiment de Fournaise (Paladin)**  
+nom 1: **Châtiment de Fournaise (Paladin)**  
+classe: **Paladin**<br>**(p255 MdJ 24)**  
+classe 1: **Paladin**  
+incantation: INCANTATION\n\n1 Action Bonus<br>immédiatement après une attaque réussie au corps à corps 
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V*  
+duree: DURÉE\n\n1 minute  
+type: Évocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Chatiment_de_Fournaise_Paladin.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Paladin.png  
+description: \n\n---\n\nQuand votre **attaque de mêlée** touche la cible, elle subit **1d6 dégâts de feu supplémentaires**.\n\n>- **Au début de chacun de ses tours** jusqu’à la fin du sort, la cible subit **1d6 dégâts de feu** puis effectue un **jet de sauvegarde de Constitution**.\n>>- **Échec** : le sort **se poursuit**.\n\n>>>-  **Réussite** : le sort **prend fin** pour cette créature.<br>\n\nUn châtiment brûlant qui **punit dans la durée** tout adversaire frappé par votre lame sacrée.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, **tous les dégâts** infligés par le sort (coup initial et dégâts de début de tour) augmentent de **1d6** par niveau d’emplacement au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **2d6** | **3d6** | **4d6** | **5d6** | **6d6** | **7d6** | **8d6** | **9d6** |
+
+nom: **Frappe Piégeuse (Rôdeur)**  
+nom 1: **Frappe Piégeuse (Rôdeur)**  
+classe: **Rôdeur**<br>**(p289 MdJ 24)**  
+classe 1: **Rôdeur**  
+incantation: INCANTATION\n\n1 Action Bonus<br>(immédiatement après avoir touché une créature avec une arme)  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute  
+type: Invocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Frappe_Piegeuse_Rodeur.png  
+symbole 1: symbole/Invocation.png  
+symbole 4: symbole/Rôdeur.png  
+description: \n\n---\n\nLorsque votre **attaque d’arme** touche une créature, des **plantes grimpantes** jaillissent et l’encerclent. La cible effectue un **jet de sauvegarde de Force** :\n\n>- **Échec** : la créature est **Entravée** jusqu’à la fin du sort.\n>\n>- **Réussite** : les plantes **se flétrissent** et le sort **prend fin** immédiatement.\n\n>>*Une créature de **taille G ou supérieure** a **Avantage** à ce jet.*<br>\n\nTant qu’elle reste **Entravée** :\n\n>- Au **début de chacun de ses tours**, elle subit **1d6 dégâts perforants**.\n>- Elle ou une créature dans son **allonge** peut, par une **action**, tenter un **test de Force (Athlétisme)** contre votre **DD de sauvegarde des sorts** ; en cas de **réussite**, le sort **prend fin**.<br>\n\nUn sort idéal pour **immobiliser** une cible prioritaire tout en lui infligeant des **dégâts continus**.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, **tous les dégâts perforants** infligés par le sort (à chaque début de tour) augmentent de **1d6** par niveau d’emplacement au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **2d6** | **3d6** | **4d6** | **5d6** | **6d6** | **7d6** | **8d6** | **9d6** |
+
+nom: **Soins (Rôdeur)**  
+nom 1: **Soins (Rôdeur)**  
+classe: **Rôdeur**<br>**(p330 MdJ 24)**  
+classe 1: **Rôdeur**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Abjuration de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Soins_Rodeur.png  
+symbole 1: symbole/Abjuration.png  
+symbole 4: symbole/Rôdeur.png  
+description: \n\n---\n\nVous insufflez une **énergie curative naturelle** dans une créature que vous **touchez physiquement**. Elle récupère un nombre de **points de vie égal à 2d8 + votre modificateur de caractéristique d’incantation**.\n\n>- Ce sort est **sans effet** sur les **morts-vivants** et les **créatures artificielles**.<br>\n\nUn soin rapide, essentiel pour **stabiliser un allié blessé** au cœur de la nature ou en plein combat.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, les **soins augmentent de 2d8** par niveau d’emplacement au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **4d8** PV | **6d8** PV | **8d8** PV | **10d8** PV | **12d8** PV | **14d8** PV | **16d8** PV | **18d8** PV |
+
+nom: **Marque du Chasseur (Rôdeur)**  
+nom 1: **Marque du Chasseur (Rôdeur)**  
+classe: **Rôdeur**<br>**(p305 MdJ 24)**  
+classe 1: **Rôdeur**  
+incantation: INCANTATION\n\n1 Action Bonus  
+portee: PORTÉE\n\n**27 m (90', 18c)**  
+composantes: *V*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 heure  
+type: Divination de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Marque_du_Chasseur_Rodeur.png  
+symbole 1: symbole/Divination.png  
+symbole 4: symbole/Rôdeur.png  
+description: \n\n---\n\nVous désignez magiquement une **créature visible** à portée comme votre **proie**.\n\n>- Jusqu’à la fin du sort, chaque fois que vous **touchez** la cible avec un **jet d’attaque**, elle subit **1d6 dégâts de force**.<br>\n\n>- Vous avez **Avantage** aux tests de **Sagesse (Perception ou Survie)** visant à **retrouver** votre cible.<br>\n\n>- Si la cible tombe à **0 PV** avant la fin du sort, vous pouvez, **par une action Bonus**, **déplacer la marque** vers une autre créature visible à portée.<br>\n\n---\n\n**À plus haut niveau**\n\nVotre **durée de concentration** augmente aux emplacements supérieurs :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|\n| **Niv 3–4** | **Niv 5+**   |\n| **8 heures** | **24 heures** |
+
+nom: **Convocation de Bête (Magicien)**  
+nom 1: **Convocation de Bête (Magicien)**  
+classe: **Magicien de l'École de l’Illusion**\n\n**(p264 MdJ 24)**  
+classe 1: **Magicien de l'École de l’Illusion**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**27 m (90', 18c)**  
+composantes: *V, S, M (une plume, une touffe de fourrure et une queue de poisson enfermées dans un gland doré d’une valeur minimale de 200 po)*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 heure  
+type: Invocation de Niveau 2  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Convocation_Bete_Magicien.png  
+symbole 1: symbole/Invocation.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous **invoquez un esprit bestial** qui apparaît dans un **espace inoccupé** que vous voyez à portée. À l’incantation, choisissez un **environnement** : **air, eau ou terre**.\n\n>- L’esprit adopte l’apparence d’un **animal adapté** à l’environnement choisi et utilise le **profil de l’Esprit Bestial** correspondant (voir carte dédiée).\n>- La créature disparaît lorsque le sort prend fin ou si elle tombe à **0 PV**.<br>\n\n**Contrôle de la créature** :\n\n>- L’esprit est votre **allié** ; il partage votre **initiative** et agit **juste après vous**.\n>- Il **obéit** à vos **ordres verbaux** (aucune action requise). Sans ordre, il prend l’action **Esquive** et se déplace pour se mettre à couvert.<br>\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, appliquez ce **niveau d’emplacement** à chaque entrée qui y fait référence dans le **profil de l’Esprit Bestial**.
+
+nom: **Convocation de Dragon (Ensorceleur)**  
+nom 1: **Convocation de Dragon (Ensorceleur)**  
+classe: **Ensorceleur Draconique**\n\n**(p266 MdJ 24)**  
+classe 1: **Ensorceleur Draconique**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S, M (un objet gravé d’une représentation de dragon, d’une valeur minimale de 500 po)*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 heure  
+type: Invocation de Niveau 5  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Convocation_Dragon_Ensorceleur.png  
+symbole 1: symbole/Invocation.png  
+symbole 4: symbole/Ensorceleur.png  
+description: \n\n---\n\nVous **invoquez un esprit draconique** qui apparaît dans un **espace inoccupé** que vous voyez à portée. Il adopte le **profil de l’Esprit Draconique** correspondant (voir carte dédiée) et disparaît si le sort prend fin ou si elle tombe à **0 PV**.<br>\n\n**Contrôle de la créature** :\n\n>- L’esprit est votre **allié** ; il partage votre **initiative** et agit **juste après vous**.\n>- Il **obéit** à vos **ordres verbaux** (aucune action requise). Sans ordre, il prend l’action **Esquive** et se met à couvert.<br>\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, appliquez ce **niveau d’emplacement** à chaque entrée correspondante du **profil de l’Esprit Draconique**.
+
+nom: **Convocation de Fée (Magicien)**  
+nom 1: **Convocation de Fée (Magicien)**  
+classe: **Magicien de l'École de l’Illusion**\n\n**(p267 MdJ 24)**  
+classe 1: **Magicien de l'École de l’Illusion**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**27 m (90', 18c)**  
+composantes: *V, S, M (une fleur dorée d’une valeur minimale de 300 po)*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 heure  
+type: Invocation de Niveau 3  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Convocation_Fee_Magicien.png  
+symbole 1: symbole/Invocation.png  
+symbole 4: symbole/Magicien.png  
+description: \n\n---\n\nVous **invoquez un esprit féerique** qui apparaît dans un **espace inoccupé** que vous voyez à portée. À l’incantation, choisissez une **humeur** : **espiègle, furibonde ou rieuse**.\n\n>- L’esprit prend l’apparence d’une **créature féerique** reflétant l’humeur choisie et utilise le **profil de l’Esprit Féerique** correspondant (voir carte dédiée).\n>- La créature disparaît lorsque le sort se termine ou si elle tombe à **0 PV**.<br>\n\n**Contrôle de la créature** :\n\n>- L’esprit est votre **allié** ; il partage votre **initiative** et agit **juste après vous**.\n>- Il **obéit** à vos **ordres verbaux** (aucune action requise). Sans ordre, il prend l’action **Esquive** et se met à couvert.<br>\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, appliquez ce **niveau d’emplacement** partout où le **profil de l’Esprit Féerique** y fait référence.
+
+nom: **Élémentalisme (Moine)**  
+nom 1: **Élémentalisme (Moine)**  
+classe: **Moine (Voie des quatre éléments)**\n\n**(p280 MdJ 24)**  
+classe 1: **Moine (Voie des quatre éléments)**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Transmutation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Elementalisme_Moine.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Moine.png  
+description: \n\n---\n\nVous manipulez les **éléments naturels** pour produire l’un des effets suivants à portée :\n\n>- **Appel d’air** : une brise légère fait **ondoyer les vêtements**, **soulever la poussière**, **bruisser les feuilles** et peut **claquer des portes ou volets ouverts** dans un **Cube de 1,50 m (5', 1c)**. Les objets maintenus fermement ne sont pas affectés.\n\n>- **Appel d’eau** : vous créez une **brume rafraîchissante** dans un **Cube de 1,50 m**, ou faites apparaître **20 cl d’eau claire** dans un récipient ou sur une surface. Cette eau **s’évapore après 1 minute**.\n\n>- **Appel de feu** : vous produisez une **fumée ardente mais inoffensive** dans un **Cube de 1,50 m**. Vous en choisissez la **couleur** et **l’odeur**. Les **bougies, torches et lampes** dans la zone sont allumées. L’**odeur persiste 1 minute**.\n\n>- **Appel de terre** : vous étendez un **voile de sable ou poussière** sur une zone de **1,50 m** ou faites apparaître un **mot unique** inscrit dans la terre ou le sable.\n\n>- **Façonnage élémentaire** : vous donnez une **forme grossière** (par exemple, une silhouette de créature) à un volume de **terre, sable, flamme, fumée, brume ou eau** contenu dans un **Cube de 30 cm**. Cette forme persiste **1 heure**.<br>\n\nUn art druidico-élémentaliste adapté à la discipline du Moine, idéal pour **contrôler l’environnement**, **créer des diversions** ou **faciliter vos déplacements**.
+
+nom: **Châtiment Divin (Paladin)**  
+nom 1: **Châtiment Divin (Paladin)**  
+classe: **Paladin**<br>**(p254 MdJ 24)**  
+classe 1: **Paladin**  
+incantation: INCANTATION\n\n1 Action Bonus<br>immédiatement après une attaque réussie au corps à corps 
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Chatiment_Divin_Paladin.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Paladin.png  
+description: \n\n---\n\nLa cible subit **2d8 dégâts radiants supplémentaires**.\n\n>- Si la cible est un **Fiélon** ou un **Mort-vivant**, les dégâts augmentent de **1d8**.<br>\n\n---\n\n**À plus haut niveau**\n\nLes dégâts de ce sort augmentent de **1d8** par niveau d’emplacement au-delà du 1<sup>er</sup> :\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **2d8**  | **3d8**  | **4d8**  | **5d8**  | **6d8**  | **7d8**  | **8d8**  | **9d8**  |
+
+nom: **Communication avec les Animaux (Barbare)**  
+nom 1: **Communication avec les Animaux (Barbare)**  
+classe: **Barbare**<br>**(p258 MdJ 24)**  
+classe 1: **Barbare**
+incantation: INCANTATION\n\nRituel incanté en 10 minutes sans dépenser d’emplacement de sort  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\n10 minutes  
+type: Divination de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Communication_Animaux_Barbare.png
+symbole 1: symbole/Divination.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nPour toute la durée du sort, vous êtes capable de **comprendre les Bêtes** et de **communiquer verbalement avec elles**.\n\n>- De plus, toutes les options de **compétence liées à l’action Influence** vous sont accessibles lorsqu’elles sont dirigées vers une Bête.\n\n>- La plupart des Bêtes ne s’expriment que sur des sujets de **survie** ou d’**affection**, mais elles peuvent fournir des informations sur les **alentours**, les **monstres proches**, ou ce qu’elles ont **perçu durant les dernières 24 heures**.<br>\n\nCe sort est un outil essentiel pour **explorateurs**, **rôdeurs** ou **diplomates sylvestres**, facilitant la coopération avec la faune locale.
+
+nom: **Perception Bestiale (Barbare)**  
+nom 1: **Perception Bestiale (Barbare)**  
+classe: **(Barbare)**<br>**(p317 MdJ 24)**  
+classe 1: ** (Barbare)**  
+incantation: INCANTATION\n\nRituel incanté en 10 minutes sans dépenser d’emplacement de sort   
+portee: PORTÉE\n\n**Contact**  
+composantes: *S*  
+duree: DURÉE\n\nConcentration, jusqu'à 1 heure  
+type: Divination de Niveau 2  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Perception_Bestiale_Barbare.png  
+symbole 1: symbole/Divination.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous touchez une **Bête consentante**, et pour toute la durée du sort, **vous percevez le monde à travers ses sens**.<br>\n\n>- Vous voyez, entendez et ressentez exactement ce qu’elle perçoit, comme si elle était **l’une de vos rétines vivantes**.<br>\n>- Vous bénéficiez également de **tous les sens spéciaux** de la Bête (comme la vision dans le noir, l’odorat aigu, etc.).<br>\n\nParfait pour l’**exploration furtive**, l’**observation à distance**, ou la **surveillance invisible**, ce sort vous relie intimement à votre allié animal.
+
+nom: **Communion avec la Nature (Barbare)**  
+nom 1: **Communion avec la Nature (Barbare)**  
+classe: **Barbare**<br>**(p259 MdJ 24)**  
+classe 1: **Barbare**  
+incantation: INCANTATION\n\nRituel incanté en 10 minutes sans dépenser d’emplacement de sort  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Divination de Niveau 5  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Communion_Nature_Barbare.png  
+symbole 1: symbole/Divination.png  
+symbole 4: symbole/Druide.png  
+description: \n\n---\n\nVous entrez en **communion avec les esprits de la nature**, afin de recueillir des **informations précises sur les environs**.\n\n>- En **extérieur**, la portée s'étend jusqu'à **4,5 km (3 miles)**.\n>- En **caverne ou souterrain naturel**, elle se limite à **90 m (300', 18c)**.\n>- Le sort **échoue dans les zones artificielles** ou construites (comme un château ou une ville).<br>\n\nChoisissez **trois éléments** parmi les suivants ; vous obtenez des **informations immédiates** sur chacun d'eux, concernant la zone affectée :\n\n>- **Position des communautés implantées** (villages, camps, etc.)\n>- **Portails menant à d'autres plans d'existence**\n>- **Présence d'une créature** d'un facteur de puissance ≥ 10, de type **Céleste**, **Élémentaire**, **Fée**, **Fiélon** ou **Mort-vivant** *(choisie par le MJ)*\n>- **Type dominant** de **plante**, **minéral**, ou **Bête** *(vous choisissez lequel)*\n>- **Cours d'eau, rivières et plans d'eau**<br>\n\nUn excellent outil pour explorer, traquer ou anticiper les dangers dans un environnement naturel.
+
+nom: **Mot de Pouvoir Guérisseur (Barde)**  
+nom 1: **Mot de Pouvoir Guérisseur (Barde)**  
+classe: **Barde**<br>**(p310 MdJ 24)**  
+classe 1: **Barde**
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V*  
+duree: DURÉE\n\nInstantanée  
+type: Enchantement de Niveau 9  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Mot_Pouvoir_Guerisseur.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Barde.png  
+description: \n\n---\n\nUne vague d’**énergie de guérison** enveloppe une **créature visible à portée**.<br>\n\n>- Elle **récupère tous ses points de vie**.<br>\n>- Si elle est **Charmée, Effrayée, Empoisonnée, Étourdie ou Paralysée**, ces **états prennent fin immédiatement**.<br>\n>- Si elle est **à terre**, elle peut **utiliser sa Réaction** pour **se relever sans dépenser de mouvement**.<br>\n\nUn **sort ultime de restauration**, aussi efficace pour ranimer que pour libérer une cible entravée par les effets les plus puissants.
+
+nom: **Mot de Pouvoir Mortel (Barde)**  
+nom 1: **Mot de Pouvoir Mortel (Barde)**  
+classe: **Barde**<br>**(p310 MdJ 24)**  
+classe 1: **Barde**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V*  
+duree: DURÉE\n\nInstantanée  
+type: Enchantement de Niveau 9  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Mot_Pouvoir_Mortel.png  
+symbole 1: symbole/Enchantement.png  
+symbole 4: symbole/Barde.png  
+description: \n\n---\n\nVous prononcez un **mot interdit et chargé de pouvoir absolu**, visant une **créature visible à portée**.<br>\n\n>- Si elle a **100 points de vie ou moins**, elle **meurt sur-le-champ**, sans jet de sauvegarde ni résistance possible.<br>\n>- Si elle a **plus de 100 points de vie**, elle subit **12d12 dégâts psychiques**.<br>\n\nUn sort **implacable**, capable d’ôter la vie d’un simple mot ou de briser l’esprit des plus puissants.
+
+nom: **Poigne Électrique (Guerrier)**  
+nom 1: **Poigne Électrique (Guerrier)**  
+classe: **Chevalier Occulte**<br>**(p318 MdJ 24)**  
+classe: **Chevalier Occulte**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Poigne_Electrique_GuerrierOcculte.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Guerrier.png  
+description: \n\n---\n\nUne **décharge de foudre** jaillit de votre main vers une créature que vous tentez de toucher. Effectuez une **attaque de sort de mêlée** contre la cible.\n\n>- Si l’attaque touche, la cible subit **1d8 dégâts de foudre**.\n>- Elle **ne peut pas effectuer d’attaques d’Opportunité** jusqu’au début de son prochain tour.<br>\n\nSort idéal pour **asséner un choc rapide** et **se dégager sans risque** d’une zone de mêlée.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent lorsque vous atteignez certains niveaux :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d8** | **3d8** | **4d8** |
+
+nom: **Rayon de Givre (Guerrier)**  
+nom 1: **Rayon de Givre (Guerrier)**  
+classe: **Chevalier Occulte**<br>**(p323 MdJ 24)**  
+classe: **Chevalier Occulte**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation Mineure  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Rayon_Givre_GuerrierOcculte.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Guerrier.png  
+description: \n\n---\n\nVous projetez un **rayon bleuâtre glacé** vers une créature visible à portée. Effectuez une **attaque de sort à distance** contre la cible.\n\n>- Si l’attaque touche, la cible subit **1d8 dégâts de froid**.\n>- Sa **Vitesse est réduite de 3 m (10', 2c)** jusqu’au début de votre tour suivant.<br>\n\nUn sort idéal pour **freiner un adversaire** et infliger un **choc glacial**.\n\n---\n\n**Amélioration de sort mineur**\n\nLes dégâts augmentent lorsque vous atteignez certains niveaux :\n\n| ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) | ![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|\n| **Niv 5** | **Niv 11** | **Niv 17** |\n| **2d8** | **3d8** | **4d8** |
+
+nom: **Bouclier (Guerrier)**  
+nom 1: **Bouclier (Guerrier)**  
+classe: **Chevalier Occulte**<br>**(p249 MdJ 24)**  
+classe: **Chevalier Occulte**  
+incantation: INCANTATION\n\n1 Réaction<br>(que vous utilisez lorsqu’un projectile vous touche ou qu’un sort vous prend pour cible)  
+portee: PORTÉE\n\n**Personnelle**  
+composantes: *V, S*  
+duree: DURÉE\n\n1 Round  
+type: Abjuration de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Bouclier_GuerrierOcculte.png  
+symbole 1: symbole/Abjuration.png  
+symbole 4: symbole/Guerrier.png  
+description: \n\n---\n\nUn **champ de force invisible** surgit en un éclair pour vous protéger d’un danger imminent.\n\n>- **+5** à votre **Classe d’Armure**, jusqu’au **début de votre prochain tour**.\n>- Ce bonus s’applique **même contre l’attaque qui a déclenché cette Réaction**.<br>\n>- Vous êtes également **protégé contre les projectiles magiques**, qui ne vous infligent **aucun dégât**.<br><br>\n\nUn sort défensif d'une efficacité redoutable, capable de transformer un coup fatal en échec total.
+
+nom: **Mains Brûlantes (Guerrier)**  
+nom 1: **Mains Brûlantes (Guerrier)**  
+classe: **Chevalier Occulte**<br>**(p303 MdJ 24)**  
+classe: **Chevalier Occulte**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**Personnel (Cône de 4,50 m, 15', 3c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Mains_Brulantes_GuerrierOcculte.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Guerrier.png   
+description: \n\n---\n\nVous déchaînez une **nappe de flammes ardentes** sous la forme d’un **Cône de 4,50 m (15', 3c)** émanant de vous. <br><br>Chaque créature prise dans la zone effectue un **jet de sauvegarde de Dextérité** :\n\n>- **Échec** : la cible subit **3d6 dégâts de feu**.\n\n>- **Réussite** : la cible subit **la moitié des dégâts**.<br>\n\n>- Les **objets inflammables** dans le cône **s’embrasent** s’ils ne sont portés par personne.<br>\n\nUn sort offensif idéal pour **balayer un groupe compact d’ennemis** et **mettre le feu** à des obstacles légers.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement supérieur**, les dégâts augmentent de **1d6** par niveau d’emplacement au-delà du 1<sup>er</sup>.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **4d6** | **5d6** | **6d6** | **7d6** | **8d6** | **9d6** | **10d6** | **11d6** |
+
+nom: **Saut (Guerrier)**  
+nom 1: **Saut (Guerrier)**  
+classe: **Chevalier Occulte**<br>**(p328 MdJ 24)**  
+classe 1: **Chevalier Occulte**  
+incantation: INCANTATION\n\n1 Action Bonus  
+portee: PORTÉE\n\n**Contact**  
+composantes: *V, S, M (une patte arrière de sauterelle)*  
+duree: DURÉE\n\n1 minute  
+type: Transmutation de Niveau 1  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Saut_Guerrier_Occulte.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Guerrier.png  
+description: \n\n---\n\nVous touchez une **créature consentante**. Pour toute la durée du sort, cette créature peut, **une fois à chacun de ses tours**, effectuer un **saut jusqu’à 9 m (30', 6c)**, en ne dépensant que **3 m (10', 2c)** de déplacement. Ce saut peut être vertical, horizontal ou en diagonale, ne nécessite aucun élan, n’implique aucun test, et n’est pas limité par les contraintes physiques habituelles. <br><br>La créature reste toutefois soumise aux effets de terrain, à la gravité normale et à toute condition de mouvement restreint (comme l’Entrave ou les terrains difficiles).\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement de niveau supérieur**, vous pouvez cibler **une créature supplémentaire par niveau au-delà du 1<sup>er</sup>**.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png) |\n|----------|----------|----------|----------|----------|----------|----------|----------|\n| **Niv 2** | **Niv 3** | **Niv 4** | **Niv 5** | **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **2 cibles** | **3 cibles** | **4 cibles** | **5 cibles** | **6 cibles** | **7 cibles** | **8 cibles** | **9 cibles** |
+
+nom: **Télékinésie (Guerrier)**  
+nom 1: **Télékinésie (Guerrier)**  
+classe: **Chevalier Occulte**<br>**(p334 MdJ 24)**  
+classe 1: **Chevalier Occulte**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nConcentration, jusqu'à 10 minutes  
+type: Transmutation de Niveau 5  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Telekinesie_GuerrierOcculte.png  
+symbole 1: symbole/Transmutation.png  
+symbole 4: symbole/Guerrier.png  
+description: \n\n---\n\nVous canalisez votre volonté pour **manipuler une créature ou un objet à distance**, uniquement par la pensée. À l’incantation, puis à chaque tour avec l’action **Magie**, vous choisissez une **cible visible à portée** (créature ou objet) et appliquez l’effet correspondant. Changer de cible met immédiatement fin à l’effet sur la précédente.\n\n>- **Créature :** Vous ciblez une créature de **taille TG ou inférieure**, qui doit réussir un **jet de sauvegarde de Force**, ou être **déplacée jusqu’à 9 m (30', 6c)** dans la direction de votre choix, puis subir l’état **Entravé** jusqu’à la fin de votre prochain tour. Si elle est suspendue en l’air, elle y reste jusqu’à votre tour suivant, sauf si vous interrompez le sort ou changez de cible. Elle chute si vous cessez de la maintenir.\n\n>- **Objet :** Vous déplacez un **objet de taille TG ou inférieure** jusqu’à **9 m (30', 6c)**. Si l’objet n’est pas porté, il est déplacé automatiquement. Si l’objet est **porté ou tenu**, la créature doit réussir un **jet de Force**, ou vous arrachez l’objet et le déplacez à votre guise.\n\n>- **Contrôle fin :** Vous pouvez **ouvrir une porte, manier un outil, sortir un objet d’un sac ou verser une fiole**, pourvu que l’objet soit dans la portée.<br>\n\nUn sort polyvalent vous permettant de **neutraliser des ennemis à distance** ou d’**agir subtilement sur l’environnement**.
+
+
+
+
+

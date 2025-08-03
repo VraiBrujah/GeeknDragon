@@ -1,0 +1,93 @@
+nom: **Convocation d'esprit draconique**
+nom 1: **Convocation d'esprit draconique**
+classe: **Ensorceleur Draconique**
+classe 1: **Ensorceleur Draconique**
+incantation: INCANTATION\n\n1 Action
+portee: PORTÉE\n\n**18 m (60', 12c)**
+composantes: *V, S, M* (un objet gravé d’un dragon, valant au moins 500 po)
+duree: DURÉE\n\nConcentration, jusqu'à 1 heure
+type: Invocation de Niveau 5
+charge:
+attca_image: symbole/vide.png
+image: image/Sorts/Convocation draconique.png
+symbole 1: symbole/Invocation.png
+symbole 4: symbole/Invocation.png
+description: \n\n---\n\nVous invoquez l'esprit d'un dragon dans un espace inoccupé que vous pouvez voir à portée. La créature utilise le bloc de statistiques **Esprit draconique** et disparaît si elle tombe à 0 points de vie ou lorsque le sort prend fin. <br><br>L'esprit est un allié pour vous et vos compagnons. Il partage votre initiative en combat et agit immédiatement après votre tour. Il obéit à vos commandes verbales (aucune action requise). Si vous ne lui donnez pas d’instructions, il utilise l’action **Esquive** et tente d’éviter tout danger.\n\n---\n\n**À plus haut niveau**\n\nSi vous lancez ce sort avec un emplacement de niveau supérieur, utilisez ce niveau pour déterminer les caractéristiques de l’**esprit draconique** dans son bloc de statistiques.
+
+nom: **Élémentalisme**  
+nom 1: **Élémentalisme**  
+classe: **Moine de la Voie des quatre éléments**  
+classe 1: **Moine de la Voie des quatre éléments**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**9 m (30', 6c)**  
+composantes: *V, S*  
+duree: DURÉE\n\nInstantané  
+type: Transmutation Sort mineur
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Elementalisme.png  
+symbole 1: symbole/Transmutation.png  
+description: \n\n---\n\nVous manipulez un élément dans une **zone de 1,50 m (5', 1c)** en choisissant l’un des effets suivants :  \n\n>- **Air :** Un vent léger souffle, fermant portes et volets non maintenus.\n\n>- **Terre :** Une fine couche de poussière recouvre une surface ou un mot apparaît sur le sol.\n\n>- **Feu :** Des braises et une fumée parfumée apparaissent, allumant bougies et torches. La fumée persiste **1 minute**.\n\n>- **Eau :** Une brume légère humidifie la zone ou crée **une tasse d’eau**, qui s’évapore en **1 minute**.\n\n>- **Sculpter un élément :** Vous donnez une **forme grossière** à la terre, au feu, à la fumée, à l’eau ou à la brume dans un **cube de 30 cm (1')**, conservant cette forme pendant **1 heure**.  
+
+nom: **Châtiment Divin**  
+nom 1: **Châtiment Divin**  
+classe: **Paladin**  
+classe 1: **Paladin**  
+incantation: INCANTATION\n\n1 Action Bonus  
+portee: PORTÉE\n\nSoi-même  
+composantes: *V*  
+duree: DURÉE\n\nInstantanée  
+type: Invocation Niveau 1
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Chatiment_Divin.png  
+symbole 1: symbole/Invocation.png  
+description: \n\n---\n\nAprès avoir touché une cible avec une attaque de mêlée (arme ou frappe à mains nues), vous libérez une énergie sacrée. La cible subit **2d8 dégâts radiants** supplémentaires.\n\nSi la cible est un **Fiélon** ou un **Mort-vivant**, les dégâts augmentent de **1d8**.\n\n---\n\n**À plus haut niveau**\n\n Lorsque vous utilisez un emplacement de sort de niveau supérieur, les dégâts augmentent de **1d8 par niveau d'emplacement** au-delà du 1<sup>er</sup>.  
+
+nom: **Convocation de bête**  
+nom 1: **Convocation de bête**  
+classe: **Magicien de l'École de l’Illusion**  
+classe 1: **Magicien de l'École de l’Illusion**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**27 m (90', 18c)**  
+composantes: *V, S, M* (une plume, une touffe de fourrure et une nageoire de poisson enfermées dans un gland doré, valant au moins 200 po)  
+duree: DURÉE\n\nConcentration, jusqu'à 1 heure  
+type: Invocation de Niveau 2  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Convocation_bete.png  
+symbole 1: symbole/Invocation.png  
+symbole 4: symbole/Invocation.png  
+description: \n\n---\n\nVous invoquez l’esprit d’une bête dans un espace inoccupé que vous pouvez voir à portée. La créature utilise le bloc de statistiques **Esprit bestial** et disparaît si elle tombe à 0 points de vie ou lorsque le sort prend fin. <br><br>Lorsque vous lancez ce sort, choisissez un environnement : **Air, Terre ou Eau**. L’esprit prend l’apparence d’un animal de votre choix appartenant à cet environnement, ce qui détermine certains aspects de ses statistiques.\n\nL’esprit bestial est un allié pour vous et vos compagnons. Il partage votre initiative en combat et agit immédiatement après votre tour. Il obéit à vos commandes verbales (aucune action requise). Si vous ne lui donnez pas d’instructions, il utilise l’action **Esquive** et tente d’éviter tout danger.\n\n---\n\n**À plus haut niveau**\n\nSi vous lancez ce sort avec un emplacement de niveau supérieur, utilisez ce niveau pour déterminer les caractéristiques de l’**esprit bestial** dans son bloc de statistiques.  
+
+nom: **Convocation de fée**  
+nom 1: **Convocation de fée**  
+classe: **Magicien de l'École de l’Illusion**  
+classe 1: **Magicien de l'École de l’Illusion**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**27 m (90', 18c)**  
+composantes: *V, S, M* (une fleur dorée valant au moins 300 po)  
+duree: DURÉE\n\nConcentration, jusqu'à 1 heure  
+type: Invocation de Niveau 3  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Convocation_fee.png  
+symbole 1: symbole/Invocation.png  
+symbole 4: symbole/Invocation.png  
+description: \n\n---\n\nVous invoquez l’esprit d’une fée dans un espace inoccupé que vous pouvez voir à portée. La créature utilise le bloc de statistiques **Esprit féerique** et disparaît si elle tombe à 0 points de vie ou lorsque le sort prend fin. <br><br>Lorsque vous lancez ce sort, choisissez un état d’esprit : **Furieux, Joyeux ou Malicieux**. L’esprit prend l’apparence d’une créature féerique reflétant cette humeur, ce qui influence certains aspects de ses statistiques.\n\nL’esprit féerique est un allié pour vous et vos compagnons. Il partage votre initiative en combat et agit immédiatement après votre tour. Il obéit à vos commandes verbales (aucune action requise). Si vous ne lui donnez pas d’instructions, il utilise l’action **Esquive** et tente d’éviter tout danger.\n\n---\n\n**À plus haut niveau**\n\nSi vous lancez ce sort avec un emplacement de niveau supérieur, utilisez ce niveau pour déterminer les caractéristiques de l’**esprit féerique** dans son bloc de statistiques.  
+
+nom: **Bourrasque**
+nom 1: **Bourrasque**
+classe: **Druide, Ensorceleur, Magicien, Rôdeur**
+classe 1: **Druide, Ensorceleur, Magicien, Rôdeur**
+incantation: INCANTATION\n\n1 Action
+portee: PORTÉE\n\n**Personnelle (ligne de 18 m)**
+composantes: *V, S, M (une graine de légume)*
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute
+type: Évocation de Niveau 2
+charge:
+attca\_image: symbole/vide.png
+image: image/Sorts/Bourrasque.png
+symbole 1: symbole/Évocation.png
+symbole 4: symbole/Évocation.png
+description: \n\n---\n\nUne ligne de vent fort de **18 mètres de long sur 3 mètres de large** émane de vous dans la direction que vous choisissez pendant toute la durée du sort. Chaque créature qui débute son tour dans cette ligne doit réussir un **jet de sauvegarde de Force**, sans quoi elle est repoussée de **4,50 mètres dans la direction du vent**.\n\nLe vent disperse les gaz et la vapeur, et il éteint les bougies, les torches et les autres flammes non protégées dans la zone. Les flammes protégées, comme celles d'une lanterne, vacillent fortement et ont **50 % de chance de s'éteindre**.\n\nToute créature dans la ligne doit dépenser **2 mètres de déplacement pour chaque mètre parcouru** lorsqu'elle se déplace vers vous.\n\nÀ chacun de vos tours avant la fin du sort, vous pouvez utiliser **une action bonus pour changer la direction du vent**.

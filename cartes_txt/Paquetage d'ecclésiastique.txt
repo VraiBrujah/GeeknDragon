@@ -1,0 +1,83 @@
+nom: Sac à Dos
+nom 1: Sac à Dos
+prix: **2 po**
+prix 1: **2 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Équipement d'aventurier
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/backpack.png
+description: \n\n---\n\nCe sac à dos en cuir ou en tissu renforcé est conçu pour permettre aux aventuriers de transporter leur équipement essentiel lors de leurs déplacements. Léger, il n'est cependant pas optimisé pour les armures.\n\n---\n\n**Mécaniques :**\n\n>- **Capacité :** Peut contenir jusqu'à **15 kg (30 lb)**, soit l'équivalent de <br>0.03 m³.\n\n>- **Utilisation :** Porter ce sac à dos avec une **armure intermédiaire ou lourde** impose un **désavantage** aux tests de **Dextérité**, y compris en **Discrétion**.
+
+nom: Couverture
+nom 1: Couverture
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Équipement d'aventurier
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/blanket.png
+description: \n\n---\n\nUne grande couverture chaude en laine ou matériau similaire, essentielle pour se réchauffer pendant le repos et survivre dans des climats froids.\n\n---\n\n**Mécanique** :\n\n>- **Effet** : Enroulé dans une couverture, vous obtenez un **avantage** sur les jets de sauvegarde contre le **froid extrême**.\n\n>- **Règles de froid extrême** : Lorsque la température est de **0°F (-20°C)** ou moins, une créature exposée au froid doit réussir un **jet de sauvegarde de Constitution DD 10** à la fin de chaque heure ou subir **1 niveau d’épuisement**. Les créatures ayant une résistance ou une immunité aux dégâts de froid réussissent automatiquement ce jet de sauvegarde.\n\n---\n\n **Condition d’épuisement** :\n\n>  - **Niveaux cumulatifs** : Chaque fois que vous gagnez un niveau d'épuisement, appliquez les effets correspondants. À **6 niveaux**, le personnage meurt.\n\n>  - **Tests de D20 affectés** : Réduisez le résultat de tous les **tests de D20** (jets de capacité, jets de sauvegarde et jets d’attaque) de **2 × votre niveau d’épuisement**.\n\n>  - **Vitesse réduite** : Réduisez votre **vitesse** de **5 pieds (15 m, 1 case)** par niveau d’épuisement.\n\n>  - **Récupération** : Un **repos long** au chaud retire **1 niveau d’épuisement**. Lorsque votre niveau d’épuisement atteint **0**, la condition prend fin.
+
+nom: Eau Bénite
+nom 1: Eau Bénite
+prix: **25 po**
+prix 1: **25 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Équipement d'aventurier
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/holy_water.png
+description: \n\n---\n\nUne fiole d'eau consacrée imprégnée de puissance divine, efficace contre les fiélons et les morts-vivants.\n\n---\n\n**Mécanique** :\n\n>- **Utilisation en Attaque** : Durant une **Action Attaquer**, vous pouvez remplacer l'une de vos attaques pour lancer une fiole d'eau bénite sur une cible située à **6 m (20', 4c)**.\n\n>- **Effet** : La cible doit réussir un **jet de sauvegarde de Dextérité (DD = 8 + votre modificateur de Dextérité + votre bonus de maîtrise)** ou subir **2d8 dégâts radiants** si elle est un **Fiélon** ou un **Mort-vivant**.\n\n>- **Spécial** : Nécessite un Clerc ou un Paladin pour être consacrée et préparée.
+
+nom: Lampe
+nom 1: Lampe
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Équipement d'Aventure
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/lamp.png
+description: \n\n---\n\nUne petite lampe en métal conçue pour éclairer les zones sombres en brûlant de l'huile.\n\n---\n\n**Mécanique** :\n\n>- **Rayon lumineux** : Émet une **lumière vive** dans un rayon de <br>**45 m (15', 3c)** et une **lumière faible** dans un rayon supplémentaire de <br>**9 m (30', 6c)**.\n\n>- **Consommation de carburant** : Nécessite de l'**huile** pour fonctionner. Une seule fiole d'huile dure **6 heures** en utilisation continue.\n\n>- **Utilisation** : Fournit de la lumière dans des environnements sombres et peut être placée sur une surface ou transportée à une main.\n\n>- **Spécial** : Peut être éteinte ou rallumée durant l'**action utiliser un objet**.\n\n>- **Effet** : Utile pour explorer des donjons, des grottes ou toute zone à faible visibilité.
+
+nom: Ration (7)
+nom 1: Ration (7)
+prix: **35 pa**
+prix 1: **35 pa**
+poids: **7 kg**\n\n**(14 lb)**
+poids 1: **7 kg**\n\n**(14 lb)**
+type: Équipement d'aventure
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)<br><br>![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/ration_bundle.png
+description: \n\n---\n\nUn paquet comprenant **10 jours** de provisions alimentaires adaptées au voyage, telles que de la **viande séchée**, des **fruits secs**, du **biscuit de mer** et des **noix**. Ce paquet est idéal pour les expéditions prolongées et la planification à long terme.\n\n**Mécaniques :**\n\n>- **Sustentation quotidienne :** Une ration fournit suffisamment de nourriture pour les besoins quotidiens d'une créature de **taille Petite ou Moyenne**.\n\n**Risque de malnutrition :**\n\n>- Une créature doit consommer au moins **la moitié** de sa ration quotidienne pour éviter **l'Épuisement**.\n\n>- Manger moins de la moitié nécessite un **jet de sauvegarde de Constitution DD 10**. En cas d'échec, la créature subit **1 niveau d'Épuisement** à la fin de la journée.\n\n>- Une créature ne mangeant **rien pendant 5 jours consécutifs** gagne automatiquement **1 niveau d'Épuisement** le cinquième jour, et un niveau supplémentaire pour chaque jour suivant sans nourriture.\n\n>- **Récupération d'épuisement :** Consommer une journée complète de nourriture élimine l'Épuisement lié à la malnutrition.\n\n>- **Saveur :** Bien que fonctionnelles et compactes, les rations sont fades et répétitives. Elles sont conçues pour la survie, pas pour le plaisir.\n\n- **Besoins alimentaires quotidiens** : Une créature **minuscule** nécessite **0,1 kg (1/4 lb)** de nourriture par jour, une **petite ou moyenne** **0,5 kg (1 lb)**, une **grande** **2 kg (4 lb)**, une **très grande** **8 kg (16 lb)** et une **gigantesque** **32 kg (64 lb)**.  \n\n **Condition d’épuisement** :\n\n>  - **Niveaux cumulatifs** : Chaque fois que vous gagnez un niveau d'épuisement, appliquez les effets correspondants. À **6 niveaux**, le personnage meurt.\n\n>  - **Tests de D20 affectés** : Réduisez le résultat de tous les **tests de D20** (jets de capacité, jets de sauvegarde et jets d’attaque) de **2 × votre niveau d’épuisement**.\n\n>  - **Vitesse réduite** : Réduisez votre **vitesse** de **5 pieds (15 m, 1 case)** par niveau d’épuisement.
+
+nom: Robe
+nom 1: Robe
+prix: **1 po**
+prix 1: **1 po**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Équipement d'aventurier
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/robe.png
+description: \n\n---\n\nUn vêtement simple et polyvalent, souvent porté pour des raisons cérémonielles, pratiques ou religieuses.\n\n---\n\n**Mécaniques :**\n\n>- **Effet :** Fonctionne comme un vêtement basique, adapté à diverses occasions, des cérémonies aux tâches quotidiennes.\n\n>- **Personnalisable :** Peut être orné d'héraldique, de couleurs spécifiques ou de symboles religieux.\n\n>- **Rôle social :** Idéal pour les moines, les érudits ou les personnages pieux qui privilégient des vêtements minimalistes.\n\n>- **Stockage :** Peut être plié et rangé dans un **sac à dos** sans occuper beaucoup d'espace.
+
+nom: Boîte à amadou
+nom 1: Boîte à amadou
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Équipement d'aventurier
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/tinderbox.png
+description: \n\n---\n\nUn petit récipient contenant les outils nécessaires pour allumer un feu.\n\n---\n\n**Mécanique** :\n\n>- **Contenu** : Comprend un silex, un acier à feu et de l’amadou légèrement huilé.\n\n>- **Effet** :\n\n> - En tant qu'**action bonus**, allumez une **bougie**, **lampe**, **lanterne** ou **torche**.\n\n> - Allumer tout autre combustible exposé (ex. : feu de camp) prend **1 minute**.\n\n>- **Utilisation** : Essentiel pour survivre dans les donjons sombres, camper dans la nature ou préparer des sources de lumière.

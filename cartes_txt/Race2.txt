@@ -1,0 +1,667 @@
+nom: Elfe des Bois
+nom 1: Elfe des Bois
+type: Espèce
+recto: arriere_plan/espece.png
+symbole 1: symbole/sylvain2.png
+symbole 2: symbole/sylvain.png
+symbole 3: symbole/sylvain.png
+symbole 4: symbole/sylvain2.png
+taille image: symbole/taille.png
+taille: Moyen
+age image: symbole/age.png
+age: Jusqu’à 750 ans\n\n![Ligne!](symbole/LigneD2.png)
+deplacement image: symbole/depla.png
+deplacement: 10,5 m (35', 7c)
+image: image/kelena.png
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)
+dv image: symbole/vide.png
+description: \n\n---\n\nLes Elfes des Bois, ou **elfes sauvages**, sont des habitants des forêts anciennes, imprégnés de la magie des paysages primordiaux. Ils ont un lien inné avec la nature et sont souvent des protecteurs de leur environnement. Connus pour leur agilité et leur capacité à se déplacer silencieusement, les elfes des bois sont des chasseurs hors pair et des éclaireurs talentueux.\n\nIls vivent en harmonie avec leur environnement, utilisant leur connexion avec la magie naturelle pour se fondre dans leur habitat. Leur lien profond avec la nature leur confère une vitesse et des sens accrus. Les elfes des bois, bien qu’énigmatiques, sont souvent amicaux envers ceux qui respectent leurs terres sacrées.  \n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Vitesse :** 10,5 m (35 pieds, 7 cases)\n\n**Taille :** Moyen (environ 1,50–1,80 m): ![Ligne!](symbole/LigneD.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous pouvez voir dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance féerique :** Vous avez **avantage sur les jets de sauvegarde** pour résister à la condition Charmé, et la magie ne peut pas vous endormir.\n\n>**Sens aiguisés :** Vous gagnez la maîtrise dans l’une des compétences suivantes : **Intuition**, **Perception** ou **Survie**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n>**Transe :** Au lieu de dormir, vous entrez dans une **transe méditative** pendant 4 heures, ce qui compte comme un **repos long**. Pendant votre transe, vous restez conscient de vos environs.\n\n---\n\n### **Lignée elfique : Elfe des Bois**\n\n>#### Traits de l’Elfe des Bois\n\n>> En tant qu’**Elfe des Bois**, vous avez une affinité particulière avec les forêts anciennes et leurs secrets. Vous bénéficiez des traits suivants :\n\n>>>- **Vitesse accrue :** Votre vitesse de déplacement est de **10,5 m (35 pieds, 7 cases)**, supérieure à celle de la plupart des humanoïdes.\n- **Magie naturelle :** Vous connaissez le sort mineur **"Druidisme"**.\n\n| Niveau de personnage | Sorts accordés |\n|:-----------------------:|:----------------|\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         | ![Case!](symbole/caseDcocher.png) Druidisme      |\n|![Case!](symbole/caseDcocher.png) **Niveau 3**         |![Case!](symbole/caseDcocher.png) Grande foulée |\n|![Case!](symbole/caseDcocher.png) **Niveau 5**         |![Case!](symbole/caseDcocher.png) Passage sans Trace |\n\n> Ces sorts sont toujours préparés pour vous. Vous pouvez les lancer une fois sans utiliser d’emplacement de sort, et vous regagnez cette capacité après un **repos long**. Vous pouvez aussi les lancer avec vos emplacements de sorts si vous en possédez. La **Sagesse** est votre caractéristique d’incantation pour ces sorts.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l'**Elfique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Shadar-kai
+nom 1: Shadar-kai
+type: Espèce
+recto: arriere_plan/espece.png
+symbole 1: symbole/shadar-kai.png
+symbole 2: symbole/shadar-kai.png
+symbole 3: symbole/shadar-kai.png
+symbole 4: symbole/shadar-kai.png
+taille image: symbole/taille.png
+taille: Moyen
+age image: symbole/age.png
+age: Jusqu’à 750 ans\n\n![Ligne!](symbole/LigneD2.png)
+deplacement image: symbole/depla.png
+deplacement: 9 m (30', 6c)
+image: image/mimi.png
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)
+dv image: symbole/vide.png
+description: \n\n---\n\nLes **Shadar-kai** sont des elfes façonnés par l’énergie lugubre du **Plan de l’Ombre**, où ils servent la **Reine Corbeau** ou poursuivent des objectifs personnels mystérieux. Ce lien profond avec le Plan de l’Ombre leur confère une affinité naturelle avec les ténèbres et la mort. Leur apparence spectrale et leur longévité font d’eux des figures énigmatiques et redoutées.\n\nDans leur état d’origine, les Shadar-kai apparaissent pâles, presque fantomatiques, et leur peau semble parfois cendrée ou translucide. Lorsqu’ils voyagent dans le **Plan Matériel**, cette apparence devient moins marquée, mais leur nature spectrale reste visible dans leur aura lugubre.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,50–1,80 m): ![Ligne!](symbole/LigneD.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> #### **Vision dans le noir**\n\n>> Vous pouvez voir dans l’obscurité dans un rayon de **18 m (60 pieds, 12 cases)** comme si c’était une lumière faible, et dans une lumière faible comme si c’était une lumière vive. Dans l’obscurité totale, vous ne percevez que des nuances de gris.  \n\n  \n\n> #### **Faveur de la Reine Corbeau**  \n\n>> En tant qu’**action bonus**, vous pouvez **vous téléporter magiquement** jusqu’à **9 m (30 pieds, 6 cases)** vers un espace inoccupé que vous pouvez voir.  \n\n>>> - À partir du **niveau 3**, lorsque vous utilisez cette capacité, vous gagnez une **résistance à tous les dégâts** jusqu’au début de votre prochain tour et vous apparaissez dans un état **spectral et translucide**.  \n> - Vous pouvez utiliser ce trait un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez tous les usages après un **repos long**.  ![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)  \n\n  \n\n> #### **Ascendance féerique**  \n\n>> Vous avez **avantage sur les jets de sauvegarde** pour résister ou mettre un terme à la condition **Charmé**, et la magie ne peut pas vous endormir.  \n\n  \n\n> #### **Sens Aiguisés**  \n\n>> Vous gagnez la maîtrise de la compétence **Perception**.  \n\n  \n\n> #### **Résistance nécrotique**  \n\n>> Vous avez une **résistance aux dégâts nécrotiques**.  \n\n  \n\n> #### **Transe**  \n\n>> Vous n’avez pas besoin de dormir. À la place, vous entrez dans une **transe méditative** pendant **4 heures**, ce qui compte comme un **repos long**. Pendant votre transe, vous êtes conscient de votre environnement.  \n\n>> Après chaque transe, vous pouvez choisir de **maîtriser temporairement** deux armes ou outils au choix jusqu’à votre prochain repos long. Ces maîtrises doivent être tirées de la liste des équipements standards.  \n\n>>>>>>>> ![Ligne!](symbole/LigneD1.png)![Ligne!](symbole/LigneD1.png)\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l'**Elfique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Tabaxi
+nom 1: Tabaxi
+type: Espèce
+recto: arriere_plan/espece.png
+symbole 1: symbole/tabaxi.png
+symbole 2: symbole/tabaxi.png
+symbole 3: symbole/tabaxi.png
+symbole 4: symbole/tabaxi.png
+taille image: symbole/taille.png
+taille: Moyen ou Petit (au choix)
+age image: symbole/age.png
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)
+deplacement image: symbole/depla.png
+deplacement: Marche, escalade\n\n9 m (30', 6c)
+image: image/Tigresse2.png
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)
+dv image: symbole/vide.png
+description: \n\n---\n\nLes **Tabaxis**, créatures mi-félines mi-humanoïdes, sont créés par le **Seigneur des Chats** et connus pour leur curiosité insatiable. Leur apparence varie, allant des grands félins (tigres, jaguars) aux chats domestiques, avec des motifs et couleurs infiniment diversifiés. Grâce à leur agilité naturelle et leur nature exploratrice, ils excellent comme éclaireurs, espions ou aventuriers en quête de mystères à découvrir.\n\nLeur lien avec leurs ancêtres félins leur confère une grâce et une souplesse inégalées, les rendant aussi dangereux que fascinants. Mais sous leur curiosité se cache une volonté forte de collecter histoires, trésors et connaissances.  \n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Vitesse :** 9 m (30 pieds, 6 cases), escalade 9 m (30 pieds, 6 cases)\n\n**Taille :** Petit ou Moyen (1,00–1,90 m):  ![Ligne!](symbole/LigneD.png) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> #### **Vision dans le noir**  \n\n>> Vous pouvez voir dans une lumière faible dans un rayon de **18 m (60 pieds, 12 cases)** comme si c’était une lumière vive, et dans l’obscurité comme si c’était une lumière faible. Les couleurs sont perceptibles en nuances de gris.  \n\n>#### **Griffes féline**  \n\n>> Vos griffes naturelles vous permettent d’effectuer des attaques non armées redoutables :  \n\n>>> - Vos attaquent avec vos griffes infligent des dégâts **tranchants** égaux à **1d6 + votre modificateur de Force**, au lieu des dégâts contondants habituels. ![Ligne!](symbole/LigneD.png) \n> - Vous pouvez également utiliser vos griffes pour **escalader**, ce qui vous donne une vitesse d’escalade égale à votre vitesse de déplacement.  \n\n> #### **Agilité Féline**  \n\n>> Vos réflexes félins vous permettent de bouger avec une vitesse incroyable :  \n\n>>> - Pendant votre tour en combat, vous pouvez **doubler votre vitesse de déplacement** jusqu’à la fin du tour.  \n> - Une fois cette capacité utilisée, vous ne pouvez pas l’utiliser à nouveau tant que vous ne vous êtes pas arrêté (**0 pied de déplacement**) pendant l’un de vos tours.  \n\n---\n\n> #### **Talent Félin**  \n\n>> Vous maîtrisez les compétence **Discrétion** et **Perception**\n\n---\n\n### **Langues**\n\n> Vous parlez, lisez et écrivez le **Commun** et une autre langue adaptée à votre perssonage \n\n>>>>>>>>>>>>>>>> ![Ligne!](symbole/LigneD.png)\n\n<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Féral (Ours-garou)
+nom 1: Féral (Ours-garou)
+type: Espèce
+recto: arriere_plan/espece.png
+symbole 1: symbole/feral.png
+symbole 2: symbole/feral.png
+symbole 3: symbole/feral.png
+symbole 4: symbole/feral.png
+taille image: symbole/taille.png
+taille: Moyen
+age image: symbole/age.png
+age: Jusqu’à 70 ans\n\n![Ligne!](symbole/LigneD2.png)
+deplacement image: symbole/depla.png
+deplacement: 9 m (30', 6c)
+image: image/kodiac4.png
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)
+dv image: symbole/vide.png
+description: \n\n---\n\nLes **Férals**, descendants des ours-garous, incarnent la puissance brute et la résilience de leurs ancêtres lycanthropes. Leur lien avec leur héritage bestial leur confère une force physique impressionnante et une endurance exceptionnelle, faisant d’eux des combattants redoutables et des protecteurs acharnés.  \n\nLorsqu’ils **se métamorphosent**, leur apparence bestiale devient plus prononcée : leur peau s’épaissit, leur force augmente, et ils dégagent une aura intimidante. Bien que leur héritage soit parfois redouté, les Férals sont profondément respectés pour leur courage et leur dévouement à ceux qu’ils protègent.  \n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,60–2,10 m): ![Ligne!](symbole/LigneD.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> #### **Vision dans le noir**  \n>> Vous pouvez voir dans une lumière faible dans un rayon de **18 m (60 pieds, 12 cases)** comme si c’était une lumière vive, et dans l’obscurité comme si c’était une lumière faible. Les couleurs sont perceptibles en nuances de gris.  \n\n> #### **Instinct bestial**  \n>> Vous maîtrisez une compétence parmi les suivantes : **Acrobaties**, **Athlétisme**, **Intimidation** ou **Survie**. Notez votre choix ici : ![Ligne!](symbole/LigneD.png) <br> \n\n> #### **Férocité** \n\n|Total|Dépensé|\n|---|---|\n|![Case!](symbole/caseD.png)|![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)<br>![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)| \n\n>> En tant qu’**action bonus**, vous pouvez adopter une apparence plus bestiale pour **1 minute** ou jusqu’à ce que vous utilisiez une autre **action bonus** pour revenir à votre apparence normale.  \n\n>> - Lorsque vous vous métamorphosez, vous gagnez des **points de vie temporaires** égaux à **2 × votre bonus de maîtrise + 1d6**.  \n> - Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez tous les usages après un **repos long**.  \n>   - **Peau de bête**  : Vous obtenez un **bonus de +1 à la CA** pendant la durée de votre transformation. \n\n---\n\n### **Langues**\n\n> Vous parlez, lisez et écrivez le **Commun** et une autre langue adaptée à votre perssonage \n\n>>>>>>>>>>>>>>>> ![Ligne!](symbole/LigneD.png)\n\n<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Méduses Pactisées
+nom 1: Méduses Pactisées
+type: Espèce
+recto: arriere_plan/espece.png
+symbole 1: symbole/meduse.png
+symbole 2: symbole/meduse.png
+symbole 3: symbole/meduse.png
+symbole 4: symbole/meduse.png
+taille image: symbole/taille.png
+taille: Moyen
+age image: symbole/age.png
+age: Jusqu’à 8000 ans\n\n![Ligne!](symbole/LigneD2.png)
+deplacement image: symbole/depla.png
+deplacement: 9 m (30', 6c)
+image: image/nana.png
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)
+dv image: symbole/vide.png
+description: \n\n---\n\nLes **Méduses Pactisées** sont des humanoïdes mystérieux, transformés par un **pacte scellé avec une entité ancienne et énigmatique**. Ce pacte leur a permis de maîtriser les aspects dangereux de leur nature, comme leur regard pétrifiant, pour les convertir en un outil redoutable d’analyse et de manipulation.  \n\nAvec leur affinité avec les serpents et leur héritage infernal, les Méduses Pactisées possèdent un charisme captivant qui inspire respect ou crainte. En raison de leur transformation, elles sont souvent perçues avec méfiance, mais leur talent pour exploiter les faiblesses des autres en fait de précieux alliés ou des ennemis redoutables.  \n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,50–2,00 m): ![Ligne!](symbole/LigneD.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> #### **Vision dans le noir**  \n>> Vous pouvez voir dans une lumière faible dans un rayon de **18 m (60 pieds, 12 cases)** comme si c’était une lumière vive, et dans l’obscurité comme si c’était une lumière faible. Les couleurs sont perceptibles en nuances de gris.  \n\n> #### **Regard Analytique** \n\n|Total|Dépensé|\n|---|---|\n|![Case!](symbole/caseD.png)|![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)<br>![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)| \n\n>>  En tant qu’**action bonus**, vous pouvez fixer une créature visible dans un rayon de **18 m (60 pieds, 12 cases)** pour analyser ses faiblesses :  \n\n>>> - La cible doit réussir un **jet de sauvegarde de Sagesse** (DD = 8 + votre **bonus de maîtrise** + votre **modificateur de Charisme**).  \n> - En cas d’échec, la cible révèle une de ses **faiblesses** (déterminée par le MJ) et subit la condition **effrayé** jusqu’à la fin de votre prochain tour. \n> - Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez tous les usages après un **repos court ou long**.  \n\n> #### **Affinité avec les Serpents**  \n\n>>- Vous gagnez la maîtrise dans une compétence de votre choix entre **Persuasion** ou **Intimidation**.  \n>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)  \n\n>> - Lorsque vous interagissez avec des créatures serpentines, vous avez **avantage** sur les jets de Charisme.  \n\n> #### **Héritage Infernal**  \n>> Vous bénéficiez de la **résistance aux dégâts de feu**, héritée de votre pacte.  \n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l’**Infernal**.  \n> - La langue **Infernal** vous a été octroyée par votre **pacte mystérieux**, symbolisant votre lien avec une entité ancienne.\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Aasimar  
+nom 1: Aasimar  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/celeste1.png  
+symbole 2: symbole/celeste2.png  
+symbole 3: symbole/celeste3.png  
+symbole 4: symbole/celeste1.png  
+taille image: symbole/taille.png  
+taille: Petit ou Moyen (au choix)  
+age image: symbole/age.png  
+age: Jusqu’à 160 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/aasimar.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Aasimars** sont des mortels porteurs d’une étincelle céleste en eux. Que ce soit par une lignée angélique ou une bénédiction divine, ils portent en eux une lumière capable d’apporter **guérison**, **protection** et **courroux divin**.\n\nIls peuvent naître au sein de n’importe quel peuple mortel, héritant des traits physiques de leurs parents, mais leur ascendance céleste se manifeste par des **yeux lumineux**, des **reflets métalliques sur la peau**, ou encore une **auréole subtile**. Ces signes deviennent plus évidents lorsqu’ils révèlent pleinement leur nature divine.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Petit (environ 60–120 cm) ou Moyen (environ 1,20–2,10 m), au choix\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Résistance céleste** : Vous avez **résistance aux dégâts nécrotiques et radiants**.\n\n> **Mains guérisseuses** : En utilisant une **action magique**, vous touchez une créature et lancez un nombre de **d4** égal à votre **bonus de maîtrise**. La créature regagne un nombre de **points de vie** égal au total obtenu. Une fois utilisé, ce trait ne peut être réutilisé qu’après un **repos long**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Porteur de lumière** : Vous connaissez le **tour de magie "Lumière"**. Le **Charisme** est votre caractéristique d’incantation pour ce sort.\n\n---\n\n### **Révélation Céleste**\n\n> À partir du **niveau 3**, vous pouvez révéler votre **essence céleste** en utilisant une **action bonus**. Vous choisissez l’une des **trois formes suivantes** à chaque activation. Cette transformation dure **1 minute** ou jusqu’à ce que vous l’arrêtiez (**aucune action requise**). Une fois utilisée, cette capacité ne peut être réutilisée qu’après un **repos long**.\n\n> Une fois par tour, lorsque vous infligez des **dégâts avec une attaque ou un sort**, vous ajoutez un bonus de **dégâts nécrotiques ou radiants** égal à votre **bonus de maîtrise**.\n\n>#### Options de transformation\n\n>>> **Ailes Célestes** : Deux ailes **spectrales** apparaissent dans votre dos. Vous gagnez une **vitesse de vol égale à votre vitesse de déplacement**.\n\n>>> **Radiance Intérieure** : Vos **yeux et votre bouche** émettent une **lumière ardente**. Vous **éclairez** un rayon de **3 m (10 pieds, lumière vive) et 3 m supplémentaires (lumière tamisée)**. À la fin de chacun de vos tours, les créatures à **3 m (10 pieds) ou moins** subissent des **dégâts radiants** égaux à votre **bonus de maîtrise**.\n\n>>> **Ombre Nécrotique** : Vos **yeux deviennent noirs**, et des ailes **sans plumes** apparaissent brièvement. Les créatures ennemies à **3 m (10 pieds)** doivent réussir un **jet de sauvegarde de Charisme** (DD = 8 + votre modificateur de Charisme + votre bonus de maîtrise), sinon elles sont **effrayées jusqu’à la fin de votre prochain tour**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Céleste**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Airain  
+nom 1: Drakéide - Airain  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/airain.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/airain.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_airain.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides d’Airain** descendent des dragons métalliques du même nom. Leur peau est recouverte d’écailles aux reflets cuivrés et ils possèdent une affinité naturelle avec le feu.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Airain)** : Votre lignée vous confère une résistance et un souffle draconique liés au **feu**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **bouffée d’énergie magique**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Dextérité** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 feu**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts de feu**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+
+
+
+nom: Drakéide - Airain  
+nom 1: Drakéide - Airain  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/airain.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/airain.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_airain.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides d’Airain** descendent des dragons métalliques du même nom. Leur peau est recouverte d’écailles aux reflets cuivrés et ils possèdent une affinité naturelle avec le feu.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Airain)** : Votre lignée vous confère une résistance et un souffle draconique liés au **feu**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **bouffée d’énergie magique**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Dextérité** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 feu**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts de feu**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Argent  
+nom 1: Drakéide - Argent  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/argent.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/argent.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_argent.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides d’Argent** sont les héritiers des majestueux dragons d’argent. Leurs écailles brillent d’un éclat métallique, évoquant la pureté de la glace et la sagesse de leurs ancêtres draconiques. Ils possèdent une affinité naturelle avec le **froid**, et leur présence impose souvent un respect silencieux.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Argent)** : Votre lignée vous confère une résistance et un souffle draconique liés au **froid**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **bouffée d’énergie glaciale**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Constitution** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 froid**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts de froid**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales glaciales** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Blanc  
+nom 1: Drakéide - Blanc  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/blanc.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/blanc.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_blanc.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides Blancs** sont les descendants des dragons blancs, des créatures puissantes et redoutables vivant dans les étendues glacées. Leurs écailles sont d’un blanc éclatant, parfois teintées d’ombres bleutées, et leur sang porte l’héritage du **froid mordant**.\n\nLeur instinct est aiguisé, et ils sont souvent plus sauvages que leurs cousins, préférant la force brute à la diplomatie. Leur souffle glacé peut figer un adversaire sur place, et leur résistance naturelle au froid leur permet de survivre dans les environnements les plus hostiles.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Blanc)** : Votre lignée vous confère une résistance et un souffle draconique liés au **froid**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **bouffée d’énergie glaciale**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Constitution** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 froid**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts de froid**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales de givre** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Bleu  
+nom 1: Drakéide - Bleu  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/bleu.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/bleu.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_bleu.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides Bleus** sont les descendants des puissants dragons bleus, maîtres des tempêtes et seigneurs des déserts. Leurs écailles d’un bleu éclatant scintillent sous la lumière, et des éclairs semblent danser sur leur peau lorsqu’ils s’agitent. Leur tempérament est souvent marqué par l’ambition et un sens inné du commandement.\n\nLeur souffle draconique libère une décharge d’**électricité**, foudroyant ceux qui se dressent sur leur chemin. Leur affinité avec la foudre leur permet de résister aux assauts électriques et de canaliser cette énergie destructrice.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Bleu)** : Votre lignée vous confère une résistance et un souffle draconique liés à la **foudre**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **décharge électrique**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Dextérité** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 foudre**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts de foudre**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales chargées d’électricité** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Bronze  
+nom 1: Drakéide - Bronze  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/bronze.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/bronze.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_bronze.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides de Bronze** descendent des nobles dragons de bronze, défenseurs des mers et des rivages. Leurs écailles scintillent sous la lumière, adoptant des teintes cuivrées et dorées rappelant les profondeurs océaniques. Leur nature les pousse souvent à protéger les plus faibles et à lutter contre l’injustice.\n\nLeur souffle draconique est chargé d’**électricité**, leur permettant de foudroyer leurs ennemis en un instant. Cette affinité élémentaire leur confère également une **résistance naturelle à la foudre**.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Bronze)** : Votre lignée vous confère une résistance et un souffle draconique liés à la **foudre**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **décharge électrique**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Dextérité** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 foudre**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts de foudre**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales d’énergie électrique** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Cuivre  
+nom 1: Drakéide - Cuivre  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/cuivre.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/cuivre.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_cuivre.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides de Cuivre** sont les descendants des dragons de cuivre, connus pour leur malice et leur amour des plaisanteries. Leurs écailles arborent des teintes cuivrées aux reflets rouges, et leur personnalité excentrique en fait des compagnons imprévisibles, mais loyaux.\n\nLeur souffle draconique libère une **vapeur d’acide corrosive**, capable de ronger la chair et l’acier. Cette affinité avec l’**acide** leur confère également une résistance naturelle aux effets de cette énergie destructrice.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Cuivre)** : Votre lignée vous confère une résistance et un souffle draconique liés à l’**acide**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **exhalation corrosive**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Dextérité** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 acide**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts d’acide**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales aux reflets cuivrés** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Noir  
+nom 1: Drakéide - Noir  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/noir.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/noir.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_noir.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides Noirs** sont les descendants des redoutables dragons noirs, maîtres des marais et des ruines oubliées. Leurs écailles sombres reflètent à peine la lumière, leur donnant une apparence menaçante et furtive. Ils sont souvent pragmatiques, rusés et prêts à tout pour survivre.\n\nLeur souffle draconique libère une **vague d’acide corrosif**, réduisant leurs ennemis à néant en quelques instants. Cette affinité leur confère également une **résistance naturelle aux dégâts d’acide**.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Noir)** : Votre lignée vous confère une résistance et un souffle draconique liés à l’**acide**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **exhalation d’acide brûlant**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Dextérité** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 acide**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts d’acide**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales d’un noir d’encre** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Or  
+nom 1: Drakéide - Or  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/or.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/or.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_or.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides d’Or** sont les héritiers des majestueux dragons d’or, symboles de sagesse et de puissance bienveillante. Leurs écailles brillent d’un éclat solaire et leur prestance naturelle inspire respect et admiration. Ils possèdent un instinct protecteur et une soif de justice qui les poussent souvent à défendre les plus faibles.\n\nLeur souffle draconique libère une **vague de flammes ardentes**, réduisant en cendres ceux qui osent les défier. Leur affinité avec le **feu** leur confère une **résistance naturelle à cette énergie destructrice**.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Or)** : Votre lignée vous confère une résistance et un souffle draconique liés au **feu**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **exhalation enflammée**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Dextérité** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 feu**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts de feu**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales aux reflets dorés** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Rouge  
+nom 1: Drakéide - Rouge  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/rouge.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/rouge.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_rouge.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides Rouges** sont les descendants des redoutables dragons rouges, maîtres des montagnes et des volcans en fusion. Leurs écailles, d’un rouge écarlate ou cramoisi, témoignent de leur lien avec le **feu primordial**. Ambitieux et déterminés, ils possèdent une présence imposante qui inspire autant la crainte que le respect.\n\nLeur souffle draconique libère une **vague de flammes ardentes**, consumant tout sur son passage. Leur affinité avec le **feu** leur confère une **résistance naturelle à cette énergie destructrice**.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Rouge)** : Votre lignée vous confère une résistance et un souffle draconique liés au **feu**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **exhalation enflammée**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Dextérité** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 feu**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts de feu**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales aux reflets incandescents** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Drakéide - Vert  
+nom 1: Drakéide - Vert  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/dragon.png  
+symbole 2: symbole/vert.png  
+symbole 3: symbole/dragon.png  
+symbole 4: symbole/vert.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/drakeide_vert.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Drakéides Verts** sont les descendants des dragons verts, maîtres des forêts profondes et des marécages empoisonnés. Leurs écailles aux reflets émeraude leur permettent de se fondre dans leur environnement, et leur regard perçant trahit une intelligence aiguisée et une ruse innée.\n\nLeur souffle draconique exhale un **nuage de poison toxique**, asphyxiant leurs ennemis en quelques instants. Cette affinité leur confère une **résistance naturelle aux effets du poison**.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance draconique (Vert)** : Votre lignée vous confère une résistance et un souffle draconique liés au **poison**.\n\n> **Souffle draconique** : Lorsque vous effectuez une **attaque**, vous pouvez remplacer l’une de vos attaques par une **exhalation toxique**.\n\n>> - Forme : **Cône de 4,50 m (15 pieds)** ou **ligne de 9 m (30 pieds) sur 1,50 m (5 pieds) de large** (choisie à chaque utilisation)\n>> - Jet de sauvegarde : **Constitution** (DD = 8 + modificateur de Constitution + bonus de maîtrise)\n>> - Dégâts : **1d10 poison**, augmentant à **2d10 (niveau 5)**, **3d10 (niveau 11)**, **4d10 (niveau 17)**\n\nVous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**. Toutes les utilisations sont récupérées après un **repos long**.\n\n> **Résistance élémentaire** : Vous avez **résistance aux dégâts de poison**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vol draconique** : À partir du **niveau 5**, vous pouvez, en utilisant une **action bonus**, faire apparaître des **ailes spectrales aux teintes verdoyantes** pendant **10 minutes**. Vous obtenez une **vitesse de vol égale à votre vitesse de déplacement**.\n\nUne fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Draconique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Nain  
+nom 1: Nain  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/nain1.png  
+symbole 2: symbole/nain2.png  
+symbole 3: symbole/nain3.png  
+symbole 4: symbole/nain4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 350 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 7,5 m (25', 5c)  
+image: image/nain.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Nains** sont des êtres robustes, forgés par les dieux de la pierre et du métal. Leur affinité naturelle avec la roche et leur résilience hors du commun font d’eux d’excellents artisans, bâtisseurs et combattants. Depuis les temps anciens, ils ont creusé des cités monumentales dans les montagnes et les collines, affrontant les créatures des profondeurs et les titans des sommets.\n\nLeur longévité et leur attachement aux traditions leur confèrent une vision du monde souvent plus patiente et réfléchie que celle des autres peuples. Néanmoins, ils sont aussi fiers et obstinés, considérant que tout mérite doit être gagné par l’effort et l’honneur.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 7,5 m (25 pieds, 5 cases)\n\n**Taille :** Moyen (environ 1,20–1,50 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **36 m (120 pieds, 24 cases)**.\n\n> **Résilience naine** : Vous avez **résistance aux dégâts de poison** et **avantage sur les jets de sauvegarde** contre l’empoisonnement.\n\n> **Endurance naine** : Votre **total de points de vie** maximum augmente de **1**, et il augmente de **1** supplémentaire à chaque fois que vous gagnez un niveau.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Expertise en pierre** : En utilisant une **action bonus**, vous gagnez une **perception des vibrations (tremorsense)** d’une portée de **18 m (60 pieds)** pendant **10 minutes**.\n\n>> - Vous devez être sur une surface **en pierre** (naturelle ou travaillée) ou la toucher pour utiliser cette capacité.\n>> - Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez toutes vos utilisations après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Nain**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Elfe Noir  
+nom 1: Elfe Noir  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/elfe_noir1.png  
+symbole 2: symbole/elfe_noir2.png  
+symbole 3: symbole/elfe_noir3.png  
+symbole 4: symbole/elfe_noir4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 750 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/elfe_noir.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Elfes Noirs**, ou **Drows**, sont des descendants des elfes qui ont choisi de suivre la déesse Lolth dans les profondeurs de l’Outreterre. Leurs corps ont été marqués par des siècles passés dans l’obscurité : leur peau est d’un noir d’encre ou d’un violet profond, et leurs yeux brillent d’une lueur étrange, adaptés aux ténèbres perpétuelles.\n\nLongtemps considérés comme une race maudite, certains drows cherchent aujourd’hui à s’affranchir du passé de leur peuple. D’autres, en revanche, embrassent la culture impitoyable et hiérarchisée de l’Outreterre, où seuls les plus rusés et les plus puissants survivent.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,50–1,80 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir améliorée** : Vous voyez dans l’obscurité jusqu’à une distance de **36 m (120 pieds, 24 cases)**.\n\n> **Ascendance féerique** : Vous avez **avantage sur les jets de sauvegarde** contre l’état **Charmé**, et la magie ne peut pas vous **endormir**.\n\n> **Sens aiguisés** : Vous gagnez la maîtrise dans l’une des compétences suivantes : **Intuition**, **Perception** ou **Survie**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Transe** : Vous n’avez pas besoin de dormir et la magie ne peut pas vous plonger dans le sommeil. Vous pouvez terminer un **repos long** en seulement **4 heures**, à condition de méditer en restant conscient de votre environnement.\n\n---\n\n### **Lignée Elfique : Elfe Noir**\n\n>#### **Traits de l’Elfe Noir**\n\n>> En tant que **Drow**, vous avez été marqué par la magie de l’Outreterre et possédez les dons suivants :\n\n>>> - **Vision Supérieure** : Votre **Vision dans le Noir** est portée à **36 m (120 pieds, 24 cases)**.\n- **Tour de magie** : Vous connaissez le **tour de magie "Lumières Dansantes"**.\n\n| Niveau de personnage | Sorts accordés |\n|:-----------------------:|:----------------|\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         | ![Case!](symbole/caseDcocher.png) Lumières Dansantes      |\n|![Case!](symbole/caseDcocher.png) **Niveau 3**         |![Case!](symbole/caseDcocher.png) Feu Féérique |\n|![Case!](symbole/caseDcocher.png) **Niveau 5**         |![Case!](symbole/caseDcocher.png) Obscurité |\n\n> Ces sorts sont toujours préparés pour vous. Vous pouvez les lancer une fois sans utiliser d’emplacement de sort, et vous regagnez cette capacité après un **repos long**. Vous pouvez aussi les lancer avec vos emplacements de sorts si vous en possédez. L’**Intelligence**, la **Sagesse**, ou le **Charisme** (au choix) est votre caractéristique d’incantation pour ces sorts.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l'**Elfique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Elfe des Bois
+nom 1: Elfe des Bois
+type: Espèce
+recto: arriere_plan/espece.png
+symbole 1: symbole/sylvain2.png
+symbole 2: symbole/sylvain.png
+symbole 3: symbole/sylvain.png
+symbole 4: symbole/sylvain2.png
+taille image: symbole/taille.png
+taille: Moyen
+age image: symbole/age.png
+age: Jusqu’à 750 ans\n\n![Ligne!](symbole/LigneD2.png)
+deplacement image: symbole/depla.png
+deplacement: 10,5 m (35', 7c)
+image: image/kelena.png
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)
+dv image: symbole/vide.png
+description: \n\n---\n\nLes Elfes des Bois, ou **elfes sauvages**, sont des habitants des forêts anciennes, imprégnés de la magie des paysages primordiaux. Ils ont un lien inné avec la nature et sont souvent des protecteurs de leur environnement. Connus pour leur agilité et leur capacité à se déplacer silencieusement, les elfes des bois sont des chasseurs hors pair et des éclaireurs talentueux.\n\nIls vivent en harmonie avec leur environnement, utilisant leur connexion avec la magie naturelle pour se fondre dans leur habitat. Leur lien profond avec la nature leur confère une vitesse et des sens accrus. Les elfes des bois, bien qu’énigmatiques, sont souvent amicaux envers ceux qui respectent leurs terres sacrées.  \n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Vitesse :** 10,5 m (35 pieds, 7 cases)\n\n**Taille :** Moyen (environ 1,50–1,80 m): ![Ligne!](symbole/LigneD.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous pouvez voir dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance féerique :** Vous avez **avantage sur les jets de sauvegarde** pour résister à la condition Charmé, et la magie ne peut pas vous endormir.\n\n>**Sens aiguisés :** Vous gagnez la maîtrise dans l’une des compétences suivantes : **Intuition**, **Perception** ou **Survie**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n>**Transe :** Au lieu de dormir, vous entrez dans une **transe méditative** pendant 4 heures, ce qui compte comme un **repos long**. Pendant votre transe, vous restez conscient de vos environs.\n\n---\n\n### **Lignée elfique : Elfe des Bois**\n\n>#### Traits de l’Elfe des Bois\n\n>> En tant qu’**Elfe des Bois**, vous avez une affinité particulière avec les forêts anciennes et leurs secrets. Vous bénéficiez des traits suivants :\n\n>>>- **Vitesse accrue :** Votre vitesse de déplacement est de **10,5 m (35 pieds, 7 cases)**, supérieure à celle de la plupart des humanoïdes.\n- **Magie naturelle :** Vous connaissez le sort mineur **"Druidisme"**.\n\n| Niveau de personnage | Sorts accordés |\n|:-----------------------:|:----------------|\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         | ![Case!](symbole/caseDcocher.png) Druidisme      |\n|![Case!](symbole/caseDcocher.png) **Niveau 3**         |![Case!](symbole/caseDcocher.png) Grande foulée |\n|![Case!](symbole/caseDcocher.png) **Niveau 5**         |![Case!](symbole/caseDcocher.png) Passage sans Trace |\n\n> Ces sorts sont toujours préparés pour vous. Vous pouvez les lancer une fois sans utiliser d’emplacement de sort, et vous regagnez cette capacité après un **repos long**. Vous pouvez aussi les lancer avec vos emplacements de sorts si vous en possédez. La **Sagesse** est votre caractéristique d’incantation pour ces sorts.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l'**Elfique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Haut Elfe  
+nom 1: Haut Elfe  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/haut_elfe1.png  
+symbole 2: symbole/haut_elfe2.png  
+symbole 3: symbole/haut_elfe3.png  
+symbole 4: symbole/haut_elfe4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 750 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/haut_elfe.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Hauts Elfes** sont les héritiers des premiers elfes ayant exploré la magie et ses secrets. Leur lignée est profondément imprégnée de l’énergie du **Féerie** et du **Plan Matériel**, ce qui leur confère une affinité naturelle avec les arcanes. Connus pour leur sagesse et leur maîtrise magique, ils sont souvent considérés comme les plus érudits et raffinés des elfes.\n\nLeur apparence est généralement noble, avec une silhouette élancée et des traits délicats. Leurs yeux brillent souvent d’une lueur mystique, reflet de leur connexion avec les forces surnaturelles qui parcourent leur sang.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,50–1,80 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ascendance féerique** : Vous avez **avantage sur les jets de sauvegarde** contre l’état **Charmé**, et la magie ne peut pas vous **endormir**.\n\n> **Sens aiguisés** : Vous gagnez la maîtrise dans l’une des compétences suivantes : **Intuition**, **Perception** ou **Survie**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Transe** : Vous n’avez pas besoin de dormir et la magie ne peut pas vous plonger dans le sommeil. Vous pouvez terminer un **repos long** en seulement **4 heures**, à condition de méditer en restant conscient de votre environnement.\n\n---\n\n### **Lignée Elfique : Haut Elfe**\n\n>#### **Traits du Haut Elfe**\n\n>> En tant que **Haut Elfe**, vous possédez un lien profond avec la magie et les arts arcaniques.\n\n>>> - **Magie innée** : Vous connaissez le **tour de magie "Prestidigitation"**. À la fin d’un **repos long**, vous pouvez remplacer ce tour par un autre de la **liste des sorts de magicien**.\n\n| Niveau de personnage | Sorts accordés |\n|:-----------------------:|:----------------|\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         | ![Case!](symbole/caseDcocher.png) Prestidigitation      |\n|![Case!](symbole/caseDcocher.png) **Niveau 3**         |![Case!](symbole/caseDcocher.png) Détection de la Magie |\n|![Case!](symbole/caseDcocher.png) **Niveau 5**         |![Case!](symbole/caseDcocher.png) Pas Brumeux |\n\n> Ces sorts sont toujours préparés pour vous. Vous pouvez les lancer une fois sans utiliser d’emplacement de sort, et vous regagnez cette capacité après un **repos long**. Vous pouvez aussi les lancer avec vos emplacements de sorts si vous en possédez. L’**Intelligence**, la **Sagesse**, ou le **Charisme** (au choix) est votre caractéristique d’incantation pour ces sorts.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l'**Elfique**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Gnome des Forêts  
+nom 1: Gnome des Forêts  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/gnome_foret1.png  
+symbole 2: symbole/gnome_foret2.png  
+symbole 3: symbole/gnome_foret3.png  
+symbole 4: symbole/gnome_foret4.png  
+taille image: symbole/taille.png  
+taille: Petit  
+age image: symbole/age.png  
+age: Jusqu’à 425 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/gnome_foret.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Gnomes des Forêts** sont des créatures rusées et insaisissables, vivant cachés dans les bois profonds et les clairières enchantées. Leurs petites tailles et leur intelligence vive leur permettent d’échapper aux prédateurs et de confondre les intrus grâce à la magie et aux illusions.\n\nCurieux et débrouillards, ils ont une affinité naturelle pour la nature et la magie féerique. Ils peuvent communiquer avec les animaux et manipuler leur environnement à l’aide de sorts subtils.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Petit (environ 90–120 cm)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ruse gnome** : Vous avez **avantage sur les jets de sauvegarde d’Intelligence, de Sagesse et de Charisme** contre la magie.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Lignée Gnome : Gnome des Forêts**\n\n> En tant que **Gnome des Forêts**, vous possédez des dons magiques inspirés du monde féerique.\n\n>>> - **Magie naturelle** : Vous connaissez le **tour de magie "Illusion Mineure"**.\n\n| Niveau de personnage | Sorts accordés |\n|:-----------------------:|:----------------|\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         | ![Case!](symbole/caseDcocher.png) Illusion Mineure      |\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         |![Case!](symbole/caseDcocher.png) Parler aux Animaux |\n\n> **Parler aux Animaux** est toujours préparé pour vous. Vous pouvez le lancer un nombre de fois égal à votre **bonus de maîtrise** sans utiliser d’emplacement de sort, et vous regagnez toutes les utilisations après un **repos long**. Vous pouvez aussi le lancer avec vos emplacements de sorts si vous en possédez. L’**Intelligence**, la **Sagesse**, ou le **Charisme** (au choix) est votre caractéristique d’incantation pour ces sorts.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Gnome**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Gnome des Roches  
+nom 1: Gnome des Roches  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/gnome_roche1.png  
+symbole 2: symbole/gnome_roche2.png  
+symbole 3: symbole/gnome_roche3.png  
+symbole 4: symbole/gnome_roche4.png  
+taille image: symbole/taille.png  
+taille: Petit  
+age image: symbole/age.png  
+age: Jusqu’à 425 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/gnome_roche.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Gnomes des Roches** sont des inventeurs nés et des maîtres artisans. Habitués aux tunnels et aux souterrains, ils ont développé une ingéniosité hors pair et une affinité avec la mécanique et la magie pratique. Leur curiosité naturelle les pousse à expérimenter sans cesse, et ils trouvent toujours un moyen de bricoler des objets fascinants à partir de presque rien.\n\nIls sont souvent plus robustes que leurs cousins des forêts et possèdent un esprit logique qui les rend excellents dans les domaines de la science, de l’alchimie et de l’ingénierie magique.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Petit (environ 90–120 cm)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Ruse gnome** : Vous avez **avantage sur les jets de sauvegarde d’Intelligence, de Sagesse et de Charisme** contre la magie.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Lignée Gnome : Gnome des Roches**\n\n> En tant que **Gnome des Roches**, vous possédez un esprit vif et un talent naturel pour les inventions.\n\n>>> - **Magie artisanale** : Vous connaissez les **tours de magie "Réparation" et "Prestidigitation"**.\n>>> - **Ingénierie Gnome** : Vous pouvez passer **10 minutes** à canaliser la magie de **Prestidigitation** dans un **petit objet mécanique** (CA 5, 1 PV), comme un jouet, un allume-feu ou une boîte à musique.\n\n| Niveau de personnage | Sorts accordés |\n|:-----------------------:|:----------------|\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         | ![Case!](symbole/caseDcocher.png) Réparation, Prestidigitation |\n\n> Vous pouvez avoir **jusqu’à trois dispositifs actifs** à la fois. Ils cessent de fonctionner au bout de **8 heures**, si vous les démontez, ou s’ils sont détruits.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Gnome**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Goliath - Héritage des Nuages  
+nom 1: Goliath - Héritage des Nuages  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/goliath1.png  
+symbole 2: symbole/goliath2.png  
+symbole 3: symbole/goliath3.png  
+symbole 4: symbole/goliath4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 10,5 m (35', 7c)  
+image: image/goliath_nuage.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Goliaths héritiers des Géants des Nuages** possèdent une affinité naturelle avec l’air et le mouvement. Leur ascendance leur confère une stature élancée, des yeux qui semblent refléter le ciel, et une capacité innée à se déplacer en un clin d'œil. Aventuriers dans l’âme, ils cherchent sans cesse à s’élever au-delà des sommets, à la manière des géants célestes dont ils descendent.\n\nLeur héritage leur offre un contrôle instinctif sur l’espace qui les entoure, leur permettant de se téléporter sur de courtes distances, échappant ainsi aux dangers ou surprenant leurs adversaires.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 10,5 m (35 pieds, 7 cases)\n\n**Taille :** Moyen (environ 2,10–2,40 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Ascendance des Géants** : Vous êtes issu d’une lignée de géants et bénéficiez d’un **don surnaturel** lié à votre héritage. Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez toutes les utilisations après un **repos long**.\n\n>>> **Bond des Nuages** (*Géant des Nuages*) : En utilisant une **action bonus**, vous vous **téléportez magiquement jusqu’à 9 m (30 pieds)** vers un espace inoccupé que vous voyez.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Forme Imposante** (*niveau 5*) : En utilisant une **action bonus**, vous pouvez temporairement grandir et atteindre une **taille Grande** si l’espace autour de vous le permet.\n\n>> - Cette transformation dure **10 minutes** ou jusqu’à ce que vous l’arrêtiez (**aucune action requise**).\n>> - Pendant cette période, vous avez **avantage sur les tests de Force**, et votre vitesse augmente de **3 m (10 pieds, 2 cases)**.\n>> - Une fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Puissance Goliath** : Vous avez **avantage sur les tests d’aptitude pour échapper à l’état Agrippé**, et vous comptez comme une **taille supérieure** pour déterminer votre **capacité de charge** et ce que vous pouvez soulever.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Géant**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Goliath - Héritage du Feu  
+nom 1: Goliath - Héritage du Feu  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/goliath1.png  
+symbole 2: symbole/goliath2.png  
+symbole 3: symbole/goliath3.png  
+symbole 4: symbole/goliath4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 10,5 m (35', 7c)  
+image: image/goliath_feu.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Goliaths héritiers des Géants du Feu** possèdent une puissance brute et une résilience inébranlable, héritées des maîtres des forges et des volcans. Leurs corps robustes arborent souvent des tons rougeâtres ou cendreux, et leur peau semble irradier une chaleur intense.\n\nConnus pour leur endurance et leur agressivité en combat, ces Goliaths peuvent enflammer leurs attaques, transformant leurs coups en assauts dévastateurs. Animés par une force intérieure brûlante, ils poursuivent leurs objectifs avec une détermination implacable.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 10,5 m (35 pieds, 7 cases)\n\n**Taille :** Moyen (environ 2,10–2,40 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Ascendance des Géants** : Vous êtes issu d’une lignée de géants et bénéficiez d’un **don surnaturel** lié à votre héritage. Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez toutes les utilisations après un **repos long**.\n\n>>> **Brûlure du Feu** (*Géant du Feu*) : Lorsque vous **touchez une cible avec une attaque et lui infligez des dégâts**, vous pouvez ajouter **1d10 dégâts de feu** à l’attaque.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Forme Imposante** (*niveau 5*) : En utilisant une **action bonus**, vous pouvez temporairement grandir et atteindre une **taille Grande** si l’espace autour de vous le permet.\n\n>> - Cette transformation dure **10 minutes** ou jusqu’à ce que vous l’arrêtiez (**aucune action requise**).\n>> - Pendant cette période, vous avez **avantage sur les tests de Force**, et votre vitesse augmente de **3 m (10 pieds, 2 cases)**.\n>> - Une fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Puissance Goliath** : Vous avez **avantage sur les tests d’aptitude pour échapper à l’état Agrippé**, et vous comptez comme une **taille supérieure** pour déterminer votre **capacité de charge** et ce que vous pouvez soulever.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Géant**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Goliath - Héritage du Givre  
+nom 1: Goliath - Héritage du Givre  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/goliath1.png  
+symbole 2: symbole/goliath2.png  
+symbole 3: symbole/goliath3.png  
+symbole 4: symbole/goliath4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 10,5 m (35', 7c)  
+image: image/goliath_givre.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Goliaths héritiers des Géants du Givre** portent en eux la force implacable des tempêtes glacées. Leurs corps robustes, aux teintes pâles ou bleutées, semblent avoir été sculptés dans la glace elle-même. Leur ascendance leur confère une résistance au froid et une capacité à frapper leurs ennemis d’une morsure glaciale qui ralentit leur mouvement.\n\nFroids et méthodiques, ces Goliaths sont souvent considérés comme implacables en combat, utilisant leur puissance pour immobiliser leurs adversaires et les dominer par la force brute.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 10,5 m (35 pieds, 7 cases)\n\n**Taille :** Moyen (environ 2,10–2,40 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Ascendance des Géants** : Vous êtes issu d’une lignée de géants et bénéficiez d’un **don surnaturel** lié à votre héritage. Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez toutes les utilisations après un **repos long**.\n\n>>> **Morsure du Givre** (*Géant du Givre*) : Lorsque vous **touchez une cible avec une attaque et lui infligez des dégâts**, vous pouvez ajouter **1d6 dégâts de froid** à l’attaque et **réduire sa vitesse de 3 m (10 pieds, 2 cases)** jusqu’au début de votre prochain tour.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Forme Imposante** (*niveau 5*) : En utilisant une **action bonus**, vous pouvez temporairement grandir et atteindre une **taille Grande** si l’espace autour de vous le permet.\n\n>> - Cette transformation dure **10 minutes** ou jusqu’à ce que vous l’arrêtiez (**aucune action requise**).\n>> - Pendant cette période, vous avez **avantage sur les tests de Force**, et votre vitesse augmente de **3 m (10 pieds, 2 cases)**.\n>> - Une fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Puissance Goliath** : Vous avez **avantage sur les tests d’aptitude pour échapper à l’état Agrippé**, et vous comptez comme une **taille supérieure** pour déterminer votre **capacité de charge** et ce que vous pouvez soulever.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Géant**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Goliath - Héritage des Collines  
+nom 1: Goliath - Héritage des Collines  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/goliath1.png  
+symbole 2: symbole/goliath2.png  
+symbole 3: symbole/goliath3.png  
+symbole 4: symbole/goliath4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 10,5 m (35', 7c)  
+image: image/goliath_colline.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Goliaths héritiers des Géants des Collines** incarnent la force brute et l’endurance inébranlable de leurs ancêtres. Massifs et imposants, ils possèdent une carrure robuste et une puissance physique redoutable. Contrairement à d’autres lignées de géants, ceux des collines se concentrent sur la domination physique pure, utilisant leur force écrasante pour renverser leurs ennemis.\n\nDotés d’un esprit pragmatique et d’une résilience exceptionnelle, ils affrontent les défis avec une détermination sans faille, comptant sur leur robustesse pour survivre aux combats les plus acharnés.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 10,5 m (35 pieds, 7 cases)\n\n**Taille :** Moyen (environ 2,10–2,40 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Ascendance des Géants** : Vous êtes issu d’une lignée de géants et bénéficiez d’un **don surnaturel** lié à votre héritage. Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez toutes les utilisations après un **repos long**.\n\n>>> **Chute des Collines** (*Géant des Collines*) : Lorsque vous **touchez une créature de taille Large ou plus petite avec une attaque**, vous pouvez lui infliger des dégâts et la **faire tomber à terre (Prone)**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Forme Imposante** (*niveau 5*) : En utilisant une **action bonus**, vous pouvez temporairement grandir et atteindre une **taille Grande** si l’espace autour de vous le permet.\n\n>> - Cette transformation dure **10 minutes** ou jusqu’à ce que vous l’arrêtiez (**aucune action requise**).\n>> - Pendant cette période, vous avez **avantage sur les tests de Force**, et votre vitesse augmente de **3 m (10 pieds, 2 cases)**.\n>> - Une fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Puissance Goliath** : Vous avez **avantage sur les tests d’aptitude pour échapper à l’état Agrippé**, et vous comptez comme une **taille supérieure** pour déterminer votre **capacité de charge** et ce que vous pouvez soulever.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Géant**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Goliath - Héritage de la Pierre  
+nom 1: Goliath - Héritage de la Pierre  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/goliath1.png  
+symbole 2: symbole/goliath2.png  
+symbole 3: symbole/goliath3.png  
+symbole 4: symbole/goliath4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 10,5 m (35', 7c)  
+image: image/goliath_pierre.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Goliaths héritiers des Géants de Pierre** possèdent une endurance inébranlable et une affinité instinctive avec la roche et les montagnes. Leur peau, souvent marbrée de gris et de brun, semble presque sculptée dans la pierre elle-même. Leur héritage leur confère une résilience hors du commun, leur permettant d’ignorer une partie des dommages qu’ils subissent.\n\nD’un tempérament stoïque et réfléchi, ces Goliaths sont connus pour leur patience et leur force intérieure. Ils se tiennent fermes face aux tempêtes et aux conflits, incarnant la stabilité et la puissance de la montagne.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 10,5 m (35 pieds, 7 cases)\n\n**Taille :** Moyen (environ 2,10–2,40 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Ascendance des Géants** : Vous êtes issu d’une lignée de géants et bénéficiez d’un **don surnaturel** lié à votre héritage. Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez toutes les utilisations après un **repos long**.\n\n>>> **Endurance de la Pierre** (*Géant de Pierre*) : Lorsque vous **subissez des dégâts**, vous pouvez utiliser votre **réaction** pour **réduire les dégâts subis** de **1d12 + votre modificateur de Constitution**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Forme Imposante** (*niveau 5*) : En utilisant une **action bonus**, vous pouvez temporairement grandir et atteindre une **taille Grande** si l’espace autour de vous le permet.\n\n>> - Cette transformation dure **10 minutes** ou jusqu’à ce que vous l’arrêtiez (**aucune action requise**).\n>> - Pendant cette période, vous avez **avantage sur les tests de Force**, et votre vitesse augmente de **3 m (10 pieds, 2 cases)**.\n>> - Une fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Puissance Goliath** : Vous avez **avantage sur les tests d’aptitude pour échapper à l’état Agrippé**, et vous comptez comme une **taille supérieure** pour déterminer votre **capacité de charge** et ce que vous pouvez soulever.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Géant**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Goliath - Héritage des Tempêtes  
+nom 1: Goliath - Héritage des Tempêtes  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/goliath1.png  
+symbole 2: symbole/goliath2.png  
+symbole 3: symbole/goliath3.png  
+symbole 4: symbole/goliath4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 10,5 m (35', 7c)  
+image: image/goliath_tempete.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Goliaths héritiers des Géants des Tempêtes** portent en eux la puissance déchaînée des orages et de la mer en furie. Leurs corps semblent parcourus d’une énergie instable, et leurs yeux brillent souvent d’une lueur orageuse. Leur ascendance leur confère la capacité de riposter violemment aux attaques, projetant des décharges tonitruantes sur ceux qui osent les blesser.\n\nMystérieux et imposants, ces Goliaths sont souvent perçus comme des forces de la nature elles-mêmes, avançant avec la détermination implacable du tonnerre grondant.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 10,5 m (35 pieds, 7 cases)\n\n**Taille :** Moyen (environ 2,10–2,40 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Ascendance des Géants** : Vous êtes issu d’une lignée de géants et bénéficiez d’un **don surnaturel** lié à votre héritage. Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous regagnez toutes les utilisations après un **repos long**.\n\n>>> **Tonnerre des Tempêtes** (*Géant des Tempêtes*) : Lorsque vous **subissez des dégâts d’une créature située à 18 m (60 pieds) ou moins**, vous pouvez utiliser votre **réaction** pour lui infliger **1d8 dégâts de tonnerre**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Forme Imposante** (*niveau 5*) : En utilisant une **action bonus**, vous pouvez temporairement grandir et atteindre une **taille Grande** si l’espace autour de vous le permet.\n\n>> - Cette transformation dure **10 minutes** ou jusqu’à ce que vous l’arrêtiez (**aucune action requise**).\n>> - Pendant cette période, vous avez **avantage sur les tests de Force**, et votre vitesse augmente de **3 m (10 pieds, 2 cases)**.\n>> - Une fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Puissance Goliath** : Vous avez **avantage sur les tests d’aptitude pour échapper à l’état Agrippé**, et vous comptez comme une **taille supérieure** pour déterminer votre **capacité de charge** et ce que vous pouvez soulever.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Géant**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Halfelin  
+nom 1: Halfelin  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/halfling1.png  
+symbole 2: symbole/halfling2.png  
+symbole 3: symbole/halfling3.png  
+symbole 4: symbole/halfling4.png  
+taille image: symbole/taille.png  
+taille: Petit  
+age image: symbole/age.png  
+age: Jusqu’à 150 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/halfling.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Halfelins** sont un peuple chaleureux, joyeux et profondément attaché à la communauté et à la famille. Ils vivent souvent dans des villages tranquilles nichés dans des vallées fertiles, préférant une vie simple et confortable. Malgré leur petite taille, ils possèdent une incroyable capacité d’adaptation et une chance légendaire qui semble les protéger du danger.\n\nNombre d’Halfelins, animés par une curiosité insatiable, quittent leur foyer pour explorer le vaste monde. Leur petite stature leur permet de se faufiler aisément dans les foules et d’éviter l’attention des plus grands peuples, ce qui en fait d’excellents voyageurs, espions ou voleurs… mais aussi d’adorables compagnons.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Petit (environ 60–90 cm)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Courageux** : Vous avez **avantage sur les jets de sauvegarde** contre l’état **Effrayé**.\n\n> **Agilité halfeline** : Vous pouvez **vous déplacer à travers l’espace de toute créature** d’une taille supérieure à la vôtre, mais vous **ne pouvez pas vous arrêter dans cet espace**.\n\n> **Chanceux** : Lorsque vous obtenez un **1 naturel** sur un **test de d20**, vous pouvez **relancer le dé**. Vous devez utiliser le second résultat, même s’il s’agit d’un autre **1**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Discrétion naturelle** : Vous pouvez utiliser l’action **Se Cacher** même si vous n’êtes dissimulé que par une créature **d’au moins une taille supérieure à la vôtre**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et le **Halfelin**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Humain  
+nom 1: Humain  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/humain1.png  
+symbole 2: symbole/humain2.png  
+symbole 3: symbole/humain3.png  
+symbole 4: symbole/humain4.png  
+taille image: symbole/taille.png  
+taille: Moyen ou Petit  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/humain.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Humains** sont l’une des espèces les plus répandues et diversifiées du multivers. Grâce à leur ambition et leur ingéniosité, ils ont su s’adapter à presque tous les environnements et bâtir des civilisations florissantes. Leur désir d’accomplissement et leur capacité à innover en font des explorateurs, des érudits, des guerriers et des leaders aux motivations variées.\n\nIssus d’une myriade de cultures et de traditions, les humains peuvent être de toutes origines et croyances. On les retrouve aussi bien dans des métropoles tentaculaires que dans de petits villages reculés, s’intégrant aux autres peuples ou forgeant leur propre destinée.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (1,50–2,10 m) ou Petit (60–120 cm), à choisir à la création\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Ingéniosité humaine** : À la fin d’un **repos long**, vous gagnez **Inspiration Héroïque**.\n\n> **Aptitude polyvalente** : Vous gagnez la maîtrise d’**une compétence de votre choix**.\n\n> **Adaptabilité** : Vous gagnez un **don d’Origine** de votre choix.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n### **Dons d’Origine suggérés**\n\n| Don | Effet |\n|:-----------------------|:----------------|\n| **Attaquant Sauvage** | Une fois par tour, lorsque vous touchez une cible avec une arme, vous pouvez relancer les dés de dégâts et utiliser le meilleur résultat. |\n| **Expertise (Compétences/ Outils)** | Vous gagnez la maîtrise de **trois compétences ou outils** de votre choix. |\n| **Bagarreur de Taverne** | Vos coups à mains nues infligent **1d4 dégâts contondants**, et vous pouvez **pousser** une cible de **1,50 m (5 pieds)** après une attaque. |\n| **Robuste** | Votre total de **points de vie maximum** augmente de **2 fois votre niveau**, et de **2 PV supplémentaires par niveau** gagné. |\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et une langue supplémentaire de votre choix.\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Orc  
+nom 1: Orc  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/orc1.png  
+symbole 2: symbole/orc2.png  
+symbole 3: symbole/orc3.png  
+symbole 4: symbole/orc4.png  
+taille image: symbole/taille.png  
+taille: Moyen  
+age image: symbole/age.png  
+age: Jusqu’à 80 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/orc.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Orcs** sont un peuple marqué par l’héritage de Gruumsh, leur dieu créateur. Forgés pour survivre aux environnements les plus hostiles, ils possèdent une endurance exceptionnelle et une volonté indomptable. Même lorsqu’ils rejettent Gruumsh, les orcs conservent sa force et sa détermination, s’efforçant de prouver leur valeur par leurs actions.\n\nPhysiquement massifs et imposants, ils sont connus pour leur peau grise, leurs oreilles pointues et leurs canines proéminentes. Qu’ils soient nomades ou installés dans de grandes tribus, les orcs vivent avec une intensité qui les pousse à toujours aller de l’avant, affrontant chaque défi avec une férocité inégalée.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (environ 1,80–2,10 m)\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Poussée d’adrénaline** : Vous pouvez utiliser une **action bonus** pour effectuer l’action **Se Déplacer en Sprint (Dash)**.\n\n>> - Lorsque vous faites cela, vous gagnez des **points de vie temporaires** égaux à votre **bonus de maîtrise**.\n>> - Vous pouvez utiliser cette capacité un nombre de fois égal à votre **bonus de maîtrise**, et vous récupérez toutes les utilisations après un **repos court ou long**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **36 m (120 pieds, 24 cases)**.\n\n> **Endurance implacable** : Lorsque vous êtes **réduit à 0 points de vie**, mais pas tué sur le coup, vous pouvez **tomber à 1 point de vie à la place**.\n\n>> - Une fois cette capacité utilisée, elle ne peut être réutilisée qu’après un **repos long**.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l'**Orc**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Tieffelin - Héritage Abyssal  
+nom 1: Tieffelin - Héritage Abyssal  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/tieffelin1.png  
+symbole 2: symbole/tieffelin2.png  
+symbole 3: symbole/tieffelin3.png  
+symbole 4: symbole/tieffelin4.png  
+taille image: symbole/taille.png  
+taille: Moyen ou Petit  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/tieffelin_abyssal.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Tieffelins Abyssaux** sont marqués par l’anarchie et la fureur du Chaos primordial. Portant les stigmates du **Pandémonium**, du **Chaos abyssal** ou des souffrances de **Carcéri**, ils sont souvent imprévisibles et dotés d’un tempérament fougueux. Leurs traits démoniaques varient, allant de **cornes tordues**, de **griffes** ou de **crocs saillants**, à une peau écarlate ou cendreuse, parfois recouverte de poils ou de rugosités infernales.\n\nMarqués par le **poison et la maladie**, ils possèdent une affinité naturelle pour les énergies corruptrices des Abysses, ce qui leur confère une **résistance aux poisons** et des pouvoirs occultes pernicieux.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (1,50–2,10 m) ou Petit (90–120 cm), à choisir à la création\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Présence surnaturelle** : Vous connaissez le **tour de magie "Thaumaturgie"**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Héritage Fiélon : Abyssal**\n\n> En tant que **Tieffelin Abyssal**, vous êtes immunisé aux influences démoniaques et maniez une magie corrompue.\n\n>>> - **Résistance abyssale** : Vous avez **résistance aux dégâts de poison**.\n>>> - **Magie démoniaque** : Vous maîtrisez le **tour de magie "Jet de Poison"**.\n\n| Niveau de personnage | Sorts accordés |\n|:-----------------------:|:----------------|\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         | ![Case!](symbole/caseDcocher.png) Jet de Poison |\n|![Case!](symbole/caseDcocher.png) **Niveau 3**         |![Case!](symbole/caseDcocher.png) Rayon de Maladie |\n|![Case!](symbole/caseDcocher.png) **Niveau 5**         |![Case!](symbole/caseDcocher.png) Paralysie |\n\n> Ces sorts sont toujours préparés pour vous. Vous pouvez les lancer une fois sans utiliser d’emplacement de sort, et vous regagnez cette capacité après un **repos long**. Vous pouvez aussi les lancer avec vos emplacements de sorts si vous en possédez. L’**Intelligence**, la **Sagesse**, ou le **Charisme** (au choix) est votre caractéristique d’incantation pour ces sorts.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l'**Infernal**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Tieffelin - Héritage Chthonien  
+nom 1: Tieffelin - Héritage Chthonien  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/tieffelin1.png  
+symbole 2: symbole/tieffelin2.png  
+symbole 3: symbole/tieffelin3.png  
+symbole 4: symbole/tieffelin4.png  
+taille image: symbole/taille.png  
+taille: Moyen ou Petit  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/tieffelin_chthonien.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Tieffelins Chthoniens** sont marqués par l’influence des plans sombres et corrompus tels que **Hadès, Géhenne et Carcéri**. Leur apparence oscille entre le cadavérique et l’étrangement séduisant, avec une peau cireuse, des yeux sans pupilles ou des traits inspirés des **hags, succubes ou yugoloths**. Certains dégagent une aura de mort, tandis que d’autres semblent flotter à la lisière du réel.\n\nImprégnés de la magie des ombres et de la souffrance, ils possèdent une **résistance aux énergies nécrotiques** et peuvent manipuler la force vitale pour prolonger leur propre existence.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (1,50–2,10 m) ou Petit (90–120 cm), à choisir à la création\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Présence surnaturelle** : Vous connaissez le **tour de magie "Thaumaturgie"**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Héritage Fiélon : Chthonien**\n\n> En tant que **Tieffelin Chthonien**, vous portez en vous l’énergie froide et implacable des plans inférieurs.\n\n>>> - **Résistance chthonienne** : Vous avez **résistance aux dégâts nécrotiques**.\n>>> - **Magie des ombres** : Vous maîtrisez le **tour de magie "Main Spectrale"**.\n\n| Niveau de personnage | Sorts accordés |\n|:-----------------------:|:----------------|\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         | ![Case!](symbole/caseDcocher.png) Main Spectrale |\n|![Case!](symbole/caseDcocher.png) **Niveau 3**         |![Case!](symbole/caseDcocher.png) Faux-Vie |\n|![Case!](symbole/caseDcocher.png) **Niveau 5**         |![Case!](symbole/caseDcocher.png) Rayon d’Affaiblissement |\n\n> Ces sorts sont toujours préparés pour vous. Vous pouvez les lancer une fois sans utiliser d’emplacement de sort, et vous regagnez cette capacité après un **repos long**. Vous pouvez aussi les lancer avec vos emplacements de sorts si vous en possédez. L’**Intelligence**, la **Sagesse**, ou le **Charisme** (au choix) est votre caractéristique d’incantation pour ces sorts.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l'**Infernal**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)
+
+nom: Tieffelin - Héritage Infernal  
+nom 1: Tieffelin - Héritage Infernal  
+type: Espèce  
+recto: arriere_plan/espece.png  
+symbole 1: symbole/tieffelin1.png  
+symbole 2: symbole/tieffelin2.png  
+symbole 3: symbole/tieffelin3.png  
+symbole 4: symbole/tieffelin4.png  
+taille image: symbole/taille.png  
+taille: Moyen ou Petit  
+age image: symbole/age.png  
+age: Jusqu’à 100 ans\n\n![Ligne!](symbole/LigneD2.png)  
+deplacement image: symbole/depla.png  
+deplacement: 9 m (30', 6c)  
+image: image/tieffelin_infernal.png  
+dv: Objet magique lié\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)\n\n![Ligne!](symbole/LigneD.png)  
+dv image: symbole/vide.png  
+description: \n\n---\n\nLes **Tieffelins Infernaux** portent la marque du **Baasu**, du **royaume de Géhenne** et des **Neuf Enfers de Baator**. Descendants des démons de l’ordre et de la ruse, ils arborent souvent des **cornes recourbées**, une **queue effilée**, et leur peau peut être d’un rouge profond, d’un noir charbon ou d’un bronze métallique. Certains dégagent une odeur de soufre ou laissent derrière eux une légère chaleur résiduelle.\n\nIls maîtrisent les flammes des enfers et possèdent une **résistance au feu**, ainsi que des capacités magiques leur permettant de riposter violemment lorsqu’ils sont menacés.\n\n---\n\n### **Caractéristiques principales**\n\n**Type de créature :** Humanoïde\n\n**Vitesse :** 9 m (30 pieds, 6 cases)\n\n**Taille :** Moyen (1,50–2,10 m) ou Petit (90–120 cm), à choisir à la création\n\n**Poids** : ![Ligne!](symbole/LigneD.png)\n\n---\n\n### **Traits raciaux**\n\n> **Vision dans le noir** : Vous voyez dans l’obscurité jusqu’à une distance de **18 m (60 pieds, 12 cases)**.\n\n> **Présence surnaturelle** : Vous connaissez le **tour de magie "Thaumaturgie"**.\n\n>>>>>>>>>>>>>>>>![Ligne!](symbole/LigneD.png)\n\n> **Héritage Fiélon : Infernal**\n\n> En tant que **Tieffelin Infernal**, vous portez en vous l’empreinte des diables et des flammes de l’enfer.\n\n>>> - **Résistance infernale** : Vous avez **résistance aux dégâts de feu**.\n>>> - **Magie des flammes** : Vous maîtrisez le **tour de magie "Tir de Feu"**.\n\n| Niveau de personnage | Sorts accordés |\n|:-----------------------:|:----------------|\n|![Case!](symbole/caseDcocher.png) **Niveau 1**         | ![Case!](symbole/caseDcocher.png) Tir de Feu |\n|![Case!](symbole/caseDcocher.png) **Niveau 3**         |![Case!](symbole/caseDcocher.png) Réprimande Infernal |\n|![Case!](symbole/caseDcocher.png) **Niveau 5**         |![Case!](symbole/caseDcocher.png) Obscurité |\n\n> Ces sorts sont toujours préparés pour vous. Vous pouvez les lancer une fois sans utiliser d’emplacement de sort, et vous regagnez cette capacité après un **repos long**. Vous pouvez aussi les lancer avec vos emplacements de sorts si vous en possédez. L’**Intelligence**, la **Sagesse**, ou le **Charisme** (au choix) est votre caractéristique d’incantation pour ces sorts.\n\n---\n\n### **Langues**\n\n> - Vous parlez, lisez et écrivez le **Commun** et l'**Infernal**\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)

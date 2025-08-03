@@ -1,0 +1,143 @@
+nom: Chest
+nom 1: Chest
+prix: **5 gp**
+prix 1: **5 gp**
+poids: **25 lb**\n\n**(12.5 kg)**
+poids 1: **25 lb**\n\n**(12.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/chest.png
+description: \n\n---\n\nA large wooden container reinforced with iron bindings, ideal for storing heavy or bulky items.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Holds up to **340 liters**, **200 kg (440 lb)**\n\n>- **Protection**: Protects contents from environmental damage, but not theft unless locked (lock sold separately).\n\n>- **Use**: Suitable for transporting treasure, supplies, or important gear across long journeys.
+
+nom: Fine Clothes
+nom 1: Fine Clothes
+prix: **15 gp**
+prix 1: **15 gp**
+poids: **6 lb**\n\n**(3 kg)**
+poids 1: **6 lb**\n\n**(3 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/fine_clothes.png
+description: \n\n---\n\nHigh-quality clothing made of expensive fabrics, tailored for noble gatherings and formal events.\n\n---\n\n**Mechanics**:\n\n>- **Effect**: Grants Advantage on **Charisma (Persuasion)** checks during formal or noble events where appearance is key.\n\n>- **Use**: Suitable for impressing dignitaries, gaining entry to exclusive events, or portraying a noble character.
+
+nom: Ink
+nom 1: Ink
+prix: **10 gp**
+prix 1: **10 gp**
+poids: **0.2 lb**\n\n**(0.1 kg)**
+poids 1: **0.2 lb**\n\n**(0.1 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/ink.png
+description: \n\n---\n\nA small bottle of high-quality ink, used for writing, drawing, or scribing magical spells.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: A bottle provides enough ink to write approximately **500 pages** of text.\n\n>- **Use**: Essential for creating written documents, scrolls, or magical inscriptions.\n\n>- **Special**: Required by Wizards for scribing spells into a spellbook.
+
+nom: Ink Pen (5)
+nom 1: Ink Pen (5)
+prix: **1 sp**
+prix 1: **1 sp**
+poids: **0.5 lb**\n\n**(0.25 kg)**
+poids 1: **0.5 lb**\n\n**(0.25 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/ink_pen.png
+description: \n\n---\n\nA small, finely crafted pen designed for use with ink. Essential for writing documents and magical texts.\n\n---\n\n**Mechanics**:\n\n>- **Use**: Requires **Ink** to function.\n\n>- **Effect**: Can be used to write letters, notes, or any written form of communication.\n\n>- **Special**: Allows precise writing for magical purposes when combined with high-quality ink.
+
+nom: Lamp
+nom 1: Lamp
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/lamp.png
+description: \n\n---\n\nA small metal lamp designed to illuminate dark areas by burning oil.\n\n---\n\n**Mechanics**:\n\n>- **Light Radius**: Casts **Bright Light** in a **15 ft (4.5 m, 3c)** radius and **Dim Light** for an additional **30ft (9 m, 6c)**.\n\n>- **Fuel Consumption**: Requires **Oil** to function. A single flask of oil lasts for **6 hours** of continuous use.\n\n>- **Use**: Provides light in dark environments and can be placed on a surface or carried in one hand.\n\n>- **Special**: Can be extinguished or relit as a **Utilize action**.\n\n>- **Effect**: Useful for exploring dungeons, caves, or any area with poor visibility.
+
+nom: Map Case
+nom 1: Map Case
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/map_case.png
+description: \n\n---\n\nA sturdy cylindrical case designed to protect maps from damage due to weather or rough handling. It’s an essential tool for explorers and cartographers.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Holds up to **10 sheets of paper** or **rolled maps**.\n\n>- **Effect**: Maps stored in a map case are protected from **water damage**, creasing, or tearing.\n\n>- **Usage**: Can be attached to a **belt**, **backpack**, or **saddle** for easy access.
+
+nom: Scroll Case
+nom 1: Scroll Case
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/scroll_case.png
+description: \n\n---\n\nA carefully crafted tube designed to hold and protect delicate scrolls or parchments. It is widely used by wizards, scholars, and archivists.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Holds up to **5 scrolls** or **rolled parchments**.\n\n>- **Effect**: Scrolls stored in the case are protected from **water**, **fire damage**, or tearing.\n\n>- **Usage**: The case can be secured to a **belt** or **backpack** and allows quick access to scrolls in combat or exploration.
+
+nom: Oil (4)
+nom 1: Oil (4)
+prix: **4 sp**
+prix 1: **4 sp**
+poids: **4 lb**\n\n**(2 kg)**
+poids 1: **4 lb**\n\n**(2 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)<br><br>![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/oil4.png
+description: \n\n---\n\nA versatile flask of oil, useful for lighting fires, fueling lanterns, or creating slick surfaces.\n\n---\n\n**Mechanics**:\n\n>- **Dousing Targets**: Throwing oil as part of an attack covers a creature or object within **20ft (6 m, 4c)**. The target must succeed on a **DC 8 **Dexterity** saving throw** (plus your **Dexterity** modifier and Proficiency Bonus) or be covered in oil. If ignited, the target takes an additional **5 Fire damage**.\n\n>- **Creating Slick Surfaces**: Pouring oil as a **Utilize action** creates a slippery **5 ft (1.5 m, 1c)** square area.\n\n>- **Fuel Source**: A flask of oil burns for **6 hours** in a lamp or lantern.
+
+nom: Paper (5)
+nom 1: Paper (5)
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **0.5 lb**\n\n**(0.25 kg)**
+poids 1: **0.5 lb**\n\n**(0.25 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/paper.png
+description: \n\n---\n\nA single sheet of high-quality paper, used for writing, drawing, or crafting documents.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Each sheet can hold up to **250 handwritten words**.\n\n>- **Utility**: Essential for recording notes, drawing maps, or drafting letters.\n\n>- **Effect**: Serves as a simple yet vital tool for adventurers needing documentation or communication.\n\n---\n\n **Note**: \n\n![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)
+
+nom: Parchment (5)
+nom 1: Parchment (5)
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **0.5 lb**\n\n**(0.25 kg)**
+poids 1: **0.5 lb**\n\n**(0.25 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/parchment.png
+description: \n\n---\n\nA durable sheet of treated animal skin, often used for writing in harsher conditions.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Each sheet can hold up to **250 handwritten words**.\n\n>- **Utility**: Ideal for field notes, contracts, or durable messages.\n\n>- **Effect**: More resilient than paper, making it suitable for outdoor or rugged use.\n\n---\n\n **Note**: \n\n![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)![Case!](symbole/cadreLine.png)
+
+nom: Perfume
+nom 1: Perfume
+prix: **5 gp**
+prix 1: **5 gp**
+poids: **0.1 lb**\n\n**(0.05 kg)**
+poids 1: **0.1 lb**\n\n**(0.05 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/perfume.png
+description: \n\n---\n\nA vial of fragrant liquid designed to enhance your presence or mask unpleasant odors.\n\n---\n\n**Mechanics**:\n\n>- **Duration**: A single application lasts for **1 hour**.\n\n>- **Effect**: Grants **Advantage** on **Charisma (Persuasion)** checks made to influence Indifferent Humanoids within **5 ft (1.5 m, 1c)**.\n\n>- **Use**: Ideal for social interactions, formal occasions, or disguising unsavory smells.\n\n>- **Special**: May attract or repel creatures sensitive to smells.
+
+nom: Tinderbox
+nom 1: Tinderbox
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/tinderbox.png
+description: \n\n---\n\nA small container holding the tools necessary to kindle a fire.\n\n---\n\n**Mechanics**:\n\n>- **Contents**: Includes flint, fire steel, and lightly oiled tinder.**Effect**: \n\n> - As a **Bonus Action**, light a **candle**, **lamp**, **lantern**, or **torch**.\n\n> - Lighting any other exposed fuel (e.g., campfire) takes **1 minute**.\n\n>- **Use**: Essential for survival in dark dungeons, wilderness camping, or preparing light sources.

@@ -1,0 +1,284 @@
+nom: Bâton
+nom 1: Bâton
+prix: **2 pa**
+prix 1: **2 pa**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attcont.png
+attca: **1d6 contondant**
+image: image/Arme/quarterstaff.png
+description: \n\n---\n\nLe bâton est une solide perche en bois utilisée à la fois comme bâton de marche et comme arme. Prisés par les moines, druides et voyageurs, c'est un outil polyvalent et fiable en combat.\n\n---\n\n**Mécanique** : Inflige **1d6 dégâts contondants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Polyvalent** : Cette propriété permet au bâton d’infliger **1d8** dégâts lorsqu’il est manié à deux mains au lieu d’une.\n\n---\n\n**Avantage de maître d’arme**\n\n**Renverser** – Si vous frappez une créature avec cette arme, vous pouvez la forcer à effectuer un **jet de sauvegarde de Constitution**. Le DD de ce jet est égal à 8 + votre **Bonus de Maîtrise** + votre modificateur de **Force**. En cas d’échec, la créature est mise **À Terre**, offrant un avantage aux attaquants au corps à corps contre elle et imposant un désavantage aux attaques à distance la visant.
+
+nom: Dague
+nom 1: Dague
+prix: **2 po**
+prix 1: **2 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d4 perforant**
+image: image/Arme/dagger.png
+description: \n\n---\n\nLa dague est une petite lame aiguisée conçue pour des frappes rapides et précises. Arme polyvalente et facile à dissimuler, elle est fréquemment utilisée par les voleurs, éclaireurs et autres combattants nécessitant une option de dernier recours.\n\n---\n\n**Mécanique** : Inflige **1d4 dégâts perforants**. Ajoutez votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Finesse** : Lors d’une attaque avec cette arme, vous pouvez choisir d’utiliser votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Le même modificateur doit être utilisé pour les deux.\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une seconde arme légère comme **action bonus**. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf si ce modificateur est négatif.\n\n>- **Lancer** : Vous pouvez lancer la dague pour effectuer une attaque à distance. Sa portée normale est de **6 m (20', 4c)** et sa portée maximale est de **18 m (60', 12c)**. Attaquer au-delà de la portée normale impose un désavantage au jet d’attaque.\n\n---\n\n**Avantage de maître d’arme**\n\n**Entaille** – Vous pouvez effectuer l’attaque supplémentaire de la propriété Légère dans le cadre de l’**action d’Attaque** au lieu d’une **action bonus**. Cette attaque supplémentaire ne peut être effectuée qu’une fois par tour.
+
+nom: Dague (2)
+nom 1: Dague (2)
+prix: **4 po**
+prix 1: **4 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/attper.png
+attca: **1d4 perforant**
+image: image/Arme/dagger.png
+description: \n\n---\n\nLa dague est une petite lame aiguisée conçue pour des frappes rapides et précises. Arme polyvalente et facile à dissimuler, elle est fréquemment utilisée par les voleurs, éclaireurs et autres combattants nécessitant une option de dernier recours.\n\n---\n\n**Mécanique** : Inflige **1d4 dégâts perforants**. Ajoutez votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Finesse** : Lors d’une attaque avec cette arme, vous pouvez choisir d’utiliser votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Le même modificateur doit être utilisé pour les deux.\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une seconde arme légère comme **action bonus**. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf si ce modificateur est négatif.\n\n>- **Lancer** : Vous pouvez lancer la dague pour effectuer une attaque à distance. Sa portée normale est de **6 m (20', 4c)** et sa portée maximale est de **18 m (60', 12c)**. Attaquer au-delà de la portée normale impose un désavantage au jet d’attaque.\n\n---\n\n**Avantage de maître d’arme**\n\n**Entaille** – Vous pouvez effectuer l’attaque supplémentaire de la propriété Légère dans le cadre de l’**action d’Attaque** au lieu d’une **action bonus**. Cette attaque supplémentaire ne peut être effectuée qu’une fois par tour.
+
+nom: Dague (5)
+nom 1: Dague (5)
+prix: **10 po**
+prix 1: **10 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/attper.png
+attca: **1d4 perforant**
+image: image/Arme/dagger.png
+description: \n\n---\n\nLa dague est une petite lame aiguisée conçue pour des frappes rapides et précises. Arme polyvalente et facile à dissimuler, elle est fréquemment utilisée par les voleurs, éclaireurs et autres combattants nécessitant une option de dernier recours.\n\n---\n\n**Mécanique** : Inflige **1d4 dégâts perforants**. Ajoutez votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Finesse** : Lors d’une attaque avec cette arme, vous pouvez choisir d’utiliser votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Le même modificateur doit être utilisé pour les deux.\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une seconde arme légère comme **action bonus**. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf si ce modificateur est négatif.\n\n>- **Lancer** : Vous pouvez lancer la dague pour effectuer une attaque à distance. Sa portée normale est de **6 m (20', 4c)** et sa portée maximale est de **18 m (60', 12c)**. Attaquer au-delà de la portée normale impose un désavantage au jet d’attaque.\n\n---\n\n**Avantage de maître d’arme**\n\n**Entaille** – Vous pouvez effectuer l’attaque supplémentaire de la propriété Légère dans le cadre de l’**action d’Attaque** au lieu d’une **action bonus**. Cette attaque supplémentaire ne peut être effectuée qu’une fois par tour.
+
+nom: Gourdin
+nom 1: Gourdin
+prix: **1 pa**
+prix 1: **1 pa**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attcont.png
+attca: **1d4 contondant**
+image: image/Arme/club.png
+description: \n\n---\n\nLe gourdin est un bâton court et lourd utilisé comme une arme simple mais efficace. Facile à fabriquer et à transporter, il est souvent apprécié des paysans et des aventuriers pour sa simplicité et son accessibilité.\n\n---\n\n**Mécanique** : Inflige **1d4 dégâts contondants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une seconde arme légère comme **action bonus**. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf si ce modificateur est négatif.\n\n---\n\n**Avantage de maître d’arme**\n\n**Ralenti** – Si vous frappez une créature avec cette arme et infligez des dégâts, vous pouvez réduire sa vitesse de **3 m (10', 2c)** jusqu’au début de votre prochain tour. Cet effet ne se cumule pas avec d'autres effets de ralentissement.
+
+nom: Hachette
+nom 1: Hachette
+prix: **5 po**
+prix 1: **5 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **1d6 tranchant**
+image: image/Arme/handaxe.png
+description: \n\n---\n\nLa hachette est une arme légère et polyvalente pouvant être utilisée au corps à corps ou lancée contre un ennemi. Elle est souvent portée par les aventuriers pour sa double utilité en tant qu'outil et arme. \n\n---\n\n**Mécanique** : Inflige **1d6 dégâts tranchants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une seconde arme légère comme **action bonus**. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf si ce modificateur est négatif.\n\n>- **Lancer** : La hachette peut être utilisée comme une arme à distance. Sa portée normale est de **6 m (20', 4c)** et sa portée maximale est de <br>**18 m (60', 12c)**. Les attaques au-delà de la portée normale subissent un désavantage.\n\n---\n\n**Avantage de maître d’arme**\n\n**Vexer** – Si vous frappez une créature avec cette arme, vous obtenez **Avantage** sur votre prochain jet d’attaque contre cette créature avant la fin de votre prochain tour.
+
+nom: Hachette (4)
+nom 1: Hachette (4)
+prix: **20 po**
+prix 1: **20 po**
+poids: **4 kg**\n\n**(8 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/atttran.png
+attca: **1d6 tranchant**
+image: image/Arme/handaxe.png
+description: \n\n---\n\nLa hachette est une arme légère et polyvalente pouvant être utilisée au corps à corps ou lancée contre un ennemi. Elle est souvent portée par les aventuriers pour sa double utilité en tant qu'outil et arme. \n\n---\n\n**Mécanique** : Inflige **1d6 dégâts tranchants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une seconde arme légère comme **action bonus**. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf si ce modificateur est négatif.\n\n>- **Lancer** : La hachette peut être utilisée comme une arme à distance. Sa portée normale est de **6 m (20', 4c)** et sa portée maximale est de <br>**18 m (60', 12c)**. Les attaques au-delà de la portée normale subissent un désavantage.\n\n---\n\n**Avantage de maître d’arme**\n\n**Vexer** – Si vous frappez une créature avec cette arme, vous obtenez **Avantage** sur votre prochain jet d’attaque contre cette créature avant la fin de votre prochain tour.
+
+nom: Javeline
+nom 1: Javeline
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d6 perforant**
+image: image/Arme/javelin.png
+description: \n\n---\n\nLa javeline est une lance légère conçue pour être jetée avec précision. Son design aérodynamique le rend efficace à moyenne distance tout en restant utilisable au corps à corps.\n\n---\n\n**Mécanique** : Inflige **1d6 dégâts perforants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lancer** : La javeline peut être utilisé comme une arme à distance. Sa portée normale est de **9 m (30', 6c)** et sa portée maximale est de  <br>**36 m (120', 24c)** . Les attaques au-delà de la portée normale subissent un désavantage.\n\n---\n\n**Avantage de maître d’arme**\n\n**Ralenti** – Si vous frappez une créature avec cette arme et infligez des dégâts, vous pouvez réduire sa vitesse de **3 m (10', 2c)** jusqu’au début de votre prochain tour. Cet effet ne se cumule pas avec d'autres effets de ralentissement.
+
+nom: Javeline (6)
+nom 1: Javeline (6)
+prix: **3 po**
+prix 1: **3 po**
+poids: **6 kg**\n\n**(12 lb)**
+poids 1: **6 kg**\n\n**(12 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/attper.png
+attca: **1d6 perforant**
+image: image/Arme/javelin.png
+description: \n\n---\n\nLa javeline est une lance légère conçue pour être jetée avec précision. Son design aérodynamique le rend efficace à moyenne distance tout en restant utilisable au corps à corps.\n\n---\n\n**Mécanique** : Inflige **1d6 dégâts perforants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lancer** : La javeline peut être utilisé comme une arme à distance. Sa portée normale est de **9 m (30', 6c)** et sa portée maximale est de  <br>**36 m (120', 24c)** . Les attaques au-delà de la portée normale subissent un désavantage.\n\n---\n\n**Avantage de maître d’arme**\n\n**Ralenti** – Si vous frappez une créature avec cette arme et infligez des dégâts, vous pouvez réduire sa vitesse de **3 m (10', 2c)** jusqu’au début de votre prochain tour. Cet effet ne se cumule pas avec d'autres effets de ralentissement.
+
+nom: Javeline (8)
+nom 1: Javeline (8)
+prix: **4 po**
+prix 1: **4 po**
+poids: **8 kg**\n\n**(16 lb)**
+poids 1: **8 kg**\n\n**(16 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)\n\n![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/attper.png
+attca: **1d6 perforant**
+image: image/Arme/javelin.png
+description: \n\n---\n\nLa javeline est une lance légère conçue pour être jetée avec précision. Son design aérodynamique le rend efficace à moyenne distance tout en restant utilisable au corps à corps.\n\n---\n\n**Mécanique** : Inflige **1d6 dégâts perforants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lancer** : La javeline peut être utilisé comme une arme à distance. Sa portée normale est de **9 m (30', 6c)** et sa portée maximale est de  <br>**36 m (120', 24c)** . Les attaques au-delà de la portée normale subissent un désavantage.\n\n---\n\n**Avantage de maître d’arme**\n\n**Ralenti** – Si vous frappez une créature avec cette arme et infligez des dégâts, vous pouvez réduire sa vitesse de **3 m (10', 2c)** jusqu’au début de votre prochain tour. Cet effet ne se cumule pas avec d'autres effets de ralentissement.
+
+nom: Lance
+nom 1: Lance
+prix: **1 po**
+prix 1: **1 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d6 perforant**
+image: image/Arme/spear.png
+description: \n\n---\n\nLa lance est une arme polyvalente conçue pour des attaques à la fois en mêlée et à distance. Sa longueur permet de maintenir une certaine portée, tout en restant légère et maniable.\n\n---\n\n**Mécanique** : Inflige **1d6 dégâts perforants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lancer** : Vous pouvez lancer la lance pour effectuer une attaque à distance. Sa portée normale est de **6 m (20', 4c)** et sa portée maximale est de **18 m (60', 12c)**. Les attaques au-delà de la portée normale subissent un désavantage.\n\n>- **Polyvalente** : Lorsqu’elle est maniée à deux mains, la lance inflige **1d8** dégâts lorsqu’il est manié à deux mains au lieu d’une.\n\n---\n\n**Avantage de maître d’arme**\n\n**Saper** – Si vous frappez une créature avec cette arme, celle-ci subit un désavantage à son prochain jet d’attaque avant le début de votre prochain tour.
+
+nom: Marteau Léger
+nom 1: Marteau Léger
+prix: **2 po**
+prix 1: **2 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attcont.png
+attca: **1d4 contondant**
+image: image/Arme/light_hammer.png
+description: \n\n---\n\nLe marteau léger est un outil compact et polyvalent, qui s’avère tout aussi utile en combat que dans des tâches artisanales. Sa taille le rend facile à manier et à lancer.\n\n---\n\n**Mécanique** : Inflige **1d4 dégâts contondants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une seconde arme légère comme **action bonus**. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf si ce modificateur est négatif.\n\n>- **Lancer** : Le marteau léger peut être utilisé comme une arme à distance. Sa portée normale est de **6 m (20', 4c)** et sa portée maximale est de <br>**18 m (60', 12c)**. Les attaques au-delà de la portée normale subissent un désavantage.\n\n---\n\n**Avantage de maître d’arme**\n\n**Entaille** – Vous pouvez effectuer l’attaque supplémentaire de la propriété Légère dans le cadre de l’**action d’Attaque** au lieu d’une **action bonus**. Cette attaque supplémentaire ne peut être effectuée qu’une fois par tour.
+
+nom: Masse d'armes
+nom 1: Masse d'armes
+prix: **5 po**
+prix 1: **5 po**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attcont.png
+attca: **1d6 contondant**
+image: image/Arme/mace.png
+description: \n\n---\n\nLa masse d'armes est une arme solide conçue pour asséner des coups puissants. Son embout métallique garantit des frappes destructrices, ce qui en fait une arme prisée par les guerriers et les clercs.\n\n---\n\n**Mécanique** : Inflige **1d6 dégâts contondants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** : Aucune.\n\n---\n\n**Avantage de maître d’arme**\n\n**Saper** – Si vous frappez une créature avec cette arme, celle-ci subit un désavantage à son prochain jet d’attaque avant le début de votre prochain tour.
+
+nom: Massue
+nom 1: Massue
+prix: **2 pa**
+prix 1: **2 pa**
+poids: **5 kg**\n\n**(10 lb)**
+poids 1: **5 kg**\n\n**(10 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attcont.png
+attca: **1d8 contondant**
+image: image/Arme/greatclub.png
+description: \n\n---\n\nLa massue est une arme massive et imposante, souvent utilisée par les aventuriers misant sur leur force brute pour vaincre leurs ennemis. \n\n---\n\n**Mécanique** : Inflige **1d8 dégâts contondants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée, rendant incompatible l’usage d’un bouclier ou d’une autre arme.\n\n---\n\n**Avantage de maître d’arme**\n\n**Repousser** – Si vous frappez une créature avec cette arme, vous pouvez la pousser jusqu’à **3 m (10', 2c)** en ligne droite, à condition qu’elle soit de taille Grande ou inférieure.
+
+nom: Serpe
+nom 1: Serpe
+prix: **1 po**
+prix 1: **1 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de corps à corps courante
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **1d4 tranchant**
+image: image/Arme/sickle.png
+description: \n\n---\n\nLa serpe, à l'origine un outil agricole, est dotée d'une lame courbée qui la rend redoutable dans les combats rapprochés. \n\n---\n\n**Mécanique** : Inflige **1d4 dégâts tranchants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une seconde arme légère comme **action bonus**. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf si ce modificateur est négatif.\n\n---\n\n**Avantage de maître d’arme**\n\n**Entaille** – Vous pouvez effectuer l’attaque supplémentaire de la propriété Légère dans le cadre de l’**action d’Attaque** au lieu d’une **action bonus**. Cette attaque supplémentaire ne peut être effectuée qu’une fois par tour.

@@ -1,0 +1,201 @@
+pour l'aleatoitre relance je ne veux pas que tu utilise les parametre precedent! si ces un sort offanssif il doit s'abatre sur un ennemis tirasi aleatoirement!
+je veux juste une image original qui représente le sujet de la FICHE ce doit être une Image détourée avec bords fondus (alpha fade-out" ou "alpha edge fade" ou Floating artwork with soft edge mask, c’est-à-dire une illustration flottante avec masque de bord flou), Une image à vignette douce sur fond transparent, Avec les bords floutés ou estompés en dégradé de transparence, Pour qu’elle s’intègre harmonieusement dans une page sans bord dur visible qui serra collet au verso de la carte  du sort en format 9/16e, Toutes les images générées doivent être visuellement cohérentes avec la classe actuelle, dans l’univers de Donjons & Dragons, plus précisément celui de Féerune, en s’inspirant exclusivement des panthéons, symboles, tenues et esthétiques propres à cet univers. 
+
+[CONVENTIONS]
+- Réponds uniquement par l’image du sujet de la FICHE demandée aucun texte!
+- Si un champ est fourni dans la fiche, tu l’utilises tel quel (pas d’aléatoire).
+- Si un champ est absent, choisis-le aléatoirement selon les tables aléatoires
+  et les pondérations précisées plus bas.
+
+[STYLE VISUEL]
+- Illustration PNG 9:16, fond transparent, contours évanescents (alpha edge fade) et
+  micro-vignette douce, pour qu’elle se fonde sur carte!
+- Réalisme héroïque cohérent avec l’esthétique officielle de D&D 5e /
+  Forgotten Realms : armures, glyphes, étoffes, architecture inspirées de Faerûn
+  (Côte des Épées, Cormyr, etc.)
+- Palette riche mais naturelle ; éclairage dramatique à la manière des artbooks Wizards of the Coast
+
+[CAS PARTICULIERS]
+• Objet : montre l’objet en plan rapproché, posé sur fond neutre brumeux.  
+• Scène : cadre narratif (intérieur taverne, forêt, donjon) ; profondeur atmosphérique.  
+• 1 personnage : focus plein-pied sur le héros.  
+• >1 personnage : composition triangulaire, protagoniste au centre ; silhouettes nettes au 1ᵉʳ plan, arrière-plan flouté léger.  
+• Ennemi/monstre : créature isolée, angle légèrement en contre-plongée, posture dynamique.
+
+[ALÉATOIRE]
+Utilise les tables ci-dessous ; si plusieurs tirages sont nécessaires (p. ex. groupe, ennemie), assure-toi de ne pas répéter deux fois exactement la même combinaison.
+
+
+### Table A – Genre du personnage (1d20)
+
+|  d20 | Sexe      | Poids % |
+| ---: | --------- | :-----: |
+|  1-7 | **Femme** |   65 %  |
+| 8-20 | **Homme** |   35 %  |
+
+---
+
+### Table B-0 – Catégorie de race (1d20)
+
+|  d20 | Dirige vers…                 | Poids % |
+| ---: | ---------------------------- | :-----: |
+|  1-6 | **Sous-table B-PHB**         |   30 %  |
+| 7-20 | **Sous-table B-Suppléments** |   70 %  |
+
+#### Sous-table B-PHB (1d20)
+
+Lancer un D20, de 1-5 utiliser la Sous-table B-PHB de 6-20, utiliser la Sous-table B-Suppléments
+
+### Sous-table B-PHB
+
+|   d20 | Race PHB (choix précis quand il existe des variantes) | Poids % |
+| ----: | ----------------------------------------------------- | :-----: |
+|     1 | **Humain**                                            |    5    |
+|     2 | **Demi-elfe**                                         |    5    |
+|     3 | **Demi-orc**                                          |    5    |
+|     4 | **Drakéide**                                          |    5    |
+|     5 | **Tieffelin**                                         |    5    |
+|     6 | **Nain des collines**                                 |    5    |
+|     7 | **Nain des montagnes**                                |    5    |
+|     8 | **Elfe des bois**                                     |    5    |
+|     9 | **haut-elfe**                                         |    5    |
+|    10 | **Gnome des forêts**                                  |    5    |
+|    11 | **Gnome des roches**                                  |    5    |
+|    12 | **Halfelin pied-léger**                               |    5    |
+|    13 | **Halfelin robuste**                                  |    5    |
+| 14-20 | **Relancez ce d20**                                   |    —    |
+
+
+
+#### Sous-table B-Suppléments
+
+| #       | Race (FR) – source officielle                           | Points |
+| ------- | ------------------------------------------------------- | ------ |
+| 01-02   | **Aarakocra** (*EE PC*)                                 | 2      |
+| 03-04   | **Aasimar** (*VGtM / MoM*)                              | 2      |
+| 05-06   | **Astral elf** (*SJ IS*)                                | 2      |
+| 07-08   | **Autognome** (*SJ IS*)                                 | 2      |
+| 09-10   | **Bugbear / Gobelours** (*VGtM / MoM*)                  | 2      |
+| 11-12   | **Centaur** (*GGtR / MoM*)                              | 2      |
+| 13-14   | **Changeling** (*ERftLW / MoM*)                         | 2      |
+| 15-16   | **Conil (Harengon)** (*WBtW*)                           | 2      |
+| 17-18   | **Dhampire** (*VRGtR*)                                  | 2      |
+| 19-20   | **Duergar** (*MoM*)                                     | 2      |
+| 21-22   | **Éladrin** (*DMG / MoM*)                               | 2      |
+| 23-24   | **Elfe aquatique** (*VGtM / MoM*)                       | 2      |
+| 25-26   | **Elfe noir / Drow (suppl.)** (*SCAG / MoM*)            | 2      |
+| 27-28   | **Fadette (Fairy)** (*WBtW / MoM*)                      | 2      |
+| 29-30   | **Féral (Shifter)** (*ERftLW*)                          | 2      |
+| 31-32   | **Firbolg** (*VGtM / MoM*)                              | 2      |
+| 33-34   | **Forgelier (Warforged)** (*ERftLW*)                    | 2      |
+| 35-36   | **Génasi – air** (*EE PC / MoM*)                        | 2      |
+| 37-38   | **Génasi – eau**                                        | 2      |
+| 39-40   | **Génasi – feu**                                        | 2      |
+| 41-42   | **Génasi – terre**                                      | 2      |
+| 43-44   | **Giff** (*SJ IS*)                                      | 2      |
+| 45-46   | **Githyanki** (*MToF / MoM*)                            | 2      |
+| 47-48   | **Githzerai** (*MToF / MoM*)                            | 2      |
+| 49-50   | **Gnome des profondeurs (Svirfneblin)** (*EE PC / MoM*) | 2      |
+| 51-52   | **Gnome des roches** (*MMoM*)                           | 2      |
+| 53-54   | **Gobelin** (*VGtM / MoM*)                              | 2      |
+| 55-56   | **Goliath** (*EE PC / MoM*)                             | 2      |
+| 57-58   | **Hadozee** (*SJ IS*)                                   | 2      |
+| 59-60   | **Halfelin sagespectre (Ghostwise)** (*SCAG*)           | 2      |
+| 61-62   | **Hiboulin (Owlin)** (*S\:CoC*)                         | 2      |
+| 63-64   | **Hobgobelin** (*VGtM / MoM*)                           | 2      |
+| 65-66   | **Homme-lézard** (*VGtM / MoM*)                         | 2      |
+| 67-68   | **Kalashtar** (*ERftLW*)                                | 2      |
+| 69-70   | **Kenku** (*VGtM / MoM*)                                | 2      |
+| 71-72   | **Kender** (*SotDQ*)                                    | 2      |
+| 73-74   | **Kobold** (*VGtM / MoM*)                               | 2      |
+| 75-76   | **Leonin** (*MOoT*)                                     | 2      |
+| 77-78   | **Locathah** (*LRoW*)                                   | 2      |
+| 79-80   | **Lignée sur mesure (Custom Lineage)** (*TCoE*)         | 2      |
+| 81-82   | **Loxodon** (*GGtR*)                                    | 2      |
+| 83-84   | **Minotaure** (*GGtR / MoM*)                            | 2      |
+| 85-86   | **Orc (joueur)** (*VGtM / MoM*)                         | 2      |
+| 87-88   | **Plasmoid** (*SJ IS*)                                  | 2      |
+| 89-90   | **Dragonborn Draconblood** (*EGtW*)                     | 2      |
+| 91-92   | **Dragonborn Ravenite** (*EGtW*)                        | 2      |
+| 93-94   | **Ressuscité (Reborn)** (*VRGtR*)                       | 2      |
+| 95-96   | **Sang maudit (Hexblood)** (*VRGtR*)                    | 2      |
+| 97-98   | **Satyre** (*MOoT*)                                     | 2      |
+| 99-100  | **Shadar-kai** (*MToF / MoM*)                           | 2      |
+| 101-102 | **Simic Hybrid** (*GGtR*)                               | 2      |
+| 103-104 | **Tabaxi** (*VGtM / MoM*)                               | 2      |
+| 105-106 | **Thri-kreen** (*SJ IS*)                                | 2      |
+| 107-108 | **Torte (Tortle)** (*TPM*)                              | 2      |
+| 109-110 | **Triton** (*VGtM / MoM*)                               | 2      |
+| 111-112 | **Vedalken** (*GGtR*)                                   | 2      |
+| 113-114 | **Yuan-ti (pur-sang)** (*VGtM / MoM*)                   | 2      |
+
+
+---
+
+### Table C – Ennemi CR 0 ¼ (1d20)
+
+| d20 | Ennemi                                     | Poids % |
+| --: | ------------------------------------------ | :-----: |
+|   1 | Spectre                                    |    5    |
+|   2 | Acolyte                                    |    5    |
+|   3 | Araignéegéante                             |    5    |
+|   4 | Loup                                       |    5    |
+|   5 | Vase grise                                 |    5    |
+|   6 | Brutacien                                  |    5    |
+|   7 | Chauve-souris géante                       |    5    |
+|   8 | Diablotin                                  |    5    |
+|   9 | Duergar                                    |    5    |
+|  10 | Goule                                      |    5    |
+|  11 | Loup sanguinaire                           |    5    |
+|  12 | Dretch                                     |    5    |
+|  13 | Garde de waterdeep                         |    5    |
+|  14 | Duodrone                                   |    5    |
+|  15 | Kobold                                     |    5    |
+|  16 | Kenku                                      |    5    |
+|  17 | Esprit follet                              |    5    |
+|  18 | Gobelin                                    |    5    |
+|  19 | Ankheg                                     |    5    |
+|  20 | Nuée d'insecte                             |    5    |
+
+
+**Utilisation**
+
+1. **Protagoniste** : si la fiche ne précise ni race ni genre, lancez sur les tables A & B pour creer le perssonage du dessin
+2. **Ennemi(s)** : si il faux un ennemie piochez dans la table C
+
+
+++++++++++++++++++++++++ FICHE ++++++++++++++++++++++++
+
+
+
+
+nom: **Colonne de Flamme (Clerc)**  
+nom 1: **Colonne de Flamme (Clerc)**  
+classe: **Clerc Domaine de la Lumière<br>(p258 MdJ 24)**  
+classe 1: **Clerc Domaine de la Lumière**  
+incantation: INCANTATION\n\n1 Action  
+portee: PORTÉE\n\n**18 m (60', 12c)**  
+composantes: *V, S, M (une pincée de soufre)*  
+duree: DURÉE\n\nInstantanée  
+type: Évocation de Niveau 5  
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Colonne_Flamme_Clerc_Domaine_de_la_Lumière.png  
+symbole 1: symbole/Évocation.png  
+symbole 4: symbole/Clerc.png  
+description: \n\n---\n\nUne **colonne verticale de flammes radieuses** s’abat depuis le ciel, ciblant un point à portée.<br><br>Elle crée un **Cylindre de 3 m (10', 2c) de rayon et de 12 m (40', 8c) de haut**. Chaque créature prise dans la zone doit effectuer un **jet de sauvegarde de Dextérité**.\n\n>>>- **Échec** : la créature subit **5d6 dégâts de feu** **+ 5d6 dégâts radiants**.\n>>>- **Réussite** : elle subit **la moitié des dégâts totaux**.<br>\n\nLe sort associe la **puissance destructrice du feu sacré** à la **lumière divine**, frappant les ennemis d’un châtiment céleste fulgurant.<br><br>Idéal pour **purifier un groupe compact de créatures**, surtout dans un espace vertical ou resserré.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un **emplacement de niveau supérieur**, les **dégâts de feu** et les **dégâts radiants** augmentent chacun de **1d6 par niveau au-delà du 5<sup>e</sup>**.\n\n| ![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|![Case!](symbole/caseDcocher.png)|\n|----------|----------|----------|----------|\n| **Niv 6** | **Niv 7** | **Niv 8** | **Niv 9** |\n| **6d6+6d6** | **7d6+7d6** | **8d6+8d6** | **9d6+9d6** |
+
+
+
+
+
+++++++++++++++++++++++++ FIN ++++++++++++++++++++++++
+
+
+rappel important:
+je veux juste une image original qui représente le sort ce doit être une Image détourée avec bords fondus (alpha fade-out" ou "alpha edge fade" ou Floating artwork with soft edge mask, c’est-à-dire une illustration flottante avec masque de bord flou), Une image à vignette douce sur fond transparent, Avec les bords floutés ou estompés en dégradé de transparence, Pour qu’elle s’intègre harmonieusement dans une page sans bord dur visible qui serra collet au verso de la carte  du sort en format 9/16e, Toutes les images générées doivent être visuellement cohérentes avec la classe de la FICHE, dans l’univers de Donjons & Dragons, plus précisément celui de Féerune, en s’inspirant exclusivement des panthéons, symboles, tenues et esthétiques propres à cet univers. Si un personnage est représenté dans une image, il doit obligatoirement correspondre à la classe de la FICHE. la scene doit etre entierement visible ou au mieux!
+
+ATTENTION
+En premier avant de commencer a faire l'image! Ecris moi le resultat detailler de tes jet sur les table aleatoire avec le pourcentage de chance du choix de chaque element. Puis en deuxieme ecris moi le nom de l'image a recuper dans le champimage de la Fiche. 
+
+Puis en troisieme dessine l'image et SURTOUT n'oublie pas les effet magique et fait vraiment attention l'Image doit etre bien centrais et fait attention au 4 bord de l'image qui ne doivent pas faire de coupur net et qui doivent avoir un bon bords floutés ou estompés en dégradé de transparence !!!alpha edge fade parfait!!!. 

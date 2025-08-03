@@ -1,0 +1,406 @@
+nom: Dés
+nom 1: Dés
+prix: **1 pa**
+prix 1: **1 pa**
+poids: **0.25 kg**\n\n**(0.5 lb)**
+poids 1: **0.25 kg**\n\n**(0.5 lb)**
+type: Ensemble de jeu
+charge:
+image: image/Tools/dice_set.png
+description: \n\n---\n\nEnsemble de dés utilisés dans les jeux de hasard, particulièrement prisé des joueurs et des amateurs de tavernes.\n\n---\n\n**Capacité**: Sagesse\n\n---\n\n**Utilisation**:\n\n>- Détecter une tricherie (**DD 10**)\n\n>- Gagner grâce à une habile manipulation (**DD 20**)
+
+nom: Échecs Draconiques
+nom 1: Échecs Draconiques
+prix: **1 po**
+prix 1: **1 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Ensemble de jeu
+charge:
+image: image/Tools/dragonchess_set.png
+description: \n\n---\n\nJeu stratégique inspiré des batailles mythiques entre dragons et mortels, apprécié des intellectuels et stratèges.\n\n---\n\n**Capacité**: Sagesse\n\n---\n\n**Utilisation**:\n\n>- Détecter une tricherie (**DD 10**)\n\n>- Remporter une partie grâce à une stratégie supérieure (**DD 20**)
+
+nom: Jeu de cartes
+nom 1: Jeu de cartes
+prix: **5 pa**
+prix 1: **5 pa**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Ensemble de jeu
+charge:
+image: image/Tools/playing_cards.png
+description: \n\n---\n\nPaquet de cartes utilisé dans des jeux de stratégie, de chance et de bluff, offrant d'infinies possibilités de divertissement ou de profit.\n\n---\n\n**Capacité**: Sagesse\n\n---\n\n**Utilisation**:\n\n>- Détecter une tricherie (**DD 10**)\n\n>- Remporter une partie grâce au bluff ou à une stratégie réfléchie (**DD 20**)
+
+nom: Jeu des Dragons
+nom 1: Jeu des Dragons
+prix: **1 po**
+prix 1: **1 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Ensemble de jeu
+charge:
+image: image/Tools/three_dragon_ante.png
+description: \n\n---\n\nJeu de cartes basé sur les légendes draconiques, mêlant chance et stratégie pour surclasser ses adversaires et accumuler des richesses.\n\n---\n\n**Capacité**: Sagesse\n\n---\n\n**Utilisation**:\n\n>- Détecter une tricherie (**DD 10**)\n\n>- Gagner la partie en maîtrisant l'équilibre entre risque et récompense (**DD 20**)
+
+nom: Chalemie
+nom 1: Chalemie
+prix: **2 po**
+prix 1: **2 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/shawm.png
+description: \n\n---\n\nInstrument à vent au son perçant et audacieux, souvent utilisé lors de festivités ou de performances martiales.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer un air festif traditionnel (**DD 10**)\n\n>- Improviser une mélodie énergisante pour rallier les esprits (**DD 15**)
+
+nom: Cor
+nom 1: Cor
+prix: **3 po**
+prix 1: **3 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/horn.png
+description: \n\n---\n\nLe cor produit un son audacieux et cuivré, idéal pour les signaux de bataille ou les annonces cérémonielles.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer un appel aux armes (**DD 10**)\n\n>- Improviser un signal commandant pour rallier des alliés (**DD 15**)
+
+nom: Cornemuse
+nom 1: Cornemuse
+prix: **30 po**
+prix 1: **30 po**
+poids: **3 kg**\n\n**(6 lb)**
+poids 1: **3 kg**\n\n**(6 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/bagpipes.png
+description: \n\n---\n\nInstrument au son puissant et résonnant, capable d'inspirer les alliés ou d'intimider les ennemis, souvent utilisé lors de performances martiales ou cérémonielles.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer un air connu (**DD 10**)\n\n>- Improviser une mélodie martiale (**DD 15**)
+
+nom: Flûte
+nom 1: Flûte
+prix: **2 po**
+prix 1: **2 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/flute.png
+description: \n\n---\n\nInstrument à vent polyvalent, la flûte produit des sons doux et mélodieux, idéale pour des sérénades ou des occasions festives.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer un air connu (**DD 10**)\n\n>- Improviser une mélodie joyeuse pour remonter le moral (**DD 15**)
+
+nom: Flûte de Pan
+nom 1: Flûte de Pan
+prix: **12 po**
+prix 1: **12 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/pan_flute.png
+description: \n\n---\n\nLa flûte de Pan, composée de plusieurs tubes de tailles différentes, émet des sons harmonieux évoquant la nature et le mysticisme.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer une mélodie douce pour calmer les créatures (**DD 10**)\n\n>- Improviser un air mystérieux (**DD 15**)
+
+nom: Luth
+nom 1: Luth
+prix: **35 po**
+prix 1: **35 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/lute.png
+description: \n\n---\n\nInstrument à cordes connu pour sa richesse et sa polyvalence, le luth est un favori des bardes et ménestrels pour raconter des histoires captivantes.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer une ballade populaire (**DD 10**)\n\n>- Improviser une mélodie émouvante pour captiver l'audience (**DD 15**)
+
+nom: Tambour
+nom 1: Tambour
+prix: **6 po**
+prix 1: **6 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/drum.png
+description: \n\n---\n\nLe tambour, élément essentiel des percussions, permet de maintenir le rythme, d'inspirer les troupes ou d'enrichir les performances avec ses sons profonds et résonants.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer un rythme régulier pour maintenir l'ordre (**DD 10**)\n\n>- Improviser un rythme complexe pour inspirer une foule (**DD 15**)
+
+nom: Lyre
+nom 1: Lyre
+prix: **30 po**
+prix 1: **30 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/lyre.png
+description: \n\n---\n\nLa lyre, instrument à cordes raffiné, est souvent utilisée dans les cours et les temples pour ses sons délicats capables de calmer ou d'inspirer.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer une mélodie douce pour apaiser les émotions (**DD 10**)\n\n>- Improviser un hymne inspirant (**DD 15**)
+
+nom: Tympanon
+nom 1: Tympanon
+prix: **25 po**
+prix 1: **25 po**
+poids: **5 kg**\n\n**(10 lb)**
+poids 1: **5 kg**\n\n**(10 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/dulcimer.png
+description: \n\n---\n\nLe tympanon, instrument à cordes frappées, produit un son mélodique et apaisant parfait pour accompagner des récits ou des moments de détente.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer une mélodie apaisante (**DD 10**)\n\n>- Improviser une mélodie relaxante pour réduire les tensions (**DD 15**)
+
+nom: Viole
+nom 1: Viole
+prix: **30 po**
+prix 1: **30 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Instrument de musique
+charge:
+image: image/Tools/viol.png
+description: \n\n---\n\nLa viole, instrument à cordes, est capable de produire des mélodies envoûtantes parfaites pour sublimer des récits dramatiques ou des performances artistiques.\n\n---\n\n**Capacité**: Charisme\n\n---\n\n**Utilisation**:\n\n>- Jouer une mélodie émotive pour captiver un public (**DD 10**)\n\n>- Improviser une mélodie pour amplifier une performance dramatique (**DD 15**)
+
+nom: Accessoires de déguisement
+nom 1: Accessoires de déguisement
+prix: **25 po**
+prix 1: **25 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Outils
+charge:
+image: image/Tools/disguise_kit.png
+description: \n\n---\n\nLes accessoires de déguisement contiennent tout ce qu’il faut pour modifier votre apparence, idéal pour se fondre dans la masse ou adopter une nouvelle identité.\n\n---\n\n**Caractéristique**: Charisme\n\n---\n\n**Utiliser**:\n\n>- Appliquer un maquillage (**DD 10**)\n\n>- **Fabrication**:\n\n| **Objet**    | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain** |\n|--------------|-------------------------|--------------------------|--------------------|-------------------|\n| Costume      | 2 po                   | 1 jour                  | 12                 | Urbain, marchés  |
+
+nom: Instrument de navigateur
+nom 1: Instrument de navigateur
+prix: **25 po**
+prix 1: **25 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Outils
+charge:
+image: image/Tools/navigators_tools.png
+description: \n\n---\n\nLes instruments de navigateur sont essentiels pour tracer des routes et naviguer dans des environnements dangereux, sur terre comme en mer.\n\n---\n\n**Caractéristique**: Sagesse\n\n---\n\n**Utiliser**:\n\n>- Tracer un itinéraire (**DD 10**)\n\n>- Déterminer une position en observant les étoiles (**DD 15**)
+
+nom: Matériel d'empoisonneur
+nom 1: Matériel d'empoisonneur
+prix: **50 po**
+prix 1: **50 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Outils
+charge:
+image: image/Tools/poisoners_kit.png
+description: \n\n---\n\nLe matériel d'empoisonneur sert à créer, appliquer et détecter des poisons, souvent utilisé par des assassins et des espions.\n\n---\n\n**Caractéristique**: Intelligence\n\n---\n\n**Utiliser**:\n\n>- Détecter un objet empoisonné (**DD 10**)\n\n>- **Fabrication**:\n\n| **Objet**       | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain** |\n|-----------------|-------------------------|--------------------------|--------------------|-------------------|\n| Poison basique  | 50 po                  | 2 jours                 | 15                 | Forêt, marécages |
+
+nom: Matériel d'herboriste
+nom 1: Matériel d'herboriste
+prix: **5 po**
+prix 1: **5 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Outils
+charge:
+image: image/Tools/herbalism_kit.png
+description: \n\n---\n\nLe matériel d’herboriste est indispensable pour identifier et récolter des plantes aux propriétés médicinales ou magiques, utilisé pour fabriquer des potions et des remèdes.\n\n---\n\n**Caractéristique**: Intelligence\n\n---\n\n**Utiliser**:\n\n>- Identifier une plante (**DD 10**)\n\n>- **Fabrication**:\n\n| **Objet**          | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**      |\n|--------------------|-------------------------|--------------------------|--------------------|-----------------------|\n| Antitoxine         | 25 po                  | 2 jours                 | 15                 | Forêt, marécages     |\n| Bougie             | 1 pc                   | 4 heures                | 10                 | Forêt, prairies      |\n| Trousse de soins   | 5 po                   | 1 jour                  | 12                 | Plaines, collines    |\n| Potion de soin     | 25 po                  | 2 jours                 | 15                 | Forêt, marécages     |
+
+nom: Matériel de contrefaçon
+nom 1: Matériel de contrefaçon
+prix: **15 po**
+prix 1: **15 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Outils
+charge:
+image: image/Tools/forgery_kit.png
+description: \n\n---\n\nLe matériel de contrefaçon est essentiel pour créer de faux documents ou répliquer des sceaux et des écritures, souvent utilisé par des espions et des escrocs.\n\n---\n\n**Caractéristique**: Dextérité\n\n---\n\n**Utiliser**:\n\n>- Imiter 10 mots ou moins d’une écriture étrangère (**DD 15**)\n\n>- Dupliquer un sceau en cire (**DD 20**)
+
+nom: Matériel d'alchimiste
+nom 1: Matériel d'alchimiste
+prix: **50 po**
+prix 1: **50 po**
+poids: **4 kg**\n\n**(8 lb)**
+poids 1: **4 kg**\n\n**(8 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/alchemist_supplies.png
+description: \n\n---\n\nLe matériel d’alchimiste permet de créer diverses substances chimiques et d’analyser des matériaux inconnus. Il est indispensable pour fabriquer des potions et autres objets alchimiques.\n\n---\n\n**Caractéristique**: Intelligence\n\n---\n\n**Utiliser**:\n\n>- Identifier une substance (**DD 15**)\n\n>- Allumer un feu (**DD 15**)\n\n>- **Fabrication**:\n\n| **Objet**              | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**      |\n|------------------------|-------------------------|--------------------------|--------------------|-----------------------|\n| Acide                  | 12 po                  | 2 jours                 | 12                 | Forêt, marécages      |\n| Feu grégeois         | 25 po                  | 3 jours                 | 15                 | Forêt, marécages      |\n| Huile        | 5 pc                   | 2 heures                | 10                 | Forêt, collines       |\n| Parfum                 | 2 po                   | 1 jour                  | 12                 | Forêt, prairies       |\n| Papier       | 1 pa                  | 5 heures                 | 13                 | Forêt, montagnes     |\n| Sacoche à composantes    | 12 po                  | 2 jours                 | 14                 | Forêt, collines       |
+
+nom: Matériel de brasseur
+nom 1: Matériel de brasseur
+prix: **20 po**
+prix 1: **20 po**
+poids: **4.5 kg**\n\n**(9 lb)**
+poids 1: **4.5 kg**\n\n**(9 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/brewer_supplies.png
+description: \n\n---\n\nLe matériel de brasseur est utilisé pour fabriquer de l’alcool et détecter les substances toxiques dans les boissons. C’est un outil prisé par les aventuriers pour créer des potions ou purifier de l’eau.\n\n---\n\n**Caractéristique**: Intelligence\n\n---\n\n**Utiliser**:\n\n>- Détecter une boisson empoisonnée (**DD 15**)\n\n>- Identifier un alcool (**DD 10**)\n\n>- **Fabrication**:\n\n| **Objet**       | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**  |\n|-----------------|-------------------------|--------------------------|--------------------|-------------------|\n| Antitoxine      | 25 po                  | 3 jours                 | 15                 | Forêt, marécages |
+
+nom: Matériel de calligraphe
+nom 1: Matériel de calligraphe
+prix: **10 po**
+prix 1: **10 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/calligrapher_supplies.png
+description: \n\n---\n\nLe matériel de calligraphe permet de créer des écritures ornées ou des documents importants, comme des parchemins ou des contrats.\n\n---\n\n**Caractéristique**: Dextérité\n\n---\n\n**Utiliser**:\n\n>- Rédiger un texte avec des fioritures impressionnantes qui empêchent les contrefaçons (**DD 15**)\n\n>- **Fabrication**:\n\n| **Objet**        | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**  |\n|------------------|-------------------------|--------------------------|--------------------|-------------------|\n| Encre            | 10 po                  | 1 jour                  | 10                 | Urbain            |\n| Parchemin magique| Variable               | Variable                | 15                 | Urbain            |
+
+nom: Matériel de peintre
+nom 1: Matériel de peintre
+prix: **10 po**
+prix 1: **10 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/painters_supplies.png
+description: \n\n---\n\nLe matériel de peintre est utilisé pour créer des images détaillées et artistiques, capturant souvent une scène ou un moment avec une précision vivante.\n\n---\n\n**Caractéristique**: Sagesse\n\n---\n\n**Utiliser**:\n\n>- Peindre une image reconnaissable de quelque chose que vous avez vu (**DD 10**)\n\n>- **Fabrication**:\n\n| **Objet**          | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**  |\n|--------------------|-------------------------|--------------------------|--------------------|-------------------|\n| Focalisateur druidique    | 5 po                   | 1 jour                  | 10                 | Forêt, plaines    |\n| Symbole sacré      | 5 po                   | 1 jour                  | 10                 | Urbain            |
+
+nom: Outils de bricoleur
+nom 1: Outils de bricoleur
+prix: **50 po**
+prix 1: **50 po**
+poids: **5 kg**\n\n**(10 lb)**
+poids 1: **5 kg**\n\n**(10 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/tinkers_tools.png
+description: \n\n---\n\nLes outils de bricoleur sont conçus pour créer de petits objets mécaniques ou réparer des mécanismes complexes. Ils sont essentiels pour les inventeurs et les artisans.\n\n---\n\n**Caractéristique**: Dextérité\n\n---\n\n**Utiliser**:\n\n>- Assembler un objet minuscule en morceaux, se désagrège en 1 min (**DD 20**)\n\n>- **Fabrication**:\n\n| **Objet**          | **Coût des Matériaux** | **Temps de Fabrication** | **DD Recherche (Achat)** | **Terrain** |\n|---------------------|-----------------------|--------------------------|--------------------------|-------------------|\n| Mousquet           | 250 po               | 25 jours                | 20                       | Ville, atelier    |\n| Pistolet           | 100 po               | 10 jours                | 18                       | Ville, atelier    |\n| Cloche             | 5 pa                 | 4 heures                | 8                        | Tous             |\n| Lanterne sourde | 5 po              | 1 jour                  | 12                       | Tous             |\n| Flasque            | 1 pc                 | 1 heure                | 5                        | Tous             |\n| Lanterne à capote    | 2 po                 | 1 jour                  | 10                       | Tous             |\n| Piège à mâchoires  | 2 po                 | 1 jour                 | 12                       | Forêt, toundra    |\n| Cadenas            | 5 po                | 1 jour                  | 10                       | Tous             |\n| Menottes           | 1 po                 | 1 jour                  | 10                       | Ville, atelier    |\n| Miroir             | 2 po                 | 1 jour                  | 12                       | Ville, atelier    |\n| Pelle/Pioche              | 1 po                 | 1 jour                  | 8                        | Tous             |\n| Sifflet de signal  | 2 pc                 | 2 heures                | 5                        | Tous             |\n| Boîte à amadou     | 2 pa                 | 4 heures                | 8                        | Tous             |
+
+nom: Outils de cartographe
+nom 1: Outils de cartographe
+prix: **15 po**
+prix 1: **15 po**
+poids: **3 kg**\n\n**(6 lb)**
+poids 1: **3 kg**\n\n**(4 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/cartographer_tools.png
+description: \n\n---\n\nLes outils de cartographe permettent de dessiner des cartes précises et d’analyser des documents géographiques, utiles pour les explorateurs et navigateurs.\n\n---\n\n**Caractéristique**: Sagesse\n\n---\n\n**Utiliser**:\n\n>- Dessiner une carte d’une petite zone (**DD 15**)\n\n>- **Fabrication**:\n\n| **Objet**      | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**  |\n|----------------|-------------------------|--------------------------|--------------------|-------------------|\n| Carte          | 1 po                   | 1 jour                  | 10                 | Tout              |
+
+nom: Outils de charpentier
+nom 1: Outils de charpentier
+prix: **8 po**
+prix 1: **8 po**
+poids: **3 kg**\n\n**(6 lb)**
+poids 1: **3 kg**\n\n**(6 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/carpenter_tools.png
+description: \n\n---\n\nLes outils de charpentier sont essentiels pour construire, réparer ou analyser des structures en bois, des abris simples aux bâtiments complexes.\n\n---\n\n**Caractéristique**: Force\n\n---\n\n**Utiliser**:\n\n>- Sceller ou forcer une porte ou un conteneur (**DD 20**)\n\n>- **Fabrication**:\n\n| **Objet**          | **Coût des Matériaux** | **Temps de Fabrication** | **DD Survie** (Collecte) | **Terrain**  |\n|------------------|-----------------------|--------------------------|-------------------------|-----------------|\n| Gourdin         | 5 pc                 | 5 heures                | 12                      | Forêt          |\n| Massue   | 1 pa                 | 10 heures               | 12                      | Forêt          |\n| Bâton | 1 pa                 | 10 heures               | 12                      | Forêt          |\n| Tonneau           | 2 po                 | 2 jours                 | 12                      | Forêt          |\n| Coffre          | 5 po                 | 3 jours                 | 13                      | Forêt          |\n| Échelle (3 m)         | 1 pa                 | 1 jour                  | 10                      | Forêt          |\n| Perche (3 m)         | 2 pc                 | 2 heures                | 10                      | Forêt          |\n| Bélier Portable | 4 po                 | 2 jours                 | 12                      | Forêt          |\n| Torche          | 1 pc                 | 1 heure                 | 8                       | Forêt          |
+
+nom: Outils de cordonnier
+nom 1: Outils de cordonnier
+prix: **5 po**
+prix 1: **5 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/cobbler_tools.png
+description: \n\n---\n\nLes outils de cordonnier sont spécialisés dans la fabrication et la réparation de chaussures, ainsi que leur modification pour améliorer leurs performances.\n\n---\n\n**Caractéristique**: Dextérité\n\n---\n\n**Utiliser**:\n\n>- Modifier des chaussures pour donner un avantage au prochain test de Dextérité (Acrobaties) du porteur (**DD 10**)\n\n>- **Fabrication**:\n\n| **Objet**        | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**  |\n|------------------|-------------------------|--------------------------|--------------------|-------------------|\n| Matériel d’escalade   | 25 po                  | 5 jours                 | 15                 | Tout              |
+
+nom: Outils de forgeron
+nom 1: Outils de forgeron
+prix: **20 po**
+prix 1: **20 po**
+poids: **4 kg**\n\n**(8 lb)**
+poids 1: **4 kg**\n\n**(8 lb)**
+type: Outils d’artisan
+charge:
+image: image/Tools/smiths_tools.png
+description: \n\n---\n\nLes outils de forgeron sont utilisés pour forger, réparer et analyser des objets métalliques, allant des armes et armures aux outils courants.\n\n---\n\n**Caractéristique** : Force\n\n---\n\n**Utilisation** :\n\n>- Forcer une porte ou un conteneur (**DD 20**)\n\n>- **Fabrication** :\n\n| **Objet**                      | **Coût en matériaux** | **Temps de fabrication**   |\n|--------------------------------|-----------------------|---------------------------|\n| Arme de mêlée (métal)  | Moitié du coût de l'objet | Coût de l'objet ÷ 10 jours |\n| Armure intermédiaire (métal)    | Moitié du coût de l'objet | Coût de l'objet ÷ 10 jours |\n| Armure lourde (métal)           | Moitié du coût de l'objet | Coût de l'objet ÷ 10 jours |\n| bouclier en métal        | 5 po               | 1 jour                    |\n| Billes (sac de 1000)        | 5 pa               | 5 jour                    |\n| Seau                           | 2 pa              | 1 jour                    |\n| Chausse-trapes (sac)           | 5 pa               | 1 jour                    |\n| Chaîne (3 m)                   | 2 po               | 1 jour                    |\n| Pied-de-biche                  | 1 po                 | 1 jour                    |\n| Balles d'armes à poudre (10)        | 1 po               | 1 jour                    |\n| Grappin                | 1 po                 | 1 jour                    |\n| Pot en fer                 | 1 po                 | 1 jour                    |\n| Pics en fer (10)            | 5 pa               | 1 jour                    |\n| Billes de fronde (10)          | 2 pa               | 1 jour                    |
+
+nom: Outils de joaillier
+nom 1: Outils de joaillier
+prix: **25 po**
+prix 1: **25 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/jewelers_tools.png
+description: \n\n---\n\nLes outils de joaillier sont conçus pour travailler avec des pierres précieuses et des métaux précieux, permettant de créer, réparer et évaluer des objets de valeur.\n\n---\n\n**Caractéristique**: Intelligence\n\n---\n\n**Utiliser**:\n\n>- Évaluer la valeur d’une gemme (**DD 15**)\n\n>- **Fabrication**:\n\n| **Objet**         | **Coût des matériaux** | **Temps de fabrication** |\n|-------------------|------------------------|--------------------------|\n| Focaliseur arcanique| 50% du coût de l’objet | Coût de l’objet ÷ 10 jours |\n| Cristal        | 5 po                  | 1 jour                   |\n| Orbe           | 10 po                 | 2 jours                  |\n| Bâton          | 5 po                  | 1 jour                   |\n| Sceptre        | 2 po                | 1 jour                   |\n| Baguette       | 5 po                  | 1 jour                   |\n| Symbole sacré   | 2 po                | 1 jour                   |\n| Amulette       | 2 po                | 1 jour                   |\n| Emblème        | 2 po                | 1 jour                   |\n| Reliquaire     | 2 po                | 1 jour                   |
+
+nom: Outils de maçon
+nom 1: Outils de maçon
+prix: **10 po**
+prix 1: **10 po**
+poids: **4 kg**\n\n**(8 lb)**
+poids 1: **4 kg**\n\n**(8 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/masons_tools.png
+description: \n\n---\n\nLes outils de maçon sont idéaux pour travailler la pierre, permettant de la tailler, de la sculpter ou de la réparer, ainsi que d’analyser son artisanat.\n\n---\n\n**Caractéristique**: Force\n\n---\n\n**Utiliser**:\n\n>- Graver un symbole ou percer un trou dans la pierre (**DD 10**)\n\n>- **Fabrication**:\n\n| **Objet**          | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**  |\n|--------------------|-------------------------|--------------------------|--------------------|-------------------|\n| Palan              | 5 pa                   | 1 jour                  | 12                 | Collines, montagnes|
+
+nom: Outils de menuisier
+nom 1: Outils de menuisier
+prix: **1 po**
+prix 1: **1 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/woodcarvers_tools.png
+description: \n\n---\n\nLes outils de menuisier sont essentiels pour construire, réparer ou analyser des structures en bois, des meubles aux bâtiments complexes.\n\n---\n\n**Caractéristique**: Force\n\n---\n\n**Utiliser**:\n\n>- Réparer une pièce de bois cassée (**DD 15**)\n\n>- **Fabrication**:\n\n| **Objet**             | **Coût en Matériaux** | **Temps de Fabrication** | **DD de Collecte** | **Terrain**    |\n|-----------------------|---------------------|-----------------------|-----------------|-------------------|\n| Armes à distance (sauf le pistolet, le mousquet et la fronde)           | Moitié du coût de l'objet | Coût de l'objet ÷ 10 jours | 12              | Forêt, jungle    |\n| Gourdin             | 5 pc               | 1 jour               | 10              | Forêt, jungle    |\n| Massue      | 1 pa               | 1 jour               | 10              | Forêt, jungle    |\n| Bâton      | 1 pa               | 1 jour               | 10              | Forêt, jungle    |\n| Focaliseur : Bâton et Baguette | 1 po               | 1 jour               | 12              | Forêt, jungle    |\n| Flèches (20)         | 5 pa            | 1 jour               | 12              | Forêt           |\n| Carreaux (20)        | 5 pa            | 1 jour               | 12              | Forêt           |\n| Focus Druidique      | 5 pa              | 1 jour               | 12              | Forêt           |\n| Porte-plume       | 5 pc              | 1 heure              | 8               | Tout            |\n| Dards de sarbacane (50)       | 5 pa              | 1 heure              | 8               | Tout            |\n| Bouclier en Bois    | 5 pa              | 2 jours              | 12              | Forêt, jungle    |
+
+nom: Outils de potier
+nom 1: Outils de potier
+prix: **10 po**
+prix 1: **10 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/potters_tools.png
+description: \n\n---\n\nLes outils de potier sont essentiels pour fabriquer et analyser des objets en céramique, des récipients simples aux décorations complexes.\n\n---\n\n**Caractéristique**: Intelligence\n\n---\n\n**Utiliser**:\n\n>- Identifier ce qu’un objet en céramique a contenu dans les dernières 24 heures (**DD 15**)\n\n>- **Fabrication**:\n\n| **Objet**         | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**      |\n|-------------------|-------------------------|--------------------------|--------------------|-----------------------|\n| Cruche            | 1 pc                   | 1 jour                  | 12                 | Rivières, déserts    |\n| Lampe             | 2.5 pa                 | 1 jour                  | 12                 | Collines, déserts    |
+
+nom: Outils de souffleur de verre
+nom 1: Outils de souffleur de verre
+prix: **30 po**
+prix 1: **30 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/glassblower_tools.png
+description: \n\n---\n\nLes outils de souffleur de verre servent à créer des objets en verre décoratifs ou fonctionnels, à analyser des éléments magiques en verre et à réparer des objets endommagés.\n\n---\n\n**Caractéristique**: Intelligence\n\n---\n\n**Utiliser**:\n\n>- Identifier ce qu’un objet en verre a contenu dans les dernières 24 heures (**DD 15**)\n\n>- **Fabrication**:\n\n| **Objet**           | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**      |\n|---------------------|-------------------------|--------------------------|--------------------|-----------------------|\n| Bouteille en verre  | 1 po                   | 1 jour                  | 12                 | Déserts, plages      |\n| Loupe               | 50 po                  | 10 jours                | 15                 | Montagnes, grottes   |\n| Longue-vue          | 500 po                 | 100 jours               | 18                 | Montagnes, grottes   |\n| Fiole              | 5 pa                   | 1 jour                  | 12                 | Déserts, plages      |
+
+nom: Outils de tanneur
+nom 1: Outils de tanneur
+prix: **5 po**
+prix 1: **5 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/leatherworker_tools.png
+description: \n\n---\n\nLes outils de tanneur permettent de travailler et de réparer des objets en cuir, comme des armures, des vêtements et des équipements utilitaires.\n\n---\n\n**Caractéristique**: Dextérité\n\n---\n\n**Utiliser**:\n\n>- Ajouter un motif à un objet en cuir (**DD 10**)\n\n>- **Fabrication**:\n\n| **Objet**                | **Coût en Matériaux** | **Temps de Fabrication** | **DD de Recherche** | **Environnement**      |\n|-----------------------|------------------|-----------------|--------------|-------------------|\n| Fronde               | 5 pa            | 4 heures        | 10           | Collines, forêts   |\n| Fouet                | 1 po            | 1 jour          | 12           | Plaines, toundra   |\n| Armure en Peau       | 5 po            | 1 jour          | 14           | Forêt, jungle     |\n| Armure de Cuir       | 5 po            | 1 jour          | 14           | Plaines, forêts   |\n| Armure de Cuir Cloutée | 22 po         | 4 jours         | 16           | Forêt, montagnes  |\n| Sac à Dos            | 1 po            | 1 jour          | 12           | Plaines, collines |\n| Étui à Carreaux      | 5 pa            | 4 heures        | 10           | Urbain, forêts    |\n| Étui à Carte ou Parchemin | 5 pa      | 4 heures        | 10           | Forêt, toundra    |\n| Parchemin (5 feuilles)| 5 pc           | 1 jour          | 10           | Urbain, plaines   |\n| Sacoche               | 3 pa            | 4 heures        | 10           | Collines, forêts  |\n| Carquois             | 5 pa            | 4 heures        | 10           | Forêt, collines   |\n| Outre                | 1 pa            | 1 jour          | 10           | Plaines, toundra  |
+
+nom: Outils de tisserand
+nom 1: Outils de tisserand
+prix: **1 po**
+prix 1: **1 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/weavers_tools.png
+description: \n\n---\n\nLes outils de tisserand sont utilisés pour fabriquer et réparer des textiles, rendant ces outils essentiels pour la création de vêtements, de filets et de cordes.\n\n---\n\n**Caractéristique**: Dextérité\n\n---\n\n**Utiliser**:\n\n>- Réparer une déchirure dans un vêtement (**DD 10**)\n\n>- Coudre un petit motif (**DD 10**)\n\n>- **Fabrication**:\n\n| **Objet**           | **Coût des Matériaux** | **Temps de Fabrication** | **DD Recherche** | **Terrain**       |\n|---------------------|-----------------------|--------------------------|-----------------|-----------------------|\n| Armure matelassée   | 5 po                 | 2 jours                 | 12              | Plaines, toundra       |\n| Panier             | 2 pa                 | 1 jour                  | 10              | Forêt, jungle          |\n| Corde (15 m)       | 1 po                 | 1 jour                  | 10              | Forêt, jungle          |\n| Tente             | 2 po                 | 2 jours                 | 12              | Forêt, toundra         |\n| Sac de couchage    | 1 po                 | 1 jour                  | 10              | Tous environnements    |\n| Couverture         | 5 pa                 | 1 jour                  | 10              | Tous environnements    |\n| Beaux habits     | 15 po                | 5 jours                 | 15              | Ville, village         |\n| Filet              | 1 po                 | 1 jour                  | 10              | Côte, forêt            |\n| Sac               | 1 pc                 | 4 heures                | 8               | Tous environnements    |\n| Ficelle           | 1 pa                 | 4 heures                | 8               | Tous environnements    |\n| Tenue de voyageur | 2 po                | 2 jours                 | 12              | Tous environnements    |\n| Robe| 5 pa                | 1 jour                 | 12              | Tous environnements    |
+
+nom: Ustensiles de cuisinier
+nom 1: Ustensiles de cuisinier
+prix: **1 po**
+prix 1: **1 po**
+poids: **4 kg**\n\n**(8 lb)**
+poids 1: **4 kg**\n\n**(8 lb)**
+type: Outils d'artisan
+charge:
+image: image/Tools/cook_utensils.png
+description: \n\n---\n\nLes ustensiles de cuisinier permettent de préparer des repas et d'assurer la sécurité alimentaire, améliorant le moral et la satisfaction des aventuriers.\n\n---\n\n**Caractéristique**: Sagesse\n\n---\n\n**Utiliser**:\n\n>- Améliorer le goût des aliments (**DD 10**)\n\n>- Détecter un aliment avarié ou empoisonné (**DD 15**)\n\n>- **Fabrication**:\n\n| **Objet**  | **Coût des matériaux** | **Temps de fabrication** | **Recherche (DD)** | **Terrain**      |\n|------------|-------------------------|--------------------------|--------------------|-----------------------|\n| Rations    | 5 pa                   | 1 jour                  | 10                 | Forêt, toundra       |
+
+nom: Outils de voleur
+nom 1: Outils de voleur
+prix: **25 po**
+prix 1: **25 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Outils
+charge:
+image: image/Tools/thieves_tools.png
+description: \n\n---\n\nLes outils de voleur sont indispensables pour ouvrir des serrures, désarmer des pièges et contourner les systèmes de sécurité, ce qui en fait un choix incontournable pour les voleurs et les aventuriers.\n\n---\n\n**Caractéristique**: Dextérité\n\n---\n\n**Utiliser**:\n\n>- Crocheter une serrure (**DD 15**)\n\n>- Désarmer un piège (**DD 15**)

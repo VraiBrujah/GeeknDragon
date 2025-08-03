@@ -1,0 +1,800 @@
+nom: Service d'Écurie par Jour
+nom 1: Service d'Écurie par Jour
+prix: **5 pa**
+prix 1: **5 pa**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/stable_service.png
+description: \n\n---\n\nUn **Service d'Écurie par Jour** offre un hébergement sécurisé et des soins de base pour les montures des aventuriers et voyageurs. Les écuries sont généralement situées près des auberges ou aux portes des villes.\n\n---\n\n**Effets :**\n\n> - Offre un abri sécurisé pour une **monture standard** (cheval, poney, mule).\n\n> - Inclut **nourriture et eau potable** pour la monture.\n\n> - Permet un **repos complet pour la monture**, restaurant son énergie.\n\n> - Possibilité de services supplémentaires comme le **brossage** ou le **ferrage** moyennant un coût additionnel.\n\n---\n\n### **Conditions de l'Écurie :**\n\n| **Service**        | **Description**       |\n|---------------------|------------------------|\n| **Box Privé**      | Box individuel, sécurisé |\n| **Nourriture**     | Foin frais et eau propre |\n| **Surveillance**   | Surveillance régulière |\n| **Entretien**      | Nettoyage quotidien du box |\n\n**Services Supplémentaires :**\n\n| **Service**         | **Prix** | **Description**         |\n|----------------------|---------|-------------------------|\n| **Brossage Complet**| 2 pa    | Entretien de la monture |\n| **Ferrage**         | 1 po    | Remplacement des fers   |\n| **Soins Mineurs**   | 5 pa    | Pansement des petites blessures |\n| **Dressage Léger**  | 2 po    | Obéissance de base      |
+
+nom: Fourrage (par jour)
+nom 1: Fourrage (par jour)
+prix: **5 pc**
+prix 1: **5 pc**
+poids: **5 kg**\n\n**(10 lb)**
+poids 1: **5 kg**\n\n**(10 lb)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Consommable
+attca_image: symbole/vide.png
+attca:
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+image: image/Vehicules/horse_feed.png
+description: \n\n---\n\n**Ration quotidienne de nourriture pour animaux**.\n\n**Utilisation :**\n\n> - **Besoins Quotidiens :** Les animaux de taille **Moyenne ou Grande** nécessitent **1 unité de Fourrage par jour**.\n\n> - **Petites Créatures :** Les animaux de petite taille nécessitent **une demi-unité**.\n\n> - **Créatures Plus Grandes :** Les créatures de taille **Très Grande** nécessitent **4 unités**, et celles de taille **Gigantesque** en nécessitent **10**.\n\n> - **Stockage :** Peut être stocké dans des **sacs, charrettes ou conteneurs**.\n\n---\n\n### **Mécaniques de Malnutrition**\n\n> - Manger moins de **la moitié de la nourriture quotidienne requise** nécessite un **jet de sauvegarde de Constitution DD 10**, ou la créature subit **1 niveau d'Épuisement** à la fin de la journée.\n\n> - Ne **rien manger pendant 5 jours consécutifs** entraîne **1 niveau d'Épuisement automatique** le cinquième jour et **+1 niveau par jour supplémentaire**.\n\n> - **Récupération :** L'Épuisement causé par la malnutrition **ne peut pas être éliminé** tant que la créature n’a pas consommé **une ration complète pendant une journée entière**.\n\n---\n\n### **Condition d'Épuisement :**\n\n> - **Niveaux Cumulatifs :** À chaque niveau supplémentaire d'Épuisement, la créature subit des effets de plus en plus graves. À **6 niveaux**, elle **meurt**.\n\n> - **Jets de D20 Affectés :** Réduisez le résultat de tous les **Jets de D20** (tests d'aptitude, jets de sauvegarde, jets d'attaque) de **2 × votre niveau d'Épuisement**.\n\n> - **Réduction de la Vitesse :** Réduisez votre **Vitesse** de **1.5 m (5 pieds)** par niveau d'Épuisement.\n\n> - **Récupération :** Un **Repos Long** retire **1 niveau d'Épuisement**. Lorsque votre niveau d'Épuisement atteint **0**, la condition prend fin.
+
+nom:  Train de Vie Mendiant
+nom 1: Train de Vie Mendiant
+prix: **0 po**
+prix 1: **0 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/wretched_lifestyle.png
+description: \n\n---\n\nLe **Train de Vie Misérable** représente le **strict minimum pour survivre**, s'appuyant sur des restes, la chance et la charité occasionnelle. L'abri est souvent inexistant, et l'exposition aux **maladies** et aux **intempéries** est constante.\n\n**Conditions Générales :**\n\n> - **Abri :** Aucun. Vous dormez à la belle étoile, dans des bâtiments abandonnés ou des abris de fortune.\n\n> - **Nourriture :** Restes glanés ou dons occasionnels.\n\n> - **Vêtements :** Déchirés, sales et insuffisants pour affronter les intempéries.\n\n> - **Hygiène :** Très mauvaise, entraînant des maladies fréquentes.\n\n**Statut Social :**\n\n> - Vous êtes **ignoré ou méprisé** par la plupart des gens.\n\n> - Les gardes ou les autorités peuvent vous **harceler ou vous chasser** des espaces publics.\n\n> - Les autres évitent souvent le contact visuel avec vous.\n\n**Risques pour la Santé :**\n\n> - **Exposition aux Maladies :** Forte probabilité de contracter des infections.\n\n> - **Famine :** Sans nourriture régulière, vous souffrez d'épuisement et de malnutrition.\n\n> - **Intempéries :** Vulnérable au froid, à la pluie ou à une chaleur extrême.\n\n**Opportunités :**\n\n> - Vous pouvez apprendre à **naviguer dans les quartiers pauvres ou la nature** avec débrouillardise.\n\n> - Vous pourriez entendre des **rumeurs ou des secrets de la rue** ignorés des autres.\n\n> - Des âmes charitables pourraient parfois vous offrir **nourriture ou abri**.\n\n> - Familiarité avec les **coins cachés et les passages discrets** des villes.\n\n> - Adaptation aux **environnements difficiles et aux tactiques de survie**.
+
+nom: Train de Vie Misérable
+nom 1: Train de Vie Misérable
+prix: **1 pa par jour**
+prix 1: **1 pa par jour**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/squalid_lifestyle.png
+description: \n\n---\n\nLe **Train de Vie Insalubre** représente une **existence précaire**, marquée par des espaces surpeuplés, des conditions insalubres et une lutte constante pour satisfaire les besoins essentiels.\n\n**Conditions Générales :**\n\n> - **Abri :** Chambres partagées ou abris de fortune offrant une protection minimale contre les intempéries.\n\n> - **Nourriture :** Repas bon marché, souvent rassis ou de mauvaise qualité.\n\n> - **Vêtements :** Usés et mal ajustés, offrant une protection limitée.\n\n> - **Hygiène :** Mauvaise, avec un accès limité à l'eau propre.\n\n**Statut Social :**\n\n> - Vous êtes **ignoré ou pris en pitié** par la plupart des gens.\n\n> - Les gardes et les autorités vous traitent avec **mépris ou suspicion**.\n\n> - Les plus riches évitent activement de vous côtoyer.\n\n**Risques pour la Santé :**\n\n> - **Risque accru de maladie :** L'hygiène déplorable favorise les infections.\n\n> - **Vols et Exploitation :** Vous êtes vulnérable aux voleurs et aux escrocs.\n\n> - **Malnutrition :** Les repas sont suffisants pour apaiser la faim, mais manquent de nutriments.\n\n**Opportunités :**\n\n> - Accès aux **informations de rue et aux réseaux de bas étage**.\n\n> - Vous pourriez gagner la **confiance d'autres personnes vivant dans des conditions similaires**.\n\n> - Capacité à **se fondre dans les foules sans être remarqué**.\n\n> - Familiarité avec les **services bon marché ou discrets** en ville.\n\n> - Capacité à **survivre avec des ressources minimales**.
+
+nom: Train de Vie Pauvre
+nom 1: Train de Vie Pauvre
+prix: **2 pa par jour**
+prix 1: **2 pa par jour**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/poor_lifestyle.png
+description: \n\n---\n\nLe **Train de Vie Pauvre** représente une **existence modeste mais fragile**, où les besoins essentiels sont couverts, mais où confort et stabilité restent rares.\n\n**Conditions Générales :**\n\n> - **Abri :** Une petite chambre partagée dans une auberge ou un logement rudimentaire.\n\n> - **Nourriture :** Repas simples et consistants, suffisants pour rester en bonne santé.\n\n> - **Vêtements :** Fonctionnels mais basiques, souvent de seconde main.\n\n> - **Hygiène :** Accès limité à l'eau propre et aux installations de bain.\n\n**Statut Social :**\n\n> - Vous êtes **principalement ignoré par les plus riches**, mais respecté par les gens du peuple.\n\n> - Les gardes et autorités vous traitent avec **indifférence**, sauf en cas de provocation.\n\n> - Vous vous fondez facilement dans les **quartiers modestes**.\n\n**Risques pour la Santé :**\n\n> - **Nutrition limitée :** Les repas suffisent pour rester en bonne santé, mais manquent de variété.\n\n> - **Maladies mineures :** Risque légèrement accru de maladies courantes.\n\n> - **Vulnérabilité au crime :** Risque occasionnel de vol ou d'arnaque.\n\n**Opportunités :**\n\n> - Accès aux **réseaux de travailleurs et d'artisans**.\n\n> - Capacité à **trouver du travail temporaire** dans des établissements modestes.\n\n> - Interaction avec des **marchands, artisans et ouvriers**.\n\n> - **Voyages discrets** sans attirer l'attention.\n\n> - Opportunités pour **économiser de petites sommes d'argent au fil du temps**.
+
+nom: Train de Vie Modeste
+nom 1: Train de Vie Modeste
+prix: **1 po par jour**
+prix 1: **1 po par jour**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/modest_lifestyle.png
+description: \n\n---\n\nLe **Train de Vie Modeste** offre un **Train de Vie équilibré et fiable**, où les besoins essentiels sont confortablement couverts.\n\n**Conditions Générales :**\n\n> - **Abri :** Une petite chambre privée dans une auberge ou une maison simple.\n\n> - **Nourriture :** Repas réguliers, variés et nutritifs.\n\n> - **Vêtements :** Tenues propres et pratiques.\n\n> - **Hygiène :** Accès régulier à l'eau propre et aux installations de bain.\n\n**Statut Social :**\n\n> - Vous êtes **bien vu par les gens du peuple**.\n\n> - Les gardes et autorités vous traitent avec **courtoisie**.\n\n> - Vous vous déplacez sans problème dans les **zones de classe moyenne**.\n\n**Santé et Bien-être :**\n\n> - **Nutrition stable :** Aide à maintenir une bonne santé.\n\n> - **Risque réduit de maladie :** Conditions de vie salubres.\n\n> - **Sécurité modérée :** Logement relativement sécurisé.\n\n**Opportunités :**\n\n> - Accès aux **guildes et petits commerces**.\n\n> - Possibilité de **tisser des liens avec les artisans et commerçants locaux**.\n\n> - Capacité à **économiser de petites sommes régulièrement**.\n\n> - Invitations occasionnelles à des **événements communautaires**.
+
+nom: Train de Vie Confortable
+nom 1: Train de Vie Confortable
+prix: **2 po par jour**
+prix 1: **2 po par jour**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/comfortable_lifestyle.png
+description: \n\n---\n\nLe **Train de Vie Confortable** offre une **vie stable et agréable**, avec accès à de petites luxures et des commodités fiables.\n\n**Conditions Générales :**\n\n> - **Abri :** Une chambre privée et propre dans une auberge réputée ou une petite maison confortable.\n\n> - **Nourriture :** Repas de qualité, comprenant des produits frais et des plats occasionnellement délicats.\n\n> - **Vêtements :** Tenues élégantes et bien ajustées, adaptées aux sorties publiques.\n\n> - **Hygiène :** Accès régulier à des installations de bain, savons parfumés et draps propres.\n\n**Statut Social :**\n\n> - Vous êtes vu comme **un membre respectable de la société**.\n\n> - Les gardes, les fonctionnaires et les commerçants vous traitent avec **respect et considération**.\n\n> - Vous êtes souvent **reconnu et salué chaleureusement** dans les établissements locaux.\n\n**Santé et Bien-être :**\n\n> - **Nutrition excellente :** Des repas réguliers et équilibrés maintiennent votre santé optimale.\n\n> - **Faible risque de maladie :** Conditions de vie saines et bien entretenues.\n\n> - **Sécurité renforcée :** Votre logement est verrouillé et le personnel est digne de confiance.\n\n**Opportunités :**\n\n> - Accès aux **guildes, artisans et commerces respectables**.\n\n> - Opportunités de **créer des liens avec des personnes influentes de la classe moyenne**.\n\n> - Capacité à **économiser des sommes modérées régulièrement**.\n\n> - Invitations à des **événements locaux, festivals et réunions communautaires**.\n\n> - Potentiel pour **des investissements mineurs ou des partenariats commerciaux**.
+
+nom: Train de Vie Riche
+nom 1: Train de Vie Riche
+prix: **4 po par jour**
+prix 1: **4 po par jour**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/wealthy_lifestyle.png
+description: \n\n---\n\nLe **Train de Vie Riche** offre des **hébergements luxueux, des repas raffinés et un accès privilégié** à des services exclusifs et à la haute société.\n\n**Conditions Générales :**\n\n> - **Abri :** Une résidence spacieuse, une suite prestigieuse dans une auberge de renom ou un petit domaine privé.\n\n> - **Nourriture :** Repas gastronomiques préparés par des cuisiniers compétents, souvent accompagnés de vins fins.\n\n> - **Vêtements :** Tenues élégantes confectionnées à partir de tissus de haute qualité.\n\n> - **Hygiène :** Installations de bain privées, huiles parfumées et produits de toilette haut de gamme.\n\n**Statut Social :**\n\n> - Vous êtes **admiré ou envié** par les classes inférieures.\n\n> - Les nobles et les riches marchands vous considèrent comme **un pair ou un allié précieux**.\n\n> - Votre présence est souvent **attendue lors d'événements exclusifs**.\n\n**Santé et Bien-être :**\n\n> - **Nutrition supérieure :** Vos repas sont préparés avec soin et sont parfaitement équilibrés.\n\n> - **Risque minimal de maladie :** Les conditions de vie sont impeccables et bien entretenues.\n\n> - **Sécurité privée :** Votre résidence est protégée par des gardes ou des systèmes de sécurité.\n\n**Opportunités :**\n\n> - Invitations à des **banquets, galas et événements prestigieux**.\n\n> - Potentiel pour des **investissements lucratifs et des affaires rentables**.\n\n> - Accès à des **services exclusifs**, comme des précepteurs privés ou des artisans renommés.\n\n> - Influence dans les **affaires locales ou les décisions politiques mineures**.\n\n> - Opportunités de **créer des liens avec des personnalités influentes et puissantes**.
+
+nom: Train de Vie Aristocratique
+nom 1: Train de Vie Aristocratique
+prix: **10 po par jour**
+prix 1: **10 po par jour**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/aristocratic_lifestyle.png
+description: \n\n---\n\nLe **Train de Vie Aristocratique** représente le **sommet du luxe et du privilège**. Vous êtes entouré d'une opulence que peu peuvent imaginer.\n\n**Conditions Générales :**\n\n> - **Abri :** Palais somptueux, manoirs opulents ou suites luxueuses dans les meilleures auberges.\n\n> - **Nourriture :** Cuisine gastronomique, préparée par des chefs renommés et accompagnée des vins les plus fins.\n\n> - **Vêtements :** Vêtements sur mesure, ornés de broderies et de bijoux précieux.\n\n> - **Hygiène :** Bains privés somptueux, serviettes parfumées et soins personnels par des domestiques dévoués.\n\n> - **Serviteurs :** Une équipe dédiée incluant majordomes, cuisiniers, servantes et assistants personnels.\n\n**Statut Social :**\n\n> - Vous êtes **révéré et respecté** par presque tout le monde.\n\n> - Accès aux **cours royales, cercles exclusifs et rassemblements nobles**.\n\n> - Les personnes de rang inférieur vous traitent avec **déférence et prudence**.\n\n**Santé et Bien-être :**\n\n> - **Nutrition exceptionnelle :** Des repas équilibrés et somptueux pour une santé optimale.\n\n> - **Confort absolu :** Chaque aspect de votre vie quotidienne est conçu pour maximiser votre bien-être.\n\n> - **Soins médicaux élites :** Accès immédiat à des soigneurs compétents ou des remèdes magiques.\n\n> - **Sécurité maximale :** Gardes du corps personnels et résidences extrêmement sécurisées.\n\n**Opportunités :**\n\n> - Invitations aux **banquets royaux, bals et galas exclusifs**.\n\n> - Influence dans les **décisions politiques locales et régionales**.\n\n> - Accès à des **alliés puissants, dirigeants et familles nobles influentes**.\n\n> - Capacité à **sponsoriser des expéditions, artistes ou projets ambitieux**.\n\n> - Opportunités de **façonner le destin des villes ou des régions grâce à votre richesse et votre influence**.
+
+nom: Bière (Chope)
+nom 1: Bière (Chope)
+prix: **4 pc**
+prix 1: **4 pc**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/ale_mug.png
+description: \n\n---\n\nUne **chope de bière** est une boisson incontournable dans les tavernes et auberges, appréciée pour sa saveur et ses effets relaxants. Cependant, une consommation excessive entraîne le risque d'**intoxication**, qui fonctionne de manière similaire à la **condition Empoisonné**.\n\n---\n\n**Mécaniques d'Intoxication :**\n\n> - Boire **1 chope de bière** n'a aucun effet immédiat.\n\n> - Boire **2 chopes de bière en 1 heure** nécessite un **jet de sauvegarde de Constitution DD 10**.\n\n> - Chaque chope supplémentaire consommée dans la même heure augmente le **DD de 2** (**Max DD 20**).\n\n> - **Échec :** Le buveur obtient la **condition Empoisonné** pendant **1 heure** (*Désavantage aux jets d'attaque et tests de caractéristique*).\n\n> - **Récupération :** Un **repos court** retire la **condition Empoisonné** causée par l'intoxication.\n\n---\n\n### **Exemples de Variétés de Bière :**\n\n| **Nom**              | **Saveur**        | **Effet (par chope)**                    | **Durée** |\n|-----------------------|-------------------|------------------------------------------|-----------|\n| **Brassée de Braises** | Fumée, chaude    | **+1 point de vie temporaire**           | 1 heure   |\n| **Bière Barbe-de-Givre** | Amère, vive   | **Avantage aux jets de sauvegarde de Constitution contre le froid** | 1 heure |\n| **Grain Doré**       | Douce, miellée   | **+1 aux tests de Charisme (Persuasion)** | 1 heure   |\n| **Brassin de l'Enclume Noire** | Maltée, lourde | **+1 aux tests de Force (Athlétisme)** | 1 heure |\n| **Vent-Murmure**     | Légère, florale  | **+1 aux tests de Sagesse (Perception)** | 1 heure   |\n| **Stout Tripes-de-Pierre** | Épaisse, terreuse | **Résistance aux dégâts de poison** | 1 heure |
+
+nom: Pain (Miche)
+nom 1: Pain (Miche)
+prix: **2 pc**
+prix 1: **2 pc**
+poids: **0.25 kg**\n\n**(0.5 lb)**
+poids 1: **0.25 kg**\n\n**(0.5 lb)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/bread_loaf.png
+charge: 
+description: \n\n---\n\nUne **miche de pain** est un aliment fondamental de nombreux repas, offrant une source simple mais essentielle de subsistance. \n\n---\n\n**Mécaniques d'Utilisation :**\n\n> - **Consommation :** Fournit **1 jour de subsistance de base** pour une **créature de taille Petite ou Moyenne**.\n\n> - **Conservation :** Le pain frais se conserve **2 jours**. Après cela, il devient **rassis** et perd sa saveur mais reste consommable jusqu'à **7 jours**.\n\n> - **Pain rassis :** Sa valeur nutritive est réduite de **moitié**, nécessitant deux miches pour une subsistance complète.\n\n**Récupération de la Malnutrition :**\n\n> - La consommation complète d'une miche retire **1 niveau d'Épuisement** causé par la malnutrition.\n\n---\n\n### **Exemples de Variétés de Pain :**\n\n| **Nom**              | **Saveur**        | **Effet (par miche)**           | **Durée** |\n|-----------------------|-------------------|---------------------------------|-----------|\n| **Pain Pierre-Chaude**| Dense, robuste   | **+1 point de vie temporaire**  | 1 heure   |\n| **Galette Clair de Lune** | Douce, aromatique | **+1 aux tests de Dextérité (Discrétion)** | 1 heure |\n| **Pain Nain**        | Dur, granuleux   | **+1 aux tests de Force (Athlétisme)** | 1 heure |\n| **Baguette Bénie du Soleil** | Légère, croquante | **+1 aux tests de Charisme (Représentation)** | 1 heure |\n| **Seigle Ombregrain** | Amer, terreux   | **+1 aux tests de Sagesse (Perspicacité)** | 1 heure |\n| **Rouleau Croûte Dorée** | Beurré, chaud | **+1 aux jets de sauvegarde de Constitution** | 1 heure |\n| **Biscuit de Voyageur** | Sec, durable (Conservation +10j)  | **Résistance à l'Épuisement**    | 1 heure   |
+
+nom: Fromage (Quartier)
+nom 1: Fromage (Quartier)
+prix: **1 pa**
+prix 1: **1 pa**
+poids: **0,2 kg**\n\n**(4 lb)**
+poids 1: **0,2 kg**\n\n**(4 lb)**
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/cheese_wedge.png
+charge: 
+description: \n\n---\n\nUn **quartier de fromage** est un aliment savoureux et nutritif, souvent consommé en collation ou accompagné de pain et de vin. Il offre une énergie durable et se transporte facilement.\n\n---\n\n**Mécaniques d'Utilisation :**\n\n> - **Consommation :** Fournit **1 jour de subsistance de base** pour une **créature de taille Petite ou Moyenne**.\n\n> - **Conservation :** Le fromage frais dure **4 jours**. Le fromage vieilli peut durer **des semaines**, mais peut dégager une forte odeur.\n\n**Récupération de la Malnutrition :**\n\n> - La consommation complète d'un quartier retire **1 niveau d'Épuisement** causé par la malnutrition.\n\n---\n\n### **Exemples de Variétés de Fromage :**\n\n| **Nom**             | **Saveur**       | **Effet (par quartier)**                | **Durée**    |\n|-----------------------|------------------|-----------------------------------------|-------------|\n| **Brie Feuille d'Or** | Doux, crémeux    | **+1 point de vie temporaire**          | **1 heure** |\n| **Cheddar Givrevoile**| Vif, vieilli     | **Avantage aux jets contre le froid**   | **1 heure** |\n| **Gouda Cœur-de-Braise** | Fumé, riche  | **Résistance aux dégâts de feu**        | **30 min**  |\n| **Bleu Pic-orage**    | Acide, corsé     | **+1 bonus aux tests de Perception**    | **1 heure** |\n| **Camembert Murmure** | Doux, onctueux   | **Avantage aux tests de Discrétion**    | **30 min**  |\n| **Gruyère Racinefer** | Noisette, ferme  | **+1 bonus aux tests de Force**         | **1 heure** |\n| **Mozzarella Goutte-de-Rosée** | Frais, léger | **+1 bonus aux tests de Dextérité**   | **1 heure** |\n| **Havarti Ombreval** | Doux, crémeux    | **Avantage aux jets contre le poison**  | **1 heure** |
+
+nom: Séjour à l'Auberge Misérable
+nom 1: Séjour à l'Auberge Misérable
+prix: **7 pc**
+prix 1: **7 pc**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_squalid.png
+description: \n\n---\n\nUn **Séjour Misérable** offre le strict minimum pour dormir à l'abri des intempéries. Les conditions sont insalubres, l'hygiène est quasi inexistante, et le risque de maladie ou de vol est élevé.\n\n---\n\n**Conditions du Séjour :**\n\n> - **Abri :** Espace exigu, humide et souvent surpeuplé.\n\n> - **Nourriture :** Repas médiocres, souvent avariés.\n\n> - **Hygiène :** Absence totale d'installations sanitaires.\n\n> - **Sécurité :** Protection minimale contre les vols.\n\n> - **Statut Social :** Perception négative par les PNJ.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Repos :** Permet un **repos court**, mais pas un repos long.\n\n> - **Risque de Maladie :** Jet de **Constitution (DD 15)** chaque nuit.\n\n> - **Risque de Vol :** Jet de **Sagesse (Perception) (DD 15)** chaque nuit.\n\n---\n\n**Conséquences d'un Échec :**\n- **Maladie :** Niveau d'épuisement ou maladie mineure.\n\n> - **Vol :** Perte d'un objet aléatoire ou de quelques pièces.\n\n---\n\n### **Avantages :**\n\n>- Coût très bas.\n\n> - Accès aux rumeurs des couches les plus basses de la société.\n\n> - Facilité pour se fondre dans les quartiers pauvres.\n\n---\n\n\n\n**Note de Style :** Une odeur de moisissure et de fumée froide imprègne l'air. Les clients murmurent et évitent de croiser les regards.
+
+nom: Séjour à l'Auberge Pauvre
+nom 1: Séjour à l'Auberge Pauvre
+prix: **1 pa**
+prix 1: **1 pa**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_poor.png
+description: \n\n---\n\nUn **Séjour Pauvre** offre un abri rudimentaire mais fonctionnel. Vous dormez souvent dans une chambre partagée et mangez des repas simples.\n\n---\n\n**Conditions du Séjour :**\n\n> - **Abri :** Chambre partagée avec un lit sommaire.\n\n> - **Nourriture :** Repas simples, parfois rassis.\n\n> - **Hygiène :** Accès limité à l'eau propre.\n\n> - **Sécurité :** Risque modéré de vol.\n\n> - **Statut Social :** Neutre, peu de respect.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Repos :** Permet un **repos long**.\n\n> - **Risque de Maladie :** Jet de **Constitution (DD 12)** chaque nuit.\n\n> - **Risque de Vol :** Jet de **Sagesse (Perception) (DD 12)** chaque nuit.\n\n---\n\n**Conséquences d'un Échec :**\n- **Maladie :** Symptômes mineurs.\n\n> - **Vol :** Perte mineure d'objets ou de pièces.\n\n---\n\n### **Avantages :**\n\n> - Prix abordable.\n\n> - Accès aux informations locales.\n\n> - Relations possibles avec les habitants modestes.\n\n---\n\n\n\n**Note de Style :** Les murs sont fins, et le bruit ambiant rend le sommeil léger. Une faible lueur éclaire la pièce.
+
+nom: Séjour à l'Auberge Modeste
+nom 1: Séjour à l'Auberge Modeste
+prix: **5 pa**
+prix 1: **5 pa**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_modest.png
+description: \n\n---\n\nUn **Séjour Modeste** propose une petite chambre privée, propre et sécurisée. Les repas sont chauds et suffisants.\n\n---\n\n**Conditions du Séjour :**\n\n> - **Abri :** Chambre privée, lit simple.\n\n> - **Nourriture :** Repas chauds et nutritifs.\n\n> - **Hygiène :** Accès correct aux installations sanitaires.\n\n> - **Sécurité :** Risque de vol minimal.\n\n> - **Statut Social :** Acceptable dans les cercles populaires.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Repos :** Permet un **repos long** de qualité.\n\n> - **Risque de Maladie :** Aucun.\n\n> - **Risque de Vol :** Négligeable.\n\n---\n\n### **Avantages :**\n\n> - Bonne récupération physique et mentale.\n\n> - Discrétion dans les zones populaires.\n\n> - Opportunités de tisser des relations modestes.\n\n---\n\n\n\n**Note de Style :** L'odeur du pain chaud flotte dans l'air, et les draps sont frais et propres.
+
+nom: Séjour à l'Auberge Confortable
+nom 1: Séjour à l'Auberge Confortable
+prix: **8 pa**
+prix 1: **8 pa**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_comfortable.png
+description: \n\n---\n\nUn **Séjour Confortable** garantit un abri privé, un lit douillet et des repas bien préparés.\n\n---\n\n**Conditions du Séjour :**\n\n> - **Abri :** Chambre privée spacieuse.\n\n> - **Nourriture :** Repas copieux et savoureux.\n\n> - **Hygiène :** Installations propres et accessibles.\n\n> - **Sécurité :** Effets personnels sécurisés.\n\n> - **Statut Social :** Respectable.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Repos :** Repos long optimal.\n\n> - **Risque de Maladie :** Aucun.\n\n> - **Risque de Vol :** Aucun.\n\n---\n\n### **Avantages :**\n\n> - Statut social positif.\n\n> - Interaction avec les marchands locaux.\n\n> - Récupération optimale.\n\n---\n\n\n\n**Note de Style :** La lumière tamisée et l'odeur des herbes fraîches offrent une atmosphère relaxante.
+
+nom: Séjour à l'Auberge Riche
+nom 1: Séjour à l'Auberge Riche
+prix: **2 po**
+prix 1: **2 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_wealthy.png
+description: \n\n---\n\nUn **Séjour Riche** offre une chambre spacieuse et décorée avec goût, des repas gastronomiques et un service attentionné, garantissant confort et prestige.\n\n---\n\n**Conditions du Séjour :**\n\n> - **Abri :** Suite privée élégante et spacieuse.\n\n> - **Nourriture :** Repas gastronomiques, vins fins et desserts délicats.\n\n> - **Hygiène :** Salle de bain privée avec des produits de luxe.\n\n> - **Sécurité :** Gardes et système de verrouillage sécurisé.\n\n> - **Statut Social :** Grande respectabilité.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Repos :** Permet un **repos long** parfait.\n\n> - **Risque de Maladie :** Aucun.\n\n> - **Risque de Vol :** Aucun.\n\n> - **Avantage Social :** Bonus de **+1 aux tests de Charisme (Persuasion)** pendant 24 heures.\n\n---\n\n### **Avantages :**\n\n> - Accès à des marchands influents et artisans de renom.\n\n> - Opportunités pour des affaires lucratives.\n\n> - Statut social renforcé auprès des PNJ.\n\n> - Confort maximal pour une récupération optimale.\n\n---\n\n\n\n**Note de Style :** La pièce est parfumée d'encens délicat, les draps en soie caressent la peau, et une musique douce flotte dans l'air.
+
+nom: Séjour à l'Auberge Aristocratique
+nom 1: Séjour à l'Auberge Aristocratique
+prix: **4 po**
+prix 1: **4 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_aristocratic.png
+description: \n\n---\n\nUn **Séjour Aristocratique** représente le summum du luxe et de l'exclusivité, offrant une suite somptueuse, un service personnalisé et une expérience incomparable.\n\n---\n\n**Conditions du Séjour :**\n\n> - **Abri :** Suite luxueuse avec mobilier raffiné et décoration opulente.\n\n> - **Nourriture :** Repas préparés par des chefs étoilés, accompagnés des meilleurs vins.\n\n> - **Hygiène :** Salle de bain privée, produits de toilette de luxe et soins personnalisés.\n\n> - **Sécurité :** Surveillance constante par des gardes privés.\n\n> - **Statut Social :** Influence élevée et admiration générale.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Repos :** Permet un **repos long** parfait avec récupération optimale.\n\n> - **Risque de Maladie :** Aucun.\n\n> - **Risque de Vol :** Aucun.\n\n> - **Avantage Social :** Bonus de **+2 aux tests de Charisme (Persuasion)** pendant 24 heures.\n\n---\n\n### **Avantages :**\n\n> - Accès aux cercles d'élite et aux personnalités influentes.\n\n> - Invitations à des événements prestigieux.\n\n> - Opportunités pour des alliances politiques ou commerciales.\n\n> - Protection maximale contre les menaces extérieures.\n\n---\n\n\n\n**Note de Style :** Les murs sont ornés de tapisseries dorées, le lit est recouvert de fourrures exotiques, et un majordome veille à chaque besoin du client.
+
+nom: Repas (Misérable)
+nom 1: Repas (Misérable)
+prix: **1 pc**
+prix 1: **1 pc**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_squalid.png
+charge: 
+description: \n\n---\n\nUn **Repas Misérable** est composé de restes, de bouillie aqueuse et de pain rassis. Il soutient à peine la vie et peut parfois causer des désagréments.\n\n---\n\n**Conditions du Repas :**\n\n> - **Qualité :** Très faible.\n\n> - **Nourriture :** Bouillie diluée, pain dur, viande douteuse.\n\n> - **Conservation :** À consommer immédiatement.\n\n> - **Statut Social :** Perception négative par les PNJ.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Nutrition :** Fournit **1 journée de subsistance minimale**.\n\n> - **Risque :** Après **5 jours consécutifs**, effectuez un **jet de sauvegarde de Constitution DD 10**.\n   - **Échec :** Subissez **1 niveau d'Épuisement**.\n\n---\n\n### **Exemples de Repas Misérables :**\n\n| **Nom**               | **Type**       | **Description**         | **Effet**             |\n|------------------------|---------------|-------------------------|-----------------------|\n| **Ragoût de Rat**     | Ragoût        | Viande douteuse, goût amer | **-2 aux jets de Constitution (1h)** |\n| **Biscuit Moisi**     | Pain          | Sec, rassis, moisi       | **Nausée légère (1h)** |\n| **Bouillie Aqueuse**  | Bouillie      | Liquide et insipide     | —                     |\n| **Potage Raclure**    | Soupe         | Principalement de l'eau | —                     |\n\n**Note de Style :** Une odeur aigre et de fumée flotte dans l'air. Chaque bouchée est une lutte.
+
+nom: Repas (Pauvre)
+nom 1: Repas (Pauvre)
+prix: **2 pc**
+prix 1: **2 pc**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_poor.png
+charge: 
+description: \n\n---\n\nUn **Repas Pauvre** offre une subsistance minimale avec des ingrédients simples mais mangeables.\n\n---\n\n**Conditions du Repas :**\n\n> - **Qualité :** Faible.\n\n> - **Nourriture :** Ragoûts fades, pain dur, légumes bouillis.\n\n> - **Conservation :** À consommer rapidement.\n\n> - **Statut Social :** Neutre.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Nutrition :** Fournit **1 journée de subsistance basique**.\n\n> - **Risque :** Après **7 jours consécutifs**, effectuez un **jet de Constitution DD 12**.\n   - **Échec :** Subissez **1 niveau d'Épuisement**.\n\n---\n\n### **Exemples de Repas Pauvres :**\n\n| **Nom**                 | **Type**       | **Description**       | **Effet**                  |\n|--------------------------|---------------|-----------------------|----------------------------|\n| **Ragoût de Poisson**   | Ragoût        | Bouillon salé         | **-1 aux jets de Constitution (1h)**  |\n| **Pain Dur & Fromage**  | Pain          | Pain rassis et sec    | —                          |\n| **Racines Bouillies**   | Légumes       | Goût fade            | **-1 aux jets de Constitution (1h)** |\n| **Soupe de Pommes**     | Soupe         | Soupe légère         | —                          |\n\n**Note de Style :** Une odeur de sel et de fumée plane, et chaque bouchée est fonctionnelle.
+
+nom: Repas (Modeste)
+nom 1: Repas (Modeste)
+prix: **1 pa**
+prix 1: **1 pa**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_modest.png
+description: \n\n---\n\nUn **Repas Modeste** propose une nourriture équilibrée et chaude, composée de viande, de légumes et de pain frais.\n\n---\n\n**Conditions du Repas :**\n\n> - **Qualité :** Moyenne.\n\n> - **Nourriture :** Ragoût épais, pain frais, légumes assaisonnés.\n\n> - **Conservation :** Peut durer jusqu'à **2 jours**.\n\n> - **Statut Social :** Acceptable.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Nutrition :** Fournit **1 journée de subsistance adéquate**.\n\n> - **Stabilité :** Aucun risque d'**Épuisement** avec une consommation prolongée.\n\n---\n\n### **Exemples de Repas Modestes :**\n\n| **Nom**                  | **Type**       | **Description**      | **Effet**             |\n|---------------------------|---------------|----------------------|-----------------------|\n| **Assiette de Volaille** | Viande        | Poulet rôti          | — |\n| **Pain aux Herbes**      | Pain          | Pain frais aux herbes | —     |\n| **Ragoût de Légumes**    | Soupe         | Copieux et parfumé   | —                     |\n| **Carottes Glacées**     | Légumes       | Sucrées et croquantes | —                     |\n\n**Note de Style :** L'air est empli d'une odeur chaleureuse de cuisson maison.
+
+nom: Repas (Confortable)
+nom 1: Repas (Confortable)
+prix: **2 pa**
+prix 1: **2 pa**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_comfortable.png
+description: \n\n---\n\nUn **Repas Confortable** est une expérience culinaire agréable, préparée avec des ingrédients frais et des recettes soignées.\n\n---\n\n**Conditions du Repas :**\n\n> - **Qualité :** Bonne.\n\n> - **Nourriture :** Viande tendre, légumes frais, pain beurré.\n\n> - **Conservation :** Peut durer **3 jours**.\n\n> - **Statut Social :** Respectable.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Nutrition :** Fournit **1 journée de nutrition de qualité**.\n\n---\n\n### **Exemples de Repas Confortables :**\n\n| **Nom**                  | **Type**       | **Description**      | **Effet**            |\n|---------------------------|---------------|----------------------|----------------------|\n| **Porc aux Herbes**      | Viande        | Viande savoureuse   | **+1 aux jets de Force (1h)**     |\n| **Ragoût Crémeux**       | Soupe         | Crémeux et parfumé  | —                    |\n| **Pain Doré au Beurre**  | Pain          | Moelleux et beurré  | —                    |\n| **Salade Fraîche**       | Légumes       | Croquante et vive   | **+1 aux jets de Dextérité (1h)** |\n\n**Note de Style :** Une douce odeur d'herbes et de beurre flotte dans l'air.
+
+nom: Repas (Riche)
+nom 1: Repas (Riche)
+prix: **3 pa**
+prix 1: **3 pa**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_wealthy.png
+description: \n\n---\n\nUn **Repas Riche** est une expérience gastronomique préparée avec des ingrédients de première qualité et présentée avec soin. Chaque bouchée est une célébration.\n\n---\n\n**Conditions du Repas :**\n\n> - **Qualité :** Excellente.\n\n> - **Nourriture :** Viandes tendres, sauces raffinées, légumes frais.\n\n> - **Conservation :** Peut durer jusqu'à **3 jours** dans de bonnes conditions.\n\n> - **Statut Social :** Haute respectabilité.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Nutrition :** Fournit **1 journée de nutrition supérieure**.\n\n> - **Bonus :** Confère un **Avantage au prochain jet de Charisme (Persuasion)** pendant **1 heure**.\n\n> - **Stabilité :** Aucun risque d'**Épuisement** avec une consommation prolongée.\n\n---\n\n### **Exemples de Repas Riches :**\n\n| **Nom**                     | **Type**       | **Description**           | **Effet**                |\n|------------------------------|---------------|---------------------------|--------------------------|\n| **Steak aux Épices de Dragon** | Viande     | Viande tendre et épicée  | **+1 aux jets de Constitution (1h)** |\n| **Parfait Rubis**           | Dessert       | Doux, fruité et exotique | **+1 aux jets d'Intelligence (1h)** |\n| **Soupe aux Truffes Noires** | Soupe        | Crémeuse et riche        | **+1 aux jets de Sagesse (1h)**      |\n| **Salade Élégance Élfique** | Légumes       | Herbes rares et noix     | **+1 aux jets de Dextérité (1h)**    |\n\n**Note de Style :** Une délicate odeur d'épices et d'herbes rares flotte dans l'air, et chaque plat est servi avec élégance.
+
+nom: Repas (Aristocratique)
+nom 1: Repas (Aristocratique)
+prix: **6 pa**
+prix 1: **6 pa**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_aristocratic.png
+description: \n\n---\n\nUn **Repas Aristocratique** est une œuvre d'art culinaire, composée d'ingrédients rares et préparée par des chefs prestigieux. Chaque plat est une expérience sensorielle.\n\n---\n\n**Conditions du Repas :**\n\n> - **Qualité :** Exceptionnelle.\n\n> - **Nourriture :** Viandes exotiques, sauces complexes, desserts élaborés.\n\n> - **Conservation :** À consommer immédiatement pour une fraîcheur optimale.\n\n> - **Statut Social :** Très haute respectabilité.\n\n---\n\n### **Mécaniques de Jeu :**\n\n> - **Nutrition :** Fournit **1 journée de nutrition inégalée**.\n\n> - **Bonus :** Confère **+10 point de vie temporaire** et **Avantage au prochain jet de Charisme (Persuasion)** pendant **1 heure**.\n\n> - **Stabilité :** Aucun risque d'**Épuisement** avec une consommation prolongée.\n\n---\n\n### **Exemples de Repas Aristocratiques :**\n\n| **Nom**                        | **Type**       | **Description**           | **Effet**                |\n|---------------------------------|---------------|---------------------------|--------------------------|\n| **Omelette aux Œufs de Phénix** | Œuf          | Saveur épicée et rare    | **+2 aux jets de Charisme (1h)**     |\n| **Agneau Céleste**             | Viande        | Tendre et parfaitement cuit | **+2 aux jets de Force (1h)**      |\n| **Soufflé Saphir**             | Dessert       | Infusé de gemmes rares   | **+2  aux jets d'Intelligence (1h)** |\n| **Salade Stellaire**           | Légumes       | Herbes célestes et légères | **+2  aux jets de Sagesse (1h)**     |\n\n**Note de Style :** Chaque plat est présenté avec soin sur des assiettes d'argent, et un doux parfum floral flotte dans l'air.
+
+nom: Vin (Commun)
+nom 1: Vin (Commun)
+prix: **2 pa**
+prix 1: **2 pa**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/wine_common.png
+description: \n\n---\n\nUne **bouteille de vin commun** est une boisson simple et abordable, populaire dans les tavernes et les foyers. Son goût varie de fruité à sec, selon la région d'origine.\n\n---\n\n**Mécaniques d'Intoxication :**\n\n> - Boire **1 verre de vin commun** n'a pas d'effet immédiat.\n\n> - Boire **2 verres en 1 heure** nécessite un **jet de sauvegarde de Constitution DD 10**.\n\n> - Chaque verre supplémentaire augmente la **DD de 2** (**Max DD 20**).\n\n> - **Échec :** Le buveur subit la **condition Empoisonné** pendant **1 heure** (*Désavantage aux jets d'attaque et tests de capacité*).\n\n> - **Récupération :** Un **Repos Court** élimine la condition Empoisonné causée par l'intoxication.\n\n---\n\n### **Exemples de Vins Communs :**\n\n| **Nom**           | **Saveur**       | **Effet (par verre)**           | **Durée** |\n|--------------------|------------------|---------------------------------|-----------|\n| **Rouge Fermier**  | Fruité, léger    | **+1 point de vie temporaire**   | 1 heure   |\n| **Blanc Lanterne** | Acidulé, frais   | **+1 aux jets de Charisme (Performance)** | 1 heure   |\n| **Mélange Colline** | Doux, rond     | **+1 aux jets de Dextérité (Discrétion)** | 1 heure   |\n| **Gorgée du Marin** | Salé, piquant  | **+1 aux jets de sauvegardes de Constitution** | 1 heure |\n| **Rosé du Marché** | Sucré, floral    | **+1 aux jets de Sagesse (Perspicacité)** | 1 heure   |\n| **Réserve Cuivrée** | Sec, noisette  | **+1 aux jets d'Intelligence (Investigation)** | 1 heure |
+
+nom: Vin (Fin)
+nom 1: Vin (Fin)
+prix: **10 po**
+prix 1: **10 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Nourriture & Boisson
+attca_image: symbole/vide.png
+attca:
+image: image/Services/wine_fine.png
+description: \n\n---\n\nUne **bouteille de vin fin** symbolise le luxe et le raffinement, souvent dégustée par les nobles et les aventuriers célébrant une grande victoire.\n\n---\n\n**Mécaniques d'Intoxication :**\n\n> - Boire **1 verre de vin fin** n'a pas d'effet immédiat.\n\n> - Boire **2 verres en 1 heure** nécessite un **jet de sauvegarde de Constitution DD 12**.\n\n> - Chaque verre supplémentaire augmente la **DD de 2** (**Max DD 20**).\n\n> - **Échec :** Le buveur subit la **condition Empoisonné** pendant **1 heure**.\n\n> - **Récupération :** Un **Repos Court** élimine la condition Empoisonné.\n\n---\n\n### **Exemples de Vins Fins :**\n\n| **Nom**            | **Saveur**       | **Effet (par verre)**          | **Durée** |\n|---------------------|------------------|--------------------------------|-----------|\n| **Aube Elfique**    | Floral, parfumé | **Avantage aux jets de Charisme (Persuasion)** | 1 heure |\n| **Nectar Doré**     | Doux, sirupeux  | **+2 points de vie temporaires** | 1 heure |\n| **Réserve Crépuscule** | Fumé, audacieux | **Avantage aux jets de Sagesse (Perspicacité)** | 1 heure |\n| **Ambroisie Céleste** | Subtil, magique | **Avantage aux jets de sauvegardes contre le poison** | 1 heure |
+
+nom: Trajet en Diligence Entre Villes
+nom 1: Trajet en Diligence Entre Villes
+prix: **3 pc pour 1.5 km**\n\n**(1 Mile)**
+prix 1: **3 pc pour 1.5 km**\n\n**(1 Mile)**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/passag.png
+attca1: 4
+attca_image2: symbole/vit.png
+attca2: **10 km/h (6 mph, 80c)**
+image: image/Services/coach_ride.png
+description: \n\n---\n\nUn **Trajet en Diligence Entre Villes** offre un moyen fiable de voyager sur des distances modérées avec un certain confort. Les diligences sont tirées par des chevaux robustes et conduites par des cochers expérimentés.\n\n---\n\n**Effets :**\n\n> - Voyage sécurisé entre les villes.\n\n> - Espace limité pour les effets personnels.\n\n---\n\n**Exemples de Services de Diligence :**\n\n| **Nom**              | **Type**        | **Description**            | **Origine**     |\n|-----------------------|-----------------|-----------------------------|-----------------|\n| **Diligence de la Route d'Argent** | Standard   | Diligence en bois basique   | Routes principales |\n| **Express Vent-Rapide** | Rapide     | Chevaux rapides, moins de cargo | Routes marchandes |\n| **Chariot du Marchand** | Cargo      | Plus d'espace pour le stockage | Lignes de caravanes |\n| **Chariot de Minuit**  | Nocturne    | Voyage exclusivement de nuit | Routes douteuses |\n| **Ligne Velours**      | Luxe        | Sièges confortables, rideaux | Routes nobles  |
+
+nom: Trajet en Diligence En Ville
+nom 1: Trajet en Diligence En Ville
+prix: **1 pc pour 1.5 km**\n\n**(1 Mile)**
+prix 1: **1 pc pour 1.5 km**\n\n**(1 Mile)**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/passag.png
+attca1: 4
+attca_image2: symbole/vit.png
+attca2: **6 km/h (4 mph, 60sq)**
+image: image/Services/coach_city.png
+description: \n\n---\n\nUn **Trajet en Diligence en Ville** offre un mode de transport pratique pour ceux qui ne souhaitent pas marcher sur de longues distances. Les diligences urbaines sont souvent couvertes et offrent un confort basique.\n\n---\n\n**Effets :**\n\n> - Déplacements rapides et faciles entre les quartiers de la ville.\n\n> - Espace cargo limité, principalement pour des effets personnels.\n\n---\n\n**Exemples de Services de Diligence en Ville :**\n\n| **Nom**              | **Type**        | **Description**         | **Origine**    |\n|-----------------------|-----------------|--------------------------|---------------|\n| **Diligence Lanterne** | Standard    | Service nocturne éclairé aux lanternes | Quartiers centraux |\n| **Calèche Velours**    | Luxe        | Confortable et privé     | Quartiers nobles |\n| **Navette Marchande**  | Cargo       | Transport de marchandises | Centres commerciaux |\n| **Calèche Cuivrée**    | Économique  | Abordable pour les plus modestes | Quartiers pauvres |\n| **Carrosse Éperon**    | Rapide      | Déplacements rapides     | Marchés animés |
+
+nom: Péage Routier ou de Porte
+nom 1: Péage Routier ou de Porte
+prix: **1 pc**
+prix 1: **1 pc**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Services/road_toll.png
+description: \n\n---\n\nUn **Péage Routier ou de Porte** est une petite taxe prélevée par les autorités locales ou les gardes pour l'utilisation de routes entretenues, de ponts ou pour entrer dans une ville.\n\n---\n\n**Effets :**\n\n> - Permet de traverser des zones restreintes ou surveillées.\n\n> - Le non-paiement peut entraîner des amendes ou un refus de passage.\n\n---\n\n**Exemples de Péages :**\n\n| **Nom**            | **Type**        | **Description**          | **Origine**    |\n|---------------------|-----------------|--------------------------|---------------|\n| **Taxe de la Porte de Fer** | Péage Urbain | Droit d'entrée dans une ville | Portes de la ville |\n| **Taxe de la Route Royale** | Péage Routier | Taxe sur les grandes routes marchandes | Routes royales |\n| **Tarif du Pont Rivière**   | Péage de Pont | Droit de passage sur les ponts | Ponts marchands |\n| **Poste Frontière**         | Péage de Frontière | Frais pour traverser les frontières | Lignes nationales |\n| **Passe-Caravane**          | Péage Marchand | Taxe pour le transport de marchandises | Routes marchandes |
+
+nom: Trajet en Navire
+nom 1: Trajet en Navire
+prix: **1 pa pour 1.5 km**\n\n**(1 Mile)**
+prix 1: **1 pa pour 1.5 km**\n\n**(1 Mile)**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca: 
+attca_image1: symbole/passag.png
+attca1: 
+attca_image2: symbole/vit.png
+attca2: **10 km/h (6 mph, 80c)**
+image: image/Services/ship_passage.png
+description: \n\n---\n\nUn **Trajet en Navire** permet aux passagers de voyager par mer ou rivière, généralement à bord de navires marchands ou de transport de passagers. Le confort du voyage varie en fonction du navire et de l'équipage.\n\n---\n\n**Effets :**\n\n> - Voyage sécurisé sur les routes maritimes.\n\n> - Espace cargo limité pour les effets personnels.\n\n---\n\n**Exemples de Passages en Navire :**\n\n| **Nom**             | **Type**       | **Description**           | **Origine**    |\n|----------------------|---------------|----------------------------|---------------|\n| **Ferry Brise-Tempête** | Passage Fluvial | Voyage calme sur les rivières | Ports fluviaux |\n| **Mouette Dorée**      | Passage Maritime | Voyage luxueux en mer      | Cités côtières |\n| **Cargo Ferblindé**    | Passage Commercial | Lente mais fiable            | Ports marchands |\n| **Skiff Vent-Noir**    | Passage Rapide | Voyage rapide pour quelques passagers | Baies secrètes |\n| **Voyageur de Lune**   | Passage Nocturne | Voyage discret de nuit     | Routes pirates |
+
+nom: Mercenaire Qualifié
+nom 1: Mercenaire Qualifié
+prix: **2 po par jour**
+prix 1: **2 po par jour**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Services/skilled_hireling.png
+description: \n\n---\n\nUn **Mercenaire Qualifié** est un professionnel spécialisé dans un domaine précis.\n\n**Effets :**\n\n> - Offre une **maîtrise dans une compétence ou un métier spécifique**.\n\n> - Capable d'accomplir des **tâches complexes avec précision**.\n\n---\n\n**Exemples de Mercenaires Qualifiés :**\n\n| **Nom**              | **Type**        | **Description**       | **Compétence**       | **Coût Additionnel** |\n|-----------------------|-----------------|-----------------------|---------------------|---------------------|\n| **Rowan Kaelthar**   | Garde          | Vigile fiable         | Perception          | —                   |\n| **Kaelis Forgebrume**| Forgeron       | Maître du métal       | Outils de forge     | +1 po              |\n| **Elysia Calbrith**  | Alchimiste     | Prépare des potions   | Kit d'alchimie      | +2 po              |\n| **Theran Duskbane**  | Scribe         | Copiste rapide        | Calligraphie        | +1 po              |\n| **Cassian Windhelm** | Marin          | Navigateur habile     | Véhicules aquatiques| +1 po              |\n| **Selene Frostleaf** | Guérisseuse    | Soins rapides         | Médecine            | +2 po              |\n| **Darius Thornfield**| Espion         | Observateur discret   | Discrétion          | +2 po              |\n| **Lyara Dawnshade**  | Architecte     | Planification précise | Outils de maçon     | +1 po              |\n| **Faelan Starling**  | Chef Cuisinier | Cuisine raffinée      | Outils de cuisine   | +5 pa              |\n| **Kieran Stonepath** | Éclaireur      | Expert en survie      | Survie             | +1 po              |\n| **Myra Silverquill** | Diplomate      | Négocie des accords   | Persuasion         | +2 po              |
+
+nom: Ouvrier Non Qualifié
+nom 1: Ouvrier Non Qualifié
+prix: **2 pa par jour**
+prix 1: **2 pa par jour**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Services/untrained_hireling.png
+description: \n\n---\n\nUn **Ouvrier Non Qualifié** est un travailleur polyvalent souvent engagé pour des tâches simples et physiques.\n\n**Effets :**\n\n> - Offre une **main-d'œuvre fiable pour des tâches basiques**.\n\n> - **Incapable d'accomplir des tâches nécessitant une expertise**.\n\n---\n\n**Exemples d'Ouvriers Non Qualifiés :**\n\n| **Nom**               | **Type**        | **Description**            | **Tâche**         | **Coût Additionnel** |\n|------------------------|-----------------|----------------------------|-------------------|----------------------|\n| **Finnian Tressevent** | Porteur         | Porte des charges lourdes   | Transport        | —                   |\n| **Elda Clairécume**    | Aide-cuisinière | Aide à la préparation de repas | Cuisine         | —                   |\n| **Jareth Longue-Roche**| Mineur          | Travaille dans les tunnels  | Extraction       | +1 pa              |\n| **Sylas Ventfrisson**  | Charpentier     | Aide au montage de structures | Réparation      | +2 pa              |\n| **Lina Pierrefeu**     | Nettoyeuse      | Entretien ménager | Entretien      | —                   |\n| **Dorien Cielclair**   | Porteur d'eau   | Transporte de l'eau potable  | Approvision | —                   |\n| **Roderic Brisepente** | Aide-bûcheron   | Rassemble et transporte le bois | Sylviculture  | +1 pa              |\n| **Mira Ombrelune**     | Surveillante    | Garde les provisions la nuit | Surveillance     | +1 pa              |\n| **Tarian Feuillage**   | Monteur de camp | Monte les tentes | Camping          | —                   |
+
+nom: Messager
+nom 1: Messager
+prix: **2 pc par 1,5 km**\n\n**(1 mile)**
+prix 1: **2 pc par 1,5 km**\n\n**(1 mile)**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vit.png
+attca2: **10 km/h (6 mph, 80c)**
+image: image/Services/messenger.png
+description: \n\n---\n\nUn **Messager** est engagé pour livrer des lettres, de petits colis ou des informations importantes rapidement et en toute sécurité, que ce soit en ville ou entre des lieux éloignés.\n\n**Effets :**\n\n> - Peut être affecté par les **conditions météorologiques ou les dangers sur la route**.\n\n---\n\n**Exemples de Messagers :**\n\n| **Nom**               | **Type**         | **Description**            | **Vitesse**        | **Coût Additionnel** |\n|------------------------|------------------|----------------------------|--------------------|----------------------|\n| **Ronan Feuille-Vive**| Coureur          | Agile et rapide en ville   | **16 km/h (10 mph)** | —                |\n| **Elda Ombre-Soie**   | Furtif           | Déplacements discrets      | **9,6 km/h (6 mph)** | +1 pc           |\n| **Faucon Aéris**      | Animal dressé    | Livraison aérienne rapide  | **48 km/h (30 mph)** | +1 pa           |\n| **Kael Clair-Voile**  | Fluvial          | Navigue sur les rivières   | **6,4 km/h (4 mph)** | +1 pc           |\n| **Sélène Vent-Nocturne** | Nocturne     | Travaille de nuit          | **8 km/h (5 mph)**   | +1 pc           |\n| **Thalos Roue-Vive**  | Chariot          | Rapide sur terrain plat    | **12 km/h (7 mph)** | +2 pc           |\n| **Lyra Aile-Céleste** | Aérien           | Livraison par monture volante | **64 km/h (40 mph)** | +3 pa         |\n| **Dorian Marche-Pierre** | Terrestre    | Adapté aux terrains accidentés | **8 km/h (5 mph)** | —                |\n| **Elios Clair-Souffle** | Héraut        | Transmission verbale rapide | **Variable**       | —                |\n| **Finn Sabot-Fer**    | Monté            | Messager monté à cheval    | **24 km/h (15 mph)** | +3 pc           |
+
+nom: Commande de Potion de Soins
+nom 1: Commande de Potion de Soins
+prix: **25 po**
+prix 1: **25 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/potion_healing.png
+description: \n\n---\n\n### **Potion de Soins**\n\nCe service permet de commander une **potion de soins standard**, préparée avec soin par un herboriste compétent à l’aide d’ingrédients médicinaux rares.\n\n**Détails du Service :**\n\n> - **Type de Potion :** Potion de soins standard.\n\n> - **Niveau minimal du Créateur :** Niveau 3.\n\n> - **Rareté :** Commune.\n\n> - **Effet :** Rend **2d4+2 points de vie** lorsqu'elle est consommée.\n\n**Avantages de la Potion :**\n\n> - Soigne efficacement des blessures mineures.\n> - Facile à transporter et à administrer.\n> - Idéale pour les aventuriers en déplacement.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir une **potion de soins**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Très rare           | 20                     | 1d6 jours           |\n| Bourg                 | Peu courant         | 15                     | 1d4 jours           |\n| Ville                 | Courant             | 10                     | 1 jour              |\n| Métropole             | Très courant        | 5                      | Immédiat            |\n\n**Style Note :** Le liquide rouge vif brille doucement lorsqu'il est agité, dégageant une douce odeur d'herbes médicinales.
+
+nom: Commande de Potion de Soins Majeurs
+nom 1: Commande de Potion de Soins Majeurs
+prix: **125 po**
+prix 1: **125 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Peu Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/potion_greater_healing.png
+description: \n\n---\n\n### **Potion de Soins Majeurs**\n\nCe service permet de commander une **potion de soins majeurs**, concoctée avec des ingrédients rares et stabilisée par des rituels alchimiques précis.\n\n**Détails du Service :**\n\n> - **Type de Potion :** Potion de soins majeurs.\n\n> - **Niveau minimal du Créateur :** Niveau 5.\n\n> - **Rareté :** Peu Commune.\n\n> - **Effet :** Rend **4d4+4 points de vie** lorsqu'elle est consommée.\n\n**Avantages de la Potion :**\n\n> - Efficace pour soigner des blessures importantes.\n> - Précieuse lors des combats prolongés.\n> - Une ressource stratégique pour les aventuriers chevronnés.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir une **potion de soins majeurs**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Très rare           | 20                     | 1d8 jours           |\n| Ville                 | Peu courant         | 15                     | 1d6 jours           |\n| Métropole             | Courant             | 10                     | 1d4 jours           |\n\n**Style Note :** Le liquide rouge intense tourbillonne doucement, émettant une chaleur réconfortante.
+
+nom: Commande de Potion de Soins Supérieures
+nom 1: Commande de Potion de Soins Supérieures
+prix: **500 po**
+prix 1: **500 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/potion_supreme_healing.png
+description: \n\n---\n\n### **Potion de Soins Supérieures**\n\nCe service permet de commander une **potion de soins supérieures**, créée avec des ingrédients extrêmement rares et stabilisée par un rituel magique complexe.\n\n**Détails du Service :**\n\n> - **Type de Potion :** Potion de soins supérieures.\n\n> - **Niveau minimal du Créateur :** Niveau 9.\n\n> - **Rareté :** Rare.\n\n> - **Effet :** Rend **8d4+8 points de vie** lorsqu'elle est consommée.\n\n**Avantages de la Potion :**\n\n> - Restaure une grande quantité de points de vie.\n> - Essentielle pour les affrontements dangereux.\n> - Convoitée par les aventuriers expérimentés.\n\n**Trouver une Boutique :** \n\nPour trouver un vendeur capable de fournir une **potion de soins supérieures**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Très rare           | 20                     | 1d10 jours          |\n| Ville                 | Rare               | 15                     | 1d8 jours           |\n| Métropole             | Peu courant        | 10                     | 1d6 jours           |\n\n**Style Note :** Le liquide écarlate scintille de reflets dorés et dégage une chaleur douce.
+
+nom: Commande de Potion de Soins Suprêmes
+nom 1: Commande de Potion de Soins Suprêmes
+prix: **5 000 po**
+prix 1: **5 000 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Très Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/potion_elite_healing.png
+description: \n\n---\n\n### **Potion de Soins Suprêmes**\n\nCette **potion de soins suprêmes** est le summum de l'herboristerie curative, souvent réservée aux héros et aux élites. Elle contient une énergie curative extrêmement concentrée, stabilisée par des rituels magiques complexes.\n\n**Détails du Service :**\n\n> - **Type de Potion :** Potion de soins suprêmes.\n\n> - **Niveau minimal du Créateur :** Niveau 11.\n\n> - **Rareté :** Très Rare.\n\n> - **Effet :** Rend **10d4+20 points de vie** lorsqu'elle est consommée.\n\n**Avantages de la Potion :**\n\n> - Restaure une quantité massive de points de vie.\n> - Un atout indispensable lors des affrontements critiques.\n> - Extrêmement prisée par les héros de haut niveau.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir une **potion de soins suprêmes**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Extrêmement rare    | 25                     | 2d10+5 jours        |\n| Ville                 | Très rare           | 20                     | 2d8+2 jours         |\n| Métropole             | Rare               | 15                     | 1d10 jours          |\n\n**Risques Additionnels :**\n\n> - **Faux Produits :** Certains commerçants malhonnêtes peuvent vendre de fausses potions. Un test **réussi d'Arcanes (Intelligence), DD 20**, permet de détecter la falsification.\n\n> - **Convoitise :** Une potion de ce calibre peut attirer des voleurs ou des rivaux.\n\n**Style Note :** Le liquide doré crépite doucement à l'intérieur de la fiole, et une lumière pure émane du centre de la potion, projetant des reflets cristallins sur les murs environnants.
+
+nom: Commande de Parchemin de Sort Mineur
+nom 1: Commande de Parchemin de Sort Mineur
+prix: **15 po**
+prix 1: **15 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_cantrip.png
+description: \n\n---\n\n### **Parchemin de Sort Mineur**\n\nCe service permet de commander un **parchemin de sort mineur**, soigneusement préparé par un mage compétent.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort mineur.\n\n> - **Niveau minimal du Créateur :** Niveau 1.\n\n> - **Rareté :** Commune.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort mineur sans préparation préalable**.\n\n> - Pratique pour des situations précises.\n\n> - Idéal pour les aventuriers cherchant une solution rapide.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir un **parchemin de sort mineur**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Très rare           | 20                     | 1d6 jours           |\n| Bourg                 | Peu courant         | 15                     | 1d4 jours           |\n| Ville                 | Courant             | 10                     | 1 jour              |\n| Métropole             | Très courant        | 5                      | Immédiat            |\n\n**Note de Style :** Le parchemin est orné de fines runes brillantes et dégage une légère lueur bleutée lorsqu'il est activé.
+
+nom: Commande de Parchemin Niv 1
+nom 1: Commande de Parchemin Niv 1
+prix: **25 po**
+prix 1: **25 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level1.png
+description: \n\n---\n\n### **Parchemin de Sort de Niveau 1**\n\nCe service permet de commander un **parchemin de sort de niveau 1**, inscrit avec soin par un mage expérimenté.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 1.\n\n> - **Niveau minimal du Créateur :** Niveau 3.\n\n> - **Rareté :** Commune.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort de niveau 1 sans préparation préalable**.\n\n> - Utile pour des situations critiques.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir un **parchemin de sort de niveau 1**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Très rare           | 20                     | 1d8 jours           |\n| Bourg                 | Rare                | 15                     | 1d6 jours           |\n| Ville                 | Courant             | 10                     | 1d4 jours           |\n| Métropole             | Très courant        | 5                      | Immédiat            |\n\n**Note de Style :** Le parchemin vibre légèrement lorsqu'on le tient, et les symboles brillent faiblement sous la lumière.
+
+nom: Commande de Parchemin Niv 2
+nom 1: Commande de Parchemin Niv 2
+prix: **100 po**
+prix 1: **100 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Peu Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level2.png
+description: \n\n---\n\n### **Parchemin de Sort de Niveau 2**\n\nCe service permet de commander un **parchemin de sort de niveau 2**, soigneusement inscrit sur un parchemin renforcé magiquement.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 2.\n\n> - **Niveau minimal du Créateur :** Niveau 5.\n\n> - **Rareté :** Peu Commune.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort de niveau 2 sans préparation préalable**.\n\n> - Extrêmement utile lors de situations complexes.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir un **parchemin de sort de niveau 2**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Très rare           | 20                     | 1d10 jours          |\n| Ville                 | Peu courant         | 15                     | 1d6 jours           |\n| Métropole             | Courant             | 10                     | 1d4 jours           |\n\n**Note de Style :** Les symboles sur le parchemin semblent vibrer doucement, et une légère odeur d'ozone flotte autour lorsqu'il est déployé.
+
+nom: Commande de Parchemin Niv 3
+nom 1: Commande de Parchemin Niv 3
+prix: **150 po**
+prix 1: **150 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Peu Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level3.png
+description: \n\n---\n\n### **Parchemin de Sort de Niveau 3**\n\nCe service permet de commander un **parchemin de sort de niveau 3**, soigneusement calligraphié avec des encres magiques rares.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 3.\n\n> - **Niveau minimal du Créateur :** Niveau 5.\n\n> - **Rareté :** Peu Commune.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort de niveau 3 sans préparation préalable**.\n\n> - Idéal pour les affrontements décisifs.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir un **parchemin de sort de niveau 3**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Très rare           | 20                     | 1d10 jours          |\n| Ville                 | Peu courant         | 15                     | 1d6 jours           |\n| Métropole             | Courant             | 10                     | 1d4 jours           |\n\n**Note de Style :** Le parchemin émet une lueur douce et crépite légèrement lorsqu'il est manipulé.
+
+nom: Commande de Parchemin Niv 4
+nom 1: Commande de Parchemin Niv 4
+prix: **1 000 po**
+prix 1: **1 000 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level4.png
+description: \n\n---\n\n### **Parchemin de Sort de Niveau 4**\n\nCe service permet de commander un **parchemin de sort de niveau 4**, inscrit avec une précision méticuleuse sur un parchemin enchanté.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 4.\n\n> - **Niveau minimal du Créateur :** Niveau 7.\n\n> - **Rareté :** Rare.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort de niveau 4 sans préparation préalable**.\n\n> - Un atout stratégique majeur.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir un **parchemin de sort de niveau 4**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Très rare           | 20                     | 1d10+2 jours        |\n| Ville                 | Rare               | 15                     | 1d8 jours           |\n| Métropole             | Peu courant        | 10                     | 1d6 jours           |\n\n**Note de Style :** Les runes sur le parchemin brillent d'une lumière dorée, et une chaleur subtile émane du papier.
+
+nom: Commande de Parchemin Niv 5
+nom 1: Commande de Parchemin Niv 5
+prix: **1 500 po**
+prix 1: **1 500 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level5.png
+description: \n\n---\n\n### **Parchemin de Sort de Niveau 5**\n\nCe service permet de commander un **parchemin de sort de niveau 5**, rédigé avec des encres magiques rares et stabilisé par des incantations complexes.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 5.\n\n> - **Niveau minimal du Créateur :** Niveau 9.\n\n> - **Rareté :** Rare.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort de niveau 5 sans préparation préalable**.\n\n> - Inestimable dans des combats critiques.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir un **parchemin de sort de niveau 5**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Très rare           | 20                     | 2d6+2 jours         |\n| Ville                 | Rare               | 15                     | 1d10 jours          |\n| Métropole             | Peu courant        | 10                     | 1d8 jours           |\n\n**Note de Style :** Le parchemin vibre doucement entre les mains, et une lueur argentée danse sur ses bords.
+
+nom: Commande de Parchemin Niv 6
+nom 1: Commande de Parchemin Niv 6
+prix: **10 000 po**
+prix 1: **10 000 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Très Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level6.png
+description: \n\n---\n\n### **Parchemin de Sort de Niveau 6**\n\nCe service permet de commander un **parchemin de sort de niveau 6**, minutieusement préparé avec des encres magiques extrêmement coûteuses et des rituels complexes.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 6.\n\n> - **Niveau minimal du Créateur :** Niveau 11.\n\n> - **Rareté :** Très Rare.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort de niveau 6 sans préparation préalable**.\n\n> - Un outil précieux lors de situations critiques.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir un **parchemin de sort de niveau 6**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Extrêmement rare    | 25                     | 2d10+5 jours        |\n| Ville                 | Très rare           | 20                     | 2d8+2 jours         |\n| Métropole             | Rare               | 15                     | 1d10 jours          |\n\n**Note de Style :** Le parchemin émet un léger bourdonnement mystique, et ses runes scintillent d'une lumière azur.
+
+nom: Commande de Parchemin Niv 7
+nom 1: Commande de Parchemin Niv 7
+prix: **12 500 po**
+prix 1: **12 500 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Très Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level7.png
+description: \n\n---\n\n### **Parchemin de Sort de Niveau 7**\n\nCe service permet de commander un **parchemin de sort de niveau 7**, rédigé avec des matériaux rares et enchantés, souvent nécessitant des composants issus de créatures légendaires.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 7.\n\n> - **Niveau minimal du Créateur :** Niveau 13.\n\n> - **Rareté :** Très Rare.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort de niveau 7 sans préparation préalable**.\n\n> - Une ressource stratégique précieuse.\n\n**Trouver une Boutique :**\n\nPour trouver un vendeur capable de fournir un **parchemin de sort de niveau 7**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Extrêmement rare    | 25                     | 2d12+5 jours        |\n| Ville                 | Très rare           | 20                     | 2d10+2 jours        |\n| Métropole             | Rare               | 15                     | 2d8 jours           |\n\n**Note de Style :** Une aura lumineuse dorée entoure le parchemin, et un doux carillon magique se fait entendre lorsqu'il est déplié.
+
+nom: Commande de Parchemin Niv 8
+nom 1: Commande de Parchemin Niv 8
+prix: **15 000 po**
+prix 1: **15 000 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Très Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level8.png
+description: \n\n---\n\n### **Parchemin de Sort de Niveau 8**\n\nCe service permet de commander un **parchemin de sort de niveau 8**, un artefact magique exceptionnellement rare et précieux.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 8.\n\n> - **Niveau minimal du Créateur :** Niveau 15.\n\n> - **Rareté :** Très Rare.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort de niveau 8 sans préparation préalable**.\n\n> - Extrêmement précieux lors de situations désespérées.\n\n**Trouver une Boutique :** \n\nPour trouver un vendeur capable de fournir un **parchemin de sort de niveau 8**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Extrêmement rare    | 25                     | 2d12+7 jours        |\n| Ville                 | Très rare           | 20                     | 2d10+5 jours        |\n| Métropole             | Rare               | 15                     | 2d8 jours           |\n\n**Note de Style :** Le parchemin dégage une lueur éclatante, et des symboles flottants dansent au-dessus de sa surface.
+
+nom: Commande de Parchemin Niv 9
+nom 1: Commande de Parchemin Niv 9
+prix: **50 000 po**
+prix 1: **50 000 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Légendaire)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level9.png
+description: \n\n---\n\n### **Parchemin de Sort de Niveau 9**\n\nCe service permet de commander un **parchemin de sort de niveau 9**, un artefact d'une puissance incommensurable, capable de sceller des pactes cosmiques ou de renverser des royaumes.\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 9.\n\n> - **Niveau minimal du Créateur :** Niveau 17.\n\n> - **Rareté :** Légendaire.\n\n> - **Utilisation :** Seul un personnage appartenant à une classe possédant le sort inscrit dans sa **liste de sorts de classe** peut tenter d'utiliser ce parchemin. De plus, le personnage doit avoir la **capacité de lancer des sorts** pour activer le parchemin.\n\n**Avantages du Parchemin :**\n\n> - Permet de lancer un **sort de niveau 9 sans préparation préalable**.\n\n> - Peut inverser le cours d'une bataille ou réécrire le destin.\n\n> - Objet incroyablement convoité par les archimages et les grands seigneurs mystiques.\n\n###  Trouver une Boutique :\n\nPour trouver un vendeur capable de fournir un **parchemin de sort de niveau 9**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **Disponibilité**   | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|---------------------|------------------------|---------------------|\n| Village               | Inexistant          | Impossible             | —                  |\n| Bourg                 | Inexistant          | Impossible             | —                  |\n| Ville                 | Extrêmement rare    | 25                     | 2d12+10 jours       |\n| Métropole             | Très rare           | 20                     | 2d10+7 jours        |\n\n**Mécanique Additionnelle :**\n\n> - Un échec critique peut attirer l'attention indésirable d'autres puissances cherchant à empêcher l'acquisition de ce parchemin.\n\n**Risques liés à l'Obtention :**\n\n> - **Fausses copies** : Certains vendeurs peu scrupuleux peuvent proposer de faux parchemins. Un test **réussi d'Arcanes (Intelligence), DD 20**, permet de détecter la falsification.
+
+nom: Service de Lancement de Sort Tour de Magie
+nom 1: Service de Lancement de Sort Tour de Magie
+prix: **10 po**
+prix 1: **10 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service Magique (Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_cantrip.png
+description: \n\n---\n\n### **Service de Lancement de Sort (Tour de Magie)**\n\nCe service permet à un lanceur de sorts compétent d'invoquer un **tour de magie**, une magie simple mais utile, souvent utilisée pour des tâches quotidiennes ou des effets pratiques.\n\n---\n\n**Détails du Service :**\n\n> - **Type de Sort :** Tour de magie.\n\n> - **Niveau minimal du Lanceur :** Niveau 1.\n\n> - **Rareté :** Commune.\n\n---\n\n**Exemples de Tours de Magie :**\n\n| **Sort**         | **Effet**          | **Utilisation**       |\n|-------------------|--------------------|-----------------------|\n| Lumière         | Émet une lumière   | Éclairer une zone     |\n| Prestidigitation| Effets mineurs     | Nettoyer, réchauffer  |\n| Réparation      | Répare un objet    | Restaurer un objet    |\n| Contact glacial          | Dommage mineur     | Combat               |\n| Message         | Communication secrète | Envoyer un message  |\n\n---\n\n**Trouver un Lanceur de Sort :**\n\nPour trouver un lanceur de sorts capable d'offrir un **Service de Tour de Magie**, lancez un **test d'Investigation (Intelligence)** selon la taille de la ville :\n\n| **Taille de la Ville** | **DD d'Investigation** | **Délai d'Attente** |\n|------------------------|------------------------|---------------------|\n| Village               | 15                     | 1d4 jours           |\n| Bourg                 | 10                     | 1 jour              |\n| Ville                 | 5                      | Immédiat            |\n| Métropole             | 5                      | Immédiat            |\n\n**Style Note :** Une douce lueur émane des doigts du lanceur alors que le sort est activé, souvent accompagnée d'une légère brise ou d'une étincelle magique.
+
+nom: Service de Lancement de Sort Niveau 1
+nom 1: Service de Lancement de Sort Niveau 1
+prix: **50 po**
+prix 1: **50 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service Magique (Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level1.png
+description: \n\n---\n\n### **Service de Lancement de Sort Niveau 1**\n\nCe service offre l'accès à des **sorts de niveau 1**, souvent utilisés pour des soins mineurs, des protections simples ou des effets utilitaires.\n\n---\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 1.\n\n> - **Niveau Minimal du Lanceur :** Niveau 3.\n\n> - **Rareté :** Commune..\n\n**Exemples de Sorts de Niveau 1 :**\n\n| **Sort**         | **Effet**             | **Utilité**            |\n|------------------|-----------------------|------------------------|\n| Soins           | Soigne des blessures mineures | Restaure des points de vie |\n| Détection de la magie | Détecte les auras magiques | Identifier les enchantements |\n| Bouclier        | Barrière protectrice  | Améliore la défense    |\n| Feuille morte    | Ralentit la descente  | Empêche les dégâts de chute |\n| Identification  | Apprend les propriétés d'un objet | Identification magique |\n| Baies nourricières  | Sustentation et soins | Restaure 1 point de vie et nourrit |\n\n---\n\n**Trouver un Lanceur de Sort :**\n\nPour trouver un lanceur de sorts capable de fournir un **Service de Sort Niveau 1**, effectuez un **test d'Investigation (Intelligence)** basé sur la taille de la ville :\n\n| **Taille de la Ville** | **DD d'Investigation** | **Délai d'Attente** |\n|-------------------------|------------------------|---------------------|\n| Village                | 20                     | 1d6 jours          |\n| Bourg                  | 15                     | 1d4 jours          |\n| Ville                  | 10                     | 1 jour             |\n| Métropole              | 5                      | Immédiat           |\n\n**Note de Style :** Les mains du lanceur de sorts brillent doucement avec des symboles runiques lorsque le sort prend effet.
+
+nom: Service de Lancement de Sort Niveau 2
+nom 1: Service de Lancement de Sort Niveau 2
+prix: **200 po**
+prix 1: **200 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service Magique (Peu Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level2.png
+description: \n\n---\n\n### **Service de Lancement de Sort Niveau 2**\n\nCe service permet d'accéder à des **sorts de niveau 2**, souvent utilisés pour soigner des afflictions, faciliter l'infiltration ou améliorer les capacités de combat.\n\n---\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 2.\n\n> - **Niveau Minimal du Lanceur :** Niveau 5.\n\n> - **Rareté :** Peu Commune..\n\n**Exemples de Sorts de Niveau 2 :**\n\n| **Sort**           | **Effet**             | **Utilité**          |\n|---------------------|-----------------------|----------------------|\n| Restauration Partielle | Retire une condition     | Guérit maladies/poisons |\n| Invisibilité       | Rend invisible        | Infiltration         |\n| Image Miroir       | Illusion défensive    | Évite les attaques   |\n| Foulée brumeuse        | Téléportation courte  | Évasion rapide       |\n| Immobilisation de Personne | Paralyse une cible | Neutralisation d'ennemi |\n\n---\n\n**Trouver un Lanceur de Sort :**\n\nPour trouver un lanceur de sorts capable de fournir un **Service de Sort Niveau 2**, effectuez un **test d'Investigation (Intelligence)** basé sur la taille de la ville :\n\n| **Taille de la Ville** | **DD d'Investigation** | **Délai d'Attente** |\n|-------------------------|------------------------|---------------------|\n| Village                | Impossible            | —                  |\n| Bourg                  | 20                    | 1d8 jours          |\n| Ville                  | 15                    | 1d6 jours          |\n| Métropole              | 10                    | 1d4 jours          |\n\n**Note de Style :** Une légère lueur entoure le lanceur alors qu'il canalise l'énergie du sort.
+
+nom: Service de Lancement de Sort Niveau 3
+nom 1: Service de Lancement de Sort Niveau 3
+prix: **300 po**
+prix 1: **300 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service Magique (Peu Commun)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level3.png
+description: \n\n---\n\n### **Service de Lancement de Sort Niveau 3**\n\nCe service offre l'accès à des **sorts de niveau 3**, capables de produire des effets puissants en combat, en soins ou en utilitaires.\n\n---\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 3.\n\n> - **Niveau Minimal du Lanceur :** Niveau 7.\n\n> - **Rareté :** Peu Commune..\n\n**Exemples de Sorts de Niveau 3 :**\n\n| **Sort**         | **Effet**           | **Utilité**          |\n|-------------------|---------------------|----------------------|\n| Boule de Feu     | Dégâts de zone      | Dévastation en combat |\n| Contresort       | Annule un sort      | Interrompt les sort |\n| Retour à la vie      | Ramène un mort      | Résurrection tactique  |\n| Vol             | Capacité de voler   | Déplacement aérien   |\n| Dissipation de la Magie | Annule les enchantements | Supprime les effets magiques |\n\n---\n\n**Trouver un Lanceur de Sort :**\n\nPour trouver un lanceur de sorts capable de fournir un **Service de Sort Niveau 3**, effectuez un **test d'Investigation (Intelligence)** basé sur la taille de la ville :\n\n| **Taille de la Ville** | **DD d'Investigation** | **Délai d'Attente** |\n|-------------------------|------------------------|---------------------|\n| Village                | Impossible            | —                  |\n| Bourg                  | 20                    | 1d10 jours         |\n| Ville                  | 15                    | 1d8 jours          |\n| Métropole              | 10                    | 1d6 jours          |\n\n**Note de Style :** L'air crépite d'énergie alors que le lanceur trace des symboles complexes dans les airs.
+
+nom: Service de Lancement de Sort Niveau 4-5
+nom 1: Service de Lancement de Sort Niveau 4-5
+prix: **2 000 po**
+prix 1: **2 000 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service Magique (Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level4-5.png
+description: \n\n---\n\n### **Service de Lancement de Sort Niveau 4-5**\n\nCes sorts puissants peuvent renverser le cours d'une bataille, guérir des blessures mortelles ou résoudre des situations complexes.\n\n---\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 4-5.\n\n> - **Niveau Minimal du Lanceur :** Niveau 9.\n\n> - **Rareté :** Rare..\n\n**Exemples de Sorts de Niveau 4-5 :**\n\n| **Sort**            | **Effet**              | **Utilité**             |\n|----------------------|------------------------|-------------------------|\n| Invisibilité Supérieure | Invisibilité prolongée | Discrétion prolongée   |\n| Peau de Pierre      | Résistance aux dégâts  | Défense améliorée       |\n| Porte Dimensionnelle | Téléportation rapide   | Déplacement stratégique |\n| Soins de Groupe     | Soins en zone          | Restaure plusieurs alliés |\n| Rappel à la Vie     | Ramène un mort | Ramène un allié à la vie |\n\n---\n\n**Trouver un Lanceur de Sort :**\n\nPour trouver un lanceur de sorts capable de fournir un **Service de Sort Niveau 4-5**, effectuez un **test d'Investigation (Intelligence)** basé sur la taille de la ville :\n\n| **Taille de la Ville** | **DD d'Investigation** | **Délai d'Attente** |\n|-------------------------|------------------------|---------------------|\n| Village                | Impossible            | —                  |\n| Bourg                  | 25                    | 2d8+2 jours        |\n| Ville                  | 20                    | 1d10 jours         |\n| Métropole              | 15                    | 1d8 jours          |\n\n**Note de Style :** Une lumière douce et persistante émane du lanceur de sorts alors qu'il incante lentement les paroles anciennes du sort.
+
+nom: Service de Lancement de Sort Niveau 6-7
+nom 1: Service de Lancement de Sort Niveau 6-7
+prix: **20 000 po**
+prix 1: **20 000 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service Magique (Très Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level6-7.png
+description: \n\n---\n\n### **Service de Lancement de Sort Niveau 6-7**\n\nCes sorts puissants peuvent altérer la réalité, contrer des malédictions mortelles ou déchaîner des forces dévastatrices.\n\n---\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 6-7.\n\n> - **Niveau Minimal du Lanceur :** Niveau 11.\n\n> - **Rareté :** Très Rare..\n\n**Exemples de Sorts de Niveau 6-7 :**\n\n| **Sort**            | **Effet**              | **Utilité**           |\n|----------------------|------------------------|-----------------------|\n| Guérison            | Restauration complète | Soins majeurs         |\n| Changement de plan	 | Voyage planaire       | Exploration planaires |\n| Désintégration      | Destruction matérielle | Élimination d'obstacles |\n| Vision suprême    | Perception magique     | Révélation de vérités |\n| Doigt de Mort       | Magie létale           | Élimination rapide   |\n\n---\n\n**Trouver un Lanceur de Sort :**\n\nPour trouver un lanceur de sorts capable de fournir un **Service de Sort Niveau 6-7**, effectuez un **test d'Investigation (Intelligence)** basé sur la taille de la ville :\n\n| **Taille de la Ville** | **DD d'Investigation** | **Délai d'Attente** |\n|-------------------------|------------------------|---------------------|\n| Village                | Impossible            | —                  |\n| Bourg                  | 25                    | 2d10+5 jours       |\n| Ville                  | 20                    | 2d8+2 jours        |\n| Métropole              | 15                    | 1d10 jours         |\n\n**Note de Style :** Une énergie arcanique tourbillonne autour du lanceur alors qu'il déploie des glyphes lumineux complexes.
+
+nom: Service de Lancement de Sort Niveau 8
+nom 1: Service de Lancement de Sort Niveau 8
+prix: **50 000 po**
+prix 1: **50 000 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service Magique (Très Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level8.png
+description: \n\n---\n\n### **Service de Lancement de Sort Niveau 8**\n\nCes sorts comptent parmi les plus puissants, capables de causer des destructions massives, de protéger contre des menaces titanesques ou d'altérer l'esprit.\n\n---\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 8.\n\n> - **Niveau Minimal du Lanceur :** Niveau 15.\n\n> - **Rareté :** Très Rare..\n\n**Exemples de Sorts de Niveau 8 :**\n\n| **Sort**            | **Effet**             | **Utilité**           |\n|----------------------|-----------------------|-----------------------|\n| Esprit impénétrable   | Protection mentale    | Immunité psychique    |\n| Mot de pouvoir étourdissant | Incapacite la cible | Neutralisation d'ennemi |\n| Tremblement de Terre | Séisme massif       | Destruction étendue   |\n| Éclat du soleil     | Explosion lumineuse   | Dégâts radiants       |\n| Domination de Monstre | Contrôle mental     | Manipulation d'une créature |\n\n---\n\n**Trouver un Lanceur de Sort :**\n\nPour trouver un lanceur de sorts capable de fournir un **Service de Sort Niveau 8**, effectuez un **test d'Investigation (Intelligence)** basé sur la taille de la ville :\n\n| **Taille de la Ville** | **DD d'Investigation** | **Délai d'Attente** |\n|-------------------------|------------------------|---------------------|\n| Village                | Impossible            | —                  |\n| Bourg                  | Impossible            | —                  |\n| Ville                  | 25                    | 2d12+5 jours       |\n| Métropole              | 20                    | 2d10+3 jours       |\n\n**Note de Style :** L'atmosphère vibre sous la pression du pouvoir tandis que les incantations résonnent dans l'air.
+
+nom: Service de Lancement de Sort Niveau 9
+nom 1: Service de Lancement de Sort Niveau 9
+prix: **100 000 po**
+prix 1: **100 000 po**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service Magique (Légendaire)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level9.png
+description: \n\n---\n\n### **Service de Lancement de Sort Niveau 9**\n\nCes sorts représentent le sommet absolu de la puissance magique, capables de réécrire la réalité, de ramener les morts à la vie ou de déclencher des catastrophes d'une ampleur inimaginable.\n\n---\n\n**Détails du Service :**\n\n> - **Type de Sort :** Sort de niveau 9.\n\n> - **Niveau Minimal du Lanceur :** Niveau 17.\n\n> - **Rareté :** Légendaire..\n\n**Exemples de Sorts de Niveau 9 :**\n\n| **Sort**             | **Effet**               | **Utilité**             |\n|-----------------------|-------------------------|-------------------------|\n| Souhait              | Réalisation d'un vœu   | Accomplir presque tout  |\n| Résurrection suprême | Résurrection parfaite  | Ramène les morts à la vie |\n| Arrêt du Temps       | Geler le temps         | Actions ininterrompues  |\n| Nuée de météores    | Destruction massive    | Ravage une vaste zone   |\n| Mot de Pouvoir Mortel | Mort instantanée       | Élimine une cible faible |\n\n---\n\n**Trouver un Lanceur de Sort :**\n\nPour trouver un lanceur de sorts capable de fournir un **Service de Sort Niveau 9**, effectuez un **test d'Investigation (Intelligence)** basé sur la taille de la ville :\n\n| **Taille de la Ville** | **DD d'Investigation** | **Délai d'Attente** |\n|-------------------------|------------------------|---------------------|\n| Village                | Impossible            | —                  |\n| Bourg                  | Impossible            | —                  |\n| Ville                  | 30                    | 2d12+10 jours      |\n| Métropole              | 25                    | 2d10+7 jours       |\n\n**Risques Additionnels :**\n\n>- **Conséquences imprévues :** Certains sorts de ce niveau peuvent entraîner des effets secondaires imprévus.\n\n> - **Interventions extérieures :** Des puissances mystiques ou rivales pourraient interférer avec le rituel.\n\n**Note de Style :** L'air se déforme autour du lanceur, les ombres dansent et une énergie écrasante remplit la pièce alors que le sort prend forme.

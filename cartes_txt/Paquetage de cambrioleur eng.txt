@@ -1,0 +1,131 @@
+nom: Backpack
+nom 1: Backpack
+prix: **2 gp**
+prix 1: **2 gp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/backpack.png
+description: \n\n---\n\nThis leather or reinforced cloth backpack is designed for adventurers to carry essential gear during their travels. It is lightweight but not optimized for use with heavier armor.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Can hold up to **30 pounds or 1 cubic foot (15 kg)**.\n\n>- **Usage**: Using this backpack while wearing **medium or heavy armor** imposes **disadvantage** on all **Dexterity** checks, including **Stealth**.
+
+nom: Ball Bearings
+nom 1: Ball Bearings
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/ball_bearings.png
+description: \n\n---\n\nA pouch containing 1 000 of tiny metal balls used to trip enemies or slow pursuit.\n\n---\n\n**Mechanics**:\n\n>- **Use**: As part of the **Utilize action**, spill the ball bearings to cover a **10ft (3 m, 2c)** square area within **10ft (3 m, 2c)**.\n\n>- **Effect**: Creatures entering the area must succeed on a **DC 10 **Dexterity** saving throw** or fall **Prone**.\n\n>- **Recovery**: Takes **10 minutes** to collect the ball bearings.
+
+nom: Bell
+nom 1: Bell
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **0.1 lb**\n\n**(0.05 kg)**
+poids 1: **0.1 lb**\n\n**(0.05 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/bell.png
+description: \n\n---\n\nA small metal bell that emits a clear sound when rung.\n\n---\n\n**Mechanics**:\n\n>- **Use**: As part of the **Utilize action**, ring the bell to produce a sound audible within **60ft (18 m, 12c)**.\n\n>- **Effect**: Often used to signal or alert others.\n\n>- **Special**: Can be tied to objects for alarms or traps.
+
+nom: Candle (10)
+nom 1: Candle (10)
+prix: **1 sp**
+prix 1: **1 sp**
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)\n\n![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/candle10.png
+description: \n\n---\n\nTen simple wax candle used for illumination.\n\n---\n\n**Mechanics**:\n\n>- **Effect**: When lit, sheds **Bright Light** in a **5 ft (1.5 m, 1c)** radius and **Dim Light** for an additional **5 ft (1.5 m, 1c)**.\n\n>- **Duration**: Burns for **1 hour**.\n\n>- **Special**: perfect for maintaining subtle lighting without drawing much attention.
+
+nom: Crowbar
+nom 1: Crowbar
+prix: **2 gp**
+prix 1: **2 gp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/crowbar.png
+description: \n\n---\n\nA sturdy, metal tool designed to provide leverage for prying open doors, crates, or breaking objects.\n\n---\n\n**Mechanics**:\n\n>- **Effect**: Grants **Advantage** on Strength checks where leverage is applicable (e.g., breaking doors, opening chests).\n\n>- **Use**: Essential for bypassing locked or jammed objects without needing keys or finesse tools.
+
+nom: Lantern, Hooded
+nom 1: Lantern, Hooded
+prix: **5 gp**
+prix 1: **5 gp**
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/hooded_lantern.png
+description: \n\n---\n\nA versatile lantern with an adjustable hood, allowing control over its light output.\n\n---\n\n**Mechanics**:\n\n>- **Light Radius**: Casts **Bright Light** in a **30ft (9 m, 6c)** radius and **Dim Light** for an additional **30ft (9 m, 6c)**.\n\n>- **Adjustable Hood**: As a **Bonus Action**, lower the hood to reduce light to **Dim Light** in a **5 ft (1.5 m, 1c)** radius, or raise it again to restore full brightness.\n\n>- **Fuel Consumption**: Requires **Oil** to function. A single flask of oil lasts for **6 hours** of continuous use.\n\n>- **Use**: Suitable for both stealthy operations and general illumination.\n\n>- **Effect**: perfect for balancing visibility and subtlety in various environments.
+
+nom: Oil (7)
+nom 1: Oil (7)
+prix: **7 sp**
+prix 1: **7 sp**
+poids: **7 lb**\n\n**(3.5 kg)**
+poids 1: **7 lb**\n\n**(3.5 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)<br><br>![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/oil7.png
+description: \n\n---\n\nA versatile flask of oil, useful for lighting fires, fueling lanterns, or creating slick surfaces.\n\n---\n\n**Mechanics**:\n\n>- **Dousing Targets**: Throwing oil as part of an attack covers a creature or object within **20ft (6 m, 4c)**. The target must succeed on a **DC 8 **Dexterity** saving throw** (plus your **Dexterity** modifier and Proficiency Bonus) or be covered in oil. If ignited, the target takes an additional **5 Fire damage**.\n\n>- **Creating Slick Surfaces**: Pouring oil as a **Utilize action** creates a slippery **5 ft (1.5 m, 1c)** square area.\n\n>- **Fuel Source**: A flask of oil burns for **6 hours** in a lamp or lantern.
+
+nom: Ration (5)
+nom 1: Ration (5)
+prix: **25 sp**
+prix 1: **25 sp**
+poids: **10 lb**\n\n**(5 kg)**
+poids 1: **10 lb**\n\n**(5 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)<br><br>![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/ration_bundle.png
+description: \n\n---\n\nA bundled package containing **10 days** worth of travel-ready food, including **jerky**, **dried fruit**, **hardtack**, and **nuts**. This bulk supply is ideal for extended expeditions and long-term survival planning.\n\n---\n\n**Mechanics:**\n\n>- **Daily Sustenance:** One ration provides enough food to meet the daily requirement for a **Small** or **Medium** creature.**Malnutrition Hazard:**\n\n>- A creature must consume at least **half** its required daily food to avoid **Exhaustion**.\n\n>- Eating less than half requires a **DC 10 Constitution saving throw** or the creature gains **1 level of Exhaustion** at the end of the day.\n\n>- A creature eating nothing for **5 consecutive days** gains **1 level of Exhaustion automatically** on the fifth day, and an additional level for each subsequent day without food.\n\n>- **Exhaustion Recovery:** Eating a full day’s worth of food removes malnutrition-related Exhaustion.\n\n>- **Flavor:** While functional and compact, rations are bland and repetitive. They are meant for survival, not enjoyment.\n\n---\n\n**Food Needs per Day**: A **Tiny** creature requires **1/4 lb (0.1 kg)** of food per day, a **Small or Medium** creature **1 lb (0.5 kg)**, a **Large** creature **4 lb (2 kg)**, a **Huge** creature **16 lb (8 kg)**, and a **Gargantuan** creature **64 lb (32 kg)**.  \n\n---\n\n**Exhaustion Condition**:\n\n>  - **Cumulative Levels**: Each time you gain Exhaustion, you receive **1 level of Exhaustion**. At **6 levels**, the character dies.\n\n>  - **D20 Tests Affected**: Reduce the result of all **D20 Tests** (ability checks, saving throws, and attack rolls) by **2 × your Exhaustion level**.\n\n>  - **Speed Reduced**: Reduce your **Speed** by **5 feet (1.5 m, 1 case)** per Exhaustion level.
+
+nom: Rope
+nom 1: Rope
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/rope.png
+description: \n\n---\n\nA versatile and durable rope, essential for adventurers to tie knots, climb, or restrain creatures.\n\n---\n\n**Mechanics**:\n\n>- **Tying Knots**: As a **Utilize action**, tie a knot with the rope by succeeding on a **DC 10 **Dexterity** (Sleight of Hand)** check.\n\n>- **Breaking the Rope**: The rope can be burst with a successful **DC 20 Strength (Athletics)** check.\n\n>- **Binding Creatures**: Bind an **unwilling creature** with the rope only if it is **Grappled, Incapacitated, or Restrained**. If the creature’s legs are bound, it gains the **Restrained condition** until it escapes.\n\n>- **Escape**: To escape the rope, the creature must make a successful **DC 15 **Dexterity** (Acrobatics)** check as an action.
+
+nom: Tinderbox
+nom 1: Tinderbox
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/tinderbox.png
+description: \n\n---\n\nA small container holding the tools necessary to kindle a fire.\n\n---\n\n**Mechanics**:\n\n>- **Contents**: Includes flint, fire steel, and lightly oiled tinder.**Effect**: \n\n> - As a **Bonus Action**, light a **candle**, **lamp**, **lantern**, or **torch**.\n\n> - Lighting any other exposed fuel (e.g., campfire) takes **1 minute**.\n\n>- **Use**: Essential for survival in dark dungeons, wilderness camping, or preparing light sources.
+
+nom: Waterskin
+nom 1: Waterskin
+prix: **2 sp**
+prix 1: **2 sp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/waterskin.png
+description: \n\n---\n\nA leather pouch designed to carry water or other liquids for travel.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Holds up to **4 pints (2 liters)** of liquid.\n\n>- **Effect**: Essential for staying hydrated in the wilderness.\n\n>- **Weight**: **Full**: 5 lb (2.5 kg) / **Empty**: Negligible weight.\n\n>- **Use**: Drinking from a waterskin counts as part of a short rest or an action.\n\n---\n\n **Dehydration Rules**:\n\n>  - **Water Needs per Day**: A **Tiny** creature requires **1/4 gallon (0.9 L)** of water per day, a **Small or Medium** creature **1 gallon (3.5 L)**, a **Large** creature **4 gallons (15 L)**, a **Huge** creature **16 gallons (60 L)**, and a **Gargantuan** creature **64 gallons (240 L)**.  \n\n>  - **Dehydration Effects**: If a creature drinks less than **half the required water** for a day, it gains **1 level of Exhaustion** at the day’s end.\n\n>  - **Recovery**: Exhaustion caused by dehydration **cannot be removed** until the creature drinks the **full daily water requirement**.\n\n---\n\n**Exhaustion Condition**:\n\n>  - **Cumulative Levels**: Each time you gain Exhaustion, you receive **1 level of Exhaustion**. At **6 levels**, the character dies.\n\n>  - **D20 Tests Affected**: Reduce the result of all **D20 Tests** (ability checks, saving throws, and attack rolls) by **2 × your Exhaustion level**.\n\n>  - **Speed Reduced**: Reduce your **Speed** by **5 feet (1.5 m, 1 case)** per Exhaustion level.

@@ -1,0 +1,800 @@
+nom: Stable Service per Day
+nom 1: Stable Service per Day
+prix: **5 sp**
+prix 1: **5 sp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/stable_service.png
+description: \n\n---\n\nA **Stable Service per Day** offers secure shelter and basic care for adventurers and travelers mounts. Stables are typically located near inns or city gates.\n\n**Effects:**\n\n> - Provides a **secure shelter** for a **standard mount** (horse, pony, mule).\n\n> - Includes **food and fresh water** for the mount.\n\n> - Allows a **full rest for the mount**, restoring its energy.\n\n> - Optional **additional services** like **grooming** or **shoeing** are available at extra cost.\n\n---\n\n### **Stable Conditions:**\n\n| **Service**        | **Description**       |\n|---------------------|------------------------|\n| **Private Stall**   | Individual, secure stall |\n| **Food**           | Fresh hay and clean water |\n| **Surveillance**   | Regular watch over mounts |\n| **Maintenance**    | Daily cleaning of the stall |\n\n**Additional Services:**\n\n| **Service**         | **Price** | **Description**         |\n|----------------------|---------|-------------------------|\n| **Full Grooming**   | 2 sp    | Thorough care for the mount |\n| **Shoeing**         | 1 gp    | Replacement of horseshoes   |\n| **Minor Care**      | 5 sp    | Dressing minor injuries     |\n| **Light Training**  | 2 gp    | Basic obedience training    |
+
+nom: Feed (per day)
+nom 1: Feed (per day)
+prix: **5 cp**
+prix 1: **5 cp**
+poids: **10 lb**\n\n**(5 kg)**
+poids 1: **10 lb**\n\n**(5 kg)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Consumable
+attca_image: symbole/vide.png
+attca:
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+image: image/Vehicules/horse_feed.png
+description: \n\n---\n\n**Daily Ration of Animal Feed**.\n\n**Usage:**\n\n> - **Daily Requirements:** Medium or Large animals require **1 unit of feed per day**.\n\n> - **Small Creatures:** Small animals require **half a unit**.\n\n> - **Larger Creatures:** Huge creatures require **4 units**, and Gargantuan creatures require **10 units**.\n\n> - **Storage:** Can be stored in **bags, carts, or containers**.\n\n---\n\n### **Malnutrition Mechanics**\n\n> - Eating less than **half of the required daily ration** requires a **DC 10 Constitution saving throw**, or the creature suffers **1 level of Exhaustion** at the end of the day.\n\n> - Eating **nothing for 5 consecutive days** results in **1 automatic level of Exhaustion** on the fifth day, and **+1 level per additional day**.\n\n> - **Recovery:** Exhaustion caused by malnutrition **cannot be removed** until the creature consumes **a full ration for an entire day**.\n\n---\n\n### **Exhaustion Condition:**\n\n> - **Cumulative Levels:** With each additional level of Exhaustion, the creature suffers increasingly severe effects. At **6 levels**, it **dies**.\n\n> - **D20 Rolls Affected:** Reduce the result of all **D20 rolls** (ability checks, saving throws, attack rolls) by **2 × your level of Exhaustion**.\n\n> - **Speed Reduction:** Reduce your **Speed** by **1.5 m (5 feet)** per level of Exhaustion.\n\n> - **Recovery:** A **Long Rest** removes **1 level of Exhaustion**. When your Exhaustion level reaches **0**, the condition ends.
+
+nom: Wretched Lifestyle
+nom 1: Wretched Lifestyle
+prix: **0 gp**
+prix 1: **0 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/wretched_lifestyle.png
+description: \n\n---\n\nThe **Wretched Lifestyle** represents the **bare minimum for survival**, relying on scraps, luck, and occasional charity. Shelter is often non-existent, and exposure to **disease** and **natural hazards** is constant.\n\n**General Conditions:**\n\n> - **Shelter:** None. You sleep in the open, abandoned buildings, or makeshift shelters.\n\n> - **Food:** Scavenged scraps or occasional handouts.\n\n> - **Clothing:** Torn, dirty, and insufficient for harsh weather.\n\n> - **Hygiene:** Poor, leading to frequent illness or infection.\n\n**Social Status:**\n\n> - You are **ignored or scorned** by most people.\n\n> - Guards or city officials may **harass or expel** you from public spaces.\n\n> - Others may avoid eye contact or actively distance themselves from you.\n\n**Health Risks:**\n\n> - **Disease Exposure:** Increased chance of contracting illnesses from unsanitary conditions.\n\n> - **Starvation:** Without regular food, you suffer from exhaustion and malnutrition.\n\n> - **Environmental Hazards:** Vulnerable to cold, rain, or extreme heat without shelter.\n\n**Opportunities:**\n\n> - You may learn to **navigate urban slums or wilderness** with resourcefulness.\n\n> - You might overhear **street-level rumors or secrets** unnoticed by others.\n\n> - Kind-hearted individuals may occasionally offer **food or shelter**.\n\n> - Familiarity with the **hidden corners and passageways** of cities.\n\n> - Adaptation to **harsh environments and survival tactics**.
+
+nom: Squalid Lifestyle
+nom 1: Squalid Lifestyle
+prix: **1 sp per day**
+prix 1: **1 sp per day**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/squalid_lifestyle.png
+description: \n\n---\n\nThe **Squalid Lifestyle** represents a **precarious existence** marked by overcrowded spaces, unsanitary conditions, and a constant struggle to maintain basic needs.\n\n**General Conditions:**\n\n> - **Shelter:** Shared rooms or improvised shelters offering minimal protection from the elements.\n\n> - **Food:** Cheap, often stale or low-quality meals.\n\n> - **Clothing:** Worn and poorly fitted, offering limited protection.\n\n> - **Hygiene:** Poor sanitation and limited access to clean water.\n\n**Social Status:**\n\n> - You are **ignored or pitied** by most people.\n\n> - Guards and officials may treat you with **disdain** or **suspicion**.\n\n> - Wealthier individuals will **actively avoid interacting** with you.\n\n**Health Risks:**\n\n> - **Increased Illness Risk:** Exposure to diseases due to poor hygiene and living conditions.\n\n> - **Theft and Exploitation:** Vulnerable to thieves, scams, or predatory individuals.\n\n> - **Malnutrition:** Meals provide enough to stave off hunger but lack nutritional balance.\n\n**Opportunities:**\n\n> - Access to **street-level information** and connections with low-level criminals or beggars.\n\n> - You might gain the **trust of others living in similar conditions**.\n\n> - Opportunities to **blend into crowded areas unnoticed**.\n\n> - Familiarity with **low-cost or hidden services** in urban areas.\n\n> - Ability to **survive with minimal resources**.
+
+nom: Poor Lifestyle
+nom 1: Poor Lifestyle
+prix: **2 sp per day**
+prix 1: **2 sp per day**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/poor_lifestyle.png
+description: \n\n---\n\nThe **Poor Lifestyle** represents a **modest but fragile existence**, where basic needs are met but comfort and stability remain scarce.\n\n**General Conditions:**\n\n> - **Shelter:** A small, often shared room in an inn, dormitory, or basic lodging.\n\n> - **Food:** Simple, hearty meals that provide basic sustenance.\n\n> - **Clothing:** Functional but plain clothing, often secondhand.\n\n> - **Hygiene:** Limited access to clean water and bathing facilities.\n\n**Social Status:**\n\n> - You are **mostly ignored by wealthier individuals** but may gain some respect among working-class people.\n\n> - Guards and officials will treat you with **indifference unless provoked**.\n\n> - You blend in easily in **crowded or modest areas**.\n\n**Health Risks:**\n\n> - **Limited Nutrition:** Meals provide enough to remain healthy but lack variety.\n\n> - **Minor Illnesses:** Slightly increased exposure to common illnesses.\n\n> - **Vulnerability to Crime:** Petty theft and scams are occasional risks.\n\n**Opportunities:**\n\n> - Access to **working-class networks** in towns and cities.\n\n> - Ability to **find temporary work** in modest establishments.\n\n> - Interaction with **merchants, craftsmen, and laborers**.\n\n> - **Discreet travel** without drawing significant attention.\n\n> - Opportunities to **save modest sums of money over time**.
+
+nom: Modest Lifestyle
+nom 1: Modest Lifestyle
+prix: **1 gp per day**
+prix 1: **1 gp per day**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/modest_lifestyle.png
+description: \n\n---\n\nThe **Modest Lifestyle** offers a **balanced and dependable standard of living**, where basic needs are comfortably met without excess.\n\n**General Conditions:**\n\n> - **Shelter:** A small private room in an inn, modest home, or simple apartment.\n\n> - **Food:** Regular meals with decent variety and adequate portions.\n\n> - **Clothing:** Clean and practical attire suitable for daily life.\n\n> - **Hygiene:** Access to bathing facilities and clean water.\n\n**Social Status:**\n\n> - You are **well-regarded among common folk** and seen as respectable.\n\n> - Guards and officials generally treat you with **fairness and courtesy**.\n\n> - You can comfortably move through **middle-class areas** without suspicion.\n\n**Health and Well-being:**\n\n> - **Stable Nutrition:** Balanced meals help maintain good health.\n\n> - **Reduced Risk of Illness:** Living conditions minimize exposure to disease.\n\n> - **Security:** Lodgings offer reasonable protection against theft.\n\n**Opportunities:**\n\n> - Access to **guilds, small businesses, and modest establishments**.\n\n> - Opportunities to **build relationships with merchants or tradespeople**.\n\n> - Ability to **save small amounts of money regularly**.\n\n> - Potential for **steady employment or ongoing contracts**.\n\n> - Occasional invitations to **local community events or gatherings**.
+
+nom: Comfortable Lifestyle
+nom 1: Comfortable Lifestyle
+prix: **2 gp per day**
+prix 1: **2 gp per day**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/comfortable_lifestyle.png
+description: \n\n---\n\nThe **Comfortable Lifestyle** offers a **pleasant and stable way of living**, with access to small luxuries and reliable amenities.\n\n**General Conditions:**\n\n> - **Shelter:** A private, clean room at a reputable inn, or a cozy and well-kept small home.\n\n> - **Food:** High-quality meals, often including fresh produce, meats, and occasional delicacies.\n\n> - **Clothing:** Stylish and well-tailored clothing suitable for public outings.\n\n> - **Hygiene:** Regular access to bathing facilities, scented soaps, and clean linens.\n\n**Social Status:**\n\n> - You are seen as **a respected member of society**, fitting comfortably into middle-class circles.\n\n> - Guards, officials, and business owners treat you with **respect and consideration**.\n\n> - You are often recognized and greeted warmly in local establishments.\n\n**Health and Well-being:**\n\n> - **Excellent Nutrition:** Regular, balanced meals keep you healthy and energized.\n\n> - **Low Risk of Illness:** Clean living conditions reduce the chance of disease.\n\n> - **Enhanced Security:** Lodgings are secure, with locked doors and trusted staff.\n\n**Opportunities:**\n\n> - Access to **guilds, artisans, and respectable businesses**.\n\n> - Opportunities to **form connections with influential middle-class figures**.\n\n> - Ability to **save moderate amounts of money regularly**.\n\n> - Invitations to **social gatherings, local festivals, and community events**.\n\n> - Potential for **steady employment or minor investments**.
+
+nom: Wealthy Lifestyle
+nom 1: Wealthy Lifestyle
+prix: **4 gp per day**
+prix 1: **4 gp per day**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/wealthy_lifestyle.png
+description: \n\n---\n\nThe **Wealthy Lifestyle** offers **luxurious accommodations, refined meals, and privileged access** to exclusive services and high society.\n\n**General Conditions:**\n\n> - **Shelter:** A spacious private residence, a suite at a prestigious inn, or a well-maintained estate.\n\n> - **Food:** Gourmet meals prepared by skilled cooks, often accompanied by fine wine.\n\n> - **Clothing:** Elegant and fashionable attire made from premium fabrics.\n\n> - **Hygiene:** Access to private bathing facilities, scented oils, and premium toiletries.\n\n**Social Status:**\n\n> - You are **admired or envied** by the lower and middle classes.\n\n> - Nobles and influential merchants treat you as **an equal or valued associate**.\n\n> - Your presence at exclusive events is often expected or even requested.\n\n**Health and Well-being:**\n\n> - **Superb Nutrition:** Your meals are well-prepared and nutritionally balanced.\n\n> - **Minimal Risk of Illness:** Living conditions are pristine and regularly maintained.\n\n> - **Personal Security:** Access to private guards or a secure estate.\n\n**Opportunities:**\n\n> - Invitations to **elite social gatherings, banquets, and galas**.\n\n> - Potential for **lucrative investments and business ventures**.\n\n> - Access to **exclusive services**, such as private tutors, skilled artisans, or rare goods.\n\n> - Influence in **local politics or community decision-making**.\n\n> - Opportunities to **network with nobles and powerful individuals**.
+
+nom: Aristocratic Lifestyle
+nom 1: Aristocratic Lifestyle
+prix: **10 gp per day**
+prix 1: **10 gp per day**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/aristocratic_lifestyle.png
+description: \n\n---\n\nThe **Aristocratic Lifestyle** represents the **pinnacle of luxury and privilege**. You are surrounded by wealth, influence, and opulence, living a life most can only dream of.\n\n**General Conditions:**\n\n> - **Shelter:** Palace estates, opulent manors, or luxurious suites in the finest inns.\n\n> - **Food:** Gourmet cuisine prepared by master chefs, paired with the finest wines and rare delicacies.\n\n> - **Clothing:** Tailored outfits made from exquisite fabrics, adorned with jewelry and embellishments.\n\n> - **Hygiene:** Private bathing chambers, scented oils, perfumed towels, and attendants for personal care.\n\n> - **Servants:** A dedicated staff of attendants, including butlers, cooks, maids, and personal assistants.\n\n**Social Status:**\n\n> - You are **revered and respected** by nearly everyone you meet.\n\n> - Access to **royal courts, exclusive clubs, and noble gatherings**.\n\n> - People of lower social standing treat you with **deference and caution**.\n\n**Health and Well-being:**\n\n> - **Exceptional Nutrition:** Meals are expertly crafted and nutritionally rich.\n\n> - **Luxurious Comfort:** Every aspect of your daily life is designed for maximum comfort.\n\n> - **Elite Medical Care:** Immediate access to skilled healers and magical remedies.\n\n> - **Private Security:** Personal bodyguards and highly secure premises.\n\n**Opportunities:**\n\n> - Invitations to **royal banquets, court events, and exclusive galas**.\n\n> - Influence over **local politics, trade agreements, and civic decisions**.\n\n> - Access to **powerful allies, rulers, and influential noble families**.\n\n> - Ability to **sponsor ventures, artists, and adventurers**.\n\n> - Opportunities to **shape the fate of cities or regions through wealth and influence**.
+
+nom: Ale (Mug)
+nom 1: Ale (Mug)
+prix: **4 cp**
+prix 1: **4 cp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/ale_mug.png
+description: \n\n---\n\nA **mug of ale** is a staple drink in taverns and inns, enjoyed for its flavor and relaxing effects. However, excessive consumption carries the risk of **Intoxication**, which functions similarly to the **Poisoned condition**.\n\n**Intoxication Mechanics:**\n\n> - Drinking **1 mug of ale** has no immediate effect.\n\n> - Drinking **2 mugs of ale within 1 hour** requires a **DC 10 Constitution saving throw**.\n\n> - Each additional mug consumed within the same hour increases the **DC by 2** (**Max DC 20**).\n\n> - **Failure:** The drinker gains the **Poisoned condition** for **1 hour** (*Disadvantage on Attack Rolls and Ability Checks*).\n\n> - **Recovery:** A **Short Rest** removes the **Poisoned** condition caused by intoxication.\n\n---\n\n### **Examples of Ale Varieties:**\n\n| **Name**           | **Flavor**       | **Effect (per mug)**                   | **Duration** |\n|---------------------|------------------|-----------------------------------------|--------------|\n| **Emberbrew Ale**  | Smoky, warm      | **+1 temporary hit point**              | 1 hour       |\n| **Frostbeard Ale** | Bitter, crisp    | **Advantage on Constitution saving throws vs cold** | 1 hour |\n| **Golden Grain Ale** | Smooth, honeyed | **+1 to Charisma (Persuasion) checks**  | 1 hour       |\n| **Black Anvil Brew** | Heavy, malty   | **+1 to Strength (Athletics) checks**   | 1 hour       |\n| **Whisperwind Ale** | Light, floral   | **+1 to Wisdom (Perception) checks**    | 1 hour       |\n| **Stonegut Stout** | Thick, earthy    | **Resistance to Poison damage**         | 1 hour       |
+
+nom: Bread (Loaf)
+nom 1: Bread (Loaf)
+prix: **2 cp**
+prix 1: **2 cp**
+poids: **0.5 lb**\n\n**(0.25 kg)**
+poids 1: **0.5 lb**\n\n**(0.25 kg)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/bread_loaf.png
+description: \n\n---\n\nA **loaf of bread** is a fundamental part of most meals, offering simple yet essential sustenance. \n\n**Usage Mechanics:**\n\n> - **Consumption:** Provides **1 day of basic sustenance** for a **Small or Medium creature**.\n\n> - **Partial Consumption:** Eating less than half a loaf requires a **DC 10 Constitution saving throw** or gain **1 level of Exhaustion**.\n\n> - **Preservation:** Fresh bread lasts **2 days** without preservation. Afterward, it becomes **stale** and loses its flavor but remains edible for up to **7 days**.\n\n> - **Stale Bread:** Eating stale bread reduces its nourishment by **half**, requiring two loaves for full sustenance.\n\n**Recovery from Malnutrition:**\n\n> - Full consumption of bread removes **1 level of Exhaustion** caused by malnutrition.\n\n### **Examples of Bread Varieties:**\n\n| **Name**              | **Flavor**        | **Effect (per loaf)**          | **Duration** |\n|------------------------|-------------------|--------------------------------|--------------|\n| **Hearthstone Loaf**  | Dense, hearty     | **+1 temporary hit point**     | 1 hour       |\n| **Moonrise Flatbread**| Soft, aromatic    | **+1 to Dexterity (Stealth) checks** | 1 hour   |\n| **Dwarven Stonebread**| Hard, grainy      | **+1 to Strength (Athletics) checks** | 1 hour   |\n| **Sunblessed Baguette**| Light, crisp     | **+1 to Charisma (Performance) checks** | 1 hour |\n| **Shadowgrain Rye**   | Bitter, earthy    | **+1 to Wisdom (Insight) checks** | 1 hour   |\n| **Golden Crust Roll** | Buttery, warm     | **+1 to Constitution saves**   | 1 hour       |\n| **Traveler’s Hardtack** | Dry, durable (Preservation + 10 day)    | **Resistance to Exhaustion for 1 hour** | 1 hour |
+
+nom: Cheese (Wedge)
+nom 1: Cheese (Wedge)
+prix: **1 sp**
+prix 1: **1 sp**
+poids: **0.5 lb**\n\n**(0.2 kg)**
+poids 1: **0.5 lb**\n\n**(0.2 kg)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/cheese_wedge.png
+description: \n\n---\n\nA **cheese wedge** is a savory and nutritious food, often enjoyed as a snack or paired with bread and wine. It provides lasting energy and is easy to transport.\n\n---\n\n**Usage Mechanics:**\n\n> - **Consumption:** Provides **1 day of basic sustenance** for a **Small or Medium-sized creature**.\n\n> - **Preservation:** Fresh cheese lasts **4 days**. Aged cheese can last **weeks** but may produce a strong odor.\n\n**Recovery from Malnutrition:**\n\n> - Consuming a full wedge removes **1 level of Exhaustion** caused by malnutrition.\n\n---\n\n### **Examples of Cheese Varieties:**\n\n| **Name**             | **Flavor**       | **Effect (per wedge)**                        | **Duration** |\n|-----------------------|------------------|-----------------------------------------------|-------------|\n| **Golden Leaf Brie** | Soft, creamy     | **+1 temporary hit point**                    | **1 hour**  |\n| **Frostveil Cheddar**| Sharp, aged      | **Advantage on saving throws against cold**   | **1 hour**  |\n| **Emberheart Gouda** | Smoky, rich      | **Resistance to fire damage**                 | **30 min**  |\n| **Stormpeak Bleu**   | Tangy, pungent   | **+1 bonus to Perception checks**             | **1 hour**  |\n| **Whispering Camembert** | Mild, smooth | **Advantage on Stealth checks**               | **30 min**  |\n| **Ironroot Gruyère** | Nutty, firm      | **+1 to Strength checks**                     | **1 hour**  |\n| **Dewdrop Mozzarella** | Fresh, light   | **+1 bonus to Dexterity checks**              | **1 hour**  |\n| **Shadowvale Havarti** | Mild, creamy   | **Advantage on saving throws against poison** | **1 hour**  |
+
+nom: Stay at the Inn (Squalid)
+nom 1: Stay at the Inn (Squalid)
+prix: **7 cp**
+prix 1: **7 cp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_squalid.png
+description: \n\n---\n\nA **Squalid Stay** offers the bare minimum for shelter from the elements. Conditions are unsanitary, hygiene is nearly non-existent, and the risk of disease or theft is high.\n\n**Lodging Conditions:**\n\n> - **Shelter:** Cramped, damp, and often overcrowded space.\n\n> - **Food:** Poor quality meals, often stale.\n\n> - **Hygiene:** No sanitary facilities.\n\n> - **Security:** Minimal protection against theft.\n\n> - **Social Status:** Poor perception by NPCs.\n\n---\n\n### **Game Mechanics:**\n\n> - **Rest:** Allows a **short rest**, but not a long rest.\n\n> - **Disease Risk:** Roll a **Constitution (DC 15)** check each night.\n\n> - **Theft Risk:** Roll a **Wisdom (Perception) (DC 15)** check each night.\n\n**Consequences of Failure:**\n- **Disease:** Level of exhaustion or minor illness.\n\n> - **Theft:** Loss of a random item or small sum of coins.\n\n---\n\n### **Benefits:**\n\n> - Very low cost.\n\n> - Access to rumors from society's lowest levels.\n\n> - Ease of blending into poor neighborhoods.\n\n---\n\n**Flavor Note:** The air smells of mildew and cold smoke. Guests speak in hushed tones, avoiding eye contact.
+
+nom: Stay at the Inn (Poor)
+nom 1: Stay at the Inn (Poor)
+prix: **1 sp**
+prix 1: **1 sp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_poor.png
+description: \n\n---\n\nA **Poor Stay** offers basic shelter and minimal comfort. You sleep in shared rooms and eat simple meals.\n\n**Lodging Conditions:**\n\n> - **Shelter:** Shared room with basic bedding.\n\n> - **Food:** Simple meals, sometimes stale.\n\n> - **Hygiene:** Limited access to clean water.\n\n> - **Security:** Moderate theft risk.\n\n> - **Social Status:** Neutral, little respect.\n\n---\n\n### **Game Mechanics:**\n\n> - **Rest:** Allows a **long rest**.\n\n> - **Disease Risk:** Roll a **Constitution (DC 12)** check each night.\n\n> - **Theft Risk:** Roll a **Wisdom (Perception) (DC 12)** check each night.\n\n**Consequences of Failure:**\n- **Disease:** Minor symptoms.\n\n> - **Theft:** Minor loss of items or coins.\n\n---\n\n### **Benefits:**\n\n> - Affordable price.\n\n> - Access to local information.\n\n> - Possible relations with modest locals.\n\n---\n\n**Flavor Note:** Thin walls let in the sounds of the street. A faint candlelight flickers in the corner.
+
+nom: Stay at the Inn (Modest)
+nom 1: Stay at the Inn (Modest)
+prix: **5 sp**
+prix 1: **5 sp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_modest.png
+description: \n\n---\n\nA **Modest Stay** offers a small private room, clean bedding, and warm, adequate meals.\n\n**Lodging Conditions:**\n\n> - **Shelter:** Private room, single bed.\n\n> - **Food:** Warm, nutritious meals.\n\n> - **Hygiene:** Reasonable access to sanitation.\n\n> - **Security:** Minimal theft risk.\n\n> - **Social Status:** Acceptable among common folk.\n\n---\n\n### **Game Mechanics:**\n\n> - **Rest:** Provides a **high-quality long rest**.\n\n> - **Disease Risk:** None.\n\n> - **Theft Risk:** Negligible.\n\n---\n\n### **Benefits:**\n\n> - Effective physical and mental recovery.\n\n> - Ability to blend into working-class areas.\n\n> - Opportunities for modest relationships.\n\n---\n\n**Flavor Note:** The smell of fresh bread fills the air, and the bedding is clean and crisp.
+
+nom: Stay at the Inn (Comfortable)
+nom 1: Stay at the Inn (Comfortable)
+prix: **8 sp**
+prix 1: **8 sp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_comfortable.png
+description: \n\n---\n\nA **Comfortable Stay** guarantees a private room, a cozy bed, and well-prepared meals.\n\n**Lodging Conditions:**\n\n> - **Shelter:** Spacious private room.\n\n> - **Food:** Hearty, well-prepared meals.\n\n> - **Hygiene:** Clean, accessible facilities.\n\n> - **Security:** Secure storage for belongings.\n\n> - **Social Status:** Respectable.\n\n---\n\n### **Game Mechanics:**\n\n> - **Rest:** Optimal **long rest**.\n\n> - **Disease Risk:** None.\n\n> - **Theft Risk:** None.\n\n---\n\n### **Benefits:**\n\n> - Positive social status.\n\n> - Interaction with local merchants.\n\n> - Optimal physical and mental recovery.\n\n---\n\n**Flavor Note:** The room is dimly lit, the scent of fresh herbs calming the senses.
+
+nom: Stay at the Inn (Wealthy)
+nom 1: Stay at the Inn (Wealthy)
+prix: **2 gp**
+prix 1: **2 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_wealthy.png
+description: \n\n---\n\nA **Wealthy Stay** provides a spacious, elegantly decorated room, gourmet meals, and attentive service.\n\n**Lodging Conditions:**\n\n> - **Shelter:** Elegant private suite.\n\n> - **Food:** Gourmet meals and fine wine.\n\n> - **Hygiene:** Private bathroom with luxury products.\n\n> - **Security:** Guarded and secure.\n\n> - **Social Status:** Highly respectable.\n\n---\n\n### **Game Mechanics:**\n\n> - **Rest:** Perfect **long rest**.\n\n> - **Disease Risk:** None.\n\n> - **Theft Risk:** None.\n\n> - **Social Advantage:** Gain **+1 to Charisma (Persuasion)** for 24 hours.\n\n---\n\n### **Benefits:**\n\n> - Access to influential merchants.\n\n> - Social standing improved.\n\n> - Maximum comfort for recovery.\n\n---\n\n**Flavor Note:** The air carries the faint scent of incense, silk sheets caress the skin, and soft music fills the space.
+
+nom: Stay at the Inn (Aristocratic)
+nom 1: Stay at the Inn (Aristocratic)
+prix: **4 gp**
+prix 1: **4 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service
+attca_image: symbole/vide.png
+attca:
+image: image/Services/inn_aristocratic.png
+description: \n\n---\n\nAn **Aristocratic Stay** represents the pinnacle of luxury and exclusivity, offering a lavish suite, personalized service, and unparalleled comfort.\n\n**Lodging Conditions:**\n\n> - **Shelter:** Grand suite with fine furnishings and opulent decor.\n\n> - **Food:** Gourmet meals prepared by renowned chefs, paired with rare wines.\n\n> - **Hygiene:** Private bath, luxury toiletries, and personal attendants.\n\n> - **Security:** Constant surveillance by private guards.\n\n> - **Social Status:** Elevated influence and admiration.\n\n---\n\n### **Game Mechanics:**\n\n> - **Rest:** Provides a **perfect long rest** with maximum recovery.\n\n> - **Disease Risk:** None.\n\n> - **Theft Risk:** None.\n\n> - **Social Advantage:** Gain **+2 to Charisma (Persuasion)** for 24 hours.\n\n---\n\n### **Benefits:**\n\n> - Access to elite social circles and influential personalities.\n\n> - Invitations to prestigious events and gatherings.\n\n> - Opportunities for political or commercial alliances.\n\n> - Maximum protection from external threats.\n\n> - Potential to gain favors from high-ranking NPCs.\n\n---\n\n**Flavor Note:** The walls are adorned with golden tapestries, the bed is layered with silk and furs, and a personal butler ensures every need is met.
+
+nom: Meal (Squalid)
+nom 1: Meal (Squalid)
+prix: **1 cp**
+prix 1: **1 cp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_squalid.png
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+description: \n\n---\n\nA **Squalid Meal** consists of scraps, watery gruel, and stale bread. It barely sustains life and may occasionally cause discomfort.\n\n**Meal Conditions:**\n\n> - **Quality:** Very low.\n\n> - **Food:** Diluted gruel, hard bread, questionable meat.\n\n> - **Storage:** Must be consumed immediately.\n\n> - **Social Status:** Negative perception by NPCs.\n\n---\n\n### **Game Mechanics:**\n\n> - **Nutrition:** Provides **1 day of minimal sustenance**.\n\n> - **Risk:** After **5 consecutive days**, make a **DC 10 Constitution saving throw**.\n   - **Failure:** Suffer **1 level of Exhaustion**.\n\n---\n\n### **Examples of Squalid Meals:**\n\n| **Name**           | **Type**   | **Description**          | **Effect**            |\n|--------------------|-----------|--------------------------|-----------------------|\n| **Rat Stew**      | Stew      | Questionable meat, bitter taste | **-2 to Constitution checks (1h)** |\n| **Moldy Biscuit** | Bread     | Dry, stale, moldy        | **Mild nausea (1h)**   |\n| **Watery Gruel**  | Gruel     | Liquid and tasteless     | —                     |\n| **Scrap Broth**   | Soup      | Mostly water             | —                     |\n\n**Style Note:** A sour and smoky smell lingers in the air. Every bite is a struggle.
+
+nom: Meal (Poor)
+nom 1: Meal (Poor)
+prix: **2 cp**
+prix 1: **2 cp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_poor.png
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+description: \n\n---\n\nA **Poor Meal** offers minimal sustenance with simple but edible ingredients.\n\n**Meal Conditions:**\n\n> - **Quality:** Low.\n\n> - **Food:** Bland stews, hard bread, boiled vegetables.\n\n> - **Storage:** Must be consumed quickly.\n\n> - **Social Status:** Neutral status.\n\n---\n\n### **Game Mechanics:**\n\n> - **Nutrition:** Provides **1 day of basic sustenance**.\n\n> - **Risk:** After **7 consecutive days**, make a **DC 12 Constitution saving throw**.\n   - **Failure:** Suffer **1 level of Exhaustion**.\n\n---\n\n### **Examples of Poor Meals:**\n\n| **Name**              | **Type**   | **Description**       | **Effect**              |\n|------------------------|-----------|-----------------------|-------------------------|\n| **Fish Stew**         | Stew      | Salty broth           | **-1 to Constitution checks (1h)** |\n| **Hard Bread & Cheese** | Bread   | Stale, dry bread      | —                       |\n| **Boiled Roots**      | Vegetables| Bland taste           | **-1 to Constitution checks (1 h)** |\n| **Apple Soup**        | Soup      | Light broth           | —                       |\n\n**Style Note:** A smell of salt and smoke lingers, and every bite serves its purpose.
+
+nom: Meal (Modest)
+nom 1: Meal (Modest)
+prix: **1 sp**
+prix 1: **1 sp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_modest.png
+description: \n\n---\n\nA **Modest Meal** provides balanced, warm food, including meat, vegetables, and fresh bread.\n\n**Meal Conditions:**\n\n> - **Quality:** Average.\n\n> - **Food:** Thick stew, fresh bread, seasoned vegetables.\n\n> - **Storage:** Can last up to **2 days**.\n\n> - **Social Status:** Acceptable.\n\n---\n\n### **Game Mechanics:**\n\n> - **Nutrition:** Provides **1 day of adequate sustenance**.\n\n> - **Stability:** No risk of **Exhaustion** with prolonged consumption.\n\n---\n\n### **Examples of Modest Meals:**\n\n| **Name**             | **Type**   | **Description**        | **Effect**            |\n|-----------------------|-----------|------------------------|-----------------------|\n| **Poultry Plate**    | Meat      | Roasted chicken        | — |\n| **Herb Bread**       | Bread     | Fresh herb-infused bread | —     |\n| **Vegetable Stew**   | Soup      | Hearty and fragrant    | —                     |\n| **Glazed Carrots**   | Vegetables| Sweet and crunchy      | —                     |\n\n**Style Note:** The air is filled with a warm, homely cooking aroma.
+
+nom: Meal (Comfortable)
+nom 1: Meal (Comfortable)
+prix: **2 sp**
+prix 1: **2 sp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_comfortable.png
+description: \n\n---\n\nA **Comfortable Meal** is a pleasant culinary experience, prepared with fresh ingredients and careful recipes.\n\n**Meal Conditions:**\n\n> - **Quality:** Good.\n\n> - **Food:** Tender meat, fresh vegetables, buttery bread.\n\n> - **Storage:** Can last **3 days**.\n\n> - **Social Status:** Respectable.\n\n---\n\n### **Game Mechanics:**\n\n> - **Nutrition:** Provides **1 day of quality nutrition**.\n\n---\n\n### **Examples of Comfortable Meals:**\n\n| **Name**          | **Type**   | **Description**        | **Effect**         |\n|--------------------|-----------|------------------------|--------------------|\n| **Herb Pork**     | Meat      | Flavorful, savory meat | **+1 to Strength checks (1h)** |\n| **Creamy Stew**   | Soup      | Rich and fragrant      | —                  |\n| **Golden Butter Bread** | Bread | Soft and buttery bread  | —                  |\n| **Fresh Salad**   | Vegetables| Crisp and lively       | **+1 to Dexterity checks (1h)** |\n\n**Style Note:** A soft smell of herbs and butter lingers in the air.
+
+nom: Meal (Wealthy)
+nom 1: Meal (Wealthy)
+prix: **3 sp**
+prix 1: **3 sp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Vehicules/horse_feed.png
+description: \n\n---\n\nA **Wealthy Meal** is a refined dining experience crafted with premium ingredients and presented with elegance. Every bite feels like a celebration.\n\n**Meal Conditions:**\n\n> - **Quality:** Excellent.\n\n> - **Food:** Tender meats, refined sauces, fresh vegetables.\n\n> - **Storage:** Can last up to **3 days** under proper conditions.\n\n> - **Social Status:** High respectability.\n\n---\n\n### **Game Mechanics:**\n\n> - **Nutrition:** Provides **1 day of superior nutrition**.\n\n> - **Bonus:** Grants **Advantage on the next Charisma (Persuasion) check** for **1 hour**.\n\n> - **Stability:** No risk of **Exhaustion** with prolonged consumption.\n\n---\n\n### **Examples of Wealthy Meals:**\n\n| **Name**                    | **Type**    | **Description**         | **Effect**                |\n|-----------------------------|------------|-------------------------|---------------------------|\n| **Dragon-Spice Steak**     | Meat       | Tender, spiced meat     | **+1 to Constitution checks (1h)**   |\n| **Ruby Parfait**           | Dessert    | Sweet, fruity, exotic   | **+1 to Intelligence checks (1h)**   |\n| **Black Truffle Soup**     | Soup       | Rich, creamy texture    | **+1 to Wisdom checks (1h)**         |\n| **Elven Elegance Salad**   | Vegetables | Rare herbs and nuts     | **+1 to Dexterity checks (1h)**      |\n\n**Style Note:** A delicate aroma of rare spices and herbs lingers in the air, and every dish is served with care and precision.
+
+nom: Meal (Aristocratic)
+nom 1: Meal (Aristocratic)
+prix: **6 sp**
+prix 1: **6 sp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/meal_aristocratic.png
+description: \n\n---\n\nAn **Aristocratic Meal** is a masterpiece of culinary art, crafted with rare ingredients and prepared by renowned chefs. Each dish is a sensory delight.\n\n**Meal Conditions:**\n\n> - **Quality:** Exceptional.\n\n> - **Food:** Exotic meats, complex sauces, elaborate desserts.\n\n> - **Storage:** Must be consumed immediately for optimal freshness.\n\n> - **Social Status:** Very high respectability.\n\n---\n\n### **Game Mechanics:**\n\n> - **Nutrition:** Provides **1 day of unparalleled nutrition**.\n\n> - **Bonus:** Grants **+1 Temporary Hit Point** and **Advantage on the next Charisma (Persuasion) check** for **1 hour**.\n\n> - **Stability:** No risk of **Exhaustion** with prolonged consumption.\n\n---\n\n### **Examples of Aristocratic Meals:**\n\n| **Name**                       | **Type**    | **Description**        | **Effect**                |\n|--------------------------------|------------|------------------------|---------------------------|\n| **Phoenix Egg Omelette**      | Egg        | Spicy, rare flavor     | **+2 to Charisma checks (1h)**       |\n| **Celestial Lamb**            | Meat       | Tender and perfectly cooked | **+2 to Strength checks (1h)**  |\n| **Sapphire Soufflé**          | Dessert    | Infused with rare gems | **+2 to Intelligence checks (1h)**   |\n| **Stellar Salad**             | Vegetables | Light celestial herbs  | **+2 to Wisdom checks (1h)**         |\n\n**Style Note:** Each dish is presented on silver plates, with a soft floral aroma lingering in the air. Every detail reflects sophistication and luxury.
+
+nom: Wine (Common)
+nom 1: Wine (Common)
+prix: 2 sp
+prix 1: 2 sp
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/wine_common.png
+description: \n\n---\n\nA **bottle of common wine** is a simple and affordable beverage, popular in taverns and homes alike. Its taste varies from fruity to dry, depending on the region of origin.\n\n**Intoxication Mechanics:**\n\n> - Drinking **1 glass of common wine** has no immediate effect.\n\n> - Drinking **2 glasses within 1 hour** requires a **DC 10 Constitution saving throw**.\n\n> - Each additional glass consumed within the same hour increases the **DC by 2** (**Max DC 20**).\n\n> - **Failure:** The drinker gains the **Poisoned condition** for **1 hour** (*Disadvantage on Attack Rolls and Ability Checks*).\n\n> - **Recovery:** A **Short Rest** removes the **Poisoned** condition caused by intoxication.\n\n---\n\n### **Examples of Common Wine Varieties:**\n\n| **Name**           | **Flavor**       | **Effect (per glass)**                   | **Duration** |\n|---------------------|------------------|-----------------------------------------|--------------|\n| **Farmer’s Red**   | Fruity, light    | **+1 temporary hit point**               | 1 hour       |\n| **Lantern White**  | Crisp, citrusy   | **+1 to Charisma (Performance) checks**  | 1 hour       |\n| **Hilltop Blend**  | Smooth, mellow   | **+1 to Dexterity (Stealth) checks**     | 1 hour       |\n| **Sailor's Swig**  | Salty, tangy     | **+1 to Constitution saving throws**     | 1 hour       |\n| **Market Rose**    | Sweet, floral    | **+1 to Wisdom (Insight) checks**        | 1 hour       |\n| **Copper Reserve** | Dry, nutty       | **+1 to Intelligence (Investigation) checks** | 1 hour |
+
+nom: Wine (Fine)
+nom 1: Wine (Fine)
+prix: 10 gp
+prix 1: 10 gp
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+poids image: symbole/poids.png
+poids image 1: symbole/poids.png
+type: Food & Drink
+attca_image: symbole/vide.png
+attca:
+image: image/Services/wine_fine.png
+description: \n\n---\n\nA **bottle of fine wine** represents luxury and refinement, often enjoyed by nobles, merchants, and adventurers celebrating great victories.\n\n**Intoxication Mechanics:**\n\n> - Drinking **1 glass of fine wine** has no immediate effect.\n\n> - Drinking **2 glasses within 1 hour** requires a **DC 12 Constitution saving throw**.\n\n> - Each additional glass consumed within the same hour increases the **DC by 2** (**Max DC 20**).\n\n> - **Failure:** The drinker gains the **Poisoned condition** for **1 hour** (*Disadvantage on Attack Rolls and Ability Checks*).\n\n> - **Recovery:** A **Short Rest** removes the **Poisoned** condition caused by intoxication.\n\n---\n\n### **Examples of Fine Wine Varieties:**\n\n| **Name**           | **Flavor**        | **Effect (per glass)**                   | **Duration** |\n|---------------------|-------------------|-----------------------------------------|--------------|\n| **Elven Sunrise**  | Floral, aromatic  | **Advantage on Charisma (Persuasion) checks** | 1 hour |\n| **Golden Nectar**  | Sweet, syrupy     | **+2 temporary hit points**             | 1 hour       |\n| **Twilight Reserve** | Bold, smoky    | **Advantage on Wisdom (Insight) checks** | 1 hour       |\n| **Ruby Reserve**   | Rich, fruity      | **+1 to Intelligence (Arcana) checks**  | 1 hour       |\n| **Celestial Ambrosia** | Subtle, magical | **Advantage on Constitution saves vs poison** | 1 hour |\n| **Starfire Vintage** | Smooth, refined | **+1 to Dexterity (Acrobatics) checks**  | 1 hour       |
+
+nom: Coach Ride (Between Towns)
+nom 1: Coach Ride (Between Towns)
+prix: **3 cp per mile**\n\n**(1.5 km)**
+prix 1: **3 cp per mile**\n\n**(1.5 km)**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/passag.png
+attca1: 4
+attca_image2: symbole/vit.png
+attca2: **6 mph (10 km/h, 80sq)**
+image: image/Services/coach_ride.png
+description: \n\n---\n\nA **Coach Ride Between Towns** provides a reliable way to travel moderate distances with some comfort. Coaches are drawn by sturdy horses and driven by experienced drivers.\n\n---\n\n**Effects:**\n\n> - Safe travel between towns.\n\n> - Cargo limited to personal belongings.\n\n---\n\n**Examples of Coach Services:**\n\n| **Name**           | **Type**         | **Description**          | **Origin**      |\n|---------------------|------------------|---------------------------|-----------------|\n| Silver Road Coach  | Standard Coach  | Basic wooden coach        | Main Roads     |\n| Swiftwind Express  | Fast Coach      | Faster horses, less cargo | Trade Routes   |\n| Merchant's Carriage| Cargo Coach     | Extra storage space       | Caravan Lines  |\n| Midnight Wagon     | Night Coach     | Operates only at night    | Shady Routes   |\n| Velvet Liner       | Luxury Coach    | Plush seats and curtains  | Noble Paths    |
+
+nom: Coach Ride (Within a City)
+nom 1: Coach Ride (Within a City)
+prix: **1 cp per mile**\n\n**(1.5 km)**
+prix 1: **1 cp per mile**\n\n**(1.5 km)**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/passag.png
+attca1: 4
+attca_image2: symbole/vit.png
+attca2: **4 mph (6 km/h, 60sq)**
+image: image/Services/coach_city.png
+description: \n\n---\n\nA **Coach Ride Within a City** offers a convenient mode of transportation for those unwilling or unable to walk long distances. City coaches are often covered and provide basic comfort.\n\n---\n\n**Effects:**\n\n> - Quick and easy movement across city districts.\n\n> - Limited cargo space, primarily for personal belongings.\n\n---\n\n**Examples of City Coach Services:**\n\n| **Name**           | **Type**         | **Description**          | **Origin**      |\n|---------------------|------------------|---------------------------|-----------------|\n| Lantern Coach      | Standard Coach  | Lantern-lit night service | Main Districts |\n| Velvet Cab         | Luxury Coach    | Comfortable and private   | Noble Quarters |\n| Merchant's Shuttle | Cargo Coach     | Goods and supplies        | Trade Centers  |\n| Copper Cab         | Budget Coach    | Affordable for commoners  | Slum Districts |\n| Swiftspur Carriage | Fast Coach      | Rapid transit option      | Busy Markets   |
+
+nom: Road or Gate Toll
+nom 1: Road or Gate Toll
+prix: 1 cp
+prix 1: 1 cp
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Services/road_toll.png
+description: \n\n---\n\nA **Road or Gate Toll** is a small fee collected by local authorities or guards for using maintained roads, bridges, or city gates.\n\n---\n\n**Effects:**\n\n> - Allows passage through restricted or guarded areas.\n\n> - Failure to pay may result in fines or denial of passage.\n\n---\n\n**Examples of Road or Gate Tolls:**\n\n| **Name**           | **Type**         | **Description**          | **Origin**      |\n|---------------------|------------------|---------------------------|-----------------|\n| Iron Gate Fee      | City Toll       | Fee for entering a city   | City Entrances |\n| King’s Road Tax    | Road Toll       | Fee for main trade roads  | Royal Routes   |\n| River Crossing Tariff | Bridge Toll | Fee for crossing bridges  | Trade Bridges  |\n| Border Checkpoint  | Border Toll     | Fee for crossing borders  | National Lines |\n| Caravan Pass       | Trade Toll      | Discount for bulk goods   | Merchant Roads |
+
+nom: Ship’s Passage
+nom 1: Ship’s Passage
+prix: **1 sp per mile**\n\n**(1.5 km)**
+prix 1: **1 sp per mile**\n\n**(1.5 km)**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/passag.png
+attca1: 10
+attca_image2: symbole/vit.png
+attca2: **6 mph (10 km/h, 80sq)**
+image: image/Services/ship_passage.png
+description: \n\n---\n\nA **Ship’s Passage** allows passengers to travel by sea or river, typically aboard merchant or passenger vessels. The journey varies in comfort based on the ship and crew.\n\n---\n\n**Effects:**\n\n> - Safe passage across water routes.\n\n> - Limited cargo space for personal belongings.\n\n---\n\n**Examples of Ship's Passage:**\n\n| **Name**           | **Type**         | **Description**          | **Origin**      |\n|---------------------|------------------|---------------------------|-----------------|\n| Stormrider Ferry   | River Passage   | Calm river travel         | River Ports    |\n| Golden Seagull     | Sea Passage     | Luxurious sea journey     | Coastal Cities |\n| Ironhold Cargo     | Trade Passage   | Slow but reliable cargo   | Merchant Ports |\n| Blackwind Skiff    | Fast Passage    | Quick travel for few      | Smuggler Bays  |\n| Moonlight Voyager  | Night Passage   | Operates under darkness   | Pirate Routes  |
+
+nom: Skilled Hireling
+nom 1: Skilled Hireling
+prix: **2 gp per day**
+prix 1: **2 gp per day**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Services/skilled_hireling.png
+description: \n\n---\n\nA **Skilled Hireling** is a professional specialized in a specific field.\n\n**Effects:**\n\n> - Provides **proficiency in a specific skill or trade**.\n\n> - Capable of performing **complex tasks with precision**.\n\n---\n\n**Examples of Skilled Hirelings:**\n\n| **Name**              | **Type**        | **Description**       | **Skill**           | **Additional Cost** |\n|------------------------|-----------------|-----------------------|---------------------|---------------------|\n| **Rowan Kaelthar**   | Guard          | Reliable watchman     | Perception          | —                   |\n| **Kaelis Forgebrume**| Blacksmith     | Master of metalwork   | Smith's Tools       | +1 gp              |\n| **Elysia Calbrith**  | Alchemist      | Prepares potions      | Alchemist's Kit     | +2 gp              |\n| **Theran Duskbane**  | Scribe         | Fast copyist          | Calligraphy         | +1 gp              |\n| **Cassian Windhelm** | Sailor         | Skilled navigator     | Water Vehicles      | +1 gp              |\n| **Selene Frostleaf** | Healer         | Quick medical care    | Medicine            | +2 gp              |\n| **Darius Thornfield**| Spy            | Discreet observer     | Stealth             | +2 gp              |\n| **Lyara Dawnshade**  | Architect      | Precise planning      | Mason's Tools       | +1 gp              |\n| **Faelan Starling**  | Chef           | Refined cuisine       | Cook's Utensils     | +5 sp              |\n| **Kieran Stonepath** | Scout          | Survival expert       | Survival            | +1 gp              |\n| **Myra Silverquill** | Diplomat       | Negotiates deals      | Persuasion          | +2 gp              |
+
+nom: Untrained Hireling
+nom 1: Untrained Hireling
+prix: **2 sp per day**
+prix 1: **2 sp per day**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Services/untrained_hireling.png
+description: \n\n---\n\nAn **Untrained Hireling** is a versatile worker often hired for simple physical tasks.\n\n**Effects:**\n\n> - Provides **reliable labor for basic tasks**.\n\n> - **Unable to perform tasks requiring expertise**.\n\n---\n\n**Examples of Untrained Hirelings:**\n\n| **Name**               | **Type**        | **Description**          | **Task**         | **Additional Cost** |\n|-------------------------|-----------------|--------------------------|------------------|---------------------|\n| **Finnian Tressevent** | Porter          | Carries heavy loads      | Transport        | —                   |\n| **Elda Clearbrook**    | Kitchen Aid     | Assists in meal prep     | Cooking          | —                   |\n| **Jareth Longrock**    | Miner           | Works in tunnels         | Extraction       | +1 sp              |\n| **Sylas Frostwind**    | Carpenter Aid   | Helps build structures   | Repairing        | +2 sp              |\n| **Lina Firestone**     | Cleaner         | Performs maintenance     | Cleaning         | —                   |\n| **Dorien Brightsky**   | Water Carrier   | Delivers fresh water     | Supply           | —                   |\n| **Roderic Cliffbreaker**| Lumberjack Aid | Gathers and transports wood | Forestry     | +1 sp              |\n| **Mira Nightshade**    | Watcher         | Guards supplies at night | Surveillance     | +1 sp              |\n| **Tarian Leafwalker**  | Camp Setup      | Sets up tents and fires  | Camping          | —                   |
+
+nom: Messenger
+nom 1: Messenger
+prix: **2 cp per 1 mile**\n\n**(1.5 km)**
+prix 1: **2 cp per 1 mile**\n\n**(1.5 kg)**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Services
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vit.png
+attca2: **10 km/h (6 mph, 80sq)**
+image: image/Services/messenger.png
+description: \n\n---\n\nA **Messenger** is hired to deliver letters, small parcels, or critical information quickly and securely, whether within a city or across distant locations.\n\n**Effects:**\n\n> - Ensures **secure delivery of documents or small packages**.\n\n> - **Speed depends on terrain and messenger type**.\n\n> - Delivery may be affected by **weather or road hazards**.\n\n---\n\n**Examples of Messengers:**\n\n| **Name**               | **Type**          | **Description**         | **Speed**        | **Additional Cost** |\n|-------------------------|-------------------|-------------------------|------------------|---------------------|\n| **Erynn Swiftfoot**    | Runner           | Fast in urban areas     | **16 km/h (10 mph)** | —               |\n| **Kael Shadowplume**   | Stealth Courier  | Delivers discreetly     | **9.6 km/h (6 mph)** | +1 cp           |\n| **Falcon Velora**      | Animal Courier   | Trained falcon delivery | **48 km/h (30 mph)** | +1 sp           |\n| **Darian Clearwater**  | River Courier    | Navigates waterways     | **6.4 km/h (4 mph)** | +1 cp           |\n| **Selene Nightbreeze** | Night Courier    | Operates after sunset   | **8 km/h (5 mph)** | +1 cp           |\n| **Garin Wheelswift**   | Cart Courier     | Fast over flat roads    | **12 km/h (7 mph)** | +2 cp           |\n| **Talia Skywing**      | Aerial Courier   | Flying mount delivery   | **64 km/h (40 mph)** | +3 sp           |\n| **Orin Stonepath**     | Terrain Runner   | Crosses rough ground    | **8 km/h (5 mph)** | —               |\n| **Elios Brightvoice**  | Herald           | Delivers verbal messages| **Variable**      | —               |\n| **Finn Ironhoof**      | Mounted Courier  | Travels long distances  | **24 km/h (15 mph)** | +3 cp           |
+
+nom: Healing Potion Order
+nom 1: Healing Potion Order
+prix: **25 gp**
+prix 1: **25 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Common)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/potion_healing.png
+description: \n\n---\n\nThis service allows you to order a **standard healing potion**, carefully prepared by a skilled herbalist using rare medicinal ingredients.\n\n**Service Details:**\n\n> - **Potion Type:** Standard Healing Potion.\n\n> - **Minimum Creator Level:** Level 3.\n\n> - **Rarity:** Common.\n\n> - **Effect:** Restores **2d4+2 hit points** when consumed.\n\n**Potion Benefits:**\n\n> - Effectively heals minor wounds.\n> - Easy to carry and administer.\n> - Ideal for adventurers on the move.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Healing Potion**, make an **Investigation (Intelligence) check** based on the size of the city:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|----------------------|------------------|\n| Village            | Very Rare        | 20                   | 1d6 days         |\n| Town              | Uncommon         | 15                   | 1d4 days         |\n| City              | Common           | 10                   | 1 day           |\n| Metropolis        | Very Common      | 5                    | Immediate       |\n\n**Style Note:** The bright red liquid glows softly when shaken, releasing a faint scent of medicinal herbs.
+
+nom: Greater Healing Potion Order
+nom 1: Greater Healing Potion Order
+prix: **125 gp**
+prix 1: **125 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Uncommon)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/potion_greater_healing.png
+description: \n\n---\n\nThis service allows you to order a **Greater Healing Potion**, brewed with rare ingredients and stabilized through precise alchemical rituals.\n\n**Service Details:**\n\n> - **Potion Type:** Greater Healing Potion.\n\n> - **Minimum Creator Level:** Level 5.\n\n> - **Rarity:** Uncommon.\n\n> - **Effect:** Restores **4d4+4 hit points** when consumed.\n\n**Potion Benefits:**\n\n> - Effective for treating significant injuries.\n> - Valuable in prolonged battles.\n> - A strategic resource for seasoned adventurers.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Greater Healing Potion**, make an **Investigation (Intelligence) check** based on the size of the city:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|----------------------|------------------|\n| Village            | Non-Existent     | Impossible           | —               |\n| Town              | Very Rare        | 20                   | 1d8 days        |\n| City              | Uncommon         | 15                   | 1d6 days        |\n| Metropolis        | Common           | 10                   | 1d4 days        |\n\n**Style Note:** The deep red liquid swirls gently, emitting a comforting warmth.
+
+nom: Superior Healing Potion Order
+nom 1: Superior Healing Potion Order
+prix: **500 gp**
+prix 1: **500 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/potion_supreme_healing.png
+description: \n\n---\n\nThis service allows you to order a **Superior Healing Potion**, crafted using extremely rare ingredients and stabilized with a complex magical ritual.\n\n**Service Details:**\n\n> - **Potion Type:** Superior Healing Potion.\n\n> - **Minimum Creator Level:** Level 9.\n\n> - **Rarity:** Rare.\n\n> - **Effect:** Restores **8d4+8 hit points** when consumed.\n\n**Potion Benefits:**\n\n> - Restores a substantial amount of hit points.\n> - Essential for dangerous encounters.\n> - Highly coveted by experienced adventurers.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Superior Healing Potion**, make an **Investigation (Intelligence) check** based on the size of the city:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|----------------------|------------------|\n| Village            | Non-Existent     | Impossible           | —               |\n| Town              | Very Rare        | 20                   | 1d10 days       |\n| City              | Rare            | 15                   | 1d8 days        |\n| Metropolis        | Uncommon         | 10                   | 1d6 days        |\n\n**Style Note:** The scarlet liquid shimmers with golden highlights and radiates gentle warmth.
+
+nom: Supreme Healing Potion Order
+nom 1: Supreme Healing Potion Order
+prix: **5 000 gp**
+prix 1: **5 000 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Very Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/potion_elite_healing.png
+description: \n\n---\n\nThis **Supreme Healing Potion** represents the pinnacle of curative alchemy, often reserved for heroes and elites. It contains incredibly concentrated healing energy, stabilized through complex magical rituals.\n\n**Service Details:**\n\n> - **Potion Type:** Supreme Healing Potion.\n\n> - **Minimum Creator Level:** Level 11.\n\n> - **Rarity:** Very Rare.\n\n> - **Effect:** Restores **10d4+20 hit points** when consumed.\n\n**Potion Benefits:**\n\n> - Restores a massive amount of hit points.\n> - An indispensable asset in critical encounters.\n> - Highly prized by high-level heroes.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Supreme Healing Potion**, make an **Investigation (Intelligence) check** based on the size of the city:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|----------------------|------------------|\n| Village            | Non-Existent     | Impossible           | —               |\n| Town              | Extremely Rare   | 25                   | 2d10+5 days     |\n| City              | Very Rare        | 20                   | 2d8+2 days      |\n| Metropolis        | Rare            | 15                   | 1d10 days       |\n\n**Style Note:** The golden liquid crackles softly inside the vial, radiating pure light and casting crystalline reflections.
+
+nom: Minor Spell Scroll Order
+nom 1: Minor Spell Scroll Order
+prix: **15 gp**
+prix 1: **15 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Common)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_cantrip.png
+description: \n\n---\n\nThis service allows you to order a **Minor Spell Scroll**, carefully prepared by a skilled mage.\n\n**Service Details:**\n\n> - **Spell Type:** Cantrip.\n\n> - **Minimum Creator Level:** Level 1.\n\n> - **Rarity:** Common.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **cantrip without prior preparation**.\n\n> - Practical for specific situations.\n\n> - Ideal for adventurers seeking quick solutions.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Minor Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Very Rare        | 20                    | 1d6 days         |\n| Town               | Uncommon         | 15                    | 1d4 days         |\n| City               | Common           | 10                    | 1 day           |\n| Metropolis         | Very Common      | 5                     | Immediate       |\n\n**Style Note:** The scroll is adorned with delicate glowing runes and emits a faint bluish glow when activated.
+
+nom: Level 1 Spell Scroll Order
+nom 1: Level 1 Spell Scroll Order
+prix: **25 gp**
+prix 1: **25 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Common)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level1.png
+description: \n\n---\n\nThis service allows you to order a **Level 1 Spell Scroll**, carefully inscribed by an experienced mage.\n\n**Service Details:**\n\n> - **Spell Type:** Level 1 spell.\n\n> - **Minimum Creator Level:** Level 3.\n\n> - **Rarity:** Common.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **Level 1 spell without prior preparation**.\n\n> - Useful for critical situations.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Level 1 Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Very Rare        | 20                    | 1d8 days         |\n| Town               | Rare             | 15                    | 1d6 days         |\n| City               | Common           | 10                    | 1d4 days         |\n| Metropolis         | Very Common      | 5                     | Immediate       |\n\n**Style Note:** The scroll vibrates slightly when held, and the symbols faintly glow under light.
+
+nom: Level 2 Spell Scroll Order
+nom 1: Level 2 Spell Scroll Order
+prix: **100 gp**
+prix 1: **100 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Uncommon)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level2.png
+description: \n\n---\n\nThis service allows you to order a **Level 2 Spell Scroll**, carefully inscribed on magically reinforced parchment.\n\n**Service Details:**\n\n> - **Spell Type:** Level 2 spell.\n\n> - **Minimum Creator Level:** Level 5.\n\n> - **Rarity:** Uncommon.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **Level 2 spell without prior preparation**.\n\n> - Extremely useful in complex situations.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Level 2 Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Nonexistent      | Impossible            | —               |\n| Town               | Very Rare        | 20                    | 1d10 days        |\n| City               | Uncommon         | 15                    | 1d6 days         |\n| Metropolis         | Common           | 10                    | 1d4 days         |\n\n**Style Note:** The symbols on the scroll seem to gently vibrate, and a faint scent of ozone surrounds it when unrolled.
+
+nom: Level 3 Spell Scroll Order
+nom 1: Level 3 Spell Scroll Order
+prix: **150 gp**
+prix 1: **150 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Uncommon)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level3.png
+description: \n\n---\n\nThis service allows you to order a **Level 3 Spell Scroll**, carefully calligraphed with rare magical inks.\n\n**Service Details:**\n\n> - **Spell Type:** Level 3 spell.\n\n> - **Minimum Creator Level:** Level 5.\n\n> - **Rarity:** Uncommon.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **Level 3 spell without prior preparation**.\n\n> - Ideal for decisive confrontations.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Level 3 Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Nonexistent      | Impossible            | —               |\n| Town               | Very Rare        | 20                    | 1d10 days        |\n| City               | Uncommon         | 15                    | 1d6 days         |\n| Metropolis         | Common           | 10                    | 1d4 days         |\n\n**Style Note:** The scroll emits a soft glow and crackles faintly with magical energy when held.
+
+nom: Level 4 Spell Scroll Order
+nom 1: Level 4 Spell Scroll Order
+prix: **1 000 gp**
+prix 1: **1 000 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level4.png
+description: \n\n---\n\nThis service allows you to order a **Level 4 Spell Scroll**, meticulously scribed on enchanted parchment.\n\n**Service Details:**\n\n> - **Spell Type:** Level 4 spell.\n\n> - **Minimum Creator Level:** Level 7.\n\n> - **Rarity:** Rare.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **Level 4 spell without prior preparation**.\n\n> - A strategic asset for critical situations.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Level 4 Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Nonexistent      | Impossible            | —               |\n| Town               | Very Rare        | 20                    | 1d10+2 days     |\n| City               | Rare             | 15                    | 1d8 days        |\n| Metropolis         | Uncommon         | 10                    | 1d6 days        |\n\n**Style Note:** The runes on the scroll emit a golden light, and a subtle warmth radiates from the parchment.
+
+nom: Level 5 Spell Scroll Order
+nom 1: Level 5 Spell Scroll Order
+prix: **1 500 gp**
+prix 1: **1 500 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level5.png
+description: \n\n---\n\nThis service allows you to order a **Level 5 Spell Scroll**, inscribed with complex magical patterns and stabilized with arcane rituals.\n\n**Service Details:**\n\n> - **Spell Type:** Level 5 spell.\n\n> - **Minimum Creator Level:** Level 9.\n\n> - **Rarity:** Rare.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **Level 5 spell without prior preparation**.\n\n> - Invaluable in life-or-death encounters.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Level 5 Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Nonexistent      | Impossible            | —               |\n| Town               | Very Rare        | 20                    | 2d6+2 days      |\n| City               | Rare             | 15                    | 1d10 days       |\n| Metropolis         | Uncommon         | 10                    | 1d6 days        |\n\n**Style Note:** The scroll hums faintly with energy, and the ink shimmers when exposed to light.
+
+nom: Level 6 Spell Scroll Order
+nom 1: Level 6 Spell Scroll Order
+prix: **10 000 gp**
+prix 1: **10 000 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Very Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level6.png
+description: \n\n---\n\nThis service allows you to order a **Level 6 Spell Scroll**, meticulously crafted with rare and enchanted inks under strict magical supervision.\n\n**Service Details:**\n\n> - **Spell Type:** Level 6 spell.\n\n> - **Minimum Creator Level:** Level 11.\n\n> - **Rarity:** Very Rare.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **Level 6 spell without prior preparation**.\n\n> - An essential tool for high-stakes encounters.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Level 6 Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Nonexistent      | Impossible            | —               |\n| Town               | Extremely Rare   | 25                    | 2d10+5 days     |\n| City               | Very Rare        | 20                    | 2d8+2 days      |\n| Metropolis         | Rare             | 15                    | 1d10 days       |\n\n**Style Note:** The scroll emits a faint hum, and glowing azure runes shimmer along its edges.
+
+nom: Level 7 Spell Scroll Order
+nom 1: Level 7 Spell Scroll Order
+prix: **12 500 gp**
+prix 1: **12 500 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Very Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level7.png
+description: \n\n---\n\nThis service allows you to order a **Level 7 Spell Scroll**, inscribed with complex symbols and requiring rare components gathered from mythical creatures.\n\n**Service Details:**\n\n> - **Spell Type:** Level 7 spell.\n\n> - **Minimum Creator Level:** Level 13.\n\n> - **Rarity:** Very Rare.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **Level 7 spell without prior preparation**.\n\n> - A highly strategic resource for major confrontations.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Level 7 Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Nonexistent      | Impossible            | —               |\n| Town               | Extremely Rare   | 25                    | 2d12+5 days     |\n| City               | Very Rare        | 20                    | 2d10+2 days     |\n| Metropolis         | Rare             | 15                    | 2d8 days        |\n\n**Style Note:** A faint golden glow surrounds the scroll, and a delicate magical chime can be heard when it is unrolled.
+
+nom: Level 8 Spell Scroll Order
+nom 1: Level 8 Spell Scroll Order
+prix: **15 000 gp**
+prix 1: **15 000 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Very Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level8.png
+description: \n\n---\n\nThis service allows you to order a **Level 8 Spell Scroll**, a powerful artifact requiring arcane mastery and materials infused with planar energy.\n\n**Service Details:**\n\n> - **Spell Type:** Level 8 spell.\n\n> - **Minimum Creator Level:** Level 15.\n\n> - **Rarity:** Very Rare.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **Level 8 spell without prior preparation**.\n\n> - A nearly unmatched tool for dire circumstances.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Level 8 Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Nonexistent      | Impossible            | —               |\n| Town               | Nonexistent      | Impossible            | —               |\n| City               | Extremely Rare   | 25                    | 2d12+7 days     |\n| Metropolis         | Very Rare        | 20                    | 2d10+5 days     |\n\n**Style Note:** The scroll radiates a faint pulse of energy, and its runes shift slightly when observed.
+
+nom: Level 9 Spell Scroll Order
+nom 1: Level 9 Spell Scroll Order
+prix: **50 000 gp**
+prix 1: **50 000 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Service (Legendary)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellscroll_level9.png
+description: \n\n---\n\nThis service allows you to order a **Level 9 Spell Scroll**, an artifact of immense power capable of shaping destinies, altering realities, or unleashing devastating forces.\n\n**Service Details:**\n\n> - **Spell Type:** Level 9 spell.\n\n> - **Minimum Creator Level:** Level 17.\n\n> - **Rarity:** Legendary.\n\n> - **Usage:** Only a character whose class **spell list includes the inscribed spell** can attempt to use this scroll. Furthermore, the character must have the **ability to cast spells** to activate the scroll.\n\n**Scroll Benefits:**\n\n> - Allows casting a **Level 9 spell without prior preparation**.\n\n> - A tool of unparalleled power, often reserved for world-altering events.\n\n> - Coveted by archmages, planar entities, and legendary heroes.\n\n**Finding a Shop:**\n\nTo find a seller capable of providing a **Level 9 Spell Scroll**, roll an **Investigation (Intelligence) check** based on the city size:\n\n| **City Size**       | **Availability** | **Investigation DC** | **Waiting Time** |\n|---------------------|------------------|-----------------------|------------------|\n| Village            | Nonexistent      | Impossible            | —               |\n| Town               | Nonexistent      | Impossible            | —               |\n| City               | Extremely Rare   | 25                    | 2d12+10 days    |\n| Metropolis         | Very Rare        | 20                    | 2d10+7 days     |\n\n**Additional Mechanics:**\n\n> - **Critical Failure (Natural 1 on Investigation check):** Attracts unwanted attention from rival factions, curious archmages, or planar entities aware of your search.\n\n> - **Forgery Risk:** Unscrupulous merchants may attempt to sell fake scrolls. A **successful Arcana (Intelligence) check, DC 20**, can detect forgeries.
+
+nom: Spellcasting Service (Cantrip)
+nom 1: Spellcasting Service (Cantrip)
+prix: **10 gp**
+prix 1: **10 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Magical Service (Common)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_cantrip.png
+description: \n\n---\n\nThis service allows a skilled spellcaster to invoke a **cantrip**, a minor magical effect often used for daily tasks or small practical purposes.\n\n---\n\n**Service Details:**\n\n> - **Spell Type:** Cantrip.\n\n> - **Minimum Caster Level:** Level 1.\n\n> - **Rarity:** Common.\n\n---\n\n**Examples of Cantrips:**\n\n| **Spell**         | **Effect**          | **Usage**             |\n|--------------------|---------------------|-----------------------|\n| Light           | Emits light         | Illuminate an area   |\n| Prestidigitation| Minor effects      | Clean, warm items    |\n| Mending         | Repair object      | Restore broken items |\n| Frostbite       | Minor damage       | Combat               |\n| Message         | Secret communication | Send a message      |\n\n---\n\n**Finding a Spellcaster:**\n\nTo locate a spellcaster capable of providing a **Cantrip Spellcasting Service**, make an **Investigation (Intelligence) check** based on the city's size:\n\n| **City Size**       | **Investigation DC** | **Waiting Time** |\n|---------------------|----------------------|------------------|\n| Village            | 15                   | 1d4 days         |\n| Town               | 10                   | 1 day            |\n| City               | 5                    | Immediate        |\n| Metropolis         | 5                    | Immediate        |\n\n**Style Note:** A soft glow emanates from the caster's hands as the spell activates, often accompanied by a faint breeze or a sparkling magical effect.
+
+nom: Spellcasting Service Level 1
+nom 1: Spellcasting Service Level 1
+prix: **50 gp**
+prix 1: **50 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Magical Service (Common)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level1.png
+description: \n\n---\n\nThis service grants access to **Level 1 spells**, often used for basic healing, protection, or utility.\n\n---\n\n**Service Details:**\n\n> - **Spell Type:** Level 1 Spell.\n\n> - **Minimum Caster Level:** Level 3.\n\n> - **Rarity:** Common.\n\n---\n\n**Examples of Level 1 Spells:**\n\n| **Spell**         | **Effect**         | **Purpose**           |\n|--------------------|---------------------|------------------------|\n| Cure Wounds      | Heal minor injuries | Restore hit points   |\n| Detect Magic     | Detect magic aura   | Identify enchantments |\n| Shield           | Protective barrier  | Enhance defense      |\n| Feather Fall     | Slow descent        | Prevent fall damage  |\n| Identify         | Learn item properties | Magical identification |\n\n---\n\n**Finding a Spellcaster:**\n\nTo locate a spellcaster capable of providing a **Level 1 Spellcasting Service**, make an **Investigation (Intelligence) check** based on the city's size:\n\n| **City Size**       | **Investigation DC** | **Waiting Time** |\n|---------------------|----------------------|------------------|\n| Village            | 20                   | 1d6 days         |\n| Town               | 15                   | 1d4 days         |\n| City               | 10                   | 1 day           |\n| Metropolis         | 5                    | Immediate       |\n\n**Style Note:** The spellcaster’s hands glow softly with runic symbols as the spell takes effect.
+
+nom: Spellcasting Service Level 2
+nom 1: Spellcasting Service Level 2
+prix: **200 gp**
+prix 1: **200 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Magical Service (Uncommon)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level2.png
+description: \n\n---\n\nThis service grants access to **Level 2 spells**, often used for curing ailments, stealth, or combat support.\n\n---\n\n**Service Details:**\n\n> - **Spell Type:** Level 2 Spell.\n\n> - **Minimum Caster Level:** Level 5.\n\n> - **Rarity:** Uncommon.\n\n---\n\n**Examples of Level 2 Spells:**\n\n| **Spell**         | **Effect**         | **Purpose**           |\n|--------------------|---------------------|------------------------|\n| Lesser Restoration| Remove condition   | Cure diseases/poison |\n| Invisibility      | Turn invisible     | Stealth operations   |\n| Mirror Image      | Defensive illusion | Avoid attacks        |\n| Misty Step        | Short teleport     | Quick repositioning  |\n| Hold Person       | Paralyze enemy     | Disable opponent     |\n\n---\n\n**Finding a Spellcaster:**\n\nTo locate a spellcaster capable of providing a **Level 2 Spellcasting Service**, make an **Investigation (Intelligence) check** based on the city's size:\n\n| **City Size**       | **Investigation DC** | **Waiting Time** |\n|---------------------|----------------------|------------------|\n| Village            | Impossible           | —               |\n| Town               | 20                   | 1d8 days         |\n| City               | 15                   | 1d6 days         |\n| Metropolis         | 10                   | 1d4 days         |\n\n**Style Note:** A faint shimmer surrounds the caster as they channel the spell's energy.
+
+nom: Spellcasting Service Level 3
+nom 1: Spellcasting Service Level 3
+prix: **300 gp**
+prix 1: **300 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Magical Service (Uncommon)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level3.png
+description: \n\n---\n\This service grants access to **Level 3 spells**, capable of delivering substantial effects in combat, healing, or utility.\n\n---\n\n**Service Details:**\n\n> - **Spell Type:** Level 3 Spell.\n\n> - **Minimum Caster Level:** Level 7.\n\n> - **Rarity:** Uncommon.\n\n---\n\n**Examples of Level 3 Spells:**\n\n| **Spell**         | **Effect**         | **Purpose**           |\n|--------------------|---------------------|------------------------|\n| Fireball         | Area damage        | Combat devastation   |\n| Counterspell     | Negate magic       | Interrupt casters    |\n| Revivify         | Raise dead         | Emergency revival    |\n| Fly              | Flight ability     | Aerial mobility      |\n| Dispel Magic     | End enchantments   | Remove magic effects |\n\n---\n\n**Finding a Spellcaster:**\n\nTo locate a spellcaster capable of providing a **Level 3 Spellcasting Service**, make an **Investigation (Intelligence) check** based on the city's size:\n\n| **City Size**       | **Investigation DC** | **Waiting Time** |\n|---------------------|----------------------|------------------|\n| Village            | Impossible           | —               |\n| Town               | 20                   | 1d10 days        |\n| City               | 15                   | 1d8 days         |\n| Metropolis         | 10                   | 1d6 days         |\n\n**Style Note:** The air crackles with energy as the spellcaster weaves intricate sigils in the air.
+
+nom: Spellcasting Service Level 4-5
+nom 1: Spellcasting Service Level 4-5
+prix: **2 000 gp**
+prix 1: **2 000 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Magical Service (Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level4-5.png
+description: \n\n---\n\nThese powerful spells can shift the tide of battle, heal life-threatening injuries, or solve complex challenges.\n\n---\n\n**Service Details:**\n\n> - **Spell Type:** Level 4–5 Spell.\n\n> - **Minimum Caster Level:** Level 9.\n\n> - **Rarity:** Rare.\n\n---\n\n**Examples of Level 4–5 Spells:**\n\n| **Spell**         | **Effect**         | **Purpose**           |\n|--------------------|---------------------|------------------------|\n| Greater Invisibility | Prolonged stealth | Extended invisibility |\n| Stoneskin        | Damage resistance  | Enhanced defense      |\n| Dimension Door   | Teleportation      | Instant travel        |\n| Mass Cure Wounds | Area healing       | Group restoration     |\n| Raise Dead       | Resurrection       | Revive ally           |\n\n---\n\n**Finding a Spellcaster:**\n\n| **City Size**       | **Investigation DC** | **Waiting Time** |\n|---------------------|----------------------|------------------|\n| Village            | Impossible           | —               |\n| Town               | 25                   | 2d8+2 days       |\n| City               | 20                   | 1d10 days        |\n| Metropolis         | 15                   | 1d8 days         |\n\n**Style Note:** The room glows faintly as the spell’s power begins to manifest.
+
+nom: Spellcasting Service Level 6-7
+nom 1: Spellcasting Service Level 6-7
+prix: **20 000 gp**
+prix 1: **20 000 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Magical Service (Very Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level6-7.png
+description: \n\n---\n\nThis service grants access to **Level 6–7 spells**, capable of reshaping reality, countering deadly curses, or unleashing devastating magical forces.\n\n---\n\n**Service Details:**\n\n> - **Spell Type:** Level 6–7 Spell.\n\n> - **Minimum Caster Level:** Level 11.\n\n> - **Rarity:** Very Rare.\n\n---\n\n**Examples of Level 6–7 Spells:**\n\n| **Spell**         | **Effect**            | **Purpose**           |\n|--------------------|-----------------------|------------------------|\n| Heal             | Full restoration     | Restore full health   |\n| Plane Shift      | Planar travel        | Travel between planes |\n| Disintegrate     | Destroy matter       | Remove obstacles      |\n| True Seeing      | Magical sight        | Detect hidden truths  |\n| Finger of Death  | Lethal magic         | Instantly kill target |\n\n---\n\n**Finding a Spellcaster:**\n\nTo locate a spellcaster capable of providing a **Level 6–7 Spellcasting Service**, make an **Investigation (Intelligence) check** based on the city's size:\n\n| **City Size**       | **Investigation DC** | **Waiting Time** |\n|---------------------|----------------------|------------------|\n| Village            | Impossible           | —               |\n| Town               | 25                   | 2d10+5 days      |\n| City               | 20                   | 2d8+2 days       |\n| Metropolis         | 15                   | 1d10 days        |\n\n**Style Note:** Arcane runes glow brightly in the air as the caster channels immense magical energy.
+
+nom: Spellcasting Service Level 8
+nom 1: Spellcasting Service Level 8
+prix: **50 000 gp**
+prix 1: **50 000 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Magical Service (Very Rare)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level8.png
+description: \n\n---\n\nThis service grants access to **Level 8 spells**, among the most powerful magics known to mortals, capable of incredible feats of destruction, protection, or manipulation.\n\n---\n\n**Service Details:**\n\n> - **Spell Type:** Level 8 Spell.\n\n> - **Minimum Caster Level:** Level 15.\n\n> - **Rarity:** Very Rare.\n\n---\n\n**Examples of Level 8 Spells:**\n\n| **Spell**         | **Effect**            | **Purpose**           |\n|--------------------|-----------------------|------------------------|\n| Mind Blank       | Mental immunity       | Protection from mind effects |\n| Power Word Stun  | Incapacitate target   | Disable a powerful enemy |\n| Earthquake       | Massive tremor        | Wide-area destruction  |\n| Sunburst         | Blinding explosion    | Radiant area damage    |\n| Dominate Monster | Mind control          | Control a creature     |\n\n---\n\n**Finding a Spellcaster:**\n\nTo locate a spellcaster capable of providing a **Level 8 Spellcasting Service**, make an **Investigation (Intelligence) check** based on the city's size:\n\n| **City Size**       | **Investigation DC** | **Waiting Time** |\n|---------------------|----------------------|------------------|\n| Village            | Impossible           | —               |\n| Town               | Impossible           | —               |\n| City               | 25                   | 2d12+5 days      |\n| Metropolis         | 20                   | 2d10+3 days      |\n\n**Style Note:** The air vibrates with intense energy, and the surroundings dim as the magic takes hold.
+
+nom: Spellcasting Service Level 9
+nom 1: Spellcasting Service Level 9
+prix: **100 000 gp**
+prix 1: **100 000 gp**
+poids:
+poids image: symbole/vide.png
+poids 1:
+poids image 1: symbole/vide.png
+type: Magical Service (Legendary)
+attca_image: symbole/vide.png
+attca:
+image: image/Services/spellcasting_level9.png
+description: \n\n---\n\nThis service grants access to **Level 9 spells**, representing the pinnacle of mortal magical power, capable of rewriting reality, resurrecting the dead, or unleashing catastrophic destruction.\n\n---\n\n**Service Details:**\n\n> - **Spell Type:** Level 9 Spell.\n\n> - **Minimum Caster Level:** Level 17.\n\n> - **Rarity:** Legendary.\n\n---\n\n**Examples of Level 9 Spells:**\n\n| **Spell**         | **Effect**            | **Purpose**           |\n|--------------------|-----------------------|------------------------|\n| Wish            | Ultimate wish        | Achieve nearly anything |\n| True Resurrection | Perfect resurrection | Return the dead to life |\n| Time Stop        | Freeze time          | Perform undisturbed actions |\n| Meteor Swarm     | Area devastation     | Unleash catastrophic damage |\n| Power Word Kill  | Instant death        | Eliminate weak enemy |\n\n---\n\n**Finding a Spellcaster:**\n\nTo locate a spellcaster capable of providing a **Level 9 Spellcasting Service**, make an **Investigation (Intelligence) check** based on the city's size:\n\n| **City Size**       | **Investigation DC** | **Waiting Time** |\n|---------------------|----------------------|------------------|\n| Village            | Impossible           | —               |\n| Town               | Impossible           | —               |\n| City               | 30                   | 2d12+10 days     |\n| Metropolis         | 25                   | 2d10+7 days      |\n\n**Additional Risks:**\n\n>- **High Stakes:** These spells may have unintended consequences.\n\n> - **Rival Interest:** Other powerful individuals may attempt to intervene.\n\n**Style Note:** Reality seems to ripple, and shadows dance unnaturally as the caster channels overwhelming power.

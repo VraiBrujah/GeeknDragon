@@ -1,0 +1,119 @@
+nom: Backpack
+nom 1: Backpack
+prix: **2 gp**
+prix 1: **2 gp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/backpack.png
+description: \n\n---\n\nThis leather or reinforced cloth backpack is designed for adventurers to carry essential gear during their travels. It is lightweight but not optimized for use with heavier armor.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Can hold up to **30 pounds or 1 cubic foot (15 kg)**.\n\n>- **Usage**: Using this backpack while wearing **medium or heavy armor** imposes **disadvantage** on all **Dexterity** checks, including **Stealth**.
+
+nom: Bedroll
+nom 1: Bedroll
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **7 lb**\n\n**(3.5 kg)**
+poids 1: **7 lb**\n\n**(3.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/bedroll.png
+description: \n\n---\n\nA roll of thick fabric, often padded, used for sleeping outdoors.\n\n---\n\n**Mechanics**:\n\n>- **Use**: Sleeps **1 Small or Medium creature** comfortably.\n\n>- **Effect**: Grants **Advantage on saving throws** against **extreme cold** when used during rest (see the Dungeon Master’s Guide).
+
+nom: Bell
+nom 1: Bell
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **0.1 lb**\n\n**(0.05 kg)**
+poids 1: **0.1 lb**\n\n**(0.05 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/bell.png
+description: \n\n---\n\nA small metal bell that emits a clear sound when rung.\n\n---\n\n**Mechanics**:\n\n>- **Use**: As part of the **Utilize action**, ring the bell to produce a sound audible within **60ft (18 m, 12c)**.\n\n>- **Effect**: Often used to signal or alert others.\n\n>- **Special**: Can be tied to objects for alarms or traps.
+
+nom: Bullseye Lantern
+nom 1: Bullseye Lantern
+prix: **10 gp**
+prix 1: **10 gp**
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/bullseye_lantern.png
+description: \n\n---\n\nA specialized lantern designed to focus light into a concentrated beam.\n\n---\n\n**Mechanics**:\n\n>- **Light Radius**: Casts **Bright Light** in a **60ft (18 m, 12c)** cone and **Dim Light** for an additional **60ft (18 m, 12c)**.\n\n>- **Fuel Consumption**: Requires **Oil** to function. A single flask of oil lasts for **6 hours** of continuous use.\n\n>- **Use**: Directs a focused beam of light, ideal for spotting distant objects or navigating narrow paths.\n\n>- **Special**: Can be extinguished or relit as a **Utilize action**.\n\n>- **Effect**: perfect for precision lighting in exploration or tactical situations.
+
+nom: Costume (3)
+nom 1: Costume (3)
+prix: **15 gp**
+prix 1: **15 gp**
+poids: **12 lb**\n\n**(6 kg)**
+poids 1: **12 lb**\n\n**(6 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/costume3.png
+description: \n\n---\n\nA crafted outfit designed to resemble specific individuals, roles, or personas for performances or disguise.\n\n---\n\n**Mechanics**:\n\n>- **Effect**: Grants **Advantage** on **Charisma (Deception)** checks to impersonate the character or role the costume represents:\n\n![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)![Ligne!](symbole/LigneD.png)\n\n>- **Use**: Ideal for performers, spies, and characters needing to blend into unfamiliar social circles.
+
+nom: Mirror
+nom 1: Mirror
+prix: **5 gp**
+prix 1: **5 gp**
+poids: **0.5 lb**\n\n**(0.5 kg)**
+poids 1: **0.5 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/mirror.png
+description: \n\n---\n\nA small, polished steel mirror that serves various practical and tactical purposes.\n\n---\n\n**Mechanics**:\n\n>- **Utility**: Useful for personal grooming, peeking around corners, or signaling with reflected light.\n\n>- **Signal Range**: Can reflect light over long distances in bright conditions.\n\n>- **Use in Stealth**: Allows you to check for traps or enemies without exposing yourself.\n\n>- **Effect**: Adds versatility to exploration and social interactions, serving adventurers in creative ways.
+
+nom: Oil (8)
+nom 1: Oil (8)
+prix: **8 sp**
+prix 1: **8 sp**
+poids: **8 lb**\n\n**(4 kg)**
+poids 1: **8 lb**\n\n**(4 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)<br><br>![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/oil8.png
+description: \n\n---\n\nA versatile flask of oil, useful for lighting fires, fueling lanterns, or creating slick surfaces.\n\n---\n\n**Mechanics**:\n\n>- **Dousing Targets**: Throwing oil as part of an attack covers a creature or object within **20ft (6 m, 4c)**. The target must succeed on a **DC 8 **Dexterity** saving throw** (plus your **Dexterity** modifier and Proficiency Bonus) or be covered in oil. If ignited, the target takes an additional **5 Fire damage**.\n\n>- **Creating Slick Surfaces**: Pouring oil as a **Utilize action** creates a slippery **5 ft (1.5 m, 1c)** square area.\n\n>- **Fuel Source**: A flask of oil burns for **6 hours** in a lamp or lantern.
+
+nom: Ration (9)
+nom 1: Ration (9)
+prix: **45 sp**
+prix 1: **45 sp**
+poids: **18 lb**\n\n**(9 kg)**
+poids 1: **18 lb**\n\n**(9 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)<br><br>![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/ration.png
+description: \n\n---\n\nRations are travel-ready food supplies, including **jerky**, **dried fruit**, **hardtack**, and **nuts**. They are compact, durable, and essential for sustaining adventurers on long journeys.\n\n---\n\n**Mechanics:**\n\n>- **Daily Sustenance:** One ration provides enough food to meet the daily requirement for a **Small** or **Medium** creature.**Malnutrition Hazard:**\n\n>- A creature must consume at least **half** its required daily food to avoid **Exhaustion**.\n\n>- Eating less than half requires a **DC 10 Constitution saving throw** or the creature gains **1 level of Exhaustion** at the end of the day.\n\n>- A creature eating nothing for **5 consecutive days** gains **1 level of Exhaustion automatically** on the fifth day, and an additional level for each subsequent day without food.\n\n>- **Exhaustion Recovery:** Eating a full day’s worth of food removes malnutrition-related Exhaustion.\n\n>- **Flavor:** While functional and compact, rations are bland and repetitive. They are meant for survival, not enjoyment.\n\n---\n\n**Food Needs per Day**: A **Tiny** creature requires **1/4 lb (0.1 kg)** of food per day, a **Small or Medium** creature **1 lb (0.5 kg)**, a **Large** creature **4 lb (2 kg)**, a **Huge** creature **16 lb (8 kg)**, and a **Gargantuan** creature **64 lb (32 kg)**.  \n\n---\n\n**Exhaustion Condition**:\n\n>  - **Cumulative Levels**: Each time you gain Exhaustion, you receive **1 level of Exhaustion**. At **6 levels**, the character dies.\n\n>  - **D20 Tests Affected**: Reduce the result of all **D20 Tests** (ability checks, saving throws, and attack rolls) by **2 × your Exhaustion level**.\n\n>  - **Speed Reduced**: Reduce your **Speed** by **5 feet (1.5 m, 1 case)** per Exhaustion level.
+
+nom: Tinderbox
+nom 1: Tinderbox
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Adventuring Gear
+charge:
+attca_image: symbole/vide.png
+image: image/Equipement/tinderbox.png
+description: \n\n---\n\nA small container holding the tools necessary to kindle a fire.\n\n---\n\n**Mechanics**:\n\n>- **Contents**: Includes flint, fire steel, and lightly oiled tinder.**Effect**: \n\n> - As a **Bonus Action**, light a **candle**, **lamp**, **lantern**, or **torch**.\n\n> - Lighting any other exposed fuel (e.g., campfire) takes **1 minute**.\n\n>- **Use**: Essential for survival in dark dungeons, wilderness camping, or preparing light sources.
+
+nom: Waterskin
+nom 1: Waterskin
+prix: **2 sp**
+prix 1: **2 sp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Adventuring Gear
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/waterskin.png
+description: \n\n---\n\nA leather pouch designed to carry water or other liquids for travel.\n\n---\n\n**Mechanics**:\n\n>- **Capacity**: Holds up to **4 pints (2 liters)** of liquid.\n\n>- **Effect**: Essential for staying hydrated in the wilderness.\n\n>- **Weight**: **Full**: 5 lb (2.5 kg) / **Empty**: Negligible weight.\n\n>- **Use**: Drinking from a waterskin counts as part of a short rest or an action.\n\n---\n\n **Dehydration Rules**:\n\n>  - **Water Needs per Day**: A **Tiny** creature requires **1/4 gallon (0.9 L)** of water per day, a **Small or Medium** creature **1 gallon (3.5 L)**, a **Large** creature **4 gallons (15 L)**, a **Huge** creature **16 gallons (60 L)**, and a **Gargantuan** creature **64 gallons (240 L)**.  \n\n>  - **Dehydration Effects**: If a creature drinks less than **half the required water** for a day, it gains **1 level of Exhaustion** at the day’s end.\n\n>  - **Recovery**: Exhaustion caused by dehydration **cannot be removed** until the creature drinks the **full daily water requirement**.\n\n---\n\n**Exhaustion Condition**:\n\n>  - **Cumulative Levels**: Each time you gain Exhaustion, you receive **1 level of Exhaustion**. At **6 levels**, the character dies.\n\n>  - **D20 Tests Affected**: Reduce the result of all **D20 Tests** (ability checks, saving throws, and attack rolls) by **2 × your Exhaustion level**.\n\n>  - **Speed Reduced**: Reduce your **Speed** by **5 feet (1.5 m, 1 case)** per Exhaustion level.

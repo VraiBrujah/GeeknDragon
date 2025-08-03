@@ -1,0 +1,341 @@
+nom: Cimeterre
+nom 1: Cimeterre
+prix: **25 po**
+prix 1: **25 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **1d6 tranchant**
+image: image/Arme/scimitar.png
+description: \n\n---\n\nLe cimeterre est une lame incurvée élégante conçue pour des attaques rapides et tranchantes. Il est prisé par les guerriers agiles et les combattants des déserts.\n\n---\n\n**Mécanique** : Inflige **1d6 dégâts tranchants**. Ajoutez votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Finesse** : Vous pouvez utiliser votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Le même modificateur doit être utilisé pour les deux jets.\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une autre arme Légère en tant qu’action bonus. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf s’il est négatif.\n\n---\n\n**Avantage de maître d’arme**\n\n**Entaille** – Vous pouvez effectuer l’attaque supplémentaire de la propriété Légère dans le cadre de l’**action d’Attaque** au lieu d’une **action bonus**. Cette attaque supplémentaire ne peut être effectuée qu’une fois par tour.
+
+nom: Coutille
+nom 1: Coutille
+prix: **20 po**
+prix 1: **20 po**
+poids: **3 kg**\n\n**(6 lb)**
+poids 1: **3 kg**\n\n**(6 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **1d10 tranchant**
+image: image/Arme/glaive.png
+description: \n\n---\n\nLe coutille est une arme d’hast avec une lame tranchante, parfaite pour maintenir les ennemis à distance tout en infligeant des coups dévastateurs.\n\n---\n\n**Mécanique** : Inflige **1d10 dégâts tranchants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lourde** : Vous avez un désavantage sur les jets d’attaque avec cette arme si votre score de **Force** est inférieur à 13.\n\n>- **Allonge** : Cette arme ajoute  **1.5 m (5', 1c)**  à votre portée pour vos attaques et vos attaques d’opportunité.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée, rendant incompatible l’usage d’un bouclier ou d’une autre arme.\n\n---\n\n**Avantage de maître d’arme**\n\n**Érafler** – Si votre jet d’attaque avec cette arme manque une créature, vous pouvez infliger des dégâts égaux à votre modificateur de **Force** à la cible. Les dégâts correspondent au type de l’arme.
+
+nom: Épée à deux mains
+nom 1: Épée à deux mains
+prix: **50 po**
+prix 1: **50 po**
+poids: **3 kg**\n\n**(6 lb)**
+poids 1: **3 kg**\n\n**(6 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **2d6 tranchant**
+image: image/Arme/greatsword.png
+description: \n\n---\n\nL’épée à deux mains est une arme massive à double tranchant, conçue pour infliger des dégâts exceptionnels en combat rapproché. Elle est prisée par les guerriers robustes.\n\n---\n\n**Mécanique** : Inflige **2d6 dégâts tranchants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lourde** : Vous avez un désavantage sur les jets d’attaque avec cette arme si votre score de **Force** est inférieur à 13.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée, rendant incompatible l’usage d’un bouclier ou d’une autre arme.\n\n---\n\n**Avantage de maître d’arme**\n\n**Érafler** – Si votre jet d’attaque avec cette arme manque une créature, vous pouvez infliger des dégâts égaux à votre modificateur de **Force** à la cible. Les dégâts correspondent au type de l’arme.
+
+nom: Épée courte
+nom 1: Épée courte
+prix: **10 po**
+prix 1: **10 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d6 perforant**
+image: image/Arme/shortsword.png
+description: \n\n---\n\nL’épée courte est une lame légère et équilibrée, idéale pour les combattants furtifs et rapides. Son design en fait une arme de prédilection pour les attaques précises.\n\n---\n\n**Mécanique** : Inflige **1d6 dégâts perforants**. Ajoutez votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Finesse** : Vous pouvez utiliser votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Le même modificateur doit être utilisé pour les deux jets.\n\n>- **Légère** : Vous pouvez effectuer une attaque supplémentaire avec une autre arme Légère en tant qu’action bonus. Cette attaque supplémentaire n’ajoute pas votre modificateur de caractéristique aux dégâts, sauf s’il est négatif.\n\n---\n\n**Avantage de maître d’arme**\n\n**Vexer** – Si vous frappez une créature avec cette arme, vous obtenez **Avantage** sur votre prochain jet d’attaque contre cette créature avant la fin de votre prochain tour.
+
+nom: Épée longue
+nom 1: Épée longue
+prix: **15 po**
+prix 1: **15 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **1d8 tranchant**
+image: image/Arme/longsword.png
+description: \n\n---\n\nL’épée longue est une arme emblématique, équilibrée entre puissance et rapidité. Elle est souvent le choix des chevaliers et des guerriers pour sa polyvalence.\n\n---\n\n**Mécanique** : Inflige **1d8 dégâts tranchants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Polyvalente** : Lorsque cette arme est maniée à deux mains, elle inflige **1d10 dégâts tranchants** au lieu de 1d8.\n\n---\n\n**Avantage de maître d’arme**\n\n**Saper** – Si vous frappez une créature avec cette arme, elle subit un désavantage sur son prochain jet d’attaque avant le début de votre prochain tour. Cela permet de perturber ses actions offensives.
+
+nom: Fléau
+nom 1: Fléau
+prix: **10 po**
+prix 1: **10 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attcont.png
+attca: **1d8 contondant**
+image: image/Arme/flail.png
+description: \n\n---\n\nLe fléau est une arme composée d’une boule à pointes reliée à un manche par une chaîne. Sa conception permet de contourner les boucliers et les armures.\n\n---\n\n**Mécanique** : Inflige **1d8 dégâts contondants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** : Aucune.\n\n---\n\n**Avantage de maître d’arme**\n\n**Saper** – Si vous frappez une créature avec cette arme, elle subit un désavantage sur son prochain jet d’attaque avant le début de votre prochain tour. La nature imprévisible du fléau rend difficile la récupération de l’ennemi.
+
+nom: Fouet
+nom 1: Fouet
+prix: **2 po**
+prix 1: **2 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **1d4 tranchant**
+image: image/Arme/whip.png
+description: \n\n---\n\nLe fouet est une arme flexible conçue pour des attaques précises et un contrôle à distance. Il est prisé par les combattants agiles et les dompteurs de bêtes.\n\n---\n\n**Mécanique** : Inflige **1d4 dégâts tranchants**. Ajoutez votre modificateur de **Dextérité** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Finesse** : Vous pouvez utiliser votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Le même modificateur doit être utilisé pour les deux jets.\n\n>- **Allonge** : Cette arme ajoute  **1.5 m (5', 1c)**  à votre portée pour vos attaques et vos attaques d’opportunité.\n\n---\n\n**Avantage de maître d’arme**\n\n**Ralenti** – Si vous frappez une créature avec cette arme et infligez des dégâts, vous pouvez réduire sa vitesse de **3 m (10', 2c)** jusqu’au début de votre prochain tour. Cet effet ne se cumule pas avec d'autres effets de ralentissement.
+
+nom: Hache à deux mains
+nom 1: Hache à deux mains
+prix: **30 po**
+prix 1: **30 po**
+poids: **3.5 kg**\n\n**(7 lb)**
+poids 1: **3.5 kg**\n\n**(7 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **1d12 tranchant**
+image: image/Arme/greataxe.png
+description: \n\n---\n\nLa hache à deux mains est une arme lourde à deux mains conçue pour infliger des coups dévastateurs. Elle est le choix des barbares cherchant à maximiser leur puissance destructrice.\n\n---\n\n**Mécanique** : Inflige **1d12 dégâts tranchants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lourde** : Vous avez un désavantage sur les jets d’attaque avec cette arme si votre score de **Force** est inférieur à 13.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée, rendant incompatible l’usage d’un bouclier ou d’une autre arme.\n\n---\n\n**Avantage de maître d’arme**\n\n**Fendre** – Si vous frappez une créature avec cette arme, vous pouvez effectuer une attaque avec cette même arme contre une autre créature située à  <br>**1.5 m (5', 1c)**  de la première. La deuxième attaque inflige les dégâts de l’arme sans ajouter votre modificateur de caractéristique, sauf s’il est négatif.
+
+nom: Hache d’armes
+nom 1: Hache d’armes
+prix: **10 po**
+prix 1: **10 po**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **1d8 tranchant**
+image: image/Arme/battleaxe.png
+description: \n\n---\n\nLa hache d’armes est une arme polyvalente, capable d’infliger des dégâts importants avec une ou deux mains. Les guerriers l’apprécient pour son équilibre entre puissance et contrôle.\n\n---\n\n**Mécanique** : Inflige **1d8 dégâts tranchants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Polyvalente** : Lorsque cette arme est maniée à deux mains, elle inflige **1d10 dégâts tranchants** au lieu de 1d8.\n\n---\n\n**Avantage de maître d’arme**\n\n**Renverser** – Si vous frappez une créature avec cette arme, vous pouvez la forcer à effectuer un **jet de sauvegarde de Constitution**. Le DD de ce jet est égal à 8 + votre **Bonus de Maîtrise** + votre modificateur de **Force**. En cas d’échec, la créature est mise **À Terre**, offrant un avantage aux attaquants au corps à corps contre elle et imposant un désavantage aux attaques à distance la visant.
+
+nom: Hallebarde
+nom 1: Hallebarde
+prix: **20 po**
+prix 1: **20 po**
+poids: **3 kg**\n\n**(6 lb)**
+poids 1: **3 kg**\n\n**(6 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/atttran.png
+attca: **1d10 tranchant**
+image: image/Arme/halberd.png
+description: \n\n---\n\nLa hallebarde est une arme d’hast équipée d’une lame ressemblant à une hache et d’une pointe pour le combat à distance. Elle permet d’infliger des coups puissants tout en maintenant les ennemis à distance.\n\n---\n\n**Mécanique** : Inflige **1d10 dégâts tranchants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lourde** : Vous avez un désavantage sur les jets d’attaque avec cette arme si votre score de **Force** est inférieur à 13.\n\n>- **Allonge** : Cette arme ajoute  **1.5 m (5', 1c)**  à votre portée pour vos attaques et vos attaques d’opportunité.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée efficacement.\n\n---\n\n**Avantage de maître d’arme**\n\n**Fendre** – Si vous frappez une créature avec cette arme, vous pouvez effectuer une attaque avec cette même arme contre une autre créature située à  <br>**1.5 m (5', 1c)**  de la première. La deuxième attaque inflige les dégâts de l’arme sans ajouter votre modificateur de caractéristique, sauf s’il est négatif.
+
+nom: Lance d’arçon
+nom 1: Lance d’arçon
+prix: **10 po**
+prix 1: **10 po**
+poids: **3 kg**\n\n**(6 lb)**
+poids 1: **3 kg**\n\n**(6 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d10 perforant**
+image: image/Arme/lance.png
+description: \n\n---\n\nLa Lance d’arçon est une arme de guerre destinée au combat monté. Elle offre une portée étendue et des dégâts importants, mais est plus difficile à manier au sol.\n\n---\n\n**Mécanique** : Inflige **1d10 dégâts perforants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Allonge** : Cette arme ajoute  **1.5 m (5', 1c)**  à votre portée pour vos attaques et vos attaques d’opportunité.\n\n>- **Lourde** : Vous avez un désavantage sur les jets d’attaque avec cette arme si votre score de **Force** est inférieur à 13.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée au sol, mais une main si vous êtes sur une monture.\n\n---\n\n**Avantage de maître d’arme**\n\n**Renverser** – Si vous frappez une créature avec cette arme, vous pouvez la forcer à effectuer un **jet de sauvegarde de Constitution**. Le DD de ce jet est égal à 8 + votre **Bonus de Maîtrise** + votre modificateur de **Force**. En cas d’échec, la créature est mise **À Terre**, offrant un avantage aux attaquants au corps à corps contre elle et imposant un désavantage aux attaques à distance la visant.
+
+nom: Maillet d’armes
+nom 1: Maillet d’armes
+prix: **10 po**
+prix 1: **10 po**
+poids: **5 kg**\n\n**(10 lb)**
+poids 1: **5 kg**\n\n**(10 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attcont.png
+attca: **2d6 contondant**
+image: image/Arme/maul.png
+description: \n\n---\n\nLe Maillet d’armes est un énorme marteau à deux mains conçu pour infliger des coups écrasants. Il est prisée par les combattants qui privilégient la force brute.\n\n---\n\n**Mécanique** : Inflige **2d6 dégâts contondants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lourde** : Vous avez un désavantage sur les jets d’attaque avec cette arme si votre score de **Force** est inférieur à 13.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée efficacement.\n\n---\n\n**Avantage de maître d’arme**\n\n**Renverser** – Si vous frappez une créature avec cette arme, vous pouvez la forcer à effectuer un **jet de sauvegarde de Constitution**. Le DD de ce jet est égal à 8 + votre **Bonus de Maîtrise** + votre modificateur de **Force**. En cas d’échec, la créature est mise **À Terre**, offrant un avantage aux attaquants au corps à corps contre elle et imposant un désavantage aux attaques à distance la visant.
+
+nom: Marteau de guerre
+nom 1: Marteau de guerre
+prix: **15 po**
+prix 1: **15 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attcont.png
+attca: **1d8 contondant**
+image: image/Arme/warhammer.png
+description: \n\n---\n\nLe marteau de guerre est une arme polyvalente utilisée pour infliger des coups puissants et écrasants. Il est très apprécié par les clercs et les guerriers.\n\n---\n\n**Mécanique** : Inflige **1d8 dégâts contondants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Polyvalente** : Lorsque cette arme est maniée à deux mains, elle inflige **1d10 dégâts contondants** au lieu de 1d8.\n\n---\n\n**Avantage de maître d’arme**\n\n**Repousser** – Si vous frappez une créature avec cette arme, vous pouvez la pousser jusqu’à **3 m (10', 2c)** en ligne droite, à condition qu’elle soit de taille Grande ou inférieure.
+
+nom: Morgenstern
+nom 1: Morgenstern
+prix: **15 po**
+prix 1: **15 po**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d8 perforant**
+image: image/Arme/morningstar.png
+description: \n\n---\n\nLe morgenstern est une arme brutale équipée d’une tête métallique hérissée de pointes. Sa conception en fait une arme dévastatrice au combat rapproché.\n\n---\n\n**Mécanique** : Inflige **1d8 dégâts perforants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** : Aucune.\n\n---\n\n**Avantage de maître d’arme**\n\n**Saper** – Si vous frappez une créature avec cette arme, elle subit un désavantage sur son prochain jet d’attaque avant le début de votre prochain tour. Cela perturbe sa capacité à riposter efficacement.
+
+nom: Pic de guerre
+nom 1: Pic de guerre
+prix: **5 po**
+prix 1: **5 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d8 perforant**
+image: image/Arme/war_pick.png
+description: \n\n---\n\nLe pic de guerre est une arme robuste conçue pour percer les armures et infliger des dégâts concentrés. Elle est prisée pour sa précision et son efficacité contre les ennemis lourdement protégés.\n\n---\n\n**Mécanique** : Inflige **1d8 dégâts perforants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** : Aucune.\n\n---\n\n**Avantage de maître d’arme**\n\n**Saper** – Si vous frappez une créature avec cette arme, elle subit un désavantage sur son prochain jet d’attaque avant le début de votre prochain tour. Cet effet limite ses capacités offensives.
+
+nom: Pique
+nom 1: Pique
+prix: **5 po**
+prix 1: **5 po**
+poids: **9 kg**\n\n**(18 lb)**
+poids 1: **9 kg**\n\n**(18 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d10 perforant**
+image: image/Arme/pike.png
+description: \n\n---\n\nLe pique est une longue arme d’hast utilisée pour repousser les ennemis. Son allonge et son poids en font une arme idéale pour les formations défensives.\n\n---\n\n**Mécanique** : Inflige **1d10 dégâts perforants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lourde** : Vous avez un désavantage sur les jets d’attaque avec cette arme si votre score de **Force** est inférieur à 13.\n\n>- **Allonge** : Cette arme ajoute  **1.5 m (5', 1c)**  à votre portée pour vos attaques et vos attaques d’opportunité.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée efficacement.\n\n---\n\n**Avantage de maître d’arme**\n\n**Repousser** – Si vous frappez une créature avec cette arme, vous pouvez la pousser jusqu’à **3 m (10', 2c)** en ligne droite, à condition qu’elle soit de taille Grande ou inférieure.
+
+nom: Rapière
+nom 1: Rapière
+prix: **25 po**
+prix 1: **25 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d8 perforant**
+image: image/Arme/rapier.png
+description: \n\n---\n\nLa rapière est une épée fine et élégante conçue pour la précision et la rapidité. C’est une arme prisée par les duellistes et les guerriers agiles.\n\n---\n\n**Mécanique** : Inflige **1d8 dégâts perforants**. Ajoutez votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Finesse** : Vous pouvez utiliser votre modificateur de **Force** ou de **Dextérité** pour les jets d’attaque et de dégâts. Le même modificateur doit être utilisé pour les deux jets.\n\n---\n\n**Avantage de maître d’arme**\n\n**Vexer** – Si vous frappez une créature avec cette arme, vous obtenez **Avantage** sur votre prochain jet d’attaque contre cette créature avant la fin de votre prochain tour.
+
+nom: Trident
+nom 1: Trident
+prix: **5 po**
+prix 1: **5 po**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Arme de guerre au corps à corps
+symbole 1: symbole/Armes courantes de corps à corps.png
+symbole 2: symbole/Armes courantes de corps à corps.png
+symbole 3: symbole/Armes courantes de corps à corps.png
+symbole 4: symbole/Armes courantes de corps à corps.png
+attbonus: Bonus Att.
+degat: Dégâts
+charge:
+attca_image: symbole/attper.png
+attca: **1d8 perforant**
+image: image/Arme/trident.png
+description: \n\n---\n\nLe trident est une arme à trois pointes conçue pour les combats rapprochés ou à distance. Souvent associé aux guerriers des mers, il est efficace dans diverses situations.\n\n---\n\n**Mécanique** : Inflige **1d8 dégâts perforants**. Ajoutez votre modificateur de **Force** pour les jets d’attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez votre **Bonus de Maîtrise** au jet d’attaque.\n\n---\n\n**Propriétés** :\n\n>- **Lancer** : Vous pouvez lancer le trident pour effectuer une attaque à distance. Sa portée est de **6 m (20', 4c)** en portée normale et de <br>**18 m (60', 12c)** en portée longue. Les attaques au-delà de la portée normale ont un désavantage.\n\n>- **Polyvalente** : Lorsque cette arme est maniée à deux mains, elle inflige **1d10 dégâts perforants** au lieu de 1d8.\n\n---\n\n**Avantage de maître d’arme**\n\n**Renverser** – Si vous frappez une créature avec cette arme, vous pouvez la forcer à effectuer un **jet de sauvegarde de Constitution**. Le DD de ce jet est égal à 8 + votre **Bonus de Maîtrise** + votre modificateur de **Force**. En cas d’échec, la créature est mise **À Terre**, offrant un avantage aux attaquants au corps à corps contre elle et imposant un désavantage aux attaques à distance la visant.

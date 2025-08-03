@@ -1,0 +1,115 @@
+continue et fait de même pour le code et l'image du sort suivant : 
+
+
+
+
+
+
+BOUCLIER DE LA FOI (Clerc)
+Abjuration du 1er niveau 
+
+Temps d’incantation : action Bonus
+Portée : 18 m
+Composantes : V, S, M (un parchemin de prière)
+Durée : Concentration, jusqu’à 10 minutes
+
+Un champ scintillant enveloppe une créature de votre choix à portée et lui octroie un bonus de +2 à la CA pour toute la durée.
+
+Page 250 du manuel des joueurs 2024
+
+
+
+
+
+
+
+
+
+
+pour le code rappelle: 
+## Explication détaillée des champs :
+
+* **nom** : Nom officiel du sort en français.
+* **nom 1** : Répétition du nom officiel identique au champ « nom ».
+* **classe** : Classes pouvant lancer le sort (officielles uniquement) suivie de la page du manuel et le manuel exemple : (p254 MdJ 24) veux dire page 254 du manuel des joueur 2024
+* **classe 1** : Répétition identique des classes mais sans la page du manuel.
+* **incantation** : Durée nécessaire pour lancer le sort. Format strict : « INCANTATION\n\n » suivi de la durée exacte (exemple : 1 Action, 1 Action Bonus, etc.).
+* **portee** : Portée exacte du sort, indiquée en mètres, en pieds et en cases selon les règles de D\&D. Format strict : « PORTÉE\n\n » suivi de la portée.
+* **composantes** : Composantes du sort (Verbales (V), Somatiques (S), Matérielles (M)). Les composantes matérielles sont suivies d'une description précise (incluant le coût éventuel).
+* **duree** : Durée d'effet du sort. Format strict : « DURÉE\n\n » suivi de la durée exacte (ex : Instantanée, Concentration jusqu'à 1 heure, etc.).
+* **type** : École de magie et niveau du sort.
+* **charge** : Optionnel (laisser vide sauf indication spécifique).
+* **attca\_image** : vide par défaut (`symbole/vide.png`).
+* **image** : Chemin vers l'image représentant visuellement le sort.
+* **symbole 1** : Icône de l’école de magie principale.
+* **symbole 4** : Icône secondaire ou répétée de l’école de magie.
+* **description** : Description complète du sort, strictement structurée comme suit :
+  * Introduction séparée par le séparateur de section: "\n\n---\n\n".
+  * Effets détaillés du sort, en précisant toutes les mécaniques nécessaires.
+  * Éventuellement une section « **À plus haut niveau** » introduite par une ligne séparatrice `\n\n---\n\n`, explicitant les améliorations lorsqu'utilisé avec un emplacement de sort supérieur.
+ajoute des "\n\n" ou des "\n>-" ou des "<br>" ou des "<br><br>" entre les action ou effet important pour aérer les texte et le rendre le plus lisible possible
+pour les boullet point il est important d'utiliser: "\n>-"
+\n\n  est necessaire pour un retoru a la ligne d'un nouveau paragrafe car <br> force un saut de ligne mais avec le meme alignement que le dernier paragaphe donc on peux parfois avoir besoin de "\n\n<br><br>" comme dans l'exemple Assistance
+
+Ce modèle assure la cohérence, l'exactitude et la clarté indispensables pour une utilisation fluide dans les parties de D&D compatible avec mon API.
+
+Le format de la fiche doit être strictement respecté pour être accepter par mon api, chaque champ apparaissant sur une seule ligne car mon api ne supporte pas les retour a la ligne don il faux absolument des des marqueurs explicites "\n\n" ou "<br>", exactement comme dans les exemples fournis ci-dessous. L’ordre, le nommage des champs et leur présentation doivent être rigoureusement respectés. Le nom des champ doit être comme dans les exemple suivant que la fiche soit en anglais ou en Français. Si la fiche est en Français les mesure doivent être en métrique suivie de la mesure impérial entre parenthèse, et inversement pour les fiche en anglais. pour les distance il faux les mesure en mètre, pieds, case en Français et en pieds, mètre case en anglais exemple: Français: **36 m (120', 24c)** anglais: **120pi (36m, 24c)**
+
+donne moi le code complet pour le sort reformuler un minimum mais garde le fond identique, pas de perte d'information, et les terme important comme les nom, les action, les titre ect ect doivent eux être garder de façon exacte. la forme peux être améliorer tout comme les tournure de phrase pour être plus simple a comprendre ou plus immersive. je le veux en format code makdown que je puisse le copier coller facilement et compatible avec mon api.
+
+Pour chaque sort, je vais créer des versions spécifiques à certaines classes, la classe actuelle est: "Clerc". Ainsi, ajoute systématiquement la mention « (Clerc) » à la suite du nom du sort. Toutes les images générées doivent être visuellement cohérentes avec la classe actuelle, dans l’univers de Donjons & Dragons, plus précisément celui de Féerune, en s’inspirant exclusivement des panthéons, symboles, tenues et esthétiques propres à cet univers. Si un personnage est représenté dans une image, il doit obligatoirement correspondre à la classe actuelle, avec un genre généré aléatoirement et une espèce jouable choisie aléatoirement parmi celles disponibles dans le Manuel des Joueurs ou les suppléments officiels de D&D 5e.
+
+Vérifie que toutes les améliorations liées au lancement du sort à un niveau supérieur sont exhaustivement indiquées jusqu’au niveau 9 inclus si pertinent. Pour chaque niveau supplémentaire, ajoute une case à cocher (caseD2cocher.png) suivie d’une description claire des effets associés à ce niveau : qu’il s’agisse de dégâts infligés, de soins prodigués, ou de tout autre effet propre à la mécanique.
+du sort. Le rendu final doit demeurer lisible, structuré et compatible avec mon API, en respectant strictement le format Markdown enrichi en vigueur.
+
+je veux le code en premeir puis l'image a part sans aucun texte. pour l'image je veux juste une image qui représente le sort ce doit être une Image détourée avec bords fondus (alpha fade-out" ou "alpha edge fade" ou Floating artwork with soft edge mask, c’est-à-dire une illustration flottante avec masque de bord flou), Une image à vignette douce sur fond transparent, Avec les bords floutés ou estompés en dégradé de transparence, Pour qu’elle s’intègre harmonieusement dans une page sans bord dur visible qui serra collet au verso de la carte  du sort en format 9/16e
+
+exemple de code correcte de sort valider:
+
+nom: **Châtiment Divin**  
+nom 1: **Châtiment Divin**  
+classe: **Paladin (p254 MdJ 24)** 
+classe 1: **Paladin**  
+incantation: INCANTATION\n\n1 Action Bonus<br>(après avoir touché une cible)
+portee: PORTÉE\n\nPersonnelle  
+composantes: *V*  
+duree: DURÉE\n\nInstantanée  
+type: Invocation Niveau 1
+charge:  
+attca_image: symbole/vide.png  
+image: image/Sorts/Chatiment_Divin.png  
+symbole 1: symbole/Invocation.png  
+symbole 4: symbole/Paladin.png
+description: \n\n---\n\nAprès avoir touché une cible avec une attaque de mêlée (arme ou frappe à mains nues), vous libérez une énergie sacrée. La cible subit **2d8 dégâts radiants** supplémentaires.\n\nSi la cible est un **Fiélon** ou un **Mort-vivant**, les dégâts augmentent de **1d8**.\n\n---\n\n**À plus haut niveau**\n\n Lorsque vous utilisez un emplacement de sort de niveau supérieur, les dégâts augmentent de **1d8 par niveau d'emplacement** au-delà du 1<sup>er</sup>.  
+
+nom: **Projectile magique**
+nom 1: **Projectile magique**
+classe: **Magicien, Ensorceleur (p320 MdJ 24)**
+classe 1: **Magicien, Ensorceleur**
+incantation: INCANTATION\n\n1 Action
+portee: PORTÉE\n\n**36 m (120', 24c)**
+composantes: *V, S*
+duree: DURÉE\n\nInstantanée
+type: Évocation de Niveau 1
+charge:
+attca\_image: symbole/vide.png
+image: image/Sorts/Projectile\_magique.png
+symbole 1: symbole/Évocation.png
+symbole 4: symbole/Évocation.png
+description: \n\n---\n\nVous créez trois projectiles magiques de force scintillant qui atteignent automatiquement une ou plusieurs cibles que vous voyez à portée. Chaque projectile inflige **1d4+1 dégâts de force** à sa cible. Les projectiles frappent simultanément, et vous pouvez les répartir à votre convenance.\n\n---\n\n**À plus haut niveau**\n\nLorsque vous lancez ce sort avec un emplacement de niveau supérieur, vous créez **un projectile supplémentaire par niveau au-dessus du 1<sup>er</sup>**.
+
+nom: **Assistance (Clerc)**
+nom 1: **Assistance (Clerc)**
+classe: **Clerc (p246 MdJ 24)**
+classe 1: **Clerc**
+incantation: INCANTATION\n\n1 Action
+portee: PORTÉE\n\n**Contact**
+composantes: *V, S*
+duree: DURÉE\n\nConcentration, jusqu'à 1 minute
+type: Divination de Niveau 0
+charge:  
+attca_image: symbole/vide.png
+image: image/Sorts/Assistance_Clerc.png
+symbole 1: symbole/Divination.png
+symbole 4: symbole/Clerc.png
+description: \n\n---\n\nVous touchez une **créature consentante**, en choisissant **une compétence précise**.<br><br>Pour toute la durée du sort, la créature ciblée peut **ajouter 1d4** au résultat de **chaque test de caractéristique** effectué en lien avec cette compétence.<br><br>\n>- Ce bonus s’applique **tant que votre concentration est maintenue**.\n>- Le sort ne fonctionne pas sur une créature **inconsciente ou non consentante**.<br><br>Cette bénédiction est un outil **précieux pour soutenir subtilement un allié dans une tâche complexe** ou renforcer l'expertise dans un domaine particulier pendant une scène d’exploration, de négociation ou d’infiltration.

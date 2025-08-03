@@ -1,0 +1,350 @@
+nom: Bomb
+nom 1: Bomb
+prix: **100 gp**
+prix 1: **100 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Explosive
+charge:
+attca_image: symbole/attfir.png
+attca: 3d6 Fire
+image: image/Explosives/bomb.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nThe bomb is a compact explosive device used to inflict significant damage in a small area. It is particularly effective in tactical or siege scenarios.\n\n---\n\n**Mechanics**: As an action, you can light and throw the bomb at a point within **60ft (18m, 12sq)**. Each creature in a **5ft, (1.5m, 1sq)** centered on the point must make a **DC 12 **Dexterity** saving throw** or take **3d6 fire damage** on a failed save, or half as much on a successful one.
+
+nom: Dynamite Stick
+nom 1: Dynamite Stick
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Explosive
+charge:
+attca_image: symbole/attfor.png
+attca: 3d6 Force
+image: image/Explosives/dynamite.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nA single stick of dynamite is a powerful tool for demolition or combat. When bundled, its explosive potential increases exponentially.\n\n---\n\n**Mechanics**: As an action, you can light and throw the dynamite at a point within **60ft (18m, 12sq)**. Each creature in a **5ft, (1.5m, 1sq)** centered on the point must make a **DC 12 **Dexterity** saving throw** or take **3d6 force damage** on a failed save, or half as much on a successful one.\n\n**Special**: Bundling multiple sticks increases the damage by **1d6 per additional stick** (up to a maximum of **10d6**) and increases the radius by **5ft, (1.5m, 1sq)** (up to a maximum of **20ft, (6m, 4sq)**). Bundling requires 1 minute of preparation.
+
+nom: Grenade Launcher
+nom 1: Grenade Launcher
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **7 lb**\n\n**(3.5 kg)**
+poids 1: **7 lb**\n\n**(3.5 kg)**
+type: Martial ranged weapon
+charge:
+attca_image: symbole/vide.png
+attca:
+image: image/Explosives/grenade_launcher.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nThe grenade launcher is a powerful and versatile ranged weapon capable of propelling grenades to distant targets with precision. It is used in tactical scenarios where standard throwing range is insufficient.\n\n---\n\n**Mechanics**: The grenade launcher allows you to fire grenades up to **1000ft (300m, 200sq)**. The type of damage, saving throws, and radius of effect depend on the grenade being launched.\n\n---\n\n**Properties**:\n\n>- **Two-Handed**: Requires two hands to operate.\n\n>- **Ammunition (Grenade)**: The damage, saving throw, and area of effect depend on the type of grenade loaded.\n\n**Damage**: Variable depending on the grenade used (e.g., **5d6 piercing** for fragmentation grenades, heavily obscured area for smoke grenadesq).
+
+nom: Fragmentation Grenade
+nom 1: Fragmentation Grenade
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Explosive
+charge:
+attca_image: symbole/attpier.png
+attca: 5d6 Piercing
+image: image/Explosives/frag_grenade.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nThe fragmentation grenade is a highly effective explosive weapon, scattering shrapnel in all directions upon detonation.\n\n---\n\n**Mechanics**: As an action, you can throw the grenade at a point within **60ft (18m, 12sq)**. Each creature in a **20ft, (6m, 4sq)** centered on the point must make a **DC 15 **Dexterity** saving throw** or take **5d6 piercing damage** on a failed save, or half as much on a successful one.
+
+nom: Smoke Grenade
+nom 1: Smoke Grenade
+prix: **50 gp**
+prix 1: **50 gp**
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Explosive
+charge:
+attca_image: symbole/vide.png
+attca:
+image: image/Explosives/smoke_grenade.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nThe smoke grenade releases a thick cloud of smoke, providing cover and obscuring vision in a wide area.\n\n---\n\n**Mechanics**: As an action, you can throw the grenade at a point within **60ft (18m, 12sq)**. The area within a **20ft, (6m, 4sq)** is heavily obscured for **1 minute**. A strong wind (such as from the Gust of Wind spell) disperses the smoke immediately. This effect can provide strategic advantages in combat, such as cover or evasion.
+
+nom: Gunpowder (Keg)
+nom 1: Gunpowder (Keg)
+prix: **250 gp**
+prix 1: **250 gp**
+poids: **20 lb**\n\n**(10 kg)**
+poids 1: **20 lb**\n\n**(10 kg)**
+type: Explosive
+charge: 
+attca_image: symbole/attfir.png
+attca: 7d6 Fire
+image: image/Explosives/gunpowder_keg.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nA keg of gunpowder is a dangerous but potent explosive, often used for demolition or in battle.\n\n---\n\n**Mechanics**: Setting fire to a gunpowder keg causes it to explode. Each creature in a **10ft, (3m, 2sq)** centered on the keg must make a **DC 12 **Dexterity** saving throw** or take **7d6 fire damage** on a failed save, or half as much on a successful one. Strategic placement of kegs can result in devastating area damage or breaching of fortifications.
+
+nom: Gunpowder (Powder Horn)
+nom 1: Gunpowder (Powder Horn)
+prix: **35 gp**
+prix 1: **35 gp**
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Explosive
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)\n\n![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)\n\n![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)\n\n![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)\n\n![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/attfir.png
+attca: 3d6 Fire
+image: image/Explosives/gunpowder_horn.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nA powder horn contains gunpowder for firearms but can also act as a small explosive if ignited.\n\n---\n\n**Mechanics**: Setting fire to a powder horn causes it to explode. Each creature in a **10ft, (3m, 2sq)** centered on the horn must make a **DC 12 **Dexterity** saving throw** or take **3d6 fire damage** on a failed save, or half as much on a successful one. Powder horns can be carried as emergency tools or used for tactical area damage.
+
+nom: Automatic Rifle
+nom 1: Automatic Rifle
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **8 lb**\n\n**(4 kg)**
+poids 1: **8 lb**\n\n**(4 kg)**
+type: Martial Ranged Weapon
+charge:
+attca_image: symbole/attper.png
+attca: **2d8 Piercing**
+image: image/Arme/automatic_rifle.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nA modern firearm designed for rapid fire. Its ability to spray bullets in a wide area makes it devastating in combat.\n\n---\n\n**Mechanics**: Deals **2d8 piercing damage**. Add your **Dexterity** modifier for attack and damage rolls. If proficient, add your **Proficiency Bonus** to the attack roll.\n\n---\n\n**Properties**:\n\n>- **Ammunition**: Requires bullets. Normal range is **80 ft (24 m, 16sq)**, long range 240 ft (72 m, 48sq). \n\n>- **Burst Fire (10 bullets)**: Targets in a **10 ft (3 m, 2sq) cone** must make a **DC 15 **Dexterity** saving throw** or take full weapon damage. Halve the damage on a successful save.\n\n>- **Reload (30 shot)**: After firing 30 bullets, reloading requires 1 action.\n\n>- **Two-Handed**: Requires two hands to use effectively, leaving no room for shields or additional weapons.\n\n---\n\n**Mastery**\n\n**Slow** – If you hit a creature with this weapon, you can reduce its speed by **10ft (3 m, 2sq)** until the start of your next turn.
+
+nom: Hunting Rifle
+nom 1: Hunting Rifle
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **8 lb**\n\n**(4 kg)**
+poids 1: **8 lb**\n\n**(4 kg)**
+type: Martial Ranged Weapon
+charge:
+attca_image: symbole/attper.png
+attca: **2d10 Piercing**
+image: image/Arme/hunting_rifle.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nA precise firearm designed for long-range hunting and combat. It rewards skilled aim with devastating damage.\n\n---\n\n**Mechanics**: Deals **2d10 piercing damage**. Add your **Dexterity** modifier for attack and damage rolls. If proficient, add your **Proficiency Bonus** to the attack roll.\n\n---\n\n**Properties**:\n\n>- **Ammunition**: Requires bullets. Normal range is **80 ft (24 m, 16sq)**, long range **240 ft, (72 m, 48sq)**. \n\n>- **Reload (5 shot)**: After firing 5 bullets, reloading requires 1 action.\n\n>- **Two-Handed**: Requires two hands to use effectively, leaving no room for shields or additional weapons.\n\n---\n\n**Mastery**\n\n**Slow** – If you hit a creature with this weapon, you can reduce its speed by **10ft (3 m, 2sq)** until the start of your next turn.
+
+nom: Revolver
+nom 1: Revolver
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **3 lb**\n\n**(1.5 kg)**
+poids 1: **3 lb**\n\n**(1.5 kg)**
+type: Martial Ranged Weapon
+charge:
+attca_image: symbole/attper.png
+attca: **2d8 Piercing**
+image: image/Arme/revolver.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nA sleek, reliable firearm capable of rapid shots. Its design makes it a favorite for close-quarters combat.\n\n---\n\n**Mechanics**: Deals **2d8 piercing damage**. Add your **Dexterity** modifier for attack and damage rolls. If proficient, add your **Proficiency Bonus** to the attack roll.\n\n---\n\n**Properties**:\n\n>- **Ammunition**: Requires bullets. Normal range is **40 ft, (12 m, 8sq)**, long range **120 ft, (36 m, 24sq)**. \n\n>- **Reload (6 shot)**: After firing 6 bullets, reloading requires 1 action.\n\n---\n\n**Mastery**\n\n**Sap** – If you hit a creature with this weapon, that creature has **Disadvantage** on its next attack roll before the start of your next turn.
+
+nom: Semiautomatic Pistol
+nom 1: Semiautomatic Pistol
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **3 lb**\n\n**(1.5 kg)**
+poids 1: **3 lb**\n\n**(1.5 kg)**
+type: Martial Ranged Weapon
+charge:
+attca_image: symbole/attper.png
+attca: **2d6 Piercing**
+image: image/Arme/semiautomatic_pistol.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nA modern handgun capable of rapid-fire. Its versatility and ease of use make it a favored sidearm.\n\n---\n\n**Mechanics**: Deals **2d6 piercing damage**. Add your **Dexterity** modifier for attack and damage rolls. If proficient, add your **Proficiency Bonus** to the attack roll.\n\n---\n\n**Properties**:\n\n>- **Ammunition**: Requires bullets. Normal range is **50 ft, (15 m, 10sq)**, long range **150 ft, (45 m, 30sq)**. \n\n>- **Reload (15 shot)**: After firing 15 bullets, reloading requires 1 action.\n\n---\n\n**Mastery**\n\n**Vex** – If you hit a creature with this weapon, you have **Advantage** on your next attack roll against that creature before the end of your next turn.
+
+nom: Shotgun
+nom 1: Shotgun
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **7 lb**\n\n**(3.5 lb)**
+poids 1: **7 lb**\n\n**(3.5 lb)**
+type: Martial Ranged Weapon
+charge:
+attca_image: symbole/attper.png
+attca: **2d8 Piercing**
+image: image/Arme/shotgun.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nA devastating close-range weapon that fires a spread of projectiles, making it effective against groups of enemies.\n\n---\n\n**Mechanics**: Deals **2d8 piercing damage**. Add your **Dexterity** modifier for attack and damage rolls. If proficient, add your **Proficiency Bonus** to the attack roll.\n\n---\n\n**Properties**:\n\n>- **Ammunition**: Requires shells. Normal range is **30ft (9 m, 6sq)**, long range **90 ft, (27 m, 18sq)**. \n\n>- **Reload (2 shot)**: After firing 2 shells, reloading requires 1 action.\n\n>- **Two-Handed**: Requires two hands to use effectively, leaving no room for shields or additional weapons.\n\n---\n\n**Mastery**\n\n**Push** – If you strike a creature with this weapon, you can repel it up to **10ft (3 m, 2sq)** away in a straight line, provided the target is Large or smaller.
+
+nom: Antimatter Rifle
+nom 1: Antimatter Rifle
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **10 lb**\n\n**(5 kg)**
+poids 1: **10 lb**\n\n**(5 kg)**
+type: Martial Ranged Weapon
+charge:
+attca_image: symbole/attnec.png
+attca: **6d8 Necrotic**
+image: image/Arme/antimatter_rifle.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nA powerful futuristic weapon that fires concentrated bursts of antimatter. It is devastating against both organic and inorganic targets.\n\n---\n\n**Mechanics**: Deals **6d8 necrotic damage**. Add your **Dexterity** modifier for attack and damage rolls. If proficient, add your **Proficiency Bonus** to the attack roll.\n\n---\n\n**Properties**:\n\n>- **Ammunition**: Requires antimatter cells. Normal range is **120 ft, (36 m, 24sq)**, long range **360 ft, (108 m, 72sq)**. \n\n>- **Reload (2 shot)**: After firing 2 bursts, reloading requires 1 action.\n\n>- **Two-Handed**: Requires two hands to use effectively, leaving no room for shields or additional weapons.\n\n---\n\n**Mastery**\n\n**Sap** – If you hit a creature with this weapon, that creature has **Disadvantage** on its next attack roll before the start of your next turn.
+
+nom: Laser Pistol
+nom 1: Laser Pistol
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Martial Ranged Weapon
+charge:
+attca_image: symbole/attrad.png
+attca: **3d6 Radiant**
+image: image/Arme/laser_pistol.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nA sleek energy-based firearm that fires highly concentrated beams of light. Perfect for precision and agility in combat.\n\n---\n\n**Mechanics**: Deals **3d6 radiant damage**. Add your **Dexterity** modifier for attack and damage rolls. If proficient, add your **Proficiency Bonus** to the attack roll.\n\n---\n\n**Properties**:\n\n>- **Ammunition**: Requires energy cells. Normal range is **40 ft, (12 m, 8sq)**, long range **120 ft, (36 m, 24sq)**. \n\n>- **Reload (50 shot)**: After firing 50 beams, reloading requires 1 action.\n\n---\n\n**Mastery**\n\n**Vex** – If you hit a creature with this weapon, you have **Advantage** on your next attack roll against that creature before the end of your next turn.
+
+nom: Laser Rifle
+nom 1: Laser Rifle
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **7 lb**\n\n**(3.5 lb)**
+poids 1: **7 lb**\n\n**(3.5 lb)**
+type: Martial Ranged Weapon
+charge:
+attca_image: symbole/attrad.png
+attca: **3d8 Radiant**
+image: image/Arme/laser_rifle.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nA futuristic weapon designed for long-range precision and power. It fires beams of focused energy, capable of cutting through even the toughest defenses.\n\n---\n\n**Mechanics**: Deals **3d8 radiant damage**. Add your **Dexterity** modifier for attack and damage rolls. If proficient, add your **Proficiency Bonus** to the attack roll.\n\n---\n\n**Properties**:\n\n>- **Ammunition**: Requires energy cells. Normal range is **100 ft, (30 m, 20sq)**, long range **300 ft, (90 m, 60sq)**. \n\n>- **Reload (30 shot)**: After firing 30 beams, reloading requires 1 action.\n\n>- **Two-Handed**: Requires two hands to use effectively, leaving no room for shields or additional weapons.\n\n---\n\n**Mastery**\n\n**Slow** – If you hit a creature with this weapon, you can reduce its speed by **10ft (3 m, 2sq)** until the start of your next turn.
+
+nom: Modern Firearm Bullets (10)
+nom 1: Modern Firearm Bullets (10)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Ammunition
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/modern_firearm_bullets.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nSmall metal projectiles designed for use with modern firearms.\n\n---\n\n**Mechanics:**\n\n>- **Quantity**: Sold in sets of **10 bullets**.\n\n>- **Compatible Weapons**: Used with firearms featuring the **Ammunition (Bullet)** property, such as **Automatic Rifles**, **Revolvers**, and **Shotguns**.\n\n>- **Attack Usage**: Each ranged attack consumes **1 bullet**.\n\n>- **Recovery**: Fired bullets cannot be retrieved due to deformation or loss upon impact.
+
+nom: Shotgun Shells (10)
+nom 1: Shotgun Shells (10)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Ammunition
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/shotgun_shells.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nCylindrical cartridges containing multiple small projectiles for use with shotguns.\n\n---\n\n**Mechanics:**\n\n>- **Quantity**: Sold in sets of **10 shells**.\n\n>- **Compatible Weapons**: Used with firearms featuring the **Ammunition (Shell)** property, such as **Shotguns**.\n\n>- **Attack Usage**: Each ranged attack consumes **1 shell**.\n\n>- **Recovery**: Shotgun shells are not recoverable after being fired due to their dispersion upon impact.
+
+nom: Energy Cells (5)
+nom 1: Energy Cells (5)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Ammunition
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/energy_cells.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nCompact power sources used to charge futuristic energy-based weapons.\n\n---\n\n**Mechanics:**\n\n>- **Quantity**: Sold in sets of **5 cells**.\n\n>- **Compatible Weapons**: Used with futuristic weapons featuring the **Ammunition (Energy Cell)** property, such as **Laser Pistols**, **Laser Rifles**, and **Antimatter Rifles**.\n\n>- **Attack Usage**: Each ranged attack consumes **1 energy cell**.\n\n>- **Recovery**: Energy cells are depleted upon use and cannot be recharged or reused.
+
+nom: Antimatter Charges (2)
+nom 1: Antimatter Charges (2)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Ammunition
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/antimatter_charges.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nHighly volatile charges designed for use with antimatter-based weapons.\n\n---\n\n**Mechanics:**\n\n>- **Quantity**: Sold in sets of **2 charges**.\n\n>- **Compatible Weapons**: Used with weapons featuring the **Ammunition (Antimatter Charge)** property, such as **Antimatter Rifles**.\n\n>- **Attack Usage**: Each ranged attack consumes **1 antimatter charge**.\n\n>- **Recovery**: Antimatter charges are completely consumed upon use and cannot be salvaged.
+
+nom: Laser Capacitors (10)
+nom 1: Laser Capacitors (10)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Ammunition
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/laser_capacitors.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nSmall, rechargeable components designed to power laser-based weaponry.\n\n---\n\n**Mechanics:**\n\n>- **Quantity**: Sold in sets of **10 capacitors**.\n\n>- **Compatible Weapons**: Used with weapons featuring the **Ammunition (Laser Capacitor)** property, such as **Laser Pistols** and **Laser Rifles**.\n\n>- **Attack Usage**: Each ranged attack consumes **1 capacitor**.\n\n>- **Recovery**: Capacitors cannot be reused once depleted, but spare capacitors can be purchased or found.
+
+nom: Modern Firearm Bullets (30)
+nom 1: Modern Firearm Bullets (30)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **3 lb**\n\n**(1.5 kg)**
+poids 1: **3 lb**\n\n**(1.5 kg)**
+type: Ammunition
+charge: ![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)![Case!](symbole/caseD1cocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/modern_firearm_bullets_30.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nLarger bundle of metal projectiles designed for use with modern firearms.\n\n---\n\n**Mechanics:**\n\n>- **Quantity**: Sold in sets of **30 bullets**.\n\n>- **Compatible Weapons**: Used with firearms featuring the **Ammunition (Bullet)** property, such as **Automatic Rifles**, **Revolvers**, and **Shotguns**.\n\n>- **Attack Usage**: Each ranged attack consumes **1 bullet**.\n\n>- **Bulk Purchase Advantage**: Buying bullets in larger quantities offers convenience for prolonged missions.\n\n>- **Recovery**: Fired bullets cannot be retrieved due to deformation or loss upon impact.

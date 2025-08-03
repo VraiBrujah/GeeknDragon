@@ -1,0 +1,285 @@
+nom: 2-pound Silver Bar
+nom 1: 2-pound Silver Bar
+prix: **10 gp**
+prix 1: **10 gp**
+poids: **2 lb**\n\n**(1 kg)**
+poids 1: **2 lb**\n\n**(1 kg)**
+type: Trade Bar
+charge:
+image: image/Trade/silver_bar_2 lb.png
+description: \n\n---\n\nThis rectangular ingot of pure silver weighs 2 pounds and is widely used by merchants as a standardized medium of exchange. Measuring approximately 5 inches long, 2 inches wide, and 1/2 inch thick, it is stamped with the seal of a reputable mint or merchant guild. Trade bars like this one ensure fair dealings in bulk transactions across distant markets.
+
+nom: 5-pound Silver Bar
+nom 1: 5-pound Silver Bar
+prix: **25 gp**
+prix 1: **25 gp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Trade Bar
+charge:
+image: image/Trade/silver_bar_5lb.png
+description: \n\n---\n\nWeighing 5 pounds, this silver ingot is a practical and trusted currency in regions where coinage is cumbersome. It measures 6 inches long, 2 inches wide, and 1 inch thick, with smooth edges and a polished surface. Such bars often bear marks of their origin and purity, guaranteeing their value to traders.
+
+nom: 5-pound Gold Bar
+nom 1: 5-pound Gold Bar
+prix: **250 gp**
+prix 1: **250 gp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Trade Bar
+charge:
+image: image/Trade/gold_bar_5lb.png
+description: \n\n---\n\nCrafted from pure gold, this heavy ingot represents a significant fortune in compact form. Measuring 5 inches long, 2 inches wide, and 3/4 inch thick, its bright, polished surface gleams with unmatched luster. Valued for its rarity and beauty, this trade bar is often safeguarded in locked chests or vaults during long journeys.
+
+nom: 1 lb. of Wheat
+nom 1: 1 lb. of Wheat
+prix: **1 cp**
+prix 1: **1 cp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/wheat.png
+description: \n\n---\n\nThis humble sack of wheat represents a day’s sustenance for a small family or the seed for planting future harvests. It is a cornerstone of agricultural trade and a staple food for countless communities.
+
+nom: 1 lb. of Flour
+nom 1: 2 lb. of Flour
+prix: **2 cp**
+prix 1: **2 cp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/flour.png
+description: \n\n---\n\nThis finely milled flour, stored in a sturdy cloth sack, is essential for baking bread, crafting pastries, and creating hearty meals. Its consistent quality makes it a reliable trade item among farmers and bakers.
+
+nom: Chicken
+nom 1: Chicken
+prix: **2 cp**
+prix 1: **2 cp**
+poids: **5 lb**\n\n**(2.5 kg)**
+poids 1: **5 lb**\n\n**(2.5 kg)**
+type: Beast
+charge:
+image: image/Trade/chicken.png
+description: \n\n---\n\nA **Chicken** is a common farm animal, valued for its eggs, meat, and low maintenance requirements. Hens lay eggs regularly, while roosters are often kept for breeding or as alarm systems.\n\n---\n\n**Armor Class:** 12 (Natural Armor)  \n\n **Hit Points:** 1 (1d4 - 1)  \n\n **Speed:** 10 ft. (3 m, 2sq)  \n\n---\n\n| **STR** | **DEX** | **CON** | **INT** | **WIS** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 3 (-4)  | 14 (+2) | 8 (-1)  | 2 (-4)  | 12 (+1) | 5 (-3)  |\n\n---\n\n **Senses:** Passive Perception 11  \n\n**Actions**\n\n **Peck:** *Melee Weapon Attack:* +4 to hit, reach 5 ft. (1.5 m, 1sq), one target. *Hit:* 1 piercing damage.
+
+nom: 1 lb. of Salt
+nom 1: 1 lb. of Salt
+prix: **5 cp**
+prix 1: **5 cp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/salt.png
+description: \n\n---\n\nThis small pouch of salt, a vital preservative and seasoning, holds incredible value in regions far from the sea. Salt is highly prized as a trade good and a symbol of wealth in many cultures.
+
+nom: 1 lb. of Iron
+nom 1: 1 lb. of Iron
+prix: **1 sp**
+prix 1: **1 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/iron.png
+description: \n\n---\n\nA rough ingot of iron, essential for forging tools, weapons, and structures. This durable metal forms the backbone of many economies and is a staple commodity for blacksmiths.
+
+nom: 1 sq. yd. of Canvas
+nom 1: 1 sq. yd. of Canvas
+prix: **1 sp**
+prix 1: **1 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/canvas.png
+description: \n\n---\n\nThis durable sheet of woven fabric is ideal for tents, sails, or sturdy bags. Its versatility and resistance to wear make it a valuable trade good in both urban and rural markets.
+
+nom: 1 lb. of Copper
+nom 1: 1 lb. of Copper
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/copper.png
+description: \n\n---\n\nA gleaming piece of refined copper, often used in crafting utensils, coins, and decorative items. Copper’s conductivity also makes it essential in magical apparatuses or alchemical devices.
+
+nom: 1 sq. yd. of Cotton Cloth
+nom 1: 1 sq. yd. of Cotton Cloth
+prix: **5 sp**
+prix 1: **5 sp**
+poids: **0.5 lb**\n\n**(0.25 kg)**
+poids 1: **0.5 lb**\n\n**(0.25 kg)**
+type: Trade Good
+charge:
+image: image/Trade/cotton_cloth.png
+description: \n\n---\n\nA soft and breathable piece of cotton fabric, widely used in clothing, upholstery, and bedding. Its availability and comfort make it a staple trade item in most marketplaces.
+
+nom: 1 lb. of Ginger
+nom 1: 1 lb. of Ginger
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/ginger.png
+description: \n\n---\n\nA fragrant and spicy root, prized for its culinary and medicinal uses. Ginger is a sought-after spice, often transported along bustling trade routes to exotic destinations.
+
+nom: Goat
+nom 1: Goat
+prix: **1 gp**
+prix 1: **1 gp**
+poids: **55 lb**\n\n**(25 kg)**
+poids 1: **55 lb**\n\n**(25 kg)**
+type: Beast
+charge:
+image: image/Trade/goat.png
+description: \n\n---\n\nA **Goat** is a sturdy, adaptable animal valued for milk, meat, and hide. Known for their climbing ability, they are often found in hilly or mountainous terrains.\n\n---\n\n**Armor Class:** 10  \n\n **Hit Points:** 4 (1d8)  \n\n **Speed:** 40 ft. (12 m, 8sq), Climb 30 ft. (9 m, 6sq)  \n\n---\n\n| **STR** | **DEX** | **CON** | **INT** | **WIS** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 11 (+0) | 10 (+0) | 11 (+0) | 2 (-4)  | 10 (+0) | 5 (-3)  |\n\n---\n\n **Senses:** Darkvision 60 ft., Passive Perception 12  \n\n**Actions**\n\n **Ram:** *Melee Weapon Attack:* +2 to hit, reach 5 ft. (1.5 m, 1sq), one target. *Hit:* 1 Bludgeoning damage. If the goat moved at least 20 ft. straight toward the target immediately before the hit, the target takes 2 (1d4) bludgeoning damage.
+
+nom: 1 lb. of Cinnamon
+nom 1: 1 lb. of Cinnamon
+prix: **2 gp**
+prix 1: **2 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/cinnamon.png
+description: \n\n---\n\nA fragrant spice derived from the bark of tropical trees, cinnamon adds a warm and aromatic flavor to dishes and beverages. Its value lies in its rarity and association with luxury.
+
+nom: 1 lb. of Pepper
+nom 1: 1 lb. of Pepper
+prix: **2 gp**
+prix 1: **2 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/pepper.png
+description: \n\n---\n\nKnown as **black gold**, pepper is a highly prized spice that has driven explorers to distant lands. Its bold flavor makes it an essential ingredient in fine cooking.
+
+nom: Sheep
+nom 1: Sheep
+prix: **2 gp**
+prix 1: **2 gp**
+poids: **120 lb**\n\n**(54 kg)**
+poids 1: **120 lb**\n\n**(54 kg)**
+type: Beast
+charge:
+image: image/Trade/sheep.png
+description: \n\n---\n\nA **Sheep** is primarily valued for its wool, meat, and milk. Its fleece is a crucial trade commodity in many agricultural economies.\n\n---\n\n**Armor Class:** 11 (Natural Armor)  \n\n **Hit Points:** 5 (1d8)  \n\n **Speed:** 40 ft. (12 m, 8sq)  \n\n **Senses:** Passive Perception 10  \n\n---\n\n| **STR** | **DEX** | **CON** | **INT** | **WIS** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 10 (+0) | 12 (+1) | 11 (+0) | 2 (-4)  | 10 (+0) | 6 (-2)  |\n\n---\n\n**Actions**\n\n **Headbutt:** *Melee Weapon Attack:* +2 to hit, reach 5 ft. (1.5 m, 1sq), one target. *Hit:* 2 (1d4) bludgeoning damage.
+
+nom: 1 lb. of Cloves
+nom 1: 1 lb. of Cloves
+prix: **3 gp**
+prix 1: **3 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/cloves.png
+description: \n\n---\n\nThese aromatic flower buds are known for their intense flavor and medicinal properties. Cloves are a luxury spice, often traded along the richest trade routes.
+
+nom: Pig
+nom 1: Pig
+prix: **3 gp**
+prix 1: **3 gp**
+poids: **200 lb**\n\n**(90 kg)**
+poids 1: **200 lb**\n\n**(90 kg)**
+type: Beast
+charge:
+image: image/Trade/pig.png
+description: \n\n---\n\nA **Pig** is a versatile farm animal, providing meat, leather, and sometimes companionship. They are highly adaptable and can thrive in various environments.\n\n---\n\n**Armor Class:** 11  \n\n **Hit Points:** 13 (2d8 + 4)  \n\n **Speed:** 40 ft. (12 m, 8sq)  \n\n---\n\n| **STR** | **DEX** | **CON** | **INT** | **WIS** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 13 (+1) | 11 (+0) | 14 (+2) | 2 (-4)  | 9 (-1)  | 5 (-3)  |\n\n---\n\n **Senses:** Passive Perception 9  \n\n**Actions**\n\n **Gore:** *Melee Weapon Attack:* +3 to hit, reach 5 ft. (1.5 m, 1sq), one target. *Hit:* 4 (1d6 + 1) piercing damage.
+
+nom: 1 lb. of Silver
+nom 1: 1 lb. of Silver
+prix: **5 gp**
+prix 1: **5 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/silver.png
+description: \n\n---\n\nA gleaming metal that serves as currency, crafting material, and a sign of wealth. Silver is particularly valued in the creation of weapons designed to harm supernatural creatures.
+
+nom: 1 sq. yd. of Linen
+nom 1: 1 sq. yd. of Linen
+prix: **5 gp**
+prix 1: **5 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/linen.png
+description: \n\n---\n\nA fine, smooth fabric derived from flax plants, linen is used for elegant clothing, bedding, and tapestries. Its durability and refinement make it a favorite among the wealthy.
+
+nom: 1 lb. of Silk
+nom 1: 1 lb. of Silk
+prix: **10 gp**
+prix 1: **10 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/silk.png
+description: \n\n---\n\nA luxurious fabric spun from the threads of silkworms, silk is synonymous with wealth and opulence. It is prized for its softness, sheen, and rarity.
+
+nom: Cow
+nom 1: Cow
+prix: **10 gp**
+prix 1: **10 gp**
+poids: **1 000 lb**\n\n**(450 kg)**
+poids 1: **1 000 lb**\n\n**(450 kg)**
+type: Beast
+charge:
+image: image/Trade/cow.png
+description: \n\n---\n\nA **Cow** is a staple in agriculture, valued for milk, meat, and leather. It represents abundance and prosperity.\n\n---\n\n**Armor Class:** 10  \n\n **Hit Points:** 15 (2d10 + 4)  \n\n **Speed:** 30 ft. (9 m, 6sq)  \n\n---\n\n| **STR** | **DEX** | **CON** | **INT** | **WIS** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 18 (+4) | 10 (+0) | 16 (+3) | 2 (-4)  | 10 (+0) | 6 (-2)  |\n\n---\n\n **Senses:** Passive Perception 10  \n\n**Actions**\n\n **Gore:** *Melee Weapon Attack:* +6 to hit, reach 5 ft. (1.5 m, 1sq), one target. *Hit:* 9 (1d10 + 4) bludgeoning damage.
+
+nom: 1 lb. of Saffron
+nom 1: 1 lb. of Saffron
+prix: **15 gp**
+prix 1: **15 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/saffron.png
+description: \n\n---\n\nThis vivid spice is derived from the stigmas of crocus flowers. Its intense flavor, brilliant color, and medicinal properties make saffron one of the most expensive trade goods.
+
+nom: Ox
+nom 1: Ox
+prix: **15 gp**
+prix 1: **15 gp**
+poids: **1 200 lb**\n\n**(540 kg)**
+poids 1: **1 200 lb**\n\n**(540 kg)**
+type: Beast
+charge:
+image: image/Trade/ox.png
+description: \n\n---\n\nAn **Ox** is a large and powerful beast of burden, prized for its strength and endurance. These animals are commonly used for plowing fields, pulling heavy carts, and transporting goods across long distances.\n\n---\n\n**Armor Class:** 11 (Natural Armor)  \n\n **Hit Points:** 22 (3d10 + 6)  \n\n **Speed:** 50 ft. (15 m, 10sq)  \n\n---\n\n| **STR** | **DEX** | **CON** | **INT** | **WIS** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 18 (+4) | 12 (+1) | 14 (+2) | 2 (-4)  | 12 (+1) | 5 (-3)  |\n\n---\n\n **Senses:** Passive Perception 11  \n\n---\n\n**Traits**\n\n **Trampling Charge:** If the ox moves at least **20 ft. (6 m)** straight toward a creature and then hits it with a **Gore attack** on the same turn, the target must succeed on a **DC 14 Strength saving throw** or be **knocked prone**. If the target is prone, the ox can make a **Hooves attack** against it as a **bonus action**.\n\n---\n\n**Actions**\n\n **Gore:** *Melee Weapon Attack:* +6 to hit, reach 5 ft. (1.5 m, 1sq), one target. *Hit:* 13 (2d8 + 4) bludgeoning damage.\n\n **Hooves:** *Melee Weapon Attack:* +6 to hit, reach 5 ft. (1.5 m, 1sq), one target. *Hit:* 10 (1d12 + 4) bludgeoning damage.
+
+nom: 1 lb. of Gold
+nom 1: 1 lb. of Gold
+prix: **50 gp**
+prix 1: **50 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/gold.png
+description: \n\n---\n\nGold is the ultimate standard of wealth, valued not only for its rarity but also for its versatility in crafting, trade, and art. Its bright luster and malleability make it a prized possession for merchants and nobles alike.
+
+nom: 1 lb. of Platinum
+nom 1: 1 lb. of Platinum
+prix: **500 gp**
+prix 1: **500 gp**
+poids: **1 lb**\n\n**(0.5 kg)**
+poids 1: **1 lb**\n\n**(0.5 kg)**
+type: Trade Good
+charge:
+image: image/Trade/platinum.png
+description: \n\n---\n\nPlatinum is a rare and precious metal that exceeds even gold in value. Often used in luxury items and advanced magical crafting, platinum is a symbol of unmatched wealth and status.
