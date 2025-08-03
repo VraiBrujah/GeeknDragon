@@ -1,12 +1,12 @@
 {
-  "lot10":            null,
-  "lot25":            null,
-  "lot50-essence":    null,
-  "lot50-tresorerie": null,
-  "booster15":        1,
-  "pack60":           1,
-  "mystere100":       1,
-  "triptyque-unit":   1,
-  "triptyque-spec":   1,
-  "pack-etoile":      1
+  "lot10":            10,
+  "lot25":            10,
+  "lot50-essence":    10,
+  "lot50-tresorerie": 10,
+  "booster15":        10,
+  "pack60":           10,
+  "mystere100":       10,
+  "triptyque-unit":   10,
+  "triptyque-spec":   10,
+  "pack-etoile":      10
 }
