@@ -41,8 +41,16 @@ function inStock(string $id): bool
     <div class="card">
       <div class="swiper mb-6">
           <div class="swiper-wrapper">
-            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/argent/a100.png" alt="Vue rapprochée d’une pièce du lot de 25" width="1024" height="1024" class="rounded"></div>
-            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot250Piece.jpg" alt="Vue d’ensemble du lot de 25 pièces" width="1189" height="857" class="rounded"></div>
+            <div class="swiper-slide">
+              <a href="images/Piece/pro/argent/a100.png" data-fancybox="lot25">
+                <img loading="lazy" src="images/Piece/pro/argent/a100.png" alt="Vue rapprochée d’une pièce du lot de 25" width="1024" height="1024" class="rounded">
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="images/Piece/pro/lot250Piece.jpg" data-fancybox="lot25">
+                <img loading="lazy" src="images/Piece/pro/lot250Piece.jpg" alt="Vue d’ensemble du lot de 25 pièces" width="1189" height="857" class="rounded">
+              </a>
+            </div>
           </div>
           <div class="swiper-pagination"></div>
           <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
