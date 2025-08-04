@@ -355,7 +355,7 @@ function inStock(string $id): bool
         <div class="card flex flex-col">
           <img src="images/triptyque_unitaire.jpg" alt="Triptyque unitaire" class="rounded mb-4 w-full h-48 object-cover">
           <h4 class="text-center text-2xl font-semibold mb-2">Triptyque unitaire</h4>
-          <p class="text-center mb-4 text-gray-300">Classe de base, équipement et pièces de départ inclus. Tout pour créer un personnage instantanément.</p>
+          <p class="text-center mb-4 text-gray-300">Créez un héros en un instant. Ce triptyque rigide et illustré concentre tout ce qu’il faut pour une classe, une race ou un historique de base : compétences clés, équipement de départ et réserve de pièces.</p>
           <?php if(inStock('triptyque-unit')): ?>
             <div class="mt-auto flex flex-col items-center">
               <div class="multiplier-slot"></div>
@@ -369,7 +369,7 @@ function inStock(string $id): bool
               <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="triptyque-unit" data-item-name="Triptyque unitaire"
                       data-item-price="30" data-item-weight="120" data-item-url="boutique.php"
-                      data-item-description="Triptyque rigide classe au choix" data-item-quantity="1">
+                      data-item-description="Triptyque rigide complet pour classe, race ou historique au choix." data-item-quantity="1">
                 Ajouter
               </button>
             </div>
@@ -382,7 +382,7 @@ function inStock(string $id): bool
         <div class="card flex flex-col">
           <img src="images/triptyque_spec.jpg" alt="Triptyque spécialisé" class="rounded mb-4 w-full h-48 object-cover">
           <h4 class="text-center text-2xl font-semibold mb-2">Triptyque spécialisé</h4>
-          <p class="text-center mb-4 text-gray-300">Sous‑classe, espèce ou historique précis&nbsp;: personnalisez votre héros avec style.</p>
+          <p class="text-center mb-4 text-gray-300">Personnalisez votre héros avec panache. Ajoutez une sous‑classe exotique, une espèce rare ou un historique approfondi grâce à ce triptyque modulable.</p>
           <?php if(inStock('triptyque-spec')): ?>
             <div class="mt-auto flex flex-col items-center">
               <div class="multiplier-slot"></div>
@@ -396,7 +396,7 @@ function inStock(string $id): bool
               <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="triptyque-spec" data-item-name="Triptyque spécialisé"
                       data-item-price="40" data-item-weight="120" data-item-url="boutique.php"
-                      data-item-description="Triptyque spécialisé + équipement" data-item-quantity="1">
+                      data-item-description="Triptyque supplémentaire dédié à une sous-classe, espèce ou historique." data-item-quantity="1">
                 Ajouter
               </button>
             </div>
@@ -409,7 +409,7 @@ function inStock(string $id): bool
         <div class="card flex flex-col">
           <img src="images/triptyque_pack_etoile.jpg" alt="Pack étoiles" class="rounded mb-4 w-full h-48 object-cover">
           <h4 class="text-center text-2xl font-semibold mb-2">Pack “Guidé par les étoiles”</h4>
-          <p class="text-center mb-4 text-gray-300">3&nbsp;triptyques aléatoires et une aide cartonnée dans une pochette opaque&nbsp;: l’option parfaite pour des cadeaux surprises.</p>
+          <p class="text-center mb-4 text-gray-300">Laissez le destin écrire votre légende. Ce pack mystère renferme trois triptyques aléatoires et une aide de jeu cartonnée exclusive, le tout scellé dans une pochette opaque.</p>
           <?php if(inStock('pack-etoile')): ?>
             <div class="mt-auto flex flex-col items-center">
               <div class="multiplier-slot"></div>
@@ -423,7 +423,7 @@ function inStock(string $id): bool
               <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="pack-etoile" data-item-name="Pack triptyques & aide"
                       data-item-price="110" data-item-weight="420" data-item-url="boutique.php"
-                      data-item-description="3 triptyques aléatoires + cheat-sheet classe" data-item-quantity="1">
+                      data-item-description="Pack surprise : 3 triptyques aléatoires + aide de jeu exclusive." data-item-quantity="1">
                 Ajouter
               </button>
             </div>
