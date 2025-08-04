@@ -12,7 +12,7 @@ function navClass($key, $active) {
   <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
     <!-- Logo + Titre cliquables ensemble -->
     <a href="/index.php" class="flex items-center gap-3 group">
-      <img src="/images/logo.png" alt="Logo Geek & Dragon" class="h-12 logo-lighten transition-transform group-hover:scale-105">
+      <img loading="lazy" src="/images/logo.png" alt="Logo Geek & Dragon" class="h-12 logo-lighten transition-transform group-hover:scale-105">
       <h1 class="text-2xl font-bold text-white group-hover:text-indigo-300 transition">Geek & Dragon</h1>
     </a>
 
