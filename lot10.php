@@ -1,7 +1,7 @@
 <?php
 $active = 'boutique';
 $title  = "Lot de 10 – L’Offrande du Vagabond | Geek & Dragon";
-$metaDescription = "2 pièces de chaque métal, multiplicateur au choix.";
+$metaDescription = "Un trésor de poche pour aventuriers itinérants : 10 pièces finement gravées (2 de chaque métal) pour vos premières quêtes.";
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
@@ -69,7 +69,7 @@ function inStock(string $id): bool
           </div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 10<br>L’Offrande du Vagabond</h1>
-      <p class="mb-6 text-gray-300 text-center">2 pièces de chaque métal, multiplicateur au choix.</p>
+      <p class="mb-6 text-gray-300 text-center">L’allié parfait des premières quêtes. Ce lot de dix pièces finement gravées (deux de chaque métal précieux du royaume) offre à vos aventuriers novices un trésor de poche plein de caractère. Chaque pièce porte la patine d’un voyageur et raconte une histoire – une façon idéale d’ancrer vos campagnes dans une ambiance authentique, palpable dès la première poignée de monnaie.</p>
       <?php if(inStock('lot10')): ?>
       <div class="quantity-selector justify-center mx-auto mb-4" data-id="lot10">
         <button type="button" class="quantity-btn minus" data-target="lot10">−</button>
@@ -89,7 +89,7 @@ function inStock(string $id): bool
       <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="lot10" data-item-name="Lot de 10 – L’Offrande du Vagabond"
               data-item-price="60" data-item-url="lot10.php"
-              data-item-description="2 pièces de chaque métal, multiplicateur au choix"
+              data-item-description="Lot de 10 pièces finement gravées (2 de chaque métal), l’allié parfait des premières quêtes."
               data-item-quantity="1"
               data-item-custom1-name="Multiplicateur"
               data-item-custom1-options="1|10|100|1000|10000"

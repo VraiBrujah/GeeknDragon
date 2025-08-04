@@ -86,7 +86,7 @@ function inStock(string $id): bool
             <img src="images/Piece/pro/p10.png" alt="Lot de 10<br>L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
-          <p class="text-center mb-4 text-gray-300">2 pièces de chaque métal, multiplicateur au choix.</p>
+          <p class="text-center mb-4 text-gray-300">10 pièces gravées (2 de chaque métal), parfaites pour vos premières quêtes.</p>
           <div class="mt-auto flex flex-col items-center">
             <div class="multiplier-slot">
               <label for="multiplier-lot10" class="mx-auto text-center">
@@ -110,7 +110,7 @@ function inStock(string $id): bool
             <button class="snipcart-add-item btn btn-shop mx-auto"
                     data-item-id="lot10" data-item-name="Lot de 10–L’Offrande du Vagabond"
                     data-item-price="60" data-item-url="boutique.php"
-                    data-item-description="2 pièces de chaque métal, multiplicateur au choix"
+                    data-item-description="10 pièces gravées (2 de chaque métal), parfaites pour vos premières quêtes"
                     data-item-quantity="1"
                     data-item-custom1-name="Multiplicateur"
                     data-item-custom1-options="1|10|100|1000|10000"
@@ -128,7 +128,7 @@ function inStock(string $id): bool
             <img src="images/Piece/pro/p25.png" alt="Lot de 25–La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
-          <p class="text-center mb-4 text-gray-300">1 pièce de chaque métal pour chaque multiplicateur.</p>
+          <p class="text-center mb-4 text-gray-300">25 pièces uniques du cuivre à l’or, la bourse complète du marchand.</p>
           <div class="mt-auto flex flex-col items-center">
             <div class="multiplier-slot"></div>
             <div class="flex flex-col items-center">
@@ -141,7 +141,7 @@ function inStock(string $id): bool
             <button class="snipcart-add-item btn btn-shop mx-auto"
                     data-item-id="lot25" data-item-name="Lot de 25–La Monnaie des Royaumes"
                     data-item-price="145" data-item-url="boutique.php"
-                    data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
+                    data-item-description="25 pièces uniques du cuivre à l’or, la bourse complète du marchand"
                     data-item-quantity="1">
               Ajouter
             </button>
@@ -156,7 +156,7 @@ function inStock(string $id): bool
             <img src="images/Piece/pro/p50.png" alt="Lot de 50–L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>L’Essence des Royaumes</h4>
-          <p class="text-center mb-4 text-gray-300">2 pièces de chaque métal pour chaque multiplicateur.</p>
+          <p class="text-center mb-4 text-gray-300">50 pièces, deux de chaque type, pour ressentir la richesse royale.</p>
           <div class="mt-auto flex flex-col items-center">
             <div class="multiplier-slot"></div>
             <div class="flex flex-col items-center">
@@ -169,7 +169,7 @@ function inStock(string $id): bool
             <button class="snipcart-add-item btn btn-shop mx-auto"
                     data-item-id="lot50-essence" data-item-name="Lot de 50–L’Essence des Royaumes"
                     data-item-price="275" data-item-url="boutique.php"
-                    data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
+                    data-item-description="50 pièces, deux de chaque type, pour ressentir la richesse royale"
                     data-item-quantity="1">
               Ajouter
             </button>
@@ -184,7 +184,7 @@ function inStock(string $id): bool
             <img src="images/Piece/pro/p50.png" alt="Lot de 50–La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>La Trésorerie du Seigneur Marchand</h4>
-          <p class="text-center mb-4 text-gray-300">10 pièces de chaque métal, multiplicateur au choix.</p>
+          <p class="text-center mb-4 text-gray-300">50 pièces, dix de chaque métal rare, la trésorerie du Seigneur Marchand.</p>
           <div class="mt-auto flex flex-col items-center">
             <div class="multiplier-slot">
               <label for="multiplier-lot50-tresorerie" class="mx-auto text-center">
@@ -208,7 +208,7 @@ function inStock(string $id): bool
             <button class="snipcart-add-item btn btn-shop mx-auto"
                     data-item-id="lot50-tresorerie" data-item-name="Lot de 50–La Trésorerie du Seigneur Marchand"
                     data-item-price="275" data-item-url="boutique.php"
-                    data-item-description="10 pièces de chaque métal, multiplicateur au choix"
+                    data-item-description="50 pièces, dix de chaque métal rare, la trésorerie du Seigneur Marchand"
                     data-item-quantity="1"
                     data-item-custom1-name="Multiplicateur"
                     data-item-custom1-options="1|10|100|1000|10000"

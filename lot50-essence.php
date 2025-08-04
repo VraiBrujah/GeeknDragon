@@ -1,7 +1,7 @@
 <?php
 $active = 'boutique';
 $title  = "Lot de 50 – L’Essence des Royaumes | Geek & Dragon";
-$metaDescription = "2 pièces de chaque métal pour chaque multiplicateur.";
+$metaDescription = "Le pactole du collectionneur : 50 pièces, deux exemplaires de chaque type pour ressentir la richesse royale.";
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
@@ -69,7 +69,7 @@ function inStock(string $id): bool
           </div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50<br>L’Essence des Royaumes</h1>
-      <p class="mb-6 text-gray-300 text-center">2 pièces de chaque métal pour chaque multiplicateur.</p>
+      <p class="mb-6 text-gray-300 text-center">La richesse royale à portée de main. Ce coffret de cinquante pièces (deux exemplaires de chaque métal et de chaque valeur) confère à vos parties une dimension tactile et luxueuse.</p>
       <?php if(inStock('lot50-essence')): ?>
       <div class="quantity-selector justify-center mx-auto mb-4" data-id="lot50-essence">
         <button type="button" class="quantity-btn minus" data-target="lot50-essence">−</button>
@@ -79,7 +79,7 @@ function inStock(string $id): bool
       <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="lot50-essence" data-item-name="Lot de 50 – L’Essence des Royaumes"
               data-item-price="275" data-item-url="lot50-essence.php"
-              data-item-description="2 pièces de chaque métal pour chaque multiplicateur"
+              data-item-description="50 pièces (2 de chaque type), le coffret luxueux pour ressentir la richesse royale."
               data-item-quantity="1">
         Ajouter — 275 $
       </button>

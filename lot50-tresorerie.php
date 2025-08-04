@@ -1,7 +1,7 @@
 <?php
 $active = 'boutique';
 $title  = "Lot de 50 – La Trésorerie du Seigneur Marchand | Geek & Dragon";
-$metaDescription = "10 pièces de chaque métal, multiplicateur au choix.";
+$metaDescription = "La richesse sans limite : 50 pièces, 10 de chaque métal rare, pour une trésorerie digne d’un Seigneur Marchand.";
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
@@ -69,7 +69,7 @@ function inStock(string $id): bool
           </div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50<br>La Trésorerie du Seigneur Marchand</h1>
-      <p class="mb-6 text-gray-300 text-center">10 pièces de chaque métal, multiplicateur au choix.</p>
+      <p class="mb-6 text-gray-300 text-center">Une fortune digne d’un magnat des guildes. Avec dix pièces de chacun des métaux rares, ce lot prestigieux propulse vos campagnes dans une opulence assumée.</p>
       <?php if(inStock('lot50-tresorerie')): ?>
       <div class="quantity-selector justify-center mx-auto mb-4" data-id="lot50-tresorerie">
         <button type="button" class="quantity-btn minus" data-target="lot50-tresorerie">−</button>
@@ -89,7 +89,7 @@ function inStock(string $id): bool
       <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="lot50-tresorerie" data-item-name="Lot de 50 – La Trésorerie du Seigneur Marchand"
               data-item-price="275" data-item-url="lot50-tresorerie.php"
-              data-item-description="10 pièces de chaque métal, multiplicateur au choix"
+              data-item-description="50 pièces (10 de chaque métal rare), la trésorerie ultime pour une opulence assumée."
               data-item-quantity="1"
               data-item-custom1-name="Multiplicateur"
               data-item-custom1-options="1|10|100|1000|10000"
