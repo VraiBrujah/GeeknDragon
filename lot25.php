@@ -48,6 +48,12 @@ function inStock(string $id): bool
           <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
           <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
           </div>
+      <div class="swiper swiper-thumbs mb-6">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/argent/a100.png" alt="Vue rapprochée d’une pièce du lot de 25" width="100" height="100" class="rounded"></div>
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot250Piece.jpg" alt="Vue d’ensemble du lot de 25 pièces" width="100" height="100" class="rounded"></div>
+          </div>
+      </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 25<br>La Monnaie des Royaumes</h1>
       <p class="mb-6 text-gray-300 text-center">1 pièce de chaque métal pour chaque multiplicateur.</p>
       <?php if(inStock('lot25')): ?>

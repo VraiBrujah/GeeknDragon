@@ -244,3 +244,21 @@ input.gd-field, textarea.gd-field{
 .swiper-pagination-bullet-active {
   background: #7c3aed;
 }
+
+/* Miniatures Swiper */
+.swiper-thumbs {
+  width: 100%;
+}
+.swiper-thumbs .swiper-slide {
+  width: 25%;
+  height: auto;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.swiper-thumbs .swiper-slide-thumb-active {
+  opacity: 1;
+}
+.swiper-thumbs .swiper-slide img {
+  width: auto;
+  max-height: 5rem;
+}
