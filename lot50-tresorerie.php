@@ -29,10 +29,16 @@ function inStock(string $id): bool
 <?php include 'header.php'; ?>
 <div hidden id="snipcart"
      data-api-key="<?= htmlspecialchars($snipcartKey ?? '') ?>"
-     data-config-add-product-behavior="overlay"></div>
+     data-config-add-product-behavior="overlay"
+     data-config-locales="fr,en"
+     data-config-language="fr"></div>
 <?php if (!$snipcartKey): ?>
 <p class="text-red-500 text-center">SNIPCART_API_KEY missing</p>
 <?php endif; ?>
+<script>
+  const lang = localStorage.getItem('snipcartLanguage') || 'fr';
+  document.getElementById('snipcart').setAttribute('data-config-language', lang);
+</script>
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 
 <main class="pt-32 pb-20">

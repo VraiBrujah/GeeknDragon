@@ -235,6 +235,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Sélecteur de langue Snipcart
+document.addEventListener('DOMContentLoaded', () => {
+  const sel = document.getElementById('lang-switcher');
+  if (sel) {
+    sel.value = localStorage.getItem('snipcartLanguage') || 'fr';
+    sel.addEventListener('change', () => {
+      localStorage.setItem('snipcartLanguage', sel.value);
+      location.reload();
+    });
+  }
+});
+
 // Réinitialise les boutons après actions Snipcart
 document.addEventListener('snipcart.ready', () => {
   const reset = item => {
