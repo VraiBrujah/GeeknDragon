@@ -17,7 +17,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
 
         <!-- Article complet : Es-tu Game ? -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg">
-          <img src="/images/es_tu_game_demo.jpg" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
+          <img loading="lazy" src="/images/es_tu_game_demo.jpg" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
 
           <h4 class="text-3xl font-semibold mb-4">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
 
