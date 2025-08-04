@@ -25,6 +25,12 @@ function navClass($key, $active) {
         <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>">Contact</a>
       </nav>
 
+      <!-- Sélecteur de langue -->
+      <select id="lang-switcher" class="bg-gray-800 text-white rounded px-2 py-1">
+        <option value="fr">FR</option>
+        <option value="en">EN</option>
+      </select>
+
       <!-- Panier Snipcart -->
       <button class="snipcart-checkout txt-court uppercase tracking-wide">
         Panier
