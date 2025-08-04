@@ -1,7 +1,7 @@
 <?php
 $active = 'boutique';
 $title  = "Lot de 25 – La Monnaie des Royaumes | Geek & Dragon";
-$metaDescription = "1 pièce de chaque métal pour chaque multiplicateur.";
+$metaDescription = "La monnaie universelle de votre univers : 25 pièces uniques du cuivre le plus humble à l’or ancestral.";
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
@@ -69,7 +69,7 @@ function inStock(string $id): bool
           </div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 25<br>La Monnaie des Royaumes</h1>
-      <p class="mb-6 text-gray-300 text-center">1 pièce de chaque métal pour chaque multiplicateur.</p>
+      <p class="mb-6 text-gray-300 text-center">Votre univers prend vie entre vos doigts. Ce coffret rassemble vingt‑cinq pièces toutes différentes, du cuivre le plus humble à l’or ancestral. Offrez à vos joueurs l’expérience d’une bourse complète digne d’un marchand itinérant.</p>
       <?php if(inStock('lot25')): ?>
       <div class="quantity-selector justify-center mx-auto mb-4" data-id="lot25">
         <button type="button" class="quantity-btn minus" data-target="lot25">−</button>
@@ -79,7 +79,7 @@ function inStock(string $id): bool
       <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="lot25" data-item-name="Lot de 25 – La Monnaie des Royaumes"
               data-item-price="145" data-item-url="lot25.php"
-              data-item-description="1 pièce de chaque métal pour chaque multiplicateur"
+              data-item-description="Coffret de 25 pièces différentes, pour ressentir la monnaie des royaumes entre vos doigts."
               data-item-quantity="1">
         Ajouter — 145 $
       </button>
