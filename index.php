@@ -55,7 +55,14 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-32">
       <div class="max-w-6xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold mb-12">Boutique</h3>
-          <p class="mb-8 txt-court">Paiement sécurisé &nbsp;|&nbsp; Stocks mis à jour en temps réel.</p>
+          <p class="mb-8 txt-court">Paiement sécurisé via Snipcart
+            <span class="payment-icons">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="American Express">
+            </span>
+            &nbsp;|&nbsp; Stocks mis à jour en temps réel.
+          </p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
           <a href="boutique.php" class="btn btn-primary" data-hide-price="1">
             Visiter la boutique

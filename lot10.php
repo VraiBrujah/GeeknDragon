@@ -91,6 +91,14 @@ function inStock(string $id): bool
         Ajouter — 60 $
       </button>
       <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
+      <p class="mt-4 text-center txt-court">Paiement sécurisé via Snipcart
+        <span class="payment-icons">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="American Express">
+        </span>
+        &nbsp;|&nbsp; Stocks mis à jour en temps réel.
+      </p>
     </div>
   </section>
 </main>

@@ -262,3 +262,15 @@ input.gd-field, textarea.gd-field{
   width: auto;
   max-height: 5rem;
 }
+
+/* Payment provider icons */
+.payment-icons {
+  display: inline-flex;
+  gap: 0.5rem;
+  vertical-align: middle;
+}
+
+.payment-icons img {
+  height: 1.5rem;
+  width: auto;
+}
