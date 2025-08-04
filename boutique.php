@@ -52,7 +52,7 @@ function inStock(string $id): bool
 
   <!-- ===== Bannière d'ouverture ===== -->
   <section class="relative min-h-[24rem] md:min-h-[32rem]">
-    <img src="images/banner_luxe_coins.jpg" alt="Pluie de pièces luxueuses" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+    <img src="images/banner_luxe_coins.jpg" alt="Pluie de pièces luxueuses" class="absolute inset-0 w-full h-full object-cover" loading="eager">
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
         <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Des pièces et cartes d'équipement plus luxueuses qu'une figurine de dragon à 300 $ : utilisées à chaque session et conçues au&nbsp;Québec.</p>
@@ -66,9 +66,9 @@ function inStock(string $id): bool
       <p class="text-lg md:text-xl txt-court">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
       <p class="mt-4 txt-court">Paiement sécurisé via Snipcart
         <span class="payment-icons">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="American Express">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" loading="lazy">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard" loading="lazy">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="American Express" loading="lazy">
         </span>
         &nbsp;|&nbsp; Stocks mis à jour en temps réel.
       </p>
@@ -83,7 +83,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot10')): ?>
         <div class="card flex flex-col">
           <a href="lot10.php?from=pieces">
-            <img src="images/Piece/pro/p10.png" alt="Lot de 10<br>L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover">
+            <img src="images/Piece/pro/p10.png" alt="Lot de 10<br>L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
           <p class="text-center mb-4 text-gray-300">10 pièces gravées (2 de chaque métal), parfaites pour vos premières quêtes.</p>
@@ -125,7 +125,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot25')): ?>
         <div class="card flex flex-col">
           <a href="lot25.php?from=pieces">
-            <img src="images/Piece/pro/p25.png" alt="Lot de 25–La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
+            <img src="images/Piece/pro/p25.png" alt="Lot de 25–La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
           <p class="text-center mb-4 text-gray-300">25 pièces uniques du cuivre à l’or, la bourse complète du marchand.</p>
@@ -153,7 +153,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot50-essence')): ?>
         <div class="card flex flex-col">
           <a href="lot50-essence.php?from=pieces">
-            <img src="images/Piece/pro/p50.png" alt="Lot de 50–L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover">
+            <img src="images/Piece/pro/p50.png" alt="Lot de 50–L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>L’Essence des Royaumes</h4>
           <p class="text-center mb-4 text-gray-300">50 pièces, deux de chaque type, pour ressentir la richesse royale.</p>
@@ -181,7 +181,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot50-tresorerie')): ?>
         <div class="card flex flex-col">
           <a href="lot50-tresorerie.php?from=pieces">
-            <img src="images/Piece/pro/p50.png" alt="Lot de 50–La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover">
+            <img src="images/Piece/pro/p50.png" alt="Lot de 50–La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>La Trésorerie du Seigneur Marchand</h4>
           <p class="text-center mb-4 text-gray-300">50 pièces, dix de chaque métal rare, la trésorerie du Seigneur Marchand.</p>
@@ -233,7 +233,7 @@ function inStock(string $id): bool
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h3 class="text-4xl font-bold mb-6">Coffres sur mesure</h3>
-	  <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Le coffre du mage dément" class="rounded mb-4 w-full h-124 object-cover"></a>
+      <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Le coffre du mage dément" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
       <p class="mb-6 text-gray-300">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
       <a href="contact.php" class="btn btn-primary">Demander un devis</a>	  
     </div>
@@ -247,7 +247,7 @@ function inStock(string $id): bool
 
         <!-- Booster 15 -->
         <div class="card flex flex-col">
-          <img src="images/cartes_booster.jpg" alt="Booster 15 cartes" class="rounded mb-4 w-full h-48 object-cover">
+          <img src="images/cartes_booster.jpg" alt="Booster 15 cartes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-2">Booster 15 cartes</h4>
           <p class="text-center mb-4 text-gray-300">Faites le plein d’équipement en un clin d’œil. Ce pack “booster” dévoile quinze cartes thématiques façon TCG, chacune magnifiquement illustrée et prête à l’emploi pour dynamiser vos sessions.</p>
           <?php if(inStock('booster15')): ?>
@@ -274,7 +274,7 @@ function inStock(string $id): bool
 
         <!-- Pack 60 -->
         <div class="card flex flex-col">
-          <img src="images/cartes_pack60.jpg" alt="Pile marchande 60 cartes" class="rounded mb-4 w-full h-48 object-cover">
+          <img src="images/cartes_pack60.jpg" alt="Pile marchande 60 cartes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-2">Pile marchande 60&nbsp;cartes</h4>
           <p class="text-center mb-4 text-gray-300">L’échoppe ambulante à sortir sur la table. Ce pack de soixante cartes variées se transforme en boutique improvisée&nbsp;: exposez-les et laissez vos joueurs fouiller l’étal d’un marchand itinérant.</p>
           <?php if(inStock('pack60')): ?>
@@ -301,7 +301,7 @@ function inStock(string $id): bool
 
         <!-- Mystère 100 -->
         <div class="card flex flex-col">
-          <img src="images/cartes_mystere100.jpg" alt="Mystère 100 cartes" class="rounded mb-4 w-full h-48 object-cover">
+          <img src="images/cartes_mystere100.jpg" alt="Mystère 100 cartes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-2">Mystère 100 cartes</h4>
           <p class="text-center mb-4 text-gray-300">Le coffre aux trésors ultime. Osez l’inconnu avec ce pack de cent cartes renfermant de véritables raretés et des éditions limitées convoitées.</p>
           <?php if(inStock('mystere100')): ?>
@@ -353,7 +353,7 @@ function inStock(string $id): bool
 
         <!-- Triptyque unitaire -->
         <div class="card flex flex-col">
-          <img src="images/triptyque_unitaire.jpg" alt="Triptyque unitaire" class="rounded mb-4 w-full h-48 object-cover">
+          <img src="images/triptyque_unitaire.jpg" alt="Triptyque unitaire" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-2">Triptyque unitaire</h4>
           <p class="text-center mb-4 text-gray-300">Créez un héros en un instant. Ce triptyque rigide et illustré concentre tout ce qu’il faut pour une classe, une race ou un historique de base : compétences clés, équipement de départ et réserve de pièces.</p>
           <?php if(inStock('triptyque-unit')): ?>
@@ -380,7 +380,7 @@ function inStock(string $id): bool
 
         <!-- Triptyque spécialisé -->
         <div class="card flex flex-col">
-          <img src="images/triptyque_spec.jpg" alt="Triptyque spécialisé" class="rounded mb-4 w-full h-48 object-cover">
+          <img src="images/triptyque_spec.jpg" alt="Triptyque spécialisé" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-2">Triptyque spécialisé</h4>
           <p class="text-center mb-4 text-gray-300">Personnalisez votre héros avec panache. Ajoutez une sous‑classe exotique, une espèce rare ou un historique approfondi grâce à ce triptyque modulable.</p>
           <?php if(inStock('triptyque-spec')): ?>
@@ -407,7 +407,7 @@ function inStock(string $id): bool
 
         <!-- Pack étoiles -->
         <div class="card flex flex-col">
-          <img src="images/triptyque_pack_etoile.jpg" alt="Pack étoiles" class="rounded mb-4 w-full h-48 object-cover">
+          <img src="images/triptyque_pack_etoile.jpg" alt="Pack étoiles" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-2">Pack “Guidé par les étoiles”</h4>
           <p class="text-center mb-4 text-gray-300">Laissez le destin écrire votre légende. Ce pack mystère renferme trois triptyques aléatoires et une aide de jeu cartonnée exclusive, le tout scellé dans une pochette opaque.</p>
           <?php if(inStock('pack-etoile')): ?>
