@@ -48,6 +48,12 @@ function inStock(string $id): bool
           <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
           <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
           </div>
+      <div class="swiper swiper-thumbs mb-6">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/p10.png" alt="Vue rapprochée d’une pièce du lot de 10" width="100" height="100" class="rounded"></div>
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot10Piece-300.jpg" alt="Vue d’ensemble du lot de 10 pièces" width="100" height="100" class="rounded"></div>
+          </div>
+      </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 10<br>L’Offrande du Vagabond</h1>
       <p class="mb-6 text-gray-300 text-center">2 pièces de chaque métal, multiplicateur au choix.</p>
       <?php if(inStock('lot10')): ?>

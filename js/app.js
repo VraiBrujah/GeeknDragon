@@ -197,15 +197,38 @@ document.addEventListener('DOMContentLoaded', () => {
 // Initialisation des carrousels Swiper
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.swiper').forEach(sw => {
-    new Swiper(sw, {
-      loop: true,
-      autoplay: { delay: 5000 },
-      pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
-      navigation: {
-        nextEl: sw.querySelector('.swiper-button-next'),
-        prevEl: sw.querySelector('.swiper-button-prev'),
-      },
-    });
+    if (sw.classList.contains('swiper-thumbs')) return;
+    const container = sw.parentElement;
+    const thumbsEl = container.querySelector('.swiper-thumbs');
+    if (thumbsEl) {
+      const thumbsSwiper = new Swiper(thumbsEl, {
+        slidesPerView: 4,
+        freeMode: true,
+        watchSlidesProgress: true,
+      });
+      new Swiper(sw, {
+        loop: true,
+        autoplay: { delay: 5000 },
+        pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
+        navigation: {
+          nextEl: sw.querySelector('.swiper-button-next'),
+          prevEl: sw.querySelector('.swiper-button-prev'),
+        },
+        thumbs: {
+          swiper: thumbsSwiper,
+        },
+      });
+    } else {
+      new Swiper(sw, {
+        loop: true,
+        autoplay: { delay: 5000 },
+        pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
+        navigation: {
+          nextEl: sw.querySelector('.swiper-button-next'),
+          prevEl: sw.querySelector('.swiper-button-prev'),
+        },
+      });
+    }
   });
 });
 
