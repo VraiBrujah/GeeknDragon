@@ -249,7 +249,7 @@ function inStock(string $id): bool
         <div class="card flex flex-col">
           <img src="images/cartes_booster.jpg" alt="Booster 15 cartes" class="rounded mb-4 w-full h-48 object-cover">
           <h4 class="text-center text-2xl font-semibold mb-2">Booster 15 cartes</h4>
-          <p class="text-center mb-4 text-gray-300">15 cartes ciblées façon TCG&nbsp;: armes, vivres, potions… un booster pour enrichir immédiatement vos sessions.</p>
+          <p class="text-center mb-4 text-gray-300">Faites le plein d’équipement en un clin d’œil. Ce pack “booster” dévoile quinze cartes thématiques façon TCG, chacune magnifiquement illustrée et prête à l’emploi pour dynamiser vos sessions.</p>
           <?php if(inStock('booster15')): ?>
             <div class="mt-auto flex flex-col items-center">
               <div class="multiplier-slot"></div>
@@ -263,7 +263,7 @@ function inStock(string $id): bool
               <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="booster15" data-item-name="Booster 15 cartes"
                       data-item-price="15" data-item-weight="100" data-item-url="boutique.php"
-                      data-item-description="15 cartes illustrées thématiques" data-item-quantity="1">
+                      data-item-description="Booster de 15 cartes illustrées prêtes à l’emploi (style TCG)." data-item-quantity="1">
                 Ajouter
               </button>
             </div>
@@ -276,7 +276,7 @@ function inStock(string $id): bool
         <div class="card flex flex-col">
           <img src="images/cartes_pack60.jpg" alt="Pile marchande 60 cartes" class="rounded mb-4 w-full h-48 object-cover">
           <h4 class="text-center text-2xl font-semibold mb-2">Pile marchande 60&nbsp;cartes</h4>
-          <p class="text-center mb-4 text-gray-300">Une pile marchande de 60&nbsp;cartes idéale pour simuler une échoppe itinérante et surprendre vos joueurs.</p>
+          <p class="text-center mb-4 text-gray-300">L’échoppe ambulante à sortir sur la table. Ce pack de soixante cartes variées se transforme en boutique improvisée&nbsp;: exposez-les et laissez vos joueurs fouiller l’étal d’un marchand itinérant.</p>
           <?php if(inStock('pack60')): ?>
             <div class="mt-auto flex flex-col items-center">
               <div class="multiplier-slot"></div>
@@ -290,7 +290,7 @@ function inStock(string $id): bool
               <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="pack60" data-item-name="Pack 60 cartes"
                       data-item-price="45" data-item-weight="350" data-item-url="boutique.php"
-                      data-item-description="60 cartes d’équipement variées" data-item-quantity="1">
+                      data-item-description="Pack de 60 cartes variées pour simuler une échoppe itinérante." data-item-quantity="1">
                 Ajouter
               </button>
             </div>
@@ -303,7 +303,7 @@ function inStock(string $id): bool
         <div class="card flex flex-col">
           <img src="images/cartes_mystere100.jpg" alt="Mystère 100 cartes" class="rounded mb-4 w-full h-48 object-cover">
           <h4 class="text-center text-2xl font-semibold mb-2">Mystère 100 cartes</h4>
-          <p class="text-center mb-4 text-gray-300">Le coffre ultime&nbsp;: 100&nbsp;cartes dont de rares exemplaires, en tirage limité. Osez l’inconnu&nbsp;!</p>
+          <p class="text-center mb-4 text-gray-300">Le coffre aux trésors ultime. Osez l’inconnu avec ce pack de cent cartes renfermant de véritables raretés et des éditions limitées convoitées.</p>
           <?php if(inStock('mystere100')): ?>
             <div class="mt-auto flex flex-col items-center">
               <div class="multiplier-slot"></div>
@@ -317,7 +317,7 @@ function inStock(string $id): bool
               <button class="snipcart-add-item btn btn-shop mx-auto"
                       data-item-id="mystere100" data-item-name="Mystère 100 cartes"
                       data-item-price="65" data-item-weight="550" data-item-url="boutique.php"
-                      data-item-description="100 cartes d’équipement (rares incluses)" data-item-quantity="1">
+                      data-item-description="Coffre mystère de 100 cartes, comprenant des raretés en édition limitée." data-item-quantity="1">
                 Ajouter
               </button>
             </div>
