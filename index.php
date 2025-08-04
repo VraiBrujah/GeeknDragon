@@ -34,17 +34,17 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
           <a href="boutique.php#cartes" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Cartes d’équipement</h4>
             <p>560 cartes illustrées pour remplacer la lecture fastidieuse du manuel.</p>
-            <img src="images/cartes_equipement.jpg" alt="Cartes d'équipement" class="rounded mb-4">
+              <img src="images/cartes_equipement.jpg" alt="Cartes d'équipement" class="rounded mb-4" loading="lazy">
           </a>
           <a href="boutique.php#pieces" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Pièces métalliques</h4>
             <p>Monnaie physique pour ressentir chaque trésor et influencer la chance à la table.</p>
-            <img src="images/piece.png" alt="Pièces métalliques" class="rounded mb-4">
+              <img src="images/piece.png" alt="Pièces métalliques" class="rounded mb-4" loading="lazy">
           </a>
           <a href="boutique.php#triptyques" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Fiche Triptyque</h4>
             <p>Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes.</p>
-            <img src="images/triptyque_fiche.jpg" alt="Triptyque" class="rounded mb-4">
+              <img src="images/triptyque_fiche.jpg" alt="Triptyque" class="rounded mb-4" loading="lazy">
           </a>
         </div>
       </div>
@@ -85,7 +85,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     
         <!-- Résumé d'article - dupliquer ce bloc pour chaque actualité -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg mb-12">
-          <img src="/images/es_tu_game_demo.jpg" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
+            <img src="/images/es_tu_game_demo.jpg" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces" loading="lazy">
           <h4 class="text-3xl font-semibold mb-4">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
           <p class="text-lg text-gray-200 mb-4">
             Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.
@@ -97,7 +97,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     
         <!-- Bloc témoignage -->
         <article class="bg-gray-800 p-6 mt-12 rounded-xl shadow-lg">
-          <img src="images/avisJoueurFlim2025.jpg" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces">
+          <img src="images/avisJoueurFlim2025.jpg" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-4">« Finis les combats contre nos feuilles de personnage ! »</h4>
           <p class="text-lg leading-relaxed text-gray-200">
             De nombreux joueurs présents l’affirment : les pièces physiques changent tout.
@@ -120,7 +120,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     <section id="contact" class="py-16 bg-gray-900/80 scroll-mt-32">
       <div class="max-w-xl mx-auto text-center">
         <h3 class="text-4xl font-bold mb-6">Contact</h3>
-        <img src="images/team_brujah.jpg" alt="Brujah" class="mx-auto h-32 w-32 rounded-full mb-4">
+        <img src="images/team_brujah.jpg" alt="Brujah" class="mx-auto h-32 w-32 rounded-full mb-4" loading="lazy">
           <p class="mb-2 txt-court"><strong>Brujah</strong> — Responsable produit & communauté</p>
           <p class="mb-2 txt-court"><a href="mailto:contact@geekndragon.com" class="text-indigo-400 hover:underline">contact@geekndragon.com</a></p>
           <p class="txt-court"><a href="tel:+14387642612" class="text-indigo-400 hover:underline">+1 438 764-2612</a></p>
