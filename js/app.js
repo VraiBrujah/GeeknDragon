@@ -230,6 +230,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+  if (window.Fancybox) {
+    Fancybox.bind('[data-fancybox]', {});
+  }
 });
 
 // Réinitialise les boutons après actions Snipcart
