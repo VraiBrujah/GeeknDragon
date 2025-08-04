@@ -16,12 +16,20 @@ function navClass($key, $active) {
       <h1 class="text-2xl font-bold text-white group-hover:text-indigo-300 transition">Geek & Dragon</h1>
     </a>
 
-    <!-- Navigation -->
-    <nav class="hidden md:flex gap-6 uppercase tracking-wide">
-      <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>">Produits</a>
-      <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>">Actualités</a>
-      <a href="/boutique.php"        class="txt-court <?= navClass('boutique',$active)?>">Boutique</a>
-      <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>">Contact</a>
-    </nav>
+    <div class="flex items-center gap-6">
+      <!-- Navigation -->
+      <nav class="hidden md:flex gap-6 uppercase tracking-wide">
+        <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>">Produits</a>
+        <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>">Actualités</a>
+        <a href="/boutique.php"        class="txt-court <?= navClass('boutique',$active)?>">Boutique</a>
+        <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>">Contact</a>
+      </nav>
+
+      <!-- Panier Snipcart -->
+      <button class="snipcart-checkout txt-court uppercase tracking-wide">
+        Panier
+        <span class="snipcart-items-count"></span>
+      </button>
+    </div>
   </div>
 </header>
