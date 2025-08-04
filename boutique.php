@@ -58,6 +58,14 @@ function inStock(string $id): bool
   <section class="text-center max-w-4xl mx-auto px-6 my-16" id="pieces">
     <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Boutique officielle</h2>
       <p class="text-lg md:text-xl txt-court">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
+      <p class="mt-4 txt-court">Paiement sécurisé via Snipcart
+        <span class="payment-icons">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="American Express">
+        </span>
+        &nbsp;|&nbsp; Stocks mis à jour en temps réel.
+      </p>
   </section>
 
   <!-- ░░░ PIÈCES ░░░ -->
