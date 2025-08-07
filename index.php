@@ -17,10 +17,10 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     <section class="min-h-screen flex items-center justify-center text-center relative">
       <img src="images/hero_flbg.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="">
       <div class="relative z-10 max-w-3xl p-6">
-        <h2 class="text-5xl font-extrabold mb-6">L'immersion au cœur du jeu</h2>
-          <p class="text-xl mb-2 txt-court">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
-          <p class="text-xl mb-8 txt-court">Conçues au Québec</p>
-<a href="boutique.php" class="btn btn-primary" data-hide-price="1">
+        <h2 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h2>
+          <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
+          <p class="text-xl mb-8 txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
+<a href="boutique.php" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
           </a>
       </div>

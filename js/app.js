@@ -1,3 +1,40 @@
+// Gestion des traductions simples
+document.addEventListener('DOMContentLoaded', () => {
+  const translationsReady = false; // passer à true lorsque les traductions EN seront complètes
+  const switcher = document.getElementById('lang-switcher');
+  const defaultLang = 'fr';
+  const available = ['fr', 'en'];
+  let lang = localStorage.getItem('lang') || defaultLang;
+  if (!available.includes(lang)) lang = defaultLang;
+
+  if (switcher) {
+    if (!translationsReady || available.length < 2) {
+      switcher.classList.add('hidden');
+    } else {
+      switcher.classList.remove('hidden');
+      switcher.value = lang;
+      switcher.addEventListener('change', () => {
+        localStorage.setItem('lang', switcher.value);
+        location.reload();
+      });
+    }
+  }
+
+  fetch(`/translations/${lang}.json`)
+    .then(res => res.json())
+    .then(data => {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const keys = el.dataset.i18n.split('.');
+        let text = data;
+        keys.forEach(k => { if (text) text = text[k]; });
+        if (text) el.textContent = text;
+      });
+    })
+    .catch(() => {
+      if (switcher) switcher.classList.add('hidden');
+    });
+});
+
 // Animation fade-up
 document.querySelectorAll('.fade-up').forEach(el=>{
   const observer=new IntersectionObserver(entries=>{

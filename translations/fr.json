@@ -1,0 +1,20 @@
+{
+  "nav": {
+    "products": "Produits",
+    "news": "Actualités",
+    "shop": "Boutique",
+    "contact": "Contact",
+    "cart": "Panier",
+    "cards": "Cartes",
+    "triptychs": "Triptyques"
+  },
+  "hero": {
+    "title": "L'immersion au cœur du jeu",
+    "subtitle1": "Cartes, pièces et fiches prêtes à jouer pour vos parties D&D",
+    "subtitle2": "Conçues au Québec",
+    "visitShop": "Visiter la boutique"
+  },
+  "footer": {
+    "made": "Conçu au Québec."
+  }
+}
