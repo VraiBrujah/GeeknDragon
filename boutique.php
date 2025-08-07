@@ -243,89 +243,11 @@ function inStock(string $id): bool
   <section id="cartes" class="py-16">
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Cartes d’équipement</h3>
-      <div class="grid md:grid-cols-3 gap-10">
-
-        <!-- Booster 15 -->
-        <div class="card flex flex-col">
-          <img src="images/cartes_booster.jpg" alt="Booster 15 cartes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          <h4 class="text-center text-2xl font-semibold mb-2">Booster 15 cartes</h4>
-          <p class="text-center mb-4 text-gray-300">Faites le plein d’équipement en un clin d’œil. Ce pack “booster” dévoile quinze cartes thématiques façon TCG, chacune magnifiquement illustrée et prête à l’emploi pour dynamiser vos sessions.</p>
-          <?php if(inStock('booster15')): ?>
-            <div class="mt-auto flex flex-col items-center">
-              <div class="multiplier-slot"></div>
-              <div class="flex flex-col items-center">
-                <div class="quantity-selector mx-auto text-center" data-id="booster15">
-                  <button type="button" class="quantity-btn minus" data-target="booster15">−</button>
-                  <span class="qty-value" id="qty-booster15">1</span>
-                  <button type="button" class="quantity-btn plus" data-target="booster15">+</button>
-                </div>
-              </div>
-              <button class="snipcart-add-item btn btn-shop mx-auto"
-                      data-item-id="booster15" data-item-name="Booster 15 cartes"
-                      data-item-price="15" data-item-weight="100" data-item-url="boutique.php"
-                      data-item-description="Booster de 15 cartes illustrées prêtes à l’emploi (style TCG)." data-item-quantity="1">
-                Ajouter
-              </button>
-            </div>
-          <?php else: ?>
-            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
-          <?php endif; ?>
+      <div class="flex justify-center">
+        <div class="card text-center max-w-md">
+          <h4 class="text-2xl font-semibold mb-2">À venir</h4>
+          <p class="text-gray-300">Nos scribes enchantent encore ces parchemins d’aventure.<br>Les cartes d’équipement forgeront leur entrée lors de la prochaine lune.</p>
         </div>
-
-        <!-- Pack 60 -->
-        <div class="card flex flex-col">
-          <img src="images/cartes_pack60.jpg" alt="Pile marchande 60 cartes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          <h4 class="text-center text-2xl font-semibold mb-2">Pile marchande 60&nbsp;cartes</h4>
-          <p class="text-center mb-4 text-gray-300">L’échoppe ambulante à sortir sur la table. Ce pack de soixante cartes variées se transforme en boutique improvisée&nbsp;: exposez-les et laissez vos joueurs fouiller l’étal d’un marchand itinérant.</p>
-          <?php if(inStock('pack60')): ?>
-            <div class="mt-auto flex flex-col items-center">
-              <div class="multiplier-slot"></div>
-              <div class="flex flex-col items-center">
-              <div class="quantity-selector mx-auto text-center" data-id="pack60">
-                  <button type="button" class="quantity-btn minus" data-target="pack60">−</button>
-                  <span class="qty-value" id="qty-pack60">1</span>
-                  <button type="button" class="quantity-btn plus" data-target="pack60">+</button>
-                </div>
-              </div>
-              <button class="snipcart-add-item btn btn-shop mx-auto"
-                      data-item-id="pack60" data-item-name="Pack 60 cartes"
-                      data-item-price="45" data-item-weight="350" data-item-url="boutique.php"
-                      data-item-description="Pack de 60 cartes variées pour simuler une échoppe itinérante." data-item-quantity="1">
-                Ajouter
-              </button>
-            </div>
-          <?php else: ?>
-            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
-          <?php endif; ?>
-        </div>
-
-        <!-- Mystère 100 -->
-        <div class="card flex flex-col">
-          <img src="images/cartes_mystere100.jpg" alt="Mystère 100 cartes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          <h4 class="text-center text-2xl font-semibold mb-2">Mystère 100 cartes</h4>
-          <p class="text-center mb-4 text-gray-300">Le coffre aux trésors ultime. Osez l’inconnu avec ce pack de cent cartes renfermant de véritables raretés et des éditions limitées convoitées.</p>
-          <?php if(inStock('mystere100')): ?>
-            <div class="mt-auto flex flex-col items-center">
-              <div class="multiplier-slot"></div>
-              <div class="flex flex-col items-center">
-                <div class="quantity-selector mx-auto text-center" data-id="mystere100">
-                  <button type="button" class="quantity-btn minus" data-target="mystere100">−</button>
-                  <span class="qty-value" id="qty-mystere100">1</span>
-                  <button type="button" class="quantity-btn plus" data-target="mystere100">+</button>
-                </div>
-              </div>
-              <button class="snipcart-add-item btn btn-shop mx-auto"
-                      data-item-id="mystere100" data-item-name="Mystère 100 cartes"
-                      data-item-price="65" data-item-weight="550" data-item-url="boutique.php"
-                      data-item-description="Coffre mystère de 100 cartes, comprenant des raretés en édition limitée." data-item-quantity="1">
-                Ajouter
-              </button>
-            </div>
-          <?php else: ?>
-            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
-          <?php endif; ?>
-        </div>
-
       </div>
     </div>
   </section>
@@ -338,7 +260,7 @@ function inStock(string $id): bool
       </div>
       <div class="md:w-2/3 text-gray-200 space-y-4">
         <h3 class="text-3xl font-bold">Investissez ensemble, partagez l’aventure</h3>
-        <p>Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur peut contribuer en achetant son propre triptyque, ses cartes et ses pièces.</p>
+        <p>Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
         <p>À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> et ne sont utilisées qu’une seule fois… nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
         <p>Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
       </div>
@@ -349,89 +271,11 @@ function inStock(string $id): bool
   <section id="triptyques" class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Triptyques de personnage</h3>
-      <div class="grid md:grid-cols-3 gap-10">
-
-        <!-- Triptyque unitaire -->
-        <div class="card flex flex-col">
-          <img src="images/triptyque_unitaire.jpg" alt="Triptyque unitaire" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          <h4 class="text-center text-2xl font-semibold mb-2">Triptyque unitaire</h4>
-          <p class="text-center mb-4 text-gray-300">Créez un héros en un instant. Ce triptyque rigide et illustré concentre tout ce qu’il faut pour une classe, une race ou un historique de base : compétences clés, équipement de départ et réserve de pièces.</p>
-          <?php if(inStock('triptyque-unit')): ?>
-            <div class="mt-auto flex flex-col items-center">
-              <div class="multiplier-slot"></div>
-              <div class="flex flex-col items-center">
-                <div class="quantity-selector mx-auto text-center" data-id="triptyque-unit">
-                  <button type="button" class="quantity-btn minus" data-target="triptyque-unit">−</button>
-                  <span class="qty-value" id="qty-triptyque-unit">1</span>
-                  <button type="button" class="quantity-btn plus" data-target="triptyque-unit">+</button>
-                </div>
-              </div>
-              <button class="snipcart-add-item btn btn-shop mx-auto"
-                      data-item-id="triptyque-unit" data-item-name="Triptyque unitaire"
-                      data-item-price="30" data-item-weight="120" data-item-url="boutique.php"
-                      data-item-description="Triptyque rigide complet pour classe, race ou historique au choix." data-item-quantity="1">
-                Ajouter
-              </button>
-            </div>
-          <?php else: ?>
-            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
-          <?php endif; ?>
+      <div class="flex justify-center">
+        <div class="card text-center max-w-md">
+          <h4 class="text-2xl font-semibold mb-2">À venir</h4>
+          <p class="text-gray-300">Les artisans façonnent encore ces grimoires de héros.<br>Les triptyques rejoindront la boutique sous peu.</p>
         </div>
-
-        <!-- Triptyque spécialisé -->
-        <div class="card flex flex-col">
-          <img src="images/triptyque_spec.jpg" alt="Triptyque spécialisé" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          <h4 class="text-center text-2xl font-semibold mb-2">Triptyque spécialisé</h4>
-          <p class="text-center mb-4 text-gray-300">Personnalisez votre héros avec panache. Ajoutez une sous‑classe exotique, une espèce rare ou un historique approfondi grâce à ce triptyque modulable.</p>
-          <?php if(inStock('triptyque-spec')): ?>
-            <div class="mt-auto flex flex-col items-center">
-              <div class="multiplier-slot"></div>
-              <div class="flex flex-col items-center">
-                <div class="quantity-selector mx-auto text-center" data-id="triptyque-spec">
-                  <button type="button" class="quantity-btn minus" data-target="triptyque-spec">−</button>
-                  <span class="qty-value" id="qty-triptyque-spec">1</span>
-                  <button type="button" class="quantity-btn plus" data-target="triptyque-spec">+</button>
-                </div>
-              </div>
-              <button class="snipcart-add-item btn btn-shop mx-auto"
-                      data-item-id="triptyque-spec" data-item-name="Triptyque spécialisé"
-                      data-item-price="40" data-item-weight="120" data-item-url="boutique.php"
-                      data-item-description="Triptyque supplémentaire dédié à une sous-classe, espèce ou historique." data-item-quantity="1">
-                Ajouter
-              </button>
-            </div>
-          <?php else: ?>
-            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
-          <?php endif; ?>
-        </div>
-
-        <!-- Pack étoiles -->
-        <div class="card flex flex-col">
-          <img src="images/triptyque_pack_etoile.jpg" alt="Pack étoiles" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          <h4 class="text-center text-2xl font-semibold mb-2">Pack “Guidé par les étoiles”</h4>
-          <p class="text-center mb-4 text-gray-300">Laissez le destin écrire votre légende. Ce pack mystère renferme trois triptyques aléatoires et une aide de jeu cartonnée exclusive, le tout scellé dans une pochette opaque.</p>
-          <?php if(inStock('pack-etoile')): ?>
-            <div class="mt-auto flex flex-col items-center">
-              <div class="multiplier-slot"></div>
-              <div class="flex flex-col items-center">
-                <div class="quantity-selector mx-auto text-center" data-id="pack-etoile">
-                  <button type="button" class="quantity-btn minus" data-target="pack-etoile">−</button>
-                  <span class="qty-value" id="qty-pack-etoile">1</span>
-                  <button type="button" class="quantity-btn plus" data-target="pack-etoile">+</button>
-                </div>
-              </div>
-              <button class="snipcart-add-item btn btn-shop mx-auto"
-                      data-item-id="pack-etoile" data-item-name="Pack triptyques & aide"
-                      data-item-price="110" data-item-weight="420" data-item-url="boutique.php"
-                      data-item-description="Pack surprise : 3 triptyques aléatoires + aide de jeu exclusive." data-item-quantity="1">
-                Ajouter
-              </button>
-            </div>
-          <?php else: ?>
-            <div class="mt-auto text-center"><span class="btn btn-shop mx-auto" disabled>Rupture de stock</span></div>
-          <?php endif; ?>
-        </div>
-
       </div>
     </div>
   </section>
