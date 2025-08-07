@@ -177,6 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePlus(sel.dataset.id);
   });
 
+  // Couverture des produits sans sélecteur de quantité
+  document.querySelectorAll('.btn-shop[data-item-id]').forEach(btn => {
+    const id = btn.dataset.itemId;
+    if (!document.querySelector(`.quantity-selector[data-id="${id}"]`)) {
+      updatePlus(id);
+    }
+  });
+
   document.querySelectorAll('.multiplier-select').forEach(sel => {
     const id = sel.dataset.target;
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
