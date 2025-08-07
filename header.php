@@ -27,26 +27,26 @@ function navClass($key, $active) {
 
       <!-- Navigation -->
       <nav class="hidden md:flex gap-6 uppercase tracking-wide">
-        <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>">Produits</a>
-        <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>">Actualités</a>
+        <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.products">Produits</a>
+        <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.news">Actualités</a>
         <div class="relative group">
-          <a href="/boutique.php" class="txt-court <?= navClass('boutique',$active)?>">Boutique</a>
+          <a href="/boutique.php" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.shop">Boutique</a>
           <div class="absolute left-0 mt-2 hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded">
-            <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>">Cartes</a>
-            <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>">Triptyques</a>
+            <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.cards">Cartes</a>
+            <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.triptychs">Triptyques</a>
           </div>
         </div>
-        <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>">Contact</a>
+        <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.contact">Contact</a>
       </nav>
 
-      <!-- Sélecteur de langue -->
-      <select id="lang-switcher" class="bg-gray-800 text-white rounded px-2 py-1">
+      <!-- Sélecteur de langue (masqué tant que les traductions ne sont pas finalisées) -->
+      <select id="lang-switcher" class="bg-gray-800 text-white rounded px-2 py-1 hidden">
         <option value="fr">FR</option>
         <option value="en">EN</option>
       </select>
 
       <!-- Panier Snipcart -->
-      <button class="snipcart-checkout txt-court uppercase tracking-wide">
+      <button class="snipcart-checkout txt-court uppercase tracking-wide" data-i18n="nav.cart">
         Panier
         <span class="snipcart-items-count"></span>
       </button>
@@ -54,11 +54,11 @@ function navClass($key, $active) {
   </div>
   <!-- Menu mobile -->
   <nav id="mobile-menu" class="fixed inset-0 bg-gray-900/95 flex flex-col items-center gap-6 p-8 text-white hidden md:hidden uppercase tracking-wide" aria-hidden="true">
-    <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>">Produits</a>
-    <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>">Actualités</a>
-    <a href="/boutique.php"        class="txt-court <?= navClass('boutique',$active)?>">Boutique</a>
-    <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>">Cartes</a>
-    <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>">Triptyques</a>
-    <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>">Contact</a>
+    <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.products">Produits</a>
+    <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.news">Actualités</a>
+    <a href="/boutique.php"        class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.shop">Boutique</a>
+    <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.cards">Cartes</a>
+    <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.triptychs">Triptyques</a>
+    <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.contact">Contact</a>
   </nav>
 </header>
