@@ -21,9 +21,13 @@ function navClass($key, $active) {
       <nav class="hidden md:flex gap-6 uppercase tracking-wide">
         <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>">Produits</a>
         <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>">Actualités</a>
-        <a href="/boutique.php"        class="txt-court <?= navClass('boutique',$active)?>">Boutique</a>
-        <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>">Cartes</a>
-        <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>">Triptyques</a>
+        <div class="relative group">
+          <a href="/boutique.php" class="txt-court <?= navClass('boutique',$active)?>">Boutique</a>
+          <div class="absolute left-0 mt-2 hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded">
+            <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>">Cartes</a>
+            <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>">Triptyques</a>
+          </div>
+        </div>
         <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>">Contact</a>
       </nav>
 
