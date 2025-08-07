@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const available = ['fr', 'en'];
   let lang = localStorage.getItem('lang') || defaultLang;
   if (!available.includes(lang)) lang = defaultLang;
+  document.documentElement.lang = lang;
 
   if (switcher) {
     if (!translationsReady || available.length < 2) {

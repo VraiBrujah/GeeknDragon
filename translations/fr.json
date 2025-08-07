@@ -16,5 +16,24 @@
   },
   "footer": {
     "made": "Conçu au Québec."
+  },
+  "contact": {
+    "title": "Demande de devis",
+    "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone (optionnel)",
+      "message": "Détail de la demande",
+      "submit": "Envoyer ma demande"
+    },
+    "info": {
+      "role": "Responsable produit"
+    }
+  },
+  "thankyou": {
+    "title": "Merci !",
+    "message": "Votre demande a bien été transmise à notre équipe.",
+    "backHome": "Retour à l'accueil"
   }
 }

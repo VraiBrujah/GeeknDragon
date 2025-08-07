@@ -40,7 +40,7 @@ function navClass($key, $active) {
       </nav>
 
       <!-- Sélecteur de langue (masqué tant que les traductions ne sont pas finalisées) -->
-      <select id="lang-switcher" class="bg-gray-800 text-white rounded px-2 py-1 hidden">
+      <select id="lang-switcher" class="bg-gray-800 text-white rounded px-2 py-1">
         <option value="fr">FR</option>
         <option value="en">EN</option>
       </select>
