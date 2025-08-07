@@ -5,6 +5,11 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+body {
+  background: url('/images/bg_texture.jpg') center/cover fixed;
+  color: #e5e7eb;
+}
+
 h1,h2,h3,h4,h5,h6,
 .btn,
 .txt-court {

@@ -7,7 +7,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
 <html lang="fr">
 <?php include 'head-common.php'; ?>
 
-<body class="bg-[url('images/bg_texture.jpg')] bg-cover bg-fixed text-gray-100">
+<body>
 
   <?php include 'header.php'; ?>
 
