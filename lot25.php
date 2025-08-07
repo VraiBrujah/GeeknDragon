@@ -2,9 +2,10 @@
 $active = 'boutique';
 $title  = "Lot de 25 – La Monnaie des Royaumes | Geek & Dragon";
 $metaDescription = "La monnaie universelle de votre univers : 25 pièces uniques du cuivre le plus humble à l’or ancestral.";
+$snipcartCssVersion = filemtime(__DIR__.'/css/snipcart.css');
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+<link rel="stylesheet" href="/css/snipcart.css?v=$snipcartCssVersion" />
 <style>
   body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center;}
@@ -39,7 +40,7 @@ function inStock(string $id): bool
   const lang = localStorage.getItem('snipcartLanguage') || 'fr';
   document.getElementById('snipcart').setAttribute('data-config-language', lang);
 </script>
-<script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+<script async src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>
 
 <main class="pt-32 pb-20">
   <section class="max-w-md mx-auto px-6">

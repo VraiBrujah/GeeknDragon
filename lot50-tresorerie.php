@@ -2,9 +2,10 @@
 $active = 'boutique';
 $title  = "Lot de 50 – La Trésorerie du Seigneur Marchand | Geek & Dragon";
 $metaDescription = "La richesse sans limite : 50 pièces, 10 de chaque métal rare, pour une trésorerie digne d’un Seigneur Marchand.";
+$snipcartCssVersion = filemtime(__DIR__.'/css/snipcart.css');
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+<link rel="stylesheet" href="/css/snipcart.css?v=$snipcartCssVersion" />
 <style>
   body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center;}
@@ -39,7 +40,7 @@ function inStock(string $id): bool
   const lang = localStorage.getItem('snipcartLanguage') || 'fr';
   document.getElementById('snipcart').setAttribute('data-config-language', lang);
 </script>
-<script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+<script async src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>
 
 <main class="pt-32 pb-20">
   <section class="max-w-md mx-auto px-6">

@@ -2,9 +2,10 @@
 $active = 'boutique';
 $title  = 'Boutique | Geek & Dragon';
 $metaDescription = "Achetez nos cartes et accessoires immersifs pour D&D.";
+$snipcartCssVersion = filemtime(__DIR__.'/css/snipcart.css');
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
+<link rel="stylesheet" href="/css/snipcart.css?v=$snipcartCssVersion" />
 <!-- Snipcart script is loaded asynchronously below in the body to avoid blocking the page -->
 <style>
   body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
@@ -46,7 +47,7 @@ function inStock(string $id): bool
   const lang = localStorage.getItem('snipcartLanguage') || 'fr';
   document.getElementById('snipcart').setAttribute('data-config-language', lang);
 </script>
-<script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+<script async src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>
 
 <main class="pt-24 md:pt-32">
 
