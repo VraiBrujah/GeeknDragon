@@ -181,6 +181,14 @@ input.gd-field:focus, textarea.gd-field:focus{
   filter: brightness(1.3) contrast(1.1);
 }
 
+/* Contact page parchment wrapper */
+
+.parchment {
+  background: #fdf8e4 url('../images/parchment_fibers.png') repeat;
+  box-shadow: 0 15px 40px -10px rgba(0,0,0,.7);
+  border: 3px solid #c4a36d;
+}
+
 /* Header cart button */
 
 .snipcart-checkout{
@@ -354,7 +362,7 @@ input.gd-field:focus, textarea.gd-field:focus{
   height: auto;
   max-height: 20rem;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .swiper-button-prev,

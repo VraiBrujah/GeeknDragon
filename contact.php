@@ -2,23 +2,7 @@
 $active = 'contact';
 $title  = 'Demande de devis | Geek & Dragon';
 $metaDescription = "Demande de devis et informations pour vos projets immersifs.";
-$extraHead = <<<HTML
-<style>
-    body {
-      background: url('images/bg_texture.jpg') center/cover fixed;
-      color: #1e1b16;
-    }
-    .parchment {
-      background: #fdf8e4 url('images/parchment_fibers.png') repeat;
-      box-shadow: 0 15px 40px -10px rgba(0,0,0,.7);
-      border: 3px solid #c4a36d;
-    }
-    label {
-      color: #4b3e2c;
-      font-weight: 600;
-    }
-  </style>
-HTML;
+$extraHead = '';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -37,23 +21,23 @@ HTML;
       <form action="https://formsubmit.co/contact@geekndragon.com" method="POST" class="space-y-6">
 
         <div>
-          <label for="name">Nom complet</label>
-          <input id="name" name="Nom" type="text" required class="w-full mt-1 rounded-md border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          <label for="name" class="text-[#4b3e2c] font-semibold">Nom complet</label>
+          <input id="name" name="Nom" type="text" required class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
         </div>
 
         <div>
-          <label for="email">Adresse e-mail</label>
-          <input id="email" name="Email" type="email" required class="w-full mt-1 rounded-md border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          <label for="email" class="text-[#4b3e2c] font-semibold">Adresse e-mail</label>
+          <input id="email" name="Email" type="email" required class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
         </div>
 
         <div>
-          <label for="phone">Téléphone (optionnel)</label>
-          <input id="phone" name="Téléphone" type="tel" class="w-full mt-1 rounded-md border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          <label for="phone" class="text-[#4b3e2c] font-semibold">Téléphone (optionnel)</label>
+          <input id="phone" name="Téléphone" type="tel" class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
         </div>
 
         <div>
-          <label for="message">Détail de la demande</label>
-          <textarea id="message" name="Message" rows="5" required class="w-full mt-1 rounded-md border border-gray-300 p-3 focus:outline-none focus:ring-2 focus:ring-indigo-600"></textarea>
+          <label for="message" class="text-[#4b3e2c] font-semibold">Détail de la demande</label>
+          <textarea id="message" name="Message" rows="5" required class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600"></textarea>
         </div>
 
         <!-- Options de FormSubmit -->
