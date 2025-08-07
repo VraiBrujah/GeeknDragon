@@ -8,6 +8,72 @@ document.querySelectorAll('.fade-up').forEach(el=>{
   observer.observe(el);
 });
 
+// Menu mobile avec focus trap
+document.addEventListener('DOMContentLoaded', () => {
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (!menuBtn || !mobileMenu) return;
+
+  const focusableSelectors = 'a[href], button:not([disabled]), select, textarea, input, [tabindex]:not([tabindex="-1"])';
+  let focusable = [];
+  let firstEl, lastEl;
+
+  const setFocusable = () => {
+    focusable = Array.from(mobileMenu.querySelectorAll(focusableSelectors));
+    firstEl = focusable[0];
+    lastEl = focusable[focusable.length - 1];
+  };
+
+  const trapFocus = e => {
+    if (e.key !== 'Tab') return;
+    if (focusable.length === 0) return;
+    if (e.shiftKey) {
+      if (document.activeElement === firstEl) {
+        e.preventDefault();
+        lastEl.focus();
+      }
+    } else {
+      if (document.activeElement === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
+      }
+    }
+  };
+
+  const openMenu = () => {
+    mobileMenu.classList.remove('hidden');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    setFocusable();
+    if (firstEl) firstEl.focus();
+    document.addEventListener('keydown', trapFocus);
+  };
+
+  const closeMenu = () => {
+    mobileMenu.classList.add('hidden');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    document.removeEventListener('keydown', trapFocus);
+    menuBtn.focus();
+  };
+
+  menuBtn.addEventListener('click', () => {
+    if (menuBtn.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+    }
+  });
+});
+
 /* -------------------------------------------------------
    Geek & Dragon – Vidéos séquentielles + audio dès geste
    ------------------------------------------------------- */

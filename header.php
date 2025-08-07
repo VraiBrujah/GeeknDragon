@@ -17,6 +17,14 @@ function navClass($key, $active) {
     </a>
 
     <div class="flex items-center gap-6">
+      <!-- Bouton hamburger -->
+      <button id="menu-btn" class="md:hidden text-white focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="sr-only">Menu</span>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
       <!-- Navigation -->
       <nav class="hidden md:flex gap-6 uppercase tracking-wide">
         <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>">Produits</a>
@@ -44,4 +52,13 @@ function navClass($key, $active) {
       </button>
     </div>
   </div>
+  <!-- Menu mobile -->
+  <nav id="mobile-menu" class="fixed inset-0 bg-gray-900/95 flex flex-col items-center gap-6 p-8 text-white hidden md:hidden uppercase tracking-wide" aria-hidden="true">
+    <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>">Produits</a>
+    <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>">Actualités</a>
+    <a href="/boutique.php"        class="txt-court <?= navClass('boutique',$active)?>">Boutique</a>
+    <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>">Cartes</a>
+    <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>">Triptyques</a>
+    <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>">Contact</a>
+  </nav>
 </header>
