@@ -53,7 +53,7 @@ function inStock(string $id): bool
 
   <!-- ===== Bannière d'ouverture ===== -->
   <section class="relative min-h-[24rem] md:min-h-[32rem]">
-    <img src="images/banner_luxe_coins.jpg" alt="Pluie de pièces luxueuses" class="absolute inset-0 w-full h-full object-cover" loading="eager">
+    <img src="images/banner_luxe_coins.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="eager">
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
         <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Des pièces et cartes d'équipement plus luxueuses qu'une figurine de dragon à 300 $ : utilisées à chaque session et conçues au&nbsp;Québec.</p>
@@ -84,7 +84,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot10')): ?>
         <div class="card flex flex-col">
           <a href="lot10.php?from=pieces">
-            <img src="images/Piece/pro/p10.png" alt="Lot de 10<br>L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
+            <img src="images/Piece/pro/p10.png" alt="Lot de 10 – L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
           <p class="text-center mb-4 text-gray-300">10 pièces gravées (2 de chaque métal), parfaites pour vos premières quêtes.</p>
@@ -126,7 +126,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot25')): ?>
         <div class="card flex flex-col">
           <a href="lot25.php?from=pieces">
-            <img src="images/Piece/pro/p25.png" alt="Lot de 25–La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
+            <img src="images/Piece/pro/p25.png" alt="Lot de 25 – La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
           <p class="text-center mb-4 text-gray-300">25 pièces uniques du cuivre à l’or, la bourse complète du marchand.</p>
@@ -154,7 +154,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot50-essence')): ?>
         <div class="card flex flex-col">
           <a href="lot50-essence.php?from=pieces">
-            <img src="images/Piece/pro/p50.png" alt="Lot de 50–L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
+            <img src="images/Piece/pro/p50.png" alt="Lot de 50 – L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>L’Essence des Royaumes</h4>
           <p class="text-center mb-4 text-gray-300">50 pièces, deux de chaque type, pour ressentir la richesse royale.</p>
@@ -182,7 +182,7 @@ function inStock(string $id): bool
         <?php if(inStock('lot50-tresorerie')): ?>
         <div class="card flex flex-col">
           <a href="lot50-tresorerie.php?from=pieces">
-            <img src="images/Piece/pro/p50.png" alt="Lot de 50–La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
+            <img src="images/Piece/pro/p50.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
           </a>
           <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>La Trésorerie du Seigneur Marchand</h4>
           <p class="text-center mb-4 text-gray-300">50 pièces, dix de chaque métal rare, la trésorerie du Seigneur Marchand.</p>
