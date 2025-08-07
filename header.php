@@ -22,6 +22,8 @@ function navClass($key, $active) {
         <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>">Produits</a>
         <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>">Actualités</a>
         <a href="/boutique.php"        class="txt-court <?= navClass('boutique',$active)?>">Boutique</a>
+        <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>">Cartes</a>
+        <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>">Triptyques</a>
         <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>">Contact</a>
       </nav>
 
