@@ -7,7 +7,6 @@ $extraHead = <<<HTML
 <!-- Snipcart styles -->
 <link rel="stylesheet" href="/css/snipcart.css?v=$snipcartCssVersion" />
 <style>
-  body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center;}
   .snipcart-modal__container{background:#1f2937!important;}
   .snipcart .snipcart-button-primary{background-image:linear-gradient(to right,#4f46e5,#7c3aed)!important;border:none;}
