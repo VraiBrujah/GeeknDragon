@@ -7,7 +7,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
 <!DOCTYPE html>
 <html lang="fr">
 <?php include '../head-common.php'; ?>
-<body class="bg-[url('/images/bg_texture.jpg')] bg-cover bg-fixed text-gray-100">
+<body>
   <?php include '../header.php'; ?>
 
   <main class="pt-32">

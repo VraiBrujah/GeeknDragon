@@ -2,16 +2,12 @@
 $active='contact';
 $title = 'Merci !!! | Geek & Dragon';
 $metaDescription = "Confirmation de l'envoi de votre message à Geek & Dragon.";
-$extraHead = <<<HTML
-<style>
-  body{background:url('images/bg_texture.jpg') center/cover fixed;color:#fef9e7;}
-</style>
-HTML;
+$extraHead = '';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <?php include 'head-common.php'; ?>
-<body class="bg-cover bg-fixed">
+<body>
   <?php include 'header.php'; ?>
 
   <main class="pt-32 flex items-center justify-center min-h-screen">

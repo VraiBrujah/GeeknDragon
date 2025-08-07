@@ -8,7 +8,6 @@ $extraHead = <<<HTML
 <link rel="stylesheet" href="/css/snipcart.css?v=$snipcartCssVersion" />
 <!-- Snipcart script is loaded asynchronously below in the body to avoid blocking the page -->
 <style>
-  body{background:url('images/bg_texture.jpg') center/cover fixed;color:#e5e7eb;}
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
   .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
   .snipcart-modal__container{background:#1f2937!important;}
