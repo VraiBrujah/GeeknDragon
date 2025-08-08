@@ -16,6 +16,7 @@
   <meta name="twitter:title" content="<?= htmlspecialchars($title ?? 'Geek & Dragon') ?>" />
   <meta name="twitter:description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/images/logo.png') ?>" />
+  <link rel="canonical" href="<?= htmlspecialchars($metaUrl ?? '') ?>">
   <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
   <script src="/js/vendor.bundle.min.js?v=<?= filemtime(__DIR__.'/js/vendor.bundle.min.js') ?>"></script>
   <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">

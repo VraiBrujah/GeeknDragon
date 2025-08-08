@@ -2,6 +2,7 @@
 $active = 'boutique';
 $title  = "Lot de 25 – La Monnaie des Royaumes | Geek & Dragon";
 $metaDescription = "La monnaie universelle de votre univers : 25 pièces uniques du cuivre le plus humble à l’or ancestral.";
+$metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/lot25.php';
 $snipcartCssVersion = filemtime(__DIR__.'/css/snipcart.css');
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
@@ -108,6 +109,22 @@ function inStock(string $id): bool
 </main>
 
 <?php include 'footer.php'; ?>
+<script type="application/ld+json">
+<?= json_encode([
+    '@context' => 'https://schema.org/',
+    '@type' => 'Product',
+    'name' => 'Lot de 25 – La Monnaie des Royaumes',
+    'description' => 'La monnaie universelle de votre univers : 25 pièces uniques du cuivre le plus humble à l’or ancestral.',
+    'image' => 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/images/Piece/pro/argent/a100.png',
+    'sku' => 'lot25',
+    'offers' => [
+        '@type' => 'Offer',
+        'price' => 145,
+        'priceCurrency' => 'CAD',
+        'availability' => inStock('lot25') ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+    ],
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>

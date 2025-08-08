@@ -2,6 +2,7 @@
 $active = 'boutique';
 $title  = "Lot de 50 – L’Essence des Royaumes | Geek & Dragon";
 $metaDescription = "Le pactole du collectionneur : 50 pièces, deux exemplaires de chaque type pour ressentir la richesse royale.";
+$metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/lot50-essence.php';
 $snipcartCssVersion = filemtime(__DIR__.'/css/snipcart.css');
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
@@ -108,6 +109,22 @@ function inStock(string $id): bool
 </main>
 
 <?php include 'footer.php'; ?>
+<script type="application/ld+json">
+<?= json_encode([
+    '@context' => 'https://schema.org/',
+    '@type' => 'Product',
+    'name' => 'Lot de 50 – L’Essence des Royaumes',
+    'description' => 'Le pactole du collectionneur : 50 pièces, deux exemplaires de chaque type pour ressentir la richesse royale.',
+    'image' => 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/images/Piece/pro/argent/a1000.png',
+    'sku' => 'lot50-essence',
+    'offers' => [
+        '@type' => 'Offer',
+        'price' => 275,
+        'priceCurrency' => 'CAD',
+        'availability' => inStock('lot50-essence') ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+    ],
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>

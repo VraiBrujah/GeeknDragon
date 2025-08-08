@@ -2,6 +2,7 @@
 $active = 'boutique';
 $title  = "Lot de 50 – La Trésorerie du Seigneur Marchand | Geek & Dragon";
 $metaDescription = "La richesse sans limite : 50 pièces, 10 de chaque métal rare, pour une trésorerie digne d’un Seigneur Marchand.";
+$metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/lot50-tresorerie.php';
 $snipcartCssVersion = filemtime(__DIR__.'/css/snipcart.css');
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
@@ -121,6 +122,22 @@ function inStock(string $id): bool
 </main>
 
 <?php include 'footer.php'; ?>
+<script type="application/ld+json">
+<?= json_encode([
+    '@context' => 'https://schema.org/',
+    '@type' => 'Product',
+    'name' => 'Lot de 50 – La Trésorerie du Seigneur Marchand',
+    'description' => 'La richesse sans limite : 50 pièces, 10 de chaque métal rare, pour une trésorerie digne d’un Seigneur Marchand.',
+    'image' => 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/images/Piece/pro/argent/a10000.png',
+    'sku' => 'lot50-tresorerie',
+    'offers' => [
+        '@type' => 'Offer',
+        'price' => 275,
+        'priceCurrency' => 'CAD',
+        'availability' => inStock('lot50-tresorerie') ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+    ],
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>
