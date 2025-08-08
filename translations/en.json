@@ -35,5 +35,24 @@
     "title": "Thank you!",
     "message": "Your request has been sent to our team.",
     "backHome": "Back to home"
+  },
+  "product": {
+    "back": "Back to shop",
+    "multiplier": "Multiplier",
+    "unit": "single",
+    "add": "Add",
+    "outOfStock": "Out of stock",
+    "securePayment": "Secure payment via Snipcart",
+    "realTimeStock": "Stock updated in real time"
+  },
+  "news": {
+    "flim2025": {
+      "heading": "News – FLIM 2025",
+      "title": "Heroes level 20, an overly tenacious raccoon, and... our coins",
+      "video1": "The mayor honors the three heroes with real silver",
+      "video2": "When everything is decided by a coin... dragon or star?",
+      "video3": "Game finale: The raccoon, the stars... and chaos",
+      "youtube": "Watch the full session on the official YouTube channel:"
+    }
   }
 }
