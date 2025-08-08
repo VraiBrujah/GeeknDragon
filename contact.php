@@ -1,8 +1,20 @@
 <?php
+session_start();
 $active = 'contact';
 $title  = 'Demande de devis | Geek & Dragon';
 $metaDescription = "Demande de devis et informations pour vos projets immersifs.";
 $extraHead = '';
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$csrfToken = $_SESSION['csrf_token'];
+
+$errors = $_SESSION['errors'] ?? [];
+$old = $_SESSION['old'] ?? [];
+unset($_SESSION['errors'], $_SESSION['old']);
+
+$recaptchaSiteKey = getenv('RECAPTCHA_SITE_KEY');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -18,31 +30,43 @@ $extraHead = '';
       <h1 class="text-4xl font-bold text-center mb-6" data-i18n="contact.title">Demande de devis</h1>
         <p class="text-center mb-8 text-lg txt-court" data-i18n="contact.subtitle">Pour recevoir une offre personnalisée, remplis ce formulaire magique.</p>
 
-      <form action="https://formsubmit.co/contact@geekndragon.com" method="POST" class="space-y-6">
+      <form action="contact-handler.php" method="POST" class="space-y-6">
+
+        <?php if (!empty($errors)): ?>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          <ul class="list-disc list-inside">
+            <?php foreach ($errors as $error): ?>
+              <li><?= htmlspecialchars($error) ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <?php endif; ?>
 
         <div>
           <label for="name" class="text-[#4b3e2c] font-semibold" data-i18n="contact.form.name">Nom complet</label>
-          <input id="name" name="Nom" type="text" required class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          <input id="name" name="Nom" type="text" required value="<?= htmlspecialchars($old['Nom'] ?? '') ?>" class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
         </div>
 
         <div>
           <label for="email" class="text-[#4b3e2c] font-semibold" data-i18n="contact.form.email">Adresse e-mail</label>
-          <input id="email" name="Email" type="email" required class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          <input id="email" name="Email" type="email" required value="<?= htmlspecialchars($old['Email'] ?? '') ?>" class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
         </div>
 
         <div>
           <label for="phone" class="text-[#4b3e2c] font-semibold" data-i18n="contact.form.phone">Téléphone (optionnel)</label>
-          <input id="phone" name="Téléphone" type="tel" class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
+          <input id="phone" name="Téléphone" type="tel" value="<?= htmlspecialchars($old['Téléphone'] ?? '') ?>" class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
         </div>
 
         <div>
           <label for="message" class="text-[#4b3e2c] font-semibold" data-i18n="contact.form.message">Détail de la demande</label>
-          <textarea id="message" name="Message" rows="5" required class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600"></textarea>
+          <textarea id="message" name="Message" rows="5" required class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600"><?= htmlspecialchars($old['Message'] ?? '') ?></textarea>
         </div>
 
-        <!-- Options de FormSubmit -->
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://geekndragon.com/merci.php" />
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>" />
+
+        <?php if ($recaptchaSiteKey): ?>
+        <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars($recaptchaSiteKey) ?>"></div>
+        <?php endif; ?>
 
           <button type="submit" class="btn w-full bg-indigo-700 hover:bg-indigo-600 text-white font-semibold py-3 rounded-full transition" data-i18n="contact.form.submit">
             Envoyer ma demande
@@ -60,5 +84,8 @@ $extraHead = '';
 
   <?php include 'footer.php'; ?>
   <script src="/js/app.js"></script>
+  <?php if ($recaptchaSiteKey): ?>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <?php endif; ?>
 </body>
 </html>
