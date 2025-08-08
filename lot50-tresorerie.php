@@ -50,12 +50,12 @@ function inStock(string $id): bool
           <div class="swiper-wrapper">
             <div class="swiper-slide">
               <a href="images/Piece/pro/argent/a10000.png" data-fancybox="lot50-tresorerie">
-                <img loading="lazy" src="images/Piece/pro/argent/a10000.png" alt="Vue rapprochée d’une pièce du lot de 50 Trésorerie" width="1024" height="1024" class="rounded">
+                <img loading="lazy" src="images/Piece/pro/argent/a10000.png" alt="Gros plan sur une pièce en métal rare du lot de 50 Trésorerie" width="1024" height="1024" class="rounded">
               </a>
             </div>
             <div class="swiper-slide">
               <a href="images/Piece/pro/lot100Piece.jpg" data-fancybox="lot50-tresorerie">
-                <img loading="lazy" src="images/Piece/pro/lot100Piece.jpg" alt="Vue d’ensemble du lot de 50 pièces Trésorerie" width="1222" height="915" class="rounded">
+                <img loading="lazy" src="images/Piece/pro/lot100Piece.jpg" alt="Vue d’ensemble des 50 pièces de métaux rares" width="1222" height="915" class="rounded">
               </a>
             </div>
           </div>
@@ -65,8 +65,8 @@ function inStock(string $id): bool
           </div>
       <div class="swiper swiper-thumbs mb-6">
           <div class="swiper-wrapper">
-            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/argent/a10000.png" alt="Vue rapprochée d’une pièce du lot de 50 Trésorerie" width="100" height="100" class="rounded"></div>
-            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot100Piece.jpg" alt="Vue d’ensemble du lot de 50 pièces Trésorerie" width="100" height="100" class="rounded"></div>
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/argent/a10000.png" alt="Pièce en métal rare du lot de 50 Trésorerie" width="100" height="100" class="rounded"></div>
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot100Piece.jpg" alt="Vue d’ensemble des 50 pièces rares" width="100" height="100" class="rounded"></div>
           </div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 50<br>La Trésorerie du Seigneur Marchand</h1>

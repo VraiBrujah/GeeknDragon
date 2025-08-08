@@ -50,12 +50,12 @@ function inStock(string $id): bool
           <div class="swiper-wrapper">
             <div class="swiper-slide">
               <a href="images/Piece/pro/argent/a100.png" data-fancybox="lot25">
-                <img loading="lazy" src="images/Piece/pro/argent/a100.png" alt="Vue rapprochée d’une pièce du lot de 25" width="1024" height="1024" class="rounded">
+                <img loading="lazy" src="images/Piece/pro/argent/a100.png" alt="Gros plan sur une pièce en argent du lot de 25" width="1024" height="1024" class="rounded">
               </a>
             </div>
             <div class="swiper-slide">
               <a href="images/Piece/pro/lot250Piece.jpg" data-fancybox="lot25">
-                <img loading="lazy" src="images/Piece/pro/lot250Piece.jpg" alt="Vue d’ensemble du lot de 25 pièces" width="1189" height="857" class="rounded">
+                <img loading="lazy" src="images/Piece/pro/lot250Piece.jpg" alt="Vue d’ensemble des 25 pièces métalliques variées" width="1189" height="857" class="rounded">
               </a>
             </div>
           </div>
@@ -65,8 +65,8 @@ function inStock(string $id): bool
           </div>
       <div class="swiper swiper-thumbs mb-6">
           <div class="swiper-wrapper">
-            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/argent/a100.png" alt="Vue rapprochée d’une pièce du lot de 25" width="100" height="100" class="rounded"></div>
-            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot250Piece.jpg" alt="Vue d’ensemble du lot de 25 pièces" width="100" height="100" class="rounded"></div>
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/argent/a100.png" alt="Pièce en argent du lot de 25" width="100" height="100" class="rounded"></div>
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot250Piece.jpg" alt="Vue d’ensemble des 25 pièces métalliques" width="100" height="100" class="rounded"></div>
           </div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 25<br>La Monnaie des Royaumes</h1>

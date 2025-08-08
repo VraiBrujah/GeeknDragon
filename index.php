@@ -15,7 +15,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
 
     <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative">
-      <img src="images/hero_flbg.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="">
+      <img src="images/hero_flbg.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="" role="presentation">
       <div class="relative z-10 max-w-3xl p-6">
         <h2 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h2>
           <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
@@ -34,17 +34,17 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
           <a href="boutique.php#cartes" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Cartes d’équipement</h4>
             <p>560 cartes illustrées pour remplacer la lecture fastidieuse du manuel.</p>
-              <img src="images/cartes_equipement.jpg" alt="Cartes d'équipement" class="rounded mb-4" loading="lazy">
+              <img src="images/cartes_equipement.jpg" alt="560 cartes d’équipement illustrées" class="rounded mb-4" loading="lazy">
           </a>
           <a href="boutique.php#pieces" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Pièces métalliques</h4>
             <p>Monnaie physique pour ressentir chaque trésor et influencer la chance à la table.</p>
-              <img src="images/piece.png" alt="Pièces métalliques" class="rounded mb-4" loading="lazy">
+              <img src="images/piece.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
           </a>
           <a href="boutique.php#triptyques" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Fiche Triptyque</h4>
             <p>Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes.</p>
-              <img src="images/triptyque_fiche.jpg" alt="Triptyque" class="rounded mb-4" loading="lazy">
+              <img src="images/triptyque_fiche.jpg" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
           </a>
         </div>
       </div>

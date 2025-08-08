@@ -50,12 +50,12 @@ function inStock(string $id): bool
           <div class="swiper-wrapper">
             <div class="swiper-slide">
               <a href="images/Piece/pro/p10.png" data-fancybox="lot10">
-                <img loading="lazy" src="images/Piece/pro/p10.png" alt="Vue rapprochée d’une pièce du lot de 10" width="400" height="400" class="rounded">
+                <img loading="lazy" src="images/Piece/pro/p10.png" alt="Gros plan sur une pièce en métal gravé du lot de 10" width="400" height="400" class="rounded">
               </a>
             </div>
             <div class="swiper-slide">
               <a href="images/Piece/pro/lot10Piece.jpg" data-fancybox="lot10">
-                <img loading="lazy" src="images/Piece/pro/lot10Piece.jpg" alt="Vue d’ensemble du lot de 10 pièces" width="1452" height="1385" class="rounded">
+                <img loading="lazy" src="images/Piece/pro/lot10Piece.jpg" alt="Vue d’ensemble des 10 pièces métalliques gravées" width="1452" height="1385" class="rounded">
               </a>
             </div>
           </div>
@@ -65,8 +65,8 @@ function inStock(string $id): bool
           </div>
       <div class="swiper swiper-thumbs mb-6">
           <div class="swiper-wrapper">
-            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/p10.png" alt="Vue rapprochée d’une pièce du lot de 10" width="100" height="100" class="rounded"></div>
-            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot10Piece-300.jpg" alt="Vue d’ensemble du lot de 10 pièces" width="100" height="100" class="rounded"></div>
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/p10.png" alt="Pièce en métal gravé du lot de 10" width="100" height="100" class="rounded"></div>
+            <div class="swiper-slide"><img loading="lazy" src="images/Piece/pro/lot10Piece-300.jpg" alt="Vue d’ensemble des 10 pièces métalliques" width="100" height="100" class="rounded"></div>
           </div>
       </div>
       <h1 class="text-3xl font-bold mb-4 text-center">Lot de 10<br>L’Offrande du Vagabond</h1>
