@@ -7,15 +7,13 @@
   <p class="text-center mb-4 text-gray-300"><?= htmlspecialchars($product['desc']) ?></p>
   <div class="mt-auto flex flex-col items-center">
     <div class="multiplier-slot">
-      <?php if (!empty($product['multiplier'])): ?>
+      <?php if (!empty($product['multipliers'])): ?>
       <label for="multiplier-<?= htmlspecialchars($product['id']) ?>" class="mx-auto text-center">
         <span class="sr-only">Multiplicateur</span>
         <select id="multiplier-<?= htmlspecialchars($product['id']) ?>" class="multiplier-select text-black" data-target="<?= htmlspecialchars($product['id']) ?>">
-          <option value="1">unitaire</option>
-          <option value="10">x10</option>
-          <option value="100">x100</option>
-          <option value="1000">x1000</option>
-          <option value="10000">x10000</option>
+          <?php foreach ($product['multipliers'] as $m): ?>
+          <option value="<?= $m ?>"><?= $m == 1 ? 'unitaire' : 'x' . $m ?></option>
+          <?php endforeach; ?>
         </select>
       </label>
       <?php endif; ?>
@@ -34,10 +32,10 @@
             data-item-url="boutique.php"
             data-item-description="<?= htmlspecialchars($product['desc']) ?>"
             data-item-quantity="1"
-            <?php if (!empty($product['multiplier'])): ?>
+            <?php if (!empty($product['multipliers'])): ?>
             data-item-custom1-name="Multiplicateur"
-            data-item-custom1-options="1|10|100|1000|10000"
-            data-item-custom1-value="1"
+            data-item-custom1-options="<?= implode('|', $product['multipliers']) ?>"
+            data-item-custom1-value="<?= $product['multipliers'][0] ?>"
             <?php endif; ?>>
       Ajouter
     </button>
