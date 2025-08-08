@@ -57,9 +57,9 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
         <h3 class="text-4xl font-bold mb-12">Boutique</h3>
           <p class="mb-8 txt-court">Paiement sécurisé via Snipcart
             <span class="payment-icons">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="American Express">
+              <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
+              <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
+              <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
             </span>
             &nbsp;|&nbsp; Stocks mis à jour en temps réel.
           </p>
