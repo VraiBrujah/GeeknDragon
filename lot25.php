@@ -15,7 +15,6 @@ $extraHead = <<<HTML
 </style>
 HTML;
 $stock    = json_decode(file_get_contents(__DIR__ . '/stock.json'), true) ?? [];
-$snipcartKey = getenv('SNIPCART_API_KEY');
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 function inStock(string $id): bool
 {
@@ -28,19 +27,12 @@ function inStock(string $id): bool
 <?php include 'head-common.php'; ?>
 <body>
 <?php include 'header.php'; ?>
-<div hidden id="snipcart"
-     data-api-key="<?= htmlspecialchars($snipcartKey ?? '') ?>"
-     data-config-add-product-behavior="overlay"
-     data-config-locales="fr,en"
-     data-config-language="fr"></div>
-<?php if (!$snipcartKey): ?>
-<p class="text-red-500 text-center">SNIPCART_API_KEY missing</p>
-<?php endif; ?>
-<script>
-  const lang = localStorage.getItem('snipcartLanguage') || 'fr';
-  document.getElementById('snipcart').setAttribute('data-config-language', lang);
-</script>
-<script async src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>
+<?php
+$snipcartLanguage = 'fr';
+$snipcartLocales = 'fr,en';
+$snipcartAddProductBehavior = 'overlay';
+include 'snipcart-init.php';
+?>
 
 <main class="pt-32 pb-20">
   <section class="max-w-md mx-auto px-6">
