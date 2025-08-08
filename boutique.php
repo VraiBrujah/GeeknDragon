@@ -26,44 +26,19 @@ function inStock(string $id): bool
 }
 
 // Liste des produits
-$products = [
-    [
-        'id' => 'lot10',
-        'name' => 'Lot de 10<br>L’Offrande du Vagabond',
-        'price' => 60,
-        'img' => 'images/Piece/pro/p10.png',
-        'desc' => '10 pièces gravées (2 de chaque métal), parfaites pour vos premières quêtes.',
-        'url' => 'lot10.php?from=pieces',
-        'multiplier' => true,
-    ],
-    [
-        'id' => 'lot25',
-        'name' => 'Lot de 25<br>La Monnaie des Royaumes',
-        'price' => 145,
-        'img' => 'images/Piece/pro/p25.png',
-        'desc' => '25 pièces uniques du cuivre à l’or, la bourse complète du marchand.',
-        'url' => 'lot25.php?from=pieces',
-        'multiplier' => false,
-    ],
-    [
-        'id' => 'lot50-essence',
-        'name' => 'Lot de 50<br>L’Essence des Royaumes',
-        'price' => 275,
-        'img' => 'images/Piece/pro/p50.png',
-        'desc' => '50 pièces, deux de chaque type, pour ressentir la richesse royale.',
-        'url' => 'lot50-essence.php?from=pieces',
-        'multiplier' => false,
-    ],
-    [
-        'id' => 'lot50-tresorerie',
-        'name' => 'Lot de 50<br>La Trésorerie du Seigneur Marchand',
-        'price' => 275,
-        'img' => 'images/Piece/pro/p50.png',
-        'desc' => '50 pièces, dix de chaque métal rare, la trésorerie du Seigneur Marchand.',
-        'url' => 'lot50-tresorerie.php?from=pieces',
-        'multiplier' => true,
-    ],
-];
+$data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
+$products = [];
+foreach ($data as $id => $p) {
+    $products[] = [
+        'id' => $id,
+        'name' => str_replace(' – ', '<br>', $p['name']),
+        'price' => $p['price'],
+        'img' => $p['images'][0] ?? '',
+        'desc' => $p['description'],
+        'url' => 'product.php?id=' . urlencode($id) . '&from=pieces',
+        'multipliers' => $p['multipliers'] ?? [],
+    ];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">

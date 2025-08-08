@@ -1,0 +1,46 @@
+{
+  "lot10": {
+    "name": "Lot de 10 – L’Offrande du Vagabond",
+    "price": 60,
+    "description": "Lot de 10 pièces finement gravées (2 de chaque métal), l’allié parfait des premières quêtes.",
+    "images": [
+      "images/Piece/pro/p10.png",
+      "images/Piece/pro/lot10Piece.jpg"
+    ],
+    "multipliers": [1,10,100,1000,10000],
+    "stock": 10
+  },
+  "lot25": {
+    "name": "Lot de 25 – La Monnaie des Royaumes",
+    "price": 145,
+    "description": "Coffret de 25 pièces différentes, pour ressentir la monnaie des royaumes entre vos doigts.",
+    "images": [
+      "images/Piece/pro/argent/a100.png",
+      "images/Piece/pro/lot250Piece.jpg"
+    ],
+    "multipliers": [],
+    "stock": 10
+  },
+  "lot50-essence": {
+    "name": "Lot de 50 – L’Essence des Royaumes",
+    "price": 275,
+    "description": "50 pièces (2 de chaque type), le coffret luxueux pour ressentir la richesse royale.",
+    "images": [
+      "images/Piece/pro/argent/a1000.png",
+      "images/Piece/pro/lot50Piece.jpg"
+    ],
+    "multipliers": [],
+    "stock": 10
+  },
+  "lot50-tresorerie": {
+    "name": "Lot de 50 – La Trésorerie du Seigneur Marchand",
+    "price": 275,
+    "description": "50 pièces (10 de chaque métal rare), la trésorerie ultime pour une opulence assumée.",
+    "images": [
+      "images/Piece/pro/argent/a10000.png",
+      "images/Piece/pro/lot100Piece.jpg"
+    ],
+    "multipliers": [1,10,100,1000,10000],
+    "stock": 10
+  }
+}
