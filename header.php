@@ -7,6 +7,58 @@ $active = $active ?? '';
 function navClass($key, $active) {
   return $key === $active ? 'text-indigo-400 underline' : 'hover:text-indigo-400';
 }
+$navItems = [
+  '/index.php#produits' => [
+    'slug'  => 'index',
+    'label' => 'Produits',
+    'i18n'  => 'nav.products'
+  ],
+  '/index.php#actus' => [
+    'slug'  => 'index',
+    'label' => 'Actualités',
+    'i18n'  => 'nav.news'
+  ],
+  '/boutique.php' => [
+    'slug'  => 'boutique',
+    'label' => 'Boutique',
+    'i18n'  => 'nav.shop',
+    'children' => [
+      '/boutique.php#cartes' => [
+        'slug'  => 'boutique',
+        'label' => 'Cartes',
+        'i18n'  => 'nav.cards'
+      ],
+      '/boutique.php#triptyques' => [
+        'slug'  => 'boutique',
+        'label' => 'Triptyques',
+        'i18n'  => 'nav.triptychs'
+      ]
+    ]
+  ],
+  '/index.php#contact' => [
+    'slug'  => 'index',
+    'label' => 'Contact',
+    'i18n'  => 'nav.contact'
+  ]
+];
+
+function renderNav(array $items, string $active, bool $mobile = false): void {
+  foreach ($items as $href => $item) {
+    $class = 'txt-court ' . navClass($item['slug'], $active);
+    if (isset($item['children']) && !$mobile) {
+      echo '<div class="relative group">';
+      echo '<a href="' . $href . '" class="' . $class . '" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
+      echo '<div class="absolute left-0 mt-2 hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded">';
+      renderNav($item['children'], $active, $mobile);
+      echo '</div></div>';
+    } else {
+      echo '<a href="' . $href . '" class="' . $class . '" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
+      if (isset($item['children']) && $mobile) {
+        renderNav($item['children'], $active, $mobile);
+      }
+    }
+  }
+}
 ?>
 <header class="backdrop-blur bg-gray-900/70 fixed top-0 w-full z-50">
   <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
@@ -27,16 +79,7 @@ function navClass($key, $active) {
 
       <!-- Navigation -->
       <nav class="hidden md:flex gap-6 uppercase tracking-wide">
-        <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.products">Produits</a>
-        <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.news">Actualités</a>
-        <div class="relative group">
-          <a href="/boutique.php" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.shop">Boutique</a>
-          <div class="absolute left-0 mt-2 hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded">
-            <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.cards">Cartes</a>
-            <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.triptychs">Triptyques</a>
-          </div>
-        </div>
-        <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.contact">Contact</a>
+        <?php renderNav($navItems, $active); ?>
       </nav>
 
       <!-- Sélecteur de langue -->
@@ -54,11 +97,6 @@ function navClass($key, $active) {
   </div>
   <!-- Menu mobile -->
   <nav id="mobile-menu" class="fixed inset-0 bg-gray-900/95 flex flex-col items-center gap-6 p-8 text-white hidden md:hidden uppercase tracking-wide" aria-hidden="true">
-    <a href="/index.php#produits"  class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.products">Produits</a>
-    <a href="/index.php#actus"     class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.news">Actualités</a>
-    <a href="/boutique.php"        class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.shop">Boutique</a>
-    <a href="/boutique.php#cartes" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.cards">Cartes</a>
-    <a href="/boutique.php#triptyques" class="txt-court <?= navClass('boutique',$active)?>" data-i18n="nav.triptychs">Triptyques</a>
-    <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.contact">Contact</a>
+    <?php renderNav($navItems, $active, true); ?>
   </nav>
 </header>
