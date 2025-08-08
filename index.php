@@ -15,7 +15,11 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
 
     <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative">
-      <img src="images/hero_flbg.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50" alt="" role="presentation">
+      <video id="hero-video" class="absolute inset-0 w-full h-full object-cover opacity-50" poster="images/hero_flbg.jpg" preload="metadata" muted playsinline loop>
+        <source data-src="videos/coins_cascade.mp4" type="video/mp4">
+        <source data-src="videos/coins_cascade.webm" type="video/webm">
+        <img src="images/hero_flbg.jpg" alt="" role="presentation">
+      </video>
       <div class="relative z-10 max-w-3xl p-6">
         <h2 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h2>
           <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
@@ -133,5 +137,32 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
    
   <?php include 'footer.php'; ?>
   <script src="/js/app.js"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const video = document.getElementById('hero-video');
+        if (!video) return;
+        const sources = video.querySelectorAll('source[data-src]');
+        const loadAndPlay = () => {
+          sources.forEach((source) => {
+            source.src = source.dataset.src;
+          });
+          video.load();
+          video.play();
+        };
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                loadAndPlay();
+                observer.unobserve(video);
+              }
+            });
+          }, { threshold: 0.5 });
+          observer.observe(video);
+        } else {
+          loadAndPlay();
+        }
+      });
+  </script>
 </body>
 </html>
