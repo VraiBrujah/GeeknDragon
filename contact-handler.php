@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+require_once __DIR__ . '/vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: contact.php');
     exit;
@@ -21,7 +26,11 @@ if (!hash_equals($_SESSION['csrf_token'] ?? '', $csrf)) {
 if ($nom === '') {
     $errors[] = 'Le nom est requis.';
 }
-if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if (
+    $email === '' ||
+    !filter_var($email, FILTER_VALIDATE_EMAIL) ||
+    preg_match("/[\r\n]/", $email)
+) {
     $errors[] = "L'adresse e-mail est invalide.";
 }
 if ($message === '') {
@@ -59,9 +68,31 @@ if ($errors) {
 $to = 'contact@geekndragon.com';
 $subject = 'Nouveau message depuis le formulaire de contact';
 $body = "Nom: $nom\nEmail: $email\nTéléphone: $telephone\nMessage:\n$message";
-$headers = 'From: ' . $email . "\r\n" . 'Reply-To: ' . $email . "\r\n";
 
-mail($to, $subject, $body, $headers);
+try {
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host = getenv('SMTP_HOST');
+    $mail->SMTPAuth = true;
+    $mail->Username = getenv('SMTP_USERNAME');
+    $mail->Password = getenv('SMTP_PASSWORD');
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = getenv('SMTP_PORT') ?: 587;
+
+    $mail->setFrom($email);
+    $mail->addAddress($to);
+    $mail->addReplyTo($email);
+    $mail->Subject = $subject;
+    $mail->Body = $body;
+
+    $mail->send();
+} catch (Exception $e) {
+    error_log('Mailer Error: ' . $e->getMessage(), 3, __DIR__ . '/error_log');
+    $_SESSION['errors'] = ["Une erreur est survenue lors de l'envoi du message."];
+    $_SESSION['old'] = $old;
+    header('Location: contact.php');
+    exit;
+}
 
 unset($_SESSION['csrf_token']);
 header('Location: merci.php');

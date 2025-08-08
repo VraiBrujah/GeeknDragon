@@ -2,3 +2,4 @@
 error_log
 *.log
 node_modules/
+vendor/
