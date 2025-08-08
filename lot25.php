@@ -88,16 +88,7 @@ include 'snipcart-init.php';
     </div>
   </section>
 
-  <section class="max-w-md mx-auto px-6 mt-12">
-    <h2 class="text-2xl font-bold mb-4 text-center">Témoignages</h2>
-    <div class="card mb-4">
-      <blockquote class="italic mb-2">« Ces pièces ajoutent une immersion incroyable à nos parties de JDR. »</blockquote>
-      <p class="text-sm text-gray-300">— Rôliste TV</p>
-    </div>
-    <div class="card">
-      <p class="mb-2">Plus d'avis sur <a href="https://www.trictrac.net/" class="underline" target="_blank" rel="noopener">Tric Trac</a>.</p>
-    </div>
-  </section>
+  <?php include __DIR__ . '/partials/testimonials.php'; ?>
 </main>
 
 <?php include 'footer.php'; ?>
