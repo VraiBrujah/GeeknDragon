@@ -24,6 +24,46 @@ function inStock(string $id): bool
     global $stock;
     return !isset($stock[$id]) || $stock[$id] > 0;      // true si illimité ou quantité > 0
 }
+
+// Liste des produits
+$products = [
+    [
+        'id' => 'lot10',
+        'name' => 'Lot de 10<br>L’Offrande du Vagabond',
+        'price' => 60,
+        'img' => 'images/Piece/pro/p10.png',
+        'desc' => '10 pièces gravées (2 de chaque métal), parfaites pour vos premières quêtes.',
+        'url' => 'lot10.php?from=pieces',
+        'multiplier' => true,
+    ],
+    [
+        'id' => 'lot25',
+        'name' => 'Lot de 25<br>La Monnaie des Royaumes',
+        'price' => 145,
+        'img' => 'images/Piece/pro/p25.png',
+        'desc' => '25 pièces uniques du cuivre à l’or, la bourse complète du marchand.',
+        'url' => 'lot25.php?from=pieces',
+        'multiplier' => false,
+    ],
+    [
+        'id' => 'lot50-essence',
+        'name' => 'Lot de 50<br>L’Essence des Royaumes',
+        'price' => 275,
+        'img' => 'images/Piece/pro/p50.png',
+        'desc' => '50 pièces, deux de chaque type, pour ressentir la richesse royale.',
+        'url' => 'lot50-essence.php?from=pieces',
+        'multiplier' => false,
+    ],
+    [
+        'id' => 'lot50-tresorerie',
+        'name' => 'Lot de 50<br>La Trésorerie du Seigneur Marchand',
+        'price' => 275,
+        'img' => 'images/Piece/pro/p50.png',
+        'desc' => '50 pièces, dix de chaque métal rare, la trésorerie du Seigneur Marchand.',
+        'url' => 'lot50-tresorerie.php?from=pieces',
+        'multiplier' => true,
+    ],
+];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -79,145 +119,9 @@ function inStock(string $id): bool
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Pièces métalliques</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-        <!-- Lot de 10 – L’Offrande du Vagabond -->
-        <?php if(inStock('lot10')): ?>
-        <div class="card flex flex-col">
-          <a href="lot10.php?from=pieces">
-            <img src="images/Piece/pro/p10.png" alt="Lot de 10 – L’Offrande du Vagabond" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          </a>
-          <h4 class="text-center text-2xl font-semibold mb-2">Lot de 10<br>L’Offrande du Vagabond</h4>
-          <p class="text-center mb-4 text-gray-300">10 pièces gravées (2 de chaque métal), parfaites pour vos premières quêtes.</p>
-          <div class="mt-auto flex flex-col items-center">
-            <div class="multiplier-slot">
-              <label for="multiplier-lot10" class="mx-auto text-center">
-                <span class="sr-only">Multiplicateur</span>
-                <select id="multiplier-lot10" class="multiplier-select text-black" data-target="lot10">
-                  <option value="1">unitaire</option>
-                  <option value="10">x10</option>
-                  <option value="100">x100</option>
-                  <option value="1000">x1000</option>
-                  <option value="10000">x10000</option>
-                </select>
-              </label>
-            </div>
-            <div class="flex flex-col items-center">
-              <div class="quantity-selector mx-auto text-center" data-id="lot10">
-                <button type="button" class="quantity-btn minus" data-target="lot10">−</button>
-                <span class="qty-value" id="qty-lot10">1</span>
-                <button type="button" class="quantity-btn plus" data-target="lot10">+</button>
-              </div>
-            </div>
-            <button class="snipcart-add-item btn btn-shop mx-auto"
-                    data-item-id="lot10" data-item-name="Lot de 10–L’Offrande du Vagabond"
-                    data-item-price="60" data-item-url="boutique.php"
-                    data-item-description="10 pièces gravées (2 de chaque métal), parfaites pour vos premières quêtes"
-                    data-item-quantity="1"
-                    data-item-custom1-name="Multiplicateur"
-                    data-item-custom1-options="1|10|100|1000|10000"
-                    data-item-custom1-value="1">
-              Ajouter
-            </button>
-          </div>
-        </div>
-        <?php endif; ?>
-
-        <!-- Lot de 25 – La Monnaie des Royaumes -->
-        <?php if(inStock('lot25')): ?>
-        <div class="card flex flex-col">
-          <a href="lot25.php?from=pieces">
-            <img src="images/Piece/pro/p25.png" alt="Lot de 25 – La Monnaie des Royaumes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          </a>
-          <h4 class="text-center text-2xl font-semibold mb-2">Lot de 25<br>La Monnaie des Royaumes</h4>
-          <p class="text-center mb-4 text-gray-300">25 pièces uniques du cuivre à l’or, la bourse complète du marchand.</p>
-          <div class="mt-auto flex flex-col items-center">
-            <div class="multiplier-slot"></div>
-            <div class="flex flex-col items-center">
-              <div class="quantity-selector mx-auto text-center" data-id="lot25">
-                <button type="button" class="quantity-btn minus" data-target="lot25">−</button>
-                <span class="qty-value" id="qty-lot25">1</span>
-                <button type="button" class="quantity-btn plus" data-target="lot25">+</button>
-              </div>
-            </div>
-            <button class="snipcart-add-item btn btn-shop mx-auto"
-                    data-item-id="lot25" data-item-name="Lot de 25–La Monnaie des Royaumes"
-                    data-item-price="145" data-item-url="boutique.php"
-                    data-item-description="25 pièces uniques du cuivre à l’or, la bourse complète du marchand"
-                    data-item-quantity="1">
-              Ajouter
-            </button>
-          </div>
-        </div>
-        <?php endif; ?>
-
-        <!-- Lot de 50 – L’Essence des Royaumes -->
-        <?php if(inStock('lot50-essence')): ?>
-        <div class="card flex flex-col">
-          <a href="lot50-essence.php?from=pieces">
-            <img src="images/Piece/pro/p50.png" alt="Lot de 50 – L’Essence des Royaumes" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          </a>
-          <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>L’Essence des Royaumes</h4>
-          <p class="text-center mb-4 text-gray-300">50 pièces, deux de chaque type, pour ressentir la richesse royale.</p>
-          <div class="mt-auto flex flex-col items-center">
-            <div class="multiplier-slot"></div>
-            <div class="flex flex-col items-center">
-              <div class="quantity-selector mx-auto text-center" data-id="lot50-essence">
-                <button type="button" class="quantity-btn minus" data-target="lot50-essence">−</button>
-                <span class="qty-value" id="qty-lot50-essence">1</span>
-                <button type="button" class="quantity-btn plus" data-target="lot50-essence">+</button>
-              </div>
-            </div>
-            <button class="snipcart-add-item btn btn-shop mx-auto"
-                    data-item-id="lot50-essence" data-item-name="Lot de 50–L’Essence des Royaumes"
-                    data-item-price="275" data-item-url="boutique.php"
-                    data-item-description="50 pièces, deux de chaque type, pour ressentir la richesse royale"
-                    data-item-quantity="1">
-              Ajouter
-            </button>
-          </div>
-        </div>
-        <?php endif; ?>
-
-        <!-- Lot de 50 – La Trésorerie du Seigneur Marchand -->
-        <?php if(inStock('lot50-tresorerie')): ?>
-        <div class="card flex flex-col">
-          <a href="lot50-tresorerie.php?from=pieces">
-            <img src="images/Piece/pro/p50.png" alt="Lot de 50 – La Trésorerie du Seigneur Marchand" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
-          </a>
-          <h4 class="text-center text-2xl font-semibold mb-2">Lot de 50<br>La Trésorerie du Seigneur Marchand</h4>
-          <p class="text-center mb-4 text-gray-300">50 pièces, dix de chaque métal rare, la trésorerie du Seigneur Marchand.</p>
-          <div class="mt-auto flex flex-col items-center">
-            <div class="multiplier-slot">
-              <label for="multiplier-lot50-tresorerie" class="mx-auto text-center">
-                <span class="sr-only">Multiplicateur</span>
-                <select id="multiplier-lot50-tresorerie" class="multiplier-select text-black" data-target="lot50-tresorerie">
-                  <option value="1">unitaire</option>
-                  <option value="10">x10</option>
-                  <option value="100">x100</option>
-                  <option value="1000">x1000</option>
-                  <option value="10000">x10000</option>
-                </select>
-              </label>
-            </div>
-            <div class="flex flex-col items-center">
-              <div class="quantity-selector mx-auto text-center" data-id="lot50-tresorerie">
-                <button type="button" class="quantity-btn minus" data-target="lot50-tresorerie">−</button>
-                <span class="qty-value" id="qty-lot50-tresorerie">1</span>
-                <button type="button" class="quantity-btn plus" data-target="lot50-tresorerie">+</button>
-              </div>
-            </div>
-            <button class="snipcart-add-item btn btn-shop mx-auto"
-                    data-item-id="lot50-tresorerie" data-item-name="Lot de 50–La Trésorerie du Seigneur Marchand"
-                    data-item-price="275" data-item-url="boutique.php"
-                    data-item-description="50 pièces, dix de chaque métal rare, la trésorerie du Seigneur Marchand"
-                    data-item-quantity="1"
-                    data-item-custom1-name="Multiplicateur"
-                    data-item-custom1-options="1|10|100|1000|10000"
-                    data-item-custom1-value="1">
-              Ajouter
-            </button>
-          </div>
-        </div>
-        <?php endif; ?>
+        <?php foreach ($products as $product): ?>
+          <?php include __DIR__ . '/partials/product-card.php'; ?>
+        <?php endforeach; ?>
       </div>
 
       <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
