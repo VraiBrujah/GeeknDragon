@@ -1,6 +1,6 @@
 // Gestion des traductions simples
 document.addEventListener('DOMContentLoaded', () => {
-  const translationsReady = false; // passer à true lorsque les traductions EN seront complètes
+  const translationsReady = true; // traductions prêtes
   const switcher = document.getElementById('lang-switcher');
   const defaultLang = 'fr';
   const available = ['fr', 'en'];
