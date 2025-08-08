@@ -2,6 +2,7 @@
 session_start();
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/recaptcha.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -37,16 +38,15 @@ if ($message === '') {
     $errors[] = 'Le message est requis.';
 }
 
-$recaptchaSecret = getenv('RECAPTCHA_SECRET_KEY');
+$recaptchaSecret   = getenv('RECAPTCHA_SECRET_KEY');
 $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
 if ($recaptchaSecret) {
     if ($recaptchaResponse === '') {
         $errors[] = 'Veuillez vérifier le reCAPTCHA.';
     } else {
-        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($recaptchaSecret) . '&response=' . urlencode($recaptchaResponse));
-        $captchaResult = json_decode($verifyResponse, true);
+        $captchaResult = verifyRecaptcha($recaptchaSecret, $recaptchaResponse);
         if (empty($captchaResult['success'])) {
-            $errors[] = 'La vérification reCAPTCHA a échoué.';
+            $errors[] = $captchaResult['error'] ?? 'La vérification reCAPTCHA a échoué.';
         }
     }
 }
