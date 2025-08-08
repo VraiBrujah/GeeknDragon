@@ -39,7 +39,7 @@ function navClass($key, $active) {
         <a href="/index.php#contact"   class="txt-court <?= navClass('index',$active)  ?>" data-i18n="nav.contact">Contact</a>
       </nav>
 
-      <!-- Sélecteur de langue (masqué tant que les traductions ne sont pas finalisées) -->
+      <!-- Sélecteur de langue -->
       <select id="lang-switcher" class="bg-gray-800 text-white rounded px-2 py-1">
         <option value="fr">FR</option>
         <option value="en">EN</option>
