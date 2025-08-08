@@ -1,7 +1,7 @@
 <?php if(inStock($product['id'])): ?>
 <div class="card flex flex-col">
   <a href="<?= htmlspecialchars($product['url']) ?>">
-    <img src="<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['desc']) ?>" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
+    <img src="/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['desc']) ?>" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
   </a>
   <h4 class="text-center text-2xl font-semibold mb-2"><?= $product['name'] ?></h4>
   <p class="text-center mb-4 text-gray-300"><?= htmlspecialchars($product['desc']) ?></p>

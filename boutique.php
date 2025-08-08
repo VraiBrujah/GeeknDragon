@@ -96,9 +96,9 @@ include 'snipcart-init.php';
       <p class="text-lg md:text-xl txt-court">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
       <p class="mt-4 txt-court">Paiement sécurisé via Snipcart
         <span class="payment-icons">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" loading="lazy">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard" loading="lazy">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="American Express" loading="lazy">
+          <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
+          <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
+          <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
         </span>
         &nbsp;|&nbsp; Stocks mis à jour en temps réel.
       </p>
