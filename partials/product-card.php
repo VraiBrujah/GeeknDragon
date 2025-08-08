@@ -9,10 +9,14 @@
     <div class="multiplier-slot">
       <?php if (!empty($product['multipliers'])): ?>
       <label for="multiplier-<?= htmlspecialchars($product['id']) ?>" class="mx-auto text-center">
-        <span class="sr-only">Multiplicateur</span>
+        <span class="sr-only" data-i18n="product.multiplier">Multiplicateur</span>
         <select id="multiplier-<?= htmlspecialchars($product['id']) ?>" class="multiplier-select text-black" data-target="<?= htmlspecialchars($product['id']) ?>">
           <?php foreach ($product['multipliers'] as $m): ?>
-          <option value="<?= $m ?>"><?= $m == 1 ? 'unitaire' : 'x' . $m ?></option>
+          <?php if ($m == 1): ?>
+          <option value="<?= $m ?>" data-i18n="product.unit">unitaire</option>
+          <?php else: ?>
+          <option value="<?= $m ?>">x<?= $m ?></option>
+          <?php endif; ?>
           <?php endforeach; ?>
         </select>
       </label>
@@ -37,7 +41,7 @@
             data-item-custom1-options="<?= implode('|', $product['multipliers']) ?>"
             data-item-custom1-value="<?= $product['multipliers'][0] ?>"
             <?php endif; ?>>
-      Ajouter
+      <span data-i18n="product.add">Ajouter</span>
     </button>
   </div>
 </div>

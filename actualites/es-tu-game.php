@@ -13,13 +13,13 @@ $ogImage = '/images/es_tu_game_demo.jpg';
   <main class="pt-32">
     <section id="actus" class="py-16 bg-gray-900/80">
       <div class="max-w-5xl mx-auto px-6">
-        <h3 class="text-4xl font-bold text-center mb-12">Actualité – FLIM 2025</h3>
+        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="news.flim2025.heading">Actualité – FLIM 2025</h3>
 
         <!-- Article complet : Es-tu Game ? -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg">
           <img loading="lazy" src="/images/es_tu_game_demo.jpg" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
 
-          <h4 class="text-3xl font-semibold mb-4">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
+          <h4 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
 
           <div class="space-y-8 text-lg leading-relaxed text-gray-200">
 
@@ -66,7 +66,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
             </p>
 
             <p class="mt-4 italic text-sm text-gray-400">
-              Retrouvez la table complète sur la chaîne YouTube officielle :
+              <span data-i18n="news.flim2025.youtube">Retrouvez la table complète sur la chaîne YouTube officielle :</span>
               <a href="https://www.youtube.com/@estugameofficieljdr" class="underline text-indigo-400" target="_blank">
                 Es‑tu Game ? — Jeux de rôle
               </a>
@@ -83,7 +83,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"
                       data-video="video2">🔊</button>
-                <p class="text-center text-sm mt-2 text-gray-300 txt-court">
+                <p class="text-center text-sm mt-2 text-gray-300 txt-court" data-i18n="news.flim2025.video1">
                   Le maire rend hommage aux trois héros en argent véritable
                 </p>
             </div>
@@ -94,7 +94,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
               <button class="mute-btn hidden group-hover:block
                              absolute top-2 right-2 z-10 bg-black/60 text-white text-sm px-2 py-1 rounded"
                       data-video="video1">🔊</button>
-                <p class="text-center text-sm mt-2 text-gray-300 txt-court">
+                <p class="text-center text-sm mt-2 text-gray-300 txt-court" data-i18n="news.flim2025.video2">
                   Quand tout se joue sur une pièce… dragon ou étoile ?
                 </p>
             </div>
@@ -105,7 +105,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"
                       data-video="video3">🔊</button>
-                <p class="text-center text-sm mt-2 text-gray-300 txt-court">
+                <p class="text-center text-sm mt-2 text-gray-300 txt-court" data-i18n="news.flim2025.video3">
                   Final de la game : Le raton, les étoiles… et le chaos
                 </p>
             </div>

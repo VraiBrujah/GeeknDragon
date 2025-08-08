@@ -46,7 +46,7 @@ include 'snipcart-init.php';
 ?>
 <main class="pt-32 pb-20">
   <section class="max-w-md mx-auto px-6">
-    <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline mb-6 block mx-auto">&larr; Retour à la boutique</a>
+    <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline mb-6 block mx-auto">&larr; <span data-i18n="product.back">Retour à la boutique</span></a>
     <div class="card">
       <div class="swiper mb-6">
         <div class="swiper-wrapper">
@@ -81,10 +81,14 @@ include 'snipcart-init.php';
       </div>
       <?php if(!empty($multipliers)): ?>
       <label for="multiplier-<?= htmlspecialchars($id) ?>" class="block mb-4 text-center">
-        <span class="sr-only">Multiplicateur</span>
+        <span class="sr-only" data-i18n="product.multiplier">Multiplicateur</span>
         <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select text-black" data-target="<?= htmlspecialchars($id) ?>">
           <?php foreach ($multipliers as $m): ?>
-          <option value="<?= $m ?>"><?= $m == 1 ? 'unitaire' : 'x'.$m ?></option>
+          <?php if ($m == 1): ?>
+          <option value="<?= $m ?>" data-i18n="product.unit">unitaire</option>
+          <?php else: ?>
+          <option value="<?= $m ?>">x<?= $m ?></option>
+          <?php endif; ?>
           <?php endforeach; ?>
         </select>
       </label>
@@ -99,16 +103,16 @@ include 'snipcart-init.php';
               data-item-custom1-options="<?= implode('|', $multipliers) ?>"
               data-item-custom1-value="<?= $multipliers[0] ?>"
               <?php endif; ?>>
-        Ajouter — <?= htmlspecialchars($product['price']) ?> $
+        <span data-i18n="product.add">Ajouter</span> — <?= htmlspecialchars($product['price']) ?> $
       </button>
-      <?php else: ?><span class="btn btn-shop" disabled>Rupture de stock</span><?php endif; ?>
-      <p class="mt-4 text-center txt-court">Paiement sécurisé via Snipcart
+      <?php else: ?><span class="btn btn-shop" disabled data-i18n="product.outOfStock">Rupture de stock</span><?php endif; ?>
+      <p class="mt-4 text-center txt-court"><span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
         <span class="payment-icons">
           <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
           <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
           <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
         </span>
-        &nbsp;|&nbsp; Stocks mis à jour en temps réel.
+        &nbsp;|&nbsp; <span data-i18n="product.realTimeStock">Stocks mis à jour en temps réel.</span>
       </p>
     </div>
   </section>

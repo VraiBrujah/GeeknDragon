@@ -35,5 +35,24 @@
     "title": "Merci !",
     "message": "Votre demande a bien été transmise à notre équipe.",
     "backHome": "Retour à l'accueil"
+  },
+  "product": {
+    "back": "Retour à la boutique",
+    "multiplier": "Multiplicateur",
+    "unit": "unitaire",
+    "add": "Ajouter",
+    "outOfStock": "Rupture de stock",
+    "securePayment": "Paiement sécurisé via Snipcart",
+    "realTimeStock": "Stocks mis à jour en temps réel."
+  },
+  "news": {
+    "flim2025": {
+      "heading": "Actualité – FLIM 2025",
+      "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces",
+      "video1": "Le maire rend hommage aux trois héros en argent véritable",
+      "video2": "Quand tout se joue sur une pièce… dragon ou étoile ?",
+      "video3": "Final de la game : Le raton, les étoiles… et le chaos",
+      "youtube": "Retrouvez la table complète sur la chaîne YouTube officielle :"
+    }
   }
 }
