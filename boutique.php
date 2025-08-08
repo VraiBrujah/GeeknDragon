@@ -93,7 +93,7 @@ $products = [
 
   <!-- ===== Bannière d'ouverture ===== -->
   <section class="relative min-h-[24rem] md:min-h-[32rem]">
-    <img src="images/banner_luxe_coins.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="eager">
+    <img src="images/banner_luxe_coins.jpg" alt="Bannière de pièces métalliques luxueuses" class="absolute inset-0 w-full h-full object-cover" loading="eager">
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
         <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Des pièces et cartes d'équipement plus luxueuses qu'une figurine de dragon à 300 $ : utilisées à chaque session et conçues au&nbsp;Québec.</p>
@@ -138,7 +138,7 @@ $products = [
   <section class="py-16">
     <div class="max-w-3xl mx-auto px-6 text-center">
       <h3 class="text-4xl font-bold mb-6">Coffres sur mesure</h3>
-      <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Le coffre du mage dément" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
+      <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
       <p class="mb-6 text-gray-300">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
       <a href="contact.php" class="btn btn-primary">Demander un devis</a>	  
     </div>
@@ -161,7 +161,7 @@ $products = [
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
       <div class="md:w-1/3">
-        <img src="images/carte_propriete.png" alt="Carte de propriété" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
+        <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
       </div>
       <div class="md:w-2/3 text-gray-200 space-y-4">
         <h3 class="text-3xl font-bold">Investissez ensemble, partagez l’aventure</h3>
