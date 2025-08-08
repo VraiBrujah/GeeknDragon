@@ -2,6 +2,7 @@
 $active = 'boutique';
 $title  = "Lot de 10 – L’Offrande du Vagabond | Geek & Dragon";
 $metaDescription = "Un trésor de poche pour aventuriers itinérants : 10 pièces finement gravées (2 de chaque métal) pour vos premières quêtes.";
+$metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/lot10.php';
 $snipcartCssVersion = filemtime(__DIR__.'/css/snipcart.css');
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
@@ -121,6 +122,22 @@ function inStock(string $id): bool
 </main>
 
 <?php include 'footer.php'; ?>
+<script type="application/ld+json">
+<?= json_encode([
+    '@context' => 'https://schema.org/',
+    '@type' => 'Product',
+    'name' => 'Lot de 10 – L’Offrande du Vagabond',
+    'description' => 'Un trésor de poche pour aventuriers itinérants : 10 pièces finement gravées (2 de chaque métal) pour vos premières quêtes.',
+    'image' => 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/images/Piece/pro/p10.png',
+    'sku' => 'lot10',
+    'offers' => [
+        '@type' => 'Offer',
+        'price' => 60,
+        'priceCurrency' => 'CAD',
+        'availability' => inStock('lot10') ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+    ],
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>

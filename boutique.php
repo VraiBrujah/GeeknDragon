@@ -2,6 +2,7 @@
 $active = 'boutique';
 $title  = 'Boutique | Geek & Dragon';
 $metaDescription = "Achetez nos cartes et accessoires immersifs pour D&D.";
+$metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
 $snipcartCssVersion = filemtime(__DIR__.'/css/snipcart.css');
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
@@ -187,6 +188,26 @@ $products = [
 </main>
 
 <?php include 'footer.php'; ?>
+<script type="application/ld+json">
+<?= json_encode([
+    '@context' => 'https://schema.org/',
+    '@graph' => array_map(function ($p) {
+        return [
+            '@type' => 'Product',
+            'name' => strip_tags($p['name']),
+            'description' => $p['desc'],
+            'image' => 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/' . $p['img'],
+            'sku' => $p['id'],
+            'offers' => [
+                '@type' => 'Offer',
+                'price' => $p['price'],
+                'priceCurrency' => 'CAD',
+                'availability' => inStock($p['id']) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            ],
+        ];
+    }, $products),
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+</script>
   <script>window.stock = <?= json_encode($stock) ?>;</script>
   <script src="js/app.js"></script>
 </body>
