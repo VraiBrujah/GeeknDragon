@@ -108,8 +108,9 @@ include 'snipcart-init.php';
       </p>
   </section>
 
+
   <!-- ░░░ PIÈCES ░░░ -->
-  <section class="py-32 bg-gray-900/80">
+  <section class="py-0 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Pièces métalliques</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
