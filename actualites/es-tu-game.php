@@ -10,7 +10,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
 <body>
   <?php include '../header.php'; ?>
 
-  <main class="pt-0">
+  <main class="pt-15">
     <section id="actus" class="py-16 bg-gray-900/80">
       <div class="max-w-5xl mx-auto px-6">
         <h3 class="text-4xl font-bold text-center mb-12" data-i18n="news.flim2025.heading">Actualité – FLIM 2025</h3>
