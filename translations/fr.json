@@ -54,5 +54,10 @@
       "video3": "Final de la game : Le raton, les étoiles… et le chaos",
       "youtube": "Retrouvez la table complète sur la chaîne YouTube officielle :"
     }
+  },
+  "testimonials": {
+    "title": "Témoignages",
+    "moreReviews": "Plus d'avis sur",
+    "trictrac": "TricTrac"
   }
 }
