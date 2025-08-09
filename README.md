@@ -36,10 +36,17 @@ The application expects a few secrets to be provided through the environment:
 - `SHIPPING_SECRET` – secret used by `shipping.php` to verify Snipcart webhook signatures.
 - `ORDER_SECRET` – secret used by `decrement-stock.php` when handling the "order completed" webhook.
 
+To send emails from the contact form, configure SMTP credentials for the fixed sender address `no-reply@geekndragon.com`:
+
+- `SMTP_HOST` – SMTP server hostname.
+- `SMTP_PORT` – SMTP server port (defaults to 587 if unset).
+- `SMTP_USERNAME` – account username (usually `no-reply@geekndragon.com`).
+- `SMTP_PASSWORD` – password for the SMTP account.
+
 ## Local setup
 
 1. Install PHP (7.4 or newer) and clone this repository.
-2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SHIPPING_SECRET` and `ORDER_SECRET`.
+2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SHIPPING_SECRET`, `ORDER_SECRET` and the SMTP variables.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
 3. Start a local server from the project root:
 
