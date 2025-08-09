@@ -5,7 +5,7 @@
     "description": "Lot de 10 pièces finement gravées (2 de chaque métal), l’allié parfait des premières quêtes.",
     "images": [
       "images/Piece/pro/lot10Piece-300.png",
-      "images/Piece/pro/lot10Piece.jpg",
+      "images/Piece/pro/p10.png",
 			"images/Piece/pro/piece/of.png",
 			"images/Piece/pro/piece/op.png",
 			"images/Piece/pro/piece/cp.png",
@@ -32,6 +32,7 @@
     "description": "Coffret de 25 pièces différentes, pour ressentir la monnaie des royaumes entre vos doigts.",
     "images": [
       "images/Piece/pro/all25.jpg",
+      "images/Piece/pro/p25.png",
 			"images/Piece/pro/piece/of.png",
 			"images/Piece/pro/piece/op.png",
 			"images/Piece/pro/piece/cp.png",
@@ -58,6 +59,7 @@
     "description": "50 pièces (2 de chaque type), le coffret luxueux pour ressentir la richesse royale.",
     "images": [
       "images/Piece/pro/lot100Piece.png",
+      "images/Piece/pro/p50.png",
 			"images/Piece/pro/piece/of.png",
 			"images/Piece/pro/piece/op.png",
 			"images/Piece/pro/piece/cp.png",
@@ -84,6 +86,7 @@
     "description": "50 pièces (10 de chaque métal rare), la trésorerie ultime pour une opulence assumée.",
     "images": [
       "images/Piece/pro/lot100Piece.png",
+      "images/Piece/pro/p50.png",
 			"images/Piece/pro/piece/of.png",
 			"images/Piece/pro/piece/op.png",
 			"images/Piece/pro/piece/cp.png",
