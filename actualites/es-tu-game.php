@@ -78,7 +78,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
 
             <div class="relative group">
-              <video id="video2" src="/videos/leMaireDoneUnePieceDargentFLIM.mp4"
+              <video id="video1" src="/videos/leMaireDoneUnePieceDargentFLIM.mp4"
                      class="rounded shadow-lg w-full aspect-video" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"
@@ -89,7 +89,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
             </div>
 
             <div class="relative group">
-              <video id="video1" src="/videos/pileoufaceled2duFLIM2025.mp4"
+              <video id="video2" src="/videos/pileoufaceled2duFLIM2025.mp4"
                      class="rounded shadow-lg w-full aspect-video" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block
                              absolute top-2 right-2 z-10 bg-black/60 text-white text-sm px-2 py-1 rounded"
