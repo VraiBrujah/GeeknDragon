@@ -4,7 +4,7 @@ Site web Geek&Dragon
 
 ## Project overview
 
-GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart.com/). It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and Snipcart handles the shopping cart and checkout. Stock levels are stored in `stock.json` and are automatically updated through webhooks when an order is completed.
+GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart.com/). It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and Snipcart handles the shopping cart and checkout. Stock levels are managed through Snipcart's Inventory API and automatically updated via webhooks when an order is completed.
 
 ## Product lots and custom chests
 
@@ -15,7 +15,7 @@ The shop offers several coin bundles:
 - **Lot de 50 – L’Essence des Royaumes** – 275 $ (2 coins of each metal for each multiplier)
 - **Lot de 50 – La Trésorerie du Seigneur Marchand** – 275 $ (10 coins of each metal with a selectable multiplier)
 
-The corresponding product identifiers are `lot10`, `lot25`, `lot50-essence` and `lot50-tresorerie`. When adding or removing products, update both `data/products.json` and `stock.json` to keep the lists aligned.
+The corresponding product identifiers are `lot10`, `lot25`, `lot50-essence` and `lot50-tresorerie`. When adding or removing products, update `data/products.json` accordingly.
 
 Need more than 50 pieces or a custom assortment? Request a personalized chest through the [quote form](contact.php).
 
@@ -32,14 +32,14 @@ Multipliers are handled with Snipcart custom fields. Add a `<select>` with the c
 The application expects a few secrets to be provided through the environment:
 
 - `SNIPCART_API_KEY` – your public Snipcart API key.
+- `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates.
 - `SHIPPING_SECRET` – secret used by `shipping.php` to verify Snipcart webhook signatures.
 - `ORDER_SECRET` – secret used by `decrement-stock.php` when handling the "order completed" webhook.
-- `SNIPCART_API_KEY` – public API key used by `boutique.php` for the Snipcart integration.
 
 ## Local setup
 
 1. Install PHP (7.4 or newer) and clone this repository.
-2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SHIPPING_SECRET` and `ORDER_SECRET`.
+2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SHIPPING_SECRET` and `ORDER_SECRET`.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
 3. Start a local server from the project root:
 

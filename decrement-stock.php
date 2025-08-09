@@ -4,13 +4,11 @@
  * decrement-stock.php  –  Geek & Dragon
  * -------------------------------------------------------------
  * Webhook Snipcart « Order completed »
- * Décrémente automatiquement le stock (stock.json) à chaque vente.
+ * Décrémente automatiquement le stock via l'API Snipcart à chaque vente.
  *
  * 1. Vérifie la signature HMAC SHA-256 (header X-Snipcart-Signature)
- * 2. Lit le fichier stock.json   (clé = product ID, valeur = quantité)
- * 3. Vérifie que la quantité commandée n'excède pas le stock disponible
- * 4. Soustrait la quantité vendue
- * 5. Enregistre le nouveau stock sur disque
+ * 2. Vérifie le stock disponible via l'API Snipcart
+ * 3. Soustrait la quantité vendue en envoyant une requête PATCH
  * -------------------------------------------------------------
  * Stock JSON exemple :
  * {
@@ -20,10 +18,9 @@
  * }
  */
 
-define('STOCK_FILE', __DIR__ . '/stock.json');
-// Le secret est lu depuis la variable d'environnement ORDER_SECRET
-define('WEBHOOK_SECRET', getenv('ORDER_SECRET'));   // <— À REMPLACER !
-// TODO: Utiliser l'API Snipcart pour gérer l'inventaire afin de synchroniser automatiquement le stock.
+// Clés secrètes
+define('WEBHOOK_SECRET', getenv('ORDER_SECRET'));
+define('SNIPCART_SECRET', getenv('SNIPCART_SECRET_API_KEY'));
 
 // ────────────────────────────
 function respond($code, $msg = '')
@@ -35,9 +32,33 @@ function respond($code, $msg = '')
     exit;
 }
 
-if (empty(WEBHOOK_SECRET)) {
-    error_log('Webhook secret not configured');
+if (empty(WEBHOOK_SECRET) || empty(SNIPCART_SECRET)) {
+    error_log('Secrets not configured');
     respond(500);
+}
+
+function snipcartRequest(string $method, string $endpoint, ?array $payload = null): array
+{
+    $ch = curl_init('https://app.snipcart.com/api' . $endpoint);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CUSTOMREQUEST => $method,
+        CURLOPT_USERPWD => SNIPCART_SECRET . ':',
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+    ]);
+    if ($payload !== null) {
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+    }
+    $res = curl_exec($ch);
+    $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    if ($res === false || $status >= 400) {
+        error_log('Snipcart API error: ' . ($res === false ? curl_error($ch) : $res));
+        curl_close($ch);
+        respond(502, 'Snipcart API error');
+    }
+    curl_close($ch);
+    $data = json_decode($res, true);
+    return is_array($data) ? $data : [];
 }
 
 // 1. Vérifie signature
@@ -54,53 +75,20 @@ if (!$order || !isset($order['items'])) {
     respond(400, 'Bad payload');
 }
 
-// 3. Charge le stock actuel (ou tableau vide)
-$stock = file_exists(STOCK_FILE)
-    ? json_decode(file_get_contents(STOCK_FILE), true)
-    : [];
-
-if (!is_array($stock)) {
-    $stock = [];
-}
-
-// 4. Vérifie le stock disponible
-foreach ($order['items'] as $item) {
-    $id  = $item['uniqueId'];      // correspond au data-item-id
-    $qty = (int) $item['quantity'];
-
-    if (!isset($stock[$id])) {
-        // Si l'ID n'existe pas encore, on l'initialise (illimité → ignore)
-        continue;
-    }
-
-    if ($qty > $stock[$id]) {
-        respond(409, 'Stock insuffisant pour ' . $id);
-    }
-}
-
-// 5. Décrémente
+// 3. Vérifie et décrémente le stock via l'API Snipcart
 foreach ($order['items'] as $item) {
     $id  = $item['uniqueId'];
     $qty = (int) $item['quantity'];
 
-    if (!isset($stock[$id])) {
-        continue;
+    $inv = snipcartRequest('GET', '/inventory/' . urlencode($id));
+    $available = $inv['stock'] ?? $inv['available'] ?? 0;
+    if ($qty > $available) {
+        respond(409, 'Stock insuffisant pour ' . $id);
     }
 
-    $stock[$id] = max(0, $stock[$id] - $qty);
+    $newStock = max(0, $available - $qty);
+    snipcartRequest('PATCH', '/inventory/' . urlencode($id), ['stock' => $newStock]);
 }
 
-// 6. Écrit le nouveau stock – verrouillage simple
-$fp = fopen(STOCK_FILE, 'c+');
-if (!$fp) {
-    respond(500, 'Cannot open stock file');
-}
-
-flock($fp, LOCK_EX);
-ftruncate($fp, 0);
-fwrite($fp, json_encode($stock, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-flock($fp, LOCK_UN);
-fclose($fp);
-
-// 7. Réponse OK
+// 4. Réponse OK
 respond(200, 'Stock updated');
