@@ -4,7 +4,7 @@
     "price": 60,
     "description": "Lot de 10 pièces finement gravées (2 de chaque métal), l’allié parfait des premières quêtes.",
     "images": [
-      "images/Piece/pro/lot10Piece-300.jpg",
+      "images/Piece/pro/lot10Piece-300.png",
       "images/Piece/pro/lot10Piece.jpg",
 			"images/Piece/pro/piece/of.png",
 			"images/Piece/pro/piece/op.png",
@@ -57,7 +57,7 @@
     "price": 275,
     "description": "50 pièces (2 de chaque type), le coffret luxueux pour ressentir la richesse royale.",
     "images": [
-      "images/Piece/pro/lot100Piece.jpg",
+      "images/Piece/pro/lot100Piece.png",
 			"images/Piece/pro/piece/of.png",
 			"images/Piece/pro/piece/op.png",
 			"images/Piece/pro/piece/cp.png",
@@ -83,7 +83,7 @@
     "price": 275,
     "description": "50 pièces (10 de chaque métal rare), la trésorerie ultime pour une opulence assumée.",
     "images": [
-      "images/Piece/pro/lot100Piece.jpg",
+      "images/Piece/pro/lot100Piece.png",
 			"images/Piece/pro/piece/of.png",
 			"images/Piece/pro/piece/op.png",
 			"images/Piece/pro/piece/cp.png",
