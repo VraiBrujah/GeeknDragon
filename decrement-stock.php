@@ -1,4 +1,5 @@
 <?php
+
 /**
  * decrement-stock.php  –  Geek & Dragon
  * -------------------------------------------------------------
@@ -7,8 +8,9 @@
  *
  * 1. Vérifie la signature HMAC SHA-256 (header X-Snipcart-Signature)
  * 2. Lit le fichier stock.json   (clé = product ID, valeur = quantité)
- * 3. Soustrait la quantité vendue
- * 4. Enregistre le nouveau stock sur disque
+ * 3. Vérifie que la quantité commandée n'excède pas le stock disponible
+ * 4. Soustrait la quantité vendue
+ * 5. Enregistre le nouveau stock sur disque
  * -------------------------------------------------------------
  * Stock JSON exemple :
  * {
@@ -21,12 +23,15 @@
 define('STOCK_FILE', __DIR__ . '/stock.json');
 // Le secret est lu depuis la variable d'environnement ORDER_SECRET
 define('WEBHOOK_SECRET', getenv('ORDER_SECRET'));   // <— À REMPLACER !
+// TODO: Utiliser l'API Snipcart pour gérer l'inventaire afin de synchroniser automatiquement le stock.
 
 // ────────────────────────────
 function respond($code, $msg = '')
 {
     http_response_code($code);
-    if ($msg) echo $msg;
+    if ($msg) {
+        echo $msg;
+    }
     exit;
 }
 
@@ -54,24 +59,42 @@ $stock = file_exists(STOCK_FILE)
     ? json_decode(file_get_contents(STOCK_FILE), true)
     : [];
 
-if (!is_array($stock)) $stock = [];
+if (!is_array($stock)) {
+    $stock = [];
+}
 
-// 4. Décrémente
+// 4. Vérifie le stock disponible
 foreach ($order['items'] as $item) {
-    $id = $item['uniqueId'];      // correspond au data-item-id
-    $qty = (int)$item['quantity'];
+    $id  = $item['uniqueId'];      // correspond au data-item-id
+    $qty = (int) $item['quantity'];
 
     if (!isset($stock[$id])) {
         // Si l'ID n'existe pas encore, on l'initialise (illimité → ignore)
         continue;
     }
 
+    if ($qty > $stock[$id]) {
+        respond(409, 'Stock insuffisant pour ' . $id);
+    }
+}
+
+// 5. Décrémente
+foreach ($order['items'] as $item) {
+    $id  = $item['uniqueId'];
+    $qty = (int) $item['quantity'];
+
+    if (!isset($stock[$id])) {
+        continue;
+    }
+
     $stock[$id] = max(0, $stock[$id] - $qty);
 }
 
-// 5. Écrit le nouveau stock – verrouillage simple
+// 6. Écrit le nouveau stock – verrouillage simple
 $fp = fopen(STOCK_FILE, 'c+');
-if (!$fp) respond(500, 'Cannot open stock file');
+if (!$fp) {
+    respond(500, 'Cannot open stock file');
+}
 
 flock($fp, LOCK_EX);
 ftruncate($fp, 0);
@@ -79,6 +102,5 @@ fwrite($fp, json_encode($stock, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 flock($fp, LOCK_UN);
 fclose($fp);
 
-// 6. Réponse OK
+// 7. Réponse OK
 respond(200, 'Stock updated');
-?>
