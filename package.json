@@ -8,15 +8,19 @@
     "bundle:css": "npx clean-css-cli -o css/vendor.bundle.min.css css/swiper-bundle.min.css css/fancybox.css",
     "bundle:js": "npx terser js/tailwindcss.min.js js/swiper-bundle.min.js js/fancybox.umd.js -c -m -o js/vendor.bundle.min.js",
     "bundle": "npm run bundle:css && npm run bundle:js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "tailwindcss": "^3.4.17",
     "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.6"
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
   }
 }
