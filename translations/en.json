@@ -54,5 +54,10 @@
       "video3": "Game finale: The raccoon, the stars... and chaos",
       "youtube": "Watch the full session on the official YouTube channel:"
     }
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "moreReviews": "More reviews on",
+    "trictrac": "TricTrac"
   }
 }
