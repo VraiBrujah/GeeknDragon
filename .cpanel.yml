@@ -2,4 +2,5 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/pacti620/public_html/geekndragon.com/
+    - /usr/bin/php build-sitemap.php
     - /usr/bin/rsync -av --delete --exclude='.git/' . "$DEPLOYPATH"
