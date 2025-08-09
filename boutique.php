@@ -19,25 +19,30 @@ HTML;
 
 /* ───── STOCK ───── */
 $snipcartSecret = getenv('SNIPCART_SECRET_API_KEY');
+$stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
 function getStock(string $id): ?int
 {
-    global $snipcartSecret;
-    if (!$snipcartSecret) {
-        return null;
+    global $snipcartSecret, $stockData;
+    static $cache = [];
+    if (isset($cache[$id])) {
+        return $cache[$id];
     }
-    $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
-    curl_setopt_array($ch, [
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_USERPWD => $snipcartSecret . ':',
-    ]);
-    $res = curl_exec($ch);
-    $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-    curl_close($ch);
-    if ($res === false || $status >= 400) {
-        return null;
+    if ($snipcartSecret) {
+        $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERPWD => $snipcartSecret . ':',
+        ]);
+        $res = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        if ($res === false || $status >= 400) {
+            return $cache[$id] = null;
+        }
+        $inv = json_decode($res, true);
+        return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
     }
-    $data = json_decode($res, true);
-    return $data['stock'] ?? $data['available'] ?? null;
+    return $cache[$id] = $stockData[$id] ?? null;
 }
 function inStock(string $id): bool
 {
@@ -58,6 +63,10 @@ foreach ($data as $id => $p) {
         'url' => 'product.php?id=' . urlencode($id) . '&from=pieces',
         'multipliers' => $p['multipliers'] ?? [],
     ];
+}
+$stock = [];
+foreach ($products as $p) {
+    $stock[$p['id']] = getStock($p['id']);
 }
 ?>
 <!DOCTYPE html>
