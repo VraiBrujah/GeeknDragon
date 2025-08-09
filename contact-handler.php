@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -79,8 +80,10 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = getenv('SMTP_PORT') ?: 587;
 
-    $mail->setFrom($email);
+    // Use a fixed no-reply address as the sender to ensure deliverability
+    $mail->setFrom('no-reply@geekndragon.com');
     $mail->addAddress($to);
+    // Preserve the visitor's address so the merchant can reply directly
     $mail->addReplyTo($email);
     $mail->Subject = $subject;
     $mail->Body = $body;
@@ -97,4 +100,3 @@ try {
 unset($_SESSION['csrf_token']);
 header('Location: merci.php');
 exit;
-?>
