@@ -2,6 +2,8 @@
 /* Geek & Dragon – Calculateur d’expédition dynamique
    Place ce fichier dans /public_html/shipping.php
    N’oublie pas de cocher “POST” dans Snipcart.
+   La variable d'environnement SHIPPING_SECRET doit être définie,
+   sinon ce script renvoie un code HTTP 500.
 */
 
 header('Content-Type: application/json');
@@ -9,6 +11,9 @@ header('Content-Type: application/json');
 // ⬇️ facultatif : vérifie la signature Snipcart
 // Le secret est récupéré depuis la variable d'environnement SHIPPING_SECRET
 $secret = getenv('SHIPPING_SECRET');
+if (empty($secret)) {
+  http_response_code(500); exit;
+}
 $signature = $_SERVER['HTTP_X_SNIPCART_SIGNATURE'] ?? '';
 $raw = file_get_contents("php://input");
 if (!hash_equals(hash_hmac('sha256', $raw, $secret), $signature)) {
