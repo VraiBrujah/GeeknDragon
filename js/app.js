@@ -347,7 +347,77 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Sélecteur de langue Snipcart
+// === Viewer "1 seul <img>" pour la page produit ===
+document.addEventListener('DOMContentLoaded', () => {
+  const gallery = document.getElementById('product-gallery');
+  if (gallery) {
+    const images = JSON.parse(gallery.getAttribute('data-images') || '[]');
+    const alt = gallery.getAttribute('data-alt') || '';
+    const mainImg = document.getElementById('pg-main-img');
+    const mainLink = document.getElementById('pg-main-link');
+    const prevBtn = gallery.querySelector('.gallery-nav-prev');
+    const nextBtn = gallery.querySelector('.gallery-nav-next');
+    const thumbButtons = Array.from(document.querySelectorAll('[data-pg-thumb]'));
+
+    let idx = 0;
+    let timer = null;
+    const hasImages = images && images.length > 0;
+
+    const setActive = (i) => {
+      if (!hasImages) return;
+      idx = (i + images.length) % images.length;
+      const src = images[idx];
+      mainImg.src = src;
+      mainImg.alt = alt;
+      mainLink.href = src;
+
+      // highlight vignettes
+      thumbButtons.forEach(btn => {
+        btn.classList.toggle('border-indigo-500', Number(btn.getAttribute('data-pg-thumb')) === idx);
+      });
+    };
+
+    const next = (step = 1) => setActive(idx + step);
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (images.length > 1) {
+        timer = setInterval(() => next(1), 5000);
+      }
+    };
+    const stopAutoplay = () => { if (timer) { clearInterval(timer); timer = null; } };
+
+    // Événements
+    if (prevBtn) prevBtn.addEventListener('click', () => { stopAutoplay(); next(-1); startAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { stopAutoplay(); next(1); startAutoplay(); });
+
+    thumbButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const i = Number(btn.getAttribute('data-pg-thumb')) || 0;
+        stopAutoplay();
+        setActive(i);
+        startAutoplay();
+      });
+    });
+
+    // Ouvrir la lightbox Fancybox sur clic de l'image, en galerie
+    mainLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.Fancybox && hasImages) {
+        window.Fancybox.show(
+          images.map(src => ({ src, type: 'image' })),
+          { startIndex: idx }
+        );
+      }
+    });
+
+    // Initialisation
+    if (hasImages) setActive(0);
+    startAutoplay();
+  }
+});
+
+// === Sélecteur de langue Snipcart (inchangé) ===
 document.addEventListener('DOMContentLoaded', () => {
   const sel = document.getElementById('lang-switcher');
   if (sel) {
@@ -359,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Réinitialise les boutons après actions Snipcart
+// === Réinitialise les boutons après actions Snipcart (inchangé) ===
 document.addEventListener('snipcart.ready', () => {
   const reset = item => {
     const id = item.id || item.item?.id;
@@ -370,3 +440,4 @@ document.addEventListener('snipcart.ready', () => {
   Snipcart.events.on('item.added', reset);
   Snipcart.events.on('item.updated', reset);
 });
+
