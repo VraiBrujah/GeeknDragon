@@ -95,7 +95,7 @@ include 'snipcart-init.php';
   </section>
 
   <!-- ░░░ EN-TÊTE ░░░ -->
-  <section class="text-center max-w-4xl mx-auto px-6 my-16" id="pieces">
+  <section class="text-center max-w-4xl mx-auto px-6 my-16">
     <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Boutique officielle</h2>
       <p class="text-lg md:text-xl txt-court">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
       <p class="mt-4 txt-court">Paiement sécurisé via Snipcart
@@ -110,7 +110,7 @@ include 'snipcart-init.php';
 
 
   <!-- ░░░ PIÈCES ░░░ -->
-  <section class="py-64 bg-gray-900/80">
+  <section class="py-24 bg-gray-900/80" id="pieces">
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Pièces métalliques</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">

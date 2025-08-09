@@ -88,11 +88,15 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
         <option value="en">EN</option>
       </select>
 
+
       <!-- Panier Snipcart -->
       <button class="snipcart-checkout txt-court uppercase tracking-wide" data-i18n="nav.cart">
         Panier
         <span class="snipcart-items-count"></span>
       </button>
+			<a href="#" class="snipcart-user-profile">
+				<span class="snipcart-user-email">Mon compte</span>
+			</a>
     </div>
   </div>
   <!-- Menu mobile -->

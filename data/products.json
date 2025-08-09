@@ -4,8 +4,25 @@
     "price": 60,
     "description": "Lot de 10 pièces finement gravées (2 de chaque métal), l’allié parfait des premières quêtes.",
     "images": [
-      "images/Piece/pro/p10.png",
-      "images/Piece/pro/lot10Piece.jpg"
+      "images/Piece/pro/lot10Piece-300.jpg",
+      "images/Piece/pro/lot10Piece.jpg",
+			"images/Piece/of.png",
+			"images/Piece/op.png",
+			"images/Piece/cp.png",
+			"images/Piece/cf.png",
+			"images/Piece/af.png",
+			"images/Piece/af.png",
+			"images/Piece/ef.png",
+			"images/Piece/ep.png",
+			"images/Piece/of.png",
+			"images/Piece/op.png",
+			"images/Piece/pf.png",
+			"images/Piece/p100.png",
+			"images/Piece/e10.png",
+			"images/Piece/a10r.png",			
+			"images/Piece/c10.png",
+			"images/Piece/o1000.png",			
+			"images/Piece/p10000.png"			
     ],
     "multipliers": [1,10,100,1000,10000]
   },
@@ -14,8 +31,24 @@
     "price": 145,
     "description": "Coffret de 25 pièces différentes, pour ressentir la monnaie des royaumes entre vos doigts.",
     "images": [
-      "images/Piece/pro/argent/a100.png",
-      "images/Piece/pro/lot250Piece.jpg"
+      "images/Piece/pro/all25.jpg",
+			"images/Piece/of.png",
+			"images/Piece/op.png",
+			"images/Piece/cp.png",
+			"images/Piece/cf.png",
+			"images/Piece/af.png",
+			"images/Piece/af.png",
+			"images/Piece/ef.png",
+			"images/Piece/ep.png",
+			"images/Piece/of.png",
+			"images/Piece/op.png",
+			"images/Piece/pf.png",
+			"images/Piece/p100.png",
+			"images/Piece/e10.png",
+			"images/Piece/a10r.png",			
+			"images/Piece/c10.png",
+			"images/Piece/o1000.png",			
+			"images/Piece/p10000.png"	
     ],
     "multipliers": []
   },
@@ -24,8 +57,24 @@
     "price": 275,
     "description": "50 pièces (2 de chaque type), le coffret luxueux pour ressentir la richesse royale.",
     "images": [
-      "images/Piece/pro/argent/a1000.png",
-      "images/Piece/pro/lot50Piece.jpg"
+      "images/Piece/pro/lot100Piece.jpg",
+			"images/Piece/of.png",
+			"images/Piece/op.png",
+			"images/Piece/cp.png",
+			"images/Piece/cf.png",
+			"images/Piece/af.png",
+			"images/Piece/af.png",
+			"images/Piece/ef.png",
+			"images/Piece/ep.png",
+			"images/Piece/of.png",
+			"images/Piece/op.png",
+			"images/Piece/pf.png",
+			"images/Piece/p100.png",
+			"images/Piece/e10.png",
+			"images/Piece/a10r.png",			
+			"images/Piece/c10.png",
+			"images/Piece/o1000.png",			
+			"images/Piece/p10000.png"	
     ],
     "multipliers": []
   },
@@ -34,8 +83,24 @@
     "price": 275,
     "description": "50 pièces (10 de chaque métal rare), la trésorerie ultime pour une opulence assumée.",
     "images": [
-      "images/Piece/pro/argent/a10000.png",
-      "images/Piece/pro/lot100Piece.jpg"
+      "images/Piece/pro/lot100Piece.jpg",
+			"images/Piece/of.png",
+			"images/Piece/op.png",
+			"images/Piece/cp.png",
+			"images/Piece/cf.png",
+			"images/Piece/af.png",
+			"images/Piece/af.png",
+			"images/Piece/ef.png",
+			"images/Piece/ep.png",
+			"images/Piece/of.png",
+			"images/Piece/op.png",
+			"images/Piece/pf.png",
+			"images/Piece/p100.png",
+			"images/Piece/e10.png",
+			"images/Piece/a10r.png",			
+			"images/Piece/c10.png",
+			"images/Piece/o1000.png",			
+			"images/Piece/p10000.png"	
     ],
     "multipliers": [1,10,100,1000,10000]
   }
