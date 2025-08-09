@@ -15,6 +15,8 @@ The shop offers several coin bundles:
 - **Lot de 50 – L’Essence des Royaumes** – 275 $ (2 coins of each metal for each multiplier)
 - **Lot de 50 – La Trésorerie du Seigneur Marchand** – 275 $ (10 coins of each metal with a selectable multiplier)
 
+The corresponding product identifiers are `lot10`, `lot25`, `lot50-essence` and `lot50-tresorerie`. When adding or removing products, update both `data/products.json` and `stock.json` to keep the lists aligned.
+
 Need more than 50 pieces or a custom assortment? Request a personalized chest through the [quote form](contact.php).
 
 ### Adding product images

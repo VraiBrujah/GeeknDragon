@@ -2,11 +2,5 @@
   "lot10":            10,
   "lot25":            10,
   "lot50-essence":    10,
-  "lot50-tresorerie": 10,
-  "booster15":        0,
-  "pack60":           0,
-  "mystere100":       0,
-  "triptyque-unit":   0,
-  "triptyque-spec":   0,
-  "pack-etoile":      0
+  "lot50-tresorerie": 10
 }
