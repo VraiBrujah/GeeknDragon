@@ -14,7 +14,6 @@ $title  = $product['name'] . ' | Geek & Dragon';
 $metaDescription = $product['description'];
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/product.php?id=' . urlencode($id);
 $snipcartCssVersion = filemtime(__DIR__ . '/css/snipcart.css');
-
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
 <link rel="stylesheet" href="/css/snipcart.css?v=$snipcartCssVersion" />
@@ -23,19 +22,17 @@ $extraHead = <<<HTML
   .snipcart-modal__container{background:#1f2937!important;}
   .snipcart .snipcart-button-primary{background-image:linear-gradient(to right,#4f46e5,#7c3aed)!important;border:none;}
   .snipcart .snipcart-button-primary:hover{background-image:linear-gradient(to right,#6366f1,#8b5cf6)!important;}
-  /* Boutons nav image */
-  .gallery-nav-btn{ @apply absolute top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-10 h-10 grid place-items-center; }
-  .gallery-nav-prev{ left: .5rem; }
-  .gallery-nav-next{ right: .5rem; }
 </style>
 HTML;
-
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 
-function getStock(string $id): ?int {
+function getStock(string $id): ?int
+{
     global $snipcartSecret, $stockData;
     static $cache = [];
-    if (isset($cache[$id])) return $cache[$id];
+    if (isset($cache[$id])) {
+        return $cache[$id];
+    }
     if ($snipcartSecret) {
         $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
         curl_setopt_array($ch, [
@@ -45,22 +42,23 @@ function getStock(string $id): ?int {
         $res = curl_exec($ch);
         $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
         curl_close($ch);
-        if ($res === false || $status >= 400) return $cache[$id] = null;
+        if ($res === false || $status >= 400) {
+            return $cache[$id] = null;
+        }
         $inv = json_decode($res, true);
         return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
     }
     return $cache[$id] = $stockData[$id] ?? null;
 }
 
-function inStock(string $id): bool {
+function inStock(string $id): bool
+{
     $stock = getStock($id);
     return $stock === null || $stock > 0;
 }
-
 $displayName = str_replace(' – ', '<br>', $product['name']);
 $multipliers = $product['multipliers'] ?? [];
 $images = $product['images'] ?? [];
-$firstImg = $images[0] ?? '/images/placeholder.png';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -76,71 +74,46 @@ include 'snipcart-init.php';
 <main class="pt-32 pb-20">
   <section class="max-w-md mx-auto px-6">
     <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline mb-6 block mx-auto">&larr; <span data-i18n="product.back">Retour à la boutique</span></a>
-
     <div class="card">
-
-      <!-- ========= Fenêtre principale : 1 seul <img> qui change ========= -->
-      <div id="product-gallery"
-           class="relative w-full mb-6"
-           data-images='<?= json_encode($images, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>'
-           data-alt='<?= htmlspecialchars($product['description'], ENT_QUOTES) ?>'>
-
-        <!-- Lien cliquable pour ouvrir la lightbox -->
-        <a id="pg-main-link" href="<?= htmlspecialchars($firstImg) ?>">
-          <img id="pg-main-img"
-               src="<?= htmlspecialchars($firstImg) ?>"
-               alt="<?= htmlspecialchars($product['description']) ?>"
-               class="rounded w-full h-auto block" loading="eager">
-        </a>
-
-        <!-- Navigation Prev / Next -->
-        <button type="button" class="gallery-nav-btn gallery-nav-prev" aria-label="Image précédente" data-dir="-1">‹</button>
-        <button type="button" class="gallery-nav-btn gallery-nav-next" aria-label="Image suivante" data-dir="1">›</button>
+      <div class="swiper mb-6">
+        <div class="swiper-wrapper">
+          <?php foreach ($images as $img) : ?>
+          <div class="swiper-slide">
+            <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
+              <img loading="lazy" src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($product['description']) ?>" class="rounded">
+            </a>
+          </div>
+          <?php endforeach; ?>
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
+        <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
       </div>
-
-      <!-- ========= Vignettes (optionnelles si >1 image) ========= -->
-      <?php if (count($images) > 1) : ?>
-      <div class="grid grid-cols-5 gap-3 mb-6">
-        <?php foreach ($images as $idx => $img) : ?>
-          <button type="button"
-                  class="border-2 border-transparent rounded overflow-hidden hover:border-indigo-500 focus:outline-none focus:border-indigo-500"
-                  data-pg-thumb="<?= (int)$idx ?>">
-            <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($product['description']) ?>" width="100" height="100" class="block w-full h-auto">
-          </button>
-        <?php endforeach; ?>
-      </div>
-      <?php endif; ?>
-
       <h1 class="text-3xl font-bold mb-4 text-center"><?= $displayName ?></h1>
       <p class="mb-6 text-gray-300 text-center"><?= htmlspecialchars($product['description']) ?></p>
-
       <?php if (inStock($id)) : ?>
       <div class="quantity-selector justify-center mx-auto mb-4" data-id="<?= htmlspecialchars($id) ?>">
         <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
         <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
         <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
       </div>
-
-      <?php if (!empty($multipliers)) : ?>
+            <?php if (!empty($multipliers)) : ?>
       <label for="multiplier-<?= htmlspecialchars($id) ?>" class="block mb-4 text-center">
         <span class="sr-only" data-i18n="product.multiplier">Multiplicateur</span>
         <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select text-black" data-target="<?= htmlspecialchars($id) ?>">
-          <?php foreach ($multipliers as $m) : ?>
-            <?php if ($m == 1) : ?>
-              <option value="<?= $m ?>" data-i18n="product.unit">unitaire</option>
-            <?php else : ?>
-              <option value="<?= $m ?>">x<?= $m ?></option>
-            <?php endif; ?>
-          <?php endforeach; ?>
+                <?php foreach ($multipliers as $m) : ?>
+                    <?php if ($m == 1) : ?>
+          <option value="<?= $m ?>" data-i18n="product.unit">unitaire</option>
+                    <?php else : ?>
+          <option value="<?= $m ?>">x<?= $m ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
         </select>
       </label>
-      <?php endif; ?>
-
+            <?php endif; ?>
       <button class="snipcart-add-item btn btn-shop mx-auto block"
-              data-item-id="<?= htmlspecialchars($id) ?>"
-              data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-              data-item-price="<?= htmlspecialchars($product['price']) ?>"
-              data-item-url="product.php?id=<?= htmlspecialchars($id) ?>"
+              data-item-id="<?= htmlspecialchars($id) ?>" data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+              data-item-price="<?= htmlspecialchars($product['price']) ?>" data-item-url="product.php?id=<?= htmlspecialchars($id) ?>"
               data-item-description="<?= htmlspecialchars($product['description']) ?>"
               data-item-quantity="1"
               <?php if (!empty($multipliers)) : ?>
@@ -150,12 +123,10 @@ include 'snipcart-init.php';
               <?php endif; ?>>
         <span data-i18n="product.add">Ajouter</span> — <?= htmlspecialchars($product['price']) ?> $
       </button>
-      <?php else : ?>
-        <span class="btn btn-shop" disabled data-i18n="product.outOfStock">Rupture de stock</span>
-      <?php endif; ?>
-
-      <p class="mt-4 text-center txt-court">
-        <span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
+      <?php else :
+            ?><span class="btn btn-shop" disabled data-i18n="product.outOfStock">Rupture de stock</span><?php
+      endif; ?>
+      <p class="mt-4 text-center txt-court"><span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
         <span class="payment-icons">
           <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
           <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
@@ -168,8 +139,6 @@ include 'snipcart-init.php';
   <?php include __DIR__ . '/partials/testimonials.php'; ?>
 </main>
 <?php include 'footer.php'; ?>
-
-<!-- SEO structured data -->
 <script type="application/ld+json">
 <?= json_encode([
     '@context' => 'https://schema.org/',
@@ -186,7 +155,6 @@ include 'snipcart-init.php';
     ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
 </script>
-
 <script>window.stock = <?= json_encode([$id => getStock($id)]) ?>;</script>
 <script src="js/app.js"></script>
 </body>
