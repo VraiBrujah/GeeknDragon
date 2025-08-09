@@ -7,8 +7,7 @@
       "images/Piece/pro/p10.png",
       "images/Piece/pro/lot10Piece.jpg"
     ],
-    "multipliers": [1,10,100,1000,10000],
-    "stock": 10
+    "multipliers": [1,10,100,1000,10000]
   },
   "lot25": {
     "name": "Lot de 25 – La Monnaie des Royaumes",
@@ -18,8 +17,7 @@
       "images/Piece/pro/argent/a100.png",
       "images/Piece/pro/lot250Piece.jpg"
     ],
-    "multipliers": [],
-    "stock": 10
+    "multipliers": []
   },
   "lot50-essence": {
     "name": "Lot de 50 – L’Essence des Royaumes",
@@ -29,8 +27,7 @@
       "images/Piece/pro/argent/a1000.png",
       "images/Piece/pro/lot50Piece.jpg"
     ],
-    "multipliers": [],
-    "stock": 10
+    "multipliers": []
   },
   "lot50-tresorerie": {
     "name": "Lot de 50 – La Trésorerie du Seigneur Marchand",
@@ -40,7 +37,6 @@
       "images/Piece/pro/argent/a10000.png",
       "images/Piece/pro/lot100Piece.jpg"
     ],
-    "multipliers": [1,10,100,1000,10000],
-    "stock": 10
+    "multipliers": [1,10,100,1000,10000]
   }
 }
