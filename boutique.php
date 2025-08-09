@@ -3,7 +3,7 @@ $active = 'boutique';
 $title  = 'Boutique | Geek & Dragon';
 $metaDescription = "Achetez nos cartes et accessoires immersifs pour D&D.";
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
-$snipcartCssVersion = filemtime(__DIR__.'/css/snipcart.css');
+$snipcartCssVersion = filemtime(__DIR__ . '/css/snipcart.css');
 $extraHead = <<<HTML
 <!-- Snipcart styles -->
 <link rel="stylesheet" href="/css/snipcart.css?v=$snipcartCssVersion" />
@@ -18,11 +18,31 @@ $extraHead = <<<HTML
 HTML;
 
 /* ───── STOCK ───── */
-$stock    = json_decode(file_get_contents(__DIR__ . '/stock.json'), true) ?? [];
+$snipcartSecret = getenv('SNIPCART_SECRET_API_KEY');
+function getStock(string $id): ?int
+{
+    global $snipcartSecret;
+    if (!$snipcartSecret) {
+        return null;
+    }
+    $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_USERPWD => $snipcartSecret . ':',
+    ]);
+    $res = curl_exec($ch);
+    $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    curl_close($ch);
+    if ($res === false || $status >= 400) {
+        return null;
+    }
+    $data = json_decode($res, true);
+    return $data['stock'] ?? $data['available'] ?? null;
+}
 function inStock(string $id): bool
 {
-    global $stock;
-    return !isset($stock[$id]) || $stock[$id] > 0;      // true si illimité ou quantité > 0
+    $stock = getStock($id);
+    return $stock === null || $stock > 0;      // true si illimité ou quantité > 0
 }
 
 // Liste des produits
@@ -84,8 +104,8 @@ include 'snipcart-init.php';
     <div class="max-w-6xl mx-auto px-6">
       <h3 class="text-4xl font-bold text-center mb-12">Pièces métalliques</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-        <?php foreach ($products as $product): ?>
-          <?php include __DIR__ . '/partials/product-card.php'; ?>
+        <?php foreach ($products as $product) : ?>
+            <?php include __DIR__ . '/partials/product-card.php'; ?>
         <?php endforeach; ?>
       </div>
 
@@ -104,7 +124,7 @@ include 'snipcart-init.php';
       <h3 class="text-4xl font-bold mb-6">Coffres sur mesure</h3>
       <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
       <p class="mb-6 text-gray-300">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
-      <a href="contact.php" class="btn btn-primary">Demander un devis</a>	  
+      <a href="contact.php" class="btn btn-primary">Demander un devis</a>     
     </div>
   </section>
 
