@@ -30,6 +30,11 @@ function respond($code, $msg = '')
     exit;
 }
 
+if (empty(WEBHOOK_SECRET)) {
+    error_log('Webhook secret not configured');
+    respond(500);
+}
+
 // 1. Vérifie signature
 $signature = $_SERVER['HTTP_X_SNIPCART_SIGNATURE'] ?? '';
 $raw       = file_get_contents('php://input');
