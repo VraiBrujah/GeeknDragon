@@ -1,7 +1,12 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/pacti620/public_html/geekndragon.com/
+    # Deploy to the document root used by the live site.
+    # The previous path pointed to /public_html/geekndragon.com which did not
+    # match the path used at runtime (/home/pacti620/geekndragon.com).
+    # As a result the "vendor" directory, including Composer's ClassLoader,
+    # was missing and PHP failed to load the autoloader.
+    - export DEPLOYPATH=/home/pacti620/geekndragon.com/
     - /usr/bin/env composer install --no-dev --optimize-autoloader
     - /usr/bin/php build-sitemap.php
     - /usr/bin/rsync -av --delete --exclude='.git/' . "$DEPLOYPATH"
