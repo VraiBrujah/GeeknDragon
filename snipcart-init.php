@@ -4,7 +4,7 @@ $snipcartLanguage = $snipcartLanguage ?? 'fr';
 $snipcartAddProductBehavior = $snipcartAddProductBehavior ?? 'overlay';
 ?>
 <?php if ($snipcartKey): ?>
-<div hidden id="snipcart"></div>
+<div hidden id="snipcart" data-api-key="<?= htmlspecialchars($snipcartKey) ?>"></div>
 <script>
   const lang = localStorage.getItem('snipcartLanguage') || '<?= htmlspecialchars($snipcartLanguage) ?>';
   window.SnipcartSettings = {
