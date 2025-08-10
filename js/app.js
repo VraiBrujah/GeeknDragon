@@ -36,6 +36,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Lecture ping-pong de la vidéo héro
+document.addEventListener('DOMContentLoaded', () => {
+  const hero = document.getElementById('hero-video');
+  if (!hero) return;
+  hero.loop = false;
+  hero.querySelectorAll('source[data-src]').forEach(s => { s.src = s.dataset.src; });
+  hero.load();
+
+  const playForward = () => {
+    hero.playbackRate = 1;
+    hero.play();
+  };
+
+  hero.addEventListener('ended', () => {
+    hero.playbackRate = -1;
+    hero.play();
+  });
+
+  hero.addEventListener('timeupdate', () => {
+    if (hero.playbackRate < 0 && hero.currentTime <= 0.1) {
+      playForward();
+    }
+  });
+
+  playForward();
+});
+
 // Animation fade-up
 document.querySelectorAll('.fade-up').forEach(el=>{
   const observer=new IntersectionObserver(entries=>{
