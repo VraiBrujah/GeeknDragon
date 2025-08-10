@@ -13,7 +13,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
   <?php include 'header.php'; ?>
   <?php include 'snipcart-init.php'; ?>
 
-  <main class="pt-0">
+  <main class="pt-16">
 
     <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative text-white">
