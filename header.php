@@ -42,6 +42,8 @@ $navItems = [
   ]
 ];
 
+$snipcartKey = $snipcartKey ?? getenv('SNIPCART_API_KEY');
+
 function renderNav(array $items, string $active, bool $mobile = false): void {
   foreach ($items as $href => $item) {
     $class = 'txt-court ' . navClass($item['slug'], $active);
@@ -89,14 +91,16 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </select>
 
 
+      <?php if ($snipcartKey): ?>
       <!-- Panier Snipcart -->
       <button class="snipcart-checkout txt-court uppercase tracking-wide" data-i18n="nav.cart">
         Panier
         <span class="snipcart-items-count"></span>
       </button>
-                        <a href="#" class="snipcart-user-profile hidden md:block">
-                                <span class="snipcart-user-email">Mon compte</span>
-                        </a>
+      <a href="#" class="snipcart-user-profile hidden md:block">
+        <span class="snipcart-user-email">Mon compte</span>
+      </a>
+      <?php endif; ?>
     </div>
   </div>
   <!-- Menu mobile -->
