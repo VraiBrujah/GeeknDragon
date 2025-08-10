@@ -48,14 +48,20 @@ To send emails from the contact form, configure SMTP credentials for the fixed s
 1. Install PHP (7.4 or newer) and clone this repository.
 2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SHIPPING_SECRET`, `ORDER_SECRET` and the SMTP variables.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
-3. Start a local server from the project root:
+3. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
+
+   ```bash
+   npm install
+   ```
+
+4. Start a local server from the project root:
 
 
    ```bash
    php -S localhost:8000
    ```
 
-4. Browse to <http://localhost:8000> to view the site.
+5. Browse to <http://localhost:8000> to view the site.
 
 Make sure that the domain you are using is allowed in your Snipcart dashboard; otherwise the cart may remain stuck at the "préparation" step.
 
