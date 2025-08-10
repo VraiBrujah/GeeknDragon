@@ -42,13 +42,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!hero) return;
   hero.loop = false;
 
+  const EPS = 0.01;
+
   hero.addEventListener('ended', () => {
     hero.playbackRate = -1;
+    hero.currentTime = hero.duration - EPS;
     hero.play();
   });
 
   hero.addEventListener('timeupdate', () => {
-    if (hero.playbackRate < 0 && hero.currentTime <= 0.1) {
+    if (hero.playbackRate < 0 && hero.currentTime <= EPS) {
       hero.playbackRate = 1;
       hero.currentTime = 0;
       hero.play();
