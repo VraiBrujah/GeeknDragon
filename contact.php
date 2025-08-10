@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/bootstrap.php';
 session_start();
 $config = require __DIR__ . '/config.php';
 $active = 'contact';

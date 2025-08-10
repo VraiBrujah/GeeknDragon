@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/../bootstrap.php';
 $config = require __DIR__ . '/../config.php';
 $active = 'index';
 $title  = "Des héros niveau 20, un raton trop tenace, et… nos pièces | Geek & Dragon";

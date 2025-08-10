@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 $active = 'boutique';
 $id = preg_replace('/[^a-z0-9_-]/i', '', $_GET['id'] ?? '');

@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 $active = 'boutique';
 $title  = 'Boutique | Geek & Dragon';

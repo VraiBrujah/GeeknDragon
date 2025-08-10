@@ -1,4 +1,5 @@
 <?php
+require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 $active = 'index';
 $title  = 'Geek & Dragon | Aides de jeu immersives';
