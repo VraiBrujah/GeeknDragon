@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/bootstrap.php';
 $active = 'boutique';
 $title  = 'Boutique | Geek & Dragon';
 $metaDescription = "Achetez nos cartes et accessoires immersifs pour D&D.";

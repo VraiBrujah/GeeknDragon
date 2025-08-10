@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/bootstrap.php';
 $active = 'boutique';
 $id = preg_replace('/[^a-z0-9_-]/i', '', $_GET['id'] ?? '');
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];

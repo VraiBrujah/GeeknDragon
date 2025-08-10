@@ -1,5 +1,6 @@
 <?php
-$active='contact';
+require_once __DIR__ . '/bootstrap.php';
+$active = 'contact';
 $title = 'Merci !!! | Geek & Dragon';
 $metaDescription = "Confirmation de l'envoi de votre message à Geek & Dragon.";
 $extraHead = '';

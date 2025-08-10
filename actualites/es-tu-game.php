@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../bootstrap.php';
 $active = 'index';
 $title  = "Des héros niveau 20, un raton trop tenace, et… nos pièces | Geek & Dragon";
 $metaDescription = "Retour sur notre démonstration de pièces au FLIM 2025 avec Es-tu Game ?";
