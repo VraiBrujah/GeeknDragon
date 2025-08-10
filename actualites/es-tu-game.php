@@ -9,6 +9,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
 <?php include '../head-common.php'; ?>
 <body>
   <?php include '../header.php'; ?>
+  <?php include '../snipcart-init.php'; ?>
 
   <main class="pt-16">
     <section id="actus" class="py-16 bg-gray-900/80">

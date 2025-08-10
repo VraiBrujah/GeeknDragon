@@ -23,6 +23,7 @@ $recaptchaSiteKey = getenv('RECAPTCHA_SITE_KEY');
 <body>
 
   <?php include 'header.php'; ?>
+  <?php include 'snipcart-init.php'; ?>
 
   <main class="pt-32 flex items-center justify-center min-h-screen px-4">
 
