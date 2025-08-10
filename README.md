@@ -61,6 +61,28 @@ Make sure that the domain you are using is allowed in your Snipcart dashboard; o
 
 The Snipcart webhooks (`shipping.php` and `decrement-stock.php`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
 
+## Error logging
+
+PHP errors are not displayed in the browser. Inspect the `error.log` file at the project root to diagnose problems.
+
+1. Ensure PHP disables `display_errors` and enables `log_errors` with a log file path:
+
+   ```bash
+   php -d display_errors=0 -d log_errors=1 -d error_log=error.log -S localhost:8000
+   ```
+
+   If using Apache or Nginx, set these directives in `php.ini` or your virtual host configuration.
+
+2. Reproduce the failing request (for example, `curl http://localhost:8000/index.php`).
+
+3. View the log output:
+
+   ```bash
+   tail -n 50 error.log
+   ```
+
+   The file includes the full stack trace for uncaught exceptions.
+
 ## Deployment
 
 The repository includes a `.cpanel.yml` file used by cPanel’s Git deployment feature. When you push to the production repository, cPanel runs the tasks listed there which synchronise the project to the path defined by `DEPLOYPATH` using `rsync`:
