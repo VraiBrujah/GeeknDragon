@@ -58,7 +58,7 @@
     "price": 275,
     "description": "50 pièces (2 de chaque type), la bourse pour ressentir la richesse royale.",
     "images": [
-      "images/Piece/pro/lot100Piece.png",
+      "images/Piece/pro/lot50Piece.png",
       "images/Piece/pro/p50.png",
 			"images/Piece/pro/piece/of.png",
 			"images/Piece/pro/piece/op.png",
@@ -85,7 +85,7 @@
     "price": 275,
     "description": "50 pièces (10 de chaque métal rare), la trésorerie ultime pour une opulence assumée.",
     "images": [
-      "images/Piece/pro/lot100Piece.png",
+      "images/Piece/pro/lot50Piece2.png",
       "images/Piece/pro/p50.png",
 			"images/Piece/pro/piece/of.png",
 			"images/Piece/pro/piece/op.png",
