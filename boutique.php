@@ -88,10 +88,10 @@ include 'snipcart-init.php';
   <!-- ===== Bannière d'ouverture ===== -->
   <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-      <video id="hero-video" class="absolute inset-0 w-full h-full object-cover hero-fade" poster="images/hero_flbg4.jpg" preload="metadata" muted playsinline autoplay loop>
+      <video id="hero-video" class="absolute inset-0 w-full h-full object-cover hero-fade" poster="images/hero_coffre.jpg" preload="metadata" muted playsinline autoplay loop>
         <source data-src="videos/coins_cascadeCoffre.mp4" type="video/mp4">
         <source data-src="videos/coins_cascadey.webm" type="video/webm">
-        <img src="images/hero_flbg4.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
+        <img src="images/hero_coffre.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
       </video>
       <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 		<div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
