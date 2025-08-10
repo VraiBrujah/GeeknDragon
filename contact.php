@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/bootstrap.php';
+$config = require __DIR__ . '/config.php';
 $active = 'contact';
 $title  = 'Demande de devis | Geek & Dragon';
 $metaDescription = "Demande de devis et informations pour vos projets immersifs.";
@@ -15,7 +15,7 @@ $errors = $_SESSION['errors'] ?? [];
 $old = $_SESSION['old'] ?? [];
 unset($_SESSION['errors'], $_SESSION['old']);
 
-$recaptchaSiteKey = getenv('RECAPTCHA_SITE_KEY');
+$recaptchaSiteKey = $config['recaptcha_site_key'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="fr">

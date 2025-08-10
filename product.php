@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . '/bootstrap.php';
+$config = require __DIR__ . '/config.php';
 $active = 'boutique';
 $id = preg_replace('/[^a-z0-9_-]/i', '', $_GET['id'] ?? '');
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
 $stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
-$snipcartSecret = getenv('SNIPCART_SECRET_API_KEY');
+$snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
 if (!$id || !isset($data[$id])) {
     http_response_code(404);
     echo 'Produit introuvable';

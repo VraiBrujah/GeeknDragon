@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/bootstrap.php';
+$config = require __DIR__ . '/config.php';
 $active = 'boutique';
 $title  = 'Boutique | Geek & Dragon';
 $metaDescription = "Achetez nos cartes et accessoires immersifs pour D&D.";
@@ -19,7 +19,7 @@ $extraHead = <<<HTML
 HTML;
 
 /* ───── STOCK ───── */
-$snipcartSecret = getenv('SNIPCART_SECRET_API_KEY');
+$snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
 $stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
 function getStock(string $id): ?int
 {
