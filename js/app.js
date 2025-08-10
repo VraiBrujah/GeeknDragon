@@ -143,11 +143,9 @@ function fullyVisible(el) {
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ----- Vidéos et état ----- */
-  const videos = [
-    document.getElementById('video1'),
-    document.getElementById('video2'),
-    document.getElementById('video3'),
-  ].filter(Boolean);
+  const videos = ['video1', 'video2', 'video3']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
   let current = 0;          // index vidéo active
   let audioOK = false;      // passe à true après 1 geste
 
@@ -170,7 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (b) b.textContent = vid.muted ? '🔇' : '🔊';
   }
   document.querySelectorAll('.mute-btn').forEach(btn => {
-    const vid = document.getElementById(btn.dataset.video);
+    const vid = videos.find(v => v.id === btn.dataset.video);
+    if (!vid) return;
     btn.addEventListener('click', e => {
       e.stopPropagation();
       vid.muted = !vid.muted;
