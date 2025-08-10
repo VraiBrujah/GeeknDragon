@@ -86,18 +86,24 @@ include 'snipcart-init.php';
 <main class="pt-24 md:pt-32">
 
   <!-- ===== Bannière d'ouverture ===== -->
-  <section class="relative min-h-[24rem] md:min-h-[32rem]">
-    <video id="hero-video" class="absolute inset-0 w-full h-full object-cover" poster="images/hero_flbg4.jpg" preload="metadata" muted playsinline autoplay loop>
-      <source data-src="videos/coins_cascadey.mp4" type="video/mp4">
-      <source data-src="videos/coins_cascadey.webm" type="video/webm">
-      <img src="images/hero_flbg4.jpg" alt="" role="presentation">
-    </video>
-    <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
-      <h2 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
-        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, tandis que nos pièces sont présentes à chaque session pour des années d’aventures.</p>
-      <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
-    </div>
-  </section>
+  <!-- ===== HERO ===== -->
+    <section class="min-h-screen flex items-center justify-center text-center relative text-white">
+      <video id="hero-video" class="absolute inset-0 w-full h-full object-cover hero-fade" poster="images/hero_flbg4.jpg" preload="metadata" muted playsinline autoplay loop>
+        <source data-src="videos/coins_cascadey.mp4" type="video/mp4">
+        <source data-src="videos/coins_cascadey.webm" type="video/webm">
+        <img src="images/hero_flbg4.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
+      </video>
+      <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+      <div class="relative z-10 max-w-3xl p-6">
+        <h2 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h2>
+          <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
+          <p class="text-xl mb-8 txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
+			<a href="boutique.php" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+				Visiter la boutique
+			</a>
+      </div>
+    </section>
+
 
   <!-- ░░░ EN-TÊTE ░░░ -->
   <section class="text-center max-w-4xl mx-auto px-6 my-16">
