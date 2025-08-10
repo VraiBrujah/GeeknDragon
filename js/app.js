@@ -141,8 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const videos = [
     document.getElementById('video1'),
     document.getElementById('video2'),
-    document.getElementById('video3')
-  ];
+    document.getElementById('video3'),
+  ].filter(Boolean);
   let current = 0;          // index vidéo active
   let audioOK = false;      // passe à true après 1 geste
 
