@@ -7,6 +7,10 @@ deployment:
     # As a result the "vendor" directory, including Composer's ClassLoader,
     # was missing and PHP failed to load the autoloader.
     - export DEPLOYPATH=/home/pacti620/geekndragon.com/
-    - /usr/bin/env composer install --no-dev --optimize-autoloader
-    - /usr/bin/php build-sitemap.php
+    # First sync the repository to the live document root.
     - /usr/bin/rsync -av --delete --exclude='.git/' . "$DEPLOYPATH"
+    # Install Composer dependencies directly in the deploy path so the
+    # vendor/composer/ClassLoader.php file is always available at runtime.
+    - /usr/bin/env composer install --no-dev --optimize-autoloader -d "$DEPLOYPATH"
+    # Rebuild the sitemap using the freshly installed autoloader.
+    - /usr/bin/php "$DEPLOYPATH/build-sitemap.php"
