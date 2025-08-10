@@ -45,7 +45,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
           <a href="boutique.php#pieces" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Pièces métalliques</h4>
             <p>Monnaie physique pour ressentir chaque trésor et influencer la chance à la table.</p>
-              <img src="images/Piece/pro/lot10Piece-300.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
+              <img src="images/Piece/pro/lot10Piece2-300.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
           </a>
           <a href="boutique.php#triptyques" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Fiche Triptyque</h4>
