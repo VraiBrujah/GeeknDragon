@@ -13,10 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
       switcher.classList.add('hidden');
     } else {
       switcher.classList.remove('hidden');
-      switcher.value = lang;
-      switcher.addEventListener('change', () => {
-        localStorage.setItem('lang', switcher.value);
-        location.reload();
+      const btns = switcher.querySelectorAll('button[data-lang]');
+      btns.forEach(btn => {
+        if (btn.dataset.lang === lang) {
+          btn.classList.remove('opacity-50');
+        }
+        btn.addEventListener('click', () => {
+          localStorage.setItem('lang', btn.dataset.lang);
+          location.reload();
+        });
       });
     }
   }
@@ -141,8 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const videos = [
     document.getElementById('video1'),
     document.getElementById('video2'),
-    document.getElementById('video3')
-  ];
+    document.getElementById('video3'),
+  ].filter(Boolean);
   let current = 0;          // index vidéo active
   let audioOK = false;      // passe à true après 1 geste
 
