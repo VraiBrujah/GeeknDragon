@@ -23,6 +23,11 @@ $navItems = [
     'label' => 'Boutique',
     'i18n'  => 'nav.shop',
     'children' => [
+      '/boutique.php#pieces' => [
+        'slug'  => 'boutique',
+        'label' => 'Pièces',
+        'i18n'  => 'nav.pieces'
+      ],
       '/boutique.php#cartes' => [
         'slug'  => 'boutique',
         'label' => 'Cartes',
@@ -50,7 +55,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     if (isset($item['children']) && !$mobile) {
       echo '<div class="relative group">';
       echo '<a href="' . $href . '" class="' . $class . '" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
-      echo '<div class="absolute left-0 mt-2 hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded">';
+      echo '<div class="absolute left-0 top-full hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded z-10">';
       renderNav($item['children'], $active, $mobile);
       echo '</div></div>';
     } else {
@@ -85,21 +90,21 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </nav>
 
       <!-- Sélecteur de langue -->
-      <select id="lang-switcher" class="bg-gray-800 text-white rounded px-2 py-1 hidden md:block">
-        <option value="fr">FR</option>
-        <option value="en">EN</option>
-      </select>
+      <div id="lang-switcher" class="hidden md:flex gap-2 text-xl">
+        <button data-lang="fr" class="opacity-50 hover:opacity-100 transition" aria-label="Français">🇫🇷</button>
+        <button data-lang="en" class="opacity-50 hover:opacity-100 transition" aria-label="English">🇬🇧</button>
+      </div>
 
 
       <?php if ($snipcartKey): ?>
-      <!-- Panier Snipcart -->
+      <!-- Snipcart -->
       <button class="snipcart-checkout txt-court uppercase tracking-wide" data-i18n="nav.cart">
         Panier
         <span class="snipcart-items-count"></span>
       </button>
-      <a href="#" class="snipcart-user-profile hidden md:block">
-        <span class="snipcart-user-email">Mon compte</span>
-      </a>
+      <button class="snipcart-customer-signin txt-court uppercase tracking-wide" data-i18n="nav.account">
+        <span class="snipcart-user-email">Compte</span>
+      </button>
       <?php endif; ?>
     </div>
   </div>
