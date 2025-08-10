@@ -81,9 +81,9 @@
     "multipliers": []
   },
   "lot50-tresorerie": {
-    "name": "La Trésorerie du Seigneur Marchand",
+    "name": "La Trésorerie du Seigneur",
     "price": 275,
-    "description": "50 pièces (10 de chaque métal rare), la trésorerie ultime pour une opulence assumée.",
+    "description": "50 pièces (10 de chaque métal), la trésorerie ultime pour une opulence assumée.",
     "images": [
       "images/Piece/pro/lot50Piece2.png",
       "images/Piece/pro/p50.png",
