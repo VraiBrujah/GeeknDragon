@@ -17,7 +17,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
 
     <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative">
-      <video id="hero-video" class="absolute inset-0 w-full h-full object-cover opacity-50" poster="images/hero_flbg.jpg" preload="metadata" muted playsinline loop>
+      <video id="hero-video" class="absolute inset-0 w-full h-full object-cover opacity-50" poster="images/hero_flbg.jpg" preload="metadata" muted playsinline autoplay>
         <source data-src="videos/coins_cascade.mp4" type="video/mp4">
         <source data-src="videos/coins_cascade.webm" type="video/webm">
         <img src="images/hero_flbg.jpg" alt="" role="presentation">
