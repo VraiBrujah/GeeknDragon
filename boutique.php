@@ -89,7 +89,7 @@ include 'snipcart-init.php';
     <img src="images/banner_luxe_coins.jpg" alt="Bannière de pièces métalliques luxueuses" class="absolute inset-0 w-full h-full object-cover" loading="eager">
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
-        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Des pièces et cartes d'équipement plus luxueuses qu'une figurine de dragon à 300 $ : utilisées à chaque session et conçues au&nbsp;Québec.</p>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, tandis que nos pièces sont présentes à chaque session pour des années d’aventures.</p>
       <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
     </div>
   </section>
@@ -175,7 +175,7 @@ include 'snipcart-init.php';
       <div class="md:w-2/3 text-gray-200 space-y-4">
         <h3 class="text-3xl font-bold">Investissez ensemble, partagez l’aventure</h3>
         <p>Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
-        <p>À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> et ne sont utilisées qu’une seule fois… nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
+        <p>À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
         <p>Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
       </div>
     </div>
