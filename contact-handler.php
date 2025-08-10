@@ -2,11 +2,7 @@
 
 session_start();
 
-require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/recaptcha.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: contact.php');
@@ -69,28 +65,12 @@ if ($errors) {
 $to = 'contact@geekndragon.com';
 $subject = 'Nouveau message depuis le formulaire de contact';
 $body = "Nom: $nom\nEmail: $email\nTéléphone: $telephone\nMessage:\n$message";
+$headers = "From: no-reply@geekndragon.com\r\n" .
+           "Reply-To: $email\r\n" .
+           'X-Mailer: PHP/' . phpversion();
 
-try {
-    $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host = getenv('SMTP_HOST');
-    $mail->SMTPAuth = true;
-    $mail->Username = getenv('SMTP_USERNAME');
-    $mail->Password = getenv('SMTP_PASSWORD');
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = getenv('SMTP_PORT') ?: 587;
-
-    // Use a fixed no-reply address as the sender to ensure deliverability
-    $mail->setFrom('no-reply@geekndragon.com');
-    $mail->addAddress($to);
-    // Preserve the visitor's address so the merchant can reply directly
-    $mail->addReplyTo($email);
-    $mail->Subject = $subject;
-    $mail->Body = $body;
-
-    $mail->send();
-} catch (Exception $e) {
-    error_log('Mailer Error: ' . $e->getMessage(), 3, __DIR__ . '/error_log');
+if (!mail($to, $subject, $body, $headers)) {
+    error_log('Mail Error: failed to send', 3, __DIR__ . '/error_log');
     $_SESSION['errors'] = ["Une erreur est survenue lors de l'envoi du message."];
     $_SESSION['old'] = $old;
     header('Location: contact.php');
