@@ -96,6 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const openMenu = () => {
     mobileMenu.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      mobileMenu.classList.remove('translate-x-full');
+      mobileMenu.classList.add('translate-x-0');
+    });
     menuBtn.setAttribute('aria-expanded', 'true');
     mobileMenu.setAttribute('aria-hidden', 'false');
     setFocusable();
@@ -104,7 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const closeMenu = () => {
-    mobileMenu.classList.add('hidden');
+    mobileMenu.classList.add('translate-x-full');
+    mobileMenu.classList.remove('translate-x-0');
+    mobileMenu.addEventListener('transitionend', () => {
+      mobileMenu.classList.add('hidden');
+    }, { once: true });
     menuBtn.setAttribute('aria-expanded', 'false');
     mobileMenu.setAttribute('aria-hidden', 'true');
     document.removeEventListener('keydown', trapFocus);
