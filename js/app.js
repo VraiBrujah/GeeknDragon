@@ -36,27 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Lecture ping-pong de la vidéo héro
+// Lecture en boucle de la vidéo héro
 document.addEventListener('DOMContentLoaded', () => {
   const hero = document.getElementById('hero-video');
-  if (!hero) return;
-  hero.loop = false;
-
-  const EPS = 0.01;
-
-  hero.addEventListener('ended', () => {
-    hero.playbackRate = -1;
-    hero.currentTime = hero.duration - EPS;
-    hero.play();
-  });
-
-  hero.addEventListener('timeupdate', () => {
-    if (hero.playbackRate < 0 && hero.currentTime <= EPS) {
-      hero.playbackRate = 1;
-      hero.currentTime = 0;
-      hero.play();
-    }
-  });
+  if (hero) hero.loop = true;
 });
 
 // Animation fade-up
