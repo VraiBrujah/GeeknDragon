@@ -11,13 +11,32 @@ header('Content-Type: application/json');
 // ⬇️ facultatif : vérifie la signature Snipcart
 // Le secret est récupéré depuis la variable d'environnement SHIPPING_SECRET
 $secret = getenv('SHIPPING_SECRET');
-if (empty($secret)) {
+$apiKey = getenv('SNIPCART_SECRET_API_KEY');
+if (empty($secret) || empty($apiKey)) {
   http_response_code(500); exit;
 }
 $signature = $_SERVER['HTTP_X_SNIPCART_SIGNATURE'] ?? '';
 $raw = file_get_contents("php://input");
 if (!hash_equals(hash_hmac('sha256', $raw, $secret), $signature)) {
   http_response_code(401); exit;
+}
+
+$token = $_SERVER['HTTP_X_SNIPCART_REQUESTTOKEN'] ?? '';
+if (!validateToken($token, $apiKey)) {
+  http_response_code(401); exit;
+}
+
+function validateToken($token, $apiKey) {
+  if (!$token) return false;
+  $ch = curl_init('https://app.snipcart.com/api/requestvalidation/' . urlencode($token));
+  curl_setopt_array($ch, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_USERPWD => $apiKey . ':',
+  ]);
+  curl_exec($ch);
+  $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+  curl_close($ch);
+  return $status === 200;
 }
 
 $data = json_decode($raw, true);
