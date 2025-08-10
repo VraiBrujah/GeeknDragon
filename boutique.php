@@ -87,7 +87,11 @@ include 'snipcart-init.php';
 
   <!-- ===== Bannière d'ouverture ===== -->
   <section class="relative min-h-[24rem] md:min-h-[32rem]">
-    <img src="images/banner_luxe_coins.jpg" alt="Bannière de pièces métalliques luxueuses" class="absolute inset-0 w-full h-full object-cover" loading="eager">
+    <video id="hero-video" class="absolute inset-0 w-full h-full object-cover" poster="images/hero_flbg4.jpg" preload="metadata" muted playsinline autoplay loop>
+      <source data-src="videos/coins_cascadey.mp4" type="video/mp4">
+      <source data-src="videos/coins_cascadey.webm" type="video/webm">
+      <img src="images/hero_flbg4.jpg" alt="" role="presentation">
+    </video>
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
         <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, tandis que nos pièces sont présentes à chaque session pour des années d’aventures.</p>
@@ -207,5 +211,32 @@ include 'snipcart-init.php';
 </script>
   <script>window.stock = <?= json_encode($stock) ?>;</script>
   <script src="js/app.js"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const video = document.getElementById('hero-video');
+        if (!video) return;
+        const sources = video.querySelectorAll('source[data-src]');
+        const loadAndPlay = () => {
+          sources.forEach((source) => {
+            source.src = source.dataset.src;
+          });
+          video.load();
+          video.play();
+        };
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                loadAndPlay();
+                observer.unobserve(video);
+              }
+            });
+          }, { threshold: 0.5 });
+          observer.observe(video);
+        } else {
+          loadAndPlay();
+        }
+      });
+  </script>
 </body>
 </html>
