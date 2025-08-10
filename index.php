@@ -39,17 +39,17 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
         <div class="grid md:grid-cols-3 gap-10">
           <a href="boutique.php#cartes" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Cartes d’équipement</h4>
-            <p>560 cartes illustrées pour remplacer la lecture fastidieuse du manuel.</p>
+            <p class="text-center">560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel.</p>
               <img src="images/cartes_equipement.jpg" alt="560 cartes d’équipement illustrées" class="rounded mb-4" loading="lazy">
           </a>
           <a href="boutique.php#pieces" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Pièces métalliques</h4>
-            <p>Monnaie physique pour ressentir chaque trésor et influencer la chance à la table.</p>
+            <p class="text-center">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table.</p>
               <img src="images/Piece/pro/lot10Piece2-300.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
           </a>
           <a href="boutique.php#triptyques" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2">Fiche Triptyque</h4>
-            <p>Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes.</p>
+            <p class="text-center">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes.</p>
               <img src="images/triptyque_fiche.jpg" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
           </a>
         </div>
