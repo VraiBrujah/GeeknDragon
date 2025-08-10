@@ -1,12 +1,15 @@
 <?php
 
-$autoload = __DIR__ . '/vendor/autoload.php';
-if (!file_exists($autoload)) {
-    $message = 'Missing vendor/autoload.php.';
-    error_log($message);
-    exit($message);
+$envFile = __DIR__ . '/.env';
+if (is_readable($envFile)) {
+    $vars = parse_ini_file($envFile, false, INI_SCANNER_RAW);
+    if (is_array($vars)) {
+        foreach ($vars as $key => $value) {
+            if (getenv($key) === false) {
+                putenv("$key=$value");
+                $_ENV[$key] = $value;
+            }
+        }
+    }
 }
 
-require_once $autoload;
-
-Dotenv\Dotenv::createImmutable(__DIR__)->safeLoad();
