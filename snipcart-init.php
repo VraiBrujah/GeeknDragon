@@ -17,4 +17,8 @@ $snipcartAddProductBehavior = $snipcartAddProductBehavior ?? 'overlay';
   const lang = localStorage.getItem('snipcartLanguage') || '<?= htmlspecialchars($snipcartLanguage) ?>';
   document.getElementById('snipcart').setAttribute('data-config-language', lang);
 </script>
-<script async src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>
+<script
+  async
+  src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"
+  onerror="this.onerror=null;this.src='https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js';"
+></script>
