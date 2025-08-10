@@ -13,14 +13,14 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
   <?php include 'header.php'; ?>
   <?php include 'snipcart-init.php'; ?>
 
-  <main class="pt-0">
+  <main class="pt-12">
 
     <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-      <video id="hero-video" class="absolute inset-0 w-full h-full object-cover" poster="images/hero_flbg4.jpg" preload="metadata" muted playsinline autoplay loop>
-        <source data-src="videos/coins_cascadey.mp4" type="video/mp4">
+      <video id="hero-video" class="absolute inset-0 w-full h-full object-cover hero-fade" poster="images/hero_mage.jpg" preload="metadata" muted playsinline autoplay loop>
+        <source data-src="videos/coins_cascadeMage.mp4" type="video/mp4">
         <source data-src="videos/coins_cascadey.webm" type="video/webm">
-        <img src="images/hero_flbg4.jpg" alt="" role="presentation">
+        <img src="images/hero_mage.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
       </video>
       <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
       <div class="relative z-10 max-w-3xl p-6">
@@ -34,7 +34,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     </section>
 
     <!-- ===== PRODUITS ===== -->
-    <section id="produits" class="py-16 bg-gray-900/80 scroll-mt-32">
+    <section id="produits" class="py-16 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h3 class="text-4xl font-bold text-center mb-12">Nos Incontournables</h3>
         <div class="grid md:grid-cols-3 gap-10">
@@ -59,7 +59,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
 
 
 <!-- ===== BOUTIQUE ===== -->
-    <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-32">
+    <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold mb-12">Boutique</h3>
           <p class="mb-8 txt-court">Paiement sécurisé via Snipcart
