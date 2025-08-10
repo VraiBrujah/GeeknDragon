@@ -89,7 +89,7 @@ include 'snipcart-init.php';
   <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative text-white">
       <video id="hero-video" class="absolute inset-0 w-full h-full object-cover hero-fade" poster="images/hero_flbg4.jpg" preload="metadata" muted playsinline autoplay loop>
-        <source data-src="videos/coins_cascadey.mp4" type="video/mp4">
+        <source data-src="videos/coins_cascadeCoffre.mp4" type="video/mp4">
         <source data-src="videos/coins_cascadey.webm" type="video/webm">
         <img src="images/hero_flbg4.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
       </video>
