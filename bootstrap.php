@@ -2,7 +2,7 @@
 
 $autoload = __DIR__ . '/vendor/autoload.php';
 if (!file_exists($autoload)) {
-    $message = 'Missing vendor/autoload.php. Run `composer install`.';
+    $message = 'Missing vendor/autoload.php.';
     error_log($message);
     exit($message);
 }
