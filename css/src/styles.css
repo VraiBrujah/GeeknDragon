@@ -434,3 +434,9 @@ input.gd-field:focus, textarea.gd-field:focus{
   height: 1.5rem;
   width: auto;
 }
+
+/* Hero media fade effect */
+.hero-fade {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
