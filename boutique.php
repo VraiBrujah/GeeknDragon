@@ -151,6 +151,21 @@ include 'snipcart-init.php';
     </div>
   </section>
 
+
+
+  <!-- ░░░ TRIPTYQUES ░░░ -->
+  <section id="triptyques" class="py-16 bg-gray-900/80">
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-4xl font-bold text-center mb-12">Triptyques de personnage</h3>
+      <div class="flex justify-center">
+        <div class="card text-center max-w-md">
+          <h4 class="text-2xl font-semibold mb-2">À venir</h4>
+          <p class="text-gray-300">Les artisans façonnent encore ces grimoires de héros.<br>Les triptyques rejoindront la boutique sous peu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- ===== Investissement collectif & Carte de propriété ===== -->
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
@@ -162,19 +177,6 @@ include 'snipcart-init.php';
         <p>Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
         <p>À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> et ne sont utilisées qu’une seule fois… nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
         <p>Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ░░░ TRIPTYQUES ░░░ -->
-  <section id="triptyques" class="py-16 bg-gray-900/80">
-    <div class="max-w-6xl mx-auto px-6">
-      <h3 class="text-4xl font-bold text-center mb-12">Triptyques de personnage</h3>
-      <div class="flex justify-center">
-        <div class="card text-center max-w-md">
-          <h4 class="text-2xl font-semibold mb-2">À venir</h4>
-          <p class="text-gray-300">Les artisans façonnent encore ces grimoires de héros.<br>Les triptyques rejoindront la boutique sous peu.</p>
-        </div>
       </div>
     </div>
   </section>
