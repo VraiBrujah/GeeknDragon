@@ -96,7 +96,7 @@ include 'snipcart-init.php';
       <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 		<div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
 		  <h2 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
-			<p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, tandis que nos pièces sont présentes à chaque session pour des années d’aventures.</p>
+			<p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
 		  <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
 		</div>
     </section>
