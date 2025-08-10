@@ -41,13 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const hero = document.getElementById('hero-video');
   if (!hero) return;
   hero.loop = false;
-  hero.querySelectorAll('source[data-src]').forEach(s => { s.src = s.dataset.src; });
-  hero.load();
-
-  const playForward = () => {
-    hero.playbackRate = 1;
-    hero.play();
-  };
 
   hero.addEventListener('ended', () => {
     hero.playbackRate = -1;
@@ -56,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   hero.addEventListener('timeupdate', () => {
     if (hero.playbackRate < 0 && hero.currentTime <= 0.1) {
-      playForward();
+      hero.playbackRate = 1;
+      hero.currentTime = 0;
+      hero.play();
     }
   });
-
-  playForward();
 });
 
 // Animation fade-up
