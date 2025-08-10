@@ -34,7 +34,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
     </section>
 
     <!-- ===== PRODUITS ===== -->
-    <section id="produits" class="py-16 bg-gray-900/80 scroll-mt-32">
+    <section id="produits" class="py-16 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h3 class="text-4xl font-bold text-center mb-12">Nos Incontournables</h3>
         <div class="grid md:grid-cols-3 gap-10">
@@ -59,7 +59,7 @@ $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D."
 
 
 <!-- ===== BOUTIQUE ===== -->
-    <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-32">
+    <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold mb-12">Boutique</h3>
           <p class="mb-8 txt-court">Paiement sécurisé via Snipcart
