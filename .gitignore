@@ -2,8 +2,6 @@
 error_log
 *.log
 node_modules/
-vendor/
-
 # Hero video assets (added separately)
 videos/coins_cascade.mp4
 videos/coins_cascade.webm
