@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/bootstrap.php';
+$config = require __DIR__ . '/config.php';
 $active = 'contact';
 $title = 'Merci !!! | Geek & Dragon';
 $metaDescription = "Confirmation de l'envoi de votre message à Geek & Dragon.";

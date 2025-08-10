@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/bootstrap.php';
+$config = require __DIR__ . '/config.php';
 $active = 'index';
 $title  = 'Geek & Dragon | Aides de jeu immersives';
 $metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D.";
