@@ -1,5 +1,6 @@
 <?php
 session_start();
+$config = require __DIR__ . '/config.php';
 $active = 'contact';
 $title  = 'Demande de devis | Geek & Dragon';
 $metaDescription = "Demande de devis et informations pour vos projets immersifs.";
@@ -14,7 +15,7 @@ $errors = $_SESSION['errors'] ?? [];
 $old = $_SESSION['old'] ?? [];
 unset($_SESSION['errors'], $_SESSION['old']);
 
-$recaptchaSiteKey = getenv('RECAPTCHA_SITE_KEY');
+$recaptchaSiteKey = $config['recaptcha_site_key'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -23,6 +24,7 @@ $recaptchaSiteKey = getenv('RECAPTCHA_SITE_KEY');
 <body>
 
   <?php include 'header.php'; ?>
+  <?php include 'snipcart-init.php'; ?>
 
   <main class="pt-32 flex items-center justify-center min-h-screen px-4">
 
@@ -32,10 +34,10 @@ $recaptchaSiteKey = getenv('RECAPTCHA_SITE_KEY');
 
       <form action="contact-handler.php" method="POST" class="space-y-6">
 
-        <?php if (!empty($errors)): ?>
+        <?php if (!empty($errors)) : ?>
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
           <ul class="list-disc list-inside">
-            <?php foreach ($errors as $error): ?>
+            <?php foreach ($errors as $error) : ?>
               <li><?= htmlspecialchars($error) ?></li>
             <?php endforeach; ?>
           </ul>
@@ -64,7 +66,7 @@ $recaptchaSiteKey = getenv('RECAPTCHA_SITE_KEY');
 
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>" />
 
-        <?php if ($recaptchaSiteKey): ?>
+        <?php if ($recaptchaSiteKey) : ?>
         <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars($recaptchaSiteKey) ?>"></div>
         <?php endif; ?>
 
@@ -84,7 +86,7 @@ $recaptchaSiteKey = getenv('RECAPTCHA_SITE_KEY');
 
   <?php include 'footer.php'; ?>
   <script src="/js/app.js"></script>
-  <?php if ($recaptchaSiteKey): ?>
+  <?php if ($recaptchaSiteKey) : ?>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <?php endif; ?>
 </body>

@@ -48,18 +48,46 @@ To send emails from the contact form, configure SMTP credentials for the fixed s
 1. Install PHP (7.4 or newer) and clone this repository.
 2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SHIPPING_SECRET`, `ORDER_SECRET` and the SMTP variables.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
-3. Start a local server from the project root:
+3. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
+
+   ```bash
+   npm install
+   ```
+
+4. Start a local server from the project root:
 
 
    ```bash
    php -S localhost:8000
    ```
 
-4. Browse to <http://localhost:8000> to view the site.
+5. Browse to <http://localhost:8000> to view the site.
 
 Make sure that the domain you are using is allowed in your Snipcart dashboard; otherwise the cart may remain stuck at the "préparation" step.
 
 The Snipcart webhooks (`shipping.php` and `decrement-stock.php`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
+
+## Error logging
+
+PHP errors are not displayed in the browser. Inspect the `error.log` file at the project root to diagnose problems.
+
+1. Ensure PHP disables `display_errors` and enables `log_errors` with a log file path:
+
+   ```bash
+   php -d display_errors=0 -d log_errors=1 -d error_log=error.log -S localhost:8000
+   ```
+
+   If using Apache or Nginx, set these directives in `php.ini` or your virtual host configuration.
+
+2. Reproduce the failing request (for example, `curl http://localhost:8000/index.php`).
+
+3. View the log output:
+
+   ```bash
+   tail -n 50 error.log
+   ```
+
+   The file includes the full stack trace for uncaught exceptions.
 
 ## Deployment
 

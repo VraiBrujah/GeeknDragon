@@ -42,6 +42,8 @@ $navItems = [
   ]
 ];
 
+$snipcartKey = $snipcartKey ?? getenv('SNIPCART_API_KEY');
+
 function renderNav(array $items, string $active, bool $mobile = false): void {
   foreach ($items as $href => $item) {
     $class = 'txt-court ' . navClass($item['slug'], $active);
@@ -68,7 +70,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       <h1 class="text-2xl font-bold text-white group-hover:text-indigo-300 transition">Geek & Dragon</h1>
     </a>
 
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-6 flex-wrap">
       <!-- Bouton hamburger -->
       <button id="menu-btn" class="md:hidden text-white focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
         <span class="sr-only">Menu</span>
@@ -83,20 +85,22 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </nav>
 
       <!-- Sélecteur de langue -->
-      <select id="lang-switcher" class="bg-gray-800 text-white rounded px-2 py-1">
+      <select id="lang-switcher" class="bg-gray-800 text-white rounded px-2 py-1 hidden md:block">
         <option value="fr">FR</option>
         <option value="en">EN</option>
       </select>
 
 
+      <?php if ($snipcartKey): ?>
       <!-- Panier Snipcart -->
       <button class="snipcart-checkout txt-court uppercase tracking-wide" data-i18n="nav.cart">
         Panier
         <span class="snipcart-items-count"></span>
       </button>
-			<a href="#" class="snipcart-user-profile">
-				<span class="snipcart-user-email">Mon compte</span>
-			</a>
+      <a href="#" class="snipcart-user-profile hidden md:block">
+        <span class="snipcart-user-email">Mon compte</span>
+      </a>
+      <?php endif; ?>
     </div>
   </div>
   <!-- Menu mobile -->

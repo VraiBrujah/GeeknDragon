@@ -1,5 +1,6 @@
 <?php
-$active='contact';
+$config = require __DIR__ . '/config.php';
+$active = 'contact';
 $title = 'Merci !!! | Geek & Dragon';
 $metaDescription = "Confirmation de l'envoi de votre message à Geek & Dragon.";
 $extraHead = '';
@@ -9,6 +10,7 @@ $extraHead = '';
 <?php include 'head-common.php'; ?>
 <body>
   <?php include 'header.php'; ?>
+  <?php include 'snipcart-init.php'; ?>
 
   <main class="pt-32 flex items-center justify-center min-h-screen">
     <div class="text-center max-w-xl bg-gray-900/70 backdrop-blur p-10 rounded-3xl border border-yellow-500 shadow-2xl">

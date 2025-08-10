@@ -343,7 +343,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   if (window.Fancybox) {
-    Fancybox.bind('[data-fancybox]', {});
+    Fancybox.bind('[data-fancybox]', {
+      backdrop: 'blur',
+      dragToClose: true,
+      closeButton: 'top',
+      placeFocusBack: true,
+      on: {
+        close: () => history.back(),
+      },
+    });
   }
 });
 

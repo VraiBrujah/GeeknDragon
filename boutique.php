@@ -1,4 +1,5 @@
 <?php
+$config = require __DIR__ . '/config.php';
 $active = 'boutique';
 $title  = 'Boutique | Geek & Dragon';
 $metaDescription = "Achetez nos cartes et accessoires immersifs pour D&D.";
@@ -18,7 +19,7 @@ $extraHead = <<<HTML
 HTML;
 
 /* ───── STOCK ───── */
-$snipcartSecret = getenv('SNIPCART_SECRET_API_KEY');
+$snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
 $stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
 function getStock(string $id): ?int
 {
@@ -89,7 +90,7 @@ include 'snipcart-init.php';
     <img src="images/banner_luxe_coins.jpg" alt="Bannière de pièces métalliques luxueuses" class="absolute inset-0 w-full h-full object-cover" loading="eager">
     <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
       <h2 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
-        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Des pièces et cartes d'équipement plus luxueuses qu'une figurine de dragon à 300 $ : utilisées à chaque session et conçues au&nbsp;Québec.</p>
+        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, tandis que nos pièces sont présentes à chaque session pour des années d’aventures.</p>
       <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
     </div>
   </section>
@@ -151,20 +152,7 @@ include 'snipcart-init.php';
     </div>
   </section>
 
-  <!-- ===== Investissement collectif & Carte de propriété ===== -->
-  <section class="py-16 bg-gray-900/80">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
-      <div class="md:w-1/3">
-        <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
-      </div>
-      <div class="md:w-2/3 text-gray-200 space-y-4">
-        <h3 class="text-3xl font-bold">Investissez ensemble, partagez l’aventure</h3>
-        <p>Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
-        <p>À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> et ne sont utilisées qu’une seule fois… nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
-        <p>Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
-      </div>
-    </div>
-  </section>
+
 
   <!-- ░░░ TRIPTYQUES ░░░ -->
   <section id="triptyques" class="py-16 bg-gray-900/80">
@@ -175,6 +163,21 @@ include 'snipcart-init.php';
           <h4 class="text-2xl font-semibold mb-2">À venir</h4>
           <p class="text-gray-300">Les artisans façonnent encore ces grimoires de héros.<br>Les triptyques rejoindront la boutique sous peu.</p>
         </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ===== Investissement collectif & Carte de propriété ===== -->
+  <section class="py-16 bg-gray-900/80">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
+      <div class="md:w-1/3">
+        <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
+      </div>
+      <div class="md:w-2/3 text-gray-200 space-y-4">
+        <h3 class="text-3xl font-bold">Investissez ensemble, partagez l’aventure</h3>
+        <p>Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
+        <p>À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
+        <p>Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
       </div>
     </div>
   </section>
