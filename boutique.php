@@ -89,7 +89,7 @@ include 'snipcart-init.php';
       <source data-src="videos/coins_cascadey.webm" type="video/webm">
       <img src="images/hero_mage.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
     </video>
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
         <p class="text-xl mb-8 txt-court" data-i18n="shop.hero.description">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
