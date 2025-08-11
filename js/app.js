@@ -74,6 +74,7 @@
   const setLang = (lang) => {
     const safe = LANGS.includes(lang) ? lang : DEFAULT_LANG;
     localStorage.setItem('lang', safe);
+    localStorage.setItem('snipcartLanguage', safe);
     setCookie('lang', safe);
     document.documentElement.lang = safe;
     return safe;
@@ -147,8 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let lang = window.GD.getLang();
   if (!available.includes(lang)) lang = defaultLang;
-  document.documentElement.lang = lang;
-  document.cookie = `lang=${lang};path=/;max-age=31536000`;
+  lang = window.GD.setLang(lang);
 
   // Met à jour l’état visuel des boutons
   const setCurrent = (cur) => {
@@ -158,6 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
   setCurrent(lang);
+  if (window.Snipcart?.api?.session?.setLanguage) {
+    window.Snipcart.api.session.setLanguage(lang);
+  }
 
   // Gestion clic drapeau
   document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
@@ -168,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // Si besoin de recharger entièrement (ex : pricing server-side), décommente :
       // window.location = new URL(window.location.href).toString();
       // Sinon, on met à jour le DOM dynamiquement (voir fetch juste après).
+      if (window.Snipcart?.api?.session?.setLanguage) {
+        window.Snipcart.api.session.setLanguage(picked);
+      }
       loadTranslations(picked);
     });
   });

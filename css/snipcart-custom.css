@@ -41,15 +41,28 @@
 }
 
 /* Ensure account modal form fields remain readable on dark background */
-.snipcart-form__label,
-.snipcart-form__label--focus {
+.snipcart-customer-signin .snipcart-form__label,
+.snipcart-customer-signin .snipcart-form__label--focus {
   color: #e5e7eb;
 }
 
-.snipcart-form__input {
+.snipcart-customer-signin .snipcart-form__input {
   color: #e5e7eb;
 }
 
-.snipcart-form__input::placeholder {
+.snipcart-customer-signin .snipcart-form__input::placeholder {
   color: #9ca3af;
+}
+
+/* Ensure cart modal isn’t hidden under fixed header */
+.snipcart-modal__container {
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height));
+  margin-top: 0;
+}
+
+/* Make quantity and multiplier fields readable */
+.snipcart-item-line select,
+.snipcart-item-line input {
+  color: #111827;
 }

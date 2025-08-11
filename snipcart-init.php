@@ -1,6 +1,6 @@
 <?php
 $snipcartKey = $snipcartKey ?? getenv('SNIPCART_API_KEY');
-$snipcartLanguage = $snipcartLanguage ?? 'fr';
+$snipcartLanguage = $snipcartLanguage ?? ($lang ?? 'fr');
 $snipcartAddProductBehavior = $snipcartAddProductBehavior ?? 'overlay';
 ?>
 <?php if ($snipcartKey): ?>

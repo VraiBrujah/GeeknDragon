@@ -74,7 +74,7 @@ foreach ($products as $p) {
 <body>
 <?php include 'header.php'; ?>
 <?php
-$snipcartLanguage = 'fr';
+$snipcartLanguage = $lang;
 $snipcartLocales = 'fr,en';
 $snipcartAddProductBehavior = 'overlay';
 include 'snipcart-init.php';
