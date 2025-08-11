@@ -72,7 +72,7 @@ $snipcartLocales = 'fr,en';
 $snipcartAddProductBehavior = 'overlay';
 include 'snipcart-init.php';
 ?>
-<main id="main" class="pt-32 pb-20">
+<main id="main" class="pt-42 pb-20">
   <section class="max-w-md mx-auto px-6">
     <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline mb-6 block mx-auto">&larr; <span data-i18n="product.back">Retour à la boutique</span></a>
     <div class="card">
