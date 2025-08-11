@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Initialisation des carrousels Swiper
+// Initialisation des carrousels Swiper & Fancybox
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.swiper').forEach((sw) => {
     if (sw.classList.contains('swiper-thumbs')) return;
@@ -509,4 +509,67 @@ document.addEventListener('DOMContentLoaded', () => {
       e.currentTarget.blur();
     }
   }));
+});
+
+/* ======================================================
+   AJOUTS HEADER : état actif unifié (clic & scroll-spy)
+   ====================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  // 1) Forcer la pile verticale si le PHP n'a pas mis la classe
+  document.querySelectorAll('.snipcart-checkout, .snipcart-customer-signin').forEach((btn) => {
+    const wrap = btn?.parentElement;
+    if (wrap && !wrap.classList.contains('snipcart-stack')) {
+      wrap.classList.add('snipcart-stack');
+    }
+  });
+
+  // 2) Surbrillance unifiée : liens & icônes
+  const clearActive = () => {
+    document.querySelectorAll('header .is-active, header a[aria-current="page"]').forEach((el) => {
+      el.classList.remove('is-active');
+      if (el.matches('a[aria-current="page"]')) el.removeAttribute('aria-current');
+    });
+  };
+
+  const setActive = (el) => {
+    clearActive();
+    if (!el) return;
+    if (el.matches('a')) el.setAttribute('aria-current','page');
+    else el.classList.add('is-active');
+  };
+
+  // Clic sur liens du header et icônes compte/panier
+  document.querySelectorAll('header a[href], header .snipcart-btn').forEach((el) => {
+    el.addEventListener('click', (ev) => {
+      // Laisse tranquille les modifs d'onglet / cmd+clic
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
+      setActive(el);
+    });
+  });
+
+  // 3) Scroll-spy : mappe liens #id -> sections correspondantes
+  const sectionToLink = new Map();
+  document.querySelectorAll('header a[href*="#"]').forEach((a) => {
+    let id = '';
+    try { id = new URL(a.href).hash.replace('#',''); }
+    catch { id = (a.getAttribute('href') || '').split('#')[1]; }
+    if (!id) return;
+    const section = document.getElementById(id);
+    if (section) sectionToLink.set(section, a);
+  });
+
+  if (sectionToLink.size) {
+    const io = new IntersectionObserver((entries) => {
+      let best = null;
+      for (const entry of entries) {
+        if (entry.isIntersecting && (!best || entry.intersectionRatio > best.intersectionRatio)) best = entry;
+      }
+      if (best) {
+        const link = sectionToLink.get(best.target);
+        if (link) setActive(link);
+      }
+    }, { rootMargin: '0px 0px -60% 0px', threshold: [0.25, 0.5, 0.75] });
+
+    sectionToLink.forEach((_, section) => io.observe(section));
+  }
 });
