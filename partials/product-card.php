@@ -70,13 +70,17 @@ $multipliers = $product['multipliers'] ?? [];
 	  </div>
 
 	  <!-- Bouton ajouter -->
-	  <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
-		data-item-id="<?= htmlspecialchars($id) ?>"
-		data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-		data-item-description="<?= htmlspecialchars($desc) ?>"
-		data-item-price="<?= htmlspecialchars($price) ?>"
-		data-item-url="<?= htmlspecialchars($url) ?>"
-		data-item-quantity="1"
+          <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
+                data-item-id="<?= htmlspecialchars($id) ?>"
+                data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
+                data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+                data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
+                data-item-description="<?= htmlspecialchars($desc) ?>"
+                data-item-description-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
+                data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
+                data-item-price="<?= htmlspecialchars($price) ?>"
+                data-item-url="<?= htmlspecialchars($url) ?>"
+                data-item-quantity="1"
 		<?php if (!empty($multipliers)) : ?>
 		  data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
 		  data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
@@ -109,7 +113,13 @@ $multipliers = $product['multipliers'] ?? [];
 
     const multEl = document.getElementById('multiplier-' + id);
     if (multEl) {
-      btn.setAttribute('data-item-custom1-value', multEl.value);
+      const mult = multEl.value;
+      btn.setAttribute('data-item-custom1-value', mult);
+      const lang = document.documentElement.lang;
+      const baseName = lang === 'en'
+        ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
+        : (btn.dataset.itemNameFr || btn.getAttribute('data-item-name'));
+      btn.setAttribute('data-item-name', mult !== '1' ? baseName + ' x' + mult : baseName);
     }
   }, { passive: true });
 })();

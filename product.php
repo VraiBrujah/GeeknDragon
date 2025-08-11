@@ -146,7 +146,11 @@ include 'snipcart-init.php';
       <button class="snipcart-add-item btn btn-shop"
         data-item-id="<?= htmlspecialchars($id) ?>"
         data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
+        data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+        data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
         data-item-description="<?= htmlspecialchars($productDesc) ?>"
+        data-item-description-fr="<?= htmlspecialchars($product['description']) ?>"
+        data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $product['description']) ?>"
         data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
         data-item-url="<?= htmlspecialchars($metaUrl) ?>"
         data-item-quantity="1"
@@ -222,7 +226,13 @@ include 'snipcart-init.php';
     // Multiplicateur
     const multEl = document.getElementById('multiplier-' + id);
     if (multEl) {
-      btn.setAttribute('data-item-custom1-value', multEl.value);
+      const mult = multEl.value;
+      btn.setAttribute('data-item-custom1-value', mult);
+      const lang = document.documentElement.lang;
+      const baseName = lang === 'en'
+        ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
+        : (btn.dataset.itemNameFr || btn.getAttribute('data-item-name'));
+      btn.setAttribute('data-item-name', mult !== '1' ? baseName + ' x' + mult : baseName);
     }
   }, { passive: true });
 })();

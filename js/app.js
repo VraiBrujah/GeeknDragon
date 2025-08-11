@@ -824,8 +824,14 @@ document.addEventListener('click', function (e) {
   }
 
   // Multiplicateur (option personnalisée)
-  const multEl = document.getElementById('multiplier-' + id);
+  const multEl = document.getElementById(`multiplier-${id}`);
   if (multEl) {
-    btn.setAttribute('data-item-custom1-value', multEl.value);
+    const mult = multEl.value;
+    btn.setAttribute('data-item-custom1-value', mult);
+    const lang = document.documentElement.lang;
+    const baseName = lang === 'en'
+      ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
+      : (btn.dataset.itemNameFr || btn.getAttribute('data-item-name'));
+    btn.setAttribute('data-item-name', mult !== '1' ? `${baseName} x${mult}` : baseName);
   }
 }, { passive: true });
