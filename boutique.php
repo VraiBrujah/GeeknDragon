@@ -5,17 +5,10 @@ $active = 'boutique';
 $title  = 'Boutique | Geek & Dragon';
 $metaDescription = "Achetez nos cartes et accessoires immersifs pour D&D.";
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
-$snipcartCssVersion = filemtime(__DIR__ . '/css/snipcart.css');
 $extraHead = <<<HTML
-<!-- Snipcart styles -->
-<link rel="stylesheet" href="/css/snipcart.css?v=$snipcartCssVersion" />
-<!-- Snipcart script is loaded asynchronously below in the body to avoid blocking the page -->
 <style>
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
   .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
-  .snipcart-modal__container{background:#1f2937!important;}
-  .snipcart .snipcart-button-primary{background-image:linear-gradient(to right,#4f46e5,#7c3aed)!important;border:none;}
-  .snipcart .snipcart-button-primary:hover{background-image:linear-gradient(to right,#6366f1,#8b5cf6)!important;}
 </style>
 HTML;
 
