@@ -84,7 +84,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </span>
     </a>
 
-    <div class="flex flex-wrap items-center gap-6 md:gap-8">
+    <div class="flex items-center gap-6 md:gap-8">
       <!-- Bouton hamburger -->
       <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +107,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <?php if ($snipcartKey): ?>
       <!-- Snipcart -->
-      <div class="flex flex-col gap-4 md:flex-row md:flex-wrap md:items-center md:gap-8 flex-shrink-0 text-white z-10">
+      <div class="flex flex-col gap-4 md:flex-row md:items-center md:gap-8 flex-shrink-0 text-white md:absolute md:right-4 md:top-1/2 md:-translate-y-1/2 z-10">
         <button class="snipcart-checkout snipcart-btn flex items-center justify-center gap-1 txt-court w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
