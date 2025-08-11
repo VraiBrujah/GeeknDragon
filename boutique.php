@@ -79,21 +79,20 @@ include 'snipcart-init.php';
 
 <main id="main" class="pt-[var(--header-height)]">
 
-  <!-- ===== Bannière d'ouverture ===== -->
   <!-- ===== HERO ===== -->
-    <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-      <video id="hero-video" class="absolute inset-0 w-full h-full object-cover hero-fade" style="z-index:-1" poster="images/hero_coffre.jpg" preload="metadata" muted playsinline autoplay loop>
-        <source data-src="videos/coins_cascadeCoffre.mp4" type="video/mp4">
-        <source data-src="videos/coins_cascadey.webm" type="video/webm">
-        <img src="images/hero_coffre.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
-      </video>
-      <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-                <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
-                  <h1 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Boutique Geek & Dragon</h1>
-                        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
-                  <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
-                </div>
-    </section>
+  <section class="min-h-screen flex items-center justify-center text-center relative text-white">
+    <video id="hero-video" class="absolute inset-0 w-full h-full object-cover hero-fade" style="z-index:-1" poster="images/hero_mage.jpg" preload="metadata" muted playsinline autoplay loop>
+      <source data-src="videos/coins_cascadeMage.mp4" type="video/mp4">
+      <source data-src="videos/coins_cascadey.webm" type="video/webm">
+      <img src="images/hero_mage.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
+    </video>
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div class="relative z-10 max-w-3xl p-6">
+      <h1 class="text-5xl font-extrabold mb-6">Boutique Geek & Dragon</h1>
+      <p class="text-xl mb-8 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
+      <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
+    </div>
+  </section>
 
 
   <!-- ░░░ EN-TÊTE ░░░ -->
