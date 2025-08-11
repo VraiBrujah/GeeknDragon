@@ -1,4 +1,16 @@
 /* Custom overrides for Snipcart cart */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Cinzel:wght@400;600;700&display=swap');
+
+.snipcart {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.snipcart h1,
+.snipcart h2,
+.snipcart h3,
+.snipcart__button--primary {
+  font-family: 'Cinzel', serif;
+}
 .snipcart-item-line {
   display: flex;
   align-items: center;
