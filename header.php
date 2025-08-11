@@ -105,7 +105,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 		 <img src="/images/flags/fr.svg" width="32" height="24" alt="">
 	   </button>
 	   <button type="button" data-lang="en" class="flag-btn" aria-label="English" aria-current="false">
-		 <img src="/images/flags/gb.svg" width="32" height="24" alt="">
+		 <img src="/images/flags/usgb.svg" width="32" height="24" alt="">
 	   </button>
 	 </div>
 
