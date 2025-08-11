@@ -104,11 +104,11 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       <?php if ($snipcartKey): ?>
       <!-- Snipcart -->
       <div class="flex flex-col items-end gap-4 md:flex-row md:items-center md:gap-8">
-        <button class="snipcart-checkout txt-court text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.cart">
+        <button class="snipcart-checkout snipcart-btn txt-court text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.cart">
           Panier
           <span class="snipcart-items-count"></span>
         </button>
-        <button class="snipcart-customer-signin txt-court text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.account">
+        <button class="snipcart-customer-signin snipcart-btn txt-court text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.account">
           Compte
         </button>
       </div>
@@ -128,11 +128,11 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </ul>
     <?php if ($snipcartKey): ?>
     <div class="mt-8 flex flex-col items-center gap-8">
-      <button class="snipcart-checkout txt-court text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.cart">
+      <button class="snipcart-checkout snipcart-btn txt-court text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.cart">
         Panier
         <span class="snipcart-items-count"></span>
       </button>
-      <button class="snipcart-customer-signin txt-court text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.account">Compte</button>
+      <button class="snipcart-customer-signin snipcart-btn txt-court text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.account">Compte</button>
     </div>
     <?php endif; ?>
   </nav>
