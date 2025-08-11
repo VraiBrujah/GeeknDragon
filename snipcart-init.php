@@ -9,7 +9,7 @@ $snipcartAddProductBehavior = $snipcartAddProductBehavior ?? 'overlay';
   const lang = localStorage.getItem('snipcartLanguage') || '<?= htmlspecialchars($snipcartLanguage) ?>';
   window.SnipcartSettings = {
     publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
-    loadStrategy: 'on-user-interaction',
+    loadStrategy: 'onload',
     config: {
       addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
       locale: lang,
