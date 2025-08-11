@@ -64,7 +64,8 @@
   color: #fcfbfb;
 }
 
-/* Center summary section text */
+/* Center summary section text and container */
 .snipcart-cart-summary {
+  margin: 0 auto;
   text-align: center;
 }
