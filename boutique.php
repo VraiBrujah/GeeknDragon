@@ -124,7 +124,7 @@ include 'snipcart-init.php';
   <!-- ░░░ CARTES ░░░ -->
     <section id="cartes" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
-        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.pieces.title">Cartes d’équipement</h3>
+        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.cards.title">Cartes d’équipement</h3>
         <div class="flex justify-center">
           <div class="card text-center max-w-md">
             <h4 class="text-2xl font-semibold mb-2" data-i18n="shop.cards.coming">À venir</h4>
