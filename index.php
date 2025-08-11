@@ -24,7 +24,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         <source data-src="videos/coins_cascadey.webm" type="video/webm">
         <img src="images/hero_mage.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
       </video>
-      <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+      <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
           <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
