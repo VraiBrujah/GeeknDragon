@@ -10,10 +10,10 @@ $snipcartAddProductBehavior = $snipcartAddProductBehavior ?? 'overlay';
   window.SnipcartSettings = {
     publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
     loadStrategy: 'onload',
-    customerAccountEnabled: true,
     config: {
       addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
       locale: lang,
+      customerAccount: { enabled: true },
     },
   };
 </script>
