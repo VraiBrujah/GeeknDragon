@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const keys = elem.dataset.i18n.split('.');
         let text = data;
         keys.forEach((k) => { if (text) text = text[k]; });
-        if (text) elem.textContent = text;
+        if (text) elem.innerHTML = text;
       });
     })
     .catch(() => {
