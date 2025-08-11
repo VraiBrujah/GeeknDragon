@@ -1,4 +1,28 @@
 {
+  "meta": {
+    "home": {
+      "title": "Geek & Dragon | Immersive game aids",
+      "desc": "Cards, coins and sheets to enrich your D&D sessions."
+    },
+    "shop": {
+      "title": "Shop | Geek & Dragon",
+      "desc": "Buy our immersive cards and accessories for D&D."
+    },
+    "contact": {
+      "title": "Quote request | Geek & Dragon",
+      "desc": "Quote request and information for your immersive projects."
+    },
+    "thankyou": {
+      "title": "Thank you!!! | Geek & Dragon",
+      "desc": "Confirmation that your message has been sent to Geek & Dragon."
+    },
+    "news": {
+      "flim2025": {
+        "title": "Heroes level 20, an overly tenacious raccoon, and... our coins | Geek & Dragon",
+        "desc": "Recap of our coin demonstration at FLIM 2025 with Es-tu Game?"
+      }
+    }
+  },
   "nav": {
     "products": "Products",
     "news": "News",

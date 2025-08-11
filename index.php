@@ -2,11 +2,12 @@
 require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 $active = 'index';
-$title  = 'Geek & Dragon | Aides de jeu immersives';
-$metaDescription = "Cartes, pièces et fiches pour enrichir vos parties de D&D.";
+require __DIR__ . '/i18n.php';
+$title  = $translations['meta']['home']['title'] ?? 'Geek & Dragon';
+$metaDescription = $translations['meta']['home']['desc'] ?? '';
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 
 <body>

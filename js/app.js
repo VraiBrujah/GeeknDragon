@@ -18,9 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const switcher = document.getElementById('lang-switcher');
   const defaultLang = 'fr';
   const available = ['fr', 'en'];
-  let lang = localStorage.getItem('lang') || defaultLang;
+  const cookieMatch = document.cookie.match(/(?:^|; )lang=([^;]+)/);
+  let lang = localStorage.getItem('lang') || (cookieMatch ? cookieMatch[1] : document.documentElement.lang) || defaultLang;
   if (!available.includes(lang)) lang = defaultLang;
   document.documentElement.lang = lang;
+  document.cookie = `lang=${lang};path=/;max-age=31536000`;
 
   if (switcher) {
     if (!translationsReady || available.length < 2) {
@@ -34,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         btn.addEventListener('click', () => {
           localStorage.setItem('lang', btn.dataset.lang);
+          document.cookie = `lang=${btn.dataset.lang};path=/;max-age=31536000`;
           window.location.reload();
         });
       });

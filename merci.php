@@ -2,12 +2,13 @@
 require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 $active = 'contact';
-$title = 'Merci !!! | Geek & Dragon';
-$metaDescription = "Confirmation de l'envoi de votre message à Geek & Dragon.";
+require __DIR__ . '/i18n.php';
+$title = $translations['meta']['thankyou']['title'] ?? 'Geek & Dragon';
+$metaDescription = $translations['meta']['thankyou']['desc'] ?? '';
 $extraHead = '';
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 <body>
   <?php include 'header.php'; ?>
