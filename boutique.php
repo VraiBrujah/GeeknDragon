@@ -100,7 +100,7 @@ include 'snipcart-init.php';
 
   <!-- ░░░ EN-TÊTE ░░░ -->
     <section class="text-center max-w-4xl mx-auto px-6 my-16">
-      <h2 class="text-4xl md:text-5xl font-extrabold mb-4" data-i18n="shop.intro.title">Boutique officielle</h2>
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-4" data-i18n="shop.intro.title">Trésors artisanaux</h2>
         <p class="text-lg md:text-xl txt-court" data-i18n="shop.intro.description">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
         <p class="mt-4 txt-court">
           <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
