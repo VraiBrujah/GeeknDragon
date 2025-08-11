@@ -39,7 +39,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <a href="<?= langUrl('boutique.php#cartes') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d’équipement</h4>
             <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
-              <img src="images/cartes_equipement.jpg" alt="560 cartes d’équipement illustrées" class="rounded mb-4" loading="lazy">
+              <img src="images/cartes_equipement.png" alt="560 cartes d’équipement illustrées" class="rounded mb-4" loading="lazy">
           </a>
           <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
@@ -49,7 +49,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>
             <p class="text-center" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
-              <img src="images/triptyque_fiche.jpg" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
+              <img src="images/triptyque_fiche.png" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
           </a>
         </div>
       </div>
@@ -88,7 +88,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     
         <!-- Résumé d'article - dupliquer ce bloc pour chaque actualité -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg mb-12">
-            <img src="/images/es_tu_game_demo.jpg" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces" loading="lazy">
+            <img src="/images/es_tu_game_demo.png" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces" loading="lazy">
           <h4 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
           <p class="text-lg text-gray-200 mb-4" data-i18n="news.flim2025.summary">
             Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.
@@ -100,7 +100,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     
         <!-- Bloc témoignage -->
         <article class="bg-gray-800 p-6 mt-12 rounded-xl shadow-lg">
-          <img src="images/avisJoueurFlim2025.jpg" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
+          <img src="images/avisJoueurFlim2025.png" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-4" data-i18n="testimonials.quote1.title">« Finis les combats contre nos feuilles de personnage ! »</h4>
           <p class="text-lg leading-relaxed text-gray-200" data-i18n="testimonials.quote1.intro">
             De nombreux joueurs présents l’affirment : les pièces physiques changent tout.
@@ -123,7 +123,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     <section id="contact" class="py-16 bg-gray-900/80 scroll-mt-32">
       <div class="max-w-xl mx-auto text-center">
         <h3 class="text-4xl font-bold mb-6" data-i18n="nav.contact">Contact</h3>
-        <img src="images/team_brujah.jpg" alt="Brujah" class="mx-auto h-32 w-32 rounded-full mb-4" loading="lazy">
+        <img src="images/team_brujah.png" alt="Brujah" class="mx-auto h-32 w-32 rounded-full mb-4" loading="lazy">
           <p class="mb-2 txt-court"><strong>Brujah</strong> — <span data-i18n="contact.info.roleCommunity">Responsable produit & communauté</span></p>
           <p class="mb-2 txt-court"><a href="mailto:contact@geekndragon.com" class="text-indigo-400 hover:underline">contact@geekndragon.com</a></p>
           <p class="txt-court"><a href="tel:+14387642612" class="text-indigo-400 hover:underline">+1 438 764-2612</a></p>

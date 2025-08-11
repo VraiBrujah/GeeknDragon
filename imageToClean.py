@@ -7,7 +7,7 @@ from tkinter import ttk, filedialog, scrolledtext, messagebox
 
 # ---- Constantes
 TARGET = 1200  # dimension du carré final
-IMG_EXTS = {".png", ".jpg", ".jpeg"}
+IMG_EXTS = {".png", ".png", ".jpeg"}
 
 # ---- Traitement d'une image
 def process_one(src_path: Path, backup_root: Path, convert_jpg_to_png: bool, log):
@@ -53,7 +53,7 @@ def process_one(src_path: Path, backup_root: Path, convert_jpg_to_png: bool, log
         out_format = None
 
         # Si JPG et transparence requise -> convertir en PNG si option cochée
-        if ext in {".jpg", ".jpeg"} and needs_transparency and convert_jpg_to_png:
+        if ext in {".png", ".jpeg"} and needs_transparency and convert_jpg_to_png:
             out_path = src_path.with_suffix(".png")
             out_format = "PNG"
 

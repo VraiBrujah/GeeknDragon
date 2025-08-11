@@ -21,7 +21,7 @@ Need more than 50 pieces or a custom assortment? Request a personalized chest th
 
 ### Adding product images
 
-Place product photos under `images/Piece/pro/`. Each item typically uses a full‑resolution image and a 300 px thumbnail (e.g. `lot10Piece.jpg` and `lot10Piece-300.jpg`).
+Place product photos under `images/Piece/pro/`. Each item typically uses a full‑resolution image and a 300 px thumbnail (e.g. `lot10Piece.png` and `lot10Piece-300.png`).
 
 ### Configuring multipliers in Snipcart
 
