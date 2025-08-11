@@ -27,7 +27,7 @@ $recaptchaSiteKey = $config['recaptcha_site_key'] ?? null;
   <?php include 'header.php'; ?>
   <?php include 'snipcart-init.php'; ?>
 
-  <main class="pt-32 flex items-center justify-center min-h-screen px-4">
+  <main id="main" class="pt-32 flex items-center justify-center min-h-screen px-4">
 
     <div class="parchment rounded-3xl p-10 md:p-14 w-full max-w-2xl text-gray-900">
       <h1 class="text-4xl font-bold text-center mb-6" data-i18n="contact.title">Demande de devis</h1>
