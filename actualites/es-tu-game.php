@@ -82,7 +82,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
 
             <div class="relative group">
               <video id="video1" src="/videos/leMaireDoneUnePieceDargentFLIM.mp4"
-                     class="rounded shadow-lg w-full aspect-video" playsinline preload="metadata"></video>
+                     class="rounded shadow-lg w-full aspect-video transition-transform duration-300" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"
                       data-video="video2">🔊</button>
@@ -93,7 +93,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
 
             <div class="relative group">
               <video id="video2" src="/videos/pileoufaceled2duFLIM2025.mp4"
-                     class="rounded shadow-lg w-full aspect-video" playsinline preload="metadata"></video>
+                     class="rounded shadow-lg w-full aspect-video transition-transform duration-300" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block
                              absolute top-2 right-2 z-10 bg-black/60 text-white text-sm px-2 py-1 rounded"
                       data-video="video1">🔊</button>
@@ -104,7 +104,7 @@ $ogImage = '/images/es_tu_game_demo.jpg';
 
             <div class="relative group">
               <video id="video3" src="/videos/finestugameFLIM2025.mp4"
-                     class="rounded shadow-lg w-full aspect-video" playsinline preload="metadata"></video>
+                     class="rounded shadow-lg w-full aspect-video transition-transform duration-300" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"
                       data-video="video3">🔊</button>

@@ -167,6 +167,24 @@ document.addEventListener('DOMContentLoaded', () => {
   let audioOK = false; // passe à true après 1 geste
   let playSeq; // sera défini plus bas
 
+  /* ---------- Effet de zoom et pause hors écran ---------- */
+  videos.forEach((vid) => {
+    vid.addEventListener('play', () => vid.classList.add('scale-105'));
+    ['pause', 'ended'].forEach((evt) => {
+      vid.addEventListener(evt, () => vid.classList.remove('scale-105'));
+    });
+  });
+
+  const pauseObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0 });
+
+  videos.forEach((vid) => pauseObserver.observe(vid));
+
   /* ---------- Bouton mute / unmute ---------- */
   function updateBtn(vid) {
     const b = document.querySelector(`.mute-btn[data-video="${vid.id}"]`);
