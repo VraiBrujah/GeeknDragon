@@ -34,9 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btn.dataset.lang === lang) {
           btn.classList.remove('opacity-50');
           btn.classList.add('ring-2', 'ring-indigo-400', 'rounded');
+		  btn.setAttribute('aria-current','true');
         } else {
           btn.classList.add('opacity-50');
           btn.classList.remove('ring-2', 'ring-indigo-400', 'rounded');
+		  btn.removeAttribute('aria-current');
         }
         btn.addEventListener('click', () => {
           localStorage.setItem('lang', btn.dataset.lang);
