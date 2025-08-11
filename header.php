@@ -118,11 +118,6 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   <!-- Menu mobile -->
   <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-200"></div>
   <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
-    <button id="menu-close" aria-label="Fermer le menu" class="self-end mb-8 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
     <ul class="flex flex-col items-center gap-6">
       <?php renderNav($navItems, $active, true); ?>
     </ul>
@@ -135,5 +130,10 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       <button class="snipcart-customer-signin snipcart-btn txt-court text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.account">Compte</button>
     </div>
     <?php endif; ?>
+    <button id="menu-close" aria-label="Fermer le menu" class="mt-8 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
   </nav>
 </header>
