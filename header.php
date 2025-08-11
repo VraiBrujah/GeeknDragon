@@ -8,7 +8,7 @@
   <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap p-4 md:px-6">
     <!-- Logo / Titre -->
     <a href="/" class="flex items-center gap-3 site-title text-xl font-semibold">
-      <img src="/images/logo.svg" alt="Geek & Dragon" class="h-8 w-8 logo-lighten"/>
+      <img src="/images/logo.png" alt="Geek & Dragon" class="h-8 w-8 logo-lighten"/>
       <span>Geek & Dragon</span>
     </a>
 
