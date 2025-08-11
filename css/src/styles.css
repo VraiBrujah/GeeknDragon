@@ -223,6 +223,9 @@ input.gd-field:focus, textarea.gd-field:focus{
 /* Header Snipcart buttons */
 
 .snipcart-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 9999px;
   border-width: 2px;
   --tw-border-opacity: 1;
