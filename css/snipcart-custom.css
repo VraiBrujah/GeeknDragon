@@ -1,15 +1,19 @@
 /* Custom overrides for Snipcart cart */
 .snipcart-item-line {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
 }
 .snipcart-item-line__remove {
-  position: absolute;
-  top: auto;
-  bottom: 0.5rem;
-  right: 0.5rem;
+  margin-left: auto;
 }
 .snipcart-item-line__actions {
   position: static;
+}
+
+.snipcart-item-line + .snipcart-item-line {
+  margin-top: 0.5rem;
 }
 
 /* Ensure cart and account buttons remain readable and uniform */
