@@ -16,12 +16,30 @@
     "subtitle2": "Designed in Quebec",
     "visitShop": "Visit the shop"
   },
+  "home": {
+    "mustHave": {
+      "heading": "Our Must-Haves",
+      "equipment": {
+        "title": "Equipment Cards",
+        "desc": "560 illustrated equipment cards to replace slogging through the rulebook"
+      },
+      "coins": {
+        "title": "Metal Coins",
+        "desc": "Physical currency to feel every treasure and sway luck at the table"
+      },
+      "triptych": {
+        "title": "Triptych Sheet",
+        "desc": "Create and manage your character without opening a book, on three sturdy panels"
+      }
+    }
+  },
   "footer": {
     "made": "Designed in Quebec."
   },
   "contact": {
     "title": "Quote request",
     "subtitle": "To receive a personalized offer, fill out this magic form.",
+    "requestQuote": "Request a quote",
     "form": {
       "name": "Full name",
       "email": "Email address",
@@ -30,7 +48,8 @@
       "submit": "Send my request"
     },
     "info": {
-      "role": "Product manager"
+      "role": "Product manager",
+      "roleCommunity": "Product manager & community"
     }
   },
   "thankyou": {
@@ -51,6 +70,8 @@
     "flim2025": {
       "heading": "News – FLIM 2025",
       "title": "Heroes level 20, an overly tenacious raccoon, and... our coins",
+      "summary": "Our first demonstration of coins at FLIM 2025 took the form of a legendary one-shot hosted by Es-tu Game?.",
+      "read": "Read the article",
       "video1": "The mayor honors the three heroes with real silver",
       "video2": "When everything is decided by a coin... dragon or star?",
       "video3": "Game finale: The raccoon, the stars... and chaos",
@@ -60,6 +81,13 @@
   "testimonials": {
     "title": "Testimonials",
     "moreReviews": "More reviews on",
-    "trictrac": "TricTrac"
+    "trictrac": "TricTrac",
+    "quote1": {
+      "title": "“No more battles with our character sheets!”",
+      "intro": "Many players said it: physical coins change everything.",
+      "p1": "Gone are the columns of numbers hastily scribbled on a crumpled sheet. Now every player felt the real weight of the loot, sliding between their fingers like a forgotten heirloom. Treasure became tangible. At each exchange, the whole body reacted: the hand hesitating, the eye weighing, the throat drying. The hoard took on flesh. It became dramatic stakes, visceral emotion, an event, a lasting memory...",
+      "p2strong": "No more fights with character sheets",
+      "p2rest": "endless book searches while others disconnect, or the long 0 / 0.1 / 0.2 / 0.3... character creation sessions that discourage before the game even begins. With Geek & Dragon, everything starts when the coin hits the table."
+    }
   }
 }
