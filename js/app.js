@@ -169,9 +169,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Effet de zoom et pause hors écran ---------- */
   videos.forEach((vid) => {
-    vid.addEventListener('play', () => vid.classList.add('scale-105'));
+    ['play', 'playing'].forEach((evt) => {
+      vid.addEventListener(evt, () => vid.classList.add('scale-105', 'z-10'));
+    });
     ['pause', 'ended'].forEach((evt) => {
-      vid.addEventListener(evt, () => vid.classList.remove('scale-105'));
+      vid.addEventListener(evt, () => vid.classList.remove('scale-105', 'z-10'));
     });
   });
 
