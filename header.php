@@ -53,8 +53,8 @@ $navItems = [
 $snipcartKey = $snipcartKey ?? getenv('SNIPCART_API_KEY');
 
 function renderNav(array $items, string $active, bool $mobile = false): void {
-  foreach ($items as $href => $item) {
-    // IMPORTANT : on ne met plus "txt-court" ici (ça forçait la police Cinzel)
+    foreach ($items as $href => $item) {
+    // Le menu utilise déjà Cinzel via le CSS, inutile d'ajouter "txt-court"
     $class = 'nav-link font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
     $link = langUrl($href);
     if (isset($item['children']) && !$mobile) {

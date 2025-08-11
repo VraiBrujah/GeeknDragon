@@ -31,7 +31,9 @@ body {
 /* Titres + éléments “hero” en Cinzel (pour le côté médiéval) */
 h1,h2,h3,h4,h5,h6,
 .btn,
-.txt-court {
+.txt-court,
+.title,
+.subtitle {
   font-family: 'Cinzel', serif;
 }
 
@@ -173,10 +175,10 @@ h6 {
   display: block;
 }
 
-/* 2) Lisibilité du menu : forcer Open Sans dans le header (PAS Cinzel) */
+/* 2) Lisibilité du menu : Cinzel dans le header */
 header nav a,
 header nav .txt-court {
-  font-family: 'Open Sans', sans-serif !important;
+  font-family: 'Cinzel', serif !important;
   text-transform: uppercase;
   letter-spacing: .04em;
   line-height: 1.2;
@@ -213,6 +215,7 @@ header .max-w-7xl{ flex-wrap: wrap; }
   padding-bottom: 0.5rem;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+  font-family: 'Cinzel', serif;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
