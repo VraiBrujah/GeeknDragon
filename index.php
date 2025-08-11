@@ -133,6 +133,11 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <p class="mb-2 txt-court"><strong>Brujah</strong> — <span data-i18n="contact.info.roleCommunity">Responsable produit & communauté</span></p>
           <p class="mb-2 txt-court"><a href="mailto:contact@geekndragon.com" class="text-indigo-400 hover:underline">contact@geekndragon.com</a></p>
           <p class="txt-court"><a href="tel:+14387642612" class="text-indigo-400 hover:underline">+1 438 764-2612</a></p>
+          <div class="mt-6">
+            <a href="<?= langUrl('contact.php') ?>" class="btn btn-primary" data-i18n="contact.requestQuote">
+              Demander un devis
+            </a>
+          </div>
       </div>
     </section>
 
