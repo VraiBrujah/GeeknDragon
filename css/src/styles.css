@@ -55,6 +55,19 @@ h6 {
   letter-spacing: 0.05em;
 }
 
+/* Liens de navigation en style médiéval + surbrillance */
+.nav-link {
+  font-family: 'Cinzel', serif;
+  transition: color 0.2s, background-color 0.2s;
+  border-radius: 0.25rem;
+}
+.nav-link:hover,
+.nav-link:focus,
+.nav-link.is-active {
+  color: #fff;
+  background-color: rgba(79, 70, 229, 0.3);
+}
+
 /* Lien d’accès rapide */
 .skip-link {
   position: absolute;
@@ -324,7 +337,7 @@ a[aria-current="page"]{
 
 /* Slider styles (Swiper) */
 .swiper { width:100%; position:relative; }
-.swiper-slide img { width:100%; height:auto; max-height:20rem; object-fit:contain; }
+.swiper-slide img { width:100%; height:auto; max-height:32rem; object-fit:contain; }
 .swiper-button-prev, .swiper-button-next {
   color:#fff; background-image:linear-gradient(to right,#4f46e5,#7c3aed);
   border-radius:9999px; width:2.5rem; height:2.5rem; display:flex; align-items:center; justify-content:center;
