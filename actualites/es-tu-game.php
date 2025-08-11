@@ -2,12 +2,13 @@
 require __DIR__ . '/../bootstrap.php';
 $config = require __DIR__ . '/../config.php';
 $active = 'index';
-$title  = "Des héros niveau 20, un raton trop tenace, et… nos pièces | Geek & Dragon";
-$metaDescription = "Retour sur notre démonstration de pièces au FLIM 2025 avec Es-tu Game ?";
+require __DIR__ . '/../i18n.php';
+$title  = $translations['meta']['news']['flim2025']['title'] ?? 'Geek & Dragon';
+$metaDescription = $translations['meta']['news']['flim2025']['desc'] ?? '';
 $ogImage = '/images/es_tu_game_demo.jpg';
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($lang) ?>">
 <?php include '../head-common.php'; ?>
 <body>
   <?php include '../header.php'; ?>

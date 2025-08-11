@@ -2,8 +2,9 @@
 require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 $active = 'boutique';
-$title  = 'Boutique | Geek & Dragon';
-$metaDescription = "Achetez nos cartes et accessoires immersifs pour D&D.";
+require __DIR__ . '/i18n.php';
+$title  = $translations['meta']['shop']['title'] ?? 'Geek & Dragon';
+$metaDescription = $translations['meta']['shop']['desc'] ?? '';
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
 $extraHead = <<<HTML
 <style>
@@ -67,7 +68,7 @@ foreach ($products as $p) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 
 <body>

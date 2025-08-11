@@ -3,8 +3,9 @@ require __DIR__ . '/bootstrap.php';
 session_start();
 $config = require __DIR__ . '/config.php';
 $active = 'contact';
-$title  = 'Demande de devis | Geek & Dragon';
-$metaDescription = "Demande de devis et informations pour vos projets immersifs.";
+require __DIR__ . '/i18n.php';
+$title  = $translations['meta']['contact']['title'] ?? 'Geek & Dragon';
+$metaDescription = $translations['meta']['contact']['desc'] ?? '';
 $extraHead = '';
 
 if (empty($_SESSION['csrf_token'])) {
@@ -19,7 +20,7 @@ unset($_SESSION['errors'], $_SESSION['old']);
 $recaptchaSiteKey = $config['recaptcha_site_key'] ?? null;
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 
 <body>

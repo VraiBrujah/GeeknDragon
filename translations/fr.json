@@ -1,4 +1,28 @@
 {
+  "meta": {
+    "home": {
+      "title": "Geek & Dragon | Aides de jeu immersives",
+      "desc": "Cartes, pièces et fiches pour enrichir vos parties de D&D."
+    },
+    "shop": {
+      "title": "Boutique | Geek & Dragon",
+      "desc": "Achetez nos cartes et accessoires immersifs pour D&D."
+    },
+    "contact": {
+      "title": "Demande de devis | Geek & Dragon",
+      "desc": "Demande de devis et informations pour vos projets immersifs."
+    },
+    "thankyou": {
+      "title": "Merci !!! | Geek & Dragon",
+      "desc": "Confirmation de l'envoi de votre message à Geek & Dragon."
+    },
+    "news": {
+      "flim2025": {
+        "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces | Geek & Dragon",
+        "desc": "Retour sur notre démonstration de pièces au FLIM 2025 avec Es-tu Game ?"
+      }
+    }
+  },
   "nav": {
     "products": "Produits",
     "news": "Actualités",

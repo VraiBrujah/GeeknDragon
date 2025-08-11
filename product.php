@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
+require __DIR__ . '/i18n.php';
 $active = 'boutique';
 $id = preg_replace('/[^a-z0-9_-]/i', '', $_GET['id'] ?? '');
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
@@ -12,8 +13,10 @@ if (!$id || !isset($data[$id])) {
     exit;
 }
 $product = $data[$id];
-$title  = $product['name'] . ' | Geek & Dragon';
-$metaDescription = $product['description'];
+$productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
+$productDesc = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
+$title  = $productName . ' | Geek & Dragon';
+$metaDescription = $productDesc;
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/product.php?id=' . urlencode($id);
 $extraHead = <<<HTML
 <style>
@@ -59,7 +62,7 @@ $multipliers = $product['multipliers'] ?? [];
 $images = $product['images'] ?? [];
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 <body>
 <?php include 'header.php'; ?>
