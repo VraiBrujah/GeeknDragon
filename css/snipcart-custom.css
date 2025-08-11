@@ -25,9 +25,13 @@
   gap: 0.25rem;
 }
 
+.snipcart-checkout:hover,
 .snipcart-checkout:focus,
 .snipcart-checkout:active,
+.snipcart-customer-signin:hover,
 .snipcart-customer-signin:focus,
 .snipcart-customer-signin:active {
   color: #e5e7eb;
+  background-color: transparent;
+  outline: none;
 }
