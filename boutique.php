@@ -112,7 +112,7 @@ include 'snipcart-init.php';
     </section>
 
   <!-- ░░░ COFFRES SUR MESURE ░░░ -->
-    <section class="py-16">
+    <section class="py-24">
       <div class="max-w-3xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold mb-6" data-i18n="shop.chest.title">Coffres sur mesure</h3>
         <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
@@ -136,7 +136,7 @@ include 'snipcart-init.php';
 
 
   <!-- ░░░ TRIPTYQUES ░░░ -->
-    <section id="triptyques" class="py-24 bg-gray-900/80 scroll-mt-24">
+    <section id="triptyques" class="py-24">
       <div class="max-w-3xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.triptychs.title">Triptyques de personnage</h3>
         <div class="flex justify-center">
