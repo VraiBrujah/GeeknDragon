@@ -1,0 +1,12 @@
+/* Custom overrides for Snipcart cart */
+.snipcart-item-line {
+  position: relative;
+}
+.snipcart-item-line__remove {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+.snipcart-item-line__actions {
+  position: static;
+}
