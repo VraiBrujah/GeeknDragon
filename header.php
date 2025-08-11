@@ -111,7 +111,8 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </div>
   </div>
   <!-- Menu mobile -->
-  <nav id="mobile-menu" class="fixed inset-0 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
+  <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-200"></div>
+  <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
     <ul class="flex flex-col items-center gap-6">
       <?php renderNav($navItems, $active, true); ?>
     </ul>
