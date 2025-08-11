@@ -16,13 +16,13 @@ $ogImage = '/images/es_tu_game_demo.jpg';
   <main id="main" class="pt-16">
     <section id="actus" class="py-16 bg-gray-900/80">
       <div class="max-w-5xl mx-auto px-6">
-        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="news.flim2025.heading">Actualité – FLIM 2025</h3>
+        <h2 class="text-4xl font-bold text-center mb-12" data-i18n="news.flim2025.heading">Actualité – FLIM 2025</h2>
 
         <!-- Article complet : Es-tu Game ? -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg">
           <img loading="lazy" src="/images/es_tu_game_demo.jpg" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
 
-          <h4 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
+          <h1 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h1>
 
           <div class="space-y-8 text-lg leading-relaxed text-gray-200">
 

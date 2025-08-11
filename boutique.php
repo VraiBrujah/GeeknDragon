@@ -88,11 +88,11 @@ include 'snipcart-init.php';
         <img src="images/hero_coffre.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
       </video>
       <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-		<div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
-		  <h2 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Entrez dans la légende</h2>
-			<p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
-		  <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
-		</div>
+                <div class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center text-center px-4">
+                  <h1 class="text-center text-4xl md:text-5xl font-extrabold mb-4">Boutique Geek & Dragon</h1>
+                        <p class="text-lg md:text-xl max-w-2xl mx-auto mb-6 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
+                  <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
+                </div>
     </section>
 
 
