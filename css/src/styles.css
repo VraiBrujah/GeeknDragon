@@ -248,6 +248,16 @@ input.gd-field:focus, textarea.gd-field:focus{
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
+.snipcart-checkout:focus,
+.snipcart-checkout:active{
+  --tw-bg-opacity: 1;
+  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
 .snipcart-checkout .snipcart-items-count{
   position: absolute;
   top: -0.5rem;
