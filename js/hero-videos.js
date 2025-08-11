@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (!Array.isArray(list) || list.length === 0) return;
 
-    let index = 0;
+    let index = -1;
     let current;
 
     function createVideo(src) {
@@ -27,10 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function playNext() {
-      index = (index + 1) % list.length;
+      index += 1;
+      if (index >= list.length) index = 0;
       const next = createVideo(list[index]);
       next.addEventListener('ended', playNext);
       container.appendChild(next);
+      next.play().catch(() => {});
       requestAnimationFrame(() => {
         next.style.opacity = '1';
         next.style.filter = 'blur(0)';
@@ -45,12 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
       current = next;
     }
 
-    current = createVideo(list[0]);
-    current.addEventListener('ended', playNext);
-    container.appendChild(current);
-    requestAnimationFrame(() => {
-      current.style.opacity = '1';
-      current.style.filter = 'blur(0)';
-    });
+    playNext();
   });
 });
