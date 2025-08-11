@@ -63,13 +63,13 @@
 
 /* Make quantity and multiplier fields readable */
 .snipcart-item-line .snipcart-form__label {
-  color: #e5e7eb;
+  color: #fcfbfb;
 }
 
 .snipcart-item-line select,
 .snipcart-item-line input,
 .snipcart-item-line option {
-  color: #e5e7eb;
+  color: #fcfbfb;
 }
 
 /* Center summary section text */
