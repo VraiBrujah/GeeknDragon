@@ -74,9 +74,9 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 ?>
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
-  <div class="max-w-7xl mx-auto flex justify-between items-center p-4 md:px-6 flex-nowrap gap-x-4">
+  <div class="max-w-7xl mx-auto relative flex justify-between items-center p-4 md:px-6 flex-nowrap gap-x-4 overflow-visible">
     <!-- Logo + Titre cliquables ensemble -->
-    <a href="<?= langUrl('/index.php') ?>" class="flex flex-col md:flex-row items-center group transition-colors duration-200 flex-shrink-0 space-y-1 md:space-y-0 md:space-x-3 text-center md:text-left">
+    <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex flex-col md:flex-row items-center group transition-colors duration-200 flex-shrink-0 space-y-1 md:space-y-0 md:space-x-3 text-center md:text-left">
       <img src="/images/logo.png" alt="Logo Geek & Dragon" class="h-12 logo-lighten transition-transform duration-200 group-hover:scale-105">
       <span class="site-title text-2xl md:text-3xl font-semibold text-white group-hover:text-indigo-300 transition-colors duration-200">
         <span class="sm:hidden leading-snug">Geek<br>&<br>Dragon</span>
@@ -107,7 +107,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <?php if ($snipcartKey): ?>
       <!-- Snipcart -->
-      <div class="flex flex-col gap-4 md:flex-row md:items-center md:gap-8 flex-shrink-0 text-white">
+      <div class="flex flex-col gap-4 md:flex-row md:items-center md:gap-8 flex-shrink-0 text-white md:absolute md:right-4 md:top-1/2 md:-translate-y-1/2 z-10">
         <button class="snipcart-checkout snipcart-btn flex items-center justify-center gap-1 txt-court w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
