@@ -110,8 +110,9 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </div>
   </div>
   <!-- Menu mobile -->
-  <nav id="mobile-menu" class="fixed inset-0 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
-    <ul class="flex flex-col items-center gap-6">
+  <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden opacity-0 transition-opacity duration-200 md:hidden z-10"></div>
+  <nav id="mobile-menu" class="fixed top-0 right-0 h-full w-64 bg-gray-900 flex flex-col items-start p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto z-20" aria-hidden="true" aria-label="Navigation mobile">
+    <ul class="flex flex-col items-start gap-6">
       <?php renderNav($navItems, $active, true); ?>
     </ul>
   </nav>

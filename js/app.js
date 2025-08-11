@@ -69,7 +69,8 @@ document.querySelectorAll('.fade-up').forEach((el) => {
 document.addEventListener('DOMContentLoaded', () => {
   const menuBtn = document.getElementById('menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-  if (!menuBtn || !mobileMenu) return;
+  const overlay = document.getElementById('menu-overlay');
+  if (!menuBtn || !mobileMenu || !overlay) return;
 
   const focusableSelectors = 'a[href], button:not([disabled]), select, textarea, input, [tabindex]:not([tabindex="-1"])';
   let focusable = [];
@@ -97,8 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const openMenu = () => {
+    overlay.classList.remove('hidden');
     mobileMenu.classList.remove('hidden');
     requestAnimationFrame(() => {
+      overlay.classList.remove('opacity-0');
+      overlay.classList.add('opacity-100');
       mobileMenu.classList.remove('translate-x-full');
       mobileMenu.classList.add('translate-x-0');
     });
@@ -115,6 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileMenu.addEventListener('transitionend', () => {
       mobileMenu.classList.add('hidden');
     }, { once: true });
+    overlay.classList.remove('opacity-100');
+    overlay.classList.add('opacity-0');
+    overlay.addEventListener('transitionend', () => {
+      overlay.classList.add('hidden');
+    }, { once: true });
     menuBtn.setAttribute('aria-expanded', 'false');
     mobileMenu.setAttribute('aria-hidden', 'true');
     document.removeEventListener('keydown', trapFocus);
@@ -130,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+  overlay.addEventListener('click', closeMenu);
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
