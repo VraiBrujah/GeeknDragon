@@ -181,6 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((res) => res.ok ? res.json() : null)
       .then((data) => {
         if (!data) return;
+        window.i18n = data;
         document.querySelectorAll('[data-i18n]').forEach((el) => {
           const keys = el.dataset.i18n.split('.');
           let text = data; keys.forEach((k) => { if (text) text = text[k]; });
@@ -221,6 +222,12 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!isFor) return;
           sel.closest('.multiplier-wrapper')?.classList.toggle('hidden', isFor !== current);
         });
+
+        if (typeof window.updatePlus === 'function') {
+          document.querySelectorAll('.btn-shop[data-item-id]').forEach((btn) => {
+            window.updatePlus(btn.dataset.itemId);
+          });
+        }
       })
       .catch(() => {
         if (switcher) switcher.classList.add('hidden');
@@ -538,18 +545,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const over = max != null && (max <= 0 || total >= max);
     const hidePrice = addBtn?.dataset.hidePrice !== undefined;
     const unitPrice = addBtn ? parseFloat(addBtn.dataset.itemPrice || '0') : 0;
-    const priceText = unitPrice ? `Ajouter — ${unitPrice * total} $` : 'Ajouter';
+    const tr = window.i18n?.product || {};
+    const addText = tr.add || 'Ajouter';
+    const insufficientText = tr.insufficientStock || 'Stock insuffisant';
 
     if (plusBtn) {
       const nextTotal = (qty + 1) * multiplier;
       plusBtn.disabled = max != null && (max <= 0 || nextTotal > max);
-      plusBtn.title = plusBtn.disabled ? 'Stock insuffisant' : '';
+      plusBtn.title = plusBtn.disabled ? insufficientText : '';
     }
     if (addBtn) {
+      const label = addBtn.querySelector('[data-i18n="product.add"]');
+      let priceSpan = addBtn.querySelector('.price-text');
+      if (!priceSpan) {
+        priceSpan = document.createElement('span');
+        priceSpan.className = 'price-text';
+        addBtn.append(' ', priceSpan);
+      }
       addBtn.disabled = over;
-      addBtn.title = over ? 'Stock insuffisant' : '';
-      if (over) addBtn.textContent = 'Stock insuffisant';
-      else addBtn.textContent = hidePrice ? 'Ajouter' : priceText;
+      addBtn.title = over ? insufficientText : '';
+      if (label) label.textContent = over ? insufficientText : addText;
+      priceSpan.textContent = (over || hidePrice || !unitPrice) ? '' : `— ${unitPrice * total} $`;
     }
   };
   window.updatePlus = updatePlus;
