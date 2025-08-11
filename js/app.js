@@ -456,39 +456,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartBtns = document.querySelectorAll('.snipcart-checkout');
   const accountBtns = document.querySelectorAll('.snipcart-customer-signin');
 
-  const toggle = (getVisible, open, close) => (e) => {
-    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) {
-      return;
+  const cartVisible = () => window.Snipcart?.store?.getState()?.cart?.status === 'visible';
+  const accountVisible = () => window.Snipcart?.store?.getState()?.customer?.status === 'visible';
+
+  cartBtns.forEach((btn) => btn.addEventListener('click', (e) => {
+    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
+    if (cartVisible()) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      window.Snipcart.api.theme.cart.close();
+      e.currentTarget.blur();
     }
-    e.preventDefault();
-    const state = window.Snipcart.store.getState();
-    const visible = getVisible(state);
-    if (visible) {
-      close?.();
-    } else {
-      open?.();
+  }));
+
+  accountBtns.forEach((btn) => btn.addEventListener('click', (e) => {
+    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
+    if (accountVisible()) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      window.Snipcart.api.theme.customer.close();
+      e.currentTarget.blur();
     }
-    e.currentTarget.blur();
-  };
-
-  const cartVisible = (state) => state?.cart?.status === 'visible';
-  const accountVisible = (state) => state?.customer?.status === 'visible';
-
-  cartBtns.forEach((btn) => btn.addEventListener(
-    'click',
-    toggle(
-      cartVisible,
-      () => window.Snipcart?.api?.theme?.cart?.open(),
-      () => window.Snipcart?.api?.theme?.cart?.close(),
-    ),
-  ));
-
-  accountBtns.forEach((btn) => btn.addEventListener(
-    'click',
-    toggle(
-      accountVisible,
-      () => window.Snipcart?.api?.theme?.customer?.open(),
-      () => window.Snipcart?.api?.theme?.customer?.close(),
-    ),
-  ));
+  }));
 });
