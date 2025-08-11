@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuBtn = document.getElementById('menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const overlay = document.getElementById('menu-overlay');
+  const closeBtn = document.getElementById('menu-close');
   if (!menuBtn || !mobileMenu || !overlay) return;
 
   const focusableSelectors = 'a[href], button:not([disabled]), select, textarea, input, [tabindex]:not([tabindex="-1"])';
@@ -138,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
   overlay.addEventListener('click', closeMenu);
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
