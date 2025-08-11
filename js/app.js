@@ -538,11 +538,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const updatePlus = (id) => {
     const max = stock[id];
     const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
-    const multiplier = parseInt(document.querySelector(`.multiplier-select[data-target="${id}"]`)?.value || '1', 10);
-    const total = qty * multiplier;
     const plusBtn = document.querySelector(`.quantity-btn.plus[data-target="${id}"]`);
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
-    const over = max != null && (max <= 0 || total >= max);
+    const over = max != null && (max <= 0 || qty >= max);
     const hidePrice = addBtn?.dataset.hidePrice !== undefined;
     const unitPrice = addBtn ? parseFloat(addBtn.dataset.itemPrice || '0') : 0;
     const tr = window.i18n?.product || {};
@@ -550,8 +548,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const insufficientText = tr.insufficientStock || 'Stock insuffisant';
 
     if (plusBtn) {
-      const nextTotal = (qty + 1) * multiplier;
-      plusBtn.disabled = max != null && (max <= 0 || nextTotal > max);
+      const nextQty = qty + 1;
+      plusBtn.disabled = max != null && (max <= 0 || nextQty > max);
       plusBtn.title = plusBtn.disabled ? insufficientText : '';
     }
     if (addBtn) {
@@ -565,7 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
       addBtn.disabled = over;
       addBtn.title = over ? insufficientText : '';
       if (label) label.textContent = over ? insufficientText : addText;
-      priceSpan.textContent = (over || hidePrice || !unitPrice) ? '' : `— ${unitPrice * total} $`;
+      priceSpan.textContent = (over || hidePrice || !unitPrice) ? '' : `— ${unitPrice * qty} $`;
     }
   };
   window.updatePlus = updatePlus;
@@ -578,16 +576,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!qtySpan) return;
       let qty = parseInt(qtySpan.textContent, 10) || 1;
       const max = stock[id];
-      const multiplier = parseInt(document.querySelector(`.multiplier-select[data-target="${id}"]`)?.value || '1', 10);
       if (btn.classList.contains('minus')) {
         qty = Math.max(1, qty - 1);
-      } else if (max == null || (qty + 1) * multiplier <= max) {
+      } else if (max == null || qty + 1 <= max) {
         qty += 1;
       }
       qtySpan.textContent = qty;
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
-      const total = qty * multiplier;
-      if (addBtn) addBtn.setAttribute('data-item-quantity', total.toString());
+      if (addBtn) addBtn.setAttribute('data-item-quantity', qty.toString());
       updatePlus(id);
     });
   });
@@ -611,10 +607,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
     const update = () => {
       const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
-      const mult = parseInt(sel.value, 10);
       if (addBtn) {
         addBtn.setAttribute('data-item-custom1-value', sel.value);
-        addBtn.setAttribute('data-item-quantity', (qty * mult).toString());
+        addBtn.setAttribute('data-item-quantity', qty.toString());
       }
       updatePlus(id);
     };
