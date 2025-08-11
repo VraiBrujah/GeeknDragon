@@ -74,7 +74,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 ?>
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
-  <div class="max-w-7xl mx-auto flex justify-between items-center p-4 md:px-6 flex-wrap gap-x-4">
+  <div class="max-w-7xl mx-auto flex justify-between items-center p-4 md:px-6 flex-nowrap gap-x-4">
     <!-- Logo + Titre cliquables ensemble -->
     <a href="<?= langUrl('/index.php') ?>" class="flex flex-col md:flex-row items-center group transition-colors duration-200 flex-shrink-0 space-y-1 md:space-y-0 md:space-x-3 text-center md:text-left">
       <img src="/images/logo.png" alt="Logo Geek & Dragon" class="h-12 logo-lighten transition-transform duration-200 group-hover:scale-105">
