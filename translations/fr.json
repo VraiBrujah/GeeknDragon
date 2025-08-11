@@ -84,6 +84,7 @@
   "product": {
     "back": "Retour à la boutique",
     "multiplier": "Multiplicateur",
+    "quantity": "Quantité",
     "unit": "unitaire",
     "add": "Ajouter",
     "outOfStock": "Rupture de stock",

@@ -84,6 +84,7 @@
   "product": {
     "back": "Back to shop",
     "multiplier": "Multiplier",
+    "quantity": "Quantity",
     "unit": "single",
     "add": "Add",
     "outOfStock": "Out of stock",

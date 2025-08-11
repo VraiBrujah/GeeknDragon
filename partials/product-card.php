@@ -9,6 +9,7 @@
   <p class="text-center mb-4 text-gray-300 flex-grow" data-desc-fr="<?= htmlspecialchars($product['desc']) ?>" data-desc-en="<?= htmlspecialchars($product['desc_en']) ?>"><?= htmlspecialchars($product['desc']) ?></p>
   <div class="mt-auto flex flex-col items-center gap-4">
     <div class="flex flex-col items-center">
+      <label class="mb-2 text-center" data-i18n="product.quantity">Quantité</label>
       <div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($product['id']) ?>">
         <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($product['id']) ?>">−</button>
         <span class="qty-value" id="qty-<?= htmlspecialchars($product['id']) ?>">1</span>

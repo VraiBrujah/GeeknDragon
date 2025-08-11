@@ -67,7 +67,7 @@ $images = $product['images'] ?? [];
 <body>
 <?php include 'header.php'; ?>
 <?php
-$snipcartLanguage = 'fr';
+$snipcartLanguage = $lang;
 $snipcartLocales = 'fr,en';
 $snipcartAddProductBehavior = 'overlay';
 include 'snipcart-init.php';
@@ -98,24 +98,25 @@ include 'snipcart-init.php';
       <h1 class="text-3xl font-bold mb-4 text-center" data-name-fr="<?= $displayName ?>" data-name-en="<?= $displayNameEn ?>"><?= $displayName ?></h1>
       <p class="mb-6 text-gray-300 text-center" data-desc-fr="<?= htmlspecialchars($product['description']) ?>" data-desc-en="<?= htmlspecialchars($descriptionEn) ?>"><?= htmlspecialchars($product['description']) ?></p>
       <?php if (inStock($id)) : ?>
-      <div class="quantity-selector justify-center mx-auto mb-4" data-id="<?= htmlspecialchars($id) ?>">
-        <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
-        <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-        <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+      <div class="text-center mb-4">
+        <label class="block mb-2" data-i18n="product.quantity">Quantité</label>
+        <div class="quantity-selector justify-center mx-auto" data-id="<?= htmlspecialchars($id) ?>">
+          <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+          <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
+          <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+        </div>
       </div>
             <?php if (!empty($multipliers)) : ?>
-      <label for="multiplier-<?= htmlspecialchars($id) ?>" class="block mb-4 text-center">
-        <span class="sr-only" data-i18n="product.multiplier">Multiplicateur</span>
-        <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select text-black" data-target="<?= htmlspecialchars($id) ?>">
+      <label for="multiplier-<?= htmlspecialchars($id) ?>" class="block mb-2 text-center" data-i18n="product.multiplier">Multiplicateur</label>
+      <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select text-black mb-4" data-target="<?= htmlspecialchars($id) ?>">
                 <?php foreach ($multipliers as $m) : ?>
                     <?php if ($m == 1) : ?>
-          <option value="<?= $m ?>" data-i18n="product.unit">unitaire</option>
+        <option value="<?= $m ?>" data-i18n="product.unit">unitaire</option>
                     <?php else : ?>
-          <option value="<?= $m ?>">x<?= $m ?></option>
+        <option value="<?= $m ?>">x<?= $m ?></option>
                     <?php endif; ?>
                 <?php endforeach; ?>
-        </select>
-      </label>
+      </select>
             <?php endif; ?>
       <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="<?= htmlspecialchars($id) ?>" data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>" data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'])) ?>"
