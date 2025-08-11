@@ -77,7 +77,7 @@ $snipcartAddProductBehavior = 'overlay';
 include 'snipcart-init.php';
 ?>
 
-<main id="main" class="pt-12">
+<main id="main" class="pt-[var(--header-height)]">
 
   <!-- ===== Bannière d'ouverture ===== -->
   <!-- ===== HERO ===== -->
