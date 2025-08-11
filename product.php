@@ -118,8 +118,7 @@ include 'snipcart-init.php';
               data-item-description="<?= htmlspecialchars($product['description']) ?>" data-item-description-en="<?= htmlspecialchars($descriptionEn) ?>"
               data-item-quantity="1"
               <?php if (!empty($multipliers)) : ?>
-              data-item-custom1-name="Multiplicateur"
-              data-item-custom1-name-en="Multiplier"
+              data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
               data-item-custom1-options="<?= implode('|', $multipliers) ?>"
               data-item-custom1-value="<?= $multipliers[0] ?>"
               <?php endif; ?>>
