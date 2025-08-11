@@ -37,7 +37,13 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', () => {
           localStorage.setItem('lang', btn.dataset.lang);
           document.cookie = `lang=${btn.dataset.lang};path=/;max-age=31536000`;
-          window.location.reload();
+          const url = new URL(window.location);
+          if (btn.dataset.lang === defaultLang) {
+            url.searchParams.delete('lang');
+          } else {
+            url.searchParams.set('lang', btn.dataset.lang);
+          }
+          window.location.href = url.toString();
         });
       });
     }

@@ -52,15 +52,16 @@ $snipcartKey = $snipcartKey ?? getenv('SNIPCART_API_KEY');
 function renderNav(array $items, string $active, bool $mobile = false): void {
   foreach ($items as $href => $item) {
     $class = 'txt-court font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
+    $link = langUrl($href);
     if (isset($item['children']) && !$mobile) {
       echo '<li class="relative group">';
-      echo '<a href="' . $href . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
+      echo '<a href="' . $link . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
       echo '<ul class="absolute left-0 top-full hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-2">';
       renderNav($item['children'], $active, $mobile);
       echo '</ul></li>';
     } else {
       echo '<li>';
-      echo '<a href="' . $href . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
+      echo '<a href="' . $link . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
       if (isset($item['children']) && $mobile) {
         echo '<ul class="pl-4 flex flex-col space-y-2 mt-2">';
         renderNav($item['children'], $active, $mobile);
@@ -75,7 +76,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
   <div class="max-w-7xl mx-auto flex justify-between items-center p-4 md:px-6">
     <!-- Logo + Titre cliquables ensemble -->
-    <a href="/index.php" class="flex items-center space-x-3 group transition-colors duration-200">
+    <a href="<?= langUrl('/index.php') ?>" class="flex items-center space-x-3 group transition-colors duration-200">
       <img src="/images/logo.png" alt="Logo Geek & Dragon" class="h-12 logo-lighten transition-transform duration-200 group-hover:scale-105">
       <span class="site-title text-2xl md:text-3xl font-semibold text-white group-hover:text-indigo-300 transition-colors duration-200">Geek & Dragon</span>
     </a>
