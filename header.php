@@ -9,12 +9,12 @@ function navClass($key, $active) {
 }
 $navItems = [
   '/index.php#produits' => [
-    'slug'  => 'index',
+    'slug'  => 'produits',
     'label' => 'Produits',
     'i18n'  => 'nav.products'
   ],
   '/index.php#actus' => [
-    'slug'  => 'index',
+    'slug'  => 'actus',
     'label' => 'Actualités',
     'i18n'  => 'nav.news'
   ],
@@ -41,7 +41,7 @@ $navItems = [
     ]
   ],
   '/index.php#contact' => [
-    'slug'  => 'index',
+    'slug'  => 'contact',
     'label' => 'Contact',
     'i18n'  => 'nav.contact'
   ]

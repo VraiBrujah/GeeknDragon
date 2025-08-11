@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
-$active = 'index';
+$active = 'produits';
 require __DIR__ . '/i18n.php';
 $title  = $translations['meta']['home']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['home']['desc'] ?? '';
