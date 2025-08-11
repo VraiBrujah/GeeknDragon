@@ -1,4 +1,6 @@
 <?php
+// Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
+
 if (!isset($product['id'])) return;
 $id = (string)$product['id'];
 
@@ -12,7 +14,7 @@ $multipliers = $product['multipliers'] ?? [];
 
 <?php if (inStock($id)) : ?>
 <div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
-            min-w-[20.5rem] sm:min-w-[21rem] md:min-w-[21.5rem]">
+            min-w-[21rem] sm:min-w-[22rem] md:min-w-[23rem]">
   <a href="<?= htmlspecialchars($url) ?>">
     <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
          alt="<?= htmlspecialchars($desc) ?>"
@@ -61,8 +63,7 @@ $multipliers = $product['multipliers'] ?? [];
     </div>
     <?php endif; ?>
 
-    <button class="snipcart-add-item btn btn-shop px-6"
-      style="white-space:nowrap"
+    <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
       data-item-id="<?= htmlspecialchars($id) ?>"
       data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
       data-item-description="<?= htmlspecialchars($desc) ?>"
@@ -76,11 +77,11 @@ $multipliers = $product['multipliers'] ?? [];
       <?php endif; ?>
     >
       <span data-i18n="product.add">Ajouter</span>
-      &nbsp;—&nbsp;<?= htmlspecialchars($price) ?> $
     </button>
   </div>
 </div>
 
+<!-- Petit patch local si la page liste n'inclut pas déjà le listener global -->
 <script>
 (function(){
   if (window.__snipcartQtyPatch) return;
