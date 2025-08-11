@@ -1,9 +1,39 @@
 <?php
-$availableLangs = ['fr','en'];
+/**
+ * Basic internationalisation bootstrap.
+ *
+ * Language is resolved from the `lang` query parameter or the stored cookie.
+ * The helper `langUrl()` appends the current language to internal links when
+ * needed so that navigation remains consistent across pages.
+ */
+
+$availableLangs = ['fr', 'en'];
 $lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? 'fr');
 if (!in_array($lang, $availableLangs, true)) {
     $lang = 'fr';
 }
 setcookie('lang', $lang, time() + 31536000, '/');
-$translations = json_decode(file_get_contents(__DIR__ . "/translations/$lang.json"), true);
+
+/**
+ * Append the current language as query parameter to a URL.
+ */
+function langUrl(string $url): string
+{
+    global $lang;
+    if ($lang === 'fr') {
+        return $url;
+    }
+
+    $parts = explode('#', $url, 2);
+    if (str_contains($parts[0], '?')) {
+        $parts[0] .= '&lang=' . $lang;
+    } else {
+        $parts[0] .= '?lang=' . $lang;
+    }
+
+    return isset($parts[1]) ? $parts[0] . '#' . $parts[1] : $parts[0];
+}
+
+$translations = json_decode(file_get_contents(__DIR__ . "/translations/$lang.json"), true) ?: [];
 ?>
+

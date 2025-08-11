@@ -29,7 +29,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
           <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
           <p class="text-xl mb-8 txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
-<a href="boutique.php" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+<a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
           </a>
       </div>
@@ -40,17 +40,17 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
       <div class="max-w-6xl mx-auto px-6">
         <h3 class="text-4xl font-bold text-center mb-12" data-i18n="home.mustHave.heading">Nos Incontournables</h3>
         <div class="grid md:grid-cols-3 gap-10">
-          <a href="boutique.php#cartes" class="card-product block no-underline hover:no-underline text-gray-100">
+          <a href="<?= langUrl('boutique.php#cartes') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d’équipement</h4>
             <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
               <img src="images/cartes_equipement.jpg" alt="560 cartes d’équipement illustrées" class="rounded mb-4" loading="lazy">
           </a>
-          <a href="boutique.php#pieces" class="card-product block no-underline hover:no-underline text-gray-100">
+          <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
             <p class="text-center" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
               <img src="images/Piece/pro/lot10Piece2-300.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
           </a>
-          <a href="boutique.php#triptyques" class="card-product block no-underline hover:no-underline text-gray-100">
+          <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>
             <p class="text-center" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
               <img src="images/triptyque_fiche.jpg" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
@@ -73,10 +73,10 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
             &nbsp;|&nbsp; <span data-i18n="product.realTimeStock">Stocks mis à jour en temps réel.</span>
           </p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
-          <a href="boutique.php" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+          <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
           </a>
-          <a href="contact.php" class="btn btn-outline" data-i18n="contact.requestQuote">
+          <a href="<?= langUrl('contact.php') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">
             Demander un devis
           </a>
         </div>
@@ -100,7 +100,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
             Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.
           </p>
           <div class="text-center">
-            <a href="actualites/es-tu-game.php" class="btn btn-primary" data-i18n="news.flim2025.read">Lire l’article</a>
+            <a href="<?= langUrl('actualites/es-tu-game.php') ?>" class="btn btn-primary" data-i18n="news.flim2025.read">Lire l’article</a>
           </div>
         </article>
     
