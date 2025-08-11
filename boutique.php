@@ -120,11 +120,11 @@ include 'snipcart-init.php';
         <a href="contact.php" class="btn btn-primary" data-i18n="shop.chest.button">Demander un devis</a>
       </div>
     </section>
-
+	
   <!-- ░░░ CARTES ░░░ -->
-    <section id="cartes" class="py-16">
+    <section id="cartes" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
-        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.cards.title">Cartes d’équipement</h3>
+        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.pieces.title">Cartes d’équipement</h3>
         <div class="flex justify-center">
           <div class="card text-center max-w-md">
             <h4 class="text-2xl font-semibold mb-2" data-i18n="shop.cards.coming">À venir</h4>
@@ -135,10 +135,9 @@ include 'snipcart-init.php';
     </section>
 
 
-
   <!-- ░░░ TRIPTYQUES ░░░ -->
-    <section id="triptyques" class="py-16 bg-gray-900/80">
-      <div class="max-w-6xl mx-auto px-6">
+    <section id="triptyques" class="py-24 bg-gray-900/80 scroll-mt-24">
+      <div class="max-w-3xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.triptychs.title">Triptyques de personnage</h3>
         <div class="flex justify-center">
           <div class="card text-center max-w-md">
@@ -148,6 +147,8 @@ include 'snipcart-init.php';
         </div>
       </div>
     </section>
+
+
   
   <!-- ===== Investissement collectif & Carte de propriété ===== -->
   <section class="py-16 bg-gray-900/80">
