@@ -103,10 +103,15 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <?php if ($snipcartKey): ?>
       <!-- Snipcart -->
-      <button class="snipcart-customer-signin snipcart-checkout txt-court text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.cart">
-        Panier
-        <span class="snipcart-items-count"></span>
-      </button>
+      <div class="flex items-center gap-4">
+        <button class="snipcart-customer-signin txt-court text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.account">
+          Compte
+        </button>
+        <button class="snipcart-checkout txt-court text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.cart">
+          Panier
+          <span class="snipcart-items-count"></span>
+        </button>
+      </div>
       <?php endif; ?>
     </div>
   </div>
@@ -121,5 +126,14 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     <ul class="flex flex-col items-center gap-6">
       <?php renderNav($navItems, $active, true); ?>
     </ul>
+    <?php if ($snipcartKey): ?>
+    <div class="mt-8 flex flex-col items-center gap-6">
+      <button class="snipcart-customer-signin txt-court text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.account">Compte</button>
+      <button class="snipcart-checkout txt-court text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.cart">
+        Panier
+        <span class="snipcart-items-count"></span>
+      </button>
+    </div>
+    <?php endif; ?>
   </nav>
 </header>
