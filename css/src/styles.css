@@ -463,11 +463,13 @@ input.gd-field:focus, textarea.gd-field:focus{
   display: inline-flex;
   gap: 0.5rem;
   vertical-align: middle;
+  align-items: center;
 }
 
 .payment-icons img {
   height: 1.5rem;
   width: auto;
+  display: block;
 }
 
 /* Hero media fade effect */

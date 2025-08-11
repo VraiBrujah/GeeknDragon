@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
       btns.forEach((btn) => {
         if (btn.dataset.lang === lang) {
           btn.classList.remove('opacity-50');
+          btn.classList.add('ring-2', 'ring-indigo-400', 'rounded');
+        } else {
+          btn.classList.add('opacity-50');
+          btn.classList.remove('ring-2', 'ring-indigo-400', 'rounded');
         }
         btn.addEventListener('click', () => {
           localStorage.setItem('lang', btn.dataset.lang);
