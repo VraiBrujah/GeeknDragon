@@ -123,14 +123,16 @@ include 'snipcart-init.php';
 				data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
 				data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"  <!-- Nom FR -->
 				data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'])) ?>"
-				data-item-description="<?= htmlspecialchars($product['description']) ?>"
-				data-item-description-fr="<?= htmlspecialchars($product['description']) ?>" <!-- Desc FR -->
-				data-item-description-en="<?= htmlspecialchars($product['description_en']) ?>"
-				data-item-quantity="1"
-				<?php if (!empty($multipliers)) : ?>
-				data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-				data-item-custom1-options="<?= implode('|', $multipliers) ?>"
-				data-item-custom1-value="<?= $multipliers[0] ?>"
+                                data-item-description="<?= htmlspecialchars($product['description']) ?>"
+                                data-item-description-fr="<?= htmlspecialchars($product['description']) ?>" <!-- Desc FR -->
+                                data-item-description-en="<?= htmlspecialchars($product['description_en']) ?>"
+                                data-item-price="<?= htmlspecialchars($product['price']) ?>"
+                                data-item-url="<?= htmlspecialchars('product.php?id=' . urlencode($id) . '&from=' . urlencode($from)) ?>"
+                                data-item-quantity="1"
+                                <?php if (!empty($multipliers)) : ?>
+                                data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+                                data-item-custom1-options="<?= implode('|', $multipliers) ?>"
+                                data-item-custom1-value="<?= $multipliers[0] ?>"
 				<?php endif; ?>>
         <span data-i18n="product.add">Ajouter</span> — <?= htmlspecialchars($product['price']) ?> $
       </button>
