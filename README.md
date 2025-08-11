@@ -23,9 +23,9 @@ Need more than 50 pieces or a custom assortment? Request a personalized chest th
 
 Place product photos under `images/Piece/pro/`. Each item typically uses a full‑resolution image and a 300 px thumbnail (e.g. `lot10Piece.jpg` and `lot10Piece-300.jpg`).
 
-### Configuring multipliers in Snipcart
+### Multipliers
 
-Multipliers are handled with Snipcart custom fields. Add a `<select>` with the class `multiplier-select` and set the `data-item-custom1-name`, `data-item-custom1-options` (such as `1|10|100|1000|10000`) and `data-item-custom1-value` attributes on the `snipcart-add-item` button to let customers choose the desired multiplier.
+Multipliers are now configured directly within Snipcart. Products do not require a selector on the shop page; the cart automatically exposes the available options defined in Snipcart.
 
 ## Environment variables
 
