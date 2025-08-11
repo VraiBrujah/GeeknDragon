@@ -45,9 +45,11 @@
 .snipcart-form__label--focus,
 .snipcart-form__input,
 .snipcart-form__input::placeholder,
-.snipcart-form__select,
-.snipcart-form__select option {
+.snipcart-form__select {
   color: #fcfbfb;
+}
+.snipcart-form__select option {
+  color: #0d0d0d;
 }
 
 /* Ensure cart modal isn’t hidden under fixed header */
@@ -59,8 +61,21 @@
 
 /* Make quantity and multiplier fields readable */
 .snipcart-item-line select,
-.snipcart-item-line input,
+.snipcart-item-line input {
+  color: #fcfbfb;
+}
 .snipcart-item-line option {
+  color: #0d0d0d;
+}
+
+/* Expand multiplier dropdown for better visibility */
+.snipcart-item-custom-field select {
+  min-width: 6rem;
+}
+
+/* Ensure quantity label is visible */
+.snipcart-item-line__quantity label,
+.snipcart-item-line__quantity .snipcart__font--tiny {
   color: #fcfbfb;
 }
 
