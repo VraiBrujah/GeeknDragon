@@ -35,3 +35,17 @@
   background-color: transparent;
   outline: none;
 }
+
+/* Ensure account modal form fields remain readable on dark background */
+.snipcart-form__label,
+.snipcart-form__label--focus {
+  color: #e5e7eb;
+}
+
+.snipcart-form__input {
+  color: #e5e7eb;
+}
+
+.snipcart-form__input::placeholder {
+  color: #9ca3af;
+}
