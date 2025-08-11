@@ -6,12 +6,15 @@
    sinon ce script renvoie un code HTTP 500.
 */
 
+require_once __DIR__ . '/bootstrap.php';
+$config = require __DIR__ . '/config.php';
+
 header('Content-Type: application/json');
 
 // ⬇️ facultatif : vérifie la signature Snipcart
-// Le secret est récupéré depuis la variable d'environnement SHIPPING_SECRET
-$secret = getenv('SHIPPING_SECRET');
-$apiKey = getenv('SNIPCART_SECRET_API_KEY');
+// Le secret est récupéré depuis la configuration
+$secret = $config['shipping_secret'];
+$apiKey = $config['snipcart_secret_api_key'];
 if (empty($secret) || empty($apiKey)) {
   http_response_code(500); exit;
 }
