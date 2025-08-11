@@ -44,12 +44,15 @@
 .snipcart-form__label,
 .snipcart-form__label--focus,
 .snipcart-form__input,
-.snipcart-form__input::placeholder,
+.snipcart-form__input::placeholder {
+  color: #9ca3af;            /* placeholder gris moyen */
+}
 .snipcart-form__select {
-  color: #fcfbfb;
+  background-color: #374151; /* gris foncé (rgb(55,65,81)) comme les champs du site */
+  color: #e5e7eb;            /* texte gris clair pour lisibilité sur fond sombre */
 }
 .snipcart-form__select option {
-  color: #0d0d0d;
+  color: #0d0d0d;            /* texte noir pour les options sur fond clair par défaut */
 }
 
 /* Ensure cart modal isn’t hidden under fixed header */

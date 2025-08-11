@@ -301,7 +301,16 @@ a[aria-current="page"]{
   gap: 1rem;
   margin: 1rem auto;
 }
-.multiplier-select { margin-left:auto; margin-right:auto; display:block; }
+.multiplier-select {
+  display: block;
+  margin: 0 auto;
+  min-width: 6rem;          /* largeur mini pour ne pas tronquer le texte */
+  padding: 0.5rem 1rem;     /* espacement interne pour agrandir la zone cliquable */
+  font-size: 1.125rem;      /* texte plus grand (ex. ~18px) */
+  line-height: 1.5;
+  border-radius: 0.375rem;  /* coins légèrement arrondis comme les autres champs */
+}
+
 .multiplier-slot { height: 3rem; display:flex; align-items:center; justify-content:center; }
 
 .quantity-btn {

@@ -16,14 +16,14 @@
         <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($product['id']) ?>">+</button>
       </div>
     </div>
-    <button class="snipcart-add-item btn btn-shop mx-auto"
-            data-item-id="<?= htmlspecialchars($product['id']) ?>"
-            data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-            data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'])) ?>"
-            data-item-price="<?= htmlspecialchars($product['price']) ?>"
-            data-item-url="boutique.php"
-            data-item-description="<?= htmlspecialchars($product['desc']) ?>"
-            data-item-description-en="<?= htmlspecialchars($product['desc_en']) ?>"
+		<button class="snipcart-add-item btn btn-shop"
+			data-item-id="<?= htmlspecialchars($product['id']) ?>"
+			data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+			data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"  <!-- Nom FR -->
+			data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'])) ?>"
+			data-item-description="<?= htmlspecialchars($product['description']) ?>"
+			data-item-description-fr="<?= htmlspecialchars($product['description']) ?>" <!-- Desc FR -->
+			data-item-description-en="<?= htmlspecialchars($product['description_en']) ?>"
             data-item-quantity="1"
             <?php if (!empty($product['multipliers'])) : ?>
             data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"

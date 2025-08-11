@@ -118,16 +118,20 @@ include 'snipcart-init.php';
                 <?php endforeach; ?>
       </select>
             <?php endif; ?>
-      <button class="snipcart-add-item btn btn-shop mx-auto block"
-              data-item-id="<?= htmlspecialchars($id) ?>" data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>" data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'])) ?>"
-              data-item-price="<?= htmlspecialchars($product['price']) ?>" data-item-url="product.php?id=<?= htmlspecialchars($id) ?>"
-              data-item-description="<?= htmlspecialchars($product['description']) ?>" data-item-description-en="<?= htmlspecialchars($descriptionEn) ?>"
-              data-item-quantity="1"
-              <?php if (!empty($multipliers)) : ?>
-              data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-              data-item-custom1-options="<?= implode('|', $multipliers) ?>"
-              data-item-custom1-value="<?= $multipliers[0] ?>"
-              <?php endif; ?>>
+			<button class="snipcart-add-item btn btn-shop"
+				data-item-id="<?= htmlspecialchars($product['id']) ?>"
+				data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+				data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"  <!-- Nom FR -->
+				data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'])) ?>"
+				data-item-description="<?= htmlspecialchars($product['description']) ?>"
+				data-item-description-fr="<?= htmlspecialchars($product['description']) ?>" <!-- Desc FR -->
+				data-item-description-en="<?= htmlspecialchars($product['description_en']) ?>"
+				data-item-quantity="1"
+				<?php if (!empty($multipliers)) : ?>
+				data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+				data-item-custom1-options="<?= implode('|', $multipliers) ?>"
+				data-item-custom1-value="<?= $multipliers[0] ?>"
+				<?php endif; ?>>
         <span data-i18n="product.add">Ajouter</span> — <?= htmlspecialchars($product['price']) ?> $
       </button>
       <?php else :
