@@ -104,9 +104,9 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <?php if ($snipcartKey): ?>
       <!-- Snipcart -->
-      <button class="snipcart-user-profile txt-court uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.account">
-        <span class="snipcart-user-email">Compte</span>
-      </button>
+        <!-- <button class="snipcart-user-profile txt-court uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.account">
+          <span class="snipcart-user-email">Compte</span>
+        </button> -->
       <button class="snipcart-checkout txt-court uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.cart">
         Panier
         <span class="snipcart-items-count"></span>
