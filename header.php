@@ -71,6 +71,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   }
 }
 ?>
+<a href="#main" class="skip-link">Aller au contenu</a>
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
   <div class="max-w-7xl mx-auto flex justify-between items-center p-4 md:px-6">
     <!-- Logo + Titre cliquables ensemble -->
