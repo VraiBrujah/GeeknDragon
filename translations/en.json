@@ -16,6 +16,49 @@
     "subtitle2": "Designed in Quebec",
     "visitShop": "Visit the shop"
   },
+  "home": {
+    "incontournables": {
+      "title": "Our must-haves",
+      "cards": {
+        "title": "Equipment Cards",
+        "desc": "560 illustrated equipment cards to replace tedious manual reading"
+      },
+      "coins": {
+        "title": "Metal coins",
+        "desc": "Physical currency to feel every treasure and influence luck at the table"
+      },
+      "triptych": {
+        "title": "Triptych Sheet",
+        "desc": "Create and manage your character without opening a single book, on three sturdy panels"
+      }
+    },
+    "shop": {
+      "title": "Shop",
+      "payment": "Secure payment via Snipcart",
+      "stock": "Stock updated in real time.",
+      "visit": "Visit the shop",
+      "quote": "Request a quote"
+    },
+    "news": {
+      "heading": "News – FLIM 2025",
+      "article1": {
+        "title": "Heroes level 20, an overly tenacious raccoon, and... our coins",
+        "summary": "Our first coin demonstration at FLIM 2025 took the form of a legendary one-shot run by Es‑tu Game?.",
+        "read": "Read the article"
+      },
+      "testimonial": {
+        "title": "“No more battles with our character sheets!”",
+        "intro": "Many players present claimed it: physical coins change everything.",
+        "story": "Gone are the columns of numbers hastily scribbled on a crumpled sheet. From now on, each player felt the real weight of the loot, slipping between their fingers like a forgotten heirloom. A treasure become tangible. With every exchange, the whole body reacted: the hesitant hand, the weighing eye, the dry throat. The treasure took shape. It became dramatic stake, visceral emotion, an event, a memorable souvenir...",
+        "emphasis": "No more fighting with character sheets",
+        "outro": "the endless book searches while others tune out, or the long 0 / 0.1 / 0.2 / 0.3... character creation sessions that discourage before the game even starts. With Geek & Dragon, everything begins when the coin hits the table."
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "role": "Product & community manager"
+    }
+  },
   "footer": {
     "made": "Designed in Quebec."
   },

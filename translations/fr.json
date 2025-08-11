@@ -16,6 +16,49 @@
     "subtitle2": "Conçues au Québec",
     "visitShop": "Visiter la boutique"
   },
+  "home": {
+    "incontournables": {
+      "title": "Nos Incontournables",
+      "cards": {
+        "title": "Cartes d’équipement",
+        "desc": "560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel"
+      },
+      "coins": {
+        "title": "Pièces métalliques",
+        "desc": "Monnaie physique pour ressentir chaque trésor et influencer la chance à la table"
+      },
+      "triptych": {
+        "title": "Fiche Triptyque",
+        "desc": "Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes"
+      }
+    },
+    "shop": {
+      "title": "Boutique",
+      "payment": "Paiement sécurisé via Snipcart",
+      "stock": "Stocks mis à jour en temps réel.",
+      "visit": "Visiter la boutique",
+      "quote": "Demander un devis"
+    },
+    "news": {
+      "heading": "Actualité – FLIM 2025",
+      "article1": {
+        "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces",
+        "summary": "Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.",
+        "read": "Lire l’article"
+      },
+      "testimonial": {
+        "title": "« Finis les combats contre nos feuilles de personnage ! »",
+        "intro": "De nombreux joueurs présents l’affirment : les pièces physiques changent tout.",
+        "story": "Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sentait le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, c’était tout le corps qui réagissait : la main qui hésite, l’œil qui soupèse, la gorge qui sèche. Le trésor prenait chair. Il devenait enjeu dramatique, émotion viscérale, c’est un événement, un souvenir marquant...",
+        "emphasis": "Fini les combats contre les feuilles de perso",
+        "outro": "les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la pièce tombe sur la table."
+      }
+    },
+    "contact": {
+      "title": "Contact",
+      "role": "Responsable produit & communauté"
+    }
+  },
   "footer": {
     "made": "Conçu au Québec."
   },
