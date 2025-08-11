@@ -59,6 +59,7 @@ foreach ($data as $id => $p) {
         'desc' => $p['description'],
         'desc_en' => $p['description_en'] ?? $p['description'],
         'url' => 'product.php?id=' . urlencode($id) . '&from=pieces',
+        'multipliers' => $p['multipliers'] ?? [],
     ];
 }
 $stock = [];

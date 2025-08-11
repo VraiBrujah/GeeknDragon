@@ -58,6 +58,7 @@ function inStock(string $id): bool
 $displayName = str_replace(' – ', '<br>', $product['name']);
 $displayNameEn = str_replace(' – ', '<br>', $product['name_en'] ?? $product['name']);
 $descriptionEn = $product['description_en'] ?? $product['description'];
+$multipliers = $product['multipliers'] ?? [];
 $images = $product['images'] ?? [];
 ?>
 <!DOCTYPE html>
@@ -97,11 +98,31 @@ include 'snipcart-init.php';
         <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
         <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
       </div>
+            <?php if (!empty($multipliers)) : ?>
+      <label for="multiplier-<?= htmlspecialchars($id) ?>" class="block mb-4 text-center">
+        <span class="sr-only" data-i18n="product.multiplier">Multiplicateur</span>
+        <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select text-black" data-target="<?= htmlspecialchars($id) ?>">
+                <?php foreach ($multipliers as $m) : ?>
+                    <?php if ($m == 1) : ?>
+          <option value="<?= $m ?>" data-i18n="product.unit">unitaire</option>
+                    <?php else : ?>
+          <option value="<?= $m ?>">x<?= $m ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+        </select>
+      </label>
+            <?php endif; ?>
       <button class="snipcart-add-item btn btn-shop mx-auto block"
               data-item-id="<?= htmlspecialchars($id) ?>" data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>" data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'])) ?>"
               data-item-price="<?= htmlspecialchars($product['price']) ?>" data-item-url="product.php?id=<?= htmlspecialchars($id) ?>"
               data-item-description="<?= htmlspecialchars($product['description']) ?>" data-item-description-en="<?= htmlspecialchars($descriptionEn) ?>"
-              data-item-quantity="1">
+              data-item-quantity="1"
+              <?php if (!empty($multipliers)) : ?>
+              data-item-custom1-name="Multiplicateur"
+              data-item-custom1-name-en="Multiplier"
+              data-item-custom1-options="<?= implode('|', $multipliers) ?>"
+              data-item-custom1-value="<?= $multipliers[0] ?>"
+              <?php endif; ?>>
         <span data-i18n="product.add">Ajouter</span> — <?= htmlspecialchars($product['price']) ?> $
       </button>
       <?php else :

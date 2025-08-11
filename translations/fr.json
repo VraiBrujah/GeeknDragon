@@ -81,13 +81,15 @@
     "message": "Votre demande a bien été transmise à notre équipe.",
     "backHome": "Retour à l'accueil"
   },
-    "product": {
-      "back": "Retour à la boutique",
-      "add": "Ajouter",
-      "outOfStock": "Rupture de stock",
-      "securePayment": "Paiement sécurisé via Snipcart",
-      "realTimeStock": "Stocks mis à jour en temps réel."
-    },
+  "product": {
+    "back": "Retour à la boutique",
+    "multiplier": "Multiplicateur",
+    "unit": "unitaire",
+    "add": "Ajouter",
+    "outOfStock": "Rupture de stock",
+    "securePayment": "Paiement sécurisé via Snipcart",
+    "realTimeStock": "Stocks mis à jour en temps réel."
+  },
   "shop": {
     "hero": {
       "title": "Boutique Geek & Dragon",
