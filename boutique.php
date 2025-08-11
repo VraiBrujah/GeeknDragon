@@ -84,11 +84,7 @@ include 'snipcart-init.php';
 
   <!-- ===== HERO ===== -->
   <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-    <video id="hero-video" class="absolute inset-0 w-full h-full object-cover hero-fade" style="z-index:-1" poster="images/hero_mage.jpg" preload="metadata" muted playsinline autoplay loop>
-      <source data-src="videos/coins_cascadeCoffre.mp4" type="video/mp4">
-      <source data-src="videos/coins_cascadey.webm" type="video/webm">
-      <img src="images/hero_mage.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
-    </video>
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-videos='["videos/coins_cascadeCoffre.mp4","videos/coins_cascadeMage.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
@@ -210,32 +206,6 @@ include 'snipcart-init.php';
 </script>
   <script>window.stock = <?= json_encode($stock) ?>;</script>
   <script src="js/app.js"></script>
-  <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const video = document.getElementById('hero-video');
-        if (!video) return;
-        const sources = video.querySelectorAll('source[data-src]');
-        const loadAndPlay = () => {
-          sources.forEach((source) => {
-            source.src = source.dataset.src;
-          });
-          video.load();
-          video.play();
-        };
-        if ('IntersectionObserver' in window) {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                loadAndPlay();
-                observer.unobserve(video);
-              }
-            });
-          }, { threshold: 0.5 });
-          observer.observe(video);
-        } else {
-          loadAndPlay();
-        }
-      });
-  </script>
+  <script src="/js/hero-videos.js"></script>
 </body>
 </html>
