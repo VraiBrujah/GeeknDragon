@@ -15,15 +15,9 @@ $product = $data[$id];
 $title  = $product['name'] . ' | Geek & Dragon';
 $metaDescription = $product['description'];
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/product.php?id=' . urlencode($id);
-$snipcartCssVersion = filemtime(__DIR__ . '/css/snipcart.css');
 $extraHead = <<<HTML
-<!-- Snipcart styles -->
-<link rel="stylesheet" href="/css/snipcart.css?v=$snipcartCssVersion" />
 <style>
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center;}
-  .snipcart-modal__container{background:#1f2937!important;}
-  .snipcart .snipcart-button-primary{background-image:linear-gradient(to right,#4f46e5,#7c3aed)!important;border:none;}
-  .snipcart .snipcart-button-primary:hover{background-image:linear-gradient(to right,#6366f1,#8b5cf6)!important;}
 </style>
 HTML;
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
