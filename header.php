@@ -71,7 +71,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   }
 }
 ?>
-<header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-50">
+<header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
   <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
     <!-- Logo + Titre cliquables ensemble -->
     <a href="/index.php" class="flex items-center gap-3 group transition-colors duration-200">
@@ -79,7 +79,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       <h1 class="text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors duration-200">Geek & Dragon</h1>
     </a>
 
-    <div class="flex items-center space-x-8">
+    <div class="flex items-center gap-x-8">
       <!-- Bouton hamburger -->
       <button id="menu-btn" class="md:hidden text-white focus:outline-none transition-colors duration-200" aria-controls="mobile-menu" aria-expanded="false">
         <span class="sr-only">Menu</span>
@@ -90,7 +90,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <!-- Navigation -->
       <nav class="hidden md:block uppercase tracking-wide">
-        <ul class="flex space-x-8">
+        <ul class="flex gap-x-8">
           <?php renderNav($navItems, $active); ?>
         </ul>
       </nav>
