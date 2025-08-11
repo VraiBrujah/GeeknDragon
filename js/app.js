@@ -452,32 +452,40 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Toggle Snipcart cart and account panels on repeated clicks
-document.addEventListener('snipcart.ready', () => {
+document.addEventListener('DOMContentLoaded', () => {
   const cartBtns = document.querySelectorAll('.snipcart-checkout');
   const accountBtns = document.querySelectorAll('.snipcart-customer-signin');
 
-  const toggleCart = (e) => {
+  const toggle = (getVisible, open, close) => (e) => {
     e.preventDefault();
-    const open = document.body.classList.contains('snipcart-sidecart--open');
-    if (open && window.Snipcart?.api?.theme?.cart?.close) {
-      window.Snipcart.api.theme.cart.close();
-    } else if (window.Snipcart?.api?.theme?.cart?.open) {
-      window.Snipcart.api.theme.cart.open();
+    const state = window.Snipcart?.store?.getState();
+    const visible = getVisible(state);
+    if (visible) {
+      close?.();
+    } else {
+      open?.();
     }
     e.currentTarget.blur();
   };
 
-  const toggleAccount = (e) => {
-    e.preventDefault();
-    const modalOpen = document.body.classList.contains('snipcart-modal--open');
-    if (modalOpen && window.Snipcart?.api?.theme?.customer?.close) {
-      window.Snipcart.api.theme.customer.close();
-    } else if (window.Snipcart?.api?.theme?.customer?.open) {
-      window.Snipcart.api.theme.customer.open();
-    }
-    e.currentTarget.blur();
-  };
+  const cartVisible = (state) => state?.cart?.status === 'visible';
+  const accountVisible = (state) => state?.customer?.status === 'visible';
 
-  cartBtns.forEach((btn) => btn.addEventListener('click', toggleCart));
-  accountBtns.forEach((btn) => btn.addEventListener('click', toggleAccount));
+  cartBtns.forEach((btn) => btn.addEventListener(
+    'click',
+    toggle(
+      cartVisible,
+      () => window.Snipcart?.api?.theme?.cart?.open(),
+      () => window.Snipcart?.api?.theme?.cart?.close(),
+    ),
+  ));
+
+  accountBtns.forEach((btn) => btn.addEventListener(
+    'click',
+    toggle(
+      accountVisible,
+      () => window.Snipcart?.api?.theme?.customer?.open(),
+      () => window.Snipcart?.api?.theme?.customer?.close(),
+    ),
+  ));
 });
