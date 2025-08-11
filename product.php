@@ -24,6 +24,7 @@ $extraHead = <<<HTML
 </style>
 HTML;
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
+$product['url'] = 'product.php?id=' . urlencode($id) . '&from=' . urlencode($from);
 
 function getStock(string $id): ?int
 {
@@ -127,7 +128,7 @@ include 'snipcart-init.php';
                                 data-item-description-fr="<?= htmlspecialchars($product['description']) ?>" <!-- Desc FR -->
                                 data-item-description-en="<?= htmlspecialchars($product['description_en']) ?>"
                                 data-item-price="<?= htmlspecialchars($product['price']) ?>"
-                                data-item-url="<?= htmlspecialchars('product.php?id=' . urlencode($id) . '&from=' . urlencode($from)) ?>"
+                                data-item-url="<?= htmlspecialchars($product['url']) ?>"
                                 data-item-quantity="1"
                                 <?php if (!empty($multipliers)) : ?>
                                 data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
