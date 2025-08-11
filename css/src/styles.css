@@ -220,10 +220,9 @@ input.gd-field:focus, textarea.gd-field:focus{
   border: 3px solid #c4a36d;
 }
 
-/* Header cart button */
+/* Header Snipcart buttons */
 
-.snipcart-checkout{
-  position: relative;
+.snipcart-btn{
   border-radius: 9999px;
   border-width: 2px;
   --tw-border-opacity: 1;
@@ -239,6 +238,10 @@ input.gd-field:focus, textarea.gd-field:focus{
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.snipcart-checkout{
+  position: relative;
 }
 
 .snipcart-checkout:hover{
