@@ -1,4 +1,4 @@
-<?php if(inStock($product['id'])): ?>
+<?php if (inStock($product['id'])) : ?>
 <div class="card flex flex-col">
   <a href="<?= htmlspecialchars($product['url']) ?>">
     <img src="/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['desc']) ?>" data-alt-fr="<?= htmlspecialchars($product['desc']) ?>" data-alt-en="<?= htmlspecialchars($product['desc_en']) ?>" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
@@ -22,9 +22,8 @@
             data-item-description="<?= htmlspecialchars($product['desc']) ?>"
             data-item-description-en="<?= htmlspecialchars($product['desc_en']) ?>"
             data-item-quantity="1"
-            <?php if (!empty($product['multipliers'])): ?>
-            data-item-custom1-name="Multiplicateur"
-            data-item-custom1-name-en="Multiplier"
+            <?php if (!empty($product['multipliers'])) : ?>
+            data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
             data-item-custom1-options="<?= implode('|', $product['multipliers']) ?>"
             data-item-custom1-value="<?= $product['multipliers'][0] ?>"
             <?php endif; ?>>
