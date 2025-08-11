@@ -1,8 +1,10 @@
 {
   "lot10": {
     "name": "L’Offrande du Vagabond",
+    "name_en": "The Vagabond's Offering",
     "price": 60,
     "description": "Lot de 10 pièces finement gravées (2 de chaque métal), l’allié parfait des premières quêtes.",
+    "description_en": "Set of 10 finely engraved coins (2 of each metal), the perfect ally for early quests.",
     "images": [
       "images/Piece/pro/lot10Piece-300.png",
       "images/Piece/pro/p10.png",
@@ -28,8 +30,10 @@
   },
   "lot25": {
     "name": "La Monnaie des Royaumes",
+    "name_en": "Currency of the Realms",
     "price": 145,
     "description": "Coffret de 25 pièces différentes, pour ressentir la monnaie des royaumes entre vos doigts.",
+    "description_en": "Box of 25 different coins, feel the currency of the realms between your fingers.",
     "images": [
       "images/Piece/pro/all25.png",
       "images/Piece/pro/p25.png",
@@ -55,8 +59,10 @@
   },
   "lot50-essence": {
     "name": "L’Essence des Royaumes",
+    "name_en": "Essence of the Realms",
     "price": 275,
     "description": "50 pièces (2 de chaque type), la bourse pour ressentir la richesse royale.",
+    "description_en": "50 coins (2 of each type), the purse to feel royal wealth.",
     "images": [
       "images/Piece/pro/lot50Piece.png",
       "images/Piece/pro/p50.png",
@@ -82,8 +88,10 @@
   },
   "lot50-tresorerie": {
     "name": "La Trésorerie du Seigneur",
+    "name_en": "The Lord's Treasury",
     "price": 275,
     "description": "50 pièces (10 de chaque métal), la trésorerie ultime pour une opulence assumée.",
+    "description_en": "50 coins (10 of each metal), the ultimate treasury for unabashed opulence.",
     "images": [
       "images/Piece/pro/lot50Piece2.png",
       "images/Piece/pro/p50.png",
