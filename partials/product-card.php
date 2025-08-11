@@ -75,7 +75,7 @@ $multipliers = $product['multipliers'] ?? [];
         data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
       <?php endif; ?>
     >
-      <span data-i18n="product.add">Ajouter</span> — <?= htmlspecialchars($price) ?> $
+      <span data-i18n="product.add">Ajouter</span>
     </button>
   </div>
 </div>

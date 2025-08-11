@@ -156,7 +156,7 @@ include 'snipcart-init.php';
           data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
         <?php endif; ?>
       >
-        <span data-i18n="product.add">Ajouter</span> $
+        <span data-i18n="product.add">Ajouter</span>
       </button>
 
       <?php else : ?>
