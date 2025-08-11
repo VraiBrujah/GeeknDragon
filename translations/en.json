@@ -88,6 +88,7 @@
     "unit": "single",
     "add": "Add",
     "outOfStock": "Out of stock",
+    "insufficientStock": "Insufficient stock",
     "securePayment": "Secure payment via Snipcart",
     "realTimeStock": "Stock updated in real time"
   },
