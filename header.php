@@ -52,15 +52,16 @@ $snipcartKey = $snipcartKey ?? getenv('SNIPCART_API_KEY');
 function renderNav(array $items, string $active, bool $mobile = false): void {
   foreach ($items as $href => $item) {
     $class = 'txt-court font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
+    $ariaCurrent = $item['slug'] === $active ? ' aria-current="page"' : '';
     if (isset($item['children']) && !$mobile) {
       echo '<li class="relative group">';
-      echo '<a href="' . $href . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
+      echo '<a href="' . $href . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '"' . $ariaCurrent . '>' . $item['label'] . '</a>';
       echo '<ul class="absolute left-0 top-full hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-2">';
       renderNav($item['children'], $active, $mobile);
       echo '</ul></li>';
     } else {
       echo '<li>';
-      echo '<a href="' . $href . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
+      echo '<a href="' . $href . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '"' . $ariaCurrent . '>' . $item['label'] . '</a>';
       if (isset($item['children']) && $mobile) {
         echo '<ul class="pl-4 flex flex-col space-y-2 mt-2">';
         renderNav($item['children'], $active, $mobile);
@@ -112,7 +113,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   </div>
   <!-- Menu mobile -->
   <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-200"></div>
-  <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
+  <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation principale">
     <ul class="flex flex-col items-center gap-6">
       <?php renderNav($navItems, $active, true); ?>
     </ul>
