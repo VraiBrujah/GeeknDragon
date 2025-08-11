@@ -77,7 +77,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     <!-- Logo + Titre cliquables ensemble -->
     <a href="/index.php" class="flex items-center space-x-3 group transition-colors duration-200">
       <img src="/images/logo.png" alt="Logo Geek & Dragon" class="h-12 logo-lighten transition-transform duration-200 group-hover:scale-105">
-      <h1 class="text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors duration-200">Geek & Dragon</h1>
+      <span class="text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors duration-200">Geek & Dragon</span>
     </a>
 
     <div class="flex items-center gap-6 md:gap-8">
