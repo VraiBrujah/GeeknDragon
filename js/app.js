@@ -461,8 +461,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
     e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
     const state = window.Snipcart.store.getState();
     const visible = getVisible(state);
     if (visible) {
