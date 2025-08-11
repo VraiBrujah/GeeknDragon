@@ -100,7 +100,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </nav>
 
       <!-- Sélecteur de langue -->
-      <div id="lang-switcher" class="hidden md:flex gap-2 text-xl">
+      <div id="lang-switcher" class="hidden md:flex items-center gap-2 text-xl">
         <button data-lang="fr" class="opacity-50 hover:opacity-100 transition-colors duration-200" aria-label="Français">🇫🇷</button>
         <button data-lang="en" class="opacity-50 hover:opacity-100 transition-colors duration-200" aria-label="English">🇬🇧</button>
       </div>
