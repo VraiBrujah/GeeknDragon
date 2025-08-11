@@ -62,7 +62,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       echo '<li>';
       echo '<a href="' . $href . '" class="' . $class . '" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
       if (isset($item['children']) && $mobile) {
-        echo '<ul class="pl-4 flex flex-col gap-2 mt-2">';
+        echo '<ul class="pl-4 flex flex-col space-y-2 mt-2">';
         renderNav($item['children'], $active, $mobile);
         echo '</ul>';
       }
@@ -74,12 +74,12 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
   <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
     <!-- Logo + Titre cliquables ensemble -->
-    <a href="/index.php" class="flex items-center gap-3 group transition-colors duration-200">
+    <a href="/index.php" class="flex items-center space-x-3 group transition-colors duration-200">
       <img loading="lazy" src="/images/logo.png" alt="Logo Geek & Dragon" class="h-12 logo-lighten transition-transform duration-200 group-hover:scale-105">
       <h1 class="text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors duration-200">Geek & Dragon</h1>
     </a>
 
-    <div class="flex items-center gap-x-8">
+    <div class="flex items-center space-x-8">
       <!-- Bouton hamburger -->
       <button id="menu-btn" class="md:hidden text-white focus:outline-none transition-colors duration-200" aria-controls="mobile-menu" aria-expanded="false">
         <span class="sr-only">Menu</span>
@@ -90,13 +90,13 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <!-- Navigation -->
       <nav class="hidden md:block uppercase tracking-wide">
-        <ul class="flex gap-x-8">
+        <ul class="flex space-x-8">
           <?php renderNav($navItems, $active); ?>
         </ul>
       </nav>
 
       <!-- Sélecteur de langue -->
-      <div id="lang-switcher" class="hidden md:flex gap-2 text-xl">
+      <div id="lang-switcher" class="hidden md:flex space-x-2 text-xl">
         <button data-lang="fr" class="opacity-50 hover:opacity-100 transition-colors duration-200" aria-label="Français">🇫🇷</button>
         <button data-lang="en" class="opacity-50 hover:opacity-100 transition-colors duration-200" aria-label="English">🇬🇧</button>
       </div>
@@ -115,8 +115,8 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </div>
   </div>
   <!-- Menu mobile -->
-  <nav id="mobile-menu" class="fixed inset-0 bg-gray-900/95 flex flex-col items-center gap-6 p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full" aria-hidden="true">
-    <ul class="flex flex-col items-center gap-6">
+  <nav id="mobile-menu" class="fixed inset-0 bg-gray-900/95 flex flex-col items-center space-y-6 p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full" aria-hidden="true">
+    <ul class="flex flex-col items-center space-y-6">
       <?php renderNav($navItems, $active, true); ?>
     </ul>
   </nav>
