@@ -13,7 +13,8 @@ $multipliers = $product['multipliers'] ?? [];
 ?>
 
 <?php if (inStock($id)) : ?>
-<div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow">
+<div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
+            min-w-[21rem] sm:min-w-[22rem] md:min-w-[24rem]">
   <a href="<?= htmlspecialchars($url) ?>">
     <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
          alt="<?= htmlspecialchars($desc) ?>"
@@ -36,7 +37,7 @@ $multipliers = $product['multipliers'] ?? [];
     <?= htmlspecialchars($desc) ?>
   </p>
 
-  <div class="mt-auto flex flex-col items-center gap-4">
+  <div class="mt-auto flex flex-col items-center gap-4 w-full">
     <div class="flex flex-col items-center">
       <label class="mb-2 text-center" data-i18n="product.quantity">Quantité</label>
       <div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($id) ?>">
@@ -62,7 +63,7 @@ $multipliers = $product['multipliers'] ?? [];
     </div>
     <?php endif; ?>
 
-    <button class="snipcart-add-item btn btn-shop"
+    <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
       data-item-id="<?= htmlspecialchars($id) ?>"
       data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
       data-item-description="<?= htmlspecialchars($desc) ?>"
