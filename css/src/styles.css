@@ -475,3 +475,13 @@ input.gd-field:focus, textarea.gd-field:focus{
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
   mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
 }
+
+/* Transition floutée entre les vidéos héro */
+.hero-video {
+  transition: filter 1s ease, opacity 1s ease;
+}
+
+.hero-video.is-fading {
+  filter: blur(10px);
+  opacity: 0;
+}
