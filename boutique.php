@@ -94,20 +94,6 @@ include 'snipcart-init.php';
   </section>
 
 
-  <!-- ░░░ EN-TÊTE ░░░ -->
-    <section class="text-center max-w-4xl mx-auto px-6 my-16">
-      <h2 class="text-4xl md:text-5xl font-extrabold mb-4" data-i18n="shop.intro.title">Trésors artisanaux</h2>
-        <p class="text-lg md:text-xl txt-court" data-i18n="shop.intro.description">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
-        <p class="mt-4 txt-court">
-          <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
-          <span class="payment-icons">
-            <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-            <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-            <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
-        </p>
-    </section>
-
-
   <!-- ░░░ PIÈCES ░░░ -->
     <section class="pt-42 py-42 bg-gray-900/80 scroll-mt-42" id="pieces">
       <div class="max-w-6xl mx-auto px-6">
@@ -177,6 +163,19 @@ include 'snipcart-init.php';
       </div>
     </div>
   </section>
+  
+  <!-- ░░░ EN-TÊTE ░░░ -->
+    <section class="text-center max-w-4xl mx-auto px-6 my-16">
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-4" data-i18n="shop.intro.title">Trésors artisanaux</h2>
+        <p class="text-lg md:text-xl txt-court" data-i18n="shop.intro.description">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
+        <p class="mt-4 txt-court">
+          <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
+          <span class="payment-icons">
+            <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
+            <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
+            <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
+        </p>
+    </section>
 
 </main>
 
@@ -205,4 +204,6 @@ include 'snipcart-init.php';
   <script src="js/app.js"></script>
   <script src="/js/hero-videos.js"></script>
 </body>
+
+
 </html>
