@@ -107,7 +107,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <?php if ($snipcartKey): ?>
       <!-- Snipcart -->
-      <div class="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
+      <div class="flex flex-col gap-4 md:flex-row md:items-center md:gap-8 flex-shrink-0">
         <button class="snipcart-checkout snipcart-btn txt-court w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" data-i18n="nav.cart">
           Panier
           <span class="snipcart-items-count"></span>
