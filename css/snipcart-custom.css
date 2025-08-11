@@ -25,6 +25,10 @@
   gap: 0.25rem;
 }
 
+.snipcart-items-count:empty {
+  display: none;
+}
+
 .snipcart-checkout:hover,
 .snipcart-checkout:focus,
 .snipcart-checkout:active,
