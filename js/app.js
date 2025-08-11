@@ -457,8 +457,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const accountBtns = document.querySelectorAll('.snipcart-customer-signin');
 
   const toggle = (getVisible, open, close) => (e) => {
+    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) {
+      return;
+    }
     e.preventDefault();
-    const state = window.Snipcart?.store?.getState();
+    const state = window.Snipcart.store.getState();
     const visible = getVisible(state);
     if (visible) {
       close?.();
