@@ -50,6 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
         keys.forEach((k) => { if (text) text = text[k]; });
         if (text) elem.textContent = text;
       });
+      // Apply product names/descriptions based on active language
+      document.querySelectorAll('[data-name-fr]').forEach((el) => {
+        const elem = el;
+        const target = lang === 'en' ? elem.dataset.nameEn : elem.dataset.nameFr;
+        if (target) elem.innerHTML = target;
+      });
+      document.querySelectorAll('[data-desc-fr]').forEach((el) => {
+        const elem = el;
+        const target = lang === 'en' ? elem.dataset.descEn : elem.dataset.descFr;
+        if (target) elem.textContent = target;
+      });
+      document.querySelectorAll('[data-alt-fr]').forEach((el) => {
+        const elem = el;
+        const target = lang === 'en' ? elem.dataset.altEn : elem.dataset.altFr;
+        if (target) elem.setAttribute('alt', target);
+      });
+      document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
+        if (lang === 'en') {
+          if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
+          if (btn.dataset.itemDescriptionEn) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionEn);
+          if (btn.dataset.itemCustom1NameEn) btn.setAttribute('data-item-custom1-name', btn.dataset.itemCustom1NameEn);
+        }
+      });
     })
     .catch(() => {
       if (switcher) switcher.classList.add('hidden');

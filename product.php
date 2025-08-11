@@ -53,6 +53,8 @@ function inStock(string $id): bool
     return $stock === null || $stock > 0;
 }
 $displayName = str_replace(' – ', '<br>', $product['name']);
+$displayNameEn = str_replace(' – ', '<br>', $product['name_en'] ?? $product['name']);
+$descriptionEn = $product['description_en'] ?? $product['description'];
 $multipliers = $product['multipliers'] ?? [];
 $images = $product['images'] ?? [];
 ?>
@@ -76,7 +78,7 @@ include 'snipcart-init.php';
           <?php foreach ($images as $img) : ?>
           <div class="swiper-slide">
             <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
-              <img loading="lazy" src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($product['description']) ?>" class="rounded">
+              <img loading="lazy" src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($product['description']) ?>" data-alt-fr="<?= htmlspecialchars($product['description']) ?>" data-alt-en="<?= htmlspecialchars($descriptionEn) ?>" class="rounded">
             </a>
           </div>
           <?php endforeach; ?>
@@ -85,8 +87,8 @@ include 'snipcart-init.php';
         <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
         <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
       </div>
-      <h1 class="text-3xl font-bold mb-4 text-center"><?= $displayName ?></h1>
-      <p class="mb-6 text-gray-300 text-center"><?= htmlspecialchars($product['description']) ?></p>
+      <h1 class="text-3xl font-bold mb-4 text-center" data-name-fr="<?= $displayName ?>" data-name-en="<?= $displayNameEn ?>"><?= $displayName ?></h1>
+      <p class="mb-6 text-gray-300 text-center" data-desc-fr="<?= htmlspecialchars($product['description']) ?>" data-desc-en="<?= htmlspecialchars($descriptionEn) ?>"><?= htmlspecialchars($product['description']) ?></p>
       <?php if (inStock($id)) : ?>
       <div class="quantity-selector justify-center mx-auto mb-4" data-id="<?= htmlspecialchars($id) ?>">
         <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
@@ -108,12 +110,13 @@ include 'snipcart-init.php';
       </label>
             <?php endif; ?>
       <button class="snipcart-add-item btn btn-shop mx-auto block"
-              data-item-id="<?= htmlspecialchars($id) ?>" data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+              data-item-id="<?= htmlspecialchars($id) ?>" data-item-name="<?= htmlspecialchars(strip_tags($product['name'])) ?>" data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'])) ?>"
               data-item-price="<?= htmlspecialchars($product['price']) ?>" data-item-url="product.php?id=<?= htmlspecialchars($id) ?>"
-              data-item-description="<?= htmlspecialchars($product['description']) ?>"
+              data-item-description="<?= htmlspecialchars($product['description']) ?>" data-item-description-en="<?= htmlspecialchars($descriptionEn) ?>"
               data-item-quantity="1"
               <?php if (!empty($multipliers)) : ?>
               data-item-custom1-name="Multiplicateur"
+              data-item-custom1-name-en="Multiplier"
               data-item-custom1-options="<?= implode('|', $multipliers) ?>"
               data-item-custom1-value="<?= $multipliers[0] ?>"
               <?php endif; ?>>

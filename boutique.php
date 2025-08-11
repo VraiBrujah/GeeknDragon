@@ -52,9 +52,11 @@ foreach ($data as $id => $p) {
     $products[] = [
         'id' => $id,
         'name' => str_replace(' – ', '<br>', $p['name']),
+        'name_en' => str_replace(' – ', '<br>', $p['name_en'] ?? $p['name']),
         'price' => $p['price'],
         'img' => $p['images'][0] ?? '',
         'desc' => $p['description'],
+        'desc_en' => $p['description_en'] ?? $p['description'],
         'url' => 'product.php?id=' . urlencode($id) . '&from=pieces',
         'multipliers' => $p['multipliers'] ?? [],
     ];
