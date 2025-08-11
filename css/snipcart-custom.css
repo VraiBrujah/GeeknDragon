@@ -46,17 +46,17 @@
 .snipcart-form__input,
 .snipcart-form__input::placeholder,
 .snipcart-form__textarea {
-  color: #e5e7eb;
+  color: #ffffff;
 }
 .snipcart-form__input,
 .snipcart-form__select,
 .snipcart-form__textarea {
-  background-color: #374151;
-  color: #e5e7eb;
+  background-color: #333333;
+  color: #ffffff;
 }
 .snipcart-form__select option {
-  background-color: #374151;
-  color: #e5e7eb;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 /* Ensure cart modal isn’t hidden under fixed header */
@@ -69,12 +69,12 @@
 /* Make quantity and multiplier fields readable */
 .snipcart-item-line select,
 .snipcart-item-line input {
-  background-color: #374151;
-  color: #e5e7eb;
+  background-color: #333333;
+  color: #ffffff;
 }
 .snipcart-item-line option {
-  background-color: #374151;
-  color: #e5e7eb;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 /* Expand multiplier dropdown for better visibility */
@@ -85,7 +85,7 @@
 /* Make custom field (Multiplier) label/value more prominent */
 .snipcart-item-custom-field {
   font-size: 1rem; /* increase base font size for custom fields */
-  color: #e5e7eb;  /* ensure text is visible on dark background */
+  color: #ffffff;  /* ensure text is visible on dark background */
   font-weight: 500; /* slightly bold for emphasis */
 }
 .snipcart-item-custom-field label {
@@ -96,7 +96,7 @@
 /* Ensure quantity label is visible */
 .snipcart-item-line__quantity label,
 .snipcart-item-line__quantity .snipcart__font--tiny {
-  color: #e5e7eb;
+  color: #ffffff;
 }
 
 /* Center summary section text and container */
