@@ -4,7 +4,7 @@
    + vidéos séquentielles + Swiper/Fancybox + helpers utilitaires.
    ===================================================================== */
 
-/* global Swiper, Fancybox */
+/* global Swiper, Fancybox, whenSnipcart */
 
 /* ========================================================================
    UTILITAIRES GÉNÉRIQUES
@@ -117,6 +117,7 @@
       }
     }, 200);
   };
+  window.whenSnipcart = whenSnipcart;
 
   // Expose quelques utilitaires si besoin ailleurs
   window.GD = Object.assign(window.GD || {}, {
@@ -158,9 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
   setCurrent(lang);
-  if (window.Snipcart?.api?.session?.setLanguage) {
-    window.Snipcart.api.session.setLanguage(lang);
-  }
+  whenSnipcart(() => window.Snipcart.api.session.setLanguage(lang));
 
   // Gestion clic drapeau
   document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
@@ -171,9 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Si besoin de recharger entièrement (ex : pricing server-side), décommente :
       // window.location = new URL(window.location.href).toString();
       // Sinon, on met à jour le DOM dynamiquement (voir fetch juste après).
-      if (window.Snipcart?.api?.session?.setLanguage) {
-        window.Snipcart.api.session.setLanguage(picked);
-      }
+      whenSnipcart(() => window.Snipcart.api.session.setLanguage(picked));
       loadTranslations(picked);
     });
   });
