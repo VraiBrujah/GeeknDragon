@@ -65,8 +65,6 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
               <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
               <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
-            </span>
-            &nbsp;|&nbsp; <span data-i18n="product.realTimeStock">Stocks mis à jour en temps réel.</span>
           </p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
           <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">

@@ -104,9 +104,6 @@ include 'snipcart-init.php';
             <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
             <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
             <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
-          </span>
-          &nbsp;|&nbsp;
-          <span data-i18n="shop.intro.stock">Stocks mis à jour en temps réel.</span>
         </p>
     </section>
 
