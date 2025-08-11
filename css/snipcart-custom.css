@@ -76,6 +76,17 @@
   min-width: 6rem;
 }
 
+/* Make custom field (Multiplier) label/value more prominent */
+.snipcart-item-custom-field {
+  font-size: 1rem; /* increase base font size for custom fields */
+  color: #fcfbfb;  /* ensure text is visible on dark background */
+  font-weight: 500; /* slightly bold for emphasis */
+}
+.snipcart-item-custom-field label {
+  font-size: 0.95rem;
+  margin-right: 0.25rem;
+}
+
 /* Ensure quantity label is visible */
 .snipcart-item-line__quantity label,
 .snipcart-item-line__quantity .snipcart__font--tiny {
