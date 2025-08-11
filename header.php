@@ -83,7 +83,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     <!-- Logo + Titre cliquables ensemble -->
     <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex flex-col md:flex-row items-center group transition-colors duration-200 flex-shrink-0 space-y-1 md:space-y-0 md:space-x-3 text-center md:text-left">
       <!-- Nouveau SVG très grand : on le bride via la classe header-logo -->
-      <img src="/images/geekndragon_logo.svg" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105" width="160" height="160">
+      <img src="/images/geekndragon_logo_blanc.png" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105" width="160" height="160">
       <span class="site-title text-2xl md:text-3xl font-semibold text-white group-hover:text-indigo-300 transition-colors duration-200">
         <span class="sm:hidden leading-snug">Geek<br>&amp;<br>Dragon</span>
         <span class="hidden sm:inline">Geek &amp; Dragon</span>
