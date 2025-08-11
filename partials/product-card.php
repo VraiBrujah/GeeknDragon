@@ -63,21 +63,24 @@ $multipliers = $product['multipliers'] ?? [];
     </div>
     <?php endif; ?>
 
-    <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
-      data-item-id="<?= htmlspecialchars($id) ?>"
-      data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-      data-item-description="<?= htmlspecialchars($desc) ?>"
-      data-item-price="<?= htmlspecialchars($price) ?>"
-      data-item-url="<?= htmlspecialchars($url) ?>"
-      data-item-quantity="1"
-      <?php if (!empty($multipliers)) : ?>
-        data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-        data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-        data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
-      <?php endif; ?>
-    >
-      <span data-i18n="product.add">Ajouter</span>
-    </button>
+	  <button
+		class="snipcart-add-item btn btn-shop px-6"
+		style="white-space:nowrap"
+		data-item-id="<?= htmlspecialchars($id) ?>"
+		data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
+		data-item-description="<?= htmlspecialchars($desc) ?>"
+		data-item-price="<?= htmlspecialchars($price) ?>"
+		data-item-url="<?= htmlspecialchars($url) ?>"
+		data-item-quantity="1"
+		<?php if (!empty($multipliers)) : ?>
+		  data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+		  data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
+		  data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+		<?php endif; ?>
+	  >
+		<span data-i18n="product.add">Ajouter</span>
+		&nbsp;—&nbsp;<span class="price"><?= htmlspecialchars($price) ?>&#8239;$</span>
+	  </button>
   </div>
 </div>
 
