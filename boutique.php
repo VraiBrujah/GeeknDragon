@@ -96,14 +96,14 @@ include 'snipcart-init.php';
 
   <!-- ░░░ PIÈCES ░░░ -->
     <section id="pieces" class="py-24 bg-gray-900/80 scroll-mt-24">
-		<div class="max-w-7xl mx-auto px-6">
-		  <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.pieces.title">Pièces métalliques</h3>
-		  <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch">
-			<?php foreach ($products as $product) : ?>
-			  <?php include __DIR__ . '/partials/product-card.php'; ?>
-			<?php endforeach; ?>
-		  </div>
-		</div>
+      <div class="max-w-6xl mx-auto px-6">
+        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.pieces.title">Pièces métalliques</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 items-stretch">
+          <?php foreach ($products as $product) : ?>
+              <?php include __DIR__ . '/partials/product-card.php'; ?>
+          <?php endforeach; ?>
+        </div>
+		
 
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
           <span data-i18n="shop.pieces.description">Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.</span><br>
