@@ -98,7 +98,7 @@ include 'snipcart-init.php';
     <section id="pieces" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.pieces.title">Pièces métalliques</h3>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 items-stretch">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           <?php foreach ($products as $product) : ?>
               <?php include __DIR__ . '/partials/product-card.php'; ?>
           <?php endforeach; ?>
