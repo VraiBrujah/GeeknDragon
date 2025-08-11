@@ -1,5 +1,17 @@
 /* global Swiper, Fancybox */
 
+// Définir dynamiquement la hauteur de l'en-tête
+document.addEventListener('DOMContentLoaded', () => {
+  const setHeaderHeight = () => {
+    const header = document.querySelector('header');
+    if (!header) return;
+    document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
+  };
+
+  setHeaderHeight();
+  window.addEventListener('resize', setHeaderHeight);
+});
+
 // Gestion des traductions simples
 document.addEventListener('DOMContentLoaded', () => {
   const translationsReady = true; // traductions prêtes
