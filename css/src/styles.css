@@ -10,7 +10,8 @@ body {
 }
 
 body {
-  background: url('/images/bg_texture.jpg') center/cover fixed;
+  background: url('/images/bg_texture.jpg') center/cover;
+  background-attachment: scroll;
   color: #e5e7eb;
   line-height: 1.6;
 }
