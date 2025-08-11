@@ -515,3 +515,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }));
 });
+
+// Toast de confirmation lors de l'ajout au panier
+document.addEventListener('snipcart.ready', () => {
+  if (!window.Snipcart?.events) return;
+  const messages = { fr: 'Article ajouté au panier', en: 'Item added to cart' };
+  window.Snipcart.events.on('item.added', () => {
+    const toast = document.createElement('div');
+    const lang = document.documentElement.lang || 'fr';
+    toast.textContent = messages[lang] || messages.fr;
+    toast.className = 'cart-toast';
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => toast.classList.add('visible'));
+    setTimeout(() => {
+      toast.classList.remove('visible');
+      toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+    }, 2000);
+  });
+});
