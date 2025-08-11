@@ -6,22 +6,6 @@
   <h4 class="text-center text-2xl font-semibold mb-2" data-name-fr="<?= htmlspecialchars($product['name']) ?>" data-name-en="<?= htmlspecialchars($product['name_en']) ?>"><?= $product['name'] ?></h4>
   <p class="text-center mb-4 text-gray-300" data-desc-fr="<?= htmlspecialchars($product['desc']) ?>" data-desc-en="<?= htmlspecialchars($product['desc_en']) ?>"><?= htmlspecialchars($product['desc']) ?></p>
   <div class="mt-auto flex flex-col items-center">
-    <div class="multiplier-slot">
-      <?php if (!empty($product['multipliers'])): ?>
-      <label for="multiplier-<?= htmlspecialchars($product['id']) ?>" class="mx-auto text-center">
-        <span class="sr-only" data-i18n="product.multiplier">Multiplicateur</span>
-        <select id="multiplier-<?= htmlspecialchars($product['id']) ?>" class="multiplier-select text-black" data-target="<?= htmlspecialchars($product['id']) ?>">
-          <?php foreach ($product['multipliers'] as $m): ?>
-          <?php if ($m == 1): ?>
-          <option value="<?= $m ?>" data-i18n="product.unit">unitaire</option>
-          <?php else: ?>
-          <option value="<?= $m ?>">x<?= $m ?></option>
-          <?php endif; ?>
-          <?php endforeach; ?>
-        </select>
-      </label>
-      <?php endif; ?>
-    </div>
     <div class="flex flex-col items-center">
       <div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($product['id']) ?>">
         <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($product['id']) ?>">−</button>
