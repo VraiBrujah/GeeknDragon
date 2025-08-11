@@ -4,9 +4,26 @@
 }
 .snipcart-item-line__remove {
   position: absolute;
-  top: 0.5rem;
+  top: auto;
+  bottom: 0.5rem;
   right: 0.5rem;
 }
 .snipcart-item-line__actions {
   position: static;
+}
+
+/* Ensure cart and account buttons remain readable and uniform */
+.snipcart-checkout,
+.snipcart-customer-signin {
+  color: #e5e7eb;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.snipcart-checkout:focus,
+.snipcart-checkout:active,
+.snipcart-customer-signin:focus,
+.snipcart-customer-signin:active {
+  color: #e5e7eb;
 }
