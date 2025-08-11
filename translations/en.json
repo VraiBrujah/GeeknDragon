@@ -81,13 +81,15 @@
     "message": "Your request has been sent to our team.",
     "backHome": "Back to home"
   },
-    "product": {
-      "back": "Back to shop",
-      "add": "Add",
-      "outOfStock": "Out of stock",
-      "securePayment": "Secure payment via Snipcart",
-      "realTimeStock": "Stock updated in real time"
-    },
+  "product": {
+    "back": "Back to shop",
+    "multiplier": "Multiplier",
+    "unit": "single",
+    "add": "Add",
+    "outOfStock": "Out of stock",
+    "securePayment": "Secure payment via Snipcart",
+    "realTimeStock": "Stock updated in real time"
+  },
   "shop": {
     "hero": {
       "title": "Geek & Dragon Shop",
