@@ -368,13 +368,13 @@ a[aria-current="page"]{
 input,
 textarea,
 select {
-  background-color: #374151;
-  color: #e5e7eb;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 select option {
-  background-color: #374151;
-  color: #e5e7eb;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 input.gd-field, textarea.gd-field{
@@ -382,12 +382,12 @@ input.gd-field, textarea.gd-field{
   width: 100%;
   border-radius: 0.5rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
+  background-color: #333333;
   padding: 0.75rem;
   --tw-text-opacity: 1;
-  color: rgb(229 231 235 / var(--tw-text-opacity, 1));
+  color: #ffffff;
 }
-input.gd-field::placeholder, textarea.gd-field::placeholder{ color:#9ca3af; }
+input.gd-field::placeholder, textarea.gd-field::placeholder{ color:#ffffff; }
 input.gd-field:focus, textarea.gd-field:focus{
   outline: 2px solid transparent;
   outline-offset: 2px;
