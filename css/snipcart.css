@@ -7,3 +7,11 @@
 .snipcart-cart__footer{background:#1f2937!important;color:#f9fafb!important;}
 .snipcart .snipcart-button-primary{background-image:linear-gradient(to right,#4f46e5,#7c3aed)!important;border:none;}
 .snipcart .snipcart-button-primary:hover{background-image:linear-gradient(to right,#6366f1,#8b5cf6)!important;}
+
+:root {
+  --bgColor-default: #111827;   /* fond principal */
+  --bgColor-alt: #1f2937;       /* panneaux */
+  --bgColor-modal: #1f2937;
+  --bgColor-modalVeil: rgba(17,24,39,0.8);
+  --color-default: #e5e7eb;     /* texte */
+}
