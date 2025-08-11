@@ -94,17 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Lecture en boucle de la vidéo héro
-document.addEventListener('DOMContentLoaded', () => {
-  const hero = document.getElementById('hero-video');
-  if (!hero) return;
-  hero.loop = true;
-  hero.addEventListener('ended', () => {
-    hero.currentTime = 0;
-    hero.play();
-  });
-});
-
 // Animation fade-up
 document.querySelectorAll('.fade-up').forEach((el) => {
   const observer = new IntersectionObserver((entries) => {
