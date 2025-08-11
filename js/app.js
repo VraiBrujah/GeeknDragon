@@ -79,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lang === 'en') {
           if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
           if (btn.dataset.itemDescriptionEn) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionEn);
-          if (btn.dataset.itemCustom1NameEn) btn.setAttribute('data-item-custom1-name', btn.dataset.itemCustom1NameEn);
         }
       });
     })

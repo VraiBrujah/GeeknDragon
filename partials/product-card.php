@@ -23,8 +23,8 @@
             data-item-description-en="<?= htmlspecialchars($product['desc_en']) ?>"
             data-item-quantity="1"
             <?php if (!empty($product['multipliers'])): ?>
-            data-item-custom1-name="Multiplicateur"
-            data-item-custom1-name-en="Multiplier"
+            data-item-custom1-name="Multiplier"
+            data-item-custom1-name-fr="Multiplicateur"
             data-item-custom1-options="<?= implode('|', $product['multipliers']) ?>"
             data-item-custom1-value="<?= $product['multipliers'][0] ?>"
             <?php endif; ?>>
