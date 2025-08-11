@@ -814,7 +814,23 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
 });
 
-/* ========================================================================
-   FIN — Le fichier est volontairement long (>500 lignes) pour intégrer
-   tous les correctifs demandés + utilitaires utiles pour l’avenir.
-   ===================================================================== */
+
+document.addEventListener('click', function (e) {
+  const btn = e.target.closest('.snipcart-add-item');
+  if (!btn) return;
+
+  const id = btn.dataset.itemId;
+
+  // Quantité
+  const qtyEl = document.getElementById('qty-' + id);
+  if (qtyEl) {
+    const q = parseInt(qtyEl.textContent, 10);
+    if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
+  }
+
+  // Multiplicateur (option personnalisée)
+  const multEl = document.getElementById('multiplier-' + id);
+  if (multEl) {
+    btn.setAttribute('data-item-custom1-value', multEl.value);
+  }
+}, { passive: true });
