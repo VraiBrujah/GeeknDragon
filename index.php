@@ -32,7 +32,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     </section>
 
     <!-- ===== PRODUITS ===== -->
-    <section id="produits" class="py-16 bg-gray-900/80 scroll-mt-24">
+    <section id="produits" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h3 class="text-4xl font-bold text-center mb-12" data-i18n="home.mustHave.heading">Nos Incontournables</h3>
         <div class="grid md:grid-cols-3 gap-10">
