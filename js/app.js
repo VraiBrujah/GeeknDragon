@@ -138,6 +138,59 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// Navigation desktop : sous-menus accessibles
+document.addEventListener('DOMContentLoaded', () => {
+  const desktopNav = document.querySelector('nav[aria-label="Navigation principale"]');
+  if (!desktopNav) return;
+
+  desktopNav.querySelectorAll('a[aria-haspopup="true"]').forEach((link) => {
+    const li = link.parentElement;
+    const submenu = link.nextElementSibling;
+    if (!submenu) return;
+    const items = submenu.querySelectorAll('a');
+
+    const open = () => link.setAttribute('aria-expanded', 'true');
+    const close = () => link.setAttribute('aria-expanded', 'false');
+
+    link.addEventListener('focus', open);
+
+    li.addEventListener('focusout', (e) => {
+      if (!li.contains(e.relatedTarget)) {
+        close();
+      }
+    });
+
+    link.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        open();
+        if (items.length) items[0].focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        open();
+        if (items.length) items[items.length - 1].focus();
+      } else if (e.key === 'Escape') {
+        close();
+      }
+    });
+
+    items.forEach((item, idx) => {
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          items[(idx + 1) % items.length].focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          items[(idx - 1 + items.length) % items.length].focus();
+        } else if (e.key === 'Escape') {
+          close();
+          link.focus();
+        }
+      });
+    });
+  });
+});
+
 /* -------------------------------------------------------
    Geek & Dragon – Vidéos séquentielles + audio dès geste
    ------------------------------------------------------- */

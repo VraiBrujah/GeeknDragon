@@ -54,8 +54,8 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     $class = 'txt-court font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
     if (isset($item['children']) && !$mobile) {
       echo '<li class="relative group">';
-      echo '<a href="' . $href . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
-      echo '<ul class="absolute left-0 top-full hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-2">';
+      echo '<a href="' . $href . '" class="' . $class . ' block px-2 py-1" aria-haspopup="true" aria-expanded="false" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
+      echo '<ul class="absolute left-0 top-full hidden group-hover:flex group-focus-within:flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-2">';
       renderNav($item['children'], $active, $mobile);
       echo '</ul></li>';
     } else {
