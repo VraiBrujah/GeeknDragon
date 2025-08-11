@@ -169,25 +169,50 @@ document.addEventListener('DOMContentLoaded', () => {
   let audioOK = false; // passe à true après 1 geste
   let playSeq; // sera défini plus bas
 
-  /* ---------- Effet de zoom et pause hors écran ---------- */
-  videos.forEach((vid) => {
-    ['play', 'playing'].forEach((evt) => {
-      vid.addEventListener(evt, () => vid.classList.add('scale-105', 'z-10'));
-    });
-    ['pause', 'ended'].forEach((evt) => {
-      vid.addEventListener(evt, () => vid.classList.remove('scale-105', 'z-10'));
-    });
-  });
+  /* ---------- Effet de zoom, pause hors écran + reprise ---------- */
+  videos.forEach((v) => {
+    const vid = v;
+    vid.dataset.userPaused = 'false';
+    vid.dataset.autoPaused = 'false';
 
-  const pauseObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) {
-        entry.target.pause();
+    const addClass = () => vid.classList.add('scale-105', 'z-10');
+    const removeClass = () => vid.classList.remove('scale-105', 'z-10');
+
+    vid.addEventListener('play', () => {
+      addClass();
+      vid.dataset.userPaused = 'false';
+      vid.dataset.autoPaused = 'false';
+    });
+    vid.addEventListener('playing', addClass);
+    vid.addEventListener('pause', () => {
+      removeClass();
+      if (vid.dataset.autopausing === 'true') {
+        vid.dataset.autopausing = 'false';
+      } else {
+        vid.dataset.userPaused = 'true';
       }
     });
-  }, { threshold: 0 });
+    vid.addEventListener('ended', removeClass);
+  });
 
-  videos.forEach((vid) => pauseObserver.observe(vid));
+  const visibilityObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const vid = entry.target;
+      if (!entry.isIntersecting) {
+        if (!vid.paused) {
+          vid.dataset.autopausing = 'true';
+          vid.dataset.autoPaused = 'true';
+          vid.pause();
+          vid.classList.remove('scale-105', 'z-10');
+        }
+      } else if (vid.dataset.autoPaused === 'true' && vid.dataset.userPaused !== 'true') {
+        vid.play();
+        vid.dataset.autoPaused = 'false';
+      }
+    });
+  }, { threshold: 0.2 });
+
+  videos.forEach((vid) => visibilityObserver.observe(vid));
 
   /* ---------- Bouton mute / unmute ---------- */
   function updateBtn(vid) {
