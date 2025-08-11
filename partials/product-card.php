@@ -1,11 +1,11 @@
 <?php if (inStock($product['id'])) : ?>
-<div class="card flex flex-col">
+<div class="card h-full flex flex-col">
   <a href="<?= htmlspecialchars($product['url']) ?>">
     <img src="/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['desc']) ?>" data-alt-fr="<?= htmlspecialchars($product['desc']) ?>" data-alt-en="<?= htmlspecialchars($product['desc_en']) ?>" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
   </a>
   <h4 class="text-center text-2xl font-semibold mb-2" data-name-fr="<?= htmlspecialchars($product['name']) ?>" data-name-en="<?= htmlspecialchars($product['name_en']) ?>"><?= $product['name'] ?></h4>
-  <p class="text-center mb-4 text-gray-300" data-desc-fr="<?= htmlspecialchars($product['desc']) ?>" data-desc-en="<?= htmlspecialchars($product['desc_en']) ?>"><?= htmlspecialchars($product['desc']) ?></p>
-  <div class="mt-auto flex flex-col items-center">
+  <p class="text-center mb-4 text-gray-300 flex-grow" data-desc-fr="<?= htmlspecialchars($product['desc']) ?>" data-desc-en="<?= htmlspecialchars($product['desc_en']) ?>"><?= htmlspecialchars($product['desc']) ?></p>
+  <div class="mt-auto flex flex-col items-center gap-4">
     <div class="flex flex-col items-center">
       <div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($product['id']) ?>">
         <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($product['id']) ?>">−</button>
