@@ -3,7 +3,9 @@
   <a href="<?= htmlspecialchars($product['url']) ?>">
     <img src="/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['desc']) ?>" data-alt-fr="<?= htmlspecialchars($product['desc']) ?>" data-alt-en="<?= htmlspecialchars($product['desc_en']) ?>" class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
   </a>
-  <h4 class="text-center text-2xl font-semibold mb-2" data-name-fr="<?= htmlspecialchars($product['name']) ?>" data-name-en="<?= htmlspecialchars($product['name_en']) ?>"><?= $product['name'] ?></h4>
+  <a href="<?= htmlspecialchars($product['url']) ?>" class="block">
+    <h4 class="text-center text-2xl font-semibold mb-2" data-name-fr="<?= htmlspecialchars($product['name']) ?>" data-name-en="<?= htmlspecialchars($product['name_en']) ?>"><?= $product['name'] ?></h4>
+  </a>
   <p class="text-center mb-4 text-gray-300 flex-grow" data-desc-fr="<?= htmlspecialchars($product['desc']) ?>" data-desc-en="<?= htmlspecialchars($product['desc_en']) ?>"><?= htmlspecialchars($product['desc']) ?></p>
   <div class="mt-auto flex flex-col items-center gap-4">
     <div class="flex flex-col items-center">
