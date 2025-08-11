@@ -1,7 +1,7 @@
 <?php
 /**  header.php  —  barre de navigation commune
  *  Usage :  <?php include 'header.php'; ?>
- *  $active (optionnel) = chaîne « index », « boutique », « contact »…
+ *  $active (optionnel) = chaîne « produits », « boutique », « actus », « contact »…
  */
 $active = $active ?? '';
 function navClass($key, $active) {
@@ -14,34 +14,34 @@ $navItems = [
     'i18n'  => 'nav.shop',
     'children' => [
       '/boutique.php#pieces' => [
-        'slug'  => 'boutique',
+        'slug'  => 'pieces',
         'label' => 'Pièces',
         'i18n'  => 'nav.pieces'
       ],
       '/boutique.php#cartes' => [
-        'slug'  => 'boutique',
+        'slug'  => 'cartes',
         'label' => 'Cartes',
         'i18n'  => 'nav.cards'
       ],
       '/boutique.php#triptyques' => [
-        'slug'  => 'boutique',
+        'slug'  => 'triptyques',
         'label' => 'Triptyques',
         'i18n'  => 'nav.triptychs'
       ]
     ]
   ],
   '/index.php#produits' => [
-    'slug'  => 'index',
+    'slug'  => 'produits',
     'label' => 'Produits',
     'i18n'  => 'nav.products'
   ],
   '/index.php#actus' => [
-    'slug'  => 'index',
+    'slug'  => 'actus',
     'label' => 'Actualités',
     'i18n'  => 'nav.news'
   ],
   '/index.php#contact' => [
-    'slug'  => 'index',
+    'slug'  => 'contact',
     'label' => 'Contact',
     'i18n'  => 'nav.contact'
   ]
@@ -79,7 +79,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     <a href="<?= langUrl('/index.php') ?>" class="flex flex-col md:flex-row items-center group transition-colors duration-200 flex-shrink-0 space-y-1 md:space-y-0 md:space-x-3 text-center md:text-left">
       <img src="/images/logo.png" alt="Logo Geek & Dragon" class="h-12 logo-lighten transition-transform duration-200 group-hover:scale-105">
       <span class="site-title text-2xl md:text-3xl font-semibold text-white group-hover:text-indigo-300 transition-colors duration-200">
-        <span class="sm:hidden leading-tight">Geek<br>&<br>Dragon</span>
+        <span class="sm:hidden leading-snug">Geek<br>&<br>Dragon</span>
         <span class="hidden sm:inline">Geek &amp; Dragon</span>
       </span>
     </a>
