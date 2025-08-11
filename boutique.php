@@ -87,85 +87,85 @@ include 'snipcart-init.php';
       <img src="images/hero_mage.jpg" alt="" role="presentation" class="w-full h-full object-cover hero-fade">
     </video>
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-    <div class="relative z-10 max-w-3xl p-6">
-      <h1 class="text-5xl font-extrabold mb-6">Boutique Geek & Dragon</h1>
-      <p class="text-xl mb-8 txt-court">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
-      <a href="#pieces" class="btn btn-primary">Choisir mes trésors</a>
-    </div>
+      <div class="relative z-10 max-w-3xl p-6">
+        <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
+        <p class="text-xl mb-8 txt-court" data-i18n="shop.hero.description">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
+        <a href="#pieces" class="btn btn-primary" data-i18n="shop.hero.button">Choisir mes trésors</a>
+      </div>
   </section>
 
 
   <!-- ░░░ EN-TÊTE ░░░ -->
-  <section class="text-center max-w-4xl mx-auto px-6 my-16">
-    <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Boutique officielle</h2>
-      <p class="text-lg md:text-xl txt-court">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
-      <p class="mt-4 txt-court">Paiement sécurisé via Snipcart
-        <span class="payment-icons">
-          <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-          <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-          <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
-        </span>
-        &nbsp;|&nbsp; Stocks mis à jour en temps réel.
-      </p>
-  </section>
+    <section class="text-center max-w-4xl mx-auto px-6 my-16">
+      <h2 class="text-4xl md:text-5xl font-extrabold mb-4" data-i18n="shop.intro.title">Boutique officielle</h2>
+        <p class="text-lg md:text-xl txt-court" data-i18n="shop.intro.description">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
+        <p class="mt-4 txt-court">
+          <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
+          <span class="payment-icons">
+            <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
+            <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
+            <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
+          </span>
+          &nbsp;|&nbsp;
+          <span data-i18n="shop.intro.stock">Stocks mis à jour en temps réel.</span>
+        </p>
+    </section>
 
 
   <!-- ░░░ PIÈCES ░░░ -->
-  <section class="py-24 bg-gray-900/80" id="pieces">
-    <div class="max-w-6xl mx-auto px-6">
-      <h3 class="text-4xl font-bold text-center mb-12">Pièces métalliques</h3>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-        <?php foreach ($products as $product) : ?>
-            <?php include __DIR__ . '/partials/product-card.php'; ?>
-        <?php endforeach; ?>
-      </div>
+    <section class="py-24 bg-gray-900/80" id="pieces">
+      <div class="max-w-6xl mx-auto px-6">
+        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.pieces.title">Pièces métalliques</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <?php foreach ($products as $product) : ?>
+              <?php include __DIR__ . '/partials/product-card.php'; ?>
+          <?php endforeach; ?>
+        </div>
 
-      <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
-        Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.<br>
-        <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank" class="underline text-indigo-400 hover:text-indigo-300">
-          Voir la démonstration en vidéo&nbsp;>
-        </a>
-      </p>
-    </div>
-  </section>
+        <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
+          <span data-i18n="shop.pieces.description">Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.</span><br>
+          <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank" class="underline text-indigo-400 hover:text-indigo-300" data-i18n="shop.pieces.video">Voir la démonstration en vidéo&nbsp;></a>
+        </p>
+      </div>
+    </section>
 
   <!-- ░░░ COFFRES SUR MESURE ░░░ -->
-  <section class="py-16">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <h3 class="text-4xl font-bold mb-6">Coffres sur mesure</h3>
-      <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
-      <p class="mb-6 text-gray-300">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
-      <a href="contact.php" class="btn btn-primary">Demander un devis</a>     
-    </div>
-  </section>
+    <section class="py-16">
+      <div class="max-w-3xl mx-auto px-6 text-center">
+        <h3 class="text-4xl font-bold mb-6" data-i18n="shop.chest.title">Coffres sur mesure</h3>
+        <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
+        <p class="mb-6 text-gray-300" data-i18n="shop.chest.description">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
+        <a href="contact.php" class="btn btn-primary" data-i18n="shop.chest.button">Demander un devis</a>
+      </div>
+    </section>
 
   <!-- ░░░ CARTES ░░░ -->
-  <section id="cartes" class="py-16">
-    <div class="max-w-6xl mx-auto px-6">
-      <h3 class="text-4xl font-bold text-center mb-12">Cartes d’équipement</h3>
-      <div class="flex justify-center">
-        <div class="card text-center max-w-md">
-          <h4 class="text-2xl font-semibold mb-2">À venir</h4>
-          <p class="text-gray-300">Nos scribes enchantent encore ces parchemins d’aventure.<br>Les cartes d’équipement forgeront leur entrée lors de la prochaine lune.</p>
+    <section id="cartes" class="py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.cards.title">Cartes d’équipement</h3>
+        <div class="flex justify-center">
+          <div class="card text-center max-w-md">
+            <h4 class="text-2xl font-semibold mb-2" data-i18n="shop.cards.coming">À venir</h4>
+            <p class="text-gray-300"><span data-i18n="shop.cards.description1">Nos scribes enchantent encore ces parchemins d’aventure.</span><br><span data-i18n="shop.cards.description2">Les cartes d’équipement forgeront leur entrée lors de la prochaine lune.</span></p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
 
 
   <!-- ░░░ TRIPTYQUES ░░░ -->
-  <section id="triptyques" class="py-16 bg-gray-900/80">
-    <div class="max-w-6xl mx-auto px-6">
-      <h3 class="text-4xl font-bold text-center mb-12">Triptyques de personnage</h3>
-      <div class="flex justify-center">
-        <div class="card text-center max-w-md">
-          <h4 class="text-2xl font-semibold mb-2">À venir</h4>
-          <p class="text-gray-300">Les artisans façonnent encore ces grimoires de héros.<br>Les triptyques rejoindront la boutique sous peu.</p>
+    <section id="triptyques" class="py-16 bg-gray-900/80">
+      <div class="max-w-6xl mx-auto px-6">
+        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.triptychs.title">Triptyques de personnage</h3>
+        <div class="flex justify-center">
+          <div class="card text-center max-w-md">
+            <h4 class="text-2xl font-semibold mb-2" data-i18n="shop.triptychs.coming">À venir</h4>
+            <p class="text-gray-300"><span data-i18n="shop.triptychs.description1">Les artisans façonnent encore ces grimoires de héros.</span><br><span data-i18n="shop.triptychs.description2">Les triptyques rejoindront la boutique sous peu.</span></p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   
   <!-- ===== Investissement collectif & Carte de propriété ===== -->
   <section class="py-16 bg-gray-900/80">
@@ -174,10 +174,10 @@ include 'snipcart-init.php';
         <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
       </div>
       <div class="md:w-2/3 text-gray-200 space-y-4">
-        <h3 class="text-3xl font-bold">Investissez ensemble, partagez l’aventure</h3>
-        <p>Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
-        <p>À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
-        <p>Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
+        <h3 class="text-3xl font-bold" data-i18n="shop.collective.title">Investissez ensemble, partagez l’aventure</h3>
+        <p data-i18n="shop.collective.description1">Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
+        <p data-i18n="shop.collective.description2">À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
+        <p data-i18n="shop.collective.description3">Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
       </div>
     </div>
   </section>

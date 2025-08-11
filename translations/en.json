@@ -66,6 +66,47 @@
     "securePayment": "Secure payment via Snipcart",
     "realTimeStock": "Stock updated in real time"
   },
+  "shop": {
+    "hero": {
+      "title": "Geek & Dragon Shop",
+      "description": "Give your sessions the elegance and durability of coins and equipment cards designed in Quebec, more precious than a $300 dragon miniature used only on rare occasions; our coins appear in every session for years of adventures.",
+      "button": "Choose my treasures"
+    },
+    "intro": {
+      "title": "Official shop",
+      "description": "Collectible items and handcrafted game aids, made in Quebec.",
+      "payment": "Secure payment via Snipcart",
+      "stock": "Stock updated in real time."
+    },
+    "pieces": {
+      "title": "Metal coins",
+      "description": "A role-playing game without physical coins is like Monopoly without banknotes. Treat yourself to the authentic weight of treasure.",
+      "video": "Watch the demo video >"
+    },
+    "chest": {
+      "title": "Custom chests",
+      "description": "Need more than 50 coins? Custom chests are available on request.",
+      "button": "Request a quote"
+    },
+    "cards": {
+      "title": "Equipment cards",
+      "coming": "Coming soon",
+      "description1": "Our scribes are still enchanting these adventure parchments.",
+      "description2": "The equipment cards will forge their way in by the next moon."
+    },
+    "triptychs": {
+      "title": "Character triptychs",
+      "coming": "Coming soon",
+      "description1": "The artisans are still shaping these hero grimoires.",
+      "description2": "The triptychs will join the shop shortly."
+    },
+    "collective": {
+      "title": "Invest together, share the adventure",
+      "description1": "Don't let the game master go broke for your pleasure: each player will soon be able to contribute by buying their triptych, cards and coins.",
+      "description2": "By comparison, some dragon figurines sell for over <strong>$300</strong> each and are generally used only once in an entire campaign—and even then, only when the scenario allows it, because it's not systematic. Our coins, however, are used in every session for years of campaigning.",
+      "description3": "Fill out the <em>ownership card</em> opposite by writing your name and the number of coins purchased, sign it and hand your treasures to the game master. At the end of the campaign, they will return them to you without difficulty."
+    }
+  },
   "news": {
     "flim2025": {
       "heading": "News – FLIM 2025",
