@@ -19,7 +19,7 @@
 /* Ensure cart and account buttons remain readable and uniform */
 .snipcart-checkout,
 .snipcart-customer-signin {
-  color: #e5e7eb;
+  color: #fcfbfb;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
@@ -35,7 +35,7 @@
 .snipcart-customer-signin:hover,
 .snipcart-customer-signin:focus,
 .snipcart-customer-signin:active {
-  color: #e5e7eb;
+  color: #fcfbfb;
   background-color: transparent;
   outline: none;
 }
@@ -43,11 +43,11 @@
 /* Ensure account modal form fields remain readable on dark background */
 .snipcart-customer-signin .snipcart-form__label,
 .snipcart-customer-signin .snipcart-form__label--focus {
-  color: #e5e7eb;
+  color: #fcfbfb;
 }
 
 .snipcart-customer-signin .snipcart-form__input {
-  color: #e5e7eb;
+  color: #fcfbfb;
 }
 
 .snipcart-customer-signin .snipcart-form__input::placeholder {
