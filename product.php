@@ -73,8 +73,10 @@ $snipcartAddProductBehavior = 'overlay';
 include 'snipcart-init.php';
 ?>
 <main id="main" class="pt-32 pb-20">
-  <section class="max-w-md mx-auto px-6">
-    <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline mb-6 block mx-auto">&larr; <span data-i18n="product.back">Retour à la boutique</span></a>
+  <section class="max-w-3xl mx-auto px-6">
+    <div class="mb-6 text-center">
+      <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline inline-block">&larr; <span data-i18n="product.back">Retour à la boutique</span></a>
+    </div>
     <div class="card">
       <div class="swiper mb-6">
         <div class="swiper-wrapper">

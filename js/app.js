@@ -640,7 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dragToClose: true,
       closeButton: 'top',
       placeFocusBack: true,
-      on: { close: () => window.history.back() }
+      Hash: false
     });
   }
 });
