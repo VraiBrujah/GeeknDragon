@@ -94,6 +94,11 @@
   display: none;
 }
 
+/* Hide variant dropdowns in cart */
+.snipcart-item-line__variants {
+  display: none;
+}
+
 /* Ensure quantity label is visible */
 .snipcart-item-line__quantity label,
 .snipcart-item-line__quantity .snipcart__font--tiny {
