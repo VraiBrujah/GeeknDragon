@@ -317,12 +317,30 @@
   height:calc(100vh - var(--gd-header-h));
 }
 
-/* ======= SAFETY RAILS SCROLL (confirmation & longues pages) ======= */
-html, body { overflow-y: auto !important; }
-.snipcart{ overflow: visible !important; }
-.snipcart .snipcart-order,
-.snipcart .snipcart-order__sections,
-.snipcart .snipcart-order__invoice{
+/* ===== Scroll correct: la modale Snipcart gère le scroll, pas l'arrière-plan ===== */
+
+/* Quand la modale Snipcart est ouverte, on fige le body */
+body.snipcart-open { overflow: hidden; }
+
+/* La modale (overlay) sous le header fixe, et ELLE scrolle */
+.snipcart .snipcart-modal__container{
+  position: fixed;
+  top: var(--gd-header-h);
+  left: 0; right: 0; bottom: 0;
+  height: auto;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Checkout/Order en page pleine (pas d’overlay) : on laisse scroller la page,
+   on s’assure que les sections Snipcart ne bloquent pas le scroll */
+.snipcart .snipcart-layout,
+.snipcart .snipcart-checkout,
+.snipcart .snipcart-order{
+  position: static !important;
+  height: auto !important;
   max-height: none !important;
   overflow: visible !important;
+}
+
 }
