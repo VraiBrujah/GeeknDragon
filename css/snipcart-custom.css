@@ -18,15 +18,10 @@
   padding: 0.5rem 0;
 }
 .snipcart-item-line__remove {
-  order: -1;
-  margin-left: 0;
-  margin-right: 0.5rem;
+  margin-left: auto;
 }
 .snipcart-item-line__actions {
   position: static;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .snipcart-item-line + .snipcart-item-line {
@@ -125,20 +120,11 @@
 .snipcart-item-line__quantity {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
 }
 
 .snipcart-item-line__quantity input {
-  width: 3rem;
-  text-align: center;
   background-color: #333333;
   color: #ffffff;
-}
-
-.snipcart-item-line__quantity button {
-  background-color: #333333;
-  color: #ffffff;
-  padding: 0 0.25rem;
 }
 
 /* Center summary section text and container */
