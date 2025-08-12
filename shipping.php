@@ -26,7 +26,7 @@ $raw = file_get_contents('php://input');
 // Vérification optionnelle de la signature (si le secret est dispo)
 if ($secret) {
   $signature = $_SERVER['HTTP_X_SNIPCART_SIGNATURE'] ?? '';
-  if (!hash_equals(hash_hmac('sha256', $raw, $secret), $signature)) {
+  if ($signature && !hash_equals(hash_hmac('sha256', $raw, $secret), $signature)) {
     http_response_code(401);
     echo json_encode(['error' => 'invalid signature']);
     exit;
