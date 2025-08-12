@@ -33,7 +33,7 @@ The application expects a few secrets to be provided through the environment:
 
 - `SNIPCART_API_KEY` – your public Snipcart API key.
 - `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates.
-- `QUOTE_EMAIL` – recipient for quote requests.
+- `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
 
 To send emails from the contact form, configure SMTP credentials for the fixed sender address `no-reply@geekndragon.com`:
 
