@@ -12,11 +12,13 @@ function header_value(string $name): ?string {
 
 $token  = header_value('X-Snipcart-RequestToken');
 
-// Récupère la clé secrète depuis l'environnement avec un fallback
+// Récupère la clé secrète depuis l'environnement
 $secret = getenv('SNIPCART_SECRET_API_KEY');
 if (!$secret) {
-  // Fallback en dur identique à snipcart-init.php pour les envs sans variable
-  $secret = 'S_MDdhYmU2NWMtYmI5ZC00NmI0LWJjZGUtZDdkYTZjYTRmZTMxNjM4ODkxMjUzODg0NDc4ODU4';
+  http_response_code(500);
+  header('Content-Type: application/json');
+  echo json_encode(['errors' => [['key' => 'missing-secret', 'message' => 'SNIPCART_SECRET_API_KEY manquante']]]);
+  exit;
 }
 
 // DOIT être la clé SECRÈTE **Live** si le checkout est Live
