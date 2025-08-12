@@ -22,10 +22,17 @@ body {
 }
 
 body {
-  background: url('/images/bg_texture.jpg') center/cover;
-  background-attachment: scroll;
-  color: #e5e7eb;
+  background-color: #f9fafb;
+  color: #111827;
   line-height: 1.6;
+}
+
+a {
+  color: #1d4ed8;
+}
+
+a:hover {
+  color: #1e40af;
 }
 
 /* Titres + éléments “hero” en Cinzel (pour le côté médiéval) */
@@ -78,7 +85,7 @@ h6 {
   --gd-primary-hover:#7c3aed;     /* indigo-600 */
   --gd-secondary:#d97706;         /* amber-600  */
   --gd-dark:#111827;              /* gray-900   */
-  --gd-text:#e5e7eb;              /* gray-200   */
+  --gd-text:#111827;              /* gray-900   */
   --gd-muted:#9aa3b2;             /* gray-400~  */
   --gd-ring: rgba(79,70,229,.45); /* indigo halo */
   --header-height:0px;
