@@ -67,7 +67,13 @@ if ($errors) {
  */
 function sendSnipcartMail(string $to, string $subject, string $body, string $replyTo = ''): bool
 {
-    $secret = getenv('SNIPCART_SECRET_API_KEY');
+	// Récupère la clé secrète depuis l'environnement avec un fallback
+	$secret = getenv('SNIPCART_SECRET_API_KEY');
+	if (!$secret) {
+	  // Fallback en dur identique à snipcart-init.php pour les envs sans variable
+	  $secret = 'S_MDdhYmU2NWMtYmI5ZC00NmI0LWJjZGUtZDdkYTZjYTRmZTMxNjM4ODkxMjUzODg0NDc4ODU4';
+	}
+
     $from   = getenv('SMTP_USERNAME') ?: 'contact@geekndragon.com';
     if (!$secret) {
         return false;
