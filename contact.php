@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . '/bootstrap.php';
 session_start();
-$config = require __DIR__ . '/config.php';
 $active = 'contact';
 require __DIR__ . '/i18n.php';
 $title  = $translations['meta']['contact']['title'] ?? 'Geek & Dragon';
@@ -16,8 +15,6 @@ $csrfToken = $_SESSION['csrf_token'];
 $errors = $_SESSION['errors'] ?? [];
 $old = $_SESSION['old'] ?? [];
 unset($_SESSION['errors'], $_SESSION['old']);
-
-$recaptchaSiteKey = $config['recaptcha_site_key'] ?? null;
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -73,10 +70,6 @@ $recaptchaSiteKey = $config['recaptcha_site_key'] ?? null;
 
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>" />
 
-        <?php if ($recaptchaSiteKey) : ?>
-        <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars($recaptchaSiteKey) ?>"></div>
-        <?php endif; ?>
-
           <button type="submit" class="btn w-full bg-indigo-700 hover:bg-indigo-600 text-white font-semibold py-3 rounded-full transition" data-i18n="contact.form.submit">
             Envoyer ma demande
           </button>
@@ -93,8 +86,5 @@ $recaptchaSiteKey = $config['recaptcha_site_key'] ?? null;
 
   <?php include 'footer.php'; ?>
   <script src="/js/app.js"></script>
-  <?php if ($recaptchaSiteKey) : ?>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  <?php endif; ?>
 </body>
 </html>

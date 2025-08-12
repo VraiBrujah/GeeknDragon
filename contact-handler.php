@@ -3,10 +3,6 @@ require __DIR__ . '/bootstrap.php';
 
 session_start();
 
-require_once __DIR__ . '/recaptcha.php';
-
-
-
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: contact.php');
     exit;
@@ -36,22 +32,6 @@ if (
 }
 if ($message === '') {
     $errors[] = 'Le message est requis.';
-}
-
-$recaptchaSecret   = $_ENV['RECAPTCHA_SECRET_KEY'] ?? $_SERVER['RECAPTCHA_SECRET_KEY'];
-$recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
-if (!$recaptchaSecret) {
-    error_log('Missing environment variable: RECAPTCHA_SECRET_KEY', 3, __DIR__ . '/error_log');
-}
-if ($recaptchaSecret) {
-    if ($recaptchaResponse === '') {
-        $errors[] = 'Veuillez vérifier le reCAPTCHA.';
-    } else {
-        $captchaResult = verifyRecaptcha($recaptchaSecret, $recaptchaResponse);
-        if (empty($captchaResult['success'])) {
-            $errors[] = $captchaResult['error'] ?? 'La vérification reCAPTCHA a échoué.';
-        }
-    }
 }
 
 $old = [
