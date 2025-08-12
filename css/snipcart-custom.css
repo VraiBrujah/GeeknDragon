@@ -178,3 +178,18 @@
   align-items: center;
   gap: 0.25rem;
 }
+
+/* Ensure secondary action buttons like the address "OK" remain readable */
+.snipcart-button-secondary,
+.snipcart__button--secondary {
+  color: #ffffff;
+  background-color: #333333;
+  border: 1px solid #ffffff;
+}
+
+.snipcart-button-secondary:hover,
+.snipcart__button--secondary:hover,
+.snipcart-button-secondary:focus,
+.snipcart__button--secondary:focus {
+  filter: brightness(1.05);
+}
