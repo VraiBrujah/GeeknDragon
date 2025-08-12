@@ -835,3 +835,30 @@ document.addEventListener('click', function (e) {
     btn.setAttribute('data-item-name', mult !== '1' ? `${baseName} x${mult}` : baseName);
   }
 }, { passive: true });
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1) Décalage précis sous le header fixe
+  const header = document.querySelector('header');
+  const root   = document.querySelector('#snipcart, .snipcart');
+  if (header && root) {
+    const setOffset = () => {
+      const h = header.getBoundingClientRect().height || 96;
+      document.documentElement.style.setProperty('--gd-header-h', h + 'px');
+    };
+    setOffset();
+    new ResizeObserver(setOffset).observe(header);
+    window.addEventListener('resize', setOffset);
+  }
+
+  // 2) Cacher UNIQUEMENT le champ custom "Multiplicateur" (la quantité n’est pas touchée)
+  const hideMultiplicateur = () => {
+    document.querySelectorAll('.snipcart-item-custom-field, .snipcart-item-line__custom-fields')
+      .forEach(el => {
+        const txt = (el.getAttribute('data-snipcart-custom-field-label') || el.textContent || '').toLowerCase();
+        if (txt.includes('multiplicateur')) el.style.display = 'none';
+      });
+  };
+  hideMultiplicateur();
+  const snipcartRoot = document.querySelector('#snipcart');
+  if (snipcartRoot) new MutationObserver(hideMultiplicateur).observe(snipcartRoot, {childList:true, subtree:true});
+});
