@@ -1,14 +1,11 @@
 <?php
 // Récupération des variables d'environnement Snipcart
 $snipcartKey = $_ENV['SNIPCART_API_KEY']
-    ?? $_SERVER['SNIPCART_API_KEY']
-    ?? getenv('SNIPCART_API_KEY');
+    ?? $_SERVER['SNIPCART_API_KEY'];
 $snipcartLanguage = $_ENV['SNIPCART_LANGUAGE']
-    ?? $_SERVER['SNIPCART_LANGUAGE']
-    ?? getenv('SNIPCART_LANGUAGE');
+    ?? $_SERVER['SNIPCART_LANGUAGE'];
 $snipcartAddProductBehavior = $_ENV['SNIPCART_ADD_PRODUCT_BEHAVIOR']
-    ?? $_SERVER['SNIPCART_ADD_PRODUCT_BEHAVIOR']
-    ?? getenv('SNIPCART_ADD_PRODUCT_BEHAVIOR');
+    ?? $_SERVER['SNIPCART_ADD_PRODUCT_BEHAVIOR'];
 
 if (!$snipcartKey || !$snipcartLanguage || !$snipcartAddProductBehavior) {
     throw new RuntimeException('SNIPCART_API_KEY, SNIPCART_LANGUAGE et SNIPCART_ADD_PRODUCT_BEHAVIOR doivent être définies.');
