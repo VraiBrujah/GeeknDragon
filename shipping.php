@@ -12,14 +12,7 @@ $config = require __DIR__ . '/config.php';
 
 header('Content-Type: application/json');
 
-// ---- Fallbacks (à remplacer par tes valeurs si besoin) ----
-$SECRET_FALLBACK = 'S_MDdhYmU2NWMtYmI5ZC00NmI0LWJjZGUtZDdkYTZjYTRmZTMxNjM4ODkxMjUzODg0NDc4ODU4';
-
-$apiKey = $config['snipcart_secret_api_key'] ?? '';
-if (!$apiKey) {
-  $apiKey = $SECRET_FALLBACK; // évite un 500 si la variable d'env est absente
-}
-
+$apiKey = $config['snipcart_secret_api_key'] ?? null;
 $secret = $config['shipping_secret'] ?? '';
 $raw = file_get_contents('php://input');
 
