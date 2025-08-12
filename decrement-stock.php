@@ -1,4 +1,5 @@
 <?php
+require __DIR__.'/bootstrap.php';
 
 /**
  * decrement-stock.php  –  Geek & Dragon
@@ -18,8 +19,11 @@
  * }
  */
 
-// Clé secrète Snipcart
-define('SNIPCART_SECRET', getenv('SNIPCART_SECRET_API_KEY'));
+// Récupère les clés depuis l'environnement
+$apiKey = $_ENV['SNIPCART_API_KEY']
+    ?? $_SERVER['SNIPCART_API_KEY'];
+$secret = $_ENV['SNIPCART_SECRET_API_KEY']
+    ?? $_SERVER['SNIPCART_SECRET_API_KEY'];
 
 header('Content-Type: application/json');
 
@@ -31,10 +35,12 @@ function respond($code, $msg = [])
     exit;
 }
 
-if (empty(SNIPCART_SECRET)) {
-    error_log('Snipcart secret not configured');
+if (!$apiKey || !$secret) {
+    error_log('Snipcart API keys not configured');
     respond(500, ['error' => 'config']);
 }
+
+define('SNIPCART_SECRET', $secret);
 
 function validateToken(string $token): bool
 {

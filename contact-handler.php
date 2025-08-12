@@ -3,10 +3,6 @@ require __DIR__ . '/bootstrap.php';
 
 session_start();
 
-require_once __DIR__ . '/recaptcha.php';
-
-
-
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: contact.php');
     exit;
@@ -38,19 +34,6 @@ if ($message === '') {
     $errors[] = 'Le message est requis.';
 }
 
-$recaptchaSecret   = getenv('RECAPTCHA_SECRET_KEY');
-$recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
-if ($recaptchaSecret) {
-    if ($recaptchaResponse === '') {
-        $errors[] = 'Veuillez vérifier le reCAPTCHA.';
-    } else {
-        $captchaResult = verifyRecaptcha($recaptchaSecret, $recaptchaResponse);
-        if (empty($captchaResult['success'])) {
-            $errors[] = $captchaResult['error'] ?? 'La vérification reCAPTCHA a échoué.';
-        }
-    }
-}
-
 $old = [
     'Nom' => $nom,
     'Email' => $email,
@@ -66,38 +49,44 @@ if ($errors) {
 }
 
 /**
- * Envoie un e-mail via l'API Snipcart.
+ * Envoie un e-mail via l'API SendGrid.
  */
-function sendSnipcartMail(string $to, string $subject, string $body, string $replyTo = ''): bool
+function sendSendgridMail(string $to, string $subject, string $body, string $replyTo = ''): bool
 {
-	// Récupère la clé secrète depuis l'environnement avec un fallback
-	$secret = getenv('SNIPCART_SECRET_API_KEY');
-	if (!$secret) {
-	  // Fallback en dur identique à snipcart-init.php pour les envs sans variable
-	  $secret = 'S_MDdhYmU2NWMtYmI5ZC00NmI0LWJjZGUtZDdkYTZjYTRmZTMxNjM4ODkxMjUzODg0NDc4ODU4';
-	}
-
-    $from   = getenv('SMTP_USERNAME') ?: 'contact@geekndragon.com';
-    if (!$secret) {
+    $apiKey = $_ENV['SENDGRID_API_KEY'] ?? $_SERVER['SENDGRID_API_KEY'];
+    $from   = $_ENV['SMTP_USERNAME'] ?? $_SERVER['SMTP_USERNAME'];
+    if (!$apiKey) {
+        error_log('Missing environment variable: SENDGRID_API_KEY', 3, __DIR__ . '/error_log');
         return false;
+    }
+    if (!$from) {
+        error_log('Missing environment variable: SMTP_USERNAME', 3, __DIR__ . '/error_log');
+        $from = 'contact@geekndragon.com';
     }
 
     $payload = [
-        'to'       => $to,
-        'from'     => $from,
-        'subject'  => $subject,
-        'textBody' => $body,
+        'personalizations' => [[
+            'to'      => [['email' => $to]],
+            'subject' => $subject,
+        ]],
+        'from'    => ['email' => $from],
+        'content' => [[
+            'type'  => 'text/plain',
+            'value' => $body,
+        ]],
     ];
     if ($replyTo) {
-        $payload['replyTo'] = $replyTo;
+        $payload['reply_to'] = ['email' => $replyTo];
     }
 
-    $ch = curl_init('https://app.snipcart.com/api/email');
+    $ch = curl_init('https://api.sendgrid.com/v3/mail/send');
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST           => true,
-        CURLOPT_USERPWD        => $secret . ':',
-        CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
+        CURLOPT_HTTPHEADER     => [
+            'Authorization: Bearer ' . $apiKey,
+            'Content-Type: application/json',
+        ],
         CURLOPT_POSTFIELDS     => json_encode($payload),
     ]);
     curl_exec($ch);
@@ -105,14 +94,16 @@ function sendSnipcartMail(string $to, string $subject, string $body, string $rep
     curl_close($ch);
     return $status >= 200 && $status < 300;
 }
-
-
-$to = 'contact@geekndragon.com';
+$to = $_ENV['QUOTE_EMAIL'] ?? $_SERVER['QUOTE_EMAIL'];
+if (!$to) {
+    error_log('Missing environment variable: QUOTE_EMAIL', 3, __DIR__ . '/error_log');
+    $to = 'contact@geekndragon.com';
+}
 $subject = 'Nouveau message depuis le formulaire de contact';
 $body = "Nom: $nom\nEmail: $email\nTéléphone: $telephone\nMessage:\n$message";
 
-if (!sendSnipcartMail($to, $subject, $body, $email)) {
-    error_log('Mail Error: failed to send via Snipcart', 3, __DIR__ . '/error_log');
+if (!sendSendgridMail($to, $subject, $body, $email)) {
+    error_log('Mail Error: failed to send via SendGrid', 3, __DIR__ . '/error_log');
     $_SESSION['errors'] = ["Une erreur est survenue lors de l'envoi du message."];
     $_SESSION['old'] = $old;
     header('Location: contact.php');

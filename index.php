@@ -12,17 +12,22 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
 <body>
 
-  <?php include 'header.php'; ?>
-  <?php include 'snipcart-init.php'; ?>
+  <?php
+  ob_start();
+  include 'snipcart-init.php';
+  $snipcartInit = ob_get_clean();
+  include 'header.php';
+  echo $snipcartInit;
+  ?>
 
   <main id="main" class="pt-[var(--header-height)]">
   
 
     <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-      <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-videos='["videos/mage.mp4","videos/cascade_HD.mp4","videos/mage.mp4","videos/fontaine11.mp4","videos/mage.mp4","videos/Carte1.mp4","videos/mage.mp4","videos/fontaine4.mp4","videos/mage.mp4","videos/fontaine3.mp4","videos/mage.mp4","videos/fontaine2.mp4","videos/mage.mp4","videos/fontaine1.mp4","videos/mage.mp4","videos/Carte1.mp4","videos/mage.mp4"]'></div>
+      <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/mage.mp4" data-videos='["videos/cascade_HD.mp4","videos/fontaine11.mp4","videos/Carte1.mp4","videos/fontaine4.mp4","videos/fontaine3.mp4","videos/fontaine2.mp4","videos/fontaine1.mp4"]'></div>
       <div class="absolute inset-0 bg-black/60"></div>
-      <div class="relative z-10 max-w-3xl p-6">
+      <div class="relative z-10 max-w-3xl p-6 hero-text">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
           <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
           <p class="text-xl mb-8 txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
