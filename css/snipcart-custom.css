@@ -20,7 +20,7 @@
 .snipcart-item-line__remove {
   /* Move trash icon to the left and ensure visibility */
   margin-left: 0 !important;
-  color: #1f2937;
+  color: #ffffff;
 }
 .snipcart-item-line__actions {
   position: static;
@@ -33,7 +33,7 @@
 /* Ensure cart and account buttons remain readable and uniform */
 .snipcart-checkout,
 .snipcart-customer-signin {
-  color: #1f2937;
+  color: #fcfbfb;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
@@ -49,7 +49,7 @@
 .snipcart-customer-signin:hover,
 .snipcart-customer-signin:focus,
 .snipcart-customer-signin:active {
-  color: #1f2937;
+  color: #fcfbfb;
   background-color: transparent;
   outline: none;
 }
@@ -61,7 +61,7 @@
 .snipcart-form__input::placeholder,
 .snipcart-form__textarea,
 .snipcart-form__textarea::placeholder {
-  color: #1f2937;
+  color: #ffffff;
 }
 .snipcart-form__input,
 .snipcart-form__select,
@@ -71,17 +71,17 @@
 .snipcart-form__field textarea,
 .snipcart-form__checkbox,
 .snipcart-form__radio {
-  background-color: #ffffff;
-  color: #1f2937;
+  background-color: #333333;
+  color: #ffffff;
 }
 .snipcart-form__select option {
-  background-color: #ffffff;
-  color: #1f2937;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 .snipcart-form__checkbox,
 .snipcart-form__radio {
-  accent-color: #6d28d9;
+  accent-color: #333333;
 }
 
 /* Ensure cart modal isn’t hidden under fixed header */
@@ -94,12 +94,12 @@
 /* Make quantity fields readable */
 .snipcart-item-line select,
 .snipcart-item-line input {
-  background-color: #ffffff;
-  color: #1f2937;
+  background-color: #333333;
+  color: #ffffff;
 }
 .snipcart-item-line option {
-  background-color: #ffffff;
-  color: #1f2937;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 /* Hide multiplier custom field in cart */
@@ -115,7 +115,7 @@
 /* Ensure quantity label is visible */
 .snipcart-item-line__quantity label,
 .snipcart-item-line__quantity .snipcart__font--tiny {
-  color: #1f2937;
+  color: #ffffff;
 }
 
 /* Ensure quantity selector is visible and styled */
@@ -125,8 +125,8 @@
 }
 
 .snipcart-item-line__quantity input {
-  background-color: #ffffff;
-  color: #1f2937;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 /* Center summary section text and container */
@@ -147,9 +147,9 @@
 
 /* Boutons -/+ sombres (cohérents avec tes autres champs) */
 .__qty-btn {
-  background-color: #f3f4f6;
-  color: #1f2937;
-  border: 1px solid #d1d5db;
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #444;
   border-radius: 6px;
   width: 32px;
   height: 32px;
@@ -157,7 +157,7 @@
   font-size: 18px;
   cursor: pointer;
 }
-.__qty-btn:focus { outline: 2px solid #9ca3af; }
+.__qty-btn:focus { outline: 2px solid #555; }
 .__qty-btn:hover { filter: brightness(1.05); }
 
 /* Petit espace quand la corbeille est placée à gauche du titre */
@@ -208,9 +208,9 @@
 /* Ensure secondary action buttons like the address "OK" remain readable */
 .snipcart-button-secondary,
 .snipcart__button--secondary {
-  color: #1f2937;
-  background-color: #f3f4f6;
-  border: 1px solid #1f2937;
+  color: #ffffff;
+  background-color: #333333;
+  border: 1px solid #ffffff;
 }
 
 .snipcart-button-secondary:hover,
@@ -223,11 +223,11 @@
 
 /* Ensure shipping rate options remain readable */
 .snipcart-shipping-rates-list-item {
-  background-color: #f3f4f6;
-  color: #1f2937;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 .snipcart-shipping-rates-list-item label,
 .snipcart-shipping-rates-list-item span {
-  color: #1f2937;
+  color: #ffffff;
 }
