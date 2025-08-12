@@ -296,11 +296,6 @@
 /* DIVERS                                                               */
 /* =================================================================== */
 
-/* Masquer UNIQUEMENT le champ custom "Multiplicateur" dans le panier */
-.snipcart .snipcart-item-custom-field[data-snipcart-custom-field-label="Multiplicateur"]{
-  display:none !important;
-}
-
 /* Dropdown options (fond sombre) */
 .snipcart .snipcart-form__select option{
   background:var(--gd-card); color:var(--gd-text);
