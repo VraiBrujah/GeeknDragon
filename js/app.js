@@ -4,7 +4,7 @@
    + vidéos séquentielles + Swiper/Fancybox + helpers utilitaires.
    ===================================================================== */
 
-/* global Swiper, Fancybox, whenSnipcart */
+/* global Swiper, Fancybox */
 
 /* ========================================================================
    UTILITAIRES GÉNÉRIQUES
@@ -16,7 +16,7 @@
   const qs  = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Pas d’erreurs si console absente (très vieux navigateurs)
+  // Pas d’erreurs si console absente
   const log = (...args) => { try { console.log('[GD]', ...args); } catch (_) {} };
 
   // Throttle / Debounce
@@ -50,7 +50,7 @@
     return el;
   };
 
-  // Récupère/écrit un cookie simple
+  // Cookies
   const setCookie = (name, value, maxAge = 31536000) => {
     try { document.cookie = `${name}=${value};path=/;max-age=${maxAge}`; } catch(_) {}
   };
@@ -61,7 +61,7 @@
     } catch (_) { return null; }
   };
 
-  // Langue (stockée dans localStorage + cookie)
+  // Langue
   const LANGS = ['fr', 'en'];
   const DEFAULT_LANG = 'fr';
   const getLang = () => {
@@ -92,7 +92,7 @@
     window.scrollTo({ top, behavior: 'smooth' });
   };
 
-  // Focus trap générique
+  // Focus trap
   const focusTrap = (container) => {
     const focusableSel = 'a[href], button:not([disabled]), select, textarea, input, [tabindex]:not([tabindex="-1"])';
     let nodes = []; let first = null; let last = null;
@@ -108,7 +108,7 @@
     };
   };
 
-  // Petite file d’attente pour callbacks Snipcart quand non chargé
+  // Snipcart ready (polling léger)
   const whenSnipcart = (cb) => {
     if (window.Snipcart && window.Snipcart.store && window.Snipcart.api) { cb(); return; }
     const int = setInterval(() => {
@@ -119,7 +119,7 @@
   };
   window.whenSnipcart = whenSnipcart;
 
-  // Expose quelques utilitaires si besoin ailleurs
+  // Expose utilitaires
   window.GD = Object.assign(window.GD || {}, {
     qs, qsa, log, throttle, debounce, createEl,
     getLang, setLang, smoothScrollTo, getHeaderOffset, focusTrap
@@ -127,16 +127,21 @@
 })();
 
 /* ========================================================================
-   HAUTEUR D’EN-TÊTE (variable CSS)
+   HAUTEUR D’EN-TÊTE → variables CSS (global + Snipcart)
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  const setHeaderHeight = () => {
-    const header = document.querySelector('header');
-    if (!header) return;
-    document.documentElement.style.setProperty('--header-height', `${header.offsetHeight}px`);
+  const header = document.querySelector('header');
+  if (!header) return;
+  const setHeaderVars = () => {
+    const h = header.getBoundingClientRect().height || 96;
+    // utilisé par ton site
+    document.documentElement.style.setProperty('--header-height', `${h}px`);
+    // utilisé par snipcart-custom.css (modal/summary sticky)
+    document.documentElement.style.setProperty('--gd-header-h', `${h}px`);
   };
-  setHeaderHeight();
-  window.addEventListener('resize', setHeaderHeight);
+  setHeaderVars();
+  new ResizeObserver(setHeaderVars).observe(header);
+  window.addEventListener('resize', setHeaderVars);
 });
 
 /* ========================================================================
@@ -151,7 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!available.includes(lang)) lang = defaultLang;
   lang = window.GD.setLang(lang);
 
-  // Met à jour l’état visuel des boutons
   const setCurrent = (cur) => {
     document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
       if (btn.dataset.lang === cur) btn.setAttribute('aria-current', 'true');
@@ -161,33 +165,30 @@ document.addEventListener('DOMContentLoaded', () => {
   setCurrent(lang);
   whenSnipcart(() => window.Snipcart.api.session.setLanguage(lang));
 
-  // Gestion clic drapeau
   document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const picked = btn.dataset.lang;
       window.GD.setLang(picked);
       setCurrent(picked);
-      // Si besoin de recharger entièrement (ex : pricing server-side), décommente :
-      // window.location = new URL(window.location.href).toString();
-      // Sinon, on met à jour le DOM dynamiquement (voir fetch juste après).
       whenSnipcart(() => window.Snipcart.api.session.setLanguage(picked));
       loadTranslations(picked);
     });
   });
 
-  // Chargement + injection i18n
   function loadTranslations(current) {
     fetch(`/translations/${current}.json`)
       .then((res) => res.ok ? res.json() : null)
       .then((data) => {
         if (!data) return;
         window.i18n = data;
+
         document.querySelectorAll('[data-i18n]').forEach((el) => {
           const keys = el.dataset.i18n.split('.');
           let text = data; keys.forEach((k) => { if (text) text = text[k]; });
           if (text != null) el.innerHTML = text;
         });
-        // Champs de données produits (nom/desc/alt) via datasets bilingues
+
+        // Champs produits (nom/desc/alt)
         document.querySelectorAll('[data-name-fr]').forEach((el) => {
           const target = current === 'en' ? el.dataset.nameEn : el.dataset.nameFr;
           if (target) el.innerHTML = target;
@@ -200,7 +201,8 @@ document.addEventListener('DOMContentLoaded', () => {
           const target = current === 'en' ? el.dataset.altEn : el.dataset.altFr;
           if (target) el.setAttribute('alt', target);
         });
-        // Boutons Snipcart (nom/description)
+
+        // Boutons Snipcart (nom/description + libellé custom)
         document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
           if (current === 'en') {
             if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
@@ -209,15 +211,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
             if (btn.dataset.itemDescriptionFr) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
           }
-          // Option “Multiplicateur” localisée
           const hasCustom = btn.hasAttribute('data-item-custom1-name') && data?.product?.multiplier;
           if (hasCustom) btn.setAttribute('data-item-custom1-name', data.product.multiplier);
         });
 
-        // (Option) Si une carte produit embarque deux sélecteurs FR/EN,
-        // montre uniquement celui de la langue en cours (via data-role)
+        // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)
         document.querySelectorAll('[data-role^="multiplier-"]').forEach((sel) => {
-          const role = sel.dataset.role; // ex: multiplier-fr / multiplier-en
+          const role = sel.dataset.role; // multiplier-fr / multiplier-en
           const isFor = role?.split('-')[1];
           if (!isFor) return;
           sel.closest('.multiplier-wrapper')?.classList.toggle('hidden', isFor !== current);
@@ -233,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (switcher) switcher.classList.add('hidden');
       });
   }
-
   loadTranslations(lang);
 });
 
@@ -241,17 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
    SCROLL ANIMS (fade-up) + SMOOTH ANCHOR
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  // Fade-up
   document.querySelectorAll('.fade-up').forEach((el) => {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('animate');
-      });
+      entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add('animate'); });
     }, { threshold: 0.1 });
     observer.observe(el);
   });
 
-  // Smooth anchors avec offset header
   document.body.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]:not([href="#"])');
     if (!a) return;
@@ -260,7 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!target) return;
     e.preventDefault();
     window.GD.smoothScrollTo(target);
-    // Marque l’onglet actif si c’est un lien de nav
     if (a.matches('nav .nav-link')) {
       document.querySelectorAll('nav .nav-link.is-active').forEach(x => x.classList.remove('is-active'));
       a.classList.add('is-active');
@@ -279,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!menuBtn || !mobileMenu || !overlay) return;
 
   const trap = window.GD.focusTrap(mobileMenu);
-
   const openMenu = () => {
     mobileMenu.classList.remove('hidden');
     overlay.classList.remove('hidden');
@@ -292,10 +285,8 @@ document.addEventListener('DOMContentLoaded', () => {
     menuBtn.setAttribute('aria-expanded', 'true');
     mobileMenu.setAttribute('aria-hidden', 'false');
     trap.mount();
-    // Focus sur le premier élément
     const first = mobileMenu.querySelector('a,button'); if (first) first.focus();
   };
-
   const closeMenu = () => {
     mobileMenu.classList.add('translate-x-full');
     mobileMenu.classList.remove('translate-x-0');
@@ -308,15 +299,12 @@ document.addEventListener('DOMContentLoaded', () => {
     trap.unmount();
     menuBtn.focus();
   };
-
   menuBtn.addEventListener('click', () => {
     menuBtn.getAttribute('aria-expanded') === 'true' ? closeMenu() : openMenu();
   });
-
   mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
   overlay.addEventListener('click', closeMenu);
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') closeMenu();
   });
@@ -333,13 +321,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const setActive = (el) => {
     clearActive();
-    if (el) {
-      el.classList.add('is-active');
-      el.setAttribute('aria-current', 'page');
-    }
+    if (el) { el.classList.add('is-active'); el.setAttribute('aria-current', 'page'); }
   };
 
-  // Surbrillance au clic
   document.querySelectorAll('nav .nav-link').forEach((el) => {
     el.addEventListener('click', (ev) => {
       if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) return;
@@ -347,7 +331,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Scroll-Spy (#section)
   const mapping = new Map();
   document.querySelectorAll('nav .nav-link[href*="#"]').forEach((a) => {
     const id = a.getAttribute('href').split('#')[1];
@@ -365,10 +348,9 @@ document.addEventListener('DOMContentLoaded', () => {
     mapping.forEach((_, sec) => io.observe(sec));
   }
 
-  // Accessibilité : sous-menu “Boutique” focus/blur
-  // (Pour clavier : affiche le sous-menu tant qu’un lien enfant a le focus)
-  qsa('nav .relative.group').forEach((grp) => {
-    const submenu = qs('ul', grp);
+  // Accessibilité : sous-menu “Boutique”
+  document.querySelectorAll('nav .relative.group').forEach((grp) => {
+    const submenu = grp.querySelector('ul');
     if (!submenu) return;
     grp.addEventListener('focusin', () => submenu.classList.remove('hidden'));
     grp.addEventListener('focusout', (e) => {
@@ -380,47 +362,28 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ========================================================================
    VIDÉOS SÉQUENTIELLES + AUDIO AU GESTE
    ===================================================================== */
-
-// Élément 100 % visible ?
 function fullyVisible(el) {
   const r = el.getBoundingClientRect();
   return r.top >= 0 && r.left >= 0
          && r.bottom <= (window.innerHeight || document.documentElement.clientHeight)
          && r.right <= (window.innerWidth || document.documentElement.clientWidth);
 }
-
 document.addEventListener('DOMContentLoaded', () => {
-  /* ----- Vidéos et état ----- */
   const videos = ['video1', 'video2', 'video3']
     .map((id) => document.getElementById(id))
     .filter(Boolean);
-  let current = 0; // index vidéo active
-  let audioOK = false; // passe à true après 1 geste
-  let playSeq; // sera défini plus bas
+  let current = 0;
+  let audioOK = false;
+  let playSeq;
 
-  /* ---------- Effet de zoom, pause hors écran + reprise ---------- */
-  videos.forEach((v) => {
-    const vid = v;
+  videos.forEach((vid) => {
     vid.dataset.userPaused = 'false';
     vid.dataset.autoPaused = 'false';
-
     const addClass = () => vid.classList.add('scale-105', 'z-10');
     const removeClass = () => vid.classList.remove('scale-105', 'z-10');
-
-    vid.addEventListener('play', () => {
-      addClass();
-      vid.dataset.userPaused = 'false';
-      vid.dataset.autoPaused = 'false';
-    });
+    vid.addEventListener('play', () => { addClass(); vid.dataset.userPaused = 'false'; vid.dataset.autoPaused = 'false'; });
     vid.addEventListener('playing', addClass);
-    vid.addEventListener('pause', () => {
-      removeClass();
-      if (vid.dataset.autopausing === 'true') {
-        vid.dataset.autopausing = 'false';
-      } else {
-        vid.dataset.userPaused = 'true';
-      }
-    });
+    vid.addEventListener('pause', () => { removeClass(); if (vid.dataset.autopausing === 'true') { vid.dataset.autopausing = 'false'; } else { vid.dataset.userPaused = 'true'; } });
     vid.addEventListener('ended', removeClass);
   });
 
@@ -440,97 +403,56 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.2 });
-
   videos.forEach((vid) => visibilityObserver.observe(vid));
 
-  /* ---------- Bouton mute / unmute ---------- */
   function updateBtn(vid) {
     const b = document.querySelector(`.mute-btn[data-video="${vid.id}"]`);
     if (b) b.textContent = vid.muted ? '🔇' : '🔊';
   }
 
-  /* ---------- Détection de n’importe quel geste ---------- */
   const enableAudio = () => {
     if (audioOK) return;
     audioOK = true;
-    // Si une vidéo est en cours -> dé-mute
     const v = videos[current];
     if (v && !v.paused) { v.muted = false; updateBtn(v); }
   };
-  // liste de gestes qui comptent comme « user activation »
   ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => window.addEventListener(evt, enableAudio, { once: true, passive: true }));
   document.querySelectorAll('.mute-btn').forEach((btn) => {
     const vid = videos.find((v) => v.id === btn.dataset.video);
     if (!vid) return;
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      vid.muted = !vid.muted;
-      updateBtn(vid);
-    });
+    btn.addEventListener('click', (e) => { e.stopPropagation(); vid.muted = !vid.muted; updateBtn(vid); });
   });
 
-  /* ---------- Lecture séquentielle ---------- */
   function start(vid) {
-    const video = vid;
-    video.muted = !audioOK; // son si geste déjà fait
-    video.currentTime = 0;
-    video.play().then(() => {
-      if (audioOK) { video.muted = false; }
-      updateBtn(video);
-    }).catch(() => { // blocage → joue muet
-      video.muted = true;
-      video.play();
-      updateBtn(video);
-    });
-
-    video.onended = () => {
-      current += 1;
-      if (current < videos.length) playSeq(current);
-    };
+    vid.muted = !audioOK;
+    vid.currentTime = 0;
+    vid.play().then(() => { if (audioOK) vid.muted = false; updateBtn(vid); })
+      .catch(() => { vid.muted = true; vid.play(); updateBtn(vid); });
+    vid.onended = () => { current += 1; if (current < videos.length) playSeq(current); };
   }
 
   playSeq = (idx) => {
     const vid = videos[idx];
     if (!vid) return;
-
-    // pause tout le reste
-    videos.forEach((v, i) => {
-      if (i !== idx) {
-        v.pause();
-        const video = v;
-        video.currentTime = 0;
-      }
-    });
-
-    // Observateur : lance quand 100 % visible
+    videos.forEach((v, i) => { if (i !== idx) { v.pause(); v.currentTime = 0; } });
     const io = new IntersectionObserver((ent) => {
-      if (ent[0].isIntersecting && fullyVisible(vid)) {
-        io.disconnect();
-        start(vid);
-      }
+      if (ent[0].isIntersecting && fullyVisible(vid)) { io.disconnect(); start(vid); }
     }, { threshold: 1 });
     io.observe(vid);
   };
 
-  /* ---------- Clic vidéo = play/pause manuels ---------- */
   videos.forEach((vid, idx) => {
     vid.addEventListener('click', () => {
-      if (vid.paused) {
-        if (!audioOK) enableAudio(); // active son au 1ᵉʳ geste
-        current = idx;
-        start(vid);
-      } else {
-        vid.pause();
-      }
+      if (vid.paused) { if (!audioOK) enableAudio(); current = idx; start(vid); }
+      else { vid.pause(); }
     });
   });
 
-  /* ---------- Lance la première dès qu’elle apparaît ---------- */
   if (videos.length) playSeq(current);
 });
 
 /* ========================================================================
-   BOUTIQUE — gestion quantités + multiplicateur + Swiper + Fancybox
+   BOUTIQUE — quantités + multiplicateur + Swiper + Fancybox
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const stock = window.stock || {};
@@ -568,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.updatePlus = updatePlus;
 
-  // Boutons +/- quantité
+  // +/- quantité
   document.querySelectorAll('.quantity-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.target;
@@ -576,19 +498,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!qtySpan) return;
       let qty = parseInt(qtySpan.textContent, 10) || 1;
       const max = stock[id];
-      if (btn.classList.contains('minus')) {
-        qty = Math.max(1, qty - 1);
-      } else if (max == null || qty + 1 <= max) {
-        qty += 1;
-      }
+      if (btn.classList.contains('minus')) qty = Math.max(1, qty - 1);
+      else if (max == null || qty + 1 <= max) qty += 1;
       qtySpan.textContent = qty;
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
-      if (addBtn) addBtn.setAttribute('data-item-quantity', qty.toString());
+      if (addBtn) addBtn.setAttribute('data-item-quantity', String(qty));
       updatePlus(id);
     });
   });
 
-  // Initialisation par carte
+  // Init par carte
   document.querySelectorAll('.quantity-selector').forEach((sel) => {
     updatePlus(sel.dataset.id);
   });
@@ -601,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Sélecteurs de multiplicateur
+  // Sélecteurs de multiplicateur (sur fiche produit)
   document.querySelectorAll('.multiplier-select').forEach((sel) => {
     const id = sel.dataset.target;
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
@@ -609,7 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
       if (addBtn) {
         addBtn.setAttribute('data-item-custom1-value', sel.value);
-        addBtn.setAttribute('data-item-quantity', qty.toString());
+        addBtn.setAttribute('data-item-quantity', String(qty));
       }
       updatePlus(id);
     };
@@ -623,11 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = sw.parentElement;
     const thumbsEl = container.querySelector('.swiper-thumbs');
     if (thumbsEl) {
-      const thumbsSwiper = new Swiper(thumbsEl, {
-        slidesPerView: 4,
-        freeMode: true,
-        watchSlidesProgress: true,
-      });
+      const thumbsSwiper = new Swiper(thumbsEl, { slidesPerView: 4, freeMode: true, watchSlidesProgress: true });
       // eslint-disable-next-line no-new
       new Swiper(sw, {
         loop: true,
@@ -660,7 +575,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================================================
-   SNIPCART — évite double-ouverture + badges actifs
+   SNIPCART — évite double ouverture + badges actifs
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const cartBtns = document.querySelectorAll('.snipcart-checkout');
@@ -672,59 +587,39 @@ document.addEventListener('DOMContentLoaded', () => {
   cartBtns.forEach((btn) => btn.addEventListener('click', (e) => {
     if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
     if (cartVisible()) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
+      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
       window.Snipcart.api.theme.cart.close();
       e.currentTarget.blur();
     }
   }));
-
   accountBtns.forEach((btn) => btn.addEventListener('click', (e) => {
     if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
     if (accountVisible()) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
+      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
       window.Snipcart.api.theme.customer.close();
       e.currentTarget.blur();
     }
   }));
 
-  // Ajoute un halo “is-active” aux boutons quand les panneaux sont ouverts
-  window.GD && window.GD.log('Snipcart listener armed');
   const setBtnState = () => {
     const cv = cartVisible();
     const av = accountVisible();
     cartBtns.forEach(b => b.classList.toggle('is-active', cv));
     accountBtns.forEach(b => b.classList.toggle('is-active', av));
   };
-
   window.addEventListener('snipcart.ready', setBtnState);
   window.addEventListener('snipcart.opened', setBtnState);
   window.addEventListener('snipcart.closed', setBtnState);
 
-  // Si Snipcart est prêt, écoute aussi son store
-  const hookStore = () => {
-    try {
-      const store = window.Snipcart.store;
-      if (!store) return;
-      store.subscribe(() => setBtnState());
-    } catch (_) {}
-  };
-  // essaie d’accrocher quand dispo
-  (function poll() {
-    if (window.Snipcart && window.Snipcart.store) hookStore();
-    else setTimeout(poll, 300);
-  })();
+  const hookStore = () => { try { const store = window.Snipcart.store; if (store) store.subscribe(() => setBtnState()); } catch (_) {} };
+  (function poll() { if (window.Snipcart && window.Snipcart.store) hookStore(); else setTimeout(poll, 300); })();
 });
 
 /* ========================================================================
-   CHARGEMENT PARESSEUX D’IMAGES (sécurisé)
+   LAZYLOAD IMG
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   if (!('loading' in HTMLImageElement.prototype)) {
-    // Polyfill très simple : IntersectionObserver
     const imgs = document.querySelectorAll('img[loading="lazy"]');
     if (!imgs.length) return;
     const io = new IntersectionObserver((entries, obs) => {
@@ -743,16 +638,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================================================
-   ANCRAGES “RETOUR HAUT” + COLLAPSE SECTIONS (helpers)
+   BACK TO TOP + COLLAPSE
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  // Back to top (si bouton présent)
   const back = document.getElementById('back-to-top');
   if (back) {
-    back.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    back.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
     const toggleBack = throttle(() => {
       back.classList.toggle('opacity-0', window.pageYOffset < 500);
       back.classList.toggle('pointer-events-none', window.pageYOffset < 500);
@@ -762,8 +653,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Accordéons “data-collapse”
-  qsa('[data-collapse]').forEach((btn) => {
-    const target = qs(btn.dataset.collapse);
+  document.querySelectorAll('[data-collapse]').forEach((btn) => {
+    const target = document.querySelector(btn.dataset.collapse);
     if (!target) return;
     btn.setAttribute('aria-expanded', 'false');
     target.hidden = true;
@@ -775,95 +666,88 @@ document.addEventListener('DOMContentLoaded', () => {
       const h = target.clientHeight + 'px';
       target.style.height = '0px';
       requestAnimationFrame(() => { target.style.height = h; });
-      target.addEventListener('transitionend', () => {
-        target.style.height = 'auto';
-      }, { once: true });
+      target.addEventListener('transitionend', () => { target.style.height = 'auto'; }, { once: true });
     };
     const close = () => {
       btn.setAttribute('aria-expanded', 'false');
       target.style.height = target.clientHeight + 'px';
       requestAnimationFrame(() => { target.style.height = '0px'; });
-      target.addEventListener('transitionend', () => {
-        target.hidden = true; target.style.height = '';
-      }, { once: true });
+      target.addEventListener('transitionend', () => { target.hidden = true; target.style.height = ''; }, { once: true });
     };
 
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      (btn.getAttribute('aria-expanded') === 'true' ? close : open)();
-    });
+    btn.addEventListener('click', (e) => { e.preventDefault(); (btn.getAttribute('aria-expanded') === 'true' ? close : open)(); });
   });
 });
 
 /* ========================================================================
-   OBSERVATEUR “HEADER SHRINK” (optionnel, look plus propre au scroll)
+   HEADER SHRINK (ombre/flou au scroll)
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   if (!header) return;
-  const onScroll = throttle(() => {
-    header.classList.toggle('shadow-2xl', window.pageYOffset > 8);
-    header.classList.toggle('backdrop-blur-md', window.pageYOffset > 8);
-  }, 80);
+  const onScroll = (() => {
+    const throttled = (fn, wait = 80) => {
+      let t = 0; return () => { const n = Date.now(); if (n - t > wait) { t = n; fn(); } };
+    };
+    return throttled(() => {
+      header.classList.toggle('shadow-2xl', window.pageYOffset > 8);
+      header.classList.toggle('backdrop-blur-md', window.pageYOffset > 8);
+    });
+  })();
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 });
 
-
+/* ========================================================================
+   SNIPCART — synchronisation au clic "Ajouter au panier"
+   ===================================================================== */
 document.addEventListener('click', function (e) {
   const btn = e.target.closest('.snipcart-add-item');
   if (!btn) return;
 
   const id = btn.dataset.itemId;
 
-  // Quantité
+  // Quantité depuis l’UI carte
   const qtyEl = document.getElementById('qty-' + id);
   if (qtyEl) {
     const q = parseInt(qtyEl.textContent, 10);
     if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
   }
 
-}, { passive: true });
+  // Valeur du multiplicateur choisie sur la fiche (si présente)
+  const sel = document.querySelector(`.multiplier-select[data-target="${id}"]`);
+  if (sel) btn.setAttribute('data-item-custom1-value', sel.value);
+}, false);
 
-
-// Ajuste la hauteur du header (var CSS) sans ajouter de margin global
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('header');
-  if (!header) return;
-  const setH = () => {
-    const h = header.getBoundingClientRect().height || 96;
-    document.documentElement.style.setProperty('--gd-header-h', h + 'px');
-  };
-  setH();
-  new ResizeObserver(setH).observe(header);
-  window.addEventListener('resize', setH);
-});
-
-// Cache UNIQUEMENT "Multiplicateur" dans le panier/checkout (quantité intacte)
+/* ========================================================================
+   SNIPCART — cacher UNIQUEMENT "Multiplicateur/Multiplier" dans le panier
+   (la quantité reste affichée)
+   ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('snipcart');
   if (!root) return;
 
   const hideMultiplier = () => {
     root.querySelectorAll('.snipcart-item-line').forEach((line) => {
-      // cherche des labels/texte "Multiplicateur"
-      const nodes = Array.from(line.querySelectorAll('label, .snipcart__font--tiny, .snipcart__font--regular, span, dt, dd, div'));
+      const nodes = Array.from(line.querySelectorAll(
+        'label, .snipcart__font--tiny, .snipcart__font--regular, span, dt, dd, div'
+      ));
       nodes.forEach((n) => {
         const txt = (n.textContent || '').toLowerCase().trim();
-        if (!txt || !txt.includes('multiplicateur')) return;
-
-        // remonte à un conteneur de champ custom (sans toucher la quantité)
-        let box = n.closest('.snipcart-item-custom-field, .snipcart-item-line__variants, .snipcart-item-line__custom-fields, .snipcart-form__field, li, div');
-        if (box && !box.closest('.snipcart-item-line__quantity')) {
-          box.style.display = 'none';
-        } else {
-          n.style.display = 'none';
+        if (!txt) return;
+        // FR/EN
+        if (txt.includes('multiplicateur') || txt.includes('multiplier')) {
+          let box = n.closest('.snipcart-item-custom-field, .snipcart-item-line__variants, .snipcart-item-line__custom-fields, .snipcart-form__field, li, div');
+          if (box && !box.closest('.snipcart-item-line__quantity')) {
+            box.style.display = 'none';
+          } else {
+            n.style.display = 'none';
+          }
         }
       });
     });
   };
 
   hideMultiplier();
-  new MutationObserver(hideMultiplier).observe(root, {childList:true, subtree:true});
+  new MutationObserver(hideMultiplier).observe(root, { childList:true, subtree:true });
 });
-
