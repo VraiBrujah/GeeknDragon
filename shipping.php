@@ -12,8 +12,12 @@ function header_value(string $name): ?string {
 }
 
 // Récupère les clés depuis l'environnement
-$apiKey = getenv('SNIPCART_API_KEY');
-$secret = getenv('SNIPCART_SECRET_API_KEY');
+$apiKey = $_ENV['SNIPCART_API_KEY']
+    ?? $_SERVER['SNIPCART_API_KEY']
+    ?? getenv('SNIPCART_API_KEY');
+$secret = $_ENV['SNIPCART_SECRET_API_KEY']
+    ?? $_SERVER['SNIPCART_SECRET_API_KEY']
+    ?? getenv('SNIPCART_SECRET_API_KEY');
 if (!$apiKey || !$secret) {
   error_log('Snipcart API keys not configured');
   http_response_code(500);
