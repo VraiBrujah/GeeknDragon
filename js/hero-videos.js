@@ -5,10 +5,10 @@
 //   qu'après que le nouveau joue vraiment (plus d'écran vide).
 
 document.addEventListener('DOMContentLoaded', () => {
-  const FADE_MS = 600;
+  const FADE_MS = 1000;
 
   document.querySelectorAll('.hero-videos').forEach((container) => {
-    // 1) Lire et valider la liste
+    // 1) Lire et valider la liste aléatoire + éventuelle vidéo principale
     let list = [];
     try {
       const raw = container.dataset.videos || '[]';
@@ -16,8 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (Array.isArray(arr)) {
         list = arr.filter((s) => typeof s === 'string' && s.trim() !== '');
       }
-    } catch {/* ignore */}
-    if (list.length === 0) return;
+    } catch { /* ignore */ }
+
+    const mainSrc = (container.dataset.main || '').trim();
+
+    if (mainSrc && list.length === 0) {
+      list = [mainSrc];
+    } else if (!mainSrc && list.length === 0) {
+      return;
+    }
 
     // Helper de création <video>
     const makeVideo = (src, hidden = true) => {
@@ -41,6 +48,100 @@ document.addEventListener('DOMContentLoaded', () => {
       v.style.filter = hidden ? 'blur(8px)' : 'blur(0)';
       return v;
     };
+
+    // Cas C — vidéo principale + liste aléatoire
+    if (mainSrc && (list.length > 1 || (list.length === 1 && list[0] !== mainSrc))) {
+      let lastWasMain = true;
+      let current = makeVideo(mainSrc, true);
+      container.appendChild(current);
+
+      let next = null;
+
+      const pickRandom = () => list[Math.floor(Math.random() * list.length)];
+
+      const showWhenReady = (video) => {
+        const vid = video;
+        const run = () => {
+          vid.play().catch(() => {});
+          requestAnimationFrame(() => {
+            vid.style.opacity = '1';
+            vid.style.filter = 'blur(0)';
+          });
+        };
+        if (vid.readyState >= 2) run();
+        else vid.addEventListener('canplay', run, { once: true });
+      };
+
+      const buildNextRandom = () => {
+        const src = lastWasMain ? pickRandom() : mainSrc;
+        lastWasMain = !lastWasMain;
+        const v = makeVideo(src, true);
+        v.addEventListener('error', () => {
+          setTimeout(() => {
+            if (v.parentNode) v.parentNode.removeChild(v);
+            // eslint-disable-next-line no-use-before-define
+            buildAndStageNextRandom();
+          }, 100);
+        });
+        return v;
+      };
+
+      const buildAndStageNextRandom = () => {
+        next = buildNextRandom();
+        container.appendChild(next);
+        if (next.readyState < 2) next.load();
+      };
+
+      const goToNext = () => {
+        if (!next) buildAndStageNextRandom();
+
+        const startTransition = () => {
+          next.play().catch(() => {});
+          requestAnimationFrame(() => {
+            next.style.opacity = '1';
+            next.style.filter = 'blur(0)';
+
+            current.style.opacity = '0';
+            current.style.filter = 'blur(8px)';
+
+            const old = current;
+            current = next;
+
+            old.addEventListener('transitionend', () => {
+              if (old.parentNode) old.parentNode.removeChild(old);
+              current.addEventListener('ended', goToNext, { once: true });
+              buildAndStageNextRandom();
+            }, { once: true });
+          });
+        };
+
+        if (next.readyState >= 2) startTransition();
+        else next.addEventListener('canplay', startTransition, { once: true });
+      };
+
+      current.addEventListener('loadeddata', () => {
+        showWhenReady(current);
+      }, { once: true });
+
+      current.addEventListener('playing', () => {
+        buildAndStageNextRandom();
+        current.addEventListener('ended', goToNext, { once: true });
+      }, { once: true });
+
+      setTimeout(() => {
+        if (current.style.opacity !== '1') {
+          showWhenReady(current);
+        }
+      }, 300);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          [current, next].forEach((v) => v && v.paused && v.play().catch(() => {}));
+        }
+      });
+
+      return;
+    }
 
     // Cas A — une seule vidéo : pas de recréation, boucle fiable
     if (list.length === 1) {
@@ -91,16 +192,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let next = null;
 
-    const showWhenReady = (v) => {
+    const showWhenReady = (video) => {
+      const vid = video;
       const run = () => {
-        v.play().catch(() => {});
+        vid.play().catch(() => {});
         requestAnimationFrame(() => {
-          v.style.opacity = '1';
-          v.style.filter = 'blur(0)';
+          vid.style.opacity = '1';
+          vid.style.filter = 'blur(0)';
         });
       };
-      if (v.readyState >= 2) run();
-      else v.addEventListener('canplay', run, { once: true });
+      if (vid.readyState >= 2) run();
+      else vid.addEventListener('canplay', run, { once: true });
     };
 
     const buildNext = () => {
@@ -110,6 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Si erreur sur la source, on tente de passer à la suivante
         setTimeout(() => {
           if (v.parentNode) v.parentNode.removeChild(v);
+          // eslint-disable-next-line no-use-before-define
           buildAndStageNext();
         }, 100);
       });
@@ -118,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const buildAndStageNext = () => {
       next = buildNext();
-      container.appendChild(next);      // on l'ajoute cachée pour bufferiser
+      container.appendChild(next); // on l'ajoute cachée pour bufferiser
       if (next.readyState < 2) next.load();
     };
 
@@ -174,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reprise à retour d’onglet
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible') {
-        [current, next].forEach(v => v && v.paused && v.play().catch(() => {}));
+        [current, next].forEach((v) => v && v.paused && v.play().catch(() => {}));
       }
     });
   });

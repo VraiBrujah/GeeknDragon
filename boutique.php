@@ -84,7 +84,7 @@ include 'snipcart-init.php';
 
   <!-- ===== HERO ===== -->
   <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-videos='["videos/Fontaine12.mp4","videos/Carte1.mp4","videos/fontaine6.mp4","videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/Carte1.mp4","videos/fontaine9.mp4","videos/.mp4","videos/fontaine4.mp4"]'></div>
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
