@@ -11,8 +11,13 @@ $ogImage = '/images/es_tu_game_demo.png';
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include '../head-common.php'; ?>
 <body>
-  <?php include '../header.php'; ?>
-  <?php include '../snipcart-init.php'; ?>
+  <?php
+  ob_start();
+  include '../snipcart-init.php';
+  $snipcartInit = ob_get_clean();
+  include '../header.php';
+  echo $snipcartInit;
+  ?>
 
   <main id="main" class="pt-[var(--header-height)]">
     <section id="actus" class="py-16 bg-gray-900/80">

@@ -72,12 +72,15 @@ foreach ($products as $p) {
 <?php include 'head-common.php'; ?>
 
 <body>
-<?php include 'header.php'; ?>
 <?php
 $snipcartLanguage = $lang;
 $snipcartLocales = 'fr,en';
 $snipcartAddProductBehavior = 'overlay';
+ob_start();
 include 'snipcart-init.php';
+$snipcartInit = ob_get_clean();
+include 'header.php';
+echo $snipcartInit;
 ?>
 
 <main id="main" class="pt-[var(--header-height)]">

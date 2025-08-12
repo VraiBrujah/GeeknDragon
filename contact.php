@@ -25,8 +25,13 @@ $recaptchaSiteKey = $config['recaptcha_site_key'] ?? null;
 
 <body>
 
-  <?php include 'header.php'; ?>
-  <?php include 'snipcart-init.php'; ?>
+  <?php
+  ob_start();
+  include 'snipcart-init.php';
+  $snipcartInit = ob_get_clean();
+  include 'header.php';
+  echo $snipcartInit;
+  ?>
 
   <main id="main" class="pt-32 flex items-center justify-center min-h-screen px-4">
 
