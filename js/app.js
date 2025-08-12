@@ -726,33 +726,7 @@ document.addEventListener('click', function (e) {
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('snipcart');
   if (!root) return;
-
-  const hideMultiplier = () => {
-    root.querySelectorAll('.snipcart-item-line').forEach((line) => {
-      const nodes = Array.from(line.querySelectorAll(
-        'label, .snipcart__font--tiny, .snipcart__font--regular, span, dt, dd, div'
-      ));
-      nodes.forEach((n) => {
-        const txt = (n.textContent || '').toLowerCase().trim();
-        if (!txt) return;
-        // FR/EN
-        if (txt.includes('multiplicateur') || txt.includes('multiplier')) {
-          let box = n.closest('.snipcart-item-custom-field, .snipcart-item-line__variants, .snipcart-item-line__custom-fields, .snipcart-form__field, li, div');
-          if (box && !box.closest('.snipcart-item-line__quantity')) {
-            box.style.display = 'none';
-          } else {
-            n.style.display = 'none';
-          }
-        }
-      });
-    });
-  };
-
-  hideMultiplier();
-  new MutationObserver(hideMultiplier).observe(root, { childList:true, subtree:true });
 });
-
-
 
 // Verrouille le scroll de la page uniquement pour le panier/checkout (pas pour la facture)
 const toggleSnipcartScroll = () => {
