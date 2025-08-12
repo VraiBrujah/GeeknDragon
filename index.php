@@ -20,7 +20,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
     <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-      <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-videos='["videos/mage.mp4","videos/cascade_HD.mp4","videos/mage.mp4","videos/fontaine11.mp4","videos/mage.mp4","videos/Carte1.mp4","videos/mage.mp4","videos/fontaine4.mp4","videos/mage.mp4","videos/fontaine3.mp4","videos/mage.mp4","videos/fontaine2.mp4","videos/mage.mp4","videos/fontaine1.mp4","videos/mage.mp4","videos/Carte1.mp4","videos/mage.mp4"]'></div>
+      <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/mage.mp4" data-videos='["videos/cascade_HD.mp4","videos/fontaine11.mp4","videos/Carte1.mp4","videos/fontaine4.mp4","videos/fontaine3.mp4","videos/fontaine2.mp4","videos/fontaine1.mp4"]'></div>
       <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
