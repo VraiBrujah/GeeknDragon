@@ -57,7 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let next = null;
 
-      const pickRandom = () => list[Math.floor(Math.random() * list.length)];
+      let pool = [...list];
+      const pickRandom = () => {
+        if (pool.length === 0) pool = [...list];
+        const i = Math.floor(Math.random() * pool.length);
+        return pool.splice(i, 1)[0];
+      };
 
       const showWhenReady = (video) => {
         const vid = video;
