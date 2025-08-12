@@ -1,27 +1,24 @@
-/* Geek & Dragon — Snipcart custom (DARK + clean) */
+/* Geek & Dragon — Snipcart custom (DARK + clean, v2) */
 
-/* (optionnel) typographies */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Cinzel:wght@400;600;700&display=swap');
 
-/* ===== Palette + variables ===== */
+/* ===== Palette + variables (tons proches) ===== */
 :root{
-  /* deux tons proches pour éviter l’effet “patchwork” */
-  --gd-bg:   #0f172a; /* fond page/panneaux */
-  --gd-card: #131c2b; /* cartes/champs (légèrement plus clair) */
+  --gd-bg:   #101826; /* fond */
+  --gd-card: #121d2a; /* cartes/champs - très proche */
 
-  --gd-text:     #e6eaf1;
-  --gd-muted:    #9aa4b2;
-  --gd-heading:  #f3f4f6;
+  --gd-text:    #e7ebf2;
+  --gd-muted:   #a0a9b8;
+  --gd-heading: #f4f6fa;
 
-  --gd-border: #2a3550;
-  --gd-accent: #8b5cf6; /* violet */
+  --gd-border: #2b3650;
+  --gd-accent: #8b5cf6;
   --gd-focus:  #22d3ee;
 
-  /* hauteur header (mise à jour par JS ci-dessous) */
-  --gd-header-h: 96px;
+  --gd-header-h: 96px; /* mis à jour par JS si besoin */
 }
 
-/* ===== Thème Snipcart via variables ===== */
+/* ===== Variables Snipcart ===== */
 #snipcart, .snipcart{
   --bgColor-default: var(--gd-bg);
   --bgColor-alt:     var(--gd-card);
@@ -29,8 +26,8 @@
 
   --color-default:   var(--gd-text);
   --color-heading:   var(--gd-heading);
-  --color-link:      #b5c0ff;
-  --color-linkHover: #d6dbff;
+  --color-link:      #c1c8ff;
+  --color-linkHover: #e0e4ff;
 
   --color-input:         var(--gd-text);
   --color-inputLabel:    var(--gd-text);
@@ -42,13 +39,11 @@
   --focusColor:        var(--gd-focus);
 }
 
-/* base + titres */
+/* base + titres (pas de margin-top global ici → plus de bande vide sur index/boutique) */
 .snipcart{
   font-family:'Open Sans',system-ui,-apple-system,Segoe UI,sans-serif;
   color:var(--color-default);
   background:var(--bgColor-default);
-  /* décale le contenu Snipcart sous le header (valeur JS ensuite) */
-  margin-top: var(--gd-header-h);
 }
 .snipcart h1,.snipcart h2,.snipcart h3,.snipcart__button--primary{font-family:'Cinzel',serif}
 
@@ -66,7 +61,7 @@
   border-color:var(--borderColor) !important;
 }
 
-/* liens (“Modifier”, etc.) lisibles */
+/* liens (“Modifier”, etc.) */
 .snipcart .snipcart__actions--link,
 .snipcart a.snipcart__font--small,
 .snipcart .snipcart-button-link{
@@ -77,7 +72,7 @@
 .snipcart a.snipcart__font--small:hover,
 .snipcart .snipcart-button-link:hover{ color:var(--color-linkHover) !important; }
 
-/* champs (inputs/selects/textarea/typeahead) */
+/* champs */
 .snipcart .snipcart-input,
 .snipcart input[type=text],
 .snipcart input[type=email],
@@ -106,7 +101,7 @@
 .snipcart .snipcart-form__label,
 .snipcart .snipcart__font--tiny{ color:var(--color-inputLabel) !important; }
 
-/* autofill Chrome (sinon fond blanc) */
+/* autofill Chrome */
 .snipcart input:-webkit-autofill,
 .snipcart input:-webkit-autofill:hover,
 .snipcart input:-webkit-autofill:focus{
@@ -115,12 +110,12 @@
   caret-color:var(--color-input) !important;
 }
 
-/* paiement : titres/labels bien contrastés */
+/* paiement : labels bien clairs */
 .snipcart .snipcart-payment__form .snipcart__font--subtitle,
 .snipcart .snipcart-payment__form label,
 .snipcart .snipcart__font--subtitle{ color:var(--color-heading) !important; }
 
-/* méthodes de livraison (retour webhook) lisibles */
+/* méthodes de livraison (webhook) */
 .snipcart .snipcart-shipping-rates-list-item{
   background:var(--gd-card) !important;
   border:1px solid var(--gd-border) !important;
@@ -129,8 +124,8 @@
 .snipcart .snipcart-shipping-rates-list-item *{ color:var(--gd-text) !important; }
 .snipcart .snipcart-radio__input:checked + .snipcart-shipping-rates-list-item,
 .snipcart .snipcart-shipping-rates-list-item.is-selected{
-  background: #18243a !important; /* très proche, juste 1 cran */
-  border-color: var(--gd-accent) !important;
+  background:#162338 !important;           /* 1 cran au-dessus, discret */
+  border-color:var(--gd-accent) !important;
 }
 
 /* boutons secondaires */
@@ -143,7 +138,7 @@
 .snipcart .snipcart__button--secondary:hover,
 .snipcart .snipcart-button-secondary:hover{ filter: brightness(1.05); }
 
-/* corbeille à gauche (panier) — quantité CONSERVÉE */
+/* corbeille à gauche + quantité lisible */
 .snipcart .snipcart-item-line{ display:flex; align-items:center; gap:.5rem; padding:.5rem 0; }
 .snipcart .snipcart-item-line + .snipcart-item-line{ margin-top:.5rem; }
 .snipcart .snipcart-item-line__header{ display:flex; align-items:center; }
@@ -151,7 +146,7 @@
 .snipcart .snipcart-item-line__actions{ order:2; margin:0 .75rem 0 .25rem !important; opacity:1 !important; }
 .snipcart .snipcart-item-line__title{ order:3; }
 
-/* icône corbeille bien visible */
+/* icône corbeille visible */
 .snipcart .snipcart-item-line__actions .snipcart__button--icon{
   width:36px; height:36px; border:0; background:transparent;
   display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
@@ -161,7 +156,7 @@
   width:18px; height:18px; color:#ff4d4f !important; fill:currentColor !important; opacity:1 !important;
 }
 
-/* quantité : TOUJOURS visible + lisible */
+/* quantité — taille ↑ */
 .snipcart .snipcart-item-line__quantity,
 .snipcart .snipcart-item-quantity{ display:flex; align-items:center; gap:.5rem; }
 .snipcart .snipcart-item-line__quantity input,
@@ -169,29 +164,30 @@
   background:var(--gd-card) !important;
   color:var(--gd-text) !important;
   border:1px solid var(--gd-border) !important;
+  height:40px !important; width:80px !important; font-size:18px !important; text-align:center;
 }
-.snipcart .snipcart-item-line__quantity label,
-.snipcart .snipcart-item-quantity .snipcart__font--tiny{ color:var(--gd-text) !important; }
 
-/* stepper -/+ (si tu l’as en JS) */
-.__qty-stepped{ display:inline-flex; align-items:center; gap:6px; }
+/* stepper -/+ 40px */
+.__qty-stepped{ display:inline-flex; align-items:center; gap:8px; }
 .__qty-btn{
   background:var(--gd-card); color:var(--gd-text);
-  border:1px solid var(--gd-border); border-radius:6px;
-  width:32px; height:32px; line-height:30px; font-size:18px; cursor:pointer;
+  border:1px solid var(--gd-border); border-radius:8px;
+  width:40px; height:40px; line-height:38px; font-size:20px; cursor:pointer;
 }
 .__qty-btn:focus{ outline:2px solid var(--gd-focus); }
 .__qty-btn:hover{ filter:brightness(1.05); }
 
-/* cacher UNIQUEMENT le custom field "Multiplicateur" (le reste reste visible) */
+/* Masque le custom field “Multiplicateur” seulement si l’attribut est présent */
 .snipcart .snipcart-item-custom-field[data-snipcart-custom-field-label="Multiplicateur"]{ display:none !important; }
-/* fallback si Snipcart ne met pas cet attribut : on ne masque rien en CSS ; JS s’en charge (voir plus bas). */
 
-/* lists / dropdowns */
+/* dropdowns */
 .snipcart .snipcart-form__select option{ background:var(--gd-card); color:var(--gd-text); }
 
-/* résumé / sticky sous le header (si sticky utilisé) */
+/* résumé sticky (si utilisé) */
 .snipcart .snipcart-cart-summary{ position: sticky; top: calc(var(--gd-header-h) + 12px); }
 
-/* sécurité : Snipcart au-dessus d’éventuels overlays du header */
-.snipcart, .snipcart .snipcart-layout{ position:relative; z-index:1; }
+/* modal Snipcart sous header fixe (sans toucher les autres pages) */
+.snipcart .snipcart-modal__container{
+  top:var(--gd-header-h);
+  height:calc(100vh - var(--gd-header-h));
+}
