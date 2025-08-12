@@ -94,9 +94,25 @@
   display: none;
 }
 
+/* Hide variant dropdowns in cart */
+.snipcart-item-line__variants {
+  display: none;
+}
+
 /* Ensure quantity label is visible */
 .snipcart-item-line__quantity label,
 .snipcart-item-line__quantity .snipcart__font--tiny {
+  color: #ffffff;
+}
+
+/* Ensure quantity selector is visible and styled */
+.snipcart-item-line__quantity {
+  display: flex;
+  align-items: center;
+}
+
+.snipcart-item-line__quantity input {
+  background-color: #333333;
   color: #ffffff;
 }
 
