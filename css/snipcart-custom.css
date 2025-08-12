@@ -18,7 +18,9 @@
   padding: 0.5rem 0;
 }
 .snipcart-item-line__remove {
-  margin-left: auto;
+  /* Move trash icon to the left and ensure visibility */
+  margin-left: 0 !important;
+  color: #ffffff;
 }
 .snipcart-item-line__actions {
   position: static;

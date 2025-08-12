@@ -40,6 +40,9 @@
 
     if (!title || !removeBtn) return;
 
+    // Ensure the remove button doesn't keep an auto margin that pushes it to the right
+    removeBtn.style.margin = '0';
+
     // Wrapper esthétique + petit espace
     let leftWrap = $('.__remove-left', itemLine);
     if (!leftWrap) {
