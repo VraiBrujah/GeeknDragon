@@ -66,38 +66,39 @@ if ($errors) {
 }
 
 /**
- * Envoie un e-mail via l'API Snipcart.
+ * Envoie un e-mail via l'API SendGrid.
  */
-function sendSnipcartMail(string $to, string $subject, string $body, string $replyTo = ''): bool
+function sendSendgridMail(string $to, string $subject, string $body, string $replyTo = ''): bool
 {
-	// Récupère la clé secrète depuis l'environnement avec un fallback
-	$secret = getenv('SNIPCART_SECRET_API_KEY');
-	if (!$secret) {
-	  // Fallback en dur identique à snipcart-init.php pour les envs sans variable
-	  $secret = 'S_MDdhYmU2NWMtYmI5ZC00NmI0LWJjZGUtZDdkYTZjYTRmZTMxNjM4ODkxMjUzODg0NDc4ODU4';
-	}
-
+    $apiKey = getenv('SENDGRID_API_KEY');
     $from   = getenv('SMTP_USERNAME') ?: 'contact@geekndragon.com';
-    if (!$secret) {
+    if (!$apiKey) {
         return false;
     }
 
     $payload = [
-        'to'       => $to,
-        'from'     => $from,
-        'subject'  => $subject,
-        'textBody' => $body,
+        'personalizations' => [[
+            'to'      => [['email' => $to]],
+            'subject' => $subject,
+        ]],
+        'from'    => ['email' => $from],
+        'content' => [[
+            'type'  => 'text/plain',
+            'value' => $body,
+        ]],
     ];
     if ($replyTo) {
-        $payload['replyTo'] = $replyTo;
+        $payload['reply_to'] = ['email' => $replyTo];
     }
 
-    $ch = curl_init('https://app.snipcart.com/api/email');
+    $ch = curl_init('https://api.sendgrid.com/v3/mail/send');
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST           => true,
-        CURLOPT_USERPWD        => $secret . ':',
-        CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
+        CURLOPT_HTTPHEADER     => [
+            'Authorization: Bearer ' . $apiKey,
+            'Content-Type: application/json',
+        ],
         CURLOPT_POSTFIELDS     => json_encode($payload),
     ]);
     curl_exec($ch);
@@ -111,8 +112,8 @@ $to = 'contact@geekndragon.com';
 $subject = 'Nouveau message depuis le formulaire de contact';
 $body = "Nom: $nom\nEmail: $email\nTéléphone: $telephone\nMessage:\n$message";
 
-if (!sendSnipcartMail($to, $subject, $body, $email)) {
-    error_log('Mail Error: failed to send via Snipcart', 3, __DIR__ . '/error_log');
+if (!sendSendgridMail($to, $subject, $body, $email)) {
+    error_log('Mail Error: failed to send via SendGrid', 3, __DIR__ . '/error_log');
     $_SESSION['errors'] = ["Une erreur est survenue lors de l'envoi du message."];
     $_SESSION['old'] = $old;
     header('Location: contact.php');
