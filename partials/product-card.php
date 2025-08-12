@@ -53,25 +53,7 @@ $multipliers = $product['multipliers'] ?? [];
 		</div>
 	  </div>
 
-	  <!-- Bloc multiplicateur : affiché ou espace réservé -->
-	  <div class="flex flex-col items-center h-[70px] justify-center">
-		<?php if (!empty($multipliers)) : ?>
-		  <label for="multiplier-<?= htmlspecialchars($id) ?>" class="mb-2 text-center" data-i18n="product.multiplier">Multiplicateur</label>
-		  <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select text-black px-3 py-2 rounded" data-target="<?= htmlspecialchars($id) ?>">
-			<?php foreach ($multipliers as $m) :
-				$m = (int)$m; ?>
-			  <?php if ($m === 1) : ?>
-				<option value="1" data-i18n="product.unit">unitaire</option>
-			  <?php else : ?>
-				<option value="<?= $m ?>">x<?= $m ?></option>
-			  <?php endif; ?>
-			<?php endforeach; ?>
-		  </select>
-		<?php else : ?>
-		  <!-- Espace réservé pour alignement -->
-		  <div style="height:48px"></div>
-		<?php endif; ?>
-	  </div>
+
 
 	  <!-- Bouton ajouter -->
           <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
