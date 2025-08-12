@@ -20,8 +20,12 @@ require __DIR__.'/bootstrap.php';
  */
 
 // Récupère les clés depuis l'environnement
-$apiKey = getenv('SNIPCART_API_KEY');
-$secret = getenv('SNIPCART_SECRET_API_KEY');
+$apiKey = $_ENV['SNIPCART_API_KEY']
+    ?? $_SERVER['SNIPCART_API_KEY']
+    ?? getenv('SNIPCART_API_KEY');
+$secret = $_ENV['SNIPCART_SECRET_API_KEY']
+    ?? $_SERVER['SNIPCART_SECRET_API_KEY']
+    ?? getenv('SNIPCART_SECRET_API_KEY');
 
 header('Content-Type: application/json');
 
