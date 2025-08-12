@@ -57,18 +57,29 @@
 .snipcart-form__label--focus,
 .snipcart-form__input,
 .snipcart-form__input::placeholder,
-.snipcart-form__textarea {
+.snipcart-form__textarea,
+.snipcart-form__textarea::placeholder {
   color: #ffffff;
 }
 .snipcart-form__input,
 .snipcart-form__select,
-.snipcart-form__textarea {
+.snipcart-form__textarea,
+.snipcart-form__field input,
+.snipcart-form__field select,
+.snipcart-form__field textarea,
+.snipcart-form__checkbox,
+.snipcart-form__radio {
   background-color: #333333;
   color: #ffffff;
 }
 .snipcart-form__select option {
   background-color: #333333;
   color: #ffffff;
+}
+
+.snipcart-form__checkbox,
+.snipcart-form__radio {
+  accent-color: #333333;
 }
 
 /* Ensure cart modal isn’t hidden under fixed header */
