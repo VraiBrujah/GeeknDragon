@@ -36,11 +36,10 @@ $snipcartAddProductBehavior = $snipcartAddProductBehavior ?? 'overlay';
   // Stockage de la clé secrète si besoin (attention à la sécurité côté client)
   window.SnipcartSecretKey = '<?= htmlspecialchars($snipcartSecret) ?>';
 </script>
-<script
-  async
-  src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>'"
-  onerror="this.onerror=null;this.src='https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js';"
-></script>
+<!-- Librairie Snipcart -->
+<script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+<!-- Script de personnalisation -->
+<script defer src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>
 <?php else: ?>
 <p class="text-red-500 text-center">SNIPCART_API_KEY manquante</p>
 <?php endif; ?>
