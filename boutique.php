@@ -94,7 +94,7 @@ include 'snipcart-init.php';
   </section>
 
   <!-- ░░░ PIÈCES ░░░ -->
-    <section id="pieces" class="py-24 bg-gray-900/80 scroll-mt-24 shop-wrap my-10">
+    <section id="pieces" class="py-24 bg-gray-900/80 scroll-mt-24">
 		<h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Pièces métalliques</h2>
         <div class="shop-grid">
           <?php foreach ($products as $product) : ?>
