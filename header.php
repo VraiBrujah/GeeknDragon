@@ -52,8 +52,7 @@ $navItems = [
 
 $snipcartKey = $snipcartKey
   ?? $_ENV['SNIPCART_API_KEY']
-  ?? $_SERVER['SNIPCART_API_KEY']
-  ?? getenv('SNIPCART_API_KEY');
+  ?? $_SERVER['SNIPCART_API_KEY'];
 
 function renderNav(array $items, string $active, bool $mobile = false): void {
     foreach ($items as $href => $item) {
