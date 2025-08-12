@@ -59,6 +59,7 @@ function inStock(string $id): bool
 $displayName   = str_replace(' – ', '<br>', $product['name']);
 $displayNameEn = str_replace(' – ', '<br>', $product['name_en'] ?? $product['name']);
 $descriptionEn = $product['description_en'] ?? $product['description'];
+$multipliers   = $product['multipliers'] ?? [];
 $images        = $product['images'] ?? [];
 
 $extraHead = <<<HTML
@@ -139,6 +140,11 @@ include 'snipcart-init.php';
         data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
         data-item-url="<?= htmlspecialchars($metaUrl) ?>"
         data-item-quantity="1"
+        <?php if (!empty($multipliers)) : ?>
+          data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+          data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
+          data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+        <?php endif; ?>
       >
         <span data-i18n="product.add">Ajouter</span>
       </button>
@@ -183,7 +189,7 @@ include 'snipcart-init.php';
 <script>window.stock = <?= json_encode([$id => getStock($id)]) ?>;</script>
 <script src="js/app.js"></script>
 
-<!-- Patch robuste : met à jour quantité juste avant l’ajout -->
+<!-- Patch robuste : met à jour quantité & multiplicateur juste avant l’ajout -->
 <script>
 (function(){
   if (window.__snipcartQtyPatch) return;
@@ -203,6 +209,17 @@ include 'snipcart-init.php';
       if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
     }
 
+    // Multiplicateur
+    const multEl = document.getElementById('multiplier-' + id);
+    if (multEl) {
+      const mult = multEl.value;
+      btn.setAttribute('data-item-custom1-value', mult);
+      const lang = document.documentElement.lang;
+      const baseName = lang === 'en'
+        ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
+        : (btn.dataset.itemNameFr || btn.getAttribute('data-item-name'));
+      btn.setAttribute('data-item-name', mult !== '1' ? baseName + ' x' + mult : baseName);
+    }
   }, { passive: true });
 })();
 </script>
