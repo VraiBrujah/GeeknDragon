@@ -1,242 +1,189 @@
-/* Custom overrides for Snipcart cart */
+/* ------------------------------------------------------------------
+   Geek & Dragon — Snipcart custom (DARK THEME + fixes)
+   ------------------------------------------------------------------ */
+
+/* Police (optionnel) */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Cinzel:wght@400;600;700&display=swap');
 
-.snipcart {
-  font-family: 'Open Sans', sans-serif;
-  color: #fff;
-  background-color: var(--gd-dark);
+/* ========== Thème & variables ========== */
+#snipcart, .snipcart{
+  /* Palette */
+  --gd-bg-900:#0b1220;   /* page/panels */
+  --gd-bg-850:#0e1626;
+  --gd-bg-800:#101722;   /* champs */
+  --gd-bg-750:#141e2e;   /* hover */
+  --gd-bg-700:#192234;   /* selected */
+  --gd-border-600:#2b3651;
+
+  --gd-text-100:#f3f4f6;
+  --gd-text-300:#e5e7eb;
+  --gd-muted:#94a3b8;
+
+  --gd-accent:#8b5cf6;   /* violet */
+  --gd-focus:#22d3ee;    /* focus */
+
+  /* Variables Snipcart */
+  --bgColor-default:var(--gd-bg-900);
+  --bgColor-alt:var(--gd-bg-850);
+  --bgColor-input:var(--gd-bg-800);
+
+  --color-default:var(--gd-text-300);
+  --color-heading:var(--gd-text-100);
+  --color-link:#a5b4fc;
+  --color-linkHover:#c7d2fe;
+
+  --color-input:var(--gd-text-300);
+  --color-inputLabel:var(--gd-text-300);
+  --color-inputIcon:var(--gd-text-300);
+  --color-inputPlaceholder:var(--gd-muted);
+
+  --borderColor:var(--gd-border-600);
+  --borderColor-input:var(--gd-border-600);
+  --focusColor:var(--gd-focus);
+
+  /* Décalage sous le header fixe (valeur de secours, voir JS plus bas) */
+  --gd-header-height:96px;
 }
 
-/* Ensure modal containers and overlays adopt the global colors */
-.snipcart-modal__container,
-.snipcart-modal__overlay {
-  color: inherit;
-  background-color: inherit;
+/* Base + titres */
+.snipcart{
+  font-family:'Open Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+  color:var(--color-default);
+  background:var(--bgColor-default);
+  margin-top:var(--gd-header-height); /* évite que ça passe sous le header */
+}
+.snipcart h1,.snipcart h2,.snipcart h3,.snipcart__button--primary{font-family:'Cinzel',serif}
+
+/* ========== Panneaux / boîtes ========== */
+.snipcart .snipcart-layout__content,
+.snipcart .snipcart-checkout__content,
+.snipcart .snipcart__box,
+.snipcart .snipcart__box--header,
+.snipcart .snipcart__box--content,
+.snipcart .snipcart__box--footer,
+.snipcart .snipcart-summary-fees,
+.snipcart .snipcart-item-line{
+  background:var(--bgColor-default) !important;
+  color:var(--color-default) !important;
+  border-color:var(--borderColor) !important;
 }
 
-.snipcart h1,
-.snipcart h2,
-.snipcart h3,
-.snipcart__button--primary {
-  font-family: 'Cinzel', serif;
+/* ========== Liens d’action ("Modifier", etc.) ========== */
+.snipcart .snipcart__actions--link,
+.snipcart a.snipcart__font--small,
+.snipcart .snipcart-button-link{
+  color:var(--color-link) !important;
+  text-decoration:underline;
 }
-.snipcart-item-line {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0;
-}
-.snipcart-item-line__remove {
-  /* Move trash icon to the left and ensure visibility */
-  margin-left: 0 !important;
-  color: #ffffff;
-}
-.snipcart-item-line__actions {
-  position: static;
-}
+.snipcart .snipcart__actions--link:hover,
+.snipcart a.snipcart__font--small:hover,
+.snipcart .snipcart-button-link:hover{color:var(--color-linkHover) !important}
 
-.snipcart-item-line + .snipcart-item-line {
-  margin-top: 0.5rem;
+/* ========== Champs (inputs/selects/textarea/typeahead) ========== */
+.snipcart .snipcart-input,
+.snipcart input[type=text],
+.snipcart input[type=email],
+.snipcart input[type=tel],
+.snipcart input[type=number],
+.snipcart .snipcart-form__select,
+.snipcart select,
+.snipcart .snipcart-typeahead__input,
+.snipcart textarea{
+  background:var(--bgColor-input) !important;
+  color:var(--color-input) !important;
+  border:1px solid var(--borderColor-input) !important;
 }
+.snipcart .snipcart-input:focus,
+.snipcart input:focus,
+.snipcart select:focus,
+.snipcart textarea:focus,
+.snipcart .snipcart-typeahead__input:focus{
+  outline:2px solid var(--focusColor) !important;
+  border-color:var(--focusColor) !important;
+}
+.snipcart input::placeholder,
+.snipcart textarea::placeholder,
+.snipcart .snipcart-typeahead__input::placeholder{color:var(--color-inputPlaceholder) !important}
+.snipcart label,
+.snipcart .snipcart-form__label,
+.snipcart .snipcart__font--tiny{color:var(--color-inputLabel) !important}
 
-/* Ensure cart and account buttons remain readable and uniform */
-.snipcart-checkout,
-.snipcart-customer-signin {
-  color: #fcfbfb;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.snipcart-items-count:empty {
-  display: none;
-}
-
-.snipcart-checkout:hover,
-.snipcart-checkout:focus,
-.snipcart-checkout:active,
-.snipcart-customer-signin:hover,
-.snipcart-customer-signin:focus,
-.snipcart-customer-signin:active {
-  color: #fcfbfb;
-  background-color: transparent;
-  outline: none;
-}
-
-/* Ensure form fields remain readable on dark background */
-.snipcart-form__label,
-.snipcart-form__label--focus,
-.snipcart-form__input,
-.snipcart-form__input::placeholder,
-.snipcart-form__textarea,
-.snipcart-form__textarea::placeholder {
-  color: #ffffff;
-}
-.snipcart-form__input,
-.snipcart-form__select,
-.snipcart-form__textarea,
-.snipcart-form__field input,
-.snipcart-form__field select,
-.snipcart-form__field textarea,
-.snipcart-form__checkbox,
-.snipcart-form__radio {
-  background-color: #333333;
-  color: #ffffff;
-}
-.snipcart-form__select option {
-  background-color: #333333;
-  color: #ffffff;
+/* Autofill Chrome (sinon fond blanc) */
+.snipcart input:-webkit-autofill,
+.snipcart input:-webkit-autofill:hover,
+.snipcart input:-webkit-autofill:focus{
+  -webkit-box-shadow:0 0 0 1000px var(--bgColor-input) inset !important;
+  -webkit-text-fill-color:var(--color-input) !important;
+  caret-color:var(--color-input) !important;
 }
 
-.snipcart-form__checkbox,
-.snipcart-form__radio {
-  accent-color: #333333;
+/* ========== Paiement : libellés lisibles ========== */
+.snipcart .snipcart-payment__form .snipcart__font--subtitle,
+.snipcart .snipcart-payment__form label,
+.snipcart .snipcart__font--subtitle{color:var(--color-heading) !important}
+
+/* ========== Méthodes de livraison (retour webhook) ========== */
+.snipcart .snipcart-shipping-rates-list-item{
+  background:var(--bgColor-input) !important;
+  border:1px solid var(--borderColor-input) !important;
+  color:var(--color-default) !important;
+}
+.snipcart .snipcart-shipping-rates-list-item *{color:var(--color-default) !important}
+.snipcart .snipcart-radio__input:checked + .snipcart-shipping-rates-list-item,
+.snipcart .snipcart-shipping-rates-list-item.is-selected{
+  background:var(--gd-bg-700) !important;
+  border-color:var(--gd-accent) !important;
 }
 
-/* Ensure cart modal isn’t hidden under fixed header */
-.snipcart-modal__container {
-  top: var(--header-height);
-  height: calc(100vh - var(--header-height));
-  margin-top: 0;
+/* ========== Boutons secondaires ========== */
+.snipcart .snipcart__button--secondary,
+.snipcart .snipcart-button-secondary{
+  background:var(--bgColor-input) !important;
+  color:var(--color-default) !important;
+  border:1px solid var(--color-default) !important;
+}
+.snipcart .snipcart__button--secondary:hover,
+.snipcart .snipcart-button-secondary:hover{filter:brightness(1.05)}
+
+/* ========== Ligne produit : corbeille à gauche (panier) ========== */
+.snipcart .snipcart-item-line{display:flex;align-items:center;gap:.5rem;padding:.5rem 0}
+.snipcart .snipcart-item-line + .snipcart-item-line{margin-top:.5rem}
+.snipcart .snipcart-item-line__header{display:flex;align-items:center}
+.snipcart .snipcart-item-line__media--small{order:1}
+.snipcart .snipcart-item-line__actions{order:2;margin:0 .75rem 0 .25rem !important;opacity:1 !important}
+.snipcart .snipcart-item-line__title{order:3}
+.snipcart .snipcart-item-line__actions .snipcart__button--icon{
+  width:36px;height:36px;border:0;background:transparent;
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.snipcart .snipcart-item-line__actions .snipcart__icon,
+.snipcart .snipcart-item-line__actions svg{
+  width:18px;height:18px;color:#ff4d4f !important;fill:currentColor !important;opacity:1 !important;
 }
 
-/* Make quantity fields readable */
-.snipcart-item-line select,
-.snipcart-item-line input {
-  background-color: #333333;
-  color: #ffffff;
+/* Stepper quantité (si injecté en JS) */
+.__qty-stepped{display:inline-flex;align-items:center;gap:6px}
+.__qty-btn{
+  background:var(--bgColor-input);color:var(--color-default);
+  border:1px solid var(--borderColor-input);border-radius:6px;
+  width:32px;height:32px;line-height:30px;font-size:18px;cursor:pointer;
 }
-.snipcart-item-line option {
-  background-color: #333333;
-  color: #ffffff;
-}
+.__qty-btn:focus{outline:2px solid var(--focusColor)}
+.__qty-btn:hover{filter:brightness(1.05)}
+.__remove-left{margin-right:8px}
 
-/* Hide multiplier custom field in cart */
-.snipcart-item-custom-field {
-  display: none;
-}
+/* ========== Masquer le custom field "Multiplicateur" (cart/checkout/résumé) ========== */
+/* On masque tous les custom fields d’item (tu n’en utilises qu’un : "Multiplicateur") */
+.snipcart .snipcart-item-custom-fields,
+.snipcart .snipcart-item-line__custom-fields,
+.snipcart .snipcart-item-custom-field,
+.snipcart .snipcart-item-line__variants{display:none !important}
 
-/* Hide variant dropdowns in cart */
-.snipcart-item-line__variants {
-  display: none;
-}
+/* ========== Dropdowns lisibles ========== */
+.snipcart .snipcart-form__select option{background:var(--bgColor-input);color:var(--color-input)}
 
-/* Ensure quantity label is visible */
-.snipcart-item-line__quantity label,
-.snipcart-item-line__quantity .snipcart__font--tiny {
-  color: #ffffff;
-}
-
-/* Ensure quantity selector is visible and styled */
-.snipcart-item-line__quantity {
-  display: flex;
-  align-items: center;
-}
-
-.snipcart-item-line__quantity input {
-  background-color: #333333;
-  color: #ffffff;
-}
-
-/* Center summary section text and container */
-.snipcart-cart-summary {
-  margin: 0 auto;
-  text-align: center;
-}
-
-
-/* === AJOUTS pour stepper quantité & corbeille à gauche === */
-
-/* Wrapper du stepper (injection JS) */
-.__qty-stepped {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Boutons -/+ sombres (cohérents avec tes autres champs) */
-.__qty-btn {
-  background-color: #333333;
-  color: #ffffff;
-  border: 1px solid #444;
-  border-radius: 6px;
-  width: 32px;
-  height: 32px;
-  line-height: 30px;
-  font-size: 18px;
-  cursor: pointer;
-}
-.__qty-btn:focus { outline: 2px solid #555; }
-.__qty-btn:hover { filter: brightness(1.05); }
-
-/* Petit espace quand la corbeille est placée à gauche du titre */
-.__remove-left {
-  margin-right: 8px;
-}
-
-
-/* Optionnel : aligner verticalement le bloc titre + corbeille */
-.snipcart-item-line__information,
-.snipcart-item-line__header {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-
-
-/* --- Corbeille visible et placée à gauche du nom --- */
-
-/* Le header d’une ligne de produit est un flex container */
-.snipcart-item-line__header { display: flex; align-items: center; }
-
-/* Ordre souhaité : [miniature] [corbeille] [titre] */
-.snipcart-item-line__media--small { order: 1; }
-.snipcart-item-line__actions     { order: 2; margin: 0 .75rem 0 .25rem; /* espace avant le nom */ }
-.snipcart-item-line__title       { order: 3; }
-
-/* La corbeille est parfois poussée à droite via margin-left:auto */
-.snipcart-item-line__actions { margin-left: 0 !important; }
-
-/* Toujours visible (par défaut elle peut être quasi transparente hors hover) */
-.snipcart-item-line__actions { opacity: 1 !important; }
-
-/* Bouton + icône plus gros et bien contrastés */
-.snipcart-item-line__actions .snipcart__button--icon {
-  width: 36px; height: 36px; border: 0; background: transparent;
-  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
-}
-.snipcart-item-line__actions .snipcart__icon,
-.snipcart-item-line__actions svg {
-  width: 18px; height: 18px;
-  color: #ff4d4f !important;       /* rouge visible */
-  fill: currentColor !important;
-  opacity: 1 !important;
-
-
-/* Ensure secondary action buttons like the address "OK" remain readable */
-.snipcart-button-secondary,
-.snipcart__button--secondary {
-  color: #ffffff;
-  background-color: #333333;
-  border: 1px solid #ffffff;
-}
-
-.snipcart-button-secondary:hover,
-.snipcart__button--secondary:hover,
-.snipcart-button-secondary:focus,
-.snipcart__button--secondary:focus {
-  filter: brightness(1.05);
-
-}
-
-/* Ensure shipping rate options remain readable */
-.snipcart-shipping-rates-list-item {
-  background-color: #333333;
-  color: #ffffff;
-}
-
-.snipcart-shipping-rates-list-item label,
-.snipcart-shipping-rates-list-item span {
-  color: #ffffff;
+/* ========== Modal (au cas où) sous header fixe ========== */
+.snipcart .snipcart-modal__container{
+  top:var(--gd-header-height);
+  height:calc(100vh - var(--gd-header-height));
 }
