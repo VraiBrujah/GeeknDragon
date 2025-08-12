@@ -1,4 +1,4 @@
-/* Geek & Dragon — Snipcart custom (DARK + clean, v4)
+/* Geek & Dragon — Snipcart custom (DARK + clean, v5)
    Place ce fichier APRES snipcart.css dans le <head>.
    Palette sombre cohérente + paiement lisible + erreurs très visibles. */
 
@@ -315,4 +315,14 @@
 .snipcart .snipcart-modal__container{
   top:var(--gd-header-h);
   height:calc(100vh - var(--gd-header-h));
+}
+
+/* ======= SAFETY RAILS SCROLL (confirmation & longues pages) ======= */
+html, body { overflow-y: auto !important; }
+.snipcart{ overflow: visible !important; }
+.snipcart .snipcart-order,
+.snipcart .snipcart-order__sections,
+.snipcart .snipcart-order__invoice{
+  max-height: none !important;
+  overflow: visible !important;
 }
