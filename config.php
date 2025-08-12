@@ -12,10 +12,6 @@ return [
             ?? $_SERVER['SMTP_PORT']
         ) ?: 587,
     ],
-    'recaptcha_site_key' => $_ENV['RECAPTCHA_SITE_KEY']
-        ?? $_SERVER['RECAPTCHA_SITE_KEY'],
-    'recaptcha_secret_key' => $_ENV['RECAPTCHA_SECRET_KEY']
-        ?? $_SERVER['RECAPTCHA_SECRET_KEY'],
     'snipcart_api_key' => $_ENV['SNIPCART_API_KEY']
         ?? $_SERVER['SNIPCART_API_KEY'],
     'snipcart_secret_api_key' => $_ENV['SNIPCART_SECRET_API_KEY']
