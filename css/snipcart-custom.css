@@ -78,7 +78,7 @@
   margin-top: 0;
 }
 
-/* Make quantity and multiplier fields readable */
+/* Make quantity fields readable */
 .snipcart-item-line select,
 .snipcart-item-line input {
   background-color: #333333;
@@ -89,20 +89,9 @@
   color: #ffffff;
 }
 
-/* Expand multiplier dropdown for better visibility */
-.snipcart-item-custom-field select {
-  min-width: 6rem;
-}
-
-/* Make custom field (Multiplier) label/value more prominent */
+/* Hide multiplier custom field in cart */
 .snipcart-item-custom-field {
-  font-size: 1rem; /* increase base font size for custom fields */
-  color: #ffffff;  /* ensure text is visible on dark background */
-  font-weight: 500; /* slightly bold for emphasis */
-}
-.snipcart-item-custom-field label {
-  font-size: 0.95rem;
-  margin-right: 0.25rem;
+  display: none;
 }
 
 /* Ensure quantity label is visible */
