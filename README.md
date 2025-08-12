@@ -33,19 +33,22 @@ The application expects a few secrets to be provided through the environment:
 
 - `SNIPCART_API_KEY` – your public Snipcart API key.
 - `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates. **Keep this key strictly server-side; it must never be exposed to client-side code or shipped to the browser.**
+- `SNIPCART_LANGUAGE` – locale used by Snipcart (for example `fr`).
+- `SNIPCART_ADD_PRODUCT_BEHAVIOR` – how products are added to the cart (`overlay`, `sidecart`, ...).
+- `SENDGRID_API_KEY` – API key for the SendGrid SMTP service used to send emails.
 - `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
 
-To send emails from the contact form, configure SMTP credentials for the fixed sender address `no-reply@geekndragon.com`:
+To send emails from the contact form using SendGrid's SMTP service, configure credentials for the fixed sender address `no-reply@geekndragon.com`:
 
-- `SMTP_HOST` – SMTP server hostname.
+- `SMTP_HOST` – SMTP server hostname (for SendGrid use `smtp.sendgrid.net`).
 - `SMTP_PORT` – SMTP server port (defaults to 587 if unset).
-- `SMTP_USERNAME` – account username (usually `no-reply@geekndragon.com`).
-- `SMTP_PASSWORD` – password for the SMTP account.
+- `SMTP_USERNAME` – account username (for SendGrid use `apikey`).
+- `SMTP_PASSWORD` – password for the SMTP account (the same as `SENDGRID_API_KEY`).
 
 ## Local setup
 
 1. Install PHP (7.4 or newer) and clone this repository.
-2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY` and the SMTP variables.
+2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SNIPCART_LANGUAGE`, `SNIPCART_ADD_PRODUCT_BEHAVIOR`, `SENDGRID_API_KEY` and the SMTP variables.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
 3. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
 

@@ -1,18 +1,13 @@
 <?php
-// Récupération de la clé publique depuis l'environnement ou fallback
+// Récupération des variables d'environnement Snipcart
 $snipcartKey = getenv('SNIPCART_API_KEY');
-if (!$snipcartKey) {
-    // Fallback en dur
-    $snipcartKey = 'YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1';
+$snipcartLanguage = getenv('SNIPCART_LANGUAGE');
+$snipcartAddProductBehavior = getenv('SNIPCART_ADD_PRODUCT_BEHAVIOR');
+
+if (!$snipcartKey || !$snipcartLanguage || !$snipcartAddProductBehavior) {
+    throw new RuntimeException('SNIPCART_API_KEY, SNIPCART_LANGUAGE et SNIPCART_ADD_PRODUCT_BEHAVIOR doivent être définies.');
 }
-
-// Définition de la langue (fallback sur 'fr' si non définie)
-$snipcartLanguage = $snipcartLanguage ?? ($lang ?? 'fr');
-
-// Définition du comportement d'ajout (fallback sur 'overlay')
-$snipcartAddProductBehavior = $snipcartAddProductBehavior ?? 'overlay';
 ?>
-<?php if ($snipcartKey): ?>
 <div hidden id="snipcart" data-api-key="<?= htmlspecialchars($snipcartKey) ?>"></div>
 <script>
   const lang = localStorage.getItem('snipcartLanguage') || '<?= htmlspecialchars($snipcartLanguage) ?>';
@@ -31,6 +26,3 @@ $snipcartAddProductBehavior = $snipcartAddProductBehavior ?? 'overlay';
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 <!-- Script de personnalisation -->
 <script defer src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>
-<?php else: ?>
-<p class="text-red-500 text-center">SNIPCART_API_KEY manquante</p>
-<?php endif; ?>
