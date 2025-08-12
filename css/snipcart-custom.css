@@ -165,11 +165,6 @@
   margin-right: 8px;
 }
 
-/* Assurer la lisibilité des icônes dans le thème sombre */
-.snipcart__icon, .snipcart__icon svg, .snipcart__icon path {
-  color: #ffffff;
-  fill: currentColor;
-}
 
 /* Optionnel : aligner verticalement le bloc titre + corbeille */
 .snipcart-item-line__information,
@@ -177,4 +172,34 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
+}
+
+
+/* --- Corbeille visible et placée à gauche du nom --- */
+
+/* Le header d’une ligne de produit est un flex container */
+.snipcart-item-line__header { display: flex; align-items: center; }
+
+/* Ordre souhaité : [miniature] [corbeille] [titre] */
+.snipcart-item-line__media--small { order: 1; }
+.snipcart-item-line__actions     { order: 2; margin: 0 .75rem 0 .25rem; /* espace avant le nom */ }
+.snipcart-item-line__title       { order: 3; }
+
+/* La corbeille est parfois poussée à droite via margin-left:auto */
+.snipcart-item-line__actions { margin-left: 0 !important; }
+
+/* Toujours visible (par défaut elle peut être quasi transparente hors hover) */
+.snipcart-item-line__actions { opacity: 1 !important; }
+
+/* Bouton + icône plus gros et bien contrastés */
+.snipcart-item-line__actions .snipcart__button--icon {
+  width: 36px; height: 36px; border: 0; background: transparent;
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.snipcart-item-line__actions .snipcart__icon,
+.snipcart-item-line__actions svg {
+  width: 18px; height: 18px;
+  color: #ff4d4f !important;       /* rouge visible */
+  fill: currentColor !important;
+  opacity: 1 !important;
 }
