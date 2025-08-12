@@ -825,3 +825,45 @@ document.addEventListener('click', function (e) {
 
 }, { passive: true });
 
+
+// Ajuste la hauteur du header (var CSS) sans ajouter de margin global
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('header');
+  if (!header) return;
+  const setH = () => {
+    const h = header.getBoundingClientRect().height || 96;
+    document.documentElement.style.setProperty('--gd-header-h', h + 'px');
+  };
+  setH();
+  new ResizeObserver(setH).observe(header);
+  window.addEventListener('resize', setH);
+});
+
+// Cache UNIQUEMENT "Multiplicateur" dans le panier/checkout (quantité intacte)
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.getElementById('snipcart');
+  if (!root) return;
+
+  const hideMultiplier = () => {
+    root.querySelectorAll('.snipcart-item-line').forEach((line) => {
+      // cherche des labels/texte "Multiplicateur"
+      const nodes = Array.from(line.querySelectorAll('label, .snipcart__font--tiny, .snipcart__font--regular, span, dt, dd, div'));
+      nodes.forEach((n) => {
+        const txt = (n.textContent || '').toLowerCase().trim();
+        if (!txt || !txt.includes('multiplicateur')) return;
+
+        // remonte à un conteneur de champ custom (sans toucher la quantité)
+        let box = n.closest('.snipcart-item-custom-field, .snipcart-item-line__variants, .snipcart-item-line__custom-fields, .snipcart-form__field, li, div');
+        if (box && !box.closest('.snipcart-item-line__quantity')) {
+          box.style.display = 'none';
+        } else {
+          n.style.display = 'none';
+        }
+      });
+    });
+  };
+
+  hideMultiplier();
+  new MutationObserver(hideMultiplier).observe(root, {childList:true, subtree:true});
+});
+
