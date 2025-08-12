@@ -72,12 +72,15 @@ HTML;
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 <body>
-<?php include 'header.php'; ?>
 <?php
 $snipcartLanguage = $lang;
 $snipcartLocales = 'fr,en';
 $snipcartAddProductBehavior = 'overlay';
+ob_start();
 include 'snipcart-init.php';
+$snipcartInit = ob_get_clean();
+include 'header.php';
+echo $snipcartInit;
 ?>
 <main id="main" class="py-10 pt-[var(--header-height)] main-product">
   <section class="max-w-md mx-auto px-6">
