@@ -220,3 +220,14 @@
   filter: brightness(1.05);
 
 }
+
+/* Ensure shipping rate options remain readable */
+.snipcart-shipping-rates-list-item {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.snipcart-shipping-rates-list-item label,
+.snipcart-shipping-rates-list-item span {
+  color: #ffffff;
+}
