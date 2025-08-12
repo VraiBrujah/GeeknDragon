@@ -1,73 +1,101 @@
 <?php
 /**
- * Snipcart bootstrap + clés .env avec secours en dur
- * Place ce fichier où il est inclus sur toutes les pages produits/panier.
+ * Geek & Dragon – Calculateur d'expédition dynamique
+ * Répond aux webhooks Snipcart shippingrates.fetch.
+ * Charge les variables d'environnement via bootstrap et
+ * propose des valeurs de secours pour éviter les erreurs 500
+ * lorsque l'environnement n'est pas correctement chargé.
  */
 
-// ---- FALLBACKS (à remplacer par tes vraies valeurs en dur si besoin) ----
-$PUBLIC_FALLBACK = 'YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1';
+require_once __DIR__ . '/bootstrap.php';
+$config = require __DIR__ . '/config.php';
+
+header('Content-Type: application/json');
+
+// ---- Fallbacks (à remplacer par tes valeurs si besoin) ----
 $SECRET_FALLBACK = 'S_MDdhYmU2NWMtYmI5ZC00NmI0LWJjZGUtZDdkYTZjYTRmZTMxNjM4ODkxMjUzODg0NDc4ODU4';
 
-// ---- Récup des clés depuis l'env (avec secours) ----
-$snipcartKey    = getenv('SNIPCART_API_KEY');
-if (!$snipcartKey || trim($snipcartKey) === '') {
-  $snipcartKey = $PUBLIC_FALLBACK;
+$apiKey = $config['snipcart_secret_api_key'] ?? '';
+if (!$apiKey) {
+  $apiKey = $SECRET_FALLBACK; // évite un 500 si la variable d'env est absente
 }
 
-$snipcartSecret = getenv('SNIPCART_SECRET_API_KEY');
-if (!$snipcartSecret || trim($snipcartSecret) === '') {
-  $snipcartSecret = $SECRET_FALLBACK;
+$secret = $config['shipping_secret'] ?? '';
+$raw = file_get_contents('php://input');
+
+// Vérification optionnelle de la signature (si le secret est dispo)
+if ($secret) {
+  $signature = $_SERVER['HTTP_X_SNIPCART_SIGNATURE'] ?? '';
+  if (!hash_equals(hash_hmac('sha256', $raw, $secret), $signature)) {
+    http_response_code(401);
+    echo json_encode(['error' => 'invalid signature']);
+    exit;
+  }
 }
 
-// (Optionnel) Rendre dispo côté PHP sans jamais exposer la secret au front
-if (!defined('SNIPCART_SECRET_API_KEY')) {
-  define('SNIPCART_SECRET_API_KEY', $snipcartSecret);
+// Validation optionnelle du token (si la clé API est dispo)
+$token = $_SERVER['HTTP_X_SNIPCART_REQUESTTOKEN'] ?? '';
+if ($apiKey && $token && !validateToken($token, $apiKey)) {
+  http_response_code(401);
+  echo json_encode(['error' => 'invalid token']);
+  exit;
 }
-if (!defined('SNIPCART_PUBLIC_API_KEY')) {
-  define('SNIPCART_PUBLIC_API_KEY', $snipcartKey);
+
+function validateToken($token, $apiKey) {
+  if (!$token) return false;
+  $ch = curl_init('https://app.snipcart.com/api/requestvalidation/' . urlencode($token));
+  curl_setopt_array($ch, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_USERPWD => $apiKey . ':',
+  ]);
+  curl_exec($ch);
+  $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+  curl_close($ch);
+  return $status === 200;
 }
 
-// ---- Config front ----
-$snipcartLanguage = $snipcartLanguage ?? ($lang ?? 'fr');
-$snipcartAddProductBehavior = $snipcartAddProductBehavior ?? 'overlay';
+$data = json_decode($raw, true);
+$weight = floatval($data['content']['totalWeight'] ?? 0); // en g
+$country = $data['content']['shippingAddress']['country'] ?? 'CA';
 
-// ---- Cache-busting helpers ----
-$cssLocal       = __DIR__ . '/css/snipcart.css';
-$cssCustomLocal = __DIR__ . '/css/snipcart-custom.css';
-$jsCustomLocal  = __DIR__ . '/js/snipcart.js';
+$rates = [];
 
-$cssVer       = file_exists($cssLocal)       ? filemtime($cssLocal)       : time();
-$cssCustomVer = file_exists($cssCustomLocal) ? filemtime($cssCustomLocal) : time();
-$jsCustomVer  = file_exists($jsCustomLocal)  ? filemtime($jsCustomLocal)  : time();
-?>
-<?php if ($snipcartKey): ?>
-  <!-- Thème Snipcart (CDN) + ton override CSS local -->
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css" />
-  <link rel="stylesheet" href="/css/snipcart.css?v=<?= $cssVer ?>" />
-  <link rel="stylesheet" href="/css/snipcart-custom.css?v=<?= $cssCustomVer ?>" />
+// Canada
+if ($country === 'CA') {
+  $base = 10; // base 0-250 g
+  if ($weight > 250) {
+    $base += ceil(($weight - 250) / 250) * 2; // +2 $ / 250 g
+  }
+  $rates[] = [
+    'id' => 'standard_ca',
+    'name' => 'Standard (Poste Canada)',
+    'description' => 'Livraison 3-5 jours',
+    'amount' => $base * 100, // en cents
+    'currency' => 'CAD',
+  ];
+}
 
-  <!-- Conteneur Snipcart + Settings -->
-  <div hidden id="snipcart" data-api-key="<?= htmlspecialchars($snipcartKey) ?>"></div>
-  <script>
-    (function() {
-      const lang = localStorage.getItem('snipcartLanguage') || '<?= htmlspecialchars($snipcartLanguage) ?>';
-      window.SnipcartSettings = {
-        publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
-        loadStrategy: 'onload',
-        config: {
-          addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
-          locale: lang,
-          customerAccount: { enabled: true },
-        },
-      };
-    })();
-  </script>
+// USA
+if ($country === 'US') {
+  $amount = 15 + ($weight / 500) * 3;
+  $rates[] = [
+    'id' => 'usps',
+    'name' => 'USPS Tracked',
+    'description' => '6-9 jours',
+    'amount' => intval($amount * 100),
+    'currency' => 'USD',
+  ];
+}
 
-  <!-- Lib Snipcart (CDN) -->
-  <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+// Europe : tarif unique
+if (in_array($country, ['FR', 'BE', 'DE', 'GB', 'ES'])) {
+  $rates[] = [
+    'id' => 'intl',
+    'name' => 'International suivi',
+    'description' => '7-15 jours',
+    'amount' => 3500, // 35 € flat
+    'currency' => 'EUR',
+  ];
+}
 
-  <!-- Ton JS de personnalisation (après la lib) -->
-  <script defer src="/js/snipcart.js?v=<?= $jsCustomVer ?>"></script>
-<?php else: ?>
-  <p class="text-red-500 text-center">SNIPCART_API_KEY manquante</p>
-<?php endif; ?>
+echo json_encode($rates);
