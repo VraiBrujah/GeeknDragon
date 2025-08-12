@@ -38,9 +38,7 @@ $multipliers = $product['multipliers'] ?? [];
   </p>
 
 
-  <p class="price mt-2 text-xl font-bold text-yellow-400">
-    <?= htmlspecialchars($price) ?> $ CAD
-  </p>
+
 
   <div class="mt-auto w-full flex flex-col items-center gap-4">
 
