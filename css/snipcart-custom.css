@@ -3,6 +3,15 @@
 
 .snipcart {
   font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  background-color: var(--gd-dark);
+}
+
+/* Ensure modal containers and overlays adopt the global colors */
+.snipcart-modal__container,
+.snipcart-modal__overlay {
+  color: inherit;
+  background-color: inherit;
 }
 
 .snipcart h1,
