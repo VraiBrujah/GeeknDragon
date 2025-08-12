@@ -1,53 +1,70 @@
-/* Geek & Dragon — Snipcart custom (DARK + clean, v2) */
+/* Geek & Dragon — Snipcart custom (DARK + clean, v4)
+   Place ce fichier APRES snipcart.css dans le <head>.
+   Palette sombre cohérente + paiement lisible + erreurs très visibles. */
 
+/* =================================================================== */
+/* PALETTE & TOKENS                                                     */
+/* =================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Cinzel:wght@400;600;700&display=swap');
 
-/* ===== Palette + variables (tons proches) ===== */
 :root{
-  --gd-bg:   #101826; /* fond */
-  --gd-card: #121d2a; /* cartes/champs - très proche */
+  /* Tons proches → transitions douces entre sections */
+  --gd-bg:        #101826; /* fond global */
+  --gd-card:      #121d2a; /* cartes/champs (≈ fond +1 cran) */
+  --gd-card-2:    #162338; /* état sélectionné/hover discret */
 
-  --gd-text:    #e7ebf2;
-  --gd-muted:   #a0a9b8;
-  --gd-heading: #f4f6fa;
+  --gd-text:      #e7ebf2;
+  --gd-muted:     #a0a9b8;
+  --gd-heading:   #f4f6fa;
 
-  --gd-border: #2b3650;
-  --gd-accent: #8b5cf6;
-  --gd-focus:  #22d3ee;
+  --gd-border:    #2b3650;
+  --gd-accent:    #8b5cf6; /* violet */
+  --gd-focus:     #22d3ee; /* focus */
 
-  --gd-header-h: 96px; /* mis à jour par JS si besoin */
+  /* Hauteur header fixe (mise à jour par JS) */
+  --gd-header-h:  96px;
+
+  /* Couleurs d’alerte */
+  --gd-error:     #f87171;
+  --gd-warning:   #f59e0b;
 }
 
-/* ===== Variables Snipcart ===== */
+/* =================================================================== */
+/* ROOT THEME OVERRIDES (variables Snipcart)                            */
+/* =================================================================== */
 #snipcart, .snipcart{
-  --bgColor-default: var(--gd-bg);
-  --bgColor-alt:     var(--gd-card);
-  --bgColor-input:   var(--gd-card);
+  --bgColor-default:  var(--gd-bg);
+  --bgColor-alt:      var(--gd-card);
+  --bgColor-input:    var(--gd-card);
 
-  --color-default:   var(--gd-text);
-  --color-heading:   var(--gd-heading);
-  --color-link:      #c1c8ff;
-  --color-linkHover: #e0e4ff;
+  --color-default:    var(--gd-text);
+  --color-heading:    var(--gd-heading);
+  --color-link:       #c1c8ff;
+  --color-linkHover:  #e0e4ff;
 
-  --color-input:         var(--gd-text);
-  --color-inputLabel:    var(--gd-text);
-  --color-inputIcon:     var(--gd-text);
+  --color-input:      var(--gd-text);
+  --color-inputLabel: var(--gd-text);
+  --color-inputIcon:  var(--gd-text);
   --color-inputPlaceholder: var(--gd-muted);
 
-  --borderColor:       var(--gd-border);
-  --borderColor-input: var(--gd-border);
-  --focusColor:        var(--gd-focus);
+  --borderColor:        var(--gd-border);
+  --borderColor-input:  var(--gd-border);
+  --focusColor:         var(--gd-focus);
 }
 
-/* base + titres (pas de margin-top global ici → plus de bande vide sur index/boutique) */
+/* =================================================================== */
+/* BASE TYPO & CONTAINERS                                               */
+/* =================================================================== */
 .snipcart{
   font-family:'Open Sans',system-ui,-apple-system,Segoe UI,sans-serif;
   color:var(--color-default);
   background:var(--bgColor-default);
 }
-.snipcart h1,.snipcart h2,.snipcart h3,.snipcart__button--primary{font-family:'Cinzel',serif}
+.snipcart h1,.snipcart h2,.snipcart h3,.snipcart__button--primary{
+  font-family:'Cinzel',serif;
+}
 
-/* panneaux / boîtes */
+/* Boîtes/panneaux (couleur unifiée) */
 .snipcart .snipcart-layout__content,
 .snipcart .snipcart-checkout__content,
 .snipcart .snipcart__box,
@@ -61,18 +78,28 @@
   border-color:var(--borderColor) !important;
 }
 
-/* liens (“Modifier”, etc.) */
+/* Liens d’action (“Modifier”, etc.) bien visibles */
 .snipcart .snipcart__actions--link,
 .snipcart a.snipcart__font--small,
 .snipcart .snipcart-button-link{
   color:var(--color-link) !important;
-  text-decoration: underline;
+  text-decoration:underline;
 }
 .snipcart .snipcart__actions--link:hover,
 .snipcart a.snipcart__font--small:hover,
-.snipcart .snipcart-button-link:hover{ color:var(--color-linkHover) !important; }
+.snipcart .snipcart-button-link:hover{
+  color:var(--color-linkHover) !important;
+}
 
-/* champs */
+/* Petits textes */
+.snipcart .snipcart__font--tiny,
+.snipcart .snipcart__font--small{
+  color:var(--gd-muted) !important;
+}
+
+/* =================================================================== */
+/* FORMES & CHAMPS                                                      */
+/* =================================================================== */
 .snipcart .snipcart-input,
 .snipcart input[type=text],
 .snipcart input[type=email],
@@ -86,6 +113,15 @@
   color:var(--color-input) !important;
   border:1px solid var(--borderColor-input) !important;
 }
+.snipcart input::placeholder,
+.snipcart textarea::placeholder,
+.snipcart .snipcart-typeahead__input::placeholder{
+  color:var(--color-inputPlaceholder) !important;
+}
+.snipcart label,
+.snipcart .snipcart-form__label{ color:var(--color-inputLabel) !important; }
+
+/* Focus accessible */
 .snipcart .snipcart-input:focus,
 .snipcart input:focus,
 .snipcart select:focus,
@@ -94,14 +130,8 @@
   outline:2px solid var(--focusColor) !important;
   border-color:var(--focusColor) !important;
 }
-.snipcart input::placeholder,
-.snipcart textarea::placeholder,
-.snipcart .snipcart-typeahead__input::placeholder{ color:var(--color-inputPlaceholder) !important; }
-.snipcart label,
-.snipcart .snipcart-form__label,
-.snipcart .snipcart__font--tiny{ color:var(--color-inputLabel) !important; }
 
-/* autofill Chrome */
+/* Chrome autofill (sinon fond blanc) */
 .snipcart input:-webkit-autofill,
 .snipcart input:-webkit-autofill:hover,
 .snipcart input:-webkit-autofill:focus{
@@ -110,25 +140,35 @@
   caret-color:var(--color-input) !important;
 }
 
-/* paiement : labels bien clairs */
-.snipcart .snipcart-payment__form .snipcart__font--subtitle,
-.snipcart .snipcart-payment__form label,
-.snipcart .snipcart__font--subtitle{ color:var(--color-heading) !important; }
+/* Spinners number → off */
+.snipcart input[type=number]::-webkit-outer-spin-button,
+.snipcart input[type=number]::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+.snipcart input[type=number]{ -moz-appearance:textfield; }
 
-/* méthodes de livraison (webhook) */
+/* Radio/checkbox accent */
+.snipcart input[type=checkbox],
+.snipcart input[type=radio]{ accent-color: var(--gd-accent); }
+
+/* =================================================================== */
+/* LIVRAISON (retour webhook)                                           */
+/* =================================================================== */
 .snipcart .snipcart-shipping-rates-list-item{
   background:var(--gd-card) !important;
   border:1px solid var(--gd-border) !important;
   color:var(--gd-text) !important;
 }
-.snipcart .snipcart-shipping-rates-list-item *{ color:var(--gd-text) !important; }
+.snipcart .snipcart-shipping-rates-list-item *{
+  color:var(--gd-text) !important;
+}
 .snipcart .snipcart-radio__input:checked + .snipcart-shipping-rates-list-item,
 .snipcart .snipcart-shipping-rates-list-item.is-selected{
-  background:#162338 !important;           /* 1 cran au-dessus, discret */
+  background:var(--gd-card-2) !important;
   border-color:var(--gd-accent) !important;
 }
 
-/* boutons secondaires */
+/* =================================================================== */
+/* BOUTONS SECONDAIRES                                                  */
+/* =================================================================== */
 .snipcart .snipcart__button--secondary,
 .snipcart .snipcart-button-secondary{
   background:var(--gd-card) !important;
@@ -136,17 +176,20 @@
   border:1px solid var(--gd-text) !important;
 }
 .snipcart .snipcart__button--secondary:hover,
-.snipcart .snipcart-button-secondary:hover{ filter: brightness(1.05); }
+.snipcart .snipcart-button-secondary:hover{ filter:brightness(1.05); }
 
-/* corbeille à gauche + quantité lisible */
+/* =================================================================== */
+/* LIGNES PRODUIT (corbeille à gauche + quantité lisible)               */
+/* =================================================================== */
 .snipcart .snipcart-item-line{ display:flex; align-items:center; gap:.5rem; padding:.5rem 0; }
 .snipcart .snipcart-item-line + .snipcart-item-line{ margin-top:.5rem; }
+
 .snipcart .snipcart-item-line__header{ display:flex; align-items:center; }
 .snipcart .snipcart-item-line__media--small{ order:1; }
 .snipcart .snipcart-item-line__actions{ order:2; margin:0 .75rem 0 .25rem !important; opacity:1 !important; }
 .snipcart .snipcart-item-line__title{ order:3; }
 
-/* icône corbeille visible */
+/* Bouton corbeille visible */
 .snipcart .snipcart-item-line__actions .snipcart__button--icon{
   width:36px; height:36px; border:0; background:transparent;
   display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
@@ -156,37 +199,119 @@
   width:18px; height:18px; color:#ff4d4f !important; fill:currentColor !important; opacity:1 !important;
 }
 
-/* quantité — taille ↑ */
+/* Quantité : champ + boutons plus grands */
 .snipcart .snipcart-item-line__quantity,
 .snipcart .snipcart-item-quantity{ display:flex; align-items:center; gap:.5rem; }
+
 .snipcart .snipcart-item-line__quantity input,
 .snipcart .snipcart-item-quantity input{
   background:var(--gd-card) !important;
   color:var(--gd-text) !important;
   border:1px solid var(--gd-border) !important;
-  height:40px !important; width:80px !important; font-size:18px !important; text-align:center;
+  height:40px !important; width:82px !important; font-size:18px !important; text-align:center;
 }
 
-/* stepper -/+ 40px */
-.__qty-stepped{ display:inline-flex; align-items:center; gap:8px; }
-.__qty-btn{
+/* Cercles +/- (quel que soit le markup v3) */
+.snipcart .snipcart-item-line__quantity button,
+.snipcart .snipcart-item-quantity button{
   background:var(--gd-card); color:var(--gd-text);
-  border:1px solid var(--gd-border); border-radius:8px;
-  width:40px; height:40px; line-height:38px; font-size:20px; cursor:pointer;
+  border:1px solid var(--gd-border);
+  width:40px; height:40px; border-radius:999px;
 }
-.__qty-btn:focus{ outline:2px solid var(--gd-focus); }
-.__qty-btn:hover{ filter:brightness(1.05); }
+.snipcart .snipcart-item-line__quantity button .snipcart__icon,
+.snipcart .snipcart-item-quantity button .snipcart__icon{ color:var(--gd-text); }
 
-/* Masque le custom field “Multiplicateur” seulement si l’attribut est présent */
-.snipcart .snipcart-item-custom-field[data-snipcart-custom-field-label="Multiplicateur"]{ display:none !important; }
+/* =================================================================== */
+/* PAIEMENT — champs + erreurs lisibles                                 */
+/* =================================================================== */
 
-/* dropdowns */
-.snipcart .snipcart-form__select option{ background:var(--gd-card); color:var(--gd-text); }
+/* Titres/labels bien clairs */
+.snipcart .snipcart-payment__form .snipcart__font--subtitle,
+.snipcart .snipcart-payment__form label,
+.snipcart .snipcart__font--subtitle{
+  color:var(--gd-heading) !important;
+}
 
-/* résumé sticky (si utilisé) */
-.snipcart .snipcart-cart-summary{ position: sticky; top: calc(var(--gd-header-h) + 12px); }
+/* Inputs du formulaire de carte (conteneurs contrôlés par Snipcart) */
+.snipcart .snipcart-payment__form .snipcart-input,
+.snipcart .snipcart-payment-card-form .snipcart-input,
+.snipcart .snipcart-payment__form input[type="text"],
+.snipcart .snipcart-payment-card-form input[type="text"]{
+  background:var(--gd-card) !important;
+  color:var(--gd-text) !important;
+  border:1px solid var(--gd-border) !important;
+}
+.snipcart .snipcart-payment__form .snipcart-input::placeholder,
+.snipcart .snipcart-payment-card-form input::placeholder{
+  color:var(--gd-muted) !important;
+}
+.snipcart .snipcart-payment__form .snipcart-input:focus,
+.snipcart .snipcart-payment-card-form input:focus{
+  outline:2px solid var(--gd-focus) !important;
+  border-color:var(--gd-focus) !important;
+}
 
-/* modal Snipcart sous header fixe (sans toucher les autres pages) */
+/* Stripe/Snipcart v3 : iframes des éléments de carte (non stylables à l’intérieur) */
+.snipcart iframe[title*="card"],
+.snipcart iframe[title*="Card"],
+.snipcart iframe[title*="number"],
+.snipcart iframe[title*="expiry"],
+.snipcart iframe[title*="cvc"]{
+  background:var(--gd-card) !important; /* contour/zone */
+  color-scheme: dark;                    /* hint pour thème sombre */
+  border-radius:8px;
+}
+
+/* États d’erreur sur champs */
+.snipcart .snipcart-form__field--error .snipcart-input,
+.snipcart .snipcart-form__field--error input,
+.snipcart .snipcart-form__field--error select{
+  border-color:var(--gd-error) !important;
+  box-shadow:0 0 0 2px rgba(248,113,113,.25);
+}
+.snipcart .snipcart-field-error,
+.snipcart .snipcart__error{
+  color:var(--gd-heading) !important;
+}
+
+/* Bandeaux/notifications d’erreur (ex. "Unable to process payment") */
+.snipcart [role="alert"],
+.snipcart .snipcart__notice,
+.snipcart .snipcart__notice--error,
+.snipcart .snipcart__notice--warning,
+.snipcart .snipcart-notification,
+.snipcart .snipcart-alert,
+.snipcart .snipcart__box--error{
+  background:var(--gd-card-2) !important;
+  color:var(--gd-heading) !important;
+  border:1px solid var(--gd-error) !important;
+}
+.snipcart .snipcart__notice a,
+.snipcart [role="alert"] a{
+  color:#fff !important;
+  text-decoration:underline;
+}
+
+/* =================================================================== */
+/* DIVERS                                                               */
+/* =================================================================== */
+
+/* Masquer UNIQUEMENT le champ custom "Multiplicateur" dans le panier */
+.snipcart .snipcart-item-custom-field[data-snipcart-custom-field-label="Multiplicateur"]{
+  display:none !important;
+}
+
+/* Dropdown options (fond sombre) */
+.snipcart .snipcart-form__select option{
+  background:var(--gd-card); color:var(--gd-text);
+}
+
+/* Résumé sticky sous le header si la colonne est sticky */
+.snipcart .snipcart-cart-summary{
+  position:sticky; top: calc(var(--gd-header-h) + 12px);
+}
+
+/* Modal Snipcart (version overlay) sous header fixe */
 .snipcart .snipcart-modal__container{
   top:var(--gd-header-h);
   height:calc(100vh - var(--gd-header-h));
