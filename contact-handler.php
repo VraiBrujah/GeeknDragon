@@ -68,7 +68,7 @@ if ($errors) {
 function sendSnipcartMail(string $to, string $subject, string $body, string $replyTo = ''): bool
 {
     $secret = getenv('SNIPCART_SECRET_API_KEY');
-    $from   = getenv('SMTP_USERNAME') ?: 'no-reply@geekndragon.com';
+    $from   = getenv('SMTP_USERNAME') ?: 'contact@geekndragon.com';
     if (!$secret) {
         return false;
     }
