@@ -38,8 +38,11 @@ if ($message === '') {
     $errors[] = 'Le message est requis.';
 }
 
-$recaptchaSecret   = getenv('RECAPTCHA_SECRET_KEY');
+$recaptchaSecret   = $_ENV['RECAPTCHA_SECRET_KEY'] ?? $_SERVER['RECAPTCHA_SECRET_KEY'] ?? getenv('RECAPTCHA_SECRET_KEY');
 $recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+if (!$recaptchaSecret) {
+    error_log('Missing environment variable: RECAPTCHA_SECRET_KEY', 3, __DIR__ . '/error_log');
+}
 if ($recaptchaSecret) {
     if ($recaptchaResponse === '') {
         $errors[] = 'Veuillez vérifier le reCAPTCHA.';
@@ -70,10 +73,15 @@ if ($errors) {
  */
 function sendSendgridMail(string $to, string $subject, string $body, string $replyTo = ''): bool
 {
-    $apiKey = getenv('SENDGRID_API_KEY');
-    $from   = getenv('SMTP_USERNAME') ?: 'contact@geekndragon.com';
+    $apiKey = $_ENV['SENDGRID_API_KEY'] ?? $_SERVER['SENDGRID_API_KEY'] ?? getenv('SENDGRID_API_KEY');
+    $from   = $_ENV['SMTP_USERNAME'] ?? $_SERVER['SMTP_USERNAME'] ?? getenv('SMTP_USERNAME');
     if (!$apiKey) {
+        error_log('Missing environment variable: SENDGRID_API_KEY', 3, __DIR__ . '/error_log');
         return false;
+    }
+    if (!$from) {
+        error_log('Missing environment variable: SMTP_USERNAME', 3, __DIR__ . '/error_log');
+        $from = 'contact@geekndragon.com';
     }
 
     $payload = [
@@ -106,7 +114,11 @@ function sendSendgridMail(string $to, string $subject, string $body, string $rep
     curl_close($ch);
     return $status >= 200 && $status < 300;
 }
-$to = getenv('QUOTE_EMAIL') ?: 'contact@geekndragon.com';
+$to = $_ENV['QUOTE_EMAIL'] ?? $_SERVER['QUOTE_EMAIL'] ?? getenv('QUOTE_EMAIL');
+if (!$to) {
+    error_log('Missing environment variable: QUOTE_EMAIL', 3, __DIR__ . '/error_log');
+    $to = 'contact@geekndragon.com';
+}
 $subject = 'Nouveau message depuis le formulaire de contact';
 $body = "Nom: $nom\nEmail: $email\nTéléphone: $telephone\nMessage:\n$message";
 
