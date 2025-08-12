@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require __DIR__.'/bootstrap.php';
 
 // Pour du debug léger (à retirer en prod)
 ini_set('display_errors', '0');
@@ -10,21 +11,25 @@ function header_value(string $name): ?string {
   return $_SERVER[$key] ?? null;
 }
 
-$token  = header_value('X-Snipcart-RequestToken');
-
-// Récupère la clé secrète depuis l'environnement avec un fallback
+// Récupère les clés depuis l'environnement
+$apiKey = getenv('SNIPCART_API_KEY');
 $secret = getenv('SNIPCART_SECRET_API_KEY');
-if (!$secret) {
-  // Fallback en dur identique à snipcart-init.php pour les envs sans variable
-  $secret = 'S_MDdhYmU2NWMtYmI5ZC00NmI0LWJjZGUtZDdkYTZjYTRmZTMxNjM4ODkxMjUzODg0NDc4ODU4';
+if (!$apiKey || !$secret) {
+  error_log('Snipcart API keys not configured');
+  http_response_code(500);
+  header('Content-Type: application/json');
+  echo json_encode(['errors' => [['key' => 'config', 'message' => 'Snipcart API keys not configured']]]);
+  exit;
 }
+
+$token  = header_value('X-Snipcart-RequestToken');
 
 // DOIT être la clé SECRÈTE **Live** si le checkout est Live
 
-if (!$token || !$secret) {
+if (!$token) {
   http_response_code(400);
   header('Content-Type: application/json');
-  echo json_encode(['errors' => [['key'=>'missing-token','message'=>'Jeton ou configuration manquants']]]);
+  echo json_encode(['errors' => [['key'=>'missing-token','message'=>'Jeton manquant']]]);
   exit;
 }
 
