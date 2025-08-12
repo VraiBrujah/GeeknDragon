@@ -5,11 +5,9 @@ require __DIR__ . '/bootstrap.php';
 $products = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true);
 $stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true);
 $apiKey = $_ENV['SNIPCART_API_KEY']
-    ?? $_SERVER['SNIPCART_API_KEY']
-    ?? getenv('SNIPCART_API_KEY');
+    ?? $_SERVER['SNIPCART_API_KEY'];
 $secret = $_ENV['SNIPCART_SECRET_API_KEY']
-    ?? $_SERVER['SNIPCART_SECRET_API_KEY']
-    ?? getenv('SNIPCART_SECRET_API_KEY');
+    ?? $_SERVER['SNIPCART_SECRET_API_KEY'];
 if (!$apiKey || !$secret) {
     error_log('Snipcart API keys not configured');
     fwrite(STDERR, "Snipcart API keys not configured\n");
