@@ -175,6 +175,7 @@
 }
 
 
+
 /* --- Corbeille visible et placée à gauche du nom --- */
 
 /* Le header d’une ligne de produit est un flex container */
@@ -202,4 +203,20 @@
   color: #ff4d4f !important;       /* rouge visible */
   fill: currentColor !important;
   opacity: 1 !important;
+
+
+/* Ensure secondary action buttons like the address "OK" remain readable */
+.snipcart-button-secondary,
+.snipcart__button--secondary {
+  color: #ffffff;
+  background-color: #333333;
+  border: 1px solid #ffffff;
+}
+
+.snipcart-button-secondary:hover,
+.snipcart__button--secondary:hover,
+.snipcart-button-secondary:focus,
+.snipcart__button--secondary:focus {
+  filter: brightness(1.05);
+
 }
