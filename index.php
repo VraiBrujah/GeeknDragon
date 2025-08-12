@@ -101,7 +101,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     
         <!-- Bloc témoignage -->
         <article class="bg-gray-800 p-6 mt-12 rounded-xl shadow-lg">
-          <img src="images/avisJoueurFlim2025.png" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
+          <img src="images/avisJoueurFlim2025.jpg" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-4" data-i18n="testimonials.quote1.title">« Finis les combats contre nos feuilles de personnage ! »</h4>
           <p class="text-lg leading-relaxed text-gray-200" data-i18n="testimonials.quote1.intro">
             De nombreux joueurs présents l’affirment : les pièces physiques changent tout.
