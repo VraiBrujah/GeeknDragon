@@ -1,8 +1,9 @@
 <?php
 // Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
-if (!isset($product['id'])) return;
 
-$id          = (string)$product['id'];
+if (!isset($product['id'])) return;
+$id = (string)$product['id'];
+
 $name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
 $desc        = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
@@ -12,89 +13,88 @@ $multipliers = $product['multipliers'] ?? [];
 ?>
 
 <?php if (inStock($id)) : ?>
-<article class="card-product">
-  <a href="<?= htmlspecialchars($url) ?>" class="media" style="aspect-ratio:1/1">
-    <img
-      src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-      alt="<?= htmlspecialchars($desc) ?>"
-      data-alt-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-      data-alt-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
-      loading="lazy" decoding="async" fetchpriority="low"
-      style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center"
-    >
+<div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
+            min-w-[21rem] sm:min-w-[22rem] md:min-w-[23rem]">
+  <a href="<?= htmlspecialchars($url) ?>">
+    <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+         alt="<?= htmlspecialchars($desc) ?>"
+         data-alt-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
+         data-alt-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
+         class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
   </a>
 
   <a href="<?= htmlspecialchars($url) ?>" class="block">
-    <h4 class="title"
+    <h4 class="text-center text-2xl font-semibold mb-2"
         data-name-fr="<?= htmlspecialchars($product['name']) ?>"
         data-name-en="<?= htmlspecialchars($product['name_en'] ?? $product['name']) ?>">
       <?= htmlspecialchars($name) ?>
     </h4>
   </a>
 
-  <p class="desc"
+  <p class="text-center mb-4 text-gray-300 flex-grow"
      data-desc-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
      data-desc-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>">
     <?= htmlspecialchars($desc) ?>
   </p>
 
-  <div class="mt-auto w-full flex flex-col items-center gap-4">
+	<div class="mt-auto flex flex-col items-center gap-4 w-full">
 
-    <!-- Quantité -->
-    <div class="flex flex-col items-center">
-      <label class="mb-2 text-center" data-i18n="product.quantity">Quantité</label>
-      <div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($id) ?>">
-        <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
-        <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-        <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
-      </div>
-    </div>
+	  <!-- Bloc quantité -->
+	  <div class="flex flex-col items-center">
+		<label class="mb-2 text-center" data-i18n="product.quantity">Quantité</label>
+		<div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($id) ?>">
+		  <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+		  <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
+		  <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+		</div>
+	  </div>
 
-    <!-- Multiplicateur (ou espace réservé pour garder les cartes alignées) -->
-    <div class="flex flex-col items-center h-[70px] justify-center">
-      <?php if (!empty($multipliers)) : ?>
-        <label for="multiplier-<?= htmlspecialchars($id) ?>" class="mb-2 text-center" data-i18n="product.multiplier">Multiplicateur</label>
-        <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select" data-target="<?= htmlspecialchars($id) ?>">
-          <?php foreach ($multipliers as $m): $m = (int)$m; ?>
-            <?php if ($m === 1): ?>
-              <option value="1" data-i18n="product.unit">unitaire</option>
-            <?php else: ?>
-              <option value="<?= $m ?>">x<?= $m ?></option>
-            <?php endif; ?>
-          <?php endforeach; ?>
-        </select>
-      <?php else: ?>
-        <div style="height:48px"></div>
-      <?php endif; ?>
-    </div>
+	  <!-- Bloc multiplicateur : affiché ou espace réservé -->
+	  <div class="flex flex-col items-center h-[70px] justify-center">
+		<?php if (!empty($multipliers)) : ?>
+		  <label for="multiplier-<?= htmlspecialchars($id) ?>" class="mb-2 text-center" data-i18n="product.multiplier">Multiplicateur</label>
+		  <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select text-black px-3 py-2 rounded" data-target="<?= htmlspecialchars($id) ?>">
+			<?php foreach ($multipliers as $m) :
+				$m = (int)$m; ?>
+			  <?php if ($m === 1) : ?>
+				<option value="1" data-i18n="product.unit">unitaire</option>
+			  <?php else : ?>
+				<option value="<?= $m ?>">x<?= $m ?></option>
+			  <?php endif; ?>
+			<?php endforeach; ?>
+		  </select>
+		<?php else : ?>
+		  <!-- Espace réservé pour alignement -->
+		  <div style="height:48px"></div>
+		<?php endif; ?>
+	  </div>
 
-    <!-- Bouton ajouter -->
-    <button
-      class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap w-full"
-      data-item-id="<?= htmlspecialchars($id) ?>"
-      data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-      data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-      data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-      data-item-description="<?= htmlspecialchars($desc) ?>"
-      data-item-description-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-      data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
-      data-item-price="<?= htmlspecialchars($price) ?>"
-      data-item-url="<?= htmlspecialchars($url) ?>"
-      data-item-quantity="1"
-      <?php if (!empty($multipliers)) : ?>
-        data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-        data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-        data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
-      <?php endif; ?>
-    >
-      <span data-i18n="product.add">Ajouter</span>
-    </button>
-  </div>
-</article>
+	  <!-- Bouton ajouter -->
+          <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
+                data-item-id="<?= htmlspecialchars($id) ?>"
+                data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
+                data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+                data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
+                data-item-description="<?= htmlspecialchars($desc) ?>"
+                data-item-description-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
+                data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
+                data-item-price="<?= htmlspecialchars($price) ?>"
+                data-item-url="<?= htmlspecialchars($url) ?>"
+                data-item-quantity="1"
+		<?php if (!empty($multipliers)) : ?>
+		  data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+		  data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
+		  data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+		<?php endif; ?>
+	  >
+		<span data-i18n="product.add">Ajouter</span>
+	  </button>
+	</div>
+</div>
 
-<!-- Patch “quantité + multiplicateur” au clic sur le bouton Snipcart -->
+<!-- Petit patch local si la page liste n'inclut pas déjà le listener global -->
 <script>
-(function () {
+(function(){
   if (window.__snipcartQtyPatch) return;
   window.__snipcartQtyPatch = true;
 
@@ -105,20 +105,16 @@ $multipliers = $product['multipliers'] ?? [];
     const id = btn.getAttribute('data-item-id');
     if (!id) return;
 
-    // quantité
     const qtyEl = document.getElementById('qty-' + id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
       if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
     }
 
-    // multiplicateur
     const multEl = document.getElementById('multiplier-' + id);
     if (multEl) {
       const mult = multEl.value;
       btn.setAttribute('data-item-custom1-value', mult);
-
-      // mettre le bon nom selon la langue visible
       const lang = document.documentElement.lang;
       const baseName = lang === 'en'
         ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
