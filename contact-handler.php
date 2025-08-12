@@ -106,9 +106,7 @@ function sendSendgridMail(string $to, string $subject, string $body, string $rep
     curl_close($ch);
     return $status >= 200 && $status < 300;
 }
-
-
-$to = 'contact@geekndragon.com';
+$to = getenv('QUOTE_EMAIL') ?: 'contact@geekndragon.com';
 $subject = 'Nouveau message depuis le formulaire de contact';
 $body = "Nom: $nom\nEmail: $email\nTéléphone: $telephone\nMessage:\n$message";
 
