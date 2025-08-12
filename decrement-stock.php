@@ -6,9 +6,9 @@
  * Webhook Snipcart « Order completed »
  * Décrémente automatiquement le stock via l'API Snipcart à chaque vente.
  *
- * 1. Vérifie la signature HMAC SHA-256 (header X-Snipcart-Signature)
- * 2. Vérifie le stock disponible via l'API Snipcart
- * 3. Soustrait la quantité vendue en envoyant une requête PATCH
+ * - Valide le token Snipcart (header X-Snipcart-RequestToken)
+ * - Vérifie le stock disponible via l'API Snipcart
+ * - Soustrait la quantité vendue en envoyant une requête PATCH
  * -------------------------------------------------------------
  * Stock JSON exemple :
  * {
@@ -18,8 +18,7 @@
  * }
  */
 
-// Clés secrètes
-define('WEBHOOK_SECRET', getenv('ORDER_SECRET'));
+// Clé secrète Snipcart
 define('SNIPCART_SECRET', getenv('SNIPCART_SECRET_API_KEY'));
 
 header('Content-Type: application/json');
@@ -32,8 +31,8 @@ function respond($code, $msg = [])
     exit;
 }
 
-if (empty(WEBHOOK_SECRET) || empty(SNIPCART_SECRET)) {
-    error_log('Secrets not configured');
+if (empty(SNIPCART_SECRET)) {
+    error_log('Snipcart secret not configured');
     respond(500, ['error' => 'config']);
 }
 
@@ -75,14 +74,8 @@ function snipcartRequest(string $method, string $endpoint, ?array $payload = nul
     return is_array($data) ? $data : [];
 }
 
-// 1. Vérifie signature
-$signature = $_SERVER['HTTP_X_SNIPCART_SIGNATURE'] ?? '';
-$raw       = file_get_contents('php://input');
-
-if (!hash_equals(hash_hmac('sha256', $raw, WEBHOOK_SECRET), $signature)) {
-    respond(401, ['error' => 'Invalid signature']);
-}
-
+// 1. Valide le token Snipcart
+$raw   = file_get_contents('php://input');
 $token = $_SERVER['HTTP_X_SNIPCART_REQUESTTOKEN'] ?? '';
 if (!validateToken($token)) {
     respond(401, ['error' => 'Invalid token']);

@@ -33,8 +33,6 @@ The application expects a few secrets to be provided through the environment:
 
 - `SNIPCART_API_KEY` – your public Snipcart API key.
 - `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates.
-- `SHIPPING_SECRET` – secret used by `shipping.php` to verify Snipcart webhook signatures.
-- `ORDER_SECRET` – secret used by `decrement-stock.php` when handling the "order completed" webhook.
 - `QUOTE_EMAIL` – recipient for quote requests.
 
 To send emails from the contact form, configure SMTP credentials for the fixed sender address `no-reply@geekndragon.com`:
@@ -47,7 +45,7 @@ To send emails from the contact form, configure SMTP credentials for the fixed s
 ## Local setup
 
 1. Install PHP (7.4 or newer) and clone this repository.
-2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SHIPPING_SECRET`, `ORDER_SECRET` and the SMTP variables.
+2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY` and the SMTP variables.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
 3. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
 
@@ -101,7 +99,7 @@ deployment:
     - /usr/bin/rsync -av --delete --exclude='.git/' . "$DEPLOYPATH"
 ```
 
-Adjust the path as needed for your own hosting. Ensure the environment variables are set in cPanel so that the Snipcart shipping and order webhooks work.
+Adjust the path as needed for your own hosting. Ensure the environment variables are set in cPanel so that the Snipcart webhooks work.
 
 In the Snipcart dashboard:
 
