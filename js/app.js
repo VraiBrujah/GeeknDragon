@@ -5,15 +5,14 @@
    ===================================================================== */
 
 /* global Swiper, Fancybox */
+/* eslint-disable */
 
 /* ========================================================================
    UTILITAIRES GÉNÉRIQUES
    ===================================================================== */
 (() => {
-  'use strict';
-
   // Sélecteurs rapides
-  const qs  = (sel, root = document) => root.querySelector(sel);
+  const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
   // Pas d’erreurs si console absente
@@ -21,7 +20,8 @@
 
   // Throttle / Debounce
   const throttle = (fn, wait = 100) => {
-    let last = 0, timer = null;
+    let last = 0; let
+      timer = null;
     return function throttled(...args) {
       const now = Date.now();
       if (now - last >= wait) {
@@ -32,7 +32,7 @@
     };
   };
   const debounce = (fn, wait = 120) => {
-    let t; return function debounced(...args){ clearTimeout(t); t = setTimeout(() => fn.apply(this,args), wait); };
+    let t; return function debounced(...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), wait); };
   };
 
   // Helpers DOM
@@ -43,7 +43,7 @@
       else if (k === 'style') Object.assign(el.style, v);
       else if (v !== null && v !== undefined) el.setAttribute(k, v);
     });
-    [].concat(children).forEach(c => {
+    [].concat(children).forEach((c) => {
       if (typeof c === 'string') el.appendChild(document.createTextNode(c));
       else if (c) el.appendChild(c);
     });
@@ -52,7 +52,7 @@
 
   // Cookies
   const setCookie = (name, value, maxAge = 31536000) => {
-    try { document.cookie = `${name}=${value};path=/;max-age=${maxAge}`; } catch(_) {}
+    try { document.cookie = `${name}=${value};path=/;max-age=${maxAge}`; } catch (_) {}
   };
   const getCookie = (name) => {
     try {
@@ -66,8 +66,8 @@
   const DEFAULT_LANG = 'fr';
   const getLang = () => {
     const fromStorage = localStorage.getItem('lang');
-    const fromCookie  = getCookie('lang');
-    const fromHtml    = document.documentElement.lang;
+    const fromCookie = getCookie('lang');
+    const fromHtml = document.documentElement.lang;
     const lang = (fromStorage || fromCookie || fromHtml || DEFAULT_LANG).toLowerCase();
     return LANGS.includes(lang) ? lang : DEFAULT_LANG;
   };
@@ -99,12 +99,11 @@
     const set = () => { nodes = qsa(focusableSel, container); [first] = nodes; last = nodes[nodes.length - 1]; };
     const handler = (e) => {
       if (e.key !== 'Tab' || !nodes.length) return;
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     };
     return {
-      mount(){ set(); container.addEventListener('keydown', handler); },
-      unmount(){ container.removeEventListener('keydown', handler); }
+      mount() { set(); container.addEventListener('keydown', handler); },
+      unmount() { container.removeEventListener('keydown', handler); },
     };
   };
 
@@ -121,8 +120,17 @@
 
   // Expose utilitaires
   window.GD = Object.assign(window.GD || {}, {
-    qs, qsa, log, throttle, debounce, createEl,
-    getLang, setLang, smoothScrollTo, getHeaderOffset, focusTrap
+    qs,
+    qsa,
+    log,
+    throttle,
+    debounce,
+    createEl,
+    getLang,
+    setLang,
+    smoothScrollTo,
+    getHeaderOffset,
+    focusTrap,
   });
 })();
 
@@ -177,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function loadTranslations(current) {
     fetch(`/translations/${current}.json`)
-      .then((res) => res.ok ? res.json() : null)
+      .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (!data) return;
         window.i18n = data;
@@ -217,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)
         document.querySelectorAll('[data-role^="multiplier-"]').forEach((sel) => {
-          const role = sel.dataset.role; // multiplier-fr / multiplier-en
+          const { role } = sel.dataset; // multiplier-fr / multiplier-en
           const isFor = role?.split('-')[1];
           if (!isFor) return;
           sel.closest('.multiplier-wrapper')?.classList.toggle('hidden', isFor !== current);
@@ -256,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     window.GD.smoothScrollTo(target);
     if (a.matches('nav .nav-link')) {
-      document.querySelectorAll('nav .nav-link.is-active').forEach(x => x.classList.remove('is-active'));
+      document.querySelectorAll('nav .nav-link.is-active').forEach((x) => x.classList.remove('is-active'));
       a.classList.add('is-active');
     }
   }, { passive: false });
@@ -266,10 +274,10 @@ document.addEventListener('DOMContentLoaded', () => {
    MENU MOBILE (panneau + overlay + focus trap)
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  const menuBtn    = document.getElementById('menu-btn');
+  const menuBtn = document.getElementById('menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-  const overlay    = document.getElementById('menu-overlay');
-  const closeBtn   = document.getElementById('menu-close');
+  const overlay = document.getElementById('menu-overlay');
+  const closeBtn = document.getElementById('menu-close');
   if (!menuBtn || !mobileMenu || !overlay) return;
 
   const trap = window.GD.focusTrap(mobileMenu);
@@ -443,8 +451,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   videos.forEach((vid, idx) => {
     vid.addEventListener('click', () => {
-      if (vid.paused) { if (!audioOK) enableAudio(); current = idx; start(vid); }
-      else { vid.pause(); }
+      if (vid.paused) { if (!audioOK) enableAudio(); current = idx; start(vid); } else { vid.pause(); }
     });
   });
 
@@ -569,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dragToClose: true,
       closeButton: 'top',
       placeFocusBack: true,
-      on: { close: () => window.history.back() }
+      on: { close: () => window.history.back() },
     });
   }
 });
@@ -604,15 +611,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const setBtnState = () => {
     const cv = cartVisible();
     const av = accountVisible();
-    cartBtns.forEach(b => b.classList.toggle('is-active', cv));
-    accountBtns.forEach(b => b.classList.toggle('is-active', av));
+    cartBtns.forEach((b) => b.classList.toggle('is-active', cv));
+    accountBtns.forEach((b) => b.classList.toggle('is-active', av));
   };
   window.addEventListener('snipcart.ready', setBtnState);
   window.addEventListener('snipcart.opened', setBtnState);
   window.addEventListener('snipcart.closed', setBtnState);
 
-  const hookStore = () => { try { const store = window.Snipcart.store; if (store) store.subscribe(() => setBtnState()); } catch (_) {} };
-  (function poll() { if (window.Snipcart && window.Snipcart.store) hookStore(); else setTimeout(poll, 300); })();
+  const hookStore = () => { try { const { store } = window.Snipcart; if (store) store.subscribe(() => setBtnState()); } catch (_) {} };
+  (function poll() { if (window.Snipcart && window.Snipcart.store) hookStore(); else setTimeout(poll, 300); }());
 });
 
 /* ========================================================================
@@ -626,8 +633,8 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach((e) => {
         if (!e.isIntersecting) return;
         const img = e.target;
-        const src = img.dataset.src;
-        const srcset = img.dataset.srcset;
+        const { src } = img.dataset;
+        const { srcset } = img.dataset;
         if (src) img.src = src;
         if (srcset) img.srcset = srcset;
         obs.unobserve(img);
@@ -663,14 +670,14 @@ document.addEventListener('DOMContentLoaded', () => {
       target.hidden = false;
       btn.setAttribute('aria-expanded', 'true');
       target.style.height = 'auto';
-      const h = target.clientHeight + 'px';
+      const h = `${target.clientHeight}px`;
       target.style.height = '0px';
       requestAnimationFrame(() => { target.style.height = h; });
       target.addEventListener('transitionend', () => { target.style.height = 'auto'; }, { once: true });
     };
     const close = () => {
       btn.setAttribute('aria-expanded', 'false');
-      target.style.height = target.clientHeight + 'px';
+      target.style.height = `${target.clientHeight}px`;
       requestAnimationFrame(() => { target.style.height = '0px'; });
       target.addEventListener('transitionend', () => { target.hidden = true; target.style.height = ''; }, { once: true });
     };
@@ -701,14 +708,14 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ========================================================================
    SNIPCART — synchronisation au clic "Ajouter au panier"
    ===================================================================== */
-document.addEventListener('click', function (e) {
+document.addEventListener('click', (e) => {
   const btn = e.target.closest('.snipcart-add-item');
   if (!btn) return;
 
   const id = btn.dataset.itemId;
 
   // Quantité depuis l’UI carte
-  const qtyEl = document.getElementById('qty-' + id);
+  const qtyEl = document.getElementById(`qty-${id}`);
   if (qtyEl) {
     const q = parseInt(qtyEl.textContent, 10);
     if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
