@@ -754,10 +754,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Verrouille le scroll de la page quand la modale Snipcart est ouverte
-window.addEventListener('snipcart.opened', () => document.body.classList.add('snipcart-open'));
-window.addEventListener('snipcart.closed', () => document.body.classList.remove('snipcart-open'));
-window.addEventListener('snipcart.ready', () => {
+// Verrouille le scroll de la page uniquement pour le panier/checkout (pas pour la facture)
+const toggleSnipcartScroll = () => {
+  const root = document.getElementById('snipcart');
+  const inOrder = !!root?.querySelector('.snipcart-order');
   const visible = window.Snipcart?.store?.getState()?.cart?.status === 'visible';
-  document.body.classList.toggle('snipcart-open', !!visible);
+  document.body.classList.toggle('snipcart-open', visible && !inOrder);
+};
+
+window.addEventListener('snipcart.opened', toggleSnipcartScroll);
+window.addEventListener('snipcart.closed', toggleSnipcartScroll);
+window.addEventListener('snipcart.ready', () => {
+  const root = document.getElementById('snipcart');
+  if (root) {
+    new MutationObserver(toggleSnipcartScroll).observe(root, { childList: true, subtree: true });
+  }
+  toggleSnipcartScroll();
 });
