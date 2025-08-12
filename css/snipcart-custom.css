@@ -89,9 +89,8 @@
   color: #ffffff;
 }
 
-/* Hide multiplier custom field and variant dropdown in cart */
-.snipcart-item-custom-field,
-.snipcart-item-line__variants {
+/* Hide multiplier custom field in cart */
+.snipcart-item-custom-field {
   display: none;
 }
 
