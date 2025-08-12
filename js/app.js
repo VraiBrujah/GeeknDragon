@@ -835,3 +835,51 @@ document.addEventListener('click', function (e) {
     btn.setAttribute('data-item-name', mult !== '1' ? `${baseName} x${mult}` : baseName);
   }
 }, { passive: true });
+
+
+/* ========== Lisibilité des options de livraison (thème sombre) ========== */
+:root{
+  /* Entrées & listes (dont shipping rates) */
+  --bgColor-input:#0f172a;
+  --bgColor-input-hover:#111827;
+  --bgColor-input-focus:#111827;
+  --borderColor-input:#374151;
+  --borderColor-input-hover:#6366f1;
+  --borderColor-input-focus:#6366f1;
+  --color-input:#e5e7eb;
+  --color-input-hover:#f3f4f6;
+  --color-input-focus:#ffffff;
+  --color-inputLabel:#e5e7eb;
+  --color-inputPlaceholder:#9ca3af;
+  --color-inputIcon:#9ca3af;
+  --color-inputIcon-hover:#e5e7eb;
+  --color-inputIcon-focus:#a5b4fc;
+}
+
+/* Cartes d’options de livraison + prix à droite */
+.snipcart .snipcart-shipping-rates-list-item{
+  background-color:var(--bgColor-input) !important;
+  color:var(--color-input) !important;
+  border-color:var(--borderColor-input) !important;
+}
+.snipcart .snipcart-shipping-rates-list-item--right{
+  color:var(--color-input) !important;
+}
+
+/* Radio + libellés */
+.snipcart .snipcart-form-radio + label{
+  color:var(--color-input) !important;
+}
+.snipcart .snipcart-form-radio + label:before{
+  background-color:var(--bgColor-input) !important;
+  border-color:var(--borderColor-input) !important;
+}
+.snipcart .snipcart-form-radio:checked + label:before{
+  background-color:var(--bgColor-buttonPrimary,#4f46e5) !important;
+  border-color:transparent !important;
+}
+
+/* Bordure de l’option active */
+.snipcart .snipcart-shipping-rates-list-item--highlight{
+  border-color:var(--borderColor-input-focus) !important;
+}
