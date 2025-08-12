@@ -5,10 +5,15 @@ $snipcartKey = $_ENV['SNIPCART_API_KEY']
 $snipcartLanguage = $_ENV['SNIPCART_LANGUAGE']
     ?? $_SERVER['SNIPCART_LANGUAGE'];
 $snipcartAddProductBehavior = $_ENV['SNIPCART_ADD_PRODUCT_BEHAVIOR']
-    ?? $_SERVER['SNIPCART_ADD_PRODUCT_BEHAVIOR'];
+    ?? $_SERVER['SNIPCART_ADD_PRODUCT_BEHAVIOR']
+    ?? 'standard';
 
-if (!$snipcartKey || !$snipcartLanguage || !$snipcartAddProductBehavior) {
-    throw new RuntimeException('SNIPCART_API_KEY, SNIPCART_LANGUAGE et SNIPCART_ADD_PRODUCT_BEHAVIOR doivent être définies.');
+if (!$snipcartAddProductBehavior) {
+    $snipcartAddProductBehavior = 'standard';
+}
+
+if (!$snipcartKey || !$snipcartLanguage) {
+    throw new RuntimeException('SNIPCART_API_KEY et SNIPCART_LANGUAGE doivent être définies.');
 }
 ?>
 <div hidden id="snipcart" data-api-key="<?= htmlspecialchars($snipcartKey) ?>"></div>
