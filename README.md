@@ -35,6 +35,7 @@ The application expects a few secrets to be provided through the environment:
 - `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates.
 - `SHIPPING_SECRET` – secret used by `shipping.php` to verify Snipcart webhook signatures.
 - `ORDER_SECRET` – secret used by `decrement-stock.php` when handling the "order completed" webhook.
+- `QUOTE_EMAIL` – recipient for quote requests.
 
 To send emails from the contact form, configure SMTP credentials for the fixed sender address `no-reply@geekndragon.com`:
 

@@ -62,15 +62,47 @@ if ($errors) {
     exit;
 }
 
-$to = 'contact@geekndragon.com';
+/**
+ * Envoie un e-mail via l'API Snipcart.
+ */
+function sendSnipcartMail(string $to, string $subject, string $body, string $replyTo = ''): bool
+{
+    $secret = getenv('SNIPCART_SECRET_API_KEY');
+    $from   = getenv('SMTP_USERNAME') ?: 'no-reply@geekndragon.com';
+    if (!$secret) {
+        return false;
+    }
+
+    $payload = [
+        'to'       => $to,
+        'from'     => $from,
+        'subject'  => $subject,
+        'textBody' => $body,
+    ];
+    if ($replyTo) {
+        $payload['replyTo'] = $replyTo;
+    }
+
+    $ch = curl_init('https://app.snipcart.com/api/email');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST           => true,
+        CURLOPT_USERPWD        => $secret . ':',
+        CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
+        CURLOPT_POSTFIELDS     => json_encode($payload),
+    ]);
+    curl_exec($ch);
+    $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    curl_close($ch);
+    return $status >= 200 && $status < 300;
+}
+
+$to = getenv('QUOTE_EMAIL') ?: getenv('SMTP_USERNAME') ?: 'contact@geekndragon.com';
 $subject = 'Nouveau message depuis le formulaire de contact';
 $body = "Nom: $nom\nEmail: $email\nTéléphone: $telephone\nMessage:\n$message";
-$headers = "From: no-reply@geekndragon.com\r\n" .
-           "Reply-To: $email\r\n" .
-           'X-Mailer: PHP/' . phpversion();
 
-if (!mail($to, $subject, $body, $headers)) {
-    error_log('Mail Error: failed to send', 3, __DIR__ . '/error_log');
+if (!sendSnipcartMail($to, $subject, $body, $email)) {
+    error_log('Mail Error: failed to send via Snipcart', 3, __DIR__ . '/error_log');
     $_SESSION['errors'] = ["Une erreur est survenue lors de l'envoi du message."];
     $_SESSION['old'] = $old;
     header('Location: contact.php');
