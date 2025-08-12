@@ -631,3 +631,67 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 /* ========================================================================
    FIN – (le fichier dépasse 500 lignes pour inclure des utilitaires utiles)
    ===================================================================== */
+
+/* === Boutique — grille & cartes produits === */
+
+/* conteneur centré : largeur max et padding latéraux */
+.shop-wrap{max-width:1200px;margin-inline:auto;padding-inline:1rem}
+
+/* grille responsive avec espaces réguliers */
+.shop-grid{
+  display:grid;
+  grid-template-columns:repeat(1,minmax(0,1fr));
+  gap:2rem;                /* espace entre les cartes */
+}
+@media (min-width:640px){  /* >= sm */
+  .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:1024px){ /* >= lg */
+  .shop-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+/* carte homogène, centrée et égales en hauteur */
+.card-product{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  height:100%;
+  border-radius:.75rem;background:#1f2937; /* gray-800 */
+  padding:1.25rem;box-shadow:0 10px 20px -8px rgba(0,0,0,.6);
+}
+
+/* zone média carrée, l’image s’adapte sans déformer */
+.card-product .media{
+  width:100%;aspect-ratio:1/1; /* carré, cf. support: très large */
+  position:relative;overflow:hidden;border-radius:.75rem;
+  background:rgba(255,255,255,.035);
+}
+.card-product .media img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;object-position:center; /* image contenue */
+}
+
+/* titres et textes centrés, sans débordement */
+.card-product .title{
+  margin-top:.75rem;font-family:'Cinzel',serif;font-weight:700;
+  font-size:1.125rem;line-height:1.3;
+  word-break:break-word;hyphens:auto;
+}
+.card-product .desc{
+  margin-top:.5rem;color:#cbd5e1; /* slate-300 */
+  font-size:.95rem;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;
+  overflow:hidden; /* clamp sur 3 lignes */
+}
+
+/* rangées quantité / multiplicateur */
+.qty-row,.mult-row{
+  display:flex;align-items:center;justify-content:center;gap:.75rem;margin-top:.75rem;
+}
+
+/* select Multiplicateur lisible */
+.multiplier-select{
+  min-width:156px;padding:.5rem .75rem;border-radius:.5rem;
+  background:#0b1220;color:#e5e7eb;border:1px solid rgba(129,140,248,.5);
+}
+
+/* bouton plein largeur & ancré en bas de carte */
+.card-product .btn-shop{width:100%;margin-top:auto}
