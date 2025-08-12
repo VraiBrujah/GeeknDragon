@@ -5,6 +5,8 @@ session_start();
 
 require_once __DIR__ . '/recaptcha.php';
 
+
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: contact.php');
     exit;
@@ -104,7 +106,8 @@ function sendSnipcartMail(string $to, string $subject, string $body, string $rep
     return $status >= 200 && $status < 300;
 }
 
-$to = getenv('QUOTE_EMAIL') ?: getenv('SMTP_USERNAME') ?: 'contact@geekndragon.com';
+
+$to = 'contact@geekndragon.com';
 $subject = 'Nouveau message depuis le formulaire de contact';
 $body = "Nom: $nom\nEmail: $email\nTéléphone: $telephone\nMessage:\n$message";
 
