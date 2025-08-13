@@ -88,9 +88,7 @@
     "unit": "single",
     "add": "Add",
     "outOfStock": "Out of stock",
-    "insufficientStock": "Insufficient stock",
-    "securePayment": "Secure payment via Snipcart",
-    "realTimeStock": "Stock updated in real time"
+    "securePayment": "Secure payment via Snipcart"
   },
   "shop": {
     "hero": {
@@ -101,8 +99,7 @@
     "intro": {
       "title": "Handcrafted treasures",
       "description": "Collectible items and handcrafted game aids, made in Quebec.",
-      "payment": "Secure payment via Snipcart",
-      "stock": "Stock updated in real time."
+      "payment": "Secure payment via Snipcart"
     },
     "pieces": {
       "title": "Metal coins",

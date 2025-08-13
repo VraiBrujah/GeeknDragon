@@ -6,7 +6,6 @@ require __DIR__ . '/i18n.php';
 $active = 'boutique';
 $id = preg_replace('/[^a-z0-9_-]/i', '', $_GET['id'] ?? '');
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
-$stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
 $snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
 
 if (!$id || !isset($data[$id])) {
@@ -29,7 +28,7 @@ $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 
 function getStock(string $id): ?int
 {
-    global $snipcartSecret, $stockData;
+    global $snipcartSecret;
     static $cache = [];
     if (isset($cache[$id])) {
         return $cache[$id];
@@ -49,7 +48,7 @@ function getStock(string $id): ?int
         $inv = json_decode($res, true);
         return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
     }
-    return $cache[$id] = $stockData[$id] ?? null;
+    return $cache[$id] = null;
 }
 
 function inStock(string $id): bool
@@ -211,7 +210,6 @@ echo $snipcartInit;
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
 </script>
 
-<script>window.stock = <?= json_encode([$id => getStock($id)]) ?>;</script>
 <script src="js/app.js"></script>
 
 <!-- Patch : mettre à jour quantité & multiplicateur juste avant l’ajout -->
