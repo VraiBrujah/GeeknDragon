@@ -46,7 +46,7 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
-    "multipliers": [" x 1", " x 10", " x 100", " x 1 000", " x 10 000"]
+    "multipliers": ["&nbsp;x 1", " x 10", " x 100", " x 1 000", " x 10 000"]
   },
   "lot25": {
     "name": "La Monnaie des Cinq Royaumes",
