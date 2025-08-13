@@ -26,6 +26,7 @@ if (!$snipcartKey || !$snipcartLanguage) {
       addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
       locale: lang,
       customerAccount: { enabled: true },
+      analytics: { enabled: false },
     },
   };
 
