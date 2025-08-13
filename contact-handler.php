@@ -60,7 +60,7 @@ function sendSendgridMail(string $to, string $subject, string $body, string $rep
 {
     global $debug, $sendgridLogger;
     $apiKey = $_ENV['SENDGRID_API_KEY'] ?? $_SERVER['SENDGRID_API_KEY'];
-    $from   = $_ENV['SMTP_USERNAME'] ?? $_SERVER['SMTP_USERNAME'];
+    $from   = $_ENV['SMTP_USERNAME'] ?? $_SERVER['SMTP_USERNAME'] ?? 'contact@geekndragon.com';
     if (!$apiKey) {
         $sendgridLogger('Missing environment variable: SENDGRID_API_KEY');
         return false;
