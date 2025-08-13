@@ -2,6 +2,7 @@
 require __DIR__ . '/bootstrap.php';
 
 session_start();
+$debug = filter_var($_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: contact.php');
@@ -51,16 +52,21 @@ if ($errors) {
 /**
  * Envoie un e-mail via l'API SendGrid.
  */
-function sendSendgridMail(string $to, string $subject, string $body, string $replyTo = ''): bool
+$sendgridLogger = function (string $message) {
+    error_log($message, 3, __DIR__ . '/error_log');
+};
+
+function sendSendgridMail(string $to, string $subject, string $body, string $replyTo = '', ?array &$details = null): bool
 {
+    global $debug, $sendgridLogger;
     $apiKey = $_ENV['SENDGRID_API_KEY'] ?? $_SERVER['SENDGRID_API_KEY'];
     $from   = $_ENV['SMTP_USERNAME'] ?? $_SERVER['SMTP_USERNAME'];
     if (!$apiKey) {
-        error_log('Missing environment variable: SENDGRID_API_KEY', 3, __DIR__ . '/error_log');
+        $sendgridLogger('Missing environment variable: SENDGRID_API_KEY');
         return false;
     }
     if (!$from) {
-        error_log('Missing environment variable: SMTP_USERNAME', 3, __DIR__ . '/error_log');
+        $sendgridLogger('Missing environment variable: SMTP_USERNAME');
         $from = 'contact@geekndragon.com';
     }
 
@@ -92,15 +98,16 @@ function sendSendgridMail(string $to, string $subject, string $body, string $rep
     $response = curl_exec($ch);
     $status   = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
     $error    = curl_error($ch);
-    if ($status < 200 || $status >= 300) {
-        error_log(
-            "SendGrid error: status $status, response: $response, curl_error: $error",
-            3,
-            __DIR__ . '/error_log'
-        );
+    $details = [
+        'status'    => $status,
+        'response'  => $response,
+        'curl_error'=> $error,
+    ];
+    if ($debug || $status < 200 || $status >= 300 || $error) {
+        $sendgridLogger("SendGrid response: status $status, response: $response, curl_error: $error");
     }
     curl_close($ch);
-    return $status >= 200 && $status < 300;
+    return $status >= 200 && $status < 300 && !$error;
 }
 $to = $_ENV['QUOTE_EMAIL'] ?? $_SERVER['QUOTE_EMAIL'];
 if (!$to) {
@@ -110,9 +117,17 @@ if (!$to) {
 $subject = 'Nouveau message depuis le formulaire de contact';
 $body = "Nom: $nom\nEmail: $email\nTéléphone: $telephone\nMessage:\n$message";
 
-if (!sendSendgridMail($to, $subject, $body, $email)) {
-    error_log('Mail Error: failed to send via SendGrid', 3, __DIR__ . '/error_log');
-    $_SESSION['errors'] = ["Une erreur est survenue lors de l'envoi du message."];
+$details = [];
+if (!sendSendgridMail($to, $subject, $body, $email, $details)) {
+    $errorMessage = "Une erreur est survenue lors de l'envoi du message. Vous pouvez nous contacter directement à <a href=\"mailto:" . htmlspecialchars($to, ENT_QUOTES, 'UTF-8') . "\">" . htmlspecialchars($to, ENT_QUOTES, 'UTF-8') . "</a>.";
+    if ($debug) {
+        $errorMessage .= ' Détails: statut ' . htmlspecialchars((string)($details['status'] ?? ''), ENT_QUOTES, 'UTF-8') .
+            ', réponse: ' . htmlspecialchars($details['response'] ?? '', ENT_QUOTES, 'UTF-8');
+        if (!empty($details['curl_error'])) {
+            $errorMessage .= ', erreur cURL: ' . htmlspecialchars($details['curl_error'], ENT_QUOTES, 'UTF-8');
+        }
+    }
+    $_SESSION['errors'] = [$errorMessage];
     $_SESSION['old'] = $old;
     header('Location: contact.php');
     exit;
