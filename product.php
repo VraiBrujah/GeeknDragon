@@ -134,18 +134,7 @@ echo $snipcartInit;
         <?= $productDescHtml ?>
       </div>
 
-      <?php if (!empty($multipliers)) : ?>
-        <div class="text-center mb-4 w-full">
-          <label class="block mb-2" for="multiplier-<?= htmlspecialchars($id) ?>">
-            <?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>
-          </label>
-          <select id="multiplier-<?= htmlspecialchars($id) ?>" class="select">
-            <?php foreach ($multipliers as $m): ?>
-              <option value="<?= htmlspecialchars((string)$m) ?>">x<?= htmlspecialchars((string)$m) ?></option>
-            <?php endforeach; ?>
-          </select>
-        </div>
-      <?php endif; ?>
+
 
       <?php if (inStock($id)) : ?>
         <div class="text-center mb-4 w-full">
