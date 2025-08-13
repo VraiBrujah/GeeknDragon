@@ -212,7 +212,10 @@
 
 /* Quantité : champ + boutons plus grands */
 .snipcart .snipcart-item-line__quantity,
-.snipcart .snipcart-item-quantity{ order:5; display:flex; align-items:center; gap:.5rem; }
+.snipcart .snipcart-item-quantity{
+  order:5; display:flex; align-items:center; justify-content:center; gap:.5rem;
+  min-width:10rem;
+}
 
 .snipcart .gd-qty-input {
   background: var(--gd-card);
