@@ -113,6 +113,12 @@
   color:var(--color-input) !important;
   border:1px solid var(--borderColor-input) !important;
 }
+
+.snipcart .snipcart-form__select,
+.snipcart select{
+  min-width:10rem;
+}
+
 .snipcart input::placeholder,
 .snipcart textarea::placeholder,
 .snipcart .snipcart-typeahead__input::placeholder{
