@@ -421,12 +421,12 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 /* conteneur centré : largeur max et padding latéraux */
 .shop-wrap{ max-width:1200px; margin-inline:auto; padding-inline:1rem; }
 
-/* grille responsive régulière */
+/* grille responsive adaptative */
 .shop-grid{
-  display:grid; grid-template-columns:repeat(1,minmax(0,1fr)); gap:2rem;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:2rem;
 }
-@media (min-width:640px){ .shop-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media (min-width:1024px){ .shop-grid{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
 
 /* bouton plein largeur & ancré en bas de carte */
 .card-product .btn-shop{ width:100%; margin-top:auto; }
