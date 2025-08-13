@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.querySelectorAll('[data-desc-fr]').forEach((el) => {
           const target = current === 'en' ? el.dataset.descEn : el.dataset.descFr;
-          if (target) el.textContent = target;
+          if (target) el.innerHTML = target;
         });
         document.querySelectorAll('[data-alt-fr]').forEach((el) => {
           const target = current === 'en' ? el.dataset.altEn : el.dataset.altFr;
@@ -415,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateBtn(vid) {
     const b = document.querySelector(`.mute-btn[data-video="${vid.id}"]`);
-    if (b) b.textContent = vid.muted ? '🔇' : '🔊';
+    if (b) b.innerHTML = vid.muted ? '🔇' : '🔊';
   }
 
   const enableAudio = () => {
@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const updatePlus = (id) => {
     const max = stock[id];
-    const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
+    const qty = parseInt(document.getElementById(`qty-${id}`)?.innerHTML || '1', 10);
     const plusBtn = document.querySelector(`.quantity-btn.plus[data-target="${id}"]`);
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
     const over = max != null && (max <= 0 || qty >= max);
@@ -491,8 +491,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       addBtn.disabled = over;
       addBtn.title = over ? insufficientText : '';
-      if (label) label.textContent = over ? insufficientText : addText;
-      priceSpan.textContent = (over || hidePrice || !unitPrice) ? '' : `— ${unitPrice * qty} $`;
+      if (label) label.innerHTML = over ? insufficientText : addText;
+      priceSpan.innerHTML = (over || hidePrice || !unitPrice) ? '' : `— ${unitPrice * qty} $`;
     }
   };
   window.updatePlus = updatePlus;
@@ -503,11 +503,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = btn.dataset.target;
       const qtySpan = document.getElementById(`qty-${id}`);
       if (!qtySpan) return;
-      let qty = parseInt(qtySpan.textContent, 10) || 1;
+      let qty = parseInt(qtySpan.innerHTML, 10) || 1;
       const max = stock[id];
       if (btn.classList.contains('minus')) qty = Math.max(1, qty - 1);
       else if (max == null || qty + 1 <= max) qty += 1;
-      qtySpan.textContent = qty;
+      qtySpan.innerHTML = qty;
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
       if (addBtn) addBtn.setAttribute('data-item-quantity', String(qty));
       updatePlus(id);
@@ -532,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = sel.dataset.target;
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
     const update = () => {
-      const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
+      const qty = parseInt(document.getElementById(`qty-${id}`)?.innerHTML || '1', 10);
       if (addBtn) {
         addBtn.setAttribute('data-item-custom1-value', sel.value);
         addBtn.setAttribute('data-item-quantity', String(qty));
@@ -717,7 +717,7 @@ document.addEventListener('click', (e) => {
   // Quantité depuis l’UI carte
   const qtyEl = document.getElementById(`qty-${id}`);
   if (qtyEl) {
-    const q = parseInt(qtyEl.textContent, 10);
+    const q = parseInt(qtyEl.innerHTML, 10);
     if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
   }
 
