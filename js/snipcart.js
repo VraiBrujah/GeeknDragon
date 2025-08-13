@@ -108,15 +108,7 @@
     const minus = mkBtn('−', 'Diminuer la quantité');
     const plus  = mkBtn('+', 'Augmenter la quantité');
 
-    // Style input pour coller à ton thème sombre
-    input.style.backgroundColor = '#333333';
-    input.style.color = '#ffffff';
-    input.style.border = '1px solid #444';
-    input.style.borderRadius = '6px';
-    input.style.height = '32px';
-    input.style.padding = '0 8px';
-    input.style.width = '64px';
-    input.style.textAlign = 'center';
+    input.classList.add('gd-qty-input');
 
     // Injection: [-][input][+]
     qtyBlock.insertBefore(wrap, input);

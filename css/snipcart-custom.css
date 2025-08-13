@@ -203,12 +203,17 @@
 .snipcart .snipcart-item-line__quantity,
 .snipcart .snipcart-item-quantity{ display:flex; align-items:center; gap:.5rem; }
 
-.snipcart .snipcart-item-line__quantity input,
-.snipcart .snipcart-item-quantity input{
-  background:var(--gd-card) !important;
-  color:var(--gd-text) !important;
-  border:1px solid var(--gd-border) !important;
-  height:40px !important; width:82px !important; font-size:18px !important; text-align:center;
+.snipcart .gd-qty-input {
+  background: var(--gd-card);
+  color: var(--gd-text);
+  border: 1px solid var(--gd-border);
+  border-radius: 6px;
+  height: 2rem;
+  padding: 0 0.5rem;
+  font-size: 18px;
+  text-align: center;
+  min-width: 3rem;
+  max-width: 5rem;
 }
 
 /* Cercles +/- (quel que soit le markup v3) */
@@ -216,7 +221,7 @@
 .snipcart .snipcart-item-quantity button{
   background:var(--gd-card); color:var(--gd-text);
   border:1px solid var(--gd-border);
-  width:40px; height:40px; border-radius:999px;
+  width:2rem; height:2rem; border-radius:999px;
 }
 .snipcart .snipcart-item-line__quantity button .snipcart__icon,
 .snipcart .snipcart-item-quantity button .snipcart__icon{ color:var(--gd-text); }

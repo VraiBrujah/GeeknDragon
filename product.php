@@ -19,6 +19,10 @@ $product = $data[$id];
 $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
 $productDesc = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 
+// Parse Markdown description to HTML for display
+$parsedown = new Parsedown();
+$htmlDesc  = $parsedown->text($productDesc);
+
 $title  = $productName . ' | Geek & Dragon';
 $metaDescription = $productDesc;
 $host = $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
@@ -116,9 +120,11 @@ echo $snipcartInit;
           data-name-fr="<?= $displayName ?>"
           data-name-en="<?= $displayNameEn ?>"><?= $displayName ?></h1>
 
-      <p class="mb-6 text-gray-300 text-center"
-         data-desc-fr="<?= htmlspecialchars($product['description']) ?>"
-         data-desc-en="<?= htmlspecialchars($descriptionEn) ?>"><?= htmlspecialchars($product['description']) ?></p>
+        <div class="mb-6 text-gray-300 text-center"
+             data-desc-fr="<?= htmlspecialchars($product['description']) ?>"
+             data-desc-en="<?= htmlspecialchars($descriptionEn) ?>">
+          <?= $htmlDesc ?>
+        </div>
 
       <?php if (inStock($id)) : ?>
       <div class="text-center mb-4 w-full">
