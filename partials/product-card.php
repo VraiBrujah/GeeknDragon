@@ -12,12 +12,8 @@ $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
 
 static $parsedown;
-if (class_exists('Parsedown')) {
-    $parsedown = $parsedown ?? new Parsedown();
-    $htmlDesc  = $parsedown->text($desc);
-} else {
-    $htmlDesc = nl2br(htmlspecialchars($desc));
-}
+$parsedown = $parsedown ?? new Parsedown();
+$htmlDesc  = $parsedown->text($desc);
 ?>
 
 <?php if (inStock($id)) : ?>

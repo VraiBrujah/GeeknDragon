@@ -20,12 +20,8 @@ $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $pro
 $productDesc = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 
 // Parse Markdown description to HTML for display
-if (class_exists('Parsedown')) {
-    $parsedown = new Parsedown();
-    $htmlDesc  = $parsedown->text($productDesc);
-} else {
-    $htmlDesc = nl2br(htmlspecialchars($productDesc));
-}
+$parsedown = new Parsedown();
+$htmlDesc  = $parsedown->text($productDesc);
 
 $title  = $productName . ' | Geek & Dragon';
 $metaDescription = $productDesc;
