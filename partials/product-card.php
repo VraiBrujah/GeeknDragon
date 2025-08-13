@@ -67,11 +67,6 @@ $isInStock = inStock($id);
               data-item-price="<?= htmlspecialchars($price) ?>"
               data-item-url="<?= htmlspecialchars($url) ?>"
               data-item-quantity="1"
-        <?php if (!empty($multipliers)) : ?>
-        data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-        data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-        data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
-      <?php endif; ?>
       >
         <span data-i18n="product.add">Ajouter</span>
       </button>
