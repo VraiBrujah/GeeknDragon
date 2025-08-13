@@ -181,13 +181,14 @@
 /* =================================================================== */
 /* LIGNES PRODUIT (corbeille à gauche + quantité lisible)               */
 /* =================================================================== */
-.snipcart .snipcart-item-line{ display:flex; align-items:center; gap:.5rem; padding:.5rem 0; }
+.snipcart .snipcart-item-line{ display:flex; align-items:flex-start; flex-wrap:wrap; gap:.5rem; padding:.5rem 0; }
 .snipcart .snipcart-item-line + .snipcart-item-line{ margin-top:.5rem; }
 
 .snipcart .snipcart-item-line__header{ display:flex; align-items:center; }
 .snipcart .snipcart-item-line__media--small{ order:1; }
 .snipcart .snipcart-item-line__actions{ order:2; margin:0 .75rem 0 .25rem !important; opacity:1 !important; }
 .snipcart .snipcart-item-line__title{ order:3; }
+.snipcart .snipcart-item-line__custom-fields{ flex-basis:100%; order:4; margin-top:.25rem; }
 
 /* Bouton corbeille visible */
 .snipcart .snipcart-item-line__actions .snipcart__button--icon{
@@ -201,7 +202,7 @@
 
 /* Quantité : champ + boutons plus grands */
 .snipcart .snipcart-item-line__quantity,
-.snipcart .snipcart-item-quantity{ display:flex; align-items:center; gap:.5rem; }
+.snipcart .snipcart-item-quantity{ order:5; display:flex; align-items:center; gap:.5rem; }
 
 .snipcart .gd-qty-input {
   background: var(--gd-card);
