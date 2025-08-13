@@ -38,7 +38,7 @@ The application expects a few secrets to be provided through the environment:
 - `SENDGRID_API_KEY` – API key for the SendGrid SMTP service used to send emails.
 - `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
 
-To send emails from the contact form using SendGrid's SMTP service, configure credentials for the fixed sender address `no-reply@geekndragon.com`:
+To send emails from the contact form using SendGrid's SMTP service, configure credentials for the fixed sender address `contact@geekndragon.com`:
 
 - `SMTP_HOST` – SMTP server hostname (for SendGrid use `smtp.sendgrid.net`).
 - `SMTP_PORT` – SMTP server port (defaults to 587 if unset).
