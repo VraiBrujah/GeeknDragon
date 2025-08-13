@@ -10,6 +10,10 @@ $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $url         = $product['url'] ?? ('product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
+
+static $parsedown;
+$parsedown = $parsedown ?? new Parsedown();
+$htmlDesc  = $parsedown->text($desc);
 ?>
 
 <?php if (inStock($id)) : ?>
@@ -31,11 +35,11 @@ $multipliers = $product['multipliers'] ?? [];
     </h4>
   </a>
 
-  <p class="text-center mb-4 text-gray-300 flex-grow"
+  <div class="text-center mb-4 text-gray-300 flex-grow"
      data-desc-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
      data-desc-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>">
-    <?= htmlspecialchars($desc) ?>
-  </p>
+    <?= $htmlDesc ?>
+  </div>
 
 
 
