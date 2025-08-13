@@ -79,7 +79,6 @@ $extraHead = <<<HTML
   .quantity-selector { display: inline-flex; align-items: center; gap: .75rem; }
   .quantity-btn { width: 36px; height: 36px; border-radius: 9999px; background: #111827; color: #e5e7eb; border: 1px solid rgba(255,255,255,.2); }
   .qty-value { min-width: 1.5rem; display: inline-block; text-align: center; }
-  select.select { background:#111827; color:#e5e7eb; border:1px solid rgba(255,255,255,.2); border-radius:.5rem; padding:.5rem .75rem; }
 </style>
 HTML;
 ?>
@@ -139,10 +138,19 @@ echo $snipcartInit;
       <?php if (inStock($id)) : ?>
         <div class="text-center mb-4 w-full">
           <label class="block mb-2" data-i18n="product.quantity">Quantité</label>
-          <div class="quantity-selector justify-center mx-auto" data-id="<?= htmlspecialchars($id) ?>">
-            <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
-            <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-            <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+          <div class="flex items-center justify-center gap-4">
+            <?php if (!empty($multipliers)) : ?>
+              <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select select" data-target="<?= htmlspecialchars($id) ?>">
+                <?php foreach ($multipliers as $mult) : ?>
+                  <option value="<?= htmlspecialchars((string)$mult) ?>">x<?= htmlspecialchars((string)$mult) ?></option>
+                <?php endforeach; ?>
+              </select>
+            <?php endif; ?>
+            <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
+              <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+              <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
+              <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+            </div>
           </div>
         </div>
 
