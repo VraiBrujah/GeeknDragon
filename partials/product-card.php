@@ -1,7 +1,9 @@
 <?php
 // Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
 
-if (!isset($product['id'])) return;
+if (!isset($product['id'])) {
+    return;
+}
 $id = (string)$product['id'];
 
 $name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
@@ -12,12 +14,8 @@ $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
 
 static $parsedown;
-if (class_exists('Parsedown')) {
-    $parsedown = $parsedown ?? new Parsedown();
-    $htmlDesc  = $parsedown->text($desc);
-} else {
-    $htmlDesc = nl2br(htmlspecialchars($desc));
-}
+$parsedown = $parsedown ?? new Parsedown();
+$htmlDesc  = $parsedown->text($desc);
 ?>
 
 <?php if (inStock($id)) : ?>
@@ -51,19 +49,19 @@ if (class_exists('Parsedown')) {
   <div class="mt-auto w-full flex flex-col items-center gap-4">
 
 
-	  <!-- Bloc quantité -->
-	  <div class="flex flex-col items-center">
-		<label class="mb-2 text-center" data-i18n="product.quantity">Quantité</label>
-		<div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($id) ?>">
-		  <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
-		  <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-		  <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
-		</div>
-	  </div>
+      <!-- Bloc quantité -->
+      <div class="flex flex-col items-center">
+        <label class="mb-2 text-center" data-i18n="product.quantity">Quantité</label>
+        <div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($id) ?>">
+          <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+          <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
+          <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+        </div>
+      </div>
 
 
 
-	  <!-- Bouton ajouter -->
+      <!-- Bouton ajouter -->
           <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
                 data-item-id="<?= htmlspecialchars($id) ?>"
                 data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
@@ -75,15 +73,15 @@ if (class_exists('Parsedown')) {
                 data-item-price="<?= htmlspecialchars($price) ?>"
                 data-item-url="<?= htmlspecialchars($url) ?>"
                 data-item-quantity="1"
-		<?php if (!empty($multipliers)) : ?>
-		  data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-		  data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-		  data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
-		<?php endif; ?>
-	  >
-		<span data-i18n="product.add">Ajouter</span>
-	  </button>
-	</div>
+        <?php if (!empty($multipliers)) : ?>
+          data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+          data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
+          data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+        <?php endif; ?>
+      >
+        <span data-i18n="product.add">Ajouter</span>
+      </button>
+    </div>
 </div>
 
 <!-- Petit patch local si la page liste n'inclut pas déjà le listener global -->

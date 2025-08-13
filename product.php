@@ -19,13 +19,8 @@ $product = $data[$id];
 $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
 $productDesc = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 
-// Parse Markdown description to HTML for display
-if (class_exists('Parsedown')) {
-    $parsedown = new Parsedown();
-    $htmlDesc  = $parsedown->text($productDesc);
-} else {
-    $htmlDesc = nl2br(htmlspecialchars($productDesc));
-}
+$parsedown = new Parsedown();
+$htmlDesc  = $parsedown->text($productDesc);
 
 $title  = $productName . ' | Geek & Dragon';
 $metaDescription = $productDesc;
@@ -100,24 +95,24 @@ echo $snipcartInit;
 
     <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center card">
       <?php if (!empty($images)) : ?>
-      <div class="swiper mb-6 w-full">
-        <div class="swiper-wrapper">
-          <?php foreach ($images as $img) : ?>
-          <div class="swiper-slide">
-            <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
-              <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
-                   alt="<?= htmlspecialchars($product['description']) ?>"
-                   data-alt-fr="<?= htmlspecialchars($product['description']) ?>"
-                   data-alt-en="<?= htmlspecialchars($descriptionEn) ?>"
-                   class="rounded w-full object-cover">
-            </a>
+        <div class="swiper mb-6 w-full">
+          <div class="swiper-wrapper">
+            <?php foreach ($images as $img) : ?>
+              <div class="swiper-slide">
+                <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
+                  <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
+                       alt="<?= htmlspecialchars($product['description']) ?>"
+                       data-alt-fr="<?= htmlspecialchars($product['description']) ?>"
+                       data-alt-en="<?= htmlspecialchars($descriptionEn) ?>"
+                       class="rounded w-full object-cover">
+                </a>
+              </div>
+            <?php endforeach; ?>
           </div>
-          <?php endforeach; ?>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
+          <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
-        <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
-      </div>
       <?php endif; ?>
 
       <h1 class="text-3xl font-bold mb-4 text-center"
@@ -153,11 +148,11 @@ echo $snipcartInit;
         data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
         data-item-url="<?= htmlspecialchars($metaUrl) ?>"
         data-item-quantity="1"
-        <?php if (!empty($multipliers)) : ?>
-          data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-          data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-          data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
-        <?php endif; ?>
+            <?php if (!empty($multipliers)) : ?>
+              data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+              data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
+              data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+            <?php endif; ?>
       >
         <span data-i18n="product.add">Ajouter</span>
       </button>
