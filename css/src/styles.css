@@ -355,7 +355,17 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 .text-muted{ color:var(--gd-muted); } .text-soft{ color:#cfd5ff; }
 .bg-soft{ background:rgba(255,255,255,.06); } .border-soft{ border:1px solid rgba(255,255,255,.08); }
 
-.grid-auto{ display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; }
+/* nouvelle version : carte min 340–360px => wrap si pas la place */
+.grid-auto{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.25rem;
+}
+@media (min-width:1280px){
+  .grid-auto{
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  }
+}
 
 .hero-overlay{ position:relative; }
 .hero-overlay::after{ content:""; position:absolute; inset:0; background:radial-gradient(1200px 500px at 50% -20%, rgba(255,255,255,.08), transparent 60%); pointer-events:none; }
