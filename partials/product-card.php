@@ -9,7 +9,7 @@ $id = (string)$product['id'];
 $name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
 $desc        = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
-$url         = $product['url'] ?? ('product.php?id=' . urlencode($id));
+$url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
 
