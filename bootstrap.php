@@ -1,5 +1,7 @@
 <?php
 
+header('Permissions-Policy: payment=(self)');
+
 require_once __DIR__ . '/vendor/erusev/parsedown/Parsedown.php';
 
 // Attempt to load Composer's autoloader only if all required files are present.
