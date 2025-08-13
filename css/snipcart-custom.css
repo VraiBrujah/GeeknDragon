@@ -241,6 +241,12 @@
   color:var(--gd-heading) !important;
 }
 
+/* Libellés des méthodes de paiement bien lisibles */
+.snipcart .snipcart-payment-methods .snipcart__font--regular,
+.snipcart .snipcart-payment-method__title{
+  color:var(--gd-heading) !important;
+}
+
 /* Inputs du formulaire de carte (conteneurs contrôlés par Snipcart) */
 .snipcart .snipcart-payment__form .snipcart-input,
 .snipcart .snipcart-payment-card-form .snipcart-input,
