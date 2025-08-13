@@ -57,7 +57,7 @@ foreach ($data as $id => $p) {
         'img' => $p['images'][0] ?? '',
         'description' => $p['description'],
         'description_en' => $p['description_en'] ?? $p['description'],
-        'url' => 'product.php?id=' . urlencode($id) . '&from=pieces',
+        'url' => '/product.php?id=' . urlencode($id) . '&from=pieces',
         'multipliers' => $p['multipliers'] ?? [],
     ];
 }
