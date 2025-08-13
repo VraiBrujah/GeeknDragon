@@ -4,7 +4,7 @@ Site web Geek&Dragon
 
 ## Project overview
 
-GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart.com/). It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and Snipcart handles the shopping cart and checkout. Stock levels are managed through Snipcart's Inventory API and automatically updated via webhooks when an order is completed.
+GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart.com/). It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and Snipcart handles the shopping cart and checkout. Stock levels are managed directly through Snipcart's Inventory API.
 
 ## Product lots and custom chests
 
@@ -67,7 +67,7 @@ To send emails from the contact form using SendGrid's SMTP service, configure cr
 
 Make sure that the domain you are using is allowed in your Snipcart dashboard; otherwise the cart may remain stuck at the "préparation" step.
 
-The Snipcart webhooks (`shipping.php` and `decrement-stock.php`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
+The Snipcart webhook (`shipping.php`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
 
 ## Error logging
 
@@ -102,12 +102,11 @@ deployment:
     - /usr/bin/rsync -av --delete --exclude='.git/' . "$DEPLOYPATH"
 ```
 
-Adjust the path as needed for your own hosting. Ensure the environment variables are set in cPanel so that the Snipcart webhooks work.
+Adjust the path as needed for your own hosting. Ensure the environment variables are set in cPanel so that the Snipcart webhook works.
 
 In the Snipcart dashboard:
 
 1. Set **Dynamic shipping** to `https://your-domain.com/shipping.php` and select the **POST** method.
-2. Set **Order completed** webhook to `https://your-domain.com/decrement-stock.php`.
 
-With these hooks enabled, stock levels update automatically and shipping rates are calculated dynamically when customers check out.
+With this hook enabled, shipping rates are calculated dynamically when customers check out.
 

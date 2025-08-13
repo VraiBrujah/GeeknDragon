@@ -460,25 +460,14 @@ document.addEventListener('DOMContentLoaded', () => {
    BOUTIQUE — quantités + multiplicateur + Swiper + Fancybox
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  const stock = window.stock || {};
-
   const updatePlus = (id) => {
-    const max = stock[id];
     const qty = parseInt(document.getElementById(`qty-${id}`)?.innerHTML || '1', 10);
-    const plusBtn = document.querySelector(`.quantity-btn.plus[data-target="${id}"]`);
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
-    const over = max != null && (max <= 0 || qty >= max);
     const hidePrice = addBtn?.dataset.hidePrice !== undefined;
     const unitPrice = addBtn ? parseFloat(addBtn.dataset.itemPrice || '0') : 0;
     const tr = window.i18n?.product || {};
     const addText = tr.add || 'Ajouter';
-    const insufficientText = tr.insufficientStock || 'Stock insuffisant';
 
-    if (plusBtn) {
-      const nextQty = qty + 1;
-      plusBtn.disabled = max != null && (max <= 0 || nextQty > max);
-      plusBtn.title = plusBtn.disabled ? insufficientText : '';
-    }
     if (addBtn) {
       const label = addBtn.querySelector('[data-i18n="product.add"]');
       let priceSpan = addBtn.querySelector('.price-text');
@@ -487,10 +476,10 @@ document.addEventListener('DOMContentLoaded', () => {
         priceSpan.className = 'price-text';
         addBtn.append(' ', priceSpan);
       }
-      addBtn.disabled = over;
-      addBtn.title = over ? insufficientText : '';
-      if (label) label.innerHTML = over ? insufficientText : addText;
-      priceSpan.innerHTML = (over || hidePrice || !unitPrice) ? '' : `— ${unitPrice * qty} $`;
+      addBtn.disabled = false;
+      addBtn.title = '';
+      if (label) label.innerHTML = addText;
+      priceSpan.innerHTML = (hidePrice || !unitPrice) ? '' : `— ${unitPrice * qty} $`;
     }
   };
   window.updatePlus = updatePlus;
@@ -502,9 +491,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const qtySpan = document.getElementById(`qty-${id}`);
       if (!qtySpan) return;
       let qty = parseInt(qtySpan.innerHTML, 10) || 1;
-      const max = stock[id];
       if (btn.classList.contains('minus')) qty = Math.max(1, qty - 1);
-      else if (max == null || qty + 1 <= max) qty += 1;
+      else qty += 1;
       qtySpan.innerHTML = qty;
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
       if (addBtn) addBtn.setAttribute('data-item-quantity', String(qty));

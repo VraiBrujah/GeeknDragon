@@ -9,18 +9,18 @@ $id = (string)$product['id'];
 $name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
 $desc        = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
-$url         = $product['url'] ?? ('product.php?id=' . urlencode($id));
+$url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
 
 static $parsedown;
 $parsedown = $parsedown ?? new Parsedown();
 $htmlDesc  = $parsedown->text($desc);
+$isInStock = inStock($id);
 ?>
 
-<?php if (inStock($id)) : ?>
 <div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
-            min-w-[21rem] sm:min-w-[22rem] md:min-w-[23rem]">
+            min-w-[21rem] sm:min-w-[22rem] md:min-w-[23rem] <?= $isInStock ? '' : 'oos' ?>">
   <a href="<?= htmlspecialchars($url) ?>">
     <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
          alt="<?= htmlspecialchars($desc) ?>"
@@ -47,8 +47,7 @@ $htmlDesc  = $parsedown->text($desc);
 
 
   <div class="mt-auto w-full flex flex-col items-center gap-4">
-
-
+    <?php if ($isInStock) : ?>
       <!-- Bloc quantité -->
       <div class="flex flex-col items-center">
         <label class="mb-2 text-center" data-i18n="product.quantity">Quantité</label>
@@ -59,26 +58,27 @@ $htmlDesc  = $parsedown->text($desc);
         </div>
       </div>
 
-
-
       <!-- Bouton ajouter -->
-          <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
-                data-item-id="<?= htmlspecialchars($id) ?>"
-                data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-                data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-                data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-                data-item-price="<?= htmlspecialchars($price) ?>"
-                data-item-url="<?= htmlspecialchars($url) ?>"
-                data-item-quantity="1"
-          <?php if (!empty($multipliers)) : ?>
-          data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-          data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-          data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
-        <?php endif; ?>
+      <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
+              data-item-id="<?= htmlspecialchars($id) ?>"
+              data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
+              data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+              data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
+              data-item-price="<?= htmlspecialchars($price) ?>"
+              data-item-url="<?= htmlspecialchars($url) ?>"
+              data-item-quantity="1"
+        <?php if (!empty($multipliers)) : ?>
+        data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+        data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
+        data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+      <?php endif; ?>
       >
         <span data-i18n="product.add">Ajouter</span>
       </button>
-    </div>
+    <?php else : ?>
+      <span class="btn btn-shop opacity-60 cursor-not-allowed" data-i18n="product.outOfStock">Rupture de stock</span>
+    <?php endif; ?>
+  </div>
 </div>
 
 <!-- Petit patch local si la page liste n'inclut pas déjà le listener global -->
@@ -113,4 +113,3 @@ $htmlDesc  = $parsedown->text($desc);
   }, { passive: true });
 })();
 </script>
-<?php endif; ?>

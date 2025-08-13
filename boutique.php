@@ -15,10 +15,9 @@ HTML;
 
 /* ───── STOCK ───── */
 $snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
-$stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
 function getStock(string $id): ?int
 {
-    global $snipcartSecret, $stockData;
+    global $snipcartSecret;
     static $cache = [];
     if (isset($cache[$id])) {
         return $cache[$id];
@@ -38,7 +37,7 @@ function getStock(string $id): ?int
         $inv = json_decode($res, true);
         return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
     }
-    return $cache[$id] = $stockData[$id] ?? null;
+    return $cache[$id] = null;
 }
 function inStock(string $id): bool
 {
@@ -58,13 +57,9 @@ foreach ($data as $id => $p) {
         'img' => $p['images'][0] ?? '',
         'description' => $p['description'],
         'description_en' => $p['description_en'] ?? $p['description'],
-        'url' => 'product.php?id=' . urlencode($id) . '&from=pieces',
+        'url' => '/product.php?id=' . urlencode($id) . '&from=pieces',
         'multipliers' => $p['multipliers'] ?? [],
     ];
-}
-$stock = [];
-foreach ($products as $p) {
-    $stock[$p['id']] = getStock($p['id']);
 }
 ?>
 <!DOCTYPE html>
@@ -203,7 +198,6 @@ echo $snipcartInit;
     }, $products),
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
 </script>
-  <script>window.stock = <?= json_encode($stock) ?>;</script>
   <script src="js/app.js"></script>
   <script src="/js/hero-videos.js"></script>
 </body>
