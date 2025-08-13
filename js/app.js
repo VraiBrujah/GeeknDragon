@@ -210,18 +210,16 @@ document.addEventListener('DOMContentLoaded', () => {
           if (target) el.setAttribute('alt', target);
         });
 
-        // Boutons Snipcart (nom/description + libellé custom)
-        document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
-          if (current === 'en') {
-            if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
-            if (btn.dataset.itemDescriptionEn) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionEn);
-          } else {
-            if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
-            if (btn.dataset.itemDescriptionFr) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
-          }
-          const hasCustom = btn.hasAttribute('data-item-custom1-name') && data?.product?.multiplier;
-          if (hasCustom) btn.setAttribute('data-item-custom1-name', data.product.multiplier);
-        });
+          // Boutons Snipcart (nom + libellé custom)
+          document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
+            if (current === 'en') {
+              if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
+            } else {
+              if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
+            }
+            const hasCustom = btn.hasAttribute('data-item-custom1-name') && data?.product?.multiplier;
+            if (hasCustom) btn.setAttribute('data-item-custom1-name', data.product.multiplier);
+          });
 
         // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)
         document.querySelectorAll('[data-role^="multiplier-"]').forEach((sel) => {

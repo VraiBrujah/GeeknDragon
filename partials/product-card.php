@@ -67,13 +67,10 @@ $htmlDesc  = $parsedown->text($desc);
                 data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
                 data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
                 data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-                data-item-description="<?= htmlspecialchars($desc) ?>"
-                data-item-description-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-                data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
                 data-item-price="<?= htmlspecialchars($price) ?>"
                 data-item-url="<?= htmlspecialchars($url) ?>"
                 data-item-quantity="1"
-        <?php if (!empty($multipliers)) : ?>
+          <?php if (!empty($multipliers)) : ?>
           data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
           data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
           data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"

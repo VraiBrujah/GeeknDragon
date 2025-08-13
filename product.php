@@ -159,17 +159,14 @@ echo $snipcartInit;
         </div>
 
         <button class="snipcart-add-item btn btn-shop"
-          data-item-id="<?= htmlspecialchars($id) ?>"
-          data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
-          data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-          data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-          data-item-description="<?= htmlspecialchars($productDescText) ?>"
-          data-item-description-fr="<?= htmlspecialchars(trim(strip_tags($product['description']))) ?>"
-          data-item-description-en="<?= htmlspecialchars(trim(strip_tags($product['description_en'] ?? $product['description']))) ?>"
-          data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
-          data-item-url="<?= htmlspecialchars($metaUrl) ?>"
-          data-item-quantity="1"
-          <?php if (!empty($multipliers)) : ?>
+            data-item-id="<?= htmlspecialchars($id) ?>"
+            data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
+            data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+            data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
+            data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
+            data-item-url="<?= htmlspecialchars($metaUrl) ?>"
+            data-item-quantity="1"
+            <?php if (!empty($multipliers)) : ?>
             data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
             data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
             data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
