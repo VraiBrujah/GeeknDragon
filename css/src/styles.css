@@ -117,7 +117,7 @@ h1,h2,h3,h4,h5,h6{ line-height:1.25; }
 }
 
 
-@media (min-width:1440px){
+@media (min-width:40px){
   .card-product .desc{
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -364,12 +364,12 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 /* nouvelle version : carte min 340–360px => wrap si pas la place */
 .grid-auto{
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(1440px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 1.25rem;
 }
 @media (min-width:1280px){
   .grid-auto{
-    grid-template-columns: repeat(auto-fit, minmax(1460px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   }
 }
 
