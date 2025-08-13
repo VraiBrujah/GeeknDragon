@@ -89,8 +89,16 @@ function sendSendgridMail(string $to, string $subject, string $body, string $rep
         ],
         CURLOPT_POSTFIELDS     => json_encode($payload),
     ]);
-    curl_exec($ch);
-    $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    $response = curl_exec($ch);
+    $status   = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    $error    = curl_error($ch);
+    if ($status < 200 || $status >= 300) {
+        error_log(
+            "SendGrid error: status $status, response: $response, curl_error: $error",
+            3,
+            __DIR__ . '/error_log'
+        );
+    }
     curl_close($ch);
     return $status >= 200 && $status < 300;
 }
