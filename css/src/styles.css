@@ -117,12 +117,13 @@ h1,h2,h3,h4,h5,h6{ line-height:1.25; }
 }
 
 
-/* descriptions dans les cartes produits : lisibles avant tout */
-.card-product .desc{
-  display: block;              /* annule le -webkit-box */
-  -webkit-line-clamp: unset;   /* supprime la troncature forcée */
-  overflow: visible;
-  max-height: none;
+@media (min-width:1440px){
+  .card-product .desc{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 8;     /* coupe “propre” après 8 lignes */
+    overflow: hidden;
+  }
 }
 
 /* ========================================================================
