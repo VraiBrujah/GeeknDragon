@@ -345,3 +345,27 @@ body.snipcart-open { overflow: hidden; }
 }
 
 }
+
+/* =================================================================== */
+/* PANIER : LARGEUR ET VARIATIONS LISIBLES SUR GRAND ÉCRAN             */
+/* =================================================================== */
+@media (min-width: 1024px) {
+  /* Conserver une largeur raisonnable pour éviter le layout "desktop" */
+  #snipcart .snipcart-modal__container {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Les champs de variation occupent toute la largeur et restent visibles */
+  #snipcart .snipcart-item-line__custom-fields,
+  #snipcart .custom-fields,
+  #snipcart .custom-field--standard,
+  #snipcart .custom-field--medium,
+  #snipcart .custom-field--large {
+    width: 100% !important;
+    min-width: 100% !important;
+    white-space: normal;
+  }
+}
+
