@@ -728,12 +728,12 @@ document.addEventListener('click', (e) => {
 
 /* ========================================================================
    SNIPCART — cacher UNIQUEMENT "Multiplicateur/Multiplier" dans le panier
-   (la quantité reste affichée)
+   (la quantité reste affichée) — Désactivé
    ===================================================================== */
-document.addEventListener('DOMContentLoaded', () => {
-  const root = document.getElementById('snipcart');
-  if (!root) return;
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   const root = document.getElementById('snipcart');
+//   if (!root) return;
+// });
 
 // Verrouille le scroll de la page uniquement pour le panier/checkout (pas pour la facture)
 const toggleSnipcartScroll = () => {
