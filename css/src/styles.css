@@ -240,9 +240,9 @@ header .max-w-7xl{ flex-wrap: wrap; }
   font-size: 0.75rem; line-height: 1rem; font-weight: 700; color:#fff;
 }
 
-/* 6) Espacement des boutons Snipcart selon l’orientation */
+/* 6) Empilement vertical (si le conteneur n’a pas déjà flex-col)
+   => applique un petit décalage entre les deux boutons */
 header .snipcart-btn + .snipcart-btn{ margin-top:.5rem; }
-@media (min-width:768px){ header .snipcart-btn + .snipcart-btn{ margin-top:0; margin-left:1rem; } }
 
 /* 7) États “actifs” globaux (liens & boutons) */
 .is-active,
