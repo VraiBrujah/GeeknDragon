@@ -120,7 +120,15 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
             <strong data-i18n="testimonials.quote1.p2strong">Fini les combats contre les feuilles de perso</strong>, <span data-i18n="testimonials.quote1.p2rest">les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la pièce tombe sur la table.</span>
           </p>
         </article>
-    
+
+        <!-- Bloc témoignage 2 -->
+        <article class="bg-gray-800 p-6 mt-12 rounded-xl shadow-lg">
+          <p class="text-lg leading-relaxed text-gray-200" data-i18n="testimonials.quote2.text">
+            Ma grande découverte au FLIM, mes enfants sont tombés en amours avec les pièces et depuis font pleins de tâches pour pouvoir échanger leur point contre une chasse au trésor qui pourront avoir leur propre coffre au trésor. Merci à Mathieu pour offrir ce super ajout pour l'initiation des enfants aux jeux de rôles.
+          </p>
+          <p class="mt-4 text-right text-gray-200" data-i18n="testimonials.quote2.author">— Gabrielle</p>
+        </article>
+
       </div>
     </section>
 
