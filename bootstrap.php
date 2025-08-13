@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__ . '/vendor/erusev/parsedown/Parsedown.php';
+
 // Attempt to load Composer's autoloader only if all required files are present.
 $vendorDir = __DIR__ . '/vendor';
 $autoload  = $vendorDir . '/autoload.php';
@@ -15,7 +18,6 @@ foreach ($polyfills as $file) {
         break;
     }
 }
-
 if ($canLoadVendor) {
     require_once $autoload;
 
@@ -23,12 +25,6 @@ if ($canLoadVendor) {
         Dotenv\Dotenv::createUnsafeImmutable(__DIR__)->safeLoad();
     }
 } else {
-    // Minimal fallback: load Parsedown manually if available.
-    $parsedownFile = $vendorDir . '/erusev/parsedown/Parsedown.php';
-    if (file_exists($parsedownFile)) {
-        require_once $parsedownFile;
-    }
-
     // Basic .env loader to emulate Dotenv functionality
     $envPath = __DIR__ . '/.env';
     if (file_exists($envPath)) {
@@ -47,4 +43,3 @@ if ($canLoadVendor) {
         }
     }
 }
-
