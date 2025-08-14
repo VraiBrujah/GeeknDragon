@@ -209,7 +209,7 @@
 	  "images/carte/Acide_verso.png",
 	  "images/carte/Acid_recto.png",
 	  "images/carte/Acid_verso.png"
-    ]
+    ],
 	"Langue": [" — Français", " — English"]
   },
 
@@ -237,7 +237,7 @@
 	  "images/carte/Matérield-alchimiste-verso.png",
 	  "images/carte/Alchemist_s Supplies_recto.png",
 	  "images/carte/Alchemist_s Supplies_verso.png"
-    ]
+    ],
 	"Langue": [" — Français", " — English"]
   },
 
@@ -265,7 +265,7 @@
 	  "images/carte/Sang d_Assassin_verso.png",
 	  "images/carte/Assassin_s Blood_recto.png",
 	  "images/carte/Assassin_s Blood_verso.png"
-    ]
+    ],
 	"Langue": [" — Français", " — English"]
   },  
   "triptyque-aleatoire": {
@@ -295,7 +295,7 @@
 	  "images/carte/Backpack_recto.png",
 	  "images/carte/Backpack_verso.png",
 	  "images/Piece/Lots/Vagabond/Vagabon.png"
-    ]
+    ],
 	"Langue": [" — Français", " — English"]
   }
 }
