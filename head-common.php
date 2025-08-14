@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">
   <link rel="stylesheet" href="/css/snipcart.css?v=<?= filemtime(__DIR__.'/css/snipcart.css') ?>">
   <link rel="stylesheet" href="/css/snipcart-custom.css?v=<?= filemtime(__DIR__.'/css/snipcart-custom.css') ?>">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 
