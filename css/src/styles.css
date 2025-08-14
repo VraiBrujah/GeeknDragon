@@ -34,7 +34,7 @@ h1,h2,h3,h4,h5,h6{ line-height:1.25; }
 .txt-court{ text-align:center; line-height:1.6; }
 
 /* Titre site */
-.site-title{ font-family:'Cinzel',serif; letter-spacing:.05em; }
+.site-title{ font-family:'Cinzel',serif; letter-spacing:.05em; white-space:normal; }
 
 /* Lien d’accès rapide */
 .skip-link{
