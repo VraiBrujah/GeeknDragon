@@ -96,7 +96,7 @@ include 'header.php';
 echo $snipcartInit;
 ?>
 
-<main id="main" class="pt-[var(--header-height)]">
+<main id="main" class="pt-[calc(var(--header-height)-5px)]">
 
   <!-- ===== HERO ===== -->
   <section class="min-h-screen flex items-center justify-center text-center relative text-white">
