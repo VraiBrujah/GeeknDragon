@@ -78,6 +78,7 @@ foreach ($data as $id => $p) {
             break;
     }
 }
+$products = array_merge($pieces, $cards, $triptychs);
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -216,7 +217,7 @@ echo $snipcartInit;
                 'availability' => inStock($p['id']) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
             ],
         ];
-    }, $products),
+    }, $products /* merged products */),
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
 </script>
   <script src="js/app.js"></script>
