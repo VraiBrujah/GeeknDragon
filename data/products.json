@@ -46,7 +46,7 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
-    "multipliers": [1, 10, 100, 1000, 10000]
+    "multipliers": ["— x1", "— x10", "— x100", "— x1 000", "— x10 000"]
   },
   "lot25": {
     "name": "La Monnaie des Cinq Royaumes",
@@ -187,7 +187,8 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
-    "multipliers": [1, 10, 100, 1000, 10000]
+
+    "multipliers": ["— x1", "— x10", "— x100", "— x1 000", "— x10 000"]
   },
   "cartes-magasin-armure": {
     "category": "cards",

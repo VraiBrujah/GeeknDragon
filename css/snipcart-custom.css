@@ -113,6 +113,13 @@
   color:var(--color-input) !important;
   border:1px solid var(--borderColor-input) !important;
 }
+
+.snipcart .snipcart-form__select,
+.snipcart select{
+  min-width:10rem;
+  padding-right:2.5rem;
+}
+
 .snipcart input::placeholder,
 .snipcart textarea::placeholder,
 .snipcart .snipcart-typeahead__input::placeholder{
@@ -190,8 +197,8 @@
 .snipcart .snipcart-item-line__title{ order:3; }
 .snipcart .snipcart-item-line__custom-fields{ flex-basis:100%; order:4; margin-top:.25rem; }
 
-/* Masquer la description, ne laisser que le titre */
-.snipcart .snipcart-item-line__information > *:not(.snipcart-item-line__title){ display:none !important; }
+/* Masquer uniquement la description pour conserver les autres informations */
+.snipcart .snipcart-item-line__information > .snipcart-item-line__description { display:none !important; }
 
 /* Bouton corbeille visible */
 .snipcart .snipcart-item-line__actions .snipcart__button--icon{
@@ -205,7 +212,10 @@
 
 /* Quantité : champ + boutons plus grands */
 .snipcart .snipcart-item-line__quantity,
-.snipcart .snipcart-item-quantity{ order:5; display:flex; align-items:center; gap:.5rem; }
+.snipcart .snipcart-item-quantity{
+  order:5; display:flex; align-items:center; justify-content:center; gap:.5rem;
+  min-width:10rem;
+}
 
 .snipcart .gd-qty-input {
   background: var(--gd-card);
@@ -238,6 +248,12 @@
 .snipcart .snipcart-payment__form .snipcart__font--subtitle,
 .snipcart .snipcart-payment__form label,
 .snipcart .snipcart__font--subtitle{
+  color:var(--gd-heading) !important;
+}
+
+/* Libellés des méthodes de paiement bien lisibles */
+.snipcart .snipcart-payment-methods .snipcart__font--regular,
+.snipcart .snipcart-payment-method__title{
   color:var(--gd-heading) !important;
 }
 

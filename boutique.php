@@ -126,9 +126,9 @@ echo $snipcartInit;
     <section class="py-24">
       <div class="max-w-3xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold mb-6" data-i18n="shop.chest.title">Coffres sur mesure</h3>
-        <a href="contact.php"><img src="images/Piece/pro/coffre.png" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
+        <a href="index.php#contact"><img src="images/Piece/pro/coffre.png" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
         <p class="mb-6 text-gray-300" data-i18n="shop.chest.description">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
-        <a href="contact.php" class="btn btn-primary" data-i18n="shop.chest.button">Demander un devis</a>
+        <a href="index.php#contact" class="btn btn-primary" data-i18n="shop.chest.button">Demander un devis</a>
       </div>
     </section>
 	
