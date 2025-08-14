@@ -12,6 +12,7 @@ $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
+$isLanguage  = !empty($multipliers) && preg_match('/fran[cç]ais|english/i', $multipliers[0]);
 
 static $parsedown;
 $parsedown = $parsedown ?? new Parsedown();
@@ -68,7 +69,7 @@ $isInStock = inStock($id);
               data-item-url="<?= htmlspecialchars($url) ?>"
               data-item-quantity="1"
         <?php if (!empty($multipliers)) : ?>
-        data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+        data-item-custom1-name="<?= htmlspecialchars($translations['product'][$isLanguage ? 'language' : 'multiplier'] ?? ($isLanguage ? 'Langue' : 'Multiplicateur')) ?>"
         data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
         data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
       <?php endif; ?>

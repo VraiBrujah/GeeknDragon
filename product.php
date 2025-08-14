@@ -62,6 +62,7 @@ $displayName   = str_replace(' – ', '<br>', $product['name']);
 $displayNameEn = str_replace(' – ', '<br>', $product['name_en'] ?? $product['name']);
 
 $multipliers   = $product['multipliers'] ?? [];
+$isLanguage    = !empty($multipliers) && preg_match('/fran[cç]ais|english/i', $multipliers[0]);
 $images        = $product['images'] ?? [];
 
 // CSS local pour une description propre
@@ -165,7 +166,7 @@ echo $snipcartInit;
             data-item-url="<?= htmlspecialchars($metaUrl) ?>"
             data-item-quantity="1"
             <?php if (!empty($multipliers)) : ?>
-            data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+            data-item-custom1-name="<?= htmlspecialchars($translations['product'][$isLanguage ? 'language' : 'multiplier'] ?? ($isLanguage ? 'Langue' : 'Multiplicateur')) ?>"
             data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
             data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
           <?php endif; ?>
