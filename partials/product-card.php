@@ -12,6 +12,11 @@ $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
+$languages   = $product['languages'] ?? [];
+$customOptions = !empty($languages) ? $languages : $multipliers;
+$customLabel = !empty($languages)
+    ? ($translations['product']['language'] ?? ($lang === 'en' ? 'Language' : 'Langue'))
+    : ($translations['product']['multiplier'] ?? ($lang === 'en' ? 'Multiplier' : 'Multiplicateur'));
 
 static $parsedown;
 $parsedown = $parsedown ?? new Parsedown();
@@ -67,10 +72,10 @@ $isInStock = inStock($id);
               data-item-price="<?= htmlspecialchars($price) ?>"
               data-item-url="<?= htmlspecialchars($url) ?>"
               data-item-quantity="1"
-        <?php if (!empty($multipliers)) : ?>
-        data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-        data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-        data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+        <?php if (!empty($customOptions)) : ?>
+        data-item-custom1-name="<?= htmlspecialchars($customLabel) ?>"
+        data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
+        data-item-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
       <?php endif; ?>
       >
         <span data-i18n="product.add">Ajouter</span>
