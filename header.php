@@ -81,7 +81,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
-  <div class="max-w-7xl mx-auto relative flex items-center md:justify-between p-4 md:px-6 gap-x-4 gap-y-2 flex-wrap overflow-visible">
+  <div class="max-w-7xl mx-auto relative flex items-center justify-between p-4 md:px-6 gap-x-4 gap-y-2 flex-nowrap overflow-visible">
     <!-- Logo + Titre cliquables ensemble -->
     <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex flex-col md:flex-row items-center group transition-colors duration-200 flex-shrink-0 space-y-1 md:space-y-0 md:space-x-3 text-center md:text-left">
       <!-- Nouveau SVG très grand : on le bride via la classe header-logo -->
@@ -92,7 +92,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </span>
     </a>
 
-    <div class="flex items-center gap-6 md:gap-8">
+    <div class="flex items-center gap-4 md:gap-8 flex-shrink-0">
       <!-- Bouton hamburger -->
       <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +108,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </nav>
 
       <!-- Sélecteur de langue (drapeaux) -->
-      <div id="lang-switcher" class="hidden md:flex items-center gap-2 order-2 md:order-3 ml-2">
+        <div id="lang-switcher" class="hidden md:flex items-center gap-2 order-2 md:order-3 ml-2 flex-shrink-0">
         <button type="button" data-lang="fr" class="flag-btn" aria-label="Français" aria-current="false">
           <img src="/images/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
         </button>
