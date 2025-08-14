@@ -8,7 +8,11 @@
  */
 
 $availableLangs = ['fr', 'en'];
-$lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? 'fr');
+$lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? null);
+if ($lang === null) {
+    $accept = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
+    $lang = str_starts_with(strtolower($accept), 'fr') ? 'fr' : 'en';
+}
 if (!in_array($lang, $availableLangs, true)) {
     $lang = 'fr';
 }
