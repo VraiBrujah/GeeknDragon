@@ -4,7 +4,7 @@ $urls = [];
 // Static pages
 $urls[] = '';
 $urls[] = 'boutique.php';
-$urls[] = 'contact.php';
+$urls[] = 'index.php#contact';
 // Actualités pages
 foreach (glob(__DIR__ . '/actualites/*.php') as $file) {
     $relative = str_replace(__DIR__ . '/', '', $file);

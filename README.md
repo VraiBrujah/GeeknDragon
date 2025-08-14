@@ -17,7 +17,7 @@ The shop offers several coin bundles:
 
 The corresponding product identifiers are `lot10`, `lot25`, `lot50-essence` and `lot50-tresorerie`. When adding or removing products, update `data/products.json` accordingly.
 
-Need more than 50 pieces or a custom assortment? Request a personalized chest through the [quote form](contact.php).
+Need more than 50 pieces or a custom assortment? Request a personalized chest through the [quote form](index.php#contact).
 
 ### Adding product images
 
