@@ -178,7 +178,10 @@ header nav a:hover{ text-decoration:underline; text-underline-offset:6px; }
 header nav a.is-active, header nav a[aria-current="page"]{
   color:#c7d2fe; text-decoration:underline; text-underline-offset:6px; text-decoration-thickness:2px;
 }
-header .max-w-7xl{ flex-wrap:nowrap; }
+header .max-w-7xl{ flex-wrap:wrap; }
+@media (min-width:768px){
+  header .max-w-7xl{ flex-wrap:nowrap; }
+}
 
 /* Snipcart (compte + panier) */
 .snipcart-btn{
