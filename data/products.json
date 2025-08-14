@@ -46,7 +46,7 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
-    "multipliers": ["— x1", "— x10", "— x100", "— x1 000", "— x10 000"]
+    "multipliers": ["‎ — x1", "‎ — x10", "‎ — x100", "‎ — x1 000", "‎ — x10 000"]
   },
   "lot25": {
     "name": "La Monnaie des Cinq Royaumes",
@@ -187,97 +187,84 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
+    "multipliers": ["‎ — x1", " — x10", " — x100", "‎ — x1 000", " — x10 000"]
+  },
+  "pack-182-arsenal-aventurier": {
+    "category": "cards",
+    "name": "Arsenal de l’Aventurier — 182 cartes",
+    "name_en": "Adventurer’s Arsenal — 182 Cards",
+    "price": 320,
+    "description": "<h3 style=\"text-align:center\">Armes • Armures • Équipement</h3><p>Un lot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l’essentiel d’aventure en cartes illustrées.</p><ul><li><strong>Armes</strong> : mêlée & distance, propriétés, munitions, notes d’usage.</li><li><strong>Armures & boucliers</strong> : catégories, CA, malus & exigences.</li><li><strong>Équipement</strong> : cordes, torches, rations, outils de terrain, etc.</li></ul><p><em>Idéal pour la table : pioche, pose, échange — fini la fouille dans le manuel.</em></p>",
+    "description_en": "<h3 style=\"text-align:center\">Weapons • Armor • Gear</h3><p>A massive, table‑ready set to outfit a whole party: classic & exotic weapons, protection for every build, and all core adventuring gear as illustrated cards.</p><ul><li><strong>Weapons</strong>: melee & ranged, properties, ammo, usage notes.</li><li><strong>Armor & shields</strong>: categories, AC, penalties & requirements.</li><li><strong>Equipment</strong>: ropes, torches, rations, field tools, and more.</li></ul><p><em>Perfect at the table: draw, place, trade — no more rulebook diving.</em></p>",
+    "images": [
+      "images/carte/Arme_recto.png",
+	  "images/carte/Arme_verso.png",
+	  "images/carte/Greatclub_recto.png",
+	  "images/carte/Greatclub_verso.png",
+      "images/carte/Armure_recto.png",
+	  "images/carte/Armure_verso.png",
+	  "images/carte/Armor_recto.png",
+	  "images/carte/Armor_verso.png",
+	  "images/carte/Acide_recto.png",
+	  "images/carte/Acide_verso.png",
+	  "images/carte/Acid_recto.png",
+	  "images/carte/Acid_verso.png"
+    ]
+  },
 
-    "multipliers": ["— x1", "— x10", "— x100", "— x1 000", "— x10 000"]
-  },
-  "cartes-magasin-armure": {
+  "pack-182-butins-ingenieries": {
     "category": "cards",
-    "name": "Cartes magasin – Armurier",
-    "name_en": "Shop Cards – Armorer",
-    "price": 28,
-    "description": "14 cartes illustrées pour équiper un magasin d’armure.",
-    "description_en": "14 illustrated cards to stock an armor shop.",
+    "name": "Butins & Ingénieries — 182 cartes",
+    "name_en": "Loot & Ingeniery — 182 Cards",
+    "price": 320,
+    "description": "<h3 style=\"text-align:center\">Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils</h3><p>Pour des campagnes qui osent : trésors variés, matériel instable, techno‑reliques et les indispensables de l’artisan.</p><ul><li><strong>Butin</strong> : gemmes, objets curieux, artefacts mineurs, reliques.</li><li><strong>Explosifs & armes modernes/futuristes</strong> : grenades, charges, armes à feu & à énergie (avec mises en garde).</li><li><strong>Marchandises</strong> : denrées, tissus, minerais, composants, valeurs & volumes.</li><li><strong>Outils</strong> : artisanats, crochetage, alchimie légère, kits spéciaux.</li></ul><p><em>Injecte de la variété et des choix tactiques — du troc de marché au braquage high‑fantasy.</em></p>",
+    "description_en": "<h3 style=\"text-align:center\">Loot • Explosives & Modern/Futuristic Weapons • Trade Goods • Tools</h3><p>For campaigns that push the envelope: varied treasures, volatile hardware, techno‑relics, and every crafter’s staple.</p><ul><li><strong>Loot</strong>: gems, curios, minor artifacts, relics.</li><li><strong>Explosives & modern/futur weapons</strong>: grenades, charges, firearms & energy weapons (with safety notes).</li><li><strong>Trade goods</strong>: foodstuffs, fabrics, ores, components, values & bulk.</li><li><strong>Tools</strong>: crafts, lockpicks, light alchemy, specialty kits.</li></ul><p><em>Add variety and tactical choices — from market bartering to high‑fantasy heists.</em></p>",
     "images": [
-      "images/cartes_equipement.png"
+      "images/carte/Alexandrite_recto.png",
+	  "images/carte/Alexandrite_verso.png",
+	  "images/carte/AlexandriteEN_recto.png",
+	  "images/carte/AlexandriteEN_verso.png",
+      "images/carte/Bombe_recto.png",
+	  "images/carte/Bombe_verso.png",
+	  "images/carte/Bomb_recto.png",
+	  "images/carte/Bomb_verso.png",
+	  "images/carte/Chèvre_recto.png",
+	  "images/carte/Chèvre_verso.png",
+	  "images/carte/Goat_recto.png",
+	  "images/carte/Goat_verso.png",
+	  "images/carte/Matérield-alchimiste-recto.png",
+	  "images/carte/Matérield-alchimiste-verso.png",
+	  "images/carte/Alchemist_s Supplies_recto.png",
+	  "images/carte/Alchemist_s Supplies_verso.png"
     ]
   },
-  "pack-explorateur": {
+
+  "pack-182-routes-services": {
     "category": "cards",
-    "name": "Pactage d’explorateur",
-    "name_en": "Explorer's Pack",
-    "price": 16,
-    "description": "8 cartes d’équipement pour le pactage d’explorateur.",
-    "description_en": "8 equipment cards for the Explorer's Pack.",
+    "name": "Routes & Services — 182 cartes",
+    "name_en": "Roads & Services — 182 Cards",
+    "price": 320,
+    "description": "<h3 style=\"text-align:center\">Paquetages • Services • Véhicules • Poisons</h3><p>Tout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque — avec des cartes claires et pratiques.</p><ul><li><strong>Paquetages</strong> : <em>artiste, cambrioleur, diplomate, ecclésiastique, érudit, explorateur, exploration souterraine</em> — chaque pack détaillé en cartes (contenu, poids, astuces).</li><li><strong>Services</strong> : hébergements, soins, transport, passeurs, mercenaires, tarifs & délais.</li><li><strong>Véhicules</strong> : terrestres, marins, animaux de bât — capacités, vitesses, équipage.</li><li><strong>Poison</strong> : types, application, effets et rareté (avec symboles de sécurité).</li></ul><p><em>Parfait pour les campagnes orientées exploration, voyage et intrigue.</em></p>",
+    "description_en": "<h3 style=\"text-align:center\">Packs • Services • Vehicles • Poisons</h3><p>Everything to set your world in motion: ready your PCs, travel, bargain, and take risks — with clean, table‑friendly cards.</p><ul><li><strong>Packs</strong>: <em>artist, burglar, diplomat, acolyte/cleric, scholar, explorer, underdark exploration</em> — each pack detailed in cards (contents, weight, tips).</li><li><strong>Services</strong>: lodging, healing, transport, smugglers, mercenaries, rates & delays.</li><li><strong>Vehicles</strong>: land, sea, beasts of burden — capacities, speeds, crew.</li><li><strong>Poisons</strong>: types, application, effects & rarity (with safety icons).</li></ul><p><em>Perfect for exploration‑, travel‑ and intrigue‑heavy campaigns.</em></p>",
     "images": [
-      "images/cartes_equipement.png"
+	  "images/carte/Sac à Dos_recto.png",
+	  "images/carte/Sac à Dos_verso.png",
+	  "images/carte/Backpack_recto.png",
+	  "images/carte/Backpack_verso.png",
+	  "images/carte/Bière (Chope)_recto.png",
+	  "images/carte/Bière (Chope)_verso.png",
+	  "images/carte/Ale (Mug)_recto.png",
+	  "images/carte/Ale (Mug)_verso.png",
+	  "images/carte/Vaisseau Aérien_recto.png",
+	  "images/carte/Vaisseau Aérien_verso.png",
+	  "images/carte/Airship_recto.png",
+	  "images/carte/Airship_verso.png",
+	  "images/carte/Sang d_Assassin_recto.png",
+	  "images/carte/Sang d_Assassin_verso.png",
+	  "images/carte/Assassin_s Blood_recto.png",
+	  "images/carte/Assassin_s Blood_verso.png"
     ]
-  },
-  "pack-donjon": {
-    "category": "cards",
-    "name": "Pactage de donjoniste",
-    "name_en": "Dungeoneer's Pack",
-    "price": 18,
-    "description": "9 cartes d’équipement pour le pactage de donjoniste.",
-    "description_en": "9 equipment cards for the Dungeoneer's Pack.",
-    "images": [
-      "images/cartes_equipement.png"
-    ]
-  },
-  "pack-diplomate": {
-    "category": "cards",
-    "name": "Pactage de diplomate",
-    "name_en": "Diplomat's Pack",
-    "price": 22,
-    "description": "11 cartes d’équipement pour le pactage de diplomate.",
-    "description_en": "11 equipment cards for the Diplomat's Pack.",
-    "images": [
-      "images/cartes_equipement.png"
-    ]
-  },
-  "pack-artiste": {
-    "category": "cards",
-    "name": "Pactage d’artiste",
-    "name_en": "Entertainer's Pack",
-    "price": 14,
-    "description": "7 cartes d’équipement pour le pactage d’artiste.",
-    "description_en": "7 equipment cards for the Entertainer's Pack.",
-    "images": [
-      "images/cartes_equipement.png"
-    ]
-  },
-  "pack-savant": {
-    "category": "cards",
-    "name": "Pactage de savant",
-    "name_en": "Scholar's Pack",
-    "price": 14,
-    "description": "7 cartes d’équipement pour le pactage de savant.",
-    "description_en": "7 equipment cards for the Scholar's Pack.",
-    "images": [
-      "images/cartes_equipement.png"
-    ]
-  },
-  "pack-pretre": {
-    "category": "cards",
-    "name": "Pactage de prêtre",
-    "name_en": "Priest's Pack",
-    "price": 20,
-    "description": "10 cartes d’équipement pour le pactage de prêtre.",
-    "description_en": "10 equipment cards for the Priest's Pack.",
-    "images": [
-      "images/cartes_equipement.png"
-    ]
-  },
-  "pack-cambrioleur": {
-    "category": "cards",
-    "name": "Pactage de cambrioleur",
-    "name_en": "Burglar's Pack",
-    "price": 28,
-    "description": "14 cartes d’équipement pour le pactage de cambrioleur.",
-    "description_en": "14 equipment cards for the Burglar's Pack.",
-    "images": [
-      "images/cartes_equipement.png"
-    ]
-  },
+  },  
   "triptyque-aleatoire": {
     "category": "triptychs",
     "name": "Triptyque aléatoire",
