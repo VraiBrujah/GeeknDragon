@@ -81,7 +81,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
-  <div class="max-w-7xl mx-auto relative flex items-center justify-between p-4 md:px-6 gap-x-4 gap-y-2 flex-nowrap overflow-visible">
+  <div class="max-w-7xl mx-auto relative flex items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 flex-nowrap overflow-visible">
     <!-- Logo + Titre cliquables ensemble -->
     <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex flex-col md:flex-row items-center group transition-colors duration-200 flex-shrink-0 space-y-1 md:space-y-0 md:space-x-3 text-center md:text-left">
       <!-- Nouveau SVG très grand : on le bride via la classe header-logo -->
