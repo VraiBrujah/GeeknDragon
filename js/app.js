@@ -217,8 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
               if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
             }
-            const hasCustom = btn.hasAttribute('data-item-custom1-name') && data?.product?.multiplier;
-            if (hasCustom) btn.setAttribute('data-item-custom1-name', data.product.multiplier);
+            const label = data?.product?.language || data?.product?.multiplier;
+            const hasCustom = btn.hasAttribute('data-item-custom1-name') && label;
+            if (hasCustom) btn.setAttribute('data-item-custom1-name', label);
           });
 
         // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)

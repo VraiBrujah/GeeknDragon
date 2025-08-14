@@ -62,6 +62,11 @@ $displayName   = str_replace(' – ', '<br>', $product['name']);
 $displayNameEn = str_replace(' – ', '<br>', $product['name_en'] ?? $product['name']);
 
 $multipliers   = $product['multipliers'] ?? [];
+$languages     = $product['languages'] ?? [];
+$customOptions = !empty($languages) ? $languages : $multipliers;
+$customLabel   = !empty($languages)
+    ? ($translations['product']['language'] ?? ($lang === 'en' ? 'Language' : 'Langue'))
+    : ($translations['product']['multiplier'] ?? ($lang === 'en' ? 'Multiplier' : 'Multiplicateur'));
 $images        = $product['images'] ?? [];
 
 // CSS local pour une description propre
@@ -140,10 +145,12 @@ echo $snipcartInit;
           <label class="block mb-2" data-i18n="product.quantity">Quantité</label>
           <div class="flex items-center justify-center gap-4">
 <!--
-            <?php if (!empty($multipliers)) : ?>
+            <?php if (!empty($customOptions)) : ?>
               <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select select" data-target="<?= htmlspecialchars($id) ?>">
-                <?php foreach ($multipliers as $mult) : ?>
-                  <option value="<?= htmlspecialchars((string)$mult) ?>">x<?= htmlspecialchars((string)$mult) ?></option>
+                <?php foreach ($customOptions as $opt) : ?>
+                  <option value="<?= htmlspecialchars((string)$opt) ?>">
+                    <?= !empty($languages) ? htmlspecialchars((string)$opt) : 'x' . htmlspecialchars((string)$opt) ?>
+                  </option>
                 <?php endforeach; ?>
               </select>
             <?php endif; ?>
@@ -164,10 +171,10 @@ echo $snipcartInit;
             data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
             data-item-url="<?= htmlspecialchars($metaUrl) ?>"
             data-item-quantity="1"
-            <?php if (!empty($multipliers)) : ?>
-            data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-            data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-            data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+            <?php if (!empty($customOptions)) : ?>
+            data-item-custom1-name="<?= htmlspecialchars($customLabel) ?>"
+            data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
+            data-item-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
           <?php endif; ?>
         >
           <span data-i18n="product.add">Ajouter</span>
