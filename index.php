@@ -76,7 +76,13 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
           </a>
+
           <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">
+
+            Demander un devis
+          </a>
+          -->
+          <a href="#contact" class="btn btn-outline" data-i18n="contact.requestQuote">
             Demander un devis
           </a>
         </div>

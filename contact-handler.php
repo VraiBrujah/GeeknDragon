@@ -5,7 +5,8 @@ session_start();
 $debug = filter_var($_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: contact.php');
+    // header('Location: contact.php');
+    header('Location: index.php#contact');
     exit;
 }
 
@@ -45,7 +46,8 @@ $old = [
 if ($errors) {
     $_SESSION['errors'] = $errors;
     $_SESSION['old'] = $old;
-    header('Location: contact.php');
+    // header('Location: contact.php');
+    header('Location: index.php#contact');
     exit;
 }
 
@@ -129,7 +131,8 @@ if (!sendSendgridMail($to, $subject, $body, $email, $details)) {
     }
     $_SESSION['errors'] = [$errorMessage];
     $_SESSION['old'] = $old;
-    header('Location: contact.php');
+    // header('Location: contact.php');
+    header('Location: index.php#contact');
     exit;
 }
 
