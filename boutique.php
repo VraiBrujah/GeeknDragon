@@ -47,9 +47,12 @@ function inStock(string $id): bool
 
 // Liste des produits
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
-$products = [];
+$pieces = [];
+$cards = [];
+$triptychs = [];
 foreach ($data as $id => $p) {
-    $products[] = [
+    $category = $p['category'] ?? 'pieces';
+    $prod = [
         'id' => $id,
         'name' => str_replace(' – ', '<br>', $p['name']),
         'name_en' => str_replace(' – ', '<br>', $p['name_en'] ?? $p['name']),
@@ -57,9 +60,20 @@ foreach ($data as $id => $p) {
         'img' => $p['images'][0] ?? '',
         'description' => $p['description'],
         'description_en' => $p['description_en'] ?? $p['description'],
-        'url' => '/product.php?id=' . urlencode($id) . '&from=pieces',
+        'url' => '/product.php?id=' . urlencode($id) . '&from=' . urlencode($category),
         'multipliers' => $p['multipliers'] ?? [],
     ];
+    switch ($category) {
+        case 'cards':
+            $cards[] = $prod;
+            break;
+        case 'triptychs':
+            $triptychs[] = $prod;
+            break;
+        default:
+            $pieces[] = $prod;
+            break;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -93,9 +107,9 @@ echo $snipcartInit;
 
   <!-- ░░░ PIÈCES ░░░ -->
     <section id="pieces" class="py-24 bg-gray-900/80 scroll-mt-24">
-		<h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Pièces métalliques</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="shop.pieces.title">Pièces métalliques</h2>
         <div class="shop-grid">
-          <?php foreach ($products as $product) : ?>
+          <?php foreach ($pieces as $product) : ?>
               <?php include __DIR__ . '/partials/product-card.php'; ?>
           <?php endforeach; ?>
         </div>
@@ -122,26 +136,30 @@ echo $snipcartInit;
     <section id="cartes" class="py-24 bg-gray-900/80 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.cards.title">Cartes d’équipement</h3>
-        <div class="flex justify-center">
-          <div class="card text-center max-w-md">
-            <h4 class="text-2xl font-semibold mb-2" data-i18n="shop.cards.coming">À venir</h4>
-            <p class="text-gray-300"><span data-i18n="shop.cards.description1">Nos scribes enchantent encore ces parchemins d’aventure.</span><br><span data-i18n="shop.cards.description2">Les cartes d’équipement forgeront leur entrée lors de la prochaine lune.</span></p>
-          </div>
+        <div class="shop-grid">
+          <?php foreach ($cards as $product) : ?>
+              <?php include __DIR__ . '/partials/product-card.php'; ?>
+          <?php endforeach; ?>
         </div>
+        <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
+          <span data-i18n="shop.cards.description">Paquets thématiques de cartes illustrées pour gérer l’inventaire.</span>
+        </p>
       </div>
     </section>
 
 
   <!-- ░░░ TRIPTYQUES ░░░ -->
     <section id="triptyques" class="py-24">
-      <div class="max-w-3xl mx-auto px-6 text-center">
+      <div class="max-w-6xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.triptychs.title">Triptyques de personnage</h3>
-        <div class="flex justify-center">
-          <div class="card text-center max-w-md">
-            <h4 class="text-2xl font-semibold mb-2" data-i18n="shop.triptychs.coming">À venir</h4>
-            <p class="text-gray-300"><span data-i18n="shop.triptychs.description1">Les artisans façonnent encore ces grimoires de héros.</span><br><span data-i18n="shop.triptychs.description2">Les triptyques rejoindront la boutique sous peu.</span></p>
-          </div>
+        <div class="shop-grid">
+          <?php foreach ($triptychs as $product) : ?>
+              <?php include __DIR__ . '/partials/product-card.php'; ?>
+          <?php endforeach; ?>
         </div>
+        <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
+          <span data-i18n="shop.triptychs.description">Fiches rigides en trois volets pour classes, espèces et historiques.</span>
+        </p>
       </div>
     </section>
 

@@ -187,6 +187,106 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
+
     "multipliers": ["— x1", "— x10", "— x100", "— x1 000", "— x10 000"]
+  },
+  "cartes-magasin-armure": {
+    "category": "cards",
+    "name": "Cartes magasin – Armurier",
+    "name_en": "Shop Cards – Armorer",
+    "price": 28,
+    "description": "14 cartes illustrées pour équiper un magasin d’armure.",
+    "description_en": "14 illustrated cards to stock an armor shop.",
+    "images": [
+      "images/cartes_equipement.png"
+    ]
+  },
+  "pack-explorateur": {
+    "category": "cards",
+    "name": "Pactage d’explorateur",
+    "name_en": "Explorer's Pack",
+    "price": 16,
+    "description": "8 cartes d’équipement pour le pactage d’explorateur.",
+    "description_en": "8 equipment cards for the Explorer's Pack.",
+    "images": [
+      "images/cartes_equipement.png"
+    ]
+  },
+  "pack-donjon": {
+    "category": "cards",
+    "name": "Pactage de donjoniste",
+    "name_en": "Dungeoneer's Pack",
+    "price": 18,
+    "description": "9 cartes d’équipement pour le pactage de donjoniste.",
+    "description_en": "9 equipment cards for the Dungeoneer's Pack.",
+    "images": [
+      "images/cartes_equipement.png"
+    ]
+  },
+  "pack-diplomate": {
+    "category": "cards",
+    "name": "Pactage de diplomate",
+    "name_en": "Diplomat's Pack",
+    "price": 22,
+    "description": "11 cartes d’équipement pour le pactage de diplomate.",
+    "description_en": "11 equipment cards for the Diplomat's Pack.",
+    "images": [
+      "images/cartes_equipement.png"
+    ]
+  },
+  "pack-artiste": {
+    "category": "cards",
+    "name": "Pactage d’artiste",
+    "name_en": "Entertainer's Pack",
+    "price": 14,
+    "description": "7 cartes d’équipement pour le pactage d’artiste.",
+    "description_en": "7 equipment cards for the Entertainer's Pack.",
+    "images": [
+      "images/cartes_equipement.png"
+    ]
+  },
+  "pack-savant": {
+    "category": "cards",
+    "name": "Pactage de savant",
+    "name_en": "Scholar's Pack",
+    "price": 14,
+    "description": "7 cartes d’équipement pour le pactage de savant.",
+    "description_en": "7 equipment cards for the Scholar's Pack.",
+    "images": [
+      "images/cartes_equipement.png"
+    ]
+  },
+  "pack-pretre": {
+    "category": "cards",
+    "name": "Pactage de prêtre",
+    "name_en": "Priest's Pack",
+    "price": 20,
+    "description": "10 cartes d’équipement pour le pactage de prêtre.",
+    "description_en": "10 equipment cards for the Priest's Pack.",
+    "images": [
+      "images/cartes_equipement.png"
+    ]
+  },
+  "pack-cambrioleur": {
+    "category": "cards",
+    "name": "Pactage de cambrioleur",
+    "name_en": "Burglar's Pack",
+    "price": 28,
+    "description": "14 cartes d’équipement pour le pactage de cambrioleur.",
+    "description_en": "14 equipment cards for the Burglar's Pack.",
+    "images": [
+      "images/cartes_equipement.png"
+    ]
+  },
+  "triptyque-aleatoire": {
+    "category": "triptychs",
+    "name": "Triptyque aléatoire",
+    "name_en": "Random Triptych Bundle",
+    "price": 120,
+    "description": "Trois triptyques (classe, espèce, historique) avec cartes d’équipement, pièces de départ et un set de 7 dés.",
+    "description_en": "Three triptychs (class, species, background) with matching equipment cards, starting coins and a set of 7 dice.",
+    "images": [
+      "images/triptyque_fiche.png"
+    ]
   }
 }

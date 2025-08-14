@@ -113,15 +113,11 @@
     },
     "cards": {
       "title": "Equipment cards",
-      "coming": "Coming soon",
-      "description1": "Our scribes are still enchanting these adventure parchments.",
-      "description2": "The equipment cards will forge their way in by the next moon."
+      "description": "Themed packs of illustrated cards to manage inventory."
     },
     "triptychs": {
       "title": "Character triptychs",
-      "coming": "Coming soon",
-      "description1": "The artisans are still shaping these hero grimoires.",
-      "description2": "The triptychs will join the shop shortly."
+      "description": "Sturdy three-panel sheets for classes, species and backgrounds."
     },
     "collective": {
       "title": "Invest together, share the adventure",
