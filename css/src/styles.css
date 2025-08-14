@@ -127,6 +127,36 @@ h1,h2,h3,h4,h5,h6{ line-height:1.25; }
 }
 
 /* ========================================================================
+   MEDIA PRODUITS (images & vidéos)
+   ===================================================================== */
+
+.product-media-wrapper{
+  width:100%;
+  overflow:hidden;
+  border-radius:.75rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.product-media{
+  width:100%;
+  object-fit:cover;
+  display:block;
+}
+.product-media.portrait{ object-fit:contain; }
+
+/* Grille boutique */
+.card .product-media-wrapper{ height:12rem; }
+.card .product-media{ height:100%; }
+.card .product-media.portrait{
+  height:auto; max-height:100%; width:auto; margin-left:auto; margin-right:auto;
+}
+
+/* Page produit */
+.main-product .product-media-wrapper{ max-height:32rem; }
+.main-product .product-media{ max-height:100%; }
+
+/* ========================================================================
    ANIMS
    ===================================================================== */
 @keyframes fadeUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(0)}}
