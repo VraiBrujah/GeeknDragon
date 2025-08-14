@@ -795,10 +795,6 @@ video {
   height: 8rem;
 }
 
-.h-48{
-  height: 12rem;
-}
-
 .h-6{
   height: 1.5rem;
 }
@@ -1711,7 +1707,7 @@ h1,h2,h3,h4,h5,h6{
    ===================================================================== */
 
 .header-logo{
-  height:clamp(28px,5.5vw,48px);
+  height:calc(var(--header-height) - 10px);
   width:auto;
   display:block;
 }
@@ -2529,7 +2525,7 @@ code{
   }
 
   .header-logo{
-    height:clamp(28px,7vw,44px);
+    height:calc(var(--header-height) - 10px);
   }
 
   header nav ul{

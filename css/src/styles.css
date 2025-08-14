@@ -136,7 +136,7 @@ h1,h2,h3,h4,h5,h6{ line-height:1.25; }
    HEADER / NAV
    ===================================================================== */
 
-.header-logo{ height:clamp(28px,5.5vw,48px); width:auto; display:block; }
+.header-logo{ height:calc(var(--header-height) - 10px); width:auto; display:block; }
 
 header nav a, header nav .txt-court{
   font-family:'Cinzel',serif!important; text-transform:uppercase;
@@ -396,7 +396,7 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 
 @media (max-width:480px){
   .container-7xl{ padding-inline:.75rem; }
-  .header-logo{ height:clamp(28px,7vw,44px); }
+  .header-logo{ height:calc(var(--header-height) - 10px); }
   header nav ul{ gap:1rem .75rem; }
 }
 @media (max-width:768px){
