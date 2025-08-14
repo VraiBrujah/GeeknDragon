@@ -139,6 +139,7 @@ echo $snipcartInit;
         <div class="text-center mb-4 w-full">
           <label class="block mb-2" data-i18n="product.quantity">Quantité</label>
           <div class="flex items-center justify-center gap-4">
+<!--
             <?php if (!empty($multipliers)) : ?>
               <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select select" data-target="<?= htmlspecialchars($id) ?>">
                 <?php foreach ($multipliers as $mult) : ?>
@@ -146,6 +147,7 @@ echo $snipcartInit;
                 <?php endforeach; ?>
               </select>
             <?php endif; ?>
+-->
             <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
               <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
               <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
