@@ -1,10 +1,12 @@
 <?php
+
 $baseUrl = 'https://geekndragon.com';
 $urls = [];
 // Static pages
 $urls[] = '';
 $urls[] = 'boutique.php';
-$urls[] = 'contact.php';
+// $urls[] = 'contact.php'; // Quote system temporarily disabled
+$urls[] = '#contact';
 // Actualités pages
 foreach (glob(__DIR__ . '/actualites/*.php') as $file) {
     $relative = str_replace(__DIR__ . '/', '', $file);
@@ -18,7 +20,8 @@ if (is_array($data)) {
     }
 }
 $urls = array_unique($urls);
-$xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"/>'
+$xml = new SimpleXMLElement(
+    '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"/>'
 );
 foreach ($urls as $path) {
     $loc = rtrim($baseUrl, '/') . '/' . ltrim($path, '/');
@@ -28,4 +31,3 @@ foreach ($urls as $path) {
 $dom = dom_import_simplexml($xml)->ownerDocument;
 $dom->formatOutput = true;
 $dom->save(__DIR__ . '/sitemap.xml');
-?>
