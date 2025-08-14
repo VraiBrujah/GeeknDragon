@@ -9,6 +9,7 @@ $id = (string)$product['id'];
 $name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
 $desc        = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
+$isVideo     = preg_match('/\.mp4$/i', $img);
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
@@ -27,11 +28,16 @@ $isInStock = inStock($id);
 <div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
             min-w-[21rem] sm:min-w-[22rem] md:min-w-[23rem] <?= $isInStock ? '' : 'oos' ?>">
   <a href="<?= htmlspecialchars($url) ?>">
-    <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-         alt="<?= htmlspecialchars($desc) ?>"
-         data-alt-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-         data-alt-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
-         class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
+    <?php if ($isVideo) : ?>
+      <video src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+             class="product-media rounded mb-4" autoplay muted loop playsinline></video>
+    <?php else : ?>
+      <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+           alt="<?= htmlspecialchars($desc) ?>"
+           data-alt-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
+           data-alt-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
+           class="product-media rounded mb-4" loading="lazy">
+    <?php endif; ?>
   </a>
 
   <a href="<?= htmlspecialchars($url) ?>" class="block">

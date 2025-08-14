@@ -84,6 +84,8 @@ $extraHead = <<<HTML
   .quantity-selector { display: inline-flex; align-items: center; gap: .75rem; }
   .quantity-btn { width: 36px; height: 36px; border-radius: 9999px; background: #111827; color: #e5e7eb; border: 1px solid rgba(255,255,255,.2); }
   .qty-value { min-width: 1.5rem; display: inline-block; text-align: center; }
+  .product-media { width: 100%; max-height: 32rem; object-fit: cover; }
+  .product-media.portrait { object-fit: contain; }
 </style>
 HTML;
 ?>
@@ -114,12 +116,17 @@ echo $snipcartInit;
         <div class="swiper mb-6 w-full">
           <div class="swiper-wrapper">
             <?php foreach ($images as $img) : ?>
+              <?php $isVideo = preg_match('/\.mp4$/i', $img); ?>
               <div class="swiper-slide">
-                <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
-                  <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
-                       alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
-                       class="rounded w-full object-cover">
-                </a>
+                <?php if ($isVideo) : ?>
+                  <video src="<?= htmlspecialchars($img) ?>" class="product-media rounded" muted playsinline></video>
+                <?php else : ?>
+                  <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
+                    <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
+                         alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
+                         class="product-media rounded">
+                  </a>
+                <?php endif; ?>
               </div>
             <?php endforeach; ?>
           </div>

@@ -535,24 +535,48 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sw.classList.contains('swiper-thumbs')) return;
     const container = sw.parentElement;
     const thumbsEl = container.querySelector('.swiper-thumbs');
+    const opts = {
+      loop: true,
+      autoplay: { delay: 5000 },
+      pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
+      navigation: { nextEl: sw.querySelector('.swiper-button-next'), prevEl: sw.querySelector('.swiper-button-prev') },
+      on: {
+        slideChange() {
+          const videos = this.slides.map((s) => s.querySelector('video')).filter(Boolean);
+          videos.forEach((v) => { v.pause(); v.currentTime = 0; });
+          const active = this.slides[this.activeIndex].querySelector('video');
+          if (active) {
+            this.autoplay.stop();
+            active.play();
+            active.onended = () => { this.autoplay.start(); };
+          } else if (this.autoplay) {
+            this.autoplay.start();
+          }
+        },
+      },
+    };
     if (thumbsEl) {
       const thumbsSwiper = new Swiper(thumbsEl, { slidesPerView: 4, freeMode: true, watchSlidesProgress: true });
-      // eslint-disable-next-line no-new
-      new Swiper(sw, {
-        loop: true,
-        autoplay: { delay: 5000 },
-        pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
-        navigation: { nextEl: sw.querySelector('.swiper-button-next'), prevEl: sw.querySelector('.swiper-button-prev') },
-        thumbs: { swiper: thumbsSwiper },
-      });
+      opts.thumbs = { swiper: thumbsSwiper };
+    }
+    const swiper = new Swiper(sw, opts);
+    swiper.emit('slideChange');
+  });
+
+  // Orientation for media
+  const setOrientation = (el) => {
+    const w = el.videoWidth || el.naturalWidth;
+    const h = el.videoHeight || el.naturalHeight;
+    if (!w || !h) return;
+    if (w < h) el.classList.add('portrait');
+  };
+  document.querySelectorAll('.product-media').forEach((el) => {
+    if (el.tagName === 'VIDEO') {
+      el.addEventListener('loadedmetadata', () => setOrientation(el), { once: true });
+    } else if (el.complete) {
+      setOrientation(el);
     } else {
-      // eslint-disable-next-line no-new
-      new Swiper(sw, {
-        loop: true,
-        autoplay: { delay: 5000 },
-        pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
-        navigation: { nextEl: sw.querySelector('.swiper-button-next'), prevEl: sw.querySelector('.swiper-button-prev') },
-      });
+      el.addEventListener('load', () => setOrientation(el), { once: true });
     }
   });
 

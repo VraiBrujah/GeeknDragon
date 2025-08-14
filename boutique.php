@@ -10,6 +10,8 @@ $extraHead = <<<HTML
 <style>
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
   .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
+  .product-media{width:100%;height:12rem;object-fit:cover;}
+  .product-media.portrait{height:auto;max-height:12rem;width:auto;margin-left:auto;margin-right:auto;object-fit:contain;}
 </style>
 HTML;
 
