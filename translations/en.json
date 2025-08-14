@@ -84,6 +84,7 @@
   "product": {
     "back": "Back to shop",
     "multiplier": "Multiplier",
+    "language": "Language",
     "quantity": "Quantity",
     "unit": "single",
     "add": "Add",
