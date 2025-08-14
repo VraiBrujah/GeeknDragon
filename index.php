@@ -76,8 +76,9 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
           </a>
-          <!--
-          <a href="<?= langUrl('contact.php') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">
+
+          <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">
+
             Demander un devis
           </a>
           -->
@@ -148,7 +149,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <p class="txt-court"><a href="tel:+14387642612" class="text-indigo-400 hover:underline">+1 438 764-2612</a></p>
           <!--
           <div class="mt-6">
-            <a href="<?= langUrl('contact.php') ?>" class="btn btn-primary" data-i18n="contact.requestQuote">
+            <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary" data-i18n="contact.requestQuote">
               Demander un devis
             </a>
           </div>
