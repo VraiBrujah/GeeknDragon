@@ -27,17 +27,19 @@ $isInStock = inStock($id);
 
 <div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
             min-w-[21rem] sm:min-w-[22rem] md:min-w-[23rem] <?= $isInStock ? '' : 'oos' ?>">
-  <a href="<?= htmlspecialchars($url) ?>">
-    <?php if ($isVideo) : ?>
-      <video src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-             class="product-media rounded mb-4" autoplay muted loop playsinline></video>
-    <?php else : ?>
-      <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-           alt="<?= htmlspecialchars($desc) ?>"
-           data-alt-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-           data-alt-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
-           class="product-media rounded mb-4" loading="lazy">
-    <?php endif; ?>
+  <a href="<?= htmlspecialchars($url) ?>" class="block">
+    <div class="product-media-wrapper mb-4">
+      <?php if ($isVideo) : ?>
+        <video src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+               class="product-media" autoplay muted loop playsinline></video>
+      <?php else : ?>
+        <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+             alt="<?= htmlspecialchars($desc) ?>"
+             data-alt-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
+             data-alt-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
+             class="product-media" loading="lazy">
+      <?php endif; ?>
+    </div>
   </a>
 
   <a href="<?= htmlspecialchars($url) ?>" class="block">

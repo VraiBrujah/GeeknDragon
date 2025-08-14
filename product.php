@@ -70,24 +70,7 @@ $customLabel   = !empty($languages)
 $images        = $product['images'] ?? [];
 
 // CSS local pour une description propre
-$extraHead = <<<HTML
-<style>
-  .product-panel { max-width: 820px; margin-left: auto; margin-right: auto; }
-  .product-desc { text-align: left; line-height: 1.65; color: #e6e8ee; font-size: 0.98rem; word-break: break-word; hyphens: auto; }
-  .product-desc h3, .product-desc h4 { color: #fff; margin: 0.7rem 0 0.4rem; line-height: 1.25; }
-  .product-desc h3 { font-size: 1.2rem; text-transform: uppercase; letter-spacing: .03em; text-align: center; }
-  .product-desc h4 { font-size: 1.05rem; }
-  .product-desc p { margin: 0.55rem 0; }
-  .product-desc ul, .product-desc ol { margin: 0.45rem 0 0.75rem 1.25rem; padding-left: 0.2rem; list-style: disc outside; }
-  .product-desc li { margin: 0.25rem 0; }
-  .product-desc blockquote { margin: 0.75rem 0; padding: .65rem .9rem; border-left: 3px solid rgba(90,160,255,.55); background: rgba(255,255,255,.04); font-style: italic; }
-  .quantity-selector { display: inline-flex; align-items: center; gap: .75rem; }
-  .quantity-btn { width: 36px; height: 36px; border-radius: 9999px; background: #111827; color: #e5e7eb; border: 1px solid rgba(255,255,255,.2); }
-  .qty-value { min-width: 1.5rem; display: inline-block; text-align: center; }
-  .product-media { width: 100%; max-height: 32rem; object-fit: cover; }
-  .product-media.portrait { object-fit: contain; }
-</style>
-HTML;
+$extraHead = '';
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -118,15 +101,17 @@ echo $snipcartInit;
             <?php foreach ($images as $img) : ?>
               <?php $isVideo = preg_match('/\.mp4$/i', $img); ?>
               <div class="swiper-slide">
-                <?php if ($isVideo) : ?>
-                  <video src="<?= htmlspecialchars($img) ?>" class="product-media rounded" muted playsinline></video>
-                <?php else : ?>
-                  <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
-                    <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
-                         alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
-                         class="product-media rounded">
-                  </a>
-                <?php endif; ?>
+                <div class="product-media-wrapper">
+                  <?php if ($isVideo) : ?>
+                    <video src="<?= htmlspecialchars($img) ?>" class="product-media" muted playsinline></video>
+                  <?php else : ?>
+                    <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
+                      <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
+                           alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
+                           class="product-media">
+                    </a>
+                  <?php endif; ?>
+                </div>
               </div>
             <?php endforeach; ?>
           </div>
