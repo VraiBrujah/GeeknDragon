@@ -210,6 +210,7 @@
 	  "images/carte/Acid_recto.png",
 	  "images/carte/Acid_verso.png"
     ]
+	"Langue": [" — Français", " — English"]
   },
 
   "pack-182-butins-ingenieries": {
@@ -237,6 +238,7 @@
 	  "images/carte/Alchemist_s Supplies_recto.png",
 	  "images/carte/Alchemist_s Supplies_verso.png"
     ]
+	"Langue": [" — Français", " — English"]
   },
 
   "pack-182-routes-services": {
@@ -264,6 +266,7 @@
 	  "images/carte/Assassin_s Blood_recto.png",
 	  "images/carte/Assassin_s Blood_verso.png"
     ]
+	"Langue": [" — Français", " — English"]
   },  
   "triptyque-aleatoire": {
     "category": "triptychs",
