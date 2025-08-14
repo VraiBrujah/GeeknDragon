@@ -197,8 +197,8 @@
 .snipcart .snipcart-item-line__title{ order:3; }
 .snipcart .snipcart-item-line__custom-fields{ flex-basis:100%; order:4; margin-top:.25rem; }
 
-/* Masquer la description, ne laisser que le titre */
-.snipcart .snipcart-item-line__information > *:not(.snipcart-item-line__title){ display:none !important; }
+/* Masquer uniquement la description pour conserver les autres informations */
+.snipcart .snipcart-item-line__information > .snipcart-item-line__description { display:none !important; }
 
 /* Bouton corbeille visible */
 .snipcart .snipcart-item-line__actions .snipcart__button--icon{
