@@ -13,10 +13,10 @@
   --item-padding: 1.25rem;
   
   /* Tailles optimisées */
-  --panier-width-mobile: calc(100vw - 1rem);
-  --panier-width-tablet: 620px;
-  --panier-width-desktop: 750px;
-  --panier-max-height: 85vh;
+  --panier-width-mobile: calc(100vw - 0.5rem);
+  --panier-width-tablet: 720px;
+  --panier-width-desktop: 850px;
+  --panier-max-height: 90vh;
   
   /* Couleurs du panier */
   --panier-bg: #0f172a;
@@ -51,12 +51,21 @@
 @media (min-width: 640px) {
   #snipcart .snipcart-modal__container {
     width: var(--panier-width-tablet) !important;
+    max-width: var(--panier-width-tablet) !important;
   }
 }
 
 @media (min-width: 1024px) {
   #snipcart .snipcart-modal__container {
     width: var(--panier-width-desktop) !important;
+    max-width: var(--panier-width-desktop) !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  #snipcart .snipcart-modal__container {
+    width: 900px !important;
+    max-width: 900px !important;
   }
 }
 
@@ -186,7 +195,8 @@
 /* Section des variantes/options dans le sommaire */
 #snipcart .snipcart-item-line__variants,
 #snipcart .snipcart-item-line__options,
-#snipcart .snipcart-cart-summary .snipcart-item-line__custom-fields {
+#snipcart .snipcart-cart-summary .snipcart-item-line__custom-fields,
+#snipcart .snipcart-checkout .snipcart-item-line__custom-fields {
   display: flex !important;
   flex-direction: column !important;
   gap: 0.25rem !important;
@@ -200,12 +210,46 @@
 /* Texte des variantes */
 #snipcart .snipcart-item-line__variants .snipcart-item-line__custom-field,
 #snipcart .snipcart-item-line__options .snipcart-item-line__custom-field,
-#snipcart .snipcart-cart-summary .snipcart-item-line__custom-field {
+#snipcart .snipcart-cart-summary .snipcart-item-line__custom-field,
+#snipcart .snipcart-checkout .snipcart-item-line__custom-field {
   font-size: 0.875rem !important;
   color: var(--panier-muted) !important;
   background: transparent !important;
   border: none !important;
   padding: 0.25rem 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* Affichage spécifique du multiplicateur dans le checkout */
+#snipcart .snipcart-checkout .snipcart-item-line__custom-field-name,
+#snipcart .snipcart-cart-summary .snipcart-item-line__custom-field-name {
+  font-weight: 500 !important;
+  color: var(--panier-muted) !important;
+}
+
+#snipcart .snipcart-checkout .snipcart-item-line__custom-field-value,
+#snipcart .snipcart-cart-summary .snipcart-item-line__custom-field-value {
+  font-weight: 600 !important;
+  color: var(--panier-accent) !important;
+  background: rgba(139, 92, 246, 0.1) !important;
+  padding: 0.125rem 0.5rem !important;
+  border-radius: 4px !important;
+  font-size: 0.875rem !important;
+}
+
+/* Forcer l'affichage des champs personnalisés dans le résumé */
+#snipcart .snipcart-checkout .snipcart-cart-summary .snipcart-item-line,
+#snipcart .snipcart-order-summary .snipcart-item-line {
+  position: relative !important;
+}
+
+#snipcart .snipcart-checkout .snipcart-cart-summary .snipcart-item-line__custom-fields,
+#snipcart .snipcart-order-summary .snipcart-item-line__custom-fields {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Prix - bien visible et aligné */
@@ -334,6 +378,15 @@
   min-width: 60px !important;
 }
 
+/* Multiplicateur spécifique */
+#snipcart .snipcart-item-line__custom-field[data-name*="multiplicateur"] .snipcart-item-line__custom-field-value,
+#snipcart .snipcart-item-line__custom-field[data-name*="multiplier"] .snipcart-item-line__custom-field-value {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(168, 85, 247, 0.2)) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+  color: var(--panier-accent) !important;
+  font-weight: 700 !important;
+}
+
 /* =================================================================== */
 /* BOUTONS D'ACTION - DESIGN CLEAN                                    */
 /* =================================================================== */
@@ -416,7 +469,7 @@
   line-height: 1.5 !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  gap: 1rem !important;
+  gap: 1.5rem !important;
 }
 
 #snipcart .snipcart-summary-fees__line:last-child,
@@ -456,9 +509,13 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
   text-align: right !important;
   flex-shrink: 0 !important;
-  min-width: 80px !important;
+  min-width: 140px !important;
+  max-width: 140px !important;
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 /* Prix total final plus grand */
@@ -466,7 +523,8 @@
 #snipcart .snipcart-cart-summary__line:last-child .snipcart-cart-summary__amount,
 #snipcart .snipcart-cart-summary__line:last-child .snipcart-cart-summary__total {
   font-size: 1.5rem !important;
-  min-width: 120px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
 }
 
 /* =================================================================== */
@@ -480,9 +538,9 @@
   border-radius: 12px !important;
   color: white !important;
   font-family: 'Cinzel', serif !important;
-  font-size: 1rem !important;
+  font-size: 0.9rem !important;
   font-weight: 600 !important;
-  padding: 1.25rem 2rem !important;
+  padding: 1rem 1.5rem !important;
   width: 100% !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 
@@ -493,13 +551,16 @@
   letter-spacing: 0.25px !important;
   cursor: pointer !important;
   min-height: 52px !important;
+  max-height: 52px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  line-height: 1.2 !important;
+  line-height: 1.1 !important;
   word-wrap: break-word !important;
-  white-space: normal !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 #snipcart .snipcart__button--primary::before {
@@ -536,17 +597,21 @@
   color: var(--panier-text) !important;
   font-family: 'Cinzel', serif !important;
   font-weight: 600 !important;
-  padding: 1rem 1.5rem !important;
+  padding: 0.875rem 1.25rem !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   cursor: pointer !important;
   min-height: 48px !important;
+  max-height: 48px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  line-height: 1.2 !important;
+  line-height: 1.1 !important;
   word-wrap: break-word !important;
-  white-space: normal !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 0.9rem !important;
 }
 
 #snipcart .snipcart__button--secondary:hover {
@@ -746,7 +811,9 @@
   margin-bottom: 1rem !important;
 }
 
-#snipcart .snipcart-form__input {
+#snipcart .snipcart-form__input,
+#snipcart .snipcart-form__select,
+#snipcart .snipcart-form__textarea {
   background: var(--panier-bg) !important;
   border: 1px solid var(--panier-border) !important;
   border-radius: 8px !important;
@@ -763,6 +830,50 @@
   font-weight: 500 !important;
   margin-bottom: 0.5rem !important;
   display: block !important;
+}
+
+/* Corriger les labels sombres dans les champs de paiement */
+#snipcart .snipcart-payment-methods__method .snipcart-form__label,
+#snipcart .snipcart-payment-form .snipcart-form__label,
+#snipcart .snipcart-credit-card .snipcart-form__label,
+#snipcart .snipcart-billing-address .snipcart-form__label,
+#snipcart .snipcart-shipping-address .snipcart-form__label {
+  color: var(--panier-text) !important;
+  opacity: 1 !important;
+  font-weight: 500 !important;
+  text-shadow: none !important;
+}
+
+/* Forcer le texte blanc sur tous les labels de formulaire */
+#snipcart label,
+#snipcart .snipcart-label,
+#snipcart .snipcart-form label,
+#snipcart .snipcart-checkout label {
+  color: var(--panier-text) !important;
+  opacity: 1 !important;
+}
+
+/* Corriger spécifiquement les textes de paiement */
+#snipcart .snipcart-payment-methods label,
+#snipcart .snipcart-credit-card label,
+#snipcart .snipcart-payment-form label {
+  color: #f1f5f9 !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+
+/* Textes d'aide et placeholders */
+#snipcart .snipcart-form__help,
+#snipcart .snipcart-form__error,
+#snipcart .snipcart-form__note {
+  color: var(--panier-muted) !important;
+}
+
+#snipcart input::placeholder,
+#snipcart select::placeholder,
+#snipcart textarea::placeholder {
+  color: var(--panier-muted) !important;
+  opacity: 0.7 !important;
 }
 
 /* Optimisation des boutons pour mobile */
