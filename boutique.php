@@ -206,37 +206,49 @@ echo $snipcartInit;
 
 
 
-  <!-- ░░░ COFFRES SUR MESURE PREMIUM ░░░ -->
-  <section class="items-center features-section">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="flex flex-wrap justify-center gap-6">
-        <div class="feature-card">
-          <span class="feature-icon">📦</span>
-          <h3 class="feature-title" data-i18n="shop.chest.title">Coffres sur mesure</h3>
-          <p class="feature-description" data-i18n="shop.chest.description">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
-          <a href="index.php#contact" class="hero-cta mt-6" data-i18n="shop.chest.button">Demander un devis</a>
-        </div>
-        
-        <div class="feature-card">
-          <span class="feature-icon">🚚</span>
-          <h3 class="feature-title">Livraison rapide</h3>
-          <p class="feature-description">Expédition sous 48h partout au Canada avec suivi en temps réel de votre commande.</p>
-        </div>
-        
-        <div class="feature-card">
-          <span class="feature-icon">🔒</span>
-          <h3 class="feature-title">Paiement sécurisé</h3>
-          <p class="feature-description">Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.</p>
-        </div>
-        
-        <div class="feature-card">
-          <span class="feature-icon">🎯</span>
-          <h3 class="feature-title">Qualité artisanale</h3>
-          <p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+	<section class="items-center features-section">
+	  <div class="max-w-6xl mx-auto px-6">
+		<div class="flex flex-wrap gap-6">
+		  
+		  <!-- Coffre sur mesure — pleine largeur -->
+		  <div class="feature-card basis-full">
+			<span class="feature-icon">📦</span>
+			<h3 class="feature-title" data-i18n="shop.chest.title">Coffres sur mesure</h3>
+			<p class="feature-description" data-i18n="shop.chest.description">
+			  Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.
+			</p>
+			<a href="index.php#contact" class="hero-cta mt-6" data-i18n="shop.chest.button">Demander un devis</a>
+		  </div>
+		  
+		  <!-- Les trois autres cartes, alignées sur la même ligne -->
+		  <div class="feature-card basis-1/3">
+			<span class="feature-icon">🚚</span>
+			<h3 class="feature-title">Livraison rapide</h3>
+			<p class="feature-description">
+			  Expédition sous 48h partout au Canada avec suivi en temps réel de votre commande.
+			</p>
+		  </div>
+		  
+		  <div class="feature-card basis-1/3">
+			<span class="feature-icon">🔒</span>
+			<h3 class="feature-title">Paiement sécurisé</h3>
+			<p class="feature-description">
+			  Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.
+			</p>
+		  </div>
+		  
+		  <div class="feature-card basis-1/3">
+			<span class="feature-icon">🎯</span>
+			<h3 class="feature-title">Qualité artisanale</h3>
+			<p class="feature-description">
+			  Fabriqué au Québec avec des matériaux premium pour des années d'aventures.
+			</p>
+		  </div>
+		  
+		</div>
+	  </div>
+	</section>
+
 	
   <!-- ░░░ CARTES PREMIUM ░░░ -->
   <section id="cartes" class="shop-section scroll-mt-24">
