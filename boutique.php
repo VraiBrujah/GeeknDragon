@@ -11,6 +11,9 @@ $extraHead = <<<HTML
 <style>
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
   .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
+
+  /* Désactive la petite ligne au-dessus du titre h2 générée par ::before */
+  .shop-section-title.no-leading-line::before{content:none !important;}
 </style>
 HTML;
 
@@ -113,155 +116,153 @@ echo $snipcartInit;
     </div>
   </section>
 
-	<!-- ░░░ PIÈCES PREMIUM ░░░ -->
-	<section id="pieces" class="shop-section scroll-mt-24">
-	  <div class="max-w-7xl mx-auto">
-		<!-- Titre principal -->
-		<h2 class="shop-section-title" data-i18n="shop.pieces.title">
-		  Pièces métalliques
-		</h2>
+  <!-- ░░░ PIÈCES PREMIUM ░░░ -->
+  <section id="pieces" class="shop-section scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
 
-		<!-- Grille de produits -->
-		<div class="products-grid">
-		  <?php foreach ($pieces as $product) : ?>
-			<?php include __DIR__ . '/partials/product-card-premium.php'; ?>
-		  <?php endforeach; ?>
-		</div>
+      <!-- LIGNE violette collée à la section précédente, puis espace avant le titre -->
+      <div aria-hidden="true" class="mx-auto h-1 w-24 rounded-full bg-violet-500 mt-0 mb-8"></div>
 
-		<!-- Description & appel à la vidéo -->
-		<div class="mt-20 md:mt-28 max-w-4xl mx-auto px-6 text-center space-y-10 leading-relaxed">
-		  <p class="text-gray-300 text-xl md:text-2xl tracking-wide">
-			<span data-i18n="shop.pieces.description">
-			  <span class="block font-semibold text-gray-100">
-				Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets :
-				<span class="font-normal">ça fonctionne, mais ça perd toute sa saveur.</span>
-			  </span>
+      <!-- Titre principal (ligne interne désactivée) -->
+      <h2 class="shop-section-title no-leading-line" data-i18n="shop.pieces.title">
+        Pièces métalliques
+      </h2>
 
-			  <span class="block mt-6">
-				Le trésor est au cœur de presque toutes les campagnes de D&D… et pourtant,
-				quand il se réduit à des chiffres qu’on inscrit puis efface cent fois,
-				il perd toute magie et tout impact.
-			  </span>
+      <!-- Grille de produits -->
+      <div class="products-grid">
+        <?php foreach ($pieces as $product) : ?>
+          <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
+        <?php endforeach; ?>
+      </div>
 
-			  <span class="block mt-6">
-				Par souci de simplicité, on se limite presque toujours à la pièce d’or,
-				oubliant la richesse des autres monnaies.
-			  </span>
+      <!-- Description & appel à la vidéo -->
+      <div class="mt-20 md:mt-28 max-w-4xl mx-auto px-6 text-center space-y-10 leading-relaxed">
+        <p class="text-gray-300 text-xl md:text-2xl tracking-wide">
+          <span data-i18n="shop.pieces.description">
+            <span class="block font-semibold text-gray-100">
+              Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets :
+              <span class="font-normal">ça fonctionne, mais ça perd toute sa saveur.</span>
+            </span>
 
-			  <span class="block mt-6">
-				Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient
-				tangible, mémorable — digne des plus grandes quêtes.
-			  </span>
-			</span>
-		  </p>
+            <span class="block mt-6">
+              Le trésor est au cœur de presque toutes les campagnes de D&D… et pourtant,
+              quand il se réduit à des chiffres qu’on inscrit puis efface cent fois,
+              il perd toute magie et tout impact.
+            </span>
 
-		  <!-- Lien vidéo : encore plus aéré -->
-		  <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s"
-			 target="_blank"
-			 class="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-lg border-2 border-indigo-400/50
-					text-indigo-300 hover:text-indigo-100 hover:border-indigo-300 hover:bg-indigo-500/10
-					transition-all duration-200 mx-auto">
-			<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-			  <path d="M8 5v14l11-7z"/>
-			</svg>
-			<span class="underline decoration-2 underline-offset-4 text-base md:text-lg"
-				  data-i18n="shop.pieces.video">
-			  Regardez la vidéo de Pierre-Louis (Es-Tu Game ?) — « L’Économie de D&D 💰 Conseils Jeux de Rôle »
-			</span>
-		  </a>
+            <span class="block mt-6">
+              Par souci de simplicité, on se limite presque toujours à la pièce d’or,
+              oubliant la richesse des autres monnaies.
+            </span>
 
+            <span class="block mt-6">
+              Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient
+              tangible, mémorable — digne des plus grandes quêtes.
+            </span>
+          </span>
+        </p>
 
+        <!-- Lien vidéo -->
+        <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s"
+           target="_blank"
+           class="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-lg border-2 border-indigo-400/50
+                  text-indigo-300 hover:text-indigo-100 hover:border-indigo-300 hover:bg-indigo-500/10
+                  transition-all duration-200 mx-auto">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <span class="underline decoration-2 underline-offset-4 text-base md:text-lg"
+                data-i18n="shop.pieces.video">
+            Regardez la vidéo de Pierre-Louis (Es-Tu Game ?) — « L’Économie de D&D 💰 Conseils Jeux de Rôle »
+          </span>
+        </a>
 
-		  <!-- Tableau des abréviations -->
-		  <div class="pt-10">
-			<h4 class="text-center text-gray-200 mb-4">
-			  Échelle & abréviations (5e)
-			</h4>
-			<div class="overflow-x-auto">
-			  <table class="mx-auto border-collapse text-gray-300">
-				<thead>
-				  <tr class="bg-gray-700">
-					<th class="px-4 py-2">Abrév.</th>
-					<th class="px-4 py-2">Nom</th>
-					<th class="px-4 py-2">Conversion</th>
-				  </tr>
-				</thead>
-				<tbody>
-				  <tr class="bg-gray-800">
-					<td class="px-4 py-2 text-center">pc</td>
-					<td class="px-4 py-2 text-center">pièce de cuivre</td>
-					<td class="px-4 py-2 text-center">10 pc = 1 pa</td>
-				  </tr>
-				  <tr class="bg-gray-700">
-					<td class="px-4 py-2 text-center">pa</td>
-					<td class="px-4 py-2 text-center">pièce d’argent</td>
-					<td class="px-4 py-2 text-center">10 pa = 1 po</td>
-				  </tr>
-				  <tr class="bg-gray-800">
-					<td class="px-4 py-2 text-center">pe</td>
-					<td class="px-4 py-2 text-center">pièce d’électrum</td>
-					<td class="px-4 py-2 text-center">1 po = 2 pe</td>
-				  </tr>
-				  <tr class="bg-gray-700">
-					<td class="px-4 py-2 text-center">po</td>
-					<td class="px-4 py-2 text-center">pièce d’or</td>
-					<td class="px-4 py-2 text-center">—</td>
-				  </tr>
-				  <tr class="bg-gray-800">
-					<td class="px-4 py-2 text-center">pp</td>
-					<td class="px-4 py-2 text-center">pièce de platine</td>
-					<td class="px-4 py-2 text-center">10 po = 1 pp</td>
-				  </tr>
-				</tbody>
-			  </table>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	</section>
+        <!-- Tableau des abréviations -->
+        <div class="pt-10">
+          <h4 class="text-center text-gray-200 mb-4">
+            Échelle & abréviations (5e)
+          </h4>
+          <div class="overflow-x-auto">
+            <table class="mx-auto border-collapse text-gray-300">
+              <thead>
+                <tr class="bg-gray-700">
+                  <th class="px-4 py-2">Abrév.</th>
+                  <th class="px-4 py-2">Nom</th>
+                  <th class="px-4 py-2">Conversion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-gray-800">
+                  <td class="px-4 py-2 text-center">pc</td>
+                  <td class="px-4 py-2 text-center">pièce de cuivre</td>
+                  <td class="px-4 py-2 text-center">10 pc = 1 pa</td>
+                </tr>
+                <tr class="bg-gray-700">
+                  <td class="px-4 py-2 text-center">pa</td>
+                  <td class="px-4 py-2 text-center">pièce d’argent</td>
+                  <td class="px-4 py-2 text-center">10 pa = 1 po</td>
+                </tr>
+                <tr class="bg-gray-800">
+                  <td class="px-4 py-2 text-center">pe</td>
+                  <td class="px-4 py-2 text-center">pièce d’électrum</td>
+                  <td class="px-4 py-2 text-center">1 po = 2 pe</td>
+                </tr>
+                <tr class="bg-gray-700">
+                  <td class="px-4 py-2 text-center">po</td>
+                  <td class="px-4 py-2 text-center">pièce d’or</td>
+                  <td class="px-4 py-2 text-center">—</td>
+                </tr>
+                <tr class="bg-gray-800">
+                  <td class="px-4 py-2 text-center">pp</td>
+                  <td class="px-4 py-2 text-center">pièce de platine</td>
+                  <td class="px-4 py-2 text-center">10 po = 1 pp</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </section>
 
+  <section class="features-section">
+    <div class="max-w-6xl mx-auto px-6 space-y-8">
+      <!-- 1) Bloc Coffres sur mesure : ligne dédiée et centré -->
+      <div class="flex justify-center">
+        <div class="feature-card w-full md:max-w-2xl">
+          <span class="feature-icon">📦</span>
+          <h3 class="feature-title" data-i18n="shop.chest.title">Coffres sur mesure</h3>
+          <p class="feature-description" data-i18n="shop.chest.description">
+            Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.
+          </p>
+          <a href="index.php#contact" class="hero-cta mt-6" data-i18n="shop.chest.button">Demander un devis</a>
+        </div>
+      </div>
 
+      <!-- 2) Les 3 autres cartes : côte à côte -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="feature-card">
+          <span class="feature-icon">🚚</span>
+          <h3 class="feature-title">Livraison rapide</h3>
+          <p class="feature-description">Expédition sous 48h partout au Canada avec suivi en temps réel de votre commande.</p>
+        </div>
 
-	<section class="features-section">
-	  <div class="max-w-6xl mx-auto px-6 space-y-8">
-		<!-- 1) Bloc Coffres sur mesure : ligne dédiée et centré -->
-		<div class="flex justify-center">
-		  <div class="feature-card w-full md:max-w-2xl">
-			<span class="feature-icon">📦</span>
-			<h3 class="feature-title" data-i18n="shop.chest.title">Coffres sur mesure</h3>
-			<p class="feature-description" data-i18n="shop.chest.description">
-			  Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.
-			</p>
-			<a href="index.php#contact" class="hero-cta mt-6" data-i18n="shop.chest.button">Demander un devis</a>
-		  </div>
-		</div>
+        <div class="feature-card">
+          <span class="feature-icon">🔒</span>
+          <h3 class="feature-title">Paiement sécurisé</h3>
+          <p class="feature-description">Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.</p>
+        </div>
 
-		<!-- 2) Les 3 autres cartes : côte à côte -->
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-		  <div class="feature-card">
-			<span class="feature-icon">🚚</span>
-			<h3 class="feature-title">Livraison rapide</h3>
-			<p class="feature-description">Expédition sous 48h partout au Canada avec suivi en temps réel de votre commande.</p>
-		  </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎯</span>
+          <h3 class="feature-title">Qualité artisanale</h3>
+          <p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-		  <div class="feature-card">
-			<span class="feature-icon">🔒</span>
-			<h3 class="feature-title">Paiement sécurisé</h3>
-			<p class="feature-description">Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.</p>
-		  </div>
-
-		  <div class="feature-card">
-			<span class="feature-icon">🎯</span>
-			<h3 class="feature-title">Qualité artisanale</h3>
-			<p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
-		  </div>
-		</div>
-	  </div>
-	</section>
-
-
-	
   <!-- ░░░ CARTES PREMIUM ░░░ -->
   <section id="cartes" class="shop-section scroll-mt-24">
     <div class="max-w-7xl mx-auto">
@@ -271,7 +272,7 @@ echo $snipcartInit;
           <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
         <?php endforeach; ?>
       </div>
-      
+
       <div class="text-center mt-12 max-w-4xl mx-auto px-6">
         <p class="text-lg text-gray-300">
           <span data-i18n="shop.cards.description">Paquets thématiques de cartes illustrées pour gérer l'inventaire.</span>
@@ -279,7 +280,6 @@ echo $snipcartInit;
       </div>
     </div>
   </section>
-
 
   <!-- ░░░ TRIPTYQUES PREMIUM ░░░ -->
   <section id="triptyques" class="shop-section">
@@ -290,7 +290,7 @@ echo $snipcartInit;
           <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
         <?php endforeach; ?>
       </div>
-      
+
       <div class="text-center mt-12 max-w-4xl mx-auto px-6">
         <p class="text-lg text-gray-300">
           <span data-i18n="shop.triptychs.description">Fiches rigides en trois volets pour classes, espèces et historiques.</span>
@@ -299,8 +299,6 @@ echo $snipcartInit;
     </div>
   </section>
 
-
-  
   <!-- ===== INVESTISSEMENT COLLECTIF PREMIUM ===== -->
   <section class="features-section">
     <div class="max-w-6xl mx-auto px-6">
@@ -316,20 +314,20 @@ echo $snipcartInit;
             </div>
           </div>
         </div>
-        
+
         <div class="lg:w-1/2 space-y-6">
           <div class="feature-card">
             <span class="feature-icon">💰</span>
             <h4 class="feature-title">Investissement partagé</h4>
             <p class="feature-description" data-i18n="shop.collective.description1">Ne laissez pas le maître de jeu se ruiner pour votre plaisir : chaque joueur peut contribuer en achetant son matériel.</p>
           </div>
-          
+
           <div class="feature-card">
             <span class="feature-icon">⚖️</span>
             <h4 class="feature-title">Rapport qualité-prix</h4>
             <p class="feature-description" data-i18n="shop.collective.description2">Contrairement aux figurines à 300$ utilisées une fois, nos pièces servent à chaque session pour des années de campagne.</p>
           </div>
-          
+
           <div class="feature-card">
             <span class="feature-icon">📋</span>
             <h4 class="feature-title">Carte de propriété</h4>
@@ -339,30 +337,30 @@ echo $snipcartInit;
       </div>
     </div>
   </section>
-  
+
   <!-- ░░░ TRUST SECTION PREMIUM ░░░ -->
   <section class="trust-section">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="shop-section-title" data-i18n="shop.intro.title">Trésors artisanaux</h2>
       <p class="text-xl text-center mb-12 max-w-3xl mx-auto" data-i18n="shop.intro.description">Objets de collection et aides de jeu artisanaux, fabriqués au Québec.</p>
-      
+
       <div class="trust-badges">
         <div class="trust-badge">
           <span class="trust-icon">🔒</span>
           <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
         </div>
-        
+
         <div class="trust-badge">
           <img src="/images/payments/visa.svg" alt="Logo Visa" class="w-8 h-6" loading="lazy">
           <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" class="w-8 h-6" loading="lazy">
           <img src="/images/payments/american-express.svg" alt="Logo American Express" class="w-8 h-6" loading="lazy">
         </div>
-        
+
         <div class="trust-badge">
           <span class="trust-icon">🍁</span>
           <span>Fabriqué au Québec</span>
         </div>
-        
+
         <div class="trust-badge">
           <span class="trust-icon">⭐</span>
           <span>Qualité premium</span>
@@ -398,6 +396,4 @@ echo $snipcartInit;
   <script src="/js/hero-videos.js"></script>
   <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
 </body>
-
-
 </html>
