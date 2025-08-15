@@ -116,7 +116,7 @@ echo $snipcartInit;
   </section>
 
 	<!-- ░░░ PIÈCES PREMIUM ░░░ -->
-	<section id="pieces" class="shop-section scroll-mt-24">
+	<section id="pieces" class="py-24 shop-section scroll-mt-24">
 	  <div class="max-w-7xl mx-auto">
 		<h2 class="shop-section-title" data-i18n="shop.pieces.title">Pièces métalliques</h2>
 		<div class="products-grid">
