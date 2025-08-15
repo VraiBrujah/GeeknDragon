@@ -114,7 +114,7 @@ echo $snipcartInit;
   </section>
 
 	<!-- ░░░ PIÈCES PREMIUM ░░░ -->
-	<section id="pieces" class="shop-section scroll-mt-24">
+        <section id="pieces" class="shop-section scroll-mt-24 mt-8">
 	  <div class="max-w-7xl mx-auto">
 		<!-- Titre principal -->
 		<h2 class="shop-section-title" data-i18n="shop.pieces.title">
@@ -262,7 +262,7 @@ echo $snipcartInit;
 
 	
   <!-- ░░░ CARTES PREMIUM ░░░ -->
-  <section id="cartes" class="shop-section scroll-mt-24">
+  <section id="cartes" class="shop-section scroll-mt-24 mt-8">
     <div class="max-w-7xl mx-auto">
       <h2 class="shop-section-title" data-i18n="shop.cards.title">Cartes d'équipement</h2>
       <div class="products-grid">
@@ -281,7 +281,7 @@ echo $snipcartInit;
 
 
   <!-- ░░░ TRIPTYQUES PREMIUM ░░░ -->
-  <section id="triptyques" class="shop-section">
+  <section id="triptyques" class="shop-section mt-8">
     <div class="max-w-7xl mx-auto">
       <h2 class="shop-section-title" data-i18n="shop.triptychs.title">Triptyques de personnage</h2>
       <div class="products-grid">
