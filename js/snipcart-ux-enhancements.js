@@ -286,6 +286,7 @@
     const customFields = snipcartEl.querySelectorAll('.snipcart-item-line__custom-field');
     
     customFields.forEach(field => {
+      const fieldEl = field;
       if (!field.querySelector('.field-icon')) {
         const nameEl = field.querySelector('.snipcart-item-line__custom-field-name');
         const valueEl = field.querySelector('.snipcart-item-line__custom-field-value');
@@ -312,14 +313,14 @@
           nameEl.insertBefore(iconEl, nameEl.firstChild);
           
           // Effet hover sur les champs
-          field.addEventListener('mouseenter', () => {
-            field.style.background = 'rgba(15, 23, 42, 0.8)';
-            field.style.borderColor = 'rgba(139, 92, 246, 0.4)';
+          fieldEl.addEventListener('mouseenter', () => {
+            fieldEl.style.background = 'rgba(15, 23, 42, 0.8)';
+            fieldEl.style.borderColor = 'rgba(139, 92, 246, 0.4)';
           });
-          
-          field.addEventListener('mouseleave', () => {
-            field.style.background = 'rgba(15, 23, 42, 0.6)';
-            field.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+
+          fieldEl.addEventListener('mouseleave', () => {
+            fieldEl.style.background = 'rgba(15, 23, 42, 0.6)';
+            fieldEl.style.borderColor = 'rgba(255, 255, 255, 0.1)';
           });
         }
       }
