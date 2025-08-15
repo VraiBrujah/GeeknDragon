@@ -167,7 +167,7 @@
 /* GRILLE DE PRODUITS PREMIUM                                        */
 /* =================================================================== */
 .shop-section {
-  padding-top: calc(var(--boutique-space-3xl) + 12px);
+  padding-top: calc(var(--boutique-space-3xl));
   background: var(--boutique-bg);
   position: relative;
 }
