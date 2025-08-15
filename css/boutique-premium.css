@@ -199,11 +199,18 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: var(--boutique-space-xl);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--boutique-space-lg);
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--boutique-space-lg);
+}
+
+@media (min-width: 1280px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 1600px;
+  }
 }
 
 /* =================================================================== */
