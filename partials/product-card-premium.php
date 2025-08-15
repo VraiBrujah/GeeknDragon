@@ -168,9 +168,21 @@ $isInStock = inStock($id);
       }
     });
   }, observerOptions);
+  function alignDescriptions() {
+    const descs = document.querySelectorAll('.product-card .product-description');
+    let max = 0;
+    descs.forEach(el => { max = Math.max(max, el.offsetHeight); });
+    descs.forEach(el => { el.style.minHeight = max + 'px'; });
+  }
 
-  document.querySelectorAll('.product-card').forEach(card => {
-    observer.observe(card);
-  });
+  function initCards() {
+    alignDescriptions();
+    document.querySelectorAll('.product-card').forEach(card => {
+      observer.observe(card);
+    });
+  }
+
+  window.addEventListener('load', initCards);
+  window.addEventListener('resize', alignDescriptions);
 })();
 </script>
