@@ -2,10 +2,9 @@
    GEEK & DRAGON - AMÉLIORATIONS UX POUR SNIPCART
    Effets visuels et interactions premium pour le panier
    ======================================================================== */
+/* eslint-disable no-param-reassign, no-use-before-define, no-console */
 
 (() => {
-  'use strict';
-
   // Attendre que Snipcart soit prêt
   function waitForSnipcart(callback) {
     if (window.Snipcart && window.Snipcart.events) {
@@ -42,7 +41,7 @@
 
     // Bouton de checkout
     const checkoutBtns = snipcartEl.querySelectorAll('.snipcart__button--primary, .snipcart__button--checkout');
-    checkoutBtns.forEach(btn => {
+    checkoutBtns.forEach((btn) => {
       if (!btn.querySelector('.btn-icon')) {
         const icon = document.createElement('span');
         icon.className = 'btn-icon';
@@ -58,7 +57,7 @@
 
     // Boutons de suppression
     const removeBtns = snipcartEl.querySelectorAll('.snipcart-item-line__actions button, .__remove-left button');
-    removeBtns.forEach(btn => {
+    removeBtns.forEach((btn) => {
       if (!btn.querySelector('.btn-icon')) {
         btn.innerHTML = '<span class="btn-icon">🗑️</span>';
         btn.style.cssText += `
@@ -79,10 +78,11 @@
 
     // Boutons +/-
     const qtyBtns = snipcartEl.querySelectorAll('.__qty-btn');
-    qtyBtns.forEach(btn => {
+    qtyBtns.forEach((btn) => {
       // Effet de vibration sur clic
       btn.addEventListener('click', () => {
         btn.style.animation = 'none';
+        // eslint-disable-next-line no-unused-expressions
         btn.offsetHeight; // Force reflow
         btn.style.animation = 'buttonClick 0.2s ease-out';
       });
@@ -285,7 +285,7 @@
     const snipcartEl = document.getElementById('snipcart');
     const customFields = snipcartEl.querySelectorAll('.snipcart-item-line__custom-field');
 
-    customFields.forEach(field => {
+    customFields.forEach((field) => {
       const fieldEl = field;
       if (!field.querySelector('.field-icon')) {
         const nameEl = field.querySelector('.snipcart-item-line__custom-field-name');
@@ -390,5 +390,4 @@
   window.GD = window.GD || {};
   window.GD.enhanceCart = enhanceCartVisuals;
   window.GD.showCartNotification = showCartNotification;
-
 })();
