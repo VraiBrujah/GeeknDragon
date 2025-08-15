@@ -19,21 +19,31 @@ if (!$snipcartKey) {
 ?>
 <div hidden id="snipcart" data-api-key="<?= htmlspecialchars($snipcartKey) ?>"></div>
 <script>
-  // Configuration simple et fonctionnelle
+  // Configuration avec format de langue correct pour Snipcart
   const siteLang = '<?= htmlspecialchars($lang ?? 'fr') ?>';
   const currentLang = localStorage.getItem('lang') || siteLang;
   
-  localStorage.setItem('snipcartLanguage', currentLang);
+  // Snipcart utilise des codes de langue spécifiques
+  const snipcartLang = currentLang === 'en' ? 'en' : 'fr';
+  
+  localStorage.setItem('snipcartLanguage', snipcartLang);
   
   window.SnipcartSettings = {
     publicApiKey: '<?= htmlspecialchars($snipcartKey) ?>',
     loadStrategy: 'onload',
     config: {
       addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
-      locale: currentLang,
+      locale: snipcartLang,
       customerAccount: { enabled: true }
     }
   };
+
+  // Forcer la langue après chargement
+  document.addEventListener('snipcart.ready', function() {
+    if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.session) {
+      window.Snipcart.api.session.setLanguage(snipcartLang);
+    }
+  });
 
 </script>
 <!-- Librairie Snipcart -->
