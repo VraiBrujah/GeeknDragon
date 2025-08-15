@@ -185,6 +185,7 @@
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
   text-align: center;
+  margin-top: var(--boutique-space-2xl);
   margin-bottom: var(--boutique-space-2xl);
   color: var(--boutique-text);
   position: relative;
