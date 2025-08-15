@@ -13,10 +13,10 @@
   --item-padding: 1.25rem;
   
   /* Tailles optimisées */
-  --panier-width-mobile: calc(100vw - 2rem);
-  --panier-width-tablet: 520px;
-  --panier-width-desktop: 600px;
-  --panier-max-height: 80vh;
+  --panier-width-mobile: calc(100vw - 1rem);
+  --panier-width-tablet: 620px;
+  --panier-width-desktop: 750px;
+  --panier-max-height: 85vh;
   
   /* Couleurs du panier */
   --panier-bg: #0f172a;
@@ -183,6 +183,31 @@
   width: 100% !important;
 }
 
+/* Section des variantes/options dans le sommaire */
+#snipcart .snipcart-item-line__variants,
+#snipcart .snipcart-item-line__options,
+#snipcart .snipcart-cart-summary .snipcart-item-line__custom-fields {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+  margin-top: 0.5rem !important;
+  padding: 0.5rem !important;
+  background: rgba(139, 92, 246, 0.05) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Texte des variantes */
+#snipcart .snipcart-item-line__variants .snipcart-item-line__custom-field,
+#snipcart .snipcart-item-line__options .snipcart-item-line__custom-field,
+#snipcart .snipcart-cart-summary .snipcart-item-line__custom-field {
+  font-size: 0.875rem !important;
+  color: var(--panier-muted) !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0.25rem 0 !important;
+}
+
 /* Prix - bien visible et aligné */
 #snipcart .snipcart-item-line__price,
 #snipcart .snipcart-item-line__unit-price,
@@ -225,10 +250,11 @@
   font-size: 1rem !important;
   font-weight: 600 !important;
   text-align: center !important;
-  width: 60px !important;
-  min-width: 60px !important;
-  height: 36px !important;
+  width: 70px !important;
+  min-width: 70px !important;
+  height: 44px !important;
   transition: border-color 0.2s ease !important;
+  box-sizing: border-box !important;
 }
 
 #snipcart .snipcart-item-line__quantity input:focus,
@@ -244,15 +270,16 @@
   border: none !important;
   border-radius: 8px !important;
   color: white !important;
-  width: 36px !important;
-  height: 36px !important;
+  width: 44px !important;
+  height: 44px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 1.125rem !important;
-  font-weight: 600 !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
 }
 
 #snipcart .__qty-btn:hover {
@@ -326,14 +353,15 @@
   border-radius: 8px !important;
   color: var(--panier-danger) !important;
   padding: 0 !important;
-  width: 36px !important;
-  height: 36px !important;
+  width: 44px !important;
+  height: 44px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  font-size: 1rem !important;
+  font-size: 1.125rem !important;
+  flex-shrink: 0 !important;
 }
 
 #snipcart .snipcart-item-line__actions button:hover,
@@ -359,8 +387,10 @@
   padding: var(--panier-padding) !important;
   margin: var(--panier-gap) 0 !important;
   position: relative !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   flex-shrink: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 #snipcart .snipcart-cart-summary::before {
@@ -378,12 +408,15 @@
 #snipcart .snipcart-cart-summary__line {
   display: flex !important;
   justify-content: space-between !important;
-  align-items: center !important;
-  padding: 0.75rem 0 !important;
+  align-items: flex-start !important;
+  padding: 0.875rem 0 !important;
   border-bottom: 1px solid var(--panier-border) !important;
   font-size: 1rem !important;
   color: var(--panier-text) !important;
-  line-height: 1.4 !important;
+  line-height: 1.5 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  gap: 1rem !important;
 }
 
 #snipcart .snipcart-summary-fees__line:last-child,
@@ -407,19 +440,33 @@
   color: var(--panier-muted) !important;
   flex: 1 !important;
   text-align: left !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  min-width: 0 !important;
 }
 
-/* Prix total avec effet spécial */
+/* Prix dans le sommaire */
 #snipcart .snipcart-summary-fees__amount,
 #snipcart .snipcart-cart-summary__total,
 #snipcart .snipcart-cart-summary__amount {
   font-family: 'Cinzel', serif !important;
-  font-size: 1.5rem !important;
+  font-size: 1.125rem !important;
   font-weight: 700 !important;
   color: var(--panier-success) !important;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
   text-align: right !important;
   flex-shrink: 0 !important;
+  min-width: 80px !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Prix total final plus grand */
+#snipcart .snipcart-summary-fees__line:last-child .snipcart-summary-fees__amount,
+#snipcart .snipcart-cart-summary__line:last-child .snipcart-cart-summary__amount,
+#snipcart .snipcart-cart-summary__line:last-child .snipcart-cart-summary__total {
+  font-size: 1.5rem !important;
+  min-width: 120px !important;
 }
 
 /* =================================================================== */
@@ -433,9 +480,9 @@
   border-radius: 12px !important;
   color: white !important;
   font-family: 'Cinzel', serif !important;
-  font-size: 1.1rem !important;
-  font-weight: 700 !important;
-  padding: 1rem 1.5rem !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  padding: 1.25rem 2rem !important;
   width: 100% !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 
@@ -443,9 +490,16 @@
   position: relative !important;
   overflow: hidden !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
+  letter-spacing: 0.25px !important;
   cursor: pointer !important;
-  min-height: 48px !important;
+  min-height: 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
 }
 
 #snipcart .snipcart__button--primary::before {
@@ -482,9 +536,17 @@
   color: var(--panier-text) !important;
   font-family: 'Cinzel', serif !important;
   font-weight: 600 !important;
-  padding: 0.75rem 1.25rem !important;
+  padding: 1rem 1.5rem !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   cursor: pointer !important;
+  min-height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
 }
 
 #snipcart .snipcart__button--secondary:hover {
@@ -661,19 +723,83 @@
   width: 100% !important;
 }
 
+/* Footer du panier avec boutons */
+#snipcart .snipcart-cart-footer,
+#snipcart .snipcart-modal__footer {
+  background: var(--panier-surface) !important;
+  border-top: 1px solid var(--panier-border) !important;
+  padding: var(--panier-padding) !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: var(--panier-gap) !important;
+}
+
+/* Améliorer la structure du checkout */
+#snipcart .snipcart-checkout {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Améliorer l'affichage des formulaires */
+#snipcart .snipcart-form__field {
+  margin-bottom: 1rem !important;
+}
+
+#snipcart .snipcart-form__input {
+  background: var(--panier-bg) !important;
+  border: 1px solid var(--panier-border) !important;
+  border-radius: 8px !important;
+  color: var(--panier-text) !important;
+  padding: 0.875rem !important;
+  font-size: 1rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#snipcart .snipcart-form__label {
+  color: var(--panier-text) !important;
+  font-family: 'Cinzel', serif !important;
+  font-weight: 500 !important;
+  margin-bottom: 0.5rem !important;
+  display: block !important;
+}
+
 /* Optimisation des boutons pour mobile */
 @media (max-width: 640px) {
   #snipcart .__qty-btn {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 1rem !important;
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1.125rem !important;
   }
   
   #snipcart .snipcart-item-line__quantity input[type="number"],
   #snipcart .__qty-stepped input {
-    width: 50px !important;
-    min-width: 50px !important;
-    height: 32px !important;
-    font-size: 0.9rem !important;
+    width: 60px !important;
+    min-width: 60px !important;
+    height: 40px !important;
+    font-size: 0.95rem !important;
+  }
+  
+  #snipcart .snipcart-item-line__actions button,
+  #snipcart .__remove-left button,
+  #snipcart .snipcart__button--icon {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1rem !important;
+  }
+  
+  #snipcart .snipcart__button--primary,
+  #snipcart .snipcart-cart-button,
+  #snipcart .snipcart__button--checkout {
+    padding: 1rem 1.5rem !important;
+    font-size: 0.95rem !important;
+    min-height: 48px !important;
+  }
+  
+  #snipcart .snipcart__button--secondary {
+    padding: 0.875rem 1.25rem !important;
+    font-size: 0.95rem !important;
+    min-height: 44px !important;
   }
 }
