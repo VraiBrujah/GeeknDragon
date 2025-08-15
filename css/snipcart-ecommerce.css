@@ -138,34 +138,6 @@
   display: flex !important;
   flex-direction: column !important;
   gap: var(--panier-gap) !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-/* Conteneurs internes du checkout */
-#snipcart .snipcart-checkout__step,
-#snipcart .snipcart-checkout__content,
-#snipcart .snipcart-order-summary {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-  padding: 0 var(--panier-padding) !important;
-}
-
-/* Corriger la largeur du sommaire dans le checkout */
-#snipcart .snipcart-checkout .snipcart-cart-summary,
-#snipcart .snipcart-checkout .snipcart-order-summary {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: var(--panier-gap) 0 !important;
-}
-
-/* Articles dans le sommaire du checkout */
-#snipcart .snipcart-checkout .snipcart-item-line,
-#snipcart .snipcart-order-summary .snipcart-item-line {
-  width: 100% !important;
-  box-sizing: border-box !important;
-  padding: var(--item-padding) !important;
 }
 
 /* =================================================================== */
@@ -466,12 +438,11 @@
   border: 1px solid var(--panier-border) !important;
   border-radius: 16px !important;
   padding: var(--panier-padding) !important;
-  margin: var(--panier-gap) !important;
+  margin: var(--panier-gap) 0 !important;
   position: relative !important;
   overflow: visible !important;
   flex-shrink: 0 !important;
-  width: calc(100% - 3rem) !important;
-  max-width: calc(100% - 3rem) !important;
+  width: 100% !important;
   box-sizing: border-box !important;
 }
 
@@ -490,7 +461,7 @@
 #snipcart .snipcart-cart-summary__line {
   display: flex !important;
   justify-content: space-between !important;
-  align-items: center !important;
+  align-items: flex-start !important;
   padding: 0.875rem 0 !important;
   border-bottom: 1px solid var(--panier-border) !important;
   font-size: 1rem !important;
@@ -498,7 +469,7 @@
   line-height: 1.5 !important;
   width: 100% !important;
   box-sizing: border-box !important;
-  gap: 1rem !important;
+  gap: 1.5rem !important;
 }
 
 #snipcart .snipcart-summary-fees__line:last-child,
@@ -525,7 +496,6 @@
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
   min-width: 0 !important;
-  max-width: calc(100% - 120px) !important;
 }
 
 /* Prix dans le sommaire */
@@ -539,17 +509,22 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
   text-align: right !important;
   flex-shrink: 0 !important;
-  min-width: 100px !important;
+  min-width: 140px !important;
+  max-width: 140px !important;
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 /* Prix total final plus grand */
 #snipcart .snipcart-summary-fees__line:last-child .snipcart-summary-fees__amount,
 #snipcart .snipcart-cart-summary__line:last-child .snipcart-cart-summary__amount,
 #snipcart .snipcart-cart-summary__line:last-child .snipcart-cart-summary__total {
-  font-size: 1.4rem !important;
-  min-width: 120px !important;
+  font-size: 1.5rem !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
 }
 
 /* =================================================================== */
@@ -713,10 +688,9 @@
 /* =================================================================== */
 @media (max-width: 640px) {
   #snipcart .snipcart-modal__container {
-    margin: 0.25rem !important;
-    max-width: calc(100vw - 0.5rem) !important;
+    margin: 0.5rem !important;
+    max-width: calc(100vw - 1rem) !important;
     border-radius: 16px !important;
-    width: calc(100vw - 0.5rem) !important;
   }
   
   #snipcart .snipcart-item-line {
@@ -724,9 +698,7 @@
   }
   
   #snipcart .snipcart-cart-summary {
-    padding: 1rem !important;
-    width: calc(100% - 2rem) !important;
-    margin: var(--panier-gap) !important;
+    padding: 1.25rem !important;
   }
   
   #snipcart .snipcart-cart-header,
@@ -738,28 +710,12 @@
   #snipcart .snipcart-item-line__product-name {
     font-size: 1rem !important;
   }
-  
-  /* Prix plus petits sur mobile */
-  #snipcart .snipcart-summary-fees__amount,
-  #snipcart .snipcart-cart-summary__total,
-  #snipcart .snipcart-cart-summary__amount {
-    min-width: 80px !important;
-    font-size: 1rem !important;
-  }
-  
-  #snipcart .snipcart-summary-fees__line:last-child .snipcart-summary-fees__amount,
-  #snipcart .snipcart-cart-summary__line:last-child .snipcart-cart-summary__amount,
-  #snipcart .snipcart-cart-summary__line:last-child .snipcart-cart-summary__total {
-    font-size: 1.25rem !important;
-    min-width: 100px !important;
-  }
 }
 
 @media (max-width: 480px) {
   #snipcart .snipcart-modal__container {
-    margin: 0.125rem !important;
-    max-width: calc(100vw - 0.25rem) !important;
-    width: calc(100vw - 0.25rem) !important;
+    margin: 0.25rem !important;
+    max-width: calc(100vw - 0.5rem) !important;
   }
   
   #snipcart .snipcart-item-line {
@@ -768,18 +724,6 @@
   
   #snipcart .snipcart-item-line__header {
     gap: 0.5rem !important;
-  }
-  
-  #snipcart .snipcart-cart-summary {
-    padding: 0.75rem !important;
-    width: calc(100% - 1.5rem) !important;
-  }
-  
-  /* Labels plus courts sur très petit écran */
-  #snipcart .snipcart-summary-fees__label,
-  #snipcart .snipcart-cart-summary__label {
-    max-width: calc(100% - 100px) !important;
-    font-size: 0.9rem !important;
   }
 }
 
