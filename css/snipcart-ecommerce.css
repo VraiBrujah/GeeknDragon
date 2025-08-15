@@ -1,0 +1,453 @@
+/* ========================================================================
+   GEEK & DRAGON - SNIPCART E-COMMERCE DESIGN ULTRA MODERNE
+   Design de panier premium avec effets visuels avancés
+   ======================================================================== */
+
+/* =================================================================== */
+/* VARIABLES ÉTENDUES POUR E-COMMERCE PREMIUM                          */
+/* =================================================================== */
+:root {
+  /* Gradients premium */
+  --gd-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gd-gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
+  --gd-gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --gd-gradient-card: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+  
+  /* Ombres premium */
+  --gd-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --gd-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --gd-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --gd-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+  --gd-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  
+  /* Animation et timing */
+  --gd-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --gd-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Espacements premium */
+  --gd-space-xs: 0.25rem;
+  --gd-space-sm: 0.5rem;
+  --gd-space-md: 1rem;
+  --gd-space-lg: 1.5rem;
+  --gd-space-xl: 2rem;
+  --gd-space-2xl: 3rem;
+}
+
+/* =================================================================== */
+/* CONTENEUR PRINCIPAL DU PANIER - DESIGN PREMIUM                      */
+/* =================================================================== */
+#snipcart .snipcart-modal__container {
+  background: var(--gd-gradient-card) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--gd-shadow-xl) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  max-width: 480px !important;
+  margin: 0 auto !important;
+  overflow: hidden !important;
+}
+
+/* Header du panier avec effet glassmorphism */
+#snipcart .snipcart-cart-header {
+  background: rgba(30, 41, 59, 0.8) !important;
+  backdrop-filter: blur(15px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: var(--gd-space-lg) !important;
+  position: relative !important;
+}
+
+#snipcart .snipcart-cart-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gd-gradient-accent);
+}
+
+#snipcart .snipcart-cart-header__title,
+#snipcart .snipcart-modal__title {
+  font-family: 'Cinzel', serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: var(--gd-heading) !important;
+  margin: 0 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* =================================================================== */
+/* ARTICLES DU PANIER - DESIGN CARTE PREMIUM                          */
+/* =================================================================== */
+#snipcart .snipcart-item-line {
+  background: rgba(30, 41, 59, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+  margin: var(--gd-space-md) 0 !important;
+  padding: var(--gd-space-lg) !important;
+  transition: var(--gd-transition) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+#snipcart .snipcart-item-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gd-gradient-accent);
+  opacity: 0.5;
+}
+
+#snipcart .snipcart-item-line:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--gd-shadow-lg) !important;
+  border-color: rgba(139, 92, 246, 0.3) !important;
+}
+
+/* Titre de l'article avec style premium */
+#snipcart .snipcart-item-line__title,
+#snipcart .snipcart-item-line__product-name {
+  font-family: 'Cinzel', serif !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: var(--gd-heading) !important;
+  margin-bottom: var(--gd-space-sm) !important;
+  line-height: 1.4 !important;
+}
+
+/* Prix avec effet premium */
+#snipcart .snipcart-item-line__price,
+#snipcart .snipcart-item-line__unit-price {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: #10b981 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* =================================================================== */
+/* CONTRÔLES DE QUANTITÉ - DESIGN PREMIUM                             */
+/* =================================================================== */
+#snipcart .snipcart-item-line__quantity {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--gd-space-sm) !important;
+  margin: var(--gd-space-md) 0 !important;
+}
+
+#snipcart .snipcart-item-line__quantity input[type="number"],
+#snipcart .__qty-stepped input {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  color: var(--gd-text) !important;
+  padding: var(--gd-space-sm) var(--gd-space-md) !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  min-width: 60px !important;
+  transition: var(--gd-transition) !important;
+}
+
+#snipcart .snipcart-item-line__quantity input:focus,
+#snipcart .__qty-stepped input:focus {
+  outline: none !important;
+  border-color: var(--gd-accent) !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2) !important;
+}
+
+/* Boutons +/- stylés */
+#snipcart .__qty-btn {
+  background: var(--gd-gradient-accent) !important;
+  border: none !important;
+  border-radius: 10px !important;
+  color: white !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: var(--gd-transition) !important;
+  box-shadow: var(--gd-shadow-sm) !important;
+}
+
+#snipcart .__qty-btn:hover {
+  transform: scale(1.05) !important;
+  box-shadow: var(--gd-shadow-md) !important;
+}
+
+/* =================================================================== */
+/* CHAMPS PERSONNALISÉS - DESIGN PREMIUM                              */
+/* =================================================================== */
+#snipcart .snipcart-item-line__custom-field,
+#snipcart .snipcart-item-line__custom-fields {
+  background: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+  padding: var(--gd-space-md) !important;
+  margin: var(--gd-space-sm) 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+#snipcart .snipcart-item-line__custom-field-name {
+  font-family: 'Cinzel', serif !important;
+  font-weight: 600 !important;
+  color: var(--gd-accent) !important;
+  font-size: 0.9rem !important;
+}
+
+#snipcart .snipcart-item-line__custom-field-value {
+  color: var(--gd-text) !important;
+  font-weight: 500 !important;
+  background: rgba(139, 92, 246, 0.1) !important;
+  padding: var(--gd-space-xs) var(--gd-space-sm) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(139, 92, 246, 0.2) !important;
+}
+
+/* =================================================================== */
+/* BOUTONS D'ACTION - DESIGN PREMIUM                                  */
+/* =================================================================== */
+#snipcart .snipcart-item-line__actions button,
+#snipcart .__remove-left button,
+#snipcart .snipcart__button--icon {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  border-radius: 10px !important;
+  color: #f87171 !important;
+  padding: var(--gd-space-sm) !important;
+  transition: var(--gd-transition) !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#snipcart .snipcart-item-line__actions button:hover,
+#snipcart .__remove-left button:hover {
+  background: rgba(239, 68, 68, 0.2) !important;
+  border-color: #f87171 !important;
+  transform: scale(1.05) !important;
+}
+
+/* =================================================================== */
+/* SOMMAIRE DU PANIER - DESIGN ULTRA PREMIUM                          */
+/* =================================================================== */
+#snipcart .snipcart-cart-summary,
+#snipcart .snipcart-summary {
+  background: var(--gd-gradient-card) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 20px !important;
+  padding: var(--gd-space-xl) !important;
+  margin: var(--gd-space-lg) 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+#snipcart .snipcart-cart-summary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gd-gradient-accent);
+}
+
+/* Lignes du sommaire */
+#snipcart .snipcart-summary-fees__line,
+#snipcart .snipcart-cart-summary__line {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: var(--gd-space-md) 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  font-size: 1rem !important;
+}
+
+#snipcart .snipcart-summary-fees__line:last-child,
+#snipcart .snipcart-cart-summary__line:last-child {
+  border-bottom: none !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: var(--gd-heading) !important;
+  background: rgba(139, 92, 246, 0.1) !important;
+  border-radius: 12px !important;
+  padding: var(--gd-space-lg) !important;
+  margin-top: var(--gd-space-md) !important;
+}
+
+/* Prix total avec effet spécial */
+#snipcart .snipcart-summary-fees__amount,
+#snipcart .snipcart-cart-summary__total {
+  font-family: 'Cinzel', serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #10b981 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* =================================================================== */
+/* BOUTONS PRINCIPAUX - DESIGN ULTRA PREMIUM                          */
+/* =================================================================== */
+#snipcart .snipcart__button--primary,
+#snipcart .snipcart-cart-button,
+#snipcart .snipcart__button--checkout {
+  background: var(--gd-gradient-accent) !important;
+  border: none !important;
+  border-radius: 16px !important;
+  color: white !important;
+  font-family: 'Cinzel', serif !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  padding: var(--gd-space-lg) var(--gd-space-xl) !important;
+  width: 100% !important;
+  transition: var(--gd-transition) !important;
+  box-shadow: var(--gd-shadow-lg) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+#snipcart .snipcart__button--primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+#snipcart .snipcart__button--primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--gd-shadow-xl) !important;
+}
+
+#snipcart .snipcart__button--primary:hover::before {
+  left: 100%;
+}
+
+/* Bouton secondaire */
+#snipcart .snipcart__button--secondary {
+  background: transparent !important;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 16px !important;
+  color: var(--gd-text) !important;
+  font-family: 'Cinzel', serif !important;
+  font-weight: 600 !important;
+  padding: var(--gd-space-md) var(--gd-space-lg) !important;
+  transition: var(--gd-transition) !important;
+}
+
+#snipcart .snipcart__button--secondary:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: var(--gd-accent) !important;
+  color: var(--gd-accent) !important;
+}
+
+/* =================================================================== */
+/* PANIER VIDE - DESIGN ÉLÉGANT                                       */
+/* =================================================================== */
+#snipcart .snipcart-cart-empty {
+  text-align: center !important;
+  padding: var(--gd-space-2xl) !important;
+  background: var(--gd-gradient-card) !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#snipcart .snipcart-cart-empty__icon {
+  font-size: 4rem !important;
+  color: var(--gd-muted) !important;
+  margin-bottom: var(--gd-space-lg) !important;
+  opacity: 0.6 !important;
+}
+
+#snipcart .snipcart-cart-empty__title {
+  font-family: 'Cinzel', serif !important;
+  font-size: 1.5rem !important;
+  color: var(--gd-heading) !important;
+  margin-bottom: var(--gd-space-md) !important;
+}
+
+/* =================================================================== */
+/* ANIMATIONS ET EFFETS SPÉCIAUX                                      */
+/* =================================================================== */
+@keyframes cartItemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes cartSummaryPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+#snipcart .snipcart-item-line {
+  animation: cartItemSlideIn 0.4s ease-out !important;
+}
+
+#snipcart .snipcart-cart-summary {
+  animation: cartSummaryPulse 2s ease-in-out infinite !important;
+}
+
+/* =================================================================== */
+/* RESPONSIVE DESIGN                                                  */
+/* =================================================================== */
+@media (max-width: 640px) {
+  #snipcart .snipcart-modal__container {
+    margin: var(--gd-space-sm) !important;
+    max-width: calc(100vw - 1rem) !important;
+    border-radius: 16px !important;
+  }
+  
+  #snipcart .snipcart-item-line {
+    padding: var(--gd-space-md) !important;
+  }
+  
+  #snipcart .snipcart-cart-summary {
+    padding: var(--gd-space-lg) !important;
+  }
+}
+
+/* =================================================================== */
+/* EFFETS DE SCROLL PERSONNALISÉS                                     */
+/* =================================================================== */
+#snipcart .snipcart-modal__container::-webkit-scrollbar {
+  width: 8px;
+}
+
+#snipcart .snipcart-modal__container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+#snipcart .snipcart-modal__container::-webkit-scrollbar-thumb {
+  background: var(--gd-gradient-accent);
+  border-radius: 4px;
+}
+
+#snipcart .snipcart-modal__container::-webkit-scrollbar-thumb:hover {
+  background: var(--gd-accent);
+}

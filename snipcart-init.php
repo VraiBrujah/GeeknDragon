@@ -34,3 +34,7 @@ if (!$snipcartKey || !$snipcartLanguage) {
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 <!-- Script de personnalisation -->
 <script defer src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>
+<!-- Script de traduction -->
+<script defer src="/js/snipcart-translations.js?v=<?= filemtime(__DIR__.'/js/snipcart-translations.js') ?>"></script>
+<!-- Script d'améliorations UX -->
+<script defer src="/js/snipcart-ux-enhancements.js?v=<?= filemtime(__DIR__.'/js/snipcart-ux-enhancements.js') ?>"></script>
