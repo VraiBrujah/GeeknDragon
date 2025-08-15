@@ -169,73 +169,83 @@
     root.__observerMounted = true;
   }
 
-  // Fonction simple pour remplacer les textes dans Snipcart
+  // Fonction pour appliquer les traductions Snipcart
   function applySnipcartTranslations() {
+    if (!window.i18n?.snipcart) return;
+    
+    const translations = window.i18n.snipcart;
     const lang = localStorage.getItem('lang') || 'fr';
     
-    // Traduire les champs personnalisés visibles
-    setTimeout(() => {
-      document.querySelectorAll('#snipcart [data-item-custom1-name], #snipcart [data-item-custom2-name]').forEach(el => {
-        const name = el.textContent?.trim();
-        if (name === 'multiplier' || name === 'Multiplier') {
-          el.textContent = lang === 'fr' ? 'Multiplicateur' : 'Multiplier';
-        } else if (name === 'language' || name === 'Language') {
-          el.textContent = lang === 'fr' ? 'Langue' : 'Language';
+    // Configuration des traductions Snipcart
+    if (window.Snipcart?.api?.theme) {
+      try {
+        // Appliquer les traductions personnalisées
+        window.Snipcart.api.theme.customization.registerTemplates({
+          // Template pour les champs personnalisés
+          'CartItem': `
+            <div class="snipcart-item-line">
+              <!-- Contenu standard -->
+              {{#if customFields}}
+                {{#each customFields}}
+                  <div class="snipcart-item-line__custom-field">
+                    <span class="snipcart-item-line__custom-field-name">
+                      {{#if (equals name "multiplier")}}
+                        ${translations.custom_fields?.multiplier || 'Multiplicateur'}
+                      {{else if (equals name "language")}}
+                        ${translations.custom_fields?.language || 'Langue'}
+                      {{else}}
+                        {{name}}
+                      {{/if}}
+                    </span>
+                    <span class="snipcart-item-line__custom-field-value">{{value}}</span>
+                  </div>
+                {{/each}}
+              {{/if}}
+            </div>
+          `
+        });
+        
+        // Traduction via l'API si disponible
+        if (window.Snipcart.api.localization) {
+          window.Snipcart.api.localization.setLanguage(lang, {
+            cart: translations.cart,
+            checkout: translations.checkout,
+            customer: translations.customer,
+            errors: translations.errors
+          });
         }
-      });
-      
-      // Traduire autres éléments si nécessaire
-      hideVariableNames();
-    }, 500);
+      } catch (e) {
+        console.debug('[Snipcart] Customization API not available');
+      }
+    }
   }
 
   // Fonction pour masquer les noms de variables dans l'interface
   function hideVariableNames() {
-    const lang = localStorage.getItem('lang') || 'fr';
-    
-    // Traductions simples
-    const translations = {
-      fr: { multiplier: 'Multiplicateur', language: 'Langue' },
-      en: { multiplier: 'Multiplier', language: 'Language' }
-    };
-    
-    // Sélecteurs plus larges pour capturer tous les éléments
+    // Sélecteurs pour les éléments qui peuvent afficher des noms de variables
     const selectors = [
-      '#snipcart .snipcart-item-line__custom-field-name',
-      '#snipcart .snipcart-item-line__product-option-name', 
-      '#snipcart [data-item-custom-field-name]',
-      '#snipcart .snipcart-product-option__name',
-      '#snipcart .snipcart-item-line__information *'
+      '.snipcart-item-line__custom-field-name',
+      '.snipcart-item-line__product-option-name',
+      '[data-item-custom-field-name]',
+      '.snipcart-product-option__name'
     ];
     
     selectors.forEach(selector => {
       document.querySelectorAll(selector).forEach(el => {
-        const text = el.textContent?.trim().toLowerCase();
+        const text = el.textContent?.trim();
         if (!text) return;
         
-        if (text === 'multiplier') {
-          el.textContent = translations[lang].multiplier;
-        } else if (text === 'language') {
-          el.textContent = translations[lang].language;
+        // Remplacer les noms de variables par les traductions
+        const translations = window.i18n?.snipcart?.custom_fields;
+        if (translations) {
+          if (text === 'multiplier' || text === 'Multiplier') {
+            el.textContent = translations.multiplier;
+          } else if (text === 'language' || text === 'Language') {
+            el.textContent = translations.language;
+          }
         }
       });
     });
-    
-    // Observer spécifique pour Snipcart
-    const snipcartEl = document.getElementById('snipcart');
-    if (snipcartEl && !snipcartEl.hasAttribute('data-translation-observer')) {
-      const observer = new MutationObserver(() => {
-        setTimeout(hideVariableNames, 100);
-      });
-      
-      observer.observe(snipcartEl, {
-        childList: true,
-        subtree: true,
-        characterData: true
-      });
-      
-      snipcartEl.setAttribute('data-translation-observer', 'true');
-    }
   }
 
   whenSnipcartReady(() => {

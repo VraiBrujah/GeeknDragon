@@ -190,21 +190,24 @@ document.addEventListener('DOMContentLoaded', () => {
       window.GD.setLang(picked);
       setCurrent(picked);
       
-      // Mettre à jour Snipcart
+      // Mettre à jour Snipcart avec délai pour s'assurer qu'il est prêt
       whenSnipcart(() => {
         try {
           if (window.Snipcart.api.session) {
             window.Snipcart.api.session.setLanguage(picked);
           }
           
-          // Déclencher les nouvelles traductions
-          if (window.GD?.translateSnipcart) {
-            setTimeout(window.GD.translateSnipcart, 200);
+          // Forcer le rechargement des traductions Snipcart
+          if (window.Snipcart.store) {
+            const state = window.Snipcart.store.getState();
+            if (state.cart.status === 'visible') {
+              // Fermer et rouvrir le panier pour appliquer les traductions
+              window.Snipcart.api.theme.cart.close();
+              setTimeout(() => {
+                window.Snipcart.api.theme.cart.open();
+              }, 100);
+            }
           }
-          
-          // Événement personnalisé pour les traductions
-          document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: picked } }));
-          
         } catch (e) {
           console.debug('[i18n] Erreur mise à jour langue Snipcart:', e);
         }
