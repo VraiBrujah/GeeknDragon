@@ -182,7 +182,7 @@ echo $snipcartInit;
              class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center"
              role="dialog" aria-modal="true"
              aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »">
-          <div class="relative w-11/12 max-w-3xl">
+          <div class="relative w-full max-w-screen-lg">
             <button type="button"
                     class="absolute -top-10 right-0 text-white text-4xl leading-none focus:outline-none"
                     aria-label="Fermer la vidéo"
@@ -422,18 +422,23 @@ echo $snipcartInit;
 
     const openModal = () => {
       modal.classList.remove('hidden');
+      openBtn.classList.add('invisible');
       iframe.focus();
     };
 
     const closeModal = () => {
       modal.classList.add('hidden');
       iframe.src = iframe.src;
+      openBtn.classList.remove('invisible');
       openBtn.focus();
     };
 
     openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+    });
   });
   </script>
 </body>
