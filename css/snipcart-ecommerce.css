@@ -440,7 +440,8 @@
   padding: var(--panier-padding) !important;
   margin: var(--panier-gap) 0 !important;
   position: relative !important;
-  overflow: visible !important;
+  overflow-y: auto !important;
+  max-height: calc(var(--panier-max-height) - 2 * var(--panier-padding)) !important;
   flex-shrink: 0 !important;
   width: 100% !important;
   box-sizing: border-box !important;
