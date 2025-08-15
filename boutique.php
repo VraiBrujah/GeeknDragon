@@ -102,8 +102,9 @@ echo $snipcartInit;
     <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:0" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60" style="z-index:1"></div>
     <div class="hero-content animate-fade-in-up" style="z-index:2">
-      <h1 class="hero-title" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
-      <p class="hero-subtitle" data-i18n="shop.hero.description">Offrez à vos parties l'élégance et la durabilité de pièces et cartes d'équipement conçues au Québec, plus précieuses qu'une figurine de dragon à 300 $, laquelle ne sert qu'exceptionnellement, nos pièces sont présentes à chaque session pour des années d'aventures.</p>
+      <h1 class="hero-title" data-i18n="shop.hero.title">L'immersion au cœur du jeu</h1>
+      <p class="hero-subtitle" data-i18n="shop.hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
+      <p class="hero-subtitle" data-i18n="shop.hero.subtitle2">Conçues au Québec</p>
       <a href="#pieces" class="hero-cta">
         <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
