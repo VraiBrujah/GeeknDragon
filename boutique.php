@@ -130,12 +130,14 @@ echo $snipcartInit;
       </div>
 
       <!-- Description & appel à la vidéo -->
-      <div class="mt-20 md:mt-28 max-w-4xl mx-auto px-6 text-center space-y-10 leading-relaxed">
-        <p class="text-gray-300 text-xl md:text-2xl tracking-wide">
+      <section class="mt-20 md:mt-28 max-w-4xl mx-auto px-6 py-16 text-center space-y-10 leading-relaxed bg-gradient-to-b from-gray-900 via-indigo-900 to-gray-900">
+        <h2 class="text-3xl font-bold text-gray-200">Pourquoi des pièces physiques&nbsp;?</h2>
+        <div class="h-0.5 w-20 bg-indigo-400 mx-auto"></div>
+        <p class="text-gray-400 text-xl md:text-2xl tracking-wide">
           <span data-i18n="shop.pieces.description">
-            <span class="block font-semibold text-gray-100">
+            <span class="block font-semibold text-gray-200">
               Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets :
-              <span class="font-normal">ça fonctionne, mais ça perd toute sa saveur.</span>
+              <span class="font-normal text-gray-400">ça fonctionne, mais ça perd toute sa saveur.</span>
             </span>
 
             <span class="block mt-6">
@@ -177,7 +179,7 @@ echo $snipcartInit;
             Échelle & abréviations (5e)
           </h4>
           <div class="overflow-x-auto">
-            <table class="mx-auto border-collapse text-gray-300">
+            <table class="mx-auto border-collapse text-gray-400">
               <thead>
                 <tr class="bg-gray-700">
                   <th class="px-4 py-2">Abrév.</th>
@@ -215,7 +217,7 @@ echo $snipcartInit;
             </table>
           </div>
         </div>
-      </div>
+      </section>
 
     </div>
   </section>
