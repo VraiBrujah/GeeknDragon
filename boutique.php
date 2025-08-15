@@ -188,6 +188,7 @@ echo $snipcartInit;
 	</section>
 
 
+
   <!-- ░░░ COFFRES SUR MESURE PREMIUM ░░░ -->
   <section class="features-section">
     <div class="max-w-6xl mx-auto px-6">
