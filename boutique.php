@@ -207,7 +207,7 @@ echo $snipcartInit;
 
 
   <!-- ░░░ COFFRES SUR MESURE PREMIUM ░░░ -->
-  <section class="features-section">
+  <section class="items-center features-section">
     <div class="max-w-6xl mx-auto px-6">
       <div class="features-grid">
         <div class="feature-card">
