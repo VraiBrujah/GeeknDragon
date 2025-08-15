@@ -93,9 +93,8 @@
   },
   "shop": {
     "hero": {
-      "title": "Immersion at the heart of the game",
-      "subtitle1": "Cards, coins and sheets ready to play for your D&D sessions",
-      "subtitle2": "Designed in Quebec",
+      "title": "Geek & Dragon Shop",
+      "description": "Give your sessions the elegance and durability of coins and equipment cards designed in Quebec, more precious than a $300 dragon miniature used only on rare occasions; our coins appear in every session for years of adventures.",
       "button": "Choose my treasures"
     },
     "intro": {

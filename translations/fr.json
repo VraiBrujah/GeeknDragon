@@ -93,9 +93,8 @@
   },
   "shop": {
     "hero": {
-      "title": "L'immersion au cœur du jeu",
-      "subtitle1": "Cartes, pièces et fiches prêtes à jouer pour vos parties D&D",
-      "subtitle2": "Conçues au Québec",
+      "title": "Boutique Geek & Dragon",
+      "description": "Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.",
       "button": "Choisir mes trésors"
     },
     "intro": {
