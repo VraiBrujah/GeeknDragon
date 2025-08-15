@@ -100,6 +100,8 @@ $isInStock = inStock($id);
               <?php endforeach; ?>
             </select>
           </div>
+        <?php else : ?>
+          <div class="custom-options-placeholder"></div>
         <?php endif; ?>
       </div>
 

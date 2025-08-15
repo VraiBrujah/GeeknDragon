@@ -14,8 +14,9 @@
   
   /* Tailles optimisées */
   --panier-width-mobile: calc(100vw - 0.5rem);
-  --panier-width-tablet: 720px;
-  --panier-width-desktop: 850px;
+  --panier-width-tablet: 800px;
+  --panier-width-desktop: 950px;
+  --panier-width-xl: 1100px;
   --panier-max-height: 90vh;
   
   /* Couleurs du panier */
@@ -64,8 +65,15 @@
 
 @media (min-width: 1200px) {
   #snipcart .snipcart-modal__container {
-    width: 900px !important;
-    max-width: 900px !important;
+    width: var(--panier-width-xl) !important;
+    max-width: var(--panier-width-xl) !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  #snipcart .snipcart-modal__container {
+    width: 1200px !important;
+    max-width: 1200px !important;
   }
 }
 
@@ -129,6 +137,31 @@
   padding: 0 !important;
   display: flex !important;
   flex-direction: column !important;
+  max-height: calc(90vh - 120px) !important;
+}
+
+/* Scrollbar personnalisée pour le contenu */
+#snipcart .snipcart-modal__content::-webkit-scrollbar,
+#snipcart .snipcart-cart-content::-webkit-scrollbar {
+  width: 12px !important;
+}
+
+#snipcart .snipcart-modal__content::-webkit-scrollbar-track,
+#snipcart .snipcart-cart-content::-webkit-scrollbar-track {
+  background: var(--panier-bg) !important;
+  border-radius: 6px !important;
+}
+
+#snipcart .snipcart-modal__content::-webkit-scrollbar-thumb,
+#snipcart .snipcart-cart-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--panier-accent), #a855f7) !important;
+  border-radius: 6px !important;
+  border: 2px solid var(--panier-bg) !important;
+}
+
+#snipcart .snipcart-modal__content::-webkit-scrollbar-thumb:hover,
+#snipcart .snipcart-cart-content::-webkit-scrollbar-thumb:hover {
+  background: var(--panier-accent) !important;
 }
 
 /* Zone des articles avec padding optimal */
@@ -438,11 +471,12 @@
   border: 1px solid var(--panier-border) !important;
   border-radius: 16px !important;
   padding: var(--panier-padding) !important;
-  margin: var(--panier-gap) 0 !important;
+  margin: var(--panier-gap) !important;
   position: relative !important;
   overflow: visible !important;
   flex-shrink: 0 !important;
-  width: 100% !important;
+  width: calc(100% - 2rem) !important;
+  max-width: calc(100% - 2rem) !important;
   box-sizing: border-box !important;
 }
 

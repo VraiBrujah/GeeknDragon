@@ -70,7 +70,21 @@ $customLabel   = !empty($languages)
 $images        = $product['images'] ?? [];
 
 // CSS local pour une description propre
-$extraHead = '';
+$extraHead = <<<HTML
+<link rel="stylesheet" href="/css/boutique-premium.css?v=<?= filemtime(__DIR__.'/css/boutique-premium.css') ?>">
+<style>
+  .main-product {
+    background: var(--boutique-bg);
+    min-height: 100vh;
+  }
+  .product-panel {
+    background: var(--boutique-gradient-card) !important;
+    border: 1px solid var(--boutique-border) !important;
+    border-radius: var(--boutique-radius-lg) !important;
+    box-shadow: var(--boutique-shadow-xl) !important;
+  }
+</style>
+HTML;
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -89,12 +103,17 @@ echo $snipcartInit;
 <main id="main" class="py-10 pt-[var(--header-height)] main-product">
   <section class="max-w-3xl w-full mx-auto px-6">
     <div class="flex justify-center mb-6">
-      <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline">&larr;
+      <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="hero-cta">
+        <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
         <span data-i18n="product.back">Retour à la boutique</span>
       </a>
     </div>
 
-    <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center product-panel">
+    <div class="product-card max-w-4xl mx-auto"
+         style="background: var(--boutique-gradient-card); border: 1px solid var(--boutique-border); border-radius: var(--boutique-radius-lg); box-shadow: var(--boutique-shadow-xl);"
+    >
       <?php if (!empty($images)) : ?>
         <div class="swiper mb-6 w-full">
           <div class="swiper-wrapper">
@@ -121,41 +140,47 @@ echo $snipcartInit;
         </div>
       <?php endif; ?>
 
-      <h1 class="text-3xl font-bold mb-4 text-center"
+      <h1 class="product-title text-4xl"
           data-name-fr="<?= $displayName ?>"
           data-name-en="<?= $displayNameEn ?>"><?= ($lang === 'en' ? $displayNameEn : $displayName) ?></h1>
 
       <!-- Description : rendu HTML direct, sans data-desc-* pour éviter les remplacements JS -->
-      <div class="product-desc mb-6">
+      <div class="product-description text-lg mb-6">
         <?= $productDescHtml ?>
+      </div>
+      
+      <div class="product-price text-2xl mb-6">
+        <?= number_format((float)$product['price'], 2, '.', '') ?> $CA
       </div>
 
 
 
       <?php if (inStock($id)) : ?>
-        <div class="text-center mb-4 w-full">
-          <label class="block mb-2" data-i18n="product.quantity">Quantité</label>
-          <div class="flex items-center justify-center gap-4">
-<!--
-            <?php if (!empty($customOptions)) : ?>
-              <select id="multiplier-<?= htmlspecialchars($id) ?>" class="multiplier-select select" data-target="<?= htmlspecialchars($id) ?>">
-                <?php foreach ($customOptions as $opt) : ?>
-                  <option value="<?= htmlspecialchars((string)$opt) ?>">
-                    <?= !empty($languages) ? htmlspecialchars((string)$opt) : 'x' . htmlspecialchars((string)$opt) ?>
+        <div class="quantity-controls">
+          <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
+            <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+            <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
+            <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+          </div>
+          
+          <?php if (!empty($customOptions)) : ?>
+            <div class="custom-options">
+              <label for="custom-<?= htmlspecialchars($id) ?>" class="block text-sm font-medium text-gray-300 mb-2">
+                <?= htmlspecialchars($customLabel) ?>
+              </label>
+              <select id="custom-<?= htmlspecialchars($id) ?>" 
+                      class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                <?php foreach ($customOptions as $option) : ?>
+                  <option value="<?= htmlspecialchars((string)$option) ?>">
+                    <?= htmlspecialchars((string)$option) ?>
                   </option>
                 <?php endforeach; ?>
               </select>
-            <?php endif; ?>
--->
-            <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
-              <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
-              <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-              <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
             </div>
-          </div>
+          <?php endif; ?>
         </div>
 
-        <button class="snipcart-add-item btn btn-shop"
+        <button class="snipcart-add-item add-to-cart-btn"
             data-item-id="<?= htmlspecialchars($id) ?>"
             data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
             data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
@@ -169,20 +194,36 @@ echo $snipcartInit;
             data-item-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
           <?php endif; ?>
         >
-          <span data-i18n="product.add">Ajouter</span>
+          <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
+            <circle cx="9" cy="20" r="1"/>
+            <circle cx="20" cy="20" r="1"/>
+          </svg>
+          <span data-i18n="product.add">Ajouter au panier</span>
         </button>
       <?php else : ?>
-        <span class="btn btn-shop opacity-60 cursor-not-allowed" disabled data-i18n="product.outOfStock">Rupture de stock</span>
+        <button class="add-to-cart-btn" disabled>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd"/>
+          </svg>
+          <span data-i18n="product.outOfStock">Rupture de stock</span>
+        </button>
       <?php endif; ?>
 
-      <p class="mt-4 text-center txt-court">
-        <span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
-        <span class="payment-icons inline-flex gap-2 align-middle ml-2">
-          <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-          <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-          <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
-        </span>
-      </p>
+      <div class="trust-section mt-8 pt-6 border-t border-gray-600">
+        <div class="trust-badges justify-center">
+          <div class="trust-badge">
+            <span class="trust-icon">🔒</span>
+            <span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
+          </div>
+          
+          <div class="trust-badge">
+            <img src="/images/payments/visa.svg" alt="Logo Visa" class="w-8 h-6" loading="lazy">
+            <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" class="w-8 h-6" loading="lazy">
+            <img src="/images/payments/american-express.svg" alt="Logo American Express" class="w-8 h-6" loading="lazy">
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
