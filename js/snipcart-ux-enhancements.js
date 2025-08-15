@@ -34,6 +34,9 @@
     
     // Améliorer les champs personnalisés
     enhanceCustomFields();
+    
+    // Forcer l'affichage des multiplicateurs
+    forceMultiplierDisplay();
   }
 
   // Améliorer les boutons avec des icônes
@@ -326,6 +329,75 @@
     });
   }
 
+  // Forcer l'affichage des multiplicateurs dans le sommaire
+  function forceMultiplierDisplay() {
+    const snipcartEl = document.getElementById('snipcart');
+    if (!snipcartEl) return;
+
+    // Chercher les éléments de sommaire
+    const summaryElements = snipcartEl.querySelectorAll('.snipcart-cart-summary, .snipcart-order-summary, .snipcart-checkout .snipcart-summary');
+    
+    summaryElements.forEach(summary => {
+      // Chercher tous les articles dans le sommaire
+      const itemLines = summary.querySelectorAll('.snipcart-item-line');
+      
+      itemLines.forEach(itemLine => {
+        // Vérifier si les champs personnalisés existent déjà
+        let customFields = itemLine.querySelector('.snipcart-item-line__custom-fields');
+        
+        if (!customFields) {
+          // Créer la section des champs personnalisés si elle n'existe pas
+          customFields = document.createElement('div');
+          customFields.className = 'snipcart-item-line__custom-fields';
+          customFields.style.cssText = `
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0.25rem !important;
+            margin-top: 0.5rem !important;
+            padding: 0.5rem !important;
+            background: rgba(139, 92, 246, 0.05) !important;
+            border-radius: 8px !important;
+            border: 1px solid rgba(139, 92, 246, 0.1) !important;
+          `;
+          
+          // Ajouter le multiplicateur par défaut x100
+          const multiplierField = document.createElement('div');
+          multiplierField.className = 'snipcart-item-line__custom-field';
+          multiplierField.setAttribute('data-name', 'multiplicateur');
+          multiplierField.innerHTML = `
+            <div class="snipcart-item-line__custom-field-name" style="
+              font-weight: 500 !important;
+              color: var(--panier-muted) !important;
+              font-size: 0.875rem !important;
+            ">Multiplicateur</div>
+            <div class="snipcart-item-line__custom-field-value" style="
+              font-weight: 700 !important;
+              color: var(--panier-accent) !important;
+              background: rgba(139, 92, 246, 0.1) !important;
+              padding: 0.125rem 0.5rem !important;
+              border-radius: 4px !important;
+              font-size: 0.875rem !important;
+            ">x100</div>
+          `;
+          multiplierField.style.cssText = `
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            padding: 0.25rem 0 !important;
+          `;
+          
+          customFields.appendChild(multiplierField);
+          itemLine.appendChild(customFields);
+        } else {
+          // Forcer l'affichage si elle existe déjà
+          customFields.style.display = 'flex !important';
+          customFields.style.visibility = 'visible !important';
+          customFields.style.opacity = '1 !important';
+        }
+      });
+    });
+  }
+
   // Notifications de panier
   function showCartNotification(message, type = 'success') {
     const existing = document.querySelector('.cart-notification');
@@ -379,6 +451,19 @@
       
       window.Snipcart.events.on('cart.opened', () => {
         setTimeout(enhanceCartVisuals, 100);
+      });
+      
+      window.Snipcart.events.on('checkout.opened', () => {
+        setTimeout(() => {
+          enhanceCartVisuals();
+          forceMultiplierDisplay();
+        }, 300);
+      });
+      
+      window.Snipcart.events.on('checkout.step', () => {
+        setTimeout(() => {
+          forceMultiplierDisplay();
+        }, 200);
       });
     }
     
