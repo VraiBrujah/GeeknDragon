@@ -20,7 +20,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
   echo $snipcartInit;
   ?>
 
-  <main id="main" class="py-650">
+  <main id="main" class="pt-650">
   
 
     <!-- ===== HERO ===== -->
