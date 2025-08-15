@@ -209,7 +209,7 @@ echo $snipcartInit;
   <!-- ░░░ COFFRES SUR MESURE PREMIUM ░░░ -->
   <section class="items-center features-section">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="features-grid">
+      <div class="flex flex-wrap justify-center gap-6">
         <div class="feature-card">
           <span class="feature-icon">📦</span>
           <h3 class="feature-title" data-i18n="shop.chest.title">Coffres sur mesure</h3>
