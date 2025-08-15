@@ -2,10 +2,9 @@
    GEEK & DRAGON - AMÉLIORATIONS UX POUR SNIPCART
    Effets visuels et interactions premium pour le panier
    ======================================================================== */
+/* eslint-disable no-param-reassign, no-use-before-define, no-console */
 
 (() => {
-  'use strict';
-
   // Attendre que Snipcart soit prêt
   function waitForSnipcart(callback) {
     if (window.Snipcart && window.Snipcart.events) {
@@ -22,16 +21,16 @@
 
     // Ajouter des icônes aux boutons
     enhanceButtons();
-    
+
     // Ajouter des indicateurs visuels
     addVisualIndicators();
-    
+
     // Améliorer le sommaire
     enhanceCartSummary();
-    
+
     // Ajouter des animations
     addAnimations();
-    
+
     // Améliorer les champs personnalisés
     enhanceCustomFields();
   }
@@ -39,10 +38,10 @@
   // Améliorer les boutons avec des icônes
   function enhanceButtons() {
     const snipcartEl = document.getElementById('snipcart');
-    
+
     // Bouton de checkout
     const checkoutBtns = snipcartEl.querySelectorAll('.snipcart__button--primary, .snipcart__button--checkout');
-    checkoutBtns.forEach(btn => {
+    checkoutBtns.forEach((btn) => {
       if (!btn.querySelector('.btn-icon')) {
         const icon = document.createElement('span');
         icon.className = 'btn-icon';
@@ -58,19 +57,19 @@
 
     // Boutons de suppression
     const removeBtns = snipcartEl.querySelectorAll('.snipcart-item-line__actions button, .__remove-left button');
-    removeBtns.forEach(btn => {
+    removeBtns.forEach((btn) => {
       if (!btn.querySelector('.btn-icon')) {
         btn.innerHTML = '<span class="btn-icon">🗑️</span>';
         btn.style.cssText += `
           position: relative;
           overflow: hidden;
         `;
-        
+
         // Effet de confirmation au hover
         btn.addEventListener('mouseenter', () => {
           btn.style.background = 'rgba(239, 68, 68, 0.3)';
         });
-        
+
         btn.addEventListener('mouseleave', () => {
           btn.style.background = 'rgba(239, 68, 68, 0.1)';
         });
@@ -79,10 +78,11 @@
 
     // Boutons +/-
     const qtyBtns = snipcartEl.querySelectorAll('.__qty-btn');
-    qtyBtns.forEach(btn => {
+    qtyBtns.forEach((btn) => {
       // Effet de vibration sur clic
       btn.addEventListener('click', () => {
         btn.style.animation = 'none';
+        // eslint-disable-next-line no-unused-expressions
         btn.offsetHeight; // Force reflow
         btn.style.animation = 'buttonClick 0.2s ease-out';
       });
@@ -92,7 +92,7 @@
   // Ajouter des indicateurs visuels
   function addVisualIndicators() {
     const snipcartEl = document.getElementById('snipcart');
-    
+
     // Indicateur de nombre d'articles
     const itemLines = snipcartEl.querySelectorAll('.snipcart-item-line');
     if (itemLines.length > 0) {
@@ -150,7 +150,7 @@
   function enhanceCartSummary() {
     const snipcartEl = document.getElementById('snipcart');
     const summary = snipcartEl.querySelector('.snipcart-cart-summary, .snipcart-summary');
-    
+
     if (summary && !summary.querySelector('.summary-enhancement')) {
       // Ajouter un indicateur de sécurité
       const securityIndicator = document.createElement('div');
@@ -203,7 +203,7 @@
           position: relative;
           overflow: hidden;
         `;
-        
+
         const shimmer = document.createElement('div');
         shimmer.style.cssText = `
           position: absolute;
@@ -231,22 +231,22 @@
           50% { transform: scale(0.95); }
           100% { transform: scale(1); }
         }
-        
+
         @keyframes counterPulse {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.1); }
         }
-        
+
         @keyframes statusBlink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.3; }
         }
-        
+
         @keyframes shimmer {
           0% { left: -100%; }
           100% { left: 100%; }
         }
-        
+
         @keyframes slideInFromRight {
           from {
             opacity: 0;
@@ -257,11 +257,11 @@
             transform: translateX(0);
           }
         }
-        
+
         .snipcart-item-line {
           animation: slideInFromRight 0.4s ease-out !important;
         }
-        
+
         .cart-notification {
           position: fixed;
           top: 100px;
@@ -284,23 +284,24 @@
   function enhanceCustomFields() {
     const snipcartEl = document.getElementById('snipcart');
     const customFields = snipcartEl.querySelectorAll('.snipcart-item-line__custom-field');
-    
-    customFields.forEach(field => {
+
+    customFields.forEach((field) => {
+      const fieldEl = field;
       if (!field.querySelector('.field-icon')) {
         const nameEl = field.querySelector('.snipcart-item-line__custom-field-name');
         const valueEl = field.querySelector('.snipcart-item-line__custom-field-value');
-        
+
         if (nameEl && valueEl) {
           // Ajouter des icônes basées sur le type de champ
           const fieldName = nameEl.textContent.toLowerCase();
           let icon = '⚙️';
-          
+
           if (fieldName.includes('multiplicateur') || fieldName.includes('multiplier')) {
             icon = '✖️';
           } else if (fieldName.includes('langue') || fieldName.includes('language')) {
             icon = '🌐';
           }
-          
+
           const iconEl = document.createElement('span');
           iconEl.className = 'field-icon';
           iconEl.textContent = icon;
@@ -310,16 +311,16 @@
             opacity: 0.8;
           `;
           nameEl.insertBefore(iconEl, nameEl.firstChild);
-          
+
           // Effet hover sur les champs
-          field.addEventListener('mouseenter', () => {
-            field.style.background = 'rgba(15, 23, 42, 0.8)';
-            field.style.borderColor = 'rgba(139, 92, 246, 0.4)';
+          fieldEl.addEventListener('mouseenter', () => {
+            fieldEl.style.background = 'rgba(15, 23, 42, 0.8)';
+            fieldEl.style.borderColor = 'rgba(139, 92, 246, 0.4)';
           });
-          
-          field.addEventListener('mouseleave', () => {
-            field.style.background = 'rgba(15, 23, 42, 0.6)';
-            field.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+
+          fieldEl.addEventListener('mouseleave', () => {
+            fieldEl.style.background = 'rgba(15, 23, 42, 0.6)';
+            fieldEl.style.borderColor = 'rgba(255, 255, 255, 0.1)';
           });
         }
       }
@@ -330,17 +331,17 @@
   function showCartNotification(message, type = 'success') {
     const existing = document.querySelector('.cart-notification');
     if (existing) existing.remove();
-    
+
     const notification = document.createElement('div');
     notification.className = 'cart-notification';
     notification.textContent = message;
-    
+
     if (type === 'error') {
       notification.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
     }
-    
+
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
       notification.style.animation = 'slideInFromRight 0.5s ease-out reverse';
       setTimeout(() => notification.remove(), 500);
@@ -351,43 +352,44 @@
   waitForSnipcart(() => {
     // Améliorer le panier initial
     enhanceCartVisuals();
-    
+
     // Observer les changements
     const observer = new MutationObserver(() => {
       enhanceCartVisuals();
     });
-    
+
     const snipcartEl = document.getElementById('snipcart');
     if (snipcartEl) {
       observer.observe(snipcartEl, {
         childList: true,
-        subtree: true
+        subtree: true,
       });
     }
-    
+
     // Écouter les événements Snipcart
     if (window.Snipcart.events) {
       window.Snipcart.events.on('item.added', () => {
         showCartNotification('Article ajouté au panier ! 🛒');
         setTimeout(enhanceCartVisuals, 300);
       });
-      
+
       window.Snipcart.events.on('item.removed', () => {
         showCartNotification('Article retiré du panier', 'error');
         setTimeout(enhanceCartVisuals, 300);
       });
-      
+
       window.Snipcart.events.on('cart.opened', () => {
         setTimeout(enhanceCartVisuals, 100);
       });
     }
-    
-    console.log('[UX] Améliorations Snipcart activées');
+
+    if (window.GD && window.GD.log) {
+      window.GD.log('[UX] Améliorations Snipcart activées');
+    }
   });
 
   // Exposer les fonctions
   window.GD = window.GD || {};
   window.GD.enhanceCart = enhanceCartVisuals;
   window.GD.showCartNotification = showCartNotification;
-
 })();
