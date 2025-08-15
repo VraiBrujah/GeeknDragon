@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const setHeaderVars = () => {
     const h = header.getBoundingClientRect().height || 96;
     // utilisé par ton site
-    document.documentElement.style.setProperty('--header-height', `${h}px`);
+    document.documentElement.style.setProperty('--header-height', `${h - 5}px`);
     // utilisé par snipcart-custom.css (modal/summary sticky)
     document.documentElement.style.setProperty('--gd-header-h', `${h}px`);
   };
