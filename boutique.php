@@ -62,8 +62,6 @@ foreach ($data as $id => $p) {
         'description' => $p['description'],
         'description_en' => $p['description_en'] ?? $p['description'],
         'url' => '/product.php?id=' . urlencode($id) . '&from=' . urlencode($category),
-        'multipliers' => $p['multipliers'] ?? [],
-        'languages' => $p['languages'] ?? [],
     ];
     switch ($category) {
         case 'cards':

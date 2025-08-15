@@ -12,12 +12,6 @@ $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $isVideo     = preg_match('/\.mp4$/i', $img);
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
-$multipliers = $product['multipliers'] ?? [];
-$languages   = $product['languages'] ?? [];
-$customOptions = !empty($languages) ? $languages : $multipliers;
-$customLabel = !empty($languages)
-    ? ($translations['product']['language'] ?? ($lang === 'en' ? 'Language' : 'Langue'))
-    : ($translations['product']['multiplier'] ?? ($lang === 'en' ? 'Multiplier' : 'Multiplicateur'));
 
 static $parsedown;
 $parsedown = $parsedown ?? new Parsedown();
@@ -86,21 +80,6 @@ $isInStock = inStock($id);
           <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
         </div>
         
-        <?php if (!empty($customOptions)) : ?>
-          <div class="custom-options">
-            <label for="custom-<?= htmlspecialchars($id) ?>" class="block text-sm font-medium text-gray-300 mb-2">
-              <?= htmlspecialchars($customLabel) ?>
-            </label>
-            <select id="custom-<?= htmlspecialchars($id) ?>" 
-                    class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-              <?php foreach ($customOptions as $option) : ?>
-                <option value="<?= htmlspecialchars((string)$option) ?>">
-                  <?= htmlspecialchars((string)$option) ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-        <?php endif; ?>
       </div>
 
       <!-- Bouton d'achat -->
@@ -111,13 +90,7 @@ $isInStock = inStock($id);
               data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
               data-item-price="<?= htmlspecialchars($price) ?>"
               data-item-url="<?= htmlspecialchars($url) ?>"
-              data-item-quantity="1"
-        <?php if (!empty($customOptions)) : ?>
-        data-item-custom1-name="<?= htmlspecialchars($customLabel) ?>"
-        data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
-        data-item-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
-        <?php endif; ?>
-      >
+              data-item-quantity="1">
         <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
           <circle cx="9" cy="20" r="1"/>
@@ -136,7 +109,7 @@ $isInStock = inStock($id);
   </div>
 </div>
 
-<!-- Script pour la gestion des quantités et options -->
+<!-- Script pour la gestion des quantités -->
 <script>
 (function(){
   if (window.__premiumCardPatch) return;
@@ -176,21 +149,6 @@ $isInStock = inStock($id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
       if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
-    }
-
-    // Mise à jour des options custom
-    const customEl = document.getElementById('custom-' + id);
-    if (customEl) {
-      const customValue = customEl.value;
-      btn.setAttribute('data-item-custom1-value', customValue);
-      
-      const lang = document.documentElement.lang;
-      const baseName = lang === 'en'
-        ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
-        : (btn.dataset.itemNameFr || btn.getAttribute('data-item-name'));
-      
-      const finalName = customValue !== '1' ? baseName + ' × ' + customValue : baseName;
-      btn.setAttribute('data-item-name', finalName);
     }
   }, { passive: true });
 
