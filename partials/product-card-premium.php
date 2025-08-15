@@ -67,45 +67,46 @@ $isInStock = inStock($id);
       <?= strip_tags($htmlDesc) ?>
     </div>
 
-    <div class="product-price">
-      <?= $price ?> $CA
-    </div>
-
-    <?php if ($isInStock) : ?>
-      <!-- Contrôles de quantité -->
-      <div class="quantity-controls">
-        <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
-          <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
-          <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-          <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
-        </div>
-        
+    <div class="product-purchase">
+      <div class="product-price">
+        <?= $price ?> $CA
       </div>
 
-      <!-- Bouton d'achat -->
-      <button class="snipcart-add-item add-to-cart-btn"
-              data-item-id="<?= htmlspecialchars($id) ?>"
-              data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-              data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-              data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-              data-item-price="<?= htmlspecialchars($price) ?>"
-              data-item-url="<?= htmlspecialchars($url) ?>"
-              data-item-quantity="1">
-        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
-          <circle cx="9" cy="20" r="1"/>
-          <circle cx="20" cy="20" r="1"/>
-        </svg>
-        <span data-i18n="product.add">Ajouter au panier</span>
-      </button>
-    <?php else : ?>
-      <button class="add-to-cart-btn" disabled>
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd"/>
-        </svg>
-        <span data-i18n="product.outOfStock">Rupture de stock</span>
-      </button>
-    <?php endif; ?>
+      <?php if ($isInStock) : ?>
+        <!-- Contrôles de quantité -->
+        <div class="quantity-controls">
+          <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
+            <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+            <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
+            <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+          </div>
+        </div>
+
+        <!-- Bouton d'achat -->
+        <button class="snipcart-add-item add-to-cart-btn"
+                data-item-id="<?= htmlspecialchars($id) ?>"
+                data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
+                data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+                data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
+                data-item-price="<?= htmlspecialchars($price) ?>"
+                data-item-url="<?= htmlspecialchars($url) ?>"
+                data-item-quantity="1">
+          <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
+            <circle cx="9" cy="20" r="1"/>
+            <circle cx="20" cy="20" r="1"/>
+          </svg>
+          <span data-i18n="product.add">Ajouter au panier</span>
+        </button>
+      <?php else : ?>
+        <button class="add-to-cart-btn" disabled>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clip-rule="evenodd"/>
+          </svg>
+          <span data-i18n="product.outOfStock">Rupture de stock</span>
+        </button>
+      <?php endif; ?>
+    </div>
   </div>
 </div>
 
