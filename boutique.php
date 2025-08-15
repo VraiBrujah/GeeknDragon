@@ -158,20 +158,39 @@ echo $snipcartInit;
           </span>
         </p>
 
-        <!-- Lien vidéo -->
-        <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s"
-           target="_blank"
-           class="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-lg border-2 border-indigo-400/50
-                  text-indigo-300 hover:text-indigo-100 hover:border-indigo-300 hover:bg-indigo-500/10
-                  transition-all duration-200 mx-auto">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-          <span class="underline decoration-2 underline-offset-4 text-base md:text-lg"
-                data-i18n="shop.pieces.video">
-            Regardez la vidéo de Pierre-Louis (Es-Tu Game ?) — « L’Économie de D&D 💰 Conseils Jeux de Rôle »
-          </span>
-        </a>
+        <!-- Vidéo de présentation -->
+        <div class="mt-8 flex justify-center">
+          <button type="button"
+                  class="group relative rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  aria-controls="video-modal"
+                  aria-label="Lire la vidéo de Pierre-Louis (Es-Tu Game ?) — L'Économie de D&D 💰 Conseils Jeux de Rôle"
+                  data-video-open>
+            <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg"
+                 alt="Miniature de la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
+                 class="block w-full h-auto transition-transform duration-200 group-hover:scale-105 group-hover:shadow-lg">
+            <svg class="pointer-events-none absolute inset-0 m-auto w-16 h-16 text-white opacity-80 transition-transform duration-200 group-hover:scale-110"
+                 viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Modal vidéo -->
+        <div id="video-modal"
+             class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center"
+             role="dialog" aria-modal="true"
+             aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »">
+          <div class="relative w-11/12 max-w-3xl">
+            <button type="button"
+                    class="absolute -top-10 right-0 text-white text-4xl leading-none focus:outline-none"
+                    aria-label="Fermer la vidéo"
+                    data-video-close>&times;</button>
+            <div class="w-full aspect-video">
+              <iframe class="w-full h-full" src="https://www.youtube.com/embed/y96eAFtC4xE?start=624"
+                      title="L’Économie de D&D 💰 Conseils Jeux de Rôle" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
 
         <!-- Tableau des abréviations -->
         <div class="pt-10">
@@ -391,5 +410,29 @@ echo $snipcartInit;
   <script src="js/app.js"></script>
   <script src="/js/hero-videos.js"></script>
   <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const openBtn = document.querySelector('[data-video-open]');
+    const modal = document.getElementById('video-modal');
+    if (!openBtn || !modal) return;
+    const closeBtn = modal.querySelector('[data-video-close]');
+    const iframe = modal.querySelector('iframe');
+
+    const openModal = () => {
+      modal.classList.remove('hidden');
+      iframe.focus();
+    };
+
+    const closeModal = () => {
+      modal.classList.add('hidden');
+      iframe.src = iframe.src;
+      openBtn.focus();
+    };
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  });
+  </script>
 </body>
 </html>
