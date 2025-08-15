@@ -158,12 +158,40 @@ echo $snipcartInit;
           </span>
         </p>
 
+        <!-- Vidéo de présentation -->
+        <div class="mt-8 flex justify-center">
+          <button type="button"
+                  class="group relative rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  aria-controls="video-modal"
+                  aria-label="Lire la vidéo de Pierre-Louis (Es-Tu Game ?) — L'Économie de D&D 💰 Conseils Jeux de Rôle"
+                  data-video-open>
+            <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg"
+                 alt="Miniature de la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
+                 class="block w-full h-auto transition-transform duration-200 group-hover:scale-105 group-hover:shadow-lg">
+          </button>
+        </div>
 
+        <!-- Modal vidéo -->
+        <div id="video-modal"
+             class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center"
+             role="dialog" aria-modal="true"
+             aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »">
+          <div class="relative w-full max-w-screen-lg">
+            <button type="button"
+                    class="absolute -top-10 right-0 text-white text-4xl leading-none focus:outline-none"
+                    aria-label="Fermer la vidéo"
+                    data-video-close>&times;</button>
+            <div class="w-full aspect-video">
+              <iframe class="w-full h-full" src="https://www.youtube.com/embed/y96eAFtC4xE?start=624"
+                      title="L’Économie de D&D 💰 Conseils Jeux de Rôle" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
 
         <!-- Tableau des abréviations -->
         <div class="mt-12">
           <h4 class="text-center text-gray-200 mb-4">
-            Échelle & abréviations (5e)
+            <br><br>Échelle & abréviations (5e)
           </h4>
           <div class="overflow-x-auto">
             <table class="mx-auto border-collapse text-gray-400">
