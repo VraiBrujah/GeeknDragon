@@ -156,68 +156,14 @@
     "trictrac": "TricTrac",
     "quote1": {
       "title": "« Finis les combats contre nos feuilles de personnage ! »",
-      "intro": "De nombreux joueurs présents l'affirment : les pièces physiques changent tout.",
-      "p1": "Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sentait le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, c'était tout le corps qui réagissait : la main qui hésite, l'œil qui soupèse, la gorge qui sèche. Le trésor prenait chair. Il devenait enjeu dramatique, émotion viscérale, c'est un événement, un souvenir marquant...",
+      "intro": "De nombreux joueurs présents l’affirment : les pièces physiques changent tout.",
+      "p1": "Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sentait le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, c’était tout le corps qui réagissait : la main qui hésite, l’œil qui soupèse, la gorge qui sèche. Le trésor prenait chair. Il devenait enjeu dramatique, émotion viscérale, c’est un événement, un souvenir marquant...",
       "p2strong": "Fini les combats contre les feuilles de perso",
       "p2rest": "les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la pièce tombe sur la table."
     },
     "quote2": {
       "text": "Ma grande découverte au FLIM, mes enfants sont tombés en amours avec les pièces et depuis font pleins de tâches pour pouvoir échanger leur point contre une chasse au trésor qui pourront avoir leur propre coffre au trésor. Merci à Mathieu pour offrir ce super ajout pour l'initiation des enfants aux jeux de rôles.",
       "author": "— Gabrielle"
-    }
-  },
-  "snipcart": {
-    "cart": {
-      "title": "Panier",
-      "empty": "Votre panier est vide",
-      "subtotal": "Sous-total",
-      "total": "Total",
-      "checkout": "Commander",
-      "continue_shopping": "Continuer les achats",
-      "quantity": "Quantité",
-      "remove": "Retirer",
-      "update": "Mettre à jour"
-    },
-    "checkout": {
-      "title": "Commande",
-      "billing_address": "Adresse de facturation",
-      "shipping_address": "Adresse de livraison",
-      "payment_method": "Méthode de paiement",
-      "place_order": "Passer la commande",
-      "processing": "Traitement en cours...",
-      "thank_you": "Merci pour votre commande !",
-      "order_number": "Numéro de commande",
-      "email": "Email",
-      "phone": "Téléphone",
-      "first_name": "Prénom",
-      "last_name": "Nom",
-      "company": "Entreprise",
-      "address": "Adresse",
-      "city": "Ville",
-      "postal_code": "Code postal",
-      "province": "Province",
-      "country": "Pays"
-    },
-    "customer": {
-      "title": "Mon compte",
-      "sign_in": "Se connecter",
-      "sign_out": "Se déconnecter",
-      "register": "S'inscrire",
-      "forgot_password": "Mot de passe oublié ?",
-      "orders": "Mes commandes",
-      "addresses": "Mes adresses",
-      "profile": "Mon profil"
-    },
-    "errors": {
-      "required": "Ce champ est requis",
-      "email": "Adresse email invalide",
-      "payment_failed": "Le paiement a échoué",
-      "shipping_unavailable": "Livraison non disponible pour cette adresse",
-      "out_of_stock": "Article en rupture de stock"
-    },
-    "custom_fields": {
-      "multiplier": "Multiplicateur",
-      "language": "Langue"
     }
   }
 }
