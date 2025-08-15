@@ -113,13 +113,13 @@ echo $snipcartInit;
     </div>
   </section>
 
-	<!-- ░░░ PIÈCES PREMIUM ░░░ -->
-	<section id="pieces" class="shop-section scroll-mt-24">
-	  <div class="max-w-7xl mx-auto">
-		<!-- Titre principal -->
-		<h2 class="shop-section-title" data-i18n="shop.pieces.title">
-		  Pièces métalliques
-		</h2>
+        <!-- ░░░ PIÈCES PREMIUM ░░░ -->
+        <section id="pieces" class="shop-section scroll-mt-24">
+          <div class="max-w-7xl mx-auto">
+                <!-- Titre principal -->
+                <h2 class="shop-section-title mt-8" data-i18n="shop.pieces.title">
+                  Pièces métalliques
+                </h2>
 
 		<!-- Grille de produits -->
 		<div class="products-grid">
@@ -264,7 +264,7 @@ echo $snipcartInit;
   <!-- ░░░ CARTES PREMIUM ░░░ -->
   <section id="cartes" class="shop-section scroll-mt-24">
     <div class="max-w-7xl mx-auto">
-      <h2 class="shop-section-title" data-i18n="shop.cards.title">Cartes d'équipement</h2>
+      <h2 class="shop-section-title mt-8" data-i18n="shop.cards.title">Cartes d'équipement</h2>
       <div class="products-grid">
         <?php foreach ($cards as $product) : ?>
           <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
@@ -283,7 +283,7 @@ echo $snipcartInit;
   <!-- ░░░ TRIPTYQUES PREMIUM ░░░ -->
   <section id="triptyques" class="shop-section">
     <div class="max-w-7xl mx-auto">
-      <h2 class="shop-section-title" data-i18n="shop.triptychs.title">Triptyques de personnage</h2>
+      <h2 class="shop-section-title mt-8" data-i18n="shop.triptychs.title">Triptyques de personnage</h2>
       <div class="products-grid">
         <?php foreach ($triptychs as $product) : ?>
           <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
