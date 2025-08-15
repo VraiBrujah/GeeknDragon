@@ -207,7 +207,7 @@
   gap: var(--boutique-space-xl);
   justify-content: center;
   justify-items: center;
-  max-width: 1600px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 var(--boutique-space-lg);
 }
@@ -554,6 +554,13 @@
 /* =================================================================== */
 /* RESPONSIVE DESIGN                                                 */
 /* =================================================================== */
+@media (min-width: 1440px) {
+  .products-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 1440px;
+  }
+}
+
 @media (max-width: 768px) {
   :root {
     --boutique-space-xs: 0.25rem;
