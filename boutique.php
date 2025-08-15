@@ -115,31 +115,74 @@ echo $snipcartInit;
     </div>
   </section>
 
-  <!-- ░░░ PIÈCES PREMIUM ░░░ -->
-  <section id="pieces" class="shop-section scroll-mt-24">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="shop-section-title" data-i18n="shop.pieces.title">Pièces métalliques</h2>
-      <div class="products-grid">
-        <?php foreach ($pieces as $product) : ?>
-          <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
-        <?php endforeach; ?>
-      </div>
-      
-      <div class="text-center mt-12 max-w-4xl mx-auto px-6">
-        <p class="text-lg text-gray-300 mb-6">
-          <span data-i18n="shop.pieces.description">Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.</span>
-        </p>
-		<h4 style=\"text-align:center\">Échelle & abréviations (5e)</h4>\n<table style=\"width:100%;border-collapse:collapse;margin:0 auto\"><thead><tr><th style=\"text-align:center\">Abrév.</th><th style=\"text-align:center\">Nom</th><th style=\"text-align:center\">Conversion</th></tr></thead><tbody><tr><td style=\"text-align:center\">pc</td><td style=\"text-align:center\">pièce de cuivre</td><td style=\"text-align:center\">10&nbsp;pc = 1&nbsp;pa</td></tr><tr><td style=\"text-align:center\">pa</td><td style=\"text-align:center\">pièce d’argent</td><td style=\"text-align:center\">10&nbsp;pa = 1&nbsp;po</td></tr><tr><td style=\"text-align:center\">pe</td><td style=\"text-align:center\">pièce d’électrum</td><td style=\"text-align:center\">1&nbsp;po = 2&nbsp;pe</td></tr><tr><td style=\"text-align:center\">po</td><td style=\"text-align:center\">pièce d’or</td><td style=\"text-align:center\">—</td></tr><tr><td style=\"text-align:center\">pp</td><td style=\"text-align:center\">pièce de platine</td><td style=\"text-align:center\">10&nbsp;po = 1&nbsp;pp</td></tr></tbody></table>
-        <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank" 
-           class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors underline decoration-2 underline-offset-4">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-          <span data-i18n="shop.pieces.video">Voir la démonstration en vidéo</span>
-        </a>
-      </div>
-    </div>
-  </section>
+	<!-- ░░░ PIÈCES PREMIUM ░░░ -->
+	<section id="pieces" class="shop-section scroll-mt-24">
+	  <div class="max-w-7xl mx-auto">
+		<h2 class="shop-section-title" data-i18n="shop.pieces.title">Pièces métalliques</h2>
+		<div class="products-grid">
+		  <?php foreach ($pieces as $product) : ?>
+			<?php include __DIR__ . '/partials/product-card-premium.php'; ?>
+		  <?php endforeach; ?>
+		</div>
+
+		<div class="text-center mt-12 max-w-4xl mx-auto px-6">
+		  <p class="text-lg text-gray-300 mb-6">
+			<span data-i18n="shop.pieces.description">
+			  Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets. Offrez-vous le poids authentique du trésor.
+			</span>
+		  </p>
+
+		  <h4 class="text-center mb-4">Échelle & abréviations (5e)</h4>
+		  <div style="display: flex; justify-content: center;">
+			<table style="border-collapse: collapse; margin: 0 auto;">
+			  <thead>
+				<tr>
+				  <th style="text-align:center; padding: 6px;">Abrév.</th>
+				  <th style="text-align:center; padding: 6px;">Nom</th>
+				  <th style="text-align:center; padding: 6px;">Conversion</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <td style="text-align:center; padding: 6px;">pc</td>
+				  <td style="text-align:center; padding: 6px;">pièce de cuivre</td>
+				  <td style="text-align:center; padding: 6px;">10&nbsp;pc = 1&nbsp;pa</td>
+				</tr>
+				<tr>
+				  <td style="text-align:center; padding: 6px;">pa</td>
+				  <td style="text-align:center; padding: 6px;">pièce d’argent</td>
+				  <td style="text-align:center; padding: 6px;">10&nbsp;pa = 1&nbsp;po</td>
+				</tr>
+				<tr>
+				  <td style="text-align:center; padding: 6px;">pe</td>
+				  <td style="text-align:center; padding: 6px;">pièce d’électrum</td>
+				  <td style="text-align:center; padding: 6px;">1&nbsp;po = 2&nbsp;pe</td>
+				</tr>
+				<tr>
+				  <td style="text-align:center; padding: 6px;">po</td>
+				  <td style="text-align:center; padding: 6px;">pièce d’or</td>
+				  <td style="text-align:center; padding: 6px;">—</td>
+				</tr>
+				<tr>
+				  <td style="text-align:center; padding: 6px;">pp</td>
+				  <td style="text-align:center; padding: 6px;">pièce de platine</td>
+				  <td style="text-align:center; padding: 6px;">10&nbsp;po = 1&nbsp;pp</td>
+				</tr>
+			  </tbody>
+			</table>
+		  </div>
+
+		  <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank"
+			 class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors underline decoration-2 underline-offset-4 mt-6">
+			<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+			  <path d="M8 5v14l11-7z"/>
+			</svg>
+			<span data-i18n="shop.pieces.video">Voir la démonstration en vidéo</span>
+		  </a>
+		</div>
+	  </div>
+	</section>
+
 
   <!-- ░░░ COFFRES SUR MESURE PREMIUM ░░░ -->
   <section class="features-section">
