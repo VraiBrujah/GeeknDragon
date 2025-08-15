@@ -8,6 +8,6 @@
         "erusev/parsedown": "^1.7"
     },
     "config": {
-        "disable-tls": true
+        "disable-tls": false
     }
 }

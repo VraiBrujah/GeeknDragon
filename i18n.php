@@ -38,6 +38,17 @@ function langUrl(string $url): string
     return isset($parts[1]) ? $parts[0] . '#' . $parts[1] : $parts[0];
 }
 
-$translations = json_decode(file_get_contents(__DIR__ . "/translations/$lang.json"), true) ?: [];
+$translationFile = __DIR__ . "/translations/$lang.json";
+$translations = [];
+if (file_exists($translationFile)) {
+    $jsonContent = file_get_contents($translationFile);
+    if ($jsonContent !== false) {
+        $translations = json_decode($jsonContent, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            error_log("JSON decode error in $translationFile: " . json_last_error_msg());
+            $translations = [];
+        }
+    }
+}
 ?>
 
