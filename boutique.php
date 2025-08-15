@@ -128,46 +128,47 @@ echo $snipcartInit;
 		  <?php endforeach; ?>
 		</div>
 
-	<!-- Description & appel à la vidéo -->
-	<div class="mt-14 max-w-4xl mx-auto px-6 text-center space-y-8 leading-relaxed">
-	  <p class="text-gray-300 text-xl md:text-2xl tracking-wide">
-		<span data-i18n="shop.pieces.description">
-		  <span class="block font-semibold text-gray-100">
-			Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets :
-			<span class="font-normal">ça fonctionne, mais ça perd toute sa saveur.</span>
-		  </span>
+		<!-- Description & appel à la vidéo -->
+		<div class="mt-20 md:mt-28 max-w-4xl mx-auto px-6 text-center space-y-10 leading-relaxed">
+		  <p class="text-gray-300 text-xl md:text-2xl tracking-wide">
+			<span data-i18n="shop.pieces.description">
+			  <span class="block font-semibold text-gray-100">
+				Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets :
+				<span class="font-normal">ça fonctionne, mais ça perd toute sa saveur.</span>
+			  </span>
 
-		  <span class="block mt-5">
-			Le trésor est au cœur de presque toutes les campagnes de D&D… et pourtant,
-			quand il se réduit à des chiffres qu’on inscrit puis efface cent fois,
-			il perd toute magie et tout impact.
-		  </span>
+			  <span class="block mt-6">
+				Le trésor est au cœur de presque toutes les campagnes de D&D… et pourtant,
+				quand il se réduit à des chiffres qu’on inscrit puis efface cent fois,
+				il perd toute magie et tout impact.
+			  </span>
 
-		  <span class="block mt-5">
-			Par souci de simplicité, on se limite presque toujours à la pièce d’or,
-			oubliant la richesse des autres monnaies.
-		  </span>
+			  <span class="block mt-6">
+				Par souci de simplicité, on se limite presque toujours à la pièce d’or,
+				oubliant la richesse des autres monnaies.
+			  </span>
 
-		  <span class="block mt-5">
-			Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient
-			tangible, mémorable — digne des plus grandes quêtes.
-		  </span>
-		</span>
-	  </p>
+			  <span class="block mt-6">
+				Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient
+				tangible, mémorable — digne des plus grandes quêtes.
+			  </span>
+			</span>
+		  </p>
 
-	  <!-- Lien vidéo : plus visible et accessible -->
-	  <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s"
-		 target="_blank"
-		 class="inline-flex items-center justify-center gap-3 px-5 py-3 rounded-lg border border-indigo-400/50
-				text-indigo-300 hover:text-indigo-100 hover:border-indigo-300 hover:bg-indigo-500/10
-				transition-colors duration-200 mx-auto">
-		<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-		  <path d="M8 5v14l11-7z"/>
-		</svg>
-		<span class="underline decoration-2 underline-offset-4" data-i18n="shop.pieces.video">
-		  Regardez la vidéo de Pierre-Louis (Es-Tu Game ?) — « L’Économie de D&D 💰 Conseils Jeux de Rôle »
-		</span>
-	  </a>
+		  <!-- Lien vidéo : encore plus aéré -->
+		  <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s"
+			 target="_blank"
+			 class="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-lg border-2 border-indigo-400/50
+					text-indigo-300 hover:text-indigo-100 hover:border-indigo-300 hover:bg-indigo-500/10
+					transition-all duration-200 mx-auto">
+			<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+			  <path d="M8 5v14l11-7z"/>
+			</svg>
+			<span class="underline decoration-2 underline-offset-4 text-base md:text-lg"
+				  data-i18n="shop.pieces.video">
+			  Regardez la vidéo de Pierre-Louis (Es-Tu Game ?) — « L’Économie de D&D 💰 Conseils Jeux de Rôle »
+			</span>
+		  </a>
 
 
 
