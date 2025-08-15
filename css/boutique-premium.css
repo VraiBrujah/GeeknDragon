@@ -167,7 +167,7 @@
 /* GRILLE DE PRODUITS PREMIUM                                        */
 /* =================================================================== */
 .shop-section {
-  padding: var(--boutique-space-3xl) 0;
+  padding-top: calc(var(--boutique-space-3xl) + 12px);
   background: var(--boutique-bg);
   position: relative;
 }
@@ -184,7 +184,19 @@
   background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
+.shop-section::before {
+  content: "";
+  position: absolute;
+  top: 0;              /* collé au bord haut de la section */
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--boutique-gradient-primary);
+  border-radius: 3px;
+}
+
 .shop-section-title {
+  margin-top: 0;
   font-family: 'Cinzel', serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
@@ -196,15 +208,7 @@
 }
 
 .shop-section-title::after {
-  content: '';
-  position: absolute;
-  bottom: -var(--boutique-space-md);
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 4px;
-  background: var(--boutique-gradient-primary);
-  border-radius: 2px;
+  content: none !important;
 }
 
 .products-grid {

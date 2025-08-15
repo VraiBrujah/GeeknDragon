@@ -12,8 +12,6 @@ $extraHead = <<<HTML
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
   .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
 
-  /* Désactive la petite ligne au-dessus du titre h2 générée par ::before */
-  .shop-section-title.no-leading-line::before{content:none !important;}
 </style>
 HTML;
 
@@ -117,16 +115,12 @@ echo $snipcartInit;
   </section>
 
   <!-- ░░░ PIÈCES PREMIUM ░░░ -->
-  <section id="pieces" class="shop-section scroll-mt-24">
-    <div class="max-w-7xl mx-auto">
+	<section id="pieces" class="shop-section scroll-mt-24">
+	  <div class="max-w-7xl mx-auto">
+		<h2 class="shop-section-title" data-i18n="shop.pieces.title">
+		  Pièces métalliques
+		</h2>
 
-      <!-- LIGNE violette collée à la section précédente, puis espace avant le titre -->
-      <div aria-hidden="true" class="mx-auto h-1 w-24 rounded-full bg-violet-500 mt-0 mb-8"></div>
-
-      <!-- Titre principal (ligne interne désactivée) -->
-      <h2 class="shop-section-title" data-i18n="shop.pieces.title">
-        Pièces métalliques
-      </h2>
 
       <!-- Grille de produits -->
       <div class="products-grid">
