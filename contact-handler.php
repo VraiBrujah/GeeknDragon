@@ -1,11 +1,7 @@
 <?php
 require __DIR__ . '/bootstrap.php';
-require_once __DIR__ . '/utils/Logger.php';
-require_once __DIR__ . '/utils/Validator.php';
 
 session_start();
-Logger::init();
-
 $debug = filter_var($_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN);
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -15,38 +11,28 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $errors = [];
 
-// Récupération et nettoyage des données
 $nom = trim($_POST['Nom'] ?? '');
 $email = trim($_POST['Email'] ?? '');
 $telephone = trim($_POST['Téléphone'] ?? '');
 $message = trim($_POST['Message'] ?? '');
 $csrf = $_POST['csrf_token'] ?? '';
 
-// Validation CSRF avec logging
-if (!Validator::csrfToken($csrf, $_SESSION['csrf_token'] ?? '')) {
+if (!hash_equals($_SESSION['csrf_token'] ?? '', $csrf)) {
     $errors[] = 'Token CSRF invalide.';
-    Logger::warning('CSRF token validation failed', [
-        'ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
-        'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'unknown'
-    ]);
 }
 
-// Validations améliorées
-if (!Validator::name($nom, 2, 100)) {
-    $errors[] = 'Le nom doit contenir entre 2 et 100 caractères et ne peut contenir que des lettres, espaces, tirets et apostrophes.';
+if ($nom === '') {
+    $errors[] = 'Le nom est requis.';
 }
-
-if (!Validator::email($email)) {
+if (
+    $email === '' ||
+    !filter_var($email, FILTER_VALIDATE_EMAIL) ||
+    preg_match("/[\r\n]/", $email)
+) {
     $errors[] = "L'adresse e-mail est invalide.";
 }
-
-// Validation optionnelle du téléphone
-if (!empty($telephone) && !Validator::phone($telephone)) {
-    $errors[] = 'Le numéro de téléphone doit être au format international (+1234567890).';
-}
-
-if (!Validator::message($message, 10, 5000)) {
-    $errors[] = 'Le message doit contenir entre 10 et 5000 caractères.';
+if ($message === '') {
+    $errors[] = 'Le message est requis.';
 }
 
 $old = [
