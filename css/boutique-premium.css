@@ -219,7 +219,6 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 var(--boutique-space-lg);
-  align-items: stretch;
 }
 
 /* =================================================================== */
@@ -347,13 +346,6 @@
   text-align: center;
   margin-bottom: var(--boutique-space-lg);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.product-purchase {
-  margin-top: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* =================================================================== */
