@@ -189,7 +189,30 @@ document.addEventListener('DOMContentLoaded', () => {
       const picked = btn.dataset.lang;
       window.GD.setLang(picked);
       setCurrent(picked);
-      whenSnipcart(() => window.Snipcart.api.session.setLanguage(picked));
+      
+      // Mettre à jour Snipcart avec délai pour s'assurer qu'il est prêt
+      whenSnipcart(() => {
+        try {
+          if (window.Snipcart.api.session) {
+            window.Snipcart.api.session.setLanguage(picked);
+          }
+          
+          // Forcer le rechargement des traductions Snipcart
+          if (window.Snipcart.store) {
+            const state = window.Snipcart.store.getState();
+            if (state.cart.status === 'visible') {
+              // Fermer et rouvrir le panier pour appliquer les traductions
+              window.Snipcart.api.theme.cart.close();
+              setTimeout(() => {
+                window.Snipcart.api.theme.cart.open();
+              }, 100);
+            }
+          }
+        } catch (e) {
+          console.debug('[i18n] Erreur mise à jour langue Snipcart:', e);
+        }
+      });
+      
       loadTranslations(picked);
     });
   });

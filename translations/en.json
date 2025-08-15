@@ -155,7 +155,7 @@
     "moreReviews": "More reviews on",
     "trictrac": "TricTrac",
     "quote1": {
-      "title": "“No more battles with our character sheets!”",
+      "title": ""No more battles with our character sheets!"",
       "intro": "Many players said it: physical coins change everything.",
       "p1": "Gone are the columns of numbers hastily scribbled on a crumpled sheet. Now every player felt the real weight of the loot, sliding between their fingers like a forgotten heirloom. Treasure became tangible. At each exchange, the whole body reacted: the hand hesitating, the eye weighing, the throat drying. The hoard took on flesh. It became dramatic stakes, visceral emotion, an event, a lasting memory...",
       "p2strong": "No more fights with character sheets",
@@ -164,6 +164,60 @@
     "quote2": {
       "text": "My big discovery at FLIM: my children fell in love with the coins and have been doing lots of chores so they can trade their points for a treasure hunt and have their own treasure chest. Thanks to Mathieu for offering this great addition to introducing kids to role-playing games.",
       "author": "— Gabrielle"
+    }
+  },
+  "snipcart": {
+    "cart": {
+      "title": "Cart",
+      "empty": "Your cart is empty",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "checkout": "Checkout",
+      "continue_shopping": "Continue shopping",
+      "quantity": "Quantity",
+      "remove": "Remove",
+      "update": "Update"
+    },
+    "checkout": {
+      "title": "Checkout",
+      "billing_address": "Billing address",
+      "shipping_address": "Shipping address",
+      "payment_method": "Payment method",
+      "place_order": "Place order",
+      "processing": "Processing...",
+      "thank_you": "Thank you for your order!",
+      "order_number": "Order number",
+      "email": "Email",
+      "phone": "Phone",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "company": "Company",
+      "address": "Address",
+      "city": "City",
+      "postal_code": "Postal code",
+      "province": "Province/State",
+      "country": "Country"
+    },
+    "customer": {
+      "title": "My account",
+      "sign_in": "Sign in",
+      "sign_out": "Sign out",
+      "register": "Register",
+      "forgot_password": "Forgot password?",
+      "orders": "My orders",
+      "addresses": "My addresses",
+      "profile": "My profile"
+    },
+    "errors": {
+      "required": "This field is required",
+      "email": "Invalid email address",
+      "payment_failed": "Payment failed",
+      "shipping_unavailable": "Shipping unavailable for this address",
+      "out_of_stock": "Item out of stock"
+    },
+    "custom_fields": {
+      "multiplier": "Multiplier",
+      "language": "Language"
     }
   }
 }
