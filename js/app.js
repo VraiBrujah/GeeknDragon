@@ -15,8 +15,19 @@
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Pas d’erreurs si console absente
-  const log = (...args) => { try { console.log('[GD]', ...args); } catch (_) {} };
+  // Logging sécurisé avec fallback
+  const log = (...args) => { 
+    try { 
+      if (typeof console !== 'undefined' && console.log) {
+        console.log('[GD]', ...args); 
+      }
+    } catch (error) {
+      // En mode développement, on peut vouloir voir l'erreur
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.warn('[GD] Logging error:', error);
+      }
+    }
+  };
 
   // Throttle / Debounce
   const throttle = (fn, wait = 100) => {
