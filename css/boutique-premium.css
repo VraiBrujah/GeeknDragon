@@ -95,16 +95,14 @@
   text-align: center;
   max-width: 800px;
   padding: var(--boutique-space-xl);
+  color: white;
 }
 
 .hero-title {
   font-family: 'Cinzel', serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  background: var(--boutique-gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 3rem;
+  font-weight: 800;
+  color: white;
   margin-bottom: var(--boutique-space-lg);
   line-height: 1.2;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -112,7 +110,7 @@
 
 .hero-subtitle {
   font-size: 1.25rem;
-  color: var(--boutique-text-muted);
+  color: white;
   margin-bottom: var(--boutique-space-xl);
   line-height: 1.6;
   max-width: 600px;
