@@ -116,76 +116,93 @@ echo $snipcartInit;
 	<!-- ░░░ PIÈCES PREMIUM ░░░ -->
 	<section id="pieces" class="shop-section scroll-mt-24">
 	  <div class="max-w-7xl mx-auto">
-		<h2 class="shop-section-title" data-i18n="shop.pieces.title">Pièces métalliques</h2>
+		<!-- Titre principal -->
+		<h2 class="shop-section-title" data-i18n="shop.pieces.title">
+		  Pièces métalliques
+		</h2>
+
+		<!-- Grille de produits -->
 		<div class="products-grid">
 		  <?php foreach ($pieces as $product) : ?>
 			<?php include __DIR__ . '/partials/product-card-premium.php'; ?>
 		  <?php endforeach; ?>
 		</div>
 
-
-		<div class="text-center mt-12 max-w-4xl mx-auto px-6">
-		  <p class="text-lg text-gray-300 mb-6">
+		<!-- Description & appel à la vidéo -->
+		<div class="text-center mt-12 max-w-4xl mx-auto px-6 space-y-6">
+		  <p class="text-lg text-gray-300">
 			<span data-i18n="shop.pieces.description">
-			  Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets : ça fonctionne, mais ça perd toute la saveur.  
-			  Dans la plupart des campagnes D&D, le trésor est central… et pourtant, réduit à des chiffres qu’on inscrit et efface cent fois, il perd tout impact.  
-			  Par souci de simplicité, on se limite presque toujours à la pièce d’or, oubliant la richesse des autres monnaies.  
-			  Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient tangible, mémorable, et digne des plus grandes quêtes.
+			  <strong>Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets :</strong>
+			  ça fonctionne, mais ça perd toute sa saveur.<br><br>
+			  Le trésor est au cœur de presque toutes les campagnes de D&D… et pourtant,
+			  quand il se réduit à des chiffres qu’on inscrit puis efface cent fois,
+			  il perd toute magie et tout impact.<br><br>
+			  Par souci de simplicité, on se limite presque toujours à la pièce d’or,
+			  oubliant la richesse des autres monnaies.<br><br>
+			  Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient
+			  tangible, mémorable — digne des plus grandes quêtes.
 			</span>
 		  </p>
-		  
+
 		  <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank"
-			 class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors underline decoration-2 underline-offset-4 mt-6">
+			 class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 
+					transition-colors underline decoration-2 underline-offset-4">
 			<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
 			  <path d="M8 5v14l11-7z"/>
 			</svg>
 			<span data-i18n="shop.pieces.video">
-			  Vidéo de Pierre-Louis (Es-Tu Game ?) — « L’Économie de D&D 💰 Conseils Jeux de Rôle »
+			  Regardez la vidéo de Pierre-Louis (Es-Tu Game ?) — « L’Économie de D&D 💰 Conseils Jeux de Rôle »
 			</span>
 		  </a>
 
-		  <h4 class="text-center mb-4">Échelle & abréviations (5e)</h4>
-		  <div style="display: flex; justify-content: center;">
-			<table style="border-collapse: collapse; margin: 0 auto;">
-			  <thead>
-				<tr>
-				  <th style="text-align:center; padding: 6px;">Abrév.</th>
-				  <th style="text-align:center; padding: 6px;">Nom</th>
-				  <th style="text-align:center; padding: 6px;">Conversion</th>
-				</tr>
-			  </thead>
-			  <tbody>
-				<tr>
-				  <td style="text-align:center; padding: 6px;">pc</td>
-				  <td style="text-align:center; padding: 6px;">pièce de cuivre</td>
-				  <td style="text-align:center; padding: 6px;">10&nbsp;pc = 1&nbsp;pa</td>
-				</tr>
-				<tr>
-				  <td style="text-align:center; padding: 6px;">pa</td>
-				  <td style="text-align:center; padding: 6px;">pièce d’argent</td>
-				  <td style="text-align:center; padding: 6px;">10&nbsp;pa = 1&nbsp;po</td>
-				</tr>
-				<tr>
-				  <td style="text-align:center; padding: 6px;">pe</td>
-				  <td style="text-align:center; padding: 6px;">pièce d’électrum</td>
-				  <td style="text-align:center; padding: 6px;">1&nbsp;po = 2&nbsp;pe</td>
-				</tr>
-				<tr>
-				  <td style="text-align:center; padding: 6px;">po</td>
-				  <td style="text-align:center; padding: 6px;">pièce d’or</td>
-				  <td style="text-align:center; padding: 6px;">—</td>
-				</tr>
-				<tr>
-				  <td style="text-align:center; padding: 6px;">pp</td>
-				  <td style="text-align:center; padding: 6px;">pièce de platine</td>
-				  <td style="text-align:center; padding: 6px;">10&nbsp;po = 1&nbsp;pp</td>
-				</tr>
-			  </tbody>
-			</table>
+		  <!-- Tableau des abréviations -->
+		  <div class="pt-10">
+			<h4 class="text-center text-gray-200 mb-4">
+			  Échelle & abréviations (5e)
+			</h4>
+			<div class="overflow-x-auto">
+			  <table class="mx-auto border-collapse text-gray-300">
+				<thead>
+				  <tr class="bg-gray-700">
+					<th class="px-4 py-2">Abrév.</th>
+					<th class="px-4 py-2">Nom</th>
+					<th class="px-4 py-2">Conversion</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr class="bg-gray-800">
+					<td class="px-4 py-2 text-center">pc</td>
+					<td class="px-4 py-2 text-center">pièce de cuivre</td>
+					<td class="px-4 py-2 text-center">10 pc = 1 pa</td>
+				  </tr>
+				  <tr class="bg-gray-700">
+					<td class="px-4 py-2 text-center">pa</td>
+					<td class="px-4 py-2 text-center">pièce d’argent</td>
+					<td class="px-4 py-2 text-center">10 pa = 1 po</td>
+				  </tr>
+				  <tr class="bg-gray-800">
+					<td class="px-4 py-2 text-center">pe</td>
+					<td class="px-4 py-2 text-center">pièce d’électrum</td>
+					<td class="px-4 py-2 text-center">1 po = 2 pe</td>
+				  </tr>
+				  <tr class="bg-gray-700">
+					<td class="px-4 py-2 text-center">po</td>
+					<td class="px-4 py-2 text-center">pièce d’or</td>
+					<td class="px-4 py-2 text-center">—</td>
+				  </tr>
+				  <tr class="bg-gray-800">
+					<td class="px-4 py-2 text-center">pp</td>
+					<td class="px-4 py-2 text-center">pièce de platine</td>
+					<td class="px-4 py-2 text-center">10 po = 1 pp</td>
+				  </tr>
+				</tbody>
+			  </table>
+			</div>
 		  </div>
 		</div>
 	  </div>
 	</section>
+
 
 
 
