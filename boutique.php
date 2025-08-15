@@ -168,10 +168,12 @@ echo $snipcartInit;
             <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg"
                  alt="Miniature de la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
                  class="block w-full h-auto transition-transform duration-200 group-hover:scale-105 group-hover:shadow-lg">
-            <svg class="pointer-events-none absolute inset-0 m-auto w-16 h-16 text-white opacity-80 transition-transform duration-200 group-hover:scale-110"
-                 viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
+            <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <svg class="w-16 h-16 text-white opacity-80 transition-transform duration-200 group-hover:scale-110"
+                   viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
           </button>
         </div>
 
