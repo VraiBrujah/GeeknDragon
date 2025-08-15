@@ -124,7 +124,7 @@ echo $snipcartInit;
       <div aria-hidden="true" class="mx-auto h-1 w-24 rounded-full bg-violet-500 mt-0 mb-8"></div>
 
       <!-- Titre principal (ligne interne désactivée) -->
-      <h2 class="shop-section-title no-leading-line" data-i18n="shop.pieces.title">
+      <h2 class="shop-section-title" data-i18n="shop.pieces.title">
         Pièces métalliques
       </h2>
 
