@@ -206,12 +206,11 @@ echo $snipcartInit;
 
 
 
-	<section class="items-center features-section">
-	  <div class="max-w-6xl mx-auto px-6">
-		<div class="flex flex-wrap gap-6">
-		  
-		  <!-- Coffre sur mesure — pleine largeur -->
-		  <div class="feature-card basis-full">
+	<section class="features-section">
+	  <div class="max-w-6xl mx-auto px-6 space-y-8">
+		<!-- 1) Bloc Coffres sur mesure : ligne dédiée et centré -->
+		<div class="flex justify-center">
+		  <div class="feature-card w-full md:max-w-2xl">
 			<span class="feature-icon">📦</span>
 			<h3 class="feature-title" data-i18n="shop.chest.title">Coffres sur mesure</h3>
 			<p class="feature-description" data-i18n="shop.chest.description">
@@ -219,35 +218,31 @@ echo $snipcartInit;
 			</p>
 			<a href="index.php#contact" class="hero-cta mt-6" data-i18n="shop.chest.button">Demander un devis</a>
 		  </div>
-		  
-		  <!-- Les trois autres cartes, alignées sur la même ligne -->
-		  <div class="feature-card basis-1/3">
+		</div>
+
+		<!-- 2) Les 3 autres cartes : côte à côte -->
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+		  <div class="feature-card">
 			<span class="feature-icon">🚚</span>
 			<h3 class="feature-title">Livraison rapide</h3>
-			<p class="feature-description">
-			  Expédition sous 48h partout au Canada avec suivi en temps réel de votre commande.
-			</p>
+			<p class="feature-description">Expédition sous 48h partout au Canada avec suivi en temps réel de votre commande.</p>
 		  </div>
-		  
-		  <div class="feature-card basis-1/3">
+
+		  <div class="feature-card">
 			<span class="feature-icon">🔒</span>
 			<h3 class="feature-title">Paiement sécurisé</h3>
-			<p class="feature-description">
-			  Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.
-			</p>
+			<p class="feature-description">Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.</p>
 		  </div>
-		  
-		  <div class="feature-card basis-1/3">
+
+		  <div class="feature-card">
 			<span class="feature-icon">🎯</span>
 			<h3 class="feature-title">Qualité artisanale</h3>
-			<p class="feature-description">
-			  Fabriqué au Québec avec des matériaux premium pour des années d'aventures.
-			</p>
+			<p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
 		  </div>
-		  
 		</div>
 	  </div>
 	</section>
+
 
 	
   <!-- ░░░ CARTES PREMIUM ░░░ -->
