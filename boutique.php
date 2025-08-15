@@ -101,7 +101,7 @@ echo $snipcartInit;
     <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6 hero-text">
-        <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
+        <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique\nGeek & Dragon</h1>
         <p class="text-xl mb-8 txt-court" data-i18n="shop.hero.description">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
         <a href="#pieces" class="btn btn-primary" data-i18n="shop.hero.button">Choisir mes trésors</a>
       </div>
