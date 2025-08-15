@@ -123,12 +123,26 @@ echo $snipcartInit;
 		  <?php endforeach; ?>
 		</div>
 
+
 		<div class="text-center mt-12 max-w-4xl mx-auto px-6">
 		  <p class="text-lg text-gray-300 mb-6">
 			<span data-i18n="shop.pieces.description">
-			  Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets. Offrez-vous le poids authentique du trésor.
+			  Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets : ça fonctionne, mais ça perd toute la saveur.  
+			  Dans la plupart des campagnes D&D, le trésor est central… et pourtant, réduit à des chiffres qu’on inscrit et efface cent fois, il perd tout impact.  
+			  Par souci de simplicité, on se limite presque toujours à la pièce d’or, oubliant la richesse des autres monnaies.  
+			  Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient tangible, mémorable, et digne des plus grandes quêtes.
 			</span>
 		  </p>
+		  
+		  <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank"
+			 class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors underline decoration-2 underline-offset-4 mt-6">
+			<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+			  <path d="M8 5v14l11-7z"/>
+			</svg>
+			<span data-i18n="shop.pieces.video">
+			  Vidéo de Pierre-Louis (Es-Tu Game ?) — « L’Économie de D&D 💰 Conseils Jeux de Rôle »
+			</span>
+		  </a>
 
 		  <h4 class="text-center mb-4">Échelle & abréviations (5e)</h4>
 		  <div style="display: flex; justify-content: center;">
@@ -169,14 +183,6 @@ echo $snipcartInit;
 			  </tbody>
 			</table>
 		  </div>
-
-		  <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank"
-			 class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors underline decoration-2 underline-offset-4 mt-6">
-			<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-			  <path d="M8 5v14l11-7z"/>
-			</svg>
-			<span data-i18n="shop.pieces.video">Voir la démonstration en vidéo</span>
-		  </a>
 		</div>
 	  </div>
 	</section>
