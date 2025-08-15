@@ -162,9 +162,13 @@
 /* GRILLE DE PRODUITS PREMIUM                                        */
 /* =================================================================== */
 .shop-section {
-  padding: var(--boutique-space-2xl) 0;
+  padding: var(--boutique-space-3xl) 0;
   background: var(--boutique-bg);
   position: relative;
+}
+
+.shop-section + .shop-section {
+  margin-top: var(--boutique-space-3xl);
 }
 
 .shop-section:nth-child(even) {
