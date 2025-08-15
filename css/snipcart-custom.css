@@ -388,3 +388,44 @@ body.snipcart-open { overflow: hidden; }
   }
 }
 
+/* =================================================================== */
+/* RÉPARATIONS MISE EN PAGE & LISIBILITÉ                               */
+/* =================================================================== */
+
+/* Éviter que les montants débordent du sommaire */
+.snipcart .snipcart-summary-fees__item{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+}
+.snipcart .snipcart-summary-fees__amount,
+.snipcart .snipcart-summary__total-price{
+  flex-shrink:0;
+  white-space:nowrap;
+  text-align:right;
+}
+
+/* Bouton "Continuer les achats" avec largeur adaptée */
+.snipcart .snipcart-cart__actions .snipcart__button--secondary{
+  white-space:normal;
+  padding-left:1rem;
+  padding-right:1rem;
+}
+
+/* Quantité bien visible dans le résumé */
+.snipcart .snipcart-item-line__quantity{
+  color:var(--gd-text) !important;
+}
+
+/* Labels de paiement plus clairs */
+.snipcart .snipcart-payment-card-form label{
+  color:var(--gd-text) !important;
+}
+
+/* Autoriser le scroll dans le panier et le checkout */
+.snipcart .snipcart-layout__content,
+.snipcart .snipcart-cart__content{
+  max-height:calc(100vh - var(--gd-header-h));
+  overflow-y:auto !important;
+}
+
