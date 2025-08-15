@@ -383,7 +383,9 @@
       });
     }
 
-    console.log('[UX] Améliorations Snipcart activées');
+    if (window.GD && window.GD.log) {
+      window.GD.log('[UX] Améliorations Snipcart activées');
+    }
   });
 
   // Exposer les fonctions
