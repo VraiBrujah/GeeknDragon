@@ -19,13 +19,10 @@ if (!$snipcartKey) {
 ?>
 <div hidden id="snipcart" data-api-key="<?= htmlspecialchars($snipcartKey) ?>"></div>
 <script>
-  // Synchronisation des langues entre le site et Snipcart
+  // Configuration simple et fonctionnelle
   const siteLang = '<?= htmlspecialchars($lang ?? 'fr') ?>';
-  const storedLang = localStorage.getItem('lang') || localStorage.getItem('snipcartLanguage');
-  const currentLang = storedLang || siteLang;
+  const currentLang = localStorage.getItem('lang') || siteLang;
   
-  // Synchroniser les deux storages
-  localStorage.setItem('lang', currentLang);
   localStorage.setItem('snipcartLanguage', currentLang);
   
   window.SnipcartSettings = {
@@ -34,55 +31,8 @@ if (!$snipcartKey) {
     config: {
       addProductBehavior: '<?= htmlspecialchars($snipcartAddProductBehavior) ?>',
       locale: currentLang,
-      customerAccount: { enabled: true },
-      // Configuration des traductions personnalisées
-      locales: {
-        fr: {
-          cart: {
-            title: 'Panier',
-            empty: 'Votre panier est vide',
-            subtotal: 'Sous-total',
-            total: 'Total',
-            checkout: 'Commander',
-            continue_shopping: 'Continuer les achats'
-          },
-          checkout: {
-            title: 'Commande',
-            billing_address: 'Adresse de facturation',
-            shipping_address: 'Adresse de livraison',
-            payment_method: 'Méthode de paiement',
-            place_order: 'Passer la commande'
-          },
-          customer: {
-            title: 'Mon compte',
-            sign_in: 'Se connecter',
-            sign_out: 'Se déconnecter'
-          }
-        },
-        en: {
-          cart: {
-            title: 'Cart',
-            empty: 'Your cart is empty',
-            subtotal: 'Subtotal', 
-            total: 'Total',
-            checkout: 'Checkout',
-            continue_shopping: 'Continue shopping'
-          },
-          checkout: {
-            title: 'Checkout',
-            billing_address: 'Billing address',
-            shipping_address: 'Shipping address',
-            payment_method: 'Payment method',
-            place_order: 'Place order'
-          },
-          customer: {
-            title: 'My account',
-            sign_in: 'Sign in',
-            sign_out: 'Sign out'
-          }
-        }
-      }
-    },
+      customerAccount: { enabled: true }
+    }
   };
 
 </script>
@@ -90,3 +40,5 @@ if (!$snipcartKey) {
 <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
 <!-- Script de personnalisation -->
 <script defer src="/js/snipcart.js?v=<?= filemtime(__DIR__.'/js/snipcart.js') ?>"></script>
+<!-- Script de traduction -->
+<script defer src="/js/snipcart-translations.js?v=<?= filemtime(__DIR__.'/js/snipcart-translations.js') ?>"></script>

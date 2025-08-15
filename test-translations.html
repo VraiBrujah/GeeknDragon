@@ -110,6 +110,25 @@
     <!-- Snipcart -->
     <div hidden id="snipcart" data-api-key="test-key"></div>
     
+    <!-- Scripts Snipcart (simulation) -->
+    <script>
+        // Simulation basique de Snipcart pour les tests
+        window.Snipcart = {
+            events: {
+                on: (event, callback) => {
+                    console.log(`[Test] Snipcart event listener: ${event}`);
+                }
+            },
+            api: {
+                session: {
+                    setLanguage: (lang) => {
+                        console.log(`[Test] Snipcart langue changée: ${lang}`);
+                    }
+                }
+            }
+        };
+    </script>
+    
     <script>
         // Simulation des utilitaires GD
         window.GD = {
