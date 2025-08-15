@@ -2,21 +2,24 @@
    GEEK & DRAGON - EFFETS VISUELS PREMIUM POUR LA BOUTIQUE
    Animations et interactions avancées pour une expérience immersive
    ======================================================================== */
+/* eslint-disable max-classes-per-file,
+   no-param-reassign,
+   class-methods-use-this,
+   no-new,
+   no-console */
 
 (() => {
-  'use strict';
-
   // Configuration des animations
   const ANIMATION_CONFIG = {
     observerOptions: {
       threshold: [0.1, 0.25, 0.5, 0.75],
-      rootMargin: '0px 0px -50px 0px'
+      rootMargin: '0px 0px -50px 0px',
     },
     delays: {
       card: 100,
       feature: 150,
-      stagger: 50
-    }
+      stagger: 50,
+    },
   };
 
   // ================================================================
@@ -38,12 +41,12 @@
     setupIntersectionObserver() {
       this.observer = new IntersectionObserver(
         this.handleIntersection.bind(this),
-        ANIMATION_CONFIG.observerOptions
+        ANIMATION_CONFIG.observerOptions,
       );
     }
 
     handleIntersection(entries) {
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting && !this.animatedElements.has(entry.target)) {
           this.animateElement(entry.target);
           this.animatedElements.add(entry.target);
@@ -53,8 +56,8 @@
 
     animateElement(element) {
       const animationType = element.dataset.animation || 'fadeInUp';
-      const delay = parseInt(element.dataset.delay || '0');
-      
+      const delay = parseInt(element.dataset.delay || '0', 10);
+
       setTimeout(() => {
         element.classList.add(`animate-${animationType}`);
         element.style.opacity = '1';
@@ -75,10 +78,10 @@
         <div class="sparkle" style="--delay: 0.5s; --duration: 2.5s;"></div>
         <div class="sparkle" style="--delay: 1s; --duration: 2s;"></div>
       `;
-      
+
       element.style.position = 'relative';
       element.appendChild(sparkles);
-      
+
       setTimeout(() => sparkles.remove(), 3000);
     }
 
@@ -102,7 +105,7 @@
       });
 
       // Observer les titres de section
-      document.querySelectorAll('.shop-section-title').forEach(title => {
+      document.querySelectorAll('.shop-section-title').forEach((title) => {
         title.dataset.animation = 'slideInFromLeft';
         title.style.opacity = '0';
         title.style.transform = 'translateX(-50px)';
@@ -115,7 +118,7 @@
     }
 
     handleScroll() {
-      const scrollY = window.scrollY;
+      const { scrollY } = window;
       const speed = 0.5;
 
       // Effet parallax sur le hero
@@ -161,10 +164,10 @@
         z-index: 1;
         opacity: 0.6;
       `;
-      
+
       this.ctx = this.canvas.getContext('2d');
       this.updateCanvasSize();
-      
+
       const heroSection = document.querySelector('.hero-boutique');
       if (heroSection) {
         heroSection.appendChild(this.canvas);
@@ -176,13 +179,13 @@
       this.canvas.width = window.innerWidth * dpr;
       this.canvas.height = window.innerHeight * dpr;
       this.ctx.scale(dpr, dpr);
-      this.canvas.style.width = window.innerWidth + 'px';
-      this.canvas.style.height = window.innerHeight + 'px';
+      this.canvas.style.width = `${window.innerWidth}px`;
+      this.canvas.style.height = `${window.innerHeight}px`;
     }
 
     bindEvents() {
       window.addEventListener('resize', () => this.updateCanvasSize());
-      
+
       // Créer des particules au survol des cartes
       document.addEventListener('mouseenter', (e) => {
         if (e.target.closest('.product-card')) {
@@ -192,7 +195,7 @@
     }
 
     createBurstEffect(x, y) {
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 6; i += 1) {
         this.particles.push({
           x,
           y,
@@ -201,7 +204,7 @@
           life: 1,
           decay: 0.02,
           size: Math.random() * 3 + 1,
-          color: `hsl(${Math.random() * 60 + 270}, 70%, 60%)`
+          color: `hsl(${Math.random() * 60 + 270}, 70%, 60%)`,
         });
       }
     }
@@ -210,7 +213,7 @@
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       // Mise à jour et rendu des particules
-      this.particles = this.particles.filter(particle => {
+      this.particles = this.particles.filter((particle) => {
         particle.x += particle.vx;
         particle.y += particle.vy;
         particle.life -= particle.decay;
@@ -257,7 +260,7 @@
 
         const ripple = document.createElement('div');
         ripple.className = 'ripple-effect';
-        
+
         const rect = button.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         const x = e.clientX - rect.left - size / 2;
@@ -335,7 +338,7 @@
 
     addHoverEffects() {
       // Effet de glow sur les cartes
-      document.querySelectorAll('.product-card').forEach(card => {
+      document.querySelectorAll('.product-card').forEach((card) => {
         card.addEventListener('mouseenter', () => {
           card.style.filter = 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.4))';
         });
@@ -346,15 +349,15 @@
       });
 
       // Effet de rotation 3D sur les images
-      document.querySelectorAll('.product-media').forEach(media => {
+      document.querySelectorAll('.product-media').forEach((media) => {
         media.addEventListener('mousemove', (e) => {
           const rect = media.getBoundingClientRect();
           const x = (e.clientX - rect.left) / rect.width;
           const y = (e.clientY - rect.top) / rect.height;
-          
+
           const rotateX = (y - 0.5) * 10;
           const rotateY = (0.5 - x) * 10;
-          
+
           media.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
         });
 
@@ -384,8 +387,8 @@
     createConfettiEffect(element) {
       const colors = ['#8b5cf6', '#10b981', '#f59e0b', '#ef4444'];
       const rect = element.getBoundingClientRect();
-      
-      for (let i = 0; i < 5; i++) {
+
+      for (let i = 0; i < 5; i += 1) {
         const confetti = document.createElement('div');
         confetti.style.cssText = `
           position: fixed;
@@ -399,10 +402,10 @@
           z-index: 1000;
           animation: confetti 1s ease-out forwards;
         `;
-        
-        confetti.style.setProperty('--x', (Math.random() - 0.5) * 100 + 'px');
-        confetti.style.setProperty('--y', (Math.random() - 0.5) * 100 + 'px');
-        
+
+        confetti.style.setProperty('--x', `${(Math.random() - 0.5) * 100}px`);
+        confetti.style.setProperty('--y', `${(Math.random() - 0.5) * 100}px`);
+
         document.body.appendChild(confetti);
         setTimeout(() => confetti.remove(), 1000);
       }
@@ -411,20 +414,20 @@
     addSoundEffects() {
       // Créer des sons synthétiques simples
       const audioCtx = window.AudioContext ? new AudioContext() : null;
-      
+
       const playSound = (frequency, duration = 100) => {
         if (!audioCtx) return;
-        
+
         const oscillator = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
-        
+
         oscillator.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-        
+
         oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
         gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration / 1000);
-        
+
         oscillator.start();
         oscillator.stop(audioCtx.currentTime + duration / 1000);
       };
@@ -454,7 +457,7 @@
         setTimeout(() => {
           button.classList.remove('loading');
           button.disabled = false;
-          
+
           // Animation de succès
           button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
           button.innerHTML = `
@@ -463,7 +466,7 @@
             </svg>
             <span>Ajouté !</span>
           `;
-          
+
           setTimeout(() => {
             button.style.background = '';
             button.innerHTML = `
@@ -497,7 +500,7 @@
     lazyLoadImages() {
       if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
             if (entry.isIntersecting) {
               const img = entry.target;
               if (img.dataset.src) {
@@ -509,7 +512,7 @@
           });
         });
 
-        document.querySelectorAll('img[data-src]').forEach(img => {
+        document.querySelectorAll('img[data-src]').forEach((img) => {
           imageObserver.observe(img);
         });
       }
@@ -590,7 +593,6 @@
     ScrollAnimations,
     ParticleEffects,
     InteractiveEnhancements,
-    PerformanceOptimizer
+    PerformanceOptimizer,
   };
-
 })();
