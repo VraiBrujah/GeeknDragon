@@ -1,0 +1,815 @@
+/* ========================================================================
+   GEEK & DRAGON - BOUTIQUE E-COMMERCE PREMIUM
+   Design moderne et attractif avec les meilleures pratiques UX
+   ======================================================================== */
+
+/* =================================================================== */
+/* VARIABLES PREMIUM POUR LA BOUTIQUE                                 */
+/* =================================================================== */
+:root {
+  /* Couleurs boutique premium */
+  --boutique-primary: #8b5cf6;
+  --boutique-primary-hover: #a855f7;
+  --boutique-secondary: #10b981;
+  --boutique-accent: #f59e0b;
+  --boutique-danger: #ef4444;
+  
+  /* Surfaces et arrière-plans */
+  --boutique-bg: #0f172a;
+  --boutique-surface: #1e293b;
+  --boutique-card: #334155;
+  --boutique-elevated: #475569;
+  
+  /* Textes */
+  --boutique-text: #f1f5f9;
+  --boutique-text-muted: #94a3b8;
+  --boutique-text-accent: #c7d2fe;
+  
+  /* Bordures et dividers */
+  --boutique-border: rgba(255, 255, 255, 0.1);
+  --boutique-border-accent: rgba(139, 92, 246, 0.3);
+  
+  /* Ombres premium */
+  --boutique-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --boutique-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --boutique-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --boutique-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.3);
+  --boutique-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  
+  /* Gradients premium */
+  --boutique-gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
+  --boutique-gradient-secondary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --boutique-gradient-card: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+  --boutique-gradient-overlay: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  
+  /* Animations et transitions */
+  --boutique-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --boutique-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --boutique-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Espacements boutique */
+  --boutique-space-xs: 0.25rem;
+  --boutique-space-sm: 0.5rem;
+  --boutique-space-md: 1rem;
+  --boutique-space-lg: 1.5rem;
+  --boutique-space-xl: 2rem;
+  --boutique-space-2xl: 3rem;
+  
+  /* Border radius */
+  --boutique-radius-sm: 8px;
+  --boutique-radius-md: 12px;
+  --boutique-radius-lg: 16px;
+  --boutique-radius-xl: 20px;
+}
+
+/* =================================================================== */
+/* HERO SECTION PREMIUM                                               */
+/* =================================================================== */
+.hero-boutique {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.hero-boutique::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: var(--boutique-space-xl);
+}
+
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  background: var(--boutique-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--boutique-space-lg);
+  line-height: 1.2;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--boutique-text-muted);
+  margin-bottom: var(--boutique-space-xl);
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--boutique-space-sm);
+  background: var(--boutique-gradient-primary);
+  color: white;
+  padding: var(--boutique-space-lg) var(--boutique-space-xl);
+  border-radius: var(--boutique-radius-xl);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  transition: var(--boutique-transition);
+  box-shadow: var(--boutique-shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--boutique-shadow-xl), var(--boutique-shadow-glow);
+}
+
+.hero-cta:hover::before {
+  left: 100%;
+}
+
+/* =================================================================== */
+/* GRILLE DE PRODUITS PREMIUM                                        */
+/* =================================================================== */
+.shop-section {
+  padding: var(--boutique-space-2xl) 0;
+  background: var(--boutique-bg);
+  position: relative;
+}
+
+.shop-section:nth-child(even) {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.shop-section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: var(--boutique-space-2xl);
+  color: var(--boutique-text);
+  position: relative;
+}
+
+.shop-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -var(--boutique-space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--boutique-gradient-primary);
+  border-radius: 2px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--boutique-space-xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--boutique-space-lg);
+}
+
+/* =================================================================== */
+/* CARTES PRODUITS ULTRA PREMIUM                                     */
+/* =================================================================== */
+.product-card {
+  background: var(--boutique-gradient-card);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-lg);
+  padding: var(--boutique-space-lg);
+  transition: var(--boutique-transition);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--boutique-shadow-md);
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--boutique-gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--boutique-shadow-xl), var(--boutique-shadow-glow);
+  border-color: var(--boutique-border-accent);
+}
+
+.product-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Média du produit */
+.product-media-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: var(--boutique-radius-md);
+  margin-bottom: var(--boutique-space-lg);
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-media-container .product-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--boutique-transition);
+}
+
+.product-card:hover .product-media {
+  transform: scale(1.1);
+}
+
+/* Badge de stock */
+.stock-badge {
+  position: absolute;
+  top: var(--boutique-space-sm);
+  right: var(--boutique-space-sm);
+  padding: var(--boutique-space-xs) var(--boutique-space-sm);
+  border-radius: var(--boutique-radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 2;
+}
+
+.stock-badge.in-stock {
+  background: var(--boutique-gradient-secondary);
+  color: white;
+}
+
+.stock-badge.out-of-stock {
+  background: var(--boutique-danger);
+  color: white;
+}
+
+/* Contenu de la carte */
+.product-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--boutique-text);
+  margin-bottom: var(--boutique-space-sm);
+  line-height: 1.3;
+  text-align: center;
+}
+
+.product-description {
+  color: var(--boutique-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: var(--boutique-space-lg);
+  text-align: center;
+  flex: 1;
+}
+
+.product-price {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--boutique-secondary);
+  text-align: center;
+  margin-bottom: var(--boutique-space-lg);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* =================================================================== */
+/* CONTRÔLES DE QUANTITÉ PREMIUM                                     */
+/* =================================================================== */
+.quantity-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--boutique-space-md);
+  margin-bottom: var(--boutique-space-lg);
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--boutique-space-md);
+  background: var(--boutique-surface);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-md);
+  padding: var(--boutique-space-sm);
+}
+
+.quantity-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--boutique-radius-sm);
+  background: var(--boutique-gradient-primary);
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--boutique-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--boutique-shadow-md);
+}
+
+.quantity-btn:active {
+  transform: scale(0.95);
+}
+
+.qty-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--boutique-text);
+  min-width: 40px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: var(--boutique-space-sm);
+  border-radius: var(--boutique-radius-sm);
+}
+
+/* =================================================================== */
+/* BOUTONS D'ACHAT PREMIUM                                           */
+/* =================================================================== */
+.add-to-cart-btn {
+  background: var(--boutique-gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--boutique-radius-md);
+  padding: var(--boutique-space-lg) var(--boutique-space-xl);
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: var(--boutique-transition);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--boutique-space-sm);
+  box-shadow: var(--boutique-shadow-md);
+}
+
+.add-to-cart-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.add-to-cart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--boutique-shadow-lg), var(--boutique-shadow-glow);
+}
+
+.add-to-cart-btn:hover::before {
+  left: 100%;
+}
+
+.add-to-cart-btn:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.add-to-cart-btn:disabled::before {
+  display: none;
+}
+
+/* Icône panier */
+.cart-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* =================================================================== */
+/* SECTIONS SPÉCIALES                                                */
+/* =================================================================== */
+.features-section {
+  background: var(--boutique-gradient-overlay);
+  padding: var(--boutique-space-2xl) 0;
+  border-top: 1px solid var(--boutique-border);
+  border-bottom: 1px solid var(--boutique-border);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--boutique-space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--boutique-space-lg);
+}
+
+.feature-card {
+  background: var(--boutique-surface);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-lg);
+  padding: var(--boutique-space-xl);
+  text-align: center;
+  transition: var(--boutique-transition);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--boutique-shadow-lg);
+  border-color: var(--boutique-border-accent);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: var(--boutique-space-lg);
+  display: block;
+}
+
+.feature-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--boutique-text);
+  margin-bottom: var(--boutique-space-sm);
+}
+
+.feature-description {
+  color: var(--boutique-text-muted);
+  line-height: 1.6;
+}
+
+/* =================================================================== */
+/* TRUST INDICATORS                                                  */
+/* =================================================================== */
+.trust-section {
+  background: var(--boutique-surface);
+  padding: var(--boutique-space-xl) 0;
+  text-align: center;
+}
+
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--boutique-space-xl);
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--boutique-space-lg);
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--boutique-space-sm);
+  color: var(--boutique-text-muted);
+  font-size: 0.9rem;
+}
+
+.trust-icon {
+  font-size: 1.5rem;
+  color: var(--boutique-secondary);
+}
+
+/* =================================================================== */
+/* RESPONSIVE DESIGN                                                 */
+/* =================================================================== */
+@media (max-width: 768px) {
+  :root {
+    --boutique-space-xs: 0.25rem;
+    --boutique-space-sm: 0.5rem;
+    --boutique-space-md: 0.75rem;
+    --boutique-space-lg: 1rem;
+    --boutique-space-xl: 1.5rem;
+    --boutique-space-2xl: 2rem;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: var(--boutique-space-lg);
+    padding: 0 var(--boutique-space-md);
+  }
+  
+  .product-media-container {
+    height: 200px;
+  }
+  
+  .hero-content {
+    padding: var(--boutique-space-lg);
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--boutique-space-lg);
+    padding: 0 var(--boutique-space-md);
+  }
+  
+  .trust-badges {
+    flex-direction: column;
+    gap: var(--boutique-space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    padding: var(--boutique-space-md);
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero-cta {
+    padding: var(--boutique-space-md) var(--boutique-space-lg);
+    font-size: 1rem;
+  }
+}
+
+/* =================================================================== */
+/* ANIMATIONS AVANCÉES                                               */
+/* =================================================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+.shimmer-effect {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* =================================================================== */
+/* ÉTATS HOVER ET FOCUS AVANCÉS                                      */
+/* =================================================================== */
+.product-card {
+  cursor: pointer;
+}
+
+.product-card:focus-within {
+  outline: 2px solid var(--boutique-primary);
+  outline-offset: 2px;
+}
+
+.add-to-cart-btn:focus {
+  outline: 2px solid var(--boutique-text);
+  outline-offset: 2px;
+}
+
+/* =================================================================== */
+/* OPTIMISATIONS AVANCÉES E-COMMERCE                                 */
+/* =================================================================== */
+
+/* Wishlist et comparaison */
+.product-actions {
+  position: absolute;
+  top: var(--boutique-space-sm);
+  left: var(--boutique-space-sm);
+  display: flex;
+  gap: var(--boutique-space-xs);
+  opacity: 0;
+  transition: var(--boutique-transition);
+}
+
+.product-card:hover .product-actions {
+  opacity: 1;
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  color: var(--boutique-primary);
+  cursor: pointer;
+  transition: var(--boutique-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn:hover {
+  background: var(--boutique-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Quick view modal */
+.quick-view-trigger {
+  position: absolute;
+  bottom: var(--boutique-space-sm);
+  right: var(--boutique-space-sm);
+  background: var(--boutique-gradient-primary);
+  color: white;
+  border: none;
+  border-radius: var(--boutique-radius-sm);
+  padding: var(--boutique-space-xs) var(--boutique-space-sm);
+  font-size: 0.8rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: var(--boutique-transition);
+}
+
+.product-card:hover .quick-view-trigger {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Indicateurs de popularité */
+.popularity-badge {
+  position: absolute;
+  top: var(--boutique-space-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--boutique-gradient-secondary);
+  color: white;
+  padding: var(--boutique-space-xs) var(--boutique-space-sm);
+  border-radius: var(--boutique-radius-xl);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 3;
+}
+
+/* Skeleton loading pour un meilleur UX */
+.skeleton {
+  background: linear-gradient(90deg, 
+    var(--boutique-surface) 25%, 
+    var(--boutique-card) 50%, 
+    var(--boutique-surface) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Filtres et tri avancés */
+.shop-filters {
+  background: var(--boutique-surface);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-lg);
+  padding: var(--boutique-space-lg);
+  margin-bottom: var(--boutique-space-xl);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--boutique-space-md);
+  align-items: center;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--boutique-space-sm);
+}
+
+.filter-select {
+  background: var(--boutique-bg);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-sm);
+  color: var(--boutique-text);
+  padding: var(--boutique-space-sm) var(--boutique-space-md);
+  font-size: 0.9rem;
+  transition: var(--boutique-transition);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--boutique-primary);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* =================================================================== */
+/* LOADING STATES                                                    */
+/* =================================================================== */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.loading .add-to-cart-btn {
+  background: #6b7280;
+  cursor: wait;
+}
+
+.loading .add-to-cart-btn::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: var(--boutique-space-sm);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

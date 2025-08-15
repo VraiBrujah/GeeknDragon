@@ -7,6 +7,7 @@ $title  = $translations['meta']['shop']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['shop']['desc'] ?? '';
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
 $extraHead = <<<HTML
+<link rel="stylesheet" href="/css/boutique-premium.css?v=<?= filemtime(__DIR__.'/css/boutique-premium.css') ?>">
 <style>
   .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
   .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
@@ -96,104 +97,189 @@ echo $snipcartInit;
 
 <main id="main" class="pt-[calc(var(--header-height))]">
 
-  <!-- ===== HERO ===== -->
-  <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
-    <div class="absolute inset-0 bg-black/60"></div>
-      <div class="relative z-10 max-w-3xl p-6 hero-text">
-        <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
-        <p class="text-xl mb-8 txt-court" data-i18n="shop.hero.description">Offrez à vos parties l’élégance et la durabilité de pièces et cartes d’équipement conçues au Québec, plus précieuses qu’une figurine de dragon à 300 $, laquelle ne sert qu’exceptionnellement, nos pièces sont présentes à chaque session pour des années d’aventures.</p>
-        <a href="#pieces" class="btn btn-primary" data-i18n="shop.hero.button">Choisir mes trésors</a>
-      </div>
+  <!-- ===== HERO PREMIUM ===== -->
+  <section class="hero-boutique">
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:0" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
+    <div class="absolute inset-0 bg-black/60" style="z-index:1"></div>
+    <div class="hero-content animate-fade-in-up" style="z-index:2">
+      <h1 class="hero-title" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
+      <p class="hero-subtitle" data-i18n="shop.hero.description">Offrez à vos parties l'élégance et la durabilité de pièces et cartes d'équipement conçues au Québec, plus précieuses qu'une figurine de dragon à 300 $, laquelle ne sert qu'exceptionnellement, nos pièces sont présentes à chaque session pour des années d'aventures.</p>
+      <a href="#pieces" class="hero-cta">
+        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
+          <circle cx="9" cy="20" r="1"/>
+          <circle cx="20" cy="20" r="1"/>
+        </svg>
+        <span data-i18n="shop.hero.button">Choisir mes trésors</span>
+      </a>
+    </div>
   </section>
 
-  <!-- ░░░ PIÈCES ░░░ -->
-    <section id="pieces" class="py-24 bg-gray-900/80 scroll-mt-24">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="shop.pieces.title">Pièces métalliques</h2>
-        <div class="shop-grid">
-          <?php foreach ($pieces as $product) : ?>
-              <?php include __DIR__ . '/partials/product-card.php'; ?>
-          <?php endforeach; ?>
-        </div>
-		
-
-        <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
-          <span data-i18n="shop.pieces.description">Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.</span><br>
-          <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank" class="underline text-indigo-400 hover:text-indigo-300" data-i18n="shop.pieces.video">Voir la démonstration en vidéo&nbsp;></a>
+  <!-- ░░░ PIÈCES PREMIUM ░░░ -->
+  <section id="pieces" class="shop-section scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="shop-section-title" data-i18n="shop.pieces.title">Pièces métalliques</h2>
+      <div class="products-grid">
+        <?php foreach ($pieces as $product) : ?>
+          <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
+        <?php endforeach; ?>
+      </div>
+      
+      <div class="text-center mt-12 max-w-4xl mx-auto px-6">
+        <p class="text-lg text-gray-300 mb-6">
+          <span data-i18n="shop.pieces.description">Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.</span>
         </p>
+        <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank" 
+           class="inline-flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors underline decoration-2 underline-offset-4">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <span data-i18n="shop.pieces.video">Voir la démonstration en vidéo</span>
+        </a>
       </div>
-    </section>
+    </div>
+  </section>
 
-  <!-- ░░░ COFFRES SUR MESURE ░░░ -->
-    <section class="py-24">
-      <div class="max-w-3xl mx-auto px-6 text-center">
-        <h3 class="text-4xl font-bold mb-6" data-i18n="shop.chest.title">Coffres sur mesure</h3>
-        <a href="index.php#contact"><img src="images/Piece/pro/coffre.png" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
-        <p class="mb-6 text-gray-300" data-i18n="shop.chest.description">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
-        <a href="index.php#contact" class="btn btn-primary" data-i18n="shop.chest.button">Demander un devis</a>
+  <!-- ░░░ COFFRES SUR MESURE PREMIUM ░░░ -->
+  <section class="features-section">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon">📦</span>
+          <h3 class="feature-title" data-i18n="shop.chest.title">Coffres sur mesure</h3>
+          <p class="feature-description" data-i18n="shop.chest.description">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
+          <a href="index.php#contact" class="hero-cta mt-6" data-i18n="shop.chest.button">Demander un devis</a>
+        </div>
+        
+        <div class="feature-card">
+          <span class="feature-icon">🚚</span>
+          <h3 class="feature-title">Livraison rapide</h3>
+          <p class="feature-description">Expédition sous 48h partout au Canada avec suivi en temps réel de votre commande.</p>
+        </div>
+        
+        <div class="feature-card">
+          <span class="feature-icon">🔒</span>
+          <h3 class="feature-title">Paiement sécurisé</h3>
+          <p class="feature-description">Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.</p>
+        </div>
+        
+        <div class="feature-card">
+          <span class="feature-icon">🎯</span>
+          <h3 class="feature-title">Qualité artisanale</h3>
+          <p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 	
-  <!-- ░░░ CARTES ░░░ -->
-    <section id="cartes" class="py-24 bg-gray-900/80 scroll-mt-24">
-      <div class="max-w-6xl mx-auto px-6">
-        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.cards.title">Cartes d’équipement</h3>
-        <div class="shop-grid">
-          <?php foreach ($cards as $product) : ?>
-              <?php include __DIR__ . '/partials/product-card.php'; ?>
-          <?php endforeach; ?>
-        </div>
-        <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
-          <span data-i18n="shop.cards.description">Paquets thématiques de cartes illustrées pour gérer l’inventaire.</span>
+  <!-- ░░░ CARTES PREMIUM ░░░ -->
+  <section id="cartes" class="shop-section scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="shop-section-title" data-i18n="shop.cards.title">Cartes d'équipement</h2>
+      <div class="products-grid">
+        <?php foreach ($cards as $product) : ?>
+          <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
+        <?php endforeach; ?>
+      </div>
+      
+      <div class="text-center mt-12 max-w-4xl mx-auto px-6">
+        <p class="text-lg text-gray-300">
+          <span data-i18n="shop.cards.description">Paquets thématiques de cartes illustrées pour gérer l'inventaire.</span>
         </p>
       </div>
-    </section>
+    </div>
+  </section>
 
 
-  <!-- ░░░ TRIPTYQUES ░░░ -->
-    <section id="triptyques" class="py-24">
-      <div class="max-w-6xl mx-auto px-6 text-center">
-        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="shop.triptychs.title">Triptyques de personnage</h3>
-        <div class="shop-grid">
-          <?php foreach ($triptychs as $product) : ?>
-              <?php include __DIR__ . '/partials/product-card.php'; ?>
-          <?php endforeach; ?>
-        </div>
-        <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
+  <!-- ░░░ TRIPTYQUES PREMIUM ░░░ -->
+  <section id="triptyques" class="shop-section">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="shop-section-title" data-i18n="shop.triptychs.title">Triptyques de personnage</h2>
+      <div class="products-grid">
+        <?php foreach ($triptychs as $product) : ?>
+          <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
+        <?php endforeach; ?>
+      </div>
+      
+      <div class="text-center mt-12 max-w-4xl mx-auto px-6">
+        <p class="text-lg text-gray-300">
           <span data-i18n="shop.triptychs.description">Fiches rigides en trois volets pour classes, espèces et historiques.</span>
         </p>
       </div>
-    </section>
+    </div>
+  </section>
 
 
   
-  <!-- ===== Investissement collectif & Carte de propriété ===== -->
-  <section class="py-16 bg-gray-900/80">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
-      <div class="md:w-1/3">
-        <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
-      </div>
-      <div class="md:w-2/3 text-gray-200 space-y-4">
-        <h3 class="text-3xl font-bold" data-i18n="shop.collective.title">Investissez ensemble, partagez l’aventure</h3>
-        <p data-i18n="shop.collective.description1">Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.</p>
-        <p data-i18n="shop.collective.description2">À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.</p>
-        <p data-i18n="shop.collective.description3">Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté.</p>
+  <!-- ===== INVESTISSEMENT COLLECTIF PREMIUM ===== -->
+  <section class="features-section">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+        <div class="lg:w-1/2">
+          <div class="product-card">
+            <div class="product-media-container">
+              <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="product-media" loading="lazy">
+            </div>
+            <div class="product-content text-center">
+              <h3 class="product-title" data-i18n="shop.collective.title">Investissez ensemble, partagez l'aventure</h3>
+              <p class="product-description" data-i18n="shop.collective.description3">Complétez la carte de propriété en indiquant votre nom et le nombre de pièces achetées.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="lg:w-1/2 space-y-6">
+          <div class="feature-card">
+            <span class="feature-icon">💰</span>
+            <h4 class="feature-title">Investissement partagé</h4>
+            <p class="feature-description" data-i18n="shop.collective.description1">Ne laissez pas le maître de jeu se ruiner pour votre plaisir : chaque joueur peut contribuer en achetant son matériel.</p>
+          </div>
+          
+          <div class="feature-card">
+            <span class="feature-icon">⚖️</span>
+            <h4 class="feature-title">Rapport qualité-prix</h4>
+            <p class="feature-description" data-i18n="shop.collective.description2">Contrairement aux figurines à 300$ utilisées une fois, nos pièces servent à chaque session pour des années de campagne.</p>
+          </div>
+          
+          <div class="feature-card">
+            <span class="feature-icon">📋</span>
+            <h4 class="feature-title">Carte de propriété</h4>
+            <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
   
-  <!-- ░░░ EN-TÊTE ░░░ -->
-    <section class="text-center max-w-4xl mx-auto px-6 my-16">
-      <h2 class="text-4xl md:text-5xl font-extrabold mb-4" data-i18n="shop.intro.title">Trésors artisanaux</h2>
-        <p class="text-lg md:text-xl txt-court" data-i18n="shop.intro.description">Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.</p>
-        <p class="mt-4 txt-court">
+  <!-- ░░░ TRUST SECTION PREMIUM ░░░ -->
+  <section class="trust-section">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="shop-section-title" data-i18n="shop.intro.title">Trésors artisanaux</h2>
+      <p class="text-xl text-center mb-12 max-w-3xl mx-auto" data-i18n="shop.intro.description">Objets de collection et aides de jeu artisanaux, fabriqués au Québec.</p>
+      
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <span class="trust-icon">🔒</span>
           <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
-          <span class="payment-icons">
-            <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-            <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-            <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
-        </p>
-    </section>
+        </div>
+        
+        <div class="trust-badge">
+          <img src="/images/payments/visa.svg" alt="Logo Visa" class="w-8 h-6" loading="lazy">
+          <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" class="w-8 h-6" loading="lazy">
+          <img src="/images/payments/american-express.svg" alt="Logo American Express" class="w-8 h-6" loading="lazy">
+        </div>
+        
+        <div class="trust-badge">
+          <span class="trust-icon">🍁</span>
+          <span>Fabriqué au Québec</span>
+        </div>
+        
+        <div class="trust-badge">
+          <span class="trust-icon">⭐</span>
+          <span>Qualité premium</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
@@ -220,6 +306,7 @@ echo $snipcartInit;
 </script>
   <script src="js/app.js"></script>
   <script src="/js/hero-videos.js"></script>
+  <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
 </body>
 
 
