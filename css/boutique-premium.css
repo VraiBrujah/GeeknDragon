@@ -167,7 +167,9 @@
 /* GRILLE DE PRODUITS PREMIUM                                        */
 /* =================================================================== */
 .shop-section {
-  padding-top: calc(var(--boutique-space-3xl));
+  /* petit espace interne avant le titre, le trait reste collé au dessus */
+  padding-top: var(--boutique-space-lg);
+  padding-bottom: var(--boutique-space-3xl);
   background: var(--boutique-bg);
   position: relative;
 }
@@ -176,18 +178,15 @@
   margin-top: var(--boutique-space-3xl);
 }
 
-.shop-section + .shop-section .shop-section-title {
-  margin-top: var(--boutique-space-3xl);
-}
-
 .shop-section:nth-child(even) {
   background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
 }
 
+/* Trait violet inamovible en haut de chaque section */
 .shop-section::before {
   content: "";
   position: absolute;
-  top: 0;              /* collé au bord haut de la section */
+  top: 0;
   left: 0;
   right: 0;
   height: 6px;
@@ -195,18 +194,19 @@
   border-radius: 3px;
 }
 
+/* Titre : petit écart sous le trait */
 .shop-section-title {
-  margin-top: 0;
   font-family: 'Cinzel', serif;
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 700;
   text-align: center;
-  margin-top: var(--boutique-space-2xl);
+  margin-top: var(--boutique-space-sm);   /* <<< espace réduit */
   margin-bottom: var(--boutique-space-2xl);
   color: var(--boutique-text);
   position: relative;
 }
 
+/* On désactive la petite barre décorative sous le titre */
 .shop-section-title::after {
   content: none !important;
 }
@@ -631,43 +631,22 @@
 /* ANIMATIONS AVANCÉES                                               */
 /* =================================================================== */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.4s ease-out;
-}
+.animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
+.animate-scale-in   { animation: scaleIn 0.4s ease-out; }
 
 .shimmer-effect {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
@@ -678,9 +657,7 @@
 /* =================================================================== */
 /* ÉTATS HOVER ET FOCUS AVANCÉS                                      */
 /* =================================================================== */
-.product-card {
-  cursor: pointer;
-}
+.product-card { cursor: pointer; }
 
 .product-card:focus-within {
   outline: 2px solid var(--boutique-primary);
@@ -695,8 +672,6 @@
 /* =================================================================== */
 /* OPTIMISATIONS AVANCÉES E-COMMERCE                                 */
 /* =================================================================== */
-
-/* Wishlist et comparaison */
 .product-actions {
   position: absolute;
   top: var(--boutique-space-sm);
@@ -707,9 +682,7 @@
   transition: var(--boutique-transition);
 }
 
-.product-card:hover .product-actions {
-  opacity: 1;
-}
+.product-card:hover .product-actions { opacity: 1; }
 
 .action-btn {
   width: 32px;
@@ -770,7 +743,7 @@
   z-index: 3;
 }
 
-/* Skeleton loading pour un meilleur UX */
+/* Skeleton loading */
 .skeleton {
   background: linear-gradient(90deg, 
     var(--boutique-surface) 25%, 
@@ -781,11 +754,11 @@
 }
 
 @keyframes skeleton-loading {
-  0% { background-position: 200% 0; }
+  0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
 
-/* Filtres et tri avancés */
+/* Filtres et tri */
 .shop-filters {
   background: var(--boutique-surface);
   border: 1px solid var(--boutique-border);
@@ -798,11 +771,7 @@
   align-items: center;
 }
 
-.filter-group {
-  display: flex;
-  align-items: center;
-  gap: var(--boutique-space-sm);
-}
+.filter-group { display: flex; align-items: center; gap: var(--boutique-space-sm); }
 
 .filter-select {
   background: var(--boutique-bg);
@@ -823,10 +792,7 @@
 /* =================================================================== */
 /* LOADING STATES                                                    */
 /* =================================================================== */
-.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
+.loading { opacity: 0.6; pointer-events: none; }
 
 .loading .add-to-cart-btn {
   background: #6b7280;
@@ -844,8 +810,4 @@
   margin-left: var(--boutique-space-sm);
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
