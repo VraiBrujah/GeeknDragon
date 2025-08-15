@@ -1,6 +1,22 @@
 <?php
 
+// Headers de sécurité
 header('Permissions-Policy: payment=(self)');
+header('X-Frame-Options: SAMEORIGIN');
+header('X-Content-Type-Options: nosniff');
+header('X-XSS-Protection: 1; mode=block');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
+
+// Content Security Policy basique (à ajuster selon les besoins)
+$csp = "default-src 'self'; " .
+       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.snipcart.com https://app.snipcart.com; " .
+       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " .
+       "font-src 'self' https://fonts.gstatic.com; " .
+       "img-src 'self' data: https:; " .
+       "connect-src 'self' https://app.snipcart.com; " .
+       "frame-src 'self' https://js.stripe.com;";
+header("Content-Security-Policy: $csp");
 
 require_once __DIR__ . '/vendor/erusev/parsedown/Parsedown.php';
 

@@ -8,15 +8,39 @@
  */
 
 $availableLangs = ['fr', 'en'];
-$lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? null);
+
+// Validation stricte du paramètre de langue
+$lang = null;
+if (isset($_GET['lang']) && is_string($_GET['lang'])) {
+    $langParam = trim($_GET['lang']);
+    if (in_array($langParam, $availableLangs, true)) {
+        $lang = $langParam;
+    }
+}
+
+// Fallback sur le cookie si GET invalide
+if ($lang === null && isset($_COOKIE['lang']) && is_string($_COOKIE['lang'])) {
+    $cookieLang = trim($_COOKIE['lang']);
+    if (in_array($cookieLang, $availableLangs, true)) {
+        $lang = $cookieLang;
+    }
+}
+
+// Fallback sur Accept-Language si aucune langue valide trouvée
 if ($lang === null) {
     $accept = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
     $lang = str_starts_with(strtolower($accept), 'fr') ? 'fr' : 'en';
 }
-if (!in_array($lang, $availableLangs, true)) {
-    $lang = 'fr';
-}
-setcookie('lang', $lang, time() + 31536000, '/');
+
+// Cookie sécurisé
+$isSecure = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
+setcookie('lang', $lang, [
+    'expires' => time() + 31536000,
+    'path' => '/',
+    'secure' => $isSecure,
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
 
 /**
  * Append the current language as query parameter to a URL.
