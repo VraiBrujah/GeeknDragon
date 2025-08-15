@@ -390,5 +390,4 @@
   window.GD = window.GD || {};
   window.GD.enhanceCart = enhanceCartVisuals;
   window.GD.showCartNotification = showCartNotification;
-
 })();
