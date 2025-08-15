@@ -96,6 +96,9 @@
   max-width: 800px;
   padding: var(--boutique-space-xl);
   color: white;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .hero-title {
@@ -105,7 +108,7 @@
   color: white;
   margin-bottom: var(--boutique-space-lg);
   line-height: 1.2;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .hero-subtitle {
@@ -116,6 +119,9 @@
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .hero-cta {
