@@ -177,7 +177,7 @@
 }
 
 .shop-section + .shop-section .shop-section-title {
-  margin-top: var(--boutique-space-2xl);
+  margin-top: var(--boutique-space-3xl);
 }
 
 .shop-section:nth-child(even) {
