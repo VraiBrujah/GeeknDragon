@@ -201,6 +201,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: var(--boutique-space-xl);
+  justify-content: center;
+  justify-items: center;
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 var(--boutique-space-lg);
@@ -226,6 +228,9 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
   box-shadow: var(--boutique-shadow-md);
 }
 
@@ -471,6 +476,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--boutique-space-xl);
+  justify-content: center;
+  justify-items: center;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--boutique-space-lg);
@@ -483,6 +490,9 @@
   padding: var(--boutique-space-xl);
   text-align: center;
   transition: var(--boutique-transition);
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
 }
 
 .feature-card:hover {
