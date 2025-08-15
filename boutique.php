@@ -191,7 +191,7 @@ echo $snipcartInit;
         <!-- Tableau des abréviations -->
         <div class="mt-12">
           <h4 class="text-center text-gray-200 mb-4">
-            <br><br>Échelle & abréviations (5e)
+            Échelle & abréviations (5e)
           </h4>
           <div class="overflow-x-auto">
             <table class="mx-auto border-collapse text-gray-400">
