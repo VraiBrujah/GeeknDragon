@@ -186,7 +186,7 @@ echo $snipcartInit;
                     data-video-close>&times;</button>
             <div class="w-full aspect-video">
               <iframe class="w-full h-full" src="https://www.youtube.com/embed/y96eAFtC4xE?start=624"
-                      title="L’Économie de D&D 💰 Conseils Jeux de Rôle" allowfullscreen></iframe>
+                      title="L’Économie de D&D 💰 Conseils Jeux de Rôle" allowfullscreen tabindex="-1"></iframe>
             </div>
           </div>
         </div>
@@ -433,9 +433,9 @@ echo $snipcartInit;
     openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => {
+    window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
-    });
+    }, true);
     document.addEventListener('fullscreenchange', () => {
       if (!document.fullscreenElement && !modal.classList.contains('hidden')) closeModal();
     });
