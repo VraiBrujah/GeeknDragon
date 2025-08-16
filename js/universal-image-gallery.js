@@ -39,8 +39,10 @@
       '#produits img',
       '#boutique img',
       '.product-image',
+      '.property-image',
       '.gallery-image',
-      'img[data-gallery]'
+      'img[data-gallery]',
+      '.feature-card img'
     ],
     
     // Options de galerie
