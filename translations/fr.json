@@ -119,7 +119,8 @@
       "equivTitle": "Équivalences totales par métal",
       "bestLabel": "Représentation minimale :",
       "remainder": "Reste",
-      "and": "et"
+      "and": "et",
+      "totalPieces": "Nombre total de pièces"
     },
     "chest": {
       "title": "Coffres sur mesure",

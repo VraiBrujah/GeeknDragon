@@ -57,7 +57,13 @@
     const text = parts.length > 1
       ? `${parts.slice(0, -1).join(', ')} ${andText} ${parts[parts.length - 1]}`
       : (parts[0] || '');
-    return { text, remaining, items };
+    const total = items.reduce((sum, { qty }) => sum + qty, 0);
+    return {
+      text,
+      remaining,
+      items,
+      total,
+    };
   };
 
   /**
@@ -69,6 +75,7 @@
     const andText = tr.and || 'and';
     const bestLabel = tr.bestLabel || '';
     const remainderText = tr.remainder || 'Remainder';
+    const totalPiecesLabel = tr.totalPieces || 'Total pieces';
 
     const baseValue = Array.from(sources).reduce((sum, input) => {
       const { currency } = input.dataset;
@@ -85,7 +92,9 @@
     });
 
     const minimal = minimalParts(baseValue, currencyNames, andText);
-    best.textContent = minimal.text ? `${bestLabel} ${minimal.text}` : '';
+    best.innerHTML = minimal.text
+      ? `${bestLabel} ${minimal.text}<br>${totalPiecesLabel}: ${nf.format(minimal.total)}`
+      : '';
 
     equivList.innerHTML = '';
     let hasEquiv = false;
@@ -106,20 +115,20 @@
         }
       });
       if (!parts.length) return;
-      let summary = parts.length > 1
+      const summary = parts.length > 1
         ? `${parts.slice(0, -1).join(', ')} ${andText} ${parts[parts.length - 1]}`
         : parts[0];
       const remainder = baseValue % base;
+      let remainderSummary = '';
       if (remainder > 0) {
-        const remPhrase = minimalParts(remainder, currencyNames, andText).text;
-        if (remPhrase) summary += ` — ${remainderText}: ${remPhrase}`;
+        const rem = minimalParts(remainder, currencyNames, andText);
+        if (rem.text) remainderSummary = `${remainderText}: ${rem.text}`;
       }
-      const row = document.createElement('div');
-      row.className = 'grid grid-cols-[max-content_1fr] gap-2';
+      const row = document.createElement('tr');
       const coinTitle = currencyNames[coin]
         .replace(/^pièces?\s+(?:de|d['’])\s*/i, '')
         .replace(/^./, (ch) => ch.toUpperCase());
-      row.innerHTML = `<strong>${coinTitle}</strong><span>${summary}</span>`;
+      row.innerHTML = `<td><strong>${coinTitle}</strong></td><td>${summary}</td><td>${remainderSummary}</td><td>${totalPiecesLabel}: ${nf.format(minimal.total)}</td>`;
       equivList.appendChild(row);
       hasEquiv = true;
     });
