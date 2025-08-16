@@ -67,103 +67,48 @@ echo $snipcartInit;
 
     <div class="bg-gray-800 p-6 rounded-xl shadow-lg product-panel">
       <?php if (!empty($images)) : ?>
-        <!-- Galerie produit moderne -->
+        <!-- Galerie produit simplifiée (utilise universal-image-gallery.js) -->
         <div class="product-gallery-container mb-6">
           <!-- Image principale -->
           <div class="main-image-container relative">
-            <div class="main-image-wrapper" id="main-image-wrapper">
-              <?php $firstImage = $images[0]; $isFirstVideo = preg_match('/\.mp4$/i', $firstImage); ?>
-              <?php if ($isFirstVideo) : ?>
-                <video id="main-media" 
-                       src="<?= htmlspecialchars($firstImage) ?>" 
-                       class="main-product-media"
-                       muted playsinline controls
-                       data-type="video"
-                       data-src="<?= htmlspecialchars($firstImage) ?>">
-                </video>
-              <?php else : ?>
-                <img id="main-media" 
-                     src="<?= htmlspecialchars($firstImage) ?>"
-                     alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
-                     class="main-product-media"
-                     data-type="image"
-                     data-src="<?= htmlspecialchars($firstImage) ?>">
-              <?php endif; ?>
-              
-              <!-- Overlay zoom/fullscreen -->
-              <div class="media-overlay">
-                <button class="zoom-btn" id="zoom-btn" title="Zoom">
-                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
-                  </svg>
-                </button>
-                <button class="fullscreen-btn" id="fullscreen-btn" title="Plein écran">
-                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
-                  </svg>
-                </button>
-              </div>
-              
-              <!-- Badge 360° ou Vidéo -->
-              <div class="media-badges">
-                <?php if ($isFirstVideo) : ?>
-                  <span class="badge badge-video">Vidéo</span>
-                <?php endif; ?>
-              </div>
-            </div>
+            <?php $firstImage = $images[0]; $isFirstVideo = preg_match('/\.mp4$/i', $firstImage); ?>
+            <?php if ($isFirstVideo) : ?>
+              <video src="<?= htmlspecialchars($firstImage) ?>" 
+                     class="product-media main-product-media"
+                     muted playsinline controls
+                     data-no-gallery>
+              </video>
+            <?php else : ?>
+              <img src="<?= htmlspecialchars($firstImage) ?>"
+                   alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
+                   class="product-media main-product-media"
+                   data-gallery="product">
+            <?php endif; ?>
           </div>
           
           <!-- Thumbnails -->
           <?php if (count($images) > 1) : ?>
             <div class="thumbnails-container">
-              <div class="thumbnails-wrapper" id="thumbnails-wrapper">
+              <div class="thumbnails-wrapper">
                 <?php foreach ($images as $index => $img) : ?>
                   <?php $isVideo = preg_match('/\.mp4$/i', $img); ?>
-                  <div class="thumbnail <?= $index === 0 ? 'active' : '' ?>" 
-                       data-index="<?= $index ?>"
-                       data-src="<?= htmlspecialchars($img) ?>"
-                       data-type="<?= $isVideo ? 'video' : 'image' ?>">
-                    <?php if ($isVideo) : ?>
-                      <video src="<?= htmlspecialchars($img) ?>" class="thumbnail-media" muted></video>
-                      <div class="video-icon">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.68L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/>
-                        </svg>
-                      </div>
-                    <?php else : ?>
-                      <img src="<?= htmlspecialchars($img) ?>" 
-                           alt="<?= htmlspecialchars('Image ' . ($index + 1) . ' - ' . strip_tags($productName)) ?>"
-                           class="thumbnail-media">
-                    <?php endif; ?>
-                  </div>
+                  <?php if ($isVideo) : ?>
+                    <video src="<?= htmlspecialchars($img) ?>" 
+                           class="thumbnail-media <?= $index === 0 ? 'active' : '' ?>"
+                           data-index="<?= $index ?>"
+                           data-no-gallery
+                           muted></video>
+                  <?php else : ?>
+                    <img src="<?= htmlspecialchars($img) ?>" 
+                         alt="<?= htmlspecialchars('Image ' . ($index + 1) . ' - ' . strip_tags($productName)) ?>"
+                         class="thumbnail-media <?= $index === 0 ? 'active' : '' ?>"
+                         data-index="<?= $index ?>"
+                         data-gallery="product">
+                  <?php endif; ?>
                 <?php endforeach; ?>
               </div>
-              
-              <!-- Navigation thumbnails -->
-              <?php if (count($images) > 4) : ?>
-                <button class="thumb-nav thumb-prev" id="thumb-prev">‹</button>
-                <button class="thumb-nav thumb-next" id="thumb-next">›</button>
-              <?php endif; ?>
             </div>
           <?php endif; ?>
-        </div>
-        
-        <!-- Modal fullscreen -->
-        <div id="fullscreen-modal" class="fullscreen-modal hidden">
-          <div class="fullscreen-content">
-            <button class="close-fullscreen" id="close-fullscreen">&times;</button>
-            <div class="fullscreen-media-container">
-              <img id="fullscreen-media" class="fullscreen-media" alt="">
-              <div class="fullscreen-controls">
-                <button class="fs-nav fs-prev" id="fs-prev">‹</button>
-                <button class="fs-nav fs-next" id="fs-next">›</button>
-              </div>
-            </div>
-            <div class="fullscreen-thumbs" id="fullscreen-thumbs">
-              <!-- Thumbnails générées par JS -->
-            </div>
-          </div>
         </div>
       <?php endif; ?>
       
@@ -309,7 +254,56 @@ echo $snipcartInit;
 </script>
 
 <script src="js/app.js"></script>
-<script src="/js/product-gallery.js?v=<?= filemtime(__DIR__.'/js/product-gallery.js') ?>"></script>
+
+<!-- Script pour la navigation des thumbnails -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Navigation des thumbnails
+  const thumbnails = document.querySelectorAll('.thumbnail-media');
+  const mainImage = document.querySelector('.main-product-media');
+  
+  if (thumbnails.length && mainImage) {
+    thumbnails.forEach((thumb, index) => {
+      thumb.addEventListener('click', function() {
+        // Retirer la classe active de tous
+        thumbnails.forEach(t => t.classList.remove('active'));
+        // Ajouter active au thumbnail cliqué
+        this.classList.add('active');
+        
+        // Changer l'image principale
+        if (mainImage.tagName === 'IMG' && this.tagName === 'IMG') {
+          mainImage.src = this.src;
+          mainImage.alt = this.alt;
+        } else if (mainImage.tagName === 'VIDEO' && this.tagName === 'VIDEO') {
+          mainImage.src = this.src;
+        } else if (mainImage.tagName === 'IMG' && this.tagName === 'VIDEO') {
+          // Remplacer img par video
+          const newVideo = document.createElement('video');
+          newVideo.className = mainImage.className;
+          newVideo.src = this.src;
+          newVideo.controls = true;
+          newVideo.muted = true;
+          newVideo.playsInline = true;
+          newVideo.dataset.noGallery = true;
+          mainImage.parentNode.replaceChild(newVideo, mainImage);
+        } else if (mainImage.tagName === 'VIDEO' && this.tagName === 'IMG') {
+          // Remplacer video par img
+          const newImg = document.createElement('img');
+          newImg.className = mainImage.className;
+          newImg.src = this.src;
+          newImg.alt = this.alt;
+          newImg.dataset.gallery = 'product';
+          mainImage.parentNode.replaceChild(newImg, mainImage);
+          // Réappliquer la galerie
+          if (window.UniversalGallery) {
+            window.UniversalGallery.refresh();
+          }
+        }
+      });
+    });
+  }
+});
+</script>
 
 <!-- Patch : mettre à jour quantité & multiplicateur juste avant l'ajout -->
 <script>
