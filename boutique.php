@@ -347,17 +347,19 @@ echo $snipcartInit;
     </div>
   </section>
 
-  <!-- ===== INVESTISSEMENT COLLECTIF PREMIUM ===== -->
-  <section class="features-section">
+  <!-- ░░░ INVESTISSEMENT COLLECTIF PREMIUM ░░░ -->
+  <section id="collective" class="shop-section">
     <div class="max-w-6xl mx-auto px-6">
+      <h2 class="shop-section-title" data-i18n="shop.collective.title">Investissez ensemble, partagez l'aventure</h2>
+
       <div class="flex flex-col lg:flex-row items-center gap-12">
         <div class="lg:w-1/2">
-          <div class="product-card product-card-wide">
+          <div class="product-card product-card-wide no-hover">
             <div class="product-media-container">
-              <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="product-media" loading="lazy">
+              <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="product-media no-crop" loading="lazy">
             </div>
             <div class="product-content text-center">
-              <h3 class="product-title" data-i18n="shop.collective.title">Investissez ensemble, partagez l'aventure</h3>
+              <h3 class="product-title" data-i18n="shop.collective.cardTitle">Carte de propriété</h3>
               <p class="product-description" data-i18n="shop.collective.description3">Complétez la carte de propriété en indiquant votre nom et le nombre de pièces achetées.</p>
             </div>
           </div>
