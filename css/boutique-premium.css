@@ -281,7 +281,15 @@
   transition: var(--boutique-transition);
 }
 
+.product-media.no-crop {
+  object-fit: contain;
+}
+
 .product-card:hover .product-media { transform: scale(1.1); }
+
+.product-card.no-hover:hover .product-media {
+  transform: none;
+}
 
 /* Badges stock */
 .stock-badge {
