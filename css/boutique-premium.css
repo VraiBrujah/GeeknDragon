@@ -699,6 +699,7 @@
 /* =================================================================== */
 #currency-converter,
 #currency-results,
+#currency-equivalences,
 #currency-best {
   background: var(--boutique-card);
   padding: var(--boutique-space-lg);
@@ -708,6 +709,7 @@
 
 #currency-converter table,
 #currency-results table,
+#currency-equivalences table,
 #currency-best table {
   width: 100%;
   border-collapse: collapse;
@@ -717,6 +719,8 @@
 #currency-converter td,
 #currency-results th,
 #currency-results td,
+#currency-equivalences th,
+#currency-equivalences td,
 #currency-best th,
 #currency-best td {
   padding: var(--boutique-space-sm) var(--boutique-space-md);
@@ -731,6 +735,7 @@
 
 #currency-converter th,
 #currency-results th,
+#currency-equivalences th,
 #currency-best th {
   color: var(--boutique-text-accent);
 }
