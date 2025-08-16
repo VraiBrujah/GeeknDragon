@@ -366,15 +366,22 @@ document.addEventListener('DOMContentLoaded', () => {
     mapping.forEach((_, sec) => io.observe(sec));
   }
 
-  // Accessibilité : sous-menu “Boutique”
-  document.querySelectorAll('nav .relative.group').forEach((grp) => {
-    const submenu = grp.querySelector('ul');
-    if (!submenu) return;
-    grp.addEventListener('focusin', () => submenu.classList.remove('hidden'));
-    grp.addEventListener('focusout', (e) => {
-      if (!grp.contains(e.relatedTarget)) submenu.classList.add('hidden');
-    });
+// Accessibilité : sous-menu “Boutique”
+document.querySelectorAll('nav button[aria-haspopup="true"]').forEach((btn) => {
+  const submenu = btn.nextElementSibling;
+  if (!submenu) return;
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    submenu.classList.toggle('hidden', expanded);
   });
+  btn.addEventListener('blur', (e) => {
+    if (!btn.parentElement.contains(e.relatedTarget)) {
+      btn.setAttribute('aria-expanded', 'false');
+      submenu.classList.add('hidden');
+    }
+  });
+});
 });
 
 /* ========================================================================
