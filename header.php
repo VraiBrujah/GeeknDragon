@@ -21,34 +21,28 @@ function findActiveSlug(array $items, string $path): string {
 $navItems = [
   '/boutique.php' => [
     'slug'  => 'boutique',
-    'label' => 'Boutique',
     'i18n'  => 'nav.shop',
     'children' => [
       '/boutique.php#pieces' => [
         'slug'  => 'pieces',
-        'label' => 'Pièces',
         'i18n'  => 'nav.pieces'
       ],
       '/boutique.php#cartes' => [
         'slug'  => 'cartes',
-        'label' => 'Cartes',
         'i18n'  => 'nav.cards'
       ],
       '/boutique.php#triptyques' => [
         'slug'  => 'triptyques',
-        'label' => 'Triptyques',
         'i18n'  => 'nav.triptychs'
       ]
     ]
   ],
   '/index.php#actus' => [
     'slug'  => 'actus',
-    'label' => 'Actualités',
     'i18n'  => 'nav.news'
   ],
   '/index.php#contact' => [
     'slug'  => 'contact',
-    'label' => 'Contact',
     'i18n'  => 'nav.contact'
   ]
 ];
@@ -60,21 +54,23 @@ $snipcartKey = $snipcartKey
   ?? $_SERVER['SNIPCART_API_KEY'];
 
 function renderNav(array $items, string $currentSlug, bool $mobile = false): void {
+  global $translations;
   foreach ($items as $href => $item) {
     // Le menu utilise déjà Cinzel via le CSS, inutile d'ajouter "txt-court"
     $isActive = $item['slug'] === $currentSlug;
     $class = 'nav-link font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ($isActive ? ' is-active' : '');
     $link = langUrl($href);
     $aria = $isActive ? ' aria-current="page"' : '';
+    $label = htmlspecialchars($translations[$item['i18n']] ?? '');
     if (isset($item['children']) && !$mobile) {
       echo '<li class="relative">';
-      echo '<button type="button" class="' . $class . ' block px-2 py-1"' . $aria . ' aria-haspopup="true" aria-expanded="false" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</button>';
+      echo '<button type="button" class="' . $class . ' block px-2 py-1"' . $aria . ' aria-haspopup="true" aria-expanded="false" data-i18n="' . $item['i18n'] . '">' . $label . '</button>';
       echo '<ul class="submenu hidden absolute left-0 top-full flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-1">';
       renderNav($item['children'], $currentSlug, $mobile);
       echo '</ul></li>';
     } else {
       echo '<li>';
-      echo '<a href="' . $link . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '"' . $aria . '>' . $item['label'] . '</a>';
+      echo '<a href="' . $link . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '"' . $aria . '>' . $label . '</a>';
       if (isset($item['children']) && $mobile) {
         echo '<ul class="pl-4 flex flex-col space-y-2 mt-2">';
         renderNav($item['children'], $currentSlug, $mobile);
