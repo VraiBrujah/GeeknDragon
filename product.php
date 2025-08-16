@@ -70,20 +70,22 @@ echo $snipcartInit;
         <!-- Galerie produit simplifiée (utilise universal-image-gallery.js) -->
         <div class="product-gallery-container mb-6">
           <!-- Image principale -->
-          <div class="main-image-container relative">
-            <?php $firstImage = $images[0]; $isFirstVideo = preg_match('/\.mp4$/i', $firstImage); ?>
-            <?php if ($isFirstVideo) : ?>
-              <video src="<?= htmlspecialchars($firstImage) ?>" 
+          <div class="main-image-container">
+            <div class="main-image-wrapper">
+              <?php $firstImage = $images[0]; $isFirstVideo = preg_match('/\.mp4$/i', $firstImage); ?>
+              <?php if ($isFirstVideo) : ?>
+                <video src="<?= htmlspecialchars($firstImage) ?>" 
+                       class="product-media main-product-media"
+                       muted playsinline controls
+                       data-no-gallery>
+                </video>
+              <?php else : ?>
+                <img src="<?= htmlspecialchars($firstImage) ?>"
+                     alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
                      class="product-media main-product-media"
-                     muted playsinline controls
-                     data-no-gallery>
-              </video>
-            <?php else : ?>
-              <img src="<?= htmlspecialchars($firstImage) ?>"
-                   alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
-                   class="product-media main-product-media"
-                   data-gallery="product">
-            <?php endif; ?>
+                     data-gallery="product">
+              <?php endif; ?>
+            </div>
           </div>
           
           <!-- Thumbnails -->
@@ -92,19 +94,20 @@ echo $snipcartInit;
               <div class="thumbnails-wrapper">
                 <?php foreach ($images as $index => $img) : ?>
                   <?php $isVideo = preg_match('/\.mp4$/i', $img); ?>
-                  <?php if ($isVideo) : ?>
-                    <video src="<?= htmlspecialchars($img) ?>" 
-                           class="thumbnail-media <?= $index === 0 ? 'active' : '' ?>"
-                           data-index="<?= $index ?>"
-                           data-no-gallery
-                           muted></video>
-                  <?php else : ?>
-                    <img src="<?= htmlspecialchars($img) ?>" 
-                         alt="<?= htmlspecialchars('Image ' . ($index + 1) . ' - ' . strip_tags($productName)) ?>"
-                         class="thumbnail-media <?= $index === 0 ? 'active' : '' ?>"
-                         data-index="<?= $index ?>"
-                         data-gallery="product">
-                  <?php endif; ?>
+                  <div class="thumbnail <?= $index === 0 ? 'active' : '' ?>" data-index="<?= $index ?>">
+                    <?php if ($isVideo) : ?>
+                      <video src="<?= htmlspecialchars($img) ?>" 
+                             class="thumbnail-media"
+                             data-no-gallery
+                             muted></video>
+                      <div class="video-icon">▶</div>
+                    <?php else : ?>
+                      <img src="<?= htmlspecialchars($img) ?>" 
+                           alt="<?= htmlspecialchars('Image ' . ($index + 1) . ' - ' . strip_tags($productName)) ?>"
+                           class="thumbnail-media"
+                           data-gallery="product">
+                    <?php endif; ?>
+                  </div>
                 <?php endforeach; ?>
               </div>
             </div>
@@ -259,39 +262,41 @@ echo $snipcartInit;
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   // Navigation des thumbnails
-  const thumbnails = document.querySelectorAll('.thumbnail-media');
+  const thumbnailContainers = document.querySelectorAll('.thumbnail');
   const mainImage = document.querySelector('.main-product-media');
   
-  if (thumbnails.length && mainImage) {
-    thumbnails.forEach((thumb, index) => {
-      thumb.addEventListener('click', function() {
-        // Retirer la classe active de tous
-        thumbnails.forEach(t => t.classList.remove('active'));
-        // Ajouter active au thumbnail cliqué
-        this.classList.add('active');
+  if (thumbnailContainers.length && mainImage) {
+    thumbnailContainers.forEach((container, index) => {
+      container.addEventListener('click', function() {
+        const thumb = container.querySelector('.thumbnail-media');
+        
+        // Retirer la classe active de tous les conteneurs
+        thumbnailContainers.forEach(c => c.classList.remove('active'));
+        // Ajouter active au conteneur cliqué
+        container.classList.add('active');
         
         // Changer l'image principale
-        if (mainImage.tagName === 'IMG' && this.tagName === 'IMG') {
-          mainImage.src = this.src;
-          mainImage.alt = this.alt;
-        } else if (mainImage.tagName === 'VIDEO' && this.tagName === 'VIDEO') {
-          mainImage.src = this.src;
-        } else if (mainImage.tagName === 'IMG' && this.tagName === 'VIDEO') {
+        if (mainImage.tagName === 'IMG' && thumb.tagName === 'IMG') {
+          mainImage.src = thumb.src;
+          mainImage.alt = thumb.alt;
+        } else if (mainImage.tagName === 'VIDEO' && thumb.tagName === 'VIDEO') {
+          mainImage.src = thumb.src;
+        } else if (mainImage.tagName === 'IMG' && thumb.tagName === 'VIDEO') {
           // Remplacer img par video
           const newVideo = document.createElement('video');
           newVideo.className = mainImage.className;
-          newVideo.src = this.src;
+          newVideo.src = thumb.src;
           newVideo.controls = true;
           newVideo.muted = true;
           newVideo.playsInline = true;
           newVideo.dataset.noGallery = true;
           mainImage.parentNode.replaceChild(newVideo, mainImage);
-        } else if (mainImage.tagName === 'VIDEO' && this.tagName === 'IMG') {
+        } else if (mainImage.tagName === 'VIDEO' && thumb.tagName === 'IMG') {
           // Remplacer video par img
           const newImg = document.createElement('img');
           newImg.className = mainImage.className;
-          newImg.src = this.src;
-          newImg.alt = this.alt;
+          newImg.src = thumb.src;
+          newImg.alt = thumb.alt;
           newImg.dataset.gallery = 'product';
           mainImage.parentNode.replaceChild(newImg, mainImage);
           // Réappliquer la galerie
