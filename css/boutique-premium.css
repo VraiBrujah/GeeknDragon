@@ -471,7 +471,8 @@
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   gap: var(--boutique-space-xl);
   justify-content: center;
   justify-items: center;
@@ -515,13 +516,6 @@
 .feature-description { color: var(--boutique-text-muted); line-height: 1.6; }
 
 /* Grid for feature cards */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  grid-auto-rows: 1fr;
-  gap: var(--boutique-space-xl);
-}
-
 .features-grid .feature-card {
   max-width: none;
   height: 100%;
