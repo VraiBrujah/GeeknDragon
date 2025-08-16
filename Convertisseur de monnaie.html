@@ -186,6 +186,15 @@
   const pieceWord = q => q===1 ? "pièce" : "pièces";
   const articleDe = coin => VOWELS.includes(coin[0]) ? ("d’"+coin.toLowerCase()) : ("de "+coin.toLowerCase());
   const joinEt = arr => arr.length<=1 ? (arr[0]||"") : arr.slice(0,-1).join(", ") + " et " + arr[arr.length-1];
+  const joinEtLines = (arr, perLine=3) => {
+    if (arr.length <= perLine) return joinEt(arr);
+    const lines = [];
+    for (let i=0;i<arr.length;i+=perLine){
+      const segment = arr.slice(i,i+perLine);
+      lines.push(i+perLine >= arr.length ? joinEt(segment) : segment.join(", "));
+    }
+    return lines.join(",<br>");
+  };
 
   function inputsTotalCp(){
     let total=0;
@@ -212,7 +221,7 @@
       ? `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)}`
       : `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)} x${it.mult}`
     );
-    return { text: parts.length ? `Représentation minimale : ${joinEt(parts)}` : "Représentation minimale : —", items, remaining };
+    return { text: parts.length ? `Représentation minimale : ${joinEtLines(parts)}` : "Représentation minimale : —", items, remaining };
   }
 
   // --- Conversion table (colonnes dynamiques)
@@ -273,7 +282,7 @@
       let summary = joinEt(parts);
       if (remainderCp>0){
         const rem = minimalSentenceFromCp(remainderCp);
-        summary += " — Reste : " + rem.text.replace("Représentation minimale : ","");
+        summary += " — Reste : " + rem.text.replace("Représentation minimale : ","").replace(/<br>/g, ", ");
       }
 
       const row = document.createElement("div"); row.className = "equiv-row";
@@ -295,7 +304,7 @@
   function fillMinimal(totalCp){
     if (totalCp<=0){ minimalCard.classList.add("is-hidden"); return; }
     const res = minimalSentenceFromCp(totalCp);
-    minimalText.textContent = res.text;
+    minimalText.innerHTML = res.text;
     minimalCard.classList.remove("is-hidden");
   }
 
