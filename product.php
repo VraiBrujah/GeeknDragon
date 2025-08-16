@@ -26,36 +26,7 @@ $host = $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
 $metaUrl = 'https://' . $host . '/product.php?id=' . urlencode($id);
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 
-function getStock(string $id): ?int
-{
-    global $snipcartSecret;
-    static $cache = [];
-    if (isset($cache[$id])) {
-        return $cache[$id];
-    }
-    if ($snipcartSecret) {
-        $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERPWD => $snipcartSecret . ':',
-        ]);
-        $res = curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-        curl_close($ch);
-        if ($res === false || $status >= 400) {
-            return $cache[$id] = null;
-        }
-        $inv = json_decode($res, true);
-        return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
-    }
-    return $cache[$id] = null;
-}
-
-function inStock(string $id): bool
-{
-    $stock = getStock($id);
-    return $stock === null || $stock > 0;
-}
+require_once __DIR__ . '/includes/stock-functions.php';
 
 // Affichage (FR/EN) pour le titre
 $displayName   = str_replace(' – ', '<br>', $product['name']);

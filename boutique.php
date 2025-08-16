@@ -17,35 +17,7 @@ HTML;
 
 /* ───── STOCK ───── */
 $snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
-function getStock(string $id): ?int
-{
-    global $snipcartSecret;
-    static $cache = [];
-    if (isset($cache[$id])) {
-        return $cache[$id];
-    }
-    if ($snipcartSecret) {
-        $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERPWD => $snipcartSecret . ':',
-        ]);
-        $res = curl_exec($ch);
-        $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-        curl_close($ch);
-        if ($res === false || $status >= 400) {
-            return $cache[$id] = null;
-        }
-        $inv = json_decode($res, true);
-        return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
-    }
-    return $cache[$id] = null;
-}
-function inStock(string $id): bool
-{
-    $stock = getStock($id);
-    return $stock === null || $stock > 0;      // true si illimité ou quantité > 0
-}
+require_once __DIR__ . '/includes/stock-functions.php';
 
 // Liste des produits
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
