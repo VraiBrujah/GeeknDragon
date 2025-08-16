@@ -97,7 +97,7 @@ echo $snipcartInit;
 ?>
 
 <main id="main" class="pt-[calc(var(--header-height))]">
-
+  <div class="w-full" style="height:1px; background-color: var(--boutique-primary); margin-top:-1px;"></div>
   <!-- ===== HERO PREMIUM ===== -->
   <section class="hero-boutique">
     <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:0" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
