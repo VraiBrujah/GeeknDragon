@@ -299,7 +299,7 @@ echo $snipcartInit;
           </div>
 
           <div class="feature-card">
-            <span class="feature-icon">🎯</span>
+            <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-16 w-auto mx-auto mb-4" loading="lazy">
             <h4 class="feature-title">Qualité artisanale</h4>
             <p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
           </div>
@@ -327,7 +327,7 @@ echo $snipcartInit;
         </div>
 
         <div class="trust-badge">
-          <span class="trust-icon">🍁</span>
+          <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-8 w-auto" loading="lazy">
           <span>Fabriqué au Québec</span>
         </div>
 
