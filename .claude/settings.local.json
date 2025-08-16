@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(rm:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(where:*)",
+      "Bash(mkdir:*)",
+      "Bash(copy:*)",
+      "Bash(cp:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(python:*)"
     ],
     "defaultMode": "acceptEdits"
   }
