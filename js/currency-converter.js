@@ -27,6 +27,37 @@
   const coins = Object.keys(rates);
 
   /**
+   * Compute optimal coin counts for a value using dynamic programming.
+   * Minimizes the sum of multipliers used.
+   * @param {number} baseValue - total value in copper pieces
+   * @param {Array} denominations - list of {coin, multiplier, value}
+   * @returns {Object} counts per coin
+   */
+  const computeOptimalCoins = (baseValue, denominations) => {
+    const dp = Array(baseValue + 1).fill(Infinity);
+    const choice = Array(baseValue + 1).fill(null);
+    dp[0] = 0;
+
+    for (let i = 1; i <= baseValue; i += 1) {
+      denominations.forEach((denom, idx) => {
+        if (denom.value <= i && dp[i - denom.value] + denom.multiplier < dp[i]) {
+          dp[i] = dp[i - denom.value] + denom.multiplier;
+          choice[i] = idx;
+        }
+      });
+    }
+
+    const counts = {};
+    let v = baseValue;
+    while (v > 0 && choice[v] !== null) {
+      const denom = denominations[choice[v]];
+      counts[denom.coin] = (counts[denom.coin] || 0) + denom.multiplier;
+      v -= denom.value;
+    }
+    return counts;
+  };
+
+  /**
    * Render converted values for all currencies.
    */
   const render = () => {
@@ -53,15 +84,7 @@
       })))
       .sort((a, b) => b.value - a.value);
 
-    let remaining = baseValue;
-    const counts = {};
-    denominations.forEach(({ coin, multiplier, value }) => {
-      const qty = Math.floor(remaining / value);
-      if (qty > 0) {
-        counts[coin] = (counts[coin] || 0) + qty * multiplier;
-        remaining -= qty * value;
-      }
-    });
+    const counts = computeOptimalCoins(baseValue, denominations);
 
     const parts = Object.entries(counts).map(
       ([coin, qty]) => `${qty} ${currencyNames[coin]}`,
@@ -73,6 +96,9 @@
 
   sources.forEach((inputEl) => {
     const el = inputEl;
+    el.addEventListener('focus', () => {
+      if (el.value === '0') el.value = '';
+    });
     el.addEventListener('input', () => {
       el.value = el.value.replace(/[^0-9]/g, '');
       render();
