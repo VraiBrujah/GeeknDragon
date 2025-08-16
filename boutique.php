@@ -188,49 +188,26 @@ echo $snipcartInit;
           </div>
         </div>
 
-        <!-- Tableau des abréviations -->
-        <div class="mt-12">
-          <h4 class="text-center text-gray-200 mb-4">
-            Échelle & abréviations (5e)
-          </h4>
-          <div class="overflow-x-auto">
-            <table class="mx-auto border-collapse text-gray-400">
-              <thead>
-                <tr class="bg-gray-700">
-                  <th class="px-4 py-2">Abrév.</th>
-                  <th class="px-4 py-2">Nom</th>
-                  <th class="px-4 py-2">Conversion</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="bg-gray-800">
-                  <td class="px-4 py-2 text-center">pc</td>
-                  <td class="px-4 py-2 text-center">pièce de cuivre</td>
-                  <td class="px-4 py-2 text-center">10 pc = 1 pa</td>
-                </tr>
-                <tr class="bg-gray-700">
-                  <td class="px-4 py-2 text-center">pa</td>
-                  <td class="px-4 py-2 text-center">pièce d’argent</td>
-                  <td class="px-4 py-2 text-center">10 pa = 1 po</td>
-                </tr>
-                <tr class="bg-gray-800">
-                  <td class="px-4 py-2 text-center">pe</td>
-                  <td class="px-4 py-2 text-center">pièce d’électrum</td>
-                  <td class="px-4 py-2 text-center">1 po = 2 pe</td>
-                </tr>
-                <tr class="bg-gray-700">
-                  <td class="px-4 py-2 text-center">po</td>
-                  <td class="px-4 py-2 text-center">pièce d’or</td>
-                  <td class="px-4 py-2 text-center">—</td>
-                </tr>
-                <tr class="bg-gray-800">
-                  <td class="px-4 py-2 text-center">pp</td>
-                  <td class="px-4 py-2 text-center">pièce de platine</td>
-                  <td class="px-4 py-2 text-center">10 po = 1 pp</td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- Convertisseur de monnaie -->
+        <div class="mt-12 text-center" id="currency-converter">
+          <h4 class="text-gray-200 mb-4" data-i18n="shop.converter.title">Convertisseur de monnaie</h4>
+          <div class="max-w-md mx-auto space-y-4">
+            <div>
+              <label for="currency-source" class="block text-gray-200 mb-2" data-i18n="shop.converter.sourceLabel">Monnaie source</label>
+              <select id="currency-source" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2">
+                <option value="copper" data-i18n="shop.converter.copper">pièce de cuivre</option>
+                <option value="silver" data-i18n="shop.converter.silver">pièce d’argent</option>
+                <option value="electrum" data-i18n="shop.converter.electrum">pièce d’électrum</option>
+                <option value="gold" data-i18n="shop.converter.gold">pièce d’or</option>
+                <option value="platinum" data-i18n="shop.converter.platinum">pièce de platine</option>
+              </select>
+            </div>
+            <div>
+              <label for="currency-amount" class="block text-gray-200 mb-2" data-i18n="shop.converter.amountLabel">Quantité</label>
+              <input id="currency-amount" type="number" min="0" value="0" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+            </div>
           </div>
+          <ul id="currency-results" class="mt-4 text-gray-200 space-y-1" aria-live="polite"></ul>
         </div>
       </section>
 
@@ -406,6 +383,7 @@ echo $snipcartInit;
   <script src="js/app.js"></script>
   <script src="/js/hero-videos.js"></script>
   <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
+  <script src="/js/currency-converter.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const openBtn = document.querySelector('[data-video-open]');
