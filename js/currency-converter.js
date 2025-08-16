@@ -49,7 +49,7 @@
 
     let text = '';
     if (parts.length === 1) {
-      text = parts[0];
+      [text] = parts;
     } else if (parts.length > 1) {
       const groups = [];
       for (let i = 0; i < parts.length; i += 3) {
@@ -93,7 +93,7 @@
     const minimal = minimalParts(baseValue, currencyNames, andText);
     const totalPieces = minimal.items.reduce((sum, { qty }) => sum + qty, 0);
     best.innerHTML = minimal.text
-      ? `${bestLabel}<br>${minimal.text}<br>${totalPiecesLabel} ${nf.format(totalPieces)}`
+      ? `<div class="minimal-block">${bestLabel}<br>${minimal.text}</div><div class="total-pieces-block">${totalPiecesLabel} ${nf.format(totalPieces)}</div>`
       : '';
     best.classList.toggle('hidden', !minimal.text);
 
