@@ -134,36 +134,17 @@ echo $snipcartInit;
 
         <!-- Vidéo de présentation -->
         <div class="mt-8 flex justify-center">
-          <div class="group relative rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer"
-               style="width: 420px;"
-               id="es-tu-game-video-trigger">
-            <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg"
-                 alt="Miniature de la vidéo « L'Économie de D&D 💰 Conseils Jeux de Rôle »"
-                 class="block w-full h-auto transition-transform duration-200 group-hover:scale-105 group-hover:shadow-lg">
-            <!-- Bouton play overlay -->
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="bg-black/60 rounded-full p-4 transition-all duration-200 group-hover:bg-black/80 group-hover:scale-110">
-                <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.68L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/>
-                </svg>
-              </div>
-            </div>
+          <div class="relative rounded-lg overflow-hidden" style="width: 420px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
+            <video src="videos/es-tu-game-demo.mp4" 
+                   class="w-full h-auto"
+                   autoplay
+                   loop
+                   muted
+                   playsinline
+                   preload="metadata">
+              Votre navigateur ne supporte pas la lecture vidéo.
+            </video>
           </div>
-        </div>
-
-        <!-- Overlay vidéo (style hero-videos) -->
-        <div id="es-tu-game-overlay" class="fixed inset-0 z-50 hidden bg-black flex items-center justify-center">
-          <video id="es-tu-game-video" 
-                 class="max-w-full max-h-full"
-                 style="max-width: 90vw; max-height: 90vh;"
-                 controls
-                 preload="none">
-            <source src="videos/es-tu-game-demo.mp4" type="video/mp4">
-            Votre navigateur ne supporte pas la lecture vidéo.
-          </video>
-          <button id="es-tu-game-close" 
-                  class="absolute top-4 right-4 text-white text-4xl leading-none focus:outline-none hover:text-gray-300"
-                  aria-label="Fermer la vidéo">&times;</button>
         </div>
 
         <!-- Convertisseur de monnaie -->
@@ -385,62 +366,5 @@ echo $snipcartInit;
   <script src="/js/hero-videos.js"></script>
   <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
   <script src="/js/currency-converter.js"></script>
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Gestion de la vidéo Es-Tu Game
-    const trigger = document.getElementById('es-tu-game-video-trigger');
-    const overlay = document.getElementById('es-tu-game-overlay');
-    const video = document.getElementById('es-tu-game-video');
-    const closeBtn = document.getElementById('es-tu-game-close');
-
-    if (trigger && overlay && video && closeBtn) {
-      const openVideo = () => {
-        // Redémarrer la vidéo à zéro
-        video.currentTime = 0;
-        video.load(); // Recharger la vidéo
-        
-        overlay.classList.remove('hidden');
-        video.play().catch(e => console.log('Autoplay prevented:', e));
-        
-        // Ajouter l'écouteur Echap
-        document.addEventListener('keydown', escapeListener, true);
-      };
-
-      const closeVideo = () => {
-        overlay.classList.add('hidden');
-        video.pause();
-        video.currentTime = 0; // Remettre à zéro
-        
-        // Retirer l'écouteur Echap
-        document.removeEventListener('keydown', escapeListener, true);
-      };
-
-      const escapeListener = (e) => {
-        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
-          e.preventDefault();
-          closeVideo();
-        }
-      };
-
-      // Event listeners
-      trigger.addEventListener('click', openVideo);
-      closeBtn.addEventListener('click', closeVideo);
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeVideo();
-      });
-
-      // Fermer si la vidéo se termine
-      video.addEventListener('ended', closeVideo);
-    }
-
-    // Gestion de l'image property (si présente)
-    const propertyImg = document.querySelector('.property-image');
-    if (propertyImg) {
-      propertyImg.addEventListener('click', () => {
-        propertyImg.classList.toggle('expanded');
-      });
-    }
-  });
-  </script>
 </body>
 </html>
