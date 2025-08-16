@@ -134,34 +134,36 @@ echo $snipcartInit;
 
         <!-- Vidéo de présentation -->
         <div class="mt-8 flex justify-center">
-          <button type="button"
-                  class="group relative rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 max-w-md"
-                  style="width: 420px;"
-                  aria-controls="video-modal"
-                  aria-label="Lire la vidéo de Pierre-Louis (Es-Tu Game ?) — L'Économie de D&D 💰 Conseils Jeux de Rôle"
-                  data-video-open>
+          <div class="group relative rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 cursor-pointer"
+               style="width: 420px;"
+               id="es-tu-game-video-trigger">
             <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg"
                  alt="Miniature de la vidéo « L'Économie de D&D 💰 Conseils Jeux de Rôle »"
                  class="block w-full h-auto transition-transform duration-200 group-hover:scale-105 group-hover:shadow-lg">
-          </button>
-        </div>
-
-        <!-- Modal vidéo -->
-        <div id="video-modal"
-             class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center"
-             role="dialog" aria-modal="true"
-             aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
-             tabindex="-1">
-          <div class="relative w-[90vw] max-w-4xl">
-            <button type="button"
-                    class="absolute top-4 right-4 z-10 text-white text-4xl leading-none focus:outline-none"
-                    aria-label="Fermer la vidéo"
-                    data-video-close>&times;</button>
-            <div class="w-full aspect-video max-h-[90vh]">
-              <iframe class="w-full h-full" src="https://www.youtube.com/embed/y96eAFtC4xE?start=624&rel=0&modestbranding=1"
-                      title="L’Économie de D&D 💰 Conseils Jeux de Rôle" allowfullscreen tabindex="-1"></iframe>
+            <!-- Bouton play overlay -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-black/60 rounded-full p-4 transition-all duration-200 group-hover:bg-black/80 group-hover:scale-110">
+                <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.68L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/>
+                </svg>
+              </div>
             </div>
           </div>
+        </div>
+
+        <!-- Overlay vidéo (style hero-videos) -->
+        <div id="es-tu-game-overlay" class="fixed inset-0 z-50 hidden bg-black flex items-center justify-center">
+          <video id="es-tu-game-video" 
+                 class="max-w-full max-h-full"
+                 style="max-width: 90vw; max-height: 90vh;"
+                 controls
+                 preload="none">
+            <source src="videos/es-tu-game-demo.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture vidéo.
+          </video>
+          <button id="es-tu-game-close" 
+                  class="absolute top-4 right-4 text-white text-4xl leading-none focus:outline-none hover:text-gray-300"
+                  aria-label="Fermer la vidéo">&times;</button>
         </div>
 
         <!-- Convertisseur de monnaie -->
@@ -381,49 +383,53 @@ echo $snipcartInit;
   <script src="/js/currency-converter.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const openBtn = document.querySelector('[data-video-open]');
-    const modal = document.getElementById('video-modal');
-    if (!openBtn || !modal) return;
-    const closeBtn = modal.querySelector('[data-video-close]');
-    const iframe = modal.querySelector('iframe');
+    // Gestion de la vidéo Es-Tu Game
+    const trigger = document.getElementById('es-tu-game-video-trigger');
+    const overlay = document.getElementById('es-tu-game-overlay');
+    const video = document.getElementById('es-tu-game-video');
+    const closeBtn = document.getElementById('es-tu-game-close');
 
-    const escListener = (e) => {
-      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-        e.preventDefault();
-        closeModal();
-      }
-    };
+    if (trigger && overlay && video && closeBtn) {
+      const openVideo = () => {
+        // Redémarrer la vidéo à zéro
+        video.currentTime = 0;
+        video.load(); // Recharger la vidéo
+        
+        overlay.classList.remove('hidden');
+        video.play().catch(e => console.log('Autoplay prevented:', e));
+        
+        // Ajouter l'écouteur Echap
+        document.addEventListener('keydown', escapeListener, true);
+      };
 
-    const openModal = () => {
-      // Redémarrer la vidéo à zéro à chaque ouverture
-      const originalSrc = iframe.src.split('&t=')[0]; // Enlever le timestamp si présent
-      iframe.src = originalSrc;
-      
-      modal.classList.remove('hidden');
-      openBtn.classList.add('invisible');
-      document.addEventListener('keydown', escListener, true);
-      modal.focus();
-    };
+      const closeVideo = () => {
+        overlay.classList.add('hidden');
+        video.pause();
+        video.currentTime = 0; // Remettre à zéro
+        
+        // Retirer l'écouteur Echap
+        document.removeEventListener('keydown', escapeListener, true);
+      };
 
-    const closeModal = () => {
-      if (document.fullscreenElement) {
-        try { document.exitFullscreen(); } catch (_) {}
-      }
-      modal.classList.add('hidden');
-      // Arrêter la vidéo en rechargeant l'iframe
-      iframe.src = iframe.src;
-      document.removeEventListener('keydown', escListener, true);
-      openBtn.classList.remove('invisible');
-      openBtn.focus();
-    };
+      const escapeListener = (e) => {
+        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+          e.preventDefault();
+          closeVideo();
+        }
+      };
 
-    openBtn.addEventListener('click', openModal);
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement && !modal.classList.contains('hidden')) closeModal();
-    });
+      // Event listeners
+      trigger.addEventListener('click', openVideo);
+      closeBtn.addEventListener('click', closeVideo);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeVideo();
+      });
 
+      // Fermer si la vidéo se termine
+      video.addEventListener('ended', closeVideo);
+    }
+
+    // Gestion de l'image property (si présente)
     const propertyImg = document.querySelector('.property-image');
     if (propertyImg) {
       propertyImg.addEventListener('click', () => {
