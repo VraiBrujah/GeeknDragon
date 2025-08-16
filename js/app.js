@@ -522,15 +522,8 @@ function initVideoManager(videoIds) {
   } else {
     // Mode boucle : démarrer la vidéo unique quand visible
     const vid = videos[0];
-    const startObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && fullyVisible(vid)) {
-        startObserver.disconnect();
-        start(vid);
-      }
-    }, { threshold: 0.5 });
     
-    startObserver.observe(vid);
-    
+    // Ajouter l'événement click
     vid.addEventListener('click', () => {
       if (vid.paused) { 
         if (!audioOK) enableAudio(); 
@@ -539,6 +532,16 @@ function initVideoManager(videoIds) {
         vid.pause(); 
       }
     });
+    
+    // Observer pour démarrer automatiquement quand visible
+    const startObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startObserver.disconnect();
+        start(vid);
+      }
+    }, { threshold: 0.2 });
+    
+    startObserver.observe(vid);
   }
 }
 
