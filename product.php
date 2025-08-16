@@ -57,9 +57,9 @@ $snipcartInit = ob_get_clean();
 include 'header.php';
 echo $snipcartInit;
 ?>
-<main id="main" class="py-10 pt-[var(--header-height)] main-product">
-  <section class="max-w-3xl w-full mx-auto px-6">
-    <div class="flex justify-center mb-6">
+<main id="main" class="py-10 pt-[calc(var(--header-height)+2rem)] main-product">
+  <section class="max-w-4xl w-full mx-auto px-6">
+    <div class="flex justify-center mb-8">
       <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline">&larr;
         <span data-i18n="product.back">Retour à la boutique</span>
       </a>
