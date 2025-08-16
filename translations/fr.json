@@ -114,7 +114,10 @@
       "silver": "pièce d’argent",
       "electrum": "pièce d’électrum",
       "gold": "pièce d’or",
-      "platinum": "pièce de platine"
+      "platinum": "pièce de platine",
+      "multiplier": "Multiplicateur",
+      "bestLabel": "Représentation minimale :",
+      "and": "et"
     },
     "chest": {
       "title": "Coffres sur mesure",

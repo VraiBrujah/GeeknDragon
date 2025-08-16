@@ -235,7 +235,7 @@ echo $snipcartInit;
             <table id="currency-results" class="w-full text-gray-200" aria-live="polite">
               <thead>
                 <tr>
-                  <th class="text-left"></th>
+                  <th class="text-left" data-i18n="shop.converter.multiplier">Multiplicateur</th>
                   <th>×1</th>
                   <th>×10</th>
                   <th>×100</th>
@@ -267,7 +267,7 @@ echo $snipcartInit;
               </tbody>
             </table>
           </div>
-          <p id="currency-best" class="mt-4"></p>
+          <p id="currency-best" class="mt-4" data-i18n="shop.converter.bestLabel"></p>
         </div>
       </section>
 

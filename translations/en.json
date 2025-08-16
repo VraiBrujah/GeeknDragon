@@ -114,7 +114,10 @@
       "silver": "Silver piece",
       "electrum": "Electrum piece",
       "gold": "Gold piece",
-      "platinum": "Platinum piece"
+      "platinum": "Platinum piece",
+      "multiplier": "Multiplier",
+      "bestLabel": "Minimal coins:",
+      "and": "and"
     },
     "chest": {
       "title": "Custom chests",
