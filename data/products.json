@@ -46,7 +46,15 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
-    "multipliers": ["‎ — x1", "‎ — x10", "‎ — x100", "‎ — x1 000", "‎ — x10 000"]
+    "multipliers": [
+      "‎ — x1",
+      "‎ — x10",
+      "‎ — x100",
+      "‎ — x1 000",
+      "‎ — x10 000"
+    ],
+    "summary": "Trésor de départ immersif",
+    "summary_en": "Immersive starter hoard"
   },
   "lot25": {
     "name": "La Monnaie des Cinq Royaumes",
@@ -93,7 +101,9 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "summary": "25 pièces, zéro doublon",
+    "summary_en": "25 coins, no duplicates"
   },
   "lot50-essence": {
     "name": "L’Essence du Marchand",
@@ -140,7 +150,9 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "summary": "50 pièces, double variété",
+    "summary_en": "50 coins, double the variety"
   },
   "lot50-tresorerie": {
     "name": "La Trésorerie du Seigneur",
@@ -187,7 +199,15 @@
       "images/Piece/pro/piece/pf.png",
       "images/Piece/pro/lot10Piece2-300.png"
     ],
-    "multipliers": ["‎ — x1", " — x10", " — x100", "‎ — x1 000", " — x10 000"]
+    "multipliers": [
+      "‎ — x1",
+      " — x10",
+      " — x100",
+      "‎ — x1 000",
+      " — x10 000"
+    ],
+    "summary": "50 pièces pour l’opulence",
+    "summary_en": "50 coins for opulence"
   },
   "pack-182-arsenal-aventurier": {
     "category": "cards",
@@ -198,21 +218,25 @@
     "description_en": "<h3 style=\"text-align:center\">Weapons • Armor • Equipment</h3><p>A massive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards.</p><ul><li><strong>Weapons</strong>: melee & ranged.</li><li><strong>Armor & shields</strong>: light, medium, and heavy.</li><li><strong>Equipment</strong>: ropes, torches, rations, field tools, etc.</li></ul><p><em>Perfect at the table: draw, place, trade\nno more digging through the rulebook.</em></p>",
     "images": [
       "images/carte/Arme_recto.png",
-	  "images/carte/Arme_verso.png",
-	  "images/carte/Greatclub_recto.png",
-	  "images/carte/Greatclub_verso.png",
+      "images/carte/Arme_verso.png",
+      "images/carte/Greatclub_recto.png",
+      "images/carte/Greatclub_verso.png",
       "images/carte/Armure_recto.png",
-	  "images/carte/Armure_verso.png",
-	  "images/carte/Armor_recto.png",
-	  "images/carte/Armor_verso.png",
-	  "images/carte/Acide_recto.png",
-	  "images/carte/Acide_verso.png",
-	  "images/carte/Acid_recto.png",
-	  "images/carte/Acid_verso.png"
+      "images/carte/Armure_verso.png",
+      "images/carte/Armor_recto.png",
+      "images/carte/Armor_verso.png",
+      "images/carte/Acide_recto.png",
+      "images/carte/Acide_verso.png",
+      "images/carte/Acid_recto.png",
+      "images/carte/Acid_verso.png"
     ],
-    "languages": [" — Français", " — English"]
+    "languages": [
+      " — Français",
+      " — English"
+    ],
+    "summary": "Armes • Armures • Équipement",
+    "summary_en": "Weapons • Armor • Equipment"
   },
-
   "pack-182-butins-ingenieries": {
     "category": "cards",
     "name": "Butins & Ingénieries\n182 cartes",
@@ -222,25 +246,29 @@
     "description_en": "<h3 style=\"text-align:center\">Loot • Explosives & Modern/Futuristic Weapons • Trade Goods • Tools</h3><p>For campaigns that push the envelope: varied treasures, volatile hardware, techno‑relics, and every crafter’s staple.</p><ul><li><strong>Loot</strong>: gems, curios, minor artifacts, relics.</li><li><strong>Explosives & modern/futur weapons</strong>: grenades, charges, firearms & energy weapons.</li><li><strong>Trade goods</strong>: foodstuffs, fabrics, ores.</li><li><strong>Tools</strong>: crafts, lockpicks, light alchemy, specialty kits.</li></ul><p><em>Add variety and tactical choices\nfrom market bartering to high‑fantasy heists.\nno more digging through the rulebook.</em></p>",
     "images": [
       "images/carte/Alexandrite_recto.png",
-	  "images/carte/Alexandrite_verso.png",
-	  "images/carte/AlexandriteEN_recto.png",
-	  "images/carte/AlexandriteEN_verso.png",
+      "images/carte/Alexandrite_verso.png",
+      "images/carte/AlexandriteEN_recto.png",
+      "images/carte/AlexandriteEN_verso.png",
       "images/carte/Bombe_recto.png",
-	  "images/carte/Bombe_verso.png",
-	  "images/carte/Bomb_recto.png",
-	  "images/carte/Bomb_verso.png",
-	  "images/carte/Chèvre_recto.png",
-	  "images/carte/Chèvre_verso.png",
-	  "images/carte/Goat_recto.png",
-	  "images/carte/Goat_verso.png",
-	  "images/carte/Matérield-alchimiste-recto.png",
-	  "images/carte/Matérield-alchimiste-verso.png",
-	  "images/carte/Alchemist_s Supplies_recto.png",
-	  "images/carte/Alchemist_s Supplies_verso.png"
+      "images/carte/Bombe_verso.png",
+      "images/carte/Bomb_recto.png",
+      "images/carte/Bomb_verso.png",
+      "images/carte/Chèvre_recto.png",
+      "images/carte/Chèvre_verso.png",
+      "images/carte/Goat_recto.png",
+      "images/carte/Goat_verso.png",
+      "images/carte/Matérield-alchimiste-recto.png",
+      "images/carte/Matérield-alchimiste-verso.png",
+      "images/carte/Alchemist_s Supplies_recto.png",
+      "images/carte/Alchemist_s Supplies_verso.png"
     ],
-    "languages": [" — Français", " — English"]
+    "languages": [
+      " — Français",
+      " — English"
+    ],
+    "summary": "Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils",
+    "summary_en": "Loot • Explosives & Modern/Futuristic Weapons • Trade Goods • Tools"
   },
-
   "pack-182-routes-services": {
     "category": "cards",
     "name": "Routes & Services\n182 cartes",
@@ -249,54 +277,64 @@
     "description": "<h3 style=\"text-align:center\">Paquetages • Services • Véhicules • Poisons</h3><p>Tout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque\navec des cartes claires et pratiques.</p><ul><li><strong>Paquetages</strong> : <em>artiste, cambrioleur, diplomate, ecclésiastique, érudit, explorateur, exploration souterraine</em>.\n</li><li><strong>Services</strong> : hébergements, soins, transport, passeurs, mercenaires.\n</li><li><strong>Véhicules</strong> : terrestres, marins, animaux de bât.\n</li><li><strong>Poison</strong> : effets et rareté.\n</li></ul><p><em>Parfait pour les campagnes orientées exploration, voyage et intrigue.\nfini la fouille dans le manuel.</em></p>",
     "description_en": "<h3 style=\"text-align:center\">Packs • Services • Vehicles • Poisons</h3><p>Everything to set your world in motion: ready your PCs, travel, bargain, and take risks\nwith clean, table‑friendly cards.</p><ul><li><strong>Packs</strong>: <em>artist, burglar, diplomat, acolyte/cleric, scholar, explorer, underdark exploration</em>.\n</li><li><strong>Services</strong>: lodging, healing, transport, smugglers, mercenaries.\n</li><li><strong>Vehicles</strong>: land, sea, beasts of burden.\n</li><li><strong>Poisons</strong>: effects & rarity.\n</li></ul><p><em>Perfect for exploration‑, travel‑ and intrigue‑heavy campaigns.\nno more digging through the rulebook.</em></p>",
     "images": [
-	  "images/carte/Sac à Dos_recto.png",
-	  "images/carte/Sac à Dos_verso.png",
-	  "images/carte/Backpack_recto.png",
-	  "images/carte/Backpack_verso.png",
-	  "images/carte/Bière (Chope)_recto.png",
-	  "images/carte/Bière (Chope)_verso.png",
-	  "images/carte/Ale (Mug)_recto.png",
-	  "images/carte/Ale (Mug)_verso.png",
-	  "images/carte/Vaisseau Aérien_recto.png",
-	  "images/carte/Vaisseau Aérien_verso.png",
-	  "images/carte/Airship_recto.png",
-	  "images/carte/Airship_verso.png",
-	  "images/carte/Sang d_Assassin_recto.png",
-	  "images/carte/Sang d_Assassin_verso.png",
-	  "images/carte/Assassin_s Blood_recto.png",
-	  "images/carte/Assassin_s Blood_verso.png"
+      "images/carte/Sac à Dos_recto.png",
+      "images/carte/Sac à Dos_verso.png",
+      "images/carte/Backpack_recto.png",
+      "images/carte/Backpack_verso.png",
+      "images/carte/Bière (Chope)_recto.png",
+      "images/carte/Bière (Chope)_verso.png",
+      "images/carte/Ale (Mug)_recto.png",
+      "images/carte/Ale (Mug)_verso.png",
+      "images/carte/Vaisseau Aérien_recto.png",
+      "images/carte/Vaisseau Aérien_verso.png",
+      "images/carte/Airship_recto.png",
+      "images/carte/Airship_verso.png",
+      "images/carte/Sang d_Assassin_recto.png",
+      "images/carte/Sang d_Assassin_verso.png",
+      "images/carte/Assassin_s Blood_recto.png",
+      "images/carte/Assassin_s Blood_verso.png"
     ],
-    "languages": [" — Français", " — English"]
+    "languages": [
+      " — Français",
+      " — English"
+    ],
+    "summary": "Paquetages • Services • Véhicules • Poisons",
+    "summary_en": "Packs • Services • Vehicles • Poisons"
   },
   "triptyque-aleatoire": {
     "category": "triptychs",
-	"name": "Triptyques Mystères\nOrigines Complètes",
-	"name_en": "Mystery Triptychs\nComplete Origins",
-	"price": 59.99,
-	"description": "<h3 style=\"text-align:center\">Trois triptyques, un héros clé en main</h3>\n<p>Tire au sort <strong>1 Classe</strong>, <strong>1 Espèce</strong> et <strong>1 Historique</strong> pour forger une origine unique, puis joue immédiatement avec :</p>\n<ul>\n<li><strong>Cartes d’équipement assorties</strong> correspondant au paquetage.</li>\n<li><strong>Pièces de départ</strong>.</li>\n<li><strong>Compatibilité 5e 2024</strong></li>\n</ul>\n<p>Un bundle idéal pour des <em>one-shots</em>, des tables débutantes ou pour surprendre des joueurs vétérans.\nfini la fouille dans le manuel.</p>",
-	"description_en": "<h3 style=\"text-align:center\">Three triptychs, a plug‑and‑play hero</h3>\n<p>Draw at random <strong>1 Class</strong>, <strong>1 Species</strong> and <strong>1 Background</strong> to forge a unique origin, then play right away with:</p>\n<ul>\n<li><strong>Matching equipment cards</strong> based on the linked pack.</li>\n<li><strong>Starting coins</strong>.</li>\n<li><strong>5e 2024 compatible</strong></li>\n</ul>\n<p>Perfect for one‑shots, new tables, or to surprise veteran players.\nno more digging through the rulebook.</p>",
-	"images": [
-	  "videos/trip2.mp4",
-	  "images/tryptique.png",
+    "name": "Triptyques Mystères\nOrigines Complètes",
+    "name_en": "Mystery Triptychs\nComplete Origins",
+    "price": 59.99,
+    "description": "<h3 style=\"text-align:center\">Trois triptyques, un héros clé en main</h3>\n<p>Tire au sort <strong>1 Classe</strong>, <strong>1 Espèce</strong> et <strong>1 Historique</strong> pour forger une origine unique, puis joue immédiatement avec :</p>\n<ul>\n<li><strong>Cartes d’équipement assorties</strong> correspondant au paquetage.</li>\n<li><strong>Pièces de départ</strong>.</li>\n<li><strong>Compatibilité 5e 2024</strong></li>\n</ul>\n<p>Un bundle idéal pour des <em>one-shots</em>, des tables débutantes ou pour surprendre des joueurs vétérans.\nfini la fouille dans le manuel.</p>",
+    "description_en": "<h3 style=\"text-align:center\">Three triptychs, a plug‑and‑play hero</h3>\n<p>Draw at random <strong>1 Class</strong>, <strong>1 Species</strong> and <strong>1 Background</strong> to forge a unique origin, then play right away with:</p>\n<ul>\n<li><strong>Matching equipment cards</strong> based on the linked pack.</li>\n<li><strong>Starting coins</strong>.</li>\n<li><strong>5e 2024 compatible</strong></li>\n</ul>\n<p>Perfect for one‑shots, new tables, or to surprise veteran players.\nno more digging through the rulebook.</p>",
+    "images": [
+      "videos/trip2.mp4",
+      "images/tryptique.png",
       "images/tryp/Drakéide Airain_recto.png",
-	  "images/tryp/Drakéide Airain_verso.png",
-	  "images/tryp/_Barbare_ Voie du Berserker_recto.png",
-	  "images/tryp/_Barbare_ Voie du Berserker_verso.png",
-	  "images/tryp/Acolyte_recto.png",
-	  "images/tryp/Acolyte_verso.png",
-	  "images/carte/Sac à Dos_recto.png",
-	  "images/carte/Sac à Dos_verso.png",
-	  "images/Piece/Lots/Vagabond/Vagabon.png",
-	  "images/tryp/Brass Dragonborn_recto.png",
-	  "images/tryp/Brass Dragonborn_verso.png",
-	  "images/tryp/_Barbare_ Path of the Berserker_recto.png",
-	  "images/tryp/_Barbare_ Path of the Berserker_verso.png",
-	  "images/tryp/AcolyteEN_recto.png",
-	  "images/tryp/AcolyteEN_verso.png",
-	  "images/carte/Backpack_recto.png",
-	  "images/carte/Backpack_verso.png",
-	  "images/Piece/Lots/Vagabond/Vagabon.png"
+      "images/tryp/Drakéide Airain_verso.png",
+      "images/tryp/_Barbare_ Voie du Berserker_recto.png",
+      "images/tryp/_Barbare_ Voie du Berserker_verso.png",
+      "images/tryp/Acolyte_recto.png",
+      "images/tryp/Acolyte_verso.png",
+      "images/carte/Sac à Dos_recto.png",
+      "images/carte/Sac à Dos_verso.png",
+      "images/Piece/Lots/Vagabond/Vagabon.png",
+      "images/tryp/Brass Dragonborn_recto.png",
+      "images/tryp/Brass Dragonborn_verso.png",
+      "images/tryp/_Barbare_ Path of the Berserker_recto.png",
+      "images/tryp/_Barbare_ Path of the Berserker_verso.png",
+      "images/tryp/AcolyteEN_recto.png",
+      "images/tryp/AcolyteEN_verso.png",
+      "images/carte/Backpack_recto.png",
+      "images/carte/Backpack_verso.png",
+      "images/Piece/Lots/Vagabond/Vagabon.png"
     ],
-    "languages": [" — Français", " — English"]
+    "languages": [
+      " — Français",
+      " — English"
+    ],
+    "summary": "Trois triptyques, un héros clé en main",
+    "summary_en": "Three triptychs, a plug‑and‑play hero"
   }
 }
