@@ -15,7 +15,9 @@
   if (!sources.length || !results || !best) return;
 
   const multipliers = [1, 10, 100, 1000, 10000];
-  const coins = Object.keys(rates);
+  const coins = Object.keys(rates).sort((a, b) => rates[b] - rates[a]);
+
+  const nf = new Intl.NumberFormat('fr-FR');
 
   const getCurrencyNames = () => Array.from(results.querySelectorAll('tbody tr')).reduce(
     (acc, row) => ({
@@ -52,23 +54,28 @@
       const cells = row.querySelectorAll('td');
       multipliers.forEach((multiplier, idx) => {
         const converted = Math.floor(baseValue / (rates[currency] * multiplier));
-        cells[idx].textContent = converted;
+        cells[idx].textContent = converted ? nf.format(converted) : '';
       });
     });
 
     let remaining = baseValue;
-    const counts = {};
+    const items = [];
     denominations.forEach(({ coin, multiplier, value }) => {
+      if (remaining <= 0) return;
       const qty = Math.floor(remaining / value);
       if (qty > 0) {
-        counts[coin] = (counts[coin] || 0) + qty * multiplier;
         remaining -= qty * value;
+        items.push({ coin, multiplier, qty });
       }
     });
 
-    const parts = Object.entries(counts).map(
-      ([coin, qty]) => `${qty} ${currencyNames[coin]}`,
-    );
+    const parts = items.map(({ coin, multiplier, qty }) => {
+      const label = currencyNames[coin].replace(/^pièce/, qty > 1 ? 'pièces' : 'pièce');
+      return multiplier === 1
+        ? `${nf.format(qty)} ${label}`
+        : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
+    });
+
     const phrase = parts.length > 1
       ? `${parts.slice(0, -1).join(', ')} ${andText} ${parts[parts.length - 1]}`
       : (parts[0] || '');
