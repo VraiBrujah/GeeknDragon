@@ -178,18 +178,6 @@ header nav a:hover{ text-decoration:underline; text-underline-offset:6px; }
 header nav a.is-active, header nav a[aria-current="page"]{
   color:#c7d2fe; text-decoration:underline; text-underline-offset:6px; text-decoration-thickness:2px;
 }
-header nav .submenu{
-  opacity:0;
-  transform:translateY(0.5rem);
-  transition:opacity .2s ease, transform .2s ease;
-  box-shadow:0 4px 6px rgba(0,0,0,.1);
-  border-radius:.5rem;
-}
-header nav li:focus-within > .submenu,
-header nav li:hover > .submenu{
-  opacity:1;
-  transform:translateY(0);
-}
 header .max-w-7xl{ flex-wrap:wrap; }
 @media (min-width:768px){
   header .max-w-7xl{ flex-wrap:nowrap; }
