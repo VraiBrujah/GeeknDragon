@@ -724,6 +724,11 @@
   border-bottom: 1px solid var(--boutique-border);
 }
 
+#currency-sources th,
+#currency-sources td {
+  text-align: center;
+}
+
 #currency-converter th,
 #currency-results th,
 #currency-best th {
