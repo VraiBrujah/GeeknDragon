@@ -60,8 +60,6 @@ foreach ($data as $id => $p) {
         'name_en' => str_replace(' – ', '<br>', $p['name_en'] ?? $p['name']),
         'price' => $p['price'],
         'img' => $p['images'][0] ?? '',
-        'summary' => $p['summary'] ?? null,
-        'summary_en' => $p['summary_en'] ?? null,
         'description' => $p['description'],
         'description_en' => $p['description_en'] ?? $p['description'],
         'url' => '/product.php?id=' . urlencode($id) . '&from=' . urlencode($category),

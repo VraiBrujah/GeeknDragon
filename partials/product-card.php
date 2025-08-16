@@ -7,9 +7,7 @@ if (!isset($product['id'])) {
 $id = (string)$product['id'];
 
 $name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
-$descFr      = $product['summary'] ?? ($product['description'] ?? '');
-$descEn      = $product['summary_en'] ?? ($product['description_en'] ?? ($product['description'] ?? ''));
-$desc        = $lang === 'en' ? $descEn : $descFr;
+$desc        = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $isVideo     = preg_match('/\.mp4$/i', $img);
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
@@ -37,8 +35,8 @@ $isInStock = inStock($id);
       <?php else : ?>
         <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
              alt="<?= htmlspecialchars($desc) ?>"
-             data-alt-fr="<?= htmlspecialchars($descFr) ?>"
-             data-alt-en="<?= htmlspecialchars($descEn) ?>"
+             data-alt-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
+             data-alt-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
              class="product-media" loading="lazy">
       <?php endif; ?>
     </div>
@@ -53,8 +51,8 @@ $isInStock = inStock($id);
   </a>
 
   <div class="text-center mb-4 text-gray-300 flex-grow"
-     data-desc-fr="<?= htmlspecialchars($descFr) ?>"
-     data-desc-en="<?= htmlspecialchars($descEn) ?>">
+     data-desc-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
+     data-desc-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>">
     <?= $htmlDesc ?>
   </div>
 
