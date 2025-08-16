@@ -295,7 +295,33 @@
   function fillMinimal(totalCp){
     if (totalCp<=0){ minimalCard.classList.add("is-hidden"); return; }
     const res = minimalSentenceFromCp(totalCp);
-    minimalText.textContent = res.text;
+
+    const parts = res.items.map(it => it.mult===1
+      ? `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)}`
+      : `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)} x${it.mult}`
+    );
+
+    let text = "Représentation minimale : ";
+    if (parts.length === 0){
+      text += "—";
+    } else {
+      for (let i=0; i<parts.length; i++){
+        const last = i === parts.length - 1;
+        const beforeLast = i === parts.length - 2;
+        text += parts[i];
+        if (!last){
+          const nextBreak = ((i+1) % 3 === 0 && !last);
+          if (beforeLast && !nextBreak){
+            text += " et ";
+          } else {
+            text += ", ";
+          }
+          if (nextBreak){ text += "<br>"; }
+        }
+      }
+    }
+
+    minimalText.innerHTML = text;
     minimalCard.classList.remove("is-hidden");
   }
 
