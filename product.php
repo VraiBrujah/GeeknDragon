@@ -40,8 +40,35 @@ $customLabel   = !empty($languages)
     : ($translations['product']['multiplier'] ?? ($lang === 'en' ? 'Multiplier' : 'Multiplicateur'));
 $images        = $product['images'] ?? [];
 
-// CSS local pour une description propre
-$extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemtime(__DIR__.'/css/product-gallery.css') . '">';
+// CSS moderne optimisé pour la galerie
+$extraHead = '
+<link rel="stylesheet" href="/css/product-gallery-modern.css?v=' . filemtime(__DIR__.'/css/product-gallery-modern.css') . '">
+<link rel="preload" href="/css/product-gallery-modern.css" as="style">
+<style>
+  /* CSS critique inline pour above-the-fold */
+  .product-gallery { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1rem; 
+    margin-bottom: 1.5rem; 
+  }
+  .main-media-container { 
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); 
+    border-radius: 0.75rem; 
+    overflow: hidden; 
+  }
+  .media-viewport { 
+    aspect-ratio: 4 / 3; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+  }
+  .main-media { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+  }
+</style>';
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -67,47 +94,90 @@ echo $snipcartInit;
 
     <div class="bg-gray-800 p-6 rounded-xl shadow-lg product-panel">
       <?php if (!empty($images)) : ?>
-        <!-- Galerie produit simplifiée (utilise universal-image-gallery.js) -->
-        <div class="product-gallery-container mb-6">
-          <!-- Image principale -->
-          <div class="main-image-container relative">
-            <?php $firstImage = $images[0]; $isFirstVideo = preg_match('/\.mp4$/i', $firstImage); ?>
-            <?php if ($isFirstVideo) : ?>
-              <video src="<?= htmlspecialchars($firstImage) ?>" 
-                     class="product-media main-product-media"
-                     muted playsinline controls
-                     data-no-gallery>
-              </video>
-            <?php else : ?>
-              <img src="<?= htmlspecialchars($firstImage) ?>"
-                   alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
-                   class="product-media main-product-media"
-                   data-gallery="product">
-            <?php endif; ?>
+        <!-- Galerie produit optimisée avec lazy loading et progressive enhancement -->
+        <div class="product-gallery" data-gallery="product-media">
+          <!-- Conteneur média principal avec amélioration progressive -->
+          <div class="main-media-container">
+            <?php 
+            $firstImage = $images[0]; 
+            $isFirstVideo = preg_match('/\.(mp4|webm|mov)$/i', $firstImage);
+            ?>
+            <div class="media-viewport" role="img" aria-label="<?= htmlspecialchars('Média principal : ' . strip_tags($productName)) ?>">
+              <?php if ($isFirstVideo) : ?>
+                <video 
+                  id="main-video"
+                  class="main-media" 
+                  data-src="<?= htmlspecialchars($firstImage) ?>"
+                  muted 
+                  playsinline 
+                  preload="metadata"
+                  poster="<?= htmlspecialchars(str_replace(['.mp4', '.webm', '.mov'], '.jpg', $firstImage)) ?>"
+                  aria-label="<?= htmlspecialchars('Vidéo : ' . strip_tags($productName)) ?>">
+                  <source data-src="<?= htmlspecialchars($firstImage) ?>" type="video/<?= pathinfo($firstImage, PATHINFO_EXTENSION) ?>">
+                  <p>Votre navigateur ne supporte pas la lecture vidéo. <a href="<?= htmlspecialchars($firstImage) ?>">Télécharger la vidéo</a></p>
+                </video>
+              <?php else : ?>
+                <img 
+                  id="main-image"
+                  class="main-media" 
+                  data-src="<?= htmlspecialchars($firstImage) ?>"
+                  alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
+                  loading="eager"
+                  decoding="async"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw">
+                <noscript>
+                  <img src="<?= htmlspecialchars($firstImage) ?>" alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>">
+                </noscript>
+              <?php endif; ?>
+            </div>
           </div>
           
-          <!-- Thumbnails -->
+          <!-- Navigation thumbnails avec clavier -->
           <?php if (count($images) > 1) : ?>
-            <div class="thumbnails-container">
-              <div class="thumbnails-wrapper">
+            <nav class="thumbnails-nav" role="tablist" aria-label="Galerie de médias">
+              <div class="thumbnails-track">
                 <?php foreach ($images as $index => $img) : ?>
-                  <?php $isVideo = preg_match('/\.mp4$/i', $img); ?>
-                  <?php if ($isVideo) : ?>
-                    <video src="<?= htmlspecialchars($img) ?>" 
-                           class="thumbnail-media <?= $index === 0 ? 'active' : '' ?>"
-                           data-index="<?= $index ?>"
-                           data-no-gallery
-                           muted></video>
-                  <?php else : ?>
-                    <img src="<?= htmlspecialchars($img) ?>" 
-                         alt="<?= htmlspecialchars('Image ' . ($index + 1) . ' - ' . strip_tags($productName)) ?>"
-                         class="thumbnail-media <?= $index === 0 ? 'active' : '' ?>"
-                         data-index="<?= $index ?>"
-                         data-gallery="product">
-                  <?php endif; ?>
+                  <?php 
+                  $isVideo = preg_match('/\.(mp4|webm|mov)$/i', $img);
+                  $mediaType = $isVideo ? 'video' : 'image';
+                  ?>
+                  <button 
+                    type="button"
+                    class="thumbnail-btn <?= $index === 0 ? 'active' : '' ?>"
+                    data-index="<?= $index ?>"
+                    data-media-src="<?= htmlspecialchars($img) ?>"
+                    data-media-type="<?= $mediaType ?>"
+                    role="tab"
+                    aria-selected="<?= $index === 0 ? 'true' : 'false' ?>"
+                    aria-controls="main-media"
+                    aria-label="<?= htmlspecialchars(($isVideo ? 'Vidéo' : 'Image') . ' ' . ($index + 1) . ' de ' . count($images)) ?>">
+                    
+                    <?php if ($isVideo) : ?>
+                      <video 
+                        class="thumbnail-media" 
+                        data-src="<?= htmlspecialchars($img) ?>"
+                        muted 
+                        preload="none"
+                        poster="<?= htmlspecialchars(str_replace(['.mp4', '.webm', '.mov'], '.jpg', $img)) ?>">
+                      </video>
+                      <span class="media-type-icon" aria-hidden="true">▶</span>
+                    <?php else : ?>
+                      <img 
+                        class="thumbnail-media" 
+                        data-src="<?= htmlspecialchars($img) ?>"
+                        alt="<?= htmlspecialchars('Miniature ' . ($index + 1) . ' - ' . strip_tags($productName)) ?>"
+                        loading="lazy"
+                        decoding="async">
+                    <?php endif; ?>
+                  </button>
                 <?php endforeach; ?>
               </div>
-            </div>
+              
+              <!-- Indicateur de position -->
+              <div class="gallery-indicator" aria-live="polite" aria-atomic="true">
+                <span class="current-index">1</span> / <span class="total-count"><?= count($images) ?></span>
+              </div>
+            </nav>
           <?php endif; ?>
         </div>
       <?php endif; ?>
@@ -255,54 +325,427 @@ echo $snipcartInit;
 
 <script src="js/app.js"></script>
 
-<!-- Script pour la navigation des thumbnails -->
+<!-- Gestionnaire de galerie produit moderne -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Navigation des thumbnails
-  const thumbnails = document.querySelectorAll('.thumbnail-media');
-  const mainImage = document.querySelector('.main-product-media');
+/**
+ * Gestionnaire de galerie produit optimisé
+ * Inspiré de initVideoManager avec amélioration progressive et accessibilité
+ */
+(() => {
+  'use strict';
   
-  if (thumbnails.length && mainImage) {
-    thumbnails.forEach((thumb, index) => {
-      thumb.addEventListener('click', function() {
-        // Retirer la classe active de tous
-        thumbnails.forEach(t => t.classList.remove('active'));
-        // Ajouter active au thumbnail cliqué
-        this.classList.add('active');
+  // Utilitaires légers
+  const qs = (sel, root = document) => root.querySelector(sel);
+  const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  
+  // Configuration responsive et accessibilité
+  const PREFERS_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const IS_TOUCH_DEVICE = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  
+  /**
+   * Gestionnaire de galerie produit
+   */
+  function initProductGallery() {
+    const gallery = qs('.product-gallery[data-gallery="product-media"]');
+    if (!gallery) return;
+    
+    const mainMediaContainer = qs('.media-viewport', gallery);
+    const thumbnailButtons = qsa('.thumbnail-btn', gallery);
+    const indicator = qs('.gallery-indicator', gallery);
+    
+    if (!mainMediaContainer || thumbnailButtons.length === 0) return;
+    
+    let currentIndex = 0;
+    let isLoading = false;
+    
+    // État de la galerie
+    const state = {
+      currentMedia: null,
+      mediaCache: new Map(),
+      intersectionObserver: null,
+      keyboardEnabled: true
+    };
+    
+    /**
+     * Initialisation avec lazy loading intelligent
+     */
+    function init() {
+      // Charger le média principal immédiatement
+      loadMainMedia(currentIndex);
+      
+      // Configurer les événements
+      setupEventListeners();
+      
+      // Initialiser l'observation intersection pour les thumbnails
+      setupIntersectionObserver();
+      
+      // Précharger le média suivant
+      if (thumbnailButtons.length > 1) {
+        requestIdleCallback(() => preloadNextMedia(currentIndex + 1));
+      }
+    }
+    
+    /**
+     * Configuration des événements
+     */
+    function setupEventListeners() {
+      // Navigation par thumbnails
+      thumbnailButtons.forEach((btn, index) => {
+        // Click/Touch
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (!isLoading) switchToMedia(index);
+        });
         
-        // Changer l'image principale
-        if (mainImage.tagName === 'IMG' && this.tagName === 'IMG') {
-          mainImage.src = this.src;
-          mainImage.alt = this.alt;
-        } else if (mainImage.tagName === 'VIDEO' && this.tagName === 'VIDEO') {
-          mainImage.src = this.src;
-        } else if (mainImage.tagName === 'IMG' && this.tagName === 'VIDEO') {
-          // Remplacer img par video
-          const newVideo = document.createElement('video');
-          newVideo.className = mainImage.className;
-          newVideo.src = this.src;
-          newVideo.controls = true;
-          newVideo.muted = true;
-          newVideo.playsInline = true;
-          newVideo.dataset.noGallery = true;
-          mainImage.parentNode.replaceChild(newVideo, mainImage);
-        } else if (mainImage.tagName === 'VIDEO' && this.tagName === 'IMG') {
-          // Remplacer video par img
-          const newImg = document.createElement('img');
-          newImg.className = mainImage.className;
-          newImg.src = this.src;
-          newImg.alt = this.alt;
-          newImg.dataset.gallery = 'product';
-          mainImage.parentNode.replaceChild(newImg, mainImage);
-          // Réappliquer la galerie
-          if (window.UniversalGallery) {
-            window.UniversalGallery.refresh();
+        // Clavier (accessibilité)
+        btn.addEventListener('keydown', (e) => {
+          handleKeyboardNavigation(e, index);
+        });
+        
+        // Focus management
+        btn.addEventListener('focus', () => {
+          if (!PREFERS_REDUCED_MOTION) {
+            btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
+        });
+      });
+      
+      // Navigation clavier globale
+      gallery.addEventListener('keydown', handleGlobalKeyboard);
+      
+      // Gestion du redimensionnement
+      const resizeObserver = new ResizeObserver(debounce(handleResize, 150));
+      resizeObserver.observe(mainMediaContainer);
+    }
+    
+    /**
+     * Navigation clavier
+     */
+    function handleKeyboardNavigation(e, index) {
+      switch (e.key) {
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          if (!isLoading) switchToMedia(index);
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          navigateToIndex(Math.max(0, currentIndex - 1));
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          navigateToIndex(Math.min(thumbnailButtons.length - 1, currentIndex + 1));
+          break;
+        case 'Home':
+          e.preventDefault();
+          navigateToIndex(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          navigateToIndex(thumbnailButtons.length - 1);
+          break;
+      }
+    }
+    
+    /**
+     * Navigation clavier globale
+     */
+    function handleGlobalKeyboard(e) {
+      if (!state.keyboardEnabled) return;
+      
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const direction = e.key === 'ArrowLeft' ? -1 : 1;
+        const newIndex = Math.max(0, Math.min(thumbnailButtons.length - 1, currentIndex + direction));
+        if (newIndex !== currentIndex) {
+          e.preventDefault();
+          navigateToIndex(newIndex);
+        }
+      }
+    }
+    
+    /**
+     * Navigation vers un index spécifique
+     */
+    function navigateToIndex(index) {
+      if (index >= 0 && index < thumbnailButtons.length && index !== currentIndex) {
+        switchToMedia(index);
+        thumbnailButtons[index].focus();
+      }
+    }
+    
+    /**
+     * Basculer vers un média
+     */
+    async function switchToMedia(index) {
+      if (isLoading || index === currentIndex) return;
+      
+      isLoading = true;
+      const button = thumbnailButtons[index];
+      const mediaSrc = button.dataset.mediaSrc;
+      const mediaType = button.dataset.mediaType;
+      
+      try {
+        // Mise à jour de l'état visuel
+        updateActiveStates(index);
+        
+        // Chargement du nouveau média
+        await loadMainMedia(index);
+        
+        // Mise à jour de l'indicateur
+        updateIndicator(index);
+        
+        // Préchargement du suivant
+        preloadNextMedia(index + 1);
+        
+        currentIndex = index;
+        
+      } catch (error) {
+        console.warn('Erreur lors du changement de média:', error);
+        // Fallback gracieux
+        showMediaError();
+      } finally {
+        isLoading = false;
+      }
+    }
+    
+    /**
+     * Chargement du média principal
+     */
+    function loadMainMedia(index) {
+      return new Promise((resolve, reject) => {
+        const button = thumbnailButtons[index];
+        const mediaSrc = button.dataset.mediaSrc;
+        const mediaType = button.dataset.mediaType;
+        
+        // Vérifier le cache
+        if (state.mediaCache.has(mediaSrc)) {
+          const cachedElement = state.mediaCache.get(mediaSrc);
+          replaceMainMedia(cachedElement.cloneNode(true));
+          resolve();
+          return;
+        }
+        
+        if (mediaType === 'video') {
+          loadVideo(mediaSrc).then(resolve).catch(reject);
+        } else {
+          loadImage(mediaSrc).then(resolve).catch(reject);
         }
       });
+    }
+    
+    /**
+     * Chargement d'image avec optimisations
+     */
+    function loadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = document.createElement('img');
+        img.className = 'main-media';
+        img.alt = `Geek & Dragon – ${document.querySelector('h1')?.textContent || 'Produit'}`;
+        img.loading = 'eager';
+        img.decoding = 'async';
+        img.sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw';
+        
+        img.onload = () => {
+          state.mediaCache.set(src, img);
+          replaceMainMedia(img);
+          resolve();
+        };
+        
+        img.onerror = () => {
+          reject(new Error(`Impossible de charger l'image: ${src}`));
+        };
+        
+        img.src = src;
+      });
+    }
+    
+    /**
+     * Chargement de vidéo avec optimisations
+     */
+    function loadVideo(src) {
+      return new Promise((resolve, reject) => {
+        const video = document.createElement('video');
+        video.className = 'main-media';
+        video.muted = true;
+        video.playsInline = true;
+        video.controls = true;
+        video.preload = 'metadata';
+        video.setAttribute('aria-label', `Vidéo : ${document.querySelector('h1')?.textContent || 'Produit'}`);
+        
+        // Poster si disponible
+        const posterSrc = src.replace(/\.(mp4|webm|mov)$/i, '.jpg');
+        video.poster = posterSrc;
+        
+        video.onloadedmetadata = () => {
+          state.mediaCache.set(src, video);
+          replaceMainMedia(video);
+          resolve();
+        };
+        
+        video.onerror = () => {
+          reject(new Error(`Impossible de charger la vidéo: ${src}`));
+        };
+        
+        video.src = src;
+      });
+    }
+    
+    /**
+     * Remplacement du média principal
+     */
+    function replaceMainMedia(newElement) {
+      const currentMedia = qs('.main-media', mainMediaContainer);
+      
+      if (!PREFERS_REDUCED_MOTION) {
+        // Animation de transition fluide
+        newElement.style.opacity = '0';
+        newElement.style.transform = 'scale(0.95)';
+      }
+      
+      if (currentMedia) {
+        mainMediaContainer.replaceChild(newElement, currentMedia);
+      } else {
+        mainMediaContainer.appendChild(newElement);
+      }
+      
+      if (!PREFERS_REDUCED_MOTION) {
+        // Animation d'entrée
+        requestAnimationFrame(() => {
+          newElement.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          newElement.style.opacity = '1';
+          newElement.style.transform = 'scale(1)';
+        });
+      }
+      
+      state.currentMedia = newElement;
+    }
+    
+    /**
+     * Mise à jour des états actifs
+     */
+    function updateActiveStates(index) {
+      thumbnailButtons.forEach((btn, i) => {
+        const isActive = i === index;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive.toString());
+      });
+    }
+    
+    /**
+     * Mise à jour de l'indicateur
+     */
+    function updateIndicator(index) {
+      if (indicator) {
+        const currentSpan = qs('.current-index', indicator);
+        if (currentSpan) {
+          currentSpan.textContent = (index + 1).toString();
+        }
+      }
+    }
+    
+    /**
+     * Préchargement du média suivant
+     */
+    function preloadNextMedia(index) {
+      if (index >= thumbnailButtons.length || state.mediaCache.size >= 3) return;
+      
+      requestIdleCallback(() => {
+        const button = thumbnailButtons[index];
+        if (!button) return;
+        
+        const mediaSrc = button.dataset.mediaSrc;
+        const mediaType = button.dataset.mediaType;
+        
+        if (state.mediaCache.has(mediaSrc)) return;
+        
+        if (mediaType === 'image') {
+          const img = new Image();
+          img.src = mediaSrc;
+          img.onload = () => state.mediaCache.set(mediaSrc, img);
+        }
+      });
+    }
+    
+    /**
+     * Configuration de l'intersection observer pour les thumbnails
+     */
+    function setupIntersectionObserver() {
+      const thumbnailsTrack = qs('.thumbnails-track', gallery);
+      if (!thumbnailsTrack) return;
+      
+      state.intersectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const thumbnail = qs('.thumbnail-media', entry.target);
+          if (entry.isIntersecting && thumbnail && !thumbnail.src && thumbnail.dataset.src) {
+            thumbnail.src = thumbnail.dataset.src;
+          }
+        });
+      }, { 
+        rootMargin: '50px',
+        threshold: 0.1 
+      });
+      
+      thumbnailButtons.forEach(btn => {
+        state.intersectionObserver.observe(btn);
+      });
+    }
+    
+    /**
+     * Gestion du redimensionnement
+     */
+    function handleResize() {
+      // Réajustement responsive si nécessaire
+      if (state.currentMedia && state.currentMedia.tagName === 'IMG') {
+        state.currentMedia.sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw';
+      }
+    }
+    
+    /**
+     * Affichage d'erreur
+     */
+    function showMediaError() {
+      const errorElement = document.createElement('div');
+      errorElement.className = 'media-error';
+      errorElement.innerHTML = `
+        <p>Impossible de charger ce média.</p>
+        <button onclick="location.reload()">Réessayer</button>
+      `;
+      replaceMainMedia(errorElement);
+    }
+    
+    /**
+     * Fonction utilitaire debounce
+     */
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+    
+    // Initialisation
+    init();
+    
+    // Cleanup au déchargement
+    window.addEventListener('beforeunload', () => {
+      if (state.intersectionObserver) {
+        state.intersectionObserver.disconnect();
+      }
     });
   }
-});
+  
+  // Initialisation when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProductGallery);
+  } else {
+    initProductGallery();
+  }
+})();
 </script>
 
 <!-- Patch : mettre à jour quantité & multiplicateur juste avant l'ajout -->
