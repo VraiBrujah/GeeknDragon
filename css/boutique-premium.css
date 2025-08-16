@@ -698,7 +698,6 @@
 /* CURRENCY CONVERTER TABLES                                          */
 /* =================================================================== */
 #currency-converter,
-#currency-results,
 #currency-equivalences,
 #currency-best {
   background: var(--boutique-card);
@@ -708,7 +707,6 @@
 }
 
 #currency-converter table,
-#currency-results table,
 #currency-equivalences table,
 #currency-best table {
   width: 100%;
@@ -717,8 +715,6 @@
 
 #currency-converter th,
 #currency-converter td,
-#currency-results th,
-#currency-results td,
 #currency-equivalences th,
 #currency-equivalences td,
 #currency-best th,
@@ -739,9 +735,12 @@
 }
 
 #currency-converter th,
-#currency-results th,
 #currency-equivalences th,
 #currency-best th {
   color: var(--boutique-text-accent);
+}
+
+#currency-equivalences-list tbody tr:nth-child(even) {
+  background: var(--boutique-surface);
 }
 
