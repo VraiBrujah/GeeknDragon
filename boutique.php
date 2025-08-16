@@ -210,7 +210,43 @@ echo $snipcartInit;
               <input id="currency-amount" type="number" min="0" value="0" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
             </div>
           </div>
-          <ul id="currency-results" class="mt-4 text-gray-200 space-y-1" aria-live="polite"></ul>
+          <div class="mt-4 bg-gray-800 rounded-lg p-4 overflow-x-auto">
+            <table id="currency-results" class="w-full text-gray-200" aria-live="polite">
+              <thead>
+                <tr>
+                  <th class="text-left"></th>
+                  <th>×1</th>
+                  <th>×10</th>
+                  <th>×100</th>
+                  <th>×1000</th>
+                  <th>×10000</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-currency="copper">
+                  <th class="text-left" data-i18n="shop.converter.copper">pièce de cuivre</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr data-currency="silver">
+                  <th class="text-left" data-i18n="shop.converter.silver">pièce d’argent</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr data-currency="electrum">
+                  <th class="text-left" data-i18n="shop.converter.electrum">pièce d’électrum</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr data-currency="gold">
+                  <th class="text-left" data-i18n="shop.converter.gold">pièce d’or</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr data-currency="platinum">
+                  <th class="text-left" data-i18n="shop.converter.platinum">pièce de platine</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p id="currency-best" class="mt-4"></p>
         </div>
       </section>
 
