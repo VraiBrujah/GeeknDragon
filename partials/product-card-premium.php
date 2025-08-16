@@ -42,18 +42,30 @@ $isInStock = inStock($id);
     </div>
   <?php endif; ?>
 
-  <!-- Média du produit -->
+  <!-- Média du produit optimisé -->
   <a href="<?= htmlspecialchars($url) ?>" class="product-media-container">
-    <?php if ($isVideo) : ?>
-      <video src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-             class="product-media" autoplay muted loop playsinline></video>
-    <?php else : ?>
-      <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-           alt="<?= htmlspecialchars($desc) ?>"
-           data-alt-fr="<?= htmlspecialchars($product['summary'] ?? $product['description'] ?? $desc) ?>"
-           data-alt-en="<?= htmlspecialchars($product['summary_en'] ?? $product['summary'] ?? $product['description_en'] ?? $product['description'] ?? $desc) ?>"
-           class="product-media" loading="lazy">
-    <?php endif; ?>
+    <?php
+    // Utilisation du MediaHelper pour un affichage optimisé
+    $altText = $lang === 'en' 
+        ? ($product['summary_en'] ?? $product['summary'] ?? $product['description_en'] ?? $product['description'] ?? $desc)
+        : ($product['summary'] ?? $product['description'] ?? $desc);
+    
+    if ($isVideo) {
+        echo \GeeknDragon\Helpers\MediaHelper::renderProductVideo($img, [
+            'class' => 'product-media',
+            'autoplay' => true,
+            'muted' => true,
+            'loop' => true,
+            'playsinline' => true
+        ]);
+    } else {
+        echo \GeeknDragon\Helpers\MediaHelper::renderProductImage($img, $altText, [
+            'class' => 'product-media',
+            'data-alt-fr' => htmlspecialchars($product['summary'] ?? $product['description'] ?? $desc),
+            'data-alt-en' => htmlspecialchars($product['summary_en'] ?? $product['summary'] ?? $product['description_en'] ?? $product['description'] ?? $desc)
+        ]);
+    }
+    ?>
   </a>
 
   <!-- Contenu de la carte -->
