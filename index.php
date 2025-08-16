@@ -37,15 +37,18 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
       </div>
     </section>
 
-    <!-- ===== PRODUITS ===== -->
+    <!-- ===== BOUTIQUE & PRODUITS ===== -->
     <section id="produits" class="py-24 bg-gray-900/80 scroll-mt-24">
+    <span id="boutique"></span>
       <div class="max-w-6xl mx-auto px-6">
-        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="home.mustHave.heading">Nos Incontournables</h3>
-        <div class="grid md:grid-cols-3 gap-10">
+        <h3 class="text-4xl font-bold text-center mb-4" data-i18n="nav.shop">Boutique</h3>
+        <p class="text-xl text-center mb-12 text-gray-300" data-i18n="home.mustHave.heading">Nos Incontournables</p>
+        
+        <div class="grid md:grid-cols-3 gap-10 mb-12">
           <a href="<?= langUrl('boutique.php#cartes') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
-            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d’équipement</h4>
-            <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
-              <img src="images/cartes_equipement.png" alt="560 cartes d’équipement illustrées" class="rounded mb-4" loading="lazy">
+            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d'équipement</h4>
+            <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d'équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
+              <img src="images/cartes_equipement.png" alt="560 cartes d'équipement illustrées" class="rounded mb-4" loading="lazy">
           </a>
           <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
@@ -58,27 +61,23 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               <img src="images/triptyque_fiche.png" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
           </a>
         </div>
-      </div>
-    </section>
 
-
-<!-- ===== BOUTIQUE ===== -->
-    <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-24">
-      <div class="max-w-6xl mx-auto px-6 text-center">
-        <h3 class="text-4xl font-bold mb-12" data-i18n="nav.shop">Boutique</h3>
+        <div class="text-center">
           <p class="mb-8 txt-court"><span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
             <span class="payment-icons">
               <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
               <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
               <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
+            </span>
           </p>
-        <div class="flex flex-col md:flex-row gap-6 justify-center">
-          <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
-            Visiter la boutique
-          </a>
-          <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">
-            Demander un devis
-          </a>
+          <div class="flex flex-col md:flex-row gap-6 justify-center">
+            <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+              Visiter la boutique complète
+            </a>
+            <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">
+              Demander un devis
+            </a>
+          </div>
         </div>
       </div>
     </section>

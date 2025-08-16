@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
   <script src="/js/vendor.bundle.min.js?v=<?= filemtime(__DIR__.'/js/vendor.bundle.min.js') ?>"></script>
   <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">
+  <link rel="stylesheet" href="/css/boutique-style-global.css?v=<?= filemtime(__DIR__.'/css/boutique-style-global.css') ?>">
   <link rel="stylesheet" href="/css/snipcart.css?v=<?= filemtime(__DIR__.'/css/snipcart.css') ?>">
   <link rel="stylesheet" href="/css/snipcart-custom.css?v=<?= filemtime(__DIR__.'/css/snipcart-custom.css') ?>">
   <link rel="stylesheet" href="/css/snipcart-ecommerce.css?v=<?= filemtime(__DIR__.'/css/snipcart-ecommerce.css') ?>">
