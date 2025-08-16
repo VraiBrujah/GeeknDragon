@@ -55,6 +55,8 @@ h1,h2,h3,h4,h5,h6{ line-height:1.25; }
   --gd-text:#e5e7eb;              /* gray-200   */
   --gd-muted:#9aa3b2;             /* gray-400~  */
   --gd-ring: rgba(79,70,229,.45); /* indigo halo */
+  --gd-header-from: rgba(17,24,39,.85); /* header gradient start */
+  --gd-header-to: rgba(31,41,55,.65);   /* header gradient end   */
   --header-height:0px;
 }
 

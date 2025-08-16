@@ -52,7 +52,7 @@ $snipcartKey = $snipcartKey
 function renderNav(array $items, string $active, bool $mobile = false): void {
     foreach ($items as $href => $item) {
     // Le menu utilise déjà Cinzel via le CSS, inutile d'ajouter "txt-court"
-    $class = 'nav-link font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
+    $class = 'nav-link font-medium transition-colors duration-300 ease-in-out hover:text-indigo-300 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
     $link = langUrl($href);
     if (isset($item['children']) && !$mobile) {
       echo '<li class="relative group">';
@@ -75,17 +75,17 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 ?>
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
-<header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
+<header class="backdrop-blur backdrop-saturate-150 bg-gradient-to-r from-[var(--gd-header-from)] to-[var(--gd-header-to)] bg-opacity-80 shadow-2xl fixed top-0 w-full z-[1200]">
   <div class="max-w-7xl mx-auto relative flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
     <!-- Logo à gauche -->
-    <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex items-center group transition-colors duration-200 flex-shrink-0">
-      <img src="/images/geekndragon_logo_blanc.png" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105" width="200" height="200">
+    <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex items-center group transition duration-300 ease-in-out flex-shrink-0 hover:opacity-90">
+      <img src="/images/geekndragon_logo_blanc.png" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-300 ease-in-out group-hover:scale-105" width="200" height="200">
     </a>
 
     <!-- Titre centré -->
     <div class="flex-1 text-center">
       <a href="<?= langUrl('/index.php') ?>" class="group">
-        <span class="site-title flex flex-col items-center text-2xl md:text-3xl font-semibold leading-none text-white group-hover:text-indigo-300 transition-colors duration-200">
+        <span class="site-title flex flex-col items-center text-2xl md:text-3xl font-semibold leading-none text-white group-hover:text-indigo-300 transition-colors duration-300 ease-in-out">
           <span>GEEK</span>
           <span>&amp;</span>
           <span>DRAGON</span>
@@ -96,7 +96,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     <!-- Partie droite -->
     <div class="flex items-center gap-4 md:gap-8 flex-shrink-0">
       <!-- Bouton hamburger -->
-      <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menu">
+      <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-300 ease-in-out" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
@@ -122,14 +122,14 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       <?php if ($snipcartKey): ?>
       <!-- Snipcart : icônes EMPILÉES partout -->
       <div class="flex flex-col items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
-        <button class="snipcart-customer-signin snipcart-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
+        <button class="snipcart-customer-signin snipcart-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-300 ease-in-out" aria-label="Compte">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
           </svg>
           <span class="sr-only" data-i18n="nav.account">Compte</span>
         </button>
 
-        <button class="snipcart-checkout snipcart-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
+        <button class="snipcart-checkout snipcart-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-300 ease-in-out" aria-label="Panier">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
           </svg>
@@ -142,8 +142,8 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   </div>
 
   <!-- Menu mobile (TOUT est ensemble) -->
-  <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-200"></div>
-  <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
+  <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-300 ease-in-out"></div>
+  <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-300 ease-in-out translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
     <ul class="flex flex-col items-center gap-6">
       <?php renderNav($navItems, $active, true); ?>
     </ul>
