@@ -40,7 +40,7 @@
   const render = () => {
     const baseValue = Array.from(sources).reduce((sum, input) => {
       const { currency } = input.dataset;
-      const amount = parseInt(input.value, 10) || 0;
+      const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
       return sum + amount * rates[currency];
     }, 0);
     results.querySelectorAll('tbody tr').forEach((row) => {
@@ -76,7 +76,11 @@
       if (el.value === '0') el.value = '';
     });
     el.addEventListener('input', () => {
-      el.value = el.value.replace(/[^0-9]/g, '');
+      el.value = el.value.replace(/[^0-9.-]/g, '');
+      const value = parseFloat(el.value);
+      const invalid = Number.isFinite(value) && (value < 0 || !Number.isInteger(value));
+      el.setCustomValidity(invalid ? 'Veuillez saisir un entier positif' : '');
+      if (invalid) el.reportValidity();
       render();
     });
   });
