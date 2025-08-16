@@ -177,10 +177,11 @@ echo $snipcartInit;
         <div id="video-modal"
              class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center"
              role="dialog" aria-modal="true"
-             aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »">
+             aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
+             tabindex="-1">
           <div class="relative w-full max-w-screen-lg">
             <button type="button"
-                    class="absolute -top-10 right-0 text-white text-4xl leading-none focus:outline-none"
+                    class="absolute top-4 right-4 text-white text-4xl leading-none focus:outline-none"
                     aria-label="Fermer la vidéo"
                     data-video-close>&times;</button>
             <div class="w-full aspect-video">
@@ -397,7 +398,7 @@ echo $snipcartInit;
     const openModal = () => {
       modal.classList.remove('hidden');
       openBtn.classList.add('invisible');
-      iframe.focus();
+      modal.focus();
     };
 
     const closeModal = () => {
