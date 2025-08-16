@@ -196,50 +196,44 @@ echo $snipcartInit;
           <h4 class="text-gray-200 mb-4" data-i18n="shop.converter.title">Convertisseur de monnaie</h4>
           <div class="mx-auto">
             <p class="text-gray-200 mb-2" data-i18n="shop.converter.sourcesLabel">Monnaies sources</p>
-            <table id="currency-sources" class="w-full text-gray-200">
-              <thead>
-                <tr>
-                  <th data-i18n="shop.converter.copper">pièce de cuivre</th>
-                  <th data-i18n="shop.converter.silver">pièce d’argent</th>
-                  <th data-i18n="shop.converter.electrum">pièce d’électrum</th>
-                  <th data-i18n="shop.converter.gold">pièce d’or</th>
-                  <th data-i18n="shop.converter.platinum">pièce de platine</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div id="currency-sources" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 text-gray-200">
+              <div>
+                <label class="block mb-1 text-center" data-i18n="shop.converter.copper">pièce de cuivre</label>
+                <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+              </div>
+              <div>
+                <label class="block mb-1 text-center" data-i18n="shop.converter.silver">pièce d’argent</label>
+                <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+              </div>
+              <div>
+                <label class="block mb-1 text-center" data-i18n="shop.converter.electrum">pièce d’électrum</label>
+                <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+              </div>
+              <div>
+                <label class="block mb-1 text-center" data-i18n="shop.converter.gold">pièce d’or</label>
+                <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+              </div>
+              <div>
+                <label class="block mb-1 text-center" data-i18n="shop.converter.platinum">pièce de platine</label>
+                <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+              </div>
+            </div>
           </div>
           <div id="currency-equivalences" class="mt-4 bg-gray-900 rounded-lg p-4 text-gray-200 hidden">
             <h5 class="mb-2" data-i18n="shop.converter.equivTitle">Équivalences totales par métal</h5>
-            <table id="currency-equivalences-list" class="w-full text-left text-sm">
-              <thead class="bg-gray-800 text-gray-100">
-                <tr>
-                  <th class="font-semibold" data-i18n="shop.converter.equivMetal">Métal</th>
-                  <th class="font-semibold" data-i18n="shop.converter.equivEquivalent">Équivalence</th>
-                  <th class="font-semibold" data-i18n="shop.converter.remainder">Reste</th>
-                  <th class="font-semibold" data-i18n="shop.converter.equivTotalPieces">Nombre total de pièces</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
+            <div class="overflow-x-auto">
+              <table id="currency-equivalences-list" class="w-full min-w-[500px] text-left text-sm">
+                <thead class="bg-gray-800 text-gray-100">
+                  <tr>
+                    <th class="font-semibold" data-i18n="shop.converter.equivMetal">Métal</th>
+                    <th class="font-semibold" data-i18n="shop.converter.equivEquivalent">Équivalence</th>
+                    <th class="font-semibold" data-i18n="shop.converter.remainder">Reste</th>
+                    <th class="font-semibold" data-i18n="shop.converter.equivTotalPieces">Nombre total de pièces</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
           </div>
           <div id="currency-best" class="mt-1 bg-gray-900 rounded-lg p-4 text-gray-200 hidden" data-i18n="shop.converter.bestLabel"></div>
         </div>
