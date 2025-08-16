@@ -288,26 +288,6 @@ echo $snipcartInit;
         </div>
       </div>
 
-      <!-- 2) Les 3 autres cartes : côte à côte -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="feature-card">
-          <span class="feature-icon">🚚</span>
-          <h3 class="feature-title">Livraison rapide</h3>
-          <p class="feature-description">Expédition sous 48h partout au Canada avec suivi en temps réel de votre commande.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">🔒</span>
-          <h3 class="feature-title">Paiement sécurisé</h3>
-          <p class="feature-description">Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.</p>
-        </div>
-
-        <div class="feature-card">
-          <span class="feature-icon">🎯</span>
-          <h3 class="feature-title">Qualité artisanale</h3>
-          <p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -352,8 +332,8 @@ echo $snipcartInit;
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="shop-section-title" data-i18n="shop.collective.title">Investissez ensemble, partagez l'aventure</h2>
 
-      <div class="flex flex-col lg:flex-row items-center gap-12">
-        <div class="lg:w-1/2">
+      <div class="flex flex-col items-center gap-12">
+        <div class="max-w-xl mx-auto">
           <div class="product-card product-card-wide no-hover">
             <div class="product-media-container">
               <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="product-media no-crop" loading="lazy">
@@ -365,7 +345,7 @@ echo $snipcartInit;
           </div>
         </div>
 
-        <div class="lg:w-1/2 space-y-6">
+        <div class="features-grid">
           <div class="feature-card">
             <span class="feature-icon">💰</span>
             <h4 class="feature-title">Investissement partagé</h4>
@@ -382,6 +362,24 @@ echo $snipcartInit;
             <span class="feature-icon">📋</span>
             <h4 class="feature-title">Carte de propriété</h4>
             <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-icon">🚚</span>
+            <h4 class="feature-title">Livraison rapide</h4>
+            <p class="feature-description">Expédition sous 48h partout au Canada avec suivi en temps réel de votre commande.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-icon">🔒</span>
+            <h4 class="feature-title">Paiement sécurisé</h4>
+            <p class="feature-description">Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-icon">🎯</span>
+            <h4 class="feature-title">Qualité artisanale</h4>
+            <p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
           </div>
         </div>
       </div>
