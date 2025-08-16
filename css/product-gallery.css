@@ -588,25 +588,21 @@
 /* =================================================================== */
 /* CARTE DE PROPRIÉTÉ - TAILLE COMPLÈTE                            */
 /* =================================================================== */
-.property-image {
+.feature-card .property-image {
   width: 100% !important;
   height: auto !important;
-  max-width: 100% !important;
+  display: block !important;
+  margin: 0 auto 1rem auto !important;
   object-fit: contain !important;
   cursor: pointer;
   transition: transform 0.3s ease;
-}
-
-.property-image:hover {
-  transform: scale(1.02);
-}
-
-/* Container de la carte de propriété */
-.feature-card .feature-icon .property-image {
-  display: block;
-  margin: 0 auto;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card .property-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.3);
 }
 
 /* =================================================================== */

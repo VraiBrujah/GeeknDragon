@@ -290,12 +290,11 @@ echo $snipcartInit;
           </div>
 
           <div class="feature-card">
-            <div class="feature-icon" style="width: 100%; max-width: 300px; margin: 0 auto;">
-              <img src="images/carte_propriete.png" 
-                   alt="Carte de propriété - Système de traçabilité" 
-                   class="property-image"
-                   data-gallery="features">
-            </div>
+            <img src="images/carte_propriete.png" 
+                 alt="Carte de propriété - Système de traçabilité" 
+                 class="property-image"
+                 data-gallery="features"
+                 style="width: 100%; height: auto; margin: 0 auto 1rem auto; display: block;">
             <h4 class="feature-title">Carte de propriété</h4>
             <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
           </div>
