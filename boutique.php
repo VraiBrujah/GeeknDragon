@@ -200,31 +200,31 @@ echo $snipcartInit;
               <tbody>
                 <tr>
                   <td class="w-24 pr-2">
-                    <input type="number" min="0" value="0" data-currency="copper" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
                   </td>
                   <th class="text-left" data-i18n="shop.converter.copper">pièce de cuivre</th>
                 </tr>
                 <tr>
                   <td class="w-24 pr-2">
-                    <input type="number" min="0" value="0" data-currency="silver" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
                   </td>
                   <th class="text-left" data-i18n="shop.converter.silver">pièce d’argent</th>
                 </tr>
                 <tr>
                   <td class="w-24 pr-2">
-                    <input type="number" min="0" value="0" data-currency="electrum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
                   </td>
                   <th class="text-left" data-i18n="shop.converter.electrum">pièce d’électrum</th>
                 </tr>
                 <tr>
                   <td class="w-24 pr-2">
-                    <input type="number" min="0" value="0" data-currency="gold" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
                   </td>
                   <th class="text-left" data-i18n="shop.converter.gold">pièce d’or</th>
                 </tr>
                 <tr>
                   <td class="w-24 pr-2">
-                    <input type="number" min="0" value="0" data-currency="platinum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
                   </td>
                   <th class="text-left" data-i18n="shop.converter.platinum">pièce de platine</th>
                 </tr>
@@ -352,7 +352,7 @@ echo $snipcartInit;
     <div class="max-w-6xl mx-auto px-6">
       <div class="flex flex-col lg:flex-row items-center gap-12">
         <div class="lg:w-1/2">
-          <div class="product-card">
+          <div class="product-card product-card-wide">
             <div class="product-media-container">
               <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="product-media" loading="lazy">
             </div>

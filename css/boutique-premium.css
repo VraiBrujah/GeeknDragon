@@ -237,6 +237,11 @@
   box-shadow: var(--boutique-shadow-md);
 }
 
+.product-card-wide {
+  flex: 1 1 100%;
+  max-width: 100%;
+}
+
 .product-card::before {
   content: '';
   position: absolute;
