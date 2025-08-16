@@ -399,6 +399,9 @@ echo $snipcartInit;
     };
 
     const closeModal = () => {
+      if (document.fullscreenElement) {
+        try { document.exitFullscreen(); } catch (_) {}
+      }
       modal.classList.add('hidden');
       iframe.src = iframe.src;
       openBtn.classList.remove('invisible');
@@ -410,6 +413,9 @@ echo $snipcartInit;
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+    });
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement && !modal.classList.contains('hidden')) closeModal();
     });
   });
   </script>
