@@ -45,15 +45,3 @@ if ($canLoadVendor) {
         }
     }
 }
-
-// Initialisation de l'application avec la nouvelle architecture
-try {
-    if (class_exists('GeeknDragon\\Core\\Application')) {
-        GeeknDragon\Core\Application::getInstance();
-    }
-} catch (\Exception $e) {
-    // En mode développement, afficher l'erreur
-    if (defined('ENVIRONMENT') && ENVIRONMENT === 'development') {
-        error_log("Erreur d'initialisation de l'application : " . $e->getMessage());
-    }
-}

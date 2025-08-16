@@ -11,9 +11,7 @@
       "Bash(python:*)",
       "Bash(pip install:*)",
       "Bash(yt-dlp:*)",
-      "Bash(mv:*)",
-      "Bash(composer:*)",
-      "Bash(php:*)"
+      "Bash(mv:*)"
     ],
     "defaultMode": "acceptEdits"
   }
