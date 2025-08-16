@@ -110,3 +110,12 @@ In the Snipcart dashboard:
 
 With this hook enabled, shipping rates are calculated dynamically when customers check out.
 
+## Manual tests
+
+To ensure the currency converter handles invalid inputs correctly:
+
+1. Open the shop page (`boutique.php`) in a browser.
+2. In the currency converter, enter a decimal such as `1.5` and move focus away. The converter floors the value to `1` and a warning appears.
+3. Enter a negative value such as `-3`. The converter clamps the amount to `0` and displays the warning.
+4. Remove the invalid characters and verify that the warning disappears and the totals update.
+
