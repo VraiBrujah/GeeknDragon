@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="/css/snipcart-custom.css?v=<?= filemtime(__DIR__.'/css/snipcart-custom.css') ?>">
   <link rel="stylesheet" href="/css/snipcart-ecommerce.css?v=<?= filemtime(__DIR__.'/css/snipcart-ecommerce.css') ?>">
   <link rel="icon" type="image/png" href="/images/favicon.png">
+  <script src="/js/lazy-load-enhanced.js" defer></script>
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 

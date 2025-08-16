@@ -1,8 +1,9 @@
 {
   "permissions": {
-    "defaultMode": "acceptEdits",
     "allow": [
-      "Bash(rm:*)"
-    ]
+      "Bash(rm:*)",
+      "Bash(find:*)"
+    ],
+    "defaultMode": "acceptEdits"
   }
 }
