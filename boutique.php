@@ -385,7 +385,7 @@ echo $snipcartInit;
     video.dataset.userPaused = 'false';
     video.dataset.autoPaused = 'false';
     video.loop = true; // Boucle en continu
-    let audioOK = false;
+    let audioOK = true; // Audio activé par défaut
     
     // Gestion du hover
     const addClass = () => video.classList.add('scale-105', 'z-10');
@@ -463,8 +463,12 @@ echo $snipcartInit;
     });
     
     // Démarrage initial
-    video.muted = true; // Commence en muet
-    video.play().catch(() => {});
+    video.muted = false; // Commence avec le son activé
+    video.play().catch(() => {
+      // Si l'autoplay avec son échoue, essayer en muet
+      video.muted = true;
+      video.play().catch(() => {});
+    });
     updateBtn();
   });
   </script>
