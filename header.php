@@ -76,7 +76,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
 <header class="backdrop-blur backdrop-saturate-150 bg-gradient-to-r from-[var(--gd-header-from)] to-[var(--gd-header-to)] bg-opacity-80 shadow-2xl fixed top-0 w-full z-[1200]">
-  <div class="max-w-7xl mx-auto relative flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
+  <div class="max-w-7xl mx-auto relative flex flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 overflow-visible">
     <!-- Logo à gauche -->
     <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex items-center group transition duration-300 ease-in-out flex-shrink-0 hover:opacity-90">
       <img src="/images/geekndragon_logo_blanc.png" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-300 ease-in-out group-hover:scale-105" width="200" height="200">
@@ -102,9 +102,9 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
         </svg>
       </button>
 
-      <!-- Navigation (au centre, revient sur 2 lignes si besoin) -->
+      <!-- Navigation (au centre, reste sur une seule ligne) -->
       <nav class="hidden md:block order-3 md:order-2 basis-full md:basis-auto uppercase tracking-wide mt-2 md:mt-0 flex-1 text-center" aria-label="Navigation principale">
-        <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <ul class="flex flex-nowrap items-center justify-center gap-x-6">
           <?php renderNav($navItems, $active); ?>
         </ul>
       </nav>
