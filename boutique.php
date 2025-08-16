@@ -135,12 +135,13 @@ echo $snipcartInit;
         <!-- Vidéo de présentation -->
         <div class="mt-8 flex justify-center">
           <button type="button"
-                  class="group relative rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  class="group relative rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400 max-w-md"
+                  style="width: 420px;"
                   aria-controls="video-modal"
                   aria-label="Lire la vidéo de Pierre-Louis (Es-Tu Game ?) — L'Économie de D&D 💰 Conseils Jeux de Rôle"
                   data-video-open>
             <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg"
-                 alt="Miniature de la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
+                 alt="Miniature de la vidéo « L'Économie de D&D 💰 Conseils Jeux de Rôle »"
                  class="block w-full h-auto transition-transform duration-200 group-hover:scale-105 group-hover:shadow-lg">
           </button>
         </div>
@@ -394,6 +395,10 @@ echo $snipcartInit;
     };
 
     const openModal = () => {
+      // Redémarrer la vidéo à zéro à chaque ouverture
+      const originalSrc = iframe.src.split('&t=')[0]; // Enlever le timestamp si présent
+      iframe.src = originalSrc;
+      
       modal.classList.remove('hidden');
       openBtn.classList.add('invisible');
       document.addEventListener('keydown', escListener, true);
@@ -405,6 +410,7 @@ echo $snipcartInit;
         try { document.exitFullscreen(); } catch (_) {}
       }
       modal.classList.add('hidden');
+      // Arrêter la vidéo en rechargeant l'iframe
       iframe.src = iframe.src;
       document.removeEventListener('keydown', escListener, true);
       openBtn.classList.remove('invisible');
