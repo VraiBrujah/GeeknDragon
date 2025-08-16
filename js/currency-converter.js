@@ -22,6 +22,7 @@
   }), {});
 
   const multipliers = [1, 10, 100, 1000, 10000];
+  const coins = Object.keys(rates);
 
   /**
    * Render converted values for all currencies.
@@ -34,23 +35,36 @@
       const { currency } = row.dataset;
       const cells = row.querySelectorAll('td');
       multipliers.forEach((multiplier, idx) => {
-        const converted = (baseValue * multiplier) / rates[currency];
+        const converted = baseValue / (rates[currency] * multiplier);
         cells[idx].textContent = converted.toFixed(2);
       });
     });
 
-    // Minimal coin representation
+    // Minimal coin representation using 25 denominations
+    const denominations = multipliers
+      .flatMap((multiplier) => coins.map((coin) => ({
+        coin,
+        multiplier,
+        value: rates[coin] * multiplier,
+      })))
+      .sort((a, b) => b.value - a.value);
+
     let remaining = baseValue;
-    const order = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
-    const parts = [];
-    order.forEach((currency) => {
-      const value = Math.floor(remaining / rates[currency]);
-      if (value > 0) {
-        parts.push(`${value} ${currencyNames[currency]}`);
-        remaining -= value * rates[currency];
+    const counts = {};
+    denominations.forEach(({ coin, multiplier, value }) => {
+      const qty = Math.floor(remaining / value);
+      if (qty > 0) {
+        counts[coin] = (counts[coin] || 0) + qty * multiplier;
+        remaining -= qty * value;
       }
     });
-    best.textContent = parts.length ? parts.join(', ') : '';
+
+    const parts = Object.entries(counts).map(
+      ([coin, qty]) => `${qty} ${currencyNames[coin]}`,
+    );
+    best.textContent = parts.length > 1
+      ? `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`
+      : (parts[0] || '');
   };
 
   const handleChange = () => {
