@@ -400,21 +400,75 @@ function initVideoManager(videoIds) {
     vid.dataset.userPaused = 'false';
     vid.dataset.autoPaused = 'false';
     
-    // Ajouter le style visuel aux vidéos
+    // Créer un wrapper pour la vidéo et son titre (si pas déjà fait)
+    let wrapper = vid.closest('.video-section-wrapper');
+    if (!wrapper) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'video-section-wrapper';
+      wrapper.style.cssText = `
+        background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        border-radius: 16px;
+        padding: 20px;
+        margin: 16px 0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      `;
+      
+      // Structure actuelle : div.relative.group > video + button + p
+      const currentContainer = vid.parentNode; // div.relative.group
+      const grandParent = currentContainer.parentNode;
+      
+      // Insérer le wrapper avant le container actuel
+      grandParent.insertBefore(wrapper, currentContainer);
+      
+      // Déplacer le container dans le wrapper
+      wrapper.appendChild(currentContainer);
+      
+      // Chercher le titre qui suit
+      let titleElement = wrapper.nextElementSibling;
+      while (titleElement) {
+        if (titleElement.tagName === 'P' && titleElement.classList.contains('text-center')) {
+          // Déplacer le titre dans le wrapper
+          wrapper.appendChild(titleElement);
+          titleElement.style.marginTop = '16px';
+          titleElement.style.marginBottom = '0';
+          titleElement.style.paddingTop = '8px';
+          break;
+        }
+        titleElement = titleElement.nextElementSibling;
+      }
+    }
+    
+    // Style pour la vidéo
     vid.style.border = '1px solid rgba(139, 92, 246, 0.3)';
     vid.style.borderRadius = '12px';
     vid.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
     vid.style.transition = 'all 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease';
+    vid.style.width = '100%';
+    vid.style.display = 'block';
     
     const addClass = () => {
       vid.classList.add('scale-105', 'z-10');
       vid.style.borderColor = 'rgba(139, 92, 246, 0.6)';
       vid.style.boxShadow = '0 8px 32px rgba(139, 92, 246, 0.3)';
+      // Effet sur le wrapper aussi
+      const wrapper = vid.closest('.video-section-wrapper');
+      if (wrapper) {
+        wrapper.style.borderColor = 'rgba(139, 92, 246, 0.4)';
+        wrapper.style.boxShadow = '0 12px 40px rgba(139, 92, 246, 0.2)';
+      }
     };
     const removeClass = () => {
       vid.classList.remove('scale-105', 'z-10');
       vid.style.borderColor = 'rgba(139, 92, 246, 0.3)';
       vid.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
+      // Restaurer le wrapper
+      const wrapper = vid.closest('.video-section-wrapper');
+      if (wrapper) {
+        wrapper.style.borderColor = 'rgba(139, 92, 246, 0.2)';
+        wrapper.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+      }
     };
     
     vid.addEventListener('play', () => { 
