@@ -400,21 +400,54 @@ function initVideoManager(videoIds) {
     vid.dataset.userPaused = 'false';
     vid.dataset.autoPaused = 'false';
     
-    // Ajouter le style visuel aux vidéos
+    // Créer un wrapper pour la vidéo et son titre
+    const wrapper = document.createElement('div');
+    wrapper.className = 'video-section-wrapper';
+    wrapper.style.cssText = `
+      background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 16px 0;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    `;
+    
+    // Insérer le wrapper avant la vidéo
+    vid.parentNode.insertBefore(wrapper, vid);
+    wrapper.appendChild(vid);
+    
+    // Chercher le titre (paragraphe suivant)
+    let titleElement = wrapper.nextElementSibling;
+    if (titleElement && titleElement.tagName === 'P') {
+      wrapper.appendChild(titleElement);
+      titleElement.style.marginTop = '12px';
+      titleElement.style.marginBottom = '0';
+    }
+    
+    // Style pour la vidéo
     vid.style.border = '1px solid rgba(139, 92, 246, 0.3)';
     vid.style.borderRadius = '12px';
     vid.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
     vid.style.transition = 'all 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease';
+    vid.style.width = '100%';
+    vid.style.display = 'block';
     
     const addClass = () => {
       vid.classList.add('scale-105', 'z-10');
       vid.style.borderColor = 'rgba(139, 92, 246, 0.6)';
       vid.style.boxShadow = '0 8px 32px rgba(139, 92, 246, 0.3)';
+      // Effet sur le wrapper aussi
+      wrapper.style.borderColor = 'rgba(139, 92, 246, 0.4)';
+      wrapper.style.boxShadow = '0 12px 40px rgba(139, 92, 246, 0.2)';
     };
     const removeClass = () => {
       vid.classList.remove('scale-105', 'z-10');
       vid.style.borderColor = 'rgba(139, 92, 246, 0.3)';
       vid.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
+      // Restaurer le wrapper
+      wrapper.style.borderColor = 'rgba(139, 92, 246, 0.2)';
+      wrapper.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
     };
     
     vid.addEventListener('play', () => { 
