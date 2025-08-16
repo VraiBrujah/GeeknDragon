@@ -181,7 +181,7 @@ echo $snipcartInit;
              tabindex="-1">
           <div class="relative w-full max-w-screen-lg">
             <button type="button"
-                    class="absolute top-4 right-4 text-white text-4xl leading-none focus:outline-none"
+                    class="absolute top-4 right-4 z-10 text-white text-4xl leading-none focus:outline-none"
                     aria-label="Fermer la vidéo"
                     data-video-close>&times;</button>
             <div class="w-full aspect-video">
