@@ -1,21 +1,13 @@
 <?php
 /**  header.php  —  barre de navigation commune
  *  Usage :  <?php include 'header.php'; ?>
+ *  $active (optionnel) = chaîne « produits », « boutique », « actus », « contact »…
  */
+$active = $active ?? '';
 
-function findActiveSlug(array $items, string $path): string {
-  foreach ($items as $href => $item) {
-    if (parse_url($href, PHP_URL_PATH) === $path) {
-      return $item['slug'];
-    }
-    if (!empty($item['children'])) {
-      $slug = findActiveSlug($item['children'], $path);
-      if ($slug !== '') {
-        return $slug;
-      }
-    }
-  }
-  return '';
+function navClass($key, $active) {
+  // Classe "active" sobre, on laisse le style au CSS
+  return $key === $active ? 'is-active' : '';
 }
 
 $navItems = [
@@ -53,31 +45,27 @@ $navItems = [
   ]
 ];
 
-$currentSlug = findActiveSlug($navItems, parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
-
 $snipcartKey = $snipcartKey
   ?? $_ENV['SNIPCART_API_KEY']
   ?? $_SERVER['SNIPCART_API_KEY'];
 
-function renderNav(array $items, string $currentSlug, bool $mobile = false): void {
-  foreach ($items as $href => $item) {
+function renderNav(array $items, string $active, bool $mobile = false): void {
+    foreach ($items as $href => $item) {
     // Le menu utilise déjà Cinzel via le CSS, inutile d'ajouter "txt-court"
-    $isActive = $item['slug'] === $currentSlug;
-    $class = 'nav-link font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ($isActive ? ' is-active' : '');
+    $class = 'nav-link font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
     $link = langUrl($href);
-    $aria = $isActive ? ' aria-current="page"' : '';
     if (isset($item['children']) && !$mobile) {
       echo '<li class="relative">';
-      echo '<button type="button" class="' . $class . ' block px-2 py-1"' . $aria . ' aria-haspopup="true" aria-expanded="false" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</button>';
+      echo '<button type="button" class="' . $class . ' block px-2 py-1" aria-haspopup="true" aria-expanded="false" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</button>';
       echo '<ul class="submenu hidden absolute left-0 top-full flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-1">';
-      renderNav($item['children'], $currentSlug, $mobile);
+      renderNav($item['children'], $active, $mobile);
       echo '</ul></li>';
     } else {
       echo '<li>';
-      echo '<a href="' . $link . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '"' . $aria . '>' . $item['label'] . '</a>';
+      echo '<a href="' . $link . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
       if (isset($item['children']) && $mobile) {
         echo '<ul class="pl-4 flex flex-col space-y-2 mt-2">';
-        renderNav($item['children'], $currentSlug, $mobile);
+        renderNav($item['children'], $active, $mobile);
         echo '</ul>';
       }
       echo '</li>';
@@ -117,7 +105,7 @@ function renderNav(array $items, string $currentSlug, bool $mobile = false): voi
       <!-- Navigation (au centre, revient sur 2 lignes si besoin) -->
       <nav class="hidden md:block order-3 md:order-2 basis-full md:basis-auto uppercase tracking-wide mt-2 md:mt-0 flex-1 text-center" aria-label="Navigation principale">
         <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          <?php renderNav($navItems, $currentSlug); ?>
+          <?php renderNav($navItems, $active); ?>
         </ul>
       </nav>
 
@@ -157,7 +145,7 @@ function renderNav(array $items, string $currentSlug, bool $mobile = false): voi
   <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-200"></div>
   <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
     <ul class="flex flex-col items-center gap-6">
-      <?php renderNav($navItems, $currentSlug, true); ?>
+      <?php renderNav($navItems, $active, true); ?>
     </ul>
 
     <!-- Langues + actions dans le même panneau -->
