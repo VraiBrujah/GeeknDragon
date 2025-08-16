@@ -30,11 +30,11 @@ unset($_SESSION['errors'], $_SESSION['old']);
   echo $snipcartInit;
   ?>
 
-  <main id="main" class="pt-32 flex items-center justify-center min-h-screen px-4" style="background: var(--site-bg);">
+  <main id="main" class="pt-32 flex items-center justify-center min-h-screen px-4">
 
-    <div class="premium-card rounded-3xl p-10 md:p-14 w-full max-w-2xl animate-scale-in">
-      <h1 class="premium-title text-4xl font-bold text-center mb-6" data-i18n="contact.title">Demande de devis</h1>
-        <p class="premium-subtitle text-center mb-8 text-lg" data-i18n="contact.subtitle">Pour recevoir une offre personnalisée, remplis ce formulaire magique.</p>
+    <div class="parchment rounded-3xl p-10 md:p-14 w-full max-w-2xl text-gray-900">
+      <h1 class="text-4xl font-bold text-center mb-6" data-i18n="contact.title">Demande de devis</h1>
+        <p class="text-center mb-8 text-lg txt-court" data-i18n="contact.subtitle">Pour recevoir une offre personnalisée, remplis ce formulaire magique.</p>
 
       <form action="contact-handler.php" method="POST" class="space-y-6">
 
@@ -49,28 +49,28 @@ unset($_SESSION['errors'], $_SESSION['old']);
         <?php endif; ?>
 
         <div>
-          <label for="name" class="font-semibold" style="color: var(--site-text-accent);" data-i18n="contact.form.name">Nom complet</label>
+          <label for="name" class="text-[#4b3e2c] font-semibold" data-i18n="contact.form.name">Nom complet</label>
           <input id="name" name="Nom" type="text" required value="<?= htmlspecialchars($old['Nom'] ?? '') ?>" class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
         </div>
 
         <div>
-          <label for="email" class="font-semibold" style="color: var(--site-text-accent);" data-i18n="contact.form.email">Adresse e-mail</label>
+          <label for="email" class="text-[#4b3e2c] font-semibold" data-i18n="contact.form.email">Adresse e-mail</label>
           <input id="email" name="Email" type="email" required value="<?= htmlspecialchars($old['Email'] ?? '') ?>" class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
         </div>
 
         <div>
-          <label for="phone" class="font-semibold" style="color: var(--site-text-accent);" data-i18n="contact.form.phone">Téléphone (optionnel)</label>
+          <label for="phone" class="text-[#4b3e2c] font-semibold" data-i18n="contact.form.phone">Téléphone (optionnel)</label>
           <input id="phone" name="Téléphone" type="tel" value="<?= htmlspecialchars($old['Téléphone'] ?? '') ?>" class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
         </div>
 
         <div>
-          <label for="message" class="font-semibold" style="color: var(--site-text-accent);" data-i18n="contact.form.message">Détail de la demande</label>
+          <label for="message" class="text-[#4b3e2c] font-semibold" data-i18n="contact.form.message">Détail de la demande</label>
           <textarea id="message" name="Message" rows="5" required class="w-full mt-1 rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600"><?= htmlspecialchars($old['Message'] ?? '') ?></textarea>
         </div>
 
         <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>" />
 
-          <button type="submit" class="btn-premium w-full font-semibold py-3" data-i18n="contact.form.submit">
+          <button type="submit" class="btn w-full bg-indigo-700 hover:bg-indigo-600 text-white font-semibold py-3 rounded-full transition" data-i18n="contact.form.submit">
             Envoyer ma demande
           </button>
       </form>

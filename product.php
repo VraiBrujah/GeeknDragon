@@ -58,14 +58,14 @@ include 'header.php';
 echo $snipcartInit;
 ?>
 <main id="main" class="py-10 pt-[var(--header-height)] main-product">
-  <section class="premium-section max-w-3xl w-full mx-auto px-6">
+  <section class="max-w-3xl w-full mx-auto px-6">
     <div class="flex justify-center mb-6">
-      <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn-premium" style="background: transparent; border: 2px solid var(--site-primary);">&larr;
+      <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline">&larr;
         <span data-i18n="product.back">Retour à la boutique</span>
       </a>
     </div>
 
-    <div class="premium-card p-6 flex flex-col items-center product-panel animate-scale-in">
+    <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center product-panel">
       <?php if (!empty($images)) : ?>
         <div class="swiper mb-6 w-full">
           <div class="swiper-wrapper">
@@ -92,7 +92,7 @@ echo $snipcartInit;
         </div>
       <?php endif; ?>
 
-      <h1 class="premium-title text-3xl font-bold mb-4 text-center"
+      <h1 class="text-3xl font-bold mb-4 text-center"
           data-name-fr="<?= $displayName ?>"
           data-name-en="<?= $displayNameEn ?>"><?= ($lang === 'en' ? $displayNameEn : $displayName) ?></h1>
 
@@ -118,15 +118,15 @@ echo $snipcartInit;
               </select>
             <?php endif; ?>
 -->
-            <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>" style="background: var(--site-surface); border: 1px solid var(--site-border); border-radius: var(--site-radius-md); padding: var(--site-space-sm);">
-              <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>" style="background: var(--site-gradient-primary); border-radius: var(--site-radius-sm);">−</button>
-              <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>" style="background: rgba(255, 255, 255, 0.05); padding: var(--site-space-sm); border-radius: var(--site-radius-sm);">1</span>
-              <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>" style="background: var(--site-gradient-primary); border-radius: var(--site-radius-sm);">+</button>
+            <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
+              <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+              <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
+              <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
             </div>
           </div>
         </div>
 
-        <button class="snipcart-add-item btn-premium"
+        <button class="snipcart-add-item btn btn-shop"
             data-item-id="<?= htmlspecialchars($id) ?>"
             data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
             data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
@@ -143,7 +143,7 @@ echo $snipcartInit;
           <span data-i18n="product.add">Ajouter</span>
         </button>
       <?php else : ?>
-        <span class="btn-premium opacity-60 cursor-not-allowed" disabled data-i18n="product.outOfStock">Rupture de stock</span>
+        <span class="btn btn-shop opacity-60 cursor-not-allowed" disabled data-i18n="product.outOfStock">Rupture de stock</span>
       <?php endif; ?>
 
       <p class="mt-4 text-center txt-court">
