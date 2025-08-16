@@ -386,25 +386,41 @@ function fullyVisible(el) {
          && r.bottom <= (window.innerHeight || document.documentElement.clientHeight)
          && r.right <= (window.innerWidth || document.documentElement.clientWidth);
 }
-document.addEventListener('DOMContentLoaded', () => {
-  const videos = ['video1', 'video2', 'video3']
-    .map((id) => document.getElementById(id))
-    .filter(Boolean);
+// Fonction universelle de gestion des vidéos
+function initVideoManager(videoIds) {
+  const videos = videoIds.map((id) => document.getElementById(id)).filter(Boolean);
+  if (videos.length === 0) return;
+  
   let current = 0;
   let audioOK = false;
   let playSeq;
+  const isSequenceMode = videos.length > 1;
 
   videos.forEach((vid) => {
     vid.dataset.userPaused = 'false';
     vid.dataset.autoPaused = 'false';
+    
     const addClass = () => vid.classList.add('scale-105', 'z-10');
     const removeClass = () => vid.classList.remove('scale-105', 'z-10');
-    vid.addEventListener('play', () => { addClass(); vid.dataset.userPaused = 'false'; vid.dataset.autoPaused = 'false'; });
+    
+    vid.addEventListener('play', () => { 
+      addClass(); 
+      vid.dataset.userPaused = 'false'; 
+      vid.dataset.autoPaused = 'false'; 
+    });
     vid.addEventListener('playing', addClass);
-    vid.addEventListener('pause', () => { removeClass(); if (vid.dataset.autopausing === 'true') { vid.dataset.autopausing = 'false'; } else { vid.dataset.userPaused = 'true'; } });
+    vid.addEventListener('pause', () => { 
+      removeClass(); 
+      if (vid.dataset.autopausing === 'true') { 
+        vid.dataset.autopausing = 'false'; 
+      } else { 
+        vid.dataset.userPaused = 'true'; 
+      } 
+    });
     vid.addEventListener('ended', removeClass);
   });
 
+  // Observer pour la visibilité
   const visibilityObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const vid = entry.target;
@@ -421,6 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.2 });
+  
   videos.forEach((vid) => visibilityObserver.observe(vid));
 
   function updateBtn(vid) {
@@ -434,38 +451,103 @@ document.addEventListener('DOMContentLoaded', () => {
     const v = videos[current];
     if (v && !v.paused) { v.muted = false; updateBtn(v); }
   };
-  ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => window.addEventListener(evt, enableAudio, { once: true, passive: true }));
+
+  ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => {
+    window.addEventListener(evt, enableAudio, { once: true, passive: true });
+  });
+
+  // Gestion des boutons mute
   document.querySelectorAll('.mute-btn').forEach((btn) => {
     const vid = videos.find((v) => v.id === btn.dataset.video);
     if (!vid) return;
-    btn.addEventListener('click', (e) => { e.stopPropagation(); vid.muted = !vid.muted; updateBtn(vid); });
+    btn.addEventListener('click', (e) => { 
+      e.stopPropagation(); 
+      vid.muted = !vid.muted; 
+      updateBtn(vid); 
+    });
   });
 
   function start(vid) {
     vid.muted = !audioOK;
     vid.currentTime = 0;
-    vid.play().then(() => { if (audioOK) vid.muted = false; updateBtn(vid); })
-      .catch(() => { vid.muted = true; vid.play(); updateBtn(vid); });
-    vid.onended = () => { current += 1; if (current < videos.length) playSeq(current); };
+    vid.play().then(() => { 
+      if (audioOK) vid.muted = false; 
+      updateBtn(vid); 
+    }).catch(() => { 
+      vid.muted = true; 
+      vid.play(); 
+      updateBtn(vid); 
+    });
+    
+    // Mode boucle pour vidéo unique, séquence pour multiple
+    if (isSequenceMode) {
+      vid.onended = () => { 
+        current += 1; 
+        if (current < videos.length) playSeq(current); 
+      };
+    } else {
+      vid.loop = true;
+      vid.onended = null;
+    }
   }
 
-  playSeq = (idx) => {
-    const vid = videos[idx];
-    if (!vid) return;
-    videos.forEach((v, i) => { if (i !== idx) { v.pause(); v.currentTime = 0; } });
-    const io = new IntersectionObserver((ent) => {
-      if (ent[0].isIntersecting && fullyVisible(vid)) { io.disconnect(); start(vid); }
-    }, { threshold: 1 });
-    io.observe(vid);
-  };
+  if (isSequenceMode) {
+    // Mode séquence : jouer les vidéos l'une après l'autre
+    playSeq = (idx) => {
+      const vid = videos[idx];
+      if (!vid) return;
+      videos.forEach((v, i) => { if (i !== idx) { v.pause(); v.currentTime = 0; } });
+      const io = new IntersectionObserver((ent) => {
+        if (ent[0].isIntersecting && fullyVisible(vid)) { 
+          io.disconnect(); 
+          start(vid); 
+        }
+      }, { threshold: 1 });
+      io.observe(vid);
+    };
 
-  videos.forEach((vid, idx) => {
-    vid.addEventListener('click', () => {
-      if (vid.paused) { if (!audioOK) enableAudio(); current = idx; start(vid); } else { vid.pause(); }
+    videos.forEach((vid, idx) => {
+      vid.addEventListener('click', () => {
+        if (vid.paused) { 
+          if (!audioOK) enableAudio(); 
+          current = idx; 
+          start(vid); 
+        } else { 
+          vid.pause(); 
+        }
+      });
     });
-  });
 
-  if (videos.length) playSeq(current);
+    if (videos.length) playSeq(current);
+  } else {
+    // Mode boucle : démarrer la vidéo unique quand visible
+    const vid = videos[0];
+    const startObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && fullyVisible(vid)) {
+        startObserver.disconnect();
+        start(vid);
+      }
+    }, { threshold: 0.5 });
+    
+    startObserver.observe(vid);
+    
+    vid.addEventListener('click', () => {
+      if (vid.paused) { 
+        if (!audioOK) enableAudio(); 
+        start(vid); 
+      } else { 
+        vid.pause(); 
+      }
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Vidéos de es-tu-game.php (séquence)
+  initVideoManager(['video1', 'video2', 'video3']);
+  
+  // Vidéo de boutique.php (boucle)
+  initVideoManager(['video4']);
 });
 
 /* ========================================================================

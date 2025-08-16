@@ -135,7 +135,7 @@ echo $snipcartInit;
         <!-- Vidéo de présentation -->
         <div class="mt-8 flex justify-center">
           <div class="relative group rounded-lg overflow-hidden" style="width: 420px;">
-            <video id="es-tu-game-video" 
+            <video id="video4" 
                    src="videos/es-tu-game-demo.mp4" 
                    class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
                    playsinline 
@@ -144,7 +144,7 @@ echo $snipcartInit;
             </video>
             <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                            bg-black/60 text-white text-sm px-2 py-1 rounded"
-                    data-video="es-tu-game-video">🔊</button>
+                    data-video="video4">🔊</button>
             <p class="text-center text-sm mt-2 text-gray-300 txt-court">
               L'Économie de D&D 💰 Conseils Jeux de Rôle
             </p>
@@ -375,122 +375,5 @@ echo $snipcartInit;
   <script src="/js/hero-videos.js"></script>
   <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
   <script src="/js/currency-converter.js"></script>
-  <script>
-  // Gestion de la vidéo Es-Tu Game exactement comme dans es-tu-game.php
-  document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('es-tu-game-video');
-    if (!video) return;
-    
-    let audioOK = true;
-    
-    // Configuration initiale
-    video.dataset.userPaused = 'false';
-    video.dataset.autoPaused = 'false';
-    video.loop = true;
-    
-    // Gestion des classes au survol et lecture
-    const addClass = () => video.classList.add('scale-105', 'z-10');
-    const removeClass = () => video.classList.remove('scale-105', 'z-10');
-    
-    video.addEventListener('play', () => { 
-      addClass(); 
-      video.dataset.userPaused = 'false'; 
-      video.dataset.autoPaused = 'false'; 
-    });
-    video.addEventListener('playing', addClass);
-    video.addEventListener('pause', () => { 
-      removeClass(); 
-      if (video.dataset.autopausing === 'true') { 
-        video.dataset.autopausing = 'false'; 
-      } else { 
-        video.dataset.userPaused = 'true'; 
-      } 
-    });
-    video.addEventListener('ended', removeClass);
-    
-    // Observer pour la visibilité
-    const visibilityObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          if (!video.paused) {
-            video.dataset.autopausing = 'true';
-            video.dataset.autoPaused = 'true';
-            video.pause();
-            video.classList.remove('scale-105', 'z-10');
-          }
-        } else if (video.dataset.autoPaused === 'true' && video.dataset.userPaused !== 'true') {
-          video.play();
-          video.dataset.autoPaused = 'false';
-        }
-      });
-    }, { threshold: 0.2 });
-    
-    visibilityObserver.observe(video);
-    
-    // Mise à jour du bouton mute
-    function updateBtn() {
-      const b = document.querySelector('.mute-btn[data-video="es-tu-game-video"]');
-      if (b) b.innerHTML = video.muted ? '🔇' : '🔊';
-    }
-    
-    // Activation de l'audio au premier geste utilisateur
-    const enableAudio = () => {
-      if (audioOK) return;
-      audioOK = true;
-      if (!video.paused) { 
-        video.muted = false; 
-        updateBtn(); 
-      }
-    };
-    
-    ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => {
-      window.addEventListener(evt, enableAudio, { once: true, passive: true });
-    });
-    
-    // Bouton mute/unmute
-    const muteBtn = document.querySelector('.mute-btn[data-video="es-tu-game-video"]');
-    if (muteBtn) {
-      muteBtn.addEventListener('click', (e) => { 
-        e.stopPropagation(); 
-        video.muted = !video.muted; 
-        updateBtn(); 
-      });
-    }
-    
-    // Fonction de démarrage
-    function start() {
-      video.muted = !audioOK;
-      video.currentTime = 0;
-      video.play().then(() => { 
-        if (audioOK) video.muted = false; 
-        updateBtn(); 
-      }).catch(() => { 
-        video.muted = true; 
-        video.play(); 
-        updateBtn(); 
-      });
-    }
-    
-    // Clic sur la vidéo pour play/pause
-    video.addEventListener('click', () => {
-      if (video.paused) { 
-        if (!audioOK) enableAudio(); 
-        start(); 
-      } else { 
-        video.pause(); 
-      }
-    });
-    
-    // Démarrage initial quand visible
-    const startObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        startObserver.disconnect();
-        start();
-      }
-    }, { threshold: 0.5 });
-    
-    startObserver.observe(video);
-  });
-  </script>
 </body>
 </html>
