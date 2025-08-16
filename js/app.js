@@ -386,6 +386,11 @@ function fullyVisible(el) {
          && r.bottom <= (window.innerHeight || document.documentElement.clientHeight)
          && r.right <= (window.innerWidth || document.documentElement.clientWidth);
 }
+// Helper pour traductions imbriquées
+function getNestedTranslation(obj, path) {
+  return path.split('.').reduce((current, key) => current && current[key], obj);
+}
+
 // Fonction universelle de gestion des vidéos
 function initVideoManager(videoIds) {
   const videos = videoIds.map((id) => document.getElementById(id)).filter(Boolean);
@@ -431,9 +436,19 @@ function initVideoManager(videoIds) {
         if (titleElement.tagName === 'P' && titleElement.classList.contains('text-center')) {
           // Déplacer le titre dans le wrapper
           wrapper.appendChild(titleElement);
-          titleElement.style.marginTop = '16px';
+          titleElement.style.marginTop = '24px';
           titleElement.style.marginBottom = '0';
-          titleElement.style.paddingTop = '8px';
+          titleElement.style.paddingTop = '12px';
+          titleElement.style.borderTop = '1px solid rgba(139, 92, 246, 0.1)';
+          
+          // Traduction automatique si data-i18n existe
+          if (titleElement.hasAttribute('data-i18n') && window.i18n) {
+            const i18nKey = titleElement.getAttribute('data-i18n');
+            const translatedText = getNestedTranslation(window.i18n, i18nKey);
+            if (translatedText) {
+              titleElement.textContent = translatedText;
+            }
+          }
           break;
         }
         titleElement = titleElement.nextElementSibling;
