@@ -179,13 +179,13 @@ echo $snipcartInit;
              role="dialog" aria-modal="true"
              aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
              tabindex="-1">
-          <div class="relative w-full max-w-screen-lg">
+          <div class="relative w-[90vw] max-w-4xl">
             <button type="button"
                     class="absolute top-4 right-4 z-10 text-white text-4xl leading-none focus:outline-none"
                     aria-label="Fermer la vidéo"
                     data-video-close>&times;</button>
-            <div class="w-full aspect-video">
-              <iframe class="w-full h-full" src="https://www.youtube.com/embed/y96eAFtC4xE?start=624"
+            <div class="w-full aspect-video max-h-[90vh]">
+              <iframe class="w-full h-full" src="https://www.youtube.com/embed/y96eAFtC4xE?start=624&rel=0&modestbranding=1"
                       title="L’Économie de D&D 💰 Conseils Jeux de Rôle" allowfullscreen tabindex="-1"></iframe>
             </div>
           </div>
@@ -414,9 +414,17 @@ echo $snipcartInit;
     const closeBtn = modal.querySelector('[data-video-close]');
     const iframe = modal.querySelector('iframe');
 
+    const escListener = (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        e.preventDefault();
+        closeModal();
+      }
+    };
+
     const openModal = () => {
       modal.classList.remove('hidden');
       openBtn.classList.add('invisible');
+      document.addEventListener('keydown', escListener, true);
       modal.focus();
     };
 
@@ -426,6 +434,7 @@ echo $snipcartInit;
       }
       modal.classList.add('hidden');
       iframe.src = iframe.src;
+      document.removeEventListener('keydown', escListener, true);
       openBtn.classList.remove('invisible');
       openBtn.focus();
     };
@@ -433,9 +442,6 @@ echo $snipcartInit;
     openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
-    }, true);
     document.addEventListener('fullscreenchange', () => {
       if (!document.fullscreenElement && !modal.classList.contains('hidden')) closeModal();
     });
