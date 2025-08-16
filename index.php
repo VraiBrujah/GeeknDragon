@@ -24,35 +24,35 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
   
 
     <!-- ===== HERO ===== -->
-    <section class="min-h-screen flex items-center justify-center text-center relative text-white">
+    <section class="hero-premium min-h-screen flex items-center justify-center text-center relative text-white">
       <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/mage.mp4" data-videos='["videos/cascade_HD.mp4","videos/fontaine11.mp4","videos/Carte1.mp4","videos/fontaine4.mp4","videos/fontaine3.mp4","videos/fontaine2.mp4","videos/fontaine1.mp4"]'></div>
       <div class="absolute inset-0 bg-black/60"></div>
-      <div class="relative z-10 max-w-3xl p-6 hero-text">
-        <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
-          <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
-          <p class="text-xl mb-8 txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
-<a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+      <div class="hero-premium-content relative z-10 max-w-3xl p-6">
+        <h1 class="hero-premium-title text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
+          <p class="premium-subtitle text-xl mb-2" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
+          <p class="premium-subtitle text-xl mb-8" data-i18n="hero.subtitle2">Conçues au Québec</p>
+<a href="<?= langUrl('boutique.php') ?>" class="btn-premium" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
           </a>
       </div>
     </section>
 
     <!-- ===== PRODUITS ===== -->
-    <section id="produits" class="py-24 bg-gray-900/80 scroll-mt-24">
+    <section id="produits" class="premium-section py-24 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
-        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="home.mustHave.heading">Nos Incontournables</h3>
-        <div class="grid md:grid-cols-3 gap-10">
-          <a href="<?= langUrl('boutique.php#cartes') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
+        <h3 class="premium-title text-4xl font-bold text-center mb-12" data-i18n="home.mustHave.heading">Nos Incontournables</h3>
+        <div class="premium-features-grid">
+          <a href="<?= langUrl('boutique.php#cartes') ?>" class="premium-card animate-scale-in block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d’équipement</h4>
             <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
               <img src="images/cartes_equipement.png" alt="560 cartes d’équipement illustrées" class="rounded mb-4" loading="lazy">
           </a>
-          <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
+          <a href="<?= langUrl('boutique.php#pieces') ?>" class="premium-card animate-scale-in block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
             <p class="text-center" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
               <img src="images/Piece/pro/lot10Piece2-300.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
           </a>
-          <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
+          <a href="<?= langUrl('boutique.php#triptyques') ?>" class="premium-card animate-scale-in block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>
             <p class="text-center" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
               <img src="images/triptyque_fiche.png" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
@@ -63,9 +63,9 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
 
 <!-- ===== BOUTIQUE ===== -->
-    <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-24">
+    <section id="boutique" class="premium-section py-16 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6 text-center">
-        <h3 class="text-4xl font-bold mb-12" data-i18n="nav.shop">Boutique</h3>
+        <h3 class="premium-title text-4xl font-bold mb-12" data-i18n="nav.shop">Boutique</h3>
           <p class="mb-8 txt-court"><span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
             <span class="payment-icons">
               <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
@@ -73,10 +73,10 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
           </p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
-          <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+          <a href="<?= langUrl('boutique.php') ?>" class="btn-premium" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
           </a>
-          <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">
+          <a href="<?= langUrl('index.php#contact') ?>" class="btn-premium" style="background: transparent; border: 2px solid var(--site-primary);" data-i18n="contact.requestQuote">
             Demander un devis
           </a>
         </div>
@@ -87,13 +87,13 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
     
     <!-- ===== ACTUALITÉS ===== -->
-    <section id="actus" class="py-16 bg-gray-900/80 scroll-mt-24">
+    <section id="actus" class="premium-section py-16 scroll-mt-24">
       <div class="max-w-5xl mx-auto px-6">
     
-        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="news.flim2025.heading">Actualité – FLIM 2025</h3>
+        <h3 class="premium-title text-4xl font-bold text-center mb-12" data-i18n="news.flim2025.heading">Actualité – FLIM 2025</h3>
     
         <!-- Résumé d'article - dupliquer ce bloc pour chaque actualité -->
-        <article class="bg-gray-800 p-6 rounded-xl shadow-lg mb-12">
+        <article class="premium-card p-6 mb-12 animate-fade-in-up">
             <img src="/images/es_tu_game_demo.png" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces" loading="lazy">
           <h4 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
           <p class="text-lg text-gray-200 mb-4" data-i18n="news.flim2025.summary">
