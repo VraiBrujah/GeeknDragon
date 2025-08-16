@@ -69,7 +69,6 @@
     const tr = window.i18n?.shop?.converter || {};
     const andText = tr.and || 'and';
     const bestLabel = tr.bestLabel || '';
-    const remainderText = tr.remainder || 'Remainder';
     const totalPiecesLabel = tr.totalPieces || 'Total pieces:';
 
     const baseValue = Array.from(sources).reduce((sum, input) => {
@@ -89,7 +88,7 @@
     const minimal = minimalParts(baseValue, currencyNames, andText);
     const totalPieces = minimal.items.reduce((sum, { qty }) => sum + qty, 0);
     best.innerHTML = minimal.text
-      ? `${bestLabel} ${minimal.text}<br>${totalPiecesLabel} ${nf.format(totalPieces)}`
+      ? `${bestLabel}<br>${minimal.text}<br>${totalPiecesLabel} ${nf.format(totalPieces)}`
       : '';
 
     equivBody.innerHTML = '';
@@ -113,24 +112,28 @@
       });
       if (!parts.length) return;
       const summaryParts = parts.map((p) => p.text);
-      const summary = summaryParts.length > 1
-        ? `${summaryParts.slice(0, -1).join(', ')} ${andText} ${summaryParts[summaryParts.length - 1]}`
-        : summaryParts[0];
+      const summary = summaryParts.join('<br>');
       const remainder = baseValue % base;
-      let remainderPhrase = '';
       let remainderItems = [];
       if (remainder > 0) {
         const rem = minimalParts(remainder, currencyNames, andText);
-        remainderPhrase = rem.text ? `${remainderText}: ${rem.text}` : '';
         remainderItems = rem.items;
       }
+      const remainderPhrase = remainderItems
+        .map(({ coin: rCoin, multiplier, qty }) => {
+          const label = currencyNames[rCoin].replace(/^pièce/, qty > 1 ? 'pièces' : 'pièce');
+          return multiplier === 1
+            ? `${nf.format(qty)} ${label}`
+            : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
+        })
+        .join('<br>');
       const totalRowPieces = parts.reduce((sum, { qty }) => sum + qty, 0)
         + remainderItems.reduce((sum, { qty }) => sum + qty, 0);
       const row = document.createElement('tr');
       const coinTitle = currencyNames[coin]
         .replace(/^pièces?\s+(?:de|d['’])\s*/i, '')
         .replace(/^./, (ch) => ch.toUpperCase());
-      row.innerHTML = `<th class="text-left">${coinTitle}</th><td>${summary}</td><td>${remainderPhrase}</td><td>${nf.format(totalRowPieces)}</td>`;
+      row.innerHTML = `<th>${coinTitle}</th><td>${summary}</td><td>${remainderPhrase}</td><td>${nf.format(totalRowPieces)}</td>`;
       equivBody.appendChild(row);
       hasEquiv = true;
     });
