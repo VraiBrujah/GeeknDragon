@@ -376,24 +376,56 @@ echo $snipcartInit;
   <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
   <script src="/js/currency-converter.js"></script>
   <script>
-  // Gestion de la vidéo Es-Tu Game comme dans es-tu-game.php
+  // Gestion de la vidéo Es-Tu Game exactement comme dans es-tu-game.php
   document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById('es-tu-game-video');
     if (!video) return;
     
+    let audioOK = false;
+    
     // Configuration initiale
     video.dataset.userPaused = 'false';
     video.dataset.autoPaused = 'false';
-    video.loop = true; // Boucle en continu
-    let audioOK = true; // Audio activé par défaut
+    video.loop = true;
     
-    // Gestion du hover
+    // Gestion des classes au survol et lecture
     const addClass = () => video.classList.add('scale-105', 'z-10');
     const removeClass = () => video.classList.remove('scale-105', 'z-10');
-    video.addEventListener('mouseenter', addClass);
-    video.addEventListener('mouseleave', removeClass);
-    video.addEventListener('touchstart', addClass, { passive: true });
-    video.addEventListener('touchend', removeClass, { passive: true });
+    
+    video.addEventListener('play', () => { 
+      addClass(); 
+      video.dataset.userPaused = 'false'; 
+      video.dataset.autoPaused = 'false'; 
+    });
+    video.addEventListener('playing', addClass);
+    video.addEventListener('pause', () => { 
+      removeClass(); 
+      if (video.dataset.autopausing === 'true') { 
+        video.dataset.autopausing = 'false'; 
+      } else { 
+        video.dataset.userPaused = 'true'; 
+      } 
+    });
+    video.addEventListener('ended', removeClass);
+    
+    // Observer pour la visibilité
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          if (!video.paused) {
+            video.dataset.autopausing = 'true';
+            video.dataset.autoPaused = 'true';
+            video.pause();
+            video.classList.remove('scale-105', 'z-10');
+          }
+        } else if (video.dataset.autoPaused === 'true' && video.dataset.userPaused !== 'true') {
+          video.play();
+          video.dataset.autoPaused = 'false';
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    visibilityObserver.observe(video);
     
     // Mise à jour du bouton mute
     function updateBtn() {
@@ -401,13 +433,13 @@ echo $snipcartInit;
       if (b) b.innerHTML = video.muted ? '🔇' : '🔊';
     }
     
-    // Activation de l'audio au premier clic
+    // Activation de l'audio au premier geste utilisateur
     const enableAudio = () => {
       if (audioOK) return;
       audioOK = true;
-      if (!video.paused) {
-        video.muted = false;
-        updateBtn();
+      if (!video.paused) { 
+        video.muted = false; 
+        updateBtn(); 
       }
     };
     
@@ -418,58 +450,46 @@ echo $snipcartInit;
     // Bouton mute/unmute
     const muteBtn = document.querySelector('.mute-btn[data-video="es-tu-game-video"]');
     if (muteBtn) {
-      muteBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        video.muted = !video.muted;
-        updateBtn();
+      muteBtn.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        video.muted = !video.muted; 
+        updateBtn(); 
       });
     }
     
-    // Gestion de la visibilité (pause quand pas visible)
-    const visibilityObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (video.dataset.autoPaused === 'true' && video.dataset.userPaused === 'false') {
-            video.dataset.autoPaused = 'false';
-            video.play().catch(() => {});
-          }
-        } else {
-          if (!video.paused && video.dataset.userPaused === 'false') {
-            video.dataset.autoPaused = 'true';
-            video.pause();
-          }
-        }
+    // Fonction de démarrage
+    function start() {
+      video.muted = !audioOK;
+      video.currentTime = 0;
+      video.play().then(() => { 
+        if (audioOK) video.muted = false; 
+        updateBtn(); 
+      }).catch(() => { 
+        video.muted = true; 
+        video.play(); 
+        updateBtn(); 
       });
-    }, { threshold: 0.2 });
+    }
     
-    visibilityObserver.observe(video);
-    
-    // Gestion du clic sur la vidéo (play/pause)
+    // Clic sur la vidéo pour play/pause
     video.addEventListener('click', () => {
-      if (video.paused) {
-        video.dataset.userPaused = 'false';
-        video.play().then(() => {
-          if (audioOK) video.muted = false;
-          updateBtn();
-        }).catch(() => {
-          video.muted = true;
-          video.play();
-          updateBtn();
-        });
-      } else {
-        video.dataset.userPaused = 'true';
-        video.pause();
+      if (video.paused) { 
+        if (!audioOK) enableAudio(); 
+        start(); 
+      } else { 
+        video.pause(); 
       }
     });
     
-    // Démarrage initial
-    video.muted = false; // Commence avec le son activé
-    video.play().catch(() => {
-      // Si l'autoplay avec son échoue, essayer en muet
-      video.muted = true;
-      video.play().catch(() => {});
-    });
-    updateBtn();
+    // Démarrage initial quand visible
+    const startObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startObserver.disconnect();
+        start();
+      }
+    }, { threshold: 0.5 });
+    
+    startObserver.observe(video);
   });
   </script>
 </body>
