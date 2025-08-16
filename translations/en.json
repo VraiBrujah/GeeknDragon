@@ -119,7 +119,8 @@
       "equivTitle": "Total equivalents per metal",
       "bestLabel": "Minimal coins:",
       "remainder": "Remainder",
-      "and": "and"
+      "and": "and",
+      "totalPieces": "Total coins"
     },
     "chest": {
       "title": "Custom chests",
