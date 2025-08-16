@@ -706,6 +706,18 @@
   color: var(--boutique-text);
 }
 
+#currency-best {
+  background: var(--boutique-gradient-card);
+}
+
+#currency-best .total-pieces {
+  display: inline-block;
+  background: var(--boutique-surface);
+  padding: var(--boutique-space-xs) var(--boutique-space-sm);
+  border-radius: var(--boutique-radius-sm);
+  margin-top: var(--boutique-space-sm);
+}
+
 #currency-converter table,
 #currency-equivalences table,
 #currency-best table {
