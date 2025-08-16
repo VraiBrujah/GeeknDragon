@@ -333,19 +333,13 @@ echo $snipcartInit;
       <h2 class="shop-section-title" data-i18n="shop.collective.title">Investissez ensemble, partagez l'aventure</h2>
 
       <div class="flex flex-col items-center gap-12">
-        <div class="max-w-xl mx-auto">
-          <div class="product-card product-card-wide no-hover">
-            <div class="product-media-container">
-              <img src="images/carte_propriete.png" alt="Carte de propriété à remplir" class="product-media no-crop" loading="lazy">
-            </div>
-            <div class="product-content text-center">
-              <h3 class="product-title" data-i18n="shop.collective.cardTitle">Carte de propriété</h3>
-              <p class="product-description" data-i18n="shop.collective.description3">Complétez la carte de propriété en indiquant votre nom et le nombre de pièces achetées.</p>
-            </div>
-          </div>
-        </div>
-
         <div class="features-grid">
+          <div class="feature-card">
+            <span class="feature-icon">📋</span>
+            <h4 class="feature-title">Carte de propriété</h4>
+            <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
+          </div>
+
           <div class="feature-card">
             <span class="feature-icon">💰</span>
             <h4 class="feature-title">Investissement partagé</h4>
@@ -356,12 +350,6 @@ echo $snipcartInit;
             <span class="feature-icon">⚖️</span>
             <h4 class="feature-title">Rapport qualité-prix</h4>
             <p class="feature-description" data-i18n="shop.collective.description2">Contrairement aux figurines à 300$ utilisées une fois, nos pièces servent à chaque session pour des années de campagne.</p>
-          </div>
-
-          <div class="feature-card">
-            <span class="feature-icon">📋</span>
-            <h4 class="feature-title">Carte de propriété</h4>
-            <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
           </div>
 
           <div class="feature-card">
