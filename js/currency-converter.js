@@ -14,17 +14,16 @@
 
   if (!sources.length || !results || !best) return;
 
-  // Retrieve translated currency names from the results table
-  const currencyNames = Array.from(results.querySelectorAll('tbody tr')).reduce(
+  const multipliers = [1, 10, 100, 1000, 10000];
+  const coins = Object.keys(rates);
+
+  const getCurrencyNames = () => Array.from(results.querySelectorAll('tbody tr')).reduce(
     (acc, row) => ({
       ...acc,
       [row.dataset.currency]: row.querySelector('th').textContent,
     }),
     {},
   );
-
-  const multipliers = [1, 10, 100, 1000, 10000];
-  const coins = Object.keys(rates);
 
   const denominations = multipliers
     .flatMap((multiplier) => coins.map((coin) => ({
@@ -38,6 +37,11 @@
    * Render converted values for all currencies.
    */
   const render = () => {
+    const currencyNames = getCurrencyNames();
+    const tr = window.i18n?.shop?.converter || {};
+    const andText = tr.and || 'and';
+    const bestLabel = tr.bestLabel || '';
+
     const baseValue = Array.from(sources).reduce((sum, input) => {
       const { currency } = input.dataset;
       const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
@@ -65,9 +69,10 @@
     const parts = Object.entries(counts).map(
       ([coin, qty]) => `${qty} ${currencyNames[coin]}`,
     );
-    best.textContent = parts.length > 1
-      ? `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`
+    const phrase = parts.length > 1
+      ? `${parts.slice(0, -1).join(', ')} ${andText} ${parts[parts.length - 1]}`
       : (parts[0] || '');
+    best.textContent = phrase ? `${bestLabel} ${phrase}` : '';
   };
 
   sources.forEach((inputEl) => {
