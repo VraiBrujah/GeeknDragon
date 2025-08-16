@@ -59,7 +59,8 @@
     @media(min-width:900px){ .results-grid{ grid-template-columns:1fr; } }
 
     /* Tableau dynamique */
-    .table{ width:100%; border-collapse:collapse; }
+    .table-wrap{ overflow-x:auto; }
+    .table{ width:100%; border-collapse:collapse; min-width:600px; }
     .table th,.table td{ padding:.6rem .75rem; border-bottom:1px solid var(--boutique-border); }
     .table th{ color:var(--boutique-text-accent); text-align:center; }
     .table td{ text-align:center; }

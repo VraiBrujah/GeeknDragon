@@ -704,6 +704,7 @@
   padding: var(--boutique-space-lg);
   border-radius: var(--boutique-radius-lg);
   color: var(--boutique-text);
+  overflow-x: auto;
 }
 
 #currency-best {
@@ -723,6 +724,7 @@
 #currency-best table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 }
 
 #currency-converter th,
