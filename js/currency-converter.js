@@ -32,15 +32,15 @@
   const render = () => {
     const baseValue = Array.from(sources).reduce((sum, input) => {
       const { currency } = input.dataset;
-      const amount = parseFloat(input.value) || 0;
+      const amount = parseInt(input.value, 10) || 0;
       return sum + amount * rates[currency];
     }, 0);
     results.querySelectorAll('tbody tr').forEach((row) => {
       const { currency } = row.dataset;
       const cells = row.querySelectorAll('td');
       multipliers.forEach((multiplier, idx) => {
-        const converted = baseValue / (rates[currency] * multiplier);
-        cells[idx].textContent = converted.toFixed(2);
+        const converted = Math.floor(baseValue / (rates[currency] * multiplier));
+        cells[idx].textContent = converted;
       });
     });
 
@@ -71,7 +71,13 @@
       : (parts[0] || '');
   };
 
-  sources.forEach((input) => input.addEventListener('input', render));
+  sources.forEach((inputEl) => {
+    const el = inputEl;
+    el.addEventListener('input', () => {
+      el.value = el.value.replace(/[^0-9]/g, '');
+      render();
+    });
+  });
 
   // Initial render
   render();
