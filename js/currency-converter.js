@@ -73,9 +73,21 @@
 
   sources.forEach((inputEl) => {
     const el = inputEl;
-    el.addEventListener('input', () => {
+    const sanitizeAndRender = () => {
       el.value = el.value.replace(/[^0-9]/g, '');
       render();
+    };
+    el.addEventListener('input', sanitizeAndRender);
+    el.addEventListener('focus', () => {
+      if (el.value === '0') {
+        el.value = '';
+      }
+    });
+    el.addEventListener('blur', () => {
+      if (el.value === '') {
+        el.value = '0';
+      }
+      sanitizeAndRender();
     });
   });
 
