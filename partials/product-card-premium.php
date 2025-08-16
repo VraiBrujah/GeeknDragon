@@ -46,19 +46,13 @@ $isInStock = inStock($id);
   <a href="<?= htmlspecialchars($url) ?>" class="product-media-container">
     <?php if ($isVideo) : ?>
       <video src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-             class="product-media" 
-             autoplay muted loop playsinline
-             preload="metadata"
-             loading="lazy"></video>
+             class="product-media" autoplay muted loop playsinline></video>
     <?php else : ?>
       <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
            alt="<?= htmlspecialchars($desc) ?>"
            data-alt-fr="<?= htmlspecialchars($product['summary'] ?? $product['description'] ?? $desc) ?>"
            data-alt-en="<?= htmlspecialchars($product['summary_en'] ?? $product['summary'] ?? $product['description_en'] ?? $product['description'] ?? $desc) ?>"
-           class="product-media" 
-           loading="lazy" 
-           decoding="async"
-           fetchpriority="low">
+           class="product-media" loading="lazy">
     <?php endif; ?>
   </a>
 

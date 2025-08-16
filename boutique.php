@@ -3,52 +3,82 @@ require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 $active = 'boutique';
 require __DIR__ . '/i18n.php';
-
-// Inclusion des fonctions unifiées
-require_once __DIR__ . '/includes/stock-functions.php';
-
-$title = $translations['meta']['shop']['title'] ?? 'Boutique Geek & Dragon - Pièces et Équipements D&D';
-$metaDescription = $translations['meta']['shop']['desc'] ?? 'Découvrez notre collection de pièces métalliques, cartes d\'équipement et triptyques pour vos parties de Donjons & Dragons. Fabriqué au Québec avec des matériaux premium.';
+$title  = $translations['meta']['shop']['title'] ?? 'Geek & Dragon';
+$metaDescription = $translations['meta']['shop']['desc'] ?? '';
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
-
-// Design system unifié
 $extraHead = <<<HTML
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" as="style">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/css/design-system.css?v=<?= filemtime(__DIR__.'/css/design-system.css') ?>">
-<link rel="stylesheet" href="/css/components.css?v=<?= filemtime(__DIR__.'/css/components.css') ?>">
-<meta name="theme-color" content="#8b5cf6">
-<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="/css/boutique-premium.css?v=<?= filemtime(__DIR__.'/css/boutique-premium.css') ?>">
+<style>
+  .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
+  .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
+
+</style>
 HTML;
 
-/* ───── DONNÉES PRODUITS ───── */
+/* ───── STOCK ───── */
 $snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
+function getStock(string $id): ?int
+{
+    global $snipcartSecret;
+    static $cache = [];
+    if (isset($cache[$id])) {
+        return $cache[$id];
+    }
+    if ($snipcartSecret) {
+        $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERPWD => $snipcartSecret . ':',
+        ]);
+        $res = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        if ($res === false || $status >= 400) {
+            return $cache[$id] = null;
+        }
+        $inv = json_decode($res, true);
+        return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
+    }
+    return $cache[$id] = null;
+}
+function inStock(string $id): bool
+{
+    $stock = getStock($id);
+    return $stock === null || $stock > 0;      // true si illimité ou quantité > 0
+}
 
-// Chargement et formatage des produits avec les nouvelles fonctions
+// Liste des produits
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
 $pieces = [];
 $cards = [];
 $triptychs = [];
-
 foreach ($data as $id => $p) {
     $category = $p['category'] ?? 'pieces';
-    $p['id'] = $id; // S'assurer que l'ID est présent
-    $formattedProduct = formatProduct($p, $lang, $category);
-    
+    $prod = [
+        'id' => $id,
+        'name' => str_replace(' – ', '<br>', $p['name']),
+        'name_en' => str_replace(' – ', '<br>', $p['name_en'] ?? $p['name']),
+        'price' => $p['price'],
+        'img' => $p['images'][0] ?? '',
+        'description' => $p['description'],
+        'description_en' => $p['description_en'] ?? $p['description'],
+        'summary' => $p['summary'] ?? ($p['description'] ?? ''),
+        'summary_en' => $p['summary_en'] ?? ($p['summary'] ?? ($p['description_en'] ?? $p['description'] ?? '')),
+        'url' => '/product.php?id=' . urlencode($id) . '&from=' . urlencode($category),
+    ];
     switch ($category) {
         case 'cards':
-            $cards[] = $formattedProduct;
+            $cards[] = $prod;
             break;
         case 'triptychs':
-            $triptychs[] = $formattedProduct;
+            $triptychs[] = $prod;
             break;
         default:
-            $pieces[] = $formattedProduct;
+            $pieces[] = $prod;
             break;
     }
 }
-
-$allProducts = array_merge($pieces, $cards, $triptychs);
+$products = array_merge($pieces, $cards, $triptychs);
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -67,156 +97,79 @@ echo $snipcartInit;
 ?>
 
 <main id="main" class="pt-[calc(var(--header-height))]">
-  <!-- Ligne de séparation premium -->
-  <div class="w-full h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
-  
-  <!-- ===== HERO SECTION MODERNISÉ ===== -->
-  <section class="gd-hero" itemscope itemtype="https://schema.org/Store">
-    <!-- Fallback visuel pendant chargement vidéos -->
-    <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900" style="z-index:-1"></div>
-    
-    <!-- Vidéos d'arrière-plan -->
-    <div class="hero-videos absolute inset-0 w-full h-full" 
-         style="z-index:0" 
-         data-main="videos/Fontaine12.mp4" 
-         data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'>
-    </div>
-    
-    <!-- Overlay d'assombrissement -->
+  <div class="w-full" style="height:1px; background-color: var(--boutique-primary); margin-top:-1px;"></div>
+  <!-- ===== HERO PREMIUM ===== -->
+  <section class="hero-boutique">
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:0" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60" style="z-index:1"></div>
-    
-    <!-- Contenu principal du hero -->
-    <div class="gd-hero__content gd-animate-fade-up" style="z-index:2">
-      <h1 class="gd-hero__title" 
-          data-i18n="shop.hero.title" 
-          itemprop="name">
-        Boutique Geek & Dragon
-      </h1>
-      
-      <p class="gd-hero__subtitle" 
-         data-i18n="shop.hero.description" 
-         itemprop="description">
-        Offrez à vos parties l'élégance et la durabilité de pièces et cartes d'équipement conçues au Québec, plus précieuses qu'une figurine de dragon à 300 $, laquelle ne sert qu'exceptionnellement, nos pièces sont présentes à chaque session pour des années d'aventures.
-      </p>
-      
-      <a href="#pieces" 
-         class="gd-btn gd-btn--primary gd-btn--lg"
-         aria-label="Découvrir la collection de pièces métalliques">
-        <svg class="gd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <div class="hero-content animate-fade-in-up" style="z-index:2">
+      <h1 class="hero-title" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
+      <p class="hero-subtitle" data-i18n="shop.hero.description">Offrez à vos parties l'élégance et la durabilité de pièces et cartes d'équipement conçues au Québec, plus précieuses qu'une figurine de dragon à 300 $, laquelle ne sert qu'exceptionnellement, nos pièces sont présentes à chaque session pour des années d'aventures.</p>
+      <a href="#pieces" class="hero-cta">
+        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
           <circle cx="9" cy="20" r="1"/>
           <circle cx="20" cy="20" r="1"/>
         </svg>
         <span data-i18n="shop.hero.button">Choisir mes trésors</span>
       </a>
-      
-      <!-- Badges de confiance en hero -->
-      <div class="flex justify-center mt-8 gap-6 text-sm text-gray-300">
-        <div class="flex items-center gap-2">
-          <span>🍁</span>
-          <span>Fabriqué au Québec</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span>⭐</span>
-          <span>Qualité Premium</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span>🚚</span>
-          <span>Livraison 48h</span>
-        </div>
-      </div>
     </div>
-    
-    <!-- Métadonnées Schema.org -->
-    <meta itemprop="telephone" content="+1-XXX-XXX-XXXX">
-    <meta itemprop="address" content="Québec, Canada">
   </section>
 
-  <!-- ===== SECTION PIÈCES MÉTALLIQUES ===== -->
-  <section id="pieces" class="gd-shop-section scroll-mt-24" itemscope itemtype="https://schema.org/CollectionPage">
-    <div class="gd-container">
-      <header class="text-center mb-16">
-        <h2 class="gd-shop-section__title" 
-            data-i18n="shop.pieces.title" 
-            itemprop="name">
-          Pièces Métalliques
-        </h2>
-        <p class="gd-text gd-text--muted gd-text--lg max-w-3xl mx-auto" 
-           data-i18n="shop.pieces.subtitle"
-           itemprop="description">
-          Le poids authentique du trésor pour vos campagnes de D&D. Fabriquées au Québec avec des alliages premium.
-        </p>
-      </header>
+  <!-- ░░░ PIÈCES PREMIUM ░░░ -->
+	<section id="pieces" class="shop-section scroll-mt-24">
+	  <div class="max-w-7xl mx-auto">
+		<h2 class="shop-section-title" data-i18n="shop.pieces.title">
+		  Pièces métalliques
+		</h2>
 
-      <!-- Grille de produits modernisée -->
-      <div class="gd-product-grid" itemscope itemtype="https://schema.org/ItemList">
-        <meta itemprop="numberOfItems" content="<?= count($pieces) ?>">
-        <?php foreach ($pieces as $index => $product) : ?>
-          <div itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-            <meta itemprop="position" content="<?= $index + 1 ?>">
-            <div itemprop="item" itemscope itemtype="https://schema.org/Product">
-              <?php include __DIR__ . '/partials/product-card-unified.php'; ?>
-            </div>
-          </div>
+
+      <!-- Grille de produits -->
+      <div class="products-grid">
+        <?php foreach ($pieces as $product) : ?>
+          <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
         <?php endforeach; ?>
       </div>
 
-      <!-- Section explicative avec vidéo -->
-      <section class="gd-card mt-16 max-w-5xl mx-auto p-8 lg:p-12 text-center">
-        <header class="mb-12">
-          <h3 class="gd-heading gd-heading--3 mb-6">
-            Pourquoi des pièces physiques ?
-          </h3>
-          <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-emerald-500 mx-auto mb-8 rounded-full"></div>
-        </header>
-        
-        <div class="prose prose-lg prose-invert max-w-4xl mx-auto text-left">
-          <blockquote class="gd-text--xl text-center italic text-purple-300 border-l-4 border-purple-500 pl-6 mb-8">
-            "Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets : ça fonctionne, mais ça perd toute sa saveur."
-          </blockquote>
-          
-          <div class="grid md:grid-cols-2 gap-8 text-gray-300">
-            <div class="space-y-4">
-              <h4 class="gd-text--lg font-semibold text-purple-300">🏰 Le problème</h4>
-              <p>Le trésor est au cœur de presque toutes les campagnes de D&D… et pourtant, quand il se réduit à des chiffres qu'on inscrit puis efface cent fois, il perd toute magie et tout impact.</p>
-              <p>Par souci de simplicité, on se limite presque toujours à la pièce d'or, oubliant la richesse des autres monnaies.</p>
-            </div>
-            
-            <div class="space-y-4">
-              <h4 class="gd-text--lg font-semibold text-emerald-300">⚔️ Notre solution</h4>
-              <p>Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient tangible, mémorable — digne des plus grandes quêtes.</p>
-              <p>Chaque pièce raconte une histoire, chaque échange prend du poids, littéralement et figurativement.</p>
-            </div>
-          </div>
-        </div>
+      <!-- Description & appel à la vidéo -->
+      <section class="mt-20 md:mt-28 max-w-4xl mx-auto px-6 py-16 text-center space-y-10 leading-relaxed bg-gradient-to-b from-gray-900 via-indigo-900 to-gray-900">
+        <h2 class="text-3xl font-bold text-gray-200">Pourquoi des pièces physiques&nbsp;?</h2>
+        <div class="h-0.5 w-20 bg-indigo-400 mx-auto"></div>
+        <p class="text-gray-400 text-xl md:text-2xl tracking-wide">
+          <span data-i18n="shop.pieces.description">
+            <span class="block font-semibold text-gray-200">
+              Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets :
+              <span class="font-normal text-gray-400">ça fonctionne, mais ça perd toute sa saveur.</span>
+            </span>
 
-        <!-- Vidéo de démonstration -->
-        <div class="mt-12 flex justify-center">
+            <span class="block mt-6">
+              Le trésor est au cœur de presque toutes les campagnes de D&D… et pourtant,
+              quand il se réduit à des chiffres qu’on inscrit puis efface cent fois,
+              il perd toute magie et tout impact.
+            </span>
+
+            <span class="block mt-6">
+              Par souci de simplicité, on se limite presque toujours à la pièce d’or,
+              oubliant la richesse des autres monnaies.
+            </span>
+
+            <span class="block mt-6">
+              Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient
+              tangible, mémorable — digne des plus grandes quêtes.
+            </span>
+          </span>
+        </p>
+
+        <!-- Vidéo de présentation -->
+        <div class="mt-8 flex justify-center">
           <button type="button"
-                  class="gd-btn gd-btn--outline gd-btn--lg group relative overflow-hidden"
+                  class="group relative rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400"
                   aria-controls="video-modal"
-                  aria-label="Voir la démonstration vidéo par Pierre-Louis (Es-Tu Game ?)"
+                  aria-label="Lire la vidéo de Pierre-Louis (Es-Tu Game ?) — L'Économie de D&D 💰 Conseils Jeux de Rôle"
                   data-video-open>
-            
-            <!-- Thumbnail de la vidéo -->
-            <div class="absolute inset-0 rounded-lg overflow-hidden opacity-20 group-hover:opacity-30 transition-opacity">
-              <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg"
-                   alt="Miniature de démonstration vidéo"
-                   class="w-full h-full object-cover"
-                   loading="lazy" 
-                   decoding="async">
-            </div>
-            
-            <!-- Contenu du bouton -->
-            <div class="relative z-10 flex items-center gap-3">
-              <svg class="gd-icon gd-icon--lg" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z"/>
-              </svg>
-              <div class="text-left">
-                <div class="font-semibold">Voir la démonstration</div>
-                <div class="text-sm opacity-80">par Pierre-Louis (Es-Tu Game ?)</div>
-              </div>
-            </div>
+            <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg"
+                 alt="Miniature de la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
+                 class="block w-full h-auto transition-transform duration-200 group-hover:scale-105 group-hover:shadow-lg">
           </button>
         </div>
 
@@ -312,42 +265,38 @@ echo $snipcartInit;
     </div>
   </section>
 
-  <!-- ===== SECTION CARTES D'ÉQUIPEMENT ===== -->
-  <section id="cartes" class="gd-shop-section scroll-mt-24">
-    <div class="gd-container">
-      <header class="text-center mb-16">
-        <h2 class="gd-shop-section__title" data-i18n="shop.cards.title">Cartes d'Équipement</h2>
-        <p class="gd-text gd-text--muted gd-text--lg max-w-3xl mx-auto" data-i18n="shop.cards.subtitle">
-          Paquets thématiques de cartes illustrées pour gérer l'inventaire de vos aventuriers avec style.
-        </p>
-      </header>
-
-      <div class="gd-product-grid">
-        <?php foreach ($cards as $index => $product) : ?>
-          <div itemscope itemtype="https://schema.org/Product">
-            <?php include __DIR__ . '/partials/product-card-unified.php'; ?>
-          </div>
+  <!-- ░░░ CARTES PREMIUM ░░░ -->
+  <section id="cartes" class="shop-section scroll-mt-24">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="shop-section-title" data-i18n="shop.cards.title">Cartes d'équipement</h2>
+      <div class="products-grid">
+        <?php foreach ($cards as $product) : ?>
+          <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
         <?php endforeach; ?>
+      </div>
+
+      <div class="text-center mt-12 max-w-4xl mx-auto px-6">
+        <p class="text-lg text-gray-300">
+          <span data-i18n="shop.cards.description">Paquets thématiques de cartes illustrées pour gérer l'inventaire.</span>
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- ===== SECTION TRIPTYQUES ===== -->
-  <section id="triptyques" class="gd-shop-section">
-    <div class="gd-container">
-      <header class="text-center mb-16">
-        <h2 class="gd-shop-section__title" data-i18n="shop.triptychs.title">Triptyques de Personnage</h2>
-        <p class="gd-text gd-text--muted gd-text--lg max-w-3xl mx-auto" data-i18n="shop.triptychs.subtitle">
-          Fiches rigides en trois volets pour classes, espèces et historiques. Organisation parfaite pour vos personnages.
-        </p>
-      </header>
-
-      <div class="gd-product-grid">
-        <?php foreach ($triptychs as $index => $product) : ?>
-          <div itemscope itemtype="https://schema.org/Product">
-            <?php include __DIR__ . '/partials/product-card-unified.php'; ?>
-          </div>
+  <!-- ░░░ TRIPTYQUES PREMIUM ░░░ -->
+  <section id="triptyques" class="shop-section">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="shop-section-title" data-i18n="shop.triptychs.title">Triptyques de personnage</h2>
+      <div class="products-grid">
+        <?php foreach ($triptychs as $product) : ?>
+          <?php include __DIR__ . '/partials/product-card-premium.php'; ?>
         <?php endforeach; ?>
+      </div>
+
+      <div class="text-center mt-12 max-w-4xl mx-auto px-6">
+        <p class="text-lg text-gray-300">
+          <span data-i18n="shop.triptychs.description">Fiches rigides en trois volets pour classes, espèces et historiques.</span>
+        </p>
       </div>
     </div>
   </section>
@@ -366,7 +315,7 @@ echo $snipcartInit;
           </div>
 
           <div class="feature-card">
-            <span class="feature-icon"><img src="images/carte_propriete.png" alt="Carte de propriété" class="property-image" loading="lazy" decoding="async"></span>
+            <span class="feature-icon"><img src="images/carte_propriete.png" alt="Carte de propriété" class="property-image"></span>
             <h4 class="feature-title">Carte de propriété</h4>
             <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
           </div>
@@ -399,31 +348,33 @@ echo $snipcartInit;
     </div>
   </section>
 
-  <!-- ===== SECTION FINALE - CONFIANCE ===== -->
-  <section class="gd-section">
-    <div class="gd-container text-center">
-      <header class="mb-16">
-        <h2 class="gd-heading gd-heading--2 mb-6" data-i18n="shop.intro.title">
-          Trésors Artisanaux
-        </h2>
-        <p class="gd-text gd-text--muted gd-text--xl max-w-3xl mx-auto" data-i18n="shop.intro.description">
-          Objets de collection et aides de jeu artisanaux, fabriqués au Québec avec passion et expertise.
-        </p>
-      </header>
+  <!-- ░░░ TRUST SECTION PREMIUM ░░░ -->
+  <section class="trust-section">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="shop-section-title" data-i18n="shop.intro.title">Trésors artisanaux</h2>
+      <p class="text-xl text-center mb-12 max-w-3xl mx-auto" data-i18n="shop.intro.description">Objets de collection et aides de jeu artisanaux, fabriqués au Québec.</p>
 
-      <!-- Trust indicators modernisés -->
-      <?php include __DIR__ . '/partials/trust-indicators.php'; ?>
-      
-      <!-- Call-to-action final -->
-      <div class="mt-16">
-        <a href="#pieces" class="gd-btn gd-btn--primary gd-btn--lg">
-          <svg class="gd-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
-            <circle cx="9" cy="20" r="1"/>
-            <circle cx="20" cy="20" r="1"/>
-          </svg>
-          Commencer mes achats
-        </a>
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <span class="trust-icon">🔒</span>
+          <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
+        </div>
+
+        <div class="trust-badge">
+          <img src="/images/payments/visa.svg" alt="Logo Visa" class="w-8 h-6" loading="lazy">
+          <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" class="w-8 h-6" loading="lazy">
+          <img src="/images/payments/american-express.svg" alt="Logo American Express" class="w-8 h-6" loading="lazy">
+        </div>
+
+        <div class="trust-badge">
+          <span class="trust-icon">🍁</span>
+          <span>Fabriqué au Québec</span>
+        </div>
+
+        <div class="trust-badge">
+          <span class="trust-icon">⭐</span>
+          <span>Qualité premium</span>
+        </div>
       </div>
     </div>
   </section>
@@ -434,35 +385,27 @@ echo $snipcartInit;
 <script type="application/ld+json">
 <?= json_encode([
     '@context' => 'https://schema.org/',
-    '@type' => 'WebPage',
-    'name' => 'Boutique Geek & Dragon - Pièces et Équipements D&D',
-    'description' => 'Découvrez notre collection de pièces métalliques, cartes d\'équipement et triptyques pour vos parties de Donjons & Dragons.',
-    'url' => $metaUrl,
-    'mainEntity' => [
-        '@type' => 'Store',
-        'name' => 'Geek & Dragon',
-        'description' => 'Boutique spécialisée en matériel de jeu de rôle artisanal',
-        'address' => [
-            '@type' => 'PostalAddress',
-            'addressCountry' => 'CA',
-            'addressRegion' => 'Quebec'
-        ]
-    ],
-    'hasOfferCatalog' => [
-        '@type' => 'OfferCatalog',
-        'name' => 'Catalogue Geek & Dragon',
-        'itemListElement' => array_map(function ($p) use ($host) {
-            return generateProductJsonLd($p, $host);
-        }, $allProducts)
-    ]
+    '@graph' => array_map(function ($p) {
+        return [
+            '@type' => 'Product',
+            'name' => strip_tags($p['name']),
+            'description' => $p['description'],
+            'image' => 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/' . $p['img'],
+            'sku' => $p['id'],
+            'offers' => [
+                '@type' => 'Offer',
+                'price' => $p['price'],
+                'priceCurrency' => 'CAD',
+                'availability' => inStock($p['id']) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+            ],
+        ];
+    }, $products /* merged products */),
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
 </script>
-  <!-- Scripts modernisés et optimisés -->
-  <script src="/optimize-performance.js" defer></script>
-  <script src="js/app.js" defer></script>
-  <script src="/js/hero-videos.js" defer></script>
-  <script src="/js/image-optimization.js" defer></script>
-  <script src="/js/currency-converter.js" defer></script>
+  <script src="js/app.js"></script>
+  <script src="/js/hero-videos.js"></script>
+  <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
+  <script src="/js/currency-converter.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
     const openBtn = document.querySelector('[data-video-open]');

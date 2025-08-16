@@ -272,9 +272,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Optimisation: réduire les repaints */
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 .product-media-container .product-media {
@@ -282,9 +279,6 @@
   height: 100%;
   object-fit: cover;
   transition: var(--boutique-transition);
-  /* Optimisation: GPU acceleration */
-  will-change: transform;
-  transform: translateZ(0);
 }
 
 .product-media.no-crop {
@@ -660,13 +654,34 @@
   text-transform: uppercase; letter-spacing: 0.05em; z-index: 3;
 }
 
-/* Skeleton loading pour un meilleur UX */
+/* Skeleton */
 .skeleton {
   background: linear-gradient(90deg, var(--boutique-surface) 25%, var(--boutique-card) 50%, var(--boutique-surface) 75%);
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite;
 }
 @keyframes skeleton-loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* Filtres */
+.shop-filters {
+  background: var(--boutique-surface);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-lg);
+  padding: var(--boutique-space-lg);
+  margin-bottom: var(--boutique-space-xl);
+  display: flex; flex-wrap: wrap; gap: var(--boutique-space-md); align-items: center;
+}
+.filter-group { display: flex; align-items: center; gap: var(--boutique-space-sm); }
+.filter-select {
+  background: var(--boutique-bg);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-sm);
+  color: var(--boutique-text);
+  padding: var(--boutique-space-sm) var(--boutique-space-md);
+  font-size: 0.9rem;
+  transition: var(--boutique-transition);
+}
+.filter-select:focus { outline: none; border-color: var(--boutique-primary); box-shadow: 0 0 0 2px rgba(139,92,246,0.2); }
 
 /* =================================================================== */
 /* LOADING STATES                                                    */
