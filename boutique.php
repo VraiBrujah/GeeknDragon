@@ -62,6 +62,8 @@ foreach ($data as $id => $p) {
         'img' => $p['images'][0] ?? '',
         'description' => $p['description'],
         'description_en' => $p['description_en'] ?? $p['description'],
+        'summary' => $p['summary'] ?? ($p['description'] ?? ''),
+        'summary_en' => $p['summary_en'] ?? ($p['summary'] ?? ($p['description_en'] ?? $p['description'] ?? '')),
         'url' => '/product.php?id=' . urlencode($id) . '&from=' . urlencode($category),
     ];
     switch ($category) {
