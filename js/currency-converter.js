@@ -78,6 +78,7 @@
     best.innerHTML = minimal.text
       ? `${bestLabel}<br>${minimal.text}<br>${totalPiecesLabel} ${nf.format(totalPieces)}`
       : '';
+    best.classList.toggle('hidden', !minimal.text);
 
     equivBody.innerHTML = '';
     let hasEquiv = false;
