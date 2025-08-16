@@ -88,6 +88,7 @@
     "quantity": "Quantity",
     "unit": "single",
     "add": "Add",
+    "inStock": "In stock",
     "outOfStock": "Out of stock",
     "securePayment": "Secure payment via Snipcart"
   },
