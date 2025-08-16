@@ -109,8 +109,7 @@
     },
     "converter": {
       "title": "Convertisseur de monnaie",
-      "sourceLabel": "Monnaie source",
-      "amountLabel": "Quantité",
+      "sourcesLabel": "Monnaies sources",
       "copper": "pièce de cuivre",
       "silver": "pièce d’argent",
       "electrum": "pièce d’électrum",

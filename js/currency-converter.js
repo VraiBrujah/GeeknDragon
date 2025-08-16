@@ -8,29 +8,33 @@
     platinum: 1000,
   };
 
-  const select = document.getElementById('currency-source');
-  const input = document.getElementById('currency-amount');
+  const sources = document.querySelectorAll('#currency-sources input');
   const results = document.getElementById('currency-results');
   const best = document.getElementById('currency-best');
 
-  if (!select || !input || !results || !best) return;
+  if (!sources.length || !results || !best) return;
 
-  // Retrieve translated currency names from the select options
-  const currencyNames = Array.from(select.options).reduce((acc, option) => ({
-    ...acc,
-    [option.value]: option.textContent,
-  }), {});
+  // Retrieve translated currency names from the results table
+  const currencyNames = Array.from(results.querySelectorAll('tbody tr')).reduce(
+    (acc, row) => ({
+      ...acc,
+      [row.dataset.currency]: row.querySelector('th').textContent,
+    }),
+    {},
+  );
 
   const multipliers = [1, 10, 100, 1000, 10000];
   const coins = Object.keys(rates);
 
   /**
    * Render converted values for all currencies.
-   * @param {number} amount - Amount in the selected currency
-   * @param {string} source - Selected currency key
    */
-  const render = (amount, source) => {
-    const baseValue = amount * rates[source];
+  const render = () => {
+    const baseValue = Array.from(sources).reduce((sum, input) => {
+      const { currency } = input.dataset;
+      const amount = parseFloat(input.value) || 0;
+      return sum + amount * rates[currency];
+    }, 0);
     results.querySelectorAll('tbody tr').forEach((row) => {
       const { currency } = row.dataset;
       const cells = row.querySelectorAll('td');
@@ -67,14 +71,8 @@
       : (parts[0] || '');
   };
 
-  const handleChange = () => {
-    const amount = parseFloat(input.value) || 0;
-    render(amount, select.value);
-  };
-
-  select.addEventListener('change', handleChange);
-  input.addEventListener('input', handleChange);
+  sources.forEach((input) => input.addEventListener('input', render));
 
   // Initial render
-  handleChange();
+  render();
 })();

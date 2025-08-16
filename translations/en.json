@@ -109,8 +109,7 @@
     },
     "converter": {
       "title": "Currency converter",
-      "sourceLabel": "Source currency",
-      "amountLabel": "Amount",
+      "sourcesLabel": "Source currencies",
       "copper": "Copper piece",
       "silver": "Silver piece",
       "electrum": "Electrum piece",
