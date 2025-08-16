@@ -381,7 +381,7 @@ echo $snipcartInit;
     const video = document.getElementById('es-tu-game-video');
     if (!video) return;
     
-    let audioOK = false;
+    let audioOK = true;
     
     // Configuration initiale
     video.dataset.userPaused = 'false';
