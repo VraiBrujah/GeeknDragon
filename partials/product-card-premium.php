@@ -7,7 +7,12 @@ if (!isset($product['id'])) {
 $id = (string)$product['id'];
 
 $name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
-$desc        = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
+$summary     = $lang === 'en'
+    ? ($product['summary_en'] ?? $product['summary'] ?? null)
+    : ($product['summary'] ?? $product['summary_en'] ?? null);
+$desc        = $summary ?? ($lang === 'en'
+    ? ($product['description_en'] ?? $product['description'])
+    : $product['description']);
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $isVideo     = preg_match('/\.mp4$/i', $img);
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
@@ -45,8 +50,8 @@ $isInStock = inStock($id);
     <?php else : ?>
       <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
            alt="<?= htmlspecialchars($desc) ?>"
-           data-alt-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-           data-alt-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
+           data-alt-fr="<?= htmlspecialchars($product['summary'] ?? $product['description'] ?? $desc) ?>"
+           data-alt-en="<?= htmlspecialchars($product['summary_en'] ?? $product['summary'] ?? $product['description_en'] ?? $product['description'] ?? $desc) ?>"
            class="product-media" loading="lazy">
     <?php endif; ?>
   </a>
@@ -62,8 +67,8 @@ $isInStock = inStock($id);
     </a>
 
     <div class="product-description"
-         data-desc-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-         data-desc-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>">
+         data-desc-fr="<?= htmlspecialchars($product['summary'] ?? $product['description'] ?? $desc) ?>"
+         data-desc-en="<?= htmlspecialchars($product['summary_en'] ?? $product['summary'] ?? $product['description_en'] ?? $product['description'] ?? $desc) ?>">
       <?= strip_tags($htmlDesc) ?>
     </div>
 
