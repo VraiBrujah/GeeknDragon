@@ -700,10 +700,20 @@
 #currency-converter,
 #currency-equivalences,
 #currency-best {
-  background: var(--boutique-card);
+  background: var(--boutique-gradient-card);
+  border: 1px solid var(--boutique-border-accent);
   padding: var(--boutique-space-lg);
   border-radius: var(--boutique-radius-lg);
   color: var(--boutique-text);
+}
+
+#currency-best .best-total {
+  display: inline-block;
+  margin-top: var(--boutique-space-sm);
+  padding: var(--boutique-space-xs) var(--boutique-space-md);
+  background: var(--boutique-surface);
+  border-radius: var(--boutique-radius-md);
+  font-weight: 600;
 }
 
 #currency-converter table,
