@@ -46,9 +46,26 @@
         ? `${nf.format(qty)} ${label}`
         : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
     });
-    const text = parts.length > 1
-      ? `${parts.slice(0, -1).join(', ')} ${andText} ${parts[parts.length - 1]}`
-      : (parts[0] || '');
+
+    let text = '';
+    if (parts.length === 1) {
+      text = parts[0];
+    } else if (parts.length > 1) {
+      const groups = [];
+      for (let i = 0; i < parts.length; i += 3) {
+        groups.push(parts.slice(i, i + 3));
+      }
+      const lastGroup = groups[groups.length - 1];
+      const lastItem = lastGroup.pop();
+      const lastGroupText = lastGroup.length
+        ? `${lastGroup.join(', ')} ${andText} ${lastItem}`
+        : `${andText} ${lastItem}`;
+      groups[groups.length - 1] = lastGroupText;
+      text = groups
+        .map((g) => (Array.isArray(g) ? g.join(', ') : g))
+        .join(',<br>');
+    }
+
     return { text, remaining, items };
   };
 
