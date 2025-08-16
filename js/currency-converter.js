@@ -9,26 +9,17 @@
   };
 
   const sources = document.querySelectorAll('#currency-sources input');
-  const results = document.getElementById('currency-results');
   const best = document.getElementById('currency-best');
   const equivContainer = document.getElementById('currency-equivalences');
   const equivTable = document.getElementById('currency-equivalences-list');
   const equivBody = equivTable?.querySelector('tbody');
 
-  if (!sources.length || !results || !best || !equivContainer || !equivTable || !equivBody) return;
+  if (!sources.length || !best || !equivContainer || !equivTable || !equivBody) return;
 
   const multipliers = [1, 10, 100, 1000, 10000];
   const coins = Object.keys(rates).sort((a, b) => rates[b] - rates[a]);
 
   const nf = new Intl.NumberFormat('fr-FR');
-
-  const getCurrencyNames = () => Array.from(results.querySelectorAll('tbody tr')).reduce(
-    (acc, row) => ({
-      ...acc,
-      [row.dataset.currency]: row.querySelector('th').textContent,
-    }),
-    {},
-  );
 
   const denominations = multipliers
     .flatMap((multiplier) => coins.map((coin) => ({
@@ -65,8 +56,14 @@
    * Render converted values for all currencies.
    */
   const render = () => {
-    const currencyNames = getCurrencyNames();
     const tr = window.i18n?.shop?.converter || {};
+    const currencyNames = {
+      copper: tr.copper || 'pièce de cuivre',
+      silver: tr.silver || 'pièce d’argent',
+      electrum: tr.electrum || 'pièce d’électrum',
+      gold: tr.gold || 'pièce d’or',
+      platinum: tr.platinum || 'pièce de platine',
+    };
     const andText = tr.and || 'and';
     const bestLabel = tr.bestLabel || '';
     const totalPiecesLabel = tr.totalPieces || 'Total pieces:';
@@ -76,15 +73,6 @@
       const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
       return sum + amount * rates[currency];
     }, 0);
-    results.querySelectorAll('tbody tr').forEach((row) => {
-      const { currency } = row.dataset;
-      const cells = row.querySelectorAll('td');
-      multipliers.forEach((multiplier, idx) => {
-        const converted = Math.floor(baseValue / (rates[currency] * multiplier));
-        cells[idx].textContent = converted ? nf.format(converted) : '';
-      });
-    });
-
     const minimal = minimalParts(baseValue, currencyNames, andText);
     const totalPieces = minimal.items.reduce((sum, { qty }) => sum + qty, 0);
     best.innerHTML = minimal.text
