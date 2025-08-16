@@ -733,6 +733,11 @@
   text-align: center;
 }
 
+#currency-equivalences th,
+#currency-equivalences td {
+  text-align: center;
+}
+
 #currency-converter th,
 #currency-results th,
 #currency-equivalences th,
