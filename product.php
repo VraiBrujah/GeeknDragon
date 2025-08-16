@@ -258,54 +258,112 @@ echo $snipcartInit;
 
 <script src="js/app.js"></script>
 
-<!-- Script pour la navigation des thumbnails -->
+<!-- Script pour la navigation des thumbnails avec autoplay -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   // Navigation des thumbnails
   const thumbnailContainers = document.querySelectorAll('.thumbnail');
   const mainImage = document.querySelector('.main-product-media');
+  let currentIndex = 0;
+  let autoplayInterval;
+  let isAutoplayActive = true;
   
   if (thumbnailContainers.length && mainImage) {
+    
+    // Fonction pour changer d'image
+    function switchToImage(index) {
+      if (index >= thumbnailContainers.length) index = 0;
+      if (index < 0) index = thumbnailContainers.length - 1;
+      
+      const container = thumbnailContainers[index];
+      const thumb = container.querySelector('.thumbnail-media');
+      
+      // Retirer la classe active de tous les conteneurs
+      thumbnailContainers.forEach(c => c.classList.remove('active'));
+      // Ajouter active au conteneur sélectionné
+      container.classList.add('active');
+      
+      // Changer l'image principale
+      if (mainImage.tagName === 'IMG' && thumb.tagName === 'IMG') {
+        mainImage.src = thumb.src;
+        mainImage.alt = thumb.alt;
+      } else if (mainImage.tagName === 'VIDEO' && thumb.tagName === 'VIDEO') {
+        mainImage.src = thumb.src;
+      } else if (mainImage.tagName === 'IMG' && thumb.tagName === 'VIDEO') {
+        // Remplacer img par video
+        const newVideo = document.createElement('video');
+        newVideo.className = mainImage.className;
+        newVideo.src = thumb.src;
+        newVideo.controls = true;
+        newVideo.muted = true;
+        newVideo.playsInline = true;
+        newVideo.dataset.noGallery = true;
+        mainImage.parentNode.replaceChild(newVideo, mainImage);
+      } else if (mainImage.tagName === 'VIDEO' && thumb.tagName === 'IMG') {
+        // Remplacer video par img
+        const newImg = document.createElement('img');
+        newImg.className = mainImage.className;
+        newImg.src = thumb.src;
+        newImg.alt = thumb.alt;
+        newImg.dataset.gallery = 'product';
+        mainImage.parentNode.replaceChild(newImg, mainImage);
+        // Réappliquer la galerie
+        if (window.UniversalGallery) {
+          window.UniversalGallery.refresh();
+        }
+      }
+      
+      currentIndex = index;
+    }
+    
+    // Navigation manuelle
     thumbnailContainers.forEach((container, index) => {
       container.addEventListener('click', function() {
-        const thumb = container.querySelector('.thumbnail-media');
-        
-        // Retirer la classe active de tous les conteneurs
-        thumbnailContainers.forEach(c => c.classList.remove('active'));
-        // Ajouter active au conteneur cliqué
-        container.classList.add('active');
-        
-        // Changer l'image principale
-        if (mainImage.tagName === 'IMG' && thumb.tagName === 'IMG') {
-          mainImage.src = thumb.src;
-          mainImage.alt = thumb.alt;
-        } else if (mainImage.tagName === 'VIDEO' && thumb.tagName === 'VIDEO') {
-          mainImage.src = thumb.src;
-        } else if (mainImage.tagName === 'IMG' && thumb.tagName === 'VIDEO') {
-          // Remplacer img par video
-          const newVideo = document.createElement('video');
-          newVideo.className = mainImage.className;
-          newVideo.src = thumb.src;
-          newVideo.controls = true;
-          newVideo.muted = true;
-          newVideo.playsInline = true;
-          newVideo.dataset.noGallery = true;
-          mainImage.parentNode.replaceChild(newVideo, mainImage);
-        } else if (mainImage.tagName === 'VIDEO' && thumb.tagName === 'IMG') {
-          // Remplacer video par img
-          const newImg = document.createElement('img');
-          newImg.className = mainImage.className;
-          newImg.src = thumb.src;
-          newImg.alt = thumb.alt;
-          newImg.dataset.gallery = 'product';
-          mainImage.parentNode.replaceChild(newImg, mainImage);
-          // Réappliquer la galerie
-          if (window.UniversalGallery) {
-            window.UniversalGallery.refresh();
-          }
-        }
+        // Arrêter l'autoplay quand on clique manuellement
+        stopAutoplay();
+        switchToImage(index);
+        // Redémarrer l'autoplay après 5 secondes
+        setTimeout(startAutoplay, 5000);
       });
     });
+    
+    // Fonction pour démarrer l'autoplay
+    function startAutoplay() {
+      if (thumbnailContainers.length <= 1) return;
+      
+      stopAutoplay(); // S'assurer qu'il n'y a pas d'autre interval
+      isAutoplayActive = true;
+      
+      autoplayInterval = setInterval(() => {
+        if (isAutoplayActive) {
+          currentIndex = (currentIndex + 1) % thumbnailContainers.length;
+          switchToImage(currentIndex);
+        }
+      }, 3000); // Change d'image toutes les 3 secondes
+    }
+    
+    // Fonction pour arrêter l'autoplay
+    function stopAutoplay() {
+      if (autoplayInterval) {
+        clearInterval(autoplayInterval);
+        autoplayInterval = null;
+      }
+      isAutoplayActive = false;
+    }
+    
+    // Pause autoplay au survol
+    const galleryContainer = document.querySelector('.product-gallery-container');
+    if (galleryContainer) {
+      galleryContainer.addEventListener('mouseenter', stopAutoplay);
+      galleryContainer.addEventListener('mouseleave', () => {
+        setTimeout(startAutoplay, 1000); // Redémarre 1 sec après avoir quitté la zone
+      });
+    }
+    
+    // Démarrer l'autoplay si il y a plusieurs images
+    if (thumbnailContainers.length > 1) {
+      startAutoplay();
+    }
   }
 });
 </script>
