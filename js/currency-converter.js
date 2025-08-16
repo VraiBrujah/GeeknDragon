@@ -24,37 +24,39 @@
   );
 
   const multipliers = [1, 10, 100, 1000, 10000];
-  const coins = Object.keys(rates);
+  const coinOrder = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
 
   /**
-   * Compute optimal coin counts for a value using dynamic programming.
-   * Minimizes the sum of multipliers used.
+   * Convert a value to coin parts using multipliers for each coin type.
    * @param {number} baseValue - total value in copper pieces
-   * @param {Array} denominations - list of {coin, multiplier, value}
-   * @returns {Object} counts per coin
+   * @returns {Array} list of {coin, multiplier, qty}
    */
-  const computeOptimalCoins = (baseValue, denominations) => {
-    const dp = Array(baseValue + 1).fill(Infinity);
-    const choice = Array(baseValue + 1).fill(null);
-    dp[0] = 0;
+  const computeCoinParts = (baseValue) => {
+    const baseCounts = {};
+    let remaining = baseValue;
+    coinOrder.forEach((coin) => {
+      const value = rates[coin];
+      const qty = Math.floor(remaining / value);
+      if (qty > 0) {
+        baseCounts[coin] = qty;
+        remaining -= qty * value;
+      }
+    });
 
-    for (let i = 1; i <= baseValue; i += 1) {
-      denominations.forEach((denom, idx) => {
-        if (denom.value <= i && dp[i - denom.value] + denom.multiplier < dp[i]) {
-          dp[i] = dp[i - denom.value] + denom.multiplier;
-          choice[i] = idx;
+    const multiplierOrder = [10000, 1000, 100, 10, 1];
+    const parts = [];
+    coinOrder.forEach((coin) => {
+      let count = baseCounts[coin] || 0;
+      multiplierOrder.forEach((multiplier) => {
+        const qty = Math.floor(count / multiplier);
+        if (qty > 0) {
+          parts.push({ coin, multiplier, qty });
+          count -= qty * multiplier;
         }
       });
-    }
+    });
 
-    const counts = {};
-    let v = baseValue;
-    while (v > 0 && choice[v] !== null) {
-      const denom = denominations[choice[v]];
-      counts[denom.coin] = (counts[denom.coin] || 0) + denom.multiplier;
-      v -= denom.value;
-    }
-    return counts;
+    return parts;
   };
 
   /**
@@ -75,19 +77,8 @@
       });
     });
 
-    // Minimal coin representation using 25 denominations
-    const denominations = multipliers
-      .flatMap((multiplier) => coins.map((coin) => ({
-        coin,
-        multiplier,
-        value: rates[coin] * multiplier,
-      })))
-      .sort((a, b) => b.value - a.value);
-
-    const counts = computeOptimalCoins(baseValue, denominations);
-
-    const parts = Object.entries(counts).map(
-      ([coin, qty]) => `${qty} ${currencyNames[coin]}`,
+    const parts = computeCoinParts(baseValue).map(
+      ({ coin, multiplier, qty }) => `${qty} ${currencyNames[coin]}${multiplier > 1 ? ` x${multiplier}` : ''}`,
     );
     best.textContent = parts.length > 1
       ? `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`
