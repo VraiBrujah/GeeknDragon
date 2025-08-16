@@ -73,6 +73,9 @@
 
   sources.forEach((inputEl) => {
     const el = inputEl;
+    el.addEventListener('focus', () => {
+      if (el.value === '0') el.value = '';
+    });
     el.addEventListener('input', () => {
       el.value = el.value.replace(/[^0-9]/g, '');
       render();
