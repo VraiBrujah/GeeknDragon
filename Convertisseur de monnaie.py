@@ -83,18 +83,6 @@ def join_with_commas_and_et(parts):
         return parts[0]
     return ", ".join(parts[:-1]) + " et " + parts[-1]
 
-def join_with_commas_and_et_lines(parts, per_line=3):
-    if len(parts) <= per_line:
-        return join_with_commas_and_et(parts)
-    lines = []
-    for i in range(0, len(parts), per_line):
-        segment = parts[i:i+per_line]
-        if i + per_line >= len(parts):
-            lines.append(join_with_commas_and_et(segment))
-        else:
-            lines.append(", ".join(segment))
-    return ",<br>".join(lines)
-
 def minimal_sentence_from_cp(total_cp: int, tokens):
     """
     Calcule la représentation minimale (glouton) en phrase.
@@ -118,7 +106,7 @@ def minimal_sentence_from_cp(total_cp: int, tokens):
             parts.append(f"{intfmt(q)} {piece_word(q)} {article_de(coin)}")
         else:
             parts.append(f"{intfmt(q)} {piece_word(q)} {article_de(coin)} x{mult}")
-    phrase = "Représentation minimale : " + (join_with_commas_and_et_lines(parts) if parts else "—")
+    phrase = "Représentation minimale : " + (join_with_commas_and_et(parts) if parts else "—")
     return phrase, items, remaining
 
 
@@ -458,7 +446,7 @@ class App(tk.Tk):
 
             if remainder_cp > 0:
                 phrase_reste, _, _ = minimal_sentence_from_cp(remainder_cp, TOKENS_ALL)
-                phrase_reste = phrase_reste.replace("Représentation minimale : ", "").replace('<br>', ', ')
+                phrase_reste = phrase_reste.replace("Représentation minimale : ", "")
                 summary += " — Reste : " + phrase_reste
 
             ttk.Label(grid, text=coin, style="CardH.TLabel", anchor="center", justify="center").grid(row=row, column=0, padx=(0,8), pady=2, sticky="ew")
@@ -468,7 +456,7 @@ class App(tk.Tk):
     # C) Représentation minimale — Complète (phrase)
     def _fill_min_full_sentence(self, total_cp):
         phrase, _, _ = minimal_sentence_from_cp(total_cp, TOKENS_ALL)
-        self.lbl_min_full.config(text=phrase.replace('<br>', '\n'))
+        self.lbl_min_full.config(text=phrase)
 
     # ---------- Utilities ----------
     def export_csv(self):
