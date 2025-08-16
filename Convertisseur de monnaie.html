@@ -68,7 +68,7 @@
     /* Équivalences compactes (1 ligne par métal) */
     .equiv-row{ display:grid; grid-template-columns:170px 1fr; gap:.5rem; align-items:start; }
     .equiv-row strong{ color:var(--boutique-text-accent); text-align:center; display:block; }
-    .equiv-text{ color:var(--boutique-text); }
+    .equiv-text{ color:var(--boutique-text); text-align:center; }
 
     /* Phrase finale */
     .minimal-phrase{
@@ -210,9 +210,16 @@
     }
     const parts = items.map(it => it.mult===1
       ? `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)}`
-      : `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)} x${it.mult}`
+      : `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)} x${fmt(it.mult)}`
     );
-    return { text: parts.length ? `Représentation minimale : ${joinEt(parts)}` : "Représentation minimale : —", items, remaining };
+    const totalPieces = items.reduce((sum,it)=>sum+it.qty,0);
+    return {
+      text: parts.length ? `Représentation minimale : ${joinEt(parts)}` : "Représentation minimale : —",
+      parts,
+      totalPieces,
+      items,
+      remaining
+    }; 
   }
 
   // --- Conversion table (colonnes dynamiques)
@@ -270,10 +277,10 @@
       }
       if (!parts.length) continue; // ligne inutile -> on saute
 
-      let summary = joinEt(parts);
+      const lines = parts.slice();
       if (remainderCp>0){
         const rem = minimalSentenceFromCp(remainderCp);
-        summary += " — Reste : " + rem.text.replace("Représentation minimale : ","");
+        lines.push(...rem.parts);
       }
 
       const row = document.createElement("div"); row.className = "equiv-row";
@@ -281,7 +288,7 @@
       const right = document.createElement("div");
       left.innerHTML = `<strong>${coin}</strong>`;
       right.className = "equiv-text";
-      right.textContent = summary;
+      right.innerHTML = lines.join("<br>");
 
       row.appendChild(left); row.appendChild(right);
       equivList.appendChild(row);
@@ -295,7 +302,8 @@
   function fillMinimal(totalCp){
     if (totalCp<=0){ minimalCard.classList.add("is-hidden"); return; }
     const res = minimalSentenceFromCp(totalCp);
-    minimalText.textContent = res.text;
+    const line = res.parts.length ? joinEt(res.parts) : "—";
+    minimalText.innerHTML = `Représentation minimale<br>${line}<br>Nombre total de pièces : ${fmt(res.totalPieces)}`;
     minimalCard.classList.remove("is-hidden");
   }
 
