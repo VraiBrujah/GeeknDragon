@@ -24,40 +24,15 @@
   );
 
   const multipliers = [1, 10, 100, 1000, 10000];
-  const coinOrder = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+  const coins = Object.keys(rates);
 
-  /**
-   * Convert a value to coin parts using multipliers for each coin type.
-   * @param {number} baseValue - total value in copper pieces
-   * @returns {Array} list of {coin, multiplier, qty}
-   */
-  const computeCoinParts = (baseValue) => {
-    const baseCounts = {};
-    let remaining = baseValue;
-    coinOrder.forEach((coin) => {
-      const value = rates[coin];
-      const qty = Math.floor(remaining / value);
-      if (qty > 0) {
-        baseCounts[coin] = qty;
-        remaining -= qty * value;
-      }
-    });
-
-    const multiplierOrder = [10000, 1000, 100, 10, 1];
-    const parts = [];
-    coinOrder.forEach((coin) => {
-      let count = baseCounts[coin] || 0;
-      multiplierOrder.forEach((multiplier) => {
-        const qty = Math.floor(count / multiplier);
-        if (qty > 0) {
-          parts.push({ coin, multiplier, qty });
-          count -= qty * multiplier;
-        }
-      });
-    });
-
-    return parts;
-  };
+  const denominations = multipliers
+    .flatMap((multiplier) => coins.map((coin) => ({
+      coin,
+      multiplier,
+      value: rates[coin] * multiplier,
+    })))
+    .sort((a, b) => b.value - a.value);
 
   /**
    * Render converted values for all currencies.
@@ -77,8 +52,18 @@
       });
     });
 
-    const parts = computeCoinParts(baseValue).map(
-      ({ coin, multiplier, qty }) => `${qty} ${currencyNames[coin]}${multiplier > 1 ? ` x${multiplier}` : ''}`,
+    let remaining = baseValue;
+    const counts = {};
+    denominations.forEach(({ coin, multiplier, value }) => {
+      const qty = Math.floor(remaining / value);
+      if (qty > 0) {
+        counts[coin] = (counts[coin] || 0) + qty * multiplier;
+        remaining -= qty * value;
+      }
+    });
+
+    const parts = Object.entries(counts).map(
+      ([coin, qty]) => `${qty} ${currencyNames[coin]}`,
     );
     best.textContent = parts.length > 1
       ? `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`
