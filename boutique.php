@@ -303,7 +303,10 @@ echo $snipcartInit;
           </div>
 
           <div class="feature-card">
-            <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-16 w-auto mx-auto mb-4" loading="lazy">
+            <img src="/images/logo-fabrique-BqFMdtDT.png" 
+				 alt="Logo Fabriqué au Québec" 
+				 class="max-w-[200px] max-h-[200px] w-auto h-auto mx-auto mb-4" 
+				 loading="lazy">
             <h4 class="feature-title">Qualité artisanale</h4>
             <p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
           </div>
