@@ -116,7 +116,9 @@
       "gold": "pièce d’or",
       "platinum": "pièce de platine",
       "multiplier": "Multiplicateur",
+      "equivTitle": "Équivalences totales par métal",
       "bestLabel": "Représentation minimale :",
+      "remainder": "Reste",
       "and": "et"
     },
     "chest": {
