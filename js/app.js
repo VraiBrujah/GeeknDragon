@@ -388,13 +388,19 @@ function fullyVisible(el) {
 }
 // Fonction universelle de gestion des vidéos
 function initVideoManager(videoIds) {
+  console.log('🎥 initVideoManager appelé avec:', videoIds);
   const videos = videoIds.map((id) => document.getElementById(id)).filter(Boolean);
-  if (videos.length === 0) return;
+  console.log('🎥 Vidéos trouvées:', videos.map(v => v.id));
+  if (videos.length === 0) {
+    console.log('❌ Aucune vidéo trouvée');
+    return;
+  }
   
   let current = 0;
   let audioOK = false;
   let playSeq;
   const isSequenceMode = videos.length > 1;
+  console.log('🎥 Mode:', isSequenceMode ? 'SEQUENCE' : 'BOUCLE');
 
   videos.forEach((vid) => {
     vid.dataset.userPaused = 'false';
@@ -447,9 +453,15 @@ function initVideoManager(videoIds) {
 
   const enableAudio = () => {
     if (audioOK) return;
+    console.log('🔊 enableAudio appelé');
     audioOK = true;
-    const v = videos[current];
-    if (v && !v.paused) { v.muted = false; updateBtn(v); }
+    // En mode boucle, on utilise la première vidéo
+    const v = isSequenceMode ? videos[current] : videos[0];
+    if (v && !v.paused) { 
+      v.muted = false; 
+      updateBtn(v); 
+      console.log('🔊 Audio activé pour:', v.id);
+    }
   };
 
   ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => {
@@ -468,12 +480,16 @@ function initVideoManager(videoIds) {
   });
 
   function start(vid) {
+    console.log('🚀 start() appelé pour:', vid.id, 'audioOK:', audioOK);
     vid.muted = !audioOK;
     vid.currentTime = 0;
+    console.log('▶️ Tentative de lecture...');
     vid.play().then(() => { 
+      console.log('✅ Vidéo en cours de lecture');
       if (audioOK) vid.muted = false; 
       updateBtn(vid); 
-    }).catch(() => { 
+    }).catch((error) => { 
+      console.log('❌ Erreur lecture, fallback muet:', error);
       vid.muted = true; 
       vid.play(); 
       updateBtn(vid); 
@@ -481,11 +497,13 @@ function initVideoManager(videoIds) {
     
     // Mode boucle pour vidéo unique, séquence pour multiple
     if (isSequenceMode) {
+      console.log('🔄 Mode séquence configuré');
       vid.onended = () => { 
         current += 1; 
         if (current < videos.length) playSeq(current); 
       };
     } else {
+      console.log('🔄 Mode boucle configuré');
       vid.loop = true;
       vid.onended = null;
     }
@@ -522,25 +540,36 @@ function initVideoManager(videoIds) {
   } else {
     // Mode boucle : démarrer la vidéo unique quand visible
     const vid = videos[0];
+    console.log('🔄 Mode boucle pour:', vid.id);
     
     // Ajouter l'événement click
     vid.addEventListener('click', () => {
+      console.log('🖱️ Click sur vidéo unique:', vid.id, 'paused:', vid.paused);
       if (vid.paused) { 
-        if (!audioOK) enableAudio(); 
+        if (!audioOK) {
+          console.log('🔊 Activation audio');
+          enableAudio(); 
+        }
+        console.log('▶️ Démarrage vidéo');
         start(vid); 
       } else { 
+        console.log('⏸️ Pause vidéo');
         vid.pause(); 
       }
     });
     
     // Observer pour démarrer automatiquement quand visible
     const startObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
+      const entry = entries[0];
+      console.log('👁️ Visibility changed:', entry.isIntersecting, 'pour', vid.id);
+      if (entry.isIntersecting) {
+        console.log('🚀 Démarrage auto de la vidéo');
         startObserver.disconnect();
         start(vid);
       }
-    }, { threshold: 0.2 });
+    }, { threshold: 0.1 });
     
+    console.log('👁️ Observer attaché à:', vid.id);
     startObserver.observe(vid);
   }
 }
