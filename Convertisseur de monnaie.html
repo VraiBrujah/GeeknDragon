@@ -65,10 +65,10 @@
     .table td{ text-align:center; }
     .table td:first-child,.table th:first-child{ text-align:left; }
 
-    /* Équivalences totales par métal */
-    .equiv-row{ display:grid; grid-template-columns:170px 1fr 1fr; gap:.5rem; }
+    /* Équivalences compactes (1 ligne par métal) */
+    .equiv-row{ display:grid; grid-template-columns:170px 1fr; gap:.5rem; align-items:start; }
     .equiv-row strong{ color:var(--boutique-text-accent); text-align:center; display:block; }
-    .equiv-text{ color:var(--boutique-text); text-align:center; }
+    .equiv-text{ color:var(--boutique-text); }
 
     /* Phrase finale */
     .minimal-phrase{
@@ -248,7 +248,7 @@
   // --- Équivalences par métal (compact, 1 ligne)
   function fillEquivalences(totalCp){
     equivList.innerHTML="";
-    const rows = [];
+    let any=false;
 
     for(const coin of COINS){
       const base = RATES[coin];
@@ -262,59 +262,40 @@
         const q = Math.floor(rest/m);
         if(q>0){
           parts.push(m===1
-            ? `${fmt(q)} ${pieceWord(q)} ${articleDe(coin)}`
-            : `${fmt(q)} ${pieceWord(q)} ${articleDe(coin)} x${fmt(m)}`
+            ? `${fmt(q)} ${pieceWord(q)}`
+            : `${fmt(q)} ${pieceWord(q)} x${fmt(m)}`
           );
           rest -= q*m;
         }
       }
-      if (!parts.length) continue;
+      if (!parts.length) continue; // ligne inutile -> on saute
 
-      const eqLines = parts;
-      const restLines = [];
+      let summary = joinEt(parts);
       if (remainderCp>0){
         const rem = minimalSentenceFromCp(remainderCp);
-        for(const it of rem.items){
-          restLines.push(it.mult===1
-            ? `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)}`
-            : `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)} x${it.mult}`
-          );
-        }
+        summary += " — Reste : " + rem.text.replace("Représentation minimale : ","");
       }
 
       const row = document.createElement("div"); row.className = "equiv-row";
-      const left = document.createElement("div"); left.innerHTML = `<strong>${coin}</strong>`;
-      const equivDiv = document.createElement("div"); equivDiv.className = "equiv-text"; equivDiv.innerHTML = eqLines.join("<br>");
-      const restDiv = document.createElement("div"); restDiv.className = "equiv-text"; restDiv.innerHTML = restLines.length ? restLines.join("<br>") : "—";
+      const left = document.createElement("div");
+      const right = document.createElement("div");
+      left.innerHTML = `<strong>${coin}</strong>`;
+      right.className = "equiv-text";
+      right.textContent = summary;
 
-      row.append(left, equivDiv, restDiv);
-      rows.push(row);
+      row.appendChild(left); row.appendChild(right);
+      equivList.appendChild(row);
+      any=true;
     }
 
-    if (rows.length){
-      const head = document.createElement("div"); head.className = "equiv-row";
-      ["Métal","Équivalence","Reste"].forEach(t => {
-        const d = document.createElement("div");
-        d.innerHTML = `<strong>${t}</strong>`;
-        head.appendChild(d);
-      });
-      equivList.appendChild(head);
-      for(const r of rows) equivList.appendChild(r);
-    }
-
-    equivCard.classList.toggle("is-hidden", !rows.length);
+    equivCard.classList.toggle("is-hidden", !any);
   }
 
   // --- Phrase minimale complète
   function fillMinimal(totalCp){
     if (totalCp<=0){ minimalCard.classList.add("is-hidden"); return; }
     const res = minimalSentenceFromCp(totalCp);
-    const lines = res.items.map(it => it.mult===1
-      ? `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)}`
-      : `${fmt(it.qty)} ${pieceWord(it.qty)} ${articleDe(it.coin)} x${it.mult}`
-    );
-    const total = res.items.reduce((sum,it)=>sum+it.qty,0);
-    minimalText.innerHTML = `Représentation minimale<br>${lines.length ? joinEt(lines) : "—"}<br>Nombre total de pièces : ${fmt(total)}`;
+    minimalText.textContent = res.text;
     minimalCard.classList.remove("is-hidden");
   }
 
