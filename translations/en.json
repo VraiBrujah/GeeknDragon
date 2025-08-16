@@ -107,6 +107,16 @@
       "description": "<strong>A role-playing game without physical coins is like Monopoly without money:</strong> it works, but it loses all its flavor.<br><br>Treasure lies at the heart of almost every D&D campaign… yet when it's reduced to numbers written and erased a hundred times, it loses all magic and impact.<br><br>For the sake of simplicity, we almost always stick to the gold piece, forgetting the richness of other currencies.<br><br>With our physical coins, the math stays simple, but every haul becomes tangible, memorable — worthy of the grandest quests.",
       "video": "Watch Pierre-Louis's video (Es-Tu Game?) — “The Economy of D&D 💰 RPG Tips”"
     },
+    "converter": {
+      "title": "Currency converter",
+      "sourceLabel": "Source currency",
+      "amountLabel": "Amount",
+      "copper": "Copper piece",
+      "silver": "Silver piece",
+      "electrum": "Electrum piece",
+      "gold": "Gold piece",
+      "platinum": "Platinum piece"
+    },
     "chest": {
       "title": "Custom chests",
       "description": "Need more than 50 coins? Custom chests are available on request.",
