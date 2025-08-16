@@ -334,7 +334,7 @@ echo $snipcartInit;
         </div>
 
         <div class="trust-badge">
-          <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-8 w-auto" loading="lazy">
+          <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-6 w-auto" loading="lazy">
           <span>Fabriqué au Québec</span>
         </div>
 
