@@ -134,16 +134,20 @@ echo $snipcartInit;
 
         <!-- Vidéo de présentation -->
         <div class="mt-8 flex justify-center">
-          <div class="relative rounded-lg overflow-hidden" style="width: 420px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);">
-            <video src="videos/es-tu-game-demo.mp4" 
-                   class="w-full h-auto"
-                   autoplay
-                   loop
-                   muted
-                   playsinline
+          <div class="relative group rounded-lg overflow-hidden" style="width: 420px;">
+            <video id="es-tu-game-video" 
+                   src="videos/es-tu-game-demo.mp4" 
+                   class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
+                   playsinline 
                    preload="metadata">
               Votre navigateur ne supporte pas la lecture vidéo.
             </video>
+            <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
+                           bg-black/60 text-white text-sm px-2 py-1 rounded"
+                    data-video="es-tu-game-video">🔊</button>
+            <p class="text-center text-sm mt-2 text-gray-300 txt-court">
+              L'Économie de D&D 💰 Conseils Jeux de Rôle
+            </p>
           </div>
         </div>
 
@@ -366,5 +370,98 @@ echo $snipcartInit;
   <script src="/js/hero-videos.js"></script>
   <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
   <script src="/js/currency-converter.js"></script>
+  <script>
+  // Gestion de la vidéo Es-Tu Game comme dans es-tu-game.php
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.getElementById('es-tu-game-video');
+    if (!video) return;
+    
+    // Configuration initiale
+    video.dataset.userPaused = 'false';
+    video.dataset.autoPaused = 'false';
+    video.loop = true; // Boucle en continu
+    let audioOK = false;
+    
+    // Gestion du hover
+    const addClass = () => video.classList.add('scale-105', 'z-10');
+    const removeClass = () => video.classList.remove('scale-105', 'z-10');
+    video.addEventListener('mouseenter', addClass);
+    video.addEventListener('mouseleave', removeClass);
+    video.addEventListener('touchstart', addClass, { passive: true });
+    video.addEventListener('touchend', removeClass, { passive: true });
+    
+    // Mise à jour du bouton mute
+    function updateBtn() {
+      const b = document.querySelector('.mute-btn[data-video="es-tu-game-video"]');
+      if (b) b.innerHTML = video.muted ? '🔇' : '🔊';
+    }
+    
+    // Activation de l'audio au premier clic
+    const enableAudio = () => {
+      if (audioOK) return;
+      audioOK = true;
+      if (!video.paused) {
+        video.muted = false;
+        updateBtn();
+      }
+    };
+    
+    ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => {
+      window.addEventListener(evt, enableAudio, { once: true, passive: true });
+    });
+    
+    // Bouton mute/unmute
+    const muteBtn = document.querySelector('.mute-btn[data-video="es-tu-game-video"]');
+    if (muteBtn) {
+      muteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        updateBtn();
+      });
+    }
+    
+    // Gestion de la visibilité (pause quand pas visible)
+    const visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (video.dataset.autoPaused === 'true' && video.dataset.userPaused === 'false') {
+            video.dataset.autoPaused = 'false';
+            video.play().catch(() => {});
+          }
+        } else {
+          if (!video.paused && video.dataset.userPaused === 'false') {
+            video.dataset.autoPaused = 'true';
+            video.pause();
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    visibilityObserver.observe(video);
+    
+    // Gestion du clic sur la vidéo (play/pause)
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        video.dataset.userPaused = 'false';
+        video.play().then(() => {
+          if (audioOK) video.muted = false;
+          updateBtn();
+        }).catch(() => {
+          video.muted = true;
+          video.play();
+          updateBtn();
+        });
+      } else {
+        video.dataset.userPaused = 'true';
+        video.pause();
+      }
+    });
+    
+    // Démarrage initial
+    video.muted = true; // Commence en muet
+    video.play().catch(() => {});
+    updateBtn();
+  });
+  </script>
 </body>
 </html>
