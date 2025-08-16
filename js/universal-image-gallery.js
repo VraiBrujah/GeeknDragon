@@ -332,27 +332,51 @@
     config.includeSelectors.forEach(selector => {
       const images = document.querySelectorAll(selector);
       images.forEach(img => {
-        if (!isExcluded(img) && !img.classList.contains('gallery-enabled')) {
+        if (!isExcluded(img) && !img.classList.contains('gallery-enabled') && !img.dataset.galleryProcessed) {
           includeImages.push(img);
         }
       });
     });
     
+    // Si aucune nouvelle image, on arrête
+    if (includeImages.length === 0) {
+      return;
+    }
+    
     // Appliquer la galerie
     includeImages.forEach((img, index) => {
-      // Marquer comme activée
+      // Marquer comme activée ET comme traitée
       img.classList.add('gallery-enabled');
+      img.dataset.galleryProcessed = 'true';
       img.dataset.galleryIndex = index;
       
-      // Ajouter l'événement click
-      img.addEventListener('click', function(e) {
+      // Ajouter l'événement click (une seule fois)
+      const clickHandler = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        openGallery(this, includeImages);
-      });
+        openGallery(this, getAllGalleryImages());
+      };
+      
+      img.addEventListener('click', clickHandler);
+      // Stocker la référence pour éviter les doublons
+      img._galleryClickHandler = clickHandler;
     });
     
-    console.log(`✅ Galerie appliquée à ${includeImages.length} images`);
+    console.log(`✅ Galerie appliquée à ${includeImages.length} nouvelles images`);
+  }
+  
+  // Fonction helper pour récupérer toutes les images de galerie
+  function getAllGalleryImages() {
+    const allImages = [];
+    config.includeSelectors.forEach(selector => {
+      const images = document.querySelectorAll(selector + '.gallery-enabled');
+      images.forEach(img => {
+        if (!isExcluded(img)) {
+          allImages.push(img);
+        }
+      });
+    });
+    return allImages;
   }
 
   // ========================================================================
@@ -557,6 +581,7 @@
   // OBSERVER POUR CONTENU DYNAMIQUE
   // ========================================================================
   
+  let observerTimeout = null;
   function observeNewImages() {
     const observer = new MutationObserver((mutations) => {
       let hasNewImages = false;
@@ -564,11 +589,11 @@
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
           if (node.nodeType === 1) { // Element node
-            if (node.tagName === 'IMG' && !isExcluded(node)) {
+            if (node.tagName === 'IMG' && !isExcluded(node) && !node.dataset.galleryProcessed) {
               hasNewImages = true;
             }
             // Vérifier aussi les enfants
-            const imgs = node.querySelectorAll('img');
+            const imgs = node.querySelectorAll('img:not([data-gallery-processed])');
             if (imgs.length > 0) {
               hasNewImages = true;
             }
@@ -577,8 +602,11 @@
       });
       
       if (hasNewImages) {
-        // Réappliquer la galerie après un délai
-        setTimeout(applyGalleryToImages, 100);
+        // Debounce : attendre que les mutations se calment
+        if (observerTimeout) {
+          clearTimeout(observerTimeout);
+        }
+        observerTimeout = setTimeout(applyGalleryToImages, 250);
       }
     });
     
@@ -599,9 +627,17 @@
     init();
   }
   
-  // Réinitialiser après le chargement complet (pour les images lazy)
+  // Réinitialiser après le chargement complet (pour les images lazy) - seulement si nécessaire
   window.addEventListener('load', () => {
-    setTimeout(applyGalleryToImages, 500);
+    // Vérifier s'il y a des images non traitées avant de réappliquer
+    const unprocessedImages = document.querySelectorAll('img:not([data-gallery-processed])');
+    const needProcessing = Array.from(unprocessedImages).some(img => {
+      return config.includeSelectors.some(selector => img.matches(selector)) && !isExcluded(img);
+    });
+    
+    if (needProcessing) {
+      setTimeout(applyGalleryToImages, 500);
+    }
   });
 
   // ========================================================================
