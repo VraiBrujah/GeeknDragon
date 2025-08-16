@@ -7,7 +7,12 @@
         "symfony/polyfill-php80": "^1.28",
         "erusev/parsedown": "^1.7"
     },
+    "autoload": {
+        "psr-4": {
+            "GeeknDragon\\": "classes/"
+        }
+    },
     "config": {
-        "disable-tls": false
+        "disable-tls": true
     }
 }
