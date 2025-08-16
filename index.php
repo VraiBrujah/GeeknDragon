@@ -181,7 +181,9 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           
           <!-- Boutons d'action -->
           <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="<?= langUrl('contact.php') ?>" class="btn btn-primary px-8 py-3" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%); font-weight: 600;">
+            <!-- Temporairement redirigé vers la section contact de cette page (emails perdus 70% du temps) -->
+            <!-- <a href="<?= langUrl('contact.php') ?>" class="btn btn-primary px-8 py-3" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%); font-weight: 600;"> -->
+            <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary px-8 py-3" style="background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%); font-weight: 600;">
               <svg class="w-5 h-5 inline mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"></path>
               </svg>
