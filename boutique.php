@@ -227,10 +227,10 @@ echo $snipcartInit;
               </tbody>
             </table>
           </div>
-          <div id="currency-equivalences" class="mt-4 bg-gray-800 rounded-lg p-4 text-gray-200 hidden">
+          <div id="currency-equivalences" class="mt-4 bg-gray-900 rounded-lg p-4 text-gray-200 hidden">
             <h5 class="mb-2" data-i18n="shop.converter.equivTitle">Équivalences totales par métal</h5>
             <table id="currency-equivalences-list" class="w-full text-left text-sm">
-              <thead>
+              <thead class="bg-gray-700">
                 <tr>
                   <th data-i18n="shop.converter.equivMetal">Métal</th>
                   <th data-i18n="shop.converter.equivEquivalent">Équivalence</th>
@@ -241,7 +241,7 @@ echo $snipcartInit;
               <tbody></tbody>
             </table>
           </div>
-          <p id="currency-best" class="mt-4" data-i18n="shop.converter.bestLabel"></p>
+          <div id="currency-best" class="mt-2 bg-gray-900 rounded-lg p-4 text-gray-200 hidden" data-i18n="shop.converter.bestLabel"></div>
         </div>
       </section>
 
