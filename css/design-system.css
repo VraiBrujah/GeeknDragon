@@ -1,0 +1,556 @@
+/* ========================================================================
+   GEEK & DRAGON - DESIGN SYSTEM UNIFIÉ
+   Système de design cohérent pour toutes les pages
+   Thématique : Médiéval/Fantasy D&D avec modernité e-commerce
+   ======================================================================== */
+
+/* =================================================================== */
+/* VARIABLES GLOBALES - DESIGN TOKENS                                */
+/* =================================================================== */
+:root {
+  /* ===== COULEURS PRINCIPALES ===== */
+  /* Palette médiévale modernisée */
+  --gd-primary: #8b5cf6;              /* Violet royal - magie */
+  --gd-primary-light: #a855f7;        /* Violet clair */
+  --gd-primary-dark: #7c3aed;         /* Violet foncé */
+  --gd-secondary: #10b981;            /* Vert émeraude - nature/druide */
+  --gd-secondary-light: #34d399;      /* Vert clair */
+  --gd-accent: #f59e0b;               /* Or - trésor */
+  --gd-accent-light: #fbbf24;         /* Or clair */
+  --gd-danger: #ef4444;               /* Rouge sang - combat */
+  --gd-warning: #f97316;              /* Orange - alerte */
+  
+  /* ===== SURFACES ET ARRIÈRE-PLANS ===== */
+  /* Dégradés sombres inspirés des donjons */
+  --gd-bg-primary: #0f172a;           /* Noir profond - caverne */
+  --gd-bg-secondary: #1e293b;         /* Gris ardoise - pierre */
+  --gd-bg-tertiary: #334155;          /* Gris moyen - métal */
+  --gd-bg-elevated: #475569;          /* Gris clair - surface */
+  
+  /* ===== TEXTES ===== */
+  /* Hiérarchie lisible sur fonds sombres */
+  --gd-text-primary: #f1f5f9;         /* Blanc cassé - parchemin */
+  --gd-text-secondary: #cbd5e1;       /* Gris clair */
+  --gd-text-muted: #94a3b8;           /* Gris moyen */
+  --gd-text-disabled: #64748b;        /* Gris foncé */
+  --gd-text-on-primary: #ffffff;      /* Blanc pur sur couleurs */
+  
+  /* ===== BORDURES ET DIVISIONS ===== */
+  --gd-border-subtle: rgba(255, 255, 255, 0.08);
+  --gd-border-default: rgba(255, 255, 255, 0.12);
+  --gd-border-strong: rgba(255, 255, 255, 0.18);
+  --gd-border-accent: rgba(139, 92, 246, 0.3);
+  
+  /* ===== OMBRES - PROFONDEUR MÉDIÉVALE ===== */
+  --gd-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+  --gd-shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.15), 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --gd-shadow-lg: 0 8px 24px 0 rgba(0, 0, 0, 0.25), 0 4px 8px 0 rgba(0, 0, 0, 0.08);
+  --gd-shadow-xl: 0 16px 48px 0 rgba(0, 0, 0, 0.35), 0 8px 16px 0 rgba(0, 0, 0, 0.12);
+  --gd-shadow-glow: 0 0 24px rgba(139, 92, 246, 0.35);
+  --gd-shadow-glow-secondary: 0 0 24px rgba(16, 185, 129, 0.25);
+  
+  /* ===== GRADIENTS - MAGIE ET MYSTÈRE ===== */
+  --gd-gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
+  --gd-gradient-secondary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --gd-gradient-accent: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --gd-gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  --gd-gradient-surface: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+  --gd-gradient-overlay: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  --gd-gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  
+  /* ===== ANIMATIONS ET TRANSITIONS ===== */
+  --gd-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --gd-transition-default: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --gd-transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --gd-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --gd-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* ===== ESPACEMENTS - ÉCHELLE HARMONIQUE ===== */
+  --gd-space-xs: 0.25rem;             /* 4px */
+  --gd-space-sm: 0.5rem;              /* 8px */
+  --gd-space-md: 1rem;                /* 16px */
+  --gd-space-lg: 1.5rem;              /* 24px */
+  --gd-space-xl: 2rem;                /* 32px */
+  --gd-space-2xl: 3rem;               /* 48px */
+  --gd-space-3xl: 4rem;               /* 64px */
+  --gd-space-4xl: 6rem;               /* 96px */
+  
+  /* ===== RAYONS DE BORDURE ===== */
+  --gd-radius-sm: 0.5rem;             /* 8px */
+  --gd-radius-md: 0.75rem;            /* 12px */
+  --gd-radius-lg: 1rem;               /* 16px */
+  --gd-radius-xl: 1.5rem;             /* 24px */
+  --gd-radius-full: 9999px;           /* Cercle parfait */
+  
+  /* ===== TYPOGRAPHIE - MÉDIÉVALE MODERNE ===== */
+  --gd-font-heading: 'Cinzel', 'Times New Roman', serif;     /* Titres élégants */
+  --gd-font-body: 'Inter', 'Segoe UI', system-ui, sans-serif; /* Corps lisible */
+  --gd-font-mono: 'JetBrains Mono', 'Courier New', monospace; /* Code/données */
+  
+  /* Échelle typographique */
+  --gd-text-xs: 0.75rem;              /* 12px */
+  --gd-text-sm: 0.875rem;             /* 14px */
+  --gd-text-base: 1rem;               /* 16px */
+  --gd-text-lg: 1.125rem;             /* 18px */
+  --gd-text-xl: 1.25rem;              /* 20px */
+  --gd-text-2xl: 1.5rem;              /* 24px */
+  --gd-text-3xl: 1.875rem;            /* 30px */
+  --gd-text-4xl: 2.25rem;             /* 36px */
+  --gd-text-5xl: 3rem;                /* 48px */
+  --gd-text-6xl: 3.75rem;             /* 60px */
+  
+  /* Hauteurs de ligne optimisées */
+  --gd-leading-tight: 1.2;
+  --gd-leading-normal: 1.5;
+  --gd-leading-relaxed: 1.75;
+  
+  /* ===== Z-INDEX - COUCHES LOGIQUES ===== */
+  --gd-z-base: 0;
+  --gd-z-dropdown: 10;
+  --gd-z-sticky: 20;
+  --gd-z-modal: 30;
+  --gd-z-popover: 40;
+  --gd-z-tooltip: 50;
+  
+  /* ===== BREAKPOINTS ===== */
+  --gd-screen-sm: 640px;
+  --gd-screen-md: 768px;
+  --gd-screen-lg: 1024px;
+  --gd-screen-xl: 1280px;
+  --gd-screen-2xl: 1536px;
+}
+
+/* =================================================================== */
+/* RESET ET BASE HARMONISÉS                                          */
+/* =================================================================== */
+
+/* Reset spécifique au projet */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--gd-font-body);
+  font-size: var(--gd-text-base);
+  line-height: var(--gd-leading-normal);
+  color: var(--gd-text-primary);
+  background: var(--gd-bg-primary);
+  min-height: 100vh;
+}
+
+/* =================================================================== */
+/* COMPOSANTS DE BASE - BUTTONS                                      */
+/* =================================================================== */
+
+.gd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gd-space-sm);
+  padding: var(--gd-space-md) var(--gd-space-xl);
+  border: none;
+  border-radius: var(--gd-radius-lg);
+  font-family: var(--gd-font-heading);
+  font-size: var(--gd-text-base);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--gd-transition-default);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.gd-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.gd-btn:hover::before {
+  left: 100%;
+}
+
+/* Variantes de boutons */
+.gd-btn--primary {
+  background: var(--gd-gradient-primary);
+  color: var(--gd-text-on-primary);
+  box-shadow: var(--gd-shadow-md);
+}
+
+.gd-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--gd-shadow-lg), var(--gd-shadow-glow);
+}
+
+.gd-btn--secondary {
+  background: var(--gd-gradient-secondary);
+  color: var(--gd-text-on-primary);
+  box-shadow: var(--gd-shadow-md);
+}
+
+.gd-btn--secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--gd-shadow-lg), var(--gd-shadow-glow-secondary);
+}
+
+.gd-btn--outline {
+  background: transparent;
+  border: 2px solid var(--gd-border-strong);
+  color: var(--gd-text-primary);
+}
+
+.gd-btn--outline:hover {
+  background: var(--gd-gradient-primary);
+  border-color: transparent;
+  color: var(--gd-text-on-primary);
+}
+
+.gd-btn--ghost {
+  background: transparent;
+  color: var(--gd-text-secondary);
+}
+
+.gd-btn--ghost:hover {
+  background: var(--gd-bg-secondary);
+  color: var(--gd-text-primary);
+}
+
+/* Tailles de boutons */
+.gd-btn--sm {
+  padding: var(--gd-space-sm) var(--gd-space-md);
+  font-size: var(--gd-text-sm);
+}
+
+.gd-btn--lg {
+  padding: var(--gd-space-lg) var(--gd-space-2xl);
+  font-size: var(--gd-text-lg);
+}
+
+.gd-btn--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* =================================================================== */
+/* COMPOSANTS DE BASE - CARDS                                        */
+/* =================================================================== */
+
+.gd-card {
+  background: var(--gd-gradient-surface);
+  border: 1px solid var(--gd-border-default);
+  border-radius: var(--gd-radius-lg);
+  box-shadow: var(--gd-shadow-md);
+  transition: var(--gd-transition-default);
+  position: relative;
+  overflow: hidden;
+}
+
+.gd-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gd-gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.gd-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--gd-shadow-xl), var(--gd-shadow-glow);
+  border-color: var(--gd-border-accent);
+}
+
+.gd-card:hover::before {
+  transform: scaleX(1);
+}
+
+.gd-card__header {
+  padding: var(--gd-space-lg);
+  border-bottom: 1px solid var(--gd-border-subtle);
+}
+
+.gd-card__body {
+  padding: var(--gd-space-lg);
+}
+
+.gd-card__footer {
+  padding: var(--gd-space-lg);
+  border-top: 1px solid var(--gd-border-subtle);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* =================================================================== */
+/* COMPOSANTS DE BASE - TYPOGRAPHIE                                  */
+/* =================================================================== */
+
+.gd-heading {
+  font-family: var(--gd-font-heading);
+  font-weight: 700;
+  line-height: var(--gd-leading-tight);
+  color: var(--gd-text-primary);
+  margin-bottom: var(--gd-space-md);
+}
+
+.gd-heading--1 { font-size: var(--gd-text-6xl); }
+.gd-heading--2 { font-size: var(--gd-text-5xl); }
+.gd-heading--3 { font-size: var(--gd-text-4xl); }
+.gd-heading--4 { font-size: var(--gd-text-3xl); }
+.gd-heading--5 { font-size: var(--gd-text-2xl); }
+.gd-heading--6 { font-size: var(--gd-text-xl); }
+
+.gd-text {
+  font-family: var(--gd-font-body);
+  line-height: var(--gd-leading-normal);
+  color: var(--gd-text-primary);
+}
+
+.gd-text--muted { color: var(--gd-text-muted); }
+.gd-text--secondary { color: var(--gd-text-secondary); }
+.gd-text--sm { font-size: var(--gd-text-sm); }
+.gd-text--lg { font-size: var(--gd-text-lg); }
+.gd-text--xl { font-size: var(--gd-text-xl); }
+
+/* =================================================================== */
+/* COMPOSANTS DE BASE - LAYOUT                                       */
+/* =================================================================== */
+
+.gd-container {
+  width: 100%;
+  max-width: var(--gd-screen-2xl);
+  margin: 0 auto;
+  padding: 0 var(--gd-space-md);
+}
+
+.gd-section {
+  padding: var(--gd-space-4xl) 0;
+  position: relative;
+}
+
+.gd-section--hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gd-gradient-hero);
+  position: relative;
+  overflow: hidden;
+}
+
+.gd-grid {
+  display: grid;
+  gap: var(--gd-space-xl);
+}
+
+.gd-grid--1 { grid-template-columns: 1fr; }
+.gd-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.gd-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.gd-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+.gd-flex {
+  display: flex;
+  gap: var(--gd-space-md);
+}
+
+.gd-flex--center {
+  align-items: center;
+  justify-content: center;
+}
+
+.gd-flex--between {
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =================================================================== */
+/* COMPOSANTS SPÉCIALISÉS E-COMMERCE                                */
+/* =================================================================== */
+
+.gd-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--gd-space-xl);
+  padding: var(--gd-space-md);
+}
+
+.gd-product-card {
+  @extend .gd-card;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.gd-product-media {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: var(--gd-radius-md);
+  margin-bottom: var(--gd-space-lg);
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.gd-product-media img,
+.gd-product-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--gd-transition-default);
+  will-change: transform;
+}
+
+.gd-product-card:hover .gd-product-media img,
+.gd-product-card:hover .gd-product-media video {
+  transform: scale(1.05);
+}
+
+/* =================================================================== */
+/* RESPONSIVE DESIGN - MOBILE FIRST                                  */
+/* =================================================================== */
+
+@media (max-width: 767px) {
+  :root {
+    --gd-space-xs: 0.125rem;
+    --gd-space-sm: 0.25rem;
+    --gd-space-md: 0.5rem;
+    --gd-space-lg: 1rem;
+    --gd-space-xl: 1.5rem;
+    --gd-space-2xl: 2rem;
+    --gd-space-3xl: 3rem;
+  }
+  
+  .gd-product-grid {
+    grid-template-columns: 1fr;
+    gap: var(--gd-space-lg);
+  }
+  
+  .gd-grid--2,
+  .gd-grid--3,
+  .gd-grid--4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .gd-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gd-grid--3,
+  .gd-grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .gd-product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+}
+
+/* =================================================================== */
+/* ANIMATIONS ET MICRO-INTERACTIONS                                  */
+/* =================================================================== */
+
+@keyframes gd-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gd-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gd-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.gd-animate-fade-up {
+  animation: gd-fade-in-up 0.6s var(--gd-smooth);
+}
+
+.gd-animate-scale-in {
+  animation: gd-scale-in 0.4s var(--gd-smooth);
+}
+
+.gd-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: gd-shimmer 2s infinite;
+}
+
+/* =================================================================== */
+/* UTILITAIRES                                                       */
+/* =================================================================== */
+
+.gd-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.gd-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gd-line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.gd-line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

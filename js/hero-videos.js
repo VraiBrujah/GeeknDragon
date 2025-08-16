@@ -33,9 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('playsinline', ''); // iOS
-      v.preload = 'auto';
+      v.preload = 'metadata'; // Optimisé: metadata au lieu de auto
       v.autoplay = true;
       v.loop = false; // géré au cas par cas
+      // Optimisation: loading priorité
+      v.loading = 'lazy';
       // Layout + anim
       v.style.position = 'absolute';
       v.style.inset = '0';
@@ -227,7 +229,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const buildAndStageNext = () => {
       next = buildNext();
       container.appendChild(next); // on l'ajoute cachée pour bufferiser
-      if (next.readyState < 2) next.load();
+      // Optimisation: preload intelligent - seulement quand nécessaire
+      setTimeout(() => {
+        if (next && next.parentNode) {
+          next.preload = 'auto';
+          if (next.readyState < 2) next.load();
+        }
+      }, 1000); // Délai pour éviter de surcharger
     };
 
     const goToNext = () => {
