@@ -67,8 +67,49 @@ echo $snipcartInit;
 
     <div class="bg-gray-800 p-6 rounded-xl shadow-lg product-panel">
       <?php if (!empty($images)) : ?>
-        <!-- Galerie produit optimisée avec MediaHelper -->
-        <?= \GeeknDragon\Helpers\MediaHelper::renderProductGallery($images, strip_tags($productName)) ?>
+        <!-- Galerie produit simplifiée (utilise universal-image-gallery.js) -->
+        <div class="product-gallery-container mb-6">
+          <!-- Image principale -->
+          <div class="main-image-container relative">
+            <?php $firstImage = $images[0]; $isFirstVideo = preg_match('/\.mp4$/i', $firstImage); ?>
+            <?php if ($isFirstVideo) : ?>
+              <video src="<?= htmlspecialchars($firstImage) ?>" 
+                     class="product-media main-product-media"
+                     muted playsinline controls
+                     data-no-gallery>
+              </video>
+            <?php else : ?>
+              <img src="<?= htmlspecialchars($firstImage) ?>"
+                   alt="<?= htmlspecialchars('Geek & Dragon – ' . strip_tags($productName)) ?>"
+                   class="product-media main-product-media"
+                   data-gallery="product">
+            <?php endif; ?>
+          </div>
+          
+          <!-- Thumbnails -->
+          <?php if (count($images) > 1) : ?>
+            <div class="thumbnails-container">
+              <div class="thumbnails-wrapper">
+                <?php foreach ($images as $index => $img) : ?>
+                  <?php $isVideo = preg_match('/\.mp4$/i', $img); ?>
+                  <?php if ($isVideo) : ?>
+                    <video src="<?= htmlspecialchars($img) ?>" 
+                           class="thumbnail-media <?= $index === 0 ? 'active' : '' ?>"
+                           data-index="<?= $index ?>"
+                           data-no-gallery
+                           muted></video>
+                  <?php else : ?>
+                    <img src="<?= htmlspecialchars($img) ?>" 
+                         alt="<?= htmlspecialchars('Image ' . ($index + 1) . ' - ' . strip_tags($productName)) ?>"
+                         class="thumbnail-media <?= $index === 0 ? 'active' : '' ?>"
+                         data-index="<?= $index ?>"
+                         data-gallery="product">
+                  <?php endif; ?>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          <?php endif; ?>
+        </div>
       <?php endif; ?>
       
       <div class="product-info">
@@ -196,24 +237,12 @@ echo $snipcartInit;
 <?php include 'footer.php'; ?>
 
 <script type="application/ld+json">
-<?php
-// Génération des métadonnées d'image optimisées
-$imageMetadata = !empty($images) 
-    ? \GeeknDragon\Helpers\MediaHelper::generateImageMetadata($images[0], $productName, $host)
-    : null;
-
-echo json_encode([
+<?= json_encode([
     '@context' => 'https://schema.org/',
     '@type' => 'Product',
     'name' => $productName,
     'description' => $productDescText,
-    'image' => $imageMetadata ? [
-        '@type' => 'ImageObject',
-        'url' => $imageMetadata['url'],
-        'width' => $imageMetadata['width'],
-        'height' => $imageMetadata['height'],
-        'description' => $imageMetadata['alt']
-    ] : null,
+    'image' => !empty($images) ? ('https://' . $host . '/' . ltrim($images[0], '/')) : null,
     'sku' => $id,
     'offers' => [
         '@type' => 'Offer',
@@ -221,13 +250,60 @@ echo json_encode([
         'priceCurrency' => 'CAD',
         'availability' => inStock($id) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
     ],
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-?>
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
 </script>
 
 <script src="js/app.js"></script>
 
-<?= \GeeknDragon\Helpers\MediaHelper::renderGalleryScript() ?>
+<!-- Script pour la navigation des thumbnails -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Navigation des thumbnails
+  const thumbnails = document.querySelectorAll('.thumbnail-media');
+  const mainImage = document.querySelector('.main-product-media');
+  
+  if (thumbnails.length && mainImage) {
+    thumbnails.forEach((thumb, index) => {
+      thumb.addEventListener('click', function() {
+        // Retirer la classe active de tous
+        thumbnails.forEach(t => t.classList.remove('active'));
+        // Ajouter active au thumbnail cliqué
+        this.classList.add('active');
+        
+        // Changer l'image principale
+        if (mainImage.tagName === 'IMG' && this.tagName === 'IMG') {
+          mainImage.src = this.src;
+          mainImage.alt = this.alt;
+        } else if (mainImage.tagName === 'VIDEO' && this.tagName === 'VIDEO') {
+          mainImage.src = this.src;
+        } else if (mainImage.tagName === 'IMG' && this.tagName === 'VIDEO') {
+          // Remplacer img par video
+          const newVideo = document.createElement('video');
+          newVideo.className = mainImage.className;
+          newVideo.src = this.src;
+          newVideo.controls = true;
+          newVideo.muted = true;
+          newVideo.playsInline = true;
+          newVideo.dataset.noGallery = true;
+          mainImage.parentNode.replaceChild(newVideo, mainImage);
+        } else if (mainImage.tagName === 'VIDEO' && this.tagName === 'IMG') {
+          // Remplacer video par img
+          const newImg = document.createElement('img');
+          newImg.className = mainImage.className;
+          newImg.src = this.src;
+          newImg.alt = this.alt;
+          newImg.dataset.gallery = 'product';
+          mainImage.parentNode.replaceChild(newImg, mainImage);
+          // Réappliquer la galerie
+          if (window.UniversalGallery) {
+            window.UniversalGallery.refresh();
+          }
+        }
+      });
+    });
+  }
+});
+</script>
 
 <!-- Patch : mettre à jour quantité & multiplicateur juste avant l'ajout -->
 <script>
