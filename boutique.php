@@ -335,15 +335,15 @@ echo $snipcartInit;
       <div class="flex flex-col items-center gap-12">
         <div class="features-grid">
           <div class="feature-card">
-            <span class="feature-icon">📋</span>
-            <h4 class="feature-title">Carte de propriété</h4>
-            <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
-          </div>
-
-          <div class="feature-card">
             <span class="feature-icon">💰</span>
             <h4 class="feature-title">Investissement partagé</h4>
             <p class="feature-description" data-i18n="shop.collective.description1">Ne laissez pas le maître de jeu se ruiner pour votre plaisir : chaque joueur peut contribuer en achetant son matériel.</p>
+          </div>
+
+          <div class="feature-card">
+            <span class="feature-icon"><img src="images/carte_propriete.png" alt="Carte de propriété" class="property-image"></span>
+            <h4 class="feature-title">Carte de propriété</h4>
+            <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
           </div>
 
           <div class="feature-card">
@@ -465,6 +465,13 @@ echo $snipcartInit;
     document.addEventListener('fullscreenchange', () => {
       if (!document.fullscreenElement && !modal.classList.contains('hidden')) closeModal();
     });
+
+    const propertyImg = document.querySelector('.property-image');
+    if (propertyImg) {
+      propertyImg.addEventListener('click', () => {
+        propertyImg.classList.toggle('expanded');
+      });
+    }
   });
   </script>
 </body>

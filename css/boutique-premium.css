@@ -505,6 +505,18 @@
 
 .feature-icon { font-size: 3rem; margin-bottom: var(--boutique-space-lg); display: block; }
 
+.feature-icon img {
+  width: 3rem;
+  height: auto;
+  cursor: pointer;
+  transition: width 0.3s ease;
+  max-width: 100%;
+}
+
+.feature-icon img.expanded {
+  width: 80%;
+}
+
 .feature-title {
   font-family: 'Cinzel', serif;
   font-size: 1.25rem;
