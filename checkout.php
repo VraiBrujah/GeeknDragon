@@ -42,9 +42,18 @@ echo $snipcartInit;
       <div class="space-y-4 mb-8">
         <?php foreach ($cart['items'] as $item): ?>
           <?php $qty = (int)($item['quantity'] ?? 1); ?>
-          <div class="flex justify-between text-gray-200">
-            <span><?= htmlspecialchars($item['name']) ?> × <?= $qty ?></span>
-            <span><?= number_format(($item['price'] ?? 0) * $qty, 2) ?> <?= htmlspecialchars($cart['currency'] ?? 'CAD') ?></span>
+          <div class="text-gray-200">
+            <div class="flex justify-between">
+              <span><?= htmlspecialchars($item['name']) ?> × <?= $qty ?></span>
+              <span><?= number_format(($item['price'] ?? 0) * $qty, 2) ?> <?= htmlspecialchars($cart['currency'] ?? 'CAD') ?></span>
+            </div>
+            <?php if (!empty($item['variants']) && is_array($item['variants'])): ?>
+              <ul class="ml-4 text-sm text-gray-400 list-disc">
+                <?php foreach ($item['variants'] as $variantName => $variantValue): ?>
+                  <li><?= htmlspecialchars($variantName) ?> : <?= htmlspecialchars($variantValue) ?></li>
+                <?php endforeach; ?>
+              </ul>
+            <?php endif; ?>
           </div>
         <?php endforeach; ?>
       </div>
