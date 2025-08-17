@@ -349,6 +349,7 @@ body.snipcart-open { overflow: hidden; }
   left: 0; right: 0; bottom: 0;
   height: auto;
   overflow-y: auto !important;
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -360,7 +361,8 @@ body.snipcart-open { overflow: hidden; }
   position: static !important;
   height: auto !important;
   max-height: none !important;
-  overflow: visible !important;
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch;
 }
 
 }
