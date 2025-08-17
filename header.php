@@ -76,7 +76,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
-  <div class="max-w-7xl mx-auto relative flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
+  <div class="max-w-7xl mx-auto relative flex flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
     <!-- Logo à gauche -->
     <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex items-center group transition-colors duration-200 flex-shrink-0">
       <img src="/images/geekndragon_logo_blanc.png" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105" width="200" height="200">
@@ -94,7 +94,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </div>
 
     <!-- Partie droite -->
-    <div class="flex items-center gap-4 md:gap-8 flex-shrink-0">
+    <div class="flex items-center gap-4 md:gap-8 flex-shrink-0 flex-nowrap">
       <!-- Bouton hamburger -->
       <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +121,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 
       <?php if ($snipcartKey): ?>
       <!-- Snipcart : icônes EMPILÉES partout -->
-      <div class="flex flex-col items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
+      <div class="flex items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
         <button class="snipcart-customer-signin snipcart-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
