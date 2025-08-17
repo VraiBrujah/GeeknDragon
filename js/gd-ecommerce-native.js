@@ -762,8 +762,12 @@
         if (e.target.id === 'gd-cart-modal') closeModal('gd-cart-modal');
       }
       
-      if (e.target.classList.contains('gd-modal-close')) {
-        const modalType = e.target.dataset.modal;
+      // Amélioration : utiliser closest() pour gérer les clics sur le SVG à l'intérieur du bouton
+      const closeButton = e.target.closest('.gd-modal-close');
+      if (closeButton) {
+        e.preventDefault();
+        e.stopPropagation();
+        const modalType = closeButton.dataset.modal;
         if (modalType === 'account') closeModal('gd-account-modal');
         if (modalType === 'cart') closeModal('gd-cart-modal');
       }
