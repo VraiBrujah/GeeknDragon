@@ -60,7 +60,7 @@
         "name": "La Monnaie des Cinq Royaumes",
         "name_en": "Currency of the Five Realms",
         "price": 145,
-        "description": "<h3 style=\"text-align:center\">25 pièces, zéro doublon</h3>\n<p><strong>5 métaux × 5 multiplicateurs</strong> = <strong>25 modèles uniques</strong>. Chaque métal existe en <em>unitaire</em> (brillant) et <strong>x10 / x100 / x1&nbsp;000 / x10&nbsp;000</strong> (gravure mate). <strong>Tout est inclus</strong> : aucune sélection requise.</p>\n<p><em>Utilisez les multiplicateurs pour accélérer les comptes sans perdre l’immersion.</em></p>",
+        "description": "<h3 style=\"text-align:center\">25 pièces, zéro doublon</h3>\n<p><strong>5 métaux × 5 multiplicateurs</strong> = <strong>25 modèles uniques</strong>. Chaque métal existe en <em>unitaire</em> (brillant) et <strong>x10 / x100 / x1&nbsp;000 / x10&nbsp;000</strong> (gravure mate).</p>\n<p><em>Utilisez les multiplicateurs pour accélérer les comptes sans perdre l’immersion.</em></p>",
         "description_en": "<h3 style=\"text-align:center\">25 coins, no duplicates</h3>\n<p><strong>5 metals × 5 multipliers</strong> = <strong>25 unique designs</strong>. Each metal comes in <em>unit</em> (shiny) and <strong>x10 / x100 / x1,000 / x10,000</strong> (matte engraving). <strong>Everything included</strong> — no selection needed.</p>\n<p><em>Use multipliers to speed up counting without breaking immersion.</em></p>",
         "images": [
             "/images/optimized-modern/webp/Seignieur.webp",
@@ -109,7 +109,7 @@
         "name": "L’Essence du Marchand",
         "name_en": "Essence of the Merchant",
         "price": 275,
-        "description": "<h3 style=\"text-align:center\">50 pièces, double variété</h3>\n<p><strong>2 exemplaires</strong> de chacun des <strong>25 modèles</strong> de la <em>Monnaie des Cinq Royaumes</em> : total <strong>50 pièces</strong>. Unitaire (brillant) et x10/x100/x1&nbsp;000/x10&nbsp;000 (gravure mate). <strong>Tout est inclus</strong> : aucune sélection requise.</p>\n<p><em>Utilisez les multiplicateurs pour accélérer les comptes sans perdre l’immersion.</em></p>",
+        "description": "<h3 style=\"text-align:center\">50 pièces, double variété</h3>\n<p><strong>2 exemplaires</strong> de chacun des <strong>25 modèles</strong> de la <em>Monnaie des Cinq Royaumes</em> : total <strong>50 pièces</strong>. Unitaire (brillant) et x10/x100/x1&nbsp;000/x10&nbsp;000 (gravure mate).</p>\n<p><em>Utilisez les multiplicateurs pour accélérer les comptes sans perdre l’immersion.</em></p>",
         "description_en": "<h3 style=\"text-align:center\">50 coins, double the variety</h3>\n<p><strong>2 copies</strong> of each of the <strong>25 designs</strong> from the <em>Currency of the Five Realms</em> — total <strong>50 coins</strong>. Unit (shiny) and x10/x100/x1,000/x10,000 (matte engraving). <strong>Everything included</strong> — no selection needed.</p>\n<p><em>Use multipliers to speed up counting without breaking immersion.</em></p>",
         "images": [
             "/images/optimized-modern/webp/Royaume.webp",
