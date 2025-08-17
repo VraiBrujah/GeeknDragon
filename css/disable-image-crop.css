@@ -1,0 +1,147 @@
+/* Désactivation du crop et des clics sur les images */
+
+/* ========================================================================
+   DÉSACTIVATION DU CROP - TOUTES LES IMAGES S'ADAPTENT AU CONTENEUR
+   ======================================================================== */
+
+/* Images produits dans les cartes */
+.product-media {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Images principales des pages produits */
+.main-product-media {
+  object-fit: contain !important;
+  cursor: default !important;
+}
+
+/* Thumbnails */
+.thumbnail-media {
+  object-fit: contain !important;
+}
+
+/* Images dans les cartes boutique */
+.card-product img,
+.product-card img {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Images dans toutes les sections */
+#produits img,
+#boutique img,
+.boutique img {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Images de la page d'accueil */
+.feature-card img,
+.card-product img {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* ========================================================================
+   DÉSACTIVATION DES EFFETS DE GALERIE ET HOVER
+   ======================================================================== */
+
+/* Supprimer tous les curseurs pointer des images */
+img:not(.payment-icons img):not(.header img):not([src*="logo"]):not([src*="favicon"]) {
+  cursor: default !important;
+}
+
+/* Désactiver les effets hover des images */
+.gallery-enabled {
+  cursor: default !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.gallery-enabled:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.gallery-enabled::after {
+  display: none !important;
+}
+
+/* Désactiver zoom sur images produits */
+.main-product-media:hover {
+  transform: none !important;
+  cursor: default !important;
+}
+
+.main-product-media.zoomed {
+  transform: none !important;
+  cursor: default !important;
+}
+
+/* ========================================================================
+   CONTENEURS D'IMAGES - GARDER LES PROPORTIONS
+   ======================================================================== */
+
+/* Conteneurs de médias produits */
+.product-media-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+.product-media-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+/* Galerie principale produit */
+.main-image-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+.main-image-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+/* ========================================================================
+   REDIRECTION DES CLICS VERS LES LIENS DE SECTION
+   ======================================================================== */
+
+/* Les images deviennent non-cliquables */
+img {
+  pointer-events: none !important;
+}
+
+/* Sauf pour les logos, paiements et icônes */
+.header img,
+.payment-icons img,
+img[src*="logo"],
+img[src*="favicon"],
+img[src*="icon"],
+img[alt*="Logo"],
+img[alt*="Icon"],
+.social-icon img {
+  pointer-events: auto !important;
+}
+
+/* Les conteneurs/liens parent récupèrent les clics */
+.card-product,
+.product-card,
+.feature-card,
+a[href] {
+  pointer-events: auto !important;
+}

@@ -70,20 +70,9 @@
   // ========================================================================
   
   function init() {
-    console.log('🎨 Initialisation de la galerie universelle...');
-    
-    // Créer la modal si elle n'existe pas
-    if (!modalCreated) {
-      createModal();
-    }
-    
-    // Appliquer la galerie aux images
-    applyGalleryToImages();
-    
-    // Observer pour les nouvelles images (contenu dynamique)
-    observeNewImages();
-    
-    console.log('✅ Galerie universelle initialisée');
+    console.log('🚫 Galerie universelle désactivée par configuration');
+    // Galerie universelle complètement désactivée
+    return;
   }
 
   // ========================================================================
