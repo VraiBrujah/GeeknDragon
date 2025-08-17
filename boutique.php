@@ -282,7 +282,7 @@ echo $snipcartInit;
           </div>
 
           <div class="feature-card">
-            <img src="images/carte_propriete.png" 
+            <img src="/images/optimized-modern/webp/carte-propriete.webp" 
                  alt="Carte de propriété - Système de traçabilité" 
                  class="property-image"
                  data-gallery="features"

@@ -5,7 +5,7 @@ $active = 'actus';
 require __DIR__ . '/../i18n.php';
 $title  = $translations['meta']['news']['flim2025']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['news']['flim2025']['desc'] ?? '';
-$ogImage = '/images/es_tu_game_demo.png';
+$ogImage = '/images/optimized-modern/webp/es-tu-game-demo.webp';
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -26,7 +26,7 @@ $ogImage = '/images/es_tu_game_demo.png';
 
         <!-- Article complet : Es-tu Game ? -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg">
-          <img loading="lazy" src="/images/es_tu_game_demo.png" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
+          <img loading="lazy" src="/images/optimized-modern/webp/es-tu-game-demo.webp" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
 
           <h1 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h1>
 
