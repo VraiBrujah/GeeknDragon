@@ -21,19 +21,13 @@
   <script src="/js/vendor.bundle.min.js?v=<?= filemtime(__DIR__.'/js/vendor.bundle.min.js') ?>"></script>
   <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">
   <link rel="stylesheet" href="/css/boutique-style-global.css?v=<?= filemtime(__DIR__.'/css/boutique-style-global.css') ?>">
-  <!-- Système e-commerce hybride : Interface DnD + Snipcart -->
-  <link rel="stylesheet" href="/css/snipcart.css?v=<?= filemtime(__DIR__.'/css/snipcart.css') ?>">
-  <link rel="stylesheet" href="/css/snipcart-custom.css?v=<?= filemtime(__DIR__.'/css/snipcart-custom.css') ?>">
-  <link rel="stylesheet" href="/css/snipcart-ecommerce.css?v=<?= filemtime(__DIR__.'/css/snipcart-ecommerce.css') ?>">
-  <link rel="stylesheet" href="/css/gd-ecommerce-hybrid.css?v=<?= filemtime(__DIR__.'/css/gd-ecommerce-hybrid.css') ?>">
+  <!-- Système e-commerce natif moderne -->
+  <link rel="stylesheet" href="/css/gd-ecommerce-native.css?v=<?= filemtime(__DIR__.'/css/gd-ecommerce-native.css') ?>">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="stylesheet" href="/css/disable-image-crop.css?v=<?= filemtime(__DIR__.'/css/disable-image-crop.css') ?>">
   <script src="/js/lazy-load-enhanced.js" defer></script>
   <script src="/js/universal-image-gallery.js" defer></script>
-  <script src="/js/gd-ecommerce-hybrid.js" defer></script>
-  <!-- Snipcart -->
-  <script async src="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.js"></script>
-  <div hidden id="snipcart" data-api-key="<?= htmlspecialchars($snipcartKey ?? 'your-snipcart-public-key') ?>" data-config-modal-style="side"></div>
+  <script src="/js/gd-ecommerce-native.js" defer></script>
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 
