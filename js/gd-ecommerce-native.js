@@ -168,12 +168,16 @@
       return false;
     }
 
+    console.log('🛒 Ajout au panier:', productData);
+    console.log('🏷️ Variantes détectées:', productData.variants);
+
     const existingItemIndex = state.cart.items.findIndex((item) => item.id === productData.id
       && JSON.stringify(item.variants) === JSON.stringify(productData.variants));
 
     if (existingItemIndex !== -1) {
       // Article existant - mettre à jour la quantité
       state.cart.items[existingItemIndex].quantity += (productData.quantity || 1);
+      console.log('📈 Quantité mise à jour pour article existant');
     } else {
       // Nouvel article
       const newItem = {
@@ -188,6 +192,7 @@
       };
 
       state.cart.items.push(newItem);
+      console.log('✨ Nouvel article ajouté:', newItem);
     }
 
     calculateCartTotals();
@@ -198,7 +203,7 @@
     announceToScreenReader(`${productData.name} ajouté au panier`);
     animateCartButton();
 
-    console.log('Article ajouté au panier:', productData.name);
+    console.log('🎯 État du panier après ajout:', state.cart);
     return true;
   }
 
@@ -470,11 +475,16 @@
 
     // Générer l'HTML pour chaque item avec les vraies options depuis products.json
     const itemsPromises = state.cart.items.map(async (item, index) => {
+      console.log(`🎨 Génération HTML pour article ${index}:`, item);
+      console.log(`🏷️ Variantes de l'article:`, item.variants);
+      
       const variantOptions = await getProductVariantOptions(item.id);
+      console.log(`📋 Options disponibles depuis products.json:`, variantOptions);
       
       // Créer des sélecteurs interactifs pour les variations basés sur products.json
       const variantsHtml = Object.keys(item.variants).length > 0
         ? await Promise.all(Object.entries(item.variants).map(async ([key, value]) => {
+            console.log(`🔧 Traitement variante: ${key} = ${value}`);
             if (key.toLowerCase() === 'multiplicateur' && variantOptions.multipliers.length > 0) {
               // Sélecteur pour multiplicateur basé sur products.json
               const options = variantOptions.multipliers.map(mult => {
@@ -701,9 +711,13 @@
   function handleAddToCartClick(event) {
     // Chercher le bouton d'ajout au panier le plus proche
     const button = event.target.closest('[data-item-id]');
-    if (!button) return;
+    if (!button) {
+      console.log('🚫 Aucun bouton avec data-item-id trouvé');
+      return;
+    }
 
     event.preventDefault();
+    console.log('🖱️ Clic sur bouton ajout au panier:', button);
 
     // Extraire les données du produit
     const productData = {
@@ -715,6 +729,8 @@
       url: button.dataset.itemUrl || window.location.href,
       variants: extractProductVariants(button),
     };
+
+    console.log('📦 Données produit extraites:', productData);
 
     if (addToCart(productData)) {
       // Feedback visuel
@@ -758,20 +774,46 @@
   }
 
   /**
-   * Extrait les variantes du produit depuis products.json et les sélecteurs
+   * Extrait les variantes du produit depuis les data attributes et sélecteurs
    */
   function extractProductVariants(button) {
     const variants = {};
     const productId = button.dataset.itemId;
 
-    // Récupérer les sélecteurs de variantes proches
+    console.log('🔍 Extraction des variantes pour:', productId);
+    console.log('📋 Données du bouton:', button.dataset);
+
+    // Récupérer les variantes depuis les data attributes Snipcart
+    if (button.dataset.itemCustom1Name && button.dataset.itemCustom1Value) {
+      const variantName = button.dataset.itemCustom1Name;
+      const variantValue = button.dataset.itemCustom1Value;
+      variants[variantName] = variantValue;
+      console.log(`✅ Variante trouvée: ${variantName} = ${variantValue}`);
+    }
+    
+    if (button.dataset.itemCustom2Name && button.dataset.itemCustom2Value) {
+      const variantName = button.dataset.itemCustom2Name;
+      const variantValue = button.dataset.itemCustom2Value;
+      variants[variantName] = variantValue;
+      console.log(`✅ Variante trouvée: ${variantName} = ${variantValue}`);
+    }
+    
+    if (button.dataset.itemCustom3Name && button.dataset.itemCustom3Value) {
+      const variantName = button.dataset.itemCustom3Name;
+      const variantValue = button.dataset.itemCustom3Value;
+      variants[variantName] = variantValue;
+      console.log(`✅ Variante trouvée: ${variantName} = ${variantValue}`);
+    }
+
+    // Récupérer les sélecteurs de variantes proches (si ils existent)
     const container = button.closest('.card, .product-panel, .product-info');
     if (container) {
-      // Multiplicateurs depuis le sélecteur
+      // Multiplicateurs depuis le sélecteur (si non en commentaire)
       const multiplierSelect = container.querySelector('select[id^="multiplier-"]');
       if (multiplierSelect && multiplierSelect.value && multiplierSelect.value !== '1') {
         const selectedText = multiplierSelect.options[multiplierSelect.selectedIndex].text;
         variants.Multiplicateur = selectedText.trim();
+        console.log(`✅ Multiplicateur depuis sélecteur: ${selectedText.trim()}`);
       }
 
       // Langues depuis le sélecteur
@@ -779,20 +821,11 @@
       if (languageSelect && languageSelect.selectedIndex > 0) {
         const selectedText = languageSelect.options[languageSelect.selectedIndex].text;
         variants.Langue = selectedText.trim();
-      }
-
-      // Autres variantes depuis les data attributes
-      if (button.dataset.itemCustom1Name && button.dataset.itemCustom1Value) {
-        variants[button.dataset.itemCustom1Name] = button.dataset.itemCustom1Value;
-      }
-      if (button.dataset.itemCustom2Name && button.dataset.itemCustom2Value) {
-        variants[button.dataset.itemCustom2Name] = button.dataset.itemCustom2Value;
-      }
-      if (button.dataset.itemCustom3Name && button.dataset.itemCustom3Value) {
-        variants[button.dataset.itemCustom3Name] = button.dataset.itemCustom3Value;
+        console.log(`✅ Langue depuis sélecteur: ${selectedText.trim()}`);
       }
     }
 
+    console.log('🎯 Variantes extraites:', variants);
     return variants;
   }
 
