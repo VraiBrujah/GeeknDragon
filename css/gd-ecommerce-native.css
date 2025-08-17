@@ -1071,27 +1071,54 @@
    MASQUAGE DE L'INTERFACE SNIPCART (SYSTÈME TRANSPARENT)
    ======================================================================== */
 
-/* Masquer l'interface Snipcart par défaut - elle fonctionne en arrière-plan */
-#snipcart {
+/* Masquer complètement l'interface Snipcart par défaut - elle fonctionne en arrière-plan */
+#snipcart,
+.snipcart,
+.snipcart-modal,
+[data-snipcart-modal],
+.snipcart__modal,
+.snipcart-overlay {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
-/* Masquer le modal Snipcart par défaut, sauf quand on l'ouvre explicitement pour le checkout */
-.snipcart {
-  display: none !important;
-}
-
-.snipcart.snipcart--show {
+/* Seulement autoriser l'affichage quand on l'ouvre explicitement pour le checkout */
+.snipcart.snipcart--show,
+.snipcart.snipcart--checkout,
+#snipcart.snipcart--show {
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
 }
 
-/* S'assurer que les boutons Snipcart gardent leur fonctionnalité mais utilisent notre style */
+/* Empêcher l'apparition des tooltips et notifications Snipcart */
+.snipcart-tooltip,
+.snipcart-notification,
+.snipcart__notification {
+  display: none !important;
+}
+
+/* Badges de comptage - on utilise seulement les nôtres */
+.snipcart-items-count:not(.gd-cart-badge):not(.gd-cart-badge-mobile) {
+  display: none !important;
+}
+
+/* S'assurer que les boutons Snipcart gardent leur fonctionnalité mais ne montrent pas de popups */
 .snipcart-customer-signin,
 .snipcart-checkout {
   /* Boutons gardent leur fonctionnalité Snipcart mais avec notre apparence */
 }
 
-/* Badges de comptage - on utilise les nôtres */
-.snipcart-items-count:not(.gd-cart-badge):not(.gd-cart-badge-mobile) {
+/* Empêcher les overlays Snipcart d'apparaître */
+body.snipcart-modal-open {
+  overflow: auto !important;
+}
+
+/* Masquer les éléments d'état Snipcart */
+.snipcart-loading,
+.snipcart__loading {
   display: none !important;
 }
