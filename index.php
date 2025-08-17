@@ -32,7 +32,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
           <div class="flex items-center justify-center gap-2 mb-8">
             <p class="text-xl txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
-            <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-5 w-auto" loading="lazy">
+            <picture><source srcset="/images/optimized-modern/avif/logo-fabrique-BqFMdtDT.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/logo-fabrique-BqFMdtDT.webp" type="image/webp"><img src="/images/optimized-modern/png/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-5 w-auto" loading="lazy" sizes="100vw"></picture>
           </div>
 <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
             Visiter la boutique
@@ -51,17 +51,17 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <a href="<?= langUrl('boutique.php#cartes') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d'équipement</h4>
             <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d'équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
-              <img src="images/cartes_equipement.png" alt="560 cartes d'équipement illustrées" class="rounded mb-4" loading="lazy">
+              <picture><source srcset="/images/optimized-modern/avif/cartes_equipement.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/cartes_equipement.webp" type="image/webp"><img src="/images/optimized-modern/png/cartes_equipement.png" alt="560 cartes d" class="rounded mb-4" loading="lazy" sizes="100vw"></picture>
           </a>
           <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
             <p class="text-center" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
-              <img src="images/Piece/pro/lot10Piece2-300.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
+              <picture><source srcset="/images/optimized-modern/avif/lot10Piece2-300.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/lot10Piece2-300.webp" type="image/webp"><img src="/images/optimized-modern/png/lot10Piece2-300.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy" sizes="100vw"></picture>
           </a>
           <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>
             <p class="text-center" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
-              <img src="images/triptyque_fiche.png" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
+              <picture><source srcset="/images/optimized-modern/avif/triptyque_fiche.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/triptyque_fiche.webp" type="image/webp"><img src="/images/optimized-modern/png/triptyque_fiche.png" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy" sizes="100vw"></picture>
           </a>
         </div>
 
@@ -96,7 +96,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     
         <!-- Résumé d'article - dupliquer ce bloc pour chaque actualité -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg mb-12">
-            <img src="/images/es_tu_game_demo.png" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces" loading="lazy">
+            <picture><source srcset="/images/optimized-modern/avif/es_tu_game_demo.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/es_tu_game_demo.webp" type="image/webp"><img src="/images/optimized-modern/png/es_tu_game_demo.png" alt="One‑shot niveau 20 avec pièces" class="rounded mb-6 w-full" loading="lazy" sizes="100vw"></picture>
           <h4 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
           <p class="text-lg text-gray-200 mb-4" data-i18n="news.flim2025.summary">
             Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.
@@ -108,7 +108,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     
         <!-- Bloc témoignage -->
         <article class="bg-gray-800 p-6 mt-12 rounded-xl shadow-lg">
-          <img src="images/avisJoueurFlim2025.jpg" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
+          <picture><source srcset="/images/optimized-modern/avif/avisJoueurFlim2025.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/avisJoueurFlim2025.webp" type="image/webp"><img src="/images/optimized-modern/png/avisJoueurFlim2025.png" alt="Avis joueurs sur pièces" class="rounded mb-4 w-full" loading="lazy" sizes="100vw"></picture>
           <h4 class="text-center text-2xl font-semibold mb-4" data-i18n="testimonials.quote1.title">« Finis les combats contre nos feuilles de personnage ! »</h4>
           <p class="text-lg leading-relaxed text-gray-200" data-i18n="testimonials.quote1.intro">
             De nombreux joueurs présents l’affirment : les pièces physiques changent tout.
@@ -152,7 +152,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           
           <!-- Photo avec bordure lumineuse -->
           <div style="position: relative; display: inline-block; margin-bottom: 2rem;">
-            <img src="images/team_brujah.png" alt="Brujah" class="h-48 w-48 rounded-full" style="border: 3px solid #8b5cf6; box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);" loading="lazy">
+            <picture><source srcset="/images/optimized-modern/avif/team_brujah.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/team_brujah.webp" type="image/webp"><img src="/images/optimized-modern/png/team_brujah.png" alt="Brujah" class="h-48 w-48 rounded-full" loading="lazy" sizes="100vw"></picture>
             <!-- Badge de statut -->
             <div style="position: absolute; bottom: 10px; right: 10px; background: #10b981; width: 24px; height: 24px; border-radius: 50%; border: 3px solid #1e293b;"></div>
           </div>

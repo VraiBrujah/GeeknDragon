@@ -3,6 +3,9 @@ require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 require __DIR__ . '/i18n.php';
 
+// Importer les helpers pour les médias modernes
+use GeeknDragon\Helpers\ModernMediaHelper;
+
 $active = 'boutique';
 $id = preg_replace('/[^a-z0-9_-]/i', '', $_GET['id'] ?? '');
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
@@ -40,8 +43,9 @@ $customLabel   = !empty($languages)
     : ($translations['product']['multiplier'] ?? ($lang === 'en' ? 'Multiplier' : 'Multiplicateur'));
 $images        = $product['images'] ?? [];
 
-// CSS local pour une description propre
+// CSS local pour une description propre + CSS médias modernes
 $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemtime(__DIR__.'/css/product-gallery.css') . '">';
+$extraHead .= ModernMediaHelper::generateModernMediaCSS();
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -67,7 +71,7 @@ echo $snipcartInit;
 
     <div class="bg-gray-800 p-6 rounded-xl shadow-lg product-panel">
       <?php if (!empty($images)) : ?>
-        <!-- Galerie produit simplifiée (utilise universal-image-gallery.js) -->
+        <!-- Galerie d'images moderne avec WebP/AVIF + fallbacks -->
         <div class="product-gallery-container mb-6">
           <!-- Image principale -->
           <div class="main-image-container">
