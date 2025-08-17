@@ -31,7 +31,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
           <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
           <div class="flex items-center justify-center gap-2 mb-8">
-            <p class="text-xl txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
+            <p class="text-xl txt-court" data-i18n="hero.subtitle2">Fabriqué au Québec</p>
             <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-5 w-auto" loading="lazy">
           </div>
 <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
