@@ -2,11 +2,9 @@
 // GEEK & DRAGON - E-COMMERCE NATIF MODERNE
 // Système Web-first, léger et performant
 // Architecture en îlots avec hydratation partielle
-// ======================================================================== 
+// ========================================================================
 
-(function() {
-  'use strict';
-
+(function gdEcommerceNative() {
   // Configuration globale
   const CONFIG = {
     storageKey: 'gd_cart_v2',
@@ -16,7 +14,7 @@
     currency: 'CAD',
     currencySymbol: '$',
     autoSave: true,
-    analytics: false // Respect RGPD
+    analytics: false, // Respect RGPD
   };
 
   // État global du système
@@ -25,14 +23,14 @@
       items: [],
       total: 0,
       count: 0,
-      currency: CONFIG.currency
+      currency: CONFIG.currency,
     },
     ui: {
       accountModalOpen: false,
       cartModalOpen: false,
-      currentAccountTab: 'profile'
+      currentAccountTab: 'profile',
     },
-    initialized: false
+    initialized: false,
   };
 
   // Cache DOM pour les performances
@@ -45,7 +43,7 @@
     cartBadgeMobile: null,
     accountModal: null,
     cartModal: null,
-    body: document.body
+    body: document.body,
   };
 
   // ========================================================================
@@ -68,13 +66,6 @@
   }
 
   /**
-   * Génère un ID unique simple
-   */
-  function generateId() {
-    return Date.now().toString(36) + Math.random().toString(36).substr(2);
-  }
-
-  /**
    * Échappe les caractères HTML pour éviter XSS
    */
   function escapeHtml(text) {
@@ -89,8 +80,8 @@
   function formatPrice(price, currency = CONFIG.currency) {
     return new Intl.NumberFormat('fr-CA', {
       style: 'currency',
-      currency: currency,
-      minimumFractionDigits: 2
+      currency,
+      minimumFractionDigits: 2,
     }).format(price);
   }
 
@@ -894,4 +885,4 @@
     }
   });
 
-})();
+}());
