@@ -76,9 +76,11 @@ echo $snipcartInit;
               <?php if ($isFirstVideo) : ?>
                 <video src="<?= htmlspecialchars($firstImage) ?>" 
                        class="product-media main-product-media"
-                       autoplay muted playsinline controls
+                       autoplay muted playsinline
                        data-no-gallery
-                       id="main-product-video">
+                       id="main-product-video"
+                       disablepictureinpicture
+                       controlslist="nodownload nofullscreen noremoteplayback">
                 </video>
               <?php else : ?>
                 <img src="<?= htmlspecialchars($firstImage) ?>"
@@ -100,7 +102,9 @@ echo $snipcartInit;
                       <video src="<?= htmlspecialchars($img) ?>" 
                              class="thumbnail-media"
                              data-no-gallery
-                             muted></video>
+                             muted
+                             disablepictureinpicture
+                             controlslist="nodownload nofullscreen noremoteplayback"></video>
                       <div class="video-icon">▶</div>
                     <?php else : ?>
                       <img src="<?= htmlspecialchars($img) ?>"
@@ -286,10 +290,11 @@ document.addEventListener('DOMContentLoaded', function() {
       const newVideo = document.createElement('video');
       newVideo.className = mainMedia.className;
       newVideo.src = thumb.src;
-      newVideo.controls = true;
       newVideo.muted = true;
       newVideo.playsInline = true;
       newVideo.dataset.noGallery = true;
+      newVideo.disablePictureInPicture = true;
+      newVideo.setAttribute('controlslist', 'nodownload nofullscreen noremoteplayback');
       mainMedia.parentNode.replaceChild(newVideo, mainMedia);
       mainMedia = newVideo;
     } else if (mainMedia.tagName === 'VIDEO' && thumb.tagName === 'IMG') {

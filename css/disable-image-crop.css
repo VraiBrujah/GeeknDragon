@@ -121,8 +121,9 @@ img:not(.payment-icons img):not(.header img):not([src*="logo"]):not([src*="favic
    REDIRECTION DES CLICS VERS LES LIENS DE SECTION
    ======================================================================== */
 
-/* Les images deviennent non-cliquables */
-img {
+/* Les images et vidéos deviennent non-cliquables */
+img,
+video {
   pointer-events: none !important;
 }
 
