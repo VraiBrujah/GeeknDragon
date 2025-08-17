@@ -87,7 +87,7 @@ $ogImage = '/images/optimized-modern/webp/es-tu-game-demo.webp';
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
 
             <div class="relative group">
-              <video id="video1" src="/videos/video-lemairedoneunepiecedargentflim.mp4"
+              <video id="video1" src="/videos/leMaireDoneUnePieceDargentFLIM.mp4"
                      class="rounded shadow-lg w-full aspect-video transition-transform duration-300" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"
@@ -98,7 +98,7 @@ $ogImage = '/images/optimized-modern/webp/es-tu-game-demo.webp';
             </div>
 
             <div class="relative group">
-              <video id="video2" src="/videos/video-pileoufaceled2duflim2025.mp4"
+              <video id="video2" src="/videos/pileoufaceled2duFLIM2025.mp4"
                      class="rounded shadow-lg w-full aspect-video transition-transform duration-300" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block
                              absolute top-2 right-2 z-10 bg-black/60 text-white text-sm px-2 py-1 rounded"
@@ -109,7 +109,7 @@ $ogImage = '/images/optimized-modern/webp/es-tu-game-demo.webp';
             </div>
 
             <div class="relative group">
-              <video id="video3" src="/videos/video-finestugameflim2025.mp4"
+              <video id="video3" src="/videos/finestugameFLIM2025.mp4"
                      class="rounded shadow-lg w-full aspect-video transition-transform duration-300" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"
