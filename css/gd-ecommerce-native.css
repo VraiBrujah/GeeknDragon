@@ -953,28 +953,3 @@
     display: none !important;
   }
 }
-
-/* ========================================================================
-   INTEGRATION SNIPCART TRANSPARENTE
-   ======================================================================== */
-
-/* Masquer l'interface Snipcart par défaut - seulement pour checkout */
-#snipcart:not(.snipcart--show) {
-  display: none !important;
-}
-
-/* Permettre seulement le checkout Snipcart */
-#snipcart.snipcart--show {
-  display: block !important;
-}
-
-/* Masquer les notifications et tooltips Snipcart */
-.snipcart-notification,
-.snipcart-tooltip {
-  display: none !important;
-}
-
-/* Masquer tous les autres badges Snipcart (on garde les nôtres) */
-.snipcart-items-count:not(.gd-cart-badge):not(.gd-cart-badge-mobile) {
-  display: none !important;
-}
