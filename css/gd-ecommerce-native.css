@@ -67,6 +67,8 @@
   --gd-z-sticky: 1020;
   --gd-z-modal: 1050;
   --gd-z-tooltip: 1070;
+  /* Hauteur du header (valeur par défaut, mise à jour via JS) */
+  --gd-header-h: 96px;
 }
 
 /* ========================================================================
@@ -772,16 +774,25 @@
    ======================================================================== */
 
 @media (max-width: 768px) {
+  .gd-modal-overlay {
+    top: var(--gd-header-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(100vh - var(--gd-header-h));
+  }
+
   .gd-modal {
     align-items: flex-start;
     padding: 0;
+    min-height: 100%;
   }
-  
+
   .gd-modal-content {
-    max-height: 100vh;
+    max-height: 100%;
     border-radius: 0;
     border: none;
-    min-height: 100vh;
+    min-height: 100%;
   }
   
   .gd-modal-header {
