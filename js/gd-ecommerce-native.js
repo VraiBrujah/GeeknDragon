@@ -273,12 +273,6 @@
         // Mettre à jour la variante
         item.variants[variantKey] = newValue;
         
-        // Recalculer le prix si c'est un multiplicateur
-        if (variantKey.toLowerCase() === 'multiplicateur') {
-          const basePrice = item.price / (item.variants.Multiplicateur || 1);
-          item.price = basePrice * parseFloat(newValue);
-        }
-        
         calculateCartTotals();
         saveCart();
         updateCartDisplay();
@@ -708,7 +702,7 @@
   /**
    * Gère l'ajout au panier depuis les boutons existants
    */
-  function handleAddToCartClick(event) {
+  async function handleAddToCartClick(event) {
     // Chercher le bouton d'ajout au panier le plus proche
     const button = event.target.closest('[data-item-id]');
     if (!button) {
@@ -729,6 +723,16 @@
       url: button.dataset.itemUrl || window.location.href,
       variants: extractProductVariants(button),
     };
+
+    const variantOptions = await getProductVariantOptions(productData.id);
+
+    if (!productData.variants.Multiplicateur && variantOptions.multipliers.length > 0) {
+      productData.variants.Multiplicateur = variantOptions.multipliers[0].trim();
+    }
+
+    if (!productData.variants.Langue && variantOptions.languages.length > 0) {
+      productData.variants.Langue = variantOptions.languages[0].trim();
+    }
 
     console.log('📦 Données produit extraites:', productData);
 
@@ -810,7 +814,7 @@
     if (container) {
       // Multiplicateurs depuis le sélecteur (si non en commentaire)
       const multiplierSelect = container.querySelector('select[id^="multiplier-"]');
-      if (multiplierSelect && multiplierSelect.value && multiplierSelect.value !== '1') {
+      if (multiplierSelect && multiplierSelect.value) {
         const selectedText = multiplierSelect.options[multiplierSelect.selectedIndex].text;
         variants.Multiplicateur = selectedText.trim();
         console.log(`✅ Multiplicateur depuis sélecteur: ${selectedText.trim()}`);
