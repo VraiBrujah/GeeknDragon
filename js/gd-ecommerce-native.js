@@ -4,6 +4,7 @@
 // Architecture en îlots avec hydratation partielle
 // ========================================================================
 
+/* eslint-disable no-use-before-define, no-param-reassign */
 (function gdEcommerceNative() {
   // Configuration globale
   const CONFIG = {
@@ -95,7 +96,7 @@
     announcement.classList.add('sr-only');
     announcement.textContent = message;
     elements.body.appendChild(announcement);
-    
+
     setTimeout(() => {
       elements.body.removeChild(announcement);
     }, 1000);
@@ -117,7 +118,7 @@
         if (parsedCart && Array.isArray(parsedCart.items)) {
           state.cart = {
             ...state.cart,
-            ...parsedCart
+            ...parsedCart,
           };
           calculateCartTotals();
           return true;
@@ -134,7 +135,7 @@
    */
   const saveCart = debounce(() => {
     if (!CONFIG.autoSave) return;
-    
+
     try {
       localStorage.setItem(CONFIG.storageKey, JSON.stringify(state.cart));
     } catch (error) {
@@ -151,7 +152,10 @@
    */
   function calculateCartTotals() {
     state.cart.count = state.cart.items.reduce((total, item) => total + item.quantity, 0);
-    state.cart.total = state.cart.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    state.cart.total = state.cart.items.reduce(
+      (total, item) => total + (item.price * item.quantity),
+      0,
+    );
   }
 
   /**
@@ -164,10 +168,8 @@
       return false;
     }
 
-    const existingItemIndex = state.cart.items.findIndex(item => 
-      item.id === productData.id && 
-      JSON.stringify(item.variants) === JSON.stringify(productData.variants)
-    );
+    const existingItemIndex = state.cart.items.findIndex((item) => item.id === productData.id
+      && JSON.stringify(item.variants) === JSON.stringify(productData.variants));
 
     if (existingItemIndex !== -1) {
       // Article existant - mettre à jour la quantité
@@ -182,20 +184,20 @@
         image: productData.image || '',
         url: productData.url || '',
         variants: productData.variants || {},
-        addedAt: Date.now()
+        addedAt: Date.now(),
       };
-      
+
       state.cart.items.push(newItem);
     }
 
     calculateCartTotals();
     saveCart();
     updateCartDisplay();
-    
+
     // Feedback utilisateur
     announceToScreenReader(`${productData.name} ajouté au panier`);
     animateCartButton();
-    
+
     console.log('Article ajouté au panier:', productData.name);
     return true;
   }
@@ -204,10 +206,8 @@
    * Met à jour la quantité d'un article
    */
   function updateItemQuantity(itemId, variants, newQuantity) {
-    const itemIndex = state.cart.items.findIndex(item => 
-      item.id === itemId && 
-      JSON.stringify(item.variants) === JSON.stringify(variants)
-    );
+    const itemIndex = state.cart.items.findIndex((item) => item.id === itemId
+      && JSON.stringify(item.variants) === JSON.stringify(variants));
 
     if (itemIndex === -1) return false;
 
@@ -228,10 +228,8 @@
    * Supprime un article du panier
    */
   function removeFromCart(itemId, variants = {}) {
-    const itemIndex = state.cart.items.findIndex(item => 
-      item.id === itemId && 
-      JSON.stringify(item.variants) === JSON.stringify(variants)
-    );
+    const itemIndex = state.cart.items.findIndex((item) => item.id === itemId
+      && JSON.stringify(item.variants) === JSON.stringify(variants));
 
     if (itemIndex !== -1) {
       const removedItem = state.cart.items.splice(itemIndex, 1)[0];
@@ -239,7 +237,7 @@
       saveCart();
       updateCartDisplay();
       updateCartModal();
-      
+
       announceToScreenReader(`${removedItem.name} retiré du panier`);
       console.log('Article retiré du panier:', removedItem.name);
     }
@@ -254,7 +252,7 @@
     saveCart();
     updateCartDisplay();
     updateCartModal();
-    
+
     announceToScreenReader('Panier vidé');
     console.log('Panier vidé');
   }
@@ -268,12 +266,12 @@
    */
   function updateCartDisplay() {
     const badges = [elements.cartBadge, elements.cartBadgeMobile].filter(Boolean);
-    
-    badges.forEach(badge => {
+
+    badges.forEach((badge) => {
       badge.textContent = state.cart.count;
       badge.setAttribute('data-count', state.cart.count);
       badge.setAttribute('aria-label', `${state.cart.count} articles dans le panier`);
-      
+
       if (state.cart.count > 0) {
         badge.style.transform = 'scale(1)';
       } else {
@@ -287,8 +285,8 @@
    */
   function animateCartButton() {
     const buttons = [elements.cartToggle, elements.cartToggleMobile].filter(Boolean);
-    
-    buttons.forEach(button => {
+
+    buttons.forEach((button) => {
       button.style.transform = 'scale(1.1)';
       setTimeout(() => {
         button.style.transform = 'scale(1)';
@@ -319,7 +317,7 @@
                   <h3>🏰 Bienvenue, Noble Aventurier !</h3>
                   <p>Gérez votre profil et vos quêtes dans cette section</p>
                 </div>
-                
+
                 <div class="gd-account-tabs" role="tablist">
                   <button class="gd-account-tab active" role="tab" aria-selected="true" aria-controls="profile-panel" data-tab="profile">
                     🛡️ Profil
@@ -331,7 +329,7 @@
                     ⚙️ Paramètres
                   </button>
                 </div>
-                
+
                 <div class="gd-account-content">
                   <div class="gd-tab-content active" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="gd-form-group">
@@ -354,13 +352,13 @@
                     </div>
                     <button class="gd-btn gd-btn-primary gd-btn-full">💾 Sauvegarder le Profil</button>
                   </div>
-                  
+
                   <div class="gd-tab-content" id="orders-panel" role="tabpanel" aria-labelledby="orders-tab">
                     <div style="text-align: center; padding: 2rem; color: var(--gd-text-secondary);">
                       📜 Vos quêtes précédentes apparaîtront ici
                     </div>
                   </div>
-                  
+
                   <div class="gd-tab-content" id="settings-panel" role="tabpanel" aria-labelledby="settings-tab">
                     <div class="gd-form-group">
                       <label class="gd-form-label" for="settings-notifications">Notifications par Corbeau</label>
@@ -442,11 +440,9 @@
       return;
     }
 
-    const itemsHtml = state.cart.items.map(item => {
-      const variantsHtml = Object.keys(item.variants).length > 0 
-        ? Object.entries(item.variants).map(([key, value]) => 
-            `<span class="gd-cart-item-variant">${escapeHtml(key)}: ${escapeHtml(value)}</span>`
-          ).join('')
+    const itemsHtml = state.cart.items.map((item) => {
+      const variantsHtml = Object.keys(item.variants).length > 0
+        ? Object.entries(item.variants).map(([key, value]) => `<span class="gd-cart-item-variant">${escapeHtml(key)}: ${escapeHtml(value)}</span>`).join('')
         : '';
 
       return `
@@ -530,12 +526,12 @@
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     elements.body.style.overflow = 'hidden';
-    
+
     // Focus trap
     const focusableElements = modal.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
-    
+
     if (focusableElements.length > 0) {
       focusableElements[0].focus();
     }
@@ -547,7 +543,7 @@
         document.removeEventListener('keydown', handleEscape);
       }
     };
-    
+
     document.addEventListener('keydown', handleEscape);
   }
 
@@ -570,10 +566,10 @@
     }
 
     // Retourner le focus au bouton qui a ouvert la modal
-    const triggerButton = modalId === 'gd-cart-modal' 
-      ? elements.cartToggle 
+    const triggerButton = modalId === 'gd-cart-modal'
+      ? elements.cartToggle
       : elements.accountToggle;
-    
+
     if (triggerButton) {
       triggerButton.focus();
     }
@@ -599,12 +595,12 @@
     const tabs = document.querySelectorAll('.gd-account-tab');
     const contents = document.querySelectorAll('.gd-tab-content');
 
-    tabs.forEach(tab => {
+    tabs.forEach((tab) => {
       tab.classList.remove('active');
       tab.setAttribute('aria-selected', 'false');
     });
 
-    contents.forEach(content => {
+    contents.forEach((content) => {
       content.classList.remove('active');
     });
 
@@ -639,10 +635,10 @@
       id: button.dataset.itemId,
       name: button.dataset.itemName || button.dataset.itemNameFr,
       price: parseFloat(button.dataset.itemPrice),
-      quantity: parseInt(button.dataset.itemQuantity) || 1,
+      quantity: parseInt(button.dataset.itemQuantity, 10) || 1,
       image: extractProductImage(button),
       url: button.dataset.itemUrl || window.location.href,
-      variants: extractProductVariants(button)
+      variants: extractProductVariants(button),
     };
 
     if (addToCart(productData)) {
@@ -674,7 +670,7 @@
    */
   function extractProductVariants(button) {
     const variants = {};
-    
+
     // Récupérer les sélecteurs de variantes proches
     const container = button.closest('.card, .product-panel, .product-info');
     if (container) {
@@ -715,7 +711,7 @@
     // Pour l'instant, on redirige vers une page de checkout
     // À terme, on pourrait intégrer Stripe ou un autre processeur de paiement
     console.log('Redirection vers le checkout avec:', state.cart);
-    
+
     // Exemple de redirection
     const checkoutData = encodeURIComponent(JSON.stringify(state.cart));
     window.location.href = `/checkout.php?data=${checkoutData}`;
@@ -733,7 +729,7 @@
     if (elements.accountToggle) {
       elements.accountToggle.addEventListener('click', () => openModal('gd-account-modal'));
     }
-    
+
     if (elements.cartToggle) {
       elements.cartToggle.addEventListener('click', () => openModal('gd-cart-modal'));
     }
@@ -741,7 +737,7 @@
     if (elements.accountToggleMobile) {
       elements.accountToggleMobile.addEventListener('click', () => openModal('gd-account-modal'));
     }
-    
+
     if (elements.cartToggleMobile) {
       elements.cartToggleMobile.addEventListener('click', () => openModal('gd-cart-modal'));
     }
@@ -752,7 +748,7 @@
         if (e.target.id === 'gd-account-modal') closeModal('gd-account-modal');
         if (e.target.id === 'gd-cart-modal') closeModal('gd-cart-modal');
       }
-      
+
       // Amélioration : utiliser closest() pour gérer les clics sur le SVG à l'intérieur du bouton
       const closeButton = e.target.closest('.gd-modal-close');
       if (closeButton) {
@@ -809,22 +805,22 @@
 
     // Éviter le FOUC
     elements.body.classList.add('gd-preload');
-    
+
     // Cache des éléments DOM
     cacheElements();
-    
+
     // Chargement du panier
     loadCart();
-    
+
     // Création des modales
     createModals();
-    
+
     // Attachement des événements
     attachEventListeners();
-    
+
     // Mise à jour de l'interface
     updateCartDisplay();
-    
+
     // Retirer la classe preload après initialisation
     requestAnimationFrame(() => {
       elements.body.classList.remove('gd-preload');
@@ -841,28 +837,28 @@
   // Exposition de l'API publique
   window.GDEcommerce = {
     // Gestion du panier
-    addToCart: addToCart,
+    addToCart,
     removeItem: removeFromCart,
     updateQuantity: updateItemQuantity,
-    clearCart: clearCart,
-    
+    clearCart,
+
     // Contrôle des modales
     openAccountModal: () => openModal('gd-account-modal'),
     openCartModal: () => openModal('gd-cart-modal'),
     closeAccountModal: () => closeModal('gd-account-modal'),
     closeCartModal: () => closeModal('gd-cart-modal'),
-    
+
     // Utilitaires
     getCart: () => ({ ...state.cart }),
     getCartCount: () => state.cart.count,
     getCartTotal: () => state.cart.total,
-    
+
     // Checkout
-    proceedToCheckout: proceedToCheckout,
-    
+    proceedToCheckout,
+
     // État de l'interface
     isAccountModalOpen: () => state.ui.accountModalOpen,
-    isCartModalOpen: () => state.ui.cartModalOpen
+    isCartModalOpen: () => state.ui.cartModalOpen,
   };
 
   // ========================================================================
@@ -884,5 +880,4 @@
       init();
     }
   });
-
 }());
