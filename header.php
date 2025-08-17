@@ -120,20 +120,20 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </div>
 
       <?php if ($snipcartKey): ?>
-      <!-- Snipcart : icônes EMPILÉES partout -->
+      <!-- Système hybride : Interface DnD + Snipcart fonctionnel -->
       <div class="flex items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
-        <button class="snipcart-customer-signin snipcart-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+        <button id="gd-account-toggle" class="gd-header-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
           </svg>
           <span class="sr-only" data-i18n="nav.account">Compte</span>
         </button>
 
-        <button class="snipcart-checkout snipcart-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+        <button id="gd-cart-toggle" class="gd-header-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
           </svg>
-          <span class="snipcart-items-count"></span>
+          <span id="gd-cart-count" class="gd-cart-badge snipcart-items-count">0</span>
           <span class="sr-only" data-i18n="nav.cart">Panier</span>
         </button>
       </div>
@@ -160,19 +160,20 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </div>
 
       <?php if ($snipcartKey): ?>
+      <!-- Menu mobile hybride -->
       <div class="flex flex-col w-full gap-6">
-        <button class="snipcart-customer-signin snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
-          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+        <button id="gd-account-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
+          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
           </svg>
           <span class="sr-only" data-i18n="nav.account">Compte</span>
         </button>
 
-        <button class="snipcart-checkout snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
-          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+        <button id="gd-cart-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
+          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
           </svg>
-          <span class="snipcart-items-count"></span>
+          <span class="gd-cart-badge-mobile snipcart-items-count">0</span>
           <span class="sr-only" data-i18n="nav.cart">Panier</span>
         </button>
       </div>
