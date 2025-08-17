@@ -154,10 +154,10 @@
   function preloadCriticalImages() {
     // Précharger le logo et les premières images visibles
     const criticalImages = [
-      '/images/optimized-modern/webp/brand-geekndragon-main.webp',
-      '/images/optimized-modern/webp/cartes-equipement.webp',
-      '/images/optimized-modern/webp/coin-copper-10.webp',
-      '/images/optimized-modern/webp/triptyque-fiche.webp'
+      '/images/logo.png',
+      '/images/cartes_equipement.png',
+      '/images/Piece/pro/lot10Piece2-300.png',
+      '/images/triptyque_fiche.png'
     ];
     
     criticalImages.forEach(src => {

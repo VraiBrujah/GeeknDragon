@@ -13,6 +13,9 @@
       "Bash(yt-dlp:*)",
       "Bash(mv:*)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": [
+      "C:\\c\\Users\\Brujah\\Documents\\GitHub"
+    ]
   }
 }
