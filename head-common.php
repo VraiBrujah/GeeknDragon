@@ -26,10 +26,8 @@
   <link rel="stylesheet" href="/css/snipcart-ecommerce.css?v=<?= filemtime(__DIR__.'/css/snipcart-ecommerce.css') ?>">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="stylesheet" href="/css/disable-image-crop.css?v=<?= filemtime(__DIR__.'/css/disable-image-crop.css') ?>">
-  <link rel="stylesheet" href="/css/gd-ecommerce-modern.css?v=<?= filemtime(__DIR__.'/css/gd-ecommerce-modern.css') ?>">
   <script src="/js/lazy-load-enhanced.js" defer></script>
   <script src="/js/universal-image-gallery.js" defer></script>
-  <script src="/js/gd-ecommerce-modern.js" defer></script>
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 
