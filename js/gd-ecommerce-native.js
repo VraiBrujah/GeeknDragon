@@ -478,26 +478,20 @@
       console.log(`🎨 Génération HTML pour article ${index}:`, item);
       console.log(`🏷️ Variantes de l'article:`, item.variants);
       
-        const variantOptions = await getProductVariantOptions(item.id);
-        console.log(`📋 Options disponibles depuis products.json:`, variantOptions);
-
-        // Fusionner les variantes existantes avec les options disponibles pour garantir l'affichage
-        const allVariants = {
-          ...(variantOptions.multipliers.length > 0 ? { Multiplicateur: item.variants.Multiplicateur || variantOptions.multipliers[0] } : {}),
-          ...(variantOptions.languages.length > 0 ? { Langue: item.variants.Langue || variantOptions.languages[0] } : {}),
-          ...item.variants,
-        };
-
-        // Créer des sélecteurs interactifs pour les variations basés sur products.json
-        const variantsHtml = Object.keys(allVariants).length > 0
-          ? await Promise.all(Object.entries(allVariants).map(async ([key, value]) => {
+      const variantOptions = await getProductVariantOptions(item.id);
+      console.log(`📋 Options disponibles depuis products.json:`, variantOptions);
+      
+      // Créer des sélecteurs interactifs pour les variations basés sur products.json
+      const variantsHtml = Object.keys(item.variants).length > 0
+        ? await Promise.all(Object.entries(item.variants).map(async ([key, value]) => {
             console.log(`🔧 Traitement variante: ${key} = ${value}`);
             if (key.toLowerCase() === 'multiplicateur' && variantOptions.multipliers.length > 0) {
               // Sélecteur pour multiplicateur basé sur products.json
-                const options = variantOptions.multipliers.map(mult => {
-                  const isSelected = mult.trim() === value.trim();
-                  return `<option value="${escapeHtml(mult.trim())}" ${isSelected ? 'selected' : ''}>${escapeHtml(mult.trim())}</option>`;
-                }).join('');
+              const options = variantOptions.multipliers.map(mult => {
+                const cleanMult = mult.replace(/[^\dx]/g, ''); // Extrait juste le nombre/x
+                const isSelected = mult.trim() === value.trim();
+                return `<option value="${escapeHtml(mult.trim())}" ${isSelected ? 'selected' : ''}>${escapeHtml(mult.trim())}</option>`;
+              }).join('');
               
               return `
                 <div class="gd-cart-variant-selector">
