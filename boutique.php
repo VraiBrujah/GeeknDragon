@@ -282,7 +282,11 @@ echo $snipcartInit;
           </div>
 
           <div class="feature-card">
-            <picture><source srcset="/images/optimized-modern/avif/carte_propriete.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/carte_propriete.webp" type="image/webp"><img src="/images/optimized-modern/png/carte_propriete.png" alt="Carte de propriété - Système de traçabilité" class="property-image" loading="lazy" sizes="100vw"></picture>
+            <img src="images/carte_propriete.png" 
+                 alt="Carte de propriété - Système de traçabilité" 
+                 class="property-image"
+                 data-gallery="features"
+                 style="width: 100%; height: auto; margin: 0 auto 1rem auto; display: block;">
             <h4 class="feature-title">Carte de propriété</h4>
             <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
           </div>
@@ -307,7 +311,10 @@ echo $snipcartInit;
 
           <div class="feature-card">
             <span class="feature-icon">
-              <picture><source srcset="/images/optimized-modern/avif/logo-fabrique-BqFMdtDT.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/logo-fabrique-BqFMdtDT.webp" type="image/webp"><img src="/images/optimized-modern/png/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-8 w-auto mx-auto" loading="lazy" sizes="100vw"></picture>
+              <img src="/images/logo-fabrique-BqFMdtDT.png" 
+                   alt="Logo Fabriqué au Québec" 
+                   class="h-8 w-auto mx-auto" 
+                   loading="lazy">
             </span>
             <h4 class="feature-title">Qualité artisanale</h4>
             <p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
@@ -336,7 +343,7 @@ echo $snipcartInit;
         </div>
 
         <div class="trust-badge">
-          <picture><source srcset="/images/optimized-modern/avif/logo-fabrique-BqFMdtDT.avif" type="image/avif"><source srcset="/images/optimized-modern/webp/logo-fabrique-BqFMdtDT.webp" type="image/webp"><img src="/images/optimized-modern/png/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-6 w-auto" loading="lazy" sizes="100vw"></picture>
+          <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-6 w-auto" loading="lazy">
           <span>Fabriqué au Québec</span>
         </div>
 
