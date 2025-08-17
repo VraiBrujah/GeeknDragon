@@ -512,37 +512,71 @@
   // ========================================================================
 
   function attachEventListeners() {
-    // Boutons header spécifiques - Simple et direct
+    // INTERCEPTION GLOBALE DE TOUS LES BOUTONS SNIPCART
+    document.addEventListener('click', (e) => {
+      // Intercepter les boutons signin Snipcart
+      if (e.target.closest('.snipcart-customer-signin') || e.target.closest('[data-snipcart-action="signin"]')) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        openModal('gd-account-modal');
+        return false;
+      }
+      
+      // Intercepter les boutons checkout/cart Snipcart
+      if (e.target.closest('.snipcart-checkout') || e.target.closest('[data-snipcart-action="checkout"]')) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        openModal('gd-cart-modal');
+        return false;
+      }
+      
+      // Intercepter les boutons d'ajout au panier
+      if (e.target.closest('.snipcart-add-item') || e.target.closest('[data-item-id]')) {
+        // Laisser Snipcart ajouter l'article (pour la synchronisation)
+        // mais ouvrir notre modal après
+        setTimeout(() => {
+          openModal('gd-cart-modal');
+        }, 100);
+      }
+    }, true); // Capture en phase de capture pour intercepter avant Snipcart
+
+    // Boutons header - Empêcher le comportement Snipcart par défaut et ouvrir nos modales
     if (elements.accountToggle) {
       elements.accountToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
         openModal('gd-account-modal');
-      });
+      }, true);
     }
     
     if (elements.cartToggle) {
       elements.cartToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
         openModal('gd-cart-modal');
-      });
+      }, true);
     }
 
     if (elements.accountToggleMobile) {
       elements.accountToggleMobile.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
         openModal('gd-account-modal');
-      });
+      }, true);
     }
     
     if (elements.cartToggleMobile) {
       elements.cartToggleMobile.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
         openModal('gd-cart-modal');
-      });
+      }, true);
     }
 
     // Bouton checkout - Fermer notre modal et déclencher Snipcart
@@ -635,28 +669,18 @@
   }
 
   function preventSnipcartAutoOpen() {
-    // Rediriger l'ouverture des modales Snipcart vers nos modales
+    // Empêcher l'ouverture automatique des modales Snipcart
     if (window.Snipcart && window.Snipcart.api) {
       // Surcharger les méthodes d'ouverture de modal
       const originalShow = window.Snipcart.api.modal.show;
       window.Snipcart.api.modal.show = function(step) {
-        // Si on autorise explicitement (checkout), utiliser Snipcart
+        // Seulement autoriser l'ouverture si on l'a explicitement demandé
         if (state.allowSnipcartModal) {
           state.allowSnipcartModal = false; // Reset
           return originalShow.call(this, step);
         }
-        
-        // Sinon, rediriger vers nos modales selon le contexte
-        console.log('🏰 Redirection vers interface DnD pour:', step);
-        if (step === 'billing' || step === 'payment' || step === 'shipping') {
-          // Si c'est pour le checkout, autoriser Snipcart
-          state.allowSnipcartModal = true;
-          return originalShow.call(this, step);
-        } else {
-          // Sinon ouvrir notre modal panier
-          openModal('gd-cart-modal');
-          return false;
-        }
+        console.log('🚫 Ouverture modal Snipcart bloquée - redirection vers interface DnD');
+        return false;
       };
     }
   }
@@ -704,10 +728,10 @@
         updateCartBadge();
         animateCartButton();
         
-        // Ouvrir automatiquement notre modal panier après ajout
-        setTimeout(() => {
-          openModal('gd-cart-modal');
-        }, 300);
+        // Mettre à jour le contenu de notre modal si elle est ouverte
+        if (state.ui.cartModalOpen) {
+          setTimeout(() => updateSnipcartContent(), 100);
+        }
       });
 
       window.Snipcart.api.on('item.removed', (item) => {

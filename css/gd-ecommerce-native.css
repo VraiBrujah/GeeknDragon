@@ -1068,26 +1068,57 @@
 }
 
 /* ========================================================================
-   MASQUAGE MINIMAL DE L'INTERFACE SNIPCART (LAISSER FONCTIONNER)
+   MASQUAGE DE L'INTERFACE SNIPCART (SYSTÈME TRANSPARENT)
    ======================================================================== */
 
-/* Masquer seulement le modal principal Snipcart sauf pour checkout explicite */
-#snipcart:not(.snipcart--show) {
+/* Masquer complètement l'interface Snipcart par défaut - elle fonctionne en arrière-plan */
+#snipcart,
+.snipcart,
+.snipcart-modal,
+[data-snipcart-modal],
+.snipcart__modal,
+.snipcart-overlay {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
-/* Permettre l'affichage quand on l'ouvre explicitement pour le checkout */
+/* Seulement autoriser l'affichage quand on l'ouvre explicitement pour le checkout */
+.snipcart.snipcart--show,
+.snipcart.snipcart--checkout,
 #snipcart.snipcart--show {
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
 }
 
-/* Masquer les tooltips et notifications par défaut */
+/* Empêcher l'apparition des tooltips et notifications Snipcart */
 .snipcart-tooltip,
-.snipcart-notification {
+.snipcart-notification,
+.snipcart__notification {
   display: none !important;
 }
 
-/* Badges de comptage - garder seulement les nôtres visibles */
+/* Badges de comptage - on utilise seulement les nôtres */
 .snipcart-items-count:not(.gd-cart-badge):not(.gd-cart-badge-mobile) {
+  display: none !important;
+}
+
+/* S'assurer que les boutons Snipcart gardent leur fonctionnalité mais ne montrent pas de popups */
+.snipcart-customer-signin,
+.snipcart-checkout {
+  /* Boutons gardent leur fonctionnalité Snipcart mais avec notre apparence */
+}
+
+/* Empêcher les overlays Snipcart d'apparaître */
+body.snipcart-modal-open {
+  overflow: auto !important;
+}
+
+/* Masquer les éléments d'état Snipcart */
+.snipcart-loading,
+.snipcart__loading {
   display: none !important;
 }
