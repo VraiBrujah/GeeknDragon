@@ -310,18 +310,83 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Clic sur les miniatures
   if (total && mainMedia) {
+    let restartAutoSlide; // Référence à la fonction de redémarrage
+    
     thumbnailContainers.forEach((container, index) => {
       container.addEventListener('click', function() {
         showImage(index);
+        // Redémarrer le défilement automatique après clic manuel
+        if (restartAutoSlide) {
+          restartAutoSlide();
+        }
       });
     });
 
-    // Défilement automatique
+    // Défilement automatique avec gestion vidéo
     if (total > 1) {
-      setInterval(function() {
-        const next = (currentIndex + 1) % total;
-        showImage(next);
-      }, 5000);
+      let autoSlideInterval;
+      let videoEndListener;
+      
+      function startAutoSlide() {
+        // Nettoyer l'ancien interval
+        if (autoSlideInterval) {
+          clearInterval(autoSlideInterval);
+        }
+        
+        // Vérifier si l'élément actuel est une vidéo
+        const currentMedia = mainMedia;
+        if (currentMedia && currentMedia.tagName === 'VIDEO') {
+          // C'est une vidéo, attendre qu'elle se termine
+          
+          // Démarrer la vidéo automatiquement
+          currentMedia.autoplay = true;
+          currentMedia.muted = true;
+          currentMedia.play().catch(e => console.log('Autoplay bloqué:', e));
+          
+          // Nettoyer l'ancien listener
+          if (videoEndListener) {
+            currentMedia.removeEventListener('ended', videoEndListener);
+          }
+          
+          // Écouter la fin de la vidéo
+          videoEndListener = function() {
+            console.log('Vidéo terminée, passage à l\'image suivante');
+            const next = (currentIndex + 1) % total;
+            showImage(next);
+            startAutoSlide(); // Redémarrer pour le nouvel élément
+          };
+          
+          currentMedia.addEventListener('ended', videoEndListener);
+          
+          // Sécurité : si la vidéo ne se termine pas dans 30s, passer quand même
+          setTimeout(() => {
+            if (currentIndex === getCurrentMediaIndex() && currentMedia.tagName === 'VIDEO') {
+              console.log('Timeout vidéo, passage forcé');
+              const next = (currentIndex + 1) % total;
+              showImage(next);
+              startAutoSlide();
+            }
+          }, 30000);
+          
+        } else {
+          // C'est une image, défilement normal après 5s
+          autoSlideInterval = setTimeout(() => {
+            const next = (currentIndex + 1) % total;
+            showImage(next);
+            startAutoSlide(); // Redémarrer pour le nouvel élément
+          }, 5000);
+        }
+      }
+      
+      function getCurrentMediaIndex() {
+        return currentIndex;
+      }
+      
+      // Exposer la fonction pour les clics manuels
+      restartAutoSlide = startAutoSlide;
+      
+      // Démarrer le défilement automatique
+      startAutoSlide();
     }
   }
 });
