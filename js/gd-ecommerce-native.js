@@ -218,7 +218,7 @@
       calculateCartTotals();
       saveCart();
       updateCartDisplay();
-      updateCartModal();
+      updateCartModal().catch(console.error);
     }
 
     return true;
@@ -236,7 +236,7 @@
       calculateCartTotals();
       saveCart();
       updateCartDisplay();
-      updateCartModal();
+      updateCartModal().catch(console.error);
 
       announceToScreenReader(`${removedItem.name} retiré du panier`);
       console.log('Article retiré du panier:', removedItem.name);
@@ -251,7 +251,7 @@
     calculateCartTotals();
     saveCart();
     updateCartDisplay();
-    updateCartModal();
+    updateCartModal().catch(console.error);
 
     announceToScreenReader('Panier vidé');
     console.log('Panier vidé');
@@ -277,7 +277,7 @@
         calculateCartTotals();
         saveCart();
         updateCartDisplay();
-        updateCartModal();
+        updateCartModal().catch(console.error);
         
         announceToScreenReader(`${variantKey} mis à jour: ${newValue}`);
         console.log(`Variante mise à jour pour ${item.name}: ${variantKey} = ${newValue}`);
@@ -448,7 +448,7 @@
   /**
    * Met à jour le contenu de la modal panier
    */
-  function updateCartModal() {
+  async function updateCartModal() {
     const cartContent = document.getElementById('gd-cart-content');
     if (!cartContent) return;
 
@@ -468,16 +468,20 @@
       return;
     }
 
-    const itemsHtml = state.cart.items.map((item, index) => {
-      // Créer des sélecteurs interactifs pour les variations
+    // Générer l'HTML pour chaque item avec les vraies options depuis products.json
+    const itemsPromises = state.cart.items.map(async (item, index) => {
+      const variantOptions = await getProductVariantOptions(item.id);
+      
+      // Créer des sélecteurs interactifs pour les variations basés sur products.json
       const variantsHtml = Object.keys(item.variants).length > 0
-        ? Object.entries(item.variants).map(([key, value]) => {
-            if (key.toLowerCase() === 'multiplicateur') {
-              // Sélecteur pour multiplicateur
-              const multipliers = ['1', '2', '3', '4', '5', '10'];
-              const options = multipliers.map(mult => 
-                `<option value="${mult}" ${mult === value ? 'selected' : ''}>${mult}x</option>`
-              ).join('');
+        ? await Promise.all(Object.entries(item.variants).map(async ([key, value]) => {
+            if (key.toLowerCase() === 'multiplicateur' && variantOptions.multipliers.length > 0) {
+              // Sélecteur pour multiplicateur basé sur products.json
+              const options = variantOptions.multipliers.map(mult => {
+                const cleanMult = mult.replace(/[^\dx]/g, ''); // Extrait juste le nombre/x
+                const isSelected = mult.trim() === value.trim();
+                return `<option value="${escapeHtml(mult.trim())}" ${isSelected ? 'selected' : ''}>${escapeHtml(mult.trim())}</option>`;
+              }).join('');
               
               return `
                 <div class="gd-cart-variant-selector">
@@ -487,18 +491,12 @@
                   </select>
                 </div>
               `;
-            } else if (key.toLowerCase() === 'langue') {
-              // Sélecteur pour langue
-              const languages = [
-                { value: 'Français', label: '🇫🇷 Français' },
-                { value: 'English', label: '🇺🇸 English' },
-                { value: 'Español', label: '🇪🇸 Español' },
-                { value: 'Deutsch', label: '🇩🇪 Deutsch' },
-                { value: 'Italiano', label: '🇮🇹 Italiano' }
-              ];
-              const options = languages.map(lang => 
-                `<option value="${lang.value}" ${lang.value === value ? 'selected' : ''}>${lang.label}</option>`
-              ).join('');
+            } else if (key.toLowerCase() === 'langue' && variantOptions.languages.length > 0) {
+              // Sélecteur pour langue basé sur products.json
+              const options = variantOptions.languages.map(lang => {
+                const isSelected = lang.trim() === value.trim();
+                return `<option value="${escapeHtml(lang.trim())}" ${isSelected ? 'selected' : ''}>${escapeHtml(lang.trim())}</option>`;
+              }).join('');
               
               return `
                 <div class="gd-cart-variant-selector">
@@ -517,7 +515,7 @@
                 </div>
               `;
             }
-          }).join('')
+          })).then(results => results.join(''))
         : '';
 
       return `
@@ -542,7 +540,9 @@
           </button>
         </div>
       `;
-    }).join('');
+    });
+
+    const itemsHtml = (await Promise.all(itemsPromises)).join('');
 
     cartContent.innerHTML = `
       <div class="gd-cart-items">
@@ -591,7 +591,7 @@
 
     // Préparation de la modal
     if (modalId === 'gd-cart-modal') {
-      updateCartModal();
+      updateCartModal().catch(console.error);
       state.ui.cartModalOpen = true;
     } else if (modalId === 'gd-account-modal') {
       state.ui.accountModalOpen = true;
@@ -741,33 +741,74 @@
   }
 
   /**
-   * Extrait les variantes du produit
+   * Charge les données des produits depuis products.json
+   */
+  let productsData = null;
+  async function loadProductsData() {
+    if (!productsData) {
+      try {
+        const response = await fetch('/data/products.json');
+        productsData = await response.json();
+      } catch (error) {
+        console.warn('Erreur lors du chargement de products.json:', error);
+        productsData = {};
+      }
+    }
+    return productsData;
+  }
+
+  /**
+   * Extrait les variantes du produit depuis products.json et les sélecteurs
    */
   function extractProductVariants(button) {
     const variants = {};
+    const productId = button.dataset.itemId;
 
     // Récupérer les sélecteurs de variantes proches
     const container = button.closest('.card, .product-panel, .product-info');
     if (container) {
-      // Multiplicateurs
+      // Multiplicateurs depuis le sélecteur
       const multiplierSelect = container.querySelector('select[id^="multiplier-"]');
-      if (multiplierSelect && multiplierSelect.value !== '1') {
-        variants.Multiplicateur = multiplierSelect.value;
+      if (multiplierSelect && multiplierSelect.value && multiplierSelect.value !== '1') {
+        const selectedText = multiplierSelect.options[multiplierSelect.selectedIndex].text;
+        variants.Multiplicateur = selectedText.trim();
       }
 
-      // Langues
+      // Langues depuis le sélecteur
       const languageSelect = container.querySelector('select[data-type="language"]');
-      if (languageSelect) {
-        variants.Langue = languageSelect.options[languageSelect.selectedIndex].text;
+      if (languageSelect && languageSelect.selectedIndex > 0) {
+        const selectedText = languageSelect.options[languageSelect.selectedIndex].text;
+        variants.Langue = selectedText.trim();
       }
 
       // Autres variantes depuis les data attributes
       if (button.dataset.itemCustom1Name && button.dataset.itemCustom1Value) {
         variants[button.dataset.itemCustom1Name] = button.dataset.itemCustom1Value;
       }
+      if (button.dataset.itemCustom2Name && button.dataset.itemCustom2Value) {
+        variants[button.dataset.itemCustom2Name] = button.dataset.itemCustom2Value;
+      }
+      if (button.dataset.itemCustom3Name && button.dataset.itemCustom3Value) {
+        variants[button.dataset.itemCustom3Name] = button.dataset.itemCustom3Value;
+      }
     }
 
     return variants;
+  }
+
+  /**
+   * Récupère les options disponibles pour un produit depuis products.json
+   */
+  async function getProductVariantOptions(productId) {
+    const products = await loadProductsData();
+    const product = products[productId];
+    
+    if (!product) return { multipliers: [], languages: [] };
+    
+    return {
+      multipliers: product.multipliers || [],
+      languages: product.languages || []
+    };
   }
 
   // ========================================================================
@@ -886,6 +927,9 @@
 
     // Chargement du panier
     loadCart();
+
+    // Pré-chargement des données produits
+    loadProductsData().catch(console.error);
 
     // Création des modales
     createModals();
