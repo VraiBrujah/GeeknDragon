@@ -23,8 +23,12 @@
     cart: {
       items: [],
       total: 0,
+      subtotal: 0,
+      taxes: 0,
+      discounts: 0,
       count: 0,
       currency: CONFIG.currency,
+      sessionId: null,
     },
     ui: {
       accountModalOpen: false,
@@ -120,7 +124,7 @@
             ...state.cart,
             ...parsedCart,
           };
-          calculateCartTotals();
+          calculateCartTotals(parsedCart);
           return true;
         }
       }
@@ -150,18 +154,68 @@
   /**
    * Calcule les totaux du panier
    */
-  function calculateCartTotals() {
-    state.cart.count = state.cart.items.reduce((total, item) => total + item.quantity, 0);
-    state.cart.total = state.cart.items.reduce(
-      (total, item) => total + (item.price * item.quantity),
-      0,
-    );
+  function calculateCartTotals(cartData = null) {
+    if (cartData) {
+      state.cart.count = cartData.count
+        ?? (cartData.items ? cartData.items.reduce((total, item) => total + item.quantity, 0) : 0);
+      state.cart.subtotal = cartData.subtotal ?? 0;
+      state.cart.taxes = cartData.taxes ?? 0;
+      state.cart.discounts = cartData.discounts ?? 0;
+      state.cart.total = cartData.total ?? cartData.grandTotal ?? 0;
+    } else {
+      state.cart.count = state.cart.items.reduce((total, item) => total + item.quantity, 0);
+      const subtotal = state.cart.items.reduce(
+        (total, item) => total + (item.price * item.quantity),
+        0,
+      );
+      state.cart.subtotal = subtotal;
+      state.cart.taxes = 0;
+      state.cart.discounts = 0;
+      state.cart.total = subtotal;
+    }
+  }
+
+  /**
+   * Synchronise le panier avec le serveur
+   */
+  async function syncCartWithServer(endpoint, payload = {}, updateModal = false) {
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: state.cart.sessionId,
+          ...payload,
+        }),
+      });
+
+      if (!response.ok) throw new Error('Réponse serveur invalide');
+
+      const data = await response.json();
+      if (data.sessionId) state.cart.sessionId = data.sessionId;
+      if (data.cart) {
+        state.cart.items = data.cart.items || [];
+        state.cart.currency = data.cart.currency || state.cart.currency;
+        calculateCartTotals(data.cart);
+      } else {
+        calculateCartTotals();
+      }
+
+      saveCart();
+      updateCartDisplay();
+      if (updateModal) updateCartModal().catch(console.error);
+
+      return data;
+    } catch (error) {
+      console.error('Erreur lors de la synchronisation du panier:', error);
+      return null;
+    }
   }
 
   /**
    * Ajoute un article au panier
    */
-  function addToCart(productData) {
+  async function addToCart(productData) {
     // Validation des données
     if (!productData.id || !productData.name || !productData.price) {
       console.warn('Données produit invalides:', productData);
@@ -171,80 +225,53 @@
     console.log('🛒 Ajout au panier:', productData);
     console.log('🏷️ Variantes détectées:', productData.variants);
 
-    const existingItemIndex = state.cart.items.findIndex((item) => item.id === productData.id
-      && JSON.stringify(item.variants) === JSON.stringify(productData.variants));
+    const result = await syncCartWithServer('/api/cart/add', { item: productData });
 
-    if (existingItemIndex !== -1) {
-      // Article existant - mettre à jour la quantité
-      state.cart.items[existingItemIndex].quantity += (productData.quantity || 1);
-      console.log('📈 Quantité mise à jour pour article existant');
-    } else {
-      // Nouvel article
-      const newItem = {
-        id: productData.id,
-        name: escapeHtml(productData.name),
-        price: parseFloat(productData.price),
-        quantity: productData.quantity || 1,
-        image: productData.image || '',
-        url: productData.url || '',
-        variants: productData.variants || {},
-        addedAt: Date.now(),
-      };
-
-      state.cart.items.push(newItem);
-      console.log('✨ Nouvel article ajouté:', newItem);
+    if (result) {
+      // Feedback utilisateur
+      announceToScreenReader(`${productData.name} ajouté au panier`);
+      animateCartButton();
+      console.log('🎯 État du panier après ajout:', state.cart);
+      return true;
     }
 
-    calculateCartTotals();
-    saveCart();
-    updateCartDisplay();
-
-    // Feedback utilisateur
-    announceToScreenReader(`${productData.name} ajouté au panier`);
-    animateCartButton();
-
-    console.log('🎯 État du panier après ajout:', state.cart);
-    return true;
+    return false;
   }
 
   /**
    * Met à jour la quantité d'un article
    */
-  function updateItemQuantity(itemId, variants, newQuantity) {
-    const itemIndex = state.cart.items.findIndex((item) => item.id === itemId
-      && JSON.stringify(item.variants) === JSON.stringify(variants));
-
-    if (itemIndex === -1) return false;
-
+  async function updateItemQuantity(itemId, variants, newQuantity) {
     if (newQuantity <= 0) {
-      removeFromCart(itemId, variants);
-    } else if (newQuantity <= CONFIG.maxItems) {
-      state.cart.items[itemIndex].quantity = newQuantity;
-      calculateCartTotals();
-      saveCart();
-      updateCartDisplay();
-      updateCartModal().catch(console.error);
+      await removeFromCart(itemId, variants);
+      return true;
     }
+    if (newQuantity > CONFIG.maxItems) return false;
 
-    return true;
+    const result = await syncCartWithServer(
+      '/api/cart/update',
+      { id: itemId, variants, quantity: newQuantity },
+      true,
+    );
+    return !!result;
   }
 
   /**
    * Supprime un article du panier
    */
-  function removeFromCart(itemId, variants = {}) {
-    const itemIndex = state.cart.items.findIndex((item) => item.id === itemId
+  async function removeFromCart(itemId, variants = {}) {
+    const existingItem = state.cart.items.find((item) => item.id === itemId
       && JSON.stringify(item.variants) === JSON.stringify(variants));
 
-    if (itemIndex !== -1) {
-      const removedItem = state.cart.items.splice(itemIndex, 1)[0];
-      calculateCartTotals();
-      saveCart();
-      updateCartDisplay();
-      updateCartModal().catch(console.error);
+    const result = await syncCartWithServer(
+      '/api/cart/remove',
+      { id: itemId, variants },
+      true,
+    );
 
-      announceToScreenReader(`${removedItem.name} retiré du panier`);
-      console.log('Article retiré du panier:', removedItem.name);
+    if (result && existingItem) {
+      announceToScreenReader(`${existingItem.name} retiré du panier`);
+      console.log('Article retiré du panier:', existingItem.name);
     }
   }
 
@@ -738,7 +765,7 @@
 
     console.log('📦 Données produit extraites:', productData);
 
-    if (addToCart(productData)) {
+    if (await addToCart(productData)) {
       // Feedback visuel
       button.style.transform = 'scale(0.95)';
       setTimeout(() => {
@@ -853,19 +880,31 @@
   /**
    * Procède au checkout
    */
-  function proceedToCheckout() {
+  async function proceedToCheckout() {
     if (state.cart.items.length === 0) {
       announceToScreenReader('Le panier est vide');
       return;
     }
 
-    // Pour l'instant, on redirige vers une page de checkout
-    // À terme, on pourrait intégrer Stripe ou un autre processeur de paiement
-    console.log('Redirection vers le checkout avec:', state.cart);
+    try {
+      const response = await fetch('/api/cart/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: state.cart.sessionId }),
+      });
 
-    // Exemple de redirection
-    const checkoutData = encodeURIComponent(JSON.stringify(state.cart));
-    window.location.href = `/checkout.php?data=${checkoutData}`;
+      if (!response.ok) throw new Error('Réponse serveur invalide');
+
+      const data = await response.json();
+      if (data.sessionId) state.cart.sessionId = data.sessionId;
+
+      const redirectUrl = data.url || data.redirectUrl;
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      }
+    } catch (error) {
+      console.error('Erreur lors du checkout:', error);
+    }
   }
 
   // ========================================================================
