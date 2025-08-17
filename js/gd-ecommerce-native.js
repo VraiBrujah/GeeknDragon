@@ -257,6 +257,34 @@
     console.log('Panier vidé');
   }
 
+  /**
+   * Met à jour une variante d'un article dans le panier
+   */
+  function updateVariant(itemId, itemIndex, variantKey, newValue) {
+    if (itemIndex >= 0 && itemIndex < state.cart.items.length) {
+      const item = state.cart.items[itemIndex];
+      
+      if (item.id === itemId) {
+        // Mettre à jour la variante
+        item.variants[variantKey] = newValue;
+        
+        // Recalculer le prix si c'est un multiplicateur
+        if (variantKey.toLowerCase() === 'multiplicateur') {
+          const basePrice = item.price / (item.variants.Multiplicateur || 1);
+          item.price = basePrice * parseFloat(newValue);
+        }
+        
+        calculateCartTotals();
+        saveCart();
+        updateCartDisplay();
+        updateCartModal();
+        
+        announceToScreenReader(`${variantKey} mis à jour: ${newValue}`);
+        console.log(`Variante mise à jour pour ${item.name}: ${variantKey} = ${newValue}`);
+      }
+    }
+  }
+
   // ========================================================================
   // INTERFACE UTILISATEUR
   // ========================================================================
@@ -440,13 +468,60 @@
       return;
     }
 
-    const itemsHtml = state.cart.items.map((item) => {
+    const itemsHtml = state.cart.items.map((item, index) => {
+      // Créer des sélecteurs interactifs pour les variations
       const variantsHtml = Object.keys(item.variants).length > 0
-        ? Object.entries(item.variants).map(([key, value]) => `<span class="gd-cart-item-variant">${escapeHtml(key)}: ${escapeHtml(value)}</span>`).join('')
+        ? Object.entries(item.variants).map(([key, value]) => {
+            if (key.toLowerCase() === 'multiplicateur') {
+              // Sélecteur pour multiplicateur
+              const multipliers = ['1', '2', '3', '4', '5', '10'];
+              const options = multipliers.map(mult => 
+                `<option value="${mult}" ${mult === value ? 'selected' : ''}>${mult}x</option>`
+              ).join('');
+              
+              return `
+                <div class="gd-cart-variant-selector">
+                  <label class="gd-variant-label">${escapeHtml(key)}:</label>
+                  <select class="gd-variant-select" onchange="GDEcommerce.updateVariant('${escapeHtml(item.id)}', ${index}, '${escapeHtml(key)}', this.value)">
+                    ${options}
+                  </select>
+                </div>
+              `;
+            } else if (key.toLowerCase() === 'langue') {
+              // Sélecteur pour langue
+              const languages = [
+                { value: 'Français', label: '🇫🇷 Français' },
+                { value: 'English', label: '🇺🇸 English' },
+                { value: 'Español', label: '🇪🇸 Español' },
+                { value: 'Deutsch', label: '🇩🇪 Deutsch' },
+                { value: 'Italiano', label: '🇮🇹 Italiano' }
+              ];
+              const options = languages.map(lang => 
+                `<option value="${lang.value}" ${lang.value === value ? 'selected' : ''}>${lang.label}</option>`
+              ).join('');
+              
+              return `
+                <div class="gd-cart-variant-selector">
+                  <label class="gd-variant-label">${escapeHtml(key)}:</label>
+                  <select class="gd-variant-select" onchange="GDEcommerce.updateVariant('${escapeHtml(item.id)}', ${index}, '${escapeHtml(key)}', this.value)">
+                    ${options}
+                  </select>
+                </div>
+              `;
+            } else {
+              // Affichage simple pour autres variantes
+              return `
+                <div class="gd-cart-variant-display">
+                  <span class="gd-variant-label">${escapeHtml(key)}:</span>
+                  <span class="gd-variant-value">${escapeHtml(value)}</span>
+                </div>
+              `;
+            }
+          }).join('')
         : '';
 
       return `
-        <div class="gd-cart-item" data-item-id="${escapeHtml(item.id)}">
+        <div class="gd-cart-item" data-item-id="${escapeHtml(item.id)}" data-item-index="${index}">
           <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" class="gd-cart-item-image" loading="lazy">
           <div class="gd-cart-item-details">
             <div class="gd-cart-item-name">${item.name}</div>
@@ -840,6 +915,7 @@
     addToCart,
     removeItem: removeFromCart,
     updateQuantity: updateItemQuantity,
+    updateVariant,
     clearCart,
 
     // Contrôle des modales
