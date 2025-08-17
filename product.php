@@ -76,8 +76,9 @@ echo $snipcartInit;
               <?php if ($isFirstVideo) : ?>
                 <video src="<?= htmlspecialchars($firstImage) ?>" 
                        class="product-media main-product-media"
-                       muted playsinline controls
-                       data-no-gallery>
+                       autoplay muted playsinline controls
+                       data-no-gallery
+                       id="main-product-video">
                 </video>
               <?php else : ?>
                 <img src="<?= htmlspecialchars($firstImage) ?>"
@@ -360,6 +361,48 @@ document.addEventListener('DOMContentLoaded', function() {
       btn.setAttribute('data-item-name', mult !== '1' ? (baseName + ' x' + mult) : baseName);
     }
   }, { passive: true });
+})();
+</script>
+
+<script>
+// Gestion de la vidéo principale - attendre la fin avant navigation
+(function() {
+  const mainVideo = document.getElementById('main-product-video');
+  if (!mainVideo) return;
+  
+  let videoHasEnded = false;
+  
+  // Marquer quand la vidéo se termine
+  mainVideo.addEventListener('ended', function() {
+    videoHasEnded = true;
+    console.log('Vidéo terminée, navigation autorisée');
+  });
+  
+  // Intercepter les clics de navigation
+  const navigationLinks = document.querySelectorAll('a[href]');
+  navigationLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      // Si la vidéo joue encore et n'est pas terminée
+      if (!mainVideo.ended && !mainVideo.paused && !videoHasEnded) {
+        e.preventDefault();
+        
+        // Afficher un message ou attendre
+        const confirmNavigation = confirm('La vidéo est en cours de lecture. Voulez-vous vraiment quitter cette page ?');
+        if (confirmNavigation) {
+          window.location.href = this.href;
+        }
+      }
+    });
+  });
+  
+  // Intercepter la navigation par le navigateur (bouton retour, etc.)
+  window.addEventListener('beforeunload', function(e) {
+    if (!mainVideo.ended && !mainVideo.paused && !videoHasEnded) {
+      e.preventDefault();
+      e.returnValue = 'La vidéo est en cours de lecture.';
+      return 'La vidéo est en cours de lecture.';
+    }
+  });
 })();
 </script>
 </body>
