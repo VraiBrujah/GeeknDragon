@@ -474,52 +474,54 @@
       
       const variantOptions = await getProductVariantOptions(item.id);
       console.log(`📋 Options disponibles depuis products.json:`, variantOptions);
-      
+
       // Créer des sélecteurs interactifs pour les variations basés sur products.json
       const variantsHtml = Object.keys(item.variants).length > 0
-        ? await Promise.all(Object.entries(item.variants).map(async ([key, value]) => {
+        ? (await Promise.all(Object.entries(item.variants).map(async ([key, value]) => {
             console.log(`🔧 Traitement variante: ${key} = ${value}`);
-            if (key.toLowerCase() === 'multiplicateur' && variantOptions.multipliers.length > 0) {
-              // Sélecteur pour multiplicateur basé sur products.json
-              const options = variantOptions.multipliers.map(mult => {
-                const cleanMult = mult.replace(/[^\dx]/g, ''); // Extrait juste le nombre/x
-                const isSelected = mult.trim() === value.trim();
-                return `<option value="${escapeHtml(mult.trim())}" ${isSelected ? 'selected' : ''}>${escapeHtml(mult.trim())}</option>`;
+            const normalizedKey = key.toLowerCase();
+            if (['multiplicateur', 'multiplier'].includes(normalizedKey) && variantOptions.multipliers.length > 0) {
+              const canonicalKey = 'Multiplicateur';
+              const options = variantOptions.multipliers.map((mult) => {
+                const opt = mult.trim();
+                const isSelected = opt === value.trim();
+                return `<option value="${escapeHtml(opt)}" ${isSelected ? 'selected' : ''}>${escapeHtml(opt)}</option>`;
               }).join('');
-              
+              const label = document.documentElement.lang === 'en' ? 'Multiplier' : 'Multiplicateur';
               return `
                 <div class="gd-cart-variant-selector">
-                  <label class="gd-variant-label">${escapeHtml(key)}:</label>
-                  <select class="gd-variant-select" onchange="GDEcommerce.updateVariant('${escapeHtml(item.id)}', ${index}, '${escapeHtml(key)}', this.value)">
+                  <label class="gd-variant-label">${escapeHtml(label)}:</label>
+                  <select class="gd-variant-select" onchange="GDEcommerce.updateVariant('${escapeHtml(item.id)}', ${index}, '${canonicalKey}', this.value)">
                     ${options}
                   </select>
-                </div>
-              `;
-            } else if (key.toLowerCase() === 'langue' && variantOptions.languages.length > 0) {
-              // Sélecteur pour langue basé sur products.json
-              const options = variantOptions.languages.map(lang => {
-                const isSelected = lang.trim() === value.trim();
-                return `<option value="${escapeHtml(lang.trim())}" ${isSelected ? 'selected' : ''}>${escapeHtml(lang.trim())}</option>`;
-              }).join('');
-              
-              return `
-                <div class="gd-cart-variant-selector">
-                  <label class="gd-variant-label">${escapeHtml(key)}:</label>
-                  <select class="gd-variant-select" onchange="GDEcommerce.updateVariant('${escapeHtml(item.id)}', ${index}, '${escapeHtml(key)}', this.value)">
-                    ${options}
-                  </select>
-                </div>
-              `;
-            } else {
-              // Affichage simple pour autres variantes
-              return `
-                <div class="gd-cart-variant-display">
-                  <span class="gd-variant-label">${escapeHtml(key)}:</span>
-                  <span class="gd-variant-value">${escapeHtml(value)}</span>
                 </div>
               `;
             }
-          })).then(results => results.join(''))
+            if (['langue', 'language'].includes(normalizedKey) && variantOptions.languages.length > 0) {
+              const canonicalKey = 'Langue';
+              const options = variantOptions.languages.map((lang) => {
+                const opt = lang.trim();
+                const isSelected = opt === value.trim();
+                return `<option value="${escapeHtml(opt)}" ${isSelected ? 'selected' : ''}>${escapeHtml(opt)}</option>`;
+              }).join('');
+              const label = document.documentElement.lang === 'en' ? 'Language' : 'Langue';
+              return `
+                <div class="gd-cart-variant-selector">
+                  <label class="gd-variant-label">${escapeHtml(label)}:</label>
+                  <select class="gd-variant-select" onchange="GDEcommerce.updateVariant('${escapeHtml(item.id)}', ${index}, '${canonicalKey}', this.value)">
+                    ${options}
+                  </select>
+                </div>
+              `;
+            }
+            // Affichage simple pour autres variantes
+            return `
+              <div class="gd-cart-variant-display">
+                <span class="gd-variant-label">${escapeHtml(key)}:</span>
+                <span class="gd-variant-value">${escapeHtml(value)}</span>
+              </div>
+            `;
+          }))).join('')
         : '';
 
       return `
@@ -787,26 +789,22 @@
     console.log('🔍 Extraction des variantes pour:', productId);
     console.log('📋 Données du bouton:', button.dataset);
 
+    const normalizeVariantName = (name) => {
+      const n = name.toLowerCase();
+      if (n === 'multiplicateur' || n === 'multiplier') return 'Multiplicateur';
+      if (n === 'langue' || n === 'language') return 'Langue';
+      return name;
+    };
+
     // Récupérer les variantes depuis les data attributes Snipcart
-    if (button.dataset.itemCustom1Name && button.dataset.itemCustom1Value) {
-      const variantName = button.dataset.itemCustom1Name;
-      const variantValue = button.dataset.itemCustom1Value;
-      variants[variantName] = variantValue;
-      console.log(`✅ Variante trouvée: ${variantName} = ${variantValue}`);
-    }
-    
-    if (button.dataset.itemCustom2Name && button.dataset.itemCustom2Value) {
-      const variantName = button.dataset.itemCustom2Name;
-      const variantValue = button.dataset.itemCustom2Value;
-      variants[variantName] = variantValue;
-      console.log(`✅ Variante trouvée: ${variantName} = ${variantValue}`);
-    }
-    
-    if (button.dataset.itemCustom3Name && button.dataset.itemCustom3Value) {
-      const variantName = button.dataset.itemCustom3Name;
-      const variantValue = button.dataset.itemCustom3Value;
-      variants[variantName] = variantValue;
-      console.log(`✅ Variante trouvée: ${variantName} = ${variantValue}`);
+    for (let i = 1; i <= 3; i += 1) {
+      const name = button.dataset[`itemCustom${i}Name`];
+      const value = button.dataset[`itemCustom${i}Value`];
+      if (name && value) {
+        const variantName = normalizeVariantName(name);
+        variants[variantName] = value;
+        console.log(`✅ Variante trouvée: ${variantName} = ${value}`);
+      }
     }
 
     // Récupérer les sélecteurs de variantes proches (si ils existent)
