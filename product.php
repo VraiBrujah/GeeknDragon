@@ -102,10 +102,9 @@ echo $snipcartInit;
                              muted></video>
                       <div class="video-icon">▶</div>
                     <?php else : ?>
-                      <img src="<?= htmlspecialchars($img) ?>" 
+                      <img src="<?= htmlspecialchars($img) ?>"
                            alt="<?= htmlspecialchars('Image ' . ($index + 1) . ' - ' . strip_tags($productName)) ?>"
-                           class="thumbnail-media"
-                           data-gallery="product">
+                           class="thumbnail-media">
                     <?php endif; ?>
                   </div>
                 <?php endforeach; ?>
@@ -261,51 +260,68 @@ echo $snipcartInit;
 <!-- Script pour la navigation des thumbnails -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Navigation des thumbnails
   const thumbnailContainers = document.querySelectorAll('.thumbnail');
-  const mainImage = document.querySelector('.main-product-media');
-  
-  if (thumbnailContainers.length && mainImage) {
+  let mainMedia = document.querySelector('.main-product-media');
+  let currentIndex = 0;
+  const total = thumbnailContainers.length;
+
+  function showImage(index) {
+    if (!thumbnailContainers[index]) return;
+
+    const container = thumbnailContainers[index];
+    const thumb = container.querySelector('.thumbnail-media');
+
+    // Mettre à jour l'active sur les thumbnails
+    thumbnailContainers.forEach(c => c.classList.remove('active'));
+    container.classList.add('active');
+
+    // Mettre à jour le média principal
+    if (mainMedia.tagName === 'IMG' && thumb.tagName === 'IMG') {
+      mainMedia.src = thumb.src;
+      mainMedia.alt = thumb.alt;
+    } else if (mainMedia.tagName === 'VIDEO' && thumb.tagName === 'VIDEO') {
+      mainMedia.src = thumb.src;
+    } else if (mainMedia.tagName === 'IMG' && thumb.tagName === 'VIDEO') {
+      const newVideo = document.createElement('video');
+      newVideo.className = mainMedia.className;
+      newVideo.src = thumb.src;
+      newVideo.controls = true;
+      newVideo.muted = true;
+      newVideo.playsInline = true;
+      newVideo.dataset.noGallery = true;
+      mainMedia.parentNode.replaceChild(newVideo, mainMedia);
+      mainMedia = newVideo;
+    } else if (mainMedia.tagName === 'VIDEO' && thumb.tagName === 'IMG') {
+      const newImg = document.createElement('img');
+      newImg.className = mainMedia.className;
+      newImg.src = thumb.src;
+      newImg.alt = thumb.alt;
+      newImg.dataset.gallery = 'product';
+      mainMedia.parentNode.replaceChild(newImg, mainMedia);
+      mainMedia = newImg;
+      if (window.UniversalGallery) {
+        window.UniversalGallery.refresh();
+      }
+    }
+
+    currentIndex = index;
+  }
+
+  // Clic sur les miniatures
+  if (total && mainMedia) {
     thumbnailContainers.forEach((container, index) => {
       container.addEventListener('click', function() {
-        const thumb = container.querySelector('.thumbnail-media');
-        
-        // Retirer la classe active de tous les conteneurs
-        thumbnailContainers.forEach(c => c.classList.remove('active'));
-        // Ajouter active au conteneur cliqué
-        container.classList.add('active');
-        
-        // Changer l'image principale
-        if (mainImage.tagName === 'IMG' && thumb.tagName === 'IMG') {
-          mainImage.src = thumb.src;
-          mainImage.alt = thumb.alt;
-        } else if (mainImage.tagName === 'VIDEO' && thumb.tagName === 'VIDEO') {
-          mainImage.src = thumb.src;
-        } else if (mainImage.tagName === 'IMG' && thumb.tagName === 'VIDEO') {
-          // Remplacer img par video
-          const newVideo = document.createElement('video');
-          newVideo.className = mainImage.className;
-          newVideo.src = thumb.src;
-          newVideo.controls = true;
-          newVideo.muted = true;
-          newVideo.playsInline = true;
-          newVideo.dataset.noGallery = true;
-          mainImage.parentNode.replaceChild(newVideo, mainImage);
-        } else if (mainImage.tagName === 'VIDEO' && thumb.tagName === 'IMG') {
-          // Remplacer video par img
-          const newImg = document.createElement('img');
-          newImg.className = mainImage.className;
-          newImg.src = thumb.src;
-          newImg.alt = thumb.alt;
-          newImg.dataset.gallery = 'product';
-          mainImage.parentNode.replaceChild(newImg, mainImage);
-          // Réappliquer la galerie
-          if (window.UniversalGallery) {
-            window.UniversalGallery.refresh();
-          }
-        }
+        showImage(index);
       });
     });
+
+    // Défilement automatique
+    if (total > 1) {
+      setInterval(function() {
+        const next = (currentIndex + 1) % total;
+        showImage(next);
+      }, 5000);
+    }
   }
 });
 </script>
