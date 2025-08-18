@@ -10,7 +10,6 @@
         "guzzlehttp/guzzle": "^7"
     },
     "config": {
-        "disable-tls": true,
-        "secure-http": false
+        "disable-tls": false
     }
 }

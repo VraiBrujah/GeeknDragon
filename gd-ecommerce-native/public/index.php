@@ -104,7 +104,7 @@ try {
     if (strpos($path, '/snipcart/') !== 0) {
         // Afficher une page d'information pour les autres requêtes
         if ($requestMethod === 'GET' && $path === '/') {
-            showApiInfo();
+            self::showApiInfo();
             exit;
         }
         

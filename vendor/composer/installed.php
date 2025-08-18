@@ -3,11 +3,11 @@
         'name' => 'geekndragon/project',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '97653a3556424185f4ee609274d3fa4b092be19d',
+        'reference' => 'e04b434de121f934895ef1e90378b885ff8ceeea',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => false,
+        'dev' => true,
     ),
     'versions' => array(
         'erusev/parsedown' => array(
@@ -22,7 +22,7 @@
         'geekndragon/project' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '97653a3556424185f4ee609274d3fa4b092be19d',
+            'reference' => 'e04b434de121f934895ef1e90378b885ff8ceeea',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
