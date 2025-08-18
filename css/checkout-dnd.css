@@ -210,7 +210,7 @@
 
 .gd-step-title {
   font-size: 1.5rem;
-  color: var(--gd-primary);
+  color: var(--gd-secondary);
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid var(--gd-secondary);
@@ -234,7 +234,7 @@
 
 .gd-address-title {
   font-size: 1.2rem;
-  color: var(--gd-primary);
+  color: var(--gd-text-light);
   margin-bottom: 15px;
   display: flex;
   align-items: center;
