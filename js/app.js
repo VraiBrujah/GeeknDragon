@@ -118,17 +118,6 @@
     };
   };
 
-  // Snipcart ready (polling léger)
-  const whenSnipcart = (cb) => {
-    if (window.Snipcart && window.Snipcart.store && window.Snipcart.api) { cb(); return; }
-    const int = setInterval(() => {
-      if (window.Snipcart && window.Snipcart.store && window.Snipcart.api) {
-        clearInterval(int); cb();
-      }
-    }, 200);
-  };
-  window.whenSnipcart = whenSnipcart;
-
   // Expose utilitaires
   window.GD = Object.assign(window.GD || {}, {
     qs,
@@ -182,14 +171,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
   setCurrent(lang);
-  whenSnipcart(() => window.Snipcart.api.session.setLanguage(lang));
 
   document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const picked = btn.dataset.lang;
       window.GD.setLang(picked);
       setCurrent(picked);
-      whenSnipcart(() => window.Snipcart.api.session.setLanguage(picked));
       loadTranslations(picked);
     });
   });
@@ -776,47 +763,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================================================
-   SNIPCART — évite double ouverture + badges actifs
-   ===================================================================== */
-document.addEventListener('DOMContentLoaded', () => {
-  const cartBtns = document.querySelectorAll('.snipcart-checkout');
-  const accountBtns = document.querySelectorAll('.snipcart-customer-signin');
-
-  const cartVisible = () => window.Snipcart?.store?.getState()?.cart?.status === 'visible';
-  const accountVisible = () => window.Snipcart?.store?.getState()?.customer?.status === 'visible';
-
-  cartBtns.forEach((btn) => btn.addEventListener('click', (e) => {
-    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
-    if (cartVisible()) {
-      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
-      window.Snipcart.api.theme.cart.close();
-      e.currentTarget.blur();
-    }
-  }));
-  accountBtns.forEach((btn) => btn.addEventListener('click', (e) => {
-    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
-    if (accountVisible()) {
-      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
-      window.Snipcart.api.theme.customer.close();
-      e.currentTarget.blur();
-    }
-  }));
-
-  const setBtnState = () => {
-    const cv = cartVisible();
-    const av = accountVisible();
-    cartBtns.forEach((b) => b.classList.toggle('is-active', cv));
-    accountBtns.forEach((b) => b.classList.toggle('is-active', av));
-  };
-  window.addEventListener('snipcart.ready', setBtnState);
-  window.addEventListener('snipcart.opened', setBtnState);
-  window.addEventListener('snipcart.closed', setBtnState);
-
-  const hookStore = () => { try { const { store } = window.Snipcart; if (store) store.subscribe(() => setBtnState()); } catch (_) {} };
-  (function poll() { if (window.Snipcart && window.Snipcart.store) hookStore(); else setTimeout(poll, 300); }());
-});
-
-/* ========================================================================
    LAZYLOAD IMG
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -900,27 +846,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================================================
-   SNIPCART — synchronisation au clic "Ajouter au panier"
-   ===================================================================== */
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.snipcart-add-item');
-  if (!btn) return;
-
-  const id = btn.dataset.itemId;
-
-  // Quantité depuis l’UI carte
-  const qtyEl = document.getElementById(`qty-${id}`);
-  if (qtyEl) {
-    const q = parseInt(qtyEl.innerHTML, 10);
-    if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
-  }
-
-  // Valeur du multiplicateur choisie sur la fiche (si présente)
-  const sel = document.querySelector(`.multiplier-select[data-target="${id}"]`);
-  if (sel) btn.setAttribute('data-item-custom1-value', sel.value);
-}, false);
-
-/* ========================================================================
    SNIPCART — cacher UNIQUEMENT "Multiplicateur/Multiplier" dans le panier
    (la quantité reste affichée) — Désactivé
    ===================================================================== */
@@ -929,20 +854,4 @@ document.addEventListener('click', (e) => {
 //   if (!root) return;
 // });
 
-// Verrouille le scroll de la page uniquement pour le panier/checkout (pas pour la facture)
-const toggleSnipcartScroll = () => {
-  const root = document.getElementById('snipcart');
-  const inOrder = !!root?.querySelector('.snipcart-order');
-  const visible = window.Snipcart?.store?.getState()?.cart?.status === 'visible';
-  document.body.classList.toggle('snipcart-open', visible && !inOrder);
-};
 
-window.addEventListener('snipcart.opened', toggleSnipcartScroll);
-window.addEventListener('snipcart.closed', toggleSnipcartScroll);
-window.addEventListener('snipcart.ready', () => {
-  const root = document.getElementById('snipcart');
-  if (root) {
-    new MutationObserver(toggleSnipcartScroll).observe(root, { childList: true, subtree: true });
-  }
-  toggleSnipcartScroll();
-});
