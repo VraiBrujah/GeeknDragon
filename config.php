@@ -1,8 +1,4 @@
 <?php
-
-$snipcartConfig = require __DIR__ . '/config/snipcart.php';
-$stripeConfig   = require __DIR__ . '/config/stripe.php';
-
 return [
     'smtp' => [
         'host' => $_ENV['SMTP_HOST']
@@ -16,8 +12,8 @@ return [
             ?? $_SERVER['SMTP_PORT']
         ) ?: 587,
     ],
-    'snipcart' => $snipcartConfig,
-    'stripe'   => $stripeConfig,
-    'snipcart_api_key' => $snipcartConfig['publicToken'],
-    'snipcart_secret_api_key' => $snipcartConfig['secret'],
+    'snipcart_api_key' => $_ENV['SNIPCART_API_KEY']
+        ?? $_SERVER['SNIPCART_API_KEY'],
+    'snipcart_secret_api_key' => $_ENV['SNIPCART_SECRET_API_KEY']
+        ?? $_SERVER['SNIPCART_SECRET_API_KEY'],
 ];

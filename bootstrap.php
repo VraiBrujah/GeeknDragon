@@ -45,6 +45,3 @@ if ($canLoadVendor) {
         }
     }
 }
-
-$snipcartConfig = require __DIR__ . '/config/snipcart.php';
-$stripeConfig   = require __DIR__ . '/config/stripe.php';
