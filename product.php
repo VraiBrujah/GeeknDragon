@@ -47,16 +47,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 <body>
-<?php
-$snipcartLanguage = $lang;
-$snipcartLocales = 'fr,en';
-$snipcartAddProductBehavior = 'overlay';
-ob_start();
-include 'snipcart-init.php';
-$snipcartInit = ob_get_clean();
-include 'header.php';
-echo $snipcartInit;
-?>
+<?php include 'header.php'; ?>
 <main id="main" class="py-10 pt-[calc(var(--header-height)+2rem)] main-product">
   <section class="max-w-4xl w-full mx-auto px-6">
     <div class="flex justify-center mb-8">

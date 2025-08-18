@@ -11,13 +11,7 @@ $extraHead = '';
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 <body>
-  <?php
-  ob_start();
-  include 'snipcart-init.php';
-  $snipcartInit = ob_get_clean();
-  include 'header.php';
-  echo $snipcartInit;
-  ?>
+  <?php include 'header.php'; ?>
 
   <main id="main" class="pt-32 flex items-center justify-center min-h-screen">
     <div class="text-center max-w-xl bg-gray-900/70 backdrop-blur p-10 rounded-3xl border border-yellow-500 shadow-2xl">

@@ -12,13 +12,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
 <body>
 
-  <?php
-  ob_start();
-  include 'snipcart-init.php';
-  $snipcartInit = ob_get_clean();
-  include 'header.php';
-  echo $snipcartInit;
-  ?>
+  <?php include 'header.php'; ?>
 
   <main id="main" class="pt-[calc(var(--header-height))]">
   
