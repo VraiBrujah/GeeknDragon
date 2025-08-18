@@ -58,13 +58,7 @@ $cart['total'] = array_reduce($cart['items'], function ($carry, $it) {
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 <body>
-<?php
-ob_start();
-include 'snipcart-init.php';
-$snipcartInit = ob_get_clean();
-include 'header.php';
-echo $snipcartInit;
-?>
+<?php include 'header.php'; ?>
 <main id="main" class="pt-32 flex items-center justify-center min-h-screen">
   <div class="max-w-3xl w-full bg-gray-900/70 backdrop-blur p-8 rounded-3xl border border-yellow-500 shadow-2xl">
     <h1 class="text-3xl font-bold mb-6 text-yellow-400" data-i18n="checkout.title">Résumé de la commande</h1>
