@@ -69,6 +69,8 @@
     body: document.body,
   };
 
+  let eventsAttached = false;
+
   // ========================================================================
   // UTILITAIRES
   // ========================================================================
@@ -671,7 +673,7 @@
   /**
    * Ouvre une modal
    */
-  function openModal(modalId) {
+  async function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) return;
 
@@ -684,41 +686,46 @@
 
     // Préparation de la modal
     if (modalId === 'gd-cart-modal') {
-      updateCartModal().catch(logger.error);
-      state.ui.cartModalOpen = true;
-      [elements.cartToggle, elements.cartToggleMobile].forEach((btn) => {
-        if (btn) btn.setAttribute('aria-expanded', 'true');
-      });
-    } else if (modalId === 'gd-account-modal') {
-      state.ui.accountModalOpen = true;
-      [elements.accountToggle, elements.accountToggleMobile].forEach((btn) => {
-        if (btn) btn.setAttribute('aria-expanded', 'true');
-      });
+      await updateCartModal().catch(logger.error);
     }
 
-    // Gestion de l'accessibilité
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    elements.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      // Gestion de l'accessibilité
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      elements.body.style.overflow = 'hidden';
 
-    // Focus trap
-    const focusableElements = modal.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-    );
-
-    if (focusableElements.length > 0) {
-      focusableElements[0].focus();
-    }
-
-    // Gestionnaire pour la touche Échap
-    const handleEscape = (e) => {
-      if (e.key === 'Escape') {
-        closeModal(modalId);
-        document.removeEventListener('keydown', handleEscape);
+      if (modalId === 'gd-cart-modal') {
+        state.ui.cartModalOpen = true;
+        [elements.cartToggle, elements.cartToggleMobile].forEach((btn) => {
+          if (btn) btn.setAttribute('aria-expanded', 'true');
+        });
+      } else if (modalId === 'gd-account-modal') {
+        state.ui.accountModalOpen = true;
+        [elements.accountToggle, elements.accountToggleMobile].forEach((btn) => {
+          if (btn) btn.setAttribute('aria-expanded', 'true');
+        });
       }
-    };
 
-    document.addEventListener('keydown', handleEscape);
+      // Focus trap
+      const focusableElements = modal.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+
+      if (focusableElements.length > 0) {
+        focusableElements[0].focus();
+      }
+
+      // Gestionnaire pour la touche Échap
+      const handleEscape = (e) => {
+        if (e.key === 'Escape') {
+          closeModal(modalId);
+          document.removeEventListener('keydown', handleEscape);
+        }
+      };
+
+      document.addEventListener('keydown', handleEscape);
+    });
   }
 
   /**
@@ -1532,6 +1539,9 @@
    * Attache tous les événements
    */
   function attachEventListeners() {
+    if (eventsAttached || !elements.accountModal || !elements.cartModal) return;
+    eventsAttached = true;
+
     // Boutons header
     if (elements.accountToggle) {
       elements.accountToggle.addEventListener('click', () => {
