@@ -5,7 +5,7 @@ $active = '';
 require __DIR__ . '/i18n.php';
 $title = $translations['meta']['checkout']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['checkout']['desc'] ?? '';
-$extraHead = '<link rel="stylesheet" href="/css/checkout-dnd.css?v=' . filemtime(__DIR__ . '/css/checkout-dnd.css') . '">';
+$extraHead = '';
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
