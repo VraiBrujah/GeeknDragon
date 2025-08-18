@@ -22,13 +22,7 @@ unset($_SESSION['errors'], $_SESSION['old']);
 
 <body>
 
-  <?php
-  ob_start();
-  include 'snipcart-init.php';
-  $snipcartInit = ob_get_clean();
-  include 'header.php';
-  echo $snipcartInit;
-  ?>
+  <?php include 'header.php'; ?>
 
   <main id="main" class="pt-32 flex items-center justify-center min-h-screen px-4">
 

@@ -47,16 +47,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 <body>
-<?php
-$snipcartLanguage = $lang;
-$snipcartLocales = 'fr,en';
-$snipcartAddProductBehavior = 'overlay';
-ob_start();
-include 'snipcart-init.php';
-$snipcartInit = ob_get_clean();
-include 'header.php';
-echo $snipcartInit;
-?>
+<?php include 'header.php'; ?>
 <main id="main" class="py-10 pt-[calc(var(--header-height)+2rem)] main-product">
   <section class="max-w-4xl w-full mx-auto px-6">
     <div class="flex justify-center mb-8">
@@ -206,18 +197,18 @@ echo $snipcartInit;
           </div>
         </div>
 
-        <button class="snipcart-add-item btn btn-shop"
-            data-item-id="<?= htmlspecialchars($id) ?>"
-            data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
-            data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-            data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-            data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
-            data-item-url="<?= htmlspecialchars($metaUrl) ?>"
-            data-item-quantity="1"
+        <button class="gd-add-to-cart btn btn-shop"
+            data-id="<?= htmlspecialchars($id) ?>"
+            data-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
+            data-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+            data-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
+            data-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
+            data-url="<?= htmlspecialchars($metaUrl) ?>"
+            data-quantity="1"
             <?php if (!empty($customOptions)) : ?>
-            data-item-custom1-name="<?= htmlspecialchars($customLabel) ?>"
-            data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
-            data-item-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
+            data-custom1-name="<?= htmlspecialchars($customLabel) ?>"
+            data-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
+            data-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
           <?php endif; ?>
         >
           <span data-i18n="product.add">Ajouter</span>
@@ -227,8 +218,7 @@ echo $snipcartInit;
       <?php endif; ?>
 
       <p class="mt-4 text-center txt-court">
-        <span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
-        <span class="payment-icons inline-flex gap-2 align-middle ml-2">
+        <span class="payment-icons inline-flex gap-2 align-middle">
           <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
           <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
           <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
@@ -400,35 +390,35 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Patch : mettre à jour quantité & multiplicateur juste avant l'ajout -->
 <script>
 (function(){
-  if (window.__snipcartQtyPatch) return;
-  window.__snipcartQtyPatch = true;
+  if (window.__gdQtyPatch) return;
+  window.__gdQtyPatch = true;
 
   document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.snipcart-add-item');
+    const btn = e.target.closest('.gd-add-to-cart');
     if (!btn) return;
 
-    const id = btn.getAttribute('data-item-id');
+    const id = btn.getAttribute('data-id');
     if (!id) return;
 
     // Quantité
     const qtyEl = document.getElementById('qty-' + id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
+      if (!isNaN(q) && q > 0) btn.setAttribute('data-quantity', String(q));
     }
 
     // Multiplicateur (si présent)
     const multEl = document.getElementById('multiplier-' + id);
     if (multEl) {
       const mult = multEl.value;
-      btn.setAttribute('data-item-custom1-value', mult);
+      btn.setAttribute('data-custom1-value', mult);
 
       // Mettre à jour le nom affiché dans le panier (optionnel)
       const lang = document.documentElement.lang;
       const baseName = (lang === 'en')
-        ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
-        : (btn.dataset.itemNameFr || btn.getAttribute('data-item-name'));
-      btn.setAttribute('data-item-name', mult !== '1' ? (baseName + ' x' + mult) : baseName);
+        ? (btn.dataset.nameEn || btn.getAttribute('data-name'))
+        : (btn.dataset.nameFr || btn.getAttribute('data-name'));
+      btn.setAttribute('data-name', mult !== '1' ? (baseName + ' x' + mult) : baseName);
     }
   }, { passive: true });
 })();

@@ -57,16 +57,7 @@ $products = array_merge($pieces, $cards, $triptychs);
 <?php include 'head-common.php'; ?>
 
 <body>
-<?php
-$snipcartLanguage = $lang;
-$snipcartLocales = 'fr,en';
-$snipcartAddProductBehavior = 'overlay';
-ob_start();
-include 'snipcart-init.php';
-$snipcartInit = ob_get_clean();
-include 'header.php';
-echo $snipcartInit;
-?>
+<?php include 'header.php'; ?>
 
 <main id="main" class="pt-[calc(var(--header-height))]">
   <div class="w-full" style="height:1px; background-color: var(--boutique-primary); margin-top:-1px;"></div>

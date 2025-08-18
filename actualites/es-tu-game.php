@@ -11,13 +11,7 @@ $ogImage = '/images/optimized-modern/webp/es-tu-game-demo.webp';
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include '../head-common.php'; ?>
 <body>
-  <?php
-  ob_start();
-  include '../snipcart-init.php';
-  $snipcartInit = ob_get_clean();
-  include '../header.php';
-  echo $snipcartInit;
-  ?>
+  <?php include '../header.php'; ?>
 
   <main id="main" class="pt-[var(--header-height)]">
     <section id="actus" class="py-16 bg-gray-900/80">

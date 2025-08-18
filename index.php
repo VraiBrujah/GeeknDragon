@@ -12,13 +12,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
 <body>
 
-  <?php
-  ob_start();
-  include 'snipcart-init.php';
-  $snipcartInit = ob_get_clean();
-  include 'header.php';
-  echo $snipcartInit;
-  ?>
+  <?php include 'header.php'; ?>
 
   <main id="main" class="pt-[calc(var(--header-height))]">
   
@@ -66,7 +60,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         </div>
 
         <div class="text-center">
-          <p class="mb-8 txt-court"><span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
+          <p class="mb-8 txt-court">
             <span class="payment-icons">
               <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
               <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
