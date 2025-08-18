@@ -102,6 +102,49 @@
     }, 1000);
   }
 
+  /**
+   * Normalise et trie les variantes pour comparaison fiable
+   */
+  function normalizeVariants(variants = {}) {
+    return Object.keys(variants)
+      .sort()
+      .reduce((acc, key) => {
+        acc[key] = String(variants[key]).trim();
+        return acc;
+      }, {});
+  }
+
+  /**
+   * Compare deux objets de variantes en ignorant l'ordre des clés
+   */
+  function variantsEqual(a = {}, b = {}) {
+    const va = normalizeVariants(a);
+    const vb = normalizeVariants(b);
+    const keysA = Object.keys(va);
+    const keysB = Object.keys(vb);
+    if (keysA.length !== keysB.length) return false;
+    return keysA.every((k) => va[k] === vb[k]);
+  }
+
+  /**
+   * Fusionne les articles identiques (même id + variantes)
+   */
+  function mergeCartItems() {
+    const merged = [];
+    state.cart.items.forEach((item) => {
+      const normVars = normalizeVariants(item.variants);
+      const existingIndex = merged.findIndex(
+        (i) => i.id === item.id && variantsEqual(i.variants, normVars),
+      );
+      if (existingIndex !== -1) {
+        merged[existingIndex].quantity += item.quantity;
+      } else {
+        merged.push({ ...item, variants: normVars });
+      }
+    });
+    state.cart.items = merged;
+  }
+
   // ========================================================================
   // GESTION DU STOCKAGE LOCAL
   // ========================================================================
@@ -149,8 +192,9 @@
 
   /**
    * Calcule les totaux du panier
-   */
+  */
   function calculateCartTotals() {
+    mergeCartItems();
     state.cart.count = state.cart.items.reduce((total, item) => total + item.quantity, 0);
     state.cart.total = state.cart.items.reduce(
       (total, item) => total + (item.price * item.quantity),
@@ -171,8 +215,10 @@
     console.log('🛒 Ajout au panier:', productData);
     console.log('🏷️ Variantes détectées:', productData.variants);
 
-    const existingItemIndex = state.cart.items.findIndex((item) => item.id === productData.id
-      && JSON.stringify(item.variants) === JSON.stringify(productData.variants));
+    const normalizedVariants = normalizeVariants(productData.variants || {});
+    const existingItemIndex = state.cart.items.findIndex(
+      (item) => item.id === productData.id && variantsEqual(item.variants, normalizedVariants),
+    );
 
     if (existingItemIndex !== -1) {
       // Article existant - mettre à jour la quantité
@@ -187,7 +233,7 @@
         quantity: productData.quantity || 1,
         image: productData.image || '',
         url: productData.url || '',
-        variants: productData.variants || {},
+        variants: normalizedVariants,
         addedAt: Date.now(),
       };
 
@@ -211,13 +257,15 @@
    * Met à jour la quantité d'un article
    */
   function updateItemQuantity(itemId, variants, newQuantity) {
-    const itemIndex = state.cart.items.findIndex((item) => item.id === itemId
-      && JSON.stringify(item.variants) === JSON.stringify(variants));
+    const normVariants = normalizeVariants(variants);
+    const itemIndex = state.cart.items.findIndex(
+      (item) => item.id === itemId && variantsEqual(item.variants, normVariants),
+    );
 
     if (itemIndex === -1) return false;
 
     if (newQuantity <= 0) {
-      removeFromCart(itemId, variants);
+      removeFromCart(itemId, normVariants);
     } else if (newQuantity <= CONFIG.maxItems) {
       state.cart.items[itemIndex].quantity = newQuantity;
       calculateCartTotals();
@@ -233,8 +281,10 @@
    * Supprime un article du panier
    */
   function removeFromCart(itemId, variants = {}) {
-    const itemIndex = state.cart.items.findIndex((item) => item.id === itemId
-      && JSON.stringify(item.variants) === JSON.stringify(variants));
+    const normVariants = normalizeVariants(variants);
+    const itemIndex = state.cart.items.findIndex(
+      (item) => item.id === itemId && variantsEqual(item.variants, normVariants),
+    );
 
     if (itemIndex !== -1) {
       const removedItem = state.cart.items.splice(itemIndex, 1)[0];
@@ -268,16 +318,24 @@
   function updateVariant(itemId, itemIndex, variantKey, newValue) {
     if (itemIndex >= 0 && itemIndex < state.cart.items.length) {
       const item = state.cart.items[itemIndex];
-      
+
       if (item.id === itemId) {
         // Mettre à jour la variante
         item.variants[variantKey] = newValue;
-        
+        item.variants = normalizeVariants(item.variants);
+
+        const duplicateIndex = state.cart.items.findIndex((it, idx) => idx !== itemIndex
+          && it.id === item.id && variantsEqual(it.variants, item.variants));
+        if (duplicateIndex !== -1) {
+          state.cart.items[duplicateIndex].quantity += item.quantity;
+          state.cart.items.splice(itemIndex, 1);
+        }
+
         calculateCartTotals();
         saveCart();
         updateCartDisplay();
         updateCartModal().catch(console.error);
-        
+
         announceToScreenReader(`${variantKey} mis à jour: ${newValue}`);
         console.log(`Variante mise à jour pour ${item.name}: ${variantKey} = ${newValue}`);
       }
@@ -858,6 +916,7 @@
       announceToScreenReader('Le panier est vide');
       return;
     }
+    calculateCartTotals();
 
     // Pour l'instant, on redirige vers une page de checkout
     // À terme, on pourrait intégrer Stripe ou un autre processeur de paiement
