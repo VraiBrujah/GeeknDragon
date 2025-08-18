@@ -1346,8 +1346,8 @@
               <div class="gd-form-group">
                 <label for="billing-country">Pays *</label>
                 <select id="billing-country" name="country" required>
-                  <option value="CA" selected>Canada</option>
-                  <option value="US">États-Unis</option>
+                  <option value="CA" ${checkoutState.addresses.billing.country === 'CA' ? 'selected' : ''}>Canada</option>
+                  <option value="US" ${checkoutState.addresses.billing.country === 'US' ? 'selected' : ''}>États-Unis</option>
                 </select>
               </div>
             </form>
@@ -1434,10 +1434,10 @@
               </div>
               <div class="gd-form-group">
                 <label for="shipping-country">Pays *</label>
-                <select id="shipping-country" name="country" required 
+                <select id="shipping-country" name="country" required
                         ${checkoutState.addresses.sameAsbilling ? 'disabled' : ''}>
-                  <option value="CA" selected>Canada</option>
-                  <option value="US">États-Unis</option>
+                  <option value="CA" ${checkoutState.addresses.shipping.country === 'CA' ? 'selected' : ''}>Canada</option>
+                  <option value="US" ${checkoutState.addresses.shipping.country === 'US' ? 'selected' : ''}>États-Unis</option>
                 </select>
               </div>
             </form>
@@ -1464,12 +1464,19 @@
    */
   function toggleShippingAddress(sameAsBilling) {
     checkoutState.addresses.sameAsbilling = sameAsBilling;
+    const billingForm = document.getElementById('billing-address-form');
     const shippingForm = document.getElementById('shipping-address-form');
 
     if (sameAsBilling) {
       shippingForm.classList.add('gd-form-disabled');
       const inputs = shippingForm.querySelectorAll('input, select');
       inputs.forEach((input) => {
+        if (billingForm) {
+          const billingInput = billingForm.querySelector(`[name="${input.name}"]`);
+          if (billingInput) {
+            input.value = billingInput.value;
+          }
+        }
         input.disabled = true;
       });
 
@@ -1500,6 +1507,12 @@
           // Si l'adresse de livraison est identique, copier automatiquement
           if (checkoutState.addresses.sameAsbilling) {
             checkoutState.addresses.shipping[e.target.name] = e.target.value;
+            const corresponding = shippingForm.querySelector(
+              `[name="${e.target.name}"]`,
+            );
+            if (corresponding) {
+              corresponding.value = e.target.value;
+            }
           }
         });
       });
