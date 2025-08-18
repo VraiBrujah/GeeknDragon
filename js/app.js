@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const h = header.getBoundingClientRect().height || 96;
     // utilisé par ton site
     document.documentElement.style.setProperty('--header-height', `${h - 5}px`);
-    // utilisé par snipcart-custom.css (modal/summary sticky)
+    // utilisé par les éléments e-commerce (modales, résumés, etc.)
     document.documentElement.style.setProperty('--gd-header-h', `${h}px`);
   };
   setHeaderVars();
