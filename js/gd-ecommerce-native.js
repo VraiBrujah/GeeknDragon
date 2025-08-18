@@ -675,12 +675,25 @@
     const modal = document.getElementById(modalId);
     if (!modal) return;
 
+    // Ferme l'autre fenêtre si elle est ouverte
+    if (modalId === 'gd-cart-modal' && state.ui.accountModalOpen) {
+      closeModal('gd-account-modal');
+    } else if (modalId === 'gd-account-modal' && state.ui.cartModalOpen) {
+      closeModal('gd-cart-modal');
+    }
+
     // Préparation de la modal
     if (modalId === 'gd-cart-modal') {
       updateCartModal().catch(logger.error);
       state.ui.cartModalOpen = true;
+      [elements.cartToggle, elements.cartToggleMobile].forEach((btn) => {
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+      });
     } else if (modalId === 'gd-account-modal') {
       state.ui.accountModalOpen = true;
+      [elements.accountToggle, elements.accountToggleMobile].forEach((btn) => {
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+      });
     }
 
     // Gestion de l'accessibilité
@@ -722,8 +735,14 @@
     // Mise à jour de l'état
     if (modalId === 'gd-cart-modal') {
       state.ui.cartModalOpen = false;
+      [elements.cartToggle, elements.cartToggleMobile].forEach((btn) => {
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
     } else if (modalId === 'gd-account-modal') {
       state.ui.accountModalOpen = false;
+      [elements.accountToggle, elements.accountToggleMobile].forEach((btn) => {
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
     }
 
     // Retourner le focus au bouton qui a ouvert la modal
@@ -1502,19 +1521,43 @@
   function attachEventListeners() {
     // Boutons header
     if (elements.accountToggle) {
-      elements.accountToggle.addEventListener('click', () => openModal('gd-account-modal'));
+      elements.accountToggle.addEventListener('click', () => {
+        if (state.ui.accountModalOpen) {
+          closeModal('gd-account-modal');
+        } else {
+          openModal('gd-account-modal');
+        }
+      });
     }
 
     if (elements.cartToggle) {
-      elements.cartToggle.addEventListener('click', () => openModal('gd-cart-modal'));
+      elements.cartToggle.addEventListener('click', () => {
+        if (state.ui.cartModalOpen) {
+          closeModal('gd-cart-modal');
+        } else {
+          openModal('gd-cart-modal');
+        }
+      });
     }
 
     if (elements.accountToggleMobile) {
-      elements.accountToggleMobile.addEventListener('click', () => openModal('gd-account-modal'));
+      elements.accountToggleMobile.addEventListener('click', () => {
+        if (state.ui.accountModalOpen) {
+          closeModal('gd-account-modal');
+        } else {
+          openModal('gd-account-modal');
+        }
+      });
     }
 
     if (elements.cartToggleMobile) {
-      elements.cartToggleMobile.addEventListener('click', () => openModal('gd-cart-modal'));
+      elements.cartToggleMobile.addEventListener('click', () => {
+        if (state.ui.cartModalOpen) {
+          closeModal('gd-cart-modal');
+        } else {
+          openModal('gd-cart-modal');
+        }
+      });
     }
 
     // Fermeture des modales
