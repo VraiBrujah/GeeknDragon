@@ -377,8 +377,8 @@
 }
 
 .gd-shipping-option-price {
-  color: var(--gd-primary);
-  font-weight: bold;
+  color: var(--gd-gold);
+  font-weight: 600;
 }
 
 .gd-shipping-option-details {
