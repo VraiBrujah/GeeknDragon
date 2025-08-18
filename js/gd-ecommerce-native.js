@@ -980,8 +980,8 @@
   const checkoutState = {
     step: 1, // 1: adresses, 2: livraison, 3: paiement
     addresses: {
-      billing: {},
-      shipping: {},
+      billing: { country: 'CA' },
+      shipping: { country: 'CA' },
       sameAsbilling: true,
     },
     shipping: {
@@ -1487,8 +1487,11 @@
         input.disabled = true;
       });
 
-      // Copier les données de facturation
-      checkoutState.addresses.shipping = { ...checkoutState.addresses.billing };
+      // Copier les données de facturation (incluant le pays)
+      checkoutState.addresses.shipping = {
+        ...checkoutState.addresses.billing,
+        country: checkoutState.addresses.billing.country,
+      };
     } else {
       shippingForm.classList.remove('gd-form-disabled');
       const inputs = shippingForm.querySelectorAll('input, select');
@@ -1506,8 +1509,9 @@
     const shippingForm = document.getElementById('shipping-address-form');
 
     if (billingForm) {
-      const inputs = billingForm.querySelectorAll('input, select');
+      const inputs = billingForm.querySelectorAll('input');
       inputs.forEach((input) => {
+        checkoutState.addresses.billing[input.name] = input.value;
         input.addEventListener('input', (e) => {
           checkoutState.addresses.billing[e.target.name] = e.target.value;
 
@@ -1523,15 +1527,46 @@
           }
         });
       });
+
+      const selects = billingForm.querySelectorAll('select');
+      selects.forEach((select) => {
+        checkoutState.addresses.billing[select.name] = select.value;
+        select.addEventListener('change', (e) => {
+          checkoutState.addresses.billing[e.target.name] = e.target.value;
+
+          if (checkoutState.addresses.sameAsbilling) {
+            checkoutState.addresses.shipping[e.target.name] = e.target.value;
+            const corresponding = shippingForm.querySelector(
+              `[name="${e.target.name}"]`,
+            );
+            if (corresponding) {
+              corresponding.value = e.target.value;
+            }
+          }
+        });
+      });
     }
 
     if (shippingForm) {
-      const inputs = shippingForm.querySelectorAll('input, select');
+      const inputs = shippingForm.querySelectorAll('input');
       inputs.forEach((input) => {
+        checkoutState.addresses.shipping[input.name] = input.value;
         input.addEventListener('input', (e) => {
           checkoutState.addresses.shipping[e.target.name] = e.target.value;
         });
       });
+
+      const selects = shippingForm.querySelectorAll('select');
+      selects.forEach((select) => {
+        checkoutState.addresses.shipping[select.name] = select.value;
+        select.addEventListener('change', (e) => {
+          checkoutState.addresses.shipping[e.target.name] = e.target.value;
+        });
+      });
+    }
+
+    if (checkoutState.addresses.sameAsbilling) {
+      checkoutState.addresses.shipping = { ...checkoutState.addresses.billing };
     }
   }
 
