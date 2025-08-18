@@ -5,9 +5,7 @@
         "symfony/polyfill-ctype": "^1.28",
         "symfony/polyfill-mbstring": "^1.28",
         "symfony/polyfill-php80": "^1.28",
-        "erusev/parsedown": "^1.7",
-        "stripe/stripe-php": "^14",
-        "guzzlehttp/guzzle": "^7"
+        "erusev/parsedown": "^1.7"
     },
     "config": {
         "disable-tls": false
