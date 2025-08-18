@@ -583,7 +583,7 @@
         : '';
 
       return `
-        <div class="gd-cart-item" data-item-id="${escapeHtml(item.id)}" data-item-index="${index}">
+        <div class="gd-cart-item" data-id="${escapeHtml(item.id)}" data-item-index="${index}">
           <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" class="gd-cart-item-image" loading="lazy">
           <div class="gd-cart-item-details">
             <div class="gd-cart-item-name">${item.name}</div>
@@ -764,9 +764,9 @@
    */
   async function handleAddToCartClick(event) {
     // Chercher le bouton d'ajout au panier le plus proche
-    const button = event.target.closest('[data-item-id]');
+    const button = event.target.closest('[data-id]');
     if (!button) {
-      console.log('🚫 Aucun bouton avec data-item-id trouvé');
+      console.log('🚫 Aucun bouton avec data-id trouvé');
       return;
     }
 
@@ -775,12 +775,12 @@
 
     // Extraire les données du produit
     const productData = {
-      id: button.dataset.itemId,
-      name: button.dataset.itemName || button.dataset.itemNameFr,
-      price: parseFloat(button.dataset.itemPrice),
-      quantity: parseInt(button.dataset.itemQuantity, 10) || 1,
+      id: button.dataset.id,
+      name: button.dataset.name || button.dataset.nameFr,
+      price: parseFloat(button.dataset.price),
+      quantity: parseInt(button.dataset.quantity, 10) || 1,
       image: extractProductImage(button),
-      url: button.dataset.itemUrl || window.location.href,
+      url: button.dataset.url || window.location.href,
       variants: extractProductVariants(button),
     };
 
@@ -842,7 +842,7 @@
    */
   function extractProductVariants(button) {
     const variants = {};
-    const productId = button.dataset.itemId;
+    const productId = button.dataset.id;
 
     console.log('🔍 Extraction des variantes pour:', productId);
     console.log('📋 Données du bouton:', button.dataset);
@@ -856,8 +856,8 @@
 
     // Récupérer les variantes depuis les data attributes Snipcart
     for (let i = 1; i <= 3; i += 1) {
-      const name = button.dataset[`itemCustom${i}Name`];
-      const value = button.dataset[`itemCustom${i}Value`];
+      const name = button.dataset[`custom${i}Name`];
+      const value = button.dataset[`custom${i}Value`];
       if (name && value) {
         const variantName = normalizeVariantName(name);
         variants[variantName] = value;
@@ -980,7 +980,7 @@
 
     // Ajout au panier (délégation d'événements)
     document.addEventListener('click', (e) => {
-      if (e.target.closest('.snipcart-add-item, [data-item-id]')) {
+      if (e.target.closest('.gd-add-to-cart, [data-id]')) {
         handleAddToCartClick(e);
       }
     });
