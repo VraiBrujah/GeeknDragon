@@ -470,14 +470,15 @@
 }
 
 .gd-btn-outline {
-  background: transparent;
+  background: rgba(139, 92, 246, 0.1);
   color: var(--gd-primary);
-  border: 2px solid var(--gd-primary);
+  border: 1px solid var(--gd-primary);
 }
 
 .gd-btn-outline:hover {
   background: var(--gd-primary);
-  color: white;
+  color: #fff;
+  transform: translateY(-1px);
 }
 
 .gd-btn-large {
