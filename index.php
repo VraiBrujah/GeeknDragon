@@ -60,7 +60,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         </div>
 
         <div class="text-center">
-          <p class="mb-8 txt-court"><span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
+          <p class="mb-8 txt-court">
             <span class="payment-icons">
               <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
               <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">

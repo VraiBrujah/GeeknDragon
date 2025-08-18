@@ -218,8 +218,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
       <?php endif; ?>
 
       <p class="mt-4 text-center txt-court">
-        <span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
-        <span class="payment-icons inline-flex gap-2 align-middle ml-2">
+        <span class="payment-icons inline-flex gap-2 align-middle">
           <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
           <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
           <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
