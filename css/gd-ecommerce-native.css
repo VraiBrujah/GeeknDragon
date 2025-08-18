@@ -790,14 +790,14 @@
 }
 
 .gd-btn-outline {
-  background: transparent;
-  color: var(--gd-text-primary);
-  border: 1px solid var(--gd-border);
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--gd-primary);
+  border: 1px solid var(--gd-primary);
 }
 
 .gd-btn-outline:hover {
-  background: var(--gd-bg-elevated);
-  border-color: var(--gd-border-hover);
+  background: var(--gd-primary);
+  color: #fff;
   transform: translateY(-1px);
 }
 
