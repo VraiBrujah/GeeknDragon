@@ -239,6 +239,44 @@
   color: var(--gd-text-primary);
 }
 
+#gd-cart-content {
+  overflow-y: auto;
+}
+
+/* Styles de scrollbar personnalisés pour les zones scrollables */
+.gd-modal-body,
+#gd-cart-content,
+.gd-cart-items {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gd-primary) var(--gd-bg-overlay);
+}
+
+.gd-modal-body::-webkit-scrollbar,
+#gd-cart-content::-webkit-scrollbar,
+.gd-cart-items::-webkit-scrollbar {
+  width: 8px;
+}
+
+.gd-modal-body::-webkit-scrollbar-track,
+#gd-cart-content::-webkit-scrollbar-track,
+.gd-cart-items::-webkit-scrollbar-track {
+  background: var(--gd-bg-overlay);
+  border-radius: var(--gd-radius);
+}
+
+.gd-modal-body::-webkit-scrollbar-thumb,
+#gd-cart-content::-webkit-scrollbar-thumb,
+.gd-cart-items::-webkit-scrollbar-thumb {
+  background: var(--gd-primary);
+  border-radius: var(--gd-radius);
+}
+
+.gd-modal-body::-webkit-scrollbar-thumb:hover,
+#gd-cart-content::-webkit-scrollbar-thumb:hover,
+.gd-cart-items::-webkit-scrollbar-thumb:hover {
+  background: var(--gd-primary-hover);
+}
+
 /* ========================================================================
    SECTION COMPTE
    ======================================================================== */
@@ -432,26 +470,6 @@
   max-height: 400px;
   overflow-y: auto;
   margin-bottom: var(--gd-space-lg);
-  scrollbar-width: thin;
-  scrollbar-color: var(--gd-border) var(--gd-bg-elevated);
-}
-
-.gd-cart-items::-webkit-scrollbar {
-  width: 8px;
-}
-
-.gd-cart-items::-webkit-scrollbar-track {
-  background: var(--gd-bg-elevated);
-  border-radius: 4px;
-}
-
-.gd-cart-items::-webkit-scrollbar-thumb {
-  background: var(--gd-border);
-  border-radius: 4px;
-}
-
-.gd-cart-items::-webkit-scrollbar-thumb:hover {
-  background: var(--gd-border-hover);
 }
 
 .gd-cart-item {
