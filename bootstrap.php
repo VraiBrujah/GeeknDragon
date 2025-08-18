@@ -31,12 +31,12 @@ if ($canLoadVendor) {
     $envPath = __DIR__ . '/.env';
     if (file_exists($envPath)) {
         foreach (file($envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
-            if (str_starts_with(trim($line), '#') || !str_contains($line, '=')) {
+            if (strpos(trim($line), '#') === 0 || strpos($line, '=') === false) {
                 continue;
             }
-            [$name, $value] = explode('=', $line, 2);
-            $name  = trim($name);
-            $value = trim($value);
+            $parts = explode('=', $line, 2);
+            $name  = trim($parts[0]);
+            $value = isset($parts[1]) ? trim($parts[1]) : '';
             if ($name !== '') {
                 putenv("{$name}={$value}");
                 $_ENV[$name]    = $value;
