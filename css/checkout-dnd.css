@@ -471,7 +471,7 @@
 
 .gd-btn-outline {
   background: rgba(139, 92, 246, 0.1);
-  color: var(--gd-primary);
+  color: var(--gd-text-light);
   border: 1px solid var(--gd-primary);
 }
 
