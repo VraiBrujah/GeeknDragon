@@ -362,7 +362,7 @@
     if (snipcartEl) {
       observer.observe(snipcartEl, {
         childList: true,
-        subtree: true,
+        subtree: true
       });
     }
 

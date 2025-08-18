@@ -29,7 +29,7 @@
       'img[alt*="Logo"]',
       'img[alt*="Icon"]'
     ],
-    
+
     // Sélecteurs à inclure
     includeSelectors: [
       '.card-product img',
@@ -44,7 +44,7 @@
       'img[data-gallery]',
       '.feature-card img'
     ],
-    
+
     // Options de galerie
     galleryOptions: {
       zoomLevel: 2,
@@ -68,7 +68,7 @@
   // ========================================================================
   // INITIALISATION
   // ========================================================================
-  
+
   function init() {
     console.log('🚫 Galerie universelle désactivée par configuration');
     // Galerie universelle complètement désactivée
@@ -78,7 +78,7 @@
   // ========================================================================
   // CRÉATION DE LA MODAL
   // ========================================================================
-  
+
   function createModal() {
     // Container modal
     modal = document.createElement('div');
@@ -101,9 +101,9 @@
         <div class="ugm-counter"></div>
       </div>
     `;
-    
+
     document.body.appendChild(modal);
-    
+
     // Récupérer les éléments
     modalImg = modal.querySelector('.ugm-image');
     modalCaption = modal.querySelector('.ugm-caption');
@@ -111,23 +111,23 @@
     prevBtn = modal.querySelector('.ugm-prev');
     nextBtn = modal.querySelector('.ugm-next');
     zoomBtn = modal.querySelector('.ugm-zoom');
-    
+
     // Attacher les événements
     attachModalEvents();
-    
+
     // Ajouter les styles CSS
     injectStyles();
-    
+
     modalCreated = true;
   }
 
   // ========================================================================
   // INJECTION DES STYLES CSS
   // ========================================================================
-  
+
   function injectStyles() {
     if (document.getElementById('universal-gallery-styles')) return;
-    
+
     const styles = document.createElement('style');
     styles.id = 'universal-gallery-styles';
     styles.innerHTML = `
@@ -307,14 +307,14 @@
         .ugm-counter { font-size: 12px; padding: 6px 12px; }
       }
     `;
-    
+
     document.head.appendChild(styles);
   }
 
   // ========================================================================
   // APPLICATION DE LA GALERIE AUX IMAGES
   // ========================================================================
-  
+
   function applyGalleryToImages() {
     // Récupérer toutes les images à inclure
     const includeImages = [];
@@ -326,34 +326,34 @@
         }
       });
     });
-    
+
     // Si aucune nouvelle image, on arrête
     if (includeImages.length === 0) {
       return;
     }
-    
+
     // Appliquer la galerie
     includeImages.forEach((img, index) => {
       // Marquer comme activée ET comme traitée
       img.classList.add('gallery-enabled');
       img.dataset.galleryProcessed = 'true';
       img.dataset.galleryIndex = index;
-      
+
       // Ajouter l'événement click (une seule fois)
       const clickHandler = function(e) {
         e.preventDefault();
         e.stopPropagation();
         openGallery(this, getAllGalleryImages());
       };
-      
+
       img.addEventListener('click', clickHandler);
       // Stocker la référence pour éviter les doublons
       img._galleryClickHandler = clickHandler;
     });
-    
+
     console.log(`✅ Galerie appliquée à ${includeImages.length} nouvelles images`);
   }
-  
+
   // Fonction helper pour récupérer toutes les images de galerie
   function getAllGalleryImages() {
     const allImages = [];
@@ -371,7 +371,7 @@
   // ========================================================================
   // VÉRIFICATION D'EXCLUSION
   // ========================================================================
-  
+
   function isExcluded(img) {
     // Vérifier chaque sélecteur d'exclusion
     for (const selector of config.excludeSelectors) {
@@ -389,19 +389,19 @@
   // ========================================================================
   // OUVERTURE DE LA GALERIE
   // ========================================================================
-  
+
   function openGallery(img, allImages) {
     currentImage = img;
     galleryImages = allImages || [img];
     currentIndex = parseInt(img.dataset.galleryIndex) || 0;
-    
+
     // Afficher l'image
     updateModal();
-    
+
     // Activer la modal
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    
+
     // Mise à jour de la navigation
     updateNavigation();
   }
@@ -409,20 +409,20 @@
   // ========================================================================
   // MISE À JOUR DE LA MODAL
   // ========================================================================
-  
+
   function updateModal() {
     const img = galleryImages[currentIndex];
-    
+
     // Image
     modalImg.src = img.src;
     modalImg.alt = img.alt || '';
     modalImg.classList.remove('zoomed');
-    
+
     // Caption
     const caption = img.alt || img.title || '';
     modalCaption.textContent = caption;
     modalCaption.style.display = caption ? 'block' : 'none';
-    
+
     // Counter
     if (galleryImages.length > 1) {
       modal.querySelector('.ugm-counter').textContent = `${currentIndex + 1} / ${galleryImages.length}`;
@@ -430,7 +430,7 @@
     } else {
       modal.querySelector('.ugm-counter').style.display = 'none';
     }
-    
+
     // Animation
     modalImg.style.animation = 'slideIn 0.3s ease';
     setTimeout(() => {
@@ -441,12 +441,12 @@
   // ========================================================================
   // MISE À JOUR DE LA NAVIGATION
   // ========================================================================
-  
+
   function updateNavigation() {
     // Afficher/masquer les boutons
     prevBtn.style.display = galleryImages.length > 1 ? 'flex' : 'none';
     nextBtn.style.display = galleryImages.length > 1 ? 'flex' : 'none';
-    
+
     // Désactiver si nécessaire
     prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
     nextBtn.style.opacity = currentIndex === galleryImages.length - 1 ? '0.5' : '1';
@@ -455,25 +455,25 @@
   // ========================================================================
   // ÉVÉNEMENTS DE LA MODAL
   // ========================================================================
-  
+
   function attachModalEvents() {
     // Fermeture
     closeBtn.addEventListener('click', closeGallery);
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeGallery();
     });
-    
+
     // Navigation
     prevBtn.addEventListener('click', () => navigateGallery(-1));
     nextBtn.addEventListener('click', () => navigateGallery(1));
-    
+
     // Zoom
     zoomBtn.addEventListener('click', toggleZoom);
     modalImg.addEventListener('dblclick', toggleZoom);
-    
+
     // Clavier
     document.addEventListener('keydown', handleKeyboard);
-    
+
     // Touch/Swipe
     setupTouchEvents();
   }
@@ -481,7 +481,7 @@
   // ========================================================================
   // FERMETURE DE LA GALERIE
   // ========================================================================
-  
+
   function closeGallery() {
     modal.classList.remove('active');
     document.body.style.overflow = '';
@@ -491,7 +491,7 @@
   // ========================================================================
   // NAVIGATION
   // ========================================================================
-  
+
   function navigateGallery(direction) {
     const newIndex = currentIndex + direction;
     if (newIndex >= 0 && newIndex < galleryImages.length) {
@@ -504,7 +504,7 @@
   // ========================================================================
   // ZOOM
   // ========================================================================
-  
+
   function toggleZoom() {
     modalImg.classList.toggle('zoomed');
   }
@@ -512,48 +512,48 @@
   // ========================================================================
   // GESTION CLAVIER
   // ========================================================================
-  
+
   function handleKeyboard(e) {
     if (!modal.classList.contains('active')) return;
-    
+
     switch(e.key) {
-      case 'Escape':
-        closeGallery();
-        break;
-      case 'ArrowLeft':
-        navigateGallery(-1);
-        break;
-      case 'ArrowRight':
-        navigateGallery(1);
-        break;
-      case ' ':
-        e.preventDefault();
-        toggleZoom();
-        break;
+    case 'Escape':
+      closeGallery();
+      break;
+    case 'ArrowLeft':
+      navigateGallery(-1);
+      break;
+    case 'ArrowRight':
+      navigateGallery(1);
+      break;
+    case ' ':
+      e.preventDefault();
+      toggleZoom();
+      break;
     }
   }
 
   // ========================================================================
   // GESTION TACTILE
   // ========================================================================
-  
+
   function setupTouchEvents() {
     let touchStartX = 0;
     let touchEndX = 0;
-    
+
     modalImg.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
-    
+
     modalImg.addEventListener('touchend', (e) => {
       touchEndX = e.changedTouches[0].screenX;
       handleSwipe();
     }, { passive: true });
-    
+
     function handleSwipe() {
       const swipeThreshold = 50;
       const diff = touchStartX - touchEndX;
-      
+
       if (Math.abs(diff) > swipeThreshold) {
         if (diff > 0) {
           // Swipe gauche - image suivante
@@ -569,12 +569,12 @@
   // ========================================================================
   // OBSERVER POUR CONTENU DYNAMIQUE
   // ========================================================================
-  
+
   let observerTimeout = null;
   function observeNewImages() {
     const observer = new MutationObserver((mutations) => {
       let hasNewImages = false;
-      
+
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
           if (node.nodeType === 1) { // Element node
@@ -589,7 +589,7 @@
           }
         });
       });
-      
+
       if (hasNewImages) {
         // Debounce : attendre que les mutations se calment
         if (observerTimeout) {
@@ -598,7 +598,7 @@
         observerTimeout = setTimeout(applyGalleryToImages, 250);
       }
     });
-    
+
     // Observer le body pour les changements
     observer.observe(document.body, {
       childList: true,
@@ -609,13 +609,13 @@
   // ========================================================================
   // INITIALISATION AU CHARGEMENT
   // ========================================================================
-  
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
-  
+
   // Réinitialiser après le chargement complet (pour les images lazy) - seulement si nécessaire
   window.addEventListener('load', () => {
     // Vérifier s'il y a des images non traitées avant de réappliquer
@@ -623,7 +623,7 @@
     const needProcessing = Array.from(unprocessedImages).some(img => {
       return config.includeSelectors.some(selector => img.matches(selector)) && !isExcluded(img);
     });
-    
+
     if (needProcessing) {
       setTimeout(applyGalleryToImages, 500);
     }
@@ -632,7 +632,7 @@
   // ========================================================================
   // API PUBLIQUE
   // ========================================================================
-  
+
   window.UniversalGallery = {
     refresh: applyGalleryToImages,
     open: openGallery,

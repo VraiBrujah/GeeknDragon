@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test du panier - Geek & Dragon</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-product { border: 1px solid #ccc; padding: 20px; margin: 10px 0; }
+        .btn { background: #0066cc; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        .btn:hover { background: #0052a3; }
+        #cart-info { background: #f5f5f5; padding: 10px; margin: 20px 0; }
+        .cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .cart-content { background: white; margin: 50px auto; padding: 20px; width: 80%; max-width: 600px; }
+        .close { float: right; font-size: 28px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🏰 Test du système de panier Geek & Dragon</h1>
+    
+    <div id="cart-info">
+        <h3>État du panier</h3>
+        <p>Articles: <span id="cart-count">0</span></p>
+        <p>Total: <span id="cart-total">0.00</span> $</p>
+        <button onclick="openCartModal()" class="btn">Voir le panier</button>
+    </div>
+
+    <div class="test-product">
+        <h3>L'Offrande du Voyageur</h3>
+        <p>Prix: 60.00 $</p>
+        <p>Test avec variations (Multiplicateurs)</p>
+        
+        <button class="gd-add-to-cart btn"
+                data-item-id="lot10"
+                data-item-name="L'Offrande du Voyageur"
+                data-item-price="60.00"
+                data-item-url="https://test.com/product?id=lot10"
+                data-item-custom1-name="Multiplicateur"
+                data-item-custom1-options="‎ — x1|‎ — x10|‎ — x100|‎ — x1 000|‎ — x10 000"
+                data-item-custom1-value="‎ — x1">
+            Ajouter au panier
+        </button>
+    </div>
+
+    <div class="test-product">
+        <h3>Produit test simple</h3>
+        <p>Prix: 25.00 $</p>
+        <p>Test sans variations</p>
+        
+        <button class="gd-add-to-cart btn"
+                data-item-id="test-simple"
+                data-item-name="Produit test simple"
+                data-item-price="25.00"
+                data-item-url="https://test.com/product?id=test-simple">
+            Ajouter au panier
+        </button>
+    </div>
+
+    <!-- Modal du panier -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close" onclick="closeCartModal()">&times;</span>
+            <h2>Votre panier</h2>
+            <div id="cart-items"></div>
+            <div id="cart-summary"></div>
+        </div>
+    </div>
+
+    <script src="js/gd-ecommerce-native.js"></script>
+    <script>
+        // Fonctions de test
+        function updateCartDisplay() {
+            const cart = JSON.parse(localStorage.getItem('gd_cart_v2') || '{"items":[],"total":0,"count":0}');
+            document.getElementById('cart-count').textContent = cart.count;
+            document.getElementById('cart-total').textContent = cart.total.toFixed(2);
+        }
+
+        function openCartModal() {
+            document.getElementById('cartModal').style.display = 'block';
+            displayCartItems();
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function displayCartItems() {
+            const cart = JSON.parse(localStorage.getItem('gd_cart_v2') || '{"items":[]}');
+            const container = document.getElementById('cart-items');
+            
+            if (cart.items.length === 0) {
+                container.innerHTML = '<p>Votre panier est vide</p>';
+                return;
+            }
+
+            let html = '<ul>';
+            cart.items.forEach(item => {
+                html += `<li>${item.name} - ${item.price}$ (x${item.quantity})`;
+                if (item.variants && item.variants.length > 0) {
+                    html += ` - ${item.variants.map(v => `${v.name}: ${v.value}`).join(', ')}`;
+                }
+                html += '</li>';
+            });
+            html += '</ul>';
+            
+            container.innerHTML = html;
+        }
+
+        // Écouter les changements du panier
+        window.addEventListener('storage', updateCartDisplay);
+        document.addEventListener('cartUpdated', updateCartDisplay);
+        
+        // Mise à jour initiale
+        updateCartDisplay();
+    </script>
+</body>
+</html>

@@ -38,11 +38,11 @@
     thumbnails = document.querySelectorAll('.thumbnail');
     fullscreenModal = document.getElementById('fullscreen-modal');
     fullscreenMedia = document.getElementById('fullscreen-media');
-    
+
     zoomBtn = document.getElementById('zoom-btn');
     fullscreenBtn = document.getElementById('fullscreen-btn');
     closeBtn = document.getElementById('close-fullscreen');
-    
+
     thumbPrev = document.getElementById('thumb-prev');
     thumbNext = document.getElementById('thumb-next');
     fsPrev = document.getElementById('fs-prev');
@@ -55,7 +55,7 @@
     bindEvents();
     setupKeyboardNavigation();
     setupTouchGestures();
-    
+
     console.log('✅ Galerie produit initialisée');
   }
 
@@ -115,26 +115,26 @@
       if (fullscreenModal && fullscreenModal.classList.contains('hidden')) return;
 
       switch (e.key) {
-        case 'Escape':
-          e.preventDefault();
-          if (isZoomed) {
-            resetZoom();
-          } else {
-            closeFullscreen();
-          }
-          break;
-        case 'ArrowLeft':
-          e.preventDefault();
-          navigateFullscreen(-1);
-          break;
-        case 'ArrowRight':
-          e.preventDefault();
-          navigateFullscreen(1);
-          break;
-        case 'Space':
-          e.preventDefault();
-          toggleZoom();
-          break;
+      case 'Escape':
+        e.preventDefault();
+        if (isZoomed) {
+          resetZoom();
+        } else {
+          closeFullscreen();
+        }
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        navigateFullscreen(-1);
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        navigateFullscreen(1);
+        break;
+      case 'Space':
+        e.preventDefault();
+        toggleZoom();
+        break;
       }
     });
   }
@@ -194,7 +194,7 @@
     if (!mainMedia) return;
 
     const isVideo = imageData.type === 'video';
-    
+
     if (isVideo && mainMedia.tagName !== 'VIDEO') {
       // Remplacer img par video
       const newVideo = document.createElement('video');
@@ -206,11 +206,11 @@
       newVideo.dataset.type = 'video';
       newVideo.dataset.src = imageData.src;
       newVideo.src = imageData.src;
-      
+
       mainMedia.parentNode.replaceChild(newVideo, mainMedia);
       mainMedia = newVideo;
       bindMainMediaEvents();
-      
+
     } else if (!isVideo && mainMedia.tagName !== 'IMG') {
       // Remplacer video par img
       const newImg = document.createElement('img');
@@ -220,11 +220,11 @@
       newImg.dataset.src = imageData.src;
       newImg.src = imageData.src;
       newImg.alt = `Image ${currentIndex + 1}`;
-      
+
       mainMedia.parentNode.replaceChild(newImg, mainMedia);
       mainMedia = newImg;
       bindMainMediaEvents();
-      
+
     } else {
       // Même type, juste changer la source
       mainMedia.src = imageData.src;
@@ -238,7 +238,7 @@
   // Lier les événements au nouveau média
   function bindMainMediaEvents() {
     if (!mainMedia) return;
-    
+
     mainMedia.addEventListener('dblclick', toggleZoom);
     mainMedia.addEventListener('click', handleMainMediaClick);
     mainMedia.addEventListener('wheel', handleWheelZoom, { passive: false });
@@ -250,7 +250,7 @@
     if (!badgesContainer) return;
 
     badgesContainer.innerHTML = '';
-    
+
     if (isVideo) {
       const videoBadge = document.createElement('span');
       videoBadge.className = 'badge badge-video';
@@ -285,7 +285,7 @@
   // Toggle zoom
   function toggleZoom() {
     if (mainMedia.tagName === 'VIDEO') return; // Pas de zoom sur vidéo
-    
+
     if (isZoomed) {
       resetZoom();
     } else {
@@ -296,14 +296,14 @@
   // Appliquer le zoom
   function applyZoom() {
     if (!mainMedia || mainMedia.tagName === 'VIDEO') return;
-    
+
     isZoomed = true;
     mainMedia.classList.add('zoomed');
     mainMedia.style.transform = `scale(${config.zoomLevel})`;
-    
+
     // Changer le curseur
     mainMedia.style.cursor = 'grab';
-    
+
     // Ajouter les événements de pan
     setupPanEvents();
   }
@@ -311,13 +311,13 @@
   // Réinitialiser le zoom
   function resetZoom() {
     if (!mainMedia) return;
-    
+
     isZoomed = false;
     mainMedia.classList.remove('zoomed');
     mainMedia.style.transform = '';
     mainMedia.style.transformOrigin = 'center';
     mainMedia.style.cursor = 'pointer';
-    
+
     // Retirer les événements de pan
     removePanEvents();
   }
@@ -325,9 +325,9 @@
   // Gestion du zoom par molette
   function handleWheelZoom(e) {
     if (mainMedia.tagName === 'VIDEO') return;
-    
+
     e.preventDefault();
-    
+
     if (e.deltaY < 0) {
       // Zoom in
       if (!isZoomed) applyZoom();
@@ -354,7 +354,7 @@
   // Démarrer le pan
   function startPan(e) {
     if (!isZoomed) return;
-    
+
     isDragging = true;
     startX = e.clientX;
     startY = e.clientY;
@@ -365,22 +365,22 @@
   // Effectuer le pan
   function doPan(e) {
     if (!isDragging || !isZoomed) return;
-    
+
     e.preventDefault();
-    
+
     const deltaX = e.clientX - startX;
     const deltaY = e.clientY - startY;
-    
+
     currentX += deltaX;
     currentY += deltaY;
-    
+
     // Limiter le pan
     const maxPan = 100;
     currentX = Math.max(-maxPan, Math.min(maxPan, currentX));
     currentY = Math.max(-maxPan, Math.min(maxPan, currentY));
-    
+
     mainMedia.style.transform = `scale(${config.zoomLevel}) translate(${currentX}px, ${currentY}px)`;
-    
+
     startX = e.clientX;
     startY = e.clientY;
   }
@@ -396,17 +396,17 @@
   // Gérer le panning par clic
   function handleZoomPan(e) {
     if (!isZoomed) return;
-    
+
     const rect = mainMedia.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    
+
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    
+
     const offsetX = (x - centerX) / centerX * 50;
     const offsetY = (y - centerY) / centerY * 50;
-    
+
     mainMedia.style.transformOrigin = `${50 + offsetX}% ${50 + offsetY}%`;
   }
 
@@ -414,7 +414,7 @@
   function scrollThumbnails(direction) {
     const wrapper = document.getElementById('thumbnails-wrapper');
     if (!wrapper) return;
-    
+
     const scrollAmount = 90; // largeur thumbnail + gap
     wrapper.scrollLeft += direction * scrollAmount;
   }
@@ -422,11 +422,11 @@
   // Ouvrir fullscreen
   function openFullscreen() {
     if (!fullscreenModal || !fullscreenMedia) return;
-    
+
     fullscreenModal.classList.remove('hidden');
     updateFullscreenMedia();
     createFullscreenThumbnails();
-    
+
     // Bloquer le scroll du body
     document.body.style.overflow = 'hidden';
   }
@@ -434,10 +434,10 @@
   // Fermer fullscreen
   function closeFullscreen() {
     if (!fullscreenModal) return;
-    
+
     fullscreenModal.classList.add('hidden');
     resetZoom();
-    
+
     // Restaurer le scroll du body
     document.body.style.overflow = '';
   }
@@ -445,7 +445,7 @@
   // Mettre à jour le média fullscreen
   function updateFullscreenMedia() {
     if (!fullscreenMedia) return;
-    
+
     const currentImage = images[currentIndex];
     fullscreenMedia.src = currentImage.src;
     fullscreenMedia.alt = `Image ${currentIndex + 1}`;
@@ -466,21 +466,21 @@
   function createFullscreenThumbnails() {
     const container = document.getElementById('fullscreen-thumbs');
     if (!container) return;
-    
+
     container.innerHTML = '';
-    
+
     images.forEach((img, index) => {
       const thumb = document.createElement('div');
       thumb.className = `thumbnail ${index === currentIndex ? 'active' : ''}`;
       thumb.dataset.index = index;
-      
+
       if (img.type === 'video') {
         const video = document.createElement('video');
         video.src = img.src;
         video.className = 'thumbnail-media';
         video.muted = true;
         thumb.appendChild(video);
-        
+
         const icon = document.createElement('div');
         icon.className = 'video-icon';
         icon.innerHTML = '<svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M8 6.82v10.36c0 .79.87 1.27 1.54.84l8.14-5.18c.62-.39.62-1.29 0-1.68L9.54 5.98C8.87 5.55 8 6.03 8 6.82z"/></svg>';
@@ -492,14 +492,14 @@
         image.alt = `Thumbnail ${index + 1}`;
         thumb.appendChild(image);
       }
-      
+
       thumb.addEventListener('click', () => {
         currentIndex = index;
         updateFullscreenMedia();
         updateActiveThumbnail(currentIndex);
         updateFullscreenThumbnails();
       });
-      
+
       container.appendChild(thumb);
     });
   }
@@ -508,7 +508,7 @@
   function updateFullscreenThumbnails() {
     const container = document.getElementById('fullscreen-thumbs');
     if (!container) return;
-    
+
     const thumbs = container.querySelectorAll('.thumbnail');
     thumbs.forEach((thumb, index) => {
       thumb.classList.toggle('active', index === currentIndex);
@@ -532,25 +532,25 @@
   function handleShare(platform) {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(document.title);
-    const description = encodeURIComponent(
-      document.querySelector('meta[name="description"]')?.content || ''
-    );
+    // const description = encodeURIComponent(
+    //   document.querySelector('meta[name="description"]')?.content || ''
+    // );
 
     let shareUrl = '';
 
     switch (platform) {
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-        break;
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
-        break;
-      case 'whatsapp':
-        shareUrl = `https://wa.me/?text=${title}%20${url}`;
-        break;
-      case 'copy':
-        copyToClipboard(window.location.href);
-        return;
+    case 'facebook':
+      shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+      break;
+    case 'twitter':
+      shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+      break;
+    case 'whatsapp':
+      shareUrl = `https://wa.me/?text=${title}%20${url}`;
+      break;
+    case 'copy':
+      copyToClipboard(window.location.href);
+      return;
     }
 
     if (shareUrl) {
@@ -581,14 +581,14 @@
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-    
+
     try {
       document.execCommand('copy');
       showCopyNotification();
     } catch (err) {
-      console.error('Erreur lors de la copie:', err);
+      // console.error('Erreur lors de la copie:', err);
     }
-    
+
     document.body.removeChild(textArea);
   }
 
@@ -597,12 +597,12 @@
     const notification = document.createElement('div');
     notification.className = 'copy-notification';
     notification.textContent = '✓ Lien copié !';
-    
+
     document.body.appendChild(notification);
-    
+
     // Afficher avec animation
     setTimeout(() => notification.classList.add('show'), 100);
-    
+
     // Masquer après 3 secondes
     setTimeout(() => {
       notification.classList.remove('show');

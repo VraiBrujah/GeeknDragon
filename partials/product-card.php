@@ -72,7 +72,7 @@ $isInStock = inStock($id);
       </div>
 
       <!-- Bouton ajouter -->
-      <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
+      <button class="gd-add-to-cart btn btn-shop px-6 whitespace-nowrap"
               data-item-id="<?= htmlspecialchars($id) ?>"
               data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
               data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
@@ -101,7 +101,7 @@ $isInStock = inStock($id);
   window.__snipcartQtyPatch = true;
 
   document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.snipcart-add-item');
+    const btn = e.target.closest('.gd-add-to-cart');
     if (!btn) return;
 
     const id = btn.getAttribute('data-item-id');

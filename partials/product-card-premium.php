@@ -88,7 +88,7 @@ $isInStock = inStock($id);
       </div>
 
       <!-- Bouton d'achat -->
-      <button class="snipcart-add-item add-to-cart-btn"
+      <button class="gd-add-to-cart add-to-cart-btn"
               data-item-id="<?= htmlspecialchars($id) ?>"
               data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
               data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
@@ -143,7 +143,7 @@ $isInStock = inStock($id);
     }
     
     // Gestion du bouton d'achat
-    const btn = e.target.closest('.snipcart-add-item');
+    const btn = e.target.closest('.gd-add-to-cart');
     if (!btn) return;
 
     const id = btn.getAttribute('data-item-id');
