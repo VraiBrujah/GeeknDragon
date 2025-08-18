@@ -5,7 +5,7 @@
     silver: 10,
     electrum: 50,
     gold: 100,
-    platinum: 1000
+    platinum: 1000,
   };
 
   const sources = document.querySelectorAll('#currency-sources input');
@@ -25,7 +25,7 @@
     .flatMap((multiplier) => coins.map((coin) => ({
       coin,
       multiplier,
-      value: rates[coin] * multiplier
+      value: rates[coin] * multiplier,
     })))
     .sort((a, b) => b.value - a.value);
 
@@ -79,7 +79,7 @@
       silver: tr.silver || 'pièce d’argent',
       electrum: tr.electrum || 'pièce d’électrum',
       gold: tr.gold || 'pièce d’or',
-      platinum: tr.platinum || 'pièce de platine'
+      platinum: tr.platinum || 'pièce de platine',
     };
     const andText = tr.and || 'and';
     const bestLabel = tr.bestLabel || '';

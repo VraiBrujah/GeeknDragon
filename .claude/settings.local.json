@@ -12,12 +12,7 @@
       "Bash(pip install:*)",
       "Bash(yt-dlp:*)",
       "Bash(mv:*)",
-      "Bash(grep:*)",
-      "WebSearch",
-      "WebFetch(domain:docs.snipcart.com)",
-      "Bash(npm run lint)",
-      "Bash(npx eslint:*)",
-      "Bash(npm install:*)"
+      "Bash(grep:*)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

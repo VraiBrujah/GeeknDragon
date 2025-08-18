@@ -16,28 +16,6 @@
     currencySymbol: '$',
     autoSave: true,
     analytics: false, // Respect RGPD
-    debug: true // Mode debug (production: false)
-  };
-
-  // Système de logging structuré
-  const logger = {
-    info: (message, data = null) => {
-      if (CONFIG.debug) {
-        // eslint-disable-next-line no-console
-        console.log(`[GD-Cart] ${message}`, data || '');
-      }
-    },
-    warn: (message, data = null) => {
-      if (CONFIG.debug) {
-        // eslint-disable-next-line no-console
-        console.warn(`[GD-Cart] ${message}`, data || '');
-      }
-    },
-    error: (message, error = null) => {
-      // Toujours afficher les erreurs
-      // eslint-disable-next-line no-console
-      console.error(`[GD-Cart] ${message}`, error || '');
-    }
   };
 
   // État global du système
@@ -46,14 +24,14 @@
       items: [],
       total: 0,
       count: 0,
-      currency: CONFIG.currency
+      currency: CONFIG.currency,
     },
     ui: {
       accountModalOpen: false,
       cartModalOpen: false,
-      currentAccountTab: 'profile'
+      currentAccountTab: 'profile',
     },
-    initialized: false
+    initialized: false,
   };
 
   // Cache DOM pour les performances
@@ -66,7 +44,7 @@
     cartBadgeMobile: null,
     accountModal: null,
     cartModal: null,
-    body: document.body
+    body: document.body,
   };
 
   // ========================================================================
@@ -104,7 +82,7 @@
     return new Intl.NumberFormat('fr-CA', {
       style: 'currency',
       currency,
-      minimumFractionDigits: 2
+      minimumFractionDigits: 2,
     }).format(price);
   }
 
@@ -156,7 +134,7 @@
     state.cart.items.forEach((item) => {
       const normVars = normalizeVariants(item.variants);
       const existingIndex = merged.findIndex(
-        (i) => i.id === item.id && variantsEqual(i.variants, normVars)
+        (i) => i.id === item.id && variantsEqual(i.variants, normVars),
       );
       if (existingIndex !== -1) {
         merged[existingIndex].quantity += item.quantity;
@@ -183,14 +161,14 @@
         if (parsedCart && Array.isArray(parsedCart.items)) {
           state.cart = {
             ...state.cart,
-            ...parsedCart
+            ...parsedCart,
           };
           calculateCartTotals();
           return true;
         }
       }
     } catch (error) {
-      logger.warn('Erreur lors du chargement du panier:', error);
+      console.warn('Erreur lors du chargement du panier:', error);
     }
     return false;
   }
@@ -204,7 +182,7 @@
     try {
       localStorage.setItem(CONFIG.storageKey, JSON.stringify(state.cart));
     } catch (error) {
-      logger.warn('Erreur lors de la sauvegarde du panier:', error);
+      console.warn('Erreur lors de la sauvegarde du panier:', error);
     }
   }, CONFIG.debounceDelay);
 
@@ -220,7 +198,7 @@
     state.cart.count = state.cart.items.reduce((total, item) => total + item.quantity, 0);
     state.cart.total = state.cart.items.reduce(
       (total, item) => total + (item.price * item.quantity),
-      0
+      0,
     );
   }
 
@@ -230,22 +208,22 @@
   function addToCart(productData) {
     // Validation des données
     if (!productData.id || !productData.name || !productData.price) {
-      logger.warn('Données produit invalides:', productData);
+      console.warn('Données produit invalides:', productData);
       return false;
     }
 
-    logger.info('🛒 Ajout au panier:', productData);
-    logger.info('🏷️ Variantes détectées:', productData.variants);
+    console.log('🛒 Ajout au panier:', productData);
+    console.log('🏷️ Variantes détectées:', productData.variants);
 
     const normalizedVariants = normalizeVariants(productData.variants || {});
     const existingItemIndex = state.cart.items.findIndex(
-      (item) => item.id === productData.id && variantsEqual(item.variants, normalizedVariants)
+      (item) => item.id === productData.id && variantsEqual(item.variants, normalizedVariants),
     );
 
     if (existingItemIndex !== -1) {
       // Article existant - mettre à jour la quantité
       state.cart.items[existingItemIndex].quantity += (productData.quantity || 1);
-      logger.info('📈 Quantité mise à jour pour article existant');
+      console.log('📈 Quantité mise à jour pour article existant');
     } else {
       // Nouvel article
       const newItem = {
@@ -256,11 +234,11 @@
         image: productData.image || '',
         url: productData.url || '',
         variants: normalizedVariants,
-        addedAt: Date.now()
+        addedAt: Date.now(),
       };
 
       state.cart.items.push(newItem);
-      logger.info('✨ Nouvel article ajouté:', newItem);
+      console.log('✨ Nouvel article ajouté:', newItem);
     }
 
     calculateCartTotals();
@@ -271,7 +249,7 @@
     announceToScreenReader(`${productData.name} ajouté au panier`);
     animateCartButton();
 
-    logger.info('🎯 État du panier après ajout:', state.cart);
+    console.log('🎯 État du panier après ajout:', state.cart);
     return true;
   }
 
@@ -281,7 +259,7 @@
   function updateItemQuantity(itemId, variants, newQuantity) {
     const normVariants = normalizeVariants(variants);
     const itemIndex = state.cart.items.findIndex(
-      (item) => item.id === itemId && variantsEqual(item.variants, normVariants)
+      (item) => item.id === itemId && variantsEqual(item.variants, normVariants),
     );
 
     if (itemIndex === -1) return false;
@@ -293,7 +271,7 @@
       calculateCartTotals();
       saveCart();
       updateCartDisplay();
-      updateCartModal().catch(logger.error);
+      updateCartModal().catch(console.error);
     }
 
     return true;
@@ -305,7 +283,7 @@
   function removeFromCart(itemId, variants = {}) {
     const normVariants = normalizeVariants(variants);
     const itemIndex = state.cart.items.findIndex(
-      (item) => item.id === itemId && variantsEqual(item.variants, normVariants)
+      (item) => item.id === itemId && variantsEqual(item.variants, normVariants),
     );
 
     if (itemIndex !== -1) {
@@ -313,10 +291,10 @@
       calculateCartTotals();
       saveCart();
       updateCartDisplay();
-      updateCartModal().catch(logger.error);
+      updateCartModal().catch(console.error);
 
       announceToScreenReader(`${removedItem.name} retiré du panier`);
-      logger.info('Article retiré du panier:', removedItem.name);
+      console.log('Article retiré du panier:', removedItem.name);
     }
   }
 
@@ -328,10 +306,10 @@
     calculateCartTotals();
     saveCart();
     updateCartDisplay();
-    updateCartModal().catch(logger.error);
+    updateCartModal().catch(console.error);
 
     announceToScreenReader('Panier vidé');
-    logger.info('Panier vidé');
+    console.log('Panier vidé');
   }
 
   /**
@@ -356,10 +334,10 @@
         calculateCartTotals();
         saveCart();
         updateCartDisplay();
-        updateCartModal().catch(logger.error);
+        updateCartModal().catch(console.error);
 
         announceToScreenReader(`${variantKey} mis à jour: ${newValue}`);
-        logger.info(`Variante mise à jour pour ${item.name}: ${variantKey} = ${newValue}`);
+        console.log(`Variante mise à jour pour ${item.name}: ${variantKey} = ${newValue}`);
       }
     }
   }
@@ -549,26 +527,26 @@
 
     // Générer l'HTML pour chaque item avec les vraies options depuis products.json
     const itemsPromises = state.cart.items.map(async (item, index) => {
-      logger.info(`🎨 Génération HTML pour article ${index}:`, item);
-      logger.info('🏷️ Variantes de l\'article:', item.variants);
-
+      console.log(`🎨 Génération HTML pour article ${index}:`, item);
+      console.log(`🏷️ Variantes de l'article:`, item.variants);
+      
       const variantOptions = await getProductVariantOptions(item.id);
-      logger.info('📋 Options disponibles depuis products.json:', variantOptions);
+      console.log(`📋 Options disponibles depuis products.json:`, variantOptions);
 
       // Créer des sélecteurs interactifs pour les variations basés sur products.json
       const variantsHtml = Object.keys(item.variants).length > 0
         ? (await Promise.all(Object.entries(item.variants).map(async ([key, value]) => {
-          logger.info(`🔧 Traitement variante: ${key} = ${value}`);
-          const normalizedKey = key.toLowerCase();
-          if (['multiplicateur', 'multiplier'].includes(normalizedKey) && variantOptions.multipliers.length > 0) {
-            const canonicalKey = 'Multiplicateur';
-            const options = variantOptions.multipliers.map((mult) => {
-              const opt = mult.trim();
-              const isSelected = opt === value.trim();
-              return `<option value="${escapeHtml(opt)}" ${isSelected ? 'selected' : ''}>${escapeHtml(opt)}</option>`;
-            }).join('');
-            const label = document.documentElement.lang === 'en' ? 'Multiplier' : 'Multiplicateur';
-            return `
+            console.log(`🔧 Traitement variante: ${key} = ${value}`);
+            const normalizedKey = key.toLowerCase();
+            if (['multiplicateur', 'multiplier'].includes(normalizedKey) && variantOptions.multipliers.length > 0) {
+              const canonicalKey = 'Multiplicateur';
+              const options = variantOptions.multipliers.map((mult) => {
+                const opt = mult.trim();
+                const isSelected = opt === value.trim();
+                return `<option value="${escapeHtml(opt)}" ${isSelected ? 'selected' : ''}>${escapeHtml(opt)}</option>`;
+              }).join('');
+              const label = document.documentElement.lang === 'en' ? 'Multiplier' : 'Multiplicateur';
+              return `
                 <div class="gd-cart-variant-selector">
                   <label class="gd-variant-label">${escapeHtml(label)}:</label>
                   <select class="gd-variant-select" onchange="GDEcommerce.updateVariant('${escapeHtml(item.id)}', ${index}, '${canonicalKey}', this.value)">
@@ -576,16 +554,16 @@
                   </select>
                 </div>
               `;
-          }
-          if (['langue', 'language'].includes(normalizedKey) && variantOptions.languages.length > 0) {
-            const canonicalKey = 'Langue';
-            const options = variantOptions.languages.map((lang) => {
-              const opt = lang.trim();
-              const isSelected = opt === value.trim();
-              return `<option value="${escapeHtml(opt)}" ${isSelected ? 'selected' : ''}>${escapeHtml(opt)}</option>`;
-            }).join('');
-            const label = document.documentElement.lang === 'en' ? 'Language' : 'Langue';
-            return `
+            }
+            if (['langue', 'language'].includes(normalizedKey) && variantOptions.languages.length > 0) {
+              const canonicalKey = 'Langue';
+              const options = variantOptions.languages.map((lang) => {
+                const opt = lang.trim();
+                const isSelected = opt === value.trim();
+                return `<option value="${escapeHtml(opt)}" ${isSelected ? 'selected' : ''}>${escapeHtml(opt)}</option>`;
+              }).join('');
+              const label = document.documentElement.lang === 'en' ? 'Language' : 'Langue';
+              return `
                 <div class="gd-cart-variant-selector">
                   <label class="gd-variant-label">${escapeHtml(label)}:</label>
                   <select class="gd-variant-select" onchange="GDEcommerce.updateVariant('${escapeHtml(item.id)}', ${index}, '${canonicalKey}', this.value)">
@@ -593,15 +571,15 @@
                   </select>
                 </div>
               `;
-          }
-          // Affichage simple pour autres variantes
-          return `
+            }
+            // Affichage simple pour autres variantes
+            return `
               <div class="gd-cart-variant-display">
                 <span class="gd-variant-label">${escapeHtml(key)}:</span>
                 <span class="gd-variant-value">${escapeHtml(value)}</span>
               </div>
             `;
-        }))).join('')
+          }))).join('')
         : '';
 
       return `
@@ -677,7 +655,7 @@
 
     // Préparation de la modal
     if (modalId === 'gd-cart-modal') {
-      updateCartModal().catch(logger.error);
+      updateCartModal().catch(console.error);
       state.ui.cartModalOpen = true;
     } else if (modalId === 'gd-account-modal') {
       state.ui.accountModalOpen = true;
@@ -690,7 +668,7 @@
 
     // Focus trap
     const focusableElements = modal.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
 
     if (focusableElements.length > 0) {
@@ -788,12 +766,12 @@
     // Chercher le bouton d'ajout au panier le plus proche
     const button = event.target.closest('[data-item-id]');
     if (!button) {
-      logger.info('🚫 Aucun bouton avec data-item-id trouvé');
+      console.log('🚫 Aucun bouton avec data-item-id trouvé');
       return;
     }
 
     event.preventDefault();
-    logger.info('🖱️ Clic sur bouton ajout au panier:', button);
+    console.log('🖱️ Clic sur bouton ajout au panier:', button);
 
     // Extraire les données du produit
     const productData = {
@@ -803,7 +781,7 @@
       quantity: parseInt(button.dataset.itemQuantity, 10) || 1,
       image: extractProductImage(button),
       url: button.dataset.itemUrl || window.location.href,
-      variants: extractProductVariants(button)
+      variants: extractProductVariants(button),
     };
 
     const variantOptions = await getProductVariantOptions(productData.id);
@@ -816,7 +794,7 @@
       productData.variants.Langue = variantOptions.languages[0].trim();
     }
 
-    logger.info('📦 Données produit extraites:', productData);
+    console.log('📦 Données produit extraites:', productData);
 
     if (addToCart(productData)) {
       // Feedback visuel
@@ -852,7 +830,7 @@
         const response = await fetch('/data/products.json');
         productsData = await response.json();
       } catch (error) {
-        logger.warn('Erreur lors du chargement de products.json:', error);
+        console.warn('Erreur lors du chargement de products.json:', error);
         productsData = {};
       }
     }
@@ -866,8 +844,8 @@
     const variants = {};
     const productId = button.dataset.itemId;
 
-    logger.info('🔍 Extraction des variantes pour:', productId);
-    logger.info('📋 Données du bouton:', button.dataset);
+    console.log('🔍 Extraction des variantes pour:', productId);
+    console.log('📋 Données du bouton:', button.dataset);
 
     const normalizeVariantName = (name) => {
       const n = name.toLowerCase();
@@ -883,7 +861,7 @@
       if (name && value) {
         const variantName = normalizeVariantName(name);
         variants[variantName] = value;
-        logger.info(`✅ Variante trouvée: ${variantName} = ${value}`);
+        console.log(`✅ Variante trouvée: ${variantName} = ${value}`);
       }
     }
 
@@ -895,7 +873,7 @@
       if (multiplierSelect && multiplierSelect.value) {
         const selectedText = multiplierSelect.options[multiplierSelect.selectedIndex].text;
         variants.Multiplicateur = selectedText.trim();
-        logger.info(`✅ Multiplicateur depuis sélecteur: ${selectedText.trim()}`);
+        console.log(`✅ Multiplicateur depuis sélecteur: ${selectedText.trim()}`);
       }
 
       // Langues depuis le sélecteur
@@ -903,11 +881,11 @@
       if (languageSelect && languageSelect.selectedIndex > 0) {
         const selectedText = languageSelect.options[languageSelect.selectedIndex].text;
         variants.Langue = selectedText.trim();
-        logger.info(`✅ Langue depuis sélecteur: ${selectedText.trim()}`);
+        console.log(`✅ Langue depuis sélecteur: ${selectedText.trim()}`);
       }
     }
 
-    logger.info('🎯 Variantes extraites:', variants);
+    console.log('🎯 Variantes extraites:', variants);
     return variants;
   }
 
@@ -917,9 +895,9 @@
   async function getProductVariantOptions(productId) {
     const products = await loadProductsData();
     const product = products[productId];
-
+    
     if (!product) return { multipliers: [], languages: [] };
-
+    
     return {
       multipliers: product.multipliers || [],
       languages: product.languages || []
@@ -942,7 +920,7 @@
 
     // Pour l'instant, on redirige vers une page de checkout
     // À terme, on pourrait intégrer Stripe ou un autre processeur de paiement
-    logger.info('Redirection vers le checkout avec:', state.cart);
+    console.log('Redirection vers le checkout avec:', state.cart);
 
     // Exemple de redirection
     const checkoutData = encodeURIComponent(JSON.stringify(state.cart));
@@ -1002,7 +980,7 @@
 
     // Ajout au panier (délégation d'événements)
     document.addEventListener('click', (e) => {
-      if (e.target.closest('.gd-add-to-cart, [data-item-id]')) {
+      if (e.target.closest('.snipcart-add-item, [data-item-id]')) {
         handleAddToCartClick(e);
       }
     });
@@ -1033,7 +1011,7 @@
   function init() {
     if (state.initialized) return;
 
-    logger.info('🏰 Initialisation du système e-commerce Geek & Dragon');
+    console.log('🏰 Initialisation du système e-commerce Geek & Dragon');
 
     // Éviter le FOUC
     elements.body.classList.add('gd-preload');
@@ -1045,7 +1023,7 @@
     loadCart();
 
     // Pré-chargement des données produits
-    loadProductsData().catch(logger.error);
+    loadProductsData().catch(console.error);
 
     // Création des modales
     createModals();
@@ -1062,7 +1040,7 @@
     });
 
     state.initialized = true;
-    logger.info('✅ Système e-commerce initialisé avec succès');
+    console.log('✅ Système e-commerce initialisé avec succès');
   }
 
   // ========================================================================
@@ -1094,7 +1072,7 @@
 
     // État de l'interface
     isAccountModalOpen: () => state.ui.accountModalOpen,
-    isCartModalOpen: () => state.ui.cartModalOpen
+    isCartModalOpen: () => state.ui.cartModalOpen,
   };
 
   // ========================================================================
@@ -1112,7 +1090,7 @@
   // Réinitialisation si nécessaire après chargement complet
   window.addEventListener('load', () => {
     if (!state.initialized) {
-      logger.warn('Réinitialisation du système e-commerce');
+      console.warn('Réinitialisation du système e-commerce');
       init();
     }
   });

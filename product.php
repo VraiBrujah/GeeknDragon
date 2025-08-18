@@ -206,7 +206,7 @@ echo $snipcartInit;
           </div>
         </div>
 
-        <button class="gd-add-to-cart btn btn-shop"
+        <button class="snipcart-add-item btn btn-shop"
             data-item-id="<?= htmlspecialchars($id) ?>"
             data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
             data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.__snipcartQtyPatch = true;
 
   document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.gd-add-to-cart');
+    const btn = e.target.closest('.snipcart-add-item');
     if (!btn) return;
 
     const id = btn.getAttribute('data-item-id');

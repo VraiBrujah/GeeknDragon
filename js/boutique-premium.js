@@ -13,13 +13,13 @@
   const ANIMATION_CONFIG = {
     observerOptions: {
       threshold: [0.1, 0.25, 0.5, 0.75],
-      rootMargin: '0px 0px -50px 0px'
+      rootMargin: '0px 0px -50px 0px',
     },
     delays: {
       card: 100,
       feature: 150,
-      stagger: 50
-    }
+      stagger: 50,
+    },
   };
 
   // ================================================================
@@ -41,7 +41,7 @@
     setupIntersectionObserver() {
       this.observer = new IntersectionObserver(
         this.handleIntersection.bind(this),
-        ANIMATION_CONFIG.observerOptions
+        ANIMATION_CONFIG.observerOptions,
       );
     }
 
@@ -204,7 +204,7 @@
           life: 1,
           decay: 0.02,
           size: Math.random() * 3 + 1,
-          color: `hsl(${Math.random() * 60 + 270}, 70%, 60%)`
+          color: `hsl(${Math.random() * 60 + 270}, 70%, 60%)`,
         });
       }
     }
@@ -593,6 +593,6 @@
     ScrollAnimations,
     ParticleEffects,
     InteractiveEnhancements,
-    PerformanceOptimizer
+    PerformanceOptimizer,
   };
 })();
