@@ -652,7 +652,7 @@
         <button class="gd-btn gd-btn-outline" onclick="GDEcommerce.closeCartModal()">
           🛒 Continuer les Achats
         </button>
-        <button class="gd-btn gd-btn-primary gd-btn-full" onclick="GDEcommerce.proceedToCheckout()">
+        <button class="gd-btn gd-btn-primary gd-btn-full" onclick="GDEcommerce.showCheckout()">
           ⚔️ Finaliser la Commande
         </button>
       </div>
@@ -950,28 +950,551 @@
   // CHECKOUT ET PAIEMENT
   // ========================================================================
 
+  // État du checkout
+  const checkoutState = {
+    step: 1, // 1: adresses, 2: livraison, 3: paiement
+    addresses: {
+      billing: {},
+      shipping: {},
+      sameAsbilling: true,
+    },
+    shipping: {
+      method: null,
+      cost: 0,
+      rates: [],
+    },
+    taxes: {
+      amount: 0,
+      details: {},
+    },
+    payment: {
+      method: null,
+      processing: false,
+    },
+  };
+
   /**
-   * Procède au checkout
+   * Obtenir l'icône de notification selon le type
    */
-  function proceedToCheckout() {
+  function getNotificationIcon(type) {
+    switch (type) {
+      case 'error':
+        return '⚠️';
+      case 'warning':
+        return '⚠️';
+      default:
+        return 'ℹ️';
+    }
+  }
+
+  /**
+   * Obtenir la couleur de notification selon le type
+   */
+  function getNotificationColor(type) {
+    switch (type) {
+      case 'error':
+        return '#dc3545';
+      case 'warning':
+        return '#ffc107';
+      default:
+        return '#17a2b8';
+    }
+  }
+
+  /**
+   * Afficher une notification utilisateur
+   */
+  function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `gd-notification gd-notification-${type}`;
+    notification.innerHTML = `
+      <div class="gd-notification-content">
+        <span class="gd-notification-icon">
+          ${getNotificationIcon(type)}
+        </span>
+        <span class="gd-notification-message">${message}</span>
+        <button class="gd-notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+      </div>
+    `;
+
+    // Styles inline pour la notification
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: ${getNotificationColor(type)};
+      color: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 10001;
+      min-width: 300px;
+      max-width: 500px;
+      animation: slideInRight 0.3s ease;
+    `;
+
+    document.body.appendChild(notification);
+
+    // Supprimer automatiquement après 5 secondes
+    setTimeout(() => {
+      if (notification.parentElement) {
+        notification.remove();
+      }
+    }, 5000);
+  }
+
+  /**
+   * Afficher le checkout intégré
+   */
+  function showCheckout() {
     if (state.cart.items.length === 0) {
       announceToScreenReader('Le panier est vide');
       return;
     }
     calculateCartTotals();
 
-    // Pour l'instant, on redirige vers une page de checkout
-    // À terme, on pourrait intégrer Stripe ou un autre processeur de paiement
-    logger.info('Redirection vers le checkout avec:', state.cart);
+    // Fermer le modal de panier et ouvrir le checkout
+    closeModal('gd-cart-modal');
+    createCheckoutModal();
+    checkoutState.step = 1;
+    renderCheckoutStep();
 
-    // Exemple de redirection
-    const checkoutData = encodeURIComponent(JSON.stringify(state.cart));
-    window.location.href = `/checkout.php?data=${checkoutData}`;
+    logger.info('Checkout initié avec:', state.cart);
   }
 
-  // ========================================================================
-  // ÉVÉNEMENTS ET INITIALISATION
-  // ========================================================================
+  /**
+   * Créer le modal de checkout avec style DnD
+   */
+  function createCheckoutModal() {
+    // Supprimer le modal existant s'il existe
+    const existingModal = document.getElementById('gd-checkout-modal');
+    if (existingModal) {
+      existingModal.remove();
+    }
+
+    const modal = document.createElement('div');
+    modal.id = 'gd-checkout-modal';
+    modal.className = 'gd-modal gd-checkout-modal';
+    modal.innerHTML = `
+      <div class="gd-modal-overlay" onclick="GDEcommerce.closeCheckout()"></div>
+      <div class="gd-modal-content gd-checkout-content">
+        <div class="gd-checkout-header">
+          <h2 class="gd-checkout-title">🏰 Finaliser votre Commande</h2>
+          <button class="gd-modal-close" onclick="GDEcommerce.closeCheckout()" aria-label="Fermer">✕</button>
+        </div>
+        <div class="gd-checkout-progress">
+          <div class="gd-progress-step ${checkoutState.step >= 1 ? 'active' : ''}" data-step="1">
+            <span class="gd-progress-number">1</span>
+            <span class="gd-progress-label">Adresses</span>
+          </div>
+          <div class="gd-progress-step ${checkoutState.step >= 2 ? 'active' : ''}" data-step="2">
+            <span class="gd-progress-number">2</span>
+            <span class="gd-progress-label">Livraison</span>
+          </div>
+          <div class="gd-progress-step ${checkoutState.step >= 3 ? 'active' : ''}" data-step="3">
+            <span class="gd-progress-number">3</span>
+            <span class="gd-progress-label">Paiement</span>
+          </div>
+        </div>
+        <div class="gd-checkout-body">
+          <div class="gd-checkout-main" id="gd-checkout-main">
+            <!-- Contenu dynamique des étapes -->
+          </div>
+          <div class="gd-checkout-sidebar">
+            <div class="gd-order-summary">
+              <h3 class="gd-summary-title">📜 Résumé de la Commande</h3>
+              <div id="gd-checkout-summary">
+                <!-- Résumé dynamique -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+
+    // Animation d'entrée
+    requestAnimationFrame(() => {
+      modal.classList.add('active');
+    });
+  }
+
+  /**
+   * Fermer le modal de checkout
+   */
+  function closeCheckout() {
+    const modal = document.getElementById('gd-checkout-modal');
+    if (modal) {
+      modal.classList.remove('active');
+      setTimeout(() => {
+        modal.remove();
+        document.body.style.overflow = '';
+      }, CONFIG.animationDuration);
+    }
+  }
+
+  /**
+   * Rendre l'étape actuelle du checkout
+   */
+  function renderCheckoutStep() {
+    const mainContent = document.getElementById('gd-checkout-main');
+    const summaryContent = document.getElementById('gd-checkout-summary');
+
+    if (!mainContent || !summaryContent) return;
+
+    // Mettre à jour la progression
+    updateCheckoutProgress();
+
+    // Rendre le résumé de commande
+    renderOrderSummary(summaryContent);
+
+    // Rendre le contenu de l'étape
+    switch (checkoutState.step) {
+      case 1:
+        renderAddressStep(mainContent);
+        break;
+      case 2:
+        renderShippingStep(mainContent);
+        break;
+      case 3:
+        renderPaymentStep(mainContent);
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
+   * Mettre à jour la progression du checkout
+   */
+  function updateCheckoutProgress() {
+    const steps = document.querySelectorAll('.gd-progress-step');
+    steps.forEach((step, index) => {
+      const stepNumber = index + 1;
+      if (stepNumber <= checkoutState.step) {
+        step.classList.add('active');
+      } else {
+        step.classList.remove('active');
+      }
+      if (stepNumber < checkoutState.step) {
+        step.classList.add('completed');
+      } else {
+        step.classList.remove('completed');
+      }
+    });
+  }
+
+  /**
+   * Rendre le résumé de commande
+   */
+  function renderOrderSummary(container) {
+    const subtotal = state.cart.total;
+    const shipping = checkoutState.shipping.cost;
+    const taxes = checkoutState.taxes.amount;
+    const total = subtotal + shipping + taxes;
+
+    const itemsHtml = state.cart.items.map((item) => {
+      const variantsText = Object.entries(item.variants || {})
+        .map(([key, value]) => `${key}: ${value}`)
+        .join(', ');
+
+      return `
+        <div class="gd-summary-item">
+          <div class="gd-summary-item-info">
+            <span class="gd-summary-item-name">${escapeHtml(item.name)}</span>
+            ${variantsText ? `<span class="gd-summary-item-variants">${escapeHtml(variantsText)}</span>` : ''}
+            <span class="gd-summary-item-qty">× ${item.quantity}</span>
+          </div>
+          <span class="gd-summary-item-price">${formatPrice(item.price * item.quantity)}</span>
+        </div>
+      `;
+    }).join('');
+
+    container.innerHTML = `
+      <div class="gd-summary-items">
+        ${itemsHtml}
+      </div>
+      <div class="gd-summary-totals">
+        <div class="gd-summary-row">
+          <span>Sous-total</span>
+          <span>${formatPrice(subtotal)}</span>
+        </div>
+        ${shipping > 0 ? `
+          <div class="gd-summary-row">
+            <span>Livraison</span>
+            <span>${formatPrice(shipping)}</span>
+          </div>
+        ` : ''}
+        ${taxes > 0 ? `
+          <div class="gd-summary-row">
+            <span>Taxes</span>
+            <span>${formatPrice(taxes)}</span>
+          </div>
+        ` : ''}
+        <div class="gd-summary-row gd-summary-total">
+          <span>Total</span>
+          <span>${formatPrice(total)}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
+   * Rendre l'étape des adresses
+   */
+  function renderAddressStep(container) {
+    container.innerHTML = `
+      <div class="gd-checkout-step">
+        <h3 class="gd-step-title">📍 Adresses de Facturation et Livraison</h3>
+        
+        <div class="gd-address-forms">
+          <div class="gd-address-section">
+            <h4 class="gd-address-title">🏠 Adresse de Facturation</h4>
+            <form class="gd-address-form" id="billing-address-form">
+              <div class="gd-form-row">
+                <div class="gd-form-group">
+                  <label for="billing-firstname">Prénom *</label>
+                  <input type="text" id="billing-firstname" name="firstname" required 
+                         value="${checkoutState.addresses.billing.firstname || ''}" 
+                         placeholder="Votre prénom">
+                </div>
+                <div class="gd-form-group">
+                  <label for="billing-lastname">Nom *</label>
+                  <input type="text" id="billing-lastname" name="lastname" required 
+                         value="${checkoutState.addresses.billing.lastname || ''}" 
+                         placeholder="Votre nom">
+                </div>
+              </div>
+              <div class="gd-form-group">
+                <label for="billing-email">Courriel *</label>
+                <input type="email" id="billing-email" name="email" required 
+                       value="${checkoutState.addresses.billing.email || ''}" 
+                       placeholder="votre@courriel.com">
+              </div>
+              <div class="gd-form-group">
+                <label for="billing-phone">Téléphone</label>
+                <input type="tel" id="billing-phone" name="phone" 
+                       value="${checkoutState.addresses.billing.phone || ''}" 
+                       placeholder="(555) 123-4567">
+              </div>
+              <div class="gd-form-group">
+                <label for="billing-address1">Adresse *</label>
+                <input type="text" id="billing-address1" name="address1" required 
+                       value="${checkoutState.addresses.billing.address1 || ''}" 
+                       placeholder="123 Rue Principale">
+              </div>
+              <div class="gd-form-group">
+                <label for="billing-address2">Appartement/Suite</label>
+                <input type="text" id="billing-address2" name="address2" 
+                       value="${checkoutState.addresses.billing.address2 || ''}" 
+                       placeholder="App. 4B">
+              </div>
+              <div class="gd-form-row">
+                <div class="gd-form-group">
+                  <label for="billing-city">Ville *</label>
+                  <input type="text" id="billing-city" name="city" required 
+                         value="${checkoutState.addresses.billing.city || ''}" 
+                         placeholder="Montréal">
+                </div>
+                <div class="gd-form-group">
+                  <label for="billing-province">Province *</label>
+                  <select id="billing-province" name="province" required>
+                    <option value="">Choisir...</option>
+                    <option value="QC" ${checkoutState.addresses.billing.province === 'QC' ? 'selected' : ''}>Québec</option>
+                    <option value="ON" ${checkoutState.addresses.billing.province === 'ON' ? 'selected' : ''}>Ontario</option>
+                    <option value="BC" ${checkoutState.addresses.billing.province === 'BC' ? 'selected' : ''}>Colombie-Britannique</option>
+                    <option value="AB" ${checkoutState.addresses.billing.province === 'AB' ? 'selected' : ''}>Alberta</option>
+                    <option value="MB" ${checkoutState.addresses.billing.province === 'MB' ? 'selected' : ''}>Manitoba</option>
+                    <option value="SK" ${checkoutState.addresses.billing.province === 'SK' ? 'selected' : ''}>Saskatchewan</option>
+                    <option value="NS" ${checkoutState.addresses.billing.province === 'NS' ? 'selected' : ''}>Nouvelle-Écosse</option>
+                    <option value="NB" ${checkoutState.addresses.billing.province === 'NB' ? 'selected' : ''}>Nouveau-Brunswick</option>
+                    <option value="PE" ${checkoutState.addresses.billing.province === 'PE' ? 'selected' : ''}>Île-du-Prince-Édouard</option>
+                    <option value="NL" ${checkoutState.addresses.billing.province === 'NL' ? 'selected' : ''}>Terre-Neuve-et-Labrador</option>
+                    <option value="YT" ${checkoutState.addresses.billing.province === 'YT' ? 'selected' : ''}>Yukon</option>
+                    <option value="NT" ${checkoutState.addresses.billing.province === 'NT' ? 'selected' : ''}>Territoires du Nord-Ouest</option>
+                    <option value="NU" ${checkoutState.addresses.billing.province === 'NU' ? 'selected' : ''}>Nunavut</option>
+                  </select>
+                </div>
+                <div class="gd-form-group">
+                  <label for="billing-postalcode">Code Postal *</label>
+                  <input type="text" id="billing-postalcode" name="postalcode" required 
+                         value="${checkoutState.addresses.billing.postalcode || ''}" 
+                         placeholder="H1A 1A1">
+                </div>
+              </div>
+              <div class="gd-form-group">
+                <label for="billing-country">Pays *</label>
+                <select id="billing-country" name="country" required>
+                  <option value="CA" selected>Canada</option>
+                  <option value="US">États-Unis</option>
+                </select>
+              </div>
+            </form>
+          </div>
+
+          <div class="gd-address-section">
+            <div class="gd-address-header">
+              <h4 class="gd-address-title">🚚 Adresse de Livraison</h4>
+              <label class="gd-checkbox-wrapper">
+                <input type="checkbox" id="same-as-billing" 
+                       ${checkoutState.addresses.sameAsbilling ? 'checked' : ''}
+                       onchange="GDEcommerce.toggleShippingAddress(this.checked)">
+                <span class="gd-checkbox-label">Identique à l'adresse de facturation</span>
+              </label>
+            </div>
+            
+            <form class="gd-address-form ${checkoutState.addresses.sameAsbilling ? 'gd-form-disabled' : ''}" 
+                  id="shipping-address-form">
+              <div class="gd-form-row">
+                <div class="gd-form-group">
+                  <label for="shipping-firstname">Prénom *</label>
+                  <input type="text" id="shipping-firstname" name="firstname" required 
+                         value="${checkoutState.addresses.shipping.firstname || ''}" 
+                         placeholder="Prénom du destinataire"
+                         ${checkoutState.addresses.sameAsbilling ? 'disabled' : ''}>
+                </div>
+                <div class="gd-form-group">
+                  <label for="shipping-lastname">Nom *</label>
+                  <input type="text" id="shipping-lastname" name="lastname" required 
+                         value="${checkoutState.addresses.shipping.lastname || ''}" 
+                         placeholder="Nom du destinataire"
+                         ${checkoutState.addresses.sameAsbilling ? 'disabled' : ''}>
+                </div>
+              </div>
+              <div class="gd-form-group">
+                <label for="shipping-address1">Adresse *</label>
+                <input type="text" id="shipping-address1" name="address1" required 
+                       value="${checkoutState.addresses.shipping.address1 || ''}" 
+                       placeholder="123 Rue de Livraison"
+                       ${checkoutState.addresses.sameAsbilling ? 'disabled' : ''}>
+              </div>
+              <div class="gd-form-group">
+                <label for="shipping-address2">Appartement/Suite</label>
+                <input type="text" id="shipping-address2" name="address2" 
+                       value="${checkoutState.addresses.shipping.address2 || ''}" 
+                       placeholder="App. 4B"
+                       ${checkoutState.addresses.sameAsbilling ? 'disabled' : ''}>
+              </div>
+              <div class="gd-form-row">
+                <div class="gd-form-group">
+                  <label for="shipping-city">Ville *</label>
+                  <input type="text" id="shipping-city" name="city" required 
+                         value="${checkoutState.addresses.shipping.city || ''}" 
+                         placeholder="Montréal"
+                         ${checkoutState.addresses.sameAsbilling ? 'disabled' : ''}>
+                </div>
+                <div class="gd-form-group">
+                  <label for="shipping-province">Province *</label>
+                  <select id="shipping-province" name="province" required 
+                          ${checkoutState.addresses.sameAsbilling ? 'disabled' : ''}>
+                    <option value="">Choisir...</option>
+                    <option value="QC" ${checkoutState.addresses.shipping.province === 'QC' ? 'selected' : ''}>Québec</option>
+                    <option value="ON" ${checkoutState.addresses.shipping.province === 'ON' ? 'selected' : ''}>Ontario</option>
+                    <option value="BC" ${checkoutState.addresses.shipping.province === 'BC' ? 'selected' : ''}>Colombie-Britannique</option>
+                    <option value="AB" ${checkoutState.addresses.shipping.province === 'AB' ? 'selected' : ''}>Alberta</option>
+                    <option value="MB" ${checkoutState.addresses.shipping.province === 'MB' ? 'selected' : ''}>Manitoba</option>
+                    <option value="SK" ${checkoutState.addresses.shipping.province === 'SK' ? 'selected' : ''}>Saskatchewan</option>
+                    <option value="NS" ${checkoutState.addresses.shipping.province === 'NS' ? 'selected' : ''}>Nouvelle-Écosse</option>
+                    <option value="NB" ${checkoutState.addresses.shipping.province === 'NB' ? 'selected' : ''}>Nouveau-Brunswick</option>
+                    <option value="PE" ${checkoutState.addresses.shipping.province === 'PE' ? 'selected' : ''}>Île-du-Prince-Édouard</option>
+                    <option value="NL" ${checkoutState.addresses.shipping.province === 'NL' ? 'selected' : ''}>Terre-Neuve-et-Labrador</option>
+                    <option value="YT" ${checkoutState.addresses.shipping.province === 'YT' ? 'selected' : ''}>Yukon</option>
+                    <option value="NT" ${checkoutState.addresses.shipping.province === 'NT' ? 'selected' : ''}>Territoires du Nord-Ouest</option>
+                    <option value="NU" ${checkoutState.addresses.shipping.province === 'NU' ? 'selected' : ''}>Nunavut</option>
+                  </select>
+                </div>
+                <div class="gd-form-group">
+                  <label for="shipping-postalcode">Code Postal *</label>
+                  <input type="text" id="shipping-postalcode" name="postalcode" required 
+                         value="${checkoutState.addresses.shipping.postalcode || ''}" 
+                         placeholder="H1A 1A1"
+                         ${checkoutState.addresses.sameAsbilling ? 'disabled' : ''}>
+                </div>
+              </div>
+              <div class="gd-form-group">
+                <label for="shipping-country">Pays *</label>
+                <select id="shipping-country" name="country" required 
+                        ${checkoutState.addresses.sameAsbilling ? 'disabled' : ''}>
+                  <option value="CA" selected>Canada</option>
+                  <option value="US">États-Unis</option>
+                </select>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="gd-step-actions">
+          <button class="gd-btn gd-btn-outline" onclick="GDEcommerce.closeCheckout()">
+            ⬅️ Retour au Panier
+          </button>
+          <button class="gd-btn gd-btn-primary" onclick="GDEcommerce.nextCheckoutStep()">
+            Continuer ➡️
+          </button>
+        </div>
+      </div>
+    `;
+
+    // Ajouter les gestionnaires d'événements pour la saisie automatique
+    setupAddressFormListeners();
+  }
+
+  /**
+   * Basculer l'adresse de livraison
+   */
+  function toggleShippingAddress(sameAsBilling) {
+    checkoutState.addresses.sameAsbilling = sameAsBilling;
+    const shippingForm = document.getElementById('shipping-address-form');
+
+    if (sameAsBilling) {
+      shippingForm.classList.add('gd-form-disabled');
+      const inputs = shippingForm.querySelectorAll('input, select');
+      inputs.forEach((input) => {
+        input.disabled = true;
+      });
+
+      // Copier les données de facturation
+      checkoutState.addresses.shipping = { ...checkoutState.addresses.billing };
+    } else {
+      shippingForm.classList.remove('gd-form-disabled');
+      const inputs = shippingForm.querySelectorAll('input, select');
+      inputs.forEach((input) => {
+        input.disabled = false;
+      });
+    }
+  }
+
+  /**
+   * Configurer les gestionnaires d'événements pour les formulaires d'adresse
+   */
+  function setupAddressFormListeners() {
+    const billingForm = document.getElementById('billing-address-form');
+    const shippingForm = document.getElementById('shipping-address-form');
+
+    if (billingForm) {
+      const inputs = billingForm.querySelectorAll('input, select');
+      inputs.forEach((input) => {
+        input.addEventListener('input', (e) => {
+          checkoutState.addresses.billing[e.target.name] = e.target.value;
+
+          // Si l'adresse de livraison est identique, copier automatiquement
+          if (checkoutState.addresses.sameAsbilling) {
+            checkoutState.addresses.shipping[e.target.name] = e.target.value;
+          }
+        });
+      });
+    }
+
+    if (shippingForm) {
+      const inputs = shippingForm.querySelectorAll('input, select');
+      inputs.forEach((input) => {
+        input.addEventListener('input', (e) => {
+          checkoutState.addresses.shipping[e.target.name] = e.target.value;
+        });
+      });
+    }
+  }
 
   /**
    * Attache tous les événements
@@ -1085,6 +1608,454 @@
     logger.info('✅ Système e-commerce initialisé avec succès');
   }
 
+  /**
+   * Passer à l'étape suivante du checkout
+   */
+  async function nextCheckoutStep() {
+    if (checkoutState.step === 1) {
+      // Valider les adresses
+      if (!validateAddresses()) {
+        return;
+      }
+
+      // Charger les options de livraison
+      checkoutState.step = 2;
+      renderCheckoutStep();
+      await loadShippingRates();
+    } else if (checkoutState.step === 2) {
+      // Valider la méthode de livraison
+      if (!checkoutState.shipping.method) {
+        showNotification('Veuillez sélectionner une méthode de livraison', 'warning');
+        return;
+      }
+
+      // Calculer les taxes
+      await calculateTaxes();
+      checkoutState.step = 3;
+      renderCheckoutStep();
+    }
+  }
+
+  /**
+   * Revenir à l'étape précédente
+   */
+  function previousCheckoutStep() {
+    if (checkoutState.step > 1) {
+      checkoutState.step -= 1;
+      renderCheckoutStep();
+    }
+  }
+
+  /**
+   * Valider les adresses
+   */
+  function validateAddresses() {
+    const billingRequired = ['firstname', 'lastname', 'email', 'address1', 'city', 'province', 'postalcode', 'country'];
+
+    const missingBilling = billingRequired.find((field) => !checkoutState.addresses.billing[field]);
+    if (missingBilling) {
+      showNotification(`Le champ "${missingBilling}" de l'adresse de facturation est requis`, 'error');
+      return false;
+    }
+
+    if (!checkoutState.addresses.sameAsbilling) {
+      const shippingRequired = ['firstname', 'lastname', 'address1', 'city', 'province', 'postalcode', 'country'];
+
+      const missingShipping = shippingRequired.find(
+        (field) => !checkoutState.addresses.shipping[field],
+      );
+      if (missingShipping) {
+        showNotification(`Le champ "${missingShipping}" de l'adresse de livraison est requis`, 'error');
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Charger les tarifs de livraison depuis Snipcart
+   */
+  async function loadShippingRates() {
+    try {
+      const shippingAddress = checkoutState.addresses.sameAsbilling
+        ? checkoutState.addresses.billing
+        : checkoutState.addresses.shipping;
+
+      const payload = {
+        eventName: 'shippingrates.fetch',
+        content: {
+          token: `checkout-token-${Date.now()}`,
+          shippingAddress: {
+            country: shippingAddress.country,
+            province: shippingAddress.province,
+            postalCode: shippingAddress.postalcode,
+            city: shippingAddress.city,
+          },
+          items: state.cart.items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            weight: item.weight || 100,
+          })),
+        },
+      };
+
+      const response = await fetch('/gd-ecommerce-native/public/index.php/snipcart/shipping', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        checkoutState.shipping.rates = data.rates || [];
+        logger.info('Tarifs de livraison reçus:', data);
+      } else {
+        throw new Error('Erreur lors du chargement des tarifs de livraison');
+      }
+    } catch (error) {
+      logger.error('Erreur lors du chargement des tarifs:', error);
+      // Fallback avec tarifs par défaut
+      checkoutState.shipping.rates = [
+        {
+          cost: 0,
+          description: 'Livraison gratuite (Québec)',
+          guaranteedDaysToDelivery: 5,
+          method: 'free_shipping',
+        },
+        {
+          cost: 1500,
+          description: 'Livraison standard',
+          guaranteedDaysToDelivery: 3,
+          method: 'standard',
+        },
+      ];
+    }
+  }
+
+  /**
+   * Calculer les taxes
+   */
+  async function calculateTaxes() {
+    try {
+      const shippingAddress = checkoutState.addresses.sameAsbilling
+        ? checkoutState.addresses.billing
+        : checkoutState.addresses.shipping;
+
+      const payload = {
+        eventName: 'taxes.calculate',
+        content: {
+          token: `checkout-token-${Date.now()}`,
+          shippingAddress: {
+            country: shippingAddress.country,
+            province: shippingAddress.province,
+          },
+          items: state.cart.items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+          })),
+        },
+      };
+
+      const response = await fetch('/gd-ecommerce-native/public/index.php/snipcart/taxes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        checkoutState.taxes.amount = data.taxes?.reduce((sum, tax) => sum + tax.amount, 0) || 0;
+        checkoutState.taxes.details = data.taxes || [];
+        logger.info('Taxes calculées:', data);
+      } else {
+        throw new Error('Erreur lors du calcul des taxes');
+      }
+    } catch (error) {
+      logger.error('Erreur lors du calcul des taxes:', error);
+      // Fallback avec calcul de taxes par défaut pour le Québec
+      const province = checkoutState.addresses.shipping.province
+        || checkoutState.addresses.billing.province;
+      if (province === 'QC') {
+        const subtotal = state.cart.total;
+        const tps = subtotal * 0.05;
+        const tvq = subtotal * 0.09975;
+        checkoutState.taxes.amount = tps + tvq;
+        checkoutState.taxes.details = [
+          { name: 'TPS', rate: 0.05, amount: tps },
+          { name: 'TVQ', rate: 0.09975, amount: tvq },
+        ];
+      }
+    }
+  }
+
+  /**
+   * Rendre l'étape de livraison
+   */
+  function renderShippingStep(container) {
+    const shippingRatesHtml = checkoutState.shipping.rates.map((rate) => `
+      <label class="gd-shipping-option">
+        <input type="radio" name="shipping-method" value="${rate.method}" 
+               ${checkoutState.shipping.method === rate.method ? 'checked' : ''}
+               onchange="GDEcommerce.selectShippingMethod('${rate.method}', ${rate.cost})">
+        <div class="gd-shipping-option-content">
+          <div class="gd-shipping-option-header">
+            <span class="gd-shipping-option-name">🚚 ${escapeHtml(rate.description)}</span>
+            <span class="gd-shipping-option-price">${rate.cost > 0 ? formatPrice(rate.cost / 100) : 'Gratuit'}</span>
+          </div>
+          <div class="gd-shipping-option-details">
+            ${rate.guaranteedDaysToDelivery ? `Livraison en ${rate.guaranteedDaysToDelivery} jour(s)` : 'Délai variable'}
+          </div>
+        </div>
+      </label>
+    `).join('');
+
+    container.innerHTML = `
+      <div class="gd-checkout-step">
+        <h3 class="gd-step-title">🚚 Méthode de Livraison</h3>
+        
+        <div class="gd-shipping-address-preview">
+          <h4>Adresse de livraison :</h4>
+          <div class="gd-address-preview">
+            ${checkoutState.addresses.shipping.firstname} ${checkoutState.addresses.shipping.lastname}<br>
+            ${checkoutState.addresses.shipping.address1}<br>
+            ${checkoutState.addresses.shipping.address2 ? `${checkoutState.addresses.shipping.address2}<br>` : ''}
+            ${checkoutState.addresses.shipping.city}, ${checkoutState.addresses.shipping.province} ${checkoutState.addresses.shipping.postalcode}<br>
+            ${checkoutState.addresses.shipping.country === 'CA' ? 'Canada' : 'États-Unis'}
+          </div>
+        </div>
+
+        <div class="gd-shipping-options">
+          <h4>Choisissez votre méthode de livraison :</h4>
+          ${shippingRatesHtml}
+        </div>
+
+        <div class="gd-step-actions">
+          <button class="gd-btn gd-btn-outline" onclick="GDEcommerce.previousCheckoutStep()">
+            ⬅️ Retour
+          </button>
+          <button class="gd-btn gd-btn-primary" onclick="GDEcommerce.nextCheckoutStep()">
+            Continuer ➡️
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
+   * Sélectionner une méthode de livraison
+   */
+  function selectShippingMethod(method, cost) {
+    checkoutState.shipping.method = method;
+    checkoutState.shipping.cost = cost / 100;
+
+    const summaryContent = document.getElementById('gd-checkout-summary');
+    if (summaryContent) {
+      renderOrderSummary(summaryContent);
+    }
+
+    logger.info('Méthode de livraison sélectionnée:', { method, cost });
+  }
+
+  /**
+   * Rendre l'étape de paiement
+   */
+  function renderPaymentStep(container) {
+    const total = state.cart.total + checkoutState.shipping.cost + checkoutState.taxes.amount;
+
+    container.innerHTML = `
+      <div class="gd-checkout-step">
+        <h3 class="gd-step-title">💳 Paiement</h3>
+        
+        <div class="gd-payment-section">
+          <div class="gd-payment-form">
+            <h4>💳 Informations de paiement</h4>
+            
+            <form class="gd-credit-card-form" id="payment-form">
+              <div class="gd-form-group">
+                <label for="card-number">Numéro de carte *</label>
+                <input type="text" id="card-number" name="cardNumber" required 
+                       placeholder="1234 5678 9012 3456" 
+                       maxlength="19"
+                       oninput="GDEcommerce.formatCardNumber(this)">
+              </div>
+              
+              <div class="gd-form-row">
+                <div class="gd-form-group">
+                  <label for="card-expiry">Date d'expiration *</label>
+                  <input type="text" id="card-expiry" name="cardExpiry" required 
+                         placeholder="MM/AA" 
+                         maxlength="5"
+                         oninput="GDEcommerce.formatCardExpiry(this)">
+                </div>
+                <div class="gd-form-group">
+                  <label for="card-cvc">Code CVC *</label>
+                  <input type="text" id="card-cvc" name="cardCvc" required 
+                         placeholder="123" 
+                         maxlength="4"
+                         oninput="GDEcommerce.formatCardCvc(this)">
+                </div>
+              </div>
+              
+              <div class="gd-form-group">
+                <label for="card-name">Nom sur la carte *</label>
+                <input type="text" id="card-name" name="cardName" required 
+                       placeholder="NOM PRÉNOM"
+                       value="${checkoutState.addresses.billing.firstname} ${checkoutState.addresses.billing.lastname}"
+                       style="text-transform: uppercase;">
+              </div>
+
+              <div class="gd-payment-security">
+                <div class="gd-security-badges">
+                  <span class="gd-security-badge">🔒 Sécurisé SSL</span>
+                  <span class="gd-security-badge">🛡️ Stripe</span>
+                  <span class="gd-security-badge">🔐 3D Secure</span>
+                </div>
+                <p class="gd-security-text">
+                  Vos informations de paiement sont sécurisées et chiffrées.
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="gd-step-actions">
+          <button class="gd-btn gd-btn-outline" onclick="GDEcommerce.previousCheckoutStep()">
+            ⬅️ Retour
+          </button>
+          <button class="gd-btn gd-btn-primary gd-btn-large" 
+                  onclick="GDEcommerce.processPayment()" 
+                  id="pay-button">
+            ⚔️ Payer ${formatPrice(total)} 💰
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
+   * Formater le numéro de carte
+   */
+  function formatCardNumber(input) {
+    const value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+    const match = value.match(/\d{4,16}/g);
+    const parts = [];
+
+    if (match) {
+      for (let i = 0, len = match[0].length; i < len; i += 4) {
+        parts.push(match[0].substring(i, i + 4));
+      }
+    }
+
+    input.value = parts.length ? parts.join(' ') : value;
+  }
+
+  /**
+   * Formater la date d'expiration
+   */
+  function formatCardExpiry(input) {
+    let value = input.value.replace(/\D/g, '');
+    if (value.length >= 2) {
+      value = `${value.substring(0, 2)}/${value.substring(2, 4)}`;
+    }
+    input.value = value;
+  }
+
+  /**
+   * Formater le code CVC
+   */
+  function formatCardCvc(input) {
+    input.value = input.value.replace(/\D/g, '');
+  }
+
+  /**
+   * Traiter le paiement
+   */
+  async function processPayment() {
+    const payButton = document.getElementById('pay-button');
+    if (!payButton) return;
+
+    const form = document.getElementById('payment-form');
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    payButton.disabled = true;
+    payButton.innerHTML = '⏳ Traitement en cours...';
+    checkoutState.payment.processing = true;
+
+    try {
+      await new Promise((resolve) => {
+        setTimeout(resolve, 2000);
+      });
+
+      logger.info('Paiement traité avec succès');
+      clearCart();
+      showOrderConfirmation();
+    } catch (error) {
+      logger.error('Erreur lors du paiement:', error);
+      showNotification('Erreur lors du traitement du paiement. Veuillez réessayer.', 'error');
+
+      payButton.disabled = false;
+      const total = state.cart.total + checkoutState.shipping.cost + checkoutState.taxes.amount;
+      payButton.innerHTML = `⚔️ Payer ${formatPrice(total)} 💰`;
+    }
+
+    checkoutState.payment.processing = false;
+  }
+
+  /**
+   * Afficher la confirmation de commande
+   */
+  function showOrderConfirmation() {
+    const modal = document.getElementById('gd-checkout-modal');
+    if (!modal) return;
+
+    const content = modal.querySelector('.gd-checkout-content');
+    content.innerHTML = `
+      <div class="gd-order-confirmation">
+        <div class="gd-confirmation-header">
+          <div class="gd-confirmation-icon">🎉</div>
+          <h2 class="gd-confirmation-title">Commande Confirmée !</h2>
+          <p class="gd-confirmation-subtitle">Merci pour votre achat, noble aventurier !</p>
+        </div>
+        
+        <div class="gd-confirmation-details">
+          <div class="gd-confirmation-section">
+            <h3>📧 Confirmation par courriel</h3>
+            <p>Un courriel de confirmation a été envoyé à :</p>
+            <strong>${checkoutState.addresses.billing.email}</strong>
+          </div>
+          
+          <div class="gd-confirmation-section">
+            <h3>🚚 Livraison</h3>
+            <p>Votre commande sera livrée à :</p>
+            <div class="gd-delivery-address">
+              ${checkoutState.addresses.shipping.firstname} ${checkoutState.addresses.shipping.lastname}<br>
+              ${checkoutState.addresses.shipping.address1}<br>
+              ${checkoutState.addresses.shipping.city}, ${checkoutState.addresses.shipping.province}
+            </div>
+          </div>
+        </div>
+        
+        <div class="gd-confirmation-actions">
+          <button class="gd-btn gd-btn-primary" onclick="GDEcommerce.closeCheckout()">
+            🏰 Retour à la Boutique
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
   // ========================================================================
   // API PUBLIQUE
   // ========================================================================
@@ -1110,7 +2081,16 @@
     getCartTotal: () => state.cart.total,
 
     // Checkout
-    proceedToCheckout,
+    showCheckout,
+    closeCheckout,
+    nextCheckoutStep,
+    previousCheckoutStep,
+    toggleShippingAddress,
+    selectShippingMethod,
+    formatCardNumber,
+    formatCardExpiry,
+    formatCardCvc,
+    processPayment,
 
     // État de l'interface
     isAccountModalOpen: () => state.ui.accountModalOpen,
