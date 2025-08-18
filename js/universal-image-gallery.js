@@ -3,12 +3,9 @@
 // Application automatique sur toutes les images produit du site
 // ========================================================================
 
-(function() {
-  'use strict';
-
+(function universalImageGallery() {
   // Configuration globale
   const config = {
-    // Sélecteurs à exclure
     excludeSelectors: [
       '.logo',
       '.site-logo',
@@ -27,496 +24,179 @@
       'img[src*="icon"]',
       'img[src*=".svg"]',
       'img[alt*="Logo"]',
-      'img[alt*="Icon"]'
+      'img[alt*="Icon"]',
     ],
-    
-    // Sélecteurs à inclure
-    includeSelectors: [
-      '.card-product img',
-      '.product-card img',
+    productSelectors: [
       '.product-media',
-      '.boutique img',
-      '#produits img',
-      '#boutique img',
-      '.product-image',
-      '.property-image',
+      '.card-product img',
+      '[data-gallery]',
       '.gallery-image',
-      'img[data-gallery]',
-      '.feature-card img'
+      '.product-image',
     ],
-    
-    // Options de galerie
-    galleryOptions: {
-      zoomLevel: 2,
-      animationDuration: 300,
-      backdropOpacity: 0.95,
-      enableZoom: true,
-      enableFullscreen: true,
-      enableNavigation: true,
-      enableKeyboard: true,
-      enableTouch: true
-    }
+    zoomLevel: 2.5,
+    transitionDuration: 300,
+    swipeThreshold: 50,
   };
 
   // État global
-  let currentImage = null;
-  let currentIndex = 0;
-  let galleryImages = [];
-  let modalCreated = false;
-  let modal, modalImg, modalCaption, prevBtn, nextBtn, zoomBtn, closeBtn;
+  const state = {
+    currentImageIndex: 0,
+    galleryImages: [],
+    isModalOpen: false,
+    isZoomed: false,
+  };
 
-  // ========================================================================
-  // INITIALISATION
-  // ========================================================================
-  
-  function init() {
-    console.log('🚫 Galerie universelle désactivée par configuration');
-    // Galerie universelle complètement désactivée
-    return;
+  // Éléments DOM
+  let modal = null;
+  let modalImg = null;
+  let closeBtn = null;
+  let prevBtn = null;
+  let nextBtn = null;
+
+  // Vérifier si une image doit être exclue
+  function isExcluded(img) {
+    return config.excludeSelectors.some((selector) => {
+      try {
+        return img.matches(selector) || img.closest(selector);
+      } catch (e) {
+        return false;
+      }
+    });
   }
 
-  // ========================================================================
-  // CRÉATION DE LA MODAL
-  // ========================================================================
-  
-  function createModal() {
-    // Container modal
-    modal = document.createElement('div');
-    modal.className = 'universal-gallery-modal';
-    modal.innerHTML = `
-      <div class="ugm-content">
-        <button class="ugm-close" aria-label="Fermer">&times;</button>
-        <button class="ugm-prev" aria-label="Image précédente">‹</button>
-        <button class="ugm-next" aria-label="Image suivante">›</button>
-        <button class="ugm-zoom" aria-label="Zoom">
-          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
-          </svg>
-        </button>
-        <div class="ugm-image-container">
-          <img class="ugm-image" alt="">
-        </div>
-        <div class="ugm-caption"></div>
-        <div class="ugm-counter"></div>
-      </div>
-    `;
-    
-    document.body.appendChild(modal);
-    
-    // Récupérer les éléments
-    modalImg = modal.querySelector('.ugm-image');
-    modalCaption = modal.querySelector('.ugm-caption');
-    closeBtn = modal.querySelector('.ugm-close');
-    prevBtn = modal.querySelector('.ugm-prev');
-    nextBtn = modal.querySelector('.ugm-next');
-    zoomBtn = modal.querySelector('.ugm-zoom');
-    
-    // Attacher les événements
-    attachModalEvents();
-    
-    // Ajouter les styles CSS
-    injectStyles();
-    
-    modalCreated = true;
-  }
-
-  // ========================================================================
-  // INJECTION DES STYLES CSS
-  // ========================================================================
-  
+  // Injecter les styles CSS
   function injectStyles() {
     if (document.getElementById('universal-gallery-styles')) return;
-    
-    const styles = document.createElement('style');
-    styles.id = 'universal-gallery-styles';
-    styles.innerHTML = `
-      /* Modal Gallery */
+
+    const style = document.createElement('style');
+    style.id = 'universal-gallery-styles';
+    style.textContent = `
       .universal-gallery-modal {
         display: none;
         position: fixed;
-        z-index: 99999;
-        top: 0;
+        z-index: 10000;
         left: 0;
+        top: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(10px);
+        background-color: rgba(0,0,0,0.9);
         animation: fadeIn 0.3s ease;
       }
-      
-      .universal-gallery-modal.active {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .ugm-content {
+      .gallery-content {
         position: relative;
-        max-width: 90vw;
-        max-height: 90vh;
-      }
-      
-      .ugm-image-container {
+        width: 100%;
+        height: 100%;
         display: flex;
-        align-items: center;
         justify-content: center;
-        min-height: 200px;
+        align-items: center;
       }
-      
-      .ugm-image {
-        max-width: 100%;
-        max-height: 80vh;
+      .gallery-main-image {
+        max-width: 90%;
+        max-height: 90%;
         object-fit: contain;
-        cursor: zoom-in;
         transition: transform 0.3s ease;
-        border-radius: 8px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        cursor: zoom-in;
       }
-      
-      .ugm-image.zoomed {
-        transform: scale(2);
+      .gallery-main-image.zoomed {
+        transform: scale(2.5);
         cursor: zoom-out;
       }
-      
-      .ugm-close, .ugm-prev, .ugm-next, .ugm-zoom {
+      .gallery-close {
         position: absolute;
-        background: rgba(0, 0, 0, 0.7);
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+        z-index: 10001;
+      }
+      .gallery-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.2);
         color: white;
         border: none;
+        font-size: 30px;
+        padding: 10px 15px;
         cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 10;
-        border-radius: 50%;
-        width: 44px;
-        height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
+        border-radius: 3px;
+        transition: background 0.3s ease;
       }
-      
-      .ugm-close:hover, .ugm-prev:hover, .ugm-next:hover, .ugm-zoom:hover {
-        background: rgba(139, 92, 246, 0.8);
-        transform: scale(1.1);
+      .gallery-nav:hover {
+        background: rgba(255,255,255,0.4);
       }
-      
-      .ugm-close {
-        top: 20px;
-        right: 20px;
-        font-size: 32px;
-      }
-      
-      .ugm-prev {
-        left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-      
-      .ugm-next {
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-      
-      .ugm-zoom {
-        bottom: 20px;
-        right: 20px;
-      }
-      
-      .ugm-caption {
-        text-align: center;
-        color: white;
-        padding: 15px;
-        font-size: 16px;
-        max-width: 600px;
-        margin: 0 auto;
-      }
-      
-      .ugm-counter {
+      .gallery-prev { left: 20px; }
+      .gallery-next { right: 20px; }
+      .gallery-counter {
         position: absolute;
         bottom: 20px;
-        left: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         color: white;
-        background: rgba(0, 0, 0, 0.7);
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 14px;
+        background: rgba(0,0,0,0.7);
+        padding: 5px 15px;
+        border-radius: 15px;
       }
-      
-      /* Images cliquables */
-      .gallery-enabled {
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-      }
-      
-      .gallery-enabled:hover {
-        transform: scale(1.02);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-      }
-      
-      .gallery-enabled::after {
-        content: '';
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        width: 32px;
-        height: 32px;
-        background: rgba(0, 0, 0, 0.7);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' fill='white' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-      
-      .gallery-enabled:hover::after {
-        opacity: 1;
-      }
-      
-      /* Animations */
       @keyframes fadeIn {
         from { opacity: 0; }
         to { opacity: 1; }
       }
-      
-      @keyframes slideIn {
-        from { transform: translateX(50px); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-      }
-      
-      /* Responsive */
-      @media (max-width: 768px) {
-        .ugm-close, .ugm-prev, .ugm-next, .ugm-zoom {
-          width: 36px;
-          height: 36px;
-          font-size: 20px;
-        }
-        
-        .ugm-prev { left: 10px; }
-        .ugm-next { right: 10px; }
-        .ugm-close { top: 10px; right: 10px; }
-        .ugm-zoom { bottom: 10px; right: 10px; }
-        
-        .ugm-caption { font-size: 14px; padding: 10px; }
-        .ugm-counter { font-size: 12px; padding: 6px 12px; }
-      }
     `;
-    
-    document.head.appendChild(styles);
+    document.head.appendChild(style);
   }
 
-  // ========================================================================
-  // APPLICATION DE LA GALERIE AUX IMAGES
-  // ========================================================================
-  
-  function applyGalleryToImages() {
-    // Récupérer toutes les images à inclure
-    const includeImages = [];
-    config.includeSelectors.forEach(selector => {
-      const images = document.querySelectorAll(selector);
-      images.forEach(img => {
-        if (!isExcluded(img) && !img.classList.contains('gallery-enabled') && !img.dataset.galleryProcessed) {
-          includeImages.push(img);
-        }
-      });
-    });
-    
-    // Si aucune nouvelle image, on arrête
-    if (includeImages.length === 0) {
-      return;
-    }
-    
-    // Appliquer la galerie
-    includeImages.forEach((img, index) => {
-      // Marquer comme activée ET comme traitée
-      img.classList.add('gallery-enabled');
-      img.dataset.galleryProcessed = 'true';
-      img.dataset.galleryIndex = index;
-      
-      // Ajouter l'événement click (une seule fois)
-      const clickHandler = function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        openGallery(this, getAllGalleryImages());
-      };
-      
-      img.addEventListener('click', clickHandler);
-      // Stocker la référence pour éviter les doublons
-      img._galleryClickHandler = clickHandler;
-    });
-    
-    console.log(`✅ Galerie appliquée à ${includeImages.length} nouvelles images`);
-  }
-  
-  // Fonction helper pour récupérer toutes les images de galerie
-  function getAllGalleryImages() {
-    const allImages = [];
-    config.includeSelectors.forEach(selector => {
-      const images = document.querySelectorAll(selector + '.gallery-enabled');
-      images.forEach(img => {
-        if (!isExcluded(img)) {
-          allImages.push(img);
-        }
-      });
-    });
-    return allImages;
-  }
-
-  // ========================================================================
-  // VÉRIFICATION D'EXCLUSION
-  // ========================================================================
-  
-  function isExcluded(img) {
-    // Vérifier chaque sélecteur d'exclusion
-    for (const selector of config.excludeSelectors) {
-      if (img.matches(selector)) {
-        return true;
-      }
-      // Vérifier aussi les parents
-      if (img.closest(selector)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  // ========================================================================
-  // OUVERTURE DE LA GALERIE
-  // ========================================================================
-  
-  function openGallery(img, allImages) {
-    currentImage = img;
-    galleryImages = allImages || [img];
-    currentIndex = parseInt(img.dataset.galleryIndex) || 0;
-    
-    // Afficher l'image
-    updateModal();
-    
-    // Activer la modal
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Mise à jour de la navigation
-    updateNavigation();
-  }
-
-  // ========================================================================
-  // MISE À JOUR DE LA MODAL
-  // ========================================================================
-  
+  // Mettre à jour la modal
   function updateModal() {
-    const img = galleryImages[currentIndex];
-    
-    // Image
-    modalImg.src = img.src;
-    modalImg.alt = img.alt || '';
-    modalImg.classList.remove('zoomed');
-    
-    // Caption
-    const caption = img.alt || img.title || '';
-    modalCaption.textContent = caption;
-    modalCaption.style.display = caption ? 'block' : 'none';
-    
-    // Counter
-    if (galleryImages.length > 1) {
-      modal.querySelector('.ugm-counter').textContent = `${currentIndex + 1} / ${galleryImages.length}`;
-      modal.querySelector('.ugm-counter').style.display = 'block';
-    } else {
-      modal.querySelector('.ugm-counter').style.display = 'none';
+    const currentImage = state.galleryImages[state.currentImageIndex];
+    if (currentImage && modalImg) {
+      modalImg.src = currentImage.src;
+      modalImg.alt = currentImage.alt || 'Image de galerie';
+
+      const counter = modal.querySelector('.gallery-counter');
+      if (counter) {
+        counter.querySelector('.current').textContent = state.currentImageIndex + 1;
+        counter.querySelector('.total').textContent = state.galleryImages.length;
+      }
+
+      prevBtn.style.display = state.currentImageIndex > 0 ? 'block' : 'none';
+      nextBtn.style.display = state.currentImageIndex < state.galleryImages.length - 1 ? 'block' : 'none';
     }
-    
-    // Animation
-    modalImg.style.animation = 'slideIn 0.3s ease';
-    setTimeout(() => {
-      modalImg.style.animation = '';
-    }, 300);
   }
 
-  // ========================================================================
-  // MISE À JOUR DE LA NAVIGATION
-  // ========================================================================
-  
-  function updateNavigation() {
-    // Afficher/masquer les boutons
-    prevBtn.style.display = galleryImages.length > 1 ? 'flex' : 'none';
-    nextBtn.style.display = galleryImages.length > 1 ? 'flex' : 'none';
-    
-    // Désactiver si nécessaire
-    prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
-    nextBtn.style.opacity = currentIndex === galleryImages.length - 1 ? '0.5' : '1';
-  }
-
-  // ========================================================================
-  // ÉVÉNEMENTS DE LA MODAL
-  // ========================================================================
-  
-  function attachModalEvents() {
-    // Fermeture
-    closeBtn.addEventListener('click', closeGallery);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeGallery();
-    });
-    
-    // Navigation
-    prevBtn.addEventListener('click', () => navigateGallery(-1));
-    nextBtn.addEventListener('click', () => navigateGallery(1));
-    
-    // Zoom
-    zoomBtn.addEventListener('click', toggleZoom);
-    modalImg.addEventListener('dblclick', toggleZoom);
-    
-    // Clavier
-    document.addEventListener('keydown', handleKeyboard);
-    
-    // Touch/Swipe
-    setupTouchEvents();
-  }
-
-  // ========================================================================
-  // FERMETURE DE LA GALERIE
-  // ========================================================================
-  
-  function closeGallery() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    modalImg.classList.remove('zoomed');
-  }
-
-  // ========================================================================
-  // NAVIGATION
-  // ========================================================================
-  
+  // Navigation dans la galerie
   function navigateGallery(direction) {
-    const newIndex = currentIndex + direction;
-    if (newIndex >= 0 && newIndex < galleryImages.length) {
-      currentIndex = newIndex;
+    const newIndex = state.currentImageIndex + direction;
+    if (newIndex >= 0 && newIndex < state.galleryImages.length) {
+      state.currentImageIndex = newIndex;
       updateModal();
-      updateNavigation();
     }
   }
 
-  // ========================================================================
-  // ZOOM
-  // ========================================================================
-  
+  // Basculer le zoom
   function toggleZoom() {
-    modalImg.classList.toggle('zoomed');
+    state.isZoomed = !state.isZoomed;
+    modalImg.classList.toggle('zoomed', state.isZoomed);
   }
 
-  // ========================================================================
-  // GESTION CLAVIER
-  // ========================================================================
-  
+  // Fermer la galerie
+  function closeGallery() {
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+      state.isModalOpen = false;
+      state.isZoomed = false;
+      if (modalImg) {
+        modalImg.classList.remove('zoomed');
+      }
+    }
+  }
+
+  // Gestion du clavier
   function handleKeyboard(e) {
-    if (!modal.classList.contains('active')) return;
-    
-    switch(e.key) {
+    if (!state.isModalOpen) return;
+
+    switch (e.key) {
       case 'Escape':
         closeGallery();
         break;
@@ -526,118 +206,116 @@
       case 'ArrowRight':
         navigateGallery(1);
         break;
-      case ' ':
-        e.preventDefault();
-        toggleZoom();
+      default:
         break;
     }
   }
 
-  // ========================================================================
-  // GESTION TACTILE
-  // ========================================================================
-  
-  function setupTouchEvents() {
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    modalImg.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    
-    modalImg.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-    
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      const diff = touchStartX - touchEndX;
-      
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          // Swipe gauche - image suivante
-          navigateGallery(1);
-        } else {
-          // Swipe droite - image précédente
-          navigateGallery(-1);
-        }
-      }
-    }
+  // Attacher les événements de la modal
+  function attachModalEvents() {
+    closeBtn.addEventListener('click', closeGallery);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeGallery();
+    });
+
+    prevBtn.addEventListener('click', () => navigateGallery(-1));
+    nextBtn.addEventListener('click', () => navigateGallery(1));
+    modalImg.addEventListener('click', toggleZoom);
+    document.addEventListener('keydown', handleKeyboard);
   }
 
-  // ========================================================================
-  // OBSERVER POUR CONTENU DYNAMIQUE
-  // ========================================================================
-  
-  let observerTimeout = null;
-  function observeNewImages() {
-    const observer = new MutationObserver((mutations) => {
-      let hasNewImages = false;
-      
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (node.nodeType === 1) { // Element node
-            if (node.tagName === 'IMG' && !isExcluded(node) && !node.dataset.galleryProcessed) {
-              hasNewImages = true;
-            }
-            // Vérifier aussi les enfants
-            const imgs = node.querySelectorAll('img:not([data-gallery-processed])');
-            if (imgs.length > 0) {
-              hasNewImages = true;
-            }
-          }
-        });
+  // Créer la modal
+  function createModal() {
+    if (modal) return;
+
+    modal = document.createElement('div');
+    modal.className = 'universal-gallery-modal';
+    modal.innerHTML = `
+      <div class="gallery-content">
+        <span class="gallery-close">&times;</span>
+        <img class="gallery-main-image" alt="Gallery image">
+        <button class="gallery-nav gallery-prev">&#8249;</button>
+        <button class="gallery-nav gallery-next">&#8250;</button>
+        <div class="gallery-counter">
+          <span class="current">1</span> / <span class="total">1</span>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    modalImg = modal.querySelector('.gallery-main-image');
+    closeBtn = modal.querySelector('.gallery-close');
+    prevBtn = modal.querySelector('.gallery-prev');
+    nextBtn = modal.querySelector('.gallery-next');
+
+    injectStyles();
+    attachModalEvents();
+  }
+
+  // Obtenir toutes les images de galerie
+  function getAllGalleryImages() {
+    const allImages = document.querySelectorAll('img');
+    return Array.from(allImages).filter((img) => {
+      if (isExcluded(img)) return false;
+
+      return config.productSelectors.some((selector) => {
+        try {
+          return img.matches(selector) || img.closest(selector);
+        } catch (e) {
+          return false;
+        }
       });
-      
-      if (hasNewImages) {
-        // Debounce : attendre que les mutations se calment
-        if (observerTimeout) {
-          clearTimeout(observerTimeout);
-        }
-        observerTimeout = setTimeout(applyGalleryToImages, 250);
-      }
-    });
-    
-    // Observer le body pour les changements
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
     });
   }
 
-  // ========================================================================
-  // INITIALISATION AU CHARGEMENT
-  // ========================================================================
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-  
-  // Réinitialiser après le chargement complet (pour les images lazy) - seulement si nécessaire
-  window.addEventListener('load', () => {
-    // Vérifier s'il y a des images non traitées avant de réappliquer
-    const unprocessedImages = document.querySelectorAll('img:not([data-gallery-processed])');
-    const needProcessing = Array.from(unprocessedImages).some(img => {
-      return config.includeSelectors.some(selector => img.matches(selector)) && !isExcluded(img);
-    });
-    
-    if (needProcessing) {
-      setTimeout(applyGalleryToImages, 500);
+  // Ouvrir la galerie
+  function openGallery(clickedImage) {
+    createModal();
+
+    state.galleryImages = getAllGalleryImages();
+    state.currentImageIndex = state.galleryImages.indexOf(clickedImage);
+    state.isModalOpen = true;
+    state.isZoomed = false;
+
+    if (state.currentImageIndex === -1) {
+      state.currentImageIndex = 0;
     }
+
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    updateModal();
+  }
+
+  // Initialiser le système de galerie
+  function initUniversalGallery() {
+    config.productSelectors.forEach((selector) => {
+      const images = document.querySelectorAll(selector);
+      images.forEach((img) => {
+        if (!isExcluded(img) && !img.dataset.galleryEnabled) {
+          const imageElement = img;
+          imageElement.style.cursor = 'zoom-in';
+          imageElement.addEventListener('click', () => openGallery(imageElement));
+          imageElement.dataset.galleryEnabled = 'true';
+        }
+      });
+    });
+  }
+
+  // Initialisation
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initUniversalGallery);
+  } else {
+    initUniversalGallery();
+  }
+
+  // Observer pour les nouvelles images ajoutées dynamiquement
+  const observer = new MutationObserver(() => {
+    initUniversalGallery();
   });
 
-  // ========================================================================
-  // API PUBLIQUE
-  // ========================================================================
-  
-  window.UniversalGallery = {
-    refresh: applyGalleryToImages,
-    open: openGallery,
-    close: closeGallery,
-    config: config
-  };
-
-})();
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+}());

@@ -1,193 +1,143 @@
 // Lazy loading amélioré avec Intersection Observer
-(function() {
-  'use strict';
-  
+(function lazyLoadEnhanced() {
   // Configuration
   const config = {
-    rootMargin: '50px 0px', // Charger 50px avant l'entrée dans le viewport
+    rootMargin: '50px 0px',
     threshold: 0.01,
-    loadDelay: 100 // Délai pour éviter le chargement lors du scroll rapide
+    loadDelay: 100,
   };
-  
+
   // Map pour stocker les timeouts
   const loadTimeouts = new Map();
-  
-  // Créer l'observer
+
+  // Fonction pour charger une image
+  function loadImage(img) {
+    // Pour les images avec data-src
+    if (img.dataset.src) {
+      const tempImg = new Image();
+      tempImg.onload = function handleImageLoad() {
+        const imageElement = img;
+        imageElement.src = imageElement.dataset.src;
+        imageElement.classList.add('lazy-loaded');
+        delete imageElement.dataset.src;
+
+        if (imageElement.dataset.bg === 'true') {
+          imageElement.style.backgroundImage = `url(${imageElement.src})`;
+        }
+      };
+      tempImg.src = img.dataset.src;
+    }
+
+    if (img.dataset.srcset) {
+      const imageElement = img;
+      imageElement.srcset = imageElement.dataset.srcset;
+      delete imageElement.dataset.srcset;
+    }
+  }
+
+  // Créer l'observer après la définition de loadImage
   const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const img = entry.target;
-        
-        // Utiliser un timeout pour éviter le chargement lors du scroll rapide
         const timeout = setTimeout(() => {
           loadImage(img);
           observer.unobserve(img);
           loadTimeouts.delete(img);
         }, config.loadDelay);
-        
         loadTimeouts.set(img, timeout);
-      } else {
-        // Annuler le chargement si l'image sort du viewport avant le délai
-        if (loadTimeouts.has(entry.target)) {
-          clearTimeout(loadTimeouts.get(entry.target));
-          loadTimeouts.delete(entry.target);
-        }
+      } else if (loadTimeouts.has(entry.target)) {
+        clearTimeout(loadTimeouts.get(entry.target));
+        loadTimeouts.delete(entry.target);
       }
     });
   }, config);
-  
-  // Fonction pour charger une image
-  function loadImage(img) {
-    // Pour les images avec data-src
-    if (img.dataset.src) {
-      // Précharger l'image
-      const tempImg = new Image();
-      tempImg.onload = function() {
-        img.src = img.dataset.src;
-        img.classList.add('lazy-loaded');
-        delete img.dataset.src;
-        
-        // Si c'est une image de fond
-        if (img.dataset.bg === 'true') {
-          img.style.backgroundImage = `url(${img.src})`;
-        }
-      };
-      tempImg.src = img.dataset.src;
-    }
-    
-    // Pour les images avec srcset
-    if (img.dataset.srcset) {
-      img.srcset = img.dataset.srcset;
-      delete img.dataset.srcset;
-    }
-  }
-  
+
   // Observer pour les vidéos
-  const videoObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
       const video = entry.target;
-      
+
       if (entry.isIntersecting) {
-        // Charger la vidéo si elle entre dans le viewport
         if (!video.src && video.dataset.src) {
-          video.src = video.dataset.src;
-          video.load();
-          delete video.dataset.src;
+          const videoElement = video;
+          videoElement.src = videoElement.dataset.src;
+          videoElement.load();
+          delete videoElement.dataset.src;
         }
-        
-        // Auto-play pour les vidéos en boucle muettes
+
         if (video.muted && video.loop && video.paused) {
-          video.play().catch(e => console.log('Autoplay prevented:', e));
+          video.play().catch(() => {
+            // Autoplay prevented - this is expected behavior
+          });
         }
-      } else {
-        // Mettre en pause si hors viewport pour économiser les ressources
-        if (!video.paused && video.muted && video.loop) {
-          video.pause();
-        }
+      } else if (!video.paused && video.muted && video.loop) {
+        video.pause();
       }
     });
   }, {
     rootMargin: '0px',
-    threshold: 0.25 // La vidéo doit être visible à 25% pour démarrer
+    threshold: 0.25,
   });
-  
+
   // Fonction pour initialiser le lazy loading
   function initLazyLoading() {
-    // Images avec lazy loading natif du navigateur comme fallback
     const images = document.querySelectorAll('img[loading="lazy"]');
-    images.forEach(img => {
-      // Si le navigateur ne supporte pas loading="lazy"
+    images.forEach((img) => {
       if (!('loading' in HTMLImageElement.prototype)) {
         imageObserver.observe(img);
       }
     });
-    
-    // Images avec data-src (pour un contrôle plus précis)
+
     const lazyImages = document.querySelectorAll('img[data-src]');
-    lazyImages.forEach(img => imageObserver.observe(img));
-    
-    // Vidéos
+    lazyImages.forEach((img) => imageObserver.observe(img));
+
     const videos = document.querySelectorAll('video[data-src], video:not([data-no-lazy])');
-    videos.forEach(video => {
-      video.preload = 'none'; // Ne pas précharger par défaut
-      videoObserver.observe(video);
+    videos.forEach((video) => {
+      const videoElement = video;
+      videoElement.preload = 'none';
+      videoObserver.observe(videoElement);
     });
   }
-  
+
   // Optimisation des images de hero
   function optimizeHeroImages() {
     const heroImages = document.querySelectorAll('.hero-videos video, [data-hero-image]');
-    heroImages.forEach(media => {
+    heroImages.forEach((media) => {
       if (media.tagName === 'VIDEO') {
-        // Pour les vidéos hero, précharger seulement les métadonnées
-        media.preload = 'metadata';
-        
-        // Charger progressivement après le chargement initial
+        const videoElement = media;
+        videoElement.preload = 'metadata';
+
         if (document.readyState === 'complete') {
           setTimeout(() => {
-            media.preload = 'auto';
-            media.load();
+            videoElement.preload = 'auto';
+            videoElement.load();
           }, 1000);
         }
       }
     });
   }
-  
+
   // Optimisation des images de produits
   function optimizeProductImages() {
     const productImages = document.querySelectorAll('.card-product img, .product-media');
-    productImages.forEach(img => {
-      // Ajouter des dimensions si manquantes pour éviter le layout shift
-      if (!img.width && img.naturalWidth) {
-        img.width = img.naturalWidth;
-      }
-      if (!img.height && img.naturalHeight) {
-        img.height = img.naturalHeight;
-      }
-      
-      // Utiliser decoding async pour ne pas bloquer le thread principal
-      img.decoding = 'async';
+    productImages.forEach((img) => {
+      const imageElement = img;
+      imageElement.loading = 'lazy';
+      imageElement.decoding = 'async';
     });
   }
-  
-  // Préchargement intelligent des images critiques
-  function preloadCriticalImages() {
-    // Précharger le logo et les premières images visibles
-    const criticalImages = [
-      '/images/optimized-modern/webp/brand-geekndragon-main.webp',
-      '/images/optimized-modern/webp/cartes-equipement.webp',
-      '/images/optimized-modern/webp/coin-copper-10.webp',
-      '/images/optimized-modern/webp/triptyque-fiche.webp'
-    ];
-    
-    criticalImages.forEach(src => {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = src;
-      document.head.appendChild(link);
-    });
-  }
-  
+
   // Initialisation
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLazyLoading);
+    document.addEventListener('DOMContentLoaded', () => {
+      initLazyLoading();
+      optimizeHeroImages();
+      optimizeProductImages();
+    });
   } else {
     initLazyLoading();
-  }
-  
-  // Optimisations supplémentaires après le chargement complet
-  window.addEventListener('load', () => {
     optimizeHeroImages();
     optimizeProductImages();
-  });
-  
-  // Précharger les images critiques immédiatement
-  preloadCriticalImages();
-  
-  // Nettoyer les timeouts lors du déchargement de la page
-  window.addEventListener('beforeunload', () => {
-    loadTimeouts.forEach(timeout => clearTimeout(timeout));
-    loadTimeouts.clear();
-  });
-})();
+  }
+}());
