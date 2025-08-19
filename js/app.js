@@ -15,18 +15,15 @@
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Logging seulement en développement
+  // Logging sécurisé avec fallback
   const log = (...args) => { 
-    const isDevelopment = window.location.hostname === 'localhost' || 
-                         window.location.hostname.includes('127.0.0.1') ||
-                         window.location.search.includes('debug=1');
-                         
-    if (isDevelopment) {
-      try { 
-        if (typeof console !== 'undefined' && console.log) {
-          console.log('[GD]', ...args); 
-        }
-      } catch (error) {
+    try { 
+      if (typeof console !== 'undefined' && console.log) {
+        console.log('[GD]', ...args); 
+      }
+    } catch (error) {
+      // En mode développement, on peut vouloir voir l'erreur
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         console.warn('[GD] Logging error:', error);
       }
     }
@@ -186,12 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function loadTranslations(current) {
     fetch(`/translations/${current}.json`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-        }
-        return res.json();
-      })
+      .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (!data) return;
         window.i18n = data;
@@ -242,10 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
       })
-      .catch((error) => {
-        log('Erreur lors du chargement des traductions:', error);
-        // Fallback silencieux en cas d'erreur - cacher le switcher si erreur
-        const switcher = document.querySelector('.lang-switcher');
+      .catch(() => {
         if (switcher) switcher.classList.add('hidden');
       });
   }

@@ -57,13 +57,22 @@ $products = array_merge($pieces, $cards, $triptychs);
 <?php include 'head-common.php'; ?>
 
 <body>
-<?php include 'header.php'; ?>
+<?php
+$snipcartLanguage = $lang;
+$snipcartLocales = 'fr,en';
+$snipcartAddProductBehavior = 'overlay';
+ob_start();
+include 'snipcart-init.php';
+$snipcartInit = ob_get_clean();
+include 'header.php';
+echo $snipcartInit;
+?>
 
 <main id="main" class="pt-[calc(var(--header-height))]">
   <div class="w-full" style="height:1px; background-color: var(--boutique-primary); margin-top:-1px;"></div>
   <!-- ===== HERO PREMIUM ===== -->
   <section class="hero-boutique">
-    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:0" data-main="videos/video-fountain-12.mp4" data-videos='["videos/video-card-preview.mp4","videos/video-fountain-6.mp4","videos/trip2.mp4","videos/video-fountain-7.mp4","videos/cartearme.mp4","videos/video-fountain-8.mp4","videos/video-fountain-9.mp4","videos/video-fountain-4.mp4"]'></div>
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:0" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60" style="z-index:1"></div>
     <div class="hero-content animate-fade-in-up" style="z-index:2">
       <h1 class="hero-title" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
@@ -127,7 +136,7 @@ $products = array_merge($pieces, $cards, $triptychs);
         <div class="mt-8 flex justify-center">
           <div class="relative group rounded-lg overflow-hidden" style="width: 420px;">
             <video id="video4" 
-                   src="videos/video-demo-game.mp4" 
+                   src="videos/es-tu-game-demo.mp4" 
                    class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
                    playsinline 
                    preload="metadata">
@@ -273,9 +282,9 @@ $products = array_merge($pieces, $cards, $triptychs);
           </div>
 
           <div class="feature-card">
-            <img src="/images/optimized-modern/webp/carte-propriete.webp"
-                 alt="Carte de propriété - Système de traçabilité"
-                 class="property-image rounded"
+            <img src="images/carte_propriete.png" 
+                 alt="Carte de propriété - Système de traçabilité" 
+                 class="property-image"
                  data-gallery="features"
                  style="width: 100%; height: auto; margin: 0 auto 1rem auto; display: block;">
             <h4 class="feature-title">Carte de propriété</h4>

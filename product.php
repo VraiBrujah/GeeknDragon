@@ -5,26 +5,7 @@ require __DIR__ . '/i18n.php';
 
 $active = 'boutique';
 $id = preg_replace('/[^a-z0-9_-]/i', '', $_GET['id'] ?? '');
-
-// Chargement des produits avec gestion d'erreurs
-$data = [];
-try {
-    $jsonContent = file_get_contents(__DIR__ . '/data/products.json');
-    if ($jsonContent === false) {
-        throw new Exception('Impossible de lire le fichier products.json');
-    }
-    
-    $data = json_decode($jsonContent, true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        throw new Exception('Erreur JSON: ' . json_last_error_msg());
-    }
-    
-    $data = $data ?? [];
-} catch (Exception $e) {
-    error_log('Erreur lors du chargement des produits: ' . $e->getMessage());
-    $data = [];
-}
-
+$data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
 $snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
 
 if (!$id || !isset($data[$id])) {
