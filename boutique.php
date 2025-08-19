@@ -273,9 +273,9 @@ $products = array_merge($pieces, $cards, $triptychs);
           </div>
 
           <div class="feature-card">
-            <img src="/images/optimized-modern/webp/carte-propriete.webp" 
-                 alt="Carte de propriété - Système de traçabilité" 
-                 class="property-image"
+            <img src="/images/optimized-modern/webp/carte-propriete.webp"
+                 alt="Carte de propriété - Système de traçabilité"
+                 class="property-image rounded"
                  data-gallery="features"
                  style="width: 100%; height: auto; margin: 0 auto 1rem auto; display: block;">
             <h4 class="feature-title">Carte de propriété</h4>

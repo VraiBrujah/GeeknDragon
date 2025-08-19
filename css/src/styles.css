@@ -5,8 +5,10 @@
 @tailwind utilities;
 
 @layer base {
-  img {
-    @apply border border-gray-300 rounded-md;
+  /* Optional bordered rounded images */
+  img.rounded {
+    @apply rounded-md;
+    border: 2px solid var(--rounded-border-color, rgba(255, 255, 255, 0.1));
   }
 }
 
