@@ -62,9 +62,9 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         <div class="text-center">
           <p class="mb-8 txt-court">
             <span class="payment-icons">
-              <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-              <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-              <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
+              <img src="/images/payments/visa.svg" alt="Logo Visa" class="h-8 w-auto" loading="lazy">
+              <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" class="h-8 w-auto" loading="lazy">
+              <img src="/images/payments/american-express.svg" alt="Logo American Express" class="h-8 w-auto" loading="lazy">
             </span>
           </p>
           <div class="flex flex-col md:flex-row gap-6 justify-center">
