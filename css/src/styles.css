@@ -28,3 +28,15 @@ h5,
 h6 {
   font-family: var(--font-heading);
 }
+
+/* Payment method icons in shop section */
+.payment-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-icons img {
+  height: 24px;
+  width: auto;
+}
