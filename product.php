@@ -218,7 +218,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
       <?php endif; ?>
 
       <p class="mt-4 text-center txt-court">
-        <span class="payment-icons inline-flex gap-2 align-middle">
+        <span class="payment-icons">
           <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
           <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
           <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
