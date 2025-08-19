@@ -1,6 +1,18 @@
 <?php
 
+// Headers de sécurité
 header('Permissions-Policy: payment=(self)');
+header('X-Frame-Options: DENY');
+header('X-Content-Type-Options: nosniff');
+header('X-XSS-Protection: 1; mode=block');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+header('Content-Security-Policy: default-src \'self\'; img-src \'self\' data: https:; script-src \'self\' \'unsafe-inline\' https://js.snipcart.com; style-src \'self\' \'unsafe-inline\' https://fonts.googleapis.com; font-src \'self\' https://fonts.gstatic.com; connect-src \'self\' https://app.snipcart.com; frame-src https://js.snipcart.com');
+
+// Configuration des erreurs et logging  
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/error_log');
 
 require_once __DIR__ . '/vendor/erusev/parsedown/Parsedown.php';
 

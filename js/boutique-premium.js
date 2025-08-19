@@ -547,7 +547,10 @@
     // Vérifier que nous sommes sur la page boutique
     if (!document.querySelector('.hero-boutique')) return;
 
-    console.log('[Boutique Premium] Initialisation...');
+    // Initialisation en mode debug seulement
+    if (window.location.hostname === 'localhost' || window.location.search.includes('debug=1')) {
+      console.log('[Boutique Premium] Initialisation...');
+    }
 
     // Initialiser tous les modules
     new ScrollAnimations();
@@ -578,7 +581,10 @@
     `;
     document.head.appendChild(animationStyles);
 
-    console.log('[Boutique Premium] ✅ Initialisé avec succès');
+    // Log de succès en mode debug seulement
+    if (window.location.hostname === 'localhost' || window.location.search.includes('debug=1')) {
+      console.log('[Boutique Premium] ✅ Initialisé avec succès');
+    }
   }
 
   // Démarrer quand le DOM est prêt

@@ -16,7 +16,8 @@
       "Bash(node:*)",
       "WebFetch(domain:localhost)",
       "Bash(start http://localhost:8000/test-cart.html)",
-      "Bash(start http://localhost:8000/test-complete-system.html)"
+      "Bash(start http://localhost:8000/test-complete-system.html)",
+      "Bash(npm run lint)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

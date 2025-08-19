@@ -24,7 +24,10 @@
     info: (message, data = null) => {
       if (CONFIG.debug) {
         // eslint-disable-next-line no-console
-        console.log(`[GD-Cart] ${message}`, data || '');
+        // Logging en mode développement seulement
+        if (window.location.hostname === 'localhost' || window.location.search.includes('debug=1')) {
+          console.log(`[GD-Cart] ${message}`, data || '');
+        }
       }
     },
     warn: (message, data = null) => {
@@ -876,6 +879,9 @@
     if (!productsData) {
       try {
         const response = await fetch('/data/products.json');
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
         productsData = await response.json();
       } catch (error) {
         logger.warn('Erreur lors du chargement de products.json:', error);
@@ -1815,8 +1821,11 @@
         body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
-        const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
         const newRates = data.rates || [];
         checkoutState.shipping.rates = newRates;
         logger.info('Tarifs de livraison reçus:', data);
@@ -1884,14 +1893,14 @@
         body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        checkoutState.taxes.amount = data.taxes?.reduce((sum, tax) => sum + tax.amount, 0) || 0;
-        checkoutState.taxes.details = data.taxes || [];
-        logger.info('Taxes calculées:', data);
-      } else {
-        throw new Error('Erreur lors du calcul des taxes');
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
+      
+      const data = await response.json();
+      checkoutState.taxes.amount = data.taxes?.reduce((sum, tax) => sum + tax.amount, 0) || 0;
+      checkoutState.taxes.details = data.taxes || [];
+      logger.info('Taxes calculées:', data);
     } catch (error) {
       logger.error('Erreur lors du calcul des taxes:', error);
       // Fallback avec calcul de taxes par défaut pour le Québec
