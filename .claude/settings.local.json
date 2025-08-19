@@ -17,7 +17,9 @@
       "WebFetch(domain:localhost)",
       "Bash(start http://localhost:8000/test-cart.html)",
       "Bash(start http://localhost:8000/test-complete-system.html)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm run bundle:css:*)",
+      "Bash(npm run:*)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

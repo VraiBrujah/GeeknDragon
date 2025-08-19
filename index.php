@@ -29,46 +29,51 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
             <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-5 w-auto" loading="lazy">
           </div>
 <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
-            Visiter la boutique
+            Découvrir nos trésors
           </a>
       </div>
     </section>
 
     <!-- ===== BOUTIQUE & PRODUITS ===== -->
-    <section id="produits" class="py-24 bg-gray-900/80 scroll-mt-24">
+    <section id="produits" class="section-spacing bg-gray-900/80 scroll-mt-24" aria-labelledby="products-heading">
     <span id="boutique"></span>
       <div class="max-w-6xl mx-auto px-6">
-        <h3 class="text-4xl font-bold text-center mb-4" data-i18n="nav.shop">Boutique</h3>
-        <p class="text-xl text-center mb-12 text-gray-300" data-i18n="home.mustHave.heading">Nos Incontournables</p>
+        <h2 id="products-heading" class="text-center mb-4" data-i18n="nav.shop">Boutique</h2>
+        <p class="text-xl text-center mb-12 text-secondary" data-i18n="home.mustHave.heading">Nos Incontournables</p>
         
-        <div class="grid md:grid-cols-3 gap-10 mb-12">
-          <a href="<?= langUrl('boutique.php#cartes') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
-            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d'équipement</h4>
-            <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d'équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
-              <img src="/images/optimized-modern/webp/cartes-equipement.webp" alt="560 cartes d'équipement illustrées" class="rounded mb-4" loading="lazy">
-          </a>
-          <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
-            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
-            <p class="text-center" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
-              <img src="/images/optimized-modern/webp/coin-copper-10.webp" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
-          </a>
-          <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
-            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>
-            <p class="text-center" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
-              <img src="/images/optimized-modern/webp/triptyque-fiche.webp" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
-          </a>
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <article class="bg-gray-800 p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
+            <img src="/images/optimized-modern/webp/cartes-equipement.webp" alt="560 cartes d'équipement illustrées" class="rounded mb-4 w-full" loading="lazy">
+            <h3 class="text-center mb-3" data-i18n="home.mustHave.equipment.title">Cartes d'équipement</h3>
+            <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.equipment.desc">560 cartes d'équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
+            <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-outline w-full" aria-label="Voir les cartes d'équipement">
+              Découvrir
+            </a>
+          </article>
+          
+          <article class="bg-gray-800 p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
+            <img src="/images/optimized-modern/webp/coin-copper-10.webp" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4 w-full" loading="lazy">
+            <h3 class="text-center mb-3" data-i18n="home.mustHave.coins.title">Pièces métalliques</h3>
+            <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
+            <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-outline w-full" aria-label="Voir les pièces métalliques">
+              Découvrir
+            </a>
+          </article>
+          
+          <article class="bg-gray-800 p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
+            <img src="/images/optimized-modern/webp/triptyque-fiche.webp" alt="Fiche de personnage triptyque rigide" class="rounded mb-4 w-full" loading="lazy">
+            <h3 class="text-center mb-3" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h3>
+            <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
+            <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-outline w-full" aria-label="Voir les fiches triptyques">
+              Découvrir
+            </a>
+          </article>
         </div>
 
         <div class="text-center">
-          <div class="flex flex-col md:flex-row gap-6 justify-center">
-            <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
-              Visiter la boutique complète
-            </a>
-            <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">
-              Demander un devis
-            </a>
-          </div>
-
+          <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+            Visiter la boutique complète
+          </a>
         </div>
       </div>
     </section>
