@@ -60,13 +60,6 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         </div>
 
         <div class="text-center">
-          <p class="mb-8 txt-court">
-            <span class="payment-icons">
-              <img src="/images/payments/visa.svg" alt="Logo Visa" class="h-8 w-auto" loading="lazy">
-              <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" class="h-8 w-auto" loading="lazy">
-              <img src="/images/payments/american-express.svg" alt="Logo American Express" class="h-8 w-auto" loading="lazy">
-            </span>
-          </p>
           <div class="flex flex-col md:flex-row gap-6 justify-center">
             <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
               Visiter la boutique complète
@@ -75,6 +68,13 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               Demander un devis
             </a>
           </div>
+          <p class="mt-4 txt-court">
+            <span class="payment-icons">
+              <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
+              <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
+              <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
+            </span>
+          </p>
         </div>
       </div>
     </section>

@@ -31,12 +31,9 @@ h6 {
 
 /* Payment method icons in shop section */
 .payment-icons {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  @apply inline-flex items-center gap-2;
 }
 
 .payment-icons img {
-  height: 24px;
-  width: auto;
+  @apply h-6 w-auto;
 }
