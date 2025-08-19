@@ -1723,6 +1723,8 @@
       checkoutState.step = 2;
       renderCheckoutStep();
       await loadShippingRates();
+      // Réactualiser l'étape pour afficher les tarifs obtenus
+      renderCheckoutStep();
     } else if (checkoutState.step === 2) {
       // Valider la méthode de livraison
       if (!checkoutState.shipping.method) {
@@ -1776,8 +1778,10 @@
 
   /**
    * Charger les tarifs de livraison depuis Snipcart
-   */
+  */
   async function loadShippingRates() {
+    const previousRates = JSON.stringify(checkoutState.shipping.rates);
+
     try {
       const shippingAddress = checkoutState.addresses.sameAsbilling
         ? checkoutState.addresses.billing
@@ -1813,15 +1817,19 @@
 
       if (response.ok) {
         const data = await response.json();
-        checkoutState.shipping.rates = data.rates || [];
+        const newRates = data.rates || [];
+        checkoutState.shipping.rates = newRates;
         logger.info('Tarifs de livraison reçus:', data);
+        if (JSON.stringify(newRates) !== previousRates) {
+          renderCheckoutStep();
+        }
       } else {
         throw new Error('Erreur lors du chargement des tarifs de livraison');
       }
     } catch (error) {
       logger.error('Erreur lors du chargement des tarifs:', error);
       // Fallback avec tarifs par défaut
-      checkoutState.shipping.rates = [
+      const fallbackRates = [
         {
           cost: 0,
           description: 'Livraison gratuite (Québec)',
@@ -1835,6 +1843,10 @@
           method: 'standard',
         },
       ];
+      checkoutState.shipping.rates = fallbackRates;
+      if (JSON.stringify(fallbackRates) !== previousRates) {
+        renderCheckoutStep();
+      }
     }
   }
 
