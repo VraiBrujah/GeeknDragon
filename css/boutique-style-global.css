@@ -107,6 +107,7 @@ article.bg-gray-800:hover {
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
 }
 
 .btn-primary::before,
@@ -125,6 +126,7 @@ article.bg-gray-800:hover {
 .btn-shop:hover {
   transform: translateY(-2px) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), 0 0 20px rgba(139, 92, 246, 0.3) !important;
+  border-radius: 8px !important;
 }
 
 .btn-primary:hover::before,
@@ -132,16 +134,27 @@ article.bg-gray-800:hover {
   left: 100%;
 }
 
+.btn-primary:focus,
+.btn-shop:focus {
+  border-radius: 8px !important;
+}
+
 .btn-outline {
   border: 2px solid #818cf8 !important;
   background: transparent !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border-radius: 8px !important;
 }
 
 .btn-outline:hover {
   background: rgba(129, 140, 248, 0.1) !important;
   transform: translateY(-3px) scale(1.05) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 8px !important;
+}
+
+.btn-outline:focus {
+  border-radius: 8px !important;
 }
 
 /* =================================================================== */
