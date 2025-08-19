@@ -20,7 +20,7 @@ $ogImage = '/images/optimized-modern/webp/es-tu-game-demo.webp';
 
         <!-- Article complet : Es-tu Game ? -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg">
-          <img loading="lazy" src="/images/optimized-modern/webp/es-tu-game-demo.webp" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
+          <img loading="lazy" src="/images/optimized-modern/webp/es-tu-game-demo.webp" class="mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
 
           <h1 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h1>
 

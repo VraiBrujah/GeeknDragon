@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  img {
+    @apply border border-gray-300 rounded-md;
+  }
+}
+
 :root {
   --font-heading: 'Cinzel', serif;
 }
