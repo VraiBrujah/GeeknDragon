@@ -143,6 +143,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         <!-- Carte de contact avec effet premium -->
         <div style="background: linear-gradient(145deg, #1e293b 0%, #334155 100%); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 20px; padding: 3rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(139, 92, 246, 0.1); margin: 2rem auto; max-width: 600px;">
           
+		  
           <!-- Photo avec bordure lumineuse -->
           <div style="position: relative; display: inline-block; margin-bottom: 2rem;">
             <img src="/images/optimized-modern/webp/team-brujah.webp" alt="Brujah" class="rounded h-48 w-48" loading="lazy">
