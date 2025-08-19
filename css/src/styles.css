@@ -35,5 +35,5 @@ h6 {
 }
 
 .payment-icons img {
-  @apply h-6 w-auto;
+  @apply h-4 w-auto;
 }
