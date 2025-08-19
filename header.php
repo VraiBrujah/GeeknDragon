@@ -79,7 +79,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   <div class="max-w-7xl mx-auto relative flex flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
     <!-- Logo à gauche -->
     <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex items-center group transition-colors duration-200 flex-shrink-0">
-      <img src="/images/optimized-modern/webp/brand-geekndragon-white.webp" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105" width="200" height="200">
+      <img src="/images/optimized-modern/webp/brand-geekndragon-white.webp" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105 rounded" style="--rounded-border-color: transparent;" width="200" height="200">
     </a>
 
     <!-- Titre centré -->
