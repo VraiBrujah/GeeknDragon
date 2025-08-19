@@ -3,7 +3,12 @@ module.exports = {
   content: ["./**/*.{php,html,js}", "!./node_modules/**"],
   safelist: ['z-[1200]'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        body: ['"EB Garamond"', 'serif'],
+        title: ['"Cinzel"', 'serif'],
+      },
+    },
   },
   plugins: [],
 }
