@@ -1,6 +1,8 @@
 <?php
 // Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
 
+require_once __DIR__ . '/../includes/video-utils.php';
+
 if (!isset($product['id'])) {
     return;
 }
@@ -15,6 +17,7 @@ $desc        = $summary ?? ($lang === 'en'
     : $product['description']);
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $isVideo     = preg_match('/\.mp4$/i', $img);
+$posterPath  = $isVideo ? generateVideoPoster($img) : null;
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 
@@ -45,8 +48,9 @@ $isInStock = inStock($id);
   <!-- Média du produit -->
   <a href="<?= htmlspecialchars($url) ?>" class="product-media-container">
     <?php if ($isVideo) : ?>
-      <video src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-             class="product-media" autoplay muted loop playsinline></video>
+      <video data-src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+             <?php if ($posterPath) : ?>poster="<?= htmlspecialchars($posterPath) ?>"<?php endif; ?>
+             class="product-media lazy-video" muted loop playsinline preload="metadata"></video>
     <?php else : ?>
       <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
            alt="<?= htmlspecialchars($desc) ?>"
@@ -114,7 +118,7 @@ $isInStock = inStock($id);
   </div>
 </div>
 
-<!-- Script pour la gestion des quantités -->
+<!-- Script pour la gestion des quantités et lazy-loading -->
 <script>
 (function(){
   if (window.__premiumCardPatch) return;
@@ -156,6 +160,31 @@ $isInStock = inStock($id);
       if (!isNaN(q) && q > 0) btn.setAttribute('data-quantity', String(q));
     }
   }, { passive: true });
+
+  // Lazy-loading des vidéos avec IntersectionObserver
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const video = entry.target;
+        const src = video.getAttribute('data-src');
+        if (src) {
+          video.src = src;
+          video.autoplay = true;
+          video.removeAttribute('data-src');
+          video.classList.remove('lazy-video');
+          videoObserver.unobserve(video);
+        }
+      }
+    });
+  }, {
+    rootMargin: '50px 0px',
+    threshold: 0.1
+  });
+
+  // Observer toutes les vidéos lazy
+  document.querySelectorAll('.lazy-video').forEach(video => {
+    videoObserver.observe(video);
+  });
 
   // Animation d'apparition au scroll
   const observerOptions = {

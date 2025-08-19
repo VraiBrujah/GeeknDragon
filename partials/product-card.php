@@ -1,6 +1,8 @@
 <?php
 // Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
 
+require_once __DIR__ . '/../includes/video-utils.php';
+
 if (!isset($product['id'])) {
     return;
 }
@@ -10,6 +12,7 @@ $name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $pro
 $desc        = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $isVideo     = preg_match('/\.mp4$/i', $img);
+$posterPath  = $isVideo ? generateVideoPoster($img) : null;
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
@@ -30,8 +33,9 @@ $isInStock = inStock($id);
   <a href="<?= htmlspecialchars($url) ?>" class="block">
     <div class="product-media-wrapper mb-4">
       <?php if ($isVideo) : ?>
-        <video src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-               class="product-media" autoplay muted loop playsinline></video>
+        <video data-src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+               <?php if ($posterPath) : ?>poster="<?= htmlspecialchars($posterPath) ?>"<?php endif; ?>
+               class="product-media lazy-video" muted loop playsinline preload="metadata"></video>
       <?php else : ?>
         <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
              alt="<?= htmlspecialchars($desc) ?>"
@@ -94,12 +98,13 @@ $isInStock = inStock($id);
   </div>
 </div>
 
-<!-- Petit patch local si la page liste n'inclut pas déjà le listener global -->
+<!-- Patch local pour quantités et lazy-loading vidéos -->
 <script>
 (function(){
   if (window.__gdQtyPatch) return;
   window.__gdQtyPatch = true;
 
+  // Gestion des clics pour les quantités
   document.addEventListener('click', function (e) {
     const btn = e.target.closest('.gd-add-to-cart');
     if (!btn) return;
@@ -124,5 +129,30 @@ $isInStock = inStock($id);
       btn.setAttribute('data-name', mult !== '1' ? baseName + ' x' + mult : baseName);
     }
   }, { passive: true });
+
+  // Lazy-loading des vidéos avec IntersectionObserver
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const video = entry.target;
+        const src = video.getAttribute('data-src');
+        if (src) {
+          video.src = src;
+          video.autoplay = true;
+          video.removeAttribute('data-src');
+          video.classList.remove('lazy-video');
+          videoObserver.unobserve(video);
+        }
+      }
+    });
+  }, {
+    rootMargin: '50px 0px',
+    threshold: 0.1
+  });
+
+  // Observer toutes les vidéos lazy
+  document.querySelectorAll('.lazy-video').forEach(video => {
+    videoObserver.observe(video);
+  });
 })();
 </script>
