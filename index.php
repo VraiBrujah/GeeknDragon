@@ -99,15 +99,15 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <img src="/images/optimized-modern/webp/avisJoueurFlim2025.webp" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-4" data-i18n="testimonials.quote1.title">« Finis les combats contre nos feuilles de personnage ! »</h4>
           <p class="text-lg leading-relaxed text-gray-200" data-i18n="testimonials.quote1.intro">
-            De nombreux joueurs présents l’affirment : les pièces physiques changent tout.
+            De nombreux joueurs le confirment : les pièces physiques changent tout.
           </p>
 
           <p class="text-lg leading-relaxed text-gray-200" data-i18n="testimonials.quote1.p1">
-    Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sentait le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, c’était tout le corps qui réagissait : la main qui hésite, l’œil qui soupèse, la gorge qui sèche. Le trésor prenait chair. Il devenait enjeu dramatique, émotion viscérale, c’est un événement, un souvenir marquant...
+    Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sent le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, tout le corps réagit : la main hésite, l’œil soupèse, la gorge se serre. Le trésor prend chair. Il devient enjeu dramatique, émotion viscérale, souvenir marquant.
   </p>
 
           <p class="text-lg mt-4 leading-relaxed text-gray-200">
-            <strong data-i18n="testimonials.quote1.p2strong">Fini les combats contre les feuilles de perso</strong>, <span data-i18n="testimonials.quote1.p2rest">les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la pièce tombe sur la table.</span>
+            <strong data-i18n="testimonials.quote1.p2strong">Finies aussi les batailles contre les feuilles de personnage</strong>, <span data-i18n="testimonials.quote1.p2rest">les recherches interminables dans les manuels pendant que les autres décrochent… ou encore les sessions 0 qui s’étirent. La « session 0 », c’est ce moment censé préparer le jeu : on crée les personnages, on définit les règles, on équipe les héros. Mais souvent, elle s’allonge en « 0.1 », « 0.2 », « 0.3 »… plusieurs soirées passées à remplir des cases plutôt qu’à vivre des aventures.<br><br>Avec Geek & Dragon, tout change : plus besoin d’administratif à rallonge. L’aventure commence au premier cling quand la pièce tombe sur la table.</span>
           </p>
         </article>
 
