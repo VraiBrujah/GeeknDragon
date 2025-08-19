@@ -68,13 +68,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               Demander un devis
             </a>
           </div>
-          <p class="mt-4 txt-court">
-            <span class="payment-icons">
-              <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-              <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-              <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
-            </span>
-          </p>
+
         </div>
       </div>
     </section>
