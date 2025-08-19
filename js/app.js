@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   if (!header) return;
   const setHeaderVars = () => {
-    const h = header.getBoundingClientRect().height || 96;
+    const h = header.getBoundingClientRect().height || 80;
     // utilisé par ton site
     document.documentElement.style.setProperty('--header-height', `${h - 5}px`);
     // utilisé par les éléments e-commerce (modales, résumés, etc.)
