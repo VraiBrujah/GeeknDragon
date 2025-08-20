@@ -8,7 +8,8 @@ class GeeknDragonCart {
         this.isOpen = false;
         this.items = new Map();
         this.apiEndpoint = '/api/cart';
-        
+        this.csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+
         this.init();
     }
     
@@ -179,7 +180,8 @@ class GeeknDragonCart {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-Token': this.csrfToken
                 },
                 body: JSON.stringify(item)
             });
@@ -236,7 +238,8 @@ class GeeknDragonCart {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-Token': this.csrfToken
                 },
                 body: JSON.stringify({
                     itemKey: itemKey,
@@ -289,7 +292,8 @@ class GeeknDragonCart {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-Token': this.csrfToken
                 },
                 body: JSON.stringify({ itemKey: itemKey })
             });
@@ -319,7 +323,8 @@ class GeeknDragonCart {
             const response = await fetch('/api/cart/clear', {
                 method: 'POST',
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-Token': this.csrfToken
                 }
             });
             
