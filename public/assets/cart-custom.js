@@ -18,12 +18,12 @@ class GeeknDragonCart {
      */
     init() {
         // Elements DOM
-        this.cartToggle = document.getElementById('gd-cart-toggle');
+        this.cartToggle = document.getElementById('gd-cart-toggle-widget');
         this.cartPanel = document.getElementById('gd-cart-panel');
         this.cartOverlay = document.getElementById('gd-cart-overlay');
         this.cartClose = document.getElementById('gd-cart-close');
         this.cartContent = document.getElementById('gd-cart-content');
-        this.cartCount = document.getElementById('gd-cart-count');
+        this.cartCount = document.getElementById('gd-cart-count-widget');
         this.cartTotal = document.getElementById('gd-cart-total');
         
         if (!this.cartToggle || !this.cartPanel) {
