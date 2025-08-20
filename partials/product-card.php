@@ -76,18 +76,19 @@ $isInStock = inStock($id);
       </div>
 
       <!-- Bouton ajouter -->
-      <button class="gd-add-to-cart btn btn-shop px-6 whitespace-nowrap"
-              data-id="<?= htmlspecialchars($id) ?>"
-              data-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-              data-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-              data-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-              data-price="<?= htmlspecialchars($price) ?>"
-              data-url="<?= htmlspecialchars($url) ?>"
-              data-quantity="1"
+      <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
+              data-base-name="<?= htmlspecialchars(strip_tags($name)) ?>"
+              data-item-id="<?= htmlspecialchars($id) ?>"
+              data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
+              data-item-price="<?= htmlspecialchars($price) ?>"
+              data-item-url="<?= htmlspecialchars($url) ?>"
+              data-item-description="<?= htmlspecialchars(strip_tags($desc)) ?>"
+              data-item-image="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+              data-item-quantity="1"
         <?php if (!empty($customOptions)) : ?>
-        data-custom1-name="<?= htmlspecialchars($customLabel) ?>"
-        data-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
-        data-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
+        data-item-custom1-name="<?= htmlspecialchars($customLabel) ?>"
+        data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
+        data-item-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
       <?php endif; ?>
       >
         <span data-i18n="product.add">Ajouter au sac</span>
@@ -106,27 +107,24 @@ $isInStock = inStock($id);
 
   // Gestion des clics pour les quantités
   document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.gd-add-to-cart');
+    const btn = e.target.closest('.snipcart-add-item');
     if (!btn) return;
 
-    const id = btn.getAttribute('data-id');
+    const id = btn.getAttribute('data-item-id');
     if (!id) return;
 
     const qtyEl = document.getElementById('qty-' + id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-quantity', String(q));
+      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
     }
 
     const multEl = document.getElementById('multiplier-' + id);
     if (multEl) {
       const mult = multEl.value;
-      btn.setAttribute('data-custom1-value', mult);
-      const lang = document.documentElement.lang;
-      const baseName = lang === 'en'
-        ? (btn.dataset.nameEn || btn.getAttribute('data-name'))
-        : (btn.dataset.nameFr || btn.getAttribute('data-name'));
-      btn.setAttribute('data-name', mult !== '1' ? baseName + ' x' + mult : baseName);
+      btn.setAttribute('data-item-custom1-value', mult);
+      const baseName = btn.getAttribute('data-base-name');
+      btn.setAttribute('data-item-name', mult !== '1' ? baseName + ' x' + mult : baseName);
     }
   }, { passive: true });
 

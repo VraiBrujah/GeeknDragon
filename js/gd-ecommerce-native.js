@@ -808,52 +808,6 @@
   // ========================================================================
 
   /**
-   * Gère l'ajout au panier depuis les boutons existants
-   */
-  async function handleAddToCartClick(event) {
-    // Chercher le bouton d'ajout au panier le plus proche
-    const button = event.target.closest('[data-id]');
-    if (!button) {
-      logger.info('🚫 Aucun bouton avec data-id trouvé');
-      return;
-    }
-
-    event.preventDefault();
-    logger.info('🖱️ Clic sur bouton ajout au panier:', button);
-
-    // Extraire les données du produit
-    const productData = {
-      id: button.dataset.id,
-      name: button.dataset.name || button.dataset.nameFr,
-      price: parseFloat(button.dataset.price),
-      quantity: parseInt(button.dataset.quantity, 10) || 1,
-      image: extractProductImage(button),
-      url: button.dataset.url || window.location.href,
-      variants: extractProductVariants(button),
-    };
-
-    const variantOptions = await getProductVariantOptions(productData.id);
-
-    if (!productData.variants.Multiplicateur && variantOptions.multipliers.length > 0) {
-      productData.variants.Multiplicateur = variantOptions.multipliers[0].trim();
-    }
-
-    if (!productData.variants.Langue && variantOptions.languages.length > 0) {
-      productData.variants.Langue = variantOptions.languages[0].trim();
-    }
-
-    logger.info('📦 Données produit extraites:', productData);
-
-    if (addToCart(productData)) {
-      // Feedback visuel
-      button.style.transform = 'scale(0.95)';
-      setTimeout(() => {
-        button.style.transform = 'scale(1)';
-      }, 100);
-    }
-  }
-
-  /**
    * Extrait l'image du produit depuis la page
    */
   function extractProductImage(button) {
@@ -1641,13 +1595,6 @@
       if (e.target.classList.contains('gd-account-tab')) {
         const tabName = e.target.dataset.tab;
         if (tabName) switchAccountTab(tabName);
-      }
-    });
-
-    // Ajout au panier (délégation d'événements)
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('.gd-add-to-cart, [data-id]')) {
-        handleAddToCartClick(e);
       }
     });
 

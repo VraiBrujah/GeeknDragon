@@ -197,18 +197,19 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
           </div>
         </div>
 
-        <button class="gd-add-to-cart btn btn-shop"
-            data-id="<?= htmlspecialchars($id) ?>"
-            data-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
-            data-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-            data-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-            data-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
-            data-url="<?= htmlspecialchars($metaUrl) ?>"
-            data-quantity="1"
+        <button class="snipcart-add-item btn btn-shop"
+            data-base-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
+            data-item-id="<?= htmlspecialchars($id) ?>"
+            data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
+            data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
+            data-item-url="<?= htmlspecialchars($metaUrl) ?>"
+            data-item-description="<?= htmlspecialchars($productDescText) ?>"
+            data-item-image="<?= !empty($images) ? '/' . ltrim(htmlspecialchars($images[0]), '/') : '' ?>"
+            data-item-quantity="1"
             <?php if (!empty($customOptions)) : ?>
-            data-custom1-name="<?= htmlspecialchars($customLabel) ?>"
-            data-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
-            data-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
+            data-item-custom1-name="<?= htmlspecialchars($customLabel) ?>"
+            data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
+            data-item-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
           <?php endif; ?>
         >
           <span data-i18n="product.add">Ajouter au sac</span>
@@ -394,31 +395,28 @@ document.addEventListener('DOMContentLoaded', function() {
   window.__gdQtyPatch = true;
 
   document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.gd-add-to-cart');
+    const btn = e.target.closest('.snipcart-add-item');
     if (!btn) return;
 
-    const id = btn.getAttribute('data-id');
+    const id = btn.getAttribute('data-item-id');
     if (!id) return;
 
     // Quantité
     const qtyEl = document.getElementById('qty-' + id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-quantity', String(q));
+      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
     }
 
     // Multiplicateur (si présent)
     const multEl = document.getElementById('multiplier-' + id);
     if (multEl) {
       const mult = multEl.value;
-      btn.setAttribute('data-custom1-value', mult);
+      btn.setAttribute('data-item-custom1-value', mult);
 
       // Mettre à jour le nom affiché dans le panier (optionnel)
-      const lang = document.documentElement.lang;
-      const baseName = (lang === 'en')
-        ? (btn.dataset.nameEn || btn.getAttribute('data-name'))
-        : (btn.dataset.nameFr || btn.getAttribute('data-name'));
-      btn.setAttribute('data-name', mult !== '1' ? (baseName + ' x' + mult) : baseName);
+      const baseName = btn.getAttribute('data-base-name');
+      btn.setAttribute('data-item-name', mult !== '1' ? (baseName + ' x' + mult) : baseName);
     }
   }, { passive: true });
 })();
