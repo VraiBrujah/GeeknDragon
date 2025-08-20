@@ -65,8 +65,8 @@
   /* Z-index */
   --gd-z-dropdown: 1000;
   --gd-z-sticky: 1020;
-  --gd-z-modal: 1050;
-  --gd-z-tooltip: 1070;
+  --gd-z-modal: 1250;
+  --gd-z-tooltip: 1270;
   /* Hauteur du header (valeur par défaut, mise à jour via JS) */
   --gd-header-h: 96px;
 }

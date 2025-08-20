@@ -7,7 +7,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const FADE_MS = 1000;
 
-  document.querySelectorAll('.hero-videos').forEach((container) => {
+  const containers = document.querySelectorAll('.hero-videos');
+  console.log('[Hero Videos] Found containers:', containers.length);
+
+  containers.forEach((container) => {
     // 1) Lire et valider la liste aléatoire + éventuelle vidéo principale
     let list = [];
     try {
@@ -20,9 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const mainSrc = (container.dataset.main || '').trim();
 
+    console.log('[Hero Videos] Container data:', {
+      main: mainSrc,
+      videos: container.dataset.videos,
+      list: list
+    });
+
     if (mainSrc && list.length === 0) {
       list = [mainSrc];
     } else if (!mainSrc && list.length === 0) {
+      console.log('[Hero Videos] No videos found, skipping container');
       return;
     }
 
