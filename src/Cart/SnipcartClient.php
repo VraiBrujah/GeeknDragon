@@ -16,6 +16,10 @@ class SnipcartClient
     
     public function __construct(string $apiKey, string $secretKey, bool $mockMode = false)
     {
+        if (empty($apiKey) || empty($secretKey)) {
+            throw new SnipcartException('Configuration Snipcart invalide');
+        }
+
         $this->apiKey = $apiKey;
         $this->secretKey = $secretKey;
         $this->mockMode = $mockMode;
@@ -122,7 +126,12 @@ class SnipcartClient
         if ($response === false) {
             throw new \RuntimeException("Erreur cURL Snipcart : {$error}");
         }
-        
+
+        if ($httpCode === 401 || $httpCode === 403) {
+            error_log("Snipcart API auth error {$httpCode} for {$endpoint}: {$response}");
+            throw new SnipcartException('Configuration Snipcart invalide', $httpCode);
+        }
+
         if ($httpCode >= 400) {
             error_log("Snipcart API error {$httpCode} for {$endpoint}: {$response}");
             throw new \RuntimeException("Erreur API Snipcart : {$httpCode}");
