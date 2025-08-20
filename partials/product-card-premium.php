@@ -92,7 +92,7 @@ $isInStock = inStock($id);
       </div>
 
       <!-- Bouton d'achat -->
-      <button class="snipcart-add-item add-to-cart-btn"
+      <button class="gd-add-to-cart add-to-cart-btn"
               data-item-id="<?= htmlspecialchars($id) ?>"
               data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
               data-item-price="<?= htmlspecialchars($price) ?>"

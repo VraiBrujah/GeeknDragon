@@ -76,7 +76,7 @@ $isInStock = inStock($id);
       </div>
 
       <!-- Bouton ajouter -->
-      <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
+      <button class="gd-add-to-cart btn btn-shop px-6 whitespace-nowrap"
               data-base-name="<?= htmlspecialchars(strip_tags($name)) ?>"
               data-item-id="<?= htmlspecialchars($id) ?>"
               data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"

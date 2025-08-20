@@ -51,6 +51,9 @@ $snipcartKey = $snipcartKey
   ?? $_ENV['SNIPCART_API_KEY']
   ?? $_SERVER['SNIPCART_API_KEY'];
 
+// Vérification des clés API en mode production
+$apiConfigured = !empty($snipcartKey) && !empty($_ENV['SNIPCART_SECRET_API_KEY'] ?? $_SERVER['SNIPCART_SECRET_API_KEY'] ?? '');
+
 if (!function_exists('renderNav')) {
 function renderNav(array $items, string $active, bool $mobile = false): void {
     foreach ($items as $href => $item) {
@@ -188,3 +191,33 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </div>
   </nav>
 </header>
+
+<?php if (!$apiConfigured): ?>
+<!-- Avertissement API non configurée -->
+<div id="api-warning" style="
+  position: fixed; 
+  top: var(--header-height, 96px); 
+  left: 0; 
+  right: 0; 
+  background: linear-gradient(45deg, #dc2626, #b91c1c); 
+  color: white; 
+  text-align: center; 
+  padding: 0.75rem; 
+  z-index: 1100;
+  font-family: 'Cinzel', serif;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+">
+  ⚠️ <strong>Configuration requise :</strong> Le système de panier nécessite la configuration des clés API.
+  <a href="/test-snipcart.php" style="color: #fbbf24; text-decoration: underline; margin-left: 0.5rem;">Tester la configuration</a>
+  <button onclick="this.parentElement.style.display='none'" style="
+    background: none; 
+    border: none; 
+    color: white; 
+    font-size: 1.25rem; 
+    float: right; 
+    cursor: pointer;
+    line-height: 1;
+  ">×</button>
+</div>
+<?php endif; ?>

@@ -197,7 +197,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
           </div>
         </div>
 
-        <button class="snipcart-add-item btn btn-shop"
+        <button class="gd-add-to-cart btn btn-shop"
             data-base-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
             data-item-id="<?= htmlspecialchars($id) ?>"
             data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.__gdQtyPatch = true;
 
   document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.snipcart-add-item');
+    const btn = e.target.closest('.gd-add-to-cart');
     if (!btn) return;
 
     const id = btn.getAttribute('data-item-id');

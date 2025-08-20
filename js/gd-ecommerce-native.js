@@ -16,7 +16,7 @@
     currencySymbol: '$',
     autoSave: true,
     analytics: false, // Respect RGPD
-    debug: false, // Mode debug (production: false)
+    debug: false, // Mode production
   };
 
   // Système de logging structuré
@@ -127,6 +127,29 @@
   }
 
   /**
+   * Anime le bouton du panier lors d'un ajout
+   */
+  function animateCartButton() {
+    if (elements.cartToggle) {
+      elements.cartToggle.style.transform = 'scale(1.1)';
+      elements.cartToggle.style.transition = 'transform 0.2s ease';
+      
+      setTimeout(() => {
+        elements.cartToggle.style.transform = '';
+      }, 200);
+    }
+    
+    if (elements.cartToggleMobile) {
+      elements.cartToggleMobile.style.transform = 'scale(1.1)';
+      elements.cartToggleMobile.style.transition = 'transform 0.2s ease';
+      
+      setTimeout(() => {
+        elements.cartToggleMobile.style.transform = '';
+      }, 200);
+    }
+  }
+
+  /**
    * Normalise et trie les variantes pour comparaison fiable
    */
   function normalizeVariants(variants = {}) {
@@ -200,6 +223,22 @@
   /**
    * Sauvegarde le panier dans le localStorage
    */
+  function saveCart() {
+    if (!CONFIG.autoSave) return false;
+    
+    try {
+      localStorage.setItem(CONFIG.storageKey, JSON.stringify(state.cart));
+      logger.info('💾 Panier sauvegardé');
+      return true;
+    } catch (error) {
+      logger.error('Erreur sauvegarde panier:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Sauvegarde le panier dans le localStorage
+   */
   const saveCart = debounce(() => {
     if (!CONFIG.autoSave) return;
 
@@ -224,6 +263,38 @@
       (total, item) => total + (item.price * item.quantity),
       0,
     );
+  }
+
+  /**
+   * Met à jour l'affichage du panier (badges, compteurs)
+   */
+  function updateCartDisplay() {
+    // Calculer les totaux
+    calculateCartTotals();
+
+    // Mettre à jour les badges de panier dans le header
+    if (elements.cartBadge) {
+      elements.cartBadge.textContent = state.cart.count;
+      elements.cartBadge.setAttribute('aria-label', `${state.cart.count} articles dans le panier`);
+    }
+    
+    if (elements.cartBadgeMobile) {
+      elements.cartBadgeMobile.textContent = state.cart.count;
+    }
+
+    // Mettre à jour l'état des boutons
+    if (elements.cartToggle) {
+      elements.cartToggle.setAttribute('aria-label', 
+        state.cart.count > 0 ? `Panier (${state.cart.count} articles)` : 'Panier vide'
+      );
+    }
+
+    // Note: la sauvegarde est gérée par saveCart() appelée séparément
+
+    logger.info('🔄 Affichage panier mis à jour:', { 
+      count: state.cart.count, 
+      total: state.cart.total 
+    });
   }
 
   /**
