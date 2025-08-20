@@ -2048,25 +2048,69 @@
       form.reportValidity();
       return;
     }
+    const total = state.cart.total + checkoutState.shipping.cost + checkoutState.taxes.amount;
 
     payButton.disabled = true;
     payButton.innerHTML = '⏳ Traitement en cours...';
     checkoutState.payment.processing = true;
 
     try {
-      await new Promise((resolve) => {
-        setTimeout(resolve, 2000);
-      });
+      const invoice = {
+        amount: total,
+        currency: CONFIG.currency.toLowerCase(),
+        number: `GD-${Date.now()}`,
+        email: checkoutState.addresses.billing.email,
+      };
 
-      logger.info('Paiement traité avec succès');
-      clearCart();
-      showOrderConfirmation();
+      // paymentMethodId should come from Stripe.js integration in production
+      const payload = {
+        invoice,
+        paymentMethodId: 'pm_card_visa',
+      };
+
+      const response = await fetch(
+        '/gd-ecommerce-native/public/index.php/snipcart/payment/authorize',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.status === 'success') {
+        if (data.instructions && data.instructions.toLowerCase().includes('capture')) {
+          await fetch('/gd-ecommerce-native/public/index.php/snipcart/payment/capture', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ transactionId: data.transactionId }),
+          });
+        }
+
+        logger.info('Paiement traité avec succès', data);
+        clearCart();
+        window.location.href = '/merci.php';
+      } else if (data.status === 'requires_action') {
+        showNotification(data.instructions || 'Authentification requise.', 'error');
+        payButton.disabled = false;
+        payButton.innerHTML = `⚔️ Payer ${formatPrice(total)} 💰`;
+      } else {
+        const message = data.instructions || 'Erreur lors du traitement du paiement. Veuillez réessayer.';
+        logger.error('Paiement refusé', data);
+        showNotification(message, 'error');
+        payButton.disabled = false;
+        payButton.innerHTML = `⚔️ Payer ${formatPrice(total)} 💰`;
+      }
     } catch (error) {
       logger.error('Erreur lors du paiement:', error);
       showNotification('Erreur lors du traitement du paiement. Veuillez réessayer.', 'error');
 
       payButton.disabled = false;
-      const total = state.cart.total + checkoutState.shipping.cost + checkoutState.taxes.amount;
       payButton.innerHTML = `⚔️ Payer ${formatPrice(total)} 💰`;
     }
 
