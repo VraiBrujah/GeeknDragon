@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace GeeknDragon\Core;
 
+use Throwable;
+
 /**
  * Mini-routeur simple pour GeeknDragon
  * Gère les routes GET/POST avec redirections 301 pour préserver l'existant
