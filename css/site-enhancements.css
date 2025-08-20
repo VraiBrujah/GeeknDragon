@@ -226,6 +226,39 @@ label {
   transition-duration: 0.2s !important;
 }
 
+/* Cartes produits cliquables sur la page d'accueil */
+.product-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.product-card-link:hover {
+  text-decoration: none;
+}
+
+.product-card-link article {
+  transition: all 0.3s ease !important;
+}
+
+.product-card-link:hover article {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.product-card-link:focus {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 4px;
+  border-radius: 1rem;
+}
+
+/* Animation du bouton découvrir au hover */
+.product-card-link:hover .btn {
+  background-color: #4f46e5 !important;
+  border-color: #4f46e5 !important;
+  color: white !important;
+}
+
 /* Responsive: encore plus compact sur mobile */
 @media (max-width: 767px) {
   h1 {

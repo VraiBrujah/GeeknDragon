@@ -42,32 +42,38 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         <p class="text-xl text-center mb-12 text-secondary" data-i18n="home.mustHave.heading">Nos Incontournables</p>
         
         <div class="grid md:grid-cols-3 gap-8 mb-12">
-          <article class="bg-gray-800 p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
-            <img src="/images/optimized-modern/webp/cartes-equipement.webp" alt="560 cartes d'équipement illustrées" class="rounded mb-4 w-full" loading="lazy">
-            <h3 class="text-center mb-3" data-i18n="home.mustHave.equipment.title">Cartes d'équipement</h3>
-            <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.equipment.desc">560 cartes d'équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
-            <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-outline w-full" aria-label="Voir les cartes d'équipement">
-              Découvrir
-            </a>
-          </article>
+          <a href="<?= langUrl('boutique.php#cartes') ?>" class="block group" aria-label="Voir les cartes d'équipement">
+            <article class="bg-gray-800 p-6 rounded-xl shadow-lg transition-all duration-200 group-hover:scale-105 group-hover:shadow-xl cursor-pointer">
+              <img src="/images/optimized-modern/webp/cartes-equipement.webp" alt="560 cartes d'équipement illustrées" class="rounded mb-4 w-full" loading="lazy">
+              <h3 class="text-center mb-3" data-i18n="home.mustHave.equipment.title">Cartes d'équipement</h3>
+              <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.equipment.desc">560 cartes d'équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
+              <div class="btn btn-outline w-full group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-colors">
+                Découvrir
+              </div>
+            </article>
+          </a>
           
-          <article class="bg-gray-800 p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
-            <img src="/images/optimized-modern/webp/coin-copper-10.webp" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4 w-full" loading="lazy">
-            <h3 class="text-center mb-3" data-i18n="home.mustHave.coins.title">Pièces métalliques</h3>
-            <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
-            <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-outline w-full" aria-label="Voir les pièces métalliques">
-              Découvrir
-            </a>
-          </article>
+          <a href="<?= langUrl('boutique.php#pieces') ?>" class="block group" aria-label="Voir les pièces métalliques">
+            <article class="bg-gray-800 p-6 rounded-xl shadow-lg transition-all duration-200 group-hover:scale-105 group-hover:shadow-xl cursor-pointer">
+              <img src="/images/optimized-modern/webp/coin-copper-10.webp" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4 w-full" loading="lazy">
+              <h3 class="text-center mb-3" data-i18n="home.mustHave.coins.title">Pièces métalliques</h3>
+              <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
+              <div class="btn btn-outline w-full group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-colors">
+                Découvrir
+              </div>
+            </article>
+          </a>
           
-          <article class="bg-gray-800 p-6 rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
-            <img src="/images/optimized-modern/webp/triptyque-fiche.webp" alt="Fiche de personnage triptyque rigide" class="rounded mb-4 w-full" loading="lazy">
-            <h3 class="text-center mb-3" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h3>
-            <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
-            <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-outline w-full" aria-label="Voir les fiches triptyques">
-              Découvrir
-            </a>
-          </article>
+          <a href="<?= langUrl('boutique.php#triptyques') ?>" class="block group" aria-label="Voir les fiches triptyques">
+            <article class="bg-gray-800 p-6 rounded-xl shadow-lg transition-all duration-200 group-hover:scale-105 group-hover:shadow-xl cursor-pointer">
+              <img src="/images/optimized-modern/webp/triptyque-fiche.webp" alt="Fiche de personnage triptyque rigide" class="rounded mb-4 w-full" loading="lazy">
+              <h3 class="text-center mb-3" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h3>
+              <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
+              <div class="btn btn-outline w-full group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-colors">
+                Découvrir
+              </div>
+            </article>
+          </a>
         </div>
 
         <div class="text-center">
