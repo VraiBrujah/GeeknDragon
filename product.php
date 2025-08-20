@@ -211,7 +211,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
             data-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
           <?php endif; ?>
         >
-          <span data-i18n="product.add">Ajouter</span>
+          <span data-i18n="product.add">Ajouter au panier</span>
         </button>
       <?php else : ?>
         <span class="btn btn-shop opacity-60 cursor-not-allowed" disabled data-i18n="product.outOfStock">Rupture de stock</span>
