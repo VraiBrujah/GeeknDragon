@@ -19,7 +19,19 @@
       "Bash(start http://localhost:8000/test-complete-system.html)",
       "Bash(npm run build:*)",
       "Bash(npm run bundle:css:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(php:*)",
+      "Bash(composer:*)",
+      "Bash(curl:*)",
+      "Bash(/dev/null)",
+      "Bash(touch:*)",
+      "Bash(powershell:*)",
+      "Bash(forfiles:*)",
+      "Bash(dir:*)",
+      "Bash(true)",
+      "Bash(del:*)",
+      "Bash(npm install:*)",
+      "Bash(npm audit:*)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

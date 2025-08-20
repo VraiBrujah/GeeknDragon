@@ -1,13 +1,43 @@
 {
     "name": "geekndragon/project",
+    "description": "Site e-commerce GeeknDragon pour accessoires de jeux de rôle",
+    "type": "project",
+    "license": "proprietary",
     "require": {
+        "php": ">=8.1",
         "vlucas/phpdotenv": "^5.6",
         "symfony/polyfill-ctype": "^1.28",
         "symfony/polyfill-mbstring": "^1.28",
         "symfony/polyfill-php80": "^1.28",
         "erusev/parsedown": "^1.7"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GeeknDragon\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GeeknDragon\\Tests\\": "tests/"
+        }
+    },
     "config": {
-        "disable-tls": false
+        "disable-tls": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpunit/phpunit": true
+        }
+    },
+    "scripts": {
+        "test": "php tests/AllTests.php",
+        "linkcheck": "php tools/linkcheck.php",
+        "report": "php tools/report.php > report.html",
+        "build": [
+            "npm run build",
+            "composer dump-autoload"
+        ]
     }
 }

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit14a99f7dca67ea4f2251aa913f7b6dd0
+class ComposerStaticInit5f6131781a2ce5dda955b5b497df46e2
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -26,6 +26,7 @@ class ComposerStaticInit14a99f7dca67ea4f2251aa913f7b6dd0
         'G' => 
         array (
             'GrahamCampbell\\ResultType\\' => 26,
+            'GeeknDragon\\' => 12,
         ),
         'D' => 
         array (
@@ -54,9 +55,23 @@ class ComposerStaticInit14a99f7dca67ea4f2251aa913f7b6dd0
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
+        'GeeknDragon\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'Parsedown' => 
+            array (
+                0 => __DIR__ . '/..' . '/erusev/parsedown',
+            ),
         ),
     );
 
@@ -104,9 +119,19 @@ class ComposerStaticInit14a99f7dca67ea4f2251aa913f7b6dd0
         'Dotenv\\Util\\Regex' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Util/Regex.php',
         'Dotenv\\Util\\Str' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Util/Str.php',
         'Dotenv\\Validator' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Validator.php',
+        'GeeknDragon\\Cart\\CartService' => __DIR__ . '/../..' . '/src/Cart/CartService.php',
+        'GeeknDragon\\Cart\\SnipcartClient' => __DIR__ . '/../..' . '/src/Cart/SnipcartClient.php',
+        'GeeknDragon\\Controller\\BaseController' => __DIR__ . '/../..' . '/src/Controller/BaseController.php',
+        'GeeknDragon\\Controller\\CartController' => __DIR__ . '/../..' . '/src/Controller/CartController.php',
+        'GeeknDragon\\Core\\Router' => __DIR__ . '/../..' . '/src/Core/Router.php',
+        'GeeknDragon\\I18n\\TranslationService' => __DIR__ . '/../..' . '/src/I18n/TranslationService.php',
+        'GeeknDragon\\Security\\CsrfProtection' => __DIR__ . '/../..' . '/src/Security/CsrfProtection.php',
+        'GeeknDragon\\Service\\ProductService' => __DIR__ . '/../..' . '/src/Service/ProductService.php',
+        'GeeknDragon\\View\\ViewHelper' => __DIR__ . '/../..' . '/src/View/ViewHelper.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
         'GrahamCampbell\\ResultType\\Result' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Result.php',
         'GrahamCampbell\\ResultType\\Success' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Success.php',
+        'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
         'PhpOption\\LazyOption' => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption/LazyOption.php',
         'PhpOption\\None' => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption/None.php',
         'PhpOption\\Option' => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption/Option.php',
@@ -124,9 +149,10 @@ class ComposerStaticInit14a99f7dca67ea4f2251aa913f7b6dd0
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit14a99f7dca67ea4f2251aa913f7b6dd0::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit14a99f7dca67ea4f2251aa913f7b6dd0::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit14a99f7dca67ea4f2251aa913f7b6dd0::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5f6131781a2ce5dda955b5b497df46e2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5f6131781a2ce5dda955b5b497df46e2::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit5f6131781a2ce5dda955b5b497df46e2::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit5f6131781a2ce5dda955b5b497df46e2::$classMap;
 
         }, null, ClassLoader::class);
     }

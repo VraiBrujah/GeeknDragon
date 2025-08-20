@@ -5,7 +5,7 @@ $active = 'boutique';
 require __DIR__ . '/i18n.php';
 $title  = $translations['meta']['shop']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['shop']['desc'] ?? '';
-$metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
+$metaUrl = 'https://' . $config['current_host'] . '/boutique.php';
 $extraHead = <<<HTML
 <link rel="stylesheet" href="/css/boutique-premium.css?v=<?= filemtime(__DIR__.'/css/boutique-premium.css') ?>">
 <style>

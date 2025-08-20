@@ -5,9 +5,11 @@
  */
 $active = $active ?? '';
 
+if (!function_exists('navClass')) {
 function navClass($key, $active) {
   // Classe "active" sobre, on laisse le style au CSS
   return $key === $active ? 'is-active' : '';
+}
 }
 
 $navItems = [
@@ -49,6 +51,7 @@ $snipcartKey = $snipcartKey
   ?? $_ENV['SNIPCART_API_KEY']
   ?? $_SERVER['SNIPCART_API_KEY'];
 
+if (!function_exists('renderNav')) {
 function renderNav(array $items, string $active, bool $mobile = false): void {
     foreach ($items as $href => $item) {
     // Le menu utilise déjà Cinzel via le CSS, inutile d'ajouter "txt-court"
@@ -71,6 +74,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       echo '</li>';
     }
   }
+}
 }
 ?>
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
