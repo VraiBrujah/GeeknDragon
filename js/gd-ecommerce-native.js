@@ -16,7 +16,7 @@
     currencySymbol: '$',
     autoSave: true,
     analytics: false, // Respect RGPD
-    debug: true, // Mode debug (production: false)
+    debug: false, // Mode debug (production: false)
   };
 
   // Système de logging structuré
@@ -1595,6 +1595,44 @@
       if (e.target.classList.contains('gd-account-tab')) {
         const tabName = e.target.dataset.tab;
         if (tabName) switchAccountTab(tabName);
+      }
+    });
+
+    // Gestion des boutons d'ajout au panier
+    document.addEventListener('click', (e) => {
+      const addButton = e.target.closest('.gd-add-to-cart');
+      if (addButton) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const productData = {
+          id: addButton.dataset.itemId,
+          name: addButton.dataset.itemName,
+          price: parseFloat(addButton.dataset.itemPrice),
+          quantity: parseInt(addButton.dataset.itemQuantity) || 1,
+          image: addButton.dataset.itemImage || '',
+          url: addButton.dataset.itemUrl || '',
+          variants: {}
+        };
+
+        // Récupérer les variantes (multiplicateur, langue, etc.)
+        if (addButton.dataset.itemCustom1Name && addButton.dataset.itemCustom1Value) {
+          productData.variants[addButton.dataset.itemCustom1Name] = addButton.dataset.itemCustom1Value;
+        }
+
+        logger.info('🎯 Bouton panier cliqué:', productData);
+        
+        if (addToCart(productData)) {
+          // Son de succès et feedback visuel
+          playSound('add');
+          showNotification('Article ajouté au panier!', 'success');
+          
+          // Animation du bouton
+          addButton.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            addButton.style.transform = '';
+          }, 150);
+        }
       }
     });
 

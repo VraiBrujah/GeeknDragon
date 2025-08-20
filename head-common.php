@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="/css/boutique-style-global.css?v=<?= filemtime(__DIR__.'/css/boutique-style-global.css') ?>">
   <!-- Système e-commerce natif moderne -->
   <link rel="stylesheet" href="/css/gd-ecommerce-native.css?v=<?= filemtime(__DIR__.'/css/gd-ecommerce-native.css') ?>">
+  <!-- Améliorations du site (polices, tailles, mode production) -->
+  <link rel="stylesheet" href="/css/site-enhancements.css?v=<?= filemtime(__DIR__.'/css/site-enhancements.css') ?>">
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="stylesheet" href="/css/disable-image-crop.css?v=<?= filemtime(__DIR__.'/css/disable-image-crop.css') ?>">
   <link rel="stylesheet" href="/css/checkout-dnd.css?v=<?= filemtime(__DIR__.'/css/checkout-dnd.css') ?>">

@@ -145,3 +145,77 @@ if ($canLoadVendor) {
         }
     }
 }
+
+// Configuration du mode production
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+error_reporting(E_ALL);
+ini_set('log_errors', '1');
+ini_set('error_log', __DIR__ . '/storage/logs/php_errors.log');
+
+// Gestionnaire d'erreurs global pour les clés API manquantes
+set_exception_handler(function ($e) {
+    error_log("Erreur critique: " . $e->getMessage() . " dans " . $e->getFile() . ":" . $e->getLine());
+    
+    // En mode production, afficher une page d'erreur générique
+    if (strpos($e->getMessage(), 'SNIPCART') !== false) {
+        http_response_code(503);
+        echo '<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Configuration requise - Geek & Dragon</title>
+    <style>
+        body { font-family: "Cinzel", serif; text-align: center; padding: 2rem; background: #111827; color: white; }
+        .error-box { max-width: 500px; margin: 0 auto; padding: 2rem; border: 2px solid #dc2626; border-radius: 0.5rem; }
+        h1 { color: #fbbf24; margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; line-height: 1.6; }
+        .contact { margin-top: 2rem; }
+        a { color: #60a5fa; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="error-box">
+        <h1>⚙️ Configuration requise</h1>
+        <p>Le système e-commerce nécessite une configuration supplémentaire.</p>
+        <p>Veuillez contacter l\'administrateur du site.</p>
+        <div class="contact">
+            <a href="mailto:contact@geekndragon.com">📧 Nous contacter</a>
+        </div>
+    </div>
+</body>
+</html>';
+        exit;
+    }
+    
+    // Autres erreurs : page d'erreur générique
+    http_response_code(500);
+    echo '<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Erreur temporaire - Geek & Dragon</title>
+    <style>
+        body { font-family: "Cinzel", serif; text-align: center; padding: 2rem; background: #111827; color: white; }
+        .error-box { max-width: 500px; margin: 0 auto; padding: 2rem; border: 2px solid #dc2626; border-radius: 0.5rem; }
+        h1 { color: #fbbf24; margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; line-height: 1.6; }
+        .back { margin-top: 2rem; }
+        a { color: #60a5fa; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="error-box">
+        <h1>🛡️ Erreur temporaire</h1>
+        <p>Une erreur technique temporaire est survenue.</p>
+        <p>Nos dragons travaillent à la résoudre !</p>
+        <div class="back">
+            <a href="/">🏠 Retour à l\'accueil</a>
+        </div>
+    </div>
+</body>
+</html>';
+    exit;
+});

@@ -1,0 +1,251 @@
+/* ========================================================================
+   GEEK & DRAGON - AMÉLIORATIONS DU SITE
+   Polices médiévales, tailles réduites, mode production
+   ======================================================================== */
+
+/* Variables CSS personnalisées */
+:root {
+  /* Polices médiévales */
+  --font-primary: 'Cinzel', serif;
+  --font-secondary: 'EB Garamond', serif;
+  
+  /* Tailles réduites pour un affichage plus compact */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 0.95rem;
+  --text-lg: 1.05rem;
+  --text-xl: 1.15rem;
+  --text-2xl: 1.4rem;
+  --text-3xl: 1.75rem;
+  --text-4xl: 2.1rem;
+  --text-5xl: 2.8rem;
+  
+  /* Espacements réduits */
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.25rem;
+  --spacing-xl: 1.75rem;
+}
+
+/* Application globale de Cinzel pour les titres et éléments importants */
+h1, h2, h3, h4, h5, h6,
+.hero-title,
+.site-title,
+.product-title,
+.section-title,
+.nav-link,
+.btn,
+.card-title {
+  font-family: var(--font-primary) !important;
+}
+
+/* EB Garamond pour le contenu */
+body,
+p,
+.product-description,
+.content,
+.text-content {
+  font-family: var(--font-secondary) !important;
+}
+
+/* Ajustements des tailles de texte */
+h1 {
+  font-size: var(--text-4xl) !important;
+  line-height: 1.2 !important;
+}
+
+h2 {
+  font-size: var(--text-3xl) !important;
+  line-height: 1.25 !important;
+}
+
+h3 {
+  font-size: var(--text-2xl) !important;
+  line-height: 1.3 !important;
+}
+
+h4 {
+  font-size: var(--text-xl) !important;
+  line-height: 1.35 !important;
+}
+
+h5, h6 {
+  font-size: var(--text-lg) !important;
+  line-height: 1.4 !important;
+}
+
+/* Texte de base plus compact */
+body {
+  font-size: var(--text-base) !important;
+  line-height: 1.5 !important;
+}
+
+/* Boutons avec Cinzel et taille réduite */
+.btn,
+.gd-add-to-cart,
+.add-to-cart-btn,
+button {
+  font-family: var(--font-primary) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  padding: var(--spacing-sm) var(--spacing-lg) !important;
+}
+
+/* Navigation avec Cinzel */
+.nav-link {
+  font-size: var(--text-base) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.025em !important;
+}
+
+/* Titre du site plus élégant */
+.site-title {
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+}
+
+/* Hero title plus compact mais impactant */
+.hero-title {
+  font-size: var(--text-4xl) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  line-height: 1.1 !important;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: var(--text-5xl) !important;
+  }
+}
+
+/* Sous-titres hero plus lisibles */
+.hero-subtitle {
+  font-size: var(--text-lg) !important;
+  line-height: 1.6 !important;
+  font-weight: 400 !important;
+}
+
+/* Cartes produits plus compactes */
+.product-card {
+  padding: var(--spacing-lg) !important;
+}
+
+.product-card .product-title {
+  font-size: var(--text-lg) !important;
+  font-weight: 600 !important;
+  margin-bottom: var(--spacing-sm) !important;
+}
+
+.product-card .product-price {
+  font-family: var(--font-primary) !important;
+  font-size: var(--text-xl) !important;
+  font-weight: 700 !important;
+}
+
+.product-card .product-description {
+  font-size: var(--text-sm) !important;
+  line-height: 1.5 !important;
+}
+
+/* Panier et modales */
+.gd-modal-title {
+  font-family: var(--font-primary) !important;
+  font-size: var(--text-2xl) !important;
+  font-weight: 600 !important;
+}
+
+.gd-cart-item-name {
+  font-family: var(--font-primary) !important;
+  font-size: var(--text-base) !important;
+  font-weight: 500 !important;
+}
+
+/* Notifications plus élégantes */
+.gd-notification {
+  font-family: var(--font-primary) !important;
+  font-size: var(--text-sm) !important;
+}
+
+/* Section spacing réduit */
+.section-spacing {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+}
+
+/* Content spacing réduit */
+.content-spacing > * + * {
+  margin-top: var(--spacing-lg) !important;
+}
+
+@media (min-width: 768px) {
+  .content-spacing > * + * {
+    margin-top: var(--spacing-xl) !important;
+  }
+}
+
+/* Amélioration de la lisibilité */
+p {
+  line-height: 1.6 !important;
+}
+
+/* Style médiéval pour les listes */
+ul, ol {
+  font-family: var(--font-secondary) !important;
+}
+
+/* Input et formulaires avec style médiéval */
+input, textarea, select {
+  font-family: var(--font-secondary) !important;
+  font-size: var(--text-base) !important;
+}
+
+/* Labels avec Cinzel */
+label {
+  font-family: var(--font-primary) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 500 !important;
+}
+
+/* Mode production : masquer les éléments de debug */
+.debug-info,
+[data-debug],
+.development-only {
+  display: none !important;
+}
+
+/* Amélioration des transitions pour une expérience plus fluide */
+* {
+  transition-duration: 0.2s !important;
+}
+
+/* Responsive: encore plus compact sur mobile */
+@media (max-width: 767px) {
+  h1 {
+    font-size: var(--text-3xl) !important;
+  }
+  
+  h2 {
+    font-size: var(--text-2xl) !important;
+  }
+  
+  .hero-title {
+    font-size: var(--text-3xl) !important;
+  }
+  
+  .section-spacing {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .product-card {
+    padding: var(--spacing-md) !important;
+  }
+}

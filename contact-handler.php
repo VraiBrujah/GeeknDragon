@@ -2,7 +2,7 @@
 require __DIR__ . '/bootstrap.php';
 
 session_start();
-$debug = filter_var($_ENV['APP_DEBUG'] ?? $_SERVER['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOLEAN);
+$debug = false; // Mode production
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php#contact');

@@ -25,10 +25,10 @@ return [
     ],
     'snipcart_api_key' => validateApiKey(
         $_ENV['SNIPCART_API_KEY'] ?? $_SERVER['SNIPCART_API_KEY'] ?? ''
-    ),
+    ) ?: throw new RuntimeException('SNIPCART_API_KEY manquante ou invalide'),
     'snipcart_secret_api_key' => validateApiKey(
         $_ENV['SNIPCART_SECRET_API_KEY'] ?? $_SERVER['SNIPCART_SECRET_API_KEY'] ?? ''
-    ),
+    ) ?: throw new RuntimeException('SNIPCART_SECRET_API_KEY manquante ou invalide'),
     
     // Validation du host sécurisée
     'current_host' => validateHost($_SERVER['HTTP_HOST'] ?? 'geekndragon.com'),
