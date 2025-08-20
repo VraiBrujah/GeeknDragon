@@ -63,7 +63,7 @@ $products = array_merge($pieces, $cards, $triptychs);
   <div class="w-full" style="height:1px; background-color: var(--boutique-primary); margin-top:-1px;"></div>
   <!-- ===== HERO PREMIUM ===== -->
   <section class="hero-boutique">
-    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:0" data-main="videos/video-fountain-12.mp4" data-videos='["videos/video-card-preview.mp4","videos/video-fountain-6.mp4","videos/trip2.mp4","videos/video-fountain-7.mp4","videos/cartearme.mp4","videos/video-fountain-8.mp4","videos/video-fountain-9.mp4","videos/video-fountain-4.mp4"]'></div>
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:0" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60" style="z-index:1"></div>
     <div class="hero-content animate-fade-in-up" style="z-index:2">
       <h1 class="hero-title" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
