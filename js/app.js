@@ -637,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hidePrice = addBtn?.dataset.hidePrice !== undefined;
     const unitPrice = addBtn ? parseFloat(addBtn.dataset.itemPrice || '0') : 0;
     const tr = window.i18n?.product || {};
-    const addText = tr.add || 'Ajouter';
+    const addText = tr.add || 'Ajouter au panier';
 
     if (addBtn) {
       const label = addBtn.querySelector('[data-i18n="product.add"]');
