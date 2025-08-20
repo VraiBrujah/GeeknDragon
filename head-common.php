@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <?= \GeeknDragon\Security\CsrfProtection::getMetaTag(); ?>
   <title><?= htmlspecialchars($title ?? 'Geek & Dragon') ?></title>
   <meta name="description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta property="og:title" content="<?= htmlspecialchars($title ?? 'Geek & Dragon') ?>" />
