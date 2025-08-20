@@ -64,6 +64,7 @@
     cartToggleMobile: null,
     cartBadge: null,
     cartBadgeMobile: null,
+    cartBadgeWidget: null,
     accountModal: null,
     cartModal: null,
     body: document.body,
@@ -262,6 +263,11 @@
       elements.cartBadge.setAttribute('aria-label', `${state.cart.count} articles dans le panier`);
     }
     
+    if (elements.cartBadgeWidget) {
+      elements.cartBadgeWidget.textContent = state.cart.count;
+      elements.cartBadgeWidget.setAttribute('aria-label', `${state.cart.count} articles dans le panier`);
+    }
+
     if (elements.cartBadgeMobile) {
       elements.cartBadgeMobile.textContent = state.cart.count;
     }
@@ -1708,6 +1714,7 @@
     elements.accountToggleMobile = document.getElementById('gd-account-toggle-mobile');
     elements.cartToggleMobile = document.getElementById('gd-cart-toggle-mobile');
     elements.cartBadge = document.getElementById('gd-cart-count');
+    elements.cartBadgeWidget = document.getElementById('gd-cart-count-widget');
     elements.cartBadgeMobile = document.querySelector('.gd-cart-badge-mobile');
   }
 
