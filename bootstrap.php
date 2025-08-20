@@ -160,6 +160,7 @@ set_exception_handler(function ($e) {
     // En mode production, afficher une page d'erreur générique
     if (strpos($e->getMessage(), 'SNIPCART') !== false) {
         http_response_code(503);
+        $userMessage = htmlspecialchars(preg_replace('/^SNIPCART:\\s*/', '', $e->getMessage()), ENT_QUOTES, 'UTF-8');
         echo '<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -178,7 +179,7 @@ set_exception_handler(function ($e) {
 <body>
     <div class="error-box">
         <h1>⚙️ Configuration requise</h1>
-        <p>Le système e-commerce nécessite une configuration supplémentaire.</p>
+        <p>' . $userMessage . '</p>
         <p>Veuillez contacter l\'administrateur du site.</p>
         <div class="contact">
             <a href="mailto:contact@geekndragon.com">📧 Nous contacter</a>
