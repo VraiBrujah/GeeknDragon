@@ -223,22 +223,6 @@
   /**
    * Sauvegarde le panier dans le localStorage
    */
-  function saveCart() {
-    if (!CONFIG.autoSave) return false;
-    
-    try {
-      localStorage.setItem(CONFIG.storageKey, JSON.stringify(state.cart));
-      logger.info('💾 Panier sauvegardé');
-      return true;
-    } catch (error) {
-      logger.error('Erreur sauvegarde panier:', error);
-      return false;
-    }
-  }
-
-  /**
-   * Sauvegarde le panier dans le localStorage
-   */
   const saveCart = debounce(() => {
     if (!CONFIG.autoSave) return;
 
@@ -1599,11 +1583,11 @@
    * Attache tous les événements
    */
   function attachEventListeners() {
-    if (eventsAttached || !elements.accountModal || !elements.cartModal) return;
+    if (eventsAttached) return;
     eventsAttached = true;
 
     // Boutons header
-    if (elements.accountToggle) {
+    if (elements.accountToggle && elements.accountModal) {
       elements.accountToggle.addEventListener('click', () => {
         if (state.ui.accountModalOpen) {
           closeModal('gd-account-modal');
@@ -1613,7 +1597,7 @@
       });
     }
 
-    if (elements.cartToggle) {
+    if (elements.cartToggle && elements.cartModal) {
       elements.cartToggle.addEventListener('click', () => {
         if (state.ui.cartModalOpen) {
           closeModal('gd-cart-modal');
@@ -1623,7 +1607,7 @@
       });
     }
 
-    if (elements.accountToggleMobile) {
+    if (elements.accountToggleMobile && elements.accountModal) {
       elements.accountToggleMobile.addEventListener('click', () => {
         if (state.ui.accountModalOpen) {
           closeModal('gd-account-modal');
@@ -1633,7 +1617,7 @@
       });
     }
 
-    if (elements.cartToggleMobile) {
+    if (elements.cartToggleMobile && elements.cartModal) {
       elements.cartToggleMobile.addEventListener('click', () => {
         if (state.ui.cartModalOpen) {
           closeModal('gd-cart-modal');
