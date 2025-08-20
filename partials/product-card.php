@@ -90,7 +90,7 @@ $isInStock = inStock($id);
         data-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
       <?php endif; ?>
       >
-        <span data-i18n="product.add">Ajouter au panier</span>
+        <span data-i18n="product.add">Ajouter au sac</span>
       </button>
     <?php else : ?>
       <span class="btn btn-shop opacity-60 cursor-not-allowed" data-i18n="product.outOfStock">Rupture de stock</span>

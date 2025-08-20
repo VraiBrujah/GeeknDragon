@@ -26,11 +26,11 @@
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="stylesheet" href="/css/disable-image-crop.css?v=<?= filemtime(__DIR__.'/css/disable-image-crop.css') ?>">
   <link rel="stylesheet" href="/css/checkout-dnd.css?v=<?= filemtime(__DIR__.'/css/checkout-dnd.css') ?>">
-  <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css">
+  <!-- Snipcart CSS supprimé - utilisation API uniquement -->
   <script src="/js/lazy-load-enhanced.js" defer></script>
   <script src="/js/universal-image-gallery.js" defer></script>
   <script src="/js/gd-ecommerce-native.js" defer></script>
-  <script async src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js"></script>
+  <!-- Snipcart JS supprimé - utilisation API uniquement -->
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 

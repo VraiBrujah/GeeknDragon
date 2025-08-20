@@ -31,7 +31,8 @@
       "Bash(true)",
       "Bash(del:*)",
       "Bash(npm install:*)",
-      "Bash(npm audit:*)"
+      "Bash(npm audit:*)",
+      "WebFetch(domain:geekndragon.com)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

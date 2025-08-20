@@ -105,7 +105,7 @@ $isInStock = inStock($id);
           <circle cx="9" cy="20" r="1"/>
           <circle cx="20" cy="20" r="1"/>
         </svg>
-        <span data-i18n="product.add">Ajouter au panier</span>
+        <span data-i18n="product.add">Ajouter au sac</span>
       </button>
     <?php else : ?>
       <button class="add-to-cart-btn" disabled>

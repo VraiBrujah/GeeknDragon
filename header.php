@@ -77,7 +77,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 }
 }
 ?>
-<div hidden id="snipcart" data-api-key="<?= $snipcartKey ?>"></div>
+<!-- Snipcart div supprimé - utilisation API uniquement -->
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">

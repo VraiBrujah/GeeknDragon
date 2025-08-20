@@ -87,7 +87,7 @@
     "language": "Language",
     "quantity": "Quantity",
     "unit": "single",
-    "add": "Add to cart",
+    "add": "Add to bag",
     "inStock": "In stock",
     "outOfStock": "Out of stock",
     "securePayment": "Secure payment via Snipcart"
