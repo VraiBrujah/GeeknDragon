@@ -146,7 +146,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 		  
           <!-- Photo avec bordure lumineuse -->
           <div style="position: relative; display: inline-block; margin-bottom: 2rem;">
-            <img src="/images/optimized-modern/webp/team-brujah.webp" alt="Brujah" class="rounded h-48 w-48" loading="lazy">
+            <img src="/images/optimized-modern/webp/team-brujah.webp" alt="Brujah" class="rounded h-48 w-48" loading="lazy" style="--rounded-border-color: transparent;">
             <!-- Badge de statut -->
             <div style="position: absolute; bottom: 10px; right: 10px; background: #10b981; width: 24px; height: 24px; border-radius: 50%; border: 3px solid #1e293b;"></div>
           </div>
