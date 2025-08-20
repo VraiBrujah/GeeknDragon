@@ -92,14 +92,14 @@ $isInStock = inStock($id);
       </div>
 
       <!-- Bouton d'achat -->
-      <button class="gd-add-to-cart add-to-cart-btn"
-              data-id="<?= htmlspecialchars($id) ?>"
-              data-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-              data-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-              data-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-              data-price="<?= htmlspecialchars($price) ?>"
-              data-url="<?= htmlspecialchars($url) ?>"
-              data-quantity="1">
+      <button class="snipcart-add-item add-to-cart-btn"
+              data-item-id="<?= htmlspecialchars($id) ?>"
+              data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
+              data-item-price="<?= htmlspecialchars($price) ?>"
+              data-item-url="<?= htmlspecialchars($url) ?>"
+              data-item-description="<?= htmlspecialchars(strip_tags($desc)) ?>"
+              data-item-image="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+              data-item-quantity="1">
         <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
           <circle cx="9" cy="20" r="1"/>
@@ -147,17 +147,17 @@ $isInStock = inStock($id);
     }
     
     // Gestion du bouton d'achat
-    const btn = e.target.closest('.gd-add-to-cart');
+    const btn = e.target.closest('.snipcart-add-item');
     if (!btn) return;
 
-    const id = btn.getAttribute('data-id');
+    const id = btn.getAttribute('data-item-id');
     if (!id) return;
 
     // Mise à jour de la quantité
     const qtyEl = document.getElementById('qty-' + id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-quantity', String(q));
+      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
     }
   }, { passive: true });
 
