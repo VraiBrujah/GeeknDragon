@@ -5,6 +5,7 @@ namespace GeeknDragon\Controller;
 
 use GeeknDragon\Cart\CartService;
 use GeeknDragon\Cart\SnipcartClient;
+use GeeknDragon\Cart\SnipcartException;
 
 /**
  * Contrôleur pour l'API du panier custom
@@ -60,12 +61,12 @@ class CartController extends BaseController
         
         try {
             $input = json_decode(file_get_contents('php://input'), true);
-            
+
             if (!$input) {
                 $this->json(['success' => false, 'message' => 'Données invalides'], 400);
                 return;
             }
-            
+
             // Validation des données
             $errors = $this->validate($input, [
                 'id' => 'required',
@@ -73,19 +74,19 @@ class CartController extends BaseController
                 'price' => 'required|numeric',
                 'quantity' => 'numeric'
             ]);
-            
+
             if (!empty($errors)) {
                 $this->json(['success' => false, 'errors' => $errors], 400);
                 return;
             }
-            
+
             // Ajouter au panier
             $success = $this->cartService->addItem(
                 $input['id'],
                 (int)($input['quantity'] ?? 1),
                 $input['options'] ?? []
             );
-            
+
             if ($success) {
                 $this->json([
                     'success' => true,
@@ -99,7 +100,9 @@ class CartController extends BaseController
             } else {
                 $this->json(['success' => false, 'message' => 'Impossible d\'ajouter le produit'], 500);
             }
-            
+
+        } catch (SnipcartException $e) {
+            $this->json(['success' => false, 'message' => 'Configuration Snipcart invalide'], 500);
         } catch (\Exception $e) {
             $this->handleError($e, 'CartController::addItem');
         }
@@ -117,27 +120,27 @@ class CartController extends BaseController
         
         try {
             $input = json_decode(file_get_contents('php://input'), true);
-            
+
             $itemKey = $input['itemKey'] ?? '';
             $action = $input['action'] ?? '';
-            
+
             if (!$itemKey || !in_array($action, ['increase', 'decrease'])) {
                 $this->json(['success' => false, 'message' => 'Paramètres invalides'], 400);
                 return;
             }
-            
+
             // Récupérer l'item actuel
             $items = $this->cartService->getItems();
             if (!isset($items[$itemKey])) {
                 $this->json(['success' => false, 'message' => 'Article non trouvé'], 404);
                 return;
             }
-            
+
             $currentQuantity = $items[$itemKey]['quantity'];
             $newQuantity = $action === 'increase' ? $currentQuantity + 1 : $currentQuantity - 1;
-            
+
             $success = $this->cartService->updateQuantity($itemKey, $newQuantity);
-            
+
             if ($success) {
                 $this->json([
                     'success' => true,
@@ -150,7 +153,9 @@ class CartController extends BaseController
             } else {
                 $this->json(['success' => false, 'message' => 'Impossible de mettre à jour'], 500);
             }
-            
+
+        } catch (SnipcartException $e) {
+            $this->json(['success' => false, 'message' => 'Configuration Snipcart invalide'], 500);
         } catch (\Exception $e) {
             $this->handleError($e, 'CartController::updateItem');
         }

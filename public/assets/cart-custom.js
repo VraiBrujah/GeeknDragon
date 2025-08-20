@@ -185,20 +185,20 @@ class GeeknDragonCart {
                 },
                 body: JSON.stringify(item)
             });
-            
+
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}`);
             }
-            
+
             const result = await response.json();
-            
+
             if (result.success) {
                 this.updateCartDisplay(result.cart);
                 this.open(); // Ouvrir le panier après ajout
             } else {
-                throw new Error(result.message || 'Erreur ajout');
+                this.showError((result.message || 'Erreur lors de l\'ajout au panier') + '. Veuillez réessayer plus tard.');
             }
-            
+
         } catch (error) {
             // Fallback mode hors ligne - gestion côté client
             console.warn('Mode hors ligne, gestion locale du panier');
@@ -249,9 +249,13 @@ class GeeknDragonCart {
             
             if (response.ok) {
                 const result = await response.json();
-                this.updateCartDisplay(result.cart);
+                if (result.success) {
+                    this.updateCartDisplay(result.cart);
+                } else {
+                    this.showError((result.message || 'Impossible de mettre à jour le panier') + '. Veuillez réessayer plus tard.');
+                }
             }
-            
+
         } catch (error) {
             // Fallback local
             this.updateQuantityLocally(itemKey, action);

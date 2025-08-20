@@ -53,6 +53,8 @@ class CartService
             $this->saveCartToSession();
             return true;
             
+        } catch (SnipcartException $e) {
+            throw $e;
         } catch (\Exception $e) {
             error_log("Erreur ajout panier : " . $e->getMessage());
             return false;
@@ -98,6 +100,8 @@ class CartService
             $this->saveCartToSession();
             return true;
             
+        } catch (SnipcartException $e) {
+            throw $e;
         } catch (\Exception $e) {
             error_log("Erreur mise à jour quantité : " . $e->getMessage());
             return false;
@@ -156,6 +160,8 @@ class CartService
     {
         try {
             return $this->snipcartClient->getOrders(['email' => $email]);
+        } catch (SnipcartException $e) {
+            throw $e;
         } catch (\Exception $e) {
             error_log("Erreur récupération commandes : " . $e->getMessage());
             return [];
@@ -169,6 +175,8 @@ class CartService
     {
         try {
             return $this->snipcartClient->getOrder($orderId);
+        } catch (SnipcartException $e) {
+            throw $e;
         } catch (\Exception $e) {
             error_log("Erreur récupération commande : " . $e->getMessage());
             return null;
