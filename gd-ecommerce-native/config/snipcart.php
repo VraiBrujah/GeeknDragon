@@ -14,7 +14,7 @@ return [
     'language' => $_ENV['SNIPCART_LANGUAGE'] ?? 'fr',
     'add_product_behavior' => $_ENV['SNIPCART_ADD_PRODUCT_BEHAVIOR'] ?? 'standard',
 
-    // URLs des endpoints (à adapter selon votre domaine)
+    // URLs des endpoints de notre backend
     'base_url' => $_ENV['SNIPCART_BASE_URL'] ?? 'https://api.geekndragon.com',
     'webhook_endpoints' => [
         'shipping' => $_ENV['SNIPCART_WEBHOOK_SHIPPING'] ?? '/snipcart/shipping',
@@ -26,5 +26,14 @@ return [
         'authorize' => '/snipcart/payment/authorize',
         'capture' => '/snipcart/payment/capture',
         'refund' => '/snipcart/payment/refund',
+    ],
+
+    // Configuration de l'API Snipcart
+    'api' => [
+        'base_url' => $_ENV['SNIPCART_API_BASE_URL'] ?? 'https://app.snipcart.com/api',
+        'endpoints' => [
+            'shipping_rates' => $_ENV['SNIPCART_API_SHIPPING_RATES'] ?? '/shippingrates',
+            'request_validation' => '/requestvalidation/',
+        ],
     ],
 ];
