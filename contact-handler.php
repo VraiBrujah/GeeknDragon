@@ -105,10 +105,23 @@ function sendSendgridMail(string $to, string $subject, string $body, string $rep
             'Content-Type: application/json',
         ],
         CURLOPT_POSTFIELDS     => json_encode($payload),
+        CURLOPT_CONNECTTIMEOUT => 5,
+        CURLOPT_TIMEOUT        => 10,
     ]);
     $response = curl_exec($ch);
-    $status   = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-    $error    = curl_error($ch);
+    if ($response === false) {
+        $error = curl_error($ch);
+        $details = [
+            'status'     => 0,
+            'response'   => '',
+            'curl_error' => $error,
+        ];
+        $sendgridLogger("SendGrid network failure: $error");
+        curl_close($ch);
+        return false;
+    }
+    $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    $error  = curl_error($ch);
     $details = [
         'status'    => $status,
         'response'  => $response,
