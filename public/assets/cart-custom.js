@@ -120,9 +120,6 @@ class GeeknDragonCart {
         // Support both `data-product-*` and `data-item-*` attributes so existing
         // Snipcart buttons can be used without modification.
         const productId = button.dataset.productId || button.dataset.itemId;
-        const productName = button.dataset.productName || button.dataset.itemName || productId;
-        const productPrice = parseFloat(button.dataset.productPrice || button.dataset.itemPrice) || 0;
-        const productImage = button.dataset.productImage || button.dataset.itemImage || '';
         const quantity = parseInt(button.dataset.quantity || button.dataset.itemQuantity) || 1;
         
         // Récupérer les options du produit (multiplicateurs, langue, etc.)
@@ -139,7 +136,7 @@ class GeeknDragonCart {
             }
         }
 
-        // Collect options defined via Snipcart custom field attributes
+        // Collect options defined via legacy Snipcart custom field attributes
         Object.keys(button.dataset).forEach((key) => {
             const match = key.match(/^itemCustom(\d+)Value$/i);
             if (match) {
@@ -151,13 +148,26 @@ class GeeknDragonCart {
                 }
             }
         });
-        
+
+        let productData;
+        try {
+            const res = await fetch(`/api/products/${encodeURIComponent(productId)}`);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const data = await res.json();
+            if (!data.success) throw new Error(data.message || 'Produit introuvable');
+            productData = data.product;
+        } catch (err) {
+            console.error('Erreur récupération produit:', err);
+            this.showError('Produit introuvable');
+            return;
+        }
+
         try {
             await this.addItem({
-                id: productId,
-                name: productName,
-                price: productPrice,
-                image: productImage,
+                id: productData.id,
+                name: productData.name,
+                price: productData.price,
+                image: productData.image || '',
                 quantity: quantity,
                 options: options
             });

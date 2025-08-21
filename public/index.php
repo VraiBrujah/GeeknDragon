@@ -147,6 +147,13 @@ $router->get('/api/cart/render', function() use ($config) {
     $controller->renderCart();
 });
 
+// Produit individuel
+$router->get('/api/products/{id}', function() use ($config) {
+    $id = basename(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH));
+    $controller = new GeeknDragon\Controller\ProductController($config);
+    $controller->getProduct($id);
+});
+
 // ===============================
 // ASSETS STATIQUES (BYPASS)
 // ===============================
