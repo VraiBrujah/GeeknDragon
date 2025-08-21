@@ -53,7 +53,19 @@
       cartModalOpen: false,
       currentAccountTab: 'profile',
     },
+    user: {
+      authenticated: false,
+      profile: null,
+      orders: [],
+    },
     initialized: false,
+  };
+
+  const API_ENDPOINTS = {
+    login: '/api/login',
+    logout: '/api/logout',
+    profile: '/api/profile',
+    orders: '/api/orders',
   };
 
   // Cache DOM pour les performances
@@ -109,6 +121,23 @@
       currency,
       minimumFractionDigits: 2,
     }).format(price);
+  }
+
+  /**
+   * Wrapper pour les requêtes API backend
+   */
+  async function apiRequest(url, options = {}) {
+    const opts = {
+      headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+      credentials: 'include',
+      ...options,
+    };
+    const response = await fetch(url, opts);
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message || 'Erreur réseau');
+    }
+    return response.json();
   }
 
   /**
@@ -501,58 +530,15 @@
                 </div>
 
                 <div class="gd-account-content">
-                  <div class="gd-tab-content active" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="gd-form-group">
-                      <label class="gd-form-label" for="profile-name">Nom d'Aventurier</label>
-                      <input type="text" id="profile-name" class="gd-form-input" placeholder="Votre nom complet">
-                    </div>
-                    <div class="gd-form-group">
-                      <label class="gd-form-label" for="profile-email">Adresse de Messagerie</label>
-                      <input type="email" id="profile-email" class="gd-form-input" placeholder="votre@email.com">
-                    </div>
-                    <div class="gd-form-group">
-                      <label class="gd-form-label" for="profile-class">Classe d'Aventurier</label>
-                      <select id="profile-class" class="gd-form-select">
-                        <option value="warrior">🗡️ Guerrier</option>
-                        <option value="mage">🔮 Mage</option>
-                        <option value="ranger">🏹 Rôdeur</option>
-                        <option value="cleric">⚕️ Clerc</option>
-                        <option value="rogue">🗡️ Voleur</option>
-                      </select>
-                    </div>
-                    <button class="gd-btn gd-btn-primary gd-btn-full">💾 Sauvegarder le Profil</button>
-                  </div>
-
-                  <div class="gd-tab-content" id="orders-panel" role="tabpanel" aria-labelledby="orders-tab">
-                    <div style="text-align: center; padding: 2rem; color: var(--gd-text-secondary);">
-                      📜 Vos quêtes précédentes apparaîtront ici
-                    </div>
-                  </div>
-
-                  <div class="gd-tab-content" id="settings-panel" role="tabpanel" aria-labelledby="settings-tab">
-                    <div class="gd-form-group">
-                      <label class="gd-form-label" for="settings-notifications">Notifications par Corbeau</label>
-                      <select id="settings-notifications" class="gd-form-select">
-                        <option value="all">Toutes les notifications</option>
-                        <option value="orders">Commandes uniquement</option>
-                        <option value="none">Aucune notification</option>
-                      </select>
-                    </div>
-                    <div class="gd-form-group">
-                      <label class="gd-form-label" for="settings-language">Langue Préférée</label>
-                      <select id="settings-language" class="gd-form-select">
-                        <option value="fr">Français</option>
-                        <option value="en">Common (English)</option>
-                      </select>
-                    </div>
-                    <button class="gd-btn gd-btn-secondary gd-btn-full">⚙️ Sauvegarder les Paramètres</button>
-                  </div>
+                  <div class="gd-tab-content active" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab"></div>
+                  <div class="gd-tab-content" id="orders-panel" role="tabpanel" aria-labelledby="orders-tab"></div>
+                  <div class="gd-tab-content" id="settings-panel" role="tabpanel" aria-labelledby="settings-tab"></div>
+                </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     `;
 
     // Modal Panier
@@ -755,6 +741,10 @@
       }
     }
 
+    if (modalId === 'gd-account-modal') {
+      loadAccountModal();
+    }
+
     requestAnimationFrame(() => {
       // Gestion de l'accessibilité
       modal.classList.add('active');
@@ -867,6 +857,176 @@
       activeTab.setAttribute('aria-selected', 'true');
       activeContent.classList.add('active');
       state.ui.currentAccountTab = tabName;
+    }
+  }
+
+  // ========================================================================
+  // API BACKEND & COMPTE
+  // ========================================================================
+
+  async function loginUser(credentials) {
+    const data = await apiRequest(API_ENDPOINTS.login, {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+    });
+    state.user.authenticated = true;
+    state.user.profile = data.profile || null;
+    return data;
+  }
+
+  async function logoutUser() {
+    await apiRequest(API_ENDPOINTS.logout, { method: 'POST' });
+    state.user = { authenticated: false, profile: null, orders: [] };
+  }
+
+  async function fetchProfile() {
+    const data = await apiRequest(API_ENDPOINTS.profile);
+    state.user.profile = data;
+    return data;
+  }
+
+  async function updateProfile(profile) {
+    const data = await apiRequest(API_ENDPOINTS.profile, {
+      method: 'PUT',
+      body: JSON.stringify(profile),
+    });
+    state.user.profile = data;
+    return data;
+  }
+
+  async function fetchOrders() {
+    const data = await apiRequest(API_ENDPOINTS.orders);
+    state.user.orders = data;
+    return data;
+  }
+
+  async function loadAccountModal() {
+    const profilePanel = document.getElementById('profile-panel');
+    const ordersPanel = document.getElementById('orders-panel');
+    const settingsPanel = document.getElementById('settings-panel');
+
+    if (profilePanel) profilePanel.innerHTML = '<p class="gd-loading-text">Chargement...</p>';
+    if (ordersPanel) ordersPanel.innerHTML = '<p class="gd-loading-text">Chargement...</p>';
+    if (settingsPanel) settingsPanel.innerHTML = '<p class="gd-loading-text">Chargement...</p>';
+
+    try {
+      const [profile, orders] = await Promise.all([
+        fetchProfile(),
+        fetchOrders(),
+      ]);
+      renderProfile(profile);
+      renderOrders(orders);
+      renderSettings(profile.settings || {});
+    } catch (error) {
+      logger.error('Erreur chargement données compte', error);
+      if (profilePanel) profilePanel.innerHTML = '<p>Erreur de chargement du profil.</p>';
+      if (ordersPanel) ordersPanel.innerHTML = '<p>Erreur de chargement des commandes.</p>';
+      if (settingsPanel) settingsPanel.innerHTML = '<p>Erreur de chargement des paramètres.</p>';
+    }
+  }
+
+  function renderProfile(profile) {
+    const panel = document.getElementById('profile-panel');
+    if (!panel) return;
+    panel.innerHTML = `
+      <div class="gd-form-group">
+        <label class="gd-form-label" for="profile-name">Nom d'Aventurier</label>
+        <input type="text" id="profile-name" class="gd-form-input" value="${escapeHtml(profile.name || '')}">
+      </div>
+      <div class="gd-form-group">
+        <label class="gd-form-label" for="profile-email">Adresse de Messagerie</label>
+        <input type="email" id="profile-email" class="gd-form-input" value="${escapeHtml(profile.email || '')}">
+      </div>
+      <div class="gd-form-group">
+        <label class="gd-form-label" for="profile-class">Classe d'Aventurier</label>
+        <select id="profile-class" class="gd-form-select">
+          <option value="warrior" ${profile.class === 'warrior' ? 'selected' : ''}>🗡️ Guerrier</option>
+          <option value="mage" ${profile.class === 'mage' ? 'selected' : ''}>🔮 Mage</option>
+          <option value="ranger" ${profile.class === 'ranger' ? 'selected' : ''}>🏹 Rôdeur</option>
+          <option value="cleric" ${profile.class === 'cleric' ? 'selected' : ''}>⚕️ Clerc</option>
+          <option value="rogue" ${profile.class === 'rogue' ? 'selected' : ''}>🗡️ Voleur</option>
+        </select>
+      </div>
+      <button class="gd-btn gd-btn-primary gd-btn-full" id="gd-save-profile">💾 Sauvegarder le Profil</button>
+    `;
+
+    const saveBtn = document.getElementById('gd-save-profile');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', async () => {
+        const payload = {
+          name: document.getElementById('profile-name').value,
+          email: document.getElementById('profile-email').value,
+          class: document.getElementById('profile-class').value,
+        };
+        try {
+          await updateProfile(payload);
+          showNotification('Profil mis à jour', 'success');
+        } catch (err) {
+          logger.error('Erreur mise à jour profil', err);
+          showNotification('Erreur de mise à jour du profil', 'error');
+        }
+      });
+    }
+  }
+
+  function renderOrders(orders) {
+    const panel = document.getElementById('orders-panel');
+    if (!panel) return;
+    if (!orders || orders.length === 0) {
+      panel.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--gd-text-secondary);">📜 Vos quêtes précédentes apparaîtront ici</div>';
+      return;
+    }
+    const html = orders
+      .map((order) => `
+        <div class="gd-order-item">
+          <div>Commande #${escapeHtml(order.id)}</div>
+          <div>${new Date(order.date).toLocaleDateString('fr-CA')}</div>
+          <div>${formatPrice(order.total)}</div>
+        </div>
+      `)
+      .join('');
+    panel.innerHTML = `<div class="gd-orders-list">${html}</div>`;
+  }
+
+  function renderSettings(settings) {
+    const panel = document.getElementById('settings-panel');
+    if (!panel) return;
+    panel.innerHTML = `
+      <div class="gd-form-group">
+        <label class="gd-form-label" for="settings-notifications">Notifications par Corbeau</label>
+        <select id="settings-notifications" class="gd-form-select">
+          <option value="all" ${settings.notifications === 'all' ? 'selected' : ''}>Toutes les notifications</option>
+          <option value="orders" ${settings.notifications === 'orders' ? 'selected' : ''}>Commandes uniquement</option>
+          <option value="none" ${settings.notifications === 'none' ? 'selected' : ''}>Aucune notification</option>
+        </select>
+      </div>
+      <div class="gd-form-group">
+        <label class="gd-form-label" for="settings-language">Langue Préférée</label>
+        <select id="settings-language" class="gd-form-select">
+          <option value="fr" ${settings.language === 'fr' ? 'selected' : ''}>Français</option>
+          <option value="en" ${settings.language === 'en' ? 'selected' : ''}>Common (English)</option>
+        </select>
+      </div>
+      <button class="gd-btn gd-btn-secondary gd-btn-full" id="gd-save-settings">⚙️ Sauvegarder les Paramètres</button>
+    `;
+
+    const saveSettings = document.getElementById('gd-save-settings');
+    if (saveSettings) {
+      saveSettings.addEventListener('click', async () => {
+        const payload = {
+          settings: {
+            notifications: document.getElementById('settings-notifications').value,
+            language: document.getElementById('settings-language').value,
+          },
+        };
+        try {
+          await updateProfile(payload);
+          showNotification('Paramètres mis à jour', 'success');
+        } catch (err) {
+          logger.error('Erreur mise à jour paramètres', err);
+          showNotification('Erreur de mise à jour des paramètres', 'error');
+        }
+      });
     }
   }
 
@@ -2276,14 +2436,18 @@
     addToCart,
     removeItem: removeFromCart,
     updateQuantity: updateItemQuantity,
-    updateVariant,
-    clearCart,
+      updateVariant,
+      clearCart,
 
-    // Contrôle des modales
-    openAccountModal: () => openModal('gd-account-modal'),
-    openCartModal: () => openModal('gd-cart-modal'),
-    closeAccountModal: () => closeModal('gd-account-modal'),
-    closeCartModal: () => closeModal('gd-cart-modal'),
+      // Authentification
+      login: loginUser,
+      logout: logoutUser,
+
+      // Contrôle des modales
+      openAccountModal: () => openModal('gd-account-modal'),
+      openCartModal: () => openModal('gd-cart-modal'),
+      closeAccountModal: () => closeModal('gd-account-modal'),
+      closeCartModal: () => closeModal('gd-cart-modal'),
 
     // Utilitaires
     getCart: () => ({ ...state.cart }),
