@@ -93,13 +93,8 @@ $isInStock = inStock($id);
 
       <!-- Bouton d'achat -->
       <button class="gd-add-to-cart add-to-cart-btn"
-              data-item-id="<?= htmlspecialchars($id) ?>"
-              data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-              data-item-price="<?= htmlspecialchars($price) ?>"
-              data-item-url="<?= htmlspecialchars($url) ?>"
-              data-item-description="<?= htmlspecialchars(strip_tags($desc)) ?>"
-              data-item-image="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-              data-item-quantity="1">
+              data-product-id="<?= htmlspecialchars($id) ?>"
+              data-quantity="1">
         <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
           <circle cx="9" cy="20" r="1"/>
@@ -147,17 +142,17 @@ $isInStock = inStock($id);
     }
     
     // Gestion du bouton d'achat
-    const btn = e.target.closest('.snipcart-add-item');
+    const btn = e.target.closest('.gd-add-to-cart');
     if (!btn) return;
 
-    const id = btn.getAttribute('data-item-id');
+    const id = btn.getAttribute('data-product-id');
     if (!id) return;
 
     // Mise à jour de la quantité
     const qtyEl = document.getElementById('qty-' + id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
+      if (!isNaN(q) && q > 0) btn.setAttribute('data-quantity', String(q));
     }
   }, { passive: true });
 

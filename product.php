@@ -198,19 +198,8 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
         </div>
 
         <button class="gd-add-to-cart btn btn-shop"
-            data-base-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
-            data-item-id="<?= htmlspecialchars($id) ?>"
-            data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
-            data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
-            data-item-url="<?= htmlspecialchars($metaUrl) ?>"
-            data-item-description="<?= htmlspecialchars($productDescText) ?>"
-            data-item-image="<?= !empty($images) ? '/' . ltrim(htmlspecialchars($images[0]), '/') : '' ?>"
-            data-item-quantity="1"
-            <?php if (!empty($customOptions)) : ?>
-            data-item-custom1-name="<?= htmlspecialchars($customLabel) ?>"
-            data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
-            data-item-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
-          <?php endif; ?>
+            data-product-id="<?= htmlspecialchars($id) ?>"
+            data-quantity="1"
         >
           <span data-i18n="product.add">Ajouter au sac</span>
         </button>
@@ -398,26 +387,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const btn = e.target.closest('.gd-add-to-cart');
     if (!btn) return;
 
-    const id = btn.getAttribute('data-item-id');
+    const id = btn.getAttribute('data-product-id');
     if (!id) return;
 
     // Quantité
     const qtyEl = document.getElementById('qty-' + id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
+      if (!isNaN(q) && q > 0) btn.setAttribute('data-quantity', String(q));
     }
 
-    // Multiplicateur (si présent)
-    const multEl = document.getElementById('multiplier-' + id);
-    if (multEl) {
-      const mult = multEl.value;
-      btn.setAttribute('data-item-custom1-value', mult);
-
-      // Mettre à jour le nom affiché dans le panier (optionnel)
-      const baseName = btn.getAttribute('data-base-name');
-      btn.setAttribute('data-item-name', mult !== '1' ? (baseName + ' x' + mult) : baseName);
-    }
+    // Multiplicateur désactivé pour le panier custom
   }, { passive: true });
 })();
 </script>
