@@ -4,7 +4,7 @@ Site web Geek&Dragon
 
 ## Project overview
 
-GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart.com/). It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and Snipcart handles the shopping cart and checkout. Stock levels are managed directly through Snipcart's Inventory API.
+GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart.com/). It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and Snipcart handles the shopping cart, checkout, and payment processing. Stock levels are managed directly through Snipcart's Inventory API.
 
 ## Product lots and custom chests
 
@@ -29,7 +29,7 @@ Multipliers are handled with Snipcart custom fields. Add a `<select>` with the c
 
 ## Environment variables
 
-The application expects a few secrets to be provided through the environment:
+The application expects a few secrets to be provided through the environment. Snipcart now manages payments end to end, so no additional payment gateway keys are needed:
 
 - `SNIPCART_API_KEY` – your public Snipcart API key.
 - `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates. **Keep this key strictly server-side; it must never be exposed to client-side code or shipped to the browser.**
@@ -48,7 +48,7 @@ To send emails from the contact form using SendGrid's SMTP service, configure cr
 ## Local setup
 
 1. Install PHP (7.4 or newer) and clone this repository.
-2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SNIPCART_LANGUAGE`, `SNIPCART_ADD_PRODUCT_BEHAVIOR`, `SENDGRID_API_KEY` and the SMTP variables.
+2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SNIPCART_LANGUAGE`, `SNIPCART_ADD_PRODUCT_BEHAVIOR`, `SENDGRID_API_KEY` and the SMTP variables. No additional payment gateway key is required.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
 3. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
 
