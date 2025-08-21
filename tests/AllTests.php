@@ -13,6 +13,7 @@ use GeeknDragon\I18n\TranslationService;
 use GeeknDragon\Cart\SnipcartClient;
 use GeeknDragon\Cart\CartService;
 use GeeknDragon\Core\Router;
+use GeeknDragon\Security\CsrfProtection;
 
 class AllTests
 {
@@ -34,6 +35,7 @@ class AllTests
         $this->testSnipcartClient();
         $this->testCartService();
         $this->testRouter();
+        $this->testCsrfProtection();
         
         // Tests fonctionnels
         $this->testFileIncludes();
@@ -266,6 +268,48 @@ class AllTests
             
         } catch (Exception $e) {
             $this->fail("Router: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Tests de la protection CSRF
+     */
+    private function testCsrfProtection(): void
+    {
+        echo "🛡️ Tests CsrfProtection...\n";
+
+        try {
+            // Génération initiale
+            $token1 = CsrfProtection::generateToken();
+            $time1 = $_SESSION['csrf_token_time'] ?? null;
+            $this->assert(!empty($time1), "Horodatage initial défini");
+
+            // getToken doit conserver l'horodatage
+            $token2 = CsrfProtection::getToken();
+            $time2 = $_SESSION['csrf_token_time'] ?? null;
+            $this->assert($token2 === $token1, "getToken retourne le même token");
+            $this->assert($time2 === $time1, "getToken conserve l'horodatage");
+
+            // regenerateToken doit générer un nouveau token et mettre à jour l'horodatage
+            $time2 = $_SESSION['csrf_token_time'] = time() - 10;
+            $token3 = CsrfProtection::regenerateToken();
+            $time3 = $_SESSION['csrf_token_time'] ?? null;
+            $this->assert($token3 !== $token1, "regenerateToken génère un nouveau token");
+            $this->assert($time3 > $time2, "regenerateToken met à jour l'horodatage");
+
+            // cleanup doit uniquement régénérer si expiré
+            $_SESSION['csrf_token'] = 'old';
+            $_SESSION['csrf_token_time'] = time() - 3601;
+            CsrfProtection::cleanup();
+            $this->assert($_SESSION['csrf_token'] !== 'old', "cleanup régénère un token expiré");
+
+            $currentToken = $_SESSION['csrf_token'];
+            $_SESSION['csrf_token_time'] = time();
+            CsrfProtection::cleanup();
+            $this->assert($_SESSION['csrf_token'] === $currentToken, "cleanup ne régénère pas un token valide");
+
+        } catch (Exception $e) {
+            $this->fail("CsrfProtection: " . $e->getMessage());
         }
     }
     

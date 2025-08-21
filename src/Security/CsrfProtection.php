@@ -17,10 +17,11 @@ class CsrfProtection
     public static function generateToken(): string
     {
         self::ensureSession();
-        
+
         $token = bin2hex(random_bytes(32));
         $_SESSION[self::SESSION_KEY] = $token;
-        
+        $_SESSION['csrf_token_time'] = time();
+
         return $token;
     }
     
@@ -30,11 +31,15 @@ class CsrfProtection
     public static function getToken(): string
     {
         self::ensureSession();
-        
+
         if (!isset($_SESSION[self::SESSION_KEY])) {
             return self::generateToken();
         }
-        
+
+        if (!isset($_SESSION['csrf_token_time'])) {
+            $_SESSION['csrf_token_time'] = time();
+        }
+
         return $_SESSION[self::SESSION_KEY];
     }
     
@@ -149,10 +154,9 @@ class CsrfProtection
         // Simple cleanup - régénérer le token s'il est ancien
         $tokenAge = $_SESSION['csrf_token_time'] ?? 0;
         $maxAge = 3600; // 1 heure
-        
+
         if (time() - $tokenAge > $maxAge) {
             self::generateToken();
-            $_SESSION['csrf_token_time'] = time();
         }
     }
 }
