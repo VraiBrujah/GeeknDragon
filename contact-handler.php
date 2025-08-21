@@ -16,6 +16,9 @@ $errors = [];
 $nom = trim($_POST['Nom'] ?? '');
 $email = trim($_POST['Email'] ?? '');
 $telephone = trim($_POST['Téléphone'] ?? '');
+if ($telephone !== '') {
+    $telephone = preg_replace('/\s+/', ' ', $telephone);
+}
 $message = trim($_POST['Message'] ?? '');
 $csrf = $_POST['csrf_token'] ?? '';
 
@@ -32,6 +35,12 @@ if (
     preg_match("/[\r\n]/", $email)
 ) {
     $errors[] = "L'adresse e-mail est invalide.";
+}
+if (
+    $telephone !== '' &&
+    !preg_match('/^[0-9+()\\s-]{0,20}$/', $telephone)
+) {
+    $errors[] = 'Le numéro de téléphone est invalide.';
 }
 if ($message === '') {
     $errors[] = 'Le message est requis.';
