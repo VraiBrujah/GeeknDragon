@@ -31,5 +31,10 @@ final class SnipcartClientTest extends TestCase
         $orders = $client->getOrders();
         $this->assertArrayHasKey('items', $orders, 'Les commandes mock doivent avoir des items');
         $this->assertIsArray($orders['items'], 'Les items doivent être un tableau');
+
+        $customer = $client->getCustomerByEmail('test@example.com');
+        $this->assertIsArray($customer, 'Le client mock doit être un tableau');
+        $profile = $client->getCustomer($customer['id']);
+        $this->assertSame($customer['id'], $profile['id'], 'Le profil client doit correspondre');
     }
 }

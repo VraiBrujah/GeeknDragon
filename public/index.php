@@ -138,6 +138,22 @@ $router->get('/api/products/{id}', function ($id) use ($config) {
     $controller->getProduct($id);
 });
 
+// Endpoints compte client
+$router->post('/api/account/login', function () use ($config) {
+    $controller = new GeeknDragon\Controller\AccountController($config);
+    $controller->login();
+});
+
+$router->get('/api/account/profile', function () use ($config) {
+    $controller = new GeeknDragon\Controller\AccountController($config);
+    $controller->profile();
+});
+
+$router->get('/api/account/orders', function () use ($config) {
+    $controller = new GeeknDragon\Controller\AccountController($config);
+    $controller->orders();
+});
+
 // ===============================
 // ASSETS STATIQUES (BYPASS)
 // ===============================
