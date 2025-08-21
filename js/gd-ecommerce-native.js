@@ -17,6 +17,7 @@
     autoSave: true,
     analytics: false, // Respect RGPD
     debug: false, // Mode production
+    snipcartApiKey: document.querySelector('meta[name="snipcart-api-key"]')?.content || '',
   };
 
   // Système de logging structuré
@@ -155,6 +156,41 @@
     setTimeout(() => {
       elements.body.removeChild(announcement);
     }, 1000);
+  }
+
+  /**
+   * Charge le script Snipcart officiel pour gérer le paiement
+   */
+  function loadSnipcart() {
+    return new Promise((resolve) => {
+      if (window.Snipcart) {
+        resolve();
+        return;
+      }
+      const existing = document.getElementById('snipcart-script');
+      if (existing) {
+        existing.addEventListener('load', resolve);
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://cdn.snipcart.com/themes/v3.0.32/default/snipcart.js';
+      script.async = true;
+      script.id = 'snipcart-script';
+      script.onload = () => {
+        if (window.Snipcart && typeof window.Snipcart.checkout?.configure === 'function') {
+          window.Snipcart.checkout.configure({});
+        }
+        resolve();
+      };
+      document.head.appendChild(script);
+
+      const div = document.createElement('div');
+      div.id = 'snipcart';
+      if (CONFIG.snipcartApiKey) {
+        div.setAttribute('data-api-key', CONFIG.snipcartApiKey);
+      }
+      document.body.appendChild(div);
+    });
   }
 
   /**
@@ -2201,71 +2237,22 @@
    * Rendre l'étape de paiement
    */
   function renderPaymentStep(container) {
+    loadSnipcart();
     const total = state.cart.total + checkoutState.shipping.cost + checkoutState.taxes.amount;
 
     container.innerHTML = `
       <div class="gd-checkout-step">
         <h3 class="gd-step-title">💳 Paiement</h3>
-        
-        <div class="gd-payment-section">
-          <div class="gd-payment-form">
-            <h4>💳 Informations de paiement</h4>
-            
-            <form class="gd-credit-card-form" id="payment-form">
-              <div class="gd-form-group">
-                <label for="card-number">Numéro de carte *</label>
-                <input type="text" id="card-number" name="cardNumber" required 
-                       placeholder="1234 5678 9012 3456" 
-                       maxlength="19"
-                       oninput="GDEcommerce.formatCardNumber(this)">
-              </div>
-              
-              <div class="gd-form-row">
-                <div class="gd-form-group">
-                  <label for="card-expiry">Date d'expiration *</label>
-                  <input type="text" id="card-expiry" name="cardExpiry" required 
-                         placeholder="MM/AA" 
-                         maxlength="5"
-                         oninput="GDEcommerce.formatCardExpiry(this)">
-                </div>
-                <div class="gd-form-group">
-                  <label for="card-cvc">Code CVC *</label>
-                  <input type="text" id="card-cvc" name="cardCvc" required 
-                         placeholder="123" 
-                         maxlength="4"
-                         oninput="GDEcommerce.formatCardCvc(this)">
-                </div>
-              </div>
-              
-              <div class="gd-form-group">
-                <label for="card-name">Nom sur la carte *</label>
-                <input type="text" id="card-name" name="cardName" required 
-                       placeholder="NOM PRÉNOM"
-                       value="${checkoutState.addresses.billing.firstname} ${checkoutState.addresses.billing.lastname}"
-                       style="text-transform: uppercase;">
-              </div>
 
-              <div class="gd-payment-security">
-                <div class="gd-security-badges">
-                  <span class="gd-security-badge">🔒 Sécurisé SSL</span>
-                  <span class="gd-security-badge">🛡️ Stripe</span>
-                  <span class="gd-security-badge">🔐 3D Secure</span>
-                </div>
-                <p class="gd-security-text">
-                  Vos informations de paiement sont sécurisées et chiffrées.
-                </p>
-              </div>
-            </form>
-          </div>
+        <div class="gd-payment-section">
+          <p class="gd-payment-text">Le paiement sera traité de façon sécurisée par Snipcart.</p>
         </div>
 
         <div class="gd-step-actions">
           <button class="gd-btn gd-btn-outline" onclick="GDEcommerce.previousCheckoutStep()">
             ⬅️ Retour
           </button>
-          <button class="gd-btn gd-btn-primary gd-btn-large" 
-                  onclick="GDEcommerce.processPayment()" 
-                  id="pay-button">
+          <button class="gd-btn gd-btn-primary gd-btn-large snipcart-checkout" id="pay-button">
             ⚔️ Payer ${formatPrice(total)} 💰
           </button>
         </div>
@@ -2273,121 +2260,7 @@
     `;
   }
 
-  /**
-   * Formater le numéro de carte
-   */
-  function formatCardNumber(input) {
-    const value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-    const match = value.match(/\d{4,16}/g);
-    const parts = [];
-
-    if (match) {
-      for (let i = 0, len = match[0].length; i < len; i += 4) {
-        parts.push(match[0].substring(i, i + 4));
-      }
-    }
-
-    input.value = parts.length ? parts.join(' ') : value;
-  }
-
-  /**
-   * Formater la date d'expiration
-   */
-  function formatCardExpiry(input) {
-    let value = input.value.replace(/\D/g, '');
-    if (value.length >= 2) {
-      value = `${value.substring(0, 2)}/${value.substring(2, 4)}`;
-    }
-    input.value = value;
-  }
-
-  /**
-   * Formater le code CVC
-   */
-  function formatCardCvc(input) {
-    input.value = input.value.replace(/\D/g, '');
-  }
-
-  /**
-   * Traiter le paiement
-   */
-  async function processPayment() {
-    const payButton = document.getElementById('pay-button');
-    if (!payButton) return;
-
-    const form = document.getElementById('payment-form');
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    const total = state.cart.total + checkoutState.shipping.cost + checkoutState.taxes.amount;
-
-    payButton.disabled = true;
-    payButton.innerHTML = '⏳ Traitement en cours...';
-    checkoutState.payment.processing = true;
-
-    try {
-      const invoice = {
-        amount: total,
-        currency: CONFIG.currency.toLowerCase(),
-        number: `GD-${Date.now()}`,
-        email: checkoutState.addresses.billing.email,
-      };
-
-      // paymentMethodId should come from Stripe.js integration in production
-      const payload = {
-        invoice,
-        paymentMethodId: 'pm_card_visa',
-      };
-
-      const response = await fetch(
-        '/gd-ecommerce-native/public/index.php/snipcart/payment/authorize',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      if (data.status === 'success') {
-        if (data.instructions && data.instructions.toLowerCase().includes('capture')) {
-          await fetch('/gd-ecommerce-native/public/index.php/snipcart/payment/capture', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ transactionId: data.transactionId }),
-          });
-        }
-
-        logger.info('Paiement traité avec succès', data);
-        clearCart();
-        window.location.href = '/merci.php';
-      } else if (data.status === 'requires_action') {
-        showNotification(data.instructions || 'Authentification requise.', 'error');
-        payButton.disabled = false;
-        payButton.innerHTML = `⚔️ Payer ${formatPrice(total)} 💰`;
-      } else {
-        const message = data.instructions || 'Erreur lors du traitement du paiement. Veuillez réessayer.';
-        logger.error('Paiement refusé', data);
-        showNotification(message, 'error');
-        payButton.disabled = false;
-        payButton.innerHTML = `⚔️ Payer ${formatPrice(total)} 💰`;
-      }
-    } catch (error) {
-      logger.error('Erreur lors du paiement:', error);
-      showNotification('Erreur lors du traitement du paiement. Veuillez réessayer.', 'error');
-
-      payButton.disabled = false;
-      payButton.innerHTML = `⚔️ Payer ${formatPrice(total)} 💰`;
-    }
-
-    checkoutState.payment.processing = false;
-  }
+  // Le traitement du paiement est désormais délégué au script officiel Snipcart.
 
   /**
    * Afficher la confirmation de commande
@@ -2467,10 +2340,6 @@
     previousCheckoutStep,
     toggleShippingAddress,
     selectShippingMethod,
-    formatCardNumber,
-    formatCardExpiry,
-    formatCardCvc,
-    processPayment,
 
     // État de l'interface
     isAccountModalOpen: () => state.ui.accountModalOpen,
