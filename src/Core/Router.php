@@ -66,8 +66,9 @@ class Router
         
         // Recherche de route avec paramètres dynamiques
         foreach ($this->routes[$method] ?? [] as $route => $handler) {
-            if ($this->matchRoute($route, $uri)) {
-                $this->executeHandler($handler);
+            $params = $this->matchRoute($route, $uri);
+            if ($params !== null) {
+                $this->executeHandler($handler, $params);
                 return;
             }
         }
@@ -77,24 +78,32 @@ class Router
     }
     
     /**
-     * Vérifie si une route correspond avec support des paramètres dynamiques
+     * Vérifie si une route correspond et retourne les paramètres extraits
      */
-    private function matchRoute(string $route, string $uri): bool
+    private function matchRoute(string $route, string $uri): ?array
     {
-        // Support simple des paramètres comme /product/{id}
-        $pattern = preg_replace('/\{[^}]+\}/', '([^/]+)', $route);
+        $paramNames = [];
+        $pattern = preg_replace_callback('/\{([^}]+)\}/', function ($matches) use (&$paramNames) {
+            $paramNames[] = $matches[1];
+            return '([^/]+)';
+        }, $route);
         $pattern = '#^' . $pattern . '$#';
-        
-        return preg_match($pattern, $uri) === 1;
+
+        if (preg_match($pattern, $uri, $matches)) {
+            array_shift($matches); // supprimer la correspondance complète
+            return array_combine($paramNames, $matches);
+        }
+
+        return null;
     }
     
     /**
      * Exécute un gestionnaire de route
      */
-    private function executeHandler(callable $handler): void
+    private function executeHandler(callable $handler, array $params = []): void
     {
         try {
-            call_user_func($handler);
+            call_user_func_array($handler, $params);
         } catch (Throwable $e) {
             $this->handle500($e);
         }
