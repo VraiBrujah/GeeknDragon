@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**  header.php  —  barre de navigation commune
  *  Usage :  <?php include 'header.php'; ?>
  *  $active (optionnel) = chaîne « produits », « boutique », « actus », « contact »…

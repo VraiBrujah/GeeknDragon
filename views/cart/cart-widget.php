@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Widget panier custom
  * Variables disponibles : $helper (ViewHelper), $cartService (CartService)

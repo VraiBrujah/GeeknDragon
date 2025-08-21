@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Contenu HTML des articles du panier pour le widget
  * Variables disponibles : $helper (ViewHelper), $cartService (CartService)

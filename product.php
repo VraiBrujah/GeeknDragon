@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 require __DIR__ . '/i18n.php';

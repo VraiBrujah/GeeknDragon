@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /** head-common.php - shared head section */
 ?>
 <head>

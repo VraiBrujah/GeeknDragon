@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Script de test pour valider les clés API Snipcart
  * Mode production - affiche des erreurs claires si les clés ne fonctionnent pas
