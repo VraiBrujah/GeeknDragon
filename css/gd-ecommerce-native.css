@@ -993,6 +993,14 @@
   backdrop-filter: blur(2px);
 }
 
+.gd-loading-text {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
 /* Focus trap pour les modales */
 .gd-modal-overlay:not(.active) {
   pointer-events: none;
