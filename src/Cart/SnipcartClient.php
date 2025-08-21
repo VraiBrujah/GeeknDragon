@@ -33,10 +33,23 @@ class SnipcartClient
         if ($this->mockMode) {
             return $this->getMockProduct($productId);
         }
-        
+
         return $this->makeRequest("GET", "/products/{$productId}");
     }
-    
+
+    /**
+     * Crée ou met à jour un produit
+     */
+    public function createOrUpdateProduct(array $product): array
+    {
+        if ($this->mockMode) {
+            $id = $product['id'] ?? 'mock-product';
+            return array_merge($this->getMockProduct($id), $product);
+        }
+
+        return $this->makeRequest('POST', '/products', $product);
+    }
+
     /**
      * Récupère l'inventaire d'un produit
      */

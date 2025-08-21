@@ -36,6 +36,7 @@
         "test": "php tests/AllTests.php",
         "linkcheck": "php tools/linkcheck.php",
         "report": "php tools/report.php > report.html",
+        "sync-products": "php tools/sync-snipcart-products.php",
         "build": [
             "npm run build",
             "composer dump-autoload"

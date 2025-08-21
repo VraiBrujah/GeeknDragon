@@ -140,7 +140,17 @@ class AllTests
             $this->assert(isset($product['id']), "Le produit mock doit avoir un ID");
             $this->assert(isset($product['name']), "Le produit mock doit avoir un nom");
             $this->assert(isset($product['price']), "Le produit mock doit avoir un prix");
-            
+
+            // Test création produit mock
+            $created = $client->createOrUpdateProduct([
+                'id' => 'test-new-product',
+                'name' => 'Produit Test',
+                'price' => 9.99,
+                'url' => 'https://example.com/product',
+                'image' => '/images/test.jpg'
+            ]);
+            $this->assert($created['id'] === 'test-new-product', "La création de produit mock doit retourner l'ID fourni");
+
             // Test récupération inventaire mock
             $inventory = $client->getInventory('test-product');
             $this->assert(isset($inventory['stock']), "L'inventaire mock doit avoir un stock");
