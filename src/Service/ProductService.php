@@ -13,20 +13,19 @@ class ProductService
     private static ?self $instance = null;
     private InventoryService $inventoryService;
 
-    private function __construct()
+    private function __construct(InventoryService $inventoryService)
     {
+        $this->inventoryService = $inventoryService;
         $this->loadProducts();
-        $config = require __DIR__ . '/../../config.php';
-        $this->inventoryService = InventoryService::getInstance($config);
     }
-    
+
     /**
      * Singleton pour éviter de recharger les produits
      */
-    public static function getInstance(): self
+    public static function getInstance(InventoryService $inventoryService): self
     {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new self($inventoryService);
         }
         return self::$instance;
     }

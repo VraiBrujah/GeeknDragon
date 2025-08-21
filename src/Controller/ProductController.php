@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace GeeknDragon\Controller;
 
-use GeeknDragon\Service\ProductService;
+use GeeknDragon\Service\{ProductService, InventoryService};
 
 /**
  * API pour récupérer les informations d'un produit
@@ -15,7 +15,8 @@ class ProductController extends BaseController
     public function __construct(array $config)
     {
         parent::__construct($config);
-        $this->productService = ProductService::getInstance();
+        $inventoryService = InventoryService::getInstance($config);
+        $this->productService = ProductService::getInstance($inventoryService);
     }
 
     /**
