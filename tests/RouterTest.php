@@ -40,4 +40,27 @@ final class RouterTest extends TestCase
         $router->redirect('/old-path', '/new-path');
         $this->assertTrue(true, 'Test des redirections passé');
     }
+
+    public function testMiddlewareTransformsUri(): void
+    {
+        $router = new Router();
+
+        $executed = false;
+        $router->get('/after', function () use (&$executed) {
+            $executed = true;
+        });
+
+        $router->middleware(function (string $uri) {
+            return '/after';
+        });
+
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/before';
+
+        ob_start();
+        $router->resolve();
+        ob_end_clean();
+
+        $this->assertTrue($executed, "Le middleware doit permettre de r\u00e9\u00e9crire l'URI");
+    }
 }

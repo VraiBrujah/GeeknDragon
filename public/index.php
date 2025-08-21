@@ -17,66 +17,51 @@ $config = require __DIR__ . '/../config.php';
 // Initialisation du routeur
 $router = new Router();
 
+// Middleware pour normaliser les URLs se terminant par .php
+$router->middleware(function (string $uri) use ($router) {
+    if (str_ends_with($uri, '.php')) {
+        $canonical = substr($uri, 0, -4) ?: '/';
+        $router->redirect($uri, $canonical);
+    }
+    return $uri;
+});
+
 // ===============================
-// ROUTES PRINCIPALES (PRÉSERVATION DES URLs EXISTANTES)
+// ROUTES PRINCIPALES
 // ===============================
 
 // Page d'accueil
-$router->get('/', function() {
+$router->get('/', function () {
     require __DIR__ . '/../index.php';
 });
 
 // Boutique
-$router->get('/boutique.php', function() {
-    require __DIR__ . '/../boutique.php';
-});
-
-$router->get('/boutique', function() {
+$router->get('/boutique', function () {
     require __DIR__ . '/../boutique.php';
 });
 
 // Contact
-$router->get('/contact.php', function() {
-    require __DIR__ . '/../contact.php';
-});
-
-$router->get('/contact', function() {
+$router->get('/contact', function () {
     require __DIR__ . '/../contact.php';
 });
 
 // Traitement formulaire contact
-$router->post('/contact.php', function() {
-    require __DIR__ . '/../contact-handler.php';
-});
-
-$router->post('/contact', function() {
+$router->post('/contact', function () {
     require __DIR__ . '/../contact-handler.php';
 });
 
 // Checkout
-$router->get('/checkout.php', function() {
-    require __DIR__ . '/../checkout.php';
-});
-
-$router->get('/checkout', function() {
+$router->get('/checkout', function () {
     require __DIR__ . '/../checkout.php';
 });
 
 // Page de remerciement
-$router->get('/merci.php', function() {
-    require __DIR__ . '/../merci.php';
-});
-
-$router->get('/merci', function() {
+$router->get('/merci', function () {
     require __DIR__ . '/../merci.php';
 });
 
 // Shipping
-$router->get('/shipping.php', function() {
-    require __DIR__ . '/../shipping.php';
-});
-
-$router->get('/shipping', function() {
+$router->get('/shipping', function () {
     require __DIR__ . '/../shipping.php';
 });
 
@@ -84,24 +69,24 @@ $router->get('/shipping', function() {
 // PRODUITS SPÉCIFIQUES
 // ===============================
 
-$router->get('/lot10.php', function() {
+$router->get('/lot10', function () {
     require __DIR__ . '/../lot10.php';
 });
 
-$router->get('/lot25.php', function() {
+$router->get('/lot25', function () {
     require __DIR__ . '/../lot25.php';
 });
 
-$router->get('/lot50-essence.php', function() {
+$router->get('/lot50-essence', function () {
     require __DIR__ . '/../lot50-essence.php';
 });
 
-$router->get('/lot50-tresorerie.php', function() {
+$router->get('/lot50-tresorerie', function () {
     require __DIR__ . '/../lot50-tresorerie.php';
 });
 
 // Page produit générique
-$router->get('/product.php', function() {
+$router->get('/product', function () {
     require __DIR__ . '/../product.php';
 });
 
@@ -109,7 +94,7 @@ $router->get('/product.php', function() {
 // ACTUALITÉS
 // ===============================
 
-$router->get('/actualites/es-tu-game.php', function() {
+$router->get('/actualites/es-tu-game', function () {
     require __DIR__ . '/../actualites/es-tu-game.php';
 });
 
@@ -117,38 +102,38 @@ $router->get('/actualites/es-tu-game.php', function() {
 // API PANIER CUSTOM
 // ===============================
 
-$router->get('/api/cart', function() use ($config) {
+$router->get('/api/cart', function () use ($config) {
     $controller = new GeeknDragon\Controller\CartController($config);
     $controller->getCart();
 });
 
-$router->post('/api/cart/add', function() use ($config) {
+$router->post('/api/cart/add', function () use ($config) {
     $controller = new GeeknDragon\Controller\CartController($config);
     $controller->addItem();
 });
 
-$router->post('/api/cart/update', function() use ($config) {
+$router->post('/api/cart/update', function () use ($config) {
     $controller = new GeeknDragon\Controller\CartController($config);
     $controller->updateItem();
 });
 
-$router->post('/api/cart/remove', function() use ($config) {
+$router->post('/api/cart/remove', function () use ($config) {
     $controller = new GeeknDragon\Controller\CartController($config);
     $controller->removeItem();
 });
 
-$router->post('/api/cart/clear', function() use ($config) {
+$router->post('/api/cart/clear', function () use ($config) {
     $controller = new GeeknDragon\Controller\CartController($config);
     $controller->clearCart();
 });
 
-$router->get('/api/cart/render', function() use ($config) {
+$router->get('/api/cart/render', function () use ($config) {
     $controller = new GeeknDragon\Controller\CartController($config);
     $controller->renderCart();
 });
 
 // Produit individuel
-$router->get('/api/products/{id}', function($id) use ($config) {
+$router->get('/api/products/{id}', function ($id) use ($config) {
     $controller = new GeeknDragon\Controller\ProductController($config);
     $controller->getProduct($id);
 });
@@ -171,8 +156,18 @@ if (in_array(strtolower($extension), $staticExtensions)) {
 // REDIRECTIONS 301 POUR COMPATIBILITÉ
 // ===============================
 
-// Si des URLs changent, ajouter des redirections ici
-// $router->redirect('/old-url', '/new-url');
+$router->redirect('/index.php', '/');
+$router->redirect('/boutique.php', '/boutique');
+$router->redirect('/contact.php', '/contact');
+$router->redirect('/checkout.php', '/checkout');
+$router->redirect('/merci.php', '/merci');
+$router->redirect('/shipping.php', '/shipping');
+$router->redirect('/lot10.php', '/lot10');
+$router->redirect('/lot25.php', '/lot25');
+$router->redirect('/lot50-essence.php', '/lot50-essence');
+$router->redirect('/lot50-tresorerie.php', '/lot50-tresorerie');
+$router->redirect('/product.php', '/product');
+$router->redirect('/actualites/es-tu-game.php', '/actualites/es-tu-game');
 
 // ===============================
 // RÉSOLUTION ET EXÉCUTION

@@ -13,6 +13,8 @@ class Router
 {
     private array $routes = [];
     private array $redirects = [];
+    /** @var callable[] */
+    private array $middlewares = [];
     
     /**
      * Ajoute une route GET
@@ -37,6 +39,14 @@ class Router
     {
         $this->redirects[$from] = ['to' => $to, 'code' => $code];
     }
+
+    /**
+     * Ajoute un middleware exécuté avant la résolution
+     */
+    public function middleware(callable $middleware): void
+    {
+        $this->middlewares[] = $middleware;
+    }
     
     /**
      * Résout et exécute la route courante
@@ -45,10 +55,16 @@ class Router
     {
         $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
         $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
-        
+
         // Nettoyage de l'URI
         $uri = rtrim($uri, '/') ?: '/';
-        
+
+        // Exécuter les middlewares
+        foreach ($this->middlewares as $middleware) {
+            $uri = $middleware($uri);
+            $uri = rtrim($uri, '/') ?: '/';
+        }
+
         // Vérifier les redirections d'abord
         if (isset($this->redirects[$uri])) {
             $redirect = $this->redirects[$uri];
