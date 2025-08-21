@@ -34,6 +34,12 @@
     "cards": "Cartes",
     "triptychs": "Triptyques"
   },
+  "auth": {
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "connected": "Connecté",
+    "disconnected": "Déconnecté"
+  },
   "hero": {
     "title": "L'immersion au cœur du jeu",
     "subtitle1": "Cartes, pièces et fiches prêtes à jouer pour vos parties D&D",

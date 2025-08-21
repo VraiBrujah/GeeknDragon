@@ -105,4 +105,13 @@ class AccountController extends BaseController
             $this->handleError($e, 'AccountController::orders');
         }
     }
+
+    /**
+     * GET /api/account/status - Retourne l'état de connexion de la session
+     */
+    public function status(): void
+    {
+        $authenticated = !empty($_SESSION['customer']);
+        $this->json(['authenticated' => $authenticated]);
+    }
 }

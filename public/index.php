@@ -154,6 +154,11 @@ $router->get('/api/account/orders', function () use ($config) {
     $controller->orders();
 });
 
+$router->get('/api/account/status', function () use ($config) {
+    $controller = new GeeknDragon\Controller\AccountController($config);
+    $controller->status();
+});
+
 // ===============================
 // ASSETS STATIQUES (BYPASS)
 // ===============================
