@@ -97,8 +97,34 @@ class SnipcartClient
         if ($this->mockMode) {
             return $this->getMockOrder($orderId);
         }
-        
+
         return $this->makeRequest("GET", "/orders/{$orderId}");
+    }
+
+    /**
+     * Récupère un client par son ID
+     */
+    public function getCustomer(string $customerId): array
+    {
+        if ($this->mockMode) {
+            return $this->getMockCustomer($customerId);
+        }
+
+        return $this->makeRequest('GET', "/customers/{$customerId}");
+    }
+
+    /**
+     * Recherche un client par email
+     */
+    public function getCustomerByEmail(string $email): ?array
+    {
+        if ($this->mockMode) {
+            return $this->getMockCustomer('mock-customer', $email);
+        }
+
+        $query = http_build_query(['email' => $email]);
+        $result = $this->makeRequest('GET', '/customers?' . $query);
+        return $result['items'][0] ?? null;
     }
     
     /**
@@ -233,6 +259,16 @@ class SnipcartClient
                 'postalCode' => 'H1A 1A1',
                 'country' => 'CA'
             ]
+        ];
+    }
+
+    private function getMockCustomer(string $id, string $email = 'test@example.com'): array
+    {
+        return [
+            'id' => $id,
+            'email' => $email,
+            'firstName' => 'Test',
+            'lastName' => 'User'
         ];
     }
 }
