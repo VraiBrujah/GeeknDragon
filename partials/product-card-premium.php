@@ -24,7 +24,7 @@ $price       = number_format((float)$product['price'], 2, '.', '');
 static $parsedown;
 $parsedown = $parsedown ?? new Parsedown();
 $htmlDesc  = $parsedown->text($desc);
-$isInStock = inStock($id);
+$isInStock = $inventoryService->isInStock($id);
 ?>
 
 <div class="product-card animate-scale-in <?= $isInStock ? '' : 'loading' ?>">

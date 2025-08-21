@@ -11,10 +11,13 @@ class ProductService
 {
     private array $products = [];
     private static ?self $instance = null;
-    
+    private InventoryService $inventoryService;
+
     private function __construct()
     {
         $this->loadProducts();
+        $config = require __DIR__ . '/../../config.php';
+        $this->inventoryService = InventoryService::getInstance($config);
     }
     
     /**
@@ -112,30 +115,18 @@ class ProductService
     }
     
     /**
-     * Vérifie si un produit est en stock (utilise l'ancienne fonction)
+     * Vérifie si un produit est en stock
      */
     public function isInStock(string $productId): bool
     {
-        // Utiliser la fonction existante pour préserver la compatibilité
-        if (function_exists('inStock')) {
-            return inStock($productId);
-        }
-        
-        // Fallback : considérer comme en stock si pas de vérification possible
-        return true;
+        return $this->inventoryService->isInStock($productId);
     }
-    
+
     /**
-     * Retourne le stock d'un produit (utilise l'ancienne fonction)
+     * Retourne le stock d'un produit
      */
     public function getStock(string $productId): ?int
     {
-        // Utiliser la fonction existante pour préserver la compatibilité
-        if (function_exists('getStock')) {
-            return getStock($productId);
-        }
-        
-        // Fallback
-        return null;
+        return $this->inventoryService->getStock($productId);
     }
 }
