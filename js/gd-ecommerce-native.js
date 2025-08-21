@@ -62,10 +62,11 @@
   };
 
   const API_ENDPOINTS = {
-    login: '/api/login',
-    logout: '/api/logout',
-    profile: '/api/profile',
-    orders: '/api/orders',
+    status: '/api/account/status',
+    login: '/api/account/login',
+    logout: '/api/account/logout',
+    profile: '/api/account/profile',
+    orders: '/api/account/orders',
   };
 
   // Cache DOM pour les performances
@@ -898,6 +899,23 @@
     const data = await apiRequest(API_ENDPOINTS.orders);
     state.user.orders = data;
     return data;
+  }
+
+  async function handleAccountToggle() {
+    try {
+      const data = await apiRequest(API_ENDPOINTS.status);
+      if (data.authenticated) {
+        alert(window.i18n?.auth?.connected || 'Connecté');
+      } else {
+        const loginLabel = window.i18n?.auth?.login || 'Se connecter';
+        const disconnectedLabel = window.i18n?.auth?.disconnected || 'Déconnecté';
+        if (confirm(`${disconnectedLabel}\n${loginLabel} ?`)) {
+          window.location.href = 'https://app.snipcart.com/account/login';
+        }
+      }
+    } catch (e) {
+      logger.error('Erreur statut compte', e);
+    }
   }
 
   async function loadAccountModal() {
@@ -1759,14 +1777,8 @@
     eventsAttached = true;
 
     // Boutons header
-    if (elements.accountToggle && elements.accountModal) {
-      elements.accountToggle.addEventListener('click', () => {
-        if (state.ui.accountModalOpen) {
-          closeModal('gd-account-modal');
-        } else {
-          openModal('gd-account-modal');
-        }
-      });
+    if (elements.accountToggle) {
+      elements.accountToggle.addEventListener('click', handleAccountToggle);
     }
 
     if (elements.cartToggle && elements.cartModal) {
@@ -1779,14 +1791,8 @@
       });
     }
 
-    if (elements.accountToggleMobile && elements.accountModal) {
-      elements.accountToggleMobile.addEventListener('click', () => {
-        if (state.ui.accountModalOpen) {
-          closeModal('gd-account-modal');
-        } else {
-          openModal('gd-account-modal');
-        }
-      });
+    if (elements.accountToggleMobile) {
+      elements.accountToggleMobile.addEventListener('click', handleAccountToggle);
     }
 
     if (elements.cartToggleMobile && elements.cartModal) {
