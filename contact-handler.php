@@ -1,7 +1,9 @@
 <?php
 require __DIR__ . '/bootstrap.php';
 
-session_start();
+use GeeknDragon\Core\SessionHelper;
+
+SessionHelper::ensureSession();
 $debug = false; // Mode production
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

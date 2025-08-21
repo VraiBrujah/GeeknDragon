@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace GeeknDragon\Security;
 
+use GeeknDragon\Core\SessionHelper;
+
 /**
  * Protection CSRF pour les formulaires et requêtes POST
  */
@@ -16,7 +18,7 @@ class CsrfProtection
      */
     public static function generateToken(): string
     {
-        self::ensureSession();
+        SessionHelper::ensureSession();
 
         $token = bin2hex(random_bytes(32));
         $_SESSION[self::SESSION_KEY] = $token;
@@ -30,7 +32,7 @@ class CsrfProtection
      */
     public static function getToken(): string
     {
-        self::ensureSession();
+        SessionHelper::ensureSession();
 
         if (!isset($_SESSION[self::SESSION_KEY])) {
             return self::generateToken();
@@ -48,7 +50,7 @@ class CsrfProtection
      */
     public static function validateToken(string $token): bool
     {
-        self::ensureSession();
+        SessionHelper::ensureSession();
         
         $sessionToken = $_SESSION[self::SESSION_KEY] ?? '';
         
@@ -126,30 +128,11 @@ class CsrfProtection
     }
     
     /**
-     * Assure qu'une session est active
-     */
-    private static function ensureSession(): void
-    {
-        if (session_status() === PHP_SESSION_NONE) {
-            // Configuration sécurisée de session avant démarrage
-            if (!headers_sent()) {
-                ini_set('session.cookie_httponly', '1');
-                ini_set('session.use_only_cookies', '1');
-                ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) ? '1' : '0');
-                ini_set('session.cookie_samesite', 'Strict');
-                ini_set('session.gc_maxlifetime', '3600'); // 1 heure
-                
-                session_start();
-            }
-        }
-    }
-    
-    /**
      * Nettoie les anciens tokens (à appeler périodiquement)
      */
     public static function cleanup(): void
     {
-        self::ensureSession();
+        SessionHelper::ensureSession();
         
         // Simple cleanup - régénérer le token s'il est ancien
         $tokenAge = $_SESSION['csrf_token_time'] ?? 0;

@@ -1,6 +1,9 @@
 <?php
 require __DIR__ . '/bootstrap.php';
-session_start();
+
+use GeeknDragon\Core\SessionHelper;
+
+SessionHelper::ensureSession();
 $active = 'contact';
 require __DIR__ . '/i18n.php';
 $title  = $translations['meta']['contact']['title'] ?? 'Geek & Dragon';

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace GeeknDragon\View;
 
+use GeeknDragon\Core\SessionHelper;
 use GeeknDragon\I18n\TranslationService;
 
 /**
@@ -54,9 +55,7 @@ class ViewHelper
      */
     public function csrfToken(): string
     {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+        SessionHelper::ensureSession();
         
         if (!isset($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
