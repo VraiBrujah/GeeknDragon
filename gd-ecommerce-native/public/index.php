@@ -62,6 +62,7 @@ if (file_exists($envFile)) {
 }
 
 // Vérification des variables d'environnement critiques
+// Snipcart gère désormais les paiements ; aucune autre clé n'est requise
 $requiredEnvVars = [
     'SNIPCART_SECRET_API_KEY'
 ];
