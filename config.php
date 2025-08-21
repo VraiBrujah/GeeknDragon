@@ -3,7 +3,7 @@
 // Validation sécurisée pour les clés API (uniquement alphanumérique et tirets)
 if (!function_exists('validateApiKey')) {
 function validateApiKey($key) {
-    return $key && preg_match('/^[a-zA-Z0-9_\-\.]+$/', $key) ? $key : null;
+    return $key && preg_match('/^[A-Za-z0-9_\-\.\/+=]+$/', $key) ? $key : null;
 }
 }
 
