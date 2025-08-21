@@ -63,8 +63,7 @@ if (file_exists($envFile)) {
 
 // Vérification des variables d'environnement critiques
 $requiredEnvVars = [
-    'SNIPCART_SECRET_API_KEY',
-    'STRIPE_SECRET_KEY'
+    'SNIPCART_SECRET_API_KEY'
 ];
 
 $missingVars = [];

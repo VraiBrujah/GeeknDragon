@@ -7,12 +7,45 @@
 use App\Snipcart\{
     ShippingWebhook,
     TaxesWebhook,
-    PaymentMethods,
-    PaymentAuthorize,
-    PaymentCapture,
-    PaymentRefund,
     OrderWebhook
 };
+
+/**
+ * Relais minimal vers l'API officielle Snipcart pour les appels de paiement
+ * afin de conserver un point d'entrée backend unique.
+ */
+function proxySnipcartPayment(string $method, string $path): void
+{
+    $baseUrl = 'https://app.snipcart.com/api';
+    $relativePath = str_replace('/snipcart', '', $path);
+    $query = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_QUERY);
+    $url = $baseUrl . $relativePath . ($query ? '?' . $query : '');
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+
+    $headers = [
+        'Content-Type: application/json',
+        'Accept: application/json',
+    ];
+    if (!empty($_SERVER['HTTP_AUTHORIZATION'])) {
+        $headers[] = 'Authorization: ' . $_SERVER['HTTP_AUTHORIZATION'];
+    }
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $input = file_get_contents('php://input');
+    if ($input !== false && $input !== '') {
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $input);
+    }
+
+    $response = curl_exec($ch);
+    $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE) ?: 500;
+    curl_close($ch);
+
+    http_response_code($status);
+    echo $response;
+}
 
 /**
  * Gestionnaire principal des routes Snipcart
@@ -48,34 +81,21 @@ function handleSnipcartRoutes(): void
                 case '/snipcart/shipping':
                     ShippingWebhook::handle();
                     break;
-                    
+
                 case '/snipcart/taxes':
                     TaxesWebhook::handle();
                     break;
-                    
+
                 case '/snipcart/order/completed':
                 case '/snipcart/order/webhook':
                     OrderWebhook::handle();
                     break;
-                    
-                // Passerelle de paiement Stripe
-                case '/snipcart/payment/methods':
-                    PaymentMethods::handle();
-                    break;
-                    
-                case '/snipcart/payment/authorize':
-                    PaymentAuthorize::handle();
-                    break;
-                    
-                case '/snipcart/payment/capture':
-                    PaymentCapture::handle();
-                    break;
-                    
-                case '/snipcart/payment/refund':
-                    PaymentRefund::handle();
-                    break;
-                    
+
                 default:
+                    if (str_starts_with($path, '/snipcart/payment/')) {
+                        proxySnipcartPayment($method, $path);
+                        break;
+                    }
                     http_response_code(404);
                     echo json_encode([
                         'error' => 'Endpoint non trouvé',
@@ -85,12 +105,7 @@ function handleSnipcartRoutes(): void
                     break;
             }
         } elseif ($method === 'GET') {
-            // Quelques endpoints GET pour les méthodes de paiement
             switch ($path) {
-                case '/snipcart/payment/methods':
-                    PaymentMethods::handle();
-                    break;
-                    
                 case '/snipcart/status':
                     // Endpoint de vérification de statut
                     echo json_encode([
@@ -100,8 +115,12 @@ function handleSnipcartRoutes(): void
                         'timestamp' => date('c')
                     ]);
                     break;
-                    
+
                 default:
+                    if (str_starts_with($path, '/snipcart/payment/')) {
+                        proxySnipcartPayment($method, $path);
+                        break;
+                    }
                     http_response_code(404);
                     echo json_encode([
                         'error' => 'Endpoint GET non trouvé',

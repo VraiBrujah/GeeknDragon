@@ -21,12 +21,6 @@ return [
         'taxes' => $_ENV['SNIPCART_WEBHOOK_TAXES'] ?? '/snipcart/taxes',
         'order_completed' => $_ENV['SNIPCART_WEBHOOK_ORDER_COMPLETED'] ?? '/snipcart/order/completed',
     ],
-    'payment_gateway_endpoints' => [
-        'methods' => '/snipcart/payment/methods',
-        'authorize' => '/snipcart/payment/authorize',
-        'capture' => '/snipcart/payment/capture',
-        'refund' => '/snipcart/payment/refund',
-    ],
 
     // Configuration de l'API Snipcart
     'api' => [
