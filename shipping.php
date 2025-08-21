@@ -55,18 +55,44 @@ if ($code !== 200 && $code !== 204) {
   exit;
 }
 
-// Lecture du panier (utile pour poids, province, etc.)
+// Lecture du panier (adresse, poids, etc.)
 $payload = json_decode(file_get_contents('php://input'), true) ?: [];
-$province = $payload['content']['shippingAddress']['province'] ?? 'QC';
 
-// TODO: remplace par ton calcul réel (poids, subtotal, province, etc.)
-$rates = [
-  ['cost' => 12.00, 'description' => 'Standard (3–7 j)', 'userDefinedId' => 'std'],
-  ['cost' => 24.00, 'description' => 'Express (1–2 j)',  'userDefinedId' => 'xprs'],
-];
+// Appel à l'API Snipcart pour obtenir les tarifs d'expédition
+$ch = curl_init('https://app.snipcart.com/api/shippingrates');
+curl_setopt_array($ch, [
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_HTTPHEADER     => [
+    'Accept: application/json',
+    'Content-Type: application/json'
+  ],
+  CURLOPT_USERPWD        => $secret . ':', // Basic Auth (mot de passe vide)
+  CURLOPT_POST           => true,
+  CURLOPT_POSTFIELDS     => json_encode($payload),
+  CURLOPT_TIMEOUT        => 10,
+]);
+$response = curl_exec($ch);
+$error    = curl_error($ch);
+$code     = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+// Validation de la réponse de l'API Snipcart
+$json = json_decode($response, true);
+if ($response === false || $code !== 200 || $json === null) {
+  error_log('Snipcart shippingrates API error: ' . ($error ?: $response));
+  http_response_code(500);
+  header('Content-Type: application/json; charset=utf-8');
+  echo json_encode([
+    'errors' => [[
+      'key'     => 'shipping-api',
+      'message' => 'Erreur lors de la récupération des tarifs de livraison'
+    ]]
+  ], JSON_UNESCAPED_UNICODE);
+  exit;
+}
 
 // Réponse attendue par Snipcart
 http_response_code(200);
 header('Content-Type: application/json; charset=utf-8');
-echo json_encode(['rates' => $rates], JSON_UNESCAPED_UNICODE);
+echo $response;
 exit;
