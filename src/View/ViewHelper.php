@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace GeeknDragon\View;
 
-use GeeknDragon\Core\SessionHelper;
 use GeeknDragon\I18n\TranslationService;
+use GeeknDragon\Security\CsrfProtection;
 
 /**
  * Helper pour les vues - fonctions utilitaires de rendu
@@ -51,25 +51,19 @@ class ViewHelper
     }
     
     /**
-     * Génère un token CSRF
+     * Retourne le token CSRF courant
      */
     public function csrfToken(): string
     {
-        SessionHelper::ensureSession();
-        
-        if (!isset($_SESSION['csrf_token'])) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-        }
-        
-        return $_SESSION['csrf_token'];
+        return CsrfProtection::getToken();
     }
-    
+
     /**
      * Génère un champ CSRF caché
      */
     public function csrfField(): string
     {
-        return '<input type="hidden" name="_token" value="' . $this->escape($this->csrfToken()) . '">';
+        return CsrfProtection::getHiddenField();
     }
     
     /**

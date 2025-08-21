@@ -2,6 +2,7 @@
 require __DIR__ . '/bootstrap.php';
 
 use GeeknDragon\Core\SessionHelper;
+use GeeknDragon\Security\CsrfProtection;
 
 SessionHelper::ensureSession();
 $debug = false; // Mode production
@@ -20,9 +21,8 @@ if ($telephone !== '') {
     $telephone = preg_replace('/\s+/', ' ', $telephone);
 }
 $message = trim($_POST['Message'] ?? '');
-$csrf = $_POST['csrf_token'] ?? '';
 
-if (!hash_equals($_SESSION['csrf_token'] ?? '', $csrf)) {
+if (!CsrfProtection::validateRequest()) {
     $errors[] = 'Token CSRF invalide.';
 }
 
@@ -157,6 +157,6 @@ if (!sendSendgridMail($to, $subject, $body, $email, $details)) {
     exit;
 }
 
-unset($_SESSION['csrf_token']);
+CsrfProtection::regenerateToken();
 header('Location: merci.php');
 exit;

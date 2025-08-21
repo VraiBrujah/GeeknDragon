@@ -2,6 +2,7 @@
 require __DIR__ . '/bootstrap.php';
 
 use GeeknDragon\Core\SessionHelper;
+use GeeknDragon\Security\CsrfProtection;
 
 SessionHelper::ensureSession();
 $active = 'contact';
@@ -9,11 +10,6 @@ require __DIR__ . '/i18n.php';
 $title  = $translations['meta']['contact']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['contact']['desc'] ?? '';
 $extraHead = '';
-
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-$csrfToken = $_SESSION['csrf_token'];
 
 $errors = $_SESSION['errors'] ?? [];
 $old = $_SESSION['old'] ?? [];
@@ -54,7 +50,7 @@ unset($_SESSION['errors'], $_SESSION['old']);
         <?php endif; ?>
 
         <!-- CSRF Token -->
-        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>" />
+        <?= CsrfProtection::getHiddenField() ?>
         
         <!-- Honeypot anti-spam (ne pas retirer) -->
         <input type="text" name="company" class="hidden" tabindex="-1" autocomplete="off" />
