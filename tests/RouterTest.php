@@ -63,4 +63,18 @@ final class RouterTest extends TestCase
 
         $this->assertTrue($executed, "Le middleware doit permettre de r\u00e9\u00e9crire l'URI");
     }
+
+    public function testHandle404DisplaysPage(): void
+    {
+        $router = new Router();
+
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_URI'] = '/does-not-exist';
+
+        ob_start();
+        $router->resolve();
+        $output = ob_get_clean();
+
+        $this->assertStringContainsString('Page non trouvée', $output);
+    }
 }
