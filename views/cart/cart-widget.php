@@ -1,6 +1,6 @@
 <?php
 /**
- * Widget panier custom pour remplacer Snipcart natif
+ * Widget panier custom
  * Variables disponibles : $helper (ViewHelper), $cartService (CartService)
  */
 

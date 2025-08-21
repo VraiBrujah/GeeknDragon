@@ -96,7 +96,7 @@
     "add": "Ajouter au panier",
     "inStock": "En stock",
     "outOfStock": "Rupture de stock",
-    "securePayment": "Paiement sécurisé via Snipcart"
+    "securePayment": "Paiement sécurisé"
   },
   "shop": {
     "hero": {
@@ -107,7 +107,7 @@
     "intro": {
       "title": "Trésors artisanaux",
       "description": "Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.",
-      "payment": "Paiement sécurisé via Snipcart"
+      "payment": "Paiement sécurisé"
     },
     "pieces": {
       "title": "Pièces métalliques",

@@ -297,7 +297,7 @@ $products = array_merge($pieces, $cards, $triptychs);
           <div class="feature-card">
             <span class="feature-icon">🔒</span>
             <h4 class="feature-title">Paiement sécurisé</h4>
-            <p class="feature-description">Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.</p>
+            <p class="feature-description">Transactions cryptées. Visa, Mastercard et American Express acceptés.</p>
           </div>
 
           <div class="feature-card">
@@ -324,7 +324,7 @@ $products = array_merge($pieces, $cards, $triptychs);
       <div class="trust-badges">
         <div class="trust-badge">
           <span class="trust-icon">🔒</span>
-          <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
+          <span data-i18n="shop.intro.payment">Paiement sécurisé</span>
         </div>
 
         <div class="trust-badge">

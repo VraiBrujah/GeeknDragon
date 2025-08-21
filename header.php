@@ -47,12 +47,6 @@ $navItems = [
   ]
 ];
 
-$snipcartKey = $snipcartKey
-  ?? $_ENV['SNIPCART_API_KEY']
-  ?? $_SERVER['SNIPCART_API_KEY'];
-
-// Vérification des clés API en mode production
-$apiConfigured = !empty($snipcartKey) && !empty($_ENV['SNIPCART_SECRET_API_KEY'] ?? $_SERVER['SNIPCART_SECRET_API_KEY'] ?? '');
 
 if (!function_exists('renderNav')) {
 function renderNav(array $items, string $active, bool $mobile = false): void {
@@ -80,7 +74,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
 }
 }
 ?>
-<!-- Snipcart div supprimé - utilisation API uniquement -->
+<!-- Panier natif -->
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
@@ -209,7 +203,6 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 ">
   ⚠️ <strong>Configuration requise :</strong> Le système de panier nécessite la configuration des clés API.
-  <a href="/test-snipcart.php" style="color: #fbbf24; text-decoration: underline; margin-left: 0.5rem;">Tester la configuration</a>
   <button onclick="this.parentElement.style.display='none'" style="
     background: none; 
     border: none; 

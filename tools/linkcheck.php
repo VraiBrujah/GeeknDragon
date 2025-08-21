@@ -67,7 +67,6 @@ class LinkChecker
             'lot50-essence.php',
             'lot50-tresorerie.php',
             'merci.php',
-            'shipping.php',
             'actualites/es-tu-game.php'
         ];
         
@@ -111,7 +110,7 @@ class LinkChecker
         // JavaScript
         $jsFiles = [
             'js/app.js',
-            'js/gd-ecommerce-native.js',
+            'js/cart-custom.js',
             'js/hero-videos.js',
             'js/lazy-load-enhanced.js'
         ];

@@ -4,7 +4,7 @@ Site web Geek&Dragon
 
 ## Project overview
 
-GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart.com/). It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and Snipcart handles the shopping cart, checkout, and payment processing. Stock levels are managed directly through Snipcart's Inventory API.
+GeeknDragon is a lightweight PHP web shop. It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and checkout is processed through Snipcart's API via a single server‑side webhook. Stock levels are managed directly through Snipcart's Inventory API.
 
 ## Product lots and custom chests
 
@@ -23,10 +23,6 @@ Need more than 50 pieces or a custom assortment? Request a personalized chest th
 
 Place product photos under `images/Piece/pro/`. Each item typically uses a full‑resolution image and a 300 px thumbnail (e.g. `lot10Piece.png` and `lot10Piece-300.png`).
 
-### Configuring multipliers in Snipcart
-
-Multipliers are handled with Snipcart custom fields. Add a `<select>` with the class `multiplier-select` and set the `data-item-custom1-name`, `data-item-custom1-options` (such as `1|10|100|1000|10000`) and `data-item-custom1-value` attributes on the `snipcart-add-item` button to let customers choose the desired multiplier.
-
 ## Environment variables
 
 The application expects a few secrets to be provided through the environment. Snipcart now manages payments end to end, so no additional payment gateway keys are needed:
@@ -34,7 +30,6 @@ The application expects a few secrets to be provided through the environment. Sn
 - `SNIPCART_API_KEY` – your public Snipcart API key.
 - `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates. **Keep this key strictly server-side; it must never be exposed to client-side code or shipped to the browser.**
 - `SNIPCART_LANGUAGE` – locale used by Snipcart (for example `fr`).
-- `SNIPCART_ADD_PRODUCT_BEHAVIOR` – how products are added to the cart (`overlay`, `sidecart`, ...).
 - `SENDGRID_API_KEY` – API key for the SendGrid SMTP service used to send emails.
 - `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
 
@@ -67,7 +62,7 @@ To send emails from the contact form using SendGrid's SMTP service, configure cr
 
 Make sure that the domain you are using is allowed in your Snipcart dashboard; otherwise the cart may remain stuck at the "préparation" step.
 
-The Snipcart webhook (`shipping.php`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
+The unified Snipcart webhook (`/snipcart/webhook`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
 
 ## Error logging
 
@@ -106,7 +101,7 @@ Adjust the path as needed for your own hosting. Ensure the environment variables
 
 In the Snipcart dashboard:
 
-1. Set **Dynamic shipping** to `https://your-domain.com/shipping.php` and select the **POST** method.
+1. Set **Dynamic shipping** to `https://your-domain.com/snipcart/webhook` and select the **POST** method.
 
 With this hook enabled, shipping rates are calculated dynamically when customers check out.
 

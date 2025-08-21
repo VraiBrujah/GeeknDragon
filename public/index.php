@@ -60,9 +60,10 @@ $router->get('/merci', function () {
     require __DIR__ . '/../merci.php';
 });
 
-// Shipping
-$router->get('/shipping', function () {
-    require __DIR__ . '/../shipping.php';
+// Webhook Snipcart
+$router->post('/snipcart/webhook', function () use ($config) {
+    $controller = new GeeknDragon\Controller\SnipcartWebhookController($config);
+    $controller->handle();
 });
 
 // ===============================
@@ -182,7 +183,6 @@ $router->redirect('/boutique.php', '/boutique');
 $router->redirect('/contact.php', '/contact');
 $router->redirect('/checkout.php', '/checkout');
 $router->redirect('/merci.php', '/merci');
-$router->redirect('/shipping.php', '/shipping');
 $router->redirect('/lot10.php', '/lot10');
 $router->redirect('/lot25.php', '/lot25');
 $router->redirect('/lot50-essence.php', '/lot50-essence');
