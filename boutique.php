@@ -3,6 +3,7 @@ require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 $active = 'boutique';
 require __DIR__ . '/i18n.php';
+use GeeknDragon\Service\InventoryService;
 $title  = $translations['meta']['shop']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['shop']['desc'] ?? '';
 $metaUrl = 'https://' . $config['current_host'] . '/boutique.php';
@@ -16,8 +17,7 @@ $extraHead = <<<HTML
 HTML;
 
 /* ───── STOCK ───── */
-$snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
-require_once __DIR__ . '/includes/stock-functions.php';
+$inventoryService = InventoryService::getInstance($config);
 
 // Liste des produits
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
@@ -352,7 +352,7 @@ $products = array_merge($pieces, $cards, $triptychs);
 <script type="application/ld+json">
 <?= json_encode([
     '@context' => 'https://schema.org/',
-    '@graph' => array_map(function ($p) {
+    '@graph' => array_map(function ($p) use ($inventoryService) {
         return [
             '@type' => 'Product',
             'name' => strip_tags($p['name']),
@@ -363,7 +363,7 @@ $products = array_merge($pieces, $cards, $triptychs);
                 '@type' => 'Offer',
                 'price' => $p['price'],
                 'priceCurrency' => 'CAD',
-                'availability' => inStock($p['id']) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+                'availability' => $inventoryService->isInStock($p['id']) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
             ],
         ];
     }, $products /* merged products */),

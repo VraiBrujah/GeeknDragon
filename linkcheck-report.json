@@ -1,8 +1,8 @@
 {
-    "timestamp": "2025-08-20T05:46:41+00:00",
+    "timestamp": "2025-08-21T16:37:36+00:00",
     "summary": {
         "total_ok": 96,
-        "total_warnings": 58,
+        "total_warnings": 59,
         "total_errors": 0
     },
     "categories": {
@@ -11,73 +11,73 @@
                 "item": "index.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:40"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:40"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "checkout.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "product.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "lot10.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "lot25.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "lot50-essence.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "lot50-tresorerie.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "merci.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "shipping.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "actualites\/es-tu-game.php",
                 "status": "OK",
                 "message": "Syntaxe PHP valide",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             }
         ],
         "css": [
@@ -85,19 +85,19 @@
                 "item": "css\/styles.css",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "css\/boutique-premium.css",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "css\/gd-ecommerce-native.css",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             }
         ],
         "js": [
@@ -105,25 +105,25 @@
                 "item": "js\/app.js",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "js\/gd-ecommerce-native.js",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "js\/hero-videos.js",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "js\/lazy-load-enhanced.js",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             }
         ],
         "images": [
@@ -131,235 +131,235 @@
                 "item": "images\/optimized-modern\/webp\/brand-geekndragon-white.webp",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "images\/optimized-modern\/webp\/team-brujah.webp",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "images\/flags\/flag-fr-medieval-rim-on-top.svg",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "images\/flags\/flag-en-us-uk-diagonal-medieval.svg",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/optimized-modern\/webp\/brand-geekndragon-white.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/flags\/flag-fr-medieval-rim-on-top.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/flags\/flag-en-us-uk-diagonal-medieval.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/flags\/flag-fr-medieval-rim-on-top.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/flags\/flag-en-us-uk-diagonal-medieval.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/logo-fabrique-BqFMdtDT.png",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/optimized-modern\/webp\/cartes-equipement.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/optimized-modern\/webp\/coin-copper-10.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/optimized-modern\/webp\/triptyque-fiche.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/optimized-modern\/webp\/es-tu-game-demo.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/optimized-modern\/webp\/avisJoueurFlim2025.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/images\/optimized-modern\/webp\/team-brujah.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/optimized-modern\/webp\/brand-geekndragon-white.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/flags\/flag-fr-medieval-rim-on-top.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/flags\/flag-en-us-uk-diagonal-medieval.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/flags\/flag-fr-medieval-rim-on-top.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/flags\/flag-en-us-uk-diagonal-medieval.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/optimized-modern\/webp\/Vagabon.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/optimized-modern\/webp\/Seignieur.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/optimized-modern\/webp\/Royaume.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/optimized-modern\/webp\/Essence.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/optimized-modern\/webp\/arme-recto.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/optimized-modern\/webp\/alexandrite-recto.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/optimized-modern\/webp\/sac-aa-dos-recto.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/optimized-modern\/webp\/carte-propriete.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/logo-fabrique-BqFMdtDT.png",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/payments\/visa.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/payments\/mastercard.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/payments\/american-express.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/images\/logo-fabrique-BqFMdtDT.png",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/images\/optimized-modern\/webp\/brand-geekndragon-white.webp",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/images\/flags\/flag-fr-medieval-rim-on-top.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/images\/flags\/flag-en-us-uk-diagonal-medieval.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/images\/flags\/flag-fr-medieval-rim-on-top.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/images\/flags\/flag-en-us-uk-diagonal-medieval.svg",
                 "status": "OK",
                 "message": "Image trouv\u00e9e",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             }
         ],
         "includes": [
@@ -367,187 +367,175 @@
                 "item": "bootstrap.php",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "config.php",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "i18n.php",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "header.php",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "footer.php",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "head-common.php",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
-            },
-            {
-                "item": "includes\/stock-functions.php",
-                "status": "OK",
-                "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "includes\/video-utils.php",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "partials\/product-card.php",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "partials\/product-card-premium.php",
                 "status": "OK",
                 "message": "Fichier trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 head-common.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 header.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 footer.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/bootstrap.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/config.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/i18n.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 head-common.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 header.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 footer.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/bootstrap.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/config.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/i18n.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
-            },
-            {
-                "item": "boutique.php \u2192 \/includes\/stock-functions.php",
-                "status": "OK",
-                "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/partials\/product-card-premium.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/partials\/product-card-premium.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/partials\/product-card-premium.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 head-common.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 header.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 footer.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/bootstrap.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/i18n.php",
                 "status": "OK",
                 "message": "Include trouv\u00e9",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             }
         ],
         "internal_links": [
@@ -555,349 +543,367 @@
                 "item": "index.php \u2192 \/index.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/index.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/boutique.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/boutique.php?lang=#pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/boutique.php?lang=#cartes",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/boutique.php?lang=#triptyques",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/index.php?lang=#actus",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/index.php?lang=#contact",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/boutique.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/boutique.php?lang=#pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/boutique.php?lang=#cartes",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/boutique.php?lang=#triptyques",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/index.php?lang=#actus",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "index.php \u2192 \/index.php?lang=#contact",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
+            },
+            {
+                "item": "index.php \u2192 \/test-snipcart.php",
+                "status": "OK",
+                "message": "Lien interne valide",
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/index.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/index.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/boutique.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/boutique.php?lang=#pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/boutique.php?lang=#cartes",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/boutique.php?lang=#triptyques",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/index.php?lang=#actus",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/index.php?lang=#contact",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/boutique.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/boutique.php?lang=#pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/boutique.php?lang=#cartes",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/boutique.php?lang=#triptyques",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/index.php?lang=#actus",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/index.php?lang=#contact",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
+            },
+            {
+                "item": "boutique.php \u2192 \/test-snipcart.php",
+                "status": "OK",
+                "message": "Lien interne valide",
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=lot10&amp;from=pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=lot10&amp;from=pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=lot25&amp;from=pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=lot25&amp;from=pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=lot50-essence&amp;from=pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=lot50-essence&amp;from=pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=lot50-tresorerie&amp;from=pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=lot50-tresorerie&amp;from=pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=pack-182-arsenal-aventurier&amp;from=cards",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=pack-182-arsenal-aventurier&amp;from=cards",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=pack-182-butins-ingenieries&amp;from=cards",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=pack-182-butins-ingenieries&amp;from=cards",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=pack-182-routes-services&amp;from=cards",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=pack-182-routes-services&amp;from=cards",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=triptyque-aleatoire&amp;from=triptychs",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 \/product.php?id=triptyque-aleatoire&amp;from=triptychs",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/index.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/index.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/boutique.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/boutique.php?lang=#pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/boutique.php?lang=#cartes",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/boutique.php?lang=#triptyques",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/index.php?lang=#actus",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/index.php?lang=#contact",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/boutique.php?lang=",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/boutique.php?lang=#pieces",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/boutique.php?lang=#cartes",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/boutique.php?lang=#triptyques",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/index.php?lang=#actus",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "contact.php \u2192 \/index.php?lang=#contact",
                 "status": "WARNING",
                 "message": "Lien interne introuvable",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
+            },
+            {
+                "item": "contact.php \u2192 \/test-snipcart.php",
+                "status": "OK",
+                "message": "Lien interne valide",
+                "timestamp": "2025-08-21 16:37:36"
             }
         ],
         "external_links": [
@@ -905,13 +911,13 @@
                 "item": "index.php \u2192 https:\/\/discord.gg\/VaPZtZFC",
                 "status": "INFO",
                 "message": "Lien externe",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "boutique.php \u2192 https:\/\/www.youtube.com\/watch?v=y96eAFtC4xE&ab_channel=Es-TuGame%3F-JeuxDeR%C3%B4le",
                 "status": "INFO",
                 "message": "Lien externe",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             }
         ],
         "dependencies": [
@@ -919,13 +925,13 @@
                 "item": "composer\/autoload",
                 "status": "OK",
                 "message": "Autoload Composer disponible",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "npm\/node_modules",
                 "status": "OK",
                 "message": "D\u00e9pendances NPM install\u00e9es",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             }
         ],
         "config": [
@@ -933,31 +939,31 @@
                 "item": "composer.json",
                 "status": "OK",
                 "message": "Fichier de configuration pr\u00e9sent",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "package.json",
                 "status": "OK",
                 "message": "Fichier de configuration pr\u00e9sent",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": ".env",
-                "status": "OK",
-                "message": "Fichier de configuration pr\u00e9sent",
-                "timestamp": "2025-08-20 05:46:41"
+                "status": "WARNING",
+                "message": "Fichier de configuration manquant",
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "tailwind.config.js",
                 "status": "OK",
                 "message": "Fichier de configuration pr\u00e9sent",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             },
             {
                 "item": "postcss.config.js",
                 "status": "OK",
                 "message": "Fichier de configuration pr\u00e9sent",
-                "timestamp": "2025-08-20 05:46:41"
+                "timestamp": "2025-08-21 16:37:36"
             }
         ]
     }

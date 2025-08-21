@@ -2,11 +2,12 @@
 require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 require __DIR__ . '/i18n.php';
+use GeeknDragon\Service\InventoryService;
 
 $active = 'boutique';
 $id = preg_replace('/[^a-z0-9_-]/i', '', $_GET['id'] ?? '');
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
-$snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
+$inventoryService = InventoryService::getInstance($config);
 
 if (!$id || !isset($data[$id])) {
     http_response_code(404);
@@ -26,7 +27,6 @@ $host = $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
 $metaUrl = 'https://' . $host . '/product.php?id=' . urlencode($id);
 $from = preg_replace('/[^a-z0-9_-]/i', '', $_GET['from'] ?? 'pieces');
 
-require_once __DIR__ . '/includes/stock-functions.php';
 
 // Affichage (FR/EN) pour le titre
 $displayName   = str_replace(' – ', '<br>', $product['name']);
@@ -121,7 +121,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
         <div class="product-pricing text-center mb-4">
           <div class="price-container">
             <span class="current-price"><?= number_format((float)$product['price'], 2) ?> CAD</span>
-            <?php if (inStock($id)) : ?>
+            <?php if ($inventoryService->isInStock($id)) : ?>
               <span class="stock-status in-stock">
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" class="inline mr-1">
                   <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
@@ -174,7 +174,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
 
 
 
-      <?php if (inStock($id)) : ?>
+      <?php if ($inventoryService->isInStock($id)) : ?>
         <div class="text-center mb-4 w-full">
           <label class="block mb-2" data-i18n="product.quantity">Quantité</label>
           <div class="flex items-center justify-center gap-4">
@@ -235,7 +235,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
         '@type' => 'Offer',
         'price' => (float)$product['price'],
         'priceCurrency' => 'CAD',
-        'availability' => inStock($id) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        'availability' => $inventoryService->isInStock($id) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
     ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
 </script>

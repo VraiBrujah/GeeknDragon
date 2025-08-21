@@ -147,7 +147,6 @@ class LinkChecker
             'header.php',
             'footer.php',
             'head-common.php',
-            'includes/stock-functions.php',
             'includes/video-utils.php',
             'partials/product-card.php',
             'partials/product-card-premium.php'

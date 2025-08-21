@@ -25,7 +25,7 @@ $customLabel = !empty($languages)
 static $parsedown;
 $parsedown = $parsedown ?? new Parsedown();
 $htmlDesc  = $parsedown->text($desc);
-$isInStock = inStock($id);
+$isInStock = $inventoryService->isInStock($id);
 ?>
 
 <div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
