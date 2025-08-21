@@ -2,13 +2,16 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use GeeknDragon\Service\ProductService;
+use GeeknDragon\Service\{ProductService, InventoryService};
 
 final class ProductServiceTest extends TestCase
 {
     public function testProductService(): void
     {
-        $service = ProductService::getInstance();
+        require_once __DIR__ . '/../bootstrap.php';
+        $config = require __DIR__ . '/../config.php';
+        $inventory = InventoryService::getInstance($config);
+        $service = ProductService::getInstance($inventory);
 
         $products = $service->getAllProducts();
         $this->assertNotEmpty($products, 'ProductService doit retourner des produits');

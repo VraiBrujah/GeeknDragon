@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../bootstrap.php';
 
-use GeeknDragon\Service\ProductService;
+use GeeknDragon\Service\{ProductService, InventoryService};
 use GeeknDragon\Cart\SnipcartClient;
 
 $config = require __DIR__ . '/../config.php';
@@ -31,7 +31,8 @@ try {
 
 $baseUrl = 'https://' . ($config['current_host'] ?? 'geekndragon.com');
 
-$products = ProductService::getInstance()->getAllProducts();
+$inventoryService = InventoryService::getInstance($config);
+$products = ProductService::getInstance($inventoryService)->getAllProducts();
 
 foreach ($products as $id => $product) {
     $data = [
