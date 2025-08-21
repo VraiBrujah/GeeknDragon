@@ -242,7 +242,21 @@ class AllTests
             ob_end_clean();
             
             $this->assert($testExecuted === true, "Le routeur doit exécuter la route correspondante");
-            
+
+            // Test route avec paramètre dynamique
+            $paramValue = null;
+            $router->get('/user/{id}', function($id) use (&$paramValue) {
+                $paramValue = $id;
+            });
+
+            $_SERVER['REQUEST_URI'] = '/user/42';
+
+            ob_start();
+            $router->resolve();
+            ob_end_clean();
+
+            $this->assert($paramValue === '42', "Le routeur doit extraire les paramètres dynamiques");
+
             // Test redirection
             $router->redirect('/old-path', '/new-path');
             

@@ -148,8 +148,7 @@ $router->get('/api/cart/render', function() use ($config) {
 });
 
 // Produit individuel
-$router->get('/api/products/{id}', function() use ($config) {
-    $id = basename(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH));
+$router->get('/api/products/{id}', function($id) use ($config) {
     $controller = new GeeknDragon\Controller\ProductController($config);
     $controller->getProduct($id);
 });
