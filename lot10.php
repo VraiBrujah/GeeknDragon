@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 // Validation et nettoyage du paramètre 'from'
 $from = '';
 if (isset($_GET['from']) && is_string($_GET['from'])) {

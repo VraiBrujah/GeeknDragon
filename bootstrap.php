@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 // Fonction de validation sécurisée des hosts
 if (!function_exists('validateHost')) {
 function validateHost($host) {

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Utilitaires pour la gestion des vidéos et génération d'images poster
  */
