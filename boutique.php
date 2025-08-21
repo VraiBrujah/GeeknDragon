@@ -7,14 +7,11 @@ use GeeknDragon\Service\InventoryService;
 $title  = $translations['meta']['shop']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['shop']['desc'] ?? '';
 $metaUrl = 'https://' . $config['current_host'] . '/boutique.php';
-$extraHead = <<<HTML
-<link rel="stylesheet" href="/css/boutique-premium.css?v=<?= filemtime(__DIR__.'/css/boutique-premium.css') ?>">
-<style>
-  .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}
-  .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}
-
-</style>
-HTML;
+$extraHead  = '<link rel="stylesheet" href="/css/boutique-premium.css?v=' . filemtime(__DIR__.'/css/boutique-premium.css') . "">\n";
+$extraHead .= '<style nonce="' . htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8') . '">\n';
+$extraHead .= "  .card{@apply bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col;}\n";
+$extraHead .= "  .oos{@apply bg-gray-700 text-gray-400 cursor-not-allowed;}\n";
+$extraHead .= "</style>";
 
 /* ───── STOCK ───── */
 $inventoryService = InventoryService::getInstance($config);
@@ -349,7 +346,7 @@ $products = array_merge($pieces, $cards, $triptychs);
 </main>
 
 <?php include 'footer.php'; ?>
-<script type="application/ld+json">
+<script type="application/ld+json" nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
 <?= json_encode([
     '@context' => 'https://schema.org/',
     '@graph' => array_map(function ($p) use ($inventoryService) {

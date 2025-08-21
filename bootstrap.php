@@ -56,6 +56,7 @@ function getSecureEnvVar($key, $default = null) {
 }
 
 // Headers de sécurité critiques (seulement si pas en mode CLI)
+$cspNonce = base64_encode(random_bytes(16));
 if (php_sapi_name() !== 'cli' && !headers_sent()) {
     header('X-Content-Type-Options: nosniff');
     header('X-Frame-Options: DENY');
@@ -63,10 +64,10 @@ if (php_sapi_name() !== 'cli' && !headers_sent()) {
     header('Referrer-Policy: strict-origin-when-cross-origin');
     header('Permissions-Policy: payment=(self)');
 
-    // CSP basique mais compatible
+    // CSP stricte avec nonces
     $csp = "default-src 'self'; " .
-           "script-src 'self' 'unsafe-inline' cdn.snipcart.com js.stripe.com *.google-analytics.com; " .
-           "style-src 'self' 'unsafe-inline' fonts.googleapis.com; " .
+           "script-src 'self' 'nonce-$cspNonce' cdn.snipcart.com js.stripe.com *.google-analytics.com; " .
+           "style-src 'self' 'nonce-$cspNonce' fonts.googleapis.com; " .
            "font-src 'self' fonts.gstatic.com; " .
            "img-src 'self' data: *.geekndragon.com; " .
            "connect-src 'self' app.snipcart.com *.google-analytics.com; " .
@@ -166,7 +167,7 @@ set_exception_handler(function ($e) {
 <head>
     <meta charset="UTF-8">
     <title>Configuration requise - Geek & Dragon</title>
-    <style>
+    <style nonce="' . htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8') . '">
         body { font-family: "Cinzel", serif; text-align: center; padding: 2rem; background: #111827; color: white; }
         .error-box { max-width: 500px; margin: 0 auto; padding: 2rem; border: 2px solid #dc2626; border-radius: 0.5rem; }
         h1 { color: #fbbf24; margin-bottom: 1rem; }
@@ -197,7 +198,7 @@ set_exception_handler(function ($e) {
 <head>
     <meta charset="UTF-8">
     <title>Erreur temporaire - Geek & Dragon</title>
-    <style>
+    <style nonce="' . htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8') . '">
         body { font-family: "Cinzel", serif; text-align: center; padding: 2rem; background: #111827; color: white; }
         .error-box { max-width: 500px; margin: 0 auto; padding: 2rem; border: 2px solid #dc2626; border-radius: 0.5rem; }
         h1 { color: #fbbf24; margin-bottom: 1rem; }

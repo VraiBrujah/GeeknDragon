@@ -149,7 +149,7 @@ unset($_SESSION['errors'], $_SESSION['old']);
   <?php include 'footer.php'; ?>
   <script src="/js/app.js"></script>
   
-  <script>
+  <script nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
   document.addEventListener('DOMContentLoaded', function() {
     const messageTextarea = document.getElementById('message');
     const charCount = document.getElementById('char-count');
