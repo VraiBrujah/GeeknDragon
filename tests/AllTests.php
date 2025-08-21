@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+ob_start();
+
 /**
  * Suite de tests complète pour GeeknDragon
  * Unique fichier centralisant tous les tests unitaires et fonctionnels
@@ -14,6 +16,7 @@ use GeeknDragon\Cart\SnipcartClient;
 use GeeknDragon\Cart\CartService;
 use GeeknDragon\Core\Router;
 use GeeknDragon\Security\CsrfProtection;
+use GeeknDragon\Core\SessionHelper;
 
 class AllTests
 {
@@ -36,6 +39,7 @@ class AllTests
         $this->testCartService();
         $this->testRouter();
         $this->testCsrfProtection();
+        $this->testSessionHelper();
         
         // Tests fonctionnels
         $this->testFileIncludes();
@@ -310,6 +314,45 @@ class AllTests
 
         } catch (Exception $e) {
             $this->fail("CsrfProtection: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Tests du SessionHelper pour les paramètres sécurisés
+     */
+    private function testSessionHelper(): void
+    {
+        echo "🔐 Tests SessionHelper...\n";
+
+        try {
+            if (session_status() !== PHP_SESSION_NONE) {
+                session_unset();
+                session_destroy();
+            }
+
+            // Sans HTTPS
+            unset($_SERVER['HTTPS']);
+            SessionHelper::ensureSession();
+            $params = session_get_cookie_params();
+            $this->assert($params['httponly'] === true, 'HttpOnly doit être activé');
+            $this->assert($params['samesite'] === 'Strict', 'SameSite doit être Strict');
+            $this->assert($params['secure'] === false, 'Secure doit être désactivé sans HTTPS');
+            session_unset();
+            session_destroy();
+
+            // Avec HTTPS
+            $_SERVER['HTTPS'] = 'on';
+            SessionHelper::ensureSession();
+            $params = session_get_cookie_params();
+            $this->assert($params['secure'] === true, 'Secure doit être activé avec HTTPS');
+            $this->assert($params['httponly'] === true, 'HttpOnly doit être activé avec HTTPS');
+            $this->assert($params['samesite'] === 'Strict', 'SameSite doit être Strict avec HTTPS');
+            session_unset();
+            session_destroy();
+            unset($_SERVER['HTTPS']);
+
+        } catch (Exception $e) {
+            $this->fail('SessionHelper: ' . $e->getMessage());
         }
     }
     

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace GeeknDragon\Cart;
 
+use GeeknDragon\Core\SessionHelper;
+
 /**
  * Service de gestion du panier
  * Logique métier pour le panier, les commandes et l'authentification
@@ -197,7 +199,7 @@ class CartService
      */
     private function loadCartFromSession(): void
     {
-        $this->ensureSession();
+        SessionHelper::ensureSession();
         $this->cartItems = $_SESSION['gd_cart'] ?? [];
     }
     
@@ -206,17 +208,9 @@ class CartService
      */
     private function saveCartToSession(): void
     {
-        $this->ensureSession();
+        SessionHelper::ensureSession();
         $_SESSION['gd_cart'] = $this->cartItems;
     }
     
-    /**
-     * Assure qu'une session est active
-     */
-    private function ensureSession(): void
-    {
-        if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
-            session_start();
-        }
-    }
+    // Session handling is delegated to SessionHelper
 }
