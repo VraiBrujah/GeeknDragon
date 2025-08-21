@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Snipcart;
 
+use GeeknDragon\Cart\SnipcartClient;
+
 /**
  * Webhook des commandes Snipcart
  * Traite les événements de commande (création, mise à jour, etc.)
@@ -201,15 +203,36 @@ final class OrderWebhook
      */
     private static function updateInventory(array $items): void
     {
+        $client = self::createSnipcartClient();
+
         foreach ($items as $item) {
             $productId = $item['id'] ?? '';
             $quantity = (int)($item['quantity'] ?? 0);
-            $variants = $item['customFields'] ?? [];
-            
-            // Ici vous pourriez mettre à jour votre système d'inventaire
-            // Par exemple, décrémenter le stock dans une base de données
-            error_log("Inventaire à décrémenter: $productId (-$quantity) " . json_encode($variants));
+
+            if (!$productId || $quantity <= 0) {
+                continue;
+            }
+
+            try {
+                $inventory = $client->getInventory($productId);
+                $stock = (int)($inventory['stock'] ?? $inventory['available'] ?? 0);
+                $client->updateInventory($productId, max(0, $stock - $quantity));
+            } catch (\Throwable $e) {
+                error_log('Erreur mise à jour inventaire: ' . $e->getMessage());
+            }
         }
+    }
+
+    /**
+     * Crée une instance sécurisée du client Snipcart
+     */
+    private static function createSnipcartClient(): SnipcartClient
+    {
+        $apiKey = $_ENV['SNIPCART_API_KEY'] ?? ($_SERVER['SNIPCART_API_KEY'] ?? '');
+        $secret = $_ENV['SNIPCART_SECRET_API_KEY'] ?? ($_SERVER['SNIPCART_SECRET_API_KEY'] ?? '');
+        $mock = (($_ENV['APP_ENV'] ?? $_SERVER['APP_ENV'] ?? 'production') === 'development');
+
+        return new SnipcartClient($apiKey, $secret, $mock);
     }
     
     /**
@@ -274,14 +297,24 @@ final class OrderWebhook
     {
         $orderId = $order['id'] ?? '';
         $items = $order['items'] ?? [];
-        
-        error_log("Commande annulée: $orderId");
-        
-        // Remettre en stock
+
+        $client = self::createSnipcartClient();
+
         foreach ($items as $item) {
             $productId = $item['id'] ?? '';
             $quantity = (int)($item['quantity'] ?? 0);
-            error_log("Inventaire à remettre: $productId (+$quantity)");
+
+            if (!$productId || $quantity <= 0) {
+                continue;
+            }
+
+            try {
+                $inventory = $client->getInventory($productId);
+                $stock = (int)($inventory['stock'] ?? $inventory['available'] ?? 0);
+                $client->updateInventory($productId, $stock + $quantity);
+            } catch (\Throwable $e) {
+                error_log('Erreur remise inventaire: ' . $e->getMessage());
+            }
         }
     }
     
