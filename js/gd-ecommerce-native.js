@@ -593,6 +593,7 @@
   async function updateCartModal() {
     const cartContent = document.getElementById('gd-cart-content');
     if (!cartContent) return;
+    cartContent.classList.remove('gd-loading');
 
     if (state.cart.items.length === 0) {
       cartContent.innerHTML = `
@@ -734,7 +735,7 @@
   /**
    * Ouvre une modal
    */
-  async function openModal(modalId) {
+  function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) return;
 
@@ -747,7 +748,11 @@
 
     // Préparation de la modal
     if (modalId === 'gd-cart-modal') {
-      await updateCartModal().catch(logger.error);
+      const cartContent = document.getElementById('gd-cart-content');
+      if (cartContent) {
+        cartContent.innerHTML = '<p class="gd-loading-text">Chargement...</p>';
+        cartContent.classList.add('gd-loading');
+      }
     }
 
     requestAnimationFrame(() => {
@@ -761,6 +766,7 @@
         [elements.cartToggle, elements.cartToggleMobile].forEach((btn) => {
           if (btn) btn.setAttribute('aria-expanded', 'true');
         });
+        updateCartModal().catch(logger.error);
       } else if (modalId === 'gd-account-modal') {
         state.ui.accountModalOpen = true;
         [elements.accountToggle, elements.accountToggleMobile].forEach((btn) => {
