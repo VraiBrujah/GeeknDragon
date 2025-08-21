@@ -110,7 +110,7 @@ class ViewHelper
      */
     public function partial(string $name, array $vars = []): void
     {
-        $partialPath = __DIR__ . '/../../views/partials/' . $name . '.php';
+        $partialPath = __DIR__ . '/../../partials/' . $name . '.php';
         
         if (!file_exists($partialPath)) {
             throw new \RuntimeException("Partial non trouvé : $name");
