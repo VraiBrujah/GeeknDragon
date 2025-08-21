@@ -20,7 +20,7 @@ final class SnipcartClient
     public function __construct()
     {
         $this->config = include __DIR__ . '/../../config/snipcart.php';
-        $this->baseUrl = 'https://app.snipcart.com/api';
+        $this->baseUrl = $this->config['api']['base_url'] ?? 'https://app.snipcart.com/api';
         
         if (empty($this->config['secret_key'])) {
             throw new \InvalidArgumentException('Clé secrète Snipcart non configurée');

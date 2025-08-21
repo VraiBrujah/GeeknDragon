@@ -67,7 +67,10 @@ final class SnipcartValidator
     private static function validateWebhookToken(string $token, string $secretKey): bool
     {
         try {
-            $validationUrl = 'https://app.snipcart.com/api/requestvalidation/' . urlencode($token);
+            $config = include __DIR__ . '/../../config/snipcart.php';
+            $apiBase = $config['api']['base_url'] ?? 'https://app.snipcart.com/api';
+            $endpoint = $config['api']['endpoints']['request_validation'] ?? '/requestvalidation/';
+            $validationUrl = rtrim($apiBase, '/') . $endpoint . urlencode($token);
             
             $context = stream_context_create([
                 'http' => [
