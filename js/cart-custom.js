@@ -1,5 +1,5 @@
 /**
- * Panier custom GeeknDragon - Remplace Snipcart natif
+ * Panier custom GeeknDragon
  * Gestion 100% personnalisée du panier sans dépendance externe
  */
 
@@ -100,10 +100,8 @@ class GeeknDragonCart {
      * Initialise les boutons d'ajout au panier sur la page
      */
     initAddToCartButtons() {
-        // Allow both custom buttons using data-product-* attributes and legacy
-        // Snipcart buttons using the `.snipcart-add-item` class. This makes the
-        // cart work on pages that still rely on Snipcart markup.
-        const addToCartBtns = document.querySelectorAll('[data-product-id], .snipcart-add-item');
+        // Boutons d'ajout au panier
+        const addToCartBtns = document.querySelectorAll('[data-product-id]');
         
         addToCartBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -117,10 +115,8 @@ class GeeknDragonCart {
      * Ajoute un produit depuis un bouton de la page
      */
     async addFromButton(button) {
-        // Support both `data-product-*` and `data-item-*` attributes so existing
-        // Snipcart buttons can be used without modification.
-        const productId = button.dataset.productId || button.dataset.itemId;
-        const quantity = parseInt(button.dataset.quantity || button.dataset.itemQuantity) || 1;
+        const productId = button.dataset.productId;
+        const quantity = parseInt(button.dataset.quantity) || 1;
         
         // Récupérer les options du produit (multiplicateurs, langue, etc.)
         const options = {};
@@ -136,18 +132,6 @@ class GeeknDragonCart {
             }
         }
 
-        // Collect options defined via legacy Snipcart custom field attributes
-        Object.keys(button.dataset).forEach((key) => {
-            const match = key.match(/^itemCustom(\d+)Value$/i);
-            if (match) {
-                const index = match[1];
-                const nameKey = `itemCustom${index}Name`;
-                const optionName = button.dataset[nameKey];
-                if (optionName) {
-                    options[optionName] = button.dataset[key];
-                }
-            }
-        });
 
         let productData;
         try {

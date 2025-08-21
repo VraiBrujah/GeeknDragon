@@ -85,7 +85,6 @@
   const setLang = (lang) => {
     const safe = LANGS.includes(lang) ? lang : DEFAULT_LANG;
     localStorage.setItem('lang', safe);
-    localStorage.setItem('snipcartLanguage', safe);
     setCookie('lang', safe);
     document.documentElement.lang = safe;
     return safe;
@@ -135,7 +134,7 @@
 })();
 
 /* ========================================================================
-   HAUTEUR D’EN-TÊTE → variables CSS (global + Snipcart)
+   HAUTEUR D’EN-TÊTE → variables CSS (global + panier)
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
@@ -207,18 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const target = current === 'en' ? el.dataset.altEn : el.dataset.altFr;
           if (target) el.setAttribute('alt', target);
         });
-
-          // Boutons Snipcart (nom + libellé custom)
-          document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
-            if (current === 'en') {
-              if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
-            } else {
-              if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
-            }
-            const label = data?.product?.language || data?.product?.multiplier;
-            const hasCustom = btn.hasAttribute('data-item-custom1-name') && label;
-            if (hasCustom) btn.setAttribute('data-item-custom1-name', label);
-          });
 
         // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)
         document.querySelectorAll('[data-role^="multiplier-"]').forEach((sel) => {
@@ -845,13 +832,5 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
 });
 
-/* ========================================================================
-   SNIPCART — cacher UNIQUEMENT "Multiplicateur/Multiplier" dans le panier
-   (la quantité reste affichée) — Désactivé
-   ===================================================================== */
-// document.addEventListener('DOMContentLoaded', () => {
-//   const root = document.getElementById('snipcart');
-//   if (!root) return;
-// });
 
 

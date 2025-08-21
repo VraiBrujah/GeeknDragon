@@ -29,11 +29,9 @@
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="stylesheet" href="/css/disable-image-crop.css?v=<?= filemtime(__DIR__.'/css/disable-image-crop.css') ?>">
   <link rel="stylesheet" href="/css/checkout-dnd.css?v=<?= filemtime(__DIR__.'/css/checkout-dnd.css') ?>">
-  <!-- Snipcart CSS supprimé - utilisation API uniquement -->
   <script src="/js/lazy-load-enhanced.js" defer></script>
   <script src="/js/universal-image-gallery.js" defer></script>
-  <script src="/js/gd-ecommerce-native.js" defer></script>
-  <!-- Snipcart JS supprimé - utilisation API uniquement -->
+  <script src="/js/cart-custom.js" defer></script>
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 
