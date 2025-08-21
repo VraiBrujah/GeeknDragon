@@ -33,7 +33,7 @@
         }
     },
     "scripts": {
-        "test": "php tests/AllTests.php",
+        "test": "vendor/bin/phpunit tests",
         "linkcheck": "php tools/linkcheck.php",
         "report": "php tools/report.php > report.html",
         "sync-products": "php tools/sync-snipcart-products.php",
