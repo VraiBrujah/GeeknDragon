@@ -19,7 +19,13 @@ if (!in_array($lang, $availableLangs, true)) {
 
 // Définir le cookie seulement si pas en mode CLI et headers pas encore envoyés
 if (php_sapi_name() !== 'cli' && !headers_sent()) {
-    setcookie('lang', $lang, time() + 31536000, '/');
+    setcookie('lang', $lang, [
+        'expires' => time() + 31536000,
+        'path' => '/',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Strict',
+    ]);
 }
 
 /**
