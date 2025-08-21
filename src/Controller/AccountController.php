@@ -60,6 +60,7 @@ class AccountController extends BaseController
                 return;
             }
 
+            session_regenerate_id(true);
             $_SESSION['customer'] = $customer;
 
             $this->json(['success' => true, 'customer' => $customer]);
