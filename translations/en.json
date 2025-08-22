@@ -16,6 +16,10 @@
       "title": "Thank you!!! | Geek & Dragon",
       "desc": "Confirmation that your message has been sent to Geek & Dragon."
     },
+    "quote": {
+      "title": "Quote request | Geek & Dragon",
+      "desc": "Quote request and information for your immersive projects."
+    },
     "news": {
       "flim2025": {
         "title": "Heroes level 20, an overly tenacious raccoon, and... our coins | Geek & Dragon",
@@ -66,25 +70,50 @@
   "footer": {
     "made": "Designed in Quebec."
   },
-  "contact": {
-    "title": "Quote request",
-    "subtitle": "To receive a personalized offer, fill out this magic form.",
-    "requestQuote": "Request a quote",
-    "form": {
-      "name": "Full name",
-      "email": "Email address",
-      "phone": "Phone (optional)",
-      "message": "Request details",
-      "submit": "Send my request"
+    "contact": {
+      "title": "Quote request",
+      "subtitle": "To receive a personalized offer, fill out this magic form.",
+      "requestQuote": "Request a quote",
+      "form": {
+        "name": "Full name",
+        "email": "Email address",
+        "phone": "Phone (optional)",
+        "message": "Request details",
+        "submit": "Send my request"
+      },
+      "info": {
+        "role": "Product manager",
+        "roleCommunity": "Product manager & community"
+      }
     },
-    "info": {
-      "role": "Product manager",
-      "roleCommunity": "Product manager & community"
-    }
-  },
+    "quote": {
+      "title": "Quote request",
+      "subtitle": "To receive a personalized offer, fill out this magic form.",
+      "form": {
+        "name": "Full name",
+        "email": "Email address",
+        "phone": "Phone (optional)",
+        "service": "Subject / Service",
+        "message": "Your request",
+        "consent": "By sending this form you allow us to use your information to reply by email.",
+        "submit": "Send my request"
+      },
+      "errors": {
+        "csrf": "Invalid CSRF token.",
+        "honeypot": "Spam detected.",
+        "rate": "Too many requests, please wait a bit.",
+        "name": "Name is required.",
+        "email": "Invalid email address.",
+        "phone": "Invalid phone number.",
+        "message": "Message is required.",
+        "too_long": "Message is too long."
+      }
+    },
   "thankyou": {
     "title": "Thank you!",
     "message": "Your request has been sent to our team.",
+    "errorTitle": "Something went wrong",
+    "errorMessage": "Your message could not be sent. Please try again or contact us directly.",
     "backHome": "Back to home"
   },
   "product": {
