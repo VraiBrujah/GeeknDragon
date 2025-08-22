@@ -12,10 +12,13 @@ class ProductService
     private array $products = [];
     private static ?self $instance = null;
     private InventoryService $inventoryService;
+    private string $filePath;
+    private int $lastModifiedTime = 0;
 
     private function __construct(InventoryService $inventoryService)
     {
         $this->inventoryService = $inventoryService;
+        $this->filePath = __DIR__ . '/../../data/products.json';
         $this->loadProducts();
     }
 
@@ -35,13 +38,11 @@ class ProductService
      */
     private function loadProducts(): void
     {
-        $filePath = __DIR__ . '/../../data/products.json';
-        
-        if (!file_exists($filePath)) {
-            throw new \RuntimeException("Fichier produits non trouvé : $filePath");
+        if (!file_exists($this->filePath)) {
+            throw new \RuntimeException("Fichier produits non trouvé : {$this->filePath}");
         }
-        
-        $content = file_get_contents($filePath);
+
+        $content = file_get_contents($this->filePath);
         if ($content === false) {
             throw new \RuntimeException("Impossible de lire le fichier produits");
         }
@@ -52,6 +53,23 @@ class ProductService
         }
         
         $this->products = $products;
+        $mtime = filemtime($this->filePath);
+        if ($mtime === false) {
+            throw new \RuntimeException("Impossible de récupérer la date de modification du fichier produits");
+        }
+        $this->lastModifiedTime = $mtime;
+    }
+
+    /**
+     * Recharge les produits si le fichier source a été modifié
+     */
+    private function reloadIfNeeded(): void
+    {
+        clearstatcache(false, $this->filePath);
+        $currentMtime = filemtime($this->filePath);
+        if ($currentMtime !== false && $currentMtime !== $this->lastModifiedTime) {
+            $this->loadProducts();
+        }
     }
     
     /**
@@ -59,6 +77,7 @@ class ProductService
      */
     public function getAllProducts(): array
     {
+        $this->reloadIfNeeded();
         return $this->products;
     }
     
@@ -67,6 +86,7 @@ class ProductService
      */
     public function getProduct(string $id): ?array
     {
+        $this->reloadIfNeeded();
         return $this->products[$id] ?? null;
     }
     
