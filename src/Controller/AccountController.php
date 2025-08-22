@@ -84,6 +84,8 @@ class AccountController extends BaseController
         try {
             $customer = $this->client->getCustomer($_SESSION['customer']['id']);
             $this->json(['success' => true, 'customer' => $customer]);
+        } catch (SnipcartException $e) {
+            $this->json(['success' => false, 'message' => 'Configuration Snipcart invalide'], 500);
         } catch (\Exception $e) {
             $this->handleError($e, 'AccountController::profile');
         }
@@ -102,6 +104,8 @@ class AccountController extends BaseController
         try {
             $orders = $this->client->getOrders(['customerId' => $_SESSION['customer']['id']]);
             $this->json(['success' => true, 'orders' => $orders]);
+        } catch (SnipcartException $e) {
+            $this->json(['success' => false, 'message' => 'Configuration Snipcart invalide'], 500);
         } catch (\Exception $e) {
             $this->handleError($e, 'AccountController::orders');
         }

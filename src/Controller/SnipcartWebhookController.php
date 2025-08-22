@@ -12,6 +12,14 @@ class SnipcartWebhookController extends BaseController
     {
         header('Content-Type: application/json; charset=utf-8');
 
+        $secret = $this->config['snipcart_secret_api_key'] ?? '';
+        if (!$secret) {
+            $this->json(['errors' => [[
+                'key' => 'missing-key',
+                'message' => 'Clé API Snipcart manquante'
+            ]]], 500);
+        }
+
         $token = $_SERVER['HTTP_X_SNIPCART_REQUESTTOKEN'] ?? '';
         if (!$this->validateToken($token)) {
             $this->json(['errors' => [[
@@ -40,6 +48,12 @@ class SnipcartWebhookController extends BaseController
     private function handleShipping(array $content): void
     {
         $secret = $this->config['snipcart_secret_api_key'] ?? '';
+        if (!$secret) {
+            $this->json(['errors' => [[
+                'key' => 'missing-key',
+                'message' => 'Clé API Snipcart manquante'
+            ]]], 500);
+        }
         $ch = curl_init('https://app.snipcart.com/api/shippingrates');
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
@@ -57,6 +71,14 @@ class SnipcartWebhookController extends BaseController
         $error = curl_error($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+
+        if ($code === 401 || $code === 403) {
+            error_log('Snipcart shippingrates auth error: ' . ($error ?: $response));
+            $this->json(['errors' => [[
+                'key' => 'invalid-key',
+                'message' => 'Clé API Snipcart invalide'
+            ]]], 500);
+        }
 
         $json = json_decode($response, true);
         if ($response === false || $code !== 200 || $json === null) {
@@ -78,6 +100,9 @@ class SnipcartWebhookController extends BaseController
             return false;
         }
         $secret = $this->config['snipcart_secret_api_key'] ?? '';
+        if (!$secret) {
+            return false;
+        }
         $ch = curl_init('https://app.snipcart.com/api/requestvalidation/' . urlencode($token));
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
@@ -88,6 +113,10 @@ class SnipcartWebhookController extends BaseController
         curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
+        if ($code === 401 || $code === 403) {
+            error_log('Snipcart token validation auth error');
+            return false;
+        }
         return $code === 200 || $code === 204;
     }
 }
