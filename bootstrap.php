@@ -77,6 +77,10 @@ if (php_sapi_name() !== 'cli' && !headers_sent()) {
 
 require_once __DIR__ . '/vendor/erusev/parsedown/Parsedown.php';
 
+// 🚀 INITIALISATION PERFORMANCE
+$GLOBALS['startTime'] = microtime(true);
+$GLOBALS['performanceTimings'] = [];
+
 // Attempt to load Composer's autoloader only if all required files are present.
 $vendorDir = __DIR__ . '/vendor';
 $autoload  = $vendorDir . '/autoload.php';
@@ -98,6 +102,51 @@ if ($canLoadVendor) {
 
     if (class_exists('Dotenv\\Dotenv')) {
         Dotenv\Dotenv::createUnsafeImmutable(__DIR__)->safeLoad();
+    }
+    
+    // 🚀 INITIALISATION SYSTÈMES PERFORMANCE
+    if (class_exists('GeeknDragon\\Performance\\CacheManager')) {
+        $GLOBALS['cacheManager'] = new GeeknDragon\Performance\CacheManager();
+        
+        // Nettoyage automatique (1% de chance)
+        if (mt_rand(1, 100) === 1) {
+            $cleanupStats = $GLOBALS['cacheManager']->cleanup();
+            error_log("Cache cleanup: " . $cleanupStats['deleted'] . " files, " . $cleanupStats['space_freed'] . " freed");
+        }
+    }
+    
+    // Headers de performance intelligents
+    if (php_sapi_name() !== 'cli' && class_exists('GeeknDragon\\Performance\\PerformanceHeaders')) {
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '';
+        
+        // Ressources statiques avec cache agressif
+        if (preg_match('/\.(css|js|png|jpg|jpeg|webp|gif|ico|woff2?|ttf|eot|svg|mp4)$/i', $requestUri)) {
+            $ext = pathinfo($requestUri, PATHINFO_EXTENSION);
+            $contentType = match(strtolower($ext)) {
+                'css' => 'text/css',
+                'js' => 'application/javascript',
+                'png' => 'image/png',
+                'jpg', 'jpeg' => 'image/jpeg',
+                'webp' => 'image/webp',
+                'gif' => 'image/gif',
+                'ico' => 'image/x-icon',
+                'woff', 'woff2' => 'font/woff2',
+                'ttf' => 'font/ttf',
+                'svg' => 'image/svg+xml',
+                'mp4' => 'video/mp4',
+                default => 'application/octet-stream'
+            };
+            GeeknDragon\Performance\PerformanceHeaders::setStaticResourceHeaders($contentType);
+        }
+        // API endpoints
+        elseif (strpos($requestUri, '/api/') !== false || strpos($requestUri, '.json') !== false) {
+            GeeknDragon\Performance\PerformanceHeaders::setApiHeaders(300);
+        }
+        // Pages dynamiques avec hints critiques
+        else {
+            GeeknDragon\Performance\PerformanceHeaders::setDynamicPageHeaders(1800, true);
+            GeeknDragon\Performance\PerformanceHeaders::addCriticalResourceHints();
+        }
     }
 } else {
     // Basic .env loader sécurisé

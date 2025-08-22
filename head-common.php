@@ -19,20 +19,34 @@ declare(strict_types=1);
   <meta name="twitter:description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta name="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/images/optimized-modern/webp/brand-geekndragon-main.webp') ?>" />
   <link rel="canonical" href="<?= htmlspecialchars($metaUrl ?? '') ?>">
-  <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
+  <!-- Preload des fonts critiques pour performance optimale -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:wght@400;500;600&display=swap"></noscript>
+  
+  <!-- CSS critique inliné pour First Paint optimal -->
+  <style><?= file_get_contents(__DIR__.'/css/critical.min.css') ?></style>
+  
+  <!-- Vendor JS critique -->
   <script src="/js/vendor.bundle.min.js?v=<?= filemtime(__DIR__.'/js/vendor.bundle.min.js') ?>"></script>
-  <link rel="stylesheet" href="/css/styles.css?v=<?= filemtime(__DIR__.'/css/styles.css') ?>">
-  <link rel="stylesheet" href="/css/boutique-style-global.css?v=<?= filemtime(__DIR__.'/css/boutique-style-global.css') ?>">
-  <!-- Système e-commerce natif moderne -->
-  <link rel="stylesheet" href="/css/gd-ecommerce-native.css?v=<?= filemtime(__DIR__.'/css/gd-ecommerce-native.css') ?>">
-  <!-- Améliorations du site (polices, tailles, mode production) -->
-  <link rel="stylesheet" href="/css/site-enhancements.css?v=<?= filemtime(__DIR__.'/css/site-enhancements.css') ?>">
-  <link rel="icon" type="image/png" href="/images/favicon.png">
-  <link rel="stylesheet" href="/css/disable-image-crop.css?v=<?= filemtime(__DIR__.'/css/disable-image-crop.css') ?>">
-  <link rel="stylesheet" href="/css/checkout-dnd.css?v=<?= filemtime(__DIR__.'/css/checkout-dnd.css') ?>">
+  
+  <!-- CSS non-critique chargé de manière asynchrone -->
+  <link rel="preload" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>"></noscript>
+  
+  <link rel="preload" href="/css/optimized.min.css?v=<?= filemtime(__DIR__.'/css/optimized.min.css') ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/optimized.min.css?v=<?= filemtime(__DIR__.'/css/optimized.min.css') ?>"></noscript>
+  
+  <link rel="icon" type="image/png" href="/images/favicon.png">>
+  <!-- Scripts critiques (chargés individuellement) -->
   <script src="/js/lazy-load-enhanced.js" defer></script>
   <script src="/js/universal-image-gallery.js" defer></script>
   <script src="/js/cart-custom.js" defer></script>
+  
+  <!-- Scripts non-critiques (bundlés et optimisés) -->
+  <script src="/js/optimized.min.js" defer></script>
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 

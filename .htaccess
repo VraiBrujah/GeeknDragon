@@ -1,0 +1,187 @@
+# 🚀 OPTIMISATIONS PERFORMANCE GEEKNDRAGON
+# Configuration Apache pour performance maximale
+
+# ===== COMPRESSION GZIP/BROTLI =====
+<IfModule mod_deflate.c>
+    # Activer la compression pour tous les types de contenu
+    SetOutputFilter DEFLATE
+    
+    # Types de fichiers à compresser
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE text/javascript
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/atom+xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE font/woff
+    AddOutputFilterByType DEFLATE font/woff2
+    AddOutputFilterByType DEFLATE font/ttf
+    AddOutputFilterByType DEFLATE font/eot
+    
+    # Exclure les images déjà compressées
+    SetEnvIfNoCase Request_URI \
+        \.(?:gif|jpe?g|png|webp|ico)$ no-gzip dont-vary
+    SetEnvIfNoCase Request_URI \
+        \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
+</IfModule>
+
+# Support Brotli si disponible
+<IfModule mod_brotli.c>
+    BrotliCompressionQuality 6
+    BrotliFilterByType text/html
+    BrotliFilterByType text/css
+    BrotliFilterByType text/javascript
+    BrotliFilterByType application/javascript
+    BrotliFilterByType application/json
+    BrotliFilterByType text/xml
+    BrotliFilterByType application/xml
+    BrotliFilterByType image/svg+xml
+</IfModule>
+
+# ===== HEADERS DE CACHE OPTIMISÉS =====
+<IfModule mod_expires.c>
+    ExpiresActive on
+    
+    # Images avec cache très long (immutable)
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # Fonts avec cache long
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+    ExpiresByType font/eot "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    
+    # CSS/JS avec versioning (cache agressif)
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    
+    # HTML avec revalidation
+    ExpiresByType text/html "access plus 1 hour"
+    
+    # Documents statiques
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType application/json "access plus 1 hour"
+</IfModule>
+
+# Headers Cache-Control personnalisés
+<IfModule mod_headers.c>
+    # Ressources avec versioning - cache immutable
+    <FilesMatch "\.(css|js|png|jpg|jpeg|webp|gif|ico|woff|woff2|ttf|eot|svg)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+        Header set Vary "Accept-Encoding"
+    </FilesMatch>
+    
+    # Pages HTML - cache avec revalidation
+    <FilesMatch "\.(html|htm|php)$">
+        Header set Cache-Control "public, max-age=3600, must-revalidate"
+        Header set Vary "Accept-Encoding, Accept-Language"
+    </FilesMatch>
+    
+    # Headers de sécurité
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "payment=(self)"
+    
+    # Headers de performance
+    Header always set X-DNS-Prefetch-Control "on"
+    
+    # ETag optimisé
+    Header unset ETag
+    FileETag None
+</IfModule>
+
+# ===== OPTIMISATIONS DIVERSES =====
+
+# Désactiver la signature du serveur
+ServerTokens Prod
+ServerSignature Off
+
+# Keep-Alive pour réduire les connexions
+<IfModule mod_headers.c>
+    Header always set Connection "keep-alive"
+</IfModule>
+
+# Préchargement DNS pour domaines externes
+<IfModule mod_headers.c>
+    <LocationMatch "^/$">
+        Header add Link "<//>; rel=dns-prefetch"
+        Header add Link "<//fonts.googleapis.com>; rel=dns-prefetch"
+        Header add Link "<//fonts.gstatic.com>; rel=dns-prefetch"
+        Header add Link "<//cdn.snipcart.com>; rel=dns-prefetch"
+    </LocationMatch>
+</IfModule>
+
+# Optimisation des requêtes
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Forcer HTTPS (si activé)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Servir les fichiers WebP si supportés
+    RewriteCond %{HTTP_ACCEPT} image/webp
+    RewriteCond %{REQUEST_FILENAME} \.(jpe?g|png)$
+    RewriteCond %{REQUEST_FILENAME}.webp -f
+    RewriteRule ^(.+)\.(jpe?g|png)$ $1.$2.webp [T=image/webp,E=accept:1,L]
+</IfModule>
+
+# ===== SÉCURITÉ ET PROTECTION =====
+
+# Bloquer l'accès aux fichiers sensibles
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|swp)$">
+    Require all denied
+</FilesMatch>
+
+# Protection contre le hotlinking des images
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_REFERER} !^$
+    RewriteCond %{HTTP_REFERER} !^https://(.*\.)?geekndragon\.com [NC]
+    RewriteCond %{REQUEST_FILENAME} \.(jpe?g|png|gif|webp)$ [NC]
+    RewriteRule \.(jpe?g|png|gif|webp)$ - [F]
+</IfModule>
+
+# Désactiver les méthodes HTTP non nécessaires
+<Limit GET POST HEAD>
+    Require all granted
+</Limit>
+<LimitExcept GET POST HEAD>
+    Require all denied
+</LimitExcept>
+
+# ===== OPTIMISATIONS SPÉCIFIQUES GEEKNDRAGON =====
+
+# Redirections SEO si nécessaires
+# RewriteRule ^old-page$ /new-page [R=301,L]
+
+# Gestion des erreurs avec pages personnalisées
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+# ===== PERFORMANCE MONITORING =====
+
+# Headers pour monitoring des performances
+<IfModule mod_headers.c>
+    Header always set Server-Timing "total;dur=0"
+    Header always set X-Performance-Optimized "geekndragon-v1"
+</IfModule>

@@ -64,15 +64,15 @@ $products = array_merge($pieces, $cards, $triptychs);
     <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:0" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60" style="z-index:1"></div>
     <div class="hero-content animate-fade-in-up" style="z-index:2">
-      <h1 class="hero-title" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
-      <p class="hero-subtitle" data-i18n="shop.hero.description">Offrez à vos parties l'élégance et la durabilité de pièces et cartes d'équipement conçues au Québec, plus précieuses qu'une figurine de dragon à 300 $, laquelle ne sert qu'exceptionnellement, nos pièces sont présentes à chaque session pour des années d'aventures.</p>
+      <h1 class="hero-title" data-i18n="shop.hero.title">Des trésors qui changent VRAIMENT vos parties</h1>
+      <p class="hero-subtitle" data-i18n="shop.hero.description">Plus rentables qu'une figurine à 300$ utilisée une fois : nos pièces et cartes servent à chaque session, pour des années d'aventures immersives. Fabriqué au Québec avec des matériaux premium.</p>
       <a href="#pieces" class="hero-cta">
         <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
           <circle cx="9" cy="20" r="1"/>
           <circle cx="20" cy="20" r="1"/>
         </svg>
-        <span data-i18n="shop.hero.button">Choisir mes trésors</span>
+        <span data-i18n="shop.hero.button">Débloquer l'immersion maintenant</span>
       </a>
     </div>
   </section>
@@ -99,24 +99,25 @@ $products = array_merge($pieces, $cards, $triptychs);
         <p class="text-gray-400 text-xl md:text-2xl tracking-wide">
           <span data-i18n="shop.pieces.description">
             <span class="block font-semibold text-gray-200">
-              Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets :
-              <span class="font-normal text-gray-400">ça fonctionne, mais ça perd toute sa saveur.</span>
+              « Finis les combats contre nos feuilles de personnage ! »
+              <span class="font-normal text-gray-400">— Témoignage joueur FLIM 2025</span>
             </span>
 
             <span class="block mt-6">
-              Le trésor est au cœur de presque toutes les campagnes de D&D… et pourtant,
-              quand il se réduit à des chiffres qu’on inscrit puis efface cent fois,
-              il perd toute magie et tout impact.
+              <strong class="text-gray-200">Terminées les colonnes de chiffres gribouillées.</strong> 
+              Chaque joueur sent maintenant le poids réel du butin. Un trésor devenu palpable, 
+              qui transforme chaque échange en émotion viscérale.
             </span>
 
             <span class="block mt-6">
-              Par souci de simplicité, on se limite presque toujours à la pièce d’or,
-              oubliant la richesse des autres monnaies.
+              <strong class="text-gray-200">Système multiplicateurs révolutionnaire :</strong> 
+              x1 (brillant), x10/x100/x1000/x10000 (gravés). 
+              Accélérez les calculs sans perdre l'immersion.
             </span>
 
             <span class="block mt-6">
-              Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient
-              tangible, mémorable — digne des plus grandes quêtes.
+              Plus besoin d'administratif à rallonge. L'aventure commence au premier 
+              <em class="text-indigo-300">cling</em> quand la pièce tombe sur la table.
             </span>
           </span>
         </p>

@@ -23,14 +23,15 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
       <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/video-mage-hero.mp4" data-videos='["videos/video-cascade-hd.mp4","videos/video-fountain-11.mp4","videos/video-card-preview.mp4","videos/video-fountain-4.mp4","videos/video-fountain-3.mp4","videos/video-fountain-2.mp4","videos/video-fountain-1.mp4"]'></div>
       <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6 hero-text">
-        <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
-          <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
-          <div class="flex items-center justify-center gap-2 mb-8">
-            <p class="text-xl txt-court" data-i18n="hero.subtitle2">Fabriqué au Québec</p>
-            <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-5 w-auto" loading="lazy">
+        <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">Transformez vos parties D&D avec des trésors réels</h1>
+          <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Pièces métalliques, cartes illustrées et triptyques pour une immersion totale</p>
+          <div class="flex items-center justify-center gap-2 mb-8 quebec-badge" data-quebec="true">
+            <span class="text-xl txt-court font-semibold" data-i18n="hero.subtitle2">🍁 FABRIQUÉ AU QUÉBEC</span>
+            <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-6 w-auto" loading="lazy">
+            <span class="text-sm opacity-90">• QUALITÉ ARTISANALE</span>
           </div>
 <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
-            Découvrir nos trésors
+            Transformer mes parties maintenant
           </a>
       </div>
     </section>
@@ -49,7 +50,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               <h3 class="text-center mb-3" data-i18n="home.mustHave.equipment.title">Cartes d'équipement</h3>
               <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.equipment.desc">560 cartes d'équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
               <div class="btn btn-outline w-full group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-colors">
-                Découvrir
+                Voir les trésors en action
               </div>
             </article>
           </a>
@@ -60,7 +61,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               <h3 class="text-center mb-3" data-i18n="home.mustHave.coins.title">Pièces métalliques</h3>
               <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
               <div class="btn btn-outline w-full group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-colors">
-                Découvrir
+                Voir les trésors en action
               </div>
             </article>
           </a>
@@ -71,10 +72,31 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
               <h3 class="text-center mb-3" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h3>
               <p class="text-center text-secondary mb-4" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
               <div class="btn btn-outline w-full group-hover:bg-indigo-600 group-hover:border-indigo-600 transition-colors">
-                Découvrir
+                Voir les trésors en action
               </div>
             </article>
           </a>
+        </div>
+
+        <!-- Trust Signals Renforcés -->
+        <div class="text-center mb-12">
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="trust-badge bg-gray-800 p-4 rounded-xl">
+              <div class="text-2xl mb-2">🏆</div>
+              <div class="font-semibold text-indigo-300">Vu au FLIM 2025</div>
+              <div class="text-sm text-gray-400">Démonstration officielle</div>
+            </div>
+            <div class="trust-badge bg-gray-800 p-4 rounded-xl">
+              <div class="text-2xl mb-2">🇨🇦</div>
+              <div class="font-semibold text-indigo-300">100% Québécois</div>
+              <div class="text-sm text-gray-400">Conception & fabrication locale</div>
+            </div>
+            <div class="trust-badge bg-gray-800 p-4 rounded-xl">
+              <div class="text-2xl mb-2">⚡</div>
+              <div class="font-semibold text-indigo-300">Livraison 48h</div>
+              <div class="text-sm text-gray-400">Partout au Canada</div>
+            </div>
+          </div>
         </div>
 
         <div class="text-center">
