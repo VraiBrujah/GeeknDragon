@@ -116,6 +116,17 @@
     "errorMessage": "Votre message n'a pas pu être envoyé. Veuillez réessayer ou nous contacter directement.",
     "backHome": "Retour à l'accueil"
   },
+  "errors": {
+    "404": {
+      "title": "Page non trouvée",
+      "message": "La page demandée est introuvable."
+    },
+    "500": {
+      "title": "Erreur serveur",
+      "message": "Une erreur est survenue. Veuillez réessayer plus tard."
+    },
+    "backHome": "Retour à l'accueil"
+  },
   "product": {
     "back": "Retour à la boutique",
     "multiplier": "Multiplicateur",
