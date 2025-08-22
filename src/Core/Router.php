@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace GeeknDragon\Core;
 
 use Throwable;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 /**
  * Mini-routeur simple pour GeeknDragon
@@ -15,6 +17,12 @@ class Router
     private array $redirects = [];
     /** @var callable[] */
     private array $middlewares = [];
+    private LoggerInterface $logger;
+
+    public function __construct(?LoggerInterface $logger = null)
+    {
+        $this->logger = $logger ?? new NullLogger();
+    }
     
     /**
      * Ajoute une route GET
@@ -146,9 +154,22 @@ class Router
     private function handle500(Throwable $e): void
     {
         http_response_code(500);
-        
-        // En développement, afficher l'erreur détaillée
-        if (($_ENV['APP_ENV'] ?? 'production') === 'development') {
+
+        $this->logger->error('Router error', [
+            'exception' => $e,
+            'trace' => $e->getTraceAsString(),
+        ]);
+
+        $isDev = (($_ENV['APP_ENV'] ?? 'production') === 'development');
+        $view = __DIR__ . '/../../views/pages/500.php';
+
+        if (file_exists($view)) {
+            $exception = $e; // variable disponible dans la vue
+            include $view;
+            return;
+        }
+
+        if ($isDev) {
             echo "<h1>Erreur serveur</h1>";
             echo "<pre>" . htmlspecialchars($e->getMessage()) . "</pre>";
             echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
@@ -156,8 +177,5 @@ class Router
             echo "<h1>Erreur serveur</h1>";
             echo "<p>Une erreur est survenue. Veuillez réessayer plus tard.</p>";
         }
-        
-        // Logger l'erreur
-        error_log("Router error: " . $e->getMessage() . " in " . $e->getFile() . ":" . $e->getLine());
     }
 }
