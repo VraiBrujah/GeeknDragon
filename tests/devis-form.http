@@ -1,0 +1,32 @@
+# Demande de devis form tests
+# Set BASE_URL to target instance, e.g. https://geekndragon.com
+
+# 1. Successful submission
+curl -i -c cookies.txt "$BASE_URL/devis.php" >/tmp/devis.html
+TOKEN=$(grep -oP 'name="_token" value="\K[^"]+' /tmp/devis.html)
+curl -i -b cookies.txt -X POST "$BASE_URL/devis-handler.php" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     --data "name=Test%20User&email=test@example.com&service=Boutique&message=Bonjour&_token=$TOKEN"
+
+# 2. Missing CSRF token
+curl -i -X POST "$BASE_URL/devis-handler.php" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     --data "name=Test&email=test@example.com&service=Boutique&message=Hello"
+
+# 3. Honeypot filled
+curl -i -b cookies.txt -X POST "$BASE_URL/devis-handler.php" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     --data "name=Bot&email=bot@example.com&service=Autre&message=Spam&company=Acme&_token=$TOKEN"
+
+# 4. Rate limit (two rapid submissions)
+curl -i -b cookies.txt -X POST "$BASE_URL/devis-handler.php" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     --data "name=Fast&email=fast@example.com&service=Site%20vitrine&message=One&_token=$TOKEN"
+curl -i -b cookies.txt -X POST "$BASE_URL/devis-handler.php" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     --data "name=Fast&email=fast@example.com&service=Site%20vitrine&message=Two&_token=$TOKEN"
+
+# 5. Invalid email
+curl -i -b cookies.txt -X POST "$BASE_URL/devis-handler.php" \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     --data "name=Bad&email=not-an-email&service=Autre&message=Test&_token=$TOKEN"

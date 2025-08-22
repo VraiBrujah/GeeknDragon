@@ -30,20 +30,19 @@ The application expects a few secrets to be provided through the environment. Sn
 - `SNIPCART_API_KEY` – your public Snipcart API key.
 - `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates. **Keep this key strictly server-side; it must never be exposed to client-side code or shipped to the browser.**
 - `SNIPCART_LANGUAGE` – locale used by Snipcart (for example `fr`).
-- `SENDGRID_API_KEY` – API key for the SendGrid SMTP service used to send emails.
-- `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
-
-To send emails from the contact form using SendGrid's SMTP service, configure credentials for the fixed sender address `contact@geekndragon.com`:
-
-- `SMTP_HOST` – SMTP server hostname (for SendGrid use `smtp.sendgrid.net`).
-- `SMTP_PORT` – SMTP server port (defaults to 587 if unset).
-- `SMTP_USERNAME` – account username (for SendGrid use `apikey`).
-- `SMTP_PASSWORD` – password for the SMTP account (the same as `SENDGRID_API_KEY`).
+- `QUOTE_EMAIL` – recipient for quote requests (defaults to `commande@geekndragon.com`).
+- `SMTP_HOST` – SMTP server hostname.
+- `SMTP_PORT` – SMTP server port (587 for STARTTLS, 465 for SMTPS).
+- `SMTP_SECURE` – protocol (`tls` or `ssl`).
+- `SMTP_USERNAME` – authenticated sender address.
+- `SMTP_PASSWORD` – password for the SMTP account.
+- `RATE_LIMIT_WINDOW` – form submission cooldown in seconds (default `120`).
+- `MAX_MESSAGE_CHARS` – maximum allowed message length (default `3000`).
 
 ## Local setup
 
 1. Install PHP (7.4 or newer) and clone this repository.
-2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SNIPCART_LANGUAGE`, `SNIPCART_ADD_PRODUCT_BEHAVIOR`, `SENDGRID_API_KEY` and the SMTP variables. No additional payment gateway key is required.
+2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SNIPCART_LANGUAGE`, `SNIPCART_ADD_PRODUCT_BEHAVIOR` and the SMTP variables. No additional payment gateway key is required.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
 3. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
 

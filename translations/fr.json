@@ -12,6 +12,10 @@
       "title": "Demande de devis | Geek & Dragon",
       "desc": "Demande de devis et informations pour vos projets immersifs."
     },
+    "quote": {
+      "title": "Demande de devis | Geek & Dragon",
+      "desc": "Formulaire pour obtenir une offre personnalisée."
+    },
     "thankyou": {
       "title": "Merci !!! | Geek & Dragon",
       "desc": "Confirmation de l'envoi de votre message à Geek & Dragon."
@@ -85,7 +89,8 @@
   "thankyou": {
     "title": "Merci !",
     "message": "Votre demande a bien été transmise à notre équipe.",
-    "backHome": "Retour à l'accueil"
+    "backHome": "Retour à l'accueil",
+    "error": "Une erreur est survenue lors de l'envoi. Veuillez réessayer plus tard."
   },
   "product": {
     "back": "Retour à la boutique",
@@ -187,6 +192,27 @@
     "quote2": {
       "text": "Ma grande découverte au FLIM, mes enfants sont tombés en amours avec les pièces et depuis font pleins de tâches pour pouvoir échanger leur point contre une chasse au trésor qui pourront avoir leur propre coffre au trésor. Merci à Mathieu pour offrir ce super ajout pour l'initiation des enfants aux jeux de rôles.",
       "author": "— Gabrielle"
+    }
+  },
+  "quote": {
+    "title": "Demande de devis",
+    "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone (optionnel)",
+      "service": "Sujet / Service",
+      "message": "Détail de la demande",
+      "submit": "Envoyer ma demande"
+    },
+    "errors": {
+      "csrf": "Token CSRF invalide.",
+      "honeypot": "Spam détecté.",
+      "name": "Le nom est requis.",
+      "email": "L'adresse e-mail est invalide.",
+      "phone": "Le numéro de téléphone est invalide.",
+      "message": "Le message est requis.",
+      "ratelimit": "Veuillez patienter avant de soumettre à nouveau."
     }
   }
 }

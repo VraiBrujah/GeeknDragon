@@ -12,6 +12,10 @@
       "title": "Quote request | Geek & Dragon",
       "desc": "Quote request and information for your immersive projects."
     },
+    "quote": {
+      "title": "Quote request | Geek & Dragon",
+      "desc": "Request a personalized quote for your project."
+    },
     "thankyou": {
       "title": "Thank you!!! | Geek & Dragon",
       "desc": "Confirmation that your message has been sent to Geek & Dragon."
@@ -82,9 +86,31 @@
       "roleCommunity": "Product manager & community"
     }
   },
+  "quote": {
+    "title": "Quote request",
+    "subtitle": "To receive a personalized offer, fill out this magic form.",
+    "form": {
+      "name": "Full name",
+      "email": "Email address",
+      "phone": "Phone (optional)",
+      "service": "Subject / Service",
+      "message": "Request details",
+      "submit": "Send my request"
+    },
+    "errors": {
+      "csrf": "Invalid CSRF token.",
+      "honeypot": "Spam detected.",
+      "name": "Name is required.",
+      "email": "Invalid email address.",
+      "phone": "Invalid phone number.",
+      "message": "Message is required.",
+      "ratelimit": "Please wait before submitting again."
+    }
+  },
   "thankyou": {
     "title": "Thank you!",
     "message": "Your request has been sent to our team.",
+    "error": "An error occurred while sending your request.",
     "backHome": "Back to home"
   },
   "product": {

@@ -52,6 +52,16 @@ $router->post('/contact', function () {
     require __DIR__ . '/../contact-handler.php';
 });
 
+// Devis
+$router->get('/devis', function () {
+    require __DIR__ . '/../devis.php';
+});
+
+// Traitement formulaire devis
+$router->post('/devis', function () {
+    require __DIR__ . '/../devis-handler.php';
+});
+
 // Checkout
 $router->get('/checkout', function () {
     require __DIR__ . '/../checkout.php';
@@ -183,6 +193,7 @@ if (in_array(strtolower($extension), $staticExtensions)) {
 $router->redirect('/index.php', '/');
 $router->redirect('/boutique.php', '/boutique');
 $router->redirect('/contact.php', '/contact');
+$router->redirect('/devis.php', '/devis');
 $router->redirect('/checkout.php', '/checkout');
 $router->redirect('/merci.php', '/merci');
 $router->redirect('/lot10.php', '/lot10');
