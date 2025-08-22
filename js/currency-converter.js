@@ -19,7 +19,9 @@
   const multipliers = [1, 10, 100, 1000, 10000];
   const coins = Object.keys(rates).sort((a, b) => rates[b] - rates[a]);
 
-  const nf = new Intl.NumberFormat('fr-FR');
+  const nf = new Intl.NumberFormat(document.documentElement.lang);
+  const tr = window.i18n?.shop?.converter || {};
+  const errorPositiveInteger = tr.errorPositiveInteger || 'Please enter a positive integer';
 
   const denominations = multipliers
     .flatMap((multiplier) => coins.map((coin) => ({
@@ -73,7 +75,6 @@
    * Render converted values for all currencies.
    */
   const render = () => {
-    const tr = window.i18n?.shop?.converter || {};
     const currencyNames = {
       copper: tr.copper || 'pièce de cuivre',
       silver: tr.silver || 'pièce d’argent',
@@ -155,7 +156,7 @@
       el.value = el.value.replace(/[^0-9.-]/g, '');
       const value = parseFloat(el.value);
       const invalid = Number.isFinite(value) && (value < 0 || !Number.isInteger(value));
-      el.setCustomValidity(invalid ? 'Veuillez saisir un entier positif' : '');
+      el.setCustomValidity(invalid ? errorPositiveInteger : '');
       if (invalid) el.reportValidity();
       render();
     });
