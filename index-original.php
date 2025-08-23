@@ -1,40 +1,11 @@
 <?php
-// Version temporaire simplifiée pour diagnostic
-ini_set('display_errors', '1');
-error_reporting(E_ALL);
-
-try {
-    // Test étape par étape
-    echo "<!-- Test 1: PHP de base -->";
-    
-    // Test 2: Bootstrap
-    echo "<!-- Test 2: Chargement Bootstrap -->";
-    require __DIR__ . '/bootstrap.php';
-    echo "<!-- Bootstrap OK -->";
-    
-    // Test 3: Config
-    echo "<!-- Test 3: Chargement Config -->";
-    $config = require __DIR__ . '/config.php';
-    echo "<!-- Config OK -->";
-    
-    // Test 4: i18n
-    echo "<!-- Test 4: Chargement i18n -->";
-    require __DIR__ . '/i18n.php';
-    $title  = $translations['meta']['home']['title'] ?? 'Geek & Dragon';
-    $metaDescription = $translations['meta']['home']['desc'] ?? '';
-    echo "<!-- i18n OK -->";
-    
-} catch (Throwable $e) {
-    // Affichage d'erreur détaillé
-    echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Erreur - Geek & Dragon</title></head><body>";
-    echo "<h1>🚨 Erreur détectée</h1>";
-    echo "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
-    echo "<p><strong>Fichier:</strong> " . htmlspecialchars($e->getFile()) . "</p>";
-    echo "<p><strong>Ligne:</strong> " . $e->getLine() . "</p>";
-    echo "<p><strong>Trace:</strong></p><pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
-    echo "</body></html>";
-    exit;
-}
+declare(strict_types=1);
+require __DIR__ . '/bootstrap.php';
+$config = require __DIR__ . '/config.php';
+// No active nav item on homepage
+require __DIR__ . '/i18n.php';
+$title  = $translations['meta']['home']['title'] ?? 'Geek & Dragon';
+$metaDescription = $translations['meta']['home']['desc'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
