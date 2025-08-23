@@ -273,7 +273,7 @@
             overflow: hidden;
             box-shadow: var(--shadow-xl);
             animation: float 6s ease-in-out infinite;
-            background-image: url('../../image/Produit/Li-CUBE PRO/Li-CUBE PRO image 1.png');
+            background-image: var(--licube-bg-image, url('../../image/Produit/Li-CUBE PRO/Li-CUBE PRO image 1.png'));
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -2069,6 +2069,16 @@
         });
 
         console.log('Li-CUBE PRO™ LOCATION - Présentation Interactive EDS Québec - Division Location & Services Managés');
+    </script>
+    
+    <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
+    <script src="../../js/image-config.js"></script>
+    <script>
+        // Mise à jour du background CSS pour Li-CUBE PRO™
+        document.addEventListener('DOMContentLoaded', function() {
+            const licubeImagePath = loadLiCubeImage('Li-CUBE PRO image 1.png', 3);
+            document.documentElement.style.setProperty('--licube-bg-image', `url('${licubeImagePath}')`);
+        });
     </script>
     
 </body>

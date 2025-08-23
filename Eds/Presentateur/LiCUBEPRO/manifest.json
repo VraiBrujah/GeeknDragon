@@ -21,7 +21,7 @@
   
   "screenshots": [
     {
-      "src": "./image/Produit/Li-CUBE PRO/Li-CUBE PRO image 1.png",
+      "src": "../image/Produit/Li-CUBE PRO/Li-CUBE PRO image 1.png",
       "sizes": "1280x720",
       "type": "image/png",
       "label": "Li-CUBE PRO™ Product Showcase"

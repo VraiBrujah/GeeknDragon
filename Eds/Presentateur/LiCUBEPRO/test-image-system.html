@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test du Système d'Images Dynamiques Li-CUBE PRO™</title>
+    <style>
+        /**
+         * Page de test pour valider le système de gestion dynamique des images Li-CUBE PRO™
+         */
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .test-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 4px solid #003F7F;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .image-test {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+        
+        .image-test:hover {
+            border-color: #003F7F;
+            box-shadow: 0 4px 12px rgba(0,63,127,0.15);
+        }
+        
+        .image-test h3 {
+            color: #003F7F;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .image-test img {
+            max-width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: white;
+            border: 1px solid #dee2e6;
+            margin-bottom: 1rem;
+        }
+        
+        .depth-info {
+            background: #e3f2fd;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #1565c0;
+            font-weight: 500;
+        }
+        
+        .controls {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .controls h3 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+        
+        .control-button {
+            background: #003F7F;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .control-button:hover {
+            background: #002a5c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,63,127,0.3);
+        }
+        
+        .status {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .status h3 {
+            color: #155724;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #c3e6cb;
+        }
+        
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-value {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        #console-output {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <div class="header">
+        <h1>🔬 Test du Système d'Images Dynamiques Li-CUBE PRO™</h1>
+        <p>Validation du système de gestion centralisée des chemins d'images</p>
+        <p><strong>Version:</strong> 1.0.0 | <strong>Date:</strong> <span id="test-date"></span></p>
+    </div>
+    
+    <!-- Statut du système -->
+    <div class="status" id="system-status">
+        <h3>📊 Statut du Système</h3>
+        <div class="status-item">
+            <span>Configuration chargée:</span>
+            <span class="status-value" id="config-status">En attente...</span>
+        </div>
+        <div class="status-item">
+            <span>Chemin actuel des images:</span>
+            <span class="status-value" id="current-path">En attente...</span>
+        </div>
+        <div class="status-item">
+            <span>Images disponibles:</span>
+            <span class="status-value" id="available-images">En attente...</span>
+        </div>
+        <div class="status-item">
+            <span>Images initialisées:</span>
+            <span class="status-value" id="initialized-count">0</span>
+        </div>
+    </div>
+    
+    <!-- Contrôles de test -->
+    <div class="controls">
+        <h3>🎛️ Contrôles de Test</h3>
+        <button class="control-button" onclick="testChangeLocation()">
+            📁 Tester Changement d'Emplacement
+        </button>
+        <button class="control-button" onclick="testDebugMode()">
+            🐛 Activer/Désactiver Debug
+        </button>
+        <button class="control-button" onclick="refreshAllImages()">
+            🔄 Actualiser Toutes les Images
+        </button>
+        <button class="control-button" onclick="showImageStatus()">
+            📋 Afficher Statut des Images
+        </button>
+        <button class="control-button" onclick="clearConsole()">
+            🧹 Vider Console
+        </button>
+    </div>
+    
+    <!-- Tests d'images avec différentes profondeurs -->
+    <div class="test-section">
+        <h2>🖼️ Tests d'Images par Profondeur</h2>
+        <p>Validation du chargement dynamique selon la profondeur du fichier HTML</p>
+        
+        <div class="test-grid">
+            <!-- Depth 1 - Fichiers dans LiCUBEPRO/ -->
+            <div class="image-test">
+                <h3>Depth 1 (Fichiers racine)</h3>
+                <img data-licube-image="Li-CUBE PRO image 1.png" data-depth="1" alt="Test Depth 1" class="licube-product-image">
+                <div class="depth-info">
+                    Fichiers: edsquebec.html, licubepro.html<br>
+                    Chemin: ../image/Produit/Li-CUBE PRO/
+                </div>
+            </div>
+            
+            <!-- Depth 2 - Fichiers dans presentations-*/images-onepage/ -->
+            <div class="image-test">
+                <h3>Depth 2 (Images onepage)</h3>
+                <img data-licube-image="Li-CUBE PRO image 2.png" data-depth="2" alt="Test Depth 2" class="licube-product-image">
+                <div class="depth-info">
+                    Fichiers: images-onepage/*.html<br>
+                    Chemin: ../../image/Produit/Li-CUBE PRO/
+                </div>
+            </div>
+            
+            <!-- Depth 3 - Fichiers dans presentations-*/versions-pdf/ -->
+            <div class="image-test">
+                <h3>Depth 3 (PDF & Vendeurs)</h3>
+                <img data-licube-image="Li-CUBE PRO image 3.png" data-depth="3" alt="Test Depth 3" class="licube-product-image">
+                <div class="depth-info">
+                    Fichiers: versions-pdf/*.html, presentations-vendeurs/*.html<br>
+                    Chemin: ../../../image/Produit/Li-CUBE PRO/
+                </div>
+            </div>
+            
+            <!-- Depth 4 - Fichiers dans presentations-*/supports-print/flyers/ -->
+            <div class="image-test">
+                <h3>Depth 4 (Flyers & Posters)</h3>
+                <img data-licube-image="Li-CUBE PRO.png" data-depth="4" alt="Test Depth 4" class="licube-product-image">
+                <div class="depth-info">
+                    Fichiers: flyers/*.html, posters/*.html<br>
+                    Chemin: ../../../../image/Produit/Li-CUBE PRO/
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Console de debug -->
+    <div class="test-section">
+        <h2>🖥️ Console de Debug</h2>
+        <p>Messages du système et informations de débogage</p>
+        <div id="console-output"></div>
+    </div>
+    
+    <!-- Script de configuration des images Li-CUBE PRO™ -->
+    <script src="./js/image-config.js"></script>
+    
+    <!-- Scripts de test -->
+    <script>
+        // Configuration pour les tests
+        let originalConsoleLogs = [];
+        let debugModeActive = false;
+        
+        // Intercepter les console.log pour affichage dans la page
+        const originalConsoleLog = console.log;
+        const originalConsoleWarn = console.warn;
+        const originalConsoleError = console.error;
+        
+        function interceptConsole() {
+            console.log = function(...args) {
+                originalConsoleLogs.push({type: 'log', message: args.join(' '), timestamp: new Date()});
+                updateConsoleDisplay();
+                originalConsoleLog.apply(console, args);
+            };
+            
+            console.warn = function(...args) {
+                originalConsoleLogs.push({type: 'warn', message: '⚠️ ' + args.join(' '), timestamp: new Date()});
+                updateConsoleDisplay();
+                originalConsoleWarn.apply(console, args);
+            };
+            
+            console.error = function(...args) {
+                originalConsoleLogs.push({type: 'error', message: '❌ ' + args.join(' '), timestamp: new Date()});
+                updateConsoleDisplay();
+                originalConsoleError.apply(console, args);
+            };
+        }
+        
+        function updateConsoleDisplay() {
+            const consoleOutput = document.getElementById('console-output');
+            const recent = originalConsoleLogs.slice(-50); // Garder seulement les 50 derniers messages
+            
+            consoleOutput.textContent = recent.map(log => {
+                const time = log.timestamp.toTimeString().split(' ')[0];
+                return `[${time}] ${log.message}`;
+            }).join('\n');
+            
+            // Scroller vers le bas
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+        
+        function clearConsole() {
+            originalConsoleLogs = [];
+            updateConsoleDisplay();
+            console.log('Console vidée');
+        }
+        
+        function updateSystemStatus() {
+            // Vérifier si IMAGE_CONFIG est disponible
+            if (typeof IMAGE_CONFIG !== 'undefined') {
+                document.getElementById('config-status').textContent = '✅ Chargée';
+                document.getElementById('config-status').className = 'status-value success';
+                
+                document.getElementById('current-path').textContent = IMAGE_CONFIG.imagePath;
+                document.getElementById('available-images').textContent = Object.keys(IMAGE_CONFIG.availableImages).length;
+                
+                const initializedImages = document.querySelectorAll('img.licube-dynamic-image').length;
+                document.getElementById('initialized-count').textContent = initializedImages;
+            } else {
+                document.getElementById('config-status').textContent = '❌ Erreur';
+                document.getElementById('config-status').className = 'status-value error';
+            }
+        }
+        
+        function testChangeLocation() {
+            if (typeof updateImagePaths === 'function') {
+                const newPath = prompt('Nouveau chemin des images:', IMAGE_CONFIG.imagePath);
+                if (newPath && newPath !== IMAGE_CONFIG.imagePath) {
+                    const updatedCount = updateImagePaths(newPath);
+                    console.log(`Test: Chemin modifié vers '${newPath}', ${updatedCount} images mises à jour`);
+                    updateSystemStatus();
+                }
+            } else {
+                console.error('Fonction updateImagePaths non disponible');
+            }
+        }
+        
+        function testDebugMode() {
+            debugModeActive = !debugModeActive;
+            window.DEBUG_IMAGE_PATHS = debugModeActive;
+            
+            console.log(`Mode debug ${debugModeActive ? 'activé' : 'désactivé'}`);
+            
+            if (debugModeActive) {
+                console.log('Configuration IMAGE_CONFIG:', IMAGE_CONFIG);
+            }
+        }
+        
+        function refreshAllImages() {
+            if (typeof IMAGE_CONFIG !== 'undefined' && typeof IMAGE_CONFIG.updateAllImagePaths === 'function') {
+                const count = IMAGE_CONFIG.updateAllImagePaths();
+                console.log(`${count} images actualisées`);
+                updateSystemStatus();
+            } else {
+                console.error('Fonction updateAllImagePaths non disponible');
+            }
+        }
+        
+        function showImageStatus() {
+            const images = document.querySelectorAll('img[data-licube-image]');
+            console.log(`=== STATUT DES IMAGES ===`);
+            console.log(`Total d'images Li-CUBE PRO™ trouvées: ${images.length}`);
+            
+            images.forEach((img, index) => {
+                const imageName = img.getAttribute('data-licube-image');
+                const depth = img.getAttribute('data-depth');
+                const currentSrc = img.src;
+                const isInitialized = img.classList.contains('licube-dynamic-image');
+                
+                console.log(`Image ${index + 1}:`);
+                console.log(`  - Nom: ${imageName}`);
+                console.log(`  - Depth: ${depth}`);
+                console.log(`  - Src: ${currentSrc}`);
+                console.log(`  - Initialisée: ${isInitialized ? '✅' : '❌'}`);
+                console.log('---');
+            });
+        }
+        
+        // Initialisation de la page de test
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intercepter les console.log
+            interceptConsole();
+            
+            // Afficher la date
+            document.getElementById('test-date').textContent = new Date().toLocaleDateString('fr-CA');
+            
+            // Premier log
+            console.log('🚀 Page de test Li-CUBE PRO™ chargée');
+            
+            // Attendre un peu pour que le système d'images soit initialisé
+            setTimeout(() => {
+                updateSystemStatus();
+                
+                // Test automatique initial
+                if (typeof IMAGE_CONFIG !== 'undefined') {
+                    console.log('✅ Système d\'images Li-CUBE PRO™ détecté et fonctionnel');
+                    showImageStatus();
+                } else {
+                    console.error('❌ Système d\'images Li-CUBE PRO™ non détecté');
+                }
+            }, 500);
+            
+            // Mise à jour périodique du statut
+            setInterval(updateSystemStatus, 2000);
+        });
+        
+        // Gestion des erreurs d'images
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG' && e.target.hasAttribute('data-licube-image')) {
+                console.error(`Erreur de chargement pour l'image: ${e.target.getAttribute('data-licube-image')}`);
+                console.error(`Source utilisée: ${e.target.src}`);
+            }
+        }, true);
+    </script>
+</body>
+</html>

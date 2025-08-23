@@ -10,7 +10,8 @@
       "Bash(move:*)",
       "Bash(find:*)",
       "Bash(python:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": [],
