@@ -62,8 +62,9 @@
 }
 
 .stat span {
-    font-size: 0.9rem;
-    color: var(--medium-text);
+    font-size: 1rem;
+    color: var(--light-text);
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
