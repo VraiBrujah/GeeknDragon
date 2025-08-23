@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique - Geek&Dragon | Accessoires de Jeux de Rôle Premium</title>
+    <meta name="description" content="Découvrez notre collection complète : pièces métalliques authentiques, cartes d'équipement illustrées et triptyques mystères pour D&D. Livraison rapide au Canada.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/boutique.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-text">Geek&Dragon</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Accueil</a></li>
+                <li><a href="boutique.html" class="nav-link active">Boutique</a></li>
+                <li><a href="#filters" class="nav-link">Filtres</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="shop-main">
+        <section class="shop-hero">
+            <div class="container">
+                <div class="shop-hero-content">
+                    <h1>Boutique Geek&Dragon</h1>
+                    <p>Transformez vos parties de D&D avec nos accessoires immersifs de qualité premium</p>
+                    <div class="shop-stats">
+                        <div class="stat">
+                            <strong>8</strong>
+                            <span>Produits Uniques</span>
+                        </div>
+                        <div class="stat">
+                            <strong>100%</strong>
+                            <span>Qualité Premium</span>
+                        </div>
+                        <div class="stat">
+                            <strong>🇨🇦</strong>
+                            <span>Fait au Canada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="shop-filters" id="filters">
+            <div class="container">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label>Catégorie:</label>
+                        <select id="categoryFilter" class="filter-select">
+                            <option value="all">Toutes les catégories</option>
+                            <option value="coins">Pièces Métalliques</option>
+                            <option value="cards">Cartes d'Équipement</option>
+                            <option value="triptych">Triptyques Mystères</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Prix:</label>
+                        <select id="priceFilter" class="filter-select">
+                            <option value="all">Tous les prix</option>
+                            <option value="0-50">0$ - 50$ CAD</option>
+                            <option value="50-100">50$ - 100$ CAD</option>
+                            <option value="100-200">100$ - 200$ CAD</option>
+                            <option value="200+">200$ CAD et plus</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Langue:</label>
+                        <select id="languageFilter" class="filter-select">
+                            <option value="all">Toutes les langues</option>
+                            <option value="fr">Français</option>
+                            <option value="en">Anglais</option>
+                            <option value="both">Bilingue</option>
+                        </select>
+                    </div>
+                    <button id="resetFilters" class="filter-reset">Réinitialiser</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION PIÈCES MÉTALLIQUES -->
+        <section class="product-section" id="coins">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">💰 Pièces Métalliques</h2>
+                    <p class="section-subtitle">Collections authentiques en métaux nobles pour une immersion tactile inégalée</p>
+                </header>
+
+                <div class="products-grid">
+                    <!-- L'Offrande du Voyageur -->
+                    <article class="product-card fade-in" data-category="coins" data-price="60" data-language="both">
+                        <div class="product-image">
+                            <img src="images/optimized-modern/webp/Vagabon.webp" alt="L'Offrande du Voyageur - Starter pack de pièces métalliques" loading="lazy">
+                            <div class="product-badge starter">Starter Pack</div>
+                            <div class="product-overlay">
+                                <a href="produit-offrande-voyageur.html" class="product-quick-view">Voir Détails</a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">L'Offrande du Voyageur</h3>
+                            <p class="product-description">Starter pack immersif avec 10 pièces métalliques (2 de chaque métal : cuivre, argent, électrum, or, platine)</p>
+                            <div class="product-features">
+                                <span class="feature-tag">5 multiplicateurs au choix</span>
+                                <span class="feature-tag">Finitions variables</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price">60$ <small>CAD</small></span>
+                                <span class="price-note">Point d'entrée idéal</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="produit-offrande-voyageur.html" class="btn-primary">Découvrir</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- La Monnaie des Cinq Royaumes -->
+                    <article class="product-card fade-in" data-category="coins" data-price="145" data-language="both">
+                        <div class="product-image">
+                            <img src="images/optimized-modern/webp/Royaume.webp" alt="La Monnaie des Cinq Royaumes - Collection complète" loading="lazy">
+                            <div class="product-badge popular">Plus Populaire</div>
+                            <div class="product-overlay">
+                                <a href="old/lot25.php" class="product-quick-view">Voir Détails</a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">La Monnaie des Cinq Royaumes</h3>
+                            <p class="product-description">Collection complète de 25 pièces uniques (5 métaux × 5 multiplicateurs) sans aucun doublon</p>
+                            <div class="product-features">
+                                <span class="feature-tag">25 pièces uniques</span>
+                                <span class="feature-tag">Tout inclus</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price">145$ <small>CAD</small></span>
+                                <span class="price-note">Solution complète</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="old/lot25.php" class="btn-primary">Découvrir</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- L'Essence du Marchand -->
+                    <article class="product-card fade-in" data-category="coins" data-price="275" data-language="both">
+                        <div class="product-image">
+                            <img src="images/optimized-modern/webp/Essence.webp" alt="L'Essence du Marchand - Double variété" loading="lazy">
+                            <div class="product-badge premium">Premium</div>
+                            <div class="product-overlay">
+                                <a href="old/lot50-essence.php" class="product-quick-view">Voir Détails</a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">L'Essence du Marchand</h3>
+                            <p class="product-description">Double variété pour richesse : 50 pièces (2 exemplaires de chacun des 25 modèles)</p>
+                            <div class="product-features">
+                                <span class="feature-tag">50 pièces totales</span>
+                                <span class="feature-tag">Double de tout</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price">275$ <small>CAD</small></span>
+                                <span class="price-note">Groupes nombreux</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="old/lot50-essence.php" class="btn-primary">Découvrir</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- La Trésorerie du Seigneur -->
+                    <article class="product-card fade-in" data-category="coins" data-price="275" data-language="both">
+                        <div class="product-image">
+                            <img src="images/optimized-modern/webp/Seignieur.webp" alt="La Trésorerie du Seigneur - Opulence uniforme" loading="lazy">
+                            <div class="product-badge luxury">Luxe</div>
+                            <div class="product-overlay">
+                                <a href="old/lot50-tresorerie.php" class="product-quick-view">Voir Détails</a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">La Trésorerie du Seigneur</h3>
+                            <p class="product-description">Opulence uniforme : 50 pièces (10 de chaque métal) avec un multiplicateur unique pour tout le lot</p>
+                            <div class="product-features">
+                                <span class="feature-tag">Multiplicateur uniforme</span>
+                                <span class="feature-tag">Calculs simplifiés</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price">275$ <small>CAD</small></span>
+                                <span class="price-note">Trésor somptueux</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="old/lot50-tresorerie.php" class="btn-primary">Découvrir</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION CARTES D'ÉQUIPEMENT -->
+        <section class="product-section" id="cards">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">🃏 Cartes d'Équipement</h2>
+                    <p class="section-subtitle">182 cartes illustrées par pack pour équiper vos aventuriers sans fouiller dans les manuels</p>
+                </header>
+
+                <div class="products-grid">
+                    <!-- Arsenal de l'Aventurier -->
+                    <article class="product-card fade-in" data-category="cards" data-price="49.99" data-language="fr en">
+                        <div class="product-image">
+                            <img src="images/optimized-modern/webp/arme-recto.webp" alt="Arsenal de l'Aventurier - Équipement de base" loading="lazy">
+                            <div class="product-badge essential">Essentiel</div>
+                            <div class="product-overlay">
+                                <a href="#" class="product-quick-view">Voir Détails</a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Arsenal de l'Aventurier</h3>
+                            <p class="product-description">Équipement de base complet : armes, armures, boucliers et équipement de terrain pour tous vos aventuriers</p>
+                            <div class="product-features">
+                                <span class="feature-tag">182 cartes</span>
+                                <span class="feature-tag">Français OU Anglais</span>
+                                <span class="feature-tag">Équipement classique</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price">49.99$ <small>CAD</small></span>
+                                <span class="price-note">Parfait pour débuter</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="#" class="btn-primary">Découvrir</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Butins & Ingénieries -->
+                    <article class="product-card fade-in" data-category="cards" data-price="36.99" data-language="fr en">
+                        <div class="product-image">
+                            <img src="images/optimized-modern/webp/bomb-recto.webp" alt="Butins & Ingénieries - Contenu avancé" loading="lazy">
+                            <div class="product-badge advanced">Avancé</div>
+                            <div class="product-overlay">
+                                <a href="#" class="product-quick-view">Voir Détails</a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Butins & Ingénieries</h3>
+                            <p class="product-description">Contenu avancé et moderne : gemmes, explosifs, armes futuristes et outils spécialisés pour campagnes innovantes</p>
+                            <div class="product-features">
+                                <span class="feature-tag">182 cartes</span>
+                                <span class="feature-tag">Français OU Anglais</span>
+                                <span class="feature-tag">Contenu moderne</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price">36.99$ <small>CAD</small></span>
+                                <span class="price-note">Sortir du médiéval</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="#" class="btn-primary">Découvrir</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Routes & Services -->
+                    <article class="product-card fade-in" data-category="cards" data-price="34.99" data-language="fr en">
+                        <div class="product-image">
+                            <img src="images/optimized-modern/webp/backpack-recto.webp" alt="Routes & Services - Monde vivant" loading="lazy">
+                            <div class="product-badge exploration">Exploration</div>
+                            <div class="product-overlay">
+                                <a href="#" class="product-quick-view">Voir Détails</a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Routes & Services</h3>
+                            <p class="product-description">Monde vivant et voyages : paquetages spécialisés, services urbains, véhicules et poisons pour l'exploration</p>
+                            <div class="product-features">
+                                <span class="feature-tag">182 cartes</span>
+                                <span class="feature-tag">Français OU Anglais</span>
+                                <span class="feature-tag">Exploration & intrigue</span>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price">34.99$ <small>CAD</small></span>
+                                <span class="price-note">Campagnes d'exploration</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="#" class="btn-primary">Découvrir</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION TRIPTYQUES -->
+        <section class="product-section" id="triptych">
+            <div class="container">
+                <header class="section-header">
+                    <h2 class="section-title">📋 Triptyques Mystères</h2>
+                    <p class="section-subtitle">Héros complets générés aléatoirement, prêts à jouer immédiatement</p>
+                </header>
+
+                <div class="products-grid single-product">
+                    <!-- Triptyques Mystères -->
+                    <article class="product-card fade-in featured-product" data-category="triptych" data-price="59.99" data-language="fr en">
+                        <div class="product-image">
+                            <img src="images/triptyque-fiche.webp" alt="Triptyques Mystères - Origines Complètes" loading="lazy">
+                            <div class="product-badge mystery">Mystère</div>
+                            <div class="product-overlay">
+                                <a href="#" class="product-quick-view">Voir Détails</a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">Triptyques Mystères - Origines Complètes</h3>
+                            <p class="product-description">Héros aléatoire clé en main : 3 triptyques tirés au sort (Classe, Espèce, Historique) + équipement et pièces incluses</p>
+                            <div class="product-features">
+                                <span class="feature-tag">3 triptyques aléatoires</span>
+                                <span class="feature-tag">Équipement inclus</span>
+                                <span class="feature-tag">Pièces de départ</span>
+                                <span class="feature-tag">Compatible D&D 5e 2024</span>
+                            </div>
+                            <div class="product-highlights">
+                                <div class="highlight-item">
+                                    <strong>🎲</strong>
+                                    <span>Parfait pour les one-shots</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <strong>⚡</strong>
+                                    <span>Immédiatement jouable</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <strong>🎁</strong>
+                                    <span>Surprise garantie</span>
+                                </div>
+                            </div>
+                            <div class="product-pricing">
+                                <span class="price">59.99$ <small>CAD</small></span>
+                                <span class="price-note">Héros surprise complet</span>
+                            </div>
+                            <div class="product-actions">
+                                <a href="#" class="btn-primary">Découvrir le Mystère</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION INFORMATIONS -->
+        <section class="shop-info">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">🚚</div>
+                        <h3>Livraison Rapide</h3>
+                        <p>Expédition sous 2-3 jours ouvrables partout au Canada. Suivi inclus pour tous les envois.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🛡️</div>
+                        <h3>Qualité Garantie</h3>
+                        <p>Matériaux premium et contrôle qualité rigoureux. Garantie satisfaction ou remboursement.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🎲</div>
+                        <h3>Compatible D&D</h3>
+                        <p>Tous nos produits respectent les règles officielles de Donjons & Dragons 5ème édition.</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">💬</div>
+                        <h3>Support Expert</h3>
+                        <p>Équipe de passionnés de jeux de rôle disponible pour répondre à toutes vos questions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION CTA -->
+        <section class="shop-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Prêt à transformer vos parties ?</h2>
+                    <p>Choisissez vos accessoires et vivez l'immersion ultime dès votre prochaine session de jeu.</p>
+                    <div class="cta-actions">
+                        <a href="#coins" class="cta-primary">Voir les Pièces</a>
+                        <a href="#cards" class="cta-secondary">Voir les Cartes</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Geek&Dragon</h3>
+                    <p>Votre spécialiste en accessoires immersifs pour jeux de rôle depuis 2024.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Boutique</h4>
+                    <ul>
+                        <li><a href="#coins">Pièces Métalliques</a></li>
+                        <li><a href="#cards">Cartes d'Équipement</a></li>
+                        <li><a href="#triptych">Triptyques Mystères</a></li>
+                        <li><a href="#">Guide d'Achat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="mailto:support@geekndragon.com">Support Client</a></li>
+                        <li><a href="#">Livraison & Retours</a></li>
+                        <li><a href="#">Guide de Compatibilité</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Communauté</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                        <a href="#" aria-label="Discord">🎮</a>
+                        <a href="#" aria-label="YouTube">📹</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Geek&Dragon. Tous droits réservés. | Boutique spécialisée en accessoires D&D au Canada</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/boutique.js"></script>
+</body>
+</html>
