@@ -1,5 +1,8 @@
 <?php
+declare(strict_types=1);
 // Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
+
+require_once __DIR__ . '/../includes/video-utils.php';
 
 if (!isset($product['id'])) {
     return;
@@ -15,13 +18,14 @@ $desc        = $summary ?? ($lang === 'en'
     : $product['description']);
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $isVideo     = preg_match('/\.mp4$/i', $img);
+$posterPath  = $isVideo ? generateVideoPoster($img) : null;
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 
 static $parsedown;
 $parsedown = $parsedown ?? new Parsedown();
 $htmlDesc  = $parsedown->text($desc);
-$isInStock = inStock($id);
+$isInStock = $inventoryService->isInStock($id);
 ?>
 
 <div class="product-card animate-scale-in <?= $isInStock ? '' : 'loading' ?>">
@@ -45,8 +49,9 @@ $isInStock = inStock($id);
   <!-- Média du produit -->
   <a href="<?= htmlspecialchars($url) ?>" class="product-media-container">
     <?php if ($isVideo) : ?>
-      <video src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-             class="product-media" autoplay muted loop playsinline></video>
+      <video data-src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+             <?php if ($posterPath) : ?>poster="<?= htmlspecialchars($posterPath) ?>"<?php endif; ?>
+             class="product-media lazy-video" muted loop playsinline preload="metadata"></video>
     <?php else : ?>
       <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
            alt="<?= htmlspecialchars($desc) ?>"
@@ -88,20 +93,15 @@ $isInStock = inStock($id);
       </div>
 
       <!-- Bouton d'achat -->
-      <button class="snipcart-add-item add-to-cart-btn"
-              data-item-id="<?= htmlspecialchars($id) ?>"
-              data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-              data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-              data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-              data-item-price="<?= htmlspecialchars($price) ?>"
-              data-item-url="<?= htmlspecialchars($url) ?>"
-              data-item-quantity="1">
+      <button class="gd-add-to-cart add-to-cart-btn"
+              data-product-id="<?= htmlspecialchars($id) ?>"
+              data-quantity="1">
         <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M3 3h2l.4 2m0 0L8 17h8l3-8H5.4z"/>
           <circle cx="9" cy="20" r="1"/>
           <circle cx="20" cy="20" r="1"/>
         </svg>
-        <span data-i18n="product.add">Ajouter au panier</span>
+        <span data-i18n="product.add">Débloquer l'immersion</span>
       </button>
     <?php else : ?>
       <button class="add-to-cart-btn" disabled>
@@ -114,8 +114,8 @@ $isInStock = inStock($id);
   </div>
 </div>
 
-<!-- Script pour la gestion des quantités -->
-<script>
+<!-- Script pour la gestion des quantités et lazy-loading -->
+<script nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
 (function(){
   if (window.__premiumCardPatch) return;
   window.__premiumCardPatch = true;
@@ -143,19 +143,44 @@ $isInStock = inStock($id);
     }
     
     // Gestion du bouton d'achat
-    const btn = e.target.closest('.snipcart-add-item');
+    const btn = e.target.closest('.gd-add-to-cart');
     if (!btn) return;
 
-    const id = btn.getAttribute('data-item-id');
+    const id = btn.getAttribute('data-product-id');
     if (!id) return;
 
     // Mise à jour de la quantité
     const qtyEl = document.getElementById('qty-' + id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
+      if (!isNaN(q) && q > 0) btn.setAttribute('data-quantity', String(q));
     }
   }, { passive: true });
+
+  // Lazy-loading des vidéos avec IntersectionObserver
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const video = entry.target;
+        const src = video.getAttribute('data-src');
+        if (src) {
+          video.src = src;
+          video.autoplay = true;
+          video.removeAttribute('data-src');
+          video.classList.remove('lazy-video');
+          videoObserver.unobserve(video);
+        }
+      }
+    });
+  }, {
+    rootMargin: '50px 0px',
+    threshold: 0.1
+  });
+
+  // Observer toutes les vidéos lazy
+  document.querySelectorAll('.lazy-video').forEach(video => {
+    videoObserver.observe(video);
+  });
 
   // Animation d'apparition au scroll
   const observerOptions = {

@@ -9,6 +9,8 @@ deployment:
     - export DEPLOYPATH=/home/pacti620/geekndragon.com/
     # First sync the repository to the live document root.
     - /usr/bin/rsync -av --delete --exclude='.git/' . "$DEPLOYPATH"
+    # Set production environment variable
+    - /bin/sh -c 'printf "APP_ENV=production\n" > "$DEPLOYPATH/.env"'
     # Install Composer dependencies directly in the deploy path so the
     # vendor/composer/ClassLoader.php file is always available at runtime.
     - /usr/bin/env composer install --no-dev --optimize-autoloader -d "$DEPLOYPATH"
