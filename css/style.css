@@ -55,6 +55,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
 h2 { font-size: clamp(2rem, 4vw, 3rem); }
 h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h4 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
 
 p {
     margin-bottom: 1rem;
@@ -358,7 +359,8 @@ p {
     gap: 2rem;
 }
 
-.product-category {
+.product-category,
+.card-product {
     background: var(--darker-bg);
     border-radius: var(--border-radius);
     overflow: hidden;
@@ -367,7 +369,8 @@ p {
     border: 1px solid var(--border-color);
 }
 
-.product-category:hover {
+.product-category:hover,
+.card-product:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-medium);
     border-color: var(--secondary-color);
@@ -386,7 +389,8 @@ p {
     transition: var(--transition);
 }
 
-.product-category:hover .category-image img {
+.product-category:hover .category-image img,
+.card-product:hover .category-image img {
     transform: scale(1.1);
 }
 
@@ -407,9 +411,10 @@ p {
 
 .category-content {
     padding: 2rem;
+    text-align: center;
 }
 
-.category-content h3 {
+.category-content h4 {
     color: var(--secondary-color);
     margin-bottom: 1rem;
 }
