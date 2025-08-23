@@ -32,7 +32,7 @@ section:nth-child(even) {
 }
 
 /* Trait violet en haut des sections principales */
-#produits::before,
+#catalogue::before,
 #boutique::before,
 #actus::before,
 #contact::before {

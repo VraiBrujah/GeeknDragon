@@ -31,7 +31,7 @@
 }
 
 /* Images dans toutes les sections */
-#produits img,
+#catalogue img,
 #boutique img,
 .boutique img {
   object-fit: contain !important;
