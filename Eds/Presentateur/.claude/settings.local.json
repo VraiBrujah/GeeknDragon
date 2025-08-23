@@ -14,7 +14,9 @@
       "Bash(git add:*)",
       "Bash(grep:*)",
       "Bash(rg:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(start licubepro.html)",
+      "Bash(start test-pricing.html)"
     ],
     "deny": [],
     "ask": [],

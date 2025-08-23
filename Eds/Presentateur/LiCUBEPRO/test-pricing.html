@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test du Système de Prix Dynamiques</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: #f5f5f5;
+        }
+        .test-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-value {
+            font-weight: bold;
+            color: #007bff;
+            font-size: 1.2em;
+        }
+        .debug {
+            background: #f8f9fa;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            margin: 10px 0;
+        }
+        .error {
+            color: #dc3545;
+        }
+        .success {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test du Système de Prix Dynamiques</h1>
+    
+    <div class="debug">
+        <h3>État du Système</h3>
+        <p>Pricing Manager disponible: <span id="managerStatus">⏳ Chargement...</span></p>
+        <p>Configuration chargée: <span id="configStatus">⏳ Chargement...</span></p>
+        <p>Mode actuel: <span id="modeStatus">⏳ Chargement...</span></p>
+    </div>
+
+    <div class="test-card">
+        <h3>Prix de Base Li-CUBE (Mode Vente)</h3>
+        <p>Prix: <span class="test-value" data-pricing-value="modes.vente.licube.price_base" data-pricing-format="currency">❌ Non chargé</span></p>
+    </div>
+
+    <div class="test-card">
+        <h3>Tarif Mensuel Li-CUBE (Mode Location)</h3>
+        <p>Tarif: <span class="test-value" data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">❌ Non chargé</span>/mois</p>
+    </div>
+
+    <div class="test-card">
+        <h3>Cycles Li-CUBE</h3>
+        <p>Cycles: <span class="test-value" data-pricing-value="modes.vente.licube.cycles" data-pricing-format="number">❌ Non chargé</span></p>
+    </div>
+
+    <div class="test-card">
+        <h3>Test de Calcul Dynamique</h3>
+        <p>TCO Vente Li-CUBE 20 ans: <span class="test-value" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">❌ Non calculé</span></p>
+    </div>
+
+    <!-- Chargement du système de prix -->
+    <script src="./js/pricing-manager.js"></script>
+
+    <script>
+        // Test d'initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧪 Page de test chargée');
+            
+            // Attendre que le pricing manager soit prêt
+            document.addEventListener('pricingManagerReady', function(event) {
+                console.log('✅ Event pricingManagerReady reçu:', event.detail);
+                updateStatus();
+            });
+            
+            // Vérification périodique
+            const checkInterval = setInterval(() => {
+                if (window.pricingManager) {
+                    updateStatus();
+                    if (window.pricingManager.isInitialized) {
+                        clearInterval(checkInterval);
+                    }
+                }
+            }, 500);
+            
+            setTimeout(() => {
+                clearInterval(checkInterval);
+                if (!window.pricingManager || !window.pricingManager.isInitialized) {
+                    document.getElementById('managerStatus').innerHTML = '<span class="error">❌ Timeout</span>';
+                }
+            }, 10000);
+        });
+        
+        function updateStatus() {
+            const managerAvailable = !!window.pricingManager;
+            const configLoaded = managerAvailable && !!window.pricingManager.config;
+            const initialized = managerAvailable && window.pricingManager.isInitialized;
+            
+            document.getElementById('managerStatus').innerHTML = 
+                managerAvailable ? '<span class="success">✅ Disponible</span>' : '<span class="error">❌ Non disponible</span>';
+            
+            document.getElementById('configStatus').innerHTML = 
+                configLoaded ? '<span class="success">✅ Chargée</span>' : '<span class="error">❌ Non chargée</span>';
+                
+            if (managerAvailable) {
+                document.getElementById('modeStatus').innerHTML = 
+                    `<span class="success">✅ ${window.pricingManager.currentMode || 'Non défini'}</span>`;
+                    
+                if (initialized) {
+                    console.log('🧪 Test des valeurs individuelles...');
+                    testIndividualValues();
+                }
+            } else {
+                document.getElementById('modeStatus').innerHTML = '<span class="error">❌ Non disponible</span>';
+            }
+        }
+        
+        function testIndividualValues() {
+            if (!window.pricingManager || !window.pricingManager.isInitialized) {
+                console.log('⚠️ Pricing manager non initialisé');
+                return;
+            }
+            
+            const testPaths = [
+                'modes.vente.licube.price_base',
+                'modes.location.licube.monthly_rate',
+                'modes.vente.licube.cycles',
+                'calculations.tco_vente.licube.total_20_years'
+            ];
+            
+            testPaths.forEach(path => {
+                const value = window.pricingManager.getValue(path);
+                console.log(`🧪 Test ${path}: ${value}`);
+            });
+        }
+    </script>
+</body>
+</html>
