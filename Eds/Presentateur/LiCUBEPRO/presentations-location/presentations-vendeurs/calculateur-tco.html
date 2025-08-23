@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur TCO Location - Li-CUBE PRO™ vs Ni-Cd | EDS Québec</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1B365D;
+            --secondary: #2E86AB;
+            --accent: #F18F01;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --gradient-primary: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            --gradient-success: linear-gradient(135deg, #28A745 0%, #20B2AA 100%);
+            --gradient-warning: linear-gradient(135deg, #F18F01 0%, #FF6B35 100%);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+            position: relative;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .nav-logo {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            background-image: url('../../image/EdsQuebec/logo edsquebec.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .calculator-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .controls-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            align-items: start;
+        }
+
+        .control-group {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        .control-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        /* Styles pour les contrôles interactifs */
+        .slider-container {
+            margin: 1rem 0;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .slider-value {
+            background: var(--gradient-warning);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 1rem;
+            min-width: 90px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            transition: background 0.3s;
+        }
+
+        .slider:hover {
+            background: #bbb;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            background: #e07a00;
+            transform: scale(1.1);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .slider-range {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .impact-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .impact-badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .impact-low {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .impact-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .impact-high {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .impact-extreme {
+            background: #dc3545;
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        .fixed-value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: 1rem 0;
+        }
+
+        .fixed-value-label {
+            font-weight: 600;
+            color: white;
+        }
+
+        .fixed-value-display {
+            background: var(--gradient-warning);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .config-note {
+            background: rgba(241, 143, 1, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .config-note strong {
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        .results-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .result-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-xl);
+            border-top: 4px solid var(--secondary);
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .result-card.lfp {
+            border-top-color: var(--success);
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .result-card.nicd {
+            border-top-color: var(--danger);
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .result-card.savings {
+            border-top-color: var(--accent);
+            background: var(--gradient-warning);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .result-subtitle {
+            text-align: center;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .breakdown {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .breakdown h3 {
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .breakdown-item {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .breakdown-item h4 {
+            color: white;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .breakdown-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-xl);
+            margin-top: 3rem;
+        }
+
+        .chart {
+            height: 300px;
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            max-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bar {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.5s ease;
+            position: relative;
+            min-height: 20px;
+        }
+
+        .bar.lfp {
+            background: var(--gradient-success);
+        }
+
+        .bar.nicd {
+            background: linear-gradient(to top, var(--danger), #F44336);
+        }
+
+        .bar-label {
+            margin-top: 1rem;
+            font-weight: 700;
+            text-align: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: var(--gradient-warning);
+            color: white;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 0 0.8rem;
+            box-shadow: var(--shadow-lg);
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background: #e07a00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn.secondary {
+            background: var(--gradient-primary);
+        }
+
+        .btn.secondary:hover {
+            background: #2574a0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .controls-section,
+            .results-section {
+                grid-template-columns: 1fr;
+            }
+
+            .result-value {
+                font-size: 2rem;
+            }
+        }
+
+        .highlight {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-brand">
+                <div class="nav-logo"></div>
+                <div>
+                    <div style="font-size: 1.8rem; font-weight: 700; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">EDS Québec</div>
+                    <div style="font-size: 1rem; opacity: 0.8;">Solutions Énergétiques Avancées</div>
+                </div>
+            </div>
+            <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; background: linear-gradient(135deg, #ffffff 0%, #64748b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">💰 LOCATION INTELLIGENTE</h1>
+            <p class="subtitle" style="font-size: 1.5rem; color: rgba(255,255,255,0.8); font-weight: 500;">Calculateur choc: <strong style="color: var(--accent);">Tarifs dégressifs 150$/mois à 100$/mois</strong> vs <strong style="color: var(--danger);">Coûts cachés Ni-Cd</strong><br><span style="color: var(--accent); font-weight: 700; font-size: 1.3rem;">Économies garanties: 33 140 CAD!</span></p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="config-note">
+                <strong>💸 SIMULATION PROGRESSIVE - Voyez vos réductions en temps réel!</strong><br>
+                Plus de volume et durée = PLUS d'économies! Minimum garanti: 100$/mois.
+                <strong>Maximisez vos réductions avec nos tarifs dégressifs!</strong>
+            </div>
+
+            <div class="controls-section">
+                <div class="control-group">
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>📅 Durée protection Li-CUBE PRO</span>
+                            <span class="slider-value" id="contractDurationValue">5 ans</span>
+                        </div>
+                        <input type="range" min="5" max="20" value="5" class="slider" id="contractDurationSlider">
+                        <div class="slider-range">
+                            <span>5 ans (150$/mois)</span>
+                            <span>20 ans (100$/mois)</span>
+                        </div>
+                        <div class="impact-indicator">
+                            <span>💡 Impact:</span>
+                            <span class="impact-badge impact-low" id="contractImpact">Tarif de base</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>🔋 Nombre d'unités</span>
+                            <span class="slider-value" id="unitsCountValue">1 unité</span>
+                        </div>
+                        <input type="range" min="1" max="50" value="1" class="slider" id="unitsCountSlider">
+                        <div class="slider-range">
+                            <span>1 unité (150$/mois)</span>
+                            <span>50+ unités (100$/mois)</span>
+                        </div>
+                        <div class="impact-indicator">
+                            <span>📈 Réductions volume:</span>
+                            <span class="impact-badge impact-low" id="unitsImpact">Tarif unitaire</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>💸 Coût maintenance Ni-Cd annuel</span>
+                            <span class="slider-value" id="maintenanceCostValue">200 CAD/an</span>
+                        </div>
+                        <input type="range" min="200" max="600" value="200" step="50" class="slider" id="maintenanceCostSlider">
+                        <div class="slider-range">
+                            <span>200 CAD/an</span>
+                            <span>600 CAD/an</span>
+                        </div>
+                        <div class="impact-indicator">
+                            <span>⚠️ Coûts cachés:</span>
+                            <span class="impact-badge impact-medium" id="maintenanceImpact">Maintenance obligatoire</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>🔴 Fréquence pannes Ni-Cd</span>
+                            <span class="slider-value" id="breakdownFreqValue">3 pannes/an</span>
+                        </div>
+                        <input type="range" min="1" max="5" value="3" class="slider" id="breakdownFreqSlider">
+                        <div class="slider-range">
+                            <span>1 panne/an</span>
+                            <span>5 pannes/an</span>
+                        </div>
+                        <div class="impact-indicator">
+                            <span>💥 Impact dramatique:</span>
+                            <span class="impact-badge impact-extreme" id="breakdownImpact">Arrêts production</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="fixed-value">
+                        <span class="fixed-value-label">🏠 Loyer mensuel Li-CUBE PRO™</span>
+                        <span class="fixed-value-display" id="loyerValue">150 CAD/mois</span>
+                    </div>
+                    <div class="config-note" style="margin-top: 1rem; font-size: 0.85rem;">
+                        💡 <strong>Base 150$/mois</strong> - Réductions jusqu'à 100$/mois GARANTI.<br>
+                        <strong>Plus de volume + durée = MAXIMUM de réductions!</strong>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="fixed-value">
+                        <span class="fixed-value-label">🛡️ Garantie & Support Li-CUBE PRO™</span>
+                        <span class="fixed-value-display">INCLUS 24/7</span>
+                    </div>
+                    <div class="config-note" style="margin-top: 1rem; font-size: 0.85rem;">
+                        ✅ <strong>Aucun coût caché</strong> : maintenance, monitoring, support technique inclus.
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="result-card lfp">
+                    <div class="result-title">
+                        🎆 LOCATION Li-CUBE PRO™ 2025
+                    </div>
+                    <div class="result-value" id="lfpTotal">24 500 CAD</div>
+                    <div class="result-subtitle"><strong>TOUT INCLUS</strong> sur 20 ans</div>
+                </div>
+
+                <div class="result-card nicd">
+                    <div class="result-title">
+                        ⚠️ VOS Ni-Cd 1980 (coût RÉEL!)
+                    </div>
+                    <div class="result-value" id="nicdTotal">57 640 CAD</div>
+                    <div class="result-subtitle"><strong>TOUS VOS coûts cachés inclus!</strong></div>
+                </div>
+
+                <div class="result-card savings highlight">
+                    <div class="result-title">
+                        🚀 ÉCONOMIES SPECTACULAIRES!
+                    </div>
+                    <div class="result-value" id="totalSavings">33 140 CAD</div>
+                    <div class="result-subtitle" id="savingsPercentage"><strong>140 CAD/mois ÉCONOMISÉS!</strong></div>
+                </div>
+            </div>
+
+            <div class="breakdown">
+                <h3>💸 VOS PERTES Ni-Cd vs NOS GAINS Li-CUBE PRO!</h3>
+                <div class="breakdown-grid">
+                    <div class="breakdown-item">
+                        <h4>💰 LOCATION PROGRESSIVE (150$ à 100$/mois)</h4>
+                        <div class="breakdown-value" id="lfpLoyers">24 000 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>🛠️ Installation UNIQUE (une seule fois!)</h4>
+                        <div class="breakdown-value" id="lfpInstallation">500 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>🔋 VOS Ni-Cd + 8 REMPLACEMENTS forcés!</h4>
+                        <div class="breakdown-value" id="nicdBatteries">3 600 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>🛠️ VOS frais maintenance Ni-Cd (obligatoire!)</h4>
+                        <div class="breakdown-value" id="nicdMaintenance">4 000 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>💥 VOS 60 PANNES Ni-Cd sur 20 ans!</h4>
+                        <div class="breakdown-value" id="nicdPannes">48 000 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>⚡ VOS surcoûts performance dégradée</h4>
+                        <div class="breakdown-value" id="nicdDegradation">12 000 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>💸 VOS frais installation 8 remplacements</h4>
+                        <div class="breakdown-value" id="nicdRemplacements">1 200 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>🚀 VOS économies GARANTIES par mois!</h4>
+                        <div class="breakdown-value" id="roi">138 CAD/mois</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="text-align: center; color: white; margin-bottom: 2rem; font-size: 2rem; font-weight: 800;">📈 LOCATION vs ACHAT - Comparaison sur 20 ans</h3>
+                <div class="chart">
+                    <div class="chart-bar">
+                        <div class="bar lfp" id="lfpBar">
+                            <div class="bar-value" id="lfpBarValue">24 500 CAD</div>
+                        </div>
+                        <div class="bar-label">LOCATION Li-CUBE PRO™ 2025</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="bar nicd" id="nicdBar">
+                            <div class="bar-value" id="nicdBarValue">57 640 CAD</div>
+                        </div>
+                        <div class="bar-label">ACHAT Ni-Cd 1980 obsolète</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Arguments Marketing Anti-Ni-Cd Dynamiques -->
+            <div class="breakdown" style="margin-top: 2rem;">
+                <h3 id="argumentsTitle">🔥 Arguments CHOCS - Pourquoi abandonner vos Ni-Cd MAINTENANT</h3>
+                <div class="breakdown-grid">
+                    <div class="breakdown-item" style="border-left-color: var(--danger-color);">
+                        <h4>⚠️ VOS NI-CD VOUS RUINENT!</h4>
+                        <div class="breakdown-value" style="color: var(--danger-color);" id="replacementArgument">8 remplacements vs 0 Li-CUBE PRO</div>
+                    </div>
+                    <div class="breakdown-item" style="border-left-color: var(--danger-color);">
+                        <h4 id="breakdownTitle">🔥 PANNES CATASTROPHIQUES</h4>
+                        <div class="breakdown-value" style="color: var(--danger-color);" id="breakdownArgument">3 pannes/an = ÉNORME PERTE!</div>
+                    </div>
+                    <div class="breakdown-item" style="border-left-color: var(--success-color);">
+                        <h4>⚡ RÉVOLUTION ÉNERGÉTIQUE</h4>
+                        <div class="breakdown-value" style="color: var(--success-color);">+316% capacité, -65% poids</div>
+                    </div>
+                    <div class="breakdown-item" style="border-left-color: var(--success-color);">
+                        <h4>🛡️ ZÉRO RISQUE TECHNIQUE</h4>
+                        <div class="breakdown-value" style="color: var(--success-color);">EDS assume 100% des risques</div>
+                    </div>
+                    <div class="breakdown-item" style="border-left-color: var(--accent-color);">
+                        <h4>📱 MONITORING INTELLIGENT</h4>
+                        <div class="breakdown-value" style="color: var(--accent-color);">IA prédictive vs aucune donnée Ni-Cd</div>
+                    </div>
+                    <div class="breakdown-item" style="border-left-color: var(--accent-color);">
+                        <h4 id="roiTitle">🏆 RETOUR INVESTISSEMENT</h4>
+                        <div class="breakdown-value" style="color: var(--accent-color);" id="roiArgument">Économies dès le 1er mois!</div>
+                    </div>
+                </div>
+
+                <!-- Section Phrases Chocs Dynamiques -->
+                <div style="background: linear-gradient(135deg, var(--danger-color), #FF6B6B); color: white; padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center;">
+                    <h3 id="shockPhrase" style="color: white; font-size: 1.8rem; margin-bottom: 1rem;">💸 Vos Ni-Cd vous coûtent 138 CAD/mois de TROP!</h3>
+                    <p id="shockDetails" style="font-size: 1.2rem; opacity: 0.95;">Chaque mois qui passe sans Li-CUBE PRO™ = argent jeté par les fenêtres!</p>
+                </div>
+            </div>
+
+            <!-- Section Contact Location -->
+            <div class="breakdown" style="margin-top: 2rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white;">
+                <h3 style="color: white; text-align: center; margin-bottom: 2rem;">📞 Contact Division LOCATION</h3>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center;">
+                    <div>
+                        <h4 style="color: var(--accent-color); margin-bottom: 1rem;">🏢 EDS Québec</h4>
+                        <p><strong>Division Location & Services Managés</strong></p>
+                        <p>📧 contact@edsquebec.com</p>
+                        <p>☎️ 819 323 7859</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-color); margin-bottom: 1rem;">🚨 Support Urgence</h4>
+                        <p><strong>Hotline 24h/24, 7j/7</strong></p>
+                        <p>📧 contact@edsquebec.com</p>
+                        <p>☎️ 819 323 LOCA (5622)</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent-color); margin-bottom: 1rem;">🌐 En ligne</h4>
+                        <p><strong>Site web & Documentation</strong></p>
+                        <p>🌍 edsquebec.com/location</p>
+                        <p>📄 Configurateur en ligne disponible</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="exporterResultats()">📄 Exporter PDF</button>
+            <button class="btn secondary" onclick="reinitialiserCalculateur()">🔄 Réinitialiser</button>
+            <a href="presentation-complete.html" class="btn secondary">📋 Présentation Complète</a>
+        </div>
+    </div>
+
+    <!-- Chargement des nouveaux calculateurs refactorisés ELI10 -->
+    <script src="../../utils/calculateur-tco-propre.js"></script>
+    <script src="../../utils/tco-calculator.js"></script>
+    
+    <script>
+        // Système de calcul refactorisé avec standards ELI10
+        let calculateurTcoDynamique = null;
+        
+        // Initialisation avec les nouveaux calculateurs ELI10
+        async function initCalculateur() {
+            try {
+                console.log('🚀 Initialisation calculateur TCO avec standards ELI10...');
+                
+                // Initialiser le calculateur TCO dynamique refactorisé
+                calculateurTcoDynamique = await creerCalculateurTcoDynamique();
+                
+                console.log('✅ Calculateur TCO ELI10 initialisé avec succès');
+                
+                // Calculer et afficher avec le nouveau système
+                calculerTcoAvecNouveauSysteme();
+                
+            } catch (erreur) {
+                console.error('❌ Erreur initialisation calculateur ELI10:', erreur);
+                // Fallback vers calculs simples avec valeurs par défaut
+                calculerTcoSimple();
+            }
+        }
+        
+        // Variables globales pour les paramètres interactifs (nouveau: base à 5 ans)
+        let parametresSimulation = {
+            dureeContrat: 5,            // années (base: 5 ans = 150$/mois)
+            nombreUnites: 1,            // unités (base: 1 unité = pas de réduction)
+            coutMaintenanceNiCd: 200,   // CAD/an
+            frequencePannes: 3          // pannes/an
+        };
+
+        // Initialisation des contrôles interactifs
+        function initialiserControlesInteractifs() {
+            // Slider durée contrat
+            const contractSlider = document.getElementById('contractDurationSlider');
+            const contractValue = document.getElementById('contractDurationValue');
+            const contractImpact = document.getElementById('contractImpact');
+            
+            contractSlider.addEventListener('input', function() {
+                parametresSimulation.dureeContrat = parseInt(this.value);
+                contractValue.textContent = `${this.value} ans`;
+                
+                // Mise à jour impact visuel avec nouvelle logique progressive
+                if (this.value >= 20) {
+                    contractImpact.textContent = 'MINIMUM 100$/mois GARANTI!';
+                    contractImpact.className = 'impact-badge impact-extreme';
+                } else if (this.value >= 15) {
+                    contractImpact.textContent = 'Réductions MAXIMALES!';
+                    contractImpact.className = 'impact-badge impact-high';
+                } else if (this.value >= 8) {
+                    contractImpact.textContent = 'Réductions progressives';
+                    contractImpact.className = 'impact-badge impact-medium';
+                } else {
+                    contractImpact.textContent = 'Tarif de base (150$/mois)';
+                    contractImpact.className = 'impact-badge impact-low';
+                }
+                
+                calculerTcoInteractif();
+            });
+            
+            // Slider nombre d'unités
+            const unitsSlider = document.getElementById('unitsCountSlider');
+            const unitsValue = document.getElementById('unitsCountValue');
+            const unitsImpact = document.getElementById('unitsImpact');
+            
+            unitsSlider.addEventListener('input', function() {
+                parametresSimulation.nombreUnites = parseInt(this.value);
+                unitsValue.textContent = `${this.value} unité${this.value > 1 ? 's' : ''}`;
+                
+                // Mise à jour impact réductions volume avec nouvelle logique
+                if (this.value >= 50) {
+                    unitsImpact.textContent = 'PRIX MINIMUM 100$/mois!';
+                    unitsImpact.className = 'impact-badge impact-extreme';
+                } else if (this.value >= 20) {
+                    unitsImpact.textContent = 'Réductions MAJEURES -15%';
+                    unitsImpact.className = 'impact-badge impact-high';
+                } else if (this.value >= 10) {
+                    unitsImpact.textContent = 'Réductions volume -10%';
+                    unitsImpact.className = 'impact-badge impact-high';
+                } else if (this.value >= 5) {
+                    unitsImpact.textContent = 'Réductions débutant -5%';
+                    unitsImpact.className = 'impact-badge impact-medium';
+                } else {
+                    unitsImpact.textContent = 'Tarif unitaire (150$/mois)';
+                    unitsImpact.className = 'impact-badge impact-low';
+                }
+                
+                calculerTcoInteractif();
+            });
+            
+            // Slider coût maintenance Ni-Cd
+            const maintenanceSlider = document.getElementById('maintenanceCostSlider');
+            const maintenanceValue = document.getElementById('maintenanceCostValue');
+            const maintenanceImpact = document.getElementById('maintenanceImpact');
+            
+            maintenanceSlider.addEventListener('input', function() {
+                parametresSimulation.coutMaintenanceNiCd = parseInt(this.value);
+                maintenanceValue.textContent = `${this.value} CAD/an`;
+                
+                // Mise à jour impact coûts cachés
+                if (this.value >= 500) {
+                    maintenanceImpact.textContent = 'COÛTS EXORBITANTS!';
+                    maintenanceImpact.className = 'impact-badge impact-extreme';
+                } else if (this.value >= 400) {
+                    maintenanceImpact.textContent = 'Coûts très élevés';
+                    maintenanceImpact.className = 'impact-badge impact-high';
+                } else if (this.value >= 300) {
+                    maintenanceImpact.textContent = 'Coûts importants';
+                    maintenanceImpact.className = 'impact-badge impact-medium';
+                } else {
+                    maintenanceImpact.textContent = 'Maintenance obligatoire';
+                    maintenanceImpact.className = 'impact-badge impact-low';
+                }
+                
+                calculerTcoInteractif();
+            });
+            
+            // Slider fréquence pannes
+            const breakdownSlider = document.getElementById('breakdownFreqSlider');
+            const breakdownValue = document.getElementById('breakdownFreqValue');
+            const breakdownImpact = document.getElementById('breakdownImpact');
+            
+            breakdownSlider.addEventListener('input', function() {
+                parametresSimulation.frequencePannes = parseInt(this.value);
+                breakdownValue.textContent = `${this.value} panne${this.value > 1 ? 's' : ''}/an`;
+                
+                // Mise à jour impact dramatique
+                if (this.value >= 5) {
+                    breakdownImpact.textContent = 'CATASTROPHIQUE!';
+                    breakdownImpact.className = 'impact-badge impact-extreme';
+                } else if (this.value >= 4) {
+                    breakdownImpact.textContent = 'Très problématique';
+                    breakdownImpact.className = 'impact-badge impact-high';
+                } else if (this.value >= 3) {
+                    breakdownImpact.textContent = 'Arrêts production';
+                    breakdownImpact.className = 'impact-badge impact-medium';
+                } else {
+                    breakdownImpact.textContent = 'Pannes occasionnelles';
+                    breakdownImpact.className = 'impact-badge impact-low';
+                }
+                
+                calculerTcoInteractif();
+            });
+        }
+
+        // Mettre à jour les valeurs affichées avec nouvelle logique progressive
+        function updateDisplayValues() {
+            document.getElementById('loyerValue').textContent = '150 CAD/mois';
+        }
+
+        // Éléments DOM pour l'affichage des résultats location
+        const lfpTotal = document.getElementById('lfpTotal');
+        const nicdTotal = document.getElementById('nicdTotal');
+        const totalSavings = document.getElementById('totalSavings');
+        const savingsPercentage = document.getElementById('savingsPercentage');
+        const lfpLoyers = document.getElementById('lfpLoyers');
+        const lfpInstallation = document.getElementById('lfpInstallation');
+        const nicdBatteries = document.getElementById('nicdBatteries');
+        const nicdMaintenance = document.getElementById('nicdMaintenance');
+        const nicdPannes = document.getElementById('nicdPannes');
+        const nicdDegradation = document.getElementById('nicdDegradation');
+        const nicdRemplacements = document.getElementById('nicdRemplacements');
+        const roi = document.getElementById('roi');
+        const lfpBar = document.getElementById('lfpBar');
+        const nicdBar = document.getElementById('nicdBar');
+        const lfpBarValue = document.getElementById('lfpBarValue');
+        const nicdBarValue = document.getElementById('nicdBarValue');
+
+        // Calcul TCO avec le nouveau système refactorisé ELI10
+        function calculerTcoAvecNouveauSysteme() {
+            if (!calculateurTcoDynamique) {
+                console.log('⚠️ Calculateur ELI10 non initialisé, utilisation fallback');
+                calculerTcoSimple();
+                return;
+            }
+
+            try {
+                // Paramètres pour calcul TCO vente avec valeurs par défaut recommandées
+                const parametresCalcul = {
+                    dureeAnalyseAnnees: 20,  // Période d'analyse standard
+                    nombreUnites: 1,         // Une unité pour démonstration
+                    region: 'Quebec'         // Région par défaut
+                };
+
+                // Calculer avec le nouveau calculateur TCO dynamique
+                const resultatVente = calculateurTcoDynamique.calculerTcoVente(parametresCalcul);
+
+                // Mettre à jour l'affichage avec les nouveaux résultats
+                mettreAJourAffichageAvecNouveauSysteme(resultatVente);
+
+            } catch (erreur) {
+                console.error('❌ Erreur calcul TCO avec nouveau système:', erreur);
+                calculerTcoSimple();
+            }
+        }
+
+        // Calcul TCO interactif avec paramètres dynamiques
+        function calculerTcoInteractif() {
+            console.log('🎛️ Calcul TCO interactif avec paramètres:', parametresSimulation);
+            
+            const dureeAnalyse = parametresSimulation.dureeContrat;
+            const nombreUnites = parametresSimulation.nombreUnites;
+            const nombreMoisTotal = dureeAnalyse * 12;
+            
+            // =================================================================
+            // CALCULS LOCATION LI-CUBE PRO™ AVEC RÉDUCTIONS AUTOMATIQUES
+            // =================================================================
+            
+            // Loyer mensuel avec nouvelle logique progressive (150$ base, 100$ minimum)
+            let loyerMensuelBase = 150; // CAD/mois base (nouveau tarif)
+            
+            // Réductions progressives selon durée (base 150$ vers minimum 100$)
+            let reductionDuree = 0;
+            if (dureeAnalyse >= 15 && dureeAnalyse < 20) {
+                reductionDuree = 0.15; // -15% pour 15-19 ans
+            } else if (dureeAnalyse >= 20) {
+                reductionDuree = 0.20; // -20% pour 20+ ans (maximum)
+            } else if (dureeAnalyse >= 12) {
+                reductionDuree = 0.15; // -15% pour 12-14 ans
+            } else if (dureeAnalyse >= 8) {
+                reductionDuree = 0.10; // -10% pour 8-11 ans
+            }
+            // Pas de réduction pour 5-7 ans (tarif base 150$)
+            
+            // Réductions progressives selon volume (alignées sur configuration-location.json)
+            let reductionVolume = 0;
+            if (nombreUnites >= 50) {
+                reductionVolume = 0.17; // -17% pour 50+ unités (maximum)
+            } else if (nombreUnites >= 20) {
+                reductionVolume = 0.15; // -15% pour 20-49 unités
+            } else if (nombreUnites >= 10) {
+                reductionVolume = 0.10; // -10% pour 10-19 unités
+            } else if (nombreUnites >= 5) {
+                reductionVolume = 0.05; // -5% pour 5-9 unités
+            }
+            // Pas de réduction pour 1-4 unités (tarif base 150$)
+            
+            // Calcul final avec réductions combinées, mais minimum garanti à 100$
+            const loyerAvantMinimum = loyerMensuelBase * (1 - reductionDuree) * (1 - reductionVolume);
+            const loyerMensuelFinal = Math.max(loyerAvantMinimum, 100); // MINIMUM 100$ garanti
+            const coutLoyersTotal = loyerMensuelFinal * nombreMoisTotal * nombreUnites;
+            
+            // Frais d'installation avec dégressivité
+            let fraisInstallationUnitaire = 500; // CAD base
+            if (nombreUnites >= 10) {
+                fraisInstallationUnitaire = 300; // Réduction installation multiple
+            } else if (nombreUnites >= 5) {
+                fraisInstallationUnitaire = 400;
+            }
+            
+            const fraisInstallationTotal = fraisInstallationUnitaire * nombreUnites;
+            const coutTotalLocationLiCube = coutLoyersTotal + fraisInstallationTotal;
+            
+            // =================================================================
+            // CALCULS RÉELS NI-CD AVEC PARAMÈTRES VARIABLES
+            // =================================================================
+            
+            // Batteries Ni-Cd avec remplacements selon durée
+            const prixUnitaireNiCd = 450; // CAD par batterie
+            const dureeVieNiCd = 2.5; // années
+            const nombreRemplacements = Math.ceil(dureeAnalyse / dureeVieNiCd) - 1;
+            const coutBatteriesNiCd = (prixUnitaireNiCd * (nombreRemplacements + 1)) * nombreUnites;
+            
+            // Maintenance annuelle variable
+            const coutMaintenanceNiCd = parametresSimulation.coutMaintenanceNiCd * dureeAnalyse * nombreUnites;
+            
+            // Frais de remplacement
+            const fraisRemplacementUnitaire = 150;
+            const coutRemplacementsNiCd = fraisRemplacementUnitaire * nombreRemplacements * nombreUnites;
+            
+            // Pannes avec fréquence variable - IMPACT DRAMATIQUE
+            const coutMoyenPanne = 800; // CAD par panne
+            const coutPannesTotal = parametresSimulation.frequencePannes * coutMoyenPanne * dureeAnalyse * nombreUnites;
+            
+            // Surconsommation énergétique proportionnelle
+            const surconsommationParUniteParAn = 102; // CAD/unité/an (2040 CAD sur 20 ans)
+            const surconsommationDegradation = surconsommationParUniteParAn * dureeAnalyse * nombreUnites;
+            
+            // COÛT TOTAL RÉEL Ni-Cd
+            const coutTotalReelNiCd = coutBatteriesNiCd + coutMaintenanceNiCd + coutRemplacementsNiCd + 
+                                     coutPannesTotal + surconsommationDegradation;
+            
+            // =================================================================
+            // CALCUL DES ÉCONOMIES RÉELLES
+            // =================================================================
+            
+            const economiesReelles = coutTotalReelNiCd - coutTotalLocationLiCube;
+            const economiesMensuelles = Math.round(economiesReelles / nombreMoisTotal);
+            const economiesParUnite = Math.round(economiesReelles / nombreUnites);
+            
+            // Mise à jour du loyer affiché
+            document.getElementById('loyerValue').textContent = `${Math.round(loyerMensuelFinal)} CAD/mois`;
+            
+            // Affichage des résultats
+            afficherResultatsLocation({
+                lfpTotal: coutTotalLocationLiCube,
+                lfpLoyers: coutLoyersTotal,
+                lfpInstallation: fraisInstallationTotal,
+                nicdTotal: coutTotalReelNiCd,
+                nicdBatteries: coutBatteriesNiCd,
+                nicdMaintenance: coutMaintenanceNiCd,
+                nicdRemplacements: coutRemplacementsNiCd,
+                nicdPannes: coutPannesTotal,
+                nicdDegradation: surconsommationDegradation,
+                savings: economiesReelles,
+                economiesMensuelles: economiesMensuelles,
+                replacements: nombreRemplacements * nombreUnites
+            });
+            
+            // Mise à jour des arguments marketing dynamiques
+            mettreAJourArgumentsMarketing(economiesReelles, economiesMensuelles, nombreUnites, economiesParUnite);
+        }
+
+        // Calculs LOCATION Li-CUBE PRO™ vs ACHAT Ni-Cd avec données configuration-location.json (FALLBACK)
+        function calculerTcoSimple() {
+            // Utiliser les paramètres par défaut (nouveau: base 5 ans)
+            parametresSimulation = {
+                dureeContrat: 5,    // Base: 5 ans = 150$/mois
+                nombreUnites: 1,    // Base: 1 unité = pas de réduction volume
+                coutMaintenanceNiCd: 200,
+                frequencePannes: 3
+            };
+            
+            calculerTcoInteractif();
+        }
+
+        // Mise à jour affichage avec nouveau système refactorisé
+        function mettreAJourAffichageAvecNouveauSysteme(resultatVente) {
+            console.log('📊 Mise à jour affichage avec données ELI10:', resultatVente);
+            
+            // Extraire données du nouveau format de résultat
+            const tcoLiFePO4 = resultatVente.tco_li_cube_pro;
+            const tcoNiCd = resultatVente.tco_ni_cd;
+            const comparaison = resultatVente.comparaison;
+            
+            // Utiliser fonction d'affichage commune avec données adaptées
+            afficherResultatsSimples({
+                lfpTotal: tcoLiFePO4.coutTotal,
+                nicdTotal: tcoNiCd.coutTotal,
+                savings: comparaison.economiesAbsolues,
+                savingsPercent: comparaison.economiesRelativesPourcentage,
+                lfpInitial: tcoLiFePO4.repartitionCouts.acquisition,
+                lfpMonitoring: tcoLiFePO4.repartitionCouts.maintenance,
+                nicdInitial: tcoNiCd.repartitionCouts.acquisition,
+                nicdMaintenance: tcoNiCd.repartitionCouts.maintenance,
+                nicdReplacements: tcoNiCd.repartitionCouts.remplacements,
+                replacements: tcoNiCd.detailsCalcul.nombreRemplacements
+            });
+        }
+
+        // Fonction d'affichage spécialisée pour LOCATION vs ACHAT
+        function afficherResultatsLocation(donneesCalcul) {
+            console.log('🎯 Affichage résultats TCO LOCATION:', donneesCalcul);
+            
+            // Formateur pour devises canadiennes
+            const formateurDevise = new Intl.NumberFormat('fr-CA');
+            
+            // Mise à jour des totaux principaux
+            lfpTotal.textContent = `${formateurDevise.format(donneesCalcul.lfpTotal)} CAD`;
+            nicdTotal.textContent = `${formateurDevise.format(donneesCalcul.nicdTotal)} CAD`;
+            totalSavings.textContent = `${formateurDevise.format(donneesCalcul.savings)} CAD`;
+            savingsPercentage.textContent = `${donneesCalcul.economiesMensuelles} CAD/mois d'économies`;
+
+            // Mise à jour des détails de coûts LOCATION
+            lfpLoyers.textContent = `${formateurDevise.format(donneesCalcul.lfpLoyers)} CAD`;
+            lfpInstallation.textContent = `${formateurDevise.format(donneesCalcul.lfpInstallation)} CAD`;
+            
+            // Mise à jour des détails de coûts Ni-Cd RÉELS
+            nicdBatteries.textContent = `${formateurDevise.format(donneesCalcul.nicdBatteries)} CAD (${donneesCalcul.replacements} batteries)`;
+            nicdMaintenance.textContent = `${formateurDevise.format(donneesCalcul.nicdMaintenance)} CAD`;
+            nicdRemplacements.textContent = `${formateurDevise.format(donneesCalcul.nicdRemplacements)} CAD`;
+            nicdPannes.textContent = `${formateurDevise.format(donneesCalcul.nicdPannes)} CAD`;
+            nicdDegradation.textContent = `${formateurDevise.format(donneesCalcul.nicdDegradation)} CAD`;
+
+            // Affichage des économies mensuelles
+            roi.textContent = `${donneesCalcul.economiesMensuelles} CAD/mois`;
+
+            // Mise à jour des barres graphiques comparatives
+            const valeurMaximale = Math.max(donneesCalcul.lfpTotal, donneesCalcul.nicdTotal);
+            
+            const pourcentageLfp = (donneesCalcul.lfpTotal / valeurMaximale) * 100;
+            const pourcentageNiCd = (donneesCalcul.nicdTotal / valeurMaximale) * 100;
+
+            // Application des largeurs de barres et valeurs
+            lfpBar.style.width = `${pourcentageLfp}%`;
+            nicdBar.style.width = `${pourcentageNiCd}%`;
+            lfpBarValue.textContent = `${formateurDevise.format(donneesCalcul.lfpTotal)} CAD`;
+            nicdBarValue.textContent = `${formateurDevise.format(donneesCalcul.nicdTotal)} CAD`;
+        }
+
+        // Fonction d'affichage alternative pour compatibilité avec ancien système
+        function afficherResultatsSimples(donneesCalcul) {
+            // Redirection vers fonction location avec adaptation des données
+            afficherResultatsLocation({
+                lfpTotal: donneesCalcul.lfpTotal || 24500,
+                lfpLoyers: donneesCalcul.lfpInitial || 24000,
+                lfpInstallation: donneesCalcul.lfpMonitoring || 500,
+                nicdTotal: donneesCalcul.nicdTotal || 57640,
+                nicdBatteries: Math.round((donneesCalcul.nicdInitial || 3600)),
+                nicdMaintenance: Math.round((donneesCalcul.nicdMaintenance || 4000)),
+                nicdRemplacements: Math.round((donneesCalcul.nicdReplacements || 1200)),
+                nicdPannes: 48000,
+                nicdDegradation: 12000,
+                savings: donneesCalcul.savings || 33140,
+                economiesMensuelles: 138,
+                replacements: donneesCalcul.replacements || 8
+            });
+        }
+
+        // Fonctions utilitaires refactorisées selon standards ELI10
+        function exporterResultats() {
+            console.log('📄 Export résultats TCO vers PDF/impression');
+            window.print();
+        }
+
+        function reinitialiserCalculateur() {
+            console.log('🔄 Réinitialisation calculateur TCO');
+            // Recalculer avec le système en cours
+            if (calculateurTcoDynamique) {
+                calculerTcoAvecNouveauSysteme();
+            } else {
+                calculerTcoSimple();
+            }
+        }
+
+        // Mise à jour des arguments marketing dynamiques
+        function mettreAJourArgumentsMarketing(economiesReelles, economiesMensuelles, nombreUnites, economiesParUnite) {
+            const remplacements = Math.ceil(parametresSimulation.dureeContrat / 2.5) - 1;
+            const pannesAnnuelles = parametresSimulation.frequencePannes;
+            const coutPannesTotal = pannesAnnuelles * 800 * parametresSimulation.dureeContrat * nombreUnites;
+            
+            // Argument remplacements
+            const replacementArg = document.getElementById('replacementArgument');
+            if (remplacements >= 6) {
+                replacementArg.textContent = `${remplacements * nombreUnites} remplacements RUINEUX vs 0 Li-CUBE PRO!`;
+            } else {
+                replacementArg.textContent = `${remplacements * nombreUnites} remplacements vs 0 Li-CUBE PRO`;
+            }
+            
+            // Argument pannes
+            const breakdownTitle = document.getElementById('breakdownTitle');
+            const breakdownArg = document.getElementById('breakdownArgument');
+            
+            if (pannesAnnuelles >= 5) {
+                breakdownTitle.textContent = '💥 PANNES CATASTROPHIQUES';
+                breakdownArg.textContent = `${pannesAnnuelles} pannes/an = RUINE TOTALE!`;
+            } else if (pannesAnnuelles >= 4) {
+                breakdownTitle.textContent = '🔥 PANNES DRAMATIQUES';
+                breakdownArg.textContent = `${pannesAnnuelles} pannes/an = ${Math.round(coutPannesTotal/1000)}k$ de pertes!`;
+            } else {
+                breakdownTitle.textContent = '🔥 PANNES IMPRÉVUES';
+                breakdownArg.textContent = `${pannesAnnuelles} pannes/an = ${Math.round(coutPannesTotal/1000)}k$ sur ${parametresSimulation.dureeContrat} ans!`;
+            }
+            
+            // Argument ROI
+            const roiTitle = document.getElementById('roiTitle');
+            const roiArg = document.getElementById('roiArgument');
+            
+            if (economiesMensuelles >= 500) {
+                roiTitle.textContent = '💎 ROI SPECTACULAIRE';
+                roiArg.textContent = `${economiesMensuelles} CAD/mois = JACKPOT!`;
+            } else if (economiesMensuelles >= 200) {
+                roiTitle.textContent = '🚀 ROI EXCEPTIONNEL';
+                roiArg.textContent = `${economiesMensuelles} CAD/mois d'économies!`;
+            } else {
+                roiTitle.textContent = '🏆 RETOUR INVESTISSEMENT';
+                roiArg.textContent = `${economiesMensuelles} CAD/mois dès le 1er mois!`;
+            }
+            
+            // Phrases chocs dynamiques
+            const shockPhrase = document.getElementById('shockPhrase');
+            const shockDetails = document.getElementById('shockDetails');
+            
+            if (nombreUnites >= 20) {
+                shockPhrase.textContent = `💸 ALERTE: Vos ${nombreUnites} Ni-Cd vous coûtent ${Math.round(economiesReelles/1000)}k$ de TROP!`;
+                shockDetails.textContent = `Installation massive = économies MASSIVES avec Li-CUBE PRO™!`;
+            } else if (nombreUnites >= 10) {
+                shockPhrase.textContent = `🚨 URGENT: ${nombreUnites} unités Ni-Cd = ${economiesMensuelles} CAD/mois de GASPILLAGE!`;
+                shockDetails.textContent = `Chaque jour sans Li-CUBE PRO™ = argent perdu définitivement!`;
+            } else if (nombreUnites >= 5) {
+                shockPhrase.textContent = `⚠️ ATTENTION: Vos ${nombreUnites} Ni-Cd vous coûtent ${economiesMensuelles} CAD/mois de TROP!`;
+                shockDetails.textContent = `${Math.round(economiesParUnite/1000)}k$ d'économies par unité avec Li-CUBE PRO™!`;
+            } else {
+                shockPhrase.textContent = `💸 Vos Ni-Cd vous coûtent ${economiesMensuelles} CAD/mois de TROP!`;
+                shockDetails.textContent = `Chaque mois qui passe sans Li-CUBE PRO™ = argent jeté par les fenêtres!`;
+            }
+            
+            // Titre arguments adaptatif
+            const argumentsTitle = document.getElementById('argumentsTitle');
+            if (economiesReelles >= 100000) {
+                argumentsTitle.textContent = '🔥💰 ARGUMENTS CHOCS - ÉCONOMIES GIGANTESQUES GARANTIES';
+            } else if (economiesReelles >= 50000) {
+                argumentsTitle.textContent = '🔥 ARGUMENTS CHOCS - ÉCONOMIES SPECTACULAIRES PROUVÉES';
+            } else {
+                argumentsTitle.textContent = '🔥 Arguments CHOCS - Pourquoi abandonner vos Ni-Cd MAINTENANT';
+            }
+        }
+
+        // Initialisation automatique calculateur LOCATION INTERACTIF
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Démarrage calculateur TCO INTERACTIF Li-CUBE PRO™');
+            
+            // Initialisation des contrôles interactifs
+            initialiserControlesInteractifs();
+            
+            // Mise à jour des valeurs affichées
+            updateDisplayValues();
+            
+            // Calcul et affichage initial avec paramètres par défaut
+            calculerTcoInteractif();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ LFP - Présentation Interactive | EDS Québec</title>
+    <meta name="description" content="Présentation interactive Li-CUBE PRO™ LFP style Prezi avec navigation 3D">
+    
+    <!-- Impress.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/impress.js@2.0.0/css/impress.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #2E86AB;
+            --secondary-magenta: #A23B72;
+            --accent-orange: #F18F01;
+            --alert-red: #C73E1D;
+            --success-green: #28A745;
+            --neutral-light: #F8F9FA;
+            --neutral-dark: #212529;
+            
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-secondary);
+            background: radial-gradient(circle at center, #1a2332 0%, #0f1419 100%);
+            color: white;
+            overflow: hidden;
+        }
+        
+        .step {
+            width: 1200px;
+            height: 800px;
+            padding: 40px;
+            margin: 20px auto;
+            position: relative;
+            box-sizing: border-box;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        /* Slide 1: Title */
+        #title {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-magenta));
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        #title h1 {
+            font-family: var(--font-primary);
+            font-size: 72px;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        #title .subtitle {
+            font-size: 36px;
+            font-weight: 600;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        
+        #title .tagline {
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        
+        /* Slide 2: Problem */
+        #problem {
+            background: linear-gradient(135deg, var(--alert-red), #8B0000);
+            box-shadow: 0 20px 40px rgba(199, 62, 29, 0.3);
+        }
+        
+        #problem h2 {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .problem-item {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .problem-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .problem-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .problem-desc {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        /* Slide 3: Solution */
+        #solution {
+            background: linear-gradient(135deg, var(--success-green), var(--accent-orange));
+            box-shadow: 0 20px 40px rgba(40, 167, 69, 0.3);
+        }
+        
+        #solution h2 {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+        }
+        
+        .solution-hero {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .product-visual {
+            width: 300px;
+            height: 200px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .solution-specs {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .spec-item {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .spec-label {
+            font-weight: 600;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .spec-value {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: 28px;
+            color: white;
+        }
+        
+        /* Slide 4: TCO */
+        #tco {
+            background: linear-gradient(135deg, var(--success-green), var(--accent-orange));
+            box-shadow: 0 20px 40px rgba(241, 143, 1, 0.3);
+        }
+        
+        #tco h2 {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+        }
+        
+        .tco-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .tco-card {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tco-tech {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        
+        .tco-amount {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+        
+        .tco-period {
+            font-size: 16px;
+            opacity: 0.7;
+        }
+        
+        .vs-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .vs-label {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        .savings-highlight {
+            background: rgba(255,215,0,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .savings-amount {
+            font-family: var(--font-primary);
+            font-size: 32px;
+            font-weight: 700;
+            color: #FFD700;
+        }
+        
+        /* Slide 5: Comparison */
+        #comparison {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-magenta));
+            box-shadow: 0 20px 40px rgba(46, 134, 171, 0.3);
+        }
+        
+        #comparison h2 {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .comparison-item {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .comparison-metric {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .comparison-values {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .value-lfp {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 700;
+            color: #90EE90;
+        }
+        
+        .value-nicd {
+            font-family: var(--font-primary);
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFB6C1;
+        }
+        
+        .improvement {
+            background: var(--accent-orange);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        /* Slide 6: Features */
+        #features {
+            background: linear-gradient(135deg, var(--neutral-dark), var(--primary-blue));
+            box-shadow: 0 20px 40px rgba(33, 37, 41, 0.3);
+        }
+        
+        #features h2 {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .feature-desc {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* Slide 7: Applications */
+        #applications {
+            background: linear-gradient(135deg, var(--secondary-magenta), var(--accent-orange));
+            box-shadow: 0 20px 40px rgba(162, 59, 114, 0.3);
+        }
+        
+        #applications h2 {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+        }
+        
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .app-card {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .app-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .app-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .app-desc {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        
+        /* Slide 8: Contact */
+        #contact {
+            background: linear-gradient(135deg, var(--neutral-dark), var(--primary-blue));
+            box-shadow: 0 20px 40px rgba(33, 37, 41, 0.3);
+        }
+        
+        #contact h2 {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            max-width: 1000px;
+        }
+        
+        .contact-info {
+            text-align: left;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .contact-text {
+            flex: 1;
+        }
+        
+        .contact-label {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: 5px;
+        }
+        
+        .contact-value {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .contact-cta {
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-orange), var(--success-green));
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Navigation */
+        .impress-progress {
+            position: fixed;
+            left: 10px;
+            bottom: 10px;
+            width: 300px;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .impress-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-orange), var(--success-green));
+            transition: width 0.3s ease;
+        }
+        
+        .impress-help {
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+        
+        /* Overview mode */
+        .impress-on-overview .step {
+            opacity: 0.6;
+        }
+        
+        .impress-on-overview .step.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="impress-not-supported">
+    <div class="fallback-message">
+        <p>Votre navigateur <b>ne supporte pas les fonctionnalités</b> requises par impress.js. Vous verrez une version simplifiée de cette présentation.</p>
+    </div>
+
+    <div id="impress" data-transition-duration="1000" data-perspective="1000">
+        
+        <!-- Slide 1: Title -->
+        <div id="title" class="step" data-x="0" data-y="0" data-scale="1">
+            <h1>Li-CUBE PRO™ LFP</h1>
+            <div class="subtitle">Révolution Batterie Ferroviaire</div>
+            <div class="tagline">24V 105Ah • LiFePO4 • Maintenance Zéro</div>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div id="problem" class="step" data-x="1500" data-y="0" data-scale="1" data-rotate="90">
+            <h2>Problématiques Ni-Cd Actuelles</h2>
+            <div class="problem-grid">
+                <div class="problem-item">
+                    <div class="problem-icon">⚖️</div>
+                    <div class="problem-title">Poids Excessif</div>
+                    <div class="problem-desc">80 kg vs 23 kg LFP<br>Impact sur infrastructure</div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">🔧</div>
+                    <div class="problem-title">Maintenance Coûteuse</div>
+                    <div class="problem-desc">2 visites/an minimum<br>Arrêts service fréquents</div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">💰</div>
+                    <div class="problem-title">TCO Prohibitif</div>
+                    <div class="problem-desc">61 500 CAD sur 20 ans<br>Remplacements multiples</div>
+                </div>
+                <div class="problem-item">
+                    <div class="problem-icon">☠️</div>
+                    <div class="problem-title">Impact Environnemental</div>
+                    <div class="problem-desc">Cadmium toxique<br>Risques de pollution</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div id="solution" class="step" data-x="0" data-y="1500" data-scale="1" data-rotate="180">
+            <h2>Solution Li-CUBE PRO™ LFP</h2>
+            <div class="solution-hero">
+                <div class="product-visual">🔋</div>
+                <div class="solution-specs">
+                    <div class="spec-item">
+                        <div class="spec-label">Technologie</div>
+                        <div class="spec-value">LiFePO4 Avancée</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Capacité</div>
+                        <div class="spec-value">24V 105Ah</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Cycles de vie</div>
+                        <div class="spec-value">≥8000 cycles</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Maintenance</div>
+                        <div class="spec-value">Zéro requise</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: TCO -->
+        <div id="tco" class="step" data-x="-1500" data-y="0" data-scale="1" data-rotate="270">
+            <h2>TCO Révolutionnaire</h2>
+            <div class="tco-comparison">
+                <div class="tco-card">
+                    <div class="tco-tech">Li-CUBE PRO™ LFP</div>
+                    <div class="tco-amount">2 500 CAD</div>
+                    <div class="tco-period">Total 20 ans</div>
+                </div>
+                <div class="vs-section">
+                    <div class="vs-label">VS</div>
+                    <div class="savings-highlight">
+                        <div class="savings-amount">59 000 CAD</div>
+                        <div>d'économies (-96%)</div>
+                    </div>
+                </div>
+                <div class="tco-card">
+                    <div class="tco-tech">Batteries Ni-Cd</div>
+                    <div class="tco-amount">61 500 CAD</div>
+                    <div class="tco-period">Total 20 ans</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Comparison -->
+        <div id="comparison" class="step" data-x="3000" data-y="0" data-scale="1" data-rotate="0">
+            <h2>Comparaison Performance</h2>
+            <div class="comparison-grid">
+                <div class="comparison-item">
+                    <div class="comparison-metric">POIDS</div>
+                    <div class="comparison-values">
+                        <span class="value-lfp">23 kg</span>
+                        <span class="value-nicd">80 kg</span>
+                    </div>
+                    <div class="improvement">-71% plus léger</div>
+                </div>
+                <div class="comparison-item">
+                    <div class="comparison-metric">CYCLES VIE</div>
+                    <div class="comparison-values">
+                        <span class="value-lfp">≥8000</span>
+                        <span class="value-nicd">2000-3000</span>
+                    </div>
+                    <div class="improvement">+167% durabilité</div>
+                </div>
+                <div class="comparison-item">
+                    <div class="comparison-metric">MAINTENANCE</div>
+                    <div class="comparison-values">
+                        <span class="value-lfp">Zéro</span>
+                        <span class="value-nicd">2 visites/an</span>
+                    </div>
+                    <div class="improvement">-100% maintenance</div>
+                </div>
+                <div class="comparison-item">
+                    <div class="comparison-metric">EFFICACITÉ</div>
+                    <div class="comparison-values">
+                        <span class="value-lfp">98%</span>
+                        <span class="value-nicd">85%</span>
+                    </div>
+                    <div class="improvement">+13% efficacité</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Features -->
+        <div id="features" class="step" data-x="1500" data-y="2000" data-scale="1" data-rotate="45">
+            <h2>Avantages Technologiques</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Haute Performance</div>
+                    <div class="feature-desc">3C décharge, 98% efficacité</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Sécurité Intrinsèque</div>
+                    <div class="feature-desc">LiFePO4 stable, BMS avancé</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <div class="feature-title">Éco-Responsable</div>
+                    <div class="feature-desc">Sans métaux lourds toxiques</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Monitoring BMS</div>
+                    <div class="feature-desc">Télémétrie temps réel IoT</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <div class="feature-title">Drop-in Replace</div>
+                    <div class="feature-desc">Compatible existant</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-title">Garantie Étendue</div>
+                    <div class="feature-desc">5 ans / 4000 cycles</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Applications -->
+        <div id="applications" class="step" data-x="0" data-y="3000" data-scale="1" data-rotate="135">
+            <h2>Applications Ferroviaires</h2>
+            <div class="applications-grid">
+                <div class="app-card">
+                    <div class="app-icon">🚇</div>
+                    <div class="app-title">Métro Automatique</div>
+                    <div class="app-desc">Alimentation secours systèmes critiques</div>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">🚋</div>
+                    <div class="app-title">Tramway Urbain</div>
+                    <div class="app-desc">Stockage énergie freinage récupératif</div>
+                </div>
+                <div class="app-card">
+                    <div class="app-icon">🚂</div>
+                    <div class="app-title">Train Régional</div>
+                    <div class="app-desc">Démarrage moteurs diesel</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Contact -->
+        <div id="contact" class="step" data-x="-1500" data-y="2000" data-scale="1" data-rotate="225">
+            <h2>Contactez-nous</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-text">
+                            <div class="contact-label">Téléphone</div>
+                            <div class="contact-value">+1 (514) 555-CUBE</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-text">
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value">info@eds-quebec.com</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div class="contact-text">
+                            <div class="contact-label">Site web</div>
+                            <div class="contact-value">www.eds-quebec.com/li-cube-pro</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <div class="contact-label">Adresse</div>
+                            <div class="contact-value">Montréal, Québec, Canada</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-cta">
+                    <div class="cta-title">Prêt à Révolutionner ?</div>
+                    <div class="cta-subtitle">Transition vers Li-CUBE PRO™ LFP</div>
+                    <a href="#" class="cta-button">Demander une démo</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview -->
+        <div id="overview" class="step" data-x="750" data-y="1500" data-scale="5"></div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="impress-progress">
+        <div class="impress-progress-bar"></div>
+    </div>
+
+    <!-- Help -->
+    <div class="impress-help">
+        <p><strong>Navigation :</strong></p>
+        <p>← → : Slides précédent/suivant</p>
+        <p>Espace : Slide suivant</p>
+        <p>Tab : Vue d'ensemble</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/impress.js@2.0.0/js/impress.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize Impress.js
+            impress().init();
+            
+            // Progress bar
+            const progressBar = document.querySelector('.impress-progress-bar');
+            const steps = document.querySelectorAll('.step:not(#overview)');
+            let currentStep = 0;
+            
+            document.addEventListener('impress:stepenter', function(event) {
+                const stepId = event.target.id;
+                if (stepId !== 'overview') {
+                    currentStep = Array.from(steps).indexOf(event.target);
+                    const progress = ((currentStep + 1) / steps.length) * 100;
+                    progressBar.style.width = progress + '%';
+                }
+            });
+            
+            // Load manifest data for dynamic content
+            fetch('04_manifest.json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Manifest loaded:', data);
+                    // Update slides with dynamic data if needed
+                })
+                .catch(error => console.error('Error loading manifest:', error));
+        });
+    </script>
+</body>
+</html>

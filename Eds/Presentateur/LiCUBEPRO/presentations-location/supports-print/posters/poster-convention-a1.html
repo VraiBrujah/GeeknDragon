@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ LOCATION - Poster Convention A1</title>
+    <style>
+        @page {
+            size: 2245px 3179px;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            color: #333;
+            line-height: 1.4;
+            width: 2245px;
+            height: 3179px;
+            overflow: auto;
+            position: relative;
+        }
+        
+        .poster-container {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            position: relative;
+        }
+        
+        /* Éléments décoratifs d'arrière-plan */
+        .bg-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .bg-circle-1 {
+            width: 300mm;
+            height: 300mm;
+            top: -150mm;
+            right: -150mm;
+        }
+        
+        .bg-circle-2 {
+            width: 200mm;
+            height: 200mm;
+            bottom: -100mm;
+            left: -100mm;
+            background: rgba(241, 143, 1, 0.1);
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25mm 40mm;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 25mm;
+            align-items: center;
+            box-shadow: 0 5mm 20mm rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo-section {
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 36pt;
+            font-weight: 900;
+            color: #1B365D;
+            margin-bottom: 3mm;
+            letter-spacing: 2px;
+        }
+        
+        .logo-subtitle {
+            font-size: 16pt;
+            color: #F18F01;
+            font-weight: 600;
+        }
+        
+        .main-header {
+            text-align: center;
+        }
+        
+        .main-title {
+            font-size: 84pt;
+            font-weight: 900;
+            color: #1B365D;
+            margin-bottom: 5mm;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+            letter-spacing: 3px;
+        }
+        
+        .main-subtitle {
+            font-size: 28pt;
+            color: #2E86AB;
+            font-weight: 300;
+            margin-bottom: 8mm;
+        }
+        
+        .tagline {
+            font-size: 20pt;
+            color: #F18F01;
+            font-weight: 600;
+            padding: 5mm 15mm;
+            background: rgba(241, 143, 1, 0.1);
+            border-radius: 10mm;
+            border: 2px solid #F18F01;
+        }
+        
+        .certifications {
+            display: flex;
+            flex-direction: column;
+            gap: 3mm;
+        }
+        
+        .cert-group {
+            display: flex;
+            gap: 2mm;
+        }
+        
+        .cert-badge {
+            background: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            color: white;
+            padding: 3mm 6mm;
+            border-radius: 5mm;
+            font-size: 12pt;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 2mm 8mm rgba(0,0,0,0.2);
+            min-width: 15mm;
+        }
+        
+        .content {
+            padding: 25mm 40mm;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25mm;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .left-panel {
+            display: grid;
+            gap: 15mm;
+        }
+        
+        .right-panel {
+            display: grid;
+            gap: 15mm;
+        }
+        
+        .section-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15mm;
+            padding: 15mm;
+            box-shadow: 0 5mm 25mm rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .section-title {
+            font-size: 36pt;
+            font-weight: 800;
+            color: #1B365D;
+            margin-bottom: 8mm;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5mm;
+        }
+        
+        .tco-showcase {
+            background: linear-gradient(135deg, #F18F01 0%, #FF8C42 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tco-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(15deg);
+        }
+        
+        .tco-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tco-title {
+            font-size: 28pt;
+            font-weight: 800;
+            margin-bottom: 8mm;
+        }
+        
+        .tco-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 8mm;
+            align-items: center;
+            margin: 10mm 0;
+        }
+        
+        .tco-value-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 8mm;
+            border-radius: 8mm;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .tco-label {
+            font-size: 16pt;
+            font-weight: 600;
+            margin-bottom: 2mm;
+            opacity: 0.9;
+        }
+        
+        .tco-amount {
+            font-size: 36pt;
+            font-weight: 900;
+            margin-bottom: 2mm;
+        }
+        
+        .tco-period {
+            font-size: 12pt;
+            opacity: 0.8;
+        }
+        
+        .vs-indicator {
+            font-size: 48pt;
+            font-weight: 900;
+            opacity: 0.8;
+        }
+        
+        .savings-banner {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 6mm;
+            border-radius: 8mm;
+            font-size: 24pt;
+            font-weight: 800;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8mm;
+        }
+        
+        .product-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 10mm;
+            padding: 10mm;
+            border-left: 6mm solid #28A745;
+            box-shadow: 0 3mm 15mm rgba(0,0,0,0.1);
+        }
+        
+        .product-card.nicd {
+            border-left-color: #DC3545;
+        }
+        
+        .product-header {
+            text-align: center;
+            margin-bottom: 6mm;
+        }
+        
+        .product-title {
+            font-size: 24pt;
+            font-weight: 800;
+            color: #1B365D;
+            margin-bottom: 2mm;
+        }
+        
+        .product-subtitle {
+            font-size: 16pt;
+            color: #6c757d;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 60mm;
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+            border-radius: 8mm;
+            margin-bottom: 6mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16pt;
+            color: #6c757d;
+            font-weight: 600;
+            border: 2px solid #dee2e6;
+        }
+        
+        .spec-list {
+            list-style: none;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3mm 0;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 14pt;
+        }
+        
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .spec-value {
+            font-weight: 700;
+            text-align: right;
+        }
+        
+        .spec-value.positive {
+            color: #28A745;
+        }
+        
+        .spec-value.negative {
+            color: #DC3545;
+        }
+        
+        .advantages-section {
+            background: linear-gradient(135deg, #28A745 0%, #34CE57 100%);
+            color: white;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6mm;
+        }
+        
+        .advantage-item {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 6mm;
+            border-radius: 8mm;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .advantage-icon {
+            font-size: 32pt;
+            margin-bottom: 3mm;
+        }
+        
+        .advantage-title {
+            font-size: 18pt;
+            font-weight: 700;
+            margin-bottom: 2mm;
+        }
+        
+        .advantage-desc {
+            font-size: 14pt;
+            opacity: 0.9;
+        }
+        
+        .chart-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        }
+        
+        .chart-container {
+            height: 80mm;
+            background: #f8f9fa;
+            border-radius: 8mm;
+            padding: 6mm;
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            margin-bottom: 6mm;
+        }
+        
+        .chart-bar-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3mm;
+        }
+        
+        .chart-bars {
+            display: flex;
+            gap: 2mm;
+            align-items: end;
+            height: 50mm;
+        }
+        
+        .chart-bar {
+            width: 12mm;
+            border-radius: 3mm 3mm 0 0;
+            position: relative;
+            min-height: 5mm;
+        }
+        
+        .chart-bar.lfp {
+            background: linear-gradient(to top, #28A745, #34CE57);
+            height: 5mm;
+        }
+        
+        .chart-bar.nicd {
+            background: linear-gradient(to top, #DC3545, #E74C3C);
+        }
+        
+        .bar-5y { height: 15mm; }
+        .bar-10y { height: 30mm; }
+        .bar-15y { height: 42mm; }
+        .bar-20y { height: 50mm; }
+        
+        .chart-label {
+            font-size: 12pt;
+            font-weight: 600;
+            color: #1B365D;
+            text-align: center;
+        }
+        
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20mm 40mm;
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 25mm;
+            align-items: center;
+            box-shadow: 0 -5mm 20mm rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8mm;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 3mm;
+            font-size: 16pt;
+            color: #1B365D;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .contact-item span:last-child {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        
+        /* Style pour les numéros de téléphone */
+        .phone, .tel, .telephone {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        /* Style pour les emails */
+        .email, .mail {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        .contact-icon {
+            font-size: 20pt;
+            color: #F18F01;
+            width: 8mm;
+        }
+        
+        
+        .cta-section {
+            text-align: center;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #F18F01 0%, #FF8C42 100%);
+            color: white;
+            padding: 8mm 15mm;
+            border-radius: 8mm;
+            font-size: 20pt;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5mm 20mm rgba(241, 143, 1, 0.4);
+            transition: transform 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2mm);
+        }
+        
+        .cta-subtitle {
+            font-size: 12pt;
+            color: #6c757d;
+            margin-top: 3mm;
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    
+        /* BOUTON IMPRESSION PDF */
+        .pdf-print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(241, 143, 1, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .pdf-print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(241, 143, 1, 0.4);
+            background: linear-gradient(135deg, #ff6b35 0%, #F18F01 100%);
+        }
+        
+        .pdf-print-btn:active {
+            transform: translateY(0);
+        }
+        
+        .pdf-print-btn::before {
+            content: '🖨️';
+            font-size: 16px;
+        }
+        
+        @media print {
+            .pdf-print-btn {
+                display: none !important;
+            }
+        }
+        
+        
+        
+        
+        /* CSS IMPRESSION SIMPLE */
+        @media print {
+            /* Préserver les couleurs */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Masquer seulement les boutons */
+            .pdf-print-btn {
+                display: none !important;
+            }
+            
+            /* NE PAS modifier la taille ou position du contenu */
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+        
+        /* Styles pour le dialogue simple */
+        .simple-print-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            z-index: 10000;
+            padding: 20px;
+            min-width: 350px;
+            border: 1px solid #ddd;
+        }
+        
+        .simple-print-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 9999;
+        }
+        
+        .simple-dialog-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1B365D;
+        }
+        
+        .simple-option-group {
+            margin-bottom: 12px;
+        }
+        
+        .simple-option-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+            display: block;
+        }
+        
+        .simple-option-select {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .simple-dialog-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .simple-print-btn, .simple-cancel-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .simple-print-btn {
+            background: #F18F01;
+            color: white;
+        }
+        
+        .simple-print-btn:hover {
+            background: #d47a01;
+        }
+        
+        .simple-cancel-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .simple-cancel-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        </style>
+</head>
+<body>
+
+        <button id="pdf-print-btn" class="pdf-print-btn" onclick="imprimerSimple()" title="Imprimer en PDF avec options (Ctrl+P)">
+            Imprimer en PDF
+        </button>
+        
+    <div class="poster-container">
+        <!-- Éléments décoratifs d'arrière-plan -->
+        <div class="bg-elements">
+            <div class="bg-circle bg-circle-1"></div>
+            <div class="bg-circle bg-circle-2"></div>
+        </div>
+        
+        <!-- En-tête -->
+        <div class="header">
+            <div class="logo-section">
+                <img src="../../../image/EdsQuebec/logo edsquebec.png" alt="Logo EDS Québec" style="height: 80px; width: auto; margin-bottom: 5mm;">
+                <div class="logo">EDS QUÉBEC</div>
+                <div class="logo-subtitle">Location & Services Managés</div>
+            </div>
+            
+            <div class="main-header">
+                <div class="main-title">Li-CUBE PRO™</div>
+                <div class="main-subtitle">Technologie 2025 moderne - Location</div>
+                <div class="tagline">🚨 VOS Ni-Cd vous coûtent 240$/mois RÉELS!<br>💰 ÉCONOMISEZ 90$/mois DÈS AUJOURD'HUI!<br>Tarifs dégressifs : 150$/mois → 100$/mois</div>
+            </div>
+            
+            <div class="certifications">
+                <div class="cert-group">
+                    <div class="cert-badge">CSA</div>
+                    <div class="cert-badge">UL1973</div>
+                </div>
+                <div class="cert-group">
+                    <div class="cert-badge">CE</div>
+                    <div class="cert-badge">RoHS</div>
+                </div>
+                <div class="cert-group">
+                    <div class="cert-badge">IEC</div>
+                    <div class="cert-badge">UN38.3</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contenu principal -->
+        <div class="content">
+            <!-- Panel gauche -->
+            <div class="left-panel">
+                <!-- TCO Showcase -->
+                <div class="section-card tco-showcase">
+                    <div class="tco-content">
+                        <div class="tco-title">🚨 VOS Ni-Cd vous coûtent 240$/mois RÉELS!</div>
+                        
+                        <div class="tco-comparison">
+                            <div class="tco-value-box">
+                                <div class="tco-label">Li-CUBE PRO™ LOCATION</div>
+                                <div class="tco-amount">36 500</div>
+                                <div class="tco-period">CAD / 20 ans (500$ installation incluse)</div>
+                            </div>
+                            
+                            <div class="vs-indicator">VS</div>
+                            
+                            <div class="tco-value-box">
+                                <div class="tco-label">Ni-Cd (Technologie 1980 obsolète)</div>
+                                <div class="tco-amount">69 640</div>
+                                <div class="tco-period">CAD / 20 ans</div>
+                            </div>
+                        </div>
+                        
+                        <div class="savings-banner">
+                            🔥 33 140$ ÉCONOMISÉS sur 20 ans!<br>Tarifs dégressifs : 150$/mois → 100$/mois
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Phrases choc anti-Ni-Cd -->
+                <div class="section-card advantages-section">
+                    <div class="section-title">🔥 VÉRITÉS SUR VOS NI-CD</div>
+                    
+                    <div style="display: grid; gap: 4mm; font-size: 14pt; font-weight: 600;">
+                        <div style="background: rgba(255,255,255,0.2); padding: 4mm; border-radius: 6mm; border-left: 4mm solid #FF6B6B;">
+                            ⚠️ VOS Ni-Cd vous coûtent 240$/mois RÉELS!
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 4mm; border-radius: 6mm; border-left: 4mm solid #FF6B6B;">
+                            💸 3 PANNES/AN = 48 000$ DE PERTES SUR 20 ANS
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 4mm; border-radius: 6mm; border-left: 4mm solid #FF6B6B;">
+                            📉 VOS NI-CD PERDENT 60% CAPACITÉ EN 3 ANS
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); padding: 4mm; border-radius: 6mm; border-left: 4mm solid #FF6B6B;">
+                            🔧 8 REMPLACEMENTS PRÉVUS vs 0 AVEC NOUS!
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Graphique évolution -->
+                <div class="section-card chart-section">
+                    <div class="section-title">📈 Évolution TCO</div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-bar-group">
+                            <div class="chart-bars">
+                                <div class="chart-bar lfp"></div>
+                                <div class="chart-bar nicd bar-5y"></div>
+                            </div>
+                            <div class="chart-label">5 ans</div>
+                        </div>
+                        
+                        <div class="chart-bar-group">
+                            <div class="chart-bars">
+                                <div class="chart-bar lfp"></div>
+                                <div class="chart-bar nicd bar-10y"></div>
+                            </div>
+                            <div class="chart-label">10 ans</div>
+                        </div>
+                        
+                        <div class="chart-bar-group">
+                            <div class="chart-bars">
+                                <div class="chart-bar lfp"></div>
+                                <div class="chart-bar nicd bar-15y"></div>
+                            </div>
+                            <div class="chart-label">15 ans</div>
+                        </div>
+                        
+                        <div class="chart-bar-group">
+                            <div class="chart-bars">
+                                <div class="chart-bar lfp"></div>
+                                <div class="chart-bar nicd bar-20y"></div>
+                            </div>
+                            <div class="chart-label">20 ans</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 14pt; color: #6c757d;">
+                        🟢 Li-CUBE PRO™ • 🔴 Ni-Cd (en milliers CAD)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Panel droit -->
+            <div class="right-panel">
+                <!-- Services inclus location -->
+                <div class="section-card">
+                    <div class="section-title">🛡️ TOUT INCLUS</div>
+                    <div style="font-size: 14pt; color: #1B365D; font-weight: 700; margin-bottom: 4mm;">💰 150$/mois → 100$/mois + 500$ installation unique</div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; font-size: 12pt;">
+                        <div>
+                            <div style="font-weight: 700; color: #28A745; margin-bottom: 3mm;">✅ MONITORING & IA</div>
+                            <div style="color: #333; line-height: 1.3;">• Surveillance 24h/24, 7j/7<br>• Prédiction pannes par IA<br>• Alertes temps réel<br>• Dashboard client</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; color: #28A745; margin-bottom: 3mm;">✅ MAINTENANCE TOTALE</div>
+                            <div style="color: #333; line-height: 1.3;">• Interventions préventives<br>• Remplacement avant usure<br>• Optimisations automatiques<br>• Mises à jour OTA</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; color: #28A745; margin-bottom: 3mm;">✅ SUPPORT TECHNIQUE</div>
+                            <div style="color: #333; line-height: 1.3;">• Intervention < 24h garantie<br>• Remplacement immédiat<br>• Support 24/7<br>• Zéro franchise</div>
+                        </div>
+                        <div>
+                            <div style="font-weight: 700; color: #28A745; margin-bottom: 3mm;">✅ ASSURANCE TOTALE</div>
+                            <div style="color: #333; line-height: 1.3;">• Tous risques couverts<br>• EDS assume 100%<br>• Aucun frais caché<br>• Tranquillité garantie</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Comparaison produits -->
+                <div class="section-card">
+                    <div class="section-title">⚖️ Comparaison Directe</div>
+                    
+                    <div class="comparison-grid">
+                        <div class="product-card">
+                            <div class="product-header">
+                                <div class="product-title">🟢 Li-CUBE PRO™</div>
+                                <div class="product-subtitle">Technologie 2025 moderne</div>
+                            </div>
+                            
+                            <div class="product-image">
+                                <img src="../../../image/Produit/Li-CUBE PRO/Li-CUBE PRO image 1.png" alt="Li-CUBE PRO™ - Technologie 2025 moderne" style="width: 100%; height: 120px; object-fit: contain; border-radius: 8px; background: rgba(255,255,255,0.1);">
+                            </div>
+                            
+                            <ul class="spec-list">
+                                <li class="spec-item">
+                                    <span class="spec-label">Location mensuelle</span>
+                                    <span class="spec-value positive">150$/mois → 100$/mois</span>
+                                </li>
+                                <li class="spec-item">
+                                    <span class="spec-label">Installation unique</span>
+                                    <span class="spec-value positive">500$ seulement</span>
+                                </li>
+                                <li class="spec-item">
+                                    <span class="spec-label">Gestion complète</span>
+                                    <span class="spec-value positive">100% incluse</span>
+                                </li>
+                                <li class="spec-item">
+                                    <span class="spec-label">Monitoring 24/7</span>
+                                    <span class="spec-value positive">IA intégrée</span>
+                                </li>
+                                <li class="spec-item">
+                                    <span class="spec-label">Intervention</span>
+                                    <span class="spec-value positive">< 24h</span>
+                                </li>
+                                <li class="spec-item">
+                                    <span class="spec-label">Zéro risque</span>
+                                    <span class="spec-value positive">EDS assume tout</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="product-card nicd">
+                            <div class="product-header">
+                                <div class="product-title">🔴 Ni-Cd</div>
+                                <div class="product-subtitle">Technologie 1980 obsolète</div>
+                            </div>
+                            
+                            <div class="product-image">
+                                <img src="../../../image/Ni-Cd/NiCd.png" alt="Batterie Ni-Cd - Technologie 1980 obsolète" style="width: 100%; height: 120px; object-fit: contain; border-radius: 8px; background: rgba(220,53,69,0.1);">
+                            </div>
+                            
+                            <ul class="spec-list">
+                                <li class="spec-item">
+                                    <span class="spec-label">Coût réel 20 ans</span>
+                                    <span class="spec-value negative">69 640$</span>
+                                </li>
+                                <li class="spec-item">
+                                    <span class="spec-label">Pannes/an</span>
+                                    <span class="spec-value negative">3 à 800$ chacune</span>
+                                </li>
+                                <li class="spec-item">
+                                    <span class="spec-label">Maintenance</span>
+                                    <span class="spec-value negative">200$/an</span>
+                                </li>
+                                <li class="spec-item">
+                                    <span class="spec-label">Remplacements</span>
+                                    <span class="spec-value negative">8 sur 20 ans</span>
+                                </li>
+                                <li class="spec-item">
+                                    <span class="spec-label">Monitoring</span>
+                                    <span class="spec-value negative">Inexistant</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Avantages clés -->
+                <div class="section-card advantages-section">
+                    <div class="section-title">✨ Avantages Clés</div>
+                    
+                    <div class="advantages-grid">
+                        <div class="advantage-item">
+                            <div class="advantage-icon">🛡️</div>
+                            <div class="advantage-title">ZÉRO RISQUE</div>
+                            <div class="advantage-desc">EDS assume 100% technique</div>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <div class="advantage-icon">💰</div>
+                            <div class="advantage-title">ÉCONOMIES RÉELLES</div>
+                            <div class="advantage-desc">90$/mois vs Ni-Cd</div>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <div class="advantage-icon">🚫</div>
+                            <div class="advantage-title">FINI LES PANNES</div>
+                            <div class="advantage-desc">0 panne vs 3/an Ni-Cd</div>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <div class="advantage-icon">🧠</div>
+                            <div class="advantage-title">IA PRÉDICTIVE</div>
+                            <div class="advantage-desc">Intervention AVANT problème</div>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <div class="advantage-icon">📱</div>
+                            <div class="advantage-title">MONITORING 24/7</div>
+                            <div class="advantage-desc">Surveillance temps réel</div>
+                        </div>
+                        
+                        <div class="advantage-item">
+                            <div class="advantage-icon">⚡</div>
+                            <div class="advantage-title">INTERVENTION 24H</div>
+                            <div class="advantage-desc">Support garanti</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pied de page -->
+        <div class="footer">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span class="email">contact@edsquebec.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🌐</span>
+                    <span>edsquebec.com/location</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span class="phone">819&nbsp;323&nbsp;7859</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🚨</span>
+                    <span class="phone">819&nbsp;323&nbsp;LOCA&nbsp;(5622)</span>
+                </div>
+            </div>
+            
+            
+            <div class="cta-section">
+                <div style="background: linear-gradient(135deg, #DC3545 0%, #E74C3C 100%); color: white; padding: 6mm; border-radius: 8mm; margin-bottom: 6mm; text-align: center; font-weight: 800; font-size: 16pt; border: 2px solid rgba(255,255,255,0.3);">
+                    🚨 ARRÊTEZ DE PERDRE 90$/MOIS!<br>Tarifs dégressifs : 150$/mois → 100$/mois
+                </div>
+                <a href="#" class="cta-button">📋 AUDIT GRATUIT</a>
+                <div class="cta-subtitle">Proposition location sur mesure</div>
+            </div>
+        </div>
+    </div>
+    <script src="../../utils/data-loader.js"></script>
+
+
+        
+        
+        <script>
+        function afficherOptionsSimples() {
+            // Créer l'overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'simple-print-overlay';
+            
+            // Créer le dialogue
+            const dialog = document.createElement('div');
+            dialog.className = 'simple-print-dialog';
+            dialog.innerHTML = `
+                <div class="simple-dialog-header">
+                    Options d'impression
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Format de page :</label>
+                    <select id="simple-page-format" class="simple-option-select">
+                        <option value="auto">Automatique</option>
+                        <option value="a4">A4 Portrait</option>
+                        <option value="a4-landscape">A4 Paysage</option>
+                        <option value="letter">Lettre US Portrait</option>
+                        <option value="letter-landscape">Lettre US Paysage</option>
+                        <option value="a3">A3 Portrait</option>
+                        <option value="a3-landscape">A3 Paysage</option>
+                    </select>
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Échelle (réduire si contenu dépasse) :</label>
+                    <select id="simple-print-scale" class="simple-option-select">
+                        <option value="100">100% (Taille normale)</option>
+                        <option value="90">90%</option>
+                        <option value="80">80%</option>
+                        <option value="70">70%</option>
+                        <option value="60">60%</option>
+                        <option value="50">50%</option>
+                        <option value="40">40%</option>
+                    </select>
+                </div>
+                
+                <div class="simple-dialog-buttons">
+                    <button class="simple-cancel-btn" onclick="fermerOptionsSimples()">Annuler</button>
+                    <button class="simple-print-btn" onclick="imprimerAvecOptionsSimples()">Imprimer</button>
+                </div>
+            `;
+            
+            // Ajouter au DOM
+            document.body.appendChild(overlay);
+            document.body.appendChild(dialog);
+            
+            // Fermer en cliquant sur l'overlay
+            overlay.addEventListener('click', fermerOptionsSimples);
+        }
+        
+        function fermerOptionsSimples() {
+            const overlay = document.querySelector('.simple-print-overlay');
+            const dialog = document.querySelector('.simple-print-dialog');
+            if (overlay) overlay.remove();
+            if (dialog) dialog.remove();
+        }
+        
+        function imprimerAvecOptionsSimples() {
+            const format = document.getElementById('simple-page-format').value;
+            const scale = document.getElementById('simple-print-scale').value;
+            
+            // Appliquer seulement le format et l'échelle
+            appliquerStylesSimples(format, scale);
+            
+            // Fermer le dialogue
+            fermerOptionsSimples();
+            
+            // Attendre et imprimer
+            setTimeout(() => {
+                window.print();
+                
+                // Restaurer après impression
+                setTimeout(restaurerStylesSimples, 800);
+            }, 100);
+        }
+        
+        function appliquerStylesSimples(format, scale) {
+            // Supprimer l'ancien style
+            const ancienStyle = document.getElementById('simple-print-styles');
+            if (ancienStyle) ancienStyle.remove();
+            
+            // Créer le nouveau style
+            const style = document.createElement('style');
+            style.id = 'simple-print-styles';
+            
+            let cssFormat = '';
+            switch(format) {
+                case 'a4':
+                    cssFormat = '@page { size: A4 portrait; margin: 10mm; }';
+                    break;
+                case 'a4-landscape':
+                    cssFormat = '@page { size: A4 landscape; margin: 10mm; }';
+                    break;
+                case 'letter':
+                    cssFormat = '@page { size: letter portrait; margin: 0.4in; }';
+                    break;
+                case 'letter-landscape':
+                    cssFormat = '@page { size: letter landscape; margin: 0.4in; }';
+                    break;
+                case 'a3':
+                    cssFormat = '@page { size: A3 portrait; margin: 15mm; }';
+                    break;
+                case 'a3-landscape':
+                    cssFormat = '@page { size: A3 landscape; margin: 15mm; }';
+                    break;
+                default:
+                    cssFormat = '@page { size: auto; margin: 10mm; }';
+            }
+            
+            let cssScale = '';
+            if (scale !== '100') {
+                const scaleValue = parseInt(scale) / 100;
+                cssScale = `
+                    body {
+                        transform: scale(${scaleValue});
+                        transform-origin: top left;
+                        width: ${100 / scaleValue}%;
+                        height: ${100 / scaleValue}%;
+                    }
+                `;
+            }
+            
+            style.textContent = `@media print { ${cssFormat} ${cssScale} }`;
+            document.head.appendChild(style);
+        }
+        
+        function restaurerStylesSimples() {
+            const dynamicStyles = document.getElementById('simple-print-styles');
+            if (dynamicStyles) {
+                dynamicStyles.remove();
+            }
+        }
+        
+        function imprimerSimple() {
+            afficherOptionsSimples();
+        }
+        
+        // Fonction pour compatibilité
+        function imprimerPDF() {
+            imprimerSimple();
+        }
+        
+        function imprimerPDFAmeliore() {
+            imprimerSimple();
+        }
+        
+        // Raccourci clavier
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'p') {
+                event.preventDefault();
+                imprimerSimple();
+            }
+        });
+        </script>
+        
+        
+        
+</body>
+</html>

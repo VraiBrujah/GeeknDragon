@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EDS Québec - Solutions énergétiques innovantes pour l'industrie ferroviaire. Batteries lithium Li-CUBE PRO™ avec 94% d'économies TCO.">
+    <meta name="keywords" content="batteries lithium, ferroviaire, EDS Québec, Li-CUBE PRO, TCO, économies, signalisation">
+    <meta name="author" content="EDS Québec - Energy Dream System">
+    <meta property="og:title" content="EDS Québec - Solutions Énergétiques d'Avenir">
+    <meta property="og:description" content="Spécialiste en solutions innovantes de stockage d'énergie pour l'industrie ferroviaire québécoise. Économisez jusqu'à 94% avec Li-CUBE PRO™.">
+    <meta property="og:image" content="./image/EdsQuebec/logo edsquebec.png">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.edsquebec.com">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#003F7F">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EDS Québec">
+    <title>🍁 EDS Québec - Solutions Énergétiques Innovantes</title>
+    <link rel="icon" href="./image/EdsQuebec/logo edsquebec.png" type="image/png">
+    
+    <style>
+        /**
+         * =================================================================
+         * EDS QUÉBEC - SYSTÈME CSS UNIFIÉ
+         * =================================================================
+         */
+        :root {
+            /* Couleurs principales thème Québec */
+            --primary: #003F7F;
+            --secondary: #4A90B8;
+            --accent: #F18F01;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #003F7F 0%, #4A90B8 100%);
+            --gradient-accent: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
+            
+            /* Couleurs neutres */
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --dark: #1B365D;
+            
+            /* Effets et ombres */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-xl: 0 15px 40px rgba(0,0,0,0.15);
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.6s ease;
+            
+            /* Rayons de bordure */
+            --radius-sm: 6px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 20px;
+            
+            /* Espacements */
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 3rem;
+            
+            /* Typographie */
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Utilitaires généraux */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .text-center { text-align: center; }
+        .d-flex { display: flex; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .align-center { align-items: center; }
+        .flex-column { flex-direction: column; }
+        .w-full { width: 100%; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow);
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 1.125rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 1rem;
+        }
+
+        .navbar-logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .brand-text h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .brand-text p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin: 0;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-normal);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--gradient-primary);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background: url('./image/EdsQuebec/logo edsquebec.png') center/contain no-repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-accent {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .company-showcase {
+            text-align: center;
+            position: relative;
+        }
+
+        .company-logo {
+            max-width: 400px;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+        }
+
+        .innovation-badge {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all var(--transition-normal);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .service-card p {
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .service-features li {
+            color: var(--gray-700);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Products Section */
+        .product-showcase {
+            background: var(--gray-100);
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .product-image {
+            height: 300px;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .product-content {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .product-content h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .product-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+        }
+
+        .highlight-item i {
+            color: var(--success);
+        }
+
+        /* Applications Section */
+        .applications-section {
+            background: var(--white);
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .application-item {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .application-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .application-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .application-item p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Why Choose Section */
+        .why-choose-section {
+            background: var(--gray-100);
+        }
+
+        .why-choose-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .benefits-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .benefit-content p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .stats-visual {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stats-visual h3 {
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .visual-stat {
+            padding: 1rem;
+            background: var(--gray-100);
+            border-radius: var(--radius);
+        }
+
+        .visual-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .visual-stat-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            height: 60px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gray-300);
+        }
+
+        .contact-item i {
+            color: var(--accent);
+            min-width: 1rem;
+        }
+
+        .contact-item a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color var(--transition-normal);
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--gray-300);
+            margin-bottom: 1rem;
+        }
+
+        .footer-meta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            color: var(--gray-400);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .why-choose-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .hero-actions {
+                justify-content: center;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .services-grid,
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .company-logo {
+                max-width: 250px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .footer-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                min-height: 80vh;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+            
+            .service-card,
+            .product-content {
+                padding: 1.5rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Utilitaires pour l'animation */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all var(--transition-slow);
+            will-change: transform, opacity;
+        }
+
+        .fade-in-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Préchargement des images critiques */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -10000px;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            background: url('./image/EdsQuebec/logo edsquebec.png') no-repeat;
+        }
+
+        /* Optimisations performance */
+        .service-card,
+        .product-card,
+        .application-item {
+            will-change: transform;
+        }
+
+        /* Lazy loading des images non critiques */
+        img[loading="lazy"] {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        img[loading="lazy"].loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="#" class="navbar-brand">
+                    <img src="./image/EdsQuebec/logo edsquebec.png" alt="EDS Québec" class="navbar-logo">
+                    <div class="brand-text">
+                        <h1>EDS Québec</h1>
+                        <p>Energy Dream System</p>
+                    </div>
+                </a>
+                
+                <div class="navbar-menu">
+                    <a href="#accueil" class="nav-link" aria-label="Page d'accueil">
+                        <i class="fas fa-home" aria-hidden="true"></i>
+                        Accueil
+                    </a>
+                    <a href="#services" class="nav-link" aria-label="Nos services">
+                        <i class="fas fa-cogs" aria-hidden="true"></i>
+                        Services
+                    </a>
+                    <a href="#produits" class="nav-link" aria-label="Nos produits">
+                        <i class="fas fa-battery-three-quarters" aria-hidden="true"></i>
+                        Produits
+                    </a>
+                    <a href="#contact" class="nav-link" aria-label="Nous contacter">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Hero -->
+    <section class="hero-section" id="accueil">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span class="hero-accent">EDS Québec</span><br>
+                        Solutions Énergétiques d'Avenir
+                    </h1>
+                    <p class="hero-subtitle">
+                        Spécialiste en solutions innovantes, performantes et sécurisées de stockage d'énergie 
+                        pour l'industrie ferroviaire québécoise.
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">Ans d'expertise</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">94%</div>
+                            <div class="stat-label">Économies TCO</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Fabriqué au Québec</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a href="licubepro.html" class="btn btn-accent btn-lg">
+                            <i class="fas fa-battery-three-quarters"></i>
+                            Découvrir Li-CUBE PRO™
+                        </a>
+                        <a href="#services" class="btn btn-secondary btn-lg">
+                            <i class="fas fa-info-circle"></i>
+                            Nos Services
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="company-showcase">
+                        <img src="./image/EdsQuebec/logo edsquebec.png" alt="EDS Québec" class="company-logo" loading="eager">
+                        <div class="innovation-badge">
+                            <i class="fas fa-leaf"></i>
+                            <span>Innovation Durable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Services -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-header fade-in-element">
+                <h2>Nos Expertises</h2>
+                <p>Des solutions complètes pour vos besoins énergétiques ferroviaires</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card fade-in-element">
+                    <div class="service-icon">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <h3>Batteries Lithium</h3>
+                    <p>Technologies LFP (LiFePO4) de pointe pour applications ferroviaires critiques avec surveillance IoT intégrée.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Durée de vie 4× supérieure</li>
+                        <li><i class="fas fa-check-circle"></i> Maintenance zéro</li>
+                        <li><i class="fas fa-check-circle"></i> Surveillance temps réel</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card fade-in-element">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analyse TCO</h3>
+                    <p>Études personnalisées du coût total de possession sur 20 ans avec comparatifs détaillés Ni-Cd vs Lithium.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Modélisation financière</li>
+                        <li><i class="fas fa-check-circle"></i> Projections sur 20 ans</li>
+                        <li><i class="fas fa-check-circle"></i> ROI personnalisé</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card fade-in-element">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Support Technique</h3>
+                    <p>Accompagnement complet de l'étude de faisabilité à la maintenance préventive de vos installations.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Installation certifiée</li>
+                        <li><i class="fas fa-check-circle"></i> Formation technique</li>
+                        <li><i class="fas fa-check-circle"></i> Support 24/7</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card fade-in-element">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Solutions Flexibles</h3>
+                    <p>Options de financement adaptées : location opérationnelle ou achat direct selon vos besoins budgétaires.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Location dès 150$/mois</li>
+                        <li><i class="fas fa-check-circle"></i> Achat unitaire</li>
+                        <li><i class="fas fa-check-circle"></i> Leasing personnalisé</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Produit Vedette -->
+    <section class="section product-showcase" id="produits">
+        <div class="container">
+            <div class="section-header fade-in-element">
+                <h2>Notre Produit Phare</h2>
+                <p>La révolution du stockage d'énergie ferroviaire</p>
+            </div>
+            
+            <div class="product-card fade-in-element">
+                <div class="product-image">
+                    <img src="./image/Produit/Li-CUBE PRO/Li-CUBE PRO image 1.png" alt="Li-CUBE PRO" loading="lazy">
+                    <div class="product-badge">Révolutionnaire</div>
+                </div>
+                
+                <div class="product-content">
+                    <h3>Li-CUBE PRO™</h3>
+                    <p class="product-description">
+                        La nouvelle génération de batteries lithium LFP (LiFePO4) conçue spécifiquement pour l'industrie ferroviaire. 
+                        <strong>Économisez jusqu'à 94% de votre TCO</strong> avec une technologie de surveillance IoT intégrée.
+                    </p>
+                    
+                    <div class="product-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>8000+ cycles</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-weight-hanging"></i>
+                            <span>71% plus léger</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-tools"></i>
+                            <span>Zéro maintenance</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-wifi"></i>
+                            <span>IoT intégré</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-bolt"></i>
+                            <span>Charge rapide 1-2h</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-leaf"></i>
+                            <span>Éco-responsable</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-actions">
+                        <a href="licubepro.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-eye"></i>
+                            Découvrir Li-CUBE PRO™
+                        </a>
+                        <a href="licubepro.html#calculateur" class="btn btn-accent">
+                            <i class="fas fa-calculator"></i>
+                            Calculer mon TCO
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Applications -->
+    <section class="section applications-section">
+        <div class="container">
+            <div class="section-header fade-in-element">
+                <h2>Applications Ferroviaires</h2>
+                <p>Nos solutions s'adaptent à tous vos besoins critiques</p>
+            </div>
+            
+            <div class="applications-grid">
+                <div class="application-item fade-in-element">
+                    <div class="application-icon">
+                        <i class="fas fa-traffic-light"></i>
+                    </div>
+                    <h3>Signalisation</h3>
+                    <p>Alimentations de secours pour systèmes de signalisation ferroviaire avec autonomie garantie.</p>
+                </div>
+                
+                <div class="application-item fade-in-element">
+                    <div class="application-icon">
+                        <i class="fas fa-broadcast-tower"></i>
+                    </div>
+                    <h3>Communications</h3>
+                    <p>Soutien énergétique pour équipements de communication critiques et systèmes de contrôle.</p>
+                </div>
+                
+                <div class="application-item fade-in-element">
+                    <div class="application-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Éclairage d'Urgence</h3>
+                    <p>Solutions de sauvegarde pour éclairage de sécurité en tunnels et stations souterraines.</p>
+                </div>
+                
+                <div class="application-item fade-in-element">
+                    <div class="application-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Systèmes Critiques</h3>
+                    <p>Alimentations sécurisées pour équipements de sécurité et de surveillance ferroviaire.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Pourquoi EDS -->
+    <section class="section why-choose-section">
+        <div class="container">
+            <div class="why-choose-content">
+                <div class="fade-in-element">
+                    <h2>Pourquoi Choisir EDS Québec ?</h2>
+                    <p style="font-size: 1.125rem; color: var(--gray-600); margin-bottom: 3rem;">
+                        Plus de 20 ans d'expertise au service de l'innovation énergétique québécoise
+                    </p>
+                    
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-maple-leaf"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h3>Expertise Québécoise</h3>
+                                <p>Conception, fabrication et support technique 100% québécois avec connaissance approfondie du marché local.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h3>Innovation Reconnue</h3>
+                                <p>Technologies de pointe certifiées avec surveillance IoT intégrée et performances supérieures prouvées.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h3>Économies Garanties</h3>
+                                <p>Réduction jusqu'à 94% du TCO sur 20 ans avec ROI prouvé et période de retour sur investissement optimale.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="benefit-item">
+                            <div class="benefit-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="benefit-content">
+                                <h3>Responsabilité Environnementale</h3>
+                                <p>Solutions écologiques sans cadmium toxique, recyclables et conformes aux normes environnementales.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-visual fade-in-element">
+                    <h3>Nos Résultats</h3>
+                    <div class="stats-grid">
+                        <div class="visual-stat">
+                            <div class="visual-stat-number">8000+</div>
+                            <div class="visual-stat-label">Cycles garantis</div>
+                        </div>
+                        <div class="visual-stat">
+                            <div class="visual-stat-number">71%</div>
+                            <div class="visual-stat-label">Réduction de poids</div>
+                        </div>
+                        <div class="visual-stat">
+                            <div class="visual-stat-number">0</div>
+                            <div class="visual-stat-label">Maintenance requise</div>
+                        </div>
+                        <div class="visual-stat">
+                            <div class="visual-stat-number">1-2h</div>
+                            <div class="visual-stat-label">Charge complète</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <img src="./image/EdsQuebec/logo edsquebec.png" alt="EDS Québec" class="footer-logo">
+                        <h3>EDS Energy Dream System</h3>
+                        <p style="color: var(--gray-300); line-height: 1.6;">
+                            Spécialiste en solutions innovantes, performantes et sécurisées de stockage d'énergie 
+                            pour l'industrie ferroviaire québécoise.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:8193237859">819 323 7859</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:contact@edsquebec.com">contact@edsquebec.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <div>195, rue Brissette, local A7</div>
+                                <div>Sainte-Agathe-des-Monts, QC J8C 3S4</div>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <a href="https://www.edsquebec.com" target="_blank" rel="noopener">www.edsquebec.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Nos Produits</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <a href="licubepro.html" style="color: var(--gray-300); text-decoration: none; transition: color var(--transition-normal);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--gray-300)'">
+                            Li-CUBE PRO™ - Batteries Ferroviaires
+                        </a>
+                        <span style="color: var(--gray-400); font-size: 0.875rem;">
+                            D'autres produits arrivent bientôt...
+                        </span>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Informations</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <a href="#services" style="color: var(--gray-300); text-decoration: none; transition: color var(--transition-normal);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--gray-300)'">
+                            Nos Services
+                        </a>
+                        <a href="#produits" style="color: var(--gray-300); text-decoration: none; transition: color var(--transition-normal);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--gray-300)'">
+                            Nos Produits
+                        </a>
+                        <a href="https://www.edsquebec.com" target="_blank" rel="noopener" style="color: var(--gray-300); text-decoration: none; transition: color var(--transition-normal);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--gray-300)'">
+                            Site Web Principal
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 EDS Québec - Energy Dream System. Tous droits réservés.</p>
+                <div class="footer-meta">
+                    <span>🍁 Fabriqué au Québec</span>
+                    <span>•</span>
+                    <span>Solutions énergétiques durables</span>
+                    <span>•</span>
+                    <span>Innovation pour un avenir meilleur</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <!-- JavaScript pour les animations et interactions -->
+    <script>
+        // Service Worker pour mise en cache
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(() => {});
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 🍁 EDS Québec - Page d'accueil chargée
+            
+            // Lazy loading des images
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('loaded');
+                            imageObserver.unobserve(entry.target);
+                        }
+                    });
+                });
+                lazyImages.forEach(img => imageObserver.observe(img));
+            } else {
+                lazyImages.forEach(img => img.classList.add('loaded'));
+            }
+
+            // Smooth scrolling pour les liens d'ancrage
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const navHeight = document.querySelector('.navbar').offsetHeight;
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Animation des éléments au scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observer tous les éléments avec la classe fade-in-element
+            document.querySelectorAll('.fade-in-element').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Effet navbar au scroll
+            let lastScrollTop = 0;
+            const navbar = document.querySelector('.navbar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 50) {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                    navbar.style.backdropFilter = 'blur(10px)';
+                } else {
+                    navbar.style.background = 'var(--white)';
+                    navbar.style.backdropFilter = 'none';
+                }
+                
+                lastScrollTop = scrollTop;
+            });
+
+            // Ajout d'un effet de parallax subtil au hero (optimisé)
+            const heroBackground = document.querySelector('.hero-background');
+            if (heroBackground) {
+                let ticking = false;
+                const updateParallax = () => {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.5;
+                    heroBackground.style.transform = `translateY(${rate}px)`;
+                    ticking = false;
+                };
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(updateParallax);
+                        ticking = true;
+                    }
+                });
+            }
+
+            // ✅ Animations et interactions initialisées
+        });
+    </script>
+
+    <!-- CSS pour Font Awesome (si le kit n'est pas disponible) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</body>
+</html>

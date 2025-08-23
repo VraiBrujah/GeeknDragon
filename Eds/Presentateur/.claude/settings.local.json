@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:edsquebec.com)",
+      "Bash(rm:*)",
+      "WebSearch",
+      "Bash(move presentations-vendeurs presentations-ventepresentations-vendeurs)",
+      "Bash(move data-loader.js data-loader-ancien.js)",
+      "Bash(move data-loader-refactorise.js data-loader.js)",
+      "Bash(move:*)",
+      "Bash(find:*)",
+      "Bash(python:*)",
+      "Bash(dir:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "additionalDirectories": [
+      "C:\\Users\\Brujah\\Documents\\image\\EdsQuebec"
+    ]
+  }
+}

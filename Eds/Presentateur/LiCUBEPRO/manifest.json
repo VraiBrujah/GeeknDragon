@@ -1,0 +1,53 @@
+{
+  "name": "Li-CUBE PRO™ - EDS Québec",
+  "short_name": "Li-CUBE PRO™",
+  "description": "Batteries lithium ferroviaires révolutionnaires avec 94% d'économies TCO",
+  "start_url": "/edsquebec.html",
+  "display": "standalone",
+  "background_color": "#003F7F",
+  "theme_color": "#003F7F",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity", "education"],
+  "lang": "fr-CA",
+  
+  "icons": [
+    {
+      "src": "./image/EdsQuebec/logo edsquebec.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  
+  "screenshots": [
+    {
+      "src": "./image/Produit/Li-CUBE PRO/Li-CUBE PRO image 1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Li-CUBE PRO™ Product Showcase"
+    }
+  ],
+  
+  "shortcuts": [
+    {
+      "name": "Li-CUBE PRO™",
+      "url": "/licubepro.html",
+      "description": "Accès direct au produit Li-CUBE PRO™"
+    },
+    {
+      "name": "Calculateur TCO",
+      "url": "/licubepro.html#calculateur",
+      "description": "Calculer vos économies TCO"
+    }
+  ],
+  
+  "related_applications": [],
+  "prefer_related_applications": false,
+  
+  "scope": "/",
+  "id": "eds-quebec-licube-pro",
+  
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

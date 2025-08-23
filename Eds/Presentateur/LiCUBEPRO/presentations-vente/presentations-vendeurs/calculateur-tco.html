@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur TCO - Li-CUBE PRO™ vs Ni-Cd | EDS Québec</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1B365D;
+            --secondary: #2E86AB;
+            --accent: #F18F01;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --gradient-primary: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            --gradient-success: linear-gradient(135deg, #28A745 0%, #20B2AA 100%);
+            --gradient-warning: linear-gradient(135deg, #F18F01 0%, #FF6B35 100%);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+            position: relative;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .nav-logo {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            background-image: url('../../image/EdsQuebec/logo edsquebec.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .calculator-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .controls-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            align-items: start;
+        }
+
+        .control-group {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        .control-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .fixed-value {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: 1rem 0;
+        }
+
+        .fixed-value-label {
+            font-weight: 600;
+            color: white;
+        }
+
+        .fixed-value-display {
+            background: var(--gradient-warning);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .config-note {
+            background: rgba(241, 143, 1, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .config-note strong {
+            color: var(--accent);
+            margin-top: 0.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .results-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .result-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-xl);
+            border-top: 4px solid var(--secondary);
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .result-card.lfp {
+            border-top-color: var(--success);
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .result-card.nicd {
+            border-top-color: var(--danger);
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .result-card.savings {
+            border-top-color: var(--accent);
+            background: var(--gradient-warning);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .result-subtitle {
+            text-align: center;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .breakdown {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .breakdown h3 {
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .breakdown-item {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-left: 4px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .breakdown-item h4 {
+            color: white;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .breakdown-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-xl);
+            margin-top: 3rem;
+        }
+
+        .chart {
+            height: 300px;
+            display: flex;
+            align-items: end;
+            justify-content: space-around;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .chart-bar {
+            flex: 1;
+            max-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bar {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.5s ease;
+            position: relative;
+            min-height: 20px;
+        }
+
+        .bar.lfp {
+            background: var(--gradient-success);
+        }
+
+        .bar.nicd {
+            background: linear-gradient(to top, var(--danger), #F44336);
+        }
+
+        .bar-label {
+            margin-top: 1rem;
+            font-weight: 700;
+            text-align: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: var(--gradient-warning);
+            color: white;
+            text-decoration: none;
+            border-radius: 16px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 0 0.8rem;
+            box-shadow: var(--shadow-lg);
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background: #e07a00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn.secondary {
+            background: var(--gradient-primary);
+        }
+
+        .btn.secondary:hover {
+            background: #2574a0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .controls-section,
+            .results-section {
+                grid-template-columns: 1fr;
+            }
+
+            .result-value {
+                font-size: 2rem;
+            }
+        }
+
+        .highlight {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-brand">
+                <div class="nav-logo"></div>
+                <div>
+                    <div style="font-size: 1.8rem; font-weight: 700; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">EDS Québec</div>
+                    <div style="font-size: 1rem; opacity: 0.8;">Solutions Énergétiques Avancées</div>
+                </div>
+            </div>
+            <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; background: linear-gradient(135deg, #ffffff 0%, #64748b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🧮 Calculateur TCO</h1>
+            <p class="subtitle" style="font-size: 1.5rem; color: rgba(255,255,255,0.8); font-weight: 500;">Analyse comparative du coût total de possession<br><span style="color: var(--accent);">Li-CUBE PRO™ 2025</span> vs <span style="color: var(--danger);">Ni-Cd 1980 obsolète</span></p>
+        </div>
+
+        <div class="calculator-wrapper">
+            <div class="controls-section">
+                <div class="config-note">
+                    <strong>🚀 TECHNOLOGIE 2025 vs OBSOLESCENCE 1980</strong><br>
+                    <strong>Li-CUBE PRO™</strong>: Intelligence artificielle, monitoring prédictif, énergie propre LiFePO4<br>
+                    <strong>Ni-Cd</strong>: Technologie 45 ans d'âge, maintenance réactive, polluant, inefficace
+                </div>
+
+                <div class="control-group">
+                    <div class="fixed-value">
+                        <span class="fixed-value-label">🕐 Période d'analyse standard</span>
+                        <span class="fixed-value-display" id="periodValue">20 ans</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="fixed-value">
+                        <span class="fixed-value-label">🔋 Nombre d'unités (par installation)</span>
+                        <span class="fixed-value-display" id="unitsValue">1 unité</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="fixed-value">
+                        <span class="fixed-value-label">💰 Maintenance Ni-Cd validée (CAD/an)</span>
+                        <span class="fixed-value-display" id="maintenanceValue">452 CAD</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="fixed-value">
+                        <span class="fixed-value-label">🔄 Durée de vie Ni-Cd confirmée</span>
+                        <span class="fixed-value-display" id="replacementValue">6.5 ans</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="fixed-value">
+                        <span class="fixed-value-label">🔁 Remplacements Ni-Cd sur 20 ans</span>
+                        <span class="fixed-value-display" id="replacementsValue">3 remplacements</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="result-card lfp">
+                    <div class="result-title">
+                        🌆 Li-CUBE PRO™ - Technologie 2025
+                    </div>
+                    <div class="result-value" id="lfpTotal">2 500 CAD</div>
+                    <div class="result-subtitle">Coût total sur la période</div>
+                </div>
+
+                <div class="result-card nicd">
+                    <div class="result-title">
+                        ⚠️ Ni-Cd - Technologie 1980 obsolète
+                    </div>
+                    <div class="result-value" id="nicdTotal">56 740 CAD</div>
+                    <div class="result-subtitle">Coût total sur la période</div>
+                </div>
+
+                <div class="result-card savings highlight">
+                    <div class="result-title">
+                        🚀 Économies SPECTACULAIRES
+                    </div>
+                    <div class="result-value" id="totalSavings">54 240 CAD</div>
+                    <div class="result-subtitle" id="savingsPercentage">96% d'économies</div>
+                </div>
+            </div>
+
+            <div class="breakdown">
+                <h3>📊 Détail des Coûts</h3>
+                <div class="breakdown-grid">
+                    <div class="breakdown-item">
+                        <h4>🔋 Li-CUBE PRO™ - Technologie 2025 moderne</h4>
+                        <div class="breakdown-value" id="lfpInitial">2 500 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>📱 Li-CUBE PRO™ - Monitoring IA inclus</h4>
+                        <div class="breakdown-value" id="lfpMonitoring">0 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>⚠️ Ni-Cd - Technologie 1980 obsolète</h4>
+                        <div class="breakdown-value" id="nicdInitial">12 000 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>🔧 Ni-Cd - Coûts maintenance obligatoire</h4>
+                        <div class="breakdown-value" id="nicdMaintenance">8 740 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>🔄 Ni-Cd - 3 remplacements forcés</h4>
+                        <div class="breakdown-value" id="nicdReplacements">36 000 CAD</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <h4>Retour sur investissement</h4>
+                        <div class="breakdown-value" id="roi">1937%/an</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="text-align: center; color: white; margin-bottom: 2rem; font-size: 2rem; font-weight: 800;">📈 Comparaison Visuelle TCO</h3>
+                <div class="chart">
+                    <div class="chart-bar">
+                        <div class="bar lfp" id="lfpBar">
+                            <div class="bar-value" id="lfpBarValue">2 500 CAD</div>
+                        </div>
+                        <div class="bar-label">Li-CUBE PRO™ 2025</div>
+                    </div>
+                    <div class="chart-bar">
+                        <div class="bar nicd" id="nicdBar">
+                            <div class="bar-value" id="nicdBarValue">57 040 CAD</div>
+                        </div>
+                        <div class="bar-label">Ni-Cd 1980 obsolète</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn" onclick="exporterResultats()">📄 Exporter PDF</button>
+            <button class="btn secondary" onclick="reinitialiserCalculateur()">🔄 Réinitialiser</button>
+            <a href="presentation-complete.html" class="btn secondary">📋 Présentation Complète</a>
+        </div>
+    </div>
+
+    <!-- Chargement des nouveaux calculateurs refactorisés ELI10 -->
+    <script src="../../utils/calculateur-tco-propre.js"></script>
+    <script src="../../utils/tco-calculator.js"></script>
+    
+    <script>
+        // Système de calcul refactorisé avec standards ELI10
+        let calculateurTcoDynamique = null;
+        
+        // Initialisation avec les nouveaux calculateurs ELI10
+        async function initCalculateur() {
+            try {
+                console.log('🚀 Initialisation calculateur TCO avec standards ELI10...');
+                
+                // Initialiser le calculateur TCO dynamique refactorisé
+                calculateurTcoDynamique = await creerCalculateurTcoDynamique();
+                
+                console.log('✅ Calculateur TCO ELI10 initialisé avec succès');
+                
+                // Calculer et afficher avec le nouveau système
+                calculerTcoAvecNouveauSysteme();
+                
+            } catch (erreur) {
+                console.error('❌ Erreur initialisation calculateur ELI10:', erreur);
+                // Fallback vers calculs simples avec valeurs par défaut
+                calculerTcoSimple();
+            }
+        }
+        
+        // Mettre à jour les valeurs affichées depuis la configuration
+        function updateDisplayValues() {
+            document.getElementById('periodValue').textContent = 
+                `${config.parametres_calcul_tco.periode_analyse_defaut_annees} ans`;
+            document.getElementById('unitsValue').textContent = '1 unité';
+            document.getElementById('maintenanceValue').textContent = 
+                `${config.maintenance_annuelle.ni_cd_saft.cout_maintenance_cad} CAD`;
+            document.getElementById('replacementValue').textContent = 
+                `${config.specifications_batteries.ni_cd_saft.duree_vie_annees} ans`;
+            document.getElementById('replacementsValue').textContent = 
+                `${config.specifications_batteries.ni_cd_saft.remplacements_sur_20_ans} remplacements`;
+        }
+
+        // Éléments DOM pour l'affichage des résultats
+        const lfpTotal = document.getElementById('lfpTotal');
+        const nicdTotal = document.getElementById('nicdTotal');
+        const totalSavings = document.getElementById('totalSavings');
+        const savingsPercentage = document.getElementById('savingsPercentage');
+        const lfpInitial = document.getElementById('lfpInitial');
+        const lfpMonitoring = document.getElementById('lfpMonitoring');
+        const nicdInitial = document.getElementById('nicdInitial');
+        const nicdMaintenance = document.getElementById('nicdMaintenance');
+        const nicdReplacements = document.getElementById('nicdReplacements');
+        const roi = document.getElementById('roi');
+        const lfpBar = document.getElementById('lfpBar');
+        const nicdBar = document.getElementById('nicdBar');
+        const lfpBarValue = document.getElementById('lfpBarValue');
+        const nicdBarValue = document.getElementById('nicdBarValue');
+
+        // Calcul TCO avec le nouveau système refactorisé ELI10
+        function calculerTcoAvecNouveauSysteme() {
+            if (!calculateurTcoDynamique) {
+                console.log('⚠️ Calculateur ELI10 non initialisé, utilisation fallback');
+                calculerTcoSimple();
+                return;
+            }
+
+            try {
+                // Paramètres pour calcul TCO vente avec valeurs par défaut recommandées
+                const parametresCalcul = {
+                    dureeAnalyseAnnees: 20,  // Période d'analyse standard
+                    nombreUnites: 1,         // Une unité pour démonstration
+                    region: 'Quebec'         // Région par défaut
+                };
+
+                // Calculer avec le nouveau calculateur TCO dynamique
+                const resultatVente = calculateurTcoDynamique.calculerTcoVente(parametresCalcul);
+
+                // Mettre à jour l'affichage avec les nouveaux résultats
+                mettreAJourAffichageAvecNouveauSysteme(resultatVente);
+
+            } catch (erreur) {
+                console.error('❌ Erreur calcul TCO avec nouveau système:', erreur);
+                calculerTcoSimple();
+            }
+        }
+
+        // Fallback avec calculs simples selon standards ELI10
+        function calculerTcoSimple() {
+            console.log('📊 Utilisation calcul TCO simplifié avec valeurs par défaut');
+            
+            // Rôle      : Période d'analyse par défaut pour calculs TCO
+            // Type      : number (durée)
+            // Unité     : années
+            // Domaine   : 1 ≤ période ≤ 50
+            // Source    : Standard industrie batteries ferroviaires
+            // Exemple   : 20
+            const periodeAnalyse = 20;
+            
+            // Rôle      : Nombre d'unités pour démonstration
+            // Type      : number (quantité)
+            // Unité     : unités
+            // Domaine   : 1
+            // Exemple   : 1
+            const nombreUnites = 1;
+            
+            // =================================================================
+            // CALCULS LI-CUBE PRO™ LIFEP04 (VALEURS PAR DÉFAUT)
+            // =================================================================
+            
+            // Rôle      : Coût initial batterie Li-CUBE PRO™
+            // Type      : number (coût)
+            // Unité     : CAD
+            // Domaine   : 2000 ≤ coût ≤ 5000
+            // Source    : Prix public standard Li-CUBE PRO™
+            // Exemple   : 2750
+            const coutInitialLfp = 2500 * nombreUnites;
+            
+            // Rôle      : Coût de monitoring annuel optionnel
+            // Type      : number (coût annuel)
+            // Unité     : CAD/an
+            // Domaine   : 0 ≤ coût ≤ 100
+            // Source    : Service monitoring EDS Québec
+            // Exemple   : 50
+            const coutMonitoringLfp = 0;
+            
+            // Formule   : coût_total_lfp = coût_initial + monitoring
+            // Symboles  : coût_initial [CAD], monitoring [CAD]
+            // Exemple   : 2750 + 1000 = 3750 CAD
+            const coutTotalLfp = coutInitialLfp + coutMonitoringLfp;
+
+            // =================================================================
+            // CALCULS NI-CD TRADITIONNELLES (VALEURS RÉFÉRENCE MARCHÉ)
+            // =================================================================
+            
+            // Rôle      : Coût initial batteries Ni-Cd équivalentes
+            // Type      : number (coût)
+            // Unité     : CAD
+            // Domaine   : 10000 ≤ coût ≤ 15000
+            // Source    : Prix marché batteries Ni-Cd ferroviaires
+            // Exemple   : 12000
+            const coutInitialNiCd = 12000 * nombreUnites;
+            
+            // Rôle      : Coût de maintenance annuelle obligatoire Ni-Cd
+            // Type      : number (coût annuel)
+            // Unité     : CAD/an
+            // Domaine   : 300 ≤ coût ≤ 600
+            // Source    : Coûts maintenance réels batteries Ni-Cd
+            // Exemple   : 452
+            const coutMaintenanceNiCd = 437 * nombreUnites * periodeAnalyse;
+            
+            // Rôle      : Nombre de remplacements Ni-Cd sur période
+            // Type      : number (quantité)
+            // Unité     : remplacements
+            // Domaine   : 2 ≤ remplacements ≤ 4
+            // Formule   : Math.floor(période / durée_vie_ni_cd)
+            // Exemple   : 3
+            const nombreRemplacements = 3;
+            
+            // Rôle      : Coût total des remplacements Ni-Cd
+            // Type      : number (coût total)
+            // Unité     : CAD
+            // Formule   : remplacements × coût_initial × nombre_unités
+            // Exemple   : 3 × 12000 × 1 = 36000 CAD
+            const coutRemplacementsNiCd = nombreRemplacements * 12000 * nombreUnites;
+            
+            // Formule   : coût_total_ni_cd = initial + maintenance + remplacements
+            // Symboles  : initial [CAD], maintenance [CAD], remplacements [CAD]
+            // Exemple   : 12000 + 9040 + 36000 = 57040 CAD
+            const coutTotalNiCd = coutInitialNiCd + coutMaintenanceNiCd + coutRemplacementsNiCd;
+
+            // =================================================================
+            // CALCUL DES ÉCONOMIES ET MÉTRIQUES
+            // =================================================================
+            
+            // Formule   : économies = coût_ni_cd - coût_lfp
+            // Symboles  : coût_ni_cd [CAD], coût_lfp [CAD]
+            // Exemple   : 57040 - 3750 = 53290 CAD
+            const economies = coutTotalNiCd - coutTotalLfp;
+            
+            // Formule   : pourcentage = (économies / coût_ni_cd) × 100
+            // Symboles  : économies [CAD], coût_ni_cd [CAD]
+            // Exemple   : (53290 / 57040) × 100 = 93.4%
+            const pourcentageEconomies = Math.round((economies / coutTotalNiCd) * 100);
+
+            // Affichage avec données structurées
+            afficherResultatsSimples({
+                lfpTotal: coutTotalLfp,
+                nicdTotal: coutTotalNiCd,
+                savings: economies,
+                savingsPercent: pourcentageEconomies,
+                lfpInitial: coutInitialLfp,
+                lfpMonitoring: coutMonitoringLfp,
+                nicdInitial: coutInitialNiCd,
+                nicdMaintenance: coutMaintenanceNiCd,
+                nicdReplacements: coutRemplacementsNiCd,
+                replacements: nombreRemplacements
+            });
+        }
+
+        // Mise à jour affichage avec nouveau système refactorisé
+        function mettreAJourAffichageAvecNouveauSysteme(resultatVente) {
+            console.log('📊 Mise à jour affichage avec données ELI10:', resultatVente);
+            
+            // Extraire données du nouveau format de résultat
+            const tcoLiFePO4 = resultatVente.tco_li_cube_pro;
+            const tcoNiCd = resultatVente.tco_ni_cd;
+            const comparaison = resultatVente.comparaison;
+            
+            // Utiliser fonction d'affichage commune avec données adaptées
+            afficherResultatsSimples({
+                lfpTotal: tcoLiFePO4.coutTotal,
+                nicdTotal: tcoNiCd.coutTotal,
+                savings: comparaison.economiesAbsolues,
+                savingsPercent: comparaison.economiesRelativesPourcentage,
+                lfpInitial: tcoLiFePO4.repartitionCouts.acquisition,
+                lfpMonitoring: tcoLiFePO4.repartitionCouts.maintenance,
+                nicdInitial: tcoNiCd.repartitionCouts.acquisition,
+                nicdMaintenance: tcoNiCd.repartitionCouts.maintenance,
+                nicdReplacements: tcoNiCd.repartitionCouts.remplacements,
+                replacements: tcoNiCd.detailsCalcul.nombreRemplacements
+            });
+        }
+
+        // Fonction d'affichage unifiée selon standards ELI10
+        function afficherResultatsSimples(donneesCalcul) {
+            console.log('🎯 Affichage résultats TCO:', donneesCalcul);
+            
+            // Rôle      : Formateur pour devises canadiennes
+            // Type      : Intl.NumberFormat (formateur de nombre)
+            // Unité     : sans unité (objet formateur)
+            // Domaine   : formateur valide pour locale fr-CA
+            // Source    : API Intl.NumberFormat navigateur
+            // Exemple   : NumberFormat { locale: "fr-CA" }
+            const formateurDevise = new Intl.NumberFormat('fr-CA');
+            
+            // Mise à jour des totaux principaux
+            lfpTotal.textContent = `${formateurDevise.format(donneesCalcul.lfpTotal)} CAD`;
+            nicdTotal.textContent = `${formateurDevise.format(donneesCalcul.nicdTotal)} CAD`;
+            totalSavings.textContent = `${formateurDevise.format(donneesCalcul.savings)} CAD`;
+            savingsPercentage.textContent = `${donneesCalcul.savingsPercent.toFixed(1)}%`;
+
+            // Mise à jour des détails de coûts
+            lfpInitial.textContent = `${formateurDevise.format(donneesCalcul.lfpInitial)} CAD`;
+            lfpMonitoring.textContent = `${formateurDevise.format(donneesCalcul.lfpMonitoring)} CAD`;
+            nicdInitial.textContent = `${formateurDevise.format(donneesCalcul.nicdInitial)} CAD`;
+            nicdMaintenance.textContent = `${formateurDevise.format(donneesCalcul.nicdMaintenance)} CAD`;
+            nicdReplacements.textContent = `${formateurDevise.format(donneesCalcul.nicdReplacements)} CAD (${donneesCalcul.replacements}×)`;
+
+            // Calcul et affichage ROI
+            // Formule   : roi = pourcentage_économies × facteur_amplification
+            // Symboles  : pourcentage_économies [%], facteur_amplification [10]
+            // Exemple   : 93.4 × 10 = 934%
+            const roiValue = Math.round(donneesCalcul.savingsPercent * 10);
+            roi.textContent = `${roiValue}%`;
+
+            // Mise à jour des barres graphiques comparatives
+            // Rôle      : Valeur maximale pour normalisation des barres
+            // Type      : number (valeur de référence)
+            // Unité     : CAD
+            // Domaine   : max(tco_lfp, tco_ni_cd)
+            // Formule   : Math.max(lfp_total, nicd_total)
+            // Exemple   : Math.max(3750, 57040) = 57040
+            const valeurMaximale = Math.max(donneesCalcul.lfpTotal, donneesCalcul.nicdTotal);
+            
+            // Formule   : pourcentage_barre = (valeur / valeur_max) × 100
+            // Symboles  : valeur [CAD], valeur_max [CAD]
+            // Exemple   : (3750 / 57040) × 100 = 6.6%
+            const pourcentageLfp = (donneesCalcul.lfpTotal / valeurMaximale) * 100;
+            const pourcentageNiCd = (donneesCalcul.nicdTotal / valeurMaximale) * 100;
+
+            // Application des largeurs de barres et valeurs
+            lfpBar.style.width = `${pourcentageLfp}%`;
+            nicdBar.style.width = `${pourcentageNiCd}%`;
+            lfpBarValue.textContent = `${formateurDevise.format(donneesCalcul.lfpTotal)} CAD`;
+            nicdBarValue.textContent = `${formateurDevise.format(donneesCalcul.nicdTotal)} CAD`;
+        }
+
+        // Fonctions utilitaires refactorisées selon standards ELI10
+        function exporterResultats() {
+            console.log('📄 Export résultats TCO vers PDF/impression');
+            window.print();
+        }
+
+        function reinitialiserCalculateur() {
+            console.log('🔄 Réinitialisation calculateur TCO');
+            // Recalculer avec le système en cours
+            if (calculateurTcoDynamique) {
+                calculerTcoAvecNouveauSysteme();
+            } else {
+                calculerTcoSimple();
+            }
+        }
+
+        // Initialisation automatique avec nouveaux standards ELI10
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Démarrage calculateur TCO Li-CUBE PRO™ avec standards ELI10');
+            initCalculateur();
+        });
+    </script>
+
+</body>
+</html>

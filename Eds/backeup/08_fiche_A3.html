@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ LFP - Fiche Technique A3 | EDS Québec</title>
+    <meta name="description" content="Fiche technique A3 Li-CUBE PRO™ LFP 24V 105Ah pour impression professionnelle 300 DPI">
+    
+    <!-- Fonts for print -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =====================================
+           FICHE A3 - Print Ready 300 DPI
+           Format: 297 × 420 mm + 3mm bleed
+           ===================================== */
+        
+        :root {
+            --primary-blue: #2E86AB;
+            --secondary-magenta: #A23B72;
+            --accent-orange: #F18F01;
+            --alert-red: #C73E1D;
+            --success-green: #28A745;
+            --neutral-light: #F8F9FA;
+            --neutral-dark: #212529;
+            
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Open Sans', sans-serif;
+        }
+        
+        /* Page Setup - A3 with bleed */
+        @page {
+            size: 303mm 426mm; /* A3 + 3mm bleed */
+            margin: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 3mm; /* Bleed margin */
+            font-family: var(--font-secondary);
+            font-size: 10pt;
+            line-height: 1.4;
+            color: var(--neutral-dark);
+            background: linear-gradient(135deg, var(--neutral-light) 0%, rgba(46, 134, 171, 0.05) 100%);
+            width: 297mm;
+            height: 420mm;
+            box-sizing: border-box;
+        }
+        
+        .fiche-container {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 5mm;
+            background: white;
+            padding: 8mm;
+            box-sizing: border-box;
+            border-radius: 2mm;
+            box-shadow: 0 2mm 8mm rgba(0,0,0,0.1);
+        }
+        
+        /* Header */
+        .fiche-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            border-bottom: 2pt solid var(--primary-blue);
+            padding-bottom: 5mm;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 5mm;
+        }
+        
+        .brand-logo {
+            width: 15mm;
+            height: 15mm;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 8pt;
+        }
+        
+        .brand-info h1 {
+            font-family: var(--font-primary);
+            font-size: 16pt;
+            font-weight: 800;
+            margin: 0 0 2mm 0;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .brand-subtitle {
+            font-size: 9pt;
+            color: #6c757d;
+            margin: 0;
+        }
+        
+        .header-specs {
+            text-align: right;
+            font-family: var(--font-primary);
+        }
+        
+        .spec-main {
+            font-size: 18pt;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 0;
+        }
+        
+        .spec-sub {
+            font-size: 8pt;
+            color: #6c757d;
+            margin: 1mm 0 0 0;
+        }
+        
+        /* Main Content */
+        .fiche-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8mm;
+        }
+        
+        .content-left,
+        .content-right {
+            display: flex;
+            flex-direction: column;
+            gap: 6mm;
+        }
+        
+        /* Product Visual */
+        .product-visual {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-magenta));
+            border-radius: 3mm;
+            padding: 6mm;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            z-index: 1;
+        }
+        
+        .product-image {
+            width: 100%;
+            max-width: 80mm;
+            height: 40mm;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 4mm;
+            font-size: 24pt;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .product-name {
+            font-family: var(--font-primary);
+            font-size: 12pt;
+            font-weight: 700;
+            margin: 0 0 2mm 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .product-tech {
+            font-size: 8pt;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Specifications Table */
+        .specs-section {
+            background: white;
+            border: 1pt solid #e9ecef;
+            border-radius: 2mm;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            background: var(--primary-blue);
+            color: white;
+            padding: 3mm;
+            margin: 0;
+            font-family: var(--font-primary);
+            font-size: 10pt;
+            font-weight: 600;
+        }
+        
+        .specs-grid {
+            padding: 4mm;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3mm;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2mm 0;
+            border-bottom: 0.5pt solid #e9ecef;
+        }
+        
+        .spec-label {
+            font-size: 8pt;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        
+        .spec-value {
+            font-size: 9pt;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+        
+        /* Comparison Table */
+        .comparison-section {
+            grid-column: 1 / -1;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+            margin-top: 2mm;
+        }
+        
+        .comparison-table th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2mm;
+            font-weight: 600;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 2mm;
+            border-bottom: 0.5pt solid #e9ecef;
+        }
+        
+        .lfp-value {
+            color: var(--success-green);
+            font-weight: 600;
+        }
+        
+        .nicd-value {
+            color: var(--alert-red);
+            font-weight: 600;
+        }
+        
+        .improvement {
+            color: var(--accent-orange);
+            font-weight: 600;
+            font-size: 7pt;
+        }
+        
+        /* Features Grid */
+        .features-section {
+            grid-column: 1 / -1;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3mm;
+            margin-top: 2mm;
+        }
+        
+        .feature-item {
+            background: linear-gradient(135deg, var(--neutral-light), rgba(46, 134, 171, 0.05));
+            border-radius: 2mm;
+            padding: 3mm;
+            text-align: center;
+            border: 0.5pt solid #e9ecef;
+        }
+        
+        .feature-icon {
+            font-size: 14pt;
+            margin-bottom: 2mm;
+            display: block;
+        }
+        
+        .feature-title {
+            font-family: var(--font-primary);
+            font-size: 8pt;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin: 0 0 1mm 0;
+        }
+        
+        .feature-desc {
+            font-size: 7pt;
+            color: #6c757d;
+            margin: 0;
+        }
+        
+        /* TCO Highlight */
+        .tco-highlight {
+            background: linear-gradient(135deg, var(--success-green), var(--accent-orange));
+            color: white;
+            border-radius: 3mm;
+            padding: 4mm;
+            text-align: center;
+        }
+        
+        .tco-title {
+            font-family: var(--font-primary);
+            font-size: 9pt;
+            font-weight: 600;
+            margin: 0 0 2mm 0;
+        }
+        
+        .tco-amount {
+            font-size: 16pt;
+            font-weight: 800;
+            margin: 0 0 1mm 0;
+        }
+        
+        .tco-period {
+            font-size: 7pt;
+            opacity: 0.9;
+            margin: 0;
+        }
+        
+        .tco-comparison {
+            margin-top: 2mm;
+            font-size: 7pt;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        .fiche-footer {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            border-top: 1pt solid #e9ecef;
+            padding-top: 3mm;
+        }
+        
+        .footer-contact {
+            font-size: 7pt;
+            color: #6c757d;
+        }
+        
+        .contact-line {
+            margin: 0.5mm 0;
+        }
+        
+        .footer-certif {
+            display: flex;
+            gap: 3mm;
+            align-items: center;
+        }
+        
+        .certif-badge {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1mm 2mm;
+            border-radius: 1mm;
+            font-size: 6pt;
+            font-weight: 600;
+        }
+        
+        .footer-logo {
+            font-family: var(--font-primary);
+            font-size: 8pt;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        /* Print optimizations */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .fiche-container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- Header -->
+        <header class="fiche-header">
+            <div class="header-brand">
+                <div class="brand-logo">EDS</div>
+                <div class="brand-info">
+                    <h1>Li-CUBE PRO™ LFP</h1>
+                    <p class="brand-subtitle">Batterie Ferroviaire Nouvelle Génération</p>
+                </div>
+            </div>
+            <div class="header-specs">
+                <div class="spec-main">24V 105Ah</div>
+                <div class="spec-sub">LiFePO4 Railway Battery</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="fiche-content">
+            <div class="content-left">
+                <!-- Product Visual -->
+                <section class="product-visual">
+                    <div class="product-image">🔋</div>
+                    <h2 class="product-name">Li-CUBE PRO™ LFP</h2>
+                    <p class="product-tech">Technologie LiFePO4 | Système BMS Intégré</p>
+                </section>
+
+                <!-- Electrical Specifications -->
+                <section class="specs-section">
+                    <h3 class="section-title">⚡ Caractéristiques Électriques</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Tension nominale</span>
+                            <span class="spec-value">24V</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Capacité</span>
+                            <span class="spec-value">105Ah</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Énergie</span>
+                            <span class="spec-value">2520Wh</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Efficacité</span>
+                            <span class="spec-value">98%</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Décharge max</span>
+                            <span class="spec-value">3C (315A)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Charge max</span>
+                            <span class="spec-value">1C (105A)</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Mechanical Specifications -->
+                <section class="specs-section">
+                    <h3 class="section-title">🔧 Caractéristiques Mécaniques</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Poids</span>
+                            <span class="spec-value">23 kg</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Dimensions</span>
+                            <span class="spec-value">450×320×180mm</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Indice protection</span>
+                            <span class="spec-value">IP65</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Montage</span>
+                            <span class="spec-value">Rack 19"</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Température</span>
+                            <span class="spec-value">-40°C à +70°C</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Vibrations</span>
+                            <span class="spec-value">IEC 61373</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TCO Highlight -->
+                <section class="tco-highlight">
+                    <h3 class="tco-title">💰 TCO Optimisé</h3>
+                    <div class="tco-amount">2 500 CAD</div>
+                    <div class="tco-period">Total sur 20 ans</div>
+                    <div class="tco-comparison">vs 61 500 CAD Ni-Cd (-96%)</div>
+                </section>
+            </div>
+
+            <div class="content-right">
+                <!-- Performance Comparison -->
+                <section class="specs-section comparison-section">
+                    <h3 class="section-title">📊 Comparaison vs Ni-Cd</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Critère</th>
+                                <th>Li-CUBE PRO™</th>
+                                <th>Ni-Cd</th>
+                                <th>Amélioration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Poids</td>
+                                <td class="lfp-value">23 kg</td>
+                                <td class="nicd-value">80 kg</td>
+                                <td class="improvement">-71%</td>
+                            </tr>
+                            <tr>
+                                <td>Cycles</td>
+                                <td class="lfp-value">≥8000</td>
+                                <td class="nicd-value">2000-3000</td>
+                                <td class="improvement">+167%</td>
+                            </tr>
+                            <tr>
+                                <td>Maintenance</td>
+                                <td class="lfp-value">Zéro</td>
+                                <td class="nicd-value">2 visites/an</td>
+                                <td class="improvement">-100%</td>
+                            </tr>
+                            <tr>
+                                <td>Efficacité</td>
+                                <td class="lfp-value">98%</td>
+                                <td class="nicd-value">85%</td>
+                                <td class="improvement">+13%</td>
+                            </tr>
+                            <tr>
+                                <td>Plage T°</td>
+                                <td class="lfp-value">-40°C/+70°C</td>
+                                <td class="nicd-value">-20°C/+60°C</td>
+                                <td class="improvement">+30°C</td>
+                            </tr>
+                            <tr>
+                                <td>Environnement</td>
+                                <td class="lfp-value">Éco-responsable</td>
+                                <td class="nicd-value">Cd toxique</td>
+                                <td class="improvement">100% propre</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Key Features -->
+                <section class="specs-section features-section">
+                    <h3 class="section-title">🌟 Avantages Clés</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <h4 class="feature-title">Haute Performance</h4>
+                            <p class="feature-desc">3C décharge, 98% efficacité</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔒</span>
+                            <h4 class="feature-title">Sécurité Intrinsèque</h4>
+                            <p class="feature-desc">LiFePO4 stable, BMS avancé</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🌱</span>
+                            <h4 class="feature-title">Éco-Responsable</h4>
+                            <p class="feature-desc">Sans métaux lourds</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📊</span>
+                            <h4 class="feature-title">Monitoring BMS</h4>
+                            <p class="feature-desc">Télémétrie temps réel</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔧</span>
+                            <h4 class="feature-title">Drop-in Replace</h4>
+                            <p class="feature-desc">Compatible existant</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🛡️</span>
+                            <h4 class="feature-title">Garantie 5 ans</h4>
+                            <p class="feature-desc">4000 cycles minimum</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Lifecycle Specifications -->
+                <section class="specs-section">
+                    <h3 class="section-title">🔄 Durée de Vie</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">Cycles de vie</span>
+                            <span class="spec-value">≥8000 cycles</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Durée calendaire</span>
+                            <span class="spec-value">15+ ans</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Maintenance</span>
+                            <span class="spec-value">Aucune</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Garantie</span>
+                            <span class="spec-value">5 ans</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">DOD recommandé</span>
+                            <span class="spec-value">80%</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Auto-décharge</span>
+                            <span class="spec-value">&lt;3%/mois</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="fiche-footer">
+            <div class="footer-contact">
+                <div class="contact-line"><strong>EDS Québec</strong> • 123 Rue Innovation, Montréal, QC H2X 1A1</div>
+                <div class="contact-line">📞 +1 (514) 555-CUBE • ✉️ info@eds-quebec.com • 🌐 www.eds-quebec.com/li-cube-pro</div>
+            </div>
+            <div class="footer-certif">
+                <span class="certif-badge">EN 50155</span>
+                <span class="certif-badge">IEC 61373</span>
+                <span class="certif-badge">UL 991</span>
+                <div class="footer-logo">Li-CUBE PRO™</div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

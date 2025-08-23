@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparaison Détaillée LOCATION - Li-CUBE PRO™ vs Ni-Cd</title>
+    <style>
+        :root {
+            --primary-color: #1B365D;
+            --secondary-color: #2E86AB;
+            --accent-color: #F18F01;
+            --success-color: #28A745;
+            --warning-color: #FFC107;
+            --danger-color: #DC3545;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --bg-gradient: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .comparison-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--primary-color);
+            overflow-x: auto;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tab {
+            padding: 0.8rem 1.2rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tab.active {
+            background: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2rem;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card.lfp {
+            border-top: 4px solid var(--success-color);
+        }
+
+        .product-card.lfp::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--success-color), #4CAF50);
+        }
+
+        .product-card.nicd {
+            border-top: 4px solid var(--danger-color);
+        }
+
+        .product-card.nicd::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--danger-color), #F44336);
+        }
+
+        .product-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-subtitle {
+            color: var(--secondary-color);
+            font-size: 1rem;
+        }
+
+        .spec-list {
+            list-style: none;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .spec-value {
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .spec-value.positive {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+
+        .spec-value.negative {
+            color: var(--danger-color);
+            font-weight: 600;
+        }
+
+        .advantages-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .advantage-card {
+            background: linear-gradient(135deg, var(--success-color), #4CAF50);
+            color: var(--text-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .advantage-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .advantage-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .weaknesses-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .weakness-card {
+            background: linear-gradient(135deg, var(--danger-color), #F44336);
+            color: var(--text-light);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .weakness-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .weakness-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .weakness-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .weakness-impact {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .visual-comparison {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+        }
+
+        .visual-comparison h3 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .comparison-bars {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .comparison-bar {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .bar-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .bar-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .bar-label {
+            width: 120px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .bar-fill.lfp {
+            background: linear-gradient(90deg, var(--success-color), #4CAF50);
+        }
+
+        .bar-fill.nicd {
+            background: linear-gradient(90deg, var(--danger-color), #F44336);
+        }
+
+        .bar-value {
+            width: 100px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .impact-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .impact-badge.positive {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .impact-badge.negative {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .actions {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+
+        .btn:hover {
+            background: #e07a00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn.secondary {
+            background: var(--secondary-color);
+        }
+
+        .btn.secondary:hover {
+            background: #2574a0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .bar-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+
+            .bar-label,
+            .bar-value {
+                text-align: center;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { width: 0; }
+            to { width: var(--target-width); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Li-CUBE PRO vs Ni-Cd - Comparaison LOCATION</h1>
+            <p class="subtitle"><strong>150$/mois TOUT INCLUS vs 240$/mois Ni-Cd</strong><br><span style="color: #F18F01; font-weight: 700;">Économies garanties avec tarifs dégressifs!</span><br><strong>Tarifs dégressifs : 150$/mois → 100$/mois</strong></p>
+        </div>
+
+        <div class="comparison-wrapper">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('specifications')">Spécifications</button>
+                <button class="tab" onclick="showTab('performance')">Performance</button>
+                <button class="tab" onclick="showTab('advantages')">Avantages Li-CUBE</button>
+                <button class="tab" onclick="showTab('weaknesses')">Faiblesses Ni-Cd</button>
+                <button class="tab" onclick="showTab('environmental')">Environnemental</button>
+                <button class="tab" onclick="showTab('economics')">Économies Location</button>
+            </div>
+
+            <!-- Onglet Spécifications -->
+            <div id="specifications" class="tab-content active">
+                <div class="comparison-grid">
+                    <div class="product-card lfp">
+                        <div class="product-header">
+                            <div class="product-title">Li-CUBE PRO™</div>
+                            <div class="product-subtitle">Technologie LiFePO4 2025 moderne</div>
+                        </div>
+                        <ul class="spec-list">
+                            <li class="spec-item">
+                                <span class="spec-label">Capacité</span>
+                                <span class="spec-value positive">105Ah (2688Wh)</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Tension nominale</span>
+                                <span class="spec-value">25.6V</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Durée de vie</span>
+                                <span class="spec-value positive">≥8000 cycles</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Poids</span>
+                                <span class="spec-value positive">23 kg</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Dimensions</span>
+                                <span class="spec-value">420×240×155 mm</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Densité énergétique</span>
+                                <span class="spec-value positive">117 Wh/kg</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Temps de charge</span>
+                                <span class="spec-value positive">1-2h</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Maintenance</span>
+                                <span class="spec-value positive">Zéro maintenance</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Température</span>
+                                <span class="spec-value">-40°C à +55°C</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Connectivité</span>
+                                <span class="spec-value positive">GPS, Wi-Fi, Bluetooth</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="product-card nicd">
+                        <div class="product-header">
+                            <div class="product-title">Batteries Ni-Cd</div>
+                            <div class="product-subtitle">Technologie 1980 obsolète</div>
+                        </div>
+                        <ul class="spec-list">
+                            <li class="spec-item">
+                                <span class="spec-label">Capacité</span>
+                                <span class="spec-value">100Ah (2400Wh)</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Tension nominale</span>
+                                <span class="spec-value">24V</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Durée de vie</span>
+                                <span class="spec-value negative">2000-3000 cycles</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Poids</span>
+                                <span class="spec-value negative">~80 kg</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Dimensions</span>
+                                <span class="spec-value">600×500×300 mm</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Densité énergétique</span>
+                                <span class="spec-value negative">~30 Wh/kg</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Temps de charge</span>
+                                <span class="spec-value negative">8-12h</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Maintenance</span>
+                                <span class="spec-value negative">2 visites/an</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Température</span>
+                                <span class="spec-value">-50°C à +70°C</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Connectivité</span>
+                                <span class="spec-value negative">Aucune</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onglet Performance -->
+            <div id="performance" class="tab-content">
+                <div class="visual-comparison">
+                    <h3>Comparaison Performance</h3>
+                    <div class="comparison-bars">
+                        <div class="comparison-bar">
+                            <div class="bar-title">Durée de vie (cycles)</div>
+                            <div class="bar-container">
+                                <div class="bar-label">LFP</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill lfp" style="width: 100%;">8000+</div>
+                                </div>
+                                <div class="bar-value">8000+</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Ni-Cd</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill nicd" style="width: 35%;">3000</div>
+                                </div>
+                                <div class="bar-value">2000-3000</div>
+                            </div>
+                        </div>
+
+                        <div class="comparison-bar">
+                            <div class="bar-title">Densité énergétique (Wh/kg)</div>
+                            <div class="bar-container">
+                                <div class="bar-label">LFP</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill lfp" style="width: 100%;">117</div>
+                                </div>
+                                <div class="bar-value">117 Wh/kg</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Ni-Cd</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill nicd" style="width: 25%;">30</div>
+                                </div>
+                                <div class="bar-value">30 Wh/kg</div>
+                            </div>
+                        </div>
+
+                        <div class="comparison-bar">
+                            <div class="bar-title">Vitesse de charge (heures)</div>
+                            <div class="bar-container">
+                                <div class="bar-label">LFP</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill lfp" style="width: 15%;">1-2h</div>
+                                </div>
+                                <div class="bar-value">1-2h</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Ni-Cd</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill nicd" style="width: 100%;">8-12h</div>
+                                </div>
+                                <div class="bar-value">8-12h</div>
+                            </div>
+                        </div>
+
+                        <div class="comparison-bar">
+                            <div class="bar-title">Poids (kg)</div>
+                            <div class="bar-container">
+                                <div class="bar-label">LFP</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill lfp" style="width: 29%;">23kg</div>
+                                </div>
+                                <div class="bar-value">23 kg</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Ni-Cd</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill nicd" style="width: 100%;">80kg</div>
+                                </div>
+                                <div class="bar-value">80 kg</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onglet Avantages LFP -->
+            <div id="advantages" class="tab-content">
+                <div class="advantages-section">
+                    <div class="advantage-card">
+                        <div class="advantage-title">Durée de vie exceptionnelle</div>
+                        <div class="advantage-description">≥8000 cycles (20-25 ans réels) - 4× plus que Ni-Cd</div>
+                        <div class="impact-badge positive">Réduction drastique des remplacements</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-title">Surveillance temps réel</div>
+                        <div class="advantage-description">GPS, Bluetooth, Wi-Fi, GPRS - monitoring à distance</div>
+                        <div class="impact-badge positive">Maintenance préventive, évite pannes critiques</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-title">Zéro maintenance</div>
+                        <div class="advantage-description">Pas d'électrolyte, pas d'effet mémoire, BMS automatisé</div>
+                        <div class="impact-badge positive">Réduction coûts opérationnels</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-title">Sécurité renforcée</div>
+                        <div class="advantage-description">BMS sophistiqué multi-niveau, protections complètes</div>
+                        <div class="impact-badge positive">Réduction risques incidents</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-title">Performance énergétique</div>
+                        <div class="advantage-description">117 Wh/kg (4× Ni-Cd), 157 Wh/L (6× plus compact)</div>
+                        <div class="impact-badge positive">Installation simplifiée</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-title">Optimisé climat canadien</div>
+                        <div class="advantage-description">Fonctionnement -40°C à +55°C, auto-chauffage intégré</div>
+                        <div class="impact-badge positive">Fiabilité garantie conditions hivernales</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-title">Écologique</div>
+                        <div class="advantage-description">Sans cadmium, conforme RoHS, recyclable</div>
+                        <div class="impact-badge positive">Image environnementale positive</div>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-title">Fabrication québécoise</div>
+                        <div class="advantage-description">SAV local, délais réduits, réactivité support</div>
+                        <div class="impact-badge positive">Service client optimal</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onglet Faiblesses Ni-Cd -->
+            <div id="weaknesses" class="tab-content">
+                <div class="weaknesses-section">
+                    <div class="weakness-card">
+                        <div class="weakness-title">Cadmium hautement toxique</div>
+                        <div class="weakness-description">Classé dangereux REACH, recyclage coûteux</div>
+                        <div class="weakness-impact">Risque environnemental et réglementaire</div>
+                    </div>
+
+                    <div class="weakness-card">
+                        <div class="weakness-title">Maintenance obligatoire</div>
+                        <div class="weakness-description">Maintenance obligatoire : 200$/an vs 0$ Li-CUBE PRO</div>
+                        <div class="weakness-impact">ÉCONOMIES : 90$/mois (152$/mois total vs 240$/mois Ni-Cd)</div>
+                    </div>
+
+                    <div class="weakness-card">
+                        <div class="weakness-title">Durée de vie réduite</div>
+                        <div class="weakness-description">2000-3000 cycles vs 8000+ cycles Li-CUBE PRO</div>
+                        <div class="weakness-impact">Coût TCO prohibitif sur 20 ans</div>
+                    </div>
+
+                    <div class="weakness-card">
+                        <div class="weakness-title">Poids et encombrement</div>
+                        <div class="weakness-description">80-100kg, manipulation difficile, installation contraignante</div>
+                        <div class="weakness-impact">Risque: Sécurité personnel, logistique</div>
+                    </div>
+
+                    <div class="weakness-card">
+                        <div class="weakness-title">Charge lente</div>
+                        <div class="weakness-description">8-12h indisponibilité, vs 1-2h LFP</div>
+                        <div class="weakness-impact">Risque: Productivité réduite</div>
+                    </div>
+
+                    <div class="weakness-card">
+                        <div class="weakness-title">Pas de connectivité</div>
+                        <div class="weakness-description">Aucune télémétrie, aucun suivi à distance</div>
+                        <div class="weakness-impact">Risque: Pannes imprévisibles</div>
+                    </div>
+
+                    <div class="weakness-card">
+                        <div class="weakness-title">Transport contraignant</div>
+                        <div class="weakness-description">UN2795 Batteries Wet Alkali, coûteux</div>
+                        <div class="weakness-impact">Risque: Logistique complexe</div>
+                    </div>
+
+                    <div class="weakness-card">
+                        <div class="weakness-title">Effet mémoire</div>
+                        <div class="weakness-description">Perte capacité avec cycles partiels</div>
+                        <div class="weakness-impact">Risque: Performance dégradée</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onglet Environnemental -->
+            <div id="environmental" class="tab-content">
+                <div class="comparison-grid">
+                    <div class="product-card lfp">
+                        <div class="product-header">
+                            <div class="product-title">Li-CUBE PRO™</div>
+                            <div class="product-subtitle">Solution éco-responsable</div>
+                        </div>
+                        <ul class="spec-list">
+                            <li class="spec-item">
+                                <span class="spec-label">Matériaux</span>
+                                <span class="spec-value positive">Sans métaux lourds</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Conformité</span>
+                                <span class="spec-value positive">RoHS, CE, IEC 62619</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Recyclage</span>
+                                <span class="spec-value positive">100% recyclable</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Toxicité</span>
+                                <span class="spec-value positive">Non toxique</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Transport</span>
+                                <span class="spec-value positive">Classification standard</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Émissions</span>
+                                <span class="spec-value positive">Zéro émission toxique</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="product-card nicd">
+                        <div class="product-header">
+                            <div class="product-title">Batteries Ni-Cd</div>
+                            <div class="product-subtitle">Impact environnemental négatif</div>
+                        </div>
+                        <ul class="spec-list">
+                            <li class="spec-item">
+                                <span class="spec-label">Matériaux</span>
+                                <span class="spec-value negative">Cadmium hautement toxique</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Conformité</span>
+                                <span class="spec-value negative">REACH - Classé dangereux</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Recyclage</span>
+                                <span class="spec-value negative">Coûteux et complexe</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Toxicité</span>
+                                <span class="spec-value negative">Hautement toxique</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Transport</span>
+                                <span class="spec-value negative">UN2795 - Batteries Wet</span>
+                            </li>
+                            <li class="spec-item">
+                                <span class="spec-label">Émissions</span>
+                                <span class="spec-value negative">Risque fuites KOH</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Onglet Économique -->
+            <div id="economics" class="tab-content">
+                <div class="visual-comparison">
+                    <h3>Analyse TCO 20 ans - Location</h3>
+                    <div class="comparison-bars">
+                        <div class="comparison-bar">
+                            <div class="bar-title">Coût mensuel réel Location vs Ni-Cd</div>
+                            <div class="bar-container">
+                                <div class="bar-label">Li-CUBE Location</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill lfp" style="width: 63%;">150$/mois</div>
+                                </div>
+                                <div class="bar-value">150$/mois (+ 500$ installation unique)</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Ni-Cd (coûts cachés)</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill nicd" style="width: 100%;">240$/mois</div>
+                                </div>
+                                <div class="bar-value"><strong>240$/mois coûts cachés!</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="comparison-bar">
+                            <div class="bar-title">TCO 20 ans - Comparaison location</div>
+                            <div class="bar-container">
+                                <div class="bar-label">Li-CUBE Location</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill lfp" style="width: 63%;">36 500</div>
+                                </div>
+                                <div class="bar-value">36 500 CAD (500$ installation incluse)</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Ni-Cd (avec pannes)</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill nicd" style="width: 100%;">57 640</div>
+                                </div>
+                                <div class="bar-value">57 640 CAD</div>
+                            </div>
+                        </div>
+
+                        <div class="comparison-bar">
+                            <div class="bar-title">Économies garanties location</div>
+                            <div class="bar-container">
+                                <div class="bar-label">Économies Location</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill lfp" style="width: 57%;">33 140 CAD</div>
+                                </div>
+                                <div class="bar-value">33 140$ économisés!</div>
+                            </div>
+                            <div class="bar-container">
+                                <div class="bar-label">Par mois</div>
+                                <div class="bar-track">
+                                    <div class="bar-fill lfp" style="width: 38%;">90$/mois</div>
+                                </div>
+                                <div class="bar-value">90$/mois économisés</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <p style="margin-bottom: 1rem; font-size: 1.1rem; font-weight: 600; color: var(--primary-color);">📞 Contact Location EDS Québec</p>
+                <p style="margin-bottom: 1rem; color: var(--secondary-color);">Téléphone: <strong>819 323 7859</strong> | Email: <strong>contact@edsquebec.com</strong></p>
+                <a href="calculateur-tco.html" class="btn">Calculateur TCO Location</a>
+                <a href="presentation-complete.html" class="btn secondary">Présentation Complète</a>
+                <button class="btn secondary" onclick="printComparison()">Imprimer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Masquer tous les contenus
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Désactiver tous les onglets
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Activer l'onglet sélectionné
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function printComparison() {
+            window.print();
+        }
+
+        // Animation des barres au chargement
+        window.addEventListener('load', () => {
+            const bars = document.querySelectorAll('.bar-fill');
+            bars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Spécifications Techniques</title>
+    <style>
+        @page {
+            size: 1024px 768px;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            color: white;
+            width: 1024px;
+            height: 768px;
+            overflow: auto;
+            position: relative;
+        }
+        
+        /* Éléments décoratifs d'arrière-plan */
+        .bg-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(30deg, rgba(255,255,255,0.02) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.02) 87.5%, rgba(255,255,255,0.02)),
+                linear-gradient(150deg, rgba(255,255,255,0.02) 12%, transparent 12.5%, transparent 87%, rgba(255,255,255,0.02) 87.5%, rgba(255,255,255,0.02));
+            background-size: 60px 60px;
+        }
+        
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        .specs-container {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            padding: 30px;
+        }
+        
+        .header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo-section {
+            text-align: left;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            color: #F18F01;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        
+        .logo-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .title-section {
+            text-align: center;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5px;
+            text-align: right;
+        }
+        
+        .cert-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 25px;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .spec-category {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: fit-content;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(241, 143, 1, 0.3);
+        }
+        
+        .category-icon {
+            font-size: 20px;
+            color: #F18F01;
+        }
+        
+        .category-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #F18F01;
+        }
+        
+        .spec-table {
+            display: grid;
+            gap: 8px;
+        }
+        
+        .spec-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .spec-value {
+            font-size: 11px;
+            font-weight: 700;
+            color: #F18F01;
+            text-align: right;
+            background: rgba(241, 143, 1, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(241, 143, 1, 0.2);
+        }
+        
+        .product-showcase {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
+        }
+        
+        .product-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .product-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #F18F01;
+        }
+        
+        .product-name {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .product-model {
+            font-size: 12px;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .product-image {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 120px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .key-features {
+            margin-bottom: 20px;
+        }
+        
+        .features-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #F18F01;
+            text-align: center;
+        }
+        
+        .features-list {
+            display: grid;
+            gap: 8px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            padding: 6px 10px;
+            background: rgba(40, 167, 69, 0.1);
+            border-radius: 6px;
+            border: 1px solid rgba(40, 167, 69, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 12px;
+            color: #28A745;
+            flex-shrink: 0;
+        }
+        
+        .applications {
+            margin-top: auto;
+        }
+        
+        .applications-title {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #F18F01;
+            text-align: center;
+        }
+        
+        .application-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .application-tag {
+            background: rgba(46, 134, 171, 0.2);
+            color: #87CEEB;
+            padding: 4px 8px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 600;
+            border: 1px solid rgba(46, 134, 171, 0.3);
+        }
+        
+        .footer {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 25px;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .performance-metrics {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-value {
+            font-size: 18px;
+            font-weight: 900;
+            color: #F18F01;
+            margin-bottom: 3px;
+        }
+        
+        .metric-label {
+            font-size: 9px;
+            opacity: 0.8;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 10px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .contact-item span:last-child {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        
+        /* Style pour les numéros de téléphone */
+        .phone, .tel, .telephone {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        /* Style pour les emails */
+        .email, .mail {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        .contact-icon {
+            font-size: 12px;
+            color: #F18F01;
+        }
+        
+        .qr-section {
+            text-align: center;
+        }
+        
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .qr-label {
+            font-size: 8px;
+            opacity: 0.8;
+        }
+        
+        .highlight-specs {
+            background: rgba(241, 143, 1, 0.1);
+            border: 2px solid rgba(241, 143, 1, 0.3);
+        }
+        
+        .highlight-specs .category-title {
+            color: #F18F01;
+        }
+        
+        .highlight-specs .spec-value {
+            background: rgba(241, 143, 1, 0.2);
+            color: #FFD700;
+            font-weight: 900;
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-elements">
+        <div class="bg-pattern"></div>
+        <div class="bg-grid"></div>
+    </div>
+    
+    <div class="specs-container">
+        <!-- En-tête -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">EDS QUÉBEC</div>
+                <div class="logo-subtitle">Innovation Énergétique</div>
+            </div>
+            
+            <div class="title-section">
+                <div class="main-title">📋 Li-CUBE PRO™ SPECIFICATIONS</div>
+                <div class="subtitle">Batteries LiFePO4 25.6V 105Ah • Grade A+ • Applications Ferroviaires</div>
+            </div>
+            
+            <div class="certifications">
+                <div class="cert-badge">CSA C22.2</div>
+                <div class="cert-badge">UL1973</div>
+                <div class="cert-badge">UL9540A</div>
+                <div class="cert-badge">CE</div>
+                <div class="cert-badge">IEC 62619</div>
+                <div class="cert-badge">RoHS</div>
+                <div class="cert-badge">UN38.3</div>
+            </div>
+        </div>
+        
+        <!-- Contenu principal -->
+        <div class="main-content">
+            <div class="specs-grid">
+                <!-- Spécifications électriques -->
+                <div class="spec-category highlight-specs">
+                    <div class="category-header">
+                        <span class="category-icon">⚡</span>
+                        <span class="category-title">Caractéristiques Électriques</span>
+                    </div>
+                    <div class="spec-table">
+                        <div class="spec-row">
+                            <span class="spec-label">Chimie</span>
+                            <span class="spec-value">LiFePO4 Grade A+</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Configuration</span>
+                            <span class="spec-value">8S (8 cellules série)</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Tension nominale</span>
+                            <span class="spec-value">25.6V</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Capacité nominale</span>
+                            <span class="spec-value">105Ah</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Énergie totale</span>
+                            <span class="spec-value">2688Wh</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Densité énergétique</span>
+                            <span class="spec-value">~117 Wh/kg</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Densité volumique</span>
+                            <span class="spec-value">≈ 157 Wh/L</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Auto-décharge</span>
+                            <span class="spec-value">&lt; 1.2%/mois</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Efficacité</span>
+                            <span class="spec-value">≥ 96%</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Cycles de vie</span>
+                            <span class="spec-value">≥8000 @ 80% DOD</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charge et décharge -->
+                <div class="spec-category">
+                    <div class="category-header">
+                        <span class="category-icon">🔌</span>
+                        <span class="category-title">Charge et Décharge</span>
+                    </div>
+                    <div class="spec-table">
+                        <div class="spec-row">
+                            <span class="spec-label">Courant charge recommandé</span>
+                            <span class="spec-value">80A (0.76C)</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Courant charge maximum</span>
+                            <span class="spec-value">100A (0.95C)</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Temps de charge</span>
+                            <span class="spec-value">1-2h</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Tension HVR</span>
+                            <span class="spec-value">27.6 - 28.4V</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Tension HVC</span>
+                            <span class="spec-value">28.8 - 29.2V</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Courant décharge continu</span>
+                            <span class="spec-value">105A (1C)</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Courant pic 10s</span>
+                            <span class="spec-value">210A (2C)</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Tension LVR</span>
+                            <span class="spec-value">23.2 - 24.8V</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Tension LVC</span>
+                            <span class="spec-value">21.6V (2.7V/cell)</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">DOD exploitable</span>
+                            <span class="spec-value">96% sans dommage</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Environnemental -->
+                <div class="spec-category">
+                    <div class="category-header">
+                        <span class="category-icon">🌡️</span>
+                        <span class="category-title">Conditions Environnementales</span>
+                    </div>
+                    <div class="spec-table">
+                        <div class="spec-row">
+                            <span class="spec-label">Température opération</span>
+                            <span class="spec-value">-40°C à +55°C</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Température charge</span>
+                            <span class="spec-value">-40°C à +45°C</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Auto-chauffage</span>
+                            <span class="spec-value">Automatique &lt; 0°C</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Humidité</span>
+                            <span class="spec-value">Standard industriel</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Résistance vibrations</span>
+                            <span class="spec-value">Conforme ferroviaire</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Protection IP</span>
+                            <span class="spec-value">IP20 (IP65 option)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mécanique et connectivité -->
+                <div class="spec-category">
+                    <div class="category-header">
+                        <span class="category-icon">📦</span>
+                        <span class="category-title">Mécanique et Connectivité</span>
+                    </div>
+                    <div class="spec-table">
+                        <div class="spec-row">
+                            <span class="spec-label">Dimensions</span>
+                            <span class="spec-value">420×240×155 mm</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Poids</span>
+                            <span class="spec-value">~23 kg</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Boîtier</span>
+                            <span class="spec-value">Acier peint</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Connexions</span>
+                            <span class="spec-value">Bornes M8</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Bluetooth</span>
+                            <span class="spec-value">Oui</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Wi-Fi</span>
+                            <span class="spec-value">Oui</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">GPRS</span>
+                            <span class="spec-value">Option</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">GPS</span>
+                            <span class="spec-value">Localisation</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">CAN Hub</span>
+                            <span class="spec-value">Compatible VE.CAN</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Notifications</span>
+                            <span class="spec-value">Email, SMS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Showcase produit -->
+            <div class="product-showcase">
+                <div class="product-header">
+                    <div class="product-icon">🔋</div>
+                    <div class="product-name">Li-CUBE PRO™</div>
+                    <div class="product-model">LCP-25.6V-105Ah</div>
+                </div>
+                
+                <div class="product-image">
+                    <img src="../../image/Produit/Li-CUBE PRO/Li-CUBE PRO image 1.png" alt="Li-CUBE PRO™" style="width: 100%; height: 120px; object-fit: contain; border-radius: 8px; background: rgba(255,255,255,0.1);"><br>
+                    Boîtier acier<br>
+                    420×240×155 mm
+                </div>
+                
+                <div class="key-features">
+                    <div class="features-title">✨ Avantages Clés</div>
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>8000+ cycles garantis</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Zéro maintenance</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>IoT intégré complet</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>71% plus léger</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Charge 6× plus rapide</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Sans cadmium toxique</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Made in Québec</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>BMS sophistiqué</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>Auto-chauffage -40°C</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="applications">
+                    <div class="applications-title">🎯 Applications</div>
+                    <div class="application-tags">
+                        <div class="application-tag">Passages à niveau</div>
+                        <div class="application-tag">Signalisation</div>
+                        <div class="application-tag">Communication</div>
+                        <div class="application-tag">Éclairage urgence</div>
+                        <div class="application-tag">Servitude</div>
+                        <div class="application-tag">Traction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pied de page -->
+        <div class="footer">
+            <div class="performance-metrics">
+                <div class="metric">
+                    <div class="metric-value">95%</div>
+                    <div class="metric-label">Économies TCO</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">4×</div>
+                    <div class="metric-label">Plus durable</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">6×</div>
+                    <div class="metric-label">Charge rapide</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">71%</div>
+                    <div class="metric-label">Plus léger</div>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span class="email">contact@edsquebec.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span class="phone">819&nbsp;323&nbsp;7859</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🌐</span>
+                    <span>https://edsquebec.com</span>
+                </div>
+            </div>
+            
+            <div class="qr-section">
+                <div class="qr-label">Fiche technique</div>
+            </div>
+        </div>
+    </div>
+    <script src="../utils/data-loader.js"></script>
+
+</body>
+</html>
