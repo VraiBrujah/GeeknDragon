@@ -8,7 +8,7 @@
     "bundle:css": "npx clean-css-cli -o css/vendor.bundle.min.css css/swiper-bundle.min.css css/fancybox.css",
     "bundle:js": "npx terser js/swiper-bundle.min.js js/fancybox.umd.js -c -m -o js/vendor.bundle.min.js",
     "bundle": "npm run bundle:css && npm run bundle:js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "composer test",
     "lint": "eslint js"
   },
   "keywords": [],
