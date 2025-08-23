@@ -29,15 +29,16 @@
     margin-bottom: 1rem;
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
-    text-shadow: 0 0 4px #000;
+    color: var(--dark-bg);
+    text-shadow: 0 0 4px #fff;
 }
 
 .shop-hero-content p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    color: var(--medium-text);
+    color: var(--dark-bg);
     font-weight: 700;
-    text-shadow: 0 0 4px #000;
+    text-shadow: 0 0 4px #fff;
 }
 
 .shop-stats {
