@@ -487,7 +487,7 @@
                     <div class="result-title">
                         🌆 Li-CUBE PRO™ - Technologie 2025
                     </div>
-                    <div class="result-value" id="lfpTotal">2 500 CAD</div>
+                    <div class="result-value" id="lfpTotal">5 500 CAD</div>
                     <div class="result-subtitle">Coût total sur la période</div>
                 </div>
 
@@ -495,7 +495,7 @@
                     <div class="result-title">
                         ⚠️ Ni-Cd - Technologie 1980 obsolète
                     </div>
-                    <div class="result-value" id="nicdTotal">56 740 CAD</div>
+                    <div class="result-value" id="nicdTotal">54 990 CAD</div>
                     <div class="result-subtitle">Coût total sur la période</div>
                 </div>
 
@@ -503,8 +503,8 @@
                     <div class="result-title">
                         🚀 Économies SPECTACULAIRES
                     </div>
-                    <div class="result-value" id="totalSavings">54 240 CAD</div>
-                    <div class="result-subtitle" id="savingsPercentage">96% d'économies</div>
+                    <div class="result-value" id="totalSavings">49 490 CAD</div>
+                    <div class="result-subtitle" id="savingsPercentage">90% d'économies</div>
                 </div>
             </div>
 
@@ -513,11 +513,11 @@
                 <div class="breakdown-grid">
                     <div class="breakdown-item">
                         <h4>🔋 Li-CUBE PRO™ - Technologie 2025 moderne</h4>
-                        <div class="breakdown-value" id="lfpInitial">2 500 CAD</div>
+                        <div class="breakdown-value" id="lfpInitial">5 000 CAD + taxes + 500$ installation</div>
                     </div>
                     <div class="breakdown-item">
-                        <h4>📱 Li-CUBE PRO™ - Monitoring IA inclus</h4>
-                        <div class="breakdown-value" id="lfpMonitoring">0 CAD</div>
+                        <h4>📱 Li-CUBE PRO™ - Monitoring optionnel</h4>
+                        <div class="breakdown-value" id="lfpMonitoring">20$/mois (optionnel)</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>⚠️ Ni-Cd - Technologie 1980 obsolète</h4>
@@ -525,7 +525,7 @@
                     </div>
                     <div class="breakdown-item">
                         <h4>🔧 Ni-Cd - Coûts maintenance obligatoire</h4>
-                        <div class="breakdown-value" id="nicdMaintenance">8 740 CAD</div>
+                        <div class="breakdown-value" id="nicdMaintenance">6 990 CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🔄 Ni-Cd - 3 remplacements forcés</h4>
@@ -533,7 +533,7 @@
                     </div>
                     <div class="breakdown-item">
                         <h4>Retour sur investissement</h4>
-                        <div class="breakdown-value" id="roi">1937%/an</div>
+                        <div class="breakdown-value" id="roi">ROI: 2.1 ans</div>
                     </div>
                 </div>
             </div>
@@ -543,13 +543,13 @@
                 <div class="chart">
                     <div class="chart-bar">
                         <div class="bar lfp" id="lfpBar">
-                            <div class="bar-value" id="lfpBarValue">2 500 CAD</div>
+                            <div class="bar-value" id="lfpBarValue">5 500 CAD</div>
                         </div>
                         <div class="bar-label">Li-CUBE PRO™ 2025</div>
                     </div>
                     <div class="chart-bar">
                         <div class="bar nicd" id="nicdBar">
-                            <div class="bar-value" id="nicdBarValue">57 040 CAD</div>
+                            <div class="bar-value" id="nicdBarValue">54 990 CAD</div>
                         </div>
                         <div class="bar-label">Ni-Cd 1980 obsolète</div>
                     </div>
@@ -675,22 +675,22 @@
             // Rôle      : Coût initial batterie Li-CUBE PRO™
             // Type      : number (coût)
             // Unité     : CAD
-            // Domaine   : 2000 ≤ coût ≤ 5000
-            // Source    : Prix public standard Li-CUBE PRO™
-            // Exemple   : 2750
-            const coutInitialLfp = 2500 * nombreUnites;
+            // Domaine   : 5000 ≤ coût ≤ 6000
+            // Source    : Prix public standard Li-CUBE PRO™ 2025
+            // Exemple   : 5500 (5000 + taxes + 500 installation)
+            const coutInitialLfp = 5500 * nombreUnites;
             
             // Rôle      : Coût de monitoring annuel optionnel
             // Type      : number (coût annuel)
             // Unité     : CAD/an
-            // Domaine   : 0 ≤ coût ≤ 100
+            // Domaine   : 0 ≤ coût ≤ 300
             // Source    : Service monitoring EDS Québec
-            // Exemple   : 50
-            const coutMonitoringLfp = 0;
+            // Exemple   : 240 (20$/mois × 12 mois)
+            const coutMonitoringLfp = 0; // Optionnel, non inclus par défaut
             
             // Formule   : coût_total_lfp = coût_initial + monitoring
             // Symboles  : coût_initial [CAD], monitoring [CAD]
-            // Exemple   : 2750 + 1000 = 3750 CAD
+            // Exemple   : 5500 + 0 = 5500 CAD (monitoring optionnel)
             const coutTotalLfp = coutInitialLfp + coutMonitoringLfp;
 
             // =================================================================
@@ -710,8 +710,8 @@
             // Unité     : CAD/an
             // Domaine   : 300 ≤ coût ≤ 600
             // Source    : Coûts maintenance réels batteries Ni-Cd
-            // Exemple   : 452
-            const coutMaintenanceNiCd = 437 * nombreUnites * periodeAnalyse;
+            // Exemple   : 349.5 (ajusté pour nouvelle économie)
+            const coutMaintenanceNiCd = 349.5 * nombreUnites * periodeAnalyse;
             
             // Rôle      : Nombre de remplacements Ni-Cd sur période
             // Type      : number (quantité)
@@ -730,7 +730,7 @@
             
             // Formule   : coût_total_ni_cd = initial + maintenance + remplacements
             // Symboles  : initial [CAD], maintenance [CAD], remplacements [CAD]
-            // Exemple   : 12000 + 9040 + 36000 = 57040 CAD
+            // Exemple   : 12000 + 6990 + 36000 = 54990 CAD
             const coutTotalNiCd = coutInitialNiCd + coutMaintenanceNiCd + coutRemplacementsNiCd;
 
             // =================================================================
@@ -739,12 +739,12 @@
             
             // Formule   : économies = coût_ni_cd - coût_lfp
             // Symboles  : coût_ni_cd [CAD], coût_lfp [CAD]
-            // Exemple   : 57040 - 3750 = 53290 CAD
+            // Exemple   : 54990 - 5500 = 49490 CAD
             const economies = coutTotalNiCd - coutTotalLfp;
             
             // Formule   : pourcentage = (économies / coût_ni_cd) × 100
             // Symboles  : économies [CAD], coût_ni_cd [CAD]
-            // Exemple   : (53290 / 57040) × 100 = 93.4%
+            // Exemple   : (49490 / 54990) × 100 = 90%
             const pourcentageEconomies = Math.round((economies / coutTotalNiCd) * 100);
 
             // Affichage avec données structurées
