@@ -37,6 +37,11 @@ body {
     color: var(--light-text);
     background: var(--dark-bg);
     overflow-x: hidden;
+    padding-top: 80px;
+}
+
+section {
+    scroll-margin-top: 80px;
 }
 
 /* Typographie */
