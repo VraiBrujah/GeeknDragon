@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+
 // Validation sécurisée pour les clés API (uniquement alphanumérique et tirets)
 if (!function_exists('validateApiKey')) {
 function validateApiKey($key) {

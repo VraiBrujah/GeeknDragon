@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 $baseUrl = 'https://geekndragon.com';
 $urls = [];
 // Static pages

@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 // Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
 
 require_once __DIR__ . '/../includes/video-utils.php';
