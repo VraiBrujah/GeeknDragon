@@ -25,15 +25,19 @@
     z-index: 2;
 }
 
-.shop-hero h1 {
+.shop-hero-content h1 {
     margin-bottom: 1rem;
     font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    text-shadow: 0 0 4px #000;
 }
 
-.shop-hero p {
+.shop-hero-content p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     color: var(--medium-text);
+    font-weight: 700;
+    text-shadow: 0 0 4px #000;
 }
 
 .shop-stats {
