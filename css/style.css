@@ -466,6 +466,12 @@ p {
     box-shadow: var(--shadow-medium);
 }
 
+.testimonial-card img {
+    width: 100%;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+
 .testimonial-content p {
     font-style: italic;
     margin-bottom: 1.5rem;
@@ -475,6 +481,62 @@ p {
 .testimonial-author {
     color: var(--secondary-color);
     font-weight: 600;
+}
+
+/* News */
+.news {
+    padding: 5rem 0;
+    background: var(--dark-bg);
+}
+
+.news-item {
+    background: var(--darker-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    margin-bottom: 2rem;
+}
+
+.news-item img {
+    width: 100%;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+
+.news-item h3 {
+    color: var(--light-text);
+    margin-bottom: 1rem;
+}
+
+.news-item p {
+    margin-bottom: 1rem;
+}
+
+/* Contact */
+.contact-section {
+    padding: 5rem 0;
+    background: var(--darker-bg);
+}
+
+.contact-content {
+    text-align: center;
+}
+
+.contact-photo {
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+}
+
+.contact-content a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.contact-content a:hover {
+    text-decoration: underline;
 }
 
 /* CTA Section */
