@@ -342,14 +342,13 @@ class ReportGenerator
      */
     private function renderHtml(): string
     {
-        global $cspNonce;
         $html = '<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rapport Technique - GeeknDragon</title>
-    <style nonce="' . htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8') . '">
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -623,7 +622,7 @@ class ReportGenerator
         </div>
     </div>
     
-    <script nonce="' . htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8') . '">
+    <script>
         function showTab(tabName) {
             // Cacher tous les onglets
             document.querySelectorAll(\'.tab-content\').forEach(tab => {

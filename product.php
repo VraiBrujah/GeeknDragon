@@ -223,7 +223,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
 
 <?php include 'footer.php'; ?>
 
-<script type="application/ld+json" nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
+<script type="application/ld+json">
 <?= json_encode([
     '@context' => 'https://schema.org/',
     '@type' => 'Product',
@@ -243,7 +243,7 @@ $extraHead = '<link rel="stylesheet" href="/css/product-gallery.css?v=' . filemt
 <script src="js/app.js"></script>
 
 <!-- Script pour la navigation des thumbnails -->
-<script nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
+<script>
 document.addEventListener('DOMContentLoaded', function() {
   const thumbnailContainers = document.querySelectorAll('.thumbnail');
   let mainMedia = document.querySelector('.main-product-media');
@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- Patch : mettre à jour quantité & multiplicateur juste avant l'ajout -->
-<script nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
+<script>
 (function(){
   if (window.__gdQtyPatch) return;
   window.__gdQtyPatch = true;
@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 
-<script nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
+<script>
 // Gestion de la vidéo principale - attendre la fin avant navigation
 (function() {
   const mainVideo = document.getElementById('main-product-video');

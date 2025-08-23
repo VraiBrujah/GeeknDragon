@@ -114,7 +114,7 @@ $isInStock = $inventoryService->isInStock($id);
 </div>
 
 <!-- Script pour la gestion des quantités et lazy-loading -->
-<script nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
+<script>
 (function(){
   if (window.__premiumCardPatch) return;
   window.__premiumCardPatch = true;

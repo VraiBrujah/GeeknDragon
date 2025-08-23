@@ -88,7 +88,7 @@ $isInStock = $inventoryService->isInStock($id);
 </div>
 
 <!-- Patch local pour quantités et lazy-loading vidéos -->
-<script nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
+<script>
 (function(){
   if (window.__gdQtyPatch) return;
   window.__gdQtyPatch = true;

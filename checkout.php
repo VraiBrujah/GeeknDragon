@@ -20,7 +20,7 @@ $extraHead = '';
 </main>
 <?php include 'footer.php'; ?>
 <script src="/js/app.js"></script>
-<script nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
+<script>
   document.addEventListener('DOMContentLoaded', function () {
     if (window.GDEcommerce && typeof window.GDEcommerce.showCheckout === 'function') {
       window.GDEcommerce.showCheckout();
