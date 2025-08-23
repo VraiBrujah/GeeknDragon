@@ -16,10 +16,6 @@
       "title": "Merci !!! | Geek & Dragon",
       "desc": "Confirmation de l'envoi de votre message à Geek & Dragon."
     },
-    "quote": {
-      "title": "Demande de devis | Geek & Dragon",
-      "desc": "Demande de devis et informations pour vos projets immersifs."
-    },
     "news": {
       "flim2025": {
         "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces | Geek & Dragon",
@@ -70,50 +66,25 @@
   "footer": {
     "made": "Conçu au Québec."
   },
-    "contact": {
-      "title": "Demande de devis",
-      "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
-      "requestQuote": "Demander un devis",
-      "form": {
-        "name": "Nom complet",
-        "email": "Adresse e-mail",
-        "phone": "Téléphone (optionnel)",
-        "message": "Détail de la demande",
-        "submit": "Envoyer ma demande"
-      },
-      "info": {
-        "role": "Responsable produit",
-        "roleCommunity": "Responsable produit & communauté"
-      }
+  "contact": {
+    "title": "Demande de devis",
+    "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
+    "requestQuote": "Demander un devis",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone (optionnel)",
+      "message": "Détail de la demande",
+      "submit": "Envoyer ma demande"
     },
-    "quote": {
-      "title": "Demande de devis",
-      "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
-      "form": {
-        "name": "Nom complet",
-        "email": "Adresse e-mail",
-        "phone": "Téléphone (optionnel)",
-        "service": "Sujet / Service",
-        "message": "Votre demande",
-        "consent": "En envoyant ce formulaire, vous acceptez que nous utilisions vos informations pour vous répondre par email.",
-        "submit": "Envoyer ma demande"
-      },
-      "errors": {
-        "csrf": "Token CSRF invalide.",
-        "honeypot": "Spam détecté.",
-        "rate": "Trop de tentatives. Veuillez patienter.",
-        "name": "Le nom est requis.",
-        "email": "L'adresse e-mail est invalide.",
-        "phone": "Le numéro de téléphone est invalide.",
-        "message": "Le message est requis.",
-        "too_long": "Message trop long."
-      }
-    },
+    "info": {
+      "role": "Responsable produit",
+      "roleCommunity": "Responsable produit & communauté"
+    }
+  },
   "thankyou": {
     "title": "Merci !",
     "message": "Votre demande a bien été transmise à notre équipe.",
-    "errorTitle": "Oups...",
-    "errorMessage": "Votre message n'a pas pu être envoyé. Veuillez réessayer ou nous contacter directement.",
     "backHome": "Retour à l'accueil"
   },
   "product": {
