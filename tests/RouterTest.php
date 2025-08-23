@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use GeeknDragon\Core\Router;
-use Psr\Log\NullLogger;
 
 final class RouterTest extends TestCase
 {
     public function testRouter(): void
     {
-        $router = new Router(new NullLogger());
+        $router = new Router();
 
         $testExecuted = false;
         $router->get('/test', function() use (&$testExecuted) {
@@ -44,7 +43,7 @@ final class RouterTest extends TestCase
 
     public function testMiddlewareTransformsUri(): void
     {
-        $router = new Router(new NullLogger());
+        $router = new Router();
 
         $executed = false;
         $router->get('/after', function () use (&$executed) {
@@ -67,7 +66,7 @@ final class RouterTest extends TestCase
 
     public function testHandle404DisplaysPage(): void
     {
-        $router = new Router(new NullLogger());
+        $router = new Router();
 
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_SERVER['REQUEST_URI'] = '/does-not-exist';

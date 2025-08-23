@@ -10,14 +10,12 @@ declare(strict_types=1);
 require_once __DIR__ . '/../bootstrap.php';
 
 use GeeknDragon\Core\Router;
-use GeeknDragon\Core\SimpleLogger;
 
 // Configuration globale
 $config = require __DIR__ . '/../config.php';
 
 // Initialisation du routeur
-$logger = new SimpleLogger();
-$router = new Router($logger);
+$router = new Router();
 
 // Middleware pour normaliser les URLs se terminant par .php
 $router->middleware(function (string $uri) use ($router) {
