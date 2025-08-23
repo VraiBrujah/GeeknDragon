@@ -675,3 +675,85 @@
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.05); }
 }
+
+/* Currency converter */
+#currency-converter {
+    margin-top: 2rem;
+    background: var(--darker-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    color: var(--light-text);
+    text-align: center;
+    overflow-x: auto;
+}
+
+#currency-equivalences,
+#currency-best {
+    margin-top: 1rem;
+    background: var(--darker-bg);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    color: var(--light-text);
+    overflow-x: auto;
+}
+
+#currency-best {
+    background: var(--gradient-primary);
+}
+
+#currency-best .total-pieces {
+    display: inline-block;
+    background: var(--dark-bg);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius);
+    margin-top: 0.5rem;
+}
+
+#currency-converter table,
+#currency-equivalences table,
+#currency-best table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+#currency-converter th,
+#currency-converter td,
+#currency-equivalences th,
+#currency-equivalences td,
+#currency-best th,
+#currency-best td {
+    padding: 0.5rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#currency-sources th,
+#currency-sources td,
+#currency-equivalences th,
+#currency-equivalences td {
+    text-align: center;
+}
+
+#currency-converter th,
+#currency-equivalences th,
+#currency-best th {
+    color: var(--secondary-color);
+}
+
+#currency-equivalences-list tbody tr:nth-child(even) {
+    background: var(--dark-bg);
+}
+
+#currency-sources input {
+    width: 100%;
+    background: var(--dark-bg);
+    color: var(--light-text);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+}
+
+.hidden {
+    display: none;
+}

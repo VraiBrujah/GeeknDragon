@@ -208,6 +208,48 @@
                         </div>
                     </article>
                 </div>
+                <!-- Convertisseur de monnaie -->
+                <div id="currency-converter">
+                    <h4 data-i18n="shop.converter.title">Convertisseur de monnaie</h4>
+                    <div class="converter-inputs">
+                        <p data-i18n="shop.converter.sourcesLabel">Monnaies sources</p>
+                        <table id="currency-sources">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="shop.converter.copper">pièce de cuivre</th>
+                                    <th data-i18n="shop.converter.silver">pièce d’argent</th>
+                                    <th data-i18n="shop.converter.electrum">pièce d’électrum</th>
+                                    <th data-i18n="shop.converter.gold">pièce d’or</th>
+                                    <th data-i18n="shop.converter.platinum">pièce de platine</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper"></td>
+                                    <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver"></td>
+                                    <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum"></td>
+                                    <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold"></td>
+                                    <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="currency-equivalences" class="hidden">
+                        <h5 data-i18n="shop.converter.equivTitle">Équivalences totales par métal</h5>
+                        <table id="currency-equivalences-list">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="shop.converter.equivMetal">Métal</th>
+                                    <th data-i18n="shop.converter.equivEquivalent">Équivalence</th>
+                                    <th data-i18n="shop.converter.remainder">Reste</th>
+                                    <th data-i18n="shop.converter.equivTotalPieces">Nombre total de pièces</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div id="currency-best" class="hidden" data-i18n="shop.converter.bestLabel"></div>
+                </div>
             </div>
         </section>
 
@@ -437,5 +479,6 @@
     <script src="js/script.js"></script>
     <script src="js/hero-videos.js"></script>
     <script src="js/boutique.js"></script>
+    <script src="js/currency-converter.js"></script>
 </body>
 </html>
