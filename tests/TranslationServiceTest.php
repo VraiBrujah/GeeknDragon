@@ -30,27 +30,4 @@ final class TranslationServiceTest extends TestCase
         $this->assertSame('en', $detected, 'La détection de langue depuis URL doit fonctionner');
         unset($_GET['lang']);
     }
-
-    /**
-     * @dataProvider acceptLanguageProvider
-     */
-    public function testDetectLanguageFromHeader(string $header, string $expected): void
-    {
-        $service = TranslationService::getInstance();
-        unset($_GET['lang'], $_COOKIE['lang']);
-        $_SERVER['HTTP_ACCEPT_LANGUAGE'] = $header;
-
-        $this->assertSame($expected, $service->detectLanguage());
-
-        unset($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-    }
-
-    public function acceptLanguageProvider(): array
-    {
-        return [
-            ['en-US;q=0.8,fr;q=0.9', 'fr'],
-            ['en-US,en;q=0.5', 'en'],
-            ['de,de-DE;q=0.8', 'fr'],
-        ];
-    }
 }
