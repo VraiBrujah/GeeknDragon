@@ -1282,13 +1282,13 @@
                     </h1>
                     <p class="hero-subtitle">
                         Location tout inclus avec gestion complète autonome + monitoring télémétrique 24/7. 
-                        <strong>49 490$ ÉCONOMISÉS avec notre solution!</strong> ZÉRO risque, ZÉRO panne, ZÉRO maintenance.<br>
-        <strong>Tarifs dégressifs : 150$/mois → 100$/mois (monitoring télémétrique INCLUS)</strong>
+                        <strong><span data-pricing-value="calculations.tco_location.savings.total" data-pricing-format="currency">49 490$</span> ÉCONOMISÉS avec notre solution!</strong> ZÉRO risque, ZÉRO panne, ZÉRO maintenance.<br>
+        <strong>Tarifs dégressifs : <span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">150$</span>/mois → <span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">100$</span>/mois (monitoring télémétrique INCLUS)</strong>
                     </p>
                     
                     <div class="hero-stats">
                         <div class="stat-card">
-                            <span class="stat-value">150$<br><small>/mois</small></span>
+                            <span class="stat-value"><span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">150$</span><br><small>/mois</small></span>
                             <span class="stat-label">TOUT INCLUS<br><small>Monitoring 24/7</small></span>
                         </div>
                         <div class="stat-card">
@@ -1296,7 +1296,7 @@
                             <span class="stat-label">Panne garantie</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-value">49 490$</span>
+                            <span class="stat-value" data-pricing-value="calculations.tco_location.savings.total" data-pricing-format="currency">49 490$</span>
                             <span class="stat-label">ÉCONOMISÉS!</span>
                         </div>
                     </div>
@@ -1341,7 +1341,7 @@
                     <div class="problem-card animate-on-scroll">
                         <div class="problem-icon">💸</div>
                         <h3>HÉMORRAGIE FINANCIÈRE!</h3>
-                        <p><strong>240$/mois COÛTS RÉELS cachés</strong> qui vous saignent! ARRÊTEZ cette hémorragie financière!</p>
+                        <p><strong><span data-pricing-value="modes.location.nicd.monthly_rate" data-pricing-format="currency">240$</span>/mois COÛTS RÉELS cachés</strong> qui vous saignent! ARRÊTEZ cette hémorragie financière!</p>
                         <div class="problem-impact">
                             <strong>RÉSULTAT :</strong> <span style="color: #FEF2F2; font-weight: 700;">60% PLUS CHER que notre location!</span>
                         </div>
@@ -1418,7 +1418,7 @@
                     <div class="advantage-card animate-on-scroll">
                         <div class="advantage-icon">🧠</div>
                         <h3>IA Prédictive Avancée</h3>
-                        <p>Monitoring IoT temps réel INCLUS (GPS, GPRS, Cloud), détection 5 min, intervention 24h - Terminé les pannes surprises! (vs 20$/mois optionnel en vente)</p>
+                        <p>Monitoring IoT temps réel INCLUS (GPS, GPRS, Cloud), détection 5 min, intervention 24h - Terminé les pannes surprises! (vs <span data-pricing-value="modes.vente.licube.monitoring_monthly" data-pricing-format="currency">20$</span>/mois optionnel en vente)</p>
                         <div class="advantage-impact">
                             <strong>Impact :</strong> Prévention active, continuité service maximale
                         </div>
@@ -1427,9 +1427,9 @@
                     <div class="advantage-card animate-on-scroll">
                         <div class="advantage-icon">💰</div>
                         <h3>Économies Immédiates</h3>
-                        <p>150$/mois TOUT INCLUS = 90$/mois économisés dès le 1er mois. TCO inférieur garanti.</p>
+                        <p><span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">150$</span>/mois TOUT INCLUS = <span data-pricing-value="calculations.tco_location.savings.monthly_savings" data-pricing-format="currency">90$</span>/mois économisés dès le 1er mois. TCO inférieur garanti.</p>
                         <div class="advantage-impact">
-                            <strong>Impact :</strong> 49 490$ économisés sur 20 ans total
+                            <strong>Impact :</strong> <span data-pricing-value="calculations.tco_location.savings.total" data-pricing-format="currency">49 490$</span> économisés sur 20 ans total
                         </div>
                     </div>
                     
@@ -1481,7 +1481,7 @@
                     <div class="advantage-card animate-on-scroll">
                         <div class="advantage-icon">📈</div>
                         <h3>Tarifs Dégressifs</h3>
-                        <p>Tarifs dégressifs : 150$/mois → 100$/mois. Plus d'unités = plus d'économies!</p>
+                        <p>Tarifs dégressifs : <span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">150$</span>/mois → <span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">100$</span>/mois. Plus d'unités = plus d'économies!</p>
                         <div class="advantage-impact">
                             <strong>Impact :</strong> Économies d'échelle maximisées
                         </div>
@@ -1510,8 +1510,8 @@
                         <div class="comparison-item advantage animate-on-scroll">
                             <div class="comparison-icon">💰</div>
                             <div class="comparison-content">
-                                <div class="comparison-title">150$/mois TOUT INCLUS</div>
-                                <div class="comparison-desc">Tarifs dégressifs jusqu'à 100$/mois</div>
+                                <div class="comparison-title"><span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">150$</span>/mois TOUT INCLUS</div>
+                                <div class="comparison-desc">Tarifs dégressifs jusqu'à <span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">100$</span>/mois</div>
                             </div>
                         </div>
                         
@@ -2069,9 +2069,20 @@
         });
 
         console.log('Li-CUBE PRO™ LOCATION - Présentation Interactive EDS Québec - Division Location & Services Managés');
+
+        // Initialisation du système de prix centralisé
+        document.addEventListener('pricingManagerReady', function() {
+            console.log('✅ Système de prix centralisé activé - Mise à jour présentation location...');
+            if (window.pricingManager) {
+                // Mise à jour de tous les éléments de prix avec le mode location
+                window.pricingManager.updateAllDisplays('location');
+            }
+        });
     </script>
     
     <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
+    <!-- Gestionnaire Centralisé des Prix - OBLIGATOIRE -->
+    <script src="../../js/pricing-manager.js"></script>
     <script src="../../js/image-config.js"></script>
     <script>
         // Mise à jour du background CSS pour Li-CUBE PRO™

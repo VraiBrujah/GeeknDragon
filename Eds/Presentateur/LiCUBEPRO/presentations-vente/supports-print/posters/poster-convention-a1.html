@@ -748,7 +748,7 @@
                         <div class="tco-comparison">
                             <div class="tco-value-box">
                                 <div class="tco-label">Li-CUBE PRO™</div>
-                                <div class="tco-amount">6 325</div>
+                                <div class="tco-amount" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="number">6 325</div>
                                 <div class="tco-period">CAD / 20 ans</div>
                             </div>
                             
@@ -762,7 +762,7 @@
                         </div>
                         
                         <div class="savings-banner">
-                            🎯 50 715 CAD d'économies par unité!
+                            🎯 <span data-pricing-value="calculations.tco_vente.savings.amount" data-pricing-format="currency">50 715</span> CAD d'économies par unité!
                         </div>
                     </div>
                 </div>
@@ -1127,6 +1127,15 @@
         
         <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
         <script src="../../../js/image-config.js"></script>
+        <script src="../../../js/pricing-manager.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof PricingManager !== 'undefined') {
+                PricingManager.initialize();
+                PricingManager.updatePrices();
+            }
+        });
+        </script>
         
 </body>
 </html>

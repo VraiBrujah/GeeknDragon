@@ -11,7 +11,9 @@
       "Bash(find:*)",
       "Bash(python:*)",
       "Bash(dir:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)"
     ],
     "deny": [],
     "ask": [],

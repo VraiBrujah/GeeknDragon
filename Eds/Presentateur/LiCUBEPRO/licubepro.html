@@ -563,12 +563,12 @@
             <div class="selecteur-mode">
                 <button class="bouton-mode mode-vente" id="boutonVente" onclick="changerMode('vente')">
                     💼 MODE VENTE
-                    <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9; font-weight: 700; color: #FFD700;">💰 49 490$ ÉCONOMISÉS vs Ni-Cd!</div>
-                    <div style="font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.9;">90% moins cher sur 20 ans</div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9; font-weight: 700; color: #FFD700;" data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">💰 ÉCONOMISÉS vs Ni-Cd!</div>
+                    <div style="font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.9;"><span data-pricing-value="calculations.tco_vente.savings.percentage"></span>% moins cher sur 20 ans</div>
                 </button>
                 <button class="bouton-mode mode-location actif" id="boutonLocation" onclick="changerMode('location')">
                     🏢 MODE LOCATION
-                    <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">33 140$ économisés vs Ni-Cd!</div>
+                    <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;" data-pricing-value="calculations.tco_location.savings.total" data-pricing-format="currency">économisés vs Ni-Cd!</div>
                 </button>
             </div>
         </header>
@@ -576,15 +576,15 @@
         <!-- Statistiques rapides dynamiques -->
         <section class="statistiques-rapides fade-in" id="statsRapides">
             <div class="carte-stat">
-                <span class="numero-stat" id="statPrincipal">5 500 $</span>
+                <span class="numero-stat" id="statPrincipal" data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency"></span>
                 <div class="libelle-stat" id="libellePrincipal">Prix d'achat Li-CUBE PRO™</div>
             </div>
             <div class="carte-stat">
-                <span class="numero-stat" id="statEconomies">94%</span>
+                <span class="numero-stat" id="statEconomies" data-pricing-value="calculations.tco_vente.savings.percentage"></span>
                 <div class="libelle-stat">Économies vs Ni-Cd</div>
             </div>
             <div class="carte-stat">
-                <span class="numero-stat" id="statDuree">8000+ vs 1500</span>
+                <span class="numero-stat" id="statDuree"><span data-pricing-value="modes.vente.licube.cycles" data-pricing-format="number"></span>+ vs <span data-pricing-value="modes.vente.nicd.cycles" data-pricing-format="number"></span></span>
                 <div class="libelle-stat">Cycles Li-CUBE vs Ni-Cd</div>
             </div>
             <div class="carte-stat">
@@ -592,7 +592,7 @@
                 <div class="libelle-stat" id="libelleROI">Retour investissement</div>
             </div>
             <div class="carte-stat" id="cartMonitoring" style="background: rgba(241, 143, 1, 0.1); border: 2px solid var(--accent);">
-                <span class="numero-stat" style="color: var(--accent);">20 $/mois</span>
+                <span class="numero-stat" style="color: var(--accent);" data-pricing-value="modes.vente.licube.monitoring_monthly" data-pricing-format="currency">20 $/mois</span>
                 <div class="libelle-stat">Monitoring données (optionnel)</div>
             </div>
         </section>
@@ -623,12 +623,15 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Gestionnaire Centralisé des Prix - OBLIGATOIRE -->
+    <script src="./js/pricing-manager.js"></script>
+
     <script>
         // Configuration des outils et présentations
         const OUTILS_VENDEURS = {
             vente: {
                 statistiques: {
-                    principal: { valeur: '5 000 $ + 500$ install', libelle: 'Prix de vente Li-CUBE PRO™' },
+                    principal: { valeur: 'dynamic', libelle: 'Prix de vente Li-CUBE PRO™' },
                     roi: { valeur: '2.1 ans', libelle: 'Retour investissement' }
                 },
                 categories: [
@@ -677,7 +680,7 @@
             },
             location: {
                 statistiques: {
-                    principal: { valeur: '100 $/mois', libelle: 'Tarif location Li-CUBE PRO™' },
+                    principal: { valeur: 'dynamic', libelle: 'Tarif location Li-CUBE PRO™' },
                     roi: { valeur: '6 mois', libelle: 'Retour investissement' }
                 },
                 categories: [
@@ -756,22 +759,51 @@
             // Mise à jour du contenu
             mettreAJourContenu();
             mettreAJourStatistiques();
+            
+            // Mise à jour des prix avec le nouveau mode
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                window.pricingManager.updateAllDisplays(mode);
+            }
         }
 
         function mettreAJourStatistiques() {
             const stats = OUTILS_VENDEURS[appState.currentMode].statistiques;
-            document.getElementById('statPrincipal').textContent = stats.principal.valeur;
+            
+            // Utiliser le pricing manager si disponible, sinon fallback vers les valeurs par défaut
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                // Mise à jour avec les prix dynamiques
+                const mode = appState.currentMode;
+                window.pricingManager.updateAllDisplays(mode);
+                
+                // Prix principal selon le mode
+                if (mode === 'vente') {
+                    const prixTotal = window.pricingManager.formatPrice(window.pricingManager.getPrice('vente', 'licube', 'price_total'), 'currency');
+                    document.getElementById('statPrincipal').textContent = prixTotal;
+                    document.getElementById('statROI').textContent = window.pricingManager.getConfigValue('calculations.tco_vente.savings.roi_years') + ' ans';
+                } else {
+                    const tarifMensuel = window.pricingManager.formatPrice(window.pricingManager.getPrice('location', 'licube', 'monthly_rate'), 'currency') + '/mois';
+                    document.getElementById('statPrincipal').textContent = tarifMensuel;
+                    document.getElementById('statROI').textContent = window.pricingManager.getConfigValue('calculations.tco_location.savings.roi_months') + ' mois';
+                }
+                
+                // Pourcentage d'économies dynamique
+                const economiesPercent = window.pricingManager.getConfigValue(`calculations.tco_${mode}.savings.percentage`);
+                document.getElementById('statEconomies').textContent = economiesPercent + '%';
+                
+            } else {
+                // Fallback statique si pricing manager pas encore chargé
+                document.getElementById('libellePrincipal').textContent = stats.principal.libelle;
+                document.getElementById('libelleROI').textContent = stats.roi.libelle;
+            }
+            
             document.getElementById('libellePrincipal').textContent = stats.principal.libelle;
-            document.getElementById('statROI').textContent = stats.roi.valeur;
             document.getElementById('libelleROI').textContent = stats.roi.libelle;
             
-            // Mise à jour des économies selon le mode
+            // Gestion de la carte monitoring selon le mode
             const cartMonitoring = document.getElementById('cartMonitoring');
             if (appState.currentMode === 'vente') {
-                document.getElementById('statEconomies').textContent = '90%';
                 cartMonitoring.style.display = 'block';
             } else {
-                document.getElementById('statEconomies').textContent = '87%';
                 cartMonitoring.style.display = 'none';
             }
         }
@@ -948,6 +980,19 @@
                     el.style.animationDelay = `${index * 0.1}s`;
                 });
             }, 100);
+        });
+
+        // Initialisation du système de prix centralisé
+        document.addEventListener('pricingManagerReady', function() {
+            console.log('✅ Système de prix centralisé activé - Mise à jour des prix...');
+            if (window.pricingManager) {
+                // Mise à jour initiale avec le mode par défaut (location)
+                window.pricingManager.updateAllDisplays('location');
+                
+                // Mise à jour des statistiques dynamiques selon le mode
+                const modeActuel = document.querySelector('.bouton-mode.actif').id.includes('Location') ? 'location' : 'vente';
+                window.pricingManager.updateAllDisplays(modeActuel);
+            }
         });
     </script>
     

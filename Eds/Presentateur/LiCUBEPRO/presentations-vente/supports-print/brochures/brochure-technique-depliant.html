@@ -739,7 +739,7 @@ p {
                     <span class="problem-icon">💰</span>
                     <div class="problem-content">
                         <div class="problem-title">TCO Prohibitif</div>
-                        <div class="problem-desc">57 040 CAD sur 20 ans vs 6 325 CAD pour LFP</div>
+                        <div class="problem-desc"><span data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">57 040</span> CAD sur 20 ans vs <span data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">6 325</span> CAD pour LFP</div>
                     </div>
                 </li>
                 
@@ -993,7 +993,7 @@ p {
                 <div class="tco-values">
                     <div class="tco-column">
                         <div class="tco-label">Li-CUBE PRO™ LFP</div>
-                        <div class="tco-amount">6 325</div>
+                        <div class="tco-amount" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="number">6 325</div>
                         <div class="tco-period">CAD</div>
                     </div>
                     
@@ -1007,7 +1007,7 @@ p {
                 </div>
                 
                 <div class="savings-box">
-                    🎯 ÉCONOMIES : 50 715 CAD (90%)
+                    🎯 ÉCONOMIES : <span data-pricing-value="calculations.tco_vente.savings.amount" data-pricing-format="currency">50 715</span> CAD (<span data-pricing-value="calculations.tco_vente.savings.percentage">90</span>%)
                 </div>
             </div>
             
@@ -1242,7 +1242,15 @@ p {
         });
         </script>
         
-        
+        <script src="../../../js/pricing-manager.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof PricingManager !== 'undefined') {
+                PricingManager.initialize();
+                PricingManager.updatePrices();
+            }
+        });
+        </script>
         
 </body>
 </html>

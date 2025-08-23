@@ -636,7 +636,7 @@
                 <div class="comparison-visual">
                     <div class="cost-column lfp">
                         <div class="cost-label">Li-CUBE PRO™ LFP</div>
-                        <div class="cost-value">2 500</div>
+                        <div class="cost-value" data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="number">2 500</div>
                         <div class="cost-period">CAD sur 20 ans</div>
                     </div>
                     
@@ -644,13 +644,13 @@
                     
                     <div class="cost-column nicd">
                         <div class="cost-label">Batteries Ni-Cd</div>
-                        <div class="cost-value">57 040</div>
+                        <div class="cost-value" data-pricing-value="calculations.tco_location.nicd.total_20_years" data-pricing-format="number">57 040</div>
                         <div class="cost-period">CAD sur 20 ans</div>
                     </div>
                 </div>
                 
                 <div class="savings-highlight">
-                    🎯 Économies : 54 240 CAD par unité (95% moins cher!)
+                    🎯 Économies : <span data-pricing-value="calculations.tco_location.savings.amount" data-pricing-format="currency">54 240</span> CAD par unité (<span data-pricing-value="calculations.tco_location.savings.percentage">95</span>% moins cher!)
                 </div>
             </div>
             
@@ -713,7 +713,7 @@
                     <div class="breakdown-title">🟢 Li-CUBE PRO™ LFP</div>
                     <div class="breakdown-item">
                         <span>Coût initial</span>
-                        <span>2 500 CAD</span>
+                        <span><span data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="currency">2 500</span> CAD</span>
                     </div>
                     <div class="breakdown-item">
                         <span>Maintenance (20 ans)</span>
@@ -729,7 +729,7 @@
                     </div>
                     <div class="breakdown-item">
                         <span>TOTAL 20 ans</span>
-                        <span>2 500 CAD</span>
+                        <span><span data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="currency">2 500</span> CAD</span>
                     </div>
                 </div>
                 
@@ -753,7 +753,7 @@
                     </div>
                     <div class="breakdown-item">
                         <span>TOTAL 20 ans</span>
-                        <span>57 040 CAD</span>
+                        <span><span data-pricing-value="calculations.tco_location.nicd.total_20_years" data-pricing-format="currency">57 040</span> CAD</span>
                     </div>
                 </div>
             </div>
@@ -980,7 +980,15 @@
         });
         </script>
         
-        
+        <script src="../../../js/pricing-manager.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof PricingManager !== 'undefined') {
+                PricingManager.initialize();
+                PricingManager.updatePrices();
+            }
+        });
+        </script>
         
 </body>
 </html>

@@ -916,7 +916,7 @@
                             <div class="stat-label">Ans d'expertise</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">94%</div>
+                            <div class="stat-number" data-pricing-value="calculations.tco_vente.savings.percentage"></div>
                             <div class="stat-label">Économies TCO</div>
                         </div>
                         <div class="stat-item">
@@ -1005,7 +1005,7 @@
                     <h3>Solutions Flexibles</h3>
                     <p>Options de financement adaptées : location opérationnelle ou achat direct selon vos besoins budgétaires.</p>
                     <ul class="service-features">
-                        <li><i class="fas fa-check-circle"></i> Location dès 150$/mois</li>
+                        <li><i class="fas fa-check-circle"></i> Location dès <span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">150$</span>/mois</li>
                         <li><i class="fas fa-check-circle"></i> Achat unitaire</li>
                         <li><i class="fas fa-check-circle"></i> Leasing personnalisé</li>
                     </ul>
@@ -1032,17 +1032,17 @@
                     <h3>Li-CUBE PRO™</h3>
                     <p class="product-description">
                         La nouvelle génération de batteries lithium LFP (LiFePO4) conçue spécifiquement pour l'industrie ferroviaire. 
-                        <strong>Économisez jusqu'à 94% de votre TCO</strong> avec une technologie de surveillance IoT intégrée.
+                        <strong>Économisez jusqu'à <span data-pricing-value="calculations.tco_vente.savings.percentage"></span>% de votre TCO</strong> avec une technologie de surveillance IoT intégrée.
                     </p>
                     
                     <div class="product-highlights">
                         <div class="highlight-item">
                             <i class="fas fa-sync-alt"></i>
-                            <span>8000+ cycles</span>
+                            <span><span data-pricing-value="modes.vente.licube.cycles" data-pricing-format="number">8000</span>+ cycles</span>
                         </div>
                         <div class="highlight-item">
                             <i class="fas fa-weight-hanging"></i>
-                            <span>71% plus léger</span>
+                            <span><span data-pricing-value="battery_specs.weight_reduction_percentage">71</span>% plus léger</span>
                         </div>
                         <div class="highlight-item">
                             <i class="fas fa-tools"></i>
@@ -1158,7 +1158,7 @@
                             </div>
                             <div class="benefit-content">
                                 <h3>Économies Garanties</h3>
-                                <p>Réduction jusqu'à 94% du TCO sur 20 ans avec ROI prouvé et période de retour sur investissement optimale.</p>
+                                <p>Réduction jusqu'à <span data-pricing-value="calculations.tco_vente.savings.percentage"></span>% du TCO sur 20 ans avec ROI prouvé et période de retour sur investissement optimale.</p>
                             </div>
                         </div>
                         
@@ -1178,11 +1178,11 @@
                     <h3>Nos Résultats</h3>
                     <div class="stats-grid">
                         <div class="visual-stat">
-                            <div class="visual-stat-number">8000+</div>
+                            <div class="visual-stat-number" data-pricing-value="modes.vente.licube.cycles" data-pricing-format="number">8000+</div>
                             <div class="visual-stat-label">Cycles garantis</div>
                         </div>
                         <div class="visual-stat">
-                            <div class="visual-stat-number">71%</div>
+                            <div class="visual-stat-number" data-pricing-value="battery_specs.weight_reduction_percentage"></div>
                             <div class="visual-stat-label">Réduction de poids</div>
                         </div>
                         <div class="visual-stat">
@@ -1280,6 +1280,9 @@
         </div>
     </footer>
 
+    
+    <!-- Gestionnaire Centralisé des Prix - OBLIGATOIRE -->
+    <script src="./js/pricing-manager.js"></script>
     
     <!-- JavaScript pour les animations et interactions -->
     <script>
@@ -1382,6 +1385,15 @@
             }
 
             // ✅ Animations et interactions initialisées
+        });
+
+        // Initialisation du système de prix centralisé
+        document.addEventListener('pricingManagerReady', function() {
+            console.log('✅ Système de prix centralisé activé - Mise à jour des prix EDS Québec...');
+            if (window.pricingManager) {
+                // Mise à jour de tous les éléments de prix sur la page
+                window.pricingManager.updateAllDisplays('location'); // Défaut location pour page publique
+            }
         });
     </script>
 

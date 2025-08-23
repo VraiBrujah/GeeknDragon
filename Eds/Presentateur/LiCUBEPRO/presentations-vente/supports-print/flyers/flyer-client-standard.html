@@ -620,18 +620,18 @@
                 <div class="tco-comparison">
                     <div>
                         <div style="font-size: 10pt; opacity: 0.9;">Li-CUBE PRO™</div>
-                        <div class="tco-value">6 325 CAD</div>
+                        <div class="tco-value" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">6 325 CAD</div>
                         <div style="font-size: 8pt;">TCO 20 ans</div>
                     </div>
                     <div class="tco-vs">VS</div>
                     <div>
                         <div style="font-size: 10pt; opacity: 0.9;">Ni-Cd</div>
-                        <div class="tco-value">57 040 CAD</div>
+                        <div class="tco-value" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">57 040 CAD</div>
                         <div style="font-size: 8pt;">TCO 20 ans</div>
                     </div>
                 </div>
                 <div class="tco-savings">
-                    ✨ 49 490 CAD d'économies (90% moins cher!)
+                    ✨ <span data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">49 490 CAD</span> d'économies (<span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="number">90</span>% moins cher!)
                 </div>
             </div>
         </div>
@@ -825,6 +825,63 @@
         
         <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
         <script src="../../../js/image-config.js"></script>
+        
+        <!-- Intégration du système de prix centralisé -->
+        <script src="../../../js/pricing-manager.js"></script>
+        
+        <script>
+            /**
+             * Flyer client intégré avec le système de prix centralisé
+             * 
+             * Rôle : Remplacer TOUS les prix hardcodés par des données du pricing-manager.js
+             * Fonctionnement : Charge et affiche automatiquement les prix depuis pricing-config.json
+             */
+            
+            let pricingManager = null;
+            let currentMode = 'vente'; // Mode par défaut pour presentations-vente
+            
+            /**
+             * Initialise le flyer avec le système centralisé
+             */
+            async function initFlyer() {
+                try {
+                    console.log('🚀 Initialisation flyer avec pricing-manager.js...');
+                    
+                    // Créer et initialiser le gestionnaire de prix
+                    pricingManager = new PricingManager();
+                    
+                    // Attendre que la configuration soit chargée
+                    await new Promise(resolve => {
+                        const checkLoaded = setInterval(() => {
+                            if (pricingManager.isLoaded) {
+                                clearInterval(checkLoaded);
+                                resolve();
+                            }
+                        }, 100);
+                    });
+                    
+                    console.log('✅ Configuration des prix chargée pour flyer client');
+                    
+                    // Mettre à jour tous les prix affichés
+                    pricingManager.updateAllDisplays(currentMode);
+                    
+                } catch (erreur) {
+                    console.error('❌ Erreur initialisation pricing-manager:', erreur);
+                }
+            }
+
+            // Initialisation automatique au chargement de la page
+            document.addEventListener('DOMContentLoaded', function() {
+                // Déterminer le mode selon le chemin URL
+                const isLocationMode = window.location.pathname.includes('presentations-location');
+                currentMode = isLocationMode ? 'location' : 'vente';
+                
+                console.log(`📊 Mode détecté: ${currentMode}`);
+                
+                // Initialiser le système de prix centralisé
+                initFlyer();
+            });
+        </script>
         
 </body>
 </html>

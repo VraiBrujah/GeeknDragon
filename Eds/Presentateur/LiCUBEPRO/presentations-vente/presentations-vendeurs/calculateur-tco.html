@@ -463,7 +463,7 @@
                 <div class="control-group">
                     <div class="fixed-value">
                         <span class="fixed-value-label">💰 Maintenance Ni-Cd validée (CAD/an)</span>
-                        <span class="fixed-value-display" id="maintenanceValue">452 CAD</span>
+                        <span class="fixed-value-display" id="maintenanceValue" data-pricing-value="modes.vente.nicd.maintenance_annual" data-pricing-format="currency">452 CAD</span>
                     </div>
                 </div>
 
@@ -487,7 +487,7 @@
                     <div class="result-title">
                         🌆 Li-CUBE PRO™ - Technologie 2025
                     </div>
-                    <div class="result-value" id="lfpTotal">5 500 CAD</div>
+                    <div class="result-value" id="lfpTotal" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">5 500 CAD</div>
                     <div class="result-subtitle">Coût total sur la période</div>
                 </div>
 
@@ -495,7 +495,7 @@
                     <div class="result-title">
                         ⚠️ Ni-Cd - Technologie 1980 obsolète
                     </div>
-                    <div class="result-value" id="nicdTotal">54 990 CAD</div>
+                    <div class="result-value" id="nicdTotal" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">54 990 CAD</div>
                     <div class="result-subtitle">Coût total sur la période</div>
                 </div>
 
@@ -503,7 +503,7 @@
                     <div class="result-title">
                         🚀 Économies SPECTACULAIRES
                     </div>
-                    <div class="result-value" id="totalSavings">49 490 CAD</div>
+                    <div class="result-value" id="totalSavings" data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">49 490 CAD</div>
                     <div class="result-subtitle" id="savingsPercentage">90% d'économies</div>
                 </div>
             </div>
@@ -513,7 +513,7 @@
                 <div class="breakdown-grid">
                     <div class="breakdown-item">
                         <h4>🔋 Li-CUBE PRO™ - Technologie 2025 moderne</h4>
-                        <div class="breakdown-value" id="lfpInitial">5 000 CAD + taxes + 500$ installation</div>
+                        <div class="breakdown-value" id="lfpInitial" data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency"> CAD + taxes + installation</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>📱 Li-CUBE PRO™ - Monitoring optionnel</h4>
@@ -521,15 +521,15 @@
                     </div>
                     <div class="breakdown-item">
                         <h4>⚠️ Ni-Cd - Technologie 1980 obsolète</h4>
-                        <div class="breakdown-value" id="nicdInitial">12 000 CAD</div>
+                        <div class="breakdown-value" id="nicdInitial" data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🔧 Ni-Cd - Coûts maintenance obligatoire</h4>
-                        <div class="breakdown-value" id="nicdMaintenance">6 990 CAD</div>
+                        <div class="breakdown-value" id="nicdMaintenance" data-pricing-value="calculations.tco_vente.nicd.maintenance_20_years" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🔄 Ni-Cd - 3 remplacements forcés</h4>
-                        <div class="breakdown-value" id="nicdReplacements">36 000 CAD</div>
+                        <div class="breakdown-value" id="nicdReplacements" data-pricing-value="calculations.tco_vente.nicd.replacements_cost" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>Retour sur investissement</h4>
@@ -543,13 +543,13 @@
                 <div class="chart">
                     <div class="chart-bar">
                         <div class="bar lfp" id="lfpBar">
-                            <div class="bar-value" id="lfpBarValue">5 500 CAD</div>
+                            <div class="bar-value" id="lfpBarValue" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency"> CAD</div>
                         </div>
                         <div class="bar-label">Li-CUBE PRO™ 2025</div>
                     </div>
                     <div class="chart-bar">
                         <div class="bar nicd" id="nicdBar">
-                            <div class="bar-value" id="nicdBarValue">54 990 CAD</div>
+                            <div class="bar-value" id="nicdBarValue" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency"> CAD</div>
                         </div>
                         <div class="bar-label">Ni-Cd 1980 obsolète</div>
                     </div>
@@ -564,301 +564,136 @@
         </div>
     </div>
 
-    <!-- Chargement des nouveaux calculateurs refactorisés ELI10 -->
-    <script src="../../utils/calculateur-tco-propre.js"></script>
-    <script src="../../utils/tco-calculator.js"></script>
+    <!-- Intégration du système de prix centralisé -->
+    <script src="../../js/pricing-manager.js"></script>
     
     <script>
-        // Système de calcul refactorisé avec standards ELI10
-        let calculateurTcoDynamique = null;
+        /**
+         * Calculateur TCO intégré avec le système de prix centralisé
+         * 
+         * Rôle : Remplacer TOUS les prix hardcodés par des données du pricing-manager.js
+         * Fonctionnement : 
+         * 1. Charge automatiquement la configuration depuis pricing-config.json
+         * 2. Met à jour tous les éléments DOM avec les valeurs centralisées
+         * 3. Calcule et affiche les graphiques comparatifs
+         */
         
-        // Initialisation avec les nouveaux calculateurs ELI10
+        // Variables globales pour l'état du calculateur
+        let pricingManager = null;
+        let currentMode = 'vente'; // Mode par défaut pour presentations-vente
+        
+        /**
+         * Initialise le calculateur TCO avec le système centralisé
+         */
         async function initCalculateur() {
             try {
-                console.log('🚀 Initialisation calculateur TCO avec standards ELI10...');
+                console.log('🚀 Initialisation calculateur TCO avec pricing-manager.js...');
                 
-                // Initialiser le calculateur TCO dynamique refactorisé
-                calculateurTcoDynamique = await creerCalculateurTcoDynamique();
+                // Créer et initialiser le gestionnaire de prix
+                pricingManager = new PricingManager();
                 
-                console.log('✅ Calculateur TCO ELI10 initialisé avec succès');
+                // Attendre que la configuration soit chargée
+                await new Promise(resolve => {
+                    const checkLoaded = setInterval(() => {
+                        if (pricingManager.isLoaded) {
+                            clearInterval(checkLoaded);
+                            resolve();
+                        }
+                    }, 100);
+                });
                 
-                // Calculer et afficher avec le nouveau système
-                calculerTcoAvecNouveauSysteme();
+                console.log('✅ Configuration des prix chargée avec succès');
+                
+                // Mettre à jour tous les affichages
+                updateAllDisplays();
+                
+                // Calculer et afficher les barres graphiques
+                updateChartBars();
                 
             } catch (erreur) {
-                console.error('❌ Erreur initialisation calculateur ELI10:', erreur);
-                // Fallback vers calculs simples avec valeurs par défaut
-                calculerTcoSimple();
+                console.error('❌ Erreur initialisation pricing-manager:', erreur);
             }
         }
         
-        // Mettre à jour les valeurs affichées depuis la configuration
-        function updateDisplayValues() {
+        /**
+         * Met à jour tous les éléments DOM avec les données centralisées
+         */
+        function updateAllDisplays() {
+            if (!pricingManager || !pricingManager.isLoaded) return;
+            
+            // Mettre à jour tous les éléments avec data-pricing-value
+            pricingManager.updateAllDisplays(currentMode);
+            
+            // Mettre à jour les valeurs fixes
+            const config = pricingManager.config;
             document.getElementById('periodValue').textContent = 
-                `${config.parametres_calcul_tco.periode_analyse_defaut_annees} ans`;
+                `${config.calculations.period_years} ans`;
             document.getElementById('unitsValue').textContent = '1 unité';
-            document.getElementById('maintenanceValue').textContent = 
-                `${config.maintenance_annuelle.ni_cd_saft.cout_maintenance_cad} CAD`;
             document.getElementById('replacementValue').textContent = 
-                `${config.specifications_batteries.ni_cd_saft.duree_vie_annees} ans`;
+                `${config.modes[currentMode].nicd.replacement_years} ans`;
             document.getElementById('replacementsValue').textContent = 
-                `${config.specifications_batteries.ni_cd_saft.remplacements_sur_20_ans} remplacements`;
+                `${config.modes[currentMode].nicd.replacements_needed} remplacements`;
+                
+            // Mettre à jour le pourcentage d'économies
+            const savingsPercent = config.calculations.tco_vente.savings.percentage;
+            document.getElementById('savingsPercentage').textContent = `${savingsPercent}% d'économies`;
+            
+            // Mettre à jour le ROI
+            const roiYears = config.calculations.tco_vente.savings.roi_years;
+            document.getElementById('roi').textContent = `ROI: ${roiYears} ans`;
         }
-
-        // Éléments DOM pour l'affichage des résultats
-        const lfpTotal = document.getElementById('lfpTotal');
-        const nicdTotal = document.getElementById('nicdTotal');
-        const totalSavings = document.getElementById('totalSavings');
-        const savingsPercentage = document.getElementById('savingsPercentage');
-        const lfpInitial = document.getElementById('lfpInitial');
-        const lfpMonitoring = document.getElementById('lfpMonitoring');
-        const nicdInitial = document.getElementById('nicdInitial');
-        const nicdMaintenance = document.getElementById('nicdMaintenance');
-        const nicdReplacements = document.getElementById('nicdReplacements');
-        const roi = document.getElementById('roi');
-        const lfpBar = document.getElementById('lfpBar');
-        const nicdBar = document.getElementById('nicdBar');
-        const lfpBarValue = document.getElementById('lfpBarValue');
-        const nicdBarValue = document.getElementById('nicdBarValue');
-
-        // Calcul TCO avec le nouveau système refactorisé ELI10
-        function calculerTcoAvecNouveauSysteme() {
-            if (!calculateurTcoDynamique) {
-                console.log('⚠️ Calculateur ELI10 non initialisé, utilisation fallback');
-                calculerTcoSimple();
-                return;
-            }
-
-            try {
-                // Paramètres pour calcul TCO vente avec valeurs par défaut recommandées
-                const parametresCalcul = {
-                    dureeAnalyseAnnees: 20,  // Période d'analyse standard
-                    nombreUnites: 1,         // Une unité pour démonstration
-                    region: 'Quebec'         // Région par défaut
-                };
-
-                // Calculer avec le nouveau calculateur TCO dynamique
-                const resultatVente = calculateurTcoDynamique.calculerTcoVente(parametresCalcul);
-
-                // Mettre à jour l'affichage avec les nouveaux résultats
-                mettreAJourAffichageAvecNouveauSysteme(resultatVente);
-
-            } catch (erreur) {
-                console.error('❌ Erreur calcul TCO avec nouveau système:', erreur);
-                calculerTcoSimple();
-            }
+        
+        /**
+         * Met à jour les barres graphiques comparatives
+         */
+        function updateChartBars() {
+            if (!pricingManager || !pricingManager.isLoaded) return;
+            
+            const config = pricingManager.config;
+            const lfpTotal = config.calculations.tco_vente.licube.total_20_years;
+            const nicdTotal = config.calculations.tco_vente.nicd.total_20_years;
+            
+            // Calculer les pourcentages pour les barres
+            const maxValue = Math.max(lfpTotal, nicdTotal);
+            const lfpPercent = (lfpTotal / maxValue) * 100;
+            const nicdPercent = (nicdTotal / maxValue) * 100;
+            
+            // Appliquer les largeurs des barres
+            const lfpBar = document.getElementById('lfpBar');
+            const nicdBar = document.getElementById('nicdBar');
+            
+            if (lfpBar) lfpBar.style.height = `${lfpPercent}%`;
+            if (nicdBar) nicdBar.style.height = `${nicdPercent}%`;
         }
-
-        // Fallback avec calculs simples selon standards ELI10
-        function calculerTcoSimple() {
-            console.log('📊 Utilisation calcul TCO simplifié avec valeurs par défaut');
-            
-            // Rôle      : Période d'analyse par défaut pour calculs TCO
-            // Type      : number (durée)
-            // Unité     : années
-            // Domaine   : 1 ≤ période ≤ 50
-            // Source    : Standard industrie batteries ferroviaires
-            // Exemple   : 20
-            const periodeAnalyse = 20;
-            
-            // Rôle      : Nombre d'unités pour démonstration
-            // Type      : number (quantité)
-            // Unité     : unités
-            // Domaine   : 1
-            // Exemple   : 1
-            const nombreUnites = 1;
-            
-            // =================================================================
-            // CALCULS LI-CUBE PRO™ LIFEP04 (VALEURS PAR DÉFAUT)
-            // =================================================================
-            
-            // Rôle      : Coût initial batterie Li-CUBE PRO™
-            // Type      : number (coût)
-            // Unité     : CAD
-            // Domaine   : 5000 ≤ coût ≤ 6000
-            // Source    : Prix public standard Li-CUBE PRO™ 2025
-            // Exemple   : 6325 (5000 + taxes + 500 installation)
-            const coutInitialLfp = 6325 * nombreUnites;
-            
-            // Rôle      : Coût de monitoring annuel optionnel
-            // Type      : number (coût annuel)
-            // Unité     : CAD/an
-            // Domaine   : 0 ≤ coût ≤ 300
-            // Source    : Service monitoring EDS Québec
-            // Exemple   : 240 (20$/mois × 12 mois)
-            const coutMonitoringLfp = 0; // Optionnel, non inclus par défaut
-            
-            // Formule   : coût_total_lfp = coût_initial + monitoring
-            // Symboles  : coût_initial [CAD], monitoring [CAD]
-            // Exemple   : 6325 + 0 = 6325 CAD (monitoring optionnel)
-            const coutTotalLfp = coutInitialLfp + coutMonitoringLfp;
-
-            // =================================================================
-            // CALCULS NI-CD TRADITIONNELLES (VALEURS RÉFÉRENCE MARCHÉ)
-            // =================================================================
-            
-            // Rôle      : Coût initial batteries Ni-Cd équivalentes
-            // Type      : number (coût)
-            // Unité     : CAD
-            // Domaine   : 10000 ≤ coût ≤ 15000
-            // Source    : Prix marché batteries Ni-Cd ferroviaires
-            // Exemple   : 12000
-            const coutInitialNiCd = 12000 * nombreUnites;
-            
-            // Rôle      : Coût de maintenance annuelle obligatoire Ni-Cd
-            // Type      : number (coût annuel)
-            // Unité     : CAD/an
-            // Domaine   : 300 ≤ coût ≤ 600
-            // Source    : Coûts maintenance réels batteries Ni-Cd
-            // Exemple   : 349.5 (ajusté pour nouvelle économie)
-            const coutMaintenanceNiCd = 349.5 * nombreUnites * periodeAnalyse;
-            
-            // Rôle      : Nombre de remplacements Ni-Cd sur période
-            // Type      : number (quantité)
-            // Unité     : remplacements
-            // Domaine   : 2 ≤ remplacements ≤ 4
-            // Formule   : Math.floor(période / durée_vie_ni_cd)
-            // Exemple   : 3
-            const nombreRemplacements = 3;
-            
-            // Rôle      : Coût total des remplacements Ni-Cd
-            // Type      : number (coût total)
-            // Unité     : CAD
-            // Formule   : remplacements × coût_initial × nombre_unités
-            // Exemple   : 3 × 12000 × 1 = 36000 CAD
-            const coutRemplacementsNiCd = nombreRemplacements * 12000 * nombreUnites;
-            
-            // Formule   : coût_total_ni_cd = initial + maintenance + remplacements
-            // Symboles  : initial [CAD], maintenance [CAD], remplacements [CAD]
-            // Exemple   : 12000 + 6990 + 36000 = 54990 CAD
-            const coutTotalNiCd = coutInitialNiCd + coutMaintenanceNiCd + coutRemplacementsNiCd;
-
-            // =================================================================
-            // CALCUL DES ÉCONOMIES ET MÉTRIQUES
-            // =================================================================
-            
-            // Formule   : économies = coût_ni_cd - coût_lfp
-            // Symboles  : coût_ni_cd [CAD], coût_lfp [CAD]
-            // Exemple   : 54990 - 6325 = 48665 CAD
-            const economies = coutTotalNiCd - coutTotalLfp;
-            
-            // Formule   : pourcentage = (économies / coût_ni_cd) × 100
-            // Symboles  : économies [CAD], coût_ni_cd [CAD]
-            // Exemple   : (48665 / 54990) × 100 = 88%
-            const pourcentageEconomies = Math.round((economies / coutTotalNiCd) * 100);
-
-            // Affichage avec données structurées
-            afficherResultatsSimples({
-                lfpTotal: coutTotalLfp,
-                nicdTotal: coutTotalNiCd,
-                savings: economies,
-                savingsPercent: pourcentageEconomies,
-                lfpInitial: coutInitialLfp,
-                lfpMonitoring: coutMonitoringLfp,
-                nicdInitial: coutInitialNiCd,
-                nicdMaintenance: coutMaintenanceNiCd,
-                nicdReplacements: coutRemplacementsNiCd,
-                replacements: nombreRemplacements
-            });
-        }
-
-        // Mise à jour affichage avec nouveau système refactorisé
-        function mettreAJourAffichageAvecNouveauSysteme(resultatVente) {
-            console.log('📊 Mise à jour affichage avec données ELI10:', resultatVente);
-            
-            // Extraire données du nouveau format de résultat
-            const tcoLiFePO4 = resultatVente.tco_li_cube_pro;
-            const tcoNiCd = resultatVente.tco_ni_cd;
-            const comparaison = resultatVente.comparaison;
-            
-            // Utiliser fonction d'affichage commune avec données adaptées
-            afficherResultatsSimples({
-                lfpTotal: tcoLiFePO4.coutTotal,
-                nicdTotal: tcoNiCd.coutTotal,
-                savings: comparaison.economiesAbsolues,
-                savingsPercent: comparaison.economiesRelativesPourcentage,
-                lfpInitial: tcoLiFePO4.repartitionCouts.acquisition,
-                lfpMonitoring: tcoLiFePO4.repartitionCouts.maintenance,
-                nicdInitial: tcoNiCd.repartitionCouts.acquisition,
-                nicdMaintenance: tcoNiCd.repartitionCouts.maintenance,
-                nicdReplacements: tcoNiCd.repartitionCouts.remplacements,
-                replacements: tcoNiCd.detailsCalcul.nombreRemplacements
-            });
-        }
-
-        // Fonction d'affichage unifiée selon standards ELI10
-        function afficherResultatsSimples(donneesCalcul) {
-            console.log('🎯 Affichage résultats TCO:', donneesCalcul);
-            
-            // Rôle      : Formateur pour devises canadiennes
-            // Type      : Intl.NumberFormat (formateur de nombre)
-            // Unité     : sans unité (objet formateur)
-            // Domaine   : formateur valide pour locale fr-CA
-            // Source    : API Intl.NumberFormat navigateur
-            // Exemple   : NumberFormat { locale: "fr-CA" }
-            const formateurDevise = new Intl.NumberFormat('fr-CA');
-            
-            // Mise à jour des totaux principaux
-            lfpTotal.textContent = `${formateurDevise.format(donneesCalcul.lfpTotal)} CAD`;
-            nicdTotal.textContent = `${formateurDevise.format(donneesCalcul.nicdTotal)} CAD`;
-            totalSavings.textContent = `${formateurDevise.format(donneesCalcul.savings)} CAD`;
-            savingsPercentage.textContent = `${donneesCalcul.savingsPercent.toFixed(1)}%`;
-
-            // Mise à jour des détails de coûts
-            lfpInitial.textContent = `${formateurDevise.format(donneesCalcul.lfpInitial)} CAD`;
-            lfpMonitoring.textContent = `${formateurDevise.format(donneesCalcul.lfpMonitoring)} CAD`;
-            nicdInitial.textContent = `${formateurDevise.format(donneesCalcul.nicdInitial)} CAD`;
-            nicdMaintenance.textContent = `${formateurDevise.format(donneesCalcul.nicdMaintenance)} CAD`;
-            nicdReplacements.textContent = `${formateurDevise.format(donneesCalcul.nicdReplacements)} CAD (${donneesCalcul.replacements}×)`;
-
-            // Calcul et affichage ROI
-            // Formule   : roi = pourcentage_économies × facteur_amplification
-            // Symboles  : pourcentage_économies [%], facteur_amplification [10]
-            // Exemple   : 93.4 × 10 = 934%
-            const roiValue = Math.round(donneesCalcul.savingsPercent * 10);
-            roi.textContent = `${roiValue}%`;
-
-            // Mise à jour des barres graphiques comparatives
-            // Rôle      : Valeur maximale pour normalisation des barres
-            // Type      : number (valeur de référence)
-            // Unité     : CAD
-            // Domaine   : max(tco_lfp, tco_ni_cd)
-            // Formule   : Math.max(lfp_total, nicd_total)
-            // Exemple   : Math.max(3750, 57040) = 57040
-            const valeurMaximale = Math.max(donneesCalcul.lfpTotal, donneesCalcul.nicdTotal);
-            
-            // Formule   : pourcentage_barre = (valeur / valeur_max) × 100
-            // Symboles  : valeur [CAD], valeur_max [CAD]
-            // Exemple   : (3750 / 57040) × 100 = 6.6%
-            const pourcentageLfp = (donneesCalcul.lfpTotal / valeurMaximale) * 100;
-            const pourcentageNiCd = (donneesCalcul.nicdTotal / valeurMaximale) * 100;
-
-            // Application des largeurs de barres et valeurs
-            lfpBar.style.width = `${pourcentageLfp}%`;
-            nicdBar.style.width = `${pourcentageNiCd}%`;
-            lfpBarValue.textContent = `${formateurDevise.format(donneesCalcul.lfpTotal)} CAD`;
-            nicdBarValue.textContent = `${formateurDevise.format(donneesCalcul.nicdTotal)} CAD`;
-        }
-
-        // Fonctions utilitaires refactorisées selon standards ELI10
+        
+        /**
+         * Exporte les résultats vers PDF/impression
+         */
         function exporterResultats() {
             console.log('📄 Export résultats TCO vers PDF/impression');
             window.print();
         }
 
+        /**
+         * Réinitialise le calculateur
+         */
         function reinitialiserCalculateur() {
             console.log('🔄 Réinitialisation calculateur TCO');
-            // Recalculer avec le système en cours
-            if (calculateurTcoDynamique) {
-                calculerTcoAvecNouveauSysteme();
-            } else {
-                calculerTcoSimple();
-            }
+            updateAllDisplays();
+            updateChartBars();
         }
 
-        // Initialisation automatique avec nouveaux standards ELI10
+        // Initialisation automatique au chargement de la page
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Démarrage calculateur TCO Li-CUBE PRO™ avec standards ELI10');
+            console.log('🚀 Démarrage calculateur TCO Li-CUBE PRO™ avec pricing-manager centralisé');
+            
+            // Déterminer le mode selon le chemin URL
+            const isLocationMode = window.location.pathname.includes('presentations-location');
+            currentMode = isLocationMode ? 'location' : 'vente';
+            
+            console.log(`📊 Mode détecté: ${currentMode}`);
+            
+            // Initialiser le calculateur
             initCalculateur();
         });
     </script>

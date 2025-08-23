@@ -636,7 +636,7 @@
                 <div class="comparison-visual">
                     <div class="cost-column lfp">
                         <div class="cost-label">Li-CUBE PRO™ LFP</div>
-                        <div class="cost-value">6 325</div>
+                        <div class="cost-value" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="number">6 325</div>
                         <div class="cost-period">CAD sur 20 ans</div>
                     </div>
                     
@@ -644,13 +644,13 @@
                     
                     <div class="cost-column nicd">
                         <div class="cost-label">Batteries Ni-Cd</div>
-                        <div class="cost-value">57 040</div>
+                        <div class="cost-value" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="number">57 040</div>
                         <div class="cost-period">CAD sur 20 ans</div>
                     </div>
                 </div>
                 
                 <div class="savings-highlight">
-                    🎯 Économies : 45 915 CAD par unité (80% moins cher!)
+                    🎯 Économies : <span data-pricing-value="calculations.tco_vente.savings.amount" data-pricing-format="currency">45 915</span> CAD par unité (<span data-pricing-value="calculations.tco_vente.savings.percentage">80</span>% moins cher!)
                 </div>
             </div>
             
@@ -713,7 +713,7 @@
                     <div class="breakdown-title">🟢 Li-CUBE PRO™ LFP</div>
                     <div class="breakdown-item">
                         <span>Coût initial</span>
-                        <span>5 000 + taxes + 500$ installation</span>
+                        <span><span data-pricing-value="licube.price_base">5 000</span> + taxes + <span data-pricing-value="licube.installation_cost">500</span>$ installation</span>
                     </div>
                     <div class="breakdown-item">
                         <span>Maintenance (20 ans)</span>
@@ -724,12 +724,12 @@
                         <span>0 CAD</span>
                     </div>
                     <div class="breakdown-item">
-                        <span>Monitoring (20$/mois × 20 ans)</span>
-                        <span>4 800 CAD</span>
+                        <span>Monitoring (<span data-pricing-value="licube.monitoring_monthly">20</span>$/mois × 20 ans)</span>
+                        <span><span data-pricing-value="calculations.tco_vente.licube.monitoring_20_years" data-pricing-format="currency">4 800</span> CAD</span>
                     </div>
                     <div class="breakdown-item">
                         <span>TOTAL 20 ans</span>
-                        <span>11 125 CAD</span>
+                        <span><span data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">11 125</span> CAD</span>
                     </div>
                 </div>
                 
@@ -753,7 +753,7 @@
                     </div>
                     <div class="breakdown-item">
                         <span>TOTAL 20 ans</span>
-                        <span>57 040 CAD</span>
+                        <span><span data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">57 040</span> CAD</span>
                     </div>
                 </div>
             </div>
@@ -980,7 +980,25 @@
         });
         </script>
         
+        <!-- Gestionnaire Centralisé des Prix - OBLIGATOIRE -->
+        <script src="../../../js/pricing-manager.js"></script>
+        <script>
+            document.addEventListener('pricingManagerReady', function() {
+                if (window.pricingManager) {
+                    window.pricingManager.updateAllDisplays('vente');
+                }
+            });
+        </script>
         
+        <script src="../../../js/pricing-manager.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof PricingManager !== 'undefined') {
+                PricingManager.initialize();
+                PricingManager.updatePrices();
+            }
+        });
+        </script>
         
 </body>
 </html>

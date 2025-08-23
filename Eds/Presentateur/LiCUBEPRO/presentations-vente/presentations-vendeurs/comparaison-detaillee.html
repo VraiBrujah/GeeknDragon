@@ -835,16 +835,16 @@
                             <div class="bar-container">
                                 <div class="bar-label">LFP</div>
                                 <div class="bar-track">
-                                    <div class="bar-fill lfp" style="width: 53%;">6325</div>
+                                    <div class="bar-fill lfp" style="width: 53%;" data-pricing-value="modes.vente.licube.price_total" data-pricing-format="number">6325</div>
                                 </div>
-                                <div class="bar-value">6 325 CAD</div>
+                                <div class="bar-value" data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency">6 325 CAD</div>
                             </div>
                             <div class="bar-container">
                                 <div class="bar-label">Ni-Cd</div>
                                 <div class="bar-track">
-                                    <div class="bar-fill nicd" style="width: 100%;">12000</div>
+                                    <div class="bar-fill nicd" style="width: 100%;" data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="number">12000</div>
                                 </div>
-                                <div class="bar-value">12 000 CAD</div>
+                                <div class="bar-value" data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">12 000 CAD</div>
                             </div>
                         </div>
 
@@ -853,16 +853,16 @@
                             <div class="bar-container">
                                 <div class="bar-label">LFP</div>
                                 <div class="bar-track">
-                                    <div class="bar-fill lfp" style="width: 11%;">6325</div>
+                                    <div class="bar-fill lfp" style="width: 11%;" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="number">6325</div>
                                 </div>
-                                <div class="bar-value">6 325 CAD</div>
+                                <div class="bar-value" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">6 325 CAD</div>
                             </div>
                             <div class="bar-container">
                                 <div class="bar-label">Ni-Cd</div>
                                 <div class="bar-track">
-                                    <div class="bar-fill nicd" style="width: 100%;">54990</div>
+                                    <div class="bar-fill nicd" style="width: 100%;" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="number">54990</div>
                                 </div>
-                                <div class="bar-value">57 040 CAD</div>
+                                <div class="bar-value" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">57 040 CAD</div>
                             </div>
                         </div>
 
@@ -871,9 +871,9 @@
                             <div class="bar-container">
                                 <div class="bar-label">Économies</div>
                                 <div class="bar-track">
-                                    <div class="bar-fill lfp" style="width: 89%;">50 715 CAD</div>
+                                    <div class="bar-fill lfp" style="width: 89%;" data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">50 715 CAD</div>
                                 </div>
-                                <div class="bar-value">49 490$ économisés</div>
+                                <div class="bar-value" data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">49 490$ économisés</div>
                             </div>
                         </div>
                     </div>
@@ -888,7 +888,86 @@
         </div>
     </div>
 
+    <!-- Intégration du système de prix centralisé -->
+    <script src="../../js/pricing-manager.js"></script>
+    
     <script>
+        /**
+         * Comparaison détaillée intégrée avec le système de prix centralisé
+         * 
+         * Rôle : Remplacer TOUS les prix hardcodés par des données du pricing-manager.js
+         * Fonctionnement : Charge et affiche automatiquement les prix depuis pricing-config.json
+         */
+        
+        let pricingManager = null;
+        let currentMode = 'vente'; // Mode par défaut pour presentations-vente
+        
+        /**
+         * Initialise la comparaison avec le système centralisé
+         */
+        async function initComparison() {
+            try {
+                console.log('🚀 Initialisation comparaison avec pricing-manager.js...');
+                
+                // Créer et initialiser le gestionnaire de prix
+                pricingManager = new PricingManager();
+                
+                // Attendre que la configuration soit chargée
+                await new Promise(resolve => {
+                    const checkLoaded = setInterval(() => {
+                        if (pricingManager.isLoaded) {
+                            clearInterval(checkLoaded);
+                            resolve();
+                        }
+                    }, 100);
+                });
+                
+                console.log('✅ Configuration des prix chargée pour comparaison');
+                
+                // Mettre à jour tous les prix affichés
+                pricingManager.updateAllDisplays(currentMode);
+                
+                // Mettre à jour les largeurs des barres selon les nouvelles données
+                updateBarWidths();
+                
+            } catch (erreur) {
+                console.error('❌ Erreur initialisation pricing-manager:', erreur);
+            }
+        }
+        
+        /**
+         * Met à jour les largeurs des barres selon les données centralisées
+         */
+        function updateBarWidths() {
+            if (!pricingManager || !pricingManager.isLoaded) return;
+            
+            const config = pricingManager.config;
+            
+            // Récupérer les valeurs centralisées
+            const lfpInitial = config.modes[currentMode].licube.price_total;
+            const nicdInitial = config.modes[currentMode].nicd.price_base;
+            const lfpTCO = config.calculations.tco_vente.licube.total_20_years;
+            const nicdTCO = config.calculations.tco_vente.nicd.total_20_years;
+            const savings = config.calculations.tco_vente.savings.total;
+            
+            // Calculer et appliquer les nouvelles largeurs de barres
+            // Coût initial
+            const maxInitial = Math.max(lfpInitial, nicdInitial);
+            document.querySelector('[data-pricing-value="modes.vente.licube.price_total"].bar-fill').style.width = 
+                `${(lfpInitial / maxInitial) * 100}%`;
+            document.querySelector('[data-pricing-value="modes.vente.nicd.price_base"].bar-fill').style.width = '100%';
+            
+            // TCO 20 ans
+            const maxTCO = Math.max(lfpTCO, nicdTCO);
+            document.querySelector('[data-pricing-value="calculations.tco_vente.licube.total_20_years"].bar-fill').style.width = 
+                `${(lfpTCO / maxTCO) * 100}%`;
+            document.querySelector('[data-pricing-value="calculations.tco_vente.nicd.total_20_years"].bar-fill').style.width = '100%';
+            
+            // Économies
+            document.querySelector('[data-pricing-value="calculations.tco_vente.savings.total"].bar-fill').style.width = 
+                `${(savings / maxTCO) * 100}%`;
+        }
+
         function showTab(tabName) {
             // Masquer tous les contenus
             const contents = document.querySelectorAll('.tab-content');
@@ -907,8 +986,18 @@
             window.print();
         }
 
-        // Animation des barres au chargement
+        // Animation des barres au chargement + initialisation pricing
         window.addEventListener('load', () => {
+            // Déterminer le mode selon le chemin URL
+            const isLocationMode = window.location.pathname.includes('presentations-location');
+            currentMode = isLocationMode ? 'location' : 'vente';
+            
+            console.log(`📊 Mode détecté: ${currentMode}`);
+            
+            // Initialiser le système de prix centralisé
+            initComparison();
+            
+            // Animation des barres
             const bars = document.querySelectorAll('.bar-fill');
             bars.forEach(bar => {
                 const width = bar.style.width;

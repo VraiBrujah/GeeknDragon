@@ -782,7 +782,7 @@
                 <div class="comparison-visual">
                     <div class="tco-box lfp">
                         <div class="tco-label">🟢 Li-CUBE PRO™ LFP + Monitoring inclus</div>
-                        <div class="tco-amount">2 500</div>
+                        <div class="tco-amount" data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="number"></div>
                         <div class="tco-currency">CAD</div>
                         <div class="tco-period">sur 20 ans</div>
                     </div>
@@ -791,7 +791,7 @@
                     
                     <div class="tco-box nicd">
                         <div class="tco-label">🔴 Batteries Ni-Cd</div>
-                        <div class="tco-amount">57 040</div>
+                        <div class="tco-amount" data-pricing-value="calculations.tco_location.nicd.total_20_years" data-pricing-format="number"></div>
                         <div class="tco-currency">CAD</div>
                         <div class="tco-period">sur 20 ans</div>
                     </div>
@@ -800,7 +800,7 @@
                 <div class="savings-highlight">
                     <div class="savings-content">
                         <div class="savings-icon">🎯</div>
-                        <div class="savings-amount">54 240 CAD</div>
+                        <div class="savings-amount" data-pricing-value="calculations.tco_location.savings.total" data-pricing-format="currency"> CAD</div>
                         <div class="savings-percentage">D'ÉCONOMIES</div>
                         <div class="savings-text">par unité remplacée</div>
                     </div>
@@ -903,7 +903,19 @@
             </a>
         </div>
     </div>
+    <!-- Gestionnaire Centralisé des Prix - OBLIGATOIRE -->
+    <script src="../../js/pricing-manager.js"></script>
     <script src="../utils/data-loader.js"></script>
+    
+    <script>
+        // Initialisation du système de prix centralisé
+        document.addEventListener('pricingManagerReady', function() {
+            console.log('✅ Système de prix centralisé activé - Infographie TCO location...');
+            if (window.pricingManager) {
+                window.pricingManager.updateAllDisplays('location');
+            }
+        });
+    </script>
 
 </body>
 </html>

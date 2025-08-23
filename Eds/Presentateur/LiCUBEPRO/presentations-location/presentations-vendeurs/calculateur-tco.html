@@ -546,13 +546,13 @@
                 </div>
             </div>
             <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; background: linear-gradient(135deg, #ffffff 0%, #64748b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">💰 LOCATION INTELLIGENTE</h1>
-            <p class="subtitle" style="font-size: 1.5rem; color: rgba(255,255,255,0.8); font-weight: 500;">Calculateur choc: <strong style="color: var(--accent);">Tarifs dégressifs 150$/mois à 100$/mois</strong> vs <strong style="color: var(--danger);">Coûts cachés Ni-Cd</strong><br><span style="color: var(--accent); font-weight: 700; font-size: 1.3rem;">📊 Monitoring télémétrique INCLUS + Économies garanties: 49 490 CAD!</span></p>
+            <p class="subtitle" style="font-size: 1.5rem; color: rgba(255,255,255,0.8); font-weight: 500;">Calculateur choc: <strong style="color: var(--accent);">Tarifs dégressifs <span data-pricing-value="licube.monthly_rate_max"></span>$/mois à <span data-pricing-value="licube.monthly_rate_min"></span>$/mois</strong> vs <strong style="color: var(--danger);">Coûts cachés Ni-Cd</strong><br><span style="color: var(--accent); font-weight: 700; font-size: 1.3rem;">📊 Monitoring télémétrique INCLUS + Économies garanties: <span data-pricing-value="calculations.tco_location.savings.amount" data-pricing-format="currency"> CAD</span>!</span></p>
         </div>
 
         <div class="calculator-wrapper">
             <div class="config-note">
                 <strong>💸 SIMULATION PROGRESSIVE - Voyez vos réductions en temps réel!</strong><br>
-                Plus de volume et durée = PLUS d'économies! Minimum garanti: 100$/mois.<br>
+                Plus de volume et durée = PLUS d'économies! Minimum garanti: <span data-pricing-value="licube.monthly_rate_min"></span>$/mois.<br>
                 <strong>📊 TÉLÉMÉTRIE GPS/GPRS INCLUSE</strong> (vs 20$/mois optionnel en vente)<br>
                 <strong>Maximisez vos réductions avec nos tarifs dégressifs!</strong>
             </div>
@@ -566,8 +566,8 @@
                         </div>
                         <input type="range" min="5" max="20" value="5" class="slider" id="contractDurationSlider">
                         <div class="slider-range">
-                            <span>5 ans (150$/mois)</span>
-                            <span>20 ans (100$/mois)</span>
+                            <span>5 ans (<span data-pricing-value="licube.monthly_rate_max"></span>$/mois)</span>
+                            <span>20 ans (<span data-pricing-value="licube.monthly_rate_min"></span>$/mois)</span>
                         </div>
                         <div class="impact-indicator">
                             <span>💡 Impact:</span>
@@ -584,8 +584,8 @@
                         </div>
                         <input type="range" min="1" max="50" value="1" class="slider" id="unitsCountSlider">
                         <div class="slider-range">
-                            <span>1 unité (150$/mois)</span>
-                            <span>50+ unités (100$/mois)</span>
+                            <span>1 unité (<span data-pricing-value="licube.monthly_rate_max"></span>$/mois)</span>
+                            <span>50+ unités (<span data-pricing-value="licube.monthly_rate_min"></span>$/mois)</span>
                         </div>
                         <div class="impact-indicator">
                             <span>📈 Réductions volume:</span>
@@ -636,7 +636,7 @@
                         <span class="fixed-value-display" id="loyerValue">150 CAD/mois</span>
                     </div>
                     <div class="config-note" style="margin-top: 1rem; font-size: 0.85rem;">
-                        💡 <strong>Base 150$/mois</strong> - Réductions jusqu'à 100$/mois GARANTI.<br>
+                        💡 <strong>Base <span data-pricing-value="licube.monthly_rate_max">150</span>$/mois</strong> - Réductions jusqu'à <span data-pricing-value="licube.monthly_rate_min">100</span>$/mois GARANTI.<br>
                         📊 <strong>Monitoring télémétrique INCLUS</strong> (GPS, GPRS, Cloud)<br>
                         <strong>Plus de volume + durée = MAXIMUM de réductions!</strong>
                     </div>
@@ -684,7 +684,7 @@
                 <h3>💸 VOS PERTES Ni-Cd vs NOS GAINS Li-CUBE PRO!</h3>
                 <div class="breakdown-grid">
                     <div class="breakdown-item">
-                        <h4>💰 LOCATION PROGRESSIVE (150$ à 100$/mois)</h4>
+                        <h4>💰 LOCATION PROGRESSIVE (<span data-pricing-value="licube.monthly_rate_max">150</span>$ à <span data-pricing-value="licube.monthly_rate_min">100</span>$/mois)</h4>
                         <div class="breakdown-value" id="lfpLoyers">26 000 CAD</div>
                     </div>
                     <div class="breakdown-item">
@@ -855,7 +855,7 @@
                 
                 // Mise à jour impact visuel avec nouvelle logique progressive
                 if (this.value >= 20) {
-                    contractImpact.textContent = 'MINIMUM 100$/mois GARANTI!';
+                    contractImpact.textContent = `MINIMUM ${PricingManager?.config?.modes?.location?.licube?.monthly_rate_min || 100}$/mois GARANTI!`;
                     contractImpact.className = 'impact-badge impact-extreme';
                 } else if (this.value >= 15) {
                     contractImpact.textContent = 'Réductions MAXIMALES!';
@@ -864,7 +864,7 @@
                     contractImpact.textContent = 'Réductions progressives';
                     contractImpact.className = 'impact-badge impact-medium';
                 } else {
-                    contractImpact.textContent = 'Tarif de base (150$/mois)';
+                    contractImpact.textContent = `Tarif de base (${PricingManager?.config?.modes?.location?.licube?.monthly_rate || 150}$/mois)`;
                     contractImpact.className = 'impact-badge impact-low';
                 }
                 
@@ -882,7 +882,7 @@
                 
                 // Mise à jour impact réductions volume avec nouvelle logique
                 if (this.value >= 50) {
-                    unitsImpact.textContent = 'PRIX MINIMUM 100$/mois!';
+                    unitsImpact.textContent = `PRIX MINIMUM ${PricingManager?.config?.modes?.location?.licube?.monthly_rate_min || 100}$/mois!`;
                     unitsImpact.className = 'impact-badge impact-extreme';
                 } else if (this.value >= 20) {
                     unitsImpact.textContent = 'Réductions MAJEURES -15%';
@@ -894,7 +894,7 @@
                     unitsImpact.textContent = 'Réductions débutant -5%';
                     unitsImpact.className = 'impact-badge impact-medium';
                 } else {
-                    unitsImpact.textContent = 'Tarif unitaire (150$/mois)';
+                    unitsImpact.textContent = `Tarif unitaire (${PricingManager?.config?.modes?.location?.licube?.monthly_rate || 150}$/mois)`;
                     unitsImpact.className = 'impact-badge impact-low';
                 }
                 
@@ -1020,7 +1020,7 @@
             // =================================================================
             
             // Loyer mensuel avec nouvelle logique progressive (150$ base, 100$ minimum)
-            let loyerMensuelBase = 150; // CAD/mois base (nouveau tarif)
+            let loyerMensuelBase = PricingManager ? PricingManager.config?.modes?.location?.licube?.monthly_rate || 150 : 150; // CAD/mois base (nouveau tarif)
             
             // Réductions progressives selon durée (base 150$ vers minimum 100$)
             let reductionDuree = 0;
@@ -1313,6 +1313,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🚀 Démarrage calculateur TCO INTERACTIF Li-CUBE PRO™');
             
+            // Initialiser le système de prix centralisé
+            if (typeof PricingManager !== 'undefined') {
+                PricingManager.initialize();
+                PricingManager.updatePrices();
+            }
+            
             // Initialisation des contrôles interactifs
             initialiserControlesInteractifs();
             
@@ -1323,6 +1329,7 @@
             calculerTcoInteractif();
         });
     </script>
+    <script src="../../js/pricing-manager.js"></script>
 
 </body>
 </html>

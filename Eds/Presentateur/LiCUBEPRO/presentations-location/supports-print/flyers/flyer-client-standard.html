@@ -536,7 +536,7 @@
             <div class="main-title">Li-CUBE PRO™ LOCATION</div>
             <div class="tagline">🚨 VOS Ni-Cd vous coûtent 240$/mois RÉELS!<br>
             💰 ÉCONOMISEZ 90$/mois DÈS AUJOURD'HUI avec Li-CUBE PRO™<br>
-            <strong>Tarifs dégressifs : 150$/mois → 100$/mois + Monitoring télémétrique INCLUS</strong></div>
+            <strong>Tarifs dégressifs : <span data-pricing-value="licube.monthly_rate_max">150</span>$/mois → <span data-pricing-value="licube.monthly_rate_min">100</span>$/mois + Monitoring télémétrique INCLUS</strong></div>
         </div>
         
         <!-- Contenu principal -->
@@ -555,7 +555,7 @@
                 <ul class="spec-list">
                     <li class="spec-item">
                         <span class="spec-label">Prix mensuel</span>
-                        <span class="spec-value positive">150$/mois</span>
+                        <span class="spec-value positive"><span data-pricing-value="licube.monthly_rate">150</span>$/mois</span>
                     </li>
                     <li class="spec-item">
                         <span class="spec-label">Installation unique</span>
@@ -667,7 +667,7 @@
                     <div>
                         <div style="font-size: 10pt; opacity: 0.9;">LOCATION Li-CUBE PRO™</div>
                         <div class="tco-value">24 500$</div>
-                        <div style="font-size: 8pt;">Total 20 ans (100$/mois + 500$ installation)</div>
+                        <div style="font-size: 8pt;">Total 20 ans (<span data-pricing-value="licube.monthly_rate_min">100</span>$/mois + <span data-pricing-value="licube.installation_cost">500</span>$ installation)</div>
                     </div>
                     <div class="tco-vs">VS</div>
                     <div>
@@ -678,7 +678,7 @@
                 </div>
                 <div class="tco-savings">
                     🔥 33 140$ ÉCONOMISÉS sur 20 ans!<br>
-                    <strong>Tarifs dégressifs : 150$/mois → 100$/mois</strong>
+                    <strong>Tarifs dégressifs : <span data-pricing-value="licube.monthly_rate_max">150</span>$/mois → <span data-pricing-value="licube.monthly_rate_min">100</span>$/mois</strong>
                 </div>
             </div>
         </div>
@@ -707,6 +707,7 @@
         </div>
     </div>
     <script src="../../utils/data-loader.js"></script>
+    <script src="../../../js/pricing-manager.js"></script>
 
 
         
