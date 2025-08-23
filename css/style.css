@@ -115,20 +115,42 @@ p {
     margin: 0 auto;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .logo a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     text-decoration: none;
 }
 
 .logo-image {
-    height: 50px;
+    height: 45px;
     width: auto;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
     transition: var(--transition);
 }
 
-.logo-image:hover {
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    letter-spacing: 0.5px;
+}
+
+.logo:hover .logo-image {
     filter: drop-shadow(0 4px 8px rgba(212,175,55,0.4));
     transform: scale(1.05);
+}
+
+.logo:hover .logo-text {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(212,175,55,0.6);
 }
 
 .nav-menu {
@@ -250,17 +272,15 @@ p {
     margin-bottom: 2rem;
     color: var(--light-text);
     font-weight: 700;
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.9), 0 0 30px rgba(212,175,55,0.8);
+    text-shadow: 3px 3px 8px rgba(0,0,0,1), 1px 1px 4px rgba(0,0,0,1);
     opacity: 0;
     animation: fadeInUp 1s ease-out 0.5s forwards;
-    filter: drop-shadow(0 0 20px rgba(212,175,55,0.6));
 }
 
 .highlight {
-    background: var(--gradient-secondary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--secondary-color);
+    text-shadow: 3px 3px 8px rgba(0,0,0,1), 1px 1px 4px rgba(0,0,0,1), 0 0 20px rgba(212,175,55,0.8);
+    font-weight: 800;
 }
 
 .hero-subtitle {
