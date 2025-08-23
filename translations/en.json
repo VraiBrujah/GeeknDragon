@@ -16,10 +16,6 @@
       "title": "Thank you!!! | Geek & Dragon",
       "desc": "Confirmation that your message has been sent to Geek & Dragon."
     },
-    "quote": {
-      "title": "Quote request | Geek & Dragon",
-      "desc": "Quote request and information for your immersive projects."
-    },
     "news": {
       "flim2025": {
         "title": "Heroes level 20, an overly tenacious raccoon, and... our coins | Geek & Dragon",
@@ -38,16 +34,10 @@
     "cards": "Cards",
     "triptychs": "Triptychs"
   },
-  "auth": {
-    "login": "Log in",
-    "logout": "Log out",
-    "connected": "Connected",
-    "disconnected": "Disconnected"
-  },
   "hero": {
     "title": "Immersion at the heart of the game",
     "subtitle1": "Cards, coins and sheets ready to play for your D&D sessions",
-    "subtitle2": "Made in Quebec",
+    "subtitle2": "Designed in Quebec",
     "visitShop": "Visit the shop"
   },
   "home": {
@@ -70,61 +60,25 @@
   "footer": {
     "made": "Designed in Quebec."
   },
-    "contact": {
-      "title": "Quote request",
-      "subtitle": "To receive a personalized offer, fill out this magic form.",
-      "requestQuote": "Request a quote",
-      "form": {
-        "name": "Full name",
-        "email": "Email address",
-        "phone": "Phone (optional)",
-        "message": "Request details",
-        "submit": "Send my request"
-      },
-      "info": {
-        "role": "Product manager",
-        "roleCommunity": "Product manager & community"
-      }
+  "contact": {
+    "title": "Quote request",
+    "subtitle": "To receive a personalized offer, fill out this magic form.",
+    "requestQuote": "Request a quote",
+    "form": {
+      "name": "Full name",
+      "email": "Email address",
+      "phone": "Phone (optional)",
+      "message": "Request details",
+      "submit": "Send my request"
     },
-    "quote": {
-      "title": "Quote request",
-      "subtitle": "To receive a personalized offer, fill out this magic form.",
-      "form": {
-        "name": "Full name",
-        "email": "Email address",
-        "phone": "Phone (optional)",
-        "service": "Subject / Service",
-        "message": "Your request",
-        "consent": "By sending this form you allow us to use your information to reply by email.",
-        "submit": "Send my request"
-      },
-      "errors": {
-        "csrf": "Invalid CSRF token.",
-        "honeypot": "Spam detected.",
-        "rate": "Too many requests, please wait a bit.",
-        "name": "Name is required.",
-        "email": "Invalid email address.",
-        "phone": "Invalid phone number.",
-        "message": "Message is required.",
-        "too_long": "Message is too long."
-      }
-    },
+    "info": {
+      "role": "Product manager",
+      "roleCommunity": "Product manager & community"
+    }
+  },
   "thankyou": {
     "title": "Thank you!",
     "message": "Your request has been sent to our team.",
-    "errorTitle": "Something went wrong",
-    "errorMessage": "Your message could not be sent. Please try again or contact us directly.",
-    "backHome": "Back to home"
-  },
-  "errors": {
-    "404": {
-      "title": "Page not found",
-      "message": "The requested page could not be found."
-    },
-    "500": {
-      "title": "Server error",
-      "message": "An error occurred. Please try again later."
-    },
     "backHome": "Back to home"
   },
   "product": {
@@ -133,10 +87,9 @@
     "language": "Language",
     "quantity": "Quantity",
     "unit": "single",
-    "add": "Add to bag",
-    "inStock": "In stock",
+    "add": "Add",
     "outOfStock": "Out of stock",
-    "securePayment": "Secure payment"
+    "securePayment": "Secure payment via Snipcart"
   },
   "shop": {
     "hero": {
@@ -147,7 +100,7 @@
     "intro": {
       "title": "Handcrafted treasures",
       "description": "Collectible items and handcrafted game aids, made in Quebec.",
-      "payment": "Secure payment"
+      "payment": "Secure payment via Snipcart"
     },
     "pieces": {
       "title": "Metal coins",
@@ -169,8 +122,7 @@
       "totalPieces": "total pieces:",
       "equivMetal": "Metal",
       "equivEquivalent": "Equivalent",
-      "equivTotalPieces": "Total pieces",
-      "errorPositiveInteger": "Please enter a positive integer"
+      "equivTotalPieces": "Total pieces"
     },
     "chest": {
       "title": "Custom chests",
@@ -220,10 +172,10 @@
     "trictrac": "TricTrac",
     "quote1": {
       "title": "“No more battles with our character sheets!”",
-      "intro": "Many players confirm it: physical coins change everything.",
-      "p1": "Gone are the columns of numbers hastily scribbled on a crumpled sheet. Now, each player feels the real weight of the loot, sliding between their fingers like a forgotten heirloom. Treasure becomes tangible. At each exchange, the whole body reacts: the hand hesitates, the eye weighs, the throat tightens. The hoard takes form. It becomes dramatic stakes, visceral emotion, a lasting memory.",
-      "p2strong": "Gone too are the battles against character sheets",
-      "p2rest": "the endless searches through manuals while others tune out… or session zeros that drag on. “Session zero” is supposed to prepare the game: you create the characters, set the rules, outfit the heroes. But it often stretches into “0.1,” “0.2,” “0.3”… evenings spent filling boxes instead of living adventures.<br><br>With Geek & Dragon, everything changes: no more endless paperwork. The adventure begins with the first clink when the coin hits the table."
+      "intro": "Many players said it: physical coins change everything.",
+      "p1": "Gone are the columns of numbers hastily scribbled on a crumpled sheet. Now every player felt the real weight of the loot, sliding between their fingers like a forgotten heirloom. Treasure became tangible. At each exchange, the whole body reacted: the hand hesitating, the eye weighing, the throat drying. The hoard took on flesh. It became dramatic stakes, visceral emotion, an event, a lasting memory...",
+      "p2strong": "No more fights with character sheets",
+      "p2rest": "endless book searches while others disconnect, or the long 0 / 0.1 / 0.2 / 0.3... character creation sessions that discourage before the game even begins. With Geek & Dragon, everything starts when the coin hits the table."
     },
     "quote2": {
       "text": "My big discovery at FLIM: my children fell in love with the coins and have been doing lots of chores so they can trade their points for a treasure hunt and have their own treasure chest. Thanks to Mathieu for offering this great addition to introducing kids to role-playing games.",

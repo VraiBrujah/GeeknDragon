@@ -1,8 +1,5 @@
 <?php
-declare(strict_types=1);
 // Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
-
-require_once __DIR__ . '/../includes/video-utils.php';
 
 if (!isset($product['id'])) {
     return;
@@ -13,7 +10,6 @@ $name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $pro
 $desc        = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 $img         = $product['img'] ?? ($product['images'][0] ?? '');
 $isVideo     = preg_match('/\.mp4$/i', $img);
-$posterPath  = $isVideo ? generateVideoPoster($img) : null;
 $url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
 $price       = number_format((float)$product['price'], 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
@@ -26,7 +22,7 @@ $customLabel = !empty($languages)
 static $parsedown;
 $parsedown = $parsedown ?? new Parsedown();
 $htmlDesc  = $parsedown->text($desc);
-$isInStock = $inventoryService->isInStock($id);
+$isInStock = inStock($id);
 ?>
 
 <div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
@@ -34,9 +30,8 @@ $isInStock = $inventoryService->isInStock($id);
   <a href="<?= htmlspecialchars($url) ?>" class="block">
     <div class="product-media-wrapper mb-4">
       <?php if ($isVideo) : ?>
-        <video data-src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-               <?php if ($posterPath) : ?>poster="<?= htmlspecialchars($posterPath) ?>"<?php endif; ?>
-               class="product-media lazy-video" muted loop playsinline preload="metadata"></video>
+        <video src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
+               class="product-media" autoplay muted loop playsinline></video>
       <?php else : ?>
         <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
              alt="<?= htmlspecialchars($desc) ?>"
@@ -77,10 +72,21 @@ $isInStock = $inventoryService->isInStock($id);
       </div>
 
       <!-- Bouton ajouter -->
-      <button class="gd-add-to-cart btn btn-shop px-6 whitespace-nowrap"
-              data-product-id="<?= htmlspecialchars($id) ?>"
-              data-quantity="1">
-        <span data-i18n="product.add">Ajouter au sac</span>
+      <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
+              data-item-id="<?= htmlspecialchars($id) ?>"
+              data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
+              data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+              data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
+              data-item-price="<?= htmlspecialchars($price) ?>"
+              data-item-url="<?= htmlspecialchars($url) ?>"
+              data-item-quantity="1"
+        <?php if (!empty($customOptions)) : ?>
+        data-item-custom1-name="<?= htmlspecialchars($customLabel) ?>"
+        data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $customOptions))) ?>"
+        data-item-custom1-value="<?= htmlspecialchars((string)$customOptions[0]) ?>"
+      <?php endif; ?>
+      >
+        <span data-i18n="product.add">Ajouter</span>
       </button>
     <?php else : ?>
       <span class="btn btn-shop opacity-60 cursor-not-allowed" data-i18n="product.outOfStock">Rupture de stock</span>
@@ -88,49 +94,35 @@ $isInStock = $inventoryService->isInStock($id);
   </div>
 </div>
 
-<!-- Patch local pour quantités et lazy-loading vidéos -->
-<script nonce="<?= htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8'); ?>">
+<!-- Petit patch local si la page liste n'inclut pas déjà le listener global -->
+<script>
 (function(){
-  if (window.__gdQtyPatch) return;
-  window.__gdQtyPatch = true;
+  if (window.__snipcartQtyPatch) return;
+  window.__snipcartQtyPatch = true;
 
-  // Gestion des clics pour les quantités
   document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.gd-add-to-cart');
+    const btn = e.target.closest('.snipcart-add-item');
     if (!btn) return;
-    const id = btn.getAttribute('data-product-id');
+
+    const id = btn.getAttribute('data-item-id');
     if (!id) return;
 
     const qtyEl = document.getElementById('qty-' + id);
     if (qtyEl) {
       const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-quantity', String(q));
+      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
+    }
+
+    const multEl = document.getElementById('multiplier-' + id);
+    if (multEl) {
+      const mult = multEl.value;
+      btn.setAttribute('data-item-custom1-value', mult);
+      const lang = document.documentElement.lang;
+      const baseName = lang === 'en'
+        ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
+        : (btn.dataset.itemNameFr || btn.getAttribute('data-item-name'));
+      btn.setAttribute('data-item-name', mult !== '1' ? baseName + ' x' + mult : baseName);
     }
   }, { passive: true });
-
-  // Lazy-loading des vidéos avec IntersectionObserver
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const video = entry.target;
-        const src = video.getAttribute('data-src');
-        if (src) {
-          video.src = src;
-          video.autoplay = true;
-          video.removeAttribute('data-src');
-          video.classList.remove('lazy-video');
-          videoObserver.unobserve(video);
-        }
-      }
-    });
-  }, {
-    rootMargin: '50px 0px',
-    threshold: 0.1
-  });
-
-  // Observer toutes les vidéos lazy
-  document.querySelectorAll('.lazy-video').forEach(video => {
-    videoObserver.observe(video);
-  });
 })();
 </script>

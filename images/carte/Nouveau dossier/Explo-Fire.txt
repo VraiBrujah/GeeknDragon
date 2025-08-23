@@ -1,0 +1,350 @@
+nom: Bombe
+nom 1: Bombe
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Explosif
+charge:
+attca_image: symbole/attfir.png
+attca: 3d6 Feu
+image: image/Explosives/bomb.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nUne petite bombe compacte conçue pour infliger des dégâts importants sur une petite zone. Idéale pour des scénarios tactiques ou des sièges.\n\n**Mécaniques :**\n\n>- **Utilisation :** En tant qu'**Action**, vous pouvez allumer et lancer la bombe jusqu'à **18 m (60', 12c)**.\n>- **Zone d'effet :** Chaque créature dans une **sphère de 1.5 m (5', 1c)** doit réussir un **Jet de sauvegarde de Dextérité DD 12** ou subir **3d6 dégâts de feu** en cas d'échec, ou la moitié en cas de réussite.
+
+nom: Bâton de Dynamite
+nom 1: Bâton de Dynamite
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Explosif
+charge:
+attca_image: symbole/attfor.png
+attca: 3d6 Force
+image: image/Explosives/dynamite.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nUn bâton de dynamite est un outil puissant pour la démolition ou le combat. En groupe, sa puissance augmente considérablement.\n\n**Mécaniques :**\n\n>- **Utilisation :** En tant qu'**Action**, vous pouvez allumer et lancer la dynamite jusqu'à **18 m (60', 12c)**.\n>- **Zone d'effet :** Chaque créature dans une **sphère de 1.5 m (5', 1c)** doit réussir un **Jet de sauvegarde de Dextérité DD 12** ou subir **3d6 dégâts de force** en cas d'échec, ou la moitié en cas de réussite.\n>- **Spécial :** En regroupant plusieurs bâtons, les dégâts augmentent de **1d6 par bâton supplémentaire** (max **10d6**) et la zone d'effet augmente de **1.5 m (5', 1c)** par bâton (max **6 m (20', 4c)**). Préparation : **1 minute**.
+
+nom: Lance-Grenades
+nom 1: Lance-Grenades
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **3.5 kg**\n\n**(7 lb)**
+poids 1: **3.5 kg**\n\n**(7 lb)**
+type: Armes à distance de guerre
+charge:
+attca_image: symbole/vide.png
+attca:
+image: image/Explosives/grenade_launcher.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nUne arme polyvalente capable de projeter des grenades à longue portée avec précision. Parfaite pour des scénarios tactiques.\n\n**Mécaniques :**\n\n>- **Portée :** Permet de projeter une grenade jusqu'à **300 m (1000', 200c)**.\n>- **Propriétés :**\n>- **À Deux Mains :** Nécessite deux mains.\n>- **Munitions (Grenade) :** Les dégâts, le jet de sauvegarde et la zone d'effet dépendent du type de grenade chargée.\n>- **Dégâts :** Variables selon le type de grenade (ex: **5d6 Perforant** pour une grenade à fragmentation, **Zone lourdement obscurcie** pour une grenade fumigène).
+
+nom: Grenade à Fragmentation
+nom 1: Grenade à Fragmentation
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Explosif
+charge:
+attca_image: symbole/attpier.png
+attca: 5d6 Perforant
+image: image/Explosives/frag_grenade.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nUne grenade conçue pour projeter des éclats métalliques dans toutes les directions à l'impact.\n\n**Mécaniques :**\n\n>- **Utilisation :** En tant qu'**Action**, lancez la grenade jusqu'à **18 m (60', 12c)**.\n>- **Zone d'effet :** Chaque créature dans une **sphère de 6 m (20', 4c)** doit réussir un **Jet de sauvegarde de Dextérité DD 15** ou subir **5d6 dégâts perforants** en cas d'échec, ou la moitié en cas de réussite.
+
+nom: Grenade Fumigène
+nom 1: Grenade Fumigène
+prix: **50 po**
+prix 1: **50 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Explosif
+charge:
+attca_image: symbole/vide.png
+attca:
+image: image/Explosives/smoke_grenade.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nUne grenade libérant un épais nuage de fumée, idéale pour couvrir une retraite ou obscurcir une zone.\n\n**Mécaniques :**\n\n>- **Utilisation :** En tant qu'**Action**, lancez la grenade jusqu'à **18 m (60', 12c)**.\n>- **Zone d'effet :** Crée une **sphère de 6 m (20', 4c)** fortement obscurcie pendant **1 minute**.\n>- **Vent Fort :** Un vent fort (comme le sort **Rafale de Vent**) disperse immédiatement la fumée.\n>- **Utilité :** Offre un avantage tactique en créant une couverture.
+
+nom: Tonneau de Poudre
+nom 1: Tonneau de Poudre
+prix: **250 po**
+prix 1: **250 po**
+poids: **10 kg**\n\n**(20 lb)**
+poids 1: **10 kg**\n\n**(20 lb)**
+type: Explosif
+charge:
+attca_image: symbole/attfir.png
+attca: 7d6 Feu
+image: image/Explosives/gunpowder_keg.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nUn tonneau rempli de poudre noire, souvent utilisé pour la démolition ou comme piège explosif.\n\n**Mécaniques :**\n\n>- **Allumage :** Enflammé, le tonneau explose après quelques secondes.\n>- **Zone d'effet :** Chaque créature dans une **sphère de 3 m (10', 2c)** doit réussir un **Jet de sauvegarde de Dextérité DD 12** ou subir **7d6 dégâts de feu** (moitié en cas de réussite).\n>- **Utilité :** Efficace pour briser des fortifications.
+
+nom: Corne de Poudre
+nom 1: Corne de Poudre
+prix: **35 po**
+prix 1: **35 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Explosif
+charge: ![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)\n\n![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)\n\n![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)\n\n![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)\n\n![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)
+attca_image: symbole/attfir.png
+attca: 3d6 Feu
+image: image/Explosives/gunpowder_horn.png
+symbole 1: symbole/explo.png
+symbole 2: symbole/explo.png
+symbole 3: symbole/explo.png
+symbole 4: symbole/explo.png
+description: \n\n---\n\nUne petite corne en métal ou en bois, remplie de poudre noire. Elle sert principalement à recharger les armes à feu, mais peut également être utilisée comme un explosif improvisé.\n\n**Mécaniques :**\n\n>- **Allumage :** Enflammée, la corne explose après quelques secondes.\n>- **Zone d'effet :** Chaque créature dans une **sphère de 3 m (10', 2c)** doit réussir un **Jet de sauvegarde de Dextérité DD 12** ou subir **3d6 dégâts de feu**, ou la moitié en cas de réussite.\n>- **Utilité :** Peut servir à recharger une arme à poudre ou comme outil tactique pour piéger une zone.
+
+nom: Fusil Automatique
+nom 1: Fusil Automatique
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **4 kg**\n\n**(8 lb)**
+poids 1: **4 kg**\n\n**(8 lb)**
+type: Armes à distance de guerre
+charge:
+attca_image: symbole/attper.png
+attca: **2d8 Perforant**
+image: image/Arme/automatic_rifle.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nUne arme à feu moderne conçue pour le tir en rafale. Sa capacité à arroser une zone de projectiles la rend dévastatrice en combat.\n\n**Mécaniques :** Inflige **2d8 dégâts perforants**. Ajoutez votre modificateur de **Dextérité** aux jets d'attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez également votre **Bonus de Maîtrise** au jet d'attaque.\n\n---\n\n**Propriétés :**\n\n>- **Munitions :** Nécessite des balles. La portée normale est de **24 m (80', 16c)**, et sa portée longue est de **72 m (240', 48c)**.\n\n>- **Tir en Rafale (10 balles) :** Les cibles dans un **cône de 3 m (10', 2c)** doivent réussir un **jet de sauvegarde de Dextérité DC 15** ou subir les dégâts complets. Les cibles réussissant leur sauvegarde subissent **la moitié des dégâts**.\n\n>- **Rechargement (30 tirs) :** Après avoir tiré **30 balles**, le rechargement nécessite **1 Action**.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée, rendant incompatible l’usage d’un bouclier ou d’une autre arme.\n\n---\n\n**Avantage de maître d’arme**\n\n **Ralenti** – Si vous touchez une créature avec cette arme, vous pouvez **réduire sa vitesse de 3 m (10', 2c)** jusqu'au début de votre prochain tour.
+
+nom: Fusil de Chasse
+nom 1: Fusil de Chasse
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **4 kg**\n\n**(8 lb)**
+poids 1: **4 kg**\n\n**(8 lb)**
+type: Armes à distance de guerre
+charge:
+attca_image: symbole/attper.png
+attca: **2d10 Perforant**
+image: image/Arme/hunting_rifle.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nUne arme à feu précise conçue pour la chasse longue distance et les engagements en combat. Elle récompense les tireurs précis par des dégâts dévastateurs.\n\n**Mécaniques :** Inflige **2d10 dégâts perforants**. Ajoutez votre modificateur de **Dextérité** aux jets d'attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez également votre **Bonus de Maîtrise** au jet d'attaque.\n\n---\n\n**Propriétés :**\n\n>- **Munitions :** Nécessite des balles. La portée normale est de **24 m (80', 16c)**, et sa portée longue est de **72 m (240', 48c)**.\n\n>- **Rechargement (5 tirs) :** Après avoir tiré **5 balles**, le rechargement nécessite **1 Action**.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée, rendant incompatible l’usage d’un bouclier ou d’une autre arme.\n\n---\n\n**Avantage de maître d’arme**\n\n **Ralenti** – Si vous touchez une créature avec cette arme, vous pouvez **réduire sa vitesse de 3 m (10', 2c)** jusqu'au début de votre prochain tour.
+
+nom: Revolver
+nom 1: Revolver
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Armes à distance de guerre
+charge:
+attca_image: symbole/attper.png
+attca: **2d8 Perforant**
+image: image/Arme/revolver.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nUne arme à feu élégante et fiable capable de tirs rapides. Sa conception en fait un choix privilégié pour les combats rapprochés.\n\n**Mécaniques :** Inflige **2d8 dégâts perforants**. Ajoutez votre modificateur de **Dextérité** aux jets d'attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez également votre **Bonus de Maîtrise** au jet d'attaque.\n\n---\n\n**Propriétés :**\n\n>- **Munitions :** Nécessite des balles. La portée normale est de **12 m (40', 8c)**, et sa portée longue est de **36 m (120', 24c)**.\n\n>- **Rechargement (6 tirs) :** Après avoir tiré **6 balles**, le rechargement nécessite **1 Action**.\n\n---\n\n**Avantage de maître d’arme**\n\n **Affaiblir** – Si vous touchez une créature avec cette arme, celle-ci subit un désavantage sur son **prochain jet d'attaque** avant le début de votre prochain tour.
+
+nom: Pistolet Semi-Automatique
+nom 1: Pistolet Semi-Automatique
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Armes à distance de guerre
+charge:
+attca_image: symbole/attper.png
+attca: **2d6** Perforant
+image: image/Arme/semiautomatic_pistol.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nUne arme de poing moderne capable de tirer rapidement. Sa polyvalence et sa maniabilité en font une arme secondaire prisée.\n\n**Mécaniques :** Inflige **2d6 dégâts perforants**. Ajoutez votre modificateur de **Dextérité** aux jets d'attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez également votre **Bonus de Maîtrise** au jet d'attaque.\n\n---\n\n**Propriétés :**\n\n>- **Munitions :** Nécessite des balles. La portée normale est de **15 m (50', 10c)**, et sa portée longue est de **45 m (150', 30c)**.\n\n>- **Rechargement (15 tirs) :** Après avoir tiré **15 balles**, le rechargement nécessite **1 Action**.\n\n---\n\n**Avantage de maître d’arme**\n\n **Harceler** – Si vous touchez une créature avec cette arme, vous obtenez **Avantage sur votre prochain jet d'attaque** contre cette créature avant la fin de votre prochain tour.
+
+nom: Fusil à Pompe
+nom 1: Fusil à Pompe
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **3.5 kg**\n\n**(7 lb)**
+poids 1: **3.5 kg**\n\n**(7 lb)**
+type: Armes à distance de guerre
+charge:
+attca_image: symbole/attper.png
+attca: **2d8 Perforant**
+image: image/Arme/shotgun.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nUne arme à courte portée redoutable qui projette une grappe de projectiles, idéale pour éliminer plusieurs ennemis rapprochés.\n\n**Mécaniques :** Inflige **2d8 dégâts perforants**. Ajoutez votre modificateur de **Dextérité** aux jets d'attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez également votre **Bonus de Maîtrise** au jet d'attaque.\n\n---\n\n**Propriétés :**\n\n>- **Munitions :** Nécessite des cartouches. La portée normale est de **9 m (30', 6c)**, et sa portée longue est de **27 m (90', 18c)**.\n\n>- **Rechargement (2 tirs) :** Après avoir tiré **2 cartouches**, le rechargement nécessite **1 Action**.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée, rendant incompatible l’usage d’un bouclier ou d’une autre arme.\n\n---\n\n**Avantage de maître d’arme**\n\n **Repousser** – Si vous touchez une créature avec cette arme, vous pouvez **la repousser de 3 m (10', 2c)** en ligne droite, à condition que la cible soit de taille Grande ou inférieure.
+
+nom: Fusil Antimatière
+nom 1: Fusil Antimatière
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **5 kg**\n\n**(10 lb)**
+poids 1: **5 kg**\n\n**(10 lb)**
+type: Armes à distance de guerre
+charge:
+attca_image: symbole/attnec.png
+attca: **6d8 Nécrotique**
+image: image/Arme/antimatter_rifle.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nUne arme futuriste surpuissante qui projette des rafales d'antimatière concentrée, dévastant cibles organiques et inorganiques.\n\n**Mécaniques :** Inflige **6d8 dégâts nécrotiques**. Ajoutez votre modificateur de **Dextérité** aux jets d'attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez également votre **Bonus de Maîtrise** au jet d'attaque.\n\n---\n\n**Propriétés :**\n\n>- **Munitions :** Nécessite des cellules d'antimatière. La portée normale est de **36 m (120', 26c)**, et sa portée longue est de **108 m (360', 72c)**.\n\n>- **Rechargement (2 tirs) :** Après avoir tiré **2 rafales**, le rechargement nécessite **1 Action**.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée, rendant incompatible l’usage d’un bouclier ou d’une autre arme.\n\n---\n\n**Avantage de maître d’arme**\n\n **Affaiblir** – Si vous touchez une créature avec cette arme, celle-ci subit un **désavantage sur son prochain jet d'attaque** avant le début de votre prochain tour.
+
+nom: Pistolet Laser
+nom 1: Pistolet Laser
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Armes à distance de guerre
+charge:
+attca_image: symbole/attrad.png
+attca: **3d6 Radiant**
+image: image/Arme/laser_pistol.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nUne arme énergétique élégante projetant des rayons lumineux concentrés, idéale pour une précision rapide.\n\n**Mécaniques :** Inflige **3d6 dégâts radiant**. Ajoutez votre modificateur de **Dextérité** aux jets d'attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez également votre **Bonus de Maîtrise** au jet d'attaque.\n\n---\n\n**Propriétés :**\n\n>- **Munitions :** Cellules d'énergie. La portée normale est de **12 m (40', 8c)**, et sa portée longue est de **36 m (120', 24c)**.\n\n>- **Rechargement (50 tirs) :** Après **50 tirs**, le rechargement prend **1 Action**.\n\n---\n\n**Avantage de maître d’arme**\n\n **Harceler** – Vous obtenez **Avantage sur votre prochaine attaque** contre la même cible avant la fin de votre prochain tour.
+
+nom: Fusil Laser
+nom 1: Fusil Laser
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **3.5 kg**\n\n**(7 lb)**
+poids 1: **3.5 kg**\n\n**(7 lb)**
+type: Armes à distance de guerre
+charge:
+attca_image: symbole/attrad.png
+attca: **3d8 Radiant**
+image: image/Arme/laser_rifle.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nUne arme futuriste conçue pour la précision longue distance. Elle projette des faisceaux d'énergie concentrée capables de percer les défenses les plus robustes.\n\n**Mécaniques :** Inflige **3d8 dégâts radiant**. Ajoutez votre modificateur de **Dextérité** aux jets d'attaque et de dégâts. Si vous avez la maîtrise de cette arme, ajoutez également votre **Bonus de Maîtrise** au jet d'attaque.\n\n---\n\n**Propriétés :**\n\n>- **Munitions :** Nécessite des cellules d'énergie. La portée normale est de **30 m (100', 20c)**, et sa portée longue est de **90 m (300', 60c)**.\n\n>- **Rechargement (30 tirs) :** Après avoir tiré **30 faisceaux**, le rechargement nécessite **1 Action**.\n\n>- **À deux mains** : Cette arme nécessite deux mains pour être utilisée, rendant incompatible l’usage d’un bouclier ou d’une autre arme.\n\n---\n\n**Avantage de maître d’arme**\n\n **Ralenti** – Si vous touchez une créature avec cette arme, vous pouvez **réduire sa vitesse de 3 m (10', 2c)** jusqu'au début de votre prochain tour.
+
+nom: Balles d'Armes à Feu Modernes (10)
+nom 1: Balles d'Armes à Feu Modernes (10)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Munitions
+charge: ![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/modern_firearm_bullets.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nPetits projectiles métalliques conçus pour les armes à feu modernes.\n\n---\n\n**Mécaniques :**\n\n>- **Quantité** : Vendues par lot de **10 balles**.\n\n>- **Armes Compatibles** : Utilisées avec des armes ayant la propriété **Munitions (Balle)**, comme les **Fusils Automatiques**, **Revolvers**, et **Fusils de Chasse**.\n\n>- **Utilisation en Attaque** : Chaque attaque à distance consomme **1 balle**.\n\n>- **Récupération** : Les balles tirées ne peuvent pas être récupérées en raison de leur déformation ou de leur perte à l'impact.
+
+nom: Cartouches de Fusil (10)
+nom 1: Cartouches de Fusil (10)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Munitions
+charge: ![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/shotgun_shells.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nCartouches cylindriques contenant plusieurs petits projectiles pour une utilisation avec des fusils de chasse.\n\n---\n\n**Mécaniques :**\n\n>- **Quantité** : Vendues par lot de **10 cartouches**.\n\n>- **Armes Compatibles** : Utilisées avec des armes ayant la propriété **Munitions (Cartouche)**, comme les **Fusils de Chasse**.\n\n>- **Utilisation en Attaque** : Chaque attaque à distance consomme **1 cartouche**.\n\n>- **Récupération** : Les cartouches ne peuvent pas être récupérées après avoir été tirées en raison de leur dispersion à l'impact.
+
+nom: Cellules d'Énergie (5)
+nom 1: Cellules d'Énergie (5)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Munitions
+charge: ![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/energy_cells.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nSources d'énergie compactes utilisées pour alimenter les armes futuristes à base d'énergie.\n\n---\n\n**Mécaniques :**\n\n>- **Quantité** : Vendues par lot de **5 cellules**.\n\n>- **Armes Compatibles** : Utilisées avec des armes ayant la propriété **Munitions (Cellule d'Énergie)**, comme les **Pistolets Laser**, **Fusils Laser**, et **Fusils à Antimatière**.\n\n>- **Utilisation en Attaque** : Chaque attaque à distance consomme **1 cellule d'énergie**.\n\n>- **Récupération** : Les cellules sont épuisées après utilisation et ne peuvent pas être rechargées ou réutilisées.
+
+nom: Charges d'Antimatière (2)
+nom 1: Charges d'Antimatière (2)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Munitions
+charge: ![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/antimatter_charges.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nCharges hautement volatiles conçues pour une utilisation avec des armes à base d'antimatière.\n\n---\n\n**Mécaniques :**\n\n>- **Quantité** : Vendues par lot de **2 charges**.\n\n>- **Armes Compatibles** : Utilisées avec des armes ayant la propriété **Munitions (Charge d'Antimatière)**, comme les **Fusils à Antimatière**.\n\n>- **Utilisation en Attaque** : Chaque attaque à distance consomme **1 charge d'antimatière**.\n\n>- **Récupération** : Les charges sont entièrement consommées lors de leur utilisation et ne peuvent pas être récupérées.
+
+nom: Condensateurs Laser (10)
+nom 1: Condensateurs Laser (10)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Munitions
+charge: ![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/laser_capacitors.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\n
+
+nom: Balles d'Armes à Feu Modernes (30)
+nom 1: Balles d'Armes à Feu Modernes (30)
+prix: ![Case!](symbole/cadre3.png)
+prix 1: ![Case!](symbole/cadre3.png)
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Munitions
+charge: ![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)\n\n![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)\n\n![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)![Case!](symbole/caseDcocher.png)
+attca_image: symbole/vide.png
+image: image/Equipement/modern_firearm_bullets_30.png
+symbole 1: symbole/firearm.png
+symbole 2: symbole/firearm.png
+symbole 3: symbole/firearm.png
+symbole 4: symbole/firearm.png
+description: \n\n---\n\nLot plus important de projectiles métalliques conçus pour les armes à feu modernes.\n\n---\n\n**Mécaniques :**\n\n>- **Quantité** : Vendues par lot de **30 balles**.\n\n>- **Armes Compatibles** : Utilisées avec des armes ayant la propriété **Munitions (Balle)**, comme les **Fusils Automatiques**, **Revolvers**, et **Fusils de Chasse**.\n\n>- **Utilisation en Attaque** : Chaque attaque à distance consomme **1 balle**.\n\n>- **Avantage des Achats en Gros** : Acheter des balles en grandes quantités offre une commodité pour des missions prolongées.\n\n>- **Récupération** : Les balles tirées ne peuvent pas être récupérées en raison de leur déformation ou de leur perte à l'impact.

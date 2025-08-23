@@ -7,9 +7,5 @@
   "parserOptions": {
     "ecmaVersion": 2021
   },
-  "rules": {
-    "linebreak-style": "off",
-    "no-console": "warn",
-    "object-shorthand": "warn"
-  }
+  "rules": {}
 }
