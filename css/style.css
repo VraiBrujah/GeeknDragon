@@ -380,6 +380,14 @@ p {
     text-align: center;
 }
 
+.card-product img {
+    width: 100%;
+    max-width: 250px;   /* ajuster la valeur selon le rendu souhaité */
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
 .card-product h4 {
     color: var(--light-text);
     font-size: 1.5rem;
