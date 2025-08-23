@@ -32,7 +32,12 @@
       "Bash(del:*)",
       "Bash(npm install:*)",
       "Bash(npm audit:*)",
-      "WebFetch(domain:geekndragon.com)"
+      "WebFetch(domain:geekndragon.com)",
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon - Copie/**)",
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon - Copie/**)",
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon - Copie/**)",
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon - Copie\\vendor\\erusev\\parsedown/**)",
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon - Copie/**)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

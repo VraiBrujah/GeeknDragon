@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
-// Validation sécurisée pour les clés API (uniquement alphanumérique et tirets)
+// Validation sécurisée pour les clés API (accepte aussi les clés encodées base64)
 if (!function_exists('validateApiKey')) {
 function validateApiKey($key) {
+    // Accepter les clés au format standard Snipcart (pk_/sk_) et les clés encodées
     return $key && preg_match('/^[A-Za-z0-9_\-\.\/+=]+$/', $key) ? $key : null;
 }
 }
@@ -27,6 +28,7 @@ if (PHP_SAPI !== 'cli') {
     if (!$snipcartApiKey || !$snipcartSecretApiKey) {
         throw new RuntimeException('SNIPCART: Les clés API Snipcart sont absentes ou invalides.');
     }
+    // Vérification pour les clés de test uniquement si elles sont au format standard (pas encodées)
     if (str_contains($snipcartApiKey, 'pk_test') || str_contains($snipcartSecretApiKey, 'sk_test')) {
         throw new RuntimeException('SNIPCART: Des clés de test Snipcart ont été détectées.');
     }

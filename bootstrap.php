@@ -36,10 +36,18 @@ function getSecureEnvVar($key, $default = null) {
     
     // Validation spécifique selon le type de variable
     if ($value) {
-        // Variables SMTP plus permissives (peuvent contenir @, +, etc.)
+        // Variables SMTP plus permissives (peuvent contenir @, +, caractères spéciaux pour mots de passe)
         if (str_contains($key, 'SMTP_')) {
-            if (!preg_match('/^[a-zA-Z0-9_\-\.@+]+$/', $value)) {
+            // Validation très permissive pour SMTP (accepte la plupart des caractères sauf ceux dangereux)
+            if (!preg_match('/^[a-zA-Z0-9_\-\.@+#$~^=!%*]+$/', $value)) {
                 error_log("Invalid SMTP env var detected: $key");
+                return $default;
+            }
+        } 
+        // Variables Snipcart (accepte base64 et formats standards)
+        elseif (str_contains($key, 'SNIPCART_')) {
+            if (!preg_match('/^[A-Za-z0-9_\-\.\/+=]+$/', $value)) {
+                error_log("Invalid Snipcart env var detected: $key");
                 return $default;
             }
         } else {
@@ -204,8 +212,11 @@ ini_set('log_errors', '1');
 ini_set('error_log', __DIR__ . '/storage/logs/php_errors.log');
 
 // Gestionnaire d'erreurs global pour les clés API manquantes
-set_exception_handler(function ($e) {
+set_exception_handler(function ($e) use ($cspNonce) {
     error_log("Erreur critique: " . $e->getMessage() . " dans " . $e->getFile() . ":" . $e->getLine());
+    
+    // Générer un nonce de sécurité si pas déjà défini
+    $safeNonce = $cspNonce ?? base64_encode(random_bytes(16));
     
     // En mode production, afficher une page d'erreur générique
     if (strpos($e->getMessage(), 'SNIPCART') !== false) {
@@ -216,7 +227,7 @@ set_exception_handler(function ($e) {
 <head>
     <meta charset="UTF-8">
     <title>Configuration requise - Geek & Dragon</title>
-    <style nonce="' . htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8') . '">
+    <style nonce="' . htmlspecialchars($safeNonce, ENT_QUOTES, 'UTF-8') . '">
         body { font-family: "Cinzel", serif; text-align: center; padding: 2rem; background: #111827; color: white; }
         .error-box { max-width: 500px; margin: 0 auto; padding: 2rem; border: 2px solid #dc2626; border-radius: 0.5rem; }
         h1 { color: #fbbf24; margin-bottom: 1rem; }
@@ -247,7 +258,7 @@ set_exception_handler(function ($e) {
 <head>
     <meta charset="UTF-8">
     <title>Erreur temporaire - Geek & Dragon</title>
-    <style nonce="' . htmlspecialchars($cspNonce, ENT_QUOTES, 'UTF-8') . '">
+    <style nonce="' . htmlspecialchars($safeNonce, ENT_QUOTES, 'UTF-8') . '">
         body { font-family: "Cinzel", serif; text-align: center; padding: 2rem; background: #111827; color: white; }
         .error-box { max-width: 500px; margin: 0 auto; padding: 2rem; border: 2px solid #dc2626; border-radius: 0.5rem; }
         h1 { color: #fbbf24; margin-bottom: 1rem; }
