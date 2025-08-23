@@ -85,7 +85,6 @@
   const setLang = (lang) => {
     const safe = LANGS.includes(lang) ? lang : DEFAULT_LANG;
     localStorage.setItem('lang', safe);
-    localStorage.setItem('snipcartLanguage', safe);
     setCookie('lang', safe);
     document.documentElement.lang = safe;
     return safe;
@@ -118,17 +117,6 @@
     };
   };
 
-  // Snipcart ready (polling léger)
-  const whenSnipcart = (cb) => {
-    if (window.Snipcart && window.Snipcart.store && window.Snipcart.api) { cb(); return; }
-    const int = setInterval(() => {
-      if (window.Snipcart && window.Snipcart.store && window.Snipcart.api) {
-        clearInterval(int); cb();
-      }
-    }, 200);
-  };
-  window.whenSnipcart = whenSnipcart;
-
   // Expose utilitaires
   window.GD = Object.assign(window.GD || {}, {
     qs,
@@ -146,16 +134,16 @@
 })();
 
 /* ========================================================================
-   HAUTEUR D’EN-TÊTE → variables CSS (global + Snipcart)
+   HAUTEUR D’EN-TÊTE → variables CSS (global + panier)
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   if (!header) return;
   const setHeaderVars = () => {
-    const h = header.getBoundingClientRect().height || 96;
+    const h = header.getBoundingClientRect().height || 80;
     // utilisé par ton site
     document.documentElement.style.setProperty('--header-height', `${h - 5}px`);
-    // utilisé par snipcart-custom.css (modal/summary sticky)
+    // utilisé par les éléments e-commerce (modales, résumés, etc.)
     document.documentElement.style.setProperty('--gd-header-h', `${h}px`);
   };
   setHeaderVars();
@@ -182,14 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
   setCurrent(lang);
-  whenSnipcart(() => window.Snipcart.api.session.setLanguage(lang));
 
   document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const picked = btn.dataset.lang;
       window.GD.setLang(picked);
       setCurrent(picked);
-      whenSnipcart(() => window.Snipcart.api.session.setLanguage(picked));
       loadTranslations(picked);
     });
   });
@@ -220,18 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const target = current === 'en' ? el.dataset.altEn : el.dataset.altFr;
           if (target) el.setAttribute('alt', target);
         });
-
-          // Boutons Snipcart (nom + libellé custom)
-          document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
-            if (current === 'en') {
-              if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
-            } else {
-              if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
-            }
-            const label = data?.product?.language || data?.product?.multiplier;
-            const hasCustom = btn.hasAttribute('data-item-custom1-name') && label;
-            if (hasCustom) btn.setAttribute('data-item-custom1-name', label);
-          });
 
         // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)
         document.querySelectorAll('[data-role^="multiplier-"]').forEach((sel) => {
@@ -366,22 +340,15 @@ document.addEventListener('DOMContentLoaded', () => {
     mapping.forEach((_, sec) => io.observe(sec));
   }
 
-// Accessibilité : sous-menu “Boutique”
-document.querySelectorAll('nav button[aria-haspopup="true"]').forEach((btn) => {
-  const submenu = btn.nextElementSibling;
-  if (!submenu) return;
-  btn.addEventListener('click', () => {
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!expanded));
-    submenu.classList.toggle('hidden', expanded);
+  // Accessibilité : sous-menu “Boutique”
+  document.querySelectorAll('nav .relative.group').forEach((grp) => {
+    const submenu = grp.querySelector('ul');
+    if (!submenu) return;
+    grp.addEventListener('focusin', () => submenu.classList.remove('hidden'));
+    grp.addEventListener('focusout', (e) => {
+      if (!grp.contains(e.relatedTarget)) submenu.classList.add('hidden');
+    });
   });
-  btn.addEventListener('blur', (e) => {
-    if (!btn.parentElement.contains(e.relatedTarget)) {
-      btn.setAttribute('aria-expanded', 'false');
-      submenu.classList.add('hidden');
-    }
-  });
-});
 });
 
 /* ========================================================================
@@ -393,25 +360,123 @@ function fullyVisible(el) {
          && r.bottom <= (window.innerHeight || document.documentElement.clientHeight)
          && r.right <= (window.innerWidth || document.documentElement.clientWidth);
 }
-document.addEventListener('DOMContentLoaded', () => {
-  const videos = ['video1', 'video2', 'video3']
-    .map((id) => document.getElementById(id))
-    .filter(Boolean);
+// Fonction universelle de gestion des vidéos
+function initVideoManager(videoIds) {
+  const videos = videoIds.map((id) => document.getElementById(id)).filter(Boolean);
+  if (videos.length === 0) return;
+  
   let current = 0;
   let audioOK = false;
   let playSeq;
+  const isSequenceMode = videos.length > 1;
 
   videos.forEach((vid) => {
     vid.dataset.userPaused = 'false';
     vid.dataset.autoPaused = 'false';
-    const addClass = () => vid.classList.add('scale-105', 'z-10');
-    const removeClass = () => vid.classList.remove('scale-105', 'z-10');
-    vid.addEventListener('play', () => { addClass(); vid.dataset.userPaused = 'false'; vid.dataset.autoPaused = 'false'; });
+    
+    // Créer un wrapper pour la vidéo et son titre (si pas déjà fait)
+    let wrapper = vid.closest('.video-section-wrapper');
+    if (!wrapper) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'video-section-wrapper';
+      wrapper.style.cssText = `
+        background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        border-radius: 16px;
+        padding: 20px;
+        margin: 16px 0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+      `;
+      
+      // Structure actuelle : div.relative.group > video + button + p
+      const currentContainer = vid.parentNode; // div.relative.group
+      const grandParent = currentContainer.parentNode;
+      
+      // Insérer le wrapper avant le container actuel
+      grandParent.insertBefore(wrapper, currentContainer);
+      
+      // Déplacer le container dans le wrapper
+      wrapper.appendChild(currentContainer);
+      
+      // Chercher le titre qui suit
+      let titleElement = wrapper.nextElementSibling;
+      while (titleElement) {
+        if (titleElement.tagName === 'P' && titleElement.classList.contains('text-center')) {
+          // Déplacer le titre dans le wrapper
+          wrapper.appendChild(titleElement);
+          titleElement.style.marginTop = '24px';
+          titleElement.style.marginBottom = '0';
+          titleElement.style.paddingTop = '12px';
+          titleElement.style.borderTop = '1px solid rgba(139, 92, 246, 0.1)';
+          
+          // Réappliquer les traductions sur le titre déplacé
+          if (titleElement.hasAttribute('data-i18n')) {
+            // Déclencher la retraduction via le système existant
+            if (window.updateTranslations && typeof window.updateTranslations === 'function') {
+              window.updateTranslations();
+            } else if (window.i18n && window.i18n.update) {
+              window.i18n.update();
+            } else {
+              // Fallback : déclencher un événement pour forcer la retraduction
+              document.dispatchEvent(new CustomEvent('translatePage'));
+            }
+          }
+          break;
+        }
+        titleElement = titleElement.nextElementSibling;
+      }
+    }
+    
+    // Style pour la vidéo
+    vid.style.border = '1px solid rgba(139, 92, 246, 0.3)';
+    vid.style.borderRadius = '12px';
+    vid.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
+    vid.style.transition = 'all 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease';
+    vid.style.width = '100%';
+    vid.style.display = 'block';
+    
+    const addClass = () => {
+      vid.classList.add('scale-105', 'z-10');
+      vid.style.borderColor = 'rgba(139, 92, 246, 0.6)';
+      vid.style.boxShadow = '0 8px 32px rgba(139, 92, 246, 0.3)';
+      // Effet sur le wrapper aussi
+      const wrapper = vid.closest('.video-section-wrapper');
+      if (wrapper) {
+        wrapper.style.borderColor = 'rgba(139, 92, 246, 0.4)';
+        wrapper.style.boxShadow = '0 12px 40px rgba(139, 92, 246, 0.2)';
+      }
+    };
+    const removeClass = () => {
+      vid.classList.remove('scale-105', 'z-10');
+      vid.style.borderColor = 'rgba(139, 92, 246, 0.3)';
+      vid.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
+      // Restaurer le wrapper
+      const wrapper = vid.closest('.video-section-wrapper');
+      if (wrapper) {
+        wrapper.style.borderColor = 'rgba(139, 92, 246, 0.2)';
+        wrapper.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+      }
+    };
+    
+    vid.addEventListener('play', () => { 
+      addClass(); 
+      vid.dataset.userPaused = 'false'; 
+      vid.dataset.autoPaused = 'false'; 
+    });
     vid.addEventListener('playing', addClass);
-    vid.addEventListener('pause', () => { removeClass(); if (vid.dataset.autopausing === 'true') { vid.dataset.autopausing = 'false'; } else { vid.dataset.userPaused = 'true'; } });
+    vid.addEventListener('pause', () => { 
+      removeClass(); 
+      if (vid.dataset.autopausing === 'true') { 
+        vid.dataset.autopausing = 'false'; 
+      } else { 
+        vid.dataset.userPaused = 'true'; 
+      } 
+    });
     vid.addEventListener('ended', removeClass);
   });
 
+  // Observer pour la visibilité
   const visibilityObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const vid = entry.target;
@@ -428,6 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.2 });
+  
   videos.forEach((vid) => visibilityObserver.observe(vid));
 
   function updateBtn(vid) {
@@ -438,41 +504,114 @@ document.addEventListener('DOMContentLoaded', () => {
   const enableAudio = () => {
     if (audioOK) return;
     audioOK = true;
-    const v = videos[current];
-    if (v && !v.paused) { v.muted = false; updateBtn(v); }
+    // En mode boucle, on utilise la première vidéo
+    const v = isSequenceMode ? videos[current] : videos[0];
+    if (v && !v.paused) { 
+      v.muted = false; 
+      updateBtn(v); 
+    }
   };
-  ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => window.addEventListener(evt, enableAudio, { once: true, passive: true }));
+
+  ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => {
+    window.addEventListener(evt, enableAudio, { once: true, passive: true });
+  });
+
+  // Gestion des boutons mute
   document.querySelectorAll('.mute-btn').forEach((btn) => {
     const vid = videos.find((v) => v.id === btn.dataset.video);
     if (!vid) return;
-    btn.addEventListener('click', (e) => { e.stopPropagation(); vid.muted = !vid.muted; updateBtn(vid); });
+    btn.addEventListener('click', (e) => { 
+      e.stopPropagation(); 
+      vid.muted = !vid.muted; 
+      updateBtn(vid); 
+    });
   });
 
   function start(vid) {
     vid.muted = !audioOK;
     vid.currentTime = 0;
-    vid.play().then(() => { if (audioOK) vid.muted = false; updateBtn(vid); })
-      .catch(() => { vid.muted = true; vid.play(); updateBtn(vid); });
-    vid.onended = () => { current += 1; if (current < videos.length) playSeq(current); };
+    vid.play().then(() => { 
+      if (audioOK) vid.muted = false; 
+      updateBtn(vid); 
+    }).catch(() => { 
+      vid.muted = true; 
+      vid.play(); 
+      updateBtn(vid); 
+    });
+    
+    // Mode boucle pour vidéo unique, séquence pour multiple
+    if (isSequenceMode) {
+      vid.onended = () => { 
+        current += 1; 
+        if (current < videos.length) playSeq(current); 
+      };
+    } else {
+      vid.loop = true;
+      vid.onended = null;
+    }
   }
 
-  playSeq = (idx) => {
-    const vid = videos[idx];
-    if (!vid) return;
-    videos.forEach((v, i) => { if (i !== idx) { v.pause(); v.currentTime = 0; } });
-    const io = new IntersectionObserver((ent) => {
-      if (ent[0].isIntersecting && fullyVisible(vid)) { io.disconnect(); start(vid); }
-    }, { threshold: 1 });
-    io.observe(vid);
-  };
+  if (isSequenceMode) {
+    // Mode séquence : jouer les vidéos l'une après l'autre
+    playSeq = (idx) => {
+      const vid = videos[idx];
+      if (!vid) return;
+      videos.forEach((v, i) => { if (i !== idx) { v.pause(); v.currentTime = 0; } });
+      const io = new IntersectionObserver((ent) => {
+        if (ent[0].isIntersecting && fullyVisible(vid)) { 
+          io.disconnect(); 
+          start(vid); 
+        }
+      }, { threshold: 1 });
+      io.observe(vid);
+    };
 
-  videos.forEach((vid, idx) => {
-    vid.addEventListener('click', () => {
-      if (vid.paused) { if (!audioOK) enableAudio(); current = idx; start(vid); } else { vid.pause(); }
+    videos.forEach((vid, idx) => {
+      vid.addEventListener('click', () => {
+        if (vid.paused) { 
+          if (!audioOK) enableAudio(); 
+          current = idx; 
+          start(vid); 
+        } else { 
+          vid.pause(); 
+        }
+      });
     });
-  });
 
-  if (videos.length) playSeq(current);
+    if (videos.length) playSeq(current);
+  } else {
+    // Mode boucle : démarrer la vidéo unique quand visible
+    const vid = videos[0];
+    
+    // Ajouter l'événement click
+    vid.addEventListener('click', () => {
+      if (vid.paused) { 
+        if (!audioOK) enableAudio(); 
+        start(vid); 
+      } else { 
+        vid.pause(); 
+      }
+    });
+    
+    // Observer pour démarrer automatiquement quand visible
+    const startObserver = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        startObserver.disconnect();
+        start(vid);
+      }
+    }, { threshold: 0.1 });
+    
+    startObserver.observe(vid);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Vidéos de es-tu-game.php (séquence)
+  initVideoManager(['video1', 'video2', 'video3']);
+  
+  // Vidéo de boutique.php (boucle)
+  initVideoManager(['video4']);
 });
 
 /* ========================================================================
@@ -485,7 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hidePrice = addBtn?.dataset.hidePrice !== undefined;
     const unitPrice = addBtn ? parseFloat(addBtn.dataset.itemPrice || '0') : 0;
     const tr = window.i18n?.product || {};
-    const addText = tr.add || 'Ajouter';
+    const addText = tr.add || 'Ajouter au panier';
 
     if (addBtn) {
       const label = addBtn.querySelector('[data-i18n="product.add"]');
@@ -611,47 +750,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ========================================================================
-   SNIPCART — évite double ouverture + badges actifs
-   ===================================================================== */
-document.addEventListener('DOMContentLoaded', () => {
-  const cartBtns = document.querySelectorAll('.snipcart-checkout');
-  const accountBtns = document.querySelectorAll('.snipcart-customer-signin');
-
-  const cartVisible = () => window.Snipcart?.store?.getState()?.cart?.status === 'visible';
-  const accountVisible = () => window.Snipcart?.store?.getState()?.customer?.status === 'visible';
-
-  cartBtns.forEach((btn) => btn.addEventListener('click', (e) => {
-    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
-    if (cartVisible()) {
-      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
-      window.Snipcart.api.theme.cart.close();
-      e.currentTarget.blur();
-    }
-  }));
-  accountBtns.forEach((btn) => btn.addEventListener('click', (e) => {
-    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
-    if (accountVisible()) {
-      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
-      window.Snipcart.api.theme.customer.close();
-      e.currentTarget.blur();
-    }
-  }));
-
-  const setBtnState = () => {
-    const cv = cartVisible();
-    const av = accountVisible();
-    cartBtns.forEach((b) => b.classList.toggle('is-active', cv));
-    accountBtns.forEach((b) => b.classList.toggle('is-active', av));
-  };
-  window.addEventListener('snipcart.ready', setBtnState);
-  window.addEventListener('snipcart.opened', setBtnState);
-  window.addEventListener('snipcart.closed', setBtnState);
-
-  const hookStore = () => { try { const { store } = window.Snipcart; if (store) store.subscribe(() => setBtnState()); } catch (_) {} };
-  (function poll() { if (window.Snipcart && window.Snipcart.store) hookStore(); else setTimeout(poll, 300); }());
-});
-
-/* ========================================================================
    LAZYLOAD IMG
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -734,50 +832,5 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
 });
 
-/* ========================================================================
-   SNIPCART — synchronisation au clic "Ajouter au panier"
-   ===================================================================== */
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.snipcart-add-item');
-  if (!btn) return;
 
-  const id = btn.dataset.itemId;
 
-  // Quantité depuis l’UI carte
-  const qtyEl = document.getElementById(`qty-${id}`);
-  if (qtyEl) {
-    const q = parseInt(qtyEl.innerHTML, 10);
-    if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
-  }
-
-  // Valeur du multiplicateur choisie sur la fiche (si présente)
-  const sel = document.querySelector(`.multiplier-select[data-target="${id}"]`);
-  if (sel) btn.setAttribute('data-item-custom1-value', sel.value);
-}, false);
-
-/* ========================================================================
-   SNIPCART — cacher UNIQUEMENT "Multiplicateur/Multiplier" dans le panier
-   (la quantité reste affichée) — Désactivé
-   ===================================================================== */
-// document.addEventListener('DOMContentLoaded', () => {
-//   const root = document.getElementById('snipcart');
-//   if (!root) return;
-// });
-
-// Verrouille le scroll de la page uniquement pour le panier/checkout (pas pour la facture)
-const toggleSnipcartScroll = () => {
-  const root = document.getElementById('snipcart');
-  const inOrder = !!root?.querySelector('.snipcart-order');
-  const visible = window.Snipcart?.store?.getState()?.cart?.status === 'visible';
-  document.body.classList.toggle('snipcart-open', visible && !inOrder);
-};
-
-window.addEventListener('snipcart.opened', toggleSnipcartScroll);
-window.addEventListener('snipcart.closed', toggleSnipcartScroll);
-window.addEventListener('snipcart.ready', () => {
-  const root = document.getElementById('snipcart');
-  if (root) {
-    new MutationObserver(toggleSnipcartScroll).observe(root, { childList: true, subtree: true });
-  }
-  toggleSnipcartScroll();
-});

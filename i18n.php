@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Basic internationalisation bootstrap.
  *
@@ -16,11 +17,22 @@ if ($lang === null) {
 if (!in_array($lang, $availableLangs, true)) {
     $lang = 'fr';
 }
-setcookie('lang', $lang, time() + 31536000, '/');
+
+// Définir le cookie seulement si pas en mode CLI et headers pas encore envoyés
+if (php_sapi_name() !== 'cli' && !headers_sent()) {
+    setcookie('lang', $lang, [
+        'expires' => time() + 31536000,
+        'path' => '/',
+        'secure' => true,
+        'httponly' => true,
+        'samesite' => 'Strict',
+    ]);
+}
 
 /**
  * Append the current language as query parameter to a URL.
  */
+if (!function_exists('langUrl')) {
 function langUrl(string $url): string
 {
     global $lang;
@@ -36,6 +48,7 @@ function langUrl(string $url): string
     }
 
     return isset($parts[1]) ? $parts[0] . '#' . $parts[1] : $parts[0];
+}
 }
 
 $translationFile = __DIR__ . "/translations/$lang.json";
