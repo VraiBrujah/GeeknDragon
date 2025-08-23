@@ -116,17 +116,6 @@
     "errorMessage": "Your message could not be sent. Please try again or contact us directly.",
     "backHome": "Back to home"
   },
-  "errors": {
-    "404": {
-      "title": "Page not found",
-      "message": "The requested page could not be found."
-    },
-    "500": {
-      "title": "Server error",
-      "message": "An error occurred. Please try again later."
-    },
-    "backHome": "Back to home"
-  },
   "product": {
     "back": "Back to shop",
     "multiplier": "Multiplier",
