@@ -122,14 +122,53 @@ class TranslationService
         
         // 3. Header Accept-Language
         $acceptLang = $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '';
-        if (str_contains($acceptLang, 'en')) {
-            return 'en';
+        if ($acceptLang !== '') {
+            $locales = $this->parseAcceptLanguage($acceptLang);
+            foreach ($locales as $locale) {
+                $lang = substr($locale, 0, 2);
+                if (in_array($lang, ['fr', 'en'], true)) {
+                    return $lang;
+                }
+            }
         }
-        
+
         // 4. Fallback français
         return 'fr';
     }
-    
+
+    /**
+     * Parse l'en-tête Accept-Language et retourne les locales triées par facteur de qualité
+     *
+     * @return string[] Liste des locales ordonnées
+     */
+    private function parseAcceptLanguage(string $header): array
+    {
+        $languages = array_map('trim', explode(',', $header));
+        $weighted = [];
+
+        foreach ($languages as $lang) {
+            $parts = explode(';', $lang);
+            $locale = strtolower(trim($parts[0]));
+            $q = 1.0;
+
+            foreach (array_slice($parts, 1) as $part) {
+                $part = trim($part);
+                if (str_starts_with($part, 'q=')) {
+                    $quality = (float) substr($part, 2);
+                    if ($quality >= 0 && $quality <= 1) {
+                        $q = $quality;
+                    }
+                }
+            }
+
+            $weighted[$locale] = $q;
+        }
+
+        arsort($weighted, SORT_NUMERIC);
+
+        return array_keys($weighted);
+    }
+
     /**
      * Génère une URL avec la langue courante
      */
@@ -139,13 +178,13 @@ class TranslationService
         if (function_exists('langUrl')) {
             return langUrl($path);
         }
-        
+
         // Fallback simple
         $lang = $this->currentLang;
         if ($lang === 'fr') {
             return $path; // Français par défaut, pas de préfixe
         }
-        
+
         return "/{$lang}{$path}";
     }
 }
