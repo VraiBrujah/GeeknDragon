@@ -43,16 +43,15 @@ html {
 
 body {
     font-family: var(--font-body);
-    line-height: 1.7;
+    line-height: 1.6;
     color: var(--light-text);
     background: var(--dark-bg);
     overflow-x: hidden;
-    padding-top: 80px;
-    text-shadow: var(--shadow-text);
+    padding-top: 90px;
 }
 
 section {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 100px;
 }
 
 /* Typographie médiévale */
@@ -60,33 +59,33 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 600;
     line-height: 1.3;
-    margin-bottom: 1.5rem;
-    text-shadow: var(--shadow-text);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     color: var(--light-text);
 }
 
 h1 { 
-    font-size: clamp(3rem, 6vw, 5rem); 
-    font-family: var(--font-decorative);
-    letter-spacing: 1px;
+    font-size: clamp(2.5rem, 5vw, 3.5rem); 
+    font-family: var(--font-heading);
+    letter-spacing: 0.5px;
 }
 h2 { 
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-family: var(--font-decorative); 
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-family: var(--font-heading); 
 }
 h3 { 
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-size: clamp(1.5rem, 3vw, 2rem);
 }
 h4 { 
-    font-size: clamp(1.4rem, 3vw, 2rem); 
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem); 
 }
 
 p {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     color: var(--light-text);
-    font-size: clamp(1rem, 2vw, 1.1rem);
-    line-height: 1.8;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
 }
 
 /* Container */
@@ -116,31 +115,20 @@ p {
     margin: 0 auto;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 .logo a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     text-decoration: none;
 }
 
-.logo-icon {
-    font-size: 2.5rem;
-    filter: drop-shadow(0 0 10px var(--secondary-color));
+.logo-image {
+    height: 50px;
+    width: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    transition: var(--transition);
 }
 
-.logo-text {
-    font-family: var(--font-decorative);
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--secondary-color);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 15px var(--secondary-color);
-    letter-spacing: 1px;
+.logo-image:hover {
+    filter: drop-shadow(0 4px 8px rgba(212,175,55,0.4));
+    transform: scale(1.05);
 }
 
 .nav-menu {
@@ -384,7 +372,7 @@ p {
 
 /* Products Section - Section agrandie avec style D&D */
 .products {
-    padding: 10rem 0;
+    padding: 6rem 0;
     background: var(--gradient-dark);
     position: relative;
 }
@@ -400,9 +388,36 @@ p {
     pointer-events: none;
 }
 
+/* Boutique Section */
+.boutique-section {
+    padding: 5rem 0;
+    background: var(--darker-bg);
+    text-align: center;
+}
+
+.payment-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+}
+
+.payment-icons img {
+    height: 30px;
+    width: auto;
+    opacity: 0.8;
+}
+
+.boutique-cta {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 /* Features Section - Section plus large et immersive D&D */
 .features {
-    padding: 10rem 0;
+    padding: 6rem 0;
     background: var(--dark-bg);
     position: relative;
 }
@@ -428,7 +443,7 @@ p {
 
 .feature-card {
     text-align: center;
-    padding: 3.5rem;
+    padding: 2.5rem;
     background: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-medium);
@@ -474,7 +489,7 @@ p {
 
 /* Catalogue Preview - Section agrandie avec design D&D */
 .catalogue-preview {
-    padding: 10rem 0;
+    padding: 6rem 0;
     background: var(--darker-bg);
     position: relative;
 }
@@ -552,7 +567,7 @@ p {
 }
 
 .card-product {
-    padding: 3rem;
+    padding: 2.5rem;
     text-align: center;
     background: var(--card-bg);
     backdrop-filter: blur(10px);
@@ -562,6 +577,13 @@ p {
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-product:hover {
+    text-decoration: none;
+    color: inherit;
 }
 
 .card-product::before {
@@ -595,19 +617,21 @@ p {
 
 .card-product h4 {
     color: var(--secondary-color);
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     line-height: 1.3;
-    margin: 1.5rem 0 1rem;
-    text-shadow: var(--shadow-text);
+    margin: 1rem 0 0.8rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     font-family: var(--font-heading);
+    text-decoration: none;
 }
 
 .card-product p {
     color: var(--light-text);
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin: 0 0 1.5rem;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 1rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    text-decoration: none;
 }
 
 .product-category:hover,
@@ -687,7 +711,7 @@ p {
 
 /* Testimonials - Section agrandie avec style D&D authentique */
 .testimonials {
-    padding: 10rem 0;
+    padding: 6rem 0;
     background: var(--gradient-dark);
     position: relative;
 }
@@ -712,10 +736,10 @@ p {
 
 .testimonial-card {
     background: var(--card-bg);
-    padding: 3rem;
+    padding: 2.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-medium);
-    border-left: 6px solid var(--secondary-color);
+    border-left: 4px solid var(--secondary-color);
     transition: var(--transition);
     position: relative;
     border: 2px solid var(--border-color);
@@ -766,7 +790,7 @@ p {
 
 /* News - Section actualités agrandie */
 .news {
-    padding: 10rem 0;
+    padding: 6rem 0;
     background: var(--dark-bg);
     position: relative;
 }
@@ -784,10 +808,10 @@ p {
 
 .news-item {
     background: var(--card-bg);
-    padding: 3.5rem;
+    padding: 2.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-medium);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     border: 2px solid var(--border-color);
     backdrop-filter: blur(10px);
     transition: var(--transition);
@@ -823,7 +847,7 @@ p {
 
 /* Contact - Section contact agrandie */
 .contact-section {
-    padding: 8rem 0;
+    padding: 6rem 0;
     background: var(--gradient-dark);
     position: relative;
 }
@@ -879,7 +903,7 @@ p {
 
 /* CTA Section - Section héroïque D&D finale */
 .cta-section {
-    padding: 12rem 0;
+    padding: 8rem 0;
     background: var(--gradient-mystical);
     text-align: center;
     position: relative;
