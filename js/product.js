@@ -158,19 +158,11 @@ const ProductPage = {
   // Fonctionnalité panier
   setupCartFunctionality() {
     this.addToCartBtn = document.querySelector('.btn-add-to-cart');
-    this.buyNowBtn = document.querySelector('.btn-buy-now');
 
     if (this.addToCartBtn) {
       this.addToCartBtn.addEventListener('click', (e) => {
         e.preventDefault();
         this.addToCart();
-      });
-    }
-
-    if (this.buyNowBtn) {
-      this.buyNowBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.buyNow();
       });
     }
   },
@@ -189,25 +181,6 @@ const ProductPage = {
 
     // Tracking
     this.trackAddToCart(productData);
-  },
-
-  buyNow() {
-    const productData = this.getProductData();
-
-    // Animation du bouton
-    this.animateButton(this.buyNowBtn, 'Redirection...');
-
-    // Sauvegarder et rediriger (simulation)
-    this.saveToCart(productData);
-
-    // Tracking
-    this.trackBuyNow(productData);
-
-    // Simuler redirection vers checkout
-    setTimeout(() => {
-      this.showNotification('Redirection vers le paiement...', 'info');
-      // window.location.href = '/checkout';
-    }, 1000);
   },
 
   getProductData() {
@@ -454,12 +427,6 @@ const ProductPage = {
     }
   },
 
-  trackBuyNow(productData) {
-    if (window.GeeknDragon && window.GeeknDragon.Analytics) {
-      window.GeeknDragon.Analytics.trackEvent('buy_now_click', 'ecommerce', productData.title);
-    }
-  },
-
   trackWishlistAction(productTitle, added) {
     if (window.GeeknDragon && window.GeeknDragon.Analytics) {
       const action = added ? 'wishlist_add' : 'wishlist_remove';
@@ -504,12 +471,6 @@ function updateProductConfig() {
 function addToCart() {
   if (ProductPage.addToCart) {
     ProductPage.addToCart();
-  }
-}
-
-function buyNow() {
-  if (ProductPage.buyNow) {
-    ProductPage.buyNow();
   }
 }
 

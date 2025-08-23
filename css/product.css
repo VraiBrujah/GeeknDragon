@@ -324,13 +324,12 @@
 /* Product Actions */
 .product-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 1fr auto;
     gap: 1rem;
     margin-bottom: 2rem;
 }
 
-.btn-add-to-cart,
-.btn-buy-now {
+.btn-add-to-cart {
     padding: 1rem 1.5rem;
     font-weight: 600;
     border: none;
@@ -344,9 +343,6 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-}
-
-.btn-add-to-cart {
     background: var(--gradient-primary);
     color: var(--light-text);
     box-shadow: var(--shadow-light);
@@ -357,16 +353,6 @@
     box-shadow: var(--shadow-medium);
 }
 
-.btn-buy-now {
-    background: var(--gradient-secondary);
-    color: var(--dark-bg);
-    box-shadow: var(--shadow-light);
-}
-
-.btn-buy-now:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
-}
 
 .btn-wishlist {
     background: transparent;
