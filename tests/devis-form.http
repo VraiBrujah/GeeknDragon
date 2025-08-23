@@ -1,0 +1,36 @@
+# Demande de devis - scénarios de test avec curl
+# Remplacer https://geekndragon.com par l'URL locale si besoin
+
+### 1. Récupération du token CSRF
+# curl -c cookies.txt https://geekndragon.com/devis -o /tmp/devis.html
+# TOKEN=$(grep _token /tmp/devis.html | sed -n 's/.*value="\([a-f0-9]*\)".*/\1/p')
+
+### 2. Soumission réussie
+# curl -b cookies.txt -X POST https://geekndragon.com/devis \
+#   -d "_token=$TOKEN" \
+#   -d "name=Jean Dupont" \
+#   -d "email=jean@example.com" \
+#   -d "service=Site vitrine" \
+#   -d "message=Bonjour" -i
+
+### 3. Sans token CSRF
+# curl -X POST https://geekndragon.com/devis -d "name=Jean" -d "email=jean@example.com" -d "message=Test"
+
+### 4. Honeypot rempli
+# curl -b cookies.txt -X POST https://geekndragon.com/devis \
+#   -d "_token=$TOKEN" -d "name=Spam" -d "email=spam@example.com" \
+#   -d "company=BadCorp" -d "message=spam"
+
+### 5. Rate limit
+# for i in 1 2 3; do curl -b cookies.txt -X POST https://geekndragon.com/devis \
+#   -d "_token=$TOKEN" -d "name=Test$i" -d "email=test$i@example.com" -d "message=Hi"; done
+
+### 6. Email invalide
+# curl -b cookies.txt -X POST https://geekndragon.com/devis \
+#   -d "_token=$TOKEN" -d "name=Jean" -d "email=not-an-email" -d "message=Bonjour"
+
+### 7. Message trop long
+# perl -e 'print "A" x 4000' > /tmp/msg.txt
+# curl -b cookies.txt -X POST https://geekndragon.com/devis \
+#   -d "_token=$TOKEN" -d "name=Jean" -d "email=jean@example.com" \
+#   --data-urlencode "message@/tmp/msg.txt"
