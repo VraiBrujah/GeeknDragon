@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Erreur technique | Geek & Dragon</title>
+  <meta name="description" content="Une erreur temporaire est survenue. L'équipe Geek & Dragon travaille à la résoudre rapidement.">
+  <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
+  <style>
+    body { 
+      margin: 0; 
+      font-family: 'Inter', sans-serif; 
+      background: linear-gradient(135deg, #0f172a, #1e293b); 
+      color: #f8fafc; 
+      min-height: 100vh; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      text-align: center;
+    }
+    .error-container {
+      max-width: 600px;
+      padding: 2rem;
+      background: rgba(31, 41, 55, 0.8);
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border: 1px solid rgba(220, 38, 38, 0.3);
+    }
+    .error-code { 
+      font-size: 8rem; 
+      font-weight: 800; 
+      color: #ef4444; 
+      line-height: 1; 
+      margin-bottom: 1rem;
+    }
+    .error-title { 
+      font-size: 2rem; 
+      font-weight: 700; 
+      margin-bottom: 1rem; 
+      color: #f1f5f9;
+    }
+    .error-message { 
+      font-size: 1.1rem; 
+      color: #94a3b8; 
+      margin-bottom: 2rem; 
+      line-height: 1.6;
+    }
+    .btn { 
+      display: inline-block; 
+      padding: 1rem 2rem; 
+      font-weight: 600; 
+      text-decoration: none; 
+      border-radius: 0.5rem; 
+      transition: all 0.3s; 
+      margin: 0.5rem;
+    }
+    .btn-primary { 
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8); 
+      color: white; 
+    }
+    .btn-primary:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4); 
+    }
+    .btn-outline { 
+      background: transparent; 
+      color: #a5b4fc; 
+      border: 2px solid #6366f1; 
+    }
+    .btn-outline:hover { 
+      background: #6366f1; 
+      color: white; 
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container">
+    <div class="error-code">500</div>
+    <h1 class="error-title">⚙️ Erreur Temporaire</h1>
+    <p class="error-message">
+      Nos dragons techniciens travaillent activement à résoudre ce problème temporaire. 
+      Veuillez réessayer dans quelques minutes.
+    </p>
+    <div>
+      <a href="/" class="btn btn-primary">🏠 Retour à l'Accueil</a>
+      <a href="/contact.html" class="btn btn-outline">📧 Nous Contacter</a>
+    </div>
+    <p style="margin-top: 2rem; font-size: 0.9rem; color: #6b7280;">
+      Si le problème persiste, contactez-nous à <a href="mailto:contact@geekndragon.com" style="color: #ef4444;">contact@geekndragon.com</a>
+    </p>
+  </div>
+</body>
+</html>
