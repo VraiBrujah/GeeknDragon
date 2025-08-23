@@ -598,12 +598,12 @@
                     <div class="slider-container">
                         <div class="slider-label">
                             <span>💸 Coût maintenance Ni-Cd annuel</span>
-                            <span class="slider-value" id="maintenanceCostValue">200 CAD/an</span>
+                            <span class="slider-value" id="maintenanceCostValue" data-pricing-value="nicd.maintenance_annual" data-pricing-format="currency"> CAD/an</span>
                         </div>
                         <input type="range" min="200" max="600" value="200" step="50" class="slider" id="maintenanceCostSlider">
                         <div class="slider-range">
-                            <span>200 CAD/an</span>
-                            <span>600 CAD/an</span>
+                            <span data-pricing-value="nicd.maintenance_annual" data-pricing-format="currency"> CAD/an</span>
+                            <span data-pricing-value="nicd.maintenance_annual_max" data-pricing-format="currency"> CAD/an</span>
                         </div>
                         <div class="impact-indicator">
                             <span>⚠️ Coûts cachés:</span>
@@ -633,7 +633,7 @@
                 <div class="control-group">
                     <div class="fixed-value">
                         <span class="fixed-value-label">🏠 Loyer mensuel Li-CUBE PRO™</span>
-                        <span class="fixed-value-display" id="loyerValue">150 CAD/mois</span>
+                        <span class="fixed-value-display" id="loyerValue" data-pricing-value="licube.monthly_rate_max" data-pricing-format="currency"> CAD/mois</span>
                     </div>
                     <div class="config-note" style="margin-top: 1rem; font-size: 0.85rem;">
                         💡 <strong>Base <span data-pricing-value="licube.monthly_rate_max" data-pricing-format="currency"></span>$/mois</strong> - Réductions jusqu'à <span data-pricing-value="licube.monthly_rate_min" data-pricing-format="currency"></span>$/mois GARANTI.<br>
@@ -659,7 +659,7 @@
                     <div class="result-title">
                         🎆 LOCATION Li-CUBE PRO™ 2025
                     </div>
-                    <div class="result-value" id="lfpTotal">26 500 CAD</div>
+                    <div class="result-value" id="lfpTotal" data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="currency"> CAD</div>
                     <div class="result-subtitle"><strong>TOUT INCLUS</strong> sur 20 ans</div>
                 </div>
 
@@ -667,7 +667,7 @@
                     <div class="result-title">
                         ⚠️ VOS Ni-Cd 1980 (coût RÉEL!)
                     </div>
-                    <div class="result-value" id="nicdTotal">75 990 CAD</div>
+                    <div class="result-value" id="nicdTotal" data-pricing-value="calculations.tco_location.nicd.total_20_years" data-pricing-format="currency"> CAD</div>
                     <div class="result-subtitle"><strong>TOUS VOS coûts cachés inclus!</strong></div>
                 </div>
 
@@ -675,8 +675,8 @@
                     <div class="result-title">
                         🚀 ÉCONOMIES SPECTACULAIRES!
                     </div>
-                    <div class="result-value" id="totalSavings">49 490 CAD</div>
-                    <div class="result-subtitle" id="savingsPercentage"><strong>206 CAD/mois ÉCONOMISÉS!</strong></div>
+                    <div class="result-value" id="totalSavings" data-pricing-value="calculations.tco_location.savings.amount" data-pricing-format="currency"> CAD</div>
+                    <div class="result-subtitle" id="savingsPercentage"><strong><span data-pricing-value="calculations.tco_location.savings.monthly" data-pricing-format="currency"></span> CAD/mois ÉCONOMISÉS!</strong></div>
                 </div>
             </div>
 
@@ -685,35 +685,35 @@
                 <div class="breakdown-grid">
                     <div class="breakdown-item">
                         <h4>💰 LOCATION PROGRESSIVE (<span data-pricing-value="licube.monthly_rate_max" data-pricing-format="currency"></span>$ à <span data-pricing-value="licube.monthly_rate_min" data-pricing-format="currency"></span>$/mois)</h4>
-                        <div class="breakdown-value" id="lfpLoyers">26 000 CAD</div>
+                        <div class="breakdown-value" id="lfpLoyers" data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🛠️ Installation UNIQUE (une seule fois!)</h4>
-                        <div class="breakdown-value" id="lfpInstallation">500 CAD</div>
+                        <div class="breakdown-value" id="lfpInstallation" data-pricing-value="licube.installation_cost" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🔋 VOS Ni-Cd + 8 REMPLACEMENTS forcés!</h4>
-                        <div class="breakdown-value" id="nicdBatteries">8 400 CAD</div>
+                        <div class="breakdown-value" id="nicdBatteries" data-pricing-value="calculations.tco_location.nicd.initial_cost" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🛠️ VOS frais maintenance Ni-Cd (obligatoire!)</h4>
-                        <div class="breakdown-value" id="nicdMaintenance">6 990 CAD</div>
+                        <div class="breakdown-value" id="nicdMaintenance" data-pricing-value="calculations.tco_location.nicd.maintenance_20_years" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>💥 VOS 60 PANNES Ni-Cd sur 20 ans!</h4>
-                        <div class="breakdown-value" id="nicdPannes">48 600 CAD</div>
+                        <div class="breakdown-value" id="nicdPannes" data-pricing-value="calculations.tco_location.nicd.downtime_cost" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>⚡ VOS surcoûts performance dégradée</h4>
-                        <div class="breakdown-value" id="nicdDegradation">12 000 CAD</div>
+                        <div class="breakdown-value" id="nicdDegradation" data-pricing-value="calculations.tco_location.nicd.degradation_cost" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>💸 VOS frais installation 8 remplacements</h4>
-                        <div class="breakdown-value" id="nicdRemplacements">1 200 CAD</div>
+                        <div class="breakdown-value" id="nicdRemplacements" data-pricing-value="calculations.tco_location.nicd.replacements_cost" data-pricing-format="currency"> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🚀 VOS économies GARANTIES par mois!</h4>
-                        <div class="breakdown-value" id="roi">206 CAD/mois</div>
+                        <div class="breakdown-value" id="roi" data-pricing-value="calculations.tco_location.savings.monthly" data-pricing-format="currency"> CAD/mois</div>
                     </div>
                 </div>
             </div>
@@ -723,13 +723,13 @@
                 <div class="chart">
                     <div class="chart-bar">
                         <div class="bar lfp" id="lfpBar">
-                            <div class="bar-value" id="lfpBarValue">26 500 CAD</div>
+                            <div class="bar-value" id="lfpBarValue" data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="currency"> CAD</div>
                         </div>
                         <div class="bar-label">LOCATION Li-CUBE PRO™ 2025</div>
                     </div>
                     <div class="chart-bar">
                         <div class="bar nicd" id="nicdBar">
-                            <div class="bar-value" id="nicdBarValue">75 990 CAD</div>
+                            <div class="bar-value" id="nicdBarValue" data-pricing-value="calculations.tco_location.nicd.total_20_years" data-pricing-format="currency"> CAD</div>
                         </div>
                         <div class="bar-label">ACHAT Ni-Cd 1980 obsolète</div>
                     </div>
@@ -742,15 +742,15 @@
                 <div class="breakdown-grid">
                     <div class="breakdown-item" style="border-left-color: var(--danger-color);">
                         <h4>⚠️ VOS NI-CD VOUS RUINENT!</h4>
-                        <div class="breakdown-value" style="color: var(--danger-color);" id="replacementArgument">8 remplacements vs 0 Li-CUBE PRO</div>
+                        <div class="breakdown-value" style="color: var(--danger-color);" id="replacementArgument"><span data-pricing-value="calculations.tco_location.nicd.replacement_count" data-pricing-format="number"></span> remplacements vs 0 Li-CUBE PRO</div>
                     </div>
                     <div class="breakdown-item" style="border-left-color: var(--danger-color);">
                         <h4 id="breakdownTitle">🔥 PANNES CATASTROPHIQUES</h4>
-                        <div class="breakdown-value" style="color: var(--danger-color);" id="breakdownArgument">3 pannes/an = ÉNORME PERTE!</div>
+                        <div class="breakdown-value" style="color: var(--danger-color);" id="breakdownArgument"><span data-pricing-value="nicd.failure_rate_annual" data-pricing-format="number"></span> pannes/an = ÉNORME PERTE!</div>
                     </div>
                     <div class="breakdown-item" style="border-left-color: var(--success-color);">
                         <h4>⚡ RÉVOLUTION ÉNERGÉTIQUE</h4>
-                        <div class="breakdown-value" style="color: var(--success-color);">+316% capacité, -65% poids</div>
+                        <div class="breakdown-value" style="color: var(--success-color);">+<span data-pricing-value="licube.capacity_increase_percentage" data-pricing-format="percentage"></span>% capacité, -<span data-pricing-value="licube.weight_reduction_percentage" data-pricing-format="percentage"></span>% poids</div>
                     </div>
                     <div class="breakdown-item" style="border-left-color: var(--success-color);">
                         <h4>🛡️ ZÉRO RISQUE TECHNIQUE</h4>
@@ -762,13 +762,13 @@
                     </div>
                     <div class="breakdown-item" style="border-left-color: var(--accent-color);">
                         <h4 id="roiTitle">🏆 RETOUR INVESTISSEMENT</h4>
-                        <div class="breakdown-value" style="color: var(--accent-color);" id="roiArgument">Économies dès le 1er mois!</div>
+                        <div class="breakdown-value" style="color: var(--accent-color);" id="roiArgument">Économies dès le <span data-pricing-value="calculations.tco_location.savings.payback_months" data-pricing-format="number"></span>er mois!</div>
                     </div>
                 </div>
 
                 <!-- Section Phrases Chocs Dynamiques -->
                 <div style="background: linear-gradient(135deg, var(--danger-color), #FF6B6B); color: white; padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center;">
-                    <h3 id="shockPhrase" style="color: white; font-size: 1.8rem; margin-bottom: 1rem;">💸 Vos Ni-Cd vous coûtent 206 CAD/mois de TROP!</h3>
+                    <h3 id="shockPhrase" style="color: white; font-size: 1.8rem; margin-bottom: 1rem;">💸 Vos Ni-Cd vous coûtent <span data-pricing-value="calculations.tco_location.savings.monthly" data-pricing-format="currency"></span> CAD/mois de TROP!</h3>
                     <p id="shockDetails" style="font-size: 1.2rem; opacity: 0.95;">Chaque mois qui passe sans Li-CUBE PRO™ = argent jeté par les fenêtres!</p>
                 </div>
             </div>
@@ -958,7 +958,7 @@
 
         // Mettre à jour les valeurs affichées avec nouvelle logique progressive
         function updateDisplayValues() {
-            document.getElementById('loyerValue').textContent = '150 CAD/mois';
+            // Valeur dynamique gérée par le pricing-manager
         }
 
         // Éléments DOM pour l'affichage des résultats location
@@ -1205,16 +1205,16 @@
         function afficherResultatsSimples(donneesCalcul) {
             // Redirection vers fonction location avec adaptation des données
             afficherResultatsLocation({
-                lfpTotal: donneesCalcul.lfpTotal || 26500,
+                lfpTotal: donneesCalcul.lfpTotal || 0, // Valeur dynamique
                 lfpLoyers: donneesCalcul.lfpInitial || 24000,
                 lfpInstallation: donneesCalcul.lfpMonitoring || 500,
-                nicdTotal: donneesCalcul.nicdTotal || 75990,
+                nicdTotal: donneesCalcul.nicdTotal || 0, // Valeur dynamique
                 nicdBatteries: Math.round((donneesCalcul.nicdInitial || 3600)),
                 nicdMaintenance: Math.round((donneesCalcul.nicdMaintenance || 4000)),
                 nicdRemplacements: Math.round((donneesCalcul.nicdReplacements || 1200)),
                 nicdPannes: 48000,
                 nicdDegradation: 12000,
-                savings: donneesCalcul.savings || 49490,
+                savings: donneesCalcul.savings || 0, // Valeur dynamique
                 economiesMensuelles: 206,
                 replacements: donneesCalcul.replacements || 8
             });

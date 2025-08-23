@@ -530,7 +530,7 @@
                 
                 <div class="product-image">
                     <img data-licube-image="Li-CUBE PRO image 1.png" data-depth="3" alt="Li-CUBE PRO™" class="licube-product-image" style="width: 100%; height: 120px; object-fit: contain; border-radius: 8px; background: rgba(255,255,255,0.1);"><br>
-                    420×240×155 mm • 23 kg
+                    420×240×155 mm • <span data-pricing-value="licube.weight_kg" data-pricing-format="number"></span> kg
                 </div>
                 
                 <div class="specs-comparison">
@@ -539,7 +539,7 @@
                             <span class="spec-icon">⚡</span>
                             <span>Durée de vie</span>
                         </div>
-                        <div class="spec-value positive">≥8000 cycles</div>
+                        <div class="spec-value positive">≥<span data-pricing-value="licube.cycle_life" data-pricing-format="number"></span> cycles</div>
                     </div>
                     
                     <div class="spec-item lfp">
@@ -547,7 +547,7 @@
                             <span class="spec-icon">⚖️</span>
                             <span>Poids</span>
                         </div>
-                        <div class="spec-value positive">23 kg (-71%)</div>
+                        <div class="spec-value positive"><span data-pricing-value="licube.weight_kg" data-pricing-format="number"></span> kg (-<span data-pricing-value="licube.weight_reduction_percentage" data-pricing-format="percentage"></span>%)</div>
                     </div>
                     
                     <div class="spec-item lfp">
@@ -555,7 +555,7 @@
                             <span class="spec-icon">🔋</span>
                             <span>Densité énergétique</span>
                         </div>
-                        <div class="spec-value positive">117 Wh/kg</div>
+                        <div class="spec-value positive"><span data-pricing-value="licube.energy_density" data-pricing-format="number"></span> Wh/kg</div>
                     </div>
                     
                     <div class="spec-item lfp">
@@ -595,7 +595,7 @@
                             <span class="spec-icon">💰</span>
                             <span>TCO 20 ans</span>
                         </div>
-                        <div class="spec-value positive">2 500 CAD</div>
+                        <div class="spec-value positive" data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="currency"> CAD</div>
                     </div>
                 </div>
                 
@@ -645,7 +645,7 @@
                 
                 <div class="product-image">
                     <img src="../../image/Ni-Cd/NiCd.png" alt="Batterie Ni-Cd" style="width: 100%; height: 120px; object-fit: contain; border-radius: 8px; background: rgba(220,53,69,0.1);"><br>
-                    600×500×300 mm • ~80 kg
+                    600×500×300 mm • ~<span data-pricing-value="nicd.weight_kg" data-pricing-format="number"></span> kg
                 </div>
                 
                 <div class="specs-comparison">
@@ -654,7 +654,7 @@
                             <span class="spec-icon">⚡</span>
                             <span>Durée de vie</span>
                         </div>
-                        <div class="spec-value negative">2000-3000 cycles</div>
+                        <div class="spec-value negative"><span data-pricing-value="nicd.cycle_life" data-pricing-format="number"></span> cycles</div>
                     </div>
                     
                     <div class="spec-item nicd">
@@ -662,7 +662,7 @@
                             <span class="spec-icon">⚖️</span>
                             <span>Poids</span>
                         </div>
-                        <div class="spec-value negative">~80 kg</div>
+                        <div class="spec-value negative">~<span data-pricing-value="nicd.weight_kg" data-pricing-format="number"></span> kg</div>
                     </div>
                     
                     <div class="spec-item nicd">
@@ -670,7 +670,7 @@
                             <span class="spec-icon">🔋</span>
                             <span>Densité énergétique</span>
                         </div>
-                        <div class="spec-value negative">≈30 Wh/kg</div>
+                        <div class="spec-value negative">≈<span data-pricing-value="nicd.energy_density" data-pricing-format="number"></span> Wh/kg</div>
                     </div>
                     
                     <div class="spec-item nicd">
@@ -686,7 +686,7 @@
                             <span class="spec-icon">🔧</span>
                             <span>Maintenance</span>
                         </div>
-                        <div class="spec-value negative">2 visites/an</div>
+                        <div class="spec-value negative"><span data-pricing-value="nicd.maintenance_visits_per_year" data-pricing-format="number"></span> visites/an</div>
                     </div>
                     
                     <div class="spec-item nicd">
@@ -710,7 +710,7 @@
                             <span class="spec-icon">💰</span>
                             <span>TCO 20 ans</span>
                         </div>
-                        <div class="spec-value negative">57 040 CAD</div>
+                        <div class="spec-value negative" data-pricing-value="calculations.tco_location.nicd.total_20_years" data-pricing-format="currency"> CAD</div>
                     </div>
                 </div>
                 
@@ -750,7 +750,7 @@
         <div class="footer">
             <div class="tco-highlight">
                 <div class="tco-title">💰 Économies Garanties</div>
-                <div class="tco-value">54 240 CAD (95%)</div>
+                <div class="tco-value" data-pricing-value="calculations.tco_location.savings.amount" data-pricing-format="currency"> CAD (<span data-pricing-value="calculations.tco_location.savings.percentage" data-pricing-format="percentage"></span>%)</div>
             </div>
             
             <div class="contact-info">

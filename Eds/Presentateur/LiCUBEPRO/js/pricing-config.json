@@ -63,7 +63,12 @@
       "availability_percentage": 99.9,
       "self_discharge_monthly": 1.2,
       "operating_temp_min": -40,
-      "operating_temp_max": 60
+      "operating_temp_max": 60,
+      "cycle_life": 8000,
+      "energy_density": 117,
+      "weight_reduction_percentage": 71,
+      "capacity_increase_percentage": 316,
+      "lifespan_years": "20-25"
     },
     "nicd": {
       "weight_kg": 80,
@@ -72,7 +77,14 @@
       "availability_percentage": 95,
       "self_discharge_monthly": 20,
       "operating_temp_min": -20,
-      "operating_temp_max": 50
+      "operating_temp_max": 50,
+      "cycle_life": "2000-3000",
+      "energy_density": 30,
+      "maintenance_visits_per_year": 2,
+      "failure_rate_annual": 3,
+      "failure_cost_each": 800,
+      "maintenance_annual_max": 600,
+      "lifespan_years": "3-4"
     }
   },
   

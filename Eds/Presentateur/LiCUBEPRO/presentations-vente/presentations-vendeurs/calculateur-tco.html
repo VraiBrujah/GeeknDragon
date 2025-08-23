@@ -470,7 +470,7 @@
                 <div class="control-group">
                     <div class="fixed-value">
                         <span class="fixed-value-label">🔄 Durée de vie Ni-Cd confirmée</span>
-                        <span class="fixed-value-display" id="replacementValue">6.5 ans</span>
+                        <span class="fixed-value-display" id="replacementValue" data-pricing-value="nicd.replacement_cycle_years" data-pricing-format="number"> ans</span>
                     </div>
                 </div>
 
@@ -504,7 +504,7 @@
                         🚀 Économies SPECTACULAIRES
                     </div>
                     <div class="result-value" id="totalSavings" data-pricing-value="calculations.tco_vente.savings.amount" data-pricing-format="currency"> CAD</div>
-                    <div class="result-subtitle" id="savingsPercentage">90% d'économies</div>
+                    <div class="result-subtitle" id="savingsPercentage" data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="percentage">% d'économies</div>
                 </div>
             </div>
 
@@ -517,7 +517,7 @@
                     </div>
                     <div class="breakdown-item">
                         <h4>📱 Li-CUBE PRO™ - Monitoring optionnel</h4>
-                        <div class="breakdown-value" id="lfpMonitoring">20$/mois (optionnel)</div>
+                        <div class="breakdown-value" id="lfpMonitoring"><span data-pricing-value="licube.monitoring_monthly" data-pricing-format="currency"></span>$/mois (optionnel)</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>⚠️ Ni-Cd - Technologie 1980 obsolète</h4>
@@ -533,7 +533,7 @@
                     </div>
                     <div class="breakdown-item">
                         <h4>Retour sur investissement</h4>
-                        <div class="breakdown-value" id="roi">ROI: 2.1 ans</div>
+                        <div class="breakdown-value" id="roi">ROI: <span data-pricing-value="calculations.tco_vente.savings.roi_years" data-pricing-format="number"></span> ans</div>
                     </div>
                 </div>
             </div>

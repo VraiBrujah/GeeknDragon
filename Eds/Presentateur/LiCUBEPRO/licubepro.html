@@ -588,7 +588,7 @@
                 <div class="libelle-stat">Cycles Li-CUBE vs Ni-Cd</div>
             </div>
             <div class="carte-stat">
-                <span class="numero-stat" id="statROI">1.7 ans</span>
+                <span class="numero-stat" id="statROI" data-pricing-value="calculations.tco_general.savings.roi_years" data-pricing-format="number"> ans</span>
                 <div class="libelle-stat" id="libelleROI">Retour investissement</div>
             </div>
             <div class="carte-stat" id="cartMonitoring" style="background: rgba(241, 143, 1, 0.1); border: 2px solid var(--accent);">
@@ -632,7 +632,7 @@
             vente: {
                 statistiques: {
                     principal: { valeur: 'dynamic', libelle: 'Prix de vente Li-CUBE PRO™' },
-                    roi: { valeur: '2.1 ans', libelle: 'Retour investissement' }
+                    roi: { valeur: '<span data-pricing-value="calculations.tco_vente.savings.roi_years" data-pricing-format="number"></span> ans', libelle: 'Retour investissement' }
                 },
                 categories: [
                     {
@@ -681,7 +681,7 @@
             location: {
                 statistiques: {
                     principal: { valeur: 'dynamic', libelle: 'Tarif location Li-CUBE PRO™' },
-                    roi: { valeur: '6 mois', libelle: 'Retour investissement' }
+                    roi: { valeur: '<span data-pricing-value="calculations.tco_location.savings.roi_months" data-pricing-format="number"></span> mois', libelle: 'Retour investissement' }
                 },
                 categories: [
                     {
