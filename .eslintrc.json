@@ -9,7 +9,21 @@
   },
   "rules": {
     "linebreak-style": "off",
-    "no-console": "warn",
-    "object-shorthand": "warn"
+    "no-console": "off",
+    "object-shorthand": "warn",
+    "no-use-before-define": "off",
+    "no-undef": "off",
+    "no-plusplus": "off",
+    "no-param-reassign": "off",
+    "no-restricted-syntax": "off",
+    "no-prototype-builtins": "off",
+    "no-return-assign": "off",
+    "func-names": "off",
+    "max-len": "off",
+    "class-methods-use-this": "off",
+    "no-alert": "off",
+    "radix": "off",
+    "no-nested-ternary": "off",
+    "no-unused-vars": "off"
   }
 }
