@@ -18,7 +18,13 @@ class GeeknDragonAudioPlayer {
             currentPage: this.getCurrentPage(),
             shuffleOrder: [],
             isLoaded: false,
-            quickStartFile: 'hero-intro.mp3' // Fichier de démarrage rapide
+            quickStartFile: 'hero-intro.mp3', // Fichier de démarrage rapide
+            
+            // Nouvelles propriétés pour la gestion intelligente
+            currentPagePlaylist: [], // Musiques du dossier de la page courante
+            defaultPlaylist: [], // Musiques du dossier général musique/
+            currentPlaylistType: 'current', // 'current' ou 'default'
+            priorityRatio: { current: 0.7, default: 0.3 } // 70% - 30%
         };
         
         this.audioElement = null;
@@ -44,16 +50,48 @@ class GeeknDragonAudioPlayer {
         // Créer l'interface
         this.createPlayerInterface();
         
-        // Démarrage rapide avec fichier hero
-        await this.quickStart();
+        // Vérifier si on a changé de page
+        await this.handlePageChange();
+        
+        // Démarrage rapide avec fichier hero (si pas de restauration)
+        if (!this.state.isPlaying) {
+            await this.quickStart();
+        }
         
         // Scanner les musiques en arrière-plan
         this.scanMusicFiles();
         
-        // Restaurer l'état si changement de page
-        this.restorePlaybackState();
-        
         console.log('✅ Lecteur audio Geek&Dragon initialisé');
+    }
+    
+    async handlePageChange() {
+        const savedState = localStorage.getItem('gnd-audio-state');
+        const currentPage = this.getCurrentPage();
+        
+        if (savedState) {
+            try {
+                const state = JSON.parse(savedState);
+                const previousPage = state.currentPage;
+                
+                if (previousPage && previousPage !== currentPage) {
+                    console.log(`🔄 Changement de page détecté: ${previousPage} → ${currentPage}`);
+                    
+                    // Mettre à jour la page courante
+                    this.state.currentPage = currentPage;
+                    
+                    // Restaurer l'état de lecture en cours
+                    this.restorePlaybackState();
+                    
+                    // Les nouvelles playlists seront scannées dans scanMusicFiles()
+                    return;
+                }
+            } catch (e) {
+                console.log('Erreur lors de la vérification du changement de page:', e);
+            }
+        }
+        
+        // Si pas de changement de page ou premier chargement
+        this.restorePlaybackState();
     }
     
     createAudioElement() {
@@ -164,41 +202,49 @@ class GeeknDragonAudioPlayer {
     }
     
     async scanMusicFiles() {
-        console.log('🔍 Scan des fichiers musicaux...');
+        console.log('🔍 Scan intelligent des fichiers musicaux...');
         
         // Créer le scanner si pas encore fait
         if (!this.musicScanner) {
-            // Importer le scanner dynamiquement
             await this.loadMusicScanner();
             this.musicScanner = new window.MusicFileScanner();
         }
         
-        // Essayer d'abord le dossier spécifique à la page
+        // Scanner le dossier de la page courante
         const pageDirectory = `musique/${this.state.currentPage}`;
-        let musicFiles = await this.musicScanner.scanDirectory(pageDirectory);
+        const currentPageFiles = await this.musicScanner.scanDirectory(pageDirectory);
         
-        // Si aucun fichier trouvé, essayer le dossier par défaut
-        if (musicFiles.length === 0) {
-            console.log(`📁 Aucune musique trouvée dans ${pageDirectory}, essai du dossier par défaut...`);
-            musicFiles = await this.musicScanner.scanDirectory('musique');
-            this.currentDirectory = 'musique';
-        } else {
+        // Scanner le dossier par défaut
+        const defaultFiles = await this.musicScanner.scanDirectory('musique');
+        
+        // Stocker les deux playlists séparément
+        this.state.currentPagePlaylist = [...new Set(currentPageFiles)];
+        this.state.defaultPlaylist = [...new Set(defaultFiles)];
+        
+        console.log(`📁 Page courante (${pageDirectory}): ${this.state.currentPagePlaylist.length} pistes`);
+        console.log(`📁 Dossier général: ${this.state.defaultPlaylist.length} pistes`);
+        
+        // Choisir la playlist initiale
+        if (this.state.currentPagePlaylist.length > 0) {
+            this.state.currentPlaylistType = 'current';
+            this.state.playlist = [...this.state.currentPagePlaylist];
             this.currentDirectory = pageDirectory;
+        } else if (this.state.defaultPlaylist.length > 0) {
+            this.state.currentPlaylistType = 'default';
+            this.state.playlist = [...this.state.defaultPlaylist];
+            this.currentDirectory = 'musique';
         }
         
-        if (musicFiles.length > 0) {
-            // Filtrer les doublons si le fichier de démarrage est déjà dans la liste
-            const uniqueFiles = [...new Set(musicFiles)];
-            this.state.playlist = uniqueFiles;
+        if (this.state.playlist.length > 0) {
             this.shufflePlaylist();
             
-            // Si on n'avait que le fichier de démarrage, charger la première piste de la playlist
+            // Si on n'avait que le fichier de démarrage, charger la première piste
             if (this.state.playlist.length > 1 || !this.state.isPlaying) {
                 this.loadTrack(0);
             }
             
             this.updateTrackInfo();
-            console.log(`✅ ${uniqueFiles.length} pistes uniques trouvées dans ${this.currentDirectory}`);
+            console.log(`✅ Système de priorité activé - Courante: ${this.state.currentPagePlaylist.length}, Défaut: ${this.state.defaultPlaylist.length}`);
         } else {
             console.log('⚠️ Aucune musique trouvée');
             this.updateTrackInfo('Aucune musique disponible');
@@ -305,11 +351,14 @@ class GeeknDragonAudioPlayer {
     }
     
     playNext() {
+        // Logique de sélection intelligente de la prochaine piste
+        this.selectNextPlaylistWithPriority();
+        
         if (this.state.playlist.length === 0) return;
         
         let nextTrack = (this.state.currentTrack + 1) % this.state.playlist.length;
         
-        // Si on a fini la playlist, remélanger
+        // Si on a fini la playlist courante, remélanger
         if (nextTrack === 0) {
             this.shufflePlaylist();
         }
@@ -319,6 +368,62 @@ class GeeknDragonAudioPlayer {
         if (this.state.isPlaying) {
             this.audioElement.play().catch(() => {});
         }
+    }
+    
+    selectNextPlaylistWithPriority() {
+        // Si une seule playlist disponible, l'utiliser
+        if (this.state.currentPagePlaylist.length === 0 && this.state.defaultPlaylist.length > 0) {
+            this.switchToPlaylist('default');
+            return;
+        }
+        
+        if (this.state.defaultPlaylist.length === 0 && this.state.currentPagePlaylist.length > 0) {
+            this.switchToPlaylist('current');
+            return;
+        }
+        
+        // Si les deux playlists sont disponibles, utiliser la priorité
+        if (this.state.currentPagePlaylist.length > 0 && this.state.defaultPlaylist.length > 0) {
+            const random = Math.random();
+            
+            if (random <= this.state.priorityRatio.current) {
+                // 70% de chance : playlist de la page courante
+                this.switchToPlaylist('current');
+                console.log('🎵 Priorité: Musique de la page courante (70%)');
+            } else {
+                // 30% de chance : playlist par défaut
+                this.switchToPlaylist('default');
+                console.log('🎵 Priorité: Musique générale (30%)');
+            }
+        }
+    }
+    
+    switchToPlaylist(type) {
+        if (type === this.state.currentPlaylistType) {
+            return; // Déjà sur la bonne playlist
+        }
+        
+        const wasPlaying = this.state.isPlaying;
+        
+        if (type === 'current' && this.state.currentPagePlaylist.length > 0) {
+            this.state.currentPlaylistType = 'current';
+            this.state.playlist = [...this.state.currentPagePlaylist];
+            this.currentDirectory = `musique/${this.state.currentPage}`;
+        } else if (type === 'default' && this.state.defaultPlaylist.length > 0) {
+            this.state.currentPlaylistType = 'default';
+            this.state.playlist = [...this.state.defaultPlaylist];
+            this.currentDirectory = 'musique';
+        } else {
+            return; // Playlist demandée non disponible
+        }
+        
+        // Remélanger la nouvelle playlist
+        this.shufflePlaylist();
+        this.state.currentTrack = 0;
+        
+        console.log(`🔄 Changement vers playlist ${type}: ${this.state.playlist.length} pistes`);
+        
+        // Ne pas charger automatiquement, laisser playNext() le faire
     }
     
     setVolume(value) {
@@ -357,7 +462,10 @@ class GeeknDragonAudioPlayer {
             trackInfoElement.textContent = fileName;
         }
         
-        counterElement.textContent = `${this.state.currentTrack + 1}/${this.state.playlist.length}`;
+        // Affichage amélioré avec indication de la source
+        const sourceIcon = this.state.currentPlaylistType === 'current' ? '📍' : '🌍';
+        const totalTracks = this.state.currentPagePlaylist.length + this.state.defaultPlaylist.length;
+        counterElement.textContent = `${sourceIcon} ${this.state.currentTrack + 1}/${this.state.playlist.length} (Total: ${totalTracks})`;
     }
     
     updatePlaybackState() {
@@ -375,6 +483,13 @@ class GeeknDragonAudioPlayer {
             playlist: this.state.playlist,
             shuffleOrder: this.state.shuffleOrder,
             currentDirectory: this.currentDirectory,
+            
+            // Nouvelles propriétés pour la logique intelligente
+            currentPagePlaylist: this.state.currentPagePlaylist,
+            defaultPlaylist: this.state.defaultPlaylist,
+            currentPlaylistType: this.state.currentPlaylistType,
+            currentPage: this.state.currentPage,
+            
             timestamp: Date.now()
         };
         
@@ -393,13 +508,24 @@ class GeeknDragonAudioPlayer {
                 return;
             }
             
-            // Restaurer l'état
+            // Restaurer l'état avec les nouvelles propriétés
             if (state.playlist && state.playlist.length > 0) {
                 this.state.playlist = state.playlist;
                 this.state.shuffleOrder = state.shuffleOrder || [];
                 this.state.currentTrack = state.currentTrack || 0;
                 this.state.currentTime = state.currentTime || 0;
                 this.currentDirectory = state.currentDirectory || this.currentDirectory;
+                
+                // Restaurer les playlists séparées si disponibles
+                if (state.currentPagePlaylist) {
+                    this.state.currentPagePlaylist = state.currentPagePlaylist;
+                }
+                if (state.defaultPlaylist) {
+                    this.state.defaultPlaylist = state.defaultPlaylist;
+                }
+                if (state.currentPlaylistType) {
+                    this.state.currentPlaylistType = state.currentPlaylistType;
+                }
                 
                 this.loadTrack(this.state.currentTrack);
                 
@@ -414,6 +540,8 @@ class GeeknDragonAudioPlayer {
                         });
                     }, 100);
                 }
+                
+                console.log('🔄 État restauré - Continuité de lecture maintenue');
             }
         } catch (error) {
             console.log('Erreur lors de la restauration:', error);

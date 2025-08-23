@@ -35,8 +35,9 @@ Ce fichier se lancera immédiatement pendant que les autres musiques sont scann�
 ## 🎯 Fonctionnalités
 
 - ✅ **Détection automatique** des fichiers MP3 dans les dossiers
-- ✅ **Continuité entre pages** - la musique continue sans interruption
-- ✅ **Lecture aléatoire** de toutes les musiques trouvées
+- ✅ **Continuité parfaite entre pages** - la musique continue sans interruption
+- ✅ **Système de priorité intelligent** 70% page courante / 30% générale
+- ✅ **Deux playlists séparées** pour une gestion optimisée
 - ✅ **Volume sauvegardé** (défaut: 15%)
 - ✅ **Interface réductible** avec style médiéval D&D
 - ✅ **Démarrage automatique** dès le chargement de la page
@@ -64,10 +65,35 @@ Le système détecte automatiquement ces noms courants:
 - `background.mp3`
 - `theme.mp3`
 
+## 🧠 Système de Priorité Intelligent
+
+### Comment ça marche ?
+Quand une musique se termine, le lecteur choisit la suivante selon cette logique :
+
+- **70% de chance** → Musique du dossier de la page courante (`musique/index/`, `musique/boutique/`)
+- **30% de chance** → Musique du dossier général (`musique/`)
+- **Si aucune musique dans le dossier de la page** → 100% dossier général
+
+### Indicateurs visuels
+- 📍 = Piste du dossier de la page courante
+- 🌍 = Piste du dossier général
+
+### Continuité entre pages
+Quand vous changez de page :
+1. **La musique continue** de jouer sans interruption
+2. **Les nouvelles playlists sont scannées** en arrière-plan
+3. **La priorité s'adapte** à la nouvelle page pour les prochaines pistes
+
 ## 🔧 Configuration
 
+### Réglage de la priorité
+Pour modifier les pourcentages (défaut 70/30), changez cette ligne dans `audio-player.js` :
+```javascript
+priorityRatio: { current: 0.7, default: 0.3 } // 70% - 30%
+```
+
 ### Volume par défaut
-Le volume est configuré à 15% par défaut. Pour le changer, modifiez cette ligne dans `audio-player.js`:
+Le volume est configuré à 15% par défaut :
 ```javascript
 volume: parseFloat(localStorage.getItem('gnd-audio-volume')) || 0.15, // 15%
 ```
@@ -84,9 +110,17 @@ Le lecteur utilise automatiquement les variables CSS de Geek&Dragon:
 
 ## 🚀 Déploiement
 
-1. Créez la structure de dossiers
-2. Ajoutez vos fichiers MP3 (au moins `hero-intro.mp3`)
-3. Le lecteur se lance automatiquement
+1. **Créez la structure de dossiers** (déjà faite)
+2. **Ajoutez vos fichiers MP3** :
+   - `musique/index/hero-intro.mp3` (démarrage instantané accueil)
+   - `musique/boutique/hero-intro.mp3` (démarrage instantané boutique)
+   - D'autres musiques dans les dossiers respectifs
+3. **Le lecteur se lance automatiquement** avec le système de priorité
+
+### Recommandations
+- **Minimum 2-3 musiques** par dossier pour la variété
+- **Noms descriptifs** pour faciliter l'identification
+- **Fichiers optimisés** (128-320 kbps) pour le web
 
 ## ⚠️ Notes techniques
 
@@ -97,8 +131,18 @@ Le lecteur utilise automatiquement les variables CSS de Geek&Dragon:
 
 ## 🔍 Dépannage
 
-Si aucune musique n'est détectée, vérifiez:
+### Aucune musique détectée ?
+Vérifiez :
 1. Les fichiers sont bien dans les bons dossiers
 2. Les noms de fichiers correspondent aux noms supportés
 3. Les extensions sont en minuscules (.mp3)
 4. L'autoplay n'est pas bloqué par le navigateur
+
+### La priorité ne fonctionne pas ?
+- Assurez-vous d'avoir des musiques dans les deux dossiers
+- Consultez la console du navigateur (F12) pour voir les logs
+- L'indicateur 📍/🌍 montre quelle playlist est utilisée
+
+### La musique s'arrête au changement de page ?
+- Vérifiez que le script est bien inclus sur toutes les pages
+- La continuité utilise localStorage, vérifiez qu'il n'est pas désactivé
