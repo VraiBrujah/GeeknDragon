@@ -207,30 +207,51 @@
         /* Statistiques rapides */
         .statistiques-rapides {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
             margin-bottom: 3rem;
             width: 100%;
+            max-width: 100%;
+        }
+        
+        @media (max-width: 1200px) {
+            .statistiques-rapides {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
         }
         
         #cartMonitoring {
             grid-column: 1 / -1;
-            max-width: 350px;
+            max-width: 400px;
             justify-self: center;
             margin-top: 1rem;
+        }
+        
+        @media (max-width: 1200px) {
+            #cartMonitoring {
+                max-width: 100%;
+                margin-top: 0.5rem;
+            }
         }
 
         .carte-stat {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             border-radius: var(--radius-lg);
-            padding: clamp(1rem, 3vw, 2rem);
+            padding: 1.2rem 0.8rem;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all var(--transition-normal);
             cursor: pointer;
             min-width: 0;
             overflow-wrap: break-word;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            min-height: 120px;
         }
 
         .carte-stat:hover {
@@ -241,7 +262,7 @@
 
         .numero-stat {
             display: block;
-            font-size: clamp(1.3rem, 3vw, 2.2rem);
+            font-size: clamp(1.1rem, 2.5vw, 1.8rem);
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 0.5rem;
@@ -249,15 +270,21 @@
             text-align: center;
             word-break: break-word;
             hyphens: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
         }
 
         .libelle-stat {
-            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-size: clamp(0.7rem, 1.8vw, 0.9rem);
             opacity: 0.9;
             font-weight: 500;
             text-align: center;
             word-break: break-word;
             hyphens: auto;
+            line-height: 1.2;
+            width: 100%;
         }
 
         /* Grille des catégories d'outils */
@@ -465,20 +492,23 @@
             
             .statistiques-rapides {
                 grid-template-columns: 1fr 1fr;
-                gap: 1rem;
+                gap: 0.8rem;
             }
             
             .carte-stat {
-                padding: 1rem;
+                padding: 1rem 0.5rem;
+                min-height: 100px;
             }
             
             .numero-stat {
-                font-size: 1.2rem !important;
-                line-height: 1.2;
+                font-size: 1rem !important;
+                line-height: 1.1;
+                white-space: normal;
             }
             
             .libelle-stat {
-                font-size: 0.8rem !important;
+                font-size: 0.7rem !important;
+                line-height: 1.1;
             }
             
             .controles-audio {
