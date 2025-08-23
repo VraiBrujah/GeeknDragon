@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('playsinline', ''); // iOS
-      v.preload = 'metadata';
+      v.preload = 'auto';
       v.autoplay = true;
       v.loop = false; // géré au cas par cas
       // Layout + anim

@@ -1,0 +1,17 @@
+nom: ![Case!](symbole/cadre4.png)
+nom 1: ![Case!](symbole/cadre4.png)
+prix: ![Case!](symbole/caseD2.png)
+prix 1: ![Case!](symbole/caseD2.png)
+poids: ![Case!](symbole/caseD2.png)
+poids 1: ![Case!](symbole/caseD2.png)
+symbole 1: image/categorie/Tresor.png
+symbole 2: image/categorie/Tresor.png
+symbole 3: image/categorie/Tresor.png
+symbole 4: image/categorie/Tresor.png
+type:
+charge:
+attca_image: symbole/vide.png
+attca: 
+discrétion:
+image: image/categorie/Tresor.png
+description: ![Case!](symbole/Cadreplein.png)

@@ -1,16 +1,21 @@
 <?php
-declare(strict_types=1);
 /**  header.php  —  barre de navigation commune
  *  Usage :  <?php include 'header.php'; ?>
- *  $active (optionnel) = chaîne « produits », « boutique », « actus », « contact »…
  */
-$active = $active ?? '';
 
-if (!function_exists('navClass')) {
-function navClass($key, $active) {
-  // Classe "active" sobre, on laisse le style au CSS
-  return $key === $active ? 'is-active' : '';
-}
+function findActiveSlug(array $items, string $path): string {
+  foreach ($items as $href => $item) {
+    if (parse_url($href, PHP_URL_PATH) === $path) {
+      return $item['slug'];
+    }
+    if (!empty($item['children'])) {
+      $slug = findActiveSlug($item['children'], $path);
+      if ($slug !== '') {
+        return $slug;
+      }
+    }
+  }
+  return '';
 }
 
 $navItems = [
@@ -48,41 +53,45 @@ $navItems = [
   ]
 ];
 
+$currentSlug = findActiveSlug($navItems, parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
-if (!function_exists('renderNav')) {
-function renderNav(array $items, string $active, bool $mobile = false): void {
-    foreach ($items as $href => $item) {
+$snipcartKey = $snipcartKey
+  ?? $_ENV['SNIPCART_API_KEY']
+  ?? $_SERVER['SNIPCART_API_KEY'];
+
+function renderNav(array $items, string $currentSlug, bool $mobile = false): void {
+  foreach ($items as $href => $item) {
     // Le menu utilise déjà Cinzel via le CSS, inutile d'ajouter "txt-court"
-    $class = 'nav-link font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ' ' . navClass($item['slug'], $active);
+    $isActive = $item['slug'] === $currentSlug;
+    $class = 'nav-link font-medium transition-colors duration-200 ' . ($mobile ? 'text-lg' : 'text-sm md:text-base') . ($isActive ? ' is-active' : '');
     $link = langUrl($href);
+    $aria = $isActive ? ' aria-current="page"' : '';
     if (isset($item['children']) && !$mobile) {
-      echo '<li class="relative group">';
-      echo '<a href="' . $link . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
-      echo '<ul class="absolute left-0 top-full hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-1">';
-      renderNav($item['children'], $active, $mobile);
+      echo '<li class="relative">';
+      echo '<button type="button" class="' . $class . ' block px-2 py-1"' . $aria . ' aria-haspopup="true" aria-expanded="false" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</button>';
+      echo '<ul class="submenu hidden absolute left-0 top-full flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-1">';
+      renderNav($item['children'], $currentSlug, $mobile);
       echo '</ul></li>';
     } else {
       echo '<li>';
-      echo '<a href="' . $link . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">' . $item['label'] . '</a>';
+      echo '<a href="' . $link . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '"' . $aria . '>' . $item['label'] . '</a>';
       if (isset($item['children']) && $mobile) {
         echo '<ul class="pl-4 flex flex-col space-y-2 mt-2">';
-        renderNav($item['children'], $active, $mobile);
+        renderNav($item['children'], $currentSlug, $mobile);
         echo '</ul>';
       }
       echo '</li>';
     }
   }
 }
-}
 ?>
-<!-- Panier natif -->
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
-  <div class="max-w-7xl mx-auto relative flex flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
+  <div class="max-w-7xl mx-auto relative flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
     <!-- Logo à gauche -->
     <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex items-center group transition-colors duration-200 flex-shrink-0">
-      <img src="/images/optimized-modern/webp/brand-geekndragon-white.webp" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105 rounded" style="--rounded-border-color: transparent;" width="80" height="80">
+      <img src="/images/geekndragon_logo_blanc.png" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105" width="200" height="200">
     </a>
 
     <!-- Titre centré -->
@@ -97,7 +106,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </div>
 
     <!-- Partie droite -->
-    <div class="flex items-center gap-4 md:gap-8 flex-shrink-0 flex-nowrap">
+    <div class="flex items-center gap-4 md:gap-8 flex-shrink-0">
       <!-- Bouton hamburger -->
       <button id="menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200" aria-controls="mobile-menu" aria-expanded="false" aria-label="Menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -106,9 +115,9 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       </button>
 
       <!-- Navigation (au centre, revient sur 2 lignes si besoin) -->
-      <nav class="hidden md:block order-3 md:order-2 basis-full md:basis-auto uppercase tracking-wide mt-2 md:mt-0 flex-1 text-center text-white" aria-label="Navigation principale">
+      <nav class="hidden md:block order-3 md:order-2 basis-full md:basis-auto uppercase tracking-wide mt-2 md:mt-0 flex-1 text-center" aria-label="Navigation principale">
         <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          <?php renderNav($navItems, $active); ?>
+          <?php renderNav($navItems, $currentSlug); ?>
         </ul>
       </nav>
 
@@ -122,23 +131,25 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
         </button>
       </div>
 
-      <!-- Nouveau système e-commerce natif -->
-      <div class="flex items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
-        <button id="gd-account-toggle" class="gd-header-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte" aria-expanded="false" aria-haspopup="dialog">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+      <?php if ($snipcartKey): ?>
+      <!-- Snipcart : icônes EMPILÉES partout -->
+      <div class="flex flex-col items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
+        <button class="snipcart-customer-signin snipcart-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
           </svg>
           <span class="sr-only" data-i18n="nav.account">Compte</span>
         </button>
 
-        <button id="gd-cart-toggle" class="gd-header-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Panier" aria-expanded="false" aria-haspopup="dialog">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <button class="snipcart-checkout snipcart-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
           </svg>
-          <span id="gd-cart-count" class="gd-cart-badge" aria-label="Articles dans le panier">0</span>
+          <span class="snipcart-items-count"></span>
           <span class="sr-only" data-i18n="nav.cart">Panier</span>
         </button>
       </div>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -146,7 +157,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
   <div id="menu-overlay" class="fixed inset-0 bg-black/60 hidden md:hidden z-10 opacity-0 transition-opacity duration-200"></div>
   <nav id="mobile-menu" class="fixed inset-0 z-20 bg-gray-900/95 flex flex-col items-center p-8 text-white hidden md:hidden uppercase tracking-wide transform transition-transform duration-200 translate-x-full overflow-y-auto" aria-hidden="true" aria-label="Navigation mobile">
     <ul class="flex flex-col items-center gap-6">
-      <?php renderNav($navItems, $active, true); ?>
+      <?php renderNav($navItems, $currentSlug, true); ?>
     </ul>
 
     <!-- Langues + actions dans le même panneau -->
@@ -160,23 +171,24 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
         </button>
       </div>
 
-      <!-- Menu mobile e-commerce -->
+      <?php if ($snipcartKey): ?>
       <div class="flex flex-col w-full gap-6">
-        <button id="gd-account-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
-          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <button class="snipcart-customer-signin snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
+          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
           </svg>
           <span class="sr-only" data-i18n="nav.account">Compte</span>
         </button>
 
-        <button id="gd-cart-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
-          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+        <button class="snipcart-checkout snipcart-btn w-full text-center text-lg uppercase tracking-wide hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
+          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
           </svg>
-          <span class="gd-cart-badge-mobile">0</span>
+          <span class="snipcart-items-count"></span>
           <span class="sr-only" data-i18n="nav.cart">Panier</span>
         </button>
       </div>
+      <?php endif; ?>
 
       <button id="menu-close" aria-label="Fermer le menu" class="mt-8 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -186,32 +198,3 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     </div>
   </nav>
 </header>
-
-<?php if (!$apiConfigured): ?>
-<!-- Avertissement API non configurée -->
-<div id="api-warning" style="
-  position: fixed; 
-  top: var(--header-height, 96px); 
-  left: 0; 
-  right: 0; 
-  background: linear-gradient(45deg, #dc2626, #b91c1c); 
-  color: white; 
-  text-align: center; 
-  padding: 0.75rem; 
-  z-index: 1100;
-  font-family: 'Cinzel', serif;
-  font-size: 0.875rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-">
-  ⚠️ <strong>Configuration requise :</strong> Le système de panier nécessite la configuration des clés API.
-  <button onclick="this.parentElement.style.display='none'" style="
-    background: none; 
-    border: none; 
-    color: white; 
-    font-size: 1.25rem; 
-    float: right; 
-    cursor: pointer;
-    line-height: 1;
-  ">×</button>
-</div>
-<?php endif; ?>

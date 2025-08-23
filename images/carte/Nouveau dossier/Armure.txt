@@ -1,0 +1,19 @@
+nom: ![Case!](symbole/cadre4.png)
+nom 1: ![Case!](symbole/cadre4.png)
+prix: ![Case!](symbole/caseD2.png)
+prix 1: ![Case!](symbole/caseD2.png)
+poids: ![Case!](symbole/caseD2.png)
+poids 1: ![Case!](symbole/caseD2.png)
+type:
+symbole 1: image/categorie/Armure.png
+symbole 2: image/categorie/Armure.png
+symbole 3: image/categorie/Armure.png
+symbole 4: image/categorie/Armure.png
+attbonus: **Bonus Att.**
+degat: **Dégâts**
+charge:
+attca_image: symbole/attper.png
+attca: ![Case!](symbole/caseD2.png)
+discrétion: ![Case!](symbole/caseD2.png)
+image: image/categorie/Armure.png
+description: ![Case!](symbole/Cadreplein.png)

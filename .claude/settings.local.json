@@ -1,42 +1,5 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(rm:*)",
-      "Bash(find:*)",
-      "Bash(where:*)",
-      "Bash(mkdir:*)",
-      "Bash(copy:*)",
-      "Bash(cp:*)",
-      "Bash(ffmpeg:*)",
-      "Bash(python:*)",
-      "Bash(pip install:*)",
-      "Bash(yt-dlp:*)",
-      "Bash(mv:*)",
-      "Bash(grep:*)",
-      "Bash(node:*)",
-      "WebFetch(domain:localhost)",
-      "Bash(start http://localhost:8000/test-cart.html)",
-      "Bash(start http://localhost:8000/test-complete-system.html)",
-      "Bash(npm run build:*)",
-      "Bash(npm run bundle:css:*)",
-      "Bash(npm run:*)",
-      "Bash(php:*)",
-      "Bash(composer:*)",
-      "Bash(curl:*)",
-      "Bash(/dev/null)",
-      "Bash(touch:*)",
-      "Bash(powershell:*)",
-      "Bash(forfiles:*)",
-      "Bash(dir:*)",
-      "Bash(true)",
-      "Bash(del:*)",
-      "Bash(npm install:*)",
-      "Bash(npm audit:*)",
-      "WebFetch(domain:geekndragon.com)"
-    ],
-    "defaultMode": "acceptEdits",
-    "additionalDirectories": [
-      "C:\\c\\Users\\Brujah\\Documents\\GitHub"
-    ]
+    "defaultMode": "acceptEdits"
   }
 }

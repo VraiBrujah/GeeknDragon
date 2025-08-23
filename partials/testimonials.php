@@ -1,4 +1,3 @@
-<?php declare(strict_types=1); ?>
 <section class="max-w-md mx-auto px-6 mt-12">
   <h2 class="text-2xl font-bold mb-4 text-center" data-i18n="testimonials.title">Témoignages</h2>
   <article class="bg-gray-800 p-6 rounded-xl shadow-lg">
