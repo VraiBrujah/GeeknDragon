@@ -45,25 +45,20 @@ To send emails from the contact form using SendGrid's SMTP service, configure cr
 1. Install PHP (7.4 or newer) and clone this repository.
 2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SNIPCART_LANGUAGE`, `SNIPCART_ADD_PRODUCT_BEHAVIOR`, `SENDGRID_API_KEY` and the SMTP variables. No additional payment gateway key is required.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
-3. Install PHP dependencies:
+3. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
 
    ```bash
-   composer install
+   npm install
    ```
 
-4. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
+4. Start a local server from the project root:
 
-   ```bash
-   npm ci
-   ```
-
-5. Start a local server from the project root:
 
    ```bash
    php -S localhost:8000
    ```
 
-6. Browse to <http://localhost:8000> to view the site.
+5. Browse to <http://localhost:8000> to view the site.
 
 Make sure that the domain you are using is allowed in your Snipcart dashboard; otherwise the cart may remain stuck at the "préparation" step.
 

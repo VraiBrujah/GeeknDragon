@@ -1,5 +1,10 @@
 error_log
 *.log
-vendor/
 node_modules/
 .env
+vendor/graham-campbell/result-type/
+vendor/phpoption/phpoption/
+vendor/symfony/polyfill-ctype/
+vendor/symfony/polyfill-mbstring/
+vendor/symfony/polyfill-php80/
+vendor/vlucas/phpdotenv/
