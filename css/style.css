@@ -365,6 +365,12 @@ p {
     gap: 2rem;
 }
 
+@media (min-width: 1024px) {
+    .catalogue-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 .product-category,
 .card-product {
     background: var(--darker-bg);
