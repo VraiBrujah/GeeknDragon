@@ -158,8 +158,7 @@
       "totalPieces": "Nombre total de pièces :",
       "equivMetal": "Métal",
       "equivEquivalent": "Équivalence",
-      "equivTotalPieces": "Nombre total de pièces",
-      "errorPositiveInteger": "Veuillez saisir un entier positif"
+      "equivTotalPieces": "Nombre total de pièces"
     },
     "chest": {
       "title": "Coffres sur mesure",

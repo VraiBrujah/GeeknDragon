@@ -158,8 +158,7 @@
       "totalPieces": "total pieces:",
       "equivMetal": "Metal",
       "equivEquivalent": "Equivalent",
-      "equivTotalPieces": "Total pieces",
-      "errorPositiveInteger": "Please enter a positive integer"
+      "equivTotalPieces": "Total pieces"
     },
     "chest": {
       "title": "Custom chests",
