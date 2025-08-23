@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace GeeknDragon\Controller;
 
-use GeeknDragon\Cart\SnipcartException;
 use GeeknDragon\Service\{ProductService, InventoryService};
 
 /**
@@ -46,8 +45,6 @@ class ProductController extends BaseController
                     'image' => $image,
                 ]
             ]);
-        } catch (SnipcartException $e) {
-            $this->json(['success' => false, 'message' => 'Configuration Snipcart invalide'], 500);
         } catch (\Throwable $e) {
             $this->handleError($e, 'ProductController::getProduct');
         }
