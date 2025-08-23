@@ -21,7 +21,7 @@ const LiCubePro = {
             capacity: 105,
             cycles: 8000,
             weight: 23,
-            price: 2750,
+            price: 5500,  // 5000$ + taxes + 500$ installation
             chargingTime: 1.5,
             maintenance: 0
         },
@@ -29,12 +29,12 @@ const LiCubePro = {
             name: 'Ni-Cd',
             voltage: 24,
             capacity: 100,
-            cycles: 2500,
+            cycles: 1500,  // Corrigé de 2500 à 1500
             weight: 80,
             price: 12000,
             chargingTime: 10,
             maintenance: 452
-        }
+        },
     },
     
     // Fonctions utilitaires
@@ -235,9 +235,9 @@ LiCubePro.components.TCOCalculator = class {
         const { period, units, maintenanceCost, replacementCycle } = this.data;
         
         // Calculs Li-CUBE PRO™ LFP
-        const lfpInitialCost = LiCubePro.data.lfp.price * units;
-        const lfpMonitoringCost = 50 * units;
-        const lfpTotalCost = lfpInitialCost + lfpMonitoringCost;
+        const lfpInitialCost = LiCubePro.data.lfp.price * units;  // 5500$ inclus taxes + installation
+        const lfpMonitoringCost = 240 * units * period;  // 20$/mois optionnel
+        const lfpTotalCost = lfpInitialCost; // Sans monitoring par défaut
         
         // Calculs Ni-Cd
         const nicdInitialCost = LiCubePro.data.nicd.price * units;

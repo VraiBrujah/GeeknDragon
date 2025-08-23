@@ -677,8 +677,8 @@
             // Unité     : CAD
             // Domaine   : 5000 ≤ coût ≤ 6000
             // Source    : Prix public standard Li-CUBE PRO™ 2025
-            // Exemple   : 5500 (5000 + taxes + 500 installation)
-            const coutInitialLfp = 5500 * nombreUnites;
+            // Exemple   : 6325 (5000 + taxes + 500 installation)
+            const coutInitialLfp = 6325 * nombreUnites;
             
             // Rôle      : Coût de monitoring annuel optionnel
             // Type      : number (coût annuel)
@@ -690,7 +690,7 @@
             
             // Formule   : coût_total_lfp = coût_initial + monitoring
             // Symboles  : coût_initial [CAD], monitoring [CAD]
-            // Exemple   : 5500 + 0 = 5500 CAD (monitoring optionnel)
+            // Exemple   : 6325 + 0 = 6325 CAD (monitoring optionnel)
             const coutTotalLfp = coutInitialLfp + coutMonitoringLfp;
 
             // =================================================================
@@ -739,12 +739,12 @@
             
             // Formule   : économies = coût_ni_cd - coût_lfp
             // Symboles  : coût_ni_cd [CAD], coût_lfp [CAD]
-            // Exemple   : 54990 - 5500 = 49490 CAD
+            // Exemple   : 54990 - 6325 = 48665 CAD
             const economies = coutTotalNiCd - coutTotalLfp;
             
             // Formule   : pourcentage = (économies / coût_ni_cd) × 100
             // Symboles  : économies [CAD], coût_ni_cd [CAD]
-            // Exemple   : (49490 / 54990) × 100 = 90%
+            // Exemple   : (48665 / 54990) × 100 = 88%
             const pourcentageEconomies = Math.round((economies / coutTotalNiCd) * 100);
 
             // Affichage avec données structurées
