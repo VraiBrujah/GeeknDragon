@@ -145,8 +145,8 @@ const ShopFilters = {
     // Filtre par langue
     if (this.currentFilters.language !== 'all') {
       const langFilter = this.currentFilters.language;
-      if (langFilter === 'fr' && !language.includes('fr')) return false;
-      if (langFilter === 'en' && !language.includes('en')) return false;
+      if (langFilter === 'fr' && !(language.includes('fr') || language === 'both')) return false;
+      if (langFilter === 'en' && !(language.includes('en') || language === 'both')) return false;
       if (langFilter === 'both' && language !== 'both') return false;
     }
 
