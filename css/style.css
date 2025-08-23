@@ -299,6 +299,12 @@ p {
     animation: bounce 2s infinite;
 }
 
+/* Products Section */
+.products {
+    padding: 5rem 0;
+    background: rgba(26, 26, 26, 0.8);
+}
+
 /* Features Section */
 .features {
     padding: 5rem 0;
