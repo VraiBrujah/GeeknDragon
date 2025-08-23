@@ -1,27 +1,30 @@
 /* ==============================================
-   Li-CUBE PRO™ - Scripts Utilitaires
+   Li-CUBE PRO™ - Scripts Utilitaires (MODE LOCATION)
    JavaScript pour présentations vendeurs
+   ⚠️  UTILISE DÉSORMAIS LE SYSTÈME DE PRIX CENTRALISÉ
+   ⚠️  AUCUN PRIX HARDCODÉ - TOUT PROVIENT DE pricing-config.json
    ============================================== */
 
-// Configuration globale
+// Configuration globale - PRIX SUPPRIMÉS, UTILISE pricing-manager.js
 const LiCubePro = {
     config: {
         animationDuration: 500,
         scrollOffset: 80,
         debounceDelay: 300,
         apiEndpoint: 'https://api.eds-quebec.com',
-        version: '2.0.0'
+        version: '2.1.0',  // Mise à jour version pour intégration système centralisé
+        mode: 'location'  // Mode de fonctionnement pour le pricing manager
     },
     
-    // Données de base du produit
+    // Données techniques uniquement - PRIX SUPPRIMÉS
     data: {
         lfp: {
             name: 'Li-CUBE PRO™',
             voltage: 25.6,
             capacity: 105,
-            cycles: 8000,
+            cycles: 8000,  // Provient maintenant de pricing-config.json
             weight: 23,
-            price: 2750,
+            // PRIX SUPPRIMÉ - utilise window.pricingManager.getPrice('location', 'licube', 'monthly_rate')
             chargingTime: 1.5,
             maintenance: 0
         },
@@ -29,11 +32,11 @@ const LiCubePro = {
             name: 'Ni-Cd',
             voltage: 24,
             capacity: 100,
-            cycles: 2500,
+            cycles: 1500,  // CORRIGÉ: 1500 au lieu de 2500 - provient de pricing-config.json
             weight: 80,
-            price: 12000,
+            // PRIX SUPPRIMÉ - utilise window.pricingManager.getPrice('location', 'nicd', 'monthly_rate')
             chargingTime: 10,
-            maintenance: 452
+            maintenance: 452  // Provient maintenant de pricing-config.json
         }
     },
     
@@ -234,43 +237,74 @@ LiCubePro.components.TCOCalculator = class {
     calculate() {
         const { period, units, maintenanceCost, replacementCycle } = this.data;
         
-        // Calculs Li-CUBE PRO™ LFP
-        const lfpInitialCost = LiCubePro.data.lfp.price * units;
-        const lfpMonitoringCost = 50 * units;
-        const lfpTotalCost = lfpInitialCost + lfpMonitoringCost;
-        
-        // Calculs Ni-Cd
-        const nicdInitialCost = LiCubePro.data.nicd.price * units;
-        const nicdMaintenanceTotal = maintenanceCost * units * period;
-        const replacements = Math.floor(period / replacementCycle);
-        const nicdReplacementCost = replacements * LiCubePro.data.nicd.price * units;
-        const nicdTotalCost = nicdInitialCost + nicdMaintenanceTotal + nicdReplacementCost;
-        
-        // Économies
-        const totalSavings = nicdTotalCost - lfpTotalCost;
-        const savingsPercentage = Math.round((totalSavings / nicdTotalCost) * 100);
-        const roiAnnual = Math.round((totalSavings / lfpTotalCost) * 100 / period);
-        const paybackMonths = Math.round((lfpTotalCost / (nicdTotalCost / period)) * 12);
-        
-        this.results = {
-            lfp: {
-                initial: lfpInitialCost,
-                monitoring: lfpMonitoringCost,
-                total: lfpTotalCost
-            },
-            nicd: {
-                initial: nicdInitialCost,
-                maintenance: nicdMaintenanceTotal,
-                replacements: nicdReplacementCost,
-                total: nicdTotalCost
-            },
-            savings: {
-                absolute: totalSavings,
-                percentage: savingsPercentage,
-                roi: roiAnnual,
-                payback: paybackMonths
+        // ⚠️ NOUVEAU : Utilisation du système de prix centralisé MODE LOCATION ⚠️
+        if (!window.pricingManager || !window.pricingManager.isLoaded) {
+            console.warn('PricingManager non disponible, utilisation des calculs centralisés');
+            // Utiliser directement le TCO Calculator du pricing manager
+            try {
+                this.results = window.pricingManager.calculateTCO('location', units, period);
+                this.updateDisplay();
+                this.triggerEvent('calculate', this.results);
+                return;
+            } catch (error) {
+                console.error('Impossible d\'utiliser le pricing manager:', error);
+                return;
             }
-        };
+        }
+        
+        try {
+            // Calculs Li-CUBE PRO™ LFP en MODE LOCATION avec prix centralisés
+            const lfpMonthlyRate = window.pricingManager.getPrice('location', 'licube', 'monthly_rate');  // 150$/mois
+            const lfpAnnualRate = window.pricingManager.getPrice('location', 'licube', 'annual_rate');   // 1800$/an
+            const lfpTotalCost = lfpAnnualRate * units * period;  // Coût total sur période
+            
+            // Monitoring inclus dans le prix de location (pas de coût supplémentaire)
+            const lfpMonitoringIncluded = window.pricingManager.getPrice('location', 'licube', 'monitoring_included');  // true
+            
+            // Calculs Ni-Cd en MODE LOCATION avec prix centralisés
+            const nicdMonthlyRate = window.pricingManager.getPrice('location', 'nicd', 'monthly_rate');  // 300$/mois
+            const nicdAnnualRate = window.pricingManager.getPrice('location', 'nicd', 'annual_rate');   // 3600$/an
+            const nicdBaseCost = nicdAnnualRate * units * period;
+            
+            // Maintenance Ni-Cd supplémentaire (pas incluse dans la location)
+            const nicdMaintenanceAnnual = window.pricingManager.getPrice('location', 'nicd', 'maintenance_annual');
+            const nicdMaintenanceTotal = nicdMaintenanceAnnual * units * period;
+            const nicdTotalCost = nicdBaseCost + nicdMaintenanceTotal;
+            
+            // Économies calculées dynamiquement
+            const totalSavings = nicdTotalCost - lfpTotalCost;
+            const savingsPercentage = Math.round((totalSavings / nicdTotalCost) * 100);
+            const monthlyLfp = lfpMonthlyRate * units;
+            const monthlyNicd = (nicdMonthlyRate * units) + ((nicdMaintenanceAnnual * units) / 12);
+            const monthlySavings = monthlyNicd - monthlyLfp;
+            const roiMonths = Math.round(monthlyLfp / monthlySavings);  // ROI en mois pour location
+            
+            this.results = {
+                lfp: {
+                    monthly: monthlyLfp,
+                    annual: lfpAnnualRate * units,
+                    total: lfpTotalCost,
+                    monitoring_included: lfpMonitoringIncluded
+                },
+                nicd: {
+                    monthly: monthlyNicd,
+                    annual: nicdAnnualRate * units,
+                    maintenance: nicdMaintenanceTotal,
+                    total: nicdTotalCost
+                },
+                savings: {
+                    absolute: totalSavings,
+                    percentage: savingsPercentage,
+                    monthly: monthlySavings,
+                    roi_months: roiMonths
+                }
+            };
+            
+        } catch (error) {
+            console.error('Erreur lors du calcul TCO LOCATION avec prix centralisés:', error);
+            // Fallback: utiliser les calculs TCO du pricing manager
+            this.results = window.pricingManager.calculateTCO('location', units, period);
+        }
         
         this.updateDisplay();
         this.triggerEvent('calculate', this.results);
@@ -744,11 +778,24 @@ LiCubePro.init = function() {
 };
 
 LiCubePro.initComponents = function() {
-    // Initialiser les calculateurs TCO
-    const calculators = document.querySelectorAll('.tco-calculator');
-    calculators.forEach(calc => {
-        new LiCubePro.components.TCOCalculator(calc);
-    });
+    // ⚠️ ATTENDRE le chargement du PricingManager avant d'initialiser les calculateurs ⚠️
+    
+    const initCalculators = () => {
+        const calculators = document.querySelectorAll('.tco-calculator');
+        calculators.forEach(calc => {
+            new LiCubePro.components.TCOCalculator(calc);
+        });
+        console.log(`✅ ${calculators.length} calculateurs TCO LOCATION initialisés avec prix centralisés`);
+    };
+    
+    // Si le PricingManager est déjà prêt, initialiser immédiatement
+    if (window.pricingManager && window.pricingManager.isLoaded) {
+        initCalculators();
+    } else {
+        // Sinon, attendre l'événement de chargement
+        document.addEventListener('pricingManagerReady', initCalculators, { once: true });
+        console.log('⏳ En attente du chargement du PricingManager pour mode LOCATION...');
+    }
     
     // Initialiser les gestionnaires d'onglets
     const tabContainers = document.querySelectorAll('.tabs-container');
@@ -777,7 +824,8 @@ LiCubePro.initComponents = function() {
         });
     });
     
-    console.log('Li-CUBE PRO™ Scripts initialisés v' + LiCubePro.config.version);
+    console.log(`✅ Li-CUBE PRO™ Scripts initialisés v${LiCubePro.config.version} (Mode: ${LiCubePro.config.mode})`);
+    console.log('📊 Système de prix centralisé activé - Prix LOCATION corrigés (150$/mois, monitoring inclus)');
 };
 
 // Fonctions globales pour compatibilité
