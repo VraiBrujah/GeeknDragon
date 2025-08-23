@@ -1,8 +1,8 @@
 {
   "_metadata": {
-    "version": "2025-v1.0",
+    "version": "2025-v2.0-DYNAMIC",
     "lastUpdate": "2025-01-23",
-    "description": "Configuration centralisée des prix et calculs pour Li-CUBE PRO - TOUS les fichiers doivent utiliser cette source unique",
+    "description": "Configuration SOURCES uniquement - TOUS les calculs sont dynamiques en temps réel",
     "created_by": "Claude Code",
     "currency": "CAD",
     "tax_jurisdiction": "Quebec"
@@ -13,10 +13,8 @@
       "licube": {
         "price_base": 5000,
         "taxes_percent": 14.975,
-        "installation": 500,
-        "price_total": 6325,
+        "installation_cost": 500,
         "monitoring_monthly": 20,
-        "monitoring_annual": 240,
         "monitoring_optional": true,
         "cycles": 8000,
         "maintenance_annual": 0,
@@ -26,20 +24,19 @@
       "nicd": {
         "price_base": 12000,
         "taxes_percent": 14.975,
-        "installation": 500,
-        "price_total": 14370,
+        "installation_cost": 500,
         "cycles": 1500,
         "maintenance_annual": 452,
-        "replacement_years": 6,
-        "lifespan_years": 20,
-        "replacements_needed": 3
+        "replacement_cycle_years": 6,
+        "lifespan_years": 20
       }
     },
     
     "location": {
       "licube": {
         "monthly_rate": 150,
-        "annual_rate": 1800,
+        "monthly_rate_min": 100,
+        "monthly_rate_max": 150,
         "monitoring_included": true,
         "installation_included": true,
         "maintenance_included": true,
@@ -49,12 +46,11 @@
       },
       "nicd": {
         "monthly_rate": 300,
-        "annual_rate": 3600,
         "maintenance_annual": 452,
         "cycles": 1500,
         "monitoring_included": false,
         "installation_included": true,
-        "replacement_years": 6
+        "replacement_cycle_years": 6
       }
     }
   },
@@ -62,78 +58,29 @@
   "battery_specs": {
     "licube": {
       "weight_kg": 23,
-      "weight_reduction_percentage": 71,
       "efficiency_percentage": 96,
-      "charge_speed_improvement": 6,
-      "availability_percentage": 99.9
+      "charge_speed_multiplier": 6,
+      "availability_percentage": 99.9,
+      "self_discharge_monthly": 1.2,
+      "operating_temp_min": -40,
+      "operating_temp_max": 60
     },
     "nicd": {
       "weight_kg": 80,
       "efficiency_percentage": 65,
-      "availability_percentage": 95
+      "charge_speed_multiplier": 1,
+      "availability_percentage": 95,
+      "self_discharge_monthly": 20,
+      "operating_temp_min": -20,
+      "operating_temp_max": 50
     }
   },
   
-  "calculations": {
+  "calculation_parameters": {
     "period_years": 20,
     "currency": "CAD",
-    
-    "tco_vente": {
-      "licube": {
-        "initial_cost": 6325,
-        "monitoring_20_years": 4800,
-        "maintenance_20_years": 0,
-        "replacements": 0,
-        "total_20_years": 11125,
-        "annual_average": 556
-      },
-      "nicd": {
-        "initial_cost": 14370,
-        "maintenance_20_years": 9040,
-        "replacements_cost": 28740,
-        "monitoring_20_years": 0,
-        "total_20_years": 52150,
-        "annual_average": 2608
-      },
-      "savings": {
-        "total": 41025,
-        "amount": 41025,
-        "percentage": 79,
-        "roi_years": 2.1,
-        "payback_months": 25
-      }
-    },
-    
-    "tco_location": {
-      "licube": {
-        "monthly_cost": 150,
-        "annual_cost": 1800,
-        "total_20_years": 36000,
-        "annual_average": 1800
-      },
-      "nicd": {
-        "monthly_cost": 300,
-        "annual_cost": 3600,
-        "maintenance_20_years": 9040,
-        "total_20_years": 81040,
-        "annual_average": 4052
-      },
-      "savings": {
-        "total": 45040,
-        "amount": 45040,
-        "percentage": 56,
-        "roi_months": 6,
-        "monthly_savings": 150
-      }
-    }
-  },
-  
-  "formulas": {
-    "taxes_calculation": "prix_base × (taxes_percent / 100)",
-    "total_with_taxes": "prix_base + taxes + installation",
-    "tco_formula": "coût_initial + (maintenance_annuelle × années) + remplacements",
-    "roi_calculation": "investissement_initial / économies_annuelles",
-    "savings_percentage": "((coût_traditionnel - coût_licube) / coût_traditionnel) × 100"
+    "months_per_year": 12,
+    "working_days_per_year": 365
   },
   
   "display_formats": {
@@ -147,45 +94,25 @@
       "decimals": 0,
       "format": "{value}%"
     },
-    "years": {
-      "singular": "an",
-      "plural": "ans",
-      "format": "{value} {unit}"
-    },
-    "months": {
-      "singular": "mois",
-      "plural": "mois",
-      "format": "{value} {unit}"
+    "number": {
+      "thousands_separator": " ",
+      "format": "{value}"
     }
   },
   
   "messages": {
     "fr": {
       "vente_advantages": [
-        "Investissement unique avec retour sur investissement en 2,1 ans",
-        "Monitoring optionnel à 20$/mois seulement",
-        "Maintenance incluse pendant 5 ans",
-        "Économies de 41 025$ sur 20 ans"
+        "Investissement unique avec retour sur investissement rapide",
+        "Monitoring optionnel disponible",
+        "Maintenance incluse pendant la garantie",
+        "Économies massives sur 20 ans"
       ],
       "location_advantages": [
         "Monitoring et maintenance inclus",
         "Aucun investissement initial",
-        "Économies immédiates de 150$/mois",
+        "Économies immédiates mensuelles",
         "Contrat flexible"
-      ]
-    },
-    "en": {
-      "vente_advantages": [
-        "One-time investment with ROI in 2.1 years",
-        "Optional monitoring at only $20/month",
-        "Maintenance included for 5 years",
-        "$41,025 savings over 20 years"
-      ],
-      "location_advantages": [
-        "Monitoring and maintenance included",
-        "No initial investment",
-        "Immediate savings of $150/month",
-        "Flexible contract"
       ]
     }
   }

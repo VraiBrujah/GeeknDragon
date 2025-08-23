@@ -767,19 +767,19 @@
             
             <div class="summary-stats">
                 <div class="stat-box">
-                    <div class="stat-value">50 715 CAD</div>
+                    <div class="stat-value"><span data-pricing-value="calculations.tco_vente.savings.amount" data-pricing-format="currency"></span> CAD</div>
                     <div class="stat-label">Économies totales</div>
                 </div>
                 <div class="stat-box">
-                    <div class="stat-value">90%</div>
+                    <div class="stat-value"><span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="percentage"></span>%</div>
                     <div class="stat-label">Réduction TCO</div>
                 </div>
                 <div class="stat-box">
-                    <div class="stat-value">1937%</div>
+                    <div class="stat-value"><span data-pricing-value="calculations.tco_vente.savings.roi_percentage" data-pricing-format="percentage"></span>%</div>
                     <div class="stat-label">ROI annuel</div>
                 </div>
                 <div class="stat-box">
-                    <div class="stat-value">2 mois</div>
+                    <div class="stat-value"><span data-pricing-value="calculations.tco_vente.savings.payback_months" data-pricing-format="number"></span> mois</div>
                     <div class="stat-label">Retour investissement</div>
                 </div>
             </div>
@@ -792,7 +792,7 @@
             <div class="tco-visual">
                 <div class="tco-column lfp">
                     <div class="tco-product lfp">🟢 Li-CUBE PRO™ LFP</div>
-                    <div class="tco-amount" data-pricing-value="licube.price_total">6 325</div>
+                    <div class="tco-amount" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="number"></div>
                     <div class="tco-period">CAD sur 20 ans</div>
                 </div>
                 
@@ -800,13 +800,13 @@
                 
                 <div class="tco-column nicd">
                     <div class="tco-product nicd">🔴 Batteries Ni-Cd</div>
-                    <div class="tco-amount">57 040</div>
+                    <div class="tco-amount" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="number"></div>
                     <div class="tco-period">CAD sur 20 ans</div>
                 </div>
             </div>
             
             <div class="savings-result">
-                🎯 ÉCONOMIES : 50 715 CAD par unité (89% moins cher)
+                🎯 ÉCONOMIES : <span data-pricing-value="calculations.tco_vente.savings.amount" data-pricing-format="currency"></span> CAD par unité (<span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="percentage"></span>% moins cher)
             </div>
         </div>
         
@@ -821,7 +821,7 @@
                         <table class="breakdown-table">
                             <tr class="breakdown-row">
                                 <td class="breakdown-label">Coût initial de l'unité</td>
-                                <td class="breakdown-value"><span data-pricing-value="licube.price_total">11 125</span> CAD</td>
+                                <td class="breakdown-value"><span data-pricing-value="calculations.tco_vente.licube.initial_cost" data-pricing-format="currency"></span> CAD</td>
                             </tr>
                             <tr class="breakdown-row">
                                 <td class="breakdown-label">Maintenance (20 ans)</td>
@@ -833,11 +833,11 @@
                             </tr>
                             <tr class="breakdown-row">
                                 <td class="breakdown-label">Monitoring annuel</td>
-                                <td class="breakdown-value">4 800 CAD</td>
+                                <td class="breakdown-value"><span data-pricing-value="calculations.tco_vente.licube.monitoring_20_years" data-pricing-format="currency"></span> CAD</td>
                             </tr>
                             <tr class="breakdown-row">
                                 <td class="breakdown-label">TOTAL 20 ans</td>
-                                <td class="breakdown-value"><span data-pricing-value="licube.price_total">11 125</span> CAD</td>
+                                <td class="breakdown-value"><span data-pricing-value="calculations.tco_vente.licube.initial_cost" data-pricing-format="currency"></span> CAD</td>
                             </tr>
                         </table>
                     </div>
@@ -849,15 +849,15 @@
                         <table class="breakdown-table">
                             <tr class="breakdown-row">
                                 <td class="breakdown-label">Coût initial de l'unité</td>
-                                <td class="breakdown-value">12 000 CAD</td>
+                                <td class="breakdown-value"><span data-pricing-value="calculations.tco_vente.nicd.initial_cost" data-pricing-format="currency"></span> CAD</td>
                             </tr>
                             <tr class="breakdown-row">
-                                <td class="breakdown-label">Maintenance (452 CAD/an × 20)</td>
-                                <td class="breakdown-value">9 040 CAD</td>
+                                <td class="breakdown-label">Maintenance (<span data-pricing-value="nicd.maintenance_annual" data-pricing-format="currency"></span> CAD/an × 20)</td>
+                                <td class="breakdown-value"><span data-pricing-value="calculations.tco_vente.nicd.maintenance_20_years" data-pricing-format="currency"></span> CAD</td>
                             </tr>
                             <tr class="breakdown-row">
-                                <td class="breakdown-label">Remplacements (3 fois)</td>
-                                <td class="breakdown-value">36 000 CAD</td>
+                                <td class="breakdown-label">Remplacements (<span data-pricing-value="calculations.tco_vente.nicd.replacement_count" data-pricing-format="number"></span> fois)</td>
+                                <td class="breakdown-value"><span data-pricing-value="calculations.tco_vente.nicd.replacements_cost" data-pricing-format="currency"></span> CAD</td>
                             </tr>
                             <tr class="breakdown-row">
                                 <td class="breakdown-label">Monitoring</td>
@@ -865,7 +865,7 @@
                             </tr>
                             <tr class="breakdown-row">
                                 <td class="breakdown-label">TOTAL 20 ans</td>
-                                <td class="breakdown-value">57 040 CAD</td>
+                                <td class="breakdown-value"><span data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency"></span> CAD</td>
                             </tr>
                         </table>
                     </div>
@@ -907,10 +907,10 @@
                 </div>
                 
                 <div class="chart-values">
-                    <div>LFP: 2.8k<br>Ni-Cd: 14.3k</div>
-                    <div>LFP: 2.8k<br>Ni-Cd: 26.5k</div>
-                    <div>LFP: 2.8k<br>Ni-Cd: 41.8k</div>
-                    <div>LFP: 2.8k<br>Ni-Cd: 57.0k</div>
+                    <div>LFP: <span data-pricing-value="calculations.tco_vente.licube.cost_5_years" data-pricing-format="currency"></span><br>Ni-Cd: <span data-pricing-value="calculations.tco_vente.nicd.cost_5_years" data-pricing-format="currency"></span></div>
+                    <div>LFP: <span data-pricing-value="calculations.tco_vente.licube.cost_10_years" data-pricing-format="currency"></span><br>Ni-Cd: <span data-pricing-value="calculations.tco_vente.nicd.cost_10_years" data-pricing-format="currency"></span></div>
+                    <div>LFP: <span data-pricing-value="calculations.tco_vente.licube.cost_15_years" data-pricing-format="currency"></span><br>Ni-Cd: <span data-pricing-value="calculations.tco_vente.nicd.cost_15_years" data-pricing-format="currency"></span></div>
+                    <div>LFP: <span data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency"></span><br>Ni-Cd: <span data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency"></span></div>
                 </div>
                 
                 <div class="chart-legend">
@@ -932,21 +932,21 @@
             
             <div class="roi-metrics">
                 <div class="roi-metric">
-                    <div class="roi-value">1937%</div>
+                    <div class="roi-value"><span data-pricing-value="calculations.tco_vente.savings.roi_percentage" data-pricing-format="percentage"></span>%</div>
                     <div class="roi-label">ROI Annuel</div>
                     <div class="roi-desc">Retour sur investissement annualisé</div>
                 </div>
                 
                 <div class="roi-metric">
-                    <div class="roi-value">2 mois</div>
+                    <div class="roi-value"><span data-pricing-value="calculations.tco_vente.savings.payback_months" data-pricing-format="number"></span> mois</div>
                     <div class="roi-label">Période de Retour</div>
                     <div class="roi-desc">Temps pour récupérer l'investissement</div>
                 </div>
                 
                 <div class="roi-metric">
-                    <div class="roi-value">20×</div>
+                    <div class="roi-value"><span data-pricing-value="calculations.tco_vente.savings.factor" data-pricing-format="number"></span>×</div>
                     <div class="roi-label">Facteur d'Économie</div>
-                    <div class="roi-desc">LFP coûte 20× moins cher</div>
+                    <div class="roi-desc">LFP coûte <span data-pricing-value="calculations.tco_vente.savings.factor" data-pricing-format="number"></span>× moins cher</div>
                 </div>
             </div>
         </div>
@@ -962,7 +962,7 @@
                         <span>Durée de Vie Supérieure</span>
                     </div>
                     <div class="factor-desc">
-                        8000+ cycles vs 1500 cycles Ni-Cd.<br>
+                        <span data-pricing-value="licube.cycle_life" data-pricing-format="number"></span>+ cycles vs <span data-pricing-value="nicd.cycle_life" data-pricing-format="number"></span> cycles Ni-Cd.<br>
                         Une seule batterie LFP pour toute la période vs 3-4 remplacements Ni-Cd.
                     </div>
                 </div>
@@ -974,7 +974,7 @@
                     </div>
                     <div class="factor-desc">
                         Zéro maintenance LFP vs 2 visites/an Ni-Cd.<br>
-                        Économie de 9 040 CAD en maintenance sur 20 ans.
+                        Économie de <span data-pricing-value="calculations.tco_vente.nicd.maintenance_20_years" data-pricing-format="currency"></span> CAD en maintenance sur 20 ans.
                     </div>
                 </div>
                 
@@ -984,8 +984,8 @@
                         <span>Coût Initial Réduit</span>
                     </div>
                     <div class="factor-desc">
-                        <span data-pricing-value="licube.price_total">6 325</span> CAD vs 12 000 CAD Ni-Cd.<br>
-                        5× moins cher dès l'achat initial.
+                        <span data-pricing-value="calculations.tco_vente.licube.initial_cost" data-pricing-format="currency"></span> CAD vs <span data-pricing-value="calculations.tco_vente.nicd.initial_cost" data-pricing-format="currency"></span> CAD Ni-Cd.<br>
+                        <span data-pricing-value="calculations.tco_vente.savings.initial_cost_factor" data-pricing-format="number"></span>× moins cher dès l'achat initial.
                     </div>
                 </div>
                 
@@ -1028,8 +1028,8 @@
         <div class="conclusion">
             <div class="conclusion-title">✅ Conclusion TCO</div>
             <div class="conclusion-text">
-                Le passage aux batteries Li-CUBE PRO™ LiFePO4 représente une économie de 45 915 CAD 
-                par unité sur 20 ans, soit 90% de réduction du TCO comparé aux batteries Ni-Cd traditionnelles.
+                Le passage aux batteries Li-CUBE PRO™ LiFePO4 représente une économie de <span data-pricing-value="calculations.tco_vente.savings.amount" data-pricing-format="currency"></span> CAD 
+                par unité sur 20 ans, soit <span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="percentage"></span>% de réduction du TCO comparé aux batteries Ni-Cd traditionnelles.
             </div>
             <div class="conclusion-cta">
                 💬 Demandez votre analyse TCO personnalisée gratuite
