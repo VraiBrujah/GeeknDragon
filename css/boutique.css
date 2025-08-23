@@ -2,12 +2,14 @@
 
 /* Shop Hero */
 .shop-hero {
-    padding: 8rem 0 6rem;
+    padding: 6rem 0;
     position: relative;
     overflow: hidden;
     min-height: 70vh;
     display: flex;
     align-items: center;
+    margin-top: -70px;
+    padding-top: 140px;
 }
 
 /* Utiliser le même overlay que index.html */

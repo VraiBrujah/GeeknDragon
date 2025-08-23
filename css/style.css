@@ -47,11 +47,11 @@ body {
     color: var(--light-text);
     background: var(--dark-bg);
     overflow-x: hidden;
-    padding-top: 90px;
+    padding-top: 70px;
 }
 
 section {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 80px;
 }
 
 /* Typographie médiévale */
@@ -100,10 +100,12 @@ p {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(26, 26, 26, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(26, 26, 26, 0.98);
+    backdrop-filter: blur(15px);
     z-index: 1000;
     transition: var(--transition);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
 .nav-container {
@@ -209,6 +211,8 @@ p {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    margin-top: -70px;
+    padding-top: 70px;
 }
 
 .hero-background {
@@ -392,9 +396,10 @@ p {
 
 /* Products Section - Section agrandie avec style D&D */
 .products {
-    padding: 6rem 0;
+    padding: 4rem 0 6rem;
     background: var(--gradient-dark);
     position: relative;
+    margin-top: -2rem;
 }
 
 .products::before {
@@ -410,9 +415,10 @@ p {
 
 /* Boutique Section */
 .boutique-section {
-    padding: 5rem 0;
+    padding: 4rem 0 5rem;
     background: var(--darker-bg);
     text-align: center;
+    margin-top: -1rem;
 }
 
 .payment-icons {
@@ -437,9 +443,10 @@ p {
 
 /* Features Section - Section plus large et immersive D&D */
 .features {
-    padding: 6rem 0;
+    padding: 5rem 0 6rem;
     background: var(--dark-bg);
     position: relative;
+    margin-top: -1rem;
 }
 
 .features::before {
@@ -509,9 +516,10 @@ p {
 
 /* Catalogue Preview - Section agrandie avec design D&D */
 .catalogue-preview {
-    padding: 6rem 0;
+    padding: 5rem 0 6rem;
     background: var(--darker-bg);
     position: relative;
+    margin-top: -1rem;
 }
 
 .catalogue-preview::before {
