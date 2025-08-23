@@ -231,11 +231,12 @@
 
         .numero-stat {
             display: block;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--accent);
             margin-bottom: 0.5rem;
-            line-height: 1;
+            line-height: 1.1;
+            text-align: center;
         }
 
         .libelle-stat {
@@ -498,16 +499,23 @@
         <header class="header-principal fade-in">
             <h1 class="titre-principal">🚀 Li-CUBE PRO™</h1>
             <p class="sous-titre-principal">Hub Vendeurs - Plateforme d'Outils Commerciaux EDS Québec</p>
+            <div style="background: rgba(255,215,0,0.15); border: 2px solid #FFD700; border-radius: 12px; padding: 1.5rem; margin-top: 2rem; text-align: center;">
+                <div style="font-size: 1.4rem; font-weight: 700; color: #FFD700; margin-bottom: 0.5rem;">⚡ AVANTAGE CONCURRENTIEL MAJEUR</div>
+                <div style="font-size: 1.1rem; font-weight: 600;">Télémétrie Temps Réel • Zéro Maintenance • Auto-chauffage -40°C</div>
+                <div style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.9;">Fabrication 100% québécoise • Support local réactif</div>
+            </div>
             
             <!-- Sélecteur de mode vente/location -->
             <div class="selecteur-mode">
                 <button class="bouton-mode mode-vente" id="boutonVente" onclick="changerMode('vente')">
                     💼 MODE VENTE
-                    <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">54 240$ économisés vs Ni-Cd!</div>
+                    <div style="font-size: 1rem; margin-top: 0.5rem; opacity: 1; font-weight: 700; color: #FFD700;">💰 54 240$ ÉCONOMISÉS vs Ni-Cd!</div>
+                    <div style="font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.9;">95% moins cher sur 20 ans</div>
                 </button>
                 <button class="bouton-mode mode-location actif" id="boutonLocation" onclick="changerMode('location')">
                     🏢 MODE LOCATION
-                    <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">33 140$ économisés vs Ni-Cd!</div>
+                    <div style="font-size: 1rem; margin-top: 0.5rem; opacity: 1; font-weight: 700; color: #FFD700;">💰 33 140$ ÉCONOMISÉS vs Ni-Cd!</div>
+                    <div style="font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.9;">Service managé inclus</div>
                 </button>
             </div>
         </header>
@@ -523,7 +531,7 @@
                 <div class="libelle-stat">Économies vs Ni-Cd</div>
             </div>
             <div class="carte-stat">
-                <span class="numero-stat" id="statDuree">8000+ vs 1500</span>
+                <span class="numero-stat" id="statDuree">8000+<br>vs<br>1500</span>
                 <div class="libelle-stat">Cycles Li-CUBE vs Ni-Cd</div>
             </div>
             <div class="carte-stat">
@@ -570,7 +578,8 @@
                     {
                         titre: '📊 Présentations Vendeurs',
                         icone: 'fas fa-chart-presentation',
-                        description: 'Outils de présentation interactive pour vos rendez-vous clients',
+                        description: '🔥 Outils de présentation interactive pour convaincre vos clients avec des données TCO irréfutables',
+                        badge: 'ESSENTIEL',
                         liens: [
                             { nom: '🎯 Présentation Complète Interactive', chemin: './presentations-vente/presentations-vendeurs/presentation-complete.html' },
                             { nom: '🧮 Calculateur TCO Avancé', chemin: './presentations-vente/presentations-vendeurs/calculateur-tco.html' },
@@ -580,7 +589,8 @@
                     {
                         titre: '🖼️ Supports Visuels',
                         icone: 'fas fa-images',
-                        description: 'Images et infographies pour présenter Li-CUBE PRO™',
+                        description: '🎨 Infographies visuelles impactantes pour démontrer la supériorité technique Li-CUBE PRO™',
+                        badge: 'POPULAIRE',
                         liens: [
                             { nom: '📊 Infographie TCO Complète', chemin: './presentations-vente/images-onepage/infographie-tco.html' },
                             { nom: '⚖️ Comparaison Visuelle Li-CUBE vs Ni-Cd', chemin: './presentations-vente/images-onepage/comparaison-visuelle.html' },
@@ -590,7 +600,8 @@
                     {
                         titre: '🖨️ Supports Imprimables',
                         icone: 'fas fa-print',
-                        description: 'Flyers, brochures et posters pour vos événements',
+                        description: '📊 Matériel marketing professionnel pour salons, conventions et présentations client',
+                        badge: 'PRINT-READY',
                         liens: [
                             { nom: '📄 Flyer Client Standard', chemin: './presentations-vente/supports-print/flyers/flyer-client-standard.html' },
                             { nom: '💰 Flyer Focus TCO', chemin: './presentations-vente/supports-print/flyers/flyer-tco-focus.html', nouveau: true },
@@ -601,7 +612,8 @@
                     {
                         titre: '📱 Versions PDF',
                         icone: 'fas fa-file-pdf',
-                        description: 'Documents PDF à envoyer par email ou imprimer',
+                        description: '📧 Documents PDF optimisés pour envoi email et impression haute qualité',
+                        badge: 'PARTAGE FACILE',
                         liens: [
                             { nom: '📊 Comparatif TCO PDF', chemin: './presentations-vente/versions-pdf/comparatif-tco.html' },
                             { nom: '📋 Fiche Technique PDF', chemin: './presentations-vente/versions-pdf/fiche-technique.html' },
@@ -619,7 +631,8 @@
                     {
                         titre: '📊 Présentations Vendeurs',
                         icone: 'fas fa-chart-presentation',
-                        description: 'Outils de présentation pour clients location et services managés',
+                        description: '🔥 Présentations spécialisées pour convaincre avec l'offre de location et services managés',
+                        badge: 'LOCATION+',
                         liens: [
                             { nom: '🎯 Présentation Complète Location', chemin: './presentations-location/presentations-vendeurs/presentation-complete.html' },
                             { nom: '🧮 Calculateur TCO Location', chemin: './presentations-location/presentations-vendeurs/calculateur-tco.html' },
@@ -629,7 +642,8 @@
                     {
                         titre: '🖼️ Supports Visuels',
                         icone: 'fas fa-images',
-                        description: 'Visuels spécialisés pour l\'offre de location',
+                        description: '🎨 Visuels adaptés aux modèles de location avec comparatifs TCO détaillés',
+                        badge: 'LOCATION',
                         liens: [
                             { nom: '📊 Infographie TCO Location', chemin: './presentations-location/images-onepage/infographie-tco.html' },
                             { nom: '⚖️ Location vs Achat vs Ni-Cd', chemin: './presentations-location/images-onepage/comparaison-visuelle.html' },
@@ -639,7 +653,8 @@
                     {
                         titre: '🖨️ Supports Imprimables',
                         icone: 'fas fa-print',
-                        description: 'Matériel marketing pour offre location',
+                        description: '📊 Supports marketing spécialisés pour promouvoir l'offre de location intelligente',
+                        badge: 'MARKETING',
                         liens: [
                             { nom: '📄 Flyer Location Standard', chemin: './presentations-location/supports-print/flyers/flyer-client-standard.html' },
                             { nom: '💰 Flyer TCO Location Focus', chemin: './presentations-location/supports-print/flyers/flyer-tco-focus.html' },
@@ -650,7 +665,8 @@
                     {
                         titre: '📱 Versions PDF',
                         icone: 'fas fa-file-pdf',
-                        description: 'Documents PDF spécialisés location',
+                        description: '📧 Documents PDF adaptés aux modèles de financement et services managés',
+                        badge: 'FINANCEMENT',
                         liens: [
                             { nom: '📊 Comparatif Location PDF', chemin: './presentations-location/versions-pdf/comparatif-tco.html' },
                             { nom: '📋 Fiche Services PDF', chemin: './presentations-location/versions-pdf/fiche-technique.html' },
@@ -722,10 +738,13 @@
                 `).join('');
                 
                 carteDiv.innerHTML = `
-                    <h3 class="titre-categorie">
-                        <i class="${categorie.icone} icone-categorie"></i>
-                        ${categorie.titre}
-                    </h3>
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <h3 class="titre-categorie">
+                            <i class="${categorie.icone} icone-categorie"></i>
+                            ${categorie.titre}
+                        </h3>
+                        ${categorie.badge ? `<span style="background: var(--gradient-accent); color: white; font-size: 0.7rem; font-weight: 700; padding: 0.3rem 0.6rem; border-radius: 20px; white-space: nowrap;">${categorie.badge}</span>` : ''}
+                    </div>
                     <p class="description-categorie">${categorie.description}</p>
                     <ul class="liste-liens">
                         ${liensHTML}
