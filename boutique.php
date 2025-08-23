@@ -3,10 +3,9 @@ require __DIR__ . '/bootstrap.php';
 $config = require __DIR__ . '/config.php';
 $active = 'boutique';
 require __DIR__ . '/i18n.php';
-use GeeknDragon\Service\InventoryService;
 $title  = $translations['meta']['shop']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['shop']['desc'] ?? '';
-$metaUrl = 'https://' . $config['current_host'] . '/boutique.php';
+$metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/boutique.php';
 $extraHead = <<<HTML
 <link rel="stylesheet" href="/css/boutique-premium.css?v=<?= filemtime(__DIR__.'/css/boutique-premium.css') ?>">
 <style>
@@ -17,7 +16,36 @@ $extraHead = <<<HTML
 HTML;
 
 /* ───── STOCK ───── */
-$inventoryService = InventoryService::getInstance($config);
+$snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
+function getStock(string $id): ?int
+{
+    global $snipcartSecret;
+    static $cache = [];
+    if (isset($cache[$id])) {
+        return $cache[$id];
+    }
+    if ($snipcartSecret) {
+        $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERPWD => $snipcartSecret . ':',
+        ]);
+        $res = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        if ($res === false || $status >= 400) {
+            return $cache[$id] = null;
+        }
+        $inv = json_decode($res, true);
+        return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
+    }
+    return $cache[$id] = null;
+}
+function inStock(string $id): bool
+{
+    $stock = getStock($id);
+    return $stock === null || $stock > 0;      // true si illimité ou quantité > 0
+}
 
 // Liste des produits
 $data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
@@ -57,7 +85,16 @@ $products = array_merge($pieces, $cards, $triptychs);
 <?php include 'head-common.php'; ?>
 
 <body>
-<?php include 'header.php'; ?>
+<?php
+$snipcartLanguage = $lang;
+$snipcartLocales = 'fr,en';
+$snipcartAddProductBehavior = 'overlay';
+ob_start();
+include 'snipcart-init.php';
+$snipcartInit = ob_get_clean();
+include 'header.php';
+echo $snipcartInit;
+?>
 
 <main id="main" class="pt-[calc(var(--header-height))]">
   <div class="w-full" style="height:1px; background-color: var(--boutique-primary); margin-top:-1px;"></div>
@@ -125,27 +162,32 @@ $products = array_merge($pieces, $cards, $triptychs);
 
         <!-- Vidéo de présentation -->
         <div class="mt-8 flex justify-center">
-          <div class="relative group rounded-lg overflow-hidden" style="width: 420px;">
-            <video id="video4" 
-                   src="videos/video-demo-game.mp4" 
-                   class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
-                   playsinline 
-                   preload="metadata">
-              Votre navigateur ne supporte pas la lecture vidéo.
-            </video>
-            <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
-                           bg-black/60 text-white text-sm px-2 py-1 rounded"
-                    data-video="video4">🔊</button>
-            <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&ab_channel=Es-TuGame%3F-JeuxDeR%C3%B4le" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               class="block text-center text-sm mt-2 text-gray-300 txt-court hover:text-indigo-400 transition-colors duration-300">
-              L'Économie de D&D 💰 Conseils Jeux de Rôle
-              <svg class="inline-block w-3 h-3 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/>
-                <path d="M5 5a2 2 0 00-2 2v6a2 2 0 002 2h6a2 2 0 002-2v-2a1 1 0 10-2 0v2H5V7h2a1 1 0 000-2H5z"/>
-              </svg>
-            </a>
+          <button type="button"
+                  class="group relative rounded-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                  aria-controls="video-modal"
+                  aria-label="Lire la vidéo de Pierre-Louis (Es-Tu Game ?) — L'Économie de D&D 💰 Conseils Jeux de Rôle"
+                  data-video-open>
+            <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg"
+                 alt="Miniature de la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
+                 class="block w-full h-auto transition-transform duration-200 group-hover:scale-105 group-hover:shadow-lg">
+          </button>
+        </div>
+
+        <!-- Modal vidéo -->
+        <div id="video-modal"
+             class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center"
+             role="dialog" aria-modal="true"
+             aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
+             tabindex="-1">
+          <div class="relative w-[90vw] max-w-4xl">
+            <button type="button"
+                    class="absolute top-4 right-4 z-10 text-white text-4xl leading-none focus:outline-none"
+                    aria-label="Fermer la vidéo"
+                    data-video-close>&times;</button>
+            <div class="w-full aspect-video max-h-[90vh]">
+              <iframe class="w-full h-full" src="https://www.youtube.com/embed/y96eAFtC4xE?start=624&rel=0&modestbranding=1"
+                      title="L’Économie de D&D 💰 Conseils Jeux de Rôle" allowfullscreen tabindex="-1"></iframe>
+            </div>
           </div>
         </div>
 
@@ -273,11 +315,7 @@ $products = array_merge($pieces, $cards, $triptychs);
           </div>
 
           <div class="feature-card">
-            <img src="/images/optimized-modern/webp/carte-propriete.webp"
-                 alt="Carte de propriété - Système de traçabilité"
-                 class="property-image rounded"
-                 data-gallery="features"
-                 style="width: 100%; height: auto; margin: 0 auto 1rem auto; display: block;">
+            <span class="feature-icon"><img src="images/carte_propriete.png" alt="Carte de propriété" class="property-image"></span>
             <h4 class="feature-title">Carte de propriété</h4>
             <p class="feature-description">Système de traçabilité pour récupérer facilement vos trésors en fin de campagne.</p>
           </div>
@@ -297,16 +335,11 @@ $products = array_merge($pieces, $cards, $triptychs);
           <div class="feature-card">
             <span class="feature-icon">🔒</span>
             <h4 class="feature-title">Paiement sécurisé</h4>
-            <p class="feature-description">Transactions cryptées. Visa, Mastercard et American Express acceptés.</p>
+            <p class="feature-description">Transactions cryptées via Snipcart. Visa, Mastercard et American Express acceptés.</p>
           </div>
 
           <div class="feature-card">
-            <span class="feature-icon">
-              <img src="/images/logo-fabrique-BqFMdtDT.png" 
-                   alt="Logo Fabriqué au Québec" 
-                   class="h-8 w-auto mx-auto" 
-                   loading="lazy">
-            </span>
+            <span class="feature-icon">🎯</span>
             <h4 class="feature-title">Qualité artisanale</h4>
             <p class="feature-description">Fabriqué au Québec avec des matériaux premium pour des années d'aventures.</p>
           </div>
@@ -324,7 +357,7 @@ $products = array_merge($pieces, $cards, $triptychs);
       <div class="trust-badges">
         <div class="trust-badge">
           <span class="trust-icon">🔒</span>
-          <span data-i18n="shop.intro.payment">Paiement sécurisé</span>
+          <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
         </div>
 
         <div class="trust-badge">
@@ -334,7 +367,7 @@ $products = array_merge($pieces, $cards, $triptychs);
         </div>
 
         <div class="trust-badge">
-          <img src="/images/logo-fabrique-BqFMdtDT.png" alt="Logo Fabriqué au Québec" class="h-6 w-auto" loading="lazy">
+          <span class="trust-icon">🍁</span>
           <span>Fabriqué au Québec</span>
         </div>
 
@@ -352,7 +385,7 @@ $products = array_merge($pieces, $cards, $triptychs);
 <script type="application/ld+json">
 <?= json_encode([
     '@context' => 'https://schema.org/',
-    '@graph' => array_map(function ($p) use ($inventoryService) {
+    '@graph' => array_map(function ($p) {
         return [
             '@type' => 'Product',
             'name' => strip_tags($p['name']),
@@ -363,7 +396,7 @@ $products = array_merge($pieces, $cards, $triptychs);
                 '@type' => 'Offer',
                 'price' => $p['price'],
                 'priceCurrency' => 'CAD',
-                'availability' => $inventoryService->isInStock($p['id']) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+                'availability' => inStock($p['id']) ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
             ],
         ];
     }, $products /* merged products */),
@@ -373,5 +406,53 @@ $products = array_merge($pieces, $cards, $triptychs);
   <script src="/js/hero-videos.js"></script>
   <script src="/js/boutique-premium.js?v=<?= filemtime(__DIR__.'/js/boutique-premium.js') ?>"></script>
   <script src="/js/currency-converter.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const openBtn = document.querySelector('[data-video-open]');
+    const modal = document.getElementById('video-modal');
+    if (!openBtn || !modal) return;
+    const closeBtn = modal.querySelector('[data-video-close]');
+    const iframe = modal.querySelector('iframe');
+
+    const escListener = (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        e.preventDefault();
+        closeModal();
+      }
+    };
+
+    const openModal = () => {
+      modal.classList.remove('hidden');
+      openBtn.classList.add('invisible');
+      document.addEventListener('keydown', escListener, true);
+      modal.focus();
+    };
+
+    const closeModal = () => {
+      if (document.fullscreenElement) {
+        try { document.exitFullscreen(); } catch (_) {}
+      }
+      modal.classList.add('hidden');
+      iframe.src = iframe.src;
+      document.removeEventListener('keydown', escListener, true);
+      openBtn.classList.remove('invisible');
+      openBtn.focus();
+    };
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('fullscreenchange', () => {
+      if (!document.fullscreenElement && !modal.classList.contains('hidden')) closeModal();
+    });
+
+    const propertyImg = document.querySelector('.property-image');
+    if (propertyImg) {
+      propertyImg.addEventListener('click', () => {
+        propertyImg.classList.toggle('expanded');
+      });
+    }
+  });
+  </script>
 </body>
 </html>
