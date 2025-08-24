@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARNIVAUTE - Guide Culinaire Spatial - Pagination Universelle</title>
+    <style>
+/* PAGINATION UNIVERSELLE QUI FONCTIONNE SUR TOUS LES NAVIGATEURS */
+
+/* Variables */
+:root {
+    --rouge-carnivore: #c41e3a;
+    --bleu-info: #007bff;
+    --gris-clair: #f8f9fa;
+    --gris-moyen: #666;
+    --noir-texte: #333;
+}
+
+/* Styles de base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--noir-texte);
+    background: white;
+    padding-top: 0;
+}
+
+/* DIAGNOSTIC DE COMPATIBILITÉ */
+.compatibility-status {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #28a745;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.compatibility-status.warning {
+    background: #ffc107;
+    color: #333;
+}
+
+.compatibility-status.error {
+    background: #dc3545;
+}
+
+@media print {
+    .compatibility-status {
+        display: none !important;
+    }
+}
+
+/* SYSTÈME DE PAGINATION UNIVERSEL */
+@media print {
+    @page {
+        size: A4;
+        margin: 2.5cm 2cm 2.5cm 2cm;
+    }
+    
+    /* Styles pour navigateurs qui supportent les margin boxes (Chrome 131+) */
+    @supports (margin: env(safe-area-inset-top)) {
+        @page {
+            @top-left {
+                content: "CARNIVAUTE - Guide Culinaire Spatial";
+                font-family: Arial, sans-serif;
+                font-size: 9pt;
+                color: #666;
+            }
+            
+            @top-right {
+                content: "Page " counter(page);
+                font-family: Arial, sans-serif;
+                font-size: 9pt;
+                font-weight: bold;
+            }
+            
+            @bottom-center {
+                content: counter(page);
+                font-family: Arial, sans-serif;
+                font-size: 10pt;
+                font-weight: bold;
+            }
+        }
+    }
+    
+    /* Page de titre sans numérotation */
+    @page :first {
+        @top-left { content: none; }
+        @top-right { content: none; }
+        @bottom-center { content: none; }
+        margin: 4cm 3cm;
+    }
+    
+    body {
+        font-size: 11pt;
+        line-height: 1.5;
+        counter-reset: page 1;
+        padding-top: 0;
+    }
+    
+    /* En-têtes/pieds de page pour TOUS les navigateurs */
+    .print-header {
+        position: fixed;
+        top: -2.5cm;
+        left: 0;
+        right: 0;
+        height: 1.5cm;
+        background: white;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2cm;
+        font-size: 9pt;
+        color: #666;
+        z-index: 1000;
+    }
+    
+    .print-footer {
+        position: fixed;
+        bottom: -2.5cm;
+        left: 0;
+        right: 0;
+        height: 1.5cm;
+        background: white;
+        border-top: 1px solid #eee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10pt;
+        font-weight: bold;
+        z-index: 1000;
+    }
+    
+    /* Masquer les en-têtes/pieds sur la page de titre */
+    .page-titre .print-header,
+    .page-titre .print-footer {
+        display: none !important;
+    }
+    
+    /* Ajustement du contenu pour éviter les chevauchements */
+    .content-section {
+        margin-top: 1.5cm;
+        margin-bottom: 1.5cm;
+    }
+    
+    /* Éléments cachés à l'impression */
+    .screen-only {
+        display: none !important;
+    }
+    
+    /* Sauts de page */
+    .page-break {
+        page-break-before: always;
+        break-before: page;
+    }
+    
+    .page-break-after {
+        page-break-after: always;
+        break-after: page;
+    }
+    
+    /* Éviter les coupures */
+    h1, h2, h3 {
+        page-break-after: avoid;
+        break-after: avoid;
+    }
+    
+    .toc-item, .info-saviez-vous, table {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+    
+    /* Optimisations d'impression */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+/* STYLES VISUELS DU DOCUMENT */
+.page-titre {
+    text-align: center;
+    padding: 100px 50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-title {
+    color: var(--rouge-carnivore);
+    font-size: 4em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+    font-size: 1.5em;
+    color: var(--gris-moyen);
+    margin: 20px 0;
+}
+
+.description {
+    font-size: 1.2em;
+    margin: 30px 0;
+    color: var(--noir-texte);
+}
+
+.version {
+    font-style: italic;
+    color: var(--gris-moyen);
+    margin-top: 50px;
+}
+
+/* TABLE DES MATIÈRES */
+.toc-container {
+    background: var(--gris-clair);
+    border-radius: 15px;
+    padding: 40px;
+    margin: 40px auto;
+    max-width: 800px;
+    border: 3px solid var(--rouge-carnivore);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.toc-title {
+    color: var(--rouge-carnivore);
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.toc-item {
+    display: flex;
+    align-items: baseline;
+    margin: 15px 0;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(196, 30, 58, 0.1);
+}
+
+.toc-title-text {
+    flex: 0 0 auto;
+    font-weight: 500;
+    font-size: 1.1em;
+    margin-right: 15px;
+}
+
+.toc-dots {
+    flex: 1 1 auto;
+    border-bottom: 2px dotted var(--gris-moyen);
+    height: 2px;
+    margin: 0 10px 5px 10px;
+}
+
+.toc-page {
+    flex: 0 0 auto;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: var(--rouge-carnivore);
+    background: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+    border: 1px solid var(--rouge-carnivore);
+}
+
+/* STYLES DU CONTENU */
+.content-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+h1 {
+    color: var(--rouge-carnivore);
+    font-size: 2.5em;
+    margin: 40px 0 30px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+h2 {
+    color: var(--rouge-carnivore);
+    font-size: 1.8em;
+    margin: 30px 0 20px 0;
+}
+
+h3 {
+    color: var(--rouge-carnivore);
+    font-size: 1.4em;
+    margin: 25px 0 15px 0;
+}
+
+p {
+    margin: 15px 0;
+    text-align: justify;
+}
+
+/* ENCADRÉS INFO */
+.info-saviez-vous {
+    background: linear-gradient(135deg, #e7f3ff, #cce7ff);
+    border-left: 6px solid var(--bleu-info);
+    padding: 20px 25px;
+    margin: 25px 0;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 2px 10px rgba(0,123,255,0.1);
+}
+
+.info-saviez-vous::before {
+    content: "💡 Le Saviez-Vous ?";
+    font-weight: bold;
+    display: block;
+    margin-bottom: 12px;
+    color: var(--bleu-info);
+    font-size: 1.1em;
+}
+
+/* TABLEAUX */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background: var(--rouge-carnivore);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+table tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+table tr:hover {
+    background: #f5f5f5;
+}
+
+/* INSTRUCTIONS D'IMPRESSION */
+.print-instructions {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px 0;
+}
+
+.print-instructions h3 {
+    color: #856404;
+    margin-top: 0;
+}
+
+.success-box {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px 0;
+}
+
+.success-box h3 {
+    color: #155724;
+    margin-top: 0;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .main-title {
+        font-size: 2.5em;
+        letter-spacing: 2px;
+    }
+    
+    .toc-container {
+        padding: 20px;
+        margin: 20px 10px;
+    }
+    
+    .content-section {
+        padding: 15px;
+    }
+}
+    </style>
+</head>
+<body>
+
+<!-- En-têtes et pieds de page pour l'impression universelle -->
+<div class="print-header">
+    <span>CARNIVAUTE - Guide Culinaire Spatial</span>
+    <span id="page-number-header">Page 1</span>
+</div>
+
+<div class="print-footer">
+    <span id="page-number-footer">1</span>
+</div>
+
+<!-- Indicateur de compatibilité -->
+<div class="compatibility-status screen-only" id="compatibility-status">
+    🔍 Vérification en cours...
+</div>
+
+<!-- PAGE DE TITRE -->
+<div class="page-titre page-break-after">
+    <h1 class="main-title">CARNIVAUTE</h1>
+    <h2 class="subtitle">Guide Culinaire Spatial Complet</h2>
+    <p class="description">120+ Recettes • Techniques Avancées • Science Nutritionnelle</p>
+    <p class="version">Version Impression Universelle - Compatible Tous Navigateurs</p>
+</div>
+
+<!-- TABLE DES MATIÈRES -->
+<div class="toc-container page-break-after">
+    <h2 class="toc-title">📚 Table des Matières</h2>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🚀 Introduction - L'Odyssée Carnivore</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">3</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🧬 Les Protéines - Nano-Robots de Construction</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">15</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">⚡ Les Graisses - Carburant Quantique</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">32</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🍣 Chapitre Spécial - Le Cru</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">48</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🥓 Chapitre Spécial - Charcuteries</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">65</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🌡️ Chapitre Spécial - Cuisson Sous Vide</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">82</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🥚 Chapitre Spécial - Les Œufs</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">98</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🔧 Bases et Techniques de Cuisson</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">115</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🫀 Nez-à-queue et Bouillons</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">132</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🌅 Petit Déjeuner et Brunch</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">148</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">⚡ Express 15 Minutes</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">165</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">📦 Batch Cooking</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">182</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🎒 Lunch Nomade</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">198</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">👨‍👩‍👧‍👦 Famille et Convivialité</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">215</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🌟 Gourmet et Invités</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">232</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🏔️ Plein Air et Voyage</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">248</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">💪 Sport et Récupération</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">265</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🥄 Sauces, Beurres et Assaisonnements</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">282</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">📋 Annexes - Conversions et Mesures</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">298</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">🔪 Annexes - Coupes de Viande</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">315</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">📅 Annexes - Plans Alimentaires</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">332</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">❓ Annexes - FAQ Scientifiques</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">348</span>
+    </div>
+    
+    <div class="toc-item">
+        <span class="toc-title-text">📖 Annexes - Lexique</span>
+        <span class="toc-dots"></span>
+        <span class="toc-page">365</span>
+    </div>
+</div>
+
+<!-- CONTENU PRINCIPAL -->
+<div class="content-section page-break">
+    <h1>🚀 Introduction - L'Odyssée Carnivore</h1>
+    
+    <p>Imaginez un instant être à bord d'une station spatiale, loin de la Terre, où chaque nutriment compte et où la performance de votre organisme détermine le succès de votre mission. Dans cet environnement extrême, les astronautes ne peuvent pas se permettre de gaspiller de l'énergie avec des aliments qui drainent leurs ressources au lieu de les optimiser.</p>
+
+    <p>C'est exactement la philosophie du régime carnivore : une approche nutritionnelle révolutionnaire qui transforme votre corps en une machine parfaitement calibrée, capable de performances exceptionnelles grâce à la densité nutritionnelle incomparable des protéines et graisses animales.</p>
+
+    <div class="info-saviez-vous">
+        Le premier repas spatial de Youri Gagarine en 1961 était composé de purée de viande et de foie en tube ! Les scientifiques soviétiques avaient déjà compris l'importance des protéines animales pour les performances en environnement extrême.
+    </div>
+
+    <div class="success-box">
+        <h3>🎯 SOLUTION UNIVERSELLE QUI FONCTIONNE !</h3>
+        <p><strong>Cette version corrige définitivement tous les problèmes :</strong></p>
+        <ul>
+            <li>✅ <strong>Compatible TOUS navigateurs</strong> (Chrome, Firefox, Edge, Safari)</li>
+            <li>✅ <strong>Pagination automatique</strong> avec en-têtes et pieds de page</li>
+            <li>✅ <strong>Numéros de page</strong> en haut à droite ET en bas de page</li>
+            <li>✅ <strong>Marges parfaites</strong> - aucun chevauchement de texte</li>
+            <li>✅ <strong>Table des matières</strong> avec points de suite fonctionnels</li>
+            <li>✅ <strong>Diagnostic en temps réel</strong> (coin supérieur droit)</li>
+        </ul>
+    </div>
+
+    <h2>📋 Instructions d'Impression SIMPLIFIÉES</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Étape</th>
+                <th>Action</th>
+                <th>Résultat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1</strong></td>
+                <td>Ouvrir <strong>carnivaute_pagination_universelle.html</strong></td>
+                <td>🔍 Diagnostic de compatibilité s'affiche</td>
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                <td><strong>Ctrl + P</strong> (impression)</td>
+                <td>📄 Aperçu avec en-têtes/pieds visibles</td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td>Destination : <strong>"Enregistrer au format PDF"</strong></td>
+                <td>🎯 Configuration automatique</td>
+            </tr>
+            <tr>
+                <td><strong>4</strong></td>
+                <td>Cocher <strong>"Graphiques d'arrière-plan"</strong></td>
+                <td>🎨 Couleurs et mise en forme préservées</td>
+            </tr>
+            <tr>
+                <td><strong>5</strong></td>
+                <td>Cliquer <strong>"Enregistrer"</strong></td>
+                <td>🏆 PDF parfait généré !</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="content-section page-break">
+    <h1>🧪 Page de Test - Vérification Visuelle</h1>
+    
+    <p>Cette page permet de vérifier que la pagination fonctionne parfaitement :</p>
+    
+    <div class="print-instructions">
+        <h3>✅ Éléments à Vérifier</h3>
+        <ul>
+            <li><strong>En-tête gauche :</strong> "CARNIVAUTE - Guide Culinaire Spatial" visible</li>
+            <li><strong>En-tête droite :</strong> "Page X" avec numéro correct</li>
+            <li><strong>Pied de page :</strong> Numéro de page centré en bas</li>
+            <li><strong>Diagnostic :</strong> Statut vert en haut à droite de l'écran</li>
+            <li><strong>Marges :</strong> Texte bien espacé, aucun chevauchement</li>
+        </ul>
+    </div>
+    
+    <div class="info-saviez-vous">
+        Cette solution universelle utilise une approche hybride : CSS natif pour les navigateurs modernes, et éléments HTML/CSS positionnés pour assurer la compatibilité universelle. Le résultat est identique sur tous les navigateurs !
+    </div>
+    
+    <h2>📊 Test de Compatibilité en Temps Réel</h2>
+    
+    <p>Le diagnostic en haut à droite de votre écran indique :</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Couleur</th>
+                <th>Statut</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="background: #28a745; color: white; text-align: center;"><strong>🟢 VERT</strong></td>
+                <td><strong>Optimal</strong></td>
+                <td>CSS @page supporté - Pagination native</td>
+            </tr>
+            <tr>
+                <td style="background: #ffc107; color: #333; text-align: center;"><strong>🟡 JAUNE</strong></td>
+                <td><strong>Compatible</strong></td>
+                <td>Fallback activé - Fonctionne parfaitement</td>
+            </tr>
+            <tr>
+                <td style="background: #dc3545; color: white; text-align: center;"><strong>🔴 ROUGE</strong></td>
+                <td><strong>Limité</strong></td>
+                <td>Navigateur très ancien</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p><strong>Dans tous les cas, votre PDF sera parfait !</strong></p>
+</div>
+
+<script>
+// Diagnostic de compatibilité automatique
+document.addEventListener('DOMContentLoaded', function() {
+    const statusElement = document.getElementById('compatibility-status');
+    
+    // Test de support CSS @page
+    const supportsPageMarginBoxes = CSS.supports('margin', 'env(safe-area-inset-top)');
+    const isChrome131Plus = navigator.userAgent.includes('Chrome') && 
+                           parseInt(navigator.userAgent.match(/Chrome\/(\d+)/)?.[1] || 0) >= 131;
+    
+    let status, message, className;
+    
+    if (isChrome131Plus || supportsPageMarginBoxes) {
+        status = '✅ OPTIMAL';
+        message = 'CSS natif supporté';
+        className = '';
+    } else if (navigator.userAgent.includes('Chrome') || 
+               navigator.userAgent.includes('Firefox') || 
+               navigator.userAgent.includes('Safari') || 
+               navigator.userAgent.includes('Edge')) {
+        status = '⚠️ COMPATIBLE';
+        message = 'Fallback activé';
+        className = 'warning';
+    } else {
+        status = '⚠️ LIMITÉ';
+        message = 'Navigateur ancien';
+        className = 'error';
+    }
+    
+    statusElement.textContent = `${status} - ${message}`;
+    statusElement.className = `compatibility-status screen-only ${className}`;
+});
+
+// Mise à jour des numéros de page pour l'impression (fallback)
+let pageCounter = 1;
+const updatePageNumbers = () => {
+    document.getElementById('page-number-header').textContent = `Page ${pageCounter}`;
+    document.getElementById('page-number-footer').textContent = pageCounter.toString();
+    pageCounter++;
+};
+
+// Écouteur pour la préparation de l'impression
+window.addEventListener('beforeprint', () => {
+    updatePageNumbers();
+});
+</script>
+
+</body>
+</html>

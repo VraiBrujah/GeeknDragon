@@ -1,0 +1,212 @@
+# ====================================================
+# Configuration Carnivaute - Livre de Cuisine Carnivore
+# ====================================================
+
+# Métadonnées du livre
+livre:
+  titre: "CARNIVAUTE"
+  sous_titre: "Guide Culinaire de l'Exploration Carnivore"
+  auteur: "L'Équipe Carnivaute"
+  description: "120 recettes révolutionnaires pour explorer l'univers du régime carnivore avec rigueur scientifique et plaisir gustatif"
+  version: "1.0.0"
+  langue: "fr"
+  genre: "Cuisine & Gastronomie"
+  isbn: ""  # À remplir lors de la publication
+  
+# Informations éditoriales
+edition:
+  editeur: "Éditions Carnivaute"
+  date_publication: "2024"
+  copyright: "© 2024 Carnivaute. Tous droits réservés."
+  licence: "Tous droits réservés"
+
+# Configuration de génération
+generation:
+  formats_sortie:
+    - pdf
+    - html
+    - epub
+  
+  theme: "carnivaute_spatial"
+  
+  options:
+    table_matieres: true
+    index_recettes: true
+    index_ingredients: true
+    glossaire: true
+    annexes: true
+    images_haute_qualite: true
+    optimisation_mobile: true
+
+# Structure du manuscrit
+structure:
+  dossier_manuscrit: "manuscript"
+  dossier_images: "images"
+  dossier_sortie: "output_final"
+  
+  chapitres:
+    - nom: "introduction"
+      titre: "Introduction - L'Odyssée Carnivore"
+      ordre: 1
+      type: "chapitre"
+      
+    - nom: "chapitre_cru"
+      titre: "Chapitre Spécial - Le Cru"
+      ordre: 2
+      type: "chapitre_special"
+      
+    - nom: "chapitre_charcuteries"
+      titre: "Chapitre Spécial - Charcuteries"
+      ordre: 3
+      type: "chapitre_special"
+      
+    - nom: "chapitre_sous_vide"
+      titre: "Chapitre Spécial - Cuisson Sous Vide"
+      ordre: 4
+      type: "chapitre_special"
+      
+    - nom: "chapitre_oeufs"
+      titre: "Chapitre Spécial - Les Œufs"
+      ordre: 5
+      type: "chapitre_special"
+      
+    - nom: "recettes_principales"
+      titre: "Recettes Principales"
+      ordre: 6
+      type: "section_recettes"
+      sous_sections:
+        - "bases_techniques"
+        - "nez_a_queue_bouillons"
+        - "petit_dejeuner_brunch"
+        - "express_15_minutes"
+        - "batch_cooking"
+        - "lunch_nomade"
+        - "famille_convivialite"
+        - "gourmet_invites"
+        - "plein_air_voyage"
+        - "sport_recuperation"
+        - "sauces_beurres"
+        
+    - nom: "annexes"
+      titre: "Annexes"
+      ordre: 7
+      type: "annexes"
+
+# Thème visuel Carnivaute
+theme_carnivaute:
+  couleurs:
+    primaire: "#8B0000"      # Rouge carnivore
+    secondaire: "#000000"    # Noir spatial
+    accent: "#FFD700"        # Or stellaire
+    texte: "#333333"         # Gris foncé
+    background: "#FFFFFF"    # Blanc pur
+    
+  typographie:
+    titre_principal: "Cinzel"
+    titres: "Montserrat"
+    corps_texte: "Source Sans Pro"
+    recettes: "Roboto"
+    
+  mise_en_page:
+    marges: "2.5cm"
+    espacement_ligne: 1.4
+    taille_police_base: "11pt"
+    colonnes_recettes: 1
+
+# Configuration recettes
+recettes:
+  format_standard:
+    elements_obligatoires:
+      - titre
+      - accroche
+      - ingredients
+      - preparation
+      - securite_alimentaire
+      - option_crue
+      - option_sous_vide
+      - encadre_saviez_vous
+      - valeurs_nutritionnelles
+      - cout_portion
+      
+  unites:
+    systeme_principal: "metrique"
+    systeme_alternatif: "imperial"
+    
+  securite:
+    tableaux_obligatoires: true
+    comparaison_france_ue_usa: true
+    
+  nutrition:
+    affichage_macros: true
+    calories_par_portion: true
+    sucres_nets: true
+    
+  cout:
+    devises:
+      - "CAD"
+      - "USD"
+
+# Éléments spéciaux
+elements_speciaux:
+  encadres_saviez_vous:
+    frequence: "une_par_recette"
+    style: "spatial_scientifique"
+    
+  metaphores_spatiales:
+    integration: "subtile"
+    frequence: "moderee"
+    
+  fun_facts:
+    sources_invisibles: true
+    style: "percutant"
+
+# Configuration technique
+technique:
+  qualite_images:
+    resolution_print: "300dpi"
+    resolution_web: "150dpi"
+    format_principal: "jpg"
+    
+  optimisation:
+    compression_images: true
+    minification_css: true
+    optimisation_pdf: true
+    
+  accessibilite:
+    alt_text_images: true
+    contraste_minimum: "4.5:1"
+    navigation_clavier: true
+
+# Métriques et objectifs
+objectifs:
+  nombre_recettes_total: 120
+  pages_estimees: 300
+  temps_lecture_moyen: "2h par chapitre"
+  niveau_difficulte: "débutant à avancé"
+  
+  distribution_recettes:
+    bases_techniques: 10
+    nez_a_queue_bouillons: 12
+    petit_dejeuner_brunch: 10
+    express_15_minutes: 12
+    batch_cooking: 12
+    lunch_nomade: 10
+    famille_convivialite: 12
+    gourmet_invites: 10
+    plein_air_voyage: 10
+    sport_recuperation: 10
+    sauces_beurres: 12
+
+# Validation et qualité
+validation:
+  audit_obligatoire: true
+  verification_scientifique: true
+  test_recettes: true
+  relecture_complete: true
+  
+  criteres_publication:
+    coherence_stylistique: true
+    rigueur_nutritionnelle: true
+    securite_alimentaire: true
+    lisibilite: true
+    originalite: true

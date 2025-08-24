@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARNIVAUTE - Guide Culinaire Spatial - Version Impression Corrigée</title>
+    <style>
+/* CSS PAGINATION PROFESSIONNELLE CORRIGÉE - COMPATIBLE TOUS NAVIGATEURS */
+
+/* Variables CSS pour cohérence */
+:root {
+    --rouge-carnivore: #c41e3a;
+    --bleu-info: #007bff;
+    --gris-clair: #f8f9fa;
+    --gris-moyen: #666;
+    --noir-texte: #333;
+}
+
+/* Base styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: var(--noir-texte);
+    background: white;
+}
+
+.container {
+    max-width: 210mm; /* A4 width */
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* STYLES D'IMPRESSION COMPATIBLES */
+@media print {
+    @page {
+        size: A4;
+        margin: 2.5cm 2cm 2.5cm 2cm;
+        background: white;
+    }
+    
+    body {
+        background: white;
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    .container {
+        max-width: 100%;
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    /* En-tête simulé car @top-left/@top-right non supportés */
+    .print-header {
+        display: block !important;
+        position: fixed;
+        top: 0.5cm;
+        left: 2cm;
+        right: 2cm;
+        font-size: 9pt;
+        color: var(--gris-moyen);
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5pt;
+        margin-bottom: 10pt;
+    }
+    
+    .print-header-left {
+        float: left;
+    }
+    
+    .print-header-right {
+        float: right;
+        font-weight: 600;
+    }
+    
+    /* Sauts de page modernes + legacy pour compatibilité */
+    .page-titre {
+        break-after: page;
+        page-break-after: always;
+        text-align: center;
+        padding-top: 4cm;
+    }
+    
+    .toc-container {
+        break-after: page;
+        page-break-after: always;
+    }
+    
+    h1 {
+        break-before: page;
+        page-break-before: always;
+        break-after: avoid;
+        page-break-after: avoid;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    h2, h3 {
+        break-after: avoid;
+        page-break-after: avoid;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-top: 1.5em;
+    }
+    
+    /* Éviter coupures d'éléments critiques */
+    .info-saviez-vous,
+    table,
+    .recette-section,
+    .toc-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    /* Optimisations couleurs */
+    * { 
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+    
+    /* Masquer éléments web */
+    .web-only {
+        display: none !important;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* En-tête masqué par défaut, visible en impression */
+.print-header {
+    display: none;
+}
+
+/* STYLES VISUELS AMÉLIORÉS */
+
+/* Page de titre */
+.page-titre {
+    text-align: center;
+    padding: 3em 0 4em 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 15px;
+    margin-bottom: 2em;
+}
+
+h1.main-title {
+    color: var(--rouge-carnivore);
+    font-size: 3.5em;
+    font-weight: 900;
+    margin: 0.5em 0;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 4px rgba(196, 30, 58, 0.3);
+}
+
+.subtitle {
+    font-size: 1.4em;
+    color: var(--gris-moyen);
+    font-weight: 300;
+    margin: 1em 0;
+}
+
+.version-info {
+    font-style: italic;
+    color: var(--gris-moyen);
+    margin-top: 2em;
+}
+
+/* Table des matières améliorée */
+.toc-container {
+    background: linear-gradient(135deg, var(--gris-clair) 0%, #ffffff 100%);
+    border-radius: 15px;
+    padding: 40px;
+    margin: 3em 0;
+    border: 3px solid var(--rouge-carnivore);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.toc-title {
+    color: var(--rouge-carnivore);
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 2.2em;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(196, 30, 58, 0.2);
+}
+
+.toc-content {
+    max-width: 100%;
+}
+
+.toc-item {
+    display: flex;
+    align-items: baseline;
+    margin: 12px 0;
+    padding: 8px 0;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.toc-item:hover {
+    background-color: rgba(196, 30, 58, 0.05);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.toc-title-text {
+    color: var(--noir-texte);
+    font-weight: 600;
+    font-size: 1.05em;
+    flex-shrink: 0;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.toc-title-text:hover {
+    color: var(--rouge-carnivore);
+}
+
+.toc-dots {
+    flex: 1 1 auto;
+    border-bottom: 2px dotted var(--gris-moyen);
+    margin: 0 12px 4px 12px;
+    min-width: 30px;
+    height: 1px;
+}
+
+.toc-page {
+    color: var(--rouge-carnivore);
+    font-weight: 700;
+    font-size: 1.1em;
+    flex-shrink: 0;
+    margin-left: 10px;
+    min-width: 35px;
+    text-align: right;
+}
+
+/* Niveaux hiérarchiques */
+.toc-item.niveau-2 {
+    margin-left: 30px;
+    font-size: 0.95em;
+}
+
+.toc-item.niveau-2 .toc-title-text {
+    font-weight: 500;
+    color: var(--gris-moyen);
+}
+
+/* Styles de contenu */
+h1 {
+    color: var(--rouge-carnivore);
+    font-size: 2.5em;
+    margin: 2em 0 1em 0;
+    font-weight: 700;
+    border-bottom: 3px solid var(--rouge-carnivore);
+    padding-bottom: 0.3em;
+}
+
+h2 {
+    color: var(--rouge-carnivore);
+    font-size: 1.8em;
+    margin: 1.8em 0 1em 0;
+    font-weight: 600;
+}
+
+h3 {
+    color: var(--rouge-carnivore);
+    font-size: 1.4em;
+    margin: 1.5em 0 0.8em 0;
+    font-weight: 600;
+}
+
+p {
+    margin: 1em 0;
+    text-align: justify;
+}
+
+/* Encadré "Le saviez-vous" amélioré */
+.info-saviez-vous {
+    background: linear-gradient(135deg, #e7f3ff 0%, #f0f8ff 100%);
+    border-left: 5px solid var(--bleu-info);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 25px;
+    margin: 25px 0;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.15);
+    position: relative;
+}
+
+.info-saviez-vous::before {
+    content: "💡 Le Saviez-Vous ?";
+    font-weight: 700;
+    display: block;
+    margin-bottom: 12px;
+    color: var(--bleu-info);
+    font-size: 1.1em;
+}
+
+.info-saviez-vous p {
+    margin-bottom: 0;
+    font-style: italic;
+}
+
+/* Tableaux professionnels */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th {
+    background: linear-gradient(135deg, var(--rouge-carnivore) 0%, #a71728 100%);
+    color: white;
+    font-weight: 700;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.05em;
+    letter-spacing: 0.5px;
+}
+
+table td {
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 20px;
+    vertical-align: top;
+}
+
+table tbody tr:nth-child(even) {
+    background: rgba(248, 249, 250, 0.8);
+}
+
+table tbody tr:hover {
+    background: rgba(196, 30, 58, 0.05);
+}
+
+/* Instructions d'impression intégrées */
+.print-instructions {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 30px 0;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+}
+
+.print-instructions h3 {
+    color: #856404;
+    margin-top: 0;
+}
+
+.print-instructions ul {
+    margin: 0;
+    padding-left: 25px;
+}
+
+.print-instructions li {
+    margin: 8px 0;
+    font-weight: 500;
+}
+
+/* Design responsive */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    h1.main-title {
+        font-size: 2.5em;
+        letter-spacing: 2px;
+    }
+    
+    .toc-container {
+        padding: 25px 20px;
+    }
+    
+    .toc-item {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 15px 0;
+    }
+    
+    .toc-dots {
+        display: none;
+    }
+    
+    .toc-page {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
+
+/* Animations subtiles */
+.toc-item,
+.info-saviez-vous,
+.print-instructions {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+</head>
+<body>
+
+<!-- En-tête impression (invisible à l'écran) -->
+<div class="print-header">
+    <div class="print-header-left">CARNIVAUTE - Guide Culinaire Spatial</div>
+    <div class="print-header-right">Page</div>
+    <div style="clear: both;"></div>
+</div>
+
+<div class="container">
+    <!-- PAGE DE TITRE -->
+    <div class="page-titre">
+        <h1 class="main-title">CARNIVAUTE</h1>
+        <div class="subtitle">Guide Culinaire Spatial Complet</div>
+        <p style="font-size: 1.2em; margin-top: 1.5em; font-weight: 500;">120+ Recettes • Techniques Avancées • Science Nutritionnelle</p>
+        <p class="version-info">Version Impression Professionnelle Corrigée</p>
+    </div>
+
+    <!-- INSTRUCTIONS D'IMPRESSION -->
+    <div class="print-instructions no-print">
+        <h3>📄 Instructions d'Impression Professionnelle</h3>
+        <ul>
+            <li><strong>Navigateur :</strong> Chrome ou Edge (recommandé pour meilleure compatibilité)</li>
+            <li><strong>Impression :</strong> Ctrl+P → Destination "Enregistrer en PDF"</li>
+            <li><strong>Options :</strong> ✅ Cocher "Graphiques d'arrière-plan"</li>
+            <li><strong>Format :</strong> A4 (210 × 297 mm)</li>
+            <li><strong>Marges :</strong> Automatiques (2.5cm recommandées)</li>
+            <li><strong>Résultat :</strong> PDF professionnel avec numérotation et mise en page optimisée</li>
+        </ul>
+    </div>
+
+    <!-- TABLE DES MATIÈRES CORRIGÉE -->
+    <div class="toc-container">
+        <h2 class="toc-title">📚 Table des Matières</h2>
+        <div class="toc-content">
+            
+            <div class="toc-item">
+                <a href="#introduction" class="toc-title-text">🚀 Introduction - L'Odyssée Carnivore</a>
+                <span class="toc-dots"></span>
+                <span class="toc-page">1</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🧬 Les Protéines - Nano-Robots de Construction</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">12</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">⚡ Les Graisses - Carburant Quantique</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">28</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🍣 Chapitre Spécial - Le Cru</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">45</span>
+            </div>
+            
+            <div class="toc-item niveau-2">
+                <span class="toc-title-text">Tartare de Bœuf Constellation</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">47</span>
+            </div>
+            
+            <div class="toc-item niveau-2">
+                <span class="toc-title-text">Carpaccio Nébuleuse</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">49</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🥓 Chapitre Spécial - Charcuteries</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">62</span>
+            </div>
+            
+            <div class="toc-item niveau-2">
+                <span class="toc-title-text">Bacon Intersidéral</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">64</span>
+            </div>
+            
+            <div class="toc-item niveau-2">
+                <span class="toc-title-text">Jambon de l'Espace</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">67</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🌡️ Chapitre Spécial - Cuisson Sous Vide</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">78</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🥚 Chapitre Spécial - Les Œufs</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">95</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🔧 Bases et Techniques de Cuisson</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">108</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🫀 Nez-à-queue et Bouillons</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">125</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🌅 Petit Déjeuner et Brunch</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">142</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">⚡ Express 15 Minutes</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">158</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">📦 Batch Cooking</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">175</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🎒 Lunch Nomade</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">192</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">👨‍👩‍👧‍👦 Famille et Convivialité</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">208</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🌟 Gourmet et Invités</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">225</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🏔️ Plein Air et Voyage</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">242</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">💪 Sport et Récupération</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">258</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🥄 Sauces, Beurres et Assaisonnements</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">275</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">📋 Annexes - Conversions et Mesures</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">292</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">🔪 Annexes - Coupes de Viande</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">308</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">📅 Annexes - Plans Alimentaires</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">325</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">❓ Annexes - FAQ Scientifiques</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">342</span>
+            </div>
+            
+            <div class="toc-item">
+                <span class="toc-title-text">📖 Annexes - Lexique</span>
+                <span class="toc-dots"></span>
+                <span class="toc-page">358</span>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- CONTENU EXEMPLE -->
+    <h1 id="introduction">🚀 Introduction - L'Odyssée Carnivore</h1>
+
+    <p>Imaginez un instant être à bord d'une station spatiale, loin de la Terre, où chaque nutriment compte et où la performance de votre organisme détermine le succès de votre mission. Dans cet environnement extrême, l'alimentation devient bien plus qu'un simple plaisir : elle devient votre carburant de précision, votre source d'énergie optimisée, votre système de survie. C'est exactement cette philosophie qui guide l'approche <strong>Carnivaute</strong> : transformer votre cuisine en centre de contrôle nutritionnel, où chaque bouchée est calculée pour maximiser votre potentiel biologique.</p>
+
+    <div class="info-saviez-vous">
+        Le premier repas spatial de Youri Gagarine en 1961 était composé de purée de viande et de foie en tube ! Les scientifiques soviétiques avaient déjà compris l'importance des protéines animales pour les performances en environnement extrême.
+    </div>
+
+    <h2>Pourquoi cette Approche Révolutionnaire ?</h2>
+
+    <p>Le régime carnivore n'est pas une mode passagère, mais un retour aux fondamentaux de la nutrition humaine. Pendant des millions d'années, nos ancêtres ont prospéré grâce aux protéines et graisses animales, développant un système digestif parfaitement adapté à ces nutriments denses et biodisponibles.</p>
+
+    <h3>Les Piliers Scientifiques</h3>
+
+    <p>Cette approche repose sur quatre piliers fondamentaux :</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Pilier</th>
+                <th>Principe</th>
+                <th>Bénéfice</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Biocompatibilité</strong></td>
+                <td>Nutriments parfaitement assimilables</td>
+                <td>Digestion optimale, énergie stable</td>
+            </tr>
+            <tr>
+                <td><strong>Densité nutritionnelle</strong></td>
+                <td>Maximum de nutriments par calorie</td>
+                <td>Satiété durable, moins de volume</td>
+            </tr>
+            <tr>
+                <td><strong>Simplicité métabolique</strong></td>
+                <td>Élimination des anti-nutriments végétaux</td>
+                <td>Réduction de l'inflammation</td>
+            </tr>
+            <tr>
+                <td><strong>Performance optimisée</strong></td>
+                <td>Carburant premium pour l'organisme</td>
+                <td>Récupération accélérée, clarté mentale</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Comment Utiliser Ce Guide</h2>
+
+    <p>Ce guide complet vous accompagne dans votre transformation nutritionnelle selon une progression logique et scientifique. Chaque chapitre builds sur les précédents pour créer une compréhension holistique de l'approche Carnivaute.</p>
+
+    <div class="info-saviez-vous">
+        La NASA utilise des rations à base de protéines animales lyophilisées pour nourrir les astronautes lors des missions longues. Ces aliments concentrent un maximum de nutrition dans un minimum d'espace - exactement la philosophie Carnivaute !
+    </div>
+
+    <h3>Navigation et Utilisation</h3>
+
+    <p>Pour tirer le maximum de ce guide :</p>
+    <ul>
+        <li><strong>Suivez l'ordre des chapitres</strong> pour une compréhension progressive</li>
+        <li><strong>Utilisez les liens</strong> de la table des matières pour naviguer rapidement</li>
+        <li><strong>Pratiquez les techniques</strong> avant de passer aux recettes avancées</li>
+        <li><strong>Référez-vous aux annexes</strong> pour les conversions et informations techniques</li>
+    </ul>
+
+    <p><strong>Votre voyage culinaire spatial commence maintenant. Préparez-vous à redécouvrir la nutrition sous un angle révolutionnaire !</strong></p>
+
+</div>
+
+</body>
+</html>
