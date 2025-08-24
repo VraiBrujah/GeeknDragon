@@ -708,13 +708,105 @@ ${contenuAvecBullets}
 }
 
 /**
- * Sauvegarde un fichier markdown localement
- * Rôle      : Création et téléchargement d'un fichier markdown
- * Type      : fonction de sauvegarde système
+ * Sauvegarde un fichier markdown avec gestion automatique de concaténation
+ * Rôle      : Tentative d'utilisation de l'API moderne ou fallback vers téléchargement
+ * Type      : fonction de sauvegarde système avancée
  * Paramètre : nomFichier (string) - nom du fichier à créer
  * Paramètre : contenu (string) - contenu markdown du fichier
  */
 function sauvegarderFichierLocal(nomFichier, contenu) {
+    // Tentative d'utilisation de l'API File System Access (navigateurs modernes)
+    if ('showSaveFilePicker' in window) {
+        sauvegarderAvecFileSystemAPI(nomFichier, contenu);
+    } else {
+        // Fallback vers le système de téléchargement classique
+        sauvegarderAvecTelechargement(nomFichier, contenu);
+    }
+}
+
+/**
+ * Sauvegarde avec File System Access API (navigateurs modernes)
+ * Rôle      : Écriture directe de fichier avec gestion de concaténation
+ * Type      : fonction de sauvegarde moderne
+ * Paramètre : nomFichier (string), contenu (string)
+ */
+async function sauvegarderAvecFileSystemAPI(nomFichier, contenu) {
+    try {
+        // Configuration des options de sauvegarde
+        const options = {
+            suggestedName: nomFichier,
+            types: [{
+                description: 'Fichiers Markdown',
+                accept: { 'text/markdown': ['.md'] }
+            }]
+        };
+        
+        // Demande à l'utilisateur de choisir l'emplacement (une seule fois)
+        const fileHandle = await window.showSaveFilePicker(options);
+        
+        // Vérification si le fichier existe déjà
+        let contenuExistant = '';
+        try {
+            const fichierExistant = await fileHandle.getFile();
+            contenuExistant = await fichierExistant.text();
+            console.log('📄 Fichier existant détecté, ajout à la suite...');
+        } catch (e) {
+            console.log('🆕 Nouveau fichier, création...');
+        }
+        
+        // Préparation du contenu final
+        let contenuFinal;
+        if (contenuExistant) {
+            // Fichier existe : ajouter la nouvelle note sans dupliquer l'en-tête
+            const nouvelleSectionNote = extraireNouvelleSection(contenu);
+            contenuFinal = contenuExistant + '\n' + nouvelleSectionNote;
+        } else {
+            // Nouveau fichier : utiliser le contenu complet
+            contenuFinal = contenu;
+        }
+        
+        // Écriture du fichier
+        const writable = await fileHandle.createWritable();
+        await writable.write(contenuFinal);
+        await writable.close();
+        
+        console.log('✅ Fichier sauvegardé avec API moderne:', nomFichier);
+        
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            console.log('🚫 Sauvegarde annulée par l\'utilisateur');
+            return;
+        }
+        console.error('❌ Erreur API File System:', error);
+        // Fallback vers téléchargement
+        sauvegarderAvecTelechargement(nomFichier, contenu);
+    }
+}
+
+/**
+ * Extrait uniquement la section note du contenu (sans l'en-tête)
+ * Rôle      : Séparation de l'en-tête et du contenu pour concaténation
+ * Type      : fonction utilitaire
+ * Paramètre : contenu (string) - contenu markdown complet
+ * Retour    : string - seulement la section note sans en-tête
+ */
+function extraireNouvelleSection(contenu) {
+    // Chercher la première occurrence de "## 📅 Note du"
+    const indexDebutNote = contenu.indexOf('## 📅 Note du');
+    if (indexDebutNote !== -1) {
+        return contenu.substring(indexDebutNote);
+    }
+    // Si pas trouvé, retourner tout le contenu
+    return contenu;
+}
+
+/**
+ * Sauvegarde classique par téléchargement (fallback)
+ * Rôle      : Méthode de sauvegarde compatible tous navigateurs
+ * Type      : fonction de sauvegarde classique
+ * Paramètre : nomFichier (string), contenu (string)
+ */
+function sauvegarderAvecTelechargement(nomFichier, contenu) {
     try {
         // Création du blob avec le contenu markdown
         const blob = new Blob([contenu], { type: 'text/markdown;charset=utf-8' });
@@ -731,6 +823,8 @@ function sauvegarderFichierLocal(nomFichier, contenu) {
         
         // Libération de la mémoire
         URL.revokeObjectURL(lien.href);
+        
+        console.log('💾 Fichier téléchargé (mode classique):', nomFichier);
         
     } catch (error) {
         console.error('❌ Erreur sauvegarde fichier:', error);
@@ -774,8 +868,8 @@ function afficherNotesExistantes() {
         // Afficher avec contenu simulé
         displayZone.classList.remove('notes-hidden');
         
-        const contenuSimule = genererContenuNotesSimule();
-        contentZone.textContent = contenuSimule;
+        const contenuNotes = recupererNotesExistantes();
+        contentZone.textContent = contenuNotes;
         
     } else {
         // Masquer
@@ -865,6 +959,71 @@ document.addEventListener('DOMContentLoaded', function() {
         `);
     }, 500);
 });
+
+// ========================================
+// FONCTIONS AJOUTÉES POUR GESTION AUTOMATIQUE
+// ========================================
+
+/**
+ * Sauvegarde une note dans le localStorage du navigateur
+ * Rôle      : Persistence locale des notes pour consultation ultérieure
+ * Type      : fonction de sauvegarde navigateur
+ * Paramètre : nomFichier (string), contenu (string)
+ */
+function sauvegarderDansNavigateur(nomFichier, contenu) {
+    try {
+        const cleStorage = `notes_testeur_${nomFichier}`;
+        let contenuExistant = localStorage.getItem(cleStorage) || '';
+        
+        let contenuFinal;
+        if (contenuExistant) {
+            // Ajouter seulement la nouvelle section
+            const nouvelleSectionNote = extraireNouvelleSection(contenu);
+            contenuFinal = contenuExistant + '\n' + nouvelleSectionNote;
+        } else {
+            // Premier enregistrement
+            contenuFinal = contenu;
+        }
+        
+        localStorage.setItem(cleStorage, contenuFinal);
+        console.log('💾 Note sauvegardée dans le navigateur:', nomFichier);
+        
+    } catch (error) {
+        console.error('❌ Erreur sauvegarde localStorage:', error);
+    }
+}
+
+/**
+ * Récupère les notes existantes depuis le localStorage
+ * Rôle      : Lecture des notes sauvegardées localement
+ * Type      : fonction de lecture
+ * Retour    : string contenu des notes existantes
+ */
+function recupererNotesExistantes() {
+    const nomFichier = genererNomFichier();
+    const cleStorage = `notes_testeur_${nomFichier}`;
+    const contenu = localStorage.getItem(cleStorage);
+    
+    if (contenu) {
+        return contenu;
+    }
+    
+    return `Aucune note sauvegardée pour cette page.
+
+📁 Fichier: ${nomFichier}
+📍 Emplacement: Dossier "notes-utilisateur" sur votre ordinateur
+
+ℹ️ Instructions:
+• Chaque note est sauvegardée automatiquement
+• Format markdown (.md) avec URL complète
+• Nom basé sur le chemin complet: LiCUBEPRO_chemin_fichier.md
+• Notes concaténées automatiquement si fichier existe
+• Compatible navigateurs modernes avec File System Access API
+
+⚠️ Phase Alpha:
+Cette fonctionnalité sera retirée en production.
+Destinée uniquement aux testeurs internes.`;
+}
 
 // Export pour utilisation externe si nécessaire
 if (typeof module !== 'undefined' && module.exports) {
