@@ -1955,29 +1955,130 @@
     function toggleNotesDisplay() {
         const displayArea = NotesModule.elements.displayArea;
         const contentArea = NotesModule.elements.contentArea;
+        const windowElement = NotesModule.elements.window;
         
         if (displayArea.classList.contains('notes-module-hidden')) {
+            // Afficher les notes
             displayArea.classList.remove('notes-module-hidden');
             contentArea.textContent = '🔄 Chargement des notes partagées...';
             
             loadNotes().then(data => {
                 if (data.contenu && data.contenu.trim()) {
-                    const infoHeader = data.existe 
-                        ? `✅ ${data.nombreNotes} note(s) - Dernière modif: ${data.derniereModification}\n\n`
-                        : '';
-                    contentArea.textContent = infoHeader + data.contenu;
+                    // Format simplifié : Numéro, Auteur si disponible, Contenu
+                    const formattedContent = formatNotesDisplay(data);
+                    contentArea.innerHTML = formattedContent;
                 } else {
                     contentArea.textContent = `📭 Aucune note partagée pour cette page.\n\nSoyez le premier à laisser une note !`;
                 }
             });
             
         } else {
+            // Masquer les notes et forcer le redimensionnement de la fenêtre
             displayArea.classList.add('notes-module-hidden');
+            
+            // Forcer un recalcul de la taille de la fenêtre
+            setTimeout(() => {
+                windowElement.style.height = 'auto';
+                windowElement.style.minHeight = 'auto';
+            }, 50);
         }
     }
     
     function hideNotesDisplay() {
         NotesModule.elements.displayArea.classList.add('notes-module-hidden');
+    }
+    
+    /**
+     * Formate l'affichage des notes de manière simplifiée
+     * Affiche seulement : Numéro, Auteur (si connecté), Contenu
+     * @param {object} data - Données des notes depuis le backend
+     * @return {string} HTML formaté pour l'affichage simplifié
+     */
+    function formatNotesDisplay(data) {
+        if (!data.contenu || !data.contenu.trim()) {
+            return `<div style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        📭 Aucune note partagée pour cette page.<br>
+                        Soyez le premier à laisser une note !
+                    </div>`;
+        }
+        
+        // Parser le contenu Markdown des notes
+        const notes = parseNotesContent(data.contenu);
+        
+        if (notes.length === 0) {
+            return `<div style="color: rgba(255,255,255,0.7); text-align: center; padding: 20px;">
+                        📭 Aucune note trouvée.
+                    </div>`;
+        }
+        
+        // Générer l'affichage simplifié
+        let html = `<div style="color: rgba(255,255,255,0.8); font-size: 12px; margin-bottom: 15px; text-align: center;">
+                        ✅ ${notes.length} note(s) trouvée(s)
+                    </div>`;
+        
+        notes.forEach((note, index) => {
+            const noteNumber = index + 1;
+            const author = note.author ? `<span style="color: #4CAF50; font-weight: 600;">👤 ${escapeHtml(note.author)}</span>` : '';
+            const content = escapeHtml(note.content).replace(/\n/g, '<br>');
+            
+            html += `<div style="background: rgba(255,255,255,0.05); border-left: 3px solid var(--notes-primary, #007BFF); 
+                            padding: 15px; margin-bottom: 15px; border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="color: var(--notes-primary, #007BFF); font-weight: 600; font-size: 13px;">
+                                📝 Note #${noteNumber}
+                            </span>
+                            ${author}
+                        </div>
+                        <div style="color: rgba(255,255,255,0.9); line-height: 1.5; font-size: 14px;">
+                            ${content}
+                        </div>
+                    </div>`;
+        });
+        
+        return html;
+    }
+    
+    /**
+     * Parse le contenu Markdown des notes pour extraire les informations essentielles
+     * @param {string} markdown - Contenu Markdown complet des notes
+     * @return {Array} Liste des notes avec auteur et contenu
+     */
+    function parseNotesContent(markdown) {
+        const notes = [];
+        
+        // Diviser par les sections de notes (commençant par ## 📅)
+        const sections = markdown.split(/## 📅 \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/);
+        
+        sections.forEach(section => {
+            if (!section.trim()) return;
+            
+            // Extraire l'auteur s'il existe
+            const authorMatch = section.match(/\*\*👤 Auteur :\*\* ([^\n•]+)/);
+            const author = authorMatch ? authorMatch[1].trim() : null;
+            
+            // Extraire le contenu de la note (après le dernier "• " ou à la fin)
+            const contentMatch = section.match(/• ([^•]+)$/);
+            let content = '';
+            
+            if (contentMatch) {
+                content = contentMatch[1].trim();
+            } else {
+                // Si pas de pattern "• ", prendre la dernière ligne non vide
+                const lines = section.split('\n').filter(line => line.trim());
+                if (lines.length > 0) {
+                    content = lines[lines.length - 1].replace(/^[•\-\*]\s*/, '').trim();
+                }
+            }
+            
+            if (content) {
+                notes.push({
+                    author: author,
+                    content: content
+                });
+            }
+        });
+        
+        return notes;
     }
     
     function refreshNotes() {
