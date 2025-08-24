@@ -146,9 +146,6 @@ function sauvegarderNote($config) {
     if (!empty($metadonnes['titre'])) {
         $enTeteNote .= "**📄 Titre page :** {$metadonnes['titre']}\n";
     }
-    if (!empty($metadonnes['author']) && $metadonnes['author'] !== '') {
-        $enTeteNote .= "**👤 Auteur :** {$metadonnes['author']}\n";
-    }
     if (!empty($metadonnes['categorie'])) {
         $enTeteNote .= "**🏷️ Catégorie :** {$metadonnes['categorie']}\n";
     }

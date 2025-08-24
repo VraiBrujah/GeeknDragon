@@ -339,96 +339,6 @@
         return text.replace(/[&<>"']/g, m => map[m]);
     }
     
-    /**
-     * Extrait les notes individuelles depuis le format Markdown du backend
-     * @param {string} markdownContent - Contenu Markdown complet
-     * @returns {Array} - Tableau des notes parsées
-     */
-    function extraireNotesDepuisMarkdown(markdownContent) {
-        if (!markdownContent || typeof markdownContent !== 'string') {
-            return [];
-        }
-        
-        const notes = [];
-        
-        // Parser les sections de notes (format ## 📅 timestamp)
-        const sectionsNotes = markdownContent.split(/##\s*📅\s*/);
-        
-        for (let i = 1; i < sectionsNotes.length; i++) {
-            const section = sectionsNotes[i].trim();
-            if (!section) continue;
-            
-            try {
-                // Extraire le timestamp (première ligne)
-                const lignes = section.split('\n');
-                const timestamp = lignes[0] ? lignes[0].trim() : '';
-                
-                // Trouver le contenu de la note (après les métadonnées)
-                let contenuNote = '';
-                let auteur = '';
-                let foundContent = false;
-                
-                for (let j = 1; j < lignes.length; j++) {
-                    const ligne = lignes[j].trim();
-                    
-                    // Ignorer les métadonnées (lignes qui commencent par **)
-                    if (ligne.startsWith('**') && ligne.endsWith('**')) {
-                        // Essayer d'extraire l'auteur si présent dans les métadonnées
-                        if (ligne.includes('👤 Auteur') || ligne.includes('author') || ligne.includes('Auteur')) {
-                            const match = ligne.match(/:\s*(.+?)\s*\*\*$/);
-                            if (match && match[1] && match[1] !== 'undefined' && match[1].trim() !== '') {
-                                auteur = match[1].trim();
-                            }
-                        }
-                        continue;
-                    }
-                    
-                    // Ignorer les lignes vides avant le contenu
-                    if (!ligne && !foundContent) continue;
-                    
-                    // Ignorer les séparateurs
-                    if (ligne === '---') continue;
-                    
-                    // Le contenu commence par • (bullet point)
-                    if (ligne.startsWith('•')) {
-                        contenuNote += (contenuNote ? '\n' : '') + ligne.substring(1).trim();
-                        foundContent = true;
-                    } else if (foundContent && ligne) {
-                        // Continuer le contenu si on a déjà commencé
-                        contenuNote += (contenuNote ? '\n' : '') + ligne;
-                    }
-                }
-                
-                // Ajouter la note si elle a du contenu
-                if (contenuNote.trim()) {
-                    notes.push({
-                        content: contenuNote.trim(),
-                        author: auteur || null,
-                        timestamp: timestamp,
-                        rawTimestamp: timestamp
-                    });
-                }
-                
-            } catch (error) {
-                console.warn('Erreur lors du parsing de la section note:', error);
-            }
-        }
-        
-        // Trier les notes par timestamp (plus récentes en premier)
-        notes.sort((a, b) => {
-            try {
-                const dateA = new Date(a.timestamp);
-                const dateB = new Date(b.timestamp);
-                return dateB - dateA;
-            } catch (e) {
-                return 0;
-            }
-        });
-        
-        console.log(`📋 ${notes.length} note(s) extraite(s) du Markdown`);
-        return notes;
-    }
-    
     // ========================================
     // GESTION DES ÉVÉNEMENTS
     // ========================================
@@ -656,19 +566,12 @@
         }
         
         try {
-            // Préparer les métadonnées pour le backend PHP existant
-            const metadonnes = {
-                titre: document.title,
-                author: NotesModule.currentUser ? NotesModule.currentUser.name : '',
-                userAgent: navigator.userAgent,
-                timestamp: new Date().toISOString()
-            };
-            
             const donnees = new FormData();
             donnees.append('action', 'save');
-            donnees.append('urlComplete', window.location.href);
-            donnees.append('contenu', contenu);
-            donnees.append('metadonnes', JSON.stringify(metadonnes));
+            donnees.append('note', contenu);
+            donnees.append('author', NotesModule.currentUser ? NotesModule.currentUser.name : '');
+            donnees.append('page_url', window.location.href);
+            donnees.append('page_title', document.title);
             
             const response = await fetch(NotesModule.config.apiPath, {
                 method: 'POST',
@@ -743,15 +646,13 @@
         }
         
         try {
-            const response = await fetch(`${NotesModule.config.apiPath}?action=load&urlComplete=${encodeURIComponent(window.location.href)}`);
+            const response = await fetch(`${NotesModule.config.apiPath}?action=load&page_url=${encodeURIComponent(window.location.href)}`);
             
             if (response.ok) {
                 const result = await response.json();
                 
                 if (result.success) {
-                    // Le backend PHP retourne les notes dans result.data
-                    const notesRaw = result.data || '';
-                    NotesModule.notesData = extraireNotesDepuisMarkdown(notesRaw);
+                    NotesModule.notesData = result.data.notes || [];
                     afficherNotesEpurees(NotesModule.notesData);
                     console.log('🔄 Notes actualisées:', NotesModule.notesData.length);
                 } else {
