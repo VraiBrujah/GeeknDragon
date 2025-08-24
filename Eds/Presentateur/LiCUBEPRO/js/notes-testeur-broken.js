@@ -1,10 +1,10 @@
 /**
  * =====================================================
- * SYSTÈME DE NOTES TESTEUR - VERSION CORRIGÉE
+ * SYSTÈME DE NOTES TESTEUR - VERSION SIMPLIFIÉE
  * =====================================================
  * 
- * Version sans dialogue fichier - sauvegarde automatique
- * avec corrections persistence et interface.
+ * Version sans dialogue fichier - sauvegarde automatique uniquement
+ * dans localStorage avec possibilité d'export manuel.
  */
 
 // ========================================
@@ -26,7 +26,7 @@ const configNotes = {
 // ========================================
 
 function creerFenetreNotes() {
-    console.log('📝 Initialisation système notes testeur corrigé...');
+    console.log('📝 Initialisation système notes testeur simplifié...');
     
     detecterContextePage();
     
@@ -89,16 +89,16 @@ Sauvegarde automatique sans dialogue fichier."
             <!-- Actions -->
             <div class="notes-actions">
                 <button id="notes-save-btn" class="notes-save-btn">
-                    💾 Save
+                    💾 Sauvegarder
                 </button>
                 <button id="notes-view-btn" class="notes-view-btn">
-                    👁️ Voir
+                    👁️ Voir Notes
                 </button>
                 <button id="notes-export-btn" class="notes-export-btn">
-                    📤 Export
+                    📤 Exporter .md
                 </button>
                 <button id="notes-clear-btn" class="notes-clear-btn">
-                    🗑️ Clear
+                    🗑️ Effacer
                 </button>
             </div>
             
@@ -273,7 +273,6 @@ function injecterStylesNotes() {
             line-height: 1.5;
             resize: vertical;
             transition: border-color 0.2s ease;
-            box-sizing: border-box;
         }
         
         .notes-textarea:focus {
@@ -290,23 +289,20 @@ function injecterStylesNotes() {
         .notes-actions {
             padding: 0 20px 20px;
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         
         .notes-actions button {
             flex: 1;
-            min-width: 70px;
-            padding: 8px 6px;
+            min-width: 80px;
+            padding: 10px 12px;
             border: none;
             border-radius: 10px;
             font-weight: 600;
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
         
         .notes-save-btn {
@@ -542,7 +538,7 @@ function fermerFenetreNotes() {
 }
 
 // ========================================
-// SAUVEGARDE NOTES (CORRIGÉ)
+// SAUVEGARDE NOTES (SIMPLIFIÉ)
 // ========================================
 
 function sauvegarderNote() {
@@ -575,7 +571,7 @@ function sauvegarderNote() {
     
     const noteFormatee = `## 📅 ${timestamp}\n\n${contenuAvecBullets}\n\n---\n\n`;
     
-    // Sauvegarde UNIQUEMENT locale avec clés multiples
+    // Sauvegarde UNIQUEMENT locale
     sauvegarderDansNavigateur(nomFichier, noteFormatee);
     
     textarea.value = '';
@@ -586,25 +582,16 @@ function sauvegarderNote() {
 
 function sauvegarderDansNavigateur(nomFichier, contenu) {
     try {
-        // Utiliser plusieurs clés pour maximiser la persistence
-        const cles = [
-            `LICUBEPRO_NOTES_${nomFichier.replace('.md', '')}`, // Clé principale
-            `notes_alpha_global_${nomFichier}`, // Clé secondaire
-            `notes_${window.location.host}_${nomFichier}` // Clé avec domaine
-        ];
+        const cleStorage = `notes_testeur_${nomFichier}`;
+        let contenuExistant = localStorage.getItem(cleStorage) || '';
         
-        for (const cle of cles) {
-            let contenuExistant = localStorage.getItem(cle) || '';
-            const contenuFinal = contenuExistant + contenu;
-            localStorage.setItem(cle, contenuFinal);
-            console.log('💾 Note sauvée avec clé:', cle);
-        }
+        const contenuFinal = contenuExistant + contenu;
         
-        console.log('✅ Note sauvée avec', cles.length, 'clés différentes');
+        localStorage.setItem(cleStorage, contenuFinal);
+        console.log('💾 Note ajoutée automatiquement:', nomFichier);
         
     } catch (error) {
         console.error('❌ Erreur sauvegarde localStorage:', error);
-        alert('Erreur sauvegarde : ' + error.message);
     }
 }
 
@@ -612,7 +599,7 @@ function afficherConfirmationSauvegarde() {
     const boutonSave = document.getElementById('notes-save-btn');
     const texteOriginal = boutonSave.textContent;
     
-    boutonSave.textContent = '✅ OK!';
+    boutonSave.textContent = '✅ Sauvegardé!';
     boutonSave.style.background = 'linear-gradient(135deg, #28A745 0%, #20B2AA 100%)';
     
     setTimeout(() => {
@@ -622,7 +609,7 @@ function afficherConfirmationSauvegarde() {
 }
 
 // ========================================
-// AFFICHAGE ET EXPORT NOTES (CORRIGÉ)
+// AFFICHAGE ET EXPORT NOTES
 // ========================================
 
 function afficherNotesExistantes() {
@@ -646,77 +633,33 @@ function masquerAffichageNotes() {
 
 function recupererNotesExistantes() {
     const nomFichier = genererNomFichier();
-    
-    // Essayer plusieurs clés possibles
-    const cles = [
-        `LICUBEPRO_NOTES_${nomFichier.replace('.md', '')}`,
-        `notes_alpha_global_${nomFichier}`,
-        `notes_${window.location.host}_${nomFichier}`,
-        `notes_testeur_${nomFichier}`
-    ];
-    
-    let contenu = '';
-    let cleUtilisee = '';
-    
-    for (const cle of cles) {
-        const temp = localStorage.getItem(cle);
-        if (temp) {
-            contenu = temp;
-            cleUtilisee = cle;
-            console.log('📄 Notes trouvées avec clé:', cle);
-            break;
-        }
-    }
+    const cleStorage = `notes_testeur_${nomFichier}`;
+    const contenu = localStorage.getItem(cleStorage);
     
     if (contenu) {
-        return `✅ Notes trouvées (clé: ${cleUtilisee})\n\n${contenu}`;
+        return contenu;
     }
     
-    // Debug : afficher toutes les clés localStorage disponibles
-    const toutesLesCles = [];
-    for (let i = 0; i < localStorage.length; i++) {
-        const cle = localStorage.key(i);
-        if (cle && (cle.includes('notes') || cle.includes('LICUBE'))) {
-            toutesLesCles.push(cle);
-        }
-    }
-    
-    return `❌ Aucune note trouvée pour cette page.
+    return `Aucune note sauvegardée pour cette page.
 
-📁 Fichier recherché: ${nomFichier}
-🔍 Clés testées:
-${cles.map(c => '• ' + c).join('\n')}
-
-📄 Clés liées aux notes dans localStorage:
-${toutesLesCles.length > 0 ? toutesLesCles.map(c => '• ' + c).join('\n') : '• Aucune'}
+📁 Fichier: ${nomFichier}
+💾 Sauvegarde: Automatique dans le navigateur
 
 ℹ️ Instructions:
-• Sauvegardez d'abord une note avec "💾 Save"
-• Puis utilisez "👁️ Voir" pour l'afficher
-• Utilisez "📤 Export" pour télécharger le fichier
+• Chaque note est sauvegardée automatiquement
+• Format markdown (.md) simplifié
+• Pas de dialogue fichier
+• Export manuel avec bouton "Exporter .md"
 
-⚠️ Phase Alpha - Testeurs internes uniquement`;
+⚠️ Phase Alpha:
+Cette fonctionnalité sera retirée en production.
+Destinée uniquement aux testeurs internes.`;
 }
 
 function exporterNotesVersfichier() {
     const nomFichier = genererNomFichier();
-    
-    // Utiliser la même logique que pour l'affichage
-    const cles = [
-        `LICUBEPRO_NOTES_${nomFichier.replace('.md', '')}`,
-        `notes_alpha_global_${nomFichier}`,
-        `notes_${window.location.host}_${nomFichier}`,
-        `notes_testeur_${nomFichier}`
-    ];
-    
-    let contenuNotes = '';
-    for (const cle of cles) {
-        const temp = localStorage.getItem(cle);
-        if (temp) {
-            contenuNotes = temp;
-            break;
-        }
-    }
+    const cleStorage = `notes_testeur_${nomFichier}`;
+    const contenuNotes = localStorage.getItem(cleStorage);
     
     if (!contenuNotes) {
         alert('⚠️ Aucune note à exporter pour cette page.');
@@ -751,7 +694,7 @@ ${contenuNotes}`;
         const boutonExport = document.getElementById('notes-export-btn');
         const texteOriginal = boutonExport.textContent;
         
-        boutonExport.textContent = '✅ OK!';
+        boutonExport.textContent = '✅ Exporté!';
         setTimeout(() => {
             boutonExport.textContent = texteOriginal;
         }, 2000);
@@ -780,23 +723,21 @@ function effacerSaisie() {
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🧪 === INITIALISATION NOTES TESTEUR CORRIGÉ ===');
+    console.log('🧪 === INITIALISATION NOTES TESTEUR SIMPLIFIÉ ===');
     
     setTimeout(() => {
         creerFenetreNotes();
         
         console.log(`
-🧪 SYSTÈME NOTES TESTEUR - VERSION CORRIGÉE
-==========================================
+🧪 SYSTÈME NOTES TESTEUR - VERSION SIMPLE
+========================================
 • Bouton flottant en haut à droite: 📝
 • Raccourci: Ctrl+Shift+N
 • Fichier: ${genererNomFichier()}
-• Sauvegarde: Automatique multi-clés localStorage
-• Export: Bouton "Export" pour télécharger .md
-• Persistence: Améliorée entre fenêtres/sessions
-• Interface: Boutons raccourcis pour éviter débordement
+• Sauvegarde: Automatique sans dialogue
+• Export: Bouton "Exporter .md" quand souhaité
 • Destiné aux testeurs internes uniquement
-==========================================
+========================================
         `);
     }, 500);
 });
