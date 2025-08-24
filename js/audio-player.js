@@ -54,10 +54,13 @@ class GeeknDragonAudioPlayer {
     
     async init() {
         console.log('🎵 Initialisation du lecteur audio Geek&Dragon...');
-        
+
         // Initialiser Howler
         this.initHowler();
-        
+
+        // Créer l'élément audio avec configuration par défaut
+        this.createAudioElement();
+
         // Créer l'interface
         this.createPlayerInterface();
         
@@ -109,7 +112,14 @@ class GeeknDragonAudioPlayer {
         Howler.autoUnlock = true;
         Howler.volume(this.state.volume);
     }
-    
+
+    createAudioElement() {
+        this.audioElement = document.createElement('audio');
+        this.audioElement.preload = 'metadata';
+        this.audioElement.muted = true;
+        this.audioElement.playsInline = true;
+    }
+
     createPlayerInterface() {
         // Vérifier si le lecteur existe déjà
         if (document.querySelector('.gnd-audio-player')) {
@@ -547,6 +557,9 @@ class GeeknDragonAudioPlayer {
     setupAutoplayFallback() {
         const oneTimePlay = () => {
             if (!this.state.isPlaying && this.sound) {
+                if (this.audioElement) {
+                    this.audioElement.muted = false;
+                }
                 this.sound.play();
                 this.startTimeUpdater();
                 this.state.isPlaying = true;
