@@ -209,6 +209,21 @@
                         </div>
                     </article>
                 </div>
+                <!-- Vidéo de présentation -->
+                <div class="video-section">
+                    <button type="button" class="video-thumbnail" aria-controls="video-modal" aria-label="Lire la vidéo de Pierre-Louis (Es-Tu Game ?) — L'Économie de D&D 💰 Conseils Jeux de Rôle" data-video-open>
+                        <img src="https://img.youtube.com/vi/y96eAFtC4xE/hqdefault.jpg" alt="Miniature de la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »">
+                    </button>
+                </div>
+
+                <!-- Modal vidéo -->
+                <div id="video-modal" class="video-modal hidden" role="dialog" aria-modal="true" aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »" tabindex="-1">
+                    <div class="video-container">
+                        <button type="button" class="close-btn" aria-label="Fermer la vidéo" data-video-close>&times;</button>
+                        <iframe src="https://www.youtube.com/embed/y96eAFtC4xE?start=624&rel=0&modestbranding=1" title="L’Économie de D&D 💰 Conseils Jeux de Rôle" allowfullscreen tabindex="-1"></iframe>
+                    </div>
+                </div>
+
                 <!-- Convertisseur de monnaie -->
                 <div id="currency-converter">
                     <h4 data-i18n="shop.converter.title">Convertisseur de monnaie</h4>
