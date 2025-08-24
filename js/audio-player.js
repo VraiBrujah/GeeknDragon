@@ -330,11 +330,14 @@ class GeeknDragonAudioPlayer {
         
         const actualIndex = this.state.shuffleOrder[index] || index;
         const trackPath = this.state.playlist[actualIndex];
-        
+
         this.audioElement.src = trackPath;
         this.audioElement.load();
         this.state.currentTrack = index;
-        
+        if (this.state.isPlaying) {
+            this.audioElement.play().catch(() => this.setupAutoplayFallback());
+        }
+
         const fileName = trackPath.split('/').pop().replace('.mp3', '');
         this.updateTrackInfo(fileName);
     }
