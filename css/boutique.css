@@ -829,6 +829,10 @@
     z-index: 1000;
 }
 
+.video-modal.hidden {
+    display: none;
+}
+
 .video-container {
     position: relative;
     width: 90%;
