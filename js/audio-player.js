@@ -15,7 +15,6 @@ class GeeknDragonAudioPlayer {
         // Préférences utilisateur
         const storedVolume = parseFloat(localStorage.getItem('gnd-audio-volume')) || 0.15;
         const collapsedPref = localStorage.getItem('gnd-audio-collapsed');
-        const isMobile = window.innerWidth <= 768;
 
         this.state = {
             isPlaying: false,
@@ -23,12 +22,12 @@ class GeeknDragonAudioPlayer {
             currentTime: 0,
             volume: storedVolume,
             playlist: [],
-            // Sur mobile, réduire par défaut le lecteur si aucune préférence n'est stockée
-            isCollapsed: collapsedPref !== null ? collapsedPref === 'true' : isMobile,
+            // Ne jamais réduire automatiquement; respecter seulement la préférence
+            isCollapsed: collapsedPref !== null ? collapsedPref === 'true' : false,
             currentPage: this.getCurrentPage(),
             shuffleOrder: [],
             isLoaded: false,
-            quickStartFile: 'hero-intro.mp3', // Fichier de démarrage rapide
+            quickStartFile: 'Agdon.mp3', // Fichier de démarrage rapide présent dans le dossier principal
             
             // Nouvelles propriétés pour la gestion intelligente
             currentPagePlaylist: [], // Musiques du dossier de la page courante
@@ -41,6 +40,8 @@ class GeeknDragonAudioPlayer {
         this.playerElement = null;
         this.currentDirectory = '';
         this.timeUpdater = null;
+        this.analyser = null;
+        this.visualizerData = null;
         
         this.init();
     }
@@ -67,13 +68,10 @@ class GeeknDragonAudioPlayer {
         // Vérifier si on a changé de page
         await this.handlePageChange();
         
-        // Démarrage rapide avec fichier hero (si pas de restauration)
+        // Démarrage rapide ou scan complet
         if (!this.state.isPlaying) {
             await this.quickStart();
         }
-        
-        // Scanner les musiques en arrière-plan
-        this.scanMusicFiles();
         
         console.log('✅ Lecteur audio Geek&Dragon initialisé');
     }
@@ -133,7 +131,9 @@ class GeeknDragonAudioPlayer {
                 <div class="player-toggle" onclick="window.gndAudioPlayer.toggleCollapse()">
                     <i class="fas fa-music"></i>
                 </div>
-                
+
+                <canvas class="gnd-visualizer" id="gndVisualizer" width="180" height="30"></canvas>
+
                 <div class="player-controls">
                     <div class="controls-row">
                         <button class="control-btn play-btn" onclick="window.gndAudioPlayer.togglePlay()" title="Lecture/Pause">
@@ -149,6 +149,10 @@ class GeeknDragonAudioPlayer {
                             <i class="fas fa-chevron-down"></i>
                         </button>
                     </div>
+                    <div class="track-info">
+                        <span class="track-name">--</span>
+                        <span class="track-counter"></span>
+                    </div>
                 </div>
             </div>
         `;
@@ -162,7 +166,10 @@ class GeeknDragonAudioPlayer {
     
     async quickStart() {
         // Essayer de charger le fichier de démarrage rapide
-        const quickStartPath = `musique/${this.state.currentPage}/${this.state.quickStartFile}`;
+        const dir = this.state.currentPage === 'index'
+            ? 'musique'
+            : `musique/${this.state.currentPage}`;
+        const quickStartPath = `${dir}/${this.state.quickStartFile}`;
         
         try {
             // Tester si le fichier existe
@@ -173,14 +180,20 @@ class GeeknDragonAudioPlayer {
                 this.loadTrack(0);
                 this.updatePlayButton();
                 console.log('🎵 Démarrage rapide avec:', this.state.quickStartFile);
+                // Scanner en arrière-plan pour charger les autres pistes
+                this.scanMusicFiles();
                 return;
             }
         } catch (e) {
             console.log('ℹ️ Fichier de démarrage rapide non trouvé, passage au scan complet');
+            await this.scanMusicFiles();
+            return;
         }
-        
-        // Si pas de fichier de démarrage, scanner directement
-        await this.scanMusicFiles();
+
+        // Si le fichier existe mais problème de lecture, scanner ensuite
+        if (this.state.playlist.length === 0) {
+            await this.scanMusicFiles();
+        }
     }
     
     async scanMusicFiles() {
@@ -319,6 +332,16 @@ class GeeknDragonAudioPlayer {
             onend: () => this.playNext(),
             onplayerror: () => this.setupAutoplayFallback()
         });
+
+        // Préparer l'analyseur pour le visualiseur
+        if (!this.analyser) {
+            const ctx = Howler.ctx;
+            this.analyser = ctx.createAnalyser();
+            this.analyser.fftSize = 64;
+            Howler.masterGain.connect(this.analyser);
+            this.visualizerData = new Uint8Array(this.analyser.frequencyBinCount);
+        }
+        this.startVisualizer();
 
         if (this.state.currentTime > 0) {
             this.sound.once('load', () => {
@@ -585,6 +608,26 @@ class GeeknDragonAudioPlayer {
             this.timeUpdater = null;
         }
     }
+
+    startVisualizer() {
+        const canvas = this.playerElement.querySelector('#gndVisualizer');
+        if (!canvas || !this.analyser) return;
+        const ctx = canvas.getContext('2d');
+        const draw = () => {
+            requestAnimationFrame(draw);
+            this.analyser.getByteFrequencyData(this.visualizerData);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const barWidth = canvas.width / this.visualizerData.length;
+            let x = 0;
+            for (let i = 0; i < this.visualizerData.length; i++) {
+                const barHeight = (this.visualizerData[i] / 255) * canvas.height;
+                ctx.fillStyle = '#d4af37';
+                ctx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
+                x += barWidth;
+            }
+        };
+        draw();
+    }
     
     updatePlayerInterface() {
         // Mettre à jour l'interface si elle existe déjà
@@ -649,6 +692,11 @@ class GeeknDragonAudioPlayer {
             .gnd-audio-player.collapsed .player-controls {
                 display: none;
             }
+
+            .gnd-audio-player.collapsed .gnd-visualizer,
+            .gnd-audio-player.collapsed .track-info {
+                display: none;
+            }
             
             .player-toggle {
                 position: absolute;
@@ -690,26 +738,24 @@ class GeeknDragonAudioPlayer {
             
             
             .collapse-btn {
-                background: rgba(0, 0, 0, 0.3);
-                border: 1px solid var(--secondary-color, #d4af37);
-                color: var(--secondary-color, #d4af37);
+                background: var(--secondary-color, #d4af37);
+                border: none;
+                color: var(--dark-bg, #1a1a1a);
                 cursor: pointer;
                 font-size: 0.8rem;
-                width: 25px;
-                height: 25px;
+                width: 32px;
+                height: 32px;
                 border-radius: 4px;
-                transition: all var(--transition, 0.3s ease);
+                transition: background 0.3s ease;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             }
-            
+
             .collapse-btn:hover {
-                background: var(--secondary-color, #d4af37);
-                color: var(--dark-bg, #1a1a1a);
-                transform: scale(1.1);
+                background: #e5c158;
             }
-            
+
             .controls-row {
                 display: flex;
                 align-items: center;
@@ -720,37 +766,33 @@ class GeeknDragonAudioPlayer {
                 border-radius: 8px;
                 border: 1px solid rgba(212, 175, 55, 0.3);
             }
-            
+
             .control-btn {
-                background: rgba(0, 0, 0, 0.6);
-                color: var(--secondary-color, #d4af37);
-                border: 2px solid var(--secondary-color, #d4af37);
-                width: 35px;
-                height: 35px;
-                border-radius: 50%;
+                background: var(--secondary-color, #d4af37);
+                color: var(--dark-bg, #1a1a1a);
+                border: none;
+                width: 32px;
+                height: 32px;
+                border-radius: 4px;
                 cursor: pointer;
                 font-size: 0.9rem;
-                transition: all var(--transition, 0.3s ease);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+                transition: background 0.3s ease;
             }
-            
+
             .control-btn:hover {
-                background: var(--secondary-color, #d4af37);
-                color: var(--dark-bg, #1a1a1a);
-                transform: scale(1.1);
-                box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+                background: #e5c158;
             }
-            
+
             .volume-control {
                 display: flex;
                 align-items: center;
                 flex: 1;
                 margin: 0 0.5rem;
             }
-            
+
             .volume-slider {
                 flex: 1;
                 height: 4px;
@@ -760,7 +802,7 @@ class GeeknDragonAudioPlayer {
                 border: 1px solid var(--secondary-color, #d4af37);
                 cursor: pointer;
             }
-            
+
             .volume-slider::-webkit-slider-thumb {
                 appearance: none;
                 width: 12px;
@@ -768,56 +810,30 @@ class GeeknDragonAudioPlayer {
                 background: var(--secondary-color, #d4af37);
                 border-radius: 50%;
                 cursor: pointer;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-                transition: all var(--transition, 0.3s ease);
             }
-            
-            .volume-slider::-webkit-slider-thumb:hover {
-                transform: scale(1.3);
-                box-shadow: 0 0 6px rgba(212, 175, 55, 0.8);
+
+            .gnd-visualizer {
+                width: 100%;
+                height: 30px;
+                display: block;
+                background: rgba(0, 0, 0, 0.4);
+                border-bottom: 1px solid var(--secondary-color, #d4af37);
             }
-            
-            
-            /* Responsive */
-            @media (max-width: 768px) {
-                .gnd-audio-player {
-                    bottom: 10px;
-                    right: 10px;
-                    min-width: 120px;
-                    max-width: 120px;
-                    background: rgba(34, 26, 14, 0.7);
-                }
-                
-                .gnd-audio-player.collapsed {
-                    min-width: 45px;
-                    max-width: 45px;
-                }
-                
-                .player-controls {
-                    padding: 0.75rem;
-                }
-                
-                .controls-row {
-                    gap: 0.5rem;
-                }
-                
-                .control-btn {
-                    width: 30px;
-                    height: 30px;
-                    font-size: 0.8rem;
-                }
-                
-                .collapse-btn {
-                    width: 20px;
-                    height: 20px;
-                    font-size: 0.7rem;
-                }
-                
-                .player-toggle {
-                    width: 35px;
-                    height: 35px;
-                    font-size: 0.9rem;
-                }
+
+            .track-info {
+                margin-top: 0.5rem;
+                text-align: center;
+                font-size: 0.75rem;
+            }
+
+            .track-name {
+                display: block;
+                font-weight: bold;
+            }
+
+            .track-counter {
+                display: block;
+                opacity: 0.8;
             }
             
             /* Animations */
