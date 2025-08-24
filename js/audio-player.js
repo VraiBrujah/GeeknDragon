@@ -8,13 +8,19 @@
 
 class GeeknDragonAudioPlayer {
     constructor() {
+        // Préférences utilisateur
+        const storedVolume = parseFloat(localStorage.getItem('gnd-audio-volume')) || 0.15;
+        const collapsedPref = localStorage.getItem('gnd-audio-collapsed');
+        const isMobile = window.innerWidth <= 768;
+
         this.state = {
             isPlaying: false,
             currentTrack: 0,
             currentTime: 0,
-            volume: parseFloat(localStorage.getItem('gnd-audio-volume')) || 0.15,
+            volume: storedVolume,
             playlist: [],
-            isCollapsed: localStorage.getItem('gnd-audio-collapsed') === 'true',
+            // Sur mobile, réduire par défaut le lecteur si aucune préférence n'est stockée
+            isCollapsed: collapsedPref !== null ? collapsedPref === 'true' : isMobile,
             currentPage: this.getCurrentPage(),
             shuffleOrder: [],
             isLoaded: false,
@@ -770,8 +776,9 @@ class GeeknDragonAudioPlayer {
                 .gnd-audio-player {
                     bottom: 10px;
                     right: 10px;
-                    min-width: 180px;
-                    max-width: 180px;
+                    min-width: 120px;
+                    max-width: 120px;
+                    background: rgba(34, 26, 14, 0.7);
                 }
                 
                 .gnd-audio-player.collapsed {
