@@ -100,7 +100,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
             Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.
           </p>
           <div class="text-center">
-            <a href="<?= langUrl('actualites/es-tu-game.php') ?>" class="btn btn-primary" data-i18n="news.flim2025.read">Lire l’article</a>
+            <a href="<?= langUrl('actualites/es-tu-game.html') ?>" class="btn btn-primary" data-i18n="news.flim2025.read">Lire l’article</a>
           </div>
         </article>
     

@@ -239,7 +239,7 @@ class ReportGenerator
             '/lot25.php' => 'Produit La Monnaie des Cinq Royaumes',
             '/lot50-essence.php' => 'Produit L\'Essence du Marchand',
             '/lot50-tresorerie.php' => 'Produit La Trésorerie du Seigneur',
-            '/actualites/es-tu-game.php' => 'Article Es-tu Game FLIM 2025'
+            '/actualites/es-tu-game.html' => 'Article Es-tu Game FLIM 2025'
         ];
     }
     

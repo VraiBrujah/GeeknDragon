@@ -67,7 +67,7 @@ class LinkChecker
             'lot50-essence.php',
             'lot50-tresorerie.php',
             'merci.php',
-            'actualites/es-tu-game.php'
+            'actualites/es-tu-game.html'
         ];
         
         foreach ($phpFiles as $file) {
