@@ -105,6 +105,7 @@ class GeeknDragonAudioPlayer {
         this.audioElement = document.querySelector('#musique-fond') || document.createElement('audio');
         this.audioElement.id = 'musique-fond';
         this.audioElement.preload = 'auto';
+        this.audioElement.autoplay = true;
         this.audioElement.volume = this.state.volume;
         
         if (!document.querySelector('#musique-fond')) {
@@ -238,8 +239,19 @@ class GeeknDragonAudioPlayer {
             // Si on n'avait que le fichier de démarrage, charger la première piste
             if (this.state.playlist.length > 1 || !this.state.isPlaying) {
                 this.loadTrack(0);
+
+                if (!this.state.isPlaying) {
+                    try {
+                        await this.audioElement.play();
+                        this.state.isPlaying = true;
+                        this.updatePlayButton();
+                    } catch (e) {
+                        console.log("🎵 Autoplay bloqué, en attente d'interaction utilisateur");
+                        this.setupAutoplayFallback();
+                    }
+                }
             }
-            
+
             this.updateTrackInfo();
             console.log(`✅ Système de priorité activé - Courante: ${this.state.currentPagePlaylist.length}, Défaut: ${this.state.defaultPlaylist.length}`);
         } else {
