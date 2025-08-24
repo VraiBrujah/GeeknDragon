@@ -56,7 +56,8 @@
       "Bash(mkdir:*)",
       "Read(/C:\\c\\Users\\Brujah\\Documents\\GitHub/**)",
       "Read(/C:\\c\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Presentateur/**)",
-      "Read(/C:\\c\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds/**)"
+      "Read(/C:\\c\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds/**)",
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds/**)"
     ],
     "deny": [],
     "ask": [],
