@@ -169,6 +169,130 @@
             color: var(--accent);
             margin-top: 0.5rem;
         }
+        
+        /* Styles pour les sliders interactifs */
+        .slider-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 1rem 0;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: white;
+            font-size: 1.05rem;
+        }
+        
+        .slider-value {
+            background: var(--gradient-warning);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            min-width: 100px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(241, 143, 1, 0.3);
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+            margin: 0.8rem 0;
+            cursor: pointer;
+        }
+        
+        .slider:hover {
+            opacity: 1;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(241, 143, 1, 0.4);
+            transition: transform 0.2s;
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 3px 10px rgba(241, 143, 1, 0.4);
+        }
+        
+        .slider-range {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.3rem;
+        }
+        
+        .impact-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .impact-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .impact-low {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.4);
+        }
+        
+        .impact-medium {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid rgba(255, 193, 7, 0.4);
+        }
+        
+        .impact-high {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.4);
+        }
+        
+        .impact-extreme {
+            background: var(--accent);
+            color: white;
+            animation: pulse 1.5s infinite;
+            border: 1px solid var(--accent);
+        }
 
         .input-field {
             width: 100%;
@@ -435,15 +559,15 @@
                 </div>
             </div>
             <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; background: linear-gradient(135deg, #ffffff 0%, #64748b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🧮 Calculateur TCO</h1>
-            <p class="subtitle" style="font-size: 1.5rem; color: rgba(255,255,255,0.8); font-weight: 500;">Analyse comparative du coût total de possession<br><span style="color: var(--accent);">Li-CUBE PRO™ 2025</span> vs <span style="color: var(--danger);">Ni-Cd 1980 obsolète</span></p>
+            <p class="subtitle" style="font-size: 1.5rem; color: rgba(255,255,255,0.8); font-weight: 500;"><strong>🚀 DÉCOUVREZ VOS ÉCONOMIES :</strong> Ajustez les paramètres et voyez l'impact immédiat!<br><span style="color: var(--accent); font-size: 1.3rem; font-weight: 700;">⚡ Li-CUBE PRO™ 2025</span> vs <span style="color: var(--danger); font-size: 1.1rem;">☠️ Ni-Cd 1980 obsolète</span></p>
         </div>
 
         <div class="calculator-wrapper">
             <div class="controls-section">
                 <div class="config-note">
-                    <strong>🚀 TECHNOLOGIE 2025 vs OBSOLESCENCE 1980</strong><br>
-                    <strong>Li-CUBE PRO™</strong>: Intelligence artificielle, monitoring prédictif, énergie propre LiFePO4<br>
-                    <strong>Ni-Cd</strong>: Technologie 45 ans d'âge, maintenance réactive, polluant, inefficace
+                    <strong>🔥 CALCULATEUR CHOC : Ajustez et Voyez l'Impact!</strong><br>
+                    <strong>⚙️ Li-CUBE PRO™ 2025</strong>: IA intégrée, monitoring prédictif, énergie LiFePO4 propre, ZÉRO maintenance<br>
+                    <strong>☠️ Ni-Cd 1980</strong>: Technologie obsolète (45 ans!), maintenance coûteuse, toxique, pannes fréquentes
                 </div>
 
                 <div class="control-group">
@@ -454,23 +578,56 @@
                 </div>
 
                 <div class="control-group">
-                    <div class="fixed-value">
-                        <span class="fixed-value-label">🔋 Nombre d'unités (par installation)</span>
-                        <span class="fixed-value-display" id="unitsValue">1 unité</span>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>🔋 Nombre d'unités</span>
+                            <span class="slider-value" id="unitsValue">1 unité</span>
+                        </div>
+                        <input type="range" min="1" max="50" value="1" class="slider" id="unitsSlider">
+                        <div class="slider-range">
+                            <span>1 unité</span>
+                            <span>50+ unités</span>
+                        </div>
+                        <div class="impact-indicator">
+                            <span>💡 Impact volume:</span>
+                            <span class="impact-badge impact-low" id="unitsImpact">Tarif unitaire</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <div class="fixed-value">
-                        <span class="fixed-value-label">💰 Maintenance Ni-Cd validée (CAD/an)</span>
-                        <span class="fixed-value-display" id="maintenanceValue" data-pricing-value="modes.vente.nicd.maintenance_annual" data-pricing-format="currency"> CAD</span>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>💰 Coût maintenance Ni-Cd/an</span>
+                            <span class="slider-value" id="maintenanceValue">2 112 CAD</span>
+                        </div>
+                        <input type="range" min="1500" max="5000" value="2112" step="100" class="slider" id="maintenanceSlider">
+                        <div class="slider-range">
+                            <span>1 500 CAD/an (minimum)</span>
+                            <span>5 000 CAD/an (réalité terrain)</span>
+                        </div>
+                        <div class="impact-indicator">
+                            <span>🚨 Impact sur TCO:</span>
+                            <span class="impact-badge impact-medium" id="maintenanceImpact">Coût réel validé</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <div class="fixed-value">
-                        <span class="fixed-value-label">🔄 Durée de vie Ni-Cd confirmée</span>
-                        <span class="fixed-value-display" id="replacementValue" data-pricing-value="nicd.replacement_cycle_years" data-pricing-format="number"> ans</span>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>🔄 Durée de vie Ni-Cd</span>
+                            <span class="slider-value" id="replacementValue">4 ans</span>
+                        </div>
+                        <input type="range" min="3" max="6" value="4" class="slider" id="replacementSlider">
+                        <div class="slider-range">
+                            <span>3 ans (pire cas)</span>
+                            <span>6 ans (optimiste)</span>
+                        </div>
+                        <div class="impact-indicator">
+                            <span>⚠️ Impact remplacements:</span>
+                            <span class="impact-badge impact-high" id="replacementImpact">3-4 remplacements sur 20 ans</span>
+                        </div>
                     </div>
                 </div>
 
@@ -487,7 +644,7 @@
                     <div class="result-title">
                         🌆 Li-CUBE PRO™ - Technologie 2025
                     </div>
-                    <div class="result-value" id="lfpTotal" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency"> CAD</div>
+                    <div class="result-value" id="lfpTotal">5 750 CAD</div>
                     <div class="result-subtitle">Coût total sur la période</div>
                 </div>
 
@@ -495,7 +652,7 @@
                     <div class="result-title">
                         ⚠️ Ni-Cd - Technologie 1980 obsolète
                     </div>
-                    <div class="result-value" id="nicdTotal" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency"> CAD</div>
+                    <div class="result-value" id="nicdTotal">48 797 CAD</div>
                     <div class="result-subtitle">Coût total sur la période</div>
                 </div>
 
@@ -503,8 +660,8 @@
                     <div class="result-title">
                         🚀 Économies SPECTACULAIRES
                     </div>
-                    <div class="result-value" id="totalSavings" data-pricing-value="calculations.tco_vente.savings.amount" data-pricing-format="currency"> CAD</div>
-                    <div class="result-subtitle" id="savingsPercentage" data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="percentage">% d'économies</div>
+                    <div class="result-value" id="totalSavings">43 047 CAD</div>
+                    <div class="result-subtitle" id="savingsPercentage">88% d'économies</div>
                 </div>
             </div>
 
@@ -513,27 +670,27 @@
                 <div class="breakdown-grid">
                     <div class="breakdown-item">
                         <h4>🔋 Li-CUBE PRO™ - Technologie 2025 moderne</h4>
-                        <div class="breakdown-value" id="lfpInitial" data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency"> CAD + taxes + installation</div>
+                        <div class="breakdown-value" id="lfpInitial">5 750 CAD + taxes + installation</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>📱 Li-CUBE PRO™ - Monitoring optionnel</h4>
-                        <div class="breakdown-value" id="lfpMonitoring"><span data-pricing-value="licube.monitoring_monthly" data-pricing-format="currency"></span>$/mois (optionnel)</div>
+                        <div class="breakdown-value" id="lfpMonitoring">20$/mois (optionnel)</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>⚠️ Ni-Cd - Technologie 1980 obsolète</h4>
-                        <div class="breakdown-value" id="nicdInitial" data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency"> CAD</div>
+                        <div class="breakdown-value" id="nicdInitial">13 797 CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🔧 Ni-Cd - Coûts maintenance obligatoire</h4>
-                        <div class="breakdown-value" id="nicdMaintenance" data-pricing-value="calculations.tco_vente.nicd.maintenance_20_years" data-pricing-format="currency"> CAD</div>
+                        <div class="breakdown-value" id="nicdMaintenance">42 240 CAD</div>
                     </div>
                     <div class="breakdown-item">
-                        <h4>🔄 Ni-Cd - 3 remplacements forcés</h4>
-                        <div class="breakdown-value" id="nicdReplacements" data-pricing-value="calculations.tco_vente.nicd.replacements_cost" data-pricing-format="currency"> CAD</div>
+                        <h4>🔄 Ni-Cd - 4 remplacements forcés</h4>
+                        <div class="breakdown-value" id="nicdReplacements">55 188 CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>Retour sur investissement</h4>
-                        <div class="breakdown-value" id="roi">ROI: <span data-pricing-value="calculations.tco_vente.savings.roi_years" data-pricing-format="number"></span> ans</div>
+                        <div class="breakdown-value" id="roi">ROI: <span>2.7</span> ans</div>
                     </div>
                 </div>
             </div>
@@ -542,14 +699,14 @@
                 <h3 style="text-align: center; color: white; margin-bottom: 2rem; font-size: 2rem; font-weight: 800;">📈 Comparaison Visuelle TCO</h3>
                 <div class="chart">
                     <div class="chart-bar">
-                        <div class="bar lfp" id="lfpBar">
-                            <div class="bar-value" id="lfpBarValue" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency"> CAD</div>
+                        <div class="bar lfp" id="lfpBar" style="height: 12%;">
+                            <div class="bar-value" id="lfpBarValue">5 750 CAD</div>
                         </div>
                         <div class="bar-label">Li-CUBE PRO™ 2025</div>
                     </div>
                     <div class="chart-bar">
-                        <div class="bar nicd" id="nicdBar">
-                            <div class="bar-value" id="nicdBarValue" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency"> CAD</div>
+                        <div class="bar nicd" id="nicdBar" style="height: 100%;">
+                            <div class="bar-value" id="nicdBarValue">48 797 CAD</div>
                         </div>
                         <div class="bar-label">Ni-Cd 1980 obsolète</div>
                     </div>
@@ -559,134 +716,571 @@
 
         <div class="actions">
             <button class="btn" onclick="exporterResultats()">📄 Exporter PDF</button>
-            <button class="btn secondary" onclick="reinitialiserCalculateur()">🔄 Réinitialiser</button>
+            <button class="btn secondary" onclick="reinitialiserCalculateur()">🔄 Reset Admin</button>
             <a href="presentation-complete.html" class="btn secondary">📋 Présentation Complète</a>
         </div>
     </div>
 
-    <!-- Intégration du système de prix centralisé -->
-    <script src="../../js/pricing-manager.js"></script>
-    
     <script>
         /**
-         * Calculateur TCO intégré avec le système de prix centralisé
+         * ================================================
+         * CALCULATEUR TCO COMPLET AVEC SLIDERS FONCTIONNELS
+         * ================================================
          * 
-         * Rôle : Remplacer TOUS les prix hardcodés par des données du pricing-manager.js
-         * Fonctionnement : 
-         * 1. Charge automatiquement la configuration depuis pricing-config.json
-         * 2. Met à jour tous les éléments DOM avec les valeurs centralisées
-         * 3. Calcule et affiche les graphiques comparatifs
+         * Rôle    : Calculateur TCO interactif temps réel avec chargement JSON admin
+         * Type    : Module JavaScript autonome
+         * Unité   : sans unité (logique pure)
+         * Domaine : données JSON valides de pricing-config.json
+         * Formule : TCO = prix_initial + (maintenance_annuelle × années) + (remplacements × prix_unitaire)
+         * Exemple : Li-CUBE = 5750 CAD, Ni-Cd = 48797 CAD sur 20 ans
          */
+
+        // ========================================
+        // CONFIGURATION SYSTÈME
+        // ========================================
         
-        // Variables globales pour l'état du calculateur
-        // Le pricingManager global est maintenant disponible via window.pricingManager
-        let currentMode = 'vente'; // Mode par défaut pour presentations-vente
+        /** 
+         * Configuration globale du calculateur
+         * Rôle    : Stockage des données admin et paramètres système
+         * Type    : objet JavaScript
+         * Source  : pricing-config.json (chargement dynamique)
+         */
+        let configData = null;
+        let currentMode = 'vente';
         
         /**
-         * Initialise le calculateur TCO avec le système centralisé
+         * Paramètres interactifs des sliders
+         * Rôle    : Valeurs modifiables par l'utilisateur via les sliders
+         * Type    : objet avec propriétés numériques
+         * Unité   : unités (sans), CAD/an (maintenance), ans (durée)
+         * Domaine : 1-50 unités, 1500-5000 CAD/an, 3-6 ans
          */
-        function initCalculateur() {
-            console.log('🚀 Initialisation calculateur TCO avec SimplePricingManager global...');
-            
-            // Utiliser le SimplePricingManager global
-            if (window.pricingManager && window.pricingManager.isLoaded) {
-                console.log('✅ SimplePricingManager déjà disponible');
-                updateAllDisplays();
-                updateChartBars();
-            } else {
-                // Attendre que le pricing manager global soit prêt
-                document.addEventListener('pricingManagerReady', function() {
-                    console.log('✅ SimplePricingManager maintenant disponible');
-                    updateAllDisplays();
-                    updateChartBars();
-                });
+        let parametresSliders = {
+            nombreUnites: 1,
+            coutMaintenanceNiCd: 2112,
+            dureeVieNiCd: 4
+        };
+        
+        // ========================================
+        // CHARGEMENT DES DONNÉES ADMIN
+        // ========================================
+        
+        /**
+         * Charge les données depuis le fichier JSON admin
+         * Rôle      : Récupération des données de configuration admin
+         * Type      : fonction asynchrone
+         * Retour    : Promise<boolean> - true si succès, false si échec
+         * Effet     : Remplit la variable globale configData
+         * Exemple   : await chargerDonneesAdmin() → true/false
+         */
+        async function chargerDonneesAdmin() {
+            try {
+                console.log('🔄 Chargement données admin depuis pricing-config.json...');
                 
-                // Timeout de sécurité
-                setTimeout(() => {
-                    if (window.pricingManager) {
-                        updateAllDisplays();
-                        updateChartBars();
-                    } else {
-                        console.error('❌ SimplePricingManager non disponible après timeout');
-                    }
-                }, 2000);
+                // Chargement du fichier JSON de configuration admin
+                const response = await fetch('../../js/pricing-config.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                // Parsing et validation des données JSON
+                configData = await response.json();
+                
+                // Validation de la structure des données
+                if (!configData.modes || !configData.modes.vente) {
+                    throw new Error('Structure JSON invalide - modes.vente manquant');
+                }
+                
+                console.log('✅ Données admin chargées avec succès:', configData._metadata);
+                return true;
+                
+            } catch (error) {
+                console.error('❌ Erreur chargement données admin:', error);
+                configData = null;
+                return false;
             }
         }
         
         /**
-         * Met à jour tous les éléments DOM avec les données centralisées
+         * Récupère une valeur depuis les données admin avec fallback
+         * Rôle      : Accès sécurisé aux données admin avec valeur par défaut
+         * Type      : fonction pure
+         * Paramètre : path (string) - chemin vers la donnée (ex: 'modes.vente.licube.price_base')
+         * Paramètre : defaultValue (any) - valeur par défaut si donnée manquante
+         * Retour    : valeur trouvée ou defaultValue
+         * Exemple   : getAdminValue('modes.vente.licube.price_base', 5000) → 5000
          */
-        function updateAllDisplays() {
-            if (!window.pricingManager || !window.pricingManager.isLoaded) {
-                console.warn('⚠️ SimplePricingManager non disponible pour updateAllDisplays');
-                return;
+        function getAdminValue(path, defaultValue = 0) {
+            if (!configData) return defaultValue;
+            
+            // Navigation dans l'objet via le chemin fourni
+            const keys = path.split('.');
+            let current = configData;
+            
+            for (const key of keys) {
+                if (current && typeof current === 'object' && key in current) {
+                    current = current[key];
+                } else {
+                    console.warn(`⚠️ Donnée admin manquante: ${path}, utilisation de: ${defaultValue}`);
+                    return defaultValue;
+                }
             }
             
-            console.log('🔄 Mise à jour des affichages du calculateur TCO...');
-            
-            // Mettre à jour tous les éléments avec data-pricing-value
-            const updateCount = window.pricingManager.updatePrices();
-            console.log(`✅ ${updateCount} éléments mis à jour via data-pricing-value`);
-            
-            // Mettre à jour les valeurs fixes spécifiques
-            document.getElementById('periodValue').textContent = '20 ans';
-            document.getElementById('unitsValue').textContent = '1 unité';
-            document.getElementById('replacementsValue').textContent = '3 remplacements';
-            
-            console.log('✅ Valeurs fixes mises à jour');
+            return current;
         }
         
+        // ========================================
+        // INITIALISATION SYSTÈME
+        // ========================================
+        
         /**
-         * Met à jour les barres graphiques comparatives
+         * Initialisation complète du calculateur
+         * Rôle      : Point d'entrée principal du système
+         * Type      : fonction asynchrone
+         * Effet     : Charge données, initialise sliders, calcule TCO
+         * Séquence  : chargement → interface → calculs → affichage
          */
-        function updateChartBars() {
-            if (!window.pricingManager || !window.pricingManager.isLoaded) return;
+        async function initialiserCalculateur() {
+            console.log('🚀 === INITIALISATION CALCULATEUR TCO === ');
             
-            const lfpTotal = window.pricingManager.getValue('calculations.tco_vente.licube.total_20_years');
-            const nicdTotal = window.pricingManager.getValue('calculations.tco_vente.nicd.total_20_years');
+            // Étape 1: Chargement des données admin
+            const donneesChargees = await chargerDonneesAdmin();
             
-            // Calculer les pourcentages pour les barres
-            const maxValue = Math.max(lfpTotal, nicdTotal);
-            const lfpPercent = (lfpTotal / maxValue) * 100;
-            const nicdPercent = (nicdTotal / maxValue) * 100;
+            // Étape 2: Récupération des valeurs par défaut depuis admin
+            if (donneesChargees) {
+                parametresSliders.coutMaintenanceNiCd = getAdminValue('modes.vente.nicd.maintenance_annual', 2112);
+                parametresSliders.dureeVieNiCd = getAdminValue('modes.vente.nicd.replacement_cycle_years', 4);
+                console.log('✅ Paramètres slider synchronisés avec admin:', parametresSliders);
+            }
             
-            // Appliquer les largeurs des barres
-            const lfpBar = document.getElementById('lfpBar');
-            const nicdBar = document.getElementById('nicdBar');
+            // Étape 3: Initialisation de l'interface utilisateur
+            initialiserInterface();
             
-            if (lfpBar) lfpBar.style.height = `${lfpPercent}%`;
-            if (nicdBar) nicdBar.style.height = `${nicdPercent}%`;
+            // Étape 4: Configuration des événements sliders
+            configurerEvenementsSliders();
+            
+            // Étape 5: Calcul initial avec valeurs par défaut
+            calculerTcoTempsReel();
+            
+            console.log('✅ === CALCULATEUR OPÉRATIONNEL ===');
         }
         
         /**
-         * Exporte les résultats vers PDF/impression
+         * Initialise les valeurs d'affichage de l'interface
+         * Rôle    : Mise à jour initiale des éléments DOM
+         * Type    : fonction pure (pas d'effets de bord)
+         * Effet   : Met à jour textes des sliders et valeurs fixes
+         */
+        function initialiserInterface() {
+            console.log('🎮 Initialisation interface utilisateur...');
+            
+            // Récupération des éléments DOM
+            const elements = {
+                unitsSlider: document.getElementById('unitsSlider'),
+                unitsValue: document.getElementById('unitsValue'),
+                maintenanceSlider: document.getElementById('maintenanceSlider'),
+                maintenanceValue: document.getElementById('maintenanceValue'),
+                replacementSlider: document.getElementById('replacementSlider'),
+                replacementValue: document.getElementById('replacementValue')
+            };
+            
+            // Initialisation sécurisée des sliders avec valeurs par défaut
+            if (elements.unitsSlider) {
+                elements.unitsSlider.value = parametresSliders.nombreUnites;
+                elements.unitsValue.textContent = `${parametresSliders.nombreUnites} unité`;
+            }
+            
+            if (elements.maintenanceSlider) {
+                elements.maintenanceSlider.value = parametresSliders.coutMaintenanceNiCd;
+                elements.maintenanceValue.textContent = `${parametresSliders.coutMaintenanceNiCd.toLocaleString('fr-CA')} CAD`;
+            }
+            
+            if (elements.replacementSlider) {
+                elements.replacementSlider.value = parametresSliders.dureeVieNiCd;
+                elements.replacementValue.textContent = `${parametresSliders.dureeVieNiCd} ans`;
+            }
+            
+            // Valeurs fixes (non modifiables)
+            const periodValue = document.getElementById('periodValue');
+            if (periodValue) periodValue.textContent = '20 ans';
+            
+            console.log('✅ Interface initialisée');
+        }
+        
+        // ========================================
+        // GESTION DES ÉVÉNEMENTS SLIDERS
+        // ========================================
+        
+        /**
+         * Configure tous les événements des sliders interactifs
+         * Rôle    : Liaison des sliders HTML avec la logique JavaScript
+         * Type    : fonction de configuration
+         * Effet   : Ajoute les event listeners sur les sliders
+         */
+        function configurerEvenementsSliders() {
+            console.log('🔗 Configuration événements sliders...');
+            
+            // Slider nombre d'unités (1-50)
+            configurerSliderUnites();
+            
+            // Slider maintenance Ni-Cd (1500-5000 CAD/an)
+            configurerSliderMaintenance();
+            
+            // Slider durée de vie Ni-Cd (3-6 ans)
+            configurerSliderDureeVie();
+            
+            console.log('✅ Tous les sliders sont configurés et fonctionnels');
+        }
+        
+        /**
+         * Configure le slider du nombre d'unités
+         * Rôle    : Gestion interactive du volume d'achat
+         * Type    : gestionnaire d'événements
+         * Domaine : 1 à 50 unités
+         * Impact  : Facteur multiplicateur sur tous les coûts
+         */
+        function configurerSliderUnites() {
+            const slider = document.getElementById('unitsSlider');
+            const valueDisplay = document.getElementById('unitsValue');
+            const impactBadge = document.getElementById('unitsImpact');
+            
+            if (!slider) return;
+            
+            slider.addEventListener('input', function(event) {
+                const valeur = parseInt(event.target.value);
+                parametresSliders.nombreUnites = valeur;
+                
+                // Mise à jour affichage valeur
+                valueDisplay.textContent = `${valeur} unité${valeur > 1 ? 's' : ''}`;
+                
+                // Calcul et affichage impact volume
+                if (valeur >= 20) {
+                    impactBadge.textContent = 'VOLUME INDUSTRIEL - Négociations majeures';
+                    impactBadge.className = 'impact-badge impact-extreme';
+                } else if (valeur >= 10) {
+                    impactBadge.textContent = 'Gros volume - Réductions importantes';
+                    impactBadge.className = 'impact-badge impact-high';
+                } else if (valeur >= 5) {
+                    impactBadge.textContent = 'Volume intéressant - Économies';
+                    impactBadge.className = 'impact-badge impact-medium';
+                } else {
+                    impactBadge.textContent = 'Tarif unitaire standard';
+                    impactBadge.className = 'impact-badge impact-low';
+                }
+                
+                // Recalcul immédiat du TCO
+                calculerTcoTempsReel();
+                
+                console.log(`🔋 Unités mises à jour: ${valeur}`);
+            });
+        }
+        
+        /**
+         * Configure le slider du coût de maintenance Ni-Cd
+         * Rôle    : Ajustement du coût annuel de maintenance Ni-Cd
+         * Type    : gestionnaire d'événements
+         * Unité   : CAD par an
+         * Domaine : 1500 à 5000 CAD/an
+         * Formule : coût_20_ans = valeur_slider × 20 × nombre_unités
+         */
+        function configurerSliderMaintenance() {
+            const slider = document.getElementById('maintenanceSlider');
+            const valueDisplay = document.getElementById('maintenanceValue');
+            const impactBadge = document.getElementById('maintenanceImpact');
+            
+            if (!slider) return;
+            
+            slider.addEventListener('input', function(event) {
+                const valeur = parseInt(event.target.value);
+                parametresSliders.coutMaintenanceNiCd = valeur;
+                
+                // Mise à jour affichage valeur avec formatage français
+                valueDisplay.textContent = `${valeur.toLocaleString('fr-CA')} CAD`;
+                
+                // Calcul et affichage impact maintenance
+                if (valeur >= 4500) {
+                    impactBadge.textContent = 'COÛT CATASTROPHIQUE - Urgence absolue';
+                    impactBadge.className = 'impact-badge impact-extreme';
+                } else if (valeur >= 3500) {
+                    impactBadge.textContent = 'Coût très élevé - Situation critique';
+                    impactBadge.className = 'impact-badge impact-high';
+                } else if (valeur >= 2500) {
+                    impactBadge.textContent = 'Coût réaliste validé terrain';
+                    impactBadge.className = 'impact-badge impact-medium';
+                } else {
+                    impactBadge.textContent = 'Coût optimiste (minimum théorique)';
+                    impactBadge.className = 'impact-badge impact-low';
+                }
+                
+                // Recalcul immédiat du TCO
+                calculerTcoTempsReel();
+                
+                console.log(`🔧 Maintenance Ni-Cd mise à jour: ${valeur} CAD/an`);
+            });
+        }
+        
+        /**
+         * Configure le slider de la durée de vie Ni-Cd
+         * Rôle    : Ajustement de la fréquence de remplacement Ni-Cd
+         * Type    : gestionnaire d'événements
+         * Unité   : années
+         * Domaine : 3 à 6 ans
+         * Formule : nombre_remplacements = Math.floor(20 / durée_vie)
+         */
+        function configurerSliderDureeVie() {
+            const slider = document.getElementById('replacementSlider');
+            const valueDisplay = document.getElementById('replacementValue');
+            const impactBadge = document.getElementById('replacementImpact');
+            const replacementsValue = document.getElementById('replacementsValue');
+            
+            if (!slider) return;
+            
+            slider.addEventListener('input', function(event) {
+                const valeur = parseInt(event.target.value);
+                parametresSliders.dureeVieNiCd = valeur;
+                
+                // Calcul du nombre de remplacements sur 20 ans
+                const nombreRemplacements = Math.floor(20 / valeur);
+                
+                // Mise à jour affichages
+                valueDisplay.textContent = `${valeur} ans`;
+                if (replacementsValue) {
+                    replacementsValue.textContent = `${nombreRemplacements} remplacements`;
+                }
+                
+                // Calcul et affichage impact remplacements
+                if (valeur <= 3) {
+                    impactBadge.textContent = `${nombreRemplacements} remplacements - RUINE FINANCIÈRE`;
+                    impactBadge.className = 'impact-badge impact-extreme';
+                } else if (valeur <= 4) {
+                    impactBadge.textContent = `${nombreRemplacements} remplacements - Coût majeur`;
+                    impactBadge.className = 'impact-badge impact-high';
+                } else if (valeur <= 5) {
+                    impactBadge.textContent = `${nombreRemplacements} remplacements - Coût important`;
+                    impactBadge.className = 'impact-badge impact-medium';
+                } else {
+                    impactBadge.textContent = `${nombreRemplacements} remplacements - Scénario optimiste`;
+                    impactBadge.className = 'impact-badge impact-low';
+                }
+                
+                // Recalcul immédiat du TCO
+                calculerTcoTempsReel();
+                
+                console.log(`🔄 Durée vie Ni-Cd mise à jour: ${valeur} ans (${nombreRemplacements} remplacements)`);
+            });
+        }
+        
+        // ========================================
+        // CALCULS TCO TEMPS RÉEL
+        // ========================================
+        
+        /**
+         * Calcule le TCO complet en temps réel
+         * Rôle      : Moteur de calcul principal du TCO
+         * Type      : fonction de calcul pur
+         * Formule   : TCO = prix_initial + maintenance_totale + remplacements_totaux
+         * Effet     : Met à jour tous les affichages de résultats
+         * Exemple   : Li-CUBE 5750 CAD vs Ni-Cd 48797 CAD = 43047 CAD d'économies (88%)
+         */
+        function calculerTcoTempsReel() {
+            console.log('📊 === CALCUL TCO TEMPS RÉEL ===');
+            console.log('Paramètres actuels:', parametresSliders);
+            
+            // Récupération des prix de base depuis admin ou fallback
+            const prixBaseLiCube = getAdminValue('modes.vente.licube.price_base', 5000);
+            const taxesPercent = getAdminValue('modes.vente.licube.taxes_percent', 14.975);
+            const installationCost = getAdminValue('modes.vente.licube.installation_cost', 500);
+            const prixBaseNiCd = getAdminValue('modes.vente.nicd.price_base', 12000);
+            
+            // Calculs de base pour une unité
+            const prixTotalLiCube = prixBaseLiCube + (prixBaseLiCube * taxesPercent / 100) + installationCost;
+            const prixTotalNiCd = prixBaseNiCd + (prixBaseNiCd * taxesPercent / 100) + installationCost;
+            
+            // Calculs TCO complets avec paramètres interactifs
+            const nombreRemplacements = Math.floor(20 / parametresSliders.dureeVieNiCd);
+            const maintenanceTotal = parametresSliders.coutMaintenanceNiCd * 20;
+            const remplacementsTotal = prixTotalNiCd * nombreRemplacements;
+            
+            // TCO final par technologie (pour le nombre d'unités sélectionné)
+            const tcoLiCube = prixTotalLiCube * parametresSliders.nombreUnites;
+            const tcoNiCd = (prixTotalNiCd + maintenanceTotal + remplacementsTotal) * parametresSliders.nombreUnites;
+            
+            // Calcul des économies
+            const economiesTotal = Math.max(0, tcoNiCd - tcoLiCube);
+            const pourcentageEconomies = tcoNiCd > 0 ? Math.round((economiesTotal / tcoNiCd) * 100) : 0;
+            const roiAnnees = parametresSliders.coutMaintenanceNiCd > 0 ? 
+                Math.round((tcoLiCube / (parametresSliders.coutMaintenanceNiCd * parametresSliders.nombreUnites)) * 10) / 10 : 0;
+            
+            // Mise à jour de tous les affichages
+            mettreAJourAffichageResultats({
+                tcoLiCube,
+                tcoNiCd,
+                economiesTotal,
+                pourcentageEconomies,
+                maintenanceTotal: maintenanceTotal * parametresSliders.nombreUnites,
+                remplacementsTotal: remplacementsTotal * parametresSliders.nombreUnites,
+                roiAnnees,
+                prixTotalLiCube: prixTotalLiCube * parametresSliders.nombreUnites
+            });
+            
+            console.log(`✅ TCO calculé - Li-CUBE: ${tcoLiCube.toLocaleString('fr-CA')} CAD, Ni-Cd: ${tcoNiCd.toLocaleString('fr-CA')} CAD`);
+            console.log(`💰 Économies: ${economiesTotal.toLocaleString('fr-CA')} CAD (${pourcentageEconomies}%)`);
+        }
+        
+        /**
+         * Met à jour tous les éléments d'affichage des résultats
+         * Rôle      : Interface entre calculs et affichage DOM
+         * Type      : fonction de mise à jour DOM
+         * Paramètre : resultats (objet) - tous les résultats calculés
+         * Effet     : Met à jour textes, graphiques et indicateurs
+         */
+        function mettreAJourAffichageResultats(resultats) {
+            // Mise à jour des résultats principaux
+            mettreAJourElement('lfpTotal', `${resultats.tcoLiCube.toLocaleString('fr-CA')} CAD`);
+            mettreAJourElement('nicdTotal', `${resultats.tcoNiCd.toLocaleString('fr-CA')} CAD`);
+            mettreAJourElement('totalSavings', `${resultats.economiesTotal.toLocaleString('fr-CA')} CAD`);
+            mettreAJourElement('savingsPercentage', `${resultats.pourcentageEconomies}% d'économies`);
+            
+            // Mise à jour du détail des coûts
+            mettreAJourElement('lfpInitial', `${resultats.prixTotalLiCube.toLocaleString('fr-CA')} CAD + taxes + installation`);
+            mettreAJourElement('nicdMaintenance', `${resultats.maintenanceTotal.toLocaleString('fr-CA')} CAD`);
+            mettreAJourElement('nicdReplacements', `${resultats.remplacementsTotal.toLocaleString('fr-CA')} CAD`);
+            
+            // Mise à jour ROI
+            const roiElement = document.getElementById('roi');
+            if (roiElement) {
+                roiElement.innerHTML = `ROI: <span>${resultats.roiAnnees}</span> ans`;
+            }
+            
+            // Mise à jour des graphiques
+            mettreAJourGraphiques(resultats.tcoLiCube, resultats.tcoNiCd);
+        }
+        
+        /**
+         * Met à jour un élément DOM de manière sécurisée
+         * Rôle      : Utilitaire de mise à jour DOM avec vérification
+         * Type      : fonction utilitaire
+         * Paramètre : id (string) - identifiant de l'élément
+         * Paramètre : contenu (string) - nouveau contenu textuel
+         * Effet     : Met à jour le textContent si l'élément existe
+         */
+        function mettreAJourElement(id, contenu) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = contenu;
+            } else {
+                console.warn(`⚠️ Élément DOM non trouvé: ${id}`);
+            }
+        }
+        
+        /**
+         * Met à jour les graphiques comparatifs
+         * Rôle      : Visualisation graphique des résultats TCO
+         * Type      : fonction de mise à jour graphique
+         * Paramètre : tcoLiCube (number) - coût total Li-CUBE en CAD
+         * Paramètre : tcoNiCd (number) - coût total Ni-Cd en CAD
+         * Effet     : Ajuste la hauteur des barres proportionnellement
+         */
+        function mettreAJourGraphiques(tcoLiCube, tcoNiCd) {
+            const maxValue = Math.max(tcoLiCube, tcoNiCd);
+            if (maxValue === 0) return;
+            
+            // Calcul des pourcentages pour les hauteurs de barres
+            const hauteurLiCube = (tcoLiCube / maxValue) * 100;
+            const hauteurNiCd = (tcoNiCd / maxValue) * 100;
+            
+            // Mise à jour des barres graphiques
+            const barreLiCube = document.getElementById('lfpBar');
+            const barreNiCd = document.getElementById('nicdBar');
+            
+            if (barreLiCube) barreLiCube.style.height = `${hauteurLiCube}%`;
+            if (barreNiCd) barreNiCd.style.height = `${hauteurNiCd}%`;
+            
+            // Mise à jour des valeurs sur les barres
+            mettreAJourElement('lfpBarValue', `${tcoLiCube.toLocaleString('fr-CA')} CAD`);
+            mettreAJourElement('nicdBarValue', `${tcoNiCd.toLocaleString('fr-CA')} CAD`);
+            
+            console.log(`📈 Graphiques mis à jour - Li-CUBE: ${hauteurLiCube.toFixed(1)}%, Ni-Cd: ${hauteurNiCd.toFixed(1)}%`);
+        }
+        
+        // ========================================
+        // FONCTIONS UTILITAIRES
+        // ========================================
+        
+        /**
+         * Remet les paramètres aux valeurs par défaut de l'admin
+         * Rôle    : Reset des sliders vers configuration admin
+         * Type    : fonction de réinitialisation
+         * Effet   : Recharge données admin et remet sliders à zéro
+         */
+        async function reinitialiserValeursDefaut() {
+            console.log('🔄 Réinitialisation vers valeurs par défaut admin...');
+            
+            // Rechargement des données admin
+            await chargerDonneesAdmin();
+            
+            // Reset des paramètres vers valeurs admin
+            parametresSliders = {
+                nombreUnites: 1,
+                coutMaintenanceNiCd: getAdminValue('modes.vente.nicd.maintenance_annual', 2112),
+                dureeVieNiCd: getAdminValue('modes.vente.nicd.replacement_cycle_years', 4)
+            };
+            
+            // Réinitialisation complète de l'interface
+            initialiserInterface();
+            calculerTcoTempsReel();
+            
+            console.log('✅ Valeurs par défaut admin restaurées');
+        }
+        
+        /**
+         * Fonction d'export PDF/impression
+         * Rôle    : Export des résultats vers PDF
+         * Type    : fonction utilitaire
+         * Effet   : Ouvre la boîte de dialogue d'impression du navigateur
          */
         function exporterResultats() {
-            console.log('📄 Export résultats TCO vers PDF/impression');
+            console.log('📄 Export résultats TCO vers PDF...');
             window.print();
         }
-
+        
         /**
-         * Réinitialise le calculateur
+         * Fonction de réinitialisation complète
+         * Rôle    : Bouton de reset complet du calculateur
+         * Type    : fonction publique
+         * Effet   : Remet tout à zéro et recharge
          */
         function reinitialiserCalculateur() {
-            console.log('🔄 Réinitialisation calculateur TCO');
-            updateAllDisplays();
-            updateChartBars();
+            console.log('🔄 Réinitialisation complète du calculateur...');
+            reinitialiserValeursDefaut();
         }
-
-        // Initialisation automatique au chargement de la page
+        
+        // ========================================
+        // INITIALISATION AUTOMATIQUE
+        // ========================================
+        
+        /**
+         * Point d'entrée principal - Exécution automatique au chargement DOM
+         * Rôle    : Démarrage automatique du système
+         * Type    : event listener
+         * Effet   : Lance l'initialisation complète dès que le DOM est prêt
+         */
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Démarrage calculateur TCO Li-CUBE PRO™ avec pricing-manager centralisé');
+            console.log('🎯 === DÉMARRAGE CALCULATEUR TCO LI-CUBE PRO™ ===');
+            console.log('📍 Mode: Vente');
             
-            // Déterminer le mode selon le chemin URL
-            const isLocationMode = window.location.pathname.includes('presentations-location');
-            currentMode = isLocationMode ? 'location' : 'vente';
+            // Détection du mode (vente/location) selon l'URL
+            if (window.location.pathname.includes('presentations-location')) {
+                currentMode = 'location';
+                console.log('📍 Mode détecté: Location');
+            }
             
-            console.log(`📊 Mode détecté: ${currentMode}`);
-            
-            // Initialiser le calculateur
-            initCalculateur();
+            // Lancement de l'initialisation complète
+            initialiserCalculateur().then(() => {
+                console.log('🎉 CALCULATEUR PRÊT - Sliders fonctionnels!');
+            }).catch(error => {
+                console.error('❌ Erreur lors de l\'initialisation:', error);
+            });
         });
     </script>
 

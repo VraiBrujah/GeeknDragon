@@ -40,8 +40,8 @@ class SimplePricingManager {
                         "taxes_percent": 14.975,
                         "installation_cost": 500,
                         "cycles": 1500,
-                        "maintenance_annual": 452,
-                        "replacement_cycle_years": 6,
+                        "maintenance_annual": 2112,
+                        "replacement_cycle_years": 4,
                         "lifespan_years": 20
                     }
                 },
@@ -59,12 +59,14 @@ class SimplePricingManager {
                         "contract_minimum_months": 12
                     },
                     "nicd": {
-                        "monthly_rate": 300,
-                        "maintenance_annual": 452,
+                        "monthly_rate": 240,
+                        "maintenance_annual": 200,
+                        "maintenance_annual_max": 600,
                         "cycles": 1500,
                         "monitoring_included": false,
                         "installation_included": true,
-                        "replacement_cycle_years": 6
+                        "replacement_cycle_years": 4,
+                        "breakdown_frequency_annual": 3
                     }
                 }
             },
