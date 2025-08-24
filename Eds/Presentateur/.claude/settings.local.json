@@ -53,13 +53,17 @@
       "Bash(start \"file:///C:/Users/Brujah/Documents/GitHub/GeeknDragon/Eds/Presentateur/LiCUBEPRO/presentations-vente/presentations-vendeurs/calculateur-tco.html\")",
       "Bash(start \"file:///C:/Users/Brujah/Documents/GitHub/GeeknDragon/Eds/Presentateur/LiCUBEPRO/presentations-location/presentations-vendeurs/calculateur-tco.html\")",
       "Bash(start \"file:///C:/Users/Brujah/Documents/GitHub/GeeknDragon/Eds/Presentateur/LiCUBEPRO/presentations-vente/presentations-vendeurs/calculateur-tco-nouveau.html\")",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Read(/C:\\c\\Users\\Brujah\\Documents\\GitHub/**)",
+      "Read(/C:\\c\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Presentateur/**)",
+      "Read(/C:\\c\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds/**)"
     ],
     "deny": [],
     "ask": [],
     "additionalDirectories": [
       "C:\\Users\\Brujah\\Documents\\image\\EdsQuebec",
-      "C:\\Users\\Brujah\\Documents\\GitHub\\presentations-vente\\images-onepage"
+      "C:\\Users\\Brujah\\Documents\\GitHub\\presentations-vente\\images-onepage",
+      "C:\\c\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Presentateur"
     ]
   }
 }
