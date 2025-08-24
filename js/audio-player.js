@@ -140,16 +140,12 @@ class GeeknDragonAudioPlayer {
                         <button class="control-btn play-btn" onclick="window.gndAudioPlayer.togglePlay()" title="Lecture/Pause">
                             <i class="fas ${this.state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
                         </button>
-                        
-                        <button class="control-btn next-btn" onclick="window.gndAudioPlayer.playNext()" title="Piste suivante">
-                            <i class="fas fa-forward"></i>
-                        </button>
-                        
+
                         <div class="volume-control">
-                            <input type="range" min="0" max="100" value="${this.state.volume * 100}" 
+                            <input type="range" min="0" max="100" value="${this.state.volume * 100}"
                                    class="volume-slider" onchange="window.gndAudioPlayer.setVolume(this.value)">
                         </div>
-                        
+
                         <button class="collapse-btn" onclick="window.gndAudioPlayer.toggleCollapse()" title="Réduire">
                             <i class="fas fa-chevron-down"></i>
                         </button>
@@ -707,7 +703,8 @@ class GeeknDragonAudioPlayer {
             .controls-row {
                 display: flex;
                 align-items: center;
-                gap: 0.75rem;
+                justify-content: space-between;
+                gap: 0.5rem;
                 padding: 0.75rem;
                 background: rgba(0, 0, 0, 0.4);
                 border-radius: 8px;
