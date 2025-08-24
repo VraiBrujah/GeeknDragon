@@ -579,39 +579,37 @@
          */
         
         // Variables globales pour l'état du calculateur
-        let pricingManager = null;
+        // Le pricingManager global est maintenant disponible via window.pricingManager
         let currentMode = 'vente'; // Mode par défaut pour presentations-vente
         
         /**
          * Initialise le calculateur TCO avec le système centralisé
          */
-        async function initCalculateur() {
-            try {
-                console.log('🚀 Initialisation calculateur TCO avec pricing-manager.js...');
-                
-                // Créer et initialiser le gestionnaire de prix
-                pricingManager = new PricingManager();
-                
-                // Attendre que la configuration soit chargée
-                await new Promise(resolve => {
-                    const checkLoaded = setInterval(() => {
-                        if (pricingManager.isLoaded) {
-                            clearInterval(checkLoaded);
-                            resolve();
-                        }
-                    }, 100);
+        function initCalculateur() {
+            console.log('🚀 Initialisation calculateur TCO avec SimplePricingManager global...');
+            
+            // Utiliser le SimplePricingManager global
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                console.log('✅ SimplePricingManager déjà disponible');
+                updateAllDisplays();
+                updateChartBars();
+            } else {
+                // Attendre que le pricing manager global soit prêt
+                document.addEventListener('pricingManagerReady', function() {
+                    console.log('✅ SimplePricingManager maintenant disponible');
+                    updateAllDisplays();
+                    updateChartBars();
                 });
                 
-                console.log('✅ Configuration des prix chargée avec succès');
-                
-                // Mettre à jour tous les affichages
-                updateAllDisplays();
-                
-                // Calculer et afficher les barres graphiques
-                updateChartBars();
-                
-            } catch (erreur) {
-                console.error('❌ Erreur initialisation pricing-manager:', erreur);
+                // Timeout de sécurité
+                setTimeout(() => {
+                    if (window.pricingManager) {
+                        updateAllDisplays();
+                        updateChartBars();
+                    } else {
+                        console.error('❌ SimplePricingManager non disponible après timeout');
+                    }
+                }, 2000);
             }
         }
         
@@ -619,39 +617,33 @@
          * Met à jour tous les éléments DOM avec les données centralisées
          */
         function updateAllDisplays() {
-            if (!pricingManager || !pricingManager.isLoaded) return;
+            if (!window.pricingManager || !window.pricingManager.isLoaded) {
+                console.warn('⚠️ SimplePricingManager non disponible pour updateAllDisplays');
+                return;
+            }
+            
+            console.log('🔄 Mise à jour des affichages du calculateur TCO...');
             
             // Mettre à jour tous les éléments avec data-pricing-value
-            pricingManager.updateAllDisplays(currentMode);
+            const updateCount = window.pricingManager.updatePrices();
+            console.log(`✅ ${updateCount} éléments mis à jour via data-pricing-value`);
             
-            // Mettre à jour les valeurs fixes
-            const config = pricingManager.config;
-            document.getElementById('periodValue').textContent = 
-                `${config.calculations.period_years} ans`;
+            // Mettre à jour les valeurs fixes spécifiques
+            document.getElementById('periodValue').textContent = '20 ans';
             document.getElementById('unitsValue').textContent = '1 unité';
-            document.getElementById('replacementValue').textContent = 
-                `${config.modes[currentMode].nicd.replacement_years} ans`;
-            document.getElementById('replacementsValue').textContent = 
-                `${config.modes[currentMode].nicd.replacements_needed} remplacements`;
-                
-            // Mettre à jour le pourcentage d'économies
-            const savingsPercent = config.calculations.tco_vente.savings.percentage;
-            document.getElementById('savingsPercentage').textContent = `${savingsPercent}% d'économies`;
+            document.getElementById('replacementsValue').textContent = '3 remplacements';
             
-            // Mettre à jour le ROI
-            const roiYears = config.calculations.tco_vente.savings.roi_years;
-            document.getElementById('roi').textContent = `ROI: ${roiYears} ans`;
+            console.log('✅ Valeurs fixes mises à jour');
         }
         
         /**
          * Met à jour les barres graphiques comparatives
          */
         function updateChartBars() {
-            if (!pricingManager || !pricingManager.isLoaded) return;
+            if (!window.pricingManager || !window.pricingManager.isLoaded) return;
             
-            const config = pricingManager.config;
-            const lfpTotal = config.calculations.tco_vente.licube.total_20_years;
-            const nicdTotal = config.calculations.tco_vente.nicd.total_20_years;
+            const lfpTotal = window.pricingManager.getValue('calculations.tco_vente.licube.total_20_years');
+            const nicdTotal = window.pricingManager.getValue('calculations.tco_vente.nicd.total_20_years');
             
             // Calculer les pourcentages pour les barres
             const maxValue = Math.max(lfpTotal, nicdTotal);

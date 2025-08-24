@@ -141,3 +141,4 @@ Exemple:
 ## 📝 Rappel
 
 > Chaque **variable** et **chaque calcul** doit posséder **sa formule** et **son explication** en commentaire, en français, au format **ELI10**, dans un style **Clean Code** net et explicite.
+- pour le style graphique de toute les page base toi sur celui de LiCUBEPRO/presentations-location/presentations-vendeurs/presentation-complete.html avec le logo de : LiCUBEPRO\image\EdsQuebec\logo edsquebec.png

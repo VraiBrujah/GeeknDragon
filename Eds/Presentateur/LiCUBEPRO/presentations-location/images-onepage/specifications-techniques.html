@@ -5,7 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Li-CUBE PRO™ - Spécifications Techniques</title>
     <style>
+        /**
+         * =================================================================
+         * SPÉCIFICATIONS TECHNIQUES LI-CUBE PRO™ - DESIGN HARMONISÉ
+         * =================================================================
+         */
+        :root {
+            /* Couleurs principales thème EDS Québec */
+            --primary: #003F7F;
+            --secondary: #4A90B8;
+            --accent: #F18F01;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #003F7F 0%, #4A90B8 100%);
+            --gradient-accent: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
+            
+            /* Couleurs neutres */
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --dark: #1B365D;
+            
+            /* Effets et ombres */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.2);
+            --shadow-xl: 0 15px 40px rgba(0,0,0,0.25);
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.6s ease;
+            
+            /* Rayons de bordure */
+            --radius-sm: 6px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 20px;
+            
+            /* Typographie */
+            --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
         @page {
+            size: 1024px 768px;
             margin: 0;
         }
         
@@ -15,10 +70,14 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
-            color: white;
+            font-family: var(--font-family);
+            background: white;
+            color: #333;
             max-width: 1024px;
             margin: 0 auto;
             min-height: 100vh;
@@ -68,6 +127,8 @@
             display: grid;
             grid-template-rows: auto 1fr auto;
             padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .header {
@@ -85,7 +146,7 @@
         .logo {
             font-size: 20px;
             font-weight: 900;
-            color: #F18F01;
+            color: var(--accent);
             margin-bottom: 5px;
             letter-spacing: 1px;
         }
@@ -120,13 +181,14 @@
         }
         
         .cert-badge {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(5px);
+            background: var(--dark);
+            color: #333;
+            ;
             padding: 4px 8px;
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             font-size: 9px;
             font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 3px solid #2E86AB; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .main-content {
@@ -142,12 +204,19 @@
         }
         
         .spec-category {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
+            background: #f8f9fa;
+            ;
+            border-radius: var(--radius-lg);
             padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             height: fit-content;
+            transition: all var(--transition-normal);
+        }
+        
+        .spec-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .category-header {
@@ -161,13 +230,13 @@
         
         .category-icon {
             font-size: 20px;
-            color: #F18F01;
+            color: var(--accent);
         }
         
         .category-title {
             font-size: 16px;
             font-weight: 700;
-            color: #F18F01;
+            color: var(--accent);
         }
         
         .spec-table {
@@ -181,7 +250,7 @@
             gap: 15px;
             align-items: center;
             padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid #e9ecef;
         }
         
         .spec-row:last-child {
@@ -197,23 +266,30 @@
         .spec-value {
             font-size: 11px;
             font-weight: 700;
-            color: #F18F01;
+            color: var(--accent);
             text-align: right;
             background: rgba(241, 143, 1, 0.1);
             padding: 3px 8px;
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             border: 1px solid rgba(241, 143, 1, 0.2);
         }
         
         .product-showcase {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
+            background: #f8f9fa;
+            ;
+            border-radius: var(--radius-lg);
             padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
             height: fit-content;
+            transition: all var(--transition-normal);
+        }
+        
+        .product-showcase:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .product-header {
@@ -224,7 +300,7 @@
         .product-icon {
             font-size: 40px;
             margin-bottom: 10px;
-            color: #F18F01;
+            color: var(--accent);
         }
         
         .product-name {
@@ -240,9 +316,10 @@
         }
         
         .product-image {
-            background: rgba(255, 255, 255, 0.1);
+            background: #f8f9fa;
+            ;
             border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
+            border-radius: var(--radius);
             height: 120px;
             margin-bottom: 20px;
             display: flex;
@@ -261,7 +338,7 @@
             font-size: 14px;
             font-weight: 700;
             margin-bottom: 12px;
-            color: #F18F01;
+            color: var(--accent);
             text-align: center;
         }
         
@@ -277,13 +354,19 @@
             font-size: 10px;
             padding: 6px 10px;
             background: rgba(40, 167, 69, 0.1);
-            border-radius: 6px;
+            border-radius: var(--radius-sm);
             border: 1px solid rgba(40, 167, 69, 0.2);
+            transition: all var(--transition-fast);
+        }
+        
+        .feature-item:hover {
+            background: rgba(40, 167, 69, 0.2);
+            transform: translateX(3px);
         }
         
         .feature-icon {
             font-size: 12px;
-            color: #28A745;
+            color: var(--success);
             flex-shrink: 0;
         }
         
@@ -295,7 +378,7 @@
             font-size: 12px;
             font-weight: 700;
             margin-bottom: 10px;
-            color: #F18F01;
+            color: var(--accent);
             text-align: center;
         }
         
@@ -309,10 +392,16 @@
             background: rgba(46, 134, 171, 0.2);
             color: #87CEEB;
             padding: 4px 8px;
-            border-radius: 10px;
+            border-radius: var(--radius);
             font-size: 9px;
             font-weight: 600;
             border: 1px solid rgba(46, 134, 171, 0.3);
+            transition: all var(--transition-fast);
+        }
+        
+        .application-tag:hover {
+            background: rgba(46, 134, 171, 0.3);
+            transform: scale(1.05);
         }
         
         .footer {
@@ -337,7 +426,7 @@
         .metric-value {
             font-size: 18px;
             font-weight: 900;
-            color: #F18F01;
+            color: var(--accent);
             margin-bottom: 3px;
         }
         
@@ -380,7 +469,7 @@
         
         .contact-icon {
             font-size: 12px;
-            color: #F18F01;
+            color: var(--accent);
         }
         
         .qr-section {
@@ -401,12 +490,12 @@
         }
         
         .highlight-specs .category-title {
-            color: #F18F01;
+            color: var(--accent);
         }
         
         .highlight-specs .spec-value {
-            background: rgba(241, 143, 1, 0.2);
-            color: #FFD700;
+            background: var(--gradient-accent);
+            color: #333;
             font-weight: 900;
         }
         
@@ -815,7 +904,7 @@
                     <div class="features-list">
                         <div class="feature-item">
                             <span class="feature-icon">✓</span>
-                            <span><span data-pricing-value="modes.location.licube.cycles"></span>+ cycles garantis</span>
+                            <span><span data-pricing-value="licube.cycle_life" data-pricing-format="number"></span>+ cycles garantis</span>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">✓</span>
@@ -827,7 +916,7 @@
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">✓</span>
-                            <span><span data-pricing-value="battery_specs.weight_reduction_percentage"></span>% plus léger</span>
+                            <span><span data-pricing-value="licube.weight_reduction_percentage" data-pricing-format="number"></span>% plus léger</span>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">✓</span>
@@ -870,7 +959,7 @@
         <div class="footer">
             <div class="performance-metrics">
                 <div class="metric">
-                    <div class="metric-value" data-pricing-value="calculations.tco_location.savings.percentage"></div>
+                    <div class="metric-value" data-pricing-value="calculations.tco_location.savings.percentage" data-pricing-format="number" data-pricing-suffix="%"></div>
                     <div class="metric-label">Économies TCO</div>
                 </div>
                 <div class="metric">
@@ -882,7 +971,7 @@
                     <div class="metric-label">Charge rapide</div>
                 </div>
                 <div class="metric">
-                    <div class="metric-value" data-pricing-value="battery_specs.weight_reduction_percentage"></div>
+                    <div class="metric-value" data-pricing-value="licube.weight_reduction_percentage" data-pricing-format="number" data-pricing-suffix="%"></div>
                     <div class="metric-label">Plus léger</div>
                 </div>
             </div>
@@ -907,10 +996,75 @@
             </div>
         </div>
     </div>
-    <script src="../utils/data-loader.js"></script>
-    
     <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
     <script src="../../js/image-config.js"></script>
+    
+    <!-- Intégration du système de prix centralisé -->
+    <script src="../../js/pricing-manager.js"></script>
+    
+    <script>
+        /**
+         * Spécifications techniques location intégrées avec le système de prix centralisé
+         * 
+         * Rôle : Remplacer TOUS les prix hardcodés par des données du pricing-manager.js
+         * Fonctionnement : Charge et affiche automatiquement les prix depuis pricing-config.json
+         */
+        
+        // Le pricingManager global est disponible via window.pricingManager
+        let currentMode = 'location'; // Mode location pour presentations-location
+        
+        /**
+         * Initialise les spécifications techniques location avec le système centralisé
+         */
+        function initSpecificationsTechniquesLocation() {
+            console.log('🚀 Initialisation spécifications techniques location avec SimplePricingManager global...');
+            
+            // Utiliser le SimplePricingManager global
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                console.log('✅ SimplePricingManager déjà disponible pour spécifications techniques location');
+                updateSpecificationsTechniquesLocation();
+            } else {
+                // Attendre que le pricing manager global soit prêt
+                document.addEventListener('pricingManagerReady', function() {
+                    console.log('✅ SimplePricingManager maintenant disponible pour spécifications techniques location');
+                    updateSpecificationsTechniquesLocation();
+                });
+                
+                // Timeout de sécurité
+                setTimeout(() => {
+                    if (window.pricingManager) {
+                        updateSpecificationsTechniquesLocation();
+                    } else {
+                        console.error('❌ SimplePricingManager non disponible après timeout');
+                    }
+                }, 2000);
+            }
+        }
+        
+        /**
+         * Met à jour les éléments des spécifications techniques location
+         */
+        function updateSpecificationsTechniquesLocation() {
+            if (!window.pricingManager || !window.pricingManager.isLoaded) {
+                console.warn('⚠️ SimplePricingManager non disponible pour updateSpecificationsTechniquesLocation');
+                return;
+            }
+            
+            console.log('🔄 Mise à jour des éléments de spécifications techniques location...');
+            
+            // Mettre à jour tous les éléments avec data-pricing-value
+            const updateCount = window.pricingManager.updatePrices();
+            console.log(`✅ ${updateCount} éléments mis à jour dans spécifications techniques location`);
+        }
+
+        // Initialisation automatique au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log(`📊 Mode: ${currentMode}`);
+            
+            // Initialiser le système de prix centralisé
+            initSpecificationsTechniquesLocation();
+        });
+    </script>
 
 </body>
 </html>

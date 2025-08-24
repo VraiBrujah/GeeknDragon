@@ -1,0 +1,559 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Configuration Li-CUBE PRO™ - EDS Québec",
+  "description": "Schéma complet pour la configuration des prix, spécifications et calculs",
+  "type": "object",
+  "version": "2025-v2.0",
+  "properties": {
+    "_metadata": {
+      "type": "object",
+      "title": "📋 Métadonnées",
+      "description": "Informations de version et historique",
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "description": "Version actuelle de la configuration",
+          "default": "2025-v2.0-SIMPLE",
+          "example": "2025-v2.0-SIMPLE",
+          "usedBy": ["admin/interface.html"]
+        },
+        "lastUpdate": {
+          "type": "string",
+          "title": "Dernière mise à jour",
+          "description": "Date de la dernière modification",
+          "format": "date",
+          "example": "2025-01-23"
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description de cette configuration",
+          "example": "Configuration intégrée - TOUS les calculs dynamiques"
+        },
+        "created_by": {
+          "type": "string",
+          "title": "Créé par",
+          "description": "Auteur de cette version",
+          "default": "Claude Code",
+          "example": "Claude Code"
+        },
+        "currency": {
+          "type": "string",
+          "title": "Devise",
+          "description": "Devise utilisée pour tous les prix",
+          "enum": ["CAD", "USD", "EUR"],
+          "default": "CAD"
+        },
+        "tax_jurisdiction": {
+          "type": "string",
+          "title": "Juridiction fiscale",
+          "description": "Province/région pour les taxes",
+          "enum": ["Quebec", "Ontario", "BC", "Alberta"],
+          "default": "Quebec"
+        }
+      }
+    },
+
+    "modes": {
+      "type": "object",
+      "title": "💰 Modes de Tarification",
+      "description": "Configuration des prix pour vente et location",
+      "properties": {
+        "vente": {
+          "type": "object",
+          "title": "🏪 Mode Vente",
+          "description": "Prix et paramètres pour la vente directe",
+          "properties": {
+            "licube": {
+              "type": "object",
+              "title": "🔋 Li-CUBE PRO™",
+              "properties": {
+                "price_base": {
+                  "type": "number",
+                  "title": "Prix de base",
+                  "description": "Prix de base unitaire HT",
+                  "minimum": 0,
+                  "unit": "CAD",
+                  "example": 5000,
+                  "usedBy": [
+                    "edsquebec.html",
+                    "licubepro.html",
+                    "presentations-vente/presentations-vendeurs/presentation-complete.html",
+                    "presentations-vente/images-onepage/comparaison-visuelle.html",
+                    "test-pricing.html"
+                  ],
+                  "formula": "Base de calcul pour tous les prix de vente"
+                },
+                "taxes_percent": {
+                  "type": "number",
+                  "title": "Taux de taxe",
+                  "description": "Pourcentage de taxes (TVQ + TPS au Québec)",
+                  "minimum": 0,
+                  "maximum": 25,
+                  "unit": "%",
+                  "example": 14.975,
+                  "enum": [5, 13, 14.975, 15],
+                  "usedBy": ["Tous les calculs de prix TTC"],
+                  "formula": "price_total = price_base * (1 + taxes_percent/100)"
+                },
+                "installation_cost": {
+                  "type": "number",
+                  "title": "Coût d'installation",
+                  "description": "Frais d'installation et mise en service",
+                  "minimum": 0,
+                  "unit": "CAD",
+                  "example": 500,
+                  "usedBy": ["Calculs TCO vente"],
+                  "formula": "Ajouté au prix final"
+                },
+                "monitoring_monthly": {
+                  "type": "number",
+                  "title": "Coût monitoring mensuel",
+                  "description": "Frais optionnels de surveillance IoT",
+                  "minimum": 0,
+                  "unit": "CAD/mois",
+                  "example": 20,
+                  "usedBy": [
+                    "licubepro.html",
+                    "edsquebec.html"
+                  ],
+                  "formula": "monitoring_20_years = monitoring_monthly * 12 * 20"
+                },
+                "monitoring_optional": {
+                  "type": "boolean",
+                  "title": "Monitoring optionnel",
+                  "description": "Si le monitoring est optionnel",
+                  "default": true,
+                  "example": true
+                },
+                "cycles": {
+                  "type": "integer",
+                  "title": "Cycles de vie",
+                  "description": "Nombre de cycles garantis",
+                  "minimum": 1000,
+                  "example": 8000,
+                  "usedBy": [
+                    "edsquebec.html",
+                    "licubepro.html",
+                    "presentations-vente/images-onepage/comparaison-visuelle.html",
+                    "presentations-location/images-onepage/specifications-techniques.html"
+                  ]
+                },
+                "maintenance_annual": {
+                  "type": "number",
+                  "title": "Maintenance annuelle",
+                  "description": "Coût de maintenance par an",
+                  "minimum": 0,
+                  "unit": "CAD/an",
+                  "example": 0,
+                  "usedBy": ["Calculs TCO"],
+                  "formula": "maintenance_20_years = maintenance_annual * 20"
+                },
+                "warranty_years": {
+                  "type": "integer",
+                  "title": "Garantie (années)",
+                  "description": "Durée de garantie constructeur",
+                  "minimum": 1,
+                  "maximum": 10,
+                  "unit": "années",
+                  "example": 5
+                },
+                "lifespan_years": {
+                  "type": "integer",
+                  "title": "Durée de vie",
+                  "description": "Durée de vie estimée",
+                  "minimum": 5,
+                  "maximum": 50,
+                  "unit": "années",
+                  "example": 20
+                }
+              }
+            },
+            "nicd": {
+              "type": "object",
+              "title": "🔋 Ni-Cd (Comparaison)",
+              "properties": {
+                "price_base": {
+                  "type": "number",
+                  "title": "Prix de base Ni-Cd",
+                  "description": "Prix de référence pour comparaison",
+                  "minimum": 0,
+                  "unit": "CAD",
+                  "example": 12000,
+                  "usedBy": [
+                    "presentations-vente/presentations-vendeurs/presentation-complete.html",
+                    "presentations-vente/images-onepage/comparaison-visuelle.html"
+                  ]
+                },
+                "cycles": {
+                  "type": "integer",
+                  "title": "Cycles Ni-Cd",
+                  "description": "Cycles de vie Ni-Cd pour comparaison",
+                  "example": 1500,
+                  "usedBy": [
+                    "licubepro.html",
+                    "presentations-vente/images-onepage/comparaison-visuelle.html"
+                  ]
+                },
+                "maintenance_annual": {
+                  "type": "number",
+                  "title": "Maintenance Ni-Cd",
+                  "description": "Coût de maintenance annuel Ni-Cd",
+                  "minimum": 0,
+                  "unit": "CAD/an",
+                  "example": 452,
+                  "usedBy": [
+                    "presentations-vente/presentations-vendeurs/presentation-complete.html",
+                    "Calculs TCO comparatifs"
+                  ]
+                },
+                "replacement_cycle_years": {
+                  "type": "integer",
+                  "title": "Cycle de remplacement",
+                  "description": "Fréquence de remplacement en années",
+                  "minimum": 1,
+                  "unit": "années",
+                  "example": 6
+                }
+              }
+            }
+          }
+        },
+
+        "location": {
+          "type": "object",
+          "title": "🏢 Mode Location",
+          "description": "Tarifs et paramètres pour la location",
+          "properties": {
+            "licube": {
+              "type": "object",
+              "title": "🔋 Li-CUBE PRO™ Location",
+              "properties": {
+                "monthly_rate": {
+                  "type": "number",
+                  "title": "Tarif mensuel",
+                  "description": "Tarif de location mensuel standard",
+                  "minimum": 50,
+                  "maximum": 500,
+                  "unit": "CAD/mois",
+                  "example": 150,
+                  "usedBy": [
+                    "edsquebec.html",
+                    "licubepro.html",
+                    "test-pricing.html",
+                    "presentations-location/images-onepage/comparaison-visuelle.html"
+                  ]
+                },
+                "monthly_rate_min": {
+                  "type": "number",
+                  "title": "Tarif minimum",
+                  "description": "Tarif mensuel minimum possible",
+                  "minimum": 0,
+                  "unit": "CAD/mois",
+                  "example": 100
+                },
+                "monthly_rate_max": {
+                  "type": "number",
+                  "title": "Tarif maximum",
+                  "description": "Tarif mensuel maximum",
+                  "minimum": 100,
+                  "unit": "CAD/mois",
+                  "example": 150
+                },
+                "monitoring_included": {
+                  "type": "boolean",
+                  "title": "Monitoring inclus",
+                  "description": "Si le monitoring est inclus dans le tarif",
+                  "default": true,
+                  "example": true
+                },
+                "installation_included": {
+                  "type": "boolean",
+                  "title": "Installation incluse",
+                  "description": "Si l'installation est incluse",
+                  "default": true,
+                  "example": true
+                },
+                "maintenance_included": {
+                  "type": "boolean",
+                  "title": "Maintenance incluse",
+                  "description": "Si la maintenance est incluse",
+                  "default": true,
+                  "example": true
+                },
+                "contract_minimum_months": {
+                  "type": "integer",
+                  "title": "Durée minimum contrat",
+                  "description": "Durée minimum de contrat",
+                  "minimum": 1,
+                  "unit": "mois",
+                  "example": 12
+                }
+              }
+            },
+            "nicd": {
+              "type": "object",
+              "title": "🔋 Ni-Cd Location (Comparaison)",
+              "properties": {
+                "monthly_rate": {
+                  "type": "number",
+                  "title": "Tarif mensuel Ni-Cd",
+                  "description": "Tarif de référence Ni-Cd",
+                  "unit": "CAD/mois",
+                  "example": 300,
+                  "usedBy": ["Calculs TCO comparatifs location"]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "battery_specs": {
+      "type": "object",
+      "title": "🔧 Spécifications Techniques",
+      "description": "Caractéristiques techniques des batteries",
+      "properties": {
+        "licube": {
+          "type": "object",
+          "title": "🔋 Spécifications Li-CUBE PRO™",
+          "properties": {
+            "weight_kg": {
+              "type": "number",
+              "title": "Poids",
+              "description": "Poids de la batterie",
+              "minimum": 1,
+              "maximum": 200,
+              "unit": "kg",
+              "example": 23,
+              "usedBy": [
+                "presentations-location/images-onepage/comparaison-visuelle.html"
+              ]
+            },
+            "efficiency_percentage": {
+              "type": "number",
+              "title": "Efficacité",
+              "description": "Efficacité énergétique",
+              "minimum": 50,
+              "maximum": 100,
+              "unit": "%",
+              "example": 96
+            },
+            "weight_reduction_percentage": {
+              "type": "number",
+              "title": "Réduction de poids vs Ni-Cd",
+              "description": "Pourcentage de réduction de poids par rapport au Ni-Cd",
+              "minimum": 0,
+              "maximum": 100,
+              "unit": "%",
+              "example": 71,
+              "usedBy": [
+                "edsquebec.html",
+                "presentations-location/images-onepage/specifications-techniques.html",
+                "presentations-location/images-onepage/comparaison-visuelle.html"
+              ],
+              "formula": "((nicd.weight_kg - licube.weight_kg) / nicd.weight_kg) * 100"
+            },
+            "energy_density": {
+              "type": "number",
+              "title": "Densité énergétique",
+              "description": "Densité énergétique",
+              "minimum": 50,
+              "maximum": 300,
+              "unit": "Wh/kg",
+              "example": 117,
+              "usedBy": [
+                "presentations-location/images-onepage/comparaison-visuelle.html"
+              ]
+            }
+          }
+        },
+        "nicd": {
+          "type": "object",
+          "title": "🔋 Spécifications Ni-Cd",
+          "properties": {
+            "weight_kg": {
+              "type": "number",
+              "title": "Poids Ni-Cd",
+              "description": "Poids de référence Ni-Cd",
+              "unit": "kg",
+              "example": 80,
+              "usedBy": [
+                "presentations-location/images-onepage/comparaison-visuelle.html"
+              ]
+            },
+            "energy_density": {
+              "type": "number",
+              "title": "Densité énergétique Ni-Cd",
+              "description": "Densité énergétique Ni-Cd",
+              "unit": "Wh/kg",
+              "example": 30,
+              "usedBy": [
+                "presentations-location/images-onepage/comparaison-visuelle.html"
+              ]
+            },
+            "maintenance_visits_per_year": {
+              "type": "integer",
+              "title": "Visites de maintenance/an",
+              "description": "Nombre de visites de maintenance requises par année",
+              "minimum": 0,
+              "unit": "visites/an",
+              "example": 2,
+              "usedBy": [
+                "presentations-location/images-onepage/comparaison-visuelle.html"
+              ]
+            }
+          }
+        }
+      }
+    },
+
+    "calculations": {
+      "type": "object",
+      "title": "🧮 Calculs Dynamiques",
+      "description": "Toutes les formules et calculs dérivés",
+      "readonly": true,
+      "properties": {
+        "tco_vente": {
+          "type": "object",
+          "title": "📊 TCO Mode Vente",
+          "properties": {
+            "licube": {
+              "type": "object",
+              "title": "TCO Li-CUBE PRO™ (Vente)",
+              "properties": {
+                "total_20_years": {
+                  "type": "number",
+                  "title": "TCO total 20 ans",
+                  "description": "Coût total de possession sur 20 ans",
+                  "unit": "CAD",
+                  "example": 5750,
+                  "formula": "price_base * (1 + taxes_percent/100) + installation_cost + (monitoring_monthly * 12 * 20) + (maintenance_annual * 20)",
+                  "dependencies": ["modes.vente.licube.price_base", "modes.vente.licube.taxes_percent", "modes.vente.licube.installation_cost", "modes.vente.licube.monitoring_monthly", "modes.vente.licube.maintenance_annual"],
+                  "usedBy": [
+                    "presentations-vente/images-onepage/infographie-tco.html",
+                    "presentations-vente/images-onepage/comparaison-visuelle.html",
+                    "presentations-vente/versions-pdf/presentation-executive.html",
+                    "presentations-vente/presentations-vendeurs/presentation-complete.html",
+                    "test-pricing.html"
+                  ]
+                }
+              }
+            },
+            "nicd": {
+              "type": "object",
+              "title": "TCO Ni-Cd (Vente)",
+              "properties": {
+                "total_20_years": {
+                  "type": "number",
+                  "title": "TCO Ni-Cd 20 ans",
+                  "description": "Coût total Ni-Cd sur 20 ans pour comparaison",
+                  "unit": "CAD",
+                  "example": 22500,
+                  "formula": "price_base * (1 + taxes_percent/100) + installation_cost + (maintenance_annual * 20) + (replacement_cost * replacement_cycles)",
+                  "usedBy": [
+                    "presentations-vente/images-onepage/infographie-tco.html",
+                    "presentations-vente/images-onepage/comparaison-visuelle.html",
+                    "presentations-vente/presentations-vendeurs/presentation-complete.html"
+                  ]
+                }
+              }
+            },
+            "savings": {
+              "type": "object",
+              "title": "💰 Économies (Vente)",
+              "properties": {
+                "total": {
+                  "type": "number",
+                  "title": "Économies totales",
+                  "description": "Économies absolues vs Ni-Cd",
+                  "unit": "CAD",
+                  "example": 16750,
+                  "formula": "tco_vente.nicd.total_20_years - tco_vente.licube.total_20_years",
+                  "usedBy": [
+                    "licubepro.html",
+                    "presentations-vente/images-onepage/infographie-tco.html",
+                    "presentations-vente/presentations-vendeurs/presentation-complete.html"
+                  ]
+                },
+                "percentage": {
+                  "type": "number",
+                  "title": "Pourcentage d'économies",
+                  "description": "Pourcentage d'économies vs Ni-Cd",
+                  "unit": "%",
+                  "example": 74,
+                  "formula": "((tco_vente.nicd.total_20_years - tco_vente.licube.total_20_years) / tco_vente.nicd.total_20_years) * 100",
+                  "usedBy": [
+                    "edsquebec.html",
+                    "licubepro.html",
+                    "presentations-vente/versions-pdf/presentation-executive.html",
+                    "presentations-location/images-onepage/specifications-techniques.html"
+                  ]
+                },
+                "roi_years": {
+                  "type": "number",
+                  "title": "Retour sur investissement",
+                  "description": "Période de retour sur investissement en années",
+                  "unit": "années",
+                  "example": 2,
+                  "formula": "modes.vente.licube.price_total / (annual_savings_vs_nicd)",
+                  "usedBy": [
+                    "licubepro.html"
+                  ]
+                }
+              }
+            }
+          }
+        },
+
+        "tco_location": {
+          "type": "object",
+          "title": "📊 TCO Mode Location",
+          "properties": {
+            "savings": {
+              "type": "object",
+              "title": "💰 Économies (Location)",
+              "properties": {
+                "total": {
+                  "type": "number",
+                  "title": "Économies location",
+                  "description": "Économies totales en mode location",
+                  "unit": "CAD",
+                  "example": 36000,
+                  "usedBy": [
+                    "licubepro.html"
+                  ]
+                },
+                "percentage": {
+                  "type": "number",
+                  "title": "Pourcentage économies location",
+                  "description": "Pourcentage d'économies location",
+                  "unit": "%",
+                  "example": 50,
+                  "usedBy": [
+                    "presentations-location/images-onepage/specifications-techniques.html"
+                  ]
+                },
+                "roi_months": {
+                  "type": "number",
+                  "title": "ROI location en mois",
+                  "description": "Retour sur investissement en mois",
+                  "unit": "mois",
+                  "example": 6,
+                  "usedBy": [
+                    "licubepro.html"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "required": ["_metadata", "modes", "battery_specs"],
+  "additionalProperties": false
+}

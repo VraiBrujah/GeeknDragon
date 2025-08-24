@@ -617,12 +617,26 @@
     
     <script>
         // Initialisation du système de prix centralisé
-        document.addEventListener('pricingManagerReady', function() {
+        function initInfographieTCO() {
             console.log('✅ Système de prix centralisé activé - Infographie TCO vente...');
-            if (window.pricingManager) {
-                window.pricingManager.updateAllDisplays('vente');
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                const updateCount = window.pricingManager.updatePrices();
+                console.log(`🔄 ${updateCount} éléments TCO mis à jour dans infographie`);
             }
-        });
+        }
+        
+        // Initialiser quand le pricing manager est prêt
+        if (window.pricingManager && window.pricingManager.isLoaded) {
+            initInfographieTCO();
+        } else {
+            document.addEventListener('pricingManagerReady', initInfographieTCO);
+            // Timeout de sécurité
+            setTimeout(() => {
+                if (window.pricingManager) {
+                    initInfographieTCO();
+                }
+            }, 2000);
+        }
     </script>
 
 </body>

@@ -1,0 +1,2062 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Administration Li-CUBE PRO™ - Configuration Complète</title>
+    
+    <!-- Sécurité : No-index, no-cache -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta name="pragma" content="no-cache">
+    <meta name="expires" content="0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/editor/editor.main.min.css">
+    
+    <style>
+        /* ========================================================================
+         * INTERFACE D'ADMINISTRATION Li-CUBE PRO™ - STYLES COMPLETS
+         * ======================================================================== */
+        
+        :root {
+            --primary: #1B365D;
+            --secondary: #2E86AB;
+            --accent: #F18F01;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --info: #17A2B8;
+            --light: #F8F9FA;
+            --dark: #212529;
+            
+            --bg-main: #0F1419;
+            --bg-panel: #1A1F2E;
+            --bg-card: #252B3B;
+            --bg-input: #2A3441;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8C5D6;
+            --text-muted: #8A95A6;
+            --border: #3A4556;
+            --border-focus: #F18F01;
+            
+            --radius: 8px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.3);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+            --transition: all 0.2s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-primary);
+            min-height: 100vh;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* ================================ LAYOUT ================================ */
+        
+        .admin-layout {
+            display: grid;
+            grid-template-areas: 
+                "header header header"
+                "sidebar main inspector"
+                "footer footer footer";
+            grid-template-rows: 60px 1fr 40px;
+            grid-template-columns: 300px 1fr 350px;
+            height: 100vh;
+            gap: 1px;
+            background: var(--border);
+        }
+        
+        /* ================================ HEADER ================================ */
+        
+        .admin-header {
+            grid-area: header;
+            background: var(--bg-panel);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .btn {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 13px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn:hover {
+            background: var(--bg-card);
+            border-color: var(--border-focus);
+        }
+        
+        .btn-primary { background: var(--accent); border-color: var(--accent); color: white; }
+        .btn-success { background: var(--success); border-color: var(--success); color: white; }
+        .btn-danger { background: var(--danger); border-color: var(--danger); color: white; }
+        .btn-warning { background: var(--warning); border-color: var(--warning); color: black; }
+        
+        /* ================================ SIDEBAR ================================ */
+        
+        .admin-sidebar {
+            grid-area: sidebar;
+            background: var(--bg-panel);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .sidebar-search {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .search-input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 12px 8px 36px;
+            border-radius: var(--radius);
+            font-size: 13px;
+            position: relative;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--border-focus);
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 0;
+        }
+        
+        .config-section {
+            margin-bottom: 24px;
+        }
+        
+        .section-header {
+            padding: 0 16px 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .config-item {
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .config-item:hover {
+            background: var(--bg-input);
+            border-left-color: var(--accent);
+        }
+        
+        .config-item.active {
+            background: var(--bg-card);
+            border-left-color: var(--accent);
+        }
+        
+        .config-item.modified {
+            border-left-color: var(--warning);
+        }
+        
+        .config-item.error {
+            border-left-color: var(--danger);
+        }
+        
+        .item-info {
+            flex: 1;
+        }
+        
+        .item-name {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .item-path {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+        
+        .item-badges {
+            display: flex;
+            gap: 4px;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .badge {
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-calc { background: var(--info); color: white; }
+        .badge-required { background: var(--danger); color: white; }
+        .badge-modified { background: var(--warning); color: black; }
+        .badge-readonly { background: var(--text-muted); color: white; }
+        
+        /* ================================ MAIN CONTENT ================================ */
+        
+        .admin-main {
+            grid-area: main;
+            background: var(--bg-panel);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .main-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+        
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+        
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .config-editor {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+        
+        .editor-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .editor-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .editor-description {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 12px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 2px rgba(241, 143, 1, 0.2);
+        }
+        
+        .form-control[type="number"] {
+            text-align: right;
+        }
+        
+        .form-control.error {
+            border-color: var(--danger);
+        }
+        
+        .form-help {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+        
+        .form-error {
+            font-size: 12px;
+            color: var(--danger);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .input-addon {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            border-radius: var(--radius);
+            font-size: 13px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        
+        /* ================================ INSPECTOR ================================ */
+        
+        .admin-inspector {
+            grid-area: inspector;
+            background: var(--bg-panel);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .inspector-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .inspector-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .inspector-section {
+            margin-bottom: 24px;
+        }
+        
+        .inspector-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        
+        .meta-info {
+            background: var(--bg-input);
+            border-radius: var(--radius);
+            padding: 12px;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        
+        .meta-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .meta-key {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        
+        .meta-value {
+            color: var(--text-primary);
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+        
+        .usage-list {
+            list-style: none;
+        }
+        
+        .usage-item {
+            background: var(--bg-input);
+            border-radius: var(--radius);
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .usage-item:hover {
+            background: var(--bg-card);
+            color: var(--accent);
+        }
+        
+        .formula-display {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            overflow-x: auto;
+        }
+        
+        .dependency-list {
+            list-style: none;
+        }
+        
+        .dependency-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-input);
+            border-radius: var(--radius);
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .dependency-item:hover {
+            background: var(--bg-card);
+        }
+        
+        .dependency-path {
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: var(--text-secondary);
+        }
+        
+        .dependency-value {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        /* ================================ FOOTER ================================ */
+        
+        .admin-footer {
+            grid-area: footer;
+            background: var(--bg-panel);
+            display: flex;
+            align-items: center;
+            justify-content: between;
+            padding: 0 20px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+        
+        .status-dot.warning { background: var(--warning); }
+        .status-dot.error { background: var(--danger); }
+        
+        /* ================================ NOTIFICATIONS ================================ */
+        
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            box-shadow: var(--shadow-lg);
+            max-width: 400px;
+            z-index: 1000;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-success { border-left: 4px solid var(--success); }
+        .notification-warning { border-left: 4px solid var(--warning); }
+        .notification-error { border-left: 4px solid var(--danger); }
+        .notification-info { border-left: 4px solid var(--info); }
+        
+        .notification-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .notification-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .notification-body {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* ================================ TABLES ================================ */
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .data-table th {
+            background: var(--bg-input);
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        .data-table td {
+            font-size: 13px;
+        }
+        
+        .data-table tr:hover {
+            background: var(--bg-input);
+        }
+        
+        /* ================================ TABS ================================ */
+        
+        .tab-container {
+            margin-bottom: 20px;
+        }
+        
+        .tab-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            gap: 2px;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-button.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        
+        .tab-button:hover:not(.active) {
+            color: var(--text-secondary);
+            background: var(--bg-input);
+        }
+        
+        .tab-content {
+            padding-top: 20px;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+        
+        /* ================================ LOADING ================================ */
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 20, 25, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            z-index: 999;
+        }
+        
+        .loading-spinner {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--accent);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ================================ RESPONSIVE ================================ */
+        
+        @media (max-width: 1200px) {
+            .admin-layout {
+                grid-template-columns: 250px 1fr 300px;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .admin-layout {
+                grid-template-areas: 
+                    "header header"
+                    "sidebar main"
+                    "footer footer";
+                grid-template-columns: 280px 1fr;
+            }
+            
+            .admin-inspector {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-areas: 
+                    "header"
+                    "main"
+                    "footer";
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-title">
+                <i class="fas fa-cogs" style="color: var(--accent);"></i>
+                <span>Administration Li-CUBE PRO™</span>
+                <span class="badge badge-calc">v2025-2.0</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-warning" id="validateBtn">
+                    <i class="fas fa-check-circle"></i>
+                    Valider
+                </button>
+                <button class="btn btn-success" id="saveBtn" disabled>
+                    <i class="fas fa-save"></i>
+                    Sauvegarder
+                </button>
+                <button class="btn btn-danger" id="resetBtn">
+                    <i class="fas fa-undo"></i>
+                    Annuler
+                </button>
+                <button class="btn" id="exportBtn">
+                    <i class="fas fa-download"></i>
+                    Exporter
+                </button>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-search">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Rechercher une valeur...">
+                </div>
+            </div>
+            <div class="sidebar-content" id="configTree">
+                <!-- Configuration tree sera générée par JavaScript -->
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="main-toolbar">
+                <div class="toolbar-left">
+                    <nav class="breadcrumb" id="breadcrumb">
+                        <span>Configuration</span>
+                    </nav>
+                </div>
+                <div class="toolbar-right">
+                    <div class="status-indicator">
+                        <div class="status-dot" id="statusDot"></div>
+                        <span id="statusText">Prêt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="config-editor" id="configEditor">
+                    <div class="editor-header">
+                        <h2 class="editor-title">
+                            <i class="fas fa-home"></i>
+                            Sélectionnez un élément à modifier
+                        </h2>
+                        <p class="editor-description">
+                            Utilisez la barre latérale pour naviguer dans la configuration.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Inspector -->
+        <aside class="admin-inspector">
+            <div class="inspector-header">
+                <i class="fas fa-info-circle"></i>
+                Informations détaillées
+            </div>
+            <div class="inspector-content" id="inspectorContent">
+                <div class="inspector-section">
+                    <div class="inspector-section-title">Métadonnées</div>
+                    <div class="meta-info">
+                        <div class="meta-row">
+                            <span class="meta-key">Type:</span>
+                            <span class="meta-value" id="metaType">-</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-key">Unité:</span>
+                            <span class="meta-value" id="metaUnit">-</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-key">Chemin:</span>
+                            <span class="meta-value" id="metaPath">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="inspector-section" id="usageSection" style="display: none;">
+                    <div class="inspector-section-title">Utilisé par</div>
+                    <ul class="usage-list" id="usageList">
+                        <!-- Liste des fichiers utilisant cette valeur -->
+                    </ul>
+                </div>
+
+                <div class="inspector-section" id="formulaSection" style="display: none;">
+                    <div class="inspector-section-title">Formule</div>
+                    <div class="formula-display" id="formulaDisplay">
+                        <!-- Formule de calcul -->
+                    </div>
+                </div>
+
+                <div class="inspector-section" id="dependencySection" style="display: none;">
+                    <div class="inspector-section-title">Dépendances</div>
+                    <ul class="dependency-list" id="dependencyList">
+                        <!-- Liste des dépendances -->
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Footer -->
+        <footer class="admin-footer">
+            <div class="footer-status">
+                <div class="status-indicator">
+                    <div class="status-dot" id="connectionStatus"></div>
+                    <span>Connexion active</span>
+                </div>
+                <span>•</span>
+                <span id="modificationCount">0 modification(s)</span>
+                <span>•</span>
+                <span>Dernière sauvegarde: <span id="lastSave">Jamais</span></span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Chargement du pricing manager parent -->
+    <script src="../js/pricing-manager.js"></script>
+    
+    <!-- Script principal -->
+    <script>
+        /**
+         * =====================================================================
+         * INTERFACE D'ADMINISTRATION Li-CUBE PRO™
+         * =====================================================================
+         * 
+         * Interface complète pour modifier toutes les valeurs et formules
+         * avec validation, calculs en temps réel et propagation
+         */
+        
+        class AdminInterface {
+            constructor() {
+                this.config = null;
+                this.schema = null;
+                this.originalConfig = null;
+                this.modifications = new Map();
+                this.currentPath = null;
+                this.calculations = new AdminCalculations();
+                
+                this.init();
+            }
+            
+            async init() {
+                try {
+                    await this.loadSchema();
+                    await this.loadConfig();
+                    this.buildConfigTree();
+                    this.setupEventListeners();
+                    this.updateStatus('Prêt', 'success');
+                    this.showNotification('Configuration chargée avec succès', 'success');
+                } catch (error) {
+                    console.error('Erreur initialisation:', error);
+                    this.updateStatus('Erreur de chargement', 'error');
+                    this.showNotification('Erreur: ' + error.message, 'error');
+                }
+            }
+            
+            async loadSchema() {
+                try {
+                    // Schéma intégré pour éviter les problèmes CORS avec les fichiers locaux
+                    this.schema = {
+                        "$schema": "https://json-schema.org/draft/2020-12/schema",
+                        "title": "Configuration Li-CUBE PRO™ - EDS Québec",
+                        "description": "Schéma complet pour la configuration des prix, spécifications et calculs",
+                        "type": "object",
+                        "version": "2025-v2.0",
+                        "properties": {
+                            "_metadata": {
+                                "type": "object",
+                                "title": "📋 Métadonnées",
+                                "description": "Informations de version et historique",
+                                "properties": {
+                                    "version": {
+                                        "type": "string",
+                                        "title": "Version",
+                                        "description": "Version actuelle de la configuration",
+                                        "example": "2025-v2.0-SIMPLE"
+                                    },
+                                    "lastUpdate": {
+                                        "type": "string",
+                                        "title": "Dernière mise à jour",
+                                        "description": "Date de la dernière modification",
+                                        "example": "2025-01-23"
+                                    },
+                                    "currency": {
+                                        "type": "string",
+                                        "title": "Devise",
+                                        "description": "Devise utilisée pour tous les prix",
+                                        "enum": ["CAD", "USD", "EUR"],
+                                        "example": "CAD"
+                                    }
+                                }
+                            },
+                            "modes": {
+                                "type": "object",
+                                "title": "💰 Modes de Tarification",
+                                "description": "Configuration des prix pour vente et location",
+                                "properties": {
+                                    "vente": {
+                                        "type": "object",
+                                        "title": "🏪 Mode Vente",
+                                        "properties": {
+                                            "licube": {
+                                                "type": "object",
+                                                "title": "🔋 Li-CUBE PRO™",
+                                                "properties": {
+                                                    "price_base": {
+                                                        "type": "number",
+                                                        "title": "Prix de base",
+                                                        "description": "Prix de base unitaire HT",
+                                                        "minimum": 0,
+                                                        "unit": "CAD",
+                                                        "example": 5000,
+                                                        "usedBy": ["edsquebec.html", "licubepro.html", "test-pricing.html"]
+                                                    },
+                                                    "taxes_percent": {
+                                                        "type": "number",
+                                                        "title": "Taux de taxe",
+                                                        "description": "Pourcentage de taxes (TVQ + TPS au Québec)",
+                                                        "minimum": 0,
+                                                        "maximum": 25,
+                                                        "unit": "%",
+                                                        "example": 14.975
+                                                    },
+                                                    "installation_cost": {
+                                                        "type": "number",
+                                                        "title": "Coût d'installation",
+                                                        "description": "Frais d'installation et mise en service",
+                                                        "minimum": 0,
+                                                        "unit": "CAD",
+                                                        "example": 500
+                                                    },
+                                                    "monitoring_monthly": {
+                                                        "type": "number",
+                                                        "title": "Coût monitoring mensuel",
+                                                        "description": "Frais optionnels de surveillance IoT",
+                                                        "minimum": 0,
+                                                        "unit": "CAD/mois",
+                                                        "example": 20,
+                                                        "usedBy": ["licubepro.html", "edsquebec.html"]
+                                                    },
+                                                    "cycles": {
+                                                        "type": "integer",
+                                                        "title": "Cycles de vie",
+                                                        "description": "Nombre de cycles garantis",
+                                                        "minimum": 1000,
+                                                        "example": 8000,
+                                                        "usedBy": ["edsquebec.html", "licubepro.html"]
+                                                    },
+                                                    "maintenance_annual": {
+                                                        "type": "number",
+                                                        "title": "Maintenance annuelle",
+                                                        "description": "Coût de maintenance par an",
+                                                        "minimum": 0,
+                                                        "unit": "CAD/an",
+                                                        "example": 0
+                                                    }
+                                                }
+                                            },
+                                            "nicd": {
+                                                "type": "object",
+                                                "title": "🔋 Ni-Cd (Comparaison)",
+                                                "properties": {
+                                                    "price_base": {
+                                                        "type": "number",
+                                                        "title": "Prix de base Ni-Cd",
+                                                        "description": "Prix de référence pour comparaison",
+                                                        "minimum": 0,
+                                                        "unit": "CAD",
+                                                        "example": 12000
+                                                    },
+                                                    "cycles": {
+                                                        "type": "integer",
+                                                        "title": "Cycles Ni-Cd",
+                                                        "description": "Cycles de vie Ni-Cd pour comparaison",
+                                                        "example": 1500,
+                                                        "usedBy": ["licubepro.html"]
+                                                    },
+                                                    "maintenance_annual": {
+                                                        "type": "number",
+                                                        "title": "Maintenance Ni-Cd",
+                                                        "description": "Coût de maintenance annuel Ni-Cd",
+                                                        "minimum": 0,
+                                                        "unit": "CAD/an",
+                                                        "example": 452
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "location": {
+                                        "type": "object",
+                                        "title": "🏢 Mode Location",
+                                        "properties": {
+                                            "licube": {
+                                                "type": "object",
+                                                "title": "🔋 Li-CUBE PRO™ Location",
+                                                "properties": {
+                                                    "monthly_rate": {
+                                                        "type": "number",
+                                                        "title": "Tarif mensuel",
+                                                        "description": "Tarif de location mensuel standard",
+                                                        "minimum": 50,
+                                                        "maximum": 500,
+                                                        "unit": "CAD/mois",
+                                                        "example": 150,
+                                                        "usedBy": ["edsquebec.html", "licubepro.html", "test-pricing.html"]
+                                                    },
+                                                    "monitoring_included": {
+                                                        "type": "boolean",
+                                                        "title": "Monitoring inclus",
+                                                        "description": "Si le monitoring est inclus dans le tarif",
+                                                        "example": true
+                                                    },
+                                                    "contract_minimum_months": {
+                                                        "type": "integer",
+                                                        "title": "Durée minimum contrat",
+                                                        "description": "Durée minimum de contrat",
+                                                        "minimum": 1,
+                                                        "unit": "mois",
+                                                        "example": 12
+                                                    }
+                                                }
+                                            },
+                                            "nicd": {
+                                                "type": "object",
+                                                "title": "🔋 Ni-Cd Location (Comparaison)",
+                                                "properties": {
+                                                    "monthly_rate": {
+                                                        "type": "number",
+                                                        "title": "Tarif mensuel Ni-Cd",
+                                                        "description": "Tarif de référence Ni-Cd",
+                                                        "unit": "CAD/mois",
+                                                        "example": 300
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "battery_specs": {
+                                "type": "object",
+                                "title": "🔧 Spécifications Techniques",
+                                "properties": {
+                                    "licube": {
+                                        "type": "object",
+                                        "title": "🔋 Spécifications Li-CUBE PRO™",
+                                        "properties": {
+                                            "weight_kg": {
+                                                "type": "number",
+                                                "title": "Poids",
+                                                "description": "Poids de la batterie",
+                                                "minimum": 1,
+                                                "maximum": 200,
+                                                "unit": "kg",
+                                                "example": 23
+                                            },
+                                            "efficiency_percentage": {
+                                                "type": "number",
+                                                "title": "Efficacité",
+                                                "description": "Efficacité énergétique",
+                                                "minimum": 50,
+                                                "maximum": 100,
+                                                "unit": "%",
+                                                "example": 96
+                                            },
+                                            "weight_reduction_percentage": {
+                                                "type": "number",
+                                                "title": "Réduction de poids vs Ni-Cd",
+                                                "description": "Pourcentage de réduction de poids par rapport au Ni-Cd",
+                                                "minimum": 0,
+                                                "maximum": 100,
+                                                "unit": "%",
+                                                "example": 71,
+                                                "usedBy": ["edsquebec.html"]
+                                            }
+                                        }
+                                    },
+                                    "nicd": {
+                                        "type": "object",
+                                        "title": "🔋 Spécifications Ni-Cd",
+                                        "properties": {
+                                            "weight_kg": {
+                                                "type": "number",
+                                                "title": "Poids Ni-Cd",
+                                                "description": "Poids de référence Ni-Cd",
+                                                "unit": "kg",
+                                                "example": 80
+                                            },
+                                            "maintenance_visits_per_year": {
+                                                "type": "integer",
+                                                "title": "Visites de maintenance/an",
+                                                "description": "Nombre de visites de maintenance requises par année",
+                                                "minimum": 0,
+                                                "unit": "visites/an",
+                                                "example": 2
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    };
+                    console.log('✅ Schéma intégré chargé:', this.schema.title);
+                } catch (error) {
+                    console.error('❌ Erreur chargement schéma:', error);
+                    throw new Error('Impossible de charger le schéma de configuration');
+                }
+            }
+            
+            async loadConfig() {
+                // Charger la configuration depuis le pricing manager
+                if (window.pricingManager && window.pricingManager.config) {
+                    this.config = JSON.parse(JSON.stringify(window.pricingManager.config));
+                    this.originalConfig = JSON.parse(JSON.stringify(this.config));
+                    console.log('✅ Configuration chargée depuis pricing manager');
+                } else {
+                    // Charger la configuration par défaut
+                    this.config = this.getDefaultConfig();
+                    this.originalConfig = JSON.parse(JSON.stringify(this.config));
+                    console.log('✅ Configuration par défaut chargée');
+                }
+            }
+            
+            getDefaultConfig() {
+                return {
+                    "_metadata": {
+                        "version": "2025-v2.0-ADMIN",
+                        "lastUpdate": new Date().toISOString().split('T')[0],
+                        "description": "Configuration modifiée via interface admin",
+                        "created_by": "Interface Admin",
+                        "currency": "CAD",
+                        "tax_jurisdiction": "Quebec"
+                    },
+                    "modes": {
+                        "vente": {
+                            "licube": {
+                                "price_base": 5000,
+                                "taxes_percent": 14.975,
+                                "installation_cost": 500,
+                                "monitoring_monthly": 20,
+                                "monitoring_optional": true,
+                                "cycles": 8000,
+                                "maintenance_annual": 0,
+                                "warranty_years": 5,
+                                "lifespan_years": 20
+                            },
+                            "nicd": {
+                                "price_base": 12000,
+                                "taxes_percent": 14.975,
+                                "installation_cost": 500,
+                                "cycles": 1500,
+                                "maintenance_annual": 452,
+                                "replacement_cycle_years": 6,
+                                "lifespan_years": 20
+                            }
+                        },
+                        "location": {
+                            "licube": {
+                                "monthly_rate": 150,
+                                "monthly_rate_min": 100,
+                                "monthly_rate_max": 150,
+                                "monitoring_included": true,
+                                "installation_included": true,
+                                "maintenance_included": true,
+                                "cycles": 8000,
+                                "warranty_years": 5,
+                                "contract_minimum_months": 12
+                            },
+                            "nicd": {
+                                "monthly_rate": 300,
+                                "maintenance_annual": 452,
+                                "cycles": 1500,
+                                "monitoring_included": false,
+                                "installation_included": true,
+                                "replacement_cycle_years": 6
+                            }
+                        }
+                    },
+                    "battery_specs": {
+                        "licube": {
+                            "weight_kg": 23,
+                            "efficiency_percentage": 96,
+                            "charge_speed_multiplier": 6,
+                            "availability_percentage": 99.9,
+                            "self_discharge_monthly": 1.2,
+                            "operating_temp_min": -40,
+                            "operating_temp_max": 60,
+                            "cycle_life": 8000,
+                            "energy_density": 117,
+                            "weight_reduction_percentage": 71,
+                            "capacity_increase_percentage": 316,
+                            "lifespan_years": "20-25"
+                        },
+                        "nicd": {
+                            "weight_kg": 80,
+                            "efficiency_percentage": 65,
+                            "charge_speed_multiplier": 1,
+                            "availability_percentage": 95,
+                            "self_discharge_monthly": 20,
+                            "operating_temp_min": -20,
+                            "operating_temp_max": 50,
+                            "cycle_life": "2000-3000",
+                            "energy_density": 30,
+                            "maintenance_visits_per_year": 2,
+                            "failure_rate_annual": 3,
+                            "failure_cost_each": 800,
+                            "maintenance_annual_max": 600,
+                            "lifespan_years": "3-4"
+                        }
+                    }
+                };
+            }
+            
+            buildConfigTree() {
+                const tree = document.getElementById('configTree');
+                tree.innerHTML = '';
+                
+                this.buildTreeSection(this.schema.properties, this.config, tree, '');
+            }
+            
+            buildTreeSection(schemaProps, configData, container, prefix) {
+                Object.keys(schemaProps).forEach(key => {
+                    const schemaProp = schemaProps[key];
+                    const configValue = configData?.[key];
+                    const fullPath = prefix ? `${prefix}.${key}` : key;
+                    
+                    if (schemaProp.type === 'object' && schemaProp.properties) {
+                        // Section/groupe
+                        const section = document.createElement('div');
+                        section.className = 'config-section';
+                        
+                        const header = document.createElement('div');
+                        header.className = 'section-header';
+                        header.textContent = schemaProp.title || key;
+                        section.appendChild(header);
+                        
+                        this.buildTreeSection(schemaProp.properties, configValue, section, fullPath);
+                        container.appendChild(section);
+                    } else {
+                        // Item individuel
+                        const item = document.createElement('div');
+                        item.className = 'config-item';
+                        item.dataset.path = fullPath;
+                        
+                        const info = document.createElement('div');
+                        info.className = 'item-info';
+                        
+                        const name = document.createElement('div');
+                        name.className = 'item-name';
+                        name.textContent = schemaProp.title || key;
+                        info.appendChild(name);
+                        
+                        const path = document.createElement('div');
+                        path.className = 'item-path';
+                        path.textContent = fullPath;
+                        info.appendChild(path);
+                        
+                        const badges = document.createElement('div');
+                        badges.className = 'item-badges';
+                        
+                        // Badges selon le type/état
+                        if (schemaProp.readonly) {
+                            const badge = document.createElement('span');
+                            badge.className = 'badge badge-readonly';
+                            badge.textContent = 'Calc';
+                            badges.appendChild(badge);
+                        }
+                        
+                        if (this.modifications.has(fullPath)) {
+                            const badge = document.createElement('span');
+                            badge.className = 'badge badge-modified';
+                            badge.textContent = 'Mod';
+                            badges.appendChild(badge);
+                            item.classList.add('modified');
+                        }
+                        
+                        item.appendChild(info);
+                        item.appendChild(badges);
+                        
+                        // Event listener
+                        item.addEventListener('click', () => this.selectConfigItem(fullPath));
+                        
+                        container.appendChild(item);
+                    }
+                });
+            }
+            
+            selectConfigItem(path) {
+                // Désélectionner l'ancien
+                const oldActive = document.querySelector('.config-item.active');
+                if (oldActive) oldActive.classList.remove('active');
+                
+                // Sélectionner le nouveau
+                const newActive = document.querySelector(`[data-path="${path}"]`);
+                if (newActive) newActive.classList.add('active');
+                
+                this.currentPath = path;
+                this.updateBreadcrumb(path);
+                this.buildEditor(path);
+                this.updateInspector(path);
+            }
+            
+            updateBreadcrumb(path) {
+                const breadcrumb = document.getElementById('breadcrumb');
+                const parts = path.split('.');
+                
+                breadcrumb.innerHTML = '<span>Configuration</span>';
+                
+                parts.forEach((part, index) => {
+                    const separator = document.createElement('span');
+                    separator.className = 'breadcrumb-separator';
+                    separator.textContent = '>';
+                    breadcrumb.appendChild(separator);
+                    
+                    const crumb = document.createElement('span');
+                    crumb.textContent = part;
+                    breadcrumb.appendChild(crumb);
+                });
+            }
+            
+            buildEditor(path) {
+                const editor = document.getElementById('configEditor');
+                const schemaProp = this.getSchemaProperty(path);
+                const currentValue = this.getConfigValue(path);
+                
+                if (!schemaProp) {
+                    editor.innerHTML = '<div class="editor-header"><h2>Propriété non trouvée</h2></div>';
+                    return;
+                }
+                
+                editor.innerHTML = `
+                    <div class="editor-header">
+                        <h2 class="editor-title">
+                            <i class="fas ${this.getTypeIcon(schemaProp.type)}"></i>
+                            ${schemaProp.title || path.split('.').pop()}
+                        </h2>
+                        <p class="editor-description">
+                            ${schemaProp.description || 'Aucune description disponible.'}
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        ${this.buildFormField(path, schemaProp, currentValue)}
+                    </div>
+                `;
+            }
+            
+            buildFormField(path, schema, value) {
+                const fieldId = `field_${path.replace(/\./g, '_')}`;
+                let input = '';
+                
+                switch (schema.type) {
+                    case 'string':
+                        if (schema.enum) {
+                            input = `<select class="form-control" id="${fieldId}">
+                                ${schema.enum.map(option => 
+                                    `<option value="${option}" ${value === option ? 'selected' : ''}>${option}</option>`
+                                ).join('')}
+                            </select>`;
+                        } else {
+                            input = `<input type="text" class="form-control" id="${fieldId}" value="${value || ''}" placeholder="${schema.example || ''}">`;
+                        }
+                        break;
+                        
+                    case 'number':
+                    case 'integer':
+                        const min = schema.minimum !== undefined ? `min="${schema.minimum}"` : '';
+                        const max = schema.maximum !== undefined ? `max="${schema.maximum}"` : '';
+                        const step = schema.type === 'integer' ? 'step="1"' : 'step="0.001"';
+                        
+                        input = `<div class="input-group">
+                            <input type="number" class="form-control" id="${fieldId}" 
+                                   value="${value !== undefined ? value : ''}" 
+                                   ${min} ${max} ${step}
+                                   placeholder="${schema.example || ''}">
+                            ${schema.unit ? `<span class="input-addon">${schema.unit}</span>` : ''}
+                        </div>`;
+                        break;
+                        
+                    case 'boolean':
+                        input = `<label class="switch">
+                            <input type="checkbox" id="${fieldId}" ${value ? 'checked' : ''}>
+                            <span class="slider"></span>
+                        </label>`;
+                        break;
+                        
+                    default:
+                        input = `<input type="text" class="form-control" id="${fieldId}" value="${value || ''}" placeholder="${schema.example || ''}">`;
+                }
+                
+                return `
+                    <label class="form-label" for="${fieldId}">
+                        ${schema.title || path.split('.').pop()}
+                        ${schema.unit ? ` (${schema.unit})` : ''}
+                    </label>
+                    ${input}
+                    ${schema.description ? `<div class="form-help">${schema.description}</div>` : ''}
+                    <div class="form-error" id="error_${fieldId}" style="display: none;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span></span>
+                    </div>
+                `;
+            }
+            
+            updateInspector(path) {
+                const schemaProp = this.getSchemaProperty(path);
+                const currentValue = this.getConfigValue(path);
+                
+                // Métadonnées
+                document.getElementById('metaType').textContent = schemaProp?.type || 'inconnu';
+                document.getElementById('metaUnit').textContent = schemaProp?.unit || 'aucune';
+                document.getElementById('metaPath').textContent = path;
+                
+                // Usage
+                const usageSection = document.getElementById('usageSection');
+                const usageList = document.getElementById('usageList');
+                
+                if (schemaProp?.usedBy && schemaProp.usedBy.length > 0) {
+                    usageSection.style.display = 'block';
+                    usageList.innerHTML = schemaProp.usedBy.map(file => 
+                        `<li class="usage-item" onclick="window.open('../${file}', '_blank')">${file}</li>`
+                    ).join('');
+                } else {
+                    usageSection.style.display = 'none';
+                }
+                
+                // Formule
+                const formulaSection = document.getElementById('formulaSection');
+                const formulaDisplay = document.getElementById('formulaDisplay');
+                
+                if (schemaProp?.formula) {
+                    formulaSection.style.display = 'block';
+                    formulaDisplay.textContent = schemaProp.formula;
+                } else if (path.startsWith('calculations.')) {
+                    formulaSection.style.display = 'block';
+                    const formula = this.calculations.getFormula(path);
+                    formulaDisplay.textContent = formula || 'Formule non définie';
+                } else {
+                    formulaSection.style.display = 'none';
+                }
+                
+                // Dépendances
+                const dependencySection = document.getElementById('dependencySection');
+                const dependencyList = document.getElementById('dependencyList');
+                
+                if (schemaProp?.dependencies && schemaProp.dependencies.length > 0) {
+                    dependencySection.style.display = 'block';
+                    dependencyList.innerHTML = schemaProp.dependencies.map(dep => {
+                        const depValue = this.getConfigValue(dep);
+                        return `<li class="dependency-item" onclick="adminInterface.selectConfigItem('${dep}')">
+                            <span class="dependency-path">${dep}</span>
+                            <span class="dependency-value">${depValue}</span>
+                        </li>`;
+                    }).join('');
+                } else {
+                    dependencySection.style.display = 'none';
+                }
+            }
+            
+            getSchemaProperty(path) {
+                const parts = path.split('.');
+                let current = this.schema.properties;
+                
+                for (const part of parts) {
+                    if (current?.[part]) {
+                        if (current[part].type === 'object' && current[part].properties) {
+                            current = current[part].properties;
+                        } else {
+                            return current[part];
+                        }
+                    } else {
+                        return null;
+                    }
+                }
+                
+                return current;
+            }
+            
+            getConfigValue(path) {
+                const parts = path.split('.');
+                let current = this.config;
+                
+                for (const part of parts) {
+                    if (current && typeof current === 'object' && part in current) {
+                        current = current[part];
+                    } else {
+                        return undefined;
+                    }
+                }
+                
+                return current;
+            }
+            
+            setConfigValue(path, value) {
+                const parts = path.split('.');
+                const lastPart = parts.pop();
+                let current = this.config;
+                
+                // Naviguer jusqu'au parent
+                for (const part of parts) {
+                    if (!current[part] || typeof current[part] !== 'object') {
+                        current[part] = {};
+                    }
+                    current = current[part];
+                }
+                
+                // Définir la valeur
+                current[lastPart] = value;
+                
+                // Marquer comme modifié
+                this.modifications.set(path, {
+                    oldValue: this.getOriginalValue(path),
+                    newValue: value,
+                    timestamp: Date.now()
+                });
+                
+                // Mettre à jour l'interface
+                this.updateModificationCount();
+                this.rebuildConfigTree();
+                
+                // Recalculer les valeurs dépendantes
+                this.recalculateAll();
+            }
+            
+            getOriginalValue(path) {
+                const parts = path.split('.');
+                let current = this.originalConfig;
+                
+                for (const part of parts) {
+                    if (current && typeof current === 'object' && part in current) {
+                        current = current[part];
+                    } else {
+                        return undefined;
+                    }
+                }
+                
+                return current;
+            }
+            
+            recalculateAll() {
+                // Recalculer tous les champs calculés
+                this.calculations.recalculate(this.config);
+                
+                // Propager aux autres pages si nécessaire
+                if (window.pricingManager) {
+                    window.pricingManager.config = JSON.parse(JSON.stringify(this.config));
+                    window.pricingManager.updatePrices();
+                }
+            }
+            
+            setupEventListeners() {
+                // Recherche
+                document.getElementById('searchInput').addEventListener('input', (e) => {
+                    this.filterConfigTree(e.target.value);
+                });
+                
+                // Boutons d'action
+                document.getElementById('saveBtn').addEventListener('click', () => this.saveConfiguration());
+                document.getElementById('resetBtn').addEventListener('click', () => this.resetConfiguration());
+                document.getElementById('validateBtn').addEventListener('click', () => this.validateConfiguration());
+                document.getElementById('exportBtn').addEventListener('click', () => this.exportConfiguration());
+                
+                // Écouter les changements dans l'éditeur
+                document.addEventListener('input', (e) => {
+                    if (e.target.id && e.target.id.startsWith('field_')) {
+                        const path = e.target.id.replace('field_', '').replace(/_/g, '.');
+                        let value = e.target.value;
+                        
+                        // Conversion selon le type
+                        const schemaProp = this.getSchemaProperty(path);
+                        if (schemaProp) {
+                            if (schemaProp.type === 'number' || schemaProp.type === 'integer') {
+                                value = parseFloat(value) || 0;
+                            } else if (schemaProp.type === 'boolean') {
+                                value = e.target.checked;
+                            }
+                        }
+                        
+                        this.setConfigValue(path, value);
+                    }
+                });
+            }
+            
+            filterConfigTree(searchTerm) {
+                const items = document.querySelectorAll('.config-item');
+                searchTerm = searchTerm.toLowerCase();
+                
+                items.forEach(item => {
+                    const name = item.querySelector('.item-name').textContent.toLowerCase();
+                    const path = item.querySelector('.item-path').textContent.toLowerCase();
+                    
+                    if (name.includes(searchTerm) || path.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+            
+            updateModificationCount() {
+                document.getElementById('modificationCount').textContent = `${this.modifications.size} modification(s)`;
+                document.getElementById('saveBtn').disabled = this.modifications.size === 0;
+            }
+            
+            updateStatus(message, type = 'info') {
+                const statusText = document.getElementById('statusText');
+                const statusDot = document.getElementById('statusDot');
+                
+                statusText.textContent = message;
+                statusDot.className = `status-dot ${type}`;
+            }
+            
+            showNotification(message, type = 'info', duration = 5000) {
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.innerHTML = `
+                    <div class="notification-header">
+                        <div class="notification-title">${this.getNotificationTitle(type)}</div>
+                        <button class="notification-close">&times;</button>
+                    </div>
+                    <div class="notification-body">${message}</div>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => notification.classList.add('show'), 100);
+                
+                const closeBtn = notification.querySelector('.notification-close');
+                const closeNotification = () => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 300);
+                };
+                
+                closeBtn.addEventListener('click', closeNotification);
+                if (duration > 0) {
+                    setTimeout(closeNotification, duration);
+                }
+            }
+            
+            getNotificationTitle(type) {
+                switch (type) {
+                    case 'success': return 'Succès';
+                    case 'warning': return 'Attention';
+                    case 'error': return 'Erreur';
+                    default: return 'Information';
+                }
+            }
+            
+            getTypeIcon(type) {
+                switch (type) {
+                    case 'string': return 'fa-font';
+                    case 'number': case 'integer': return 'fa-calculator';
+                    case 'boolean': return 'fa-toggle-on';
+                    case 'object': return 'fa-folder';
+                    default: return 'fa-question';
+                }
+            }
+            
+            rebuildConfigTree() {
+                this.buildConfigTree();
+                if (this.currentPath) {
+                    const activeItem = document.querySelector(`[data-path="${this.currentPath}"]`);
+                    if (activeItem) activeItem.classList.add('active');
+                }
+            }
+            
+            async saveConfiguration() {
+                try {
+                    this.updateStatus('Sauvegarde en cours...', 'warning');
+                    
+                    // Valider avant sauvegarde
+                    const validation = this.validateConfiguration();
+                    if (!validation.valid) {
+                        this.showNotification(`Erreurs de validation: ${validation.errors.join(', ')}`, 'error');
+                        return;
+                    }
+                    
+                    // Sauvegarder dans le pricing manager
+                    if (window.pricingManager) {
+                        window.pricingManager.config = JSON.parse(JSON.stringify(this.config));
+                        window.pricingManager.updatePrices();
+                    }
+                    
+                    // Réinitialiser les modifications
+                    this.modifications.clear();
+                    this.originalConfig = JSON.parse(JSON.stringify(this.config));
+                    this.updateModificationCount();
+                    this.rebuildConfigTree();
+                    
+                    // Émettre l'événement de mise à jour
+                    window.dispatchEvent(new CustomEvent('eds:dataUpdated', {
+                        detail: {
+                            paths: Array.from(this.modifications.keys()),
+                            timestamp: new Date().toISOString(),
+                            source: 'admin-interface'
+                        }
+                    }));
+                    
+                    document.getElementById('lastSave').textContent = new Date().toLocaleString('fr-CA');
+                    this.updateStatus('Sauvegardé avec succès', 'success');
+                    this.showNotification('Configuration sauvegardée avec succès!', 'success');
+                    
+                } catch (error) {
+                    console.error('Erreur sauvegarde:', error);
+                    this.updateStatus('Erreur de sauvegarde', 'error');
+                    this.showNotification('Erreur lors de la sauvegarde: ' + error.message, 'error');
+                }
+            }
+            
+            resetConfiguration() {
+                if (confirm('Êtes-vous sûr de vouloir annuler tous les changements?')) {
+                    this.config = JSON.parse(JSON.stringify(this.originalConfig));
+                    this.modifications.clear();
+                    this.updateModificationCount();
+                    this.rebuildConfigTree();
+                    
+                    if (this.currentPath) {
+                        this.buildEditor(this.currentPath);
+                        this.updateInspector(this.currentPath);
+                    }
+                    
+                    this.showNotification('Configuration réinitialisée', 'info');
+                }
+            }
+            
+            validateConfiguration() {
+                const errors = [];
+                
+                // Validation basique selon le schéma
+                this.validateObject(this.config, this.schema, '', errors);
+                
+                // Validations métier supplémentaires
+                this.validateBusinessRules(errors);
+                
+                if (errors.length === 0) {
+                    this.updateStatus('Configuration valide', 'success');
+                    this.showNotification('Configuration valide!', 'success');
+                } else {
+                    this.updateStatus(`${errors.length} erreur(s) de validation`, 'error');
+                    this.showNotification(`Erreurs trouvées: ${errors.join(', ')}`, 'error');
+                }
+                
+                return {
+                    valid: errors.length === 0,
+                    errors: errors
+                };
+            }
+            
+            validateObject(obj, schema, path, errors) {
+                if (!schema.properties) return;
+                
+                Object.keys(schema.properties).forEach(key => {
+                    const propSchema = schema.properties[key];
+                    const propPath = path ? `${path}.${key}` : key;
+                    const value = obj?.[key];
+                    
+                    // Vérifier les champs requis
+                    if (schema.required && schema.required.includes(key) && (value === undefined || value === null)) {
+                        errors.push(`${propPath} est requis`);
+                        return;
+                    }
+                    
+                    if (value === undefined || value === null) return;
+                    
+                    // Validation par type
+                    switch (propSchema.type) {
+                        case 'number':
+                        case 'integer':
+                            if (typeof value !== 'number' || isNaN(value)) {
+                                errors.push(`${propPath} doit être un nombre`);
+                            } else {
+                                if (propSchema.minimum !== undefined && value < propSchema.minimum) {
+                                    errors.push(`${propPath} doit être >= ${propSchema.minimum}`);
+                                }
+                                if (propSchema.maximum !== undefined && value > propSchema.maximum) {
+                                    errors.push(`${propPath} doit être <= ${propSchema.maximum}`);
+                                }
+                            }
+                            break;
+                            
+                        case 'string':
+                            if (typeof value !== 'string') {
+                                errors.push(`${propPath} doit être une chaîne`);
+                            } else if (propSchema.enum && !propSchema.enum.includes(value)) {
+                                errors.push(`${propPath} doit être l'une des valeurs: ${propSchema.enum.join(', ')}`);
+                            }
+                            break;
+                            
+                        case 'boolean':
+                            if (typeof value !== 'boolean') {
+                                errors.push(`${propPath} doit être un booléen`);
+                            }
+                            break;
+                            
+                        case 'object':
+                            if (typeof value !== 'object') {
+                                errors.push(`${propPath} doit être un objet`);
+                            } else {
+                                this.validateObject(value, propSchema, propPath, errors);
+                            }
+                            break;
+                    }
+                });
+            }
+            
+            validateBusinessRules(errors) {
+                // Règles métier spécifiques
+                try {
+                    // Vérifier que les prix de base sont cohérents
+                    const licubePriceVente = this.getConfigValue('modes.vente.licube.price_base');
+                    const nicdPriceVente = this.getConfigValue('modes.vente.nicd.price_base');
+                    
+                    if (licubePriceVente >= nicdPriceVente) {
+                        errors.push('Le prix Li-CUBE devrait être inférieur au prix Ni-Cd');
+                    }
+                    
+                    // Vérifier les cycles
+                    const licubeCycles = this.getConfigValue('modes.vente.licube.cycles');
+                    const nicdCycles = this.getConfigValue('modes.vente.nicd.cycles');
+                    
+                    if (licubeCycles <= nicdCycles) {
+                        errors.push('Les cycles Li-CUBE devraient être supérieurs aux cycles Ni-Cd');
+                    }
+                    
+                    // Vérifier les taux de taxes
+                    const taxRate = this.getConfigValue('modes.vente.licube.taxes_percent');
+                    if (taxRate < 0 || taxRate > 25) {
+                        errors.push('Le taux de taxe doit être entre 0% et 25%');
+                    }
+                    
+                } catch (error) {
+                    errors.push('Erreur lors de la validation des règles métier: ' + error.message);
+                }
+            }
+            
+            exportConfiguration() {
+                const exportData = {
+                    metadata: {
+                        exportDate: new Date().toISOString(),
+                        version: this.config._metadata?.version || 'unknown',
+                        modifications: this.modifications.size
+                    },
+                    schema: this.schema,
+                    configuration: this.config,
+                    modifications: Object.fromEntries(this.modifications)
+                };
+                
+                const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+                    type: 'application/json'
+                });
+                
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `licube-config-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                this.showNotification('Configuration exportée avec succès!', 'success');
+            }
+        }
+        
+        /**
+         * Classe pour gérer les calculs dynamiques
+         */
+        class AdminCalculations {
+            constructor() {
+                this.formulas = this.setupFormulas();
+            }
+            
+            setupFormulas() {
+                return {
+                    'calculations.tco_vente.licube.total_20_years': {
+                        formula: '(price_base * (1 + taxes_percent/100)) + installation_cost + (monitoring_monthly * 12 * 20)',
+                        dependencies: ['modes.vente.licube.price_base', 'modes.vente.licube.taxes_percent', 'modes.vente.licube.installation_cost', 'modes.vente.licube.monitoring_monthly']
+                    },
+                    'calculations.tco_vente.nicd.total_20_years': {
+                        formula: '(price_base * (1 + taxes_percent/100)) + installation_cost + (maintenance_annual * 20) + replacement_costs',
+                        dependencies: ['modes.vente.nicd.price_base', 'modes.vente.nicd.taxes_percent', 'modes.vente.nicd.installation_cost', 'modes.vente.nicd.maintenance_annual']
+                    },
+                    'calculations.tco_vente.savings.total': {
+                        formula: 'tco_vente.nicd.total_20_years - tco_vente.licube.total_20_years',
+                        dependencies: ['calculations.tco_vente.nicd.total_20_years', 'calculations.tco_vente.licube.total_20_years']
+                    },
+                    'calculations.tco_vente.savings.percentage': {
+                        formula: '((tco_nicd - tco_licube) / tco_nicd) * 100',
+                        dependencies: ['calculations.tco_vente.nicd.total_20_years', 'calculations.tco_vente.licube.total_20_years']
+                    }
+                };
+            }
+            
+            getFormula(path) {
+                return this.formulas[path]?.formula || 'Formule non définie';
+            }
+            
+            getDependencies(path) {
+                return this.formulas[path]?.dependencies || [];
+            }
+            
+            recalculate(config) {
+                // Recalculer tous les champs calculés
+                // Cette méthode sera appelée quand des valeurs changent
+                console.log('🧮 Recalcul des valeurs dépendantes...');
+                
+                // Implémenter la logique de recalcul ici
+                // Pour l'instant, on laisse le pricing manager s'en occuper
+            }
+        }
+        
+        // Initialisation de l'interface d'administration
+        let adminInterface;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 Initialisation de l\'interface d\'administration...');
+            adminInterface = new AdminInterface();
+        });
+        
+        // Attendre que le pricing manager soit prêt
+        document.addEventListener('pricingManagerReady', function(event) {
+            console.log('✅ Pricing manager prêt, rechargement de la config admin...');
+            if (adminInterface) {
+                adminInterface.loadConfig();
+            }
+        });
+        
+        // Styles pour les switchs
+        const switchStyles = `
+            <style>
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 50px;
+                height: 24px;
+            }
+            
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: var(--bg-input);
+                border: 1px solid var(--border);
+                transition: .4s;
+                border-radius: 24px;
+            }
+            
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 18px;
+                width: 18px;
+                left: 2px;
+                bottom: 2px;
+                background-color: var(--text-primary);
+                transition: .4s;
+                border-radius: 50%;
+            }
+            
+            input:checked + .slider {
+                background-color: var(--accent);
+                border-color: var(--accent);
+            }
+            
+            input:checked + .slider:before {
+                transform: translateX(26px);
+            }
+            </style>
+        `;
+        
+        document.head.insertAdjacentHTML('beforeend', switchStyles);
+    </script>
+</body>
+</html>

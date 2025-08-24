@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Test Valeurs Calculateur TCO</title>
+    <style>
+        body { font-family: monospace; background: #1a1a1a; color: #fff; padding: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #1a5f1a; }
+        .error { background: #5f1a1a; }
+        .value { color: #4af; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test des Valeurs du Calculateur TCO</h1>
+    <div id="results"></div>
+    
+    <script src="js/pricing-manager.js"></script>
+    <script>
+        // Liste de tous les chemins utilisés dans les calculateurs
+        const cheminsTestes = [
+            // Valeurs de base
+            'modes.vente.nicd.maintenance_annual',
+            'modes.vente.nicd.price_base',
+            
+            // Alias ajoutés pour comparaisons
+            'nicd.replacement_cycle_years',
+            'licube.monitoring_monthly',
+            'modes.vente.licube.price_total',
+            'licube.monthly_rate_min',
+            'licube.monthly_rate_max',
+            
+            // Nouveau: alias battery_specs
+            'licube.cycle_life',
+            'licube.weight_kg', 
+            'licube.efficiency_percentage',
+            'nicd.cycle_life',
+            'nicd.weight_kg',
+            'nicd.efficiency_percentage',
+            
+            // Calculs TCO vente
+            'calculations.tco_vente.licube.total_20_years',
+            'calculations.tco_vente.nicd.total_20_years',
+            'calculations.tco_vente.savings.total',
+            'calculations.tco_vente.savings.amount',
+            'calculations.tco_vente.savings.percentage',
+            'calculations.tco_vente.savings.roi_years',
+            'calculations.tco_vente.nicd.maintenance_20_years',
+            'calculations.tco_vente.nicd.replacements_cost',
+            
+            // Calculs TCO location
+            'calculations.tco_location.licube.total_20_years',
+            'calculations.tco_location.nicd.total_20_years',
+            'calculations.tco_location.savings.total',
+            'calculations.tco_location.savings.amount'
+        ];
+        
+        function testerValeurs() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<h2>🔍 Résultats des tests :</h2>';
+            
+            if (!window.pricingManager) {
+                results.innerHTML += '<div class="test-result error">❌ window.pricingManager non disponible</div>';
+                return;
+            }
+            
+            let successes = 0;
+            let errors = 0;
+            
+            cheminsTestes.forEach(chemin => {
+                try {
+                    const valeur = window.pricingManager.getValue(chemin);
+                    if (valeur !== '' && valeur !== null && valeur !== undefined) {
+                        results.innerHTML += `<div class="test-result success">✅ ${chemin}: <span class="value">${valeur}</span></div>`;
+                        successes++;
+                    } else {
+                        results.innerHTML += `<div class="test-result error">❌ ${chemin}: valeur vide/null</div>`;
+                        errors++;
+                    }
+                } catch (error) {
+                    results.innerHTML += `<div class="test-result error">❌ ${chemin}: erreur ${error.message}</div>`;
+                    errors++;
+                }
+            });
+            
+            results.innerHTML += `<h3>📊 Résumé: ${successes} succès, ${errors} erreurs</h3>`;
+        }
+        
+        // Test automatique après chargement
+        setTimeout(() => {
+            testerValeurs();
+        }, 1000);
+        
+        // Test manuel
+        document.addEventListener('keydown', function(e) {
+            if (e.key === ' ') {
+                testerValeurs();
+            }
+        });
+    </script>
+    
+    <p><em>Appuyez sur ESPACE pour relancer les tests</em></p>
+</body>
+</html>

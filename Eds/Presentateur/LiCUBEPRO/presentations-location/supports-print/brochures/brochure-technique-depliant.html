@@ -1268,7 +1268,72 @@ p {
         });
         </script>
         
+        <!-- Intégration du système de prix centralisé -->
+        <script src="../../../js/pricing-manager.js"></script>
         
+        <script>
+            /**
+             * Brochure technique location intégrée avec le système de prix centralisé
+             * 
+             * Rôle : Remplacer TOUS les prix hardcodés par des données du pricing-manager.js
+             * Fonctionnement : Charge et affiche automatiquement les prix depuis pricing-config.json
+             */
+            
+            // Le pricingManager global est disponible via window.pricingManager
+            let currentMode = 'location'; // Mode location pour presentations-location
+            
+            /**
+             * Initialise la brochure location avec le système centralisé
+             */
+            function initBrochureLocation() {
+                console.log('🚀 Initialisation brochure location avec SimplePricingManager global...');
+                
+                // Utiliser le SimplePricingManager global
+                if (window.pricingManager && window.pricingManager.isLoaded) {
+                    console.log('✅ SimplePricingManager déjà disponible pour brochure location');
+                    updateBrochureLocation();
+                } else {
+                    // Attendre que le pricing manager global soit prêt
+                    document.addEventListener('pricingManagerReady', function() {
+                        console.log('✅ SimplePricingManager maintenant disponible pour brochure location');
+                        updateBrochureLocation();
+                    });
+                    
+                    // Timeout de sécurité
+                    setTimeout(() => {
+                        if (window.pricingManager) {
+                            updateBrochureLocation();
+                        } else {
+                            console.error('❌ SimplePricingManager non disponible après timeout');
+                        }
+                    }, 2000);
+                }
+            }
+            
+            /**
+             * Met à jour les éléments de la brochure location
+             */
+            function updateBrochureLocation() {
+                if (!window.pricingManager || !window.pricingManager.isLoaded) {
+                    console.warn('⚠️ SimplePricingManager non disponible pour updateBrochureLocation');
+                    return;
+                }
+                
+                console.log('🔄 Mise à jour des éléments de brochure location...');
+                
+                // Mettre à jour tous les éléments avec data-pricing-value
+                const updateCount = window.pricingManager.updatePrices();
+                console.log(`✅ ${updateCount} éléments mis à jour dans brochure location`);
+            }
+
+            // Initialisation automatique au chargement de la page
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log(`📊 Mode: ${currentMode}`);
+                
+                // Initialiser le système de prix centralisé
+                initBrochureLocation();
+            });
+        </script>
         
 </body>
 </html>

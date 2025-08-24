@@ -72,7 +72,7 @@
         .nav-logo {
             width: 40px;
             height: 40px;
-            background: var(--gradient-primary);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -81,9 +81,17 @@
             font-size: 1rem;
             color: white;
             background-image: url('../../image/EdsQuebec/logo edsquebec.png');
-            background-size: contain;
+            background-size: 80%;
             background-repeat: no-repeat;
             background-position: center;
+            border: 1px solid rgba(241, 143, 1, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-logo:hover {
+            background: rgba(241, 143, 1, 0.2);
+            transform: scale(1.05);
+            border-color: var(--accent);
         }
         
         .nav-title {
@@ -2003,11 +2011,17 @@
             const units = parseInt(unitsSlider.value);
             const maintenancePerYear = parseInt(maintenanceCost.value);
             
-            // Li-CUBE PRO Location costs (données configuration officielle)
-            const locationMonthlyBase = 150; // Prix de base
-            const locationMonthlyMin = 100;  // Prix minimum avec réductions maximales
+            // Vérifier que le pricing manager est disponible
+            if (!window.pricingManager || !window.pricingManager.isLoaded) {
+                console.warn('⚠️ PricingManager non disponible pour calculateTCO');
+                return;
+            }
             
-            // Calcul des réductions selon volume et durée (configuration officielle)
+            // Utiliser les valeurs du pricing manager synchronisées avec l'admin
+            const locationMonthlyBase = window.pricingManager.getValue('modes.location.licube.monthly_rate') || 150;
+            const locationMonthlyMin = window.pricingManager.getValue('modes.location.licube.monthly_rate_min') || 100;
+            
+            // Calcul des réductions selon volume et durée (logique métier)
             let volumeDiscount = 0;
             if (units >= 50) volumeDiscount = 17;
             else if (units >= 20) volumeDiscount = 15;
@@ -2023,24 +2037,25 @@
             const finalMonthlyPrice = Math.max(locationMonthlyBase * (100 - totalDiscount) / 100, locationMonthlyMin);
             
             const locationTotal = finalMonthlyPrice * units * period * 12;
-            const installationCost = 500; // Une seule fois, pas par unité selon config
-            const lfpTotal = locationTotal + installationCost;
+            const lfpTotal = locationTotal; // Pas d'installation en location
             
-            // Ni-Cd coût réel total (basé données configuration officielle)
-            // 57,640$ sur 20 ans = 240$/mois équivalent pour 1 unité
-            const nicdCostPerUnitPer20Years = 75990;
-            const nicdMonthlyEquivalent = nicdCostPerUnitPer20Years / 240; // 240 mois = 20 ans
-            const nicdTotal = nicdMonthlyEquivalent * units * period * 12;
+            // Ni-Cd coût avec maintenance modifiable via l'input
+            const nicdMonthlyBase = window.pricingManager.getValue('modes.location.nicd.monthly_rate') || 300;
+            const nicdMaintenanceMonthly = maintenancePerYear / 12; // Conversion annuelle -> mensuelle
+            const nicdTotalMonthly = (nicdMonthlyBase + nicdMaintenanceMonthly) * units;
+            const nicdTotal = nicdTotalMonthly * period * 12;
             
-            // Savings (économies réelles selon configuration)
+            // Calculs économies
             const totalSavings = nicdTotal - lfpTotal;
             const monthlySavings = Math.round(totalSavings / (period * 12));
             
-            // Update display
+            // Mettre à jour l'affichage
             document.getElementById('total-savings').textContent = totalSavings.toLocaleString('fr-CA') + ' CAD';
             document.getElementById('payback-period').textContent = 'Immédiat (' + monthlySavings + '$/mois)';
             document.getElementById('lfp-total').textContent = lfpTotal.toLocaleString('fr-CA') + ' CAD';
             document.getElementById('nicd-total').textContent = nicdTotal.toLocaleString('fr-CA') + ' CAD';
+            
+            console.log(`🔄 TCO recalculé: Li-CUBE ${lfpTotal}, Ni-Cd ${nicdTotal}, Économies ${totalSavings}`);
         }
 
         // Event listeners for sliders
@@ -2056,10 +2071,72 @@
 
         maintenanceCost.addEventListener('input', calculateTCO);
 
-        // Initialize sliders
+        // Initialize sliders and wait for pricing manager
         updateSliderValue(periodSlider, periodValue, ' ans');
         updateSliderValue(unitsSlider, unitsValue, ' unité');
-        calculateTCO();
+        
+        // Fonction d'initialisation avec valeurs du pricing manager
+        function initializeWithPricingData() {
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                // Initialiser l'input maintenance avec la valeur du JSON (une seule fois)
+                const maintenanceFromConfig = window.pricingManager.getValue('modes.location.nicd.maintenance_annual') || 452;
+                maintenanceCost.value = maintenanceFromConfig;
+                
+                // Marquer l'input comme initialisé pour éviter les écrasements
+                maintenanceCost.setAttribute('data-initialized', 'true');
+                
+                // Surveillance directe de l'input pour empêcher les modifications non désirées
+                let userValue = maintenanceFromConfig; // Valeur contrôlée par l'utilisateur
+                
+                // Observer les changements involontaires de l'input
+                const observer = new MutationObserver(() => {
+                    if (maintenanceCost.value != userValue && !maintenanceCost.matches(':focus')) {
+                        console.log(`🛡️ Restauration input: ${maintenanceCost.value} → ${userValue}`);
+                        maintenanceCost.value = userValue;
+                    }
+                });
+                observer.observe(maintenanceCost, { attributes: true, attributeOldValue: true });
+                
+                // Surveiller les changements de valeur (setters)
+                let lastValue = userValue;
+                setInterval(() => {
+                    if (maintenanceCost.value != lastValue && !maintenanceCost.matches(':focus')) {
+                        console.log(`🔄 Changement détecté: ${lastValue} → ${maintenanceCost.value}`);
+                        if (maintenanceCost.value != userValue) {
+                            console.log(`🛡️ Restauration forcée: ${maintenanceCost.value} → ${userValue}`);
+                            maintenanceCost.value = userValue;
+                        }
+                    }
+                    lastValue = maintenanceCost.value;
+                }, 500);
+                
+                // Écouter les changements utilisateur
+                maintenanceCost.addEventListener('input', () => {
+                    userValue = maintenanceCost.value; // Mettre à jour la valeur de référence
+                    console.log(`👤 Utilisateur a modifié: ${userValue}`);
+                });
+                maintenanceCost.addEventListener('change', () => {
+                    userValue = maintenanceCost.value;
+                    console.log(`👤 Utilisateur a confirmé: ${userValue}`);
+                });
+                
+                console.log(`✅ Input maintenance initialisé avec: ${maintenanceFromConfig} CAD/an`);
+                calculateTCO();
+            }
+        }
+        
+        // Initialiser les calculs quand le pricing manager est prêt
+        if (window.pricingManager && window.pricingManager.isLoaded) {
+            initializeWithPricingData();
+        } else {
+            document.addEventListener('pricingManagerReady', initializeWithPricingData);
+            // Timeout de sécurité
+            setTimeout(() => {
+                if (window.pricingManager) {
+                    initializeWithPricingData();
+                }
+            }, 2000);
+        }
 
         // Contact direct - pas de formulaire
 

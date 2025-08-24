@@ -4,23 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Li-CUBE PRO™ - Comparatif TCO PDF</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary: #1B365D;
+            --secondary: #2E86AB;
+            --accent: #F18F01;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --gradient-primary: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            --gradient-success: linear-gradient(135deg, #28A745 0%, #34CE57 100%);
+            --gradient-danger: linear-gradient(135deg, #DC3545 0%, #E74C3C 100%);
+            --gradient-accent: linear-gradient(135deg, #F18F01 0%, #FF8C42 100%);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
         @page {
             size: 816px 1056px;
-            margin: 15mm;
+            margin: 8mm;
         }
         
         * {
-            margin: 0.5rem;
+            margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         
         body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: white;
             color: #333;
-            line-height: 1.5;
+            line-height: 1.4;
             font-size: 10pt;
         }
         
@@ -30,16 +51,27 @@
         }
         
         .header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 6mm;
+            margin-bottom: 4mm;
             display: grid;
             grid-template-columns: auto 1fr auto;
-            gap: 10mm;
+            gap: 8mm;
             align-items: center;
-            padding-bottom: 6mm;
-            border-bottom: 3px solid #F18F01;
-            margin-bottom: 8mm;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            padding: 6mm;
-            border-radius: 4mm;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(15deg);
         }
         
         .logo-section {
@@ -49,13 +81,13 @@
         .logo {
             font-size: 16pt;
             font-weight: 900;
-            color: #1B365D;
+            color: white;
             margin-bottom: 1mm;
         }
         
         .logo-subtitle {
             font-size: 9pt;
-            color: #F18F01;
+            color: var(--accent);
             font-weight: 600;
         }
         
@@ -66,33 +98,53 @@
         .document-title {
             font-size: 20pt;
             font-weight: 800;
-            color: #F18F01;
+            color: white;
             margin-bottom: 2mm;
+            position: relative;
+            z-index: 2;
         }
         
         .document-subtitle {
             font-size: 11pt;
-            color: #1B365D;
+            color: rgba(255, 255, 255, 0.9);
             font-weight: 600;
+            position: relative;
+            z-index: 2;
         }
         
         .savings-highlight {
             text-align: center;
-            background: linear-gradient(135deg, #F18F01 0%, #FF8C42 100%);
+            background: rgba(241, 143, 1, 0.2);
+            backdrop-filter: blur(5px);
             color: white;
             padding: 4mm;
             border-radius: 4mm;
             font-size: 12pt;
             font-weight: 800;
+            border: 2px solid var(--accent);
+            position: relative;
+            z-index: 2;
         }
         
         .executive-summary {
-            background: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            background: var(--gradient-danger);
             color: white;
-            border-radius: 4mm;
             padding: 6mm;
-            margin-bottom: 8mm;
+            margin-bottom: 4mm;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .executive-summary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(-15deg);
         }
         
         .summary-title {
@@ -114,7 +166,9 @@
             border-radius: 3mm;
             padding: 3mm;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
         }
         
         .stat-value {
@@ -129,19 +183,33 @@
         }
         
         .tco-comparison {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 6mm;
-            padding: 8mm;
-            margin-bottom: 8mm;
+            background: var(--gradient-success);
+            color: white;
+            padding: 6mm;
+            margin-bottom: 4mm;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tco-comparison::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(15deg);
         }
         
         .tco-title {
             font-size: 18pt;
             font-weight: 800;
-            color: #1B365D;
+            color: white;
             text-align: center;
             margin-bottom: 6mm;
+            position: relative;
+            z-index: 2;
         }
         
         .tco-visual {
@@ -153,21 +221,22 @@
         }
         
         .tco-column {
-            background: white;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
             border-radius: 4mm;
             padding: 6mm;
             text-align: center;
-            box-shadow: 0 2mm 8mm rgba(0,0,0,0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
         }
         
         .tco-column.lfp {
-            border: 3px solid #28A745;
-            background: linear-gradient(135deg, #f8fff9 0%, #ffffff 100%);
+            border-left: 6mm solid rgba(255, 255, 255, 0.6);
         }
         
         .tco-column.nicd {
-            border: 3px solid #DC3545;
-            background: linear-gradient(135deg, #fff8f8 0%, #ffffff 100%);
+            border-left: 6mm solid rgba(220, 53, 69, 0.6);
         }
         
         .tco-product {
@@ -206,27 +275,47 @@
         }
         
         .savings-result {
-            background: linear-gradient(135deg, #F18F01 0%, #FF8C42 100%);
+            background: rgba(241, 143, 1, 0.2);
+            backdrop-filter: blur(5px);
             color: white;
             padding: 6mm;
             border-radius: 4mm;
             text-align: center;
             font-size: 16pt;
             font-weight: 800;
-            box-shadow: 0 3mm 12mm rgba(241, 143, 1, 0.3);
+            border: 2px solid var(--accent);
+            position: relative;
+            z-index: 2;
         }
         
         .breakdown-section {
-            margin-bottom: 8mm;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 6mm;
+            margin-bottom: 4mm;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .breakdown-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(-15deg);
         }
         
         .section-title {
             font-size: 16pt;
             font-weight: 800;
-            color: #1B365D;
+            color: white;
+            text-align: center;
             margin-bottom: 4mm;
             padding-bottom: 2mm;
-            border-bottom: 2px solid #F18F01;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         }
         
         .breakdown-grid {
@@ -236,18 +325,21 @@
         }
         
         .breakdown-card {
-            background: white;
-            border: 2px solid #e9ecef;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
             border-radius: 4mm;
             overflow: auto;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
         }
         
         .breakdown-card.lfp {
-            border-color: #28A745;
+            border-left: 6mm solid rgba(40, 167, 69, 0.6);
         }
         
         .breakdown-card.nicd {
-            border-color: #DC3545;
+            border-left: 6mm solid rgba(220, 53, 69, 0.6);
         }
         
         .breakdown-header {
@@ -256,14 +348,8 @@
             font-weight: 700;
             font-size: 12pt;
             color: white;
-        }
-        
-        .breakdown-header.lfp {
-            background: linear-gradient(135deg, #28A745 0%, #34CE57 100%);
-        }
-        
-        .breakdown-header.nicd {
-            background: linear-gradient(135deg, #DC3545 0%, #E74C3C 100%);
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
         }
         
         .breakdown-content {
@@ -287,7 +373,7 @@
         .breakdown-label {
             padding: 2mm 0;
             font-size: 9pt;
-            color: #333;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .breakdown-value {
@@ -295,25 +381,44 @@
             font-size: 9pt;
             text-align: right;
             font-weight: 600;
-            color: #1B365D;
+            color: white;
         }
         
         .timeline-section {
-            margin-bottom: 8mm;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 6mm;
+            margin-bottom: 4mm;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(15deg);
         }
         
         .timeline-chart {
-            background: white;
-            border: 1px solid #e9ecef;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 4mm;
             padding: 6mm;
             margin-bottom: 4mm;
+            position: relative;
+            z-index: 2;
         }
         
         .chart-title {
             font-size: 14pt;
             font-weight: 700;
-            color: #1B365D;
+            color: white;
             text-align: center;
             margin-bottom: 4mm;
         }
@@ -329,9 +434,9 @@
             text-align: center;
             font-size: 9pt;
             font-weight: 600;
-            color: #1B365D;
+            color: white;
             padding: 2mm;
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 2mm;
         }
         
@@ -410,11 +515,23 @@
         }
         
         .roi-section {
-            background: linear-gradient(135deg, #2E86AB 0%, #17A2B8 100%);
+            background: var(--gradient-success);
             color: white;
-            border-radius: 4mm;
             padding: 6mm;
-            margin-bottom: 8mm;
+            margin-bottom: 4mm;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .roi-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(-15deg);
         }
         
         .roi-title {
@@ -422,6 +539,8 @@
             font-weight: 800;
             text-align: center;
             margin-bottom: 4mm;
+            position: relative;
+            z-index: 2;
         }
         
         .roi-metrics {
@@ -436,7 +555,9 @@
             border-radius: 3mm;
             padding: 4mm;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 2;
         }
         
         .roi-value {
@@ -457,7 +578,23 @@
         }
         
         .key-factors {
-            margin-bottom: 8mm;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 6mm;
+            margin-bottom: 4mm;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .key-factors::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(15deg);
         }
         
         .factors-grid {
@@ -467,17 +604,20 @@
         }
         
         .factor-card {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
             border-radius: 3mm;
             padding: 4mm;
-            border-left: 3mm solid #28A745;
+            border-left: 6mm solid rgba(40, 167, 69, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
         }
         
         .factor-title {
             font-size: 10pt;
             font-weight: 700;
-            color: #1B365D;
+            color: white;
             margin-bottom: 2mm;
             display: flex;
             align-items: center;
@@ -486,48 +626,80 @@
         
         .factor-desc {
             font-size: 9pt;
-            color: #6c757d;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .conclusion {
-            background: linear-gradient(135deg, #28A745 0%, #34CE57 100%);
+            background: var(--gradient-success);
             color: white;
-            border-radius: 4mm;
             padding: 6mm;
             text-align: center;
-            margin-bottom: 8mm;
+            margin-bottom: 4mm;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .conclusion::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(-15deg);
         }
         
         .conclusion-title {
             font-size: 16pt;
             font-weight: 800;
             margin-bottom: 3mm;
+            position: relative;
+            z-index: 2;
         }
         
         .conclusion-text {
             font-size: 11pt;
             margin-bottom: 4mm;
             opacity: 0.95;
+            position: relative;
+            z-index: 2;
         }
         
         .conclusion-cta {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(241, 143, 1, 0.2);
             backdrop-filter: blur(5px);
             padding: 3mm 6mm;
             border-radius: 3mm;
             font-size: 12pt;
             font-weight: 700;
             display: inline-block;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid var(--accent);
+            position: relative;
+            z-index: 2;
         }
         
         .footer {
+            background: var(--gradient-accent);
+            color: white;
+            padding: 6mm;
             display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 8mm;
+            grid-template-columns: 1fr;
+            gap: 6mm;
             align-items: center;
-            padding-top: 6mm;
-            border-top: 2px solid #1B365D;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(15deg);
         }
         
         .contact-grid {
@@ -541,9 +713,11 @@
             align-items: center;
             gap: 2mm;
             font-size: 9pt;
-            color: #1B365D;
+            color: white;
             white-space: nowrap;
             flex-shrink: 0;
+            position: relative;
+            z-index: 2;
         }
         
         .contact-item span:last-child {
@@ -565,7 +739,7 @@
         
         .contact-icon {
             font-size: 10pt;
-            color: #F18F01;
+            color: var(--accent);
             width: 4mm;
         }
         
@@ -742,6 +916,7 @@
         <!-- En-tête -->
         <div class="header">
             <div class="logo-section">
+                <img src="../../image/EdsQuebec/logo edsquebec.png" alt="Logo EDS Québec" style="height: 40px; width: auto; margin-bottom: 2mm;">
                 <div class="logo">EDS QUÉBEC</div>
                 <div class="logo-subtitle">Innovation Énergétique</div>
             </div>
@@ -1059,7 +1234,6 @@
             
         </div>
     </div>
-    <script src="../utils/data-loader.js"></script>
     <script src="../../js/pricing-manager.js"></script>
 
 
@@ -1225,13 +1399,78 @@
         </script>
         
         <script>
-        // Initialisation du système de prix centralisé
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof PricingManager !== 'undefined') {
-                PricingManager.initialize();
-                PricingManager.updatePrices();
+        // Initialisation spécifique pour comparatif TCO vente
+        function initComparatifVente() {
+            console.log('🚀 Initialisation comparatif TCO vente avec SimplePricingManager global...');
+            
+            // Configuration du mode pour le comparatif vente
+            let currentMode = 'vente';
+            
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                console.log('✅ SimplePricingManager déjà disponible pour comparatif vente');
+                updateComparatifVente();
+            } else {
+                console.log('⏳ Attente SimplePricingManager pour comparatif vente...');
+                document.addEventListener('pricingManagerReady', function() {
+                    console.log('🎯 Événement pricingManagerReady reçu pour comparatif vente');
+                    updateComparatifVente();
+                });
             }
+        }
+        
+        function updateComparatifVente() {
+            console.log('🔄 Mise à jour des prix pour comparatif vente...');
+            
+            // Mise à jour de tous les éléments de prix
+            const pricingElements = document.querySelectorAll('[data-pricing-value]');
+            console.log(`📊 ${pricingElements.length} éléments de prix trouvés pour comparatif vente`);
+            
+            pricingElements.forEach((element, index) => {
+                const path = element.getAttribute('data-pricing-value');
+                const format = element.getAttribute('data-pricing-format') || 'number';
+                
+                try {
+                    const value = window.pricingManager.getValue(path);
+                    console.log(`💰 [${index + 1}] ${path}: ${value} (format: ${format})`);
+                    
+                    if (value !== null && value !== undefined && value !== '') {
+                        if (format === 'currency') {
+                            element.textContent = parseFloat(value).toLocaleString('fr-CA', {
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            });
+                        } else if (format === 'percentage') {
+                            element.textContent = parseFloat(value).toFixed(1);
+                        } else {
+                            element.textContent = value;
+                        }
+                    } else {
+                        console.warn(`⚠️  Valeur manquante pour ${path} dans comparatif vente`);
+                        element.textContent = '---';
+                    }
+                } catch (error) {
+                    console.error(`❌ Erreur lors de la récupération de ${path}:`, error);
+                    element.textContent = 'Erreur';
+                }
+            });
+            
+            console.log('✅ Mise à jour terminée pour comparatif vente');
+        }
+        
+        // Démarrage automatique
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM chargé, initialisation comparatif vente...');
+            initComparatifVente();
         });
+        
+        // Fallback si DOMContentLoaded déjà passé
+        if (document.readyState === 'loading') {
+            // DOM pas encore chargé, on attend DOMContentLoaded
+        } else {
+            // DOM déjà chargé
+            console.log('📄 DOM déjà chargé, initialisation immédiate comparatif vente...');
+            initComparatifVente();
+        }
         </script>
         
 </body>

@@ -5,7 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Li-CUBE PRO™ - Comparaison Visuelle</title>
     <style>
+        /**
+         * =================================================================
+         * COMPARAISON VISUELLE LI-CUBE PRO™ - DESIGN HARMONISÉ
+         * =================================================================
+         */
+        :root {
+            /* Couleurs principales thème EDS Québec */
+            --primary: #003F7F;
+            --secondary: #4A90B8;
+            --accent: #F18F01;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #003F7F 0%, #4A90B8 100%);
+            --gradient-accent: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
+            
+            /* Couleurs neutres */
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --dark: #1B365D;
+            
+            /* Effets et ombres */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.2);
+            --shadow-xl: 0 15px 40px rgba(0,0,0,0.25);
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.6s ease;
+            
+            /* Rayons de bordure */
+            --radius-sm: 6px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 20px;
+            
+            /* Typographie */
+            --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
         @page {
+            size: 1200px 800px;
             margin: 0;
         }
         
@@ -15,9 +70,13 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            font-family: var(--font-family);
+            background: white;
             color: #333;
             max-width: 1200px;
             min-height: 800px;
@@ -31,11 +90,19 @@
             display: grid;
             grid-template-rows: auto 1fr auto;
             padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
         
         .header {
             text-align: center;
             margin-bottom: 30px;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            border-radius: var(--radius-xl);
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
         
         .header-top {
@@ -54,13 +121,14 @@
         .logo {
             font-size: 24px;
             font-weight: 900;
-            color: #1B365D;
+            color: #F18F01;
         }
         
         .logo-subtitle {
             font-size: 14px;
-            color: #F18F01;
+            color: white;
             font-weight: 600;
+            opacity: 0.9;
         }
         
         .certifications {
@@ -69,25 +137,27 @@
         }
         
         .cert-badge {
-            background: #1B365D;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
             padding: 4px 8px;
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             font-size: 10px;
             font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .main-title {
             font-size: 36px;
             font-weight: 900;
-            color: #1B365D;
+            color: white;
             margin-bottom: 10px;
         }
         
         .subtitle {
             font-size: 18px;
-            color: #2E86AB;
+            color: white;
             font-weight: 500;
+            opacity: 0.9;
         }
         
         .comparison-content {
@@ -98,18 +168,26 @@
         }
         
         .product-section {
-            background: white;
-            border-radius: 20px;
+            background: #f8f9fa;
+            border-radius: var(--radius-xl);
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 3px solid transparent;
+            box-shadow: var(--shadow-lg);
+            border-left: 3px solid #2E86AB;
             position: relative;
             overflow: hidden;
+            transition: all var(--transition-normal);
+            color: #333;
+        }
+        
+        .product-section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+            border-left-color: #F18F01;
         }
         
         .product-section.lfp {
-            border-color: #28A745;
-            background: linear-gradient(135deg, #f8fff9 0%, #ffffff 100%);
+            border-left-color: #28A745;
+            background: #f8f9fa;
         }
         
         .product-section.lfp::before {
@@ -119,12 +197,12 @@
             left: 0;
             right: 0;
             height: 6px;
-            background: linear-gradient(90deg, #28A745, #34CE57);
+            background: linear-gradient(90deg, var(--success), #34CE57);
         }
         
         .product-section.nicd {
-            border-color: #DC3545;
-            background: linear-gradient(135deg, #fff8f8 0%, #ffffff 100%);
+            border-left-color: #DC3545;
+            background: #f8f9fa;
         }
         
         .product-section.nicd::before {
@@ -134,7 +212,7 @@
             left: 0;
             right: 0;
             height: 6px;
-            background: linear-gradient(90deg, #DC3545, #E74C3C);
+            background: linear-gradient(90deg, var(--danger), #E74C3C);
         }
         
         .product-header {
@@ -165,21 +243,22 @@
         
         .product-subtitle {
             font-size: 16px;
-            color: #6c757d;
+            color: #333;
             font-weight: 500;
+            opacity: 0.8;
         }
         
         .product-image {
-            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
-            border: 2px solid #dee2e6;
-            border-radius: 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: var(--radius-lg);
             height: 120px;
             margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 14px;
-            color: #6c757d;
+            color: #333;
             font-weight: 600;
         }
         
@@ -194,19 +273,25 @@
             gap: 15px;
             align-items: center;
             padding: 12px 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
+            background: white;
+            border-radius: var(--radius);
             border-left: 4px solid transparent;
+            transition: all var(--transition-fast);
+        }
+        
+        .spec-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
         }
         
         .spec-item.lfp {
             border-left-color: #28A745;
-            background: linear-gradient(135deg, #f8fff9 0%, #f8f9fa 100%);
+            background: white;
         }
         
         .spec-item.nicd {
             border-left-color: #DC3545;
-            background: linear-gradient(135deg, #fff8f8 0%, #f8f9fa 100%);
+            background: white;
         }
         
         .spec-label {
@@ -220,7 +305,7 @@
         
         .spec-icon {
             font-size: 16px;
-            color: #6c757d;
+            color: #F18F01;
         }
         
         .spec-value {
@@ -242,8 +327,8 @@
         }
         
         .spec-value.neutral {
-            color: #1B365D;
-            background: rgba(27, 54, 93, 0.1);
+            color: #333;
+            background: #e9ecef;
         }
         
         .advantages-section {
@@ -307,12 +392,12 @@
         }
         
         .tco-highlight {
-            background: linear-gradient(135deg, #F18F01 0%, #FF8C42 100%);
+            background: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
             color: white;
             padding: 15px 25px;
-            border-radius: 15px;
+            border-radius: var(--radius-lg);
             text-align: center;
-            box-shadow: 0 5px 20px rgba(241, 143, 1, 0.3);
+            box-shadow: var(--shadow-lg);
         }
         
         .tco-title {
@@ -338,7 +423,7 @@
             align-items: center;
             gap: 5px;
             font-size: 12px;
-            color: #1B365D;
+            color: #333;
             white-space: nowrap;
             flex-shrink: 0;
         }
@@ -369,19 +454,23 @@
             background: #1B365D;
             color: white;
             padding: 12px 20px;
-            border-radius: 10px;
+            border-radius: var(--radius);
             font-size: 14px;
             font-weight: 700;
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 3px 15px rgba(27, 54, 93, 0.3);
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-normal);
+            border: 2px solid #2E86AB;
         }
         
         .cta-button:hover {
             transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+            border-color: #F18F01;
         }
         
         .comparison-badges {
@@ -777,5 +866,50 @@
 
     <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
     <script src="../../js/image-config.js"></script>
+    
+    <!-- Intégration du système de prix centralisé -->
+    <script src="../../js/pricing-manager.js"></script>
+    
+    <script>
+        // Initialisation du système de prix centralisé pour comparaison visuelle location
+        function initComparaisonVisuelleLocation() {
+            console.log('✅ Système de prix centralisé activé - Comparaison visuelle location...');
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                const updateCount = window.pricingManager.updatePrices();
+                console.log(`🔄 ${updateCount} éléments mis à jour dans comparaison visuelle location`);
+                
+                // Mettre à jour le pourcentage d'économies pour location
+                updateSavingsPercentageLocation();
+            }
+        }
+        
+        function updateSavingsPercentageLocation() {
+            if (!window.pricingManager || !window.pricingManager.isLoaded) return;
+            
+            const savingsPercent = window.pricingManager.getValue('calculations.tco_location.savings.percentage') || 50;
+            console.log(`📊 Mise à jour pourcentage économies location: ${savingsPercent}%`);
+            
+            // Mettre à jour les éléments avec pourcentage d'économies
+            const tcoElements = document.querySelectorAll('[data-pricing-value*="savings"]');
+            tcoElements.forEach(element => {
+                if (element.getAttribute('data-pricing-value').includes('tco_location')) {
+                    element.setAttribute('data-pricing-suffix', ` (${savingsPercent}%)`);
+                }
+            });
+        }
+        
+        // Initialiser quand le pricing manager est prêt
+        if (window.pricingManager && window.pricingManager.isLoaded) {
+            initComparaisonVisuelleLocation();
+        } else {
+            document.addEventListener('pricingManagerReady', initComparaisonVisuelleLocation);
+            // Timeout de sécurité
+            setTimeout(() => {
+                if (window.pricingManager) {
+                    initComparaisonVisuelleLocation();
+                }
+            }, 2000);
+        }
+    </script>
 </body>
 </html>

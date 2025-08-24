@@ -130,32 +130,23 @@ class GeeknDragonAudioPlayer {
                 </div>
                 
                 <div class="player-controls">
-                    <div class="player-header">
-                        <span class="player-title">🏰 Ambiance Médiévale</span>
-                        <button class="collapse-btn" onclick="window.gndAudioPlayer.toggleCollapse()">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                    </div>
-                    
                     <div class="controls-row">
-                        <button class="control-btn" onclick="window.gndAudioPlayer.togglePlay()" title="Lecture/Pause">
+                        <button class="control-btn play-btn" onclick="window.gndAudioPlayer.togglePlay()" title="Lecture/Pause">
                             <i class="fas ${this.state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
                         </button>
                         
-                        <button class="control-btn" onclick="window.gndAudioPlayer.playNext()" title="Piste suivante">
+                        <button class="control-btn next-btn" onclick="window.gndAudioPlayer.playNext()" title="Piste suivante">
                             <i class="fas fa-forward"></i>
                         </button>
                         
                         <div class="volume-control">
-                            <i class="fas fa-volume-up"></i>
                             <input type="range" min="0" max="100" value="${this.state.volume * 100}" 
                                    class="volume-slider" onchange="window.gndAudioPlayer.setVolume(this.value)">
                         </div>
-                    </div>
-                    
-                    <div class="track-info">
-                        <div class="track-name">Chargement des pistes...</div>
-                        <div class="track-counter">0/0</div>
+                        
+                        <button class="collapse-btn" onclick="window.gndAudioPlayer.toggleCollapse()" title="Réduire">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -351,23 +342,41 @@ class GeeknDragonAudioPlayer {
     }
     
     playNext() {
+        console.log('🔄 playNext() appelé - État isPlaying:', this.state.isPlaying);
+        
         // Logique de sélection intelligente de la prochaine piste
         this.selectNextPlaylistWithPriority();
         
-        if (this.state.playlist.length === 0) return;
+        if (this.state.playlist.length === 0) {
+            console.log('⚠️ Aucune playlist disponible');
+            return;
+        }
         
         let nextTrack = (this.state.currentTrack + 1) % this.state.playlist.length;
         
         // Si on a fini la playlist courante, remélanger
         if (nextTrack === 0) {
+            console.log('🔀 Fin de playlist, remélange...');
             this.shufflePlaylist();
         }
         
+        console.log(`🎵 Chargement piste ${nextTrack + 1}/${this.state.playlist.length}`);
         this.loadTrack(nextTrack);
         
-        if (this.state.isPlaying) {
-            this.audioElement.play().catch(() => {});
-        }
+        // TOUJOURS continuer la lecture automatiquement
+        setTimeout(() => {
+            this.audioElement.play().then(() => {
+                this.state.isPlaying = true;
+                this.updatePlayButton();
+                console.log('✅ Piste suivante en cours de lecture');
+            }).catch(error => {
+                console.log('⚠️ Erreur lecture:', error);
+                // Réessayer une fois
+                setTimeout(() => {
+                    this.audioElement.play().catch(() => console.log('Réessai échoué'));
+                }, 1000);
+            });
+        }, 200);
     }
     
     selectNextPlaylistWithPriority() {
@@ -588,19 +597,18 @@ class GeeknDragonAudioPlayer {
                 bottom: 20px;
                 right: 20px;
                 background: linear-gradient(135deg, var(--primary-color, #8b4513) 0%, var(--primary-dark, #654321) 100%);
-                border: 3px solid var(--secondary-color, #d4af37);
+                border: 2px solid var(--secondary-color, #d4af37);
                 border-radius: var(--border-radius, 12px);
                 box-shadow: 
-                    0 10px 30px rgba(0, 0, 0, 0.5),
-                    0 0 20px rgba(212, 175, 55, 0.3),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                    0 8px 25px rgba(0, 0, 0, 0.5),
+                    0 0 15px rgba(212, 175, 55, 0.3);
                 color: var(--light-text, #ffffff);
                 font-family: var(--font-heading, 'Cinzel', serif);
                 z-index: 1500;
                 backdrop-filter: blur(15px);
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                min-width: 320px;
-                max-width: 350px;
+                min-width: 200px;
+                max-width: 220px;
             }
             
             .gnd-audio-player::before {
@@ -622,8 +630,8 @@ class GeeknDragonAudioPlayer {
             }
             
             .gnd-audio-player.collapsed {
-                min-width: 60px;
-                max-width: 60px;
+                min-width: 50px;
+                max-width: 50px;
             }
             
             .gnd-audio-player.collapsed .player-controls {
@@ -637,17 +645,15 @@ class GeeknDragonAudioPlayer {
                 transform: translate(-50%, -50%);
                 background: var(--secondary-color, #d4af37);
                 color: var(--dark-bg, #1a1a1a);
-                width: 45px;
-                height: 45px;
+                width: 40px;
+                height: 40px;
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                font-size: 1.2rem;
-                box-shadow: 
-                    0 4px 12px rgba(0, 0, 0, 0.3),
-                    inset 0 2px 0 rgba(255, 255, 255, 0.2);
+                font-size: 1rem;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
                 transition: all var(--transition, 0.3s ease);
                 opacity: 0;
                 pointer-events: none;
@@ -666,156 +672,134 @@ class GeeknDragonAudioPlayer {
             }
             
             .player-controls {
-                padding: 1.5rem;
+                padding: 1rem;
                 display: block;
             }
             
-            .player-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 1rem;
-                border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-                padding-bottom: 0.75rem;
-            }
-            
-            .player-title {
-                font-size: 1.1rem;
-                font-weight: 600;
-                color: var(--secondary-color, #d4af37);
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-            }
             
             .collapse-btn {
-                background: transparent;
-                border: none;
-                color: var(--light-text, #ffffff);
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid var(--secondary-color, #d4af37);
+                color: var(--secondary-color, #d4af37);
                 cursor: pointer;
-                font-size: 1rem;
-                padding: 0.25rem;
+                font-size: 0.8rem;
+                width: 25px;
+                height: 25px;
                 border-radius: 4px;
                 transition: all var(--transition, 0.3s ease);
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
             .collapse-btn:hover {
-                background: rgba(212, 175, 55, 0.2);
-                color: var(--secondary-color, #d4af37);
+                background: var(--secondary-color, #d4af37);
+                color: var(--dark-bg, #1a1a1a);
+                transform: scale(1.1);
             }
             
             .controls-row {
                 display: flex;
                 align-items: center;
-                gap: 1rem;
-                margin-bottom: 1rem;
+                gap: 0.75rem;
                 padding: 0.75rem;
-                background: rgba(0, 0, 0, 0.3);
+                background: rgba(0, 0, 0, 0.4);
                 border-radius: 8px;
-                border: 1px solid rgba(212, 175, 55, 0.2);
+                border: 1px solid rgba(212, 175, 55, 0.3);
             }
             
             .control-btn {
-                background: var(--secondary-color, #d4af37);
-                color: var(--dark-bg, #1a1a1a);
-                border: none;
-                width: 40px;
-                height: 40px;
+                background: rgba(0, 0, 0, 0.6);
+                color: var(--secondary-color, #d4af37);
+                border: 2px solid var(--secondary-color, #d4af37);
+                width: 35px;
+                height: 35px;
                 border-radius: 50%;
                 cursor: pointer;
-                font-size: 1rem;
+                font-size: 0.9rem;
                 transition: all var(--transition, 0.3s ease);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 
-                    0 3px 8px rgba(0, 0, 0, 0.3),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
             }
             
             .control-btn:hover {
+                background: var(--secondary-color, #d4af37);
+                color: var(--dark-bg, #1a1a1a);
                 transform: scale(1.1);
-                box-shadow: 
-                    0 5px 12px rgba(0, 0, 0, 0.4),
-                    0 0 8px rgba(212, 175, 55, 0.6);
-                background: var(--light-text, #ffffff);
+                box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
             }
             
             .volume-control {
                 display: flex;
                 align-items: center;
-                gap: 0.5rem;
                 flex: 1;
-                margin-left: 0.5rem;
-            }
-            
-            .volume-control i {
-                color: var(--secondary-color, #d4af37);
-                font-size: 0.9rem;
+                margin: 0 0.5rem;
             }
             
             .volume-slider {
                 flex: 1;
-                height: 6px;
-                background: rgba(0, 0, 0, 0.4);
-                border-radius: 3px;
+                height: 4px;
+                background: rgba(0, 0, 0, 0.6);
+                border-radius: 2px;
                 outline: none;
-                border: 1px solid rgba(212, 175, 55, 0.3);
+                border: 1px solid var(--secondary-color, #d4af37);
+                cursor: pointer;
             }
             
             .volume-slider::-webkit-slider-thumb {
                 appearance: none;
-                width: 16px;
-                height: 16px;
+                width: 12px;
+                height: 12px;
                 background: var(--secondary-color, #d4af37);
                 border-radius: 50%;
                 cursor: pointer;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
                 transition: all var(--transition, 0.3s ease);
             }
             
             .volume-slider::-webkit-slider-thumb:hover {
-                transform: scale(1.2);
-                box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+                transform: scale(1.3);
+                box-shadow: 0 0 6px rgba(212, 175, 55, 0.8);
             }
             
-            .track-info {
-                text-align: center;
-            }
-            
-            .track-name {
-                font-size: 0.9rem;
-                font-weight: 500;
-                margin-bottom: 0.25rem;
-                color: var(--light-text, #ffffff);
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-            
-            .track-counter {
-                font-size: 0.8rem;
-                color: var(--secondary-color, #d4af37);
-                opacity: 0.8;
-            }
             
             /* Responsive */
             @media (max-width: 768px) {
                 .gnd-audio-player {
                     bottom: 10px;
                     right: 10px;
-                    min-width: 280px;
-                    max-width: 280px;
+                    min-width: 180px;
+                    max-width: 180px;
+                }
+                
+                .gnd-audio-player.collapsed {
+                    min-width: 45px;
+                    max-width: 45px;
                 }
                 
                 .player-controls {
-                    padding: 1rem;
+                    padding: 0.75rem;
                 }
                 
                 .controls-row {
-                    gap: 0.75rem;
+                    gap: 0.5rem;
                 }
                 
                 .control-btn {
+                    width: 30px;
+                    height: 30px;
+                    font-size: 0.8rem;
+                }
+                
+                .collapse-btn {
+                    width: 20px;
+                    height: 20px;
+                    font-size: 0.7rem;
+                }
+                
+                .player-toggle {
                     width: 35px;
                     height: 35px;
                     font-size: 0.9rem;

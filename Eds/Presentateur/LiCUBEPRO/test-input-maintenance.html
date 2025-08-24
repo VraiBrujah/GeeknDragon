@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Test Input Maintenance - Persistance</title>
+    <style>
+        body { font-family: monospace; background: #1a1a1a; color: #fff; padding: 20px; line-height: 1.6; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 20px; background: #2a2a2a; border-radius: 8px; }
+        input { padding: 10px; font-size: 16px; margin: 10px; width: 200px; }
+        .log { background: #333; padding: 10px; margin: 10px 0; border-radius: 4px; font-size: 12px; }
+        .value-display { font-size: 20px; color: #4af; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Persistance Input Maintenance</h1>
+        
+        <div class="test-section">
+            <h2>📊 État du Pricing Manager</h2>
+            <div id="manager-status">Chargement...</div>
+            <div id="config-values">Config en cours de chargement...</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📝 Input Maintenance Test</h2>
+            <label>Coût maintenance Ni-Cd (CAD/an/unité):</label>
+            <input type="number" id="maintenance-cost" value="0" min="100" max="1000">
+            
+            <div class="value-display">
+                Valeur actuelle: <span id="current-value">0</span> CAD/an
+            </div>
+            
+            <button onclick="logInputValue()">📋 Logger la valeur</button>
+            <button onclick="testProtection()">🛡️ Tester protection</button>
+            <button onclick="forceUpdate()">🔄 Forcer update pricing</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>📈 Calculs Test</h2>
+            <div id="calculation-result">Pas de calcul encore</div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📋 Logs en temps réel</h2>
+            <div id="logs"></div>
+        </div>
+    </div>
+
+    <script src="js/pricing-manager.js"></script>
+    <script>
+        const maintenanceCost = document.getElementById('maintenance-cost');
+        const logs = document.getElementById('logs');
+        
+        let isProtected = false;
+        
+        function addLog(message) {
+            const time = new Date().toLocaleTimeString();
+            const logDiv = document.createElement('div');
+            logDiv.className = 'log';
+            logDiv.innerHTML = `<strong>${time}:</strong> ${message}`;
+            logs.insertBefore(logDiv, logs.firstChild);
+            console.log(`[${time}] ${message}`);
+        }
+        
+        function logInputValue() {
+            addLog(`📝 Valeur input: ${maintenanceCost.value} | data-initialized: ${maintenanceCost.getAttribute('data-initialized')} | Protected: ${isProtected}`);
+        }
+        
+        function updateCurrentValueDisplay() {
+            document.getElementById('current-value').textContent = maintenanceCost.value;
+        }
+        
+        function testCalculation() {
+            if (!window.pricingManager) {
+                document.getElementById('calculation-result').textContent = 'PricingManager non disponible';
+                return;
+            }
+            
+            const maintenance = parseInt(maintenanceCost.value);
+            const result = `Maintenance: ${maintenance} CAD/an | Total sur 20 ans: ${maintenance * 20} CAD`;
+            document.getElementById('calculation-result').textContent = result;
+            addLog(`🧮 Calcul: ${result}`);
+        }
+        
+        function testProtection() {
+            if (window.pricingManager && window.pricingManager.originalUpdatePrices === undefined) {
+                setupProtection();
+            }
+            addLog(`🛡️ Protection ${isProtected ? 'ACTIVÉE' : 'PAS ACTIVÉE'}`);
+        }
+        
+        function forceUpdate() {
+            if (window.pricingManager) {
+                addLog('🔄 Forçage de updatePrices()...');
+                window.pricingManager.updatePrices();
+                setTimeout(() => {
+                    addLog(`📝 Valeur après update: ${maintenanceCost.value}`);
+                    updateCurrentValueDisplay();
+                }, 100);
+            }
+        }
+        
+        function setupProtection() {
+            if (!window.pricingManager || window.pricingManager.originalUpdatePrices !== undefined) {
+                return;
+            }
+            
+            addLog('🛡️ Configuration de la protection...');
+            
+            // Sauvegarder la fonction originale
+            window.pricingManager.originalUpdatePrices = window.pricingManager.updatePrices.bind(window.pricingManager);
+            
+            // Remplacer par une version protégée
+            window.pricingManager.updatePrices = function() {
+                addLog('🔄 UpdatePrices intercepté - sauvegarde des inputs locaux...');
+                
+                // Sauvegarder les valeurs des inputs locaux
+                const localInputs = {};
+                document.querySelectorAll('input[data-initialized="true"]').forEach(input => {
+                    localInputs[input.id] = input.value;
+                    addLog(`💾 Sauvegarde ${input.id}: ${input.value}`);
+                });
+                
+                // Faire l'update normal
+                const result = this.originalUpdatePrices();
+                
+                // Restaurer les valeurs locales
+                Object.keys(localInputs).forEach(inputId => {
+                    const input = document.getElementById(inputId);
+                    if (input) {
+                        const oldValue = input.value;
+                        input.value = localInputs[inputId];
+                        if (oldValue !== localInputs[inputId]) {
+                            addLog(`🔄 Restauré ${inputId}: ${oldValue} → ${localInputs[inputId]}`);
+                        }
+                    }
+                });
+                
+                updateCurrentValueDisplay();
+                return result;
+            };
+            
+            isProtected = true;
+            addLog('✅ Protection installée avec succès');
+        }
+        
+        function initializeTest() {
+            addLog('🚀 Initialisation du test...');
+            
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                const maintenanceFromConfig = window.pricingManager.getValue('modes.vente.nicd.maintenance_annual') || 452;
+                maintenanceCost.value = maintenanceFromConfig;
+                maintenanceCost.setAttribute('data-initialized', 'true');
+                
+                setupProtection();
+                updateCurrentValueDisplay();
+                
+                addLog(`✅ Input initialisé avec: ${maintenanceFromConfig} CAD/an`);
+                
+                document.getElementById('manager-status').textContent = '✅ PricingManager chargé et prêt';
+                document.getElementById('config-values').innerHTML = `
+                    <strong>Valeurs config:</strong><br>
+                    - Vente Ni-Cd maintenance: ${window.pricingManager.getValue('modes.vente.nicd.maintenance_annual')}<br>
+                    - Location Ni-Cd maintenance: ${window.pricingManager.getValue('modes.location.nicd.maintenance_annual')}<br>
+                    - Vente Li-CUBE prix: ${window.pricingManager.getValue('modes.vente.licube.price_base')}
+                `;
+                
+                testCalculation();
+            } else {
+                document.getElementById('manager-status').textContent = '❌ PricingManager pas encore chargé';
+            }
+        }
+        
+        // Event listeners
+        maintenanceCost.addEventListener('input', () => {
+            addLog(`📝 Input modifié: ${maintenanceCost.value}`);
+            updateCurrentValueDisplay();
+            testCalculation();
+        });
+        
+        // Initialisation
+        if (window.pricingManager && window.pricingManager.isLoaded) {
+            initializeTest();
+        } else {
+            document.addEventListener('pricingManagerReady', initializeTest);
+            setTimeout(() => {
+                if (window.pricingManager) {
+                    initializeTest();
+                }
+            }, 2000);
+        }
+        
+        // Log des updates automatiques
+        let updateCount = 0;
+        const originalConsoleLog = console.log;
+        console.log = function(...args) {
+            if (args[0] && args[0].includes('🔄')) {
+                updateCount++;
+                addLog(`🔄 Update automatique #${updateCount}: ${args.join(' ')}`);
+            }
+            originalConsoleLog.apply(console, args);
+        };
+        
+        addLog('🎬 Page de test chargée - prête pour les tests');
+    </script>
+</body>
+</html>

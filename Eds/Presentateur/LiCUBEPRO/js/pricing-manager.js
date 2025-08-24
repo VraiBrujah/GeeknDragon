@@ -126,8 +126,11 @@ class SimplePricingManager {
         console.log(`🔍 Récupération valeur pour: "${path}"`);
         
         try {
-            // Calculs dynamiques
-            if (path.startsWith('calculations.')) {
+            // Calculs dynamiques et alias
+            if (path.startsWith('calculations.') || 
+                path.startsWith('nicd.') ||
+                path.startsWith('licube.') ||
+                path === 'modes.vente.licube.price_total') {
                 return this.getCalculatedValue(path);
             }
             
@@ -170,24 +173,95 @@ class SimplePricingManager {
      * Calculs dynamiques
      */
     getCalculatedValue(path) {
-        // Pour l'instant, retourner des valeurs fixes pour tester
+        console.log(`🔍 getCalculatedValue appelé pour: "${path}"`);
+        
+        // Utiliser les valeurs de la configuration directement
+        const config = this.config;
+        console.log(`📋 Config disponible:`, !!config);
+        
+        // Valeurs de base - accès direct pour éviter récursion
+        const licubePrixBase = config.modes?.vente?.licube?.price_base || 5000;
+        const licubeTaxes = config.modes?.vente?.licube?.taxes_percent || 14.975;
+        const licubeInstallation = config.modes?.vente?.licube?.installation_cost || 500;
+        const licubeMonitoring = config.modes?.vente?.licube?.monitoring_monthly || 20;
+        
+        console.log(`🔢 Valeurs extraites:`, {
+            licubePrixBase, licubeTaxes, licubeInstallation, licubeMonitoring
+        });
+        
+        const nicdPrixBase = config.modes?.vente?.nicd?.price_base || 12000;
+        const nicdTaxes = config.modes?.vente?.nicd?.taxes_percent || 14.975;
+        const nicdInstallation = config.modes?.vente?.nicd?.installation_cost || 500;
+        const nicdMaintenanceAnnuelle = config.modes?.vente?.nicd?.maintenance_annual || 452;
+        const nicdCycleRemplacement = config.modes?.vente?.nicd?.replacement_cycle_years || 6;
+        
+        console.log(`🔢 Valeurs Ni-Cd extraites:`, {
+            nicdPrixBase, nicdTaxes, nicdInstallation, nicdMaintenanceAnnuelle, nicdCycleRemplacement
+        });
+        
+        // Calculs TCO sur 20 ans
+        const licubeTotalVente = Math.round((licubePrixBase * (1 + licubeTaxes/100)) + licubeInstallation + (licubeMonitoring * 12 * 20));
+        const nicdMaintenanceTotal = Math.round(nicdMaintenanceAnnuelle * 20);
+        const nicdRemplacements = Math.floor(20 / nicdCycleRemplacement);
+        const nicdCoutRemplacements = Math.round(nicdRemplacements * nicdPrixBase);
+        const nicdTotalVente = Math.round((nicdPrixBase * (1 + nicdTaxes/100)) + nicdInstallation + nicdMaintenanceTotal + nicdCoutRemplacements);
+        
+        const economiesVente = nicdTotalVente - licubeTotalVente;
+        const economiesPourcentage = Math.round((economiesVente / nicdTotalVente) * 100);
+        
+        // Calculs pour location
+        const licubeTarifMensuel = config.modes?.location?.licube?.monthly_rate || 150;
+        const nicdTarifMensuel = config.modes?.location?.nicd?.monthly_rate || 300;
+        const licubeTotalLocation = licubeTarifMensuel * 12 * 20;
+        const nicdTotalLocation = nicdTarifMensuel * 12 * 20;
+        const economiesLocation = nicdTotalLocation - licubeTotalLocation;
+        
         const calculatedValues = {
-            'calculations.tco_vente.licube.total_20_years': 5750,
-            'calculations.tco_vente.nicd.total_20_years': 22500,
-            'calculations.tco_vente.savings.total': 16750,
-            'calculations.tco_vente.savings.percentage': 74,
+            // TCO Vente
+            'calculations.tco_vente.licube.total_20_years': licubeTotalVente,
+            'calculations.tco_vente.nicd.total_20_years': nicdTotalVente,
+            'calculations.tco_vente.nicd.maintenance_20_years': nicdMaintenanceTotal,
+            'calculations.tco_vente.nicd.replacements_cost': nicdCoutRemplacements,
+            'calculations.tco_vente.savings.total': economiesVente,
+            'calculations.tco_vente.savings.amount': economiesVente, // Alias pour compatibilité
+            'calculations.tco_vente.savings.percentage': economiesPourcentage,
             'calculations.tco_vente.savings.roi_years': 2,
-            'calculations.tco_location.licube.total_20_years': 36000,
-            'calculations.tco_location.nicd.total_20_years': 72000,
-            'calculations.tco_location.savings.total': 36000,
-            'calculations.tco_location.savings.percentage': 50,
+            
+            // TCO Location
+            'calculations.tco_location.licube.total_20_years': licubeTotalLocation,
+            'calculations.tco_location.nicd.total_20_years': nicdTotalLocation,
+            'calculations.tco_location.savings.total': economiesLocation,
+            'calculations.tco_location.savings.percentage': Math.round((economiesLocation / nicdTotalLocation) * 100),
             'calculations.tco_location.savings.roi_months': 6,
+            
+            // Valeurs calculées additionnelles
+            'modes.vente.licube.price_total': Math.round((licubePrixBase * (1 + licubeTaxes/100)) + licubeInstallation),
+            'nicd.replacement_cycle_years': nicdCycleRemplacement,
+            'licube.monitoring_monthly': licubeMonitoring,
+            
+            // Alias pour compatibilité avec calculateur location
+            'licube.monthly_rate_min': config.modes?.location?.licube?.monthly_rate_min || 100,
+            'licube.monthly_rate_max': config.modes?.location?.licube?.monthly_rate_max || 150,
+            'calculations.tco_location.savings.amount': economiesLocation, // Alias pour compatibilité
+            
+            // Alias pour compatibilité avec comparaison-detaillee.html
+            'licube.cycle_life': config.battery_specs?.licube?.cycle_life || 8000,
+            'licube.weight_kg': config.battery_specs?.licube?.weight_kg || 23,
+            'licube.efficiency_percentage': config.battery_specs?.licube?.efficiency_percentage || 96,
+            'nicd.cycle_life': config.battery_specs?.nicd?.cycle_life || '2000-3000',
+            'nicd.weight_kg': config.battery_specs?.nicd?.weight_kg || 80,
+            'nicd.efficiency_percentage': config.battery_specs?.nicd?.efficiency_percentage || 65,
+            
+            // Général
             'calculations.tco_general.savings.roi_years': 2
         };
         
         if (path in calculatedValues) {
-            console.log(`  🧮 Valeur calculée pour "${path}": ${calculatedValues[path]}`);
-            return calculatedValues[path];
+            const result = calculatedValues[path];
+            console.log(`✅ TROUVÉ "${path}": ${result} (type: ${typeof result})`);
+            return result;
+        } else {
+            console.log(`❌ CHEMIN INTROUVABLE: "${path}"`);
         }
         
         console.warn(`  ❌ Calcul non défini pour: "${path}"`);
@@ -224,6 +298,22 @@ class SimplePricingManager {
             default:
                 return value.toString();
         }
+    }
+    
+    /**
+     * Méthodes de compatibilité supplémentaires
+     */
+    formatPrice(value, format) {
+        return this.formatValue(value, format);
+    }
+    
+    getPrice(mode, batteryType, priceType) {
+        const path = `modes.${mode}.${batteryType}.${priceType}`;
+        return this.getValue(path);
+    }
+    
+    getConfigValue(path) {
+        return this.getValue(path);
     }
     
     // =====================================================================

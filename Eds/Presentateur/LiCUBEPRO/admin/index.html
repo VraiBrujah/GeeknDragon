@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Interface d'Administration Li-CUBE PRO™ - EDS Québec</title>
+    
+    <!-- Sécurité et SEO -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="cache-control" content="no-cache, no-store, must-revalidate">
+    <meta name="pragma" content="no-cache">
+    <meta name="expires" content="0">
+    <meta name="description" content="Interface d'administration pour la configuration Li-CUBE PRO - Réservé aux développeurs">
+    
+    <link rel="icon" href="../image/EdsQuebec/logo edsquebec.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ========================================================================
+         * STYLES DE LA PAGE D'INDEX ADMINISTRATION
+         * ======================================================================== */
+        
+        :root {
+            --primary: #1B365D;
+            --secondary: #2E86AB;
+            --accent: #F18F01;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --info: #17A2B8;
+            --light: #F8F9FA;
+            --dark: #212529;
+            
+            --bg-main: #0F1419;
+            --bg-panel: #1A1F2E;
+            --bg-card: #252B3B;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8C5D6;
+            --text-muted: #8A95A6;
+            --border: #3A4556;
+            
+            --radius: 8px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 12px rgba(0,0,0,0.3);
+            --transition: all 0.2s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--bg-main) 0%, var(--primary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .admin-portal {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .portal-header {
+            margin-bottom: 40px;
+        }
+        
+        .portal-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--accent), #ff6b35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .portal-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .portal-warning {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: var(--radius);
+            padding: 12px 20px;
+            color: #ff6b6b;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .portal-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: left;
+        }
+        
+        .portal-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            border-color: var(--accent);
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent), #ff6b35);
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+        
+        .card-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .card-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        
+        .card-features li {
+            padding: 6px 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .card-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .card-action {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), #ff6b35);
+            border: none;
+            color: white;
+            padding: 14px 24px;
+            border-radius: var(--radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .card-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(241, 143, 1, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .status-bar {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+        
+        .status-item {
+            text-align: center;
+        }
+        
+        .status-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        
+        .status-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .footer-links {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+        
+        .footer-link:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .portal-title {
+                font-size: 2rem;
+            }
+            
+            .portal-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .status-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Animation d'apparition */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .portal-card:nth-child(1) { animation-delay: 0.1s; }
+        .portal-card:nth-child(2) { animation-delay: 0.2s; }
+        .portal-card:nth-child(3) { animation-delay: 0.3s; }
+        .portal-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="admin-portal">
+        <!-- Header -->
+        <header class="portal-header fade-in">
+            <h1 class="portal-title">
+                <i class="fas fa-cogs"></i>
+                Administration Li-CUBE PRO™
+            </h1>
+            <p class="portal-subtitle">Interface de configuration avancée - EDS Québec</p>
+            <div class="portal-warning">
+                <i class="fas fa-shield-alt"></i>
+                Zone réservée aux développeurs et administrateurs système
+            </div>
+        </header>
+
+        <!-- Cartes principales -->
+        <div class="portal-grid">
+            <!-- Interface de configuration -->
+            <div class="portal-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+                <h2 class="card-title">Interface de Configuration</h2>
+                <p class="card-description">
+                    Interface graphique complète pour modifier tous les prix, spécifications et paramètres de calcul avec validation en temps réel.
+                </p>
+                <ul class="card-features">
+                    <li>Édition de toutes les valeurs de prix et spécifications</li>
+                    <li>Calculs dynamiques avec formules traçables</li>
+                    <li>Validation métier et contraintes d'intégrité</li>
+                    <li>Propagation en temps réel vers toutes les pages</li>
+                    <li>Historique et versioning des modifications</li>
+                </ul>
+                <a href="./interface.html" class="card-action">
+                    <i class="fas fa-external-link-alt"></i>
+                    Ouvrir l'interface
+                </a>
+            </div>
+
+            <!-- Documentation technique -->
+            <div class="portal-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h2 class="card-title">Documentation Technique</h2>
+                <p class="card-description">
+                    Documentation complète du schéma de données, des formules de calcul et de l'architecture du système.
+                </p>
+                <ul class="card-features">
+                    <li>Schéma JSON complet avec validations</li>
+                    <li>Documentation des formules de calcul TCO</li>
+                    <li>API et événements de propagation</li>
+                    <li>Guide de développement et maintenance</li>
+                    <li>Exemples d'utilisation avancée</li>
+                </ul>
+                <a href="./schema.json" class="card-action" target="_blank">
+                    <i class="fas fa-file-code"></i>
+                    Voir le schéma
+                </a>
+            </div>
+
+            <!-- Outils de diagnostic -->
+            <div class="portal-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <h2 class="card-title">Diagnostic et Tests</h2>
+                <p class="card-description">
+                    Outils pour tester le bon fonctionnement du système de prix, valider les calculs et diagnostiquer les problèmes.
+                </p>
+                <ul class="card-features">
+                    <li>Test de toutes les valeurs de prix</li>
+                    <li>Validation des formules de calcul</li>
+                    <li>Vérification de la propagation</li>
+                    <li>Analyse des performances</li>
+                    <li>Logs détaillés et debugging</li>
+                </ul>
+                <a href="../test-pricing.html" class="card-action" target="_blank">
+                    <i class="fas fa-vial"></i>
+                    Lancer les tests
+                </a>
+            </div>
+
+            <!-- Export/Import -->
+            <div class="portal-card fade-in">
+                <div class="card-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h2 class="card-title">Export / Import</h2>
+                <p class="card-description">
+                    Gestion des sauvegardes, exports de configuration et imports pour la synchronisation entre environnements.
+                </p>
+                <ul class="card-features">
+                    <li>Export complet en JSON avec métadonnées</li>
+                    <li>Import avec validation automatique</li>
+                    <li>Snapshots horodatés</li>
+                    <li>Différentiel entre versions</li>
+                    <li>Rollback vers versions précédentes</li>
+                </ul>
+                <a href="javascript:void(0)" onclick="exportCurrentConfig()" class="card-action">
+                    <i class="fas fa-download"></i>
+                    Export configuration
+                </a>
+            </div>
+        </div>
+
+        <!-- Barre de statut -->
+        <div class="status-bar fade-in">
+            <div class="status-item">
+                <div class="status-value" id="configVersion">v2025-2.0</div>
+                <div class="status-label">Version actuelle</div>
+            </div>
+            <div class="status-item">
+                <div class="status-value" id="dataStatus">✅</div>
+                <div class="status-label">État des données</div>
+            </div>
+            <div class="status-item">
+                <div class="status-value" id="pagesCount">50+</div>
+                <div class="status-label">Pages utilisant les données</div>
+            </div>
+            <div class="status-item">
+                <div class="status-value" id="lastUpdate">Aujourd'hui</div>
+                <div class="status-label">Dernière mise à jour</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-links fade-in">
+            <a href="../licubepro.html" class="footer-link" target="_blank">
+                <i class="fas fa-home"></i>
+                Retour au hub
+            </a>
+            <a href="../edsquebec.html" class="footer-link" target="_blank">
+                <i class="fas fa-globe"></i>
+                Site public
+            </a>
+            <a href="https://github.com/anthropics/claude-code/issues" class="footer-link" target="_blank">
+                <i class="fas fa-bug"></i>
+                Signaler un problème
+            </a>
+            <a href="mailto:dev@edsquebec.com" class="footer-link">
+                <i class="fas fa-envelope"></i>
+                Contact développement
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/pricing-manager.js"></script>
+    <script src="./calculations-engine.js"></script>
+    <script src="./validation-system.js"></script>
+
+    <script>
+        /**
+         * =====================================================================
+         * SCRIPT DE LA PAGE D'INDEX ADMINISTRATION
+         * =====================================================================
+         */
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 Page d\'administration chargée');
+            initializeStatusBar();
+            setupEventListeners();
+        });
+        
+        // Écouter le pricing manager
+        document.addEventListener('pricingManagerReady', function(event) {
+            console.log('✅ Pricing manager détecté:', event.detail);
+            updateStatusBar();
+        });
+        
+        /**
+         * Initialiser la barre de statut
+         */
+        function initializeStatusBar() {
+            // Version
+            if (window.pricingManager && window.pricingManager.config) {
+                const version = window.pricingManager.config._metadata?.version || 'v2025-2.0';
+                document.getElementById('configVersion').textContent = version;
+            }
+            
+            // État des données
+            const dataStatus = window.pricingManager ? '✅' : '⚠️';
+            document.getElementById('dataStatus').textContent = dataStatus;
+            
+            // Dernière mise à jour
+            const lastUpdate = new Date().toLocaleDateString('fr-CA');
+            document.getElementById('lastUpdate').textContent = lastUpdate;
+        }
+        
+        /**
+         * Mettre à jour la barre de statut
+         */
+        function updateStatusBar() {
+            if (window.pricingManager && window.pricingManager.config) {
+                // Version
+                const version = window.pricingManager.config._metadata?.version || 'v2025-2.0';
+                document.getElementById('configVersion').textContent = version;
+                
+                // État
+                document.getElementById('dataStatus').textContent = '✅';
+                
+                // Date de mise à jour
+                const lastUpdate = window.pricingManager.config._metadata?.lastUpdate || 'Inconnue';
+                document.getElementById('lastUpdate').textContent = lastUpdate;
+                
+                console.log('📊 Barre de statut mise à jour');
+            }
+        }
+        
+        /**
+         * Configuration des écouteurs d'événements
+         */
+        function setupEventListeners() {
+            // Écouter les mises à jour de configuration
+            window.addEventListener('edsConfigUpdated', function(event) {
+                console.log('🔄 Configuration mise à jour:', event.detail);
+                updateStatusBar();
+                showNotification('Configuration mise à jour avec succès!', 'success');
+            });
+            
+            // Écouter les erreurs
+            window.addEventListener('error', function(event) {
+                console.error('💥 Erreur détectée:', event.error);
+                showNotification('Erreur système détectée', 'error');
+            });
+        }
+        
+        /**
+         * Exporter la configuration actuelle
+         */
+        function exportCurrentConfig() {
+            try {
+                console.log('📦 Export de la configuration...');
+                
+                let config = {};
+                let metadata = {};
+                
+                if (window.pricingManager && window.pricingManager.config) {
+                    config = window.pricingManager.config;
+                    metadata = {
+                        exportDate: new Date().toISOString(),
+                        source: 'Admin Portal',
+                        version: config._metadata?.version || 'unknown'
+                    };
+                } else {
+                    // Configuration par défaut si pas de pricing manager
+                    config = {
+                        "_metadata": {
+                            "version": "2025-v2.0-EXPORT",
+                            "lastUpdate": new Date().toISOString().split('T')[0],
+                            "description": "Export depuis portail admin",
+                            "created_by": "Admin Portal",
+                            "currency": "CAD",
+                            "tax_jurisdiction": "Quebec"
+                        },
+                        "note": "Configuration par défaut - Pricing manager non disponible"
+                    };
+                    
+                    metadata = {
+                        exportDate: new Date().toISOString(),
+                        source: 'Admin Portal (Fallback)',
+                        warning: 'Pricing manager non disponible - export par défaut'
+                    };
+                }
+                
+                const exportData = {
+                    metadata: metadata,
+                    configuration: config,
+                    schema: {
+                        note: 'Voir schema.json pour le schéma complet'
+                    }
+                };
+                
+                // Créer et télécharger le fichier
+                const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+                    type: 'application/json'
+                });
+                
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `licube-config-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                console.log('✅ Export terminé');
+                showNotification('Configuration exportée avec succès!', 'success');
+                
+            } catch (error) {
+                console.error('❌ Erreur lors de l\'export:', error);
+                showNotification('Erreur lors de l\'export: ' + error.message, 'error');
+            }
+        }
+        
+        /**
+         * Afficher une notification
+         */
+        function showNotification(message, type = 'info', duration = 4000) {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--bg-panel);
+                border: 1px solid var(--border);
+                border-left: 4px solid var(--${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'info'});
+                border-radius: var(--radius);
+                padding: 16px 20px;
+                color: var(--text-primary);
+                box-shadow: var(--shadow);
+                z-index: 10000;
+                max-width: 400px;
+                transform: translateX(120%);
+                transition: transform 0.3s ease;
+            `;
+            
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-triangle' : 'fa-info-circle'}" style="color: var(--${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'info'});"></i>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px; margin-left: auto;">&times;</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animer l'apparition
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Disparition automatique
+            if (duration > 0) {
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(120%)';
+                    setTimeout(() => notification.remove(), 300);
+                }, duration);
+            }
+        }
+        
+        /**
+         * Test rapide du système
+         */
+        function quickSystemTest() {
+            console.log('🧪 Test rapide du système...');
+            
+            const tests = [
+                {
+                    name: 'Pricing Manager',
+                    test: () => window.pricingManager && window.pricingManager.isLoaded,
+                    result: window.pricingManager && window.pricingManager.isLoaded
+                },
+                {
+                    name: 'Configuration',
+                    test: () => window.pricingManager && window.pricingManager.config,
+                    result: window.pricingManager && window.pricingManager.config
+                },
+                {
+                    name: 'Calculs',
+                    test: () => {
+                        if (!window.pricingManager) return false;
+                        const testValue = window.pricingManager.getValue('modes.vente.licube.price_base');
+                        return testValue && testValue > 0;
+                    },
+                    result: null
+                }
+            ];
+            
+            tests.forEach(test => {
+                try {
+                    test.result = test.test();
+                    console.log(`  ${test.result ? '✅' : '❌'} ${test.name}: ${test.result ? 'OK' : 'ÉCHEC'}`);
+                } catch (error) {
+                    test.result = false;
+                    console.log(`  ❌ ${test.name}: ERREUR - ${error.message}`);
+                }
+            });
+            
+            const allPassed = tests.every(t => t.result);
+            console.log(`🎯 Résultat global: ${allPassed ? 'SUCCÈS' : 'ÉCHECS DÉTECTÉS'}`);
+            
+            return {
+                success: allPassed,
+                tests: tests
+            };
+        }
+        
+        // Exécuter un test rapide au chargement
+        setTimeout(() => {
+            const results = quickSystemTest();
+            if (!results.success) {
+                showNotification('Certains composants ont des problèmes', 'warning', 8000);
+            }
+        }, 2000);
+        
+        console.log('🎛️ Portail d\'administration prêt');
+    </script>
+</body>
+</html>

@@ -899,56 +899,72 @@
          * Fonctionnement : Charge et affiche automatiquement les prix depuis pricing-config.json
          */
         
-        let pricingManager = null;
+        // Le pricingManager global est maintenant disponible via window.pricingManager
         let currentMode = 'vente'; // Mode par défaut pour presentations-vente
         
         /**
          * Initialise la comparaison avec le système centralisé
          */
-        async function initComparison() {
-            try {
-                console.log('🚀 Initialisation comparaison avec pricing-manager.js...');
-                
-                // Créer et initialiser le gestionnaire de prix
-                pricingManager = new PricingManager();
-                
-                // Attendre que la configuration soit chargée
-                await new Promise(resolve => {
-                    const checkLoaded = setInterval(() => {
-                        if (pricingManager.isLoaded) {
-                            clearInterval(checkLoaded);
-                            resolve();
-                        }
-                    }, 100);
+        function initComparison() {
+            console.log('🚀 Initialisation comparaison avec SimplePricingManager global...');
+            
+            // Utiliser le SimplePricingManager global
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                console.log('✅ SimplePricingManager déjà disponible pour comparaison');
+                updateComparaisonDisplays();
+                updateBarWidths();
+            } else {
+                // Attendre que le pricing manager global soit prêt
+                document.addEventListener('pricingManagerReady', function() {
+                    console.log('✅ SimplePricingManager maintenant disponible pour comparaison');
+                    updateComparaisonDisplays();
+                    updateBarWidths();
                 });
                 
-                console.log('✅ Configuration des prix chargée pour comparaison');
-                
-                // Mettre à jour tous les prix affichés
-                pricingManager.updateAllDisplays(currentMode);
-                
-                // Mettre à jour les largeurs des barres selon les nouvelles données
-                updateBarWidths();
-                
-            } catch (erreur) {
-                console.error('❌ Erreur initialisation pricing-manager:', erreur);
+                // Timeout de sécurité
+                setTimeout(() => {
+                    if (window.pricingManager) {
+                        updateComparaisonDisplays();
+                        updateBarWidths();
+                    } else {
+                        console.error('❌ SimplePricingManager non disponible après timeout');
+                    }
+                }, 2000);
             }
+        }
+        
+        /**
+         * Met à jour tous les éléments de la comparaison
+         */
+        function updateComparaisonDisplays() {
+            if (!window.pricingManager || !window.pricingManager.isLoaded) {
+                console.warn('⚠️ SimplePricingManager non disponible pour updateComparaisonDisplays');
+                return;
+            }
+            
+            console.log('🔄 Mise à jour des éléments de comparaison...');
+            
+            // Mettre à jour tous les éléments avec data-pricing-value
+            const updateCount = window.pricingManager.updatePrices();
+            console.log(`✅ ${updateCount} éléments mis à jour via data-pricing-value dans comparaison`);
         }
         
         /**
          * Met à jour les largeurs des barres selon les données centralisées
          */
         function updateBarWidths() {
-            if (!pricingManager || !pricingManager.isLoaded) return;
+            if (!window.pricingManager || !window.pricingManager.isLoaded) return;
             
-            const config = pricingManager.config;
+            console.log('🔄 Mise à jour des largeurs de barres...');
             
-            // Récupérer les valeurs centralisées
-            const lfpInitial = config.modes[currentMode].licube.price_total;
-            const nicdInitial = config.modes[currentMode].nicd.price_base;
-            const lfpTCO = config.calculations.tco_vente.licube.total_20_years;
-            const nicdTCO = config.calculations.tco_vente.nicd.total_20_years;
-            const savings = config.calculations.tco_vente.savings.total;
+            // Récupérer les valeurs via le pricing manager
+            const lfpInitial = window.pricingManager.getValue('modes.vente.licube.price_total') || 5749;
+            const nicdInitial = window.pricingManager.getValue('modes.vente.nicd.price_base') || 12000;
+            const lfpTCO = window.pricingManager.getValue('calculations.tco_vente.licube.total_20_years') || 11049;
+            const nicdTCO = window.pricingManager.getValue('calculations.tco_vente.nicd.total_20_years') || 59337;
+            const savings = window.pricingManager.getValue('calculations.tco_vente.savings.total') || 48288;
+            
+            console.log(`📊 Valeurs pour barres: LFP=${lfpInitial}, NiCd=${nicdInitial}, TCO_LFP=${lfpTCO}, TCO_NiCd=${nicdTCO}`);
             
             // Calculer et appliquer les nouvelles largeurs de barres
             // Coût initial

@@ -18,7 +18,7 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            background: white;
             color: #333;
             line-height: 1.4;
             width: 2245px;
@@ -87,7 +87,7 @@
         .logo {
             font-size: 36pt;
             font-weight: 900;
-            color: #1B365D;
+            color: #F18F01;
             margin-bottom: 3mm;
             letter-spacing: 2px;
         }
@@ -961,7 +961,79 @@
             </div>
         </div>
     </div>
-    <script src="../../utils/data-loader.js"></script>
+    <script src="../../js/pricing-manager.js"></script>
+    <script>
+        // Initialisation spécifique pour poster vente
+        function initPosterVente() {
+            console.log('🚀 Initialisation poster vente avec SimplePricingManager global...');
+            
+            // Configuration du mode pour le poster vente
+            let currentMode = 'vente';
+            
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                console.log('✅ SimplePricingManager déjà disponible pour poster vente');
+                updatePosterVente();
+            } else {
+                console.log('⏳ Attente SimplePricingManager pour poster vente...');
+                document.addEventListener('pricingManagerReady', function() {
+                    console.log('🎯 Événement pricingManagerReady reçu pour poster vente');
+                    updatePosterVente();
+                });
+            }
+        }
+        
+        function updatePosterVente() {
+            console.log('🔄 Mise à jour des prix pour poster vente...');
+            
+            // Mise à jour de tous les éléments de prix
+            const pricingElements = document.querySelectorAll('[data-pricing-value]');
+            console.log(`📊 ${pricingElements.length} éléments de prix trouvés pour poster vente`);
+            
+            pricingElements.forEach((element, index) => {
+                const path = element.getAttribute('data-pricing-value');
+                const format = element.getAttribute('data-pricing-format') || 'number';
+                
+                try {
+                    const value = window.pricingManager.getValue(path);
+                    console.log(`💰 [${index + 1}] ${path}: ${value} (format: ${format})`);
+                    
+                    if (value !== null && value !== undefined && value !== '') {
+                        if (format === 'currency') {
+                            element.textContent = parseFloat(value).toLocaleString('fr-CA', {
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            });
+                        } else {
+                            element.textContent = value;
+                        }
+                    } else {
+                        console.warn(`⚠️  Valeur manquante pour ${path} dans poster vente`);
+                        element.textContent = '---';
+                    }
+                } catch (error) {
+                    console.error(`❌ Erreur lors de la récupération de ${path}:`, error);
+                    element.textContent = 'Erreur';
+                }
+            });
+            
+            console.log('✅ Mise à jour terminée pour poster vente');
+        }
+        
+        // Démarrage automatique
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM chargé, initialisation poster vente...');
+            initPosterVente();
+        });
+        
+        // Fallback si DOMContentLoaded déjà passé
+        if (document.readyState === 'loading') {
+            // DOM pas encore chargé, on attend DOMContentLoaded
+        } else {
+            // DOM déjà chargé
+            console.log('📄 DOM déjà chargé, initialisation immédiate poster vente...');
+            initPosterVente();
+        }
+    </script>
 
 
         
@@ -1127,15 +1199,6 @@
         
         <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
         <script src="../../../js/image-config.js"></script>
-        <script src="../../../js/pricing-manager.js"></script>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof PricingManager !== 'undefined') {
-                PricingManager.initialize();
-                PricingManager.updatePrices();
-            }
-        });
-        </script>
         
 </body>
 </html>
