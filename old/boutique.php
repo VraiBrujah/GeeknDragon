@@ -175,7 +175,8 @@ echo $snipcartInit;
 
         <!-- Modal vidéo -->
         <div id="video-modal"
-             class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center"
+             class="fixed inset-0 z-50 bg-black/75 flex items-center justify-center"
+             hidden
              role="dialog" aria-modal="true"
              aria-label="Lire la vidéo « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
              tabindex="-1">
@@ -415,14 +416,14 @@ echo $snipcartInit;
     const iframe = modal.querySelector('iframe');
 
     const escListener = (e) => {
-      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      if (e.key === 'Escape' && !modal.hidden) {
         e.preventDefault();
         closeModal();
       }
     };
 
     const openModal = () => {
-      modal.classList.remove('hidden');
+      modal.hidden = false;
       openBtn.classList.add('invisible');
       document.addEventListener('keydown', escListener, true);
       modal.focus();
@@ -432,7 +433,7 @@ echo $snipcartInit;
       if (document.fullscreenElement) {
         try { document.exitFullscreen(); } catch (_) {}
       }
-      modal.classList.add('hidden');
+      modal.hidden = true;
       iframe.src = iframe.src;
       document.removeEventListener('keydown', escListener, true);
       openBtn.classList.remove('invisible');
@@ -443,7 +444,7 @@ echo $snipcartInit;
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('fullscreenchange', () => {
-      if (!document.fullscreenElement && !modal.classList.contains('hidden')) closeModal();
+      if (!document.fullscreenElement && !modal.hidden) closeModal();
     });
 
     const propertyImg = document.querySelector('.property-image');
