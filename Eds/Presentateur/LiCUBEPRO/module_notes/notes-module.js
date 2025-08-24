@@ -108,7 +108,8 @@
             hasUnsavedChanges: false,
             currentNotes: '',
             lastRefresh: null,
-            refreshTimer: null
+            refreshTimer: null,
+            currentUser: null  // Informations de l'utilisateur connecté (optionnel)
         },
         
         // Éléments DOM
@@ -140,6 +141,9 @@
         
         // Configurer les événements
         setupEventListeners();
+        
+        // Initialiser le système de gestion utilisateur
+        initializeUserSystem();
         
         // Tester la connexion serveur
         testServerConnection();
@@ -263,6 +267,34 @@
                     <div class="notes-module-context-item">
                         <strong>📁 Fichier:</strong> 
                         <span id="notes-module-filename">${generateFilenameFromURL(getCurrentPageURL())}</span>
+                    </div>
+                </div>
+                
+                <!-- Section de connexion optionnelle -->
+                <div class="notes-module-login-section">
+                    <div class="notes-module-login-form" id="notes-module-login-form">
+                        <label for="notes-module-user-input" class="notes-module-login-label">
+                            👤 Nom (optionnel) :
+                        </label>
+                        <div class="notes-module-login-controls">
+                            <input type="text" 
+                                   id="notes-module-user-input"
+                                   class="notes-module-user-input"
+                                   placeholder="Votre nom..."
+                                   maxlength="30">
+                            <button id="notes-module-login-btn" class="notes-module-login-btn" type="button">
+                                Se connecter
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="notes-module-user-info" id="notes-module-user-info" style="display: none;">
+                        <span class="notes-module-user-display">
+                            👤 Connecté en tant que : <strong id="notes-module-current-user">Anonyme</strong>
+                        </span>
+                        <button id="notes-module-logout-btn" class="notes-module-logout-btn" type="button">
+                            Changer
+                        </button>
                     </div>
                 </div>
                 
@@ -1282,9 +1314,113 @@
             }
         }
         
+        /* Styles pour l'interface de login optionnel */
+        .notes-module-login-section {
+            padding: 20px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .notes-module-login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .notes-module-login-label {
+            color: ${colors.primary};
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .notes-module-login-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .notes-module-user-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 10px 12px;
+            color: ${colors.text};
+            font-family: inherit;
+            font-size: 13px;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+        
+        .notes-module-user-input:focus {
+            outline: none;
+            border-color: ${colors.primary};
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        
+        .notes-module-user-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .notes-module-login-btn {
+            background: ${colors.primary};
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 100px;
+        }
+        
+        .notes-module-login-btn:hover {
+            background: ${lightenColor(colors.primary, 10)};
+            transform: translateY(-1px);
+        }
+        
+        .notes-module-login-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* État connecté */
+        .notes-module-user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: rgba(76, 175, 80, 0.15);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 8px;
+            color: #4CAF50;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .notes-module-logout-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .notes-module-logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
         @media (max-width: 480px) {
             .notes-module-header,
             .notes-module-context,
+            .notes-module-login-section,
             .notes-module-input-section,
             .notes-module-actions,
             .notes-module-status-bar,
@@ -1296,6 +1432,15 @@
             
             .notes-module-textarea {
                 min-height: 100px;
+            }
+            
+            .notes-module-login-controls {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .notes-module-login-btn {
+                width: 100%;
             }
         }
         
@@ -1359,6 +1504,186 @@
                 window.style.right = '20px';
                 break;
         }
+    }
+    
+    // ========================================
+    // GESTION DES UTILISATEURS (LOGIN OPTIONNEL)
+    // ========================================
+    
+    /**
+     * Initialise le système de login optionnel
+     * Charge les informations utilisateur depuis le localStorage
+     */
+    function initializeUserSystem() {
+        // Charger l'utilisateur connecté depuis le localStorage
+        const savedUser = localStorage.getItem('notesModule_currentUser');
+        if (savedUser) {
+            try {
+                const userData = JSON.parse(savedUser);
+                if (userData && userData.name) {
+                    // Utilisateur trouvé, afficher l'état connecté
+                    NotesModule.state.currentUser = userData;
+                    showUserInfo(userData.name);
+                }
+            } catch (error) {
+                console.warn('Erreur lors du chargement des données utilisateur:', error);
+                // Nettoyer les données corrompues
+                localStorage.removeItem('notesModule_currentUser');
+            }
+        }
+        
+        // Configuration des événements pour le système de login
+        setupLoginEventListeners();
+    }
+    
+    /**
+     * Configure les écouteurs d'événements pour l'interface de login
+     */
+    function setupLoginEventListeners() {
+        const loginBtn = document.getElementById('notes-module-login-btn');
+        const userInput = document.getElementById('notes-module-user-input');
+        
+        if (loginBtn && userInput) {
+            // Clic sur le bouton de connexion
+            loginBtn.addEventListener('click', handleLogin);
+            
+            // Connexion avec la touche Entrée
+            userInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleLogin();
+                }
+            });
+        }
+    }
+    
+    /**
+     * Gère la connexion de l'utilisateur
+     * Sauvegarde le nom dans localStorage et met à jour l'interface
+     */
+    function handleLogin() {
+        const userInput = document.getElementById('notes-module-user-input');
+        const userName = userInput.value.trim();
+        
+        if (!userName) {
+            // Pas de nom fourni, ne rien faire
+            return;
+        }
+        
+        // Valider le nom (max 30 caractères, pas de caractères spéciaux dangereux)
+        if (userName.length > 30) {
+            alert('Le nom ne peut pas dépasser 30 caractères.');
+            return;
+        }
+        
+        // Créer l'objet utilisateur
+        const userData = {
+            name: userName,
+            loginTime: new Date().toISOString()
+        };
+        
+        // Sauvegarder dans localStorage
+        localStorage.setItem('notesModule_currentUser', JSON.stringify(userData));
+        
+        // Mettre à jour l'état global
+        NotesModule.state.currentUser = userData;
+        
+        // Afficher l'état connecté
+        showUserInfo(userName);
+        
+        // Nettoyer le champ input
+        userInput.value = '';
+        
+        console.log('Utilisateur connecté:', userName);
+    }
+    
+    /**
+     * Affiche les informations de l'utilisateur connecté
+     * @param {string} userName - Nom de l'utilisateur
+     */
+    function showUserInfo(userName) {
+        const loginForm = document.getElementById('notes-module-login-form');
+        
+        if (!loginForm) return;
+        
+        // Remplacer le formulaire de connexion par l'info utilisateur
+        loginForm.innerHTML = `
+            <div class="notes-module-user-info">
+                <span>👤 Connecté en tant que: <strong>${escapeHtml(userName)}</strong></span>
+                <button id="notes-module-logout-btn" class="notes-module-logout-btn" type="button">
+                    Se déconnecter
+                </button>
+            </div>
+        `;
+        
+        // Configurer le bouton de déconnexion
+        const logoutBtn = document.getElementById('notes-module-logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', handleLogout);
+        }
+    }
+    
+    /**
+     * Gère la déconnexion de l'utilisateur
+     * Supprime les données du localStorage et restaure le formulaire
+     */
+    function handleLogout() {
+        // Supprimer les données utilisateur
+        localStorage.removeItem('notesModule_currentUser');
+        NotesModule.state.currentUser = null;
+        
+        // Restaurer le formulaire de connexion
+        showLoginForm();
+        
+        console.log('Utilisateur déconnecté');
+    }
+    
+    /**
+     * Affiche le formulaire de connexion
+     */
+    function showLoginForm() {
+        const loginForm = document.getElementById('notes-module-login-form');
+        
+        if (!loginForm) return;
+        
+        // Restaurer le formulaire original
+        loginForm.innerHTML = `
+            <label for="notes-module-user-input" class="notes-module-login-label">
+                👤 Nom (optionnel) :
+            </label>
+            <div class="notes-module-login-controls">
+                <input type="text" 
+                       id="notes-module-user-input"
+                       class="notes-module-user-input"
+                       placeholder="Votre nom..."
+                       maxlength="30">
+                <button id="notes-module-login-btn" class="notes-module-login-btn" type="button">
+                    Se connecter
+                </button>
+            </div>
+        `;
+        
+        // Reconfigurer les événements
+        setupLoginEventListeners();
+    }
+    
+    /**
+     * Utilitaire pour échapper les caractères HTML dangereux
+     * @param {string} text - Texte à sécuriser
+     * @return {string} Texte sécurisé
+     */
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    /**
+     * Obtient les informations de l'utilisateur actuel pour la sauvegarde
+     * @return {object|null} Données utilisateur ou null si non connecté
+     */
+    function getCurrentUserInfo() {
+        return NotesModule.state.currentUser || null;
     }
     
     // ========================================
@@ -1544,9 +1869,14 @@
         formData.append('urlComplete', getCurrentPageURL());
         formData.append('contenu', contenu);
         
-        // Métadonnées
+        // Métadonnées (incluant informations utilisateur si connecté)
+        const userInfo = getCurrentUserInfo();
         const metadata = {
             titre: document.title,
+            // Informations utilisateur si disponible
+            auteur: userInfo ? userInfo.name : null,
+            auteur_connecte: userInfo ? true : false,
+            auteur_heure_connexion: userInfo ? userInfo.loginTime : null,
             ...NotesModule.config.metadata.customFields
         };
         formData.append('metadonnes', JSON.stringify(metadata));
