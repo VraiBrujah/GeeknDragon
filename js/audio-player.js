@@ -23,8 +23,8 @@ class GeeknDragonAudioPlayer {
             currentTime: 0,
             volume: storedVolume,
             playlist: [],
-            // Sur mobile, réduire par défaut le lecteur si aucune préférence n'est stockée
-            isCollapsed: collapsedPref !== null ? collapsedPref === 'true' : isMobile,
+            // Par défaut, le lecteur est réduit pour être plus discret
+            isCollapsed: collapsedPref !== null ? collapsedPref === 'true' : true,
             currentPage: this.getCurrentPage(),
             shuffleOrder: [],
             isLoaded: false,
@@ -130,25 +130,26 @@ class GeeknDragonAudioPlayer {
         
         const playerHTML = `
             <div class="gnd-audio-player ${this.state.isCollapsed ? 'collapsed' : ''}" id="gndAudioPlayer">
-                <div class="player-toggle" onclick="window.gndAudioPlayer.toggleCollapse()">
-                    <i class="fas fa-music"></i>
+                <!-- Bouton principal Play/Pause -->
+                <div class="main-play-button" 
+                     onclick="window.gndAudioPlayer.handleMainButtonClick(event)"
+                     oncontextmenu="window.gndAudioPlayer.toggleCollapse(); return false;"
+                     title="Lecture/Pause | Clic droit: Étendre/Réduire">
+                    <i class="fas ${this.state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
                 </div>
                 
-                <div class="player-controls">
-                    <div class="controls-row">
-                        <button class="control-btn play-btn" onclick="window.gndAudioPlayer.togglePlay()" title="Lecture/Pause">
-                            <i class="fas ${this.state.isPlaying ? 'fa-pause' : 'fa-play'}"></i>
-                        </button>
-
-                        <div class="volume-control">
-                            <input type="range" min="0" max="100" value="${this.state.volume * 100}"
-                                   class="volume-slider" onchange="window.gndAudioPlayer.setVolume(this.value)">
-                        </div>
-
-                        <button class="collapse-btn" onclick="window.gndAudioPlayer.toggleCollapse()" title="Réduire">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
+                <!-- Contrôles étendus (volume) -->
+                <div class="extended-controls ${this.state.isCollapsed ? 'hidden' : ''}">
+                    <div class="volume-control">
+                        <i class="fas fa-volume-up volume-icon"></i>
+                        <input type="range" min="0" max="100" value="${this.state.volume * 100}"
+                               class="volume-slider" onchange="window.gndAudioPlayer.setVolume(this.value)">
                     </div>
+                </div>
+                
+                <!-- Bouton pour étendre/réduire -->
+                <div class="expand-button" onclick="window.gndAudioPlayer.toggleCollapse()" title="${this.state.isCollapsed ? 'Étendre' : 'Réduire'}">
+                    <i class="fas fa-chevron-${this.state.isCollapsed ? 'up' : 'down'}"></i>
                 </div>
             </div>
         `;
@@ -336,6 +337,14 @@ class GeeknDragonAudioPlayer {
         this.updateTrackInfo(fileName);
     }
     
+    handleMainButtonClick(event) {
+        // Empêcher le menu contextuel sur le clic gauche
+        event.preventDefault();
+        
+        // Simple clic gauche = play/pause
+        this.togglePlay();
+    }
+
     async togglePlay() {
         if (!this.sound) return;
 
@@ -453,35 +462,46 @@ class GeeknDragonAudioPlayer {
         this.state.isCollapsed = !this.state.isCollapsed;
         this.playerElement.classList.toggle('collapsed', this.state.isCollapsed);
         
-        const chevron = this.playerElement.querySelector('.collapse-btn i');
-        chevron.className = `fas fa-chevron-${this.state.isCollapsed ? 'up' : 'down'}`;
+        const extendedControls = this.playerElement.querySelector('.extended-controls');
+        const expandButton = this.playerElement.querySelector('.expand-button i');
+        const expandButtonContainer = this.playerElement.querySelector('.expand-button');
+        
+        if (extendedControls) {
+            extendedControls.classList.toggle('hidden', this.state.isCollapsed);
+        }
+        
+        if (expandButton) {
+            expandButton.className = `fas fa-chevron-${this.state.isCollapsed ? 'up' : 'down'}`;
+        }
+        
+        if (expandButtonContainer) {
+            expandButtonContainer.title = this.state.isCollapsed ? 'Étendre' : 'Réduire';
+        }
         
         localStorage.setItem('gnd-audio-collapsed', this.state.isCollapsed.toString());
     }
     
     updatePlayButton() {
-        const playBtn = this.playerElement.querySelector('.control-btn i');
+        const playBtn = this.playerElement.querySelector('.main-play-button i');
         if (playBtn) {
             playBtn.className = `fas ${this.state.isPlaying ? 'fa-pause' : 'fa-play'}`;
         }
     }
     
     updateTrackInfo(trackName = null) {
-        const trackInfoElement = this.playerElement.querySelector('.track-name');
-        const counterElement = this.playerElement.querySelector('.track-counter');
-        
+        // Interface simplifiée - pas d'affichage d'informations de piste
+        // Les informations sont juste loggées dans la console pour le développement
         if (trackName) {
-            trackInfoElement.textContent = trackName;
+            console.log(`🎵 Piste actuelle: ${trackName}`);
         } else if (this.state.playlist.length > 0) {
             const currentFile = this.state.playlist[this.state.shuffleOrder[this.state.currentTrack] || this.state.currentTrack];
             const fileName = currentFile ? currentFile.split('/').pop().replace('.mp3', '') : 'Inconnu';
-            trackInfoElement.textContent = fileName;
+            
+            const sourceIcon = this.state.currentPlaylistType === 'current' ? '📍' : '🌍';
+            const totalTracks = this.state.currentPagePlaylist.length + this.state.defaultPlaylist.length;
+            
+            console.log(`🎵 ${sourceIcon} ${fileName} (${this.state.currentTrack + 1}/${this.state.playlist.length}) - Total: ${totalTracks}`);
         }
-        
-        // Affichage amélioré avec indication de la source
-        const sourceIcon = this.state.currentPlaylistType === 'current' ? '📍' : '🌍';
-        const totalTracks = this.state.currentPagePlaylist.length + this.state.defaultPlaylist.length;
-        counterElement.textContent = `${sourceIcon} ${this.state.currentTrack + 1}/${this.state.playlist.length} (Total: ${totalTracks})`;
     }
     
     updatePlaybackState() {
@@ -589,11 +609,20 @@ class GeeknDragonAudioPlayer {
     updatePlayerInterface() {
         // Mettre à jour l'interface si elle existe déjà
         this.updatePlayButton();
-        this.updateTrackInfo();
         
         const volumeSlider = this.playerElement.querySelector('.volume-slider');
         if (volumeSlider) {
             volumeSlider.value = this.state.volume * 100;
+        }
+        
+        const extendedControls = this.playerElement.querySelector('.extended-controls');
+        if (extendedControls) {
+            extendedControls.classList.toggle('hidden', this.state.isCollapsed);
+        }
+        
+        const expandButton = this.playerElement.querySelector('.expand-button i');
+        if (expandButton) {
+            expandButton.className = `fas fa-chevron-${this.state.isCollapsed ? 'up' : 'down'}`;
         }
         
         this.playerElement.classList.toggle('collapsed', this.state.isCollapsed);
@@ -604,230 +633,211 @@ class GeeknDragonAudioPlayer {
         
         const styles = `
             <style id="gnd-audio-styles">
+            /* ========================================
+               LECTEUR AUDIO SIMPLIFIÉ - STYLE MEDIEVAL
+               ======================================== */
+            
             .gnd-audio-player {
                 position: fixed;
                 bottom: 20px;
                 right: 20px;
-                background: linear-gradient(135deg, var(--primary-color, #8b4513) 0%, var(--primary-dark, #654321) 100%);
-                border: 2px solid var(--secondary-color, #d4af37);
-                border-radius: var(--border-radius, 12px);
-                box-shadow: 
-                    0 8px 25px rgba(0, 0, 0, 0.5),
-                    0 0 15px rgba(212, 175, 55, 0.3);
-                color: var(--light-text, #ffffff);
-                font-family: var(--font-heading, 'Cinzel', serif);
+                background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+                border: 3px solid #d4af37;
+                border-radius: 12px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+                color: #ffffff;
+                font-family: 'Cinzel', serif;
                 z-index: 1500;
-                backdrop-filter: blur(15px);
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                min-width: 200px;
-                max-width: 220px;
+                transition: all 0.3s ease;
+                padding: 8px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-width: 60px;
             }
             
-            .gnd-audio-player::before {
-                content: '';
-                position: absolute;
-                top: -2px;
-                left: -2px;
-                right: -2px;
-                bottom: -2px;
-                background: linear-gradient(45deg, 
-                    var(--secondary-color, #d4af37), 
-                    var(--mystical-purple, #6a0dad), 
-                    var(--dragon-red, #dc143c), 
-                    var(--forest-green, #228b22));
-                border-radius: var(--border-radius, 12px);
-                z-index: -1;
-                opacity: 0.6;
-                filter: blur(2px);
-            }
+            /* ========================================
+               BOUTON PRINCIPAL PLAY/PAUSE
+               ======================================== */
             
-            .gnd-audio-player.collapsed {
-                min-width: 50px;
-                max-width: 50px;
-            }
-            
-            .gnd-audio-player.collapsed .player-controls {
-                display: none;
-            }
-            
-            .player-toggle {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: var(--secondary-color, #d4af37);
-                color: var(--dark-bg, #1a1a1a);
-                width: 40px;
-                height: 40px;
+            .main-play-button {
+                background: #d4af37;
+                color: #1a1a1a;
+                width: 50px;
+                height: 50px;
                 border-radius: 50%;
+                cursor: pointer;
+                font-size: 1.4rem;
+                font-weight: bold;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                cursor: pointer;
-                font-size: 1rem;
-                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
-                transition: all var(--transition, 0.3s ease);
-                opacity: 0;
-                pointer-events: none;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                transition: all 0.2s ease;
+                border: 2px solid #ffffff;
+                margin-bottom: 8px;
             }
             
-            .gnd-audio-player.collapsed .player-toggle {
-                opacity: 1;
-                pointer-events: auto;
-            }
-            
-            .player-toggle:hover {
-                transform: translate(-50%, -50%) scale(1.1);
-                box-shadow: 
-                    0 6px 16px rgba(0, 0, 0, 0.4),
-                    0 0 12px rgba(212, 175, 55, 0.6);
-            }
-            
-            .player-controls {
-                padding: 1rem;
-                display: block;
-            }
-            
-            
-            .collapse-btn {
-                background: rgba(0, 0, 0, 0.3);
-                border: 1px solid var(--secondary-color, #d4af37);
-                color: var(--secondary-color, #d4af37);
-                cursor: pointer;
-                font-size: 0.8rem;
-                width: 25px;
-                height: 25px;
-                border-radius: 4px;
-                transition: all var(--transition, 0.3s ease);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .collapse-btn:hover {
-                background: var(--secondary-color, #d4af37);
-                color: var(--dark-bg, #1a1a1a);
+            .main-play-button:hover {
+                background: #ffffff;
+                color: #8b4513;
                 transform: scale(1.1);
+                box-shadow: 0 6px 20px rgba(212, 175, 55, 0.8);
             }
             
-            .controls-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 0.5rem;
-                padding: 0.75rem;
+            /* ========================================
+               CONTRÔLES ÉTENDUS (VOLUME)
+               ======================================== */
+            
+            .extended-controls {
+                width: 180px;
+                padding: 8px;
                 background: rgba(0, 0, 0, 0.4);
                 border-radius: 8px;
-                border: 1px solid rgba(212, 175, 55, 0.3);
+                border: 1px solid rgba(212, 175, 55, 0.5);
+                margin-bottom: 8px;
+                transition: all 0.3s ease;
+                opacity: 1;
+                transform: scaleY(1);
+                transform-origin: bottom;
             }
             
-            .control-btn {
-                background: rgba(0, 0, 0, 0.6);
-                color: var(--secondary-color, #d4af37);
-                border: 2px solid var(--secondary-color, #d4af37);
-                width: 35px;
-                height: 35px;
-                border-radius: 50%;
-                cursor: pointer;
-                font-size: 0.9rem;
-                transition: all var(--transition, 0.3s ease);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-            }
-            
-            .control-btn:hover {
-                background: var(--secondary-color, #d4af37);
-                color: var(--dark-bg, #1a1a1a);
-                transform: scale(1.1);
-                box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+            .extended-controls.hidden {
+                opacity: 0;
+                transform: scaleY(0);
+                height: 0;
+                padding: 0;
+                margin: 0;
+                overflow: hidden;
             }
             
             .volume-control {
                 display: flex;
                 align-items: center;
-                flex: 1;
-                margin: 0 0.5rem;
+                gap: 8px;
             }
+            
+            .volume-icon {
+                color: #d4af37;
+                font-size: 1rem;
+                min-width: 20px;
+            }
+            
+            /* ========================================
+               BOUTON D'EXTENSION
+               ======================================== */
+            
+            .expand-button {
+                background: rgba(0, 0, 0, 0.6);
+                border: 2px solid #d4af37;
+                color: #d4af37;
+                width: 30px;
+                height: 20px;
+                border-radius: 10px;
+                cursor: pointer;
+                font-size: 0.8rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease;
+            }
+            
+            .expand-button:hover {
+                background: #d4af37;
+                color: #1a1a1a;
+                transform: scale(1.1);
+            }
+            
+            /* ========================================
+               MODE RÉDUIT
+               ======================================== */
+            
+            .gnd-audio-player.collapsed {
+                min-width: 60px;
+                max-width: 60px;
+                padding: 8px;
+            }
+            
+            .gnd-audio-player.collapsed .extended-controls,
+            .gnd-audio-player.collapsed .expand-button {
+                display: none;
+            }
+            
+            .gnd-audio-player.collapsed .main-play-button {
+                margin-bottom: 0;
+            }
+            
+            /* Ajout d'une petite icône d'extension dans le mode réduit */
+            .gnd-audio-player.collapsed::after {
+                content: '⚙';
+                position: absolute;
+                bottom: 2px;
+                right: 2px;
+                font-size: 8px;
+                color: #d4af37;
+                opacity: 0.7;
+                pointer-events: none;
+            }
+            
+            /* ========================================
+               VOLUME SLIDER
+               ======================================== */
             
             .volume-slider {
                 flex: 1;
-                height: 4px;
-                background: rgba(0, 0, 0, 0.6);
-                border-radius: 2px;
+                height: 6px;
+                background: rgba(0, 0, 0, 0.8);
+                border-radius: 3px;
                 outline: none;
-                border: 1px solid var(--secondary-color, #d4af37);
+                border: 1px solid #d4af37;
                 cursor: pointer;
             }
             
             .volume-slider::-webkit-slider-thumb {
                 appearance: none;
-                width: 12px;
-                height: 12px;
-                background: var(--secondary-color, #d4af37);
+                width: 16px;
+                height: 16px;
+                background: #d4af37;
                 border-radius: 50%;
                 cursor: pointer;
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-                transition: all var(--transition, 0.3s ease);
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+                transition: all 0.2s ease;
+                border: 2px solid #ffffff;
             }
             
             .volume-slider::-webkit-slider-thumb:hover {
-                transform: scale(1.3);
-                box-shadow: 0 0 6px rgba(212, 175, 55, 0.8);
+                background: #ffffff;
+                transform: scale(1.2);
+                box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
             }
             
+            /* ========================================
+               RESPONSIVE
+               ======================================== */
             
-            /* Responsive */
             @media (max-width: 768px) {
                 .gnd-audio-player {
                     bottom: 10px;
                     right: 10px;
-                    min-width: 120px;
-                    max-width: 120px;
-                    background: rgba(34, 26, 14, 0.7);
+                    padding: 6px;
                 }
                 
-                .gnd-audio-player.collapsed {
-                    min-width: 45px;
-                    max-width: 45px;
+                .main-play-button {
+                    width: 45px;
+                    height: 45px;
+                    font-size: 1.2rem;
                 }
                 
-                .player-controls {
-                    padding: 0.75rem;
+                .extended-controls {
+                    width: 150px;
+                    padding: 6px;
                 }
                 
-                .controls-row {
-                    gap: 0.5rem;
-                }
-                
-                .control-btn {
-                    width: 30px;
-                    height: 30px;
-                    font-size: 0.8rem;
-                }
-                
-                .collapse-btn {
-                    width: 20px;
-                    height: 20px;
+                .expand-button {
+                    width: 25px;
+                    height: 18px;
                     font-size: 0.7rem;
                 }
-                
-                .player-toggle {
-                    width: 35px;
-                    height: 35px;
-                    font-size: 0.9rem;
-                }
-            }
-            
-            /* Animations */
-            @keyframes glow {
-                0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
-                50% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.4); }
-            }
-            
-            .gnd-audio-player {
-                animation: glow 4s ease-in-out infinite;
             }
             </style>
         `;

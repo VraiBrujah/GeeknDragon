@@ -55,14 +55,7 @@ class MusicFileScanner {
         // Méthode 1: Tester les noms courants
         foundFiles = await this.scanCommonFiles(directory);
         
-        // Méthode 2: Essayer l'API File System Access (Chrome/Edge moderne)
-        if (foundFiles.length === 0 && 'showDirectoryPicker' in window) {
-            try {
-                foundFiles = await this.scanWithFileSystemAPI(directory);
-            } catch (e) {
-                console.log('File System API non disponible ou refusée');
-            }
-        }
+        // Méthode 2: Désactivée - pas d'interaction utilisateur requise
         
         // Méthode 3: Endpoint serveur si disponible
         if (foundFiles.length === 0) {
@@ -95,32 +88,6 @@ class MusicFileScanner {
         return foundFiles;
     }
     
-    /**
-     * Méthode 2: API File System Access (navigateurs modernes)
-     */
-    async scanWithFileSystemAPI(directory) {
-        try {
-            const dirHandle = await window.showDirectoryPicker({
-                mode: 'read',
-                startIn: 'documents'
-            });
-            
-            const foundFiles = [];
-            
-            for await (const [name, fileHandle] of dirHandle.entries()) {
-                if (fileHandle.kind === 'file' && this.isMusicFile(name)) {
-                    const file = await fileHandle.getFile();
-                    const url = URL.createObjectURL(file);
-                    foundFiles.push(url);
-                }
-            }
-            
-            return foundFiles;
-        } catch (error) {
-            console.log('Erreur File System API:', error);
-            return [];
-        }
-    }
     
     /**
      * Méthode 3: Endpoint serveur (PHP ou autre)
