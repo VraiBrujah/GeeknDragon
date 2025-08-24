@@ -76,17 +76,34 @@
 
         body {
             font-family: var(--font-family);
-            background: white;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
             min-height: 100vh;
-            color: #333;
+            color: white;
             overflow-x: hidden;
             position: relative;
+        }
+        
+        /* Background animé */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(241, 143, 1, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(46, 134, 171, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 1rem;
+            position: relative;
+            z-index: 2;
         }
 
         /* Header avec mode selector */
@@ -118,15 +135,16 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: white;
-            color: #1B365D;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            color: white;
             padding: 0.75rem 1.5rem;
             border-radius: var(--radius-lg);
             font-weight: 700;
             font-size: 0.9rem;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             z-index: 1000;
-            border: 2px solid #F18F01;
+            border: 1px solid rgba(241, 143, 1, 0.5);
         }
 
         /* Sélecteur de mode */
@@ -197,7 +215,9 @@
         }
 
         .carte-stat {
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius-lg);
             padding: 1.2rem 0.8rem;
             text-align: center;
@@ -212,7 +232,8 @@
             align-items: center;
             height: auto;
             min-height: 120px;
-            color: #333;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .carte-stat:hover {
@@ -257,14 +278,17 @@
         }
 
         .carte-categorie {
-            background: #f8f9fa;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius-xl);
             padding: 2rem;
             border-left: 3px solid #2E86AB;
             transition: all var(--transition-normal);
             position: relative;
             overflow: hidden;
-            color: #333;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .carte-categorie:hover {
@@ -276,7 +300,7 @@
         .titre-categorie {
             font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: #1B365D;
+            color: white;
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -290,8 +314,9 @@
 
         .description-categorie {
             margin-bottom: 1.5rem;
-            opacity: 0.9;
+            opacity: 0.85;
             line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .liste-liens {
@@ -300,21 +325,25 @@
 
         .lien-fichier {
             display: block;
-            color: #333;
+            color: rgba(255, 255, 255, 0.95);
             text-decoration: none;
             padding: 0.75rem 1rem;
             margin: 0.5rem 0;
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius);
             transition: all var(--transition-fast);
             border-left: 3px solid #2E86AB;
         }
 
         .lien-fichier:hover {
-            background: #e9ecef;
+            background: rgba(241, 143, 1, 0.2);
             transform: translateX(5px);
-            color: #F18F01;
+            color: white;
             border-left-color: #F18F01;
+            border-color: rgba(241, 143, 1, 0.5);
+            box-shadow: 0 4px 15px rgba(241, 143, 1, 0.3);
         }
 
         .badge-nouveau {
@@ -333,16 +362,17 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: white;
-            color: #1B365D;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: var(--radius-xl);
             padding: 1rem;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
             gap: 1rem;
             z-index: 1000;
-            border: 2px solid #F18F01;
         }
 
         .controles-audio button {

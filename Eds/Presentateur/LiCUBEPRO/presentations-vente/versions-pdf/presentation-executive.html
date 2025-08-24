@@ -316,8 +316,10 @@
         
         .comparison-content {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: 2fr 1.2fr 1.2fr;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 12mm;
+            align-items: center;
         }
         
         .comparison-content:last-child {
@@ -325,11 +327,13 @@
         }
         
         .comparison-cell {
-            padding: 3mm;
+            padding: 4mm;
             border-right: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 9pt;
+            font-size: 10pt;
             display: flex;
             align-items: center;
+            min-height: 12mm;
+            line-height: 1.4;
         }
         
         .comparison-cell:last-child {
@@ -338,13 +342,20 @@
         
         .comparison-label {
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            justify-content: center;
+            width: 100%;
         }
         
         .comparison-value {
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
             justify-content: center;
+            width: 100%;
+            padding: 2mm;
+            border-radius: var(--radius-sm);
+            margin: 1mm;
         }
         
         .comparison-value.positive {
@@ -878,8 +889,8 @@
                 
                 <div class="comparison-content">
                     <div class="comparison-cell comparison-label">Critère</div>
-                    <div class="comparison-cell" style="background: #f8fff9; font-weight: 700; color: #28A745;">Li-CUBE PRO™</div>
-                    <div class="comparison-cell" style="background: #fff8f8; font-weight: 700; color: #DC3545;">Ni-Cd</div>
+                    <div class="comparison-cell" style="background: rgba(40, 167, 69, 0.2); font-weight: 700; color: #28A745; text-align: center; justify-content: center; width: 100%;">Li-CUBE PRO™</div>
+                    <div class="comparison-cell" style="background: rgba(220, 53, 69, 0.2); font-weight: 700; color: #DC3545; text-align: center; justify-content: center; width: 100%;">Ni-Cd</div>
                 </div>
                 
                 <div class="comparison-content">
