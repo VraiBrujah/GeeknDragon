@@ -104,8 +104,8 @@ $router->get('/product', function () {
 // ACTUALITÉS
 // ===============================
 
-$router->get('/actualites/es-tu-game', function () {
-    require __DIR__ . '/../actualites/es-tu-game.php';
+$router->get('/actualites/es-tu-game.html', function () {
+    require __DIR__ . '/../actualites/es-tu-game.html';
 });
 
 // ===============================
@@ -198,7 +198,8 @@ $router->redirect('/lot25.php', '/lot25');
 $router->redirect('/lot50-essence.php', '/lot50-essence');
 $router->redirect('/lot50-tresorerie.php', '/lot50-tresorerie');
 $router->redirect('/product.php', '/product');
-$router->redirect('/actualites/es-tu-game.php', '/actualites/es-tu-game');
+$router->redirect('/actualites/es-tu-game.php', '/actualites/es-tu-game.html');
+$router->redirect('/actualites/es-tu-game', '/actualites/es-tu-game.html');
 
 // ===============================
 // RÉSOLUTION ET EXÉCUTION
