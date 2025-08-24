@@ -897,15 +897,24 @@
             const btn = document.getElementById('audioIcon');
             
             if (appState.audioPlaying) {
+                // Arrêter la musique
                 audio.pause();
                 btn.className = 'fas fa-play';
                 appState.audioPlaying = false;
+                showNotification('🎵 Musique en pause', 'info');
             } else {
+                // Démarrer la musique : unmute + play + lecture continue
+                audio.muted = false; // Unmute obligatoire au premier clic
+                audio.volume = 0.15; // Confirmer le volume à 15%
+                
                 audio.play().then(() => {
                     btn.className = 'fas fa-pause';
                     appState.audioPlaying = true;
-                }).catch(() => {
-                    showNotification('🎵 Cliquez pour activer la musique', 'info');
+                    showNotification('🎵 Lecture aléatoire continue activée (Volume 15%)', 'success');
+                    console.log('🎵 Lecture démarrée : unmute + volume 15% + aléatoire continue');
+                }).catch((error) => {
+                    console.warn('🎵 Erreur lecture audio:', error);
+                    showNotification('🎵 Impossible de démarrer la lecture - Cliquez à nouveau', 'warning');
                 });
             }
         }
@@ -944,22 +953,29 @@
             setTimeout(closeNotification, 5000);
         }
 
-        // Auto-start audio avec gestion des restrictions navigateur
+        // Initialisation audio - MUTE par défaut avec volume à 15%
         function initAudio() {
             const audio = document.getElementById('musique-fond');
-            audio.volume = 0.15;
+            
+            // Configuration audio : MUTE par défaut, volume à 15%
+            audio.volume = 0.15; // 15% de volume par défaut
+            audio.muted = true;   // Démarrer en mode mute
             
             // Initialiser la playlist aléatoire
             melangerPlaylist();
             chargerMusiqueActuelle();
             
-            // Gérer la fin de chaque musique
+            // Gérer la fin de chaque musique pour lecture continue aléatoire
             audio.addEventListener('ended', musiqueTerminee);
             
-            // Audio en pause par défaut - l'utilisateur doit démarrer manuellement
+            // État initial : arrêt complet, bouton play visible
             appState.audioPlaying = false;
             document.getElementById('audioIcon').className = 'fas fa-play';
-            showNotification('🎵 Musique en pause - Cliquez sur le bouton pour démarrer', 'info');
+            
+            // Notification claire à l'utilisateur
+            showNotification('🎵 Musique disponible - Cliquez sur ▶️ pour démarrer la lecture aléatoire', 'info');
+            
+            console.log('🎵 Audio initialisé : Volume 15%, Mute activé, Lecture manuelle requise');
         }
 
         // Initialisation
@@ -999,7 +1015,7 @@
     <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
     <script src="./js/image-config.js"></script>
     
-    <!-- Script système de notes testeur alpha -->
-    <script src="./module_notes/notes-module.js"></script>
+    <!-- Module Notes Amélioré avec interface épurée -->
+    <script src="./module_notes/notes-improved.js"></script>
 </body>
 </html>
