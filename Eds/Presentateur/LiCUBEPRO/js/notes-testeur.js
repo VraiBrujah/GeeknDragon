@@ -119,13 +119,14 @@ Sauvegarde automatique sans dialogue fichier."
 function injecterStylesNotes() {
     const style = document.createElement('style');
     style.textContent = `
-        /* Bouton flottant */
+        /* Bouton flottant - centré verticalement à droite */
         .notes-toggle-btn {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            width: 55px;
+            height: 55px;
             background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
             border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
@@ -161,13 +162,13 @@ function injecterStylesNotes() {
             animation: blink-alpha 1.5s infinite;
         }
         
-        /* Fenêtre de notes */
+        /* Fenêtre de notes - adaptée mobile */
         .notes-window {
             position: fixed;
-            top: 90px;
-            right: 20px;
-            width: 400px;
-            max-height: 80vh;
+            top: 10px;
+            right: 15px;
+            width: min(400px, calc(100vw - 30px));
+            max-height: calc(100vh - 20px);
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(20px);
             border: 2px solid rgba(255, 107, 53, 0.3);
@@ -402,18 +403,57 @@ function injecterStylesNotes() {
             50% { opacity: 0.5; }
         }
         
-        /* Responsive */
+        /* Responsive amélioré */
         @media (max-width: 500px) {
             .notes-window {
-                width: calc(100vw - 40px);
-                right: 20px;
-                left: 20px;
+                width: calc(100vw - 20px);
+                right: 10px;
+                left: 10px;
+                top: 10px;
+                max-height: calc(100vh - 20px);
             }
             
             .notes-toggle-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+                right: 10px;
+            }
+            
+            .notes-badge {
+                font-size: 8px;
+                padding: 1px 4px;
+            }
+            
+            .notes-actions {
+                padding: 0 15px 15px;
+                gap: 6px;
+            }
+            
+            .notes-actions button {
+                min-width: 60px;
+                padding: 6px 4px;
+                font-size: 10px;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .notes-window {
+                width: calc(100vw - 10px);
+                right: 5px;
+                left: 5px;
+            }
+            
+            .notes-toggle-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+                right: 5px;
+            }
+            
+            .notes-actions button {
+                min-width: 50px;
+                font-size: 9px;
             }
         }
         
