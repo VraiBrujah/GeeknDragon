@@ -52,7 +52,8 @@
       "Bash(start \"file:///C:/Users/Brujah/Documents/GitHub/GeeknDragon/Eds/Presentateur/LiCUBEPRO/presentations-location/versions-pdf/presentation-executive.html\")",
       "Bash(start \"file:///C:/Users/Brujah/Documents/GitHub/GeeknDragon/Eds/Presentateur/LiCUBEPRO/presentations-vente/presentations-vendeurs/calculateur-tco.html\")",
       "Bash(start \"file:///C:/Users/Brujah/Documents/GitHub/GeeknDragon/Eds/Presentateur/LiCUBEPRO/presentations-location/presentations-vendeurs/calculateur-tco.html\")",
-      "Bash(start \"file:///C:/Users/Brujah/Documents/GitHub/GeeknDragon/Eds/Presentateur/LiCUBEPRO/presentations-vente/presentations-vendeurs/calculateur-tco-nouveau.html\")"
+      "Bash(start \"file:///C:/Users/Brujah/Documents/GitHub/GeeknDragon/Eds/Presentateur/LiCUBEPRO/presentations-vente/presentations-vendeurs/calculateur-tco-nouveau.html\")",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": [],

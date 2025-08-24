@@ -1,0 +1,651 @@
+/**
+ * =====================================================
+ * MODULE NOTES UNIVERSEL - STYLES CSS
+ * =====================================================
+ * 
+ * Styles CSS génériques et personnalisables pour le module de notes.
+ * Conçu pour s'adapter à différents sites web avec un minimum de modifications.
+ * 
+ * PERSONNALISATION :
+ * - Modifiez les variables CSS ci-dessous pour adapter les couleurs
+ * - Les styles sont conçus pour être non-intrusifs
+ * - Compatible avec les frameworks CSS existants
+ */
+
+/* ========================================
+   VARIABLES CSS PERSONNALISABLES
+   ======================================== */
+
+:root {
+    /* Couleurs principales - À adapter selon votre site */
+    --notes-primary-color: #FF6B35;
+    --notes-secondary-color: #F7931E;
+    --notes-success-color: #28A745;
+    --notes-info-color: #007BFF;
+    --notes-warning-color: #FFC107;
+    --notes-danger-color: #DC3545;
+    
+    /* Couleurs de fond et texte */
+    --notes-bg-primary: rgba(15, 23, 42, 0.95);
+    --notes-bg-secondary: rgba(255, 255, 255, 0.05);
+    --notes-bg-input: rgba(255, 255, 255, 0.1);
+    --notes-text-primary: white;
+    --notes-text-secondary: rgba(255, 255, 255, 0.8);
+    --notes-text-muted: rgba(255, 255, 255, 0.5);
+    
+    /* Dimensions et espacement */
+    --notes-border-radius: 12px;
+    --notes-border-radius-small: 8px;
+    --notes-border-radius-round: 50%;
+    --notes-spacing-xs: 4px;
+    --notes-spacing-sm: 8px;
+    --notes-spacing-md: 12px;
+    --notes-spacing-lg: 15px;
+    --notes-spacing-xl: 20px;
+    
+    /* Ombres et effets */
+    --notes-shadow-light: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --notes-shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.3);
+    --notes-shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.3);
+    --notes-shadow-colored: 0 8px 25px rgba(255, 107, 53, 0.4);
+    
+    /* Transitions */
+    --notes-transition-fast: 0.2s ease;
+    --notes-transition-normal: 0.3s ease;
+    
+    /* Z-index pour éviter les conflits */
+    --notes-z-button: 10000;
+    --notes-z-window: 9999;
+}
+
+/* ========================================
+   BOUTON FLOTTANT
+   ======================================== */
+
+.notes-toggle-btn {
+    position: fixed;
+    width: 55px;
+    height: 55px;
+    background: linear-gradient(135deg, var(--notes-primary-color) 0%, var(--notes-secondary-color) 100%);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--notes-border-radius-round);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: var(--notes-shadow-colored);
+    transition: all var(--notes-transition-normal);
+    z-index: var(--notes-z-button);
+    color: var(--notes-text-primary);
+    font-weight: bold;
+    animation: notes-pulse 2s infinite;
+    user-select: none;
+}
+
+.notes-toggle-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
+}
+
+/* Positions du bouton */
+.notes-btn-right {
+    right: var(--notes-spacing-lg);
+}
+
+.notes-btn-left {
+    left: var(--notes-spacing-lg);
+}
+
+.notes-btn-center {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.notes-btn-top {
+    top: var(--notes-spacing-xl);
+    transform: none;
+}
+
+.notes-btn-bottom {
+    bottom: var(--notes-spacing-xl);
+    transform: none;
+}
+
+/* ========================================
+   FENÊTRE PRINCIPALE
+   ======================================== */
+
+.notes-window {
+    position: fixed;
+    top: 10px;
+    right: var(--notes-spacing-lg);
+    width: min(400px, calc(100vw - 30px));
+    max-height: calc(100vh - 20px);
+    background: var(--notes-bg-primary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    border-radius: var(--notes-spacing-xl);
+    box-shadow: var(--notes-shadow-heavy);
+    z-index: var(--notes-z-window);
+    color: var(--notes-text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', sans-serif;
+    transition: all var(--notes-transition-normal);
+    overflow: hidden;
+}
+
+.notes-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px) scale(0.9);
+    pointer-events: none;
+}
+
+/* ========================================
+   EN-TÊTE DE LA FENÊTRE
+   ======================================== */
+
+.notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--notes-spacing-lg) var(--notes-spacing-xl);
+    background: linear-gradient(135deg, var(--notes-primary-color) 0%, var(--notes-secondary-color) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notes-title {
+    display: flex;
+    align-items: center;
+    gap: var(--notes-spacing-sm);
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.notes-icon {
+    font-size: 18px;
+}
+
+.notes-close-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: var(--notes-text-primary);
+    width: 30px;
+    height: 30px;
+    border-radius: var(--notes-border-radius-round);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all var(--notes-transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notes-close-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+/* ========================================
+   SECTION CONTEXTE
+   ======================================== */
+
+.notes-context {
+    padding: var(--notes-spacing-lg) var(--notes-spacing-xl);
+    background: var(--notes-bg-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notes-context-item {
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: var(--notes-text-secondary);
+    word-break: break-all;
+}
+
+.notes-context-item strong {
+    color: var(--notes-primary-color);
+    margin-right: var(--notes-spacing-sm);
+}
+
+/* ========================================
+   ZONE DE SAISIE
+   ======================================== */
+
+.notes-input-section {
+    padding: var(--notes-spacing-xl);
+}
+
+.notes-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--notes-primary-color);
+    font-size: 14px;
+}
+
+.notes-textarea {
+    width: 100%;
+    background: var(--notes-bg-input);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--notes-border-radius);
+    padding: var(--notes-spacing-md);
+    color: var(--notes-text-primary);
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 120px;
+    transition: border-color var(--notes-transition-fast), background-color var(--notes-transition-fast);
+    box-sizing: border-box;
+}
+
+.notes-textarea:focus {
+    outline: none;
+    border-color: var(--notes-primary-color);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.notes-textarea::placeholder {
+    color: var(--notes-text-muted);
+}
+
+/* ========================================
+   BOUTONS D'ACTIONS
+   ======================================== */
+
+.notes-actions {
+    padding: 0 var(--notes-spacing-xl) var(--notes-spacing-xl);
+    display: flex;
+    gap: var(--notes-spacing-sm);
+    flex-wrap: wrap;
+}
+
+.notes-actions button {
+    flex: 1;
+    min-width: 70px;
+    padding: var(--notes-spacing-sm) 6px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all var(--notes-transition-fast);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: inherit;
+}
+
+.notes-save-btn {
+    background: linear-gradient(135deg, var(--notes-success-color) 0%, #20B2AA 100%);
+    color: var(--notes-text-primary);
+}
+
+.notes-save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+.notes-view-btn {
+    background: linear-gradient(135deg, var(--notes-info-color) 0%, #0056B3 100%);
+    color: var(--notes-text-primary);
+}
+
+.notes-view-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
+
+.notes-export-btn {
+    background: linear-gradient(135deg, #6F42C1 0%, #563D7C 100%);
+    color: var(--notes-text-primary);
+}
+
+.notes-export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(111, 66, 193, 0.4);
+}
+
+.notes-clear-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--notes-text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.notes-clear-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--notes-text-primary);
+}
+
+/* État de succès pour les boutons */
+.notes-success {
+    background: linear-gradient(135deg, var(--notes-success-color) 0%, #20B2AA 100%) !important;
+    transform: scale(1.05) !important;
+}
+
+/* ========================================
+   ZONE D'AFFICHAGE DES NOTES
+   ======================================== */
+
+.notes-display {
+    max-height: 300px;
+    overflow-y: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notes-display-header {
+    padding: var(--notes-spacing-lg) var(--notes-spacing-xl) 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--notes-primary-color);
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+    background: var(--notes-bg-primary);
+    z-index: 1;
+}
+
+.notes-hide-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--notes-text-secondary);
+    padding: var(--notes-spacing-xs) var(--notes-spacing-sm);
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all var(--notes-transition-fast);
+}
+
+.notes-hide-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--notes-text-primary);
+}
+
+.notes-content {
+    padding: 0 var(--notes-spacing-xl) var(--notes-spacing-xl);
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    color: var(--notes-text-secondary);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* ========================================
+   SCROLLBARS PERSONNALISÉES
+   ======================================== */
+
+.notes-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notes-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.notes-content::-webkit-scrollbar-thumb {
+    background: var(--notes-primary-color);
+    border-radius: 3px;
+}
+
+.notes-content::-webkit-scrollbar-thumb:hover {
+    background: var(--notes-secondary-color);
+}
+
+.notes-display::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notes-display::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.notes-display::-webkit-scrollbar-thumb {
+    background: var(--notes-primary-color);
+    border-radius: 3px;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes notes-pulse {
+    0%, 100% { 
+        box-shadow: var(--notes-shadow-colored);
+    }
+    50% { 
+        box-shadow: 0 8px 25px rgba(255, 107, 53, 0.7);
+    }
+}
+
+@keyframes notes-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablettes */
+@media (max-width: 768px) {
+    .notes-window {
+        width: calc(100vw - 20px);
+        right: 10px;
+        left: 10px;
+        top: 10px;
+    }
+    
+    .notes-toggle-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        right: 10px;
+    }
+    
+    .notes-btn-left {
+        left: 10px;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 500px) {
+    .notes-window {
+        width: calc(100vw - 20px);
+        right: 10px;
+        left: 10px;
+        top: 10px;
+        max-height: calc(100vh - 20px);
+    }
+    
+    .notes-toggle-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        right: 10px;
+    }
+    
+    .notes-btn-left {
+        left: 10px;
+    }
+    
+    .notes-actions {
+        padding: 0 var(--notes-spacing-lg) var(--notes-spacing-lg);
+        gap: 6px;
+    }
+    
+    .notes-actions button {
+        min-width: 60px;
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+    
+    .notes-header {
+        padding: var(--notes-spacing-md) var(--notes-spacing-lg);
+    }
+    
+    .notes-input-section {
+        padding: var(--notes-spacing-lg);
+    }
+    
+    .notes-context {
+        padding: var(--notes-spacing-md) var(--notes-spacing-lg);
+    }
+}
+
+/* Très petits écrans */
+@media (max-width: 320px) {
+    .notes-window {
+        width: calc(100vw - 10px);
+        right: 5px;
+        left: 5px;
+    }
+    
+    .notes-toggle-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        right: 5px;
+    }
+    
+    .notes-btn-left {
+        left: 5px;
+    }
+    
+    .notes-actions button {
+        min-width: 50px;
+        font-size: 9px;
+    }
+}
+
+/* Mode paysage sur mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .notes-window {
+        max-height: calc(100vh - 10px);
+        top: 5px;
+    }
+    
+    .notes-textarea {
+        min-height: 80px;
+    }
+    
+    .notes-display {
+        max-height: 150px;
+    }
+}
+
+/* ========================================
+   MODES SOMBRES ET THÈMES ALTERNATIFS
+   ======================================== */
+
+/* Mode sombre automatique */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --notes-bg-primary: rgba(15, 23, 42, 0.95);
+        --notes-text-primary: white;
+    }
+}
+
+/* Mode clair (peut être activé en ajoutant la classe .notes-light-theme au body) */
+.notes-light-theme {
+    --notes-bg-primary: rgba(255, 255, 255, 0.95);
+    --notes-bg-secondary: rgba(0, 0, 0, 0.05);
+    --notes-bg-input: rgba(0, 0, 0, 0.1);
+    --notes-text-primary: #333;
+    --notes-text-secondary: rgba(0, 0, 0, 0.7);
+    --notes-text-muted: rgba(0, 0, 0, 0.5);
+}
+
+/* Thème minimaliste (peut être activé en ajoutant la classe .notes-minimal au body) */
+.notes-minimal .notes-window {
+    border: 1px solid var(--notes-primary-color);
+    box-shadow: var(--notes-shadow-light);
+}
+
+.notes-minimal .notes-toggle-btn {
+    background: var(--notes-primary-color);
+    animation: none;
+}
+
+/* ========================================
+   ÉTATS D'ACCESSIBILITÉ
+   ======================================== */
+
+/* Réduction des animations pour les utilisateurs sensibles */
+@media (prefers-reduced-motion: reduce) {
+    .notes-toggle-btn {
+        animation: none;
+    }
+    
+    .notes-window {
+        transition: none;
+    }
+    
+    .notes-actions button {
+        transition: none;
+    }
+}
+
+/* Contraste élevé */
+@media (prefers-contrast: high) {
+    .notes-window {
+        border-width: 3px;
+    }
+    
+    .notes-textarea {
+        border-width: 3px;
+    }
+}
+
+/* ========================================
+   SURCHARGES DE COMPATIBILITÉ
+   ======================================== */
+
+/* Reset pour éviter les conflits avec d'autres frameworks */
+#notes-universal-container * {
+    box-sizing: border-box;
+}
+
+#notes-universal-container *::before,
+#notes-universal-container *::after {
+    box-sizing: border-box;
+}
+
+/* Protection contre les styles externes */
+.notes-window,
+.notes-window * {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+.notes-toggle-btn,
+.notes-window button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* ========================================
+   UTILITAIRES DE DÉVELOPPEMENT
+   ======================================== */
+
+/* Classe pour débugger les limites */
+.notes-debug * {
+    outline: 1px solid red !important;
+}
+
+/* Classe pour masquer temporairement */
+.notes-hidden-dev {
+    display: none !important;
+}

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemple d'utilisation - Module Notes Universel</title>
+    
+    <!-- CSS du module de notes -->
+    <link rel="stylesheet" href="notes-universal.css">
+    
+    <!-- Styles de démonstration -->
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #FFD700;
+        }
+        
+        .demo-section h2 {
+            color: #FFD700;
+            margin-top: 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .code-example {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .highlight {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        .note-box {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .note-box strong {
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Exemple d'utilisation du Module Notes Universel</h1>
+        
+        <div class="demo-section">
+            <h2>📝 Comment utiliser les notes ?</h2>
+            <p>
+                Regardez le <span class="highlight">bouton flottant 📝</span> qui est apparu sur votre écran !
+            </p>
+            
+            <div class="note-box">
+                <strong>💡 Instructions :</strong><br>
+                1. <strong>Cliquez</strong> sur le bouton 📝 (ou utilisez <code>Ctrl+Shift+N</code>)<br>
+                2. <strong>Écrivez</strong> vos notes dans la zone de texte<br>
+                3. <strong>Sauvegardez</strong> avec le bouton "💾 Sauver"<br>
+                4. <strong>Visualisez</strong> vos notes avec "👁️ Voir"<br>
+                5. <strong>Exportez</strong> en fichier avec "📤 Export"
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🎮 Contrôles du module</h2>
+            <p>Vous pouvez contrôler le module programmatiquement :</p>
+            
+            <button class="btn" onclick="NotesUniversel.open()">
+                Ouvrir les Notes
+            </button>
+            
+            <button class="btn" onclick="NotesUniversel.close()">
+                Fermer les Notes
+            </button>
+            
+            <button class="btn" onclick="NotesUniversel.toggle()">
+                Basculer les Notes
+            </button>
+            
+            <button class="btn" onclick="afficherInfosPage()">
+                Infos de la Page
+            </button>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🎨 Personnalisation en temps réel</h2>
+            <p>Testez différentes configurations :</p>
+            
+            <button class="btn" onclick="changerPositionBouton('left')">
+                Bouton à Gauche
+            </button>
+            
+            <button class="btn" onclick="changerPositionBouton('right')">
+                Bouton à Droite
+            </button>
+            
+            <button class="btn" onclick="changerCouleur('#007BFF')">
+                Thème Bleu
+            </button>
+            
+            <button class="btn" onclick="changerCouleur('#28A745')">
+                Thème Vert
+            </button>
+            
+            <button class="btn" onclick="changerCouleur('#FF6B35')">
+                Thème Orange (défaut)
+            </button>
+        </div>
+        
+        <div class="demo-section">
+            <h2>📋 Nom du fichier de sauvegarde</h2>
+            <p>Pour cette page, vos notes seront sauvegardées dans :</p>
+            <div class="code-example" id="nom-fichier">
+                Chargement...
+            </div>
+            <p><em>Le nom est généré automatiquement à partir de l'URL de la page.</em></p>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🔧 Code d'intégration pour cette page</h2>
+            <div class="code-example">
+&lt;!-- CSS du module --&gt;
+&lt;link rel="stylesheet" href="notes-universal.css"&gt;
+
+&lt;!-- JavaScript du module --&gt;
+&lt;script src="notes-universal.js"&gt;&lt;/script&gt;
+
+&lt;!-- Initialisation --&gt;
+&lt;script&gt;
+    document.addEventListener('DOMContentLoaded', function() {
+        NotesUniversel.init({
+            styles: {
+                primaryColor: '#FF6B35',
+                buttonPosition: 'right'
+            },
+            texts: {
+                title: 'Mes Notes',
+                placeholder: 'Écrivez vos notes ici...'
+            }
+        });
+    });
+&lt;/script&gt;
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>✨ Fonctionnalités démontrées</h2>
+            <ul>
+                <li>✅ <strong>Sauvegarde automatique</strong> basée sur l'URL</li>
+                <li>✅ <strong>Interface responsive</strong> (testez sur mobile)</li>
+                <li>✅ <strong>Raccourcis clavier</strong> (Ctrl+Shift+N, Échap)</li>
+                <li>✅ <strong>Export Markdown</strong> téléchargeable</li>
+                <li>✅ <strong>Personnalisation</strong> des couleurs et positions</li>
+                <li>✅ <strong>API JavaScript</strong> pour contrôle externe</li>
+                <li>✅ <strong>Stockage local</strong> persistant</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- JavaScript du module de notes -->
+    <script src="notes-universal.js"></script>
+    
+    <!-- Script de démonstration -->
+    <script>
+        // Initialisation du module avec configuration par défaut
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 Initialisation du Module Notes Universel - Exemple');
+            
+            // Initialiser le module
+            NotesUniversel.init({
+                styles: {
+                    primaryColor: '#FF6B35',
+                    buttonPosition: 'right',
+                    buttonVerticalPosition: 'center'
+                },
+                texts: {
+                    title: 'Notes de Demo',
+                    placeholder: 'Testez le module en écrivant vos notes ici...\n\nExemples:\n• Cette interface est très intuitive\n• Le design s\'adapte bien au mobile\n• L\'export en Markdown fonctionne parfaitement\n\nSauvegarde automatique activée !'
+                }
+            });
+            
+            // Afficher le nom de fichier généré
+            const pageInfo = NotesUniversel.getPageInfo();
+            document.getElementById('nom-fichier').textContent = pageInfo.nomFichier;
+            
+            console.log('✅ Module initialisé avec succès');
+            console.log('📄 Fichier de sauvegarde:', pageInfo.nomFichier);
+        });
+        
+        // Fonctions de démonstration
+        function afficherInfosPage() {
+            const infos = NotesUniversel.getPageInfo();
+            alert(`📄 Informations de la page:
+            
+Titre: ${infos.title}
+URL: ${infos.url}
+Fichier: ${infos.nomFichier}
+Domaine: ${infos.hostname}
+Version du module: ${NotesUniversel.version}`);
+        }
+        
+        function changerPositionBouton(position) {
+            NotesUniversel.updateConfig({
+                styles: {
+                    buttonPosition: position
+                }
+            });
+            
+            // Mise à jour visuelle immédiate
+            const bouton = document.getElementById('notes-toggle-btn');
+            if (bouton) {
+                bouton.className = bouton.className.replace(/notes-btn-(left|right)/g, `notes-btn-${position}`);
+            }
+            
+            console.log(`🎨 Position du bouton changée: ${position}`);
+        }
+        
+        function changerCouleur(couleur) {
+            // Mettre à jour les variables CSS
+            document.documentElement.style.setProperty('--notes-primary-color', couleur);
+            
+            NotesUniversel.updateConfig({
+                styles: {
+                    primaryColor: couleur
+                }
+            });
+            
+            console.log(`🎨 Couleur principale changée: ${couleur}`);
+        }
+        
+        // Démonstration d'événements personnalisés
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+                e.preventDefault();
+                console.log('🎯 Raccourci de démonstration détecté !');
+                NotesUniversel.toggle();
+                
+                // Exemple d'ouverture automatique avec message
+                setTimeout(() => {
+                    const textarea = document.getElementById('notes-textarea');
+                    if (textarea && !textarea.value) {
+                        textarea.value = `🎯 Ouverture automatique via Ctrl+Shift+D !
+
+Ceci est un exemple d'intégration personnalisée du module.
+Vous pouvez créer vos propres raccourcis et automatisations.
+
+Timestamp: ${new Date().toLocaleString()}`;
+                    }
+                }, 500);
+            }
+        });
+        
+        // Log pour debugging
+        console.log(`
+🧪 === EXEMPLE MODULE NOTES UNIVERSEL ===
+📄 Page de démonstration chargée
+🎮 Contrôles disponibles:
+   • Boutons dans l'interface
+   • Ctrl+Shift+N : Ouvrir/fermer notes
+   • Ctrl+Shift+D : Démonstration personnalisée
+   • Échap : Fermer les notes
+🎨 Personnalisation en temps réel activée
+=========================================
+        `);
+    </script>
+</body>
+</html>

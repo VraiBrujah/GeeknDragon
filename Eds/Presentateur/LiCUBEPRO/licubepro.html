@@ -947,7 +947,7 @@
         // Auto-start audio avec gestion des restrictions navigateur
         function initAudio() {
             const audio = document.getElementById('musique-fond');
-            audio.volume = 0.25;
+            audio.volume = 0.15;
             
             // Initialiser la playlist aléatoire
             melangerPlaylist();
@@ -956,24 +956,10 @@
             // Gérer la fin de chaque musique
             audio.addEventListener('ended', musiqueTerminee);
             
-            // Tentative autoplay
-            audio.play().then(() => {
-                appState.audioPlaying = true;
-                document.getElementById('audioIcon').className = 'fas fa-pause';
-                showNotification('🎵 Lecture aléatoire activée ! (5 musiques)', 'success');
-            }).catch(() => {
-                // Autoplay bloqué, attendre interaction
-                document.addEventListener('click', () => {
-                    if (!appState.audioPlaying) {
-                        audio.play().then(() => {
-                            appState.audioPlaying = true;
-                            document.getElementById('audioIcon').className = 'fas fa-pause';
-                            showNotification('🎵 Lecture aléatoire activée ! (5 musiques)', 'success');
-                        }).catch(() => {});
-                    }
-                }, { once: true });
-                showNotification('🎵 Cliquez n\'importe où pour activer la musique aléatoire', 'info');
-            });
+            // Audio en pause par défaut - l'utilisateur doit démarrer manuellement
+            appState.audioPlaying = false;
+            document.getElementById('audioIcon').className = 'fas fa-play';
+            showNotification('🎵 Musique en pause - Cliquez sur le bouton pour démarrer', 'info');
         }
 
         // Initialisation
