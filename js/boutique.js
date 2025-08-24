@@ -350,6 +350,7 @@ const ProductInteractions = {
     this.setupQuickActions();
     this.setupProductComparison();
     this.setupPriceCalculator();
+    this.setupVideoModal();
   },
 
   setupProductHovers() {
@@ -639,6 +640,41 @@ const ProductInteractions = {
                     </small>
                 `;
         priceElement.parentNode.appendChild(tooltip);
+      }
+    });
+  },
+
+  setupVideoModal() {
+    const openBtn = document.querySelector('[data-video-open]');
+    const modal = document.getElementById('video-modal');
+    if (!openBtn || !modal) return;
+    const closeBtn = modal.querySelector('[data-video-close]');
+    const iframe = modal.querySelector('iframe');
+
+    const escListener = (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        e.preventDefault();
+        closeModal();
+      }
+    };
+
+    const openModal = () => {
+      modal.classList.remove('hidden');
+      document.addEventListener('keydown', escListener);
+      modal.focus();
+    };
+
+    const closeModal = () => {
+      modal.classList.add('hidden');
+      iframe.src = iframe.src;
+      document.removeEventListener('keydown', escListener);
+    };
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
       }
     });
   },
