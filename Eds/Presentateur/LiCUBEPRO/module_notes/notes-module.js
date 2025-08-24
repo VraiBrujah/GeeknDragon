@@ -351,30 +351,37 @@
    ======================================== */
 
 :root {
-    --notes-primary: #4A90E2;
-    --notes-primary-light: #6BA3E8;
-    --notes-primary-dark: #357ABD;
+    /* Palette adaptée au thème sombre de LiCUBEPRO */
+    --notes-primary: #003F7F;
+    --notes-primary-light: #4A90B8;
+    --notes-primary-dark: #002759;
+    --notes-accent: #F18F01;
+    --notes-accent-light: #ff6b35;
     --notes-success: #27AE60;
     --notes-warning: #F39C12;
     --notes-danger: #E74C3C;
-    --notes-info: #3498DB;
+    --notes-info: #4A90B8;
     
-    --notes-bg-main: rgba(255, 255, 255, 0.98);
-    --notes-bg-header: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
-    --notes-bg-input: rgba(248, 249, 250, 0.95);
-    --notes-bg-note: rgba(245, 247, 250, 0.9);
-    --notes-bg-overlay: rgba(0, 0, 0, 0.08);
-    --notes-bg-button: #4A90E2;
+    /* Arrière-plans sombres avec excellente lisibilité */
+    --notes-bg-main: rgba(15, 23, 42, 0.98);
+    --notes-bg-header: linear-gradient(135deg, #003F7F 0%, #4A90B8 100%);
+    --notes-bg-input: rgba(30, 41, 59, 0.95);
+    --notes-bg-note: rgba(39, 52, 75, 0.9);
+    --notes-bg-overlay: rgba(255, 255, 255, 0.05);
+    --notes-bg-button: #003F7F;
     
-    --notes-text-primary: #2C3E50;
-    --notes-text-secondary: #5D6D7E;
-    --notes-text-muted: #95A5A6;
+    /* Textes avec contraste optimal sur fond sombre */
+    --notes-text-primary: #FFFFFF;
+    --notes-text-secondary: #CBD5E1;
+    --notes-text-muted: #94A3B8;
     --notes-text-white: #ffffff;
     --notes-text-header: #ffffff;
+    --notes-text-input: #FFFFFF;
     
-    --notes-border: #E8ECEF;
-    --notes-border-focus: #4A90E2;
-    --notes-border-light: rgba(0, 0, 0, 0.08);
+    /* Bordures adaptées au thème sombre */
+    --notes-border: rgba(255, 255, 255, 0.2);
+    --notes-border-focus: #F18F01;
+    --notes-border-light: rgba(255, 255, 255, 0.1);
     
     --notes-shadow-light: 0 2px 8px rgba(0, 0, 0, 0.08);
     --notes-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.12);
@@ -400,18 +407,8 @@
     --notes-z-panel: 9999;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --notes-bg-main: rgba(30, 34, 42, 0.98);
-        --notes-bg-input: rgba(45, 52, 64, 0.95);
-        --notes-bg-note: rgba(40, 46, 58, 0.9);
-        --notes-text-primary: #ECEFF4;
-        --notes-text-secondary: #D8DEE9;
-        --notes-text-muted: #81A1C1;
-        --notes-border: rgba(129, 161, 193, 0.2);
-        --notes-border-light: rgba(255, 255, 255, 0.08);
-    }
-}
+/* Le thème sombre est le défaut - pas besoin de media query
+   car il est adapté au thème LiCUBEPRO qui est déjà sombre */
 
 /* Protection du module */
 #notes-universal-container,
@@ -420,7 +417,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif !important;
 }
 
-/* Bouton flottant moderne */
+/* Bouton flottant moderne - thème LiCUBEPRO */
 .notes-module-toggle-btn {
     position: fixed !important;
     top: 50% !important;
@@ -428,11 +425,11 @@
     transform: translateY(-50%) !important;
     width: 56px !important;
     height: 56px !important;
-    background: linear-gradient(135deg, var(--notes-primary) 0%, var(--notes-primary-light) 100%) !important;
-    border: none !important;
+    background: linear-gradient(135deg, var(--notes-accent) 0%, var(--notes-accent-light) 100%) !important;
+    border: 3px solid rgba(0, 63, 127, 0.3) !important;
     border-radius: var(--notes-radius-round) !important;
     cursor: pointer !important;
-    box-shadow: var(--notes-shadow-button) !important;
+    box-shadow: 0 8px 25px rgba(241, 143, 1, 0.4) !important;
     z-index: var(--notes-z-button) !important;
     display: flex !important;
     align-items: center !important;
@@ -447,19 +444,19 @@
 
 .notes-module-toggle-btn:hover {
     transform: translateY(-50%) scale(1.08) !important;
-    box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4) !important;
+    box-shadow: 0 12px 35px rgba(241, 143, 1, 0.6) !important;
 }
 
 .notes-module-toggle-btn:active {
     transform: translateY(-50%) scale(0.96) !important;
 }
 
-/* Badge du bouton */
+/* Badge du bouton - style LiCUBEPRO */
 .notes-module-badge {
     position: absolute !important;
     top: -3px !important;
     right: -3px !important;
-    background: var(--notes-success) !important;
+    background: var(--notes-primary) !important;
     color: var(--notes-text-white) !important;
     font-size: 9px !important;
     font-weight: 800 !important;
@@ -468,6 +465,12 @@
     border: 2px solid var(--notes-text-white) !important;
     box-shadow: var(--notes-shadow-light) !important;
     line-height: 1 !important;
+    animation: notes-badge-pulse 2s infinite !important;
+}
+
+@keyframes notes-badge-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
 }
 
 /* Fenêtre principale */
@@ -573,7 +576,7 @@
 }
 
 .notes-module-context-item strong {
-    color: var(--notes-primary) !important;
+    color: var(--notes-accent) !important;
     margin-right: var(--notes-spacing-sm) !important;
 }
 
@@ -586,7 +589,7 @@
     display: block !important;
     font-weight: 600 !important;
     margin-bottom: 10px !important;
-    color: var(--notes-primary) !important;
+    color: var(--notes-accent) !important;
     font-size: 14px !important;
 }
 
@@ -594,10 +597,10 @@
     width: 100% !important;
     min-height: 120px !important;
     padding: var(--notes-spacing-md) !important;
-    border: 1px solid var(--notes-border) !important;
+    border: 2px solid var(--notes-border) !important;
     border-radius: var(--notes-radius-md) !important;
     background: var(--notes-bg-input) !important;
-    color: var(--notes-text-primary) !important;
+    color: var(--notes-text-input) !important;
     font-size: 14px !important;
     line-height: 1.5 !important;
     resize: vertical !important;
@@ -609,8 +612,9 @@
 
 .notes-module-textarea:focus {
     border-color: var(--notes-border-focus) !important;
-    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1) !important;
-    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 0 0 3px rgba(241, 143, 1, 0.2) !important;
+    background: rgba(30, 41, 59, 1) !important;
+    color: var(--notes-text-input) !important;
 }
 
 .notes-module-textarea::placeholder {
@@ -645,14 +649,14 @@
 }
 
 .notes-module-btn.primary {
-    background: var(--notes-primary) !important;
+    background: linear-gradient(135deg, var(--notes-accent) 0%, var(--notes-accent-light) 100%) !important;
     color: var(--notes-text-white) !important;
 }
 
 .notes-module-btn.primary:hover {
-    background: var(--notes-primary-dark) !important;
+    background: linear-gradient(135deg, #E67E00 0%, #E85D00 100%) !important;
     transform: translateY(-1px) !important;
-    box-shadow: var(--notes-shadow-light) !important;
+    box-shadow: 0 4px 15px rgba(241, 143, 1, 0.4) !important;
 }
 
 .notes-module-btn.secondary {
@@ -705,7 +709,7 @@
 }
 
 .notes-module-display-header strong {
-    color: var(--notes-primary) !important;
+    color: var(--notes-accent) !important;
 }
 
 .notes-module-hide-btn {
