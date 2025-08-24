@@ -59,7 +59,7 @@ const ProductPage = {
 
     this.tabButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        const targetTab = button.textContent.toLowerCase().replace(/[^a-z]/g, '');
+        const targetTab = button.dataset.tab;
         this.switchTab(targetTab);
       });
     });
@@ -78,7 +78,7 @@ const ProductPage = {
     });
 
     // Activer l'onglet ciblé
-    const activeButton = Array.from(this.tabButtons).find((btn) => btn.textContent.toLowerCase().includes(tabName.substring(0, 4)));
+    const activeButton = Array.from(this.tabButtons).find((btn) => btn.dataset.tab === tabName);
     const activeContent = document.getElementById(tabName);
 
     if (activeButton && activeContent) {
@@ -299,6 +299,20 @@ const ProductPage = {
   setupReviews() {
     this.setupReviewsAnimation();
     this.setupReviewsInteraction();
+
+    const reviewItems = document.querySelectorAll('.review-item');
+    const reviewsContainer = document.getElementById('reviews');
+
+    if (reviewsContainer && reviewItems.length === 0) {
+      const message = document.createElement('p');
+      message.textContent = 'Soyez le premier à donner votre avis.';
+      reviewsContainer.appendChild(message);
+    }
+
+    const reviewsTabBtn = document.querySelector('.tab-btn[data-tab="reviews"]');
+    if (reviewsTabBtn) {
+      reviewsTabBtn.textContent = `Avis (${reviewItems.length})`;
+    }
   },
 
   setupReviewsAnimation() {
