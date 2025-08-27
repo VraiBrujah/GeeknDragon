@@ -44,7 +44,8 @@ class GlobalsManager {
 
         // Configuration de formatage
         this.formatters = {
-            currency: (value, suffix = 'CAD') => `${this.formatNumber(value)} ${suffix}`,
+            currency: (value, suffix = '$') => `${this.formatNumber(value)}${suffix}`,
+            currency_cad: (value, suffix = 'CAD') => `${this.formatNumber(value)} ${suffix}`,
             currency_savings: (value, suffix = 'CAD') => {
                 const prefix = value >= 0 ? 'ÉCONOMIES ' : 'SURCOÛT ';
                 return `${prefix}${this.formatNumber(Math.abs(value))} ${suffix}`;

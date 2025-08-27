@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Variables - Li-CUBE PRO™</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background-color: #1B365D;
+            color: white;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        .variable-test {
+            margin: 10px 0;
+            padding: 8px;
+            background-color: rgba(255,255,255,0.05);
+            border-left: 3px solid #F18F01;
+        }
+        .error { color: #ff6b6b; }
+        .success { color: #51cf66; }
+    </style>
+</head>
+<body>
+    <h1>Test des Variables Li-CUBE PRO™</h1>
+    
+    <div class="test-section">
+        <h2>Prix de base</h2>
+        <div class="variable-test">
+            Prix minimum Li-CUBE: <span data-pricing-value="licube.price_cad_min" data-pricing-format="currency">—</span>
+        </div>
+        <div class="variable-test">
+            Prix maximum Li-CUBE: <span data-pricing-value="licube.price_cad_max" data-pricing-format="currency">—</span>
+        </div>
+        <div class="variable-test">
+            Prix Ni-Cd: <span data-pricing-value="nicd.price_cad" data-pricing-format="currency">—</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Spécifications techniques</h2>
+        <div class="variable-test">
+            Cycles Li-CUBE: <span data-pricing-value="licube.cycle_life_at_80dod" data-pricing-format="cycles">—</span>
+        </div>
+        <div class="variable-test">
+            Cycles Ni-Cd: <span data-pricing-value="nicd.cycle_life_typical" data-pricing-format="cycles">—</span>
+        </div>
+        <div class="variable-test">
+            Réduction de poids: <span data-pricing-value="licube.weight_reduction_percentage" data-pricing-format="percentage">—</span>%
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>TCO Vente</h2>
+        <div class="variable-test">
+            Total Li-CUBE 20 ans: <span data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">—</span>
+        </div>
+        <div class="variable-test">
+            Total Ni-Cd 20 ans: <span data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">—</span>
+        </div>
+        <div class="variable-test">
+            Économies: <span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="percentage">—</span>%
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>TCO Location</h2>
+        <div class="variable-test">
+            Total Li-CUBE 20 ans: <span data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="currency">—</span>
+        </div>
+        <div class="variable-test">
+            Total Ni-Cd 20 ans: <span data-pricing-value="calculations.tco_location.nicd.total_20_years" data-pricing-format="currency">—</span>
+        </div>
+        <div class="variable-test">
+            Économies: <span data-pricing-value="calculations.tco_location.savings.percentage" data-pricing-format="percentage">—</span>%
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Variables de modes</h2>
+        <div class="variable-test">
+            Prix vente Li-CUBE: <span data-pricing-value="modes.vente.licube.price_base" data-pricing-format="currency">—</span>
+        </div>
+        <div class="variable-test">
+            Prix vente Li-CUBE total: <span data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency">—</span>
+        </div>
+        <div class="variable-test">
+            Prix vente Ni-Cd: <span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">—</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>État du chargement</h2>
+        <div id="loading-status" class="variable-test error">
+            ❌ En attente du chargement des données...
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/globals-data.js"></script>
+    <script src="js/globals-manager.js"></script>
+    <script>
+        // Test du chargement
+        document.addEventListener('DOMContentLoaded', async function() {
+            const statusEl = document.getElementById('loading-status');
+            
+            try {
+                // Initialisation du gestionnaire global
+                const manager = new GlobalsManager();
+                const initialized = await manager.initialize();
+                
+                if (initialized) {
+                    statusEl.className = 'variable-test success';
+                    statusEl.innerHTML = '✅ Données chargées avec succès!';
+                    console.log('✅ Test variables: Chargement réussi');
+                } else {
+                    statusEl.innerHTML = '❌ Erreur lors de l\'initialisation du gestionnaire';
+                    console.error('❌ Test variables: Échec de l\'initialisation');
+                }
+            } catch (error) {
+                statusEl.innerHTML = `❌ Erreur: ${error.message}`;
+                console.error('❌ Test variables: Erreur', error);
+            }
+        });
+
+        // Log des événements
+        window.addEventListener('globals-data-loaded', function(event) {
+            console.log('📊 Événement globals-data-loaded reçu:', event.detail);
+        });
+    </script>
+</body>
+</html>

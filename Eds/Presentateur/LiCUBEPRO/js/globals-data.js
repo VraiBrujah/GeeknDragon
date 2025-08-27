@@ -30,6 +30,9 @@ window.GLOBALS_DATA = {
     "self_discharge_pct_per_month": 1.2,
     "efficiency_pct": 96,
     "cycle_life_at_80dod": 8000,
+    "cycle_life": 8000,
+    "lifespan_years": 20,
+    "capacity_increase_percentage": 10,
     "soc_operating_range_pct": [10, 90],
     "charge_current_recommended_a": 80,
     "charge_current_max_a": 100,
@@ -56,6 +59,7 @@ window.GLOBALS_DATA = {
     "location_price_min_monthly": 150,
     "location_price_max_monthly": 200,
     "location_installation_fee": 500,
+    "monitoring_monthly": 25,
     "warranty_years": 10,
     "weight_reduction_percentage": 71
   },
@@ -66,6 +70,8 @@ window.GLOBALS_DATA = {
     "energy_density_wh_per_kg": 30,
     "volumetric_density_wh_per_l": 27,
     "cycle_life_typical": 2500,
+    "cycle_life": 2500,
+    "lifespan_years": 5,
     "charge_time_hours": [8, 12],
     "maintenance_visits_per_year": 2,
     "weight_kg": 80,
@@ -81,11 +87,15 @@ window.GLOBALS_DATA = {
         "total_20_years": 11500
       },
       "nicd": {
-        "total_20_years": 45000
+        "total_20_years": 45000,
+        "maintenance_20_years": 20000,
+        "replacements_cost": 24000
       },
       "savings": {
         "total": 33500,
-        "percentage": 74.4
+        "amount": 33500,
+        "percentage": 74.4,
+        "roi_years": 2.5
       }
     },
     "tco_location": {
@@ -95,11 +105,12 @@ window.GLOBALS_DATA = {
         "total_20_years": 48500
       },
       "nicd": {
-        "total_20_years": 45000
+        "total_20_years": 98000
       },
       "savings": {
-        "total": -3500,
-        "percentage": -7.8
+        "total": 49500,
+        "amount": 49500,
+        "percentage": 50.5
       }
     }
   },
@@ -108,6 +119,26 @@ window.GLOBALS_DATA = {
     "units_count": 1,
     "maintenance_factor": 1.0
   },
+  "modes": {
+    "vente": {
+      "monitoring_included": false,
+      "licube": {
+        "price_base": 5500,
+        "price_total": 6325,
+        "price_display": "5500$"
+      },
+      "nicd": {
+        "price_base": 12000
+      }
+    },
+    "location": {
+      "monitoring_included": true,
+      "licube": {
+        "monthly_rate": 200,
+        "installation_fee": 500
+      }
+    }
+  },
   "mode": {
     "vente": {
       "monitoring_included": false
@@ -115,6 +146,9 @@ window.GLOBALS_DATA = {
     "location": {
       "monitoring_included": true
     }
+  },
+  "battery_specs": {
+    "weight_reduction_percentage": 71
   }
 };
 
