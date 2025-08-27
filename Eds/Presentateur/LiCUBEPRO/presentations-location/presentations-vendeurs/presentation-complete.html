@@ -840,7 +840,8 @@
         .savings-amount {
             font-size: 3rem;
             font-weight: 900;
-            white-space: nowrap;
+            white-space: normal;
+            word-break: normal;
             margin-bottom: 0.5rem;
         }
         
@@ -950,7 +951,8 @@
         .result-value {
             font-size: 2.2rem;
             font-weight: 800;
-            white-space: nowrap;
+            white-space: normal;
+            word-break: normal;
             color: var(--accent);
             margin-bottom: 0.5rem;
         }
@@ -1208,9 +1210,10 @@
             .btn {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                white-space: normal;
+                word-break: normal;
+                line-height: 1.2;
+                min-height: fit-content;
                 max-width: 280px;
             }
             
@@ -1943,12 +1946,12 @@
             <div style="max-width: 1000px; margin: 0 auto;">
                 <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; font-weight: 600;">📋 Notes et Références</h3>
                 <div style="font-size: 0.9rem; line-height: 1.6; color: #6c757d;">
-                    <p><strong>* Prix minimum affiché.</strong> Prix de location Li-CUBE PRO™ : 150-200$ CAD/mois selon configuration et services inclus. Voir grille tarifaire complète.</p>
+                    <p><strong>* Prix minimum affiché.</strong> Prix de location Li-CUBE PRO™ : <span data-pricing-value="licube.location_price_min_monthly" data-pricing-format="currency">150</span>-<span data-pricing-value="licube.location_price_max_monthly" data-pricing-format="currency">200</span>$ CAD/mois selon configuration et services inclus. Voir grille tarifaire complète.</p>
                     <p><strong>** TCO calculé sur 20 ans</strong>, soit 240 mois de location avec frais d'installation inclus. Li-CUBE : 150$/mois × 240 + 500$ = 36 500$ minimum.</p>
-                    <p><strong>*** Ni-Cd équivalent :</strong> Coût total de possession réel 60 000$ CAD sur 20 ans ÷ 240 mois = 250$/mois équivalent (matériel initial, 2-3 remplacements, maintenance).</p>
+                    <p><strong>*** Ni-Cd équivalent :</strong> Coût total de possession réel <span data-pricing-value="calculations.tco_location.nicd.total_20_years" data-pricing-format="currency_cad">60 000</span>$ CAD sur <span data-pricing-value="calculator.analysis_period_years" data-pricing-format="number">20</span> ans ÷ 240 mois = <span data-pricing-value="calculations.tco_location.nicd.equivalent_monthly_cost" data-pricing-format="currency">250</span>$/mois équivalent (matériel initial, 2-3 remplacements, maintenance).</p>
                     <p><strong>**** Location Li-CUBE inclut :</strong> Monitoring GPS, télémétrie cloud, maintenance préventive, remplacement d'urgence, support technique 24/7.</p>
-                    <p><strong>***** Économies :</strong> 250$ - 150$ = 100$/mois maximum (250$ - 200$ = 50$/mois minimum), soit 11 500$ à 23 500$ d'économies sur 20 ans.</p>
-                    <p><strong>****** Spécifications :</strong> Li-CUBE PRO™ LCP-24V-105Ah - 2520 Wh, 110 Wh/kg, 8000 cycles, 20 ans de durée de vie. Certifications UN38.3, CSA, UL1973.</p>
+                    <p><strong>***** Économies :</strong> <span data-pricing-value="calculations.tco_location.nicd.equivalent_monthly_cost" data-pricing-format="currency">250</span>$ - <span data-pricing-value="licube.location_price_min_monthly" data-pricing-format="currency">150</span>$ = <span data-pricing-value="calculations.tco_location.savings.monthly_max" data-pricing-format="currency">100</span>$/mois maximum (<span data-pricing-value="calculations.tco_location.nicd.equivalent_monthly_cost" data-pricing-format="currency">250</span>$ - <span data-pricing-value="licube.location_price_max_monthly" data-pricing-format="currency">200</span>$ = <span data-pricing-value="calculations.tco_location.savings.monthly_min" data-pricing-format="currency">50</span>$/mois minimum), soit <span data-pricing-value="calculations.tco_location.savings.total_min" data-pricing-format="currency_cad">11 500</span>$ à <span data-pricing-value="calculations.tco_location.savings.total_max" data-pricing-format="currency_cad">23 500</span>$ d'économies sur <span data-pricing-value="calculator.analysis_period_years" data-pricing-format="number">20</span> ans.</p>
+                    <p><strong>****** Spécifications :</strong> Li-CUBE PRO™ <span data-pricing-value="licube.model" data-pricing-format="text">LCP-24V-105Ah</span> - <span data-pricing-value="licube.energy_total_wh" data-pricing-format="number">2520</span> Wh, <span data-pricing-value="licube.energy_density_wh_per_kg" data-pricing-format="number">110</span> Wh/kg, <span data-pricing-value="licube.cycle_life" data-pricing-format="number">8000</span> cycles, <span data-pricing-value="licube.lifespan_years" data-pricing-format="number">20</span> ans de durée de vie. Certifications UN38.3, CSA, UL1973.</p>
                 </div>
             </div>
         </div>
