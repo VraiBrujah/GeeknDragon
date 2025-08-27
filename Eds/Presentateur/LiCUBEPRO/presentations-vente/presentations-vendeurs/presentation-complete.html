@@ -233,8 +233,7 @@
             display: block;
             margin-bottom: 0.5rem;
             line-height: 1.1;
-            white-space: normal;
-            word-break: normal;
+            white-space: nowrap;
         }
         
         .stat-label {
@@ -1189,10 +1188,9 @@
             .btn {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
-                white-space: normal;
-                word-break: normal;
-                line-height: 1.2;
-                min-height: fit-content;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 max-width: 280px;
             }
             

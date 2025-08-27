@@ -248,13 +248,14 @@
             font-weight: 700;
             color: #F18F01;
             margin-bottom: 0.5rem;
-            line-height: 1.2;
+            line-height: 1.1;
             text-align: center;
-            word-break: normal;
-            hyphens: none;
-            white-space: normal;
+            word-break: break-word;
+            hyphens: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             width: 100%;
-            min-height: 2.4rem;
         }
 
         .libelle-stat {
@@ -522,13 +523,13 @@
                 <button class="bouton-mode mode-vente" id="boutonVente" onclick="changerMode('vente')">
                     💼 MODE VENTE
                     <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9; font-weight: 700; color: #FFD700;">💰 ÉCONOMIES sur 20 ans vs Ni-Cd:</div>
-                    <div style="font-size: 1rem; margin-top: 0.2rem; opacity: 1; font-weight: 900; color: #FFD700;" data-pricing-value="calculations.tco_vente.savings.vs_nicd_max_licube_max" data-pricing-format="currency_cad"><span data-pricing-value="calculations.tco_vente.savings.vs_nicd_max_licube_max" data-pricing-format="currency_cad">48 500</span> $ CAD</div>
+                    <div style="font-size: 1rem; margin-top: 0.2rem; opacity: 1; font-weight: 900; color: #FFD700;" data-pricing-value="calculations.tco_vente.savings.vs_nicd_max_licube_max" data-pricing-format="currency_cad"><span data-pricing-value="calculations.tco_vente.savings.vs_nicd_max_licube_max" data-pricing-format="currency_cad">48500</span> $ CAD</div>
                     <div style="font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.9;"><span data-pricing-value="calculations.tco_vente.savings.percentage_max" data-pricing-format="percentage">91.7</span>% moins cher sur 20 ans</div>
                 </button>
                 <button class="bouton-mode mode-location actif" id="boutonLocation" onclick="changerMode('location')">
                     🏢 MODE LOCATION
                     <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9; font-weight: 700; color: #FFD700;">💰 ÉCONOMIES sur 20 ans vs Ni-Cd:</div>
-                    <div style="font-size: 1rem; margin-top: 0.2rem; opacity: 1; font-weight: 900; color: #FFD700;" data-pricing-value="calculations.tco_location.savings.total_max" data-pricing-format="currency_cad"><span data-pricing-value="calculations.tco_location.savings.total_max" data-pricing-format="currency_cad">23 500</span> $ CAD</div>
+                    <div style="font-size: 1rem; margin-top: 0.2rem; opacity: 1; font-weight: 900; color: #FFD700;" data-pricing-value="calculations.tco_location.savings.total_max" data-pricing-format="currency_cad"><span data-pricing-value="calculations.tco_location.savings.total_max" data-pricing-format="currency_cad">23500</span> $ CAD</div>
                     <div style="font-size: 0.8rem; margin-top: 0.3rem; opacity: 0.9;"><span data-pricing-value="calculations.tco_location.savings.percentage_max" data-pricing-format="percentage">39.2</span>% moins cher sur 20 ans</div>
                 </button>
             </div>
@@ -742,9 +743,10 @@
                 try {
                     // Prix principal selon le mode
                     if (mode === 'vente') {
-                        const prixBase = window.pricingManager.getValue('licube.price_cad_max') || 5500;
-                        const prixTotal = prixBase;
-                        // Prix vente Li-CUBE : 5000-5500$ CAD selon le tableau de référence
+                        const prixBase = window.pricingManager.getValue('modes.vente.licube.price_base');
+                        const taxes = window.pricingManager.getValue('modes.vente.licube.taxes_percent');
+                        const installation = window.pricingManager.getValue('modes.vente.licube.installation_cost');
+                        const prixTotal = Math.round((prixBase * (1 + taxes/100)) + installation);
                         
                         document.getElementById('statPrincipal').textContent = window.pricingManager.formatValue(prixTotal, 'currency');
                         document.getElementById('statROI').textContent = window.pricingManager.getValue('calculations.tco_vente.savings.roi_months') + ' mois';
@@ -753,17 +755,17 @@
                         document.getElementById('statEconomies').textContent = window.pricingManager.getValue('calculations.tco_vente.savings.percentage_max') + '%';
                         
                         // Cycles
-                        const licubeCycles = window.pricingManager.getValue('licube.cycle_life') || 8000;
-                        const nicdCycles = window.pricingManager.getValue('nicd.cycle_life_typical') || 2500;
+                        const licubeCycles = window.pricingManager.getValue('modes.vente.licube.cycles');
+                        const nicdCycles = window.pricingManager.getValue('modes.vente.nicd.cycles');
                         document.getElementById('statDuree').textContent = `${window.pricingManager.formatValue(licubeCycles, 'number')}+ vs ${window.pricingManager.formatValue(nicdCycles, 'number')}`;
                         
                         // Monitoring (optionnel en vente)
-                        const monitoring = window.pricingManager.getValue('licube.monitoring_monthly_cad') || 25;
+                        const monitoring = window.pricingManager.getValue('modes.vente.licube.monitoring_monthly');
                         document.getElementById('statMonitoring').textContent = window.pricingManager.formatValue(monitoring, 'currency') + ' $/mois';
                         document.getElementById('libelleMonitoring').textContent = 'Monitoring données (optionnel)';
                         
                     } else { // mode location
-                        const tarifMensuel = window.pricingManager.getValue('licube.location_price_min_monthly') || 150;
+                        const tarifMensuel = window.pricingManager.getValue('modes.location.licube.monthly_rate');
                         document.getElementById('statPrincipal').textContent = window.pricingManager.formatValue(tarifMensuel, 'currency') + '/mois';
                         document.getElementById('statROI').textContent = window.pricingManager.getValue('calculations.tco_location.savings.roi_months') || '6' + ' mois';
                         
@@ -771,8 +773,8 @@
                         document.getElementById('statEconomies').textContent = window.pricingManager.getValue('calculations.tco_location.savings.percentage_max') + '%';
                         
                         // Cycles (même valeur mais contexte location)
-                        const licubeCycles = window.pricingManager.getValue('licube.cycle_life') || 8000;
-                        const nicdCycles = window.pricingManager.getValue('nicd.cycle_life_typical') || 2500;
+                        const licubeCycles = window.pricingManager.getValue('modes.location.licube.cycles');
+                        const nicdCycles = window.pricingManager.getValue('modes.location.nicd.cycles') || 1500;
                         document.getElementById('statDuree').textContent = `${window.pricingManager.formatValue(licubeCycles, 'number')}+ vs ${window.pricingManager.formatValue(nicdCycles, 'number')}`;
                         
                         // Monitoring inclus en location
@@ -796,8 +798,9 @@
         
         function mettreAJourStatistiquesParDefaut(mode) {
             if (mode === 'vente') {
-                // Prix vente Li-CUBE: 5000-5500$ CAD selon le tableau de référence
-                document.getElementById('statPrincipal').textContent = '5 000-5 500 $ CAD';
+                // Prix total Li-CUBE: prix_base (5000) + taxes (14.975%) + installation (500)
+                const prixTotal = Math.round(5000 * 1.14975 + 500);
+                document.getElementById('statPrincipal').textContent = `${prixTotal.toLocaleString('fr-CA')} $ CAD`;
                 document.getElementById('statEconomies').textContent = '91.7%'; // Utilisera window.pricingManager.getValue('calculations.tco_vente.savings.percentage_max')
                 document.getElementById('statDuree').textContent = '8000+ vs 2500'; // Li-CUBE cycles vs Ni-Cd cycles
                 document.getElementById('statROI').textContent = '6 mois'; // ROI vente calculé
