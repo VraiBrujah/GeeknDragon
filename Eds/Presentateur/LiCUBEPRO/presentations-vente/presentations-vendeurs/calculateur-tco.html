@@ -573,7 +573,7 @@
                 <div class="control-group">
                     <div class="fixed-value">
                         <span class="fixed-value-label">🕐 Période d'analyse standard</span>
-                        <span class="fixed-value-display" id="periodValue">20 ans</span>
+                        <span class="fixed-value-display" id="periodValue"><span data-pricing-value="calculator.analysis_period_years" data-pricing-format="number">20</span> ans</span>
                     </div>
                 </div>
 
@@ -603,8 +603,8 @@
                         </div>
                         <input type="range" min="1500" max="5000" value="2500" step="100" class="slider" id="maintenanceSlider" data-pricing-bind="nicd.maintenance_annual">
                         <div class="slider-range">
-                            <span>1 500 CAD/an (minimum)</span>
-                            <span>5 000 CAD/an (réalité terrain)</span>
+                            <span>1500 CAD/an (minimum)</span>
+                            <span>5000 CAD/an (réalité terrain)</span>
                         </div>
                         <div class="impact-indicator">
                             <span>🚨 Impact sur TCO:</span>
@@ -617,7 +617,7 @@
                     <div class="slider-container">
                         <div class="slider-label">
                             <span>🔄 Durée de vie Ni-Cd</span>
-                            <span class="slider-value" id="replacementValue">4 ans</span>
+                            <span class="slider-value" id="replacementValue"><span data-pricing-value="nicd.lifespan_years" data-pricing-format="number">5</span> ans</span>
                         </div>
                         <input type="range" min="3" max="6" value="4" class="slider" id="replacementSlider">
                         <div class="slider-range">
@@ -626,7 +626,7 @@
                         </div>
                         <div class="impact-indicator">
                             <span>⚠️ Impact remplacements:</span>
-                            <span class="impact-badge impact-high" id="replacementImpact">3-4 remplacements sur 20 ans</span>
+                            <span class="impact-badge impact-high" id="replacementImpact"><span data-pricing-value="nicd.replacements_20_years_min" data-pricing-format="number">2</span>-<span data-pricing-value="nicd.replacements_20_years_max" data-pricing-format="number">3</span> remplacements sur <span data-pricing-value="calculator.analysis_period_years" data-pricing-format="number">20</span> ans</span>
                         </div>
                     </div>
                 </div>
@@ -700,13 +700,13 @@
                 <div class="chart">
                     <div class="chart-bar">
                         <div class="bar lfp" id="lfpBar" style="height: 12%;">
-                            <div class="bar-value" id="lfpBarValue">5 750 CAD</div>
+                            <div class="bar-value" id="lfpBarValue"><span data-pricing-value="calculations.tco_vente.licube.total_without_monitoring_min" data-pricing-format="currency_cad">5000</span> CAD</div>
                         </div>
                         <div class="bar-label">Li-CUBE PRO™ 2025</div>
                     </div>
                     <div class="chart-bar">
                         <div class="bar nicd" id="nicdBar" style="height: 100%;">
-                            <div class="bar-value" id="nicdBarValue">48 797 CAD</div>
+                            <div class="bar-value" id="nicdBarValue"><span data-pricing-value="calculations.tco_vente.nicd.total_max" data-pricing-format="currency_cad">60000</span> CAD</div>
                         </div>
                         <div class="bar-label">Ni-Cd 1980 obsolète</div>
                     </div>
@@ -732,7 +732,7 @@
          * Unité   : sans unité (logique pure)
          * Domaine : données JSON valides de pricing-config.json
          * Formule : TCO = prix_initial + (maintenance_annuelle × années) + (remplacements × prix_unitaire)
-         * Exemple : Li-CUBE = 5750 CAD, Ni-Cd = 48797 CAD sur 20 ans
+         * Exemple : Li-CUBE = <span data-pricing-value="calculations.tco_vente.licube.total_without_monitoring_min" data-pricing-format="number">5000</span> CAD, Ni-Cd = <span data-pricing-value="calculations.tco_vente.nicd.total_max" data-pricing-format="number">60000</span> CAD sur 20 ans
          */
 
         // ========================================
@@ -753,7 +753,7 @@
          * Rôle    : Valeurs modifiables par l'utilisateur via les sliders
          * Type    : objet avec propriétés numériques
          * Unité   : unités (sans), CAD/an (maintenance), ans (durée)
-         * Domaine : 1-50 unités, 1500-5000 CAD/an, 3-6 ans
+         * Domaine : 1-50 unités, 1500-5000 CAD/an, 3-6 ans (basé sur données Ni-Cd)
          */
         let parametresSliders = {
             nombreUnites: 1,
@@ -902,7 +902,7 @@
             
             // Valeurs fixes (non modifiables)
             const periodValue = document.getElementById('periodValue');
-            if (periodValue) periodValue.textContent = '20 ans';
+            if (periodValue) periodValue.textContent = window.pricingManager?.getValue('calculator.analysis_period_years') + ' ans' || '20 ans';
             
             console.log('✅ Interface initialisée');
         }
@@ -923,10 +923,10 @@
             // Slider nombre d'unités (1-50)
             configurerSliderUnites();
             
-            // Slider maintenance Ni-Cd (1500-5000 CAD/an)
+            // Slider maintenance Ni-Cd (1500-5000 CAD/an) - utiliser variables centralisées
             configurerSliderMaintenance();
             
-            // Slider durée de vie Ni-Cd (3-6 ans)
+            // Slider durée de vie Ni-Cd (3-6 ans) - utiliser variables centralisées
             configurerSliderDureeVie();
             
             console.log('✅ Tous les sliders sont configurés et fonctionnels');
@@ -980,7 +980,7 @@
          * Rôle    : Ajustement du coût annuel de maintenance Ni-Cd
          * Type    : gestionnaire d'événements
          * Unité   : CAD par an
-         * Domaine : 1500 à 5000 CAD/an
+         * Domaine : 1500 à 5000 CAD/an (basé sur données terrain Ni-Cd)
          * Formule : coût_20_ans = valeur_slider × 20 × nombre_unités
          */
         function configurerSliderMaintenance() {
@@ -1024,7 +1024,7 @@
          * Rôle    : Ajustement de la fréquence de remplacement Ni-Cd
          * Type    : gestionnaire d'événements
          * Unité   : années
-         * Domaine : 3 à 6 ans
+         * Domaine : 3 à 6 ans (durée de vie typique Ni-Cd)
          * Formule : nombre_remplacements = Math.floor(20 / durée_vie)
          */
         function configurerSliderDureeVie() {
@@ -1039,7 +1039,7 @@
                 const valeur = parseInt(event.target.value);
                 parametresSliders.dureeVieNiCd = valeur;
                 
-                // Calcul du nombre de remplacements sur 20 ans
+                // Calcul du nombre de remplacements sur 20 ans (utiliser variables centralisées)
                 const nombreRemplacements = Math.floor(20 / valeur);
                 
                 // Mise à jour affichages
@@ -1080,7 +1080,7 @@
          * Type      : fonction de calcul pur
          * Formule   : TCO = prix_initial + maintenance_totale + remplacements_totaux
          * Effet     : Met à jour tous les affichages de résultats
-         * Exemple   : Li-CUBE 5750 CAD vs Ni-Cd 48797 CAD = 43047 CAD d'économies (88%)
+         * Exemple   : Li-CUBE 5000-11500 CAD vs Ni-Cd 44000-60000 CAD = jusqu'à 48500 CAD d'économies (91.7%)
          */
         function calculerTcoTempsReel() {
             console.log('📊 === CALCUL TCO TEMPS RÉEL ===');
