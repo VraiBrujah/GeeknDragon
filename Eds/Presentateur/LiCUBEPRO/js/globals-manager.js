@@ -45,12 +45,26 @@ class GlobalsManager {
         // Configuration de formatage
         this.formatters = {
             currency: (value, suffix = 'CAD') => `${this.formatNumber(value)} ${suffix}`,
+            currency_savings: (value, suffix = 'CAD') => {
+                const prefix = value >= 0 ? 'ÉCONOMIES ' : 'SURCOÛT ';
+                return `${prefix}${this.formatNumber(Math.abs(value))} ${suffix}`;
+            },
             percentage: (value, suffix = '%') => `${this.formatNumber(value, 1)}${suffix}`,
+            percentage_savings: (value, suffix = '%') => {
+                if (value >= 0) {
+                    return `${this.formatNumber(value, 1)}${suffix} ÉCONOMIES`;
+                } else {
+                    return `${this.formatNumber(Math.abs(value), 1)}${suffix} SURCOÛT`;
+                }
+            },
             number: (value, precision = 0) => this.formatNumber(value, precision),
             weight: (value) => `${this.formatNumber(value, 0)} kg`,
+            weight_reduction: (value) => `(-${this.formatNumber(value, 0)}%)`,
             voltage: (value) => `${this.formatNumber(value, 1)}V`,
             energy: (value) => `${this.formatNumber(value, 0)} Wh`,
-            cycles: (value) => `${this.formatNumber(value, 0)} cycles`
+            cycles: (value) => `${this.formatNumber(value, 0)} cycles`,
+            monthly_fee: (value, suffix = 'CAD/mois') => `${this.formatNumber(value)} ${suffix}`,
+            installation_fee: (value, suffix = 'CAD*') => `${this.formatNumber(value)} ${suffix}`
         };
 
         console.log('📊 GlobalsManager : Instance créée');
@@ -126,38 +140,53 @@ class GlobalsManager {
     }
 
     /**
-     * Charge les variables globales depuis le fichier JSON
-     * Utilise le chemin relatif approprié selon la profondeur
+     * Charge les variables globales depuis globals-data.js
+     * Utilise window.GLOBALS_DATA directement (pas de fetch CORS)
      */
     async loadGlobals() {
-        const possiblePaths = [
-            '../Correction/GLOBALS.initial.json',
-            '../../Correction/GLOBALS.initial.json',
-            '../../../Correction/GLOBALS.initial.json',
-            './Correction/GLOBALS.initial.json'
-        ];
-
-        for (const path of possiblePaths) {
-            try {
-                console.log(`📁 Tentative de chargement : ${path}`);
-                const response = await fetch(path);
-                
-                if (response.ok) {
-                    this.globals = await response.json();
-                    console.log('✅ GLOBALS chargé avec succès depuis :', path);
-                    return;
-                }
-            } catch (error) {
-                console.warn(`⚠️  Échec du chargement depuis ${path}:`, error.message);
-            }
+        // Vérifier si globals-data.js est déjà chargé
+        if (window.GLOBALS_DATA) {
+            this.globals = window.GLOBALS_DATA;
+            console.log('✅ GLOBALS chargé depuis globals-data.js (déjà disponible)');
+            return;
         }
 
-        throw new Error('❌ Impossible de charger GLOBALS.initial.json depuis tous les chemins testés');
+        // Attendre le chargement de globals-data.js (max 5 secondes)
+        return new Promise((resolve, reject) => {
+            const maxAttempts = 50; // 5 secondes (50 × 100ms)
+            let attempts = 0;
+
+            const checkData = () => {
+                attempts++;
+                
+                if (window.GLOBALS_DATA) {
+                    this.globals = window.GLOBALS_DATA;
+                    console.log('✅ GLOBALS chargé depuis globals-data.js après attente');
+                    resolve();
+                } else if (attempts >= maxAttempts) {
+                    console.error('❌ Timeout: globals-data.js non chargé après 5 secondes');
+                    reject(new Error('❌ Impossible de charger globals-data.js dans les délais'));
+                } else {
+                    setTimeout(checkData, 100);
+                }
+            };
+
+            // Écouter aussi l'événement de chargement
+            window.addEventListener('globals-data-loaded', () => {
+                if (!this.globals && window.GLOBALS_DATA) {
+                    this.globals = window.GLOBALS_DATA;
+                    console.log('✅ GLOBALS chargé depuis globals-data-loaded event');
+                    resolve();
+                }
+            }, { once: true });
+
+            checkData();
+        });
     }
 
     /**
-     * Clone les GLOBALS vers un état local mutable
-     * Utilise structuredClone pour un clonage profond
+     * Clone les GLOBALS vers un état local mutable avec modifications persistantes
+     * Utilise structuredClone pour un clonage profond + localStorage pour sliders
      */
     cloneToLocalState() {
         if (!this.globals) {
@@ -166,7 +195,41 @@ class GlobalsManager {
 
         // Clonage profond pour éviter les mutations accidentelles
         this.state = structuredClone(this.globals);
-        console.log('📋 État local cloné depuis GLOBALS');
+
+        // Appliquer les modifications locales sauvegardées (sliders)
+        try {
+            const localModifications = JSON.parse(localStorage.getItem('pricing-local-modifications') || '{}');
+            let modCount = 0;
+            
+            Object.entries(localModifications).forEach(([path, value]) => {
+                const parts = path.split('.');
+                const lastPart = parts.pop();
+                let current = this.state;
+
+                // Navigation et application
+                for (const part of parts) {
+                    if (current[part]) {
+                        current = current[part];
+                    } else {
+                        return; // Chemin invalide, ignorer
+                    }
+                }
+
+                if (current && typeof current === 'object') {
+                    current[lastPart] = value;
+                    modCount++;
+                }
+            });
+
+            if (modCount > 0) {
+                console.log(`📋 État local avec ${modCount} modifications persistantes appliquées`);
+            } else {
+                console.log('📋 État local cloné depuis GLOBALS (aucune modification locale)');
+            }
+        } catch (error) {
+            console.warn('⚠️  Erreur lors du chargement des modifications locales:', error);
+            console.log('📋 État local cloné depuis GLOBALS (défaut)');
+        }
     }
 
     /**
@@ -282,13 +345,14 @@ class GlobalsManager {
     }
 
     /**
-     * Met à jour une valeur dans l'état et propage les changements
+     * Met à jour une valeur dans l'état local ET persistante
      * 
      * @param {string} path - Chemin vers la valeur
      * @param {any} value - Nouvelle valeur
+     * @param {boolean} persistent - Si true, la valeur persiste après refresh
      * @returns {boolean} Succès de la mise à jour
      */
-    setValue(path, value) {
+    setValue(path, value, persistent = true) {
         if (!this.state || !path) return false;
 
         const parts = path.split('.');
@@ -303,16 +367,30 @@ class GlobalsManager {
             current = current[part];
         }
 
-        // Mise à jour de la valeur
+        // Mise à jour de la valeur dans l'état local
         current[lastPart] = value;
+
+        // Si persistent, sauvegarder dans localStorage pour les sliders
+        if (persistent) {
+            try {
+                const localModifications = JSON.parse(localStorage.getItem('pricing-local-modifications') || '{}');
+                localModifications[path] = value;
+                localStorage.setItem('pricing-local-modifications', JSON.stringify(localModifications));
+            } catch (error) {
+                console.warn('⚠️  Impossible de persister la valeur locale:', error);
+            }
+        }
 
         // Recalcul des valeurs dépendantes
         this.updateDynamicCalculations();
 
+        // Mise à jour immédiate des éléments DOM
+        this.refreshElementsForPath(path);
+
         // Notification des changements
         this.notifyListeners(path, value);
 
-        console.log(`📝 Valeur mise à jour: ${path} = ${value}`);
+        console.log(`📝 Valeur mise à jour: ${path} = ${value}${persistent ? ' (persistante)' : ' (temporaire)'}`);
         return true;
     }
 
@@ -409,6 +487,23 @@ class GlobalsManager {
     refreshBinding() {
         this.applyDataBinding();
         console.log('🔄 Binding rafraîchi');
+    }
+
+    /**
+     * Rafraîchit seulement les éléments liés à un chemin spécifique
+     * Optimisé pour les sliders et modifications locales
+     * 
+     * @param {string} path - Chemin de la variable modifiée
+     */
+    refreshElementsForPath(path) {
+        const elements = document.querySelectorAll(`[data-pricing-value="${path}"]`);
+        elements.forEach(element => {
+            this.bindElement(element);
+        });
+        
+        if (elements.length > 0) {
+            console.log(`🔄 ${elements.length} éléments rafraîchis pour ${path}`);
+        }
     }
 
     /**

@@ -562,7 +562,7 @@
             <div class="product-section lfp">
                 <div class="comparison-badges">
                     <div class="performance-badge winner">🏆 GAGNANT</div>
-                    <div class="performance-badge winner"><span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="number">—</span>% ÉCONOMIES</div>
+                    <div class="performance-badge winner"><span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="percentage_savings">—</span></div>
                 </div>
                 
                 <div class="product-header">
@@ -590,7 +590,7 @@
                             <span class="spec-icon">⚖️</span>
                             <span>Poids</span>
                         </div>
-                        <div class="spec-value positive"><span data-pricing-value="licube.weight_kg" data-pricing-format="weight">—</span> (-<span data-pricing-value="licube.weight_reduction_percentage" data-pricing-format="number">—</span>%)</div>
+                        <div class="spec-value positive"><span data-pricing-value="licube.weight_kg" data-pricing-format="weight">—</span> <span data-pricing-value="licube.weight_reduction_percentage" data-pricing-format="weight_reduction">—</span></div>
                     </div>
                     
                     <div class="spec-item lfp">
@@ -638,7 +638,8 @@
                             <span class="spec-icon">💰</span>
                             <span>TCO 20 ans</span>
                         </div>
-                        <div class="spec-value positive" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency"> CAD</div>
+                        <div class="spec-value positive" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">—</div>
+                        <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">*Inclut services <span data-pricing-value="licube.service_fee_monthly_cad" data-pricing-format="number">—</span>$/mois</div>
                     </div>
                 </div>
                 
@@ -913,8 +914,11 @@
     </script>
     
     <!-- Scripts système de variables globales -->
+    <script src="../../js/globals-data.js"></script>
     <script src="../../js/globals-manager.js" defer></script>
     <script src="../../js/hardcoded-replacer.js" defer></script>
+    <script src="../../js/dynamic-calculations.js" defer></script>
+    <script src="../../js/validation-system.js" defer></script>
     
     <!-- Script système de notes testeur alpha -->
     <script src="../../module_notes/notes-module.js"></script>

@@ -638,7 +638,7 @@
             <div class="product-section lfp">
                 <div class="comparison-badges">
                     <div class="performance-badge winner">🏆 GAGNANT</div>
-                    <div class="performance-badge winner">95% ÉCONOMIES</div>
+                    <div class="performance-badge loser"><span data-pricing-value="calculations.tco_location.savings.percentage" data-pricing-format="percentage_savings">—</span></div>
                 </div>
                 
                 <div class="product-header">
@@ -714,7 +714,8 @@
                             <span class="spec-icon">💰</span>
                             <span>TCO 20 ans</span>
                         </div>
-                        <div class="spec-value positive" data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="currency"> CAD</div>
+                        <div class="spec-value positive" data-pricing-value="calculations.tco_location.licube.total_20_years" data-pricing-format="currency">—</div>
+                        <div style="font-size: 10px; opacity: 0.7; margin-top: 2px;">*<span data-pricing-value="licube.location_price_max_monthly" data-pricing-format="number">—</span>$/mois + <span data-pricing-value="licube.location_installation_fee" data-pricing-format="installation_fee">—</span></div>
                     </div>
                 </div>
                 
@@ -941,6 +942,13 @@
             }, 2000);
         }
     </script>
+    
+    <!-- Scripts système de variables globales -->
+    <script src="../../js/globals-data.js"></script>
+    <script src="../../js/globals-manager.js" defer></script>
+    <script src="../../js/hardcoded-replacer.js" defer></script>
+    <script src="../../js/dynamic-calculations.js" defer></script>
+    <script src="../../js/validation-system.js" defer></script>
     
     <!-- Script système de notes testeur alpha -->
     <script src="../../module_notes/notes-module.js"></script>

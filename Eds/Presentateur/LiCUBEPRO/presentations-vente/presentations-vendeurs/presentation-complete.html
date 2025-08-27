@@ -1311,7 +1311,7 @@
             <div class="problem-content">
                 <h2 class="problem-title">❌ ALERTE : Vos Batteries Ni-Cd Vous Coûtent Une Fortune!</h2>
                 <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
-                    <strong>URGENT :</strong> Chaque jour d'attente vous coûte <strong><span data-pricing-value="calculations.tco_vente.savings.daily" data-pricing-format="currency">6.34$</span>/jour</strong> en surcoûts évitables! 
+                    <strong>URGENT :</strong> Chaque jour d'attente vous coûte <strong><span data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">6.34$</span>/jour</strong> en surcoûts évitables! 
                     Les batteries Saft SPL/SBLE drainent votre budget sans pitié.
                 </p>
                 
@@ -1330,7 +1330,7 @@
                         <h3>🩸 SAIGNÉE : Maintenance Sans Fin!</h3>
                         <p><strong>CAUCHEMAR OPÉRATIONNEL :</strong> 2 visites/an minimum, électrolyte toxique, techniciens spécialisés rares. <strong>Chaque panne = production arrêtée!</strong></p>
                         <div class="problem-impact">
-                            <strong>Hémorragie financière :</strong> <strong><span data-pricing-value="calculations.tco_vente.nicd.maintenance_20_years" data-pricing-format="currency">42 240$</span></strong> sur 20 ans!
+                            <strong>Hémorragie financière :</strong> <strong><span data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">42 240$</span></strong> sur 20 ans!
                         </div>
                     </div>
                     
@@ -1373,9 +1373,9 @@
                     <div class="problem-card animate-on-scroll">
                         <div class="problem-icon">💰</div>
                         <h3>💸 RUINEUX : Prix Scandaleux!</h3>
-                        <p><strong>SHOCKING :</strong> <span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">12000$</span> pour UNE batterie 24V-100Ah! <strong>5× plus cher</strong> que Li-CUBE PRO™. Pourquoi payer 5× plus pour une technologie obsolète?</p>
+                        <p><strong>SHOCKING :</strong> <span data-pricing-value="nicd.price_cad" data-pricing-format="currency">12000$</span> pour UNE batterie 24V-100Ah! <strong>5× plus cher</strong> que Li-CUBE PRO™. Pourquoi payer 5× plus pour une technologie obsolète?</p>
                         <div class="problem-impact">
-                            <strong>Perte immédiate :</strong> <strong><span data-pricing-value="calculations.tco_vente.initial_savings" data-pricing-format="currency">9 250$</span></strong> gaspillés dès l'achat!
+                            <strong>Perte immédiate :</strong> <strong><span data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">9 250$</span></strong> gaspillés dès l'achat!
                         </div>
                     </div>
                     
@@ -1480,7 +1480,7 @@
                         <h3>💰 IMBATTABLE : Prix Révolutionnaire!</h3>
                         <p><strong>PRIX CHOC :</strong> Seulement <span data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency">2750$</span> au lieu de 12 000$! <strong>ROI immédiat garanti.</strong> Amortissement en moins de 2 ans vs coûts Ni-Cd!</p>
                         <div class="advantage-impact">
-                            <strong>Économie instantanée :</strong> <strong><span data-pricing-value="calculations.tco_vente.initial_savings" data-pricing-format="currency">9 250$</span></strong> dès le premier jour!
+                            <strong>Économie instantanée :</strong> <strong><span data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">9 250$</span></strong> dès le premier jour!
                         </div>
                     </div>
                 </div>
@@ -1625,7 +1625,7 @@
                         <div class="comparison-item disadvantage animate-on-scroll">
                             <div class="comparison-icon">💸</div>
                             <div class="comparison-content">
-                                <div class="comparison-title"><span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">12 000$</span> l'unité</div>
+                                <div class="comparison-title"><span data-pricing-value="nicd.price_cad" data-pricing-format="currency">12 000$</span> l'unité</div>
                                 <div class="comparison-desc">5× plus cher que Li-CUBE PRO</div>
                             </div>
                         </div>
@@ -1708,7 +1708,7 @@
                                 </div>
                                 <div class="spec-line">
                                     <span>Prix</span>
-                                    <span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">12000 CAD</span>
+                                    <span data-pricing-value="nicd.price_cad" data-pricing-format="currency">12000 CAD</span>
                                 </div>
                             </div>
                         </div>
@@ -1766,11 +1766,11 @@
                         <div class="tco-breakdown">
                             <div class="breakdown-line">
                                 <span>Batterie initiale</span>
-                                <span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">12000 CAD</span>
+                                <span data-pricing-value="nicd.price_cad" data-pricing-format="currency">12000 CAD</span>
                             </div>
                             <div class="breakdown-line">
                                 <span>Maintenance (20 ans)</span>
-                                <span data-pricing-value="calculations.tco_vente.nicd.maintenance_20_years" data-pricing-format="currency">9040 CAD</span>
+                                <span data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">9040 CAD</span>
                             </div>
                             <div class="breakdown-line">
                                 <span>3 Remplacements</span>
@@ -1788,7 +1788,7 @@
                         <div class="control-group">
                             <label class="control-label">Période d'analyse (années)</label>
                             <div class="slider-container">
-                                <input type="range" class="slider" id="period-slider" min="5" max="25" value="20">
+                                <input type="range" class="slider" id="period-slider" min="5" max="25" value="20" data-variable="calculator.analysis_period_years" data-unit="ans">
                                 <div class="slider-value" id="period-value">20 ans</div>
                             </div>
                         </div>
@@ -1796,7 +1796,7 @@
                         <div class="control-group">
                             <label class="control-label">Nombre d'unités</label>
                             <div class="slider-container">
-                                <input type="range" class="slider" id="units-slider" min="1" max="50" value="1">
+                                <input type="range" class="slider" id="units-slider" min="1" max="50" value="1" data-variable="calculator.units_count" data-unit="unités">
                                 <div class="slider-value" id="units-value">1 unité</div>
                             </div>
                         </div>
@@ -1990,33 +1990,29 @@
         function calculateTCO() {
             const period = parseInt(periodSlider.value);
             const units = parseInt(unitsSlider.value);
-            const maintenancePerYear = parseInt(maintenanceCost.value);
+            const maintenancePerYear = parseInt(maintenanceCost?.value || 0);
             
-            // Vérifier que le pricing manager est disponible
-            if (!window.pricingManager || !window.pricingManager.isLoaded) {
-                console.warn('⚠️ PricingManager non disponible pour calculateTCO');
+            // Vérifier que le globals manager est disponible
+            if (!window.globalsManager || !window.globalsManager.isInitialized) {
+                console.warn('⚠️ GlobalsManager non disponible pour calculateTCO');
                 return;
             }
             
-            // Li-CUBE PRO costs - utiliser les valeurs du pricing manager
-            const lfpPrixBase = window.pricingManager.getValue('modes.vente.licube.price_base') || 5000;
-            const lfpTaxes = window.pricingManager.getValue('modes.vente.licube.taxes_percent') || 14.975;
-            const lfpInstallation = window.pricingManager.getValue('modes.vente.licube.installation_cost') || 500;
-            const lfpUnitPrice = Math.round((lfpPrixBase * (1 + lfpTaxes/100)) + lfpInstallation);
-            const lfpTotal = lfpUnitPrice * units;
+            // Li-CUBE PRO costs - utiliser les valeurs du globals manager
+            const lfpPrixBase = window.globalsManager.getValue('licube.price_cad_max') || 5500;
+            const lfpServiceFee = (window.globalsManager.getValue('licube.service_fee_monthly_cad') || 25) * 12 * period;
+            const lfpTotal = (lfpPrixBase + lfpServiceFee) * units;
             
             // Ni-Cd costs - avec maintenance modifiable
-            const nicdPrixBase = window.pricingManager.getValue('modes.vente.nicd.price_base') || 12000;
-            const nicdTaxes = window.pricingManager.getValue('modes.vente.nicd.taxes_percent') || 14.975;
-            const nicdInstallation = window.pricingManager.getValue('modes.vente.nicd.installation_cost') || 500;
-            const nicdCycleRemplacement = window.pricingManager.getValue('nicd.replacement_cycle_years') || 6;
+            const nicdPrixBase = window.globalsManager.getValue('nicd.price_cad') || 12000;
+            const nicdCycleLife = window.globalsManager.getValue('nicd.cycle_life_typical') || 2500;
+            const nicdReplacementYears = Math.ceil(nicdCycleLife / 365); // Approximation années
             
-            const nicdUnitPrice = Math.round((nicdPrixBase * (1 + nicdTaxes/100)) + nicdInstallation);
-            const nicdInitial = nicdUnitPrice * units;
+            const nicdInitial = nicdPrixBase * units;
             const nicdMaintenance = maintenancePerYear * units * period; // Utilise la valeur de l'input
             
-            // Remplacements basés sur le cycle configuré
-            const replacementCycles = Math.floor(period / nicdCycleRemplacement);
+            // Remplacements basés sur le cycle de vie
+            const replacementCycles = Math.max(0, Math.floor(period / nicdReplacementYears) - 1);
             const nicdReplacements = replacementCycles * nicdPrixBase * units;
             
             const nicdTotal = nicdInitial + nicdMaintenance + nicdReplacements;
@@ -2049,9 +2045,30 @@
         updateSliderValue(periodSlider, periodValue, ' ans');
         updateSliderValue(unitsSlider, unitsValue, ' unité');
         
-        // Fonction d'initialisation avec valeurs du pricing manager
-        function initializeWithPricingData() {
-            if (window.pricingManager && window.pricingManager.isLoaded) {
+        // NOUVELLE FONCTION : Initialisation avec GlobalsManager
+        function initializeWithGlobalsData() {
+            if (window.globalsManager && window.globalsManager.isInitialized) {
+                console.log('🎯 Initialisation calculateur avec GlobalsManager...');
+                
+                // Charger les valeurs persistantes des sliders
+                const savedPeriod = window.globalsManager.getValue('calculator.analysis_period_years') || 20;
+                const savedUnits = window.globalsManager.getValue('calculator.units_count') || 1;
+                
+                periodSlider.value = savedPeriod;
+                unitsSlider.value = savedUnits;
+                updateSliderValue(periodSlider, periodValue, ' ans');
+                updateSliderValue(unitsSlider, unitsValue, savedUnits === 1 ? ' unité' : ' unités');
+                
+                // Calculer immédiatement
+                calculateTCO();
+                return true;
+            }
+            return false;
+        }
+        
+        // ANCIENNE FONCTION : Initialisation avec valeurs du pricing manager (DÉSACTIVÉE)
+        function initializeWithPricingData_DISABLED() {
+            if (false) { // window.pricingManager && window.pricingManager.isLoaded) {
                 // Initialiser l'input maintenance avec la valeur du JSON (une seule fois)
                 const maintenanceFromConfig = window.pricingManager.getValue('modes.vente.nicd.maintenance_annual') || 452;
                 maintenanceCost.value = maintenanceFromConfig;
@@ -2099,17 +2116,38 @@
             }
         }
         
-        // Initialiser les calculs quand le pricing manager est prêt
-        if (window.pricingManager && window.pricingManager.isLoaded) {
-            initializeWithPricingData();
+        // Ajouter les écouteurs aux sliders pour persistance
+        periodSlider.addEventListener('input', function() {
+            updateSliderValue(periodSlider, periodValue, ' ans');
+            if (window.globalsManager) {
+                window.globalsManager.setValue('calculator.analysis_period_years', parseInt(periodSlider.value), true);
+            }
+            calculateTCO();
+        });
+        
+        unitsSlider.addEventListener('input', function() {
+            const units = parseInt(unitsSlider.value);
+            updateSliderValue(unitsSlider, unitsValue, units === 1 ? ' unité' : ' unités');
+            if (window.globalsManager) {
+                window.globalsManager.setValue('calculator.units_count', units, true);
+            }
+            calculateTCO();
+        });
+        
+        // Initialiser les calculs quand GlobalsManager est prêt
+        if (window.globalsManager && window.globalsManager.isInitialized) {
+            initializeWithGlobalsData();
         } else {
-            document.addEventListener('pricingManagerReady', initializeWithPricingData);
+            document.addEventListener('globals-ready', () => {
+                setTimeout(initializeWithGlobalsData, 500); // Petit délai pour s'assurer que tout est chargé
+            });
             // Timeout de sécurité
             setTimeout(() => {
-                if (window.pricingManager) {
-                    initializeWithPricingData();
+                if (!initializeWithGlobalsData()) {
+                    console.warn('⚠️  Fallback: initialisation calculateur sans GlobalsManager');
+                    calculateTCO(); // Au moins essayer de calculer avec les valeurs par défaut
                 }
-            }, 2000);
+            }, 3000);
         }
 
         // Contact direct - pas de formulaire
@@ -2133,7 +2171,7 @@
 
     <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
     <!-- Gestionnaire Centralisé des Prix - OBLIGATOIRE -->
-    <script src="../../js/pricing-manager.js"></script>
+    <!-- <script src="../../js/pricing-manager.js"></script> DÉSACTIVÉ : Remplacé par globals-manager.js -->
     <script src="../../js/image-config.js"></script>
     <script>
         // Mise à jour du background CSS pour Li-CUBE PRO™
@@ -2144,8 +2182,12 @@
     </script>
     
     <!-- Scripts système de variables globales -->
+    <script src="../../js/globals-data.js"></script>
     <script src="../../js/globals-manager.js" defer></script>
     <script src="../../js/hardcoded-replacer.js" defer></script>
+    <script src="../../js/dynamic-calculations.js" defer></script>
+    <script src="../../js/slider-system.js" defer></script>
+    <script src="../../js/validation-system.js" defer></script>
     
     <!-- Script système de notes testeur alpha -->
     <script src="../../module_notes/notes-module.js"></script>

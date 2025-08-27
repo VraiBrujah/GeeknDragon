@@ -52,26 +52,26 @@ class DynamicCalculations {
 
         // === CALCULS TCO (vente/location) ===
         
-        // Pourcentage d'économies : (nicd - licube) / nicd * 100
+        // Pourcentage d'économies : (nicd - licube) / nicd * 100 (peut être négatif)
         rules.set('tco_savings_percentage', {
             dependencies: ['licube.total_20_years', 'nicd.total_20_years'],
             formula: (licubeTotal, nicdTotal) => {
                 if (!nicdTotal || nicdTotal <= 0) return 0;
                 const savings = nicdTotal - licubeTotal;
-                return Math.round((savings / nicdTotal) * 100 * 10) / 10; // 1 décimale
+                return Math.round((savings / nicdTotal) * 100 * 10) / 10; // 1 décimale, peut être négatif
             },
             targets: ['calculations.tco_vente.savings.percentage', 'calculations.tco_location.savings.percentage'],
-            description: 'Pourcentage d\'économies TCO sur 20 ans'
+            description: 'Pourcentage d\'économies/surcoût TCO sur 20 ans'
         });
 
-        // Montant total économisé : nicd - licube
+        // Montant total économisé : nicd - licube (peut être négatif)
         rules.set('tco_savings_amount', {
             dependencies: ['licube.total_20_years', 'nicd.total_20_years'],
             formula: (licubeTotal, nicdTotal) => {
-                return Math.max(0, nicdTotal - licubeTotal);
+                return nicdTotal - licubeTotal; // Peut être négatif (surcoût)
             },
             targets: ['calculations.tco_vente.savings.total', 'calculations.tco_location.savings.total'],
-            description: 'Montant total des économies sur 20 ans'
+            description: 'Montant total des économies/surcoût sur 20 ans'
         });
 
         // === CALCULS PHYSIQUES ===
