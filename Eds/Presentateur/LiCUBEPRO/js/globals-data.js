@@ -230,8 +230,8 @@ window.GLOBALS_DATA = {
 // Log de confirmation du chargement
 console.log('✅ GLOBALS_DATA chargé:', Object.keys(window.GLOBALS_DATA).length, 'sections');
 console.log('📊 Prix Li-CUBE (vente):', window.GLOBALS_DATA.licube.price_cad_max, 'CAD');
-console.log('💰 TCO vente 20 ans:', window.GLOBALS_DATA.calculations.tco_vente.licube.total_with_monitoring_max, 'CAD');
-console.log('💸 Économies vente:', window.GLOBALS_DATA.calculations.tco_vente.savings.percentage_max + '%');
+console.log('💰 TCO vente 20 ans:', window.GLOBALS_DATA.calculations.tco_vente.licube.total_20_years, 'CAD');
+console.log('💸 Économies vente:', window.GLOBALS_DATA.calculations.tco_vente.savings.percentage + '%');
 
 // Notification de disponibilité
 window.dispatchEvent(new CustomEvent('globals-data-loaded', {
