@@ -1332,7 +1332,7 @@
             <div class="problem-content">
                 <h2 class="problem-title">❌ SCANDALE : Vous Payez 2× Plus Cher!</h2>
                 <p style="font-size: 1.5rem; color: #F18F01; margin-bottom: 2rem; font-weight: 700; text-align: center;">
-                    <strong>🚨 ALERTE COÛTS :</strong> <span data-pricing-value="modes.location.nicd.monthly_rate" data-pricing-format="currency">240$</span>/mois coûts CACHÉS vs <strong><span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">150$</span>/mois TOUT INCLUS</strong> Li-CUBE PRO!<br>
+                    <strong>🚨 ALERTE COÛTS :</strong> <span data-pricing-value="modes.location.nicd.equivalent_monthly_cost" data-pricing-format="currency">250$</span>/mois coûts réels vs <strong><span data-pricing-value="modes.location.licube.monthly_min" data-pricing-format="currency">150$</span>/mois TOUT INCLUS</strong> Li-CUBE PRO!<br>
                     <span style="color: #DC3545; font-size: 1.8rem;">ARRÊTEZ cette HÉMORRAGIE financière : <span data-pricing-value="calculations.tco_location.savings.total" data-pricing-format="currency">49 490$</span> de PERTES évitables!</span>
                 </p>
                 
@@ -1519,8 +1519,8 @@
                         <div class="comparison-item advantage animate-on-scroll">
                             <div class="comparison-icon">💰</div>
                             <div class="comparison-content">
-                                <div class="comparison-title"><span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">150$</span>/mois TOUT INCLUS</div>
-                                <div class="comparison-desc">Tarifs dégressifs jusqu'à <span data-pricing-value="modes.location.licube.monthly_rate" data-pricing-format="currency">100$</span>/mois</div>
+                                <div class="comparison-title"><span data-pricing-value="modes.location.licube.monthly_display_min">150$*</span>/mois TOUT INCLUS</div>
+                                <div class="comparison-desc">vs <span data-pricing-value="modes.location.nicd.equivalent_monthly_cost" data-pricing-format="currency">250$</span>/mois Ni-Cd******</div>
                             </div>
                         </div>
                         
@@ -1589,8 +1589,8 @@
                         <div class="comparison-item disadvantage animate-on-scroll">
                             <div class="comparison-icon">💸</div>
                             <div class="comparison-content">
-                                <div class="comparison-title">240$/mois coût réel</div>
-                                <div class="comparison-desc">Achat + maintenance + pannes cachées</div>
+                                <div class="comparison-title"><span data-pricing-value="modes.location.nicd.equivalent_monthly_cost" data-pricing-format="currency">250$</span>/mois coût équivalent</div>
+                                <div class="comparison-desc">60000$ TCO / 240 mois******</div>
                             </div>
                         </div>
                         
@@ -1646,18 +1646,18 @@
                 
                 <!-- Résumé TCO LOCATION -->
                 <div style="background: linear-gradient(135deg, var(--accent) 0%, #FF6B35 100%); border-radius: 20px; padding: 2rem; margin-top: 3rem; text-align: center;">
-                    <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">💰 TCO LOCATION vs ACHAT Ni-Cd : Li-CUBE PRO™ GAGNE!</h3>
+                    <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">💰 TCO LOCATION vs ÉQUIVALENT Ni-Cd : Li-CUBE PRO™ GAGNE!</h3>
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem;">
                         <div style="background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 15px;">
-                            <div style="font-size: 2rem; font-weight: 900; color: white;">26 500$</div>
-                            <div style="color: rgba(255,255,255,0.9);">Li-CUBE PRO™ Location<br>100$/mois × 240 mois + 500$ installation</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: white;"><span data-pricing-value="calculations.tco_location.licube.total_20_years_min" data-pricing-format="currency_cad">36 500$</span>*</div>
+                            <div style="color: rgba(255,255,255,0.9);">Li-CUBE PRO™ Location<br><span data-pricing-value="modes.location.licube.monthly_min" data-pricing-format="currency">150$</span>/mois × 240 mois + <span data-pricing-value="modes.location.licube.installation_fee" data-pricing-format="currency">500$</span> installation</div>
                         </div>
                         <div style="background: rgba(220, 53, 69, 0.8); padding: 1.5rem; border-radius: 15px;">
-                            <div style="font-size: 2rem; font-weight: 900; color: white;">75 990$</div>
-                            <div style="color: rgba(255,255,255,0.9);">Ni-Cd Coût Total Réel<br>240$/mois équivalent × 20 ans</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: white;"><span data-pricing-value="calculations.tco_location.nicd.total_20_years" data-pricing-format="currency_cad">60 000$</span></div>
+                            <div style="color: rgba(255,255,255,0.9);">Ni-Cd Équivalent<br><span data-pricing-value="modes.location.nicd.equivalent_monthly_cost" data-pricing-format="currency">250$</span>/mois × 240 mois</div>
                         </div>
                         <div style="background: rgba(40, 167, 69, 0.8); padding: 1.5rem; border-radius: 15px;">
-                            <div style="font-size: 2rem; font-weight: 900; color: white;">49 490$</div>
+                            <div style="font-size: 2rem; font-weight: 900; color: white;"><span data-pricing-value="calculations.tco_location.savings.total_max" data-pricing-format="currency_cad">23 500$</span></div>
                             <div style="color: rgba(255,255,255,0.9);">ÉCONOMIES<br>garanties avec LOCATION!</div>
                         </div>
                     </div>
@@ -1932,6 +1932,23 @@
                             ENVOYER EMAIL
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Notes de Bas de Page -->
+    <section id="footnotes" class="section" style="background-color: #f8f9fa; padding: 2rem 0; border-top: 1px solid #e9ecef;">
+        <div class="container">
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <h3 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; font-weight: 600;">📋 Notes et Références</h3>
+                <div style="font-size: 0.9rem; line-height: 1.6; color: #6c757d;">
+                    <p><strong>* Prix minimum affiché.</strong> Prix de location Li-CUBE PRO™ : 150-200$ CAD/mois selon configuration et services inclus. Voir grille tarifaire complète.</p>
+                    <p><strong>** TCO calculé sur 20 ans</strong>, soit 240 mois de location avec frais d'installation inclus. Li-CUBE : 150$/mois × 240 + 500$ = 36 500$ minimum.</p>
+                    <p><strong>*** Ni-Cd équivalent :</strong> Coût total de possession réel 60 000$ CAD sur 20 ans ÷ 240 mois = 250$/mois équivalent (matériel initial, 2-3 remplacements, maintenance).</p>
+                    <p><strong>**** Location Li-CUBE inclut :</strong> Monitoring GPS, télémétrie cloud, maintenance préventive, remplacement d'urgence, support technique 24/7.</p>
+                    <p><strong>***** Économies :</strong> 250$ - 150$ = 100$/mois maximum (250$ - 200$ = 50$/mois minimum), soit 11 500$ à 23 500$ d'économies sur 20 ans.</p>
+                    <p><strong>****** Spécifications :</strong> Li-CUBE PRO™ LCP-24V-105Ah - 2520 Wh, 110 Wh/kg, 8000 cycles, 20 ans de durée de vie. Certifications UN38.3, CSA, UL1973.</p>
                 </div>
             </div>
         </div>

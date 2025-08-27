@@ -670,7 +670,7 @@
                 <div class="breakdown-grid">
                     <div class="breakdown-item">
                         <h4>🔋 Li-CUBE PRO™ - Technologie 2025 moderne</h4>
-                        <div class="breakdown-value" id="lfpInitial">150 $/mois (tout inclus)</div>
+                        <div class="breakdown-value" id="lfpInitial">150-200 $/mois (tout inclus)</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>📱 Li-CUBE PRO™ - Monitoring inclus</h4>
@@ -678,7 +678,7 @@
                     </div>
                     <div class="breakdown-item">
                         <h4>⚠️ Ni-Cd - Technologie 1980 obsolète</h4>
-                        <div class="breakdown-value" id="nicdInitial">300 $/mois (location)</div>
+                        <div class="breakdown-value" id="nicdInitial">250 $/mois (équivalent)</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🔧 Ni-Cd - Coûts maintenance obligatoire</h4>
@@ -1087,8 +1087,8 @@
             console.log('Paramètres actuels:', parametresSliders);
             
             // Récupération des prix de location depuis admin ou fallback
-            const tarifMensuelLiCube = getAdminValue('modes.location.licube.monthly_rate', 150);
-            const tarifMensuelNiCd = getAdminValue('modes.location.nicd.monthly_rate', 300);
+            const tarifMensuelLiCube = getAdminValue('modes.location.licube.monthly_min', 150);
+            const tarifMensuelNiCd = getAdminValue('modes.location.nicd.equivalent_monthly_cost', 250);
             
             // Calculs de base pour une unité (mensuel → 20 ans)
             const prixTotalLiCube = tarifMensuelLiCube * 12 * 20; // 20 ans de location

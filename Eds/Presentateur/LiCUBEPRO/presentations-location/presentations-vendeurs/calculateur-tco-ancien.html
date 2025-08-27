@@ -546,7 +546,7 @@
                 </div>
             </div>
             <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 1.5rem; background: linear-gradient(135deg, #ffffff 0%, #64748b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">💰 LOCATION INTELLIGENTE</h1>
-            <p class="subtitle" style="font-size: 1.5rem; color: rgba(255,255,255,0.8); font-weight: 500;"><strong>🚀 SLIDERS MAGIQUES :</strong> Ajustez et découvrez vos économies instantanément!<br><strong style="color: var(--accent); font-size: 1.3rem;">Tarifs dégressifs 150$/mois → 100$/mois</strong> vs <strong style="color: var(--danger);">Coûts cachés Ni-Cd</strong><br><span style="color: var(--accent); font-weight: 700; font-size: 1.3rem;">⚡ Monitoring IoT INCLUS + Économies garanties: <span data-pricing-value="calculations.tco_location.savings.amount" data-pricing-format="currency"> CAD</span>!</span></p>
+            <p class="subtitle" style="font-size: 1.5rem; color: rgba(255,255,255,0.8); font-weight: 500;"><strong>🚀 SLIDERS MAGIQUES :</strong> Ajustez et découvrez vos économies instantanément!<br><strong style="color: var(--accent); font-size: 1.3rem;">Tarifs 150-200$/mois vs 250$/mois Ni-Cd</strong> vs <strong style="color: var(--danger);">Coûts cachés Ni-Cd</strong><br><span style="color: var(--accent); font-weight: 700; font-size: 1.3rem;">⚡ Monitoring IoT INCLUS + Économies garanties: <span data-pricing-value="calculations.tco_location.savings.amount" data-pricing-format="currency"> CAD</span>!</span></p>
         </div>
 
         <div class="calculator-wrapper">
@@ -588,7 +588,7 @@
                             <span>50+ unités (<span data-pricing-value="licube.monthly_rate_min"></span>$/mois)</span>
                         </div>
                         <div class="impact-indicator">
-                            <span>📈 Réductions volume:</span>
+                            <span>📈 Tarification volume:</span>
                             <span class="impact-badge impact-low" id="unitsImpact">Tarif unitaire</span>
                         </div>
                     </div>
@@ -636,9 +636,9 @@
                         <span class="fixed-value-display" id="loyerValue" data-pricing-value="licube.monthly_rate_max" data-pricing-format="currency"> CAD/mois</span>
                     </div>
                     <div class="config-note" style="margin-top: 1rem; font-size: 0.85rem;">
-                        💡 <strong>Base <span data-pricing-value="licube.monthly_rate_max" data-pricing-format="currency"></span>$/mois</strong> - Réductions jusqu'à <span data-pricing-value="licube.monthly_rate_min" data-pricing-format="currency"></span>$/mois GARANTI.<br>
+                        💡 <strong>Gamme 150-200$/mois</strong> selon volume et durée.<br>
                         📊 <strong>Monitoring télémétrique INCLUS</strong> (GPS, GPRS, Cloud)<br>
-                        <strong>Plus de volume + durée = MAXIMUM de réductions!</strong>
+                        <strong>vs 250$/mois équivalent Ni-Cd - Économies garanties!</strong>
                     </div>
                 </div>
 
@@ -838,11 +838,11 @@
         const VALEURS_DEFAUT_LOCATION = {
             licube: {
                 monthly_rate: 150,
-                monthly_rate_min: 100,
-                monthly_rate_max: 150
+                monthly_rate_min: 150,
+                monthly_rate_max: 200
             },
             nicd: {
-                monthly_rate: 240,
+                monthly_rate: 250,
                 maintenance_annual: 200,
                 breakdown_cost_annual: 600
             }
@@ -867,28 +867,33 @@
             const moisParAnnee = 12;
             const totalMois = periode * moisParAnnee;
             
-            // Calcul tarif LiCube avec réductions
-            let tarifLiCubeMensuel = VALEURS_DEFAUT_LOCATION.licube.monthly_rate;
+            // Calcul tarif LiCube avec nouvelle grille 150-200$
+            let tarifLiCubeMensuel = VALEURS_DEFAUT_LOCATION.licube.monthly_rate; // Base 150$
             
-            // Réductions durée contrat
+            // Facteur durée contrat (vers 200$ max)
+            let facteurDuree = 1.0;
             if (parametresSimulation.dureeContrat >= 20) {
-                tarifLiCubeMensuel = VALEURS_DEFAUT_LOCATION.licube.monthly_rate_min;
+                facteurDuree = 1.33; // 200$ pour 20+ ans
             } else if (parametresSimulation.dureeContrat >= 15) {
-                tarifLiCubeMensuel = Math.round(tarifLiCubeMensuel * 0.85);
+                facteurDuree = 1.27; // 190$ pour 15-19 ans
             } else if (parametresSimulation.dureeContrat >= 8) {
-                tarifLiCubeMensuel = Math.round(tarifLiCubeMensuel * 0.925);
+                facteurDuree = 1.13; // 170$ pour 8-14 ans
             }
             
-            // Réductions volume
+            // Facteur volume (ajustement vers gamme haute)
+            let facteurVolume = 1.0;
             if (parametresSimulation.nombreUnites >= 50) {
-                tarifLiCubeMensuel = VALEURS_DEFAUT_LOCATION.licube.monthly_rate_min;
+                facteurVolume = 1.15; // +15% pour volume très élevé
             } else if (parametresSimulation.nombreUnites >= 20) {
-                tarifLiCubeMensuel = Math.round(tarifLiCubeMensuel * 0.85);
+                facteurVolume = 1.10; // +10% pour volume élevé
             } else if (parametresSimulation.nombreUnites >= 10) {
-                tarifLiCubeMensuel = Math.round(tarifLiCubeMensuel * 0.9);
+                facteurVolume = 1.07; // +7% pour volume moyen
             } else if (parametresSimulation.nombreUnites >= 5) {
-                tarifLiCubeMensuel = Math.round(tarifLiCubeMensuel * 0.95);
+                facteurVolume = 1.03; // +3% pour petit volume
             }
+            
+            // Application des facteurs avec plafond à 200$
+            tarifLiCubeMensuel = Math.min(Math.round(tarifLiCubeMensuel * facteurDuree * facteurVolume), 200);
             
             // Calculs finaux
             const coutLiCubeTotal = tarifLiCubeMensuel * totalMois * parametresSimulation.nombreUnites;
@@ -927,18 +932,18 @@
                 parametresSimulation.dureeContrat = parseInt(this.value);
                 contractValue.textContent = `${this.value} ans`;
                 
-                // Mise à jour impact visuel avec nouvelle logique progressive
+                // Mise à jour impact visuel avec nouvelle grille tarifaire 150-200$
                 if (this.value >= 20) {
-                    contractImpact.textContent = `MINIMUM ${window.pricingManager?.getValue('modes.location.licube.monthly_rate_min') || 100}$/mois GARANTI!`;
-                    contractImpact.className = 'impact-badge impact-extreme';
+                    contractImpact.textContent = 'Contrat longue durée';
+                    contractImpact.className = 'impact-badge impact-high';
                 } else if (this.value >= 15) {
-                    contractImpact.textContent = 'Réductions MAXIMALES!';
+                    contractImpact.textContent = 'Contrat étendu';
                     contractImpact.className = 'impact-badge impact-high';
                 } else if (this.value >= 8) {
-                    contractImpact.textContent = 'Réductions progressives';
+                    contractImpact.textContent = 'Contrat moyen terme';
                     contractImpact.className = 'impact-badge impact-medium';
                 } else {
-                    contractImpact.textContent = `Tarif de base (${window.pricingManager?.getValue('modes.location.licube.monthly_rate') || 150}$/mois)`;
+                    contractImpact.textContent = `Tarif de base (150$/mois)`;
                     contractImpact.className = 'impact-badge impact-low';
                 }
                 
@@ -954,21 +959,21 @@
                 parametresSimulation.nombreUnites = parseInt(this.value);
                 unitsValue.textContent = `${this.value} unité${this.value > 1 ? 's' : ''}`;
                 
-                // Mise à jour impact réductions volume avec nouvelle logique
+                // Mise à jour impact tarification volume avec nouvelle grille 150-200$
                 if (this.value >= 50) {
-                    unitsImpact.textContent = `PRIX MINIMUM ${window.pricingManager?.getValue('modes.location.licube.monthly_rate_min') || 100}$/mois!`;
-                    unitsImpact.className = 'impact-badge impact-extreme';
+                    unitsImpact.textContent = 'Tarif volume élevé';
+                    unitsImpact.className = 'impact-badge impact-high';
                 } else if (this.value >= 20) {
-                    unitsImpact.textContent = 'Réductions MAJEURES -15%';
+                    unitsImpact.textContent = 'Tarif volume important';
                     unitsImpact.className = 'impact-badge impact-high';
                 } else if (this.value >= 10) {
-                    unitsImpact.textContent = 'Réductions volume -10%';
-                    unitsImpact.className = 'impact-badge impact-high';
+                    unitsImpact.textContent = 'Tarif volume moyen';
+                    unitsImpact.className = 'impact-badge impact-medium';
                 } else if (this.value >= 5) {
-                    unitsImpact.textContent = 'Réductions débutant -5%';
+                    unitsImpact.textContent = 'Tarif volume petit';
                     unitsImpact.className = 'impact-badge impact-medium';
                 } else {
-                    unitsImpact.textContent = `Tarif unitaire (${window.pricingManager?.getValue('modes.location.licube.monthly_rate') || 150}$/mois)`;
+                    unitsImpact.textContent = `Tarif unitaire (150$/mois)`;
                     unitsImpact.className = 'impact-badge impact-low';
                 }
                 
@@ -1093,38 +1098,38 @@
             // CALCULS LOCATION LI-CUBE PRO™ AVEC RÉDUCTIONS AUTOMATIQUES
             // =================================================================
             
-            // Loyer mensuel avec nouvelle logique progressive (150$ base, 100$ minimum)
-            let loyerMensuelBase = PricingManager ? PricingManager.config?.modes?.location?.licube?.monthly_rate || 150 : 150; // CAD/mois base (nouveau tarif)
+            // Loyer mensuel avec nouvelle grille tarifaire (150-200$ selon durée et volume)
+            let loyerMensuelBase = PricingManager ? PricingManager.config?.modes?.location?.licube?.monthly_rate || 150 : 150; // CAD/mois base (150-200$ selon volume)
             
-            // Réductions progressives selon durée (base 150$ vers minimum 100$)
-            let reductionDuree = 0;
-            if (dureeAnalyse >= 15 && dureeAnalyse < 20) {
-                reductionDuree = 0.15; // -15% pour 15-19 ans
-            } else if (dureeAnalyse >= 20) {
-                reductionDuree = 0.20; // -20% pour 20+ ans (maximum)
+            // Tarification progressive selon durée (150$ base vers 200$ maximum)
+            let facteurDuree = 1.0; // Facteur multiplicateur base
+            if (dureeAnalyse >= 20) {
+                facteurDuree = 1.33; // 200$ pour 20+ ans (maximum)
+            } else if (dureeAnalyse >= 15) {
+                facteurDuree = 1.27; // 190$ pour 15-19 ans
             } else if (dureeAnalyse >= 12) {
-                reductionDuree = 0.15; // -15% pour 12-14 ans
+                facteurDuree = 1.20; // 180$ pour 12-14 ans
             } else if (dureeAnalyse >= 8) {
-                reductionDuree = 0.10; // -10% pour 8-11 ans
+                facteurDuree = 1.13; // 170$ pour 8-11 ans
             }
-            // Pas de réduction pour 5-7 ans (tarif base 150$)
+            // Facteur 1.0 pour 5-7 ans (tarif base 150$)
             
-            // Réductions progressives selon volume (alignées sur configuration-location.json)
-            let reductionVolume = 0;
+            // Tarification progressive selon volume
+            let facteurVolume = 1.0; // Facteur multiplicateur base
             if (nombreUnites >= 50) {
-                reductionVolume = 0.17; // -17% pour 50+ unités (maximum)
+                facteurVolume = 1.15; // +15% pour volume très élevé
             } else if (nombreUnites >= 20) {
-                reductionVolume = 0.15; // -15% pour 20-49 unités
+                facteurVolume = 1.10; // +10% pour volume élevé
             } else if (nombreUnites >= 10) {
-                reductionVolume = 0.10; // -10% pour 10-19 unités
+                facteurVolume = 1.07; // +7% pour volume moyen
             } else if (nombreUnites >= 5) {
-                reductionVolume = 0.05; // -5% pour 5-9 unités
+                facteurVolume = 1.03; // +3% pour petit volume
             }
-            // Pas de réduction pour 1-4 unités (tarif base 150$)
+            // Facteur 1.0 pour 1-4 unités (tarif unitaire 150$)
             
-            // Calcul final avec réductions combinées, mais minimum garanti à 100$
-            const loyerAvantMinimum = loyerMensuelBase * (1 - reductionDuree) * (1 - reductionVolume);
-            const loyerMensuelFinal = Math.max(loyerAvantMinimum, 100); // MINIMUM 100$ garanti
+            // Calcul final avec tarification progressive, gamme 150-200$
+            const loyerAvecFacteurs = loyerMensuelBase * facteurDuree * facteurVolume;
+            const loyerMensuelFinal = Math.min(Math.max(loyerAvecFacteurs, 150), 200); // GAMME 150-200$ garantie
             const coutLoyersTotal = loyerMensuelFinal * nombreMoisTotal * nombreUnites;
             
             // Frais d'installation avec dégressivité
