@@ -1,0 +1,20 @@
+file,mode,title,tag,class,data_pricing_value,data_pricing_format,data_pricing_suffix,text_sample
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,div,spec-value positive,calculations.tco_location.licube.total_20_years,currency,,CAD
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,div,spec-value negative,calculations.tco_location.nicd.total_20_years,currency,,CAD
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,div,tco-value,calculations.tco_location.savings.amount,currency,,CAD (%)
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,span,,calculations.tco_location.savings.percentage,percentage,,
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,span,,licube.cycle_life,number,,
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,span,,licube.energy_density,number,,
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,span,,licube.weight_kg,number,,
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,span,,licube.weight_reduction_percentage,percentage,,
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,span,,nicd.cycle_life,number,,
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,span,,nicd.energy_density,number,,
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,span,,nicd.maintenance_visits_per_year,number,,
+comparaison-visuelle.html,location,Li-CUBE PRO™ - Comparaison Visuelle,span,,nicd.weight_kg,number,,
+infographie-tco.html,location,Li-CUBE PRO™ - Infographie TCO,div,tco-amount,calculations.tco_location.licube.total_20_years,number,,
+infographie-tco.html,location,Li-CUBE PRO™ - Infographie TCO,div,tco-amount,calculations.tco_location.nicd.total_20_years,number,,
+infographie-tco.html,location,Li-CUBE PRO™ - Infographie TCO,div,savings-amount,calculations.tco_location.savings.total,currency,,CAD
+specifications-techniques.html,location,Li-CUBE PRO™ - Spécifications Techniques,div,metric-value,calculations.tco_location.savings.percentage,number,%,
+specifications-techniques.html,location,Li-CUBE PRO™ - Spécifications Techniques,span,,licube.cycle_life,number,,
+specifications-techniques.html,location,Li-CUBE PRO™ - Spécifications Techniques,span,,licube.weight_reduction_percentage,number,,
+specifications-techniques.html,location,Li-CUBE PRO™ - Spécifications Techniques,div,metric-value,licube.weight_reduction_percentage,number,%,

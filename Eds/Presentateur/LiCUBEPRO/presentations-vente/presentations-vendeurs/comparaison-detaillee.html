@@ -480,7 +480,7 @@
                             </li>
                             <li class="spec-item">
                                 <span class="spec-label">Tension nominale</span>
-                                <span class="spec-value">25.6V</span>
+                                <span class="spec-value"><span data-pricing-value="licube.voltage_nominal_v" data-pricing-format="voltage">—</span></span>
                             </li>
                             <li class="spec-item">
                                 <span class="spec-label">Durée de vie</span>
@@ -492,11 +492,11 @@
                             </li>
                             <li class="spec-item">
                                 <span class="spec-label">Dimensions</span>
-                                <span class="spec-value">420×240×155 mm</span>
+                                <span class="spec-value"><span data-pricing-value="licube.dimensions_mm.0" data-pricing-format="number">—</span>×<span data-pricing-value="licube.dimensions_mm.1" data-pricing-format="number">—</span>×<span data-pricing-value="licube.dimensions_mm.2" data-pricing-format="number">—</span> mm</span>
                             </li>
                             <li class="spec-item">
                                 <span class="spec-label">Densité énergétique</span>
-                                <span class="spec-value positive">117 Wh/kg</span>
+                                <span class="spec-value positive"><span data-pricing-value="licube.energy_density_wh_per_kg" data-pricing-format="number">—</span> Wh/kg</span>
                             </li>
                             <li class="spec-item">
                                 <span class="spec-label">Temps de charge</span>
@@ -596,9 +596,9 @@
                             <div class="bar-container">
                                 <div class="bar-label">LFP</div>
                                 <div class="bar-track">
-                                    <div class="bar-fill lfp" style="width: 100%;">117</div>
+                                    <div class="bar-fill lfp" style="width: 100%;"><span data-pricing-value="licube.energy_density_wh_per_kg" data-pricing-format="number">—</span></div>
                                 </div>
-                                <div class="bar-value">117 Wh/kg</div>
+                                <div class="bar-value"><span data-pricing-value="licube.energy_density_wh_per_kg" data-pricing-format="number">—</span> Wh/kg</div>
                             </div>
                             <div class="bar-container">
                                 <div class="bar-label">Ni-Cd</div>
@@ -677,7 +677,7 @@
 
                     <div class="advantage-card">
                         <div class="advantage-title">Performance énergétique</div>
-                        <div class="advantage-description">117 Wh/kg (4× Ni-Cd), 157 Wh/L (6× plus compact)</div>
+                        <div class="advantage-description"><span data-pricing-value="licube.energy_density_wh_per_kg" data-pricing-format="number">—</span> Wh/kg (4× Ni-Cd), 157 Wh/L (6× plus compact)</div>
                         <div class="impact-badge positive">Installation simplifiée</div>
                     </div>
 
@@ -724,7 +724,7 @@
 
                     <div class="weakness-card">
                         <div class="weakness-title">Poids et encombrement</div>
-                        <div class="weakness-description">80-100kg, manipulation difficile, installation contraignante</div>
+                        <div class="weakness-description"><span data-pricing-value="nicd.weight_kg" data-pricing-format="weight">—</span>, manipulation difficile, installation contraignante</div>
                         <div class="weakness-impact">Risque: Sécurité personnel, logistique</div>
                     </div>
 
@@ -1024,6 +1024,10 @@
             });
         });
     </script>
+    
+    <!-- Scripts système de variables globales -->
+    <script src="../../js/globals-manager.js" defer></script>
+    <script src="../../js/hardcoded-replacer.js" defer></script>
     
     <!-- Script système de notes testeur alpha -->
     <script src="../../module_notes/notes-module.js"></script>

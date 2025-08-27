@@ -599,9 +599,9 @@
                     <div class="slider-container">
                         <div class="slider-label">
                             <span>💰 Coût maintenance Ni-Cd/an</span>
-                            <span class="slider-value" id="maintenanceValue">2 112 CAD</span>
+                            <span class="slider-value" id="maintenanceValue"><span data-pricing-value="nicd.maintenance_annual" data-pricing-format="currency">—</span> CAD</span>
                         </div>
-                        <input type="range" min="1500" max="5000" value="2112" step="100" class="slider" id="maintenanceSlider">
+                        <input type="range" min="1500" max="5000" value="2112" step="100" class="slider" id="maintenanceSlider" data-pricing-bind="nicd.maintenance_annual">
                         <div class="slider-range">
                             <span>1 500 CAD/an (minimum)</span>
                             <span>5 000 CAD/an (réalité terrain)</span>
@@ -723,6 +723,9 @@
 
     <!-- Calculateur TCO avec sliders fonctionnels et chargement JSON admin -->
     
+    <!-- Intégration du système de prix centralisé -->
+    <script src="../../js/pricing-manager.js"></script>
+    
     <script>
         /**
          * Calculateur TCO intégré avec le système de prix centralisé
@@ -754,9 +757,9 @@
                     taxes_percent: 14.975,
                     installation_cost: 500,
                     price_total: 13797, // Calculé : 12000 + 14.975% + 500
-                    maintenance_annual: 2112,
+                    maintenance_annual: 2500, // Correction validée
                     replacement_cycle_years: 4,
-                    cycles: 1500,
+                    cycles: 2500, // Correction validée
                     lifespan_years: 20
                 }
             }
@@ -765,7 +768,7 @@
         // Paramètres de simulation interactifs (initialisés avec valeurs par défaut)
         let parametresSimulation = {
             nombreUnites: 1,
-            coutMaintenanceNiCd: VALEURS_DEFAUT.vente.nicd.maintenance_annual,
+            coutMaintenanceNiCd: 2500, // Valeur corrigée selon mapping
             dureeVieNiCd: VALEURS_DEFAUT.vente.nicd.replacement_cycle_years
         };
         
@@ -1085,6 +1088,10 @@
     
     <!-- Script système de notes testeur alpha -->
     <script src="../../module_notes/notes-module.js"></script>
+    
+    <!-- Scripts système de variables globales -->
+    <script src="../../js/globals-manager.js" defer></script>
+    <script src="../../js/hardcoded-replacer.js" defer></script>
     
     <!-- Script navigation retour et gestion musique -->
     <script src="../../js/navigation-retour.js"></script>

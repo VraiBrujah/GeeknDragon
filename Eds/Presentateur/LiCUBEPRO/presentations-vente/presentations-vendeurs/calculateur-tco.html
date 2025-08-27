@@ -599,9 +599,9 @@
                     <div class="slider-container">
                         <div class="slider-label">
                             <span>💰 Coût maintenance Ni-Cd/an</span>
-                            <span class="slider-value" id="maintenanceValue">2 112 CAD</span>
+                            <span class="slider-value" id="maintenanceValue"><span data-pricing-value="nicd.maintenance_annual" data-pricing-format="currency">—</span> CAD</span>
                         </div>
-                        <input type="range" min="1500" max="5000" value="2112" step="100" class="slider" id="maintenanceSlider">
+                        <input type="range" min="1500" max="5000" value="2500" step="100" class="slider" id="maintenanceSlider" data-pricing-bind="nicd.maintenance_annual">
                         <div class="slider-range">
                             <span>1 500 CAD/an (minimum)</span>
                             <span>5 000 CAD/an (réalité terrain)</span>
@@ -644,7 +644,7 @@
                     <div class="result-title">
                         🌆 Li-CUBE PRO™ - Technologie 2025
                     </div>
-                    <div class="result-value" id="lfpTotal">5 750 CAD</div>
+                    <div class="result-value" id="lfpTotal" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency"> CAD</div>
                     <div class="result-subtitle">Coût total sur la période</div>
                 </div>
 
@@ -652,7 +652,7 @@
                     <div class="result-title">
                         ⚠️ Ni-Cd - Technologie 1980 obsolète
                     </div>
-                    <div class="result-value" id="nicdTotal">48 797 CAD</div>
+                    <div class="result-value" id="nicdTotal" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency"> CAD</div>
                     <div class="result-subtitle">Coût total sur la période</div>
                 </div>
 
@@ -660,8 +660,8 @@
                     <div class="result-title">
                         🚀 Économies SPECTACULAIRES
                     </div>
-                    <div class="result-value" id="totalSavings">43 047 CAD</div>
-                    <div class="result-subtitle" id="savingsPercentage">88% d'économies</div>
+                    <div class="result-value" id="totalSavings" data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency"> CAD</div>
+                    <div class="result-subtitle" id="savingsPercentage"><span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="number">—</span>% d'économies</div>
                 </div>
             </div>
 
@@ -670,27 +670,27 @@
                 <div class="breakdown-grid">
                     <div class="breakdown-item">
                         <h4>🔋 Li-CUBE PRO™ - Technologie 2025 moderne</h4>
-                        <div class="breakdown-value" id="lfpInitial">5 750 CAD + taxes + installation</div>
+                        <div class="breakdown-value" id="lfpInitial"><span data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency">—</span> CAD + taxes + installation</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>📱 Li-CUBE PRO™ - Monitoring optionnel</h4>
-                        <div class="breakdown-value" id="lfpMonitoring">20$/mois (optionnel)</div>
+                        <div class="breakdown-value" id="lfpMonitoring"><span data-pricing-value="licube.monitoring_monthly" data-pricing-format="currency">—</span>$/mois (optionnel)</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>⚠️ Ni-Cd - Technologie 1980 obsolète</h4>
-                        <div class="breakdown-value" id="nicdInitial">13 797 CAD</div>
+                        <div class="breakdown-value" id="nicdInitial"><span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">—</span> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🔧 Ni-Cd - Coûts maintenance obligatoire</h4>
-                        <div class="breakdown-value" id="nicdMaintenance">42 240 CAD</div>
+                        <div class="breakdown-value" id="nicdMaintenance"><span data-pricing-value="calculations.tco_vente.nicd.maintenance_20_years" data-pricing-format="currency">—</span> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>🔄 Ni-Cd - 4 remplacements forcés</h4>
-                        <div class="breakdown-value" id="nicdReplacements">55 188 CAD</div>
+                        <div class="breakdown-value" id="nicdReplacements"><span data-pricing-value="calculations.tco_vente.nicd.replacements_cost" data-pricing-format="currency">—</span> CAD</div>
                     </div>
                     <div class="breakdown-item">
                         <h4>Retour sur investissement</h4>
-                        <div class="breakdown-value" id="roi">ROI: <span>2.7</span> ans</div>
+                        <div class="breakdown-value" id="roi">ROI: <span data-pricing-value="calculations.tco_vente.savings.roi_years" data-pricing-format="number">—</span> ans</div>
                     </div>
                 </div>
             </div>
@@ -1283,6 +1283,13 @@
             });
         });
     </script>
+
+    <!-- Intégration du système de prix centralisé -->
+    <script src="../../js/pricing-manager.js"></script>
+    
+    <!-- Scripts système de variables globales -->
+    <script src="../../js/globals-manager.js" defer></script>
+    <script src="../../js/hardcoded-replacer.js" defer></script>
 
     <!-- Système de notes testeur - Phase Alpha -->
     <script src="../../module_notes/notes-module.js"></script>

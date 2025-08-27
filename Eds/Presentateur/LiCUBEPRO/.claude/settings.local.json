@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for:*)",
+      "Bash(do echo \"=== Checking: $file ===\")",
+      "Bash(grep:*)",
+      "Bash(done)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(tail:*)",
+      "Bash(find:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

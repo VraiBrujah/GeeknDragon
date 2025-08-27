@@ -1282,6 +1282,66 @@
         });
     </script>
 
+    <!-- Système de prix centralisé -->
+    <script src="../../js/globals-manager.js"></script>
+    <script src="../../js/hardcoded-replacer.js"></script>
+    <script src="../../js/pricing-manager.js"></script>
+    
+    <!-- Initialisation système centralisé pour calculateur location -->
+    <script>
+        /**
+         * Rôle      : Initialiser le système de prix centralisé pour le calculateur location
+         * Type      : fonction d'initialisation
+         * Effet     : Remplace les valeurs hardcodées par les données centralisées
+         * Mode      : Location (utilise calculations.tco_location.*)
+         */
+        function initCalculateurTcoLocation() {
+            console.log('✅ Système de prix centralisé activé - Calculateur TCO location...');
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                const updateCount = window.pricingManager.updatePrices();
+                console.log(`🔄 ${updateCount} éléments mis à jour dans calculateur TCO location`);
+                
+                // Récupérer les valeurs centralisées pour le calculateur
+                updateCalculateurWithCentralizedData();
+            }
+        }
+        
+        /**
+         * Rôle      : Mettre à jour le calculateur avec les données centralisées
+         * Type      : fonction de synchronisation
+         * Effet     : Synchronise les paramètres du calculateur avec les données centrales
+         */
+        function updateCalculateurWithCentralizedData() {
+            if (!window.pricingManager || !window.pricingManager.isLoaded) return;
+            
+            // Récupérer les prix de location centralisés
+            const licubePriceLocation = window.pricingManager.getValue('calculations.tco_location.licube.initial_cost') || 5750;
+            const nicdMaintenanceAnnuelle = window.pricingManager.getValue('nicd.maintenance_cost_per_year') || 2112;
+            
+            console.log(`📊 Prix Li-CUBE location centralisé: ${licubePriceLocation} CAD`);
+            console.log(`🔧 Maintenance Ni-Cd centralisée: ${nicdMaintenanceAnnuelle} CAD/an`);
+            
+            // Mettre à jour les paramètres du calculateur si ils existent
+            if (typeof parametresSliders !== 'undefined') {
+                parametresSliders.prixUnitaireLiCube = licubePriceLocation;
+                parametresSliders.coutMaintenanceNiCd = nicdMaintenanceAnnuelle;
+            }
+        }
+        
+        // Initialiser quand le pricing manager est prêt
+        if (window.pricingManager && window.pricingManager.isLoaded) {
+            initCalculateurTcoLocation();
+        } else {
+            document.addEventListener('pricingManagerReady', initCalculateurTcoLocation);
+            // Timeout de sécurité
+            setTimeout(() => {
+                if (window.pricingManager) {
+                    initCalculateurTcoLocation();
+                }
+            }, 2000);
+        }
+    </script>
+
     <!-- Système de notes testeur - Phase Alpha -->
     <script src="../../module_notes/notes-module.js"></script>
     

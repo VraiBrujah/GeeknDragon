@@ -476,7 +476,7 @@
                         <ul class="spec-list">
                             <li class="spec-item">
                                 <span class="spec-label">Capacité</span>
-                                <span class="spec-value positive">105Ah (2688Wh)</span>
+                                <span class="spec-value positive">105Ah (<span data-pricing-value="licube.energy_total_wh" data-pricing-format="number"></span>Wh)</span>
                             </li>
                             <li class="spec-item">
                                 <span class="spec-label">Tension nominale</span>
@@ -488,7 +488,7 @@
                             </li>
                             <li class="spec-item">
                                 <span class="spec-label">Poids</span>
-                                <span class="spec-value positive">23 kg</span>
+                                <span class="spec-value positive"><span data-pricing-value="licube.weight_kg" data-pricing-format="number"></span> kg</span>
                             </li>
                             <li class="spec-item">
                                 <span class="spec-label">Dimensions</span>
@@ -642,7 +642,7 @@
                                 <div class="bar-track">
                                     <div class="bar-fill lfp" style="width: 29%;">23kg</div>
                                 </div>
-                                <div class="bar-value">23 kg</div>
+                                <div class="bar-value"><span data-pricing-value="licube.weight_kg" data-pricing-format="number"></span> kg</div>
                             </div>
                             <div class="bar-container">
                                 <div class="bar-label">Ni-Cd</div>
@@ -937,6 +937,41 @@
         });
     </script>
     
+    <!-- Système de prix centralisé -->
+    <script src="../../js/globals-manager.js"></script>
+    <script src="../../js/hardcoded-replacer.js"></script>
+    <script src="../../js/pricing-manager.js"></script>
+    
+    <!-- Initialisation système centralisé pour comparaison détaillée location -->
+    <script>
+        /**
+         * Rôle      : Initialiser le système de prix centralisé pour comparaison détaillée location
+         * Type      : fonction d'initialisation
+         * Effet     : Remplace les valeurs hardcodées par les données centralisées
+         * Mode      : Location (utilise calculations.tco_location.*)
+         */
+        function initComparaisonDetaillee() {
+            console.log('✅ Système de prix centralisé activé - Comparaison détaillée location...');
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                const updateCount = window.pricingManager.updatePrices();
+                console.log(`🔄 ${updateCount} éléments mis à jour dans comparaison détaillée location`);
+            }
+        }
+        
+        // Initialiser quand le pricing manager est prêt
+        if (window.pricingManager && window.pricingManager.isLoaded) {
+            initComparaisonDetaillee();
+        } else {
+            document.addEventListener('pricingManagerReady', initComparaisonDetaillee);
+            // Timeout de sécurité
+            setTimeout(() => {
+                if (window.pricingManager) {
+                    initComparaisonDetaillee();
+                }
+            }, 2000);
+        }
+    </script>
+
     <!-- Script système de notes testeur alpha -->
     <script src="../../module_notes/notes-module.js"></script>
     

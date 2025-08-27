@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Flyer Client Standard</title>
+    <style>
+        /**
+         * =================================================================
+         * FLYER CLIENT STANDARD LI-CUBE PRO™ - DESIGN HARMONISÉ
+         * =================================================================
+         */
+        :root {
+            /* Couleurs principales thème EDS Québec */
+            --primary: #003F7F;
+            --secondary: #4A90B8;
+            --accent: #F18F01;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #003F7F 0%, #4A90B8 100%);
+            --gradient-accent: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
+            
+            /* Couleurs neutres */
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --dark: #1B365D;
+            
+            /* Effets et ombres */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.2);
+            --shadow-xl: 0 15px 40px rgba(0,0,0,0.25);
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.6s ease;
+            
+            /* Rayons de bordure */
+            --radius-sm: 6px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 20px;
+            
+            /* Typographie */
+            --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        
+        @page {
+            size: 816px 1056px;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background: var(--gradient-primary);
+            color: #333;
+            line-height: 1.4;
+            width: 816px;
+            height: 1056px;
+            overflow: auto;
+            position: relative;
+        }
+        
+        /* Background animé harmonisé avec licubepro.html */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(241, 143, 1, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(74, 144, 184, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .flyer-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 20mm 15mm 15mm 15mm;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(15deg);
+        }
+        
+        .logo-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8mm;
+        }
+        
+        .logo {
+            font-size: 18pt;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .subtitle {
+            font-size: 10pt;
+            opacity: 0.9;
+        }
+        
+        .main-title {
+            font-size: 28pt;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 5mm;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 14pt;
+            text-align: center;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 10mm 15mm;
+            background: var(--white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8mm;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .comparison-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 6mm;
+            box-shadow: var(--shadow-lg);
+            border-left: 4mm solid var(--success);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all var(--transition-normal);
+        }
+        
+        .comparison-section:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        .comparison-section.nicd {
+            border-left-color: var(--danger);
+        }
+        
+        .section-title {
+            font-size: 16pt;
+            font-weight: 700;
+            margin-bottom: 4mm;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 40mm;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-sm);
+            margin-bottom: 4mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            color: var(--gray-600);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .spec-list {
+            list-style: none;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 2mm 0;
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 9pt;
+            transition: all var(--transition-fast);
+        }
+        
+        .spec-item:hover {
+            background: rgba(241, 143, 1, 0.05);
+            transform: translateX(2px);
+        }
+        
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .spec-value {
+            font-weight: 500;
+        }
+        
+        .spec-value.positive {
+            color: var(--success);
+            font-weight: 700;
+        }
+        
+        .spec-value.negative {
+            color: var(--danger);
+            font-weight: 700;
+        }
+        
+        .advantages-grid {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4mm;
+            margin-top: 6mm;
+        }
+        
+        .advantage-card {
+            background: linear-gradient(135deg, var(--success) 0%, #34CE57 100%);
+            color: var(--white);
+            padding: 4mm;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all var(--transition-normal);
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .advantage-icon {
+            font-size: 20pt;
+            margin-bottom: 2mm;
+        }
+        
+        .advantage-title {
+            font-size: 11pt;
+            font-weight: 700;
+            margin-bottom: 1mm;
+        }
+        
+        .advantage-desc {
+            font-size: 8pt;
+            opacity: 0.9;
+        }
+        
+        .tco-highlight {
+            grid-column: 1 / -1;
+            background: var(--gradient-accent);
+            color: var(--white);
+            padding: 6mm;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin-top: 4mm;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(241, 143, 1, 0.3);
+        }
+        
+        .tco-title {
+            font-size: 18pt;
+            font-weight: 800;
+            margin-bottom: 2mm;
+        }
+        
+        .tco-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 4mm;
+            align-items: center;
+            margin: 4mm 0;
+        }
+        
+        .tco-value {
+            font-size: 16pt;
+            font-weight: 700;
+        }
+        
+        .tco-vs {
+            font-size: 24pt;
+            font-weight: 800;
+            opacity: 0.8;
+        }
+        
+        .tco-savings {
+            font-size: 14pt;
+            font-weight: 600;
+            margin-top: 2mm;
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 8mm 15mm;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8mm;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4mm;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+            font-size: 10pt;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .contact-item span:last-child {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        
+        /* Style pour les numéros de téléphone */
+        .phone, .tel, .telephone {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        /* Style pour les emails */
+        .email, .mail {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        .contact-icon {
+            font-size: 12pt;
+            color: var(--accent);
+        }
+        
+        
+        .certifications {
+            position: absolute;
+            top: 8mm;
+            right: 15mm;
+            display: flex;
+            gap: 2mm;
+        }
+        
+        .cert-badge {
+            background: var(--dark);
+            color: var(--white);
+            backdrop-filter: blur(10px);
+            padding: 1mm 2mm;
+            border-radius: var(--radius-sm);
+            font-size: 7pt;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    
+        /* BOUTON IMPRESSION PDF */
+        .pdf-print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: var(--gradient-accent);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-normal);
+            font-family: var(--font-family);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(241, 143, 1, 0.3);
+        }
+        
+        .pdf-print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            background: linear-gradient(135deg, #ff6b35 0%, var(--accent) 100%);
+        }
+        
+        .pdf-print-btn:active {
+            transform: translateY(0);
+        }
+        
+        .pdf-print-btn::before {
+            content: '🖨️';
+            font-size: 16px;
+        }
+        
+        @media print {
+            .pdf-print-btn {
+                display: none !important;
+            }
+        }
+        
+        
+        
+        
+        /* CSS IMPRESSION SIMPLE */
+        @media print {
+            /* Préserver les couleurs */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Masquer seulement les boutons */
+            .pdf-print-btn {
+                display: none !important;
+            }
+            
+            /* NE PAS modifier la taille ou position du contenu */
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+        
+        /* Styles pour le dialogue simple */
+        .simple-print-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            z-index: 10000;
+            padding: 20px;
+            min-width: 350px;
+            border: 1px solid #ddd;
+        }
+        
+        .simple-print-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 9999;
+        }
+        
+        .simple-dialog-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1B365D;
+        }
+        
+        .simple-option-group {
+            margin-bottom: 12px;
+        }
+        
+        .simple-option-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+            display: block;
+        }
+        
+        .simple-option-select {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .simple-dialog-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .simple-print-btn, .simple-cancel-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .simple-print-btn {
+            background: var(--accent);
+            color: var(--white);
+        }
+        
+        .simple-print-btn:hover {
+            background: #d47a01;
+        }
+        
+        .simple-cancel-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .simple-cancel-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        </style>
+</head>
+<body>
+
+        <button id="pdf-print-btn" class="pdf-print-btn" onclick="imprimerSimple()" title="Imprimer en PDF avec options (Ctrl+P)">
+            Imprimer en PDF
+        </button>
+        
+    <div class="flyer-container">
+        <!-- En-tête -->
+        <div class="header">
+            <div class="certifications">
+                <div class="cert-badge">CSA</div>
+                <div class="cert-badge">UL1973</div>
+                <div class="cert-badge">CE</div>
+                <div class="cert-badge">RoHS</div>
+            </div>
+            
+            <div class="logo-section">
+                <div>
+                    <div class="logo">EDS QUÉBEC</div>
+                    <div class="subtitle">Innovation Énergétique</div>
+                </div>
+            </div>
+            
+            <div class="main-title">Li-CUBE PRO™</div>
+            <div class="tagline">Révolutionnez vos systèmes de batteries ferroviaires<br>
+            Remplacez vos batteries Ni-Cd par la technologie LiFePO4</div>
+        </div>
+        
+        <!-- Contenu principal -->
+        <div class="content">
+            <!-- Section Li-CUBE PRO -->
+            <div class="comparison-section">
+                <div class="section-title">
+                    🟢 Li-CUBE PRO™ LFP
+                </div>
+                
+                <div class="product-image">
+                    <img data-licube-image="Li-CUBE PRO image 1.png" data-depth="4" alt="Li-CUBE PRO™" class="licube-product-image" style="width: 100%; height: 120px; object-fit: contain; border-radius: 8px; background: rgba(255,255,255,0.1);"><br>
+                    25.6V 105Ah
+                </div>
+                
+                <ul class="spec-list">
+                    <li class="spec-item">
+                        <span class="spec-label">Capacité</span>
+                        <span class="spec-value positive">105Ah (2688Wh)</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Durée de vie</span>
+                        <span class="spec-value positive">≥8000 cycles</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Poids</span>
+                        <span class="spec-value positive">23 kg</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Charge</span>
+                        <span class="spec-value positive">1-2h rapide</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Maintenance</span>
+                        <span class="spec-value positive">Zéro</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Connectivité</span>
+                        <span class="spec-value positive">IoT complet</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Température</span>
+                        <span class="spec-value">-40°C à +55°C</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Écologie</span>
+                        <span class="spec-value positive">Sans cadmium</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Section Ni-Cd -->
+            <div class="comparison-section nicd">
+                <div class="section-title">
+                    🔴 Batteries Ni-Cd
+                </div>
+                
+                <div class="product-image">
+                    <img src="../../../image/Ni-Cd/NiCd.png" alt="Batterie Ni-Cd" style="width: 100%; height: 120px; object-fit: contain; border-radius: 8px; background: rgba(220,53,69,0.1);"><br>
+                    24V 100Ah
+                </div>
+                
+                <ul class="spec-list">
+                    <li class="spec-item">
+                        <span class="spec-label">Capacité</span>
+                        <span class="spec-value">100Ah (2400Wh)</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Durée de vie</span>
+                        <span class="spec-value negative">2000-3000 cycles</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Poids</span>
+                        <span class="spec-value negative">~80 kg</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Charge</span>
+                        <span class="spec-value negative">8-12h lente</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Maintenance</span>
+                        <span class="spec-value negative">2 visites/an</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Connectivité</span>
+                        <span class="spec-value negative">Aucune</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Température</span>
+                        <span class="spec-value">-50°C à +70°C</span>
+                    </li>
+                    <li class="spec-item">
+                        <span class="spec-label">Écologie</span>
+                        <span class="spec-value negative">Cadmium toxique</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Avantages clés -->
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">⚡</div>
+                    <div class="advantage-title">4× Plus Durable</div>
+                    <div class="advantage-desc">8000+ cycles vs 1500 cycles</div>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">🔧</div>
+                    <div class="advantage-title">Zéro Maintenance</div>
+                    <div class="advantage-desc">vs 2 visites/an obligatoires</div>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="advantage-icon">📡</div>
+                    <div class="advantage-title">100% Connecté</div>
+                    <div class="advantage-desc">GPS, Wi-Fi, monitoring temps réel</div>
+                </div>
+            </div>
+            
+            <!-- Highlight TCO -->
+            <div class="tco-highlight">
+                <div class="tco-title">💰 ÉCONOMIES GARANTIES</div>
+                <div class="tco-comparison">
+                    <div>
+                        <div style="font-size: 10pt; opacity: 0.9;">Li-CUBE PRO™</div>
+                        <div class="tco-value" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">6 325 CAD</div>
+                        <div style="font-size: 8pt;">TCO 20 ans</div>
+                    </div>
+                    <div class="tco-vs">VS</div>
+                    <div>
+                        <div style="font-size: 10pt; opacity: 0.9;">Ni-Cd</div>
+                        <div class="tco-value" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">57 040 CAD</div>
+                        <div style="font-size: 8pt;">TCO 20 ans</div>
+                    </div>
+                </div>
+                <div class="tco-savings">
+                    ✨ <span data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">49 490 CAD</span> d'économies (<span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="number">90</span>% moins cher!)
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pied de page -->
+        <div class="footer">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span class="email">contact@edsquebec.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🌐</span>
+                    <span>https://edsquebec.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span class="phone">819&nbsp;323&nbsp;7859</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>Québec, Canada</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        function afficherOptionsSimples() {
+            // Créer l'overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'simple-print-overlay';
+            
+            // Créer le dialogue
+            const dialog = document.createElement('div');
+            dialog.className = 'simple-print-dialog';
+            dialog.innerHTML = `
+                <div class="simple-dialog-header">
+                    Options d'impression
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Format de page :</label>
+                    <select id="simple-page-format" class="simple-option-select">
+                        <option value="auto">Automatique</option>
+                        <option value="a4">A4 Portrait</option>
+                        <option value="a4-landscape">A4 Paysage</option>
+                        <option value="letter">Lettre US Portrait</option>
+                        <option value="letter-landscape">Lettre US Paysage</option>
+                        <option value="a3">A3 Portrait</option>
+                        <option value="a3-landscape">A3 Paysage</option>
+                    </select>
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Échelle (réduire si contenu dépasse) :</label>
+                    <select id="simple-print-scale" class="simple-option-select">
+                        <option value="100">100% (Taille normale)</option>
+                        <option value="90">90%</option>
+                        <option value="80">80%</option>
+                        <option value="70">70%</option>
+                        <option value="60">60%</option>
+                        <option value="50">50%</option>
+                        <option value="40">40%</option>
+                    </select>
+                </div>
+                
+                <div class="simple-dialog-buttons">
+                    <button class="simple-cancel-btn" onclick="fermerOptionsSimples()">Annuler</button>
+                    <button class="simple-print-btn" onclick="imprimerAvecOptionsSimples()">Imprimer</button>
+                </div>
+            `;
+            
+            // Ajouter au DOM
+            document.body.appendChild(overlay);
+            document.body.appendChild(dialog);
+            
+            // Fermer en cliquant sur l'overlay
+            overlay.addEventListener('click', fermerOptionsSimples);
+        }
+        
+        function fermerOptionsSimples() {
+            const overlay = document.querySelector('.simple-print-overlay');
+            const dialog = document.querySelector('.simple-print-dialog');
+            if (overlay) overlay.remove();
+            if (dialog) dialog.remove();
+        }
+        
+        function imprimerAvecOptionsSimples() {
+            const format = document.getElementById('simple-page-format').value;
+            const scale = document.getElementById('simple-print-scale').value;
+            
+            // Appliquer seulement le format et l'échelle
+            appliquerStylesSimples(format, scale);
+            
+            // Fermer le dialogue
+            fermerOptionsSimples();
+            
+            // Attendre et imprimer
+            setTimeout(() => {
+                window.print();
+                
+                // Restaurer après impression
+                setTimeout(restaurerStylesSimples, 800);
+            }, 100);
+        }
+        
+        function appliquerStylesSimples(format, scale) {
+            // Supprimer l'ancien style
+            const ancienStyle = document.getElementById('simple-print-styles');
+            if (ancienStyle) ancienStyle.remove();
+            
+            // Créer le nouveau style
+            const style = document.createElement('style');
+            style.id = 'simple-print-styles';
+            
+            let cssFormat = '';
+            switch(format) {
+                case 'a4':
+                    cssFormat = '@page { size: A4 portrait; margin: 10mm; }';
+                    break;
+                case 'a4-landscape':
+                    cssFormat = '@page { size: A4 landscape; margin: 10mm; }';
+                    break;
+                case 'letter':
+                    cssFormat = '@page { size: letter portrait; margin: 0.4in; }';
+                    break;
+                case 'letter-landscape':
+                    cssFormat = '@page { size: letter landscape; margin: 0.4in; }';
+                    break;
+                case 'a3':
+                    cssFormat = '@page { size: A3 portrait; margin: 15mm; }';
+                    break;
+                case 'a3-landscape':
+                    cssFormat = '@page { size: A3 landscape; margin: 15mm; }';
+                    break;
+                default:
+                    cssFormat = '@page { size: auto; margin: 10mm; }';
+            }
+            
+            let cssScale = '';
+            if (scale !== '100') {
+                const scaleValue = parseInt(scale) / 100;
+                cssScale = `
+                    body {
+                        transform: scale(${scaleValue});
+                        transform-origin: top left;
+                        width: ${100 / scaleValue}%;
+                        height: ${100 / scaleValue}%;
+                    }
+                `;
+            }
+            
+            style.textContent = `@media print { ${cssFormat} ${cssScale} }`;
+            document.head.appendChild(style);
+        }
+        
+        function restaurerStylesSimples() {
+            const dynamicStyles = document.getElementById('simple-print-styles');
+            if (dynamicStyles) {
+                dynamicStyles.remove();
+            }
+        }
+        
+        function imprimerSimple() {
+            afficherOptionsSimples();
+        }
+        
+        // Fonction pour compatibilité
+        function imprimerPDF() {
+            imprimerSimple();
+        }
+        
+        function imprimerPDFAmeliore() {
+            imprimerSimple();
+        }
+        
+        // Raccourci clavier
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'p') {
+                event.preventDefault();
+                imprimerSimple();
+            }
+        });
+        </script>
+        
+        <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
+        <script src="../../../js/image-config.js"></script>
+        
+        <!-- Intégration du système de prix centralisé -->
+        <script src="../../../js/pricing-manager.js"></script>
+        
+        <script>
+            /**
+             * Flyer client vente intégré avec le système de prix centralisé
+             * 
+             * Rôle : Remplacer TOUS les prix hardcodés par des données du pricing-manager.js
+             * Fonctionnement : Charge et affiche automatiquement les prix depuis pricing-config.json
+             */
+            
+            // Le pricingManager global est disponible via window.pricingManager
+            let currentMode = 'vente'; // Mode par défaut pour presentations-vente
+            
+            /**
+             * Initialise le flyer vente avec le système centralisé
+             */
+            function initFlyerVente() {
+                console.log('🚀 Initialisation flyer vente avec SimplePricingManager global...');
+                
+                // Utiliser le SimplePricingManager global
+                if (window.pricingManager && window.pricingManager.isLoaded) {
+                    console.log('✅ SimplePricingManager déjà disponible pour flyer vente');
+                    updateFlyerVente();
+                } else {
+                    // Attendre que le pricing manager global soit prêt
+                    document.addEventListener('pricingManagerReady', function() {
+                        console.log('✅ SimplePricingManager maintenant disponible pour flyer vente');
+                        updateFlyerVente();
+                    });
+                    
+                    // Timeout de sécurité
+                    setTimeout(() => {
+                        if (window.pricingManager) {
+                            updateFlyerVente();
+                        } else {
+                            console.error('❌ SimplePricingManager non disponible après timeout');
+                        }
+                    }, 2000);
+                }
+            }
+            
+            /**
+             * Met à jour les éléments du flyer vente
+             */
+            function updateFlyerVente() {
+                if (!window.pricingManager || !window.pricingManager.isLoaded) {
+                    console.warn('⚠️ SimplePricingManager non disponible pour updateFlyerVente');
+                    return;
+                }
+                
+                console.log('🔄 Mise à jour des éléments de flyer vente...');
+                
+                // Mettre à jour tous les éléments avec data-pricing-value
+                const updateCount = window.pricingManager.updatePrices();
+                console.log(`✅ ${updateCount} éléments mis à jour dans flyer vente`);
+            }
+
+            // Initialisation automatique au chargement de la page
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log(`📊 Mode: ${currentMode}`);
+                
+                // Initialiser le système de prix centralisé
+                initFlyerVente();
+            });
+        </script>
+        
+        <!-- Script système de notes testeur alpha -->
+        <script src="../../../module_notes/notes-module.js"></script>
+        
+</body>
+</html>

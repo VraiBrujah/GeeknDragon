@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Présentation Executive PDF Location</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Couleurs principales thème EDS Québec harmonisées */
+            --primary: #1B365D;
+            --secondary: #2E86AB;
+            --accent: #F18F01;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --light: #F8F9FA;
+            --dark: #212529;
+            
+            /* Gradients modernes */
+            --gradient-primary: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            --gradient-success: linear-gradient(135deg, #28A745 0%, #20B2AA 100%);
+            --gradient-warning: linear-gradient(135deg, #F18F01 0%, #FF6B35 100%);
+            --gradient-dark: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            
+            /* Ombres et effets */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.6s ease;
+            
+            /* Rayons de bordure */
+            --radius-sm: 8px;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+        
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-dark);
+            color: white;
+            line-height: 1.4;
+            font-size: 10pt;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* Background animé */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(241, 143, 1, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(46, 134, 171, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .document-container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cover-page {
+            background: var(--gradient-primary);
+            backdrop-filter: blur(20px);
+            color: white;
+            border-radius: var(--radius-xl);
+            padding: 12mm;
+            margin-bottom: 8mm;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 80mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(15deg);
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: auto;
+        }
+        
+        .company-logo {
+            font-size: 20pt;
+            font-weight: 900;
+            background: var(--gradient-warning);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 3mm;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .cover-title {
+            font-size: 32pt;
+            font-weight: 900;
+            margin-bottom: 4mm;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cover-subtitle {
+            font-size: 16pt;
+            opacity: 0.95;
+            margin-bottom: 6mm;
+            font-weight: 300;
+        }
+        
+        .cover-proposition {
+            background: rgba(241, 143, 1, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 6mm;
+            border-radius: 6mm;
+            font-size: 18pt;
+            font-weight: 700;
+            border: 2px solid rgba(241, 143, 1, 0.5);
+            margin-bottom: 6mm;
+        }
+        
+        .cover-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4mm;
+        }
+        
+        .cover-stat {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 3mm;
+            border-radius: 4mm;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 16pt;
+            font-weight: 900;
+            margin-bottom: 1mm;
+        }
+        
+        .stat-label {
+            font-size: 9pt;
+            opacity: 0.9;
+        }
+        
+        .executive-summary {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-xl);
+            padding: 6mm;
+            margin-bottom: 6mm;
+            border-left: 6mm solid #F18F01;
+            box-shadow: var(--shadow-xl);
+            transition: all 0.3s ease;
+        }
+        
+        .summary-title {
+            font-size: 18pt;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 4mm;
+            text-align: center;
+        }
+        
+        .summary-text {
+            font-size: 11pt;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 4mm;
+            text-align: justify;
+        }
+        
+        .summary-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4mm;
+        }
+        
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius);
+            padding: 3mm;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-value {
+            font-size: 14pt;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1mm;
+        }
+        
+        .highlight-label {
+            font-size: 9pt;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .section {
+            margin-bottom: 6mm;
+        }
+        
+        .section-title {
+            font-size: 16pt;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 3mm;
+            padding-bottom: 2mm;
+            border-bottom: 2px solid #F18F01;
+            display: flex;
+            align-items: center;
+            gap: 3mm;
+        }
+        
+        .value-proposition {
+            background: linear-gradient(135deg, #28A745 0%, #34CE57 100%);
+            color: white;
+            border-radius: 4mm;
+            padding: 6mm;
+            margin-bottom: 6mm;
+        }
+        
+        .proposition-title {
+            font-size: 16pt;
+            font-weight: 800;
+            margin-bottom: 4mm;
+            text-align: center;
+        }
+        
+        .proposition-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4mm;
+        }
+        
+        .proposition-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 3mm;
+            padding: 3mm;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .proposition-icon {
+            font-size: 20pt;
+            margin-bottom: 2mm;
+        }
+        
+        .proposition-text {
+            font-size: 9pt;
+            font-weight: 600;
+        }
+        
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            overflow: visible;
+            margin-bottom: 6mm;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .table-header {
+            background: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            color: white;
+            padding: 4mm;
+            text-align: center;
+            font-size: 14pt;
+            font-weight: 700;
+        }
+        
+        .comparison-content {
+            display: grid;
+            grid-template-columns: 2fr 1.2fr 1.2fr;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 12mm;
+            align-items: center;
+        }
+        
+        .comparison-content:last-child {
+            border-bottom: none;
+        }
+        
+        .comparison-cell {
+            padding: 4mm;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 10pt;
+            display: flex;
+            align-items: center;
+            min-height: 12mm;
+            line-height: 1.4;
+        }
+        
+        .comparison-cell:last-child {
+            border-right: none;
+        }
+        
+        .comparison-label {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .comparison-value {
+            font-weight: 700;
+            text-align: center;
+            justify-content: center;
+            width: 100%;
+            padding: 2mm;
+            border-radius: var(--radius-sm);
+            margin: 1mm;
+        }
+        
+        .comparison-value.positive {
+            color: #28A745;
+            background: #f8fff9;
+        }
+        
+        .comparison-value.negative {
+            color: #DC3545;
+            background: #fff8f8;
+        }
+        
+        .tco-showcase {
+            background: linear-gradient(135deg, #F18F01 0%, #FF8C42 100%);
+            color: white;
+            border-radius: 4mm;
+            padding: 6mm;
+            margin-bottom: 6mm;
+            text-align: center;
+        }
+        
+        .tco-title {
+            font-size: 16pt;
+            font-weight: 800;
+            margin-bottom: 4mm;
+        }
+        
+        .tco-comparison {
+            display: grid;
+            grid-template-columns: 2fr auto 2fr;
+            gap: 4mm;
+            align-items: center;
+            margin-bottom: 4mm;
+        }
+        
+        .tco-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 3mm;
+            padding: 4mm;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .tco-label {
+            font-size: 10pt;
+            margin-bottom: 2mm;
+            opacity: 0.9;
+        }
+        
+        .tco-amount {
+            font-size: 20pt;
+            font-weight: 900;
+            margin-bottom: 1mm;
+        }
+        
+        .tco-period {
+            font-size: 8pt;
+            opacity: 0.8;
+        }
+        
+        .vs-text {
+            font-size: 24pt;
+            font-weight: 900;
+            opacity: 0.8;
+        }
+        
+        .tco-savings {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 3mm;
+            border-radius: 3mm;
+            font-size: 14pt;
+            font-weight: 800;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4mm;
+            margin-bottom: 6mm;
+        }
+        
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius);
+            padding: 4mm;
+            border-left: 3mm solid #28A745;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2mm;
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+        
+        .benefit-desc {
+            font-size: 9pt;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+        }
+        
+        .implementation-roadmap {
+            background: linear-gradient(135deg, #2E86AB 0%, #17A2B8 100%);
+            color: white;
+            border-radius: 4mm;
+            padding: 6mm;
+            margin-bottom: 6mm;
+        }
+        
+        .roadmap-title {
+            font-size: 16pt;
+            font-weight: 800;
+            margin-bottom: 4mm;
+            text-align: center;
+        }
+        
+        .roadmap-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3mm;
+        }
+        
+        .roadmap-step {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 3mm;
+            padding: 3mm;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .step-number {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 8mm;
+            height: 8mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            font-weight: 900;
+            margin: 0 auto 2mm auto;
+        }
+        
+        .step-title {
+            font-size: 9pt;
+            font-weight: 700;
+            margin-bottom: 1mm;
+        }
+        
+        .step-desc {
+            font-size: 8pt;
+            opacity: 0.9;
+        }
+        
+        .call-to-action {
+            background: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            color: white;
+            border-radius: 4mm;
+            padding: 6mm;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 18pt;
+            font-weight: 800;
+            margin-bottom: 3mm;
+        }
+        
+        .cta-text {
+            font-size: 11pt;
+            margin-bottom: 4mm;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4mm;
+        }
+        
+        .cta-button {
+            background: #F18F01;
+            color: white;
+            padding: 3mm 6mm;
+            border-radius: 3mm;
+            font-size: 10pt;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2mm;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .contact-footer {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 6mm;
+            align-items: center;
+            padding-top: 4mm;
+            border-top: 2px solid #F18F01;
+            margin-top: 6mm;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2mm;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+            font-size: 9pt;
+            color: rgba(255, 255, 255, 0.9);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .contact-item span:last-child {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        
+        /* Style pour les numéros de téléphone */
+        .phone, .tel, .telephone {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        /* Style pour les emails */
+        .email, .mail {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        .contact-icon {
+            font-size: 10pt;
+            color: #F18F01;
+            width: 4mm;
+        }
+        
+        .company-info {
+            text-align: right;
+            font-size: 8pt;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    
+        /* BOUTON IMPRESSION PDF */
+        .pdf-print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(241, 143, 1, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .pdf-print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(241, 143, 1, 0.4);
+            background: linear-gradient(135deg, #ff6b35 0%, #F18F01 100%);
+        }
+        
+        .pdf-print-btn:active {
+            transform: translateY(0);
+        }
+        
+        .pdf-print-btn::before {
+            content: '🖨️';
+            font-size: 16px;
+        }
+        
+        @media print {
+            .pdf-print-btn {
+                display: none !important;
+            }
+        }
+        
+        
+        
+        
+        /* CSS IMPRESSION SIMPLE */
+        @media print {
+            /* Préserver les couleurs */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Masquer seulement les boutons */
+            .pdf-print-btn {
+                display: none !important;
+            }
+            
+            /* NE PAS modifier la taille ou position du contenu */
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+        
+        /* Styles pour le dialogue simple */
+        .simple-print-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            z-index: 10000;
+            padding: 20px;
+            min-width: 350px;
+            border: 1px solid #ddd;
+        }
+        
+        .simple-print-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 9999;
+        }
+        
+        .simple-dialog-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1B365D;
+        }
+        
+        .simple-option-group {
+            margin-bottom: 12px;
+        }
+        
+        .simple-option-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+            display: block;
+        }
+        
+        .simple-option-select {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .simple-dialog-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .simple-print-btn, .simple-cancel-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .simple-print-btn {
+            background: #F18F01;
+            color: white;
+        }
+        
+        .simple-print-btn:hover {
+            background: #d47a01;
+        }
+        
+        .simple-cancel-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .simple-cancel-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        </style>
+</head>
+<body>
+
+        <button id="pdf-print-btn" class="pdf-print-btn" onclick="imprimerSimple()" title="Imprimer en PDF avec options (Ctrl+P)">
+            Imprimer en PDF
+        </button>
+        
+    <div class="document-container">
+        <!-- Page de couverture -->
+        <div class="cover-page">
+            <div class="cover-content">
+                <div class="company-logo">EDS QUÉBEC</div>
+                <div class="cover-title">Li-CUBE PRO™</div>
+                <div class="cover-subtitle">Présentation Executive<br>Batteries LiFePO4 Nouvelle Génération</div>
+                
+                <div class="cover-proposition">
+                    REMPLACEZ VOS BATTERIES NI-CD<br>
+                    ÉCONOMISEZ 95% SUR 20 ANS
+                </div>
+                
+                <div class="cover-stats">
+                    <div class="cover-stat">
+                        <div class="stat-value">54 240 CAD</div>
+                        <div class="stat-label">Économies par unité</div>
+                    </div>
+                    <div class="cover-stat">
+                        <div class="stat-value">8000+</div>
+                        <div class="stat-label">Cycles garantis</div>
+                    </div>
+                    <div class="cover-stat">
+                        <div class="stat-value">2 mois</div>
+                        <div class="stat-label">Retour investissement</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Résumé exécutif -->
+        <div class="executive-summary">
+            <div class="summary-title">📋 Résumé Exécutif</div>
+            
+            <div class="summary-text">
+                <strong>EDS Québec</strong> présente <strong>Li-CUBE PRO™</strong>, une solution révolutionnaire de batteries LiFePO4 
+                spécialement conçue pour remplacer les batteries Ni-Cd dans les applications ferroviaires critiques. 
+                Cette technologie de pointe offre des <strong>économies exceptionnelles de 95%</strong> sur le coût total 
+                de possession, tout en améliorant drastiquement la fiabilité, la sécurité et l'impact environnemental.
+            </div>
+            
+            <div class="summary-highlights">
+                <div class="highlight-box">
+                    <div class="highlight-value">2 500 CAD</div>
+                    <div class="highlight-label">TCO Li-CUBE PRO™ (20 ans)</div>
+                </div>
+                <div class="highlight-box">
+                    <div class="highlight-value">57 040 CAD</div>
+                    <div class="highlight-label">TCO Ni-Cd (20 ans)</div>
+                </div>
+                <div class="highlight-box">
+                    <div class="highlight-value">1937%</div>
+                    <div class="highlight-label">ROI annuel</div>
+                </div>
+                <div class="highlight-box">
+                    <div class="highlight-value">20-25 ans</div>
+                    <div class="highlight-label">Durée de vie réelle</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Proposition de valeur -->
+        <div class="value-proposition">
+            <div class="proposition-title">✨ Proposition de Valeur Unique</div>
+            
+            <div class="proposition-grid">
+                <div class="proposition-item">
+                    <div class="proposition-icon">💰</div>
+                    <div class="proposition-text">95% d'économies TCO garanties</div>
+                </div>
+                <div class="proposition-item">
+                    <div class="proposition-icon">🔧</div>
+                    <div class="proposition-text">Zéro maintenance vs 2 visites/an</div>
+                </div>
+                <div class="proposition-item">
+                    <div class="proposition-icon">⚡</div>
+                    <div class="proposition-text">4× plus durable (8000+ cycles)</div>
+                </div>
+                <div class="proposition-item">
+                    <div class="proposition-icon">📡</div>
+                    <div class="proposition-text">Télémétrie IoT 24/7 INCLUSE location</div>
+                </div>
+                <div class="proposition-item">
+                    <div class="proposition-icon">🌱</div>
+                    <div class="proposition-text">100% éco-responsable sans cadmium</div>
+                </div>
+                <div class="proposition-item">
+                    <div class="proposition-icon">🏭</div>
+                    <div class="proposition-text">Made in Québec, support local</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Comparaison directe -->
+        <div class="section">
+            <div class="section-title">⚖️ Comparaison Technique Directe</div>
+            
+            <div class="comparison-table">
+                <div class="table-header">Li-CUBE PRO™ LFP vs Batteries Ni-Cd</div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-cell comparison-label">Critère</div>
+                    <div class="comparison-cell" style="background: rgba(40, 167, 69, 0.2); font-weight: 700; color: #28A745; text-align: center; justify-content: center; width: 100%;">Li-CUBE PRO™</div>
+                    <div class="comparison-cell" style="background: rgba(220, 53, 69, 0.2); font-weight: 700; color: #DC3545; text-align: center; justify-content: center; width: 100%;">Ni-Cd</div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-cell comparison-label">Durée de vie</div>
+                    <div class="comparison-cell comparison-value positive">≥8000 cycles</div>
+                    <div class="comparison-cell comparison-value negative">2000-3000 cycles</div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-cell comparison-label">Poids</div>
+                    <div class="comparison-cell comparison-value positive">23 kg (-71%)</div>
+                    <div class="comparison-cell comparison-value negative">~80 kg</div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-cell comparison-label">Temps de charge</div>
+                    <div class="comparison-cell comparison-value positive">1-2h (6× plus rapide)</div>
+                    <div class="comparison-cell comparison-value negative">8-12h</div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-cell comparison-label">Maintenance</div>
+                    <div class="comparison-cell comparison-value positive">Zéro maintenance</div>
+                    <div class="comparison-cell comparison-value negative">2 visites/an</div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-cell comparison-label">Connectivité</div>
+                    <div class="comparison-cell comparison-value positive">GPS, Wi-Fi, IoT</div>
+                    <div class="comparison-cell comparison-value negative">Aucune</div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-cell comparison-label">Environnement</div>
+                    <div class="comparison-cell comparison-value positive">Sans cadmium</div>
+                    <div class="comparison-cell comparison-value negative">Cadmium toxique</div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-cell comparison-label">TCO 20 ans</div>
+                    <div class="comparison-cell comparison-value positive">2 500 CAD</div>
+                    <div class="comparison-cell comparison-value negative">57 040 CAD</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TCO Showcase -->
+        <div class="tco-showcase">
+            <div class="tco-title">💰 Impact Financier - Coût Total de Possession</div>
+            
+            <div class="tco-comparison">
+                <div class="tco-box">
+                    <div class="tco-label">Li-CUBE PRO™ LFP</div>
+                    <div class="tco-amount">2 800</div>
+                    <div class="tco-period">CAD sur 20 ans</div>
+                </div>
+                
+                <div class="vs-text">VS</div>
+                
+                <div class="tco-box">
+                    <div class="tco-label">Batteries Ni-Cd</div>
+                    <div class="tco-amount">57 040</div>
+                    <div class="tco-period">CAD sur 20 ans</div>
+                </div>
+            </div>
+            
+            <div class="tco-savings">
+                🎯 ÉCONOMIES : 54 240 CAD par unité (95% de réduction)
+            </div>
+        </div>
+        
+        <!-- Bénéfices stratégiques -->
+        <div class="section">
+            <div class="section-title">🎯 Bénéfices Stratégiques pour Votre Organisation</div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-title">
+                        <span>💼</span>
+                        <span>Réduction Drastique des OPEX</span>
+                    </div>
+                    <div class="benefit-desc">
+                        Élimination totale des coûts de maintenance récurrents. 
+                        Zéro intervention vs 2 visites techniques annuelles obligatoires pour Ni-Cd.
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-title">
+                        <span>📊</span>
+                        <span>Amélioration KPIs Opérationnels</span>
+                    </div>
+                    <div class="benefit-desc">
+                        Disponibilité système 99.9%, charge 6× plus rapide, 
+                        télémétrie temps réel préventive INCLUSE évitant pannes critiques.
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-title">
+                        <span>🛡️</span>
+                        <span>Conformité Réglementaire Renforcée</span>
+                    </div>
+                    <div class="benefit-desc">
+                        Conforme REACH sans cadmium toxique, certifications CSA/UL/CE, 
+                        réduction risques environnementaux et sanitaires.
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-title">
+                        <span>🚀</span>
+                        <span>Avantage Concurrentiel</span>
+                    </div>
+                    <div class="benefit-desc">
+                        Technologie de pointe IoT, image innovante, 
+                        différenciation marché par performance supérieure.
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-title">
+                        <span>⚖️</span>
+                        <span>Simplification Logistique</span>
+                    </div>
+                    <div class="benefit-desc">
+                        Poids réduit 71%, installation simplifiée, 
+                        manutention sécurisée, réduction coûts logistiques.
+                    </div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-title">
+                        <span>🌍</span>
+                        <span>Responsabilité Environnementale</span>
+                    </div>
+                    <div class="benefit-desc">
+                        Image éco-responsable, recyclage simplifié, 
+                        contribution objectifs développement durable corporate.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feuille de route implémentation -->
+        <div class="implementation-roadmap">
+            <div class="roadmap-title">🗺️ Feuille de Route d'Implémentation</div>
+            
+            <div class="roadmap-steps">
+                <div class="roadmap-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Analyse TCO</div>
+                    <div class="step-desc">Audit site, calcul personnalisé, validation ROI</div>
+                </div>
+                
+                <div class="roadmap-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Pilote</div>
+                    <div class="step-desc">Installation test 1-3 unités, validation terrain</div>
+                </div>
+                
+                <div class="roadmap-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Déploiement</div>
+                    <div class="step-desc">Remplacement progressif, formation équipes</div>
+                </div>
+                
+                <div class="roadmap-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Optimisation</div>
+                    <div class="step-desc">Monitoring INCLUS, ajustements, suivi performance</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Appel à l'action -->
+        <div class="call-to-action">
+            <div class="cta-title">🚀 Passez à l'Action Maintenant</div>
+            <div class="cta-text">
+                Ne laissez pas vos concurrents prendre l'avantage. 
+                Commencez votre transition vers Li-CUBE PRO™ dès aujourd'hui et réalisez des économies immédiates.
+            </div>
+            
+            <div class="cta-buttons">
+                <div class="cta-button">
+                    <span>📊</span>
+                    <span>Analyse TCO Gratuite</span>
+                </div>
+                <div class="cta-button">
+                    <span>🔬</span>
+                    <span>Démonstration Technique</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact -->
+        <div class="contact-footer">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">🏢</span>
+                    <span>EDS Québec - Innovation Énergétique</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span class="email">contact@edsquebec.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span class="phone">819&nbsp;323&nbsp;7859</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🌐</span>
+                    <span>https://edsquebec.com</span>
+                </div>
+            </div>
+            
+            <div class="company-info">
+                <div style="font-weight: 600; color: #1B365D; margin-bottom: 1mm;">Li-CUBE PRO™</div>
+                <div>Version 2.0.0 • 2025-08-22</div>
+                <div>Made in Québec, Canada</div>
+                <div style="margin-top: 2mm; font-size: 7pt;">© 2025 EDS Québec. Tous droits réservés.</div>
+            </div>
+        </div>
+    </div>
+
+        
+        
+        <script>
+        function afficherOptionsSimples() {
+            // Créer l'overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'simple-print-overlay';
+            
+            // Créer le dialogue
+            const dialog = document.createElement('div');
+            dialog.className = 'simple-print-dialog';
+            dialog.innerHTML = `
+                <div class="simple-dialog-header">
+                    Options d'impression
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Format de page :</label>
+                    <select id="simple-page-format" class="simple-option-select">
+                        <option value="auto">Automatique</option>
+                        <option value="a4">A4 Portrait</option>
+                        <option value="a4-landscape">A4 Paysage</option>
+                        <option value="letter">Lettre US Portrait</option>
+                        <option value="letter-landscape">Lettre US Paysage</option>
+                        <option value="a3">A3 Portrait</option>
+                        <option value="a3-landscape">A3 Paysage</option>
+                    </select>
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Échelle (réduire si contenu dépasse) :</label>
+                    <select id="simple-print-scale" class="simple-option-select">
+                        <option value="100">100% (Taille normale)</option>
+                        <option value="90">90%</option>
+                        <option value="80">80%</option>
+                        <option value="70">70%</option>
+                        <option value="60">60%</option>
+                        <option value="50">50%</option>
+                        <option value="40">40%</option>
+                    </select>
+                </div>
+                
+                <div class="simple-dialog-buttons">
+                    <button class="simple-cancel-btn" onclick="fermerOptionsSimples()">Annuler</button>
+                    <button class="simple-print-btn" onclick="imprimerAvecOptionsSimples()">Imprimer</button>
+                </div>
+            `;
+            
+            // Ajouter au DOM
+            document.body.appendChild(overlay);
+            document.body.appendChild(dialog);
+            
+            // Fermer en cliquant sur l'overlay
+            overlay.addEventListener('click', fermerOptionsSimples);
+        }
+        
+        function fermerOptionsSimples() {
+            const overlay = document.querySelector('.simple-print-overlay');
+            const dialog = document.querySelector('.simple-print-dialog');
+            if (overlay) overlay.remove();
+            if (dialog) dialog.remove();
+        }
+        
+        function imprimerAvecOptionsSimples() {
+            const format = document.getElementById('simple-page-format').value;
+            const scale = document.getElementById('simple-print-scale').value;
+            
+            // Appliquer seulement le format et l'échelle
+            appliquerStylesSimples(format, scale);
+            
+            // Fermer le dialogue
+            fermerOptionsSimples();
+            
+            // Attendre et imprimer
+            setTimeout(() => {
+                window.print();
+                
+                // Restaurer après impression
+                setTimeout(restaurerStylesSimples, 800);
+            }, 100);
+        }
+        
+        function appliquerStylesSimples(format, scale) {
+            // Supprimer l'ancien style
+            const ancienStyle = document.getElementById('simple-print-styles');
+            if (ancienStyle) ancienStyle.remove();
+            
+            // Créer le nouveau style
+            const style = document.createElement('style');
+            style.id = 'simple-print-styles';
+            
+            let cssFormat = '';
+            switch(format) {
+                case 'a4':
+                    cssFormat = '@page { size: A4 portrait; margin: 10mm; }';
+                    break;
+                case 'a4-landscape':
+                    cssFormat = '@page { size: A4 landscape; margin: 10mm; }';
+                    break;
+                case 'letter':
+                    cssFormat = '@page { size: letter portrait; margin: 0.4in; }';
+                    break;
+                case 'letter-landscape':
+                    cssFormat = '@page { size: letter landscape; margin: 0.4in; }';
+                    break;
+                case 'a3':
+                    cssFormat = '@page { size: A3 portrait; margin: 15mm; }';
+                    break;
+                case 'a3-landscape':
+                    cssFormat = '@page { size: A3 landscape; margin: 15mm; }';
+                    break;
+                default:
+                    cssFormat = '@page { size: auto; margin: 10mm; }';
+            }
+            
+            let cssScale = '';
+            if (scale !== '100') {
+                const scaleValue = parseInt(scale) / 100;
+                cssScale = `
+                    body {
+                        transform: scale(${scaleValue});
+                        transform-origin: top left;
+                        width: ${100 / scaleValue}%;
+                        height: ${100 / scaleValue}%;
+                    }
+                `;
+            }
+            
+            style.textContent = `@media print { ${cssFormat} ${cssScale} }`;
+            document.head.appendChild(style);
+        }
+        
+        function restaurerStylesSimples() {
+            const dynamicStyles = document.getElementById('simple-print-styles');
+            if (dynamicStyles) {
+                dynamicStyles.remove();
+            }
+        }
+        
+        function imprimerSimple() {
+            afficherOptionsSimples();
+        }
+        
+        // Fonction pour compatibilité
+        function imprimerPDF() {
+            imprimerSimple();
+        }
+        
+        function imprimerPDFAmeliore() {
+            imprimerSimple();
+        }
+        
+        // Raccourci clavier
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'p') {
+                event.preventDefault();
+                imprimerSimple();
+            }
+        });
+        </script>
+        
+        <!-- Intégration du système de prix centralisé -->
+        <script src="../../js/pricing-manager.js"></script>
+        
+        <script>
+            /**
+             * Présentation executive location intégrée avec le système de prix centralisé
+             * 
+             * Rôle : Remplacer TOUS les prix hardcodés par des données du pricing-manager.js
+             * Fonctionnement : Charge et affiche automatiquement les prix depuis pricing-config.json
+             */
+            
+            // Le pricingManager global est disponible via window.pricingManager
+            let currentMode = 'location'; // Mode location pour presentations-location
+            
+            /**
+             * Initialise la présentation executive location avec le système centralisé
+             */
+            function initPresentationExecutiveLocation() {
+                console.log('🚀 Initialisation présentation executive location avec SimplePricingManager global...');
+                
+                // Utiliser le SimplePricingManager global
+                if (window.pricingManager && window.pricingManager.isLoaded) {
+                    console.log('✅ SimplePricingManager déjà disponible pour présentation executive location');
+                    updatePresentationExecutiveLocation();
+                } else {
+                    // Attendre que le pricing manager global soit prêt
+                    document.addEventListener('pricingManagerReady', function() {
+                        console.log('✅ SimplePricingManager maintenant disponible pour présentation executive location');
+                        updatePresentationExecutiveLocation();
+                    });
+                    
+                    // Timeout de sécurité
+                    setTimeout(() => {
+                        if (window.pricingManager) {
+                            updatePresentationExecutiveLocation();
+                        } else {
+                            console.error('❌ SimplePricingManager non disponible après timeout');
+                        }
+                    }, 2000);
+                }
+            }
+            
+            /**
+             * Met à jour les éléments de la présentation executive location
+             */
+            function updatePresentationExecutiveLocation() {
+                if (!window.pricingManager || !window.pricingManager.isLoaded) {
+                    console.warn('⚠️ SimplePricingManager non disponible pour updatePresentationExecutiveLocation');
+                    return;
+                }
+                
+                console.log('🔄 Mise à jour des éléments de présentation executive location...');
+                
+                // Mettre à jour tous les éléments avec data-pricing-value
+                const updateCount = window.pricingManager.updatePrices();
+                console.log(`✅ ${updateCount} éléments mis à jour dans présentation executive location`);
+            }
+
+            // Initialisation automatique au chargement de la page
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log(`📊 Mode: ${currentMode}`);
+                
+                // Initialiser le système de prix centralisé
+                initPresentationExecutiveLocation();
+            });
+        </script>
+        
+        <!-- Script système de notes testeur alpha -->
+        <script src="../../module_notes/notes-module.js"></script>
+        
+        <!-- Script navigation retour et gestion musique -->
+        <script src="../../js/navigation-retour.js"></script>
+        
+</body>
+</html>

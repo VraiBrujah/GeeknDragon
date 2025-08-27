@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Comparatif TCO PDF</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Couleurs principales thème EDS Québec harmonisées */
+            --primary: #003F7F;
+            --secondary: #4A90B8;
+            --accent: #F18F01;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #003F7F 0%, #4A90B8 100%);
+            --gradient-accent: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
+            --gradient-success: linear-gradient(135deg, #28a745 0%, #34CE57 100%);
+            --gradient-danger: linear-gradient(135deg, #dc3545 0%, #E74C3C 100%);
+            
+            /* Couleurs neutres */
+            --white: #ffffff;
+            --light: #f8f9fa;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-700: #495057;
+            --gray-800: #343a40;
+            --gray-900: #212529;
+            --dark: #1B365D;
+            
+            /* Effets et ombres */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.2);
+            --shadow-xl: 0 15px 40px rgba(0,0,0,0.25);
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.6s ease;
+            
+            /* Rayons de bordure */
+            --radius-sm: 6px;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 20px;
+            
+            /* Typographie */
+            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        @page {
+            size: 816px 1056px;
+            margin: 8mm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background: var(--gradient-primary);
+            color: var(--white);
+            line-height: 1.6;
+            font-size: 10pt;
+            position: relative;
+        }
+        
+        /* Background animé harmonisé avec le style flyer */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(241, 143, 1, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(74, 144, 184, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .document-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 20mm 15mm 15mm 15mm;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 10mm;
+            align-items: center;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.05);
+            transform: rotate(15deg);
+        }
+        
+        .logo-section {
+            text-align: left;
+        }
+        
+        .logo {
+            font-size: 18pt;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .logo-subtitle {
+            font-size: 9pt;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+        
+        .title-section {
+            text-align: center;
+        }
+        
+        .document-title {
+            font-size: 20pt;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 2mm;
+        }
+        
+        .document-subtitle {
+            font-size: 11pt;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+        
+        .savings-highlight {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 4mm;
+            border-radius: 4mm;
+            font-size: 12pt;
+            font-weight: 800;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .executive-summary {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 6mm;
+            margin-bottom: 8mm;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all var(--transition-normal);
+            color: var(--primary);
+        }
+        
+        .executive-summary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        .summary-title {
+            font-size: 16pt;
+            font-weight: 800;
+            margin-bottom: 4mm;
+        }
+        
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4mm;
+            margin-top: 4mm;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 3mm;
+            padding: 3mm;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 14pt;
+            font-weight: 900;
+            margin-bottom: 1mm;
+        }
+        
+        .stat-label {
+            font-size: 8pt;
+            opacity: 0.9;
+        }
+        
+        .tco-comparison {
+            background: var(--gradient-accent);
+            color: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 8mm;
+            margin-bottom: 8mm;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(241, 143, 1, 0.3);
+            transition: all var(--transition-normal);
+        }
+        
+        .tco-comparison:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .tco-title {
+            font-size: 18pt;
+            font-weight: 800;
+            color: white;
+            text-align: center;
+            margin-bottom: 6mm;
+        }
+        
+        .tco-visual {
+            display: grid;
+            grid-template-columns: 2fr auto 2fr;
+            gap: 6mm;
+            align-items: center;
+            margin-bottom: 6mm;
+        }
+        
+        .tco-column {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 4mm;
+            padding: 6mm;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .tco-column.lfp {
+            border-left: 6mm solid rgba(40, 167, 69, 0.6);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+        }
+        
+        .tco-column.nicd {
+            border-left: 6mm solid rgba(220, 53, 69, 0.6);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+        }
+        
+        .tco-product {
+            font-size: 12pt;
+            font-weight: 700;
+            margin-bottom: 3mm;
+        }
+        
+        .tco-product.lfp {
+            color: white;
+        }
+        
+        .tco-product.nicd {
+            color: white;
+        }
+        
+        .tco-amount {
+            font-size: 24pt;
+            font-weight: 900;
+            margin-bottom: 2mm;
+            color: white;
+        }
+        
+        .tco-period {
+            font-size: 9pt;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+        }
+        
+        .vs-indicator {
+            font-size: 32pt;
+            font-weight: 900;
+            color: white;
+            opacity: 0.8;
+            text-align: center;
+        }
+        
+        .savings-result {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            color: white;
+            padding: 6mm;
+            border-radius: 4mm;
+            text-align: center;
+            font-size: 16pt;
+            font-weight: 800;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .breakdown-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: 6mm;
+            margin-bottom: 8mm;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all var(--transition-normal);
+            color: var(--primary);
+        }
+        
+        .breakdown-section:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        .section-title {
+            font-size: 16pt;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4mm;
+            padding-bottom: 2mm;
+            border-bottom: 2px solid var(--gray-300);
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+        
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6mm;
+        }
+        
+        .breakdown-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-lg);
+            overflow: auto;
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--shadow);
+            transition: all var(--transition-normal);
+        }
+        
+        .breakdown-card:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .breakdown-card.lfp {
+            border-left: 6mm solid rgba(40, 167, 69, 0.6);
+        }
+        
+        .breakdown-card.nicd {
+            border-left: 6mm solid rgba(220, 53, 69, 0.6);
+        }
+        
+        .breakdown-header {
+            padding: 4mm;
+            text-align: center;
+            font-weight: 700;
+            font-size: 12pt;
+            color: var(--white);
+        }
+        
+        .breakdown-header.lfp {
+            background: linear-gradient(135deg, #28A745 0%, #34CE57 100%);
+        }
+        
+        .breakdown-header.nicd {
+            background: linear-gradient(135deg, #DC3545 0%, #E74C3C 100%);
+        }
+        
+        .breakdown-content {
+            padding: 4mm;
+            color: var(--primary);
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .breakdown-row {
+            border-bottom: 1px solid var(--gray-200);
+            transition: all var(--transition-fast);
+        }
+        
+        .breakdown-row:hover {
+            background: rgba(241, 143, 1, 0.05);
+            transform: translateX(2px);
+        }
+        
+        .breakdown-row:last-child {
+            border-bottom: 2px solid var(--primary);
+            font-weight: 700;
+        }
+        
+        .breakdown-label {
+            padding: 2mm 0;
+            font-size: 9pt;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .breakdown-value {
+            padding: 2mm 0;
+            font-size: 9pt;
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .timeline-section {
+            background: var(--gradient-accent);
+            color: white;
+            border-radius: 4mm;
+            padding: 6mm;
+            margin-bottom: 8mm;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-accent);
+            opacity: 0.9;
+            border-radius: 4mm;
+            transform: skewY(-2deg);
+            z-index: -1;
+        }
+        
+        .timeline-chart {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4mm;
+            padding: 6mm;
+            margin-bottom: 4mm;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .chart-title {
+            font-size: 14pt;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            margin-bottom: 4mm;
+        }
+        
+        .timeline-periods {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3mm;
+            margin-bottom: 3mm;
+        }
+        
+        .period-label {
+            text-align: center;
+            font-size: 9pt;
+            font-weight: 600;
+            color: white;
+            padding: 2mm;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2mm;
+        }
+        
+        .chart-bars {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3mm;
+            height: 25mm;
+            align-items: end;
+            margin-bottom: 3mm;
+        }
+        
+        .bar-group {
+            display: flex;
+            gap: 1mm;
+            align-items: end;
+            justify-content: center;
+        }
+        
+        .chart-bar {
+            width: 8mm;
+            border-radius: 2mm 2mm 0 0;
+            position: relative;
+            min-height: 3mm;
+        }
+        
+        .chart-bar.lfp {
+            background: linear-gradient(to top, #28A745, #34CE57);
+            height: 3mm;
+        }
+        
+        .chart-bar.nicd {
+            background: linear-gradient(to top, #DC3545, #E74C3C);
+        }
+        
+        .bar-5y { height: 8mm; }
+        .bar-10y { height: 15mm; }
+        .bar-15y { height: 20mm; }
+        .bar-20y { height: 25mm; }
+        
+        .chart-values {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3mm;
+            font-size: 8pt;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 6mm;
+            margin-top: 3mm;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+            font-size: 9pt;
+        }
+        
+        .legend-color {
+            width: 4mm;
+            height: 4mm;
+            border-radius: 1mm;
+        }
+        
+        .legend-color.lfp {
+            background: #28A745;
+        }
+        
+        .legend-color.nicd {
+            background: #DC3545;
+        }
+        
+        .roi-section {
+            background: var(--gradient-success);
+            color: white;
+            border-radius: 4mm;
+            padding: 6mm;
+            margin-bottom: 8mm;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .roi-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-success);
+            opacity: 0.9;
+            border-radius: 4mm;
+            transform: skewY(-2deg);
+            z-index: -1;
+        }
+        
+        .roi-title {
+            font-size: 16pt;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4mm;
+        }
+        
+        .roi-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4mm;
+        }
+        
+        .roi-metric {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 3mm;
+            padding: 4mm;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .roi-value {
+            font-size: 18pt;
+            font-weight: 900;
+            margin-bottom: 2mm;
+        }
+        
+        .roi-label {
+            font-size: 9pt;
+            opacity: 0.9;
+        }
+        
+        .roi-desc {
+            font-size: 8pt;
+            opacity: 0.8;
+            margin-top: 1mm;
+        }
+        
+        .key-factors {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 4mm;
+            padding: 6mm;
+            margin-bottom: 8mm;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .key-factors::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0.9;
+            border-radius: 4mm;
+            transform: skewY(-2deg);
+            z-index: -1;
+        }
+        
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4mm;
+        }
+        
+        .factor-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 3mm;
+            padding: 4mm;
+            border-left: 6mm solid rgba(40, 167, 69, 0.6);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .factor-title {
+            font-size: 10pt;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2mm;
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+        
+        .factor-desc {
+            font-size: 9pt;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .conclusion {
+            background: var(--gradient-success);
+            color: white;
+            border-radius: 4mm;
+            padding: 6mm;
+            text-align: center;
+            margin-bottom: 8mm;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .conclusion::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-success);
+            opacity: 0.9;
+            border-radius: 4mm;
+            transform: skewY(-2deg);
+            z-index: -1;
+        }
+        
+        .conclusion-title {
+            font-size: 16pt;
+            font-weight: 800;
+            margin-bottom: 3mm;
+        }
+        
+        .conclusion-text {
+            font-size: 11pt;
+            margin-bottom: 4mm;
+            opacity: 0.95;
+        }
+        
+        .conclusion-cta {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 3mm 6mm;
+            border-radius: 3mm;
+            font-size: 12pt;
+            font-weight: 700;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 8mm;
+            align-items: center;
+            padding: 6mm;
+            background: var(--gradient-accent);
+            color: white;
+            border-radius: 4mm;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-accent);
+            opacity: 0.9;
+            border-radius: 4mm;
+            transform: skewY(-2deg);
+            z-index: -1;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3mm;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+            font-size: 9pt;
+            color: white;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .contact-item span:last-child {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        
+        /* Style pour les numéros de téléphone */
+        .phone, .tel, .telephone {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        /* Style pour les emails */
+        .email, .mail {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        .contact-icon {
+            font-size: 10pt;
+            color: rgba(255, 255, 255, 0.9);
+            width: 4mm;
+        }
+        
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    
+        /* BOUTON IMPRESSION PDF */
+        .pdf-print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(241, 143, 1, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .pdf-print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(241, 143, 1, 0.4);
+            background: linear-gradient(135deg, #ff6b35 0%, #F18F01 100%);
+        }
+        
+        .pdf-print-btn:active {
+            transform: translateY(0);
+        }
+        
+        .pdf-print-btn::before {
+            content: '🖨️';
+            font-size: 16px;
+        }
+        
+        @media print {
+            .pdf-print-btn {
+                display: none !important;
+            }
+        }
+        
+        
+        
+        
+        /* CSS IMPRESSION SIMPLE */
+        @media print {
+            /* Préserver les couleurs */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Masquer seulement les boutons */
+            .pdf-print-btn {
+                display: none !important;
+            }
+            
+            /* NE PAS modifier la taille ou position du contenu */
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+        
+        /* Styles pour le dialogue simple */
+        .simple-print-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            z-index: 10000;
+            padding: 20px;
+            min-width: 350px;
+            border: 1px solid #ddd;
+        }
+        
+        .simple-print-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 9999;
+        }
+        
+        .simple-dialog-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1B365D;
+        }
+        
+        .simple-option-group {
+            margin-bottom: 12px;
+        }
+        
+        .simple-option-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+            display: block;
+        }
+        
+        .simple-option-select {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .simple-dialog-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .simple-print-btn, .simple-cancel-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .simple-print-btn {
+            background: #F18F01;
+            color: white;
+        }
+        
+        .simple-print-btn:hover {
+            background: #d47a01;
+        }
+        
+        .simple-cancel-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .simple-cancel-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        </style>
+</head>
+<body>
+
+        <button id="pdf-print-btn" class="pdf-print-btn" onclick="imprimerSimple()" title="Imprimer en PDF avec options (Ctrl+P)">
+            Imprimer en PDF
+        </button>
+        
+    <div class="document-container">
+        <!-- En-tête -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">EDS QUÉBEC</div>
+                <div class="logo-subtitle">Location & Services Managés</div>
+            </div>
+            
+            <div class="title-section">
+                <div class="document-title">ANALYSE TCO</div>
+                <div class="document-subtitle">Li-CUBE PRO™ vs Batteries Ni-Cd</div>
+            </div>
+            
+            <div class="savings-highlight">
+                💰 95% D'ÉCONOMIES<br>
+                SUR 20 ANS
+            </div>
+        </div>
+        
+        <!-- Résumé exécutif -->
+        <div class="executive-summary">
+            <div class="summary-title">📊 Résumé Exécutif - Coût Total de Possession</div>
+            <p style="font-size: 11pt; margin-bottom: 4mm; opacity: 0.95;">
+                Comparaison financière détaillée sur 20 ans entre la technologie Li-CUBE PRO™ LiFePO4 
+                et les batteries Ni-Cd traditionnelles pour applications ferroviaires critiques.
+            </p>
+            
+            <div class="summary-stats">
+                <div class="stat-box">
+                    <div class="stat-value">33 600$</div>
+                    <div class="stat-label">Économies totales</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">58%</div>
+                    <div class="stat-label">Réduction TCO</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">25</div>
+                    <div class="stat-label">ROI annuel</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">18 mois</div>
+                    <div class="stat-label">Retour investissement</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Comparaison TCO principale -->
+        <div class="tco-comparison">
+            <div class="tco-title">💰 Coût Total de Possession (20 ans)</div>
+            
+            <div class="tco-visual">
+                <div class="tco-column lfp">
+                    <div class="tco-product lfp">🟢 Li-CUBE PRO™ LFP</div>
+                    <div class="tco-amount">24 000</div>
+                    <div class="tco-period">sur 20 ans</div>
+                </div>
+                
+                <div class="vs-indicator">VS</div>
+                
+                <div class="tco-column nicd">
+                    <div class="tco-product nicd">🔴 Batteries Ni-Cd</div>
+                    <div class="tco-amount">57 600</div>
+                    <div class="tco-period">sur 20 ans</div>
+                </div>
+            </div>
+            
+            <div class="savings-result">
+                🎯 ÉCONOMIES : 33 600$ sur 20 ans (58% moins cher)
+            </div>
+        </div>
+        
+        <!-- Détail des coûts -->
+        <div class="breakdown-section">
+            <div class="section-title">📋 Détail du Calcul TCO</div>
+            
+            <div class="breakdown-grid">
+                <div class="breakdown-card lfp">
+                    <div class="breakdown-header lfp">🟢 Li-CUBE PRO™ LFP</div>
+                    <div class="breakdown-content">
+                        <table class="breakdown-table">
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">Coût initial de l'unité</td>
+                                <td class="breakdown-value">24 000$</td>
+                            </tr>
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">Maintenance (20 ans)</td>
+                                <td class="breakdown-value">0</td>
+                            </tr>
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">Remplacements</td>
+                                <td class="breakdown-value">0</td>
+                            </tr>
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">Monitoring annuel</td>
+                                <td class="breakdown-value">INCLUS location</td>
+                            </tr>
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">TOTAL 20 ans</td>
+                                <td class="breakdown-value">24 000$</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="breakdown-card nicd">
+                    <div class="breakdown-header nicd">🔴 Batteries Ni-Cd</div>
+                    <div class="breakdown-content">
+                        <table class="breakdown-table">
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">Coût initial de l'unité</td>
+                                <td class="breakdown-value">18 000$</td>
+                            </tr>
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">Maintenance (452$/an × 20)</td>
+                                <td class="breakdown-value">9 040$</td>
+                            </tr>
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">Remplacements (3 fois)</td>
+                                <td class="breakdown-value">18 000$</td>
+                            </tr>
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">Monitoring</td>
+                                <td class="breakdown-value">0</td>
+                            </tr>
+                            <tr class="breakdown-row">
+                                <td class="breakdown-label">TOTAL 20 ans</td>
+                                <td class="breakdown-value">57 600$</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Évolution temporelle -->
+        <div class="timeline-section">
+            <div class="section-title">📈 Évolution des Coûts dans le Temps</div>
+            
+            <div class="timeline-chart">
+                <div class="chart-title">Coûts Cumulés par Période</div>
+                
+                <div class="timeline-periods">
+                    <div class="period-label">5 ans</div>
+                    <div class="period-label">10 ans</div>
+                    <div class="period-label">15 ans</div>
+                    <div class="period-label">20 ans</div>
+                </div>
+                
+                <div class="chart-bars">
+                    <div class="bar-group">
+                        <div class="chart-bar lfp"></div>
+                        <div class="chart-bar nicd bar-5y"></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="chart-bar lfp"></div>
+                        <div class="chart-bar nicd bar-10y"></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="chart-bar lfp"></div>
+                        <div class="chart-bar nicd bar-15y"></div>
+                    </div>
+                    <div class="bar-group">
+                        <div class="chart-bar lfp"></div>
+                        <div class="chart-bar nicd bar-20y"></div>
+                    </div>
+                </div>
+                
+                <div class="chart-values">
+                    <div>LFP: 24 000$<br>Ni-Cd: 30 000$</div>
+                    <div>LFP: 24 000$<br>Ni-Cd: 30 000$</div>
+                    <div>LFP: 24 000$<br>Ni-Cd: 30 000$</div>
+                    <div>LFP: 24 000$<br>Ni-Cd: 30 000$</div>
+                </div>
+                
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color lfp"></div>
+                        <span>Li-CUBE PRO™ LFP</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color nicd"></div>
+                        <span>Batteries Ni-Cd</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Métriques ROI -->
+        <div class="roi-section">
+            <div class="roi-title">📊 Métriques de Retour sur Investissement</div>
+            
+            <div class="roi-metrics">
+                <div class="roi-metric">
+                    <div class="roi-value">25%</div>
+                    <div class="roi-label">ROI Annuel</div>
+                    <div class="roi-desc">Retour sur investissement annualisé</div>
+                </div>
+                
+                <div class="roi-metric">
+                    <div class="roi-value">18 mois</div>
+                    <div class="roi-label">Période de Retour</div>
+                    <div class="roi-desc">Temps pour récupérer l'investissement</div>
+                </div>
+                
+                <div class="roi-metric">
+                    <div class="roi-value">2×</div>
+                    <div class="roi-label">Facteur d'Économie</div>
+                    <div class="roi-desc">LFP coûte 2× moins cher</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Facteurs clés -->
+        <div class="key-factors">
+            <div class="section-title">🎯 Facteurs Clés des Économies</div>
+            
+            <div class="factors-grid">
+                <div class="factor-card">
+                    <div class="factor-title">
+                        <span>⚡</span>
+                        <span>Durée de Vie Supérieure</span>
+                    </div>
+                    <div class="factor-desc">
+                        <span data-pricing-value="licube.cycle_life" data-pricing-format="number"></span>+ cycles vs <span data-pricing-value="nicd.cycle_life" data-pricing-format="number"></span> cycles Ni-Cd.<br>
+                        Une seule batterie LFP pour toute la période vs 3-4 remplacements Ni-Cd.
+                    </div>
+                </div>
+                
+                <div class="factor-card">
+                    <div class="factor-title">
+                        <span>🔧</span>
+                        <span>Maintenance Éliminée</span>
+                    </div>
+                    <div class="factor-desc">
+                        Zéro maintenance LFP vs 2 visites/an Ni-Cd.<br>
+                        Économie de 452$ par an en maintenance.
+                    </div>
+                </div>
+                
+                <div class="factor-card">
+                    <div class="factor-title">
+                        <span>💰</span>
+                        <span>Coût Initial Réduit</span>
+                    </div>
+                    <div class="factor-desc">
+                        24 000$ vs 18 000$ Ni-Cd.<br>
+                        2× moins cher dès l'achat initial.
+                    </div>
+                </div>
+                
+                <div class="factor-card">
+                    <div class="factor-title">
+                        <span>📡</span>
+                        <span>Monitoring Préventif INCLUS</span>
+                    </div>
+                    <div class="factor-desc">
+                        IoT intégré évite les pannes coûteuses.<br>
+                        Télémétrie GPS/GPRS INCLUSE 24/7 vs aucune surveillance Ni-Cd.
+                    </div>
+                </div>
+                
+                <div class="factor-card">
+                    <div class="factor-title">
+                        <span>🌱</span>
+                        <span>Coûts Environnementaux</span>
+                    </div>
+                    <div class="factor-desc">
+                        Recyclage simple LFP vs coûts cadmium Ni-Cd.<br>
+                        Conformité REACH sans surcoût.
+                    </div>
+                </div>
+                
+                <div class="factor-card">
+                    <div class="factor-title">
+                        <span>⚖️</span>
+                        <span>Installation Simplifiée</span>
+                    </div>
+                    <div class="factor-desc">
+                        23kg vs 80kg, manutention sécurisée.<br>
+                        Réduction coûts logistique et installation.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Conclusion -->
+        <div class="conclusion">
+            <div class="conclusion-title">✅ Conclusion TCO</div>
+            <div class="conclusion-text">
+                Le passage aux batteries Li-CUBE PRO™ LiFePO4 représente une économie de 33 600$ 
+                sur 20 ans, soit 58% de réduction du TCO comparé aux batteries Ni-Cd traditionnelles.
+            </div>
+            <div class="conclusion-cta">
+                💬 Demandez votre analyse TCO personnalisée gratuite
+            </div>
+        </div>
+        
+        <!-- Pied de page -->
+        <div class="footer">
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <span class="contact-icon">🏢</span>
+                    <span>EDS Québec - Innovation Énergétique</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span class="email">contact@edsquebec.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span class="phone">819&nbsp;323&nbsp;7859</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🌐</span>
+                    <span>https://edsquebec.com</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script src="../../js/pricing-manager.js"></script>
+
+
+        
+        
+        <script>
+        function afficherOptionsSimples() {
+            // Créer l'overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'simple-print-overlay';
+            
+            // Créer le dialogue
+            const dialog = document.createElement('div');
+            dialog.className = 'simple-print-dialog';
+            dialog.innerHTML = `
+                <div class="simple-dialog-header">
+                    Options d'impression
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Format de page :</label>
+                    <select id="simple-page-format" class="simple-option-select">
+                        <option value="auto">Automatique</option>
+                        <option value="a4">A4 Portrait</option>
+                        <option value="a4-landscape">A4 Paysage</option>
+                        <option value="letter">Lettre US Portrait</option>
+                        <option value="letter-landscape">Lettre US Paysage</option>
+                        <option value="a3">A3 Portrait</option>
+                        <option value="a3-landscape">A3 Paysage</option>
+                    </select>
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Échelle (réduire si contenu dépasse) :</label>
+                    <select id="simple-print-scale" class="simple-option-select">
+                        <option value="100">100% (Taille normale)</option>
+                        <option value="90">90%</option>
+                        <option value="80">80%</option>
+                        <option value="70">70%</option>
+                        <option value="60">60%</option>
+                        <option value="50">50%</option>
+                        <option value="40">40%</option>
+                    </select>
+                </div>
+                
+                <div class="simple-dialog-buttons">
+                    <button class="simple-cancel-btn" onclick="fermerOptionsSimples()">Annuler</button>
+                    <button class="simple-print-btn" onclick="imprimerAvecOptionsSimples()">Imprimer</button>
+                </div>
+            `;
+            
+            // Ajouter au DOM
+            document.body.appendChild(overlay);
+            document.body.appendChild(dialog);
+            
+            // Fermer en cliquant sur l'overlay
+            overlay.addEventListener('click', fermerOptionsSimples);
+        }
+        
+        function fermerOptionsSimples() {
+            const overlay = document.querySelector('.simple-print-overlay');
+            const dialog = document.querySelector('.simple-print-dialog');
+            if (overlay) overlay.remove();
+            if (dialog) dialog.remove();
+        }
+        
+        function imprimerAvecOptionsSimples() {
+            const format = document.getElementById('simple-page-format').value;
+            const scale = document.getElementById('simple-print-scale').value;
+            
+            // Appliquer seulement le format et l'échelle
+            appliquerStylesSimples(format, scale);
+            
+            // Fermer le dialogue
+            fermerOptionsSimples();
+            
+            // Attendre et imprimer
+            setTimeout(() => {
+                window.print();
+                
+                // Restaurer après impression
+                setTimeout(restaurerStylesSimples, 800);
+            }, 100);
+        }
+        
+        function appliquerStylesSimples(format, scale) {
+            // Supprimer l'ancien style
+            const ancienStyle = document.getElementById('simple-print-styles');
+            if (ancienStyle) ancienStyle.remove();
+            
+            // Créer le nouveau style
+            const style = document.createElement('style');
+            style.id = 'simple-print-styles';
+            
+            let cssFormat = '';
+            switch(format) {
+                case 'a4':
+                    cssFormat = '@page { size: A4 portrait; margin: 10mm; }';
+                    break;
+                case 'a4-landscape':
+                    cssFormat = '@page { size: A4 landscape; margin: 10mm; }';
+                    break;
+                case 'letter':
+                    cssFormat = '@page { size: letter portrait; margin: 0.4in; }';
+                    break;
+                case 'letter-landscape':
+                    cssFormat = '@page { size: letter landscape; margin: 0.4in; }';
+                    break;
+                case 'a3':
+                    cssFormat = '@page { size: A3 portrait; margin: 15mm; }';
+                    break;
+                case 'a3-landscape':
+                    cssFormat = '@page { size: A3 landscape; margin: 15mm; }';
+                    break;
+                default:
+                    cssFormat = '@page { size: auto; margin: 10mm; }';
+            }
+            
+            let cssScale = '';
+            if (scale !== '100') {
+                const scaleValue = parseInt(scale) / 100;
+                cssScale = `
+                    body {
+                        transform: scale(${scaleValue});
+                        transform-origin: top left;
+                        width: ${100 / scaleValue}%;
+                        height: ${100 / scaleValue}%;
+                    }
+                `;
+            }
+            
+            style.textContent = `@media print { ${cssFormat} ${cssScale} }`;
+            document.head.appendChild(style);
+        }
+        
+        function restaurerStylesSimples() {
+            const dynamicStyles = document.getElementById('simple-print-styles');
+            if (dynamicStyles) {
+                dynamicStyles.remove();
+            }
+        }
+        
+        function imprimerSimple() {
+            afficherOptionsSimples();
+        }
+        
+        // Fonction pour compatibilité
+        function imprimerPDF() {
+            imprimerSimple();
+        }
+        
+        function imprimerPDFAmeliore() {
+            imprimerSimple();
+        }
+        
+        // Raccourci clavier
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'p') {
+                event.preventDefault();
+                imprimerSimple();
+            }
+        });
+        </script>
+        
+        <script>
+        // Initialisation spécifique pour comparatif TCO location
+        function initComparatifLocation() {
+            console.log('🚀 Initialisation comparatif TCO location avec SimplePricingManager global...');
+            
+            // Configuration du mode pour le comparatif location
+            let currentMode = 'location';
+            
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                console.log('✅ SimplePricingManager déjà disponible pour comparatif location');
+                updateComparatifLocation();
+            } else {
+                console.log('⏳ Attente SimplePricingManager pour comparatif location...');
+                document.addEventListener('pricingManagerReady', function() {
+                    console.log('🎯 Événement pricingManagerReady reçu pour comparatif location');
+                    updateComparatifLocation();
+                });
+            }
+        }
+        
+        function updateComparatifLocation() {
+            console.log('🔄 Mise à jour des prix pour comparatif location...');
+            
+            // Mise à jour de tous les éléments de prix
+            const pricingElements = document.querySelectorAll('[data-pricing-value]');
+            console.log(`📊 ${pricingElements.length} éléments de prix trouvés pour comparatif location`);
+            
+            pricingElements.forEach((element, index) => {
+                const path = element.getAttribute('data-pricing-value');
+                const format = element.getAttribute('data-pricing-format') || 'number';
+                
+                try {
+                    const value = window.pricingManager.getValue(path);
+                    console.log(`💰 [${index + 1}] ${path}: ${value} (format: ${format})`);
+                    
+                    if (value !== null && value !== undefined && value !== '') {
+                        if (format === 'currency') {
+                            element.textContent = parseFloat(value).toLocaleString('fr-CA', {
+                                minimumFractionDigits: 0,
+                                maximumFractionDigits: 0
+                            });
+                        } else if (format === 'percentage') {
+                            element.textContent = parseFloat(value).toFixed(1);
+                        } else {
+                            element.textContent = value;
+                        }
+                    } else {
+                        console.warn(`⚠️  Valeur manquante pour ${path} dans comparatif location`);
+                        element.textContent = '---';
+                    }
+                } catch (error) {
+                    console.error(`❌ Erreur lors de la récupération de ${path}:`, error);
+                    element.textContent = 'Erreur';
+                }
+            });
+            
+            console.log('✅ Mise à jour terminée pour comparatif location');
+        }
+        
+        // Démarrage automatique
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM chargé, initialisation comparatif location...');
+            initComparatifLocation();
+        });
+        
+        // Fallback si DOMContentLoaded déjà passé
+        if (document.readyState === 'loading') {
+            // DOM pas encore chargé, on attend DOMContentLoaded
+        } else {
+            // DOM déjà chargé
+            console.log('📄 DOM déjà chargé, initialisation immédiate comparatif location...');
+            initComparatifLocation();
+        }
+        </script>
+        
+        <!-- Script système de notes testeur alpha -->
+        <script src="../../module_notes/notes-module.js"></script>
+        
+        <!-- Script navigation retour et gestion musique -->
+        <script src="../../js/navigation-retour.js"></script>
+        
+</body>
+</html>

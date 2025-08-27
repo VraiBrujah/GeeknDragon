@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Présentation Commerciale Interactive | EDS Québec</title>
+    <meta name="description" content="Présentation commerciale interactive Li-CUBE PRO™ vs Ni-Cd pour vendeurs EDS Québec">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1B365D;
+            --secondary: #2E86AB;
+            --accent: #F18F01;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+            --light: #F8F9FA;
+            --dark: #212529;
+            --gradient-primary: linear-gradient(135deg, #1B365D 0%, #2E86AB 100%);
+            --gradient-success: linear-gradient(135deg, #28A745 0%, #20B2AA 100%);
+            --gradient-warning: linear-gradient(135deg, #F18F01 0%, #FF6B35 100%);
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Navigation fixe */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .nav-logo {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            color: white;
+            background-image: url('../../image/EdsQuebec/logo edsquebec.png');
+            background-size: 80%;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 1px solid rgba(241, 143, 1, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-logo:hover {
+            background: rgba(241, 143, 1, 0.2);
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+        
+        .nav-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-item {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-item:hover,
+        .nav-item.active {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Section Hero */
+        .hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            z-index: 1;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-highlight {
+            color: var(--accent);
+            font-size: 4.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            min-width: 180px;
+            flex: 1;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.08);
+        }
+        
+        .stat-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .product-showcase {
+            width: 500px;
+            height: 400px;
+            background: var(--gradient-primary);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            animation: float 6s ease-in-out infinite;
+            background-image: var(--licube-bg-image, url('../../image/Produit/Li-CUBE PRO/Li-CUBE PRO image 1.png'));
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            50% { transform: translateY(-20px) rotateY(5deg); }
+        }
+        
+        .product-showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .certification-badges {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .cert-badge {
+            background: var(--success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .cert-badge.primary {
+            background: linear-gradient(135deg, #FF6B35 0%, var(--accent) 100%);
+            border: 2px solid white;
+            font-weight: 800;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Section Problème */
+        .problem {
+            background: linear-gradient(135deg, #7F1D1D 0%, #991B1B 100%);
+            position: relative;
+        }
+        
+        .problem-content {
+            text-align: center;
+        }
+        
+        .problem-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: #FEF2F2;
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            justify-content: center;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .problem-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--danger);
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #FEF2F2;
+        }
+        
+        .problem-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #FEF2F2;
+        }
+        
+        .problem-card p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+        }
+        
+        .problem-impact {
+            background: rgba(220, 53, 69, 0.2);
+            border-left: 4px solid var(--danger);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Section Solution */
+        .solution {
+            background: linear-gradient(135deg, #14532D 0%, #166534 100%);
+            position: relative;
+        }
+        
+        .solution-content {
+            text-align: center;
+        }
+        
+        .solution-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: #F0FDF4;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            justify-content: center;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .advantage-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--success);
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .advantage-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #F0FDF4;
+        }
+        
+        .advantage-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #F0FDF4;
+        }
+        
+        .advantage-card p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+        }
+        
+        .advantage-impact {
+            background: rgba(40, 167, 69, 0.2);
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .solution-text h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        /* Section Versus */
+        .versus {
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            position: relative;
+            padding: 6rem 0;
+        }
+        
+        .versus-content {
+            text-align: center;
+        }
+        
+        .versus-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        .versus-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+            align-items: start;
+        }
+        
+        .versus-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .versus-separator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+        
+        .versus-vs {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--accent);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin: 1rem 0;
+        }
+        
+        .versus-line {
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+        }
+        
+        .comparison-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .comparison-item.advantage {
+            border-left: 4px solid var(--success);
+        }
+        
+        .comparison-item.disadvantage {
+            border-left: 4px solid var(--danger);
+        }
+        
+        .comparison-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+        
+        .comparison-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .comparison-content {
+            flex: 1;
+        }
+        
+        .comparison-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .comparison-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        .solution-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(8px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .feature-text h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .feature-text p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+        
+        .solution-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .tech-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .tech-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-card.winner {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+        
+        .tech-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .tech-specs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .spec-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .vs-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .vs-circle {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .advantage-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Section TCO */
+        .tco {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            position: relative;
+        }
+        
+        .tco-content {
+            text-align: center;
+        }
+        
+        .tco-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-warning);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tco-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 3rem;
+        }
+        
+        .tco-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tco-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .tco-card.winner {
+            background: rgba(40, 167, 69, 0.1);
+            border-color: var(--success);
+            transform: scale(1.05);
+        }
+        
+        .tco-card.loser {
+            background: rgba(220, 53, 69, 0.1);
+            border-color: var(--danger);
+        }
+        
+        .tco-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .tco-amount {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin: 1rem 0;
+            display: block;
+            white-space: nowrap;
+        }
+        
+        .tco-card.winner .tco-amount {
+            color: var(--success);
+        }
+        
+        .tco-card.loser .tco-amount {
+            color: var(--danger);
+        }
+        
+        .tco-period {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .tco-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .breakdown-line {
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .tco-vs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .savings-highlight {
+            background: var(--gradient-warning);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .savings-amount {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+        
+        .savings-percent {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        /* Calculateur TCO */
+        .tco-calculator {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .calculator-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+        
+        .calculator-controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .control-label {
+            font-weight: 600;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .control-input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 0.8rem;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .control-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .slider-container {
+            position: relative;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255,255,255,0.2);
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+        }
+        
+        .slider-value {
+            position: absolute;
+            top: -35px;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: translateX(-50%);
+        }
+        
+        .calculator-results {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .result-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+        }
+        
+        .result-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* Section Contact */
+        .contact {
+            background: var(--gradient-primary);
+            position: relative;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .contact-text h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        .contact-text p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .contact-item span:last-child {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        
+        /* Style pour les numéros de téléphone */
+        .phone, .tel, .telephone {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        /* Style pour les emails */
+        .email, .mail {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .contact-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .contact-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-card small {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 0.8rem;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .btn {
+            background: var(--gradient-warning);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content,
+            .solution-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .tco-comparison {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 4rem 1rem 2rem;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .problems-grid,
+            .advantages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .versus-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 280px;
+            }
+            
+            .versus-separator {
+                order: 2;
+                padding: 1rem;
+            }
+            
+            .versus-vs {
+                font-size: 2rem;
+                transform: rotate(90deg);
+            }
+            
+            .versus-line {
+                width: 100px;
+                height: 2px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+        }
+        
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <div class="nav-logo"></div>
+                <div class="nav-title">Li-CUBE PRO™</div>
+            </div>
+            <div class="nav-menu">
+                <a href="#hero" class="nav-item active">Accueil</a>
+                <a href="#problem" class="nav-item">Problématique</a>
+                <a href="#solution" class="nav-item">Solution</a>
+                <a href="#tco" class="nav-item">TCO</a>
+                <a href="#contact" class="nav-item">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Hero -->
+    <section id="hero" class="section hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span class="hero-highlight">Li-CUBE PRO™</span><br>
+                        Révolution Batterie<br>
+                        Ferroviaire
+                    </h1>
+                    <p class="hero-subtitle">
+                        <strong>🚀 RÉVOLUTIONNAIRE :</strong> La technologie LiFePO4 qui transforme votre infrastructure. 
+                        <strong>Économisez jusqu'à <span data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">46 315$</span> sur 20 ans</strong> avec monitoring IoT de pointe. <strong>Garantie 10 ans incluse!</strong>
+                    </p>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <span class="stat-value">25.6V</span>
+                            <span class="stat-label">105Ah LiFePO4</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value">≥8000<br>vs<br>1500</span>
+                            <span class="stat-label">Cycles Li-CUBE<br>vs<br>Ni-Cd</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-value">23kg</span>
+                            <span class="stat-label">vs 80kg Ni-Cd</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="product-showcase">
+                        <div class="certification-badges">
+                            <span class="cert-badge primary">CSA C22.2</span>
+                            <span class="cert-badge primary">CAN/CSA</span>
+                            <span class="cert-badge primary">UL1973</span>
+                            <span class="cert-badge primary">UL9540A</span>
+                            <span class="cert-badge">CE</span>
+                            <span class="cert-badge">RoHS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Problématique -->
+    <section id="problem" class="section problem">
+        <div class="container">
+            <div class="problem-content">
+                <h2 class="problem-title">❌ ALERTE : Vos Batteries Ni-Cd Vous Coûtent Une Fortune!</h2>
+                <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
+                    <strong>URGENT :</strong> Chaque jour d'attente vous coûte <strong><span data-pricing-value="calculations.tco_vente.savings.daily" data-pricing-format="currency">6.34$</span>/jour</strong> en surcoûts évitables! 
+                    Les batteries Saft SPL/SBLE drainent votre budget sans pitié.
+                </p>
+                
+                <div class="problems-grid">
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">☠️</div>
+                        <h3>🚨 DANGER : Cadmium Mortel!</h3>
+                        <p><strong>ALERTE SANTÉ :</strong> Substance cancérigène classée REACH, manipulation à risque. Votre personnel est-il protégé? <strong>Amende jusqu'à 50 000$</strong> si non-conformité!</p>
+                        <div class="problem-impact">
+                            <strong>Coût réel :</strong> Équipements sécurité + formations + responsabilité civile = <strong>Milliers de $ perdus</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">🔧</div>
+                        <h3>🩸 SAIGNÉE : Maintenance Sans Fin!</h3>
+                        <p><strong>CAUCHEMAR OPÉRATIONNEL :</strong> 2 visites/an minimum, électrolyte toxique, techniciens spécialisés rares. <strong>Chaque panne = production arrêtée!</strong></p>
+                        <div class="problem-impact">
+                            <strong>Hémorragie financière :</strong> <strong><span data-pricing-value="calculations.tco_vente.nicd.maintenance_20_years" data-pricing-format="currency">42 240$</span></strong> sur 20 ans!
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">⏱️</div>
+                        <h3>Durée de Vie Réduite</h3>
+                        <p>1500 cycles (3-4 ans), remplacements fréquents, effet mémoire.</p>
+                        <div class="problem-impact">
+                            <strong>Impact :</strong> 3-4 remplacements sur 20 ans
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">⚖️</div>
+                        <h3>Poids et Encombrement</h3>
+                        <p>80-100kg, manipulation difficile, installation contraignante, risques sécurité.</p>
+                        <div class="problem-impact">
+                            <strong>Impact :</strong> Logistique complexe, sécurité personnel
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">🔌</div>
+                        <h3>Charge Lente</h3>
+                        <p>8-12h indisponibilité avec technologies obsolètes, impact négatif sur productivité.</p>
+                        <div class="problem-impact">
+                            <strong>Impact :</strong> Temps d'arrêt prolongés
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">📡</div>
+                        <h3>Pas de Connectivité</h3>
+                        <p>Aucune télémétrie, aucun suivi à distance, pannes imprévisibles.</p>
+                        <div class="problem-impact">
+                            <strong>Impact :</strong> Maintenance réactive uniquement
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">💰</div>
+                        <h3>💸 RUINEUX : Prix Scandaleux!</h3>
+                        <p><strong>SHOCKING :</strong> <span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">12000$</span> pour UNE batterie 24V-100Ah! <strong>5× plus cher</strong> que Li-CUBE PRO™. Pourquoi payer 5× plus pour une technologie obsolète?</p>
+                        <div class="problem-impact">
+                            <strong>Perte immédiate :</strong> <strong><span data-pricing-value="calculations.tco_vente.initial_savings" data-pricing-format="currency">9 250$</span></strong> gaspillés dès l'achat!
+                        </div>
+                    </div>
+                    
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">🚛</div>
+                        <h3>Transport Contraignant</h3>
+                        <p>UN2795 Batteries Wet Alkali, transport coûteux et contraignant.</p>
+                        <div class="problem-impact">
+                            <strong>Impact :</strong> Logistique spécialisée requise
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Solution -->
+    <section id="solution" class="section solution">
+        <div class="container">
+            <div class="solution-content">
+                <h2 class="solution-title">✅ Li-CUBE PRO™ : La Solution Qui Change Tout!</h2>
+                <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
+                    <strong>🏆 APPROUVÉ par + de 500 clients satisfaits au Québec!</strong> Technologie LiFePO4 de pointe avec surveillance IoT intégrée. 
+                    <strong>Made in Québec</strong> | <strong>Support local 24/7</strong> | <strong>Installation clé en main</strong>
+                </p>
+                
+                <div class="advantages-grid">
+                    <div class="advantage-card animate-on-scroll">
+                        <div class="advantage-icon">🔋</div>
+                        <h3>Durée de Vie Exceptionnelle</h3>
+                        <p>≥8000 cycles vs 1500 cycles Ni-Cd (20-25 ans réels vs 5-6 ans) - Technologie LiFePO4 révolutionnaire.</p>
+                        <div class="advantage-impact">
+                            <strong>Impact :</strong> 4× plus durable, TCO réduit drastiquement
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-card animate-on-scroll">
+                        <div class="advantage-icon">📱</div>
+                        <h3>Surveillance Temps Réel</h3>
+                        <p>GPS, Bluetooth, Wi-Fi, GPRS - monitoring IoT complet, maintenance prédictive IA.</p>
+                        <div class="advantage-impact">
+                            <strong>Impact :</strong> Zéro panne surprise, optimisation continue
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-card animate-on-scroll">
+                        <div class="advantage-icon">🛠️</div>
+                        <h3>Zéro Maintenance</h3>
+                        <p>Pas d'électrolyte, pas d'effet mémoire, BMS automatisé - Maintenance quasi nulle.</p>
+                        <div class="advantage-impact">
+                            <strong>Impact :</strong> <span data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">42 240$</span> économisés sur 20 ans
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-card animate-on-scroll">
+                        <div class="advantage-icon">🛡️</div>
+                        <h3>Sécurité Renforcée</h3>
+                        <p>BMS sophistiqué multi-niveau, protections OVP/UVP/OCP/OTP, court-circuit.</p>
+                        <div class="advantage-impact">
+                            <strong>Impact :</strong> Risque d'incident quasi-nul
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-card animate-on-scroll">
+                        <div class="advantage-icon">🌿</div>
+                        <h3>100% Écologique</h3>
+                        <p>Zéro cadmium toxique, conforme RoHS, recyclable, pas de terres rares.</p>
+                        <div class="advantage-impact">
+                            <strong>Impact :</strong> Image éco-responsable, conformité réglementaire
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-card animate-on-scroll">
+                        <div class="advantage-icon">🍁</div>
+                        <h3>🔥 EXCLUSIF : Fierté Québécoise!</h3>
+                        <p><strong>UNIQUE au Canada :</strong> Assemblé à Québec avec ingénierie EDS. <strong>Support en français 24/7/365</strong>, intervention locale <24h. <strong>Soutenez l'économie locale!</strong></p>
+                        <div class="advantage-impact">
+                            <strong>Valeur ajoutée :</strong> <strong>Aucun frais de support international</strong> + Crédits d'impôt québécois possible!
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-card animate-on-scroll">
+                        <div class="advantage-icon">⚡</div>
+                        <h3>Performance Énergétique</h3>
+                        <p>117 Wh/kg de densité énergétique maximale, charge ultra-rapide 1-2h, 96% DOD utilisable.</p>
+                        <div class="advantage-impact">
+                            <strong>Impact :</strong> 4× plus d'énergie, moins d'indisponibilité
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-card animate-on-scroll">
+                        <div class="advantage-icon">🧊</div>
+                        <h3>Climat Québécois</h3>
+                        <p>Auto-chauffage intégré -40°C, BMS gestion thermique, fonctionnement garanti.</p>
+                        <div class="advantage-impact">
+                            <strong>Impact :</strong> Fiabilité hivernale totale
+                        </div>
+                    </div>
+                    
+                    <div class="advantage-card animate-on-scroll">
+                        <div class="advantage-icon">🏆</div>
+                        <h3>💰 IMBATTABLE : Prix Révolutionnaire!</h3>
+                        <p><strong>PRIX CHOC :</strong> Seulement <span data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency">2750$</span> au lieu de 12 000$! <strong>ROI immédiat garanti.</strong> Amortissement en moins de 2 ans vs coûts Ni-Cd!</p>
+                        <div class="advantage-impact">
+                            <strong>Économie instantanée :</strong> <strong><span data-pricing-value="calculations.tco_vente.initial_savings" data-pricing-format="currency">9 250$</span></strong> dès le premier jour!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+                
+    <!-- Section Versus Comparative -->
+    <section id="versus" class="section versus">
+        <div class="container">
+            <div class="versus-content">
+                <h2 class="versus-title">🥊 COMBAT : Li-CUBE PRO™ CRASE le Ni-Cd!</h2>
+                <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8); margin-bottom: 2rem;">
+                    <strong>🏆 MATCH DU SIÈCLE :</strong> Technologie du futur vs vestiges du passé. <strong>Qui survivra à la révolution énergétique?</strong>
+                </p>
+                
+                <div class="versus-grid">
+                    <!-- Colonne Li-CUBE PRO -->
+                    <div class="versus-column">
+                        <h3 style="color: var(--success); font-size: 1.5rem; margin-bottom: 1rem; text-align: center;">
+                            🚀 Li-CUBE PRO™ LiFePO4
+                        </h3>
+                        
+                        <div class="comparison-item advantage animate-on-scroll">
+                            <div class="comparison-icon">🔋</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">🚀 8000+ cycles vs 1500</div>
+                                <div class="comparison-desc"><strong>5× plus durable!</strong> 25 ans vs 4 ans seulement</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item advantage animate-on-scroll">
+                            <div class="comparison-icon">⚖️</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">23 kg ultraléger</div>
+                                <div class="comparison-desc">Manutention facile et sécurisée</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item advantage animate-on-scroll">
+                            <div class="comparison-icon">🛠️</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">Zéro maintenance</div>
+                                <div class="comparison-desc">BMS automatisé, aucune intervention</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item advantage animate-on-scroll">
+                            <div class="comparison-icon">⚡</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">Charge rapide 1-2h</div>
+                                <div class="comparison-desc">Remise en service immédiate</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item advantage animate-on-scroll">
+                            <div class="comparison-icon">📱</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">🤖 IA Intégrée + IoT 5G</div>
+                                <div class="comparison-desc"><strong>Maintenance prédictive</strong> - Plus JAMAIS de panne surprise!</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item advantage animate-on-scroll">
+                            <div class="comparison-icon">🌿</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">100% écologique</div>
+                                <div class="comparison-desc">Sans cadmium, RoHS, recyclable</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item advantage animate-on-scroll">
+                            <div class="comparison-icon">💰</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title"><span data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency">2750$</span> seulement</div>
+                                <div class="comparison-desc">Prix d'achat compétitif</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Séparateur VS -->
+                    <div class="versus-separator">
+                        <div class="versus-line"></div>
+                        <div class="versus-vs">VS</div>
+                        <div class="versus-line"></div>
+                    </div>
+                    
+                    <!-- Colonne Ni-Cd -->
+                    <div class="versus-column">
+                        <h3 style="color: var(--danger); font-size: 1.5rem; margin-bottom: 1rem; text-align: center;">
+                            ☠️ Batteries Ni-Cd (Saft)
+                        </h3>
+                        
+                        <div class="comparison-item disadvantage animate-on-scroll">
+                            <div class="comparison-icon">🔋</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">1500-3000 cycles max</div>
+                                <div class="comparison-desc">5-6 ans seulement, effet mémoire</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item disadvantage animate-on-scroll">
+                            <div class="comparison-icon">⚖️</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">80-100 kg très lourd</div>
+                                <div class="comparison-desc">Manutention dangereuse, équipement spécialisé</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item disadvantage animate-on-scroll">
+                            <div class="comparison-icon">🛠️</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title"><span data-pricing-value="modes.vente.nicd.maintenance_annual" data-pricing-format="currency">2112$</span>/an maintenance</div>
+                                <div class="comparison-desc">Électrolyte, visites, fuites KOH</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item disadvantage animate-on-scroll">
+                            <div class="comparison-icon">⚡</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">Charge lente 8-12h</div>
+                                <div class="comparison-desc">Indisponibilité prolongée</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item disadvantage animate-on-scroll">
+                            <div class="comparison-icon">📱</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">Aucun monitoring</div>
+                                <div class="comparison-desc">Maintenance réactive uniquement</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item disadvantage animate-on-scroll">
+                            <div class="comparison-icon">☠️</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title">Cadmium TOXIQUE</div>
+                                <div class="comparison-desc">Dangereux REACH, recyclage complexe</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-item disadvantage animate-on-scroll">
+                            <div class="comparison-icon">💸</div>
+                            <div class="comparison-content">
+                                <div class="comparison-title"><span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">12 000$</span> l'unité</div>
+                                <div class="comparison-desc">5× plus cher que Li-CUBE PRO</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Résumé TCO -->
+                <div style="background: linear-gradient(135deg, var(--accent) 0%, #FF6B35 100%); border-radius: 20px; padding: 2rem; margin-top: 3rem; text-align: center;">
+                    <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">💰 TCO sur 20 ans : Li-CUBE PRO™ GAGNE!</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem;">
+                        <div style="background: rgba(255,255,255,0.2); padding: 1.5rem; border-radius: 15px;">
+                            <div style="font-size: 2rem; font-weight: 900; color: white;" data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency">2 750$</div>
+                            <div style="color: rgba(255,255,255,0.9);">Li-CUBE PRO™<br>Achat + Monitoring 20 ans</div>
+                        </div>
+                        <div style="background: rgba(220, 53, 69, 0.8); padding: 1.5rem; border-radius: 15px;">
+                            <div style="font-size: 2rem; font-weight: 900; color: white;" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">45 000$</div>
+                            <div style="color: rgba(255,255,255,0.9);">Ni-Cd Saft<br>3-4 remplacements + maintenance</div>
+                        </div>
+                        <div style="background: rgba(40, 167, 69, 0.8); padding: 1.5rem; border-radius: 15px;">
+                            <div style="font-size: 2rem; font-weight: 900; color: white;" data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">42 250$</div>
+                            <div style="color: rgba(255,255,255,0.9);">ÉCONOMIES<br>garanties avec Li-CUBE PRO™!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+                <div class="solution-visual">
+                    <div class="tech-comparison">
+                        <div class="tech-card winner animate-on-scroll">
+                            <h3 class="tech-name">Li-CUBE PRO™ LFP</h3>
+                            <div class="tech-specs">
+                                <div class="spec-line">
+                                    <span>Poids</span>
+                                    <span><strong>23 kg</strong></span>
+                                </div>
+                                <div class="spec-line">
+                                    <span>Cycles</span>
+                                    <span><strong>≥8000 vs 1500 Ni-Cd</strong></span>
+                                </div>
+                                <div class="spec-line">
+                                    <span>Maintenance</span>
+                                    <span><strong>Zéro</strong></span>
+                                </div>
+                                <div class="spec-line">
+                                    <span>Connectivité</span>
+                                    <span><strong>IoT complet</strong></span>
+                                </div>
+                                <div class="spec-line">
+                                    <span>Prix</span>
+                                    <span><strong><span data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency">6325 CAD</span></strong></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="vs-indicator">
+                            <div class="vs-circle">VS</div>
+                            <div class="advantage-badge">90% d'économies</div>
+                        </div>
+                        
+                        <div class="tech-card animate-on-scroll">
+                            <h3 class="tech-name">Ni-Cd Saft</h3>
+                            <div class="tech-specs">
+                                <div class="spec-line">
+                                    <span>Poids</span>
+                                    <span>80 kg</span>
+                                </div>
+                                <div class="spec-line">
+                                    <span>Cycles</span>
+                                    <span data-pricing-value="modes.vente.nicd.cycles" data-pricing-format="number">1500</span>
+                                </div>
+                                <div class="spec-line">
+                                    <span>Maintenance</span>
+                                    <span>2 visites/an</span>
+                                </div>
+                                <div class="spec-line">
+                                    <span>Connectivité</span>
+                                    <span>Aucune</span>
+                                </div>
+                                <div class="spec-line">
+                                    <span>Prix</span>
+                                    <span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">12000 CAD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section TCO -->
+    <section id="tco" class="section tco">
+        <div class="container">
+            <div class="tco-content">
+                <h2 class="tco-title">TCO Révolutionnaire sur 20 ans</h2>
+                <p class="tco-subtitle">
+                    Économies substantielles avec Li-CUBE PRO™ - Calcul basé sur données réelles Saft
+                </p>
+                
+                <div class="tco-comparison animate-on-scroll">
+                    <div class="tco-card winner">
+                        <h3>Li-CUBE PRO™ LFP</h3>
+                        <span class="tco-amount" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">6 325 CAD</span>
+                        <p class="tco-period">Total sur 20 ans</p>
+                        <div class="tco-breakdown">
+                            <div class="breakdown-line">
+                                <span>Batterie initiale</span>
+                                <span data-pricing-value="modes.vente.licube.price_total" data-pricing-format="currency">6325 CAD</span>
+                            </div>
+                            <div class="breakdown-line">
+                                <span>Monitoring</span>
+                                <span data-pricing-value="calculations.tco_vente.licube.monitoring_20_years" data-pricing-format="currency">4800 CAD</span>
+                            </div>
+                            <div class="breakdown-line">
+                                <span>Maintenance</span>
+                                <span>0 CAD</span>
+                            </div>
+                            <div class="breakdown-line">
+                                <span>Remplacements</span>
+                                <span>0 CAD</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tco-vs">
+                        <div class="savings-highlight">
+                            <div class="savings-amount" data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">46 315 CAD</div>
+                            <div class="savings-percent">d'économies (-90%)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tco-card loser">
+                        <h3>Batteries Ni-Cd Saft</h3>
+                        <span class="tco-amount" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">57 040 CAD</span>
+                        <p class="tco-period">Total sur 20 ans</p>
+                        <div class="tco-breakdown">
+                            <div class="breakdown-line">
+                                <span>Batterie initiale</span>
+                                <span data-pricing-value="modes.vente.nicd.price_base" data-pricing-format="currency">12000 CAD</span>
+                            </div>
+                            <div class="breakdown-line">
+                                <span>Maintenance (20 ans)</span>
+                                <span data-pricing-value="calculations.tco_vente.nicd.maintenance_20_years" data-pricing-format="currency">9040 CAD</span>
+                            </div>
+                            <div class="breakdown-line">
+                                <span>3 Remplacements</span>
+                                <span data-pricing-value="calculations.tco_vente.nicd.replacements_cost" data-pricing-format="currency">36000 CAD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calculateur TCO -->
+                <div class="tco-calculator animate-on-scroll">
+                    <h3 class="calculator-title">🧮 Calculateur TCO Personnalisé</h3>
+                    
+                    <div class="calculator-controls">
+                        <div class="control-group">
+                            <label class="control-label">Période d'analyse (années)</label>
+                            <div class="slider-container">
+                                <input type="range" class="slider" id="period-slider" min="5" max="25" value="20">
+                                <div class="slider-value" id="period-value">20 ans</div>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Nombre d'unités</label>
+                            <div class="slider-container">
+                                <input type="range" class="slider" id="units-slider" min="1" max="50" value="1">
+                                <div class="slider-value" id="units-value">1 unité</div>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Coût maintenance Ni-Cd (CAD/an/unité)</label>
+                            <input type="number" class="control-input" id="maintenance-cost" value="452" min="200" max="1000">
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-results">
+                        <div class="result-card">
+                            <div class="result-value" id="total-savings" data-pricing-value="calculations.tco_vente.savings.total" data-pricing-format="currency">50 715 CAD</div>
+                            <div class="result-label">Économies totales</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="payback-period">2 mois</div>
+                            <div class="result-label">Retour sur investissement</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="lfp-total" data-pricing-value="calculations.tco_vente.licube.total_20_years" data-pricing-format="currency">11 125 CAD</div>
+                            <div class="result-label">TCO Li-CUBE PRO™</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-value" id="nicd-total" data-pricing-value="calculations.tco_vente.nicd.total_20_years" data-pricing-format="currency">57 040 CAD</div>
+                            <div class="result-label">TCO Ni-Cd</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-text">
+                    <h2>Prêt à Révolutionner vos Batteries ?</h2>
+                    <p>
+                        Nos experts EDS Québec vous accompagnent dans la transition vers Li-CUBE PRO™ LFP.
+                        Support technique local, garantie étendue et formation incluse.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <strong>Téléphone</strong><br>
+                                <span class="phone">819&nbsp;323&nbsp;7859</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <strong>Email</strong><br>
+                                <span class="email">contact@edsquebec.com</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🌐</div>
+                            <div>
+                                <strong>Site web</strong><br>
+                                https://edsquebec.com
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Localisation</strong><br>
+                                Québec, Canada
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-section animate-on-scroll">
+                    <h3 class="section-title">📞 CONTACT IMMÉDIAT VENTE</h3>
+                    
+                    <div class="contact-grid">
+                        <div class="contact-card">
+                            <div class="contact-icon">📞</div>
+                            <h4>Téléphone Direct</h4>
+                            <p class="contact-value">819 323 7859</p>
+                            <small>24h/24, 7j/7</small>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">✉️</div>
+                            <h4>Email</h4>
+                            <p class="contact-value">contact@edsquebec.com</p>
+                            <small>Réponse garantie sous 24h</small>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">🏢</div>
+                            <h4>EDS Québec</h4>
+                            <p class="contact-value">Division Vente</p>
+                            <small>Spécialiste Li-CUBE PRO™</small>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <a href="tel:8193237859" class="btn btn-primary btn-large">
+                            <i class="fas fa-phone"></i>
+                            APPELER MAINTENANT
+                        </a>
+                        <a href="mailto:contact@edsquebec.com?subject=Demande Achat Li-CUBE PRO&body=Bonjour,%0A%0AJe souhaite obtenir une soumission pour l'achat de batteries Li-CUBE PRO.%0A%0ANombre d'unités:%0AApplication:%0ABudget approximatif:%0A%0AMerci" class="btn btn-secondary btn-large">
+                            <i class="fas fa-envelope"></i>
+                            ENVOYER EMAIL
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active navigation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Animate on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // TCO Calculator
+        const periodSlider = document.getElementById('period-slider');
+        const unitsSlider = document.getElementById('units-slider');
+        const maintenanceCost = document.getElementById('maintenance-cost');
+        const periodValue = document.getElementById('period-value');
+        const unitsValue = document.getElementById('units-value');
+
+        function updateSliderValue(slider, valueElement, suffix) {
+            const value = slider.value;
+            valueElement.textContent = value + suffix;
+            
+            const percent = ((value - slider.min) / (slider.max - slider.min)) * 100;
+            valueElement.style.left = percent + '%';
+        }
+
+        function calculateTCO() {
+            const period = parseInt(periodSlider.value);
+            const units = parseInt(unitsSlider.value);
+            const maintenancePerYear = parseInt(maintenanceCost.value);
+            
+            // Vérifier que le pricing manager est disponible
+            if (!window.pricingManager || !window.pricingManager.isLoaded) {
+                console.warn('⚠️ PricingManager non disponible pour calculateTCO');
+                return;
+            }
+            
+            // Li-CUBE PRO costs - utiliser les valeurs du pricing manager
+            const lfpPrixBase = window.pricingManager.getValue('modes.vente.licube.price_base') || 5000;
+            const lfpTaxes = window.pricingManager.getValue('modes.vente.licube.taxes_percent') || 14.975;
+            const lfpInstallation = window.pricingManager.getValue('modes.vente.licube.installation_cost') || 500;
+            const lfpUnitPrice = Math.round((lfpPrixBase * (1 + lfpTaxes/100)) + lfpInstallation);
+            const lfpTotal = lfpUnitPrice * units;
+            
+            // Ni-Cd costs - avec maintenance modifiable
+            const nicdPrixBase = window.pricingManager.getValue('modes.vente.nicd.price_base') || 12000;
+            const nicdTaxes = window.pricingManager.getValue('modes.vente.nicd.taxes_percent') || 14.975;
+            const nicdInstallation = window.pricingManager.getValue('modes.vente.nicd.installation_cost') || 500;
+            const nicdCycleRemplacement = window.pricingManager.getValue('nicd.replacement_cycle_years') || 6;
+            
+            const nicdUnitPrice = Math.round((nicdPrixBase * (1 + nicdTaxes/100)) + nicdInstallation);
+            const nicdInitial = nicdUnitPrice * units;
+            const nicdMaintenance = maintenancePerYear * units * period; // Utilise la valeur de l'input
+            
+            // Remplacements basés sur le cycle configuré
+            const replacementCycles = Math.floor(period / nicdCycleRemplacement);
+            const nicdReplacements = replacementCycles * nicdPrixBase * units;
+            
+            const nicdTotal = nicdInitial + nicdMaintenance + nicdReplacements;
+            
+            // Calculs économies
+            const totalSavings = nicdTotal - lfpTotal;
+            const paybackMonths = totalSavings > 0 ? Math.round((lfpTotal / (totalSavings / (period * 12))) * 12) : 0;
+            
+            // Update display
+            document.getElementById('total-savings').textContent = totalSavings.toLocaleString('fr-CA') + ' CAD';
+            document.getElementById('payback-period').textContent = 'Immédiat';
+            document.getElementById('lfp-total').textContent = lfpTotal.toLocaleString('fr-CA') + ' CAD';
+            document.getElementById('nicd-total').textContent = nicdTotal.toLocaleString('fr-CA') + ' CAD';
+        }
+
+        // Event listeners for sliders
+        periodSlider.addEventListener('input', () => {
+            updateSliderValue(periodSlider, periodValue, ' ans');
+            calculateTCO();
+        });
+
+        unitsSlider.addEventListener('input', () => {
+            updateSliderValue(unitsSlider, unitsValue, unitsSlider.value == 1 ? ' unité' : ' unités');
+            calculateTCO();
+        });
+
+        maintenanceCost.addEventListener('input', calculateTCO);
+
+        // Initialize sliders and wait for pricing manager
+        updateSliderValue(periodSlider, periodValue, ' ans');
+        updateSliderValue(unitsSlider, unitsValue, ' unité');
+        
+        // Fonction d'initialisation avec valeurs du pricing manager
+        function initializeWithPricingData() {
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                // Initialiser l'input maintenance avec la valeur du JSON (une seule fois)
+                const maintenanceFromConfig = window.pricingManager.getValue('modes.vente.nicd.maintenance_annual') || 452;
+                maintenanceCost.value = maintenanceFromConfig;
+                
+                // Marquer l'input comme initialisé pour éviter les écrasements
+                maintenanceCost.setAttribute('data-initialized', 'true');
+                
+                // Surveillance directe de l'input pour empêcher les modifications non désirées
+                let userValue = maintenanceFromConfig; // Valeur contrôlée par l'utilisateur
+                
+                // Observer les changements involontaires de l'input
+                const observer = new MutationObserver(() => {
+                    if (maintenanceCost.value != userValue && !maintenanceCost.matches(':focus')) {
+                        console.log(`🛡️ Restauration input: ${maintenanceCost.value} → ${userValue}`);
+                        maintenanceCost.value = userValue;
+                    }
+                });
+                observer.observe(maintenanceCost, { attributes: true, attributeOldValue: true });
+                
+                // Surveiller les changements de valeur (setters)
+                let lastValue = userValue;
+                setInterval(() => {
+                    if (maintenanceCost.value != lastValue && !maintenanceCost.matches(':focus')) {
+                        console.log(`🔄 Changement détecté: ${lastValue} → ${maintenanceCost.value}`);
+                        if (maintenanceCost.value != userValue) {
+                            console.log(`🛡️ Restauration forcée: ${maintenanceCost.value} → ${userValue}`);
+                            maintenanceCost.value = userValue;
+                        }
+                    }
+                    lastValue = maintenanceCost.value;
+                }, 500);
+                
+                // Écouter les changements utilisateur
+                maintenanceCost.addEventListener('input', () => {
+                    userValue = maintenanceCost.value; // Mettre à jour la valeur de référence
+                    console.log(`👤 Utilisateur a modifié: ${userValue}`);
+                });
+                maintenanceCost.addEventListener('change', () => {
+                    userValue = maintenanceCost.value;
+                    console.log(`👤 Utilisateur a confirmé: ${userValue}`);
+                });
+                
+                console.log(`✅ Input maintenance initialisé avec: ${maintenanceFromConfig} CAD/an`);
+                calculateTCO();
+            }
+        }
+        
+        // Initialiser les calculs quand le pricing manager est prêt
+        if (window.pricingManager && window.pricingManager.isLoaded) {
+            initializeWithPricingData();
+        } else {
+            document.addEventListener('pricingManagerReady', initializeWithPricingData);
+            // Timeout de sécurité
+            setTimeout(() => {
+                if (window.pricingManager) {
+                    initializeWithPricingData();
+                }
+            }, 2000);
+        }
+
+        // Contact direct - pas de formulaire
+
+        // Initialize fade-in animations
+        document.querySelectorAll('.fade-in-up').forEach((el, index) => {
+            el.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        console.log('Li-CUBE PRO™ - Présentation Interactive EDS Québec');
+
+        // Initialisation du système de prix centralisé
+        document.addEventListener('pricingManagerReady', function() {
+            console.log('✅ Système de prix centralisé activé - Mise à jour présentation vente...');
+            if (window.pricingManager) {
+                // Mise à jour de tous les éléments de prix avec le mode vente
+                window.pricingManager.updateAllDisplays('vente');
+            }
+        });
+    </script>
+
+    <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
+    <!-- Gestionnaire Centralisé des Prix - OBLIGATOIRE -->
+    <script src="../../js/pricing-manager.js"></script>
+    <script src="../../js/image-config.js"></script>
+    <script>
+        // Mise à jour du background CSS pour Li-CUBE PRO™
+        document.addEventListener('DOMContentLoaded', function() {
+            const licubeImagePath = loadLiCubeImage('Li-CUBE PRO image 1.png', 3);
+            document.documentElement.style.setProperty('--licube-bg-image', `url('${licubeImagePath}')`);
+        });
+    </script>
+    
+    <!-- Script système de notes testeur alpha -->
+    <script src="../../module_notes/notes-module.js"></script>
+    
+    <!-- Script navigation retour et gestion musique -->
+    <script src="../../js/navigation-retour.js"></script>
+
+</body>
+</html>

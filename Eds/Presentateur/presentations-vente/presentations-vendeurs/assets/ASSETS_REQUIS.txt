@@ -1,0 +1,165 @@
+===============================================================================
+🎯 ASSETS REQUIS - Li-CUBE PRO™ PRÉSENTATIONS VENTE & LOCATION
+===============================================================================
+
+📁 STRUCTURE DE DOSSIERS REQUISE :
+presentations-vente/presentations-vendeurs/assets/
+├── images/
+│   ├── logos/
+│   ├── produits/
+│   ├── comparaisons/
+│   ├── graphiques/
+│   └── icones/
+├── videos/
+├── documents/
+└── data/
+
+===============================================================================
+🖼️ IMAGES REQUISES
+===============================================================================
+
+📂 assets/images/logos/
+├── edsquebec-logo.png              # Logo EDS Québec principal (500x200px)
+├── edsquebec-logo-blanc.png        # Logo blanc pour fonds sombres
+├── li-cube-pro-logo.png            # Logo produit Li-CUBE PRO™
+└── certifications.png              # Logos CSA, UL, CE, RoHS alignés
+
+📂 assets/images/produits/
+├── li-cube-pro-principal.jpg       # Photo principale batterie (1200x800px)
+├── li-cube-pro-angle1.jpg          # Vue angle 1 (800x600px)
+├── li-cube-pro-angle2.jpg          # Vue angle 2 (800x600px)
+├── li-cube-pro-dimensions.png      # Schéma dimensions techniques
+├── bms-ecran.jpg                   # Photo écran BMS en fonctionnement
+├── connecteurs-detail.jpg          # Photo détail connecteurs
+├── installation-exemple.jpg        # Photo installation type
+└── li-cube-pro-vs-nicd.jpg         # Photo comparative tailles
+
+📂 assets/images/comparaisons/
+├── tableau-comparatif-vente.png    # Tableau Li-CUBE PRO vs Ni-Cd VENTE
+├── tableau-comparatif-location.png # Tableau Li-CUBE PRO vs Ni-Cd LOCATION
+├── graphique-tco-vente.png         # Graphique TCO mode vente
+├── graphique-tco-location.png      # Graphique TCO mode location
+├── economies-realises.png          # Graphique économies sur 20 ans
+├── performance-temps.png           # Graphique performance dans le temps
+└── avantages-visuels.png           # Infographie avantages clés
+
+📂 assets/images/graphiques/
+├── stats-principales-vente.png     # Graphique statistiques mode vente
+├── stats-principales-location.png  # Graphique statistiques mode location
+├── roi-timeline.png                # Timeline retour sur investissement
+├── maintenance-comparaison.png     # Graphique maintenance Ni-Cd vs Li-CUBE
+├── pannes-statistiques.png         # Statistiques pannes Ni-Cd
+└── capacite-degradation.png        # Graphique dégradation capacité
+
+📂 assets/images/icones/
+├── icone-batterie.svg              # Icône batterie
+├── icone-monitoring.svg            # Icône surveillance
+├── icone-maintenance.svg           # Icône maintenance
+├── icone-garantie.svg              # Icône garantie
+├── icone-economies.svg             # Icône économies
+├── icone-performance.svg           # Icône performance
+├── icone-support.svg               # Icône support 24/7
+└── icone-innovation.svg            # Icône innovation
+
+===============================================================================
+🎬 VIDÉOS REQUISES
+===============================================================================
+
+📂 assets/videos/
+├── li-cube-pro-demo.mp4            # Démonstration produit (2-3 min)
+├── installation-process.mp4        # Processus installation (1-2 min)
+├── monitoring-interface.mp4        # Interface monitoring en action
+├── comparaison-ni-cd.mp4           # Comparaison visuelle avec Ni-Cd
+└── temoignage-client.mp4           # Témoignage client (optionnel)
+
+Formats recommandés :
+- Résolution : 1920x1080 (Full HD)
+- Format : MP4, H.264
+- Durée : 30 secondes à 3 minutes max
+- Taille : < 50MB par fichier
+
+===============================================================================
+📄 DOCUMENTS REQUIS
+===============================================================================
+
+📂 assets/documents/
+├── fiche-technique-li-cube-pro.pdf # Fiche technique complète
+├── certificats-csa-ul.pdf          # Certificats de conformité
+├── garantie-conditions.pdf         # Conditions de garantie
+├── guide-installation.pdf          # Guide d'installation
+├── manuel-utilisateur.pdf          # Manuel utilisateur
+├── contrat-location-type.pdf       # Modèle contrat location
+└── brochure-commerciale.pdf        # Brochure commerciale
+
+===============================================================================
+🎨 SPÉCIFICATIONS TECHNIQUES IMAGES
+===============================================================================
+
+📊 FORMATS REQUIS SELON DESTINATION :
+
+🖥️ PRÉSENTATIONS WEB (interactives) :
+- Résolution : Responsive (min 1200px largeur)
+- Format : PNG avec transparence / JPG haute qualité
+- Optimisation web : < 500KB par image
+
+🖨️ DOCUMENTS LETTER (8.5" x 11") :
+- Résolution : 300 DPI minimum
+- Dimensions : 2550x3300px pour pleine page
+- Format : PNG haute qualité ou PDF vectoriel
+
+🖨️ POSTERS A1 (594 x 841 mm) :
+- Résolution : 300 DPI minimum  
+- Dimensions : 7016x9933px pour pleine page
+- Format : PNG ultra haute qualité ou PDF vectoriel
+
+===============================================================================
+🎯 PATHS ABSOLUS DANS LE CODE
+===============================================================================
+
+Les chemins suivants sont utilisés dans le code et ne doivent PAS être modifiés.
+Placez simplement les fichiers aux bons endroits :
+
+LOGOS :
+- ../assets/images/logos/edsquebec-logo.png
+- ../assets/images/logos/li-cube-pro-logo.png
+
+PRODUITS :
+- ../assets/images/produits/li-cube-pro-principal.jpg
+- ../assets/images/produits/li-cube-pro-vs-nicd.jpg
+
+GRAPHIQUES :
+- ../assets/images/graphiques/stats-principales-vente.png
+- ../assets/images/graphiques/stats-principales-location.png
+
+VIDÉOS :
+- ../assets/videos/li-cube-pro-demo.mp4
+
+DOCUMENTS :
+- ../assets/documents/fiche-technique-li-cube-pro.pdf
+
+===============================================================================
+✅ VALIDATION ASSETS
+===============================================================================
+
+Pour valider que tous les assets sont correctement placés :
+
+1. Vérifiez que tous les dossiers existent
+2. Vérifiez que tous les fichiers sont aux bons emplacements
+3. Testez l'affichage des pages en local
+4. Vérifiez que les liens de téléchargement fonctionnent
+
+⚠️ IMPORTANT : 
+- Respectez exactement les noms de fichiers (sensible à la casse)
+- Les extensions doivent correspondre (.png, .jpg, .mp4, .pdf)
+- Taille max recommandée : 5MB par fichier image, 50MB par vidéo
+
+===============================================================================
+📞 CONTACT POUR ASSETS MANQUANTS
+===============================================================================
+
+Si des assets sont manquants ou nécessitent une création :
+📧 Email : contact@edsquebec.com
+📞 Tel : 819 323 7859
+🌐 Web : https://edsquebec.com/assets
+
+===============================================================================

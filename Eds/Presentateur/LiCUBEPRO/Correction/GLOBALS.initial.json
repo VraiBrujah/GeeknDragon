@@ -1,0 +1,126 @@
+{
+  "licube": {
+    "model": "LCP-25.6V-105Ah",
+    "chemistry": "LiFePO4",
+    "voltage_nominal_v": 25.6,
+    "capacity_ah": 105,
+    "energy_total_wh": 2688,
+    "energy_density_wh_per_kg": 117,
+    "volumetric_density_wh_per_l": 157,
+    "self_discharge_pct_per_month": 1.2,
+    "efficiency_pct": 96,
+    "cycle_life_at_80dod": 8000,
+    "soc_operating_range_pct": [
+      10,
+      90
+    ],
+    "charge_current_recommended_a": 80,
+    "charge_current_max_a": 100,
+    "hvr_v": [
+      27.6,
+      28.4
+    ],
+    "hvc_v": [
+      28.8,
+      29.2
+    ],
+    "float_voltage_recommended_v": [
+      25.6,
+      26.24
+    ],
+    "discharge_current_cont_a": 105,
+    "discharge_current_peak_10s_a": 210,
+    "lvr_v": [
+      23.2,
+      24.8
+    ],
+    "lvc_v": 21.6,
+    "reconnect_v": 24.0,
+    "temp_charge_c": [
+      -40,
+      45
+    ],
+    "temp_discharge_c": [
+      -40,
+      55
+    ],
+    "dimensions_mm": [
+      420,
+      240,
+      155
+    ],
+    "weight_kg": 23,
+    "ip_rating": "IP20",
+    "ip_option": "IP65",
+    "connectivity": [
+      "Bluetooth",
+      "Wi-Fi",
+      "GPRS (option/location inclus)",
+      "GPS"
+    ],
+    "can_bus": "VE.CAN compatible",
+    "notifications": [
+      "Email",
+      "SMS"
+    ],
+    "price_cad_min": 2500,
+    "price_cad_max": 3000,
+    "warranty_years": 10,
+    "weight_reduction_percentage": 71
+  },
+  "nicd": {
+    "voltage_nominal_v": 24.0,
+    "capacity_ah": 100,
+    "energy_total_wh": 2400,
+    "energy_density_wh_per_kg": 30,
+    "volumetric_density_wh_per_l": 27,
+    "cycle_life_typical": 2500,
+    "charge_time_hours": [
+      8,
+      12
+    ],
+    "maintenance_visits_per_year": 2,
+    "weight_kg": 80,
+    "dimensions_mm": [
+      600,
+      500,
+      300
+    ],
+    "connectivity": [],
+    "price_cad": 12000
+  },
+  "calculations": {
+    "tco_vente": {
+      "licube": {
+        "total_20_years": 2500
+      },
+      "nicd": {
+        "total_20_years": 45000
+      },
+      "savings": {
+        "total": 42500,
+        "percentage": 94.4
+      }
+    },
+    "tco_location": {
+      "licube": {
+        "total_20_years": 2500
+      },
+      "nicd": {
+        "total_20_years": 45000
+      },
+      "savings": {
+        "total": 42500,
+        "percentage": 94.4
+      }
+    }
+  },
+  "mode": {
+    "vente": {
+      "monitoring_included": false
+    },
+    "location": {
+      "monitoring_included": true
+    }
+  }
+}

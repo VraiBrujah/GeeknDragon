@@ -714,7 +714,7 @@ p {
                 </div>
                 <div class="cover-highlight">
                     REMPLACEZ VOS NI-CD<br>
-                    ÉCONOMISEZ 90%
+                    ÉCONOMISEZ <span data-pricing-value="calculations.tco_vente.savings.percentage" data-pricing-format="number">—</span>%
                 </div>
             </div>
             <div class="cover-footer">
@@ -792,7 +792,7 @@ p {
                         <span>⚡</span>
                         <span>Durée de Vie Exceptionnelle</span>
                     </div>
-                    <div class="feature-value">≥8000 cycles @ 80% DOD (20-25 ans réels)</div>
+                    <div class="feature-value">≥<span data-pricing-value="licube.cycle_life_at_80dod" data-pricing-format="cycles">—</span> cycles @ 80% DOD (20-25 ans réels)</div>
                 </div>
                 
                 <div class="feature-item">
@@ -1308,6 +1308,10 @@ p {
                 initBrochureVente();
             });
         </script>
+        
+        <!-- Scripts système de variables globales -->
+        <script src="../../../js/globals-manager.js" defer></script>
+        <script src="../../../js/hardcoded-replacer.js" defer></script>
         
         <!-- Script système de notes testeur alpha -->
         <script src="../../../module_notes/notes-module.js"></script>

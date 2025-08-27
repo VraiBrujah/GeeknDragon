@@ -1275,16 +1275,16 @@
                     
                     <div class="hero-stats">
                         <div class="stat-card">
-                            <span class="stat-value">25.6V</span>
-                            <span class="stat-label">105Ah LiFePO4</span>
+                            <span class="stat-value"><span data-pricing-value="licube.voltage_nominal_v" data-pricing-format="voltage">—</span></span>
+                            <span class="stat-label"><span data-pricing-value="licube.capacity_ah" data-pricing-format="number">—</span>Ah LiFePO4</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-value">≥8000<br>vs<br>1500</span>
+                            <span class="stat-value">≥<span data-pricing-value="licube.cycle_life_at_80dod" data-pricing-format="cycles">—</span><br>vs<br><span data-pricing-value="nicd.cycle_life_typical" data-pricing-format="cycles">—</span></span>
                             <span class="stat-label">Cycles Li-CUBE<br>vs<br>Ni-Cd</span>
                         </div>
                         <div class="stat-card">
-                            <span class="stat-value">23kg</span>
-                            <span class="stat-label">vs 80kg Ni-Cd</span>
+                            <span class="stat-value"><span data-pricing-value="licube.weight_kg" data-pricing-format="weight">—</span></span>
+                            <span class="stat-label">vs <span data-pricing-value="nicd.weight_kg" data-pricing-format="weight">—</span> Ni-Cd</span>
                         </div>
                     </div>
                 </div>
@@ -2142,6 +2142,10 @@
             document.documentElement.style.setProperty('--licube-bg-image', `url('${licubeImagePath}')`);
         });
     </script>
+    
+    <!-- Scripts système de variables globales -->
+    <script src="../../js/globals-manager.js" defer></script>
+    <script src="../../js/hardcoded-replacer.js" defer></script>
     
     <!-- Script système de notes testeur alpha -->
     <script src="../../module_notes/notes-module.js"></script>

@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Fiche Technique PDF</title>
+    <style>
+        @page {
+            size: 816px 1056px;
+            margin: 15mm;
+        }
+        
+        * {
+            margin: 0.5rem;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            color: #333;
+            line-height: 1.5;
+            font-size: 10pt;
+        }
+        
+        .document-container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 15mm;
+            align-items: center;
+            padding-bottom: 8mm;
+            border-bottom: 2px solid #1B365D;
+            margin-bottom: 8mm;
+        }
+        
+        .logo-section {
+            text-align: left;
+        }
+        
+        .logo {
+            font-size: 18pt;
+            font-weight: 900;
+            color: #1B365D;
+            margin-bottom: 2mm;
+        }
+        
+        .logo-subtitle {
+            font-size: 10pt;
+            color: #F18F01;
+            font-weight: 600;
+        }
+        
+        .title-section {
+            text-align: center;
+        }
+        
+        .document-title {
+            font-size: 24pt;
+            font-weight: 800;
+            color: #1B365D;
+            margin-bottom: 2mm;
+        }
+        
+        .document-subtitle {
+            font-size: 12pt;
+            color: #2E86AB;
+            font-weight: 500;
+        }
+        
+        .meta-info {
+            text-align: right;
+            font-size: 8pt;
+            color: #6c757d;
+        }
+        
+        .meta-item {
+            margin-bottom: 1mm;
+        }
+        
+        .certifications {
+            display: flex;
+            gap: 2mm;
+            margin-top: 3mm;
+        }
+        
+        .cert-badge {
+            background: #1B365D;
+            color: white;
+            padding: 1mm 3mm;
+            border-radius: 2mm;
+            font-size: 7pt;
+            font-weight: 600;
+        }
+        
+        .product-overview {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 1px solid #e9ecef;
+            border-radius: 4mm;
+            padding: 6mm;
+            margin-bottom: 6mm;
+            border-left: 4mm solid #28A745;
+        }
+        
+        .overview-title {
+            font-size: 14pt;
+            font-weight: 700;
+            color: #1B365D;
+            margin-bottom: 3mm;
+            text-align: center;
+        }
+        
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 6mm;
+            align-items: center;
+        }
+        
+        .overview-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4mm;
+        }
+        
+        .overview-item {
+            background: white;
+            padding: 3mm;
+            border-radius: 3mm;
+            border: 1px solid #e9ecef;
+        }
+        
+        .overview-label {
+            font-size: 8pt;
+            color: #6c757d;
+            font-weight: 600;
+            margin-bottom: 1mm;
+        }
+        
+        .overview-value {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #1B365D;
+        }
+        
+        .product-image {
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+            border: 2px solid #dee2e6;
+            border-radius: 4mm;
+            height: 40mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10pt;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        
+        .specifications-section {
+            margin-bottom: 8mm;
+        }
+        
+        .section-title {
+            font-size: 16pt;
+            font-weight: 800;
+            color: #1B365D;
+            margin-bottom: 4mm;
+            padding-bottom: 2mm;
+            border-bottom: 2px solid #F18F01;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6mm;
+        }
+        
+        .spec-category {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4mm;
+            padding: 4mm;
+            border-left: 3mm solid #2E86AB;
+        }
+        
+        .category-title {
+            font-size: 12pt;
+            font-weight: 700;
+            color: #1B365D;
+            margin-bottom: 3mm;
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+        
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .spec-row {
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-label {
+            padding: 2mm 0;
+            font-weight: 600;
+            color: #333;
+            width: 60%;
+            font-size: 9pt;
+        }
+        
+        .spec-value {
+            padding: 2mm 0;
+            font-weight: 500;
+            color: #2E86AB;
+            text-align: right;
+            font-size: 9pt;
+        }
+        
+        .comparison-section {
+            margin-bottom: 8mm;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6mm;
+        }
+        
+        .comparison-card {
+            border: 2px solid #e9ecef;
+            border-radius: 4mm;
+            padding: 4mm;
+            background: white;
+        }
+        
+        .comparison-card.lfp {
+            border-color: #28A745;
+            background: linear-gradient(135deg, #f8fff9 0%, #ffffff 100%);
+        }
+        
+        .comparison-card.nicd {
+            border-color: #DC3545;
+            background: linear-gradient(135deg, #fff8f8 0%, #ffffff 100%);
+        }
+        
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 3mm;
+            padding-bottom: 2mm;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .comparison-title {
+            font-size: 12pt;
+            font-weight: 700;
+            margin-bottom: 1mm;
+        }
+        
+        .comparison-title.lfp {
+            color: #28A745;
+        }
+        
+        .comparison-title.nicd {
+            color: #DC3545;
+        }
+        
+        .comparison-subtitle {
+            font-size: 9pt;
+            color: #6c757d;
+        }
+        
+        .comparison-specs {
+            list-style: none;
+        }
+        
+        .comparison-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2mm 0;
+            border-bottom: 1px solid #f1f3f4;
+            font-size: 9pt;
+        }
+        
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+        
+        .comparison-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .comparison-value {
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .comparison-value.positive {
+            color: #28A745;
+        }
+        
+        .comparison-value.negative {
+            color: #DC3545;
+        }
+        
+        .advantages-section {
+            background: linear-gradient(135deg, #28A745 0%, #34CE57 100%);
+            color: white;
+            border-radius: 4mm;
+            padding: 6mm;
+            margin-bottom: 8mm;
+        }
+        
+        .advantages-title {
+            font-size: 14pt;
+            font-weight: 800;
+            margin-bottom: 4mm;
+            text-align: center;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4mm;
+        }
+        
+        .advantage-item {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 3mm;
+            padding: 3mm;
+            text-align: center;
+        }
+        
+        .advantage-icon {
+            font-size: 16pt;
+            margin-bottom: 2mm;
+        }
+        
+        .advantage-title {
+            font-size: 9pt;
+            font-weight: 700;
+            margin-bottom: 1mm;
+        }
+        
+        .advantage-desc {
+            font-size: 8pt;
+            opacity: 0.9;
+        }
+        
+        .applications-section {
+            margin-bottom: 8mm;
+        }
+        
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4mm;
+        }
+        
+        .application-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 3mm;
+            padding: 4mm;
+            border-left: 3mm solid #F18F01;
+        }
+        
+        .application-title {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #1B365D;
+            margin-bottom: 2mm;
+        }
+        
+        .application-desc {
+            font-size: 9pt;
+            color: #6c757d;
+            margin-bottom: 2mm;
+        }
+        
+        .application-benefits {
+            list-style: none;
+        }
+        
+        .application-benefit {
+            font-size: 8pt;
+            color: #28A745;
+            font-weight: 600;
+            margin-bottom: 1mm;
+            padding-left: 3mm;
+            position: relative;
+        }
+        
+        .application-benefit::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #28A745;
+        }
+        
+        .footer {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10mm;
+            align-items: center;
+            padding-top: 6mm;
+            border-top: 2px solid #1B365D;
+            margin-top: 8mm;
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3mm;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+            font-size: 9pt;
+            color: #1B365D;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .contact-item span:last-child {
+            word-break: keep-all;
+            white-space: nowrap;
+        }
+        
+        /* Style pour les numéros de téléphone */
+        .phone, .tel, .telephone {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        /* Style pour les emails */
+        .email, .mail {
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+        }
+        
+        .contact-icon {
+            font-size: 10pt;
+            color: #F18F01;
+            width: 4mm;
+        }
+        
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+    
+        /* BOUTON IMPRESSION PDF */
+        .pdf-print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #F18F01 0%, #ff6b35 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(241, 143, 1, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .pdf-print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(241, 143, 1, 0.4);
+            background: linear-gradient(135deg, #ff6b35 0%, #F18F01 100%);
+        }
+        
+        .pdf-print-btn:active {
+            transform: translateY(0);
+        }
+        
+        .pdf-print-btn::before {
+            content: '🖨️';
+            font-size: 16px;
+        }
+        
+        @media print {
+            .pdf-print-btn {
+                display: none !important;
+            }
+        }
+        
+        
+        
+        
+        /* CSS IMPRESSION SIMPLE */
+        @media print {
+            /* Préserver les couleurs */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Masquer seulement les boutons */
+            .pdf-print-btn {
+                display: none !important;
+            }
+            
+            /* NE PAS modifier la taille ou position du contenu */
+            html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+        
+        /* Styles pour le dialogue simple */
+        .simple-print-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            z-index: 10000;
+            padding: 20px;
+            min-width: 350px;
+            border: 1px solid #ddd;
+        }
+        
+        .simple-print-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 9999;
+        }
+        
+        .simple-dialog-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1B365D;
+        }
+        
+        .simple-option-group {
+            margin-bottom: 12px;
+        }
+        
+        .simple-option-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+            display: block;
+        }
+        
+        .simple-option-select {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .simple-dialog-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .simple-print-btn, .simple-cancel-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .simple-print-btn {
+            background: #F18F01;
+            color: white;
+        }
+        
+        .simple-print-btn:hover {
+            background: #d47a01;
+        }
+        
+        .simple-cancel-btn {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .simple-cancel-btn:hover {
+            background: #e0e0e0;
+        }
+        
+        </style>
+</head>
+<body>
+
+        <button id="pdf-print-btn" class="pdf-print-btn" onclick="imprimerSimple()" title="Imprimer en PDF avec options (Ctrl+P)">
+            Imprimer en PDF
+        </button>
+        
+    <div class="document-container">
+        <!-- En-tête -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">EDS QUÉBEC</div>
+                <div class="logo-subtitle">Innovation Énergétique</div>
+            </div>
+            
+            <div class="title-section">
+                <div class="document-title">Li-CUBE PRO™</div>
+                <div class="document-subtitle">Fiche Technique • Batteries LiFePO4 Ferroviaires</div>
+            </div>
+            
+            <div class="meta-info">
+                <div class="meta-item"><strong>Version:</strong> 2.0.0</div>
+                <div class="meta-item"><strong>Date:</strong> 2025-08-22</div>
+                <div class="meta-item"><strong>Référence:</strong> LCP-25.6V-105Ah</div>
+                <div class="certifications">
+                    <div class="cert-badge">CSA</div>
+                    <div class="cert-badge">UL1973</div>
+                    <div class="cert-badge">CE</div>
+                    <div class="cert-badge">RoHS</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Aperçu produit -->
+        <div class="product-overview">
+            <div class="overview-title">🔋 Li-CUBE PRO™ - 25.6V 105Ah LiFePO4</div>
+            
+            <div class="overview-grid">
+                <div class="overview-content">
+                    <div class="overview-item">
+                        <div class="overview-label">Capacité</div>
+                        <div class="overview-value">105Ah (2688Wh)</div>
+                    </div>
+                    <div class="overview-item">
+                        <div class="overview-label">Durée de vie</div>
+                        <div class="overview-value">≥8000 cycles</div>
+                    </div>
+                    <div class="overview-item">
+                        <div class="overview-label">Poids</div>
+                        <div class="overview-value">23 kg</div>
+                    </div>
+                    <div class="overview-item">
+                        <div class="overview-label">Application</div>
+                        <div class="overview-value">Ferroviaire critique</div>
+                    </div>
+                </div>
+                
+                <div class="product-image">
+                    <img data-licube-image="Li-CUBE PRO image 1.png" data-depth="3" alt="Li-CUBE PRO™" class="licube-product-image" style="width: 100%; height: 120px; object-fit: contain; border-radius: 8px; background: rgba(255,255,255,0.1);"><br>
+                    420×240×155 mm
+                </div>
+            </div>
+        </div>
+        
+        <!-- Spécifications techniques -->
+        <div class="specifications-section">
+            <div class="section-title">📋 Spécifications Techniques Détaillées</div>
+            
+            <div class="specs-grid">
+                <div class="spec-category">
+                    <div class="category-title">⚡ Caractéristiques Électriques</div>
+                    <table class="spec-table">
+                        <tr class="spec-row">
+                            <td class="spec-label">Chimie</td>
+                            <td class="spec-value">LiFePO4 Grade A+</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Configuration</td>
+                            <td class="spec-value">8S (8 cellules série)</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Tension nominale</td>
+                            <td class="spec-value">25.6V</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Capacité nominale</td>
+                            <td class="spec-value">105Ah</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Énergie totale</td>
+                            <td class="spec-value">2688Wh</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Densité énergétique</td>
+                            <td class="spec-value">~117 Wh/kg</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Densité volumique</td>
+                            <td class="spec-value">≈ 157 Wh/L</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Auto-décharge</td>
+                            <td class="spec-value">&lt; 1.2%/mois</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Efficacité</td>
+                            <td class="spec-value">≥ 96%</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Cycles de vie</td>
+                            <td class="spec-value">≥8000 @ 80% DOD</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="spec-category">
+                    <div class="category-title">🔌 Charge et Décharge</div>
+                    <table class="spec-table">
+                        <tr class="spec-row">
+                            <td class="spec-label">Courant charge recommandé</td>
+                            <td class="spec-value">80A (0.76C)</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Courant charge maximum</td>
+                            <td class="spec-value">100A (0.95C)</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Temps de charge</td>
+                            <td class="spec-value">1-2h</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Tension HVR</td>
+                            <td class="spec-value">27.6 - 28.4V</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Tension HVC</td>
+                            <td class="spec-value">28.8 - 29.2V</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Courant décharge continu</td>
+                            <td class="spec-value">105A (1C)</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Courant pic 10s</td>
+                            <td class="spec-value">210A (2C)</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Tension LVR</td>
+                            <td class="spec-value">23.2 - 24.8V</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Tension LVC</td>
+                            <td class="spec-value">21.6V (2.7V/cell)</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">DOD exploitable</td>
+                            <td class="spec-value">96% sans dommage</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="spec-category">
+                    <div class="category-title">🌡️ Conditions Environnementales</div>
+                    <table class="spec-table">
+                        <tr class="spec-row">
+                            <td class="spec-label">Température opération</td>
+                            <td class="spec-value">-40°C à +55°C</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Température charge</td>
+                            <td class="spec-value">-40°C à +45°C</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Auto-chauffage</td>
+                            <td class="spec-value">Automatique &lt; 0°C</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Humidité</td>
+                            <td class="spec-value">Standard industriel</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Résistance vibrations</td>
+                            <td class="spec-value">Conforme ferroviaire</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="spec-category">
+                    <div class="category-title">📦 Caractéristiques Mécaniques</div>
+                    <table class="spec-table">
+                        <tr class="spec-row">
+                            <td class="spec-label">Dimensions</td>
+                            <td class="spec-value">420×240×155 mm</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Poids</td>
+                            <td class="spec-value">~23 kg</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Boîtier</td>
+                            <td class="spec-value">Acier peint</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Protection IP</td>
+                            <td class="spec-value">IP20 (IP65 option)</td>
+                        </tr>
+                        <tr class="spec-row">
+                            <td class="spec-label">Connexions</td>
+                            <td class="spec-value">Bornes M8</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Comparaison LFP vs Ni-Cd -->
+        <div class="comparison-section">
+            <div class="section-title">⚖️ Comparaison Li-CUBE PRO™ vs Ni-Cd</div>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card lfp">
+                    <div class="comparison-header">
+                        <div class="comparison-title lfp">🟢 Li-CUBE PRO™ LFP</div>
+                        <div class="comparison-subtitle">25.6V 105Ah - Technologie 2025 moderne</div>
+                    </div>
+                    
+                    <ul class="comparison-specs">
+                        <li class="comparison-item">
+                            <span class="comparison-label">Durée de vie</span>
+                            <span class="comparison-value positive">≥8000 cycles</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Poids</span>
+                            <span class="comparison-value positive">23 kg (-71%)</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Densité énergétique</span>
+                            <span class="comparison-value positive">117 Wh/kg (+290%)</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Temps de charge</span>
+                            <span class="comparison-value positive">1-2h (6× plus rapide)</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Maintenance</span>
+                            <span class="comparison-value positive">Zéro maintenance</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Connectivité</span>
+                            <span class="comparison-value positive">IoT complet</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">DOD exploitable</span>
+                            <span class="comparison-value positive">96% (+60%)</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Environnement</span>
+                            <span class="comparison-value positive">Sans cadmium</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card nicd">
+                    <div class="comparison-header">
+                        <div class="comparison-title nicd">🔴 Batteries Ni-Cd</div>
+                        <div class="comparison-subtitle">24V 100Ah - Technologie 1980 obsolète</div>
+                    </div>
+                    
+                    <ul class="comparison-specs">
+                        <li class="comparison-item">
+                            <span class="comparison-label">Durée de vie</span>
+                            <span class="comparison-value negative">1500 cycles</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Poids</span>
+                            <span class="comparison-value negative">~80 kg</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Densité énergétique</span>
+                            <span class="comparison-value negative">≈30 Wh/kg</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Temps de charge</span>
+                            <span class="comparison-value negative">8-12h</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Maintenance</span>
+                            <span class="comparison-value negative">2 visites/an</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Connectivité</span>
+                            <span class="comparison-value negative">Aucune</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">DOD exploitable</span>
+                            <span class="comparison-value negative">~60%</span>
+                        </li>
+                        <li class="comparison-item">
+                            <span class="comparison-label">Environnement</span>
+                            <span class="comparison-value negative">Cadmium toxique</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Avantages stratégiques -->
+        <div class="advantages-section">
+            <div class="advantages-title">✨ Avantages Stratégiques Li-CUBE PRO™</div>
+            
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔋</div>
+                    <div class="advantage-title">Durée de Vie 4× Supérieure</div>
+                    <div class="advantage-desc">8000+ cycles garantis vs 1500 cycles Ni-Cd</div>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔧</div>
+                    <div class="advantage-title">Zéro Maintenance</div>
+                    <div class="advantage-desc">Aucune intervention vs 2 visites/an Ni-Cd</div>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">📡</div>
+                    <div class="advantage-title">IoT Intégré</div>
+                    <div class="advantage-desc">GPS, Wi-Fi, monitoring temps réel</div>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">⚖️</div>
+                    <div class="advantage-title">71% Plus Léger</div>
+                    <div class="advantage-desc">23kg vs 80kg, installation simplifiée</div>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">⚡</div>
+                    <div class="advantage-title">Charge 6× Plus Rapide</div>
+                    <div class="advantage-desc">1-2h vs 8-12h Ni-Cd</div>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">🌱</div>
+                    <div class="advantage-title">Éco-Responsable</div>
+                    <div class="advantage-desc">Sans cadmium, 100% recyclable</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Applications -->
+        <div class="applications-section">
+            <div class="section-title">🎯 Applications et Cas d'Usage</div>
+            
+            <div class="applications-grid">
+                <div class="application-card">
+                    <div class="application-title">🚧 Passages à Niveau</div>
+                    <div class="application-desc">Alimentation secours systèmes critiques de sécurité</div>
+                    <ul class="application-benefits">
+                        <li class="application-benefit">Fiabilité 99.9%</li>
+                        <li class="application-benefit">Surveillance temps réel</li>
+                        <li class="application-benefit">Maintenance zéro</li>
+                    </ul>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-title">🚦 Signalisation Ferroviaire</div>
+                    <div class="application-desc">Alimentation continue équipements de signalisation</div>
+                    <ul class="application-benefits">
+                        <li class="application-benefit">Autonomie étendue</li>
+                        <li class="application-benefit">Monitoring GPS</li>
+                        <li class="application-benefit">Alerte préventive</li>
+                    </ul>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-title">📡 Systèmes Communication</div>
+                    <div class="application-desc">Alimentation réseaux communication train-sol</div>
+                    <ul class="application-benefits">
+                        <li class="application-benefit">Connectivité native</li>
+                        <li class="application-benefit">Performance stable</li>
+                        <li class="application-benefit">Intégration IoT</li>
+                    </ul>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-title">💡 Éclairage d'Urgence</div>
+                    <div class="application-desc">Éclairage secours tunnels et gares</div>
+                    <ul class="application-benefits">
+                        <li class="application-benefit">Charge rapide</li>
+                        <li class="application-benefit">Longue autonomie</li>
+                        <li class="application-benefit">Faible maintenance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pied de page -->
+        <div class="footer">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">🏢</span>
+                    <span>EDS Québec - Innovation Énergétique</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span class="email">contact@edsquebec.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span class="phone">819&nbsp;323&nbsp;7859</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🌐</span>
+                    <span>https://edsquebec.com</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script src="../../js/pricing-manager.js"></script>
+    
+    <script>
+        /**
+         * Fiche technique vente intégrée avec le système de prix centralisé
+         * 
+         * Rôle : Remplacer TOUS les prix hardcodés par des données du pricing-manager.js
+         * Fonctionnement : Charge et affiche automatiquement les prix depuis pricing-config.json
+         */
+        
+        // Le pricingManager global est disponible via window.pricingManager
+        let currentMode = 'vente'; // Mode vente pour presentations-vente
+        
+        /**
+         * Initialise la fiche technique vente avec le système centralisé
+         */
+        function initFicheTechniqueVente() {
+            console.log('🚀 Initialisation fiche technique vente avec SimplePricingManager global...');
+            
+            // Utiliser le SimplePricingManager global
+            if (window.pricingManager && window.pricingManager.isLoaded) {
+                console.log('✅ SimplePricingManager déjà disponible pour fiche technique vente');
+                updateFicheTechniqueVente();
+            } else {
+                // Attendre que le pricing manager global soit prêt
+                document.addEventListener('pricingManagerReady', function() {
+                    console.log('✅ SimplePricingManager maintenant disponible pour fiche technique vente');
+                    updateFicheTechniqueVente();
+                });
+                
+                // Timeout de sécurité
+                setTimeout(() => {
+                    if (window.pricingManager) {
+                        updateFicheTechniqueVente();
+                    } else {
+                        console.error('❌ SimplePricingManager non disponible après timeout');
+                    }
+                }, 2000);
+            }
+        }
+        
+        /**
+         * Met à jour les éléments de la fiche technique vente
+         */
+        function updateFicheTechniqueVente() {
+            if (!window.pricingManager || !window.pricingManager.isLoaded) {
+                console.warn('⚠️ SimplePricingManager non disponible pour updateFicheTechniqueVente');
+                return;
+            }
+            
+            console.log('🔄 Mise à jour des éléments de fiche technique vente...');
+            
+            // Mettre à jour tous les éléments avec data-pricing-value
+            const updateCount = window.pricingManager.updatePrices();
+            console.log(`✅ ${updateCount} éléments mis à jour dans fiche technique vente`);
+        }
+
+        // Initialisation automatique au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log(`📊 Mode: ${currentMode}`);
+            
+            // Initialiser le système de prix centralisé
+            initFicheTechniqueVente();
+        });
+    </script>
+
+
+        
+        
+        <script>
+        function afficherOptionsSimples() {
+            // Créer l'overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'simple-print-overlay';
+            
+            // Créer le dialogue
+            const dialog = document.createElement('div');
+            dialog.className = 'simple-print-dialog';
+            dialog.innerHTML = `
+                <div class="simple-dialog-header">
+                    Options d'impression
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Format de page :</label>
+                    <select id="simple-page-format" class="simple-option-select">
+                        <option value="auto">Automatique</option>
+                        <option value="a4">A4 Portrait</option>
+                        <option value="a4-landscape">A4 Paysage</option>
+                        <option value="letter">Lettre US Portrait</option>
+                        <option value="letter-landscape">Lettre US Paysage</option>
+                        <option value="a3">A3 Portrait</option>
+                        <option value="a3-landscape">A3 Paysage</option>
+                    </select>
+                </div>
+                
+                <div class="simple-option-group">
+                    <label class="simple-option-label">Échelle (réduire si contenu dépasse) :</label>
+                    <select id="simple-print-scale" class="simple-option-select">
+                        <option value="100">100% (Taille normale)</option>
+                        <option value="90">90%</option>
+                        <option value="80">80%</option>
+                        <option value="70">70%</option>
+                        <option value="60">60%</option>
+                        <option value="50">50%</option>
+                        <option value="40">40%</option>
+                    </select>
+                </div>
+                
+                <div class="simple-dialog-buttons">
+                    <button class="simple-cancel-btn" onclick="fermerOptionsSimples()">Annuler</button>
+                    <button class="simple-print-btn" onclick="imprimerAvecOptionsSimples()">Imprimer</button>
+                </div>
+            `;
+            
+            // Ajouter au DOM
+            document.body.appendChild(overlay);
+            document.body.appendChild(dialog);
+            
+            // Fermer en cliquant sur l'overlay
+            overlay.addEventListener('click', fermerOptionsSimples);
+        }
+        
+        function fermerOptionsSimples() {
+            const overlay = document.querySelector('.simple-print-overlay');
+            const dialog = document.querySelector('.simple-print-dialog');
+            if (overlay) overlay.remove();
+            if (dialog) dialog.remove();
+        }
+        
+        function imprimerAvecOptionsSimples() {
+            const format = document.getElementById('simple-page-format').value;
+            const scale = document.getElementById('simple-print-scale').value;
+            
+            // Appliquer seulement le format et l'échelle
+            appliquerStylesSimples(format, scale);
+            
+            // Fermer le dialogue
+            fermerOptionsSimples();
+            
+            // Attendre et imprimer
+            setTimeout(() => {
+                window.print();
+                
+                // Restaurer après impression
+                setTimeout(restaurerStylesSimples, 800);
+            }, 100);
+        }
+        
+        function appliquerStylesSimples(format, scale) {
+            // Supprimer l'ancien style
+            const ancienStyle = document.getElementById('simple-print-styles');
+            if (ancienStyle) ancienStyle.remove();
+            
+            // Créer le nouveau style
+            const style = document.createElement('style');
+            style.id = 'simple-print-styles';
+            
+            let cssFormat = '';
+            switch(format) {
+                case 'a4':
+                    cssFormat = '@page { size: A4 portrait; margin: 10mm; }';
+                    break;
+                case 'a4-landscape':
+                    cssFormat = '@page { size: A4 landscape; margin: 10mm; }';
+                    break;
+                case 'letter':
+                    cssFormat = '@page { size: letter portrait; margin: 0.4in; }';
+                    break;
+                case 'letter-landscape':
+                    cssFormat = '@page { size: letter landscape; margin: 0.4in; }';
+                    break;
+                case 'a3':
+                    cssFormat = '@page { size: A3 portrait; margin: 15mm; }';
+                    break;
+                case 'a3-landscape':
+                    cssFormat = '@page { size: A3 landscape; margin: 15mm; }';
+                    break;
+                default:
+                    cssFormat = '@page { size: auto; margin: 10mm; }';
+            }
+            
+            let cssScale = '';
+            if (scale !== '100') {
+                const scaleValue = parseInt(scale) / 100;
+                cssScale = `
+                    body {
+                        transform: scale(${scaleValue});
+                        transform-origin: top left;
+                        width: ${100 / scaleValue}%;
+                        height: ${100 / scaleValue}%;
+                    }
+                `;
+            }
+            
+            style.textContent = `@media print { ${cssFormat} ${cssScale} }`;
+            document.head.appendChild(style);
+        }
+        
+        function restaurerStylesSimples() {
+            const dynamicStyles = document.getElementById('simple-print-styles');
+            if (dynamicStyles) {
+                dynamicStyles.remove();
+            }
+        }
+        
+        function imprimerSimple() {
+            afficherOptionsSimples();
+        }
+        
+        // Fonction pour compatibilité
+        function imprimerPDF() {
+            imprimerSimple();
+        }
+        
+        function imprimerPDFAmeliore() {
+            imprimerSimple();
+        }
+        
+        // Raccourci clavier
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'p') {
+                event.preventDefault();
+                imprimerSimple();
+            }
+        });
+        </script>
+        
+        <!-- Script de gestion dynamique des images Li-CUBE PRO™ -->
+        <script src="../../js/image-config.js"></script>
+        
+        <!-- Script système de notes testeur alpha -->
+        <script src="../../module_notes/notes-module.js"></script>
+        
+        <!-- Script navigation retour et gestion musique -->
+        <script src="../../js/navigation-retour.js"></script>
+        
+</body>
+</html>
