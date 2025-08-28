@@ -432,6 +432,23 @@
             margin: 0;
         }
         
+        /* Contrôles d'espacement de sections (ne s'appliquent QUE à location.html) */
+        .section-spacing-input {
+            width: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        
+        .section-spacing-input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+        
+        /* Contrôles d'espacement pour l'éditeur de styles avancé */
         .spacing-input {
             width: 60px;
             background: rgba(0, 0, 0, 0.3);
@@ -1030,7 +1047,7 @@
                         </button>
                         <div class="section-spacer-control">
                             <label for="heroSpacing">Espacement (px):</label>
-                            <input type="number" id="heroSpacing" class="spacing-input" data-field="heroSpacerHeight" 
+                            <input type="number" id="heroSpacing" class="section-spacing-input" data-field="heroSpacerHeight" 
                                    value="80" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -1082,10 +1099,27 @@
         </section>
         
         <!-- Section Arguments Héro LOCATION -->
-        <section class="edit-section">
+        <section class="edit-section reorganizable-section" data-section-id="hero-arguments" data-section-order="1.5">
             <h2 class="section-title">
-                <i class="fas fa-shield-alt"></i>
-                Arguments de Location Principaux
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-shield-alt"></i>
+                        Arguments de Location Principaux
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('hero-arguments')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('hero-arguments')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="heroArgumentsSpacing">Espacement (px):</label>
+                            <input type="number" id="heroArgumentsSpacing" class="section-spacing-input" data-field="heroArgumentsSpacerHeight" 
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
             </h2>
             <div class="edit-grid">
                 <div class="edit-field">
@@ -1231,10 +1265,27 @@
         </section>
 
         <!-- Section Grille Tarifaire -->
-        <section class="edit-section">
+        <section class="edit-section reorganizable-section" data-section-id="pricing" data-section-order="2">
             <h2 class="section-title">
-                <i class="fas fa-dollar-sign"></i>
-                Grille Tarifaire de Location
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-dollar-sign"></i>
+                        Grille Tarifaire de Location
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('pricing')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('pricing')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="pricingSpacing">Espacement (px):</label>
+                            <input type="number" id="pricingSpacing" class="section-spacing-input" data-field="heroPricingSpacerHeight" 
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
             </h2>
             <div class="edit-grid">
                 <div class="edit-field">
@@ -1386,10 +1437,27 @@
 
 
         <!-- Section Avantages Location -->
-        <section class="edit-section">
+        <section class="edit-section reorganizable-section" data-section-id="advantages" data-section-order="3">
             <h2 class="section-title">
-                <i class="fas fa-thumbs-up"></i>
-                Arguments Avantages Location
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-thumbs-up"></i>
+                        Arguments Avantages Location
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('advantages')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('advantages')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="advantagesSpacing">Espacement (px):</label>
+                            <input type="number" id="advantagesSpacing" class="section-spacing-input" data-field="pricingAdvantagesSpacerHeight" 
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
             </h2>
             <div class="edit-grid">
                 <div class="edit-field">
@@ -1454,10 +1522,27 @@
         </section>
 
         <!-- Section Contact et Location -->
-        <section class="edit-section">
+        <section class="edit-section reorganizable-section" data-section-id="contact" data-section-order="5">
             <h2 class="section-title">
-                <i class="fas fa-phone"></i>
-                Contact et Mise en Service
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-phone"></i>
+                        Contact et Mise en Service
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('contact')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('contact')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="contactSpacing">Espacement (px):</label>
+                            <input type="number" id="contactSpacing" class="section-spacing-input" data-field="comparisonContactSpacerHeight" 
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
             </h2>
             <div class="edit-grid">
                 <div class="edit-field">
@@ -1508,10 +1593,27 @@
         </section>
 
         <!-- Section Comparaison Technique -->
-        <section class="edit-section">
+        <section class="edit-section reorganizable-section" data-section-id="technical" data-section-order="4">
             <h2 class="section-title">
-                <i class="fas fa-balance-scale"></i>
-                Comparaison Technique
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-balance-scale"></i>
+                        Comparaison Technique
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('technical')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('technical')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="technicalSpacing">Espacement (px):</label>
+                            <input type="number" id="technicalSpacing" class="section-spacing-input" data-field="advantagesComparisonSpacerHeight" 
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
             </h2>
             <div class="edit-grid">
                 <div class="edit-field">
@@ -1798,10 +1900,27 @@
         </section>
 
         <!-- Section Conclusion et Appel à l'Action -->
-        <section class="edit-section">
+        <section class="edit-section reorganizable-section" data-section-id="conclusion-action" data-section-order="6">
             <h2 class="section-title">
-                <i class="fas fa-flag-checkered"></i>
-                Conclusion et Appel à l'Action Final
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-flag-checkered"></i>
+                        Conclusion et Appel à l'Action Final
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('conclusion-action')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('conclusion-action')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="conclusionActionSpacing">Espacement (px):</label>
+                            <input type="number" id="conclusionActionSpacing" class="section-spacing-input" data-field="conclusionActionSpacerHeight" 
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
             </h2>
             <div class="edit-grid">
                 <div class="edit-field">
@@ -1846,10 +1965,27 @@ Fabrication et Support 100% Québécois</textarea>
         </section>
 
         <!-- Section Conclusion Comparative -->
-        <section class="edit-section">
+        <section class="edit-section reorganizable-section" data-section-id="conclusion-comparative" data-section-order="7">
             <h2 class="section-title">
-                <i class="fas fa-trophy"></i>
-                Conclusion Finale Comparative
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-trophy"></i>
+                        Conclusion Finale Comparative
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('conclusion-comparative')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('conclusion-comparative')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="conclusionComparativeSpacing">Espacement (px):</label>
+                            <input type="number" id="conclusionComparativeSpacing" class="section-spacing-input" data-field="conclusionComparativeSpacerHeight" 
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
             </h2>
             <div class="edit-grid">
                 <div class="edit-field">
@@ -2056,10 +2192,13 @@ Fabrication et Support 100% Québécois</textarea>
             
             // Espacements entre sections
             headerSpacerHeight: 80,
+            heroArgumentsSpacerHeight: 0,
             heroPricingSpacerHeight: 0,
             pricingAdvantagesSpacerHeight: 0,
             advantagesComparisonSpacerHeight: 0,
             comparisonContactSpacerHeight: 0,
+            conclusionActionSpacerHeight: 0,
+            conclusionComparativeSpacerHeight: 0,
             
             // Hero Section
             heroTitleSize: 72,
@@ -2503,8 +2642,8 @@ Fabrication et Support 100% Québécois</textarea>
                     padding: ${styles.navPadding}px ${styles.navPadding * 1.5}px !important;
                 }
                 
-                /* Espacements entre Sections */
-                .header-spacer {
+                /* Espacements entre Sections - Logique restaurée fonctionnelle */
+                .header-spacer[data-field="heroSpacerHeight"] {
                     height: ${styles.headerSpacerHeight}px !important;
                 }
                 .section-spacer[data-field="hero-pricing-spacer"] {
@@ -2595,6 +2734,130 @@ Fabrication et Support 100% Québécois</textarea>
             `;
         }
 
+        // ==========================================
+        // SYSTÈME DE RÉORGANISATION DES SECTIONS
+        // ==========================================
+        
+        // Obtient l'ordre actuel de TOUTES les sections (éditeur) depuis localStorage  
+        function getAllSectionOrder() {
+            const savedOrder = localStorage.getItem('locationVS-allSectionOrder');
+            return savedOrder ? JSON.parse(savedOrder) : {
+                'hero': 1,
+                'hero-arguments': 2,
+                'pricing': 3, 
+                'advantages': 4,
+                'technical': 5,
+                'contact': 6,
+                'conclusion-action': 7,
+                'conclusion-comparative': 8
+            };
+        }
+        
+        // Obtient l'ordre des sections pour la présentation (sections existantes dans location.html)
+        function getPresentationSectionOrder() {
+            const allOrder = getAllSectionOrder();
+            // Filtre uniquement les sections qui existent dans location.html
+            return {
+                'hero': allOrder.hero || 1,
+                'pricing': allOrder.pricing || 2, 
+                'advantages': allOrder.advantages || 3,
+                'technical': allOrder.technical || 4,
+                'contact': allOrder.contact || 5
+            };
+        }
+        
+        // Sauvegarde l'ordre de TOUTES les sections (éditeur)
+        function saveAllSectionOrder(allOrder) {
+            localStorage.setItem('locationVS-allSectionOrder', JSON.stringify(allOrder));
+            
+            // Génère l'ordre pour la présentation (sections filtrées)
+            const presentationOrder = getPresentationSectionOrder();
+            localStorage.setItem('locationVS-sectionOrder', JSON.stringify(presentationOrder));
+            
+            // Synchronisation immédiate avec la page de présentation
+            window.dispatchEvent(new CustomEvent('storage', {
+                detail: { key: 'locationVS-sectionOrder', newValue: JSON.stringify(presentationOrder) }
+            }));
+        }
+        
+        // Applique l'ordre des sections dans l'éditeur
+        function applySectionOrder() {
+            const order = getAllSectionOrder();
+            const container = document.querySelector('.container');
+            const sections = Array.from(container.querySelectorAll('.reorganizable-section'));
+            
+            // Trie les sections par ordre
+            sections.sort((a, b) => {
+                const aOrder = order[a.dataset.sectionId] || 999;
+                const bOrder = order[b.dataset.sectionId] || 999;
+                return aOrder - bOrder;
+            });
+            
+            // Trouve la position d'insertion (après la section d'édition de style)
+            const styleSection = container.querySelector('.css-editor');
+            let insertAfter = styleSection;
+            
+            // Réinsère les sections dans le bon ordre
+            sections.forEach(section => {
+                container.insertBefore(section, insertAfter.nextSibling);
+                insertAfter = section;
+            });
+            
+            // Met à jour les attributs data-section-order
+            sections.forEach(section => {
+                section.dataset.sectionOrder = order[section.dataset.sectionId];
+            });
+            
+            console.log('📋 Ordre des sections appliqué dans l\'éditeur:', order);
+        }
+        
+        // Fonction pour monter une section
+        function moveSectionUp(sectionId) {
+            const order = getAllSectionOrder();
+            const currentOrder = order[sectionId];
+            
+            if (!currentOrder || currentOrder <= 1) return; // Déjà en première position ou section non trouvée
+            
+            // Trouve la section qui est juste au-dessus
+            const targetOrder = currentOrder - 1;
+            const targetSectionId = Object.keys(order).find(id => order[id] === targetOrder);
+            
+            if (targetSectionId) {
+                // Échange les positions
+                order[sectionId] = targetOrder;
+                order[targetSectionId] = currentOrder;
+                
+                saveAllSectionOrder(order);
+                applySectionOrder();
+                
+                console.log(`📈 Section ${sectionId} montée en position ${targetOrder}`);
+            }
+        }
+        
+        // Fonction pour descendre une section
+        function moveSectionDown(sectionId) {
+            const order = getAllSectionOrder();
+            const currentOrder = order[sectionId];
+            const maxOrder = Math.max(...Object.values(order));
+            
+            if (!currentOrder || currentOrder >= maxOrder) return; // Déjà en dernière position ou section non trouvée
+            
+            // Trouve la section qui est juste en dessous
+            const targetOrder = currentOrder + 1;
+            const targetSectionId = Object.keys(order).find(id => order[id] === targetOrder);
+            
+            if (targetSectionId) {
+                // Échange les positions
+                order[sectionId] = targetOrder;
+                order[targetSectionId] = currentOrder;
+                
+                saveAllSectionOrder(order);
+                applySectionOrder();
+                
+                console.log(`📉 Section ${sectionId} descendue en position ${targetOrder}`);
+            }
+        }
+
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
             // Création du backup automatique
@@ -2619,11 +2882,14 @@ Fabrication et Support 100% Québécois</textarea>
                 }
             });
             
+            // Initialisation de l'ordre des sections
+            applySectionOrder();
+            
             // Chargement initial
             updateValueDisplays();
             loadSavedStyles();
             
-            console.log('🎨 Éditeur CSS complet initialisé avec sync temps réel');
+            console.log('🎨 Éditeur CSS complet initialisé avec sync temps réel et réorganisation des sections');
         });
     </script>
     

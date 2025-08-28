@@ -591,10 +591,10 @@
     </nav>
 
     <!-- Section Espacement Éditable -->
-    <section class="header-spacer" data-field="header-spacer-height"></section>
+    <section class="header-spacer" data-field="heroSpacerHeight"></section>
 
     <!-- Section Héro LOCATION -->
-    <section id="hero" class="section hero">
+    <section id="hero" class="section hero" data-section-id="hero" data-section-order="1">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -655,11 +655,12 @@
         </div>
     </section>
 
-    <!-- Espacement Hero-Pricing -->
-    <section class="section-spacer" data-field="hero-pricing-spacer"></section>
 
     <!-- Section Tarifs de Location -->
-    <section id="pricing" class="section pricing-section">
+    <!-- Espacement Hero-Pricing -->
+    <section class="section-spacer" data-field="hero-pricing-spacer"></section>
+    
+    <section id="pricing" class="section pricing-section" data-section-id="pricing" data-section-order="2">
         <div class="container">
             <h2 class="section-title editable" data-field="pricing-title">TARIFS DE LOCATION TRANSPARENTS</h2>
             <p class="editable" data-field="pricing-subtitle" style="text-align: center; font-size: 1.2rem; color: var(--text-gray); margin-bottom: 3rem;">
@@ -766,11 +767,12 @@
         </div>
     </section>
 
-    <!-- Espacement Pricing-Advantages -->
-    <section class="section-spacer" data-field="pricing-advantages-spacer"></section>
 
     <!-- Section Avantages Location -->
-    <section id="advantages" class="section advantages-section">
+    <!-- Espacement Pricing-Advantages -->
+    <section class="section-spacer" data-field="pricing-advantages-spacer"></section>
+    
+    <section id="advantages" class="section advantages-section" data-section-id="advantages" data-section-order="3">
         <div class="container">
             <h2 class="section-title editable" data-field="advantages-title">POURQUOI CHOISIR LA LOCATION ?</h2>
             
@@ -838,11 +840,12 @@
         </div>
     </section>
 
-    <!-- Espacement Advantages-Comparison -->
-    <section class="section-spacer" data-field="advantages-comparison-spacer"></section>
 
     <!-- Section Avantages Techniques Comparatifs -->
-    <section class="section technical-comparison">
+    <!-- Espacement Advantages-Comparison -->
+    <section class="section-spacer" data-field="advantages-comparison-spacer"></section>
+    
+    <section class="section technical-comparison" data-section-id="technical" data-section-order="4">
         <div class="container">
             <h2 class="section-title editable" data-field="tech-title">Li-CUBE PRO™ vs BATTERIES Ni-Cd OBSOLÈTES</h2>
             <p class="editable" data-field="tech-subtitle" style="text-align: center; font-size: 1.2rem; color: var(--text-gray); margin-bottom: 3rem;">
@@ -1039,11 +1042,12 @@
         </div>
     </section>
 
-    <!-- Espacement Comparison-Contact -->
-    <section class="section-spacer" data-field="comparison-contact-spacer"></section>
 
     <!-- Section Contact et Location -->
-    <section id="contact" class="section contact-section">
+    <!-- Espacement Comparison-Contact -->
+    <section class="section-spacer" data-field="comparison-contact-spacer"></section>
+    
+    <section id="contact" class="section contact-section" data-section-id="contact" data-section-order="5">
         <div class="container">
             <div class="contact-content">
                 <h2 class="editable" data-field="contact-title">CLOSING - ARGUMENTS FINAUX LOCATION</h2>
@@ -1193,6 +1197,107 @@
                 applyDynamicCSS(savedCSS);
                 console.log('🔄 Styles sauvegardés appliqués au chargement');
             }
+        });
+    </script>
+    
+    <!-- Script de Réorganisation des Sections -->
+    <script>
+        // ==========================================
+        // SYSTÈME DE RÉORGANISATION DES SECTIONS (PRÉSENTATION)
+        // ==========================================
+        
+        // Obtient l'ordre actuel des sections depuis localStorage (pour la présentation)
+        function getSectionOrder() {
+            const savedOrder = localStorage.getItem('locationVS-sectionOrder');
+            return savedOrder ? JSON.parse(savedOrder) : {
+                'hero': 1,
+                'pricing': 2, 
+                'advantages': 3,
+                'technical': 4,
+                'contact': 5
+            };
+        }
+        
+        // Applique l'ordre des sections dans la page de présentation
+        function applySectionOrderToPresentation() {
+            const order = getSectionOrder();
+            const body = document.body;
+            
+            // Récupère toutes les sections et leurs spacers associés
+            const sectionGroups = [];
+            
+            // Pour chaque section, trouve son groupe (section + spacer suivant)
+            Object.keys(order).forEach(sectionId => {
+                const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+                if (section) {
+                    const group = { section, spacers: [], order: order[sectionId] };
+                    
+                    // Trouve le spacer qui suit cette section
+                    let nextElement = section.nextElementSibling;
+                    while (nextElement && nextElement.classList.contains('section-spacer')) {
+                        group.spacers.push(nextElement);
+                        nextElement = nextElement.nextElementSibling;
+                    }
+                    
+                    sectionGroups.push(group);
+                }
+            });
+            
+            // Trie les groupes par ordre
+            sectionGroups.sort((a, b) => a.order - b.order);
+            
+            // Trouve le point d'insertion (après le header)
+            const header = document.querySelector('header') || document.querySelector('.header');
+            let insertAfter = header;
+            
+            // Réinsère les sections dans le bon ordre
+            sectionGroups.forEach(group => {
+                // Insère la section
+                if (insertAfter.nextSibling) {
+                    body.insertBefore(group.section, insertAfter.nextSibling);
+                } else {
+                    body.appendChild(group.section);
+                }
+                insertAfter = group.section;
+                
+                // Insère les spacers
+                group.spacers.forEach(spacer => {
+                    if (insertAfter.nextSibling) {
+                        body.insertBefore(spacer, insertAfter.nextSibling);
+                    } else {
+                        body.appendChild(spacer);
+                    }
+                    insertAfter = spacer;
+                });
+            });
+            
+            console.log('📋 Ordre des sections appliqué à la présentation:', order);
+        }
+        
+        // Écoute les changements d'ordre de sections
+        function listenForSectionOrderChanges() {
+            // Écoute les événements de localStorage
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'locationVS-sectionOrder') {
+                    console.log('🔄 Changement d\'ordre détecté, réorganisation...');
+                    applySectionOrderToPresentation();
+                }
+            });
+            
+            // Écoute les événements personnalisés (pour même onglet)
+            window.addEventListener('storage', function(e) {
+                if (e.detail && e.detail.key === 'locationVS-sectionOrder') {
+                    console.log('🔄 Changement d\'ordre détecté (même onglet), réorganisation...');
+                    applySectionOrderToPresentation();
+                }
+            });
+        }
+        
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            applySectionOrderToPresentation();
+            listenForSectionOrderChanges();
+            console.log('✅ Système de réorganisation des sections initialisé sur présentation');
         });
     </script>
     

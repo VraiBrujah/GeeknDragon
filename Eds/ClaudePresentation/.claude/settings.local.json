@@ -13,7 +13,8 @@
       "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS\\edit-location.html\")",
       "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS\\location.html\")",
       "Bash(cmd /c:*)",
-      "Bash(del /q locationVS\\*)"
+      "Bash(del /q locationVS\\*)",
+      "Bash(rg:*)"
     ],
     "deny": [],
     "ask": []
