@@ -3,7 +3,8 @@
     "allow": [
       "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon/**)",
       "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Presentateur\\LiCUBEPRO\\presentations-location\\presentations-vendeurs/**)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds/**)"
     ],
     "deny": [],
     "ask": []
