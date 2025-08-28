@@ -212,12 +212,8 @@
                     Retour Présentation Location
                 </a>
                 <button class="btn btn-preview" onclick="togglePreview()">
-                    <i class="fas fa-eye"></i>
-                    Prévisualiser
-                </button>
-                <button class="btn btn-save" onclick="saveAllChanges()">
-                    <i class="fas fa-save"></i>
-                    Sauvegarder
+                    <i class="fas fa-sync"></i>
+                    Synchroniser & Prévisualiser
                 </button>
             </div>
         </div>
@@ -754,211 +750,90 @@
 
     </main>
 
-    <!-- Actions en bas de page -->
+    <!-- Statut de synchronisation automatique -->
     <footer class="editor-actions">
         <div class="actions-content">
-            <div class="save-status">
-                <i class="fas fa-circle status-icon" id="saveStatusIcon"></i>
-                <span id="saveStatusText">Version LOCATION - Non sauvegardé</span>
+            <div class="sync-status">
+                <i class="fas fa-sync status-icon" id="syncStatusIcon"></i>
+                <span id="syncStatusText">Synchronisation LOCATION automatique activée</span>
             </div>
-            <div class="header-actions">
-                <button class="btn btn-back" onclick="resetAllFields()">
-                    <i class="fas fa-undo"></i>
-                    Réinitialiser
-                </button>
-                <button class="btn btn-save" onclick="saveAllChanges()">
-                    <i class="fas fa-save"></i>
-                    Sauvegarder LOCATION
-                </button>
+            <div class="sync-info">
+                <span class="live-indicator">🔴 EN DIRECT</span>
+                <span class="sync-counter" id="syncCounter">0 modifications synchronisées</span>
             </div>
         </div>
     </footer>
 
     <script>
-        // Configuration spéciale pour version LOCATION
-        const LOCATION_CONFIG = {
-            storageKey: 'licubepro-location-content',
-            pageType: 'location',
-            targetPage: 'location.html'
-        };
-
-        let hasUnsavedChanges = false;
-        let autoSaveTimeout = null;
-
+        // Interface Éditeur LOCATION - Synchronisation Instantanée
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Éditeur LOCATION Li-CUBE PRO™ initialisé');
-            loadSavedContent();
-            setupEventListeners();
-            updateSaveStatus('loaded', 'Version LOCATION - Contenu chargé');
+            console.log('✅ Éditeur LOCATION Li-CUBE PRO™ avec Synchronisation Instantanée activé');
+            
+            // Fonction : synchronisation manuelle + ouverture de la page de présentation
+            window.togglePreview = function() {
+                console.log('🔄 Prévisualisation LOCATION - Déclenchement synchronisation manuelle...');
+                
+                // Déclenchement : synchronisation manuelle immédiate
+                if (window.instantSync) {
+                    // Force : synchronisation complète avant prévisualisation
+                    window.instantSync.executeInstantSync(true); // true = forcer sync complète
+                    console.log('✅ Synchronisation manuelle LOCATION terminée');
+                } else {
+                    console.warn('⚠️ InstantSync non disponible pour synchronisation manuelle');
+                }
+                
+                // Ouverture : page de présentation après synchronisation
+                setTimeout(() => {
+                    window.open('location.html', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+                    console.log('👁️ Page de présentation LOCATION ouverte');
+                }, 100); // Délai court pour assurer la synchronisation
+            };
+            
+            // Validation : formats email et téléphone
+            setupFieldValidation();
+            
+            // Raccourci : Ctrl+P pour prévisualisation
+            document.addEventListener('keydown', function(event) {
+                if (event.ctrlKey && event.key === 'p') {
+                    event.preventDefault();
+                    togglePreview();
+                }
+            });
+            
+            console.log('🎯 Éditeur LOCATION - Prêt pour synchronisation instantanée');
         });
 
-        function setupEventListeners() {
-            const allFields = document.querySelectorAll('.field-input');
+        // Validation : contrôles de format pour les champs spéciaux
+        function setupFieldValidation() {
+            const emailFields = document.querySelectorAll('input[type="email"]');
+            const telFields = document.querySelectorAll('input[type="tel"]');
             
-            allFields.forEach(field => {
-                field.addEventListener('input', function() {
-                    handleFieldChange(this);
-                    updateLivePreview(this);
-                    markAsUnsaved();
-                });
-                
+            emailFields.forEach(field => {
                 field.addEventListener('blur', function() {
-                    if (hasUnsavedChanges) {
-                        autoSave();
+                    if (this.value && !isValidEmail(this.value)) {
+                        this.style.borderColor = '#EF4444';
+                        this.title = 'Format d\'email invalide';
+                    } else {
+                        this.style.borderColor = '';
+                        this.title = '';
+                    }
+                });
+            });
+            
+            telFields.forEach(field => {
+                field.addEventListener('blur', function() {
+                    if (this.value && !isValidPhone(this.value)) {
+                        this.style.borderColor = '#EF4444';
+                        this.title = 'Format de téléphone invalide';
+                    } else {
+                        this.style.borderColor = '';
+                        this.title = '';
                     }
                 });
             });
         }
 
-        function handleFieldChange(field) {
-            const fieldId = field.getAttribute('data-field');
-            const value = field.value;
-            
-            console.log(`LOCATION - Champ modifié: ${fieldId} = "${value}"`);
-            
-            if (field.type === 'email' && value && !isValidEmail(value)) {
-                field.style.borderColor = 'var(--warning-red)';
-                showStatusMessage('error', 'Format d\'email invalide');
-            } else if (field.type === 'tel' && value && !isValidPhone(value)) {
-                field.style.borderColor = 'var(--warning-red)';
-                showStatusMessage('error', 'Format de téléphone invalide');
-            } else {
-                field.style.borderColor = 'var(--accent-green)';
-            }
-        }
-
-        function updateLivePreview(field) {
-            const fieldId = field.getAttribute('data-field');
-            const previewElement = document.getElementById(`preview-${fieldId}`);
-            
-            if (previewElement) {
-                previewElement.textContent = field.value || 'Aperçu vide...';
-            }
-        }
-
-        function loadSavedContent() {
-            const savedContent = localStorage.getItem(LOCATION_CONFIG.storageKey);
-            if (savedContent) {
-                try {
-                    const content = JSON.parse(savedContent);
-                    
-                    Object.entries(content).forEach(([field, value]) => {
-                        const fieldElement = document.querySelector(`[data-field="${field}"]`);
-                        if (fieldElement) {
-                            fieldElement.value = value;
-                            updateLivePreview(fieldElement);
-                        }
-                    });
-                    
-                    console.log('LOCATION - Contenu chargé:', Object.keys(content));
-                    showStatusMessage('success', 'Contenu LOCATION chargé avec succès');
-                } catch (error) {
-                    console.error('Erreur chargement LOCATION:', error);
-                    showStatusMessage('error', 'Erreur lors du chargement');
-                }
-            }
-        }
-
-        function saveAllChanges() {
-            updateSaveStatus('saving', 'Sauvegarde version LOCATION...');
-            
-            const allFields = document.querySelectorAll('.field-input');
-            const content = {};
-            
-            allFields.forEach(field => {
-                const fieldId = field.getAttribute('data-field');
-                if (fieldId) {
-                    content[fieldId] = field.value;
-                }
-            });
-            
-            try {
-                localStorage.setItem(LOCATION_CONFIG.storageKey, JSON.stringify(content));
-                
-                // IMPORTANT: Synchroniser aussi avec la clé générale pour la page de présentation
-                localStorage.setItem('licubepro-content', JSON.stringify(content));
-                
-                console.log('LOCATION - Contenu sauvegardé:', content);
-                
-                hasUnsavedChanges = false;
-                updateSaveStatus('saved', 'Version LOCATION - Toutes modifications sauvegardées');
-                showStatusMessage('success', `${Object.keys(content).length} champs LOCATION sauvegardés`);
-                
-            } catch (error) {
-                console.error('Erreur sauvegarde LOCATION:', error);
-                updateSaveStatus('error', 'Erreur sauvegarde LOCATION');
-                showStatusMessage('error', 'Impossible de sauvegarder LOCATION');
-            }
-        }
-
-        function autoSave() {
-            if (autoSaveTimeout) {
-                clearTimeout(autoSaveTimeout);
-            }
-            
-            autoSaveTimeout = setTimeout(() => {
-                saveAllChanges();
-            }, 2000);
-        }
-
-        function resetAllFields() {
-            if (confirm('Réinitialiser tous les champs LOCATION ? Les modifications non sauvegardées seront perdues.')) {
-                localStorage.removeItem(LOCATION_CONFIG.storageKey);
-                window.location.reload();
-            }
-        }
-
-        function togglePreview() {
-            window.open(LOCATION_CONFIG.targetPage, '_blank', 'width=1200,height=800');
-        }
-
-        function markAsUnsaved() {
-            if (!hasUnsavedChanges) {
-                hasUnsavedChanges = true;
-                updateSaveStatus('unsaved', 'Version LOCATION - Modifications non sauvegardées');
-            }
-        }
-
-        function updateSaveStatus(status, message) {
-            const statusIcon = document.getElementById('saveStatusIcon');
-            const statusText = document.getElementById('saveStatusText');
-            
-            statusIcon.className = 'fas status-icon';
-            
-            switch (status) {
-                case 'saving':
-                    statusIcon.classList.add('saving', 'fa-spinner');
-                    break;
-                case 'saved':
-                    statusIcon.classList.add('saved', 'fa-check-circle');
-                    break;
-                case 'unsaved':
-                    statusIcon.classList.add('fa-exclamation-triangle');
-                    break;
-                case 'error':
-                    statusIcon.classList.add('fa-times-circle');
-                    break;
-                case 'loaded':
-                    statusIcon.classList.add('saved', 'fa-circle');
-                    break;
-            }
-            
-            statusText.textContent = message;
-        }
-
-        function showStatusMessage(type, message) {
-            const statusMessage = document.getElementById('statusMessage');
-            const statusText = document.getElementById('statusText');
-            
-            statusMessage.className = `status-message ${type}`;
-            statusText.textContent = message;
-            statusMessage.style.display = 'block';
-            
-            setTimeout(() => {
-                statusMessage.style.display = 'none';
-            }, 5000);
-        }
-
+        // Utilitaires : validation des formats
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
@@ -968,27 +843,14 @@
             const phoneRegex = /^(\+1[-.\s]?)?(\(?[0-9]{3}\)?[-.\s]?)?[0-9]{3}[-.\s]?[0-9]{4}$/;
             return phoneRegex.test(phone);
         }
-
-        // Raccourcis clavier
-        document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey && event.key === 's') {
-                event.preventDefault();
-                saveAllChanges();
-            }
-        });
-
-        window.addEventListener('beforeunload', function(event) {
-            if (hasUnsavedChanges) {
-                const message = 'Modifications LOCATION non sauvegardées. Quitter quand même?';
-                event.returnValue = message;
-                return message;
-            }
-        });
-
-        console.log('Éditeur LOCATION Li-CUBE PRO™ - Interface spécialisée chargée');
     </script>
     
-    <!-- Système de synchronisation pour version LOCATION -->
-    <script src="js/live-sync.js"></script>
+    <!-- Système de Synchronisation Instantanée Li-CUBE PRO™ -->
+    <script src="js/instant-sync.js"></script>
+    
+    <!-- Systèmes Avancés Li-CUBE PRO™ -->
+    <link rel="stylesheet" href="css/advanced-style-editor.css">
+    <script src="js/advanced-style-editor.js"></script>
+    <script src="js/dynamic-descriptions.js"></script>
 </body>
 </html>

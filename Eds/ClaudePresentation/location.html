@@ -61,6 +61,9 @@
             background-image: url('./images/logo edsquebec.png');
             background-size: 80%; background-repeat: no-repeat; background-position: center;
             transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
         }
         
         .nav-logo:hover {
@@ -224,6 +227,14 @@
             margin-bottom: 3rem; background: var(--gradient-green);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        .section-title.editable:hover {
+            background: var(--gradient-green) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            border-radius: 8px !important;
         }
         
         .pricing-grid {
@@ -552,7 +563,7 @@
     <nav class="navbar">
         <div class="nav-content">
             <div class="nav-brand">
-                <div class="nav-logo"></div>
+                <a href="index.html" class="nav-logo" title="Retour au choix VENTE/LOCATION"></a>
                 <div class="nav-title">🛡️ SOLUTION ZÉRO RISQUE</div>
             </div>
             <div class="nav-menu">
@@ -1111,7 +1122,7 @@
         console.log('Li-CUBE PRO™ LOCATION - Page de location optimisée chargée');
     </script>
     
-    <!-- Système de synchronisation -->
-    <script src="js/live-sync.js"></script>
+    <!-- Récepteur de Synchronisation Instantanée Li-CUBE PRO™ -->
+    <script src="js/presentation-receiver.js"></script>
 </body>
 </html>
