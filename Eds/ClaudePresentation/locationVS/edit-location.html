@@ -728,6 +728,13 @@
                 </div>
                 
                 <div class="edit-field">
+                    <label class="field-label" for="header-spacer-height">Espacement header (px)</label>
+                    <p class="field-description">Hauteur de l'espacement entre le header et le contenu principal</p>
+                    <input type="number" id="header-spacer-height" class="field-input" data-field="header-spacer-height" 
+                           placeholder="80" value="80" min="0" max="500" step="10">
+                </div>
+                
+                <div class="edit-field">
                     <label class="field-label" for="logo-path">Chemin logo entreprise</label>
                     <p class="field-description">Chemin vers le logo de l'entreprise dans la navigation</p>
                     <input type="text" id="logo-path" class="field-input" data-field="logo-path" 
@@ -1776,6 +1783,9 @@ Fabrication et Support 100% Québécois</textarea>
             navItemSize: 16,
             navPadding: 12,
             
+            // Espacement
+            headerSpacerHeight: 80,
+            
             // Hero Section
             heroTitleSize: 72,
             heroHighlightSize: 80,
@@ -2213,6 +2223,11 @@ Fabrication et Support 100% Québécois</textarea>
                 .nav-item {
                     font-size: ${styles.navItemSize}px !important;
                     padding: ${styles.navPadding}px ${styles.navPadding * 1.5}px !important;
+                }
+                
+                /* Espacement Header */
+                .header-spacer {
+                    height: ${styles.headerSpacerHeight}px !important;
                 }
                 
                 /* Hero Section */

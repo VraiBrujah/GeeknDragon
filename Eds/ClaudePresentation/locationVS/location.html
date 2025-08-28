@@ -89,10 +89,17 @@
             transform: translateY(-2px);
         }
         
+        /* Section espacement éditable entre header et contenu */
+        .header-spacer {
+            width: 100%;
+            height: 80px; /* Hauteur par défaut */
+            background: transparent;
+            display: block;
+        }
         
         /* Section principale avec focus LOCATION */
         .section {
-            min-height: 100vh; padding: 8rem 2rem 4rem;
+            min-height: 100vh; padding: 6rem 2rem 4rem;
             position: relative; display: flex; align-items: center;
         }
         
@@ -575,6 +582,9 @@
             </div>
         </div>
     </nav>
+
+    <!-- Section Espacement Éditable -->
+    <section class="header-spacer" data-field="header-spacer-height"></section>
 
     <!-- Section Héro LOCATION -->
     <section id="hero" class="section hero">
