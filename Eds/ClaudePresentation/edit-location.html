@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Configuration éditeur version LOCATION Li-CUBE PRO™ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur Présentation LOCATION - Interface Vendeur | EDS Québec</title>
+    <meta name="description" content="Interface d'édition pour vendeurs - Personnaliser les arguments de présentation LOCATION Li-CUBE PRO™">
+    
+    <!-- Polices cohérentes avec la page de location -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variables CSS thème LOCATION : vert et bleu */
+        :root {
+            --primary-dark: #0F172A;
+            --secondary-dark: #1E293B;
+            --accent-green: #10B981;
+            --accent-teal: #14B8A6;
+            --accent-blue: #3B82F6;
+            --success-green: #059669;
+            --warning-red: #EF4444;
+            --text-white: #F8FAFC;
+            --text-gray: #CBD5E1;
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            --gradient-green: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif; background: var(--gradient-primary);
+            color: var(--text-white); line-height: 1.6; min-height: 100vh;
+        }
+        
+        .editor-header {
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            position: sticky; top: 0; z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        
+        .editor-title {
+            font-size: 1.8rem; font-weight: 700;
+            background: var(--gradient-green);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+        
+        .btn {
+            padding: 0.75rem 1.5rem; border: none; border-radius: 8px;
+            font-size: 0.95rem; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        
+        .btn-back {
+            background: rgba(16, 185, 129, 0.1); color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+        
+        .btn-save { background: var(--success-green); color: white; }
+        .btn-preview { background: var(--accent-teal); color: white; }
+        
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        
+        .editor-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        
+        .status-message {
+            background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green);
+            border-radius: 10px; padding: 1rem; margin-bottom: 2rem;
+            text-align: center; display: none;
+        }
+        
+        .status-message.success {
+            background: rgba(16, 185, 129, 0.1); border-color: var(--success-green);
+            color: var(--success-green); display: block;
+        }
+        
+        .status-message.error {
+            background: rgba(239, 68, 68, 0.1); border-color: var(--warning-red);
+            color: var(--warning-red); display: block;
+        }
+        
+        .edit-section {
+            background: rgba(16, 185, 129, 0.05); border-radius: 16px;
+            padding: 2rem; margin-bottom: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5rem; font-weight: 700; color: var(--accent-green);
+            margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+        
+        .edit-grid { display: grid; gap: 1.5rem; }
+        
+        .edit-field { display: flex; flex-direction: column; gap: 0.5rem; }
+        
+        .field-label {
+            font-weight: 600; color: var(--text-white); font-size: 0.95rem;
+        }
+        
+        .field-description {
+            font-size: 0.85rem; color: var(--text-gray); font-style: italic;
+        }
+        
+        .field-input {
+            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 8px; padding: 0.75rem; color: var(--text-white);
+            font-size: 1rem; transition: all 0.3s ease; font-family: inherit;
+        }
+        
+        .field-textarea { min-height: 100px; resize: vertical; }
+        
+        .field-input:focus {
+            outline: none; border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.15);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .field-input::placeholder { color: rgba(203, 213, 225, 0.5); }
+        
+        .numeric-field { display: flex; align-items: center; gap: 1rem; }
+        .numeric-input { flex: 1; }
+        .field-unit { color: var(--text-gray); font-size: 0.9rem; font-weight: 500; }
+        
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem; margin-top: 1rem;
+        }
+        
+        .pricing-edit-card {
+            background: rgba(16, 185, 129, 0.08); border-radius: 12px;
+            padding: 1.5rem; border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        
+        .pricing-edit-card.featured {
+            border-color: var(--accent-green); background: rgba(16, 185, 129, 0.12);
+        }
+        
+        .live-preview {
+            background: rgba(30, 41, 59, 0.3); border-radius: 10px;
+            padding: 1rem; margin-top: 1rem;
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .preview-title {
+            font-size: 0.9rem; color: var(--accent-green);
+            font-weight: 600; margin-bottom: 0.5rem;
+        }
+        
+        .preview-content { color: var(--text-gray); font-style: italic; }
+        
+        .editor-actions {
+            position: sticky; bottom: 0;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem; border-top: 1px solid rgba(16, 185, 129, 0.2);
+            margin-top: 3rem;
+        }
+        
+        .actions-content {
+            max-width: 1200px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        
+        .save-status { display: flex; align-items: center; gap: 0.5rem;
+            color: var(--text-gray); font-size: 0.9rem; }
+        
+        .status-icon { font-size: 1rem; }
+        
+        .status-icon.saving {
+            color: var(--accent-teal); animation: spin 1s infinite;
+        }
+        
+        .status-icon.saved { color: var(--success-green); }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .editor-container { padding: 1rem; }
+            .header-content { flex-direction: column; gap: 1rem; text-align: center; }
+            .header-actions { flex-wrap: wrap; justify-content: center; }
+            .actions-content { flex-direction: column; gap: 1rem; text-align: center; }
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête éditeur LOCATION -->
+    <header class="editor-header">
+        <div class="header-content">
+            <h1 class="editor-title">
+                <i class="fas fa-presentation"></i>
+                Interface Vendeur - SOLUTION ZÉRO RISQUE
+            </h1>
+            <div class="header-actions">
+                <a href="location.html" class="btn btn-back">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour Présentation Location
+                </a>
+                <button class="btn btn-preview" onclick="togglePreview()">
+                    <i class="fas fa-eye"></i>
+                    Prévisualiser
+                </button>
+                <button class="btn btn-save" onclick="saveAllChanges()">
+                    <i class="fas fa-save"></i>
+                    Sauvegarder
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Message de statut -->
+    <div class="status-message" id="statusMessage">
+        <i class="fas fa-info-circle"></i>
+        <span id="statusText">Interface Vendeur LOCATION prête</span>
+    </div>
+
+    <!-- Conteneur principal éditeur LOCATION -->
+    <main class="editor-container">
+        
+        <!-- Section Configuration Header -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-cog"></i>
+                Configuration Header et Ressources
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="nav-title">Titre navigation header</label>
+                    <p class="field-description">Titre affiché dans la barre de navigation (actuellement: 🛡️ SOLUTION ZÉRO RISQUE)</p>
+                    <input type="text" id="nav-title" class="field-input" data-field="nav-title" 
+                           placeholder="🛡️ SOLUTION ZÉRO RISQUE" value="🛡️ SOLUTION ZÉRO RISQUE">
+                </div>
+                
+                <div class="edit-field">
+                    <label class="field-label" for="logo-path">Chemin logo EDS</label>
+                    <p class="field-description">Chemin vers le logo EDS Québec dans la navigation</p>
+                    <input type="text" id="logo-path" class="field-input" data-field="logo-path" 
+                           placeholder="./images/logo edsquebec.png" value="./images/logo edsquebec.png">
+                </div>
+                
+                <div class="edit-field">
+                    <label class="field-label" for="product-image-path">Chemin image produit principal</label>
+                    <p class="field-description">Chemin vers l'image Li-CUBE PRO™ dans la section héro</p>
+                    <input type="text" id="product-image-path" class="field-input" data-field="product-image-path" 
+                           placeholder="./images/Li-CUBE PRO.png" value="./images/Li-CUBE PRO.png">
+                </div>
+                
+                <div class="edit-field">
+                    <label class="field-label" for="competitor-image-path">Chemin image concurrent (Ni-Cd)</label>
+                    <p class="field-description">Chemin vers l'image des batteries Ni-Cd obsolètes</p>
+                    <input type="text" id="competitor-image-path" class="field-input" data-field="competitor-image-path" 
+                           placeholder="./images/NiCd.png" value="./images/NiCd.png">
+                </div>
+                
+                <div class="edit-field">
+                    <label class="field-label" for="company-image-path">Chemin image entreprise EDS</label>
+                    <p class="field-description">Chemin vers l'image de l'entreprise EDS Québec</p>
+                    <input type="text" id="company-image-path" class="field-input" data-field="company-image-path" 
+                           placeholder="./images/edsQuebec.png" value="./images/edsQuebec.png">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section Arguments Héro LOCATION -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                Arguments de Location Principaux
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="hero-title">Titre produit principal</label>
+                    <p class="field-description">Nom du produit pour la version LOCATION</p>
+                    <input type="text" id="hero-title" class="field-input" data-field="hero-title" 
+                           placeholder="Li-CUBE PRO™" value="Li-CUBE PRO™">
+                    <div class="live-preview">
+                        <div class="preview-title">Aperçu location :</div>
+                        <div class="preview-content" id="preview-hero-title">Li-CUBE PRO™</div>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-subtitle">Accroche location sans risque</label>
+                    <p class="field-description">Message principal axé sur l'absence de risque</p>
+                    <input type="text" id="hero-subtitle" class="field-input" data-field="hero-subtitle" 
+                           placeholder="LOCATION INTELLIGENTE ZÉRO RISQUE" 
+                           value="LOCATION INTELLIGENTE ZÉRO RISQUE">
+                    <div class="live-preview">
+                        <div class="preview-title">Aperçu location :</div>
+                        <div class="preview-content" id="preview-hero-subtitle">LOCATION INTELLIGENTE ZÉRO RISQUE</div>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-description">Description argumentaire de location</label>
+                    <p class="field-description">Paragraphe de location avec arguments zéro risque et service inclus</p>
+                    <textarea id="hero-description" class="field-input field-textarea" data-field="hero-description" 
+                              placeholder="Pourquoi prendre des risques...">Pourquoi prendre des risques ? Louez votre Li-CUBE PRO™ et laissez EDS gérer tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. Vous payez, vous utilisez, nous nous occupons du reste.</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="monthly-price">Prix mensuel principal</label>
+                    <p class="field-description">Tarif de location mis en avant</p>
+                    <div class="numeric-field">
+                        <input type="text" id="monthly-price" class="field-input numeric-input" data-field="monthly-price" 
+                               placeholder="150 $" value="150 $">
+                        <span class="field-unit">/mois</span>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="price-included">Services inclus dans le prix</label>
+                    <p class="field-description">Ce qui est compris dans le tarif mensuel</p>
+                    <textarea id="price-included" class="field-input field-textarea" data-field="price-included" 
+                              placeholder="Maintenance, monitoring, support...">Maintenance, monitoring, support et garantie totale inclus</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="cta-text">Call-to-action principal</label>
+                    <p class="field-description">Texte du bouton d'action avec prix de location</p>
+                    <input type="text" id="cta-text" class="field-input" data-field="cta-text" 
+                           placeholder="LOUER MAINTENANT - 150$/MOIS" 
+                           value="LOUER MAINTENANT - 150$/MOIS">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Grille Tarifaire -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-dollar-sign"></i>
+                Grille Tarifaire de Location
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="pricing-title">Titre section tarifs</label>
+                    <p class="field-description">Titre accrocheur pour la grille de prix</p>
+                    <input type="text" id="pricing-title" class="field-input" data-field="pricing-title" 
+                           placeholder="TARIFS DE LOCATION TRANSPARENTS" value="TARIFS DE LOCATION TRANSPARENTS">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="pricing-subtitle">Explication tarifs</label>
+                    <p class="field-description">Phrase explicative des avantages tarifaires</p>
+                    <textarea id="pricing-subtitle" class="field-input field-textarea" data-field="pricing-subtitle" 
+                              placeholder="Prix tout inclus, sans surprise...">Prix tout inclus, sans surprise. Plus vous louez longtemps, moins vous payez !</textarea>
+                </div>
+
+                <!-- Grille des 3 offres de location -->
+                <div class="pricing-grid">
+                    <!-- Offre 6 mois -->
+                    <div class="pricing-edit-card">
+                        <h4 style="color: var(--accent-green); margin-bottom: 1rem;">ESSAI 6 MOIS</h4>
+                        <div class="edit-field">
+                            <label class="field-label" for="price-6months">Prix 6 mois</label>
+                            <div class="numeric-field">
+                                <input type="text" id="price-6months" class="field-input numeric-input" data-field="price-6months" 
+                                       placeholder="175 $" value="175 $">
+                                <span class="field-unit">/mois</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Offre 2 ans (recommandée) -->
+                    <div class="pricing-edit-card featured">
+                        <h4 style="color: var(--accent-green); margin-bottom: 1rem;">STANDARD 2 ANS ⭐</h4>
+                        <div class="edit-field">
+                            <label class="field-label" for="price-2years">Prix 2 ans (recommandé)</label>
+                            <div class="numeric-field">
+                                <input type="text" id="price-2years" class="field-input numeric-input" data-field="price-2years" 
+                                       placeholder="150 $" value="150 $">
+                                <span class="field-unit">/mois</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Offre 5 ans -->
+                    <div class="pricing-edit-card">
+                        <h4 style="color: var(--accent-green); margin-bottom: 1rem;">PREMIUM 5 ANS</h4>
+                        <div class="edit-field">
+                            <label class="field-label" for="price-5years">Prix 5 ans</label>
+                            <div class="numeric-field">
+                                <input type="text" id="price-5years" class="field-input numeric-input" data-field="price-5years" 
+                                       placeholder="125 $" value="125 $">
+                                <span class="field-unit">/mois</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="pricing-note">Note tarifaire</label>
+                    <p class="field-description">Information complémentaire sur les prix</p>
+                    <textarea id="pricing-note" class="field-input field-textarea" data-field="pricing-note" 
+                              placeholder="💡 Astuce : Tarifs dégressifs...">💡 Astuce : Tarifs dégressifs pour multiple unités !</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="volume-discounts">Remises volume</label>
+                    <p class="field-description">Détail des remises selon quantité</p>
+                    <textarea id="volume-discounts" class="field-input field-textarea" data-field="volume-discounts" 
+                              placeholder="2-4 unités : -10%...">2-4 unités : -10% | 5-9 unités : -15% | 10+ unités : -20% | 20+ unités : sur devis personnalisé</textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Avantages Location -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-thumbs-up"></i>
+                Arguments Avantages Location
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="advantages-title">Titre avantages location</label>
+                    <p class="field-description">Question engageante pour les avantages location</p>
+                    <input type="text" id="advantages-title" class="field-input" data-field="advantages-title" 
+                           placeholder="POURQUOI CHOISIR LA LOCATION ?" value="POURQUOI CHOISIR LA LOCATION ?">
+                </div>
+
+                <!-- Avantage 1 : Zéro investissement -->
+                <div class="edit-field">
+                    <label class="field-label" for="adv1-title">Avantage 1 - Titre</label>
+                    <p class="field-description">Avantage zéro investissement initial</p>
+                    <input type="text" id="adv1-title" class="field-input" data-field="adv1-title" 
+                           placeholder="ZÉRO INVESTISSEMENT INITIAL" value="ZÉRO INVESTISSEMENT INITIAL">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="adv1-text">Avantage 1 - Description</label>
+                    <p class="field-description">Explication détaillée trésorerie préservée</p>
+                    <textarea id="adv1-text" class="field-input field-textarea" data-field="adv1-text" 
+                              placeholder="Pas de sortie de cash importante...">Pas de sortie de cash importante ! Préservez votre trésorerie pour votre cœur de métier. 150 $/mois c'est accessible à toutes les entreprises, même les plus petites. Déductible fiscalement comme charge d'exploitation.</textarea>
+                </div>
+
+                <!-- Avantage 2 : Risque zéro -->
+                <div class="edit-field">
+                    <label class="field-label" for="adv2-title">Avantage 2 - Titre</label>
+                    <p class="field-description">Risque technique transféré</p>
+                    <input type="text" id="adv2-title" class="field-input" data-field="adv2-title" 
+                           placeholder="RISQUE ZÉRO GARANTI" value="RISQUE ZÉRO GARANTI">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="adv2-text">Avantage 2 - Description</label>
+                    <p class="field-description">Explication transfert de tous les risques à EDS</p>
+                    <textarea id="adv2-text" class="field-input field-textarea" data-field="adv2-text" 
+                              placeholder="Panne ? Nous remplaçons...">Panne ? Nous remplaçons. Obsolescence ? Nous mettons à jour. Performance insuffisante ? Nous optimisons. Vous n'assumez JAMAIS aucun risque technique ou financier. EDS est responsable de TOUT.</textarea>
+                </div>
+
+                <!-- Avantage 3 : Monitoring -->
+                <div class="edit-field">
+                    <label class="field-label" for="adv3-title">Avantage 3 - Titre</label>
+                    <input type="text" id="adv3-title" class="field-input" data-field="adv3-title" 
+                           placeholder="MONITORING INTELLIGENT INCLUS" value="MONITORING INTELLIGENT INCLUS">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="adv3-text">Avantage 3 - Description</label>
+                    <textarea id="adv3-text" class="field-input field-textarea" data-field="adv3-text" 
+                              placeholder="Surveillance 24/7 automatique...">Surveillance 24/7 automatique, alertes prédictives, rapports de performance mensuel. Vous savez toujours où vous en êtes. Optimisation continue de vos opérations grâce aux données IoT en temps réel.</textarea>
+                </div>
+
+                <!-- Avantage 4 : Budget prévisible -->
+                <div class="edit-field">
+                    <label class="field-label" for="adv4-title">Avantage 4 - Titre</label>
+                    <input type="text" id="adv4-title" class="field-input" data-field="adv4-title" 
+                           placeholder="BUDGET PRÉVISIBLE" value="BUDGET PRÉVISIBLE">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="adv4-text">Avantage 4 - Description</label>
+                    <textarea id="adv4-text" class="field-input field-textarea" data-field="adv4-text" 
+                              placeholder="Coût fixe mensuel...">Coût fixe mensuel, aucune surprise, aucun dépassement. Planification financière facilitée, comptabilité simplifiée. Pas de provisions pour maintenance, pas de budget remplacement à prévoir.</textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact et Location -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-phone"></i>
+                Contact et Mise en Service
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="contact-title">Titre section contact</label>
+                    <p class="field-description">Appel à l'action pour louer</p>
+                    <input type="text" id="contact-title" class="field-input" data-field="contact-title" 
+                           placeholder="LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT" value="LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-subtitle">Sous-titre contact</label>
+                    <p class="field-description">Message de renforcement pour la location</p>
+                    <textarea id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
+                              placeholder="Zéro risque, zéro surprise...">Zéro risque, zéro surprise, performance maximale garantie</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="rental-phone">Téléphone division location</label>
+                    <p class="field-description">Numéro spécialisé pour les locations</p>
+                    <input type="tel" id="rental-phone" class="field-input" data-field="rental-phone" 
+                           placeholder="819-323-LOCA" value="819-323-LOCA">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="rental-email">Email location</label>
+                    <p class="field-description">Email spécialisé pour les demandes de location</p>
+                    <input type="email" id="rental-email" class="field-input" data-field="rental-email" 
+                           placeholder="location@edsquebec.com" value="location@edsquebec.com">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="installation-time">Délai de mise en service</label>
+                    <p class="field-description">Temps entre signature et installation</p>
+                    <input type="text" id="installation-time" class="field-input" data-field="installation-time" 
+                           placeholder="48h" value="48h">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="rental-guarantees">Garanties location</label>
+                    <p class="field-description">Liste des garanties offertes en location</p>
+                    <textarea id="rental-guarantees" class="field-input field-textarea" data-field="rental-guarantees" 
+                              placeholder="✅ Devis gratuit...">✅ Devis gratuit et sans engagement
+✅ Installation par techniciens certifiés EDS
+✅ Contrat flexible adapté à vos besoins
+✅ Support québécois en français 24/7</textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Comparaison Technique -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-balance-scale"></i>
+                Comparaison Technique Li-CUBE PRO™ vs Ni-Cd
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="comparison-title">Titre section comparaison</label>
+                    <p class="field-description">Titre accrocheur pour la comparaison technique</p>
+                    <input type="text" id="comparison-title" class="field-input" data-field="comparison-title" 
+                           placeholder="COMPARAISON TECHNIQUE IMPLACABLE" value="COMPARAISON TECHNIQUE IMPLACABLE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="comparison-subtitle">Sous-titre comparaison</label>
+                    <p class="field-description">Explication de la supériorité technique</p>
+                    <textarea id="comparison-subtitle" class="field-input field-textarea" data-field="comparison-subtitle" 
+                              placeholder="Pourquoi payer plus cher pour une technologie obsolète...">Pourquoi payer plus cher pour une technologie obsolète ? Li-CUBE PRO™ écrase la concurrence sur tous les critères techniques.</textarea>
+                </div>
+
+                <!-- Section Faiblesses Ni-Cd (rouge) -->
+                <div class="edit-section" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2);">
+                    <h3 style="color: var(--warning-red); margin-bottom: 1rem;">
+                        <i class="fas fa-times-circle"></i>
+                        Faiblesses des Batteries Ni-Cd Obsolètes
+                    </h3>
+                    <div class="edit-grid">
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness1">Faiblesse 1</label>
+                            <p class="field-description">Premier défaut majeur du Ni-Cd</p>
+                            <textarea id="weakness1" class="field-input field-textarea" data-field="weakness1" 
+                                      placeholder="Effet mémoire destructeur...">Effet mémoire destructeur : perte de 20-40% de capacité si mal utilisées</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness2">Faiblesse 2</label>
+                            <p class="field-description">Second défaut critique</p>
+                            <textarea id="weakness2" class="field-input field-textarea" data-field="weakness2" 
+                                      placeholder="Autodécharge catastrophique...">Autodécharge catastrophique : 15-20% par mois même sans utilisation</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness3">Faiblesse 3</label>
+                            <p class="field-description">Troisième problème technique</p>
+                            <textarea id="weakness3" class="field-input field-textarea" data-field="weakness3" 
+                                      placeholder="Durée de vie limitée...">Durée de vie limitée : 300-500 cycles maximum, souvent moins</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness4">Faiblesse 4</label>
+                            <p class="field-description">Quatrième défaut structurel</p>
+                            <textarea id="weakness4" class="field-input field-textarea" data-field="weakness4" 
+                                      placeholder="Performance dégradée au froid...">Performance dégradée au froid : -50% de capacité sous 0°C</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness5">Faiblesse 5</label>
+                            <p class="field-description">Cinquième problème environnemental</p>
+                            <textarea id="weakness5" class="field-input field-textarea" data-field="weakness5" 
+                                      placeholder="Cadmium toxique...">Cadmium toxique : impact environnemental désastreux, recyclage complexe</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness6">Faiblesse 6</label>
+                            <p class="field-description">Sixième défaut économique</p>
+                            <textarea id="weakness6" class="field-input field-textarea" data-field="weakness6" 
+                                      placeholder="Coût total prohibitif...">Coût total prohibitif : remplacement fréquent = 4x plus cher à long terme</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness7">Faiblesse 7</label>
+                            <p class="field-description">Septième problème technique</p>
+                            <input type="text" id="weakness7-title" class="field-input" data-field="weakness7-title" 
+                                   placeholder="Réglementation Transport Stricte" value="Réglementation Transport Stricte">
+                            <textarea id="weakness7-desc" class="field-input field-textarea" data-field="weakness7-desc" 
+                                      placeholder="Classé UN2795 Batteries Wet Alkali...">Classé UN2795 Batteries Wet Alkali, transport coûteux et contraignant</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness8">Faiblesse 8</label>
+                            <p class="field-description">Huitième défaut de sécurité</p>
+                            <input type="text" id="weakness8-title" class="field-input" data-field="weakness8-title" 
+                                   placeholder="Effet Mémoire Dégradant" value="Effet Mémoire Dégradant">
+                            <textarea id="weakness8-desc" class="field-input field-textarea" data-field="weakness8-desc" 
+                                      placeholder="Perte capacité progressive...">Perte capacité progressive avec cycles partiels, performance décroissante</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness9">Faiblesse 9</label>
+                            <p class="field-description">Neuvième problème d'entretien</p>
+                            <input type="text" id="weakness9-title" class="field-input" data-field="weakness9-title" 
+                                   placeholder="Profondeur Décharge Limitée" value="Profondeur Décharge Limitée">
+                            <textarea id="weakness9-desc" class="field-input field-textarea" data-field="weakness9-desc" 
+                                      placeholder="60% seulement exploitable...">60% seulement exploitable vs 96% Li-CUBE PRO™ → capacité réelle inférieure</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness10">Faiblesse 10</label>
+                            <p class="field-description">Dixième défaut de fiabilité</p>
+                            <input type="text" id="weakness10-title" class="field-input" data-field="weakness10-title" 
+                                   placeholder="Location Plus Chère" value="Location Plus Chère">
+                            <textarea id="weakness10-desc" class="field-input field-textarea" data-field="weakness10-desc" 
+                                      placeholder="250$/mois vs 150-200$...">250$/mois vs 150-200$ Li-CUBE PRO™ → 25% plus cher sans maintenance incluse</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness11">Faiblesse 11</label>
+                            <p class="field-description">Onzième problème technologique</p>
+                            <input type="text" id="weakness11-title" class="field-input" data-field="weakness11-title" 
+                                   placeholder="Remplacements Fréquents" value="Remplacements Fréquents">
+                            <textarea id="weakness11-desc" class="field-input field-textarea" data-field="weakness11-desc" 
+                                      placeholder="3 remplacements sur 20 ans...">3 remplacements sur 20 ans (4 unités au total) vs 0 pour Li-CUBE PRO™</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Avantages Li-CUBE PRO (vert) -->
+                <div class="edit-section" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
+                    <h3 style="color: var(--success-green); margin-bottom: 1rem;">
+                        <i class="fas fa-check-circle"></i>
+                        Avantages Techniques Li-CUBE PRO™
+                    </h3>
+                    <div class="edit-grid">
+                        <div class="edit-field">
+                            <label class="field-label" for="strength1">Avantage 1</label>
+                            <p class="field-description">Premier atout technique majeur</p>
+                            <textarea id="strength1" class="field-input field-textarea" data-field="strength1" 
+                                      placeholder="AUCUN effet mémoire...">AUCUN effet mémoire : performance constante sur toute la durée de vie</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength2">Avantage 2</label>
+                            <p class="field-description">Deuxième supériorité technique</p>
+                            <textarea id="strength2" class="field-input field-textarea" data-field="strength2" 
+                                      placeholder="Autodécharge minime...">Autodécharge minime : moins de 3% par mois, stockage long terme</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength3">Avantage 3</label>
+                            <p class="field-description">Troisième atout de longévité</p>
+                            <textarea id="strength3" class="field-input field-textarea" data-field="strength3" 
+                                      placeholder="Durée de vie exceptionnelle...">Durée de vie exceptionnelle : 2000+ cycles garantis, souvent 3000+</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength4">Avantage 4</label>
+                            <p class="field-description">Quatrième supériorité climatique</p>
+                            <textarea id="strength4" class="field-input field-textarea" data-field="strength4" 
+                                      placeholder="Résistance au froid...">Résistance au froid : performance stable de -20°C à +60°C</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength5">Avantage 5</label>
+                            <p class="field-description">Cinquième atout écologique</p>
+                            <textarea id="strength5" class="field-input field-textarea" data-field="strength5" 
+                                      placeholder="100% écologique...">100% écologique : Lithium recyclable, empreinte carbone réduite</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength6">Avantage 6</label>
+                            <p class="field-description">Sixième supériorité économique</p>
+                            <textarea id="strength6" class="field-input field-textarea" data-field="strength6" 
+                                      placeholder="ROI exceptionnel...">ROI exceptionnel : amortissement sur 5-7 ans, économies massives</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength7">Avantage 7</label>
+                            <p class="field-description">Septième atout de rapidité</p>
+                            <input type="text" id="strength7-title" class="field-input" data-field="strength7-title" 
+                                   placeholder="Sécurité BMS Multi-niveau" value="Sécurité BMS Multi-niveau">
+                            <textarea id="strength7-desc" class="field-input field-textarea" data-field="strength7-desc" 
+                                      placeholder="Protections OVP, UVP, OCP...">Protections OVP, UVP, OCP, OTP, court-circuit → risques incidents réduits drastiquement</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength8">Avantage 8</label>
+                            <p class="field-description">Huitième supériorité sécuritaire</p>
+                            <input type="text" id="strength8-title" class="field-input" data-field="strength8-title" 
+                                   placeholder="Réduction Coûts Opérationnels" value="Réduction Coûts Opérationnels">
+                            <textarea id="strength8-desc" class="field-input field-textarea" data-field="strength8-desc" 
+                                      placeholder="Moins d'interventions...">Moins d'interventions, déplacements équipes réduits, fiabilité accrue</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength9">Avantage 9</label>
+                            <p class="field-description">Neuvième atout de simplicité</p>
+                            <input type="text" id="strength9-title" class="field-input" data-field="strength9-title" 
+                                   placeholder="Fabrication SAV Québec" value="Fabrication SAV Québec">
+                            <textarea id="strength9-desc" class="field-input field-textarea" data-field="strength9-desc" 
+                                      placeholder="Délais réduits, service local...">Délais réduits, service local français, réactivité pièces et support</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength10">Avantage 10</label>
+                            <p class="field-description">Dixième supériorité de fiabilité</p>
+                            <input type="text" id="strength10-title" class="field-input" data-field="strength10-title" 
+                                   placeholder="Installation Simplifiée" value="Installation Simplifiée">
+                            <textarea id="strength10-desc" class="field-input field-textarea" data-field="strength10-desc" 
+                                      placeholder="23 kg vs 80 kg...">23 kg vs 80 kg, boîtier compact acier, manutention sécurisée</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength11">Avantage 11</label>
+                            <p class="field-description">Onzième atout technologique</p>
+                            <input type="text" id="strength11-title" class="field-input" data-field="strength11-title" 
+                                   placeholder="Profondeur Décharge Optimale" value="Profondeur Décharge Optimale">
+                            <textarea id="strength11-desc" class="field-input field-textarea" data-field="strength11-desc" 
+                                      placeholder="96% exploitable vs 60% Ni-Cd...">96% exploitable vs 60% Ni-Cd → capacité réelle supérieure</textarea>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength12">Avantage 12</label>
+                            <p class="field-description">Douzième supériorité finale</p>
+                            <input type="text" id="strength12-title" class="field-input" data-field="strength12-title" 
+                                   placeholder="Location Flexible Avantageuse" value="Location Flexible Avantageuse">
+                            <textarea id="strength12-desc" class="field-input field-textarea" data-field="strength12-desc" 
+                                      placeholder="150-200$/mois vs 250$ Ni-Cd...">150-200$/mois vs 250$ Ni-Cd → plus économique avec maintenance incluse</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conclusion comparative -->
+                <div class="edit-field">
+                    <label class="field-label" for="comparison-conclusion">Conclusion comparative</label>
+                    <p class="field-description">Conclusion choc avec chiffres TCO</p>
+                    <textarea id="comparison-conclusion" class="field-input field-textarea" data-field="comparison-conclusion" 
+                              placeholder="Conclusion implacable : Li-CUBE PRO™...">Conclusion implacable : Li-CUBE PRO™ 150$/mois en location vs Ni-Cd 1200$/an en remplacement → 85% d'économies + performance supérieure !</textarea>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Actions en bas de page -->
+    <footer class="editor-actions">
+        <div class="actions-content">
+            <div class="save-status">
+                <i class="fas fa-circle status-icon" id="saveStatusIcon"></i>
+                <span id="saveStatusText">Version LOCATION - Non sauvegardé</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-back" onclick="resetAllFields()">
+                    <i class="fas fa-undo"></i>
+                    Réinitialiser
+                </button>
+                <button class="btn btn-save" onclick="saveAllChanges()">
+                    <i class="fas fa-save"></i>
+                    Sauvegarder LOCATION
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration spéciale pour version LOCATION
+        const LOCATION_CONFIG = {
+            storageKey: 'licubepro-location-content',
+            pageType: 'location',
+            targetPage: 'location.html'
+        };
+
+        let hasUnsavedChanges = false;
+        let autoSaveTimeout = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Éditeur LOCATION Li-CUBE PRO™ initialisé');
+            loadSavedContent();
+            setupEventListeners();
+            updateSaveStatus('loaded', 'Version LOCATION - Contenu chargé');
+        });
+
+        function setupEventListeners() {
+            const allFields = document.querySelectorAll('.field-input');
+            
+            allFields.forEach(field => {
+                field.addEventListener('input', function() {
+                    handleFieldChange(this);
+                    updateLivePreview(this);
+                    markAsUnsaved();
+                });
+                
+                field.addEventListener('blur', function() {
+                    if (hasUnsavedChanges) {
+                        autoSave();
+                    }
+                });
+            });
+        }
+
+        function handleFieldChange(field) {
+            const fieldId = field.getAttribute('data-field');
+            const value = field.value;
+            
+            console.log(`LOCATION - Champ modifié: ${fieldId} = "${value}"`);
+            
+            if (field.type === 'email' && value && !isValidEmail(value)) {
+                field.style.borderColor = 'var(--warning-red)';
+                showStatusMessage('error', 'Format d\'email invalide');
+            } else if (field.type === 'tel' && value && !isValidPhone(value)) {
+                field.style.borderColor = 'var(--warning-red)';
+                showStatusMessage('error', 'Format de téléphone invalide');
+            } else {
+                field.style.borderColor = 'var(--accent-green)';
+            }
+        }
+
+        function updateLivePreview(field) {
+            const fieldId = field.getAttribute('data-field');
+            const previewElement = document.getElementById(`preview-${fieldId}`);
+            
+            if (previewElement) {
+                previewElement.textContent = field.value || 'Aperçu vide...';
+            }
+        }
+
+        function loadSavedContent() {
+            const savedContent = localStorage.getItem(LOCATION_CONFIG.storageKey);
+            if (savedContent) {
+                try {
+                    const content = JSON.parse(savedContent);
+                    
+                    Object.entries(content).forEach(([field, value]) => {
+                        const fieldElement = document.querySelector(`[data-field="${field}"]`);
+                        if (fieldElement) {
+                            fieldElement.value = value;
+                            updateLivePreview(fieldElement);
+                        }
+                    });
+                    
+                    console.log('LOCATION - Contenu chargé:', Object.keys(content));
+                    showStatusMessage('success', 'Contenu LOCATION chargé avec succès');
+                } catch (error) {
+                    console.error('Erreur chargement LOCATION:', error);
+                    showStatusMessage('error', 'Erreur lors du chargement');
+                }
+            }
+        }
+
+        function saveAllChanges() {
+            updateSaveStatus('saving', 'Sauvegarde version LOCATION...');
+            
+            const allFields = document.querySelectorAll('.field-input');
+            const content = {};
+            
+            allFields.forEach(field => {
+                const fieldId = field.getAttribute('data-field');
+                if (fieldId) {
+                    content[fieldId] = field.value;
+                }
+            });
+            
+            try {
+                localStorage.setItem(LOCATION_CONFIG.storageKey, JSON.stringify(content));
+                
+                // IMPORTANT: Synchroniser aussi avec la clé générale pour la page de présentation
+                localStorage.setItem('licubepro-content', JSON.stringify(content));
+                
+                console.log('LOCATION - Contenu sauvegardé:', content);
+                
+                hasUnsavedChanges = false;
+                updateSaveStatus('saved', 'Version LOCATION - Toutes modifications sauvegardées');
+                showStatusMessage('success', `${Object.keys(content).length} champs LOCATION sauvegardés`);
+                
+            } catch (error) {
+                console.error('Erreur sauvegarde LOCATION:', error);
+                updateSaveStatus('error', 'Erreur sauvegarde LOCATION');
+                showStatusMessage('error', 'Impossible de sauvegarder LOCATION');
+            }
+        }
+
+        function autoSave() {
+            if (autoSaveTimeout) {
+                clearTimeout(autoSaveTimeout);
+            }
+            
+            autoSaveTimeout = setTimeout(() => {
+                saveAllChanges();
+            }, 2000);
+        }
+
+        function resetAllFields() {
+            if (confirm('Réinitialiser tous les champs LOCATION ? Les modifications non sauvegardées seront perdues.')) {
+                localStorage.removeItem(LOCATION_CONFIG.storageKey);
+                window.location.reload();
+            }
+        }
+
+        function togglePreview() {
+            window.open(LOCATION_CONFIG.targetPage, '_blank', 'width=1200,height=800');
+        }
+
+        function markAsUnsaved() {
+            if (!hasUnsavedChanges) {
+                hasUnsavedChanges = true;
+                updateSaveStatus('unsaved', 'Version LOCATION - Modifications non sauvegardées');
+            }
+        }
+
+        function updateSaveStatus(status, message) {
+            const statusIcon = document.getElementById('saveStatusIcon');
+            const statusText = document.getElementById('saveStatusText');
+            
+            statusIcon.className = 'fas status-icon';
+            
+            switch (status) {
+                case 'saving':
+                    statusIcon.classList.add('saving', 'fa-spinner');
+                    break;
+                case 'saved':
+                    statusIcon.classList.add('saved', 'fa-check-circle');
+                    break;
+                case 'unsaved':
+                    statusIcon.classList.add('fa-exclamation-triangle');
+                    break;
+                case 'error':
+                    statusIcon.classList.add('fa-times-circle');
+                    break;
+                case 'loaded':
+                    statusIcon.classList.add('saved', 'fa-circle');
+                    break;
+            }
+            
+            statusText.textContent = message;
+        }
+
+        function showStatusMessage(type, message) {
+            const statusMessage = document.getElementById('statusMessage');
+            const statusText = document.getElementById('statusText');
+            
+            statusMessage.className = `status-message ${type}`;
+            statusText.textContent = message;
+            statusMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^(\+1[-.\s]?)?(\(?[0-9]{3}\)?[-.\s]?)?[0-9]{3}[-.\s]?[0-9]{4}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Raccourcis clavier
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 's') {
+                event.preventDefault();
+                saveAllChanges();
+            }
+        });
+
+        window.addEventListener('beforeunload', function(event) {
+            if (hasUnsavedChanges) {
+                const message = 'Modifications LOCATION non sauvegardées. Quitter quand même?';
+                event.returnValue = message;
+                return message;
+            }
+        });
+
+        console.log('Éditeur LOCATION Li-CUBE PRO™ - Interface spécialisée chargée');
+    </script>
+    
+    <!-- Système de synchronisation pour version LOCATION -->
+    <script src="js/live-sync.js"></script>
+</body>
+</html>

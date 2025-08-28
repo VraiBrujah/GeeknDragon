@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Métadonnées pour la page d'édition en direct Li-CUBE PRO™ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur Li-CUBE PRO™ - Modification en Direct | EDS Québec</title>
+    <meta name="description" content="Interface d'édition simple et intuitive pour modifier le contenu de présentation Li-CUBE PRO™">
+    
+    <!-- Polices pour une interface moderne et lisible -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variables CSS pour le thème cohérent avec la page de présentation */
+        :root {
+            /* Palette de couleurs identique à la page principale */
+            --primary-dark: #0F172A;
+            --secondary-dark: #1E293B;
+            --accent-blue: #60A5FA;
+            --accent-blue-light: #93C5FD;
+            --accent-orange: #F59E0B;
+            --success-green: #10B981;
+            --warning-red: #EF4444;
+            --text-white: #F8FAFC;
+            --text-gray: #CBD5E1;
+            --text-blue: #BFDBFE;
+            
+            /* Dégradés et effets visuels */
+            --gradient-primary: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-light) 100%);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+        }
+        
+        /* Reset CSS de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Style de base pour la page d'édition */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-primary);
+            color: var(--text-white);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* En-tête de l'éditeur avec navigation */
+        .editor-header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        /* Conteneur de l'en-tête */
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Titre de l'éditeur */
+        .editor-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Actions dans l'en-tête */
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        /* Boutons de l'en-tête */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Bouton de retour */
+        .btn-back {
+            background: rgba(96, 165, 250, 0.1);
+            color: var(--accent-blue);
+            border: 1px solid var(--accent-blue);
+        }
+        
+        /* Bouton de sauvegarde */
+        .btn-save {
+            background: var(--success-green);
+            color: white;
+        }
+        
+        /* Bouton de prévisualisation */
+        .btn-preview {
+            background: var(--accent-orange);
+            color: white;
+        }
+        
+        /* Effets de survol sur les boutons */
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Conteneur principal de l'éditeur */
+        .editor-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Message de statut en haut */
+        .status-message {
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Message de succès */
+        .status-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--success-green);
+            color: var(--success-green);
+            display: block;
+        }
+        
+        /* Message d'erreur */
+        .status-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--warning-red);
+            color: var(--warning-red);
+            display: block;
+        }
+        
+        /* Sections de l'éditeur organisées par catégories */
+        .edit-section {
+            background: rgba(96, 165, 250, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(96, 165, 250, 0.1);
+        }
+        
+        /* Titre de section d'édition */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Grille des champs d'édition */
+        .edit-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        /* Champ d'édition individuel */
+        .edit-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        /* Étiquette de champ */
+        .field-label {
+            font-weight: 600;
+            color: var(--text-white);
+            font-size: 0.95rem;
+        }
+        
+        /* Description du champ */
+        .field-description {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            font-style: italic;
+        }
+        
+        /* Champs de saisie de texte */
+        .field-input {
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: var(--text-white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        /* Zone de texte multiligne */
+        .field-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        /* Focus sur les champs */
+        .field-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background: rgba(96, 165, 250, 0.15);
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+        }
+        
+        /* Placeholder pour les champs */
+        .field-input::placeholder {
+            color: rgba(203, 213, 225, 0.5);
+        }
+        
+        /* Champs numériques avec contrôles */
+        .numeric-field {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .numeric-input {
+            flex: 1;
+        }
+        
+        /* Unité affichée à côté des champs numériques */
+        .field-unit {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Prévisualisation en temps réel */
+        .live-preview {
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-left: 4px solid var(--accent-blue);
+        }
+        
+        /* Titre de prévisualisation */
+        .preview-title {
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Contenu de prévisualisation */
+        .preview-content {
+            color: var(--text-gray);
+            font-style: italic;
+        }
+        
+        /* Section d'actions en bas de page */
+        .editor-actions {
+            position: sticky;
+            bottom: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            border-top: 1px solid rgba(96, 165, 250, 0.2);
+            margin-top: 3rem;
+        }
+        
+        /* Conteneur des actions */
+        .actions-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Statut de sauvegarde */
+        .save-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Icône de statut */
+        .status-icon {
+            font-size: 1rem;
+        }
+        
+        .status-icon.saving {
+            color: var(--accent-orange);
+            animation: spin 1s infinite;
+        }
+        
+        .status-icon.saved {
+            color: var(--success-green);
+        }
+        
+        /* Animation de rotation */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive design pour tablettes */
+        @media (max-width: 768px) {
+            .editor-container {
+                padding: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .header-actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .actions-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+        
+        /* Styles pour l'aperçu intégré */
+        .integrated-preview {
+            position: fixed;
+            top: 0;
+            right: -50%;
+            width: 50%;
+            height: 100vh;
+            background: white;
+            z-index: 200;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+        }
+        
+        .integrated-preview.active {
+            right: 0;
+        }
+        
+        .preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .preview-header {
+            background: var(--primary-dark);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .close-preview {
+            background: var(--warning-red);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête de l'éditeur avec navigation -->
+    <header class="editor-header">
+        <div class="header-content">
+            <h1 class="editor-title">
+                <i class="fas fa-edit"></i>
+                Éditeur Li-CUBE PRO™
+            </h1>
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-back">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour à la présentation
+                </a>
+                <button class="btn btn-preview" onclick="togglePreview()">
+                    <i class="fas fa-eye"></i>
+                    Prévisualiser
+                </button>
+                <button class="btn btn-save" onclick="saveAllChanges()">
+                    <i class="fas fa-save"></i>
+                    Sauvegarder
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Message de statut -->
+    <div class="status-message" id="statusMessage">
+        <i class="fas fa-info-circle"></i>
+        <span id="statusText">Prêt pour l'édition</span>
+    </div>
+
+    <!-- Conteneur principal de l'éditeur -->
+    <main class="editor-container">
+        
+        <!-- Section Héro -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-star"></i>
+                Section Héro Principale
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="hero-title">Titre principal du produit</label>
+                    <p class="field-description">Le nom du produit mis en évidence (généralement "Li-CUBE PRO™")</p>
+                    <input type="text" id="hero-title" class="field-input" data-field="hero-title" 
+                           placeholder="Li-CUBE PRO™" value="Li-CUBE PRO™">
+                    <div class="live-preview">
+                        <div class="preview-title">Aperçu en direct :</div>
+                        <div class="preview-content" id="preview-hero-title">Li-CUBE PRO™</div>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-subtitle-1">Premier sous-titre</label>
+                    <p class="field-description">Message clé sur les avantages principaux</p>
+                    <input type="text" id="hero-subtitle-1" class="field-input" data-field="hero-subtitle-1" 
+                           placeholder="4× plus durable, zéro maintenance, sécurité maximale." 
+                           value="4× plus durable, zéro maintenance, sécurité maximale.">
+                    <div class="live-preview">
+                        <div class="preview-title">Aperçu en direct :</div>
+                        <div class="preview-content" id="preview-hero-subtitle-1">4× plus durable, zéro maintenance, sécurité maximale.</div>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-subtitle-2">Deuxième sous-titre</label>
+                    <p class="field-description">Call-to-action ou bénéfice client</p>
+                    <input type="text" id="hero-subtitle-2" class="field-input" data-field="hero-subtitle-2" 
+                           placeholder="Transformez votre cycle de vie, réduisez vos coûts." 
+                           value="Transformez votre cycle de vie, réduisez vos coûts.">
+                    <div class="live-preview">
+                        <div class="preview-title">Aperçu en direct :</div>
+                        <div class="preview-content" id="preview-hero-subtitle-2">Transformez votre cycle de vie, réduisez vos coûts.</div>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-description">Description détaillée</label>
+                    <p class="field-description">Paragraphe explicatif des avantages techniques</p>
+                    <textarea id="hero-description" class="field-input field-textarea" data-field="hero-description" 
+                              placeholder="Une révolution énergétique — plus légère, plus compacte, plus intelligente...">Une révolution énergétique — plus légère (23 kg vs ~80 kg), plus compacte, plus intelligente, pour un rendement imbattable. Écologique, sûre, fabriquée ici — la solution moderne pour votre transition énergétique.</textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Statistiques -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-chart-bar"></i>
+                Statistiques Clés
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="stat-cycles">Nombre de cycles de vie</label>
+                    <p class="field-description">Durabilité exprimée en nombre de cycles</p>
+                    <div class="numeric-field">
+                        <input type="text" id="stat-cycles" class="field-input numeric-input" data-field="stat-cycles" 
+                               placeholder="8 000+" value="8 000+">
+                        <span class="field-unit">cycles</span>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="stat-weight">Poids de la batterie</label>
+                    <p class="field-description">Poids comparativement faible</p>
+                    <div class="numeric-field">
+                        <input type="text" id="stat-weight" class="field-input numeric-input" data-field="stat-weight" 
+                               placeholder="23 kg" value="23 kg">
+                        <span class="field-unit">kg</span>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="stat-maintenance">Niveau de maintenance</label>
+                    <p class="field-description">Maintenance requise (0 pour zéro maintenance)</p>
+                    <div class="numeric-field">
+                        <input type="text" id="stat-maintenance" class="field-input numeric-input" data-field="stat-maintenance" 
+                               placeholder="0" value="0">
+                        <span class="field-unit">maintenance</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Comparaison Technique -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-balance-scale"></i>
+                Données de Comparaison
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="comparison-title">Titre de la section comparaison</label>
+                    <p class="field-description">Titre principal de la comparaison Li-CUBE PRO vs Ni-Cd</p>
+                    <input type="text" id="comparison-title" class="field-input" data-field="comparison-title" 
+                           placeholder="Li-CUBE PRO™ vs Batterie Ni-Cd" value="Li-CUBE PRO™ vs Batterie Ni-Cd">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="licube-energy">Énergie Li-CUBE PRO</label>
+                    <p class="field-description">Capacité énergétique totale en Wh</p>
+                    <div class="numeric-field">
+                        <input type="text" id="licube-energy" class="field-input numeric-input" data-field="licube-energy" 
+                               placeholder="2 520 Wh" value="2 520 Wh">
+                        <span class="field-unit">Wh</span>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="licube-cycles">Cycles Li-CUBE PRO</label>
+                    <p class="field-description">Durée de vie en cycles de charge/décharge</p>
+                    <div class="numeric-field">
+                        <input type="text" id="licube-cycles" class="field-input numeric-input" data-field="licube-cycles" 
+                               placeholder="≥ 8 000 cycles" value="≥ 8 000 cycles">
+                        <span class="field-unit">cycles</span>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="licube-weight">Poids Li-CUBE PRO</label>
+                    <p class="field-description">Poids total de la batterie</p>
+                    <div class="numeric-field">
+                        <input type="text" id="licube-weight" class="field-input numeric-input" data-field="licube-weight" 
+                               placeholder="23 kg" value="23 kg">
+                        <span class="field-unit">kg</span>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="licube-tco">TCO Li-CUBE PRO</label>
+                    <p class="field-description">Coût total de possession sur 20 ans</p>
+                    <div class="numeric-field">
+                        <input type="text" id="licube-tco" class="field-input numeric-input" data-field="licube-tco" 
+                               placeholder="11 000-11 500 CAD" value="11 000-11 500 CAD">
+                        <span class="field-unit">CAD</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Phrases Percutantes -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-quote-right"></i>
+                Messages Marketing Percutants
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="punchline-1">Première phrase percutante</label>
+                    <p class="field-description">Message sur la modernité technologique</p>
+                    <textarea id="punchline-1" class="field-input field-textarea" data-field="punchline-1" 
+                              placeholder="Le futur s'écrit avec le lithium — oubliez le cadmium toxique.">Le futur s'écrit avec le lithium — oubliez le cadmium toxique.</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="punchline-2">Deuxième phrase percutante</label>
+                    <p class="field-description">Message sur la durabilité et fiabilité</p>
+                    <textarea id="punchline-2" class="field-input field-textarea" data-field="punchline-2" 
+                              placeholder="8 000 cycles dès maintenant, pas de remplacement, pas de tracas.">8 000 cycles dès maintenant, pas de remplacement, pas de tracas.</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="punchline-3">Troisième phrase percutante</label>
+                    <p class="field-description">Message sur la technologie intelligente</p>
+                    <textarea id="punchline-3" class="field-input field-textarea" data-field="punchline-3" 
+                              placeholder="La batterie qui pense, surveille, protège — pour vous.">La batterie qui pense, surveille, protège — pour vous.</textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-address-card"></i>
+                Informations de Contact
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="contact-title">Titre de la section contact</label>
+                    <p class="field-description">Appel à l'action pour le contact</p>
+                    <input type="text" id="contact-title" class="field-input" data-field="contact-title" 
+                           placeholder="Contactez EDS Québec" value="Contactez EDS Québec">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-description">Description du contact</label>
+                    <p class="field-description">Message d'invitation à prendre contact</p>
+                    <textarea id="contact-description" class="field-input field-textarea" data-field="contact-description" 
+                              placeholder="Découvrez comment Li-CUBE PRO™ peut transformer votre opération...">Découvrez comment Li-CUBE PRO™ peut transformer votre opération énergétique. Notre équipe d'experts est prête à vous accompagner dans votre transition.</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-phone">Numéro de téléphone</label>
+                    <p class="field-description">Numéro direct pour les prospects</p>
+                    <input type="tel" id="contact-phone" class="field-input" data-field="contact-phone" 
+                           placeholder="819-323-7859" value="819-323-7859">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-email">Adresse email</label>
+                    <p class="field-description">Email de contact principal</p>
+                    <input type="email" id="contact-email" class="field-input" data-field="contact-email" 
+                           placeholder="contact@edsquebec.com" value="contact@edsquebec.com">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Actions en bas de page -->
+    <footer class="editor-actions">
+        <div class="actions-content">
+            <div class="save-status">
+                <i class="fas fa-circle status-icon" id="saveStatusIcon"></i>
+                <span id="saveStatusText">Non sauvegardé</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-back" onclick="resetAllFields()">
+                    <i class="fas fa-undo"></i>
+                    Réinitialiser
+                </button>
+                <button class="btn btn-save" onclick="saveAllChanges()">
+                    <i class="fas fa-save"></i>
+                    Sauvegarder tout
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Prévisualisation intégrée (cachée par défaut) -->
+    <div class="integrated-preview" id="integratedPreview">
+        <div class="preview-header">
+            <h3>Prévisualisation en Direct</h3>
+            <button class="close-preview" onclick="togglePreview()">
+                <i class="fas fa-times"></i>
+                Fermer
+            </button>
+        </div>
+        <iframe class="preview-frame" id="previewFrame" src="index.html"></iframe>
+    </div>
+
+    <script>
+        // Variables globales pour la gestion de l'état
+        let hasUnsavedChanges = false;
+        let autoSaveTimeout = null;
+
+        // Fonction d'initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Éditeur Li-CUBE PRO™ initialisé');
+            loadSavedContent();
+            setupEventListeners();
+            updateSaveStatus('loaded', 'Contenu chargé');
+        });
+
+        // Configuration des écouteurs d'événements pour tous les champs
+        function setupEventListeners() {
+            const allFields = document.querySelectorAll('.field-input');
+            
+            allFields.forEach(field => {
+                // Écouter les changements en temps réel
+                field.addEventListener('input', function() {
+                    handleFieldChange(this);
+                    updateLivePreview(this);
+                    markAsUnsaved();
+                });
+                
+                // Écouter la perte de focus pour sauvegarder
+                field.addEventListener('blur', function() {
+                    if (hasUnsavedChanges) {
+                        autoSave();
+                    }
+                });
+            });
+        }
+
+        // Gestion des changements de champ avec validation
+        function handleFieldChange(field) {
+            const fieldId = field.getAttribute('data-field');
+            const value = field.value;
+            
+            console.log(`Champ modifié: ${fieldId} = "${value}"`);
+            
+            // Validation basique selon le type de champ
+            if (field.type === 'email' && value && !isValidEmail(value)) {
+                field.style.borderColor = 'var(--warning-red)';
+                showStatusMessage('error', 'Format d\'email invalide');
+            } else if (field.type === 'tel' && value && !isValidPhone(value)) {
+                field.style.borderColor = 'var(--warning-red)';
+                showStatusMessage('error', 'Format de téléphone invalide');
+            } else {
+                field.style.borderColor = 'var(--accent-blue)';
+            }
+        }
+
+        // Mise à jour des aperçus en direct
+        function updateLivePreview(field) {
+            const fieldId = field.getAttribute('data-field');
+            const previewElement = document.getElementById(`preview-${fieldId}`);
+            
+            if (previewElement) {
+                previewElement.textContent = field.value || 'Aperçu vide...';
+            }
+        }
+
+        // Chargement du contenu sauvegardé depuis localStorage
+        function loadSavedContent() {
+            const savedContent = localStorage.getItem('licubepro-content');
+            if (savedContent) {
+                try {
+                    const content = JSON.parse(savedContent);
+                    
+                    Object.entries(content).forEach(([field, value]) => {
+                        const fieldElement = document.querySelector(`[data-field="${field}"]`);
+                        if (fieldElement) {
+                            fieldElement.value = value;
+                            updateLivePreview(fieldElement);
+                        }
+                    });
+                    
+                    console.log('Contenu chargé depuis localStorage:', Object.keys(content));
+                    showStatusMessage('success', 'Contenu précédemment sauvegardé chargé avec succès');
+                } catch (error) {
+                    console.error('Erreur lors du chargement:', error);
+                    showStatusMessage('error', 'Erreur lors du chargement du contenu sauvegardé');
+                }
+            }
+        }
+
+        // Sauvegarde de tout le contenu
+        function saveAllChanges() {
+            updateSaveStatus('saving', 'Sauvegarde en cours...');
+            
+            const allFields = document.querySelectorAll('.field-input');
+            const content = {};
+            
+            allFields.forEach(field => {
+                const fieldId = field.getAttribute('data-field');
+                if (fieldId) {
+                    content[fieldId] = field.value;
+                }
+            });
+            
+            try {
+                localStorage.setItem('licubepro-content', JSON.stringify(content));
+                console.log('Contenu sauvegardé:', content);
+                
+                hasUnsavedChanges = false;
+                updateSaveStatus('saved', 'Toutes les modifications sauvegardées');
+                showStatusMessage('success', `${Object.keys(content).length} champs sauvegardés avec succès`);
+                
+                // Actualiser l'aperçu si ouvert
+                refreshPreview();
+                
+            } catch (error) {
+                console.error('Erreur lors de la sauvegarde:', error);
+                updateSaveStatus('error', 'Erreur lors de la sauvegarde');
+                showStatusMessage('error', 'Impossible de sauvegarder les modifications');
+            }
+        }
+
+        // Sauvegarde automatique avec délai
+        function autoSave() {
+            if (autoSaveTimeout) {
+                clearTimeout(autoSaveTimeout);
+            }
+            
+            autoSaveTimeout = setTimeout(() => {
+                saveAllChanges();
+            }, 2000); // Sauvegarde après 2 secondes d'inactivité
+        }
+
+        // Réinitialisation de tous les champs aux valeurs par défaut
+        function resetAllFields() {
+            if (confirm('Êtes-vous sûr de vouloir réinitialiser tous les champs? Les modifications non sauvegardées seront perdues.')) {
+                // Effacer le localStorage
+                localStorage.removeItem('licubepro-content');
+                
+                // Recharger la page pour restaurer les valeurs par défaut
+                window.location.reload();
+            }
+        }
+
+        // Basculer l'aperçu intégré
+        function togglePreview() {
+            const preview = document.getElementById('integratedPreview');
+            preview.classList.toggle('active');
+            
+            if (preview.classList.contains('active')) {
+                // Sauvegarder avant d'ouvrir l'aperçu
+                saveAllChanges();
+                refreshPreview();
+            }
+        }
+
+        // Actualiser le contenu de l'aperçu
+        function refreshPreview() {
+            const previewFrame = document.getElementById('previewFrame');
+            if (previewFrame) {
+                // Forcer le rechargement de l'iframe
+                previewFrame.src = previewFrame.src;
+            }
+        }
+
+        // Marquer comme non sauvegardé
+        function markAsUnsaved() {
+            if (!hasUnsavedChanges) {
+                hasUnsavedChanges = true;
+                updateSaveStatus('unsaved', 'Modifications non sauvegardées');
+            }
+        }
+
+        // Mise à jour du statut de sauvegarde
+        function updateSaveStatus(status, message) {
+            const statusIcon = document.getElementById('saveStatusIcon');
+            const statusText = document.getElementById('saveStatusText');
+            
+            statusIcon.className = 'fas status-icon';
+            
+            switch (status) {
+                case 'saving':
+                    statusIcon.classList.add('saving', 'fa-spinner');
+                    break;
+                case 'saved':
+                    statusIcon.classList.add('saved', 'fa-check-circle');
+                    break;
+                case 'unsaved':
+                    statusIcon.classList.add('fa-exclamation-triangle');
+                    break;
+                case 'error':
+                    statusIcon.classList.add('fa-times-circle');
+                    break;
+                case 'loaded':
+                    statusIcon.classList.add('saved', 'fa-circle');
+                    break;
+            }
+            
+            statusText.textContent = message;
+        }
+
+        // Affichage des messages de statut
+        function showStatusMessage(type, message) {
+            const statusMessage = document.getElementById('statusMessage');
+            const statusText = document.getElementById('statusText');
+            
+            statusMessage.className = `status-message ${type}`;
+            statusText.textContent = message;
+            statusMessage.style.display = 'block';
+            
+            // Masquer le message après 5 secondes
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Validation d'email
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Validation de téléphone (format canadien)
+        function isValidPhone(phone) {
+            const phoneRegex = /^(\+1[-.\s]?)?(\(?[0-9]{3}\)?[-.\s]?)?[0-9]{3}[-.\s]?[0-9]{4}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Sauvegarde avant fermeture de la page
+        window.addEventListener('beforeunload', function(event) {
+            if (hasUnsavedChanges) {
+                const message = 'Vous avez des modifications non sauvegardées. Voulez-vous vraiment quitter?';
+                event.returnValue = message;
+                return message;
+            }
+        });
+
+        // Raccourcis clavier
+        document.addEventListener('keydown', function(event) {
+            // Ctrl+S pour sauvegarder
+            if (event.ctrlKey && event.key === 's') {
+                event.preventDefault();
+                saveAllChanges();
+            }
+            
+            // Ctrl+R pour réinitialiser
+            if (event.ctrlKey && event.key === 'r') {
+                event.preventDefault();
+                resetAllFields();
+            }
+            
+            // Échap pour fermer l'aperçu
+            if (event.key === 'Escape') {
+                const preview = document.getElementById('integratedPreview');
+                if (preview.classList.contains('active')) {
+                    togglePreview();
+                }
+            }
+        });
+
+        console.log('Éditeur Li-CUBE PRO™ - Interface d\'édition en direct chargée');
+    </script>
+    
+    <!-- Système de synchronisation en temps réel -->
+    <script src="js/live-sync.js"></script>
+</body>
+</html>

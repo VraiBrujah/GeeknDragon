@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Presentateur\\LiCUBEPRO\\presentations-location\\presentations-vendeurs/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
