@@ -7,7 +7,7 @@
  * Unité     : pixels (px) pour hauteurs d'espacement
  * Domaine   : 0px à 500px par espacement configurable
  * Formule   : height_finale = valeur_éditeur || valeur_défaut
- * Exemple   : heroSpacerHeight = 120px depuis localStorage
+ * Exemple   : hero-pricing-spacer = 120px depuis localStorage
  */
 
 class SpacingManager {
@@ -26,7 +26,6 @@ class SpacingManager {
 
         // Configuration : mappings data-field vers classe CSS
         this.spacingMappings = {
-            'heroSpacerHeight': '.header-spacer[data-field="heroSpacerHeight"]',
             'hero-pricing-spacer': '.section-spacer[data-field="hero-pricing-spacer"]',
             'pricing-advantages-spacer': '.section-spacer[data-field="pricing-advantages-spacer"]',
             'advantages-comparison-spacer': '.section-spacer[data-field="advantages-comparison-spacer"]',
@@ -100,11 +99,6 @@ class SpacingManager {
         // Création : CSS dynamique pour espacements
         const cssRules = [
             `/* === ESPACEMENTS DYNAMIQUES LOCATIONVS === */`,
-            
-            // Header spacer
-            `.header-spacer[data-field="heroSpacerHeight"] {`,
-            `    height: ${this.currentSpacings.headerSpacerHeight}px !important;`,
-            `}`,
             
             // Section spacers spécifiques
             `.section-spacer[data-field="hero-pricing-spacer"] {`,
