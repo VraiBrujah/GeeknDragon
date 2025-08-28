@@ -309,8 +309,13 @@
             color: var(--text-white);
             font-size: 0.8rem;
             font-weight: 500;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            text-align: center;
+            line-height: 1.3;
+            margin-bottom: 0.2rem;
+            /* Texte sur 2 lignes max pour meilleure lisibilité */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
             overflow: hidden;
         }
         
@@ -325,12 +330,43 @@
         
         .color-item small {
             color: var(--text-gray);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-style: italic;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+            text-align: center;
             line-height: 1.2;
+            /* Description sur 2 lignes max avec tooltip */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            cursor: help;
+        }
+        
+        /* Tooltip pour les descriptions complètes */
+        .color-item {
+            position: relative;
+        }
+        
+        .color-item:hover small::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .color-item:hover small[title]::after {
+            opacity: 1;
         }
         
         /* Système de réorganisation des sections */
@@ -594,66 +630,66 @@
                     <label class="color-item">
                         <span>Fond Principal</span>
                         <input type="color" id="primaryDark" value="#0F172A">
-                        <small>Arrière-plan principal</small>
+                        <small title="Couleur d'arrière-plan principal de toute la présentation">Arrière-plan principal</small>
                     </label>
                     <label class="color-item">
-                        <span>Fond Secondaire</span>
+                        <span>Fond Sections</span>
                         <input type="color" id="secondaryDark" value="#1E293B">
-                        <small>Arrière-plan sections</small>
+                        <small title="Couleur d'arrière-plan des sections et contenus">Arrière-plan sections</small>
                     </label>
                     <label class="color-item">
-                        <span>Texte Principal</span>
+                        <span>Texte Blanc</span>
                         <input type="color" id="textWhite" value="#F8FAFC">
-                        <small>Texte principal blanc</small>
+                        <small title="Couleur du texte principal blanc utilisé partout">Texte principal blanc</small>
                     </label>
                     <label class="color-item">
-                        <span>Texte Secondaire</span>
+                        <span>Texte Gris</span>
                         <input type="color" id="textGray" value="#CBD5E1">
-                        <small>Texte gris descriptif</small>
+                        <small title="Couleur du texte gris pour descriptions et détails">Texte gris descriptif</small>
                     </label>
                     
                     <!-- Ligne 2: Couleurs d'Accent -->
                     <label class="color-item">
                         <span>Vert Principal</span>
                         <input type="color" id="accentGreen" value="#10B981">
-                        <small>Boutons et éléments</small>
+                        <small title="Couleur principale pour boutons, liens et éléments interactifs">Boutons et éléments</small>
                     </label>
                     <label class="color-item">
                         <span>Bleu Accent</span>
                         <input type="color" id="accentBlue" value="#3B82F6">
-                        <small>Liens et détails</small>
+                        <small title="Couleur d'accent bleu pour liens et détails visuels">Liens et détails</small>
                     </label>
                     <label class="color-item">
                         <span>Teal Accent</span>
                         <input type="color" id="accentTeal" value="#14B8A6">
-                        <small>Gradients et effets</small>
+                        <small title="Couleur teal pour gradients, bordures et effets spéciaux">Gradients et effets</small>
                     </label>
                     <label class="color-item">
                         <span>Vert Succès</span>
                         <input type="color" id="successGreen" value="#059669">
-                        <small>Messages positifs</small>
+                        <small title="Couleur verte pour messages de succès et éléments positifs">Messages positifs</small>
                     </label>
                     
                     <!-- Ligne 3: Couleurs d'État -->
                     <label class="color-item">
-                        <span>Orange Warning</span>
+                        <span>Orange Alert</span>
                         <input type="color" id="warningOrange" value="#F59E0B">
-                        <small>Alertes et warnings</small>
+                        <small title="Couleur orange pour alertes, avertissements et warnings">Alertes et warnings</small>
                     </label>
                     <label class="color-item">
                         <span>Rouge Erreur</span>
                         <input type="color" id="warningRed" value="#EF4444">
-                        <small>Erreurs et négatif</small>
+                        <small title="Couleur rouge pour erreurs, annulations et éléments négatifs">Erreurs et négatif</small>
                     </label>
                     <label class="color-item">
                         <span>Bleu Info</span>
                         <input type="color" id="infoBlue" value="#60A5FA">
-                        <small>Informations</small>
+                        <small title="Couleur bleue pour informations, conseils et aide">Informations</small>
                     </label>
                     <label class="color-item">
                         <span>Gris Neutre</span>
                         <input type="color" id="neutralGray" value="#9CA3AF">
-                        <small>Éléments neutres</small>
+                        <small title="Couleur grise neutre pour éléments secondaires et séparateurs">Éléments neutres</small>
                     </label>
                 </div>
             </div>
