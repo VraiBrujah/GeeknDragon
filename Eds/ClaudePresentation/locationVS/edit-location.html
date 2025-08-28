@@ -1938,8 +1938,11 @@ Fabrication et Support 100% Québécois</textarea>
             updateValueDisplays();
             applyStyles();
             
+            // ✅ AJOUT : Synchronisation temps réel vers location.html
+            syncToPresentation();
+            
             // Notification
-            showNotification('Styles réinitialisés depuis la sauvegarde', 'warning');
+            showNotification('Styles réinitialisés avec effet temps réel !', 'warning');
         }
 
         // Sauvegarde avec popup de validation
