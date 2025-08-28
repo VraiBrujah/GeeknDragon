@@ -1122,6 +1122,51 @@
         console.log('Li-CUBE PRO™ LOCATION - Page de location optimisée chargée');
     </script>
     
+    <!-- Récepteur de Styles Dynamiques depuis edit-location.html -->
+    <script>
+        let dynamicStyleElement = null;
+        
+        // Application du CSS dynamique
+        function applyDynamicCSS(css) {
+            // Suppression de l'ancien style dynamique
+            if (dynamicStyleElement) {
+                dynamicStyleElement.remove();
+            }
+            
+            // Création du nouveau style
+            dynamicStyleElement = document.createElement('style');
+            dynamicStyleElement.id = 'dynamic-location-styles';
+            dynamicStyleElement.textContent = css;
+            document.head.appendChild(dynamicStyleElement);
+            
+            console.log('🎨 Styles dynamiques appliqués à location.html');
+        }
+        
+        // Écoute des messages de synchronisation CSS
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'location-css-broadcast' && e.newValue) {
+                try {
+                    const message = JSON.parse(e.newValue);
+                    if (message.type === 'LOCATION_CSS_UPDATE') {
+                        applyDynamicCSS(message.css);
+                        console.log('📡 Styles reçus depuis edit-location.html');
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Erreur lors de la réception des styles:', error);
+                }
+            }
+        });
+        
+        // Chargement initial des styles sauvegardés
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCSS = localStorage.getItem('location-dynamic-css');
+            if (savedCSS) {
+                applyDynamicCSS(savedCSS);
+                console.log('🔄 Styles sauvegardés appliqués au chargement');
+            }
+        });
+    </script>
+    
     <!-- Récepteur de Synchronisation Instantanée Li-CUBE PRO™ -->
     <script src="js/presentation-receiver.js"></script>
 </body>

@@ -277,11 +277,18 @@
         }
         
         .css-controls select {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--bg-field, #475569);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--text-white);
+            color: var(--text-primary, #FFFFFF);
             padding: 0.3rem;
             border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .css-controls select option {
+            background: var(--bg-field, #475569);
+            color: var(--text-primary, #FFFFFF);
+            padding: 0.3rem;
         }
         
         .css-controls span {
@@ -290,6 +297,30 @@
             min-width: 60px;
             text-align: right;
             font-size: 0.85rem;
+        }
+        
+        .range-control {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        
+        .range-control .range-label {
+            color: var(--text-white);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .range-control .range-value {
+            color: var(--accent-green);
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .range-control input[type="range"] {
+            width: 100%;
         }
         
         .css-actions {
@@ -328,7 +359,7 @@
         }
         
         .css-btn.export {
-            background: var(--primary-blue);
+            background: #28a745;
             color: white;
         }
         
@@ -379,35 +410,23 @@
     <section class="css-editor-section">
         <h2 class="css-title">
             <i class="fas fa-palette"></i>
-            Styles CSS de la Présentation
+            Style de la Page
             <button class="css-toggle" onclick="toggleCSSEditor()">
                 <i class="fas fa-chevron-up"></i>
             </button>
         </h2>
         <div class="css-editor" id="cssEditor">
-            <!-- Couleurs Principales -->
+            <!-- Couleurs Thème Location -->
             <div class="css-group">
-                <h3>Couleurs Principales</h3>
+                <h3>Couleurs Thème Location</h3>
                 <div class="css-controls">
-                    <label>Vert Primaire: <input type="color" id="primaryGreen" value="#1F9A3C"></label>
-                    <label>Vert Accent: <input type="color" id="accentGreen" value="#28A745"></label>
-                    <label>Bleu Principal: <input type="color" id="primaryBlue" value="#007BFF"></label>
-                    <label>Bleu Accent: <input type="color" id="accentBlue" value="#0056CC"></label>
-                    <label>Rouge/Alerte: <input type="color" id="warningRed" value="#DC3545"></label>
-                    <label>Orange/Attention: <input type="color" id="warningOrange" value="#FD7E14"></label>
-                </div>
-            </div>
-            
-            <!-- Couleurs de Fond -->
-            <div class="css-group">
-                <h3>Arrière-Plans</h3>
-                <div class="css-controls">
-                    <label>Fond Principal: <input type="color" id="bgPrimary" value="#0F172A"></label>
-                    <label>Fond Secondaire: <input type="color" id="bgSecondary" value="#1E293B"></label>
-                    <label>Fond Sections: <input type="color" id="bgSection" value="#334155"></label>
-                    <label>Fond Champs: <input type="color" id="bgField" value="#475569"></label>
-                    <label>Fond Boutons: <input type="color" id="bgButton" value="#64748B"></label>
-                    <label>Fond Header: <input type="color" id="bgHeader" value="#0F172A"></label>
+                    <label>Fond Principal: <input type="color" id="primaryDark" value="#0F172A"></label>
+                    <label>Fond Secondaire: <input type="color" id="secondaryDark" value="#1E293B"></label>
+                    <label>Vert Accent: <input type="color" id="accentGreen" value="#10B981"></label>
+                    <label>Bleu Accent: <input type="color" id="accentBlue" value="#3B82F6"></label>
+                    <label>Teal: <input type="color" id="accentTeal" value="#14B8A6"></label>
+                    <label>Vert Success: <input type="color" id="successGreen" value="#059669"></label>
+                    <label>Orange Warning: <input type="color" id="warningOrange" value="#F59E0B"></label>
                 </div>
             </div>
             
@@ -415,36 +434,103 @@
             <div class="css-group">
                 <h3>Couleurs de Texte</h3>
                 <div class="css-controls">
-                    <label>Texte Principal: <input type="color" id="textPrimary" value="#FFFFFF"></label>
-                    <label>Texte Secondaire: <input type="color" id="textSecondary" value="#CBD5E1"></label>
-                    <label>Texte Titres: <input type="color" id="textTitle" value="#F8FAFC"></label>
-                    <label>Texte Labels: <input type="color" id="textLabel" value="#E2E8F0"></label>
-                    <label>Texte Descriptions: <input type="color" id="textDesc" value="#94A3B8"></label>
-                    <label>Texte Boutons: <input type="color" id="textButton" value="#FFFFFF"></label>
+                    <label>Texte Blanc: <input type="color" id="textWhite" value="#F8FAFC"></label>
+                    <label>Texte Gris: <input type="color" id="textGray" value="#CBD5E1"></label>
                 </div>
             </div>
             
-            <!-- Typographie Titres -->
+            <!-- Navigation -->
             <div class="css-group">
-                <h3>Typographie Titres</h3>
+                <h3>Navigation</h3>
                 <div class="css-controls">
-                    <label>Police Titres: 
-                        <select id="titleFont">
-                            <option value="Inter">Inter</option>
-                            <option value="Roboto">Roboto</option>
-                            <option value="Montserrat">Montserrat</option>
-                            <option value="Poppins">Poppins</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="Times New Roman">Times New Roman</option>
+                    <div class="range-control">
+                        <span class="range-label">Taille Titre Nav:</span>
+                        <span class="range-value" id="navTitleSizeValue">28px</span>
+                        <input type="range" id="navTitleSize" min="20" max="40" value="28">
+                    </div>
+                    <label>Épaisseur Titre Nav: 
+                        <select id="navTitleWeight">
+                            <option value="600">Semi-Bold</option>
+                            <option value="700">Bold</option>
+                            <option value="800">Extra-Bold</option>
+                            <option value="900">Black</option>
                         </select>
                     </label>
-                    <label>Taille H1: <input type="range" id="h1Size" min="24" max="60" value="36"> <span id="h1SizeValue">36px</span></label>
-                    <label>Taille H2: <input type="range" id="h2Size" min="20" max="50" value="28"> <span id="h2SizeValue">28px</span></label>
-                    <label>Taille H3: <input type="range" id="h3Size" min="16" max="40" value="22"> <span id="h3SizeValue">22px</span></label>
-                    <label>Épaisseur Titres: 
-                        <select id="titleWeight">
-                            <option value="400">Normal</option>
-                            <option value="500">Medium</option>
+                    <div class="range-control">
+                        <span class="range-label">Taille Items Nav:</span>
+                        <span class="range-value" id="navItemSizeValue">16px</span>
+                        <input type="range" id="navItemSize" min="12" max="22" value="16">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Padding Nav:</span>
+                        <span class="range-value" id="navPaddingValue">12px</span>
+                        <input type="range" id="navPadding" min="8" max="24" value="12">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hero Section -->
+            <div class="css-group">
+                <h3>Section Hero</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Titre Hero:</span>
+                        <span class="range-value" id="heroTitleSizeValue">72px</span>
+                        <input type="range" id="heroTitleSize" min="40" max="100" value="72">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Highlight Hero:</span>
+                        <span class="range-value" id="heroHighlightSizeValue">80px</span>
+                        <input type="range" id="heroHighlightSize" min="50" max="120" value="80">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Sous-titre:</span>
+                        <span class="range-value" id="heroSubtitleSizeValue">22px</span>
+                        <input type="range" id="heroSubtitleSize" min="16" max="32" value="22">
+                    </div>
+                    <label>Épaisseur Titre Hero: 
+                        <select id="heroTitleWeight">
+                            <option value="700">Bold</option>
+                            <option value="800">Extra-Bold</option>
+                            <option value="900">Black</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Prix Banner -->
+            <div class="css-group">
+                <h3>Bannière Prix</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Prix Principal:</span>
+                        <span class="range-value" id="priceMainSizeValue">56px</span>
+                        <input type="range" id="priceMainSize" min="30" max="80" value="56">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Prix Secondaire:</span>
+                        <span class="range-value" id="priceSubSizeValue">18px</span>
+                        <input type="range" id="priceSubSize" min="12" max="26" value="18">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Padding Prix:</span>
+                        <span class="range-value" id="pricePaddingValue">24px</span>
+                        <input type="range" id="pricePadding" min="12" max="40" value="24">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Titres de Sections -->
+            <div class="css-group">
+                <h3>Titres de Sections</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Titre Section:</span>
+                        <span class="range-value" id="sectionTitleSizeValue">56px</span>
+                        <input type="range" id="sectionTitleSize" min="30" max="80" value="56">
+                    </div>
+                    <label>Épaisseur Titre Section: 
+                        <select id="sectionTitleWeight">
                             <option value="600">Semi-Bold</option>
                             <option value="700">Bold</option>
                             <option value="800">Extra-Bold</option>
@@ -454,54 +540,103 @@
                 </div>
             </div>
             
-            <!-- Typographie Corps -->
+            <!-- Cards et Benefits -->
             <div class="css-group">
-                <h3>Typographie Corps</h3>
+                <h3>Cartes et Avantages</h3>
                 <div class="css-controls">
-                    <label>Police Corps: 
-                        <select id="bodyFont">
-                            <option value="Inter">Inter</option>
-                            <option value="Roboto">Roboto</option>
-                            <option value="Open Sans">Open Sans</option>
-                            <option value="Lato">Lato</option>
-                            <option value="Arial">Arial</option>
-                            <option value="Georgia">Georgia</option>
-                        </select>
-                    </label>
-                    <label>Taille Texte: <input type="range" id="bodySize" min="12" max="24" value="16"> <span id="bodySizeValue">16px</span></label>
-                    <label>Épaisseur Texte: 
-                        <select id="bodyWeight">
-                            <option value="300">Light</option>
-                            <option value="400">Normal</option>
-                            <option value="500">Medium</option>
-                            <option value="600">Semi-Bold</option>
-                        </select>
-                    </label>
+                    <div class="range-control">
+                        <span class="range-label">Padding Cartes:</span>
+                        <span class="range-value" id="cardPaddingValue">28px</span>
+                        <input type="range" id="cardPadding" min="16" max="50" value="28">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Border Radius:</span>
+                        <span class="range-value" id="cardBorderRadiusValue">16px</span>
+                        <input type="range" id="cardBorderRadius" min="8" max="30" value="16">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Icônes:</span>
+                        <span class="range-value" id="benefitIconSizeValue">40px</span>
+                        <input type="range" id="benefitIconSize" min="24" max="60" value="40">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Titre Avantage:</span>
+                        <span class="range-value" id="benefitTitleSizeValue">18px</span>
+                        <input type="range" id="benefitTitleSize" min="14" max="26" value="18">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Texte Avantage:</span>
+                        <span class="range-value" id="benefitTextSizeValue">14px</span>
+                        <input type="range" id="benefitTextSize" min="12" max="20" value="14">
+                    </div>
                 </div>
             </div>
             
-            <!-- Typographie Labels -->
+            <!-- Cartes de Prix -->
             <div class="css-group">
-                <h3>Typographie Labels</h3>
+                <h3>Cartes de Prix</h3>
                 <div class="css-controls">
-                    <label>Police Labels: 
-                        <select id="labelFont">
-                            <option value="Inter">Inter</option>
-                            <option value="Roboto">Roboto</option>
-                            <option value="Open Sans">Open Sans</option>
-                            <option value="Arial">Arial</option>
-                        </select>
-                    </label>
-                    <label>Taille Labels: <input type="range" id="labelSize" min="10" max="20" value="14"> <span id="labelSizeValue">14px</span></label>
-                    <label>Taille Descriptions: <input type="range" id="descSize" min="10" max="18" value="12"> <span id="descSizeValue">12px</span></label>
-                    <label>Épaisseur Labels: 
-                        <select id="labelWeight">
-                            <option value="400">Normal</option>
-                            <option value="500">Medium</option>
+                    <div class="range-control">
+                        <span class="range-label">Padding Prix Cards:</span>
+                        <span class="range-value" id="pricingCardPaddingValue">40px</span>
+                        <input type="range" id="pricingCardPadding" min="20" max="60" value="40">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Valeur Prix:</span>
+                        <span class="range-value" id="pricingValueSizeValue">48px</span>
+                        <input type="range" id="pricingValueSize" min="30" max="70" value="48">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Durée:</span>
+                        <span class="range-value" id="pricingDurationSizeValue">18px</span>
+                        <input type="range" id="pricingDurationSize" min="14" max="24" value="18">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Boutons CTA -->
+            <div class="css-group">
+                <h3>Boutons d'Action</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Police CTA:</span>
+                        <span class="range-value" id="ctaFontSizeValue">19px</span>
+                        <input type="range" id="ctaFontSize" min="14" max="26" value="19">
+                    </div>
+                    <label>Épaisseur CTA: 
+                        <select id="ctaFontWeight">
                             <option value="600">Semi-Bold</option>
                             <option value="700">Bold</option>
+                            <option value="800">Extra-Bold</option>
                         </select>
                     </label>
+                    <div class="range-control">
+                        <span class="range-label">Padding CTA:</span>
+                        <span class="range-value" id="ctaPaddingValue">19px</span>
+                        <input type="range" id="ctaPadding" min="12" max="30" value="19">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Espacement Global -->
+            <div class="css-group">
+                <h3>Espacement Global</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Padding Sections:</span>
+                        <span class="range-value" id="sectionPaddingValue">64px</span>
+                        <input type="range" id="sectionPadding" min="32" max="100" value="64">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Largeur Max Container:</span>
+                        <span class="range-value" id="containerMaxWidthValue">1400px</span>
+                        <input type="range" id="containerMaxWidth" min="1000" max="1800" value="1400">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Espacement Grid:</span>
+                        <span class="range-value" id="gridGapValue">32px</span>
+                        <input type="range" id="gridGap" min="16" max="60" value="32">
+                    </div>
                 </div>
             </div>
             
@@ -1620,49 +1755,63 @@ Fabrication et Support 100% Québécois</textarea>
     
     <!-- Script Éditeur CSS Complet -->
     <script>
-        // Variables CSS par défaut - Couleurs Principales
+        // Variables CSS pour location.html - Extraites du thème de location
         const defaultValues = {
-            // Couleurs Principales
-            primaryGreen: '#1F9A3C',
-            accentGreen: '#28A745', 
-            primaryBlue: '#007BFF',
-            accentBlue: '#0056CC',
-            warningRed: '#DC3545',
-            warningOrange: '#FD7E14',
+            // Couleurs Principales de location.html
+            primaryDark: '#0F172A',
+            secondaryDark: '#1E293B', 
+            accentGreen: '#10B981',
+            accentBlue: '#3B82F6',
+            accentTeal: '#14B8A6',
+            successGreen: '#059669',
+            warningOrange: '#F59E0B',
             
-            // Arrière-Plans
-            bgPrimary: '#0F172A',
-            bgSecondary: '#1E293B',
-            bgSection: '#334155',
-            bgField: '#475569',
-            bgButton: '#64748B',
-            bgHeader: '#0F172A',
+            // Couleurs de Texte location.html
+            textWhite: '#F8FAFC',
+            textGray: '#CBD5E1',
             
-            // Couleurs de Texte
-            textPrimary: '#FFFFFF',
-            textSecondary: '#CBD5E1',
-            textTitle: '#F8FAFC',
-            textLabel: '#E2E8F0',
-            textDesc: '#94A3B8',
-            textButton: '#FFFFFF',
+            // Navigation
+            navTitleSize: 28,
+            navTitleWeight: '800',
+            navItemSize: 16,
+            navPadding: 12,
             
-            // Typographie Titres
-            titleFont: 'Inter',
-            h1Size: 36,
-            h2Size: 28,
-            h3Size: 22,
-            titleWeight: '600',
+            // Hero Section
+            heroTitleSize: 72,
+            heroHighlightSize: 80,
+            heroSubtitleSize: 22,
+            heroTitleWeight: '900',
             
-            // Typographie Corps
-            bodyFont: 'Inter',
-            bodySize: 16,
-            bodyWeight: '400',
+            // Prix Banner
+            priceMainSize: 56,
+            priceSubSize: 18,
+            pricePadding: 24,
             
-            // Typographie Labels
-            labelFont: 'Inter',
-            labelSize: 14,
-            descSize: 12,
-            labelWeight: '500'
+            // Section Titles
+            sectionTitleSize: 56,
+            sectionTitleWeight: '800',
+            
+            // Cards et Benefits
+            cardPadding: 28,
+            cardBorderRadius: 16,
+            benefitIconSize: 40,
+            benefitTitleSize: 18,
+            benefitTextSize: 14,
+            
+            // Pricing Cards
+            pricingCardPadding: 40,
+            pricingValueSize: 48,
+            pricingDurationSize: 18,
+            
+            // CTA Buttons
+            ctaFontSize: 19,
+            ctaFontWeight: '700',
+            ctaPadding: 19,
+            
+            // Spacing Global
+            sectionPadding: 64,
+            containerMaxWidth: 1400,
+            gridGap: 32
         };
 
         // Fonction de basculement de l'éditeur
@@ -1679,175 +1828,110 @@ Fabrication et Support 100% Québécois</textarea>
             }
         }
 
-        // Application des styles en temps réel
+        // Application des styles en temps réel pour location.html
         function applyStyles() {
-            const root = document.documentElement;
+            // Cette fonction n'applique PAS les styles à edit-location.html
+            // Elle prépare les styles pour location.html et les synchronise
             
-            // Couleurs Principales
-            const primaryGreen = document.getElementById('primaryGreen').value;
-            const accentGreen = document.getElementById('accentGreen').value;
-            const primaryBlue = document.getElementById('primaryBlue').value;
-            const accentBlue = document.getElementById('accentBlue').value;
-            const warningRed = document.getElementById('warningRed').value;
-            const warningOrange = document.getElementById('warningOrange').value;
-            
-            // Arrière-Plans
-            const bgPrimary = document.getElementById('bgPrimary').value;
-            const bgSecondary = document.getElementById('bgSecondary').value;
-            const bgSection = document.getElementById('bgSection').value;
-            const bgField = document.getElementById('bgField').value;
-            const bgButton = document.getElementById('bgButton').value;
-            const bgHeader = document.getElementById('bgHeader').value;
-            
-            // Couleurs de Texte
-            const textPrimary = document.getElementById('textPrimary').value;
-            const textSecondary = document.getElementById('textSecondary').value;
-            const textTitle = document.getElementById('textTitle').value;
-            const textLabel = document.getElementById('textLabel').value;
-            const textDesc = document.getElementById('textDesc').value;
-            const textButton = document.getElementById('textButton').value;
-            
-            // Typographie Titres
-            const titleFont = document.getElementById('titleFont').value;
-            const h1Size = document.getElementById('h1Size').value;
-            const h2Size = document.getElementById('h2Size').value;
-            const h3Size = document.getElementById('h3Size').value;
-            const titleWeight = document.getElementById('titleWeight').value;
-            
-            // Typographie Corps
-            const bodyFont = document.getElementById('bodyFont').value;
-            const bodySize = document.getElementById('bodySize').value;
-            const bodyWeight = document.getElementById('bodyWeight').value;
-            
-            // Typographie Labels
-            const labelFont = document.getElementById('labelFont').value;
-            const labelSize = document.getElementById('labelSize').value;
-            const descSize = document.getElementById('descSize').value;
-            const labelWeight = document.getElementById('labelWeight').value;
-
-            // Application des variables CSS
-            root.style.setProperty('--primary-green', primaryGreen);
-            root.style.setProperty('--accent-green', accentGreen);
-            root.style.setProperty('--primary-blue', primaryBlue);
-            root.style.setProperty('--accent-blue', accentBlue);
-            root.style.setProperty('--warning-red', warningRed);
-            root.style.setProperty('--warning-orange', warningOrange);
-            
-            root.style.setProperty('--bg-primary', bgPrimary);
-            root.style.setProperty('--bg-secondary', bgSecondary);
-            root.style.setProperty('--bg-section', bgSection);
-            root.style.setProperty('--bg-field', bgField);
-            root.style.setProperty('--bg-button', bgButton);
-            root.style.setProperty('--bg-header', bgHeader);
-            
-            root.style.setProperty('--text-primary', textPrimary);
-            root.style.setProperty('--text-secondary', textSecondary);
-            root.style.setProperty('--text-title', textTitle);
-            root.style.setProperty('--text-label', textLabel);
-            root.style.setProperty('--text-desc', textDesc);
-            root.style.setProperty('--text-button', textButton);
-            
-            // Application directe aux éléments
-            document.body.style.fontFamily = `"${bodyFont}", sans-serif`;
-            document.body.style.fontSize = bodySize + 'px';
-            document.body.style.fontWeight = bodyWeight;
-            document.body.style.backgroundColor = bgPrimary;
-            document.body.style.color = textPrimary;
-            
-            // Styles pour les titres H1
-            document.querySelectorAll('h1').forEach(el => {
-                el.style.fontFamily = `"${titleFont}", sans-serif`;
-                el.style.fontSize = h1Size + 'px';
-                el.style.fontWeight = titleWeight;
-                el.style.color = textTitle;
-            });
-            
-            // Styles pour les titres H2
-            document.querySelectorAll('h2').forEach(el => {
-                el.style.fontFamily = `"${titleFont}", sans-serif`;
-                el.style.fontSize = h2Size + 'px';
-                el.style.fontWeight = titleWeight;
-                el.style.color = textTitle;
-            });
-            
-            // Styles pour les titres H3
-            document.querySelectorAll('h3, .section-title').forEach(el => {
-                el.style.fontFamily = `"${titleFont}", sans-serif`;
-                el.style.fontSize = h3Size + 'px';
-                el.style.fontWeight = titleWeight;
-                el.style.color = textTitle;
-            });
-            
-            // Styles pour les labels
-            document.querySelectorAll('label').forEach(el => {
-                el.style.fontFamily = `"${labelFont}", sans-serif`;
-                el.style.fontSize = labelSize + 'px';
-                el.style.fontWeight = labelWeight;
-                el.style.color = textLabel;
-            });
-            
-            // Styles pour les descriptions
-            document.querySelectorAll('.description, small').forEach(el => {
-                el.style.fontFamily = `"${labelFont}", sans-serif`;
-                el.style.fontSize = descSize + 'px';
-                el.style.color = textDesc;
-            });
-            
-            // Styles pour les sections
-            document.querySelectorAll('.edit-section').forEach(el => {
-                el.style.backgroundColor = bgSection;
-            });
-            
-            // Styles pour les champs
-            document.querySelectorAll('input, textarea, select').forEach(el => {
-                el.style.backgroundColor = bgField;
-                el.style.color = textPrimary;
-            });
-            
-            // Styles pour les boutons
-            document.querySelectorAll('.btn-primary').forEach(el => {
-                el.style.backgroundColor = primaryGreen;
-                el.style.color = textButton;
-            });
-            
-            document.querySelectorAll('.btn-secondary').forEach(el => {
-                el.style.backgroundColor = primaryBlue;
-                el.style.color = textButton;
-            });
-            
-            console.log('✅ Styles appliqués en temps réel');
+            console.log('🎨 Préparation des styles pour location.html');
+            // La synchronisation temps réel se fait dans syncToPresentation()
+            // Aucune modification de l'éditeur lui-même
         }
 
-        // Mise à jour des affichages de valeurs
+        // Mise à jour des affichages de valeurs pour location.html
         function updateValueDisplays() {
-            // Mise à jour des affichages de taille pour les titres
-            if (document.getElementById('h1SizeValue')) {
-                document.getElementById('h1SizeValue').textContent = document.getElementById('h1Size').value + 'px';
+            // Navigation
+            if (document.getElementById('navTitleSizeValue')) {
+                document.getElementById('navTitleSizeValue').textContent = document.getElementById('navTitleSize').value + 'px';
             }
-            if (document.getElementById('h2SizeValue')) {
-                document.getElementById('h2SizeValue').textContent = document.getElementById('h2Size').value + 'px';
+            if (document.getElementById('navItemSizeValue')) {
+                document.getElementById('navItemSizeValue').textContent = document.getElementById('navItemSize').value + 'px';
             }
-            if (document.getElementById('h3SizeValue')) {
-                document.getElementById('h3SizeValue').textContent = document.getElementById('h3Size').value + 'px';
-            }
-            
-            // Mise à jour des affichages pour le corps de texte
-            if (document.getElementById('bodySizeValue')) {
-                document.getElementById('bodySizeValue').textContent = document.getElementById('bodySize').value + 'px';
+            if (document.getElementById('navPaddingValue')) {
+                document.getElementById('navPaddingValue').textContent = document.getElementById('navPadding').value + 'px';
             }
             
-            // Mise à jour des affichages pour les labels
-            if (document.getElementById('labelSizeValue')) {
-                document.getElementById('labelSizeValue').textContent = document.getElementById('labelSize').value + 'px';
+            // Hero Section
+            if (document.getElementById('heroTitleSizeValue')) {
+                document.getElementById('heroTitleSizeValue').textContent = document.getElementById('heroTitleSize').value + 'px';
             }
-            if (document.getElementById('descSizeValue')) {
-                document.getElementById('descSizeValue').textContent = document.getElementById('descSize').value + 'px';
+            if (document.getElementById('heroHighlightSizeValue')) {
+                document.getElementById('heroHighlightSizeValue').textContent = document.getElementById('heroHighlightSize').value + 'px';
+            }
+            if (document.getElementById('heroSubtitleSizeValue')) {
+                document.getElementById('heroSubtitleSizeValue').textContent = document.getElementById('heroSubtitleSize').value + 'px';
+            }
+            
+            // Prix Banner
+            if (document.getElementById('priceMainSizeValue')) {
+                document.getElementById('priceMainSizeValue').textContent = document.getElementById('priceMainSize').value + 'px';
+            }
+            if (document.getElementById('priceSubSizeValue')) {
+                document.getElementById('priceSubSizeValue').textContent = document.getElementById('priceSubSize').value + 'px';
+            }
+            if (document.getElementById('pricePaddingValue')) {
+                document.getElementById('pricePaddingValue').textContent = document.getElementById('pricePadding').value + 'px';
+            }
+            
+            // Section Titles
+            if (document.getElementById('sectionTitleSizeValue')) {
+                document.getElementById('sectionTitleSizeValue').textContent = document.getElementById('sectionTitleSize').value + 'px';
+            }
+            
+            // Cards et Benefits
+            if (document.getElementById('cardPaddingValue')) {
+                document.getElementById('cardPaddingValue').textContent = document.getElementById('cardPadding').value + 'px';
+            }
+            if (document.getElementById('cardBorderRadiusValue')) {
+                document.getElementById('cardBorderRadiusValue').textContent = document.getElementById('cardBorderRadius').value + 'px';
+            }
+            if (document.getElementById('benefitIconSizeValue')) {
+                document.getElementById('benefitIconSizeValue').textContent = document.getElementById('benefitIconSize').value + 'px';
+            }
+            if (document.getElementById('benefitTitleSizeValue')) {
+                document.getElementById('benefitTitleSizeValue').textContent = document.getElementById('benefitTitleSize').value + 'px';
+            }
+            if (document.getElementById('benefitTextSizeValue')) {
+                document.getElementById('benefitTextSizeValue').textContent = document.getElementById('benefitTextSize').value + 'px';
+            }
+            
+            // Pricing Cards
+            if (document.getElementById('pricingCardPaddingValue')) {
+                document.getElementById('pricingCardPaddingValue').textContent = document.getElementById('pricingCardPadding').value + 'px';
+            }
+            if (document.getElementById('pricingValueSizeValue')) {
+                document.getElementById('pricingValueSizeValue').textContent = document.getElementById('pricingValueSize').value + 'px';
+            }
+            if (document.getElementById('pricingDurationSizeValue')) {
+                document.getElementById('pricingDurationSizeValue').textContent = document.getElementById('pricingDurationSize').value + 'px';
+            }
+            
+            // CTA Buttons
+            if (document.getElementById('ctaFontSizeValue')) {
+                document.getElementById('ctaFontSizeValue').textContent = document.getElementById('ctaFontSize').value + 'px';
+            }
+            if (document.getElementById('ctaPaddingValue')) {
+                document.getElementById('ctaPaddingValue').textContent = document.getElementById('ctaPadding').value + 'px';
+            }
+            
+            // Spacing Global
+            if (document.getElementById('sectionPaddingValue')) {
+                document.getElementById('sectionPaddingValue').textContent = document.getElementById('sectionPadding').value + 'px';
+            }
+            if (document.getElementById('containerMaxWidthValue')) {
+                document.getElementById('containerMaxWidthValue').textContent = document.getElementById('containerMaxWidth').value + 'px';
+            }
+            if (document.getElementById('gridGapValue')) {
+                document.getElementById('gridGapValue').textContent = document.getElementById('gridGap').value + 'px';
             }
         }
 
-        // Réinitialisation
+        // Réinitialisation depuis le backup
         function resetCSS() {
-            Object.entries(defaultValues).forEach(([key, value]) => {
+            const backup = localStorage.getItem('location-css-backup');
+            let stylesToReset = backup ? JSON.parse(backup) : defaultValues;
+            
+            Object.entries(stylesToReset).forEach(([key, value]) => {
                 const element = document.getElementById(key);
                 if (element) element.value = value;
             });
@@ -1855,19 +1939,96 @@ Fabrication et Support 100% Québécois</textarea>
             applyStyles();
             
             // Notification
-            showNotification('Styles réinitialisés', 'warning');
+            showNotification('Styles réinitialisés depuis la sauvegarde', 'warning');
         }
 
-        // Sauvegarde
+        // Sauvegarde avec popup de validation
         function saveCSS() {
-            const styles = {};
-            Object.keys(defaultValues).forEach(key => {
-                const element = document.getElementById(key);
-                if (element) styles[key] = element.value;
+            // Popup de validation moderne
+            showSaveConfirmation(() => {
+                const styles = {};
+                Object.keys(defaultValues).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) styles[key] = element.value;
+                });
+                
+                // Écrasement du backup de réinitialisation
+                localStorage.setItem('location-css-backup', JSON.stringify(styles));
+                showNotification('Nouveau point de sauvegarde créé !', 'success');
             });
+        }
+        
+        // Popup de confirmation moderne
+        function showSaveConfirmation(onConfirm) {
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.7); z-index: 10000;
+                display: flex; align-items: center; justify-content: center;
+                opacity: 0; transition: opacity 0.3s ease;
+            `;
             
-            localStorage.setItem('location-custom-css', JSON.stringify(styles));
-            showNotification('Styles sauvegardés', 'success');
+            const popup = document.createElement('div');
+            popup.style.cssText = `
+                background: linear-gradient(135deg, #1e293b, #334155);
+                padding: 2rem; border-radius: 12px; text-align: center;
+                max-width: 400px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                border: 1px solid rgba(255,255,255,0.1); transform: scale(0.8);
+                transition: transform 0.3s ease;
+            `;
+            
+            popup.innerHTML = `
+                <div style="margin-bottom: 1.5rem;">
+                    <i class="fas fa-save" style="font-size: 3rem; color: #28a745; margin-bottom: 1rem;"></i>
+                    <h3 style="color: white; margin: 0 0 0.5rem 0; font-size: 1.3rem;">Créer un nouveau point de sauvegarde</h3>
+                    <p style="color: #cbd5e1; margin: 0; font-size: 0.9rem;">Cette action remplacera votre point de restauration actuel. Êtes-vous sûr ?</p>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <button class="popup-btn cancel" style="
+                        padding: 0.8rem 1.5rem; border: none; border-radius: 6px;
+                        background: #6b7280; color: white; cursor: pointer;
+                        font-weight: 600; transition: all 0.3s ease;
+                    ">Annuler</button>
+                    <button class="popup-btn confirm" style="
+                        padding: 0.8rem 1.5rem; border: none; border-radius: 6px;
+                        background: #28a745; color: white; cursor: pointer;
+                        font-weight: 600; transition: all 0.3s ease;
+                    ">Confirmer</button>
+                </div>
+            `;
+            
+            overlay.appendChild(popup);
+            document.body.appendChild(overlay);
+            
+            // Animation d'entrée
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                popup.style.transform = 'scale(1)';
+            }, 10);
+            
+            // Gestion des clics
+            popup.querySelector('.cancel').onclick = () => closePopup(overlay);
+            popup.querySelector('.confirm').onclick = () => {
+                onConfirm();
+                closePopup(overlay);
+            };
+            
+            // Fermeture par clic extérieur
+            overlay.onclick = (e) => {
+                if (e.target === overlay) closePopup(overlay);
+            };
+            
+            // Hover effects
+            popup.querySelectorAll('.popup-btn').forEach(btn => {
+                btn.onmouseenter = () => btn.style.transform = 'translateY(-2px)';
+                btn.onmouseleave = () => btn.style.transform = 'translateY(0)';
+            });
+        }
+        
+        function closePopup(overlay) {
+            overlay.style.opacity = '0';
+            overlay.querySelector('div').style.transform = 'scale(0.8)';
+            setTimeout(() => overlay.remove(), 300);
         }
 
         // Import CSS
@@ -1970,19 +2131,182 @@ Fabrication et Support 100% Québécois</textarea>
             }
         }
 
+        // Création du backup automatique initial
+        function createInitialBackup() {
+            const existingBackup = localStorage.getItem('location-css-backup');
+            if (!existingBackup) {
+                // Premier lancement : créer backup avec valeurs par défaut
+                localStorage.setItem('location-css-backup', JSON.stringify(defaultValues));
+                console.log('🔄 Backup automatique initial créé');
+            }
+        }
+
+        // Synchronisation temps réel avec location.html
+        function syncToPresentation() {
+            // Collecte de tous les styles actuels pour location.html
+            const currentStyles = {};
+            Object.keys(defaultValues).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) currentStyles[key] = element.value;
+            });
+            
+            // Création du CSS dynamique pour location.html
+            const locationCSS = generateLocationCSS(currentStyles);
+            
+            // Sauvegarde temporaire pour sync temps réel
+            localStorage.setItem('location-live-styles', JSON.stringify(currentStyles));
+            localStorage.setItem('location-dynamic-css', locationCSS);
+            
+            // Si InstantSync est disponible, l'utiliser pour sync immédiate
+            if (window.instantSync) {
+                try {
+                    window.instantSync.executeInstantSync(false); // sync non forcée
+                    console.log('🔄 Styles synchronisés avec location.html');
+                } catch (error) {
+                    console.warn('⚠️ Synchronisation InstantSync échouée:', error);
+                }
+            }
+            
+            // Tentative de communication direct avec onglets ouverts (location.html)
+            try {
+                const message = {
+                    type: 'LOCATION_CSS_UPDATE',
+                    styles: currentStyles,
+                    css: locationCSS,
+                    timestamp: Date.now()
+                };
+                
+                // Broadcast vers tous les onglets via localStorage event
+                localStorage.setItem('location-css-broadcast', JSON.stringify(message));
+                setTimeout(() => localStorage.removeItem('location-css-broadcast'), 100);
+                
+                console.log('📡 Styles diffusés vers location.html');
+            } catch (error) {
+                console.warn('⚠️ Diffusion échouée:', error);
+            }
+        }
+        
+        // Génération du CSS dynamique pour location.html
+        function generateLocationCSS(styles) {
+            return `
+                /* CSS Dynamique pour location.html généré depuis edit-location.html */
+                :root {
+                    --primary-dark: ${styles.primaryDark};
+                    --secondary-dark: ${styles.secondaryDark};
+                    --accent-green: ${styles.accentGreen};
+                    --accent-blue: ${styles.accentBlue};
+                    --accent-teal: ${styles.accentTeal};
+                    --success-green: ${styles.successGreen};
+                    --warning-orange: ${styles.warningOrange};
+                    --text-white: ${styles.textWhite};
+                    --text-gray: ${styles.textGray};
+                }
+                
+                /* Navigation */
+                .nav-title {
+                    font-size: ${styles.navTitleSize}px !important;
+                    font-weight: ${styles.navTitleWeight} !important;
+                }
+                .nav-item {
+                    font-size: ${styles.navItemSize}px !important;
+                    padding: ${styles.navPadding}px ${styles.navPadding * 1.5}px !important;
+                }
+                
+                /* Hero Section */
+                .hero-text h1 {
+                    font-size: ${styles.heroTitleSize}px !important;
+                    font-weight: ${styles.heroTitleWeight} !important;
+                }
+                .hero-highlight {
+                    font-size: ${styles.heroHighlightSize}px !important;
+                }
+                .hero-subtitle {
+                    font-size: ${styles.heroSubtitleSize}px !important;
+                }
+                
+                /* Prix Banner */
+                .price-main {
+                    font-size: ${styles.priceMainSize}px !important;
+                }
+                .price-sub {
+                    font-size: ${styles.priceSubSize}px !important;
+                }
+                .price-banner {
+                    padding: ${styles.pricePadding}px ${styles.pricePadding * 1.5}px !important;
+                }
+                
+                /* Section Titles */
+                .section-title {
+                    font-size: ${styles.sectionTitleSize}px !important;
+                    font-weight: ${styles.sectionTitleWeight} !important;
+                }
+                
+                /* Cards et Benefits */
+                .benefit-card, .pricing-card {
+                    padding: ${styles.cardPadding}px ${styles.cardPadding * 0.8}px !important;
+                    border-radius: ${styles.cardBorderRadius}px !important;
+                }
+                .benefit-icon {
+                    font-size: ${styles.benefitIconSize}px !important;
+                }
+                .benefit-title, .advantage-title {
+                    font-size: ${styles.benefitTitleSize}px !important;
+                }
+                .benefit-text, .advantage-text {
+                    font-size: ${styles.benefitTextSize}px !important;
+                }
+                
+                /* Pricing Cards */
+                .pricing-card {
+                    padding: ${styles.pricingCardPadding}px ${styles.pricingCardPadding * 0.8}px !important;
+                }
+                .pricing-value {
+                    font-size: ${styles.pricingValueSize}px !important;
+                }
+                .pricing-duration {
+                    font-size: ${styles.pricingDurationSize}px !important;
+                }
+                
+                /* CTA Buttons */
+                .cta-rental, .cta-btn {
+                    font-size: ${styles.ctaFontSize}px !important;
+                    font-weight: ${styles.ctaFontWeight} !important;
+                    padding: ${styles.ctaPadding}px ${styles.ctaPadding * 1.8}px !important;
+                }
+                
+                /* Spacing Global */
+                .section {
+                    padding: ${styles.sectionPadding}px 2rem 4rem !important;
+                }
+                .container {
+                    max-width: ${styles.containerMaxWidth}px !important;
+                }
+                .pricing-grid, .rental-benefits {
+                    gap: ${styles.gridGap}px !important;
+                }
+            `;
+        }
+
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
-            // Écouteurs d'événements pour tous les contrôles
+            // Création du backup automatique
+            createInitialBackup();
+            
+            // Écouteurs d'événements pour tous les contrôles avec application temps réel
             Object.keys(defaultValues).forEach(key => {
                 const element = document.getElementById(key);
                 if (element) {
                     element.addEventListener('input', () => {
                         updateValueDisplays();
                         applyStyles();
+                        // Application temps réel sur page présentation
+                        syncToPresentation();
                     });
                     element.addEventListener('change', () => {
                         updateValueDisplays();
                         applyStyles();
+                        // Application temps réel sur page présentation
+                        syncToPresentation();
                     });
                 }
             });
@@ -1991,7 +2315,7 @@ Fabrication et Support 100% Québécois</textarea>
             updateValueDisplays();
             loadSavedStyles();
             
-            console.log('🎨 Éditeur CSS simple initialisé');
+            console.log('🎨 Éditeur CSS complet initialisé avec sync temps réel');
         });
     </script>
     
