@@ -4,7 +4,8 @@
       "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon/**)",
       "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Presentateur\\LiCUBEPRO\\presentations-location\\presentations-vendeurs/**)",
       "Bash(python:*)",
-      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds/**)"
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds/**)",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\edit-location.html\")"
     ],
     "deny": [],
     "ask": []
