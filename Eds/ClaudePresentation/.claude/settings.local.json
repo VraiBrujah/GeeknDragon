@@ -6,7 +6,13 @@
       "Bash(python:*)",
       "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds/**)",
       "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\edit-location.html\")",
-      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\location.html\")"
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\location.html\")",
+      "Bash(copy location.html locationVSlocation.html)",
+      "Bash(copy location.html locationVS\\location.html)",
+      "Bash(cmd /c copy:*)",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS\\edit-location.html\")",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS\\location.html\")",
+      "Bash(cmd /c:*)"
     ],
     "deny": [],
     "ask": []
