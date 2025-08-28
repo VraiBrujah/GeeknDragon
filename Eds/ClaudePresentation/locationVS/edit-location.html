@@ -1656,7 +1656,7 @@ Fabrication et Support 100% Québécois</textarea>
     </footer>
 
     <!-- Système de Synchronisation Instantanée Li-CUBE PRO™ - DOIT SE CHARGER EN PREMIER -->
-    <script src="./js/instant-sync.js"></script>
+    <script src="js/instant-sync.js"></script>
 
     <script>
         // Interface Éditeur LOCATION - Synchronisation Instantanée
@@ -1926,7 +1926,7 @@ Fabrication et Support 100% Québécois</textarea>
             }
         }
 
-        // Réinitialisation depuis le backup avec sync temps réel
+        // Réinitialisation depuis le backup
         function resetCSS() {
             const backup = localStorage.getItem('locationVS-css-backup');
             let stylesToReset = backup ? JSON.parse(backup) : defaultValues;
@@ -1938,11 +1938,8 @@ Fabrication et Support 100% Québécois</textarea>
             updateValueDisplays();
             applyStyles();
             
-            // Synchronisation temps réel avec location.html
-            syncToPresentation();
-            
             // Notification
-            showNotification('Styles réinitialisés avec effet temps réel !', 'warning');
+            showNotification('Styles réinitialisés depuis la sauvegarde', 'warning');
         }
 
         // Sauvegarde avec popup de validation
@@ -2093,7 +2090,7 @@ Fabrication et Support 100% Québécois</textarea>
             const jsonUrl = URL.createObjectURL(jsonBlob);
             const jsonLink = document.createElement('a');
             jsonLink.href = jsonUrl;
-            jsonLink.download = 'location-custom-styles.json';
+            jsonLink.download = 'locationVS-custom-styles.json';
             jsonLink.click();
             URL.revokeObjectURL(jsonUrl);
             
@@ -2122,7 +2119,7 @@ Fabrication et Support 100% Québécois</textarea>
 
         // Chargement des styles sauvegardés
         function loadSavedStyles() {
-            const saved = localStorage.getItem('location-custom-css');
+            const saved = localStorage.getItem('locationVS-custom-css');
             if (saved) {
                 const styles = JSON.parse(saved);
                 Object.entries(styles).forEach(([key, value]) => {
@@ -2158,7 +2155,7 @@ Fabrication et Support 100% Québécois</textarea>
             
             // Sauvegarde temporaire pour sync temps réel
             localStorage.setItem('locationVS-live-styles', JSON.stringify(currentStyles));
-            localStorage.setItem('location-dynamic-css', locationCSS);
+            localStorage.setItem('locationVS-dynamic-css', locationCSS);
             
             // Si InstantSync est disponible, l'utiliser pour sync immédiate
             if (window.instantSync) {
@@ -2323,8 +2320,8 @@ Fabrication et Support 100% Québécois</textarea>
     </script>
     
     <!-- Systèmes Avancés Li-CUBE PRO™ -->
-    <link rel="stylesheet" href="./css/advanced-style-editor.css">
-    <script src="./js/advanced-style-editor.js"></script>
-    <script src="./js/dynamic-descriptions.js"></script>
+    <link rel="stylesheet" href="css/advanced-style-editor.css">
+    <script src="js/advanced-style-editor.js"></script>
+    <script src="js/dynamic-descriptions.js"></script>
 </body>
 </html>
