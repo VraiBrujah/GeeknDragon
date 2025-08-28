@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Configuration de la page de location Li-CUBE PRO™ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Outil Présentation LOCATION | EDS Québec</title>
+    <meta name="description" content="Outil de présentation commerciale Li-CUBE PRO™ LOCATION : Arguments de service et tranquillité pour équipes de vente EDS Québec.">
+    
+    <!-- Polices modernes pour une présentation de location professionnelle -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles externes pour meilleure organisation -->
+    <link rel="stylesheet" href="css/location-styles.css">
+    
+    <!-- Styles critiques pour assurer le fonctionnement -->
+    <style>
+        /* Styles de secours si CSS externe ne charge pas */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #F8FAFC;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .section {
+            min-height: 100vh; 
+            padding: 6rem 2rem 4rem;
+            position: relative; 
+            display: flex; 
+            align-items: center;
+        }
+        
+        .container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            width: 100%; 
+        }
+        
+        /* Assure que les images s'affichent */
+        .nav-logo {
+            width: 50px; 
+            height: 50px; 
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.1); 
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            background-image: url('./images/logo edsquebec.png');
+            background-size: 80%; 
+            background-repeat: no-repeat; 
+            background-position: center;
+            display: inline-block;
+        }
+        
+        .product-showcase {
+            width: 500px; 
+            height: 400px; 
+            background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%);
+            border-radius: 24px; 
+            position: relative; 
+            overflow: hidden;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.5); 
+            animation: float 6s ease-in-out infinite;
+            background-image: url('./images/Li-CUBE PRO.png');
+            background-size: contain; 
+            background-repeat: no-repeat; 
+            background-position: center;
+            border: 3px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation LOCATION -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <a href="#" class="nav-logo" data-image-field="logo-path" title="EDS Québec - Version LocationVS"></a>
+                <div class="nav-title" data-field="nav-title">🛡️ SOLUTION ZÉRO RISQUE</div>
+            </div>
+            <div class="nav-menu">
+                <a href="#hero" class="nav-item active" data-field="nav-btn1">Sans Risque</a>
+                <a href="#pricing" class="nav-item" data-field="nav-btn2">Tarifs</a>
+                <a href="#advantages" class="nav-item" data-field="nav-btn3">Avantages</a>
+                <a href="#contact" class="nav-item" data-field="nav-btn4">Louer Maintenant</a>
+                <a href="#" class="nav-item" data-field="nav-btn5">Voir Achat (Indisponible)</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Espacement Éditable -->
+    <section class="header-spacer" data-field="heroSpacerHeight"></section>
+
+    <!-- Section Héro LOCATION -->
+    <section id="hero" class="section hero" data-section-id="hero" data-section-order="1">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span class="hero-highlight editable" data-field="hero-title">Li-CUBE PRO™</span>
+                        <span class="editable" data-field="hero-subtitle">LOCATION INTELLIGENTE<br>ZÉRO RISQUE</span>
+                    </h1>
+                    <p class="hero-subtitle editable" data-field="hero-description">
+                        <strong>Pourquoi prendre des risques ?</strong> Louez votre Li-CUBE PRO™ et laissez EDS gérer 
+                        tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. 
+                        <strong>Vous payez, vous utilisez, nous nous occupons du reste.</strong>
+                    </p>
+                    
+                    <div class="price-banner">
+                        <div class="price-main">
+                            <span class="editable" data-field="monthly-price">150 $</span><span style="font-size: 2rem;">/mois</span>
+                        </div>
+                        <div class="price-sub editable" data-field="price-included">
+                            Maintenance, monitoring, support et garantie totale inclus
+                        </div>
+                    </div>
+                    
+                    <div class="rental-benefits">
+                        <div class="benefit-card animate-on-scroll">
+                            <div class="benefit-icon">🛡️</div>
+                            <div class="benefit-title">ZÉRO RISQUE</div>
+                            <div class="benefit-text">EDS assume 100% des pannes</div>
+                        </div>
+                        <div class="benefit-card animate-on-scroll">
+                            <div class="benefit-icon">💰</div>
+                            <div class="benefit-title">BUDGET PRÉVISIBLE</div>
+                            <div class="benefit-text">Coût fixe mensuel garanti</div>
+                        </div>
+                        <div class="benefit-card animate-on-scroll">
+                            <div class="benefit-icon">🔧</div>
+                            <div class="benefit-title">MAINTENANCE INCLUSE</div>
+                            <div class="benefit-text">Monitoring 24/7 automatique</div>
+                        </div>
+                        <div class="benefit-card animate-on-scroll">
+                            <div class="benefit-icon">⚡</div>
+                            <div class="benefit-title">MISE À JOUR CONTINUE</div>
+                            <div class="benefit-text">Dernière technologie toujours</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="cta-rental">
+                        <i class="fas fa-handshake"></i>
+                        <span class="editable" data-field="cta-text">ARGUMENTS DE CLOSING - 150-200$/MOIS</span>
+                    </a>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="product-showcase animate-on-scroll" data-image-field="product-image-path">
+                        <!-- Image Li-CUBE PRO automatiquement chargée via CSS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test script simple -->
+    <script>
+        console.log('🔧 repair-location.html chargé - Vérification images...');
+        
+        // Vérification images
+        const images = ['./images/logo edsquebec.png', './images/Li-CUBE PRO.png'];
+        images.forEach(src => {
+            const img = new Image();
+            img.onload = () => console.log('✅ Image chargée:', src);
+            img.onerror = () => console.error('❌ Erreur image:', src);
+            img.src = src;
+        });
+        
+        // Vérification CSS variables
+        const testEl = document.createElement('div');
+        testEl.style.color = 'var(--accent-green)';
+        document.body.appendChild(testEl);
+        const color = getComputedStyle(testEl).color;
+        document.body.removeChild(testEl);
+        
+        if (color && color !== 'var(--accent-green)') {
+            console.log('✅ Variables CSS chargées');
+        } else {
+            console.error('❌ Variables CSS non chargées');
+        }
+    </script>
+    
+    <!-- Gestionnaire principal LocationVS -->
+    <script src="js/location-manager.js"></script>
+    
+    <!-- Récepteur de Synchronisation -->
+    <script src="js/presentation-receiver.js"></script>
+</body>
+</html>

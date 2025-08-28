@@ -8,7 +8,7 @@ class PresentationReceiver {
     constructor(pageType) {
         // Configuration : type de page et identification
         this.pageType = pageType; // 'vente' ou 'location'
-        this.storageKey = `licubepro-${pageType}-live`;
+        this.storageKey = `locationVS-${pageType}-live`;
         
         // État : suivi des mises à jour reçues
         this.updatesReceived = 0;
@@ -27,7 +27,7 @@ class PresentationReceiver {
      * Initialisation : mise en place de la réception automatique
      */
     init() {
-        console.log(`📡 Récepteur PRÉSENTATION ${this.pageType.toUpperCase()} - Initialisation`);
+        // Récepteur PRÉSENTATION initialisé en mode silencieux
         
         this.setupStorageListeners();
         this.setupMessageListeners();
@@ -35,7 +35,7 @@ class PresentationReceiver {
         this.loadInitialContent();
         
         this.isListening = true;
-        console.log(`✅ Récepteur PRÉSENTATION ${this.pageType.toUpperCase()} - En écoute`);
+        // Récepteur en mode écoute active
     }
 
     /**
@@ -45,7 +45,7 @@ class PresentationReceiver {
         // Écoute : événements storage pour communications entre onglets
         window.addEventListener('storage', (event) => {
             // Filtrage : messages de synchronisation instantanée
-            if (event.key && event.key.includes(`licubepro-instant-${this.pageType}`)) {
+            if (event.key && event.key.includes(`locationVS-instant-${this.pageType}`)) {
                 this.handleStorageUpdate(event);
             }
         });
@@ -69,7 +69,7 @@ class PresentationReceiver {
      */
     setupMessageListeners() {
         // Écoute : événements personnalisés de synchronisation
-        window.addEventListener('licubepro-instant-sync', (event) => {
+        window.addEventListener('locationVS-instant-sync', (event) => {
             if (event.detail && event.detail.pageType === this.pageType) {
                 this.handleSyncMessage(event.detail);
             }
@@ -107,10 +107,10 @@ class PresentationReceiver {
             const syncMessage = JSON.parse(event.newValue);
             this.queueUpdate(syncMessage);
             
-            console.log(`📨 Message storage reçu: ${syncMessage.fieldName || 'complet'}`);
+            // Message storage traité
             
         } catch (error) {
-            console.error('Erreur traitement message storage:', error);
+            // Erreur lors du traitement du message storage
         }
     }
 
@@ -142,7 +142,7 @@ class PresentationReceiver {
             }
             
         } catch (error) {
-            console.error('Erreur traitement changement direct:', error);
+            // Erreur lors du changement direct
         }
     }
 
@@ -157,7 +157,7 @@ class PresentationReceiver {
         }
         
         this.queueUpdate(message);
-        console.log(`🔄 Message sync reçu: ${message.fieldName || 'multiple'}`);
+        // Message sync traité
     }
 
     /**
@@ -196,7 +196,7 @@ class PresentationReceiver {
     processUpdateQueue() {
         if (this.updateQueue.length === 0) return;
         
-        console.log(`🔄 Traitement de ${this.updateQueue.length} mises à jour`);
+        // Traitement des mises à jour en cours
         
         // Groupement : mises à jour par type
         const fieldUpdates = new Map();
@@ -226,7 +226,7 @@ class PresentationReceiver {
         this.lastUpdate = Date.now();
         this.updateQueue = [];
         
-        console.log(`✅ ${fieldUpdates.size + fullUpdates.length} mises à jour appliquées`);
+        // Mises à jour appliquées avec succès
     }
 
     /**
@@ -240,7 +240,7 @@ class PresentationReceiver {
         const elements = document.querySelectorAll(`[data-field="${fieldName}"]`);
         
         if (elements.length === 0) {
-            console.warn(`⚠️ Champ non trouvé: ${fieldName}`);
+            // Champ non trouvé dans la page
             return;
         }
         
@@ -252,7 +252,7 @@ class PresentationReceiver {
                 this.setElementValue(element, value);
                 this.animateUpdatedElement(element);
                 
-                console.log(`📝 Champ mis à jour: ${fieldName} = "${value}"`);
+                // Champ mis à jour
             }
         });
 
@@ -272,7 +272,7 @@ class PresentationReceiver {
             phoneLinks.forEach(link => {
                 const cleanPhone = value.replace(/\D/g, ''); // Supprime tout sauf chiffres
                 link.href = `tel:${cleanPhone}`;
-                console.log(`📞 Lien téléphone mis à jour: tel:${cleanPhone}`);
+                // Lien téléphone mis à jour
             });
         }
         
@@ -296,21 +296,21 @@ class PresentationReceiver {
                 }
                 
                 link.href = newHref;
-                console.log(`📧 Lien email mis à jour: ${value}`);
+                // Lien email mis à jour
             });
         }
 
         // Gestion : métadonnées de la page
         if (fieldName === 'page-title') {
             document.title = value;
-            console.log(`📄 Titre de la page mis à jour: ${value}`);
+            // Titre de page mis à jour
         }
         
         if (fieldName === 'page-description') {
             const metaDesc = document.querySelector('meta[name="description"]');
             if (metaDesc) {
                 metaDesc.setAttribute('content', value);
-                console.log(`📄 Meta description mise à jour: ${value}`);
+                // Meta description mise à jour
             }
         }
 
@@ -344,7 +344,7 @@ class PresentationReceiver {
                 // Animation : effet visuel de changement
                 this.animateImageUpdate(element);
                 
-                console.log(`🖼️ Image mise à jour: ${fieldName} → ${imagePath}`);
+                // Image mise à jour
             });
         }
 
@@ -372,19 +372,19 @@ class PresentationReceiver {
                     // Mise à jour : logo EDS dans .nav-logo
                     if (fieldName === 'logo-path' && rule.selectorText && rule.selectorText.includes('.nav-logo')) {
                         rule.style.backgroundImage = `url('${imagePath}')`;
-                        console.log(`📝 CSS rule mise à jour: .nav-logo → ${imagePath}`);
+                        // CSS rule nav-logo mise à jour
                     }
                     
                     // Mise à jour : produit dans .product-showcase
                     if (fieldName === 'product-image-path' && rule.selectorText && rule.selectorText.includes('.product-showcase')) {
                         rule.style.backgroundImage = `url('${imagePath}')`;
-                        console.log(`📝 CSS rule mise à jour: .product-showcase → ${imagePath}`);
+                        // CSS rule product-showcase mise à jour
                     }
                 }
             }
         } catch (error) {
             // Fallback : si l'accès aux CSS rules échoue (CORS, etc.)
-            console.warn('⚠️ Impossible de mettre à jour les CSS rules, utilisation du style inline uniquement');
+            // Fallback style inline utilisé
         }
     }
 
@@ -440,9 +440,7 @@ class PresentationReceiver {
             this.handleSpecialFields(fieldName, value);
         });
         
-        if (updatedCount > 0) {
-            console.log(`📋 Mise à jour complète: ${updatedCount} champs modifiés`);
-        }
+        // Mise à jour complète effectuée
     }
 
     /**
@@ -483,7 +481,7 @@ class PresentationReceiver {
         element.dispatchEvent(new Event('change', { bubbles: true }));
         
         // Événement personnalisé : notification de mise à jour
-        element.dispatchEvent(new CustomEvent('licubepro-updated', {
+        element.dispatchEvent(new CustomEvent('locationVS-updated', {
             detail: { fieldName: element.dataset.field, value: value },
             bubbles: true
         }));
@@ -521,10 +519,10 @@ class PresentationReceiver {
             if (content) {
                 const parsedContent = JSON.parse(content);
                 this.applyFullUpdate(parsedContent);
-                console.log(`📋 Contenu initial appliqué: ${Object.keys(parsedContent).length} champs`);
+                // Contenu initial appliqué
             }
         } catch (error) {
-            console.error('Erreur chargement initial:', error);
+            // Erreur lors du chargement initial
         }
     }
 
@@ -532,7 +530,7 @@ class PresentationReceiver {
      * Chargement de rattrapage : derniers contenus en cas de désynchronisation
      */
     loadAndApplyLatestContent() {
-        console.log(`🔄 Synchronisation de rattrapage ${this.pageType}...`);
+        // Synchronisation de rattrapage en cours
         
         // Chargement : contenu le plus récent
         this.loadInitialContent();
@@ -540,7 +538,7 @@ class PresentationReceiver {
         // Vérification : messages en attente dans le storage
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
-            if (key && key.includes(`licubepro-instant-${this.pageType}`)) {
+            if (key && key.includes(`locationVS-instant-${this.pageType}`)) {
                 try {
                     const message = JSON.parse(localStorage.getItem(key));
                     if (message.timestamp > this.lastUpdate) {
@@ -579,13 +577,13 @@ class PresentationReceiver {
         
         // Diagnostic : activité récente
         if (timeSinceLastUpdate > 300000 && this.updatesReceived > 0) { // 5 minutes
-            console.warn(`⚠️ Aucune mise à jour reçue depuis ${Math.round(timeSinceLastUpdate / 60000)} minutes`);
+            // Surveillance: aucune mise à jour récente
         }
         
         // Nettoyage : anciens messages temporaires
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
-            if (key && key.includes('licubepro-instant-') && key.includes(this.pageType)) {
+            if (key && key.includes('locationVS-instant-') && key.includes(this.pageType)) {
                 try {
                     const message = JSON.parse(localStorage.getItem(key));
                     if (now - message.timestamp > 60000) { // 1 minute
@@ -621,7 +619,7 @@ class PresentationReceiver {
         this.isListening = false;
         clearTimeout(this.processTimeout);
         this.updateQueue = [];
-        console.log(`🛑 Récepteur ${this.pageType} désactivé`);
+        // Récepteur désactivé
     }
 }
 
@@ -640,7 +638,7 @@ function initPresentationReceiver() {
     
     // Vérification : ne s'active que sur les pages de présentation (pas les éditeurs)
     if (pageUrl.includes('edit-')) {
-        console.log('🚫 Récepteur désactivé sur page éditeur');
+        // Récepteur non nécessaire sur page éditeur
         return null;
     }
     

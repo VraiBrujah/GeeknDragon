@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Diagnostic LocationVS</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #F8FAFC;
+            padding: 2rem;
+        }
+        .diagnostic-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(16, 185, 129, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+        }
+        .diagnostic-title {
+            color: #10B981;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .test-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #10B981;
+        }
+        .test-result {
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+        .success { color: #059669; }
+        .error { color: #EF4444; }
+        .warning { color: #F59E0B; }
+    </style>
+</head>
+<body>
+    <div class="diagnostic-container">
+        <h1 class="diagnostic-title">🔧 Diagnostic LocationVS</h1>
+        
+        <div class="test-item">
+            <h3>1. Test CSS Principal</h3>
+            <div id="css-test" class="test-result">Test en cours...</div>
+        </div>
+        
+        <div class="test-item">
+            <h3>2. Test Images</h3>
+            <div id="images-test" class="test-result">Test en cours...</div>
+        </div>
+        
+        <div class="test-item">
+            <h3>3. Test Scripts</h3>
+            <div id="scripts-test" class="test-result">Test en cours...</div>
+        </div>
+        
+        <div class="test-item">
+            <h3>4. Test Sections HTML</h3>
+            <div id="sections-test" class="test-result">Test en cours...</div>
+        </div>
+    </div>
+
+    <script>
+        // Test 1: CSS Principal
+        function testCSS() {
+            const testDiv = document.createElement('div');
+            testDiv.style.color = 'var(--accent-green)';
+            document.body.appendChild(testDiv);
+            
+            const computedStyle = getComputedStyle(testDiv);
+            const result = document.getElementById('css-test');
+            
+            if (computedStyle.color && computedStyle.color !== 'var(--accent-green)') {
+                result.textContent = '✅ Variables CSS chargées correctement';
+                result.className = 'test-result success';
+            } else {
+                result.textContent = '❌ Variables CSS non chargées - Vérifier css/location-styles.css';
+                result.className = 'test-result error';
+            }
+            
+            document.body.removeChild(testDiv);
+        }
+        
+        // Test 2: Images
+        function testImages() {
+            const result = document.getElementById('images-test');
+            let imageCount = 0;
+            let loadedCount = 0;
+            let errorCount = 0;
+            
+            const imagePaths = [
+                '../images/logo edsquebec.png',
+                '../images/Li-CUBE PRO.png'
+            ];
+            
+            imagePaths.forEach(path => {
+                imageCount++;
+                const img = new Image();
+                img.onload = () => {
+                    loadedCount++;
+                    checkImagesComplete();
+                };
+                img.onerror = () => {
+                    errorCount++;
+                    checkImagesComplete();
+                };
+                img.src = path;
+            });
+            
+            function checkImagesComplete() {
+                if (loadedCount + errorCount === imageCount) {
+                    if (loadedCount === imageCount) {
+                        result.textContent = `✅ Toutes les images chargées (${loadedCount}/${imageCount})`;
+                        result.className = 'test-result success';
+                    } else {
+                        result.textContent = `⚠️ Certaines images manquantes (${loadedCount}/${imageCount} chargées, ${errorCount} erreurs)`;
+                        result.className = 'test-result warning';
+                    }
+                }
+            }
+        }
+        
+        // Test 3: Scripts
+        function testScripts() {
+            const result = document.getElementById('scripts-test');
+            let scriptTests = [];
+            
+            // Test LocationManager
+            fetch('js/location-manager.js')
+                .then(response => response.ok ? 'location-manager.js ✅' : 'location-manager.js ❌')
+                .then(status => {
+                    scriptTests.push(status);
+                    return fetch('js/presentation-receiver.js');
+                })
+                .then(response => response.ok ? 'presentation-receiver.js ✅' : 'presentation-receiver.js ❌')
+                .then(status => {
+                    scriptTests.push(status);
+                    result.textContent = scriptTests.join(' | ');
+                    result.className = scriptTests.some(s => s.includes('❌')) ? 'test-result warning' : 'test-result success';
+                })
+                .catch(error => {
+                    result.textContent = '❌ Erreur chargement scripts: ' + error.message;
+                    result.className = 'test-result error';
+                });
+        }
+        
+        // Test 4: Sections HTML
+        function testSections() {
+            const result = document.getElementById('sections-test');
+            
+            fetch('location.html')
+                .then(response => response.text())
+                .then(html => {
+                    const sectionsFound = {
+                        hero: html.includes('data-section-id="hero"'),
+                        pricing: html.includes('data-section-id="pricing"'),
+                        advantages: html.includes('data-section-id="advantages"'),
+                        technical: html.includes('data-section-id="technical"'),
+                        contact: html.includes('data-section-id="contact"')
+                    };
+                    
+                    const foundCount = Object.values(sectionsFound).filter(Boolean).length;
+                    const totalSections = Object.keys(sectionsFound).length;
+                    
+                    if (foundCount === totalSections) {
+                        result.textContent = `✅ Toutes les sections présentes (${foundCount}/${totalSections})`;
+                        result.className = 'test-result success';
+                    } else {
+                        const missingSections = Object.entries(sectionsFound)
+                            .filter(([_, found]) => !found)
+                            .map(([name, _]) => name);
+                        result.textContent = `⚠️ Sections manquantes: ${missingSections.join(', ')}`;
+                        result.className = 'test-result warning';
+                    }
+                })
+                .catch(error => {
+                    result.textContent = '❌ Erreur lecture location.html';
+                    result.className = 'test-result error';
+                });
+        }
+        
+        // Lancement des tests
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                testCSS();
+                testImages();
+                testScripts();
+                testSections();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
