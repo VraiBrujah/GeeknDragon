@@ -249,6 +249,173 @@
             font-weight: 600;
         }
         
+        .css-group h4 {
+            color: var(--text-white);
+            margin: 1.5rem 0 0.8rem 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding-bottom: 0.3rem;
+        }
+        
+        /* Grille de couleurs 2D optimisée (4 colonnes × 3 lignes) */
+        .color-grid-2d {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            max-width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        
+        /* Responsive : réduction en 2 colonnes sur petits écrans */
+        @media (max-width: 768px) {
+            .color-grid-2d {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.6rem;
+            }
+        }
+        
+        /* Ancienne grille de couleurs (conservée pour compatibilité) */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-sizing: border-box;
+            min-width: 0;
+            overflow: hidden;
+        }
+        
+        .color-item:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        
+        .color-item span {
+            color: var(--text-white);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        
+        .color-item input[type="color"] {
+            width: 100%;
+            height: 35px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        
+        .color-item small {
+            color: var(--text-gray);
+            font-size: 0.7rem;
+            font-style: italic;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            line-height: 1.2;
+        }
+        
+        /* Système de réorganisation des sections */
+        .reorganizable-section {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .section-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .section-btn {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-green);
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .section-btn:hover {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.5);
+            transform: translateY(-1px);
+        }
+        
+        .section-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .section-spacer-control {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-spacer-control label {
+            color: var(--text-gray);
+            font-size: 0.75rem;
+            margin: 0;
+        }
+        
+        .spacing-input {
+            width: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        
+        .spacing-input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+        
+        .section-moving {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+        
         .css-controls {
             display: flex;
             flex-direction: column;
@@ -416,26 +583,78 @@
             </button>
         </h2>
         <div class="css-editor" id="cssEditor">
-            <!-- Couleurs Thème Location -->
+            <!-- Couleurs Thème Location - Grille 2D Optimisée -->
             <div class="css-group">
-                <h3>Couleurs Thème Location</h3>
-                <div class="css-controls">
-                    <label>Fond Principal: <input type="color" id="primaryDark" value="#0F172A"></label>
-                    <label>Fond Secondaire: <input type="color" id="secondaryDark" value="#1E293B"></label>
-                    <label>Vert Accent: <input type="color" id="accentGreen" value="#10B981"></label>
-                    <label>Bleu Accent: <input type="color" id="accentBlue" value="#3B82F6"></label>
-                    <label>Teal: <input type="color" id="accentTeal" value="#14B8A6"></label>
-                    <label>Vert Success: <input type="color" id="successGreen" value="#059669"></label>
-                    <label>Orange Warning: <input type="color" id="warningOrange" value="#F59E0B"></label>
-                </div>
-            </div>
-            
-            <!-- Couleurs de Texte -->
-            <div class="css-group">
-                <h3>Couleurs de Texte</h3>
-                <div class="css-controls">
-                    <label>Texte Blanc: <input type="color" id="textWhite" value="#F8FAFC"></label>
-                    <label>Texte Gris: <input type="color" id="textGray" value="#CBD5E1"></label>
+                <h3>🎨 Couleurs Thème Location</h3>
+                <p class="section-description">Personnalisez toutes les couleurs de votre présentation avec cette grille complète 2D</p>
+                
+                <!-- Grille de Couleurs 2D (4x3) -->
+                <div class="color-grid-2d">
+                    <!-- Ligne 1: Couleurs de Base -->
+                    <label class="color-item">
+                        <span>Fond Principal</span>
+                        <input type="color" id="primaryDark" value="#0F172A">
+                        <small>Arrière-plan principal</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Fond Secondaire</span>
+                        <input type="color" id="secondaryDark" value="#1E293B">
+                        <small>Arrière-plan sections</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Texte Principal</span>
+                        <input type="color" id="textWhite" value="#F8FAFC">
+                        <small>Texte principal blanc</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Texte Secondaire</span>
+                        <input type="color" id="textGray" value="#CBD5E1">
+                        <small>Texte gris descriptif</small>
+                    </label>
+                    
+                    <!-- Ligne 2: Couleurs d'Accent -->
+                    <label class="color-item">
+                        <span>Vert Principal</span>
+                        <input type="color" id="accentGreen" value="#10B981">
+                        <small>Boutons et éléments</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Bleu Accent</span>
+                        <input type="color" id="accentBlue" value="#3B82F6">
+                        <small>Liens et détails</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Teal Accent</span>
+                        <input type="color" id="accentTeal" value="#14B8A6">
+                        <small>Gradients et effets</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Vert Succès</span>
+                        <input type="color" id="successGreen" value="#059669">
+                        <small>Messages positifs</small>
+                    </label>
+                    
+                    <!-- Ligne 3: Couleurs d'État -->
+                    <label class="color-item">
+                        <span>Orange Warning</span>
+                        <input type="color" id="warningOrange" value="#F59E0B">
+                        <small>Alertes et warnings</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Rouge Erreur</span>
+                        <input type="color" id="warningRed" value="#EF4444">
+                        <small>Erreurs et négatif</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Bleu Info</span>
+                        <input type="color" id="infoBlue" value="#60A5FA">
+                        <small>Informations</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Gris Neutre</span>
+                        <input type="color" id="neutralGray" value="#9CA3AF">
+                        <small>Éléments neutres</small>
+                    </label>
                 </div>
             </div>
             
@@ -757,56 +976,29 @@
             </div>
         </section>
 
-        <!-- Section Espacements entre Sections -->
-        <section class="edit-section">
-            <h2 class="section-title">
-                <i class="fas fa-arrows-alt-v"></i>
-                Espacements entre Sections (px)
-            </h2>
-            <p class="section-description">Contrôlez l'espacement vertical entre chaque section de la présentation</p>
-            <div class="edit-grid">
-                <div class="edit-field">
-                    <label class="field-label" for="headerSpacerHeight">Header → Hero</label>
-                    <p class="field-description">Espacement entre le header et la section héro</p>
-                    <input type="number" id="headerSpacerHeight" class="field-input" data-field="headerSpacerHeight" 
-                           placeholder="80" value="80" min="0" max="500" step="10">
-                </div>
-                
-                <div class="edit-field">
-                    <label class="field-label" for="heroPricingSpacerHeight">Hero → Tarifs</label>
-                    <p class="field-description">Espacement entre la section héro et les tarifs</p>
-                    <input type="number" id="heroPricingSpacerHeight" class="field-input" data-field="heroPricingSpacerHeight" 
-                           placeholder="0" value="0" min="0" max="500" step="10">
-                </div>
-                
-                <div class="edit-field">
-                    <label class="field-label" for="pricingAdvantagesSpacerHeight">Tarifs → Avantages</label>
-                    <p class="field-description">Espacement entre les tarifs et les avantages</p>
-                    <input type="number" id="pricingAdvantagesSpacerHeight" class="field-input" data-field="pricingAdvantagesSpacerHeight" 
-                           placeholder="0" value="0" min="0" max="500" step="10">
-                </div>
-                
-                <div class="edit-field">
-                    <label class="field-label" for="advantagesComparisonSpacerHeight">Avantages → Comparaison</label>
-                    <p class="field-description">Espacement entre les avantages et la comparaison technique</p>
-                    <input type="number" id="advantagesComparisonSpacerHeight" class="field-input" data-field="advantagesComparisonSpacerHeight" 
-                           placeholder="0" value="0" min="0" max="500" step="10">
-                </div>
-                
-                <div class="edit-field">
-                    <label class="field-label" for="comparisonContactSpacerHeight">Comparaison → Contact</label>
-                    <p class="field-description">Espacement entre la comparaison et la section contact</p>
-                    <input type="number" id="comparisonContactSpacerHeight" class="field-input" data-field="comparisonContactSpacerHeight" 
-                           placeholder="0" value="0" min="0" max="500" step="10">
-                </div>
-            </div>
-        </section>
 
         <!-- Section Héro Principal -->
-        <section class="edit-section">
+        <section class="edit-section reorganizable-section" data-section-id="hero" data-section-order="1">
             <h2 class="section-title">
-                <i class="fas fa-home"></i>
-                Section Héro Principale
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-home"></i>
+                        Section Héro Principale
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('hero')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('hero')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="heroSpacing">Espacement (px):</label>
+                            <input type="number" id="heroSpacing" class="spacing-input" data-field="heroSpacerHeight" 
+                                   value="80" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
             </h2>
             <div class="edit-grid">
                 <div class="edit-field">
@@ -1815,6 +2007,11 @@ Fabrication et Support 100% Québécois</textarea>
             textWhite: '#F8FAFC',
             textGray: '#CBD5E1',
             
+            // Couleurs d'État et Complémentaires
+            warningRed: '#EF4444',
+            infoBlue: '#60A5FA',
+            neutralGray: '#9CA3AF',
+            
             // Navigation
             navTitleSize: 28,
             navTitleWeight: '800',
@@ -2255,6 +2452,9 @@ Fabrication et Support 100% Québécois</textarea>
                     --warning-orange: ${styles.warningOrange};
                     --text-white: ${styles.textWhite};
                     --text-gray: ${styles.textGray};
+                    --warning-red: ${styles.warningRed};
+                    --info-blue: ${styles.infoBlue};
+                    --neutral-gray: ${styles.neutralGray};
                 }
                 
                 /* Navigation */
