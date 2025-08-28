@@ -255,6 +255,64 @@ class PresentationReceiver {
                 console.log(`📝 Champ mis à jour: ${fieldName} = "${value}"`);
             }
         });
+
+        // Traitement spécial : champs téléphone et email pour liens
+        this.handleSpecialFields(fieldName, value);
+    }
+
+    /**
+     * Traitement spécial : champs nécessitant une logique particulière
+     * @param {string} fieldName - Nom du champ
+     * @param {string} value - Valeur du champ
+     */
+    handleSpecialFields(fieldName, value) {
+        // Gestion : numéro de téléphone pour liens
+        if (fieldName === 'phone-number') {
+            const phoneLinks = document.querySelectorAll('[data-phone-field="phone-number"]');
+            phoneLinks.forEach(link => {
+                const cleanPhone = value.replace(/\D/g, ''); // Supprime tout sauf chiffres
+                link.href = `tel:${cleanPhone}`;
+                console.log(`📞 Lien téléphone mis à jour: tel:${cleanPhone}`);
+            });
+        }
+        
+        // Gestion : adresse email pour liens
+        if (fieldName === 'email-address') {
+            const emailLinks = document.querySelectorAll('[data-email-field="email-address"]');
+            emailLinks.forEach(link => {
+                // Conservation : sujet et corps du message existant
+                const currentHref = link.href;
+                const subjectMatch = currentHref.match(/subject=([^&]*)/);
+                const bodyMatch = currentHref.match(/body=([^&]*)/);
+                
+                let newHref = `mailto:${value}`;
+                if (subjectMatch) {
+                    newHref += `?subject=${subjectMatch[1]}`;
+                    if (bodyMatch) {
+                        newHref += `&body=${bodyMatch[1]}`;
+                    }
+                } else if (bodyMatch) {
+                    newHref += `?body=${bodyMatch[1]}`;
+                }
+                
+                link.href = newHref;
+                console.log(`📧 Lien email mis à jour: ${value}`);
+            });
+        }
+
+        // Gestion : métadonnées de la page
+        if (fieldName === 'page-title') {
+            document.title = value;
+            console.log(`📄 Titre de la page mis à jour: ${value}`);
+        }
+        
+        if (fieldName === 'page-description') {
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) {
+                metaDesc.setAttribute('content', value);
+                console.log(`📄 Meta description mise à jour: ${value}`);
+            }
+        }
     }
 
     /**

@@ -228,18 +228,70 @@
     <!-- Conteneur principal éditeur LOCATION -->
     <main class="editor-container">
         
-        <!-- Section Configuration Header -->
+        <!-- Section Configuration Header et Métadonnées -->
         <section class="edit-section">
             <h2 class="section-title">
                 <i class="fas fa-cog"></i>
-                Configuration Header et Ressources
+                Configuration Header et Métadonnées
             </h2>
             <div class="edit-grid">
+                <!-- Métadonnées de la page -->
+                <div class="edit-field">
+                    <label class="field-label" for="page-title">Titre de la page (title)</label>
+                    <p class="field-description">Titre affiché dans l'onglet du navigateur</p>
+                    <input type="text" id="page-title" class="field-input" data-field="page-title" 
+                           placeholder="Li-CUBE PRO™ - Outil Présentation LOCATION | EDS Québec" 
+                           value="Li-CUBE PRO™ - Outil Présentation LOCATION | EDS Québec">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="page-description">Description SEO (meta description)</label>
+                    <p class="field-description">Description pour les moteurs de recherche et réseaux sociaux</p>
+                    <textarea id="page-description" class="field-input field-textarea" data-field="page-description" 
+                              placeholder="Outil de présentation commerciale Li-CUBE PRO™ LOCATION...">Outil de présentation commerciale Li-CUBE PRO™ LOCATION : Arguments de service et tranquillité pour équipes de vente EDS Québec.</textarea>
+                </div>
+
                 <div class="edit-field">
                     <label class="field-label" for="nav-title">Titre navigation header</label>
                     <p class="field-description">Titre affiché dans la barre de navigation (actuellement: 🛡️ SOLUTION ZÉRO RISQUE)</p>
                     <input type="text" id="nav-title" class="field-input" data-field="nav-title" 
                            placeholder="🛡️ SOLUTION ZÉRO RISQUE" value="🛡️ SOLUTION ZÉRO RISQUE">
+                </div>
+
+                <!-- Boutons de navigation du header -->
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn1">Bouton navigation 1</label>
+                    <p class="field-description">Premier bouton de navigation (actuellement: Sans Risque)</p>
+                    <input type="text" id="nav-btn1" class="field-input" data-field="nav-btn1" 
+                           placeholder="Sans Risque" value="Sans Risque">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn2">Bouton navigation 2</label>
+                    <p class="field-description">Deuxième bouton de navigation (actuellement: Tarifs)</p>
+                    <input type="text" id="nav-btn2" class="field-input" data-field="nav-btn2" 
+                           placeholder="Tarifs" value="Tarifs">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn3">Bouton navigation 3</label>
+                    <p class="field-description">Troisième bouton de navigation (actuellement: Avantages)</p>
+                    <input type="text" id="nav-btn3" class="field-input" data-field="nav-btn3" 
+                           placeholder="Avantages" value="Avantages">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn4">Bouton navigation 4</label>
+                    <p class="field-description">Quatrième bouton de navigation (actuellement: Louer Maintenant)</p>
+                    <input type="text" id="nav-btn4" class="field-input" data-field="nav-btn4" 
+                           placeholder="Louer Maintenant" value="Louer Maintenant">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn5">Bouton navigation 5</label>
+                    <p class="field-description">Cinquième bouton de navigation (actuellement: Voir Achat)</p>
+                    <input type="text" id="nav-btn5" class="field-input" data-field="nav-btn5" 
+                           placeholder="Voir Achat" value="Voir Achat">
                 </div>
                 
                 <div class="edit-field">
@@ -268,6 +320,57 @@
                     <p class="field-description">Chemin vers l'image de l'entreprise EDS Québec</p>
                     <input type="text" id="company-image-path" class="field-input" data-field="company-image-path" 
                            placeholder="./images/edsQuebec.png" value="./images/edsQuebec.png">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Héro Principal -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-home"></i>
+                Section Héro Principale
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="hero-title">Titre héro principal</label>
+                    <p class="field-description">Titre principal dans la section héro</p>
+                    <input type="text" id="hero-title" class="field-input" data-field="hero-title" 
+                           placeholder="Li-CUBE PRO™" value="Li-CUBE PRO™">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-subtitle">Sous-titre héro</label>
+                    <p class="field-description">Sous-titre accrocheur (avec saut de ligne si nécessaire)</p>
+                    <input type="text" id="hero-subtitle" class="field-input" data-field="hero-subtitle" 
+                           placeholder="LOCATION INTELLIGENTE ZÉRO RISQUE" value="LOCATION INTELLIGENTE ZÉRO RISQUE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-description">Description héro</label>
+                    <p class="field-description">Description détaillée du service de location</p>
+                    <textarea id="hero-description" class="field-input field-textarea" data-field="hero-description" 
+                              placeholder="La solution énergétique révolutionnaire...">La solution énergétique révolutionnaire qui transforme votre approche de l'énergie de secours : plus de pannes imprévisibles, plus de maintenance coûteuse, plus de vieilles technologies obsolètes. Juste la tranquillité d'esprit, mois après mois.</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="monthly-price">Prix mensuel affiché</label>
+                    <p class="field-description">Prix de base mensuel (sans le symbole $)</p>
+                    <input type="text" id="monthly-price" class="field-input" data-field="monthly-price" 
+                           placeholder="150" value="150">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="price-included">Services inclus</label>
+                    <p class="field-description">Liste des services inclus dans le prix</p>
+                    <textarea id="price-included" class="field-input field-textarea" data-field="price-included" 
+                              placeholder="Installation, maintenance, monitoring...">Installation, maintenance, monitoring 24/7 et support technique inclus</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="cta-text">Texte bouton d'action</label>
+                    <p class="field-description">Texte du bouton principal d'appel à l'action</p>
+                    <input type="text" id="cta-text" class="field-input" data-field="cta-text" 
+                           placeholder="ARGUMENTS DE CLOSING - 150-200$/MOIS" value="ARGUMENTS DE CLOSING - 150-200$/MOIS">
                 </div>
             </div>
         </section>
@@ -333,6 +436,91 @@
                            placeholder="LOUER MAINTENANT - 150$/MOIS" 
                            value="LOUER MAINTENANT - 150$/MOIS">
                 </div>
+
+                <!-- Arguments de Vente Héro -->
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg1-icon">Icône argument 1</label>
+                    <p class="field-description">Icône pour ZÉRO RISQUE</p>
+                    <input type="text" id="hero-arg1-icon" class="field-input" data-field="hero-arg1-icon" 
+                           placeholder="🛡️" value="🛡️">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg1-title">Titre argument 1</label>
+                    <p class="field-description">Titre principal premier argument</p>
+                    <input type="text" id="hero-arg1-title" class="field-input" data-field="hero-arg1-title" 
+                           placeholder="ZÉRO RISQUE" value="ZÉRO RISQUE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg1-desc">Description argument 1</label>
+                    <p class="field-description">Explication ZÉRO RISQUE</p>
+                    <input type="text" id="hero-arg1-desc" class="field-input" data-field="hero-arg1-desc" 
+                           placeholder="EDS assume 100% des pannes" value="EDS assume 100% des pannes">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg2-icon">Icône argument 2</label>
+                    <p class="field-description">Icône pour BUDGET PRÉVISIBLE</p>
+                    <input type="text" id="hero-arg2-icon" class="field-input" data-field="hero-arg2-icon" 
+                           placeholder="💰" value="💰">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg2-title">Titre argument 2</label>
+                    <p class="field-description">Titre principal deuxième argument</p>
+                    <input type="text" id="hero-arg2-title" class="field-input" data-field="hero-arg2-title" 
+                           placeholder="BUDGET PRÉVISIBLE" value="BUDGET PRÉVISIBLE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg2-desc">Description argument 2</label>
+                    <p class="field-description">Explication BUDGET PRÉVISIBLE</p>
+                    <input type="text" id="hero-arg2-desc" class="field-input" data-field="hero-arg2-desc" 
+                           placeholder="Coût fixe mensuel garanti" value="Coût fixe mensuel garanti">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg3-icon">Icône argument 3</label>
+                    <p class="field-description">Icône pour MAINTENANCE INCLUSE</p>
+                    <input type="text" id="hero-arg3-icon" class="field-input" data-field="hero-arg3-icon" 
+                           placeholder="🔧" value="🔧">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg3-title">Titre argument 3</label>
+                    <p class="field-description">Titre principal troisième argument</p>
+                    <input type="text" id="hero-arg3-title" class="field-input" data-field="hero-arg3-title" 
+                           placeholder="MAINTENANCE INCLUSE" value="MAINTENANCE INCLUSE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg3-desc">Description argument 3</label>
+                    <p class="field-description">Explication MAINTENANCE INCLUSE</p>
+                    <input type="text" id="hero-arg3-desc" class="field-input" data-field="hero-arg3-desc" 
+                           placeholder="Monitoring 24/7 automatique" value="Monitoring 24/7 automatique">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg4-icon">Icône argument 4</label>
+                    <p class="field-description">Icône pour MISE À JOUR CONTINUE</p>
+                    <input type="text" id="hero-arg4-icon" class="field-input" data-field="hero-arg4-icon" 
+                           placeholder="⚡" value="⚡">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg4-title">Titre argument 4</label>
+                    <p class="field-description">Titre principal quatrième argument</p>
+                    <input type="text" id="hero-arg4-title" class="field-input" data-field="hero-arg4-title" 
+                           placeholder="MISE À JOUR CONTINUE" value="MISE À JOUR CONTINUE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg4-desc">Description argument 4</label>
+                    <p class="field-description">Explication MISE À JOUR CONTINUE</p>
+                    <input type="text" id="hero-arg4-desc" class="field-input" data-field="hero-arg4-desc" 
+                           placeholder="Dernière technologie toujours" value="Dernière technologie toujours">
+                </div>
             </div>
         </section>
 
@@ -370,6 +558,26 @@
                                 <span class="field-unit">/mois</span>
                             </div>
                         </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack6-service1">Service 1 (6 mois)</label>
+                            <input type="text" id="pack6-service1" class="field-input" data-field="pack6-service1" 
+                                   placeholder="Installation gratuite" value="Installation gratuite">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack6-service2">Service 2 (6 mois)</label>
+                            <input type="text" id="pack6-service2" class="field-input" data-field="pack6-service2" 
+                                   placeholder="Maintenance incluse" value="Maintenance incluse">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack6-service3">Service 3 (6 mois)</label>
+                            <input type="text" id="pack6-service3" class="field-input" data-field="pack6-service3" 
+                                   placeholder="Support 8h-17h" value="Support 8h-17h">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack6-service4">Service 4 (6 mois)</label>
+                            <input type="text" id="pack6-service4" class="field-input" data-field="pack6-service4" 
+                                   placeholder="Monitoring de base" value="Monitoring de base">
+                        </div>
                     </div>
 
                     <!-- Offre 2 ans (recommandée) -->
@@ -383,6 +591,31 @@
                                 <span class="field-unit">/mois</span>
                             </div>
                         </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service1">Service 1 (2 ans)</label>
+                            <input type="text" id="pack24-service1" class="field-input" data-field="pack24-service1" 
+                                   placeholder="Installation gratuite" value="Installation gratuite">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service2">Service 2 (2 ans)</label>
+                            <input type="text" id="pack24-service2" class="field-input" data-field="pack24-service2" 
+                                   placeholder="Maintenance incluse" value="Maintenance incluse">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service3">Service 3 (2 ans)</label>
+                            <input type="text" id="pack24-service3" class="field-input" data-field="pack24-service3" 
+                                   placeholder="Support 24/7" value="Support 24/7">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service4">Service 4 (2 ans)</label>
+                            <input type="text" id="pack24-service4" class="field-input" data-field="pack24-service4" 
+                                   placeholder="Monitoring avancé IoT" value="Monitoring avancé IoT">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service5">Service 5 (2 ans)</label>
+                            <input type="text" id="pack24-service5" class="field-input" data-field="pack24-service5" 
+                                   placeholder="Remplacement immédiat" value="Remplacement immédiat">
+                        </div>
                     </div>
 
                     <!-- Offre 5 ans -->
@@ -395,6 +628,36 @@
                                        placeholder="125 $" value="125 $">
                                 <span class="field-unit">/mois</span>
                             </div>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service1">Service 1 (5 ans)</label>
+                            <input type="text" id="pack60-service1" class="field-input" data-field="pack60-service1" 
+                                   placeholder="Installation gratuite" value="Installation gratuite">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service2">Service 2 (5 ans)</label>
+                            <input type="text" id="pack60-service2" class="field-input" data-field="pack60-service2" 
+                                   placeholder="Maintenance incluse" value="Maintenance incluse">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service3">Service 3 (5 ans)</label>
+                            <input type="text" id="pack60-service3" class="field-input" data-field="pack60-service3" 
+                                   placeholder="Support premium 24/7" value="Support premium 24/7">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service4">Service 4 (5 ans)</label>
+                            <input type="text" id="pack60-service4" class="field-input" data-field="pack60-service4" 
+                                   placeholder="Monitoring IA prédictif" value="Monitoring IA prédictif">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service5">Service 5 (5 ans)</label>
+                            <input type="text" id="pack60-service5" class="field-input" data-field="pack60-service5" 
+                                   placeholder="Upgrade technologique inclus" value="Upgrade technologique inclus">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service6">Service 6 (5 ans)</label>
+                            <input type="text" id="pack60-service6" class="field-input" data-field="pack60-service6" 
+                                   placeholder="Option d'achat privilégiée" value="Option d'achat privilégiée">
                         </div>
                     </div>
                 </div>
@@ -411,6 +674,110 @@
                     <p class="field-description">Détail des remises selon quantité</p>
                     <textarea id="volume-discounts" class="field-input field-textarea" data-field="volume-discounts" 
                               placeholder="2-4 unités : -10%...">2-4 unités : -10% | 5-9 unités : -15% | 10+ unités : -20% | 20+ unités : sur devis personnalisé</textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Comparaison Technique -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-balance-scale"></i>
+                Comparaison Technique vs Concurrence
+            </h2>
+            <div class="edit-grid">
+                <!-- Titre et sous-titre comparaison -->
+                <div class="edit-field">
+                    <label class="field-label" for="tech-title">Titre comparaison</label>
+                    <p class="field-description">Titre principal de la section technique</p>
+                    <input type="text" id="tech-title" class="field-input" data-field="tech-title" 
+                           placeholder="Li-CUBE PRO™ vs Concurrence" value="Li-CUBE PRO™ vs Concurrence">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="tech-subtitle">Sous-titre comparaison</label>
+                    <p class="field-description">Sous-titre expliquant l'avantage</p>
+                    <input type="text" id="tech-subtitle" class="field-input" data-field="tech-subtitle" 
+                           placeholder="Pourquoi Li-CUBE PRO™ surpasse la concurrence" value="Pourquoi Li-CUBE PRO™ surpasse la concurrence">
+                </div>
+
+                <!-- Faiblesses de la concurrence -->
+                <div class="edit-field">
+                    <label class="field-label" for="weakness-title">Titre faiblesses concurrence</label>
+                    <p class="field-description">Titre de la section des faiblesses</p>
+                    <input type="text" id="weakness-title" class="field-input" data-field="weakness-title" 
+                           placeholder="LEURS FAIBLESSES" value="LEURS FAIBLESSES">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="weakness1">Faiblesse 1</label>
+                    <p class="field-description">Première faiblesse de la concurrence</p>
+                    <input type="text" id="weakness1" class="field-input" data-field="weakness1" 
+                           placeholder="❌ Batterie au plomb (lourde, toxique)" value="❌ Batterie au plomb (lourde, toxique)">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="weakness2">Faiblesse 2</label>
+                    <p class="field-description">Deuxième faiblesse de la concurrence</p>
+                    <input type="text" id="weakness2" class="field-input" data-field="weakness2" 
+                           placeholder="❌ Pas de monitoring intelligent" value="❌ Pas de monitoring intelligent">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="weakness3">Faiblesse 3</label>
+                    <p class="field-description">Troisième faiblesse de la concurrence</p>
+                    <input type="text" id="weakness3" class="field-input" data-field="weakness3" 
+                           placeholder="❌ Maintenance réactive (pas prédictive)" value="❌ Maintenance réactive (pas prédictive)">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="weakness4">Faiblesse 4</label>
+                    <p class="field-description">Quatrième faiblesse de la concurrence</p>
+                    <input type="text" id="weakness4" class="field-input" data-field="weakness4" 
+                           placeholder="❌ Support technique limité" value="❌ Support technique limité">
+                </div>
+
+                <!-- Forces de Li-CUBE PRO -->
+                <div class="edit-field">
+                    <label class="field-label" for="strength-title">Titre forces Li-CUBE PRO</label>
+                    <p class="field-description">Titre de la section des avantages</p>
+                    <input type="text" id="strength-title" class="field-input" data-field="strength-title" 
+                           placeholder="NOS AVANTAGES" value="NOS AVANTAGES">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="strength1">Force 1</label>
+                    <p class="field-description">Premier avantage Li-CUBE PRO</p>
+                    <input type="text" id="strength1" class="field-input" data-field="strength1" 
+                           placeholder="✅ Lithium LiFePO4 (léger, écologique)" value="✅ Lithium LiFePO4 (léger, écologique)">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="strength2">Force 2</label>
+                    <p class="field-description">Deuxième avantage Li-CUBE PRO</p>
+                    <input type="text" id="strength2" class="field-input" data-field="strength2" 
+                           placeholder="✅ IoT intégré + Intelligence prédictive" value="✅ IoT intégré + Intelligence prédictive">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="strength3">Force 3</label>
+                    <p class="field-description">Troisième avantage Li-CUBE PRO</p>
+                    <input type="text" id="strength3" class="field-input" data-field="strength3" 
+                           placeholder="✅ Maintenance prédictive 24/7" value="✅ Maintenance prédictive 24/7">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="strength4">Force 4</label>
+                    <p class="field-description">Quatrième avantage Li-CUBE PRO</p>
+                    <input type="text" id="strength4" class="field-input" data-field="strength4" 
+                           placeholder="✅ Support technique expert premium" value="✅ Support technique expert premium">
+                </div>
+
+                <!-- Conclusion technique -->
+                <div class="edit-field">
+                    <label class="field-label" for="tech-conclusion">Conclusion technique</label>
+                    <p class="field-description">Résumé des avantages techniques décisifs</p>
+                    <textarea id="tech-conclusion" class="field-input field-textarea" data-field="tech-conclusion" 
+                              placeholder="Li-CUBE PRO™ n'est pas juste une batterie...">Li-CUBE PRO™ n'est pas juste une batterie : c'est un système énergétique intelligent du 21ème siècle. Pendant que la concurrence vend encore des technologies du passé, nous livrons l'avenir énergétique aujourd'hui.</textarea>
                 </div>
             </div>
         </section>
@@ -744,6 +1111,121 @@
                     <p class="field-description">Conclusion choc avec chiffres TCO</p>
                     <textarea id="comparison-conclusion" class="field-input field-textarea" data-field="comparison-conclusion" 
                               placeholder="Conclusion implacable : Li-CUBE PRO™...">Conclusion implacable : Li-CUBE PRO™ 150$/mois en location vs Ni-Cd 1200$/an en remplacement → 85% d'économies + performance supérieure !</textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Conclusion et Appel à l'Action -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-flag-checkered"></i>
+                Conclusion et Appel à l'Action Final
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="final-title">Titre conclusion finale</label>
+                    <p class="field-description">Message final percutant</p>
+                    <input type="text" id="final-title" class="field-input" data-field="final-title" 
+                           placeholder="LE CHOIX EST ÉVIDENT" value="LE CHOIX EST ÉVIDENT">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="final-message">Message conclusion</label>
+                    <p class="field-description">Résumé des bénéfices décisifs</p>
+                    <textarea id="final-message" class="field-input field-textarea" data-field="final-message" 
+                              placeholder="Pourquoi risquer avec des technologies obsolètes...">Pourquoi risquer avec des technologies obsolètes ? Li-CUBE PRO™ en location vous offre le meilleur des deux mondes : technologie de pointe + risque zéro. Pendant que vos concurrents subissent pannes et remplacements, vous fonctionnez sereinement.</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="urgency-message">Message d'urgence</label>
+                    <p class="field-description">Incitation à l'action immédiate</p>
+                    <input type="text" id="urgency-message" class="field-input" data-field="urgency-message" 
+                           placeholder="NE LAISSEZ PAS LA CONCURRENCE PRENDRE L'AVANTAGE !" value="NE LAISSEZ PAS LA CONCURRENCE PRENDRE L'AVANTAGE !">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="cta-final">Appel à l'action final</label>
+                    <p class="field-description">Demande d'action concrète</p>
+                    <textarea id="cta-final" class="field-input field-textarea" data-field="cta-final" 
+                              placeholder="Appelez maintenant...">Appelez maintenant 819-323-LOCA ou écrivez à location@edsquebec.com
+Votre devis personnalisé sous 24h, installation sous 48h.
+L'énergie fiable, c'est maintenant ou jamais !</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="signature">Signature EDS</label>
+                    <p class="field-description">Signature professionnelle finale</p>
+                    <textarea id="signature" class="field-input field-textarea" data-field="signature" 
+                              placeholder="EDS Québec - Votre partenaire énergétique...">EDS Québec - Votre partenaire énergétique depuis plus de 25 ans
+Solutions Batteries Lithium Li-CUBE PRO™
+Fabrication et Support 100% Québécois</textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Conclusion Comparative -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-trophy"></i>
+                Conclusion Finale Comparative
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="conclusion-title">Titre conclusion comparative</label>
+                    <p class="field-description">Titre de la conclusion finale</p>
+                    <input type="text" id="conclusion-title" class="field-input" data-field="conclusion-title" 
+                           placeholder="RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !" 
+                           value="RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="conclusion-text">Texte conclusion</label>
+                    <p class="field-description">Explication détaillée de la supériorité économique</p>
+                    <textarea id="conclusion-text" class="field-input field-textarea" data-field="conclusion-text" 
+                              placeholder="Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd...">Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-title">Titre section contact final</label>
+                    <p class="field-description">Titre de la section contact finale</p>
+                    <input type="text" id="contact-title" class="field-input" data-field="contact-title" 
+                           placeholder="CLOSING - ARGUMENTS FINAUX LOCATION" value="CLOSING - ARGUMENTS FINAUX LOCATION">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-subtitle">Sous-titre contact final</label>
+                    <p class="field-description">Message de renforcement final</p>
+                    <textarea id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
+                              placeholder="Votre équipe commerciale dispose maintenant...">Votre équipe commerciale dispose maintenant de TOUS les arguments techniques et économiques pour conclure la location Li-CUBE PRO™</textarea>
+                </div>
+
+                <!-- Boutons d'action finaux -->
+                <div class="edit-field">
+                    <label class="field-label" for="btn-phone-text">Texte bouton téléphone</label>
+                    <p class="field-description">Texte du bouton d'action téléphone</p>
+                    <input type="text" id="btn-phone-text" class="field-input" data-field="btn-phone-text" 
+                           placeholder="CONCLURE LA VENTE" value="CONCLURE LA VENTE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="btn-email-text">Texte bouton email</label>
+                    <p class="field-description">Texte du bouton d'action email</p>
+                    <input type="text" id="btn-email-text" class="field-input" data-field="btn-email-text" 
+                           placeholder="PRÉPARER CONTRAT" value="PRÉPARER CONTRAT">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="phone-number">Numéro de téléphone</label>
+                    <p class="field-description">Numéro de téléphone pour le bouton d'action</p>
+                    <input type="tel" id="phone-number" class="field-input" data-field="phone-number" 
+                           placeholder="8193235622" value="8193235622">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="email-address">Adresse email</label>
+                    <p class="field-description">Adresse email pour le bouton d'action</p>
+                    <input type="email" id="email-address" class="field-input" data-field="email-address" 
+                           placeholder="location@edsquebec.com" value="location@edsquebec.com">
                 </div>
             </div>
         </section>
