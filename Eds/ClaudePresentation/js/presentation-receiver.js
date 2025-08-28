@@ -313,6 +313,99 @@ class PresentationReceiver {
                 console.log(`📄 Meta description mise à jour: ${value}`);
             }
         }
+
+        // Gestion : images avec chemins dynamiques
+        this.updateImageFields(fieldName, value);
+    }
+
+    /**
+     * Mise à jour : images avec chemins dynamiques
+     * @param {string} fieldName - Nom du champ image
+     * @param {string} imagePath - Nouveau chemin de l'image
+     */
+    updateImageFields(fieldName, imagePath) {
+        // Correspondance : nom de champ vers sélecteur d'attribut
+        const imageFieldMappings = {
+            'logo-path': 'logo-path',
+            'product-image-path': 'product-image-path',
+            'competitor-image-path': 'competitor-image-path',
+            'company-image-path': 'company-image-path'
+        };
+
+        // Vérification : est-ce un champ d'image reconnu
+        if (imageFieldMappings[fieldName]) {
+            const imageElements = document.querySelectorAll(`[data-image-field="${imageFieldMappings[fieldName]}"]`);
+            
+            imageElements.forEach(element => {
+                // Mise à jour : background-image via CSS
+                const newImageUrl = `url('${imagePath}')`;
+                element.style.backgroundImage = newImageUrl;
+                
+                // Animation : effet visuel de changement
+                this.animateImageUpdate(element);
+                
+                console.log(`🖼️ Image mise à jour: ${fieldName} → ${imagePath}`);
+            });
+        }
+
+        // Gestion spéciale : images dans les règles CSS existantes
+        this.updateCSSImageRules(fieldName, imagePath);
+    }
+
+    /**
+     * Mise à jour : règles CSS avec images
+     * @param {string} fieldName - Nom du champ image
+     * @param {string} imagePath - Nouveau chemin de l'image
+     */
+    updateCSSImageRules(fieldName, imagePath) {
+        // Recherche : feuilles de style pour mise à jour dynamique
+        const styleSheets = document.styleSheets;
+        
+        try {
+            for (let i = 0; i < styleSheets.length; i++) {
+                const styleSheet = styleSheets[i];
+                if (!styleSheet.cssRules) continue;
+                
+                for (let j = 0; j < styleSheet.cssRules.length; j++) {
+                    const rule = styleSheet.cssRules[j];
+                    
+                    // Mise à jour : logo EDS dans .nav-logo
+                    if (fieldName === 'logo-path' && rule.selectorText && rule.selectorText.includes('.nav-logo')) {
+                        rule.style.backgroundImage = `url('${imagePath}')`;
+                        console.log(`📝 CSS rule mise à jour: .nav-logo → ${imagePath}`);
+                    }
+                    
+                    // Mise à jour : produit dans .product-showcase
+                    if (fieldName === 'product-image-path' && rule.selectorText && rule.selectorText.includes('.product-showcase')) {
+                        rule.style.backgroundImage = `url('${imagePath}')`;
+                        console.log(`📝 CSS rule mise à jour: .product-showcase → ${imagePath}`);
+                    }
+                }
+            }
+        } catch (error) {
+            // Fallback : si l'accès aux CSS rules échoue (CORS, etc.)
+            console.warn('⚠️ Impossible de mettre à jour les CSS rules, utilisation du style inline uniquement');
+        }
+    }
+
+    /**
+     * Animation : effet visuel pour changement d'image
+     * @param {HTMLElement} element - Élément image modifié
+     */
+    animateImageUpdate(element) {
+        // Animation : effet de flash pour indiquer le changement d'image
+        const originalFilter = element.style.filter;
+        const originalTransform = element.style.transform;
+        
+        element.style.filter = 'brightness(1.3) saturate(1.2)';
+        element.style.transform = 'scale(1.05)';
+        element.style.transition = 'all 0.5s ease';
+        
+        // Restauration : état normal après animation
+        setTimeout(() => {
+            element.style.filter = originalFilter;
+            element.style.transform = originalTransform;
+        }, 600);
     }
 
     /**
@@ -342,6 +435,9 @@ class PresentationReceiver {
                     updatedCount++;
                 }
             });
+
+            // Traitement spécial : champs d'images et autres champs spéciaux
+            this.handleSpecialFields(fieldName, value);
         });
         
         if (updatedCount > 0) {
