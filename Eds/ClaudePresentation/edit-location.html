@@ -764,29 +764,46 @@
         </div>
     </footer>
 
+    <!-- Système de Synchronisation Instantanée Li-CUBE PRO™ - DOIT SE CHARGER EN PREMIER -->
+    <script src="js/instant-sync.js"></script>
+
     <script>
         // Interface Éditeur LOCATION - Synchronisation Instantanée
         document.addEventListener('DOMContentLoaded', function() {
             console.log('✅ Éditeur LOCATION Li-CUBE PRO™ avec Synchronisation Instantanée activé');
             
+            // Attente : initialisation complète d'InstantSync
+            function waitForInstantSync(callback) {
+                if (window.instantSync && window.instantSync.isInitialized) {
+                    callback();
+                } else {
+                    console.log('⏳ Attente initialisation InstantSync...');
+                    setTimeout(() => waitForInstantSync(callback), 100);
+                }
+            }
+            
             // Fonction : synchronisation manuelle + ouverture de la page de présentation
             window.togglePreview = function() {
                 console.log('🔄 Prévisualisation LOCATION - Déclenchement synchronisation manuelle...');
                 
-                // Déclenchement : synchronisation manuelle immédiate
-                if (window.instantSync) {
-                    // Force : synchronisation complète avant prévisualisation
-                    window.instantSync.executeInstantSync(true); // true = forcer sync complète
-                    console.log('✅ Synchronisation manuelle LOCATION terminée');
-                } else {
-                    console.warn('⚠️ InstantSync non disponible pour synchronisation manuelle');
-                }
-                
-                // Ouverture : page de présentation après synchronisation
-                setTimeout(() => {
-                    window.open('location.html', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
-                    console.log('👁️ Page de présentation LOCATION ouverte');
-                }, 100); // Délai court pour assurer la synchronisation
+                waitForInstantSync(() => {
+                    // Déclenchement : synchronisation manuelle immédiate
+                    if (window.instantSync) {
+                        // Force : synchronisation complète avant prévisualisation
+                        window.instantSync.executeInstantSync(true); // true = forcer sync complète
+                        console.log('✅ Synchronisation manuelle LOCATION terminée');
+                        
+                        // Ouverture : page de présentation après synchronisation
+                        setTimeout(() => {
+                            window.open('location.html', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+                            console.log('👁️ Page de présentation LOCATION ouverte');
+                        }, 200); // Délai pour assurer la synchronisation
+                    } else {
+                        console.error('❌ InstantSync non disponible pour synchronisation manuelle');
+                        // Ouverture sans sync en cas d'échec
+                        window.open('location.html', '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+                    }
+                });
             };
             
             // Validation : formats email et téléphone
@@ -844,9 +861,6 @@
             return phoneRegex.test(phone);
         }
     </script>
-    
-    <!-- Système de Synchronisation Instantanée Li-CUBE PRO™ -->
-    <script src="js/instant-sync.js"></script>
     
     <!-- Systèmes Avancés Li-CUBE PRO™ -->
     <link rel="stylesheet" href="css/advanced-style-editor.css">
