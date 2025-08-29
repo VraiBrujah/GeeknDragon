@@ -1824,6 +1824,70 @@
                               placeholder="Comparaison technique objective...">Comparaison technique objective : Pourquoi Li-CUBE PRO™ surclasse totalement les anciennes batteries Ni-Cd</textarea>
                 </div>
 
+                <!-- EMOJIS ÉDITABLES POUR LA SECTION COMPARAISON -->
+                <div style="grid-column: span 2; background: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                    <h3 style="color: var(--accent-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-smile"></i> Emojis Personnalisables (Synchronisation Temps Réel)
+                    </h3>
+                    
+                    <!-- Rôle : Configuration des emojis de titres de colonnes -->
+                    <!-- Responsabilité : Personnalisation des symboles visuels -->
+                    <!-- Synchronisation : Modification instantanée dans la page de présentation -->
+                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness-title-emoji">Emoji Titre Concurrent</label>
+                            <p class="field-description">Emoji affiché devant "Batteries Ni-Cd"</p>
+                            <input type="text" id="weakness-title-emoji" class="field-input" data-field="weakness-title-emoji" 
+                                   placeholder="❌" value="❌" maxlength="2" style="font-size: 1.2rem;">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength-title-emoji">Emoji Titre Principal</label>
+                            <p class="field-description">Emoji affiché devant "Li-CUBE PRO™"</p>
+                            <input type="text" id="strength-title-emoji" class="field-input" data-field="strength-title-emoji" 
+                                   placeholder="✅" value="✅" maxlength="2" style="font-size: 1.2rem;">
+                        </div>
+                    </div>
+
+                    <!-- Rôle : Grille des emojis de faiblesses (11 emojis) -->
+                    <!-- Structure : Grille compacte 4x3 pour économiser l'espace -->
+                    <h4 style="color: var(--warning-red); margin-bottom: 0.8rem;">Emojis Faiblesses Concurrent (11)</h4>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1.5rem;">
+                        <input type="text" class="field-input" data-field="weakness1-emoji" placeholder="☠️" value="☠️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 1">
+                        <input type="text" class="field-input" data-field="weakness2-emoji" placeholder="🔧" value="🔧" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 2">
+                        <input type="text" class="field-input" data-field="weakness3-emoji" placeholder="⏳" value="⏳" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 3">
+                        <input type="text" class="field-input" data-field="weakness4-emoji" placeholder="🏋️" value="🏋️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 4">
+                        <input type="text" class="field-input" data-field="weakness5-emoji" placeholder="🐌" value="🐌" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 5">
+                        <input type="text" class="field-input" data-field="weakness6-emoji" placeholder="📵" value="📵" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 6">
+                        <input type="text" class="field-input" data-field="weakness7-emoji" placeholder="⚖️" value="⚖️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 7">
+                        <input type="text" class="field-input" data-field="weakness8-emoji" placeholder="🧠" value="🧠" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 8">
+                        <input type="text" class="field-input" data-field="weakness9-emoji" placeholder="📊" value="📊" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 9">
+                        <input type="text" class="field-input" data-field="weakness10-emoji" placeholder="💸" value="💸" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 10">
+                        <input type="text" class="field-input" data-field="weakness11-emoji" placeholder="🔄" value="🔄" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 11">
+                    </div>
+
+                    <!-- Rôle : Grille des emojis d'avantages (12 emojis) -->
+                    <!-- Structure : Grille compacte 4x3 pour économiser l'espace -->
+                    <h4 style="color: var(--success-green); margin-bottom: 0.8rem;">Emojis Avantages Principal (12)</h4>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;">
+                        <input type="text" class="field-input" data-field="strength1-emoji" placeholder="🔋" value="🔋" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 1">
+                        <input type="text" class="field-input" data-field="strength2-emoji" placeholder="🛡️" value="🛡️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 2">
+                        <input type="text" class="field-input" data-field="strength3-emoji" placeholder="📡" value="📡" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 3">
+                        <input type="text" class="field-input" data-field="strength4-emoji" placeholder="⚡" value="⚡" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 4">
+                        <input type="text" class="field-input" data-field="strength5-emoji" placeholder="🌡️" value="🌡️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 5">
+                        <input type="text" class="field-input" data-field="strength6-emoji" placeholder="🍃" value="🍃" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 6">
+                        <input type="text" class="field-input" data-field="strength7-emoji" placeholder="🛡️" value="🛡️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 7">
+                        <input type="text" class="field-input" data-field="strength8-emoji" placeholder="💰" value="💰" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 8">
+                        <input type="text" class="field-input" data-field="strength9-emoji" placeholder="🇨🇦" value="🇨🇦" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 9">
+                        <input type="text" class="field-input" data-field="strength10-emoji" placeholder="📦" value="📦" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 10">
+                        <input type="text" class="field-input" data-field="strength11-emoji" placeholder="🔋" value="🔋" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 11">
+                        <input type="text" class="field-input" data-field="strength12-emoji" placeholder="💵" value="💵" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 12">
+                    </div>
+
+                    <p style="color: var(--text-gray); font-style: italic; margin-top: 1rem; font-size: 0.9rem;">
+                        <i class="fas fa-sync-alt"></i> Synchronisation temps réel : Modifiez un emoji ici pour le voir changer instantanément dans la présentation
+                    </p>
+                </div>
+
                 <!-- COMPARAISON EN 2 COLONNES (comme dans location.html) -->
                 
                 <!-- COLONNE GAUCHE : Faiblesses du Concurrent (❌) -->
@@ -2469,7 +2533,41 @@ Fabrication et Support 100% Québécois</textarea>
             vsLetterSpacing: 0.15,
             
             // Chemin logo (déjà géré mais ajouté pour cohérence)
-            'logo-path': './images/logo edsquebec.png'
+            'logo-path': './images/logo edsquebec.png',
+            
+            // Rôle : Emojis éditables pour la section comparaison technique
+            // Type : string (caractères Unicode emoji)
+            // Domaine : emojis valides Unicode (généralement 1-2 caractères)
+            // Usage : Personnalisation des icônes de comparaison avec synchronisation temps réel
+            'weakness-title-emoji': '❌',
+            'strength-title-emoji': '✅',
+            
+            // Emojis des faiblesses du concurrent (weakness)
+            'weakness1-emoji': '☠️',
+            'weakness2-emoji': '🔧',
+            'weakness3-emoji': '⏳',
+            'weakness4-emoji': '🏋️',
+            'weakness5-emoji': '🐌',
+            'weakness6-emoji': '📵',
+            'weakness7-emoji': '⚖️',
+            'weakness8-emoji': '🧠',
+            'weakness9-emoji': '📊',
+            'weakness10-emoji': '💸',
+            'weakness11-emoji': '🔄',
+            
+            // Emojis des avantages du produit principal (strength)
+            'strength1-emoji': '🔋',
+            'strength2-emoji': '🛡️',
+            'strength3-emoji': '📡',
+            'strength4-emoji': '⚡',
+            'strength5-emoji': '🌡️',
+            'strength6-emoji': '🍃',
+            'strength7-emoji': '🛡️',
+            'strength8-emoji': '💰',
+            'strength9-emoji': '🇨🇦',
+            'strength10-emoji': '📦',
+            'strength11-emoji': '🔋',
+            'strength12-emoji': '💵'
         };
 
         // Fonction de basculement de l'éditeur
