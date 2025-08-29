@@ -592,6 +592,54 @@ class InstantSync {
     }
 
     /**
+     * Exportation : crée un fichier JSON téléchargeable contenant les données enregistrées
+     */
+    exportContent() {
+        try {
+            const data = localStorage.getItem(this.storageKey);
+            const blob = new Blob([data ?? '{}'], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${this.storageKey}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Erreur exportation:', error);
+        }
+    }
+
+    /**
+     * Importation : charge un fichier JSON, met à jour localStorage puis applique les valeurs
+     * @param {File} file - Fichier JSON contenant les données sauvegardées
+     */
+    importContent(file) {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            try {
+                const content = JSON.parse(e.target.result);
+                localStorage.setItem(this.storageKey, JSON.stringify(content));
+
+                const fields = document.querySelectorAll('[data-field]');
+                fields.forEach(field => {
+                    const name = field.dataset.field;
+                    if (content[name] !== undefined) {
+                        this.applyValueToField(field, content[name]);
+                        this.fieldValues.set(name, content[name]);
+                    }
+                });
+
+                await this.executeFullSync();
+            } catch (error) {
+                console.error('Erreur importation:', error);
+            }
+        };
+        reader.readAsText(file);
+    }
+
+    /**
      * Statistiques : informations sur la synchronisation
      * @return {Object} - Statistiques détaillées
      */

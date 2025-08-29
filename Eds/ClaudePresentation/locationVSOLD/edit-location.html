@@ -653,6 +653,15 @@
                     <i class="fas fa-sync"></i>
                     Synchroniser & Prévisualiser
                 </button>
+                <button class="btn btn-save" onclick="window.instantSync.exportContent()">
+                    <i class="fas fa-download"></i>
+                    Exporter
+                </button>
+                <label for="import-file" class="btn btn-preview">
+                    <i class="fas fa-upload"></i>
+                    Importer
+                </label>
+                <input type="file" id="import-file" accept="application/json" style="display:none" onchange="handleImport(event)">
             </div>
         </div>
     </header>
@@ -2513,12 +2522,28 @@ Fabrication et Support 100% Québécois</textarea>
             
             // Validation : formats email et téléphone
             setupFieldValidation();
-            
-            // Raccourci : Ctrl+P pour prévisualisation
+
+            // Importation : gestion du fichier sélectionné via le champ caché
+            window.handleImport = function(event) {
+                const file = event.target.files[0];
+                if (file && window.instantSync) {
+                    window.instantSync.importContent(file);
+                }
+            };
+
+            // Raccourcis clavier : Prévisualiser (Ctrl+P), Exporter (Ctrl+E), Importer (Ctrl+I)
             document.addEventListener('keydown', function(event) {
                 if (event.ctrlKey && event.key === 'p') {
                     event.preventDefault();
                     togglePreview();
+                } else if (event.ctrlKey && event.key === 'e') {
+                    event.preventDefault();
+                    if (window.instantSync) {
+                        window.instantSync.exportContent();
+                    }
+                } else if (event.ctrlKey && event.key === 'i') {
+                    event.preventDefault();
+                    document.getElementById('import-file').click();
                 }
             });
             
