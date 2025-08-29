@@ -1043,19 +1043,6 @@
                            placeholder="./images/logo edsquebec.png" value="./images/logo edsquebec.png">
                 </div>
                 
-                <div class="edit-field">
-                    <label class="field-label" for="product-image-path">Chemin image produit principal</label>
-                    <p class="field-description">Chemin vers l'image du produit principal dans la section héro</p>
-                    <input type="text" id="product-image-path" class="field-input" data-field="product-image-path" 
-                           placeholder="./images/Li-CUBE PRO.png" value="./images/Li-CUBE PRO.png">
-                </div>
-                
-                <div class="edit-field">
-                    <label class="field-label" for="competitor-image-path">Chemin image produit concurrent</label>
-                    <p class="field-description">Chemin vers l'image du produit concurrent obsolète</p>
-                    <input type="text" id="competitor-image-path" class="field-input" data-field="competitor-image-path" 
-                           placeholder="./images/NiCd.png" value="./images/NiCd.png">
-                </div>
                 
                 <div class="edit-field">
                     <label class="field-label" for="company-image-path">Chemin image entreprise</label>
@@ -1144,23 +1131,46 @@
                     </div>
                 </div>
 
-                <!-- COLONNE DROITE : Visuel (comme dans location.html) -->
+                <!-- COLONNE DROITE : Gestion des Images (comme dans location.html) -->
                 <div style="grid-column: span 2; background: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 1.5rem;">
                     <h3 style="color: var(--accent-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-image"></i> Élément Visuel (Colonne Droite)
+                        <i class="fas fa-image"></i> Gestion des Images (Colonne Droite)
                     </h3>
                     
-                    <p style="color: var(--text-gray); font-style: italic; margin-bottom: 1rem;">
-                        Image du produit chargée automatiquement via CSS depuis ./images/Li-CUBE PRO.png
-                    </p>
-                    
-                    <div class="edit-field" style="opacity: 0.6;">
-                        <label class="field-label">Info technique</label>
-                        <p class="field-description" style="color: var(--text-gray);">
-                            L'image est définie dans le CSS via background-image. 
-                            Animation float automatique active.
-                        </p>
+                    <!-- Rôle : Configuration des chemins d'images pour la section héro -->
+                    <!-- Type : input text (chemin de fichier) -->
+                    <!-- Domaine : chemins relatifs vers images (.png, .jpg, .jpeg, .webp, .svg) -->
+                    <!-- Usage : définir les images affichées dans la présentation héro -->
+                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="edit-field">
+                            <label class="field-label" for="product-image-path">Chemin image produit principal</label>
+                            <p class="field-description">Chemin vers l'image du produit principal dans la section héro</p>
+                            <input type="text" id="product-image-path" class="field-input" data-field="product-image-path" 
+                                   placeholder="./images/Li-CUBE PRO.png" value="./images/Li-CUBE PRO.png">
+                        </div>
+
+                        <div class="edit-field">
+                            <label class="field-label" for="competitor-image-path">Chemin image produit concurrent</label>
+                            <p class="field-description">Chemin vers l'image du produit concurrent pour comparaison</p>
+                            <input type="text" id="competitor-image-path" class="field-input" data-field="competitor-image-path" 
+                                   placeholder="./images/concurrent.png" value="./images/concurrent.png">
+                        </div>
                     </div>
+
+                    <!-- Rôle : Élément visuel VS pour la comparaison -->
+                    <!-- Type : input text (texte court) -->
+                    <!-- Domaine : texte de 1-10 caractères (généralement "VS" ou équivalent) -->
+                    <!-- Usage : séparateur visuel entre les deux produits comparés -->
+                    <div class="edit-field">
+                        <label class="field-label" for="vs-element-text">Texte élément VS</label>
+                        <p class="field-description">Texte affiché entre les deux images (produit vs concurrent)</p>
+                        <input type="text" id="vs-element-text" class="field-input" data-field="vs-element-text" 
+                               placeholder="VS" value="VS" maxlength="10">
+                    </div>
+
+                    <p style="color: var(--text-gray); font-style: italic; margin-top: 1rem; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> Les images seront affichées côte à côte dans la présentation avec l'élément VS au centre
+                    </p>
                 </div>
             </div>
         </section>
@@ -2392,7 +2402,18 @@ Fabrication et Support 100% Québécois</textarea>
             // Spacing Global
             sectionPadding: 64,
             containerMaxWidth: 1400,
-            gridGap: 32
+            gridGap: 32,
+            
+            // Rôle : Chemins d'images pour la comparaison de produits
+            // Type : string (chemin relatif vers fichier image)
+            // Domaine : chemins valides vers images (.png, .jpg, .jpeg, .webp, .svg)
+            // Usage : Synchronisation temps réel des images entre éditeur et présentation
+            'product-image-path': './images/Li-CUBE PRO.png',
+            'competitor-image-path': './images/concurrent.png',
+            'vs-element-text': 'VS',
+            
+            // Chemin logo (déjà géré mais ajouté pour cohérence)
+            'logo-path': './images/logo edsquebec.png'
         };
 
         // Fonction de basculement de l'éditeur
@@ -2899,6 +2920,21 @@ Fabrication et Support 100% Québécois</textarea>
                 }
                 .pricing-grid, .rental-benefits {
                     gap: ${styles.gridGap}px !important;
+                }
+                
+                /* Rôle : Images dynamiques pour la comparaison produits */
+                /* Synchronisation : Chemins d'images modifiables depuis l'éditeur */
+                /* Responsabilité : Mise à jour en temps réel des background-image */
+                .product-showcase {
+                    background-image: url('${styles['product-image-path'] || './images/Li-CUBE PRO.png'}') !important;
+                }
+                .competitor-showcase {
+                    background-image: url('${styles['competitor-image-path'] || './images/concurrent.png'}') !important;
+                }
+                
+                /* Rôle : Gestion du logo dynamique (déjà existant mais maintenu pour cohérence) */
+                .nav-logo {
+                    background-image: url('${styles['logo-path'] || './images/logo edsquebec.png'}') !important;
                 }
             `;
         }

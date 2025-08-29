@@ -231,6 +231,98 @@
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
         
+        /* Rôle : Container pour la comparaison produits (principal vs concurrent) */
+        /* Structure : Flexbox horizontal avec 3 éléments alignés au centre */
+        /* Responsive : Passage en colonne sur mobile avec gap adaptatif */
+        .product-comparison-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Rôle : Styles spécifiques pour l'image concurrent */
+        /* Héritage : Basé sur .product-showcase mais avec image différente */
+        /* Synchronisation : Image changée dynamiquement via data-field */
+        .competitor-showcase {
+            width: 500px; height: 400px; background: var(--gradient-blue);
+            border-radius: 24px; position: relative; overflow: hidden;
+            box-shadow: var(--shadow-lg); animation: float 6s ease-in-out infinite 3s;
+            background-image: url('./images/concurrent.png');
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+            border: 3px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Rôle : Effet de brillance sur l'image concurrent */
+        /* Décalage : Animation démarrée avec 2s de délai par rapport au produit principal */
+        .competitor-showcase::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 4s infinite 2s;
+        }
+        
+        /* Rôle : Élément séparateur VS entre les deux produits */
+        /* Design : Badge circulaire avec dégradé et animation pulsante */
+        /* Éditable : Texte modifiable via système d'édition */
+        .vs-element {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            border-radius: 50%;
+            box-shadow: var(--shadow-lg);
+            animation: pulse-vs 2s ease-in-out infinite;
+            position: relative;
+            z-index: 10;
+            border: 4px solid var(--surface-light);
+        }
+        
+        /* Rôle : Animation pulsante pour l'élément VS */
+        /* Effet : Changement d'échelle et d'ombre pour attirer l'attention */
+        @keyframes pulse-vs {
+            0%, 100% { transform: scale(1); box-shadow: var(--shadow-lg); }
+            50% { transform: scale(1.1); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        }
+        
+        /* Rôle : Texte VS à l'intérieur du badge */
+        /* Design : Police bold, couleur blanche, centré */
+        /* Éditable : Compatible avec le système d'édition inline */
+        .vs-text {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 0.1em;
+        }
+        
+        /* Rôle : Responsive design pour écrans mobiles */
+        /* Comportement : Réduction des tailles et passage en colonne */
+        @media (max-width: 768px) {
+            .product-comparison-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .competitor-showcase {
+                width: 350px;
+                height: 280px;
+            }
+            
+            .vs-element {
+                width: 100px;
+                height: 100px;
+                order: 1;
+            }
+            
+            .vs-text {
+                font-size: 1.5rem;
+            }
+        }
+        
         /* Section Tarifs */
         .pricing-section {
             background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--primary-dark) 100%);
@@ -766,8 +858,24 @@
                 </div>
                 
                 <div class="hero-visual">
-                    <div class="product-showcase animate-on-scroll" data-image-field="product-image-path">
-                        <!-- Image Li-CUBE PRO automatiquement chargée via CSS -->
+                    <!-- Rôle : Section comparative des produits (principal vs concurrent) -->
+                    <!-- Structure : Flex container avec 3 éléments (image1 + VS + image2) -->
+                    <!-- Responsabilité : Affichage visuel de la comparaison produits -->
+                    <div class="product-comparison-container">
+                        <!-- Produit principal (Li-CUBE PRO) -->
+                        <div class="product-showcase animate-on-scroll" data-image-field="product-image-path">
+                            <!-- Image produit principal chargée via CSS -->
+                        </div>
+                        
+                        <!-- Élément séparateur VS éditable -->
+                        <div class="vs-element">
+                            <span class="editable vs-text" data-field="vs-element-text">VS</span>
+                        </div>
+                        
+                        <!-- Produit concurrent -->
+                        <div class="competitor-showcase animate-on-scroll" data-image-field="competitor-image-path">
+                            <!-- Image produit concurrent chargée via CSS -->
+                        </div>
                     </div>
                 </div>
             </div>
