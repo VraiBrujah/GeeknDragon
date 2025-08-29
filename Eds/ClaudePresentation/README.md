@@ -281,6 +281,18 @@ Activer les logs détaillés :
 LiveSync.configure({ enableDebug: true });
 ```
 
+## 💾 Sauvegarde avant modification
+
+Avant toute intervention sur les fichiers HTML, créer un dossier `backup/` pour conserver les versions originales.
+
+```bash
+mkdir -p backup
+cp Eds/ClaudePresentation/locationVSOLD/location.html backup/location.html
+cp Eds/ClaudePresentation/locationVSOLD/edit-location.html backup/edit-location.html
+```
+
+Ces copies permettent de restaurer rapidement l'état initial en cas d'erreur lors des modifications.
+
 ## 📧 Support
 
 Pour toute question ou assistance :
