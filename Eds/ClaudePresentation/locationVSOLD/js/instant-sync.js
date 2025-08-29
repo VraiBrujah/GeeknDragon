@@ -371,14 +371,18 @@ class InstantSync {
      */
     extractFieldValue(field) {
         const tagName = field.tagName.toLowerCase();
-        
+
+        if (field.classList.contains('section-spacer') || field.classList.contains('header-spacer')) {
+            return parseInt(field.style.height) || '';
+        }
+
         if (tagName === 'input' || tagName === 'textarea') {
             return field.value || '';
-        } else if (field.contentEditable === 'true') {
-            return field.textContent || '';
-        } else {
-            return field.textContent || field.innerText || '';
         }
+        if (field.contentEditable === 'true') {
+            return field.textContent || '';
+        }
+        return field.textContent || field.innerText || '';
     }
 
     /**

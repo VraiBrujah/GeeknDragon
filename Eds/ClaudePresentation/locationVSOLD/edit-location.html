@@ -2322,7 +2322,7 @@ Location Li-CUBE PRO™ = <strong>La tranquillité absolue</strong> avec technol
                         </button>
                         <div class="section-spacer-control">
                             <label for="conclusionActionSpacing">Espacement (px):</label>
-                            <input type="number" id="conclusionActionSpacing" class="section-spacing-input" data-field="conclusionActionSpacerHeight" 
+                            <input type="number" id="conclusionActionSpacing" class="section-spacing-input" data-field="contact-conclusionAction-spacer"
                                    value="0" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -2387,7 +2387,7 @@ Fabrication et Support 100% Québécois</textarea>
                         </button>
                         <div class="section-spacer-control">
                             <label for="conclusionComparativeSpacing">Espacement (px):</label>
-                            <input type="number" id="conclusionComparativeSpacing" class="section-spacing-input" data-field="conclusionComparativeSpacerHeight" 
+                            <input type="number" id="conclusionComparativeSpacing" class="section-spacing-input" data-field="conclusionAction-conclusionComparative-spacer"
                                    value="0" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -2589,7 +2589,7 @@ Fabrication et Support 100% Québécois</textarea>
                         </button>
                         <div class="section-spacer-control">
                             <label for="contactSpacing">Espacement (px):</label>
-                            <input type="number" id="contactSpacing" class="section-spacing-input" data-field="conclusionComparativeContactSpacerHeight" 
+                            <input type="number" id="contactSpacing" class="section-spacing-input" data-field="conclusionComparative-contact-spacer"
                                    value="0" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -2674,9 +2674,9 @@ Fabrication et Support 100% Québécois</textarea>
             heroPricingSpacerHeight: 0,
             pricingAdvantagesSpacerHeight: 0,
             advantagesComparisonSpacerHeight: 0,
-            comparisonContactSpacerHeight: 0,
-            conclusionActionSpacerHeight: 0,
-            conclusionComparativeSpacerHeight: 0,
+            contactConclusionActionSpacerHeight: 0,
+            conclusionActionConclusionComparativeSpacerHeight: 0,
+            conclusionComparativeContactSpacerHeight: 0,
             
             // Hero Section
             heroTitleSize: 72,
@@ -3211,8 +3211,14 @@ Fabrication et Support 100% Québécois</textarea>
                 .section-spacer[data-field="advantages-comparison-spacer"] {
                     height: ${styles.advantagesComparisonSpacerHeight}px !important;
                 }
-                .section-spacer[data-field="comparison-contact-spacer"] {
-                    height: ${styles.comparisonContactSpacerHeight}px !important;
+                .section-spacer[data-field="contact-conclusionAction-spacer"] {
+                    height: ${styles.contactConclusionActionSpacerHeight}px !important;
+                }
+                .section-spacer[data-field="conclusionAction-conclusionComparative-spacer"] {
+                    height: ${styles.conclusionActionConclusionComparativeSpacerHeight}px !important;
+                }
+                .section-spacer[data-field="conclusionComparative-contact-spacer"] {
+                    height: ${styles.conclusionComparativeContactSpacerHeight}px !important;
                 }
                 
                 /* Hero Section */

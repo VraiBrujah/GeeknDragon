@@ -452,14 +452,18 @@ class PresentationReceiver {
      */
     getElementValue(element) {
         const tagName = element.tagName.toLowerCase();
-        
+
+        if (element.classList.contains('section-spacer') || element.classList.contains('header-spacer')) {
+            return parseInt(element.style.height) || 0;
+        }
+
         if (tagName === 'input' || tagName === 'textarea') {
             return element.value || '';
-        } else if (element.contentEditable === 'true') {
-            return element.textContent || '';
-        } else {
-            return element.textContent || element.innerText || '';
         }
+        if (element.contentEditable === 'true') {
+            return element.textContent || '';
+        }
+        return element.textContent || element.innerText || '';
     }
 
     /**
@@ -469,8 +473,11 @@ class PresentationReceiver {
      */
     setElementValue(element, value) {
         const tagName = element.tagName.toLowerCase();
-        
-        if (tagName === 'input' || tagName === 'textarea') {
+
+        if (element.classList.contains('section-spacer') || element.classList.contains('header-spacer')) {
+            const height = parseInt(value, 10) || 0;
+            element.style.height = `${height}px`;
+        } else if (tagName === 'input' || tagName === 'textarea') {
             element.value = value;
         } else if (element.contentEditable === 'true') {
             element.innerHTML = value;
