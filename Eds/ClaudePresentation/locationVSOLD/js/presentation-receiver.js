@@ -335,15 +335,16 @@ class PresentationReceiver {
         // Vérification : est-ce un champ d'image reconnu
         if (imageFieldMappings[fieldName]) {
             const imageElements = document.querySelectorAll(`[data-image-field="${imageFieldMappings[fieldName]}"]`);
-            
+
             imageElements.forEach(element => {
-                // Mise à jour : background-image via CSS
-                const newImageUrl = `url('${imagePath}')`;
-                element.style.backgroundImage = newImageUrl;
-                
-                // Animation : effet visuel de changement
+                if (element.tagName.toLowerCase() === 'img') {
+                    element.setAttribute('src', imagePath);
+                } else {
+                    const newImageUrl = `url('${imagePath}')`;
+                    element.style.backgroundImage = newImageUrl;
+                }
+
                 this.animateImageUpdate(element);
-                
                 console.log(`🖼️ Image mise à jour: ${fieldName} → ${imagePath}`);
             });
         }
