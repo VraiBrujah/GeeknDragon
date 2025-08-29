@@ -473,9 +473,9 @@ class PresentationReceiver {
         if (tagName === 'input' || tagName === 'textarea') {
             element.value = value;
         } else if (element.contentEditable === 'true') {
-            element.textContent = value;
+            element.innerHTML = value;
         } else {
-            element.textContent = value;
+            element.innerHTML = value;
         }
         
         // Déclenchement : événements pour autres scripts
