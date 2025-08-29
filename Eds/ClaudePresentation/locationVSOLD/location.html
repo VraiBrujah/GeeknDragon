@@ -88,6 +88,15 @@
             color: var(--text-white); background: rgba(16, 185, 129, 0.15);
             transform: translateY(-2px);
         }
+
+        /* Image de l'entreprise affichée dans la présentation */
+        .company-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin: 2rem auto;
+            display: block;
+        }
         
         /* Sections espacement éditables */
         .header-spacer, .section-spacer {
@@ -863,7 +872,9 @@
                             Maintenance, monitoring, support et garantie totale inclus
                         </div>
                     </div>
-                    
+
+                    <img src="./images/edsQuebec.png" alt="Image de l'entreprise" class="company-image" data-image-field="company-image-path">
+
                     <div class="rental-benefits">
                         <div class="benefit-card animate-on-scroll">
                             <div class="benefit-icon editable" data-field="hero-arg1-icon">🛡️</div>
