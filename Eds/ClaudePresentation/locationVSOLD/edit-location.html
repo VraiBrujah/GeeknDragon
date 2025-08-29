@@ -1714,76 +1714,6 @@
             </div>
         </section>
 
-        <!-- Section Contact et Location -->
-        <section class="edit-section reorganizable-section" data-section-id="contact" data-section-order="5">
-            <h2 class="section-title">
-                <div class="section-header">
-                    <div class="section-info">
-                        <i class="fas fa-phone"></i>
-                        Contact et Mise en Service
-                    </div>
-                    <div class="section-controls">
-                        <button class="section-btn move-up" onclick="moveSectionUp('contact')" title="Monter la section">
-                            <i class="fas fa-chevron-up"></i>
-                        </button>
-                        <button class="section-btn move-down" onclick="moveSectionDown('contact')" title="Descendre la section">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="section-spacer-control">
-                            <label for="contactSpacing">Espacement (px):</label>
-                            <input type="number" id="contactSpacing" class="section-spacing-input" data-field="comparisonContactSpacerHeight" 
-                                   value="0" min="0" max="500" step="10">
-                        </div>
-                    </div>
-                </div>
-            </h2>
-            <div class="edit-grid">
-                <div class="edit-field">
-                    <label class="field-label" for="contact-title">Titre section contact</label>
-                    <p class="field-description">Appel à l'action pour louer</p>
-                    <input type="text" id="contact-title" class="field-input" data-field="contact-title" 
-                           placeholder="LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT" value="LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT">
-                </div>
-
-                <div class="edit-field">
-                    <label class="field-label" for="contact-subtitle">Sous-titre contact</label>
-                    <p class="field-description">Message de renforcement pour la location</p>
-                    <textarea id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
-                              placeholder="Zéro risque, zéro surprise...">Zéro risque, zéro surprise, performance maximale garantie</textarea>
-                </div>
-
-                <div class="edit-field">
-                    <label class="field-label" for="rental-phone">Téléphone division location</label>
-                    <p class="field-description">Numéro spécialisé pour les locations</p>
-                    <input type="tel" id="rental-phone" class="field-input" data-field="rental-phone" 
-                           placeholder="819-323-LOCA" value="819-323-LOCA">
-                </div>
-
-                <div class="edit-field">
-                    <label class="field-label" for="rental-email">Email location</label>
-                    <p class="field-description">Email spécialisé pour les demandes de location</p>
-                    <input type="email" id="rental-email" class="field-input" data-field="rental-email" 
-                           placeholder="location@edsquebec.com" value="location@edsquebec.com">
-                </div>
-
-                <div class="edit-field">
-                    <label class="field-label" for="installation-time">Délai de mise en service</label>
-                    <p class="field-description">Temps entre signature et installation</p>
-                    <input type="text" id="installation-time" class="field-input" data-field="installation-time" 
-                           placeholder="48h" value="48h">
-                </div>
-
-                <div class="edit-field">
-                    <label class="field-label" for="rental-guarantees">Garanties location</label>
-                    <p class="field-description">Liste des garanties offertes en location</p>
-                    <textarea id="rental-guarantees" class="field-input field-textarea" data-field="rental-guarantees" 
-                              placeholder="✅ Devis gratuit...">✅ Devis gratuit et sans engagement
-✅ Installation par techniciens certifiés EDS
-✅ Contrat flexible adapté à vos besoins
-✅ Support québécois en français 24/7</textarea>
-                </div>
-            </div>
-        </section>
 
         <!-- Section Comparaison Technique -->
         <section class="edit-section reorganizable-section" data-section-id="technical" data-section-order="4">
@@ -2630,6 +2560,74 @@ Fabrication et Support 100% Québécois</textarea>
         }
     </script>
     
+        <!-- Section Contact et Location DÉPLACÉE À LA FIN -->
+        <section class="edit-section reorganizable-section" data-section-id="contact" data-section-order="8">
+            <h2 class="section-title">
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-phone"></i>
+                        LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('contact')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('contact')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="contactSpacing">Espacement (px):</label>
+                            <input type="number" id="contactSpacing" class="section-spacing-input" data-field="conclusionComparativeContactSpacerHeight" 
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="contact-title">Titre section contact</label>
+                    <p class="field-description">Appel à l'action pour louer - Zéro risque, zéro surprise</p>
+                    <input type="text" id="contact-title" class="field-input" data-field="contact-title" 
+                           placeholder="LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT" value="LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-subtitle">Sous-titre contact</label>
+                    <p class="field-description">Message de renforcement pour la location</p>
+                    <textarea id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
+                              placeholder="Zéro risque, zéro surprise...">Zéro risque, zéro surprise, performance maximale garantie</textarea>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="rental-phone">Téléphone division location</label>
+                    <p class="field-description">Numéro spécialisé pour les locations</p>
+                    <input type="tel" id="rental-phone" class="field-input" data-field="rental-phone" 
+                           placeholder="819-323-5622" value="819-323-5622">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="rental-email">Email location</label>
+                    <p class="field-description">Email spécialisé pour les demandes de location</p>
+                    <input type="email" id="rental-email" class="field-input" data-field="rental-email" 
+                           placeholder="location@edsquebec.com" value="location@edsquebec.com">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="installation-time">Délai de mise en service</label>
+                    <p class="field-description">Temps entre signature et installation</p>
+                    <input type="text" id="installation-time" class="field-input" data-field="installation-time" 
+                           placeholder="48h" value="48h">
+                </div>
+
+                <div class="edit-field" style="grid-column: span 2;">
+                    <label class="field-label" for="rental-guarantees">Garanties location</label>
+                    <p class="field-description">Liste des garanties offertes en location</p>
+                    <textarea id="rental-guarantees" class="field-input field-textarea" data-field="rental-guarantees" 
+                              placeholder="✅ Devis gratuit...">✅ Devis gratuit et sans engagement ✅ Installation par techniciens certifiés EDS ✅ Contrat flexible adapté à vos besoins ✅ Support québécois en français 24/7</textarea>
+                </div>
+            </div>
+        </section>
+
     <!-- Script Éditeur CSS Complet -->
     <script>
         // Variables CSS pour location.html - Extraites du thème de location
