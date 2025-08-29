@@ -1717,25 +1717,27 @@
                 </div>
             </h2>
             <div class="edit-grid">
-                <div class="edit-field">
+                <!-- TITRES DE LA SECTION -->
+                <div class="edit-field" style="grid-column: span 2; margin-bottom: 2rem;">
                     <label class="field-label" for="tech-title">Titre section comparaison</label>
                     <p class="field-description">Titre accrocheur pour la comparaison technique</p>
                     <input type="text" id="tech-title" class="field-input" data-field="tech-title" 
                            placeholder="Li-CUBE PRO™ vs BATTERIES Ni-Cd OBSOLÈTES" value="Li-CUBE PRO™ vs BATTERIES Ni-Cd OBSOLÈTES">
                 </div>
 
-                <div class="edit-field">
+                <div class="edit-field" style="grid-column: span 2; margin-bottom: 3rem;">
                     <label class="field-label" for="tech-subtitle">Sous-titre comparaison</label>
                     <p class="field-description">Explication de la supériorité technique</p>
                     <textarea id="tech-subtitle" class="field-input field-textarea" data-field="tech-subtitle" 
-                              placeholder="Pourquoi payer plus cher pour une technologie obsolète...">Pourquoi payer plus cher pour une technologie obsolète ? Li-CUBE PRO™ écrase la concurrence sur tous les critères techniques.</textarea>
+                              placeholder="Comparaison technique objective...">Comparaison technique objective : Pourquoi Li-CUBE PRO™ surclasse totalement les anciennes batteries Ni-Cd</textarea>
                 </div>
 
-                <!-- Section Faiblesses Concurrent (rouge) -->
-                <div class="edit-section" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2);">
-                    <h3 style="color: var(--warning-red); margin-bottom: 1rem;">
-                        <i class="fas fa-times-circle"></i>
-                        Faiblesses du Produit Concurrent
+                <!-- COMPARAISON EN 2 COLONNES (comme dans location.html) -->
+                
+                <!-- COLONNE GAUCHE : Faiblesses du Concurrent (❌) -->
+                <div style="background: rgba(239, 68, 68, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--warning-red);">
+                    <h3 style="color: var(--warning-red); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>❌</span> Batteries Ni-Cd (Obsolètes) - Colonne Gauche
                     </h3>
                     <div class="edit-grid">
                         <div class="edit-field">
