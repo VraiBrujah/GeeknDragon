@@ -1054,46 +1054,76 @@
                 </div>
             </h2>
             <div class="edit-grid">
-                <div class="edit-field">
-                    <label class="field-label" for="hero-title">Titre héro principal</label>
-                    <p class="field-description">Titre principal dans la section héro</p>
-                    <input type="text" id="hero-title" class="field-input" data-field="hero-title" 
-                           placeholder="Li-CUBE PRO™" value="Li-CUBE PRO™">
+                <!-- COLONNE GAUCHE : Texte Héro (comme dans location.html) -->
+                <div style="grid-column: span 2; background: rgba(16, 185, 129, 0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
+                    <h3 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-align-left"></i> Contenu Textuel (Colonne Gauche)
+                    </h3>
+                    
+                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="edit-field">
+                            <label class="field-label" for="hero-title">Titre héro principal</label>
+                            <p class="field-description">Titre principal dans la section héro</p>
+                            <input type="text" id="hero-title" class="field-input" data-field="hero-title" 
+                                   placeholder="Li-CUBE PRO™" value="Li-CUBE PRO™">
+                        </div>
+
+                        <div class="edit-field">
+                            <label class="field-label" for="hero-subtitle">Sous-titre héro</label>
+                            <p class="field-description">Sous-titre accrocheur</p>
+                            <input type="text" id="hero-subtitle" class="field-input" data-field="hero-subtitle" 
+                                   placeholder="LOCATION INTELLIGENTE ZÉRO RISQUE" value="LOCATION INTELLIGENTE ZÉRO RISQUE">
+                        </div>
+                    </div>
+
+                    <div class="edit-field">
+                        <label class="field-label" for="hero-description">Description héro</label>
+                        <p class="field-description">Description détaillée du service de location</p>
+                        <textarea id="hero-description" class="field-input field-textarea" data-field="hero-description" 
+                                  placeholder="Pourquoi prendre des risques...">Pourquoi prendre des risques ? Louez votre Li-CUBE PRO™ et laissez EDS gérer tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. Vous payez, vous utilisez, nous nous occupons du reste.</textarea>
+                    </div>
+
+                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="edit-field">
+                            <label class="field-label" for="monthly-price">Prix mensuel</label>
+                            <p class="field-description">Prix affiché (avec $)</p>
+                            <input type="text" id="monthly-price" class="field-input" data-field="monthly-price" 
+                                   placeholder="150 $" value="150 $">
+                        </div>
+
+                        <div class="edit-field">
+                            <label class="field-label" for="cta-text">Texte bouton</label>
+                            <p class="field-description">Appel à l'action</p>
+                            <input type="text" id="cta-text" class="field-input" data-field="cta-text" 
+                                   placeholder="ARGUMENTS DE CLOSING - 150-200$/MOIS" value="ARGUMENTS DE CLOSING - 150-200$/MOIS">
+                        </div>
+                    </div>
+
+                    <div class="edit-field">
+                        <label class="field-label" for="price-included">Services inclus</label>
+                        <p class="field-description">Liste des services inclus</p>
+                        <textarea id="price-included" class="field-input field-textarea" data-field="price-included" 
+                                  placeholder="Maintenance, monitoring, support...">Maintenance, monitoring, support et garantie totale inclus</textarea>
+                    </div>
                 </div>
 
-                <div class="edit-field">
-                    <label class="field-label" for="hero-subtitle">Sous-titre héro</label>
-                    <p class="field-description">Sous-titre accrocheur (avec saut de ligne si nécessaire)</p>
-                    <input type="text" id="hero-subtitle" class="field-input" data-field="hero-subtitle" 
-                           placeholder="LOCATION INTELLIGENTE ZÉRO RISQUE" value="LOCATION INTELLIGENTE ZÉRO RISQUE">
-                </div>
-
-                <div class="edit-field">
-                    <label class="field-label" for="hero-description">Description héro</label>
-                    <p class="field-description">Description détaillée du service de location</p>
-                    <textarea id="hero-description" class="field-input field-textarea" data-field="hero-description" 
-                              placeholder="La solution énergétique révolutionnaire...">La solution énergétique révolutionnaire qui transforme votre approche de l'énergie de secours : plus de pannes imprévisibles, plus de maintenance coûteuse, plus de vieilles technologies obsolètes. Juste la tranquillité d'esprit, mois après mois.</textarea>
-                </div>
-
-                <div class="edit-field">
-                    <label class="field-label" for="monthly-price">Prix mensuel affiché</label>
-                    <p class="field-description">Prix de base mensuel (sans le symbole $)</p>
-                    <input type="text" id="monthly-price" class="field-input" data-field="monthly-price" 
-                           placeholder="150" value="150">
-                </div>
-
-                <div class="edit-field">
-                    <label class="field-label" for="price-included">Services inclus</label>
-                    <p class="field-description">Liste des services inclus dans le prix</p>
-                    <textarea id="price-included" class="field-input field-textarea" data-field="price-included" 
-                              placeholder="Installation, maintenance, monitoring...">Installation, maintenance, monitoring 24/7 et support technique inclus</textarea>
-                </div>
-
-                <div class="edit-field">
-                    <label class="field-label" for="cta-text">Texte bouton d'action</label>
-                    <p class="field-description">Texte du bouton principal d'appel à l'action</p>
-                    <input type="text" id="cta-text" class="field-input" data-field="cta-text" 
-                           placeholder="ARGUMENTS DE CLOSING - 150-200$/MOIS" value="ARGUMENTS DE CLOSING - 150-200$/MOIS">
+                <!-- COLONNE DROITE : Visuel (comme dans location.html) -->
+                <div style="grid-column: span 2; background: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 1.5rem;">
+                    <h3 style="color: var(--accent-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-image"></i> Élément Visuel (Colonne Droite)
+                    </h3>
+                    
+                    <p style="color: var(--text-gray); font-style: italic; margin-bottom: 1rem;">
+                        Image du produit chargée automatiquement via CSS depuis ./images/Li-CUBE PRO.png
+                    </p>
+                    
+                    <div class="edit-field" style="opacity: 0.6;">
+                        <label class="field-label">Info technique</label>
+                        <p class="field-description" style="color: var(--text-gray);">
+                            L'image est définie dans le CSS via background-image. 
+                            Animation float automatique active.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1475,63 +1505,119 @@
                 </div>
             </h2>
             <div class="edit-grid">
-                <div class="edit-field">
+                <!-- TITRE DE LA SECTION -->
+                <div class="edit-field" style="grid-column: span 2; margin-bottom: 1.5rem;">
                     <label class="field-label" for="advantages-title">Titre avantages location</label>
                     <p class="field-description">Question engageante pour les avantages location</p>
                     <input type="text" id="advantages-title" class="field-input" data-field="advantages-title" 
                            placeholder="POURQUOI CHOISIR LA LOCATION ?" value="POURQUOI CHOISIR LA LOCATION ?">
                 </div>
 
-                <!-- Avantage 1 : Zéro investissement -->
-                <div class="edit-field">
-                    <label class="field-label" for="adv1-title">Avantage 1 - Titre</label>
-                    <p class="field-description">Avantage zéro investissement initial</p>
-                    <input type="text" id="adv1-title" class="field-input" data-field="adv1-title" 
-                           placeholder="ZÉRO INVESTISSEMENT INITIAL" value="ZÉRO INVESTISSEMENT INITIAL">
-                </div>
-                <div class="edit-field">
-                    <label class="field-label" for="adv1-text">Avantage 1 - Description</label>
-                    <p class="field-description">Explication détaillée trésorerie préservée</p>
-                    <textarea id="adv1-text" class="field-input field-textarea" data-field="adv1-text" 
-                              placeholder="Pas de sortie de cash importante...">Pas de sortie de cash importante ! Préservez votre trésorerie pour votre cœur de métier. 150 $/mois c'est accessible à toutes les entreprises, même les plus petites. Déductible fiscalement comme charge d'exploitation.</textarea>
-                </div>
-
-                <!-- Avantage 2 : Risque zéro -->
-                <div class="edit-field">
-                    <label class="field-label" for="adv2-title">Avantage 2 - Titre</label>
-                    <p class="field-description">Risque technique transféré</p>
-                    <input type="text" id="adv2-title" class="field-input" data-field="adv2-title" 
-                           placeholder="RISQUE ZÉRO GARANTI" value="RISQUE ZÉRO GARANTI">
-                </div>
-                <div class="edit-field">
-                    <label class="field-label" for="adv2-text">Avantage 2 - Description</label>
-                    <p class="field-description">Explication transfert de tous les risques à EDS</p>
-                    <textarea id="adv2-text" class="field-input field-textarea" data-field="adv2-text" 
-                              placeholder="Panne ? Nous remplaçons...">Panne ? Nous remplaçons. Obsolescence ? Nous mettons à jour. Performance insuffisante ? Nous optimisons. Vous n'assumez JAMAIS aucun risque technique ou financier. EDS est responsable de TOUT.</textarea>
+                <!-- GRILLE 2x3 DES AVANTAGES (comme dans location.html) -->
+                
+                <!-- LIGNE 1 -->
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🚫</span> Avantage 1 (Position: Haut-Gauche)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv1-title">Titre avantage 1</label>
+                        <input type="text" id="adv1-title" class="field-input" data-field="adv1-title" 
+                               placeholder="ZÉRO INVESTISSEMENT INITIAL" value="ZÉRO INVESTISSEMENT INITIAL">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv1-text">Description avantage 1</label>
+                        <textarea id="adv1-text" class="field-input field-textarea" data-field="adv1-text" 
+                                  placeholder="Pas de sortie de cash...">Pas de sortie de cash importante ! Préservez votre trésorerie pour votre cœur de métier. 150 $/mois c'est accessible à toutes les entreprises, même les plus petites. Déductible fiscalement comme charge d'exploitation.</textarea>
+                    </div>
                 </div>
 
-                <!-- Avantage 3 : Monitoring -->
-                <div class="edit-field">
-                    <label class="field-label" for="adv3-title">Avantage 3 - Titre</label>
-                    <input type="text" id="adv3-title" class="field-input" data-field="adv3-title" 
-                           placeholder="MONITORING INTELLIGENT INCLUS" value="MONITORING INTELLIGENT INCLUS">
-                </div>
-                <div class="edit-field">
-                    <label class="field-label" for="adv3-text">Avantage 3 - Description</label>
-                    <textarea id="adv3-text" class="field-input field-textarea" data-field="adv3-text" 
-                              placeholder="Surveillance 24/7 automatique...">Surveillance 24/7 automatique, alertes prédictives, rapports de performance mensuel. Vous savez toujours où vous en êtes. Optimisation continue de vos opérations grâce aux données IoT en temps réel.</textarea>
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🛡️</span> Avantage 2 (Position: Haut-Droite)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv2-title">Titre avantage 2</label>
+                        <input type="text" id="adv2-title" class="field-input" data-field="adv2-title" 
+                               placeholder="RISQUE ZÉRO GARANTI" value="RISQUE ZÉRO GARANTI">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv2-text">Description avantage 2</label>
+                        <textarea id="adv2-text" class="field-input field-textarea" data-field="adv2-text" 
+                                  placeholder="Panne ? Nous remplaçons...">Panne ? Nous remplaçons. Obsolescence ? Nous mettons à jour. Performance insuffisante ? Nous optimisons. Vous n'assumez JAMAIS aucun risque technique ou financier. EDS est responsable de TOUT.</textarea>
+                    </div>
                 </div>
 
-                <!-- Avantage 4 : Budget prévisible -->
-                <div class="edit-field">
-                    <label class="field-label" for="adv4-title">Avantage 4 - Titre</label>
-                    <input type="text" id="adv4-title" class="field-input" data-field="adv4-title" 
-                           placeholder="BUDGET PRÉVISIBLE" value="BUDGET PRÉVISIBLE">
+                <!-- LIGNE 2 -->
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📊</span> Avantage 3 (Position: Milieu-Gauche)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv3-title">Titre avantage 3</label>
+                        <input type="text" id="adv3-title" class="field-input" data-field="adv3-title" 
+                               placeholder="MONITORING INTELLIGENT INCLUS" value="MONITORING INTELLIGENT INCLUS">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv3-text">Description avantage 3</label>
+                        <textarea id="adv3-text" class="field-input field-textarea" data-field="adv3-text" 
+                                  placeholder="Surveillance 24/7 automatique...">Surveillance 24/7 automatique, alertes prédictives, rapports de performance mensuel. Vous savez toujours où vous en êtes. Optimisation continue de vos opérations grâce aux données IoT en temps réel.</textarea>
+                    </div>
                 </div>
-                <div class="edit-field">
-                    <label class="field-label" for="adv4-text">Avantage 4 - Description</label>
-                    <textarea id="adv4-text" class="field-input field-textarea" data-field="adv4-text" 
-                              placeholder="Coût fixe mensuel...">Coût fixe mensuel, aucune surprise, aucun dépassement. Planification financière facilitée, comptabilité simplifiée. Pas de provisions pour maintenance, pas de budget remplacement à prévoir.</textarea>
+
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>💼</span> Avantage 4 (Position: Milieu-Droite)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv4-title">Titre avantage 4</label>
+                        <input type="text" id="adv4-title" class="field-input" data-field="adv4-title" 
+                               placeholder="BUDGET PRÉVISIBLE" value="BUDGET PRÉVISIBLE">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv4-text">Description avantage 4</label>
+                        <textarea id="adv4-text" class="field-input field-textarea" data-field="adv4-text" 
+                                  placeholder="Coût fixe mensuel...">Coût fixe mensuel, aucune surprise, aucun dépassement. Planification financière facilitée, comptabilité simplifiée. Pas de provisions pour maintenance, pas de budget remplacement à prévoir.</textarea>
+                    </div>
+                </div>
+
+                <!-- LIGNE 3 -->
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🔄</span> Avantage 5 (Position: Bas-Gauche)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv5-title">Titre avantage 5</label>
+                        <input type="text" id="adv5-title" class="field-input" data-field="adv5-title" 
+                               placeholder="ÉVOLUTION TECHNOLOGIQUE" value="ÉVOLUTION TECHNOLOGIQUE">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv5-text">Description avantage 5</label>
+                        <textarea id="adv5-text" class="field-input field-textarea" data-field="adv5-text" 
+                                  placeholder="Toujours la dernière version...">Toujours la dernière version ! Mises à jour logicielles automatiques, upgrade matériel inclus après 3 ans. Vous restez à la pointe sans effort ni investissement supplémentaire.</textarea>
+                    </div>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🏢</span> Avantage 6 (Position: Bas-Droite)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv6-title">Titre avantage 6</label>
+                        <input type="text" id="adv6-title" class="field-input" data-field="adv6-title" 
+                               placeholder="FLEXIBILITÉ CONTRACTUELLE" value="FLEXIBILITÉ CONTRACTUELLE">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv6-text">Description avantage 6</label>
+                        <textarea id="adv6-text" class="field-input field-textarea" data-field="adv6-text" 
+                                  placeholder="Contrats adaptés...">Contrats adaptés à vos besoins : court terme pour tests, long terme pour économies. Possibilité d'ajustement du parc, option d'achat privilégiée, résiliation facilitée.</textarea>
+                    </div>
                 </div>
             </div>
         </section>
