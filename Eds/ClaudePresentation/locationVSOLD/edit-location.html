@@ -1115,8 +1115,8 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="section-spacer-control">
-                            <label for="heroSpacing">Espacement (px):</label>
-                            <input type="number" id="heroSpacing" class="section-spacing-input" data-field="heroSpacerHeight" 
+                            <label for="heroSpacerHeight">Espacement (px):</label>
+                            <input type="number" id="heroSpacerHeight" class="section-spacing-input" data-field="heroSpacerHeight"
                                    value="80" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -1235,11 +1235,6 @@
                         <button class="section-btn move-down" onclick="moveSectionDown('hero-arguments')" title="Descendre la section">
                             <i class="fas fa-chevron-down"></i>
                         </button>
-                        <div class="section-spacer-control">
-                            <label for="heroArgumentsSpacing">Espacement (px):</label>
-                            <input type="number" id="heroArgumentsSpacing" class="section-spacing-input" data-field="heroArgumentsSpacerHeight" 
-                                   value="0" min="0" max="500" step="10">
-                        </div>
                     </div>
                 </div>
             </h2>
@@ -1402,8 +1397,8 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="section-spacer-control">
-                            <label for="pricingSpacing">Espacement (px):</label>
-                            <input type="number" id="pricingSpacing" class="section-spacing-input" data-field="heroPricingSpacerHeight" 
+                            <label for="hero-pricing-spacer">Espacement (px):</label>
+                            <input type="number" id="hero-pricing-spacer" class="section-spacing-input" data-field="hero-pricing-spacer"
                                    value="0" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -1589,8 +1584,8 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="section-spacer-control">
-                            <label for="advantagesSpacing">Espacement (px):</label>
-                            <input type="number" id="advantagesSpacing" class="section-spacing-input" data-field="pricingAdvantagesSpacerHeight" 
+                            <label for="pricing-advantages-spacer">Espacement (px):</label>
+                            <input type="number" id="pricing-advantages-spacer" class="section-spacing-input" data-field="pricing-advantages-spacer"
                                    value="0" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -1731,8 +1726,8 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="section-spacer-control">
-                            <label for="technicalSpacing">Espacement (px):</label>
-                            <input type="number" id="technicalSpacing" class="section-spacing-input" data-field="advantagesComparisonSpacerHeight" 
+                            <label for="advantages-comparison-spacer">Espacement (px):</label>
+                            <input type="number" id="advantages-comparison-spacer" class="section-spacing-input" data-field="advantages-comparison-spacer"
                                    value="0" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -2321,8 +2316,8 @@ Location Li-CUBE PRO™ = <strong>La tranquillité absolue</strong> avec technol
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="section-spacer-control">
-                            <label for="conclusionActionSpacing">Espacement (px):</label>
-                            <input type="number" id="conclusionActionSpacing" class="section-spacing-input" data-field="contact-conclusionAction-spacer"
+                            <label for="contact-conclusionAction-spacer">Espacement (px):</label>
+                            <input type="number" id="contact-conclusionAction-spacer" class="section-spacing-input" data-field="contact-conclusionAction-spacer"
                                    value="0" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -2386,8 +2381,8 @@ Fabrication et Support 100% Québécois</textarea>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="section-spacer-control">
-                            <label for="conclusionComparativeSpacing">Espacement (px):</label>
-                            <input type="number" id="conclusionComparativeSpacing" class="section-spacing-input" data-field="conclusionAction-conclusionComparative-spacer"
+                            <label for="conclusionAction-conclusionComparative-spacer">Espacement (px):</label>
+                            <input type="number" id="conclusionAction-conclusionComparative-spacer" class="section-spacing-input" data-field="conclusionAction-conclusionComparative-spacer"
                                    value="0" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -2588,8 +2583,8 @@ Fabrication et Support 100% Québécois</textarea>
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="section-spacer-control">
-                            <label for="contactSpacing">Espacement (px):</label>
-                            <input type="number" id="contactSpacing" class="section-spacing-input" data-field="conclusionComparative-contact-spacer"
+                            <label for="conclusionComparative-contact-spacer">Espacement (px):</label>
+                            <input type="number" id="conclusionComparative-contact-spacer" class="section-spacing-input" data-field="conclusionComparative-contact-spacer"
                                    value="0" min="0" max="500" step="10">
                         </div>
                     </div>
@@ -2669,14 +2664,13 @@ Fabrication et Support 100% Québécois</textarea>
             navPadding: 12,
             
             // Espacements entre sections
-            headerSpacerHeight: 80,
-            heroArgumentsSpacerHeight: 0,
-            heroPricingSpacerHeight: 0,
-            pricingAdvantagesSpacerHeight: 0,
-            advantagesComparisonSpacerHeight: 0,
-            contactConclusionActionSpacerHeight: 0,
-            conclusionActionConclusionComparativeSpacerHeight: 0,
-            conclusionComparativeContactSpacerHeight: 0,
+            heroSpacerHeight: 80,
+            'hero-pricing-spacer': 0,
+            'pricing-advantages-spacer': 0,
+            'advantages-comparison-spacer': 0,
+            'contact-conclusionAction-spacer': 0,
+            'conclusionAction-conclusionComparative-spacer': 0,
+            'conclusionComparative-contact-spacer': 0,
             
             // Hero Section
             heroTitleSize: 72,
@@ -3200,25 +3194,25 @@ Fabrication et Support 100% Québécois</textarea>
                 
                 /* Espacements entre Sections - Logique restaurée fonctionnelle */
                 .header-spacer[data-field="heroSpacerHeight"] {
-                    height: ${styles.headerSpacerHeight}px !important;
+                    height: ${styles.heroSpacerHeight}px !important;
                 }
                 .section-spacer[data-field="hero-pricing-spacer"] {
-                    height: ${styles.heroPricingSpacerHeight}px !important;
+                    height: ${styles['hero-pricing-spacer']}px !important;
                 }
                 .section-spacer[data-field="pricing-advantages-spacer"] {
-                    height: ${styles.pricingAdvantagesSpacerHeight}px !important;
+                    height: ${styles['pricing-advantages-spacer']}px !important;
                 }
                 .section-spacer[data-field="advantages-comparison-spacer"] {
-                    height: ${styles.advantagesComparisonSpacerHeight}px !important;
+                    height: ${styles['advantages-comparison-spacer']}px !important;
                 }
                 .section-spacer[data-field="contact-conclusionAction-spacer"] {
-                    height: ${styles.contactConclusionActionSpacerHeight}px !important;
+                    height: ${styles['contact-conclusionAction-spacer']}px !important;
                 }
                 .section-spacer[data-field="conclusionAction-conclusionComparative-spacer"] {
-                    height: ${styles.conclusionActionConclusionComparativeSpacerHeight}px !important;
+                    height: ${styles['conclusionAction-conclusionComparative-spacer']}px !important;
                 }
                 .section-spacer[data-field="conclusionComparative-contact-spacer"] {
-                    height: ${styles.conclusionComparativeContactSpacerHeight}px !important;
+                    height: ${styles['conclusionComparative-contact-spacer']}px !important;
                 }
                 
                 /* Hero Section */
