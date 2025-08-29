@@ -1046,10 +1046,9 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="section-spacer-control">
-                            <label for="heroPaddingTop">Espacement haut (px):</label>
-                            <input type="number" id="heroPaddingTop" class="form-input" 
-                                   value="80" min="0" max="500" step="10"
-                                   onchange="updateStyle('heroPaddingTop', this.value)">
+                            <label for="heroSpacing">Espacement (px):</label>
+                            <input type="number" id="heroSpacing" class="section-spacing-input" data-field="heroSpacerHeight" 
+                                   value="80" min="0" max="500" step="10">
                         </div>
                     </div>
                 </div>
@@ -2644,9 +2643,8 @@ Fabrication et Support 100% Québécois</textarea>
                 }
                 
                 /* Espacements entre Sections - Logique restaurée fonctionnelle */
-                /* Section hero avec espacement intégré */
-                .section.hero {
-                    padding-top: ${styles.heroPaddingTop || 80}px !important;
+                .header-spacer[data-field="heroSpacerHeight"] {
+                    height: ${styles.headerSpacerHeight}px !important;
                 }
                 .section-spacer[data-field="hero-pricing-spacer"] {
                     height: ${styles.heroPricingSpacerHeight}px !important;
@@ -2899,8 +2897,5 @@ Fabrication et Support 100% Québécois</textarea>
     <link rel="stylesheet" href="css/advanced-style-editor.css">
     <script src="js/advanced-style-editor.js"></script>
     <script src="js/dynamic-descriptions.js"></script>
-    
-    <!-- Synchronisation Sections -->
-    <script src="js/section-synchronizer.js"></script>
 </body>
 </html>
