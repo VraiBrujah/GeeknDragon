@@ -12,22 +12,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Variables CSS thème LOCATION : vert et bleu */
+        /* Variables CSS thème LOCATION : vert et bleu - IDENTIQUES à location.html */
         :root {
             --primary-dark: #0F172A;
             --secondary-dark: #1E293B;
             --accent-green: #10B981;
-            --accent-teal: #14B8A6;
             --accent-blue: #3B82F6;
+            --accent-teal: #14B8A6;
             --success-green: #059669;
-            --warning-red: #EF4444;
+            --warning-orange: #F59E0B;
             --text-white: #F8FAFC;
             --text-gray: #CBD5E1;
             
             --gradient-primary: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
             --gradient-green: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --gradient-blue: linear-gradient(135deg, var(--accent-blue) 0%, #60A5FA 100%);
             --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.4);
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,8 +39,10 @@
         }
         
         .editor-header {
-            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
-            padding: 1.5rem 2rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            background: rgba(15, 23, 42, 0.95); 
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem; 
+            border-bottom: 1px solid var(--accent-green);
             position: sticky; top: 0; z-index: 100;
         }
         
@@ -64,14 +67,27 @@
         }
         
         .btn-back {
-            background: rgba(16, 185, 129, 0.1); color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1); 
+            color: var(--accent-green);
             border: 1px solid var(--accent-green);
         }
         
-        .btn-save { background: var(--success-green); color: white; }
-        .btn-preview { background: var(--accent-teal); color: white; }
+        .btn-save { 
+            background: var(--gradient-green); 
+            color: white; 
+            border: none;
+        }
         
-        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .btn-preview { 
+            background: var(--gradient-blue); 
+            color: white; 
+            border: none;
+        }
+        
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: var(--shadow-glow); 
+        }
         
         .editor-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
         
@@ -92,9 +108,12 @@
         }
         
         .edit-section {
-            background: rgba(16, 185, 129, 0.05); border-radius: 16px;
-            padding: 2rem; margin-bottom: 2rem;
-            border: 1px solid rgba(16, 185, 129, 0.1);
+            background: var(--gradient-primary);
+            border-radius: 18px;
+            padding: 2rem; 
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-green);
+            box-shadow: var(--shadow-lg);
         }
         
         .section-title {
@@ -115,17 +134,24 @@
         }
         
         .field-input {
-            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 8px; padding: 0.75rem; color: var(--text-white);
-            font-size: 1rem; transition: all 0.3s ease; font-family: inherit;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px; 
+            padding: 1rem; 
+            color: var(--text-white);
+            font-size: 1rem; 
+            transition: all 0.3s ease; 
+            font-family: inherit;
         }
         
         .field-textarea { min-height: 100px; resize: vertical; }
         
         .field-input:focus {
-            outline: none; border-color: var(--accent-green);
-            background: rgba(16, 185, 129, 0.15);
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            outline: none; 
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.12);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-1px);
         }
         
         .field-input::placeholder { color: rgba(203, 213, 225, 0.5); }
@@ -140,12 +166,23 @@
         }
         
         .pricing-edit-card {
-            background: rgba(16, 185, 129, 0.08); border-radius: 12px;
-            padding: 1.5rem; border: 1px solid rgba(16, 185, 129, 0.2);
+            background: rgba(16, 185, 129, 0.08); 
+            border-radius: 18px;
+            padding: 2rem; 
+            border-left: 4px solid var(--accent-green);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .pricing-edit-card:hover {
+            transform: translateX(8px); 
+            background: rgba(16, 185, 129, 0.12);
         }
         
         .pricing-edit-card.featured {
-            border-color: var(--accent-green); background: rgba(16, 185, 129, 0.12);
+            border-left: 4px solid var(--warning-orange);
+            background: rgba(245, 158, 11, 0.08);
+            box-shadow: var(--shadow-glow);
         }
         
         .live-preview {
@@ -2372,14 +2409,21 @@ Fabrication et Support 100% Québécois</textarea>
             }
         }
 
-        // Application des styles en temps réel pour location.html
+        // Application des styles en temps réel pour location.html ET edit-location.html
         function applyStyles() {
-            // Cette fonction n'applique PAS les styles à edit-location.html
-            // Elle prépare les styles pour location.html et les synchronise
+            // Collecte de tous les styles actuels
+            const currentStyles = {};
+            Object.keys(defaultValues).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) currentStyles[key] = element.value;
+            });
             
-            console.log('🎨 Préparation des styles pour location.html');
-            // La synchronisation temps réel se fait dans syncToPresentation()
-            // Aucune modification de l'éditeur lui-même
+            // Application des styles à la page d'édition elle-même
+            if (typeof applyDynamicCSSToEditPage === 'function') {
+                applyDynamicCSSToEditPage(currentStyles);
+            }
+            
+            console.log('🎨 Styles appliqués à la page d\'édition en temps réel');
         }
 
         // Mise à jour des affichages de valeurs pour location.html
@@ -2727,7 +2771,12 @@ Fabrication et Support 100% Québécois</textarea>
                 localStorage.setItem('locationVS-css-broadcast', JSON.stringify(message));
                 setTimeout(() => localStorage.removeItem('locationVS-css-broadcast'), 100);
                 
-                console.log('📡 Styles diffusés vers location.html');
+                // Application immédiate des styles à la page d'édition elle-même
+                if (typeof applyDynamicCSSToEditPage === 'function') {
+                    applyDynamicCSSToEditPage(currentStyles);
+                }
+                
+                console.log('📡 Styles diffusés vers location.html et appliqués à la page d\'édition');
             } catch (error) {
                 console.warn('⚠️ Diffusion échouée:', error);
             }
@@ -3017,5 +3066,215 @@ Fabrication et Support 100% Québécois</textarea>
     <link rel="stylesheet" href="css/advanced-style-editor.css">
     <script src="js/advanced-style-editor.js"></script>
     <script src="js/dynamic-descriptions.js"></script>
+
+    <!-- Synchronisation des Variables CSS avec location.html -->
+    <script>
+        // Listener pour synchroniser les variables CSS de la page d'édition avec location.html
+        let editPageStyleElement = null;
+        
+        // Application des variables CSS dynamiques à la page d'édition
+        function applyDynamicCSSToEditPage(styles) {
+            // Suppression de l'ancien style dynamique
+            if (editPageStyleElement) {
+                editPageStyleElement.remove();
+            }
+            
+            // Création du nouveau style avec les variables mises à jour
+            editPageStyleElement = document.createElement('style');
+            editPageStyleElement.id = 'dynamic-edit-page-styles';
+            editPageStyleElement.textContent = `
+                /* Variables CSS Dynamiques synchronisées avec location.html */
+                :root {
+                    --primary-dark: ${styles.primaryDark || '#0F172A'};
+                    --secondary-dark: ${styles.secondaryDark || '#1E293B'};
+                    --accent-green: ${styles.accentGreen || '#10B981'};
+                    --accent-blue: ${styles.accentBlue || '#3B82F6'};
+                    --accent-teal: ${styles.accentTeal || '#14B8A6'};
+                    --success-green: ${styles.successGreen || '#059669'};
+                    --warning-orange: ${styles.warningOrange || '#F59E0B'};
+                    --warning-red: ${styles.warningRed || '#EF4444'};
+                    --text-white: ${styles.textWhite || '#F8FAFC'};
+                    --text-gray: ${styles.textGray || '#CBD5E1'};
+                    --info-blue: ${styles.infoBlue || '#3B82F6'};
+                    --neutral-gray: ${styles.neutralGray || '#6B7280'};
+                    
+                    --gradient-primary: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+                    --gradient-green: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+                    --gradient-blue: linear-gradient(135deg, var(--accent-blue) 0%, #60A5FA 100%);
+                    --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+                    --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+                    --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.4);
+                }
+                
+                /* Mise à jour du thème de la page d'édition en temps réel */
+                body {
+                    background: var(--gradient-primary);
+                    color: var(--text-white);
+                }
+                
+                .editor-header {
+                    background: rgba(15, 23, 42, 0.95);
+                    border-bottom: 1px solid var(--accent-green);
+                }
+                
+                .edit-section {
+                    background: rgba(16, 185, 129, 0.05);
+                    border: 1px solid rgba(16, 185, 129, 0.1);
+                }
+                
+                .section-title {
+                    color: var(--accent-green);
+                }
+                
+                .field-label {
+                    color: var(--text-white);
+                }
+                
+                .field-description {
+                    color: var(--text-gray);
+                }
+                
+                .field-input {
+                    background: rgba(16, 185, 129, 0.1);
+                    border: 1px solid rgba(16, 185, 129, 0.2);
+                    color: var(--text-white);
+                }
+                
+                .field-input:focus {
+                    border-color: var(--accent-green);
+                    background: rgba(16, 185, 129, 0.15);
+                    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+                }
+                
+                .btn-back {
+                    background: rgba(16, 185, 129, 0.1);
+                    color: var(--accent-green);
+                    border: 1px solid var(--accent-green);
+                }
+                
+                .btn-save {
+                    background: var(--success-green);
+                }
+                
+                .btn-preview {
+                    background: var(--accent-teal);
+                }
+                
+                .css-title {
+                    background: var(--accent-green);
+                }
+                
+                .css-group h3 {
+                    color: var(--accent-green);
+                }
+                
+                .pricing-edit-card {
+                    background: rgba(16, 185, 129, 0.08);
+                    border: 1px solid rgba(16, 185, 129, 0.2);
+                }
+                
+                .pricing-edit-card.featured {
+                    border-color: var(--accent-green);
+                    background: rgba(16, 185, 129, 0.12);
+                }
+                
+                .range-value {
+                    color: var(--accent-green);
+                }
+                
+                .status-message.success {
+                    background: rgba(16, 185, 129, 0.1);
+                    border-color: var(--success-green);
+                    color: var(--success-green);
+                }
+                
+                .status-message.error {
+                    background: rgba(239, 68, 68, 0.1);
+                    border-color: var(--warning-red);
+                    color: var(--warning-red);
+                }
+            `;
+            
+            document.head.appendChild(editPageStyleElement);
+            console.log('🎨 Variables CSS de la page d\'édition synchronisées avec location.html');
+        }
+        
+        // Extraction des styles depuis le CSS généré pour location.html
+        function extractStylesFromLocationCSS(css) {
+            const styles = {};
+            
+            // Extraction des variables CSS du CSS généré
+            const rootMatch = css.match(/:root\s*{([^}]+)}/);
+            if (rootMatch) {
+                const rootContent = rootMatch[1];
+                const variableMatches = rootContent.matchAll(/--([^:]+):\s*([^;]+);/g);
+                for (const match of variableMatches) {
+                    const varName = match[1].trim();
+                    const varValue = match[2].trim();
+                    styles[varName] = varValue;
+                }
+            }
+            
+            return styles;
+        }
+        
+        // Écoute des changements de styles depuis location.html
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'locationVS-css-broadcast' && e.newValue) {
+                try {
+                    const message = JSON.parse(e.newValue);
+                    if (message.type === 'LOCATION_CSS_UPDATE' && message.css) {
+                        const extractedStyles = extractStylesFromLocationCSS(message.css);
+                        applyDynamicCSSToEditPage(extractedStyles);
+                        console.log('📡 Styles reçus depuis location.html et appliqués à la page d\'édition');
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Erreur lors de la réception des styles:', error);
+                }
+            }
+        });
+        
+        // Écoute locale (même onglet) des changements de styles
+        function handleLocalStyleChanges() {
+            if (typeof window.getCurrentStyles === 'function') {
+                const currentStyles = window.getCurrentStyles();
+                applyDynamicCSSToEditPage(currentStyles);
+            }
+        }
+        
+        // Application initiale des styles au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            // Application des styles par défaut
+            const defaultStyles = {
+                primaryDark: '#0F172A',
+                secondaryDark: '#1E293B',
+                accentGreen: '#10B981',
+                accentBlue: '#3B82F6',
+                accentTeal: '#14B8A6',
+                successGreen: '#059669',
+                warningOrange: '#F59E0B',
+                warningRed: '#EF4444',
+                textWhite: '#F8FAFC',
+                textGray: '#CBD5E1',
+                infoBlue: '#3B82F6',
+                neutralGray: '#6B7280'
+            };
+            
+            applyDynamicCSSToEditPage(defaultStyles);
+            
+            // Écoute locale des changements de contrôles de style
+            if (typeof defaultValues !== 'undefined') {
+                Object.keys(defaultValues).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.addEventListener('input', handleLocalStyleChanges);
+                        element.addEventListener('change', handleLocalStyleChanges);
+                    }
+                });
+            }
+            
+            console.log('🎭 Système de synchronisation des styles de la page d\'édition initialisé');
+        });
+    </script>
 </body>
 </html>
