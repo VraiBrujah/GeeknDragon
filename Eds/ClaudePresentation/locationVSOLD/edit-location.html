@@ -1824,16 +1824,16 @@
                               placeholder="Comparaison technique objective...">Comparaison technique objective : Pourquoi Li-CUBE PRO™ surclasse totalement les anciennes batteries Ni-Cd</textarea>
                 </div>
 
-                <!-- EMOJIS ÉDITABLES POUR LA SECTION COMPARAISON -->
+                <!-- EMOJIS TITRES DE COLONNES -->
                 <div style="grid-column: span 2; background: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
                     <h3 style="color: var(--accent-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-smile"></i> Emojis Personnalisables (Synchronisation Temps Réel)
+                        <i class="fas fa-smile"></i> Emojis Titres de Colonnes
                     </h3>
                     
                     <!-- Rôle : Configuration des emojis de titres de colonnes -->
-                    <!-- Responsabilité : Personnalisation des symboles visuels -->
+                    <!-- Responsabilité : Personnalisation des symboles visuels des en-têtes -->
                     <!-- Synchronisation : Modification instantanée dans la page de présentation -->
-                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
                         <div class="edit-field">
                             <label class="field-label" for="weakness-title-emoji">Emoji Titre Concurrent</label>
                             <p class="field-description">Emoji affiché devant "Batteries Ni-Cd"</p>
@@ -1847,201 +1847,289 @@
                                    placeholder="✅" value="✅" maxlength="2" style="font-size: 1.2rem;">
                         </div>
                     </div>
-
-                    <!-- Rôle : Grille des emojis de faiblesses (11 emojis) -->
-                    <!-- Structure : Grille compacte 4x3 pour économiser l'espace -->
-                    <h4 style="color: var(--warning-red); margin-bottom: 0.8rem;">Emojis Faiblesses Concurrent (11)</h4>
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1.5rem;">
-                        <input type="text" class="field-input" data-field="weakness1-emoji" placeholder="☠️" value="☠️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 1">
-                        <input type="text" class="field-input" data-field="weakness2-emoji" placeholder="🔧" value="🔧" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 2">
-                        <input type="text" class="field-input" data-field="weakness3-emoji" placeholder="⏳" value="⏳" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 3">
-                        <input type="text" class="field-input" data-field="weakness4-emoji" placeholder="🏋️" value="🏋️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 4">
-                        <input type="text" class="field-input" data-field="weakness5-emoji" placeholder="🐌" value="🐌" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 5">
-                        <input type="text" class="field-input" data-field="weakness6-emoji" placeholder="📵" value="📵" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 6">
-                        <input type="text" class="field-input" data-field="weakness7-emoji" placeholder="⚖️" value="⚖️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 7">
-                        <input type="text" class="field-input" data-field="weakness8-emoji" placeholder="🧠" value="🧠" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 8">
-                        <input type="text" class="field-input" data-field="weakness9-emoji" placeholder="📊" value="📊" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 9">
-                        <input type="text" class="field-input" data-field="weakness10-emoji" placeholder="💸" value="💸" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 10">
-                        <input type="text" class="field-input" data-field="weakness11-emoji" placeholder="🔄" value="🔄" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Faiblesse 11">
-                    </div>
-
-                    <!-- Rôle : Grille des emojis d'avantages (12 emojis) -->
-                    <!-- Structure : Grille compacte 4x3 pour économiser l'espace -->
-                    <h4 style="color: var(--success-green); margin-bottom: 0.8rem;">Emojis Avantages Principal (12)</h4>
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;">
-                        <input type="text" class="field-input" data-field="strength1-emoji" placeholder="🔋" value="🔋" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 1">
-                        <input type="text" class="field-input" data-field="strength2-emoji" placeholder="🛡️" value="🛡️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 2">
-                        <input type="text" class="field-input" data-field="strength3-emoji" placeholder="📡" value="📡" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 3">
-                        <input type="text" class="field-input" data-field="strength4-emoji" placeholder="⚡" value="⚡" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 4">
-                        <input type="text" class="field-input" data-field="strength5-emoji" placeholder="🌡️" value="🌡️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 5">
-                        <input type="text" class="field-input" data-field="strength6-emoji" placeholder="🍃" value="🍃" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 6">
-                        <input type="text" class="field-input" data-field="strength7-emoji" placeholder="🛡️" value="🛡️" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 7">
-                        <input type="text" class="field-input" data-field="strength8-emoji" placeholder="💰" value="💰" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 8">
-                        <input type="text" class="field-input" data-field="strength9-emoji" placeholder="🇨🇦" value="🇨🇦" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 9">
-                        <input type="text" class="field-input" data-field="strength10-emoji" placeholder="📦" value="📦" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 10">
-                        <input type="text" class="field-input" data-field="strength11-emoji" placeholder="🔋" value="🔋" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 11">
-                        <input type="text" class="field-input" data-field="strength12-emoji" placeholder="💵" value="💵" maxlength="2" style="text-align: center; font-size: 1.1rem;" title="Avantage 12">
-                    </div>
-
-                    <p style="color: var(--text-gray); font-style: italic; margin-top: 1rem; font-size: 0.9rem;">
-                        <i class="fas fa-sync-alt"></i> Synchronisation temps réel : Modifiez un emoji ici pour le voir changer instantanément dans la présentation
-                    </p>
                 </div>
 
                 <!-- COMPARAISON EN 2 COLONNES (comme dans location.html) -->
                 
-                <!-- COLONNE GAUCHE : Faiblesses du Concurrent (❌) -->
+                <!-- FAIBLESSES AVEC MINI-SECTIONS EMOJI -->
                 <div style="background: rgba(239, 68, 68, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--warning-red);">
                     <h3 style="color: var(--warning-red); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                        <span>❌</span> Batteries Ni-Cd (Obsolètes) - Colonne Gauche
+                        <span>❌</span> Batteries Ni-Cd (Obsolètes) - Faiblesses
                     </h3>
-                    <div class="edit-grid">
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness1-title">Faiblesse 1 - Titre</label>
-                            <p class="field-description">Premier défaut majeur du concurrent</p>
-                            <input type="text" id="weakness1-title" class="field-input" data-field="weakness1-title" 
-                                   placeholder="Cadmium Hautement Toxique" value="Cadmium Hautement Toxique">
+                    
+                    <!-- Rôle : Organisation des faiblesses avec emojis intégrés -->
+                    <!-- Structure : Mini-section emoji au-dessus de chaque groupe de contenu -->
+                    <!-- Synchronisation : Modification temps réel entre édition et présentation -->
+                    
+                    <!-- Faiblesse 1 : Cadmium Toxique -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness1-emoji" placeholder="☠️" value="☠️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 1</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness1-desc">Faiblesse 1 - Description</label>
-                            <p class="field-description">Description détaillée de la toxicité</p>
-                            <textarea id="weakness1-desc" class="field-input field-textarea" data-field="weakness1-desc" 
-                                      placeholder="Classé dangereux REACH...">Classé dangereux REACH, recyclage coûteux, manipulation à risque</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness1-title">Titre</label>
+                                <input type="text" id="weakness1-title" class="field-input" data-field="weakness1-title" 
+                                       placeholder="Cadmium Hautement Toxique" value="Cadmium Hautement Toxique">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness1-desc">Description</label>
+                                <textarea id="weakness1-desc" class="field-input field-textarea" data-field="weakness1-desc" 
+                                          placeholder="Classé dangereux REACH...">Classé dangereux REACH, recyclage coûteux, manipulation à risque</textarea>
+                            </div>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness2-title">Faiblesse 2 - Titre</label>
-                            <p class="field-description">Second défaut critique</p>
-                            <input type="text" id="weakness2-title" class="field-input" data-field="weakness2-title" 
-                                   placeholder="Maintenance Obligatoire Coûteuse" value="Maintenance Obligatoire Coûteuse">
+                    </div>
+                    
+                    <!-- Faiblesse 2 : Maintenance Coûteuse -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness2-emoji" placeholder="🔧" value="🔧" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 2</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness2-desc">Faiblesse 2 - Description</label>
-                            <p class="field-description">Description de la maintenance coûteuse</p>
-                            <textarea id="weakness2-desc" class="field-input field-textarea" data-field="weakness2-desc" 
-                                      placeholder="Appoint électrolyte, fuites KOH...">Appoint électrolyte, fuites KOH, interventions techniques fréquentes</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness2-title">Titre</label>
+                                <input type="text" id="weakness2-title" class="field-input" data-field="weakness2-title" 
+                                       placeholder="Maintenance Obligatoire Coûteuse" value="Maintenance Obligatoire Coûteuse">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness2-desc">Description</label>
+                                <textarea id="weakness2-desc" class="field-input field-textarea" data-field="weakness2-desc" 
+                                          placeholder="Appoint électrolyte, fuites KOH...">Appoint électrolyte, fuites KOH, interventions techniques fréquentes</textarea>
+                            </div>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness3-title">Faiblesse 3 - Titre</label>
-                            <p class="field-description">Troisième problème technique</p>
-                            <input type="text" id="weakness3-title" class="field-input" data-field="weakness3-title" 
-                                   placeholder="Durée de Vie Limitée" value="Durée de Vie Limitée">
+                    </div>
+                    
+                    <!-- Faiblesse 3 : Durée de Vie Limitée -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness3-emoji" placeholder="⏳" value="⏳" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 3</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness3-desc">Faiblesse 3 - Description</label>
-                            <p class="field-description">Description de la durée de vie limitée</p>
-                            <textarea id="weakness3-desc" class="field-input field-textarea" data-field="weakness3-desc" 
-                                      placeholder="2000-3000 cycles seulement...">2000-3000 cycles seulement (5-6 ans) → remplacement fréquent</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness3-title">Titre</label>
+                                <input type="text" id="weakness3-title" class="field-input" data-field="weakness3-title" 
+                                       placeholder="Durée de Vie Limitée" value="Durée de Vie Limitée">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness3-desc">Description</label>
+                                <textarea id="weakness3-desc" class="field-input field-textarea" data-field="weakness3-desc" 
+                                          placeholder="2000-3000 cycles seulement...">2000-3000 cycles seulement (5-6 ans) → remplacement fréquent</textarea>
+                            </div>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness4-title">Faiblesse 4 - Titre</label>
-                            <p class="field-description">Quatrième défaut structurel</p>
-                            <input type="text" id="weakness4-title" class="field-input" data-field="weakness4-title" 
-                                   placeholder="Poids et Encombrement" value="Poids et Encombrement">
+                    </div>
+                    
+                    <!-- Faiblesse 4 : Poids et Encombrement -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness4-emoji" placeholder="🏋️" value="🏋️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 4</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness4-desc">Faiblesse 4 - Description</label>
-                            <p class="field-description">Description du problème de poids</p>
-                            <textarea id="weakness4-desc" class="field-input field-textarea" data-field="weakness4-desc" 
-                                      placeholder="80-100 kg, manipulation dangereuse...">80-100 kg, manipulation dangereuse, installation contraignante</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness4-title">Titre</label>
+                                <input type="text" id="weakness4-title" class="field-input" data-field="weakness4-title" 
+                                       placeholder="Poids et Encombrement" value="Poids et Encombrement">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness4-desc">Description</label>
+                                <textarea id="weakness4-desc" class="field-input field-textarea" data-field="weakness4-desc" 
+                                          placeholder="80-100 kg, manipulation dangereuse...">80-100 kg, manipulation dangereuse, installation contraignante</textarea>
+                            </div>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness5-title">Faiblesse 5 - Titre</label>
-                            <p class="field-description">Cinquième problème de charge</p>
-                            <input type="text" id="weakness5-title" class="field-input" data-field="weakness5-title" 
-                                   placeholder="Charge Lente 8-12h" value="Charge Lente 8-12h">
+                    </div>
+                    
+                    <!-- Faiblesse 5 : Charge Lente -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness5-emoji" placeholder="🐌" value="🐌" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 5</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness5-desc">Faiblesse 5 - Description</label>
-                            <p class="field-description">Description du problème de charge lente</p>
-                            <textarea id="weakness5-desc" class="field-input field-textarea" data-field="weakness5-desc" 
-                                      placeholder="Indisponibilité longue...">Indisponibilité longue, productivité réduite</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness5-title">Titre</label>
+                                <input type="text" id="weakness5-title" class="field-input" data-field="weakness5-title" 
+                                       placeholder="Charge Lente 8-12h" value="Charge Lente 8-12h">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness5-desc">Description</label>
+                                <textarea id="weakness5-desc" class="field-input field-textarea" data-field="weakness5-desc" 
+                                          placeholder="Indisponibilité longue...">Indisponibilité longue, productivité réduite</textarea>
+                            </div>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness6-title">Faiblesse 6 - Titre</label>
-                            <p class="field-description">Sixième défaut de connectivité</p>
-                            <input type="text" id="weakness6-title" class="field-input" data-field="weakness6-title" 
-                                   placeholder="Aucune Connectivité" value="Aucune Connectivité">
+                    </div>
+                    
+                    <!-- Faiblesse 6 : Aucune Connectivité -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness6-emoji" placeholder="📵" value="📵" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 6</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness6-desc">Faiblesse 6 - Description</label>
-                            <p class="field-description">Description du manque de connectivité</p>
-                            <textarea id="weakness6-desc" class="field-input field-textarea" data-field="weakness6-desc" 
-                                      placeholder="Pas de télémétrie...">Pas de télémétrie, aucun suivi à distance, pannes surprises</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness6-title">Titre</label>
+                                <input type="text" id="weakness6-title" class="field-input" data-field="weakness6-title" 
+                                       placeholder="Aucune Connectivité" value="Aucune Connectivité">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness6-desc">Description</label>
+                                <textarea id="weakness6-desc" class="field-input field-textarea" data-field="weakness6-desc" 
+                                          placeholder="Pas de télémétrie...">Pas de télémétrie, aucun suivi à distance, pannes surprises</textarea>
+                            </div>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness7">Faiblesse 7</label>
-                            <p class="field-description">Septième problème technique</p>
-                            <input type="text" id="weakness7-title" class="field-input" data-field="weakness7-title" 
-                                   placeholder="Réglementation Transport Stricte" value="Réglementation Transport Stricte">
-                            <textarea id="weakness7-desc" class="field-input field-textarea" data-field="weakness7-desc" 
-                                      placeholder="Classé UN2795 Batteries Wet Alkali...">Classé UN2795 Batteries Wet Alkali, transport coûteux et contraignant</textarea>
+                    </div>
+                    
+                    <!-- Faiblesse 7 : Réglementation Transport -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness7-emoji" placeholder="⚖️" value="⚖️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 7</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness8">Faiblesse 8</label>
-                            <p class="field-description">Huitième défaut de sécurité</p>
-                            <input type="text" id="weakness8-title" class="field-input" data-field="weakness8-title" 
-                                   placeholder="Effet Mémoire Dégradant" value="Effet Mémoire Dégradant">
-                            <textarea id="weakness8-desc" class="field-input field-textarea" data-field="weakness8-desc" 
-                                      placeholder="Perte capacité progressive...">Perte capacité progressive avec cycles partiels, performance décroissante</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness7-title">Titre</label>
+                                <input type="text" id="weakness7-title" class="field-input" data-field="weakness7-title" 
+                                       placeholder="Réglementation Transport Stricte" value="Réglementation Transport Stricte">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness7-desc">Description</label>
+                                <textarea id="weakness7-desc" class="field-input field-textarea" data-field="weakness7-desc" 
+                                          placeholder="Classé UN2795 Batteries Wet Alkali...">Classé UN2795 Batteries Wet Alkali, transport coûteux et contraignant</textarea>
+                            </div>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness9">Faiblesse 9</label>
-                            <p class="field-description">Neuvième problème d'entretien</p>
-                            <input type="text" id="weakness9-title" class="field-input" data-field="weakness9-title" 
-                                   placeholder="Profondeur Décharge Limitée" value="Profondeur Décharge Limitée">
-                            <textarea id="weakness9-desc" class="field-input field-textarea" data-field="weakness9-desc" 
-                                      placeholder="60% seulement exploitable...">60% seulement exploitable vs 96% Li-CUBE PRO™ → capacité réelle inférieure</textarea>
+                    </div>
+                    
+                    <!-- Faiblesse 8 : Effet Mémoire -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness8-emoji" placeholder="🧠" value="🧠" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 8</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness10">Faiblesse 10</label>
-                            <p class="field-description">Dixième défaut de fiabilité</p>
-                            <input type="text" id="weakness10-title" class="field-input" data-field="weakness10-title" 
-                                   placeholder="Location Plus Chère" value="Location Plus Chère">
-                            <textarea id="weakness10-desc" class="field-input field-textarea" data-field="weakness10-desc" 
-                                      placeholder="250$/mois vs 150-200$...">250$/mois vs 150-200$ Li-CUBE PRO™ → 25% plus cher sans maintenance incluse</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness8-title">Titre</label>
+                                <input type="text" id="weakness8-title" class="field-input" data-field="weakness8-title" 
+                                       placeholder="Effet Mémoire Dégradant" value="Effet Mémoire Dégradant">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness8-desc">Description</label>
+                                <textarea id="weakness8-desc" class="field-input field-textarea" data-field="weakness8-desc" 
+                                          placeholder="Perte capacité progressive...">Perte capacité progressive avec cycles partiels, performance décroissante</textarea>
+                            </div>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="weakness11">Faiblesse 11</label>
-                            <p class="field-description">Onzième problème technologique</p>
-                            <input type="text" id="weakness11-title" class="field-input" data-field="weakness11-title" 
-                                   placeholder="Remplacements Fréquents" value="Remplacements Fréquents">
-                            <textarea id="weakness11-desc" class="field-input field-textarea" data-field="weakness11-desc" 
-                                      placeholder="3 remplacements sur 20 ans...">3 remplacements sur 20 ans (4 unités au total) vs 0 pour Li-CUBE PRO™</textarea>
+                    </div>
+                    
+                    <!-- Faiblesse 9 : Profondeur Décharge -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness9-emoji" placeholder="📊" value="📊" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 9</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness9-title">Titre</label>
+                                <input type="text" id="weakness9-title" class="field-input" data-field="weakness9-title" 
+                                       placeholder="Profondeur Décharge Limitée" value="Profondeur Décharge Limitée">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness9-desc">Description</label>
+                                <textarea id="weakness9-desc" class="field-input field-textarea" data-field="weakness9-desc" 
+                                          placeholder="60% seulement exploitable...">60% seulement exploitable vs 96% Li-CUBE PRO™ → capacité réelle inférieure</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 10 : Location Plus Chère -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness10-emoji" placeholder="💸" value="💸" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 10</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness10-title">Titre</label>
+                                <input type="text" id="weakness10-title" class="field-input" data-field="weakness10-title" 
+                                       placeholder="Location Plus Chère" value="Location Plus Chère">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness10-desc">Description</label>
+                                <textarea id="weakness10-desc" class="field-input field-textarea" data-field="weakness10-desc" 
+                                          placeholder="250$/mois vs 150-200$...">250$/mois vs 150-200$ Li-CUBE PRO™ → 25% plus cher sans maintenance incluse</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 11 : Remplacements Fréquents -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness11-emoji" placeholder="🔄" value="🔄" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 11</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness11-title">Titre</label>
+                                <input type="text" id="weakness11-title" class="field-input" data-field="weakness11-title" 
+                                       placeholder="Remplacements Fréquents" value="Remplacements Fréquents">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness11-desc">Description</label>
+                                <textarea id="weakness11-desc" class="field-input field-textarea" data-field="weakness11-desc" 
+                                          placeholder="3 remplacements sur 20 ans...">3 remplacements sur 20 ans (4 unités au total) vs 0 pour Li-CUBE PRO™</textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Section Avantages Produit Principal (vert) -->
-                <div class="edit-section" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
-                    <h3 style="color: var(--success-green); margin-bottom: 1rem;">
-                        <i class="fas fa-check-circle"></i>
-                        Avantages du Produit Principal
+                <!-- AVANTAGES AVEC MINI-SECTIONS EMOJI -->
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--success-green);">
+                    <h3 style="color: var(--success-green); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>✅</span> Li-CUBE PRO™ - Avantages
                     </h3>
-                    <div class="edit-grid">
-                        <div class="edit-field">
-                            <label class="field-label" for="strength1-title">Avantage 1 - Titre</label>
-                            <p class="field-description">Premier atout technique majeur</p>
-                            <input type="text" id="strength1-title" class="field-input" data-field="strength1-title" 
-                                   placeholder="Durée Vie Exceptionnelle" value="Durée Vie Exceptionnelle">
+                    
+                    <!-- Rôle : Organisation des avantages avec emojis intégrés -->
+                    <!-- Structure : Mini-section emoji au-dessus de chaque groupe de contenu -->
+                    <!-- Synchronisation : Modification temps réel entre édition et présentation -->
+                    <!-- Avantage 1 : Durée Vie Exceptionnelle -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength1-emoji" placeholder="🔋" value="🔋" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 1</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength1-desc">Avantage 1 - Description</label>
-                            <p class="field-description">Description de la durée de vie</p>
-                            <textarea id="strength1-desc" class="field-input field-textarea" data-field="strength1-desc" 
-                                      placeholder="≥8000 cycles...">≥8000 cycles (20-25 ans réels) → 4× plus longue que Ni-Cd</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength1-title">Titre</label>
+                                <input type="text" id="strength1-title" class="field-input" data-field="strength1-title" 
+                                       placeholder="Durée Vie Exceptionnelle" value="Durée Vie Exceptionnelle">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength1-desc">Description</label>
+                                <textarea id="strength1-desc" class="field-input field-textarea" data-field="strength1-desc" 
+                                          placeholder="≥8000 cycles...">≥8000 cycles (20-25 ans réels) → 4× plus longue que Ni-Cd</textarea>
+                            </div>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength2-title">Avantage 2 - Titre</label>
-                            <p class="field-description">Deuxième supériorité technique</p>
-                            <input type="text" id="strength2-title" class="field-input" data-field="strength2-title" 
-                                   placeholder="Zéro Maintenance" value="Zéro Maintenance">
+                    </div>
+                    
+                    <!-- Avantage 2 : Zéro Maintenance -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength2-emoji" placeholder="🛡️" value="🛡️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 2</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength2-desc">Avantage 2 - Description</label>
-                            <p class="field-description">Description maintenance nulle</p>
-                            <textarea id="strength2-desc" class="field-input field-textarea" data-field="strength2-desc" 
-                                      placeholder="Aucun électrolyte...">Aucun électrolyte, aucun effet mémoire, suivi automatisé par BMS</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength2-title">Titre</label>
+                                <input type="text" id="strength2-title" class="field-input" data-field="strength2-title" 
+                                       placeholder="Zéro Maintenance" value="Zéro Maintenance">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength2-desc">Description</label>
+                                <textarea id="strength2-desc" class="field-input field-textarea" data-field="strength2-desc" 
+                                          placeholder="Aucun électrolyte...">Aucun électrolyte, aucun effet mémoire, suivi automatisé par BMS</textarea>
+                            </div>
                         </div>
+                    </div>
                         <div class="edit-field">
                             <label class="field-label" for="strength3-title">Avantage 3 - Titre</label>
                             <p class="field-description">Troisième atout de monitoring</p>
