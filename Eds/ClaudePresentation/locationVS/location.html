@@ -12,9 +12,565 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Styles externes pour meilleure organisation -->
-    <link rel="stylesheet" href="css/location-styles.css">
-    
+    <style>
+        /* Variables CSS pour le thème de location : vert et bleu */
+        :root {
+            --primary-dark: #0F172A;
+            --secondary-dark: #1E293B;
+            --accent-green: #10B981;
+            --accent-blue: #3B82F6;
+            --accent-teal: #14B8A6;
+            --success-green: #059669;
+            --warning-orange: #F59E0B;
+            --text-white: #F8FAFC;
+            --text-gray: #CBD5E1;
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            --gradient-green: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+            --gradient-blue: linear-gradient(135deg, var(--accent-blue) 0%, #60A5FA 100%);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-primary);
+            color: var(--text-white);
+            line-height: 1.6;
+        }
+        
+        /* Navigation spécifique version LOCATION */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
+            padding: 1rem 2rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        
+        .nav-content {
+            display: flex; justify-content: center; align-items: center;
+            max-width: 1400px; margin: 0 auto;
+        }
+        
+        .nav-brand { display: flex; align-items: center; gap: 1rem; }
+        
+        .nav-logo {
+            width: 50px; height: 50px; border-radius: 12px;
+            background: rgba(16, 185, 129, 0.1); border: 2px solid rgba(16, 185, 129, 0.3);
+            background-image: url('./images/logo edsquebec.png');
+            background-size: 80%; background-repeat: no-repeat; background-position: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-logo:hover {
+            background-color: rgba(16, 185, 129, 0.2); transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .nav-title {
+            font-size: 1.8rem; font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-green);
+        }
+        
+        .nav-menu { display: flex; gap: 2rem; align-items: center; }
+        
+        .nav-item {
+            color: var(--text-gray); text-decoration: none; font-weight: 500;
+            padding: 0.75rem 1.25rem; border-radius: 10px; transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-white); background: rgba(16, 185, 129, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        /* Sections espacement éditables */
+        .header-spacer, .section-spacer {
+            width: 100%;
+            background: transparent;
+            display: block;
+        }
+        
+        .header-spacer {
+            height: 80px; /* Hauteur par défaut header */
+        }
+        
+        .section-spacer {
+            height: 0px; /* Hauteur par défaut sections (espacement actuel nul) */
+        }
+        
+        /* Section principale avec focus LOCATION */
+        .section {
+            min-height: 100vh; padding: 6rem 2rem 4rem;
+            position: relative; display: flex; align-items: center;
+        }
+        
+        .container { max-width: 1400px; margin: 0 auto; width: 100%; }
+        
+        /* Héro orienté LOCATION/SERVICE */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, var(--primary-dark) 100%);
+            position: relative; overflow: hidden;
+        }
+        
+        .hero::before {
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 60%; height: 100%; z-index: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2310B981" stroke-width="0.5" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            align-items: center; position: relative; z-index: 10;
+        }
+        
+        .hero-text h1 {
+            font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-highlight {
+            color: var(--accent-green); font-size: 5rem;
+            text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+            display: block; margin-bottom: 0.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem; color: var(--text-gray);
+            margin-bottom: 2.5rem; font-weight: 500; line-height: 1.7;
+        }
+        
+        .price-banner {
+            background: var(--gradient-green); color: white;
+            padding: 1.5rem 2rem; border-radius: 15px; margin-bottom: 2rem;
+            text-align: center; box-shadow: var(--shadow-lg);
+        }
+        
+        .price-main {
+            font-size: 3.5rem; font-weight: 900; line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .price-sub {
+            font-size: 1.1rem; opacity: 0.9; margin-top: 0.5rem;
+        }
+        
+        .rental-benefits {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem; margin-bottom: 3rem;
+        }
+        
+        .benefit-card {
+            background: rgba(16, 185, 129, 0.1); backdrop-filter: blur(15px);
+            border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 16px;
+            padding: 1.8rem 1.2rem; text-align: center; transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-4px); background: rgba(16, 185, 129, 0.15);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem; color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-title {
+            font-size: 1.1rem; font-weight: 700; color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .benefit-text {
+            font-size: 0.9rem; color: var(--text-gray);
+        }
+        
+        .cta-rental {
+            background: var(--gradient-green); color: white;
+            padding: 1.2rem 2.5rem; border: none; border-radius: 12px;
+            font-size: 1.2rem; font-weight: 700; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.8rem;
+        }
+        
+        .cta-rental:hover {
+            transform: translateY(-3px); box-shadow: var(--shadow-lg);
+        }
+        
+        .product-showcase {
+            width: 500px; height: 400px; background: var(--gradient-green);
+            border-radius: 24px; position: relative; overflow: hidden;
+            box-shadow: var(--shadow-lg); animation: float 6s ease-in-out infinite;
+            background-image: url('./images/Li-CUBE PRO.png');
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+            border: 3px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .product-showcase::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 4s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        /* Section Tarifs */
+        .pricing-section {
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--primary-dark) 100%);
+        }
+        
+        .section-title {
+            font-size: 3.5rem; font-weight: 800; text-align: center;
+            margin-bottom: 3rem; background: var(--gradient-green);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        .section-title.editable:hover {
+            background: var(--gradient-green) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            border-radius: 8px !important;
+        }
+        
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 2rem; margin-bottom: 3rem;
+        }
+        
+        .pricing-card {
+            background: rgba(16, 185, 129, 0.1); border-radius: 20px;
+            padding: 2.5rem 2rem; text-align: center;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.3s ease; position: relative;
+        }
+        
+        .pricing-card.featured {
+            transform: scale(1.05); border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.15);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'RECOMMANDÉ'; position: absolute; top: -10px; left: 50%;
+            transform: translateX(-50%); background: var(--accent-green); color: white;
+            padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px); background: rgba(16, 185, 129, 0.15);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        .pricing-duration {
+            font-size: 1.1rem; font-weight: 600; color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-value {
+            font-size: 3rem; font-weight: 900; color: var(--text-white);
+            margin-bottom: 0.5rem; display: block;
+        }
+        
+        .pricing-unit {
+            font-size: 1rem; color: var(--text-gray); margin-bottom: 1.5rem;
+        }
+        
+        .pricing-features {
+            text-align: left; margin-bottom: 2rem;
+        }
+        
+        .pricing-feature {
+            display: flex; align-items: center; gap: 0.5rem;
+            margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--text-gray);
+        }
+        
+        .pricing-feature .fa-check {
+            color: var(--accent-green); font-weight: 600;
+        }
+        
+        .pricing-cta {
+            background: var(--gradient-green); color: white;
+            padding: 0.8rem 1.5rem; border: none; border-radius: 8px;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .pricing-cta:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Section Avantages Location */
+        .advantages-section {
+            background: var(--gradient-primary);
+        }
+        
+        .advantages-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 2rem; margin-top: 3rem;
+        }
+        
+        .advantage-card {
+            background: rgba(16, 185, 129, 0.08); border-radius: 18px;
+            padding: 2rem; border-left: 4px solid var(--accent-green);
+            transition: all 0.3s ease;
+        }
+        
+        .advantage-card:hover {
+            transform: translateX(8px); background: rgba(16, 185, 129, 0.12);
+        }
+        
+        .advantage-icon {
+            font-size: 2.5rem; color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        
+        .advantage-title {
+            font-size: 1.4rem; font-weight: 700; color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+        
+        .advantage-text {
+            color: var(--text-gray); line-height: 1.6;
+        }
+        
+        /* Section Contact Location */
+        /* Section comparaison technique */
+        .technical-comparison {
+            background: var(--gradient-primary);
+            padding: 6rem 2rem;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+        
+        .old-tech-column, .new-tech-column {
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+        
+        .old-tech-column {
+            border: 2px solid var(--warning-red);
+            background: rgba(239, 68, 68, 0.05);
+        }
+        
+        .new-tech-column {
+            border: 2px solid var(--success-green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+        
+        .old-tech-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--warning-red);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .new-tech-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success-green);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .weakness-item, .strength-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .weakness-item {
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .strength-item {
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .weakness-item:hover {
+            background: rgba(239, 68, 68, 0.15);
+            transform: translateX(-5px);
+        }
+        
+        .strength-item:hover {
+            background: rgba(16, 185, 129, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .weakness-icon, .strength-icon {
+            font-size: 1.8rem;
+            width: 40px;
+            text-align: center;
+            margin-top: 0.2rem;
+        }
+        
+        .weakness-content h4, .strength-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-white);
+        }
+        
+        .weakness-content p, .strength-content p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+        
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .vs-text {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-green);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .conclusion-box {
+            background: var(--gradient-green);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .conclusion-box h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .conclusion-box p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .contact-section {
+            background: var(--gradient-green); color: white;
+            text-align: center; padding: 6rem 2rem;
+        }
+        
+        .contact-content h2 {
+            font-size: 3rem; font-weight: 800; margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .contact-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 2rem; margin: 3rem 0; max-width: 900px;
+            margin-left: auto; margin-right: auto;
+        }
+        
+        .contact-card {
+            background: rgba(255,255,255,0.1); border-radius: 15px;
+            padding: 1.8rem; backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .contact-icon { font-size: 2rem; margin-bottom: 1rem; }
+        
+        .contact-actions {
+            display: flex; gap: 2rem; justify-content: center;
+            flex-wrap: wrap; margin-top: 3rem;
+        }
+        
+        .btn-contact {
+            background: white; color: var(--accent-green);
+            padding: 1.2rem 3rem; border: none; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 700; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.8rem;
+        }
+        
+        .btn-contact:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-lg);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .pricing-grid, .advantages-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .comparison-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .vs-divider { order: 2; }
+            .vs-text { font-size: 2rem; transform: rotate(90deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .section { padding: 4rem 1rem 2rem; }
+            .nav-menu { display: none; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-highlight { font-size: 3rem; }
+            .rental-benefits, .contact-grid { grid-template-columns: 1fr; }
+            .product-showcase { width: 350px; height: 280px; }
+            .pricing-card.featured { transform: none; }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.in-view {
+            opacity: 1; transform: translateY(0);
+        }
+        
+        .editable {
+            position: relative; transition: all 0.3s ease;
+        }
+        
+        .editable:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 5px; padding: 2px 5px; margin: -2px -5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation LOCATION -->
@@ -549,11 +1105,201 @@
         </div>
     </section>
 
-    <!-- Gestionnaire principal LocationVS (remplace les scripts inline) -->
-    <script src="js/location-manager.js"></script>
+    <script>
+        // Navigation fluide
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animation au scroll
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Gestion navigation active
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        console.log('Li-CUBE PRO™ LOCATION - Page de location optimisée chargée');
+    </script>
     
-    <!-- Gestionnaire espacements dynamiques -->
-    <script src="js/spacing-manager.js"></script>
+    <!-- Récepteur de Styles Dynamiques depuis edit-location.html -->
+    <script>
+        let dynamicStyleElement = null;
+        
+        // Application du CSS dynamique
+        function applyDynamicCSS(css) {
+            // Suppression de l'ancien style dynamique
+            if (dynamicStyleElement) {
+                dynamicStyleElement.remove();
+            }
+            
+            // Création du nouveau style
+            dynamicStyleElement = document.createElement('style');
+            dynamicStyleElement.id = 'dynamic-locationVS-styles';
+            dynamicStyleElement.textContent = css;
+            document.head.appendChild(dynamicStyleElement);
+            
+            console.log('🎨 Styles dynamiques appliqués à location.html');
+        }
+        
+        // Écoute des messages de synchronisation CSS
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'locationVS-css-broadcast' && e.newValue) {
+                try {
+                    const message = JSON.parse(e.newValue);
+                    if (message.type === 'LOCATION_CSS_UPDATE') {
+                        applyDynamicCSS(message.css);
+                        console.log('📡 Styles reçus depuis edit-location.html');
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Erreur lors de la réception des styles:', error);
+                }
+            }
+        });
+        
+        // Chargement initial des styles sauvegardés
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCSS = localStorage.getItem('locationVS-dynamic-css');
+            if (savedCSS) {
+                applyDynamicCSS(savedCSS);
+                console.log('🔄 Styles sauvegardés appliqués au chargement');
+            }
+        });
+    </script>
+    
+    <!-- Script de Réorganisation des Sections -->
+    <script>
+        // ==========================================
+        // SYSTÈME DE RÉORGANISATION DES SECTIONS (PRÉSENTATION)
+        // ==========================================
+        
+        // Obtient l'ordre actuel des sections depuis localStorage (pour la présentation)
+        function getSectionOrder() {
+            const savedOrder = localStorage.getItem('locationVS-sectionOrder');
+            return savedOrder ? JSON.parse(savedOrder) : {
+                'hero': 1,
+                'pricing': 2, 
+                'advantages': 3,
+                'technical': 4,
+                'contact': 5
+            };
+        }
+        
+        // Applique l'ordre des sections dans la page de présentation
+        function applySectionOrderToPresentation() {
+            const order = getSectionOrder();
+            const body = document.body;
+            
+            // Récupère toutes les sections et leurs spacers associés
+            const sectionGroups = [];
+            
+            // Pour chaque section, trouve son groupe (section + spacer suivant)
+            Object.keys(order).forEach(sectionId => {
+                const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+                if (section) {
+                    const group = { section, spacers: [], order: order[sectionId] };
+                    
+                    // Trouve le spacer qui suit cette section
+                    let nextElement = section.nextElementSibling;
+                    while (nextElement && nextElement.classList.contains('section-spacer')) {
+                        group.spacers.push(nextElement);
+                        nextElement = nextElement.nextElementSibling;
+                    }
+                    
+                    sectionGroups.push(group);
+                }
+            });
+            
+            // Trie les groupes par ordre
+            sectionGroups.sort((a, b) => a.order - b.order);
+            
+            // Trouve le point d'insertion (après le header)
+            const header = document.querySelector('header') || document.querySelector('.header');
+            let insertAfter = header;
+            
+            // Réinsère les sections dans le bon ordre
+            sectionGroups.forEach(group => {
+                // Insère la section
+                if (insertAfter.nextSibling) {
+                    body.insertBefore(group.section, insertAfter.nextSibling);
+                } else {
+                    body.appendChild(group.section);
+                }
+                insertAfter = group.section;
+                
+                // Insère les spacers
+                group.spacers.forEach(spacer => {
+                    if (insertAfter.nextSibling) {
+                        body.insertBefore(spacer, insertAfter.nextSibling);
+                    } else {
+                        body.appendChild(spacer);
+                    }
+                    insertAfter = spacer;
+                });
+            });
+            
+            console.log('📋 Ordre des sections appliqué à la présentation:', order);
+        }
+        
+        // Écoute les changements d'ordre de sections
+        function listenForSectionOrderChanges() {
+            // Écoute les événements de localStorage
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'locationVS-sectionOrder') {
+                    console.log('🔄 Changement d\'ordre détecté, réorganisation...');
+                    applySectionOrderToPresentation();
+                }
+            });
+            
+            // Écoute les événements personnalisés (pour même onglet)
+            window.addEventListener('storage', function(e) {
+                if (e.detail && e.detail.key === 'locationVS-sectionOrder') {
+                    console.log('🔄 Changement d\'ordre détecté (même onglet), réorganisation...');
+                    applySectionOrderToPresentation();
+                }
+            });
+        }
+        
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            applySectionOrderToPresentation();
+            listenForSectionOrderChanges();
+            console.log('✅ Système de réorganisation des sections initialisé sur présentation');
+        });
+    </script>
     
     <!-- Récepteur de Synchronisation Instantanée Li-CUBE PRO™ -->
     <script src="js/presentation-receiver.js"></script>
