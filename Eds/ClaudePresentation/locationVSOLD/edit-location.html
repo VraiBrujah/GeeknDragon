@@ -849,6 +849,51 @@
                 </div>
             </div>
             
+            <!-- Rôle : Contrôles de style pour l'élément VS de comparaison -->
+            <!-- Responsabilité : Personnalisation visuelle du texte VS entre les produits -->
+            <!-- Synchronisation : Variables CSS transmises vers location.html en temps réel -->
+            <!-- Élément VS (Comparaison Produits) -->
+            <div class="css-group">
+                <h3>Élément VS (Comparaison)</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Police VS:</span>
+                        <span class="range-value" id="vsFontSizeValue">2.2rem</span>
+                        <input type="range" id="vsFontSize" min="1.5" max="4" step="0.1" value="2.2">
+                    </div>
+                    <label>Épaisseur Police VS: 
+                        <select id="vsFontWeight">
+                            <option value="700">Bold</option>
+                            <option value="800">Extra-Bold</option>
+                            <option value="900" selected>Black</option>
+                        </select>
+                    </label>
+                    <label>Couleur Texte VS:
+                        <input type="color" id="vsTextColor" value="#1E293B">
+                    </label>
+                    <label>Police VS:
+                        <select id="vsFontFamily">
+                            <option value="'Playfair Display', serif" selected>Playfair Display (Serif)</option>
+                            <option value="'Inter', sans-serif">Inter (Sans-serif)</option>
+                            <option value="'JetBrains Mono', monospace">JetBrains Mono (Monospace)</option>
+                        </select>
+                    </label>
+                    <label>Style Texte VS:
+                        <select id="vsTextTransform">
+                            <option value="uppercase" selected>MAJUSCULES</option>
+                            <option value="lowercase">minuscules</option>
+                            <option value="capitalize">Première Lettre</option>
+                            <option value="none">Normal</option>
+                        </select>
+                    </label>
+                    <div class="range-control">
+                        <span class="range-label">Espacement Lettres:</span>
+                        <span class="range-value" id="vsLetterSpacingValue">0.15em</span>
+                        <input type="range" id="vsLetterSpacing" min="0" max="0.5" step="0.01" value="0.15">
+                    </div>
+                </div>
+            </div>
+            
             <!-- Cards et Benefits -->
             <div class="css-group">
                 <h3>Cartes et Avantages</h3>
@@ -2412,6 +2457,17 @@ Fabrication et Support 100% Québécois</textarea>
             'competitor-image-path': './images/concurrent.png',
             'vs-element-text': 'VS',
             
+            // Rôle : Styles personnalisables pour l'élément VS
+            // Type : propriétés CSS (taille, couleur, police, espacement)
+            // Domaine : valeurs CSS valides pour chaque propriété
+            // Usage : Personnalisation visuelle du texte VS distinct des boutons
+            vsFontSize: 2.2,
+            vsFontWeight: '900',
+            vsTextColor: '#1E293B',
+            vsFontFamily: "'Playfair Display', serif",
+            vsTextTransform: 'uppercase',
+            vsLetterSpacing: 0.15,
+            
             // Chemin logo (déjà géré mais ajouté pour cohérence)
             'logo-path': './images/logo edsquebec.png'
         };
@@ -2485,6 +2541,16 @@ Fabrication et Support 100% Québécois</textarea>
             // Section Titles
             if (document.getElementById('sectionTitleSizeValue')) {
                 document.getElementById('sectionTitleSizeValue').textContent = document.getElementById('sectionTitleSize').value + 'px';
+            }
+            
+            // Rôle : Mise à jour des affichages de valeurs pour l'élément VS
+            // Responsabilité : Synchronisation visuelle des contrôles avec leurs valeurs
+            // Élément VS (Comparaison)
+            if (document.getElementById('vsFontSizeValue')) {
+                document.getElementById('vsFontSizeValue').textContent = document.getElementById('vsFontSize').value + 'rem';
+            }
+            if (document.getElementById('vsLetterSpacingValue')) {
+                document.getElementById('vsLetterSpacingValue').textContent = document.getElementById('vsLetterSpacing').value + 'em';
             }
             
             // Cards et Benefits
@@ -2930,6 +2996,18 @@ Fabrication et Support 100% Québécois</textarea>
                 }
                 .competitor-showcase {
                     background-image: url('${styles['competitor-image-path'] || './images/concurrent.png'}') !important;
+                }
+                
+                /* Rôle : Styles personnalisés pour l'élément VS */
+                /* Synchronisation : Variables CSS mises à jour depuis l'éditeur */
+                /* Responsabilité : Apparence distinctive du texte VS comparatif */
+                :root {
+                    --vs-font-size: ${styles.vsFontSize}rem !important;
+                    --vs-font-weight: ${styles.vsFontWeight} !important;
+                    --vs-text-color: ${styles.vsTextColor} !important;
+                    --vs-font-family: ${styles.vsFontFamily} !important;
+                    --vs-text-transform: ${styles.vsTextTransform} !important;
+                    --vs-letter-spacing: ${styles.vsLetterSpacing}em !important;
                 }
                 
                 /* Rôle : Gestion du logo dynamique (déjà existant mais maintenu pour cohérence) */

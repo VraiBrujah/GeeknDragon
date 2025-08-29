@@ -289,14 +289,18 @@
         }
         
         /* Rôle : Texte VS à l'intérieur du badge */
-        /* Design : Police bold, couleur blanche, centré */
-        /* Éditable : Compatible avec le système d'édition inline */
+        /* Design : Style distinct éditable, différent des boutons */
+        /* Contraste : Style personnalisable via variables CSS pour édition */
+        /* Éditable : Compatible avec le système d'édition inline et contrôles de style */
         .vs-text {
-            font-size: 2rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            letter-spacing: 0.1em;
+            font-size: var(--vs-font-size, 2.2rem);
+            font-weight: var(--vs-font-weight, 900);
+            color: var(--vs-text-color, #1E293B);
+            text-shadow: var(--vs-text-shadow, 0 2px 4px rgba(255,255,255,0.4));
+            letter-spacing: var(--vs-letter-spacing, 0.15em);
+            font-family: var(--vs-font-family, 'Playfair Display', serif);
+            text-transform: var(--vs-text-transform, uppercase);
+            transition: all 0.3s ease;
         }
         
         /* Rôle : Responsive design pour écrans mobiles */
