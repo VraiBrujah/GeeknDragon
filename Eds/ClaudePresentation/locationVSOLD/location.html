@@ -236,10 +236,10 @@
         /* Responsive : Passage en colonne sur mobile avec gap adaptatif */
         .product-comparison-container {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 2rem;
-            flex-wrap: wrap;
         }
         
         /* Rôle : Styles spécifiques pour l'image concurrent */
@@ -348,15 +348,21 @@
         }
         
         .pricing-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 2rem; margin-bottom: 3rem;
-        }
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+          margin-bottom: 3rem;
+          align-items: stretch; 
+       }
         
         .pricing-card {
             background: rgba(16, 185, 129, 0.1); border-radius: 20px;
-            padding: 2.5rem 2rem; text-align: center;
+            text-align: center;
             border: 1px solid rgba(16, 185, 129, 0.2);
             transition: all 0.3s ease; position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         
         .pricing-card.featured {
@@ -369,6 +375,9 @@
             transform: translateX(-50%); background: var(--accent-green); color: white;
             padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem;
             font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
         }
         
         .pricing-card:hover {
@@ -411,6 +420,7 @@
             padding: 0.8rem 1.5rem; border: none; border-radius: 8px;
             font-weight: 600; cursor: pointer; transition: all 0.3s ease;
             width: 100%;
+            margin-top: auto;
         }
         
         .pricing-cta:hover {
