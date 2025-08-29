@@ -610,6 +610,7 @@ class GeeknDragonAudioPlayer {
             playlist: this.state.playlist,
             shuffleOrder: this.state.shuffleOrder,
             currentDirectory: this.currentDirectory,
+            volume: this.state.volume,
             
             // Nouvelles propriétés pour la logique intelligente
             currentPagePlaylist: this.state.currentPagePlaylist,
@@ -644,6 +645,12 @@ class GeeknDragonAudioPlayer {
                 this.state.isPlaying = state.isPlaying || false;
                 this.currentDirectory = state.currentDirectory || this.currentDirectory;
 
+                if (typeof state.volume === 'number') {
+                    this.state.volume = state.volume;
+                    Howler.volume(state.volume);
+                    localStorage.setItem('gnd-audio-volume', state.volume.toString());
+                }
+
                 // Restaurer les playlists séparées si disponibles
                 if (state.currentPagePlaylist) {
                     this.state.currentPagePlaylist = state.currentPagePlaylist;
@@ -657,6 +664,7 @@ class GeeknDragonAudioPlayer {
 
                 this.loadTrack(this.state.currentTrack);
                 this.updatePlayButton();
+                this.updatePlayerInterface();
 
                 console.log('🔄 État restauré - Continuité de lecture maintenue');
                 return true; // État restauré avec succès
@@ -1089,6 +1097,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!window.gndAudioPlayer) {
         window.gndAudioPlayer = new GeeknDragonAudioPlayer();
         gndAudioPlayer = window.gndAudioPlayer;
+    }
+});
+
+// Sauvegarde de l'état avant de quitter la page
+window.addEventListener('beforeunload', () => {
+    if (window.gndAudioPlayer) {
+        const player = window.gndAudioPlayer;
+        if (player.sound) {
+            player.state.currentTime = player.sound.seek() || 0;
+        }
+        player.savePlaybackState();
     }
 });
 
