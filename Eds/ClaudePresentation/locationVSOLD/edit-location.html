@@ -2130,103 +2130,207 @@
                             </div>
                         </div>
                     </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength3-title">Avantage 3 - Titre</label>
-                            <p class="field-description">Troisième atout de monitoring</p>
-                            <input type="text" id="strength3-title" class="field-input" data-field="strength3-title" 
-                                   placeholder="Surveillance Temps Réel" value="Surveillance Temps Réel">
+                    
+                    <!-- Avantage 3 : Surveillance Temps Réel -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength3-emoji" placeholder="📡" value="📡" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 3</small>
                         </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength3-desc">Avantage 3 - Description</label>
-                            <p class="field-description">Description surveillance temps réel</p>
-                            <textarea id="strength3-desc" class="field-input field-textarea" data-field="strength3-desc" 
-                                      placeholder="GPS, Bluetooth, Wi-Fi...">GPS, Bluetooth, Wi-Fi, GPRS → maintenance préventive, zéro panne surprise</textarea>
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength4-title">Avantage 4 - Titre</label>
-                            <p class="field-description">Quatrième supériorité performance</p>
-                            <input type="text" id="strength4-title" class="field-input" data-field="strength4-title" 
-                                   placeholder="Performance Énergétique" value="Performance Énergétique">
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength4-desc">Avantage 4 - Description</label>
-                            <p class="field-description">Description performance énergétique</p>
-                            <textarea id="strength4-desc" class="field-input field-textarea" data-field="strength4-desc" 
-                                      placeholder="110 Wh/kg (4× plus)...">110 Wh/kg (4× plus), 157 Wh/L (6× plus compact), charge 1-2h</textarea>
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength5-title">Avantage 5 - Titre</label>
-                            <p class="field-description">Cinquième atout climatique</p>
-                            <input type="text" id="strength5-title" class="field-input" data-field="strength5-title" 
-                                   placeholder="Climat Canadien" value="Climat Canadien">
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength5-desc">Avantage 5 - Description</label>
-                            <p class="field-description">Description résistance climat canadien</p>
-                            <textarea id="strength5-desc" class="field-input field-textarea" data-field="strength5-desc" 
-                                      placeholder="Fonctionnement -40°C à +55°C...">Fonctionnement -40°C à +55°C, BMS intelligent, hivers québécois</textarea>
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength6-title">Avantage 6 - Titre</label>
-                            <p class="field-description">Sixième supériorité écologique</p>
-                            <input type="text" id="strength6-title" class="field-input" data-field="strength6-title" 
-                                   placeholder="100% Écologique" value="100% Écologique">
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength6-desc">Avantage 6 - Description</label>
-                            <p class="field-description">Description aspect écologique</p>
-                            <textarea id="strength6-desc" class="field-input field-textarea" data-field="strength6-desc" 
-                                      placeholder="Zéro cadmium...">Zéro cadmium, conforme RoHS, recyclable, image environnementale</textarea>
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength7">Avantage 7</label>
-                            <p class="field-description">Septième atout de rapidité</p>
-                            <input type="text" id="strength7-title" class="field-input" data-field="strength7-title" 
-                                   placeholder="Sécurité BMS Multi-niveau" value="Sécurité BMS Multi-niveau">
-                            <textarea id="strength7-desc" class="field-input field-textarea" data-field="strength7-desc" 
-                                      placeholder="Protections OVP, UVP, OCP...">Protections OVP, UVP, OCP, OTP, court-circuit → risques incidents réduits drastiquement</textarea>
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength8">Avantage 8</label>
-                            <p class="field-description">Huitième supériorité sécuritaire</p>
-                            <input type="text" id="strength8-title" class="field-input" data-field="strength8-title" 
-                                   placeholder="Réduction Coûts Opérationnels" value="Réduction Coûts Opérationnels">
-                            <textarea id="strength8-desc" class="field-input field-textarea" data-field="strength8-desc" 
-                                      placeholder="Moins d'interventions...">Moins d'interventions, déplacements équipes réduits, fiabilité accrue</textarea>
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength9">Avantage 9</label>
-                            <p class="field-description">Neuvième atout de simplicité</p>
-                            <input type="text" id="strength9-title" class="field-input" data-field="strength9-title" 
-                                   placeholder="Fabrication SAV Québec" value="Fabrication SAV Québec">
-                            <textarea id="strength9-desc" class="field-input field-textarea" data-field="strength9-desc" 
-                                      placeholder="Délais réduits, service local...">Délais réduits, service local français, réactivité pièces et support</textarea>
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength10">Avantage 10</label>
-                            <p class="field-description">Dixième supériorité de fiabilité</p>
-                            <input type="text" id="strength10-title" class="field-input" data-field="strength10-title" 
-                                   placeholder="Installation Simplifiée" value="Installation Simplifiée">
-                            <textarea id="strength10-desc" class="field-input field-textarea" data-field="strength10-desc" 
-                                      placeholder="23 kg vs 80 kg...">23 kg vs 80 kg, boîtier compact acier, manutention sécurisée</textarea>
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength11">Avantage 11</label>
-                            <p class="field-description">Onzième atout technologique</p>
-                            <input type="text" id="strength11-title" class="field-input" data-field="strength11-title" 
-                                   placeholder="Profondeur Décharge Optimale" value="Profondeur Décharge Optimale">
-                            <textarea id="strength11-desc" class="field-input field-textarea" data-field="strength11-desc" 
-                                      placeholder="96% exploitable vs 60% Ni-Cd...">96% exploitable vs 60% Ni-Cd → capacité réelle supérieure</textarea>
-                        </div>
-                        <div class="edit-field">
-                            <label class="field-label" for="strength12">Avantage 12</label>
-                            <p class="field-description">Douzième supériorité finale</p>
-                            <input type="text" id="strength12-title" class="field-input" data-field="strength12-title" 
-                                   placeholder="Location Flexible Avantageuse" value="Location Flexible Avantageuse">
-                            <textarea id="strength12-desc" class="field-input field-textarea" data-field="strength12-desc" 
-                                      placeholder="150-200$/mois vs 250$ Ni-Cd...">150-200$/mois vs 250$ Ni-Cd → plus économique avec maintenance incluse</textarea>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength3-title">Titre</label>
+                                <input type="text" id="strength3-title" class="field-input" data-field="strength3-title" 
+                                       placeholder="Surveillance Temps Réel" value="Surveillance Temps Réel">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength3-desc">Description</label>
+                                <textarea id="strength3-desc" class="field-input field-textarea" data-field="strength3-desc" 
+                                          placeholder="GPS, Bluetooth, Wi-Fi...">GPS, Bluetooth, Wi-Fi, GPRS → maintenance préventive, zéro panne surprise</textarea>
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Avantage 4 : Performance Énergétique -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength4-emoji" placeholder="⚡" value="⚡" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 4</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength4-title">Titre</label>
+                                <input type="text" id="strength4-title" class="field-input" data-field="strength4-title" 
+                                       placeholder="Performance Énergétique" value="Performance Énergétique">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength4-desc">Description</label>
+                                <textarea id="strength4-desc" class="field-input field-textarea" data-field="strength4-desc" 
+                                          placeholder="110 Wh/kg (4× plus)...">110 Wh/kg (4× plus), 157 Wh/L (6× plus compact), charge 1-2h</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 5 : Climat Canadien -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength5-emoji" placeholder="🌡️" value="🌡️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 5</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength5-title">Titre</label>
+                                <input type="text" id="strength5-title" class="field-input" data-field="strength5-title" 
+                                       placeholder="Climat Canadien" value="Climat Canadien">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength5-desc">Description</label>
+                                <textarea id="strength5-desc" class="field-input field-textarea" data-field="strength5-desc" 
+                                          placeholder="Fonctionnement -40°C à +55°C...">Fonctionnement -40°C à +55°C, BMS intelligent, hivers québécois</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 6 : 100% Écologique -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength6-emoji" placeholder="🍃" value="🍃" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 6</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength6-title">Titre</label>
+                                <input type="text" id="strength6-title" class="field-input" data-field="strength6-title" 
+                                       placeholder="100% Écologique" value="100% Écologique">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength6-desc">Description</label>
+                                <textarea id="strength6-desc" class="field-input field-textarea" data-field="strength6-desc" 
+                                          placeholder="Zéro cadmium...">Zéro cadmium, conforme RoHS, recyclable, image environnementale</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 7 : Sécurité BMS Multi-niveau -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength7-emoji" placeholder="🛡️" value="🛡️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 7</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength7-title">Titre</label>
+                                <input type="text" id="strength7-title" class="field-input" data-field="strength7-title" 
+                                       placeholder="Sécurité BMS Multi-niveau" value="Sécurité BMS Multi-niveau">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength7-desc">Description</label>
+                                <textarea id="strength7-desc" class="field-input field-textarea" data-field="strength7-desc" 
+                                          placeholder="Protections OVP, UVP, OCP...">Protections OVP, UVP, OCP, OTP, court-circuit → risques incidents réduits drastiquement</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 8 : Réduction Coûts Opérationnels -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength8-emoji" placeholder="💰" value="💰" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 8</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength8-title">Titre</label>
+                                <input type="text" id="strength8-title" class="field-input" data-field="strength8-title" 
+                                       placeholder="Réduction Coûts Opérationnels" value="Réduction Coûts Opérationnels">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength8-desc">Description</label>
+                                <textarea id="strength8-desc" class="field-input field-textarea" data-field="strength8-desc" 
+                                          placeholder="Moins d'interventions...">Moins d'interventions, déplacements équipes réduits, fiabilité accrue</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 9 : Fabrication SAV Québec -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength9-emoji" placeholder="🇨🇦" value="🇨🇦" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 9</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength9-title">Titre</label>
+                                <input type="text" id="strength9-title" class="field-input" data-field="strength9-title" 
+                                       placeholder="Fabrication SAV Québec" value="Fabrication SAV Québec">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength9-desc">Description</label>
+                                <textarea id="strength9-desc" class="field-input field-textarea" data-field="strength9-desc" 
+                                          placeholder="Délais réduits, service local...">Délais réduits, service local français, réactivité pièces et support</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 10 : Installation Simplifiée -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength10-emoji" placeholder="📦" value="📦" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 10</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength10-title">Titre</label>
+                                <input type="text" id="strength10-title" class="field-input" data-field="strength10-title" 
+                                       placeholder="Installation Simplifiée" value="Installation Simplifiée">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength10-desc">Description</label>
+                                <textarea id="strength10-desc" class="field-input field-textarea" data-field="strength10-desc" 
+                                          placeholder="23 kg vs 80 kg...">23 kg vs 80 kg, boîtier compact acier, manutention sécurisée</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 11 : Profondeur Décharge Optimale -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength11-emoji" placeholder="🔋" value="🔋" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 11</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength11-title">Titre</label>
+                                <input type="text" id="strength11-title" class="field-input" data-field="strength11-title" 
+                                       placeholder="Profondeur Décharge Optimale" value="Profondeur Décharge Optimale">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength11-desc">Description</label>
+                                <textarea id="strength11-desc" class="field-input field-textarea" data-field="strength11-desc" 
+                                          placeholder="96% exploitable vs 60% Ni-Cd...">96% exploitable vs 60% Ni-Cd → capacité réelle supérieure</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 12 : Location Flexible Avantageuse -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength12-emoji" placeholder="💵" value="💵" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 12</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength12-title">Titre</label>
+                                <input type="text" id="strength12-title" class="field-input" data-field="strength12-title" 
+                                       placeholder="Location Flexible Avantageuse" value="Location Flexible Avantageuse">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength12-desc">Description</label>
+                                <textarea id="strength12-desc" class="field-input field-textarea" data-field="strength12-desc" 
+                                          placeholder="150-200$/mois vs 250$ Ni-Cd...">150-200$/mois vs 250$ Ni-Cd → plus économique avec maintenance incluse</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 </div>
 
                 <!-- Conclusion comparative -->
