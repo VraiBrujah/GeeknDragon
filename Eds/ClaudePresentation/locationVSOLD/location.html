@@ -403,7 +403,7 @@
         }
         
         .pricing-features {
-            text-align: left; margin-bottom: 2rem;
+            text-align: center; margin-bottom: 2rem;
         }
         
         .pricing-feature {
@@ -438,9 +438,17 @@
         }
         
         .advantage-card {
-            background: rgba(16, 185, 129, 0.08); border-radius: 18px;
-            padding: 2rem; border-left: 4px solid var(--accent-green);
-            transition: all 0.3s ease;
+                background: rgba(16, 185, 129, 0.08);
+                border-radius: 18px;
+                padding: 2rem;
+                border-left: 4px solid var(--accent-green);
+                transition: all 0.3s ease;
+                
+                display: flex;                  /* Active flexbox */
+                flex-direction: column;         /* Aligne en colonne */
+                align-items: center;            /* Centre horizontalement */
+                justify-content: flex-start;    /* Le contenu démarre en haut mais reste centré */
+                text-align: center;             /* Centre le texte */
         }
         
         .advantage-card:hover {
