@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Configuration de l'éditeur de widgets modulaires -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur de Présentations | EDS Québec - Widgets Modulaires</title>
+    <meta name="description" content="Éditeur de présentations modulaires pour créer des pages de vente interactives - EDS Québec">
+    
+    <!-- Polices modernes identiques à location.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Système de grille flexbox -->
+    <link rel="stylesheet" href="assets/css/flexbox-grid.css">
+    
+    <!-- Styles de l'éditeur -->
+    <link rel="stylesheet" href="assets/css/editor.css">
+</head>
+<body class="editor-body">
+    
+    <!-- ==========================================
+         BARRE D'OUTILS PRINCIPALE
+         ========================================== -->
+    <header class="editor-toolbar">
+        <div class="container">
+            <div class="toolbar-content">
+                
+                <!-- Logo et titre -->
+                <div class="toolbar-brand">
+                    <img src="assets/images/logo-edsquebec.png" alt="EDS Québec" class="toolbar-logo">
+                    <div class="toolbar-title">
+                        <h1>Éditeur de Présentations</h1>
+                        <span class="toolbar-subtitle">Système de widgets modulaires</span>
+                    </div>
+                </div>
+                
+                <!-- Actions principales -->
+                <div class="toolbar-actions">
+                    <button id="btn-save" class="btn btn-secondary" title="Sauvegarder la présentation">
+                        <i class="fas fa-save"></i>
+                        <span>Sauvegarder</span>
+                    </button>
+                    
+                    <button id="btn-load" class="btn btn-secondary" title="Charger une présentation">
+                        <i class="fas fa-folder-open"></i>
+                        <span>Charger</span>
+                    </button>
+                    
+                    <button id="btn-preview" class="btn btn-primary" title="Prévisualiser le rendu final">
+                        <i class="fas fa-eye"></i>
+                        <span>Aperçu</span>
+                    </button>
+                    
+                    <button id="btn-generate" class="btn btn-success" title="Générer la page finale">
+                        <i class="fas fa-rocket"></i>
+                        <span>Générer Page</span>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+    
+    <!-- ==========================================
+         INTERFACE PRINCIPALE (3 COLONNES)
+         ========================================== -->
+    <main class="editor-main">
+        <div class="editor-layout">
+            
+            <!-- ==========================================
+                 SIDEBAR GAUCHE - WIDGETS DISPONIBLES
+                 ========================================== -->
+            <aside class="sidebar sidebar-left">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-puzzle-piece"></i> Widgets Disponibles</h3>
+                </div>
+                
+                <div class="widget-library">
+                    
+                    <!-- Catégorie : Conteneurs -->
+                    <div class="widget-category">
+                        <h4 class="category-title">
+                            <i class="fas fa-layer-group"></i> Conteneurs
+                        </h4>
+                        <div class="category-widgets">
+                            
+                            <!-- Widget Conteneur Section -->
+                            <div class="widget-item" data-widget-type="container-section" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-square"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Section</div>
+                                    <div class="widget-desc">Section complète avec titre</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget Conteneur Colonnes -->
+                            <div class="widget-item" data-widget-type="container-columns" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-columns"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Colonnes</div>
+                                    <div class="widget-desc">Layout 2-4 colonnes</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget Conteneur Comparaison VS -->
+                            <div class="widget-item" data-widget-type="container-comparison" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Comparaison VS</div>
+                                    <div class="widget-desc">Deux colonnes face à face</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Catégorie : Contenu -->
+                    <div class="widget-category">
+                        <h4 class="category-title">
+                            <i class="fas fa-file-alt"></i> Contenu
+                        </h4>
+                        <div class="category-widgets">
+                            
+                            <!-- Widget Héro -->
+                            <div class="widget-item" data-widget-type="widget-hero" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Héro</div>
+                                    <div class="widget-desc">Titre, description, CTA, image</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget Navigation -->
+                            <div class="widget-item" data-widget-type="widget-navigation" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-bars"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Navigation</div>
+                                    <div class="widget-desc">Menu de navigation</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget Pricing Grid -->
+                            <div class="widget-item" data-widget-type="widget-pricing-grid" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-tags"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Grille Tarifs</div>
+                                    <div class="widget-desc">Cartes de tarification</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget Advantages Grid -->
+                            <div class="widget-item" data-widget-type="widget-advantages-grid" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Grille Avantages</div>
+                                    <div class="widget-desc">Avantages en grille</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget Contact -->
+                            <div class="widget-item" data-widget-type="widget-contact" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Contact</div>
+                                    <div class="widget-desc">Informations de contact</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Catégorie : Éléments -->
+                    <div class="widget-category">
+                        <h4 class="category-title">
+                            <i class="fas fa-th"></i> Éléments
+                        </h4>
+                        <div class="category-widgets">
+                            
+                            <!-- Widget Texte -->
+                            <div class="widget-item" data-widget-type="widget-text" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-font"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Texte</div>
+                                    <div class="widget-desc">Bloc de texte éditable</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget Image -->
+                            <div class="widget-item" data-widget-type="widget-image" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Image</div>
+                                    <div class="widget-desc">Image avec légende</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget Bouton -->
+                            <div class="widget-item" data-widget-type="widget-button" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-mouse-pointer"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Bouton</div>
+                                    <div class="widget-desc">Bouton d'action CTA</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Widget Spacer -->
+                            <div class="widget-item" data-widget-type="widget-spacer" draggable="true">
+                                <div class="widget-preview">
+                                    <i class="fas fa-arrows-alt-v"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <div class="widget-name">Espacement</div>
+                                    <div class="widget-desc">Espace vertical variable</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </aside>
+            
+            <!-- ==========================================
+                 ZONE PRINCIPALE - ÉDITEUR VISUEL
+                 ========================================== -->
+            <section class="editor-canvas">
+                <div class="canvas-header">
+                    <h3><i class="fas fa-edit"></i> Zone d'édition</h3>
+                    <div class="canvas-controls">
+                        <button id="btn-grid-guides" class="btn btn-outline" title="Afficher/Masquer la grille">
+                            <i class="fas fa-th"></i>
+                            Grille
+                        </button>
+                        <button id="btn-clear-all" class="btn btn-danger-outline" title="Vider la zone d'édition">
+                            <i class="fas fa-trash"></i>
+                            Vider
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Zone de construction des widgets -->
+                <div id="canvas-workspace" class="canvas-workspace editor-grid-guides">
+                    <div class="container">
+                        <div class="grid">
+                            
+                            <!-- Zone de drop initiale -->
+                            <div class="col-12">
+                                <div class="drop-zone" id="initial-drop">
+                                    <div class="drop-zone-content">
+                                        <i class="fas fa-plus-circle"></i>
+                                        <p>Glissez vos widgets ici pour commencer</p>
+                                        <small>Utilisez la bibliothèque de widgets à gauche</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ==========================================
+                 SIDEBAR DROITE - PROPRIÉTÉS
+                 ========================================== -->
+            <aside class="sidebar sidebar-right">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-cog"></i> Propriétés</h3>
+                </div>
+                
+                <div class="properties-panel">
+                    
+                    <!-- Message si aucun widget sélectionné -->
+                    <div id="no-selection" class="no-selection">
+                        <i class="fas fa-hand-pointer"></i>
+                        <p>Sélectionnez un widget pour voir ses propriétés</p>
+                    </div>
+                    
+                    <!-- Panneau des propriétés (caché par défaut) -->
+                    <div id="properties-content" class="properties-content" style="display: none;">
+                        
+                        <!-- Informations générales -->
+                        <div class="property-group">
+                            <h4>Général</h4>
+                            <div class="property-field">
+                                <label for="widget-id">ID du widget</label>
+                                <input type="text" id="widget-id" readonly>
+                            </div>
+                            <div class="property-field">
+                                <label for="widget-type">Type</label>
+                                <input type="text" id="widget-type" readonly>
+                            </div>
+                        </div>
+                        
+                        <!-- Positionnement -->
+                        <div class="property-group">
+                            <h4>Position</h4>
+                            <div class="property-row">
+                                <div class="property-field">
+                                    <label for="widget-col">Largeur (col)</label>
+                                    <select id="widget-col">
+                                        <option value="1">1 col</option>
+                                        <option value="2">2 cols</option>
+                                        <option value="3">3 cols</option>
+                                        <option value="4">4 cols</option>
+                                        <option value="5">5 cols</option>
+                                        <option value="6">6 cols</option>
+                                        <option value="7">7 cols</option>
+                                        <option value="8">8 cols</option>
+                                        <option value="9">9 cols</option>
+                                        <option value="10">10 cols</option>
+                                        <option value="11">11 cols</option>
+                                        <option value="12" selected>12 cols</option>
+                                    </select>
+                                </div>
+                                <div class="property-field">
+                                    <label for="widget-order">Ordre</label>
+                                    <input type="number" id="widget-order" min="1" value="1">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Styles -->
+                        <div class="property-group">
+                            <h4>Apparence</h4>
+                            <div class="property-field">
+                                <label for="widget-bg">Couleur de fond</label>
+                                <input type="color" id="widget-bg" value="#0F172A">
+                            </div>
+                            <div class="property-field">
+                                <label for="widget-padding">Padding (rem)</label>
+                                <input type="number" id="widget-padding" min="0" max="5" step="0.5" value="2">
+                            </div>
+                            <div class="property-field">
+                                <label for="widget-margin">Margin (rem)</label>
+                                <input type="number" id="widget-margin" min="0" max="5" step="0.5" value="1">
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="property-group">
+                            <h4>Actions</h4>
+                            <div class="property-actions">
+                                <button id="btn-duplicate-widget" class="btn btn-secondary btn-small">
+                                    <i class="fas fa-copy"></i> Dupliquer
+                                </button>
+                                <button id="btn-delete-widget" class="btn btn-danger btn-small">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </aside>
+            
+        </div>
+    </main>
+    
+    <!-- ==========================================
+         MODALES ET OVERLAYS
+         ========================================== -->
+    
+    <!-- Modal de sauvegarde -->
+    <div id="save-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-save"></i> Sauvegarder la présentation</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="presentation-name">Nom de la présentation</label>
+                    <input type="text" id="presentation-name" placeholder="Ma présentation">
+                </div>
+                <div class="form-group">
+                    <label for="presentation-description">Description (optionnelle)</label>
+                    <textarea id="presentation-description" placeholder="Description de la présentation..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-modal-close>Annuler</button>
+                <button id="confirm-save" class="btn btn-primary">Sauvegarder</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de chargement -->
+    <div id="load-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-folder-open"></i> Charger une présentation</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="presentations-list" class="presentations-list">
+                    <!-- Liste chargée dynamiquement -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-modal-close>Annuler</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay de chargement -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p id="loading-text">Chargement...</p>
+        </div>
+    </div>
+    
+    <!-- Scripts principaux -->
+    <script src="assets/js/editor-core.js"></script>
+    <script src="assets/js/drag-drop.js"></script>
+    <script src="assets/js/widgets-manager.js"></script>
+    <script src="assets/js/properties-panel.js"></script>
+    <script src="assets/js/persistence.js"></script>
+    
+</body>
+</html>

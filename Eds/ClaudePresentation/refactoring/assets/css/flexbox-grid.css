@@ -1,0 +1,331 @@
+/**
+ * SYSTÈME DE GRILLE FLEXBOX RESPONSIVE - ÉDITEUR WIDGETS
+ * 
+ * Rôle : Fournit un système de grille flexible et responsive pour l'éditeur de widgets
+ * Type : CSS Grid System basé sur Flexbox
+ * Unité : Colonnes et pourcentages
+ * Domaine : 1-12 colonnes, responsive mobile-first
+ * Exemple : col-6 = 50% de largeur
+ */
+
+/* ==========================================
+   VARIABLES CSS POUR LA GRILLE
+   ========================================== */
+:root {
+    /* Rôle : Nombre maximum de colonnes dans la grille */
+    /* Type : integer */
+    /* Unité : colonnes */
+    /* Domaine : 12 colonnes fixes */
+    /* Exemple : 12 */
+    --grid-columns: 12;
+    
+    /* Rôle : Espacement entre les éléments de la grille */
+    /* Type : CSS length */
+    /* Unité : rem */
+    /* Domaine : 0.5-2rem selon viewport */
+    /* Exemple : 1rem */
+    --grid-gap: 1rem;
+    
+    /* Rôle : Largeur maximale du conteneur principal */
+    /* Type : CSS length */
+    /* Unité : px */
+    /* Domaine : 1200-1600px selon écran */
+    /* Exemple : 1400px */
+    --container-max-width: 1400px;
+    
+    /* Rôle : Padding horizontal du conteneur */
+    /* Type : CSS length */
+    /* Unité : rem */
+    /* Domaine : 1-2rem selon viewport */
+    /* Exemple : 1.5rem */
+    --container-padding: 1.5rem;
+}
+
+/* ==========================================
+   CONTENEUR PRINCIPAL RESPONSIVE
+   ========================================== */
+
+/* Rôle : Conteneur principal centré avec largeur maximale */
+/* Type : CSS Container */
+/* Unité : px et % */
+/* Domaine : 100% jusqu'à max-width */
+/* Formule : width = min(100%, max-width) */
+/* Exemple : 1400px maximum, centré */
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   GRILLE FLEXBOX PRINCIPALE
+   ========================================== */
+
+/* Rôle : Conteneur de grille flexible avec wrap automatique */
+/* Type : Flexbox container */
+/* Unité : sans unité */
+/* Domaine : illimité enfants */
+/* Formule : flex-wrap pour responsive automatique */
+/* Exemple : Éléments qui passent à la ligne selon besoin */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--grid-gap);
+    box-sizing: border-box;
+}
+
+/* Rôle : Alignement vertical centré des éléments */
+.grid.align-center {
+    align-items: center;
+}
+
+/* Rôle : Alignement vertical en haut */
+.grid.align-start {
+    align-items: flex-start;
+}
+
+/* Rôle : Alignement horizontal centré */
+.grid.justify-center {
+    justify-content: center;
+}
+
+/* ==========================================
+   SYSTÈME DE COLONNES FLEXIBLES
+   ========================================== */
+
+/* Rôle : Élément de grille de base */
+/* Type : Flexbox item */
+/* Unité : sans unité */
+/* Domaine : enfant de .grid */
+/* Formule : flex-basis pour largeur, flex-grow pour expansion */
+/* Exemple : Base pour tous les éléments de colonne */
+.col {
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    min-width: 0; /* Évite les débordements */
+}
+
+/* Formule : largeur_pourcentage = (colonnes / total_colonnes) × 100% */
+/* Symboles :
+ *   - colonnes : nombre de colonnes occupées [1-12]
+ *   - total_colonnes : 12 (constante)
+ * Hypothèses : total_colonnes = 12, colonnes ≤ 12
+ * Exemple : col-6 = (6/12) × 100% = 50% */
+
+.col-1  { flex: 0 0 calc(8.333% - var(--grid-gap) * 11/12); }   /* 1/12 = 8.333% */
+.col-2  { flex: 0 0 calc(16.666% - var(--grid-gap) * 10/12); }  /* 2/12 = 16.666% */
+.col-3  { flex: 0 0 calc(25% - var(--grid-gap) * 9/12); }       /* 3/12 = 25% */
+.col-4  { flex: 0 0 calc(33.333% - var(--grid-gap) * 8/12); }   /* 4/12 = 33.333% */
+.col-5  { flex: 0 0 calc(41.666% - var(--grid-gap) * 7/12); }   /* 5/12 = 41.666% */
+.col-6  { flex: 0 0 calc(50% - var(--grid-gap) * 6/12); }       /* 6/12 = 50% */
+.col-7  { flex: 0 0 calc(58.333% - var(--grid-gap) * 5/12); }   /* 7/12 = 58.333% */
+.col-8  { flex: 0 0 calc(66.666% - var(--grid-gap) * 4/12); }   /* 8/12 = 66.666% */
+.col-9  { flex: 0 0 calc(75% - var(--grid-gap) * 3/12); }       /* 9/12 = 75% */
+.col-10 { flex: 0 0 calc(83.333% - var(--grid-gap) * 2/12); }   /* 10/12 = 83.333% */
+.col-11 { flex: 0 0 calc(91.666% - var(--grid-gap) * 1/12); }   /* 11/12 = 91.666% */
+.col-12 { flex: 0 0 calc(100% - 0px); }                         /* 12/12 = 100% */
+
+/* Rôle : Colonne qui s'adapte automatiquement à l'espace disponible */
+/* Type : Flexbox auto-sizing */
+/* Formule : flex-grow = 1 pour expansion */
+.col-auto {
+    flex: 1 1 auto;
+}
+
+/* ==========================================
+   RESPONSIVE BREAKPOINTS (MOBILE-FIRST)
+   ========================================== */
+
+/* Rôle : Breakpoint tablet - 768px et plus */
+/* Type : Media query min-width */
+/* Unité : px */
+/* Domaine : 768px+ */
+/* Exemple : iPad et écrans moyens */
+@media (min-width: 768px) {
+    :root {
+        --grid-gap: 1.5rem;
+        --container-padding: 2rem;
+    }
+    
+    /* Colonnes spécifiques tablet */
+    .col-md-1  { flex: 0 0 calc(8.333% - var(--grid-gap) * 11/12); }
+    .col-md-2  { flex: 0 0 calc(16.666% - var(--grid-gap) * 10/12); }
+    .col-md-3  { flex: 0 0 calc(25% - var(--grid-gap) * 9/12); }
+    .col-md-4  { flex: 0 0 calc(33.333% - var(--grid-gap) * 8/12); }
+    .col-md-5  { flex: 0 0 calc(41.666% - var(--grid-gap) * 7/12); }
+    .col-md-6  { flex: 0 0 calc(50% - var(--grid-gap) * 6/12); }
+    .col-md-7  { flex: 0 0 calc(58.333% - var(--grid-gap) * 5/12); }
+    .col-md-8  { flex: 0 0 calc(66.666% - var(--grid-gap) * 4/12); }
+    .col-md-9  { flex: 0 0 calc(75% - var(--grid-gap) * 3/12); }
+    .col-md-10 { flex: 0 0 calc(83.333% - var(--grid-gap) * 2/12); }
+    .col-md-11 { flex: 0 0 calc(91.666% - var(--grid-gap) * 1/12); }
+    .col-md-12 { flex: 0 0 calc(100% - 0px); }
+    .col-md-auto { flex: 1 1 auto; }
+}
+
+/* Rôle : Breakpoint desktop - 1024px et plus */
+/* Type : Media query min-width */
+/* Unité : px */
+/* Domaine : 1024px+ */
+/* Exemple : Écrans desktop standards */
+@media (min-width: 1024px) {
+    :root {
+        --grid-gap: 2rem;
+    }
+    
+    /* Colonnes spécifiques desktop */
+    .col-lg-1  { flex: 0 0 calc(8.333% - var(--grid-gap) * 11/12); }
+    .col-lg-2  { flex: 0 0 calc(16.666% - var(--grid-gap) * 10/12); }
+    .col-lg-3  { flex: 0 0 calc(25% - var(--grid-gap) * 9/12); }
+    .col-lg-4  { flex: 0 0 calc(33.333% - var(--grid-gap) * 8/12); }
+    .col-lg-5  { flex: 0 0 calc(41.666% - var(--grid-gap) * 7/12); }
+    .col-lg-6  { flex: 0 0 calc(50% - var(--grid-gap) * 6/12); }
+    .col-lg-7  { flex: 0 0 calc(58.333% - var(--grid-gap) * 5/12); }
+    .col-lg-8  { flex: 0 0 calc(66.666% - var(--grid-gap) * 4/12); }
+    .col-lg-9  { flex: 0 0 calc(75% - var(--grid-gap) * 3/12); }
+    .col-lg-10 { flex: 0 0 calc(83.333% - var(--grid-gap) * 2/12); }
+    .col-lg-11 { flex: 0 0 calc(91.666% - var(--grid-gap) * 1/12); }
+    .col-lg-12 { flex: 0 0 calc(100% - 0px); }
+    .col-lg-auto { flex: 1 1 auto; }
+}
+
+/* ==========================================
+   UTILITAIRES DE POSITIONNEMENT
+   ========================================== */
+
+/* Rôle : Décalage de colonnes vers la droite */
+/* Type : CSS margin */
+/* Formule : offset = (colonnes / 12) × 100% */
+.offset-1  { margin-left: calc(8.333% + var(--grid-gap)); }
+.offset-2  { margin-left: calc(16.666% + var(--grid-gap)); }
+.offset-3  { margin-left: calc(25% + var(--grid-gap)); }
+.offset-4  { margin-left: calc(33.333% + var(--grid-gap)); }
+.offset-5  { margin-left: calc(41.666% + var(--grid-gap)); }
+.offset-6  { margin-left: calc(50% + var(--grid-gap)); }
+.offset-7  { margin-left: calc(58.333% + var(--grid-gap)); }
+.offset-8  { margin-left: calc(66.666% + var(--grid-gap)); }
+.offset-9  { margin-left: calc(75% + var(--grid-gap)); }
+.offset-10 { margin-left: calc(83.333% + var(--grid-gap)); }
+.offset-11 { margin-left: calc(91.666% + var(--grid-gap)); }
+
+/* ==========================================
+   CLASSES UTILITAIRES POUR L'ÉDITEUR
+   ========================================== */
+
+/* Rôle : Widget redimensionnable par l'utilisateur */
+/* Type : CSS resize property */
+/* Unité : sans unité */
+/* Domaine : both, horizontal, vertical, none */
+/* Exemple : Poignées de redimensionnement visibles */
+.widget-resizable {
+    resize: both;
+    overflow: auto;
+    min-width: 200px;
+    min-height: 100px;
+    border: 2px dashed rgba(16, 185, 129, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    position: relative;
+}
+
+/* Rôle : Zone de drop pour widgets */
+/* Type : Visual indicator */
+/* Unité : sans unité */
+/* Formule : border-style dashed pour indication visuelle */
+.drop-zone {
+    border: 3px dashed rgba(16, 185, 129, 0.5);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    color: rgba(16, 185, 129, 0.7);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drop-zone.drag-over {
+    border-color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+    transform: scale(1.02);
+}
+
+/* Rôle : Widget en cours de déplacement */
+.widget-dragging {
+    opacity: 0.6;
+    transform: rotate(2deg) scale(1.05);
+    z-index: 1000;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* ==========================================
+   GUIDES VISUELS ÉDITEUR
+   ========================================== */
+
+/* Rôle : Grille de fond visible pendant l'édition */
+/* Type : Background pattern */
+/* Formule : linear-gradient pour lignes de grille */
+.editor-grid-guides {
+    background-image: 
+        linear-gradient(to right, rgba(16, 185, 129, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(16, 185, 129, 0.1) 1px, transparent 1px);
+    background-size: calc(100% / var(--grid-columns)) 2rem;
+    min-height: 100vh;
+}
+
+/* Rôle : Lignes d'alignement temporaires */
+.alignment-guide {
+    position: fixed;
+    background: #10B981;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.alignment-guide.horizontal {
+    width: 100%;
+    height: 2px;
+    left: 0;
+}
+
+.alignment-guide.vertical {
+    height: 100%;
+    width: 2px;
+    top: 0;
+}
+
+.alignment-guide.show {
+    opacity: 0.8;
+}
+
+/* ==========================================
+   CLASSES RESPONSIVE UTILITAIRES
+   ========================================== */
+
+/* Rôle : Masquer sur mobile */
+.hide-mobile {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .hide-mobile { display: block; }
+    .hide-tablet { display: none; }
+}
+
+@media (min-width: 1024px) {
+    .hide-tablet { display: block; }
+    .hide-desktop { display: none; }
+}
+
+/* Rôle : Afficher uniquement sur mobile */
+.show-mobile { display: block; }
+
+@media (min-width: 768px) {
+    .show-mobile { display: none; }
+}
