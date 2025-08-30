@@ -354,7 +354,7 @@ class InstantSync {
         if (tagName === 'input' || tagName === 'textarea') {
             field.value = value;
         } else if (field.contentEditable === 'true') {
-            field.textContent = value;
+            field.innerHTML = value;
         } else {
             field.textContent = value;
         }
@@ -380,7 +380,7 @@ class InstantSync {
             return field.value || '';
         }
         if (field.contentEditable === 'true') {
-            return field.textContent || '';
+            return field.innerHTML || '';
         }
         return field.textContent || field.innerText || '';
     }
