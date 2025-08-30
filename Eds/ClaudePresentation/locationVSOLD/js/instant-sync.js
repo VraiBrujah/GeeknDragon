@@ -655,27 +655,26 @@ class InstantSync {
     }
 }
 
+// Détection du type de page pour un stockage isolé
+function detectPageType() {
+    const url = window.location.pathname.toLowerCase();
+    if (url.includes('locationvsold')) return 'locationVSOLD';
+    if (url.includes('locationvs')) return 'locationVS';
+    if (url.includes('location')) return 'location';
+    if (url.includes('vente')) return 'vente';
+    return 'vente';
+}
+
 // Auto-détection : type de page et initialisation
 function initInstantSync() {
-    const pageUrl = window.location.pathname.toLowerCase();
-    let pageType = 'vente'; // Défaut
-
-    if (pageUrl.includes('locationvsold')) {
-        pageType = 'locationVSOLD';
-    } else if (pageUrl.includes('locationvs')) {
-        pageType = 'locationVS'; // ✅ CORRECTION : namespace spécifique pour locationVS
-    } else if (pageUrl.includes('location')) {
-        pageType = 'location';
-    } else if (pageUrl.includes('vente')) {
-        pageType = 'vente';
-    }
+    const pageType = detectPageType();
 
     // Instance globale
     window.instantSync = new InstantSync(pageType);
-    
+
     // Debug : exposition des stats dans la console
     window.getSyncStats = () => window.instantSync.getStats();
-    
+
     return window.instantSync;
 }
 
