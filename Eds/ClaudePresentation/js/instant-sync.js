@@ -21,7 +21,12 @@ class InstantSync {
         this.syncDelay = 50; // Délai ultra-court pour sync instantanée
         this.maxRetries = 3;
         this.retryCount = 0;
-        
+
+        // Communication : canal BroadcastChannel (ou null si non supporté)
+        this.channel = (typeof BroadcastChannel !== 'undefined')
+            ? new BroadcastChannel('licubepro-sync')
+            : null;
+
         // URLs : pages de destination selon le type
         this.targetUrls = {
             'vente': 'vente.html',
@@ -238,14 +243,16 @@ class InstantSync {
             source: 'editor-manual-preview'
         };
         
-        // Communication : même système que sync partielle
-        const tempKey = `licubepro-instant-${this.pageType}-full-${Date.now()}-${Math.random()}`;
-        localStorage.setItem(tempKey, JSON.stringify(syncMessage));
-        
-        // Nettoyage : suppression après utilisation
-        setTimeout(() => {
-            localStorage.removeItem(tempKey);
-        }, 1000); // Délai plus long pour sync complète
+        // Communication : canal BroadcastChannel ou fallback localStorage
+        if (this.channel) {
+            this.channel.postMessage(syncMessage);
+        } else {
+            const tempKey = `licubepro-instant-${this.pageType}-full-${Date.now()}-${Math.random()}`;
+            localStorage.setItem(tempKey, JSON.stringify(syncMessage));
+            setTimeout(() => {
+                localStorage.removeItem(tempKey);
+            }, 1000); // Délai plus long pour sync complète
+        }
         
         // Broadcast : événement global
         window.dispatchEvent(new CustomEvent('licubepro-instant-sync', {
@@ -273,14 +280,16 @@ class InstantSync {
             source: 'editor-instant'
         };
         
-        // Communication inter-onglets : via localStorage temporaire
-        const tempKey = `licubepro-instant-${this.pageType}-${Date.now()}-${Math.random()}`;
-        localStorage.setItem(tempKey, JSON.stringify(syncMessage));
-        
-        // Nettoyage : suppression du message temporaire
-        setTimeout(() => {
-            localStorage.removeItem(tempKey);
-        }, 500);
+        // Communication inter-onglets : BroadcastChannel ou fallback localStorage
+        if (this.channel) {
+            this.channel.postMessage(syncMessage);
+        } else {
+            const tempKey = `licubepro-instant-${this.pageType}-${Date.now()}-${Math.random()}`;
+            localStorage.setItem(tempKey, JSON.stringify(syncMessage));
+            setTimeout(() => {
+                localStorage.removeItem(tempKey);
+            }, 500);
+        }
         
         // Broadcast : événement personnalisé pour scripts internes
         window.dispatchEvent(new CustomEvent('licubepro-instant-sync', {
