@@ -1806,7 +1806,7 @@
                 <!-- COMPARAISON EN 2 COLONNES (comme dans location.html) -->
                 
                 <!-- FAIBLESSES AVEC MINI-SECTIONS EMOJI -->
-                <div style="background: rgba(239, 68, 68, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--warning-red);">
+                <div id="weaknesses-container" style="background: rgba(239, 68, 68, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--warning-red);">
                     <h3 style="color: var(--warning-red); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span>❌</span> Batteries Ni-Cd (Obsolètes) - Faiblesses
                     </h3>
@@ -2035,9 +2035,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="block-buttons">
+                    <button type="button" onclick="addWeakness()">Ajouter</button>
+                    <button type="button" onclick="removeWeakness()">Supprimer</button>
+                </div>
 
                 <!-- AVANTAGES AVEC MINI-SECTIONS EMOJI -->
-                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--success-green);">
+                <div id="strengths-container" style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--success-green);">
                     <h3 style="color: var(--success-green); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
                         <span>✅</span> Li-CUBE PRO™ - Avantages
                     </h3>
@@ -2284,6 +2288,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="block-buttons">
+                    <button type="button" onclick="addStrength()">Ajouter</button>
+                    <button type="button" onclick="removeStrength()">Supprimer</button>
                 </div>
                 </div>
 
@@ -3525,6 +3533,96 @@ Fabrication et Support 100% Québécois</div>
     <link rel="stylesheet" href="css/advanced-style-editor.css">
     <script src="js/advanced-style-editor.js"></script>
     <script src="js/dynamic-descriptions.js"></script>
+
+    <template id="weakness-template">
+        <div class="content-block">
+            <div class="edit-field">
+                <label class="field-label" for="weaknessX-title">Faiblesse X - Titre</label>
+                <input type="text" id="weaknessX-title" class="field-input" data-field="weaknessX-title" placeholder="Titre de la faiblesse">
+            </div>
+            <div class="edit-field">
+                <label class="field-label" for="weaknessX-desc">Faiblesse X - Description</label>
+                <div contenteditable="true" id="weaknessX-desc" class="field-input field-textarea" data-field="weaknessX-desc" data-placeholder="Description détaillée"></div>
+            </div>
+        </div>
+    </template>
+
+    <template id="strength-template">
+        <div class="content-block">
+            <div class="edit-field">
+                <label class="field-label" for="strengthX-title">Avantage X - Titre</label>
+                <input type="text" id="strengthX-title" class="field-input" data-field="strengthX-title" placeholder="Titre de l'avantage">
+            </div>
+            <div class="edit-field">
+                <label class="field-label" for="strengthX-desc">Avantage X - Description</label>
+                <div contenteditable="true" id="strengthX-desc" class="field-input field-textarea" data-field="strengthX-desc" data-placeholder="Description détaillée"></div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        let weaknessIndex = 0;
+        let strengthIndex = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            weaknessIndex = document.querySelectorAll('#weaknesses-container .content-block').length;
+            strengthIndex = document.querySelectorAll('#strengths-container .content-block').length;
+        });
+
+        window.addWeakness = function() {
+            weaknessIndex += 1;
+            const template = document.getElementById('weakness-template').content.cloneNode(true);
+            template.querySelectorAll('[data-field]').forEach(el => {
+                const type = el.dataset.field.endsWith('-title') ? 'title' : 'desc';
+                el.id = `weakness${weaknessIndex}-${type}`;
+                el.dataset.field = `weakness${weaknessIndex}-${type}`;
+                if (window.instantSync && typeof window.instantSync.registerField === 'function') {
+                    window.instantSync.registerField(el);
+                }
+            });
+            template.querySelectorAll('label').forEach(label => {
+                label.setAttribute('for', label.getAttribute('for').replace('X', weaknessIndex));
+                label.textContent = label.textContent.replace('X', weaknessIndex);
+            });
+            document.getElementById('weaknesses-container').appendChild(template);
+        };
+
+        window.removeWeakness = function() {
+            const container = document.getElementById('weaknesses-container');
+            const blocks = container.querySelectorAll('.content-block');
+            if (blocks.length > 0) {
+                container.removeChild(blocks[blocks.length - 1]);
+                weaknessIndex -= 1;
+            }
+        };
+
+        window.addStrength = function() {
+            strengthIndex += 1;
+            const template = document.getElementById('strength-template').content.cloneNode(true);
+            template.querySelectorAll('[data-field]').forEach(el => {
+                const type = el.dataset.field.endsWith('-title') ? 'title' : 'desc';
+                el.id = `strength${strengthIndex}-${type}`;
+                el.dataset.field = `strength${strengthIndex}-${type}`;
+                if (window.instantSync && typeof window.instantSync.registerField === 'function') {
+                    window.instantSync.registerField(el);
+                }
+            });
+            template.querySelectorAll('label').forEach(label => {
+                label.setAttribute('for', label.getAttribute('for').replace('X', strengthIndex));
+                label.textContent = label.textContent.replace('X', strengthIndex);
+            });
+            document.getElementById('strengths-container').appendChild(template);
+        };
+
+        window.removeStrength = function() {
+            const container = document.getElementById('strengths-container');
+            const blocks = container.querySelectorAll('.content-block');
+            if (blocks.length > 0) {
+                container.removeChild(blocks[blocks.length - 1]);
+                strengthIndex -= 1;
+            }
+        };
+    </script>
 
     <!-- Synchronisation des Variables CSS avec location.html -->
     <script>
