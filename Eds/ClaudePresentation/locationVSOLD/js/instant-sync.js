@@ -7,8 +7,32 @@
 class InstantSync {
     constructor(pageType) {
         // Configuration : type de page et clés de stockage
-        this.pageType = pageType; // 'vente' ou 'location'
+
+        /*
+         * Rôle    : Mémoriser la famille de page (vente ou location).
+         * Type    : string
+         * Unité   : sans unité
+         * Domaine : "vente" | "location" | "locationVS"
+         * Exemple : "location"
+         */
+        this.pageType = pageType; // Le mode détermine la clé utilisée dans le stockage local
+
+        /*
+         * Rôle    : Nom unique des données sauvegardées en localStorage.
+         * Type    : string
+         * Unité   : sans unité
+         * Formule : storageKey = "licubepro-" + pageType + "-live"
+         * Exemple : pageType="location" → "licubepro-location-live"
+         */
         this.storageKey = `licubepro-${pageType}-live`;
+
+        /*
+         * Rôle    : Horodatage de la dernière synchronisation réussie.
+         * Type    : string
+         * Unité   : millisecondes depuis 1970 stockées sous forme de chaîne
+         * Formule : lastSyncKey = "licubepro-" + pageType + "-lastsync"
+         * Exemple : pageType="location" → "licubepro-location-lastsync"
+         */
         this.lastSyncKey = `licubepro-${pageType}-lastsync`;
         
         // État : suivi des modifications et synchronisation
@@ -655,27 +679,52 @@ class InstantSync {
     }
 }
 
-// Auto-détection : type de page et initialisation
+/**
+ * Initialise la synchronisation instantanée selon l'URL courante.
+ *
+ * @returns {InstantSync} Instance active permettant le suivi global des champs.
+ */
 function initInstantSync() {
+    /*
+     * Rôle    : Chemin de l'URL en minuscules pour détecter le type de page.
+     * Type    : string
+     * Unité   : sans unité
+     * Domaine : toute chaîne représentant un chemin d'URL.
+     * Exemple : "/eds/claudepresentation/locationvsold/edit-location.html"
+     */
     const pageUrl = window.location.pathname.toLowerCase();
-    let pageType = 'vente'; // Défaut
+
+    /*
+     * Rôle    : Type de page contrôlant les clés de stockage.
+     * Type    : string
+     * Unité   : sans unité
+     * Domaine : "vente" | "location" | "locationVS"
+     * Exemple : "vente"
+     */
+    let pageType = 'vente'; // Valeur par défaut en cas d'URL non reconnue
 
     if (pageUrl.includes('locationvsold')) {
-        pageType = 'locationVSOLD';
+        /*
+         * Explication : les anciennes URLs "locationVSOLD" doivent utiliser
+         *              les mêmes clés de stockage que "location".
+         * Conséquence : les clés deviennent "licubepro-location-live" et
+         *              "licubepro-location-lastsync".
+         */
+        pageType = 'location';
     } else if (pageUrl.includes('locationvs')) {
-        pageType = 'locationVS'; // ✅ CORRECTION : namespace spécifique pour locationVS
+        pageType = 'locationVS'; // ✅ Namespace spécifique pour locationVS
     } else if (pageUrl.includes('location')) {
         pageType = 'location';
     } else if (pageUrl.includes('vente')) {
         pageType = 'vente';
     }
 
-    // Instance globale
+    // Instance globale exposée à la fenêtre pour l'édition en direct
     window.instantSync = new InstantSync(pageType);
-    
-    // Debug : exposition des stats dans la console
+
+    // Outil de débogage : accès rapide aux statistiques de synchronisation
     window.getSyncStats = () => window.instantSync.getStats();
-    
+
     return window.instantSync;
 }
 
