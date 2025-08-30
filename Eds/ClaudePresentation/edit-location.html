@@ -1261,7 +1261,7 @@
                         <i class="fas fa-times-circle"></i>
                         Faiblesses des Batteries Ni-Cd Obsolètes
                     </h3>
-                    <div class="edit-grid">
+                    <div class="edit-grid" id="weaknesses-container">
                         <div class="edit-field">
                             <label class="field-label" for="weakness1-title">Faiblesse 1 - Titre</label>
                             <p class="field-description">Premier défaut majeur du Ni-Cd</p>
@@ -1369,11 +1369,15 @@
                         <div class="edit-field">
                             <label class="field-label" for="weakness11">Faiblesse 11</label>
                             <p class="field-description">Onzième problème technologique</p>
-                            <input type="text" id="weakness11-title" class="field-input" data-field="weakness11-title" 
+                            <input type="text" id="weakness11-title" class="field-input" data-field="weakness11-title"
                                    placeholder="Remplacements Fréquents" value="Remplacements Fréquents">
-                            <textarea id="weakness11-desc" class="field-input field-textarea" data-field="weakness11-desc" 
+                            <textarea id="weakness11-desc" class="field-input field-textarea" data-field="weakness11-desc"
                                       placeholder="3 remplacements sur 20 ans...">3 remplacements sur 20 ans (4 unités au total) vs 0 pour Li-CUBE PRO™</textarea>
                         </div>
+                    </div>
+                    <div class="block-buttons">
+                        <button type="button" onclick="addWeakness()">Ajouter</button>
+                        <button type="button" onclick="removeWeakness()">Supprimer</button>
                     </div>
                 </div>
 
@@ -1383,7 +1387,7 @@
                         <i class="fas fa-check-circle"></i>
                         Avantages Techniques Li-CUBE PRO™
                     </h3>
-                    <div class="edit-grid">
+                    <div class="edit-grid" id="strengths-container">
                         <div class="edit-field">
                             <label class="field-label" for="strength1-title">Avantage 1 - Titre</label>
                             <p class="field-description">Premier atout technique majeur</p>
@@ -1499,11 +1503,15 @@
                         <div class="edit-field">
                             <label class="field-label" for="strength12">Avantage 12</label>
                             <p class="field-description">Douzième supériorité finale</p>
-                            <input type="text" id="strength12-title" class="field-input" data-field="strength12-title" 
+                            <input type="text" id="strength12-title" class="field-input" data-field="strength12-title"
                                    placeholder="Location Flexible Avantageuse" value="Location Flexible Avantageuse">
-                            <textarea id="strength12-desc" class="field-input field-textarea" data-field="strength12-desc" 
+                            <textarea id="strength12-desc" class="field-input field-textarea" data-field="strength12-desc"
                                       placeholder="150-200$/mois vs 250$ Ni-Cd...">150-200$/mois vs 250$ Ni-Cd → plus économique avec maintenance incluse</textarea>
                         </div>
+                    </div>
+                    <div class="block-buttons">
+                        <button type="button" onclick="addStrength()">Ajouter</button>
+                        <button type="button" onclick="removeStrength()">Supprimer</button>
                     </div>
                 </div>
 
@@ -1752,7 +1760,105 @@ Fabrication et Support 100% Québécois</textarea>
             return phoneRegex.test(phone);
         }
     </script>
-    
+
+    <template id="weakness-template">
+        <div class="content-block">
+            <div class="edit-field">
+                <label class="field-label" for="weaknessX-title">Faiblesse X - Titre</label>
+                <input type="text" id="weaknessX-title" class="field-input" data-field="weaknessX-title" placeholder="Titre de la faiblesse">
+            </div>
+            <div class="edit-field">
+                <label class="field-label" for="weaknessX-desc">Faiblesse X - Description</label>
+                <textarea id="weaknessX-desc" class="field-input field-textarea" data-field="weaknessX-desc" placeholder="Description détaillée"></textarea>
+            </div>
+        </div>
+    </template>
+
+    <template id="strength-template">
+        <div class="content-block">
+            <div class="edit-field">
+                <label class="field-label" for="strengthX-title">Avantage X - Titre</label>
+                <input type="text" id="strengthX-title" class="field-input" data-field="strengthX-title" placeholder="Titre de l'avantage">
+            </div>
+            <div class="edit-field">
+                <label class="field-label" for="strengthX-desc">Avantage X - Description</label>
+                <textarea id="strengthX-desc" class="field-input field-textarea" data-field="strengthX-desc" placeholder="Description détaillée"></textarea>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // Compteurs initiaux pour les sections dynamiques
+        let weaknessIndex = document.querySelectorAll('#weaknesses-container [data-field^="weakness"]').length / 2;
+        let strengthIndex = document.querySelectorAll('#strengths-container [data-field^="strength"]').length / 2;
+
+        // Enregistrement d'un champ pour la synchronisation instantanée
+        window.instantSync.registerField = function(field) {
+            const fieldName = field.dataset.field;
+            const events = ['input', 'change', 'blur', 'paste', 'keyup', 'keydown'];
+            events.forEach(eventType => {
+                field.addEventListener(eventType, (event) => {
+                    if (eventType === 'keydown' && !this.isModifyingKey(event)) return;
+                    this.scheduleInstantSync(fieldName, field);
+                });
+            });
+        };
+
+        // Ajoute un bloc de faiblesse
+        window.addWeakness = function() {
+            weaknessIndex += 1;
+            const template = document.getElementById('weakness-template').content.cloneNode(true);
+            template.querySelectorAll('[data-field]').forEach(element => {
+                const type = element.dataset.field.endsWith('-title') ? 'title' : 'desc';
+                element.id = `weakness${weaknessIndex}-${type}`;
+                element.dataset.field = `weakness${weaknessIndex}-${type}`;
+                window.instantSync.registerField(element);
+            });
+            template.querySelectorAll('label').forEach(label => {
+                label.setAttribute('for', label.getAttribute('for').replace('X', weaknessIndex));
+                label.textContent = label.textContent.replace('X', weaknessIndex);
+            });
+            document.getElementById('weaknesses-container').appendChild(template);
+        };
+
+        // Supprime le dernier bloc de faiblesse
+        window.removeWeakness = function() {
+            const container = document.getElementById('weaknesses-container');
+            const blocks = container.querySelectorAll('.content-block');
+            if (blocks.length > 0) {
+                container.removeChild(blocks[blocks.length - 1]);
+                weaknessIndex -= 1;
+            }
+        };
+
+        // Ajoute un bloc d'avantage
+        window.addStrength = function() {
+            strengthIndex += 1;
+            const template = document.getElementById('strength-template').content.cloneNode(true);
+            template.querySelectorAll('[data-field]').forEach(element => {
+                const type = element.dataset.field.endsWith('-title') ? 'title' : 'desc';
+                element.id = `strength${strengthIndex}-${type}`;
+                element.dataset.field = `strength${strengthIndex}-${type}`;
+                window.instantSync.registerField(element);
+            });
+            template.querySelectorAll('label').forEach(label => {
+                label.setAttribute('for', label.getAttribute('for').replace('X', strengthIndex));
+                label.textContent = label.textContent.replace('X', strengthIndex);
+            });
+            document.getElementById('strengths-container').appendChild(template);
+        };
+
+        // Supprime le dernier bloc d'avantage
+        window.removeStrength = function() {
+            const container = document.getElementById('strengths-container');
+            const blocks = container.querySelectorAll('.content-block');
+            if (blocks.length > 0) {
+                container.removeChild(blocks[blocks.length - 1]);
+                strengthIndex -= 1;
+            }
+        };
+    </script>
+
     <!-- Script Éditeur CSS Complet -->
     <script>
         // Variables CSS pour location.html - Extraites du thème de location
