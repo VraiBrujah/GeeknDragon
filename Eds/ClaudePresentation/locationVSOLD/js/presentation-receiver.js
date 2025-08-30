@@ -4,6 +4,8 @@
  * Répertoire de Travail : C:\Users\Brujah\Documents\GitHub\GeeknDragon\Eds\ClaudePresentation
  */
 
+const { detectPageType } = typeof require !== 'undefined' ? require('./page-type.js') : window;
+
 class PresentationReceiver {
     constructor(pageType) {
         // Configuration : type de page et identification
@@ -659,15 +661,6 @@ class PresentationReceiver {
 
 // Auto-détection : type de page et initialisation
 // Détection du type de page pour un stockage isolé
-function detectPageType() {
-    const url = window.location.pathname.toLowerCase();
-    if (url.includes('locationvsold')) return 'locationVSOLD';
-    if (url.includes('locationvs')) return 'locationVS';
-    if (url.includes('location')) return 'location';
-    if (url.includes('vente')) return 'vente';
-    return 'vente';
-}
-
 function initPresentationReceiver() {
     const pageUrl = window.location.pathname.toLowerCase();
     const pageType = detectPageType();
