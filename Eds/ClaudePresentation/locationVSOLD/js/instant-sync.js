@@ -61,38 +61,38 @@ class InstantSync {
         editableFields.forEach(field => {
             const fieldName = field.dataset.field;
             
-            // Écouteurs multiples : capture immédiate de tout changement
-            const events = ['input', 'change', 'blur', 'paste', 'keyup', 'keydown'];
-            
-            events.forEach(eventType => {
-                field.addEventListener(eventType, (event) => {
-                    // Filtrage : éviter les événements non-modifiants
-                    if (eventType === 'keydown' && !this.isModifyingKey(event)) {
-                        return;
-                    }
-                    
-                    // Synchronisation immédiate avec anti-rebond minimal
-                    this.scheduleInstantSync(fieldName, field);
-                });
-            });
-
-            // Écouteur spécial : contentEditable
-            if (field.contentEditable === 'true') {
-                field.addEventListener('DOMCharacterDataModified', () => {
-                    this.scheduleInstantSync(fieldName, field);
-                });
-            }
-
-            // Observer : mutations DOM pour détecter les changements programmatiques
-            const observer = new MutationObserver(() => {
+            // Écouteur unique : capture des modifications utilisateur
+            field.addEventListener('input', () => {
+                // Synchronisation immédiate avec anti-rebond minimal
                 this.scheduleInstantSync(fieldName, field);
             });
-            
-            observer.observe(field, {
-                childList: true,
-                subtree: true,
-                characterData: true
+
+            // Observer ciblé : détecte les changements programmatiques
+            const observer = new MutationObserver((mutations) => {
+                for (const mutation of mutations) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
+                        this.scheduleInstantSync(fieldName, field);
+                        break;
+                    }
+                    if (mutation.type === 'characterData' || mutation.type === 'childList') {
+                        this.scheduleInstantSync(fieldName, field);
+                        break;
+                    }
+                }
             });
+
+            if (field.contentEditable === 'true') {
+                observer.observe(field, {
+                    characterData: true,
+                    childList: true,
+                    subtree: true
+                });
+            } else {
+                observer.observe(field, {
+                    attributes: true,
+                    attributeFilter: ['value']
+                });
+            }
         });
     }
 
@@ -399,30 +399,6 @@ class InstantSync {
             return field.innerHTML || '';
         }
         return field.textContent || field.innerText || '';
-    }
-
-    /**
-     * Vérification : touche modifiante pour filtrer les événements keydown
-     * @param {KeyboardEvent} event - Événement clavier
-     * @return {boolean} - True si la touche modifie le contenu
-     */
-    isModifyingKey(event) {
-        const modifyingKeys = [
-            'Backspace', 'Delete', 'Enter', 'Tab',
-            'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
-            'Home', 'End', 'PageUp', 'PageDown'
-        ];
-        
-        // Touches de caractères : lettres, chiffres, symboles
-        if (event.key.length === 1) return true;
-        
-        // Touches spéciales modifiantes
-        if (modifyingKeys.includes(event.key)) return true;
-        
-        // Raccourcis : Ctrl+V, Ctrl+X, Ctrl+Z, etc.
-        if (event.ctrlKey || event.metaKey) return true;
-        
-        return false;
     }
 
     /**
