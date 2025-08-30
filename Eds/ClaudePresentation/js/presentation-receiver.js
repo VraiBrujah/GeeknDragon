@@ -237,8 +237,13 @@ class PresentationReceiver {
      */
     applyFieldUpdate(fieldName, value, updateInfo) {
         // Recherche : élément dans la page de présentation
-        const elements = document.querySelectorAll(`[data-field="${fieldName}"]`);
-        
+        let elements = document.querySelectorAll(`[data-field="${fieldName}"]`);
+
+        if (elements.length === 0) {
+            this.ensureDynamicBlock(fieldName);
+            elements = document.querySelectorAll(`[data-field="${fieldName}"]`);
+        }
+
         if (elements.length === 0) {
             console.warn(`⚠️ Champ non trouvé: ${fieldName}`);
             return;
@@ -409,6 +414,35 @@ class PresentationReceiver {
     }
 
     /**
+     * Création dynamique : ajoute un bloc faiblesse/avantage si nécessaire
+     * @param {string} fieldName - Nom du champ détecté
+     */
+    ensureDynamicBlock(fieldName) {
+        const match = fieldName.match(/^(weakness|strength)(\d+)-(title|desc)$/);
+        if (!match) return;
+
+        const type = match[1];
+        const index = match[2];
+
+        const container = document.getElementById(type === 'weakness' ? 'weakness-list' : 'strength-list');
+        const template = document.getElementById(`${type}-item`);
+
+        if (!container || !template) return;
+
+        // Évite de dupliquer un bloc existant
+        if (container.querySelector(`[data-field="${type}${index}-title"]`)) {
+            return;
+        }
+
+        const clone = template.content.cloneNode(true);
+        clone.querySelectorAll('[data-field]').forEach(el => {
+            const part = el.dataset.field.split('-')[1];
+            el.dataset.field = `${type}${index}-${part}`;
+        });
+        container.appendChild(clone);
+    }
+
+    /**
      * Application : mise à jour complète du contenu
      * @param {Object} content - Contenu complet à appliquer
      */
@@ -424,6 +458,7 @@ class PresentationReceiver {
                 return;
             }
             
+            this.ensureDynamicBlock(fieldName);
             const elements = document.querySelectorAll(`[data-field="${fieldName}"]`);
             
             elements.forEach(element => {

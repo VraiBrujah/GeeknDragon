@@ -826,7 +826,7 @@
             <div class="comparison-grid">
                 <div class="old-tech-column">
                     <h3 class="old-tech-title">❌ Batteries Ni-Cd (Obsolètes)</h3>
-                    <div class="weakness-list">
+                    <div class="weakness-list" id="weakness-list">
                         <div class="weakness-item">
                             <div class="weakness-icon">☠️</div>
                             <div class="weakness-content">
@@ -913,7 +913,7 @@
                 
                 <div class="new-tech-column">
                     <h3 class="new-tech-title">✅ Li-CUBE PRO™ (Technologie Moderne)</h3>
-                    <div class="strength-list">
+                    <div class="strength-list" id="strength-list">
                         <div class="strength-item">
                             <div class="strength-icon">🔋</div>
                             <div class="strength-content">
@@ -1121,7 +1121,28 @@
 
         console.log('Li-CUBE PRO™ LOCATION - Page de location optimisée chargée');
     </script>
-    
+
+    <!-- Templates dynamiques pour faiblesses et avantages -->
+    <template id="weakness-item">
+        <div class="weakness-item">
+            <div class="weakness-icon">⚠️</div>
+            <div class="weakness-content">
+                <h4 class="editable" data-field="weaknessX-title">Nouvelle faiblesse</h4>
+                <p class="editable" data-field="weaknessX-desc">Description</p>
+            </div>
+        </div>
+    </template>
+
+    <template id="strength-item">
+        <div class="strength-item">
+            <div class="strength-icon">✅</div>
+            <div class="strength-content">
+                <h4 class="editable" data-field="strengthX-title">Nouvel avantage</h4>
+                <p class="editable" data-field="strengthX-desc">Description</p>
+            </div>
+        </div>
+    </template>
+
     <!-- Récepteur de Styles Dynamiques depuis edit-location.html -->
     <script>
         let dynamicStyleElement = null;
