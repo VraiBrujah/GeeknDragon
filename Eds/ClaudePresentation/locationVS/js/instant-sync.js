@@ -55,44 +55,44 @@ class InstantSync {
     setupInstantListeners() {
         // Sélection : tous les éléments avec data-field
         const editableFields = document.querySelectorAll('[data-field]');
-        
+
         console.log(`📡 Configuration de ${editableFields.length} champs pour sync instantanée`);
-        
-        editableFields.forEach(field => {
-            const fieldName = field.dataset.field;
-            
-            // Écouteurs multiples : capture immédiate de tout changement
-            const events = ['input', 'change', 'blur', 'paste', 'keyup', 'keydown'];
-            
-            events.forEach(eventType => {
-                field.addEventListener(eventType, (event) => {
-                    // Filtrage : éviter les événements non-modifiants
-                    if (eventType === 'keydown' && !this.isModifyingKey(event)) {
-                        return;
-                    }
-                    
-                    // Synchronisation immédiate avec anti-rebond minimal
-                    this.scheduleInstantSync(fieldName, field);
-                });
-            });
 
-            // Écouteur spécial : contentEditable
-            if (field.contentEditable === 'true') {
-                field.addEventListener('DOMCharacterDataModified', () => {
-                    this.scheduleInstantSync(fieldName, field);
-                });
-            }
+        editableFields.forEach(field => this.registerField(field));
+    }
 
-            // Observer : mutations DOM pour détecter les changements programmatiques
-            const observer = new MutationObserver(() => {
+    /**
+     * Enregistrement : ajoute la synchronisation instantanée sur un champ donné
+     * @param {HTMLElement} field - Élément à synchroniser
+     */
+    registerField(field) {
+        const fieldName = field.dataset.field;
+
+        const events = ['input', 'change', 'blur', 'paste', 'keyup', 'keydown'];
+
+        events.forEach(eventType => {
+            field.addEventListener(eventType, (event) => {
+                if (eventType === 'keydown' && !this.isModifyingKey(event)) {
+                    return;
+                }
                 this.scheduleInstantSync(fieldName, field);
             });
-            
-            observer.observe(field, {
-                childList: true,
-                subtree: true,
-                characterData: true
+        });
+
+        if (field.contentEditable === 'true') {
+            field.addEventListener('DOMCharacterDataModified', () => {
+                this.scheduleInstantSync(fieldName, field);
             });
+        }
+
+        const observer = new MutationObserver(() => {
+            this.scheduleInstantSync(fieldName, field);
+        });
+
+        observer.observe(field, {
+            childList: true,
+            subtree: true,
+            characterData: true
         });
     }
 
@@ -585,6 +585,93 @@ class InstantSync {
             console.error('Erreur sauvegarde:', error);
             throw error;
         }
+    }
+
+    /**
+     * Exportation : sauvegarde le contenu dans un fichier JSON
+     */
+    exportContent() {
+        try {
+            const data = localStorage.getItem(this.storageKey);
+            const blob = new Blob([data ?? '{}'], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${this.storageKey}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Erreur exportation:', error);
+        }
+    }
+
+    /**
+     * Importation : charge un fichier JSON et crée les blocs manquants
+     * @param {File} file - Fichier JSON contenant les données sauvegardées
+     */
+    importContent(file) {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            try {
+                const content = JSON.parse(e.target.result);
+                localStorage.setItem(this.storageKey, JSON.stringify(content));
+
+                const getMaxIndex = (prefix) => {
+                    return Object.keys(content).reduce((max, key) => {
+                        const match = key.match(new RegExp(`^${prefix}(\\d+)-`));
+                        return match ? Math.max(max, parseInt(match[1], 10)) : max;
+                    }, 0);
+                };
+
+                const maxWeakness = getMaxIndex('weakness');
+                const maxStrength = getMaxIndex('strength');
+
+                const countBlocks = (type) => document.querySelectorAll(`[data-field^="${type}"][data-field$="-title"]`).length;
+                let currentWeakness = countBlocks('weakness');
+                let currentStrength = countBlocks('strength');
+
+                if (typeof window.addWeakness === 'function') {
+                    while (currentWeakness < maxWeakness) {
+                        window.addWeakness();
+                        currentWeakness++;
+                    }
+                }
+                if (typeof window.removeWeakness === 'function') {
+                    while (currentWeakness > maxWeakness) {
+                        window.removeWeakness();
+                        currentWeakness--;
+                    }
+                }
+                if (typeof window.addStrength === 'function') {
+                    while (currentStrength < maxStrength) {
+                        window.addStrength();
+                        currentStrength++;
+                    }
+                }
+                if (typeof window.removeStrength === 'function') {
+                    while (currentStrength > maxStrength) {
+                        window.removeStrength();
+                        currentStrength--;
+                    }
+                }
+
+                const fields = document.querySelectorAll('[data-field]');
+                fields.forEach(field => {
+                    const name = field.dataset.field;
+                    if (content[name] !== undefined) {
+                        this.applyValueToField(field, content[name]);
+                        this.fieldValues.set(name, content[name]);
+                    }
+                });
+
+                await this.executeFullSync();
+            } catch (error) {
+                console.error('Erreur importation:', error);
+            }
+        };
+        reader.readAsText(file);
     }
 
     /**
