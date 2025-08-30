@@ -19,7 +19,12 @@ class PresentationReceiver {
         this.debounceDelay = 25; // Délai ultra-court pour applications immédiates
         this.maxUpdateQueue = 100;
         this.updateQueue = [];
-        
+
+        // Communication : canal BroadcastChannel (ou null si non supporté)
+        this.channel = (typeof BroadcastChannel !== 'undefined')
+            ? new BroadcastChannel('licubepro-sync')
+            : null;
+
         this.init();
     }
 
@@ -29,7 +34,7 @@ class PresentationReceiver {
     init() {
         console.log(`📡 Récepteur PRÉSENTATION ${this.pageType.toUpperCase()} - Initialisation`);
         
-        this.setupStorageListeners();
+        this.setupChannelListeners();
         this.setupMessageListeners();
         this.startUpdateProcessing();
         this.loadInitialContent();
@@ -39,29 +44,35 @@ class PresentationReceiver {
     }
 
     /**
-     * Configuration : écoute des changements de stockage inter-onglets
+     * Configuration : canal de communication principal (BroadcastChannel ou fallback)
      */
-    setupStorageListeners() {
-        // Écoute : événements storage pour communications entre onglets
-        window.addEventListener('storage', (event) => {
-            // Filtrage : messages de synchronisation instantanée
-            if (event.key && event.key.includes(`licubepro-instant-${this.pageType}`)) {
-                this.handleStorageUpdate(event);
-            }
-        });
-        
-        // Écoute : changements directs du storage principal
-        const originalSetItem = localStorage.setItem;
-        localStorage.setItem = (key, value) => {
-            const result = originalSetItem.call(localStorage, key, value);
-            
-            // Détection : modifications du storage principal
-            if (key === this.storageKey) {
-                this.handleDirectStorageChange(value);
-            }
-            
-            return result;
-        };
+    setupChannelListeners() {
+        if (this.channel) {
+            // Écoute : messages BroadcastChannel
+            this.channel.onmessage = (event) => {
+                const message = event.data;
+                if (message && message.pageType === this.pageType) {
+                    this.handleSyncMessage(message);
+                }
+            };
+        } else {
+            // Fallback : événements storage pour communications entre onglets
+            window.addEventListener('storage', (event) => {
+                if (event.key && event.key.includes(`licubepro-instant-${this.pageType}`)) {
+                    this.handleStorageUpdate(event);
+                }
+            });
+
+            // Écoute : changements directs du storage principal
+            const originalSetItem = localStorage.setItem;
+            localStorage.setItem = (key, value) => {
+                const result = originalSetItem.call(localStorage, key, value);
+                if (key === this.storageKey) {
+                    this.handleDirectStorageChange(value);
+                }
+                return result;
+            };
+        }
     }
 
     /**
@@ -572,17 +583,19 @@ class PresentationReceiver {
         // Chargement : contenu le plus récent
         this.loadInitialContent();
         
-        // Vérification : messages en attente dans le storage
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            if (key && key.includes(`licubepro-instant-${this.pageType}`)) {
-                try {
-                    const message = JSON.parse(localStorage.getItem(key));
-                    if (message.timestamp > this.lastUpdate) {
-                        this.queueUpdate(message);
+        // Vérification : messages en attente dans le storage (fallback uniquement)
+        if (!this.channel) {
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.includes(`licubepro-instant-${this.pageType}`)) {
+                    try {
+                        const message = JSON.parse(localStorage.getItem(key));
+                        if (message.timestamp > this.lastUpdate) {
+                            this.queueUpdate(message);
+                        }
+                    } catch (e) {
+                        // Ignore les messages malformés
                     }
-                } catch (e) {
-                    // Ignore les messages malformés
                 }
             }
         }
@@ -617,18 +630,20 @@ class PresentationReceiver {
             console.warn(`⚠️ Aucune mise à jour reçue depuis ${Math.round(timeSinceLastUpdate / 60000)} minutes`);
         }
         
-        // Nettoyage : anciens messages temporaires
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            if (key && key.includes('licubepro-instant-') && key.includes(this.pageType)) {
-                try {
-                    const message = JSON.parse(localStorage.getItem(key));
-                    if (now - message.timestamp > 60000) { // 1 minute
+        // Nettoyage : anciens messages temporaires (fallback uniquement)
+        if (!this.channel) {
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.includes('licubepro-instant-') && key.includes(this.pageType)) {
+                    try {
+                        const message = JSON.parse(localStorage.getItem(key));
+                        if (now - message.timestamp > 60000) { // 1 minute
+                            localStorage.removeItem(key);
+                        }
+                    } catch (e) {
+                        // Suppression des messages corrompus
                         localStorage.removeItem(key);
                     }
-                } catch (e) {
-                    // Suppression des messages corrompus
-                    localStorage.removeItem(key);
                 }
             }
         }
