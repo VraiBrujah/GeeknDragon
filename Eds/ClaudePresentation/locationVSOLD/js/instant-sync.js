@@ -659,15 +659,17 @@ class InstantSync {
 function initInstantSync() {
     const pageUrl = window.location.pathname.toLowerCase();
     let pageType = 'vente'; // Défaut
-    
-    if (pageUrl.includes('locationvs')) {
+
+    if (pageUrl.includes('locationvsold')) {
+        pageType = 'locationVSOLD';
+    } else if (pageUrl.includes('locationvs')) {
         pageType = 'locationVS'; // ✅ CORRECTION : namespace spécifique pour locationVS
     } else if (pageUrl.includes('location')) {
         pageType = 'location';
     } else if (pageUrl.includes('vente')) {
         pageType = 'vente';
     }
-    
+
     // Instance globale
     window.instantSync = new InstantSync(pageType);
     

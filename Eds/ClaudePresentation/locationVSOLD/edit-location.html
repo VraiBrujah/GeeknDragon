@@ -2942,7 +2942,7 @@ Fabrication et Support 100% Québécois</div>
 
         // Réinitialisation depuis le backup
         function resetCSS() {
-            const backup = localStorage.getItem('locationVS-css-backup');
+            const backup = localStorage.getItem('locationVSOLD-css-backup');
             let stylesToReset = backup ? JSON.parse(backup) : defaultValues;
             
             Object.entries(stylesToReset).forEach(([key, value]) => {
@@ -2970,7 +2970,7 @@ Fabrication et Support 100% Québécois</div>
                 });
                 
                 // Écrasement du backup de réinitialisation
-                localStorage.setItem('locationVS-css-backup', JSON.stringify(styles));
+                localStorage.setItem('locationVSOLD-css-backup', JSON.stringify(styles));
                 showNotification('Nouveau point de sauvegarde créé !', 'success');
             });
         }
@@ -3107,7 +3107,7 @@ Fabrication et Support 100% Québécois</div>
             const jsonUrl = URL.createObjectURL(jsonBlob);
             const jsonLink = document.createElement('a');
             jsonLink.href = jsonUrl;
-            jsonLink.download = 'locationVS-custom-styles.json';
+            jsonLink.download = 'locationVSOLD-custom-styles.json';
             jsonLink.click();
             URL.revokeObjectURL(jsonUrl);
             
@@ -3136,7 +3136,7 @@ Fabrication et Support 100% Québécois</div>
 
         // Chargement des styles sauvegardés
         function loadSavedStyles() {
-            const saved = localStorage.getItem('locationVS-custom-css');
+            const saved = localStorage.getItem('locationVSOLD-custom-css');
             if (saved) {
                 const styles = JSON.parse(saved);
                 Object.entries(styles).forEach(([key, value]) => {
@@ -3150,10 +3150,10 @@ Fabrication et Support 100% Québécois</div>
 
         // Création du backup automatique initial
         function createInitialBackup() {
-            const existingBackup = localStorage.getItem('locationVS-css-backup');
+            const existingBackup = localStorage.getItem('locationVSOLD-css-backup');
             if (!existingBackup) {
                 // Premier lancement : créer backup avec valeurs par défaut
-                localStorage.setItem('locationVS-css-backup', JSON.stringify(defaultValues));
+                localStorage.setItem('locationVSOLD-css-backup', JSON.stringify(defaultValues));
                 console.log('🔄 Backup automatique initial créé');
             }
         }
@@ -3171,8 +3171,8 @@ Fabrication et Support 100% Québécois</div>
             const locationCSS = generateLocationCSS(currentStyles);
             
             // Sauvegarde temporaire pour sync temps réel
-            localStorage.setItem('locationVS-live-styles', JSON.stringify(currentStyles));
-            localStorage.setItem('locationVS-dynamic-css', locationCSS);
+            localStorage.setItem('locationVSOLD-live-styles', JSON.stringify(currentStyles));
+            localStorage.setItem('locationVSOLD-dynamic-css', locationCSS);
             
             // Si InstantSync est disponible, l'utiliser pour sync immédiate
             if (window.instantSync) {
@@ -3194,8 +3194,8 @@ Fabrication et Support 100% Québécois</div>
                 };
                 
                 // Broadcast vers tous les onglets via localStorage event
-                localStorage.setItem('locationVS-css-broadcast', JSON.stringify(message));
-                setTimeout(() => localStorage.removeItem('locationVS-css-broadcast'), 100);
+                localStorage.setItem('locationVSOLD-css-broadcast', JSON.stringify(message));
+                setTimeout(() => localStorage.removeItem('locationVSOLD-css-broadcast'), 100);
                 
                 // Application immédiate des styles à la page d'édition elle-même
                 if (typeof applyDynamicCSSToEditPage === 'function') {
@@ -3368,7 +3368,7 @@ Fabrication et Support 100% Québécois</div>
         
         // Obtient l'ordre actuel de TOUTES les sections (éditeur) depuis localStorage  
         function getAllSectionOrder() {
-            const savedOrder = localStorage.getItem('locationVS-allSectionOrder');
+            const savedOrder = localStorage.getItem('locationVSOLD-allSectionOrder');
             return savedOrder ? JSON.parse(savedOrder) : {
                 'hero': 1,
                 'hero-arguments': 2,
@@ -3396,15 +3396,15 @@ Fabrication et Support 100% Québécois</div>
         
         // Sauvegarde l'ordre de TOUTES les sections (éditeur)
         function saveAllSectionOrder(allOrder) {
-            localStorage.setItem('locationVS-allSectionOrder', JSON.stringify(allOrder));
+            localStorage.setItem('locationVSOLD-allSectionOrder', JSON.stringify(allOrder));
             
             // Génère l'ordre pour la présentation (sections filtrées)
             const presentationOrder = getPresentationSectionOrder();
-            localStorage.setItem('locationVS-sectionOrder', JSON.stringify(presentationOrder));
+            localStorage.setItem('locationVSOLD-sectionOrder', JSON.stringify(presentationOrder));
             
             // Synchronisation immédiate avec la page de présentation
             window.dispatchEvent(new CustomEvent('storage', {
-                detail: { key: 'locationVS-sectionOrder', newValue: JSON.stringify(presentationOrder) }
+                detail: { key: 'locationVSOLD-sectionOrder', newValue: JSON.stringify(presentationOrder) }
             }));
         }
         
@@ -3679,7 +3679,7 @@ Fabrication et Support 100% Québécois</div>
         
         // Écoute des changements de styles depuis location.html
         window.addEventListener('storage', function(e) {
-            if (e.key === 'locationVS-css-broadcast' && e.newValue) {
+            if (e.key === 'locationVSOLD-css-broadcast' && e.newValue) {
                 try {
                     const message = JSON.parse(e.newValue);
                     if (message.type === 'LOCATION_CSS_UPDATE' && message.css) {
