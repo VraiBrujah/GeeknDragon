@@ -826,7 +826,7 @@ function saveAllSectionOrder(allOrder) {
   localStorage.setItem('locationVSOLD-sectionOrder', JSON.stringify(presentationOrder));
 
   // Synchronisation immédiate avec la page de présentation
-  window.dispatchEvent(new CustomEvent('storage', {
+  window.dispatchEvent(new CustomEvent('sectionOrderChange', {
     detail: { key: 'locationVSOLD-sectionOrder', newValue: JSON.stringify(presentationOrder) },
   }));
 }

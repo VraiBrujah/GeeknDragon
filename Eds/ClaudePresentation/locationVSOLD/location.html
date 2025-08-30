@@ -1637,7 +1637,7 @@
             });
             
             // Écoute les événements personnalisés (pour même onglet)
-            window.addEventListener('storage', function(e) {
+            window.addEventListener('sectionOrderChange', function(e) {
                 if (e.detail && e.detail.key === 'locationVSOLD-sectionOrder') {
                     console.log('🔄 Changement d\'ordre détecté (même onglet), réorganisation...');
                     applySectionOrderToPresentation();
