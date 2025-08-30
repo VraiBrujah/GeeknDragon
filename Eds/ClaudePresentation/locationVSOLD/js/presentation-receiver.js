@@ -489,9 +489,13 @@ class PresentationReceiver {
         } else if (tagName === 'input' || tagName === 'textarea') {
             element.value = value;
         } else if (element.contentEditable === 'true') {
-            element.innerHTML = value;
+            if (typeof window !== 'undefined' && window.DOMPurify) {
+                element.innerHTML = window.DOMPurify.sanitize(value);
+            } else {
+                element.textContent = value;
+            }
         } else {
-            element.innerHTML = value;
+            element.textContent = value;
         }
         
         // Déclenchement : événements pour autres scripts
