@@ -234,10 +234,18 @@ class InstantSync {
         
         // Communication : même système que sync partielle
         const tempKey = `licubepro-instant-${this.pageType}-full-${Date.now()}-${Math.random()}`;
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+            return;
+        }
         localStorage.setItem(tempKey, JSON.stringify(syncMessage));
-        
+
         // Nettoyage : suppression après utilisation
         setTimeout(() => {
+            if (typeof localStorage === 'undefined') {
+                console.error('localStorage non disponible');
+                return;
+            }
             localStorage.removeItem(tempKey);
         }, 1000); // Délai plus long pour sync complète
         
@@ -269,10 +277,18 @@ class InstantSync {
         
         // Communication inter-onglets : via localStorage temporaire
         const tempKey = `licubepro-instant-${this.pageType}-${Date.now()}-${Math.random()}`;
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+            return;
+        }
         localStorage.setItem(tempKey, JSON.stringify(syncMessage));
-        
+
         // Nettoyage : suppression du message temporaire
         setTimeout(() => {
+            if (typeof localStorage === 'undefined') {
+                console.error('localStorage non disponible');
+                return;
+            }
             localStorage.removeItem(tempKey);
         }, 500);
         
@@ -515,6 +531,11 @@ class InstantSync {
      * Vérification : santé du système de synchronisation
      */
     checkSyncHealth() {
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+            this.updateSyncUI('error');
+            return;
+        }
         const now = Date.now();
         const lastSync = localStorage.getItem(this.lastSyncKey);
         
@@ -568,6 +589,10 @@ class InstantSync {
      * @return {Object} - Contenu sauvegardé
      */
     loadContent() {
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+            return {};
+        }
         try {
             const saved = localStorage.getItem(this.storageKey);
             return saved ? JSON.parse(saved) : {};
@@ -582,6 +607,10 @@ class InstantSync {
      * @param {Object} content - Contenu à sauvegarder
      */
     saveContent(content) {
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+            return;
+        }
         try {
             localStorage.setItem(this.storageKey, JSON.stringify(content));
             localStorage.setItem(this.lastSyncKey, Date.now().toString());
@@ -597,6 +626,10 @@ class InstantSync {
     async exportContent() {
         try {
             await this.executeFullSync();
+            if (typeof localStorage === 'undefined') {
+                console.error('localStorage non disponible');
+                return;
+            }
             const data = localStorage.getItem(this.storageKey);
             const blob = new Blob([data ?? '{}'], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
@@ -621,6 +654,10 @@ class InstantSync {
         reader.onload = async (e) => {
             try {
                 const content = JSON.parse(e.target.result);
+                if (typeof localStorage === 'undefined') {
+                    console.error('localStorage non disponible');
+                    return;
+                }
                 localStorage.setItem(this.storageKey, JSON.stringify(content));
 
                 const getMaxIndex = (prefix) => {
@@ -684,12 +721,18 @@ class InstantSync {
      * @return {Object} - Statistiques détaillées
      */
     getStats() {
+        let lastSync = null;
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+        } else {
+            lastSync = localStorage.getItem(this.lastSyncKey);
+        }
         return {
             pageType: this.pageType,
             syncCounter: this.syncCounter,
             fieldsTracked: this.fieldValues.size,
             isActive: this.isInitialized,
-            lastSync: localStorage.getItem(this.lastSyncKey),
+            lastSync: lastSync,
             pendingSync: this.pendingSync
         };
     }
