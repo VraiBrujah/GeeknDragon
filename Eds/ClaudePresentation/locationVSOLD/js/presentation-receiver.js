@@ -634,32 +634,32 @@ class PresentationReceiver {
 }
 
 // Auto-détection : type de page et initialisation
+// Détection du type de page pour un stockage isolé
+function detectPageType() {
+    const url = window.location.pathname.toLowerCase();
+    if (url.includes('locationvsold')) return 'locationVSOLD';
+    if (url.includes('locationvs')) return 'locationVS';
+    if (url.includes('location')) return 'location';
+    if (url.includes('vente')) return 'vente';
+    return 'vente';
+}
+
 function initPresentationReceiver() {
     const pageUrl = window.location.pathname.toLowerCase();
-    let pageType = 'vente'; // Défaut
+    const pageType = detectPageType();
 
-    if (pageUrl.includes('locationvsold')) {
-        pageType = 'locationVSOLD';
-    } else if (pageUrl.includes('locationvs')) {
-        pageType = 'locationVS'; // ✅ CORRECTION : namespace spécifique pour locationVS
-    } else if (pageUrl.includes('location')) {
-        pageType = 'location';
-    } else if (pageUrl.includes('vente')) {
-        pageType = 'vente';
-    }
-    
     // Vérification : ne s'active que sur les pages de présentation (pas les éditeurs)
     if (pageUrl.includes('edit-')) {
         console.log('🚫 Récepteur désactivé sur page éditeur');
         return null;
     }
-    
+
     // Instance globale
     window.presentationReceiver = new PresentationReceiver(pageType);
-    
+
     // Debug : exposition des stats
     window.getReceiverStats = () => window.presentationReceiver.getStats();
-    
+
     return window.presentationReceiver;
 }
 
