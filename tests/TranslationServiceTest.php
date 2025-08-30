@@ -45,7 +45,7 @@ final class TranslationServiceTest extends TestCase
         unset($_SERVER['HTTP_ACCEPT_LANGUAGE']);
     }
 
-    public function acceptLanguageProvider(): array
+    public static function acceptLanguageProvider(): array
     {
         return [
             ['en-US;q=0.8,fr;q=0.9', 'fr'],
