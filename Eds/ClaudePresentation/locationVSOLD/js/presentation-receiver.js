@@ -275,24 +275,24 @@ class PresentationReceiver {
      */
     handleSpecialFields(fieldName, value) {
         // Gestion : numéro de téléphone pour liens
-        if (fieldName === 'phone-number') {
-            const phoneLinks = document.querySelectorAll('[data-phone-field="phone-number"]');
+        if (['phone-number', 'rental-phone'].includes(fieldName)) {
+            const phoneLinks = document.querySelectorAll(`[data-phone-field="${fieldName}"]`);
             phoneLinks.forEach(link => {
                 const cleanPhone = value.replace(/\D/g, ''); // Supprime tout sauf chiffres
                 link.href = `tel:${cleanPhone}`;
                 console.log(`📞 Lien téléphone mis à jour: tel:${cleanPhone}`);
             });
         }
-        
+
         // Gestion : adresse email pour liens
-        if (fieldName === 'email-address') {
-            const emailLinks = document.querySelectorAll('[data-email-field="email-address"]');
+        if (['email-address', 'rental-email'].includes(fieldName)) {
+            const emailLinks = document.querySelectorAll(`[data-email-field="${fieldName}"]`);
             emailLinks.forEach(link => {
                 // Conservation : sujet et corps du message existant
                 const currentHref = link.href;
                 const subjectMatch = currentHref.match(/subject=([^&]*)/);
                 const bodyMatch = currentHref.match(/body=([^&]*)/);
-                
+
                 let newHref = `mailto:${value}`;
                 if (subjectMatch) {
                     newHref += `?subject=${subjectMatch[1]}`;
@@ -302,7 +302,7 @@ class PresentationReceiver {
                 } else if (bodyMatch) {
                     newHref += `?body=${bodyMatch[1]}`;
                 }
-                
+
                 link.href = newHref;
                 console.log(`📧 Lien email mis à jour: ${value}`);
             });
