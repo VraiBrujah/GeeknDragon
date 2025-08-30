@@ -9,7 +9,7 @@
     "bundle:js": "npx terser js/swiper-bundle.min.js js/fancybox.umd.js -c -m -o js/vendor.bundle.min.js",
     "bundle": "npm run bundle:css && npm run bundle:js",
     "test": "composer test",
-    "lint": "eslint js"
+    "lint": "eslint js Eds/ClaudePresentation/locationVSOLD/js/edit-location.js"
   },
   "keywords": [],
   "author": "",
