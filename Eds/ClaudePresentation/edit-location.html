@@ -1792,18 +1792,6 @@ Fabrication et Support 100% Québécois</textarea>
         let weaknessIndex = document.querySelectorAll('#weaknesses-container [data-field^="weakness"]').length / 2;
         let strengthIndex = document.querySelectorAll('#strengths-container [data-field^="strength"]').length / 2;
 
-        // Enregistrement d'un champ pour la synchronisation instantanée
-        window.instantSync.registerField = function(field) {
-            const fieldName = field.dataset.field;
-            const events = ['input', 'change', 'blur', 'paste', 'keyup', 'keydown'];
-            events.forEach(eventType => {
-                field.addEventListener(eventType, (event) => {
-                    if (eventType === 'keydown' && !this.isModifyingKey(event)) return;
-                    this.scheduleInstantSync(fieldName, field);
-                });
-            });
-        };
-
         // Ajoute un bloc de faiblesse
         window.addWeakness = function() {
             weaknessIndex += 1;

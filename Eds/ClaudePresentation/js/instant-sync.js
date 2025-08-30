@@ -58,41 +58,47 @@ class InstantSync {
         
         console.log(`📡 Configuration de ${editableFields.length} champs pour sync instantanée`);
         
-        editableFields.forEach(field => {
-            const fieldName = field.dataset.field;
-            
-            // Écouteurs multiples : capture immédiate de tout changement
-            const events = ['input', 'change', 'blur', 'paste', 'keyup', 'keydown'];
-            
-            events.forEach(eventType => {
-                field.addEventListener(eventType, (event) => {
-                    // Filtrage : éviter les événements non-modifiants
-                    if (eventType === 'keydown' && !this.isModifyingKey(event)) {
-                        return;
-                    }
-                    
-                    // Synchronisation immédiate avec anti-rebond minimal
-                    this.scheduleInstantSync(fieldName, field);
-                });
-            });
+        editableFields.forEach(field => this.registerField(field));
+    }
 
-            // Écouteur spécial : contentEditable
-            if (field.contentEditable === 'true') {
-                field.addEventListener('DOMCharacterDataModified', () => {
-                    this.scheduleInstantSync(fieldName, field);
-                });
-            }
+    /**
+     * Enregistrement : ajoute la synchronisation instantanée sur un champ donné
+     * @param {HTMLElement} field - Élément à synchroniser
+     */
+    registerField(field) {
+        const fieldName = field.dataset.field;
 
-            // Observer : mutations DOM pour détecter les changements programmatiques
-            const observer = new MutationObserver(() => {
+        // Écouteurs multiples : capture immédiate de tout changement
+        const events = ['input', 'change', 'blur', 'paste', 'keyup', 'keydown'];
+
+        events.forEach(eventType => {
+            field.addEventListener(eventType, (event) => {
+                // Filtrage : éviter les événements non-modifiants
+                if (eventType === 'keydown' && !this.isModifyingKey(event)) {
+                    return;
+                }
+
+                // Synchronisation immédiate avec anti-rebond minimal
                 this.scheduleInstantSync(fieldName, field);
             });
-            
-            observer.observe(field, {
-                childList: true,
-                subtree: true,
-                characterData: true
+        });
+
+        // Écouteur spécial : contentEditable
+        if (field.contentEditable === 'true') {
+            field.addEventListener('DOMCharacterDataModified', () => {
+                this.scheduleInstantSync(fieldName, field);
             });
+        }
+
+        // Observer : mutations DOM pour détecter les changements programmatiques
+        const observer = new MutationObserver(() => {
+            this.scheduleInstantSync(fieldName, field);
+        });
+
+        observer.observe(field, {
+            childList: true,
+            subtree: true,
+            characterData: true
         });
     }
 
