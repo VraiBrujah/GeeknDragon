@@ -144,7 +144,27 @@
             font-family: inherit;
         }
         
-        .field-textarea { min-height: 100px; resize: vertical; }
+        /*
+         * Rôle : style commun pour les blocs éditables multiligne
+         * Effet : imite l'apparence et le comportement d'une zone
+         *         de texte classique tout en autorisant le texte riche
+         */
+        .field-textarea {
+            min-height: 100px;
+            resize: vertical;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        /*
+         * Astuce UX : affichage d'un texte indicatif lorsque le champ
+         * est vide, équivalent du placeholder des <textarea>
+         */
+        .field-input[contenteditable="true"]:empty::before {
+            content: attr(data-placeholder);
+            color: rgba(203, 213, 225, 0.5);
+            pointer-events: none;
+        }
         
         .field-input:focus {
             outline: none; 
@@ -1043,8 +1063,8 @@
                 <div class="edit-field">
                     <label class="field-label" for="page-description">Description SEO (meta description)</label>
                     <p class="field-description">Description pour les moteurs de recherche et réseaux sociaux</p>
-                    <textarea id="page-description" class="field-input field-textarea" data-field="page-description" 
-                              placeholder="Outil de présentation commerciale Li-CUBE PRO™ LOCATION...">Outil de présentation commerciale Li-CUBE PRO™ LOCATION : Arguments de service et tranquillité pour équipes de vente EDS Québec.</textarea>
+                    <div contenteditable="true" id="page-description" class="field-input field-textarea" data-field="page-description" 
+                              data-placeholder="Outil de présentation commerciale Li-CUBE PRO™ LOCATION...">Outil de présentation commerciale Li-CUBE PRO™ LOCATION : Arguments de service et tranquillité pour équipes de vente EDS Québec.</div>
                 </div>
 
                 <div class="edit-field">
@@ -1157,8 +1177,8 @@
                     <div class="edit-field">
                         <label class="field-label" for="hero-description">Description héro</label>
                         <p class="field-description">Description détaillée du service de location</p>
-                        <textarea id="hero-description" class="field-input field-textarea" data-field="hero-description" 
-                                  placeholder="Pourquoi prendre des risques...">Pourquoi prendre des risques ? Louez votre Li-CUBE PRO™ et laissez EDS gérer tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. Vous payez, vous utilisez, nous nous occupons du reste.</textarea>
+                        <div contenteditable="true" id="hero-description" class="field-input field-textarea" data-field="hero-description" 
+                                  data-placeholder="Pourquoi prendre des risques...">Pourquoi prendre des risques ? Louez votre Li-CUBE PRO™ et laissez EDS gérer tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. Vous payez, vous utilisez, nous nous occupons du reste.</div>
                     </div>
 
                     <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
@@ -1180,8 +1200,8 @@
                     <div class="edit-field">
                         <label class="field-label" for="price-included">Services inclus</label>
                         <p class="field-description">Liste des services inclus</p>
-                        <textarea id="price-included" class="field-input field-textarea" data-field="price-included" 
-                                  placeholder="Maintenance, monitoring, support...">Maintenance, monitoring, support et garantie totale inclus</textarea>
+                        <div contenteditable="true" id="price-included" class="field-input field-textarea" data-field="price-included" 
+                                  data-placeholder="Maintenance, monitoring, support...">Maintenance, monitoring, support et garantie totale inclus</div>
                     </div>
                 </div>
 
@@ -1274,8 +1294,8 @@
                 <div class="edit-field">
                     <label class="field-label" for="hero-description">Description argumentaire de location</label>
                     <p class="field-description">Paragraphe de location avec arguments zéro risque et service inclus</p>
-                    <textarea id="hero-description" class="field-input field-textarea" data-field="hero-description" 
-                              placeholder="Pourquoi prendre des risques...">Pourquoi prendre des risques ? Louez votre Li-CUBE PRO™ et laissez EDS gérer tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. Vous payez, vous utilisez, nous nous occupons du reste.</textarea>
+                    <div contenteditable="true" id="hero-description" class="field-input field-textarea" data-field="hero-description" 
+                              data-placeholder="Pourquoi prendre des risques...">Pourquoi prendre des risques ? Louez votre Li-CUBE PRO™ et laissez EDS gérer tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. Vous payez, vous utilisez, nous nous occupons du reste.</div>
                 </div>
 
                 <div class="edit-field">
@@ -1291,8 +1311,8 @@
                 <div class="edit-field">
                     <label class="field-label" for="price-included">Services inclus dans le prix</label>
                     <p class="field-description">Ce qui est compris dans le tarif mensuel</p>
-                    <textarea id="price-included" class="field-input field-textarea" data-field="price-included" 
-                              placeholder="Maintenance, monitoring, support...">Maintenance, monitoring, support et garantie totale inclus</textarea>
+                    <div contenteditable="true" id="price-included" class="field-input field-textarea" data-field="price-included" 
+                              data-placeholder="Maintenance, monitoring, support...">Maintenance, monitoring, support et garantie totale inclus</div>
                 </div>
 
                 <div class="edit-field">
@@ -1424,8 +1444,8 @@
                 <div class="edit-field">
                     <label class="field-label" for="pricing-subtitle">Explication tarifs</label>
                     <p class="field-description">Phrase explicative des avantages tarifaires</p>
-                    <textarea id="pricing-subtitle" class="field-input field-textarea" data-field="pricing-subtitle" 
-                              placeholder="Prix tout inclus, sans surprise...">Prix tout inclus, sans surprise. Plus vous louez longtemps, moins vous payez !</textarea>
+                    <div contenteditable="true" id="pricing-subtitle" class="field-input field-textarea" data-field="pricing-subtitle" 
+                              data-placeholder="Prix tout inclus, sans surprise...">Prix tout inclus, sans surprise. Plus vous louez longtemps, moins vous payez !</div>
                 </div>
 
                 <!-- Grille des 3 offres de location -->
@@ -1563,15 +1583,15 @@
                 <div class="edit-field">
                     <label class="field-label" for="pricing-note">Note tarifaire</label>
                     <p class="field-description">Information complémentaire sur les prix</p>
-                    <textarea id="pricing-note" class="field-input field-textarea" data-field="pricing-note" 
-                              placeholder="💡 Astuce : Tarifs dégressifs...">💡 Astuce : Tarifs dégressifs pour multiple unités !</textarea>
+                    <div contenteditable="true" id="pricing-note" class="field-input field-textarea" data-field="pricing-note" 
+                              data-placeholder="💡 Astuce : Tarifs dégressifs...">💡 Astuce : Tarifs dégressifs pour multiple unités !</div>
                 </div>
 
                 <div class="edit-field">
                     <label class="field-label" for="volume-discounts">Remises volume</label>
                     <p class="field-description">Détail des remises selon quantité</p>
-                    <textarea id="volume-discounts" class="field-input field-textarea" data-field="volume-discounts" 
-                              placeholder="2-4 unités : -10%...">2-4 unités : -10% | 5-9 unités : -15% | 10+ unités : -20% | 20+ unités : sur devis personnalisé</textarea>
+                    <div contenteditable="true" id="volume-discounts" class="field-input field-textarea" data-field="volume-discounts" 
+                              data-placeholder="2-4 unités : -10%...">2-4 unités : -10% | 5-9 unités : -15% | 10+ unités : -20% | 20+ unités : sur devis personnalisé</div>
                 </div>
             </div>
         </section>
@@ -1624,8 +1644,8 @@
                     </div>
                     <div class="edit-field">
                         <label class="field-label" for="adv1-text">Description avantage 1</label>
-                        <textarea id="adv1-text" class="field-input field-textarea" data-field="adv1-text" 
-                                  placeholder="Pas de sortie de cash...">Pas de sortie de cash importante ! Préservez votre trésorerie pour votre cœur de métier. 150 $/mois c'est accessible à toutes les entreprises, même les plus petites. Déductible fiscalement comme charge d'exploitation.</textarea>
+                        <div contenteditable="true" id="adv1-text" class="field-input field-textarea" data-field="adv1-text" 
+                                  data-placeholder="Pas de sortie de cash...">Pas de sortie de cash importante ! Préservez votre trésorerie pour votre cœur de métier. 150 $/mois c'est accessible à toutes les entreprises, même les plus petites. Déductible fiscalement comme charge d'exploitation.</div>
                     </div>
                 </div>
 
@@ -1641,8 +1661,8 @@
                     </div>
                     <div class="edit-field">
                         <label class="field-label" for="adv2-text">Description avantage 2</label>
-                        <textarea id="adv2-text" class="field-input field-textarea" data-field="adv2-text" 
-                                  placeholder="Panne ? Nous remplaçons...">Panne ? Nous remplaçons. Obsolescence ? Nous mettons à jour. Performance insuffisante ? Nous optimisons. Vous n'assumez JAMAIS aucun risque technique ou financier. EDS est responsable de TOUT.</textarea>
+                        <div contenteditable="true" id="adv2-text" class="field-input field-textarea" data-field="adv2-text" 
+                                  data-placeholder="Panne ? Nous remplaçons...">Panne ? Nous remplaçons. Obsolescence ? Nous mettons à jour. Performance insuffisante ? Nous optimisons. Vous n'assumez JAMAIS aucun risque technique ou financier. EDS est responsable de TOUT.</div>
                     </div>
                 </div>
 
@@ -1659,8 +1679,8 @@
                     </div>
                     <div class="edit-field">
                         <label class="field-label" for="adv3-text">Description avantage 3</label>
-                        <textarea id="adv3-text" class="field-input field-textarea" data-field="adv3-text" 
-                                  placeholder="Surveillance 24/7 automatique...">Surveillance 24/7 automatique, alertes prédictives, rapports de performance mensuel. Vous savez toujours où vous en êtes. Optimisation continue de vos opérations grâce aux données IoT en temps réel.</textarea>
+                        <div contenteditable="true" id="adv3-text" class="field-input field-textarea" data-field="adv3-text" 
+                                  data-placeholder="Surveillance 24/7 automatique...">Surveillance 24/7 automatique, alertes prédictives, rapports de performance mensuel. Vous savez toujours où vous en êtes. Optimisation continue de vos opérations grâce aux données IoT en temps réel.</div>
                     </div>
                 </div>
 
@@ -1676,8 +1696,8 @@
                     </div>
                     <div class="edit-field">
                         <label class="field-label" for="adv4-text">Description avantage 4</label>
-                        <textarea id="adv4-text" class="field-input field-textarea" data-field="adv4-text" 
-                                  placeholder="Coût fixe mensuel...">Coût fixe mensuel, aucune surprise, aucun dépassement. Planification financière facilitée, comptabilité simplifiée. Pas de provisions pour maintenance, pas de budget remplacement à prévoir.</textarea>
+                        <div contenteditable="true" id="adv4-text" class="field-input field-textarea" data-field="adv4-text" 
+                                  data-placeholder="Coût fixe mensuel...">Coût fixe mensuel, aucune surprise, aucun dépassement. Planification financière facilitée, comptabilité simplifiée. Pas de provisions pour maintenance, pas de budget remplacement à prévoir.</div>
                     </div>
                 </div>
 
@@ -1694,8 +1714,8 @@
                     </div>
                     <div class="edit-field">
                         <label class="field-label" for="adv5-text">Description avantage 5</label>
-                        <textarea id="adv5-text" class="field-input field-textarea" data-field="adv5-text" 
-                                  placeholder="Toujours la dernière version...">Toujours la dernière version ! Mises à jour logicielles automatiques, upgrade matériel inclus après 3 ans. Vous restez à la pointe sans effort ni investissement supplémentaire.</textarea>
+                        <div contenteditable="true" id="adv5-text" class="field-input field-textarea" data-field="adv5-text" 
+                                  data-placeholder="Toujours la dernière version...">Toujours la dernière version ! Mises à jour logicielles automatiques, upgrade matériel inclus après 3 ans. Vous restez à la pointe sans effort ni investissement supplémentaire.</div>
                     </div>
                 </div>
 
@@ -1711,8 +1731,8 @@
                     </div>
                     <div class="edit-field">
                         <label class="field-label" for="adv6-text">Description avantage 6</label>
-                        <textarea id="adv6-text" class="field-input field-textarea" data-field="adv6-text" 
-                                  placeholder="Contrats adaptés...">Contrats adaptés à vos besoins : court terme pour tests, long terme pour économies. Possibilité d'ajustement du parc, option d'achat privilégiée, résiliation facilitée.</textarea>
+                        <div contenteditable="true" id="adv6-text" class="field-input field-textarea" data-field="adv6-text" 
+                                  data-placeholder="Contrats adaptés...">Contrats adaptés à vos besoins : court terme pour tests, long terme pour économies. Possibilité d'ajustement du parc, option d'achat privilégiée, résiliation facilitée.</div>
                     </div>
                 </div>
             </div>
@@ -1754,8 +1774,8 @@
                 <div class="edit-field" style="grid-column: span 2; margin-bottom: 3rem;">
                     <label class="field-label" for="tech-subtitle">Sous-titre comparaison</label>
                     <p class="field-description">Explication de la supériorité technique</p>
-                    <textarea id="tech-subtitle" class="field-input field-textarea" data-field="tech-subtitle" 
-                              placeholder="Comparaison technique objective...">Comparaison technique objective : Pourquoi Li-CUBE PRO™ surclasse totalement les anciennes batteries Ni-Cd</textarea>
+                    <div contenteditable="true" id="tech-subtitle" class="field-input field-textarea" data-field="tech-subtitle" 
+                              data-placeholder="Comparaison technique objective...">Comparaison technique objective : Pourquoi Li-CUBE PRO™ surclasse totalement les anciennes batteries Ni-Cd</div>
                 </div>
 
                 <!-- EMOJIS TITRES DE COLONNES -->
@@ -1809,8 +1829,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness1-desc">Description</label>
-                                <textarea id="weakness1-desc" class="field-input field-textarea" data-field="weakness1-desc" 
-                                          placeholder="Classé dangereux REACH...">Classé dangereux REACH, recyclage coûteux, manipulation à risque</textarea>
+                                <div contenteditable="true" id="weakness1-desc" class="field-input field-textarea" data-field="weakness1-desc" 
+                                          data-placeholder="Classé dangereux REACH...">Classé dangereux REACH, recyclage coûteux, manipulation à risque</div>
                             </div>
                         </div>
                     </div>
@@ -1829,8 +1849,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness2-desc">Description</label>
-                                <textarea id="weakness2-desc" class="field-input field-textarea" data-field="weakness2-desc" 
-                                          placeholder="Appoint électrolyte, fuites KOH...">Appoint électrolyte, fuites KOH, interventions techniques fréquentes</textarea>
+                                <div contenteditable="true" id="weakness2-desc" class="field-input field-textarea" data-field="weakness2-desc" 
+                                          data-placeholder="Appoint électrolyte, fuites KOH...">Appoint électrolyte, fuites KOH, interventions techniques fréquentes</div>
                             </div>
                         </div>
                     </div>
@@ -1849,8 +1869,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness3-desc">Description</label>
-                                <textarea id="weakness3-desc" class="field-input field-textarea" data-field="weakness3-desc" 
-                                          placeholder="2000-3000 cycles seulement...">2000-3000 cycles seulement (5-6 ans) → remplacement fréquent</textarea>
+                                <div contenteditable="true" id="weakness3-desc" class="field-input field-textarea" data-field="weakness3-desc" 
+                                          data-placeholder="2000-3000 cycles seulement...">2000-3000 cycles seulement (5-6 ans) → remplacement fréquent</div>
                             </div>
                         </div>
                     </div>
@@ -1869,8 +1889,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness4-desc">Description</label>
-                                <textarea id="weakness4-desc" class="field-input field-textarea" data-field="weakness4-desc" 
-                                          placeholder="80-100 kg, manipulation dangereuse...">80-100 kg, manipulation dangereuse, installation contraignante</textarea>
+                                <div contenteditable="true" id="weakness4-desc" class="field-input field-textarea" data-field="weakness4-desc" 
+                                          data-placeholder="80-100 kg, manipulation dangereuse...">80-100 kg, manipulation dangereuse, installation contraignante</div>
                             </div>
                         </div>
                     </div>
@@ -1889,8 +1909,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness5-desc">Description</label>
-                                <textarea id="weakness5-desc" class="field-input field-textarea" data-field="weakness5-desc" 
-                                          placeholder="Indisponibilité longue...">Indisponibilité longue, productivité réduite</textarea>
+                                <div contenteditable="true" id="weakness5-desc" class="field-input field-textarea" data-field="weakness5-desc" 
+                                          data-placeholder="Indisponibilité longue...">Indisponibilité longue, productivité réduite</div>
                             </div>
                         </div>
                     </div>
@@ -1909,8 +1929,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness6-desc">Description</label>
-                                <textarea id="weakness6-desc" class="field-input field-textarea" data-field="weakness6-desc" 
-                                          placeholder="Pas de télémétrie...">Pas de télémétrie, aucun suivi à distance, pannes surprises</textarea>
+                                <div contenteditable="true" id="weakness6-desc" class="field-input field-textarea" data-field="weakness6-desc" 
+                                          data-placeholder="Pas de télémétrie...">Pas de télémétrie, aucun suivi à distance, pannes surprises</div>
                             </div>
                         </div>
                     </div>
@@ -1929,8 +1949,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness7-desc">Description</label>
-                                <textarea id="weakness7-desc" class="field-input field-textarea" data-field="weakness7-desc" 
-                                          placeholder="Classé UN2795 Batteries Wet Alkali...">Classé UN2795 Batteries Wet Alkali, transport coûteux et contraignant</textarea>
+                                <div contenteditable="true" id="weakness7-desc" class="field-input field-textarea" data-field="weakness7-desc" 
+                                          data-placeholder="Classé UN2795 Batteries Wet Alkali...">Classé UN2795 Batteries Wet Alkali, transport coûteux et contraignant</div>
                             </div>
                         </div>
                     </div>
@@ -1949,8 +1969,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness8-desc">Description</label>
-                                <textarea id="weakness8-desc" class="field-input field-textarea" data-field="weakness8-desc" 
-                                          placeholder="Perte capacité progressive...">Perte capacité progressive avec cycles partiels, performance décroissante</textarea>
+                                <div contenteditable="true" id="weakness8-desc" class="field-input field-textarea" data-field="weakness8-desc" 
+                                          data-placeholder="Perte capacité progressive...">Perte capacité progressive avec cycles partiels, performance décroissante</div>
                             </div>
                         </div>
                     </div>
@@ -1969,8 +1989,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness9-desc">Description</label>
-                                <textarea id="weakness9-desc" class="field-input field-textarea" data-field="weakness9-desc" 
-                                          placeholder="60% seulement exploitable...">60% seulement exploitable vs 96% Li-CUBE PRO™ → capacité réelle inférieure</textarea>
+                                <div contenteditable="true" id="weakness9-desc" class="field-input field-textarea" data-field="weakness9-desc" 
+                                          data-placeholder="60% seulement exploitable...">60% seulement exploitable vs 96% Li-CUBE PRO™ → capacité réelle inférieure</div>
                             </div>
                         </div>
                     </div>
@@ -1989,8 +2009,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness10-desc">Description</label>
-                                <textarea id="weakness10-desc" class="field-input field-textarea" data-field="weakness10-desc" 
-                                          placeholder="250$/mois vs 150-200$...">250$/mois vs 150-200$ Li-CUBE PRO™ → 25% plus cher sans maintenance incluse</textarea>
+                                <div contenteditable="true" id="weakness10-desc" class="field-input field-textarea" data-field="weakness10-desc" 
+                                          data-placeholder="250$/mois vs 150-200$...">250$/mois vs 150-200$ Li-CUBE PRO™ → 25% plus cher sans maintenance incluse</div>
                             </div>
                         </div>
                     </div>
@@ -2009,8 +2029,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="weakness11-desc">Description</label>
-                                <textarea id="weakness11-desc" class="field-input field-textarea" data-field="weakness11-desc" 
-                                          placeholder="3 remplacements sur 20 ans...">3 remplacements sur 20 ans (4 unités au total) vs 0 pour Li-CUBE PRO™</textarea>
+                                <div contenteditable="true" id="weakness11-desc" class="field-input field-textarea" data-field="weakness11-desc" 
+                                          data-placeholder="3 remplacements sur 20 ans...">3 remplacements sur 20 ans (4 unités au total) vs 0 pour Li-CUBE PRO™</div>
                             </div>
                         </div>
                     </div>
@@ -2039,8 +2059,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength1-desc">Description</label>
-                                <textarea id="strength1-desc" class="field-input field-textarea" data-field="strength1-desc" 
-                                          placeholder="≥8000 cycles...">≥8000 cycles (20-25 ans réels) → 4× plus longue que Ni-Cd</textarea>
+                                <div contenteditable="true" id="strength1-desc" class="field-input field-textarea" data-field="strength1-desc" 
+                                          data-placeholder="≥8000 cycles...">≥8000 cycles (20-25 ans réels) → 4× plus longue que Ni-Cd</div>
                             </div>
                         </div>
                     </div>
@@ -2059,8 +2079,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength2-desc">Description</label>
-                                <textarea id="strength2-desc" class="field-input field-textarea" data-field="strength2-desc" 
-                                          placeholder="Aucun électrolyte...">Aucun électrolyte, aucun effet mémoire, suivi automatisé par BMS</textarea>
+                                <div contenteditable="true" id="strength2-desc" class="field-input field-textarea" data-field="strength2-desc" 
+                                          data-placeholder="Aucun électrolyte...">Aucun électrolyte, aucun effet mémoire, suivi automatisé par BMS</div>
                             </div>
                         </div>
                     </div>
@@ -2079,8 +2099,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength3-desc">Description</label>
-                                <textarea id="strength3-desc" class="field-input field-textarea" data-field="strength3-desc" 
-                                          placeholder="GPS, Bluetooth, Wi-Fi...">GPS, Bluetooth, Wi-Fi, GPRS → maintenance préventive, zéro panne surprise</textarea>
+                                <div contenteditable="true" id="strength3-desc" class="field-input field-textarea" data-field="strength3-desc" 
+                                          data-placeholder="GPS, Bluetooth, Wi-Fi...">GPS, Bluetooth, Wi-Fi, GPRS → maintenance préventive, zéro panne surprise</div>
                             </div>
                         </div>
                     </div>
@@ -2099,8 +2119,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength4-desc">Description</label>
-                                <textarea id="strength4-desc" class="field-input field-textarea" data-field="strength4-desc" 
-                                          placeholder="110 Wh/kg (4× plus)...">110 Wh/kg (4× plus), 157 Wh/L (6× plus compact), charge 1-2h</textarea>
+                                <div contenteditable="true" id="strength4-desc" class="field-input field-textarea" data-field="strength4-desc" 
+                                          data-placeholder="110 Wh/kg (4× plus)...">110 Wh/kg (4× plus), 157 Wh/L (6× plus compact), charge 1-2h</div>
                             </div>
                         </div>
                     </div>
@@ -2119,8 +2139,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength5-desc">Description</label>
-                                <textarea id="strength5-desc" class="field-input field-textarea" data-field="strength5-desc" 
-                                          placeholder="Fonctionnement -40°C à +55°C...">Fonctionnement -40°C à +55°C, BMS intelligent, hivers québécois</textarea>
+                                <div contenteditable="true" id="strength5-desc" class="field-input field-textarea" data-field="strength5-desc" 
+                                          data-placeholder="Fonctionnement -40°C à +55°C...">Fonctionnement -40°C à +55°C, BMS intelligent, hivers québécois</div>
                             </div>
                         </div>
                     </div>
@@ -2139,8 +2159,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength6-desc">Description</label>
-                                <textarea id="strength6-desc" class="field-input field-textarea" data-field="strength6-desc" 
-                                          placeholder="Zéro cadmium...">Zéro cadmium, conforme RoHS, recyclable, image environnementale</textarea>
+                                <div contenteditable="true" id="strength6-desc" class="field-input field-textarea" data-field="strength6-desc" 
+                                          data-placeholder="Zéro cadmium...">Zéro cadmium, conforme RoHS, recyclable, image environnementale</div>
                             </div>
                         </div>
                     </div>
@@ -2159,8 +2179,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength7-desc">Description</label>
-                                <textarea id="strength7-desc" class="field-input field-textarea" data-field="strength7-desc" 
-                                          placeholder="Protections OVP, UVP, OCP...">Protections OVP, UVP, OCP, OTP, court-circuit → risques incidents réduits drastiquement</textarea>
+                                <div contenteditable="true" id="strength7-desc" class="field-input field-textarea" data-field="strength7-desc" 
+                                          data-placeholder="Protections OVP, UVP, OCP...">Protections OVP, UVP, OCP, OTP, court-circuit → risques incidents réduits drastiquement</div>
                             </div>
                         </div>
                     </div>
@@ -2179,8 +2199,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength8-desc">Description</label>
-                                <textarea id="strength8-desc" class="field-input field-textarea" data-field="strength8-desc" 
-                                          placeholder="Moins d'interventions...">Moins d'interventions, déplacements équipes réduits, fiabilité accrue</textarea>
+                                <div contenteditable="true" id="strength8-desc" class="field-input field-textarea" data-field="strength8-desc" 
+                                          data-placeholder="Moins d'interventions...">Moins d'interventions, déplacements équipes réduits, fiabilité accrue</div>
                             </div>
                         </div>
                     </div>
@@ -2199,8 +2219,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength9-desc">Description</label>
-                                <textarea id="strength9-desc" class="field-input field-textarea" data-field="strength9-desc" 
-                                          placeholder="Délais réduits, service local...">Délais réduits, service local français, réactivité pièces et support</textarea>
+                                <div contenteditable="true" id="strength9-desc" class="field-input field-textarea" data-field="strength9-desc" 
+                                          data-placeholder="Délais réduits, service local...">Délais réduits, service local français, réactivité pièces et support</div>
                             </div>
                         </div>
                     </div>
@@ -2219,8 +2239,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength10-desc">Description</label>
-                                <textarea id="strength10-desc" class="field-input field-textarea" data-field="strength10-desc" 
-                                          placeholder="23 kg vs 80 kg...">23 kg vs 80 kg, boîtier compact acier, manutention sécurisée</textarea>
+                                <div contenteditable="true" id="strength10-desc" class="field-input field-textarea" data-field="strength10-desc" 
+                                          data-placeholder="23 kg vs 80 kg...">23 kg vs 80 kg, boîtier compact acier, manutention sécurisée</div>
                             </div>
                         </div>
                     </div>
@@ -2239,8 +2259,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength11-desc">Description</label>
-                                <textarea id="strength11-desc" class="field-input field-textarea" data-field="strength11-desc" 
-                                          placeholder="96% exploitable vs 60% Ni-Cd...">96% exploitable vs 60% Ni-Cd → capacité réelle supérieure</textarea>
+                                <div contenteditable="true" id="strength11-desc" class="field-input field-textarea" data-field="strength11-desc" 
+                                          data-placeholder="96% exploitable vs 60% Ni-Cd...">96% exploitable vs 60% Ni-Cd → capacité réelle supérieure</div>
                             </div>
                         </div>
                     </div>
@@ -2259,8 +2279,8 @@
                             </div>
                             <div class="edit-field">
                                 <label class="field-label" for="strength12-desc">Description</label>
-                                <textarea id="strength12-desc" class="field-input field-textarea" data-field="strength12-desc" 
-                                          placeholder="150-200$/mois vs 250$ Ni-Cd...">150-200$/mois vs 250$ Ni-Cd → plus économique avec maintenance incluse</textarea>
+                                <div contenteditable="true" id="strength12-desc" class="field-input field-textarea" data-field="strength12-desc" 
+                                          data-placeholder="150-200$/mois vs 250$ Ni-Cd...">150-200$/mois vs 250$ Ni-Cd → plus économique avec maintenance incluse</div>
                             </div>
                         </div>
                     </div>
@@ -2282,8 +2302,8 @@
                 <div class="edit-field">
                     <label class="field-label" for="conclusion-text">Texte conclusion</label>
                     <p class="field-description">Explication détaillée de la supériorité économique</p>
-                    <textarea id="conclusion-text" class="field-input field-textarea" data-field="conclusion-text" 
-                              placeholder="Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd...">Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.</textarea>
+                    <div contenteditable="true" id="conclusion-text" class="field-input field-textarea" data-field="conclusion-text" 
+                              data-placeholder="Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd...">Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.</div>
                 </div>
 
                 <!-- Conclusion technique intermédiaire -->
@@ -2301,10 +2321,10 @@
                 <div class="edit-field">
                     <label class="field-label" for="tech-conclusion-text">Texte conclusion technique</label>
                     <p class="field-description">Conclusion intermédiaire dans la section technique</p>
-                    <textarea id="tech-conclusion-text" class="field-input field-textarea" data-field="tech-conclusion-text" 
-                              placeholder="TCO Location 20 ans..."><strong>TCO Location 20 ans :</strong> Li-CUBE PRO™ 48500$ (200$/mois) vs Ni-Cd 60000$ → <strong>20% d'économies + maintenance incluse !</strong><br>
+                    <div contenteditable="true" id="tech-conclusion-text" class="field-input field-textarea" data-field="tech-conclusion-text" 
+                              data-placeholder="TCO Location 20 ans..."><strong>TCO Location 20 ans :</strong> Li-CUBE PRO™ 48500$ (200$/mois) vs Ni-Cd 60000$ → <strong>20% d'économies + maintenance incluse !</strong><br>
 <strong>Zéro risque technique</strong> (EDS assume tout), <strong>monitoring 24/7 inclus</strong>, <strong>remplacement immédiat</strong> si panne.<br>
-Location Li-CUBE PRO™ = <strong>La tranquillité absolue</strong> avec technologie de pointe et budget maîtrisé.</textarea>
+Location Li-CUBE PRO™ = <strong>La tranquillité absolue</strong> avec technologie de pointe et budget maîtrisé.</div>
                 </div>
             </div>
         </section>
@@ -2343,8 +2363,8 @@ Location Li-CUBE PRO™ = <strong>La tranquillité absolue</strong> avec technol
                 <div class="edit-field">
                     <label class="field-label" for="final-message">Message conclusion</label>
                     <p class="field-description">Résumé des bénéfices décisifs</p>
-                    <textarea id="final-message" class="field-input field-textarea" data-field="final-message" 
-                              placeholder="Pourquoi risquer avec des technologies obsolètes...">Pourquoi risquer avec des technologies obsolètes ? Li-CUBE PRO™ en location vous offre le meilleur des deux mondes : technologie de pointe + risque zéro. Pendant que vos concurrents subissent pannes et remplacements, vous fonctionnez sereinement.</textarea>
+                    <div contenteditable="true" id="final-message" class="field-input field-textarea" data-field="final-message" 
+                              data-placeholder="Pourquoi risquer avec des technologies obsolètes...">Pourquoi risquer avec des technologies obsolètes ? Li-CUBE PRO™ en location vous offre le meilleur des deux mondes : technologie de pointe + risque zéro. Pendant que vos concurrents subissent pannes et remplacements, vous fonctionnez sereinement.</div>
                 </div>
 
                 <div class="edit-field">
@@ -2357,19 +2377,19 @@ Location Li-CUBE PRO™ = <strong>La tranquillité absolue</strong> avec technol
                 <div class="edit-field">
                     <label class="field-label" for="cta-final">Appel à l'action final</label>
                     <p class="field-description">Demande d'action concrète</p>
-                    <textarea id="cta-final" class="field-input field-textarea" data-field="cta-final" 
-                              placeholder="Appelez maintenant...">Appelez maintenant 819-323-LOCA ou écrivez à location@edsquebec.com
+                    <div contenteditable="true" id="cta-final" class="field-input field-textarea" data-field="cta-final" 
+                              data-placeholder="Appelez maintenant...">Appelez maintenant 819-323-LOCA ou écrivez à location@edsquebec.com
 Votre devis personnalisé sous 24h, installation sous 48h.
-L'énergie fiable, c'est maintenant ou jamais !</textarea>
+L'énergie fiable, c'est maintenant ou jamais !</div>
                 </div>
 
                 <div class="edit-field">
                     <label class="field-label" for="signature">Signature EDS</label>
                     <p class="field-description">Signature professionnelle finale</p>
-                    <textarea id="signature" class="field-input field-textarea" data-field="signature" 
-                              placeholder="EDS Québec - Votre partenaire énergétique...">EDS Québec - Votre partenaire énergétique depuis plus de 25 ans
+                    <div contenteditable="true" id="signature" class="field-input field-textarea" data-field="signature" 
+                              data-placeholder="EDS Québec - Votre partenaire énergétique...">EDS Québec - Votre partenaire énergétique depuis plus de 25 ans
 Solutions Batteries Lithium Li-CUBE PRO™
-Fabrication et Support 100% Québécois</textarea>
+Fabrication et Support 100% Québécois</div>
                 </div>
             </div>
         </section>
@@ -2413,8 +2433,8 @@ Fabrication et Support 100% Québécois</textarea>
                 <div class="edit-field">
                     <label class="field-label" for="conclusion-text">Texte conclusion</label>
                     <p class="field-description">Explication détaillée de la supériorité économique</p>
-                    <textarea id="conclusion-text" class="field-input field-textarea" data-field="conclusion-text" 
-                              placeholder="Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd...">Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.</textarea>
+                    <div contenteditable="true" id="conclusion-text" class="field-input field-textarea" data-field="conclusion-text" 
+                              data-placeholder="Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd...">Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.</div>
                 </div>
 
                 <div class="edit-field">
@@ -2427,8 +2447,8 @@ Fabrication et Support 100% Québécois</textarea>
                 <div class="edit-field">
                     <label class="field-label" for="contact-subtitle">Sous-titre contact final</label>
                     <p class="field-description">Message de renforcement final</p>
-                    <textarea id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
-                              placeholder="Votre équipe commerciale dispose maintenant...">Votre équipe commerciale dispose maintenant de TOUS les arguments techniques et économiques pour conclure la location Li-CUBE PRO™</textarea>
+                    <div contenteditable="true" id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
+                              data-placeholder="Votre équipe commerciale dispose maintenant...">Votre équipe commerciale dispose maintenant de TOUS les arguments techniques et économiques pour conclure la location Li-CUBE PRO™</div>
                 </div>
 
                 <!-- Boutons d'action finaux -->
@@ -2626,8 +2646,8 @@ Fabrication et Support 100% Québécois</textarea>
                 <div class="edit-field">
                     <label class="field-label" for="contact-subtitle">Sous-titre contact</label>
                     <p class="field-description">Message de renforcement pour la location</p>
-                    <textarea id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
-                              placeholder="Zéro risque, zéro surprise...">Zéro risque, zéro surprise, performance maximale garantie</textarea>
+                    <div contenteditable="true" id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
+                              data-placeholder="Zéro risque, zéro surprise...">Zéro risque, zéro surprise, performance maximale garantie</div>
                 </div>
 
                 <div class="edit-field">
@@ -2654,8 +2674,8 @@ Fabrication et Support 100% Québécois</textarea>
                 <div class="edit-field" style="grid-column: span 2;">
                     <label class="field-label" for="rental-guarantees">Garanties location</label>
                     <p class="field-description">Liste des garanties offertes en location</p>
-                    <textarea id="rental-guarantees" class="field-input field-textarea" data-field="rental-guarantees" 
-                              placeholder="✅ Devis gratuit...">✅ Devis gratuit et sans engagement ✅ Installation par techniciens certifiés EDS ✅ Contrat flexible adapté à vos besoins ✅ Support québécois en français 24/7</textarea>
+                    <div contenteditable="true" id="rental-guarantees" class="field-input field-textarea" data-field="rental-guarantees" 
+                              data-placeholder="✅ Devis gratuit...">✅ Devis gratuit et sans engagement ✅ Installation par techniciens certifiés EDS ✅ Contrat flexible adapté à vos besoins ✅ Support québécois en français 24/7</div>
                 </div>
             </div>
         </section>
