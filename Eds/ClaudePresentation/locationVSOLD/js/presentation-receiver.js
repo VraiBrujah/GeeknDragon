@@ -49,10 +49,18 @@ class PresentationReceiver {
                 this.handleStorageUpdate(event);
             }
         });
-        
+
         // Écoute : changements directs du storage principal
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+            return;
+        }
         const originalSetItem = localStorage.setItem;
         localStorage.setItem = (key, value) => {
+            if (typeof localStorage === 'undefined') {
+                console.error('localStorage non disponible');
+                return;
+            }
             const result = originalSetItem.call(localStorage, key, value);
             
             // Détection : modifications du storage principal
@@ -524,6 +532,10 @@ class PresentationReceiver {
      * Chargement initial : contenu au démarrage de la page
      */
     loadInitialContent() {
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+            return;
+        }
         try {
             const content = localStorage.getItem(this.storageKey);
             if (content) {
@@ -540,11 +552,15 @@ class PresentationReceiver {
      * Chargement de rattrapage : derniers contenus en cas de désynchronisation
      */
     loadAndApplyLatestContent() {
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+            return;
+        }
         console.log(`🔄 Synchronisation de rattrapage ${this.pageType}...`);
-        
+
         // Chargement : contenu le plus récent
         this.loadInitialContent();
-        
+
         // Vérification : messages en attente dans le storage
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
@@ -582,14 +598,18 @@ class PresentationReceiver {
      * Surveillance : vérification de la santé du récepteur
      */
     checkReceiverHealth() {
+        if (typeof localStorage === 'undefined') {
+            console.error('localStorage non disponible');
+            return;
+        }
         const now = Date.now();
         const timeSinceLastUpdate = now - this.lastUpdate;
-        
+
         // Diagnostic : activité récente
         if (timeSinceLastUpdate > 300000 && this.updatesReceived > 0) { // 5 minutes
             console.warn(`⚠️ Aucune mise à jour reçue depuis ${Math.round(timeSinceLastUpdate / 60000)} minutes`);
         }
-        
+
         // Nettoyage : anciens messages temporaires
         for (let i = 0; i < localStorage.length; i++) {
             const key = localStorage.key(i);
