@@ -594,8 +594,9 @@ class InstantSync {
     /**
      * Exportation : crée un fichier JSON téléchargeable contenant les données enregistrées
      */
-    exportContent() {
+    async exportContent() {
         try {
+            await this.executeFullSync();
             const data = localStorage.getItem(this.storageKey);
             const blob = new Blob([data ?? '{}'], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
@@ -621,6 +622,45 @@ class InstantSync {
             try {
                 const content = JSON.parse(e.target.result);
                 localStorage.setItem(this.storageKey, JSON.stringify(content));
+
+                const getMaxIndex = (prefix) => {
+                    return Object.keys(content).reduce((max, key) => {
+                        const match = key.match(new RegExp(`^${prefix}(\\d+)-`));
+                        return match ? Math.max(max, parseInt(match[1], 10)) : max;
+                    }, 0);
+                };
+
+                const maxWeakness = getMaxIndex('weakness');
+                const maxStrength = getMaxIndex('strength');
+
+                const countBlocks = (type) => document.querySelectorAll(`[data-field^="${type}"][data-field$="-title"]`).length;
+                let currentWeakness = countBlocks('weakness');
+                let currentStrength = countBlocks('strength');
+
+                if (typeof window.addWeakness === 'function') {
+                    while (currentWeakness < maxWeakness) {
+                        window.addWeakness();
+                        currentWeakness++;
+                    }
+                }
+                if (typeof window.removeWeakness === 'function') {
+                    while (currentWeakness > maxWeakness) {
+                        window.removeWeakness();
+                        currentWeakness--;
+                    }
+                }
+                if (typeof window.addStrength === 'function') {
+                    while (currentStrength < maxStrength) {
+                        window.addStrength();
+                        currentStrength++;
+                    }
+                }
+                if (typeof window.removeStrength === 'function') {
+                    while (currentStrength > maxStrength) {
+                        window.removeStrength();
+                        currentStrength--;
+                    }
+                }
 
                 const fields = document.querySelectorAll('[data-field]');
                 fields.forEach(field => {
