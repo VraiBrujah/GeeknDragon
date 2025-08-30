@@ -106,134 +106,15 @@ function isValidPhone(phone) {
   const phoneRegex = /^(\+1[-.\s]?)?(\(?[0-9]{3}\)?[-.\s]?)?[0-9]{3}[-.\s]?[0-9]{4}$/;
   return phoneRegex.test(phone);
 }
-// Variables CSS pour location.html - Extraites du thème de location
-const defaultValues = {
-  // Couleurs Principales de location.html
-  primaryDark: '#0F172A',
-  secondaryDark: '#1E293B',
-  accentGreen: '#10B981',
-  accentBlue: '#3B82F6',
-  accentTeal: '#14B8A6',
-  successGreen: '#059669',
-  warningOrange: '#F59E0B',
 
-  // Couleurs de Texte location.html
-  textWhite: '#F8FAFC',
-  textGray: '#CBD5E1',
-
-  // Couleurs d'État et Complémentaires
-  warningRed: '#EF4444',
-  infoBlue: '#60A5FA',
-  neutralGray: '#9CA3AF',
-
-  // Navigation
-  navTitleSize: 28,
-  navTitleWeight: '800',
-  navItemSize: 16,
-  navPadding: 12,
-
-  // Espacements entre sections
-  heroSpacerHeight: 80,
-  'hero-pricing-spacer': 0,
-  'pricing-advantages-spacer': 0,
-  'advantages-comparison-spacer': 0,
-  'contact-conclusionAction-spacer': 0,
-  'conclusionAction-conclusionComparative-spacer': 0,
-  'conclusionComparative-contact-spacer': 0,
-
-  // Hero Section
-  heroTitleSize: 72,
-  heroHighlightSize: 80,
-  heroSubtitleSize: 22,
-  heroTitleWeight: '900',
-
-  // Prix Banner
-  priceMainSize: 56,
-  priceSubSize: 18,
-  pricePadding: 24,
-
-  // Section Titles
-  sectionTitleSize: 56,
-  sectionTitleWeight: '800',
-
-  // Cards et Benefits
-  cardPadding: 28,
-  cardBorderRadius: 16,
-  benefitIconSize: 40,
-  benefitTitleSize: 18,
-  benefitTextSize: 14,
-
-  // Pricing Cards
-  pricingCardPadding: 40,
-  pricingValueSize: 48,
-  pricingDurationSize: 18,
-
-  // CTA Buttons
-  ctaFontSize: 19,
-  ctaFontWeight: '700',
-  ctaPadding: 19,
-
-  // Spacing Global
-  sectionPadding: 64,
-  containerMaxWidth: 1400,
-  gridGap: 32,
-
-  // Rôle : Chemins d'images pour la comparaison de produits
-  // Type : string (chemin relatif vers fichier image)
-  // Domaine : chemins valides vers images (.png, .jpg, .jpeg, .webp, .svg)
-  // Usage : Synchronisation temps réel des images entre éditeur et présentation
-  'product-image-path': './images/Li-CUBE PRO.png',
-  'competitor-image-path': './images/concurrent.png',
-  'vs-element-text': 'VS',
-
-  // Rôle : Styles personnalisables pour l'élément VS
-  // Type : propriétés CSS (taille, couleur, police, espacement)
-  // Domaine : valeurs CSS valides pour chaque propriété
-  // Usage : Personnalisation visuelle du texte VS distinct des boutons
-  vsFontSize: 2.2,
-  vsFontWeight: '900',
-  vsTextColor: '#1E293B',
-  vsFontFamily: "'Playfair Display', serif",
-  vsTextTransform: 'uppercase',
-  vsLetterSpacing: 0.15,
-
-  // Chemin logo (déjà géré mais ajouté pour cohérence)
-  'logo-path': './images/logo edsquebec.png',
-
-  // Rôle : Emojis éditables pour la section comparaison technique
-  // Type : string (caractères Unicode emoji)
-  // Domaine : emojis valides Unicode (généralement 1-2 caractères)
-  // Usage : Personnalisation des icônes de comparaison avec synchronisation temps réel
-  'weakness-title-emoji': '❌',
-  'strength-title-emoji': '✅',
-
-  // Emojis des faiblesses du concurrent (weakness)
-  'weakness1-emoji': '☠️',
-  'weakness2-emoji': '🔧',
-  'weakness3-emoji': '⏳',
-  'weakness4-emoji': '🏋️',
-  'weakness5-emoji': '🐌',
-  'weakness6-emoji': '📵',
-  'weakness7-emoji': '⚖️',
-  'weakness8-emoji': '🧠',
-  'weakness9-emoji': '📊',
-  'weakness10-emoji': '💸',
-  'weakness11-emoji': '🔄',
-
-  // Emojis des avantages du produit principal (strength)
-  'strength1-emoji': '🔋',
-  'strength2-emoji': '🛡️',
-  'strength3-emoji': '📡',
-  'strength4-emoji': '⚡',
-  'strength5-emoji': '🌡️',
-  'strength6-emoji': '🍃',
-  'strength7-emoji': '🛡️',
-  'strength8-emoji': '💰',
-  'strength9-emoji': '🇨🇦',
-  'strength10-emoji': '📦',
-  'strength11-emoji': '🔋',
-  'strength12-emoji': '💵',
-};
+// Chargement des valeurs par défaut depuis un fichier JSON centralisé
+let defaultValues = {};
+const defaultsLoaded = fetch('location-defaults.json')
+  .then((resp) => resp.json())
+  .then((data) => {
+    defaultValues = data;
+  })
+  .catch((err) => console.error('Erreur de chargement des valeurs par défaut:', err));
 
 // Fonction de basculement de l'éditeur
 function toggleCSSEditor() {
@@ -364,10 +245,22 @@ function updateValueDisplays() {
   }
 }
 
-// Réinitialisation depuis le backup
-function resetCSS() {
+// Réinitialisation depuis le backup ou le fichier JSON centralisé
+async function resetCSS() {
   const backup = localStorage.getItem('locationVSOLD-css-backup');
-  const stylesToReset = backup ? JSON.parse(backup) : defaultValues;
+  let stylesToReset;
+  if (backup) {
+    stylesToReset = JSON.parse(backup);
+  } else {
+    try {
+      const resp = await fetch('location-defaults.json');
+      stylesToReset = await resp.json();
+      defaultValues = stylesToReset;
+    } catch (err) {
+      console.error('Erreur lors du chargement des valeurs par défaut:', err);
+      stylesToReset = defaultValues;
+    }
+  }
 
   Object.entries(stylesToReset).forEach(([key, value]) => {
     const element = document.getElementById(key);
@@ -386,7 +279,7 @@ function resetCSS() {
 // Sauvegarde avec popup de validation
 function saveCSS() {
   // Popup de validation moderne
-  showSaveConfirmation(() => {
+  showSaveConfirmation(async () => {
     const styles = {};
     Object.keys(defaultValues).forEach((key) => {
       const element = document.getElementById(key);
@@ -395,6 +288,17 @@ function saveCSS() {
 
     // Écrasement du backup de réinitialisation
     localStorage.setItem('locationVSOLD-css-backup', JSON.stringify(styles));
+
+    try {
+      await fetch('location-defaults.json', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(styles, null, 2),
+      });
+    } catch (err) {
+      console.error('Erreur lors de la sauvegarde des valeurs par défaut:', err);
+    }
+
     showNotification('Nouveau point de sauvegarde créé !', 'success');
   });
 }
@@ -911,36 +815,38 @@ function moveSectionDown(sectionId) {
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-  // Création du backup automatique
-  createInitialBackup();
+  defaultsLoaded.then(() => {
+    // Création du backup automatique
+    createInitialBackup();
 
-  // Écouteurs d'événements pour tous les contrôles avec application temps réel
-  Object.keys(defaultValues).forEach((key) => {
-    const element = document.getElementById(key);
-    if (element) {
-      element.addEventListener('input', () => {
-        updateValueDisplays();
-        applyStyles();
-        // Application temps réel sur page présentation
-        syncToPresentation();
-      });
-      element.addEventListener('change', () => {
-        updateValueDisplays();
-        applyStyles();
-        // Application temps réel sur page présentation
-        syncToPresentation();
-      });
-    }
+    // Écouteurs d'événements pour tous les contrôles avec application temps réel
+    Object.keys(defaultValues).forEach((key) => {
+      const element = document.getElementById(key);
+      if (element) {
+        element.addEventListener('input', () => {
+          updateValueDisplays();
+          applyStyles();
+          // Application temps réel sur page présentation
+          syncToPresentation();
+        });
+        element.addEventListener('change', () => {
+          updateValueDisplays();
+          applyStyles();
+          // Application temps réel sur page présentation
+          syncToPresentation();
+        });
+      }
+    });
+
+    // Initialisation de l'ordre des sections
+    applySectionOrder();
+
+    // Chargement initial
+    updateValueDisplays();
+    loadSavedStyles();
+
+    console.log('🎨 Éditeur CSS complet initialisé avec sync temps réel et réorganisation des sections');
   });
-
-  // Initialisation de l'ordre des sections
-  applySectionOrder();
-
-  // Chargement initial
-  updateValueDisplays();
-  loadSavedStyles();
-
-  console.log('🎨 Éditeur CSS complet initialisé avec sync temps réel et réorganisation des sections');
 });
 let weaknessIndex = 0;
 let strengthIndex = 0;
@@ -1197,7 +1103,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyDynamicCSSToEditPage(defaultStyles);
 
   // Écoute locale des changements de contrôles de style
-  if (typeof defaultValues !== 'undefined') {
+  defaultsLoaded.then(() => {
     Object.keys(defaultValues).forEach((key) => {
       const element = document.getElementById(key);
       if (element) {
@@ -1205,7 +1111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         element.addEventListener('change', handleLocalStyleChanges);
       }
     });
-  }
+  });
 
   console.log('🎭 Système de synchronisation des styles de la page d\'édition initialisé');
 });
