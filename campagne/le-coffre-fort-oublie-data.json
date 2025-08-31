@@ -1,0 +1,456 @@
+{
+  "name": "Le Coffre-fort oublié",
+  "description": "Les Gardiens de l'Aurore - Campagne D&D 2024",
+  "version": "1.0.0",
+  "currentNode": "campagne",
+  "currentPath": ["campagne"],
+  "structure": {
+    "campagne": {
+      "id": "campagne",
+      "label": "Le Coffre-fort oublié",
+      "type": "campagne",
+      "icon": "fas fa-dragon",
+      "description": "Une petite sorcière à l'aura dorée — Petite Lumière — peut guérir une malédiction rampante qui frappe Pré-au-Lard. Pour la sauver et sauver le village, il faut récupérer, dans un ancien coffre-fort de Gringotts effondré, la Relique de l'Aube. Malheur : un jeune Dragon Vert Gallois y a élu domicile.",
+      "children": ["acte1", "acte2", "acte3"],
+      "mapId": "carte_donjon_principale"
+    },
+    "acte1": {
+      "id": "acte1",
+      "label": "Acte I - Le Goulet",
+      "type": "acte",
+      "icon": "fas fa-door-open",
+      "description": "Sécuriser les dalles, désamorcer 1 piège rune. Point d'entrée dans le coffre-fort effondré depuis l'escalier en spirale jusqu'au hall principal.",
+      "children": ["spirale", "hall_principal"],
+      "mapId": "carte_donjon_principale"
+    },
+    "spirale": {
+      "id": "spirale",
+      "label": "Escalier en spirale",
+      "type": "lieu",
+      "icon": "fas fa-stairs",
+      "description": "Point d'arrivée du Portoloin fourni par Gringotts. Des runes gobelines jalonnent les marches de cet escalier qui descend vers les profondeurs du coffre-fort effondré.",
+      "children": [],
+      "mapId": "carte_donjon_principale"
+    },
+    "hall_principal": {
+      "id": "hall_principal",
+      "label": "Hall principal",
+      "type": "lieu",
+      "icon": "fas fa-columns",
+      "description": "Grand hall d'entrée avec des dalles piégées et des inscriptions gobelines gravées dans la pierre. Le bruit d'ailes du dragon résonne depuis les niveaux supérieurs.",
+      "children": ["piege_dalle"],
+      "mapId": "carte_donjon_principale"
+    },
+    "piege_dalle": {
+      "id": "piege_dalle",
+      "label": "Piège des dalles",
+      "type": "piege",
+      "icon": "fas fa-exclamation-triangle",
+      "description": "Dalles piégées qui s'effondrent si on marche dessus sans prononcer le mot de passe gobelin correct. Nécessite un jet d'Investigation DD 15 pour détecter.",
+      "children": [],
+      "mapId": null
+    },
+    "acte2": {
+      "id": "acte2",
+      "label": "Acte II - Les Trois Clefs",
+      "type": "acte",
+      "icon": "fas fa-key",
+      "description": "Choisir 3 salles parmi 4 pour obtenir les glyphes-clefs nécessaires à l'ouverture de la Salle du Cœur : Vortex bleu, Prisons vertes, Autel rouge, ou Jardin fongique.",
+      "children": ["vortex_bleu", "prisons_vertes", "autel_rouge", "jardin_fongique"],
+      "mapId": "carte_donjon_principale"
+    },
+    "vortex_bleu": {
+      "id": "vortex_bleu",
+      "label": "Salle du Vortex bleu",
+      "type": "salle",
+      "icon": "fas fa-water",
+      "description": "Une salle remplie d'énergie magique bleue avec un vortex tourbillonnant au centre. L'eau magique remplit partiellement la pièce.",
+      "children": ["elementaire_eau"],
+      "mapId": "carte_donjon_principale"
+    },
+    "elementaire_eau": {
+      "id": "elementaire_eau",
+      "label": "Élémentaire d'eau corrompu",
+      "type": "rencontre",
+      "icon": "fas fa-tint",
+      "description": "Combat contre un élémentaire d'eau corrompu par la magie draconique. CA 14, 58 PV, attaques d'éclaboussure et de tourbillon.",
+      "children": [],
+      "mapId": null
+    },
+    "prisons_vertes": {
+      "id": "prisons_vertes",
+      "label": "Prisons vertes",
+      "type": "salle",
+      "icon": "fas fa-bars",
+      "description": "D'anciennes cellules gobelines avec une aura verte malfaisante. Les barreaux sont tordus et certaines cellules contiennent encore des ossements.",
+      "children": ["spectre_gobelin"],
+      "mapId": "carte_donjon_principale"
+    },
+    "spectre_gobelin": {
+      "id": "spectre_gobelin",
+      "label": "Spectre gobelin gardien",
+      "type": "rencontre",
+      "icon": "fas fa-ghost",
+      "description": "L'esprit tourmenté d'un ancien gardien gobelin nommé Graxtor. Cherche à protéger les prisonniers éternellement. CA 12, 45 PV, attaque de drain de vie.",
+      "children": [],
+      "mapId": null
+    },
+    "autel_rouge": {
+      "id": "autel_rouge",
+      "label": "Autel rouge sacrificiel",
+      "type": "salle",
+      "icon": "fas fa-fire",
+      "description": "Un autel de sacrifice gobelin encore actif, entouré de flammes rouges éternelles. Des inscriptions de malédiction couvrent les murs.",
+      "children": ["gardien_flammes"],
+      "mapId": "carte_donjon_principale"
+    },
+    "gardien_flammes": {
+      "id": "gardien_flammes",
+      "label": "Gardien des flammes éternelles",
+      "type": "rencontre",
+      "icon": "fas fa-fire-alt",
+      "description": "Une créature élémentaire de flammes invoquée par l'autel pour protéger les secrets gobelin. CA 13, 52 PV, immunité au feu, attaques brûlantes.",
+      "children": [],
+      "mapId": null
+    },
+    "jardin_fongique": {
+      "id": "jardin_fongique",
+      "label": "Jardin fongique souterrain",
+      "type": "salle",
+      "icon": "fas fa-seedling",
+      "description": "Un jardin souterrain envahi par des champignons magiques luminescents. L'humidité et les spores créent une atmosphère mystique mais dangereuse.",
+      "children": ["champignons_explosifs"],
+      "mapId": "carte_donjon_principale"
+    },
+    "champignons_explosifs": {
+      "id": "champignons_explosifs",
+      "label": "Champignons explosifs violets",
+      "type": "rencontre",
+      "icon": "fas fa-bomb",
+      "description": "Des champignons qui explosent quand on les approche (rayon de 3m). Jet de Dextérité DD 14 sinon 2d6 dégâts de force. Contiennent le glyphe-clef.",
+      "children": [],
+      "mapId": null
+    },
+    "acte3": {
+      "id": "acte3",
+      "label": "Acte III - Le Cœur",
+      "type": "acte",
+      "icon": "fas fa-heart",
+      "description": "Rituel Or + Argent dans la Salle du Cœur. Négociation ou combat avec le jeune Dragon Vert Gallois pour récupérer la Relique de l'Aube.",
+      "children": ["salle_coeur", "dragon_vert"],
+      "mapId": "carte_donjon_principale"
+    },
+    "salle_coeur": {
+      "id": "salle_coeur",
+      "label": "Salle du Cœur",
+      "type": "lieu",
+      "icon": "fas fa-gem",
+      "description": "La salle centrale du coffre-fort où se trouve le socle de la Relique de l'Aube. Architecture gobeline majestueuse avec des colonnes gravées et un dôme étoilé.",
+      "children": ["relique_aube"],
+      "mapId": "carte_donjon_principale"
+    },
+    "relique_aube": {
+      "id": "relique_aube",
+      "label": "Relique de l'Aube",
+      "type": "objet",
+      "icon": "fas fa-sun",
+      "description": "Artefact magique légendaire capable de dissiper la malédiction qui frappe Pré-au-Lard. Cristal doré qui pulse d'une lumière chaude et réconfortante.",
+      "children": [],
+      "mapId": null
+    },
+    "dragon_vert": {
+      "id": "dragon_vert",
+      "label": "Jeune Dragon Vert Gallois",
+      "type": "rencontre",
+      "icon": "fas fa-dragon",
+      "description": "Le boss final - un jeune dragon qui s'est enchaîné aux lueurs magiques du coffre-fort. Nom : Verdoyant. Intelligent et solitaire, pas nécessairement hostile si approché correctement.",
+      "children": [],
+      "mapId": null
+    }
+  },
+  "characters": {
+    "petite_lumiere": {
+      "id": "petite_lumiere",
+      "name": "Petite Lumière",
+      "type": "pj",
+      "class": "Moine (Voie de la Miséricorde)",
+      "race": "Drakéide d'or",
+      "background": "Acolyte",
+      "level": 1,
+      "hp": { "current": 10, "max": 10 },
+      "stats": { "ca": 13, "for": 12, "dex": 16, "con": 13, "int": 11, "sag": 16, "cha": 14 },
+      "ideals": "Protéger les innocents et apporter la guérison à tous ceux qui souffrent",
+      "objectives": "Activer la Relique de l'Aube pour sauver Pré-au-Lard de la malédiction",
+      "image": "images/characters/petite_lumiere.jpg",
+      "actions": [
+        { "name": "Attaque au poing", "dice": "1d20+5", "damage": "1d4+3" },
+        { "name": "Souffle d'or (recharge 5-6)", "dice": "1d20+5", "damage": "2d6" },
+        { "name": "Contact guérisseur", "dice": "1d4", "heal": true }
+      ],
+      "inventory": ["Bâton de marche", "Kit d'herboriste", "Symbole sacré doré", "Potions de soin (3)", "Vêtements de moine", "Sac d'aumônes"]
+    },
+    "bouclier_vivant": {
+      "id": "bouclier_vivant",
+      "name": "Bouclier Vivant",
+      "type": "pj",
+      "class": "Paladin (Serment des Anciens)",
+      "race": "Goliath des collines",
+      "background": "Noble",
+      "level": 1,
+      "hp": { "current": 12, "max": 12 },
+      "stats": { "ca": 18, "for": 16, "dex": 10, "con": 14, "int": 11, "sag": 12, "cha": 15 },
+      "ideals": "Protéger les faibles et maintenir l'équilibre naturel contre les forces du mal",
+      "objectives": "Servir de bouclier à l'équipe et guider Petite Lumière vers son destin",
+      "image": "images/characters/bouclier_vivant.jpg",
+      "actions": [
+        { "name": "Attaque d'épée longue", "dice": "1d20+5", "damage": "1d8+3" },
+        { "name": "Châtiment divin (1/repos)", "dice": "1d20+5", "damage": "1d8+3+1d8" },
+        { "name": "Imposition des mains", "dice": "1d4", "heal": true }
+      ],
+      "inventory": ["Épée longue", "Bouclier avec armoiries", "Armure de mailles", "Trousse de noble", "Sceau familial", "Corde de soie (15m)"]
+    },
+    "oeil_percant": {
+      "id": "oeil_percant",
+      "name": "Œil Perçant",
+      "type": "pj",
+      "class": "Rôdeur (Traqueur des ténèbres)",
+      "race": "Elfe sylvestre",
+      "background": "Artiste",
+      "level": 1,
+      "hp": { "current": 11, "max": 11 },
+      "stats": { "ca": 14, "for": 13, "dex": 16, "con": 12, "int": 14, "sag": 15, "cha": 11 },
+      "ideals": "Préserver l'équilibre entre civilisation et nature, protéger la Forêt Interdite",
+      "objectives": "Éliminer les créatures corrompues et assurer la sécurité de l'équipe",
+      "image": "images/characters/oeil_percant.jpg",
+      "actions": [
+        { "name": "Attaque d'arc long", "dice": "1d20+5", "damage": "1d8+3" },
+        { "name": "Tir de précision", "dice": "1d20+7", "damage": "1d8+3" },
+        { "name": "Marque du chasseur", "dice": "1d6", "damage": "1d6" }
+      ],
+      "inventory": ["Arc long elfique", "Carquois (30 flèches)", "Armure de cuir renforcé", "Kit d'artiste", "Flûte de pan", "Grimoire de pistage"]
+    },
+    "ombre_dansante": {
+      "id": "ombre_dansante",
+      "name": "Ombre Dansante",
+      "type": "pj",
+      "class": "Roublard (Psionique)",
+      "race": "Elfe noir",
+      "background": "Criminel",
+      "level": 1,
+      "hp": { "current": 9, "max": 9 },
+      "stats": { "ca": 13, "for": 10, "dex": 16, "con": 12, "int": 15, "sag": 13, "cha": 14 },
+      "ideals": "Utiliser ses talents d'infiltration pour le bien après une vie dans l'ombre",
+      "objectives": "Racheter son passé criminel en aidant l'équipe à réussir leur noble mission",
+      "image": "images/characters/ombre_dansante.jpg",
+      "actions": [
+        { "name": "Attaque de dague", "dice": "1d20+5", "damage": "1d4+3" },
+        { "name": "Attaque sournoise", "dice": "1d20+5", "damage": "1d4+3+1d6" },
+        { "name": "Lame psionique", "dice": "1d20+5", "damage": "1d4+3+1d6" }
+      ],
+      "inventory": ["Dagues empoisonnées (2)", "Outils de voleur", "Armure de cuir sombre", "Contacts criminels", "Passe-partout universel", "Cape d'ombres"]
+    },
+    "gardien_secrets": {
+      "id": "gardien_secrets",
+      "name": "Gardien des Secrets",
+      "type": "pj",
+      "class": "Magicien (Divination)",
+      "race": "Drakéide d'argent",
+      "background": "Charlatan",
+      "level": 1,
+      "hp": { "current": 7, "max": 7 },
+      "stats": { "ca": 11, "for": 8, "dex": 14, "con": 13, "int": 16, "sag": 12, "cha": 15 },
+      "ideals": "Chercher la vérité cachée et partager les connaissances avec ceux qui en sont dignes",
+      "objectives": "Utiliser la divination pour guider l'équipe vers le succès et éviter les pièges",
+      "image": "images/characters/gardien_secrets.jpg",
+      "actions": [
+        { "name": "Attaque de dague", "dice": "1d20+2", "damage": "1d4" },
+        { "name": "Sort de niveau 1", "dice": "1d20+5", "damage": "variable" },
+        { "name": "Portent (2/jour)", "dice": "2d20", "special": "Remplace un jet de dé" }
+      ],
+      "inventory": ["Grimoire ancien", "Focaliseur arcanique (orbe)", "Outils de charlatan", "Parchemins vierges", "Encre d'argent", "Boule de cristal"]
+    },
+    "nackrag": {
+      "id": "nackrag",
+      "name": "Nackrag l'Estimeur",
+      "type": "pnj",
+      "class": "Gobelin Sage",
+      "race": "Gobelin ancien",
+      "background": "Érudit de Gringotts",
+      "level": 5,
+      "hp": { "current": 27, "max": 27 },
+      "stats": { "ca": 15, "for": 8, "dex": 14, "con": 12, "int": 18, "sag": 15, "cha": 13 },
+      "ideals": "Préserver les connaissances gobelines ancestrales et protéger les trésors de son peuple",
+      "objectives": "Aider les héros à récupérer la relique sans détruire l'héritage gobelin du coffre-fort",
+      "image": "images/characters/nackrag.jpg",
+      "actions": [
+        { "name": "Attaque de bâton runique", "dice": "1d20+2", "damage": "1d6" },
+        { "name": "Sort mineur gobelin", "dice": "1d20+7", "damage": "1d8" },
+        { "name": "Connaissance ancestrale", "dice": "1d20+8", "special": "Investigation/Histoire" }
+      ],
+      "inventory": ["Bâton runique ancien", "Cartes détaillées du coffre-fort", "Livres de lois gobelines", "Clefs de sécurité", "Gemmes d'évaluation", "Sac de pièces d'or"]
+    },
+    "verdoyant": {
+      "id": "verdoyant",
+      "name": "Verdoyant le Dragon Vert",
+      "type": "pnj",
+      "class": "Jeune Dragon",
+      "race": "Dragon Vert Gallois",
+      "background": "Gardien solitaire",
+      "level": 8,
+      "hp": { "current": 136, "max": 136 },
+      "stats": { "ca": 18, "for": 19, "dex": 12, "con": 17, "int": 14, "sag": 11, "cha": 15 },
+      "ideals": "Protéger son territoire et accumuler des connaissances magiques",
+      "objectives": "Garder la Relique mais peut être convaincu de la céder contre quelque chose d'équivalent",
+      "image": "images/characters/verdoyant_dragon.jpg",
+      "actions": [
+        { "name": "Morsure", "dice": "1d20+7", "damage": "2d10+4" },
+        { "name": "Griffes (2 attaques)", "dice": "1d20+7", "damage": "2d6+4" },
+        { "name": "Souffle empoisonné (recharge 5-6)", "dice": "CON DD 14", "damage": "12d6 poison" }
+      ],
+      "inventory": ["Trésor accumulé", "Relique de l'Aube (actuellement)", "Cristaux magiques", "Parchemins anciens", "Bijoux gobelin"]
+    }
+  },
+  "maps": {
+    "carte_donjon_principale": {
+      "id": "carte_donjon_principale",
+      "name": "Carte du Donjon - Le Coffre-fort oublié",
+      "image": "Gestionnaire de campagne/Le Coffre-fort oublie/images/map/Carte_Donjon_1.webp",
+      "description": "Plan complet du coffre-fort gobelin effondré avec toutes les salles et énigmes",
+      "pins": [
+        { "x": 50, "y": 85, "note": "Entrée principale - Escalier en spirale (Portoloin)" },
+        { "x": 45, "y": 72, "note": "Les Dalles Murmurantes - Hall piégé" },
+        { "x": 30, "y": 50, "note": "Le Couloir aux Échos - Passages acoustiques" },
+        { "x": 70, "y": 50, "note": "La Balance de l'Estimeur - Énigme de Nackrag" },
+        { "x": 25, "y": 30, "note": "La Fontaine des Reflets - Illusions et première clef" },
+        { "x": 75, "y": 30, "note": "Le Coffret aux Trois Clefs - Objectif final" },
+        { "x": 50, "y": 15, "note": "Le Sablier Fendu - Distorsions temporelles" }
+      ]
+    }
+  },
+  "quests": {
+    "mission_principale": {
+      "id": "mission_principale",
+      "title": "Récupérer la Relique de l'Aube",
+      "description": "Traverser le coffre-fort effondré, obtenir au moins trois glyphes-clefs et récupérer la Relique de l'Aube pour sauver Pré-au-Lard de la malédiction qui s'abat sur le village.",
+      "status": "active",
+      "objectives": [
+        { "text": "Sécuriser l'entrée du coffre-fort et désamorcer les pièges", "completed": false },
+        { "text": "Obtenir le premier glyphe-clef (Vortex bleu)", "completed": false },
+        { "text": "Obtenir le deuxième glyphe-clef (Prisons vertes)", "completed": false },
+        { "text": "Obtenir le troisième glyphe-clef (Autel rouge OU Jardin fongique)", "completed": false },
+        { "text": "Accéder à la Salle du Cœur avec les trois clefs", "completed": false },
+        { "text": "Effectuer le rituel Or + Argent pour activer la Relique", "completed": false },
+        { "text": "Négocier avec Verdoyant ou le vaincre honorablement", "completed": false },
+        { "text": "Retourner à Pré-au-Lard avant l'expiration du Portoloin", "completed": false }
+      ]
+    },
+    "sauver_dragon": {
+      "id": "sauver_dragon",
+      "name": "Épargner Verdoyant le Dragon",
+      "description": "Mission optionnelle : éviter l'abattage du jeune dragon et le convaincre de partir en paix, respectant ainsi l'esprit héroïque des Gardiens de l'Aurore.",
+      "status": "inactive",
+      "objectives": [
+        { "text": "Comprendre pourquoi le dragon s'est installé ici", "completed": false },
+        { "text": "Découvrir ce que le dragon considère comme un échange équitable", "completed": false },
+        { "text": "Proposer un arrangement qui satisfait les deux parties", "completed": false },
+        { "text": "Conclure un pacte de non-agression mutuelle", "completed": false }
+      ]
+    },
+    "mysteres_goblins": {
+      "id": "mysteres_goblins",
+      "title": "Les Mystères Gobelin",
+      "description": "Mission secondaire : explorer et comprendre l'histoire du coffre-fort, découvrir les secrets des anciens propriétaires gobelin.",
+      "status": "inactive",
+      "objectives": [
+        { "text": "Déchiffrer les inscriptions runiques gobelines", "completed": false },
+        { "text": "Découvrir l'identité de Graxtor, l'ancien gardien", "completed": false },
+        { "text": "Comprendre le fonctionnement des glyphes-clefs", "completed": false },
+        { "text": "Révéler le lien entre Nackrag et ce coffre-fort", "completed": false }
+      ]
+    }
+  },
+  "calendar": {
+    "currentDate": { "day": 15, "month": 3, "year": 1492 },
+    "timeLimit": { "hours": 4, "remaining": 240 },
+    "events": {
+      "15-3-1492": [
+        { "title": "Départ pour le coffre-fort (mission)", "type": "important", "time": "matin" },
+        { "title": "Arrivée par Portoloin", "type": "event", "time": "après-midi" }
+      ],
+      "16-3-1492": [
+        { "title": "Retour prévu à Pré-au-Lard", "type": "deadline", "time": "lever du soleil" },
+        { "title": "Expiration du Portoloin de retour", "type": "critical", "time": "aube" }
+      ]
+    },
+    "restHistory": []
+  },
+  "music": {
+    "currentTrack": null,
+    "currentContext": "campagne",
+    "volume": 0.15,
+    "enabled": true,
+    "musicPaths": {
+      "campagne": [
+        "musique/campagne/le_coffre_fort_oublie/01 - L'Aurore Céleste.mp3",
+        "musique/campagne/le_coffre_fort_oublie/08 - Héros de Verdure.mp3",
+        "musique/campagne/le_coffre_fort_oublie/L'Écho des Donjons.mp3"
+      ],
+      "campagne/acte1": [
+        "musique/campagne/le_coffre_fort_oublie/acte1/L'Écho des Donjons.mp3",
+        "musique/campagne/le_coffre_fort_oublie/acte1/L'Épopée du Donjon.mp3"
+      ],
+      "campagne/acte1/hall_principal": [
+        "musique/campagne/le_coffre_fort_oublie/acte1/L'Épopée du Donjon.mp3",
+        "musique/campagne/le_coffre_fort_oublie/acte1/La Ballade du Donjon Perdu.mp3"
+      ],
+      "campagne/acte1/spirale": [
+        "musique/campagne/le_coffre_fort_oublie/acte1/La Légende du Donjon Perdu.mp3"
+      ],
+      "campagne/acte2": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/Eywa's Whisper.mp3",
+        "musique/campagne/le_coffre_fort_oublie/acte2/Eywa's Whisper (1).mp3"
+      ],
+      "campagne/acte2/vortex_bleu": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/combat/Eywa's Whisper.mp3"
+      ],
+      "campagne/acte2/prisons_vertes": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/combat/Eywa's Whisper (1).mp3"
+      ],
+      "campagne/acte2/autel_rouge": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/danse des pieces.mp3"
+      ],
+      "campagne/acte2/jardin_fongique": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/08 - Héros de Verdure.mp3"
+      ],
+      "campagne/acte3": [
+        "musique/campagne/le_coffre_fort_oublie/acte3/Agdon.mp3",
+        "musique/campagne/le_coffre_fort_oublie/acte3/01 - L'Aurore Céleste.mp3"
+      ],
+      "campagne/acte3/dragon_vert": [
+        "musique/campagne/le_coffre_fort_oublie/acte3/dragon_boss/Agdon.mp3"
+      ],
+      "campagne/acte3/salle_coeur": [
+        "musique/campagne/le_coffre_fort_oublie/acte3/01 - L'Aurore Céleste.mp3"
+      ]
+    }
+  },
+  "settings": {
+    "autoSave": true,
+    "autoSaveInterval": 30000,
+    "theme": "medieval",
+    "language": "fr",
+    "diceAnimations": true,
+    "soundEffects": false,
+    "notifications": true
+  },
+  "metadata": {
+    "created": "2025-01-31",
+    "lastModified": "2025-01-31",
+    "version": "1.0.0",
+    "author": "Claude & Happy",
+    "campaignSystem": "D&D 2024",
+    "players": 5,
+    "estimatedDuration": "4 heures",
+    "difficultyLevel": "Débutant à Intermédiaire"
+  }
+}

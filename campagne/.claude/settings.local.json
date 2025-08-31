@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Campagne - Le Coffre-fort oublié</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8b4513;
+            --secondary-color: #d4af37;
+            --accent-color: #cd853f;
+            --dark-bg: #1a1a1a;
+            --light-bg: #2d2d2d;
+            --text-color: #ffffff;
+            --border-color: #444;
+            --success-color: #228b22;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Crimson Text', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #0f0f0f 0%, #2d1810 50%, #1a1a1a 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.02"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.02"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.01"/><circle cx="10" cy="90" r="0.5" fill="%23ffffff" opacity="0.01"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 20px;
+            min-height: 100vh;
+            grid-template-areas: 
+                "header header"
+                "sidebar main"
+                "breadcrumb breadcrumb";
+        }
+
+        /* HEADER */
+        .header {
+            grid-area: header;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--secondary-color);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            color: var(--secondary-color);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* SIDEBAR NAVIGATION */
+        .sidebar {
+            grid-area: sidebar;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            height: fit-content;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-section {
+            margin-bottom: 25px;
+        }
+
+        .nav-section h3 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tree {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .nav-item.has-children > .nav-label::before {
+            content: '▶';
+            margin-right: 5px;
+            transition: transform 0.2s ease;
+            color: var(--secondary-color);
+        }
+
+        .nav-item.expanded > .nav-label::before {
+            transform: rotate(90deg);
+        }
+
+        .nav-label {
+            display: block;
+            padding: 8px 12px;
+            background: var(--dark-bg);
+            border: 1px solid transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .nav-label:hover {
+            background: var(--primary-color);
+            border-color: var(--secondary-color);
+            transform: translateX(3px);
+        }
+
+        .nav-label.active {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            font-weight: 600;
+        }
+
+        .nav-children {
+            margin-left: 20px;
+            margin-top: 5px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-item.expanded > .nav-children {
+            max-height: 500px;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            grid-area: main;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            min-height: 600px;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .content-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            border: 1px solid var(--secondary-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-success { background: var(--success-color); }
+        .btn-danger { background: var(--danger-color); }
+        .btn-warning { background: var(--warning-color); color: var(--dark-bg); }
+        .btn-info { background: var(--info-color); }
+
+        /* TABS */
+        .tabs {
+            margin-bottom: 20px;
+        }
+
+        .tab-list {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            color: var(--text-color);
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            white-space: nowrap;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .tab-button:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .tab-button.active {
+            color: var(--secondary-color);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .card-body {
+            line-height: 1.6;
+        }
+
+        /* CHARACTER SHEETS */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .character-card {
+            background: var(--dark-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+        }
+
+        .character-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .character-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+        }
+
+        .character-info h4 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .character-info p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: rgba(139, 69, 19, 0.3);
+            border-radius: 6px;
+            border: 1px solid var(--primary-color);
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .hp-bar {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            height: 20px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--danger-color), var(--warning-color), var(--success-color));
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .hp-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+
+        .actions-list {
+            margin-top: 15px;
+        }
+
+        .action-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dice-btn {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .dice-btn:hover {
+            background: var(--warning-color);
+            transform: scale(1.1);
+        }
+
+        /* MAP CONTAINER */
+        .map-container {
+            position: relative;
+            max-width: 100%;
+            max-height: 600px;
+            overflow: auto;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--dark-bg);
+        }
+
+        .map-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            position: relative;
+        }
+
+        .map-pin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--danger-color);
+            border: 2px solid var(--text-color);
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .map-pin:hover {
+            background: var(--secondary-color);
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .pin-tooltip {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-bg);
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--secondary-color);
+            white-space: nowrap;
+            font-size: 0.8rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .map-pin:hover .pin-tooltip {
+            opacity: 1;
+        }
+
+        /* INVENTORY */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .inventory-item {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .inventory-item:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .inventory-item.selected {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .item-quantity {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger-color);
+            color: var(--text-color);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* CALENDAR */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-top: 20px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 5px;
+        }
+
+        .calendar-day:hover {
+            background: var(--primary-color);
+        }
+
+        .calendar-day.current {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            font-weight: 600;
+        }
+
+        .calendar-day.has-event {
+            background: var(--info-color);
+        }
+
+        .calendar-day.has-event::after {
+            content: '•';
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            color: var(--warning-color);
+        }
+
+        /* FORMS */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px 12px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color);
+            font-family: var(--font-body);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 8px 12px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color);
+        }
+
+        /* MODALS */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--light-bg);
+            border: 2px solid var(--secondary-color);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .modal-close:hover {
+            color: var(--danger-color);
+        }
+
+        /* BREADCRUMB */
+        .breadcrumb {
+            grid-area: breadcrumb;
+            background: var(--dark-bg);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+        }
+
+        .breadcrumb-item {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb-item.active {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .breadcrumb-separator {
+            color: var(--border-color);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "header"
+                    "main"
+                    "sidebar"
+                    "breadcrumb";
+            }
+
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .content-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* STATUS INDICATORS */
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-active { background: var(--success-color); }
+        .status-inactive { background: var(--border-color); }
+        .status-completed { background: var(--info-color); }
+        .status-in-progress { background: var(--warning-color); }
+
+        /* DICE RESULT ANIMATION */
+        .dice-result {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            padding: 20px 30px;
+            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: bold;
+            z-index: 2000;
+            animation: diceRoll 0.8s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes diceRoll {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* LOADING ANIMATION */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            border-top-color: var(--secondary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* UTILITY CLASSES */
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .text-muted { color: #999; }
+        .text-success { color: var(--success-color); }
+        .text-danger { color: var(--danger-color); }
+        .text-warning { color: var(--warning-color); }
+        .text-info { color: var(--info-color); }
+
+        .d-none { display: none; }
+        .d-block { display: block; }
+        .d-flex { display: flex; }
+        .d-grid { display: grid; }
+
+        .mb-0 { margin-bottom: 0; }
+        .mb-1 { margin-bottom: 5px; }
+        .mb-2 { margin-bottom: 10px; }
+        .mb-3 { margin-bottom: 15px; }
+        .mb-4 { margin-bottom: 20px; }
+
+        .mt-0 { margin-top: 0; }
+        .mt-1 { margin-top: 5px; }
+        .mt-2 { margin-top: 10px; }
+        .mt-3 { margin-top: 15px; }
+        .mt-4 { margin-top: 20px; }
+
+        .p-0 { padding: 0; }
+        .p-1 { padding: 5px; }
+        .p-2 { padding: 10px; }
+        .p-3 { padding: 15px; }
+        .p-4 { padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header">
+            <h1><i class="fas fa-dragon"></i> Le Coffre-fort oublié</h1>
+            <p>Gestionnaire de Campagne D&D - Les Gardiens de l'Aurore</p>
+        </header>
+
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar">
+            <div class="nav-section">
+                <h3><i class="fas fa-map"></i> Navigation</h3>
+                <ul class="nav-tree" id="campaignTree">
+                    <!-- Navigation will be generated by JavaScript -->
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h3><i class="fas fa-tools"></i> Actions</h3>
+                <div class="content-actions">
+                    <button class="btn btn-info" onclick="saveData()">
+                        <i class="fas fa-save"></i> Sauvegarder
+                    </button>
+                    <button class="btn btn-warning" onclick="loadData()">
+                        <i class="fas fa-upload"></i> Charger
+                    </button>
+                </div>
+            </div>
+
+            <!-- MUSIC PLAYER INTEGRATION -->
+            <div class="nav-section">
+                <h3><i class="fas fa-music"></i> Musique</h3>
+                <div id="musicControls">
+                    <button class="btn" onclick="toggleMusic()" id="musicToggle">
+                        <i class="fas fa-play"></i> Lecture
+                    </button>
+                    <div class="mt-2">
+                        <label class="form-label">Volume</label>
+                        <input type="range" min="0" max="100" value="15" class="form-input" onchange="setMusicVolume(this.value)">
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="content-header">
+                <h2 class="content-title">
+                    <i id="contentIcon" class="fas fa-home"></i>
+                    <span id="contentTitle">Aperçu de la Campagne</span>
+                </h2>
+                <div class="content-actions">
+                    <button class="btn btn-success" onclick="showAddModal()">
+                        <i class="fas fa-plus"></i> Ajouter
+                    </button>
+                </div>
+            </div>
+
+            <!-- TABS -->
+            <div class="tabs">
+                <div class="tab-list">
+                    <button class="tab-button active" onclick="showTab('overview')">
+                        <i class="fas fa-eye"></i> Aperçu
+                    </button>
+                    <button class="tab-button" onclick="showTab('map')">
+                        <i class="fas fa-map"></i> Carte
+                    </button>
+                    <button class="tab-button" onclick="showTab('characters')">
+                        <i class="fas fa-users"></i> Personnages
+                    </button>
+                    <button class="tab-button" onclick="showTab('quests')">
+                        <i class="fas fa-scroll"></i> Quêtes
+                    </button>
+                    <button class="tab-button" onclick="showTab('inventory')">
+                        <i class="fas fa-backpack"></i> Inventaires
+                    </button>
+                    <button class="tab-button" onclick="showTab('calendar')">
+                        <i class="fas fa-calendar"></i> Calendrier
+                    </button>
+                </div>
+
+                <!-- OVERVIEW TAB -->
+                <div class="tab-content active" id="overview">
+                    <div id="overviewContent">
+                        <!-- Content will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- MAP TAB -->
+                <div class="tab-content" id="map">
+                    <div class="map-container">
+                        <img id="mapImage" class="map-image" src="" alt="Carte de la campagne">
+                        <div id="mapPins">
+                            <!-- Pins will be generated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-info" onclick="addMapPin()">
+                            <i class="fas fa-map-pin"></i> Ajouter une note
+                        </button>
+                        <button class="btn btn-warning" onclick="clearMapPins()">
+                            <i class="fas fa-trash"></i> Effacer les notes
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CHARACTERS TAB -->
+                <div class="tab-content" id="characters">
+                    <div class="character-grid" id="charactersGrid">
+                        <!-- Characters will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- QUESTS TAB -->
+                <div class="tab-content" id="quests">
+                    <div id="questsList">
+                        <!-- Quests will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- INVENTORY TAB -->
+                <div class="tab-content" id="inventory">
+                    <div class="d-flex" style="gap: 20px;">
+                        <div style="flex: 1;">
+                            <h4>Inventaires PNJ</h4>
+                            <div id="npcInventories">
+                                <!-- NPC inventories will be generated by JavaScript -->
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4>Inventaires PJ</h4>
+                            <div id="pcInventories">
+                                <!-- PC inventories will be generated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-info" onclick="transferItems()">
+                            <i class="fas fa-exchange-alt"></i> Transférer objets
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CALENDAR TAB -->
+                <div class="tab-content" id="calendar">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 id="calendarTitle">Calendrier</h4>
+                        <div>
+                            <button class="btn" onclick="changeMonth(-1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="btn" onclick="changeMonth(1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Calendar will be generated by JavaScript -->
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-success" onclick="addEvent()">
+                            <i class="fas fa-plus"></i> Ajouter événement
+                        </button>
+                        <button class="btn btn-info" onclick="shortRest()">
+                            <i class="fas fa-bed"></i> Repos court
+                        </button>
+                        <button class="btn btn-warning" onclick="longRest()">
+                            <i class="fas fa-moon"></i> Repos long
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- BREADCRUMB -->
+        <nav class="breadcrumb">
+            <span><i class="fas fa-home"></i></span>
+            <span class="breadcrumb-separator">></span>
+            <span id="breadcrumbPath">Le Coffre-fort oublié</span>
+        </nav>
+    </div>
+
+    <!-- MODALS -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Modal</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script>
+        // ========================================
+        // CAMPAIGN DATA MANAGEMENT
+        // ========================================
+        
+        let campaignData = {
+            name: "Le Coffre-fort oublié",
+            description: "Les Gardiens de l'Aurore - Campagne D&D 2024",
+            currentNode: "campagne",
+            currentPath: ["campagne"],
+            
+            // HIERARCHICAL STRUCTURE
+            structure: {
+                campagne: {
+                    id: "campagne",
+                    label: "Le Coffre-fort oublié",
+                    type: "campagne",
+                    icon: "fas fa-dragon",
+                    description: "Une petite sorcière à l'aura dorée — Petite Lumière — peut guérir une malédiction rampante qui frappe Pré-au-Lard. Pour la sauver et sauver le village, il faut récupérer, dans un ancien coffre-fort de Gringotts effondré, la Relique de l'Aube.",
+                    children: ["acte1", "acte2", "acte3"],
+                    mapId: "coffre_fort_principal"
+                },
+                acte1: {
+                    id: "acte1",
+                    label: "Acte I - Le Goulet",
+                    type: "acte",
+                    icon: "fas fa-door-open",
+                    description: "Sécuriser les dalles, désamorcer 1 piège rune. Point d'entrée dans le coffre-fort effondré.",
+                    children: ["spirale", "hall_principal"],
+                    mapId: "coffre_fort_entree"
+                },
+                spirale: {
+                    id: "spirale",
+                    label: "Escalier en spirale",
+                    type: "lieu",
+                    icon: "fas fa-stairs",
+                    description: "Point d'arrivée du Portoloin. Des runes gobelines jalonnent les marches.",
+                    children: [],
+                    mapId: "escalier_spirale"
+                },
+                hall_principal: {
+                    id: "hall_principal",
+                    label: "Hall principal",
+                    type: "lieu",
+                    icon: "fas fa-columns",
+                    description: "Grand hall d'entrée avec des dalles piégées et des inscriptions gobelines.",
+                    children: ["piege_dalle"],
+                    mapId: "hall_principal"
+                },
+                piege_dalle: {
+                    id: "piege_dalle",
+                    label: "Piège des dalles",
+                    type: "piege",
+                    icon: "fas fa-exclamation-triangle",
+                    description: "Dalles piégées qui s'effondrent si on marche dessus sans prononcer le mot de passe gobelin.",
+                    children: [],
+                    mapId: null
+                },
+                acte2: {
+                    id: "acte2",
+                    label: "Acte II - Les Trois Clefs",
+                    type: "acte",
+                    icon: "fas fa-key",
+                    description: "Choisir 3 salles parmi 4 pour obtenir les glyphes-clefs nécessaires à l'ouverture de la Salle du Cœur.",
+                    children: ["vortex_bleu", "prisons_vertes", "autel_rouge", "jardin_fongique"],
+                    mapId: "coffre_fort_salles"
+                },
+                vortex_bleu: {
+                    id: "vortex_bleu",
+                    label: "Salle du Vortex bleu",
+                    type: "salle",
+                    icon: "fas fa-water",
+                    description: "Une salle remplie d'énergie magique bleue avec un vortex au centre.",
+                    children: ["elementaire_eau"],
+                    mapId: "vortex_bleu"
+                },
+                elementaire_eau: {
+                    id: "elementaire_eau",
+                    label: "Élémentaire d'eau",
+                    type: "rencontre",
+                    icon: "fas fa-tint",
+                    description: "Combat contre un élémentaire d'eau corrompu par la magie du dragon.",
+                    children: [],
+                    mapId: null
+                },
+                prisons_vertes: {
+                    id: "prisons_vertes",
+                    label: "Prisons vertes",
+                    type: "salle",
+                    icon: "fas fa-bars",
+                    description: "D'anciennes cellules gobelines avec une aura verte malfaisante.",
+                    children: ["spectre_gobelin"],
+                    mapId: "prisons_vertes"
+                },
+                spectre_gobelin: {
+                    id: "spectre_gobelin",
+                    label: "Spectre gobelin",
+                    type: "rencontre",
+                    icon: "fas fa-ghost",
+                    description: "L'esprit tourmenté d'un ancien gardien gobelin.",
+                    children: [],
+                    mapId: null
+                },
+                autel_rouge: {
+                    id: "autel_rouge",
+                    label: "Autel rouge",
+                    type: "salle",
+                    icon: "fas fa-fire",
+                    description: "Un autel de sacrifice gobelin encore actif, entouré de flammes rouges.",
+                    children: ["gardien_flammes"],
+                    mapId: "autel_rouge"
+                },
+                gardien_flammes: {
+                    id: "gardien_flammes",
+                    label: "Gardien des flammes",
+                    type: "rencontre",
+                    icon: "fas fa-fire-alt",
+                    description: "Une créature de flammes invoquée par l'autel.",
+                    children: [],
+                    mapId: null
+                },
+                jardin_fongique: {
+                    id: "jardin_fongique",
+                    label: "Jardin fongique",
+                    type: "salle",
+                    icon: "fas fa-seedling",
+                    description: "Un jardin souterrain envahi par des champignons magiques.",
+                    children: ["champignons_explosifs"],
+                    mapId: "jardin_fongique"
+                },
+                champignons_explosifs: {
+                    id: "champignons_explosifs",
+                    label: "Champignons explosifs",
+                    type: "rencontre",
+                    icon: "fas fa-bomb",
+                    description: "Des champignons qui explosent quand on les approche.",
+                    children: [],
+                    mapId: null
+                },
+                acte3: {
+                    id: "acte3",
+                    label: "Acte III - Le Cœur",
+                    type: "acte",
+                    icon: "fas fa-heart",
+                    description: "Rituel Or + Argent dans la Salle du Cœur. Négociation avec le jeune Dragon Vert Gallois.",
+                    children: ["salle_coeur", "dragon_vert"],
+                    mapId: "salle_coeur"
+                },
+                salle_coeur: {
+                    id: "salle_coeur",
+                    label: "Salle du Cœur",
+                    type: "lieu",
+                    icon: "fas fa-gem",
+                    description: "La salle centrale du coffre-fort où se trouve le socle de la Relique de l'Aube.",
+                    children: ["relique_aube"],
+                    mapId: "salle_coeur"
+                },
+                relique_aube: {
+                    id: "relique_aube",
+                    label: "Relique de l'Aube",
+                    type: "objet",
+                    icon: "fas fa-sun",
+                    description: "Artefact magique capable de dissiper la malédiction qui frappe Pré-au-Lard.",
+                    children: [],
+                    mapId: null
+                },
+                dragon_vert: {
+                    id: "dragon_vert",
+                    label: "Jeune Dragon Vert Gallois",
+                    type: "rencontre",
+                    icon: "fas fa-dragon",
+                    description: "Le boss final - un jeune dragon qui s'est enchaîné aux lueurs magiques du coffre-fort.",
+                    children: [],
+                    mapId: null
+                }
+            },
+
+            // CHARACTERS (PNJ + PJ)
+            characters: {
+                petite_lumiere: {
+                    id: "petite_lumiere",
+                    name: "Petite Lumière",
+                    type: "pj",
+                    class: "Moine (Voie de la Miséricorde)",
+                    race: "Drakéide d'or",
+                    background: "Acolyte",
+                    level: 1,
+                    hp: { current: 10, max: 10 },
+                    stats: { ca: 13, for: 12, dex: 16, con: 13, int: 11, sag: 16, cha: 14 },
+                    ideals: "Protéger les innocents et apporter la guérison",
+                    objectives: "Activer la Relique de l'Aube pour sauver Pré-au-Lard",
+                    image: "images/petite_lumiere.jpg",
+                    actions: [
+                        { name: "Attaque au poing", dice: "1d20+5", damage: "1d4+3" },
+                        { name: "Souffle d'or", dice: "1d20+5", damage: "2d6" },
+                        { name: "Contact guérisseur", dice: "1d4", heal: true }
+                    ],
+                    inventory: ["Bâton de marche", "Kit d'herboriste", "Symbole sacré", "Potions de soin (3)"]
+                },
+                bouclier_vivant: {
+                    id: "bouclier_vivant",
+                    name: "Bouclier Vivant",
+                    type: "pj",
+                    class: "Paladin (Serment des Anciens)",
+                    race: "Goliath des collines",
+                    background: "Noble",
+                    level: 1,
+                    hp: { current: 12, max: 12 },
+                    stats: { ca: 18, for: 16, dex: 10, con: 14, int: 11, sag: 12, cha: 15 },
+                    ideals: "Protéger les faibles et maintenir l'ordre naturel",
+                    objectives: "Servir de bouclier à l'équipe et guider les plus jeunes",
+                    image: "images/bouclier_vivant.jpg",
+                    actions: [
+                        { name: "Attaque d'épée", dice: "1d20+5", damage: "1d8+3" },
+                        { name: "Châtiment divin", dice: "1d20+5", damage: "1d8+3+1d8" },
+                        { name: "Imposition des mains", dice: "1d4", heal: true }
+                    ],
+                    inventory: ["Épée longue", "Bouclier", "Armure de mailles", "Trousse noble", "Sceau familial"]
+                },
+                oeil_percant: {
+                    id: "oeil_percant",
+                    name: "Œil Perçant",
+                    type: "pj",
+                    class: "Rôdeur (Traqueur des ténèbres)",
+                    race: "Elfe sylvestre",
+                    background: "Artiste",
+                    level: 1,
+                    hp: { current: 11, max: 11 },
+                    stats: { ca: 14, for: 13, dex: 16, con: 12, int: 14, sag: 15, cha: 11 },
+                    ideals: "Préserver l'équilibre entre civilisation et nature",
+                    objectives: "Éliminer les créatures corrompues et protéger la forêt",
+                    image: "images/oeil_percant.jpg",
+                    actions: [
+                        { name: "Attaque d'arc", dice: "1d20+5", damage: "1d8+3" },
+                        { name: "Tir de précision", dice: "1d20+7", damage: "1d8+3" },
+                        { name: "Marque du chasseur", dice: "1d6", damage: "1d6" }
+                    ],
+                    inventory: ["Arc long", "Carquois (30 flèches)", "Armure de cuir", "Kit d'artiste", "Instruments"]
+                },
+                ombre_dansante: {
+                    id: "ombre_dansante",
+                    name: "Ombre Dansante",
+                    type: "pj",
+                    class: "Roublard (Psionique)",
+                    race: "Elfe noir",
+                    background: "Criminel",
+                    level: 1,
+                    hp: { current: 9, max: 9 },
+                    stats: { ca: 13, for: 10, dex: 16, con: 12, int: 15, sag: 13, cha: 14 },
+                    ideals: "Utiliser ses talents pour le bien après une vie dans l'ombre",
+                    objectives: "Racheter son passé en aidant l'équipe à réussir",
+                    image: "images/ombre_dansante.jpg",
+                    actions: [
+                        { name: "Attaque de dague", dice: "1d20+5", damage: "1d4+3" },
+                        { name: "Attaque sournoise", dice: "1d20+5", damage: "1d4+3+1d6" },
+                        { name: "Lame psionique", dice: "1d20+5", damage: "1d4+3+1d6" }
+                    ],
+                    inventory: ["Dagues (2)", "Outils de voleur", "Armure de cuir", "Contacts criminels", "Passe-partout"]
+                },
+                gardien_secrets: {
+                    id: "gardien_secrets",
+                    name: "Gardien des Secrets",
+                    type: "pj",
+                    class: "Magicien (Divination)",
+                    race: "Drakéide d'argent",
+                    background: "Charlatan",
+                    level: 1,
+                    hp: { current: 7, max: 7 },
+                    stats: { ca: 11, for: 8, dex: 14, con: 13, int: 16, sag: 12, cha: 15 },
+                    ideals: "Chercher la vérité cachée et partager les connaissances",
+                    objectives: "Utiliser la divination pour guider l'équipe vers le succès",
+                    image: "images/gardien_secrets.jpg",
+                    actions: [
+                        { name: "Attaque de dague", dice: "1d20+2", damage: "1d4" },
+                        { name: "Sort de niveau 1", dice: "1d20+5", damage: "variable" },
+                        { name: "Portent", dice: "2d20", special: "Remplace un jet" }
+                    ],
+                    inventory: ["Grimoire", "Focaliseur arcanique", "Outils de charlatan", "Parchemins", "Encre et plume"]
+                },
+                nackrag: {
+                    id: "nackrag",
+                    name: "Nackrag l'Estimeur",
+                    type: "pnj",
+                    class: "Gobelin Sage",
+                    race: "Gobelin",
+                    background: "Érudit",
+                    level: 5,
+                    hp: { current: 27, max: 27 },
+                    stats: { ca: 15, for: 8, dex: 14, con: 12, int: 18, sag: 15, cha: 13 },
+                    ideals: "Préserver les connaissances gobelines ancestrales",
+                    objectives: "Aider les héros à récupérer la relique sans détruire le coffre-fort",
+                    image: "images/nackrag.jpg",
+                    actions: [
+                        { name: "Attaque de bâton", dice: "1d20+2", damage: "1d6" },
+                        { name: "Sort mineur", dice: "1d20+7", damage: "1d8" },
+                        { name: "Connaissance gobeline", dice: "1d20+8", special: "Investigation" }
+                    ],
+                    inventory: ["Bâton ancien", "Cartes du coffre-fort", "Livres gobelines", "Clefs de secours", "Gemmes d'appraisal"]
+                }
+            },
+
+            // MAPS
+            maps: {
+                coffre_fort_principal: {
+                    id: "coffre_fort_principal",
+                    name: "Vue d'ensemble du Coffre-fort",
+                    image: "images/maps/coffre_fort_principal.jpg",
+                    pins: []
+                },
+                coffre_fort_entree: {
+                    id: "coffre_fort_entree",
+                    name: "Entrée du Coffre-fort",
+                    image: "images/maps/coffre_fort_entree.jpg",
+                    pins: [
+                        { x: 50, y: 80, note: "Point d'arrivée du Portoloin" }
+                    ]
+                },
+                salle_coeur: {
+                    id: "salle_coeur",
+                    name: "Salle du Cœur",
+                    image: "images/maps/salle_coeur.jpg",
+                    pins: [
+                        { x: 50, y: 30, note: "Socle de la Relique de l'Aube" },
+                        { x: 70, y: 60, note: "Repaire du Dragon Vert" }
+                    ]
+                }
+            },
+
+            // QUESTS
+            quests: {
+                mission_principale: {
+                    id: "mission_principale",
+                    title: "Récupérer la Relique de l'Aube",
+                    description: "Traverser le coffre-fort effondré, obtenir les trois glyphes-clefs et récupérer la Relique de l'Aube pour sauver Pré-au-Lard.",
+                    status: "active",
+                    objectives: [
+                        { text: "Sécuriser l'entrée du coffre-fort", completed: false },
+                        { text: "Obtenir le premier glyphe-clef", completed: false },
+                        { text: "Obtenir le deuxième glyphe-clef", completed: false },
+                        { text: "Obtenir le troisième glyphe-clef", completed: false },
+                        { text: "Accéder à la Salle du Cœur", completed: false },
+                        { text: "Activer la Relique de l'Aube", completed: false },
+                        { text: "Négocier avec le dragon", completed: false }
+                    ]
+                },
+                sauver_dragon: {
+                    id: "sauver_dragon",
+                    title: "Épargner le Jeune Dragon",
+                    description: "Éviter l'abattage du dragon et le convaincre de partir en paix.",
+                    status: "inactive",
+                    objectives: [
+                        { text: "Comprendre les motivations du dragon", completed: false },
+                        { text: "Trouver un moyen de communication", completed: false },
+                        { text: "Proposer un arrangement équitable", completed: false }
+                    ]
+                }
+            },
+
+            // CALENDAR & TIME
+            calendar: {
+                currentDate: { day: 15, month: 3, year: 1492 },
+                events: {
+                    "15-3-1492": [
+                        { title: "Départ pour le coffre-fort", type: "important" }
+                    ],
+                    "16-3-1492": [
+                        { title: "Retour prévu à Pré-au-Lard", type: "deadline" }
+                    ]
+                }
+            },
+
+            // MUSIC SYSTEM
+            music: {
+                currentTrack: null,
+                currentContext: "campagne",
+                volume: 0.15,
+                musicPaths: {
+                    "campagne": ["musique/01 - L'Aurore Céleste.mp3", "musique/08 - Héros de Verdure.mp3"],
+                    "campagne/acte1": ["musique/L'Écho des Donjons.mp3"],
+                    "campagne/acte1/hall_principal": ["musique/boutique/L'Épopée du Donjon.mp3"],
+                    "campagne/acte2": ["musique/guerre/Eywa's Whisper.mp3"],
+                    "campagne/acte2/vortex_bleu": ["musique/guerre/Eywa's Whisper.mp3"],
+                    "campagne/acte2/prisons_vertes": ["musique/guerre/Eywa's Whisper (1).mp3"],
+                    "campagne/acte3/dragon_vert": ["musique/Agdon.mp3"]
+                }
+            }
+        };
+
+        // Current music player
+        let currentSound = null;
+        let musicEnabled = true;
+
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCampaign();
+            generateNavigation();
+            showContent(campaignData.currentNode);
+            initializeMusic();
+        });
+
+        function initializeCampaign() {
+            // Load saved data if available
+            const saved = localStorage.getItem('campaignData_coffre_fort');
+            if (saved) {
+                try {
+                    const savedData = JSON.parse(saved);
+                    // Merge with default data to ensure all properties exist
+                    campaignData = { ...campaignData, ...savedData };
+                } catch (e) {
+                    console.error('Error loading saved data:', e);
+                }
+            }
+        }
+
+        // ========================================
+        // NAVIGATION SYSTEM
+        // ========================================
+        
+        function generateNavigation() {
+            const tree = document.getElementById('campaignTree');
+            tree.innerHTML = '';
+            
+            function createNode(nodeId, level = 0) {
+                const node = campaignData.structure[nodeId];
+                if (!node) return;
+                
+                const li = document.createElement('li');
+                li.className = 'nav-item';
+                
+                const hasChildren = node.children && node.children.length > 0;
+                if (hasChildren) li.classList.add('has-children');
+                
+                const label = document.createElement('a');
+                label.className = 'nav-label';
+                label.innerHTML = `<i class="${node.icon}"></i> ${node.label}`;
+                label.onclick = (e) => {
+                    e.preventDefault();
+                    if (hasChildren) {
+                        li.classList.toggle('expanded');
+                    }
+                    navigateTo(nodeId);
+                };
+                
+                li.appendChild(label);
+                
+                if (hasChildren) {
+                    const childrenContainer = document.createElement('ul');
+                    childrenContainer.className = 'nav-children nav-tree';
+                    
+                    node.children.forEach(childId => {
+                        const childNode = createNode(childId, level + 1);
+                        if (childNode) childrenContainer.appendChild(childNode);
+                    });
+                    
+                    li.appendChild(childrenContainer);
+                }
+                
+                return li;
+            }
+            
+            const rootNode = createNode('campagne');
+            if (rootNode) tree.appendChild(rootNode);
+        }
+
+        function navigateTo(nodeId) {
+            campaignData.currentNode = nodeId;
+            
+            // Update active navigation
+            document.querySelectorAll('.nav-label').forEach(label => {
+                label.classList.remove('active');
+            });
+            
+            const targetLabel = document.querySelector(`[onclick*="${nodeId}"]`);
+            if (targetLabel) targetLabel.classList.add('active');
+            
+            // Update path
+            updatePath(nodeId);
+            
+            // Show content
+            showContent(nodeId);
+            
+            // Update music context
+            updateMusicContext();
+            
+            // Save state
+            saveData();
+        }
+
+        function updatePath(nodeId) {
+            const path = [];
+            let current = nodeId;
+            
+            // Build path from current to root
+            while (current && campaignData.structure[current]) {
+                path.unshift(current);
+                // Find parent
+                let parent = null;
+                for (const [id, node] of Object.entries(campaignData.structure)) {
+                    if (node.children && node.children.includes(current)) {
+                        parent = id;
+                        break;
+                    }
+                }
+                current = parent;
+            }
+            
+            campaignData.currentPath = path;
+            
+            // Update breadcrumb
+            const breadcrumb = document.getElementById('breadcrumbPath');
+            const pathLabels = path.map(id => campaignData.structure[id]?.label || id);
+            breadcrumb.textContent = pathLabels.join(' > ');
+        }
+
+        // ========================================
+        // CONTENT DISPLAY
+        // ========================================
+        
+        function showContent(nodeId) {
+            const node = campaignData.structure[nodeId];
+            if (!node) return;
+            
+            // Update header
+            document.getElementById('contentIcon').className = node.icon;
+            document.getElementById('contentTitle').textContent = node.label;
+            
+            // Update overview content
+            const overview = document.getElementById('overviewContent');
+            overview.innerHTML = `
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"><i class="${node.icon}"></i> ${node.label}</h3>
+                        <span class="status-indicator status-active"></span>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Type:</strong> ${node.type}</p>
+                        <p><strong>Description:</strong> ${node.description}</p>
+                        ${node.children && node.children.length > 0 ? 
+                            `<div class="mt-3">
+                                <h4>Éléments contenus:</h4>
+                                <ul>
+                                    ${node.children.map(childId => {
+                                        const child = campaignData.structure[childId];
+                                        return child ? `<li><i class="${child.icon}"></i> ${child.label}</li>` : '';
+                                    }).join('')}
+                                </ul>
+                            </div>` : ''
+                        }
+                    </div>
+                </div>
+            `;
+            
+            // Update map if available
+            if (node.mapId && campaignData.maps[node.mapId]) {
+                const mapImg = document.getElementById('mapImage');
+                mapImg.src = campaignData.maps[node.mapId].image;
+                updateMapPins(node.mapId);
+            }
+            
+            // Update characters
+            updateCharactersDisplay();
+            
+            // Update quests
+            updateQuestsDisplay();
+            
+            // Update inventories
+            updateInventoriesDisplay();
+            
+            // Update calendar
+            updateCalendarDisplay();
+        }
+
+        // ========================================
+        // TAB SYSTEM
+        // ========================================
+        
+        function showTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // ========================================
+        // CHARACTERS SYSTEM
+        // ========================================
+        
+        function updateCharactersDisplay() {
+            const grid = document.getElementById('charactersGrid');
+            grid.innerHTML = '';
+            
+            Object.values(campaignData.characters).forEach(character => {
+                const card = createCharacterCard(character);
+                grid.appendChild(card);
+            });
+        }
+
+        function createCharacterCard(character) {
+            const div = document.createElement('div');
+            div.className = 'character-card';
+            
+            const hpPercent = (character.hp.current / character.hp.max) * 100;
+            
+            div.innerHTML = `
+                <div class="character-header">
+                    <div class="character-avatar">
+                        <i class="fas ${character.type === 'pj' ? 'fa-user-tie' : 'fa-user'}"></i>
+                    </div>
+                    <div class="character-info">
+                        <h4>${character.name}</h4>
+                        <p>${character.race} - ${character.class}</p>
+                        <small class="text-muted">${character.type.toUpperCase()} Niveau ${character.level}</small>
+                    </div>
+                </div>
+                
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <span class="stat-value">${character.stats.ca}</span>
+                        <div class="stat-label">CA</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">${character.stats.for}</span>
+                        <div class="stat-label">FOR</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">${character.stats.dex}</span>
+                        <div class="stat-label">DEX</div>
+                    </div>
+                </div>
+                
+                <div class="hp-bar">
+                    <div class="hp-fill" style="width: ${hpPercent}%"></div>
+                    <div class="hp-text">${character.hp.current}/${character.hp.max} PV</div>
+                </div>
+                
+                <div class="card-body">
+                    <p><strong>Idéaux:</strong> ${character.ideals}</p>
+                    <p><strong>Objectifs:</strong> ${character.objectives}</p>
+                </div>
+                
+                <div class="actions-list">
+                    <h5><i class="fas fa-sword"></i> Actions</h5>
+                    ${character.actions.map(action => `
+                        <div class="action-item">
+                            <span>${action.name}</span>
+                            <button class="dice-btn" onclick="rollAction('${character.id}', '${action.name}', '${action.dice}')">
+                                <i class="fas fa-dice-d20"></i>
+                            </button>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="mt-3">
+                    <button class="btn btn-info" onclick="editCharacter('${character.id}')">
+                        <i class="fas fa-edit"></i> Modifier
+                    </button>
+                    <button class="btn btn-warning" onclick="adjustHP('${character.id}')">
+                        <i class="fas fa-heart"></i> PV
+                    </button>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // ========================================
+        // DICE ROLLING SYSTEM
+        // ========================================
+        
+        function rollAction(characterId, actionName, diceExpression) {
+            const result = rollDice(diceExpression);
+            
+            // Show animated result
+            showDiceResult(result.total);
+            
+            // Log result
+            console.log(`${actionName}: ${diceExpression} = ${result.details} = ${result.total}`);
+            
+            // Update character if it's healing
+            const character = campaignData.characters[characterId];
+            const action = character.actions.find(a => a.name === actionName);
+            if (action && action.heal) {
+                character.hp.current = Math.min(character.hp.max, character.hp.current + result.total);
+                updateCharactersDisplay();
+                saveData();
+            }
+        }
+
+        function rollDice(expression) {
+            // Parse dice expression (e.g., "1d20+5", "2d6", "1d4+3")
+            const match = expression.match(/(\d+)d(\d+)([+\-]\d+)?/);
+            if (!match) return { total: 0, details: "Invalid dice expression" };
+            
+            const numDice = parseInt(match[1]);
+            const diceType = parseInt(match[2]);
+            const modifier = match[3] ? parseInt(match[3]) : 0;
+            
+            const rolls = [];
+            let total = modifier;
+            
+            for (let i = 0; i < numDice; i++) {
+                const roll = Math.floor(Math.random() * diceType) + 1;
+                rolls.push(roll);
+                total += roll;
+            }
+            
+            const details = `[${rolls.join(', ')}]${modifier !== 0 ? ` ${modifier > 0 ? '+' : ''}${modifier}` : ''}`;
+            
+            return { total, details };
+        }
+
+        function showDiceResult(result) {
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'dice-result';
+            resultDiv.textContent = result;
+            
+            document.body.appendChild(resultDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(resultDiv);
+            }, 800);
+        }
+
+        // ========================================
+        // MAP SYSTEM
+        // ========================================
+        
+        function updateMapPins(mapId) {
+            const mapData = campaignData.maps[mapId];
+            if (!mapData) return;
+            
+            const pinsContainer = document.getElementById('mapPins');
+            pinsContainer.innerHTML = '';
+            
+            mapData.pins.forEach((pin, index) => {
+                const pinDiv = document.createElement('div');
+                pinDiv.className = 'map-pin';
+                pinDiv.style.left = `${pin.x}%`;
+                pinDiv.style.top = `${pin.y}%`;
+                
+                pinDiv.innerHTML = `
+                    <div class="pin-tooltip">${pin.note}</div>
+                `;
+                
+                pinDiv.onclick = () => editMapPin(mapId, index);
+                
+                pinsContainer.appendChild(pinDiv);
+            });
+        }
+
+        function addMapPin() {
+            const mapContainer = document.querySelector('.map-container');
+            const mapImg = document.getElementById('mapImage');
+            
+            if (!mapImg.src) {
+                alert('Aucune carte sélectionnée');
+                return;
+            }
+            
+            // Get current map
+            const currentMapId = Object.keys(campaignData.maps).find(id => 
+                campaignData.maps[id].image === mapImg.src.split('/').pop()
+            );
+            
+            if (!currentMapId) return;
+            
+            const note = prompt('Note pour cette épingle:');
+            if (note) {
+                const pin = { x: 50, y: 50, note };
+                campaignData.maps[currentMapId].pins.push(pin);
+                updateMapPins(currentMapId);
+                saveData();
+            }
+        }
+
+        function editMapPin(mapId, pinIndex) {
+            const pin = campaignData.maps[mapId].pins[pinIndex];
+            const newNote = prompt('Modifier la note:', pin.note);
+            
+            if (newNote !== null) {
+                if (newNote === '') {
+                    // Delete pin
+                    campaignData.maps[mapId].pins.splice(pinIndex, 1);
+                } else {
+                    // Update pin
+                    pin.note = newNote;
+                }
+                updateMapPins(mapId);
+                saveData();
+            }
+        }
+
+        function clearMapPins() {
+            const currentNode = campaignData.structure[campaignData.currentNode];
+            if (currentNode && currentNode.mapId && campaignData.maps[currentNode.mapId]) {
+                if (confirm('Effacer toutes les notes de cette carte ?')) {
+                    campaignData.maps[currentNode.mapId].pins = [];
+                    updateMapPins(currentNode.mapId);
+                    saveData();
+                }
+            }
+        }
+
+        // ========================================
+        // QUEST SYSTEM
+        // ========================================
+        
+        function updateQuestsDisplay() {
+            const questsList = document.getElementById('questsList');
+            questsList.innerHTML = '';
+            
+            Object.values(campaignData.quests).forEach(quest => {
+                const card = createQuestCard(quest);
+                questsList.appendChild(card);
+            });
+        }
+
+        function createQuestCard(quest) {
+            const div = document.createElement('div');
+            div.className = 'card';
+            
+            const completedObjectives = quest.objectives.filter(obj => obj.completed).length;
+            const totalObjectives = quest.objectives.length;
+            const progress = (completedObjectives / totalObjectives) * 100;
+            
+            div.innerHTML = `
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-scroll"></i> ${quest.title}
+                        <span class="status-indicator status-${quest.status}"></span>
+                    </h3>
+                    <div class="card-actions">
+                        <button class="btn btn-info" onclick="editQuest('${quest.id}')">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>${quest.description}</p>
+                    <div class="mt-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <strong>Objectifs</strong>
+                            <span class="text-info">${completedObjectives}/${totalObjectives}</span>
+                        </div>
+                        <div class="hp-bar">
+                            <div class="hp-fill" style="width: ${progress}%; background: linear-gradient(90deg, var(--info-color), var(--success-color))"></div>
+                        </div>
+                        <ul class="mt-2">
+                            ${quest.objectives.map((obj, index) => `
+                                <li style="color: ${obj.completed ? 'var(--success-color)' : 'var(--text-color)'}">
+                                    <input type="checkbox" ${obj.completed ? 'checked' : ''} 
+                                           onchange="toggleObjective('${quest.id}', ${index})">
+                                    ${obj.text}
+                                    ${obj.completed ? '<i class="fas fa-check text-success ml-2"></i>' : ''}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        function toggleObjective(questId, objectiveIndex) {
+            const quest = campaignData.quests[questId];
+            if (quest && quest.objectives[objectiveIndex]) {
+                quest.objectives[objectiveIndex].completed = !quest.objectives[objectiveIndex].completed;
+                updateQuestsDisplay();
+                saveData();
+            }
+        }
+
+        // ========================================
+        // INVENTORY SYSTEM
+        // ========================================
+        
+        function updateInventoriesDisplay() {
+            updateNPCInventories();
+            updatePCInventories();
+        }
+
+        function updateNPCInventories() {
+            const container = document.getElementById('npcInventories');
+            container.innerHTML = '';
+            
+            Object.values(campaignData.characters)
+                .filter(char => char.type === 'pnj')
+                .forEach(npc => {
+                    const inventoryDiv = createInventoryDisplay(npc);
+                    container.appendChild(inventoryDiv);
+                });
+        }
+
+        function updatePCInventories() {
+            const container = document.getElementById('pcInventories');
+            container.innerHTML = '';
+            
+            Object.values(campaignData.characters)
+                .filter(char => char.type === 'pj')
+                .forEach(pc => {
+                    const inventoryDiv = createInventoryDisplay(pc);
+                    container.appendChild(inventoryDiv);
+                });
+        }
+
+        function createInventoryDisplay(character) {
+            const div = document.createElement('div');
+            div.className = 'card';
+            
+            div.innerHTML = `
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="fas ${character.type === 'pj' ? 'fa-user-tie' : 'fa-user'}"></i>
+                        ${character.name}
+                    </h4>
+                    <button class="btn btn-success btn-sm" onclick="addItem('${character.id}')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="inventory-grid">
+                    ${character.inventory.map((item, index) => `
+                        <div class="inventory-item" onclick="selectItem('${character.id}', ${index})" id="item-${character.id}-${index}">
+                            <div>${item}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            return div;
+        }
+
+        let selectedItems = [];
+
+        function selectItem(characterId, itemIndex) {
+            const itemId = `item-${characterId}-${itemIndex}`;
+            const itemElement = document.getElementById(itemId);
+            
+            const existingSelection = selectedItems.find(s => s.characterId === characterId && s.itemIndex === itemIndex);
+            
+            if (existingSelection) {
+                // Remove selection
+                selectedItems = selectedItems.filter(s => s !== existingSelection);
+                itemElement.classList.remove('selected');
+            } else {
+                // Add selection
+                selectedItems.push({ characterId, itemIndex });
+                itemElement.classList.add('selected');
+            }
+        }
+
+        function transferItems() {
+            if (selectedItems.length === 0) {
+                alert('Veuillez sélectionner des objets à transférer');
+                return;
+            }
+            
+            const targetId = prompt('ID du personnage destinataire:');
+            const targetChar = campaignData.characters[targetId];
+            
+            if (!targetChar) {
+                alert('Personnage destinataire non trouvé');
+                return;
+            }
+            
+            // Transfer items
+            selectedItems.forEach(selection => {
+                const sourceChar = campaignData.characters[selection.characterId];
+                const item = sourceChar.inventory[selection.itemIndex];
+                
+                // Remove from source
+                sourceChar.inventory.splice(selection.itemIndex, 1);
+                
+                // Add to target
+                targetChar.inventory.push(item);
+            });
+            
+            selectedItems = [];
+            updateInventoriesDisplay();
+            saveData();
+            
+            alert(`${selectedItems.length} objet(s) transféré(s) vers ${targetChar.name}`);
+        }
+
+        function addItem(characterId) {
+            const item = prompt('Nom de l\'objet à ajouter:');
+            if (item) {
+                campaignData.characters[characterId].inventory.push(item);
+                updateInventoriesDisplay();
+                saveData();
+            }
+        }
+
+        // ========================================
+        // CALENDAR SYSTEM
+        // ========================================
+        
+        function updateCalendarDisplay() {
+            const calendar = campaignData.calendar;
+            const grid = document.getElementById('calendarGrid');
+            const title = document.getElementById('calendarTitle');
+            
+            const monthNames = [
+                'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+            ];
+            
+            title.textContent = `${monthNames[calendar.currentDate.month - 1]} ${calendar.currentDate.year}`;
+            
+            // Generate calendar days
+            grid.innerHTML = '';
+            
+            // Day headers
+            const dayHeaders = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+            dayHeaders.forEach(day => {
+                const headerDiv = document.createElement('div');
+                headerDiv.style.fontWeight = 'bold';
+                headerDiv.style.textAlign = 'center';
+                headerDiv.style.padding = '10px';
+                headerDiv.style.background = 'var(--primary-color)';
+                headerDiv.textContent = day;
+                grid.appendChild(headerDiv);
+            });
+            
+            // Calendar days (simplified - just show current month)
+            for (let day = 1; day <= 30; day++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'calendar-day';
+                
+                if (day === calendar.currentDate.day) {
+                    dayDiv.classList.add('current');
+                }
+                
+                const dateKey = `${day}-${calendar.currentDate.month}-${calendar.currentDate.year}`;
+                if (calendar.events[dateKey]) {
+                    dayDiv.classList.add('has-event');
+                    dayDiv.title = calendar.events[dateKey].map(e => e.title).join(', ');
+                }
+                
+                dayDiv.textContent = day;
+                dayDiv.onclick = () => selectDate(day);
+                
+                grid.appendChild(dayDiv);
+            }
+        }
+
+        function selectDate(day) {
+            campaignData.calendar.currentDate.day = day;
+            updateCalendarDisplay();
+            saveData();
+        }
+
+        function changeMonth(delta) {
+            campaignData.calendar.currentDate.month += delta;
+            if (campaignData.calendar.currentDate.month > 12) {
+                campaignData.calendar.currentDate.month = 1;
+                campaignData.calendar.currentDate.year++;
+            } else if (campaignData.calendar.currentDate.month < 1) {
+                campaignData.calendar.currentDate.month = 12;
+                campaignData.calendar.currentDate.year--;
+            }
+            updateCalendarDisplay();
+            saveData();
+        }
+
+        function addEvent() {
+            const title = prompt('Titre de l\'événement:');
+            if (title) {
+                const { day, month, year } = campaignData.calendar.currentDate;
+                const dateKey = `${day}-${month}-${year}`;
+                
+                if (!campaignData.calendar.events[dateKey]) {
+                    campaignData.calendar.events[dateKey] = [];
+                }
+                
+                campaignData.calendar.events[dateKey].push({
+                    title,
+                    type: 'custom'
+                });
+                
+                updateCalendarDisplay();
+                saveData();
+            }
+        }
+
+        function shortRest() {
+            // Advance time by 1 hour
+            alert('Repos court effectué - 1 heure s\'est écoulée');
+            
+            // Restore some HP to all PCs
+            Object.values(campaignData.characters)
+                .filter(char => char.type === 'pj')
+                .forEach(pc => {
+                    const healAmount = Math.floor(pc.level / 2) + 1;
+                    pc.hp.current = Math.min(pc.hp.max, pc.hp.current + healAmount);
+                });
+            
+            updateCharactersDisplay();
+            saveData();
+        }
+
+        function longRest() {
+            // Advance time by 8 hours
+            alert('Repos long effectué - 8 heures se sont écoulées');
+            
+            // Restore full HP to all PCs
+            Object.values(campaignData.characters)
+                .filter(char => char.type === 'pj')
+                .forEach(pc => {
+                    pc.hp.current = pc.hp.max;
+                });
+            
+            updateCharactersDisplay();
+            saveData();
+        }
+
+        // ========================================
+        // MUSIC SYSTEM
+        // ========================================
+        
+        function initializeMusic() {
+            updateMusicContext();
+        }
+
+        function updateMusicContext() {
+            const contextPath = campaignData.currentPath.join('/');
+            let musicPath = null;
+            
+            // Find best matching music path
+            for (let i = campaignData.currentPath.length; i > 0; i--) {
+                const testPath = campaignData.currentPath.slice(0, i).join('/');
+                if (campaignData.music.musicPaths[testPath]) {
+                    musicPath = testPath;
+                    break;
+                }
+            }
+            
+            if (musicPath && musicPath !== campaignData.music.currentContext) {
+                campaignData.music.currentContext = musicPath;
+                playContextualMusic();
+            }
+        }
+
+        function playContextualMusic() {
+            const musicFiles = campaignData.music.musicPaths[campaignData.music.currentContext];
+            if (!musicFiles || musicFiles.length === 0) return;
+            
+            // Stop current music
+            if (currentSound) {
+                currentSound.stop();
+                currentSound.unload();
+            }
+            
+            // Play random track from context
+            const randomTrack = musicFiles[Math.floor(Math.random() * musicFiles.length)];
+            
+            currentSound = new Howl({
+                src: [randomTrack],
+                html5: true,
+                loop: false,
+                volume: campaignData.music.volume,
+                onend: () => {
+                    // Auto-play next track after a short delay
+                    setTimeout(() => {
+                        if (musicEnabled) playContextualMusic();
+                    }, 2000);
+                }
+            });
+            
+            if (musicEnabled) {
+                currentSound.play();
+                campaignData.music.currentTrack = randomTrack;
+                console.log(`🎵 Now playing: ${randomTrack} (Context: ${campaignData.music.currentContext})`);
+            }
+        }
+
+        function toggleMusic() {
+            musicEnabled = !musicEnabled;
+            const button = document.getElementById('musicToggle');
+            
+            if (musicEnabled) {
+                button.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                if (!currentSound || !currentSound.playing()) {
+                    playContextualMusic();
+                }
+            } else {
+                button.innerHTML = '<i class="fas fa-play"></i> Lecture';
+                if (currentSound) {
+                    currentSound.pause();
+                }
+            }
+        }
+
+        function setMusicVolume(volume) {
+            campaignData.music.volume = volume / 100;
+            if (currentSound) {
+                currentSound.volume(campaignData.music.volume);
+            }
+            saveData();
+        }
+
+        // ========================================
+        // MODAL SYSTEM
+        // ========================================
+        
+        function showModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = content;
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        }
+
+        function showAddModal() {
+            const content = `
+                <div class="form-group">
+                    <label class="form-label">Type d'élément</label>
+                    <select class="form-select" id="addType">
+                        <option value="lieu">Lieu</option>
+                        <option value="pnj">PNJ</option>
+                        <option value="objet">Objet</option>
+                        <option value="quete">Quête</option>
+                        <option value="evenement">Événement</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nom</label>
+                    <input type="text" class="form-input" id="addName">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-input form-textarea" id="addDescription"></textarea>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-success" onclick="addElement()">Ajouter</button>
+                    <button class="btn" onclick="closeModal()">Annuler</button>
+                </div>
+            `;
+            
+            showModal('Ajouter un élément', content);
+        }
+
+        function addElement() {
+            const type = document.getElementById('addType').value;
+            const name = document.getElementById('addName').value;
+            const description = document.getElementById('addDescription').value;
+            
+            if (!name.trim()) {
+                alert('Veuillez saisir un nom');
+                return;
+            }
+            
+            // Generate unique ID
+            const id = name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+            
+            // Add to appropriate data structure
+            if (type === 'lieu' || type === 'objet') {
+                campaignData.structure[id] = {
+                    id,
+                    label: name,
+                    type,
+                    icon: type === 'lieu' ? 'fas fa-map-marker-alt' : 'fas fa-box',
+                    description,
+                    children: [],
+                    mapId: null
+                };
+                
+                // Add to current node's children
+                const currentNode = campaignData.structure[campaignData.currentNode];
+                if (currentNode) {
+                    currentNode.children.push(id);
+                }
+                
+                generateNavigation();
+            } else if (type === 'quete') {
+                campaignData.quests[id] = {
+                    id,
+                    title: name,
+                    description,
+                    status: 'active',
+                    objectives: []
+                };
+                updateQuestsDisplay();
+            }
+            
+            closeModal();
+            saveData();
+        }
+
+        // Character editing functions
+        function editCharacter(characterId) {
+            const character = campaignData.characters[characterId];
+            const content = `
+                <div class="form-group">
+                    <label class="form-label">Nom</label>
+                    <input type="text" class="form-input" id="editName" value="${character.name}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Idéaux</label>
+                    <textarea class="form-input form-textarea" id="editIdeals">${character.ideals}</textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Objectifs</label>
+                    <textarea class="form-input form-textarea" id="editObjectives">${character.objectives}</textarea>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-success" onclick="saveCharacterEdit('${characterId}')">Sauvegarder</button>
+                    <button class="btn" onclick="closeModal()">Annuler</button>
+                </div>
+            `;
+            
+            showModal(`Modifier ${character.name}`, content);
+        }
+
+        function saveCharacterEdit(characterId) {
+            const character = campaignData.characters[characterId];
+            character.name = document.getElementById('editName').value;
+            character.ideals = document.getElementById('editIdeals').value;
+            character.objectives = document.getElementById('editObjectives').value;
+            
+            updateCharactersDisplay();
+            closeModal();
+            saveData();
+        }
+
+        function adjustHP(characterId) {
+            const character = campaignData.characters[characterId];
+            const adjustment = prompt(`PV actuels: ${character.hp.current}/${character.hp.max}\nAjustement (+/- valeur):`, '0');
+            
+            if (adjustment !== null) {
+                const value = parseInt(adjustment);
+                if (!isNaN(value)) {
+                    character.hp.current = Math.max(0, Math.min(character.hp.max, character.hp.current + value));
+                    updateCharactersDisplay();
+                    saveData();
+                }
+            }
+        }
+
+        // ========================================
+        // DATA MANAGEMENT
+        // ========================================
+        
+        function saveData() {
+            try {
+                localStorage.setItem('campaignData_coffre_fort', JSON.stringify(campaignData));
+                console.log('✅ Données sauvegardées');
+            } catch (e) {
+                console.error('❌ Erreur de sauvegarde:', e);
+                alert('Erreur lors de la sauvegarde des données');
+            }
+        }
+
+        function loadData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        campaignData = { ...campaignData, ...data };
+                        
+                        // Reinitialize everything
+                        generateNavigation();
+                        showContent(campaignData.currentNode);
+                        updateMusicContext();
+                        
+                        alert('✅ Données chargées avec succès');
+                    } catch (err) {
+                        alert('❌ Erreur lors du chargement du fichier');
+                        console.error(err);
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // Auto-save every 30 seconds
+        setInterval(saveData, 30000);
+
+        // Save on page unload
+        window.addEventListener('beforeunload', saveData);
+
+        // ========================================
+        // UTILITY FUNCTIONS
+        // ========================================
+        
+        // Click outside modal to close
+        document.getElementById('modalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+            
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                saveData();
+            }
+        });
+
+        console.log('🎮 Gestionnaire de Campagne - Le Coffre-fort oublié initialisé');
+        console.log('🎵 Système de musique contextuel activé');
+        console.log('💾 Sauvegarde automatique activée');
+    </script>
+</body>
+</html>

@@ -1,0 +1,1291 @@
+{
+  "name": "Le Coffre-fort oublié - Version Complète",
+  "description": "Les Gardiens de l'Aurore - Campagne D&D 2024 avec tous objets, monstres et énigmes",
+  "version": "2.0.0",
+  "currentNode": "campagne",
+  "currentPath": ["campagne"],
+  
+  "structure": {
+    "campagne": {
+      "id": "campagne",
+      "label": "Le Coffre-fort oublié",
+      "type": "campagne",
+      "icon": "fas fa-dragon",
+      "description": "Une petite sorcière à l'aura dorée — Petite Lumière — peut guérir une malédiction rampante qui frappe Pré-au-Lard. Pour la sauver et sauver le village, il faut récupérer, dans un ancien coffre-fort de Gringotts effondré, la Relique de l'Aube.",
+      "children": ["acte1", "acte2", "acte3"],
+      "mapId": "carte_donjon_principale"
+    },
+    "acte1": {
+      "id": "acte1",
+      "label": "Acte I - Le Goulet",
+      "type": "acte",
+      "icon": "fas fa-door-open",
+      "description": "Sécuriser les dalles, désamorcer 1 piège rune. Navigation depuis l'escalier en spirale jusqu'au hall principal.",
+      "children": ["spirale", "dalles_murmurantes", "couloir_echos"],
+      "mapId": "carte_donjon_principale"
+    },
+    "spirale": {
+      "id": "spirale",
+      "label": "Escalier en spirale",
+      "type": "lieu",
+      "icon": "fas fa-stairs",
+      "description": "Point d'arrivée du Portoloin fourni par Gringotts. Des runes gobelines jalonnent les marches.",
+      "children": [],
+      "mapId": "carte_donjon_principale",
+      "image": "images/puzzles/Les_Dalles_Murmurantes.png"
+    },
+    "dalles_murmurantes": {
+      "id": "dalles_murmurantes",
+      "label": "Les Dalles Murmurantes",
+      "type": "enigme",
+      "icon": "fas fa-puzzle-piece",
+      "description": "Hall principal avec dalles piégées qui murmurent des indices en gobelin. Nécessite de déchiffrer la séquence correcte pour passer.",
+      "children": ["echo_apre"],
+      "mapId": "carte_donjon_principale",
+      "image": "images/puzzles/Les_Dalles_Murmurantes.png",
+      "enigme": {
+        "titre": "Les Dalles Murmurantes",
+        "difficulte": "Moyen",
+        "solution": "Marcher selon la séquence : Nord, Est, Sud, Ouest, Centre",
+        "indices": [
+          "Les murmures gobelin répètent : 'Norg, Ast, Sulm, Vest, Kront'",
+          "Une gravure montre les directions cardinales",
+          "Le centre résonne d'un écho particulier quand on y arrive au bon moment"
+        ],
+        "piege": "Dalle qui s'effondre (2d6 dégâts de chute) si mauvaise séquence",
+        "recompense": "Passage vers les salles suivantes + 1 Potion de Soin"
+      }
+    },
+    "echo_apre": {
+      "id": "echo_apre",
+      "label": "Écho-Âpre, Gardien du Hall",
+      "type": "rencontre",
+      "icon": "fas fa-ghost",
+      "description": "Un esprit élémentaire du son qui protège l'entrée du coffre-fort. Il teste les intrus avec des énigmes sonores.",
+      "children": [],
+      "mapId": "carte_donjon_principale",
+      "monster": "echo_apre"
+    },
+    "couloir_echos": {
+      "id": "couloir_echos",
+      "label": "Le Couloir aux Échos",
+      "type": "enigme",
+      "icon": "fas fa-volume-up",
+      "description": "Couloir mystérieux où chaque son est amplifié et déformé, révélant des secrets cachés.",
+      "children": ["balance_estimeur"],
+      "mapId": "carte_donjon_principale",
+      "image": "images/puzzles/Le_Couloir_aux_Échos.png",
+      "enigme": {
+        "titre": "Le Couloir aux Échos",
+        "difficulte": "Facile",
+        "solution": "Chanter la mélodie gobeline pour ouvrir le passage secret",
+        "indices": [
+          "Les échos répètent une mélodie spécifique",
+          "Des partitions gravées dans le mur",
+          "L'écho devient harmonieux quand la bonne note est chantée"
+        ],
+        "recompense": "Passage secret vers la Balance de l'Estimeur + informations sur Nackrag"
+      }
+    },
+    "acte2": {
+      "id": "acte2",
+      "label": "Acte II - Les Mystères de l'Estimeur",
+      "type": "acte",
+      "icon": "fas fa-balance-scale",
+      "description": "Résoudre les énigmes de Nackrag et découvrir les secrets du coffre-fort pour obtenir les clefs magiques.",
+      "children": ["balance_estimeur", "fontaine_reflets", "coffret_trois_clefs"],
+      "mapId": "carte_donjon_principale"
+    },
+    "balance_estimeur": {
+      "id": "balance_estimeur",
+      "label": "La Balance de l'Estimeur",
+      "type": "enigme",
+      "icon": "fas fa-balance-scale",
+      "description": "La balance magique de Nackrag qui teste la valeur réelle des objets et des intentions.",
+      "children": ["nereide_siphon"],
+      "mapId": "carte_donjon_principale",
+      "image": "images/puzzles/La_Balance_de_l_Estimeur.png",
+      "objet": "balance_nackrag",
+      "enigme": {
+        "titre": "L'Épreuve de la Vraie Valeur",
+        "difficulte": "Difficile",
+        "solution": "Placer un objet sans valeur monétaire mais riche en souvenirs personnels",
+        "indices": [
+          "La balance refuse l'or et les gemmes",
+          "Nackrag murmure : 'Ce qui compte n'a pas de prix'",
+          "Des objets personnels des gobelins parsèment la salle"
+        ],
+        "piege": "Piège à paralysie si tentative de triche (Jet de CON DD 15)",
+        "recompense": "Balance de Nackrag l'Estimeur + première clef d'accès"
+      }
+    },
+    "nereide_siphon": {
+      "id": "nereide_siphon",
+      "label": "Néréide de Siphon Azur",
+      "type": "rencontre",
+      "icon": "fas fa-water",
+      "description": "Créature aquatique qui garde les sources d'eau magique du coffre-fort. Elle peut être apaisée plutôt que combattue.",
+      "children": [],
+      "mapId": "carte_donjon_principale",
+      "monster": "nereide_siphon"
+    },
+    "fontaine_reflets": {
+      "id": "fontaine_reflets",
+      "label": "La Fontaine des Reflets",
+      "type": "enigme",
+      "icon": "fas fa-magic",
+      "description": "Fontaine mystique qui montre la vérité derrière les illusions et révèle les intentions cachées.",
+      "children": ["myceliade_murmurant"],
+      "mapId": "carte_donjon_principale",
+      "image": "images/puzzles/La_Fontaine_des_Reflets.png",
+      "enigme": {
+        "titre": "Les Reflets de Vérité",
+        "difficulte": "Moyen",
+        "solution": "Regarder son reflet en pensant à sa motivation la plus pure",
+        "indices": [
+          "Le reflet change selon les pensées de celui qui regarde",
+          "L'eau devient claire quand les intentions sont nobles",
+          "Petite Lumière voit son aura dorée renforcée"
+        ],
+        "recompense": "Perle de la Marée Éveillée + vision du chemin vers le coffret"
+      }
+    },
+    "myceliade_murmurant": {
+      "id": "myceliade_murmurant",
+      "label": "Mycéliade Murmurant",
+      "type": "rencontre",
+      "icon": "fas fa-seedling",
+      "description": "Créature champignon intelligente qui communique par spores et chuchotements. Gardienne des secrets de la nature souterraine.",
+      "children": [],
+      "mapId": "carte_donjon_principale",
+      "monster": "myceliade_murmurant"
+    },
+    "acte3": {
+      "id": "acte3",
+      "label": "Acte III - Le Coffret aux Trois Clefs",
+      "type": "acte",
+      "icon": "fas fa-treasure-chest",
+      "description": "L'épreuve finale pour obtenir la Relique de l'Aube et affronter les derniers gardiens du coffre-fort.",
+      "children": ["coffret_trois_clefs", "sablier_fendu", "confrontation_finale"],
+      "mapId": "carte_donjon_principale"
+    },
+    "coffret_trois_clefs": {
+      "id": "coffret_trois_clefs",
+      "label": "Le Coffret aux Trois Clefs",
+      "type": "enigme",
+      "icon": "fas fa-key",
+      "description": "Le coffret légendaire qui contient la Relique de l'Aube, protégé par trois serrures magiques correspondant aux épreuves précédentes.",
+      "children": ["zelateur_lampe"],
+      "mapId": "carte_donjon_principale",
+      "image": "images/puzzles/Le+Coffret_aux_Trois_Clefs.png",
+      "objet": "relique_aube",
+      "enigme": {
+        "titre": "L'Ouverture Tripartite",
+        "difficulte": "Très Difficile",
+        "solution": "Utiliser les trois clefs obtenues dans l'ordre : Valeur, Vérité, Temps",
+        "indices": [
+          "Trois serrures correspondent aux trois vertus gobelines",
+          "L'ordre d'insertion des clefs importe",
+          "Petite Lumière et Gardien des Secrets doivent agir ensemble"
+        ],
+        "piege": "Explosion de lumière aveuglante si mauvais ordre (Jet de CON DD 16)",
+        "recompense": "Relique de l'Aube + révélation de la présence du dragon"
+      }
+    },
+    "zelateur_lampe": {
+      "id": "zelateur_lampe",
+      "label": "Zélateur de la Lampe Sombre",
+      "type": "rencontre",
+      "icon": "fas fa-user-ninja",
+      "description": "Gardien fanatique qui protège le coffret. Peut être convaincu de se joindre à la quête si approché avec sagesse.",
+      "children": [],
+      "mapId": "carte_donjon_principale",
+      "monster": "zelateur_lampe"
+    },
+    "sablier_fendu": {
+      "id": "sablier_fendu",
+      "label": "Le Sablier Fendu",
+      "type": "enigme",
+      "icon": "fas fa-hourglass-half",
+      "description": "Artefact temporel ancien qui contrôle le temps dans le coffre-fort. Sa réparation est cruciale pour la fuite.",
+      "children": [],
+      "mapId": "carte_donjon_principale",
+      "image": "images/puzzles/Le_Sablier_Fendu.png",
+      "enigme": {
+        "titre": "La Réparation Temporelle",
+        "difficulte": "Très Difficile",
+        "solution": "Utiliser la magie de Petite Lumière pour réparer la fissure temporelle",
+        "indices": [
+          "Le temps ralentit autour du sablier",
+          "La fissure pulse en rythme avec le cœur de Petite Lumière",
+          "Des éclats de temps cristallisé parsèment le sol"
+        ],
+        "recompense": "Contrôle temporel (bonus de temps pour la fuite) + Orbe de Comptage à Rebours"
+      }
+    },
+    "confrontation_finale": {
+      "id": "confrontation_finale",
+      "label": "Confrontation avec les Derniers Gardiens",
+      "type": "rencontre",
+      "icon": "fas fa-dragon",
+      "description": "Face-à-face final avec les créatures les plus puissantes du coffre-fort avant de pouvoir s'échapper avec la Relique.",
+      "children": [],
+      "mapId": "carte_donjon_principale",
+      "monsters": ["draket_vert", "diablotin_crachin", "gelee_contrebande", "chien_bassin", "gringoco"]
+    }
+  },
+
+  "characters": {
+    "petite_lumiere": {
+      "id": "petite_lumiere",
+      "name": "Petite Lumière",
+      "type": "pj",
+      "class": "Moine (Voie de la Miséricorde)",
+      "race": "Drakéide d'or",
+      "background": "Acolyte",
+      "level": 1,
+      "hp": { "current": 10, "max": 10 },
+      "stats": { "ca": 13, "for": 12, "dex": 16, "con": 13, "int": 11, "sag": 16, "cha": 14 },
+      "ideals": "Protéger les innocents et apporter la guérison à tous ceux qui souffrent",
+      "objectives": "Activer la Relique de l'Aube pour sauver Pré-au-Lard de la malédiction",
+      "image": "images/characters/petite_lumiere.jpg",
+      "actions": [
+        { "name": "Attaque à mains nues", "dice": "1d20+5", "damage": "1d4+3", "type": "Mêlée" },
+        { "name": "Souffle d'or (recharge 5-6)", "dice": "1d20+5", "damage": "2d6", "type": "Sauvegarde CON DD 13" },
+        { "name": "Contact guérisseur (1/repos long)", "dice": "1d4", "heal": true, "type": "Soin" },
+        { "name": "Mains apaisantes (niveau 1)", "dice": "1d4", "heal": true, "type": "Soin" }
+      ],
+      "inventory": ["Bâton de marche", "Kit d'herboriste", "Symbole sacré doré", "Potions de soin (3)", "Vêtements de moine", "Sac d'aumônes"],
+      "spells": [
+        { "name": "Lumière", "level": 0, "school": "Évocation", "uses": "Illimité" },
+        { "name": "Réparation", "level": 0, "school": "Transmutation", "uses": "Illimité" }
+      ]
+    },
+    "bouclier_vivant": {
+      "id": "bouclier_vivant", 
+      "name": "Bouclier Vivant",
+      "type": "pj",
+      "class": "Paladin (Serment des Anciens)",
+      "race": "Goliath des collines",
+      "background": "Noble",
+      "level": 1,
+      "hp": { "current": 12, "max": 12 },
+      "stats": { "ca": 18, "for": 16, "dex": 10, "con": 14, "int": 11, "sag": 12, "cha": 15 },
+      "ideals": "Protéger les faibles et maintenir l'équilibre naturel",
+      "objectives": "Servir de bouclier à l'équipe et guider Petite Lumière vers son destin",
+      "image": "images/characters/bouclier_vivant.jpg",
+      "actions": [
+        { "name": "Attaque d'épée longue", "dice": "1d20+5", "damage": "1d8+3", "type": "Mêlée" },
+        { "name": "Châtiment divin (1/repos long)", "dice": "1d20+5", "damage": "1d8+3+1d8", "type": "Mêlée" },
+        { "name": "Imposition des mains", "dice": "1d4", "heal": true, "type": "Soin" },
+        { "name": "Sens divin (3/repos long)", "dice": "1d20+2", "type": "Détection", "range": "18m" }
+      ],
+      "inventory": ["Épée longue", "Bouclier avec armoiries", "Armure de mailles", "Trousse de noble", "Sceau familial", "Corde de soie (15m)"],
+      "spells": []
+    },
+    "oeil_percant": {
+      "id": "oeil_percant",
+      "name": "Œil Perçant", 
+      "type": "pj",
+      "class": "Rôdeur (Traqueur des ténèbres)",
+      "race": "Elfe sylvestre",
+      "background": "Artiste",
+      "level": 1,
+      "hp": { "current": 11, "max": 11 },
+      "stats": { "ca": 14, "for": 13, "dex": 16, "con": 12, "int": 14, "sag": 15, "cha": 11 },
+      "ideals": "Préserver l'équilibre entre civilisation et nature",
+      "objectives": "Éliminer les créatures corrompues et assurer la sécurité de l'équipe",
+      "image": "images/characters/oeil_percant.jpg",
+      "actions": [
+        { "name": "Attaque d'arc long", "dice": "1d20+5", "damage": "1d8+3", "type": "Distance", "range": "45/180m" },
+        { "name": "Tir de précision", "dice": "1d20+7", "damage": "1d8+3", "type": "Distance" },
+        { "name": "Marque du chasseur", "dice": "1d6", "damage": "1d6", "type": "Bonus" },
+        { "name": "Ennemi juré : Morts-vivants", "dice": "1d20+7", "damage": "1d8+5", "type": "Distance" }
+      ],
+      "inventory": ["Arc long elfique", "Carquois (30 flèches)", "Armure de cuir renforcé", "Kit d'artiste", "Flûte de pan", "Grimoire de pistage"],
+      "spells": []
+    },
+    "ombre_dansante": {
+      "id": "ombre_dansante",
+      "name": "Ombre Dansante",
+      "type": "pj", 
+      "class": "Roublard (Psionique)",
+      "race": "Elfe noir",
+      "background": "Criminel",
+      "level": 1,
+      "hp": { "current": 9, "max": 9 },
+      "stats": { "ca": 13, "for": 10, "dex": 16, "con": 12, "int": 15, "sag": 13, "cha": 14 },
+      "ideals": "Utiliser ses talents d'infiltration pour le bien",
+      "objectives": "Racheter son passé criminel en aidant l'équipe",
+      "image": "images/characters/ombre_dansante.jpg",
+      "actions": [
+        { "name": "Attaque de dague", "dice": "1d20+5", "damage": "1d4+3", "type": "Mêlée/Distance" },
+        { "name": "Attaque sournoise", "dice": "1d20+5", "damage": "1d4+3+1d6", "type": "Spécial" },
+        { "name": "Lame psionique (3/repos long)", "dice": "1d20+5", "damage": "1d4+3+1d6", "type": "Psychique" },
+        { "name": "Talent psionique", "dice": "1d6", "type": "Bonus aux compétences" }
+      ],
+      "inventory": ["Dagues empoisonnées (2)", "Outils de voleur", "Armure de cuir sombre", "Contacts criminels", "Passe-partout universel", "Cape d'ombres"],
+      "spells": []
+    },
+    "gardien_secrets": {
+      "id": "gardien_secrets",
+      "name": "Gardien des Secrets",
+      "type": "pj",
+      "class": "Magicien (Divination)",
+      "race": "Drakéide d'argent", 
+      "background": "Charlatan",
+      "level": 1,
+      "hp": { "current": 7, "max": 7 },
+      "stats": { "ca": 11, "for": 8, "dex": 14, "con": 13, "int": 16, "sag": 12, "cha": 15 },
+      "ideals": "Chercher la vérité cachée et partager les connaissances",
+      "objectives": "Utiliser la divination pour guider l'équipe vers le succès",
+      "image": "images/characters/gardien_secrets.jpg",
+      "actions": [
+        { "name": "Attaque de dague", "dice": "1d20+2", "damage": "1d4", "type": "Mêlée/Distance" },
+        { "name": "Sort de niveau 1", "dice": "1d20+5", "damage": "variable", "type": "Magique" },
+        { "name": "Portent (2/jour)", "dice": "2d20", "special": "Remplace un jet de dé", "type": "Divination" },
+        { "name": "Souffle de froid (recharge 5-6)", "dice": "CON DD 12", "damage": "2d6", "type": "Sauvegarde CON" }
+      ],
+      "inventory": ["Grimoire ancien", "Focaliseur arcanique (orbe)", "Outils de charlatan", "Parchemins vierges", "Encre d'argent", "Boule de cristal"],
+      "spells": [
+        { "name": "Projectile magique", "level": 1, "school": "Évocation", "damage": "3×(1d4+1)", "uses": "2/jour" },
+        { "name": "Détection de la magie", "level": 1, "school": "Divination", "uses": "2/jour", "ritual": true },
+        { "name": "Identification", "level": 1, "school": "Divination", "uses": "2/jour", "ritual": true },
+        { "name": "Prestidigitation", "level": 0, "school": "Transmutation", "uses": "Illimité" },
+        { "name": "Lumières dansantes", "level": 0, "school": "Évocation", "uses": "Illimité" },
+        { "name": "Main du mage", "level": 0, "school": "Invocation", "uses": "Illimité" }
+      ]
+    },
+    "nackrag": {
+      "id": "nackrag",
+      "name": "Nackrag l'Estimeur",
+      "type": "pnj",
+      "class": "Gobelin Sage",
+      "race": "Gobelin ancien",
+      "background": "Érudit de Gringotts",
+      "level": 5,
+      "hp": { "current": 27, "max": 27 },
+      "stats": { "ca": 15, "for": 8, "dex": 14, "con": 12, "int": 18, "sag": 15, "cha": 13 },
+      "ideals": "Préserver les connaissances gobelines ancestrales",
+      "objectives": "Aider les héros à récupérer la relique sans détruire l'héritage gobelin",
+      "image": "images/characters/nackrag.jpg",
+      "actions": [
+        { "name": "Attaque de bâton runique", "dice": "1d20+2", "damage": "1d6+1", "type": "Mêlée magique" },
+        { "name": "Évaluation supérieure", "dice": "1d20+8", "special": "Révèle la vraie valeur", "type": "Investigation" },
+        { "name": "Sort mineur gobelin", "dice": "1d20+7", "damage": "1d8", "type": "Magique" },
+        { "name": "Connaissance ancestrale", "dice": "1d20+8", "type": "Histoire/Arcanes" }
+      ],
+      "inventory": ["Balance de Nackrag l'Estimeur", "Cartes détaillées du coffre-fort", "Livres de lois gobelines", "Clefs de sécurité", "Gemmes d'évaluation", "Sac de pièces d'or"],
+      "spells": [
+        { "name": "Identification", "level": 1, "uses": "5/jour" },
+        { "name": "Détection des objets", "level": 2, "uses": "3/jour" },
+        { "name": "Localiser un objet", "level": 2, "uses": "3/jour" }
+      ]
+    }
+  },
+
+  "monsters": {
+    "echo_apre": {
+      "id": "echo_apre",
+      "name": "Écho-Âpre",
+      "type": "Élémentaire",
+      "size": "Moyen",
+      "alignment": "Neutre",
+      "ca": 14,
+      "hp": { "current": 45, "max": 45 },
+      "speed": "9m, vol 18m (vol stationnaire)",
+      "stats": { "for": 10, "dex": 18, "con": 14, "int": 12, "sag": 16, "cha": 15 },
+      "saves": { "sag": 5, "cha": 4 },
+      "skills": { "perception": 5, "intuition": 5 },
+      "resistances": ["Foudre", "Tonnerre"],
+      "immunities": ["Poison"],
+      "immunities_conditions": ["Empoisonné"],
+      "senses": "Vision dans le noir 18m, Perception passive 15",
+      "languages": "Aérien, Gobelin",
+      "challenge": "2 (450 XP)",
+      "image": "images/monsters/Écho‑Âpre.png",
+      "description": "Esprit élémentaire du son qui protège l'entrée du coffre-fort. Ses murmures résonnent étrangement dans les couloirs.",
+      "special_abilities": [
+        {
+          "name": "Murmures Désorientants",
+          "description": "Toute créature commençant son tour dans un rayon de 6m doit réussir un jet de sauvegarde de Sagesse DD 13 ou être charmée pendant 1 round."
+        },
+        {
+          "name": "Forme Sonore",
+          "description": "L'Écho-Âpre peut traverser l'espace de toute créature et vice versa. Il ne peut pas terminer son tour dans l'espace d'une autre créature."
+        }
+      ],
+      "actions": [
+        {
+          "name": "Attaques multiples",
+          "description": "L'Écho-Âpre effectue deux attaques de Lame Sonore."
+        },
+        {
+          "name": "Lame Sonore",
+          "attack_bonus": 6,
+          "damage": "1d8+4 dégâts de tonnerre",
+          "reach": "1,50m",
+          "description": "Attaque de mêlée avec une onde sonore tranchante."
+        },
+        {
+          "name": "Cri Assourdissant (Recharge 5-6)",
+          "save": "Constitution DD 13",
+          "damage": "3d6 dégâts de tonnerre",
+          "effect": "Les créatures ratées sont assourdies pendant 1 minute",
+          "range": "Cône de 4,50m",
+          "description": "Émet un cri perçant qui peut assourdir les ennemis."
+        }
+      ],
+      "tactics": "L'Écho-Âpre préfère rester en vol et harceler avec ses cris. Il teste d'abord les intentions des intrus avant de devenir hostile.",
+      "treasure": ["Cristal d'écho (300 po)", "Potion de résistance au tonnerre"],
+      "lore": "Ancien gardien loyal aux gobelins, il peut être apaisé en démontrant le respect des traditions gobelines."
+    },
+    
+    "nereide_siphon": {
+      "id": "nereide_siphon", 
+      "name": "Néréide de Siphon Azur",
+      "type": "Fée aquatique",
+      "size": "Moyen",
+      "alignment": "Chaotique Neutre",
+      "ca": 15,
+      "hp": { "current": 58, "max": 58 },
+      "speed": "9m, nage 12m",
+      "stats": { "for": 12, "dex": 16, "con": 15, "int": 13, "sag": 17, "cha": 18 },
+      "saves": { "sag": 6, "cha": 7 },
+      "skills": { "persuasion": 7, "tromperie": 7, "perception": 6 },
+      "resistances": ["Froid"],
+      "senses": "Vision dans le noir 18m, Perception passive 16",
+      "languages": "Aquatique, Commun, Elfique",
+      "challenge": "3 (700 XP)",
+      "image": "images/monsters/Néréide_de_Siphon_Azur.png",
+      "description": "Créature aquatique élégante aux cheveux bleu azur qui garde les sources magiques du coffre-fort.",
+      "special_abilities": [
+        {
+          "name": "Amphibie",
+          "description": "La néréide peut respirer l'air et l'eau."
+        },
+        {
+          "name": "Magie innée",
+          "description": "Caractéristique d'incantation : Charisme (DD 15). Peut lancer : Charme-personne (3/jour), Création d'eau (à volonté), Contrôle de l'eau (1/jour)."
+        },
+        {
+          "name": "Beauté Envoûtante",
+          "description": "Toute créature humanoïde qui commence son tour dans un rayon de 9m et peut voir la néréide doit réussir un jet de Sagesse DD 15 ou être charmée pendant 1 round."
+        }
+      ],
+      "actions": [
+        {
+          "name": "Attaques multiples",
+          "description": "La néréide effectue deux attaques de Caresse Siphonnante."
+        },
+        {
+          "name": "Caresse Siphonnante",
+          "attack_bonus": 6,
+          "damage": "1d6+3 dégâts nécrotiques",
+          "reach": "1,50m",
+          "effect": "La néréide récupère la moitié des dégâts infligés en points de vie",
+          "description": "Toucher qui draine l'énergie vitale."
+        },
+        {
+          "name": "Siphon d'Eau (Recharge 5-6)",
+          "save": "Constitution DD 15",
+          "damage": "4d6 dégâts nécrotiques",
+          "effect": "Réduit la vitesse de moitié pendant 1 minute",
+          "range": "9m",
+          "description": "Aspire l'eau du corps de la cible à distance."
+        }
+      ],
+      "tactics": "La néréide préfère charmer ses adversaires plutôt que les combattre. Elle peut être convaincue d'aider si on lui promet de purifier les eaux polluées.",
+      "treasure": ["Perle de la Marée Éveillée", "Flacon d'eau bénite (3)", "Anneau de nage"],
+      "lore": "Ancienne protectrice des eaux pures, elle souffre de voir les sources du coffre-fort souillées par la magie draconique."
+    },
+
+    "myceliade_murmurant": {
+      "id": "myceliade_murmurant",
+      "name": "Mycéliade Murmurant", 
+      "type": "Plante",
+      "size": "Moyen",
+      "alignment": "Neutre Bon",
+      "ca": 13,
+      "hp": { "current": 52, "max": 52 },
+      "speed": "6m",
+      "stats": { "for": 14, "dex": 11, "con": 16, "int": 15, "sag": 18, "cha": 12 },
+      "saves": { "sag": 7, "cha": 4 },
+      "skills": { "médecine": 7, "nature": 5, "perception": 7 },
+      "resistances": ["Perçant"],
+      "immunities": ["Poison"],
+      "immunities_conditions": ["Empoisonné"],
+      "senses": "Vision aveugle 9m, Perception passive 17",
+      "languages": "Commun, Sylvestre (par télépathie 18m)",
+      "challenge": "2 (450 XP)",
+      "image": "images/monsters/Mycéliade_Murmurant.png",
+      "description": "Créature champignon intelligente couverte de spores luminescentes qui murmurent des secrets anciens.",
+      "special_abilities": [
+        {
+          "name": "Spores Communicantes",
+          "description": "Peut communiquer télépathiquement avec toute créature dans un rayon de 18m qui parle au moins une langue."
+        },
+        {
+          "name": "Régénération Fongique",
+          "description": "Récupère 5 points de vie au début de son tour si elle a au moins 1 point de vie et se trouve dans une zone d'humidité."
+        },
+        {
+          "name": "Réseau Mycorhizien",
+          "description": "Connaît l'emplacement de toute créature en contact avec le sol dans un rayon de 60m."
+        }
+      ],
+      "actions": [
+        {
+          "name": "Attaques multiples",
+          "description": "La mycéliade effectue deux attaques de Fouet Fongique."
+        },
+        {
+          "name": "Fouet Fongique",
+          "attack_bonus": 5,
+          "damage": "1d6+2 dégâts contondants plus 1d4 dégâts de poison",
+          "reach": "3m",
+          "description": "Attaque avec ses vrilles fongiques empoisonnées."
+        },
+        {
+          "name": "Nuage de Spores (Recharge 5-6)",
+          "save": "Constitution DD 14",
+          "damage": "2d6 dégâts de poison",
+          "effect": "Les créatures ratées sont empoisonnées pendant 1 minute",
+          "range": "Rayon de 4,50m centré sur elle",
+          "description": "Libère un nuage de spores toxiques."
+        },
+        {
+          "name": "Murmures Apaisants (1/jour)",
+          "save": "Sagesse DD 15",
+          "effect": "Charme jusqu'à 3 créatures pendant 1 minute, elles ne peuvent pas attaquer",
+          "range": "18m",
+          "description": "Chuchote des secrets apaisants qui calment les esprits."
+        }
+      ],
+      "tactics": "La mycéliade préfère la diplomatie. Elle partage ses connaissances avec ceux qui respectent la nature et offre son aide pour soigner.",
+      "treasure": ["Spores de guérison (équivaut à 3 potions de soin)", "Graines rares (100 po)", "Manuel des champignons souterrains"],
+      "lore": "Gardienne des secrets naturels du coffre-fort, elle connaît les faiblesses des autres créatures et peut guider les héros."
+    },
+
+    "zelateur_lampe": {
+      "id": "zelateur_lampe",
+      "name": "Zélateur de la Lampe Sombre",
+      "type": "Humanoïde (gobelin)",
+      "size": "Petit",
+      "alignment": "Loyal Mauvais",
+      "ca": 16,
+      "hp": { "current": 65, "max": 65 },
+      "speed": "9m",
+      "stats": { "for": 12, "dex": 16, "con": 15, "int": 14, "sag": 13, "cha": 17 },
+      "saves": { "sag": 4, "cha": 6 },
+      "skills": { "tromperie": 6, "intimidation": 6, "religion": 5 },
+      "resistances": ["Nécrotique"],
+      "senses": "Vision dans le noir 18m, Perception passive 11",
+      "languages": "Commun, Gobelin, Abyssal",
+      "challenge": "4 (1 100 XP)",
+      "image": "images/monsters/Zélateur_de_la_Lampe_Sombre.png",
+      "description": "Gobelin fanatique voué au service d'une entité ténébreuse, gardien obsessionnel du coffret final.",
+      "special_abilities": [
+        {
+          "name": "Dévotion Fanatique",
+          "description": "Avantage aux jets de sauvegarde contre les effets de charme et de terreur."
+        },
+        {
+          "name": "Magie sombre",
+          "description": "Caractéristique d'incantation : Charisme (DD 14). Sorts connus : Flétrissement (2/jour), Ténèbres (2/jour), Terreur (1/jour)."
+        },
+        {
+          "name": "Aura de Ténèbres",
+          "description": "La lumière vive dans un rayon de 3m devient lumière faible, la lumière faible devient ténèbres."
+        }
+      ],
+      "actions": [
+        {
+          "name": "Attaques multiples",
+          "description": "Le zélateur effectue deux attaques de Cimeterre Maudit."
+        },
+        {
+          "name": "Cimeterre Maudit",
+          "attack_bonus": 6,
+          "damage": "1d6+3 dégâts tranchants plus 1d4 dégâts nécrotiques",
+          "reach": "1,50m",
+          "description": "Arme imprégnée d'énergie ténébreuse."
+        },
+        {
+          "name": "Invocation des Ombres (Recharge 5-6)",
+          "save": "Sagesse DD 14",
+          "damage": "3d6 dégâts psychiques",
+          "effect": "Les créatures ratées sont effrayées pendant 1 minute",
+          "range": "Cône de 6m",
+          "description": "Invoque des ombres terrifiantes qui assaillent l'esprit."
+        },
+        {
+          "name": "Sacrifice Rituel (1/jour)",
+          "description": "Si le zélateur réduit une créature à 0 point de vie avec cette attaque, il récupère tous ses points de vie et recharge toutes ses capacités.",
+          "special": "Doit réussir une attaque de cimeterre avec avantage"
+        }
+      ],
+      "tactics": "Combat avec fanatisme, utilise ses ténèbres pour avantage tactique. Peut être raisonné si on prouve une dévotion supérieure à une cause juste.",
+      "treasure": ["Cimeterre +1", "Lampe de l'Aube Tremblante", "Parchemin de Dissipation des ténèbres", "Amulette de protection contre le mal"],
+      "lore": "Ancien prêtre gobelin corrompu par une entité des plans sombres. Sa rédemption pourrait le transformer en allié puissant."
+    },
+
+    "draket_vert": {
+      "id": "draket_vert",
+      "name": "Draket Vert des Comptes",
+      "type": "Dragon",
+      "size": "Petit",
+      "alignment": "Loyal Neutre",
+      "ca": 17,
+      "hp": { "current": 38, "max": 38 },
+      "speed": "9m, vol 18m",
+      "stats": { "for": 15, "dex": 16, "con": 14, "int": 16, "sag": 12, "cha": 15 },
+      "saves": { "dex": 5, "con": 4, "sag": 3, "cha": 4 },
+      "skills": { "arcanes": 5, "investigation": 5, "perception": 3 },
+      "resistances": ["Poison"],
+      "immunities": [],
+      "senses": "Vision aveugle 3m, Vision dans le noir 18m, Perception passive 13",
+      "languages": "Commun, Draconique, Gobelin",
+      "challenge": "2 (450 XP)",
+      "image": "images/monsters/Draket_Vert_des_Comptes.png",
+      "description": "Petit dragon employé par Gringotts pour la comptabilité magique et la vérification des comptes.",
+      "special_abilities": [
+        {
+          "name": "Évaluation Précise",
+          "description": "Peut déterminer instantanément la valeur exacte de n'importe quel objet non-magique d'une valeur inférieure à 1000 po."
+        },
+        {
+          "name": "Mémoire Parfaite",
+          "description": "Se souvient parfaitement de tous les détails qu'il a observés. Impossible de le tromper avec de faux comptes."
+        }
+      ],
+      "actions": [
+        {
+          "name": "Morsure",
+          "attack_bonus": 5,
+          "damage": "1d6+2 dégâts perçants plus 1d4 dégâts de poison",
+          "reach": "1,50m",
+          "description": "Morsure empoisonnée du petit dragon."
+        },
+        {
+          "name": "Souffle Empoisonné (Recharge 5-6)",
+          "save": "Constitution DD 12",
+          "damage": "3d6 dégâts de poison",
+          "effect": "Les créatures ratées sont empoisonnées pendant 1 minute",
+          "range": "Ligne de 4,50m × 1,50m",
+          "description": "Crache un nuage de gaz toxique."
+        },
+        {
+          "name": "Audit Magique (3/jour)",
+          "save": "Intelligence DD 13",
+          "effect": "Révèle toute tentative de tromperie ou illusion",
+          "range": "18m",
+          "description": "Sort de détection des mensonges et illusions."
+        }
+      ],
+      "tactics": "Préfère négocier et éviter le combat. Si attaqué, utilise son vol pour maintenir la distance et son souffle.",
+      "treasure": ["Grand livre des comptes (500 po)", "Balance magique portable", "Gemmes assorties (200 po)"],
+      "lore": "Employé loyal de Gringotts, il peut être convaincu d'aider si on lui prouve l'importance de la mission."
+    },
+
+    "diablotin_crachin": {
+      "id": "diablotin_crachin",
+      "name": "Diablotin Crachin",
+      "type": "Fiélon (diablotin)",
+      "size": "Très petit",
+      "alignment": "Loyal Mauvais",
+      "ca": 13,
+      "hp": { "current": 10, "max": 10 },
+      "speed": "6m, vol 12m",
+      "stats": { "for": 6, "dex": 17, "con": 13, "int": 11, "sag": 12, "cha": 14 },
+      "skills": { "tromperie": 4, "discrétion": 5, "perspicacité": 3 },
+      "resistances": ["Froid"],
+      "immunities": ["Feu", "Poison"],
+      "immunities_conditions": ["Empoisonné"],
+      "senses": "Vision dans le noir 36m, Perception passive 11",
+      "languages": "Commun, Infernal",
+      "challenge": "1 (200 XP)",
+      "image": "images/monsters/Diablotin_Crachin.png", 
+      "description": "Petit démon espiègle qui adore jouer des tours et semer la confusion, souvent invoqué par accident.",
+      "special_abilities": [
+        {
+          "name": "Métamorphe",
+          "description": "Peut prendre la forme d'un rat, d'un corbeau ou d'une araignée, ou reprendre sa vraie forme."
+        },
+        {
+          "name": "Résistance à la magie",
+          "description": "Avantage aux jets de sauvegarde contre les sorts et autres effets magiques."
+        },
+        {
+          "name": "Vision du diable",
+          "description": "Les ténèbres magiques n'entravent pas sa vision dans le noir."
+        }
+      ],
+      "actions": [
+        {
+          "name": "Dard (forme de diablotin uniquement)",
+          "attack_bonus": 5,
+          "damage": "1d4+3 dégâts perçants plus 3d6 dégâts de poison",
+          "save": "Constitution DD 11 pour réduire les dégâts de poison de moitié",
+          "reach": "1,50m",
+          "description": "Attaque avec son dard empoisonné."
+        },
+        {
+          "name": "Invisibilité",
+          "description": "Devient invisible jusqu'à ce qu'il attaque ou que sa concentration soit brisée (comme pour un sort).",
+          "type": "Action"
+        },
+        {
+          "name": "Tours de Magie (à volonté)",
+          "description": "Prestidigitation, Lumières dansantes, Message",
+          "type": "Sort mineur"
+        }
+      ],
+      "tactics": "Utilise l'invisibilité et la confusion pour harceler les ennemis. Préfère fuir plutôt que mourir.",
+      "treasure": ["Petit sac de pièces de cuivre piégées", "Potion d'invisibilité", "Parchemin de Confusion"],
+      "lore": "Invoqué par erreur lors d'un rituel gobelin raté. Peut être convaincu de partir avec de la nourriture et des pièces brillantes."
+    },
+
+    "gelee_contrebande": {
+      "id": "gelee_contrebande",
+      "name": "Gelée de Contrebande",
+      "type": "Vase",
+      "size": "Moyen",
+      "alignment": "Non-aligné",
+      "ca": 8,
+      "hp": { "current": 84, "max": 84 },
+      "speed": "4,50m, escalade 4,50m",
+      "stats": { "for": 15, "dex": 6, "con": 16, "int": 2, "sag": 6, "cha": 1 },
+      "skills": {},
+      "resistances": ["Acide", "Froid", "Feu"],
+      "immunities": [],
+      "immunities_conditions": ["Aveuglé", "Charmé", "Assourdi", "Épuisement", "Effrayé", "À terre"],
+      "senses": "Vision aveugle 18m (aveugle au-delà), Perception passive 8",
+      "languages": "—",
+      "challenge": "2 (450 XP)",
+      "image": "images/monsters/Gelée_de_Contrebande.png",
+      "description": "Vase translucide qui s'est nourrie d'objets de contrebande, développant des propriétés magiques étranges.",
+      "special_abilities": [
+        {
+          "name": "Forme Amorpthe",
+          "description": "La gelée peut se déplacer dans un espace aussi étroit que 2,5 cm sans se faufiler."
+        },
+        {
+          "name": "Absorption d'Objets",
+          "description": "Quand elle touche un objet non-magique, elle peut tenter de l'absorber. L'objet doit réussir un jet de sauvegarde de Constitution DD 13 ou être détruit et ajouter 1d4 points de vie à la gelée."
+        },
+        {
+          "name": "Contrebande Magique",
+          "description": "Contient des fragments d'objets magiques. Quand elle subit des dégâts, lance 1d6 : sur 6, un effet magique aléatoire se produit (au choix du MJ)."
+        }
+      ],
+      "actions": [
+        {
+          "name": "Pseudopode",
+          "attack_bonus": 4,
+          "damage": "2d6+2 dégâts contondants plus 1d6 dégâts d'acide",
+          "reach": "1,50m",
+          "description": "Attaque avec une extension de sa masse gélatineuse."
+        },
+        {
+          "name": "Engloutissement",
+          "condition": "Créature de taille M ou plus petite touchée par le pseudopode",
+          "save": "Dextérité DD 12",
+          "effect": "La créature ratée est englobée (aveuglée, entravée, ne peut pas respirer), subit 2d6 dégâts d'acide par tour",
+          "escape": "Action pour se libérer avec Force DD 12 ou infliger 10 dégâts à la gelée",
+          "description": "Tente d'envelopper complètement sa cible."
+        }
+      ],
+      "tactics": "Attaque instinctivement, essaie d'engloutir les créatures les plus faibles. Absorbe les objets non-magiques pour se renforcer.",
+      "treasure": ["Objets partiellement digérés dans son corps", "1d4 potions aléatoires", "Gemmes non digérées (50 po)"],
+      "lore": "Créée accidentellement quand des objets de contrebande magiques ont été détruits ensemble, créant cette vase étrange."
+    },
+
+    "chien_bassin": {
+      "id": "chien_bassin",
+      "name": "Chien-Bassin de la Cour",
+      "type": "Fée",
+      "size": "Petit",
+      "alignment": "Chaotique Neutre",
+      "ca": 13,
+      "hp": { "current": 27, "max": 27 },
+      "speed": "12m, nage 9m",
+      "stats": { "for": 12, "dex": 16, "con": 14, "int": 10, "sag": 13, "cha": 15 },
+      "skills": { "perception": 3, "discrétion": 5, "survie": 3 },
+      "resistances": [],
+      "immunities": [],
+      "senses": "Vision dans le noir 18m, Perception passive 13",
+      "languages": "Sylvestre, comprend le Commun",
+      "challenge": "1/2 (100 XP)",
+      "image": "images/monsters/Chien‑Bassin_de_la_Cour.png",
+      "description": "Créature fée ressemblant à un petit chien aquatique, gardien loyal des bassins et fontaines magiques.",
+      "special_abilities": [
+        {
+          "name": "Amphibie",
+          "description": "Le chien-bassin peut respirer l'air et l'eau."
+        },
+        {
+          "name": "Saut Aquatique",
+          "description": "Le chien-bassin peut sauter jusqu'à 6m de long depuis ou vers une étendue d'eau, sans provoquer d'attaque d'opportunité."
+        },
+        {
+          "name": "Loyauté du Bassin",
+          "description": "Tant qu'il reste dans un rayon de 9m d'une source d'eau, il a avantage aux jets d'attaque et de sauvegarde."
+        }
+      ],
+      "actions": [
+        {
+          "name": "Morsure",
+          "attack_bonus": 5,
+          "damage": "1d6+3 dégâts perçants",
+          "reach": "1,50m",
+          "effect": "Si la cible est une créature, elle doit réussir un jet de Force DD 11 ou être renversée à terre",
+          "description": "Morsure puissante qui peut faire trébucher."
+        },
+        {
+          "name": "Jet d'Eau (Recharge 4-6)",
+          "attack_bonus": 5,
+          "damage": "2d4+3 dégâts contondants",
+          "range": "9/18m",
+          "effect": "La cible doit réussir un jet de Force DD 11 ou être repoussée de 3m",
+          "description": "Projette un jet d'eau puissant."
+        }
+      ],
+      "tactics": "Protège territorialement les sources d'eau. Peut être apaisé en purifiant l'eau ou en lui offrant de la nourriture.",
+      "treasure": ["Collier de perles d'eau douce (25 po)", "Fiole d'eau pure"],
+      "lore": "Gardien fée loyal, il protège les eaux contre la corruption. Très intelligent et peut devenir un allié précieux."
+    },
+
+    "gringoco": {
+      "id": "gringoco", 
+      "name": "Gringoco, l'Ancien Gardien",
+      "type": "Humanoïde (gobelin)",
+      "size": "Petit",
+      "alignment": "Loyal Neutre",
+      "ca": 18,
+      "hp": { "current": 112, "max": 112 },
+      "speed": "9m",
+      "stats": { "for": 14, "dex": 16, "con": 18, "int": 16, "sag": 15, "cha": 14 },
+      "saves": { "for": 5, "con": 7, "int": 6, "sag": 5 },
+      "skills": { "arcanes": 6, "histoire": 6, "investigation": 6, "perception": 5 },
+      "resistances": ["Psychique"],
+      "immunities": [],
+      "senses": "Vision dans le noir 18m, Perception passive 15",
+      "languages": "Commun, Gobelin, Draconique",
+      "challenge": "6 (2 300 XP)",
+      "image": "images/monsters/gringoco.png",
+      "description": "Ancien gardien gobelin d'élite, protecteur ultime des trésors de Gringotts. Sage et redoutablement efficace.",
+      "special_abilities": [
+        {
+          "name": "Magie de Gardien",
+          "description": "Caractéristique d'incantation : Intelligence (DD 14). Sorts connus : Armure du mage, Bouclier, Détection de la magie, Verrouillage, Alarme, Voir l'invisible."
+        },
+        {
+          "name": "Tactique de Groupe",
+          "description": "Les alliés dans un rayon de 9m ont avantage aux jets d'attaque si au moins un autre allié du gardien se trouve dans un rayon de 1,50m de la cible."
+        },
+        {
+          "name": "Résistance Légendaire (2/jour)",
+          "description": "Si Gringoco rate un jet de sauvegarde, il peut choisir de le réussir à la place."
+        }
+      ],
+      "actions": [
+        {
+          "name": "Attaques multiples",
+          "description": "Gringoco effectue trois attaques : deux avec sa Hallebarde +1 et une avec sa Arbalète de poing."
+        },
+        {
+          "name": "Hallebarde +1",
+          "attack_bonus": 7,
+          "damage": "1d10+3 dégâts tranchants",
+          "reach": "3m",
+          "description": "Arme d'hast magique du gardien en chef."
+        },
+        {
+          "name": "Arbalète de poing",
+          "attack_bonus": 6,
+          "damage": "1d6+3 dégâts perçants",
+          "range": "9/36m",
+          "description": "Arme à distance de précision."
+        },
+        {
+          "name": "Ordre de Bataille (Recharge 5-6)",
+          "effect": "Tous les alliés dans un rayon de 18m peuvent utiliser leur réaction pour effectuer une attaque ou se déplacer de leur vitesse",
+          "description": "Coordonne une manœuvre tactique d'équipe."
+        }
+      ],
+      "legendary_actions": "3 actions légendaires par tour",
+      "legendary_actions_list": [
+        {
+          "name": "Déplacement",
+          "cost": 1,
+          "description": "Gringoco se déplace de sa vitesse sans provoquer d'attaques d'opportunité."
+        },
+        {
+          "name": "Attaque d'Arbalète",
+          "cost": 1, 
+          "description": "Gringoco effectue une attaque d'arbalète de poing."
+        },
+        {
+          "name": "Sort (coûte 2 actions)",
+          "cost": 2,
+          "description": "Gringoco lance un sort de niveau 1 ou 2."
+        }
+      ],
+      "tactics": "Combattant tactique expert qui coordonne les autres créatures. Préfère négocier si les héros prouvent leurs bonnes intentions.",
+      "treasure": ["Hallebarde +1", "Armure de cuir clouté +1", "Clef Maîtresse de Gringotts", "Sac de 500 po", "Manuel de tactique gobeline"],
+      "lore": "Vétéran respecté qui a servi Gringotts pendant des décennies. Peut devenir un allié puissant si convaincu de la noblesse de la mission."
+    }
+  },
+
+  "magical_objects": {
+    "relique_aube": {
+      "id": "relique_aube",
+      "name": "Relique de l'Aube",
+      "type": "Objet merveilleux",
+      "rarity": "Légendaire",
+      "requires_attunement": true,
+      "image": "images/objects/Relique_de_l_Aube.png",
+      "description": "Cristal doré qui pulse d'une lumière chaude et réconfortante, capable de dissiper les plus puissantes malédictions.",
+      "properties": [
+        "Émet une lumière vive dans un rayon de 9m et une lumière faible sur 9m supplémentaires",
+        "Une fois par jour, peut lancer Restauration suprême sans composantes matérielles",
+        "Une fois par semaine, peut lancer Lever une malédiction de niveau 9",
+        "Les morts-vivants ont désavantage aux attaques contre le porteur",
+        "Immunité aux maladies et à la nécrose"
+      ],
+      "history": "Créée par les premiers gobelins de Gringotts pour protéger leurs plus grands trésors des malédictions. Son pouvoir grandit avec la pureté d'intention de son utilisateur.",
+      "activation": "Nécessite un rituel de 10 minutes avec un lanceur de sorts de niveau 5+ et un paladin ou clerc présent."
+    },
+    "balance_nackrag": {
+      "id": "balance_nackrag",
+      "name": "Balance de Nackrag l'Estimeur",
+      "type": "Objet merveilleux",
+      "rarity": "Très rare",
+      "requires_attunement": true,
+      "image": "images/objects/Balance_de_Nackrag_l_Estimeur.png",
+      "description": "Balance magique en bronze et mithril qui révèle la vraie valeur des objets et des intentions.",
+      "properties": [
+        "Révèle automatiquement la valeur exacte de tout objet pesé",
+        "Détecte les objets magiques et leurs propriétés",
+        "Une fois par jour, peut lancer Détection des mensonges (DD 15)",
+        "Une fois par jour, peut lancer Zone de vérité (DD 15)",
+        "Immunité contre les effets d'illusion de niveau 3 ou moins"
+      ],
+      "history": "Balance personnelle de Nackrag, enchantée après des décennies d'évaluation précise. Elle refuse de peser ce qui n'a pas de vraie valeur.",
+      "curse": "La balance refuse de fonctionner pour quelqu'un dont les intentions sont malhonnêtes."
+    },
+    "perle_maree": {
+      "id": "perle_maree",
+      "name": "Perle de la Marée Éveillée",
+      "type": "Objet merveilleux",
+      "rarity": "Rare",
+      "requires_attunement": false,
+      "image": "images/objects/Perle_de_la_Marée_Éveillée.png",
+      "description": "Perle iridescente qui contient l'essence pure de l'eau éveillée par les néréides.",
+      "properties": [
+        "Permet de respirer sous l'eau pendant 1 heure (recharge à l'aube)",
+        "Une fois par jour, peut lancer Création d'eau (niveau 3)",
+        "Une fois par jour, peut lancer Marche sur l'eau",
+        "+2 aux jets de sauvegarde contre les effets de feu et de desséchement",
+        "L'eau créée par la perle peut soigner 1d4 points de vie"
+      ],
+      "history": "Don d'une néréide reconnaissante à ceux qui ont purifié son domaine aquatique.",
+      "special": "La perle brille plus fort près des sources d'eau pure et s'assombrit près de l'eau corrompue."
+    },
+    "lampe_aube": {
+      "id": "lampe_aube",
+      "name": "Lampe de l'Aube Tremblante",
+      "type": "Objet merveilleux",
+      "rarity": "Peu commune",
+      "requires_attunement": false,
+      "image": "images/objects/Lampe_de_l_Aube_Tremblante.png",
+      "description": "Lanterne délicate qui émet une lumière dorée tremblante, particulièrement efficace contre les ténèbres.",
+      "properties": [
+        "Émet une lumière vive dans un rayon de 6m et une lumière faible sur 6m supplémentaires",
+        "La lumière compte comme lumière du soleil pour les créatures sensibles",
+        "Une fois par jour, peut lancer Lumière du jour",
+        "Les créatures des ténèbres ont désavantage aux attaques dans sa lumière",
+        "Peut révéler les créatures invisibles dans sa zone d'éclairage"
+      ],
+      "history": "Créée par un zélateur repenti pour racheter ses péchés passés dans l'ombre.",
+      "fuel": "Fonctionne avec l'huile sainte ou l'intention pure du porteur."
+    },
+    "orbe_comptage": {
+      "id": "orbe_comptage",
+      "name": "Orbe de Comptage à Rebours",
+      "type": "Objet merveilleux",
+      "rarity": "Rare",
+      "requires_attunement": true,
+      "image": "images/objects/Orbe_de_Comptage_à_Rebours.png",
+      "description": "Sphère de cristal qui affiche des chiffres lumineux en compte à rebours, permettant de contrôler le temps.",
+      "properties": [
+        "Affiche le temps restant avant tout événement programmé dans un rayon de 1,5 km",
+        "Une fois par jour, peut lancer Lenteur (DD 14)",
+        "Une fois par jour, peut lancer Hâte",
+        "Permet de connaître l'heure exacte n'importe où",
+        "Avertit 1 minute avant tout danger imminent"
+      ],
+      "history": "Outil temporel des gobelins comptables pour respecter les échéances cruciales.",
+      "warning": "Si le compte arrive à zéro sans action, l'orbe se brise et lance Arrêt du temps."
+    },
+    "bague_compte_gouttes": {
+      "id": "bague_compte_gouttes",
+      "name": "Bague de Compte-Gouttes",
+      "type": "Anneau",
+      "rarity": "Peu commune",
+      "requires_attunement": true,
+      "image": "images/objects/Bague_de_Compte-Gouttes.png",
+      "description": "Anneau de mithril orné d'une petite gemme qui compte et stocke les liquides précieux goutte par goutte.",
+      "properties": [
+        "Peut stocker jusqu'à 10 doses de potions ou liquides magiques",
+        "Permet de distribuer les liquides stockés par gouttes précises",
+        "Une fois par jour, peut purifier 1 litre d'eau empoisonnée",
+        "Détecte automatiquement les liquides magiques ou empoisonnés",
+        "+1 aux jets de sauvegarde contre les poisons liquides"
+      ],
+      "history": "Créée par un alchimiste gobelin méticuleux pour économiser chaque goutte de ses précieux élixirs.",
+      "capacity": "Peut contenir l'équivalent de 10 potions de soins standard."
+    },
+    "broche_premier_sourire": {
+      "id": "broche_premier_sourire",
+      "name": "Broche du Premier Sourire",
+      "type": "Objet merveilleux",
+      "rarity": "Rare",
+      "requires_attunement": true,
+      "image": "images/objects/Broche_du_Premier_Sourire.png",
+      "description": "Broche en forme de soleil levant qui réagit aux émotions positives et amplifie la joie.",
+      "properties": [
+        "Le porteur a avantage aux jets de sauvegarde contre la peur et le charme",
+        "Une fois par jour, peut lancer Espoir (comme le sort Bénédiction mais affect 6 créatures)",
+        "Quand le porteur fait un 20 naturel sur un jet d'attaque, tous les alliés dans un rayon de 9m récupèrent 1d4 points de vie",
+        "Émet une aura de 3m qui donne +1 aux jets d'Initiative des alliés",
+        "Les créatures mortes-vivantes ont désavantage pour frapper le porteur"
+      ],
+      "history": "Créée pour commémorer la première fois qu'un gobelin et un humain ont souri ensemble en signant un accord.",
+      "emotion_link": "Plus le porteur est joyeux et optimiste, plus la broche brille et ses effets sont puissants."
+    },
+    "sceau_cascades": {
+      "id": "sceau_cascades",
+      "name": "Sceau des Cascades Dociles",
+      "type": "Objet merveilleux",
+      "rarity": "Très rare",
+      "requires_attunement": true,
+      "image": "images/objects/Sceau_des_Cascades_Dociles.png",
+      "description": "Sceau gravé de runes aquatiques qui permet de contrôler et d'apaiser les eaux tumultueuses.",
+      "properties": [
+        "Une fois par jour, peut lancer Contrôle de l'eau",
+        "Une fois par jour, peut lancer Respiration aquatique (6 créatures)",
+        "Immunité contre la noyade et les dégâts de pression aquatique",
+        "Peut communiquer simplement avec les créatures aquatiques",
+        "Les créatures d'eau ne peuvent pas attaquer volontairement le porteur"
+      ],
+      "history": "Sceau d'un ancien traité de paix entre les gobelins et les élémentaires d'eau.",
+      "diplomatic_use": "Permet de négocier automatiquement avec toute créature aquatique intelligente."
+    },
+    "tambour_pas_vrai": {
+      "id": "tambour_pas_vrai",
+      "name": "Tambour du Pas Vrai",
+      "type": "Instrument merveilleux",
+      "rarity": "Rare", 
+      "requires_attunement": true,
+      "image": "images/objects/Tambour_du_Pas_Vrai.png",
+      "description": "Tambour gobelin enchanteur dont les battements peuvent révéler la vérité et synchroniser les cœurs.",
+      "properties": [
+        "Une fois par jour, peut lancer Détection des mensonges en battant un rythme spécial (10 minutes)",
+        "Une fois par jour, peut lancer Charme-personne (DD 14) avec un solo de tambour",
+        "Les alliés dans un rayon de 9m ont +1 aux jets d'attaque tant que le rythme continue",
+        "Peut calmer automatiquement les animaux hostiles non-magiques",
+        "Le son du tambour traverse les illusions auditives"
+      ],
+      "history": "Tambour rituel utilisé lors des cérémonies de vérité gobelines, où les mensonges résonnent faux.",
+      "rhythm_magic": "Différents rythmes produisent différents effets magiques."
+    },
+    "ecaille_comptes": {
+      "id": "ecaille_comptes",
+      "name": "Écaille des Comptes Émeraude",
+      "type": "Objet merveilleux",
+      "rarity": "Très rare",
+      "requires_attunement": true,
+      "image": "images/objects/Écaille_des_Comptes_Émeraude.png",
+      "description": "Écaille de dragon émeraude gravée de chiffres qui change de couleur selon les transactions financières.",
+      "properties": [
+        "Détecte automatiquement toute transaction financière dans un rayon de 30m",
+        "Révèle la valeur exacte de tout trésor touché",
+        "Une fois par jour, peut lancer Localiser un objet (objets de valeur uniquement)",
+        "Immunité contre les sorts et effets qui affectent l'or et les métaux précieux",
+        "Peut créer une connexion mentale temporaire avec d'autres écailles similaires"
+      ],
+      "history": "Écaille donnée par un dragon vert en échange de services comptables impeccables fournis par Gringotts.",
+      "network": "Fait partie d'un réseau de communication utilisé par les banquiers gobelins d'élite."
+    }
+  },
+
+  "maps": {
+    "carte_donjon_principale": {
+      "id": "carte_donjon_principale",
+      "name": "Carte du Donjon - Le Coffre-fort oublié",
+      "image": "images/maps/Carte_Donjon_1.webp",
+      "description": "Plan complet du coffre-fort gobelin effondré avec toutes les salles et énigmes",
+      "pins": [
+        { "x": 50, "y": 85, "note": "Entrée principale - Escalier en spirale (Portoloin)" },
+        { "x": 45, "y": 72, "note": "Les Dalles Murmurantes - Hall piégé gardé par Écho-Âpre" },
+        { "x": 30, "y": 50, "note": "Le Couloir aux Échos - Passages acoustiques secrets" },
+        { "x": 70, "y": 50, "note": "La Balance de l'Estimeur - Énigme de Nackrag gardée par la Néréide" },
+        { "x": 25, "y": 30, "note": "La Fontaine des Reflets - Illusions et Mycéliade Murmurant" },
+        { "x": 75, "y": 30, "note": "Le Coffret aux Trois Clefs - Objectif final gardé par le Zélateur" },
+        { "x": 50, "y": 15, "note": "Le Sablier Fendu - Distorsions temporelles et confrontation finale" }
+      ]
+    }
+  },
+
+  "quests": {
+    "mission_principale": {
+      "id": "mission_principale",
+      "title": "Récupérer la Relique de l'Aube",
+      "description": "Traverser le coffre-fort effondré, résoudre les énigmes de Nackrag et récupérer la Relique de l'Aube pour sauver Pré-au-Lard de la malédiction.",
+      "status": "active",
+      "objectives": [
+        { "text": "Passer les Dalles Murmurantes et apaiser Écho-Âpre", "completed": false },
+        { "text": "Découvrir le secret du Couloir aux Échos", "completed": false },
+        { "text": "Réussir l'épreuve de la Balance de l'Estimeur", "completed": false },
+        { "text": "Négocier avec la Néréide de Siphon Azur", "completed": false },
+        { "text": "Purifier la Fontaine des Reflets", "completed": false },
+        { "text": "Convaincre la Mycéliade Murmurant d'aider", "completed": false },
+        { "text": "Ouvrir le Coffret aux Trois Clefs", "completed": false },
+        { "text": "Convertir ou vaincre le Zélateur de la Lampe Sombre", "completed": false },
+        { "text": "Réparer le Sablier Fendu", "completed": false },
+        { "text": "Survivre à la confrontation finale", "completed": false },
+        { "text": "Activer la Relique de l'Aube", "completed": false },
+        { "text": "Retourner à Pré-au-Lard avant l'expiration du Portoloin", "completed": false }
+      ]
+    },
+    "sauver_creatures": {
+      "id": "sauver_creatures",
+      "title": "Sauver les Gardiens du Coffre-fort",
+      "description": "Mission optionnelle : convertir ou sauver les créatures du coffre-fort plutôt que les détruire, respectant ainsi l'esprit héroïque des Gardiens de l'Aurore.",
+      "status": "inactive", 
+      "objectives": [
+        { "text": "Comprendre les motivations d'Écho-Âpre", "completed": false },
+        { "text": "Aider la Néréide à purifier ses eaux", "completed": false },
+        { "text": "Établir un lien d'amitié avec la Mycéliade", "completed": false },
+        { "text": "Racheter le Zélateur de la Lampe Sombre", "completed": false },
+        { "text": "Convaincre Gringoco de se joindre à la quête", "completed": false },
+        { "text": "Négocier la paix avec tous les gardiens", "completed": false }
+      ]
+    },
+    "mysteres_gringotts": {
+      "id": "mysteres_gringotts", 
+      "title": "Les Secrets de Gringotts",
+      "description": "Mission secondaire : découvrir l'histoire complète du coffre-fort, les objets magiques cachés et les liens avec Nackrag.",
+      "status": "inactive",
+      "objectives": [
+        { "text": "Déchiffrer toutes les inscriptions gobelines", "completed": false },
+        { "text": "Découvrir l'histoire de chaque gardien", "completed": false },
+        { "text": "Récupérer tous les objets magiques", "completed": false },
+        { "text": "Comprendre le réseau des Écailles de Comptes", "completed": false },
+        { "text": "Révéler le lien entre le coffre et la malédiction de Pré-au-Lard", "completed": false }
+      ]
+    }
+  },
+
+  "calendar": {
+    "currentDate": { "day": 15, "month": 3, "year": 1492 },
+    "timeLimit": { "hours": 4, "remaining": 240 },
+    "events": {
+      "15-3-1492": [
+        { "title": "Départ pour le coffre-fort (mission)", "type": "important", "time": "matin" },
+        { "title": "Arrivée par Portoloin au coffre-fort", "type": "event", "time": "après-midi" }
+      ],
+      "16-3-1492": [
+        { "title": "Retour prévu à Pré-au-Lard", "type": "deadline", "time": "lever du soleil" },
+        { "title": "Expiration du Portoloin de retour", "type": "critical", "time": "aube" }
+      ]
+    },
+    "restHistory": []
+  },
+
+  "music": {
+    "currentTrack": null,
+    "currentContext": "campagne",
+    "volume": 0.15,
+    "enabled": true,
+    "musicPaths": {
+      "campagne": [
+        "musique/campagne/le_coffre_fort_oublie/01 - L'Aurore Céleste.mp3",
+        "musique/campagne/le_coffre_fort_oublie/08 - Héros de Verdure.mp3",
+        "musique/campagne/le_coffre_fort_oublie/L'Écho des Donjons.mp3"
+      ],
+      "campagne/acte1": [
+        "musique/campagne/le_coffre_fort_oublie/acte1/L'Écho des Donjons.mp3",
+        "musique/campagne/le_coffre_fort_oublie/acte1/L'Épopée du Donjon.mp3"
+      ],
+      "campagne/acte1/spirale": [
+        "musique/campagne/le_coffre_fort_oublie/acte1/La Légende du Donjon Perdu.mp3"
+      ],
+      "campagne/acte1/dalles_murmurantes": [
+        "musique/campagne/le_coffre_fort_oublie/acte1/L'Épopée du Donjon.mp3",
+        "musique/campagne/le_coffre_fort_oublie/acte1/La Ballade du Donjon Perdu.mp3"
+      ],
+      "campagne/acte1/echo_apre": [
+        "musique/campagne/le_coffre_fort_oublie/acte1/combat/Eywa's Whisper.mp3"
+      ],
+      "campagne/acte2": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/Eywa's Whisper.mp3",
+        "musique/campagne/le_coffre_fort_oublie/acte2/Eywa's Whisper (1).mp3"
+      ],
+      "campagne/acte2/balance_estimeur": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/danse des pieces.mp3"
+      ],
+      "campagne/acte2/nereide_siphon": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/combat/Eywa's Whisper.mp3"
+      ],
+      "campagne/acte2/fontaine_reflets": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/08 - Héros de Verdure.mp3"
+      ],
+      "campagne/acte2/myceliade_murmurant": [
+        "musique/campagne/le_coffre_fort_oublie/acte2/combat/Eywa's Whisper (1).mp3"
+      ],
+      "campagne/acte3": [
+        "musique/campagne/le_coffre_fort_oublie/acte3/Agdon.mp3",
+        "musique/campagne/le_coffre_fort_oublie/acte3/01 - L'Aurore Céleste.mp3"
+      ],
+      "campagne/acte3/coffret_trois_clefs": [
+        "musique/campagne/le_coffre_fort_oublie/acte3/01 - L'Aurore Céleste.mp3"
+      ],
+      "campagne/acte3/zelateur_lampe": [
+        "musique/campagne/le_coffre_fort_oublie/acte3/dragon_boss/Agdon.mp3"
+      ],
+      "campagne/acte3/confrontation_finale": [
+        "musique/campagne/le_coffre_fort_oublie/acte3/dragon_boss/Agdon.mp3"
+      ]
+    }
+  },
+
+  "settings": {
+    "autoSave": true,
+    "autoSaveInterval": 30000,
+    "theme": "medieval",
+    "language": "fr",
+    "diceAnimations": true,
+    "soundEffects": false,
+    "notifications": true,
+    "showMonsterStats": true,
+    "showObjectDetails": true,
+    "diplomaticMode": true
+  },
+
+  "metadata": {
+    "created": "2025-01-31",
+    "lastModified": "2025-01-31",
+    "version": "2.0.0",
+    "author": "Claude & Happy",
+    "campaignSystem": "D&D 2024",
+    "players": 5,
+    "estimatedDuration": "4 heures",
+    "difficultyLevel": "Débutant à Intermédiaire",
+    "totalMonsters": 9,
+    "totalMagicalObjects": 10,
+    "totalPuzzles": 6
+  }
+}
