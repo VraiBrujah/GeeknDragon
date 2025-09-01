@@ -12,11 +12,20 @@ class StorageService {
         // Rôle : Configuration du service de stockage
         // Type : Object - Paramètres personnalisables du service
         this.config = {
-            prefix: config.prefix || 'licubepro',
-            useCompression: config.useCompression || false,
-            fallbackToMemory: config.fallbackToMemory !== false,
-            maxMemorySize: config.maxMemorySize || 50, // MB
-            enableEncryption: config.enableEncryption || false,
+            // Préfixe unique utilisé pour isoler les clés dans le stockage
+            prefix: 'licubepro',
+            // Activation de la compression des données via LZ-String
+            useCompression: false,
+            // Autorisation de retomber sur un cache mémoire si les autres storages échouent
+            fallbackToMemory: true,
+            // Limite maximale de mémoire pour le cache (en mégaoctets)
+            maxMemorySize: 50,
+            // Activation du chiffrement des données stockées
+            enableEncryption: false,
+            // Algorithme de chiffrement utilisé par l'API WebCrypto
+            encryptionAlgorithm: 'AES-GCM',
+            // Clé symétrique utilisée pour le chiffrement (chaîne UTF-8)
+            encryptionKey: null,
             ...config
         };
         
@@ -367,49 +376,105 @@ class StorageService {
     }
     
     /**
-     * Compression : données pour réduire la taille
-     * @param {any} data - Données à comprimer
-     * @return {string} - Données comprimées
+     * Compression : réduction de la taille grâce à LZ-String
+     * @param {any} data - Données à compresser
+     * @return {string} - Chaîne compressée
      */
     async compress(data) {
-        // Implémentation basique : JSON minifié
-        // TODO: Implémenter vraie compression (LZ-string, gzip)
-        return JSON.stringify(data);
+        // On convertit d'abord l'objet en JSON pour conserver sa structure
+        const json = JSON.stringify(data);
+        // LZ-String renvoie une chaîne UTF-16 beaucoup plus courte
+        return window.LZString.compressToUTF16(json);
     }
-    
+
     /**
-     * Décompression : restauration des données comprimées
-     * @param {string} compressedData - Données comprimées
-     * @return {any} - Données décomprimées
+     * Décompression : restauration des données compressées
+     * @param {string} compressedData - Chaîne compressée
+     * @return {any} - Données d'origine
      */
     async decompress(compressedData) {
         try {
-            return JSON.parse(compressedData);
+            // Décompression puis parsing du JSON obtenu
+            const json = window.LZString.decompressFromUTF16(compressedData);
+            return JSON.parse(json);
         } catch (error) {
             console.warn('⚠️ Erreur décompression, retour données brutes');
             return compressedData;
         }
     }
-    
+
     /**
-     * Chiffrement : sécurisation des données sensibles
-     * @param {any} data - Données à chiffrer
-     * @return {string} - Données chiffrées
+     * Génère (ou récupère) la clé CryptoKey pour WebCrypto
+     * @return {Promise<CryptoKey>} - Clé utilisable par l'API subtile
+     */
+    async getCryptoKey() {
+        // Vérifie la présence d'une clé côté configuration
+        if (!this.config.encryptionKey) {
+            throw new Error('Clé de chiffrement manquante');
+        }
+
+        // Mise en cache de l'objet CryptoKey pour éviter les imports répétés
+        if (!this.cryptoKey) {
+            const encoder = new TextEncoder();
+            const rawKey = encoder.encode(this.config.encryptionKey);
+            this.cryptoKey = await window.crypto.subtle.importKey(
+                'raw',
+                rawKey,
+                { name: this.config.encryptionAlgorithm },
+                false,
+                ['encrypt', 'decrypt']
+            );
+        }
+
+        return this.cryptoKey;
+    }
+
+    /**
+     * Chiffrement : sécurisation des données sensibles via WebCrypto
+     * @param {any} data - Données à chiffrer (objet ou chaîne)
+     * @return {string} - Données chiffrées encodées en Base64
      */
     async encrypt(data) {
-        // TODO: Implémenter vraie encryption (WebCrypto API)
-        // Implémentation basique pour l'instant
-        return btoa(JSON.stringify(data));
+        const key = await this.getCryptoKey();
+        const encoder = new TextEncoder();
+        const iv = window.crypto.getRandomValues(new Uint8Array(12));
+        const encodedData = typeof data === 'string' ? encoder.encode(data) : encoder.encode(JSON.stringify(data));
+        const cipherBuffer = await window.crypto.subtle.encrypt(
+            { name: this.config.encryptionAlgorithm, iv },
+            key,
+            encodedData
+        );
+        // Concaténation IV + données chiffrées puis encodage Base64 pour stockage sûr
+        const combined = new Uint8Array(iv.byteLength + cipherBuffer.byteLength);
+        combined.set(iv, 0);
+        combined.set(new Uint8Array(cipherBuffer), iv.byteLength);
+        return btoa(String.fromCharCode(...combined));
     }
-    
+
     /**
-     * Déchiffrement : restauration des données chiffrées
-     * @param {string} encryptedData - Données chiffrées
+     * Déchiffrement : restauration des données chiffrées via WebCrypto
+     * @param {string} encryptedData - Chaîne Base64 contenant IV + données
      * @return {any} - Données déchiffrées
      */
     async decrypt(encryptedData) {
         try {
-            return JSON.parse(atob(encryptedData));
+            const key = await this.getCryptoKey();
+            const dataBytes = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
+            const iv = dataBytes.slice(0, 12);
+            const cipherBytes = dataBytes.slice(12);
+            const decrypted = await window.crypto.subtle.decrypt(
+                { name: this.config.encryptionAlgorithm, iv },
+                key,
+                cipherBytes
+            );
+            const decoder = new TextDecoder();
+            const decoded = decoder.decode(decrypted);
+            // Si le contenu n'est pas du JSON valide, on renvoie la chaîne brute
+            try {
+                return JSON.parse(decoded);
+            } catch (e) {
+                return decoded;
+            }
         } catch (error) {
             console.warn('⚠️ Erreur déchiffrement, retour données brutes');
             return encryptedData;
