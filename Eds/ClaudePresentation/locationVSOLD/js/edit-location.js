@@ -1472,10 +1472,11 @@ window.addWeaknessAfter = function(afterIndex) {
   
   // Synchronisation : temps réel COMPLÈTE
   if (window.instantSync) {
-    // 1. Re-setup listeners pour nouveaux éléments
+    // 1. Re-setup listeners pour nouveaux éléments (délai plus long)
     setTimeout(() => {
       window.instantSync.setupInstantListeners();
-    }, 100);
+      console.log('🔄 Listeners reconfigurés pour nouveaux éléments');
+    }, 200);
     
     // 2. Sauvegarde immédiate des nouveaux champs
     setTimeout(() => {
@@ -1485,13 +1486,15 @@ window.addWeaknessAfter = function(afterIndex) {
         [`weakness${newIndex}-desc`]: document.querySelector(`[data-field="weakness${newIndex}-desc"]`)?.textContent || `Description de la faiblesse ${newIndex}`
       };
       
-      // Force l'enregistrement de chaque nouveau champ
+      // Force l'enregistrement de chaque nouveau champ (méthode correcte)
       Object.entries(newFields).forEach(([fieldName, value]) => {
-        window.instantSync.saveFieldValue(fieldName, value);
+        window.instantSync.executeInstantSync(fieldName, value);
       });
       
-      // Force sync globale pour s'assurer
-      window.instantSync.executeInstantSync(true);
+      // Force sync globale pour s'assurer que tout est sauvé
+      setTimeout(() => {
+        window.instantSync.executeInstantSync(true);
+      }, 100);
       console.log('💾 Sauvegarde forcée des nouveaux champs:', newFields);
     }, 300);
   }
@@ -1781,10 +1784,11 @@ window.addStrengthAfter = function(afterIndex) {
   
   // Synchronisation : temps réel COMPLÈTE
   if (window.instantSync) {
-    // 1. Re-setup listeners pour nouveaux éléments
+    // 1. Re-setup listeners pour nouveaux éléments (délai plus long)
     setTimeout(() => {
       window.instantSync.setupInstantListeners();
-    }, 100);
+      console.log('🔄 Listeners reconfigurés pour nouveaux éléments');
+    }, 200);
     
     // 2. Sauvegarde immédiate des nouveaux champs
     setTimeout(() => {
@@ -1794,13 +1798,15 @@ window.addStrengthAfter = function(afterIndex) {
         [`strength${newIndex}-desc`]: document.querySelector(`[data-field="strength${newIndex}-desc"]`)?.textContent || `Description de l'avantage ${newIndex}`
       };
       
-      // Force l'enregistrement de chaque nouveau champ
+      // Force l'enregistrement de chaque nouveau champ (méthode correcte)
       Object.entries(newFields).forEach(([fieldName, value]) => {
-        window.instantSync.saveFieldValue(fieldName, value);
+        window.instantSync.executeInstantSync(fieldName, value);
       });
       
-      // Force sync globale pour s'assurer
-      window.instantSync.executeInstantSync(true);
+      // Force sync globale pour s'assurer que tout est sauvé
+      setTimeout(() => {
+        window.instantSync.executeInstantSync(true);
+      }, 100);
       console.log('💾 Sauvegarde forcée des nouveaux champs:', newFields);
     }, 300);
   }
