@@ -850,21 +850,6 @@
             position: relative;
         }
         
-        .dynamic-field::before {
-            content: '🆕';
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            font-size: 0.8rem;
-            opacity: 0.7;
-            animation: new-field-pulse 2s infinite;
-        }
-        
-        @keyframes new-field-pulse {
-            0%, 100% { opacity: 0.7; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-        
         /* Animation pour suppression d'éléments dynamiques */
         .dynamic-item.removing {
             opacity: 0;

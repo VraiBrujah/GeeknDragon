@@ -382,11 +382,11 @@ class PresentationReceiver {
         const itemHTML = `
             <div class="${itemClass} dynamic-item" data-index="${index}">
                 <div class="${iconClass}">
-                    <span class="editable dynamic-field" data-field="${type}${index}-emoji">${defaultEmoji}</span>
+                    <span class="editable" data-field="${type}${index}-emoji">${defaultEmoji}</span>
                 </div>
                 <div class="${contentClass}">
-                    <h4 class="editable dynamic-field" data-field="${type}${index}-title">${defaultTitle}</h4>
-                    <p class="editable dynamic-field" data-field="${type}${index}-desc">${defaultDesc}</p>
+                    <h4 class="editable" data-field="${type}${index}-title">${defaultTitle}</h4>
+                    <p class="editable" data-field="${type}${index}-desc">${defaultDesc}</p>
                 </div>
             </div>
         `;
