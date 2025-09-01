@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "language": "en",
+    "name": "English",
+    "nativeName": "English",
+    "locale": "en-US",
+    "flag": "🇺🇸",
+    "rtl": false,
+    "version": "1.0.0",
+    "lastUpdated": "2025-01-01"
+  },
+  
+  "admin": {
+    "title": "Li-CUBE PRO™ Administration",
+    "close": "Close",
+    "minimize": "Minimize",
+    "preview": "Preview",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "duplicate": "Duplicate",
+    "edit": "Edit",
+    "add": "Add",
+    "remove": "Remove",
+    "help": "Help",
+    "loading": "Loading...",
+    "refresh": "Refresh"
+  },
+  
+  "tabs": {
+    "sections": "Sections",
+    "templates": "Templates",
+    "content": "Content",
+    "settings": "Settings",
+    "languages": "Languages",
+    "builder": "Builder"
+  },
+  
+  "sections": {
+    "title": "Section Management",
+    "addSection": "Add Section",
+    "import": "Import",
+    "export": "Export",
+    "moveUp": "Move Up",
+    "moveDown": "Move Down",
+    "visible": "Visible",
+    "hidden": "Hidden",
+    "fields": "fields",
+    "field": "field",
+    "noSections": "No sections created",
+    "selectSection": "Select a section to edit",
+    "sectionName": "Section name",
+    "sectionVisible": "Section visible",
+    "sectionProperties": "Section properties",
+    "sectionActions": "Section actions"
+  },
+  
+  "templates": {
+    "title": "Available Templates",
+    "search": "Search templates...",
+    "use": "Use",
+    "create": "Create",
+    "categories": {
+      "all": "All",
+      "hero": "Hero",
+      "content": "Content", 
+      "pricing": "Pricing",
+      "contact": "Contact",
+      "custom": "Custom"
+    },
+    "types": {
+      "hero": "Hero Section",
+      "pricing": "Pricing Section",
+      "advantages": "Advantages Section",
+      "contact": "Contact Section",
+      "custom": "Custom Section",
+      "testimonial": "Testimonials Section",
+      "gallery": "Gallery Section",
+      "faq": "FAQ Section"
+    },
+    "descriptions": {
+      "hero": "Homepage section with title and subtitle",
+      "pricing": "Pricing cards grid",
+      "advantages": "List of advantages with icons",
+      "contact": "Contact information",
+      "custom": "Customizable empty section"
+    }
+  },
+  
+  "fields": {
+    "text": "Text",
+    "image": "Image",
+    "button": "Button",
+    "spacer": "Spacer",
+    "link": "Link",
+    "video": "Video",
+    "map": "Map",
+    "form": "Form",
+    "addField": "Add Field",
+    "removeField": "Remove Field",
+    "fieldName": "Field name",
+    "fieldValue": "Value",
+    "fieldType": "Field type",
+    "placeholder": "Placeholder text",
+    "required": "Required field",
+    "validation": "Validation",
+    "properties": "Properties",
+    "content": "Content",
+    "url": "URL",
+    "altText": "Alt text",
+    "linkText": "Link text",
+    "buttonText": "Button text",
+    "height": "Height",
+    "width": "Width"
+  },
+  
+  "messages": {
+    "success": "Operation successful",
+    "error": "Error occurred",
+    "warning": "Warning",
+    "info": "Information",
+    "saved": "Successfully saved",
+    "deleted": "Successfully deleted",
+    "duplicated": "Successfully duplicated",
+    "created": "Successfully created",
+    "updated": "Successfully updated",
+    "imported": "Successfully imported",
+    "exported": "Successfully exported",
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "noSelection": "Select an item to edit",
+    "confirmDelete": "Are you sure you want to delete?",
+    "confirmDeleteSection": "Are you sure you want to delete this section?",
+    "unsavedChanges": "You have unsaved changes",
+    "networkError": "Connection error",
+    "fileNotFound": "File not found",
+    "invalidData": "Invalid data",
+    "operationComplete": "Operation complete"
+  },
+  
+  "settings": {
+    "title": "Settings",
+    "interface": "Interface",
+    "panelPosition": "Panel position",
+    "right": "Right",
+    "left": "Left",
+    "autoHide": "Auto-hide in presentation mode",
+    "enableDragDrop": "Enable drag & drop",
+    "enablePreview": "Real-time preview",
+    "syncDelay": "Sync delay (ms)",
+    "language": "Language",
+    "currentLanguage": "Current language",
+    "selectLanguage": "Choose language",
+    "shortcuts": "Keyboard Shortcuts",
+    "theme": "Theme",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "autoTheme": "Auto",
+    "accessibility": "Accessibility",
+    "fontSize": "Font size",
+    "highContrast": "High contrast",
+    "reduceMotion": "Reduce animations"
+  },
+  
+  "shortcuts": {
+    "title": "Keyboard Shortcuts",
+    "preview": "Preview",
+    "save": "Save", 
+    "duplicate": "Duplicate section",
+    "close": "Close panel",
+    "toggleAdmin": "Toggle admin",
+    "undo": "Undo",
+    "redo": "Redo",
+    "selectAll": "Select all",
+    "copy": "Copy",
+    "paste": "Paste",
+    "find": "Search",
+    "help": "Show help"
+  },
+  
+  "templateBuilder": {
+    "title": "Template Builder",
+    "newTemplate": "New Template",
+    "editTemplate": "Edit Template",
+    "widgets": "Available Widgets",
+    "properties": "Properties",
+    "searchWidgets": "Search widgets...",
+    "dragHint": "Drag & drop widgets here to create your template",
+    "categories": {
+      "content": "Content",
+      "media": "Media",
+      "interactive": "Interactive",
+      "layout": "Layout",
+      "forms": "Forms",
+      "other": "Others"
+    },
+    "widgets": {
+      "text": "Text",
+      "heading": "Heading",
+      "image": "Image",
+      "button": "Button",
+      "container": "Container",
+      "grid": "Grid",
+      "spacer": "Spacer",
+      "card": "Card",
+      "list": "List",
+      "separator": "Separator"
+    },
+    "actions": {
+      "addWidget": "Add Widget",
+      "removeWidget": "Remove Widget",
+      "moveUp": "Move Up",
+      "moveDown": "Move Down",
+      "duplicate": "Duplicate",
+      "configure": "Configure"
+    }
+  },
+  
+  "languages": {
+    "title": "Language Management",
+    "currentLanguage": "Current language",
+    "availableLanguages": "Available languages",
+    "addLanguage": "Add language",
+    "removeLanguage": "Remove language",
+    "editTranslations": "Edit translations",
+    "importTranslations": "Import translations",
+    "exportTranslations": "Export translations",
+    "autoDetect": "Auto detection",
+    "fallbackLanguage": "Fallback language",
+    "rtlSupport": "RTL support",
+    "dateFormat": "Date format",
+    "numberFormat": "Number format",
+    "currencyFormat": "Currency format"
+  },
+  
+  "content": {
+    "title": "Content Management",
+    "editContent": "Edit content",
+    "contentFor": "Content for: {{language}}",
+    "translateTo": "Translate to {{language}}",
+    "originalContent": "Original content",
+    "translatedContent": "Translated content",
+    "missingTranslations": "Missing translations",
+    "autoTranslate": "Auto translation",
+    "manualTranslate": "Manual translation",
+    "copyFromOriginal": "Copy from original",
+    "resetTranslation": "Reset translation"
+  },
+  
+  "validation": {
+    "required": "This field is required",
+    "minLength": "At least {{min}} characters required",
+    "maxLength": "Maximum {{max}} characters allowed", 
+    "email": "Invalid email address",
+    "url": "Invalid URL",
+    "number": "Invalid number",
+    "phone": "Invalid phone number",
+    "date": "Invalid date",
+    "pattern": "Invalid format"
+  },
+  
+  "units": {
+    "px": "pixels",
+    "em": "em",
+    "rem": "rem",
+    "percent": "percent",
+    "vh": "vh",
+    "vw": "vw",
+    "seconds": "seconds",
+    "milliseconds": "milliseconds",
+    "bytes": "bytes",
+    "kb": "KB",
+    "mb": "MB"
+  },
+  
+  "dates": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "thisWeek": "This week",
+    "thisMonth": "This month",
+    "thisYear": "This year",
+    "never": "Never",
+    "ago": "{{time}} ago",
+    "in": "in {{time}}",
+    "justNow": "Just now"
+  },
+  
+  "status": {
+    "online": "Online",
+    "offline": "Offline",
+    "connecting": "Connecting...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "syncing": "Syncing...",
+    "synced": "Synced",
+    "error": "Error",
+    "ready": "Ready",
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "processing": "Processing..."
+  }
+}

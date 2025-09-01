@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire Universel de Campagnes D&D 2024</title>
+    
+    <!-- EXTERNAL DEPENDENCIES -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           UNIVERSAL CSS VARIABLES
+           ======================================== */
+        
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D4AF37;
+            --danger-color: #C62828;
+            --warning-color: #FF8F00;
+            --success-color: #2E7D32;
+            --info-color: #1565C0;
+            --dark-bg: #1A1A1A;
+            --light-bg: #2D2D2D;
+            --text-color: #E0E0E0;
+            --border-color: #444;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Crimson Text', serif;
+        }
+
+        /* ========================================
+           RESET & BASE STYLES
+           ======================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ========================================
+           MAIN LAYOUT
+           ======================================== */
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* CAMPAIGN SELECTOR */
+        .campaign-selector {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--dark-bg);
+            border-bottom: 2px solid var(--primary-color);
+            padding: 15px 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .campaign-selector h1 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+        }
+
+        .campaign-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .campaign-select {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: var(--font-body);
+            min-width: 200px;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            margin-top: 70px;
+            display: flex;
+        }
+
+        /* NAVIGATION SIDEBAR */
+        .nav-sidebar {
+            width: 300px;
+            background: var(--dark-bg);
+            border-right: 2px solid var(--primary-color);
+            padding: 20px;
+            overflow-y: auto;
+            height: calc(100vh - 70px);
+        }
+
+        .nav-tree {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 5px 0;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-item:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .nav-item.active {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            font-weight: bold;
+        }
+
+        .nav-item i {
+            width: 16px;
+            text-align: center;
+        }
+
+        /* CONTENT AREA */
+        .content-area {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            height: calc(100vh - 70px);
+        }
+
+        .content-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .content-header h2 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            font-size: 2rem;
+        }
+
+        /* WELCOME SCREEN */
+        .welcome-screen {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .welcome-screen h2 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .welcome-screen p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* CAMPAIGN CREATION */
+        .campaign-creator {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* BUTTONS */
+        .btn {
+            background: var(--primary-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+        }
+
+        .btn-info {
+            background: var(--info-color);
+        }
+
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+        }
+
+        /* TEMPLATES GRID */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .template-card {
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .template-card:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .template-card h3 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .template-card p {
+            margin-bottom: 15px;
+        }
+
+        .template-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        /* CAMPAIGN INTERFACE STYLES */
+        .nav-section {
+            margin-bottom: 25px;
+        }
+        
+        .nav-section h3 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 1.1rem;
+        }
+        
+        .overview-container {
+            padding: 20px;
+        }
+        
+        .campaign-overview {
+            max-width: 800px;
+        }
+        
+        .campaign-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-card h3 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .stat-card p {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+        
+        /* MAP INTERFACE */
+        .map-container, .character-container, .quest-container, 
+        .notes-container, .calendar-container {
+            padding: 20px;
+        }
+        
+        .content-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .content-header h2 {
+            flex: 1;
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            font-size: 2rem;
+        }
+        
+        .map-controls, .character-controls, .calendar-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .map-viewer {
+            background: var(--dark-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .map-wrapper {
+            position: relative;
+            transition: transform 0.3s ease;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .map-image {
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .pins-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .map-pin {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--danger-color);
+            border: 3px solid white;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            cursor: move;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+        
+        .map-pin::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+        
+        .map-pin:hover {
+            transform: rotate(-45deg) scale(1.2);
+            z-index: 200;
+        }
+        
+        .map-pin.dragging {
+            z-index: 1000;
+            opacity: 0.8;
+        }
+        
+        .pin-delete {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: var(--danger-color);
+            border: 2px solid white;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            transform: rotate(45deg);
+        }
+        
+        .map-pin:hover .pin-delete {
+            display: flex;
+        }
+        
+        /* CHARACTERS INTERFACE */
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .character-card {
+            background: var(--light-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .character-card:hover {
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow);
+        }
+        
+        .character-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .character-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .character-info h3 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+        
+        .character-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 8px;
+            background: var(--dark-bg);
+            border-radius: 6px;
+        }
+        
+        .stat-item .label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .stat-item .value {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        /* UTILITY CLASSES */
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 10px; }
+        .mt-3 { margin-top: 15px; }
+        .mb-2 { margin-bottom: 10px; }
+        .mb-3 { margin-bottom: 15px; }
+        .hidden { display: none; }
+        .flex { display: flex; }
+        .gap-2 { gap: 10px; }
+        .items-center { align-items: center; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .nav-sidebar {
+                width: 100%;
+                height: auto;
+                max-height: 200px;
+            }
+            
+            .campaign-selector {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+            
+            .campaign-controls {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- CAMPAIGN SELECTOR -->
+    <div class="campaign-selector">
+        <h1><i class="fas fa-dragon"></i> Gestionnaire de Campagnes D&D</h1>
+        <div class="campaign-controls">
+            <select class="campaign-select" id="campaignSelect" onchange="switchCampaign()">
+                <option value="">Sélectionner une campagne...</option>
+            </select>
+            <button class="btn btn-success" onclick="showNewCampaignModal()">
+                <i class="fas fa-plus"></i> Nouvelle
+            </button>
+            <button class="btn btn-info" onclick="importCampaign()">
+                <i class="fas fa-upload"></i> Importer
+            </button>
+            <button class="btn btn-warning" onclick="exportCampaign()" id="exportBtn" disabled>
+                <i class="fas fa-download"></i> Exporter
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="app-container">
+        <div class="main-content">
+            <!-- NAVIGATION SIDEBAR -->
+            <div class="nav-sidebar" id="navSidebar">
+                <!-- Navigation will be generated here -->
+            </div>
+
+            <!-- CONTENT AREA -->
+            <div class="content-area">
+                <!-- WELCOME SCREEN -->
+                <div id="welcomeScreen" class="welcome-screen">
+                    <h2><i class="fas fa-scroll"></i> Bienvenue, Maître du Jeu !</h2>
+                    <p>Créez, gérez et animez vos campagnes D&D avec tous les outils dont vous avez besoin : cartes interactives, personnages, quêtes, calendrier et bien plus encore.</p>
+                    
+                    <div class="templates-grid">
+                        <div class="template-card" onclick="createFromTemplate('blank')">
+                            <div class="template-icon"><i class="fas fa-file-alt"></i></div>
+                            <h3>Campagne Vide</h3>
+                            <p>Commencez avec une campagne entièrement personnalisable</p>
+                        </div>
+                        
+                        <div class="template-card" onclick="createFromTemplate('classic')">
+                            <div class="template-icon"><i class="fas fa-castle"></i></div>
+                            <h3>Aventure Classique</h3>
+                            <p>Template pour une aventure traditionnelle avec donjon et dragon</p>
+                        </div>
+                        
+                        <div class="template-card" onclick="createFromTemplate('urban')">
+                            <div class="template-icon"><i class="fas fa-city"></i></div>
+                            <h3>Intrigue Urbaine</h3>
+                            <p>Perfect pour les campagnes en milieu urbain avec contacts et factions</p>
+                        </div>
+                        
+                        <div class="template-card" onclick="createFromTemplate('exploration')">
+                            <div class="template-icon"><i class="fas fa-compass"></i></div>
+                            <h3>Exploration</h3>
+                            <p>Idéal pour les campagnes d'exploration de territoires inconnus</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAMPAIGN CONTENT -->
+                <div id="campaignContent" class="hidden">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script>
+        // ========================================
+        // UNIVERSAL CAMPAIGN MANAGER
+        // ========================================
+        
+        let campaigns = {};
+        let currentCampaign = null;
+        let campaignTemplates = {};
+
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCampaignsList();
+            initializeTemplates();
+            showWelcomeScreen();
+        });
+
+        function loadCampaignsList() {
+            try {
+                const saved = localStorage.getItem('dnd_campaigns_list');
+                if (saved) {
+                    campaigns = JSON.parse(saved);
+                    updateCampaignSelect();
+                }
+            } catch (e) {
+                console.error('Erreur lors du chargement de la liste des campagnes:', e);
+            }
+        }
+
+        function updateCampaignSelect() {
+            const select = document.getElementById('campaignSelect');
+            select.innerHTML = '<option value="">Sélectionner une campagne...</option>';
+            
+            Object.values(campaigns).forEach(campaign => {
+                const option = document.createElement('option');
+                option.value = campaign.id;
+                option.textContent = campaign.name;
+                select.appendChild(option);
+            });
+        }
+
+        function showWelcomeScreen() {
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+            document.getElementById('campaignContent').classList.add('hidden');
+            document.getElementById('navSidebar').innerHTML = '';
+            document.getElementById('exportBtn').disabled = true;
+        }
+
+        // ========================================
+        // CAMPAIGN TEMPLATES
+        // ========================================
+        
+        function initializeTemplates() {
+            campaignTemplates = {
+                blank: {
+                    name: "Nouvelle Campagne",
+                    description: "Une campagne vide à personnaliser",
+                    structure: {
+                        root: {
+                            id: "root",
+                            label: "Campagne",
+                            type: "campaign",
+                            icon: "fas fa-home",
+                            description: "Point de départ de votre aventure",
+                            children: [],
+                            mapId: null
+                        }
+                    },
+                    characters: {},
+                    maps: {},
+                    quests: {},
+                    calendar: {
+                        currentDate: { day: 1, month: 1, year: 1000 },
+                        events: {}
+                    },
+                    music: {
+                        enabled: true,
+                        volume: 0.5,
+                        currentContext: null,
+                        currentTrack: null,
+                        musicPaths: {}
+                    }
+                },
+                classic: {
+                    name: "Aventure Classique",
+                    description: "Template pour aventure avec donjon",
+                    structure: {
+                        root: {
+                            id: "root",
+                            label: "L'Aventure Commence",
+                            type: "campaign",
+                            icon: "fas fa-home",
+                            description: "Le village tranquille où tout commence...",
+                            children: ["village", "donjon"],
+                            mapId: null
+                        },
+                        village: {
+                            id: "village",
+                            label: "Village de Départ",
+                            type: "location",
+                            icon: "fas fa-home",
+                            description: "Un petit village paisible avec une taverne, un forgeron et des habitants chaleureux.",
+                            children: ["taverne", "forgeron"],
+                            mapId: "village_map"
+                        },
+                        taverne: {
+                            id: "taverne",
+                            label: "La Taverne du Dragon Jovial",
+                            type: "location",
+                            icon: "fas fa-beer",
+                            description: "Le lieu de rassemblement des aventuriers et source de rumeurs.",
+                            children: [],
+                            mapId: null
+                        },
+                        forgeron: {
+                            id: "forgeron",
+                            label: "Forge de Maître Durin",
+                            type: "location",
+                            icon: "fas fa-hammer",
+                            description: "Un nain expert qui peut équiper les héros.",
+                            children: [],
+                            mapId: null
+                        },
+                        donjon: {
+                            id: "donjon",
+                            label: "Le Donjon Mystérieux",
+                            type: "location",
+                            icon: "fas fa-dungeon",
+                            description: "Un ancien donjon rempli de trésors et de dangers.",
+                            children: ["entree_donjon", "salle_boss"],
+                            mapId: "donjon_map"
+                        },
+                        entree_donjon: {
+                            id: "entree_donjon",
+                            label: "Entrée du Donjon",
+                            type: "location",
+                            icon: "fas fa-door-open",
+                            description: "L'entrée sombre et inquiétante du donjon.",
+                            children: [],
+                            mapId: "entree_map"
+                        },
+                        salle_boss: {
+                            id: "salle_boss",
+                            label: "Chambre du Boss Final",
+                            type: "location",
+                            icon: "fas fa-crown",
+                            description: "La salle où attend le gardien final du donjon.",
+                            children: [],
+                            mapId: "boss_map"
+                        }
+                    },
+                    characters: {},
+                    maps: {
+                        village_map: {
+                            id: "village_map",
+                            name: "Plan du Village",
+                            image: "images/village.jpg",
+                            pins: []
+                        },
+                        donjon_map: {
+                            id: "donjon_map",
+                            name: "Carte du Donjon",
+                            image: "images/donjon.jpg",
+                            pins: []
+                        }
+                    },
+                    quests: {
+                        main_quest: {
+                            id: "main_quest",
+                            title: "Nettoyer le Donjon",
+                            description: "Les villageois demandent aux héros de nettoyer le donjon des monstres qui le hantent.",
+                            status: "active",
+                            objectives: [
+                                { description: "Parler au maire du village", completed: false },
+                                { description: "Explorer le donjon", completed: false },
+                                { description: "Vaincre le boss final", completed: false },
+                                { description: "Retourner au village", completed: false }
+                            ]
+                        }
+                    },
+                    calendar: {
+                        currentDate: { day: 1, month: 3, year: 1482 },
+                        events: {}
+                    },
+                    music: {
+                        enabled: true,
+                        volume: 0.5,
+                        currentContext: null,
+                        currentTrack: null,
+                        musicPaths: {}
+                    }
+                },
+                urban: {
+                    name: "Intrigue Urbaine",
+                    description: "Template pour les campagnes en milieu urbain avec contacts et factions",
+                    structure: {
+                        root: {
+                            id: "root",
+                            label: "La Cité des Mille Secrets",
+                            type: "campaign",
+                            icon: "fas fa-city",
+                            description: "Une grande cité portuaire où l'intrigue et la politique dominent...",
+                            children: ["quartier_nobles", "quartier_marchands", "quartier_pauvre", "port"],
+                            mapId: "city_map"
+                        },
+                        quartier_nobles: {
+                            id: "quartier_nobles",
+                            label: "Quartier Noble",
+                            type: "location",
+                            icon: "fas fa-crown",
+                            description: "Le quartier huppé où vivent les nobles et les riches marchands.",
+                            children: ["palais", "manoir_suspect"],
+                            mapId: "nobles_map"
+                        },
+                        palais: {
+                            id: "palais",
+                            label: "Palais du Gouverneur",
+                            type: "location",
+                            icon: "fas fa-university",
+                            description: "Siège du pouvoir politique de la cité.",
+                            children: [],
+                            mapId: null
+                        },
+                        manoir_suspect: {
+                            id: "manoir_suspect",
+                            label: "Manoir Mystérieux",
+                            type: "location",
+                            icon: "fas fa-home",
+                            description: "Un manoir où se trament des conspirations.",
+                            children: [],
+                            mapId: null
+                        },
+                        quartier_marchands: {
+                            id: "quartier_marchands",
+                            label: "Quartier Marchand",
+                            type: "location",
+                            icon: "fas fa-shopping-cart",
+                            description: "Le cœur commercial de la cité.",
+                            children: [],
+                            mapId: null
+                        },
+                        quartier_pauvre: {
+                            id: "quartier_pauvre",
+                            label: "Quartiers Pauvres",
+                            type: "location",
+                            icon: "fas fa-home",
+                            description: "Les bas-fonds où règnent guildes de voleurs et contrebandiers.",
+                            children: [],
+                            mapId: null
+                        },
+                        port: {
+                            id: "port",
+                            label: "Le Port",
+                            type: "location",
+                            icon: "fas fa-anchor",
+                            description: "Le port animé où arrivent nouvelles et marchandises.",
+                            children: [],
+                            mapId: null
+                        }
+                    },
+                    characters: {
+                        gouverneur: {
+                            id: "gouverneur",
+                            name: "Lord Aldrich Montclair",
+                            type: "pnj",
+                            race: "Humain",
+                            class: "Noble",
+                            level: 5,
+                            hp: { current: 45, max: 45 },
+                            armorClass: 15,
+                            description: "Le gouverneur de la cité, politicien rusé."
+                        },
+                        informateur: {
+                            id: "informateur",
+                            name: "Silas l'Oreille",
+                            type: "pnj",
+                            race: "Halfelin",
+                            class: "Roublard",
+                            level: 3,
+                            hp: { current: 22, max: 22 },
+                            armorClass: 14,
+                            description: "Informateur des bas-fonds qui vend ses secrets."
+                        }
+                    },
+                    maps: {
+                        city_map: {
+                            id: "city_map",
+                            name: "Plan de la Cité",
+                            image: "images/city.jpg",
+                            pins: []
+                        }
+                    },
+                    quests: {
+                        conspiracy: {
+                            id: "conspiracy",
+                            title: "La Conspiration des Masques",
+                            description: "Une société secrète complote contre le gouverneur.",
+                            status: "active",
+                            objectives: [
+                                { description: "Infiltrer le quartier noble", completed: false },
+                                { description: "Identifier les conjurés", completed: false },
+                                { description: "Découvrir leur plan", completed: false },
+                                { description: "Déjouer l'attentat", completed: false }
+                            ]
+                        }
+                    },
+                    calendar: {
+                        currentDate: { day: 15, month: 7, year: 1489 },
+                        events: {
+                            "15_7_1489": "Festival de la Moisson - Grand rassemblement au marché"
+                        }
+                    },
+                    music: {
+                        enabled: true,
+                        volume: 0.5,
+                        currentContext: null,
+                        currentTrack: null,
+                        musicPaths: {}
+                    }
+                },
+                exploration: {
+                    name: "Exploration",
+                    description: "Idéal pour les campagnes d'exploration de territoires inconnus",
+                    structure: {
+                        root: {
+                            id: "root",
+                            label: "Terres Inexplorées",
+                            type: "campaign",
+                            icon: "fas fa-compass",
+                            description: "Un vaste territoire sauvage à explorer et cartographier...",
+                            children: ["base_camp", "foret_mysterieuse", "ruines_antiques", "montagne"],
+                            mapId: "wilderness_map"
+                        },
+                        base_camp: {
+                            id: "base_camp",
+                            label: "Camp de Base",
+                            type: "location",
+                            icon: "fas fa-campground",
+                            description: "Le point de départ de vos expéditions.",
+                            children: [],
+                            mapId: null
+                        },
+                        foret_mysterieuse: {
+                            id: "foret_mysterieuse",
+                            label: "Forêt des Murmures",
+                            type: "location",
+                            icon: "fas fa-tree",
+                            description: "Une forêt ancienne aux secrets bien gardés.",
+                            children: ["clairiere_druidique"],
+                            mapId: "forest_map"
+                        },
+                        clairiere_druidique: {
+                            id: "clairiere_druidique",
+                            label: "Clairière Druidique",
+                            type: "location",
+                            icon: "fas fa-leaf",
+                            description: "Un lieu sacré au cœur de la forêt.",
+                            children: [],
+                            mapId: null
+                        },
+                        ruines_antiques: {
+                            id: "ruines_antiques",
+                            label: "Ruines Antiques",
+                            type: "location",
+                            icon: "fas fa-monument",
+                            description: "Les vestiges d'une civilisation perdue.",
+                            children: [],
+                            mapId: "ruins_map"
+                        },
+                        montagne: {
+                            id: "montagne",
+                            label: "Pic du Dragon",
+                            type: "location",
+                            icon: "fas fa-mountain",
+                            description: "Une montagne majestueuse aux dangers cachés.",
+                            children: [],
+                            mapId: null
+                        }
+                    },
+                    characters: {
+                        guide: {
+                            id: "guide",
+                            name: "Kael le Ranger",
+                            type: "pnj",
+                            race: "Elfe des Bois",
+                            class: "Ranger",
+                            level: 6,
+                            hp: { current: 58, max: 58 },
+                            armorClass: 16,
+                            description: "Un guide expérimenté qui connaît les terres sauvages."
+                        },
+                        druide: {
+                            id: "druide",
+                            name: "Ancianne Feuilledor",
+                            type: "pnj",
+                            race: "Elfe",
+                            class: "Druide",
+                            level: 8,
+                            hp: { current: 64, max: 64 },
+                            armorClass: 14,
+                            description: "Gardienne de la forêt des Murmures."
+                        }
+                    },
+                    maps: {
+                        wilderness_map: {
+                            id: "wilderness_map",
+                            name: "Carte des Terres Sauvages",
+                            image: "images/wilderness.jpg",
+                            pins: []
+                        },
+                        forest_map: {
+                            id: "forest_map",
+                            name: "Plan de la Forêt",
+                            image: "images/forest.jpg",
+                            pins: []
+                        }
+                    },
+                    quests: {
+                        cartographer: {
+                            id: "cartographer",
+                            title: "Mission Cartographique",
+                            description: "Explorer et cartographier les terres inconnues.",
+                            status: "active",
+                            objectives: [
+                                { description: "Établir le camp de base", completed: true },
+                                { description: "Explorer la forêt des Murmures", completed: false },
+                                { description: "Découvrir les ruines antiques", completed: false },
+                                { description: "Escalader le Pic du Dragon", completed: false },
+                                { description: "Dresser la carte complète", completed: false }
+                            ]
+                        }
+                    },
+                    calendar: {
+                        currentDate: { day: 3, month: 4, year: 1456 },
+                        events: {
+                            "3_4_1456": "Début de l'expédition"
+                        }
+                    },
+                    music: {
+                        enabled: true,
+                        volume: 0.5,
+                        currentContext: null,
+                        currentTrack: null,
+                        musicPaths: {}
+                    }
+                }
+            };
+        }
+
+        // ========================================
+        // CAMPAIGN CREATION
+        // ========================================
+        
+        function createFromTemplate(templateId) {
+            const template = campaignTemplates[templateId];
+            if (!template) return;
+            
+            showNewCampaignModal(template, templateId);
+        }
+
+        function showNewCampaignModal(template = null, templateId = 'blank') {
+            const templateData = template || campaignTemplates.blank;
+            
+            const content = `
+                <div class="campaign-creator">
+                    <h2><i class="fas fa-plus"></i> ${template ? 'Nouvelle Campagne depuis Template' : 'Nouvelle Campagne'}</h2>
+                    ${template ? `<p class="mb-3">Template: <strong>${templateData.name}</strong></p>` : ''}
+                    
+                    <div class="form-group">
+                        <label>Nom de la Campagne</label>
+                        <input type="text" class="form-input" id="newCampaignName" placeholder="Ma Super Campagne" value="${templateData.name}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-textarea" id="newCampaignDescription" placeholder="Description de votre campagne...">${templateData.description}</textarea>
+                    </div>
+                    
+                    <div class="form-group text-center">
+                        <button class="btn btn-success btn-large" onclick="createNewCampaign('${templateId}')">
+                            <i class="fas fa-magic"></i> Créer la Campagne
+                        </button>
+                        <button class="btn btn-large mt-2" onclick="showWelcomeScreen()">
+                            <i class="fas fa-times"></i> Annuler
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('welcomeScreen').innerHTML = content;
+        }
+
+        function createNewCampaign(templateId) {
+            const name = document.getElementById('newCampaignName').value.trim();
+            const description = document.getElementById('newCampaignDescription').value.trim();
+            
+            if (!name) {
+                alert('Veuillez saisir un nom pour la campagne');
+                return;
+            }
+            
+            const campaignId = generateId(name);
+            const template = campaignTemplates[templateId] || campaignTemplates.blank;
+            
+            // Create new campaign from template
+            const newCampaign = {
+                id: campaignId,
+                name: name,
+                description: description,
+                created: new Date().toISOString(),
+                lastModified: new Date().toISOString(),
+                currentNode: "root",
+                currentPath: ["root"],
+                ...JSON.parse(JSON.stringify(template)) // Deep clone
+            };
+            
+            // Update root node
+            newCampaign.structure.root.label = name;
+            newCampaign.structure.root.description = description;
+            
+            // Save campaign
+            campaigns[campaignId] = {
+                id: campaignId,
+                name: name,
+                description: description,
+                created: newCampaign.created
+            };
+            
+            localStorage.setItem('dnd_campaigns_list', JSON.stringify(campaigns));
+            localStorage.setItem(`dnd_campaign_${campaignId}`, JSON.stringify(newCampaign));
+            
+            // Switch to new campaign
+            currentCampaign = newCampaign;
+            updateCampaignSelect();
+            document.getElementById('campaignSelect').value = campaignId;
+            loadCampaignInterface();
+        }
+
+        // ========================================
+        // CAMPAIGN SWITCHING
+        // ========================================
+        
+        function switchCampaign() {
+            const campaignId = document.getElementById('campaignSelect').value;
+            
+            if (!campaignId) {
+                showWelcomeScreen();
+                currentCampaign = null;
+                return;
+            }
+            
+            try {
+                const campaignData = localStorage.getItem(`dnd_campaign_${campaignId}`);
+                if (campaignData) {
+                    currentCampaign = JSON.parse(campaignData);
+                    loadCampaignInterface();
+                    document.getElementById('exportBtn').disabled = false;
+                } else {
+                    alert('Campagne non trouvée');
+                    showWelcomeScreen();
+                }
+            } catch (e) {
+                console.error('Erreur lors du chargement de la campagne:', e);
+                alert('Erreur lors du chargement de la campagne');
+            }
+        }
+
+        function loadCampaignInterface() {
+            if (!currentCampaign) return;
+            
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('campaignContent').classList.remove('hidden');
+            
+            // Load the full campaign interface here
+            // This would include all the existing functionality from your current system
+            loadFullInterface();
+        }
+
+        function loadFullInterface() {
+            // Create the complete campaign management interface
+            document.getElementById('campaignContent').innerHTML = `
+                <!-- MAP CONTAINER -->
+                <div id="mapContainer" class="map-container hidden">
+                    <div class="content-header">
+                        <i class="fas fa-map"></i>
+                        <h2>Carte Interactive</h2>
+                        <div class="map-controls">
+                            <button class="btn" onclick="toggleRotationLock()" id="rotationLockBtn">
+                                <i class="fas fa-lock-open"></i> <span>Rotation Libre</span>
+                            </button>
+                            <button class="btn" onclick="rotateMap(-90)" id="rotateLeftBtn">
+                                <i class="fas fa-undo"></i>
+                            </button>
+                            <button class="btn" onclick="rotateMap(90)" id="rotateRightBtn">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button class="btn" onclick="togglePinsLock()" id="pinsLockBtn">
+                                <i class="fas fa-unlock"></i> <span>Pins Libres</span>
+                            </button>
+                            <button class="btn btn-success" onclick="addPin()">
+                                <i class="fas fa-plus"></i> Ajouter Pin
+                            </button>
+                        </div>
+                    </div>
+                    <div class="map-viewer" id="mapViewer">
+                        <div class="map-wrapper" id="mapWrapper">
+                            <img id="mapImage" class="map-image" alt="Carte">
+                            <div class="pins-layer" id="pinsLayer"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CHARACTER CONTAINER -->
+                <div id="characterContainer" class="character-container hidden">
+                    <div class="content-header">
+                        <i class="fas fa-users"></i>
+                        <h2>Personnages</h2>
+                        <div class="character-controls">
+                            <button class="btn btn-success" onclick="addNewCharacter('pj')">
+                                <i class="fas fa-user-plus"></i> Nouveau PJ
+                            </button>
+                            <button class="btn btn-info" onclick="addNewCharacter('pnj')">
+                                <i class="fas fa-user-friends"></i> Nouveau PNJ
+                            </button>
+                        </div>
+                    </div>
+                    <div class="characters-grid" id="charactersGrid">
+                        <!-- Characters will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- QUEST CONTAINER -->
+                <div id="questContainer" class="quest-container hidden">
+                    <div class="content-header">
+                        <i class="fas fa-scroll"></i>
+                        <h2>Quêtes</h2>
+                        <button class="btn btn-success" onclick="addNewQuest()">
+                            <i class="fas fa-plus"></i> Nouvelle Quête
+                        </button>
+                    </div>
+                    <div class="quests-list" id="questsList">
+                        <!-- Quests will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- NOTES CONTAINER -->
+                <div id="notesContainer" class="notes-container hidden">
+                    <div class="content-header">
+                        <i class="fas fa-edit"></i>
+                        <h2>Notes & Journal</h2>
+                        <button class="btn btn-success" onclick="showNoteEditor()">
+                            <i class="fas fa-plus"></i> Nouvelle Note
+                        </button>
+                    </div>
+                    <div class="notes-content" id="notesContent">
+                        <!-- Notes will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- CALENDAR CONTAINER -->
+                <div id="calendarContainer" class="calendar-container hidden">
+                    <div class="content-header">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h2>Calendrier</h2>
+                        <div class="calendar-controls">
+                            <button class="btn" onclick="advanceTime(-1)">
+                                <i class="fas fa-minus"></i> Jour
+                            </button>
+                            <button class="btn" onclick="advanceTime(1)">
+                                <i class="fas fa-plus"></i> Jour
+                            </button>
+                            <button class="btn btn-warning" onclick="addCalendarEvent()">
+                                <i class="fas fa-plus"></i> Événement
+                            </button>
+                        </div>
+                    </div>
+                    <div class="calendar-display" id="calendarDisplay">
+                        <!-- Calendar will be displayed here -->
+                    </div>
+                </div>
+
+                <!-- OVERVIEW CONTAINER (DEFAULT) -->
+                <div id="overviewContainer" class="overview-container">
+                    <div class="content-header">
+                        <i class="fas fa-home"></i>
+                        <h2>${currentCampaign.name}</h2>
+                    </div>
+                    <div class="campaign-overview">
+                        <p class="campaign-description">${currentCampaign.description}</p>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <i class="fas fa-users"></i>
+                                <h3>${Object.keys(currentCampaign.characters || {}).length}</h3>
+                                <p>Personnages</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-scroll"></i>
+                                <h3>${Object.keys(currentCampaign.quests || {}).length}</h3>
+                                <p>Quêtes</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-map"></i>
+                                <h3>${Object.keys(currentCampaign.maps || {}).length}</h3>
+                                <p>Cartes</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-calendar"></i>
+                                <h3>Jour ${currentCampaign.calendar?.currentDate?.day || 1}</h3>
+                                <p>Date Actuelle</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Generate navigation
+            generateNavigation();
+            
+            // Initialize interface components
+            initializeInterface();
+        }
+
+        function generateNavigation() {
+            const sidebar = document.getElementById('navSidebar');
+            sidebar.innerHTML = `
+                <div class="nav-section">
+                    <h3><i class="fas fa-tachometer-alt"></i> Gestion</h3>
+                    <ul class="nav-tree">
+                        <li class="nav-item active" onclick="showSection('overview')">
+                            <i class="fas fa-home"></i> Aperçu Général
+                        </li>
+                        <li class="nav-item" onclick="showSection('characters')">
+                            <i class="fas fa-users"></i> Personnages
+                        </li>
+                        <li class="nav-item" onclick="showSection('quests')">
+                            <i class="fas fa-scroll"></i> Quêtes
+                        </li>
+                        <li class="nav-item" onclick="showSection('notes')">
+                            <i class="fas fa-edit"></i> Notes & Journal
+                        </li>
+                        <li class="nav-item" onclick="showSection('calendar')">
+                            <i class="fas fa-calendar-alt"></i> Calendrier
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3><i class="fas fa-map"></i> Cartes</h3>
+                    <ul class="nav-tree" id="mapsList">
+                        <!-- Maps will be populated here -->
+                    </ul>
+                </div>
+                
+                <div class="nav-section">
+                    <h3><i class="fas fa-sitemap"></i> Lieux</h3>
+                    <ul class="nav-tree" id="locationTree">
+                        <!-- Location tree will be populated here -->
+                    </ul>
+                </div>
+            `;
+            
+            // Populate maps list
+            populateMapsList();
+            
+            // Populate location tree
+            populateLocationTree();
+        }
+
+        // ========================================
+        // IMPORT/EXPORT
+        // ========================================
+        
+        function exportCampaign() {
+            if (!currentCampaign) return;
+            
+            const dataToExport = {
+                version: "1.0",
+                exported: new Date().toISOString(),
+                campaign: currentCampaign
+            };
+            
+            const blob = new Blob([JSON.stringify(dataToExport, null, 2)], { 
+                type: 'application/json' 
+            });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentCampaign.name}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function importCampaign() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        const campaign = data.campaign || data; // Support both formats
+                        
+                        // Generate new ID to avoid conflicts
+                        const newId = generateId(campaign.name);
+                        campaign.id = newId;
+                        campaign.lastModified = new Date().toISOString();
+                        
+                        // Save campaign
+                        campaigns[newId] = {
+                            id: newId,
+                            name: campaign.name,
+                            description: campaign.description,
+                            created: campaign.created || new Date().toISOString()
+                        };
+                        
+                        localStorage.setItem('dnd_campaigns_list', JSON.stringify(campaigns));
+                        localStorage.setItem(`dnd_campaign_${newId}`, JSON.stringify(campaign));
+                        
+                        updateCampaignSelect();
+                        alert(`Campagne "${campaign.name}" importée avec succès !`);
+                        
+                    } catch (err) {
+                        alert('Erreur lors de l\'importation du fichier');
+                        console.error(err);
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        // ========================================
+        // INTERFACE MANAGEMENT
+        // ========================================
+        
+        function initializeInterface() {
+            // Initialize any necessary components
+            showSection('overview');
+        }
+        
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = ['overview', 'characters', 'quests', 'notes', 'calendar', 'map'];
+            sections.forEach(section => {
+                const container = document.getElementById(section + 'Container');
+                if (container) {
+                    container.classList.add('hidden');
+                }
+            });
+            
+            // Show selected section
+            const targetContainer = document.getElementById(sectionName + 'Container');
+            if (targetContainer) {
+                targetContainer.classList.remove('hidden');
+            }
+            
+            // Update navigation active state
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Load section-specific data
+            switch(sectionName) {
+                case 'characters':
+                    loadCharacters();
+                    break;
+                case 'quests':
+                    loadQuests();
+                    break;
+                case 'notes':
+                    loadNotes();
+                    break;
+                case 'calendar':
+                    loadCalendar();
+                    break;
+                case 'map':
+                    loadMap();
+                    break;
+            }
+        }
+        
+        function populateMapsList() {
+            const mapsList = document.getElementById('mapsList');
+            if (!mapsList || !currentCampaign.maps) return;
+            
+            mapsList.innerHTML = '';
+            Object.values(currentCampaign.maps).forEach(map => {
+                const li = document.createElement('li');
+                li.className = 'nav-item';
+                li.onclick = () => showMapById(map.id);
+                li.innerHTML = `<i class="fas fa-map"></i> ${map.name}`;
+                mapsList.appendChild(li);
+            });
+            
+            if (Object.keys(currentCampaign.maps).length === 0) {
+                mapsList.innerHTML = '<li class="nav-item disabled"><i class="fas fa-info-circle"></i> Aucune carte</li>';
+            }
+        }
+        
+        function populateLocationTree() {
+            const tree = document.getElementById('locationTree');
+            if (!tree || !currentCampaign.structure) return;
+            
+            tree.innerHTML = '';
+            const rootNode = currentCampaign.structure.root;
+            if (rootNode) {
+                generateLocationNode(rootNode, tree, 0);
+            }
+        }
+        
+        function generateLocationNode(node, container, depth) {
+            const li = document.createElement('li');
+            li.className = 'nav-item';
+            li.style.paddingLeft = (depth * 20) + 'px';
+            li.onclick = () => navigateToLocation(node.id);
+            li.innerHTML = `<i class="${node.icon || 'fas fa-map-marker'}"></i> ${node.label}`;
+            container.appendChild(li);
+            
+            if (node.children && node.children.length > 0) {
+                node.children.forEach(childId => {
+                    const childNode = currentCampaign.structure[childId];
+                    if (childNode) {
+                        generateLocationNode(childNode, container, depth + 1);
+                    }
+                });
+            }
+        }
+        
+        function loadCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+            
+            if (!currentCampaign.characters || Object.keys(currentCampaign.characters).length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-users" style="font-size: 3rem; opacity: 0.3; margin-bottom: 20px;"></i>
+                        <p>Aucun personnage créé. Utilisez les boutons ci-dessus pour ajouter des PJ ou PNJ.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            Object.values(currentCampaign.characters).forEach(character => {
+                const card = document.createElement('div');
+                card.className = 'character-card';
+                card.innerHTML = `
+                    <div class="character-header">
+                        <div class="character-avatar">
+                            <i class="fas ${character.type === 'pj' ? 'fa-user-friends' : 'fa-user'}"></i>
+                        </div>
+                        <div class="character-info">
+                            <h3>${character.name}</h3>
+                            <p class="character-type">${character.type === 'pj' ? 'Joueur' : 'Non-Joueur'}</p>
+                            <p class="character-class">${character.race} ${character.class}</p>
+                        </div>
+                        <div class="character-actions">
+                            <button class="btn btn-sm" onclick="editCharacter('${character.id}')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="character-stats">
+                        <div class="stat-item">
+                            <div class="label">Niveau</div>
+                            <div class="value">${character.level || 1}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="label">PV</div>
+                            <div class="value">${character.hp?.current || 0}/${character.hp?.max || 0}</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="label">CA</div>
+                            <div class="value">${character.armorClass || 10}</div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        function loadQuests() {
+            // Quest loading logic here
+        }
+        
+        function loadNotes() {
+            // Notes loading logic here
+        }
+        
+        function loadCalendar() {
+            // Calendar loading logic here
+        }
+        
+        function loadMap() {
+            // Map loading logic here
+        }
+        
+        function showMapById(mapId) {
+            showSection('map');
+            // Load specific map
+        }
+        
+        function navigateToLocation(locationId) {
+            // Navigate to specific location
+        }
+        
+        function addNewCharacter(type) {
+            // Character creation logic here
+            console.log('Creating new', type);
+        }
+        
+        function editCharacter(characterId) {
+            // Character editing logic here
+            console.log('Editing character', characterId);
+        }
+        
+        function addNewQuest() {
+            // Quest creation logic here
+        }
+        
+        function showNoteEditor() {
+            // Note editor logic here
+        }
+        
+        function advanceTime(days) {
+            // Time advancement logic here
+            if (currentCampaign.calendar) {
+                currentCampaign.calendar.currentDate.day += days;
+                saveCampaign();
+                loadCalendar();
+            }
+        }
+        
+        function addCalendarEvent() {
+            // Calendar event creation logic here
+        }
+        
+        // MAP FUNCTIONS
+        let mapRotation = 0;
+        let rotationLocked = false;
+        let pinsLocked = false;
+        
+        function rotateMap(degrees) {
+            if (rotationLocked) return;
+            mapRotation += degrees;
+            const mapWrapper = document.getElementById('mapWrapper');
+            if (mapWrapper) {
+                mapWrapper.style.transform = `rotate(${mapRotation}deg)`;
+            }
+        }
+        
+        function toggleRotationLock() {
+            rotationLocked = !rotationLocked;
+            const btn = document.getElementById('rotationLockBtn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                const span = btn.querySelector('span');
+                if (rotationLocked) {
+                    icon.className = 'fas fa-lock';
+                    span.textContent = 'Rotation Verrouillée';
+                    btn.classList.add('btn-warning');
+                } else {
+                    icon.className = 'fas fa-lock-open';
+                    span.textContent = 'Rotation Libre';
+                    btn.classList.remove('btn-warning');
+                }
+            }
+        }
+        
+        function togglePinsLock() {
+            pinsLocked = !pinsLocked;
+            const btn = document.getElementById('pinsLockBtn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                const span = btn.querySelector('span');
+                if (pinsLocked) {
+                    icon.className = 'fas fa-lock';
+                    span.textContent = 'Pins Verrouillés';
+                    btn.classList.add('btn-warning');
+                } else {
+                    icon.className = 'fas fa-unlock';
+                    span.textContent = 'Pins Libres';
+                    btn.classList.remove('btn-warning');
+                }
+            }
+            
+            // Update pins interactivity
+            document.querySelectorAll('.map-pin').forEach(pin => {
+                if (pinsLocked) {
+                    pin.style.cursor = 'default';
+                    pin.draggable = false;
+                } else {
+                    pin.style.cursor = 'move';
+                    pin.draggable = true;
+                }
+            });
+        }
+        
+        function addPin() {
+            // Pin creation logic here
+        }
+        
+        // ========================================
+        // UTILITY FUNCTIONS
+        // ========================================
+        
+        function generateId(name) {
+            return name.toLowerCase()
+                      .replace(/[^a-z0-9\s]/g, '')
+                      .replace(/\s+/g, '_') + '_' + Date.now();
+        }
+
+        function saveCampaign() {
+            if (!currentCampaign) return;
+            
+            currentCampaign.lastModified = new Date().toISOString();
+            localStorage.setItem(`dnd_campaign_${currentCampaign.id}`, JSON.stringify(currentCampaign));
+            console.log('✅ Campagne sauvegardée');
+        }
+        
+        // Initialize character system if missing
+        function ensureCharacterSystem() {
+            if (!currentCampaign.characters) {
+                currentCampaign.characters = {};
+            }
+        }
+        
+        // Initialize quest system if missing  
+        function ensureQuestSystem() {
+            if (!currentCampaign.quests) {
+                currentCampaign.quests = {};
+            }
+        }
+        
+        // Initialize notes system if missing
+        function ensureNotesSystem() {
+            if (!currentCampaign.notes) {
+                currentCampaign.notes = {};
+            }
+        }
+
+    </script>
+</body>
+</html>

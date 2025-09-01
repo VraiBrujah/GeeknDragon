@@ -4,7 +4,35 @@
  * Répertoire de Travail : C:\Users\Brujah\Documents\GitHub\GeeknDragon\Eds\ClaudePresentation
  */
 
-const { detectPageType } = typeof require !== 'undefined' ? require('./page-type.js') : window;
+// Rôle : Récupération sécurisée de la fonction de détection de page
+// Type : Fallback function - Gestion des cas où page-type.js n'est pas encore chargé
+// Stratégie : Vérification dynamique au moment de l'utilisation
+function getPageTypeDetector() {
+    // Priorité 1 : fonction globale window.detectPageType
+    if (typeof window !== 'undefined' && typeof window.detectPageType === 'function') {
+        return window.detectPageType;
+    }
+    
+    // Priorité 2 : require Node.js (environnement serveur)
+    if (typeof require !== 'undefined') {
+        try {
+            const { detectPageType } = require('./page-type.js');
+            return detectPageType;
+        } catch (e) {
+            console.warn('⚠️ Impossible de charger page-type.js via require');
+        }
+    }
+    
+    // Fallback : fonction par défaut basée sur l'URL
+    return function detectPageTypeFallback() {
+        const url = window.location.pathname.toLowerCase();
+        if (url.includes('locationvsold')) return 'locationVSOLD';
+        if (url.includes('locationvs')) return 'locationVS';
+        if (url.includes('location')) return 'location';
+        if (url.includes('vente')) return 'vente';
+        return 'location'; // Par défaut
+    };
+}
 
 class InstantSync {
     constructor(pageType) {
@@ -719,15 +747,40 @@ class InstantSync {
 // Détection du type de page pour un stockage isolé
 // Auto-détection : type de page et initialisation
 function initInstantSync() {
+    // Récupération : fonction de détection avec fallback sécurisé
+    const detectPageType = getPageTypeDetector();
     const pageType = detectPageType();
+    
+    console.log(`🔍 Type de page détecté: ${pageType}`);
 
-    // Instance globale
-    window.instantSync = new InstantSync(pageType);
+    try {
+        // Instance globale
+        window.instantSync = new InstantSync(pageType);
 
-    // Debug : exposition des stats dans la console
-    window.getSyncStats = () => window.instantSync.getStats();
+        // Debug : exposition des stats dans la console
+        window.getSyncStats = () => window.instantSync.getStats();
 
-    return window.instantSync;
+        console.log('✅ InstantSync initialisé avec succès');
+        console.log(`📊 Configuration: ${pageType}, Champs détectés: ${document.querySelectorAll('[data-field]').length}`);
+
+        return window.instantSync;
+        
+    } catch (error) {
+        console.error('❌ Erreur initialisation InstantSync:', error);
+        console.error('Stack trace:', error.stack);
+        
+        // Création : instance fallback minimaliste
+        window.instantSync = {
+            isInitialized: false,
+            syncCounter: 0,
+            error: error.message,
+            executeInstantSync: () => console.warn('InstantSync en mode fallback'),
+            exportContent: () => console.warn('Export non disponible en mode fallback'),
+            importContent: () => console.warn('Import non disponible en mode fallback')
+        };
+        
+        return window.instantSync;
+    }
 }
 
 // Auto-initialisation : démarrage automatique

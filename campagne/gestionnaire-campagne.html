@@ -476,6 +476,15 @@
             border: 2px solid var(--border-color);
             border-radius: 8px;
             background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-wrapper {
+            position: relative;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
         }
 
         .map-image {
@@ -483,6 +492,75 @@
             height: auto;
             display: block;
             position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .map-image.locked {
+            cursor: not-allowed;
+        }
+
+        .map-image:not(.locked) {
+            cursor: crosshair;
+        }
+
+        /* MAP CONTROLS */
+        .map-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .control-btn {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 36px;
+            height: 36px;
+        }
+
+        .control-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .control-btn.active {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            font-weight: bold;
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .rotation-indicator {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-top: 5px;
         }
 
         .map-pin {
@@ -492,15 +570,74 @@
             background: var(--danger-color);
             border: 2px solid var(--text-color);
             border-radius: 50%;
-            cursor: pointer;
+            cursor: grab;
             transform: translate(-50%, -50%);
             z-index: 10;
             transition: all 0.2s ease;
+            user-select: none;
         }
 
         .map-pin:hover {
             background: var(--secondary-color);
             transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .map-pin.dragging {
+            cursor: grabbing;
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            z-index: 20;
+        }
+
+        .map-pin.locked {
+            background: var(--border-color);
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .map-pin.locked:hover {
+            background: var(--warning-color);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .map-pin.locked::after {
+            content: '🔒';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            font-size: 8px;
+            background: var(--warning-color);
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-pin .delete-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 16px;
+            height: 16px;
+            background: var(--danger-color);
+            border: 1px solid var(--text-color);
+            border-radius: 50%;
+            font-size: 10px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .map-pin:hover .delete-btn {
+            display: flex;
+        }
+
+        .map-pin.locked .delete-btn {
+            display: none !important;
         }
 
         .pin-tooltip {
@@ -510,14 +647,38 @@
             transform: translateX(-50%);
             background: var(--dark-bg);
             color: var(--text-color);
-            padding: 5px 10px;
-            border-radius: 4px;
+            padding: 10px 15px;
+            border-radius: 6px;
             border: 1px solid var(--secondary-color);
-            white-space: nowrap;
             font-size: 0.8rem;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.2s ease;
+            max-width: 300px;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+        }
+        
+        .pin-tooltip-content {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .pin-tooltip h1, .pin-tooltip h2, .pin-tooltip h3 {
+            margin: 5px 0;
+            color: var(--secondary-color);
+        }
+        
+        .pin-tooltip p {
+            margin: 5px 0;
+            line-height: 1.3;
+        }
+        
+        .pin-tooltip img {
+            max-width: 100%;
+            max-height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
         }
 
         .map-pin:hover .pin-tooltip {
@@ -834,6 +995,508 @@
             to { transform: rotate(360deg); }
         }
 
+        /* MARKDOWN EDITOR */
+        .markdown-editor {
+            display: flex;
+            height: 600px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .markdown-input {
+            flex: 1;
+            background: var(--dark-bg);
+            color: var(--text-color);
+            border: none;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+        }
+
+        .markdown-preview {
+            flex: 1;
+            background: var(--light-bg);
+            padding: 20px;
+            border-left: 2px solid var(--border-color);
+            overflow-y: auto;
+        }
+
+        .markdown-toolbar {
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .markdown-btn {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .markdown-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .markdown-preview h1 {
+            color: var(--secondary-color);
+            font-family: var(--font-heading);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .markdown-preview h2 {
+            color: var(--secondary-color);
+            font-family: var(--font-heading);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin: 20px 0 15px 0;
+        }
+
+        .markdown-preview h3, .markdown-preview h4, .markdown-preview h5, .markdown-preview h6 {
+            color: var(--secondary-color);
+            font-family: var(--font-heading);
+            margin: 15px 0 10px 0;
+        }
+
+        .markdown-preview p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .markdown-preview ul, .markdown-preview ol {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .markdown-preview li {
+            margin-bottom: 5px;
+        }
+
+        .markdown-preview blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            background: rgba(139, 69, 19, 0.1);
+            padding: 15px 15px 15px 30px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .markdown-preview code {
+            background: var(--dark-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--secondary-color);
+        }
+
+        .markdown-preview pre {
+            background: var(--dark-bg);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .markdown-preview pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .markdown-preview table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .markdown-preview th, .markdown-preview td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+
+        .markdown-preview th {
+            background: var(--primary-color);
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .markdown-preview tr:nth-child(even) {
+            background: rgba(139, 69, 19, 0.1);
+        }
+
+        .markdown-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin: 15px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .markdown-preview .center {
+            text-align: center;
+        }
+
+        .markdown-preview .center img {
+            display: block;
+            margin: 15px auto;
+        }
+
+        .markdown-preview strong {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .markdown-preview em {
+            color: var(--warning-color);
+            font-style: italic;
+        }
+
+        .markdown-preview hr {
+            border: none;
+            height: 2px;
+            background: var(--primary-color);
+            margin: 30px 0;
+        }
+
+        /* NOTE MODAL STYLES */
+        .note-modal {
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 1200px;
+        }
+
+        .note-modal .modal-body {
+            padding: 0;
+        }
+
+        /* CHARACTER EDITOR STYLES */
+        .character-editor {
+            max-width: 800px;
+            width: 90vw;
+        }
+
+        .character-editor .modal-body {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .editor-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--dark-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .editor-section h4 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-family: var(--font-heading);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-row.triple {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .stat-editor {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background: rgba(139, 69, 19, 0.2);
+            border-radius: 6px;
+            border: 1px solid var(--primary-color);
+        }
+
+        .stat-editor label {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-editor input {
+            width: 60px;
+            text-align: center;
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        .actions-editor {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .action-editor-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .action-editor-item:last-child {
+            border-bottom: none;
+        }
+
+        .action-editor-item input {
+            flex: 1;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 5px 8px;
+            border-radius: 4px;
+        }
+
+        .remove-action-btn {
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 8px 12px;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color);
+            font-family: var(--font-body);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        select.form-input {
+            cursor: pointer;
+        }
+
+        /* SPELL SYSTEM STYLES */
+        .spells-editor {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .spell-level-section {
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(139, 69, 19, 0.1);
+        }
+
+        .spell-level-section:last-child {
+            border-bottom: none;
+        }
+
+        .spell-level-header {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 10px 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .spell-level-content {
+            padding: 10px;
+            display: none;
+        }
+
+        .spell-level-content.active {
+            display: block;
+        }
+
+        .spell-slots {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .spell-slots label {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .spell-slots input {
+            width: 60px;
+        }
+
+        .spell-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 8px;
+            background: var(--dark-bg);
+        }
+
+        .spell-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .spell-item input[type="text"] {
+            flex: 1;
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+
+        .spell-item input[type="text"]:first-child {
+            flex: 2;
+        }
+
+        .spell-item select {
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+
+        .spell-cast-btn {
+            background: var(--warning-color);
+            border: 1px solid var(--border-color);
+            color: var(--dark-bg);
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .spell-cast-btn:hover {
+            background: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        /* SPELL DISPLAY IN CHARACTER CARDS */
+        .spells-list {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .spell-ability-info {
+            margin-bottom: 10px;
+        }
+
+        .spell-level-display {
+            margin-bottom: 8px;
+        }
+
+        .spell-level-header-mini {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .spells-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+        }
+
+        .spell-mini {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(139, 69, 19, 0.1);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            padding: 4px 6px;
+            font-size: 0.8rem;
+        }
+
+        .spell-name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .spell-cast-mini {
+            background: var(--warning-color);
+            border: 1px solid var(--border-color);
+            color: var(--dark-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            margin-left: 4px;
+        }
+
+        .spell-cast-mini:hover {
+            background: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .spell-cast-mini:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         /* UTILITY CLASSES */
         .text-center { text-align: center; }
         .text-right { text-align: right; }
@@ -958,17 +1621,49 @@
                 <!-- MAP TAB -->
                 <div class="tab-content" id="map">
                     <div class="map-container">
-                        <img id="mapImage" class="map-image" src="" alt="Carte de la campagne">
-                        <div id="mapPins">
-                            <!-- Pins will be generated by JavaScript -->
+                        <div class="map-wrapper" id="mapWrapper">
+                            <img id="mapImage" class="map-image" src="" alt="Carte de la campagne" onclick="addMapPin(event)">
+                            <div id="mapPins">
+                                <!-- Pins will be generated by JavaScript -->
+                            </div>
+                        </div>
+                        
+                        <!-- MAP CONTROLS -->
+                        <div class="map-controls">
+                            <div class="control-group">
+                                <button class="control-btn" onclick="rotateMap(-90)" title="Rotation antihoraire">
+                                    <i class="fas fa-undo"></i>
+                                </button>
+                                <button class="control-btn" onclick="rotateMap(90)" title="Rotation horaire">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                                <button class="control-btn" id="lockRotationBtn" onclick="toggleRotationLock()" title="Verrouiller rotation">
+                                    <i class="fas fa-unlock"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="control-group">
+                                <button class="control-btn" id="addPinModeBtn" onclick="toggleAddPinMode()" title="Mode ajout épingles">
+                                    <i class="fas fa-map-pin"></i>
+                                </button>
+                                <button class="control-btn" id="lockPinsBtn" onclick="togglePinsLock()" title="Verrouiller épingles">
+                                    <i class="fas fa-unlock-alt"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="rotation-indicator" id="rotationIndicator">0°</div>
                         </div>
                     </div>
+                    
                     <div class="mt-3">
                         <button class="btn btn-info" onclick="addMapPin()">
-                            <i class="fas fa-map-pin"></i> Ajouter une note
+                            <i class="fas fa-map-pin"></i> Ajouter une note (centre)
                         </button>
                         <button class="btn btn-warning" onclick="clearMapPins()">
                             <i class="fas fa-trash"></i> Effacer les notes
+                        </button>
+                        <button class="btn btn-success" onclick="resetMapView()" title="Remettre à zéro">
+                            <i class="fas fa-sync-alt"></i> Reset vue
                         </button>
                     </div>
                 </div>
@@ -1257,10 +1952,42 @@
                     objectives: "Activer la Relique de l'Aube pour sauver Pré-au-Lard",
                     image: "images/petite_lumiere.jpg",
                     actions: [
-                        { name: "Attaque au poing", dice: "1d20+5", damage: "1d4+3" },
-                        { name: "Souffle d'or", dice: "1d20+5", damage: "2d6" },
-                        { name: "Contact guérisseur", dice: "1d4", heal: true }
+                        { name: "Attaque au poing", type: "Attaque", dice: "1d20+5", heal: false },
+                        { name: "Souffle d'or", type: "Capacité raciale", dice: "1d20+5", heal: false },
+                        { name: "Contact guérisseur", type: "Soins", dice: "1d4", heal: true }
                     ],
+                    spellcasting: {
+                        ability: 'sag',
+                        casterLevel: 4,
+                        levels: {
+                            0: {
+                                slots: 0,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Thaumaturgie", school: "transmutation", damage: "" },
+                                    { name: "Assistance", school: "divination", damage: "+1d4 à un jet" },
+                                    { name: "Stabilisation", school: "necromancie", damage: "Stabilise mourant" }
+                                ]
+                            },
+                            1: {
+                                slots: 4,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Soins", school: "evocation", damage: "1d8+4" },
+                                    { name: "Bénédiction", school: "enchantement", damage: "+1d4 aux jets" },
+                                    { name: "Sanctuaire", school: "abjuration", damage: "Protection" }
+                                ]
+                            },
+                            2: {
+                                slots: 3,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Soins de groupe", school: "evocation", damage: "1d8+4" },
+                                    { name: "Protection contre le poison", school: "abjuration", damage: "Résistance poison" }
+                                ]
+                            }
+                        }
+                    },
                     inventory: ["Bâton de marche", "Kit d'herboriste", "Symbole sacré", "Potions de soin (3)"]
                 },
                 bouclier_vivant: {
@@ -1277,10 +2004,25 @@
                     objectives: "Servir de bouclier à l'équipe et guider les plus jeunes",
                     image: "images/bouclier_vivant.jpg",
                     actions: [
-                        { name: "Attaque d'épée", dice: "1d20+5", damage: "1d8+3" },
-                        { name: "Châtiment divin", dice: "1d20+5", damage: "1d8+3+1d8" },
-                        { name: "Imposition des mains", dice: "1d4", heal: true }
+                        { name: "Attaque d'épée", type: "Attaque", dice: "1d20+5", heal: false },
+                        { name: "Châtiment divin", type: "Capacité", dice: "1d20+5", heal: false },
+                        { name: "Imposition des mains", type: "Soins", dice: "1d4", heal: true }
                     ],
+                    spellcasting: {
+                        ability: 'cha',
+                        casterLevel: 3,
+                        levels: {
+                            1: {
+                                slots: 3,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Soins", school: "evocation", damage: "1d8+3" },
+                                    { name: "Bénédiction", school: "enchantement", damage: "+1d4 aux jets" },
+                                    { name: "Châtiment divin", school: "evocation", damage: "2d8 vs morts-vivants/fiélons" }
+                                ]
+                            }
+                        }
+                    },
                     inventory: ["Épée longue", "Bouclier", "Armure de mailles", "Trousse noble", "Sceau familial"]
                 },
                 oeil_percant: {
@@ -1337,10 +2079,41 @@
                     objectives: "Utiliser la divination pour guider l'équipe vers le succès",
                     image: "images/gardien_secrets.jpg",
                     actions: [
-                        { name: "Attaque de dague", dice: "1d20+2", damage: "1d4" },
-                        { name: "Sort de niveau 1", dice: "1d20+5", damage: "variable" },
-                        { name: "Portent", dice: "2d20", special: "Remplace un jet" }
+                        { name: "Attaque de dague", type: "Attaque", dice: "1d20+2", heal: false },
+                        { name: "Portent", type: "Capacité", dice: "2d20", heal: false }
                     ],
+                    spellcasting: {
+                        ability: 'int',
+                        casterLevel: 3,
+                        levels: {
+                            0: {
+                                slots: 0,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Trait de feu", school: "evocation", damage: "1d10" },
+                                    { name: "Prestidigitation", school: "transmutation", damage: "" },
+                                    { name: "Main du mage", school: "conjuration", damage: "" }
+                                ]
+                            },
+                            1: {
+                                slots: 4,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Projectile magique", school: "evocation", damage: "1d4+1" },
+                                    { name: "Bouclier", school: "abjuration", damage: "+5 CA" },
+                                    { name: "Détection de la magie", school: "divination", damage: "" }
+                                ]
+                            },
+                            2: {
+                                slots: 2,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Toile d'araignée", school: "conjuration", damage: "Entrave" },
+                                    { name: "Scorching Ray", school: "evocation", damage: "2d6" }
+                                ]
+                            }
+                        }
+                    },
                     inventory: ["Grimoire", "Focaliseur arcanique", "Outils de charlatan", "Parchemins", "Encre et plume"]
                 },
                 nackrag: {
@@ -1357,10 +2130,47 @@
                     objectives: "Aider les héros à récupérer la relique sans détruire le coffre-fort",
                     image: "images/nackrag.jpg",
                     actions: [
-                        { name: "Attaque de bâton", dice: "1d20+2", damage: "1d6" },
-                        { name: "Sort mineur", dice: "1d20+7", damage: "1d8" },
-                        { name: "Connaissance gobeline", dice: "1d20+8", special: "Investigation" }
+                        { name: "Attaque de bâton", type: "Attaque", dice: "1d20+2", heal: false },
+                        { name: "Connaissance gobeline", type: "Capacité", dice: "1d20+8", heal: false }
                     ],
+                    spellcasting: {
+                        ability: 'int',
+                        casterLevel: 5,
+                        levels: {
+                            0: {
+                                slots: 0,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Lumière", school: "evocation", damage: "" },
+                                    { name: "Réparation", school: "transmutation", damage: "" },
+                                    { name: "Détection de la magie", school: "divination", damage: "" }
+                                ]
+                            },
+                            1: {
+                                slots: 4,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Identification", school: "divination", damage: "" },
+                                    { name: "Compréhension des langues", school: "divination", damage: "" }
+                                ]
+                            },
+                            2: {
+                                slots: 3,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Localiser objet", school: "divination", damage: "" },
+                                    { name: "Lévitation", school: "transmutation", damage: "" }
+                                ]
+                            },
+                            3: {
+                                slots: 2,
+                                slotsUsed: 0,
+                                spells: [
+                                    { name: "Dissipation de la magie", school: "abjuration", damage: "" }
+                                ]
+                            }
+                        }
+                    },
                     inventory: ["Bâton ancien", "Cartes du coffre-fort", "Livres gobelines", "Clefs de secours", "Gemmes d'appraisal"]
                 }
             },
@@ -1370,25 +2180,67 @@
                 coffre_fort_principal: {
                     id: "coffre_fort_principal",
                     name: "Vue d'ensemble du Coffre-fort",
-                    image: "images/maps/coffre_fort_principal.jpg",
+                    image: "images/Carte_Donjon_1.webp",
                     pins: []
                 },
                 coffre_fort_entree: {
                     id: "coffre_fort_entree",
                     name: "Entrée du Coffre-fort",
-                    image: "images/maps/coffre_fort_entree.jpg",
+                    image: "images/Carte_Donjon_1.webp",
                     pins: [
-                        { x: 50, y: 80, note: "Point d'arrivée du Portoloin" }
+                        { x: 50, y: 80, note: "# Point d'arrivée du Portoloin\n\nLes aventuriers arrivent ici via le **Portoloin** magique.\n\n*L'air crépite d'énergie résiduelle.*" }
                     ]
                 },
                 salle_coeur: {
                     id: "salle_coeur",
                     name: "Salle du Cœur",
-                    image: "images/maps/salle_coeur.jpg",
+                    image: "images/Carte_Donjon_1.webp",
                     pins: [
-                        { x: 50, y: 30, note: "Socle de la Relique de l'Aube" },
-                        { x: 70, y: 60, note: "Repaire du Dragon Vert" }
+                        { x: 50, y: 30, note: "# Socle de la Relique de l'Aube\n\n**Objectif principal** : Récupérer l'artefact.\n\n*Émet une lumière dorée pulsante.*" },
+                        { x: 70, y: 60, note: "# Repaire du Dragon Vert\n\n⚠️ **DANGER** : Jeune Dragon Vert Gallois\n\n- **FP :** 8\n- **PV :** 136\n- **CA :** 18\n\n*Enchaîné aux lueurs magiques du coffre-fort.*" }
                     ]
+                },
+                escalier_spirale: {
+                    id: "escalier_spirale",
+                    name: "Escalier en spirale",
+                    image: "images/Carte_Donjon_1.webp",
+                    pins: []
+                },
+                hall_principal: {
+                    id: "hall_principal",
+                    name: "Hall principal",
+                    image: "images/Carte_Donjon_1.webp",
+                    pins: []
+                },
+                vortex_bleu: {
+                    id: "vortex_bleu",
+                    name: "Salle du Vortex bleu",
+                    image: "images/Carte_Donjon_1.webp",
+                    pins: []
+                },
+                prisons_vertes: {
+                    id: "prisons_vertes",
+                    name: "Prisons vertes",
+                    image: "images/Carte_Donjon_1.webp",
+                    pins: []
+                },
+                autel_rouge: {
+                    id: "autel_rouge",
+                    name: "Autel rouge",
+                    image: "images/Carte_Donjon_1.webp",
+                    pins: []
+                },
+                jardin_fongique: {
+                    id: "jardin_fongique",
+                    name: "Jardin fongique",
+                    image: "images/Carte_Donjon_1.webp",
+                    pins: []
+                },
+                coffre_fort_salles: {
+                    id: "coffre_fort_salles",
+                    name: "Plan des salles",
+                    image: "images/Carte_Donjon_1.webp",
+                    pins: []
                 }
             },
 
@@ -1452,6 +2304,14 @@
             }
         };
 
+        // MAP STATE
+        let mapState = {
+            rotation: 0,
+            rotationLocked: false,
+            pinsLocked: false,
+            addPinMode: false
+        };
+
         // Current music player
         let currentSound = null;
         let musicEnabled = true;
@@ -1461,11 +2321,66 @@
         // ========================================
         
         document.addEventListener('DOMContentLoaded', function() {
+            loadCampaignState();
             initializeCampaign();
             generateNavigation();
             showContent(campaignData.currentNode);
             initializeMusic();
         });
+
+        function loadCampaignState() {
+            try {
+                const saved = localStorage.getItem('campaignData_coffre_fort');
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    if (data.mapState) {
+                        mapState = { ...mapState, ...data.mapState };
+                        // Restaurer l'état visuel au chargement de la carte
+                        setTimeout(restoreMapVisualState, 100);
+                    }
+                }
+            } catch (e) {
+                console.error('❌ Erreur lors du chargement de l\'état:', e);
+            }
+        }
+
+        function restoreMapVisualState() {
+            const mapWrapper = document.getElementById('mapWrapper');
+            if (!mapWrapper) return;
+
+            // Restaurer rotation
+            mapWrapper.style.transform = `rotate(${mapState.rotation}deg)`;
+            const rotationIndicator = document.getElementById('rotationIndicator');
+            if (rotationIndicator) {
+                rotationIndicator.textContent = `${mapState.rotation}°`;
+            }
+
+            // Restaurer les boutons de verrouillage
+            const lockRotationBtn = document.getElementById('lockRotationBtn');
+            if (mapState.rotationLocked && lockRotationBtn) {
+                lockRotationBtn.classList.add('active');
+                lockRotationBtn.querySelector('i').className = 'fas fa-lock';
+                lockRotationBtn.title = 'Déverrouiller rotation';
+            }
+
+            const lockPinsBtn = document.getElementById('lockPinsBtn');
+            if (mapState.pinsLocked && lockPinsBtn) {
+                lockPinsBtn.classList.add('active');
+                lockPinsBtn.querySelector('i').className = 'fas fa-lock';
+                lockPinsBtn.title = 'Déverrouiller épingles';
+                
+                const mapImage = document.getElementById('mapImage');
+                if (mapImage) {
+                    mapImage.classList.add('locked');
+                }
+            }
+
+            const addPinModeBtn = document.getElementById('addPinModeBtn');
+            if (mapState.addPinMode && addPinModeBtn) {
+                addPinModeBtn.classList.add('active');
+                addPinModeBtn.title = 'Désactiver mode ajout';
+            }
+        }
 
         function initializeCampaign() {
             // Load saved data if available
@@ -1726,6 +2641,46 @@
                     `).join('')}
                 </div>
                 
+                ${character.spellcasting ? `
+                    <div class="spells-list">
+                        <h5><i class="fas fa-magic"></i> Sorts</h5>
+                        <div class="spell-ability-info">
+                            <small class="text-info">
+                                ${character.spellcasting.ability === 'int' ? 'Intelligence' : 
+                                  character.spellcasting.ability === 'sag' ? 'Sagesse' : 'Charisme'} 
+                                - Niveau ${character.spellcasting.casterLevel}
+                            </small>
+                        </div>
+                        ${Object.entries(character.spellcasting.levels).map(([level, data]) => {
+                            const levelName = level == 0 ? 'Tours de magie' : `Niveau ${level}`;
+                            const hasSpells = data.spells && data.spells.length > 0;
+                            
+                            if (!hasSpells) return '';
+                            
+                            return `
+                                <div class="spell-level-display">
+                                    <div class="spell-level-header-mini">
+                                        <strong>${levelName}</strong>
+                                        ${level > 0 ? `<span class="text-info">(${data.slots - data.slotsUsed}/${data.slots})</span>` : ''}
+                                    </div>
+                                    <div class="spells-grid">
+                                        ${data.spells.map((spell, index) => `
+                                            <div class="spell-mini">
+                                                <span class="spell-name">${spell.name}</span>
+                                                <button class="dice-btn spell-cast-mini" 
+                                                        onclick="${level == 0 ? `castCantrip('${character.id}', ${index})` : `castSpell('${character.id}', ${level}, ${index})`}"
+                                                        ${level > 0 && data.slotsUsed >= data.slots ? 'disabled' : ''}>
+                                                    <i class="fas fa-magic"></i>
+                                                </button>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                ` : ''}
+                
                 <div class="mt-3">
                     <button class="btn btn-info" onclick="editCharacter('${character.id}')">
                         <i class="fas fa-edit"></i> Modifier
@@ -1811,20 +2766,53 @@
             mapData.pins.forEach((pin, index) => {
                 const pinDiv = document.createElement('div');
                 pinDiv.className = 'map-pin';
+                
+                // Apply locked state
+                if (mapState.pinsLocked || pin.locked) {
+                    pinDiv.classList.add('locked');
+                }
+                
                 pinDiv.style.left = `${pin.x}%`;
                 pinDiv.style.top = `${pin.y}%`;
+                pinDiv.dataset.mapId = mapId;
+                pinDiv.dataset.pinIndex = index;
                 
                 pinDiv.innerHTML = `
-                    <div class="pin-tooltip">${pin.note}</div>
+                    <div class="pin-tooltip">
+                        <div class="pin-tooltip-content">${parseMarkdown(pin.note)}</div>
+                    </div>
+                    <div class="delete-btn" onclick="deleteMapPin(event, '${mapId}', ${index})" title="Supprimer">×</div>
                 `;
                 
-                pinDiv.onclick = () => editMapPin(mapId, index);
+                // Double-click pour éditer la note
+                pinDiv.ondblclick = () => editMapPin(mapId, index);
+                
+                // Right-click pour verrouiller/déverrouiller individuellement
+                pinDiv.oncontextmenu = (e) => {
+                    e.preventDefault();
+                    togglePinLock(mapId, index);
+                };
+                
+                // Rendre l'épingle draggable
+                makePinDraggable(pinDiv, mapId, index);
                 
                 pinsContainer.appendChild(pinDiv);
             });
         }
 
-        function addMapPin() {
+        function togglePinLock(mapId, pinIndex) {
+            const pin = campaignData.maps[mapId].pins[pinIndex];
+            pin.locked = !pin.locked;
+            updateMapPins(mapId);
+            saveData();
+        }
+
+        function addMapPin(event) {
+            // Check if pins are locked
+            if (mapState.pinsLocked && event) {
+                return; // Prevent adding pins when locked
+            }
+            
             const mapContainer = document.querySelector('.map-container');
             const mapImg = document.getElementById('mapImage');
             
@@ -1833,37 +2821,129 @@
                 return;
             }
             
-            // Get current map
-            const currentMapId = Object.keys(campaignData.maps).find(id => 
-                campaignData.maps[id].image === mapImg.src.split('/').pop()
-            );
+            // Get current map ID from the current node
+            const currentNode = campaignData.structure[campaignData.currentNode];
+            const currentMapId = currentNode && currentNode.mapId ? currentNode.mapId : null;
             
-            if (!currentMapId) return;
+            if (!currentMapId || !campaignData.maps[currentMapId]) {
+                alert('Aucune carte associée à cette section');
+                return;
+            }
             
-            const note = prompt('Note pour cette épingle:');
-            if (note) {
-                const pin = { x: 50, y: 50, note };
-                campaignData.maps[currentMapId].pins.push(pin);
-                updateMapPins(currentMapId);
+            // Calculate position from click event if provided
+            let x = 50, y = 50;
+            if (event && event.clientX && event.clientY) {
+                const rect = mapImg.getBoundingClientRect();
+                x = ((event.clientX - rect.left) / rect.width) * 100;
+                y = ((event.clientY - rect.top) / rect.height) * 100;
+            }
+            
+            showNoteEditor('# Nouvelle Note\n\nÉcrivez votre note ici...', (note) => {
+                if (note && note.trim()) {
+                    const pin = { 
+                        x, 
+                        y, 
+                        note,
+                        locked: false // New pins are unlocked by default
+                    };
+                    campaignData.maps[currentMapId].pins.push(pin);
+                    updateMapPins(currentMapId);
+                    saveData();
+                }
+            });
+        }
+
+        function makePinDraggable(pinElement, mapId, pinIndex) {
+            let isDragging = false;
+            let startX, startY;
+            let initialLeft, initialTop;
+            
+            pinElement.addEventListener('mousedown', startDrag);
+            
+            function startDrag(e) {
+                // Ignorer si c'est sur le bouton de suppression
+                if (e.target.classList.contains('delete-btn')) return;
+                
+                // Ignorer si l'épingle ou les épingles globalement sont verrouillées
+                const pin = campaignData.maps[mapId].pins[pinIndex];
+                if (mapState.pinsLocked || pin.locked || pinElement.classList.contains('locked')) return;
+                
+                isDragging = true;
+                pinElement.classList.add('dragging');
+                
+                // Position initiale de la souris
+                startX = e.clientX;
+                startY = e.clientY;
+                
+                // Position initiale de l'épingle
+                const rect = pinElement.getBoundingClientRect();
+                const parentRect = pinElement.parentElement.getBoundingClientRect();
+                initialLeft = ((rect.left + rect.width/2 - parentRect.left) / parentRect.width) * 100;
+                initialTop = ((rect.top + rect.height/2 - parentRect.top) / parentRect.height) * 100;
+                
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', stopDrag);
+                
+                e.preventDefault();
+            }
+            
+            function drag(e) {
+                if (!isDragging) return;
+                
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
+                
+                const parentRect = pinElement.parentElement.getBoundingClientRect();
+                const deltaXPercent = (deltaX / parentRect.width) * 100;
+                const deltaYPercent = (deltaY / parentRect.height) * 100;
+                
+                let newX = initialLeft + deltaXPercent;
+                let newY = initialTop + deltaYPercent;
+                
+                // Contraindre dans les limites de la carte
+                newX = Math.max(2, Math.min(98, newX));
+                newY = Math.max(2, Math.min(98, newY));
+                
+                pinElement.style.left = `${newX}%`;
+                pinElement.style.top = `${newY}%`;
+            }
+            
+            function stopDrag(e) {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                pinElement.classList.remove('dragging');
+                
+                // Sauvegarder la nouvelle position
+                const pin = campaignData.maps[mapId].pins[pinIndex];
+                pin.x = parseFloat(pinElement.style.left);
+                pin.y = parseFloat(pinElement.style.top);
+                
+                saveData();
+                
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', stopDrag);
+            }
+        }
+        
+        function deleteMapPin(event, mapId, pinIndex) {
+            event.stopPropagation();
+            if (confirm('Supprimer cette épingle ?')) {
+                campaignData.maps[mapId].pins.splice(pinIndex, 1);
+                updateMapPins(mapId);
                 saveData();
             }
         }
 
         function editMapPin(mapId, pinIndex) {
             const pin = campaignData.maps[mapId].pins[pinIndex];
-            const newNote = prompt('Modifier la note:', pin.note);
-            
-            if (newNote !== null) {
-                if (newNote === '') {
-                    // Delete pin
-                    campaignData.maps[mapId].pins.splice(pinIndex, 1);
-                } else {
-                    // Update pin
-                    pin.note = newNote;
+            showNoteEditor(pin.note, (updatedNote) => {
+                if (updatedNote !== null && updatedNote !== undefined) {
+                    pin.note = updatedNote;
+                    updateMapPins(mapId);
+                    saveData();
                 }
-                updateMapPins(mapId);
-                saveData();
-            }
+            });
         }
 
         function clearMapPins() {
@@ -1875,6 +2955,121 @@
                     saveData();
                 }
             }
+        }
+
+        // ========================================
+        // MAP ROTATION & CONTROLS
+        // ========================================
+
+        function rotateMap(degrees) {
+            if (mapState.rotationLocked) return;
+            
+            mapState.rotation = (mapState.rotation + degrees) % 360;
+            if (mapState.rotation < 0) mapState.rotation += 360;
+            
+            const mapWrapper = document.getElementById('mapWrapper');
+            mapWrapper.style.transform = `rotate(${mapState.rotation}deg)`;
+            
+            // Update rotation indicator
+            document.getElementById('rotationIndicator').textContent = `${mapState.rotation}°`;
+            
+            saveData();
+        }
+
+        function toggleRotationLock() {
+            mapState.rotationLocked = !mapState.rotationLocked;
+            const lockBtn = document.getElementById('lockRotationBtn');
+            const icon = lockBtn.querySelector('i');
+            
+            if (mapState.rotationLocked) {
+                lockBtn.classList.add('active');
+                icon.className = 'fas fa-lock';
+                lockBtn.title = 'Déverrouiller rotation';
+            } else {
+                lockBtn.classList.remove('active');
+                icon.className = 'fas fa-unlock';
+                lockBtn.title = 'Verrouiller rotation';
+            }
+            
+            saveData();
+        }
+
+        function toggleAddPinMode() {
+            mapState.addPinMode = !mapState.addPinMode;
+            const addBtn = document.getElementById('addPinModeBtn');
+            const mapImage = document.getElementById('mapImage');
+            
+            if (mapState.addPinMode) {
+                addBtn.classList.add('active');
+                addBtn.title = 'Désactiver mode ajout';
+                mapImage.style.cursor = 'copy';
+            } else {
+                addBtn.classList.remove('active');
+                addBtn.title = 'Mode ajout épingles';
+                mapImage.style.cursor = mapState.pinsLocked ? 'not-allowed' : 'crosshair';
+            }
+        }
+
+        function togglePinsLock() {
+            mapState.pinsLocked = !mapState.pinsLocked;
+            const lockBtn = document.getElementById('lockPinsBtn');
+            const icon = lockBtn.querySelector('i');
+            const mapImage = document.getElementById('mapImage');
+            
+            if (mapState.pinsLocked) {
+                lockBtn.classList.add('active');
+                icon.className = 'fas fa-lock';
+                lockBtn.title = 'Déverrouiller épingles';
+                mapImage.classList.add('locked');
+                
+                // Lock all existing pins
+                document.querySelectorAll('.map-pin').forEach(pin => {
+                    pin.classList.add('locked');
+                });
+            } else {
+                lockBtn.classList.remove('active');
+                icon.className = 'fas fa-unlock-alt';
+                lockBtn.title = 'Verrouiller épingles';
+                mapImage.classList.remove('locked');
+                
+                // Unlock all existing pins
+                document.querySelectorAll('.map-pin').forEach(pin => {
+                    pin.classList.remove('locked');
+                });
+            }
+            
+            saveData();
+        }
+
+        function resetMapView() {
+            mapState.rotation = 0;
+            mapState.rotationLocked = false;
+            mapState.pinsLocked = false;
+            mapState.addPinMode = false;
+            
+            // Reset visual state
+            const mapWrapper = document.getElementById('mapWrapper');
+            mapWrapper.style.transform = 'rotate(0deg)';
+            document.getElementById('rotationIndicator').textContent = '0°';
+            
+            // Reset buttons
+            document.getElementById('lockRotationBtn').classList.remove('active');
+            document.getElementById('lockRotationBtn').querySelector('i').className = 'fas fa-unlock';
+            document.getElementById('addPinModeBtn').classList.remove('active');
+            document.getElementById('lockPinsBtn').classList.remove('active');
+            document.getElementById('lockPinsBtn').querySelector('i').className = 'fas fa-unlock-alt';
+            
+            // Reset map image
+            const mapImage = document.getElementById('mapImage');
+            mapImage.classList.remove('locked');
+            mapImage.style.cursor = 'crosshair';
+            
+            // Unlock all pins
+            document.querySelectorAll('.map-pin').forEach(pin => {
+                pin.classList.remove('locked');
+            });
+            
+            saveData();
         }
 
         // ========================================
@@ -1944,6 +3139,130 @@
                 quest.objectives[objectiveIndex].completed = !quest.objectives[objectiveIndex].completed;
                 updateQuestsDisplay();
                 saveData();
+            }
+        }
+
+        function editQuest(questId) {
+            const quest = campaignData.quests[questId];
+            if (!quest) return;
+            
+            const content = `
+                <div class="editor-section">
+                    <h4><i class="fas fa-scroll"></i> Informations de Quête</h4>
+                    <div class="form-group">
+                        <label>Titre</label>
+                        <input type="text" class="form-input" id="questTitle" value="${quest.title}">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-input" id="questDescription" rows="3">${quest.description}</textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-input" id="questStatus">
+                                <option value="active" ${quest.status === 'active' ? 'selected' : ''}>Active</option>
+                                <option value="completed" ${quest.status === 'completed' ? 'selected' : ''}>Complétée</option>
+                                <option value="failed" ${quest.status === 'failed' ? 'selected' : ''}>Échouée</option>
+                                <option value="paused" ${quest.status === 'paused' ? 'selected' : ''}>En pause</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Priorité</label>
+                            <select class="form-input" id="questPriority">
+                                <option value="low">Basse</option>
+                                <option value="medium" ${!quest.priority || quest.priority === 'medium' ? 'selected' : ''}>Moyenne</option>
+                                <option value="high" ${quest.priority === 'high' ? 'selected' : ''}>Haute</option>
+                                <option value="critical" ${quest.priority === 'critical' ? 'selected' : ''}>Critique</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-section">
+                    <h4><i class="fas fa-tasks"></i> Objectifs</h4>
+                    <div class="actions-editor" id="objectivesEditor">
+                        ${quest.objectives.map((objective, index) => `
+                            <div class="action-editor-item">
+                                <label>
+                                    <input type="checkbox" ${objective.completed ? 'checked' : ''} data-field="completed" data-index="${index}">
+                                    Complété
+                                </label>
+                                <input type="text" placeholder="Description de l'objectif" value="${objective.description}" data-field="description" data-index="${index}" style="flex: 2;">
+                                <button type="button" class="remove-action-btn" onclick="removeObjective(${index})">×</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button type="button" class="btn btn-info mt-2" onclick="addNewObjective()">
+                        <i class="fas fa-plus"></i> Ajouter Objectif
+                    </button>
+                </div>
+
+                <div class="mt-3 text-center">
+                    <button class="btn btn-success" onclick="saveQuestEdit('${questId}')">
+                        <i class="fas fa-save"></i> Sauvegarder
+                    </button>
+                    <button class="btn" onclick="closeModal()">
+                        <i class="fas fa-times"></i> Annuler
+                    </button>
+                </div>
+            `;
+            
+            const modal = document.getElementById('modalOverlay').querySelector('.modal');
+            modal.classList.add('character-editor');
+            
+            showModal(`Éditer Quête - ${quest.title}`, content);
+        }
+
+        function saveQuestEdit(questId) {
+            const quest = campaignData.quests[questId];
+            
+            // Basic info
+            quest.title = document.getElementById('questTitle').value;
+            quest.description = document.getElementById('questDescription').value;
+            quest.status = document.getElementById('questStatus').value;
+            quest.priority = document.getElementById('questPriority').value;
+            
+            // Objectives
+            const objectiveItems = document.querySelectorAll('#objectivesEditor .action-editor-item');
+            quest.objectives = [];
+            objectiveItems.forEach((item, index) => {
+                const objective = {
+                    description: item.querySelector('[data-field="description"]').value,
+                    completed: item.querySelector('[data-field="completed"]').checked
+                };
+                if (objective.description.trim()) {
+                    quest.objectives.push(objective);
+                }
+            });
+            
+            updateQuestsDisplay();
+            closeModal();
+            saveData();
+        }
+
+        function addNewObjective() {
+            const editor = document.getElementById('objectivesEditor');
+            const newIndex = editor.children.length;
+            
+            const newObjectiveHTML = `
+                <div class="action-editor-item">
+                    <label>
+                        <input type="checkbox" data-field="completed" data-index="${newIndex}">
+                        Complété
+                    </label>
+                    <input type="text" placeholder="Description de l'objectif" value="" data-field="description" data-index="${newIndex}" style="flex: 2;">
+                    <button type="button" class="remove-action-btn" onclick="removeObjective(${newIndex})">×</button>
+                </div>
+            `;
+            
+            editor.insertAdjacentHTML('beforeend', newObjectiveHTML);
+        }
+
+        function removeObjective(index) {
+            const objectiveItems = document.querySelectorAll('#objectivesEditor .action-editor-item');
+            if (objectiveItems[index]) {
+                objectiveItems[index].remove();
             }
         }
 
@@ -2276,6 +3595,301 @@
         }
 
         // ========================================
+        // MARKDOWN EDITOR SYSTEM
+        // ========================================
+        
+        function showNoteEditor(initialContent = '', onSave = null) {
+            const content = `
+                <div class="markdown-toolbar">
+                    <button class="markdown-btn" data-before="**" data-after="**" title="Gras">
+                        <i class="fas fa-bold"></i>
+                    </button>
+                    <button class="markdown-btn" data-before="*" data-after="*" title="Italique">
+                        <i class="fas fa-italic"></i>
+                    </button>
+                    <button class="markdown-btn" data-before="# " data-after="" title="Titre 1">
+                        H1
+                    </button>
+                    <button class="markdown-btn" data-before="## " data-after="" title="Titre 2">
+                        H2
+                    </button>
+                    <button class="markdown-btn" data-before="### " data-after="" title="Titre 3">
+                        H3
+                    </button>
+                    <button class="markdown-btn" data-before="- " data-after="" title="Liste">
+                        <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button class="markdown-btn" data-before="1. " data-after="" title="Liste numérotée">
+                        <i class="fas fa-list-ol"></i>
+                    </button>
+                    <button class="markdown-btn" data-before="> " data-after="" title="Citation">
+                        <i class="fas fa-quote-right"></i>
+                    </button>
+                    <button class="markdown-btn" data-action="code" title="Code">
+                        <i class="fas fa-code"></i>
+                    </button>
+                    <button class="markdown-btn" data-before="![Image](" data-after=")" title="Image">
+                        <i class="fas fa-image"></i>
+                    </button>
+                    <button class="markdown-btn" data-before="[Lien](" data-after=")" title="Lien">
+                        <i class="fas fa-link"></i>
+                    </button>
+                    <button class="markdown-btn" data-action="hr" title="Ligne horizontale">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="markdown-btn" data-action="center" title="Centrer">
+                        <i class="fas fa-align-center"></i>
+                    </button>
+                    <button class="markdown-btn" data-action="table" title="Tableau">
+                        <i class="fas fa-table"></i>
+                    </button>
+                    <button class="markdown-btn" data-action="upload" title="Upload Image">
+                        <i class="fas fa-upload"></i>
+                    </button>
+                </div>
+                <div class="markdown-editor">
+                    <textarea class="markdown-input" id="markdownInput" placeholder="Rédigez votre note en Markdown...">${initialContent}</textarea>
+                    <div class="markdown-preview" id="markdownPreview"></div>
+                </div>
+                <div class="mt-3 text-center">
+                    <button class="btn btn-success" onclick="saveMarkdownNote()">
+                        <i class="fas fa-save"></i> Sauvegarder
+                    </button>
+                    <button class="btn" onclick="closeModal()">
+                        <i class="fas fa-times"></i> Annuler
+                    </button>
+                </div>
+            `;
+            
+            const modal = document.getElementById('modalOverlay').querySelector('.modal');
+            modal.classList.add('note-modal');
+            
+            showModal('Éditeur de Note Markdown', content);
+            
+            // Initialiser l'éditeur
+            const input = document.getElementById('markdownInput');
+            const preview = document.getElementById('markdownPreview');
+            
+            // Fonction de sauvegarde pour le callback
+            window.currentNoteSaveCallback = onSave;
+            
+            // Mettre à jour la prévisualisation en temps réel
+            function updatePreview() {
+                preview.innerHTML = parseMarkdown(input.value);
+            }
+            
+            input.addEventListener('input', updatePreview);
+            input.addEventListener('scroll', () => {
+                // Synchroniser le scroll entre l'éditeur et la prévisualisation
+                const scrollPercent = input.scrollTop / (input.scrollHeight - input.clientHeight);
+                preview.scrollTop = scrollPercent * (preview.scrollHeight - preview.clientHeight);
+            });
+            
+            // Ajouter les gestionnaires d'événements pour les boutons
+            document.querySelectorAll('.markdown-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const before = btn.getAttribute('data-before');
+                    const after = btn.getAttribute('data-after');
+                    const action = btn.getAttribute('data-action');
+                    
+                    if (before !== null && after !== null) {
+                        insertMarkdown(before, after);
+                    } else if (action) {
+                        handleToolbarAction(action);
+                    }
+                });
+            });
+            
+            // Prévisualisation initiale
+            updatePreview();
+            
+            // Focus sur l'éditeur
+            setTimeout(() => input.focus(), 100);
+        }
+        
+        function insertMarkdown(before, after) {
+            const input = document.getElementById('markdownInput');
+            const start = input.selectionStart;
+            const end = input.selectionEnd;
+            const selectedText = input.value.substring(start, end);
+            
+            const newText = before + selectedText + after;
+            
+            input.value = input.value.substring(0, start) + newText + input.value.substring(end);
+            
+            // Repositionner le curseur
+            const newCursorPos = start + before.length + selectedText.length;
+            input.setSelectionRange(newCursorPos, newCursorPos);
+            
+            input.focus();
+            
+            // Mettre à jour la prévisualisation
+            const preview = document.getElementById('markdownPreview');
+            preview.innerHTML = parseMarkdown(input.value);
+        }
+        
+        function handleToolbarAction(action) {
+            switch (action) {
+                case 'code':
+                    insertMarkdown('\n```\n', '\n```\n');
+                    break;
+                case 'hr':
+                    insertMarkdown('\n---\n', '');
+                    break;
+                case 'center':
+                    insertMarkdown('\n<div class="center">\n\n', '\n\n</div>\n');
+                    break;
+                case 'table':
+                    insertTable();
+                    break;
+                case 'upload':
+                    uploadImage();
+                    break;
+            }
+        }
+        
+        function insertTable() {
+            const table = '\n| Colonne 1 | Colonne 2 | Colonne 3 |\n|-----------|-----------|-----------|\n| Cellule 1 | Cellule 2 | Cellule 3 |\n| Cellule 4 | Cellule 5 | Cellule 6 |\n';
+            insertMarkdown(table, '');
+        }
+        
+        function uploadImage() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const imageData = e.target.result;
+                    const imageName = file.name;
+                    insertMarkdown(`![${imageName}](${imageData})`, '');
+                };
+                reader.readAsDataURL(file);
+            };
+            input.click();
+        }
+        
+        function saveMarkdownNote() {
+            const input = document.getElementById('markdownInput');
+            const noteContent = input.value;
+            
+            if (window.currentNoteSaveCallback) {
+                window.currentNoteSaveCallback(noteContent);
+                window.currentNoteSaveCallback = null;
+            }
+            
+            closeModal();
+        }
+        
+        function parseMarkdown(markdown) {
+            if (!markdown) return '';
+            
+            let html = markdown;
+            
+            // Échapper le HTML existant
+            html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            // Blocs de code (avant autres transformations)
+            html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Titres
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            
+            // Gras et italique
+            html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+            
+            // Liens
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+            
+            // Images
+            html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />');
+            
+            // Listes non ordonnées
+            html = html.replace(/^[*+-] (.*)$/gim, '<li>$1</li>');
+            html = html.replace(/((<li>.*<\/li>\s*)+)/g, '<ul>$1</ul>');
+            
+            // Listes ordonnées
+            html = html.replace(/^\d+\. (.*)$/gim, '<li>$1</li>');
+            
+            // Citations
+            html = html.replace(/^> (.*)$/gim, '<blockquote>$1</blockquote>');
+            
+            // Lignes horizontales
+            html = html.replace(/^---$/gim, '<hr>');
+            
+            // Tableaux simples
+            const lines = html.split('\n');
+            let newLines = [];
+            let inTable = false;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                if (line.match(/^\|(.+)\|$/)) {
+                    const cells = line.split('|').slice(1, -1).map(cell => cell.trim());
+                    const isHeaderSeparator = cells.every(cell => cell.match(/^-+$/));
+                    
+                    if (isHeaderSeparator) {
+                        continue; // Ignorer les lignes de séparation
+                    }
+                    
+                    if (!inTable) {
+                        newLines.push('<table>');
+                        inTable = true;
+                    }
+                    
+                    const cellTags = cells.map(cell => `<td>${cell}</td>`).join('');
+                    newLines.push(`<tr>${cellTags}</tr>`);
+                } else {
+                    if (inTable) {
+                        newLines.push('</table>');
+                        inTable = false;
+                    }
+                    newLines.push(line);
+                }
+            }
+            
+            if (inTable) {
+                newLines.push('</table>');
+            }
+            
+            html = newLines.join('\n');
+            
+            // Paragraphes
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = '<p>' + html + '</p>';
+            
+            // Nettoyer les paragraphes vides et les éléments mal formés
+            html = html.replace(/<p><\/p>/g, '');
+            html = html.replace(/<p>\s*<\/p>/g, '');
+            html = html.replace(/<p>(<h[1-6]>)/g, '$1');
+            html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<ul>)/g, '$1');
+            html = html.replace(/(<\/ul>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<blockquote>)/g, '$1');
+            html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<table>)/g, '$1');
+            html = html.replace(/(<\/table>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<hr>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<pre>)/g, '$1');
+            html = html.replace(/(<\/pre>)<\/p>/g, '$1');
+            
+            // Gérer les divs de centrage
+            html = html.replace(/&lt;div class="center"&gt;/g, '<div class="center">');
+            html = html.replace(/&lt;\/div&gt;/g, '</div>');
+            html = html.replace(/<p>(<div class="center">)/g, '$1');
+            html = html.replace(/(<\/div>)<\/p>/g, '$1');
+            
+            return html;
+        }
+        
+        // ========================================
         // MODAL SYSTEM
         // ========================================
         
@@ -2287,6 +3901,11 @@
 
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');
+            // Réinitialiser les classes du modal
+            const modal = document.getElementById('modalOverlay').querySelector('.modal');
+            modal.classList.remove('note-modal', 'character-editor');
+            // Nettoyer le callback de sauvegarde
+            window.currentNoteSaveCallback = null;
         }
 
         function showAddModal() {
@@ -2359,6 +3978,36 @@
                     objectives: []
                 };
                 updateQuestsDisplay();
+            } else if (type === 'pnj') {
+                campaignData.characters[id] = {
+                    id,
+                    name: name,
+                    type: 'pnj',
+                    race: 'Inconnu',
+                    class: 'Inconnu',
+                    level: 1,
+                    hp: { current: 20, max: 20 },
+                    stats: { ca: 10, for: 10, dex: 10, con: 10, int: 10, sag: 10, cha: 10 },
+                    ideals: description,
+                    objectives: '',
+                    actions: [
+                        { name: 'Attaque de base', type: 'Attaque', dice: '1d4', heal: false }
+                    ],
+                    inventory: []
+                };
+                updateCharactersDisplay();
+            } else if (type === 'evenement') {
+                const { day, month, year } = campaignData.calendar.currentDate;
+                const dateKey = `${day}-${month}-${year}`;
+                
+                if (!campaignData.calendar.events[dateKey]) {
+                    campaignData.calendar.events[dateKey] = [];
+                }
+                campaignData.calendar.events[dateKey].push({
+                    title: name,
+                    description: description
+                });
+                updateCalendarDisplay();
             }
             
             closeModal();
@@ -2368,37 +4017,550 @@
         // Character editing functions
         function editCharacter(characterId) {
             const character = campaignData.characters[characterId];
+            if (!character) return;
+            
             const content = `
-                <div class="form-group">
-                    <label class="form-label">Nom</label>
-                    <input type="text" class="form-input" id="editName" value="${character.name}">
+                <div class="editor-section">
+                    <h4><i class="fas fa-user"></i> Informations de Base</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nom</label>
+                            <input type="text" class="form-input" id="charName" value="${character.name}">
+                        </div>
+                        <div class="form-group">
+                            <label>Type</label>
+                            <select class="form-input" id="charType">
+                                <option value="pj" ${character.type === 'pj' ? 'selected' : ''}>Joueur (PJ)</option>
+                                <option value="pnj" ${character.type === 'pnj' ? 'selected' : ''}>Non-Joueur (PNJ)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Race</label>
+                            <input type="text" class="form-input" id="charRace" value="${character.race}">
+                        </div>
+                        <div class="form-group">
+                            <label>Classe</label>
+                            <input type="text" class="form-input" id="charClass" value="${character.class}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Niveau</label>
+                            <input type="number" class="form-input" id="charLevel" value="${character.level}" min="1" max="20">
+                        </div>
+                        <div class="form-group">
+                            <label>CA (Classe d'Armure)</label>
+                            <input type="number" class="form-input" id="charCA" value="${character.stats.ca}">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Idéaux</label>
-                    <textarea class="form-input form-textarea" id="editIdeals">${character.ideals}</textarea>
+
+                <div class="editor-section">
+                    <h4><i class="fas fa-heart"></i> Points de Vie</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>PV Maximum</label>
+                            <input type="number" class="form-input" id="charHPMax" value="${character.hp.max}">
+                        </div>
+                        <div class="form-group">
+                            <label>PV Actuels</label>
+                            <input type="number" class="form-input" id="charHPCurrent" value="${character.hp.current}">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Objectifs</label>
-                    <textarea class="form-input form-textarea" id="editObjectives">${character.objectives}</textarea>
+
+                <div class="editor-section">
+                    <h4><i class="fas fa-dice-d20"></i> Caractéristiques</h4>
+                    <div class="stats-grid">
+                        <div class="stat-editor">
+                            <label>FORCE</label>
+                            <input type="number" id="charSTR" value="${character.stats.for}" min="1" max="30">
+                        </div>
+                        <div class="stat-editor">
+                            <label>DEXTÉRITÉ</label>
+                            <input type="number" id="charDEX" value="${character.stats.dex}" min="1" max="30">
+                        </div>
+                        <div class="stat-editor">
+                            <label>CONSTITUTION</label>
+                            <input type="number" id="charCON" value="${character.stats.con}" min="1" max="30">
+                        </div>
+                        <div class="stat-editor">
+                            <label>INTELLIGENCE</label>
+                            <input type="number" id="charINT" value="${character.stats.int || 10}" min="1" max="30">
+                        </div>
+                        <div class="stat-editor">
+                            <label>SAGESSE</label>
+                            <input type="number" id="charWIS" value="${character.stats.sag || 10}" min="1" max="30">
+                        </div>
+                        <div class="stat-editor">
+                            <label>CHARISME</label>
+                            <input type="number" id="charCHA" value="${character.stats.cha || 10}" min="1" max="30">
+                        </div>
+                    </div>
                 </div>
-                <div class="mt-3">
-                    <button class="btn btn-success" onclick="saveCharacterEdit('${characterId}')">Sauvegarder</button>
-                    <button class="btn" onclick="closeModal()">Annuler</button>
+
+                <div class="editor-section">
+                    <h4><i class="fas fa-scroll"></i> Personnalité</h4>
+                    <div class="form-group">
+                        <label>Idéaux</label>
+                        <textarea class="form-input" id="charIdeals" rows="2">${character.ideals}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Objectifs</label>
+                        <textarea class="form-input" id="charObjectives" rows="2">${character.objectives}</textarea>
+                    </div>
+                </div>
+
+                <div class="editor-section">
+                    <h4><i class="fas fa-sword"></i> Actions</h4>
+                    <div class="actions-editor" id="actionsEditor">
+                        ${character.actions.map((action, index) => `
+                            <div class="action-editor-item">
+                                <input type="text" placeholder="Nom de l'action" value="${action.name}" data-field="name" data-index="${index}">
+                                <input type="text" placeholder="Type" value="${action.type || ''}" data-field="type" data-index="${index}">
+                                <input type="text" placeholder="Dés" value="${action.dice}" data-field="dice" data-index="${index}">
+                                <label><input type="checkbox" ${action.heal ? 'checked' : ''} data-field="heal" data-index="${index}"> Soin</label>
+                                <button type="button" class="remove-action-btn" onclick="removeAction(${index})">×</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button type="button" class="btn btn-info mt-2" onclick="addNewAction()">
+                        <i class="fas fa-plus"></i> Ajouter Action
+                    </button>
+                </div>
+
+                <div class="editor-section">
+                    <h4><i class="fas fa-magic"></i> Sorts & Magie</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Caractéristique de sort</label>
+                            <select class="form-input" id="charSpellAbility">
+                                <option value="int" ${(character.spellcasting && character.spellcasting.ability === 'int') ? 'selected' : ''}>Intelligence</option>
+                                <option value="sag" ${(character.spellcasting && character.spellcasting.ability === 'sag') ? 'selected' : ''}>Sagesse</option>
+                                <option value="cha" ${(character.spellcasting && character.spellcasting.ability === 'cha') ? 'selected' : ''}>Charisme</option>
+                                <option value="none" ${!character.spellcasting || character.spellcasting.ability === 'none' ? 'selected' : ''}>Aucune</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Niveau de lanceur</label>
+                            <input type="number" class="form-input" id="charCasterLevel" value="${character.spellcasting ? character.spellcasting.casterLevel : 0}" min="0" max="20">
+                        </div>
+                    </div>
+                    <div class="spells-editor" id="spellsEditor">
+                        ${generateSpellLevelsEditor(character)}
+                    </div>
+                    <button type="button" class="btn btn-info mt-2" onclick="addSpellLevel()">
+                        <i class="fas fa-plus"></i> Ajouter Niveau de Sort
+                    </button>
+                </div>
+
+                <div class="mt-3 text-center">
+                    <button class="btn btn-success" onclick="saveCharacterEdit('${characterId}')">
+                        <i class="fas fa-save"></i> Sauvegarder
+                    </button>
+                    <button class="btn" onclick="closeModal()">
+                        <i class="fas fa-times"></i> Annuler
+                    </button>
                 </div>
             `;
             
-            showModal(`Modifier ${character.name}`, content);
+            const modal = document.getElementById('modalOverlay').querySelector('.modal');
+            modal.classList.add('character-editor');
+            
+            showModal(`Éditer - ${character.name}`, content);
+        }
+
+        function generateSpellLevelsEditor(character) {
+            const spellcasting = character.spellcasting || { levels: {} };
+            let html = '';
+            
+            for (let level = 0; level <= 9; level++) {
+                const spellLevel = spellcasting.levels[level] || { slots: 0, slotsUsed: 0, spells: [] };
+                const levelName = level === 0 ? 'Tours de magie' : `Niveau ${level}`;
+                
+                html += `
+                    <div class="spell-level-section">
+                        <div class="spell-level-header" onclick="toggleSpellLevel(${level})">
+                            <span>${levelName} (${spellLevel.spells.length} sorts)</span>
+                            <i class="fas fa-chevron-down" id="spell-chevron-${level}"></i>
+                        </div>
+                        <div class="spell-level-content" id="spell-content-${level}">
+                            ${level > 0 ? `
+                                <div class="spell-slots">
+                                    <label>Emplacements :</label>
+                                    <input type="number" min="0" max="20" value="${spellLevel.slots}" 
+                                           data-level="${level}" data-field="slots" onchange="updateSpellSlots(${level})">
+                                    <label>Utilisés :</label>
+                                    <input type="number" min="0" max="${spellLevel.slots}" value="${spellLevel.slotsUsed}" 
+                                           data-level="${level}" data-field="slotsUsed" onchange="updateSpellSlots(${level})">
+                                    <span class="text-info">(${spellLevel.slots - spellLevel.slotsUsed} restants)</span>
+                                </div>
+                            ` : ''}
+                            <div id="spells-list-${level}">
+                                ${spellLevel.spells.map((spell, index) => `
+                                    <div class="spell-item">
+                                        <input type="text" placeholder="Nom du sort" value="${spell.name}" 
+                                               data-level="${level}" data-index="${index}" data-field="name">
+                                        <select data-level="${level}" data-index="${index}" data-field="school">
+                                            <option value="abjuration" ${spell.school === 'abjuration' ? 'selected' : ''}>Abjuration</option>
+                                            <option value="conjuration" ${spell.school === 'conjuration' ? 'selected' : ''}>Conjuration</option>
+                                            <option value="divination" ${spell.school === 'divination' ? 'selected' : ''}>Divination</option>
+                                            <option value="enchantement" ${spell.school === 'enchantement' ? 'selected' : ''}>Enchantement</option>
+                                            <option value="evocation" ${spell.school === 'evocation' ? 'selected' : ''}>Évocation</option>
+                                            <option value="illusion" ${spell.school === 'illusion' ? 'selected' : ''}>Illusion</option>
+                                            <option value="necromancie" ${spell.school === 'necromancie' ? 'selected' : ''}>Nécromancie</option>
+                                            <option value="transmutation" ${spell.school === 'transmutation' ? 'selected' : ''}>Transmutation</option>
+                                        </select>
+                                        <input type="text" placeholder="Dégâts/Effet" value="${spell.damage || ''}" 
+                                               data-level="${level}" data-index="${index}" data-field="damage">
+                                        ${level > 0 ? `
+                                            <button type="button" class="spell-cast-btn" onclick="castSpell(${level}, ${index})" 
+                                                    ${spellLevel.slotsUsed >= spellLevel.slots ? 'disabled' : ''}>
+                                                Lancer
+                                            </button>
+                                        ` : `
+                                            <button type="button" class="spell-cast-btn" onclick="castCantrip(${index})">
+                                                Lancer
+                                            </button>
+                                        `}
+                                        <button type="button" class="remove-action-btn" onclick="removeSpell(${level}, ${index})">×</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <button type="button" class="btn btn-info btn-sm mt-2" onclick="addNewSpell(${level})">
+                                <i class="fas fa-plus"></i> Ajouter Sort
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return html;
+        }
+
+        function toggleSpellLevel(level) {
+            const content = document.getElementById(`spell-content-${level}`);
+            const chevron = document.getElementById(`spell-chevron-${level}`);
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                chevron.className = 'fas fa-chevron-down';
+            } else {
+                content.classList.add('active');
+                chevron.className = 'fas fa-chevron-up';
+            }
+        }
+
+        function updateSpellSlots(level) {
+            const slotsInput = document.querySelector(`[data-level="${level}"][data-field="slots"]`);
+            const usedInput = document.querySelector(`[data-level="${level}"][data-field="slotsUsed"]`);
+            
+            if (slotsInput && usedInput) {
+                const slots = parseInt(slotsInput.value);
+                const used = parseInt(usedInput.value);
+                
+                // Update max for used slots
+                usedInput.setAttribute('max', slots);
+                
+                // Update remaining display
+                const remainingSpan = usedInput.parentElement.querySelector('.text-info');
+                if (remainingSpan) {
+                    remainingSpan.textContent = `(${Math.max(0, slots - used)} restants)`;
+                }
+                
+                // Update cast buttons state
+                const castButtons = document.querySelectorAll(`[onclick*="castSpell(${level}"]`);
+                castButtons.forEach(btn => {
+                    btn.disabled = used >= slots;
+                });
+            }
+        }
+
+        function addNewSpell(level) {
+            const spellsList = document.getElementById(`spells-list-${level}`);
+            const spellsCount = spellsList.children.length;
+            
+            const newSpellHTML = `
+                <div class="spell-item">
+                    <input type="text" placeholder="Nom du sort" value="" 
+                           data-level="${level}" data-index="${spellsCount}" data-field="name">
+                    <select data-level="${level}" data-index="${spellsCount}" data-field="school">
+                        <option value="abjuration">Abjuration</option>
+                        <option value="conjuration">Conjuration</option>
+                        <option value="divination">Divination</option>
+                        <option value="enchantement">Enchantement</option>
+                        <option value="evocation" selected>Évocation</option>
+                        <option value="illusion">Illusion</option>
+                        <option value="necromancie">Nécromancie</option>
+                        <option value="transmutation">Transmutation</option>
+                    </select>
+                    <input type="text" placeholder="Dégâts/Effet" value="" 
+                           data-level="${level}" data-index="${spellsCount}" data-field="damage">
+                    ${level > 0 ? `
+                        <button type="button" class="spell-cast-btn" onclick="castSpell(${level}, ${spellsCount})">
+                            Lancer
+                        </button>
+                    ` : `
+                        <button type="button" class="spell-cast-btn" onclick="castCantrip(${spellsCount})">
+                            Lancer
+                        </button>
+                    `}
+                    <button type="button" class="remove-action-btn" onclick="removeSpell(${level}, ${spellsCount})">×</button>
+                </div>
+            `;
+            
+            spellsList.insertAdjacentHTML('beforeend', newSpellHTML);
+        }
+
+        function removeSpell(level, index) {
+            const spellItems = document.querySelectorAll(`#spells-list-${level} .spell-item`);
+            if (spellItems[index]) {
+                spellItems[index].remove();
+            }
+        }
+
+        function castSpell(level, index) {
+            const spellName = document.querySelector(`[data-level="${level}"][data-index="${index}"][data-field="name"]`).value;
+            const spellDamage = document.querySelector(`[data-level="${level}"][data-index="${index}"][data-field="damage"]`).value;
+            const usedInput = document.querySelector(`[data-level="${level}"][data-field="slotsUsed"]`);
+            
+            if (!spellName) {
+                alert('Le sort doit avoir un nom');
+                return;
+            }
+            
+            // Use a spell slot
+            const currentUsed = parseInt(usedInput.value);
+            const maxSlots = parseInt(usedInput.getAttribute('max'));
+            
+            if (currentUsed >= maxSlots) {
+                alert('Plus d\'emplacements de sort de ce niveau !');
+                return;
+            }
+            
+            usedInput.value = currentUsed + 1;
+            updateSpellSlots(level);
+            
+            // Roll damage/effect if specified
+            let result = `🔮 **${spellName}** (Niveau ${level}) lancé !`;
+            
+            if (spellDamage) {
+                if (spellDamage.match(/\d+d\d+/)) {
+                    const diceResult = rollDice(spellDamage);
+                    result += `\n💥 Effet : ${diceResult.total} (${diceResult.breakdown})`;
+                } else {
+                    result += `\n✨ Effet : ${spellDamage}`;
+                }
+            }
+            
+            showDiceResult({ breakdown: result, total: '' });
+        }
+
+        function castCantrip(index) {
+            const spellName = document.querySelector(`[data-level="0"][data-index="${index}"][data-field="name"]`).value;
+            const spellDamage = document.querySelector(`[data-level="0"][data-index="${index}"][data-field="damage"]`).value;
+            
+            if (!spellName) {
+                alert('Le tour de magie doit avoir un nom');
+                return;
+            }
+            
+            // Roll damage/effect if specified
+            let result = `✨ **${spellName}** (Tour de magie) lancé !`;
+            
+            if (spellDamage) {
+                if (spellDamage.match(/\d+d\d+/)) {
+                    const diceResult = rollDice(spellDamage);
+                    result += `\n💥 Effet : ${diceResult.total} (${diceResult.breakdown})`;
+                } else {
+                    result += `\n✨ Effet : ${spellDamage}`;
+                }
+            }
+            
+            showDiceResult({ breakdown: result, total: '' });
+        }
+
+        // Functions for casting spells from character cards
+        function castSpell(characterId, level, spellIndex) {
+            const character = campaignData.characters[characterId];
+            if (!character || !character.spellcasting || !character.spellcasting.levels[level]) return;
+            
+            const spellLevel = character.spellcasting.levels[level];
+            const spell = spellLevel.spells[spellIndex];
+            
+            if (!spell) return;
+            
+            // Check spell slots
+            if (spellLevel.slotsUsed >= spellLevel.slots) {
+                alert(`Plus d'emplacements de sort de niveau ${level} !`);
+                return;
+            }
+            
+            // Use spell slot
+            spellLevel.slotsUsed++;
+            
+            // Roll damage/effect if specified
+            let result = `🔮 **${spell.name}** (Niveau ${level}) lancé par ${character.name} !`;
+            
+            if (spell.damage) {
+                if (spell.damage.match(/\d+d\d+/)) {
+                    const diceResult = rollDice(spell.damage);
+                    result += `\n💥 Effet : ${diceResult.total} (${diceResult.breakdown})`;
+                } else {
+                    result += `\n✨ Effet : ${spell.damage}`;
+                }
+            }
+            
+            showDiceResult({ breakdown: result, total: '' });
+            updateCharactersDisplay(); // Refresh to show updated spell slots
+            saveData();
+        }
+
+        function castCantrip(characterId, spellIndex) {
+            const character = campaignData.characters[characterId];
+            if (!character || !character.spellcasting || !character.spellcasting.levels[0]) return;
+            
+            const spell = character.spellcasting.levels[0].spells[spellIndex];
+            if (!spell) return;
+            
+            // Roll damage/effect if specified
+            let result = `✨ **${spell.name}** (Tour de magie) lancé par ${character.name} !`;
+            
+            if (spell.damage) {
+                if (spell.damage.match(/\d+d\d+/)) {
+                    const diceResult = rollDice(spell.damage);
+                    result += `\n💥 Effet : ${diceResult.total} (${diceResult.breakdown})`;
+                } else {
+                    result += `\n✨ Effet : ${spell.damage}`;
+                }
+            }
+            
+            showDiceResult({ breakdown: result, total: '' });
         }
 
         function saveCharacterEdit(characterId) {
             const character = campaignData.characters[characterId];
-            character.name = document.getElementById('editName').value;
-            character.ideals = document.getElementById('editIdeals').value;
-            character.objectives = document.getElementById('editObjectives').value;
+            
+            // Basic info
+            character.name = document.getElementById('charName').value;
+            character.type = document.getElementById('charType').value;
+            character.race = document.getElementById('charRace').value;
+            character.class = document.getElementById('charClass').value;
+            character.level = parseInt(document.getElementById('charLevel').value);
+            
+            // Stats
+            character.stats.ca = parseInt(document.getElementById('charCA').value);
+            character.stats.for = parseInt(document.getElementById('charSTR').value);
+            character.stats.dex = parseInt(document.getElementById('charDEX').value);
+            character.stats.con = parseInt(document.getElementById('charCON').value);
+            character.stats.int = parseInt(document.getElementById('charINT').value);
+            character.stats.sag = parseInt(document.getElementById('charWIS').value);
+            character.stats.cha = parseInt(document.getElementById('charCHA').value);
+            
+            // HP
+            character.hp.max = parseInt(document.getElementById('charHPMax').value);
+            character.hp.current = parseInt(document.getElementById('charHPCurrent').value);
+            
+            // Personality
+            character.ideals = document.getElementById('charIdeals').value;
+            character.objectives = document.getElementById('charObjectives').value;
+            
+            // Actions
+            const actionItems = document.querySelectorAll('.action-editor-item');
+            character.actions = [];
+            actionItems.forEach((item, index) => {
+                const action = {
+                    name: item.querySelector('[data-field="name"]').value,
+                    type: item.querySelector('[data-field="type"]').value,
+                    dice: item.querySelector('[data-field="dice"]').value,
+                    heal: item.querySelector('[data-field="heal"]').checked
+                };
+                if (action.name && action.dice) {
+                    character.actions.push(action);
+                }
+            });
+            
+            // Spellcasting
+            const spellAbility = document.getElementById('charSpellAbility').value;
+            const casterLevel = parseInt(document.getElementById('charCasterLevel').value);
+            
+            if (spellAbility !== 'none' && casterLevel > 0) {
+                character.spellcasting = {
+                    ability: spellAbility,
+                    casterLevel: casterLevel,
+                    levels: {}
+                };
+                
+                // Save each spell level
+                for (let level = 0; level <= 9; level++) {
+                    const spellItems = document.querySelectorAll(`[data-level="${level}"]`);
+                    const levelSpells = [];
+                    let slots = 0;
+                    let slotsUsed = 0;
+                    
+                    // Get slots info
+                    if (level > 0) {
+                        const slotsInput = document.querySelector(`[data-level="${level}"][data-field="slots"]`);
+                        const usedInput = document.querySelector(`[data-level="${level}"][data-field="slotsUsed"]`);
+                        if (slotsInput) slots = parseInt(slotsInput.value) || 0;
+                        if (usedInput) slotsUsed = parseInt(usedInput.value) || 0;
+                    }
+                    
+                    // Get spells
+                    const spellNames = document.querySelectorAll(`[data-level="${level}"][data-field="name"]`);
+                    spellNames.forEach((nameInput, index) => {
+                        const spell = {
+                            name: nameInput.value,
+                            school: document.querySelector(`[data-level="${level}"][data-index="${index}"][data-field="school"]`)?.value || 'evocation',
+                            damage: document.querySelector(`[data-level="${level}"][data-index="${index}"][data-field="damage"]`)?.value || ''
+                        };
+                        if (spell.name.trim()) {
+                            levelSpells.push(spell);
+                        }
+                    });
+                    
+                    if (levelSpells.length > 0 || slots > 0) {
+                        character.spellcasting.levels[level] = {
+                            slots: slots,
+                            slotsUsed: slotsUsed,
+                            spells: levelSpells
+                        };
+                    }
+                }
+            } else {
+                // Remove spellcasting if not a caster
+                delete character.spellcasting;
+            }
             
             updateCharactersDisplay();
             closeModal();
             saveData();
+        }
+
+        function addNewAction() {
+            const editor = document.getElementById('actionsEditor');
+            const newIndex = editor.children.length;
+            
+            const newActionHTML = `
+                <div class="action-editor-item">
+                    <input type="text" placeholder="Nom de l'action" value="" data-field="name" data-index="${newIndex}">
+                    <input type="text" placeholder="Type" value="" data-field="type" data-index="${newIndex}">
+                    <input type="text" placeholder="Dés (ex: 1d8+3)" value="" data-field="dice" data-index="${newIndex}">
+                    <label><input type="checkbox" data-field="heal" data-index="${newIndex}"> Soin</label>
+                    <button type="button" class="remove-action-btn" onclick="removeAction(${newIndex})">×</button>
+                </div>
+            `;
+            
+            editor.insertAdjacentHTML('beforeend', newActionHTML);
+        }
+
+        function removeAction(index) {
+            const actionItems = document.querySelectorAll('.action-editor-item');
+            if (actionItems[index]) {
+                actionItems[index].remove();
+            }
         }
 
         function adjustHP(characterId) {
@@ -2421,8 +4583,12 @@
         
         function saveData() {
             try {
-                localStorage.setItem('campaignData_coffre_fort', JSON.stringify(campaignData));
-                console.log('✅ Données sauvegardées');
+                const dataToSave = {
+                    ...campaignData,
+                    mapState: mapState
+                };
+                localStorage.setItem('campaignData_coffre_fort', JSON.stringify(dataToSave));
+                console.log('✅ Données sauvegardées (incluant état carte)');
             } catch (e) {
                 console.error('❌ Erreur de sauvegarde:', e);
                 alert('Erreur lors de la sauvegarde des données');

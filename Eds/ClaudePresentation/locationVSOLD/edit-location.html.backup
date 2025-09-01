@@ -2543,16 +2543,13 @@ Fabrication et Support 100% Québécois</div>
     </footer>
 
     <!-- 
-        EDS Template Generator Framework - Version 2.0
-        Stratégie : Framework générique pour tout type de produit
-        Fonctionnalité : Interface Admin universelle avec générateur de templates
+        Framework Li-CUBE PRO™ - Version Simplified Browser Compatible
+        Stratégie : Un seul module simplifié sans ES6 exports/imports
+        Fonctionnalité : Interface Admin fonctionnelle immédiatement
     -->
     
-    <!-- Catalogue des Templates Produits -->
-    <script src="js/templates/product-templates.js"></script>
-    
-    <!-- Core EDS Framework - Version Compatible Navigateur -->
-    <script src="js/core/eds-framework.js"></script>
+    <!-- Core Li-CUBE PRO™ - Version Compatible Navigateur -->
+    <script src="js/core/licube-core.js"></script>
     
     <!-- Dépendance : Détection du type de page pour InstantSync -->
     <script src="js/page-type.js"></script>
@@ -2560,55 +2557,24 @@ Fabrication et Support 100% Québécois</div>
     <!-- Système de Synchronisation Instantanée -->
     <script src="js/instant-sync.js"></script>
     
-    <!-- Interface d'édition spécialisée -->
-    <script src="js/edit-location.js"></script>
-    
-    <!-- Bouton d'accès à l'interface d'administration -->
-    <div id="eds-admin-trigger" style="
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        background: linear-gradient(135deg, #10B981, #14B8A6);
-        color: #0F172A;
-        padding: 12px 20px;
-        border-radius: 12px;
-        cursor: pointer;
-        font-weight: 700;
-        font-size: 14px;
-        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    " onclick="toggleEDSAdmin()">
-        <i class="fas fa-magic"></i>
-        EDS Admin
-    </div>
-    
-    <!-- Vérification : EDS Framework chargé correctement -->
+    <!-- Vérification : Li-CUBE PRO™ Core chargé correctement -->
     <script>
-        // Rôle : Vérification du chargement EDS Template Generator Framework
+        // Rôle : Vérification du chargement Li-CUBE PRO™ Core
         // Type : Health check - Validation rapide des composants
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('🔍 Vérification EDS Template Generator Framework...');
+            console.log('🔍 Vérification Li-CUBE PRO™ Core...');
             
-            // Délai court pour laisser le temps au framework et InstantSync de s'initialiser
+            // Délai court pour laisser le temps au core et InstantSync de s'initialiser
             setTimeout(() => {
-                if (window.EDSFramework && window.EDSProductTemplates) {
-                    console.log('✅ EDS Framework chargé avec succès');
+                if (window.LiCubeCore && window.LiCubeAdmin) {
+                    console.log('✅ Li-CUBE PRO™ Core chargé avec succès');
                     console.log('📊 API disponible:', {
-                        framework: !!window.EDSFramework,
-                        templates: !!window.EDSProductTemplates,
-                        admin: !!window.EDSFramework.admin,
+                        core: !!window.LiCubeCore,
+                        admin: !!window.LiCubeAdmin,
+                        config: !!window.LiCubeConfig,
                         instantSync: !!window.instantSync,
                         detectPageType: !!window.detectPageType
                     });
-                    
-                    // Statistiques : Templates disponibles
-                    const templates = window.EDSProductTemplates.utils.getAllTemplates();
-                    console.log(`🎨 ${templates.length} templates disponibles:`, 
-                        templates.map(t => `${t.name} (${t.type})`));
                     
                     // Vérification : InstantSync spécifique
                     if (window.instantSync && window.instantSync.isInitialized) {
@@ -2618,46 +2584,16 @@ Fabrication et Support 100% Québécois</div>
                         console.warn('⚠️ InstantSync non initialisé - vérifiez page-type.js et instant-sync.js');
                     }
                 } else {
-                    console.error('❌ Échec du chargement EDS Framework');
+                    console.error('❌ Échec du chargement Li-CUBE PRO™ Core');
                     console.warn('🔍 État window:', {
-                        EDSFramework: !!window.EDSFramework,
-                        EDSProductTemplates: !!window.EDSProductTemplates,
+                        LiCubeCore: !!window.LiCubeCore,
+                        LiCubeAdmin: !!window.LiCubeAdmin,
+                        LiCubeConfig: !!window.LiCubeConfig,
                         instantSync: !!window.instantSync,
                         detectPageType: !!window.detectPageType
                     });
                 }
             }, 1000); // Délai augmenté pour InstantSync
-        });
-        
-        /**
-         * Fonction de basculement de l'interface EDS Admin
-         * 
-         * Rôle : Ouvrir/fermer l'interface d'administration EDS
-         * Type : Event handler pour le bouton admin
-         */
-        function toggleEDSAdmin() {
-            if (window.EDSFramework && window.EDSFramework.admin) {
-                window.EDSFramework.admin.toggle();
-            } else {
-                console.error('❌ EDS Framework Admin non disponible');
-                alert('Interface EDS Admin non disponible. Vérifiez que le framework est chargé correctement.');
-            }
-        }
-        
-        // Style : Effet hover pour le bouton admin
-        document.addEventListener('DOMContentLoaded', () => {
-            const adminTrigger = document.getElementById('eds-admin-trigger');
-            if (adminTrigger) {
-                adminTrigger.addEventListener('mouseenter', () => {
-                    adminTrigger.style.transform = 'translateY(-2px)';
-                    adminTrigger.style.boxShadow = '0 6px 20px rgba(16, 185, 129, 0.6)';
-                });
-                
-                adminTrigger.addEventListener('mouseleave', () => {
-                    adminTrigger.style.transform = 'translateY(0)';
-                    adminTrigger.style.boxShadow = '0 4px 15px rgba(16, 185, 129, 0.4)';
-                });
-            }
         });
     </script>
 

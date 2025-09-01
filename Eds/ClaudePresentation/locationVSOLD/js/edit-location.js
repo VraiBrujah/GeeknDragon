@@ -36,6 +36,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  /**
+   * Fonction : activation de l'interface d'administration EDS Framework
+   * 
+   * Rôle : Point d'entrée principal pour accéder au panneau admin universel
+   * Responsabilité : Initialiser et afficher l'interface d'administration EDS
+   * Fallback : Création d'interface simple si module admin non disponible
+   * Intégration : Connecte le bouton HTML avec le système EDSAdminInterface
+   */
+  window.toggleAdminInterface = function() {
+    console.log('🔧 Activation Interface Admin EDS Framework...');
+
+    try {
+      // Priorité 1 : EDS Framework (nouveau système universel)
+      if (window.EDSFramework && window.EDSFramework.admin && typeof window.EDSFramework.admin.toggle === 'function') {
+        console.log('✅ EDS Framework Admin détectée');
+        window.EDSFramework.admin.toggle();
+        return;
+      }
+
+      // Priorité 2 : Li-CUBE PRO™ Core (ancien système, compatibilité)
+      if (window.LiCubeAdmin && typeof window.LiCubeAdmin.toggle === 'function') {
+        console.log('✅ Li-CUBE PRO™ Core Admin détectée (mode compatibilité)');
+        window.LiCubeAdmin.toggle();
+        return;
+      }
+
+      // Priorité 3 : Framework Li-CUBE complet (ancien système complexe)
+      if (window.LiCube && window.LiCube.framework && window.LiCube.framework.admin) {
+        console.log('✅ Interface Admin framework Li-CUBE détectée (mode compatibilité)');
+        window.LiCube.framework.admin.toggle();
+        return;
+      }
+
+      // Priorité 4 : Instance AdminInterface globale standalone  
+      if (window.adminInterface && typeof window.adminInterface.toggle === 'function') {
+        console.log('✅ Instance AdminInterface globale trouvée (mode compatibilité)');
+        window.adminInterface.toggle();
+        return;
+      }
+
+      // Diagnostic : état des modules pour debug
+      console.warn('🔍 Diagnostic modules EDS Framework:');
+      console.warn('- window.EDSFramework:', !!window.EDSFramework);
+      console.warn('- window.EDSProductTemplates:', !!window.EDSProductTemplates);
+      console.warn('- window.LiCubeCore:', !!window.LiCubeCore);
+      console.warn('- window.LiCubeAdmin:', !!window.LiCubeAdmin);
+      console.warn('- window.adminInterface:', !!window.adminInterface);  
+      console.warn('- window.instantSync:', !!window.instantSync);
+      console.warn('- Classes EDS détectées:', Object.keys(window).filter(k => k.includes('EDS')));
+
+      // Fallback : interface de diagnostic améliorée
+      console.warn('⚠️ Interface admin avancée non disponible, création interface de diagnostic...');
+      createFallbackAdminInterface();
+
+    } catch (error) {
+      console.error('❌ Erreur activation interface admin:', error);
+      alert('Interface d\'administration temporairement indisponible.\nVeuillez actualiser la page.');
+    }
+  };
+
   // Validation : formats email et téléphone
   setupFieldValidation();
 
@@ -94,6 +154,119 @@ function setupFieldValidation() {
       }
     });
   });
+}
+
+/**
+ * Fonction : création d'interface d'administration fallback
+ * 
+ * Rôle : Interface admin simplifiée si le module principal n'est pas disponible
+ * Type : Fallback function - Solution de repli fonctionnelle
+ * Fonctionnalités : Affichage modal avec informations système de base
+ * Utilisation : Automatique si AdminInterface avancé non chargé
+ */
+function createFallbackAdminInterface() {
+  // Rôle : Prévention des doublons d'interface
+  if (document.getElementById('fallback-admin-modal')) {
+    document.getElementById('fallback-admin-modal').remove();
+  }
+
+  // Rôle : Structure HTML de l'interface fallback
+  const modal = document.createElement('div');
+  modal.id = 'fallback-admin-modal';
+  modal.innerHTML = `
+    <div class="fallback-admin-overlay" onclick="this.parentElement.remove()">
+      <div class="fallback-admin-content" onclick="event.stopPropagation()">
+        <div class="fallback-admin-header">
+          <h2><i class="fas fa-cogs"></i> Interface Admin - Mode Fallback</h2>
+          <button class="fallback-close" onclick="this.closest('.fallback-admin-overlay').parentElement.remove()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="fallback-admin-body">
+          <div class="fallback-info-card">
+            <h3><i class="fas fa-info-circle"></i> État du Système</h3>
+            <ul>
+              <li>Li-CUBE PRO™ Core: ${window.LiCubeCore ? '✅ Chargé v' + window.LiCubeCore.version : '❌ Non disponible'}</li>
+              <li>Interface Admin Core: ${window.LiCubeAdmin ? '✅ Disponible' : '❌ Non chargée'}</li>
+              <li>Configuration Core: ${window.LiCubeConfig ? '✅ Opérationnelle' : '❌ Non chargée'}</li>
+              <li>InstantSync: ${window.instantSync ? '✅ Opérationnel' : '❌ Non chargé'}</li>
+              <li>Modules détectés:</li>
+              <ul style="margin-left: 20px; margin-top: 10px;">
+                ${Object.keys(window).filter(k => k.startsWith('LiCube')).map(k => 
+                  `<li>${k}: ✅</li>`
+                ).join('') || '<li>Aucun module Li-CUBE détecté</li>'}
+              </ul>
+            </ul>
+          </div>
+          <div class="fallback-actions">
+            <button onclick="location.reload()" class="fallback-btn-primary">
+              <i class="fas fa-sync-alt"></i> Actualiser la page
+            </button>
+            <button onclick="console.log('Debug info:', {LiCube: window.LiCube, instantSync: window.instantSync})" class="fallback-btn-secondary">
+              <i class="fas fa-bug"></i> Infos Debug Console
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Rôle : Styles CSS intégrés pour l'interface fallback
+  const style = document.createElement('style');
+  style.textContent = `
+    .fallback-admin-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+      background: rgba(0,0,0,0.8); z-index: 10000;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+    .fallback-admin-content {
+      background: var(--primary-dark, #0F172A); border-radius: 16px;
+      min-width: 500px; max-width: 90vw; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      border: 1px solid var(--accent-green, #10B981);
+    }
+    .fallback-admin-header {
+      padding: 1.5rem; border-bottom: 1px solid var(--accent-green, #10B981);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .fallback-admin-header h2 {
+      color: var(--accent-green, #10B981); margin: 0; font-size: 1.4rem;
+    }
+    .fallback-close {
+      background: none; border: none; color: var(--text-white, white);
+      font-size: 1.2rem; cursor: pointer; padding: 0.5rem;
+      border-radius: 4px; transition: background 0.3s;
+    }
+    .fallback-close:hover { background: rgba(239,68,68,0.2); }
+    .fallback-admin-body { padding: 1.5rem; }
+    .fallback-info-card {
+      background: rgba(16,185,129,0.1); border: 1px solid var(--accent-green, #10B981);
+      border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;
+    }
+    .fallback-info-card h3 { color: var(--accent-green, #10B981); margin-top: 0; }
+    .fallback-info-card ul { color: var(--text-white, white); }
+    .fallback-actions { display: flex; gap: 1rem; justify-content: center; }
+    .fallback-btn-primary, .fallback-btn-secondary {
+      padding: 0.75rem 1.5rem; border: none; border-radius: 8px;
+      cursor: pointer; font-weight: 600; transition: all 0.3s;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .fallback-btn-primary {
+      background: var(--accent-green, #10B981); color: white;
+    }
+    .fallback-btn-secondary {
+      background: var(--accent-blue, #3B82F6); color: white;
+    }
+    .fallback-btn-primary:hover, .fallback-btn-secondary:hover {
+      transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+  `;
+
+  // Injection : ajout du modal et styles au DOM
+  document.head.appendChild(style);
+  document.body.appendChild(modal);
+
+  console.log('✅ Interface Admin fallback créée et affichée');
 }
 
 // Utilitaires : validation des formats

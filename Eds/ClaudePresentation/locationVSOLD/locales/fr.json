@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "language": "fr",
+    "name": "Français",
+    "nativeName": "Français",
+    "locale": "fr-FR",
+    "flag": "🇫🇷",
+    "rtl": false,
+    "version": "1.0.0",
+    "lastUpdated": "2025-01-01"
+  },
+  
+  "admin": {
+    "title": "Administration Li-CUBE PRO™",
+    "close": "Fermer",
+    "minimize": "Réduire",
+    "preview": "Aperçu",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "delete": "Supprimer",
+    "duplicate": "Dupliquer",
+    "edit": "Éditer",
+    "add": "Ajouter",
+    "remove": "Retirer",
+    "help": "Aide",
+    "loading": "Chargement...",
+    "refresh": "Actualiser"
+  },
+  
+  "tabs": {
+    "sections": "Sections",
+    "templates": "Modèles",
+    "content": "Contenu",
+    "settings": "Paramètres",
+    "languages": "Langues",
+    "builder": "Constructeur"
+  },
+  
+  "sections": {
+    "title": "Gestion des Sections",
+    "addSection": "Ajouter Section",
+    "import": "Importer",
+    "export": "Exporter",
+    "moveUp": "Monter",
+    "moveDown": "Descendre",
+    "visible": "Visible",
+    "hidden": "Masquée",
+    "fields": "champs",
+    "field": "champ",
+    "noSections": "Aucune section créée",
+    "selectSection": "Sélectionnez une section pour l'éditer",
+    "sectionName": "Nom de la section",
+    "sectionVisible": "Section visible",
+    "sectionProperties": "Propriétés de la section",
+    "sectionActions": "Actions sur la section"
+  },
+  
+  "templates": {
+    "title": "Modèles Disponibles",
+    "search": "Rechercher modèles...",
+    "use": "Utiliser",
+    "create": "Créer",
+    "categories": {
+      "all": "Tous",
+      "hero": "Héros",
+      "content": "Contenu", 
+      "pricing": "Tarification",
+      "contact": "Contact",
+      "custom": "Personnalisé"
+    },
+    "types": {
+      "hero": "Section Héros",
+      "pricing": "Section Tarification",
+      "advantages": "Section Avantages",
+      "contact": "Section Contact",
+      "custom": "Section Personnalisée",
+      "testimonial": "Section Témoignages",
+      "gallery": "Section Galerie",
+      "faq": "Section FAQ"
+    },
+    "descriptions": {
+      "hero": "Section d'accueil avec titre et sous-titre",
+      "pricing": "Grille de cartes de prix",
+      "advantages": "Liste d'avantages avec icônes",
+      "contact": "Informations de contact",
+      "custom": "Section vide personnalisable"
+    }
+  },
+  
+  "fields": {
+    "text": "Texte",
+    "image": "Image",
+    "button": "Bouton",
+    "spacer": "Espacement",
+    "link": "Lien",
+    "video": "Vidéo",
+    "map": "Carte",
+    "form": "Formulaire",
+    "addField": "Ajouter Champ",
+    "removeField": "Supprimer Champ",
+    "fieldName": "Nom du champ",
+    "fieldValue": "Valeur",
+    "fieldType": "Type de champ",
+    "placeholder": "Texte d'exemple",
+    "required": "Champ requis",
+    "validation": "Validation",
+    "properties": "Propriétés",
+    "content": "Contenu",
+    "url": "URL",
+    "altText": "Texte alternatif",
+    "linkText": "Texte du lien",
+    "buttonText": "Texte du bouton",
+    "height": "Hauteur",
+    "width": "Largeur"
+  },
+  
+  "messages": {
+    "success": "Opération réussie",
+    "error": "Erreur survenue",
+    "warning": "Attention",
+    "info": "Information",
+    "saved": "Sauvegardé avec succès",
+    "deleted": "Supprimé avec succès",
+    "duplicated": "Dupliqué avec succès",
+    "created": "Créé avec succès",
+    "updated": "Mis à jour avec succès",
+    "imported": "Importé avec succès",
+    "exported": "Exporté avec succès",
+    "loading": "Chargement en cours...",
+    "saving": "Sauvegarde en cours...",
+    "noSelection": "Sélectionnez un élément pour l'éditer",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ?",
+    "confirmDeleteSection": "Êtes-vous sûr de vouloir supprimer cette section ?",
+    "unsavedChanges": "Vous avez des modifications non sauvegardées",
+    "networkError": "Erreur de connexion",
+    "fileNotFound": "Fichier introuvable",
+    "invalidData": "Données invalides",
+    "operationComplete": "Opération terminée"
+  },
+  
+  "settings": {
+    "title": "Paramètres",
+    "interface": "Interface",
+    "panelPosition": "Position du panneau",
+    "right": "Droite",
+    "left": "Gauche",
+    "autoHide": "Masquer automatiquement en mode présentation",
+    "enableDragDrop": "Activer le glisser-déposer",
+    "enablePreview": "Prévisualisation temps réel",
+    "syncDelay": "Délai de synchronisation (ms)",
+    "language": "Langue",
+    "currentLanguage": "Langue actuelle",
+    "selectLanguage": "Choisir la langue",
+    "shortcuts": "Raccourcis Clavier",
+    "theme": "Thème",
+    "darkMode": "Mode sombre",
+    "lightMode": "Mode clair",
+    "autoTheme": "Automatique",
+    "accessibility": "Accessibilité",
+    "fontSize": "Taille de police",
+    "highContrast": "Contraste élevé",
+    "reduceMotion": "Réduire les animations"
+  },
+  
+  "shortcuts": {
+    "title": "Raccourcis Clavier",
+    "preview": "Prévisualiser",
+    "save": "Sauvegarder", 
+    "duplicate": "Dupliquer section",
+    "close": "Fermer panneau",
+    "toggleAdmin": "Basculer admin",
+    "undo": "Annuler",
+    "redo": "Refaire",
+    "selectAll": "Tout sélectionner",
+    "copy": "Copier",
+    "paste": "Coller",
+    "find": "Rechercher",
+    "help": "Afficher l'aide"
+  },
+  
+  "templateBuilder": {
+    "title": "Constructeur de Modèles",
+    "newTemplate": "Nouveau Modèle",
+    "editTemplate": "Éditer Modèle",
+    "widgets": "Widgets Disponibles",
+    "properties": "Propriétés",
+    "searchWidgets": "Rechercher widgets...",
+    "dragHint": "Glissez-déposez des widgets ici pour créer votre modèle",
+    "categories": {
+      "content": "Contenu",
+      "media": "Médias",
+      "interactive": "Interactif",
+      "layout": "Mise en page",
+      "forms": "Formulaires",
+      "other": "Autres"
+    },
+    "widgets": {
+      "text": "Texte",
+      "heading": "Titre",
+      "image": "Image",
+      "button": "Bouton",
+      "container": "Container",
+      "grid": "Grille",
+      "spacer": "Espacement",
+      "card": "Carte",
+      "list": "Liste",
+      "separator": "Séparateur"
+    },
+    "actions": {
+      "addWidget": "Ajouter Widget",
+      "removeWidget": "Supprimer Widget",
+      "moveUp": "Monter",
+      "moveDown": "Descendre",
+      "duplicate": "Dupliquer",
+      "configure": "Configurer"
+    }
+  },
+  
+  "languages": {
+    "title": "Gestion des Langues",
+    "currentLanguage": "Langue actuelle",
+    "availableLanguages": "Langues disponibles",
+    "addLanguage": "Ajouter langue",
+    "removeLanguage": "Supprimer langue",
+    "editTranslations": "Éditer traductions",
+    "importTranslations": "Importer traductions",
+    "exportTranslations": "Exporter traductions",
+    "autoDetect": "Détection automatique",
+    "fallbackLanguage": "Langue de fallback",
+    "rtlSupport": "Support RTL",
+    "dateFormat": "Format de date",
+    "numberFormat": "Format de nombre",
+    "currencyFormat": "Format de devise"
+  },
+  
+  "content": {
+    "title": "Gestion du Contenu",
+    "editContent": "Éditer le contenu",
+    "contentFor": "Contenu pour : {{language}}",
+    "translateTo": "Traduire vers {{language}}",
+    "originalContent": "Contenu original",
+    "translatedContent": "Contenu traduit",
+    "missingTranslations": "Traductions manquantes",
+    "autoTranslate": "Traduction automatique",
+    "manualTranslate": "Traduction manuelle",
+    "copyFromOriginal": "Copier de l'original",
+    "resetTranslation": "Réinitialiser traduction"
+  },
+  
+  "validation": {
+    "required": "Ce champ est requis",
+    "minLength": "Au moins {{min}} caractères requis",
+    "maxLength": "Maximum {{max}} caractères autorisés", 
+    "email": "Adresse email invalide",
+    "url": "URL invalide",
+    "number": "Nombre invalide",
+    "phone": "Numéro de téléphone invalide",
+    "date": "Date invalide",
+    "pattern": "Format invalide"
+  },
+  
+  "units": {
+    "px": "pixels",
+    "em": "em",
+    "rem": "rem",
+    "percent": "pourcent",
+    "vh": "vh",
+    "vw": "vw",
+    "seconds": "secondes",
+    "milliseconds": "millisecondes",
+    "bytes": "octets",
+    "kb": "Ko",
+    "mb": "Mo"
+  },
+  
+  "dates": {
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "tomorrow": "Demain",
+    "thisWeek": "Cette semaine",
+    "thisMonth": "Ce mois",
+    "thisYear": "Cette année",
+    "never": "Jamais",
+    "ago": "il y a {{time}}",
+    "in": "dans {{time}}",
+    "justNow": "À l'instant"
+  },
+  
+  "status": {
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "connecting": "Connexion...",
+    "connected": "Connecté",
+    "disconnected": "Déconnecté",
+    "syncing": "Synchronisation...",
+    "synced": "Synchronisé",
+    "error": "Erreur",
+    "ready": "Prêt",
+    "loading": "Chargement...",
+    "saving": "Sauvegarde...",
+    "processing": "Traitement..."
+  }
+}
