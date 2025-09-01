@@ -1,4 +1,8 @@
 // Interface Éditeur LOCATION - Synchronisation Instantanée
+const { sanitizeHTML } = typeof require !== 'undefined'
+  ? require('./utils/sanitizer')
+  : window;
+
 document.addEventListener('DOMContentLoaded', () => {
   console.log('✅ Éditeur LOCATION avec Synchronisation Instantanée activé');
 
@@ -173,7 +177,7 @@ function createFallbackAdminInterface() {
   // Rôle : Structure HTML de l'interface fallback
   const modal = document.createElement('div');
   modal.id = 'fallback-admin-modal';
-  modal.innerHTML = `
+  modal.innerHTML = sanitizeHTML(`
     <div class="fallback-admin-overlay" onclick="this.parentElement.remove()">
       <div class="fallback-admin-content" onclick="event.stopPropagation()">
         <div class="fallback-admin-header">
@@ -192,7 +196,7 @@ function createFallbackAdminInterface() {
               <li>InstantSync: ${window.instantSync ? '✅ Opérationnel' : '❌ Non chargé'}</li>
               <li>Modules détectés:</li>
               <ul style="margin-left: 20px; margin-top: 10px;">
-                ${Object.keys(window).filter(k => k.startsWith('LiCube')).map(k => 
+                ${Object.keys(window).filter(k => k.startsWith('LiCube')).map(k =>
                   `<li>${k}: ✅</li>`
                 ).join('') || '<li>Aucun module Li-CUBE détecté</li>'}
               </ul>
@@ -209,7 +213,7 @@ function createFallbackAdminInterface() {
         </div>
       </div>
     </div>
-  `;
+  `);
 
   // Rôle : Styles CSS intégrés pour l'interface fallback
   const style = document.createElement('style');
@@ -495,7 +499,7 @@ function showSaveConfirmation(onConfirm) {
                 transition: transform 0.3s ease;
             `;
 
-  popup.innerHTML = `
+  popup.innerHTML = sanitizeHTML(`
                 <div style="margin-bottom: 1.5rem;">
                     <i class="fas fa-save" style="font-size: 3rem; color: #28a745; margin-bottom: 1rem;"></i>
                     <h3 style="color: white; margin: 0 0 0.5rem 0; font-size: 1.3rem;">Créer un nouveau point de sauvegarde</h3>
@@ -513,7 +517,7 @@ function showSaveConfirmation(onConfirm) {
                         font-weight: 600; transition: all 0.3s ease;
                     ">Confirmer</button>
                 </div>
-            `;
+            `);
 
   overlay.appendChild(popup);
   document.body.appendChild(overlay);

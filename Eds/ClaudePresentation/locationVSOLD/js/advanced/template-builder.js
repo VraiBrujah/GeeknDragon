@@ -7,6 +7,10 @@
  * Répertoire de Travail : C:\Users\Brujah\Documents\GitHub\GeeknDragon\Eds\ClaudePresentation
  */
 
+const { sanitizeHTML } = typeof require !== 'undefined'
+    ? require('../utils/sanitizer')
+    : window;
+
 class TemplateBuilder {
     constructor(framework, sectionManager) {
         // Rôle : Services injectés
@@ -278,7 +282,7 @@ class TemplateBuilder {
         const builderOverlay = document.createElement('div');
         builderOverlay.id = 'template-builder-overlay';
         builderOverlay.className = 'template-builder-overlay';
-        builderOverlay.innerHTML = await this.getBuilderInterfaceHTML();
+        builderOverlay.innerHTML = sanitizeHTML(await this.getBuilderInterfaceHTML());
         
         // Insertion : dans le DOM
         document.body.appendChild(builderOverlay);
