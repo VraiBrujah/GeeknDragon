@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Système Hiérarchique - GeekDragon Présentation</title>
+    <style>
+        /* Rôle : Styles de test pour démonstration du dark mode */
+        /* Type : CSS (styles d'interface de test) */
+        /* Unité : Sans unité */
+        /* Domaine : Styles de test spécifiques */
+        /* Formule : Adaptation du thème dark principal */
+        /* Exemple : background sombre, texte clair, contrastes élevés */
+        
+        :root {
+            --primary-dark: #10B981;
+            --secondary-dark: #1E293B;
+            --surface-dark: #0F172A;
+            --surface-light: #334155;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+        }
+
+        body {
+            background: var(--surface-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--secondary-dark);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .test-header h1 {
+            color: var(--primary-dark);
+            margin: 0 0 8px 0;
+        }
+
+        .test-section {
+            background: var(--surface-light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .test-button {
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .test-button:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .test-result {
+            background: var(--surface-dark);
+            border: 1px solid var(--surface-light);
+            border-radius: 4px;
+            padding: 16px;
+            margin-top: 16px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            min-height: 60px;
+        }
+
+        .success { color: #10B981; }
+        .error { color: #EF4444; }
+        .info { color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+    <!-- Rôle : Page de test pour validation du système hiérarchique complet -->
+    <!-- Type : Interface de test interactive -->
+    <!-- Unité : Sans unité -->
+    <!-- Domaine : Interface de validation fonctionnelle -->
+    <!-- Formule : Tests manuels + automatiques pour validation -->
+    <!-- Exemple : Boutons de test pour chaque fonctionnalité -->
+
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🧪 Test Système Hiérarchique</h1>
+            <p class="info">Validation du système de création hiérarchique GeekDragon</p>
+        </div>
+
+        <div class="test-section">
+            <h2>🎯 Test 1: Initialisation du Moteur</h2>
+            <button class="test-button" onclick="testEngineInit()">Initialiser le Moteur</button>
+            <div id="engine-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>📋 Test 2: Création de Présentation Hiérarchique</h2>
+            <button class="test-button" onclick="testCreatePresentation()">Créer Présentation</button>
+            <div id="presentation-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>🏗️ Test 3: Ajout d'Éléments Hiérarchiques</h2>
+            <button class="test-button" onclick="testAddMetaSection()">Ajouter Méta-Section</button>
+            <button class="test-button" onclick="testAddSection()">Ajouter Section</button>
+            <button class="test-button" onclick="testAddWidget()">Ajouter Widget</button>
+            <div id="hierarchy-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>🎨 Test 4: Application de Templates</h2>
+            <button class="test-button" onclick="testApplyTemplate()">Appliquer Template</button>
+            <div id="template-result" class="test-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>🔍 Test 5: État du Système</h2>
+            <button class="test-button" onclick="testSystemState()">Vérifier État</button>
+            <div id="state-result" class="test-result"></div>
+        </div>
+    </div>
+
+    <!-- Scripts core du système -->
+    <script src="src/core/HistoryManager.js"></script>
+    <script src="src/core/SyncManager.js"></script>
+    <script src="src/core/WidgetManager.js"></script>
+    <script src="src/core/SectionManager.js"></script>
+    <script src="src/core/HierarchyManager.js"></script>
+    <script src="src/core/PresentationEngine.js"></script>
+
+    <script>
+        // Rôle : Variable globale pour instance du moteur de présentation
+        // Type : PresentationEngine (instance singleton)
+        // Unité : Sans unité
+        // Domaine : Instance unique du moteur ou null
+        // Formule : new PresentationEngine() → instance singleton
+        // Exemple : Moteur principal pour tous les tests
+        let presentationEngine = null;
+
+        /**
+         * Test d'initialisation du moteur de présentation
+         * 
+         * Rôle : Validation de l'initialisation complète du système
+         * Type : Fonction de test d'initialisation
+         * Effet de bord : Crée l'instance globale du moteur
+         */
+        async function testEngineInit() {
+            const resultDiv = document.getElementById('engine-result');
+            resultDiv.innerHTML = '⏳ Initialisation du moteur...';
+            
+            try {
+                presentationEngine = new PresentationEngine();
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Attendre l'initialisation
+                
+                resultDiv.innerHTML = `<span class="success">✅ Moteur initialisé avec succès</span>
+📊 État: ${presentationEngine ? 'Opérationnel' : 'Erreur'}
+🔧 HierarchyManager: ${presentationEngine?.hierarchyManager ? 'Chargé' : 'Non chargé'}
+📚 WidgetManager: ${presentationEngine?.widgetManager ? 'Chargé' : 'Non chargé'}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ Erreur d'initialisation: ${error.message}</span>`;
+            }
+        }
+
+        /**
+         * Test de création de présentation hiérarchique
+         * 
+         * Rôle : Validation de la création de présentation avec support hiérarchique
+         * Type : Fonction de test de création
+         * Effet de bord : Crée une présentation de test
+         */
+        async function testCreatePresentation() {
+            const resultDiv = document.getElementById('presentation-result');
+            
+            if (!presentationEngine) {
+                resultDiv.innerHTML = '<span class="error">❌ Moteur non initialisé - lancer le Test 1 d\'abord</span>';
+                return;
+            }
+
+            resultDiv.innerHTML = '⏳ Création de présentation hiérarchique...';
+
+            try {
+                const config = {
+                    titre: 'Test Présentation Hiérarchique',
+                    templateHierarchique: 'meta-header'
+                };
+
+                const presentation = await presentationEngine.createHierarchicalPresentation(config);
+                
+                resultDiv.innerHTML = `<span class="success">✅ Présentation créée avec succès</span>
+📋 ID: ${presentation.id}
+📝 Titre: ${presentation.titre}
+🏗️ Éléments hiérarchiques: ${presentation.hierarchicalElements?.length || 0}
+📅 Créée: ${new Date(presentation.dateCreation).toLocaleString()}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ Erreur création: ${error.message}</span>`;
+            }
+        }
+
+        /**
+         * Test d'ajout de méta-section
+         * 
+         * Rôle : Validation de l'ajout d'éléments de niveau méta-section
+         * Type : Fonction de test d'ajout hiérarchique
+         * Effet de bord : Ajoute une méta-section à la présentation courante
+         */
+        function testAddMetaSection() {
+            const resultDiv = document.getElementById('hierarchy-result');
+            
+            if (!presentationEngine?.currentPresentation) {
+                resultDiv.innerHTML = '<span class="error">❌ Aucune présentation active - lancer le Test 2 d\'abord</span>';
+                return;
+            }
+
+            try {
+                const elementConfig = {
+                    title: 'En-tête Principal',
+                    description: 'Méta-section de test'
+                };
+
+                const element = presentationEngine.addHierarchicalElement('meta-section', elementConfig);
+                
+                resultDiv.innerHTML = `<span class="success">✅ Méta-section ajoutée</span>
+🆔 ID: ${element.id}
+📋 Type: ${element.type}
+📝 Titre: ${element.title}
+👥 Enfants possibles: ${JSON.stringify(element.canContain || [])}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ Erreur ajout méta-section: ${error.message}</span>`;
+            }
+        }
+
+        /**
+         * Test d'ajout de section
+         * 
+         * Rôle : Validation de l'ajout d'éléments de niveau section
+         * Type : Fonction de test d'ajout avec parent
+         * Effet de bord : Ajoute une section à un parent existant
+         */
+        function testAddSection() {
+            const resultDiv = document.getElementById('hierarchy-result');
+            
+            if (!presentationEngine?.currentPresentation?.hierarchicalElements?.length) {
+                resultDiv.innerHTML = '<span class="error">❌ Aucune méta-section parent - lancer d\'abord "Ajouter Méta-Section"</span>';
+                return;
+            }
+
+            try {
+                // Rôle : ID du premier élément parent disponible
+                // Type : String (identifiant d'élément hiérarchique)
+                // Unité : Sans unité
+                // Domaine : ID valide d'élément existant
+                // Formule : hierarchicalElements[0].id
+                // Exemple : 'meta-001', 'meta-section-12345'
+                const parentId = presentationEngine.currentPresentation.hierarchicalElements[0].id;
+                
+                const elementConfig = {
+                    title: 'Section Hero',
+                    description: 'Section d\'accueil'
+                };
+
+                const element = presentationEngine.addHierarchicalElement('section', elementConfig, parentId);
+                
+                resultDiv.innerHTML = `<span class="success">✅ Section ajoutée</span>
+🆔 ID: ${element.id}
+📋 Type: ${element.type}
+📝 Titre: ${element.title}
+👨‍👩‍👧‍👦 Parent: ${parentId}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ Erreur ajout section: ${error.message}</span>`;
+            }
+        }
+
+        /**
+         * Test d'ajout de widget
+         * 
+         * Rôle : Validation de l'ajout de widgets dans la hiérarchie
+         * Type : Fonction de test d'ajout de widget
+         * Effet de bord : Ajoute un widget à un élément parent
+         */
+        function testAddWidget() {
+            const resultDiv = document.getElementById('hierarchy-result');
+            
+            // Recherche du premier élément pouvant contenir des widgets
+            let parentElement = null;
+            if (presentationEngine?.currentPresentation?.hierarchicalElements) {
+                const findWidgetParent = (elements) => {
+                    for (const element of elements) {
+                        if (element.canContain?.includes('widget')) {
+                            return element;
+                        }
+                        if (element.children) {
+                            const found = findWidgetParent(element.children);
+                            if (found) return found;
+                        }
+                    }
+                    return null;
+                };
+                
+                parentElement = findWidgetParent(presentationEngine.currentPresentation.hierarchicalElements);
+            }
+
+            if (!parentElement) {
+                resultDiv.innerHTML = '<span class="error">❌ Aucun parent disponible pour widget - ajouter d\'abord des sections</span>';
+                return;
+            }
+
+            try {
+                const elementConfig = {
+                    title: 'Widget Titre',
+                    widgetType: 'text',
+                    content: 'Bienvenue dans le système hiérarchique !'
+                };
+
+                const element = presentationEngine.addHierarchicalElement('widget', elementConfig, parentElement.id);
+                
+                resultDiv.innerHTML = `<span class="success">✅ Widget ajouté</span>
+🆔 ID: ${element.id}
+📋 Type: ${element.type}
+🎨 Type Widget: ${element.widgetType}
+👨‍👩‍👧‍👦 Parent: ${parentElement.id}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ Erreur ajout widget: ${error.message}</span>`;
+            }
+        }
+
+        /**
+         * Test d'application de template hiérarchique
+         * 
+         * Rôle : Validation du système de templates hiérarchiques
+         * Type : Fonction de test de template
+         * Effet de bord : Applique un template à la présentation
+         */
+        function testApplyTemplate() {
+            const resultDiv = document.getElementById('template-result');
+            
+            if (!presentationEngine?.currentPresentation) {
+                resultDiv.innerHTML = '<span class="error">❌ Aucune présentation active</span>';
+                return;
+            }
+
+            try {
+                const deployedTemplate = presentationEngine.applyHierarchicalTemplate('hero-section');
+                
+                resultDiv.innerHTML = `<span class="success">✅ Template appliqué avec succès</span>
+🆔 ID Template: ${deployedTemplate.id}
+📋 Type: ${deployedTemplate.type}
+🏗️ Structure déployée avec éléments intégrés`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ Erreur application template: ${error.message}</span>`;
+            }
+        }
+
+        /**
+         * Test de vérification de l'état du système
+         * 
+         * Rôle : Validation de l'état complet du système
+         * Type : Fonction de diagnostic système
+         * Effet de bord : Affiche l'état détaillé du système
+         */
+        function testSystemState() {
+            const resultDiv = document.getElementById('state-result');
+            
+            if (!presentationEngine) {
+                resultDiv.innerHTML = '<span class="error">❌ Moteur non initialisé</span>';
+                return;
+            }
+
+            try {
+                const state = presentationEngine.getState();
+                const currentPres = state.currentPresentation;
+                
+                // Rôle : Comptage des éléments hiérarchiques par type
+                // Type : Object (compteurs par type d'élément)
+                // Unité : Sans unité (nombre d'éléments)
+                // Domaine : Object avec propriétés numériques
+                // Formule : Parcours récursif + comptage par type
+                // Exemple : {'meta-section': 1, 'section': 2, 'widget': 3}
+                const hierarchyCount = {};
+                const countElements = (elements) => {
+                    if (!elements) return;
+                    for (const element of elements) {
+                        hierarchyCount[element.type] = (hierarchyCount[element.type] || 0) + 1;
+                        if (element.children) {
+                            countElements(element.children);
+                        }
+                    }
+                };
+                countElements(currentPres?.hierarchicalElements);
+
+                resultDiv.innerHTML = `<span class="success">✅ État du système</span>
+📋 Présentation: ${currentPres ? currentPres.titre : 'Aucune'}
+🏗️ Éléments hiérarchiques: ${JSON.stringify(hierarchyCount, null, 2)}
+📚 Widgets disponibles: ${Object.keys(state.availableWidgets || {}).length}
+🧩 Sections disponibles: ${Object.keys(state.availableSections || {}).length}
+🎨 Templates hiérarchiques: ${Object.keys(state.hierarchyTemplates || {}).length}
+📝 Historique: ${state.history?.length || 0} entrées`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ Erreur vérification état: ${error.message}</span>`;
+            }
+        }
+
+        // Rôle : Initialisation automatique au chargement de la page
+        // Type : Event listener de chargement DOM
+        // Unité : Sans unité
+        // Domaine : Event de chargement de page
+        // Formule : DOMContentLoaded → initialisation automatique
+        // Exemple : Chargement automatique du moteur au démarrage
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🧪 Page de test du système hiérarchique chargée');
+            console.log('👆 Cliquez sur "Initialiser le Moteur" pour commencer les tests');
+        });
+    </script>
+</body>
+</html>

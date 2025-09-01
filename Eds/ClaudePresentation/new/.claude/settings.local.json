@@ -4,7 +4,14 @@
       "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD/**)",
       "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD/**)",
       "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD/**)",
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\index.html\")",
+      "Bash(dir:*)",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\test-hierarchical.html\")",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\test-cleanup-verification.html\")",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\quick-validation.html\")"
     ],
     "deny": [],
     "ask": []

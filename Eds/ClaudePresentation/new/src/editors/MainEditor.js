@@ -20,6 +20,14 @@ class MainEditor {
         // Exemple : Instance centralisée pour accès aux managers
         this.engine = engine;
 
+        // Rôle : Gestionnaire hiérarchique pour la nouvelle architecture
+        // Type : HierarchyManager (classe de gestion hiérarchique)
+        // Unité : Sans unité (instance de classe)
+        // Domaine : Gestionnaire valide initialisé
+        // Formule : Instance avec référence au WidgetManager du moteur
+        // Exemple : hierarchyManager avec templates méta/sections prêts
+        this.hierarchyManager = new HierarchyManager(this.engine.widgetManager);
+
         // Rôle : État actuel de l'interface utilisateur
         // Type : Object (état de l'UI)
         // Unité : Sans unité
@@ -29,7 +37,7 @@ class MainEditor {
         this.uiState = {
             selectedElement: null,
             selectedSection: null,
-            activeLeftTab: 'widgets',
+            activeLeftTab: 'hierarchy', // Nouveau système hiérarchique par défaut
             activeRightTab: 'properties',
             zoom: 100,
             viewMode: 'edit', // 'edit' | 'preview'
@@ -53,15 +61,33 @@ class MainEditor {
         // Exemple : [cleanup1, cleanup2, cleanup3]
         this.eventCleanupFunctions = [];
 
-        // Rôle : Timers actifs pour debouncing et throttling
-        // Type : Map<String, Number> (timers actifs)
-        // Unité : millisecondes (ms)
-        // Domaine : ID de timers setTimeout/setInterval
-        // Formule : Map pour pouvoir annuler tous les timers
-        // Exemple : {'autosave': 1234, 'preview-update': 5678}
-        this.activeTimers = new Map();
 
         console.log('🎨 MainEditor initialisé');
+    }
+
+    /**
+     * Nettoie tous les event listeners et timers actifs
+     * 
+     * Rôle : Nettoyage propre des ressources avant destruction
+     * Type : Méthode de nettoyage de ressources
+     * Effet de bord : Supprime tous les event listeners et timers actifs
+     */
+    cleanup() {
+        console.log('🧹 Nettoyage des ressources MainEditor...');
+        
+        // Nettoyage de tous les event listeners enregistrés
+        this.eventCleanupFunctions.forEach(cleanup => {
+            try {
+                cleanup();
+            } catch (error) {
+                console.warn('⚠️ Erreur lors du nettoyage d\'un event listener:', error);
+            }
+        });
+        
+        // Vider le tableau des fonctions de nettoyage
+        this.eventCleanupFunctions = [];
+        
+        console.log('✅ Nettoyage MainEditor terminé');
     }
 
     /**
@@ -170,6 +196,9 @@ class MainEditor {
 
             // Chargement des sections disponibles
             await this.loadAvailableSections();
+
+            // Chargement des éléments hiérarchiques
+            await this.loadHierarchicalElements();
 
             // Configuration des contrôles de l'éditeur
             this.setupEditorControls();
@@ -430,6 +459,159 @@ class MainEditor {
     }
 
     /**
+     * Charge les éléments hiérarchiques disponibles
+     * 
+     * Rôle : Peuplement de l'interface hiérarchique avec tous les types d'éléments
+     * Type : Méthode de chargement de données hiérarchiques
+     * Effet de bord : Remplit les panels hiérarchiques avec les éléments disponibles
+     */
+    async loadHierarchicalElements() {
+        try {
+            console.log('🏗️ Chargement des éléments hiérarchiques...');
+
+            // Chargement des niveaux hiérarchiques
+            await this.loadHierarchyLevels();
+
+            // Chargement des templates hiérarchiques
+            await this.loadHierarchicalTemplates();
+
+            // Configuration des événements hiérarchiques
+            this.setupHierarchyEventHandlers();
+
+            console.log('✅ Éléments hiérarchiques chargés avec succès');
+        } catch (error) {
+            console.error('❌ Erreur chargement éléments hiérarchiques:', error);
+            this.showError('Erreur lors du chargement de la hiérarchie');
+        }
+    }
+
+    /**
+     * Charge les niveaux hiérarchiques dans l'interface
+     * 
+     * Rôle : Peuplement des sections accordéon avec éléments par niveau
+     * Type : Méthode de rendu d'interface hiérarchique
+     * Effet de bord : Crée les cartes d'éléments dans chaque niveau
+     */
+    async loadHierarchyLevels() {
+        const hierarchyLevels = this.hierarchyManager.getHierarchyLevels();
+        
+        // Pour chaque niveau hiérarchique
+        Object.keys(hierarchyLevels).forEach(levelType => {
+            const levelData = hierarchyLevels[levelType];
+            const elementsGrid = document.querySelector(`[data-type="${levelType}"] .elements-grid`);
+            
+            if (elementsGrid) {
+                // Création des cartes d'exemples pour ce niveau
+                levelData.examples.forEach(example => {
+                    const elementCard = this.createHierarchyElementCard(levelType, example, levelData.icon);
+                    elementsGrid.appendChild(elementCard);
+                });
+            }
+        });
+
+        console.log(`🏗️ ${Object.keys(hierarchyLevels).length} niveaux hiérarchiques configurés`);
+    }
+
+    /**
+     * Charge les templates hiérarchiques dans l'interface
+     * 
+     * Rôle : Peuplement de la section templates avec éléments prédéfinis
+     * Type : Méthode de rendu des templates
+     * Effet de bord : Crée les cartes de templates dans le panel templates
+     */
+    async loadHierarchicalTemplates() {
+        const templatesList = document.getElementById('templates-list');
+        if (!templatesList) return;
+
+        const templates = this.hierarchyManager.getAvailableTemplates();
+        
+        // Effacer les templates existants (garder juste ceux définis dans le HTML)
+        const existingCards = templatesList.querySelectorAll('.template-card[data-dynamic="true"]');
+        existingCards.forEach(card => card.remove());
+
+        // Ajouter les templates du HierarchyManager
+        templates.forEach((template, templateName) => {
+            const templateCard = this.createHierarchicalTemplateCard(templateName, template);
+            templatesList.appendChild(templateCard);
+        });
+
+        console.log(`🎨 ${templates.size} templates hiérarchiques chargés`);
+    }
+
+    /**
+     * Crée une carte d'élément hiérarchique
+     * 
+     * Rôle : Factory de cartes d'éléments draggables
+     * Type : Factory de DOM avec drag & drop
+     * Paramètres : levelType - Type du niveau, example - Nom d'exemple, icon - Icône
+     * Retour : HTMLElement - Carte draggable prête à utiliser
+     */
+    createHierarchyElementCard(levelType, example, icon) {
+        const card = document.createElement('div');
+        card.className = 'element-card';
+        card.draggable = true;
+        card.dataset.elementType = levelType;
+        card.dataset.elementName = example;
+
+        card.innerHTML = `
+            <i class="${icon}"></i>
+            <div class="element-name">${example}</div>
+        `;
+
+        // Configuration du drag & drop
+        card.addEventListener('dragstart', (e) => this.handleHierarchyElementDragStart(e, levelType, example));
+        card.addEventListener('dragend', (e) => this.handleWidgetDragEnd(e));
+
+        // Événement de click pour ajout direct
+        card.addEventListener('click', () => {
+            this.addHierarchyElementToPresentation(levelType, { name: example });
+        });
+
+        return card;
+    }
+
+    /**
+     * Crée une carte de template hiérarchique
+     * 
+     * Rôle : Factory de cartes de templates draggables
+     * Type : Factory de DOM avec preview et informations
+     * Paramètres : templateName - Nom du template, template - Configuration template
+     * Retour : HTMLElement - Carte de template prête à utiliser
+     */
+    createHierarchicalTemplateCard(templateName, template) {
+        const card = document.createElement('div');
+        card.className = 'template-card';
+        card.draggable = true;
+        card.dataset.template = templateName;
+        card.dataset.category = template.type;
+        card.dataset.dynamic = 'true';
+
+        const hierarchyLevels = this.hierarchyManager.getHierarchyLevels();
+        const levelIcon = hierarchyLevels[template.type]?.icon || 'fas fa-puzzle-piece';
+
+        card.innerHTML = `
+            <div class="template-preview">
+                <i class="${levelIcon}"></i>
+            </div>
+            <div class="template-info">
+                <h4>${template.name}</h4>
+                <p>${template.description}</p>
+            </div>
+        `;
+
+        // Configuration du drag & drop
+        card.addEventListener('dragstart', (e) => this.handleTemplateDragStart(e, templateName));
+        card.addEventListener('dragend', (e) => this.handleWidgetDragEnd(e));
+
+        // Événement de click pour ajout direct
+        card.addEventListener('click', () => {
+            this.addTemplateToPresentation(templateName);
+        });
+
+        return card;
+    }
+
+    /**
      * Crée une carte de section pour la bibliothèque
      * 
      * @param {Object} sectionInfo - Informations de la section
@@ -573,7 +755,7 @@ class MainEditor {
         // Domaine : Événements resize du navigateur
         // Formule : window.addEventListener('resize', callback)
         // Exemple : Recalcul layout et zoom lors redimensionnement
-        const handleResize = this.debounce(() => {
+        const handleResize = UIUtils.debounce(() => {
             this.handleWindowResize();
         }, 250);
 
@@ -963,13 +1145,6 @@ class MainEditor {
      * @param {number} delay - Délai en millisecondes
      * @returns {Function} Fonction débouncée
      */
-    debounce(func, delay) {
-        let timeoutId;
-        return (...args) => {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => func.apply(this, args), delay);
-        };
-    }
 
     /**
      * Utilitaire pour formater un timestamp
@@ -1236,7 +1411,6 @@ class MainEditor {
             this.updateStatusText('Erreur de sauvegarde');
         }
     }
-    togglePreviewMode() { console.log('👁️ Aperçu (à implémenter)'); }
     /**
      * Annule la dernière action
      * 
@@ -1895,8 +2069,40 @@ class MainEditor {
      * Effet de bord : Affiche le modal des paramètres
      */
     showSettings() { 
-        console.log('⚙️ Paramètres (interface à développer)');
-        this.showInfo('Interface des paramètres en cours de développement');
+        const settingsModal = document.createElement('div');
+        settingsModal.className = 'modal-overlay';
+        settingsModal.innerHTML = `
+            <div class="modal-content settings-modal">
+                <div class="modal-header">
+                    <h2>⚙️ Paramètres du Système</h2>
+                    <button class="close-modal" onclick="this.parentElement.parentElement.parentElement.remove()">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="settings-section">
+                        <h3>🎨 Interface</h3>
+                        <label>
+                            <input type="checkbox" id="dark-mode-toggle" checked> Mode sombre
+                        </label>
+                        <label>
+                            <input type="checkbox" id="auto-save-toggle" checked> Sauvegarde automatique
+                        </label>
+                    </div>
+                    <div class="settings-section">
+                        <h3>🔧 Développement</h3>
+                        <label>
+                            <input type="checkbox" id="debug-mode-toggle"> Mode débogage
+                        </label>
+                        <label>
+                            <input type="checkbox" id="verbose-logs-toggle"> Logs verbeux
+                        </label>
+                    </div>
+                    <div class="settings-actions">
+                        <button class="btn btn-primary" onclick="this.parentElement.parentElement.parentElement.parentElement.remove()">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(settingsModal);
     }
 
     /**
@@ -2663,8 +2869,33 @@ class MainEditor {
     }
 
     showHelp() {
-        console.log('❓ Aide demandée');
-        this.showInfo('Système d\'aide en cours de développement');
+        const helpModal = document.createElement('div');
+        helpModal.className = 'modal-overlay';
+        helpModal.innerHTML = `
+            <div class="modal-content help-modal">
+                <div class="modal-header">
+                    <h2>🛠️ Guide d'utilisation</h2>
+                    <button class="close-modal" onclick="this.parentElement.parentElement.parentElement.remove()">×</button>
+                </div>
+                <div class="modal-body">
+                    <h3>🎯 Création de présentation hiérarchique</h3>
+                    <ol>
+                        <li><strong>Hiérarchie :</strong> Explorez les 5 niveaux (Méta-Sections → Sections → Sous-Sections → Sous-Sous-Sections → Widgets)</li>
+                        <li><strong>Création :</strong> Glissez-déposez ou cliquez sur les éléments pour les ajouter</li>
+                        <li><strong>Templates :</strong> Utilisez les templates prédéfinis pour démarrer rapidement</li>
+                        <li><strong>Modification :</strong> Double-cliquez sur les éléments pour les éditer</li>
+                    </ol>
+                    <h3>🎨 Raccourcis clavier</h3>
+                    <ul>
+                        <li><kbd>Ctrl+S</kbd> : Sauvegarder</li>
+                        <li><kbd>Ctrl+Z</kbd> : Annuler</li>
+                        <li><kbd>Ctrl+Y</kbd> : Refaire</li>
+                        <li><kbd>F1</kbd> : Aide</li>
+                    </ul>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(helpModal);
     }
 
     // ================================================
@@ -2909,6 +3140,236 @@ class MainEditor {
      */
     showWarning(message) {
         this.showToast(message, 'warning');
+    }
+
+    // ================================================
+    // MÉTHODES DE GESTION HIÉRARCHIQUE
+    // ================================================
+
+    /**
+     * Configure les gestionnaires d'événements pour la hiérarchie
+     * 
+     * Rôle : Configuration des interactions spécifiques à la hiérarchie
+     * Type : Méthode de configuration d'événements
+     * Effet de bord : Configure expand/collapse, filtrage, etc.
+     */
+    setupHierarchyEventHandlers() {
+        // Boutons d'expansion des niveaux
+        document.querySelectorAll('.btn-expand').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleHierarchyLevel(btn.dataset.target);
+            });
+        });
+
+        // Headers cliquables pour expansion
+        document.querySelectorAll('.level-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const btn = header.querySelector('.btn-expand');
+                if (btn) {
+                    this.toggleHierarchyLevel(btn.dataset.target);
+                }
+            });
+        });
+
+        // Filtres de templates par catégorie
+        document.querySelectorAll('.template-category').forEach(btn => {
+            btn.addEventListener('click', () => {
+                this.filterTemplatesByCategory(btn.dataset.category);
+                
+                // Mise à jour des états actifs
+                document.querySelectorAll('.template-category').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        console.log('🔧 Gestionnaires d\'événements hiérarchiques configurés');
+    }
+
+    /**
+     * Bascule l'expansion/collapse d'un niveau hiérarchique
+     * 
+     * Rôle : Animation d'ouverture/fermeture des accordéons
+     * Type : Méthode d'interaction UI
+     * Paramètre : targetId - ID de la section à basculer
+     * Effet de bord : Anime l'ouverture/fermeture du niveau
+     */
+    toggleHierarchyLevel(targetId) {
+        const content = document.getElementById(targetId);
+        const btn = document.querySelector(`[data-target="${targetId}"]`);
+        
+        if (content && btn) {
+            const isExpanded = content.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // Fermeture
+                content.classList.remove('expanded');
+                btn.classList.remove('expanded');
+            } else {
+                // Ouverture
+                content.classList.add('expanded');
+                btn.classList.add('expanded');
+            }
+        }
+    }
+
+    /**
+     * Filtre les templates par catégorie
+     * 
+     * Rôle : Affichage conditionnel des templates selon la catégorie
+     * Type : Méthode de filtrage UI
+     * Paramètre : category - Catégorie à afficher ('all' pour toutes)
+     * Effet de bord : Masque/affiche les cartes de templates
+     */
+    filterTemplatesByCategory(category) {
+        const templateCards = document.querySelectorAll('.template-card');
+        
+        templateCards.forEach(card => {
+            const cardCategory = card.dataset.category;
+            
+            if (category === 'all' || cardCategory === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        console.log(`🔍 Templates filtrés par catégorie: ${category}`);
+    }
+
+    /**
+     * Gère le drag start d'un élément hiérarchique
+     * 
+     * Rôle : Initialisation du drag pour éléments hiérarchiques
+     * Type : Méthode de gestion de drag & drop
+     * Paramètres : event - Événement dragstart, levelType - Type de niveau, elementName - Nom de l'élément
+     * Effet de bord : Configure les données de transfert
+     */
+    handleHierarchyElementDragStart(event, levelType, elementName) {
+        const dragData = {
+            type: 'hierarchy-element',
+            levelType: levelType,
+            elementName: elementName,
+            source: 'hierarchy-panel'
+        };
+
+        event.dataTransfer.setData('application/json', JSON.stringify(dragData));
+        event.dataTransfer.effectAllowed = 'copy';
+        
+        event.target.classList.add('dragging');
+        console.log(`🎯 Début drag élément hiérarchique: ${levelType} - ${elementName}`);
+    }
+
+    /**
+     * Gère le drag start d'un template
+     * 
+     * Rôle : Initialisation du drag pour templates hiérarchiques
+     * Type : Méthode de gestion de drag & drop
+     * Paramètres : event - Événement dragstart, templateName - Nom du template
+     * Effet de bord : Configure les données de transfert pour template
+     */
+    handleTemplateDragStart(event, templateName) {
+        const dragData = {
+            type: 'hierarchy-template',
+            templateName: templateName,
+            source: 'templates-panel'
+        };
+
+        event.dataTransfer.setData('application/json', JSON.stringify(dragData));
+        event.dataTransfer.effectAllowed = 'copy';
+        
+        event.target.classList.add('dragging');
+        console.log(`🎨 Début drag template: ${templateName}`);
+    }
+
+    /**
+     * Ajoute un élément hiérarchique à la présentation
+     * 
+     * Rôle : Création et ajout d'élément hiérarchique à la présentation courante
+     * Type : Méthode de manipulation de données
+     * Paramètres : levelType - Type de niveau, config - Configuration de l'élément
+     * Effet de bord : Ajoute l'élément et rafraîchit l'interface
+     */
+    async addHierarchyElementToPresentation(levelType, config = {}) {
+        try {
+            const currentPresentation = this.engine.getCurrentPresentation();
+            if (!currentPresentation) {
+                this.showError('Aucune présentation chargée');
+                return;
+            }
+
+            console.log(`➕ Ajout élément hiérarchique: ${levelType}`);
+
+            // Sauvegarde de l'état pour l'historique
+            this.engine.historyManager.saveState(currentPresentation, `Avant ajout ${levelType}`);
+
+            // Création de l'élément via HierarchyManager
+            const element = this.hierarchyManager.createElement(levelType, config);
+            
+            // Ajout à la structure de présentation (simplifié pour le moment)
+            if (!currentPresentation.hierarchyElements) {
+                currentPresentation.hierarchyElements = [];
+            }
+            
+            currentPresentation.hierarchyElements.push(element);
+
+            // Rafraîchissement de l'interface
+            await this.renderPresentationSections(currentPresentation.hierarchyElements || []);
+            
+            this.showSuccess(`${levelType} "${element.name}" ajouté avec succès`);
+            
+            // Synchronisation temps réel
+            this.engine.syncManager.syncPresentation(currentPresentation, 'add-hierarchy-element');
+
+        } catch (error) {
+            console.error('❌ Erreur ajout élément hiérarchique:', error);
+            this.showError(`Erreur lors de l'ajout: ${error.message}`);
+        }
+    }
+
+    /**
+     * Ajoute un template à la présentation
+     * 
+     * Rôle : Déploiement d'un template complet dans la présentation
+     * Type : Méthode de manipulation de données
+     * Paramètre : templateName - Nom du template à déployer
+     * Effet de bord : Ajoute la structure complète du template
+     */
+    async addTemplateToPresentation(templateName) {
+        try {
+            const currentPresentation = this.engine.getCurrentPresentation();
+            if (!currentPresentation) {
+                this.showError('Aucune présentation chargée');
+                return;
+            }
+
+            console.log(`🎨 Déploiement template: ${templateName}`);
+
+            // Sauvegarde de l'état pour l'historique
+            this.engine.historyManager.saveState(currentPresentation, `Avant ajout template ${templateName}`);
+
+            // Création depuis le template
+            const templateElement = this.hierarchyManager.createFromTemplate(templateName);
+            
+            // Ajout à la structure de présentation
+            if (!currentPresentation.hierarchyElements) {
+                currentPresentation.hierarchyElements = [];
+            }
+            
+            currentPresentation.hierarchyElements.push(templateElement);
+
+            // Rafraîchissement de l'interface
+            await this.renderPresentationSections(currentPresentation.hierarchyElements || []);
+            
+            this.showSuccess(`Template "${templateElement.name}" déployé avec succès`);
+            
+            // Synchronisation temps réel
+            this.engine.syncManager.syncPresentation(currentPresentation, 'add-template');
+
+        } catch (error) {
+            console.error('❌ Erreur déploiement template:', error);
+            this.showError(`Erreur lors du déploiement: ${error.message}`);
+        }
     }
 }
 

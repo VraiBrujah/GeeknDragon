@@ -162,7 +162,13 @@
                                 </div>
                                 <div class="level-content" id="meta-sections">
                                     <p class="level-description">Grandes zones de votre présentation (Header, Body, Footer)</p>
-                                    <div class="elements-grid" data-type="meta-section">
+                                    <div class="level-actions">
+                                        <button class="btn btn-primary add-element-btn" data-level="meta-section">
+                                            <i class="fas fa-plus"></i>
+                                            Ajouter Méta-Section
+                                        </button>
+                                    </div>
+                                    <div class="elements-grid" data-type="meta-section" data-drop-zone="meta-section">
                                         <!-- Générés dynamiquement -->
                                     </div>
                                 </div>
@@ -181,7 +187,13 @@
                                 </div>
                                 <div class="level-content" id="sections">
                                     <p class="level-description">Sections thématiques (Hero, Pricing, Contact, etc.)</p>
-                                    <div class="elements-grid" data-type="section">
+                                    <div class="level-actions">
+                                        <button class="btn btn-primary add-element-btn" data-level="section">
+                                            <i class="fas fa-plus"></i>
+                                            Ajouter Section
+                                        </button>
+                                    </div>
+                                    <div class="elements-grid" data-type="section" data-drop-zone="section">
                                         <!-- Générés dynamiquement -->
                                     </div>
                                 </div>
@@ -200,7 +212,13 @@
                                 </div>
                                 <div class="level-content" id="sous-sections">
                                     <p class="level-description">Zones de contenu (Colonnes, Zones spécialisées)</p>
-                                    <div class="elements-grid" data-type="sous-section">
+                                    <div class="level-actions">
+                                        <button class="btn btn-primary add-element-btn" data-level="sous-section">
+                                            <i class="fas fa-plus"></i>
+                                            Ajouter Sous-Section
+                                        </button>
+                                    </div>
+                                    <div class="elements-grid" data-type="sous-section" data-drop-zone="sous-section">
                                         <!-- Générés dynamiquement -->
                                     </div>
                                 </div>
@@ -219,7 +237,13 @@
                                 </div>
                                 <div class="level-content" id="sous-sous-sections">
                                     <p class="level-description">Zones de détail (Titre, Contenu, Actions)</p>
-                                    <div class="elements-grid" data-type="sous-sous-section">
+                                    <div class="level-actions">
+                                        <button class="btn btn-primary add-element-btn" data-level="sous-sous-section">
+                                            <i class="fas fa-plus"></i>
+                                            Ajouter Sous-Sous-Section
+                                        </button>
+                                    </div>
+                                    <div class="elements-grid" data-type="sous-sous-section" data-drop-zone="sous-sous-section">
                                         <!-- Générés dynamiquement -->
                                     </div>
                                 </div>
@@ -603,7 +627,6 @@
     <script src="src/editors/MainEditor.js"></script>
     
     <!-- Utilitaires -->
-    <script src="src/utils/DragDrop.js"></script>
     <script src="src/utils/UIUtils.js"></script>
     
     <!-- Script principal -->

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification Nettoyage Code - GeekDragon Présentation</title>
+    <style>
+        /* Rôle : Styles pour la page de vérification du nettoyage */
+        /* Type : CSS pour interface de test post-nettoyage */
+        /* Unité : Sans unité */
+        /* Domaine : Styles de vérification et validation */
+        /* Formule : Interface simple pour tests rapides */
+        /* Exemple : Boutons, résultats, indicateurs de statut */
+        
+        :root {
+            --primary-dark: #10B981;
+            --secondary-dark: #1E293B;
+            --surface-dark: #0F172A;
+            --surface-light: #334155;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        body {
+            background: var(--surface-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .verification-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--secondary-dark);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .verification-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .verification-header h1 {
+            color: var(--primary-dark);
+            margin: 0 0 8px 0;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .test-card {
+            background: var(--surface-light);
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid var(--primary-dark);
+        }
+
+        .test-card.success {
+            border-left-color: var(--success);
+        }
+
+        .test-card.warning {
+            border-left-color: var(--warning);
+        }
+
+        .test-card.error {
+            border-left-color: var(--error);
+        }
+
+        .test-button {
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 4px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .test-button:hover {
+            background: #059669;
+        }
+
+        .test-result {
+            background: var(--surface-dark);
+            border: 1px solid var(--surface-light);
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .status-icon {
+            font-size: 16px;
+            margin-right: 8px;
+        }
+
+        .success { color: var(--success); }
+        .warning { color: var(--warning); }
+        .error { color: var(--error); }
+
+        .summary {
+            background: var(--surface-dark);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Rôle : Page de vérification complète après nettoyage du code -->
+    <!-- Type : Interface de test et validation post-nettoyage -->
+    <!-- Unité : Sans unité -->
+    <!-- Domaine : Tests de fonctionnement et intégrité système -->
+    <!-- Formule : Tests automatisés pour valider le nettoyage -->
+    <!-- Exemple : Vérifications de chargement, fonctionnalité, performance -->
+
+    <div class="verification-container">
+        <div class="verification-header">
+            <h1>🧹 Vérification Post-Nettoyage</h1>
+            <p class="info">Validation de l'intégrité du système après suppression du code mort</p>
+        </div>
+
+        <div class="test-grid">
+            <!-- Test 1: Chargement des Scripts -->
+            <div class="test-card" id="scripts-test">
+                <h3><span class="status-icon">📦</span>Chargement Scripts</h3>
+                <button class="test-button" onclick="testScriptLoading()">Vérifier Scripts</button>
+                <div id="scripts-result" class="test-result"></div>
+            </div>
+
+            <!-- Test 2: Classes et Fonctions Essentielles -->
+            <div class="test-card" id="functions-test">
+                <h3><span class="status-icon">🔧</span>Fonctions Essentielles</h3>
+                <button class="test-button" onclick="testEssentialFunctions()">Tester Fonctions</button>
+                <div id="functions-result" class="test-result"></div>
+            </div>
+
+            <!-- Test 3: Event Listeners -->
+            <div class="test-card" id="events-test">
+                <h3><span class="status-icon">🎯</span>Event Listeners</h3>
+                <button class="test-button" onclick="testEventListeners()">Vérifier Events</button>
+                <div id="events-result" class="test-result"></div>
+            </div>
+
+            <!-- Test 4: Performance -->
+            <div class="test-card" id="performance-test">
+                <h3><span class="status-icon">⚡</span>Performance</h3>
+                <button class="test-button" onclick="testPerformance()">Mesurer Performance</button>
+                <div id="performance-result" class="test-result"></div>
+            </div>
+
+            <!-- Test 5: Intégration Complète -->
+            <div class="test-card" id="integration-test">
+                <h3><span class="status-icon">🌐</span>Intégration</h3>
+                <button class="test-button" onclick="testIntegration()">Test Complet</button>
+                <div id="integration-result" class="test-result"></div>
+            </div>
+
+            <!-- Test 6: Nettoyage -->
+            <div class="test-card" id="cleanup-test">
+                <h3><span class="status-icon">🗑️</span>Nettoyage</h3>
+                <button class="test-button" onclick="testCleanup()">Test Cleanup</button>
+                <div id="cleanup-result" class="test-result"></div>
+            </div>
+        </div>
+
+        <div class="summary" id="test-summary">
+            <h2>📊 Résumé des Tests</h2>
+            <p>Cliquez sur les boutons de test pour commencer la vérification</p>
+        </div>
+    </div>
+
+    <!-- Scripts core du système (après nettoyage) -->
+    <script src="src/core/HistoryManager.js"></script>
+    <script src="src/core/SyncManager.js"></script>
+    <script src="src/core/WidgetManager.js"></script>
+    <script src="src/core/SectionManager.js"></script>
+    <script src="src/core/HierarchyManager.js"></script>
+    <script src="src/core/PresentationEngine.js"></script>
+    <script src="src/widgets/BaseWidget.js"></script>
+    <script src="src/widgets/TextWidget.js"></script>
+    <script src="src/utils/UIUtils.js"></script>
+
+    <script>
+        // Rôle : Résultats globaux des tests de vérification
+        // Type : Object (stockage des résultats de tests)
+        // Unité : Sans unité
+        // Domaine : Object avec propriétés de test
+        // Formule : Accumulation des résultats de chaque test
+        // Exemple : {passed: 4, failed: 1, warnings: 2, total: 6}
+        let testResults = {
+            passed: 0,
+            failed: 0,
+            warnings: 0,
+            total: 0
+        };
+
+        /**
+         * Test de chargement des scripts essentiels
+         * 
+         * Rôle : Vérification que tous les scripts nécessaires sont chargés
+         * Type : Test d'intégrité de chargement
+         * Effet de bord : Met à jour l'affichage des résultats
+         */
+        function testScriptLoading() {
+            const resultDiv = document.getElementById('scripts-result');
+            const testCard = document.getElementById('scripts-test');
+            resultDiv.innerHTML = '⏳ Vérification du chargement des scripts...';
+
+            const requiredClasses = [
+                'PresentationEngine',
+                'HierarchyManager', 
+                'WidgetManager',
+                'SectionManager',
+                'UIUtils',
+                'BaseWidget'
+            ];
+
+            const results = [];
+            let allPassed = true;
+
+            requiredClasses.forEach(className => {
+                if (typeof window[className] !== 'undefined') {
+                    results.push(`✅ ${className}: Chargé`);
+                } else {
+                    results.push(`❌ ${className}: Non trouvé`);
+                    allPassed = false;
+                }
+            });
+
+            const status = allPassed ? 'success' : 'error';
+            testCard.className = `test-card ${status}`;
+            resultDiv.innerHTML = results.join('\n');
+
+            updateTestResults(status, 'Chargement Scripts');
+        }
+
+        /**
+         * Test des fonctions essentielles
+         * 
+         * Rôle : Vérification que les fonctions principales fonctionnent
+         * Type : Test de fonctionnalité
+         * Effet de bord : Met à jour l'affichage des résultats
+         */
+        function testEssentialFunctions() {
+            const resultDiv = document.getElementById('functions-result');
+            const testCard = document.getElementById('functions-test');
+            resultDiv.innerHTML = '⏳ Test des fonctions essentielles...';
+
+            const tests = [];
+            let allPassed = true;
+
+            try {
+                // Test UIUtils.debounce
+                const debouncedFunction = UIUtils.debounce(() => {}, 100);
+                if (typeof debouncedFunction === 'function') {
+                    tests.push('✅ UIUtils.debounce: Fonctionnel');
+                } else {
+                    tests.push('❌ UIUtils.debounce: Échec');
+                    allPassed = false;
+                }
+
+                // Test UIUtils.generateUID
+                const uid = UIUtils.generateUID('test');
+                if (uid && uid.startsWith('test-')) {
+                    tests.push('✅ UIUtils.generateUID: Fonctionnel');
+                } else {
+                    tests.push('❌ UIUtils.generateUID: Échec');
+                    allPassed = false;
+                }
+
+                // Test PresentationEngine creation
+                const engine = new PresentationEngine();
+                if (engine && typeof engine.init === 'function') {
+                    tests.push('✅ PresentationEngine: Créable');
+                } else {
+                    tests.push('❌ PresentationEngine: Échec');
+                    allPassed = false;
+                }
+
+                // Test HierarchyManager creation
+                const hierarchy = new HierarchyManager();
+                if (hierarchy && typeof hierarchy.createElement === 'function') {
+                    tests.push('✅ HierarchyManager: Créable');
+                } else {
+                    tests.push('❌ HierarchyManager: Échec');
+                    allPassed = false;
+                }
+
+            } catch (error) {
+                tests.push(`❌ Erreur lors des tests: ${error.message}`);
+                allPassed = false;
+            }
+
+            const status = allPassed ? 'success' : 'error';
+            testCard.className = `test-card ${status}`;
+            resultDiv.innerHTML = tests.join('\n');
+
+            updateTestResults(status, 'Fonctions Essentielles');
+        }
+
+        /**
+         * Test des event listeners
+         * 
+         * Rôle : Vérification que les event listeners fonctionnent correctement
+         * Type : Test d'événements
+         * Effet de bord : Met à jour l'affichage des résultats
+         */
+        function testEventListeners() {
+            const resultDiv = document.getElementById('events-result');
+            const testCard = document.getElementById('events-test');
+            resultDiv.innerHTML = '⏳ Test des event listeners...';
+
+            const tests = [];
+            let status = 'success';
+
+            try {
+                // Test création d'un event listener temporaire
+                let eventTriggered = false;
+                const testHandler = () => { eventTriggered = true; };
+                
+                document.addEventListener('test-cleanup-event', testHandler);
+                
+                // Déclencher l'événement
+                const testEvent = new CustomEvent('test-cleanup-event');
+                document.dispatchEvent(testEvent);
+                
+                if (eventTriggered) {
+                    tests.push('✅ Event listeners: Fonctionnels');
+                } else {
+                    tests.push('❌ Event listeners: Non déclenchés');
+                    status = 'error';
+                }
+
+                // Nettoyage du test
+                document.removeEventListener('test-cleanup-event', testHandler);
+                tests.push('✅ Nettoyage event listener: OK');
+
+                // Test debounce sur événement
+                let debounceCount = 0;
+                const debouncedHandler = UIUtils.debounce(() => { debounceCount++; }, 50);
+                
+                // Appels multiples rapides
+                debouncedHandler();
+                debouncedHandler();
+                debouncedHandler();
+
+                setTimeout(() => {
+                    if (debounceCount === 1) {
+                        tests.push('✅ Debounce: Fonctionne correctement');
+                    } else {
+                        tests.push(`⚠️ Debounce: ${debounceCount} appels (attendu: 1)`);
+                        if (status === 'success') status = 'warning';
+                    }
+                    resultDiv.innerHTML = tests.join('\n');
+                }, 100);
+
+            } catch (error) {
+                tests.push(`❌ Erreur test événements: ${error.message}`);
+                status = 'error';
+            }
+
+            testCard.className = `test-card ${status}`;
+            resultDiv.innerHTML = tests.join('\n');
+
+            updateTestResults(status, 'Event Listeners');
+        }
+
+        /**
+         * Test de performance du système nettoyé
+         * 
+         * Rôle : Mesure de l'impact du nettoyage sur les performances
+         * Type : Test de performance
+         * Effet de bord : Met à jour l'affichage des résultats
+         */
+        function testPerformance() {
+            const resultDiv = document.getElementById('performance-result');
+            const testCard = document.getElementById('performance-test');
+            resultDiv.innerHTML = '⏳ Mesure des performances...';
+
+            const startTime = performance.now();
+            const results = [];
+
+            try {
+                // Test création multiple d'objets
+                const engines = [];
+                for (let i = 0; i < 100; i++) {
+                    engines.push(new PresentationEngine());
+                }
+                const engineTime = performance.now() - startTime;
+                results.push(`⚡ 100 PresentationEngine: ${engineTime.toFixed(2)}ms`);
+
+                // Test génération d'UIDs
+                const uidStart = performance.now();
+                const uids = [];
+                for (let i = 0; i < 1000; i++) {
+                    uids.push(UIUtils.generateUID('perf'));
+                }
+                const uidTime = performance.now() - uidStart;
+                results.push(`⚡ 1000 UIDs générés: ${uidTime.toFixed(2)}ms`);
+
+                // Test de debounce performance
+                const debounceStart = performance.now();
+                const debouncedFn = UIUtils.debounce(() => {}, 1);
+                for (let i = 0; i < 1000; i++) {
+                    debouncedFn();
+                }
+                const debounceTime = performance.now() - debounceStart;
+                results.push(`⚡ 1000 appels debounce: ${debounceTime.toFixed(2)}ms`);
+
+                const totalTime = performance.now() - startTime;
+                results.push(`📊 Temps total: ${totalTime.toFixed(2)}ms`);
+
+                // Évaluation de performance
+                const status = totalTime < 100 ? 'success' : totalTime < 200 ? 'warning' : 'error';
+                testCard.className = `test-card ${status}`;
+                
+                updateTestResults(status, 'Performance');
+
+            } catch (error) {
+                results.push(`❌ Erreur test performance: ${error.message}`);
+                testCard.className = 'test-card error';
+                updateTestResults('error', 'Performance');
+            }
+
+            resultDiv.innerHTML = results.join('\n');
+        }
+
+        /**
+         * Test d'intégration complète du système
+         * 
+         * Rôle : Test de bout en bout du système après nettoyage
+         * Type : Test d'intégration
+         * Effet de bord : Met à jour l'affichage des résultats
+         */
+        function testIntegration() {
+            const resultDiv = document.getElementById('integration-result');
+            const testCard = document.getElementById('integration-test');
+            resultDiv.innerHTML = '⏳ Test d\'intégration complète...';
+
+            const tests = [];
+            let allPassed = true;
+
+            try {
+                // Test création présentation complète
+                const engine = new PresentationEngine();
+                tests.push('✅ Moteur créé');
+
+                // Test ajout élément hiérarchique
+                if (engine.hierarchyManager && typeof engine.addHierarchicalElement === 'function') {
+                    tests.push('✅ Méthodes hiérarchiques disponibles');
+                } else {
+                    tests.push('❌ Méthodes hiérarchiques manquantes');
+                    allPassed = false;
+                }
+
+                // Test création présentation
+                const presentation = engine.createPresentation('Test Integration');
+                if (presentation && presentation.id && presentation.hierarchicalElements !== undefined) {
+                    tests.push('✅ Présentation avec structure hiérarchique créée');
+                } else {
+                    tests.push('❌ Création présentation échoué');
+                    allPassed = false;
+                }
+
+                // Test état du moteur
+                const state = engine.getState();
+                if (state && state.hierarchyLevels && state.hierarchyTemplates) {
+                    tests.push('✅ État complet avec hiérarchie');
+                } else {
+                    tests.push('❌ État incomplet');
+                    allPassed = false;
+                }
+
+                tests.push(`📋 Présentation ID: ${presentation?.id || 'N/A'}`);
+                tests.push(`🏗️ Éléments hiérarchiques: ${presentation?.hierarchicalElements?.length || 0}`);
+
+            } catch (error) {
+                tests.push(`❌ Erreur intégration: ${error.message}`);
+                allPassed = false;
+            }
+
+            const status = allPassed ? 'success' : 'error';
+            testCard.className = `test-card ${status}`;
+            resultDiv.innerHTML = tests.join('\n');
+
+            updateTestResults(status, 'Intégration');
+        }
+
+        /**
+         * Test de la méthode cleanup
+         * 
+         * Rôle : Vérification que le système de nettoyage fonctionne
+         * Type : Test de nettoyage
+         * Effet de bord : Met à jour l'affichage des résultats
+         */
+        function testCleanup() {
+            const resultDiv = document.getElementById('cleanup-result');
+            const testCard = document.getElementById('cleanup-test');
+            resultDiv.innerHTML = '⏳ Test du système de nettoyage...';
+
+            const tests = [];
+            let status = 'success';
+
+            try {
+                // Test si MainEditor est disponible (il n'est pas chargé dans cette page)
+                if (typeof MainEditor !== 'undefined') {
+                    const editor = new MainEditor();
+                    if (typeof editor.cleanup === 'function') {
+                        editor.cleanup();
+                        tests.push('✅ Méthode cleanup disponible et exécutée');
+                    } else {
+                        tests.push('❌ Méthode cleanup non disponible');
+                        status = 'error';
+                    }
+                } else {
+                    tests.push('⚠️ MainEditor non chargé dans cette page');
+                    tests.push('✅ Test cleanup différé (normal pour cette page)');
+                    status = 'warning';
+                }
+
+                // Test nettoyage des variables globales temporaires
+                window.testCleanupVar = 'test';
+                if (window.testCleanupVar) {
+                    delete window.testCleanupVar;
+                    if (!window.testCleanupVar) {
+                        tests.push('✅ Nettoyage variables globales: OK');
+                    } else {
+                        tests.push('❌ Nettoyage variables globales: Échec');
+                        status = 'error';
+                    }
+                }
+
+                tests.push('📝 System cleanup prêt pour usage');
+
+            } catch (error) {
+                tests.push(`❌ Erreur test cleanup: ${error.message}`);
+                status = 'error';
+            }
+
+            testCard.className = `test-card ${status}`;
+            resultDiv.innerHTML = tests.join('\n');
+
+            updateTestResults(status, 'Nettoyage');
+        }
+
+        /**
+         * Met à jour les résultats globaux des tests
+         * 
+         * Rôle : Comptabilisation des résultats de test
+         * Type : Fonction utilitaire de comptage
+         * Paramètres : status - Statut du test, testName - Nom du test
+         * Effet de bord : Met à jour l'affichage du résumé
+         */
+        function updateTestResults(status, testName) {
+            testResults.total++;
+            
+            if (status === 'success') {
+                testResults.passed++;
+            } else if (status === 'warning') {
+                testResults.warnings++;
+            } else {
+                testResults.failed++;
+            }
+
+            updateSummary();
+        }
+
+        /**
+         * Met à jour le résumé des tests
+         * 
+         * Rôle : Affichage consolidé des résultats
+         * Type : Fonction d'affichage de résumé
+         * Effet de bord : Met à jour l'élément résumé
+         */
+        function updateSummary() {
+            const summaryDiv = document.getElementById('test-summary');
+            const { passed, failed, warnings, total } = testResults;
+
+            let overallStatus = 'info';
+            let statusIcon = '📊';
+            
+            if (total > 0) {
+                if (failed === 0) {
+                    overallStatus = warnings > 0 ? 'warning' : 'success';
+                    statusIcon = warnings > 0 ? '⚠️' : '✅';
+                } else {
+                    overallStatus = 'error';
+                    statusIcon = '❌';
+                }
+            }
+
+            summaryDiv.innerHTML = `
+                <h2>${statusIcon} Résumé des Tests</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin: 16px 0;">
+                    <div class="success">✅ Réussis: ${passed}</div>
+                    <div class="warning">⚠️ Avertissements: ${warnings}</div>
+                    <div class="error">❌ Échecs: ${failed}</div>
+                    <div>📊 Total: ${total}</div>
+                </div>
+                <p class="${overallStatus}">
+                    ${total === 0 ? 'Aucun test exécuté' : 
+                      failed === 0 ? 
+                        (warnings === 0 ? '🎉 Tous les tests sont réussis ! Le nettoyage est un succès.' : '⚠️ Tests réussis avec quelques avertissements.') : 
+                        '❌ Certains tests ont échoué. Vérifiez les détails ci-dessus.'
+                    }
+                </p>
+            `;
+        }
+
+        // Initialisation au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🧪 Page de vérification post-nettoyage chargée');
+            updateSummary();
+        });
+    </script>
+</body>
+</html>

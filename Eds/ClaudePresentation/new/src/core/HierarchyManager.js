@@ -72,6 +72,37 @@ class HierarchyManager {
     }
 
     /**
+     * Initialise de façon asynchrone le gestionnaire hiérarchique
+     * 
+     * Rôle : Initialisation complète du système hiérarchique
+     * Type : Méthode d'initialisation asynchrone
+     * Retour : Promise<void> - Résolution quand l'initialisation est terminée
+     * Effet de bord : Configuration finale des templates et validation
+     */
+    async init() {
+        try {
+            console.log('🔄 Initialisation asynchrone HierarchyManager...');
+            
+            // Validation de l'initialisation des templates
+            if (this.hierarchyTemplates.size === 0) {
+                console.warn('⚠️ Aucun template hiérarchique chargé, re-initialisation...');
+                this.initializeHierarchyTemplates();
+            }
+            
+            // Validation des niveaux hiérarchiques
+            const levels = Object.keys(this.hierarchyLevels);
+            if (levels.length === 0) {
+                throw new Error('Aucun niveau hiérarchique défini');
+            }
+            
+            console.log(`✅ HierarchyManager initialisé: ${levels.length} niveaux, ${this.hierarchyTemplates.size} templates`);
+        } catch (error) {
+            console.error('❌ Erreur initialisation HierarchyManager:', error);
+            throw error;
+        }
+    }
+
+    /**
      * Initialise les templates hiérarchiques prédéfinis
      * 
      * Rôle : Chargement des templates par défaut pour construction rapide
@@ -539,6 +570,37 @@ class HierarchyManager {
         if (element.type !== 'widget' && (!element.children || element.children.length === 0)) {
             warnings.push(`Élément ${element.type} vide: ${element.id}`);
         }
+    }
+
+    /**
+     * Retourne tous les templates hiérarchiques disponibles
+     * 
+     * Rôle : Accessor pour les templates hiérarchiques
+     * Type : Méthode getter pour templates
+     * Retour : Object - Tous les templates disponibles convertis en objet
+     */
+    getTemplates() {
+        // Rôle : Conversion de la Map des templates en objet simple
+        // Type : Object (templates convertis depuis Map)
+        // Unité : Sans unité
+        // Domaine : Object avec propriétés template
+        // Formule : Object.fromEntries(Map) pour conversion
+        // Exemple : {'meta-header': {...}, 'hero-section': {...}}
+        const templatesObject = Object.fromEntries(this.hierarchyTemplates);
+        
+        console.log(`📋 ${this.hierarchyTemplates.size} templates hiérarchiques disponibles`);
+        return templatesObject;
+    }
+
+    /**
+     * Retourne les niveaux hiérarchiques disponibles
+     * 
+     * Rôle : Accessor pour la structure hiérarchique
+     * Type : Méthode getter pour niveaux
+     * Retour : Object - Niveaux hiérarchiques avec leurs configurations
+     */
+    getHierarchyLevels() {
+        return { ...this.hierarchyLevels };
     }
 }
 

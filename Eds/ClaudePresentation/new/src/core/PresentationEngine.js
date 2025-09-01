@@ -58,6 +58,14 @@ class PresentationEngine {
         // Exemple : Gère header, hero, pricing, contact, etc.
         this.sectionManager = new SectionManager();
 
+        // Rôle : Gestionnaire hiérarchique des éléments de présentation
+        // Type : HierarchyManager (gestionnaire de hiérarchie 5 niveaux)
+        // Unité : Sans unité
+        // Domaine : Instance valide de HierarchyManager
+        // Formule : new HierarchyManager(widgetManager) → gestionnaire hiérarchique
+        // Exemple : Gère Méta-Sections → Sections → Sous-Sections → Sous-Sous-Sections → Widgets
+        this.hierarchyManager = new HierarchyManager(this.widgetManager);
+
         // Initialisation du moteur
         this.init();
     }
@@ -78,6 +86,9 @@ class PresentationEngine {
             
             // Chargement des sections par défaut
             await this.sectionManager.loadDefaultSections();
+            
+            // Initialisation du gestionnaire hiérarchique
+            await this.hierarchyManager.init();
             
             // Configuration de la synchronisation
             this.syncManager.init();
@@ -109,7 +120,7 @@ class PresentationEngine {
         // Type : Object (définition complète d'une présentation)
         // Unité : Sans unité
         // Domaine : Object avec propriétés requises
-        // Formule : Structure standard de présentation
+        // Formule : Structure standard de présentation avec support hiérarchique
         // Exemple : Voir ci-dessous
         const presentation = {
             id: presentationId,
@@ -118,6 +129,7 @@ class PresentationEngine {
             dateModification: new Date().toISOString(),
             template: template,
             sections: [],
+            hierarchicalElements: [], // Support pour la nouvelle structure hiérarchique
             styles: {
                 theme: 'default',
                 colors: {
@@ -133,7 +145,8 @@ class PresentationEngine {
             metadata: {
                 version: '1.0.0',
                 author: 'PresentationEngine',
-                tags: []
+                tags: [],
+                hierarchical: true // Indicateur de support hiérarchique
             }
         };
 
@@ -410,106 +423,371 @@ class PresentationEngine {
             currentPresentation: this.currentPresentation,
             availableWidgets: this.widgetManager.getAvailableWidgets(),
             availableSections: this.sectionManager.getAvailableSections(),
+            hierarchyLevels: this.hierarchyManager.getHierarchyLevels(),
+            hierarchyTemplates: this.hierarchyManager.getTemplates(),
             history: this.historyManager.getHistory()
         };
     }
 
     /**
-     * Crée une nouvelle présentation
+     * Ajoute un élément hiérarchique à la présentation courante
      * 
-     * Rôle : Factory de création de présentations
-     * Type : Méthode de création de données
-     * Paramètre : config - Configuration de la présentation
-     * Retour : Promise<Object> - Présentation créée
+     * Rôle : Intégration d'éléments hiérarchiques dans la présentation
+     * Type : Méthode de manipulation hiérarchique
+     * Paramètres : levelType - Type d'élément (meta-section, section, etc.), elementConfig - Configuration de l'élément, parentId - ID du parent (optionnel)
+     * Retour : Object - Élément créé
      */
-    async createPresentation(config) {
-        try {
-            // Génération d'un ID unique pour la présentation
-            const presentationId = `pres-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-            
-            // Structure de présentation par défaut
-            const presentation = {
-                id: presentationId,
-                title: config.title || 'Nouvelle présentation',
-                description: config.description || '',
-                template: config.template || '',
-                dateCreation: config.createdAt || new Date().toISOString(),
-                dateModification: new Date().toISOString(),
-                author: config.author || 'Utilisateur',
-                metadata: {
-                    version: '1.0.0',
-                    lastSaved: null
-                },
-                sections: []
-            };
+    addHierarchicalElement(levelType, elementConfig, parentId = null) {
+        if (!this.currentPresentation) {
+            throw new Error('Aucune présentation active');
+        }
 
-            // Application du template si spécifié
-            if (config.template && config.template !== '') {
-                await this.applyTemplate(presentation, config.template);
+        try {
+            // Rôle : Élément hiérarchique créé par le gestionnaire
+            // Type : Object (structure d'élément hiérarchique)
+            // Unité : Sans unité
+            // Domaine : Object avec propriétés requises (id, type, content, children)
+            // Formule : hierarchyManager.createElement(levelType, elementConfig)
+            // Exemple : {id: 'meta-001', type: 'meta-section', title: 'Présentation', children: []}
+            const hierarchicalElement = this.hierarchyManager.createElement(levelType, elementConfig);
+
+            // Si c'est une méta-section (niveau racine), ajouter directement à la présentation
+            if (levelType === 'meta-section') {
+                // Rôle : Initialisation de la structure hiérarchique dans la présentation
+                // Type : Array (tableau des éléments hiérarchiques de niveau racine)
+                // Unité : Sans unité
+                // Domaine : Array d'objets hiérarchiques
+                // Formule : presentation.hierarchicalElements = presentation.hierarchicalElements || []
+                // Exemple : [{id: 'meta-001', type: 'meta-section', ...}, ...]
+                if (!this.currentPresentation.hierarchicalElements) {
+                    this.currentPresentation.hierarchicalElements = [];
+                }
+                this.currentPresentation.hierarchicalElements.push(hierarchicalElement);
+            } 
+            // Sinon, ajouter à l'élément parent spécifié
+            else if (parentId) {
+                const parentElement = this.findHierarchicalElement(parentId);
+                if (parentElement) {
+                    if (!parentElement.children) {
+                        parentElement.children = [];
+                    }
+                    parentElement.children.push(hierarchicalElement);
+                } else {
+                    throw new Error(`Élément parent '${parentId}' non trouvé`);
+                }
+            } else {
+                throw new Error(`Élément de type '${levelType}' nécessite un parent`);
             }
 
-            // Définition comme présentation courante
-            this.currentPresentation = presentation;
+            // Mise à jour timestamp
+            this.currentPresentation.dateModification = new Date().toISOString();
 
-            // Sauvegarde initiale dans l'historique
-            this.historyManager.saveState(presentation, `Création de "${presentation.title}"`);
+            // Sauvegarde pour historique
+            this.historyManager.saveState(this.currentPresentation);
 
-            console.log(`✅ Présentation créée: ${presentation.title} (${presentationId})`);
-            return presentation;
+            // Synchronisation
+            this.syncManager.syncPresentation(this.currentPresentation);
+
+            console.log(`➕ Élément hiérarchique ajouté: ${levelType} (${hierarchicalElement.id})`);
+            return hierarchicalElement;
 
         } catch (error) {
-            console.error('❌ Erreur création présentation:', error);
+            console.error('❌ Erreur ajout élément hiérarchique:', error);
             throw error;
         }
     }
 
     /**
-     * Applique un template à une présentation
+     * Recherche un élément hiérarchique par son ID
      * 
-     * Rôle : Chargement d'un template prédéfini
-     * Type : Méthode de configuration
-     * Paramètres : presentation - Présentation cible, templateName - Nom du template
-     * Effet de bord : Modifie la structure de la présentation
+     * Rôle : Recherche récursive dans la hiérarchie
+     * Type : Méthode de recherche récursive
+     * Paramètre : elementId - ID de l'élément à rechercher
+     * Retour : Object|null - Élément trouvé ou null
      */
-    async applyTemplate(presentation, templateName) {
+    findHierarchicalElement(elementId) {
+        if (!this.currentPresentation?.hierarchicalElements) {
+            return null;
+        }
+
+        /**
+         * Fonction récursive de recherche dans les éléments
+         * 
+         * Rôle : Parcours en profondeur de la hiérarchie
+         * Type : Fonction récursive de recherche
+         * Paramètre : elements - Tableau d'éléments à parcourir
+         * Retour : Object|null - Élément trouvé ou null
+         */
+        const searchInElements = (elements) => {
+            for (const element of elements) {
+                if (element.id === elementId) {
+                    return element;
+                }
+                if (element.children && element.children.length > 0) {
+                    const found = searchInElements(element.children);
+                    if (found) return found;
+                }
+            }
+            return null;
+        };
+
+        return searchInElements(this.currentPresentation.hierarchicalElements);
+    }
+
+    /**
+     * Supprime un élément hiérarchique par son ID
+     * 
+     * Rôle : Suppression d'élément avec gestion de la hiérarchie
+     * Type : Méthode de suppression hiérarchique
+     * Paramètre : elementId - ID de l'élément à supprimer
+     * Retour : boolean - Succès de la suppression
+     */
+    removeHierarchicalElement(elementId) {
+        if (!this.currentPresentation?.hierarchicalElements) {
+            return false;
+        }
+
+        /**
+         * Fonction récursive de suppression
+         * 
+         * Rôle : Suppression avec préservation de la structure
+         * Type : Fonction récursive de suppression
+         * Paramètre : elements - Tableau d'éléments, parent - Élément parent (optionnel)
+         * Retour : boolean - Succès de la suppression
+         */
+        const removeFromElements = (elements, parent = null) => {
+            for (let i = 0; i < elements.length; i++) {
+                if (elements[i].id === elementId) {
+                    elements.splice(i, 1);
+                    console.log(`🗑️ Élément hiérarchique supprimé: ${elementId}`);
+                    return true;
+                }
+                if (elements[i].children && elements[i].children.length > 0) {
+                    if (removeFromElements(elements[i].children, elements[i])) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        };
+
+        const success = removeFromElements(this.currentPresentation.hierarchicalElements);
+        
+        if (success) {
+            // Mise à jour timestamp
+            this.currentPresentation.dateModification = new Date().toISOString();
+
+            // Sauvegarde pour historique
+            this.historyManager.saveState(this.currentPresentation);
+
+            // Synchronisation
+            this.syncManager.syncPresentation(this.currentPresentation);
+        }
+
+        return success;
+    }
+
+    /**
+     * Applique un template hiérarchique à un élément
+     * 
+     * Rôle : Déploiement automatique de structures prédéfinies
+     * Type : Méthode de déploiement de template
+     * Paramètres : templateName - Nom du template, targetElementId - ID de l'élément cible (optionnel)
+     * Retour : Object - Élément créé depuis le template
+     */
+    applyHierarchicalTemplate(templateName, targetElementId = null) {
+        if (!this.currentPresentation) {
+            throw new Error('Aucune présentation active');
+        }
+
         try {
-            console.log(`📋 Application du template: ${templateName}`);
+            // Rôle : Template hiérarchique récupéré du gestionnaire
+            // Type : Object (définition complète du template)
+            // Unité : Sans unité
+            // Domaine : Object avec structure hiérarchique ou null si non trouvé
+            // Formule : hierarchyManager.getTemplate(templateName)
+            // Exemple : {name: 'meta-header', structure: {...}, config: {...}}
+            const template = this.hierarchyManager.getTemplate(templateName);
 
-            switch (templateName) {
-                case 'li-cube-pro':
-                    // Chargement des sections du template Li-CUBE PRO
-                    const licubeProSections = await this.sectionManager.getTemplateSection('li-cube-pro');
-                    presentation.sections = licubeProSections || [];
-                    break;
-
-                case 'commercial':
-                    // Template commercial simple
-                    presentation.sections = [
-                        await this.sectionManager.createSection('hero', { title: 'Présentation commerciale' }),
-                        await this.sectionManager.createSection('features', { title: 'Nos atouts' }),
-                        await this.sectionManager.createSection('contact', { title: 'Contactez-nous' })
-                    ];
-                    break;
-
-                case 'simple':
-                    // Template simple avec une section
-                    presentation.sections = [
-                        await this.sectionManager.createSection('hero', { title: 'Ma présentation' })
-                    ];
-                    break;
-
-                default:
-                    console.warn(`Template inconnu: ${templateName}`);
+            if (!template) {
+                throw new Error(`Template '${templateName}' non trouvé`);
             }
 
-            presentation.template = templateName;
-            console.log(`✅ Template "${templateName}" appliqué avec ${presentation.sections.length} sections`);
+            // Rôle : Élément créé depuis le template
+            // Type : Object (élément hiérarchique instancié)
+            // Unité : Sans unité
+            // Domaine : Object avec structure complète déployée
+            // Formule : hierarchyManager.deployTemplate(template)
+            // Exemple : Structure complète avec enfants imbriqués
+            const deployedElement = this.hierarchyManager.deployTemplate(template);
+
+            // Si un élément cible est spécifié, ajouter comme enfant
+            if (targetElementId) {
+                const targetElement = this.findHierarchicalElement(targetElementId);
+                if (targetElement) {
+                    if (!targetElement.children) {
+                        targetElement.children = [];
+                    }
+                    targetElement.children.push(deployedElement);
+                } else {
+                    throw new Error(`Élément cible '${targetElementId}' non trouvé`);
+                }
+            } else {
+                // Ajouter au niveau racine
+                if (!this.currentPresentation.hierarchicalElements) {
+                    this.currentPresentation.hierarchicalElements = [];
+                }
+                this.currentPresentation.hierarchicalElements.push(deployedElement);
+            }
+
+            // Mise à jour timestamp
+            this.currentPresentation.dateModification = new Date().toISOString();
+
+            // Sauvegarde pour historique
+            this.historyManager.saveState(this.currentPresentation);
+
+            // Synchronisation
+            this.syncManager.syncPresentation(this.currentPresentation);
+
+            console.log(`📋 Template hiérarchique déployé: ${templateName}`);
+            return deployedElement;
 
         } catch (error) {
-            console.error(`❌ Erreur application template ${templateName}:`, error);
-            // En cas d'erreur, on laisse une présentation vide
-            presentation.sections = [];
+            console.error('❌ Erreur déploiement template hiérarchique:', error);
+            throw error;
         }
+    }
+
+    /**
+     * Crée une nouvelle présentation avec support hiérarchique complet
+     * 
+     * Rôle : Factory spécialisée pour le nouveau système hiérarchique
+     * Type : Méthode de création avancée
+     * Paramètres : config - Configuration {titre, template, templateHierarchique}
+     * Retour : Promise<Object> - Présentation avec structure hiérarchique
+     */
+    async createHierarchicalPresentation(config = {}) {
+        try {
+            console.log('🆕 Création d\'une présentation hiérarchique...');
+
+            // Rôle : Configuration par défaut pour présentation hiérarchique
+            // Type : Object (paramètres de création)
+            // Unité : Sans unité
+            // Domaine : Object avec propriétés par défaut
+            // Formule : Fusion config utilisateur + valeurs par défaut
+            // Exemple : {titre: 'Ma présentation', template: 'simple', templateHierarchique: 'meta-header'}
+            const finalConfig = {
+                titre: config.titre || 'Nouvelle présentation',
+                template: config.template || null,
+                templateHierarchique: config.templateHierarchique || null,
+                author: config.author || 'Utilisateur',
+                ...config
+            };
+
+            // Création de la présentation de base
+            const presentation = this.createPresentation(finalConfig.titre, finalConfig.template);
+
+            // Application du template hiérarchique si spécifié
+            if (finalConfig.templateHierarchique) {
+                console.log(`📋 Application du template hiérarchique: ${finalConfig.templateHierarchique}`);
+                
+                try {
+                    const deployedTemplate = this.applyHierarchicalTemplate(finalConfig.templateHierarchique);
+                    console.log(`✅ Template hiérarchique appliqué: ${deployedTemplate.id}`);
+                } catch (templateError) {
+                    console.warn(`⚠️ Erreur template hiérarchique '${finalConfig.templateHierarchique}':`, templateError);
+                }
+            }
+
+            console.log(`✅ Présentation hiérarchique créée: ${finalConfig.titre} (${presentation.id})`);
+            return presentation;
+
+        } catch (error) {
+            console.error('❌ Erreur création présentation hiérarchique:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Génère le HTML avec support de la structure hiérarchique
+     * 
+     * Rôle : Rendu HTML intégrant les deux systèmes (sections + hiérarchie)
+     * Type : Méthode de génération hybride
+     * Retour : string - HTML complet avec structure hiérarchique
+     */
+    generateHierarchicalHTML() {
+        if (!this.currentPresentation) {
+            throw new Error('Aucune présentation active');
+        }
+
+        console.log('🔄 Génération HTML hiérarchique...');
+
+        try {
+            // Génération HTML des sections classiques
+            let html = this.sectionManager.generatePresentationHTML(this.currentPresentation);
+
+            // Si des éléments hiérarchiques existent, les intégrer
+            if (this.currentPresentation.hierarchicalElements && 
+                this.currentPresentation.hierarchicalElements.length > 0) {
+                
+                // Rôle : HTML des éléments hiérarchiques généré
+                // Type : String (HTML complet des éléments hiérarchiques)
+                // Unité : Sans unité
+                // Domaine : String HTML valide
+                // Formule : hierarchyManager.generateHTML(hierarchicalElements)
+                // Exemple : '<div class="meta-section">...</div>'
+                const hierarchicalHTML = this.hierarchyManager.generateHTML(
+                    this.currentPresentation.hierarchicalElements
+                );
+
+                // Intégration du HTML hiérarchique
+                html = this.integrateHierarchicalHTML(html, hierarchicalHTML);
+            }
+
+            console.log('✅ HTML hiérarchique généré avec succès');
+            return html;
+
+        } catch (error) {
+            console.error('❌ Erreur génération HTML hiérarchique:', error);
+            // Fallback sur la méthode classique
+            return this.generateHTML();
+        }
+    }
+
+    /**
+     * Intègre le HTML hiérarchique dans le HTML de base
+     * 
+     * Rôle : Fusion intelligente des deux structures HTML
+     * Type : Méthode de fusion de contenu
+     * Paramètres : baseHTML - HTML de base, hierarchicalHTML - HTML hiérarchique
+     * Retour : string - HTML fusionné
+     */
+    integrateHierarchicalHTML(baseHTML, hierarchicalHTML) {
+        // Rôle : Recherche du point d'insertion dans le HTML de base
+        // Type : String (HTML avec point d'insertion localisé)
+        // Unité : Sans unité
+        // Domaine : HTML avec balise body ou container
+        // Formule : baseHTML.replace pour localiser le point d'insertion
+        // Exemple : Insertion avant la fermeture de body ou dans main container
+        
+        // Si le HTML hiérarchique contient du contenu
+        if (hierarchicalHTML && hierarchicalHTML.trim() !== '') {
+            // Tentative d'insertion avant la fermeture du body
+            if (baseHTML.includes('</body>')) {
+                return baseHTML.replace('</body>', `${hierarchicalHTML}</body>`);
+            }
+            // Sinon, tentative d'insertion dans un container principal
+            else if (baseHTML.includes('<main')) {
+                return baseHTML.replace('<main', `${hierarchicalHTML}<main`);
+            }
+            // Fallback: ajout à la fin
+            else {
+                return baseHTML + hierarchicalHTML;
+            }
+        }
+
+        // Si pas de contenu hiérarchique, retourner le HTML de base
+        return baseHTML;
     }
 
     /**

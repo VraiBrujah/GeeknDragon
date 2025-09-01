@@ -136,62 +136,204 @@
             font-weight: var(--font-medium);
         }
 
-        /* Drag & Drop pour les sections */
-        .property-section[draggable="true"] {
-            cursor: grab;
+        /* Système d'onglets */
+        .tabs-container {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .tabs-header {
+            display: flex;
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            border: 1px solid var(--border-color);
+            border-bottom: none;
+            overflow: hidden;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: var(--spacing-md);
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            cursor: pointer;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
             transition: all 0.3s ease;
             position: relative;
         }
 
-        .property-section[draggable="true"]:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        .tab-button:hover {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
         }
 
-        .property-section.dragging {
+        .tab-button.active {
+            background: var(--accent-green);
+            color: white;
+            font-weight: var(--font-bold);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-green);
+        }
+
+        .tab-content {
+            background: rgba(30, 41, 59, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            padding: var(--spacing-lg);
+            min-height: 400px;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* Interface de réorganisation */
+        .organization-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .organization-title {
+            color: var(--accent-green);
+            font-size: var(--text-lg);
+            font-weight: var(--font-bold);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .organization-subtitle {
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+
+        .elements-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .element-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            cursor: grab;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .element-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-green);
+        }
+
+        .element-card.dragging {
             opacity: 0.6;
             cursor: grabbing;
-            transform: rotate(3deg) scale(1.02);
+            transform: rotate(2deg) scale(1.02);
             z-index: 1000;
         }
 
-        .property-section.drag-over {
+        .element-card.drag-over {
             border-color: var(--accent-green);
             background: rgba(16, 185, 129, 0.1);
             transform: scale(1.02);
         }
 
-        .section-drag-handle {
-            position: absolute;
-            top: var(--spacing-xs);
-            right: var(--spacing-xs);
-            width: 20px;
-            height: 20px;
-            background: rgba(16, 185, 129, 0.2);
-            border: 1px solid var(--accent-green);
-            border-radius: 50%;
+        .element-icon {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .element-content {
+            flex: 1;
+        }
+
+        .element-name {
+            color: white;
+            font-weight: var(--font-bold);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .element-preview {
+            color: var(--text-muted);
+            font-size: var(--text-xs);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--border-radius-sm);
+            font-family: var(--font-mono);
+        }
+
+        .element-drag-handle {
+            width: 24px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 12px;
             cursor: grab;
-            font-size: 10px;
-            color: var(--accent-green);
             opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .element-drag-handle:hover {
+            opacity: 1;
+            color: var(--accent-green);
+        }
+
+        .sync-indicator {
+            text-align: center;
+            margin-top: var(--spacing-md);
+            padding: var(--spacing-sm);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--border-radius);
+            color: var(--accent-green);
+            font-size: var(--text-sm);
+        }
+
+        .reset-order-btn {
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger-red);
+            border: 1px solid var(--danger-red);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: var(--text-sm);
             transition: all 0.3s ease;
         }
 
-        .section-drag-handle:hover {
-            opacity: 1;
-            background: rgba(16, 185, 129, 0.4);
-            cursor: grab;
-        }
-
-        .section-drag-handle:active {
-            cursor: grabbing;
-        }
-
-        .property-section-title {
-            padding-right: 30px; /* Espace pour le drag handle */
+        .reset-order-btn:hover {
+            background: var(--danger-red);
+            color: white;
         }
     </style>
 </head>
@@ -270,8 +412,48 @@
                 <strong>Widget Actuel:</strong> <span id="currentWidgetType">Aucun</span>
             </div>
             
-            <div id="dynamicProperties">
-                <!-- Les propriétés spécifiques au widget apparaîtront ici -->
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <button class="tab-button active" id="propertiesTab" onclick="switchTab('properties')">
+                        📝 Propriétés
+                    </button>
+                    <button class="tab-button" id="organizationTab" onclick="switchTab('organization')">
+                        🔀 Organisation
+                    </button>
+                </div>
+                
+                <div class="tab-content">
+                    <!-- Onglet Propriétés -->
+                    <div id="propertiesPane" class="tab-pane active">
+                        <div id="dynamicProperties">
+                            <!-- Les propriétés spécifiques au widget apparaîtront ici -->
+                        </div>
+                    </div>
+                    
+                    <!-- Onglet Organisation -->
+                    <div id="organizationPane" class="tab-pane">
+                        <div class="organization-header">
+                            <div class="organization-title">🔀 Organisation des Éléments</div>
+                            <div class="organization-subtitle">
+                                Glissez et déposez pour réorganiser l'ordre d'affichage du widget
+                            </div>
+                        </div>
+                        
+                        <div id="elementsList" class="elements-list">
+                            <!-- Les éléments réorganisables apparaîtront ici -->
+                        </div>
+                        
+                        <div class="sync-indicator">
+                            ⚡ Synchronisation temps réel avec Test 3 activée
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button class="reset-order-btn" onclick="resetElementsOrder()">
+                                🔄 Réinitialiser l'ordre
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="status success" id="propertiesStatus" style="display: none;">✅ Propriétés: Actives</div>
@@ -287,7 +469,6 @@
     <!-- Scripts de test -->
     <script>
         // Variables globales pour les tests
-        let testResults = [];
         let currentWidget = null;
         let currentWidgetType = null;
         
@@ -953,13 +1134,11 @@
                 const sectionId = `section-${widgetType}-${categoryName.toLowerCase().replace(/\s+/g, '-')}`;
                 propertiesHTML += `
                     <div class="property-section" 
-                         draggable="true" 
                          data-category="${categoryName}"
                          data-widget-section="${categoryProps[0]?.section || categoryName.toLowerCase()}"
                          id="${sectionId}"
                          onmouseover="highlightWidgetSection('${categoryProps[0]?.section || categoryName.toLowerCase()}')"
                          onmouseout="clearWidgetHighlight()">
-                        <div class="section-drag-handle" title="Faire glisser pour réorganiser">⋮⋮</div>
                         <div class="property-section-title">${categoryName}</div>
                 `;
                 
@@ -1038,9 +1217,12 @@
             propertiesHTML += '</div>';
             dynamicProperties.innerHTML = propertiesHTML;
             
-            // Initialiser le drag & drop après génération du HTML
+            // Réinitialiser l'ordre des éléments pour le nouveau widget
             setTimeout(() => {
-                initializeDragAndDrop();
+                currentElementsOrder = [];
+                if (widgetElements[widgetType]) {
+                    currentElementsOrder = [...widgetElements[widgetType]];
+                }
             }, 100);
         }
         
@@ -1362,75 +1544,200 @@
             });
         }
 
-        // Gestion du Drag & Drop des sections de propriétés
-        let draggedElement = null;
+        // === SYSTÈME D'ORGANISATION DES ÉLÉMENTS ===
         
-        function initializeDragAndDrop() {
-            const propertiesGrid = document.getElementById('properties-grid');
-            if (!propertiesGrid) return;
+        // Définition des éléments réorganisables par widget
+        const widgetElements = {
+            'logo': [
+                { id: 'logo', name: 'Logo', icon: '🏢', selector: '.nav-logo' }
+            ],
+            'hero-title': [
+                { id: 'title', name: 'Titre Principal', icon: '🎯', selector: '.hero-title' },
+                { id: 'subtitle', name: 'Sous-titre', icon: '📝', selector: '.hero-subtitle' }
+            ],
+            'pricing-card': [
+                { id: 'badge', name: 'Badge', icon: '🏷️', selector: '.pricing-badge' },
+                { id: 'planName', name: 'Nom du Plan', icon: '🎯', selector: 'h3' },
+                { id: 'price', name: 'Prix', icon: '💰', selector: '.pricing-price' },
+                { id: 'features', name: 'Fonctionnalités', icon: '✅', selector: 'ul' },
+                { id: 'cta', name: 'Bouton CTA', icon: '🔘', selector: '.pricing-cta' }
+            ]
+        };
+
+        // Variables pour le drag & drop des éléments
+        let currentElementsOrder = [];
+        let draggedElementCard = null;
+
+        // Gestion des onglets
+        function switchTab(tabName) {
+            // Désactiver tous les onglets
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
             
-            propertiesGrid.addEventListener('dragstart', handleDragStart);
-            propertiesGrid.addEventListener('dragover', handleDragOver);
-            propertiesGrid.addEventListener('drop', handleDrop);
-            propertiesGrid.addEventListener('dragend', handleDragEnd);
+            // Activer l'onglet sélectionné
+            if (tabName === 'properties') {
+                document.getElementById('propertiesTab').classList.add('active');
+                document.getElementById('propertiesPane').classList.add('active');
+            } else if (tabName === 'organization') {
+                document.getElementById('organizationTab').classList.add('active');
+                document.getElementById('organizationPane').classList.add('active');
+                
+                // Générer l'interface de réorganisation si nécessaire
+                if (currentWidgetType && currentWidget) {
+                    generateOrganizationInterface();
+                }
+            }
+        }
+
+        // Génération de l'interface de réorganisation
+        function generateOrganizationInterface() {
+            const elementsList = document.getElementById('elementsList');
+            const elements = widgetElements[currentWidgetType];
+            
+            if (!elements || !elementsList) return;
+            
+            // Initialiser l'ordre des éléments s'il n'existe pas
+            if (currentElementsOrder.length === 0) {
+                currentElementsOrder = [...elements];
+            }
+            
+            let elementsHTML = '';
+            
+            currentElementsOrder.forEach((element, index) => {
+                // Obtenir le contenu actuel de l'élément du widget
+                const widgetElement = currentWidget.querySelector(element.selector);
+                let previewContent = 'Non trouvé';
+                
+                if (widgetElement) {
+                    switch (element.id) {
+                        case 'badge':
+                            previewContent = `"${widgetElement.textContent.trim()}"`;
+                            break;
+                        case 'planName':
+                            previewContent = `"${widgetElement.textContent.trim()}"`;
+                            break;
+                        case 'price':
+                            previewContent = widgetElement.textContent.trim();
+                            break;
+                        case 'features':
+                            const features = Array.from(widgetElement.children).map(li => li.textContent.trim()).slice(0, 2);
+                            previewContent = features.join(', ') + (widgetElement.children.length > 2 ? '...' : '');
+                            break;
+                        case 'cta':
+                            previewContent = `"${widgetElement.textContent.trim()}"`;
+                            break;
+                        case 'logo':
+                            previewContent = 'Image logo';
+                            break;
+                        case 'title':
+                            previewContent = `"${widgetElement.textContent.trim()}"`;
+                            break;
+                        case 'subtitle':
+                            previewContent = `"${widgetElement.textContent.trim()}"`;
+                            break;
+                        default:
+                            previewContent = element.name;
+                    }
+                }
+                
+                elementsHTML += `
+                    <div class="element-card" draggable="true" data-element-id="${element.id}" data-index="${index}">
+                        <div class="element-icon">${element.icon}</div>
+                        <div class="element-content">
+                            <div class="element-name">${element.name}</div>
+                            <div class="element-preview">${previewContent}</div>
+                        </div>
+                        <div class="element-drag-handle">
+                            ⋮<br>⋮
+                        </div>
+                    </div>
+                `;
+            });
+            
+            elementsList.innerHTML = elementsHTML;
+            
+            // Initialiser le drag & drop pour les éléments
+            initializeElementsDragAndDrop();
+        }
+
+        // Initialisation du drag & drop pour les éléments
+        function initializeElementsDragAndDrop() {
+            const elementsList = document.getElementById('elementsList');
+            if (!elementsList) return;
+            
+            elementsList.addEventListener('dragstart', handleElementDragStart);
+            elementsList.addEventListener('dragover', handleElementDragOver);
+            elementsList.addEventListener('drop', handleElementDrop);
+            elementsList.addEventListener('dragend', handleElementDragEnd);
         }
         
-        function handleDragStart(e) {
-            if (e.target.classList.contains('property-section')) {
-                draggedElement = e.target;
+        function handleElementDragStart(e) {
+            if (e.target.classList.contains('element-card')) {
+                draggedElementCard = e.target;
                 e.target.classList.add('dragging');
                 e.dataTransfer.effectAllowed = 'move';
                 e.dataTransfer.setData('text/html', e.target.outerHTML);
             }
         }
         
-        function handleDragOver(e) {
+        function handleElementDragOver(e) {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'move';
             
-            const propertySections = [...document.querySelectorAll('.property-section')];
-            const afterElement = getDragAfterElement(document.getElementById('properties-grid'), e.clientY);
+            const elementCards = [...document.querySelectorAll('.element-card')];
+            const afterElement = getElementAfterElement(document.getElementById('elementsList'), e.clientY);
             
-            propertySections.forEach(section => section.classList.remove('drag-over'));
+            elementCards.forEach(card => card.classList.remove('drag-over'));
             
             if (afterElement) {
                 afterElement.classList.add('drag-over');
             }
         }
         
-        function handleDrop(e) {
+        function handleElementDrop(e) {
             e.preventDefault();
             
-            if (draggedElement) {
-                const propertiesGrid = document.getElementById('properties-grid');
-                const afterElement = getDragAfterElement(propertiesGrid, e.clientY);
+            if (draggedElementCard) {
+                const elementsList = document.getElementById('elementsList');
+                const afterElement = getElementAfterElement(elementsList, e.clientY);
                 
+                // Réorganiser dans la liste visuelle
                 if (afterElement == null) {
-                    propertiesGrid.appendChild(draggedElement);
+                    elementsList.appendChild(draggedElementCard);
                 } else {
-                    propertiesGrid.insertBefore(draggedElement, afterElement);
+                    elementsList.insertBefore(draggedElementCard, afterElement);
                 }
                 
+                // Mettre à jour l'ordre des éléments
+                updateElementsOrder();
+                
+                // Appliquer la réorganisation au widget du Test 3
+                applyElementsOrderToWidget();
+                
                 // Réinitialiser les styles
-                document.querySelectorAll('.property-section').forEach(section => {
-                    section.classList.remove('drag-over');
+                document.querySelectorAll('.element-card').forEach(card => {
+                    card.classList.remove('drag-over');
                 });
             }
         }
         
-        function handleDragEnd(e) {
-            if (draggedElement) {
-                draggedElement.classList.remove('dragging');
-                draggedElement = null;
+        function handleElementDragEnd(e) {
+            if (draggedElementCard) {
+                draggedElementCard.classList.remove('dragging');
+                draggedElementCard = null;
             }
             
-            document.querySelectorAll('.property-section').forEach(section => {
-                section.classList.remove('drag-over');
+            document.querySelectorAll('.element-card').forEach(card => {
+                card.classList.remove('drag-over');
             });
         }
         
-        function getDragAfterElement(container, y) {
-            const draggableElements = [...container.querySelectorAll('.property-section:not(.dragging)')];
+        function getElementAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.element-card:not(.dragging)')];
             
             return draggableElements.reduce((closest, child) => {
                 const box = child.getBoundingClientRect();
@@ -1442,6 +1749,67 @@
                     return closest;
                 }
             }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // Mettre à jour l'ordre des éléments basé sur l'interface
+        function updateElementsOrder() {
+            const elementCards = document.querySelectorAll('.element-card');
+            const newOrder = [];
+            
+            elementCards.forEach(card => {
+                const elementId = card.getAttribute('data-element-id');
+                const element = widgetElements[currentWidgetType].find(el => el.id === elementId);
+                if (element) {
+                    newOrder.push(element);
+                }
+            });
+            
+            currentElementsOrder = newOrder;
+        }
+
+        // Appliquer l'ordre des éléments au widget du Test 3 (temps réel)
+        function applyElementsOrderToWidget() {
+            if (!currentWidget || !currentWidgetType) return;
+            
+            const container = currentWidget;
+            const elementsToMove = [];
+            
+            // Collecter tous les éléments dans l'ordre actuel
+            currentElementsOrder.forEach(elementDef => {
+                const element = container.querySelector(elementDef.selector);
+                if (element) {
+                    // Créer une copie de l'élément
+                    elementsToMove.push({
+                        element: element.cloneNode(true),
+                        original: element
+                    });
+                }
+            });
+            
+            // Supprimer les originaux
+            elementsToMove.forEach(item => {
+                if (item.original.parentNode) {
+                    item.original.remove();
+                }
+            });
+            
+            // Ajouter les éléments dans le nouvel ordre
+            elementsToMove.forEach(item => {
+                container.appendChild(item.element);
+            });
+            
+            console.log('🔄 Ordre des éléments mis à jour:', currentElementsOrder.map(el => el.name));
+        }
+
+        // Réinitialiser l'ordre des éléments
+        function resetElementsOrder() {
+            if (!currentWidgetType) return;
+            
+            currentElementsOrder = [...widgetElements[currentWidgetType]];
+            generateOrganizationInterface();
+            applyElementsOrderToWidget();
+            
+            console.log('🔄 Ordre réinitialisé');
         }
 
         // Nettoyage des tests

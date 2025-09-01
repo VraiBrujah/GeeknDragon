@@ -656,7 +656,7 @@
 
 .editor-canvas {
     /* Rôle : Surface de travail principale pour la présentation */
-    /* Type : Canvas d'édition avec zone de drop */
+    /* Type : Canvas d'édition avec zone de drop en dark mode */
     /* Unité : pixels (px) avec minimum et centrage */
     /* Domaine : Largeur min pour contenu, max pour lisibilité */
     /* Formule : min-width + auto margins → centrage horizontal */
@@ -664,7 +664,8 @@
     min-width: 800px;
     min-height: 600px;
     margin: var(--space-8) auto;
-    background: white;
+    background: var(--secondary-dark);
+    border: 1px solid var(--surface-light);
     box-shadow: var(--shadow-xl);
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -673,7 +674,7 @@
 
 .canvas-dropzone {
     /* Rôle : Zone de drop initiale quand aucune section */
-    /* Type : Placeholder interactif pour démarrage */
+    /* Type : Placeholder interactif pour démarrage en dark mode */
     /* Unité : Flexbox centered avec hauteur minimum */
     /* Domaine : Toute la surface du canvas vide */
     /* Formule : Centrage parfait avec message engageant */
@@ -682,16 +683,16 @@
     align-items: center;
     justify-content: center;
     min-height: 600px;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    color: var(--text-dark);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+    color: var(--text-secondary);
     text-align: center;
-    border: 2px dashed #cbd5e1;
+    border: 2px dashed var(--surface-light);
     transition: all var(--transition-base);
 }
 
 .canvas-dropzone.dragover {
     border-color: var(--accent-green);
-    background: linear-gradient(135deg, #f0fdf4 0%, #ecfccb 100%);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
     transform: scale(1.02);
 }
 
@@ -708,12 +709,12 @@
 .dropzone-message h3 {
     font-size: var(--text-2xl);
     font-weight: 600;
-    color: var(--text-dark);
+    color: var(--text-white);
     margin-bottom: var(--space-2);
 }
 
 .dropzone-message p {
-    color: #64748b;
+    color: var(--text-muted);
     margin-bottom: var(--space-6);
 }
 
@@ -1631,4 +1632,362 @@
     color: var(--text-muted);
     font-size: 0.75rem;
     line-height: 1.4;
+}
+
+/* ==========================================
+   BOUTONS D'AJOUT D'ÉLÉMENTS HIÉRARCHIQUES
+   ========================================== */
+
+/* Rôle : Actions de niveau pour création d'éléments */
+/* Type : Container pour boutons d'ajout par niveau */
+/* Unité : pixels (px) pour marges et espacement */
+/* Domaine : Zone d'actions sous la description du niveau */
+/* Formule : margin + padding pour espacement optimal */
+/* Exemple : Actions centrées avec espacement uniforme */
+.level-actions {
+    margin: var(--space-2) 0;
+    padding: var(--space-2);
+    background: var(--surface-light);
+    border-radius: var(--radius);
+    border: 1px solid var(--surface-lighten);
+    text-align: center;
+}
+
+/* Rôle : Bouton d'ajout d'élément pour chaque niveau */
+/* Type : Bouton primaire avec icône pour création */
+/* Unité : pixels (px) pour dimensions et espacement */
+/* Domaine : Bouton de taille moyenne bien visible */
+/* Formule : padding + border + box-shadow pour relief */
+/* Exemple : Bouton vert avec icône plus et texte descriptif */
+.add-element-btn {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-green) 100%);
+    color: white;
+    border: none;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all var(--transition-fast) ease;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.add-element-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, var(--accent-green) 0%, var(--primary-dark) 100%);
+}
+
+.add-element-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+.add-element-btn i {
+    font-size: 1rem;
+}
+
+/* ==========================================
+   MODAL DE SÉLECTION DE TAILLE
+   ========================================== */
+
+/* Rôle : Overlay modal pour sélection de taille d'élément */
+/* Type : Modal fullscreen avec fond semi-transparent */
+/* Unité : Sans unité (pourcentages et valeurs relatives) */
+/* Domaine : Plein écran avec centrage parfait */
+/* Formule : position fixed + flexbox pour centrage */
+/* Exemple : Fond noir 50% transparent avec modal centré */
+.size-selector-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+
+/* Rôle : Contenu principal du modal de sélection */
+/* Type : Container modal avec design moderne */
+/* Unité : pixels (px) pour dimensions et espacement */
+/* Domaine : Modal de taille moyenne pour interface simple */
+/* Formule : width + max-width pour responsive + padding */
+/* Exemple : 500px de large avec bordure et ombre */
+.size-selector-content {
+    background: var(--secondary-dark);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    width: 90%;
+    max-width: 500px;
+    border: 1px solid var(--surface-light);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Rôle : En-tête du modal avec titre et bouton fermeture */
+/* Type : Header modal avec alignement flex */
+/* Unité : Sans unité pour alignement et marges relatives */
+/* Domaine : Titre à gauche, bouton fermeture à droite */
+/* Formule : justify-content space-between pour alignement */
+/* Exemple : H2 coloré + bouton X en coin */
+.size-selector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--surface-light);
+}
+
+.size-selector-header h2 {
+    margin: 0;
+    color: var(--primary-dark);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.size-selector-close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-1);
+    border-radius: var(--radius);
+    transition: all var(--transition-fast) ease;
+}
+
+.size-selector-close:hover {
+    background: var(--surface-light);
+    color: var(--text-primary);
+}
+
+/* Rôle : Corps du modal avec options de dimensionnement */
+/* Type : Container pour contrôles de taille */
+/* Unité : pixels (px) pour espacement des éléments */
+/* Domaine : Zone principale avec grille d'options */
+/* Formule : margin-bottom pour espacement vertical */
+/* Exemple : Formulaire de sélection organisé en grille */
+.size-selector-body {
+    margin-bottom: var(--space-4);
+}
+
+/* Rôle : Groupe de contrôles pour largeur/hauteur */
+/* Type : Container pour chaque dimension */
+/* Unité : pixels (px) pour marges et espacement */
+/* Domaine : Groupe logique pour une dimension */
+/* Formule : margin-bottom pour séparation des groupes */
+/* Exemple : Groupe Largeur + Groupe Hauteur */
+.size-group {
+    margin-bottom: var(--space-3);
+}
+
+.size-group label {
+    display: block;
+    margin-bottom: var(--space-1);
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+}
+
+/* Rôle : Grille d'options de taille prédéfinies */
+/* Type : Grid layout pour boutons de sélection */
+/* Unité : Fractions (fr) et pixels pour colonnes */
+/* Domaine : Grille responsive pour options multiples */
+/* Formule : repeat(auto-fit, minmax(80px, 1fr)) pour responsive */
+/* Exemple : Boutons 25%, 50%, 75%, 100%, Auto */
+.size-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+/* Rôle : Bouton de sélection de taille prédéfinie */
+/* Type : Bouton radio stylé avec état actif */
+/* Unité : pixels (px) pour padding et bordure */
+/* Domaine : Boutons carrés avec pourcentages ou valeurs */
+/* Formule : padding + border + border-radius pour design uniforme */
+/* Exemple : Boutons 25%, 50%, 75%, 100% avec état sélectionné */
+.size-option {
+    background: var(--surface-light);
+    border: 2px solid var(--surface-lighten);
+    color: var(--text-secondary);
+    padding: var(--space-2);
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all var(--transition-fast) ease;
+}
+
+.size-option:hover {
+    border-color: var(--primary-dark);
+    color: var(--text-primary);
+    background: var(--surface-lighten);
+}
+
+.size-option.active {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: white;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Rôle : Input pour valeur personnalisée */
+/* Type : Champ de saisie numérique avec unité */
+/* Unité : pixels (px) pour dimensions du champ */
+/* Domaine : Input de largeur moyenne pour valeurs */
+/* Formule : width fixe + padding pour saisie confortable */
+/* Exemple : Champ 120px pour valeurs comme "350px" ou "75%" */
+.size-custom-input {
+    background: var(--surface-light);
+    border: 1px solid var(--surface-lighten);
+    color: var(--text-primary);
+    padding: var(--space-2);
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    width: 120px;
+    text-align: center;
+}
+
+.size-custom-input:focus {
+    outline: none;
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* Rôle : Actions du modal (boutons Créer/Annuler) */
+/* Type : Container pour boutons d'action */
+/* Unité : Sans unité pour alignement flex */
+/* Domaine : Boutons alignés à droite du modal */
+/* Formule : justify-content flex-end pour alignement droite */
+/* Exemple : Bouton Annuler + Bouton Créer côte à côte */
+.size-selector-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--surface-light);
+}
+
+.size-selector-actions .btn {
+    padding: var(--space-2) var(--space-4);
+    font-weight: 600;
+}
+
+/* ==========================================
+   ZONE DE DROP HIÉRARCHIQUE
+   ========================================== */
+
+/* Rôle : Zone de drop pour éléments hiérarchiques */
+/* Type : Zone de destination drag & drop */
+/* Unité : pixels (px) pour hauteur minimale et bordures */
+/* Domaine : Zone visible pour indiquer possibilité de drop */
+/* Formule : min-height + border + border-radius pour zone attractive */
+/* Exemple : Zone pointillée qui s'anime lors du survol */
+.elements-grid[data-drop-zone] {
+    min-height: 80px;
+    border: 2px dashed var(--surface-lighten);
+    border-radius: var(--radius);
+    padding: var(--space-2);
+    margin-top: var(--space-2);
+    transition: all var(--transition-fast) ease;
+    position: relative;
+}
+
+.elements-grid[data-drop-zone]:empty::before {
+    content: "Glissez vos éléments ici ou utilisez le bouton d'ajout";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-style: italic;
+    text-align: center;
+    pointer-events: none;
+}
+
+.elements-grid[data-drop-zone].drag-over {
+    border-color: var(--primary-dark);
+    background: rgba(16, 185, 129, 0.05);
+    border-style: solid;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* Rôle : Élément hiérarchique créé et placé */
+/* Type : Carte d'élément dans la hiérarchie */
+/* Unité : pixels (px) pour dimensions et espacement */
+/* Domaine : Carte compacte avec informations essentielles */
+/* Formule : padding + border-radius + box-shadow pour design cohérent */
+/* Exemple : Carte avec titre, type, dimensions et actions */
+.hierarchy-element {
+    background: var(--surface-light);
+    border: 1px solid var(--surface-lighten);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    margin-bottom: var(--space-2);
+    position: relative;
+    cursor: move;
+    transition: all var(--transition-fast) ease;
+}
+
+.hierarchy-element:hover {
+    border-color: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.hierarchy-element-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-1);
+}
+
+.hierarchy-element-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.hierarchy-element-type {
+    background: var(--primary-dark);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.hierarchy-element-dimensions {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-bottom: var(--space-2);
+}
+
+.hierarchy-element-actions {
+    display: flex;
+    gap: var(--space-1);
+    opacity: 0;
+    transition: opacity var(--transition-fast) ease;
+}
+
+.hierarchy-element:hover .hierarchy-element-actions {
+    opacity: 1;
+}
+
+.hierarchy-element-actions .btn-mini {
+    padding: 4px 8px;
+    font-size: 0.7rem;
 }
