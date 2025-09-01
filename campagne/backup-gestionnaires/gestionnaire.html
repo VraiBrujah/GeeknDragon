@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Campagne - Interface Moderne</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8b4513;
+            --secondary-color: #d4af37;
+            --accent-color: #cd853f;
+            --dark-bg: #1a1a1a;
+            --light-bg: #2d2d2d;
+            --card-bg: #252525;
+            --text-color: #ffffff;
+            --text-muted: #b0b0b0;
+            --border-color: #404040;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Crimson Text', serif;
+            --sidebar-width: 280px;
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #0f0f0f 0%, #2d1810 50%, #1a1a1a 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* LAYOUT MODERNE */
+        .app-layout {
+            display: grid;
+            grid-template-columns: var(--sidebar-width) 1fr;
+            grid-template-rows: var(--header-height) 1fr;
+            height: 100vh;
+            grid-template-areas: 
+                "header header"
+                "sidebar main";
+        }
+
+        /* HEADER MODERNE */
+        .header {
+            grid-area: header;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* SIDEBAR NAVIGATION MODERNE */
+        .sidebar {
+            grid-area: sidebar;
+            background: var(--light-bg);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .nav-section {
+            margin-bottom: 30px;
+        }
+
+        .nav-section-title {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            font-size: 1rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            background: var(--dark-bg);
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            transition: width 0.3s ease;
+            z-index: 1;
+        }
+
+        .nav-link:hover::before {
+            width: 4px;
+        }
+
+        .nav-link:hover {
+            background: rgba(139, 69, 19, 0.3);
+            border-color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            font-weight: 600;
+            border-color: var(--secondary-color);
+        }
+
+        .nav-link.active::before {
+            width: 4px;
+            background: var(--dark-bg);
+        }
+
+        .nav-icon {
+            font-size: 1.1rem;
+            width: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-badge {
+            background: var(--danger-color);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: auto;
+            min-width: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* MAIN CONTENT MODERNE */
+        .main-content {
+            grid-area: main;
+            background: var(--dark-bg);
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .content-container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .page-title {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .page-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* CARTES MODERNES */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            border-color: var(--secondary-color);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .card-body {
+            line-height: 1.6;
+        }
+
+        /* BOUTONS MODERNES */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            border: 1px solid var(--secondary-color);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-success { background: var(--success-color); border-color: var(--success-color); }
+        .btn-danger { background: var(--danger-color); border-color: var(--danger-color); }
+        .btn-warning { background: var(--warning-color); color: var(--dark-bg); border-color: var(--warning-color); }
+        .btn-info { background: var(--info-color); border-color: var(--info-color); }
+        .btn-secondary { background: var(--card-bg); border-color: var(--border-color); }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+        }
+
+        /* STATS ET MÉTRIQUES */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            font-family: var(--font-heading);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* SECTIONS VIDES */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--border-color);
+        }
+
+        .empty-state-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .empty-state-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .app-layout {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "header"
+                    "main";
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .mobile-nav-toggle {
+                display: block !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 15px;
+            }
+            
+            .header-title {
+                font-size: 1.4rem;
+            }
+            
+            .content-container {
+                padding: 20px;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* NAVIGATION MOBILE */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-sidebar {
+            position: fixed;
+            top: var(--header-height);
+            left: -100%;
+            width: 280px;
+            height: calc(100vh - var(--header-height));
+            background: var(--light-bg);
+            z-index: 1000;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-sidebar.open {
+            left: 0;
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* LOADING */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            border-top-color: var(--secondary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- HEADER MODERNE -->
+        <header class="header">
+            <div class="header-left">
+                <button class="mobile-nav-toggle" onclick="toggleMobileNav()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div>
+                    <h1 class="header-title">
+                        <i class="fas fa-dragon"></i>
+                        Le Coffre-fort oublié
+                    </h1>
+                    <div class="header-subtitle">Gestionnaire de Campagne D&D</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-success btn-sm" onclick="quickSave()">
+                    <i class="fas fa-save"></i> Sauvegarder
+                </button>
+                <button class="btn btn-info btn-sm" onclick="loadData()">
+                    <i class="fas fa-upload"></i> Charger
+                </button>
+            </div>
+        </header>
+
+        <!-- SIDEBAR NAVIGATION -->
+        <nav class="sidebar">
+            <!-- Section Campagne -->
+            <div class="nav-section">
+                <h3 class="nav-section-title">
+                    <i class="fas fa-map"></i> Campagne
+                </h3>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" onclick="showPage('overview')">
+                            <i class="nav-icon fas fa-eye"></i>
+                            <span class="nav-text">Aperçu</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('map')">
+                            <i class="nav-icon fas fa-map"></i>
+                            <span class="nav-text">Carte</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('quests')">
+                            <i class="nav-icon fas fa-scroll"></i>
+                            <span class="nav-text">Quêtes</span>
+                            <span class="nav-badge">3</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section Personnages -->
+            <div class="nav-section">
+                <h3 class="nav-section-title">
+                    <i class="fas fa-users"></i> Personnages
+                </h3>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('characters')">
+                            <i class="nav-icon fas fa-user-friends"></i>
+                            <span class="nav-text">Joueurs</span>
+                            <span class="nav-badge">4</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('npcs')">
+                            <i class="nav-icon fas fa-user-tie"></i>
+                            <span class="nav-text">PNJ</span>
+                            <span class="nav-badge">12</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section Combat -->
+            <div class="nav-section">
+                <h3 class="nav-section-title">
+                    <i class="fas fa-sword"></i> Combat
+                </h3>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('monsters')">
+                            <i class="nav-icon fas fa-dragon"></i>
+                            <span class="nav-text">Monstres</span>
+                            <span class="nav-badge">8</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('encounters')">
+                            <i class="nav-icon fas fa-fist-raised"></i>
+                            <span class="nav-text">Rencontres</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section Objets & Outils -->
+            <div class="nav-section">
+                <h3 class="nav-section-title">
+                    <i class="fas fa-treasure-chest"></i> Contenu
+                </h3>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('objects')">
+                            <i class="nav-icon fas fa-gem"></i>
+                            <span class="nav-text">Objets Magiques</span>
+                            <span class="nav-badge">15</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('puzzles')">
+                            <i class="nav-icon fas fa-puzzle-piece"></i>
+                            <span class="nav-text">Énigmes</span>
+                            <span class="nav-badge">5</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Section Musique -->
+            <div class="nav-section">
+                <h3 class="nav-section-title">
+                    <i class="fas fa-music"></i> Ambiance
+                </h3>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="showPage('music')">
+                            <i class="nav-icon fas fa-play"></i>
+                            <span class="nav-text">Musique</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="content-container">
+                <!-- APERÇU DE LA CAMPAGNE -->
+                <div id="page-overview" class="page-content active">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">
+                                <i class="fas fa-eye"></i>
+                                Aperçu de la Campagne
+                            </h1>
+                            <p class="page-subtitle">Vue d'ensemble de votre aventure épique</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-success" onclick="showAddModal()">
+                                <i class="fas fa-plus"></i> Nouveau
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STATISTIQUES -->
+                    <div class="stats-row">
+                        <div class="stat-card">
+                            <div class="stat-value">4</div>
+                            <div class="stat-label">Joueurs Actifs</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Sessions Jouées</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Niveau Moyen</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Quêtes Actives</div>
+                        </div>
+                    </div>
+
+                    <!-- CONTENU PRINCIPAL -->
+                    <div class="cards-grid">
+                        <div class="card fade-in-up">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-scroll"></i>
+                                    Dernières Activités
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Session du 28/08/2025 : Le groupe a exploré les ruines anciennes...</p>
+                            </div>
+                        </div>
+
+                        <div class="card fade-in-up" style="animation-delay: 0.1s;">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-users"></i>
+                                    Groupe Actuel
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <p>4 aventuriers prêts à affronter les dangers...</p>
+                            </div>
+                        </div>
+
+                        <div class="card fade-in-up" style="animation-delay: 0.2s;">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-map"></i>
+                                    Localisation
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Actuellement dans la région de...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAGE PERSONNAGES -->
+                <div id="page-characters" class="page-content" style="display: none;">
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">
+                                <i class="fas fa-user-friends"></i>
+                                Personnages Joueurs
+                            </h1>
+                            <p class="page-subtitle">Gérez vos héros aventuriers</p>
+                        </div>
+                        <div class="page-actions">
+                            <button class="btn btn-success" onclick="openCharacterCreator()">
+                                <i class="fas fa-user-plus"></i> Créer un Personnage
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="cards-grid" id="charactersGrid">
+                        <!-- Les personnages seront générés ici -->
+                        <div class="empty-state">
+                            <div class="empty-state-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <h3 class="empty-state-title">Aucun personnage créé</h3>
+                            <p class="empty-state-description">
+                                Commencez par créer votre premier personnage joueur pour démarrer l'aventure.
+                            </p>
+                            <button class="btn btn-success" onclick="openCharacterCreator()">
+                                <i class="fas fa-user-plus"></i> Créer un Personnage
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Autres pages seront ajoutées dynamiquement -->
+            </div>
+        </main>
+    </div>
+
+    <!-- NAVIGATION MOBILE -->
+    <div class="mobile-overlay" onclick="closeMobileNav()"></div>
+    <nav class="mobile-sidebar">
+        <!-- Contenu identique à la sidebar desktop -->
+    </nav>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Variables globales
+        let currentPage = 'overview';
+        let campaignData = {};
+
+        // Navigation
+        function showPage(pageId) {
+            // Masquer toutes les pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
+            });
+
+            // Retirer la classe active de tous les liens
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Afficher la page demandée
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.style.display = 'block';
+            } else {
+                // Créer la page dynamiquement si elle n'existe pas
+                createPage(pageId);
+            }
+
+            // Activer le lien correspondant
+            event.target.closest('.nav-link').classList.add('active');
+            currentPage = pageId;
+
+            // Fermer le menu mobile si ouvert
+            closeMobileNav();
+        }
+
+        function createPage(pageId) {
+            const container = document.querySelector('.content-container');
+            const pageContent = document.createElement('div');
+            pageContent.id = `page-${pageId}`;
+            pageContent.className = 'page-content';
+            
+            // Configuration des pages
+            const pageConfigs = {
+                'map': {
+                    title: 'Carte Interactive',
+                    icon: 'fas fa-map',
+                    subtitle: 'Explorez le monde de votre campagne',
+                    content: '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-map"></i></div><h3 class="empty-state-title">Carte non configurée</h3><p class="empty-state-description">Ajoutez une image de carte pour commencer à explorer.</p><button class="btn btn-success"><i class="fas fa-upload"></i> Ajouter une carte</button></div>'
+                },
+                'quests': {
+                    title: 'Gestion des Quêtes',
+                    icon: 'fas fa-scroll',
+                    subtitle: 'Suivez l\'évolution des missions',
+                    content: '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-scroll"></i></div><h3 class="empty-state-title">Aucune quête active</h3><p class="empty-state-description">Créez votre première quête pour guider vos joueurs.</p><button class="btn btn-success"><i class="fas fa-plus"></i> Nouvelle quête</button></div>'
+                },
+                'monsters': {
+                    title: 'Bestiaire',
+                    icon: 'fas fa-dragon',
+                    subtitle: 'Vos créatures et adversaires',
+                    content: '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-dragon"></i></div><h3 class="empty-state-title">Bestiaire vide</h3><p class="empty-state-description">Ajoutez des monstres pour peupler votre monde.</p><button class="btn btn-success"><i class="fas fa-plus"></i> Ajouter un monstre</button></div>'
+                },
+                'objects': {
+                    title: 'Objets Magiques',
+                    icon: 'fas fa-gem',
+                    subtitle: 'Artefacts et trésors précieux',
+                    content: '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-gem"></i></div><h3 class="empty-state-title">Coffre au trésor vide</h3><p class="empty-state-description">Créez des objets magiques pour récompenser vos joueurs.</p><button class="btn btn-success"><i class="fas fa-plus"></i> Créer un objet</button></div>'
+                }
+            };
+
+            const config = pageConfigs[pageId] || {
+                title: 'Page non trouvée',
+                icon: 'fas fa-question',
+                subtitle: '',
+                content: '<div class="empty-state"><div class="empty-state-icon"><i class="fas fa-question"></i></div><h3 class="empty-state-title">Page en construction</h3><p class="empty-state-description">Cette section sera bientôt disponible.</p></div>'
+            };
+
+            pageContent.innerHTML = `
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">
+                            <i class="${config.icon}"></i>
+                            ${config.title}
+                        </h1>
+                        <p class="page-subtitle">${config.subtitle}</p>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn-success" onclick="showAddModal('${pageId}')">
+                            <i class="fas fa-plus"></i> Nouveau
+                        </button>
+                    </div>
+                </div>
+                <div class="fade-in-up">
+                    ${config.content}
+                </div>
+            `;
+
+            container.appendChild(pageContent);
+        }
+
+        // Navigation mobile
+        function toggleMobileNav() {
+            const sidebar = document.querySelector('.mobile-sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+
+        function closeMobileNav() {
+            const sidebar = document.querySelector('.mobile-sidebar');
+            const overlay = document.querySelector('.mobile-overlay');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        }
+
+        // Actions
+        function quickSave() {
+            const button = event.target;
+            const originalContent = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sauvegarde...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Sauvegardé';
+                setTimeout(() => {
+                    button.innerHTML = originalContent;
+                    button.disabled = false;
+                }, 1000);
+            }, 1500);
+        }
+
+        function loadData() {
+            // Implémentation du chargement
+            console.log('Chargement des données...');
+        }
+
+        function showAddModal(type = currentPage) {
+            // Implémentation des modales d'ajout
+            console.log(`Ouverture modal pour: ${type}`);
+        }
+
+        function openCharacterCreator() {
+            // Intégration avec le créateur de personnage existant
+            console.log('Ouverture du créateur de personnage...');
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Interface moderne chargée');
+        });
+    </script>
+</body>
+</html>

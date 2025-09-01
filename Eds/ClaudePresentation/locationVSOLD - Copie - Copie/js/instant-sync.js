@@ -4,18 +4,6 @@
  * Répertoire de Travail : C:\Users\Brujah\Documents\GitHub\GeeknDragon\Eds\ClaudePresentation
  */
 
-// Rôle : Détection simple et directe du type de page
-// Type : Function - Détection basée sur l'URL de la page actuelle
-// Stratégie : Analyse directe du pathname pour identifier le type
-function detectPageType() {
-    const url = window.location.pathname.toLowerCase();
-    if (url.includes('locationvsold')) return 'locationVSOLD';
-    if (url.includes('locationvs')) return 'locationVS';
-    if (url.includes('location')) return 'location';
-    if (url.includes('vente')) return 'vente';
-    return 'location'; // Par défaut
-}
-
 class InstantSync {
     constructor(pageType) {
         // Configuration : type de page et clés de stockage
@@ -73,46 +61,38 @@ class InstantSync {
         editableFields.forEach(field => {
             const fieldName = field.dataset.field;
             
-            // Écouteurs : capture des modifications utilisateur
-            field.addEventListener('input', () => {
-                console.log(`📝 Event INPUT détecté sur: ${fieldName}`);
-                // Synchronisation immédiate avec anti-rebond minimal
+            // Écouteurs multiples : capture immédiate de tout changement
+            const events = ['input', 'change', 'blur', 'paste', 'keyup', 'keydown'];
+            
+            events.forEach(eventType => {
+                field.addEventListener(eventType, (event) => {
+                    // Filtrage : éviter les événements non-modifiants
+                    if (eventType === 'keydown' && !this.isModifyingKey(event)) {
+                        return;
+                    }
+                    
+                    // Synchronisation immédiate avec anti-rebond minimal
+                    this.scheduleInstantSync(fieldName, field);
+                });
+            });
+
+            // Écouteur spécial : contentEditable
+            if (field.contentEditable === 'true') {
+                field.addEventListener('DOMCharacterDataModified', () => {
+                    this.scheduleInstantSync(fieldName, field);
+                });
+            }
+
+            // Observer : mutations DOM pour détecter les changements programmatiques
+            const observer = new MutationObserver(() => {
                 this.scheduleInstantSync(fieldName, field);
             });
             
-            // Écouteur spécial : inputs de type color nécessitent souvent 'change'
-            field.addEventListener('change', () => {
-                console.log(`🎨 Event CHANGE détecté sur: ${fieldName}`);
-                // Synchronisation immédiate pour les changements de couleur
-                this.scheduleInstantSync(fieldName, field);
+            observer.observe(field, {
+                childList: true,
+                subtree: true,
+                characterData: true
             });
-
-            // Observer ciblé : détecte les changements programmatiques
-            const observer = new MutationObserver((mutations) => {
-                for (const mutation of mutations) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
-                        this.scheduleInstantSync(fieldName, field);
-                        break;
-                    }
-                    if (mutation.type === 'characterData' || mutation.type === 'childList') {
-                        this.scheduleInstantSync(fieldName, field);
-                        break;
-                    }
-                }
-            });
-
-            if (field.contentEditable === 'true') {
-                observer.observe(field, {
-                    characterData: true,
-                    childList: true,
-                    subtree: true
-                });
-            } else {
-                observer.observe(field, {
-                    attributes: true,
-                    attributeFilter: ['value']
-                });
-            }
         });
     }
 
@@ -122,26 +102,14 @@ class InstantSync {
      * @param {HTMLElement} field - Élément DOM modifié
      */
     scheduleInstantSync(fieldName, field) {
-        if (!this.isInitialized) {
-            console.warn(`⚠️ InstantSync non initialisé pour: ${fieldName}`);
-            return;
-        }
-        
-        console.log(`🔄 scheduleInstantSync appelée pour: ${fieldName}`);
+        if (!this.isInitialized) return;
         
         // Extraction : valeur actuelle
         const currentValue = this.extractFieldValue(field);
         const previousValue = this.fieldValues.get(fieldName);
         
-        console.log(`📊 Valeurs: ${fieldName} | Actuelle: "${currentValue}" | Précédente: "${previousValue}"`);
-        
         // Vérification : changement réel
-        if (currentValue === previousValue) {
-            console.log(`⏭️ Aucun changement détecté pour: ${fieldName}`);
-            return;
-        }
-        
-        console.log(`✅ Changement détecté pour: ${fieldName}, planification sync...`);
+        if (currentValue === previousValue) return;
         
         // Mise à jour : cache local
         this.fieldValues.set(fieldName, currentValue);
@@ -198,11 +166,6 @@ class InstantSync {
             this.highlightSyncedField(field);
             
             console.log(`⚡ Sync INSTANTANÉE: ${fieldName} = "${value}"`);
-            
-            // Log spécial pour champs d'images
-            if (fieldName.endsWith('-image-path')) {
-                console.log(`🖼️ IMAGE SYNCHRONISÉE: ${fieldName} vers page ${this.pageType}`);
-            }
             
         } catch (error) {
             console.error(`❌ Erreur sync instantanée:`, error);
@@ -271,18 +234,10 @@ class InstantSync {
         
         // Communication : même système que sync partielle
         const tempKey = `licubepro-instant-${this.pageType}-full-${Date.now()}-${Math.random()}`;
-        if (typeof localStorage === 'undefined') {
-            console.error('localStorage non disponible');
-            return;
-        }
         localStorage.setItem(tempKey, JSON.stringify(syncMessage));
-
+        
         // Nettoyage : suppression après utilisation
         setTimeout(() => {
-            if (typeof localStorage === 'undefined') {
-                console.error('localStorage non disponible');
-                return;
-            }
             localStorage.removeItem(tempKey);
         }, 1000); // Délai plus long pour sync complète
         
@@ -314,18 +269,10 @@ class InstantSync {
         
         // Communication inter-onglets : via localStorage temporaire
         const tempKey = `licubepro-instant-${this.pageType}-${Date.now()}-${Math.random()}`;
-        if (typeof localStorage === 'undefined') {
-            console.error('localStorage non disponible');
-            return;
-        }
         localStorage.setItem(tempKey, JSON.stringify(syncMessage));
-
+        
         // Nettoyage : suppression du message temporaire
         setTimeout(() => {
-            if (typeof localStorage === 'undefined') {
-                console.error('localStorage non disponible');
-                return;
-            }
             localStorage.removeItem(tempKey);
         }, 500);
         
@@ -407,7 +354,7 @@ class InstantSync {
         if (tagName === 'input' || tagName === 'textarea') {
             field.value = value;
         } else if (field.contentEditable === 'true') {
-            field.innerHTML = value;
+            field.textContent = value;
         } else {
             field.textContent = value;
         }
@@ -424,27 +371,38 @@ class InstantSync {
      */
     extractFieldValue(field) {
         const tagName = field.tagName.toLowerCase();
-
-        if (field.classList.contains('section-spacer') || field.classList.contains('header-spacer')) {
-            return parseInt(field.style.height) || '';
-        }
-
+        
         if (tagName === 'input' || tagName === 'textarea') {
-            const value = field.value || '';
-            // Log spécial pour les champs de style
-            if (field.dataset.field && field.dataset.field.startsWith('style-')) {
-                console.log(`🎨 Extraction valeur style: ${field.dataset.field} = "${value}"`);
-            }
-            // Log spécial pour les champs d'images
-            if (field.dataset.field && field.dataset.field.endsWith('-image-path')) {
-                console.log(`🖼️ Extraction valeur image: ${field.dataset.field} = "${value}"`);
-            }
-            return value;
+            return field.value || '';
+        } else if (field.contentEditable === 'true') {
+            return field.textContent || '';
+        } else {
+            return field.textContent || field.innerText || '';
         }
-        if (field.contentEditable === 'true') {
-            return field.innerHTML || '';
-        }
-        return field.textContent || field.innerText || '';
+    }
+
+    /**
+     * Vérification : touche modifiante pour filtrer les événements keydown
+     * @param {KeyboardEvent} event - Événement clavier
+     * @return {boolean} - True si la touche modifie le contenu
+     */
+    isModifyingKey(event) {
+        const modifyingKeys = [
+            'Backspace', 'Delete', 'Enter', 'Tab',
+            'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+            'Home', 'End', 'PageUp', 'PageDown'
+        ];
+        
+        // Touches de caractères : lettres, chiffres, symboles
+        if (event.key.length === 1) return true;
+        
+        // Touches spéciales modifiantes
+        if (modifyingKeys.includes(event.key)) return true;
+        
+        // Raccourcis : Ctrl+V, Ctrl+X, Ctrl+Z, etc.
+        if (event.ctrlKey || event.metaKey) return true;
+        
+        return false;
     }
 
     /**
@@ -553,11 +511,6 @@ class InstantSync {
      * Vérification : santé du système de synchronisation
      */
     checkSyncHealth() {
-        if (typeof localStorage === 'undefined') {
-            console.error('localStorage non disponible');
-            this.updateSyncUI('error');
-            return;
-        }
         const now = Date.now();
         const lastSync = localStorage.getItem(this.lastSyncKey);
         
@@ -611,10 +564,6 @@ class InstantSync {
      * @return {Object} - Contenu sauvegardé
      */
     loadContent() {
-        if (typeof localStorage === 'undefined') {
-            console.error('localStorage non disponible');
-            return {};
-        }
         try {
             const saved = localStorage.getItem(this.storageKey);
             return saved ? JSON.parse(saved) : {};
@@ -629,10 +578,6 @@ class InstantSync {
      * @param {Object} content - Contenu à sauvegarder
      */
     saveContent(content) {
-        if (typeof localStorage === 'undefined') {
-            console.error('localStorage non disponible');
-            return;
-        }
         try {
             localStorage.setItem(this.storageKey, JSON.stringify(content));
             localStorage.setItem(this.lastSyncKey, Date.now().toString());
@@ -643,159 +588,41 @@ class InstantSync {
     }
 
     /**
-     * Exportation : crée un fichier JSON téléchargeable contenant les données enregistrées
-     */
-    async exportContent() {
-        try {
-            await this.executeFullSync();
-            if (typeof localStorage === 'undefined') {
-                console.error('localStorage non disponible');
-                return;
-            }
-            const data = localStorage.getItem(this.storageKey);
-            const blob = new Blob([data ?? '{}'], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `${this.storageKey}.json`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        } catch (error) {
-            console.error('Erreur exportation:', error);
-        }
-    }
-
-    /**
-     * Importation : charge un fichier JSON, met à jour localStorage puis applique les valeurs
-     * @param {File} file - Fichier JSON contenant les données sauvegardées
-     */
-    importContent(file) {
-        const reader = new FileReader();
-        reader.onload = async (e) => {
-            try {
-                const content = JSON.parse(e.target.result);
-                if (typeof localStorage === 'undefined') {
-                    console.error('localStorage non disponible');
-                    return;
-                }
-                localStorage.setItem(this.storageKey, JSON.stringify(content));
-
-                const getMaxIndex = (prefix) => {
-                    return Object.keys(content).reduce((max, key) => {
-                        const match = key.match(new RegExp(`^${prefix}(\\d+)-`));
-                        return match ? Math.max(max, parseInt(match[1], 10)) : max;
-                    }, 0);
-                };
-
-                const maxWeakness = getMaxIndex('weakness');
-                const maxStrength = getMaxIndex('strength');
-
-                const countBlocks = (type) => document.querySelectorAll(`[data-field^="${type}"][data-field$="-title"]`).length;
-                let currentWeakness = countBlocks('weakness');
-                let currentStrength = countBlocks('strength');
-
-                if (typeof window.addWeakness === 'function') {
-                    while (currentWeakness < maxWeakness) {
-                        window.addWeakness();
-                        currentWeakness++;
-                    }
-                }
-                if (typeof window.removeWeakness === 'function') {
-                    while (currentWeakness > maxWeakness) {
-                        window.removeWeakness();
-                        currentWeakness--;
-                    }
-                }
-                if (typeof window.addStrength === 'function') {
-                    while (currentStrength < maxStrength) {
-                        window.addStrength();
-                        currentStrength++;
-                    }
-                }
-                if (typeof window.removeStrength === 'function') {
-                    while (currentStrength > maxStrength) {
-                        window.removeStrength();
-                        currentStrength--;
-                    }
-                }
-
-                const fields = document.querySelectorAll('[data-field]');
-                fields.forEach(field => {
-                    const name = field.dataset.field;
-                    if (content[name] !== undefined) {
-                        this.applyValueToField(field, content[name]);
-                        this.fieldValues.set(name, content[name]);
-                    }
-                });
-
-                await this.executeFullSync();
-            } catch (error) {
-                console.error('Erreur importation:', error);
-            }
-        };
-        reader.readAsText(file);
-    }
-
-    /**
      * Statistiques : informations sur la synchronisation
      * @return {Object} - Statistiques détaillées
      */
     getStats() {
-        let lastSync = null;
-        if (typeof localStorage === 'undefined') {
-            console.error('localStorage non disponible');
-        } else {
-            lastSync = localStorage.getItem(this.lastSyncKey);
-        }
         return {
             pageType: this.pageType,
             syncCounter: this.syncCounter,
             fieldsTracked: this.fieldValues.size,
             isActive: this.isInitialized,
-            lastSync: lastSync,
+            lastSync: localStorage.getItem(this.lastSyncKey),
             pendingSync: this.pendingSync
         };
     }
 }
 
-// Détection du type de page pour un stockage isolé
 // Auto-détection : type de page et initialisation
 function initInstantSync() {
-    // Détection : type de page directe
-    const pageType = detectPageType();
+    const pageUrl = window.location.pathname.toLowerCase();
+    let pageType = 'vente'; // Défaut
     
-    console.log(`🔍 Type de page détecté: ${pageType}`);
-
-    try {
-        // Instance globale
-        window.instantSync = new InstantSync(pageType);
-
-        // Debug : exposition des stats dans la console
-        window.getSyncStats = () => window.instantSync.getStats();
-
-        console.log('✅ InstantSync initialisé avec succès');
-        console.log(`📊 Configuration: ${pageType}, Champs détectés: ${document.querySelectorAll('[data-field]').length}`);
-
-        return window.instantSync;
-        
-    } catch (error) {
-        console.error('❌ Erreur initialisation InstantSync:', error);
-        console.error('Stack trace:', error.stack);
-        
-        // Création : instance fallback minimaliste
-        window.instantSync = {
-            isInitialized: false,
-            syncCounter: 0,
-            error: error.message,
-            executeInstantSync: () => console.warn('InstantSync en mode fallback'),
-            exportContent: () => console.warn('Export non disponible en mode fallback'),
-            importContent: () => console.warn('Import non disponible en mode fallback')
-        };
-        
-        return window.instantSync;
+    if (pageUrl.includes('locationvs')) {
+        pageType = 'locationVS'; // ✅ CORRECTION : namespace spécifique pour locationVS
+    } else if (pageUrl.includes('location')) {
+        pageType = 'location';
+    } else if (pageUrl.includes('vente')) {
+        pageType = 'vente';
     }
+    
+    // Instance globale
+    window.instantSync = new InstantSync(pageType);
+    
+    // Debug : exposition des stats dans la console
+    window.getSyncStats = () => window.instantSync.getStats();
+    
+    return window.instantSync;
 }
 
 // Auto-initialisation : démarrage automatique

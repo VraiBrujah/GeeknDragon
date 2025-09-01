@@ -115,6 +115,160 @@
             box-shadow: var(--shadow-glow); 
         }
         
+        /* Rôle : Styles modernes pour boutons d'ajout/suppression de faiblesses et avantages */
+        /* Type : Boutons interactifs - Design moderne avec icônes et animations */
+        .modern-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn-modern {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 160px;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-modern:hover::before {
+            left: 100%;
+        }
+        
+        .btn-add-weakness, .btn-add-strength {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-add-weakness:hover, .btn-add-strength:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+            background: linear-gradient(135deg, var(--accent-teal) 0%, var(--success-green) 100%);
+        }
+        
+        .btn-remove-weakness, .btn-remove-strength {
+            background: linear-gradient(135deg, var(--warning-orange) 0%, #FB923C 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-remove-weakness:hover, .btn-remove-strength:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+            background: linear-gradient(135deg, #FB923C 0%, #F97316 100%);
+        }
+        
+        .btn-modern i {
+            font-size: 1.1rem;
+        }
+        
+        .btn-modern:active {
+            transform: translateY(-1px);
+            transition: transform 0.1s ease;
+        }
+        
+        /* Animation de pulsation pour indiquer l'interaction */
+        .btn-modern:focus {
+            outline: none;
+            animation: pulse-focus 0.6s ease-in-out;
+        }
+        
+        @keyframes pulse-focus {
+            0% { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 8px 30px rgba(16, 185, 129, 0.6); }
+            100% { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+        }
+        
+        /* Rôle : Boutons de contrôle individuels pour chaque section */
+        /* Type : Contrôles flottants - Position absolue sur chaque bloc */
+        .section-controls-individual {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .btn-control {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            opacity: 0.8;
+        }
+        
+        .btn-control:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .btn-add-after {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--success-green) 100%);
+            color: white;
+        }
+        
+        .btn-add-after:hover {
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-remove-this {
+            background: linear-gradient(135deg, var(--warning-orange) 0%, #EF4444 100%);
+            color: white;
+        }
+        
+        .btn-remove-this:hover {
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+        
+        /* Animation de suppression */
+        .content-block.removing {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.4s ease;
+        }
+        
+        /* Style pour les blocs avec index dynamique */
+        .weakness-block, .strength-block {
+            transition: all 0.3s ease;
+        }
+        
+        .weakness-block:hover .section-controls-individual,
+        .strength-block:hover .section-controls-individual {
+            opacity: 1;
+        }
+        
         .editor-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
         
         .status-message {
@@ -695,16 +849,6 @@
                     <i class="fas fa-arrow-left"></i>
                     Retour Présentation Location
                 </a>
-                <!-- 
-                    Rôle : Bouton d'accès à l'interface d'administration Li-CUBE PRO™
-                    Type : Button - Déclencheur principal pour ouvrir le panneau admin
-                    Fonctionnalité : Remplace le raccourci F11 non fonctionnel
-                    Position : Prioritaire dans la barre d'actions pour visibilité maximum
-                -->
-                <button class="btn btn-admin" onclick="toggleAdminInterface()" title="Ouvrir l'interface d'administration">
-                    <i class="fas fa-cogs"></i>
-                    Interface Admin
-                </button>
                 <button class="btn btn-preview" onclick="togglePreview()">
                     <i class="fas fa-sync"></i>
                     Synchroniser & Prévisualiser
@@ -748,68 +892,79 @@
                     <!-- Ligne 1: Couleurs de Base -->
                     <label class="color-item">
                         <span>Fond Principal</span>
-                        <input type="color" id="primaryDark" value="#0F172A">
+                        <input type="color" id="primaryDark" data-field="style-primaryDark" value="#0F172A">
                         <small title="Couleur d'arrière-plan principal de toute la présentation">Arrière-plan principal</small>
                     </label>
                     <label class="color-item">
                         <span>Fond Sections</span>
-                        <input type="color" id="secondaryDark" value="#1E293B">
+                        <input type="color" id="secondaryDark" data-field="style-secondaryDark" value="#1E293B">
                         <small title="Couleur d'arrière-plan des sections et contenus">Arrière-plan sections</small>
                     </label>
                     <label class="color-item">
                         <span>Texte Blanc</span>
-                        <input type="color" id="textWhite" value="#F8FAFC">
+                        <input type="color" id="textWhite" data-field="style-textWhite" value="#F8FAFC">
                         <small title="Couleur du texte principal blanc utilisé partout">Texte principal blanc</small>
                     </label>
                     <label class="color-item">
                         <span>Texte Gris</span>
-                        <input type="color" id="textGray" value="#CBD5E1">
+                        <input type="color" id="textGray" data-field="style-textGray" value="#CBD5E1">
                         <small title="Couleur du texte gris pour descriptions et détails">Texte gris descriptif</small>
                     </label>
                     
                     <!-- Ligne 2: Couleurs d'Accent -->
                     <label class="color-item">
                         <span>Vert Principal</span>
-                        <input type="color" id="accentGreen" value="#10B981">
+                        <input type="color" id="accentGreen" data-field="style-accentGreen" value="#10B981">
                         <small title="Couleur principale pour boutons, liens et éléments interactifs">Boutons et éléments</small>
                     </label>
                     <label class="color-item">
                         <span>Bleu Accent</span>
-                        <input type="color" id="accentBlue" value="#3B82F6">
+                        <input type="color" id="accentBlue" data-field="style-accentBlue" value="#3B82F6">
                         <small title="Couleur d'accent bleu pour liens et détails visuels">Liens et détails</small>
                     </label>
                     <label class="color-item">
                         <span>Teal Accent</span>
-                        <input type="color" id="accentTeal" value="#14B8A6">
+                        <input type="color" id="accentTeal" data-field="style-accentTeal" value="#14B8A6">
                         <small title="Couleur teal pour gradients, bordures et effets spéciaux">Gradients et effets</small>
                     </label>
                     <label class="color-item">
                         <span>Vert Succès</span>
-                        <input type="color" id="successGreen" value="#059669">
+                        <input type="color" id="successGreen" data-field="style-successGreen" value="#059669">
                         <small title="Couleur verte pour messages de succès et éléments positifs">Messages positifs</small>
                     </label>
                     
                     <!-- Ligne 3: Couleurs d'État -->
                     <label class="color-item">
                         <span>Orange Alert</span>
-                        <input type="color" id="warningOrange" value="#F59E0B">
+                        <input type="color" id="warningOrange" data-field="style-warningOrange" value="#F59E0B">
                         <small title="Couleur orange pour alertes, avertissements et warnings">Alertes et warnings</small>
                     </label>
                     <label class="color-item">
                         <span>Rouge Erreur</span>
-                        <input type="color" id="warningRed" value="#EF4444">
+                        <input type="color" id="warningRed" data-field="style-warningRed" value="#EF4444">
                         <small title="Couleur rouge pour erreurs, annulations et éléments négatifs">Erreurs et négatif</small>
                     </label>
-                    <label class="color-item">
-                        <span>Bleu Info</span>
-                        <input type="color" id="infoBlue" value="#60A5FA">
-                        <small title="Couleur bleue pour informations, conseils et aide">Informations</small>
-                    </label>
-                    <label class="color-item">
-                        <span>Gris Neutre</span>
-                        <input type="color" id="neutralGray" value="#9CA3AF">
-                        <small title="Couleur grise neutre pour éléments secondaires et séparateurs">Éléments neutres</small>
-                    </label>
+                </div>
+                
+                <!-- Test de synchronisation -->
+                <div class="color-group">
+                    <h4>🧪 Test Synchronisation</h4>
+                    <button onclick="testStyleSync()" style="
+                        background: linear-gradient(135deg, #10B981, #14B8A6);
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        margin: 10px 0;
+                    ">
+                        🎨 Test Changement Couleur
+                    </button>
+                    <p style="font-size: 12px; color: #9CA3AF;">
+                        Cliquez pour tester si la synchronisation fonctionne.<br>
+                        Regardez la console pour les logs détaillés.
+                    </p>
                 </div>
             </div>
             
@@ -934,7 +1089,7 @@
                         </select>
                     </label>
                     <label>Couleur Texte VS:
-                        <input type="color" id="vsTextColor" value="#1E293B">
+                        <input type="color" id="vsTextColor" data-field="style-vsTextColor" value="#1E293B">
                     </label>
                     <label>Police VS:
                         <select id="vsFontFamily">
@@ -1852,7 +2007,17 @@
                     <!-- Synchronisation : Modification temps réel entre édition et présentation -->
                     
                     <!-- Faiblesse 1 : Cadmium Toxique -->
-                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                    <div class="content-block weakness-block" data-index="1" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;">
+                        <!-- Boutons de contrôle pour cette section -->
+                        <div class="section-controls-individual">
+                            <button class="btn-control btn-add-after" onclick="addWeaknessAfter(1)" title="Ajouter une faiblesse après celle-ci">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn-control btn-remove-this" onclick="removeWeaknessAt(1)" title="Supprimer cette faiblesse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        
                         <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
                             <input type="text" class="field-input" data-field="weakness1-emoji" placeholder="☠️" value="☠️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
                             <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 1</small>
@@ -1872,7 +2037,17 @@
                     </div>
                     
                     <!-- Faiblesse 2 : Maintenance Coûteuse -->
-                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                    <div class="content-block weakness-block" data-index="2" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;">
+                        <!-- Boutons de contrôle pour cette section -->
+                        <div class="section-controls-individual">
+                            <button class="btn-control btn-add-after" onclick="addWeaknessAfter(2)" title="Ajouter une faiblesse après celle-ci">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn-control btn-remove-this" onclick="removeWeaknessAt(2)" title="Supprimer cette faiblesse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        
                         <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
                             <input type="text" class="field-input" data-field="weakness2-emoji" placeholder="🔧" value="🔧" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
                             <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 2</small>
@@ -1892,7 +2067,17 @@
                     </div>
                     
                     <!-- Faiblesse 3 : Durée de Vie Limitée -->
-                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                    <div class="content-block weakness-block" data-index="3" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;">
+                        <!-- Boutons de contrôle pour cette section -->
+                        <div class="section-controls-individual">
+                            <button class="btn-control btn-add-after" onclick="addWeaknessAfter(3)" title="Ajouter une faiblesse après celle-ci">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn-control btn-remove-this" onclick="removeWeaknessAt(3)" title="Supprimer cette faiblesse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        
                         <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
                             <input type="text" class="field-input" data-field="weakness3-emoji" placeholder="⏳" value="⏳" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
                             <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 3</small>
@@ -2071,10 +2256,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="block-buttons">
-                    <button type="button" onclick="addWeakness()">Ajouter</button>
-                    <button type="button" onclick="removeWeakness()">Supprimer</button>
-                </div>
+                <!-- BOUTONS GLOBAUX REMPLACÉS PAR BOUTONS INDIVIDUELS SUR CHAQUE SECTION -->
 
                 <!-- AVANTAGES AVEC MINI-SECTIONS EMOJI -->
                 <div id="strengths-container" style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--success-green);">
@@ -2086,7 +2268,17 @@
                     <!-- Structure : Mini-section emoji au-dessus de chaque groupe de contenu -->
                     <!-- Synchronisation : Modification temps réel entre édition et présentation -->
                     <!-- Avantage 1 : Durée Vie Exceptionnelle -->
-                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                    <div class="content-block strength-block" data-index="1" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;">
+                        <!-- Boutons de contrôle pour cette section -->
+                        <div class="section-controls-individual">
+                            <button class="btn-control btn-add-after" onclick="addStrengthAfter(1)" title="Ajouter un avantage après celui-ci">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn-control btn-remove-this" onclick="removeStrengthAt(1)" title="Supprimer cet avantage">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        
                         <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
                             <input type="text" class="field-input" data-field="strength1-emoji" placeholder="🔋" value="🔋" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
                             <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 1</small>
@@ -2325,10 +2517,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="block-buttons">
-                    <button type="button" onclick="addStrength()">Ajouter</button>
-                    <button type="button" onclick="removeStrength()">Supprimer</button>
-                </div>
+                <!-- BOUTONS GLOBAUX REMPLACÉS PAR BOUTONS INDIVIDUELS SUR CHAQUE SECTION -->
                 </div>
 
                 <!-- Conclusion comparative -->
@@ -2554,9 +2743,6 @@ Fabrication et Support 100% Québécois</div>
     <!-- Core EDS Framework - Version Compatible Navigateur -->
     <script src="js/core/eds-framework.js"></script>
     
-    <!-- Dépendance : Détection du type de page pour InstantSync -->
-    <script src="js/page-type.js"></script>
-    
     <!-- Système de Synchronisation Instantanée -->
     <script src="js/instant-sync.js"></script>
     
@@ -2595,7 +2781,7 @@ Fabrication et Support 100% Québécois</div>
             
             // Délai court pour laisser le temps au framework et InstantSync de s'initialiser
             setTimeout(() => {
-                if (window.EDSFramework && window.EDSProductTemplates) {
+                if (window.EDSFramework && window.EDSFramework.admin) {
                     console.log('✅ EDS Framework chargé avec succès');
                     console.log('📊 API disponible:', {
                         framework: !!window.EDSFramework,
@@ -2636,11 +2822,25 @@ Fabrication et Support 100% Québécois</div>
          * Type : Event handler pour le bouton admin
          */
         function toggleEDSAdmin() {
+            console.log('🔍 Diagnostic EDS Admin:');
+            console.log('- window.EDSFramework:', !!window.EDSFramework);
+            console.log('- typeof EDSFramework:', typeof window.EDSFramework);
+            console.log('- EDSFramework.admin:', !!window.EDSFramework?.admin);
+            console.log('- EDSFramework complet:', window.EDSFramework);
+
             if (window.EDSFramework && window.EDSFramework.admin) {
+                console.log('✅ Ouverture interface EDS Admin');
                 window.EDSFramework.admin.toggle();
             } else {
                 console.error('❌ EDS Framework Admin non disponible');
-                alert('Interface EDS Admin non disponible. Vérifiez que le framework est chargé correctement.');
+                console.error('État détaillé:', {
+                    hasEDSFramework: !!window.EDSFramework,
+                    EDSFrameworkType: typeof window.EDSFramework,
+                    hasAdmin: !!window.EDSFramework?.admin,
+                    adminType: typeof window.EDSFramework?.admin,
+                    windowKeys: Object.keys(window).filter(key => key.includes('EDS'))
+                });
+                alert('Interface EDS Admin non disponible.\n\nVérifiez la console pour plus de détails.');
             }
         }
         
@@ -2738,31 +2938,84 @@ Fabrication et Support 100% Québécois</div>
 
     <template id="weakness-template">
         <div class="content-block">
-            <div class="edit-field">
-                <label class="field-label" for="weaknessX-title">Faiblesse X - Titre</label>
-                <input type="text" id="weaknessX-title" class="field-input" data-field="weaknessX-title" placeholder="Titre de la faiblesse">
+            <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                <input type="text" class="field-input" data-field="weaknessX-emoji" placeholder="❓" value="❓" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse X</small>
             </div>
-            <div class="edit-field">
-                <label class="field-label" for="weaknessX-desc">Faiblesse X - Description</label>
-                <div contenteditable="true" id="weaknessX-desc" class="field-input field-textarea" data-field="weaknessX-desc" data-placeholder="Description détaillée"></div>
+            <div class="content-fields">
+                <div class="edit-field">
+                    <label class="field-label" for="weaknessX-title">Titre</label>
+                    <input type="text" id="weaknessX-title" class="field-input" data-field="weaknessX-title" placeholder="Titre de la faiblesse">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="weaknessX-desc">Description</label>
+                    <div contenteditable="true" id="weaknessX-desc" class="field-input field-textarea" data-field="weaknessX-desc" data-placeholder="Description détaillée"></div>
+                </div>
             </div>
         </div>
     </template>
 
     <template id="strength-template">
         <div class="content-block">
-            <div class="edit-field">
-                <label class="field-label" for="strengthX-title">Avantage X - Titre</label>
-                <input type="text" id="strengthX-title" class="field-input" data-field="strengthX-title" placeholder="Titre de l'avantage">
+            <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                <input type="text" class="field-input" data-field="strengthX-emoji" placeholder="⭐" value="⭐" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage X</small>
             </div>
-            <div class="edit-field">
-                <label class="field-label" for="strengthX-desc">Avantage X - Description</label>
-                <div contenteditable="true" id="strengthX-desc" class="field-input field-textarea" data-field="strengthX-desc" data-placeholder="Description détaillée"></div>
+            <div class="content-fields">
+                <div class="edit-field">
+                    <label class="field-label" for="strengthX-title">Titre</label>
+                    <input type="text" id="strengthX-title" class="field-input" data-field="strengthX-title" placeholder="Titre de l'avantage">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="strengthX-desc">Description</label>
+                    <div contenteditable="true" id="strengthX-desc" class="field-input field-textarea" data-field="strengthX-desc" data-placeholder="Description détaillée"></div>
+                </div>
             </div>
         </div>
     </template>
 
     
     <script src="js/edit-location.js"></script>
+    
+    <script>
+        // Fonction de test pour diagnostiquer la synchronisation
+        function testStyleSync() {
+            console.log('🧪 === TEST DE SYNCHRONISATION DÉMARRÉ ===');
+            
+            // Test 1 : Vérifier qu'InstantSync est initialisé
+            console.log('1️⃣ Vérification InstantSync:', !!window.instantSync);
+            console.log('   - isInitialized:', window.instantSync?.isInitialized);
+            
+            // Test 2 : Changer programmatiquement une couleur
+            const primaryDarkInput = document.getElementById('primaryDark');
+            console.log('2️⃣ Input primaryDark trouvé:', !!primaryDarkInput);
+            console.log('   - data-field:', primaryDarkInput?.dataset.field);
+            console.log('   - valeur actuelle:', primaryDarkInput?.value);
+            
+            if (primaryDarkInput) {
+                // Changer la couleur pour déclencher la synchronisation
+                const newColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+                console.log('3️⃣ Changement couleur vers:', newColor);
+                
+                primaryDarkInput.value = newColor;
+                
+                // Déclencher les événements manuellement
+                primaryDarkInput.dispatchEvent(new Event('input', { bubbles: true }));
+                primaryDarkInput.dispatchEvent(new Event('change', { bubbles: true }));
+                
+                console.log('4️⃣ Événements input et change déclenchés');
+            }
+            
+            // Test 3 : Vérifier le stockage après 1 seconde
+            setTimeout(() => {
+                const stored = localStorage.getItem('licubepro-locationVSOLD-live');
+                console.log('5️⃣ Données localStorage:', stored ? JSON.parse(stored) : 'Aucune');
+                console.log('🧪 === FIN TEST DE SYNCHRONISATION ===');
+            }, 1000);
+        }
+    </script>
+    
+    <!-- Script temporaire de correction automatique des sections -->
+    <script src="fix-sections.js"></script>
     </body>
 </html>

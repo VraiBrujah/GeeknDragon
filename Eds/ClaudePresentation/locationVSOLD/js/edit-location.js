@@ -1174,21 +1174,59 @@ document.addEventListener('DOMContentLoaded', () => {
  * @returns {void}
  */
 window.addWeakness = function () {
+  console.log(`➕ Ajout d'une nouvelle faiblesse: weakness${weaknessIndex + 1}`);
+  
   weaknessIndex += 1;
   const template = document.getElementById('weakness-template').content.cloneNode(true);
+  
+  // Configuration : nouveaux champs avec data-field appropriés
   template.querySelectorAll('[data-field]').forEach((el) => {
-    const type = el.dataset.field.endsWith('-title') ? 'title' : 'desc';
-    el.id = `weakness${weaknessIndex}-${type}`;
-    el.dataset.field = `weakness${weaknessIndex}-${type}`;
-    if (window.instantSync && typeof window.instantSync.registerField === 'function') {
-      window.instantSync.registerField(el);
+    const fieldType = el.dataset.field.endsWith('-title') ? 'title' : 'desc';
+    const newFieldName = `weakness${weaknessIndex}-${fieldType}`;
+    
+    el.id = `weakness${weaknessIndex}-${fieldType}`;
+    el.dataset.field = newFieldName;
+    
+    // Enregistrement : champ pour synchronisation instantanée
+    if (window.instantSync && typeof window.instantSync.setupInstantListeners === 'function') {
+      // Re-configuration des listeners pour le nouveau champ
+      setTimeout(() => {
+        window.instantSync.setupInstantListeners();
+        console.log(`📝 Nouveau champ enregistré: ${newFieldName}`);
+      }, 100);
     }
   });
+  
+  // Mise à jour : labels pour cohérence visuelle
   template.querySelectorAll('label').forEach((label) => {
-    label.setAttribute('for', label.getAttribute('for').replace('X', weaknessIndex));
-    label.textContent = label.textContent.replace('X', weaknessIndex);
+    const currentFor = label.getAttribute('for');
+    const currentText = label.textContent;
+    
+    if (currentFor) {
+      label.setAttribute('for', currentFor.replace('X', weaknessIndex));
+    }
+    if (currentText) {
+      label.textContent = currentText.replace('X', weaknessIndex);
+    }
   });
+  
+  // Ajout : nouveau bloc au conteneur
   document.getElementById('weaknesses-container').appendChild(template);
+  
+  // Synchronisation : notification temps réel vers présentation
+  if (window.instantSync) {
+    window.instantSync.executeInstantSync(true); // Force full sync
+    console.log(`✅ Faiblesse ajoutée et synchronisée: weakness${weaknessIndex}`);
+  }
+  
+  // Animation : scroll vers le nouveau champ
+  setTimeout(() => {
+    const newField = document.getElementById(`weakness${weaknessIndex}-title`);
+    if (newField) {
+      newField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      newField.focus();
+    }
+  }, 200);
 };
 
 /**
@@ -1199,9 +1237,33 @@ window.addWeakness = function () {
 window.removeWeakness = function () {
   const container = document.getElementById('weaknesses-container');
   const blocks = container.querySelectorAll('.content-block');
+  
   if (blocks.length > 0) {
-    container.removeChild(blocks[blocks.length - 1]);
-    weaknessIndex -= 1;
+    const blockToRemove = blocks[blocks.length - 1];
+    const fieldName = `weakness${weaknessIndex}`;
+    
+    console.log(`🗑️ Suppression de la faiblesse: ${fieldName}`);
+    
+    // Animation : fade out avant suppression
+    blockToRemove.style.transition = 'all 0.3s ease';
+    blockToRemove.style.opacity = '0';
+    blockToRemove.style.transform = 'translateX(100px)';
+    
+    setTimeout(() => {
+      // Suppression : du DOM
+      container.removeChild(blockToRemove);
+      weaknessIndex -= 1;
+      
+      // Synchronisation : notification temps réel vers présentation  
+      if (window.instantSync) {
+        window.instantSync.executeInstantSync(true); // Force full sync
+        console.log(`✅ Faiblesse supprimée et synchronisée: ${fieldName}`);
+      }
+      
+      console.log(`📊 Nouvelles faiblesses actives: ${weaknessIndex}`);
+    }, 300);
+  } else {
+    console.warn('⚠️ Aucune faiblesse à supprimer');
   }
 };
 
@@ -1211,21 +1273,59 @@ window.removeWeakness = function () {
  * @returns {void}
  */
 window.addStrength = function () {
+  console.log(`➕ Ajout d'un nouvel avantage: strength${strengthIndex + 1}`);
+  
   strengthIndex += 1;
   const template = document.getElementById('strength-template').content.cloneNode(true);
+  
+  // Configuration : nouveaux champs avec data-field appropriés
   template.querySelectorAll('[data-field]').forEach((el) => {
-    const type = el.dataset.field.endsWith('-title') ? 'title' : 'desc';
-    el.id = `strength${strengthIndex}-${type}`;
-    el.dataset.field = `strength${strengthIndex}-${type}`;
-    if (window.instantSync && typeof window.instantSync.registerField === 'function') {
-      window.instantSync.registerField(el);
+    const fieldType = el.dataset.field.endsWith('-title') ? 'title' : 'desc';
+    const newFieldName = `strength${strengthIndex}-${fieldType}`;
+    
+    el.id = `strength${strengthIndex}-${fieldType}`;
+    el.dataset.field = newFieldName;
+    
+    // Enregistrement : champ pour synchronisation instantanée
+    if (window.instantSync && typeof window.instantSync.setupInstantListeners === 'function') {
+      // Re-configuration des listeners pour le nouveau champ
+      setTimeout(() => {
+        window.instantSync.setupInstantListeners();
+        console.log(`📝 Nouveau champ enregistré: ${newFieldName}`);
+      }, 100);
     }
   });
+  
+  // Mise à jour : labels pour cohérence visuelle
   template.querySelectorAll('label').forEach((label) => {
-    label.setAttribute('for', label.getAttribute('for').replace('X', strengthIndex));
-    label.textContent = label.textContent.replace('X', strengthIndex);
+    const currentFor = label.getAttribute('for');
+    const currentText = label.textContent;
+    
+    if (currentFor) {
+      label.setAttribute('for', currentFor.replace('X', strengthIndex));
+    }
+    if (currentText) {
+      label.textContent = currentText.replace('X', strengthIndex);
+    }
   });
+  
+  // Ajout : nouveau bloc au conteneur
   document.getElementById('strengths-container').appendChild(template);
+  
+  // Synchronisation : notification temps réel vers présentation
+  if (window.instantSync) {
+    window.instantSync.executeInstantSync(true); // Force full sync
+    console.log(`✅ Avantage ajouté et synchronisé: strength${strengthIndex}`);
+  }
+  
+  // Animation : scroll vers le nouveau champ
+  setTimeout(() => {
+    const newField = document.getElementById(`strength${strengthIndex}-title`);
+    if (newField) {
+      newField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      newField.focus();
+    }
+  }, 200);
 };
 
 /**
@@ -1236,11 +1336,529 @@ window.addStrength = function () {
 window.removeStrength = function () {
   const container = document.getElementById('strengths-container');
   const blocks = container.querySelectorAll('.content-block');
+  
   if (blocks.length > 0) {
-    container.removeChild(blocks[blocks.length - 1]);
-    strengthIndex -= 1;
+    const blockToRemove = blocks[blocks.length - 1];
+    const fieldName = `strength${strengthIndex}`;
+    
+    console.log(`🗑️ Suppression de l'avantage: ${fieldName}`);
+    
+    // Animation : fade out avant suppression
+    blockToRemove.style.transition = 'all 0.3s ease';
+    blockToRemove.style.opacity = '0';
+    blockToRemove.style.transform = 'translateX(100px)';
+    
+    setTimeout(() => {
+      // Suppression : du DOM
+      container.removeChild(blockToRemove);
+      strengthIndex -= 1;
+      
+      // Synchronisation : notification temps réel vers présentation  
+      if (window.instantSync) {
+        window.instantSync.executeInstantSync(true); // Force full sync
+        console.log(`✅ Avantage supprimé et synchronisé: ${fieldName}`);
+      }
+      
+      console.log(`📊 Nouveaux avantages actifs: ${strengthIndex}`);
+    }, 300);
+  } else {
+    console.warn('⚠️ Aucun avantage à supprimer');
   }
 };
+
+/**
+ * NOUVEAU SYSTÈME : Gestion individuelle des sections de faiblesses/avantages
+ * Rôle : Ajouter/Supprimer des sections spécifiques avec boutons + et - sur chaque bloc
+ */
+
+/**
+ * Ajoute une nouvelle faiblesse après l'index spécifié
+ * @param {number} afterIndex - Index de la faiblesse après laquelle ajouter
+ */
+window.addWeaknessAfter = function(afterIndex) {
+  console.log(`➕ Ajout faiblesse après index ${afterIndex}`);
+  
+  // Recherche : conteneur et élément de référence
+  const container = document.getElementById('weaknesses-container');
+  const refBlock = container.querySelector(`.weakness-block[data-index="${afterIndex}"]`);
+  
+  if (!refBlock) {
+    console.error(`❌ Élément de référence non trouvé: weakness-block[data-index="${afterIndex}"]`);
+    return;
+  }
+  
+  // Calcul : nouvel index = toujours à la fin (plus simple pour synchronisation)
+  const existingIndexes = Array.from(container.querySelectorAll('.weakness-block'))
+    .map(el => parseInt(el.dataset.index))
+    .sort((a, b) => a - b);
+  
+  const newIndex = Math.max(...existingIndexes) + 1;
+  console.log(`🔢 Nouvel index assigné: ${newIndex} (ajout à la fin pour simplicité)`);
+  
+  // Création : nouveau bloc à partir du template
+  const template = document.getElementById('weakness-template');
+  if (!template) {
+    console.error('❌ Template weakness-template non trouvé');
+    return;
+  }
+  
+  const newBlock = template.content.cloneNode(true);
+  const blockDiv = newBlock.querySelector('.content-block');
+  
+  // Configuration : attributs et IDs pour le nouveau bloc
+  blockDiv.classList.add('weakness-block');
+  blockDiv.dataset.index = newIndex;
+  blockDiv.style.cssText = "background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;";
+  
+  // Ajout : boutons de contrôle
+  const controlsHtml = `
+    <div class="section-controls-individual">
+      <button class="btn-control btn-add-after" onclick="addWeaknessAfter(${newIndex})" title="Ajouter une faiblesse après celle-ci">
+        <i class="fas fa-plus"></i>
+      </button>
+      <button class="btn-control btn-remove-this" onclick="removeWeaknessAt(${newIndex})" title="Supprimer cette faiblesse">
+        <i class="fas fa-minus"></i>
+      </button>
+    </div>
+  `;
+  blockDiv.insertAdjacentHTML('afterbegin', controlsHtml);
+  
+  // Configuration : champs data-field avec nouvel index
+  newBlock.querySelectorAll('[data-field]').forEach(element => {
+    const oldField = element.dataset.field;
+    const fieldType = oldField.includes('-emoji') ? 'emoji' : (oldField.includes('-title') ? 'title' : 'desc');
+    const newFieldName = `weakness${newIndex}-${fieldType}`;
+    
+    element.dataset.field = newFieldName;
+    if (element.id) {
+      element.id = `weakness${newIndex}-${fieldType}`;
+    }
+    
+    // Valeurs par défaut
+    if (fieldType === 'emoji') {
+      element.value = '❓';
+      element.placeholder = '❓';
+    } else if (fieldType === 'title') {
+      element.value = `Nouvelle Faiblesse ${newIndex}`;
+      element.placeholder = `Titre faiblesse ${newIndex}`;
+    } else {
+      element.textContent = `Description de la faiblesse ${newIndex}`;
+    }
+  });
+  
+  // Configuration : labels
+  newBlock.querySelectorAll('label').forEach(label => {
+    const forAttr = label.getAttribute('for');
+    if (forAttr) {
+      const fieldType = forAttr.includes('title') ? 'title' : (forAttr.includes('desc') ? 'desc' : 'emoji');
+      label.setAttribute('for', `weakness${newIndex}-${fieldType}`);
+    }
+    if (label.textContent.includes('X')) {
+      label.textContent = label.textContent.replace('X', newIndex);
+    }
+  });
+  
+  // Insertion : toujours à la fin du conteneur avec animation
+  blockDiv.style.opacity = '0';
+  blockDiv.style.transform = 'translateY(-20px)';
+  container.appendChild(blockDiv);
+  
+  // Animation : apparition
+  setTimeout(() => {
+    blockDiv.style.transition = 'all 0.5s ease';
+    blockDiv.style.opacity = '1';
+    blockDiv.style.transform = 'translateY(0)';
+  }, 100);
+  
+  // Synchronisation : temps réel COMPLÈTE
+  if (window.instantSync) {
+    // 1. Re-setup listeners pour nouveaux éléments
+    setTimeout(() => {
+      window.instantSync.setupInstantListeners();
+    }, 100);
+    
+    // 2. Sauvegarde immédiate des nouveaux champs
+    setTimeout(() => {
+      const newFields = {
+        [`weakness${newIndex}-emoji`]: document.querySelector(`[data-field="weakness${newIndex}-emoji"]`)?.value || '❓',
+        [`weakness${newIndex}-title`]: document.querySelector(`[data-field="weakness${newIndex}-title"]`)?.value || `Nouvelle Faiblesse ${newIndex}`,
+        [`weakness${newIndex}-desc`]: document.querySelector(`[data-field="weakness${newIndex}-desc"]`)?.textContent || `Description de la faiblesse ${newIndex}`
+      };
+      
+      // Force l'enregistrement de chaque nouveau champ
+      Object.entries(newFields).forEach(([fieldName, value]) => {
+        window.instantSync.saveFieldValue(fieldName, value);
+      });
+      
+      // Force sync globale pour s'assurer
+      window.instantSync.executeInstantSync(true);
+      console.log('💾 Sauvegarde forcée des nouveaux champs:', newFields);
+    }, 300);
+  }
+  
+  // Focus : sur le nouveau titre
+  setTimeout(() => {
+    const newTitleField = document.getElementById(`weakness${newIndex}-title`);
+    if (newTitleField) {
+      newTitleField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      newTitleField.focus();
+      newTitleField.select();
+    }
+  }, 600);
+  
+  console.log(`✅ Nouvelle faiblesse ajoutée: weakness${newIndex}`);
+};
+
+/**
+ * Supprime la faiblesse à l'index spécifié avec renéumérotation automatique
+ * @param {number} index - Index de la faiblesse à supprimer
+ */
+window.removeWeaknessAt = function(index) {
+  console.log(`🗑️ Suppression faiblesse à l'index ${index}`);
+  
+  const container = document.getElementById('weaknesses-container');
+  const blockToRemove = container.querySelector(`.weakness-block[data-index="${index}"]`);
+  
+  if (!blockToRemove) {
+    console.warn(`⚠️ Faiblesse non trouvée à l'index ${index}`);
+    return;
+  }
+  
+  // Vérification : au moins une faiblesse doit rester
+  const remainingBlocks = container.querySelectorAll('.weakness-block').length;
+  if (remainingBlocks <= 1) {
+    alert('⚠️ Impossible de supprimer la dernière faiblesse. Il doit en rester au moins une.');
+    return;
+  }
+  
+  // Animation : fade out
+  blockToRemove.classList.add('removing');
+  
+  setTimeout(() => {
+    // Suppression : du DOM
+    blockToRemove.remove();
+    
+    // Renéumérotation : automatique de toutes les faiblesses
+    renumberWeaknesses();
+    
+    // Synchronisation : temps réel
+    if (window.instantSync) {
+      window.instantSync.executeInstantSync(true); // Force full sync
+    }
+    
+    console.log(`✅ Faiblesse supprimée: weakness${index} et renéumérotation effectuée`);
+  }, 400);
+};
+
+/**
+ * Renéumérotation automatique de toutes les faiblesses
+ * Rôle : Réorganise les index pour éviter les trous de numérotation
+ */
+function renumberWeaknesses() {
+  console.log('🔢 Début renéumérotation des faiblesses');
+  
+  const container = document.getElementById('weaknesses-container');
+  const blocks = Array.from(container.querySelectorAll('.weakness-block')).sort((a, b) => {
+    return parseInt(a.dataset.index) - parseInt(b.dataset.index);
+  });
+  
+  blocks.forEach((block, index) => {
+    const newIndex = index + 1;
+    const oldIndex = block.dataset.index;
+    
+    if (oldIndex != newIndex) {
+      console.log(`📝 Renéumérotation faiblesse ${oldIndex} → ${newIndex}`);
+      
+      // Mise à jour : attributs du bloc
+      block.dataset.index = newIndex;
+      
+      // Mise à jour : tous les champs data-field
+      block.querySelectorAll('[data-field]').forEach(element => {
+        const oldField = element.dataset.field;
+        const fieldType = oldField.includes('-emoji') ? 'emoji' : (oldField.includes('-title') ? 'title' : 'desc');
+        const newField = `weakness${newIndex}-${fieldType}`;
+        
+        element.dataset.field = newField;
+        if (element.id) {
+          element.id = `weakness${newIndex}-${fieldType}`;
+        }
+      });
+      
+      // Mise à jour : labels
+      block.querySelectorAll('label').forEach(label => {
+        const forAttr = label.getAttribute('for');
+        if (forAttr) {
+          const fieldType = forAttr.includes('title') ? 'title' : (forAttr.includes('desc') ? 'desc' : 'emoji');
+          label.setAttribute('for', `weakness${newIndex}-${fieldType}`);
+        }
+      });
+      
+      // Mise à jour : texte des labels
+      const smallLabel = block.querySelector('.emoji-header small');
+      if (smallLabel) {
+        smallLabel.textContent = `Faiblesse ${newIndex}`;
+      }
+      
+      // Mise à jour : boutons onclick
+      const addButton = block.querySelector('.btn-add-after');
+      const removeButton = block.querySelector('.btn-remove-this');
+      
+      if (addButton) {
+        addButton.setAttribute('onclick', `addWeaknessAfter(${newIndex})`);
+      }
+      if (removeButton) {
+        removeButton.setAttribute('onclick', `removeWeaknessAt(${newIndex})`);
+      }
+    }
+  });
+  
+  console.log(`✅ Renéumérotation terminée: ${blocks.length} faiblesses`);
+}
+
+/**
+ * Renéumérotation automatique de tous les avantages
+ * Rôle : Réorganise les index pour éviter les trous de numérotation
+ */
+function renumberStrengths() {
+  console.log('🔢 Début renéumérotation des avantages');
+  
+  const container = document.getElementById('strengths-container');
+  const blocks = Array.from(container.querySelectorAll('.strength-block')).sort((a, b) => {
+    return parseInt(a.dataset.index) - parseInt(b.dataset.index);
+  });
+  
+  blocks.forEach((block, index) => {
+    const newIndex = index + 1;
+    const oldIndex = block.dataset.index;
+    
+    if (oldIndex != newIndex) {
+      console.log(`📝 Renéumérotation avantage ${oldIndex} → ${newIndex}`);
+      
+      // Mise à jour : attributs du bloc
+      block.dataset.index = newIndex;
+      
+      // Mise à jour : tous les champs data-field
+      block.querySelectorAll('[data-field]').forEach(element => {
+        const oldField = element.dataset.field;
+        const fieldType = oldField.includes('-emoji') ? 'emoji' : (oldField.includes('-title') ? 'title' : 'desc');
+        const newField = `strength${newIndex}-${fieldType}`;
+        
+        element.dataset.field = newField;
+        if (element.id) {
+          element.id = `strength${newIndex}-${fieldType}`;
+        }
+      });
+      
+      // Mise à jour : labels
+      block.querySelectorAll('label').forEach(label => {
+        const forAttr = label.getAttribute('for');
+        if (forAttr) {
+          const fieldType = forAttr.includes('title') ? 'title' : (forAttr.includes('desc') ? 'desc' : 'emoji');
+          label.setAttribute('for', `strength${newIndex}-${fieldType}`);
+        }
+      });
+      
+      // Mise à jour : texte des labels
+      const smallLabel = block.querySelector('.emoji-header small');
+      if (smallLabel) {
+        smallLabel.textContent = `Avantage ${newIndex}`;
+      }
+      
+      // Mise à jour : boutons onclick
+      const addButton = block.querySelector('.btn-add-after');
+      const removeButton = block.querySelector('.btn-remove-this');
+      
+      if (addButton) {
+        addButton.setAttribute('onclick', `addStrengthAfter(${newIndex})`);
+      }
+      if (removeButton) {
+        removeButton.setAttribute('onclick', `removeStrengthAt(${newIndex})`);
+      }
+    }
+  });
+  
+  console.log(`✅ Renéumérotation terminée: ${blocks.length} avantages`);
+}
+
+/**
+ * Ajoute un nouvel avantage après l'index spécifié
+ * @param {number} afterIndex - Index de l'avantage après lequel ajouter
+ */
+window.addStrengthAfter = function(afterIndex) {
+  console.log(`➕ Ajout avantage après index ${afterIndex}`);
+  
+  // Recherche : conteneur et élément de référence
+  const container = document.getElementById('strengths-container');
+  const refBlock = container.querySelector(`.strength-block[data-index="${afterIndex}"]`);
+  
+  if (!refBlock) {
+    console.error(`❌ Élément de référence non trouvé: strength-block[data-index="${afterIndex}"]`);
+    return;
+  }
+  
+  // Calcul : nouvel index = toujours à la fin (plus simple pour synchronisation)
+  const existingIndexes = Array.from(container.querySelectorAll('.strength-block'))
+    .map(el => parseInt(el.dataset.index))
+    .sort((a, b) => a - b);
+  
+  const newIndex = Math.max(...existingIndexes) + 1;
+  console.log(`🔢 Nouvel index assigné: ${newIndex} (ajout à la fin pour simplicité)`);
+  
+  // Création : nouveau bloc à partir du template
+  const template = document.getElementById('strength-template');
+  if (!template) {
+    console.error('❌ Template strength-template non trouvé');
+    return;
+  }
+  
+  const newBlock = template.content.cloneNode(true);
+  const blockDiv = newBlock.querySelector('.content-block');
+  
+  // Configuration : attributs et IDs pour le nouveau bloc
+  blockDiv.classList.add('strength-block');
+  blockDiv.dataset.index = newIndex;
+  blockDiv.style.cssText = "background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;";
+  
+  // Ajout : boutons de contrôle
+  const controlsHtml = `
+    <div class="section-controls-individual">
+      <button class="btn-control btn-add-after" onclick="addStrengthAfter(${newIndex})" title="Ajouter un avantage après celui-ci">
+        <i class="fas fa-plus"></i>
+      </button>
+      <button class="btn-control btn-remove-this" onclick="removeStrengthAt(${newIndex})" title="Supprimer cet avantage">
+        <i class="fas fa-minus"></i>
+      </button>
+    </div>
+  `;
+  blockDiv.insertAdjacentHTML('afterbegin', controlsHtml);
+  
+  // Configuration : champs data-field avec nouvel index
+  newBlock.querySelectorAll('[data-field]').forEach(element => {
+    const oldField = element.dataset.field;
+    const fieldType = oldField.includes('-emoji') ? 'emoji' : (oldField.includes('-title') ? 'title' : 'desc');
+    const newFieldName = `strength${newIndex}-${fieldType}`;
+    
+    element.dataset.field = newFieldName;
+    if (element.id) {
+      element.id = `strength${newIndex}-${fieldType}`;
+    }
+    
+    // Valeurs par défaut
+    if (fieldType === 'emoji') {
+      element.value = '⭐';
+      element.placeholder = '⭐';
+    } else if (fieldType === 'title') {
+      element.value = `Nouvel Avantage ${newIndex}`;
+      element.placeholder = `Titre avantage ${newIndex}`;
+    } else {
+      element.textContent = `Description de l'avantage ${newIndex}`;
+    }
+  });
+  
+  // Configuration : labels
+  newBlock.querySelectorAll('label').forEach(label => {
+    const forAttr = label.getAttribute('for');
+    if (forAttr) {
+      const fieldType = forAttr.includes('title') ? 'title' : (forAttr.includes('desc') ? 'desc' : 'emoji');
+      label.setAttribute('for', `strength${newIndex}-${fieldType}`);
+    }
+    if (label.textContent.includes('X')) {
+      label.textContent = label.textContent.replace('X', newIndex);
+    }
+  });
+  
+  // Insertion : toujours à la fin du conteneur avec animation
+  blockDiv.style.opacity = '0';
+  blockDiv.style.transform = 'translateY(-20px)';
+  container.appendChild(blockDiv);
+  
+  // Animation : apparition
+  setTimeout(() => {
+    blockDiv.style.transition = 'all 0.5s ease';
+    blockDiv.style.opacity = '1';
+    blockDiv.style.transform = 'translateY(0)';
+  }, 100);
+  
+  // Synchronisation : temps réel COMPLÈTE
+  if (window.instantSync) {
+    // 1. Re-setup listeners pour nouveaux éléments
+    setTimeout(() => {
+      window.instantSync.setupInstantListeners();
+    }, 100);
+    
+    // 2. Sauvegarde immédiate des nouveaux champs
+    setTimeout(() => {
+      const newFields = {
+        [`strength${newIndex}-emoji`]: document.querySelector(`[data-field="strength${newIndex}-emoji"]`)?.value || '⭐',
+        [`strength${newIndex}-title`]: document.querySelector(`[data-field="strength${newIndex}-title"]`)?.value || `Nouvel Avantage ${newIndex}`,
+        [`strength${newIndex}-desc`]: document.querySelector(`[data-field="strength${newIndex}-desc"]`)?.textContent || `Description de l'avantage ${newIndex}`
+      };
+      
+      // Force l'enregistrement de chaque nouveau champ
+      Object.entries(newFields).forEach(([fieldName, value]) => {
+        window.instantSync.saveFieldValue(fieldName, value);
+      });
+      
+      // Force sync globale pour s'assurer
+      window.instantSync.executeInstantSync(true);
+      console.log('💾 Sauvegarde forcée des nouveaux champs:', newFields);
+    }, 300);
+  }
+  
+  // Focus : sur le nouveau titre
+  setTimeout(() => {
+    const newTitleField = document.getElementById(`strength${newIndex}-title`);
+    if (newTitleField) {
+      newTitleField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      newTitleField.focus();
+      newTitleField.select();
+    }
+  }, 600);
+  
+  console.log(`✅ Nouvel avantage ajouté: strength${newIndex}`);
+};
+
+/**
+ * Supprime l'avantage à l'index spécifié avec renéumérotation automatique
+ * @param {number} index - Index de l'avantage à supprimer
+ */
+window.removeStrengthAt = function(index) {
+  console.log(`🗑️ Suppression avantage à l'index ${index}`);
+  
+  const container = document.getElementById('strengths-container');
+  const blockToRemove = container.querySelector(`.strength-block[data-index="${index}"]`);
+  
+  if (!blockToRemove) {
+    console.warn(`⚠️ Avantage non trouvé à l'index ${index}`);
+    return;
+  }
+  
+  // Vérification : au moins un avantage doit rester
+  const remainingBlocks = container.querySelectorAll('.strength-block').length;
+  if (remainingBlocks <= 1) {
+    alert('⚠️ Impossible de supprimer le dernier avantage. Il doit en rester au moins un.');
+    return;
+  }
+  
+  // Animation : fade out
+  blockToRemove.classList.add('removing');
+  
+  setTimeout(() => {
+    // Suppression : du DOM
+    blockToRemove.remove();
+    
+    // Renéumérotation : automatique de tous les avantages
+    renumberStrengths();
+    
+    // Synchronisation : temps réel
+    if (window.instantSync) {
+      window.instantSync.executeInstantSync(true); // Force full sync
+    }
+    
+    console.log(`✅ Avantage supprimé: strength${index} et renéumérotation effectuée`);
+  }, 400);
+};
+
 // Listener pour synchroniser les variables CSS de la page d'édition avec location.html
 let editPageStyleElement = null;
 

@@ -1192,7 +1192,7 @@
             // Exposition : méthodes publiques
             this.exposePublicAPI();
             
-            console.log('🎯 Framework EDS prêt à l'emploi');
+            console.log('🎯 Framework EDS pret a l\'emploi');
         }
 
         /**
@@ -1247,17 +1247,28 @@
         }
     }
 
-    // Initialisation : création de l'instance principale
-    const framework = new EDSFramework();
-    
-    // Démarrage : quand le DOM est prêt
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => framework.initialize());
-    } else {
-        framework.initialize();
+    // Initialisation : création de l'instance principale avec gestion d'erreurs
+    try {
+        console.log('🚀 Tentative d\'initialisation EDS Framework...');
+        const framework = new EDSFramework();
+        
+        // Démarrage : quand le DOM est prêt
+        if (document.readyState === 'loading') {
+            console.log('⏳ DOM en cours de chargement, attente...');
+            document.addEventListener('DOMContentLoaded', () => {
+                console.log('📄 DOM chargé, initialisation du framework...');
+                framework.initialize();
+            });
+        } else {
+            console.log('📄 DOM déjà chargé, initialisation immédiate...');
+            framework.initialize();
+        }
+    } catch (error) {
+        console.error('💥 Erreur fatale lors de l\'initialisation EDS Framework:', error);
+        console.error('Stack trace:', error.stack);
     }
     
-    // Exposition : instance globale pour compatibilité
-    window.EDSFramework = framework;
+    // Exposition : instance complète avec API publique 
+    // Note: L'API publique a déjà été exposée dans exposePublicAPI()
 
 })(window);

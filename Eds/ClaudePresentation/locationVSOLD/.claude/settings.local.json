@@ -3,7 +3,10 @@
     "allow": [
       "Bash(copy:*)",
       "Bash(xcopy:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(node:*)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD - Copie\\js/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD - Copie\\js/**)"
     ],
     "deny": [],
     "ask": []
