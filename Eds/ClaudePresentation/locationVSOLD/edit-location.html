@@ -864,6 +864,7 @@
     
     if (savedHtml) {
         console.log('🔄 Restauration du contenu HTML complet depuis localStorage');
+        console.log(`📊 Taille des données sauvegardées: ${savedHtml.length} caractères`);
         
         // Rôle : Parser DOM pour extraire le contenu du body
         // Type : DOMParser (API native du navigateur)
@@ -889,15 +890,84 @@
         // Exemple : '<div class="editor-header">...</div>'
         const newBodyContent = savedDoc.body.innerHTML;
         
-        // Formule : Remplacement complet du contenu body
-        // Symboles :
-        //   - document.body.innerHTML : contenu actuel du body [HTML]
-        //   - newBodyContent : nouveau contenu à restaurer [HTML]
-        // Hypothèses : newBodyContent est du HTML valide
-        // Exemple : Restauration complète de toutes les sections dynamiques
-        document.body.innerHTML = newBodyContent;
+        // APPROCHE SÉLECTIVE : restaurer seulement les sections dynamiques, pas tout le body
+        console.log('🔄 Restauration sélective des sections dynamiques...');
         
-        console.log('✅ Contenu restauré avec succès');
+        // Extraction : conteneurs de sections dynamiques depuis la sauvegarde
+        const weaknessContainer = savedDoc.querySelector('#weaknesses-container');
+        const strengthsContainer = savedDoc.querySelector('#strengths-container');
+        
+        // Restauration : sections de faiblesses
+        if (weaknessContainer) {
+            const currentWeaknessContainer = document.querySelector('#weaknesses-container');
+            if (currentWeaknessContainer) {
+                currentWeaknessContainer.innerHTML = weaknessContainer.innerHTML;
+                console.log('✅ Sections faiblesses restaurées');
+            }
+        }
+        
+        // Restauration : sections d'avantages  
+        if (strengthsContainer) {
+            const currentStrengthsContainer = document.querySelector('#strengths-container');
+            if (currentStrengthsContainer) {
+                currentStrengthsContainer.innerHTML = strengthsContainer.innerHTML;
+                console.log('✅ Sections avantages restaurées');
+            }
+        }
+        
+        console.log('✅ Sections dynamiques edit-location.html restaurées avec succès');
+        
+        // RESTAURATION des valeurs des champs éditables (maintenant que les sections existent)
+        setTimeout(() => {
+            // Rôle : Valeurs sauvegardées des champs éditables
+            // Type : Object (dictionnaire clé-valeur)
+            // Unité : Sans unité
+            // Domaine : Paires fieldName -> valeurSaisie
+            // Formule : JSON.parse(localStorage.getItem('licubepro-field-values'))
+            // Exemple : {"weakness11-title": "Remplacements Fréquents de la batterie"}
+            const savedFieldValues = JSON.parse(localStorage.getItem('licubepro-field-values') || '{}');
+            
+            if (Object.keys(savedFieldValues).length > 0) {
+                console.log(`🔄 Restauration de ${Object.keys(savedFieldValues).length} valeurs de champs...`);
+                
+                // Restauration : application des valeurs sauvegardées
+                Object.entries(savedFieldValues).forEach(([fieldName, value]) => {
+                    const field = document.querySelector(`[data-field="${fieldName}"]`);
+                    if (field && value) {
+                        // Formule : Assignation conditionnelle selon le type d'élément
+                        // Symboles :
+                        //   - field.value : pour input et textarea [String]
+                        //   - field.textContent : pour div et span éditables [String]
+                        // Hypothèses : field existe et value n'est pas vide
+                        // Exemple : field.value = "Remplacements Fréquents de la batterie"
+                        if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') {
+                            field.value = value;
+                        } else {
+                            field.textContent = value;
+                        }
+                        console.log(`✅ ${fieldName}: "${value}"`);
+                    }
+                });
+                
+                console.log('✅ Toutes les valeurs de champs restaurées');
+                
+                // RÉINITIALISATION : event listeners pour les nouveaux éléments
+                if (window.instantSync && typeof window.instantSync.setupInstantListeners === 'function') {
+                    window.instantSync.setupInstantListeners();
+                    console.log('🔄 Event listeners réinitialisés après restauration');
+                }
+                
+            } else {
+                console.log('ℹ️ Aucune valeur de champ sauvegardée trouvée');
+            }
+            
+            // Test : vérifier quelques champs restaurés
+            const testFields = document.querySelectorAll('[data-field]');
+            console.log(`📋 ${testFields.length} champs data-field détectés après restauration complète`);
+            
+        }, 200); // Délai augmenté pour s'assurer que tout est chargé
+    } else {
+        console.log('ℹ️ Aucune sauvegarde trouvée dans localStorage');
     }
 })();
 </script>

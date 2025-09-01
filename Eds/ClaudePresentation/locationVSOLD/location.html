@@ -901,6 +901,7 @@
     
     if (savedHtml) {
         console.log('🔄 Restauration du contenu HTML complet depuis localStorage (location.html)');
+        console.log(`📊 Taille des données location sauvegardées: ${savedHtml.length} caractères`);
         
         // Rôle : Parser DOM pour extraire le contenu du body
         // Type : DOMParser (API native du navigateur)
@@ -935,6 +936,14 @@
         document.body.innerHTML = newBodyContent;
         
         console.log('✅ Contenu location.html restauré avec succès');
+        
+        // Test : vérifier quelques champs restaurés
+        setTimeout(() => {
+            const testFields = document.querySelectorAll('[data-field]');
+            console.log(`📋 ${testFields.length} champs data-field détectés dans location.html après restauration`);
+        }, 100);
+    } else {
+        console.log('ℹ️ Aucune sauvegarde location.html trouvée dans localStorage');
     }
 })();
 </script>

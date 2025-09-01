@@ -1903,11 +1903,39 @@ function saveCompleteHtmlPages(action) {
     console.log(`💾 Sauvegarde directe des 2 pages: ${action}`);
     
     try {
-        // 1. Sauvegarde DIRECTE de edit-location.html (page actuelle)
+        // 1. CAPTURE des valeurs actuelles de tous les champs éditables
+        const fieldValues = {};
+        const editableFields = document.querySelectorAll('[data-field]');
+        
+        editableFields.forEach(field => {
+            const fieldName = field.dataset.field;
+            // Rôle : Valeur actuelle du champ (input, textarea, ou textContent)
+            // Type : String
+            // Unité : Sans unité
+            // Domaine : Texte saisi par l'utilisateur
+            // Formule : field.value || field.textContent || field.innerText
+            // Exemple : "Remplacements Fréquents de la batterie"
+            const currentValue = field.value || field.textContent || field.innerText || '';
+            fieldValues[fieldName] = currentValue;
+        });
+        
+        console.log(`📊 ${Object.keys(fieldValues).length} valeurs de champs capturées`);
+        
+        // 2. Sauvegarde des valeurs des champs séparément
+        localStorage.setItem('licubepro-field-values', JSON.stringify(fieldValues));
+        
+        // 3. Mise à jour des attributs value dans le DOM avant sauvegarde HTML
+        editableFields.forEach(field => {
+            if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') {
+                field.setAttribute('value', field.value);
+            }
+        });
+        
+        // 4. Sauvegarde DIRECTE de edit-location.html (page actuelle) avec valeurs à jour
         const editPageHtml = document.documentElement.outerHTML;
         localStorage.setItem('licubepro-edit-location-html-complete', editPageHtml);
         
-        console.log('✅ edit-location.html sauvegardé directement');
+        console.log('✅ edit-location.html et valeurs champs sauvegardés directement');
         
         // 2. Sauvegarde DIRECTE de location.html avec modifications appliquées
         const currentData = window.instantSync ? window.instantSync.loadContent() : {};

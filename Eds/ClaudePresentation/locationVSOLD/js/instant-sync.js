@@ -79,6 +79,10 @@ class InstantSync {
             if (field.dataset.field) {
                 const fieldName = field.dataset.field;
                 console.log(`📝 Event INPUT détecté sur: ${fieldName}`);
+                
+                // Sauvegarde immédiate des valeurs à chaque saisie
+                this.saveFieldValuesImmediately();
+                
                 this.scheduleInstantSync(fieldName, field);
             }
         };
@@ -88,6 +92,10 @@ class InstantSync {
             if (field.dataset.field) {
                 const fieldName = field.dataset.field;
                 console.log(`🎨 Event CHANGE détecté sur: ${fieldName}`);
+                
+                // Sauvegarde immédiate des valeurs lors du changement
+                this.saveFieldValuesImmediately();
+                
                 this.scheduleInstantSync(fieldName, field);
             }
         };
@@ -101,7 +109,7 @@ class InstantSync {
         
         // Initialisation : système de throttling pour sauvegarde auto
         this.lastAutoSave = 0;
-        this.autoSaveDelay = 5000; // 5 secondes minimum entre sauvegardes auto
+        this.autoSaveDelay = 1000; // 1 seconde minimum entre sauvegardes auto (réduit pour plus de réactivité)
         
         // Observer global : détecte les changements programmatiques sur tous les champs
         if (this.globalObserver) {
@@ -157,6 +165,55 @@ class InstantSync {
         
         this.lastAutoSave = now;
         return true;
+    }
+
+    /**
+     * Sauvegarde immédiate des valeurs de tous les champs éditables
+     * Sans throttling pour garantir la persistance temps réel
+     */
+    saveFieldValuesImmediately() {
+        try {
+            // Rôle : Dictionnaire des valeurs actuelles des champs
+            // Type : Object (clé-valeur)
+            // Unité : Sans unité
+            // Domaine : Paires fieldName -> valeurActuelle
+            // Formule : Parcours de tous les éléments [data-field]
+            // Exemple : {"weakness11-title": "Remplacements Fréquents de la batterie"}
+            const fieldValues = {};
+            const editableFields = document.querySelectorAll('[data-field]');
+            
+            // Extraction : valeurs actuelles de tous les champs
+            editableFields.forEach(field => {
+                const fieldName = field.dataset.field;
+                
+                // Rôle : Valeur actuelle selon le type d'élément
+                // Type : String
+                // Unité : Sans unité
+                // Domaine : Texte saisi ou contenu éditable
+                // Formule : Priorité value > textContent > innerText > ''
+                // Exemple : "Remplacements Fréquents de la batterie"
+                let currentValue = '';
+                
+                if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') {
+                    currentValue = field.value || '';
+                } else {
+                    currentValue = field.textContent || field.innerText || '';
+                }
+                
+                if (currentValue.trim()) { // Ne stocker que les valeurs non vides
+                    fieldValues[fieldName] = currentValue;
+                }
+            });
+            
+            // Sauvegarde : stockage immédiat dans localStorage
+            localStorage.setItem('licubepro-field-values', JSON.stringify(fieldValues));
+            
+            console.log(`💾 SAUVEGARDE IMMÉDIATE: ${Object.keys(fieldValues).length} valeurs de champs`);
+            console.log('📝 Valeurs sauvegardées:', fieldValues);
+            
+        } catch (error) {
+            console.error('❌ Erreur sauvegarde valeurs champs:', error);
+        }
     }
 
     /**
@@ -233,11 +290,19 @@ class InstantSync {
             // Notification : pages de présentation
             await this.notifyPresentationPage(fieldName, value, content);
             
+            // SAUVEGARDE IMMÉDIATE des valeurs de champs (sans throttling)
+            this.saveFieldValuesImmediately();
+            
             // SAUVEGARDE AUTOMATIQUE des 2 pages HTML après modification de champ
             if (window.saveCompleteHtmlPages && this.shouldAutoSave(fieldName)) {
+                console.log(`💾 Planification sauvegarde HTML pour: ${fieldName}`);
                 setTimeout(() => {
                     window.saveCompleteHtmlPages(`Modification ${fieldName}`);
-                }, 1000); // Délai plus long pour éviter trop de sauvegardes
+                }, 500); // Délai réduit pour sauvegardes plus rapides
+            } else if (window.saveCompleteHtmlPages) {
+                console.log(`⏭️ Sauvegarde HTML ignorée pour: ${fieldName} (throttling actif)`);
+            } else {
+                console.log(`❌ saveCompleteHtmlPages non disponible pour: ${fieldName}`);
             }
             
             // Compteur : suivi des modifications
