@@ -7,6 +7,10 @@
  * Répertoire de Travail : C:\Users\Brujah\Documents\GitHub\GeeknDragon\Eds\ClaudePresentation
  */
 
+const { sanitizeHTML } = typeof require !== 'undefined'
+    ? require('../utils/sanitizer')
+    : window;
+
 class SectionManager {
     constructor(framework) {
         // Rôle : Liaison avec le framework principal
@@ -732,7 +736,7 @@ class SectionManager {
         
         // Création : élément DOM
         const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = processedTemplate.trim();
+        tempDiv.innerHTML = sanitizeHTML(processedTemplate.trim());
         const sectionElement = tempDiv.firstElementChild;
         
         // Configuration : événements des contrôles
@@ -850,7 +854,7 @@ class SectionManager {
         // Création : dialog modal simple
         const dialog = document.createElement('div');
         dialog.className = 'add-field-dialog';
-        dialog.innerHTML = `
+        dialog.innerHTML = sanitizeHTML(`
             <div class="dialog-backdrop"></div>
             <div class="dialog-content">
                 <h3>Ajouter un champ</h3>
@@ -862,7 +866,7 @@ class SectionManager {
                 </div>
                 <button class="btn-cancel">Annuler</button>
             </div>
-        `;
+        `);
         
         document.body.appendChild(dialog);
         

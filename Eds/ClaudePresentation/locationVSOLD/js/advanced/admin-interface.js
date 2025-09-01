@@ -7,6 +7,10 @@
  * Répertoire de Travail : C:\Users\Brujah\Documents\GitHub\GeeknDragon\Eds\ClaudePresentation
  */
 
+const { sanitizeHTML } = typeof require !== 'undefined'
+    ? require('../utils/sanitizer')
+    : window;
+
 class AdminInterface {
     constructor(framework, sectionManager) {
         // Rôle : Services injectés
@@ -83,7 +87,7 @@ class AdminInterface {
         this.elements.panel = this.createElement('div', {
             id: 'admin-panel',
             className: `admin-panel panel-${this.config.panelPosition}`,
-            innerHTML: this.getMainPanelHTML()
+            innerHTML: sanitizeHTML(this.getMainPanelHTML())
         });
         
         // Insertion : dans le DOM
@@ -362,7 +366,9 @@ class AdminInterface {
         sections.sort((a, b) => a.position - b.position);
         
         // Génération : HTML des sections
-        sectionsList.innerHTML = sections.map(section => this.getSectionItemHTML(section)).join('');
+        sectionsList.innerHTML = sanitizeHTML(
+            sections.map(section => this.getSectionItemHTML(section)).join('')
+        );
         
         // Configuration : événements drag & drop
         this.setupSectionListDragDrop(sectionsList);
@@ -430,7 +436,9 @@ class AdminInterface {
         const templates = this.sectionManager.getAvailableTemplates();
         
         // Génération : HTML des templates
-        templatesGrid.innerHTML = templates.map(template => this.getTemplateCardHTML(template)).join('');
+        templatesGrid.innerHTML = sanitizeHTML(
+            templates.map(template => this.getTemplateCardHTML(template)).join('')
+        );
         
         // Configuration : événements des cartes
         templatesGrid.addEventListener('click', (e) => {
@@ -482,7 +490,7 @@ class AdminInterface {
         // Création : dialog modal
         const dialog = this.createElement('div', {
             className: 'add-section-dialog',
-            innerHTML: `
+            innerHTML: sanitizeHTML(`
                 <div class="dialog-backdrop"></div>
                 <div class="dialog-content">
                     <div class="dialog-header">
@@ -502,7 +510,7 @@ class AdminInterface {
                         </div>
                     </div>
                 </div>
-            `
+            `)
         });
         
         document.body.appendChild(dialog);
@@ -577,12 +585,12 @@ class AdminInterface {
         const contentEditor = this.elements.panel.querySelector('#content-editor');
         
         if (!sectionId) {
-            contentEditor.innerHTML = `
+            contentEditor.innerHTML = sanitizeHTML(`
                 <div class="no-selection">
                     <i class="fas fa-mouse-pointer"></i>
                     <p>Sélectionnez une section pour l'éditer</p>
                 </div>
-            `;
+            `);
             return;
         }
         
@@ -590,7 +598,7 @@ class AdminInterface {
         if (!section) return;
         
         // Génération : interface d'édition
-        contentEditor.innerHTML = this.getContentEditorHTML(section);
+        contentEditor.innerHTML = sanitizeHTML(this.getContentEditorHTML(section));
         
         // Configuration : événements d'édition
         this.setupContentEditorEvents(contentEditor, section);
@@ -884,7 +892,7 @@ class AdminInterface {
         
         Object.entries(options).forEach(([key, value]) => {
             if (key === 'innerHTML') {
-                element.innerHTML = value;
+                element.innerHTML = sanitizeHTML(value);
             } else if (key === 'className') {
                 element.className = value;
             } else {
@@ -904,7 +912,7 @@ class AdminInterface {
         // Création : notification
         const notification = this.createElement('div', {
             className: `admin-notification ${type}`,
-            innerHTML: `
+            innerHTML: sanitizeHTML(`
                 <div class="notification-content">
                     <i class="fas fa-${this.getNotificationIcon(type)}"></i>
                     <span>${message}</span>
@@ -912,7 +920,7 @@ class AdminInterface {
                 <button class="btn-close-notification">
                     <i class="fas fa-times"></i>
                 </button>
-            `
+            `)
         });
         
         // Insertion : en haut du panneau
@@ -1034,7 +1042,7 @@ class AdminInterface {
         if (!languagesContent) return;
         
         // HTML : contenu de l'onglet langues
-        languagesContent.innerHTML = this.getLanguagesTabHTML();
+        languagesContent.innerHTML = sanitizeHTML(this.getLanguagesTabHTML());
         
         // Configuration : événements de l'onglet langues
         this.setupLanguagesTabEvents();
@@ -1153,7 +1161,7 @@ class AdminInterface {
         // Interface : modale d'édition des traductions
         const modal = this.createElement('div', {
             className: 'translation-editor-modal',
-            innerHTML: `
+            innerHTML: sanitizeHTML(`
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3>Éditeur de traductions - ${language.toUpperCase()}</h3>
@@ -1165,7 +1173,7 @@ class AdminInterface {
                         </div>
                     </div>
                 </div>
-            `
+            `)
         });
         
         // Fermeture : modale
