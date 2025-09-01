@@ -99,6 +99,10 @@ class InstantSync {
         const editableFields = document.querySelectorAll('[data-field]');
         console.log(`📡 Délégation configurée pour ${editableFields.length} champs existants + futurs éléments`);
         
+        // Initialisation : système de throttling pour sauvegarde auto
+        this.lastAutoSave = 0;
+        this.autoSaveDelay = 5000; // 5 secondes minimum entre sauvegardes auto
+        
         // Observer global : détecte les changements programmatiques sur tous les champs
         if (this.globalObserver) {
             this.globalObserver.disconnect();
@@ -130,6 +134,29 @@ class InstantSync {
             subtree: true,
             attributeFilter: ['value']
         });
+    }
+
+    /**
+     * Détermine si une sauvegarde automatique des pages HTML doit être effectuée
+     * @param {string} fieldName - Nom du champ modifié
+     * @return {boolean} - True si la sauvegarde doit être effectuée
+     */
+    shouldAutoSave(fieldName) {
+        const now = Date.now();
+        
+        // Throttling : éviter trop de sauvegardes rapprochées
+        if (now - this.lastAutoSave < this.autoSaveDelay) {
+            return false;
+        }
+        
+        // Excluer : champs temporaires ou non-importants
+        const excludedFields = ['style-', 'temp-', 'preview-'];
+        if (excludedFields.some(prefix => fieldName.startsWith(prefix))) {
+            return false;
+        }
+        
+        this.lastAutoSave = now;
+        return true;
     }
 
     /**
@@ -205,6 +232,13 @@ class InstantSync {
             
             // Notification : pages de présentation
             await this.notifyPresentationPage(fieldName, value, content);
+            
+            // SAUVEGARDE AUTOMATIQUE des 2 pages HTML après modification de champ
+            if (window.saveCompleteHtmlPages && this.shouldAutoSave(fieldName)) {
+                setTimeout(() => {
+                    window.saveCompleteHtmlPages(`Modification ${fieldName}`);
+                }, 1000); // Délai plus long pour éviter trop de sauvegardes
+            }
             
             // Compteur : suivi des modifications
             this.syncCounter++;

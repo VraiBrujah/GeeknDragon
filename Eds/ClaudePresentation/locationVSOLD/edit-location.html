@@ -837,6 +837,70 @@
     </style>
 </head>
 <body>
+
+<!-- 🔄 Script de restauration automatique des modifications -->
+<!-- Rôle : Restaurer le contenu HTML complet sauvegardé dans localStorage -->
+<!-- Type : Script de restauration immédiate -->
+<!-- Domaine : Exécuté au chargement de page -->
+<!-- Formule : Si localStorage contient HTML complet → remplacer innerHTML -->
+<!-- Exemple : Restauration après ajout/suppression de sections -->
+<script>
+(function() {
+    // Rôle : Clé de stockage pour la page d'édition
+    // Type : String (identifiant localStorage)
+    // Unité : Sans unité
+    // Domaine : Chaîne de caractères non vide
+    // Formule : Préfixe 'licubepro-' + nom de la page
+    // Exemple : 'licubepro-edit-location-html-complete'
+    const storageKey = 'licubepro-edit-location-html-complete';
+    
+    // Rôle : Contenu HTML complet sauvegardé précédemment
+    // Type : String (HTML complet) ou null
+    // Unité : Sans unité
+    // Domaine : HTML valide ou null si pas de sauvegarde
+    // Formule : Récupération depuis localStorage
+    // Exemple : '<!DOCTYPE html><html>...</html>'
+    const savedHtml = localStorage.getItem(storageKey);
+    
+    if (savedHtml) {
+        console.log('🔄 Restauration du contenu HTML complet depuis localStorage');
+        
+        // Rôle : Parser DOM pour extraire le contenu du body
+        // Type : DOMParser (API native du navigateur)
+        // Unité : Sans unité
+        // Domaine : Instance valide de DOMParser
+        // Formule : new DOMParser() → instance de parsing HTML
+        // Exemple : Permet de transformer string HTML en DOM
+        const parser = new DOMParser();
+        
+        // Rôle : Document HTML parsé depuis la sauvegarde
+        // Type : Document (objet DOM)
+        // Unité : Sans unité
+        // Domaine : Document HTML valide
+        // Formule : parser.parseFromString(HTML, 'text/html')
+        // Exemple : Document DOM manipulable
+        const savedDoc = parser.parseFromString(savedHtml, 'text/html');
+        
+        // Rôle : Nouveau contenu du body à restaurer
+        // Type : String (HTML du body)
+        // Unité : Sans unité
+        // Domaine : HTML valide du body
+        // Formule : savedDoc.body.innerHTML
+        // Exemple : '<div class="editor-header">...</div>'
+        const newBodyContent = savedDoc.body.innerHTML;
+        
+        // Formule : Remplacement complet du contenu body
+        // Symboles :
+        //   - document.body.innerHTML : contenu actuel du body [HTML]
+        //   - newBodyContent : nouveau contenu à restaurer [HTML]
+        // Hypothèses : newBodyContent est du HTML valide
+        // Exemple : Restauration complète de toutes les sections dynamiques
+        document.body.innerHTML = newBodyContent;
+        
+        console.log('✅ Contenu restauré avec succès');
+    }
+})();
+</script>
     <!-- En-tête éditeur LOCATION -->
     <header class="editor-header">
         <div class="header-content">
@@ -2974,6 +3038,56 @@ Fabrication et Support 100% Québécois</div>
         </div>
     </template>
 
+    
+    <!-- Script de restauration COMPLÈTE de la page sauvegardée -->
+    <script>
+        // Restauration COMPLÈTE du HTML sauvegardé (simulation écrasement fichier)
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof(Storage) !== "undefined") {
+                const savedCompleteHTML = localStorage.getItem('licubepro-edit-location-html-complete');
+                if (savedCompleteHTML) {
+                    console.log('🔄 Restauration COMPLÈTE de edit-location.html...');
+                    
+                    // Créer un document temporaire pour parser le HTML sauvé
+                    const tempDoc = new DOMParser().parseFromString(savedCompleteHTML, 'text/html');
+                    
+                    // Restaurer TOUT le contenu sauvegardé (corps de la page)
+                    const currentBody = document.body;
+                    const savedBody = tempDoc.body;
+                    
+                    if (currentBody && savedBody && savedBody.innerHTML.trim().length > 0) {
+                        // Sauvegarder les scripts actuels avant remplacement
+                        const currentScripts = Array.from(currentBody.querySelectorAll('script')).map(script => script.outerHTML);
+                        
+                        // Remplacer tout le contenu du body
+                        currentBody.innerHTML = savedBody.innerHTML;
+                        
+                        // Re-ajouter les scripts de fonctionnement si nécessaire
+                        const hasInstantSync = currentBody.querySelector('script[src*="instant-sync"]');
+                        const hasEditLocation = currentBody.querySelector('script[src*="edit-location"]');
+                        
+                        if (!hasInstantSync || !hasEditLocation) {
+                            currentScripts.forEach(scriptHTML => {
+                                if (scriptHTML.includes('instant-sync') || scriptHTML.includes('edit-location')) {
+                                    currentBody.insertAdjacentHTML('beforeend', scriptHTML);
+                                }
+                            });
+                        }
+                        
+                        console.log('✅ Page edit-location.html COMPLÈTEMENT restaurée');
+                        
+                        // Réinitialiser le système de synchronisation après restauration
+                        setTimeout(() => {
+                            if (window.instantSync) {
+                                window.instantSync.setupInstantListeners();
+                                console.log('🔄 Système de synchronisation réinitialisé');
+                            }
+                        }, 500);
+                    }
+                }
+            }
+        });
+    </script>
     
     <script src="js/edit-location.js"></script>
     

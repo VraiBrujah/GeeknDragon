@@ -1510,6 +1510,16 @@ window.addWeaknessAfter = function(afterIndex) {
   }, 600);
   
   console.log(`✅ Nouvelle faiblesse ajoutée: weakness${newIndex}`);
+  
+  // SYNCHRONISATION IMMÉDIATE comme pour les champs de texte
+  if (window.instantSync) {
+    window.instantSync.executeInstantSync(true); // Force sync complète immédiate
+  }
+  
+  // SAUVEGARDE IMMÉDIATE des 2 pages HTML complètes  
+  setTimeout(() => {
+    saveCompleteHtmlPages('Ajout faiblesse');
+  }, 200); // Délai réduit après sync
 };
 
 /**
@@ -1550,6 +1560,11 @@ window.removeWeaknessAt = function(index) {
     }
     
     console.log(`✅ Faiblesse supprimée: weakness${index} et renéumérotation effectuée`);
+    
+    // SAUVEGARDE IMMÉDIATE des 2 pages HTML complètes
+    setTimeout(() => {
+      saveCompleteHtmlPages('Suppression faiblesse');
+    }, 200); // Délai réduit pour plus de réactivité
   }, 400);
 };
 
@@ -1822,6 +1837,16 @@ window.addStrengthAfter = function(afterIndex) {
   }, 600);
   
   console.log(`✅ Nouvel avantage ajouté: strength${newIndex}`);
+  
+  // SYNCHRONISATION IMMÉDIATE comme pour les champs de texte
+  if (window.instantSync) {
+    window.instantSync.executeInstantSync(true); // Force sync complète immédiate
+  }
+  
+  // SAUVEGARDE IMMÉDIATE des 2 pages HTML complètes
+  setTimeout(() => {
+    saveCompleteHtmlPages('Ajout avantage');
+  }, 200); // Délai réduit après sync
 };
 
 /**
@@ -1862,8 +1887,88 @@ window.removeStrengthAt = function(index) {
     }
     
     console.log(`✅ Avantage supprimé: strength${index} et renéumérotation effectuée`);
+    
+    // SAUVEGARDE IMMÉDIATE des 2 pages HTML complètes
+    setTimeout(() => {
+      saveCompleteHtmlPages('Suppression avantage');
+    }, 200); // Délai réduit pour plus de réactivité
   }, 400);
 };
+
+/**
+ * Sauvegarde directe des 2 pages HTML dans localStorage (simulation écrasement fichiers)
+ * @param {string} action - Description de l'action qui a déclenché la sauvegarde
+ */
+function saveCompleteHtmlPages(action) {
+    console.log(`💾 Sauvegarde directe des 2 pages: ${action}`);
+    
+    try {
+        // 1. Sauvegarde DIRECTE de edit-location.html (page actuelle)
+        const editPageHtml = document.documentElement.outerHTML;
+        localStorage.setItem('licubepro-edit-location-html-complete', editPageHtml);
+        
+        console.log('✅ edit-location.html sauvegardé directement');
+        
+        // 2. Sauvegarde DIRECTE de location.html avec modifications appliquées
+        const currentData = window.instantSync ? window.instantSync.loadContent() : {};
+        
+        // Fetch et sauvegarde de location.html modifiée
+        fetch('location.html')
+            .then(response => response.text())
+            .then(locationHtml => {
+                const locationWithUpdates = applyUpdatesToLocationHtml(locationHtml, currentData);
+                localStorage.setItem('licubepro-location-html-complete', locationWithUpdates);
+                
+                console.log('✅ location.html sauvegardé directement avec modifications');
+            })
+            .catch(error => {
+                console.warn('⚠️ Impossible de récupérer location.html:', error);
+            });
+        
+    } catch (error) {
+        console.error('❌ Erreur lors de la sauvegarde directe:', error);
+    }
+}
+
+/**
+ * Applique les modifications du localStorage sur le HTML de location.html
+ * @param {string} locationHtml - HTML original de location.html
+ * @param {Object} content - Données à appliquer (optionnel)
+ * @return {string} - HTML avec les modifications appliquées
+ */
+function applyUpdatesToLocationHtml(locationHtml, content = null) {
+    try {
+        const data = content || (window.instantSync ? window.instantSync.loadContent() : {});
+        if (!data || Object.keys(data).length === 0) {
+            return locationHtml;
+        }
+        
+        // Parser le HTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(locationHtml, 'text/html');
+        
+        // Appliquer chaque modification
+        Object.entries(data).forEach(([fieldName, value]) => {
+            if (['lastModified', 'modifiedField', 'timestamp'].includes(fieldName)) {
+                return;
+            }
+            
+            const elements = doc.querySelectorAll(`[data-field="${fieldName}"]`);
+            elements.forEach(element => {
+                if (element.tagName.toLowerCase() === 'input' || element.tagName.toLowerCase() === 'textarea') {
+                    element.value = value;
+                } else {
+                    element.textContent = value;
+                }
+            });
+        });
+        
+        return doc.documentElement.outerHTML;
+    } catch (error) {
+        console.warn('⚠️ Erreur lors de l\'application des modifications:', error);
+        return locationHtml;
+    }
+}
 
 // Listener pour synchroniser les variables CSS de la page d'édition avec location.html
 let editPageStyleElement = null;
