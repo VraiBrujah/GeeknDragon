@@ -832,10 +832,18 @@
         /* Rôle : Styles pour éléments dynamiques de faiblesses/avantages */
         /* Type : Animation et visuel - Éléments créés temps réel */
         .dynamic-item {
-            border-left: 3px solid var(--accent-green);
-            background: rgba(16, 185, 129, 0.03);
             margin: 0.5rem 0;
             padding-left: 1rem;
+        }
+        
+        .weakness-item.dynamic-item {
+            border-left: 3px solid var(--warning-red);
+            background: rgba(239, 68, 68, 0.03);
+        }
+        
+        .strength-item.dynamic-item {
+            border-left: 3px solid var(--accent-green);
+            background: rgba(16, 185, 129, 0.03);
         }
         
         .dynamic-field {
