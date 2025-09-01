@@ -1665,8 +1665,16 @@ Fabrication et Support 100% Québécois</textarea>
 
     <!-- Système de Synchronisation Instantanée Li-CUBE PRO™ - DOIT SE CHARGER EN PREMIER -->
     <script src="js/instant-sync.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.10.18/bundle/libphonenumber-js.min.js"></script>
 
     <script>
+        // Configuration internationale
+        let defaultCountry = 'CA';
+        fetch('location-defaults.json')
+            .then(resp => resp.json())
+            .then(cfg => { if (cfg.defaultCountry) defaultCountry = cfg.defaultCountry; })
+            .catch(err => console.warn('Impossible de charger location-defaults.json :', err));
+
         // Interface Éditeur LOCATION - Synchronisation Instantanée
         document.addEventListener('DOMContentLoaded', function() {
             console.log('✅ Éditeur LOCATION Li-CUBE PRO™ avec Synchronisation Instantanée activé');
@@ -1740,7 +1748,7 @@ Fabrication et Support 100% Québécois</textarea>
                 field.addEventListener('blur', function() {
                     if (this.value && !isValidPhone(this.value)) {
                         this.style.borderColor = '#EF4444';
-                        this.title = 'Format de téléphone invalide';
+                        this.title = 'Numéro de téléphone invalide (format international)';
                     } else {
                         this.style.borderColor = '';
                         this.title = '';
@@ -1756,8 +1764,12 @@ Fabrication et Support 100% Québécois</textarea>
         }
 
         function isValidPhone(phone) {
-            const phoneRegex = /^(\+1[-.\s]?)?(\(?[0-9]{3}\)?[-.\s]?)?[0-9]{3}[-.\s]?[0-9]{4}$/;
-            return phoneRegex.test(phone);
+            try {
+                const number = libphonenumber.parsePhoneNumber(phone, defaultCountry);
+                return number.isValid();
+            } catch (e) {
+                return false;
+            }
         }
     </script>
 

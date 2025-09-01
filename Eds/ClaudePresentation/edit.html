@@ -675,7 +675,15 @@
         <iframe class="preview-frame" id="previewFrame" src="index.html"></iframe>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.10.18/bundle/libphonenumber-js.min.js"></script>
     <script>
+        // Configuration internationale
+        let defaultCountry = 'CA';
+        fetch('location-defaults.json')
+            .then(resp => resp.json())
+            .then(cfg => { if (cfg.defaultCountry) defaultCountry = cfg.defaultCountry; })
+            .catch(err => console.warn('Impossible de charger location-defaults.json :', err));
+
         // Variables globales pour la gestion de l'état
         let hasUnsavedChanges = false;
         let autoSaveTimeout = null;
@@ -722,7 +730,7 @@
                 showStatusMessage('error', 'Format d\'email invalide');
             } else if (field.type === 'tel' && value && !isValidPhone(value)) {
                 field.style.borderColor = 'var(--warning-red)';
-                showStatusMessage('error', 'Format de téléphone invalide');
+                showStatusMessage('error', 'Numéro de téléphone invalide (format international)');
             } else {
                 field.style.borderColor = 'var(--accent-blue)';
             }
@@ -894,10 +902,14 @@
             return emailRegex.test(email);
         }
 
-        // Validation de téléphone (format canadien)
+        // Validation de téléphone (format international)
         function isValidPhone(phone) {
-            const phoneRegex = /^(\+1[-.\s]?)?(\(?[0-9]{3}\)?[-.\s]?)?[0-9]{3}[-.\s]?[0-9]{4}$/;
-            return phoneRegex.test(phone);
+            try {
+                const number = libphonenumber.parsePhoneNumber(phone, defaultCountry);
+                return number.isValid();
+            } catch (e) {
+                return false;
+            }
         }
 
         // Sauvegarde avant fermeture de la page

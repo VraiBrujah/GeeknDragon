@@ -11,6 +11,7 @@
   "warningRed": "#EF4444",
   "infoBlue": "#60A5FA",
   "neutralGray": "#9CA3AF",
+  "defaultCountry": "CA",
   "navTitleSize": 28,
   "navTitleWeight": "800",
   "navItemSize": 16,

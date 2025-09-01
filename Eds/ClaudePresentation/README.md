@@ -96,7 +96,7 @@ ClaudePresentation/
 **Fonctionnalités communes :**
 - Interface intuitive sans expertise technique
 - Aperçus en temps réel des modifications
-- Validation automatique des champs
+- Validation automatique des champs (email et téléphone international)
 - Synchronisation avec page de présentation
 
 ### 3. Système de Synchronisation (`js/live-sync.js`)
@@ -222,6 +222,16 @@ if (isEditor) {
 2. Dans `edit.html` :
 ```html
 <input type="text" data-field="nouveau-champ" class="field-input">
+```
+
+### Configurer le pays par défaut
+
+Le pays utilisé pour la validation des numéros de téléphone peut être défini dans `location-defaults.json` :
+
+```json
+{
+  "defaultCountry": "CA"
+}
 ```
 
 ### Modifier la Synchronisation
