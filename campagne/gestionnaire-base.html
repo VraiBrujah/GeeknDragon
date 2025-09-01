@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Campagne - Le Coffre-fort oublié</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #8b4513;
+            --secondary-color: #d4af37;
+            --accent-color: #cd853f;
+            --dark-bg: #1a1a1a;
+            --light-bg: #2d2d2d;
+            --text-color: #ffffff;
+            --border-color: #444;
+            --success-color: #228b22;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #17a2b8;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Crimson Text', serif;
+            --sidebar-width: 350px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #0f0f0f 0%, #2d1810 50%, #1a1a1a 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.02"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.02"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.01"/><circle cx="10" cy="90" r="0.5" fill="%23ffffff" opacity="0.01"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: var(--sidebar-width) 1fr;
+            grid-template-rows: auto 1fr auto;
+            gap: 20px;
+            min-height: 100vh;
+            grid-template-areas: 
+                "header header"
+                "sidebar main"
+                "breadcrumb breadcrumb";
+        }
+
+        /* HEADER */
+        .header {
+            grid-area: header;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--secondary-color);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            color: var(--secondary-color);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* SIDEBAR NAVIGATION */
+        .sidebar {
+            grid-area: sidebar;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            height: fit-content;
+            box-shadow: var(--shadow);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: 25px;
+        }
+
+        .nav-section h3 {
+            font-family: var(--font-heading);
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tree {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .nav-item.has-children > .nav-label::before {
+            content: '▶';
+            margin-right: 5px;
+            transition: transform 0.2s ease;
+            color: var(--secondary-color);
+        }
+
+        .nav-item.expanded > .nav-label::before {
+            transform: rotate(90deg);
+        }
+
+        .nav-label {
+            display: block;
+            padding: 8px 12px;
+            background: var(--dark-bg);
+            border: 1px solid transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-label:hover {
+            background: var(--primary-color);
+            border-color: var(--secondary-color);
+            transform: translateX(3px);
+        }
+
+        .nav-label.active {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            font-weight: 600;
+        }
+
+        .nav-children {
+            margin-left: 20px;
+            margin-top: 5px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-item.expanded > .nav-children {
+            max-height: 500px;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: auto;
+        }
+
+        .status-active { background: var(--success-color); }
+        .status-inactive { background: var(--border-color); }
+        .status-completed { background: var(--info-color); }
+
+        /* MAIN CONTENT */
+        .main-content {
+            grid-area: main;
+            background: var(--light-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            min-height: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .content-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            border: 1px solid var(--secondary-color);
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-success { background: var(--success-color); }
+        .btn-danger { background: var(--danger-color); }
+        .btn-warning { background: var(--warning-color); color: var(--dark-bg); }
+        .btn-info { background: var(--info-color); }
+
+        /* TABS */
+        .tabs {
+            margin-bottom: 20px;
+        }
+
+        .tab-list {
+            display: flex;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            color: var(--text-color);
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            white-space: nowrap;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .tab-button:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .tab-button.active {
+            color: var(--secondary-color);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .card-body {
+            line-height: 1.6;
+        }
+
+        /* MONSTER CARDS */
+        .monster-card {
+            background: var(--dark-bg);
+            border: 2px solid var(--danger-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .monster-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--danger-color), var(--warning-color));
+        }
+
+        .monster-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .monster-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--danger-color);
+            flex-shrink: 0;
+        }
+
+        .monster-info h4 {
+            font-family: var(--font-heading);
+            color: var(--danger-color);
+            margin-bottom: 5px;
+        }
+
+        .monster-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .monster-stat {
+            text-align: center;
+            padding: 8px;
+            background: rgba(220, 53, 69, 0.2);
+            border-radius: 6px;
+            border: 1px solid var(--danger-color);
+        }
+
+        .monster-actions {
+            margin-top: 15px;
+        }
+
+        .monster-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        /* OBJECT CARDS */
+        .object-card {
+            background: var(--dark-bg);
+            border: 2px solid var(--secondary-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .object-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+        }
+
+        .object-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .object-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--secondary-color);
+            flex-shrink: 0;
+        }
+
+        .rarity-legendary { border-color: #ff8c00; }
+        .rarity-very-rare { border-color: #9370db; }
+        .rarity-rare { border-color: #0080ff; }
+        .rarity-uncommon { border-color: #32cd32; }
+        .rarity-common { border-color: #696969; }
+
+        /* PUZZLE CARDS */
+        .puzzle-card {
+            background: var(--dark-bg);
+            border: 2px solid var(--info-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .puzzle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--info-color), var(--primary-color));
+        }
+
+        /* HP BARS */
+        .hp-bar {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            height: 20px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--danger-color), var(--warning-color), var(--success-color));
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .hp-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            z-index: 1;
+        }
+
+        /* DICE BUTTON */
+        .dice-btn {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dice-btn:hover {
+            background: var(--warning-color);
+            transform: scale(1.1);
+        }
+
+        /* MAP CONTAINER */
+        .map-container {
+            position: relative;
+            max-width: 100%;
+            max-height: 600px;
+            overflow: auto;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--dark-bg);
+        }
+
+        .map-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            position: relative;
+            cursor: crosshair;
+            transition: opacity 0.2s ease;
+        }
+        
+        .map-image:hover {
+            opacity: 0.9;
+        }
+
+        .map-pin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--danger-color);
+            border: 2px solid var(--text-color);
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            transition: all 0.2s ease;
+        }
+
+        .map-pin:hover {
+            background: var(--secondary-color);
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .pin-tooltip {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-bg);
+            color: var(--text-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--secondary-color);
+            white-space: nowrap;
+            font-size: 0.8rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            z-index: 11;
+        }
+
+        .map-pin:hover .pin-tooltip {
+            opacity: 1;
+        }
+
+        /* DICE RESULT ANIMATION */
+        .dice-result {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            padding: 20px 30px;
+            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: bold;
+            z-index: 2000;
+            animation: diceRoll 0.8s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes diceRoll {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* BREADCRUMB */
+        .breadcrumb {
+            grid-area: breadcrumb;
+            background: var(--dark-bg);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+        }
+
+        .breadcrumb-item {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb-item.active {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .breadcrumb-separator {
+            color: var(--border-color);
+        }
+
+        /* UTILITY CLASSES */
+        .text-center { text-align: center; }
+        .text-muted { color: #999; }
+        .mt-2 { margin-top: 10px; }
+        .mb-2 { margin-bottom: 10px; }
+        .d-flex { display: flex; }
+        .justify-between { justify-content: space-between; }
+        .align-center { align-items: center; }
+        .gap-2 { gap: 10px; }
+        .w-100 { width: 100%; }
+
+        /* LOADING ANIMATION */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            border-top-color: var(--secondary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-areas: 
+                    "header"
+                    "main"
+                    "sidebar"
+                    "breadcrumb";
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .content-title {
+                font-size: 1.4rem;
+            }
+
+            .sidebar {
+                max-height: none;
+            }
+        }
+    </style>
+    <script src="gestionnaire-config.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header">
+            <h1><i class="fas fa-dragon"></i> Le Coffre-fort oublié</h1>
+            <p id="headerDescription">Gestionnaire de Campagne D&D</p>
+        </header>
+
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="sidebar">
+            <div class="nav-section">
+                <h3><i class="fas fa-map"></i> Navigation</h3>
+                <ul class="nav-tree" id="campaignTree">
+                    <!-- Navigation will be generated by JavaScript -->
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h3><i class="fas fa-tools"></i> Actions</h3>
+                <div class="content-actions">
+                    <button class="btn btn-info" onclick="saveData()">
+                        <i class="fas fa-save"></i> Sauvegarder
+                    </button>
+                    <button class="btn btn-warning" onclick="loadData()">
+                        <i class="fas fa-upload"></i> Charger
+                    </button>
+                </div>
+            </div>
+
+            <!-- MUSIC PLAYER INTEGRATION -->
+            <div class="nav-section">
+                <h3><i class="fas fa-music"></i> Musique</h3>
+                <div id="musicControls">
+                    <button class="btn" onclick="toggleMusic()" id="musicToggle">
+                        <i class="fas fa-play"></i> Lecture
+                    </button>
+                    <div class="mt-2">
+                        <label style="color: var(--text-color); font-size: 0.9rem;">Volume</label>
+                        <input type="range" min="0" max="100" value="15" class="w-100" onchange="setMusicVolume(this.value)" style="margin-top: 5px;">
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="content-header">
+                <h2 class="content-title">
+                    <i id="contentIcon" class="fas fa-home"></i>
+                    <span id="contentTitle">Aperçu de la Campagne</span>
+                </h2>
+                <div class="content-actions">
+                    <button class="btn btn-success" onclick="showAddModal()">
+                        <i class="fas fa-plus"></i> Ajouter
+                    </button>
+                </div>
+            </div>
+
+            <!-- TABS -->
+            <div class="tabs">
+                <div class="tab-list">
+                    <button class="tab-button active" onclick="showTab('overview', this)">
+                        <i class="fas fa-eye"></i> Aperçu
+                    </button>
+                    <button class="tab-button" onclick="showTab('map', this)">
+                        <i class="fas fa-map"></i> Carte
+                    </button>
+                    <button class="tab-button" onclick="showTab('characters', this)">
+                        <i class="fas fa-users"></i> Personnages
+                    </button>
+                    <button class="tab-button" id="monstersTabButton" onclick="showTab('monsters', this)">
+                        <i class="fas fa-dragon"></i> Monstres
+                    </button>
+                    <button class="tab-button" onclick="showTab('objects', this)">
+                        <i class="fas fa-gem"></i> Objets Magiques
+                    </button>
+                    <button class="tab-button" onclick="showTab('puzzles', this)">
+                        <i class="fas fa-puzzle-piece"></i> Énigmes
+                    </button>
+                    <button class="tab-button" onclick="showTab('quests', this)">
+                        <i class="fas fa-scroll"></i> Quêtes
+                    </button>
+                </div>
+
+                <!-- OVERVIEW TAB -->
+                <div class="tab-content active" id="overview">
+                    <div id="overviewContent">
+                        <!-- Content will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- MAP TAB -->
+                <div class="tab-content" id="map">
+                    <div class="map-container">
+                        <img id="mapImage" class="map-image" src="" alt="Carte de la campagne" onclick="addMapPin(event)">
+                        <div id="mapPins">
+                            <!-- Pins will be generated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn btn-info" onclick="addMapPin(null)">
+                            <i class="fas fa-map-pin"></i> Ajouter une note (centre)
+                        </button>
+                        <button class="btn btn-warning" onclick="clearMapPins()">
+                            <i class="fas fa-trash"></i> Effacer les notes
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CHARACTERS TAB -->
+                <div class="tab-content" id="characters">
+                    <div id="charactersGrid">
+                        <!-- Characters will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- MONSTERS TAB -->
+                <div class="tab-content" id="monsters">
+                    <div id="monstersGrid">
+                        <!-- Monsters will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- MAGICAL OBJECTS TAB -->
+                <div class="tab-content" id="objects">
+                    <div id="objectsGrid">
+                        <!-- Objects will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- PUZZLES TAB -->
+                <div class="tab-content" id="puzzles">
+                    <div id="puzzlesGrid">
+                        <!-- Puzzles will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- QUESTS TAB -->
+                <div class="tab-content" id="quests">
+                    <div id="questsList">
+                        <!-- Quests will be generated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- BREADCRUMB -->
+        <nav class="breadcrumb">
+            <span><i class="fas fa-home"></i></span>
+            <span class="breadcrumb-separator">></span>
+            <span id="breadcrumbPath">Le Coffre-fort oublié</span>
+        </nav>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="gestionnaire.js"></script>
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const version = params.get('version') || 'campagne';
+            const config = (window.GESTIONNAIRE_VERSIONS || {})[version] || {};
+
+            if (config.title) {
+                document.title = config.title;
+            }
+
+            if (config.sidebarWidth) {
+                document.documentElement.style.setProperty('--sidebar-width', config.sidebarWidth);
+            }
+
+            if (config.hideMonsters) {
+                const monstersTab = document.getElementById('monsters');
+                const monstersButton = document.getElementById('monstersTabButton');
+                if (monstersTab) {
+                    monstersTab.remove();
+                }
+                if (monstersButton) {
+                    monstersButton.remove();
+                }
+            }
+
+            if (config.description) {
+                const desc = document.getElementById('headerDescription');
+                if (desc) {
+                    desc.textContent = config.description;
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
