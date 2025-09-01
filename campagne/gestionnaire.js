@@ -2801,17 +2801,45 @@
             }
         }
 
-        function adjustHP(characterId) {
-            const character = campaignData.characters[characterId];
-            const adjustment = prompt(`PV actuels: ${character.hp.current}/${character.hp.max}\nAjustement (+/- valeur):`, '0');
-            
-            if (adjustment !== null) {
-                const value = parseInt(adjustment);
-                if (!isNaN(value)) {
+        // HP adjustment modal handling
+        const hpModal = document.getElementById('hpModal');
+        const hpForm = document.getElementById('hpModalForm');
+        const hpInput = document.getElementById('hpValue');
+        let hpAdjustCharacterId = null;
+
+        if (hpModal && hpForm && hpInput) {
+            document.getElementById('hpPlus').addEventListener('click', () => {
+                hpInput.value = parseInt(hpInput.value || '0') + 1;
+            });
+
+            document.getElementById('hpMinus').addEventListener('click', () => {
+                hpInput.value = parseInt(hpInput.value || '0') - 1;
+            });
+
+            document.getElementById('hpCancel').addEventListener('click', () => {
+                hpModal.style.display = 'none';
+                hpAdjustCharacterId = null;
+            });
+
+            hpForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const value = parseInt(hpInput.value);
+                if (!isNaN(value) && hpAdjustCharacterId) {
+                    const character = campaignData.characters[hpAdjustCharacterId];
                     character.hp.current = Math.max(0, Math.min(character.hp.max, character.hp.current + value));
                     updateCharactersDisplay();
                     saveData();
                 }
+                hpModal.style.display = 'none';
+                hpAdjustCharacterId = null;
+            });
+        }
+
+        function adjustHP(characterId) {
+            if (hpModal && hpInput) {
+                hpAdjustCharacterId = characterId;
+                hpInput.value = 0;
+                hpModal.style.display = 'flex';
             }
         }
 
