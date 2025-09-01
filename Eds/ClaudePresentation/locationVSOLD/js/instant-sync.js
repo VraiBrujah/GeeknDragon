@@ -65,31 +65,51 @@ class InstantSync {
      * Configuration : écouteurs ultra-réactifs sur tous les champs éditables
      */
     setupInstantListeners() {
-        // Sélection : tous les éléments avec data-field
-        const editableFields = document.querySelectorAll('[data-field]');
+        // Suppression : anciens listeners pour éviter les doublons
+        if (this.inputListener) {
+            document.removeEventListener('input', this.inputListener);
+        }
+        if (this.changeListener) {
+            document.removeEventListener('change', this.changeListener);
+        }
         
-        console.log(`📡 Configuration de ${editableFields.length} champs pour sync instantanée`);
-        
-        editableFields.forEach(field => {
-            const fieldName = field.dataset.field;
-            
-            // Écouteurs : capture des modifications utilisateur
-            field.addEventListener('input', () => {
+        // Délégation d'événements : capture TOUS les éléments avec data-field (même futurs)
+        this.inputListener = (event) => {
+            const field = event.target;
+            if (field.dataset.field) {
+                const fieldName = field.dataset.field;
                 console.log(`📝 Event INPUT détecté sur: ${fieldName}`);
-                // Synchronisation immédiate avec anti-rebond minimal
                 this.scheduleInstantSync(fieldName, field);
-            });
-            
-            // Écouteur spécial : inputs de type color nécessitent souvent 'change'
-            field.addEventListener('change', () => {
+            }
+        };
+        
+        this.changeListener = (event) => {
+            const field = event.target;
+            if (field.dataset.field) {
+                const fieldName = field.dataset.field;
                 console.log(`🎨 Event CHANGE détecté sur: ${fieldName}`);
-                // Synchronisation immédiate pour les changements de couleur
                 this.scheduleInstantSync(fieldName, field);
-            });
-
-            // Observer ciblé : détecte les changements programmatiques
-            const observer = new MutationObserver((mutations) => {
-                for (const mutation of mutations) {
+            }
+        };
+        
+        // Ajout : listeners déléguées sur le document entier
+        document.addEventListener('input', this.inputListener, true);
+        document.addEventListener('change', this.changeListener, true);
+        
+        const editableFields = document.querySelectorAll('[data-field]');
+        console.log(`📡 Délégation configurée pour ${editableFields.length} champs existants + futurs éléments`);
+        
+        // Observer global : détecte les changements programmatiques sur tous les champs
+        if (this.globalObserver) {
+            this.globalObserver.disconnect();
+        }
+        
+        this.globalObserver = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+                if (mutation.target.dataset && mutation.target.dataset.field) {
+                    const field = mutation.target;
+                    const fieldName = field.dataset.field;
+                    
                     if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
                         this.scheduleInstantSync(fieldName, field);
                         break;
@@ -99,20 +119,16 @@ class InstantSync {
                         break;
                     }
                 }
-            });
-
-            if (field.contentEditable === 'true') {
-                observer.observe(field, {
-                    characterData: true,
-                    childList: true,
-                    subtree: true
-                });
-            } else {
-                observer.observe(field, {
-                    attributes: true,
-                    attributeFilter: ['value']
-                });
             }
+        });
+        
+        // Observer : tout le document pour capturer les changements sur tous les champs
+        this.globalObserver.observe(document.body, {
+            attributes: true,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeFilter: ['value']
         });
     }
 
