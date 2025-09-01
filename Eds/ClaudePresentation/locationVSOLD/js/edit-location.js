@@ -6,7 +6,11 @@ const { sanitizeHTML } = typeof require !== 'undefined'
 document.addEventListener('DOMContentLoaded', () => {
   console.log('✅ Éditeur LOCATION avec Synchronisation Instantanée activé');
 
-  // Attente : initialisation complète d'InstantSync
+  /**
+     * Attente : initialisation complète d'InstantSync.
+     *
+     * @param {Function} callback - Fonction exécutée lorsque le module est prêt.
+     */
   function waitForInstantSync(callback) {
     if (window.instantSync && window.instantSync.isInitialized) {
       callback();
@@ -16,7 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Fonction : synchronisation manuelle + ouverture de la page de présentation
+  /**
+     * Synchronisation manuelle puis ouverture de la page de présentation.
+     *
+     * @returns {void}
+     */
   window.togglePreview = function () {
     console.log('🔄 Prévisualisation LOCATION - Déclenchement synchronisation manuelle...');
 
@@ -42,13 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * Fonction : activation de l'interface d'administration EDS Framework
-   * 
+   *
    * Rôle : Point d'entrée principal pour accéder au panneau admin universel
    * Responsabilité : Initialiser et afficher l'interface d'administration EDS
    * Fallback : Création d'interface simple si module admin non disponible
    * Intégration : Connecte le bouton HTML avec le système EDSAdminInterface
    */
-  window.toggleAdminInterface = function() {
+  window.toggleAdminInterface = function () {
     console.log('🔧 Activation Interface Admin EDS Framework...');
 
     try {
@@ -73,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Priorité 4 : Instance AdminInterface globale standalone  
+      // Priorité 4 : Instance AdminInterface globale standalone
       if (window.adminInterface && typeof window.adminInterface.toggle === 'function') {
         console.log('✅ Instance AdminInterface globale trouvée (mode compatibilité)');
         window.adminInterface.toggle();
@@ -86,14 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
       console.warn('- window.EDSProductTemplates:', !!window.EDSProductTemplates);
       console.warn('- window.LiCubeCore:', !!window.LiCubeCore);
       console.warn('- window.LiCubeAdmin:', !!window.LiCubeAdmin);
-      console.warn('- window.adminInterface:', !!window.adminInterface);  
+      console.warn('- window.adminInterface:', !!window.adminInterface);
       console.warn('- window.instantSync:', !!window.instantSync);
-      console.warn('- Classes EDS détectées:', Object.keys(window).filter(k => k.includes('EDS')));
+      console.warn('- Classes EDS détectées:', Object.keys(window).filter((k) => k.includes('EDS')));
 
       // Fallback : interface de diagnostic améliorée
       console.warn('⚠️ Interface admin avancée non disponible, création interface de diagnostic...');
       createFallbackAdminInterface();
-
     } catch (error) {
       console.error('❌ Erreur activation interface admin:', error);
       alert('Interface d\'administration temporairement indisponible.\nVeuillez actualiser la page.');
@@ -103,7 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Validation : formats email et téléphone
   setupFieldValidation();
 
-  // Importation : gestion du fichier sélectionné via le champ caché
+  /**
+     * Importation : gestion du fichier sélectionné via le champ caché.
+     *
+     * @param {Event} event - Événement `change` du champ de fichier.
+     */
   window.handleImport = function (event) {
     const file = event.target.files[0];
     if (file && window.instantSync) {
@@ -130,7 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log('🎯 Éditeur LOCATION - Prêt pour synchronisation instantanée');
 });
 
-// Validation : contrôles de format pour les champs spéciaux
+/**
+ * Validation : contrôles de format pour les champs spéciaux.
+ *
+ * @returns {void}
+ */
 function setupFieldValidation() {
   const emailFields = document.querySelectorAll('input[type="email"]');
   const telFields = document.querySelectorAll('input[type="tel"]');
@@ -162,7 +177,7 @@ function setupFieldValidation() {
 
 /**
  * Fonction : création d'interface d'administration fallback
- * 
+ *
  * Rôle : Interface admin simplifiée si le module principal n'est pas disponible
  * Type : Fallback function - Solution de repli fonctionnelle
  * Fonctionnalités : Affichage modal avec informations système de base
@@ -190,15 +205,13 @@ function createFallbackAdminInterface() {
           <div class="fallback-info-card">
             <h3><i class="fas fa-info-circle"></i> État du Système</h3>
             <ul>
-              <li>Li-CUBE PRO™ Core: ${window.LiCubeCore ? '✅ Chargé v' + window.LiCubeCore.version : '❌ Non disponible'}</li>
+              <li>Li-CUBE PRO™ Core: ${window.LiCubeCore ? `✅ Chargé v${window.LiCubeCore.version}` : '❌ Non disponible'}</li>
               <li>Interface Admin Core: ${window.LiCubeAdmin ? '✅ Disponible' : '❌ Non chargée'}</li>
               <li>Configuration Core: ${window.LiCubeConfig ? '✅ Opérationnelle' : '❌ Non chargée'}</li>
               <li>InstantSync: ${window.instantSync ? '✅ Opérationnel' : '❌ Non chargé'}</li>
               <li>Modules détectés:</li>
               <ul style="margin-left: 20px; margin-top: 10px;">
-                ${Object.keys(window).filter(k => k.startsWith('LiCube')).map(k =>
-                  `<li>${k}: ✅</li>`
-                ).join('') || '<li>Aucun module Li-CUBE détecté</li>'}
+                ${Object.keys(window).filter((k) => k.startsWith('LiCube')).map((k) => `<li>${k}: ✅</li>`).join('') || '<li>Aucun module Li-CUBE détecté</li>'}
               </ul>
             </ul>
           </div>
@@ -274,11 +287,31 @@ function createFallbackAdminInterface() {
 }
 
 // Utilitaires : validation des formats
+/**
+ * Rôle : Vérifie qu'une chaîne respecte le format d'une adresse email.
+ * Type : Fonction utilitaire – entrée {string} sans unité, sortie {boolean}.
+ * Domaine de valeurs : Chaîne contenant une partie locale, un '@' et un domaine.
+ * Exemple : "contact@example.com".
+ * Logique : expression régulière vérifiant du texte avant et après '@' ainsi qu'un point dans le domaine.
+ *
+ * @param {string} email - Adresse email à valider.
+ * @returns {boolean} Retourne `true` si le format est valide.
+ */
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
+/**
+ * Rôle : Vérifie qu'une chaîne correspond à un numéro de téléphone nord-américain standard.
+ * Type : Fonction utilitaire – entrée {string} sans unité, sortie {boolean}.
+ * Domaine de valeurs : Autorise le préfixe +1, les parenthèses, espaces, tirets ou points comme séparateurs.
+ * Exemple : "+1 (123) 456-7890".
+ * Logique : expression régulière acceptant optionnellement +1 et formée de groupes de chiffres séparés.
+ *
+ * @param {string} phone - Numéro de téléphone à valider.
+ * @returns {boolean} Retourne `true` si le format est valide.
+ */
 function isValidPhone(phone) {
   const phoneRegex = /^(\+1[-.\s]?)?(\(?[0-9]{3}\)?[-.\s]?)?[0-9]{3}[-.\s]?[0-9]{4}$/;
   return phoneRegex.test(phone);
@@ -293,7 +326,11 @@ const defaultsLoaded = fetch('location-defaults.json')
   })
   .catch((err) => console.error('Erreur de chargement des valeurs par défaut:', err));
 
-// Fonction de basculement de l'éditeur
+/**
+ * Bascule l'affichage du panneau d'édition CSS.
+ *
+ * @returns {void}
+ */
 function toggleCSSEditor() {
   const editor = document.getElementById('cssEditor');
   const toggle = document.querySelector('.css-toggle i');
@@ -307,7 +344,11 @@ function toggleCSSEditor() {
   }
 }
 
-// Application des styles en temps réel pour location.html ET edit-location.html
+/**
+ * Applique les styles saisis en temps réel aux vues d'édition et de présentation.
+ *
+ * @returns {void}
+ */
 function applyStyles() {
   // Collecte de tous les styles actuels
   const currentStyles = {};
@@ -324,7 +365,11 @@ function applyStyles() {
   console.log('🎨 Styles appliqués à la page d\'édition en temps réel');
 }
 
-// Mise à jour des affichages de valeurs pour location.html
+/**
+ * Met à jour les affichages de valeurs numériques liés aux contrôles.
+ *
+ * @returns {void}
+ */
 function updateValueDisplays() {
   // Navigation
   if (document.getElementById('navTitleSizeValue')) {
@@ -422,7 +467,11 @@ function updateValueDisplays() {
   }
 }
 
-// Réinitialisation depuis le backup ou le fichier JSON centralisé
+/**
+ * Réinitialise les styles à partir du backup ou d'un fichier JSON.
+ *
+ * @returns {Promise<void>}
+ */
 async function resetCSS() {
   const backup = localStorage.getItem('locationVSOLD-css-backup');
   let stylesToReset;
@@ -453,7 +502,11 @@ async function resetCSS() {
   showNotification('Styles réinitialisés avec effet temps réel !', 'warning');
 }
 
-// Sauvegarde avec popup de validation
+/**
+ * Sauvegarde les styles courants après confirmation.
+ *
+ * @returns {void}
+ */
 function saveCSS() {
   // Popup de validation moderne
   showSaveConfirmation(async () => {
@@ -480,7 +533,12 @@ function saveCSS() {
   });
 }
 
-// Popup de confirmation moderne
+/**
+ * Affiche une popup de confirmation avant la sauvegarde.
+ *
+ * @param {Function} onConfirm - Callback exécuté en cas de confirmation.
+ * @returns {void}
+ */
 function showSaveConfirmation(onConfirm) {
   const overlay = document.createElement('div');
   overlay.style.cssText = `
@@ -547,6 +605,12 @@ function showSaveConfirmation(onConfirm) {
   });
 }
 
+/**
+ * Ferme la popup de confirmation.
+ *
+ * @param {HTMLElement} overlay - Élément d'arrière-plan à retirer.
+ * @returns {void}
+ */
 function closePopup(overlay) {
   overlay.style.opacity = '0';
   overlay.querySelector('div').style.transform = 'scale(0.8)';
@@ -554,6 +618,11 @@ function closePopup(overlay) {
 }
 
 // Import CSS
+/**
+ * Importe des styles depuis un fichier JSON local et les applique.
+ *
+ * @returns {void}
+ */
 function importCSS() {
   const input = document.createElement('input');
   input.type = 'file';
@@ -599,6 +668,11 @@ function importCSS() {
 }
 
 // Export CSS
+/**
+ * Exporte les styles actuels dans un fichier JSON téléchargeable.
+ *
+ * @returns {void}
+ */
 function exportCSS() {
   const styles = {};
   Object.keys(defaultValues).forEach((key) => {
@@ -619,6 +693,13 @@ function exportCSS() {
 }
 
 // Notification simple
+/**
+ * Affiche une notification temporaire à l'utilisateur.
+ *
+ * @param {string} message - Texte de la notification.
+ * @param {string} type - Type visuel (success, warning, error).
+ * @returns {void}
+ */
 function showNotification(message, type) {
   const notification = document.createElement('div');
   notification.style.cssText = `
@@ -639,6 +720,11 @@ function showNotification(message, type) {
 }
 
 // Chargement des styles sauvegardés
+/**
+ * Charge les styles personnalisés sauvegardés localement.
+ *
+ * @returns {void}
+ */
 function loadSavedStyles() {
   const saved = localStorage.getItem('locationVSOLD-custom-css');
   if (saved) {
@@ -653,6 +739,11 @@ function loadSavedStyles() {
 }
 
 // Création du backup automatique initial
+/**
+ * Crée une sauvegarde initiale des valeurs par défaut si aucune n'existe.
+ *
+ * @returns {void}
+ */
 function createInitialBackup() {
   const existingBackup = localStorage.getItem('locationVSOLD-css-backup');
   if (!existingBackup) {
@@ -663,6 +754,11 @@ function createInitialBackup() {
 }
 
 // Synchronisation temps réel avec location.html
+/**
+ * Synchronise les styles en cours vers la page de présentation.
+ *
+ * @returns {void}
+ */
 function syncToPresentation() {
   // Collecte de tous les styles actuels pour location.html
   const currentStyles = {};
@@ -713,6 +809,12 @@ function syncToPresentation() {
 }
 
 // Génération du CSS dynamique pour location.html
+/**
+ * Génère une feuille de style CSS à partir d'un objet de valeurs.
+ *
+ * @param {Object} styles - Ensemble de variables CSS.
+ * @returns {string} CSS généré.
+ */
 function generateLocationCSS(styles) {
   return `
                 /* CSS Dynamique pour location.html généré depuis edit-location.html */
@@ -871,6 +973,11 @@ function generateLocationCSS(styles) {
 // ==========================================
 
 // Obtient l'ordre actuel de TOUTES les sections (éditeur) depuis localStorage
+/**
+ * Récupère l'ordre de toutes les sections depuis le stockage local.
+ *
+ * @returns {Object} Association section/position.
+ */
 function getAllSectionOrder() {
   const savedOrder = localStorage.getItem('locationVSOLD-allSectionOrder');
   return savedOrder ? JSON.parse(savedOrder) : {
@@ -886,6 +993,11 @@ function getAllSectionOrder() {
 }
 
 // Obtient l'ordre des sections pour la présentation (sections existantes dans location.html)
+/**
+ * Obtient l'ordre actuel des sections sur la page de présentation.
+ *
+ * @returns {Object} Ordre des sections.
+ */
 function getPresentationSectionOrder() {
   const allOrder = getAllSectionOrder();
   // Filtre uniquement les sections qui existent dans location.html
@@ -899,6 +1011,12 @@ function getPresentationSectionOrder() {
 }
 
 // Sauvegarde l'ordre de TOUTES les sections (éditeur)
+/**
+ * Enregistre l'ordre de toutes les sections dans le stockage local.
+ *
+ * @param {Object} allOrder - Association section/position.
+ * @returns {void}
+ */
 function saveAllSectionOrder(allOrder) {
   localStorage.setItem('locationVSOLD-allSectionOrder', JSON.stringify(allOrder));
 
@@ -913,6 +1031,11 @@ function saveAllSectionOrder(allOrder) {
 }
 
 // Applique l'ordre des sections dans l'éditeur
+/**
+ * Applique l'ordre des sections enregistré à l'interface de l'éditeur.
+ *
+ * @returns {void}
+ */
 function applySectionOrder() {
   const order = getAllSectionOrder();
   const container = document.querySelector('.container');
@@ -944,6 +1067,12 @@ function applySectionOrder() {
 }
 
 // Fonction pour monter une section
+/**
+ * Déplace une section d'un rang vers le haut.
+ *
+ * @param {string} sectionId - Identifiant de la section à déplacer.
+ * @returns {void}
+ */
 function moveSectionUp(sectionId) {
   const order = getAllSectionOrder();
   const currentOrder = order[sectionId];
@@ -967,6 +1096,12 @@ function moveSectionUp(sectionId) {
 }
 
 // Fonction pour descendre une section
+/**
+ * Déplace une section d'un rang vers le bas.
+ *
+ * @param {string} sectionId - Identifiant de la section à déplacer.
+ * @returns {void}
+ */
 function moveSectionDown(sectionId) {
   const order = getAllSectionOrder();
   const currentOrder = order[sectionId];
@@ -1033,6 +1168,11 @@ document.addEventListener('DOMContentLoaded', () => {
   strengthIndex = document.querySelectorAll('#strengths-container .content-block').length;
 });
 
+/**
+ * Ajoute un nouveau bloc de faiblesse et enregistre les champs pour la synchronisation.
+ *
+ * @returns {void}
+ */
 window.addWeakness = function () {
   weaknessIndex += 1;
   const template = document.getElementById('weakness-template').content.cloneNode(true);
@@ -1051,6 +1191,11 @@ window.addWeakness = function () {
   document.getElementById('weaknesses-container').appendChild(template);
 };
 
+/**
+ * Supprime le dernier bloc de faiblesse.
+ *
+ * @returns {void}
+ */
 window.removeWeakness = function () {
   const container = document.getElementById('weaknesses-container');
   const blocks = container.querySelectorAll('.content-block');
@@ -1060,6 +1205,11 @@ window.removeWeakness = function () {
   }
 };
 
+/**
+ * Ajoute un nouveau bloc de force et enregistre les champs pour la synchronisation.
+ *
+ * @returns {void}
+ */
 window.addStrength = function () {
   strengthIndex += 1;
   const template = document.getElementById('strength-template').content.cloneNode(true);
@@ -1078,6 +1228,11 @@ window.addStrength = function () {
   document.getElementById('strengths-container').appendChild(template);
 };
 
+/**
+ * Supprime le dernier bloc de force.
+ *
+ * @returns {void}
+ */
 window.removeStrength = function () {
   const container = document.getElementById('strengths-container');
   const blocks = container.querySelectorAll('.content-block');
@@ -1090,6 +1245,12 @@ window.removeStrength = function () {
 let editPageStyleElement = null;
 
 // Application des variables CSS dynamiques à la page d'édition
+/**
+ * Applique les variables CSS dynamiques à la page d'édition.
+ *
+ * @param {Object} styles - Variables CSS à injecter.
+ * @returns {void}
+ */
 function applyDynamicCSSToEditPage(styles) {
   // Suppression de l'ancien style dynamique
   if (editPageStyleElement) {
@@ -1217,6 +1378,12 @@ function applyDynamicCSSToEditPage(styles) {
 }
 
 // Extraction des styles depuis le CSS généré pour location.html
+/**
+ * Extrait les variables CSS d'un texte CSS généré.
+ *
+ * @param {string} css - Contenu CSS contenant les variables.
+ * @returns {Object} Ensemble des variables extraites.
+ */
 function extractStylesFromLocationCSS(css) {
   const styles = {};
 
@@ -1252,6 +1419,11 @@ window.addEventListener('storage', (e) => {
 });
 
 // Écoute locale (même onglet) des changements de styles
+/**
+ * Gère l'application locale des styles lors de modifications de contrôle.
+ *
+ * @returns {void}
+ */
 function handleLocalStyleChanges() {
   if (typeof window.getCurrentStyles === 'function') {
     const currentStyles = window.getCurrentStyles();
