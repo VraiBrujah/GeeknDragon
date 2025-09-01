@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation - Visualisation</title>
+    
+    <!-- Styles pour la visualisation -->
+    <style>
+        /* ============================================================================
+         * STYLES VISUALISEUR - PAGE FINALE CLIENT
+         * ============================================================================ */
+        
+        :root {
+            --primary: #3b82f6;
+            --secondary: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            
+            --radius: 8px;
+            --radius-lg: 12px;
+            
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+        
+        /* ============================================================================
+         * COMPOSANTS DE PRÉSENTATION
+         * ============================================================================ */
+        
+        .presentation-main {
+            min-height: 100vh;
+        }
+        
+        .meta-section {
+            width: 100%;
+            position: relative;
+        }
+        
+        .content-section {
+            width: 100%;
+            position: relative;
+        }
+        
+        /* Widgets de base */
+        .widget {
+            width: 100%;
+            position: relative;
+        }
+        
+        .widget-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .widget-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .widget-header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .widget-hero {
+            background: var(--bg-secondary);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .widget-hero h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .widget-hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        
+        .hero-cta:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .widget-text-block {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .widget-text-block h3 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .widget-text-block p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* Listes d'avantages/faiblesses */
+        .widget-advantage-list,
+        .widget-weakness-list {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .widget-advantage-list {
+            background: rgba(16, 185, 129, 0.03);
+        }
+        
+        .widget-weakness-list {
+            background: rgba(239, 68, 68, 0.03);
+        }
+        
+        .list-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .widget-advantage-list .list-title {
+            color: var(--success);
+        }
+        
+        .widget-weakness-list .list-title {
+            color: var(--danger);
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+        
+        .list-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .item-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .item-content h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-content p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        /* Widget de comparaison */
+        .widget-comparison {
+            padding: 4rem 2rem;
+            background: var(--bg-secondary);
+        }
+        
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .comparison-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .product-image {
+            width: 120px;
+            height: 120px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        
+        .product-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .vs-separator {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        /* Grille tarifaire */
+        .widget-pricing-table {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pricing-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transition: transform 0.2s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured::before {
+            content: "Recommandé";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .plan-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-period {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .plan-features {
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .feature-check {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        /* États vides */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        /* Indicateur de synchronisation */
+        .sync-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 24px;
+            padding: 8px 16px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            z-index: 1000;
+        }
+        
+        .sync-indicator.synced {
+            color: var(--success);
+        }
+        
+        .sync-indicator.syncing {
+            color: var(--warning);
+        }
+        
+        .sync-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .widget-header h1 {
+                font-size: 2rem;
+            }
+            
+            .widget-hero h2 {
+                font-size: 2rem;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .vs-separator {
+                order: 2;
+                transform: rotate(90deg);
+            }
+            
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animation d'entrée */
+        .widget {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .widget:nth-child(1) { animation-delay: 0.1s; }
+        .widget:nth-child(2) { animation-delay: 0.2s; }
+        .widget:nth-child(3) { animation-delay: 0.3s; }
+        .widget:nth-child(4) { animation-delay: 0.4s; }
+        .widget:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- ============================================================================
+     * CONTENU DE LA PRÉSENTATION - GÉNÉRÉ DYNAMIQUEMENT
+     * ============================================================================ -->
+    
+    <main class="presentation-main" id="presentationMain">
+        <!-- Le contenu sera généré dynamiquement par le système de synchronisation -->
+        <div class="empty-state">
+            <div class="empty-state-icon">🔄</div>
+            <h3>Connexion à l'éditeur...</h3>
+            <p>En attente de synchronisation</p>
+        </div>
+    </main>
+    
+    <!-- Indicateur de synchronisation -->
+    <div class="sync-indicator syncing" id="syncIndicator">
+        <span class="sync-dot"></span>
+        <span>Synchronisation...</span>
+    </div>
+    
+    <!-- Script de synchronisation temps réel -->
+    <script>
+        /* ============================================================================
+         * VISUALISEUR SYNCHRONISÉ - TEMPS RÉEL
+         * ============================================================================ */
+        
+        class PresentationViewer {
+            constructor() {
+                this.projectData = null;
+                this.isConnected = false;
+                this.syncCheckInterval = null;
+                
+                this.init();
+            }
+            
+            init() {
+                console.log('👁️ Initialisation Visualiseur de Présentation');
+                this.startSyncListener();
+                this.checkForExistingData();
+            }
+            
+            /**
+             * Rôle : Démarrage de l'écoute de synchronisation
+             * Type : Event system - Synchronisation temps réel
+             */
+            startSyncListener() {
+                // Écouter les changements de localStorage
+                window.addEventListener('storage', (event) => {
+                    if (event.key && event.key.startsWith('presentation-project-')) {
+                        console.log('🔄 Synchronisation détectée');
+                        this.handleSync(event);
+                    }
+                });
+                
+                // Vérification périodique pour les mises à jour manquées
+                this.syncCheckInterval = setInterval(() => {
+                    this.checkForUpdates();
+                }, 1000);
+            }
+            
+            /**
+             * Rôle : Vérification de données existantes au démarrage
+             * Type : Data loading - Chargement initial
+             */
+            checkForExistingData() {
+                // Vérifier d'abord s'il y a un projet spécifié dans l'URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const projectId = urlParams.get('project');
+                
+                if (projectId) {
+                    this.loadSpecificProject(projectId);
+                    return;
+                }
+                
+                // Sinon, chercher le projet le plus récent dans localStorage
+                const projectKeys = Object.keys(localStorage).filter(key => 
+                    key.startsWith('presentation-project-')
+                );
+                
+                if (projectKeys.length > 0) {
+                    // Prendre le plus récent
+                    const latestKey = projectKeys
+                        .map(key => ({
+                            key,
+                            data: JSON.parse(localStorage.getItem(key))
+                        }))
+                        .sort((a, b) => new Date(b.data.modified) - new Date(a.data.modified))[0];
+                    
+                    this.loadProjectData(latestKey.data);
+                }
+            }
+            
+            /**
+             * Rôle : Chargement d'un projet spécifique par ID
+             * Type : Project management - Chargement ciblé
+             */
+            loadSpecificProject(projectId) {
+                console.log('🎯 Chargement du projet spécifique:', projectId);
+                
+                const key = `presentation-project-${projectId}`;
+                const stored = localStorage.getItem(key);
+                
+                if (stored) {
+                    try {
+                        const projectData = JSON.parse(stored);
+                        this.loadProjectData(projectData);
+                        console.log('✅ Projet spécifique chargé:', projectData.name);
+                    } catch (error) {
+                        console.error('❌ Erreur lors du parsing du projet:', error);
+                        this.updateSyncIndicator('error');
+                    }
+                } else {
+                    console.warn('⚠️ Projet non trouvé:', projectId);
+                    this.showProjectNotFound(projectId);
+                }
+            }
+            
+            /**
+             * Rôle : Affichage d'erreur quand le projet n'est pas trouvé
+             * Type : Error handling - Gestion d'erreurs
+             */
+            showProjectNotFound(projectId) {
+                const main = document.getElementById('presentationMain');
+                main.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">❌</div>
+                        <h3>Projet non trouvé</h3>
+                        <p>Le projet <strong>${projectId}</strong> n'existe pas ou n'a pas été créé.</p>
+                        <p style="margin-top: 1rem; color: #6b7280;">
+                            <a href="javascript:window.location.reload()" style="color: var(--primary);">Actualiser la page</a>
+                            ou retournez à 
+                            <a href="../test/sync-test.html" style="color: var(--primary);">l'écran de test</a>
+                        </p>
+                    </div>
+                `;
+                this.updateSyncIndicator('disconnected');
+            }
+            
+            /**
+             * Rôle : Gestion des événements de synchronisation
+             * Type : Event handling - Traitement des changements
+             */
+            handleSync(event) {
+                if (event.newValue) {
+                    const projectData = JSON.parse(event.newValue);
+                    this.loadProjectData(projectData);
+                }
+            }
+            
+            /**
+             * Rôle : Vérification périodique des mises à jour
+             * Type : Polling - Vérification continue
+             */
+            checkForUpdates() {
+                if (!this.projectData) return;
+                
+                const key = `presentation-project-${this.projectData.id}`;
+                const stored = localStorage.getItem(key);
+                
+                if (stored) {
+                    const storedData = JSON.parse(stored);
+                    if (storedData.modified > this.projectData.modified) {
+                        console.log('🔄 Mise à jour détectée');
+                        this.loadProjectData(storedData);
+                    }
+                }
+            }
+            
+            /**
+             * Rôle : Chargement et affichage des données du projet
+             * Type : Data processing - Rendu de la présentation
+             */
+            loadProjectData(projectData) {
+                this.projectData = projectData;
+                this.isConnected = true;
+                
+                console.log('📊 Données du projet chargées:', projectData);
+                
+                this.updateSyncIndicator('synced');
+                this.renderPresentation();
+                
+                // Mettre à jour le titre de la page
+                document.title = projectData.name;
+            }
+            
+            /**
+             * Rôle : Rendu de la présentation complète
+             * Type : DOM manipulation - Génération HTML
+             */
+            renderPresentation() {
+                const main = document.getElementById('presentationMain');
+                
+                if (!this.projectData.metaSections || this.projectData.metaSections.length === 0) {
+                    main.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📋</div>
+                            <h3>Présentation vide</h3>
+                            <p>Ajoutez du contenu dans l'éditeur pour voir la présentation</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = '';
+                
+                this.projectData.metaSections.forEach(metaSection => {
+                    html += this.renderMetaSection(metaSection);
+                });
+                
+                main.innerHTML = html;
+            }
+            
+            /**
+             * Rôle : Rendu d'une méta-section
+             * Type : HTML generation - Rendu de section
+             */
+            renderMetaSection(metaSection) {
+                let html = `<div class="meta-section" data-meta-section="${metaSection.id}" style="`;
+                
+                // Appliquer les styles de la méta-section
+                if (metaSection.style) {
+                    Object.entries(metaSection.style).forEach(([property, value]) => {
+                        const cssProperty = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+                        html += `${cssProperty}: ${value}; `;
+                    });
+                }
+                
+                html += '">\\n';
+                
+                if (metaSection.sections && metaSection.sections.length > 0) {
+                    metaSection.sections.forEach(section => {
+                        html += this.renderSection(section);
+                    });
+                } else {
+                    // Meta-section vide
+                    html += `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📄</div>
+                            <h3>${metaSection.name}</h3>
+                            <p>Cette section est en cours de création...</p>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>\\n';
+                return html;
+            }
+            
+            /**
+             * Rôle : Rendu d'une section
+             * Type : HTML generation - Rendu de contenu
+             */
+            renderSection(section) {
+                let html = `<section class="content-section" data-section="${section.id}">\\n`;
+                
+                if (section.widgets && section.widgets.length > 0) {
+                    section.widgets.forEach(widget => {
+                        html += this.renderWidget(widget);
+                    });
+                } else {
+                    html += `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🎨</div>
+                            <p>Section en cours d'édition...</p>
+                        </div>
+                    `;
+                }
+                
+                html += '</section>\\n';
+                return html;
+            }
+            
+            /**
+             * Rôle : Rendu d'un widget spécifique
+             * Type : Widget rendering - Génération HTML widget
+             */
+            renderWidget(widget) {
+                let html = `<div id="${widget.id}" class="widget widget-${widget.type}"`;
+                
+                // Appliquer les styles personnalisés
+                if (widget.style) {
+                    html += ' style="';
+                    Object.entries(widget.style).forEach(([property, value]) => {
+                        const cssProperty = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+                        html += `${cssProperty}: ${value}; `;
+                    });
+                    html += '"';
+                }
+                
+                html += '>\\n';
+                
+                switch (widget.type) {
+                    case 'navbar':
+                        html += this.renderNavbarWidget(widget);
+                        break;
+                        
+                    case 'header_spacer':
+                        html += this.renderSpacerWidget(widget);
+                        break;
+                        
+                    case 'header':
+                        html += this.renderHeaderWidget(widget);
+                        break;
+                        
+                    case 'licubepro_header':
+                        html += this.renderLiCubeProHeaderWidget(widget);
+                        break;
+                        
+                    case 'hero':
+                        html += this.renderHeroWidget(widget);
+                        break;
+                        
+                    case 'text_block':
+                        html += this.renderTextBlockWidget(widget);
+                        break;
+                        
+                    case 'advantage_list':
+                        html += this.renderAdvantageListWidget(widget);
+                        break;
+                        
+                    case 'weakness_list':
+                        html += this.renderWeaknessListWidget(widget);
+                        break;
+                        
+                    case 'comparison':
+                        html += this.renderComparisonWidget(widget);
+                        break;
+                        
+                    case 'pricing_table':
+                        html += this.renderPricingTableWidget(widget);
+                        break;
+                        
+                    default:
+                        html += this.renderGenericWidget(widget);
+                }
+                
+                html += '</div>\\n';
+                return html;
+            }
+            
+            // Rendus spécifiques par type de widget
+            renderHeaderWidget(widget) {
+                const { title, subtitle, logo } = widget.data;
+                let html = '';
+                
+                if (logo) {
+                    html += `<div class="header-logo"><img src="${logo}" alt="Logo" style="max-height: 80px; margin-bottom: 1rem;"></div>\\n`;
+                }
+                if (title) {
+                    html += `<h1>${this.escapeHtml(title)}</h1>\\n`;
+                }
+                if (subtitle) {
+                    html += `<p>${this.escapeHtml(subtitle)}</p>\\n`;
+                }
+                
+                return html;
+            }
+            
+            renderHeroWidget(widget) {
+                const { title, description, cta_text, cta_link, background_image } = widget.data;
+                let html = '';
+                
+                if (title) {
+                    html += `<h2>${this.escapeHtml(title)}</h2>\\n`;
+                }
+                if (description) {
+                    html += `<p>${this.escapeHtml(description)}</p>\\n`;
+                }
+                if (cta_text) {
+                    const href = cta_link ? `href="${this.escapeHtml(cta_link)}"` : '';
+                    html += `<a class="hero-cta" ${href}>${this.escapeHtml(cta_text)}</a>\\n`;
+                }
+                
+                return html;
+            }
+            
+            renderTextBlockWidget(widget) {
+                const { title, content, alignment } = widget.data;
+                let html = `<div style="text-align: ${alignment || 'left'};">\\n`;
+                
+                if (title) {
+                    html += `<h3>${this.escapeHtml(title)}</h3>\\n`;
+                }
+                if (content) {
+                    html += `<p>${this.escapeHtml(content)}</p>\\n`;
+                }
+                
+                html += '</div>\\n';
+                return html;
+            }
+            
+            renderAdvantageListWidget(widget) {
+                const { title } = widget.data;
+                let html = '';
+                
+                if (title) {
+                    html += `<h3 class="list-title">${this.escapeHtml(title)}</h3>\\n`;
+                }
+                
+                if (widget.items && widget.items.length > 0) {
+                    html += '<div class="items-grid">\\n';
+                    widget.items.forEach(item => {
+                        html += `
+                            <div class="list-item">
+                                <span class="item-icon">${item.emoji || '✅'}</span>
+                                <div class="item-content">
+                                    <h4>${this.escapeHtml(item.title || '')}</h4>
+                                    <p>${this.escapeHtml(item.description || '')}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>\\n';
+                } else {
+                    html += '<p style="text-align: center; color: var(--text-secondary); font-style: italic;">Liste en cours de création...</p>';
+                }
+                
+                return html;
+            }
+            
+            renderWeaknessListWidget(widget) {
+                const { title } = widget.data;
+                let html = '';
+                
+                if (title) {
+                    html += `<h3 class="list-title">${this.escapeHtml(title)}</h3>\\n`;
+                }
+                
+                if (widget.items && widget.items.length > 0) {
+                    html += '<div class="items-grid">\\n';
+                    widget.items.forEach(item => {
+                        html += `
+                            <div class="list-item">
+                                <span class="item-icon">${item.emoji || '❌'}</span>
+                                <div class="item-content">
+                                    <h4>${this.escapeHtml(item.title || '')}</h4>
+                                    <p>${this.escapeHtml(item.description || '')}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>\\n';
+                } else {
+                    html += '<p style="text-align: center; color: var(--text-secondary); font-style: italic;">Liste en cours de création...</p>';
+                }
+                
+                return html;
+            }
+            
+            renderComparisonWidget(widget) {
+                const { title, product_a_name, product_b_name, product_a_image, product_b_image } = widget.data;
+                
+                let html = '<div class="comparison-container">\\n';
+                
+                if (title) {
+                    html += `<h2 class="comparison-title">${this.escapeHtml(title)}</h2>\\n`;
+                }
+                
+                html += `
+                    <div class="comparison-grid">
+                        <div class="product-card">
+                            <div class="product-image">
+                                ${product_a_image ? `<img src="${product_a_image}" alt="${product_a_name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">` : '📱'}
+                            </div>
+                            <h3 class="product-name">${this.escapeHtml(product_a_name || 'Produit A')}</h3>
+                        </div>
+                        
+                        <div class="vs-separator">VS</div>
+                        
+                        <div class="product-card">
+                            <div class="product-image">
+                                ${product_b_image ? `<img src="${product_b_image}" alt="${product_b_name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">` : '🔋'}
+                            </div>
+                            <h3 class="product-name">${this.escapeHtml(product_b_name || 'Produit B')}</h3>
+                        </div>
+                    </div>
+                `;
+                
+                html += '</div>\\n';
+                return html;
+            }
+            
+            renderPricingTableWidget(widget) {
+                const { title, description } = widget.data;
+                
+                let html = '<div class="pricing-container">\\n';
+                
+                if (title) {
+                    html += `<h2 class="pricing-title">${this.escapeHtml(title)}</h2>\\n`;
+                }
+                if (description) {
+                    html += `<p class="pricing-description">${this.escapeHtml(description)}</p>\\n`;
+                }
+                
+                if (widget.items && widget.items.length > 0) {
+                    html += '<div class="pricing-grid">\\n';
+                    widget.items.forEach((plan, index) => {
+                        const isFeatured = index === 1; // Plan du milieu en vedette
+                        html += `
+                            <div class="pricing-card ${isFeatured ? 'featured' : ''}">
+                                <h3 class="plan-name">${this.escapeHtml(plan.plan_name || '')}</h3>
+                                <div class="plan-price">${plan.price || '0'}<span style="font-size: 0.6em;">${plan.currency || '€'}</span></div>
+                                <div class="plan-period">${plan.period || '/mois'}</div>
+                                
+                                ${plan.features ? `
+                                    <div class="plan-features">
+                                        ${plan.features.split('\\n').map(feature => `
+                                            <div class="plan-feature">
+                                                <span class="feature-check">✓</span>
+                                                <span>${this.escapeHtml(feature.trim())}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    });
+                    html += '</div>\\n';
+                } else {
+                    html += '<p style="text-align: center; color: var(--text-secondary); font-style: italic;">Plans tarifaires en cours de création...</p>';
+                }
+                
+                html += '</div>\\n';
+                return html;
+            }
+            
+            renderGenericWidget(widget) {
+                return `
+                    <div style="padding: 2rem; text-align: center; background: #f3f4f6; border-radius: 8px; margin: 1rem 0;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎨</div>
+                        <p style="color: #6b7280;">Widget ${widget.type} en cours de développement...</p>
+                    </div>
+                `;
+            }
+            
+            /**
+             * Rôle : Mise à jour de l'indicateur de synchronisation
+             * Type : UI feedback - État de connexion
+             */
+            updateSyncIndicator(status) {
+                const indicator = document.getElementById('syncIndicator');
+                
+                indicator.className = `sync-indicator ${status}`;
+                
+                switch (status) {
+                    case 'synced':
+                        indicator.innerHTML = '<span class="sync-dot"></span><span>Synchronisé</span>';
+                        break;
+                    case 'syncing':
+                        indicator.innerHTML = '<span class="sync-dot"></span><span>Synchronisation...</span>';
+                        break;
+                    case 'error':
+                        indicator.innerHTML = '<span class="sync-dot"></span><span>Erreur de sync</span>';
+                        break;
+                }
+            }
+            
+            /**
+             * Rôle : Échapper les caractères HTML
+             * Type : Security - Prevention XSS
+             */
+            escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            /**
+             * Rôle : Nettoyage lors de la fermeture
+             * Type : Cleanup - Gestion mémoire
+             */
+            destroy() {
+                if (this.syncCheckInterval) {
+                    clearInterval(this.syncCheckInterval);
+                }
+                window.removeEventListener('storage', this.handleSync);
+            }
+            /**
+             * Rôle : Rendu d'un widget navbar Li-CUBE PRO
+             * Type : Widget rendering - Navigation
+             */
+            renderNavbarWidget(widget) {
+                let html = `<nav class="navbar licubepro-navbar">
+                    <div class="nav-content">
+                        <div class="nav-brand">`;
+                
+                if (widget.data.logo) {
+                    html += `<a href="#" class="nav-logo" style="background-image: url('${widget.data.logo}')"></a>`;
+                }
+                
+                if (widget.data.brand_title) {
+                    html += `<h1 class="nav-title">${widget.data.brand_title}</h1>`;
+                }
+                
+                html += `</div></div></nav>`;
+                return html;
+            }
+
+            /**
+             * Rôle : Rendu d'un widget spacer
+             * Type : Widget rendering - Espacement
+             */
+            renderSpacerWidget(widget) {
+                const height = widget.data.height || '80';
+                return `<div class="spacer" style="height: ${height}px; width: 100%; background: transparent; display: block;"></div>`;
+            }
+
+            /**
+             * Rôle : Rendu d'un widget header Li-CUBE PRO
+             * Type : Widget rendering - En-tête spécialisé
+             */
+            renderLiCubeProHeaderWidget(widget) {
+                let html = `<div class="licubepro-header-content" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); color: #F8FAFC;">`;
+                
+                if (widget.data.main_title) {
+                    html += `<h1 class="main-title" style="font-size: 3rem; font-family: 'Playfair Display', serif; color: #10B981; margin-bottom: 1rem;">${widget.data.main_title}</h1>`;
+                }
+                
+                if (widget.data.subtitle) {
+                    html += `<h2 class="subtitle" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">${widget.data.subtitle}</h2>`;
+                }
+                
+                if (widget.data.company) {
+                    html += `<p class="company" style="font-size: 1.2rem; color: #CBD5E1; margin-bottom: 0.5rem;">${widget.data.company}</p>`;
+                }
+                
+                if (widget.data.slogan) {
+                    html += `<p class="slogan" style="font-size: 1rem; color: #14B8A6; font-style: italic;">${widget.data.slogan}</p>`;
+                }
+                
+                html += `</div>`;
+                return html;
+            }
+        }
+        
+        // Initialisation au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            window.viewer = new PresentationViewer();
+        });
+        
+        // Nettoyage avant fermeture
+        window.addEventListener('beforeunload', () => {
+            if (window.viewer) {
+                window.viewer.destroy();
+            }
+        });
+    </script>
+</body>
+</html>

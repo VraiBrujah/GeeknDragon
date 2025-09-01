@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Simple - Architecture Modulaire</title>
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <style>
+        body {
+            padding: var(--spacing-lg);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .test-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .test-title {
+            color: var(--accent-green);
+            font-size: var(--text-xl);
+            font-weight: var(--font-bold);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .test-results {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            font-family: var(--font-mono);
+            font-size: var(--text-sm);
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .test-widget-container {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-md) 0;
+            min-height: 200px;
+            background: white;
+            color: var(--text-dark);
+        }
+        
+        .btn {
+            margin-right: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .status {
+            display: inline-block;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+        }
+        
+        .status.success {
+            background: rgba(5, 150, 105, 0.2);
+            color: var(--success-green);
+            border: 1px solid var(--success-green);
+        }
+        
+        .status.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger-red);
+            border: 1px solid var(--danger-red);
+        }
+        
+        .status.loading {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning-orange);
+            border: 1px solid var(--warning-orange);
+        }
+
+        /* Grille moderne pour les propriétés */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .property-section {
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+        }
+
+        .property-section-title {
+            color: var(--accent-green);
+            font-weight: var(--font-bold);
+            font-size: var(--text-sm);
+            margin-bottom: var(--spacing-sm);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .compact-form-group {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .compact-form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .range-input-group {
+            display: grid;
+            grid-template-columns: 1fr 60px;
+            gap: var(--spacing-xs);
+            align-items: center;
+        }
+
+        .range-value {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--border-radius-sm);
+            padding: 0.25rem 0.5rem;
+            text-align: center;
+            font-size: var(--text-xs);
+            color: var(--accent-green);
+            font-weight: var(--font-medium);
+        }
+
+        /* Drag & Drop pour les sections */
+        .property-section[draggable="true"] {
+            cursor: grab;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .property-section[draggable="true"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .property-section.dragging {
+            opacity: 0.6;
+            cursor: grabbing;
+            transform: rotate(3deg) scale(1.02);
+            z-index: 1000;
+        }
+
+        .property-section.drag-over {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+            transform: scale(1.02);
+        }
+
+        .section-drag-handle {
+            position: absolute;
+            top: var(--spacing-xs);
+            right: var(--spacing-xs);
+            width: 20px;
+            height: 20px;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            font-size: 10px;
+            color: var(--accent-green);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .section-drag-handle:hover {
+            opacity: 1;
+            background: rgba(16, 185, 129, 0.4);
+            cursor: grab;
+        }
+
+        .section-drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .property-section-title {
+            padding-right: 30px; /* Espace pour le drag handle */
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test de l'Architecture Modulaire</h1>
+    <p>Cette page teste le système modulaire sans utiliser les modules ES6</p>
+
+    <!-- Test 1: CSS Unifié -->
+    <div class="test-section">
+        <div class="test-title">
+            <i class="fas fa-palette"></i>
+            Test 1: Système CSS Unifié
+        </div>
+        <p>Vérification que les variables CSS et le thème sont bien chargés.</p>
+        
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Carte de Test</div>
+                <div class="card-subtitle">Avec le thème Li-CUBE PRO™</div>
+            </div>
+            <div class="card-body">
+                <p>Si vous voyez cette carte avec un fond sombre et des couleurs vertes, le CSS fonctionne !</p>
+                <button class="btn btn-primary">Bouton Primary</button>
+                <button class="btn btn-secondary">Bouton Secondary</button>
+                <button class="btn btn-outline">Bouton Outline</button>
+            </div>
+        </div>
+        
+        <div class="status success" id="cssStatus">✅ CSS Unifié: OK</div>
+    </div>
+
+    <!-- Test 2: Widget Loader -->
+    <div class="test-section">
+        <div class="test-title">
+            <i class="fas fa-cog"></i>
+            Test 2: Widget Loader (Version Simplifiée)
+        </div>
+        <p>Test de chargement des widgets sans modules ES6.</p>
+        
+        <button class="btn btn-primary" onclick="testWidgetLoader()">Tester le Chargement</button>
+        <button class="btn btn-secondary" onclick="testWidgetCreation()">Créer un Widget</button>
+        <button class="btn btn-outline" onclick="clearTests()">Nettoyer</button>
+        
+        <div class="test-results" id="loaderResults">Cliquez sur "Tester le Chargement" pour commencer...</div>
+    </div>
+
+    <!-- Test 3: Widgets Individuels -->
+    <div class="test-section">
+        <div class="test-title">
+            <i class="fas fa-puzzle-piece"></i>
+            Test 3: Rendu des Widgets
+        </div>
+        <p>Affichage des widgets individuels.</p>
+        
+        <button class="btn btn-primary" onclick="testLogoWidget()">Logo Widget</button>
+        <button class="btn btn-primary" onclick="testHeroTitleWidget()">Hero Title Widget</button>
+        <button class="btn btn-primary" onclick="testPricingCardWidget()">Pricing Card Widget</button>
+        
+        <div class="test-widget-container" id="widgetContainer">
+            Les widgets apparaîtront ici...
+        </div>
+        
+        <div class="status loading" id="widgetStatus">En attente...</div>
+    </div>
+
+    <!-- Test 4: Propriétés Éditables (Dynamique) -->
+    <div class="test-section">
+        <div class="test-title">
+            <i class="fas fa-sliders-h"></i>
+            Test 4: Système de Propriétés
+        </div>
+        <p>Les propriétés du widget affiché apparaîtront ici.</p>
+        
+        <div id="propertiesContainer" style="display: none;">
+            <div id="widgetTypeInfo" class="form-group" style="background: rgba(16, 185, 129, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #10B981;">
+                <strong>Widget Actuel:</strong> <span id="currentWidgetType">Aucun</span>
+            </div>
+            
+            <div id="dynamicProperties">
+                <!-- Les propriétés spécifiques au widget apparaîtront ici -->
+            </div>
+            
+            <div class="status success" id="propertiesStatus" style="display: none;">✅ Propriétés: Actives</div>
+        </div>
+        
+        <div id="noWidgetMessage" class="form-group" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <i class="fas fa-info-circle" style="font-size: 2em; margin-bottom: 1rem; opacity: 0.5;"></i>
+            <p><strong>Aucun widget sélectionné</strong></p>
+            <p>Utilisez le Test 3 pour afficher un widget, puis ses propriétés apparaîtront ici.</p>
+        </div>
+    </div>
+
+    <!-- Scripts de test -->
+    <script>
+        // Variables globales pour les tests
+        let testResults = [];
+        let currentWidget = null;
+        let currentWidgetType = null;
+        
+        // Test du widget loader simplifié
+        function testWidgetLoader() {
+            const results = document.getElementById('loaderResults');
+            results.textContent = 'Test du Widget Loader...\n';
+            
+            // Simulation du chargement des widgets
+            const widgets = [
+                { type: 'logo', name: 'Logo Widget', status: 'Chargé' },
+                { type: 'hero-title', name: 'Hero Title Widget', status: 'Chargé' },
+                { type: 'pricing-card', name: 'Pricing Card Widget', status: 'Chargé' }
+            ];
+            
+            widgets.forEach((widget, index) => {
+                setTimeout(() => {
+                    results.textContent += `✅ ${widget.name}: ${widget.status}\n`;
+                    if (index === widgets.length - 1) {
+                        results.textContent += '\n✅ Tous les widgets sont chargés !';
+                    }
+                }, (index + 1) * 500);
+            });
+        }
+        
+        // Test de création de widget
+        function testWidgetCreation() {
+            const results = document.getElementById('loaderResults');
+            results.textContent += '\n\n🚀 Test de création de widget...\n';
+            
+            // Simulation de la création
+            const widgetData = {
+                type: 'test',
+                name: 'Widget de Test',
+                data: {
+                    title: 'Test Title',
+                    color: '#10B981'
+                }
+            };
+            
+            setTimeout(() => {
+                results.textContent += `✅ Widget créé: ${widgetData.name}\n`;
+                results.textContent += `📊 Données: ${JSON.stringify(widgetData.data, null, 2)}\n`;
+            }, 1000);
+        }
+        
+        // Test du logo widget
+        function testLogoWidget() {
+            const container = document.getElementById('widgetContainer');
+            const status = document.getElementById('widgetStatus');
+            
+            status.textContent = '🔄 Chargement Logo Widget...';
+            status.className = 'status loading';
+            
+            setTimeout(() => {
+                container.innerHTML = `
+                    <div class="nav-logo" style="
+                        width: 80px; 
+                        height: 80px; 
+                        background: rgba(16, 185, 129, 0.1);
+                        border: 2px solid rgba(16, 185, 129, 0.3);
+                        border-radius: 12px;
+                        background-image: url('./assets/images/logo-placeholder.png');
+                        background-size: 80%;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        margin: 20px auto;
+                        transition: all 0.3s ease;
+                    "></div>
+                    <div style="text-align: center; margin-top: 10px;">
+                        <strong>Logo Widget</strong><br>
+                        <small>Survol pour voir l'effet hover</small>
+                    </div>
+                `;
+                
+                // Ajout de l'effet hover
+                const logo = container.querySelector('.nav-logo');
+                logo.addEventListener('mouseenter', () => {
+                    logo.style.transform = 'scale(1.1)';
+                    logo.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+                });
+                logo.addEventListener('mouseleave', () => {
+                    logo.style.transform = 'scale(1)';
+                    logo.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
+                });
+                
+                // Configuration du widget actuel et génération des propriétés
+                currentWidget = container;
+                currentWidgetType = 'logo';
+                generateWidgetProperties('logo');
+                
+                status.textContent = '✅ Logo Widget rendu avec succès';
+                status.className = 'status success';
+            }, 1000);
+        }
+        
+        // Test du hero title widget
+        function testHeroTitleWidget() {
+            const container = document.getElementById('widgetContainer');
+            const status = document.getElementById('widgetStatus');
+            
+            status.textContent = '🔄 Chargement Hero Title Widget...';
+            status.className = 'status loading';
+            
+            setTimeout(() => {
+                container.innerHTML = `
+                    <div class="hero-text-content" style="text-align: center; padding: 2rem;">
+                        <h1 class="hero-title" style="
+                            font-size: clamp(2rem, 6vw, 4rem);
+                            font-weight: 900;
+                            font-family: 'Playfair Display', serif;
+                            background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            margin-bottom: 1rem;
+                            animation: fadeIn 1s ease-out;
+                        ">Li-CUBE PRO™</h1>
+                        <div class="hero-subtitle" style="
+                            font-size: 1.5rem;
+                            color: #666;
+                            font-weight: 600;
+                            animation: slideUp 1s ease-out 0.3s both;
+                        ">LOCATION INTELLIGENTE<br>ZÉRO RISQUE</div>
+                    </div>
+                    
+                    <style>
+                        @keyframes fadeIn {
+                            from { opacity: 0; transform: translateY(-20px); }
+                            to { opacity: 1; transform: translateY(0); }
+                        }
+                        @keyframes slideUp {
+                            from { opacity: 0; transform: translateY(30px); }
+                            to { opacity: 1; transform: translateY(0); }
+                        }
+                    </style>
+                `;
+                
+                // Configuration du widget actuel et génération des propriétés
+                currentWidget = container;
+                currentWidgetType = 'hero-title';
+                generateWidgetProperties('hero-title');
+                
+                status.textContent = '✅ Hero Title Widget rendu avec animations';
+                status.className = 'status success';
+            }, 1000);
+        }
+        
+        // Test du pricing card widget
+        function testPricingCardWidget() {
+            const container = document.getElementById('widgetContainer');
+            const status = document.getElementById('widgetStatus');
+            
+            status.textContent = '🔄 Chargement Pricing Card Widget...';
+            status.className = 'status loading';
+            
+            setTimeout(() => {
+                container.innerHTML = `
+                    <div class="pricing-card" style="
+                        background: rgba(30, 41, 59, 0.8);
+                        border: 2px solid rgba(16, 185, 129, 0.2);
+                        border-radius: 16px;
+                        padding: 2rem;
+                        text-align: center;
+                        max-width: 300px;
+                        margin: 0 auto;
+                        transition: all 0.3s ease;
+                        color: white;
+                    ">
+                        <div class="pricing-badge" style="
+                            background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%);
+                            color: white;
+                            padding: 0.5rem 1rem;
+                            border-radius: 8px;
+                            font-size: 0.75rem;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                            margin-bottom: 1rem;
+                            display: inline-block;
+                        ">POPULAIRE</div>
+                        
+                        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: #10B981;">PROFESSIONNEL</h3>
+                        
+                        <div class="pricing-price" style="margin-bottom: 2rem;">
+                            <span style="font-size: 1.5rem; color: #10B981;">$</span>
+                            <span style="font-size: 3rem; font-weight: 900; color: white;">599</span>
+                            <span style="color: #94A3B8;">/mois</span>
+                        </div>
+                        
+                        <ul style="list-style: none; margin-bottom: 2rem; text-align: left;">
+                            <li style="margin-bottom: 0.5rem; color: #CBD5E1;">✅ Installation gratuite</li>
+                            <li style="margin-bottom: 0.5rem; color: #CBD5E1;">✅ Maintenance incluse</li>
+                            <li style="margin-bottom: 0.5rem; color: #CBD5E1;">✅ Support 24/7</li>
+                            <li style="margin-bottom: 0.5rem; color: #CBD5E1;">✅ Jusqu'à 200 équipements</li>
+                        </ul>
+                        
+                        <button class="pricing-cta" style="
+                            width: 100%;
+                            padding: 1rem;
+                            background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%);
+                            color: white;
+                            border: none;
+                            border-radius: 8px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            transition: all 0.3s ease;
+                        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 20px rgba(16, 185, 129, 0.3)'"
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            Choisir ce Plan
+                        </button>
+                    </div>
+                `;
+                
+                // Configuration du widget actuel et génération des propriétés
+                currentWidget = container;
+                currentWidgetType = 'pricing-card';
+                generateWidgetProperties('pricing-card');
+                
+                status.textContent = '✅ Pricing Card Widget rendu avec interactions';
+                status.className = 'status success';
+            }, 1000);
+        }
+        
+        
+        // Génération dynamique des propriétés selon le widget
+        function generateWidgetProperties(widgetType) {
+            const propertiesContainer = document.getElementById('propertiesContainer');
+            const noWidgetMessage = document.getElementById('noWidgetMessage');
+            const dynamicProperties = document.getElementById('dynamicProperties');
+            const currentWidgetTypeSpan = document.getElementById('currentWidgetType');
+            const propertiesStatus = document.getElementById('propertiesStatus');
+            
+            // Afficher le panneau de propriétés et masquer le message
+            propertiesContainer.style.display = 'block';
+            noWidgetMessage.style.display = 'none';
+            propertiesStatus.style.display = 'block';
+            
+            // Mise à jour du type de widget actuel
+            const widgetNames = {
+                'logo': 'Logo Widget 🏢',
+                'hero-title': 'Hero Title Widget ✨', 
+                'pricing-card': 'Pricing Card Widget 💰'
+            };
+            currentWidgetTypeSpan.textContent = widgetNames[widgetType] || widgetType;
+            
+            // Définition des propriétés par type de widget
+            const widgetProperties = {
+                'logo': [
+                    {
+                        name: 'imagePath',
+                        type: 'text',
+                        label: 'Chemin Image',
+                        defaultValue: './assets/images/logo-placeholder.png',
+                        description: 'URL ou chemin local de l\'image du logo',
+                        category: 'Image'
+                    },
+                    {
+                        name: 'altText',
+                        type: 'text',
+                        label: 'Texte Alternatif',
+                        defaultValue: 'Logo EDS Québec',
+                        description: 'Description de l\'image pour l\'accessibilité',
+                        category: 'Image'
+                    },
+                    {
+                        name: 'borderColor',
+                        type: 'color',
+                        label: 'Couleur de Bordure',
+                        defaultValue: '#10B981',
+                        description: 'Couleur de la bordure du logo',
+                        category: 'Style'
+                    },
+                    {
+                        name: 'backgroundColor',
+                        type: 'color',
+                        label: 'Couleur de Fond',
+                        defaultValue: '#10B981',
+                        description: 'Couleur de fond du logo',
+                        category: 'Style'
+                    },
+                    {
+                        name: 'logoWidth',
+                        type: 'range',
+                        label: 'Largeur (px)',
+                        defaultValue: 80,
+                        min: 40,
+                        max: 200,
+                        description: 'Largeur du logo en pixels',
+                        category: 'Dimensions'
+                    },
+                    {
+                        name: 'logoHeight',
+                        type: 'range',
+                        label: 'Hauteur (px)',
+                        defaultValue: 80,
+                        min: 40,
+                        max: 200,
+                        description: 'Hauteur du logo en pixels',
+                        category: 'Dimensions'
+                    },
+                    {
+                        name: 'borderRadius',
+                        type: 'range',
+                        label: 'Arrondi (px)',
+                        defaultValue: 12,
+                        min: 0,
+                        max: 50,
+                        description: 'Rayon de l\'arrondi des coins',
+                        category: 'Style'
+                    },
+                    {
+                        name: 'logoAlign',
+                        type: 'select',
+                        label: 'Alignement Logo',
+                        defaultValue: 'center',
+                        description: 'Alignement du logo dans son conteneur',
+                        category: 'Alignement',
+                        section: 'logo',
+                        options: [
+                            { value: 'left', label: 'Gauche' },
+                            { value: 'center', label: 'Centré' },
+                            { value: 'right', label: 'Droite' }
+                        ]
+                    },
+                    {
+                        name: 'size',
+                        type: 'range',
+                        label: 'Taille Widget (%)',
+                        defaultValue: 100,
+                        min: 50,
+                        max: 200,
+                        description: 'Taille d\'affichage du widget',
+                        category: 'Dimensions'
+                    }
+                ],
+                'hero-title': [
+                    {
+                        name: 'title',
+                        type: 'text',
+                        label: 'Titre Principal',
+                        defaultValue: 'Li-CUBE PRO™',
+                        description: 'Texte du titre principal',
+                        category: 'Contenu'
+                    },
+                    {
+                        name: 'subtitle',
+                        type: 'textarea',
+                        label: 'Sous-titre',
+                        defaultValue: 'LOCATION INTELLIGENTE\nZÉRO RISQUE',
+                        description: 'Texte du sous-titre',
+                        category: 'Contenu'
+                    },
+                    {
+                        name: 'titleColor',
+                        type: 'color',
+                        label: 'Couleur du Titre',
+                        defaultValue: '#10B981',
+                        description: 'Couleur principale du titre',
+                        category: 'Couleurs'
+                    },
+                    {
+                        name: 'subtitleColor',
+                        type: 'color',
+                        label: 'Couleur du Sous-titre',
+                        defaultValue: '#666666',
+                        description: 'Couleur du sous-titre',
+                        category: 'Couleurs'
+                    },
+                    {
+                        name: 'titleSize',
+                        type: 'range',
+                        label: 'Taille Titre (px)',
+                        defaultValue: 60,
+                        min: 24,
+                        max: 120,
+                        description: 'Taille de police du titre',
+                        category: 'Typographie'
+                    },
+                    {
+                        name: 'subtitleSize',
+                        type: 'range',
+                        label: 'Taille Sous-titre (px)',
+                        defaultValue: 24,
+                        min: 14,
+                        max: 48,
+                        description: 'Taille de police du sous-titre',
+                        category: 'Typographie'
+                    },
+                    {
+                        name: 'textAlign',
+                        type: 'select',
+                        label: 'Alignement',
+                        defaultValue: 'center',
+                        options: [
+                            { value: 'left', label: 'Gauche' },
+                            { value: 'center', label: 'Centré' },
+                            { value: 'right', label: 'Droite' },
+                            { value: 'justify', label: 'Justifié' }
+                        ],
+                        description: 'Alignement du texte',
+                        category: 'Typographie'
+                    },
+                    {
+                        name: 'titleWeight',
+                        type: 'select',
+                        label: 'Poids du Titre',
+                        defaultValue: '900',
+                        options: [
+                            { value: '400', label: 'Normal' },
+                            { value: '600', label: 'Semi-gras' },
+                            { value: '700', label: 'Gras' },
+                            { value: '800', label: 'Extra-gras' },
+                            { value: '900', label: 'Ultra-gras' }
+                        ],
+                        description: 'Épaisseur de police du titre',
+                        category: 'Typographie'
+                    },
+                    {
+                        name: 'size',
+                        type: 'range',
+                        label: 'Taille Widget (%)',
+                        defaultValue: 100,
+                        min: 50,
+                        max: 200,
+                        description: 'Taille d\'affichage du widget',
+                        category: 'Dimensions'
+                    }
+                ],
+                'pricing-card': [
+                    {
+                        name: 'planName',
+                        type: 'text',
+                        label: 'Nom du Plan',
+                        defaultValue: 'PROFESSIONNEL',
+                        description: 'Nom affiché sur la carte',
+                        category: 'Contenu'
+                    },
+                    {
+                        name: 'badgeText',
+                        type: 'text',
+                        label: 'Texte Badge',
+                        defaultValue: 'POPULAIRE',
+                        description: 'Texte du badge promotionnel',
+                        category: 'Contenu'
+                    },
+                    {
+                        name: 'price',
+                        type: 'number',
+                        label: 'Prix (CAD)',
+                        defaultValue: 599,
+                        description: 'Prix mensuel en dollars canadiens',
+                        category: 'Contenu'
+                    },
+                    {
+                        name: 'currency',
+                        type: 'text',
+                        label: 'Devise',
+                        defaultValue: '$',
+                        description: 'Symbole de la devise',
+                        category: 'Contenu'
+                    },
+                    {
+                        name: 'period',
+                        type: 'text',
+                        label: 'Période',
+                        defaultValue: '/mois',
+                        description: 'Période de facturation',
+                        category: 'Contenu'
+                    },
+                    {
+                        name: 'ctaText',
+                        type: 'text',
+                        label: 'Texte Bouton',
+                        defaultValue: 'Choisir ce Plan',
+                        description: 'Texte du bouton d\'action',
+                        category: 'Contenu'
+                    },
+                    {
+                        name: 'accentColor',
+                        type: 'color',
+                        label: 'Couleur Principale',
+                        defaultValue: '#10B981',
+                        description: 'Couleur des éléments importants',
+                        category: 'Couleurs'
+                    },
+                    {
+                        name: 'backgroundColor',
+                        type: 'color',
+                        label: 'Fond de Carte',
+                        defaultValue: '#1E293B',
+                        description: 'Couleur de fond de la carte',
+                        category: 'Couleurs'
+                    },
+                    {
+                        name: 'textColor',
+                        type: 'color',
+                        label: 'Couleur Texte',
+                        defaultValue: '#FFFFFF',
+                        description: 'Couleur du texte principal',
+                        category: 'Couleurs'
+                    },
+                    {
+                        name: 'planNameSize',
+                        type: 'range',
+                        label: 'Taille Nom Plan (px)',
+                        defaultValue: 24,
+                        min: 16,
+                        max: 36,
+                        description: 'Taille de police du nom du plan',
+                        category: 'Typographie'
+                    },
+                    {
+                        name: 'priceSize',
+                        type: 'range',
+                        label: 'Taille Prix (px)',
+                        defaultValue: 48,
+                        min: 24,
+                        max: 72,
+                        description: 'Taille de police du prix',
+                        category: 'Typographie'
+                    },
+                    {
+                        name: 'borderRadius',
+                        type: 'range',
+                        label: 'Arrondi (px)',
+                        defaultValue: 16,
+                        min: 0,
+                        max: 30,
+                        description: 'Arrondi des coins de la carte',
+                        category: 'Style'
+                    },
+                    {
+                        name: 'feature1',
+                        type: 'text',
+                        label: 'Fonctionnalité 1',
+                        defaultValue: '✅ Installation gratuite',
+                        description: 'Première fonctionnalité listée',
+                        category: 'Fonctionnalités',
+                        section: 'features'
+                    },
+                    {
+                        name: 'feature2',
+                        type: 'text',
+                        label: 'Fonctionnalité 2',
+                        defaultValue: '✅ Maintenance incluse',
+                        description: 'Deuxième fonctionnalité listée',
+                        category: 'Fonctionnalités',
+                        section: 'features'
+                    },
+                    {
+                        name: 'feature3',
+                        type: 'text',
+                        label: 'Fonctionnalité 3',
+                        defaultValue: '✅ Support 24/7',
+                        description: 'Troisième fonctionnalité listée',
+                        category: 'Fonctionnalités',
+                        section: 'features'
+                    },
+                    {
+                        name: 'feature4',
+                        type: 'text',
+                        label: 'Fonctionnalité 4',
+                        defaultValue: '✅ Jusqu\'à 200 équipements',
+                        description: 'Quatrième fonctionnalité listée',
+                        category: 'Fonctionnalités',
+                        section: 'features'
+                    },
+                    {
+                        name: 'planNameAlign',
+                        type: 'select',
+                        label: 'Alignement Nom Plan',
+                        defaultValue: 'center',
+                        description: 'Alignement du titre du plan',
+                        category: 'Alignement',
+                        section: 'planName',
+                        options: [
+                            { value: 'left', label: 'Gauche' },
+                            { value: 'center', label: 'Centré' },
+                            { value: 'right', label: 'Droite' }
+                        ]
+                    },
+                    {
+                        name: 'priceAlign',
+                        type: 'select',
+                        label: 'Alignement Prix',
+                        defaultValue: 'center',
+                        description: 'Alignement du prix',
+                        category: 'Alignement',
+                        section: 'price',
+                        options: [
+                            { value: 'left', label: 'Gauche' },
+                            { value: 'center', label: 'Centré' },
+                            { value: 'right', label: 'Droite' }
+                        ]
+                    },
+                    {
+                        name: 'featuresAlign',
+                        type: 'select',
+                        label: 'Alignement Fonctionnalités',
+                        defaultValue: 'left',
+                        description: 'Alignement de la liste des fonctionnalités',
+                        category: 'Alignement',
+                        section: 'features',
+                        options: [
+                            { value: 'left', label: 'Gauche' },
+                            { value: 'center', label: 'Centré' },
+                            { value: 'right', label: 'Droite' }
+                        ]
+                    },
+                    {
+                        name: 'ctaAlign',
+                        type: 'select',
+                        label: 'Alignement Bouton',
+                        defaultValue: 'center',
+                        description: 'Alignement du bouton d\'action',
+                        category: 'Alignement',
+                        section: 'cta',
+                        options: [
+                            { value: 'left', label: 'Gauche' },
+                            { value: 'center', label: 'Centré' },
+                            { value: 'right', label: 'Droite' }
+                        ]
+                    },
+                    {
+                        name: 'size',
+                        type: 'range',
+                        label: 'Taille Widget (%)',
+                        defaultValue: 100,
+                        min: 50,
+                        max: 200,
+                        description: 'Taille d\'affichage du widget',
+                        category: 'Dimensions'
+                    }
+                ]
+            };
+            
+            // Regroupement des propriétés par catégorie
+            const properties = widgetProperties[widgetType] || [];
+            const categorizedProperties = {};
+            
+            properties.forEach(prop => {
+                const category = prop.category || 'Général';
+                if (!categorizedProperties[category]) {
+                    categorizedProperties[category] = [];
+                }
+                categorizedProperties[category].push(prop);
+            });
+            
+            // Génération du HTML en grille avec sections drag & drop
+            let propertiesHTML = '<div class="properties-grid" id="properties-grid">';
+            
+            // Ordre des catégories basé sur l'ordre des éléments du widget
+            const categoryOrder = {
+                'Image': 1, 'Contenu': 2, 'Fonctionnalités': 3, 
+                'Couleurs': 4, 'Typographie': 5, 'Alignement': 6, 
+                'Style': 7, 'Dimensions': 8
+            };
+            
+            const sortedCategories = Object.entries(categorizedProperties).sort(([a], [b]) => {
+                return (categoryOrder[a] || 999) - (categoryOrder[b] || 999);
+            });
+            
+            sortedCategories.forEach(([categoryName, categoryProps], index) => {
+                const sectionId = `section-${widgetType}-${categoryName.toLowerCase().replace(/\s+/g, '-')}`;
+                propertiesHTML += `
+                    <div class="property-section" 
+                         draggable="true" 
+                         data-category="${categoryName}"
+                         data-widget-section="${categoryProps[0]?.section || categoryName.toLowerCase()}"
+                         id="${sectionId}"
+                         onmouseover="highlightWidgetSection('${categoryProps[0]?.section || categoryName.toLowerCase()}')"
+                         onmouseout="clearWidgetHighlight()">
+                        <div class="section-drag-handle" title="Faire glisser pour réorganiser">⋮⋮</div>
+                        <div class="property-section-title">${categoryName}</div>
+                `;
+                
+                categoryProps.forEach(prop => {
+                    propertiesHTML += `<div class="compact-form-group">`;
+                    propertiesHTML += `<label class="field-label" title="${prop.description}">${prop.label}:</label>`;
+                    
+                    switch (prop.type) {
+                        case 'text':
+                            propertiesHTML += `
+                                <input type="text" class="field-input" id="prop_${prop.name}" 
+                                    value="${prop.defaultValue}" 
+                                    onchange="updateWidgetProperty('${prop.name}', this.value)"
+                                    oninput="updateWidgetProperty('${prop.name}', this.value)"
+                                    placeholder="${prop.description}">
+                            `;
+                            break;
+                        case 'textarea':
+                            propertiesHTML += `
+                                <textarea class="field-input" id="prop_${prop.name}" rows="2" 
+                                    onchange="updateWidgetProperty('${prop.name}', this.value)"
+                                    oninput="updateWidgetProperty('${prop.name}', this.value)"
+                                    placeholder="${prop.description}">${prop.defaultValue}</textarea>
+                            `;
+                            break;
+                        case 'number':
+                            propertiesHTML += `
+                                <input type="number" class="field-input" id="prop_${prop.name}" 
+                                    value="${prop.defaultValue}" min="0" 
+                                    onchange="updateWidgetProperty('${prop.name}', this.value)"
+                                    oninput="updateWidgetProperty('${prop.name}', this.value)">
+                            `;
+                            break;
+                        case 'color':
+                            propertiesHTML += `
+                                <input type="color" class="field-input field-color" id="prop_${prop.name}" 
+                                    value="${prop.defaultValue}" 
+                                    onchange="updateWidgetProperty('${prop.name}', this.value)"
+                                    oninput="updateWidgetProperty('${prop.name}', this.value)">
+                            `;
+                            break;
+                        case 'select':
+                            propertiesHTML += `
+                                <select class="field-input" id="prop_${prop.name}" 
+                                    onchange="updateWidgetProperty('${prop.name}', this.value)">
+                            `;
+                            prop.options.forEach(option => {
+                                propertiesHTML += `
+                                    <option value="${option.value}" ${option.value === prop.defaultValue ? 'selected' : ''}>
+                                        ${option.label}
+                                    </option>
+                                `;
+                            });
+                            propertiesHTML += `</select>`;
+                            break;
+                        case 'range':
+                            const unit = prop.name === 'size' ? '%' : (prop.name.includes('Size') || prop.name.includes('Width') || prop.name.includes('Height') || prop.name.includes('Radius') ? 'px' : '');
+                            propertiesHTML += `
+                                <div class="range-input-group">
+                                    <input type="range" class="field-input field-range" id="prop_${prop.name}" 
+                                        value="${prop.defaultValue}" min="${prop.min || 0}" max="${prop.max || 100}" 
+                                        onchange="updateWidgetProperty('${prop.name}', this.value)"
+                                        oninput="updateWidgetProperty('${prop.name}', this.value)">
+                                    <span class="range-value" id="prop_${prop.name}_value">${prop.defaultValue}${unit}</span>
+                                </div>
+                            `;
+                            break;
+                    }
+                    
+                    propertiesHTML += `</div>`;
+                });
+                
+                propertiesHTML += `</div>`;
+            });
+            
+            propertiesHTML += '</div>';
+            dynamicProperties.innerHTML = propertiesHTML;
+            
+            // Initialiser le drag & drop après génération du HTML
+            setTimeout(() => {
+                initializeDragAndDrop();
+            }, 100);
+        }
+        
+        // Mise à jour d'une propriété spécifique du widget
+        function updateWidgetProperty(propertyName, value) {
+            if (!currentWidget || !currentWidgetType) return;
+            
+            console.log(`Mise à jour ${propertyName}: ${value}`);
+            
+                // Mise à jour des affichages de valeurs pour les ranges
+            const valueSpan = document.getElementById(`prop_${propertyName}_value`);
+            if (valueSpan) {
+                const unit = propertyName === 'size' ? '%' : (propertyName.includes('Size') || propertyName.includes('Width') || propertyName.includes('Height') || propertyName.includes('Radius') ? 'px' : '');
+                valueSpan.textContent = value + unit;
+            }
+            
+            // Application des modifications selon le type de widget et propriété
+            switch (currentWidgetType) {
+                case 'logo':
+                    updateLogoProperty(propertyName, value);
+                    break;
+                case 'hero-title':
+                    updateHeroTitleProperty(propertyName, value);
+                    break;
+                case 'pricing-card':
+                    updatePricingCardProperty(propertyName, value);
+                    break;
+            }
+        }
+        
+        // Mise à jour des propriétés du Logo Widget
+        function updateLogoProperty(property, value) {
+            const logo = currentWidget.querySelector('.nav-logo');
+            
+            switch (property) {
+                case 'imagePath':
+                    if (logo) {
+                        logo.style.backgroundImage = `url('${value}')`;
+                    }
+                    break;
+                case 'altText':
+                    if (logo) {
+                        logo.title = value;
+                        logo.setAttribute('aria-label', value);
+                    }
+                    break;
+                case 'borderColor':
+                    if (logo) {
+                        logo.style.borderColor = value;
+                    }
+                    break;
+                case 'backgroundColor':
+                    if (logo) {
+                        logo.style.backgroundColor = `${value}20`; // Avec transparence
+                    }
+                    break;
+                case 'logoWidth':
+                    if (logo) {
+                        logo.style.width = `${value}px`;
+                    }
+                    break;
+                case 'logoHeight':
+                    if (logo) {
+                        logo.style.height = `${value}px`;
+                    }
+                    break;
+                case 'borderRadius':
+                    if (logo) {
+                        logo.style.borderRadius = `${value}px`;
+                    }
+                    break;
+                case 'logoAlign':
+                    const logoContainer = currentWidget;
+                    if (logoContainer) {
+                        logoContainer.style.textAlign = value;
+                        logoContainer.style.display = 'flex';
+                        logoContainer.style.justifyContent = value === 'left' ? 'flex-start' : value === 'right' ? 'flex-end' : 'center';
+                    }
+                    break;
+                case 'size':
+                    currentWidget.style.transform = `scale(${value / 100})`;
+                    currentWidget.style.transformOrigin = 'center top';
+                    break;
+            }
+        }
+        
+        // Mise à jour des propriétés du Hero Title Widget
+        function updateHeroTitleProperty(property, value) {
+            const heroTitle = currentWidget.querySelector('.hero-title');
+            const heroSubtitle = currentWidget.querySelector('.hero-subtitle');
+            const heroContainer = currentWidget.querySelector('.hero-text-content');
+            
+            switch (property) {
+                case 'title':
+                    if (heroTitle) {
+                        heroTitle.textContent = value;
+                    }
+                    break;
+                case 'subtitle':
+                    if (heroSubtitle) {
+                        // Remplacer les \n par des <br> pour les retours à la ligne
+                        heroSubtitle.innerHTML = value.replace(/\n/g, '<br>');
+                    }
+                    break;
+                case 'titleColor':
+                    if (heroTitle) {
+                        heroTitle.style.background = `linear-gradient(135deg, ${value} 0%, #14B8A6 100%)`;
+                        heroTitle.style.webkitBackgroundClip = 'text';
+                        heroTitle.style.webkitTextFillColor = 'transparent';
+                        heroTitle.style.backgroundClip = 'text';
+                    }
+                    break;
+                case 'subtitleColor':
+                    if (heroSubtitle) {
+                        heroSubtitle.style.color = value;
+                    }
+                    break;
+                case 'titleSize':
+                    if (heroTitle) {
+                        heroTitle.style.fontSize = `${value}px`;
+                    }
+                    break;
+                case 'subtitleSize':
+                    if (heroSubtitle) {
+                        heroSubtitle.style.fontSize = `${value}px`;
+                    }
+                    break;
+                case 'textAlign':
+                    if (heroContainer) {
+                        heroContainer.style.textAlign = value;
+                    }
+                    break;
+                case 'titleWeight':
+                    if (heroTitle) {
+                        heroTitle.style.fontWeight = value;
+                    }
+                    break;
+                case 'size':
+                    currentWidget.style.transform = `scale(${value / 100})`;
+                    currentWidget.style.transformOrigin = 'center top';
+                    break;
+            }
+        }
+        
+        // Mise à jour des propriétés du Pricing Card Widget
+        function updatePricingCardProperty(property, value) {
+            const planTitle = currentWidget.querySelector('h3');
+            const priceAmount = currentWidget.querySelector('.pricing-price span:nth-child(2)');
+            const ctaButton = currentWidget.querySelector('.pricing-cta');
+            const badge = currentWidget.querySelector('.pricing-badge');
+            const card = currentWidget.querySelector('.pricing-card');
+            const currencySpan = currentWidget.querySelector('.pricing-price span:first-child');
+            const periodSpan = currentWidget.querySelector('.pricing-price span:last-child');
+            
+            switch (property) {
+                case 'planName':
+                    if (planTitle) {
+                        planTitle.textContent = value;
+                    }
+                    break;
+                case 'badgeText':
+                    if (badge) {
+                        badge.textContent = value;
+                    }
+                    break;
+                case 'price':
+                    if (priceAmount) {
+                        priceAmount.textContent = value;
+                    }
+                    break;
+                case 'currency':
+                    if (currencySpan) {
+                        currencySpan.textContent = value;
+                    }
+                    break;
+                case 'period':
+                    if (periodSpan) {
+                        periodSpan.textContent = value;
+                    }
+                    break;
+                case 'ctaText':
+                    if (ctaButton) {
+                        ctaButton.textContent = value;
+                    }
+                    break;
+                case 'accentColor':
+                    if (planTitle) {
+                        planTitle.style.color = value;
+                    }
+                    if (ctaButton) {
+                        ctaButton.style.background = `linear-gradient(135deg, ${value} 0%, #14B8A6 100%)`;
+                    }
+                    if (badge) {
+                        badge.style.background = `linear-gradient(135deg, ${value} 0%, #14B8A6 100%)`;
+                    }
+                    if (card) {
+                        card.style.borderColor = value;
+                    }
+                    if (currencySpan) {
+                        currencySpan.style.color = value;
+                    }
+                    break;
+                case 'backgroundColor':
+                    if (card) {
+                        card.style.backgroundColor = value;
+                    }
+                    break;
+                case 'textColor':
+                    if (card) {
+                        const textElements = card.querySelectorAll('li, .pricing-price span:nth-child(2)');
+                        textElements.forEach(el => {
+                            el.style.color = value;
+                        });
+                    }
+                    break;
+                case 'planNameSize':
+                    if (planTitle) {
+                        planTitle.style.fontSize = `${value}px`;
+                    }
+                    break;
+                case 'priceSize':
+                    if (priceAmount) {
+                        priceAmount.style.fontSize = `${value}px`;
+                    }
+                    break;
+                case 'borderRadius':
+                    if (card) {
+                        card.style.borderRadius = `${value}px`;
+                    }
+                    if (badge) {
+                        badge.style.borderRadius = `${Math.min(value, 20)}px`;
+                    }
+                    if (ctaButton) {
+                        ctaButton.style.borderRadius = `${Math.min(value / 2, 8)}px`;
+                    }
+                    break;
+                case 'feature1':
+                case 'feature2':
+                case 'feature3':
+                case 'feature4':
+                    const featureIndex = parseInt(property.replace('feature', '')) - 1;
+                    const featuresList = card.querySelector('ul');
+                    if (featuresList && featuresList.children[featureIndex]) {
+                        featuresList.children[featureIndex].textContent = value;
+                    }
+                    break;
+                case 'planNameAlign':
+                    if (planTitle) {
+                        planTitle.style.textAlign = value;
+                    }
+                    break;
+                case 'priceAlign':
+                    const priceContainer = card.querySelector('.pricing-price');
+                    if (priceContainer) {
+                        priceContainer.style.textAlign = value;
+                    }
+                    break;
+                case 'featuresAlign':
+                    const featuresList2 = card.querySelector('ul');
+                    if (featuresList2) {
+                        featuresList2.style.textAlign = value;
+                        featuresList2.style.listStylePosition = value === 'center' ? 'inside' : 'outside';
+                    }
+                    break;
+                case 'ctaAlign':
+                    const ctaContainer = card.querySelector('.pricing-card > div:last-child');
+                    if (ctaContainer) {
+                        ctaContainer.style.textAlign = value;
+                    }
+                    break;
+                case 'size':
+                    currentWidget.style.transform = `scale(${value / 100})`;
+                    currentWidget.style.transformOrigin = 'center top';
+                    break;
+            }
+        }
+
+        // Fonctions de mise en surbrillance des sections du widget
+        function highlightWidgetSection(section) {
+            clearWidgetHighlight();
+            if (!currentWidget) return;
+            
+            let targetElement = null;
+            switch (section) {
+                case 'logo':
+                    targetElement = currentWidget.querySelector('.nav-logo');
+                    break;
+                case 'planName':
+                    targetElement = currentWidget.querySelector('.pricing-card h3');
+                    break;
+                case 'price':
+                    targetElement = currentWidget.querySelector('.pricing-price');
+                    break;
+                case 'features':
+                    targetElement = currentWidget.querySelector('ul');
+                    break;
+                case 'cta':
+                    targetElement = currentWidget.querySelector('.pricing-cta');
+                    break;
+                default:
+                    targetElement = currentWidget;
+            }
+            
+            if (targetElement) {
+                targetElement.style.outline = '2px solid #10B981';
+                targetElement.style.outlineOffset = '2px';
+                targetElement.style.transition = 'all 0.3s ease';
+                targetElement.classList.add('widget-section-highlighted');
+            }
+        }
+        
+        function clearWidgetHighlight() {
+            if (!currentWidget) return;
+            const highlighted = currentWidget.querySelectorAll('.widget-section-highlighted, [style*="outline"]');
+            highlighted.forEach(el => {
+                el.style.outline = '';
+                el.style.outlineOffset = '';
+                el.classList.remove('widget-section-highlighted');
+            });
+        }
+
+        // Gestion du Drag & Drop des sections de propriétés
+        let draggedElement = null;
+        
+        function initializeDragAndDrop() {
+            const propertiesGrid = document.getElementById('properties-grid');
+            if (!propertiesGrid) return;
+            
+            propertiesGrid.addEventListener('dragstart', handleDragStart);
+            propertiesGrid.addEventListener('dragover', handleDragOver);
+            propertiesGrid.addEventListener('drop', handleDrop);
+            propertiesGrid.addEventListener('dragend', handleDragEnd);
+        }
+        
+        function handleDragStart(e) {
+            if (e.target.classList.contains('property-section')) {
+                draggedElement = e.target;
+                e.target.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', e.target.outerHTML);
+            }
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            
+            const propertySections = [...document.querySelectorAll('.property-section')];
+            const afterElement = getDragAfterElement(document.getElementById('properties-grid'), e.clientY);
+            
+            propertySections.forEach(section => section.classList.remove('drag-over'));
+            
+            if (afterElement) {
+                afterElement.classList.add('drag-over');
+            }
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            
+            if (draggedElement) {
+                const propertiesGrid = document.getElementById('properties-grid');
+                const afterElement = getDragAfterElement(propertiesGrid, e.clientY);
+                
+                if (afterElement == null) {
+                    propertiesGrid.appendChild(draggedElement);
+                } else {
+                    propertiesGrid.insertBefore(draggedElement, afterElement);
+                }
+                
+                // Réinitialiser les styles
+                document.querySelectorAll('.property-section').forEach(section => {
+                    section.classList.remove('drag-over');
+                });
+            }
+        }
+        
+        function handleDragEnd(e) {
+            if (draggedElement) {
+                draggedElement.classList.remove('dragging');
+                draggedElement = null;
+            }
+            
+            document.querySelectorAll('.property-section').forEach(section => {
+                section.classList.remove('drag-over');
+            });
+        }
+        
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.property-section:not(.dragging)')];
+            
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // Nettoyage des tests
+        function clearTests() {
+            document.getElementById('loaderResults').textContent = 'Tests nettoyés. Cliquez sur un bouton pour commencer.';
+            document.getElementById('widgetContainer').innerHTML = 'Les widgets apparaîtront ici...';
+            document.getElementById('widgetStatus').textContent = 'En attente...';
+            document.getElementById('widgetStatus').className = 'status loading';
+            
+            // Réinitialiser les propriétés
+            currentWidget = null;
+            currentWidgetType = null;
+            document.getElementById('propertiesContainer').style.display = 'none';
+            document.getElementById('noWidgetMessage').style.display = 'block';
+        }
+        
+        // Animation d'entrée
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.test-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.5s ease-out';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

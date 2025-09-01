@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur de Widgets - Li-CUBE PRO™ (Standalone)</title>
+    <link rel="stylesheet" href="../assets/css/themes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Styles spécifiques pour l'éditeur standalone */
+        .widget-editor {
+            display: grid;
+            grid-template-areas: 
+                "toolbar toolbar toolbar"
+                "library canvas properties"
+                "footer footer footer";
+            grid-template-columns: 300px 1fr 350px;
+            grid-template-rows: 60px 1fr 40px;
+            height: 100vh;
+            background: var(--bg-primary);
+            font-family: var(--font-primary);
+        }
+
+        .editor-toolbar {
+            grid-area: toolbar;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .toolbar-title {
+            font-size: var(--text-xl);
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .widget-library {
+            grid-area: library;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .library-header {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .library-title {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .library-search {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+        }
+
+        .library-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-md);
+        }
+
+        .widget-category {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .category-title {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-sm);
+            padding: 0 var(--spacing-sm);
+        }
+
+        .widget-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            margin-bottom: var(--spacing-xs);
+            background: var(--bg-card);
+            border: 1px solid transparent;
+            border-radius: var(--border-radius);
+            cursor: grab;
+            transition: var(--transition-normal);
+            user-select: none;
+        }
+
+        .widget-item:hover {
+            border-color: var(--border-hover);
+            background: rgba(16, 185, 129, 0.05);
+            transform: translateX(4px);
+        }
+
+        .widget-item.dragging {
+            opacity: 0.5;
+            transform: rotate(2deg);
+        }
+
+        .widget-icon {
+            font-size: var(--text-xl);
+            width: 32px;
+            text-align: center;
+        }
+
+        .widget-info {
+            flex: 1;
+        }
+
+        .widget-name {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--text-white);
+            margin-bottom: 2px;
+        }
+
+        .widget-description {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        .editor-canvas {
+            grid-area: canvas;
+            background: var(--bg-primary);
+            position: relative;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .canvas-toolbar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .canvas-zoom {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .zoom-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            width: 32px;
+            height: 32px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-btn:hover:not(:disabled) {
+            border-color: var(--border-hover);
+            background: var(--bg-secondary);
+        }
+
+        .zoom-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .zoom-level {
+            font-size: var(--text-sm);
+            color: var(--text-gray);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .canvas-workspace {
+            flex: 1;
+            padding: var(--spacing-xl);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 0;
+        }
+
+        .widget-preview {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-xl);
+            min-width: 400px;
+            min-height: 300px;
+            position: relative;
+            padding: var(--spacing-lg);
+            transform-origin: center top;
+            transition: var(--transition-normal);
+        }
+
+        .widget-preview.empty {
+            border: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            color: var(--text-muted);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            opacity: 0.5;
+        }
+
+        .empty-text {
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .drop-zone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px dashed transparent;
+            border-radius: var(--border-radius);
+            background: rgba(16, 185, 129, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-normal);
+        }
+
+        .drop-zone.active {
+            opacity: 1;
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .drop-indicator {
+            background: var(--accent-green);
+            color: var(--text-white);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--border-radius);
+            font-weight: var(--font-medium);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .properties-panel {
+            grid-area: properties;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .properties-header {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .properties-title {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .properties-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-lg);
+        }
+
+        .properties-empty {
+            text-align: center;
+            color: var(--text-muted);
+            padding: var(--spacing-2xl);
+            line-height: 1.6;
+        }
+
+        .property-group {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .group-title {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .property-field {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .field-label {
+            display: block;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--text-gray);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .field-input {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+            transition: var(--transition-normal);
+        }
+
+        .field-input:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .widget-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: var(--spacing-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            font-size: var(--text-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xs);
+        }
+
+        .action-btn:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-secondary);
+        }
+
+        .action-btn.primary {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: var(--text-white);
+        }
+
+        .action-btn.primary:hover {
+            background: var(--accent-teal);
+            border-color: var(--accent-teal);
+        }
+
+        .editor-footer {
+            grid-area: footer;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-lg);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-green);
+        }
+
+        .status-indicator.error {
+            background: var(--danger-red);
+        }
+
+        .status-indicator.warning {
+            background: var(--warning-orange);
+        }
+
+        /* Styles des widgets intégrés */
+        .widget-container {
+            width: 100%;
+            position: relative;
+        }
+
+        .test-widget {
+            background: var(--gradient-green);
+            color: var(--text-white);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .logo-widget {
+            width: 80px;
+            height: 80px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            margin: 0 auto var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .logo-widget:hover {
+            background: rgba(16, 185, 129, 0.2);
+            transform: scale(1.05);
+        }
+
+        .hero-title-widget {
+            text-align: center;
+            padding: var(--spacing-2xl);
+        }
+
+        .hero-title-widget h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: var(--font-black);
+            font-family: var(--font-heading);
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero-title-widget .subtitle {
+            font-size: var(--text-xl);
+            color: #666;
+            font-weight: var(--font-semibold);
+        }
+
+        @media (max-width: 1024px) {
+            .widget-editor {
+                grid-template-columns: 250px 1fr 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="widget-editor">
+        <!-- Barre d'outils -->
+        <div class="editor-toolbar">
+            <div class="toolbar-title">
+                <i class="fas fa-puzzle-piece"></i>
+                Éditeur de Widgets (Standalone)
+            </div>
+            
+            <div class="toolbar-center">
+                <button class="btn btn-sm" id="undoBtn" onclick="widgetEditor.undo()" disabled>
+                    <i class="fas fa-undo"></i> Annuler
+                </button>
+                <button class="btn btn-sm" id="redoBtn" onclick="widgetEditor.redo()" disabled>
+                    <i class="fas fa-redo"></i> Refaire
+                </button>
+                <button class="btn btn-primary btn-sm" id="saveBtn" onclick="widgetEditor.saveWidget()">
+                    <i class="fas fa-save"></i> Sauvegarder
+                </button>
+            </div>
+        </div>
+
+        <!-- Bibliothèque de widgets -->
+        <div class="widget-library">
+            <div class="library-header">
+                <h3 class="library-title">Widgets Disponibles</h3>
+                <input type="text" class="library-search" placeholder="Rechercher..." id="widgetSearch" oninput="widgetEditor.filterWidgets(this.value)">
+            </div>
+            
+            <div class="library-content" id="widgetLibrary">
+                <!-- Widgets générés dynamiquement -->
+            </div>
+        </div>
+
+        <!-- Canvas d'édition -->
+        <div class="editor-canvas">
+            <div class="canvas-toolbar">
+                <div class="canvas-zoom">
+                    <button class="zoom-btn" id="zoomOut" onclick="widgetEditor.zoomOut()">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="zoom-level" id="zoomLevel">100%</div>
+                    <button class="zoom-btn" id="zoomIn" onclick="widgetEditor.zoomIn()">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="zoom-btn" id="zoomFit" onclick="widgetEditor.zoomToFit()">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="canvas-workspace">
+                <div class="widget-preview empty" id="widgetPreview" ondrop="widgetEditor.handleDrop(event)" ondragover="widgetEditor.handleDragOver(event)">
+                    <div class="drop-zone" id="dropZone">
+                        <div class="drop-indicator">
+                            <i class="fas fa-plus"></i>
+                            Déposez un widget ici
+                        </div>
+                    </div>
+                    
+                    <div class="empty-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="empty-text">
+                        <strong>Aucun widget sélectionné</strong><br>
+                        Glissez un widget depuis la bibliothèque pour commencer
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panneau de propriétés -->
+        <div class="properties-panel">
+            <div class="properties-header">
+                <h3 class="properties-title">
+                    <i class="fas fa-sliders-h"></i>
+                    Propriétés
+                </h3>
+            </div>
+            
+            <div class="properties-content" id="propertiesContent">
+                <div class="properties-empty">
+                    <i class="fas fa-info-circle" style="font-size: 2rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+                    <p>Sélectionnez un widget pour voir ses propriétés</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pied de page -->
+        <div class="editor-footer">
+            <div class="footer-status">
+                <div class="status-item">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText">Prêt</span>
+                </div>
+                <div class="status-item">
+                    <span>Widgets: <span id="widgetCount">0</span></span>
+                </div>
+            </div>
+            <div>Éditeur Li-CUBE PRO™ Standalone</div>
+        </div>
+    </div>
+
+    <script>
+        // Widget Editor Standalone - Classe principale
+        class WidgetEditor {
+            constructor() {
+                this.currentWidget = null;
+                this.currentWidgetType = null;
+                this.widgetData = {};
+                this.zoomLevel = 100;
+                this.history = [];
+                this.historyIndex = -1;
+                
+                // Définition des widgets disponibles
+                this.availableWidgets = {
+                    'logo': {
+                        name: 'Logo',
+                        icon: '🏢',
+                        category: 'Navigation',
+                        description: 'Logo avec image et effets hover',
+                        defaultData: {
+                            text: 'EDS',
+                            size: '80px',
+                            color: '#10B981'
+                        },
+                        fields: [
+                            { id: 'text', name: 'Texte', type: 'text', value: 'EDS' },
+                            { id: 'size', name: 'Taille', type: 'text', value: '80px' },
+                            { id: 'color', name: 'Couleur', type: 'color', value: '#10B981' }
+                        ]
+                    },
+                    'hero-title': {
+                        name: 'Titre Hero',
+                        icon: '✨',
+                        category: 'Contenu',
+                        description: 'Titre principal avec gradient et animations',
+                        defaultData: {
+                            title: 'Li-CUBE PRO™',
+                            subtitle: 'LOCATION INTELLIGENTE',
+                            color: '#10B981'
+                        },
+                        fields: [
+                            { id: 'title', name: 'Titre', type: 'text', value: 'Li-CUBE PRO™' },
+                            { id: 'subtitle', name: 'Sous-titre', type: 'text', value: 'LOCATION INTELLIGENTE' },
+                            { id: 'color', name: 'Couleur', type: 'color', value: '#10B981' }
+                        ]
+                    },
+                    'text-block': {
+                        name: 'Bloc de Texte',
+                        icon: '📝',
+                        category: 'Contenu',
+                        description: 'Bloc de texte simple et personnalisable',
+                        defaultData: {
+                            content: 'Votre contenu ici...',
+                            fontSize: '16px',
+                            color: '#333333'
+                        },
+                        fields: [
+                            { id: 'content', name: 'Contenu', type: 'textarea', value: 'Votre contenu ici...' },
+                            { id: 'fontSize', name: 'Taille Police', type: 'text', value: '16px' },
+                            { id: 'color', name: 'Couleur', type: 'color', value: '#333333' }
+                        ]
+                    },
+                    'button': {
+                        name: 'Bouton',
+                        icon: '🔘',
+                        category: 'Interface',
+                        description: 'Bouton d\'action personnalisable',
+                        defaultData: {
+                            text: 'Cliquez ici',
+                            backgroundColor: '#10B981',
+                            textColor: '#FFFFFF',
+                            size: 'medium'
+                        },
+                        fields: [
+                            { id: 'text', name: 'Texte', type: 'text', value: 'Cliquez ici' },
+                            { id: 'backgroundColor', name: 'Couleur de fond', type: 'color', value: '#10B981' },
+                            { id: 'textColor', name: 'Couleur du texte', type: 'color', value: '#FFFFFF' },
+                            { id: 'size', name: 'Taille', type: 'select', value: 'medium', options: [
+                                { value: 'small', label: 'Petit' },
+                                { value: 'medium', label: 'Moyen' },
+                                { value: 'large', label: 'Grand' }
+                            ]}
+                        ]
+                    }
+                };
+                
+                this.init();
+            }
+            
+            init() {
+                this.renderWidgetLibrary();
+                this.setStatus('Éditeur initialisé', 'success');
+            }
+            
+            renderWidgetLibrary() {
+                const library = document.getElementById('widgetLibrary');
+                
+                // Grouper par catégorie
+                const categories = {};
+                Object.entries(this.availableWidgets).forEach(([type, widget]) => {
+                    const category = widget.category || 'Autres';
+                    if (!categories[category]) {
+                        categories[category] = [];
+                    }
+                    categories[category].push({ type, ...widget });
+                });
+                
+                // Générer le HTML
+                let html = '';
+                Object.entries(categories).forEach(([category, widgets]) => {
+                    html += `
+                        <div class="widget-category">
+                            <div class="category-title">${category}</div>
+                            ${widgets.map(widget => `
+                                <div class="widget-item" 
+                                     draggable="true" 
+                                     data-widget-type="${widget.type}"
+                                     ondragstart="widgetEditor.handleDragStart(event)"
+                                     ondragend="widgetEditor.handleDragEnd(event)"
+                                     ondblclick="widgetEditor.addWidget('${widget.type}')">
+                                    <div class="widget-icon">${widget.icon}</div>
+                                    <div class="widget-info">
+                                        <div class="widget-name">${widget.name}</div>
+                                        <div class="widget-description">${widget.description}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                });
+                
+                library.innerHTML = html;
+            }
+            
+            handleDragStart(event) {
+                const widgetType = event.target.closest('.widget-item').dataset.widgetType;
+                event.dataTransfer.setData('text/widget-type', widgetType);
+                event.target.classList.add('dragging');
+                this.setStatus(`Glissement de ${this.availableWidgets[widgetType].name}...`, 'info');
+            }
+            
+            handleDragEnd(event) {
+                event.target.classList.remove('dragging');
+                document.getElementById('dropZone').classList.remove('active');
+                this.setStatus('Prêt', 'success');
+            }
+            
+            handleDragOver(event) {
+                event.preventDefault();
+                document.getElementById('dropZone').classList.add('active');
+            }
+            
+            handleDrop(event) {
+                event.preventDefault();
+                document.getElementById('dropZone').classList.remove('active');
+                const widgetType = event.dataTransfer.getData('text/widget-type');
+                if (widgetType) {
+                    this.addWidget(widgetType);
+                }
+            }
+            
+            addWidget(widgetType) {
+                const widget = this.availableWidgets[widgetType];
+                if (!widget) {
+                    this.setStatus(`Widget ${widgetType} non trouvé`, 'error');
+                    return;
+                }
+                
+                this.saveToHistory('add_widget', `Ajout widget ${widget.name}`);
+                
+                this.currentWidget = widget;
+                this.currentWidgetType = widgetType;
+                this.widgetData = { ...widget.defaultData };
+                
+                this.renderWidgetPreview();
+                this.renderWidgetProperties();
+                this.updateStatus();
+                this.setStatus(`Widget ${widget.name} ajouté`, 'success');
+            }
+            
+            renderWidgetPreview() {
+                const preview = document.getElementById('widgetPreview');
+                
+                if (!this.currentWidget) {
+                    preview.className = 'widget-preview empty';
+                    preview.innerHTML = `
+                        <div class="drop-zone" id="dropZone">
+                            <div class="drop-indicator">
+                                <i class="fas fa-plus"></i>
+                                Déposez un widget ici
+                            </div>
+                        </div>
+                        <div class="empty-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <div class="empty-text">
+                            <strong>Aucun widget sélectionné</strong><br>
+                            Glissez un widget depuis la bibliothèque pour commencer
+                        </div>
+                    `;
+                    return;
+                }
+                
+                preview.className = 'widget-preview';
+                
+                // Rendu selon le type de widget
+                let html = '';
+                switch (this.currentWidgetType) {
+                    case 'logo':
+                        html = `
+                            <div class="widget-container">
+                                <div class="logo-widget" style="
+                                    background: rgba(16, 185, 129, 0.1);
+                                    color: ${this.widgetData.color};
+                                    width: ${this.widgetData.size};
+                                    height: ${this.widgetData.size};
+                                ">
+                                    ${this.widgetData.text}
+                                </div>
+                                <div style="text-align: center;">
+                                    <strong>Logo Widget</strong>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'hero-title':
+                        html = `
+                            <div class="widget-container">
+                                <div class="hero-title-widget">
+                                    <h1 style="color: ${this.widgetData.color};">${this.widgetData.title}</h1>
+                                    <div class="subtitle">${this.widgetData.subtitle}</div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'text-block':
+                        html = `
+                            <div class="widget-container">
+                                <div style="
+                                    font-size: ${this.widgetData.fontSize};
+                                    color: ${this.widgetData.color};
+                                    padding: var(--spacing-lg);
+                                    line-height: 1.6;
+                                ">
+                                    ${this.widgetData.content.replace(/\n/g, '<br>')}
+                                </div>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'button':
+                        const sizeClasses = {
+                            small: 'padding: 0.5rem 1rem; font-size: 0.875rem;',
+                            medium: 'padding: 0.75rem 1.5rem; font-size: 1rem;',
+                            large: 'padding: 1rem 2rem; font-size: 1.125rem;'
+                        };
+                        html = `
+                            <div class="widget-container" style="text-align: center;">
+                                <button style="
+                                    background: ${this.widgetData.backgroundColor};
+                                    color: ${this.widgetData.textColor};
+                                    border: none;
+                                    border-radius: var(--border-radius);
+                                    cursor: pointer;
+                                    transition: var(--transition-normal);
+                                    ${sizeClasses[this.widgetData.size]}
+                                " onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                                    ${this.widgetData.text}
+                                </button>
+                            </div>
+                        `;
+                        break;
+                        
+                    default:
+                        html = `
+                            <div class="widget-container">
+                                <div class="test-widget">
+                                    Widget: ${this.currentWidget.name}
+                                </div>
+                            </div>
+                        `;
+                }
+                
+                preview.innerHTML = html;
+                this.applyZoom();
+            }
+            
+            renderWidgetProperties() {
+                const content = document.getElementById('propertiesContent');
+                
+                if (!this.currentWidget) {
+                    content.innerHTML = `
+                        <div class="properties-empty">
+                            <i class="fas fa-info-circle" style="font-size: 2rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+                            <p>Sélectionnez un widget pour voir ses propriétés</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = `
+                    <div class="property-group">
+                        <div class="group-title">Informations Générales</div>
+                        <div class="property-field">
+                            <div class="field-label">Type de Widget</div>
+                            <div style="color: var(--text-white); padding: 0.5rem; background: var(--bg-card); border-radius: var(--border-radius); font-size: var(--text-sm);">
+                                ${this.currentWidget.name}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="property-group">
+                        <div class="group-title">Configuration</div>
+                `;
+                
+                // Générer les champs
+                this.currentWidget.fields.forEach(field => {
+                    const currentValue = this.widgetData[field.id] || field.value;
+                    
+                    html += `
+                        <div class="property-field">
+                            <label class="field-label" for="field-${field.id}">${field.name}</label>
+                    `;
+                    
+                    switch (field.type) {
+                        case 'text':
+                            html += `<input type="text" class="field-input" id="field-${field.id}" value="${currentValue}" onchange="widgetEditor.updateField('${field.id}', this.value)">`;
+                            break;
+                        case 'textarea':
+                            html += `<textarea class="field-input" id="field-${field.id}" rows="4" onchange="widgetEditor.updateField('${field.id}', this.value)">${currentValue}</textarea>`;
+                            break;
+                        case 'color':
+                            html += `<input type="color" class="field-input" id="field-${field.id}" value="${currentValue}" onchange="widgetEditor.updateField('${field.id}', this.value)">`;
+                            break;
+                        case 'select':
+                            const options = field.options.map(opt => 
+                                `<option value="${opt.value}" ${opt.value === currentValue ? 'selected' : ''}>${opt.label}</option>`
+                            ).join('');
+                            html += `<select class="field-input" id="field-${field.id}" onchange="widgetEditor.updateField('${field.id}', this.value)">${options}</select>`;
+                            break;
+                        default:
+                            html += `<input type="text" class="field-input" id="field-${field.id}" value="${currentValue}" onchange="widgetEditor.updateField('${field.id}', this.value)">`;
+                    }
+                    
+                    html += `</div>`;
+                });
+                
+                html += `
+                    </div>
+                    
+                    <div class="widget-actions">
+                        <button class="action-btn primary" onclick="widgetEditor.saveWidget()">
+                            <i class="fas fa-save"></i>
+                            Sauvegarder
+                        </button>
+                        <button class="action-btn" onclick="widgetEditor.clearWidget()">
+                            <i class="fas fa-trash"></i>
+                            Supprimer
+                        </button>
+                    </div>
+                `;
+                
+                content.innerHTML = html;
+            }
+            
+            updateField(fieldId, value) {
+                this.widgetData[fieldId] = value;
+                this.renderWidgetPreview();
+            }
+            
+            // Gestion du zoom
+            zoomIn() {
+                this.zoomLevel = Math.min(this.zoomLevel + 25, 200);
+                this.applyZoom();
+            }
+            
+            zoomOut() {
+                this.zoomLevel = Math.max(this.zoomLevel - 25, 25);
+                this.applyZoom();
+            }
+            
+            zoomToFit() {
+                this.zoomLevel = 100;
+                this.applyZoom();
+            }
+            
+            applyZoom() {
+                const preview = document.getElementById('widgetPreview');
+                const scale = this.zoomLevel / 100;
+                preview.style.transform = `scale(${scale})`;
+                document.getElementById('zoomLevel').textContent = `${this.zoomLevel}%`;
+                
+                // Mise à jour des boutons
+                document.getElementById('zoomOut').disabled = this.zoomLevel <= 25;
+                document.getElementById('zoomIn').disabled = this.zoomLevel >= 200;
+            }
+            
+            // Historique
+            saveToHistory(action, description) {
+                const snapshot = {
+                    action: action,
+                    description: description,
+                    widgetType: this.currentWidgetType,
+                    widgetData: { ...this.widgetData }
+                };
+                
+                this.history = this.history.slice(0, this.historyIndex + 1);
+                this.history.push(snapshot);
+                this.historyIndex = this.history.length - 1;
+                
+                if (this.history.length > 50) {
+                    this.history.shift();
+                    this.historyIndex--;
+                }
+                
+                this.updateHistoryButtons();
+            }
+            
+            undo() {
+                if (this.historyIndex > 0) {
+                    this.historyIndex--;
+                    this.restoreFromHistory();
+                }
+            }
+            
+            redo() {
+                if (this.historyIndex < this.history.length - 1) {
+                    this.historyIndex++;
+                    this.restoreFromHistory();
+                }
+            }
+            
+            restoreFromHistory() {
+                const snapshot = this.history[this.historyIndex];
+                if (snapshot) {
+                    this.currentWidgetType = snapshot.widgetType;
+                    this.widgetData = { ...snapshot.widgetData };
+                    this.currentWidget = this.availableWidgets[this.currentWidgetType];
+                    
+                    this.renderWidgetPreview();
+                    this.renderWidgetProperties();
+                    this.updateHistoryButtons();
+                    this.setStatus(`${snapshot.description}`, 'info');
+                }
+            }
+            
+            updateHistoryButtons() {
+                document.getElementById('undoBtn').disabled = this.historyIndex <= 0;
+                document.getElementById('redoBtn').disabled = this.historyIndex >= this.history.length - 1;
+            }
+            
+            // Autres méthodes
+            filterWidgets(searchTerm) {
+                const term = searchTerm.toLowerCase();
+                const items = document.querySelectorAll('.widget-item');
+                
+                items.forEach(item => {
+                    const name = item.querySelector('.widget-name').textContent.toLowerCase();
+                    const description = item.querySelector('.widget-description').textContent.toLowerCase();
+                    const matches = name.includes(term) || description.includes(term);
+                    item.style.display = matches ? 'flex' : 'none';
+                });
+            }
+            
+            saveWidget() {
+                if (!this.currentWidget) {
+                    this.setStatus('Aucun widget à sauvegarder', 'warning');
+                    return;
+                }
+                
+                const widgetExport = {
+                    type: this.currentWidgetType,
+                    name: this.currentWidget.name,
+                    data: this.widgetData,
+                    timestamp: new Date().toISOString()
+                };
+                
+                const widgetId = `custom-widget-${Date.now()}`;
+                localStorage.setItem(widgetId, JSON.stringify(widgetExport));
+                
+                this.setStatus('Widget sauvegardé avec succès', 'success');
+            }
+            
+            clearWidget() {
+                if (confirm('Êtes-vous sûr de vouloir supprimer ce widget ?')) {
+                    this.saveToHistory('clear_widget', 'Suppression du widget');
+                    this.currentWidget = null;
+                    this.currentWidgetType = null;
+                    this.widgetData = {};
+                    
+                    this.renderWidgetPreview();
+                    this.renderWidgetProperties();
+                    this.updateStatus();
+                    this.setStatus('Widget supprimé', 'info');
+                }
+            }
+            
+            updateStatus() {
+                document.getElementById('widgetCount').textContent = this.currentWidget ? '1' : '0';
+            }
+            
+            setStatus(message, type = 'info') {
+                document.getElementById('statusText').textContent = message;
+                const indicator = document.getElementById('statusIndicator');
+                indicator.className = `status-indicator ${type}`;
+                
+                if (type === 'success' || type === 'info') {
+                    setTimeout(() => {
+                        this.setStatus('Prêt', 'success');
+                    }, 3000);
+                }
+            }
+        }
+        
+        // Initialisation
+        const widgetEditor = new WidgetEditor();
+        window.widgetEditor = widgetEditor;
+        
+        console.log('Widget Editor Standalone initialisé !');
+    </script>
+</body>
+</html>

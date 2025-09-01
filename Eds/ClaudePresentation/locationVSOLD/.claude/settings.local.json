@@ -6,7 +6,21 @@
       "Bash(grep:*)",
       "Bash(node:*)",
       "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD - Copie\\js/**)",
-      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD - Copie\\js/**)"
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD - Copie\\js/**)",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\edit-location.html\")",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\location.html\")",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\copie\\test\\sync-test.html\")",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS\\js/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\modern\\editors\\widget-editor.html\")",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\modern\\test-simple.html\")"
     ],
     "deny": [],
     "ask": []

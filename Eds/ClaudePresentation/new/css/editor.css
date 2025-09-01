@@ -1,0 +1,1634 @@
+/**
+ * Styles spécifiques à l'interface de l'éditeur
+ * 
+ * Rôle : Interface de l'éditeur de présentations avec layout et interactions
+ * Type : Feuille de style pour composants d'édition
+ * Responsabilité : Layout éditeur, sidebars, canvas, modals
+ */
+
+/* ==========================================
+   LAYOUT PRINCIPAL DE L'ÉDITEUR
+   ========================================== */
+
+.editor-body {
+    /* Rôle : Configuration du body pour interface d'édition */
+    /* Type : Layout principal fullscreen */
+    /* Unité : Viewport units (vh, vw) */
+    /* Domaine : 100% des dimensions viewport */
+    /* Formule : Plein écran sans scroll pour interface professionnelle */
+    /* Exemple : height: 100vh → occupe toute la hauteur de l'écran */
+    height: 100vh;
+    overflow: hidden;
+    background: var(--primary-dark);
+    font-family: var(--font-primary);
+}
+
+.app-layout {
+    /* Rôle : Layout CSS Grid pour interface 3 colonnes */
+    /* Type : Container principal avec sidebars et zone centrale */
+    /* Unité : pixels (px) et fractions (fr) */
+    /* Domaine : Largeurs optimales pour productivité */
+    /* Formule : sidebar_left + main_content + sidebar_right */
+    /* Exemple : 280px 1fr 320px → sidebars fixes, centre flexible */
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    height: calc(100vh - 120px); /* Déduction de la hauteur du header */
+    background: var(--primary-dark);
+}
+
+/* ==========================================
+   HEADER DE L'APPLICATION
+   ========================================== */
+
+.app-header {
+    /* Rôle : Barre de navigation principale fixe */
+    /* Type : Header sticky avec actions globales */
+    /* Unité : pixels (px) pour hauteur et espacement */
+    /* Domaine : Hauteur suffisante pour boutons confortables */
+    /* Formule : Hauteur totale = contenu + status bar */
+    /* Exemple : 80px + 40px = 120px de hauteur totale */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-sticky);
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--surface-light);
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-6);
+    height: 80px;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.app-logo {
+    /* Rôle : Container du logo avec design moderne */
+    /* Type : Badge circulaire avec icône */
+    /* Unité : pixels (px) pour dimensions */
+    /* Domaine : Taille suffisante pour visibilité */
+    /* Formule : Cercle parfait avec icône centrée */
+    /* Exemple : 48px × 48px avec icône FontAwesome */
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-white);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.app-subtitle {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.header-separator {
+    width: 1px;
+    height: 24px;
+    background: var(--surface-light);
+    margin: 0 var(--space-2);
+}
+
+/* Status bar */
+.status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-6);
+    height: 40px;
+    background: var(--secondary-dark);
+    border-top: 1px solid var(--surface-light);
+    font-size: var(--text-xs);
+}
+
+.status-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--text-gray);
+}
+
+.presentation-meta {
+    color: var(--text-muted);
+}
+
+.sync-status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--success-color);
+    font-size: var(--text-xs);
+}
+
+.sync-status.syncing {
+    color: var(--warning-color);
+}
+
+.sync-status.error {
+    color: var(--error-color);
+}
+
+/* ==========================================
+   SIDEBARS
+   ========================================== */
+
+.app-sidebar {
+    /* Rôle : Panneaux latéraux pour outils et propriétés */
+    /* Type : Container vertical avec onglets */
+    /* Unité : pixels (px) pour largeur fixe */
+    /* Domaine : Largeur optimale pour usabilité */
+    /* Formule : Assez large pour contenu, pas trop pour écran */
+    /* Exemple : 280px → largeur confortable sans encombrer */
+    background: var(--secondary-dark);
+    border-right: 1px solid var(--surface-light);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-sidebar {
+    border-right: none;
+    border-left: 1px solid var(--surface-light);
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-tabs {
+    display: flex;
+    background: var(--tertiary-dark);
+    border-bottom: 1px solid var(--surface-light);
+}
+
+.sidebar-tab {
+    /* Rôle : Onglets de navigation dans les sidebars */
+    /* Type : Bouton d'onglet avec état actif */
+    /* Unité : Flex pour répartition égale */
+    /* Domaine : Largeur égale pour tous les onglets */
+    /* Formule : flex: 1 → répartition équitable de l'espace */
+    /* Exemple : 3 onglets → chacun prend 33.33% de largeur */
+    flex: 1;
+    padding: var(--space-3) var(--space-2);
+    background: transparent;
+    border: none;
+    color: var(--text-gray);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.sidebar-tab:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-white);
+}
+
+.sidebar-tab.active {
+    background: var(--accent-green);
+    color: white;
+}
+
+.sidebar-tab i {
+    font-size: var(--text-base);
+}
+
+.sidebar-panels {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.sidebar-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: var(--space-4);
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+}
+
+.sidebar-panel.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--surface-light);
+}
+
+.panel-header h3 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--text-white);
+    margin: 0;
+}
+
+/* ==========================================
+   WIDGETS PANEL
+   ========================================== */
+
+.widgets-filters {
+    margin-bottom: var(--space-4);
+}
+
+.filter-search {
+    position: relative;
+    margin-bottom: var(--space-3);
+}
+
+.search-input {
+    width: 100%;
+    padding: var(--space-2) var(--space-8) var(--space-2) var(--space-3);
+    background: var(--tertiary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: var(--radius-md);
+    color: var(--text-white);
+    font-size: var(--text-sm);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--accent-green);
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.search-icon {
+    position: absolute;
+    right: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.category-select {
+    width: 100%;
+    padding: var(--space-2);
+    background: var(--tertiary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: var(--radius-md);
+    color: var(--text-white);
+    font-size: var(--text-sm);
+}
+
+.widgets-grid {
+    /* Rôle : Grille responsive pour affichage des widgets */
+    /* Type : CSS Grid avec colonnes adaptatives */
+    /* Unité : minmax() pour colonnes flexibles */
+    /* Domaine : 1-2 colonnes selon largeur disponible */
+    /* Formule : repeat(auto-fit, minmax(taille_min, 1fr)) */
+    /* Exemple : minmax(120px, 1fr) → min 120px, max égal */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-3);
+}
+
+.widget-card {
+    /* Rôle : Carte représentant un widget disponible */
+    /* Type : Composant interactive drag & drop */
+    /* Unité : pixels (px) et rem pour espacement */
+    /* Domaine : Taille optimale pour aperçu et clic */
+    /* Formule : Hauteur suffisante pour icône + nom + description */
+    /* Exemple : padding + icône 2rem + texte + marge */
+    background: var(--tertiary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    cursor: grab;
+    transition: all var(--transition-base);
+    text-align: center;
+    min-height: 100px;
+}
+
+.widget-card:hover {
+    border-color: var(--accent-green);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.widget-card.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.widget-preview {
+    font-size: 1.5rem;
+    color: var(--accent-green);
+    margin-bottom: var(--space-2);
+}
+
+.widget-info h4 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-white);
+    margin: 0 0 var(--space-1) 0;
+}
+
+.widget-info p {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* ==========================================
+   SECTIONS PANEL
+   ========================================== */
+
+.sections-grid {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.section-card {
+    background: var(--tertiary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.section-card:hover {
+    border-color: var(--accent-green);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.section-preview {
+    /* Rôle : Aperçu visuel miniature de la section */
+    /* Type : Container de prévisualisation */
+    /* Unité : pixels (px) pour dimensions fixes */
+    /* Domaine : Taille suffisante pour aperçu lisible */
+    /* Formule : Ratio 16:9 ou 4:3 pour prévisualisation */
+    /* Exemple : 240px × 120px → format paysage compact */
+    height: 80px;
+    background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.section-info h4 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-white);
+    margin: 0 0 var(--space-2) 0;
+}
+
+.section-info p {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.section-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-2);
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   TEMPLATES PANEL
+   ========================================== */
+
+.templates-grid {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.template-card {
+    background: var(--tertiary-dark);
+    border: 2px solid var(--surface-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.template-card:hover {
+    border-color: var(--accent-green);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+}
+
+.template-preview {
+    height: 120px;
+    background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+}
+
+.template-info h4 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--text-white);
+    margin: 0 0 var(--space-2) 0;
+}
+
+.template-info p {
+    font-size: var(--text-sm);
+    color: var(--text-gray);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ==========================================
+   ZONE CENTRALE - ÉDITEUR
+   ========================================== */
+
+.app-main {
+    /* Rôle : Zone principale d'édition avec canvas */
+    /* Type : Container central flexible */
+    /* Unité : Flexbox avec overflow pour scroll */
+    /* Domaine : Toute la zone centrale disponible */
+    /* Formule : flex: 1 → prend l'espace restant */
+    /* Exemple : Entre sidebars, s'adapte à la largeur écran */
+    background: var(--primary-dark);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-toolbar {
+    /* Rôle : Barre d'outils contextuelle de l'éditeur */
+    /* Type : Toolbar horizontal avec groupes d'actions */
+    /* Unité : pixels (px) pour hauteur et espacement */
+    /* Domaine : Hauteur confortable pour boutons */
+    /* Formule : Hauteur bouton + padding vertical */
+    /* Exemple : 32px boutons + 16px padding = 48px total */
+    display: flex;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    background: var(--secondary-dark);
+    border-bottom: 1px solid var(--surface-light);
+    gap: var(--space-4);
+    min-height: 56px;
+}
+
+.toolbar-section {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.toolbar-separator {
+    width: 1px;
+    height: 24px;
+    background: var(--surface-light);
+}
+
+.toolbar-btn {
+    /* Rôle : Boutons d'action dans la toolbar */
+    /* Type : Bouton compact avec icône et texte */
+    /* Unité : pixels (px) et rem pour espacement */
+    /* Domaine : Taille optimale pour clic précis */
+    /* Formule : Padding minimal + contenu + états hover */
+    /* Exemple : 8px padding → bouton compact mais cliquable */
+    padding: var(--space-2) var(--space-3);
+    background: transparent;
+    border: 1px solid var(--surface-light);
+    border-radius: var(--radius-sm);
+    color: var(--text-gray);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    white-space: nowrap;
+}
+
+.toolbar-btn:hover:not(:disabled) {
+    background: var(--surface-light);
+    color: var(--text-white);
+}
+
+.toolbar-btn.active {
+    background: var(--accent-green);
+    color: white;
+    border-color: var(--accent-green);
+}
+
+.toolbar-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.toolbar-btn.danger:hover:not(:disabled) {
+    background: var(--error-color);
+    border-color: var(--error-color);
+    color: white;
+}
+
+/* Contrôles spécialisés de la toolbar */
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.zoom-indicator {
+    min-width: 3rem;
+    text-align: center;
+    font-size: var(--text-xs);
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.view-modes {
+    display: flex;
+    background: var(--tertiary-dark);
+    border-radius: var(--radius-sm);
+    padding: 2px;
+}
+
+.view-modes .toolbar-btn {
+    border: none;
+    border-radius: var(--radius-sm);
+    margin: 0;
+}
+
+/* ==========================================
+   CANVAS D'ÉDITION
+   ========================================== */
+
+.editor-canvas-container {
+    /* Rôle : Container scrollable pour le canvas d'édition */
+    /* Type : Zone de travail avec scroll personnalisé */
+    /* Unité : Flexbox fill avec overflow */
+    /* Domaine : Toute la zone restante après toolbar */
+    /* Formule : flex: 1 → remplit l'espace disponible */
+    /* Exemple : S'adapte automatiquement à la hauteur restante */
+    flex: 1;
+    overflow: auto;
+    background: var(--primary-dark);
+    position: relative;
+}
+
+/* Scroll bars personnalisées */
+.editor-canvas-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.editor-canvas-container::-webkit-scrollbar-track {
+    background: var(--secondary-dark);
+}
+
+.editor-canvas-container::-webkit-scrollbar-thumb {
+    background: var(--surface-light);
+    border-radius: 4px;
+}
+
+.editor-canvas-container::-webkit-scrollbar-thumb:hover {
+    background: var(--surface-lighter);
+}
+
+.editor-canvas {
+    /* Rôle : Surface de travail principale pour la présentation */
+    /* Type : Canvas d'édition avec zone de drop */
+    /* Unité : pixels (px) avec minimum et centrage */
+    /* Domaine : Largeur min pour contenu, max pour lisibilité */
+    /* Formule : min-width + auto margins → centrage horizontal */
+    /* Exemple : min 800px centré → prévisualisation réaliste */
+    min-width: 800px;
+    min-height: 600px;
+    margin: var(--space-8) auto;
+    background: white;
+    box-shadow: var(--shadow-xl);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+}
+
+.canvas-dropzone {
+    /* Rôle : Zone de drop initiale quand aucune section */
+    /* Type : Placeholder interactif pour démarrage */
+    /* Unité : Flexbox centered avec hauteur minimum */
+    /* Domaine : Toute la surface du canvas vide */
+    /* Formule : Centrage parfait avec message engageant */
+    /* Exemple : 600px minimum → assez grand pour être visible */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    color: var(--text-dark);
+    text-align: center;
+    border: 2px dashed #cbd5e1;
+    transition: all var(--transition-base);
+}
+
+.canvas-dropzone.dragover {
+    border-color: var(--accent-green);
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfccb 100%);
+    transform: scale(1.02);
+}
+
+.dropzone-message {
+    max-width: 400px;
+}
+
+.dropzone-message i {
+    font-size: 3rem;
+    color: var(--accent-green);
+    margin-bottom: var(--space-4);
+}
+
+.dropzone-message h3 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--space-2);
+}
+
+.dropzone-message p {
+    color: #64748b;
+    margin-bottom: var(--space-6);
+}
+
+.presentation-sections {
+    /* Rôle : Container des sections de présentation */
+    /* Type : Liste verticale de sections éditables */
+    /* Unité : Block layout naturel */
+    /* Domaine : Sections empilées verticalement */
+    /* Formule : Stack naturel avec espacement entre sections */
+    /* Exemple : Section1, Section2, Section3... empilées */
+    background: white;
+    min-height: 100%;
+}
+
+/* ==========================================
+   SECTIONS DANS L'ÉDITEUR
+   ========================================== */
+
+.editor-section {
+    /* Rôle : Section éditable dans le canvas */
+    /* Type : Container de section avec contrôles */
+    /* Unité : Block naturel avec espacement */
+    /* Domaine : Largeur pleine avec hauteur variable */
+    /* Formule : Contenu + toolbar + espacement */
+    /* Exemple : Header invisible + contenu + actions */
+    position: relative;
+    background: white;
+    border: 2px solid transparent;
+    transition: all var(--transition-base);
+}
+
+.editor-section:hover {
+    border-color: var(--accent-green);
+}
+
+.editor-section.selected {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.section-controls {
+    /* Rôle : Barre de contrôles au survol de section */
+    /* Type : Toolbar contextuelle flottante */
+    /* Unité : Absolute positioning */
+    /* Domaine : Au-dessus de la section */
+    /* Formule : Position absolue en haut à droite */
+    /* Exemple : Boutons edit, move, delete */
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    display: flex;
+    gap: 2px;
+    background: var(--accent-green);
+    border-radius: var(--radius-sm);
+    padding: 2px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+    z-index: 10;
+}
+
+.editor-section:hover .section-controls,
+.editor-section.selected .section-controls {
+    opacity: 1;
+    visibility: visible;
+}
+
+.section-control-btn {
+    /* Rôle : Boutons de contrôle de section */
+    /* Type : Bouton mini avec icône uniquement */
+    /* Unité : pixels (px) pour taille fixe */
+    /* Domaine : Petits boutons compacts */
+    /* Formule : Carré parfait pour icône */
+    /* Exemple : 24px × 24px → assez grand pour clic */
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    transition: all var(--transition-base);
+}
+
+.section-control-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.section-control-btn.danger:hover {
+    background: var(--error-color);
+}
+
+/* ==========================================
+   PROPRIÉTÉS PANEL
+   ========================================== */
+
+.properties-content {
+    /* Rôle : Zone d'affichage des propriétés de l'élément sélectionné */
+    /* Type : Container dynamique avec formulaires */
+    /* Unité : Flexbox vertical avec scroll */
+    /* Domaine : Toute la hauteur disponible du panel */
+    /* Formule : Formulaires empilés avec groupes */
+    /* Exemple : Groupe Text, Groupe Style, Groupe Position */
+    height: 100%;
+    overflow-y: auto;
+}
+
+.no-selection-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.no-selection-message i {
+    font-size: 2rem;
+    margin-bottom: var(--space-4);
+    opacity: 0.5;
+}
+
+.properties-group {
+    margin-bottom: var(--space-6);
+}
+
+.properties-group h4 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-white);
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--surface-light);
+}
+
+.property-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+}
+
+.property-label {
+    min-width: 80px;
+    font-size: var(--text-xs);
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.property-input {
+    flex: 1;
+    padding: var(--space-2);
+    background: var(--tertiary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: var(--radius-sm);
+    color: var(--text-white);
+    font-size: var(--text-xs);
+}
+
+.property-input:focus {
+    outline: none;
+    border-color: var(--accent-green);
+}
+
+/* ==========================================
+   STYLES PANEL
+   ========================================== */
+
+.style-groups {
+    /* Rôle : Container des groupes de propriétés CSS */
+    /* Type : Accordéon de groupes style */
+    /* Unité : Block layout avec groupes collapsibles */
+    /* Domaine : Toute la hauteur du panel */
+    /* Formule : Groupes empilés avec expand/collapse */
+    /* Exemple : Typography, Colors, Spacing, Layout */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.style-group {
+    background: var(--tertiary-dark);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3);
+    background: var(--surface-light);
+    cursor: pointer;
+    transition: background-color var(--transition-base);
+}
+
+.group-header:hover {
+    background: var(--surface-lighter);
+}
+
+.group-header h4 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-white);
+    margin: 0;
+}
+
+.group-toggle {
+    background: none;
+    border: none;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: transform var(--transition-base);
+}
+
+.group-toggle.expanded {
+    transform: rotate(180deg);
+}
+
+.group-content {
+    padding: var(--space-4);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-base);
+}
+
+.group-content.expanded {
+    max-height: 1000px; /* Valeur suffisamment grande */
+}
+
+/* ==========================================
+   MODALS
+   ========================================== */
+
+.modal {
+    /* Rôle : Overlay modal pour dialogues */
+    /* Type : Full screen overlay avec backdrop */
+    /* Unité : Fixed positioning avec z-index élevé */
+    /* Domaine : Couvre tout l'écran */
+    /* Formule : Fixed + z-index + backdrop blur */
+    /* Exemple : Dialog centré sur fond semi-transparent */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-dialog {
+    /* Rôle : Container du contenu modal */
+    /* Type : Card flottante avec contenu */
+    /* Unité : Max-width avec espacement */
+    /* Domaine : Largeur optimale pour lecture */
+    /* Formule : max-width + margin auto + padding */
+    /* Exemple : 500px max → lisible sur tous écrans */
+    background: var(--secondary-dark);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow: hidden;
+    transform: translateY(-20px) scale(0.95);
+    transition: all var(--transition-base);
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0) scale(1);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--surface-light);
+}
+
+.modal-header h2 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--text-white);
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--text-gray);
+    font-size: var(--text-lg);
+    cursor: pointer;
+    padding: var(--space-1);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-base);
+}
+
+.modal-close:hover {
+    color: var(--text-white);
+    background: var(--surface-light);
+}
+
+.modal-body {
+    padding: var(--space-6);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--surface-light);
+    background: var(--tertiary-dark);
+}
+
+/* ==========================================
+   LOADING ET NOTIFICATIONS
+   ========================================== */
+
+.loading-overlay {
+    /* Rôle : Overlay de chargement full-screen */
+    /* Type : Spinner centré avec message */
+    /* Unité : Fixed positioning */
+    /* Domaine : Couvre tout l'écran */
+    /* Formule : Centrage absolu avec backdrop */
+    /* Exemple : Spinner + texte "Chargement..." */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(4px);
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity var(--transition-base);
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--text-white);
+    text-align: center;
+}
+
+.loading-spinner {
+    font-size: 2rem;
+    color: var(--accent-green);
+}
+
+.loading-message {
+    font-size: var(--text-lg);
+    font-weight: 500;
+}
+
+/* Toast notifications */
+.toast-container {
+    /* Rôle : Container pour notifications toast */
+    /* Type : Stack de notifications temporaires */
+    /* Unité : Fixed positioning en coin */
+    /* Domaine : Coin de l'écran pour visibilité */
+    /* Formule : Position fixe + stack vertical */
+    /* Exemple : Coin bas-droit avec toast empilés */
+    position: fixed;
+    bottom: var(--space-6);
+    right: var(--space-6);
+    z-index: var(--z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 400px;
+}
+
+.toast {
+    background: var(--secondary-dark);
+    color: var(--text-white);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--accent-green);
+    box-shadow: var(--shadow-lg);
+    transform: translateX(100%);
+    animation: slideInRight 0.3s ease-out forwards;
+}
+
+.toast.success {
+    border-left-color: var(--success-color);
+}
+
+.toast.warning {
+    border-left-color: var(--warning-color);
+}
+
+.toast.error {
+    border-left-color: var(--error-color);
+}
+
+@keyframes slideInRight {
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* ==========================================
+   RESPONSIVE ADAPTATIONS
+   ========================================== */
+
+@media (max-width: 1280px) {
+    .app-layout {
+        grid-template-columns: 250px 1fr 280px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .app-layout {
+        grid-template-columns: 1fr;
+        position: relative;
+    }
+    
+    .app-sidebar {
+        position: fixed;
+        top: 120px;
+        bottom: 0;
+        width: 280px;
+        z-index: var(--z-fixed);
+        transform: translateX(-100%);
+        transition: transform var(--transition-base);
+    }
+    
+    .app-sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .right-sidebar {
+        right: 0;
+        transform: translateX(100%);
+    }
+    
+    .right-sidebar.show {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        padding: var(--space-3) var(--space-4);
+    }
+    
+    .header-actions .btn span {
+        display: none;
+    }
+    
+    .editor-toolbar {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+    
+    .editor-canvas {
+        margin: var(--space-4);
+        min-width: auto;
+    }
+    
+    .toast-container {
+        left: var(--space-4);
+        right: var(--space-4);
+        max-width: none;
+    }
+}
+
+/* ==========================================
+   MESSAGE PRÉSENTATION VIDE
+   ========================================== */
+
+.empty-presentation-message {
+    /* Rôle : Message d'aide pour présentation vide */
+    /* Type : Container centré avec icône et texte */
+    /* Unité : Flexbox centré vertical/horizontal */
+    /* Domaine : Zone canvas complète */
+    /* Formule : Centrage absolu avec espacement */
+    /* Exemple : Icône + titre + description */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    color: var(--text-muted);
+    text-align: center;
+    padding: var(--space-8);
+}
+
+.empty-presentation-message .empty-icon {
+    /* Rôle : Icône principale du message vide */
+    /* Type : Container d'icône avec styling */
+    /* Unité : Font size et couleurs */
+    /* Domaine : 4rem avec couleur accent */
+    /* Formule : Grande taille avec couleur accent */
+    /* Exemple : Icône plus-circle en vert accent */
+    font-size: 4rem;
+    color: var(--accent-green);
+    margin-bottom: var(--space-6);
+    opacity: 0.8;
+}
+
+.empty-presentation-message h3 {
+    /* Rôle : Titre principal du message vide */
+    /* Type : Heading avec taille et espacement */
+    /* Unité : Font size et margin */
+    /* Domaine : 1.5rem avec margin bottom */
+    /* Formule : Titre visible mais discret */
+    /* Exemple : "Présentation vide" */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+    color: var(--text-secondary);
+}
+
+.empty-presentation-message p {
+    /* Rôle : Description d'aide pour l'utilisateur */
+    /* Type : Texte explicatif multi-ligne */
+    /* Unité : Font size et line height */
+    /* Domaine : Texte centré avec largeur max */
+    /* Formule : Guide utilisateur clair */
+    /* Exemple : "Commencez par ajouter..." */
+    max-width: 400px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* ==========================================
+   INTERFACE HIÉRARCHIQUE
+   ========================================== */
+
+.hierarchy-help {
+    /* Rôle : Zone d'aide pour comprendre la hiérarchie */
+    /* Type : Container d'informations avec flow visuel */
+    /* Unité : Flexbox avec espacement */
+    /* Domaine : Guide utilisateur pour construction */
+    /* Formule : Information + visualisation du flow */
+    /* Exemple : "Méta → Section → Sous → Widget" */
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 0.5rem;
+    padding: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.help-text {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 0.9rem;
+}
+
+.hierarchy-flow {
+    /* Rôle : Visualisation du flow hiérarchique */
+    /* Type : Flexbox horizontal avec séparateurs */
+    /* Unité : Flex avec gaps et alignment */
+    /* Domaine : Étapes de construction visibles */
+    /* Formule : Étapes connectées par flèches */
+    /* Exemple : Box1 → Box2 → Box3 → Box4 */
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flow-step {
+    /* Rôle : Étape individuelle du flow de construction */
+    /* Type : Container icône + texte */
+    /* Unité : Padding et border-radius */
+    /* Domaine : Représentation d'un niveau hiérarchique */
+    /* Formule : Icône + nom du niveau */
+    /* Exemple : Icône layer-group + "Méta-Sections" */
+    background: var(--secondary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: 0.5rem;
+    padding: var(--space-2) var(--space-3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    min-width: 80px;
+}
+
+.flow-step i {
+    color: var(--accent-green);
+    font-size: 1.2rem;
+}
+
+.flow-step span {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.flow-arrow {
+    color: var(--accent-green);
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.hierarchy-levels {
+    /* Rôle : Container des différents niveaux hiérarchiques */
+    /* Type : Stack vertical des niveaux */
+    /* Unité : Gap vertical entre niveaux */
+    /* Domaine : Tous les niveaux de construction */
+    /* Formule : Stack des accordion de niveaux */
+    /* Exemple : Méta-Section, Section, Sous-Section, etc. */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.hierarchy-level {
+    /* Rôle : Niveau hiérarchique individuel (accordion) */
+    /* Type : Container expandable avec header + contenu */
+    /* Unité : Border et border-radius */
+    /* Domaine : Un niveau de la hiérarchie */
+    /* Formule : Header cliquable + contenu collapsible */
+    /* Exemple : "Méta-Sections" avec liste des méta-sections */
+    background: var(--secondary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.level-header {
+    /* Rôle : Header cliquable du niveau hiérarchique */
+    /* Type : Button-like header avec icône et expand */
+    /* Unité : Padding et flexbox */
+    /* Domaine : Zone de titre + contrôle expand/collapse */
+    /* Formule : Icône + titre + bouton expand */
+    /* Exemple : Layer-group icon + "Méta-Sections" + chevron */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    background: var(--tertiary-dark);
+    border-bottom: 1px solid var(--surface-light);
+    cursor: pointer;
+    transition: background var(--transition-base);
+}
+
+.level-header:hover {
+    background: rgba(71, 85, 105, 0.3);
+}
+
+.level-header h4 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.level-header h4 i {
+    color: var(--accent-green);
+}
+
+.btn-expand {
+    /* Rôle : Bouton d'expansion/collapse du niveau */
+    /* Type : Bouton rotatif avec transition */
+    /* Unité : Transform rotate pour animation */
+    /* Domaine : État expanded/collapsed */
+    /* Formule : Rotation 180° pour indiquer l'état */
+    /* Exemple : Chevron-down → Chevron-up (rotated) */
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: var(--space-1);
+    border-radius: 0.25rem;
+    transition: all var(--transition-base);
+}
+
+.btn-expand:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--accent-green);
+}
+
+.btn-expand.expanded {
+    transform: rotate(180deg);
+}
+
+.level-content {
+    /* Rôle : Contenu du niveau hiérarchique (collapsible) */
+    /* Type : Container avec animation de hauteur */
+    /* Unité : Max-height pour animation smooth */
+    /* Domaine : Contenu d'un niveau (description + éléments) */
+    /* Formule : Animation de hauteur pour reveal/hide */
+    /* Exemple : Description + grille des éléments disponibles */
+    padding: var(--space-4);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.level-content.expanded {
+    max-height: 1000px;
+}
+
+.level-description {
+    /* Rôle : Description explicative du niveau */
+    /* Type : Texte d'aide contextuelle */
+    /* Unité : Font size et margin */
+    /* Domaine : Explication du rôle du niveau */
+    /* Formule : Texte informatif en couleur muted */
+    /* Exemple : "Grandes zones de votre présentation..." */
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+    font-style: italic;
+}
+
+.elements-grid {
+    /* Rôle : Grille des éléments disponibles par niveau */
+    /* Type : Grid responsive avec cartes d'éléments */
+    /* Unité : CSS Grid avec gap */
+    /* Domaine : Éléments draggables d'un niveau */
+    /* Formule : Grid 2 colonnes avec gap uniforme */
+    /* Exemple : Cartes "Header", "Body", "Footer" pour Méta */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--space-3);
+}
+
+.element-card {
+    /* Rôle : Carte d'élément draggable */
+    /* Type : Container cliquable avec icône + nom */
+    /* Unité : Padding, border-radius, transition */
+    /* Domaine : Représentation d'un élément constructible */
+    /* Formule : Icône + nom + état hover/drag */
+    /* Exemple : Carte "Hero Section" avec icône th-large */
+    background: var(--primary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: 0.5rem;
+    padding: var(--space-3);
+    text-align: center;
+    cursor: grab;
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.element-card:hover {
+    border-color: var(--accent-green);
+    background: rgba(16, 185, 129, 0.1);
+    transform: translateY(-2px);
+}
+
+.element-card:active {
+    cursor: grabbing;
+    transform: translateY(0) scale(0.95);
+}
+
+.element-card.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+}
+
+.element-card i {
+    font-size: 1.5rem;
+    color: var(--accent-green);
+}
+
+.element-card .element-name {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.element-card .element-description {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: var(--space-1);
+}
+
+/* Templates categories */
+.templates-categories {
+    /* Rôle : Filtres par catégorie de templates */
+    /* Type : Boutons de filtrage horizontal */
+    /* Unité : Flexbox avec gap */
+    /* Domaine : Catégories de templates disponibles */
+    /* Formule : Boutons toggle pour filtrage */
+    /* Exemple : "Tous", "Méta", "Sections", "Complets" */
+    display: flex;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.template-category {
+    /* Rôle : Bouton de catégorie de template */
+    /* Type : Toggle button avec état actif */
+    /* Unité : Padding et border-radius */
+    /* Domaine : Filtre par type de template */
+    /* Formule : État actif/inactif avec couleurs */
+    /* Exemple : Bouton "Méta" actif en vert */
+    background: var(--secondary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: 0.5rem;
+    padding: var(--space-2) var(--space-3);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.8rem;
+}
+
+.template-category:hover {
+    background: var(--tertiary-dark);
+    border-color: var(--accent-green);
+}
+
+.template-category.active {
+    background: var(--accent-green);
+    border-color: var(--accent-green);
+    color: white;
+}
+
+.template-card {
+    /* Rôle : Carte de template draggable */
+    /* Type : Container avec preview et info */
+    /* Unité : Padding et spacing */
+    /* Domaine : Template prédéfini utilisable */
+    /* Formule : Preview + titre + description */
+    /* Exemple : Carte "Li-CUBE PRO" avec icône batterie */
+    background: var(--secondary-dark);
+    border: 1px solid var(--surface-light);
+    border-radius: 0.5rem;
+    padding: var(--space-3);
+    cursor: grab;
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.template-card:hover {
+    border-color: var(--accent-green);
+    background: rgba(16, 185, 129, 0.1);
+    transform: translateY(-2px);
+}
+
+.template-card:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.template-preview {
+    /* Rôle : Zone de preview du template */
+    /* Type : Container d'icône représentative */
+    /* Unité : Flexbox centré avec taille fixe */
+    /* Domaine : Visualisation rapide du template */
+    /* Formule : Icône grande taille centrée */
+    /* Exemple : Icône layer-group pour méta-section */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    background: var(--primary-dark);
+    border-radius: 0.25rem;
+    margin-bottom: var(--space-2);
+}
+
+.template-preview i {
+    font-size: 2rem;
+    color: var(--accent-green);
+}
+
+.template-info h4 {
+    margin: 0 0 var(--space-1) 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.template-info p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    line-height: 1.4;
+}

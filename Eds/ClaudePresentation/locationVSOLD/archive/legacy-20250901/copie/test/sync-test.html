@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Synchronisation - Créateur de Présentations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .test-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e5e5;
+        }
+
+        .test-header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .test-header p {
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .test-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .action-card {
+            background: #f8fafc;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .action-card:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            transform: translateY(-2px);
+        }
+
+        .action-card h3 {
+            color: #374151;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-success {
+            background: #10b981;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-warning {
+            background: #f59e0b;
+        }
+
+        .btn-warning:hover {
+            background: #d97706;
+        }
+
+        .status-section {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .status-section h3 {
+            color: #374151;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .log-container {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 4px 0;
+            border-bottom: 1px solid #374151;
+        }
+
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+
+        .log-timestamp {
+            color: #9ca3af;
+            font-size: 0.8rem;
+        }
+
+        .log-success {
+            color: #10b981;
+        }
+
+        .log-error {
+            color: #f87171;
+        }
+
+        .log-info {
+            color: #60a5fa;
+        }
+
+        .projects-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .project-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .project-item:hover {
+            border-color: #3b82f6;
+            background: #f8fafc;
+        }
+
+        .project-info-item {
+            flex: 1;
+        }
+
+        .project-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+
+        .project-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.875rem;
+        }
+
+        .project-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .info-card h4 {
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #6b7280;
+            margin: 5px 0;
+        }
+
+        .sync-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sync-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .sync-inactive {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .instructions {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .instructions h3 {
+            color: #92400e;
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            color: #78350f;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="test-header">
+            <h1>🔄 Test de Synchronisation</h1>
+            <p>Testez la synchronisation temps réel entre l'éditeur et le viewer</p>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Instructions de test</h3>
+            <ol>
+                <li>Cliquez sur "Créer Projet Test" pour générer un projet de démonstration</li>
+                <li>Ouvrez l'éditeur dans un nouvel onglet avec "Ouvrir Éditeur"</li>
+                <li>Ouvrez le viewer dans un autre onglet avec "Ouvrir Viewer"</li>
+                <li>Modifiez le contenu dans l'éditeur et observez les changements en temps réel dans le viewer</li>
+            </ol>
+        </div>
+
+        <div class="project-info" id="projectInfo" style="display: none;">
+            <div class="info-card">
+                <h4>Projet Actuel</h4>
+                <p id="projectName">-</p>
+                <p id="projectId">-</p>
+            </div>
+            <div class="info-card">
+                <h4>État de Synchronisation</h4>
+                <p>Status: <span id="syncStatus" class="sync-status sync-inactive">Inactif</span></p>
+                <p id="lastSync">Dernière sync: Jamais</p>
+            </div>
+            <div class="info-card">
+                <h4>Statistiques</h4>
+                <p id="metaSectionsCount">Meta-sections: 0</p>
+                <p id="widgetsCount">Widgets: 0</p>
+            </div>
+        </div>
+
+        <div class="status-section" id="projectsListSection" style="display: none;">
+            <h3>📁 Projets Disponibles</h3>
+            <div id="projectsList" class="projects-list">
+                <!-- Liste dynamique des projets -->
+            </div>
+        </div>
+
+        <div class="test-actions">
+            <div class="action-card">
+                <h3>🚀 Créer Projet Test</h3>
+                <p>Génère un nouveau projet de démonstration avec du contenu d'exemple</p>
+                <button class="btn" onclick="createTestProject()">Créer Projet</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🏢 Créer Li-CUBE PRO</h3>
+                <p>Crée une présentation Li-CUBE PRO complète depuis le template</p>
+                <button class="btn" onclick="createLiCubeProProject()" style="background: #10b981;">Créer Li-CUBE PRO</button>
+            </div>
+
+            <div class="action-card">
+                <h3>✏️ Ouvrir Éditeur</h3>
+                <p>Lance l'interface d'édition dans un nouvel onglet</p>
+                <button class="btn btn-success" onclick="openEditor()" id="editorBtn" disabled>Ouvrir Éditeur</button>
+            </div>
+
+            <div class="action-card">
+                <h3>👁️ Ouvrir Viewer</h3>
+                <p>Lance la visualisation en temps réel dans un nouvel onglet</p>
+                <button class="btn btn-warning" onclick="openViewer()" id="viewerBtn" disabled>Ouvrir Viewer</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🧪 Tests CRUD</h3>
+                <p>Valide toutes les opérations de création, modification, suppression</p>
+                <button class="btn" onclick="runCRUDTests()" id="crudBtn" disabled style="background: #8b5cf6;">Tester CRUD</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🔄 Test Sync</h3>
+                <p>Teste la synchronisation temps réel entre éditeur et viewer</p>
+                <button class="btn" onclick="testSynchronization()" id="syncBtn" disabled style="background: #06b6d4;">Test Sync</button>
+            </div>
+
+            <div class="action-card">
+                <h3>↶↷ Test Historique</h3>
+                <p>Teste les fonctionnalités undo/redo du système</p>
+                <button class="btn" onclick="testUndoRedo()" id="historyBtn" disabled style="background: #f59e0b;">Test Undo/Redo</button>
+            </div>
+
+            <div class="action-card">
+                <h3>🔧 Nettoyage</h3>
+                <p>Supprime tous les projets de test pour repartir à zéro</p>
+                <button class="btn" onclick="cleanupTestProjects()" style="background: #ef4444;">Nettoyer</button>
+            </div>
+        </div>
+
+        <div class="status-section">
+            <h3>📊 Journal de Synchronisation</h3>
+            <div class="log-container" id="logContainer">
+                <div class="log-entry">
+                    <span class="log-timestamp">[Prêt]</span>
+                    <span class="log-info">Système de synchronisation initialisé</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inclure le moteur de présentation -->
+    <script src="../core/presentation-engine.js"></script>
+
+    <script>
+        // ============================================================================
+        // SCRIPT DE TEST DE SYNCHRONISATION - TEMPS RÉEL
+        // ============================================================================
+        
+        // Variables globales pour le test
+        let engine = null;
+        let currentProjectId = null;
+        let syncListenerId = null;
+
+        /**
+         * Initialise le système de test au chargement de la page
+         */
+        function initTestSystem() {
+            addLog('Initialisation du moteur de présentation...', 'info');
+            
+            try {
+                engine = new PresentationEngine();
+                addLog('✅ Moteur de présentation initialisé', 'success');
+                
+                // Écouteur pour les changements de synchronisation
+                setupSyncListener();
+                
+                // Afficher la liste des projets existants
+                displayProjectsList();
+                
+            } catch (error) {
+                addLog('❌ Erreur lors de l\'initialisation: ' + error.message, 'error');
+            }
+        }
+
+        /**
+         * Affiche la liste des projets disponibles
+         */
+        function displayProjectsList() {
+            const projects = engine.getAllProjects();
+            const projectsList = document.getElementById('projectsList');
+            const projectsSection = document.getElementById('projectsListSection');
+            
+            if (projects.length === 0) {
+                projectsSection.style.display = 'none';
+                return;
+            }
+            
+            projectsSection.style.display = 'block';
+            
+            let html = '';
+            projects.forEach(project => {
+                const lastModified = new Date(project.lastModified).toLocaleString();
+                html += `
+                    <div class="project-item">
+                        <div class="project-info-item">
+                            <div class="project-title">${project.name}</div>
+                            <div class="project-meta">
+                                ID: ${project.id}<br>
+                                Modifié: ${lastModified}<br>
+                                ${project.metaSectionsCount} méta-sections
+                            </div>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-primary btn-small" onclick="loadProjectById('${project.id}')">
+                                Charger
+                            </button>
+                            <button class="btn btn-warning btn-small" onclick="deleteProject('${project.id}')">
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            projectsList.innerHTML = html;
+        }
+
+        /**
+         * Charge un projet par son ID
+         */
+        function loadProjectById(projectId) {
+            addLog(`📂 Chargement du projet: ${projectId}`, 'info');
+            
+            try {
+                const project = engine.loadProject(projectId);
+                
+                if (project) {
+                    currentProjectId = projectId;
+                    updateProjectInfo();
+                    enableButtons();
+                    addLog(`✅ Projet chargé: ${project.name}`, 'success');
+                } else {
+                    throw new Error('Projet non trouvé');
+                }
+            } catch (error) {
+                addLog(`❌ Erreur lors du chargement: ${error.message}`, 'error');
+            }
+        }
+
+        /**
+         * Supprime un projet
+         */
+        function deleteProject(projectId) {
+            if (confirm(`Êtes-vous sûr de vouloir supprimer le projet ${projectId} ?`)) {
+                const key = `presentation-project-${projectId}`;
+                localStorage.removeItem(key);
+                
+                addLog(`🗑️ Projet supprimé: ${projectId}`, 'info');
+                
+                // Rafraîchir la liste
+                displayProjectsList();
+                
+                // Si c'était le projet actuel, réinitialiser
+                if (currentProjectId === projectId) {
+                    currentProjectId = null;
+                    document.getElementById('projectInfo').style.display = 'none';
+                    document.getElementById('editorBtn').disabled = true;
+                    document.getElementById('viewerBtn').disabled = true;
+                }
+            }
+        }
+
+        /**
+         * Configure l'écouteur d'événements de synchronisation
+         */
+        function setupSyncListener() {
+            window.addEventListener('storage', (event) => {
+                if (event.key && event.key.startsWith('presentation-project-')) {
+                    const projectId = event.key.replace('presentation-project-', '');
+                    addLog(`🔄 Synchronisation détectée pour projet: ${projectId}`, 'info');
+                    
+                    if (projectId === currentProjectId) {
+                        updateProjectInfo();
+                        updateSyncStatus(true);
+                    }
+                }
+            });
+
+            // Écouteur pour les événements personnalisés
+            window.addEventListener('presentationSync', (event) => {
+                const { projectId, data } = event.detail;
+                addLog(`📡 Événement de sync reçu pour: ${projectId}`, 'info');
+                updateSyncStatus(true);
+            });
+
+            addLog('👂 Écouteurs de synchronisation configurés', 'info');
+        }
+
+        /**
+         * Crée un projet de test avec du contenu d'exemple
+         */
+        function createTestProject() {
+            addLog('🚀 Création du projet de test...', 'info');
+            
+            try {
+                if (!engine) {
+                    throw new Error('Moteur de présentation non initialisé');
+                }
+
+                const projectName = `Test Demo ${new Date().toLocaleTimeString()}`;
+                const project = engine.createNewProject(projectName, {
+                    description: 'Projet de démonstration pour tester la synchronisation temps réel',
+                    theme: 'modern'
+                });
+
+                if (!project) {
+                    throw new Error('Échec de création du projet');
+                }
+
+                currentProjectId = project.id;
+                
+                // Ajouter du contenu d'exemple
+                addExampleContent();
+                
+                // Mettre à jour l'interface
+                updateProjectInfo();
+                enableButtons();
+                
+                addLog(`✅ Projet créé: ${projectName} (${project.id})`, 'success');
+                
+                // Rafraîchir la liste des projets
+                displayProjectsList();
+                
+            } catch (error) {
+                addLog('❌ Erreur lors de la création du projet: ' + error.message, 'error');
+            }
+        }
+
+        /**
+         * Crée un projet Li-CUBE PRO complet depuis le template
+         */
+        function createLiCubeProProject() {
+            addLog('🏢 Création du projet Li-CUBE PRO depuis template...', 'info');
+            
+            try {
+                if (!engine) {
+                    throw new Error('Moteur de présentation non initialisé');
+                }
+
+                const projectName = `Li-CUBE PRO Location ${new Date().toLocaleTimeString()}`;
+                addLog(`📝 Nom du projet: ${projectName}`, 'info');
+                
+                const project = engine.createProjectFromTemplate(projectName, 'licubepro-location');
+
+                if (!project) {
+                    throw new Error('Échec de création du projet Li-CUBE PRO');
+                }
+
+                addLog(`🔍 Projet créé avec ID: ${project.id}`, 'info');
+                addLog(`📊 Structure: ${project.metaSections ? project.metaSections.length : 0} méta-sections`, 'info');
+                
+                currentProjectId = project.id;
+                
+                // Vérifier que le projet est bien sauvegardé
+                const savedProject = engine.loadProject(project.id);
+                if (savedProject) {
+                    addLog(`✅ Projet Li-CUBE PRO créé et sauvegardé: ${projectName}`, 'success');
+                } else {
+                    addLog(`⚠️ Projet créé mais problème de sauvegarde`, 'warning');
+                }
+                
+                // Mettre à jour l'interface
+                updateProjectInfo();
+                enableButtons();
+                
+                // Rafraîchir la liste des projets
+                displayProjectsList();
+                
+            } catch (error) {
+                addLog('❌ Erreur lors de la création du projet Li-CUBE PRO: ' + error.message, 'error');
+                console.error('Détails de l\'erreur:', error);
+                console.error('Stack trace:', error.stack);
+            }
+        }
+
+        /**
+         * Ajoute du contenu d'exemple au projet
+         */
+        function addExampleContent() {
+            if (!engine || !currentProjectId) return;
+
+            // Ajouter une meta-section de contenu
+            const contentMetaId = engine.addMetaSection('content');
+            
+            // Ajouter des sections avec différents widgets
+            const section1Id = engine.addSection(contentMetaId, 'hero');
+            const section2Id = engine.addSection(contentMetaId, 'features');
+            
+            // Ajouter des widgets
+            const heroWidgetId = engine.addWidget(section1Id, 'hero', {
+                title: 'Bienvenue dans le Test de Synchronisation',
+                description: 'Ce contenu sera synchronisé en temps réel entre l\'éditeur et le viewer',
+                cta_text: 'Commencer le Test'
+            });
+
+            const advantageWidgetId = engine.addWidget(section2Id, 'advantage_list', {
+                title: 'Avantages de la Synchronisation'
+            });
+
+            addLog('📝 Contenu d\'exemple ajouté au projet', 'info');
+        }
+
+        /**
+         * Met à jour les informations du projet affichées
+         */
+        function updateProjectInfo() {
+            if (!currentProjectId || !engine) return;
+
+            const project = engine.projectData;
+            
+            document.getElementById('projectInfo').style.display = 'grid';
+            document.getElementById('projectName').textContent = project.name;
+            document.getElementById('projectId').textContent = `ID: ${project.id}`;
+            
+            const metaCount = project.metaSections ? project.metaSections.length : 0;
+            let widgetCount = 0;
+            
+            if (project.metaSections) {
+                project.metaSections.forEach(meta => {
+                    if (meta.sections) {
+                        meta.sections.forEach(section => {
+                            if (section.widgets) {
+                                widgetCount += section.widgets.length;
+                            }
+                        });
+                    }
+                });
+            }
+            
+            document.getElementById('metaSectionsCount').textContent = `Meta-sections: ${metaCount}`;
+            document.getElementById('widgetsCount').textContent = `Widgets: ${widgetCount}`;
+        }
+
+        /**
+         * Met à jour le statut de synchronisation
+         */
+        function updateSyncStatus(isActive) {
+            const statusElement = document.getElementById('syncStatus');
+            const lastSyncElement = document.getElementById('lastSync');
+            
+            if (isActive) {
+                statusElement.textContent = 'Actif';
+                statusElement.className = 'sync-status sync-active';
+                lastSyncElement.textContent = `Dernière sync: ${new Date().toLocaleTimeString()}`;
+            } else {
+                statusElement.textContent = 'Inactif';
+                statusElement.className = 'sync-status sync-inactive';
+            }
+        }
+
+
+        /**
+         * Ouvre l'éditeur dans un nouvel onglet
+         */
+        function openEditor() {
+            if (!currentProjectId) {
+                addLog('⚠️ Aucun projet sélectionné', 'error');
+                return;
+            }
+
+            const editorUrl = `../editor/presentation-editor.html?project=${currentProjectId}`;
+            window.open(editorUrl, '_blank');
+            
+            addLog('📝 Éditeur ouvert dans un nouvel onglet', 'info');
+        }
+
+        /**
+         * Ouvre le viewer dans un nouvel onglet
+         */
+        function openViewer() {
+            if (!currentProjectId) {
+                addLog('⚠️ Aucun projet sélectionné', 'error');
+                return;
+            }
+
+            const viewerUrl = `../viewer/presentation-viewer.html?project=${currentProjectId}`;
+            window.open(viewerUrl, '_blank');
+            
+            addLog('👁️ Viewer ouvert dans un nouvel onglet', 'info');
+        }
+
+        /**
+         * Ajoute une entrée au journal de logs
+         */
+        function addLog(message, type = 'info') {
+            const logContainer = document.getElementById('logContainer');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            
+            logEntry.innerHTML = `
+                <span class="log-timestamp">[${timestamp}]</span>
+                <span class="log-${type}">${message}</span>
+            `;
+            
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        /**
+         * Active les boutons de test avancés
+         */
+        function enableAdvancedTests() {
+            document.getElementById('crudBtn').disabled = false;
+            document.getElementById('syncBtn').disabled = false;
+            document.getElementById('historyBtn').disabled = false;
+        }
+
+        /**
+         * Rôle : Test complet des opérations CRUD sur tous les niveaux hiérarchiques
+         * Type : Validation système - Test automatisé
+         */
+        function runCRUDTests() {
+            if (!currentProjectId || !engine) {
+                addLog('❌ Aucun projet actif pour les tests CRUD', 'error');
+                return;
+            }
+
+            addLog('🧪 DÉBUT DES TESTS CRUD COMPLETS', 'info');
+            let testsPassed = 0;
+            let testsFailed = 0;
+
+            try {
+                // TEST 1: Ajout de méta-section
+                addLog('📝 Test 1: Ajout méta-section', 'info');
+                const metaId = engine.addMetaSection('content');
+                if (metaId) {
+                    testsPassed++;
+                    addLog('✅ Méta-section ajoutée', 'success');
+                } else {
+                    testsFailed++;
+                    addLog('❌ Échec ajout méta-section', 'error');
+                }
+
+                // TEST 2: Ajout de section
+                addLog('📝 Test 2: Ajout section', 'info');
+                const sectionId = engine.addSection(metaId, 'hero');
+                if (sectionId) {
+                    testsPassed++;
+                    addLog('✅ Section ajoutée', 'success');
+                } else {
+                    testsFailed++;
+                    addLog('❌ Échec ajout section', 'error');
+                }
+
+                // TEST 3: Ajout de widget
+                addLog('📝 Test 3: Ajout widget', 'info');
+                const widgetId = engine.addWidget(sectionId, 'text_block', {
+                    title: 'Test Widget',
+                    content: 'Contenu de test pour validation CRUD'
+                });
+                if (widgetId) {
+                    testsPassed++;
+                    addLog('✅ Widget ajouté', 'success');
+                } else {
+                    testsFailed++;
+                    addLog('❌ Échec ajout widget', 'error');
+                }
+
+                // TEST 4: Modification de widget
+                addLog('📝 Test 4: Modification widget', 'info');
+                const updateResult = engine.updateWidget(widgetId, {
+                    title: 'Widget Modifié',
+                    content: 'Contenu mis à jour'
+                });
+                if (updateResult) {
+                    testsPassed++;
+                    addLog('✅ Widget modifié', 'success');
+                } else {
+                    testsFailed++;
+                    addLog('❌ Échec modification widget', 'error');
+                }
+
+                // TEST 5: Suppression de widget
+                addLog('📝 Test 5: Suppression widget', 'info');
+                const deleteResult = engine.removeWidget(widgetId);
+                if (deleteResult) {
+                    testsPassed++;
+                    addLog('✅ Widget supprimé', 'success');
+                } else {
+                    testsFailed++;
+                    addLog('❌ Échec suppression widget', 'error');
+                }
+
+                // TEST 6: Suppression de section
+                addLog('📝 Test 6: Suppression section', 'info');
+                const removeSectionResult = engine.removeSection(sectionId);
+                if (removeSectionResult) {
+                    testsPassed++;
+                    addLog('✅ Section supprimée', 'success');
+                } else {
+                    testsFailed++;
+                    addLog('❌ Échec suppression section', 'error');
+                }
+
+                // TEST 7: Suppression de méta-section
+                addLog('📝 Test 7: Suppression méta-section', 'info');
+                const removeMetaResult = engine.removeMetaSection(metaId);
+                if (removeMetaResult) {
+                    testsPassed++;
+                    addLog('✅ Méta-section supprimée', 'success');
+                } else {
+                    testsFailed++;
+                    addLog('❌ Échec suppression méta-section', 'error');
+                }
+
+                // Résumé des tests
+                addLog(`🏁 TESTS CRUD TERMINÉS: ${testsPassed}/${testsPassed + testsFailed} réussis`, 
+                       testsFailed === 0 ? 'success' : 'warning');
+
+                // Mettre à jour l'interface
+                updateProjectInfo();
+
+            } catch (error) {
+                addLog(`❌ Erreur pendant les tests CRUD: ${error.message}`, 'error');
+            }
+        }
+
+        /**
+         * Rôle : Test de synchronisation temps réel
+         * Type : Validation synchronisation - Test de communication
+         */
+        function testSynchronization() {
+            if (!currentProjectId || !engine) {
+                addLog('❌ Aucun projet actif pour test sync', 'error');
+                return;
+            }
+
+            addLog('🔄 DÉBUT TEST SYNCHRONISATION TEMPS RÉEL', 'info');
+            
+            try {
+                // Simuler des changements et vérifier la synchronisation
+                const testData = { test: true, timestamp: Date.now() };
+                
+                // Déclencher un événement de synchronisation
+                engine.triggerSync();
+                
+                // Vérifier que l'événement est détecté
+                window.addEventListener('storage', function testListener(event) {
+                    if (event.key && event.key.includes(currentProjectId)) {
+                        addLog('✅ Synchronisation localStorage détectée', 'success');
+                        window.removeEventListener('storage', testListener);
+                    }
+                });
+                
+                addLog('📡 Test de synchronisation lancé', 'info');
+                addLog('💡 Ouvrez l\'éditeur et le viewer pour voir la sync en action', 'info');
+                
+            } catch (error) {
+                addLog(`❌ Erreur test synchronisation: ${error.message}`, 'error');
+            }
+        }
+
+        /**
+         * Rôle : Test du système undo/redo
+         * Type : Validation historique - Test mémoire
+         */
+        function testUndoRedo() {
+            if (!currentProjectId || !engine) {
+                addLog('❌ Aucun projet actif pour test historique', 'error');
+                return;
+            }
+
+            addLog('↶↷ DÉBUT TEST UNDO/REDO', 'info');
+            
+            try {
+                // État initial
+                const initialState = JSON.stringify(engine.projectData);
+                
+                // Faire un changement
+                const metaId = engine.addMetaSection('test-history');
+                addLog('📝 Changement effectué: ajout méta-section', 'info');
+                
+                // Vérifier que l'historique peut revenir en arrière
+                const undoResult = engine.undo();
+                if (undoResult) {
+                    addLog('✅ Undo réussi', 'success');
+                    
+                    // Vérifier que l'on peut refaire
+                    const redoResult = engine.redo();
+                    if (redoResult) {
+                        addLog('✅ Redo réussi', 'success');
+                        addLog('🏁 Test historique terminé avec succès', 'success');
+                    } else {
+                        addLog('❌ Échec redo', 'error');
+                    }
+                } else {
+                    addLog('❌ Échec undo', 'error');
+                }
+                
+                // Mettre à jour l'interface
+                updateProjectInfo();
+                
+            } catch (error) {
+                addLog(`❌ Erreur test historique: ${error.message}`, 'error');
+            }
+        }
+
+        /**
+         * Rôle : Nettoyage des projets de test
+         * Type : Maintenance - Nettoyage localStorage
+         */
+        function cleanupTestProjects() {
+            if (confirm('Êtes-vous sûr de vouloir supprimer TOUS les projets de test ?')) {
+                addLog('🗑️ Nettoyage des projets de test...', 'info');
+                
+                const keys = Object.keys(localStorage).filter(key => 
+                    key.startsWith('presentation-project-') && 
+                    (key.includes('test') || key.includes('li-cube'))
+                );
+                
+                keys.forEach(key => {
+                    localStorage.removeItem(key);
+                });
+                
+                addLog(`✅ ${keys.length} projets de test supprimés`, 'success');
+                
+                // Réinitialiser l'interface
+                currentProjectId = null;
+                document.getElementById('projectInfo').style.display = 'none';
+                document.getElementById('editorBtn').disabled = true;
+                document.getElementById('viewerBtn').disabled = true;
+                document.getElementById('crudBtn').disabled = true;
+                document.getElementById('syncBtn').disabled = true;
+                document.getElementById('historyBtn').disabled = true;
+                
+                // Rafraîchir la liste
+                displayProjectsList();
+            }
+        }
+
+        /**
+         * Met à jour les boutons après chargement d'un projet
+         */
+        function enableButtons() {
+            document.getElementById('editorBtn').disabled = false;
+            document.getElementById('viewerBtn').disabled = false;
+            enableAdvancedTests();
+        }
+
+        // Initialiser le système au chargement de la page
+        document.addEventListener('DOMContentLoaded', initTestSystem);
+    </script>
+</body>
+</html>
