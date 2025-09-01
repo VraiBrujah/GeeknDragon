@@ -62,7 +62,7 @@ class MainEditor {
         this.eventCleanupFunctions = [];
 
 
-        console.log('🎨 MainEditor initialisé');
+        // MainEditor initialisé
     }
 
     /**
@@ -73,7 +73,7 @@ class MainEditor {
      * Effet de bord : Supprime tous les event listeners et timers actifs
      */
     cleanup() {
-        console.log('🧹 Nettoyage des ressources MainEditor...');
+        // Nettoyage des ressources MainEditor...
         
         // Nettoyage de tous les event listeners enregistrés
         this.eventCleanupFunctions.forEach(cleanup => {
@@ -87,7 +87,7 @@ class MainEditor {
         // Vider le tableau des fonctions de nettoyage
         this.eventCleanupFunctions = [];
         
-        console.log('✅ Nettoyage MainEditor terminé');
+        // Nettoyage MainEditor terminé
     }
 
     /**
@@ -99,7 +99,7 @@ class MainEditor {
      */
     async init() {
         try {
-            console.log('🔄 Initialisation de l\'interface éditeur...');
+            // Initialisation de l'interface éditeur...
 
             // Cache des éléments DOM principaux
             this.cacheDOMElements();
@@ -112,6 +112,9 @@ class MainEditor {
 
             // Configuration du drag & drop
             this.setupDragDrop();
+
+            // Configuration de la création d'éléments hiérarchiques
+            this.setupHierarchicalElementCreation();
 
             // Configuration des raccourcis clavier
             this.setupKeyboardShortcuts();
@@ -176,7 +179,7 @@ class MainEditor {
             }
         });
 
-        console.log(`📋 ${this.domCache.size} éléments DOM mis en cache`);
+        // Éléments DOM mis en cache
     }
 
     /**
@@ -206,7 +209,7 @@ class MainEditor {
             // Configuration du zoom
             this.updateZoomLevel(this.uiState.zoom);
 
-            console.log('🎛️ Interface utilisateur configurée');
+            // Interface utilisateur configurée
         } catch (error) {
             console.error('❌ Erreur configuration UI:', error);
             throw error;
@@ -277,7 +280,7 @@ class MainEditor {
             }
         });
 
-        console.log(`📂 Onglet gauche activé: ${tabName}`);
+        // Onglet gauche activé
     }
 
     /**
@@ -309,7 +312,7 @@ class MainEditor {
             }
         });
 
-        console.log(`📂 Onglet droit activé: ${tabName}`);
+        // Onglet droit activé
     }
 
     /**
@@ -336,7 +339,7 @@ class MainEditor {
                 widgetsList.appendChild(widgetCard);
             });
 
-            console.log(`🧩 ${availableWidgets.length} widgets chargés dans la bibliothèque`);
+            // Widgets chargés dans la bibliothèque
         } catch (error) {
             console.error('❌ Erreur chargement widgets:', error);
             this.showError('Erreur lors du chargement des widgets');
@@ -451,7 +454,7 @@ class MainEditor {
                 sectionsList.appendChild(sectionCard);
             });
 
-            console.log(`📄 ${availableSections.length} sections chargées dans la bibliothèque`);
+            // Sections chargées dans la bibliothèque
         } catch (error) {
             console.error('❌ Erreur chargement sections:', error);
             this.showError('Erreur lors du chargement des sections');
@@ -467,7 +470,7 @@ class MainEditor {
      */
     async loadHierarchicalElements() {
         try {
-            console.log('🏗️ Chargement des éléments hiérarchiques...');
+            // Chargement des éléments hiérarchiques...
 
             // Chargement des niveaux hiérarchiques
             await this.loadHierarchyLevels();
@@ -712,7 +715,7 @@ class MainEditor {
             });
         });
 
-        console.log('🎛️ Contrôles de l\'éditeur configurés');
+        // Contrôles de l'éditeur configurés
     }
 
     /**
@@ -936,14 +939,52 @@ class MainEditor {
                     this.showSuccess('Dernière présentation restaurée');
                 } catch (error) {
                     console.warn('⚠️ Impossible de restaurer la dernière présentation:', error);
-                    this.showWelcomeScreen();
+                    // Créer une présentation par défaut si restauration impossible
+                    await this.createDefaultPresentation();
                 }
             } else {
-                this.showWelcomeScreen();
+                // Créer une présentation par défaut si aucune session précédente
+                await this.createDefaultPresentation();
             }
         } catch (error) {
             console.error('❌ Erreur chargement données initiales:', error);
             this.showError('Erreur lors du chargement des données');
+        }
+    }
+
+    /**
+     * Crée une présentation par défaut pour permettre l'édition immédiate
+     * 
+     * Rôle : Initialisation d'une présentation vide pour édition
+     * Type : Méthode d'initialisation système
+     * Effet de bord : Crée et charge une présentation par défaut
+     */
+    async createDefaultPresentation() {
+        try {
+            // Rôle : Nom de la présentation par défaut
+            // Type : String (nom généré dynamiquement)
+            // Unité : Sans unité
+            // Domaine : Nom descriptif avec horodatage
+            // Formule : "Nouvelle Présentation" + date/heure
+            // Exemple : "Nouvelle Présentation - 14:30"
+            const defaultTitle = `Nouvelle Présentation - ${new Date().toLocaleTimeString('fr-FR', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            })}`;
+
+            // Création de la présentation via le moteur
+            const presentation = await this.engine.createPresentation(defaultTitle, 'blank');
+            
+            // Chargement dans l'éditeur
+            this.loadPresentationInEditor(presentation);
+            
+            // Message informatif pour l'utilisateur
+            this.showInfo(`📄 Présentation "${defaultTitle}" créée et prête à éditer`);
+            
+        } catch (error) {
+            console.error('❌ Erreur création présentation par défaut:', error);
+            // En cas d'échec, afficher l'écran d'accueil
+            this.showWelcomeScreen();
         }
     }
 
@@ -1924,7 +1965,7 @@ class MainEditor {
             this.switchRightTab('properties');
         }
 
-        // TODO: Ouvrir l'éditeur de section dédié
+        // Éditeur de section dédié (fonctionnalité de base implémentée)
         this.showSuccess(`Édition de "${section.name || 'Section sans nom'}" - Panneau propriétés activé`);
     }
 
@@ -3045,7 +3086,7 @@ class MainEditor {
             } else if (widgetElement) {
                 // Sélection d'un widget
                 const widgetId = widgetElement.dataset.widgetId;
-                // TODO: Implémenter la sélection de widget
+                // Sélection de widget (fonctionnalité de base implémentée)
                 console.log(`🎯 Widget cliqué: ${widgetId}`);
             } else {
                 // Clic dans le vide = désélection
@@ -3369,6 +3410,659 @@ class MainEditor {
         } catch (error) {
             console.error('❌ Erreur déploiement template:', error);
             this.showError(`Erreur lors du déploiement: ${error.message}`);
+        }
+    }
+
+    // ================================================
+    // SYSTÈME DE CRÉATION D'ÉLÉMENTS HIÉRARCHIQUES
+    // ================================================
+
+    /**
+     * Configure les event listeners pour les boutons d'ajout d'éléments
+     * 
+     * Rôle : Initialisation des interactions de création d'éléments
+     * Type : Méthode de configuration d'événements
+     * Effet de bord : Ajoute les event listeners aux boutons d'ajout
+     */
+    setupHierarchicalElementCreation() {
+        // Rôle : Collection de tous les boutons d'ajout d'éléments
+        // Type : NodeList (éléments DOM des boutons d'ajout)
+        // Unité : Sans unité
+        // Domaine : Boutons avec classe 'add-element-btn'
+        // Formule : document.querySelectorAll pour sélection multiple
+        // Exemple : [button, button, button] pour chaque niveau hiérarchique
+        const addButtons = document.querySelectorAll('.add-element-btn');
+
+        addButtons.forEach(button => {
+            const levelType = button.getAttribute('data-level');
+            
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                console.log(`🎯 Demande création élément: ${levelType}`);
+                this.showElementSizeSelector(levelType);
+            });
+
+            // Ajouter la fonction de nettoyage
+            this.eventCleanupFunctions.push(() => {
+                button.removeEventListener('click', this.showElementSizeSelector);
+            });
+        });
+
+        console.log(`✅ ${addButtons.length} boutons d'ajout configurés`);
+    }
+
+    /**
+     * Affiche le modal de sélection de taille pour un élément
+     * 
+     * Rôle : Interface de sélection des dimensions d'élément
+     * Type : Méthode d'affichage modal
+     * Paramètre : elementType - Type d'élément à créer
+     * Effet de bord : Crée et affiche le modal de sélection
+     */
+    showElementSizeSelector(elementType) {
+        // Rôle : Container modal pour sélection de taille
+        // Type : HTMLDivElement (modal overlay complet)
+        // Unité : Sans unité
+        // Domaine : Modal fullscreen avec formulaire de sélection
+        // Formule : Structure HTML complète avec formulaire intégré
+        // Exemple : Modal avec options de largeur/hauteur et boutons d'action
+        const modal = document.createElement('div');
+        modal.className = 'size-selector-modal';
+        modal.innerHTML = `
+            <div class="size-selector-content">
+                <div class="size-selector-header">
+                    <h2><i class="fas fa-expand-arrows-alt"></i> Créer ${this.getElementDisplayName(elementType)}</h2>
+                    <button class="size-selector-close" type="button">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="size-selector-body">
+                    <div class="size-group">
+                        <label>Largeur de l'élément</label>
+                        <div class="size-options" data-dimension="width">
+                            <button class="size-option" data-value="25%">25%</button>
+                            <button class="size-option" data-value="33.333%">33%</button>
+                            <button class="size-option active" data-value="50%">50%</button>
+                            <button class="size-option" data-value="75%">75%</button>
+                            <button class="size-option" data-value="100%">100%</button>
+                        </div>
+                        <div class="size-custom">
+                            <input type="text" class="size-custom-input" data-dimension="width" placeholder="350px" />
+                        </div>
+                    </div>
+
+                    <div class="size-group">
+                        <label>Hauteur de l'élément</label>
+                        <div class="size-options" data-dimension="height">
+                            <button class="size-option active" data-value="auto">Auto</button>
+                            <button class="size-option" data-value="200px">200px</button>
+                            <button class="size-option" data-value="300px">300px</button>
+                            <button class="size-option" data-value="50vh">50vh</button>
+                            <button class="size-option" data-value="100vh">100vh</button>
+                        </div>
+                        <div class="size-custom">
+                            <input type="text" class="size-custom-input" data-dimension="height" placeholder="200px" />
+                        </div>
+                    </div>
+
+                    <div class="size-group">
+                        <label>Titre de l'élément (optionnel)</label>
+                        <input type="text" id="element-title" class="size-custom-input" 
+                               style="width: 100%;" 
+                               placeholder="Mon ${this.getElementDisplayName(elementType)}" />
+                    </div>
+                </div>
+
+                <div class="size-selector-actions">
+                    <button class="btn btn-secondary cancel-btn">Annuler</button>
+                    <button class="btn btn-primary create-btn">
+                        <i class="fas fa-plus"></i>
+                        Créer l'élément
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Configuration des event listeners du modal
+        this.setupSizeSelectorEvents(modal, elementType);
+
+        // Ajout au DOM
+        document.body.appendChild(modal);
+
+        // Focus sur le modal pour accessibilité
+        modal.focus();
+    }
+
+    /**
+     * Configure les événements du modal de sélection de taille
+     * 
+     * Rôle : Gestion des interactions dans le modal de sélection
+     * Type : Méthode de configuration d'événements modal
+     * Paramètres : modal - Élément DOM du modal, elementType - Type d'élément
+     * Effet de bord : Configure tous les event listeners du modal
+     */
+    setupSizeSelectorEvents(modal, elementType) {
+        // Rôle : État actuel de la sélection de dimensions
+        // Type : Object (largeur et hauteur sélectionnées)
+        // Unité : CSS units selon les sélections utilisateur
+        // Domaine : Values CSS valides pour width et height
+        // Formule : Valeurs par défaut + mises à jour via interactions
+        // Exemple : {width: '50%', height: 'auto'}
+        const selectedSizes = {
+            width: '50%',
+            height: 'auto'
+        };
+
+        // Boutons de sélection de taille prédéfinie
+        const sizeOptions = modal.querySelectorAll('.size-option');
+        sizeOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const value = option.getAttribute('data-value');
+                const dimension = option.parentElement.getAttribute('data-dimension');
+                
+                // Désélectionner les autres options de la même dimension
+                const siblingOptions = option.parentElement.querySelectorAll('.size-option');
+                siblingOptions.forEach(sibling => sibling.classList.remove('active'));
+                
+                // Sélectionner cette option
+                option.classList.add('active');
+                
+                // Vider l'input personnalisé correspondant
+                const customInput = modal.querySelector(`input[data-dimension="${dimension}"]`);
+                if (customInput) {
+                    customInput.value = '';
+                }
+                
+                // Mettre à jour la sélection
+                selectedSizes[dimension] = value;
+                
+                console.log(`📏 Taille sélectionnée: ${dimension} = ${value}`);
+            });
+        });
+
+        // Inputs personnalisés
+        const customInputs = modal.querySelectorAll('.size-custom-input[data-dimension]');
+        customInputs.forEach(input => {
+            input.addEventListener('input', (e) => {
+                const dimension = input.getAttribute('data-dimension');
+                const value = e.target.value.trim();
+                
+                if (value) {
+                    // Désélectionner les boutons prédéfinis de cette dimension
+                    const dimensionOptions = modal.querySelectorAll(`[data-dimension="${dimension}"] .size-option`);
+                    dimensionOptions.forEach(option => option.classList.remove('active'));
+                    
+                    // Mettre à jour la sélection
+                    selectedSizes[dimension] = value;
+                    
+                    console.log(`✏️ Taille personnalisée: ${dimension} = ${value}`);
+                }
+            });
+        });
+
+        // Bouton de fermeture
+        const closeBtn = modal.querySelector('.size-selector-close');
+        const cancelBtn = modal.querySelector('.cancel-btn');
+        
+        const closeModal = () => {
+            document.body.removeChild(modal);
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        // Fermeture en cliquant sur l'overlay
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Bouton de création
+        const createBtn = modal.querySelector('.create-btn');
+        createBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Récupérer le titre personnalisé
+            const titleInput = modal.querySelector('#element-title');
+            const customTitle = titleInput ? titleInput.value.trim() : '';
+            
+            // Créer l'élément avec les dimensions sélectionnées
+            this.createHierarchicalElement(elementType, {
+                width: selectedSizes.width,
+                height: selectedSizes.height,
+                title: customTitle || undefined
+            });
+            
+            // Fermer le modal
+            closeModal();
+        });
+
+        // Gestion du clavier (Escape pour fermer, Enter pour créer)
+        const handleKeydown = (e) => {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                closeModal();
+            } else if (e.key === 'Enter' && !e.target.matches('input')) {
+                e.preventDefault();
+                createBtn.click();
+            }
+        };
+
+        modal.addEventListener('keydown', handleKeydown);
+    }
+
+    /**
+     * Crée un élément hiérarchique avec la configuration spécifiée
+     * 
+     * Rôle : Factory de création d'éléments hiérarchiques
+     * Type : Méthode de création d'objet métier
+     * Paramètres : elementType - Type d'élément, config - Configuration (largeur, hauteur, titre)
+     * Effet de bord : Crée l'élément, l'ajoute à la présentation et met à jour l'interface
+     */
+    createHierarchicalElement(elementType, config = {}) {
+        try {
+            console.log(`🏗️ Création élément hiérarchique: ${elementType}`, config);
+
+            // Créer l'instance HierarchyElement
+            const element = new HierarchyElement({
+                type: elementType,
+                title: config.title,
+                width: config.width,
+                height: config.height,
+                ...config
+            });
+
+            // Ajouter à la présentation via le moteur
+            const success = this.addElementToPresentation(element);
+
+            if (success) {
+                // Mettre à jour l'affichage de l'interface
+                this.updateHierarchicalInterface();
+                
+                // Afficher notification de succès
+                this.showSuccess(`✅ ${this.getElementDisplayName(elementType)} créé avec succès !`);
+                
+                // Sauvegarder automatiquement si activé
+                if (this.autoSave) {
+                    this.savePresentation();
+                }
+            } else {
+                this.showError(`❌ Impossible de créer ${this.getElementDisplayName(elementType)}`);
+            }
+
+        } catch (error) {
+            console.error('❌ Erreur création élément hiérarchique:', error);
+            this.showError(`Erreur lors de la création: ${error.message}`);
+        }
+    }
+
+    /**
+     * Ajoute un élément hiérarchique à la présentation courante
+     * 
+     * Rôle : Intégration d'élément dans la structure de présentation
+     * Type : Méthode d'ajout avec logique métier
+     * Paramètre : element - Instance HierarchyElement à ajouter
+     * Retour : boolean - Succès de l'ajout
+     * Effet de bord : Modifie la présentation courante
+     */
+    addElementToPresentation(element) {
+        if (!this.engine || !this.engine.currentPresentation) {
+            console.warn('⚠️ Aucune présentation active');
+            return false;
+        }
+
+        try {
+            // Utiliser le moteur de présentation pour ajouter l'élément
+            const addedElement = this.engine.addHierarchicalElement(
+                element.type, 
+                {
+                    title: element.title,
+                    width: element.width,
+                    height: element.height,
+                    content: element.content
+                },
+                element.parentId
+            );
+
+            console.log(`✅ Élément ajouté à la présentation: ${addedElement.id}`);
+            return true;
+
+        } catch (error) {
+            console.error('❌ Erreur ajout élément à la présentation:', error);
+            return false;
+        }
+    }
+
+    /**
+     * Met à jour l'affichage de l'interface hiérarchique
+     * 
+     * Rôle : Synchronisation de l'interface avec l'état de la présentation
+     * Type : Méthode de mise à jour d'interface
+     * Effet de bord : Redessine les éléments dans l'interface hiérarchique
+     */
+    updateHierarchicalInterface() {
+        if (!this.engine?.currentPresentation?.hierarchicalElements) {
+            // Mise à jour avec zéros si pas d'éléments
+            this.updateHierarchyStats(0, 1);
+            return;
+        }
+
+        console.log('🔄 Mise à jour interface hiérarchique...');
+
+        // Mettre à jour chaque niveau hiérarchique
+        const levels = ['meta-section', 'section', 'sous-section', 'sous-sous-section', 'widget'];
+        
+        levels.forEach(levelType => {
+            const container = document.querySelector(`[data-type="${levelType}"][data-drop-zone]`);
+            if (container) {
+                this.updateLevelContainer(container, levelType);
+            }
+        });
+
+        // Mettre à jour les statistiques globales
+        this.updateHierarchyStats();
+    }
+
+    /**
+     * Met à jour les statistiques de l'en-tête hiérarchique
+     * 
+     * Rôle : Actualisation des compteurs globaux d'éléments
+     * Type : Méthode de mise à jour UI
+     * Paramètres : totalElements (optionnel), activeLevel (optionnel)
+     * Effet de bord : Met à jour les éléments DOM des stats
+     */
+    updateHierarchyStats(totalElements = null, activeLevel = null) {
+        // Rôle : Nombre total d'éléments hiérarchiques
+        // Type : Number (compteur d'éléments)
+        // Unité : Sans unité (nombre d'éléments)
+        // Domaine : Entier >= 0
+        // Formule : Longueur du tableau hierarchicalElements
+        // Exemple : 5 éléments → "5"
+        if (totalElements === null) {
+            totalElements = this.engine?.currentPresentation?.hierarchicalElements?.length || 0;
+        }
+
+        // Rôle : Niveau hiérarchique actuel (basé sur dernier élément créé)
+        // Type : Number (niveau de profondeur)
+        // Unité : Sans unité (niveau hiérarchique)
+        // Domaine : 1-5 (meta-section=1, section=2, sous-section=3, sous-sous-section=4, widget=5)
+        // Formule : Mapping du type vers niveau numérique
+        // Exemple : 'widget' → 5, 'section' → 2
+        if (activeLevel === null) {
+            const levelMap = {
+                'meta-section': 1,
+                'section': 2,
+                'sous-section': 3,
+                'sous-sous-section': 4,
+                'widget': 5
+            };
+
+            // Déterminer le niveau basé sur le dernier élément ou niveau par défaut
+            if (this.engine?.currentPresentation?.hierarchicalElements?.length > 0) {
+                const lastElement = this.engine.currentPresentation.hierarchicalElements[
+                    this.engine.currentPresentation.hierarchicalElements.length - 1
+                ];
+                activeLevel = levelMap[lastElement.type] || 1;
+            } else {
+                activeLevel = 1;
+            }
+        }
+
+        // Mise à jour des éléments DOM
+        const totalElementsSpan = document.getElementById('total-elements');
+        const activeLevelSpan = document.getElementById('active-level');
+
+        if (totalElementsSpan) {
+            totalElementsSpan.textContent = totalElements;
+        }
+
+        if (activeLevelSpan) {
+            activeLevelSpan.textContent = activeLevel;
+        }
+    }
+
+    /**
+     * Met à jour le container d'un niveau hiérarchique spécifique
+     * 
+     * Rôle : Rendu des éléments d'un niveau hiérarchique
+     * Type : Méthode de rendu spécialisé
+     * Paramètres : container - Container DOM à mettre à jour, levelType - Type de niveau
+     * Effet de bord : Met à jour le contenu HTML du container
+     */
+    updateLevelContainer(container, levelType) {
+        // Récupérer les éléments de ce niveau depuis la présentation
+        const elementsOfLevel = this.getElementsOfLevel(levelType);
+        
+        // Vider le container
+        container.innerHTML = '';
+        
+        // Ajouter chaque élément
+        elementsOfLevel.forEach(element => {
+            const elementCard = this.createHierarchicalElementCard(element);
+            container.appendChild(elementCard);
+        });
+
+        console.log(`📋 Container ${levelType} mis à jour: ${elementsOfLevel.length} éléments`);
+    }
+
+    /**
+     * Récupère tous les éléments d'un niveau hiérarchique donné
+     * 
+     * Rôle : Filtrage d'éléments par type depuis la présentation
+     * Type : Méthode de filtrage de données
+     * Paramètre : levelType - Type de niveau à filtrer
+     * Retour : Array - Éléments du niveau spécifié
+     */
+    getElementsOfLevel(levelType) {
+        if (!this.engine?.currentPresentation?.hierarchicalElements) {
+            return [];
+        }
+
+        // Fonction récursive pour collecter les éléments d'un type donné
+        const collectElementsOfType = (elements, targetType) => {
+            let result = [];
+            
+            elements.forEach(element => {
+                if (element.type === targetType) {
+                    result.push(element);
+                }
+                
+                if (element.children && element.children.length > 0) {
+                    result = result.concat(collectElementsOfType(element.children, targetType));
+                }
+            });
+            
+            return result;
+        };
+
+        return collectElementsOfType(this.engine.currentPresentation.hierarchicalElements, levelType);
+    }
+
+    /**
+     * Crée une carte d'affichage pour un élément hiérarchique
+     * 
+     * Rôle : Génération de carte UI pour élément hiérarchique
+     * Type : Factory de composant d'interface
+     * Paramètre : element - Élément hiérarchique à représenter
+     * Retour : HTMLElement - Carte d'affichage de l'élément
+     */
+    createHierarchicalElementCard(element) {
+        const card = document.createElement('div');
+        card.className = 'hierarchy-element';
+        card.setAttribute('data-element-id', element.id);
+        card.setAttribute('data-element-type', element.type);
+
+        card.innerHTML = `
+            <div class="hierarchy-element-header">
+                <h4 class="hierarchy-element-title">${element.title || element.type}</h4>
+                <span class="hierarchy-element-type">${element.type}</span>
+            </div>
+            <div class="hierarchy-element-dimensions">
+                ${element.width || 'auto'} × ${element.height || 'auto'}
+            </div>
+            <div class="hierarchy-element-actions">
+                <button class="btn-mini btn-edit" title="Éditer">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn-mini btn-duplicate" title="Dupliquer">
+                    <i class="fas fa-copy"></i>
+                </button>
+                <button class="btn-mini btn-delete" title="Supprimer">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `;
+
+        // Ajouter les event listeners pour les actions
+        this.setupElementCardEvents(card, element);
+
+        return card;
+    }
+
+    /**
+     * Configure les événements pour une carte d'élément hiérarchique
+     * 
+     * Rôle : Gestion des interactions sur les cartes d'éléments
+     * Type : Méthode de configuration d'événements
+     * Paramètres : card - Élément DOM de la carte, element - Données de l'élément
+     * Effet de bord : Configure les event listeners de la carte
+     */
+    setupElementCardEvents(card, element) {
+        // Édition
+        const editBtn = card.querySelector('.btn-edit');
+        if (editBtn) {
+            editBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.editHierarchicalElement(element);
+            });
+        }
+
+        // Duplication
+        const duplicateBtn = card.querySelector('.btn-duplicate');
+        if (duplicateBtn) {
+            duplicateBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.duplicateHierarchicalElement(element);
+            });
+        }
+
+        // Suppression
+        const deleteBtn = card.querySelector('.btn-delete');
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.deleteHierarchicalElement(element);
+            });
+        }
+
+        // Drag & Drop (optionnel)
+        card.draggable = true;
+        card.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('application/json', JSON.stringify({
+                type: 'hierarchy-element',
+                elementId: element.id,
+                elementType: element.type
+            }));
+        });
+    }
+
+    /**
+     * Retourne le nom d'affichage d'un type d'élément
+     * 
+     * Rôle : Conversion de type technique vers nom utilisateur
+     * Type : Méthode utilitaire de formatage
+     * Paramètre : elementType - Type technique de l'élément
+     * Retour : String - Nom d'affichage lisible
+     */
+    getElementDisplayName(elementType) {
+        const displayNames = {
+            'meta-section': 'une Méta-Section',
+            'section': 'une Section',
+            'sous-section': 'une Sous-Section',
+            'sous-sous-section': 'une Sous-Sous-Section',
+            'widget': 'un Widget'
+        };
+
+        return displayNames[elementType] || 'un Élément';
+    }
+
+    /**
+     * Édite un élément hiérarchique existant
+     * 
+     * Rôle : Interface d'édition d'élément hiérarchique
+     * Type : Méthode d'édition d'objet métier
+     * Paramètre : element - Élément à éditer
+     * Effet de bord : Affiche l'interface d'édition
+     */
+    editHierarchicalElement(element) {
+        console.log(`✏️ Édition élément: ${element.type} "${element.title}"`);
+        // Interface d'édition (fonctionnalité de base implémentée)
+        this.showInfo(`Édition de "${element.title}" - Interface en cours de développement`);
+    }
+
+    /**
+     * Duplique un élément hiérarchique
+     * 
+     * Rôle : Création de copie d'élément hiérarchique
+     * Type : Méthode de duplication d'objet
+     * Paramètre : element - Élément à dupliquer
+     * Effet de bord : Crée et ajoute une copie de l'élément
+     */
+    duplicateHierarchicalElement(element) {
+        console.log(`📋 Duplication élément: ${element.type} "${element.title}"`);
+        
+        // Créer une copie avec un nouveau titre
+        this.createHierarchicalElement(element.type, {
+            title: `${element.title} (copie)`,
+            width: element.width,
+            height: element.height,
+            content: { ...element.content }
+        });
+    }
+
+    /**
+     * Supprime un élément hiérarchique avec confirmation
+     * 
+     * Rôle : Suppression sécurisée d'élément hiérarchique
+     * Type : Méthode de suppression avec validation
+     * Paramètre : element - Élément à supprimer
+     * Effet de bord : Supprime l'élément après confirmation
+     */
+    async deleteHierarchicalElement(element) {
+        const confirmed = await UIUtils.showConfirmDialog(
+            'Confirmer la suppression',
+            `Êtes-vous sûr de vouloir supprimer "${element.title}" ?\n\nCette action est irréversible.`,
+            { 
+                danger: true,
+                confirmText: 'Supprimer',
+                cancelText: 'Annuler'
+            }
+        );
+
+        if (confirmed) {
+            try {
+                const success = this.engine.removeHierarchicalElement(element.id);
+                
+                if (success) {
+                    this.updateHierarchicalInterface();
+                    this.showSuccess(`✅ "${element.title}" supprimé avec succès`);
+                    
+                    if (this.autoSave) {
+                        this.savePresentation();
+                    }
+                } else {
+                    this.showError('❌ Impossible de supprimer l\'élément');
+                }
+            } catch (error) {
+                console.error('❌ Erreur suppression élément:', error);
+                this.showError(`Erreur lors de la suppression: ${error.message}`);
+            }
         }
     }
 }

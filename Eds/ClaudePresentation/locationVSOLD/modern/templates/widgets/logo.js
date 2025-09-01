@@ -97,25 +97,34 @@ class LogoWidget {
     getEditableFields() {
         return [
             {
-                id: 'logo-path',
-                name: 'Chemin de l\'image',
-                type: 'image',
-                required: true,
-                description: 'Chemin vers l\'image du logo'
-            },
-            {
-                id: 'alt-text',
-                name: 'Texte alternatif',
+                name: 'imagePath',
+                label: 'Chemin de l\'image',
                 type: 'text',
-                required: true,
-                description: 'Description du logo pour l\'accessibilité'
+                defaultValue: './images/logo edsquebec.png'
             },
             {
-                id: 'link',
-                name: 'Lien de destination',
-                type: 'url',
-                required: false,
-                description: 'URL de redirection au clic'
+                name: 'altText',
+                label: 'Texte alternatif',
+                type: 'text',
+                defaultValue: 'Logo EDS Québec'
+            },
+            {
+                name: 'width',
+                label: 'Largeur',
+                type: 'text',
+                defaultValue: '50px'
+            },
+            {
+                name: 'height',
+                label: 'Hauteur',
+                type: 'text',
+                defaultValue: '50px'
+            },
+            {
+                name: 'link',
+                label: 'Lien de destination',
+                type: 'text',
+                defaultValue: '#'
             }
         ];
     }

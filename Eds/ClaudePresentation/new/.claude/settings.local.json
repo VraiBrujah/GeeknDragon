@@ -11,7 +11,12 @@
       "Bash(find:*)",
       "Bash(grep:*)",
       "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\test-cleanup-verification.html\")",
-      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\quick-validation.html\")"
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\quick-validation.html\")",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\test-final-integration.html\")",
+      "Bash(del:*)",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\test-widgets-final.html\")",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\debug-widgets.html\")",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\new\\test-widget-creation.html\")"
     ],
     "deny": [],
     "ask": []

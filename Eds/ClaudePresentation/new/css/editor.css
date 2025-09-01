@@ -720,13 +720,14 @@
 
 .presentation-sections {
     /* Rôle : Container des sections de présentation */
-    /* Type : Liste verticale de sections éditables */
-    /* Unité : Block layout naturel */
+    /* Type : Liste verticale de sections éditables en mode sombre */
+    /* Unité : Block layout naturel avec fond sombre */
     /* Domaine : Sections empilées verticalement */
     /* Formule : Stack naturel avec espacement entre sections */
-    /* Exemple : Section1, Section2, Section3... empilées */
-    background: white;
+    /* Exemple : Section1, Section2, Section3... empilées en dark mode */
+    background: transparent;
     min-height: 100%;
+    color: var(--text-primary);
 }
 
 /* ==========================================
@@ -1273,77 +1274,117 @@
    INTERFACE HIÉRARCHIQUE
    ========================================== */
 
-.hierarchy-help {
-    /* Rôle : Zone d'aide pour comprendre la hiérarchie */
-    /* Type : Container d'informations avec flow visuel */
-    /* Unité : Flexbox avec espacement */
-    /* Domaine : Guide utilisateur pour construction */
-    /* Formule : Information + visualisation du flow */
-    /* Exemple : "Méta → Section → Sous → Widget" */
-    background: rgba(16, 185, 129, 0.1);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    border-radius: 0.5rem;
+.hierarchy-header {
+    /* Rôle : En-tête moderne pour la section hiérarchique */
+    /* Type : Container flex avec statistiques */
+    /* Unité : Flexbox horizontal avec espacement */
+    /* Domaine : Titre + stats dans la largeur de sidebar */
+    /* Formule : Flex justify-between pour répartition */
+    /* Exemple : Titre à gauche, stats à droite */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-blue) 100%);
     padding: var(--space-4);
-    margin-bottom: var(--space-6);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-4);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
-.help-text {
-    color: var(--text-secondary);
-    margin-bottom: var(--space-4);
+.header-content h3 {
+    /* Rôle : Titre principal de l'en-tête */
+    /* Type : Typography avec icône */
+    /* Unité : Font size et spacing */
+    /* Domaine : Titre visible et engageant */
+    /* Formule : Taille adaptée au sidebar */
+    /* Exemple : "🏗️ Architecte de Présentation" */
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-1) 0;
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    font-size: 0.9rem;
 }
 
-.hierarchy-flow {
-    /* Rôle : Visualisation du flow hiérarchique */
-    /* Type : Flexbox horizontal avec séparateurs */
-    /* Unité : Flex avec gaps et alignment */
-    /* Domaine : Étapes de construction visibles */
-    /* Formule : Étapes connectées par flèches */
-    /* Exemple : Box1 → Box2 → Box3 → Box4 */
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.flow-step {
-    /* Rôle : Étape individuelle du flow de construction */
-    /* Type : Container icône + texte */
-    /* Unité : Padding et border-radius */
-    /* Domaine : Représentation d'un niveau hiérarchique */
-    /* Formule : Icône + nom du niveau */
-    /* Exemple : Icône layer-group + "Méta-Sections" */
-    background: var(--secondary-dark);
-    border: 1px solid var(--surface-light);
-    border-radius: 0.5rem;
-    padding: var(--space-2) var(--space-3);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-1);
-    min-width: 80px;
-}
-
-.flow-step i {
+.header-content h3 i {
+    /* Rôle : Icône du titre principal */
+    /* Type : Icon styling avec effet */
+    /* Unité : Color avec transition */
+    /* Domaine : Icône attirante et cohérente */
+    /* Formule : Couleur accent avec animation */
+    /* Exemple : Icône sitemap en vert accent */
     color: var(--accent-green);
     font-size: 1.2rem;
 }
 
-.flow-step span {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    text-align: center;
+.header-subtitle {
+    /* Rôle : Sous-titre explicatif */
+    /* Type : Text muted et compact */
+    /* Unité : Font size réduite */
+    /* Domaine : Explication courte et claire */
+    /* Formule : Couleur muted pour hiérarchie visuelle */
+    /* Exemple : "Créez votre présentation..." */
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin: 0;
+    line-height: 1.4;
 }
 
-.flow-arrow {
-    color: var(--accent-green);
-    font-size: 0.8rem;
-    opacity: 0.7;
+.header-stats {
+    /* Rôle : Container des statistiques */
+    /* Type : Flex column pour stats empilées */
+    /* Unité : Flexbox vertical */
+    /* Domaine : 2-3 statistiques compactes */
+    /* Formule : Column layout avec espacement minimal */
+    /* Exemple : "12 Éléments" + "3 Niveaux" */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    align-items: flex-end;
 }
+
+.stat-item {
+    /* Rôle : Item de statistique individuel */
+    /* Type : Container nombre + label */
+    /* Unité : Text alignment center */
+    /* Domaine : Stat compacte et lisible */
+    /* Formule : Alignement centré avec espacement */
+    /* Exemple : "5" + "Éléments" */
+    text-align: center;
+    min-width: 60px;
+}
+
+.stat-number {
+    /* Rôle : Nombre de la statistique */
+    /* Type : Typography emphasized */
+    /* Unité : Font size et weight */
+    /* Domaine : Chiffre visible et impactant */
+    /* Formule : Taille plus grande + couleur accent */
+    /* Exemple : "12", "3", "45" */
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--accent-green);
+    line-height: 1;
+}
+
+.stat-label {
+    /* Rôle : Label de la statistique */
+    /* Type : Typography small muted */
+    /* Unité : Font size réduite */
+    /* Domaine : Label descriptif court */
+    /* Formule : Couleur muted + taille petite */
+    /* Exemple : "Éléments", "Niveaux", "Widgets" */
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
 
 .hierarchy-levels {
     /* Rôle : Container des différents niveaux hiérarchiques */

@@ -482,16 +482,6 @@ class HierarchyManager {
         return parentLevel ? parentLevel.canContain : [];
     }
 
-    /**
-     * Retourne la définition complète des niveaux hiérarchiques
-     * 
-     * Rôle : Accès aux métadonnées de hiérarchie
-     * Type : Getter de configuration
-     * Retour : Object - Définitions complètes des niveaux
-     */
-    getHierarchyLevels() {
-        return this.hierarchyLevels;
-    }
 
     /**
      * Retourne les templates disponibles
@@ -601,6 +591,123 @@ class HierarchyManager {
      */
     getHierarchyLevels() {
         return { ...this.hierarchyLevels };
+    }
+
+    /**
+     * Récupère un template spécifique par son nom
+     * 
+     * Rôle : Accès à un template individuel
+     * Type : Méthode de récupération
+     * Paramètre : templateName (String) - Nom du template recherché
+     * Retour : Object|null - Template trouvé ou null
+     */
+    getTemplate(templateName) {
+        // Rôle : Vérification d'existence du nom de template
+        // Type : String (nom de template)
+        // Unité : Sans unité
+        // Domaine : Chaîne non vide ou null/undefined
+        // Formule : Recherche directe dans Map
+        // Exemple : "presentation-corporate", "section-intro"
+        if (!templateName) {
+            return null;
+        }
+
+        // Rôle : Template trouvé dans la collection
+        // Type : Object (configuration template) ou undefined
+        // Unité : Sans unité
+        // Domaine : Template valide ou undefined si non trouvé
+        // Formule : Accès direct via Map.get()
+        // Exemple : {name: "corporate", description: "...", elements: [...]}
+        const template = this.hierarchyTemplates.get(templateName);
+        
+        return template || null;
+    }
+
+    /**
+     * Déploie un template en créant les éléments correspondants
+     * 
+     * Rôle : Application d'un template à la présentation
+     * Type : Méthode de déploiement
+     * Paramètre : template (Object) - Configuration du template à déployer
+     * Retour : HierarchyElement - Élément racine créé
+     */
+    deployTemplate(template) {
+        // Rôle : Vérification de validité du template
+        // Type : Object (template de hiérarchie)
+        // Unité : Sans unité
+        // Domaine : Object avec propriétés name et structure
+        // Formule : Validation existence propriétés requises
+        // Exemple : {name: "corporate", type: "meta-section", elements: [...]}
+        if (!template || !template.name) {
+            console.error('❌ Template invalide pour déploiement:', template);
+            return null;
+        }
+
+        console.log(`🎨 Déploiement du template: ${template.name}`);
+
+        // Rôle : Élément racine créé depuis le template
+        // Type : HierarchyElement (élément hiérarchique)
+        // Unité : Sans unité
+        // Domaine : Instance valide de HierarchyElement
+        // Formule : Création via createFromTemplate()
+        // Exemple : Meta-section contenant sections et widgets prédéfinis
+        const rootElement = this.createFromTemplate(template.name, template);
+
+        // Rôle : Application des éléments enfants du template
+        // Type : Array<Object> (éléments enfants)
+        // Unité : Sans unité
+        // Domaine : Liste d'éléments à créer
+        // Formule : Itération sur template.elements
+        // Exemple : [{type: "section", title: "Intro"}, {type: "widget", ...}]
+        if (template.elements && Array.isArray(template.elements)) {
+            template.elements.forEach(childConfig => {
+                const childElement = new HierarchyElement({
+                    ...childConfig,
+                    parent: rootElement.id
+                });
+                rootElement.addChild(childElement);
+            });
+        }
+
+        return rootElement;
+    }
+
+    /**
+     * Génère le HTML pour un ensemble d'éléments hiérarchiques
+     * 
+     * Rôle : Rendu HTML des éléments hiérarchiques
+     * Type : Méthode de génération de contenu
+     * Paramètre : hierarchicalElements (Array) - Éléments à rendre
+     * Retour : String - HTML généré
+     */
+    generateHTML(hierarchicalElements = []) {
+        // Rôle : Vérification de validité des éléments
+        // Type : Array (liste d'éléments hiérarchiques)
+        // Unité : Sans unité
+        // Domaine : Array valide (possiblement vide)
+        // Formule : Validation Array.isArray()
+        // Exemple : [metaSection1, section1, widget1]
+        if (!Array.isArray(hierarchicalElements)) {
+            console.warn('⚠️ generateHTML: éléments non valides, utilisation tableau vide');
+            hierarchicalElements = [];
+        }
+
+        // Rôle : HTML généré pour tous les éléments
+        // Type : String (HTML complet)
+        // Unité : Sans unité
+        // Domaine : String HTML valide
+        // Formule : Concaténation des HTML individuels
+        // Exemple : "<div class='meta-section'>...</div><div class='section'>...</div>"
+        const htmlParts = hierarchicalElements.map(element => {
+            if (element && typeof element.generateHTML === 'function') {
+                return element.generateHTML();
+            } else {
+                console.warn('⚠️ Élément sans méthode generateHTML:', element);
+                return '';
+            }
+        });
+
+        return htmlParts.join('\n');
     }
 }
 

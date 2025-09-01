@@ -410,13 +410,83 @@
             width: 100%;
         }
 
-        .field-help {
-            font-size: var(--text-xs);
-            color: var(--text-muted);
-            margin-top: var(--spacing-xs);
-            line-height: 1.4;
-        }
 
+        /* Styles des boutons - Système unifié */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-card);
+            color: var(--text-white);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            text-decoration: none;
+            min-height: 36px;
+        }
+        
+        .btn:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-secondary);
+            color: var(--text-white);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .btn.btn-primary {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: var(--text-white);
+        }
+        
+        .btn.btn-primary:hover {
+            background: #0d9488;
+            border-color: #0d9488;
+        }
+        
+        .btn.btn-secondary {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-gray);
+        }
+        
+        .btn.btn-secondary:hover {
+            background: var(--bg-primary);
+            border-color: var(--border-hover);
+        }
+        
+        .btn.btn-sm {
+            padding: 0.5rem 0.75rem;
+            font-size: var(--text-xs);
+            min-height: 32px;
+        }
+        
+        .btn.btn-danger {
+            background: var(--danger-red);
+            border-color: var(--danger-red);
+            color: var(--text-white);
+        }
+        
+        .btn.btn-danger:hover {
+            background: #dc2626;
+            border-color: #dc2626;
+        }
+        
+        .btn.active {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: var(--text-white);
+        }
+        
         /* Actions du widget */
         .widget-actions {
             display: flex;
@@ -425,48 +495,13 @@
             padding-top: var(--spacing-lg);
             border-top: 1px solid var(--border-color);
         }
-
-        .action-btn {
-            flex: 1;
-            padding: var(--spacing-sm);
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-gray);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition-normal);
-            font-size: var(--text-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-xs);
-        }
-
-        .action-btn:hover {
-            border-color: var(--border-hover);
-            background: var(--bg-secondary);
-        }
-
-        .action-btn.primary {
-            background: var(--accent-green);
-            border-color: var(--accent-green);
-            color: var(--text-white);
-        }
-
-        .action-btn.primary:hover {
-            background: var(--accent-teal);
-            border-color: var(--accent-teal);
-        }
-
-        .action-btn.danger {
-            background: var(--danger-red);
-            border-color: var(--danger-red);
-            color: var(--text-white);
-        }
-
-        .action-btn.danger:hover {
-            background: #dc2626;
-            border-color: #dc2626;
+        
+        /* Séparateur de toolbar */
+        .toolbar-divider {
+            width: 1px;
+            height: 20px;
+            background: var(--border-color);
+            margin: 0 0.5rem;
         }
 
         /* Pied de page - Statut */
@@ -507,6 +542,356 @@
 
         .status-indicator.warning {
             background: var(--warning-orange);
+        }
+
+        /* ============================================================================
+         * SYSTÈME DE GRILLE ET CONTENEURS REDIMENSIONNABLES
+         * ============================================================================ */
+
+        /* Rôle : Zone de travail avec grille de placement */
+        .canvas-workspace {
+            flex: 1;
+            position: relative;
+            overflow: auto;
+            background: var(--bg-primary);
+        }
+
+        /* Rôle : Grille CSS 12x8 pour placement précis des widgets */
+        /* Type : CSS Grid avec guides visuels */
+        /* Propriétés : 12 colonnes × 8 rangées, gap 16px, responsive */
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, minmax(120px, 1fr));
+            gap: 16px;
+            padding: 24px;
+            min-height: 100%;
+            position: relative;
+        }
+
+        /* Rôle : Affichage de la grille (optionnel, toggle) */
+        /* Action : Guides visuels pour alignement précis */
+        .widget-grid.show-grid::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            right: 24px;
+            bottom: 24px;
+            background-image: 
+                linear-gradient(to right, rgba(16, 185, 129, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.1) 1px, transparent 1px);
+            background-size: calc(100% / 12) calc((100% - 7 * 16px) / 8);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Rôle : Conteneur individuel de widget redimensionnable */
+        /* Type : Div avec propriétés grid et resize handles */
+        .widget-container {
+            position: relative;
+            background: var(--bg-card);
+            border: 2px solid transparent;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition-normal);
+            cursor: pointer;
+            min-height: 120px;
+        }
+
+        .widget-container:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .widget-container.selected {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .widget-container.selected::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px dashed var(--accent-green);
+            border-radius: var(--border-radius);
+            pointer-events: none;
+            animation: dash 1s linear infinite;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 16px;
+            }
+        }
+
+        /* Rôle : En-tête du conteneur avec contrôles */
+        .widget-container-header {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .widget-container-title {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .widget-container-controls {
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .widget-container:hover .widget-container-controls {
+            opacity: 1;
+        }
+
+        .widget-control-btn {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--text-white);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-normal);
+        }
+
+        .widget-control-btn:hover {
+            background: var(--accent-green);
+        }
+
+        /* Rôle : Zone de contenu du widget */
+        .widget-container-content {
+            padding: 16px;
+            height: calc(100% - 41px);
+            overflow: auto;
+        }
+
+        /* Rôle : Poignées de redimensionnement */
+        /* Type : 8 handles (4 coins + 4 côtés) */
+        .resize-handle {
+            position: absolute;
+            background: var(--accent-green);
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+
+        .widget-container.selected .resize-handle {
+            opacity: 1;
+        }
+
+        .resize-handle:hover {
+            opacity: 1;
+            background: var(--accent-blue);
+        }
+
+        /* Handles des coins */
+        .resize-handle.nw { top: -4px; left: -4px; width: 8px; height: 8px; cursor: nw-resize; }
+        .resize-handle.ne { top: -4px; right: -4px; width: 8px; height: 8px; cursor: ne-resize; }
+        .resize-handle.sw { bottom: -4px; left: -4px; width: 8px; height: 8px; cursor: sw-resize; }
+        .resize-handle.se { bottom: -4px; right: -4px; width: 8px; height: 8px; cursor: se-resize; }
+
+        /* Handles des côtés */
+        .resize-handle.n { top: -4px; left: 20px; right: 20px; height: 8px; cursor: n-resize; }
+        .resize-handle.s { bottom: -4px; left: 20px; right: 20px; height: 8px; cursor: s-resize; }
+        .resize-handle.w { left: -4px; top: 20px; bottom: 20px; width: 8px; cursor: w-resize; }
+        .resize-handle.e { right: -4px; top: 20px; bottom: 20px; width: 8px; cursor: e-resize; }
+
+        /* État vide du canvas */
+        .empty-state {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .empty-state .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .empty-state .empty-text {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .empty-state.hidden {
+            display: none;
+        }
+
+        /* ============================================================================
+         * STYLES POUR PANNEAU DE PROPRIÉTÉS AVANCÉ
+         * ============================================================================ */
+
+        .properties-section {
+            margin-bottom: 2rem;
+        }
+
+        .properties-section h4 {
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .properties-section h4 i {
+            color: var(--accent-green);
+        }
+
+        .property-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .property-row:last-child {
+            border-bottom: none;
+        }
+
+        .property-row label {
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+
+        .property-row span {
+            color: var(--text-white);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+        }
+
+        .property-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .property-group label {
+            display: block;
+            color: var(--text-white);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .property-slider {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-primary);
+            outline: none;
+            border-radius: 3px;
+            -webkit-appearance: none;
+        }
+
+        .property-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .property-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .property-input {
+            width: 60px;
+            padding: 0.25rem 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            text-align: center;
+            font-size: var(--text-sm);
+        }
+
+        .property-input.full-width {
+            width: 100%;
+            text-align: left;
+        }
+
+        .property-textarea {
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+            resize: vertical;
+            min-height: 80px;
+            font-family: var(--font-primary);
+        }
+
+        .property-color {
+            width: 40px;
+            height: 30px;
+            padding: 0;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: none;
+            cursor: pointer;
+        }
+
+        .property-select {
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+        }
+
+        .property-unit {
+            color: var(--text-muted);
+            font-size: var(--text-xs);
+            min-width: 35px;
+            text-align: right;
+        }
+
+        .properties-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .properties-actions .btn {
+            flex: 1;
         }
 
         /* Responsive - Adaptations */
@@ -583,6 +968,13 @@
             </div>
             
             <div class="toolbar-center">
+                <!-- Rôle : Bouton principal de création de widgets -->
+                <!-- Action : Ouvre l'interface de création avec grille et sélection de taille -->
+                <button class="btn btn-primary btn-sm" id="createWidgetBtn">
+                    <i class="fas fa-plus"></i>
+                    Créer Widget
+                </button>
+                <div class="toolbar-divider"></div>
                 <button class="btn btn-sm" id="undoBtn" disabled>
                     <i class="fas fa-undo"></i>
                     Annuler
@@ -651,21 +1043,27 @@
             </div>
             
             <div class="canvas-workspace">
-                <div class="widget-preview empty" id="widgetPreview">
-                    <div class="drop-zone" id="dropZone">
-                        <div class="drop-indicator">
-                            <i class="fas fa-plus"></i>
-                            Déposez un widget ici
-                        </div>
-                    </div>
-                    
+                <!-- Rôle : Grille principale pour placer les conteneurs de widgets -->
+                <!-- Type : Grid CSS 12x8 colonnes avec redimensionnement dynamique -->
+                <!-- Action : Zone de travail avec snap-to-grid et redimensionnement -->
+                <div class="widget-grid" id="widgetGrid">
+                    <!-- La grille sera générée dynamiquement par JavaScript -->
+                </div>
+                
+                <!-- Rôle : État vide initial -->
+                <!-- Condition : Affiché seulement si aucun widget créé -->
+                <div class="empty-state" id="emptyState">
                     <div class="empty-icon">
-                        <i class="fas fa-puzzle-piece"></i>
+                        <i class="fas fa-th"></i>
                     </div>
                     <div class="empty-text">
-                        <strong>Aucun widget sélectionné</strong><br>
-                        Glissez un widget depuis la bibliothèque pour commencer
+                        <strong>Canvas de Création Vide</strong><br>
+                        Cliquez sur "Créer Widget" pour commencer votre mise en page
                     </div>
+                    <button class="btn btn-primary" id="firstWidgetBtn">
+                        <i class="fas fa-plus"></i>
+                        Créer votre premier widget
+                    </button>
                 </div>
             </div>
         </div>
@@ -708,8 +1106,219 @@
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script type="module" src="../core/widget-loader.js"></script>
-    <script type="module" src="./widget-editor.js"></script>
+    <!-- Scripts - Version standalone sans modules ES6 -->
+    <script>
+        // Widgets intégrés directement
+        class LogoWidget {
+            constructor() {
+                this.id = 'logo';
+                this.name = 'Logo';
+                this.category = 'Navigation';
+                this.icon = '🏢';
+                this.description = 'Logo avec image et effets hover';
+                
+                this.defaultData = {
+                    imagePath: './images/logo edsquebec.png',
+                    altText: 'Logo EDS Québec',
+                    width: '50px',
+                    height: '50px',
+                    link: '#'
+                };
+            }
+
+            render(data = {}) {
+                const widgetData = { ...this.defaultData, ...data };
+                
+                return `
+                    <div style="text-align: center; padding: 20px;">
+                        <a href="${widgetData.link}" 
+                           style="display: inline-block; width: ${widgetData.width}; height: ${widgetData.height}; 
+                                  border-radius: 12px; background: rgba(16, 185, 129, 0.1);
+                                  border: 2px solid rgba(16, 185, 129, 0.3);
+                                  background-image: url('${widgetData.imagePath}');
+                                  background-size: 80%; background-repeat: no-repeat; background-position: center;
+                                  transition: all 0.3s ease; text-decoration: none;">
+                            <span style="position: absolute; width: 1px; height: 1px; overflow: hidden;">${widgetData.altText}</span>
+                        </a>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    {
+                        name: 'imagePath',
+                        label: 'Chemin de l\'image',
+                        type: 'text',
+                        defaultValue: './images/logo edsquebec.png'
+                    },
+                    {
+                        name: 'altText',
+                        label: 'Texte alternatif',
+                        type: 'text',
+                        defaultValue: 'Logo EDS Québec'
+                    },
+                    {
+                        name: 'link',
+                        label: 'Lien de destination',
+                        type: 'text',
+                        defaultValue: '#'
+                    }
+                ];
+            }
+        }
+
+        class HeroTitleWidget {
+            constructor() {
+                this.id = 'hero-title';
+                this.name = 'Titre Hero';
+                this.category = 'Contenu';
+                this.icon = '✨';
+                this.description = 'Titre principal avec gradient et animations';
+                
+                this.defaultData = {
+                    title: 'Li-CUBE PRO™',
+                    subtitle: 'LOCATION INTELLIGENTE<br>ZÉRO RISQUE',
+                    gradient: 'green'
+                };
+            }
+
+            render(data = {}) {
+                const widgetData = { ...this.defaultData, ...data };
+                
+                return `
+                    <div style="text-align: center; padding: 40px 20px;">
+                        <h1 style="font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; 
+                                   background: linear-gradient(135deg, #10b981, #0d9488); 
+                                   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+                                   background-clip: text; margin-bottom: 20px; line-height: 1.1;">
+                            ${widgetData.title}
+                        </h1>
+                        <div style="font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 600; 
+                                    color: #6b7280; line-height: 1.3; max-width: 600px; margin: 0 auto;">
+                            ${widgetData.subtitle}
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    {
+                        name: 'title',
+                        label: 'Titre principal',
+                        type: 'text',
+                        defaultValue: 'Li-CUBE PRO™'
+                    },
+                    {
+                        name: 'subtitle',
+                        label: 'Sous-titre',
+                        type: 'textarea',
+                        defaultValue: 'LOCATION INTELLIGENTE<br>ZÉRO RISQUE'
+                    }
+                ];
+            }
+        }
+
+        class PricingCardWidget {
+            constructor() {
+                this.id = 'pricing-card';
+                this.name = 'Carte Tarification';
+                this.category = 'Commerce';
+                this.icon = '💰';
+                this.description = 'Carte de prix avec plan et fonctionnalités';
+                
+                this.defaultData = {
+                    planName: 'ESSENTIEL',
+                    price: '299',
+                    currency: '$',
+                    period: '/mois',
+                    ctaText: 'Choisir ce plan',
+                    ctaLink: '#contact',
+                    features: [
+                        'Installation gratuite',
+                        'Maintenance incluse',
+                        'Support par email',
+                        'Jusqu\'à 50 équipements'
+                    ]
+                };
+            }
+
+            render(data = {}) {
+                const cardData = { ...this.defaultData, ...data };
+                
+                const featuresHtml = cardData.features.map(feature => 
+                    `<li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #6b7280;">
+                        <span style="color: #10b981; font-size: 14px;">✓</span>
+                        <span>${feature}</span>
+                    </li>`
+                ).join('');
+
+                return `
+                    <div style="background: #1f2937; border: 2px solid #374151; border-radius: 12px; 
+                                padding: 32px; text-align: center; position: relative; backdrop-filter: blur(10px);">
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: white; margin-bottom: 20px; 
+                                       text-transform: uppercase; letter-spacing: 0.05em;">
+                                ${cardData.planName}
+                            </h3>
+                            
+                            <div style="display: flex; align-items: baseline; justify-content: center; gap: 8px; margin-bottom: 20px;">
+                                <span style="font-size: 2rem; font-weight: 600; color: #10b981;">${cardData.currency}</span>
+                                <span style="font-size: 3.5rem; font-weight: 900; color: white; line-height: 1;">${cardData.price}</span>
+                                <span style="font-size: 1.125rem; color: #9ca3af; font-weight: 500;">${cardData.period}</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 32px;">
+                            <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                                ${featuresHtml}
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <a href="${cardData.ctaLink}" 
+                               style="width: 100%; padding: 16px 24px; background: #10b981; color: white;
+                                      border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+                                      text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;
+                                      text-decoration: none; display: inline-block; cursor: pointer;">
+                                ${cardData.ctaText}
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    {
+                        name: 'planName',
+                        label: 'Nom du plan',
+                        type: 'text',
+                        defaultValue: 'ESSENTIEL'
+                    },
+                    {
+                        name: 'price',
+                        label: 'Prix',
+                        type: 'text',
+                        defaultValue: '299'
+                    },
+                    {
+                        name: 'currency',
+                        label: 'Devise',
+                        type: 'text',
+                        defaultValue: '$'
+                    },
+                    {
+                        name: 'ctaText',
+                        label: 'Texte du bouton',
+                        type: 'text',
+                        defaultValue: 'Choisir ce plan'
+                    }
+                ];
+            }
+        }
+    </script>
+    <script src="./widget-editor-standalone.js"></script>
 </body>
 </html>

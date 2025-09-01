@@ -165,45 +165,36 @@ class HeroTitleWidget {
     getEditableFields() {
         return [
             {
-                id: 'hero-title',
-                name: 'Titre principal',
+                name: 'title',
+                label: 'Titre principal',
                 type: 'text',
-                required: true,
-                maxLength: 100,
-                description: 'Titre principal de la section hero'
+                defaultValue: 'Li-CUBE PRO\u2122'
             },
             {
-                id: 'hero-subtitle',
-                name: 'Sous-titre',
+                name: 'subtitle',
+                label: 'Sous-titre',
                 type: 'textarea',
-                required: false,
-                maxLength: 300,
-                allowHtml: true,
-                description: 'Sous-titre avec support HTML (br, strong, em)'
+                defaultValue: 'LOCATION INTELLIGENTE<br>ZÉRO RISQUE'
             },
             {
-                id: 'gradient-type',
-                name: 'Type de gradient',
+                name: 'gradient',
+                label: 'Type de gradient',
                 type: 'select',
                 options: [
                     { value: 'green', label: 'Vert (défaut)' },
-                    { value: 'blue', label: 'Bleu' },
-                    { value: 'none', label: 'Aucun gradient' }
+                    { value: 'blue', label: 'Bleu' }
                 ],
-                default: 'green',
-                description: 'Couleur du gradient pour le titre'
+                defaultValue: 'green'
             },
             {
-                id: 'animation',
-                name: 'Animation d\'entrée',
+                name: 'animation',
+                label: 'Animation d\'entrée',
                 type: 'select',
                 options: [
                     { value: 'slide-up', label: 'Glissement vers le haut' },
-                    { value: 'fade-in', label: 'Apparition en fondu' },
-                    { value: 'none', label: 'Aucune animation' }
+                    { value: 'fade-in', label: 'Apparition en fondu' }
                 ],
-                default: 'slide-up',
-                description: 'Type d\'animation au chargement'
+                defaultValue: 'slide-up'
             }
         ];
     }

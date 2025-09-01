@@ -117,31 +117,25 @@
                             </button>
                         </div>
                         
-                        <!-- Aide hiérarchique -->
-                        <div class="hierarchy-help">
-                            <p class="help-text">
-                                <i class="fas fa-info-circle"></i>
-                                Construisez votre présentation étape par étape :
-                            </p>
-                            <div class="hierarchy-flow">
-                                <div class="flow-step">
-                                    <i class="fas fa-layer-group"></i>
-                                    <span>Méta-Sections</span>
+                        <!-- En-tête hiérarchique moderne -->
+                        <div class="hierarchy-header">
+                            <div class="header-content">
+                                <h3>
+                                    <i class="fas fa-sitemap"></i>
+                                    Architecte de Présentation
+                                </h3>
+                                <p class="header-subtitle">
+                                    Créez votre présentation de manière hiérarchique et structurée
+                                </p>
+                            </div>
+                            <div class="header-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number" id="total-elements">0</span>
+                                    <span class="stat-label">Éléments</span>
                                 </div>
-                                <i class="fas fa-arrow-right flow-arrow"></i>
-                                <div class="flow-step">
-                                    <i class="fas fa-th-large"></i>
-                                    <span>Sections</span>
-                                </div>
-                                <i class="fas fa-arrow-right flow-arrow"></i>
-                                <div class="flow-step">
-                                    <i class="fas fa-th"></i>
-                                    <span>Sous-Sections</span>
-                                </div>
-                                <i class="fas fa-arrow-right flow-arrow"></i>
-                                <div class="flow-step">
-                                    <i class="fas fa-puzzle-piece"></i>
-                                    <span>Widgets</span>
+                                <div class="stat-item">
+                                    <span class="stat-number" id="active-level">1</span>
+                                    <span class="stat-label">Niveau</span>
                                 </div>
                             </div>
                         </div>
@@ -244,6 +238,31 @@
                                         </button>
                                     </div>
                                     <div class="elements-grid" data-type="sous-sous-section" data-drop-zone="sous-sous-section">
+                                        <!-- Générés dynamiquement -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Widgets -->
+                            <div class="hierarchy-level" data-level="widget">
+                                <div class="level-header">
+                                    <h4>
+                                        <i class="fas fa-puzzle-piece"></i>
+                                        Widgets
+                                    </h4>
+                                    <button class="btn-expand" data-target="widgets">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </div>
+                                <div class="level-content" id="widgets">
+                                    <p class="level-description">Éléments interactifs (Texte, Image, Bouton, etc.)</p>
+                                    <div class="level-actions">
+                                        <button class="btn btn-primary add-element-btn" data-level="widget">
+                                            <i class="fas fa-plus"></i>
+                                            Ajouter Widget
+                                        </button>
+                                    </div>
+                                    <div class="elements-grid" data-type="widget" data-drop-zone="widget">
                                         <!-- Générés dynamiquement -->
                                     </div>
                                 </div>
@@ -614,6 +633,7 @@
     <script src="src/core/WidgetManager.js"></script>
     <script src="src/core/SectionManager.js"></script>
     <script src="src/core/HierarchyManager.js"></script>
+    <script src="src/core/HierarchyElement.js"></script>
     
     <!-- Widgets -->
     <script src="src/widgets/BaseWidget.js"></script>

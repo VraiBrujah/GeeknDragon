@@ -290,68 +290,52 @@ class PricingCardWidget {
     getEditableFields() {
         return [
             {
-                id: 'plan-name',
-                name: 'Nom du plan',
+                name: 'planName',
+                label: 'Nom du plan',
                 type: 'text',
-                required: true,
-                maxLength: 50,
-                description: 'Nom du plan tarifaire (ex: ESSENTIEL)'
+                defaultValue: 'ESSENTIEL'
             },
             {
-                id: 'plan-price',
-                name: 'Prix',
+                name: 'price',
+                label: 'Prix',
                 type: 'number',
-                required: true,
                 min: 0,
-                step: 1,
-                description: 'Prix du plan sans devise'
+                max: 9999,
+                defaultValue: '299'
             },
             {
-                id: 'currency',
-                name: 'Devise',
+                name: 'currency',
+                label: 'Devise',
                 type: 'select',
                 options: [
                     { value: '$', label: 'Dollar ($)' },
                     { value: '€', label: 'Euro (€)' },
                     { value: '£', label: 'Livre (£)' }
                 ],
-                default: '$',
-                description: 'Symbole de la devise'
+                defaultValue: '$'
             },
             {
-                id: 'period',
-                name: 'Période',
+                name: 'period',
+                label: 'Période',
                 type: 'select',
                 options: [
                     { value: '/mois', label: 'Par mois' },
                     { value: '/an', label: 'Par an' },
-                    { value: '/jour', label: 'Par jour' },
-                    { value: '', label: 'Prix unique' }
+                    { value: '/jour', label: 'Par jour' }
                 ],
-                default: '/mois',
-                description: 'Période de facturation'
+                defaultValue: '/mois'
             },
             {
-                id: 'plan-cta',
-                name: 'Texte du bouton',
+                name: 'ctaText',
+                label: 'Texte du bouton',
                 type: 'text',
-                required: true,
-                maxLength: 30,
-                description: 'Texte du call-to-action'
+                defaultValue: 'Choisir ce plan'
             },
             {
-                id: 'featured',
-                name: 'Plan recommandé',
-                type: 'checkbox',
-                default: false,
-                description: 'Marquer comme plan en vedette'
-            },
-            {
-                id: 'badge',
-                name: 'Badge (optionnel)',
+                name: 'ctaLink',
+                label: 'Lien du bouton',
                 type: 'text',
-                maxLength: 20,
-                description: 'Texte du badge (ex: POPULAIRE)'
+                defaultValue: '#contact'
             }
         ];
     }
