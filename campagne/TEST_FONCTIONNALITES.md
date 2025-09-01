@@ -1,5 +1,20 @@
 # 🧪 Tests du Gestionnaire de Campagne
 
+## 🚀 Exécution des tests automatisés
+
+1. Installer les dépendances et le navigateur Chromium de Playwright :
+
+   ```bash
+   npm install
+   npx playwright install chromium
+   ```
+
+2. Lancer tous les scénarios de test :
+
+   ```bash
+   npm test
+   ```
+
 ## ✅ Checklist de Fonctionnalités
 
 ### 🗺️ **Navigation & Structure**
