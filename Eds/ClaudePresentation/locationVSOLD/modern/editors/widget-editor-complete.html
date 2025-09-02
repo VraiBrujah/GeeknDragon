@@ -3201,6 +3201,397 @@
             }
         }
 
+        class ComparisonWidget {
+            constructor() {
+                this.id = 'comparison';
+                this.name = 'Comparaison Produits';
+                this.category = 'Commerce';
+                this.icon = '⚖️';
+                this.description = 'Comparaison entre produit obsolète et moderne';
+                
+                this.defaultData = {
+                    title: 'Li-CUBE PRO™ vs BATTERIES Ni-Cd OBSOLÈTES',
+                    // Propriétés avancées du titre principal (inspirées du TextSimple)
+                    titleSize: 32,
+                    titleColor: '#ffffff',
+                    titleAlignment: 'center',
+                    titleIsBold: true,
+                    titleIsItalic: false,
+                    titleHasBackground: false,
+                    titleBackgroundColor: '#10b981',
+                    titleBackgroundOpacity: 20,
+                    titleHasBorder: false,
+                    titleBorderColor: '#10b981',
+                    titleBorderWidth: 2,
+                    titleBorderStyle: 'solid',
+                    titleHasRoundedCorners: false,
+                    titleBorderRadius: 8,
+                    titlePaddingTop: 'small',
+                    titlePaddingBottom: 'large',
+                    titlePaddingLeft: 'medium',
+                    titlePaddingRight: 'medium',
+                    titleMarginBottom: 'large',
+                    
+                    subtitle: 'Pourquoi payer plus cher pour une technologie obsolète ? Li-CUBE PRO™ écrase la concurrence sur tous les critères techniques.',
+                    
+                    // Colonne Obsolète
+                    obsoleteTitle: 'Batteries Ni-Cd (Obsolètes)',
+                    obsoleteTitleColor: '#ef4444',
+                    obsoleteBackgroundColor: '#1f1f1f',
+                    obsoleteBorderColor: '#ef4444',
+                    obsoleteIcon: '❌',
+                    obsoleteDisadvantages: [
+                        '☠️ Cadmium Hautement Toxique|Classé dangereux REACH, recyclage coûteux, manipulation à risque',
+                        '🔧 Maintenance Obligatoire Coûteuse|Appoint électrolyte, fuites KOH, interventions techniques fréquentes',
+                        '⏳ Durée de Vie Limitée|2000-3000 cycles seulement (5-6 ans) → remplacement fréquent',
+                        '🏋️ Poids et Encombrement|80-100 kg, manipulation dangereuse, installation contraignante',
+                        '🐌 Charge Lente 8-12h|Indisponibilité longue, productivité réduite',
+                        '📵 Aucune Connectivité|Pas de télémétrie, aucun suivi à distance, pannes surprises',
+                        '⚖️ Réglementation Transport Stricte|Classé UN2795 Batteries Wet Alkali, transport coûteux et contraignant'
+                    ],
+                    
+                    // Colonne Moderne
+                    modernTitle: 'Li-CUBE PRO™ (Technologie Moderne)',
+                    modernTitleColor: '#10b981',
+                    modernBackgroundColor: '#0f1419',
+                    modernBorderColor: '#10b981',
+                    modernIcon: '✅',
+                    modernAdvantages: [
+                        '🔋 Durée Vie Exceptionnelle|≥8000 cycles (20-25 ans réels) → 4× plus longue que Ni-Cd',
+                        '🛡️ Zéro Maintenance|Aucun électrolyte, aucun effet mémoire, suivi automatisé par BMS',
+                        '📡 Surveillance Temps Réel|GPS, Bluetooth, Wi-Fi, GPRS → maintenance préventive, zéro panne surprise',
+                        '⚡ Performance Énergétique|110 Wh/kg (4× plus), 157 Wh/L (6× plus compact), charge 1-2h',
+                        '🌡️ Climat Canadien|Fonctionnement -40°C à +55°C, BMS intelligent, hivers québécois',
+                        '🍃 100% Écologique|Zéro cadmium, conforme RoHS, recyclable, image environnementale',
+                        '🛡️ Sécurité BMS Multi-niveau|Protections OVP, UVP, OCP, OTP, court-circuit → risques incidents réduits drastiquement'
+                    ],
+                    
+                    conclusion: 'Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !',
+                    conclusionDetails: 'Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d\'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.'
+                };
+            }
+
+            // Helper pour convertir les valeurs d'espacement en pixels
+            getSpacingValue(spacingType) {
+                const spacingMap = {
+                    'none': '0px',
+                    'small': '8px',
+                    'medium': '16px',
+                    'large': '32px'
+                };
+                return spacingMap[spacingType] || '16px';
+            }
+
+            // Génère les styles CSS pour le titre principal
+            generateTitleStyles(data) {
+                const styleRules = [];
+                
+                // Style de base
+                styleRules.push('text-align: ' + (data.titleAlignment || 'center'));
+                styleRules.push('font-size: ' + (data.titleSize || 32) + 'px');
+                styleRules.push('color: ' + (data.titleColor || '#ffffff'));
+                styleRules.push('font-weight: ' + (data.titleIsBold ? 'bold' : 'normal'));
+                styleRules.push('font-style: ' + (data.titleIsItalic ? 'italic' : 'normal'));
+                styleRules.push('line-height: 1.2');
+                
+                // Arrière-plan
+                if (data.titleHasBackground) {
+                    const opacity = (data.titleBackgroundOpacity || 20) / 100;
+                    const bgColor = data.titleBackgroundColor || '#10b981';
+                    // Convertir hex en rgba
+                    const hex = bgColor.replace('#', '');
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    styleRules.push(`background-color: rgba(${r}, ${g}, ${b}, ${opacity})`);
+                }
+                
+                // Contour
+                if (data.titleHasBorder) {
+                    const borderWidth = data.titleBorderWidth || 2;
+                    const borderStyle = data.titleBorderStyle || 'solid';
+                    const borderColor = data.titleBorderColor || '#10b981';
+                    styleRules.push(`border: ${borderWidth}px ${borderStyle} ${borderColor}`);
+                }
+                
+                // Coins arrondis
+                if (data.titleHasRoundedCorners) {
+                    const borderRadius = data.titleBorderRadius || 8;
+                    styleRules.push(`border-radius: ${borderRadius}px`);
+                }
+                
+                // Espacement interne (padding)
+                const paddingTop = this.getSpacingValue(data.titlePaddingTop || 'small');
+                const paddingBottom = this.getSpacingValue(data.titlePaddingBottom || 'large');
+                const paddingLeft = this.getSpacingValue(data.titlePaddingLeft || 'medium');
+                const paddingRight = this.getSpacingValue(data.titlePaddingRight || 'medium');
+                styleRules.push(`padding: ${paddingTop} ${paddingRight} ${paddingBottom} ${paddingLeft}`);
+                
+                // Marge du bas
+                const marginBottom = this.getSpacingValue(data.titleMarginBottom || 'large');
+                styleRules.push(`margin-bottom: ${marginBottom}`);
+                
+                return styleRules.join('; ');
+            }
+
+            render(data = {}) {
+                const d = { ...this.defaultData, ...data };
+                
+                // Générer les styles du titre
+                const titleStyles = this.generateTitleStyles(d);
+                
+                // Créer les listes d'inconvénients (obsolète)
+                const disadvantagesHtml = d.obsoleteDisadvantages.map((item, index) => {
+                    const [title, description] = item.split('|');
+                    return `
+                        <div class="comparison-item obsolete-item" style="margin-bottom: 20px; padding: 16px; 
+                                                                         background: rgba(239, 68, 68, 0.1); 
+                                                                         border-left: 4px solid #ef4444; 
+                                                                         border-radius: 8px;">
+                            <div style="display: flex; align-items: flex-start; gap: 12px;">
+                                <div style="font-size: 1.2rem; margin-top: 2px;">${d.obsoleteIcon}</div>
+                                <div style="flex: 1;">
+                                    <h4 style="color: #ef4444; font-size: 1rem; font-weight: bold; margin: 0 0 8px 0; line-height: 1.3;">
+                                        ${title}
+                                    </h4>
+                                    <p style="color: #d1d5db; font-size: 0.9rem; margin: 0; line-height: 1.5;">
+                                        ${description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Créer les listes d'avantages (moderne)
+                const advantagesHtml = d.modernAdvantages.map((item, index) => {
+                    const [title, description] = item.split('|');
+                    return `
+                        <div class="comparison-item modern-item" style="margin-bottom: 20px; padding: 16px; 
+                                                                        background: rgba(16, 185, 129, 0.1); 
+                                                                        border-left: 4px solid #10b981; 
+                                                                        border-radius: 8px;">
+                            <div style="display: flex; align-items: flex-start; gap: 12px;">
+                                <div style="font-size: 1.2rem; margin-top: 2px;">${d.modernIcon}</div>
+                                <div style="flex: 1;">
+                                    <h4 style="color: #10b981; font-size: 1rem; font-weight: bold; margin: 0 0 8px 0; line-height: 1.3;">
+                                        ${title}
+                                    </h4>
+                                    <p style="color: #d1d5db; font-size: 0.9rem; margin: 0; line-height: 1.5;">
+                                        ${description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="comparison-widget" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+                        <!-- Titre principal -->
+                        <h2 class="comparison-title" style="${titleStyles}">
+                            ${d.title}
+                        </h2>
+                        
+                        <!-- Sous-titre -->
+                        <p style="text-align: center; font-size: 1.1rem; color: #9ca3af; margin-bottom: 40px; line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto;">
+                            ${d.subtitle}
+                        </p>
+                        
+                        <!-- Grille de comparaison -->
+                        <div style="display: grid; grid-template-columns: 1fr 40px 1fr; gap: 20px; margin-bottom: 40px;">
+                            
+                            <!-- Colonne Obsolète -->
+                            <div class="obsolete-column" style="background: ${d.obsoleteBackgroundColor}; 
+                                                                border: 2px solid ${d.obsoleteBorderColor}; 
+                                                                border-radius: 16px; padding: 32px;">
+                                <div style="text-align: center; margin-bottom: 32px;">
+                                    <div style="font-size: 2rem; margin-bottom: 16px;">${d.obsoleteIcon}</div>
+                                    <h3 style="color: ${d.obsoleteTitleColor}; font-size: 1.5rem; font-weight: bold; margin: 0;">
+                                        ${d.obsoleteTitle}
+                                    </h3>
+                                </div>
+                                <div class="disadvantages-list">
+                                    ${disadvantagesHtml}
+                                </div>
+                            </div>
+                            
+                            <!-- Séparateur VS -->
+                            <div style="display: flex; align-items: center; justify-content: center;">
+                                <div style="background: linear-gradient(135deg, #ef4444, #10b981); 
+                                           color: white; padding: 12px 8px; border-radius: 12px; 
+                                           font-weight: bold; font-size: 1.2rem; text-align: center; 
+                                           transform: rotate(0deg); box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                                    VS
+                                </div>
+                            </div>
+                            
+                            <!-- Colonne Moderne -->
+                            <div class="modern-column" style="background: ${d.modernBackgroundColor}; 
+                                                              border: 2px solid ${d.modernBorderColor}; 
+                                                              border-radius: 16px; padding: 32px;">
+                                <div style="text-align: center; margin-bottom: 32px;">
+                                    <div style="font-size: 2rem; margin-bottom: 16px;">${d.modernIcon}</div>
+                                    <h3 style="color: ${d.modernTitleColor}; font-size: 1.5rem; font-weight: bold; margin: 0;">
+                                        ${d.modernTitle}
+                                    </h3>
+                                </div>
+                                <div class="advantages-list">
+                                    ${advantagesHtml}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Conclusion -->
+                        <div style="text-align: center; padding: 32px; background: linear-gradient(135deg, #10b981, #0d9488); 
+                                   border-radius: 16px; margin-top: 40px;">
+                            <h3 style="color: white; font-size: 2rem; font-weight: bold; margin: 0 0 16px 0; text-transform: uppercase;">
+                                ${d.conclusion}
+                            </h3>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; line-height: 1.6; margin: 0; max-width: 900px; margin-left: auto; margin-right: auto;">
+                                ${d.conclusionDetails}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    // Section 1: Contenu principal
+                    { name: 'title', label: 'Titre principal', type: 'text', category: 'Contenu Principal' },
+                    { name: 'subtitle', label: 'Sous-titre', type: 'textarea', category: 'Contenu Principal' },
+                    { name: 'conclusion', label: 'Conclusion', type: 'text', category: 'Contenu Principal' },
+                    { name: 'conclusionDetails', label: 'Détails conclusion', type: 'textarea', category: 'Contenu Principal' },
+                    
+                    // Section 2: Style du titre principal
+                    { name: 'titleSize', label: 'Taille du titre', type: 'range', min: 20, max: 60, category: 'Titre - Typographie' },
+                    { name: 'titleColor', label: 'Couleur du titre', type: 'color', category: 'Titre - Typographie' },
+                    { name: 'titleAlignment', label: 'Alignement du titre', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' },
+                        { value: 'center', label: 'Centre' },
+                        { value: 'right', label: 'Droite' }
+                    ], category: 'Titre - Typographie' },
+                    { name: 'titleIsBold', label: 'Titre en gras', type: 'checkbox', category: 'Titre - Typographie' },
+                    { name: 'titleIsItalic', label: 'Titre en italique', type: 'checkbox', category: 'Titre - Typographie' },
+                    
+                    // Section 3: Arrière-plan du titre
+                    { name: 'titleHasBackground', label: 'Arrière-plan du titre', type: 'checkbox', category: 'Titre - Arrière-plan' },
+                    { name: 'titleBackgroundColor', label: 'Couleur de fond du titre', type: 'color', category: 'Titre - Arrière-plan', condition: { field: 'titleHasBackground', value: true } },
+                    { name: 'titleBackgroundOpacity', label: 'Transparence du fond', type: 'range', min: 0, max: 100, step: 5, category: 'Titre - Arrière-plan', condition: { field: 'titleHasBackground', value: true } },
+                    
+                    // Section 4: Contour du titre
+                    { name: 'titleHasBorder', label: 'Contour du titre', type: 'checkbox', category: 'Titre - Contour' },
+                    { name: 'titleBorderColor', label: 'Couleur du contour', type: 'color', category: 'Titre - Contour', condition: { field: 'titleHasBorder', value: true } },
+                    { name: 'titleBorderWidth', label: 'Épaisseur du contour', type: 'range', min: 1, max: 10, step: 1, category: 'Titre - Contour', condition: { field: 'titleHasBorder', value: true } },
+                    { name: 'titleBorderStyle', label: 'Style du contour', type: 'select', options: [
+                        { value: 'solid', label: 'Solide' },
+                        { value: 'dashed', label: 'Tirets' },
+                        { value: 'dotted', label: 'Points' },
+                        { value: 'double', label: 'Double' }
+                    ], category: 'Titre - Contour', condition: { field: 'titleHasBorder', value: true } },
+                    
+                    // Section 5: Coins arrondis du titre
+                    { name: 'titleHasRoundedCorners', label: 'Coins arrondis du titre', type: 'checkbox', category: 'Titre - Forme' },
+                    { name: 'titleBorderRadius', label: 'Niveau d\'arrondi', type: 'range', min: 0, max: 50, step: 2, category: 'Titre - Forme', condition: { field: 'titleHasRoundedCorners', value: true } },
+                    
+                    // Section 6: Espacement du titre
+                    { name: 'titlePaddingTop', label: 'Espacement haut du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'titlePaddingBottom', label: 'Espacement bas du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'titlePaddingLeft', label: 'Espacement gauche du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'titlePaddingRight', label: 'Espacement droite du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'titleMarginBottom', label: 'Marge du bas du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucune' },
+                        { value: 'small', label: 'Petite' },
+                        { value: 'medium', label: 'Moyenne' },
+                        { value: 'large', label: 'Grande' }
+                    ], category: 'Titre - Espacement' },
+                    
+                    // Section 7: Configuration Obsolète
+                    { name: 'obsoleteTitle', label: 'Titre colonne obsolète', type: 'text', category: 'Colonne Obsolète' },
+                    { name: 'obsoleteTitleColor', label: 'Couleur titre obsolète', type: 'color', category: 'Colonne Obsolète' },
+                    { name: 'obsoleteBackgroundColor', label: 'Fond colonne obsolète', type: 'color', category: 'Colonne Obsolète' },
+                    { name: 'obsoleteBorderColor', label: 'Bordure colonne obsolète', type: 'color', category: 'Colonne Obsolète' },
+                    { name: 'obsoleteIcon', label: 'Icône obsolète', type: 'text', category: 'Colonne Obsolète' },
+                    
+                    // Section 8: Configuration Moderne
+                    { name: 'modernTitle', label: 'Titre colonne moderne', type: 'text', category: 'Colonne Moderne' },
+                    { name: 'modernTitleColor', label: 'Couleur titre moderne', type: 'color', category: 'Colonne Moderne' },
+                    { name: 'modernBackgroundColor', label: 'Fond colonne moderne', type: 'color', category: 'Colonne Moderne' },
+                    { name: 'modernBorderColor', label: 'Bordure colonne moderne', type: 'color', category: 'Colonne Moderne' },
+                    { name: 'modernIcon', label: 'Icône moderne', type: 'text', category: 'Colonne Moderne' }
+                ];
+            }
+
+            getElements() {
+                return [
+                    { id: 'widget', name: 'Widget complet', editable: true },
+                    { id: 'title', name: 'Titre principal', editable: true },
+                    { id: 'obsolete-column', name: 'Colonne obsolète', editable: true, manageable: true },
+                    { id: 'modern-column', name: 'Colonne moderne', editable: true, manageable: true },
+                    { id: 'conclusion', name: 'Section conclusion', editable: true }
+                ];
+            }
+            
+            // Méthodes pour gestion dynamique des inconvénients (obsolète)
+            addObsoleteDisadvantage(newItem) {
+                if (!newItem || newItem.trim() === '') return;
+                // Format attendu: "Titre|Description"
+                this.defaultData.obsoleteDisadvantages.push(newItem.trim());
+            }
+            
+            removeObsoleteDisadvantage(index) {
+                if (index >= 0 && index < this.defaultData.obsoleteDisadvantages.length) {
+                    this.defaultData.obsoleteDisadvantages.splice(index, 1);
+                }
+            }
+            
+            updateObsoleteDisadvantage(index, newText) {
+                if (index >= 0 && index < this.defaultData.obsoleteDisadvantages.length) {
+                    this.defaultData.obsoleteDisadvantages[index] = newText;
+                }
+            }
+            
+            // Méthodes pour gestion dynamique des avantages (moderne)
+            addModernAdvantage(newItem) {
+                if (!newItem || newItem.trim() === '') return;
+                // Format attendu: "Titre|Description"
+                this.defaultData.modernAdvantages.push(newItem.trim());
+            }
+            
+            removeModernAdvantage(index) {
+                if (index >= 0 && index < this.defaultData.modernAdvantages.length) {
+                    this.defaultData.modernAdvantages.splice(index, 1);
+                }
+            }
+            
+            updateModernAdvantage(index, newText) {
+                if (index >= 0 && index < this.defaultData.modernAdvantages.length) {
+                    this.defaultData.modernAdvantages[index] = newText;
+                }
+            }
+        }
+
         class FeatureGridWidget {
             constructor() {
                 this.id = 'feature-grid';
@@ -3537,6 +3928,7 @@
                     HeroTitleWidget,
                     PricingCardWidget,
                     CallToActionWidget,
+                    ComparisonWidget,
                     FeatureGridWidget
                 ];
                 
@@ -4085,6 +4477,9 @@
                     case 'call-to-action':
                         defaultSize = { width: 8, height: 2 };
                         break;
+                    case 'comparison':
+                        defaultSize = { width: 12, height: 6 };
+                        break;
                     case 'logo':
                         defaultSize = { width: 2, height: 1 };
                         break;
@@ -4383,6 +4778,8 @@
                 elements.forEach(element => {
                     const isPricingFeatures = element.id === 'features' && this.selectedWidget.type === 'pricing-card';
                     const isGridFeatures = element.id === 'features' && this.selectedWidget.type === 'feature-grid';
+                    const isObsoleteColumn = element.id === 'obsolete-column' && this.selectedWidget.type === 'comparison';
+                    const isModernColumn = element.id === 'modern-column' && this.selectedWidget.type === 'comparison';
                     
                     if (isPricingFeatures) {
                         // Interface spéciale pour les fonctionnalités du Pricing Card
@@ -4546,6 +4943,136 @@
                                                 </div>
                                             </div>
                                         `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (isObsoleteColumn) {
+                        // Interface spéciale pour la colonne obsolète (inconvénients)
+                        const obsoleteDisadvantages = this.selectedWidget.data.obsoleteDisadvantages || [];
+                        
+                        elementsHtml += `
+                            <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                            border-radius: 8px; margin-bottom: 8px;">
+                                <div style="margin-bottom: 12px;">
+                                    <div style="color: #ef4444; font-weight: 500; margin-bottom: 8px;">
+                                        <i class="fas fa-times-circle"></i> ${element.name} (${obsoleteDisadvantages.length})
+                                    </div>
+                                    <div style="color: var(--text-muted); font-size: 12px;">Gestion des inconvénients de l'ancienne technologie</div>
+                                </div>
+                                
+                                <div class="disadvantages-manager" style="margin-bottom: 12px;">
+                                    <div class="disadvantage-input-group" style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                        <input type="text" id="newDisadvantageInput" placeholder="⚠️ Titre|Description du problème..." 
+                                               style="flex: 1; padding: 8px 12px; background: var(--bg-primary); 
+                                                      border: 1px solid #ef4444; border-radius: 6px; 
+                                                      color: var(--text-white); font-size: 14px;">
+                                        <button onclick="widgetEditor.addObsoleteDisadvantage()" 
+                                                style="padding: 8px 16px; background: #ef4444; 
+                                                       color: white; border: none; border-radius: 6px; 
+                                                       cursor: pointer; font-size: 14px; font-weight: 500;">
+                                            <i class="fas fa-plus"></i> Ajouter
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="disadvantages-list" style="max-height: 200px; overflow-y: auto;">
+                                        ${obsoleteDisadvantages.map((item, index) => {
+                                            const [title, description] = item.split('|');
+                                            return `
+                                                <div class="disadvantage-item" style="display: flex; flex-direction: column; gap: 8px; 
+                                                                                     padding: 12px; background: rgba(239, 68, 68, 0.1); 
+                                                                                     border: 1px solid rgba(239, 68, 68, 0.3); 
+                                                                                     border-radius: 6px; margin-bottom: 8px;">
+                                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                                        <span style="color: #ef4444; font-weight: bold; min-width: 20px;">❌</span>
+                                                        <input type="text" value="${title || ''}" 
+                                                               placeholder="Titre de l'inconvénient"
+                                                               onchange="widgetEditor.updateObsoleteDisadvantage(${index}, this.value + '|' + this.parentElement.nextElementSibling.querySelector('textarea').value)"
+                                                               style="flex: 1; background: transparent; border: none; 
+                                                                      color: #ef4444; font-size: 14px; font-weight: bold; outline: none;">
+                                                        <button onclick="widgetEditor.removeObsoleteDisadvantage(${index})" 
+                                                                title="Supprimer cet inconvénient"
+                                                                style="background: rgba(239, 68, 68, 0.2); color: #ef4444; 
+                                                                       border: 1px solid #ef4444; border-radius: 4px; 
+                                                                       width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div style="margin-left: 28px;">
+                                                        <textarea placeholder="Description détaillée du problème..."
+                                                                  onchange="widgetEditor.updateObsoleteDisadvantage(${index}, this.parentElement.previousElementSibling.querySelector('input').value + '|' + this.value)"
+                                                                  style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(239, 68, 68, 0.3); 
+                                                                         border-radius: 4px; padding: 6px 8px; color: #d1d5db; font-size: 13px; 
+                                                                         resize: vertical; min-height: 40px; font-family: inherit;">${description || ''}</textarea>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (isModernColumn) {
+                        // Interface spéciale pour la colonne moderne (avantages)
+                        const modernAdvantages = this.selectedWidget.data.modernAdvantages || [];
+                        
+                        elementsHtml += `
+                            <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                            border-radius: 8px; margin-bottom: 8px;">
+                                <div style="margin-bottom: 12px;">
+                                    <div style="color: #10b981; font-weight: 500; margin-bottom: 8px;">
+                                        <i class="fas fa-check-circle"></i> ${element.name} (${modernAdvantages.length})
+                                    </div>
+                                    <div style="color: var(--text-muted); font-size: 12px;">Gestion des avantages de la nouvelle technologie</div>
+                                </div>
+                                
+                                <div class="advantages-manager" style="margin-bottom: 12px;">
+                                    <div class="advantage-input-group" style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                        <input type="text" id="newAdvantageInput" placeholder="✅ Titre|Description de l'avantage..." 
+                                               style="flex: 1; padding: 8px 12px; background: var(--bg-primary); 
+                                                      border: 1px solid #10b981; border-radius: 6px; 
+                                                      color: var(--text-white); font-size: 14px;">
+                                        <button onclick="widgetEditor.addModernAdvantage()" 
+                                                style="padding: 8px 16px; background: #10b981; 
+                                                       color: white; border: none; border-radius: 6px; 
+                                                       cursor: pointer; font-size: 14px; font-weight: 500;">
+                                            <i class="fas fa-plus"></i> Ajouter
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="advantages-list" style="max-height: 200px; overflow-y: auto;">
+                                        ${modernAdvantages.map((item, index) => {
+                                            const [title, description] = item.split('|');
+                                            return `
+                                                <div class="advantage-item" style="display: flex; flex-direction: column; gap: 8px; 
+                                                                                   padding: 12px; background: rgba(16, 185, 129, 0.1); 
+                                                                                   border: 1px solid rgba(16, 185, 129, 0.3); 
+                                                                                   border-radius: 6px; margin-bottom: 8px;">
+                                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                                        <span style="color: #10b981; font-weight: bold; min-width: 20px;">✅</span>
+                                                        <input type="text" value="${title || ''}" 
+                                                               placeholder="Titre de l'avantage"
+                                                               onchange="widgetEditor.updateModernAdvantage(${index}, this.value + '|' + this.parentElement.nextElementSibling.querySelector('textarea').value)"
+                                                               style="flex: 1; background: transparent; border: none; 
+                                                                      color: #10b981; font-size: 14px; font-weight: bold; outline: none;">
+                                                        <button onclick="widgetEditor.removeModernAdvantage(${index})" 
+                                                                title="Supprimer cet avantage"
+                                                                style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                                       border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                                       width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div style="margin-left: 28px;">
+                                                        <textarea placeholder="Description détaillée de l'avantage..."
+                                                                  onchange="widgetEditor.updateModernAdvantage(${index}, this.parentElement.previousElementSibling.querySelector('input').value + '|' + this.value)"
+                                                                  style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(16, 185, 129, 0.3); 
+                                                                         border-radius: 4px; padding: 6px 8px; color: #d1d5db; font-size: 13px; 
+                                                                         resize: vertical; min-height: 40px; font-family: inherit;">${description || ''}</textarea>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }).join('')}
                                     </div>
                                 </div>
                             </div>
@@ -4852,6 +5379,32 @@
                             if (titleElement) {
                                 titleElement.textContent = value;
                                 console.log(`🚀 Mise à jour directe text: ${value}`);
+                            }
+                        }
+                        break;
+                        
+                    case 'comparison':
+                        // Mise à jour directe du titre principal
+                        if (propertyName === 'title') {
+                            const titleElement = container.querySelector('.comparison-title');
+                            if (titleElement) {
+                                titleElement.textContent = value;
+                                console.log(`🚀 Mise à jour directe titre: ${value}`);
+                            }
+                        }
+                        // Mise à jour directe des titres de colonnes
+                        else if (propertyName === 'obsoleteTitle') {
+                            const obsoleteTitleElement = container.querySelector('.obsolete-column h3');
+                            if (obsoleteTitleElement) {
+                                obsoleteTitleElement.textContent = value;
+                                console.log(`🚀 Mise à jour directe titre obsolète: ${value}`);
+                            }
+                        }
+                        else if (propertyName === 'modernTitle') {
+                            const modernTitleElement = container.querySelector('.modern-column h3');
+                            if (modernTitleElement) {
+                                modernTitleElement.textContent = value;
+                                console.log(`🚀 Mise à jour directe titre moderne: ${value}`);
                             }
                         }
                         break;
@@ -5385,6 +5938,11 @@
                 if (this.selectedWidget && this.selectedWidget.type === 'call-to-action') {
                     this.updateCTAAdvancedRealTime(container, propertyName, value);
                 }
+                
+                // Gestion des propriétés avancées du widget Comparison
+                if (this.selectedWidget && this.selectedWidget.type === 'comparison') {
+                    this.updateComparisonAdvancedRealTime(container, propertyName, value);
+                }
             }
             
             // Extension de la mise à jour temps réel pour Hero Title - propriétés avancées du titre
@@ -5626,6 +6184,160 @@
                     case 'titleBorderRadius':
                         if (this.selectedWidget.data.titleHasRoundedCorners) {
                             title.style.borderRadius = `${value}px`;
+                        }
+                        break;
+                    
+                    // Espacement du titre - mise à jour complète via generateTitleStyles
+                    case 'titlePaddingTop':
+                    case 'titlePaddingBottom':
+                    case 'titlePaddingLeft':
+                    case 'titlePaddingRight':
+                    case 'titleMarginBottom':
+                        // Régénérer tous les styles pour l'espacement
+                        const instanceForSpacing = this.selectedWidget.instance;
+                        const newStylesForSpacing = instanceForSpacing.generateTitleStyles(this.selectedWidget.data);
+                        title.setAttribute('style', newStylesForSpacing);
+                        break;
+                }
+            }
+            
+            // Extension de la mise à jour temps réel pour Comparison - propriétés avancées du titre
+            updateComparisonAdvancedRealTime(container, propertyName, value) {
+                const title = container.querySelector('.comparison-title');
+                
+                if (!title) return;
+                
+                switch (propertyName) {
+                    // Propriétés de style du titre principal
+                    case 'titleSize':
+                        title.style.fontSize = `${value}px`;
+                        break;
+                    case 'titleColor':
+                        title.style.color = value;
+                        break;
+                    case 'titleAlignment':
+                        title.style.textAlign = value;
+                        break;
+                    case 'titleIsBold':
+                        title.style.fontWeight = value ? 'bold' : 'normal';
+                        break;
+                    case 'titleIsItalic':
+                        title.style.fontStyle = value ? 'italic' : 'normal';
+                        break;
+                    
+                    // Arrière-plan du titre
+                    case 'titleHasBackground':
+                        if (value) {
+                            const data = this.selectedWidget.data;
+                            const opacity = (data.titleBackgroundOpacity || 20) / 100;
+                            const bgColor = data.titleBackgroundColor || '#10b981';
+                            const hex = bgColor.replace('#', '');
+                            const r = parseInt(hex.substr(0, 2), 16);
+                            const g = parseInt(hex.substr(2, 2), 16);
+                            const b = parseInt(hex.substr(4, 2), 16);
+                            title.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                        } else {
+                            title.style.backgroundColor = 'transparent';
+                        }
+                        break;
+                    case 'titleBackgroundColor':
+                    case 'titleBackgroundOpacity':
+                        if (this.selectedWidget.data.titleHasBackground) {
+                            const data = this.selectedWidget.data;
+                            const opacity = (data.titleBackgroundOpacity || 20) / 100;
+                            const bgColor = data.titleBackgroundColor || '#10b981';
+                            const hex = bgColor.replace('#', '');
+                            const r = parseInt(hex.substr(0, 2), 16);
+                            const g = parseInt(hex.substr(2, 2), 16);
+                            const b = parseInt(hex.substr(4, 2), 16);
+                            title.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                        }
+                        break;
+                    
+                    // Contour du titre
+                    case 'titleHasBorder':
+                        if (value) {
+                            const data = this.selectedWidget.data;
+                            const borderWidth = data.titleBorderWidth || 2;
+                            const borderStyle = data.titleBorderStyle || 'solid';
+                            const borderColor = data.titleBorderColor || '#10b981';
+                            title.style.border = `${borderWidth}px ${borderStyle} ${borderColor}`;
+                        } else {
+                            title.style.border = 'none';
+                        }
+                        break;
+                    case 'titleBorderColor':
+                        if (this.selectedWidget.data.titleHasBorder) {
+                            const borderWidth = this.selectedWidget.data.titleBorderWidth || 2;
+                            const borderStyle = this.selectedWidget.data.titleBorderStyle || 'solid';
+                            title.style.border = `${borderWidth}px ${borderStyle} ${value}`;
+                        }
+                        break;
+                    case 'titleBorderWidth':
+                        if (this.selectedWidget.data.titleHasBorder) {
+                            const borderStyle = this.selectedWidget.data.titleBorderStyle || 'solid';
+                            const borderColor = this.selectedWidget.data.titleBorderColor || '#10b981';
+                            title.style.border = `${value}px ${borderStyle} ${borderColor}`;
+                        }
+                        break;
+                    case 'titleBorderStyle':
+                        if (this.selectedWidget.data.titleHasBorder) {
+                            const borderWidth = this.selectedWidget.data.titleBorderWidth || 2;
+                            const borderColor = this.selectedWidget.data.titleBorderColor || '#10b981';
+                            title.style.border = `${borderWidth}px ${value} ${borderColor}`;
+                        }
+                        break;
+                    
+                    // Coins arrondis du titre
+                    case 'titleHasRoundedCorners':
+                        if (value) {
+                            const borderRadius = this.selectedWidget.data.titleBorderRadius || 8;
+                            title.style.borderRadius = `${borderRadius}px`;
+                        } else {
+                            title.style.borderRadius = '0px';
+                        }
+                        break;
+                    case 'titleBorderRadius':
+                        if (this.selectedWidget.data.titleHasRoundedCorners) {
+                            title.style.borderRadius = `${value}px`;
+                        }
+                        break;
+                    
+                    // Propriétés spécifiques aux colonnes
+                    case 'obsoleteTitleColor':
+                        const obsoleteTitle = container.querySelector('.obsolete-column h3');
+                        if (obsoleteTitle) {
+                            obsoleteTitle.style.color = value;
+                        }
+                        break;
+                    case 'modernTitleColor':
+                        const modernTitle = container.querySelector('.modern-column h3');
+                        if (modernTitle) {
+                            modernTitle.style.color = value;
+                        }
+                        break;
+                    case 'obsoleteBackgroundColor':
+                        const obsoleteColumn = container.querySelector('.obsolete-column');
+                        if (obsoleteColumn) {
+                            obsoleteColumn.style.background = value;
+                        }
+                        break;
+                    case 'modernBackgroundColor':
+                        const modernColumn = container.querySelector('.modern-column');
+                        if (modernColumn) {
+                            modernColumn.style.background = value;
+                        }
+                        break;
+                    case 'obsoleteBorderColor':
+                        const obsoleteColumnBorder = container.querySelector('.obsolete-column');
+                        if (obsoleteColumnBorder) {
+                            obsoleteColumnBorder.style.borderColor = value;
+                        }
+                        break;
+                    case 'modernBorderColor':
+                        const modernColumnBorder = container.querySelector('.modern-column');
+                        if (modernColumnBorder) {
+                            modernColumnBorder.style.borderColor = value;
                         }
                         break;
                     
@@ -6490,6 +7202,128 @@ Folder('${id}')" title="Renommer">
                         }
                     }
                 }
+                
+                // Sauvegarde automatique
+                this.autoSave();
+            }
+            
+            // Gestion dynamique des inconvénients pour Comparison Widget (colonne obsolète)
+            addObsoleteDisadvantage() {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const input = document.getElementById('newDisadvantageInput');
+                if (!input || !input.value.trim()) return;
+                
+                const newDisadvantage = input.value.trim();
+                if (!newDisadvantage.includes('|')) {
+                    this.setStatus('Format requis: "Titre|Description"', 'warning');
+                    return;
+                }
+                
+                this.selectedWidget.data.obsoleteDisadvantages.push(newDisadvantage);
+                
+                // Vider l'input
+                input.value = '';
+                
+                // Mettre à jour l'interface
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                
+                const [title] = newDisadvantage.split('|');
+                this.setStatus(`Inconvénient "${title}" ajouté`, 'success');
+            }
+            
+            removeObsoleteDisadvantage(index) {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const disadvantages = this.selectedWidget.data.obsoleteDisadvantages;
+                if (index < 0 || index >= disadvantages.length) return;
+                
+                const removedItem = disadvantages[index];
+                const [title] = removedItem.split('|');
+                disadvantages.splice(index, 1);
+                
+                // Mettre à jour l'interface
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                
+                this.setStatus(`Inconvénient "${title}" supprimé`, 'success');
+            }
+            
+            updateObsoleteDisadvantage(index, newValue) {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const disadvantages = this.selectedWidget.data.obsoleteDisadvantages;
+                if (index < 0 || index >= disadvantages.length) return;
+                
+                disadvantages[index] = newValue.trim();
+                
+                // Mise à jour temps réel
+                this.renderSelectedWidget();
+                this.updatePreview();
+                
+                // Sauvegarde automatique
+                this.autoSave();
+            }
+            
+            // Gestion dynamique des avantages pour Comparison Widget (colonne moderne)
+            addModernAdvantage() {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const input = document.getElementById('newAdvantageInput');
+                if (!input || !input.value.trim()) return;
+                
+                const newAdvantage = input.value.trim();
+                if (!newAdvantage.includes('|')) {
+                    this.setStatus('Format requis: "Titre|Description"', 'warning');
+                    return;
+                }
+                
+                this.selectedWidget.data.modernAdvantages.push(newAdvantage);
+                
+                // Vider l'input
+                input.value = '';
+                
+                // Mettre à jour l'interface
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                
+                const [title] = newAdvantage.split('|');
+                this.setStatus(`Avantage "${title}" ajouté`, 'success');
+            }
+            
+            removeModernAdvantage(index) {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const advantages = this.selectedWidget.data.modernAdvantages;
+                if (index < 0 || index >= advantages.length) return;
+                
+                const removedItem = advantages[index];
+                const [title] = removedItem.split('|');
+                advantages.splice(index, 1);
+                
+                // Mettre à jour l'interface
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                
+                this.setStatus(`Avantage "${title}" supprimé`, 'success');
+            }
+            
+            updateModernAdvantage(index, newValue) {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const advantages = this.selectedWidget.data.modernAdvantages;
+                if (index < 0 || index >= advantages.length) return;
+                
+                advantages[index] = newValue.trim();
+                
+                // Mise à jour temps réel
+                this.renderSelectedWidget();
+                this.updatePreview();
                 
                 // Sauvegarde automatique
                 this.autoSave();
