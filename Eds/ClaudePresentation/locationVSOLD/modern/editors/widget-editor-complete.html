@@ -1375,10 +1375,6 @@
                     <i class="fas fa-plus"></i>
                     Ajouter Widget
                 </button>
-                <button class="btn btn-outline" id="testLogoBtn" title="Ajouter un logo pour test">
-                    <i class="fas fa-image"></i>
-                    Test Logo
-                </button>
             </div>
             
             <div class="toolbar-right">
@@ -2461,12 +2457,6 @@
                 // Boutons principaux (utilisation directe des widgets)
                 document.getElementById('addWidgetBtn').addEventListener('click', () => this.addWidget('hero-title'));
                 document.getElementById('firstWidgetBtn').addEventListener('click', () => this.addWidget('hero-title'));
-                document.getElementById('testLogoBtn').addEventListener('click', () => {
-                    // Rôle      : Ajouter et sélectionner automatiquement un logo pour test
-                    // Type      : function
-                    // Exemple   : Ajoute logo, le sélectionne, affiche propriétés
-                    this.addWidget('logo');
-                });
                 document.getElementById('saveBtn').addEventListener('click', () => this.saveProject());
                 document.getElementById('exportBtn').addEventListener('click', () => this.exportProject());
                 
@@ -3222,21 +3212,12 @@
                 // Mise à jour temps réel spécifique par type de widget et propriété
                 const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
                 
-                /* 
-                # Rôle      : Log de débogage pour vérifier la sélection du conteneur
-                # Type      : console.log
-                # Unité     : sans unité
-                # Formule   : console.log(sélecteur, élément_trouvé)
-                # Exemple   : "Conteneur trouvé: true pour sélecteur [data-widget-id='widget-123']"
-                */
-                console.log(`📦 Conteneur trouvé: ${container ? 'OUI' : 'NON'} pour sélecteur [data-widget-id="${this.selectedWidget.id}"]`);
                 
                 if (container) {
                     this.updateWidgetRealTime(container, propertyName, value);
                 }
                 
                 // Mettre à jour aussi le viewer
-                console.log(`🔄 Mise à jour de l'aperçu...`);
                 this.updatePreview();
                 
                 // Pas de setStatus pour éviter le spam lors de l'input continu
@@ -3250,13 +3231,6 @@
                 // Formule   : nouveau_HTML = widget.render(données_actuelles)
                 // Exemple   : Le widget logo se re-rend avec imagePath mise à jour
                 
-                /* 
-                # Rôle      : Mise à jour temps réel complète pour tous les widgets
-                # Type      : function
-                # Unité     : sans unité
-                # Formule   : re_rendu_complet = widget.render(nouvelles_données)
-                # Exemple   : Le widget logo se re-rend avec imagePath mise à jour
-                */
                 
                 // Re-rendu complet pour toutes les propriétés
                 this.rerenderWidget(container);
@@ -3271,24 +3245,21 @@
                 if (!this.selectedWidget || !this.selectedWidget.instance) return;
                 
                 try {
-                    /* 
-                    # Rôle      : Log de débogage pour le re-rendu du widget
-                    # Type      : console.log
-                    # Unité     : sans unité
-                    # Formule   : console.log(type_widget, données_actuelles)
-                    # Exemple   : "Re-rendu widget logo avec données: {imagePath: '../test.png', ...}"
-                    */
-                    console.log(`🎨 Re-rendu widget ${this.selectedWidget.type} avec données:`, this.selectedWidget.data);
+                    // Rôle      : Mise à jour seulement du contenu du widget, pas des contrôles
+                    // Type      : function
+                    // Unité     : sans unité
+                    // Formule   : widget_content.innerHTML = nouveau_rendu
+                    // Exemple   : Seul le contenu .widget-content est mis à jour, les contrôles restent
                     
-                    // Générer le nouveau HTML avec les données actuelles
-                    const newHTML = this.selectedWidget.instance.render(this.selectedWidget.data);
-                    
-                    console.log(`📝 Nouveau HTML généré:`, newHTML.substring(0, 200) + '...');
-                    
-                    // Remplacer le contenu du container
-                    container.innerHTML = newHTML;
-                    
-                    console.log(`✅ Container mis à jour dans l'éditeur`);
+                    // Chercher le div de contenu spécifiquement
+                    const contentDiv = container.querySelector('.widget-content');
+                    if (contentDiv) {
+                        // Générer le nouveau HTML avec les données actuelles
+                        const newHTML = this.selectedWidget.instance.render(this.selectedWidget.data);
+                        
+                        // Remplacer SEULEMENT le contenu, pas les contrôles
+                        contentDiv.innerHTML = newHTML;
+                    }
                     
                 } catch (error) {
                     console.error('❌ Erreur lors du re-rendu du widget:', error);
@@ -5078,7 +5049,6 @@ Folder('${id}')" title="Renommer">
             // Unité     : sans unité
             // Exemple   : window.widgetEditor devient accessible globalement
             window.widgetEditor = new WidgetEditorComplete();
-            console.log('WidgetEditor initialisé avec succès');
         });
         
         // CSS pour les animations
