@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="../assets/css/themes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Polices pour le style de prévisualisation finale -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
         /* ============================================================================
          * ÉDITEUR DE WIDGETS COMPLET - INTERFACE AVANCÉE 
@@ -4042,6 +4046,87 @@ Folder('${id}')" title="Renommer">
                     this.setStatus('Erreur lors du chargement du projet', 'error');
                     console.error('Erreur chargement projet:', error);
                 }
+            }
+            
+            // ============= MÉTHODES DE PRÉVISUALISATION PLEIN ÉCRAN =============
+            
+            // Ouvrir la popup de prévisualisation plein écran
+            openFullscreenPreview() {
+                const popup = document.getElementById('previewPopup');
+                popup.classList.add('active');
+                
+                // Empêcher le scroll sur le body
+                document.body.style.overflow = 'hidden';
+                
+                // Rendre la prévisualisation
+                this.renderFullscreenPreview();
+                
+                this.setStatus('Prévisualisation plein écran ouverte', 'info');
+            }
+            
+            // Fermer la popup de prévisualisation
+            closeFullscreenPreview() {
+                const popup = document.getElementById('previewPopup');
+                popup.classList.remove('active');
+                
+                // Réactiver le scroll sur le body
+                document.body.style.overflow = 'auto';
+                
+                this.setStatus('Prévisualisation fermée', 'info');
+            }
+            
+            // Rendre la prévisualisation finale avec le style du viewer exporté
+            renderFullscreenPreview() {
+                const previewGrid = document.getElementById('previewGrid');
+                
+                if (this.widgets.length === 0) {
+                    previewGrid.innerHTML = `
+                        <div class="preview-empty">
+                            <i class="fas fa-cube"></i>
+                            <div>Aucun widget à prévisualiser</div>
+                            <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">
+                                Ajoutez des widgets pour voir la prévisualisation
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let previewHtml = '';
+                
+                // Rendu de chaque widget avec le style final
+                this.widgets.forEach(widget => {
+                    const pos = widget.position || { col: 1, row: 1 };
+                    const size = widget.size || { width: 3, height: 2 };
+                    
+                    // Contenu du widget rendu avec le style final
+                    const widgetContent = widget.instance.render(widget.data);
+                    
+                    previewHtml += `
+                        <div class="preview-widget-final" 
+                             style="grid-column: ${pos.col} / ${pos.col + size.width}; 
+                                    grid-row: ${pos.row} / ${pos.row + size.height};">
+                            <div class="widget-content">
+                                ${widgetContent}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                previewGrid.innerHTML = previewHtml;
+                
+                // Appliquer les animations d'entrée
+                const widgets = previewGrid.querySelectorAll('.preview-widget-final');
+                widgets.forEach((widget, index) => {
+                    widget.style.opacity = '0';
+                    widget.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        widget.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                        widget.style.opacity = '1';
+                        widget.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
             }
 
             exportProject() {
