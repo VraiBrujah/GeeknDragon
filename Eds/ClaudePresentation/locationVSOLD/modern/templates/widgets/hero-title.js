@@ -8,6 +8,8 @@
  * Usage : Titre principal de présentation avec effet visuel
  */
 
+import { escapeHTML, sanitizeHTML } from '../utils/sanitize.js';
+
 class HeroTitleWidget {
     constructor() {
         // Configuration : Propriétés du widget titre hero
@@ -37,20 +39,23 @@ class HeroTitleWidget {
         const widgetData = { ...this.defaultData, ...data };
         
         // Classes CSS - Construction dynamique selon config
-        const titleClass = `hero-title ${widgetData.highlight ? 'hero-highlight' : ''} editable`;
-        const subtitleClass = `hero-subtitle editable animate-${widgetData.animation}`;
-        const gradientClass = `gradient-${widgetData.gradient}`;
+        const titleClass = escapeHTML(`hero-title ${widgetData.highlight ? 'hero-highlight' : ''} editable`);
+        const subtitleClass = escapeHTML(`hero-subtitle editable animate-${widgetData.animation}`);
+        const gradientClass = escapeHTML(`gradient-${widgetData.gradient}`);
+
+        const safeTitle = escapeHTML(widgetData.title);
+        const safeSubtitle = sanitizeHTML(widgetData.subtitle);
 
         return `
             <div class="hero-text-content">
-                <h1 class="${titleClass} ${gradientClass}" 
+                <h1 class="${titleClass} ${gradientClass}"
                     data-field="hero-title"
                     data-widget="hero-title">
-                    ${widgetData.title}
+                    ${safeTitle}
                 </h1>
-                <div class="${subtitleClass}" 
+                <div class="${subtitleClass}"
                      data-field="hero-subtitle">
-                    ${widgetData.subtitle}
+                    ${safeSubtitle}
                 </div>
             </div>
         `;
