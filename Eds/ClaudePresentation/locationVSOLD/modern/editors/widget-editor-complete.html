@@ -19,7 +19,7 @@
                 "library canvas properties"
                 "viewer viewer viewer"
                 "footer footer footer";
-            grid-template-columns: 280px 1fr 320px;
+            grid-template-columns: 280px 1fr var(--properties-width, 350px);
             grid-template-rows: 60px 1fr 200px 40px;
             height: 100vh;
             background: var(--bg-primary);
@@ -2368,13 +2368,11 @@
                         container.classList.add('selected');
                         this.selectedWidget = this.widgets.find(w => w.id === widgetId);
                         this.updatePropertiesPanel();
-                        this.updateOrganizationButtons();
                     }
                 } else {
                     // Désélection
                     this.selectedWidget = null;
                     this.updatePropertiesPanel();
-                    this.updateOrganizationButtons();
                 }
             }
 
@@ -3134,56 +3132,6 @@
                 this.setStatus('Widget supprimé', 'success');
             }
 
-            updateOrganizationButtons() {
-                const hasSelection = this.selectedWidget !== null;
-                const currentIndex = hasSelection ? this.widgets.findIndex(w => w.id === this.selectedWidget.id) : -1;
-                
-                // Boutons de mouvement et actions
-                document.getElementById('moveUpBtn').disabled = !hasSelection || currentIndex <= 0;
-                document.getElementById('moveDownBtn').disabled = !hasSelection || currentIndex >= this.widgets.length - 1;
-                document.getElementById('duplicateBtn').disabled = !hasSelection;
-                document.getElementById('deleteBtn').disabled = !hasSelection;
-                
-                // Contrôles de taille et position
-                const sizeControls = ['widthSlider', 'heightSlider', 'widthInput', 'heightInput', 
-                                    'positionColInput', 'positionRowInput', 'fullScreenBtn', 'fillParentBtn'];
-                
-                sizeControls.forEach(controlId => {
-                    const control = document.getElementById(controlId);
-                    if (control) {
-                        control.disabled = !hasSelection;
-                    }
-                });
-                
-                // Mettre à jour les valeurs si un widget est sélectionné
-                if (hasSelection) {
-                    this.updateSizeControls();
-                }
-            }
-            
-            updateSizeControls() {
-                if (!this.selectedWidget) return;
-                
-                const widget = this.selectedWidget;
-                const size = widget.size || { width: 3, height: 2 };
-                const position = widget.position || { col: 1, row: 1 };
-                
-                // Mettre à jour les sliders et inputs
-                const widthSlider = document.getElementById('widthSlider');
-                const heightSlider = document.getElementById('heightSlider');
-                const widthInput = document.getElementById('widthInput');
-                const heightInput = document.getElementById('heightInput');
-                const positionColInput = document.getElementById('positionColInput');
-                const positionRowInput = document.getElementById('positionRowInput');
-                
-                if (widthSlider) widthSlider.value = size.width;
-                if (heightSlider) heightSlider.value = size.height;
-                if (widthInput) widthInput.value = size.width;
-                if (heightInput) heightInput.value = size.height;
-                if (positionColInput) positionColInput.value = position.col;
-                if (positionRowInput) positionRowInput.value = position.row;
-            }
-
             updatePreview() {
                 const preview = document.getElementById('presentationPreview');
                 
@@ -3669,7 +3617,6 @@ Folder('${id}')" title="Renommer">
                     // Mettre à jour l'interface
                     this.renderCanvas();
                     this.updatePreview();
-                    this.updateOrganizationButtons();
                     
                     this.setStatus(`Projet "${project.name}" chargé`, 'success');
                 } catch (error) {
@@ -3898,7 +3845,6 @@ Folder('${id}')" title="Renommer">
                         if (colSlider) colSlider.value = newCol;
                         if (rowSlider) rowSlider.value = newRow;
                         
-                        this.updateOrganizationButtons();
                     }
                     
                     // Mettre à jour l'aperçu
@@ -4163,7 +4109,6 @@ Folder('${id}')" title="Renommer">
                 this.selectedWidget.position = position;
                 
                 // Mettre à jour les contrôles
-                this.updateSizeControls();
             }
             
             // Définir un widget en plein écran
@@ -4173,7 +4118,6 @@ Folder('${id}')" title="Renommer">
                 this.selectedWidget.size = { width: 12, height: 8 };
                 this.selectedWidget.position = { col: 1, row: 1 };
                 
-                this.updateSizeControls();
                 this.renderCanvas();
                 this.updatePreview();
                 
@@ -4192,7 +4136,6 @@ Folder('${id}')" title="Renommer">
                 this.selectedWidget.position = { col: 1, row: currentPosition.row };
                 
                 this.constrainWidgetToGrid();
-                this.updateSizeControls();
                 this.renderCanvas();
                 this.updatePreview();
                 
@@ -4494,10 +4437,15 @@ Folder('${id}')" title="Renommer">
                     const constrainedWidth = Math.max(250, Math.min(600, newWidth));
                     
                     const propertiesPanel = document.querySelector('.properties-panel');
-                    if (propertiesPanel) {
+                    const widgetEditor = document.querySelector('.widget-editor');
+                    if (propertiesPanel && widgetEditor) {
                         // Application de la nouvelle largeur
-                        propertiesPanel.style.setProperty('--properties-width', `${constrainedWidth}px`);
+                        const rootStyle = document.documentElement.style;
+                        rootStyle.setProperty('--properties-width', `${constrainedWidth}px`);
                         propertiesPanel.style.width = `${constrainedWidth}px`;
+                        
+                        // Mise à jour du grid-template-columns
+                        widgetEditor.style.gridTemplateColumns = `280px 1fr ${constrainedWidth}px`;
                         
                         // Mise à jour de l'indicateur de largeur
                         const widthIndicator = document.querySelector('.properties-width-indicator');
