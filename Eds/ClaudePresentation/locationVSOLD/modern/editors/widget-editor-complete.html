@@ -5192,6 +5192,7 @@
                                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                                                     <input type="text" value="${itemData.emoji}" placeholder="📱" 
                                                            onchange="widgetEditor.updateObsoleteDisadvantageEmoji(${index}, this.value)"
+                                                           oninput="widgetEditor.updateObsoleteDisadvantageEmoji(${index}, this.value)"
                                                            style="width: 40px; background: rgba(0,0,0,0.3); border: 1px solid rgba(239, 68, 68, 0.5); 
                                                                   border-radius: 4px; color: var(--text-white); font-size: 16px; text-align: center; padding: 4px;"
                                                            title="Emoji ou caractère (ex: ☠️, 🔧, ou logo)">
@@ -5262,6 +5263,7 @@
                                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                                                     <input type="text" value="${itemData.emoji}" placeholder="✅" 
                                                            onchange="widgetEditor.updateModernAdvantageEmoji(${index}, this.value)"
+                                                           oninput="widgetEditor.updateModernAdvantageEmoji(${index}, this.value)"
                                                            style="width: 40px; background: rgba(0,0,0,0.3); border: 1px solid rgba(16, 185, 129, 0.5); 
                                                                   border-radius: 4px; color: var(--text-white); font-size: 16px; text-align: center; padding: 4px;"
                                                            title="Emoji ou caractère (ex: 🔋, ⚡, ou logo)">
@@ -7700,9 +7702,24 @@ Folder('${id}')" title="Renommer">
                     disadvantages[index] = { text: disadvantages[index], emoji: '❌', color: '#ffffff' };
                 }
                 
+                // Mettre à jour l'emoji
                 disadvantages[index].emoji = newEmoji;
+                console.log(`🔄 Emoji mis à jour dans les données:`, disadvantages[index]);
+                
+                // Mettre à jour le DOM directement
                 this.updateComparisonElementInDOM('obsolete', index, disadvantages[index]);
+                
+                // Force une mise à jour complète de l'aperçu
                 this.updatePreview();
+                
+                // Force aussi un re-render du canvas si nécessaire  
+                this.renderCanvas();
+                
+                // FALLBACK : Si les éléments ne sont pas mis à jour, forcer un re-render complet
+                setTimeout(() => {
+                    this.verifyAndFixEmojiDisplay('obsolete', index, disadvantages[index]);
+                }, 100);
+                
                 this.autoSave();
             }
             
@@ -7755,9 +7772,24 @@ Folder('${id}')" title="Renommer">
                     advantages[index] = { text: advantages[index], emoji: '✅', color: '#ffffff' };
                 }
                 
+                // Mettre à jour l'emoji
                 advantages[index].emoji = newEmoji;
+                console.log(`🔄 Emoji mis à jour dans les données:`, advantages[index]);
+                
+                // Mettre à jour le DOM directement
                 this.updateComparisonElementInDOM('modern', index, advantages[index]);
+                
+                // Force une mise à jour complète de l'aperçu
                 this.updatePreview();
+                
+                // Force aussi un re-render du canvas si nécessaire
+                this.renderCanvas();
+                
+                // FALLBACK : Si les éléments ne sont pas mis à jour, forcer un re-render complet
+                setTimeout(() => {
+                    this.verifyAndFixEmojiDisplay('modern', index, advantages[index]);
+                }, 100);
+                
                 this.autoSave();
             }
             
@@ -7779,29 +7811,126 @@ Folder('${id}')" title="Renommer">
                 this.autoSave();
             }
             
-            // Fonction utilitaire pour mettre à jour un élément dans le DOM
+            // Fonction utilitaire pour mettre à jour un élément dans le DOM - VERSION AMÉLIORÉE
             updateComparisonElementInDOM(type, index, itemData) {
-                const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
-                if (!container) return;
+                console.log(`🔄 updateComparisonElementInDOM: ${type}, index=${index}`, itemData);
                 
-                const columnSelector = type === 'obsolete' ? '.obsolete-column .disadvantages-list' : '.modern-column .advantages-list';
-                const column = container.querySelector(columnSelector);
-                if (!column) return;
-                
-                const itemSelector = type === 'obsolete' ? '.comparison-item.obsolete-item' : '.comparison-item.modern-item';
-                const items = column.querySelectorAll(itemSelector);
-                if (!items[index]) return;
-                
-                const item = items[index];
-                const emojiElement = item.querySelector('.item-emoji');
-                const textElement = item.querySelector('.item-text');
-                
-                if (emojiElement) {
-                    emojiElement.textContent = itemData.emoji || (type === 'obsolete' ? '❌' : '✅');
+                // Mise à jour dans la fenêtre d'édition (canvas)
+                const editorContainer = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (editorContainer) {
+                    const columnSelector = type === 'obsolete' ? '.obsolete-column .disadvantages-list' : '.modern-column .advantages-list';
+                    const column = editorContainer.querySelector(columnSelector);
+                    
+                    if (column) {
+                        const itemSelector = type === 'obsolete' ? '.comparison-item.obsolete-item' : '.comparison-item.modern-item';
+                        const items = column.querySelectorAll(itemSelector);
+                        
+                        if (items[index]) {
+                            const item = items[index];
+                            const emojiElement = item.querySelector('.item-emoji');
+                            const textElement = item.querySelector('.item-text');
+                            
+                            if (emojiElement) {
+                                emojiElement.textContent = itemData.emoji || (type === 'obsolete' ? '❌' : '✅');
+                                console.log(`✅ Emoji mis à jour dans l'éditeur:`, emojiElement.textContent);
+                            }
+                            if (textElement) {
+                                textElement.textContent = itemData.text || '';
+                                textElement.style.color = itemData.color || '#ffffff';
+                                console.log(`✅ Texte mis à jour dans l'éditeur:`, textElement.textContent, textElement.style.color);
+                            }
+                        }
+                    }
                 }
-                if (textElement) {
-                    textElement.textContent = itemData.text || '';
-                    textElement.style.color = itemData.color || '#ffffff';
+                
+                // Mise à jour dans l'aperçu temps réel (preview)
+                const previewContainer = document.getElementById('preview');
+                if (previewContainer) {
+                    const previewColumnSelector = type === 'obsolete' ? '.obsolete-column .disadvantages-list' : '.modern-column .advantages-list';
+                    const previewColumn = previewContainer.querySelector(previewColumnSelector);
+                    
+                    if (previewColumn) {
+                        const previewItemSelector = type === 'obsolete' ? '.comparison-item.obsolete-item' : '.comparison-item.modern-item';
+                        const previewItems = previewColumn.querySelectorAll(previewItemSelector);
+                        
+                        if (previewItems[index]) {
+                            const previewItem = previewItems[index];
+                            const previewEmojiElement = previewItem.querySelector('.item-emoji');
+                            const previewTextElement = previewItem.querySelector('.item-text');
+                            
+                            if (previewEmojiElement) {
+                                previewEmojiElement.textContent = itemData.emoji || (type === 'obsolete' ? '❌' : '✅');
+                                console.log(`✅ Emoji mis à jour dans l'aperçu:`, previewEmojiElement.textContent);
+                            }
+                            if (previewTextElement) {
+                                previewTextElement.textContent = itemData.text || '';
+                                previewTextElement.style.color = itemData.color || '#ffffff';
+                                console.log(`✅ Texte mis à jour dans l'aperçu:`, previewTextElement.textContent, previewTextElement.style.color);
+                            }
+                        }
+                    }
+                }
+                
+                console.log(`🎯 updateComparisonElementInDOM terminé pour ${type}[${index}]`);
+            }
+            
+            // Fonction de vérification et correction des emoji - FALLBACK SÉCURISÉ
+            verifyAndFixEmojiDisplay(type, index, expectedData) {
+                console.log(`🔍 verifyAndFixEmojiDisplay: Vérification ${type}[${index}]`, expectedData);
+                
+                let needsRefresh = false;
+                
+                // Vérifier la fenêtre d'édition
+                const editorContainer = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (editorContainer) {
+                    const columnSelector = type === 'obsolete' ? '.obsolete-column .disadvantages-list' : '.modern-column .advantages-list';
+                    const column = editorContainer.querySelector(columnSelector);
+                    
+                    if (column) {
+                        const itemSelector = type === 'obsolete' ? '.comparison-item.obsolete-item' : '.comparison-item.modern-item';
+                        const items = column.querySelectorAll(itemSelector);
+                        
+                        if (items[index]) {
+                            const item = items[index];
+                            const emojiElement = item.querySelector('.item-emoji');
+                            
+                            if (emojiElement && emojiElement.textContent !== expectedData.emoji) {
+                                console.log(`❌ Emoji mismatch dans l'éditeur - Attendu: "${expectedData.emoji}", Trouvé: "${emojiElement.textContent}"`);
+                                needsRefresh = true;
+                            }
+                        }
+                    }
+                }
+                
+                // Vérifier l'aperçu
+                const previewContainer = document.getElementById('preview');
+                if (previewContainer) {
+                    const previewColumnSelector = type === 'obsolete' ? '.obsolete-column .disadvantages-list' : '.modern-column .advantages-list';
+                    const previewColumn = previewContainer.querySelector(previewColumnSelector);
+                    
+                    if (previewColumn) {
+                        const previewItemSelector = type === 'obsolete' ? '.comparison-item.obsolete-item' : '.comparison-item.modern-item';
+                        const previewItems = previewColumn.querySelectorAll(previewItemSelector);
+                        
+                        if (previewItems[index]) {
+                            const previewItem = previewItems[index];
+                            const previewEmojiElement = previewItem.querySelector('.item-emoji');
+                            
+                            if (previewEmojiElement && previewEmojiElement.textContent !== expectedData.emoji) {
+                                console.log(`❌ Emoji mismatch dans l'aperçu - Attendu: "${expectedData.emoji}", Trouvé: "${previewEmojiElement.textContent}"`);
+                                needsRefresh = true;
+                            }
+                        }
+                    }
+                }
+                
+                // Si des problèmes sont détectés, forcer un re-render complet
+                if (needsRefresh) {
+                    console.log(`🔄 Forçage du re-render complet pour corriger les emoji`);
+                    this.renderCanvas();
+                    this.updatePreview();
+                } else {
+                    console.log(`✅ Emoji correctement affiché partout`);
                 }
             }
             
