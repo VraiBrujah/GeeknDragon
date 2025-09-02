@@ -429,24 +429,27 @@ class WidgetLoader {
      * Retour : Promise<Array> des fichiers trouvés
      */
     async scanDirectory(path) {
-        // Note: Cette méthode nécessite une implémentation spécifique
-        // selon l'environnement (Node.js, browser avec build tool, etc.)
-        
-        // Pour le browser avec bundling, on peut utiliser require.context
-        // ou une liste statique des widgets disponibles
-        
-        // Implémentation temporaire avec liste statique
+        // Note : Méthode dépendante de l'environnement (Node.js, navigateur, etc.)
+        // Priorité à une détection automatique des fichiers présents dans
+        // le répertoire `templates/widgets` lorsqu'elle est possible.
+        try {
+            // Exécution côté Node.js : utilisation de fs pour scanner le dossier
+            if (typeof window === 'undefined') {
+                const fs = await import('fs/promises');
+                const dir = new URL(path, import.meta.url);
+                const files = await fs.readdir(dir);
+                return files.filter(file => file.endsWith('.js'));
+            }
+        } catch (error) {
+            console.warn('Scan automatique des widgets impossible :', error);
+        }
+
+        // Fallback statique pour les environnements ne permettant pas le scan
         const knownWidgets = [
             'logo.js',
             'hero-title.js',
-            'hero-description.js',
             'pricing-card.js',
-            'product-showcase.js',
-            'call-to-action.js',
-            'benefits-grid.js',
-            'advantage-card.js',
-            'weakness-list.js',
-            'contact-card.js'
+            'text-simple.js'
         ];
 
         return knownWidgets;
