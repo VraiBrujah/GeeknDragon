@@ -100,6 +100,143 @@
         .widget-category {
             margin-bottom: var(--spacing-lg);
         }
+        
+        /* Système de dossiers hiérarchiques */
+        .folder-structure {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .folder-item {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            transition: var(--transition-normal);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+        
+        .folder-item:hover {
+            background: rgba(16, 185, 129, 0.05);
+            color: var(--text-white);
+        }
+        
+        .folder-item.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            border-left: 3px solid var(--accent-green);
+        }
+        
+        .folder-icon {
+            width: 16px;
+            margin-right: var(--spacing-xs);
+            text-align: center;
+        }
+        
+        .folder-name {
+            flex: 1;
+            font-weight: var(--font-medium);
+        }
+        
+        .folder-count {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 6px;
+            border-radius: 10px;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .folder-children {
+            margin-left: var(--spacing-md);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: var(--spacing-sm);
+        }
+        
+        .folder-children.collapsed {
+            display: none;
+        }
+        
+        .saves-section {
+            border-top: 1px solid var(--border-color);
+            margin-top: var(--spacing-md);
+            padding-top: var(--spacing-md);
+        }
+        
+        .save-item {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: var(--transition-normal);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+            margin-bottom: 2px;
+            cursor: pointer;
+        }
+        
+        .save-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--text-white);
+        }
+        
+        .save-icon {
+            width: 16px;
+            margin-right: var(--spacing-xs);
+            text-align: center;
+            color: #3b82f6;
+        }
+        
+        .save-name {
+            flex: 1;
+        }
+        
+        .save-date {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+        }
+        
+        /* Contrôles de dossier */
+        .folder-controls {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .folder-control-btn {
+            width: 20px;
+            height: 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-normal);
+        }
+        
+        .folder-control-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+        }
+        
+        /* État de recherche actif */
+        .search-active .folder-structure {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .search-results {
+            display: none;
+        }
+        
+        .search-active .search-results {
+            display: block;
+        }
 
         .category-title {
             font-size: var(--text-sm);
@@ -152,6 +289,17 @@
             font-size: var(--text-xs);
             color: var(--text-muted);
             line-height: 1.3;
+        }
+        
+        .widget-actions {
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+        
+        .widget-item:hover .widget-actions {
+            opacity: 1;
         }
 
         /* Canvas d'édition */
@@ -260,6 +408,25 @@
         }
         
         /* Poignées de redimensionnement supprimées - utilisation des sliders dans l'onglet Organisation */
+        
+        /* Conteneur arrière-plan global adaptatif */
+        .global-background-container {
+            position: absolute;
+            background: rgba(16, 185, 129, 0.05);
+            border: 2px dashed rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(2px);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 0;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+        }
+        
+        .global-background-container.active {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+        }
 
         .widget-container-header {
             position: absolute;
@@ -987,11 +1154,64 @@
         <div class="widget-library">
             <div class="library-header">
                 <h3 class="library-title">Widgets Disponibles</h3>
-                <input type="text" class="library-search" placeholder="Rechercher..." id="widgetSearch">
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <input type="text" class="library-search" placeholder="Rechercher widgets et dossiers..." id="widgetSearch">
+                    <button class="btn btn-sm" id="createFolderBtn" title="Créer un dossier">
+                        <i class="fas fa-folder-plus"></i>
+                    </button>
+                </div>
             </div>
             
+            <!-- Structure de dossiers -->
             <div class="library-content" id="widgetLibrary">
-                <!-- Widgets chargés dynamiquement -->
+                <!-- Navigation par dossiers -->
+                <div class="folder-structure" id="folderStructure">
+                    <div class="folder-item active" data-folder="root">
+                        <i class="fas fa-home folder-icon"></i>
+                        <span class="folder-name">Tous les widgets</span>
+                        <span class="folder-count" id="totalWidgetCount">5</span>
+                    </div>
+                    
+                    <div class="folder-item" data-folder="favorites">
+                        <i class="fas fa-star folder-icon"></i>
+                        <span class="folder-name">Favoris</span>
+                        <span class="folder-count">0</span>
+                    </div>
+                    
+                    <div class="folder-item" data-folder="recent">
+                        <i class="fas fa-clock folder-icon"></i>
+                        <span class="folder-name">Récents</span>
+                        <span class="folder-count">0</span>
+                    </div>
+                    
+                    <!-- Dossiers personnalisés -->
+                    <div id="customFolders">
+                        <!-- Dossiers ajoutés dynamiquement -->
+                    </div>
+                </div>
+                
+                <!-- Section des sauvegardes -->
+                <div class="saves-section" id="savesSection">
+                    <div class="folder-item" style="font-weight: bold; color: var(--text-white);">
+                        <i class="fas fa-save folder-icon"></i>
+                        <span class="folder-name">Projets sauvegardés</span>
+                        <span class="folder-count" id="savesCount">0</span>
+                    </div>
+                    
+                    <div class="folder-children" id="savesList">
+                        <!-- Projets sauvegardés -->
+                    </div>
+                </div>
+                
+                <!-- Widgets du dossier sélectionné -->
+                <div id="widgetContent">
+                    <!-- Widgets chargés dynamiquement selon le dossier -->
+                </div>
+                
+                <!-- Résultats de recherche -->
+                <div class="search-results" id="searchResults">
+                    <!-- Résultats de recherche -->
+                </div>
             </div>
         </div>
 
@@ -1006,6 +1226,10 @@
                     <button class="btn btn-sm" id="gridToggleBtn" onclick="widgetEditor.toggleGrid()">
                         <i class="fas fa-th"></i>
                         Grille
+                    </button>
+                    <button class="btn btn-sm" id="backgroundToggleBtn" onclick="widgetEditor.toggleBackground()">
+                        <i class="fas fa-square"></i>
+                        Conteneur
                     </button>
                 </div>
                 
@@ -1115,22 +1339,28 @@
                         </div>
                         
                         <div class="property-field">
-                            <label class="property-label">Position</label>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                                <div>
-                                    <label class="property-label" style="font-size: var(--text-xs); margin-bottom: 4px;">Colonne</label>
-                                    <input type="number" id="positionColInput" class="property-input" 
-                                           min="1" max="12" value="1" disabled
-                                           style="text-align: center;"
-                                           onchange="widgetEditor.updateWidgetPosition('col', this.value)">
-                                </div>
-                                <div>
-                                    <label class="property-label" style="font-size: var(--text-xs); margin-bottom: 4px;">Rangée</label>
-                                    <input type="number" id="positionRowInput" class="property-input" 
-                                           min="1" max="8" value="1" disabled
-                                           style="text-align: center;"
-                                           onchange="widgetEditor.updateWidgetPosition('row', this.value)">
-                                </div>
+                            <label class="property-label">Position - Colonne (1-12)</label>
+                            <div class="property-control">
+                                <input type="range" id="positionColSlider" class="property-range" 
+                                       min="1" max="12" value="1" disabled
+                                       oninput="widgetEditor.updateWidgetPosition('col', this.value)">
+                                <input type="number" id="positionColInput" class="property-input" 
+                                       min="1" max="12" value="1" disabled
+                                       style="width: 60px; text-align: center;"
+                                       onchange="widgetEditor.updateWidgetPosition('col', this.value)">
+                            </div>
+                        </div>
+                        
+                        <div class="property-field">
+                            <label class="property-label">Position - Rangée (1-8)</label>
+                            <div class="property-control">
+                                <input type="range" id="positionRowSlider" class="property-range" 
+                                       min="1" max="8" value="1" disabled
+                                       oninput="widgetEditor.updateWidgetPosition('row', this.value)">
+                                <input type="number" id="positionRowInput" class="property-input" 
+                                       min="1" max="8" value="1" disabled
+                                       style="width: 60px; text-align: center;"
+                                       onchange="widgetEditor.updateWidgetPosition('row', this.value)">
                             </div>
                         </div>
                     </div>
@@ -1754,6 +1984,18 @@
                     FeatureGridWidget
                 ];
                 
+                // Système de dossiers et de recherche
+                this.currentFolder = 'root';
+                this.searchTerm = '';
+                this.folders = {
+                    root: { name: 'Tous les widgets', widgets: [], type: 'system' },
+                    favorites: { name: 'Favoris', widgets: [], type: 'system' },
+                    recent: { name: 'Récents', widgets: [], type: 'system' }
+                };
+                this.savedProjects = [];
+                this.recentWidgets = new Set();
+                this.favoriteWidgets = new Set();
+                
                 this.widgetCategories = {
                     'Navigation': [],
                     'Contenu': [],
@@ -1804,11 +2046,31 @@
                 document.getElementById('fullScreenBtn').addEventListener('click', () => this.setFullScreen());
                 document.getElementById('fillParentBtn').addEventListener('click', () => this.fillParent());
                 
-                // Recherche
+                // Recherche et navigation par dossiers
                 const searchInput = document.getElementById('widgetSearch');
                 if (searchInput) {
-                    searchInput.addEventListener('input', (e) => this.filterWidgets(e.target.value));
+                    searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));
                 }
+                
+                // Gestion des dossiers
+                document.addEventListener('click', (e) => {
+                    if (e.target.closest('.folder-item')) {
+                        const folderItem = e.target.closest('.folder-item');
+                        const folderId = folderItem.dataset.folder;
+                        if (folderId) {
+                            this.selectFolder(folderId);
+                        }
+                    }
+                });
+                
+                // Création de dossier
+                const createFolderBtn = document.getElementById('createFolderBtn');
+                if (createFolderBtn) {
+                    createFolderBtn.addEventListener('click', () => this.createNewFolder());
+                }
+                
+                // Chargement des données locales
+                this.loadLocalData();
                 
                 // Refresh preview
                 document.getElementById('refreshPreviewBtn').addEventListener('click', () => this.updatePreview());
@@ -1830,28 +2092,90 @@
                 }
             }
 
+            // Nouvelle méthode : rendu de la bibliothèque avec dossiers
             renderWidgetLibrary() {
-                const library = document.getElementById('widgetLibrary');
-                library.innerHTML = '';
+                this.updateFolderStructure();
+                this.renderCurrentFolder();
+                this.loadSavedProjects();
+            }
+            
+            // Mise à jour de la structure des dossiers
+            updateFolderStructure() {
+                // Mettre à jour les compteurs
+                const totalWidgetCountEl = document.getElementById('totalWidgetCount');
+                if (totalWidgetCountEl) {
+                    totalWidgetCountEl.textContent = this.availableWidgets.length;
+                }
                 
-                Object.entries(this.widgetCategories).forEach(([category, widgets]) => {
-                    if (widgets.length === 0) return;
+                // Répartir les widgets dans les dossiers
+                this.folders.root.widgets = this.availableWidgets;
+                this.folders.favorites.widgets = this.availableWidgets.filter(w => this.favoriteWidgets.has(w.id));
+                this.folders.recent.widgets = Array.from(this.recentWidgets).map(id => 
+                    this.availableWidgets.find(w => w.id === id)).filter(Boolean);
                     
-                    const categoryDiv = document.createElement('div');
-                    categoryDiv.className = 'widget-category';
-                    
-                    const categoryTitle = document.createElement('div');
-                    categoryTitle.className = 'category-title';
-                    categoryTitle.textContent = category;
-                    categoryDiv.appendChild(categoryTitle);
+                // Mettre à jour les compteurs dans l'UI
+                const favoritesCountEl = document.querySelector('.folder-item[data-folder="favorites"] .folder-count');
+                if (favoritesCountEl) {
+                    favoritesCountEl.textContent = this.folders.favorites.widgets.length || '0';
+                }
+                const recentCountEl = document.querySelector('.folder-item[data-folder="recent"] .folder-count');
+                if (recentCountEl) {
+                    recentCountEl.textContent = this.folders.recent.widgets.length || '0';
+                }
+            }
+            
+            // Rendu du dossier actuel
+            renderCurrentFolder() {
+                const content = document.getElementById('widgetContent');
+                if (!content) return;
+                
+                const currentFolderData = this.folders[this.currentFolder];
+                
+                if (!currentFolderData) {
+                    content.innerHTML = '<div style="padding: 1rem; color: var(--text-muted);">Dossier introuvable</div>';
+                    return;
+                }
+                
+                content.innerHTML = '';
+                
+                if (this.currentFolder === 'root') {
+                    // Afficher par catégories pour "Tous les widgets"
+                    Object.entries(this.widgetCategories).forEach(([category, widgets]) => {
+                        if (widgets.length === 0) return;
+                        
+                        const categoryDiv = document.createElement('div');
+                        categoryDiv.className = 'widget-category';
+                        
+                        const categoryTitle = document.createElement('div');
+                        categoryTitle.className = 'category-title';
+                        categoryTitle.textContent = category;
+                        categoryDiv.appendChild(categoryTitle);
+                        
+                        widgets.forEach(widget => {
+                            const widgetItem = this.createWidgetItem(widget);
+                            categoryDiv.appendChild(widgetItem);
+                        });
+                        
+                        content.appendChild(categoryDiv);
+                    });
+                } else {
+                    // Afficher les widgets du dossier sélectionné
+                    const widgets = currentFolderData.widgets;
+                    if (widgets.length === 0) {
+                        content.innerHTML = `
+                            <div style="padding: 2rem; text-align: center; color: var(--text-muted);">
+                                <i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                                <div>Aucun widget dans ce dossier</div>
+                            </div>
+                        `;
+                        return;
+                    }
                     
                     widgets.forEach(widget => {
                         const widgetItem = this.createWidgetItem(widget);
-                        categoryDiv.appendChild(widgetItem);
+                        content.appendChild(widgetItem);
                     });
-                    
-                    library.appendChild(categoryDiv);
-                });
+                }
             }
 
             createWidgetItem(widget) {
@@ -1859,15 +2183,34 @@
                 item.className = 'widget-item';
                 item.dataset.widgetType = widget.id;
                 
+                const isFavorite = this.favoriteWidgets.has(widget.id);
+                const isRecent = this.recentWidgets.has(widget.id);
+                
                 item.innerHTML = `
-                    <div class="widget-icon">${widget.icon}</div>
+                    <div class="widget-icon">
+                        <i class="${widget.icon || 'fas fa-puzzle-piece'}"></i>
+                    </div>
                     <div class="widget-info">
                         <div class="widget-name">${widget.name}</div>
                         <div class="widget-description">${widget.description}</div>
                     </div>
+                    <div class="widget-actions">
+                        <button class="btn btn-sm" onclick="event.stopPropagation(); widgetEditor.toggleFavorite('${widget.id}')" 
+                                title="${isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}">
+                            <i class="fas fa-star" style="color: ${isFavorite ? '#fbbf24' : 'var(--text-muted)'}"></i>
+                        </button>
+                        <button class="btn btn-sm" onclick="event.stopPropagation(); widgetEditor.addWidget('${widget.id}')" title="Ajouter">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
                 `;
                 
-                item.addEventListener('click', () => this.addWidget(widget.id));
+                // Clic sur l'item entier = ajouter le widget
+                item.addEventListener('click', (e) => {
+                    if (!e.target.closest('.widget-actions')) {
+                        this.addWidget(widget.id);
+                    }
+                });
                 
                 return item;
             }
@@ -1880,6 +2223,9 @@
             addWidget(widgetType) {
                 const WidgetClass = this.availableWidgets.find(w => new w().id === widgetType);
                 if (!WidgetClass) return;
+                
+                // Ajouter aux récents
+                this.addToRecent(widgetType);
                 
                 const widgetInstance = new WidgetClass();
                 
@@ -1934,6 +2280,10 @@
                 }
                 
                 document.getElementById('widgetCount').textContent = this.widgets.length;
+                
+                // Mettre à jour le conteneur arrière-plan si activé
+                this.updateBackgroundContainer();
+                
                 this.setStatus(`Widget ${widgetInstance.name} ajouté`, 'success');
             }
 
@@ -2868,23 +3218,101 @@
                 preview.innerHTML = previewHtml;
             }
 
-            filterWidgets(searchTerm) {
-                const term = searchTerm.toLowerCase().trim();
-                const widgetItems = document.querySelectorAll('.widget-item');
+            // Gestion de la recherche dynamique
+            handleSearch(term) {
+                this.searchTerm = term.toLowerCase().trim();
+                const library = document.getElementById('widgetLibrary');
                 
-                widgetItems.forEach(item => {
-                    const name = item.querySelector('.widget-name').textContent.toLowerCase();
-                    const description = item.querySelector('.widget-description').textContent.toLowerCase();
-                    const matches = name.includes(term) || description.includes(term);
+                if (this.searchTerm === '') {
+                    // Retour à l'affichage normal
+                    library.classList.remove('search-active');
+                    this.renderCurrentFolder();
+                    return;
+                }
+                
+                // Mode recherche actif
+                library.classList.add('search-active');
+                this.renderSearchResults();
+            }
+            
+            // Rendu des résultats de recherche
+            renderSearchResults() {
+                const searchResults = document.getElementById('searchResults');
+                if (!searchResults) return;
+                
+                const results = [];
+                
+                // Rechercher dans tous les widgets
+                this.availableWidgets.forEach(widget => {
+                    const name = widget.name.toLowerCase();
+                    const description = (widget.description || '').toLowerCase();
+                    const category = (widget.category || '').toLowerCase();
                     
-                    item.style.display = matches ? 'flex' : 'none';
+                    if (name.includes(this.searchTerm) || 
+                        description.includes(this.searchTerm) ||
+                        category.includes(this.searchTerm)) {
+                        results.push(widget);
+                    }
                 });
                 
-                // Masquer les catégories vides
-                document.querySelectorAll('.widget-category').forEach(category => {
-                    const visibleItems = category.querySelectorAll('.widget-item:not([style*="display: none"])');
-                    category.style.display = visibleItems.length > 0 ? 'block' : 'none';
+                // Rechercher dans les noms de dossiers
+                const folderResults = [];
+                Object.entries(this.folders).forEach(([id, folder]) => {
+                    if (folder.name.toLowerCase().includes(this.searchTerm)) {
+                        folderResults.push({ id, ...folder });
+                    }
                 });
+                
+                // Afficher les résultats
+                searchResults.innerHTML = '';
+                
+                if (folderResults.length > 0) {
+                    const foldersSection = document.createElement('div');
+                    foldersSection.innerHTML = `
+                        <div style="font-weight: bold; color: var(--text-white); margin-bottom: 8px; padding: 4px 8px;">
+                            <i class="fas fa-folder"></i> Dossiers (${folderResults.length})
+                        </div>
+                    `;
+                    
+                    folderResults.forEach(folder => {
+                        const folderItem = document.createElement('div');
+                        folderItem.className = 'folder-item';
+                        folderItem.dataset.folder = folder.id;
+                        folderItem.innerHTML = `
+                            <i class="fas fa-folder folder-icon"></i>
+                            <span class="folder-name">${folder.name}</span>
+                            <span class="folder-count">${folder.widgets.length}</span>
+                        `;
+                        foldersSection.appendChild(folderItem);
+                    });
+                    
+                    searchResults.appendChild(foldersSection);
+                }
+                
+                if (results.length > 0) {
+                    const widgetsSection = document.createElement('div');
+                    widgetsSection.innerHTML = `
+                        <div style="font-weight: bold; color: var(--text-white); margin-bottom: 8px; padding: 4px 8px; margin-top: 16px;">
+                            <i class="fas fa-puzzle-piece"></i> Widgets (${results.length})
+                        </div>
+                    `;
+                    
+                    results.forEach(widget => {
+                        const widgetItem = this.createWidgetItem(widget);
+                        widgetsSection.appendChild(widgetItem);
+                    });
+                    
+                    searchResults.appendChild(widgetsSection);
+                }
+                
+                if (results.length === 0 && folderResults.length === 0) {
+                    searchResults.innerHTML = `
+                        <div style="padding: 2rem; text-align: center; color: var(--text-muted);">
+                            <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                            <div>Aucun résultat pour "${this.searchTerm}"</div>
+                        </div>
+                    `;
+                }
             }
 
             // Historique simplifié
@@ -2898,15 +3326,59 @@
                 document.getElementById('redoBtn').disabled = this.historyIndex >= this.history.length - 1;
             }
 
+            // Sauvegarde complète du conteneur avec tous les widgets et leur configuration
             saveProject() {
+                // Vérifier si le conteneur arrière-plan est activé
+                const workspace = document.getElementById('canvasWorkspace');
+                const hasContainer = workspace?.querySelector('.global-background-container') !== null;
+                
+                // Données complètes du projet incluant le conteneur
                 const projectData = {
-                    version: '2.0.0',
+                    version: '2.1.0', // Version mise à jour pour inclure le conteneur
                     timestamp: new Date().toISOString(),
+                    
+                    // Configuration du conteneur global
+                    container: {
+                        enabled: hasContainer,
+                        type: 'adaptive-background',
+                        style: {
+                            background: 'rgba(16, 185, 129, 0.1)',
+                            border: '2px dashed rgba(16, 185, 129, 0.5)',
+                            borderRadius: '12px'
+                        }
+                    },
+                    
+                    // Widgets avec toutes leurs propriétés (récursif)
                     widgets: this.widgets.map(w => ({
                         id: w.id,
                         type: w.type,
-                        data: w.data
-                    }))
+                        data: { ...w.data }, // Copie profonde des données
+                        position: { ...w.position } || { col: 1, row: 1 },
+                        size: { ...w.size } || { width: 3, height: 2 },
+                        
+                        // Métadonnées pour la reconstruction
+                        metadata: {
+                            created: w.created || new Date().toISOString(),
+                            modified: new Date().toISOString(),
+                            category: w.instance?.category || 'Général',
+                            name: w.instance?.name || 'Widget'
+                        }
+                    })),
+                    
+                    // Configuration de la grille
+                    grid: {
+                        columns: 12,
+                        rows: 8,
+                        gap: 8,
+                        visible: workspace?.classList.contains('show-grid') || false
+                    },
+                    
+                    // Statistiques du projet
+                    stats: {
+                        totalWidgets: this.widgets.length,
+                        widgetsByType: this.getWidgetStats(),
+                        gridUsage: this.calculateGridUsage()
+                    }
                 };
                 
                 const blob = new Blob([JSON.stringify(projectData, null, 2)], { type: 'application/json' });
@@ -2920,7 +3392,290 @@
                 URL.revokeObjectURL(url);
                 
                 document.getElementById('lastSave').textContent = new Date().toLocaleString();
-                this.setStatus('Projet sauvegardé', 'success');
+                this.setStatus('Conteneur et widgets sauvegardés avec succès', 'success');
+                
+                // Sauvegarder aussi dans la liste des projets pour pouvoir recharger
+                const projectForList = {
+                    name: `Projet-${new Date().toISOString().split('T')[0]}`,
+                    timestamp: new Date().toISOString(),
+                    widgets: projectData.widgets,
+                    container: projectData.container,
+                    stats: projectData.stats
+                };
+                
+                this.savedProjects.unshift(projectForList);
+                if (this.savedProjects.length > 20) {
+                    this.savedProjects = this.savedProjects.slice(0, 20);
+                }
+                localStorage.setItem('widgetEditor_savedProjects', JSON.stringify(this.savedProjects));
+                
+                // Rafraîchir la liste des projets sauvegardés
+                this.loadSavedProjects();
+            }
+            
+            // Calculer les statistiques des widgets par type
+            getWidgetStats() {
+                const stats = {};
+                this.widgets.forEach(widget => {
+                    const type = widget.type;
+                    stats[type] = (stats[type] || 0) + 1;
+                });
+                return stats;
+            }
+            
+            // Calculer l'utilisation de la grille
+            calculateGridUsage() {
+                let usedCells = 0;
+                const totalCells = 12 * 8; // 96 cellules totales
+                
+                this.widgets.forEach(widget => {
+                    const pos = widget.position || { col: 1, row: 1 };
+                    const size = widget.size || { width: 3, height: 2 };
+                    usedCells += size.width * size.height;
+                });
+                
+                return {
+                    used: usedCells,
+                    total: totalCells,
+                    percentage: Math.round((usedCells / totalCells) * 100)
+                };
+            }
+            
+            // ============= NOUVELLES MÉTHODES DOSSIERS ET RECHERCHE =============
+            
+            // Sélection d'un dossier
+            selectFolder(folderId) {
+                // Mettre à jour l'UI
+                document.querySelectorAll('.folder-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelector(`[data-folder="${folderId}"]`)?.classList.add('active');
+                
+                this.currentFolder = folderId;
+                this.renderCurrentFolder();
+                this.setStatus(`Dossier "${this.folders[folderId]?.name || folderId}" sélectionné`, 'info');
+            }
+            
+            // Gestion des favoris
+            toggleFavorite(widgetId) {
+                if (this.favoriteWidgets.has(widgetId)) {
+                    this.favoriteWidgets.delete(widgetId);
+                } else {
+                    this.favoriteWidgets.add(widgetId);
+                }
+                
+                this.saveLocalData();
+                this.updateFolderStructure();
+                
+                // Re-rendre si on est dans les favoris
+                if (this.currentFolder === 'favorites') {
+                    this.renderCurrentFolder();
+                }
+                
+                // Rafraîchir les résultats de recherche si actifs
+                if (this.searchTerm) {
+                    this.renderSearchResults();
+                } else {
+                    this.renderCurrentFolder();
+                }
+            }
+            
+            // Ajouter aux récents
+            addToRecent(widgetId) {
+                this.recentWidgets.delete(widgetId); // Supprimer s'il existe déjà
+                this.recentWidgets.add(widgetId); // Ajouter en premier
+                
+                // Garder seulement les 10 plus récents
+                if (this.recentWidgets.size > 10) {
+                    const items = Array.from(this.recentWidgets);
+                    this.recentWidgets = new Set(items.slice(-10));
+                }
+                
+                this.saveLocalData();
+                this.updateFolderStructure();
+            }
+            
+            // Créer un nouveau dossier
+            createNewFolder() {
+                const name = prompt('Nom du nouveau dossier :');
+                if (!name || name.trim() === '') return;
+                
+                const folderId = 'custom_' + Date.now();
+                this.folders[folderId] = {
+                    name: name.trim(),
+                    widgets: [],
+                    type: 'custom'
+                };
+                
+                this.saveLocalData();
+                this.renderCustomFolders();
+                this.selectFolder(folderId);
+                
+                this.setStatus(`Dossier "${name}" créé`, 'success');
+            }
+            
+            // Rendu des dossiers personnalisés
+            renderCustomFolders() {
+                const container = document.getElementById('customFolders');
+                const customFolders = Object.entries(this.folders).filter(([id, folder]) => folder.type === 'custom');
+                
+                container.innerHTML = '';
+                
+                customFolders.forEach(([id, folder]) => {
+                    const folderItem = document.createElement('div');
+                    folderItem.className = 'folder-item';
+                    folderItem.dataset.folder = id;
+                    folderItem.innerHTML = `
+                        <i class="fas fa-folder folder-icon"></i>
+                        <span class="folder-name">${folder.name}</span>
+                        <span class="folder-count">${folder.widgets.length}</span>
+                        <div class="folder-controls">
+                            <button class="folder-control-btn" onclick="widgetEditor.renameFol
+
+Folder('${id}')" title="Renommer">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="folder-control-btn" onclick="widgetEditor.deleteFolder('${id}')" title="Supprimer">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(folderItem);
+                });
+            }
+            
+            // Renommer un dossier
+            renameFolder(folderId) {
+                const folder = this.folders[folderId];
+                if (!folder || folder.type !== 'custom') return;
+                
+                const newName = prompt('Nouveau nom :', folder.name);
+                if (!newName || newName.trim() === '' || newName.trim() === folder.name) return;
+                
+                folder.name = newName.trim();
+                this.saveLocalData();
+                this.renderCustomFolders();
+                
+                this.setStatus(`Dossier renommé en "${newName}"`, 'success');
+            }
+            
+            // Supprimer un dossier
+            deleteFolder(folderId) {
+                const folder = this.folders[folderId];
+                if (!folder || folder.type !== 'custom') return;
+                
+                if (!confirm(`Supprimer le dossier "${folder.name}" ?\nLes widgets ne seront pas supprimés.`)) return;
+                
+                delete this.folders[folderId];
+                this.saveLocalData();
+                this.renderCustomFolders();
+                
+                // Retourner à "Tous les widgets" si on était dans ce dossier
+                if (this.currentFolder === folderId) {
+                    this.selectFolder('root');
+                }
+                
+                this.setStatus(`Dossier "${folder.name}" supprimé`, 'success');
+            }
+            
+            // Charger les projets sauvegardés
+            loadSavedProjects() {
+                // Simuler quelques projets sauvegardés
+                this.savedProjects = JSON.parse(localStorage.getItem('widgetEditor_savedProjects') || '[]');
+                
+                const savesContainer = document.getElementById('savesList');
+                const savesCount = document.getElementById('savesCount');
+                
+                savesCount.textContent = this.savedProjects.length;
+                savesContainer.innerHTML = '';
+                
+                if (this.savedProjects.length === 0) {
+                    savesContainer.innerHTML = `
+                        <div style="padding: 1rem; color: var(--text-muted); font-size: 0.8rem; text-align: center;">
+                            Aucun projet sauvegardé
+                        </div>
+                    `;
+                    return;
+                }
+                
+                this.savedProjects.forEach(project => {
+                    const saveItem = document.createElement('div');
+                    saveItem.className = 'save-item';
+                    saveItem.innerHTML = `
+                        <i class="fas fa-file-code save-icon"></i>
+                        <div class="save-name">${project.name || 'Projet sans nom'}</div>
+                        <div class="save-date">${new Date(project.timestamp).toLocaleDateString()}</div>
+                    `;
+                    
+                    saveItem.addEventListener('click', () => this.loadProject(project));
+                    savesContainer.appendChild(saveItem);
+                });
+            }
+            
+            // Charger les données locales
+            loadLocalData() {
+                const data = JSON.parse(localStorage.getItem('widgetEditor_userData') || '{}');
+                this.favoriteWidgets = new Set(data.favorites || []);
+                this.recentWidgets = new Set(data.recent || []);
+                this.folders = { ...this.folders, ...(data.customFolders || {}) };
+                
+                this.renderCustomFolders();
+            }
+            
+            // Sauvegarder les données locales
+            saveLocalData() {
+                const data = {
+                    favorites: Array.from(this.favoriteWidgets),
+                    recent: Array.from(this.recentWidgets),
+                    customFolders: Object.fromEntries(
+                        Object.entries(this.folders).filter(([id, folder]) => folder.type === 'custom')
+                    )
+                };
+                localStorage.setItem('widgetEditor_userData', JSON.stringify(data));
+            }
+            
+            // Charger un projet
+            loadProject(project) {
+                if (!confirm(`Charger le projet "${project.name}" ?\nLe projet actuel sera perdu.`)) return;
+                
+                try {
+                    // Réinitialiser l'éditeur
+                    this.widgets = [];
+                    this.selectedWidget = null;
+                    
+                    // Charger les widgets
+                    if (project.widgets && Array.isArray(project.widgets)) {
+                        project.widgets.forEach(widgetData => {
+                            const WidgetClass = this.availableWidgets.find(w => w.id === widgetData.type);
+                            if (WidgetClass) {
+                                const widget = {
+                                    id: widgetData.id || this.generateId(),
+                                    type: widgetData.type,
+                                    data: widgetData.data || {},
+                                    position: widgetData.position || { col: 1, row: 1 },
+                                    size: widgetData.size || { width: 3, height: 2 },
+                                    instance: new WidgetClass()
+                                };
+                                this.widgets.push(widget);
+                            }
+                        });
+                    }
+                    
+                    // Charger le conteneur si présent
+                    if (project.container && project.container.enabled) {
+                        this.createBackgroundContainer();
+                    }
+                    
+                    // Mettre à jour l'interface
+                    this.renderCanvas();
+                    this.updatePreview();
+                    this.updateOrganizationButtons();
+                    
+                    this.setStatus(`Projet "${project.name}" chargé`, 'success');
+                } catch (error) {
+                    this.setStatus('Erreur lors du chargement du projet', 'error');
+                    console.error('Erreur chargement projet:', error);
+                }
             }
 
             exportProject() {
@@ -3031,17 +3786,137 @@
             }
             
             // Configuration du drag & drop
+            // Fonction de drag & drop fonctionnelle avec sauvegarde de position
             setupDragDrop(container, widget) {
-                container.draggable = true;
+                let isDragging = false;
+                let startX, startY;
+                let originalPosition = { ...widget.position } || { col: 1, row: 1 };
                 
-                container.addEventListener('dragstart', (e) => {
+                const onMouseDown = (e) => {
+                    // Ignorer les clics sur les boutons
+                    if (e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('.widget-container-header')) {
+                        return;
+                    }
+                    
+                    isDragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    originalPosition = { ...widget.position } || { col: 1, row: 1 };
+                    
                     container.classList.add('dragging');
-                    e.dataTransfer.setData('text/plain', widget.id);
-                });
+                    container.style.opacity = '0.8';
+                    container.style.zIndex = '1000';
+                    
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                };
                 
-                container.addEventListener('dragend', (e) => {
+                const onMouseMove = (e) => {
+                    if (!isDragging) return;
+                    
+                    const workspace = document.getElementById('canvasWorkspace');
+                    if (!workspace) return;
+                    
+                    const rect = workspace.getBoundingClientRect();
+                    const padding = 32; // Padding de la grille
+                    
+                    // Dimensions réelles de la grille utilisable
+                    const gridWidth = rect.width - (padding * 2);
+                    const gridHeight = rect.height - (padding * 2);
+                    
+                    // Taille d'une cellule (en tenant compte du gap de 8px)
+                    const cellWidth = (gridWidth - (11 * 8)) / 12; // 11 gaps entre 12 colonnes
+                    const cellHeight = (gridHeight - (7 * 8)) / 8;   // 7 gaps entre 8 rangées
+                    
+                    // Calcul du déplacement
+                    const deltaX = e.clientX - startX;
+                    const deltaY = e.clientY - startY;
+                    
+                    // Conversion en déplacement de grille
+                    const deltaCol = Math.round(deltaX / (cellWidth + 8)); // +8 pour le gap
+                    const deltaRow = Math.round(deltaY / (cellHeight + 8)); // +8 pour le gap
+                    
+                    // Nouvelle position avec contraintes
+                    const size = widget.size || { width: 3, height: 2 };
+                    let newCol = Math.max(1, Math.min(12 - size.width + 1, originalPosition.col + deltaCol));
+                    let newRow = Math.max(1, Math.min(8 - size.height + 1, originalPosition.row + deltaRow));
+                    
+                    // Mise à jour visuelle temporaire
+                    container.style.gridColumnStart = newCol;
+                    container.style.gridColumnEnd = newCol + size.width;
+                    container.style.gridRowStart = newRow;
+                    container.style.gridRowEnd = newRow + size.height;
+                };
+                
+                const onMouseUp = (e) => {
+                    if (!isDragging) return;
+                    
+                    isDragging = false;
                     container.classList.remove('dragging');
-                });
+                    container.style.opacity = '';
+                    container.style.zIndex = '10';
+                    
+                    // Calculer la position finale définitive
+                    const workspace = document.getElementById('canvasWorkspace');
+                    if (!workspace) return;
+                    
+                    const rect = workspace.getBoundingClientRect();
+                    const padding = 32;
+                    const gridWidth = rect.width - (padding * 2);
+                    const gridHeight = rect.height - (padding * 2);
+                    const cellWidth = (gridWidth - (11 * 8)) / 12;
+                    const cellHeight = (gridHeight - (7 * 8)) / 8;
+                    
+                    const deltaX = e.clientX - startX;
+                    const deltaY = e.clientY - startY;
+                    const deltaCol = Math.round(deltaX / (cellWidth + 8));
+                    const deltaRow = Math.round(deltaY / (cellHeight + 8));
+                    
+                    const size = widget.size || { width: 3, height: 2 };
+                    let newCol = Math.max(1, Math.min(12 - size.width + 1, originalPosition.col + deltaCol));
+                    let newRow = Math.max(1, Math.min(8 - size.height + 1, originalPosition.row + deltaRow));
+                    
+                    // CRUCIAL: Sauvegarder définitivement la nouvelle position
+                    widget.position = { col: newCol, row: newRow };
+                    
+                    // Appliquer la position finale CSS
+                    container.style.gridColumnStart = newCol;
+                    container.style.gridColumnEnd = newCol + size.width;
+                    container.style.gridRowStart = newRow;
+                    container.style.gridRowEnd = newRow + size.height;
+                    
+                    // Synchroniser avec le widget sélectionné si c'est le cas
+                    if (this.selectedWidget && this.selectedWidget.id === widget.id) {
+                        this.selectedWidget.position = { col: newCol, row: newRow };
+                        
+                        // Mettre à jour les sliders de position dans l'onglet Organisation
+                        const colSlider = document.getElementById('positionColSlider');
+                        const rowSlider = document.getElementById('positionRowSlider');
+                        if (colSlider) colSlider.value = newCol;
+                        if (rowSlider) rowSlider.value = newRow;
+                        
+                        this.updateOrganizationButtons();
+                    }
+                    
+                    // Mettre à jour l'aperçu
+                    this.updatePreview();
+                    
+                    // Mettre à jour le conteneur arrière-plan si activé
+                    this.updateBackgroundContainer();
+                    
+                    // Message de confirmation
+                    this.setStatus(`Widget repositionné: colonne ${newCol}, rangée ${newRow}`, 'success');
+                    
+                    // Nettoyer les événements
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                };
+                
+                // Attacher l'événement mousedown
+                container.addEventListener('mousedown', onMouseDown);
             }
             
             // Configuration du redimensionnement
@@ -3398,6 +4273,94 @@
                 if (field === 'title') {
                     this.setStatus(`Titre mis à jour: ${value}`, 'info');
                 }
+            }
+
+            // Fonction toggle conteneur arrière-plan global adaptatif
+            toggleBackground() {
+                const workspace = document.getElementById('canvasWorkspace');
+                const backgroundButton = document.getElementById('backgroundToggleBtn');
+                
+                if (!workspace) return;
+                
+                let container = workspace.querySelector('.global-background-container');
+                const isActive = container !== null;
+                
+                if (isActive) {
+                    // Désactiver le conteneur
+                    if (container) {
+                        container.remove();
+                    }
+                    
+                    if (backgroundButton) {
+                        backgroundButton.classList.remove('btn-primary');
+                        backgroundButton.innerHTML = '<i class="fas fa-square"></i> Conteneur';
+                        backgroundButton.style.background = '';
+                        backgroundButton.style.borderColor = '';
+                    }
+                    
+                    this.setStatus('Conteneur arrière-plan désactivé', 'info');
+                } else {
+                    // Activer le conteneur
+                    container = document.createElement('div');
+                    container.className = 'global-background-container active';
+                    workspace.appendChild(container);
+                    
+                    if (backgroundButton) {
+                        backgroundButton.classList.add('btn-primary');
+                        backgroundButton.innerHTML = '<i class="fas fa-square"></i> Masquer Conteneur';
+                        backgroundButton.style.background = 'var(--accent-green)';
+                        backgroundButton.style.borderColor = 'var(--accent-green)';
+                    }
+                    
+                    // Calculer et appliquer les dimensions
+                    this.updateBackgroundContainer();
+                    
+                    this.setStatus('Conteneur arrière-plan adaptatif activé', 'success');
+                }
+            }
+            
+            // Mettre à jour le conteneur arrière-plan pour qu'il englobe tous les widgets
+            updateBackgroundContainer() {
+                const workspace = document.getElementById('canvasWorkspace');
+                const container = workspace?.querySelector('.global-background-container');
+                
+                if (!container || this.widgets.length === 0) return;
+                
+                // Calculer les dimensions englobantes de tous les widgets
+                let minCol = 12, maxCol = 1, minRow = 8, maxRow = 1;
+                
+                this.widgets.forEach(widget => {
+                    const pos = widget.position || { col: 1, row: 1 };
+                    const size = widget.size || { width: 3, height: 2 };
+                    
+                    minCol = Math.min(minCol, pos.col);
+                    maxCol = Math.max(maxCol, pos.col + size.width - 1);
+                    minRow = Math.min(minRow, pos.row);
+                    maxRow = Math.max(maxRow, pos.row + size.height - 1);
+                });
+                
+                // Ajouter une marge de padding autour des widgets
+                const padding = 1;
+                minCol = Math.max(1, minCol - padding);
+                maxCol = Math.min(12, maxCol + padding);
+                minRow = Math.max(1, minRow - padding);
+                maxRow = Math.min(8, maxRow + padding);
+                
+                // Appliquer les dimensions CSS Grid au conteneur
+                container.style.gridColumnStart = minCol;
+                container.style.gridColumnEnd = maxCol + 1;
+                container.style.gridRowStart = minRow;
+                container.style.gridRowEnd = maxRow + 1;
+                
+                // Ajouter du contenu visuel au conteneur
+                container.innerHTML = `
+                    <div style="position: absolute; top: 8px; left: 12px; 
+                                background: rgba(16, 185, 129, 0.8); color: white; 
+                                padding: 4px 8px; border-radius: 4px; font-size: 10px; 
+                                font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Conteneur Global (${maxCol - minCol + 1}×${maxRow - minRow + 1})
+                    </div>
+                `;
             }
 
             // Fonction toggle grille avec indicateur visuel
