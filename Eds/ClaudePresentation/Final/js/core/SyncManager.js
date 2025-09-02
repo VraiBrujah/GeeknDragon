@@ -7,8 +7,22 @@
  * Type : Service de communication - WebSocket/PostMessage
  */
 
-class SyncManager {
-    constructor() {
+// Namespace global
+window.WidgetEditor = window.WidgetEditor || {};
+
+/**
+ * Classe Sync - Synchronisation temps réel editor/viewer
+ * Fonctionnalités : PostMessage, WebSocket, communication inter-fenêtres
+ */
+window.WidgetEditor.Sync = class Sync {
+    /**
+     * Constructeur du système de synchronisation
+     * @param {Editor} editor - Instance éditeur parent
+     */
+    constructor(editor) {
+        // Référence éditeur parent
+        this.editor = editor;
+        
         // 
         // Rôle : État de connexion avec le viewer
         // Type : boolean (état binaire)
@@ -17,7 +31,7 @@ class SyncManager {
         // Exemple : false
         this.isConnected = false;
 
-        console.log('SyncManager initialisé');
+        console.log('🔄 Sync: Système de synchronisation créé');
     }
 
     /**

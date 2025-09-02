@@ -1655,5 +1655,12 @@
     
     <!-- Récepteur de Synchronisation Instantanée Li-CUBE PRO™ -->
     <script src="js/presentation-receiver.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.presentationReceiver = new PresentationReceiver('location');
+            console.log('📡 PresentationReceiver activé');
+        });
+    </script>
 </body>
 </html>

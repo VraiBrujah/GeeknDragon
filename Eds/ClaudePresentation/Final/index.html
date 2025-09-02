@@ -424,6 +424,7 @@
     <script src="js/core/Grid.js"></script>
     <script src="js/core/DragDrop.js"></script>
     <script src="js/core/Persistence.js"></script>
+    <script src="js/core/SyncManager.js"></script>
     
     <!-- 4. Editor principal en dernier -->
     <script src="js/core/Editor.js"></script>
@@ -442,7 +443,8 @@
                 window.WidgetEditor.WidgetCanvas &&
                 window.WidgetEditor.Grid &&
                 window.WidgetEditor.DragDrop &&
-                window.WidgetEditor.Persistence) {
+                window.WidgetEditor.Persistence &&
+                window.WidgetEditor.Sync) {
                 modulesLoaded = true;
                 if (domReady) initializeEditor();
             } else {

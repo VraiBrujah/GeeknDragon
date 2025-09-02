@@ -179,8 +179,8 @@ window.WidgetEditor.Editor = class Editor {
             // Module Sync - Synchronisation temps réel
             this.state.sync = new window.WidgetEditor.Sync(this);
             
-            // Module Viewer - Génération HTML standalone
-            this.state.viewer = new window.WidgetEditor.Viewer(this);
+            // Module Viewer - Génération HTML standalone (TODO: Créer module)
+            // this.state.viewer = new window.WidgetEditor.Viewer(this);
             
             // Initialisation séquentielle des modules
             await this.state.grid.init();
