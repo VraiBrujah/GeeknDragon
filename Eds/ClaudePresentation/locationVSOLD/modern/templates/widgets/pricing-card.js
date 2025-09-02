@@ -182,6 +182,10 @@ class PricingCardWidget {
                 margin-bottom: var(--spacing-lg);
             }
 
+            .pricing-price-hover {
+                transform: scale(1.05);
+                transition: transform 0.3s ease;
+            }
             .pricing-currency {
                 font-size: var(--text-2xl);
                 font-weight: var(--font-semibold);
@@ -363,12 +367,11 @@ class PricingCardWidget {
         const priceElement = element.querySelector('.pricing-price');
         if (priceElement) {
             priceElement.addEventListener('mouseenter', () => {
-                priceElement.style.transform = 'scale(1.05)';
-                priceElement.style.transition = 'transform 0.3s ease';
+                priceElement.classList.add('pricing-price-hover');
             });
 
             priceElement.addEventListener('mouseleave', () => {
-                priceElement.style.transform = 'scale(1)';
+                priceElement.classList.remove('pricing-price-hover');
             });
         }
 

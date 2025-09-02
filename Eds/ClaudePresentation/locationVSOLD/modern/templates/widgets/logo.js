@@ -203,30 +203,39 @@ class LogoWidget {
         });
         console.log(`📋 Données complètes du logo:`, d);
         
+        const uniqueClass = `logo-instance-${Math.random().toString(36).substring(2, 9)}`;
+        const styleTag = `
+.${uniqueClass} {
+    text-align: ${d.containerAlignment};
+    padding-top: ${d.containerPaddingY}px;
+    padding-bottom: ${d.containerPaddingY}px;
+    padding-left: ${d.containerPaddingX}px;
+    padding-right: ${d.containerPaddingX}px;
+    height: 100%;
+}
+.${uniqueClass} .logo-link {
+    width: ${d.width}px;
+    height: ${d.height}px;
+    border-radius: ${d.borderRadius}px;
+    background: ${backgroundStyle};
+    border: ${borderStyle};
+    background-image: url('${d.imagePath}');
+    background-size: ${d.imageSize}%;
+    background-repeat: no-repeat;
+    background-position: ${d.imagePosition};
+    object-fit: ${d.imageFit};
+    box-shadow: ${shadowStyle};
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+`;
+
         return `
-            <div class="logo-container" style="text-align: ${d.containerAlignment}; 
-                                               padding-top: ${d.containerPaddingY}px;
-                                               padding-bottom: ${d.containerPaddingY}px;
-                                               padding-left: ${d.containerPaddingX}px;
-                                               padding-right: ${d.containerPaddingX}px; 
-                                               height: 100%;">
-                <a href="${d.link}" 
-                   class="nav-logo logo-image ${d.hoverEffect ? 'hover-effect' : ''}"
-                   style="display: inline-block; 
-                          width: ${d.width}px; 
-                          height: ${d.height}px; 
-                          border-radius: ${d.borderRadius}px; 
-                          background: ${backgroundStyle};
-                          border: ${borderStyle};
-                          background-image: url('${d.imagePath}');
-                          background-size: ${d.imageSize}%; 
-                          background-repeat: no-repeat; 
-                          background-position: ${d.imagePosition};
-                          object-fit: ${d.imageFit};
-                          box-shadow: ${shadowStyle};
-                          transition: all 0.3s ease;
-                          text-decoration: none;">
-                    <span style="position: absolute; width: 1px; height: 1px; overflow: hidden;">
+            <style>${styleTag}</style>
+            <div class="logo-container ${uniqueClass}">
+                <a href="${d.link}"
+                   class="nav-logo logo-image ${d.hoverEffect ? 'hover-effect' : ''} logo-link">
+                    <span class="sr-only">
                         ${d.altText}
                     </span>
                 </a>
