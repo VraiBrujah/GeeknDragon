@@ -634,6 +634,42 @@
             align-items: center;
             justify-content: space-between;
             flex-shrink: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        /* Boutons d'ajustement de grille modernes */
+        .btn-grid-adjust {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            border-radius: 4px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            padding: 0;
+            font-size: 10px;
+        }
+        
+        .btn-grid-adjust:hover {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            transform: scale(1.1);
+        }
+        
+        .btn-grid-adjust:active {
+            transform: scale(0.95);
+        }
+        
+        .grid-control-group {
+            padding: 4px 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .canvas-workspace {
@@ -643,28 +679,29 @@
             color: var(--text-white);
             position: relative;
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: repeat(8, minmax(100px, 1fr));
+            grid-template-columns: repeat(var(--grid-columns, 12), 1fr);
+            grid-template-rows: repeat(var(--grid-rows, 8), minmax(80px, auto));
             gap: 8px;
-            grid-auto-rows: minmax(100px, auto);
+            grid-auto-rows: minmax(80px, auto);
+            align-content: start;
         }
         
-        /* Grille visible - lignes de la grille CSS */
+        /* Grille visible - lignes de la grille CSS dynamiques */
         .canvas-workspace.show-grid {
             background-image: 
                 repeating-linear-gradient(
                     90deg,
                     transparent,
-                    transparent calc(100% / 12 - 1px),
-                    rgba(16, 185, 129, 0.3) calc(100% / 12 - 1px),
-                    rgba(16, 185, 129, 0.3) calc(100% / 12)
+                    transparent calc(100% / var(--grid-columns, 12) - 1px),
+                    rgba(16, 185, 129, 0.3) calc(100% / var(--grid-columns, 12) - 1px),
+                    rgba(16, 185, 129, 0.3) calc(100% / var(--grid-columns, 12))
                 ),
                 repeating-linear-gradient(
                     0deg,
                     transparent,
-                    transparent calc(100px - 1px),
-                    rgba(16, 185, 129, 0.3) calc(100px - 1px),
-                    rgba(16, 185, 129, 0.3) 100px
+                    transparent calc(80px - 1px),
+                    rgba(16, 185, 129, 0.3) calc(80px - 1px),
+                    rgba(16, 185, 129, 0.3) 80px
                 );
         }
         
@@ -680,7 +717,7 @@
             background-image: 
                 linear-gradient(rgba(16, 185, 129, 0.2) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(16, 185, 129, 0.2) 1px, transparent 1px);
-            background-size: calc(100% / 12) 100px;
+            background-size: calc(100% / var(--grid-columns, 12)) 80px;
             z-index: 1;
         }
 
@@ -1813,6 +1850,38 @@
                         <i class="fas fa-square"></i>
                         Conteneur
                     </button>
+                    
+                    <!-- Contrôles de grille modernes -->
+                    <div class="grid-controls" style="display: flex; align-items: center; gap: 8px; margin-left: 16px; padding-left: 16px; border-left: 1px solid var(--border-color);">
+                        <!-- Colonnes -->
+                        <div class="grid-control-group" style="display: flex; align-items: center; gap: 6px;">
+                            <i class="fas fa-columns" style="color: var(--text-gray); font-size: 0.9rem;"></i>
+                            <button class="btn-grid-adjust" onclick="widgetEditor.adjustGridColumns(-1)" title="Réduire colonnes">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span id="gridColumnsValue" style="color: var(--text-white); font-weight: 500; min-width: 20px; text-align: center;">12</span>
+                            <button class="btn-grid-adjust" onclick="widgetEditor.adjustGridColumns(1)" title="Ajouter colonnes">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Lignes -->
+                        <div class="grid-control-group" style="display: flex; align-items: center; gap: 6px;">
+                            <i class="fas fa-bars" style="color: var(--text-gray); font-size: 0.9rem; transform: rotate(90deg);"></i>
+                            <button class="btn-grid-adjust" onclick="widgetEditor.adjustGridRows(-1)" title="Réduire lignes">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span id="gridRowsValue" style="color: var(--text-white); font-weight: 500; min-width: 20px; text-align: center;">8</span>
+                            <button class="btn-grid-adjust" onclick="widgetEditor.adjustGridRows(1)" title="Ajouter lignes">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Reset grille -->
+                        <button class="btn btn-sm" onclick="widgetEditor.resetGrid()" title="Réinitialiser grille (12x8)">
+                            <i class="fas fa-undo"></i>
+                        </button>
+                    </div>
                 </div>
                 
                 <div class="canvas-info">
@@ -5390,7 +5459,7 @@
                 const styleRules = [];
                 
                 // Style de base par défaut
-                styleRules.push('padding: 80px 20px');
+                styleRules.push('padding: 40px 20px');
                 
                 // Arrière-plan
                 if (data.hasBackground) {
@@ -5644,6 +5713,10 @@
                 this.widgets = [];
                 this.selectedWidget = null;
                 
+                // Configuration de grille éditable
+                this.gridColumns = 12;  // Nombre de colonnes par défaut
+                this.gridRows = 8;      // Nombre de lignes par défaut
+                
                 // Widgets disponibles (classes de base + widgets personnalisés)
                 this.baseWidgets = [
                     TextSimpleWidget,
@@ -5694,6 +5767,9 @@
                 
                 // Initialiser l'indicateur de largeur du panneau
                 this.updateWidthIndicator();
+                
+                // Initialiser la grille avec les valeurs par défaut
+                this.updateGridLayout();
                 
                 this.setStatus('Éditeur prêt', 'success');
             }
@@ -11306,6 +11382,143 @@ Folder('${id}')" title="Renommer">
                         'Grille masquée - Mode édition normal';
                     
                     this.setStatus(statusMessage, 'info');
+                }
+            }
+
+            // ========================================
+            // SYSTÈME DE GRILLE ÉDITABLE EN TEMPS RÉEL
+            // ========================================
+
+            /**
+             * Rôle      : Ajuste le nombre de colonnes de la grille
+             * Type      : méthode (paramètre: number)
+             * Unité     : nombre entier (colonnes)
+             * Domaine   : delta entre -1 et +1 (ajustement incrémental)
+             * Formule   : nouvelles_colonnes = colonnes_actuelles + delta
+             * Exemple   : adjustGridColumns(1) pour ajouter une colonne
+             */
+            adjustGridColumns(delta) {
+                // Rôle      : Nombre de colonnes actuel
+                // Type      : number (entier)
+                // Unité     : colonnes
+                // Domaine   : 6 ≤ colonnes ≤ 24
+                // Formule   : this.gridColumns = Math.max(6, Math.min(24, current + delta))
+                // Exemple   : 12
+                const currentColumns = this.gridColumns || 12;
+                const newColumns = Math.max(6, Math.min(24, currentColumns + delta));
+                
+                if (newColumns !== currentColumns) {
+                    this.gridColumns = newColumns;
+                    this.updateGridLayout();
+                    
+                    // Message de statut informatif
+                    this.setStatus(`Grille ajustée : ${newColumns} colonnes`, 'success');
+                }
+            }
+
+            /**
+             * Rôle      : Ajuste le nombre de lignes de la grille
+             * Type      : méthode (paramètre: number)
+             * Unité     : nombre entier (lignes)
+             * Domaine   : delta entre -1 et +1 (ajustement incrémental)  
+             * Formule   : nouvelles_lignes = lignes_actuelles + delta
+             * Exemple   : adjustGridRows(1) pour ajouter une ligne
+             */
+            adjustGridRows(delta) {
+                // Rôle      : Nombre de lignes actuel
+                // Type      : number (entier)
+                // Unité     : lignes
+                // Domaine   : 4 ≤ lignes ≤ 20
+                // Formule   : this.gridRows = Math.max(4, Math.min(20, current + delta))
+                // Exemple   : 8
+                const currentRows = this.gridRows || 8;
+                const newRows = Math.max(4, Math.min(20, currentRows + delta));
+                
+                if (newRows !== currentRows) {
+                    this.gridRows = newRows;
+                    this.updateGridLayout();
+                    
+                    // Message de statut informatif
+                    this.setStatus(`Grille ajustée : ${newRows} lignes`, 'success');
+                }
+            }
+
+            /**
+             * Rôle      : Remet la grille aux dimensions par défaut
+             * Type      : méthode (sans paramètres)
+             * Unité     : sans unité
+             * Domaine   : réinitialisation à 12 colonnes × 8 lignes
+             * Formule   : gridColumns = 12, gridRows = 8
+             * Exemple   : resetGrid() - remet la grille à 12×8
+             */
+            resetGrid() {
+                this.gridColumns = 12;
+                this.gridRows = 8;
+                this.updateGridLayout();
+                
+                this.setStatus('Grille réinitialisée : 12 colonnes × 8 lignes', 'info');
+            }
+
+            /**
+             * Rôle      : Met à jour l'affichage de la grille avec les nouvelles dimensions
+             * Type      : méthode privée (sans paramètres)
+             * Unité     : sans unité
+             * Domaine   : application des variables CSS et mise à jour de l'UI
+             * Formule   : --grid-columns = this.gridColumns, --grid-rows = this.gridRows
+             * Exemple   : updateGridLayout() - applique les changements visuels
+             */
+            updateGridLayout() {
+                // Rôle      : Espace de travail principal (grille)
+                // Type      : HTMLElement
+                // Unité     : sans unité
+                // Domaine   : élément DOM #canvasWorkspace
+                // Formule   : sélecteur getElementById
+                // Exemple   : <div id="canvasWorkspace" class="canvas-workspace">
+                const workspace = document.getElementById('canvasWorkspace');
+                
+                // Rôle      : Affichage des colonnes dans l'interface
+                // Type      : HTMLElement (span)
+                // Unité     : sans unité
+                // Domaine   : élément DOM #gridColumnsValue
+                // Formule   : textContent = this.gridColumns
+                // Exemple   : <span id="gridColumnsValue">12</span>
+                const columnsDisplay = document.getElementById('gridColumnsValue');
+                
+                // Rôle      : Affichage des lignes dans l'interface
+                // Type      : HTMLElement (span)
+                // Unité     : sans unité
+                // Domaine   : élément DOM #gridRowsValue
+                // Formule   : textContent = this.gridRows
+                // Exemple   : <span id="gridRowsValue">8</span>
+                const rowsDisplay = document.getElementById('gridRowsValue');
+                
+                if (workspace) {
+                    // Rôle      : Variables CSS pour dimensions de grille
+                    // Type      : CSS custom properties
+                    // Unité     : colonnes/lignes (entiers)
+                    // Domaine   : --grid-columns: 6-24, --grid-rows: 4-20
+                    // Formule   : setProperty(nom, valeur)
+                    // Exemple   : --grid-columns: 12, --grid-rows: 8
+                    workspace.style.setProperty('--grid-columns', this.gridColumns);
+                    workspace.style.setProperty('--grid-rows', this.gridRows);
+                }
+                
+                if (columnsDisplay) {
+                    columnsDisplay.textContent = this.gridColumns;
+                }
+                
+                if (rowsDisplay) {
+                    rowsDisplay.textContent = this.gridRows;
+                }
+                
+                // Rôle      : Forcer la reconstruction de la grille CSS
+                // Type      : méthode DOM
+                // Unité     : sans unité
+                // Domaine   : recalcul du layout CSS
+                // Formule   : offsetHeight déclenche un reflow
+                // Exemple   : workspace.offsetHeight - force le rendu
+                if (workspace) {
+                    workspace.offsetHeight; // Force reflow pour appliquer les changements
                 }
             }
             
