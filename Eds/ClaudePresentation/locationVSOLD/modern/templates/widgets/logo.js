@@ -8,6 +8,8 @@
  * Usage : Affichage de logos avec arrière-plans, bordures, ombres et effets hover
  */
 
+import { escapeHTML } from '../utils/sanitize.js';
+
 class LogoWidget {
     constructor() {
         this.id = 'logo';
@@ -203,31 +205,41 @@ class LogoWidget {
         });
         console.log(`📋 Données complètes du logo:`, d);
         
+        const containerAlignment = escapeHTML(d.containerAlignment);
+        const link = escapeHTML(d.link);
+        const safeBackground = escapeHTML(backgroundStyle);
+        const safeBorder = escapeHTML(borderStyle);
+        const imagePath = escapeHTML(d.imagePath);
+        const imagePosition = escapeHTML(d.imagePosition);
+        const imageFit = escapeHTML(d.imageFit);
+        const safeShadow = escapeHTML(shadowStyle);
+        const altText = escapeHTML(d.altText);
+
         return `
-            <div class="logo-container" style="text-align: ${d.containerAlignment}; 
+            <div class="logo-container" style="text-align: ${containerAlignment};
                                                padding-top: ${d.containerPaddingY}px;
                                                padding-bottom: ${d.containerPaddingY}px;
                                                padding-left: ${d.containerPaddingX}px;
-                                               padding-right: ${d.containerPaddingX}px; 
+                                               padding-right: ${d.containerPaddingX}px;
                                                height: 100%;">
-                <a href="${d.link}" 
+                <a href="${link}"
                    class="nav-logo logo-image ${d.hoverEffect ? 'hover-effect' : ''}"
-                   style="display: inline-block; 
-                          width: ${d.width}px; 
-                          height: ${d.height}px; 
-                          border-radius: ${d.borderRadius}px; 
-                          background: ${backgroundStyle};
-                          border: ${borderStyle};
-                          background-image: url('${d.imagePath}');
-                          background-size: ${d.imageSize}%; 
-                          background-repeat: no-repeat; 
-                          background-position: ${d.imagePosition};
-                          object-fit: ${d.imageFit};
-                          box-shadow: ${shadowStyle};
+                   style="display: inline-block;
+                          width: ${d.width}px;
+                          height: ${d.height}px;
+                          border-radius: ${d.borderRadius}px;
+                          background: ${safeBackground};
+                          border: ${safeBorder};
+                          background-image: url('${imagePath}');
+                          background-size: ${d.imageSize}%;
+                          background-repeat: no-repeat;
+                          background-position: ${imagePosition};
+                          object-fit: ${imageFit};
+                          box-shadow: ${safeShadow};
                           transition: all 0.3s ease;
                           text-decoration: none;">
                     <span style="position: absolute; width: 1px; height: 1px; overflow: hidden;">
-                        ${d.altText}
+                        ${altText}
                     </span>
                 </a>
             </div>
