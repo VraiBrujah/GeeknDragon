@@ -856,4 +856,5 @@ const widgetEditor = new WidgetEditor();
 // Exposition globale pour développement
 if (typeof window !== 'undefined') {
     window.widgetEditor = widgetEditor;
+    window.WidgetEditor = WidgetEditor;
 }
