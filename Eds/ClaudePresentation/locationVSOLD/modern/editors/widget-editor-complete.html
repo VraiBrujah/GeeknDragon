@@ -2165,6 +2165,11 @@
                     Aperçu Temps Réel
                 </div>
                 <div class="viewer-controls">
+                    <input type="text" id="viewerFilenameInput" placeholder="nom-du-viewer" 
+                           style="padding: 4px 8px; font-size: 12px; border: 1px solid var(--border-color); 
+                                  border-radius: 4px; background: var(--bg-card); color: var(--text-white); 
+                                  width: 140px; margin-right: 8px;"
+                           title="Nom du fichier viewer (sans .html)">
                     <button class="btn btn-sm" id="refreshPreviewBtn">
                         <i class="fas fa-sync"></i>
                         Actualiser
@@ -5768,6 +5773,9 @@
                 // Initialiser l'indicateur de largeur du panneau
                 this.updateWidthIndicator();
                 
+                // Initialiser le nom de fichier viewer sauvegardé
+                this.initializeViewerFilename();
+                
                 // Initialiser la grille avec les valeurs par défaut
                 this.updateGridLayout();
                 
@@ -5979,7 +5987,18 @@
                         this.restorePropertiesWidth(state.propertiesWidth);
                     }
                     
-                    // Restaurer les widgets
+                    // CRUCIAL: Restaurer les dimensions de la grille AVANT les widgets
+                    // sinon constrainWidgetToGrid() utilisera les valeurs par défaut 12x8
+                    if (state.gridColumns !== undefined) this.gridColumns = state.gridColumns;
+                    if (state.gridRows !== undefined) this.gridRows = state.gridRows;
+                    
+                    // Appliquer immédiatement les dimensions restaurées AVANT de restaurer les widgets
+                    if (state.gridColumns !== undefined || state.gridRows !== undefined) {
+                        this.updateGridLayout();
+                        console.log(`🔄 Grille restaurée AVANT widgets: ${this.gridColumns}×${this.gridRows}`);
+                    }
+                    
+                    // Restaurer les widgets APRÈS avoir restauré les dimensions de la grille
                     if (state.widgets && state.widgets.length > 0) {
                         this.widgets = [];
                         
@@ -6001,6 +6020,9 @@
                         // Re-rendre la grille avec les widgets restaurés
                         this.renderCanvas();
                         
+                        // S'assurer que les sliders ont les bonnes limites après restauration des widgets
+                        this.updateSliderLimits();
+                        
                         // Restaurer la sélection
                         if (state.selectedWidgetId) {
                             this.selectWidget(state.selectedWidgetId);
@@ -6020,16 +6042,6 @@
                     if (state.searchTerm) this.searchTerm = state.searchTerm;
                     if (state.favoriteWidgets) this.favoriteWidgets = new Set(state.favoriteWidgets);
                     if (state.recentWidgets) this.recentWidgets = new Set(state.recentWidgets);
-                    
-                    // Restaurer les dimensions de la grille personnalisée
-                    if (state.gridColumns !== undefined) this.gridColumns = state.gridColumns;
-                    if (state.gridRows !== undefined) this.gridRows = state.gridRows;
-                    
-                    // Appliquer immédiatement les dimensions restaurées
-                    if (state.gridColumns !== undefined || state.gridRows !== undefined) {
-                        this.updateGridLayout();
-                        console.log(`🔄 Grille restaurée: ${this.gridColumns}×${this.gridRows}`);
-                    }
                     
                 } catch (error) {
                     console.warn('Erreur lors de la restauration:', error);
@@ -9780,16 +9792,31 @@ Folder('${id}')" title="Renommer">
                     const exportBtn = document.createElement('button');
                     exportBtn.id = 'exportViewerBtn';
                     exportBtn.className = 'btn btn-sm';
-                    exportBtn.innerHTML = '<i class="fas fa-download"></i> Exporter Viewer';
-                    exportBtn.title = 'Exporter vers le dossier viewers pour présentation client';
+                    exportBtn.innerHTML = '<i class="fas fa-save"></i> Sauvegarder';
+                    exportBtn.title = 'Sauvegarder le viewer dans le dossier viewers';
                     exportBtn.addEventListener('click', () => this.exportToStaticViewer());
                     viewerControls.appendChild(exportBtn);
                 }
             }
 
-            // Exporter vers le viewer statique
+            // Sauvegarder le viewer directement dans le dossier viewers
             exportToStaticViewer() {
                 try {
+                    // Récupérer le nom de fichier depuis l'interface
+                    const filenameInput = document.getElementById('viewerFilenameInput');
+                    let filename = filenameInput ? filenameInput.value.trim() : '';
+                    
+                    // Valeur par défaut si le champ est vide
+                    if (!filename) {
+                        filename = 'presentation-client';
+                    }
+                    
+                    // S'assurer que le nom ne contient que des caractères valides
+                    filename = filename.replace(/[^a-zA-Z0-9\-_]/g, '-');
+                    
+                    // Ajouter l'extension .html
+                    const fullFilename = `${filename}.html`;
+                    
                     // Préparer les données des widgets
                     const widgetsData = this.widgets.map(widget => ({
                         type: widget.type,
@@ -9798,21 +9825,62 @@ Folder('${id}')" title="Renommer">
                         content: widget.instance.render(widget.data)
                     }));
 
-                    // Générer le nom de fichier avec timestamp
-                    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
-                    const filename = `presentation-client-${timestamp}.html`;
-
                     // Créer le contenu du viewer
                     const viewerHtml = this.generateViewerHtml(widgetsData);
 
-                    // Télécharger le fichier
-                    this.downloadFile(viewerHtml, filename);
+                    // Sauvegarder directement dans le dossier viewers
+                    this.saveViewerFile(viewerHtml, fullFilename);
 
-                    this.setStatus('Viewer exporté avec succès !', 'success');
+                    this.setStatus(`Viewer sauvegardé: ${fullFilename}`, 'success');
 
                 } catch (error) {
-                    console.error('Erreur lors de l\'export:', error);
-                    this.setStatus('Erreur lors de l\'export du viewer', 'error');
+                    console.error('Erreur lors de la sauvegarde:', error);
+                    this.setStatus('Erreur lors de la sauvegarde du viewer', 'error');
+                }
+            }
+
+            // Initialiser le champ de nom de fichier avec la valeur sauvegardée
+            initializeViewerFilename() {
+                const filenameInput = document.getElementById('viewerFilenameInput');
+                if (filenameInput) {
+                    // Restaurer le dernier nom de fichier utilisé
+                    const lastFilename = localStorage.getItem('lastViewerFilename');
+                    if (lastFilename) {
+                        filenameInput.value = lastFilename;
+                    } else {
+                        // Valeur par défaut basée sur la date
+                        const today = new Date().toISOString().slice(0, 10);
+                        filenameInput.value = `presentation-${today}`;
+                    }
+                }
+            }
+
+            // Sauvegarder le fichier viewer avec nom personnalisé
+            saveViewerFile(content, filename) {
+                try {
+                    // Sauvegarder le nom de fichier pour la prochaine fois
+                    localStorage.setItem('lastViewerFilename', filename.replace('.html', ''));
+                    
+                    // Créer et télécharger le fichier
+                    const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = URL.createObjectURL(blob);
+                    downloadLink.download = filename;
+                    
+                    // Téléchargement automatique
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                    URL.revokeObjectURL(downloadLink.href);
+                    
+                    console.log(`✅ Fichier téléchargé: ${filename}`);
+                    
+                    // Message avec instructions claires
+                    this.setStatus(`${filename} téléchargé ✅ - Copiez-le dans le dossier viewers`, 'success');
+                    
+                } catch (error) {
+                    console.error('Erreur lors de la sauvegarde:', error);
+                    this.setStatus('Erreur lors de la sauvegarde', 'error');
                 }
             }
 
