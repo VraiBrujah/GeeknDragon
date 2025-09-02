@@ -3798,6 +3798,473 @@
             }
         }
 
+        class TarifLocationWidget {
+            constructor() {
+                this.id = 'tarif-location';
+                this.name = 'Tarifs de Location';
+                this.category = 'Commerce';
+                this.icon = '💰';
+                this.description = 'Grille tarifaire 3 colonnes avec fonctionnalités par plan';
+                
+                this.defaultData = {
+                    // Titre principal
+                    title: 'TARIFS DE LOCATION TRANSPARENTS',
+                    titleSize: 32,
+                    titleColor: '#ffffff',
+                    titleAlignment: 'center',
+                    titleIsBold: true,
+                    titleIsItalic: false,
+                    titleHasBackground: false,
+                    titleBackgroundColor: '#10b981',
+                    titleBackgroundOpacity: 20,
+                    titleHasBorder: false,
+                    titleBorderColor: '#10b981',
+                    titleBorderWidth: 2,
+                    titleBorderStyle: 'solid',
+                    titleHasRoundedCorners: false,
+                    titleBorderRadius: 8,
+                    titlePaddingTop: 'small',
+                    titlePaddingBottom: 'large',
+                    titlePaddingLeft: 'medium',
+                    titlePaddingRight: 'medium',
+                    titleMarginBottom: 'large',
+                    
+                    // Sous-titre
+                    subtitle: 'Prix tout inclus, sans surprise. Plus vous louez longtemps, moins vous payez !',
+                    subtitleColor: '#9ca3af',
+                    subtitleSize: 18,
+                    
+                    // Colonne 1 : ESSAI 6 MOIS
+                    plan1Title: 'ESSAI 6 MOIS',
+                    plan1Price: '175',
+                    plan1Currency: '$',
+                    plan1Period: 'par mois',
+                    plan1TitleColor: '#fbbf24',
+                    plan1BackgroundColor: '#1f1f1f',
+                    plan1BorderColor: '#fbbf24',
+                    plan1Featured: false,
+                    plan1Badge: '',
+                    plan1CtaText: 'Commencer l\'essai',
+                    plan1CtaLink: '#essai',
+                    plan1Features: [
+                        { text: 'Installation gratuite', emoji: '🔧', color: '#ffffff' },
+                        { text: 'Maintenance incluse', emoji: '🛠️', color: '#ffffff' },
+                        { text: 'Support 8h-17h', emoji: '📞', color: '#ffffff' },
+                        { text: 'Monitoring de base', emoji: '📊', color: '#ffffff' }
+                    ],
+                    
+                    // Colonne 2 : STANDARD 2 ANS
+                    plan2Title: 'STANDARD 2 ANS',
+                    plan2Price: '150',
+                    plan2Currency: '$',
+                    plan2Period: 'par mois',
+                    plan2TitleColor: '#3b82f6',
+                    plan2BackgroundColor: '#1f1f1f',
+                    plan2BorderColor: '#3b82f6',
+                    plan2Featured: true,
+                    plan2Badge: 'POPULAIRE',
+                    plan2CtaText: 'Choisir Standard',
+                    plan2CtaLink: '#standard',
+                    plan2Features: [
+                        { text: 'Installation gratuite', emoji: '🔧', color: '#ffffff' },
+                        { text: 'Maintenance incluse', emoji: '🛠️', color: '#ffffff' },
+                        { text: 'Support 24/7', emoji: '📞', color: '#ffffff' },
+                        { text: 'Monitoring avancé IoT', emoji: '📡', color: '#ffffff' },
+                        { text: 'Remplacement immédiat', emoji: '⚡', color: '#ffffff' }
+                    ],
+                    
+                    // Colonne 3 : PREMIUM 5 ANS
+                    plan3Title: 'PREMIUM 5 ANS',
+                    plan3Price: '125',
+                    plan3Currency: '$',
+                    plan3Period: 'par mois',
+                    plan3TitleColor: '#10b981',
+                    plan3BackgroundColor: '#1f1f1f',
+                    plan3BorderColor: '#10b981',
+                    plan3Featured: false,
+                    plan3Badge: 'MEILLEURE VALEUR',
+                    plan3CtaText: 'Choisir Premium',
+                    plan3CtaLink: '#premium',
+                    plan3Features: [
+                        { text: 'Installation gratuite', emoji: '🔧', color: '#ffffff' },
+                        { text: 'Maintenance incluse', emoji: '🛠️', color: '#ffffff' },
+                        { text: 'Support premium 24/7', emoji: '👑', color: '#ffffff' },
+                        { text: 'Monitoring IA prédictif', emoji: '🤖', color: '#ffffff' },
+                        { text: 'Upgrade technologique inclus', emoji: '🚀', color: '#ffffff' },
+                        { text: 'Option d\'achat privilégiée', emoji: '🏆', color: '#ffffff' }
+                    ],
+                    
+                    // Section bonus/astuce
+                    bonusTitle: '💡 Astuce : Tarifs dégressifs pour multiple unités !',
+                    bonusDetails: '2-4 unités : -10% | 5-9 unités : -15% | 10+ unités : -20% | 20+ unités : sur devis personnalisé',
+                    bonusBackgroundColor: '#0f172a',
+                    bonusTitleColor: '#fbbf24'
+                };
+            }
+
+            // Méthodes de gestion dynamique des fonctionnalités - Plan 1
+            addPlan1Feature(newFeature) {
+                console.log('🚀 addPlan1Feature called with:', newFeature);
+                if (!newFeature || newFeature.trim() === '') return;
+                this.defaultData.plan1Features.push({ text: newFeature.trim(), emoji: '✅', color: '#ffffff' });
+                console.log('✅ Added plan1 feature:', newFeature.trim());
+            }
+            
+            removePlan1Feature(index) {
+                console.log('🗑️ removePlan1Feature called with index:', index);
+                if (index >= 0 && index < this.defaultData.plan1Features.length) {
+                    const removed = this.defaultData.plan1Features[index];
+                    this.defaultData.plan1Features.splice(index, 1);
+                    console.log('✅ Removed plan1 feature:', removed);
+                }
+            }
+
+            // Méthodes de gestion dynamique des fonctionnalités - Plan 2
+            addPlan2Feature(newFeature) {
+                console.log('🚀 addPlan2Feature called with:', newFeature);
+                if (!newFeature || newFeature.trim() === '') return;
+                this.defaultData.plan2Features.push({ text: newFeature.trim(), emoji: '✅', color: '#ffffff' });
+                console.log('✅ Added plan2 feature:', newFeature.trim());
+            }
+            
+            removePlan2Feature(index) {
+                console.log('🗑️ removePlan2Feature called with index:', index);
+                if (index >= 0 && index < this.defaultData.plan2Features.length) {
+                    const removed = this.defaultData.plan2Features[index];
+                    this.defaultData.plan2Features.splice(index, 1);
+                    console.log('✅ Removed plan2 feature:', removed);
+                }
+            }
+
+            // Méthodes de gestion dynamique des fonctionnalités - Plan 3
+            addPlan3Feature(newFeature) {
+                console.log('🚀 addPlan3Feature called with:', newFeature);
+                if (!newFeature || newFeature.trim() === '') return;
+                this.defaultData.plan3Features.push({ text: newFeature.trim(), emoji: '✅', color: '#ffffff' });
+                console.log('✅ Added plan3 feature:', newFeature.trim());
+            }
+            
+            removePlan3Feature(index) {
+                console.log('🗑️ removePlan3Feature called with index:', index);
+                if (index >= 0 && index < this.defaultData.plan3Features.length) {
+                    const removed = this.defaultData.plan3Features[index];
+                    this.defaultData.plan3Features.splice(index, 1);
+                    console.log('✅ Removed plan3 feature:', removed);
+                }
+            }
+
+            // Helper pour convertir les valeurs d'espacement en pixels
+            getSpacingValue(spacingType) {
+                const spacingMap = {
+                    'none': '0px',
+                    'small': '8px',
+                    'medium': '16px',
+                    'large': '32px'
+                };
+                return spacingMap[spacingType] || '16px';
+            }
+
+            // Génère les styles CSS pour le titre principal
+            generateTitleStyles(data) {
+                const styleRules = [];
+                
+                // Style de base
+                styleRules.push('text-align: ' + (data.titleAlignment || 'center'));
+                styleRules.push('font-size: ' + (data.titleSize || 32) + 'px');
+                styleRules.push('color: ' + (data.titleColor || '#ffffff'));
+                styleRules.push('font-weight: ' + (data.titleIsBold ? 'bold' : 'normal'));
+                styleRules.push('font-style: ' + (data.titleIsItalic ? 'italic' : 'normal'));
+                styleRules.push('line-height: 1.2');
+                
+                // Arrière-plan
+                if (data.titleHasBackground) {
+                    const opacity = (data.titleBackgroundOpacity || 20) / 100;
+                    const bgColor = data.titleBackgroundColor || '#10b981';
+                    const hex = bgColor.replace('#', '');
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    styleRules.push(`background-color: rgba(${r}, ${g}, ${b}, ${opacity})`);
+                }
+                
+                // Contour
+                if (data.titleHasBorder) {
+                    const borderWidth = data.titleBorderWidth || 2;
+                    const borderStyle = data.titleBorderStyle || 'solid';
+                    const borderColor = data.titleBorderColor || '#10b981';
+                    styleRules.push(`border: ${borderWidth}px ${borderStyle} ${borderColor}`);
+                }
+                
+                // Coins arrondis
+                if (data.titleHasRoundedCorners) {
+                    const borderRadius = data.titleBorderRadius || 8;
+                    styleRules.push(`border-radius: ${borderRadius}px`);
+                }
+                
+                // Espacement
+                const paddingTop = this.getSpacingValue(data.titlePaddingTop || 'small');
+                const paddingBottom = this.getSpacingValue(data.titlePaddingBottom || 'large');
+                const paddingLeft = this.getSpacingValue(data.titlePaddingLeft || 'medium');
+                const paddingRight = this.getSpacingValue(data.titlePaddingRight || 'medium');
+                styleRules.push(`padding: ${paddingTop} ${paddingRight} ${paddingBottom} ${paddingLeft}`);
+                
+                const marginBottom = this.getSpacingValue(data.titleMarginBottom || 'large');
+                styleRules.push(`margin-bottom: ${marginBottom}`);
+                
+                return styleRules.join('; ');
+            }
+
+            render(data = {}) {
+                const d = { ...this.defaultData, ...data };
+                
+                // Générer les styles du titre
+                const titleStyles = this.generateTitleStyles(d);
+                
+                // Créer les listes de fonctionnalités pour chaque plan
+                const renderFeatures = (features, planNumber) => {
+                    return features.map((item, index) => {
+                        const itemData = typeof item === 'string' ? { text: item, emoji: '✅', color: '#ffffff' } : item;
+                        const displayEmoji = itemData.emoji && itemData.emoji.trim() !== '' ? itemData.emoji : '✅';
+                        const textColor = itemData.color || '#ffffff';
+                        
+                        return `
+                            <div class="tarif-feature plan${planNumber}-feature" style="margin-bottom: 12px; padding: 8px; 
+                                                                                         background: rgba(255,255,255,0.05); 
+                                                                                         border-radius: 6px; display: flex; align-items: center; gap: 12px;">
+                                <div class="feature-emoji" style="font-size: 1.2rem; min-width: 20px; text-align: center;">${displayEmoji}</div>
+                                <div class="feature-text" style="color: ${textColor}; font-size: 0.9rem; line-height: 1.3; flex: 1;">
+                                    ${itemData.text}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                };
+
+                const plan1FeaturesHtml = renderFeatures(d.plan1Features, 1);
+                const plan2FeaturesHtml = renderFeatures(d.plan2Features, 2);
+                const plan3FeaturesHtml = renderFeatures(d.plan3Features, 3);
+
+                return `
+                    <div class="tarif-location-widget" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
+                        <!-- Titre principal -->
+                        <h2 class="tarif-title" style="${titleStyles}">
+                            ${d.title}
+                        </h2>
+                        
+                        <!-- Sous-titre -->
+                        <p style="text-align: center; font-size: ${d.subtitleSize || 18}px; color: ${d.subtitleColor || '#9ca3af'}; 
+                                  margin-bottom: 40px; line-height: 1.6; max-width: 800px; margin-left: auto; margin-right: auto;">
+                            ${d.subtitle}
+                        </p>
+                        
+                        <!-- Grille de tarifs (3 colonnes) -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 40px;">
+                            
+                            <!-- Plan 1: ESSAI 6 MOIS -->
+                            <div class="tarif-card plan1-card ${d.plan1Featured ? 'featured-plan' : ''}" 
+                                 style="background: ${d.plan1BackgroundColor}; 
+                                        border: 2px solid ${d.plan1BorderColor}; 
+                                        border-radius: 16px; padding: 32px; position: relative;
+                                        ${d.plan1Featured ? 'transform: scale(1.05); z-index: 2;' : ''}">
+                                
+                                ${d.plan1Badge ? `<div class="plan-badge" style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); 
+                                                                                   background: ${d.plan1BorderColor}; color: white; padding: 6px 20px; 
+                                                                                   border-radius: 20px; font-size: 0.75rem; font-weight: bold; 
+                                                                                   text-transform: uppercase; letter-spacing: 1px;">${d.plan1Badge}</div>` : ''}
+                                
+                                <div style="text-align: center; margin-bottom: 24px;">
+                                    <h3 style="color: ${d.plan1TitleColor}; font-size: 1.25rem; font-weight: bold; margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: 1px;">
+                                        ${d.plan1Title}
+                                    </h3>
+                                    <div class="price-display" style="margin-bottom: 8px;">
+                                        <span style="color: ${d.plan1TitleColor}; font-size: 3rem; font-weight: bold;">${d.plan1Price}</span>
+                                        <span style="color: ${d.plan1TitleColor}; font-size: 1.5rem; margin-left: 4px;">${d.plan1Currency}</span>
+                                    </div>
+                                    <div style="color: #9ca3af; font-size: 1rem;">${d.plan1Period}</div>
+                                </div>
+                                
+                                <div class="features-list plan1-features">
+                                    ${plan1FeaturesHtml}
+                                </div>
+                                
+                                <div style="margin-top: 24px;">
+                                    <a href="${d.plan1CtaLink}" 
+                                       style="width: 100%; padding: 16px 24px; background: ${d.plan1BorderColor}; color: white;
+                                              border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+                                              text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;
+                                              text-decoration: none; display: inline-block; cursor: pointer; text-align: center;">
+                                        ${d.plan1CtaText}
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Plan 2: STANDARD 2 ANS -->
+                            <div class="tarif-card plan2-card ${d.plan2Featured ? 'featured-plan' : ''}" 
+                                 style="background: ${d.plan2BackgroundColor}; 
+                                        border: 2px solid ${d.plan2BorderColor}; 
+                                        border-radius: 16px; padding: 32px; position: relative;
+                                        ${d.plan2Featured ? 'transform: scale(1.05); z-index: 2;' : ''}">
+                                
+                                ${d.plan2Badge ? `<div class="plan-badge" style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); 
+                                                                                   background: ${d.plan2BorderColor}; color: white; padding: 6px 20px; 
+                                                                                   border-radius: 20px; font-size: 0.75rem; font-weight: bold; 
+                                                                                   text-transform: uppercase; letter-spacing: 1px;">${d.plan2Badge}</div>` : ''}
+                                
+                                <div style="text-align: center; margin-bottom: 24px;">
+                                    <h3 style="color: ${d.plan2TitleColor}; font-size: 1.25rem; font-weight: bold; margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: 1px;">
+                                        ${d.plan2Title}
+                                    </h3>
+                                    <div class="price-display" style="margin-bottom: 8px;">
+                                        <span style="color: ${d.plan2TitleColor}; font-size: 3rem; font-weight: bold;">${d.plan2Price}</span>
+                                        <span style="color: ${d.plan2TitleColor}; font-size: 1.5rem; margin-left: 4px;">${d.plan2Currency}</span>
+                                    </div>
+                                    <div style="color: #9ca3af; font-size: 1rem;">${d.plan2Period}</div>
+                                </div>
+                                
+                                <div class="features-list plan2-features">
+                                    ${plan2FeaturesHtml}
+                                </div>
+                                
+                                <div style="margin-top: 24px;">
+                                    <a href="${d.plan2CtaLink}" 
+                                       style="width: 100%; padding: 16px 24px; background: ${d.plan2BorderColor}; color: white;
+                                              border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+                                              text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;
+                                              text-decoration: none; display: inline-block; cursor: pointer; text-align: center;">
+                                        ${d.plan2CtaText}
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Plan 3: PREMIUM 5 ANS -->
+                            <div class="tarif-card plan3-card ${d.plan3Featured ? 'featured-plan' : ''}" 
+                                 style="background: ${d.plan3BackgroundColor}; 
+                                        border: 2px solid ${d.plan3BorderColor}; 
+                                        border-radius: 16px; padding: 32px; position: relative;
+                                        ${d.plan3Featured ? 'transform: scale(1.05); z-index: 2;' : ''}">
+                                
+                                ${d.plan3Badge ? `<div class="plan-badge" style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); 
+                                                                                   background: ${d.plan3BorderColor}; color: white; padding: 6px 20px; 
+                                                                                   border-radius: 20px; font-size: 0.75rem; font-weight: bold; 
+                                                                                   text-transform: uppercase; letter-spacing: 1px;">${d.plan3Badge}</div>` : ''}
+                                
+                                <div style="text-align: center; margin-bottom: 24px;">
+                                    <h3 style="color: ${d.plan3TitleColor}; font-size: 1.25rem; font-weight: bold; margin: 0 0 16px 0; text-transform: uppercase; letter-spacing: 1px;">
+                                        ${d.plan3Title}
+                                    </h3>
+                                    <div class="price-display" style="margin-bottom: 8px;">
+                                        <span style="color: ${d.plan3TitleColor}; font-size: 3rem; font-weight: bold;">${d.plan3Price}</span>
+                                        <span style="color: ${d.plan3TitleColor}; font-size: 1.5rem; margin-left: 4px;">${d.plan3Currency}</span>
+                                    </div>
+                                    <div style="color: #9ca3af; font-size: 1rem;">${d.plan3Period}</div>
+                                </div>
+                                
+                                <div class="features-list plan3-features">
+                                    ${plan3FeaturesHtml}
+                                </div>
+                                
+                                <div style="margin-top: 24px;">
+                                    <a href="${d.plan3CtaLink}" 
+                                       style="width: 100%; padding: 16px 24px; background: ${d.plan3BorderColor}; color: white;
+                                              border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+                                              text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;
+                                              text-decoration: none; display: inline-block; cursor: pointer; text-align: center;">
+                                        ${d.plan3CtaText}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Section Bonus/Astuce -->
+                        <div class="bonus-section" style="text-align: center; padding: 24px; background: ${d.bonusBackgroundColor || '#0f172a'}; 
+                                                          border-radius: 12px; margin-top: 32px; border: 1px solid rgba(59, 130, 246, 0.3);">
+                            <h4 style="color: ${d.bonusTitleColor || '#fbbf24'}; font-size: 1.25rem; font-weight: bold; margin: 0 0 12px 0;">
+                                ${d.bonusTitle}
+                            </h4>
+                            <p style="color: rgba(255,255,255,0.8); font-size: 1rem; line-height: 1.5; margin: 0;">
+                                ${d.bonusDetails}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    // Section 1: Contenu principal
+                    { name: 'title', label: 'Titre principal', type: 'text', category: 'Contenu Principal' },
+                    { name: 'subtitle', label: 'Sous-titre', type: 'textarea', category: 'Contenu Principal' },
+                    { name: 'subtitleColor', label: 'Couleur sous-titre', type: 'color', category: 'Contenu Principal' },
+                    { name: 'subtitleSize', label: 'Taille sous-titre', type: 'range', min: 14, max: 24, category: 'Contenu Principal' },
+                    
+                    // Section 2: Style du titre principal (comme TextSimple)
+                    { name: 'titleSize', label: 'Taille du titre', type: 'range', min: 20, max: 60, category: 'Titre - Typographie' },
+                    { name: 'titleColor', label: 'Couleur du titre', type: 'color', category: 'Titre - Typographie' },
+                    { name: 'titleAlignment', label: 'Alignement du titre', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' },
+                        { value: 'center', label: 'Centre' },
+                        { value: 'right', label: 'Droite' }
+                    ], category: 'Titre - Typographie' },
+                    { name: 'titleIsBold', label: 'Titre en gras', type: 'checkbox', category: 'Titre - Typographie' },
+                    { name: 'titleIsItalic', label: 'Titre en italique', type: 'checkbox', category: 'Titre - Typographie' },
+                    
+                    // Section 3: Plan 1 (ESSAI)
+                    { name: 'plan1Title', label: 'Titre Plan 1', type: 'text', category: 'Plan 1 - Essai' },
+                    { name: 'plan1Price', label: 'Prix Plan 1', type: 'text', category: 'Plan 1 - Essai' },
+                    { name: 'plan1Currency', label: 'Devise Plan 1', type: 'text', category: 'Plan 1 - Essai' },
+                    { name: 'plan1Period', label: 'Période Plan 1', type: 'text', category: 'Plan 1 - Essai' },
+                    { name: 'plan1TitleColor', label: 'Couleur titre Plan 1', type: 'color', category: 'Plan 1 - Essai' },
+                    { name: 'plan1BackgroundColor', label: 'Fond Plan 1', type: 'color', category: 'Plan 1 - Essai' },
+                    { name: 'plan1BorderColor', label: 'Bordure Plan 1', type: 'color', category: 'Plan 1 - Essai' },
+                    { name: 'plan1Featured', label: 'Plan 1 vedette', type: 'checkbox', category: 'Plan 1 - Essai' },
+                    { name: 'plan1Badge', label: 'Badge Plan 1', type: 'text', category: 'Plan 1 - Essai' },
+                    { name: 'plan1CtaText', label: 'Bouton Plan 1', type: 'text', category: 'Plan 1 - Essai' },
+                    { name: 'plan1CtaLink', label: 'Lien Plan 1', type: 'text', category: 'Plan 1 - Essai' },
+                    
+                    // Section 4: Plan 2 (STANDARD)
+                    { name: 'plan2Title', label: 'Titre Plan 2', type: 'text', category: 'Plan 2 - Standard' },
+                    { name: 'plan2Price', label: 'Prix Plan 2', type: 'text', category: 'Plan 2 - Standard' },
+                    { name: 'plan2Currency', label: 'Devise Plan 2', type: 'text', category: 'Plan 2 - Standard' },
+                    { name: 'plan2Period', label: 'Période Plan 2', type: 'text', category: 'Plan 2 - Standard' },
+                    { name: 'plan2TitleColor', label: 'Couleur titre Plan 2', type: 'color', category: 'Plan 2 - Standard' },
+                    { name: 'plan2BackgroundColor', label: 'Fond Plan 2', type: 'color', category: 'Plan 2 - Standard' },
+                    { name: 'plan2BorderColor', label: 'Bordure Plan 2', type: 'color', category: 'Plan 2 - Standard' },
+                    { name: 'plan2Featured', label: 'Plan 2 vedette', type: 'checkbox', category: 'Plan 2 - Standard' },
+                    { name: 'plan2Badge', label: 'Badge Plan 2', type: 'text', category: 'Plan 2 - Standard' },
+                    { name: 'plan2CtaText', label: 'Bouton Plan 2', type: 'text', category: 'Plan 2 - Standard' },
+                    { name: 'plan2CtaLink', label: 'Lien Plan 2', type: 'text', category: 'Plan 2 - Standard' },
+                    
+                    // Section 5: Plan 3 (PREMIUM)
+                    { name: 'plan3Title', label: 'Titre Plan 3', type: 'text', category: 'Plan 3 - Premium' },
+                    { name: 'plan3Price', label: 'Prix Plan 3', type: 'text', category: 'Plan 3 - Premium' },
+                    { name: 'plan3Currency', label: 'Devise Plan 3', type: 'text', category: 'Plan 3 - Premium' },
+                    { name: 'plan3Period', label: 'Période Plan 3', type: 'text', category: 'Plan 3 - Premium' },
+                    { name: 'plan3TitleColor', label: 'Couleur titre Plan 3', type: 'color', category: 'Plan 3 - Premium' },
+                    { name: 'plan3BackgroundColor', label: 'Fond Plan 3', type: 'color', category: 'Plan 3 - Premium' },
+                    { name: 'plan3BorderColor', label: 'Bordure Plan 3', type: 'color', category: 'Plan 3 - Premium' },
+                    { name: 'plan3Featured', label: 'Plan 3 vedette', type: 'checkbox', category: 'Plan 3 - Premium' },
+                    { name: 'plan3Badge', label: 'Badge Plan 3', type: 'text', category: 'Plan 3 - Premium' },
+                    { name: 'plan3CtaText', label: 'Bouton Plan 3', type: 'text', category: 'Plan 3 - Premium' },
+                    { name: 'plan3CtaLink', label: 'Lien Plan 3', type: 'text', category: 'Plan 3 - Premium' },
+                    
+                    // Section 6: Section Bonus
+                    { name: 'bonusTitle', label: 'Titre bonus', type: 'text', category: 'Section Bonus' },
+                    { name: 'bonusDetails', label: 'Détails bonus', type: 'textarea', category: 'Section Bonus' },
+                    { name: 'bonusBackgroundColor', label: 'Fond bonus', type: 'color', category: 'Section Bonus' },
+                    { name: 'bonusTitleColor', label: 'Couleur titre bonus', type: 'color', category: 'Section Bonus' }
+                ];
+            }
+
+            getElements() {
+                return [
+                    { id: 'plan1-features', name: 'Fonctionnalités Plan 1', editable: true },
+                    { id: 'plan2-features', name: 'Fonctionnalités Plan 2', editable: true },
+                    { id: 'plan3-features', name: 'Fonctionnalités Plan 3', editable: true },
+                    { id: 'tarif-card', name: 'Cartes tarifaires', editable: true }
+                ];
+            }
+        }
+
         class FeatureGridWidget {
             constructor() {
                 this.id = 'feature-grid';
@@ -4135,6 +4602,7 @@
                     PricingCardWidget,
                     CallToActionWidget,
                     ComparisonWidget,
+                    TarifLocationWidget,
                     FeatureGridWidget
                 ];
                 
@@ -4986,6 +5454,9 @@
                     const isGridFeatures = element.id === 'features' && this.selectedWidget.type === 'feature-grid';
                     const isObsoleteColumn = element.id === 'obsolete-column' && this.selectedWidget.type === 'comparison';
                     const isModernColumn = element.id === 'modern-column' && this.selectedWidget.type === 'comparison';
+                    const isPlan1Features = element.id === 'plan1-features' && this.selectedWidget.type === 'tarif-location';
+                    const isPlan2Features = element.id === 'plan2-features' && this.selectedWidget.type === 'tarif-location';
+                    const isPlan3Features = element.id === 'plan3-features' && this.selectedWidget.type === 'tarif-location';
                     
                     if (isPricingFeatures) {
                         // Interface spéciale pour les fonctionnalités du Pricing Card
@@ -5285,6 +5756,219 @@
                                                     <label style="color: var(--text-muted); font-size: 12px; min-width: 60px;">Couleur :</label>
                                                     <input type="color" value="${itemData.color || '#ffffff'}" 
                                                            onchange="widgetEditor.updateModernAdvantageColor(${index}, this.value)"
+                                                           style="width: 40px; height: 24px; border-radius: 4px; border: none; cursor: pointer;">
+                                                    <span style="color: var(--text-muted); font-size: 11px;">Couleur du texte</span>
+                                                </div>
+                                            </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (isPlan1Features) {
+                        // Interface spéciale pour les fonctionnalités Plan 1 (ESSAI)
+                        const plan1Features = this.selectedWidget.data.plan1Features || [];
+                        
+                        elementsHtml += `
+                            <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                            border-radius: 8px; margin-bottom: 8px;">
+                                <div style="margin-bottom: 12px;">
+                                    <div style="color: #fbbf24; font-weight: 500; margin-bottom: 8px;">
+                                        <i class="fas fa-calendar-alt"></i> ${element.name} (${plan1Features.length})
+                                    </div>
+                                    <div style="color: var(--text-muted); font-size: 12px;">Gestion des fonctionnalités du plan Essai 6 Mois</div>
+                                </div>
+                                
+                                <div class="plan1-manager" style="margin-bottom: 12px;">
+                                    <div class="plan1-input-group" style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                        <input type="text" id="newPlan1Input" placeholder="🔧 Nouvelle fonctionnalité..." 
+                                               style="flex: 1; padding: 8px 12px; background: var(--bg-primary); 
+                                                      border: 1px solid #fbbf24; border-radius: 6px; 
+                                                      color: var(--text-white); font-size: 14px;">
+                                        <button onclick="widgetEditor.addPlan1Feature()" 
+                                                style="padding: 8px 16px; background: #fbbf24; 
+                                                       color: white; border: none; border-radius: 6px; 
+                                                       cursor: pointer; font-size: 14px; font-weight: 500;">
+                                            <i class="fas fa-plus"></i> Ajouter
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="plan1-list" style="max-height: 200px; overflow-y: auto;">
+                                        ${plan1Features.map((item, index) => {
+                                            // Support rétrocompatibilité : si item est string, le convertir en objet
+                                            const itemData = typeof item === 'string' ? { text: item, emoji: '✅', color: '#ffffff' } : item;
+                                            return `
+                                            <div class="plan1-item" style="padding: 12px; background: rgba(251, 191, 36, 0.1); 
+                                                                              border: 1px solid rgba(251, 191, 36, 0.3); 
+                                                                              border-radius: 8px; margin-bottom: 12px;">
+                                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                                    <input type="text" value="${itemData.emoji}" placeholder="🔧" 
+                                                           onchange="widgetEditor.updatePlan1FeatureEmoji(${index}, this.value)"
+                                                           oninput="widgetEditor.updatePlan1FeatureEmoji(${index}, this.value)"
+                                                           style="width: 40px; background: rgba(0,0,0,0.3); border: 1px solid rgba(251, 191, 36, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 16px; text-align: center; padding: 4px;"
+                                                           title="Emoji ou caractère (ex: 🔧, 📞, ou logo)">
+                                                    <input type="text" value="${itemData.text}" 
+                                                           onchange="widgetEditor.updatePlan1FeatureText(${index}, this.value)"
+                                                           oninput="widgetEditor.updatePlan1FeatureText(${index}, this.value)"
+                                                           style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(251, 191, 36, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 14px; padding: 6px;"
+                                                           placeholder="Texte de la fonctionnalité">
+                                                    <button onclick="widgetEditor.removePlan1Feature(${index})" 
+                                                            title="Supprimer cette fonctionnalité"
+                                                            style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                                   border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                                   width: 28px; height: 28px; cursor: pointer; font-size: 12px;">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <label style="color: var(--text-muted); font-size: 12px; min-width: 60px;">Couleur :</label>
+                                                    <input type="color" value="${itemData.color || '#ffffff'}" 
+                                                           onchange="widgetEditor.updatePlan1FeatureColor(${index}, this.value)"
+                                                           style="width: 40px; height: 24px; border-radius: 4px; border: none; cursor: pointer;">
+                                                    <span style="color: var(--text-muted); font-size: 11px;">Couleur du texte</span>
+                                                </div>
+                                            </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (isPlan2Features) {
+                        // Interface spéciale pour les fonctionnalités Plan 2 (STANDARD)
+                        const plan2Features = this.selectedWidget.data.plan2Features || [];
+                        
+                        elementsHtml += `
+                            <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                            border-radius: 8px; margin-bottom: 8px;">
+                                <div style="margin-bottom: 12px;">
+                                    <div style="color: #3b82f6; font-weight: 500; margin-bottom: 8px;">
+                                        <i class="fas fa-star"></i> ${element.name} (${plan2Features.length})
+                                    </div>
+                                    <div style="color: var(--text-muted); font-size: 12px;">Gestion des fonctionnalités du plan Standard 2 Ans</div>
+                                </div>
+                                
+                                <div class="plan2-manager" style="margin-bottom: 12px;">
+                                    <div class="plan2-input-group" style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                        <input type="text" id="newPlan2Input" placeholder="📡 Nouvelle fonctionnalité..." 
+                                               style="flex: 1; padding: 8px 12px; background: var(--bg-primary); 
+                                                      border: 1px solid #3b82f6; border-radius: 6px; 
+                                                      color: var(--text-white); font-size: 14px;">
+                                        <button onclick="widgetEditor.addPlan2Feature()" 
+                                                style="padding: 8px 16px; background: #3b82f6; 
+                                                       color: white; border: none; border-radius: 6px; 
+                                                       cursor: pointer; font-size: 14px; font-weight: 500;">
+                                            <i class="fas fa-plus"></i> Ajouter
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="plan2-list" style="max-height: 200px; overflow-y: auto;">
+                                        ${plan2Features.map((item, index) => {
+                                            // Support rétrocompatibilité : si item est string, le convertir en objet
+                                            const itemData = typeof item === 'string' ? { text: item, emoji: '✅', color: '#ffffff' } : item;
+                                            return `
+                                            <div class="plan2-item" style="padding: 12px; background: rgba(59, 130, 246, 0.1); 
+                                                                              border: 1px solid rgba(59, 130, 246, 0.3); 
+                                                                              border-radius: 8px; margin-bottom: 12px;">
+                                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                                    <input type="text" value="${itemData.emoji}" placeholder="📡" 
+                                                           onchange="widgetEditor.updatePlan2FeatureEmoji(${index}, this.value)"
+                                                           oninput="widgetEditor.updatePlan2FeatureEmoji(${index}, this.value)"
+                                                           style="width: 40px; background: rgba(0,0,0,0.3); border: 1px solid rgba(59, 130, 246, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 16px; text-align: center; padding: 4px;"
+                                                           title="Emoji ou caractère (ex: 📡, ⚡, ou logo)">
+                                                    <input type="text" value="${itemData.text}" 
+                                                           onchange="widgetEditor.updatePlan2FeatureText(${index}, this.value)"
+                                                           oninput="widgetEditor.updatePlan2FeatureText(${index}, this.value)"
+                                                           style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(59, 130, 246, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 14px; padding: 6px;"
+                                                           placeholder="Texte de la fonctionnalité">
+                                                    <button onclick="widgetEditor.removePlan2Feature(${index})" 
+                                                            title="Supprimer cette fonctionnalité"
+                                                            style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                                   border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                                   width: 28px; height: 28px; cursor: pointer; font-size: 12px;">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <label style="color: var(--text-muted); font-size: 12px; min-width: 60px;">Couleur :</label>
+                                                    <input type="color" value="${itemData.color || '#ffffff'}" 
+                                                           onchange="widgetEditor.updatePlan2FeatureColor(${index}, this.value)"
+                                                           style="width: 40px; height: 24px; border-radius: 4px; border: none; cursor: pointer;">
+                                                    <span style="color: var(--text-muted); font-size: 11px;">Couleur du texte</span>
+                                                </div>
+                                            </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (isPlan3Features) {
+                        // Interface spéciale pour les fonctionnalités Plan 3 (PREMIUM)
+                        const plan3Features = this.selectedWidget.data.plan3Features || [];
+                        
+                        elementsHtml += `
+                            <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                            border-radius: 8px; margin-bottom: 8px;">
+                                <div style="margin-bottom: 12px;">
+                                    <div style="color: #10b981; font-weight: 500; margin-bottom: 8px;">
+                                        <i class="fas fa-crown"></i> ${element.name} (${plan3Features.length})
+                                    </div>
+                                    <div style="color: var(--text-muted); font-size: 12px;">Gestion des fonctionnalités du plan Premium 5 Ans</div>
+                                </div>
+                                
+                                <div class="plan3-manager" style="margin-bottom: 12px;">
+                                    <div class="plan3-input-group" style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                        <input type="text" id="newPlan3Input" placeholder="🚀 Nouvelle fonctionnalité..." 
+                                               style="flex: 1; padding: 8px 12px; background: var(--bg-primary); 
+                                                      border: 1px solid #10b981; border-radius: 6px; 
+                                                      color: var(--text-white); font-size: 14px;">
+                                        <button onclick="widgetEditor.addPlan3Feature()" 
+                                                style="padding: 8px 16px; background: #10b981; 
+                                                       color: white; border: none; border-radius: 6px; 
+                                                       cursor: pointer; font-size: 14px; font-weight: 500;">
+                                            <i class="fas fa-plus"></i> Ajouter
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="plan3-list" style="max-height: 200px; overflow-y: auto;">
+                                        ${plan3Features.map((item, index) => {
+                                            // Support rétrocompatibilité : si item est string, le convertir en objet
+                                            const itemData = typeof item === 'string' ? { text: item, emoji: '✅', color: '#ffffff' } : item;
+                                            return `
+                                            <div class="plan3-item" style="padding: 12px; background: rgba(16, 185, 129, 0.1); 
+                                                                              border: 1px solid rgba(16, 185, 129, 0.3); 
+                                                                              border-radius: 8px; margin-bottom: 12px;">
+                                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                                    <input type="text" value="${itemData.emoji}" placeholder="🚀" 
+                                                           onchange="widgetEditor.updatePlan3FeatureEmoji(${index}, this.value)"
+                                                           oninput="widgetEditor.updatePlan3FeatureEmoji(${index}, this.value)"
+                                                           style="width: 40px; background: rgba(0,0,0,0.3); border: 1px solid rgba(16, 185, 129, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 16px; text-align: center; padding: 4px;"
+                                                           title="Emoji ou caractère (ex: 🚀, 🤖, ou logo)">
+                                                    <input type="text" value="${itemData.text}" 
+                                                           onchange="widgetEditor.updatePlan3FeatureText(${index}, this.value)"
+                                                           oninput="widgetEditor.updatePlan3FeatureText(${index}, this.value)"
+                                                           style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(16, 185, 129, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 14px; padding: 6px;"
+                                                           placeholder="Texte de la fonctionnalité">
+                                                    <button onclick="widgetEditor.removePlan3Feature(${index})" 
+                                                            title="Supprimer cette fonctionnalité"
+                                                            style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                                   border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                                   width: 28px; height: 28px; cursor: pointer; font-size: 12px;">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <label style="color: var(--text-muted); font-size: 12px; min-width: 60px;">Couleur :</label>
+                                                    <input type="color" value="${itemData.color || '#ffffff'}" 
+                                                           onchange="widgetEditor.updatePlan3FeatureColor(${index}, this.value)"
                                                            style="width: 40px; height: 24px; border-radius: 4px; border: none; cursor: pointer;">
                                                     <span style="color: var(--text-muted); font-size: 11px;">Couleur du texte</span>
                                                 </div>
@@ -8643,6 +9327,394 @@ Folder('${id}')" title="Renommer">
                     // Formule   : classe = isCollapsed ? 'fa-chevron-left' : 'fa-chevron-right'
                     // Exemple   : panneau fermé -> 'fa-chevron-left' (flèche vers la gauche pour ouvrir)
                     collapseIcon.className = isCollapsed ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
+                }
+            }
+
+            // ====== FONCTIONS POUR TARIF LOCATION WIDGET ======
+
+            // Gestion dynamique des fonctionnalités Plan 1 (ESSAI)
+            addPlan1Feature() {
+                console.log('🚀 addPlan1Feature called');
+                if (!this.selectedWidget) return;
+                if (this.selectedWidget.type !== 'tarif-location') return;
+                
+                const input = document.getElementById('newPlan1Input');
+                if (!input || !input.value.trim()) return;
+                
+                const newFeature = input.value.trim();
+                this.selectedWidget.data.plan1Features.push({ text: newFeature, emoji: '✅', color: '#ffffff' });
+                input.value = '';
+                
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                this.setStatus(`Fonctionnalité Plan 1 "${newFeature}" ajoutée`, 'success');
+            }
+            
+            removePlan1Feature(index) {
+                console.log('🗑️ removePlan1Feature called with index:', index);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan1Features;
+                if (index < 0 || index >= features.length) return;
+                
+                features.splice(index, 1);
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                this.setStatus('Fonctionnalité Plan 1 supprimée', 'success');
+            }
+
+            // Fonctions de mise à jour détaillée Plan 1
+            updatePlan1FeatureText(index, newText) {
+                console.log('✏️ updatePlan1FeatureText called:', index, newText);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan1Features;
+                if (index < 0 || index >= features.length) return;
+                
+                if (typeof features[index] === 'string') {
+                    features[index] = { text: features[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                features[index].text = newText.trim();
+                this.updateTarifFeatureInDOM('plan1', index, features[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            updatePlan1FeatureEmoji(index, newEmoji) {
+                console.log('🎨 updatePlan1FeatureEmoji called:', index, newEmoji);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan1Features;
+                if (index < 0 || index >= features.length) return;
+                
+                if (typeof features[index] === 'string') {
+                    features[index] = { text: features[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                features[index].emoji = newEmoji;
+                this.updateTarifFeatureInDOM('plan1', index, features[index]);
+                this.updatePreview();
+                this.renderCanvas();
+                setTimeout(() => {
+                    this.verifyAndFixTarifEmojiDisplay('plan1', index, features[index]);
+                }, 100);
+                this.autoSave();
+            }
+            
+            updatePlan1FeatureColor(index, newColor) {
+                console.log('🌈 updatePlan1FeatureColor called:', index, newColor);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan1Features;
+                if (index < 0 || index >= features.length) return;
+                
+                if (typeof features[index] === 'string') {
+                    features[index] = { text: features[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                features[index].color = newColor;
+                this.updateTarifFeatureInDOM('plan1', index, features[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+
+            // Gestion dynamique des fonctionnalités Plan 2 (STANDARD)
+            addPlan2Feature() {
+                console.log('🚀 addPlan2Feature called');
+                if (!this.selectedWidget) return;
+                if (this.selectedWidget.type !== 'tarif-location') return;
+                
+                const input = document.getElementById('newPlan2Input');
+                if (!input || !input.value.trim()) return;
+                
+                const newFeature = input.value.trim();
+                this.selectedWidget.data.plan2Features.push({ text: newFeature, emoji: '✅', color: '#ffffff' });
+                input.value = '';
+                
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                this.setStatus(`Fonctionnalité Plan 2 "${newFeature}" ajoutée`, 'success');
+            }
+            
+            removePlan2Feature(index) {
+                console.log('🗑️ removePlan2Feature called with index:', index);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan2Features;
+                if (index < 0 || index >= features.length) return;
+                
+                features.splice(index, 1);
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                this.setStatus('Fonctionnalité Plan 2 supprimée', 'success');
+            }
+
+            // Fonctions de mise à jour détaillée Plan 2
+            updatePlan2FeatureText(index, newText) {
+                console.log('✏️ updatePlan2FeatureText called:', index, newText);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan2Features;
+                if (index < 0 || index >= features.length) return;
+                
+                if (typeof features[index] === 'string') {
+                    features[index] = { text: features[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                features[index].text = newText.trim();
+                this.updateTarifFeatureInDOM('plan2', index, features[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            updatePlan2FeatureEmoji(index, newEmoji) {
+                console.log('🎨 updatePlan2FeatureEmoji called:', index, newEmoji);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan2Features;
+                if (index < 0 || index >= features.length) return;
+                
+                if (typeof features[index] === 'string') {
+                    features[index] = { text: features[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                features[index].emoji = newEmoji;
+                this.updateTarifFeatureInDOM('plan2', index, features[index]);
+                this.updatePreview();
+                this.renderCanvas();
+                setTimeout(() => {
+                    this.verifyAndFixTarifEmojiDisplay('plan2', index, features[index]);
+                }, 100);
+                this.autoSave();
+            }
+            
+            updatePlan2FeatureColor(index, newColor) {
+                console.log('🌈 updatePlan2FeatureColor called:', index, newColor);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan2Features;
+                if (index < 0 || index >= features.length) return;
+                
+                if (typeof features[index] === 'string') {
+                    features[index] = { text: features[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                features[index].color = newColor;
+                this.updateTarifFeatureInDOM('plan2', index, features[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+
+            // Gestion dynamique des fonctionnalités Plan 3 (PREMIUM)
+            addPlan3Feature() {
+                console.log('🚀 addPlan3Feature called');
+                if (!this.selectedWidget) return;
+                if (this.selectedWidget.type !== 'tarif-location') return;
+                
+                const input = document.getElementById('newPlan3Input');
+                if (!input || !input.value.trim()) return;
+                
+                const newFeature = input.value.trim();
+                this.selectedWidget.data.plan3Features.push({ text: newFeature, emoji: '✅', color: '#ffffff' });
+                input.value = '';
+                
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                this.setStatus(`Fonctionnalité Plan 3 "${newFeature}" ajoutée`, 'success');
+            }
+            
+            removePlan3Feature(index) {
+                console.log('🗑️ removePlan3Feature called with index:', index);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan3Features;
+                if (index < 0 || index >= features.length) return;
+                
+                features.splice(index, 1);
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                this.setStatus('Fonctionnalité Plan 3 supprimée', 'success');
+            }
+
+            // Fonctions de mise à jour détaillée Plan 3
+            updatePlan3FeatureText(index, newText) {
+                console.log('✏️ updatePlan3FeatureText called:', index, newText);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan3Features;
+                if (index < 0 || index >= features.length) return;
+                
+                if (typeof features[index] === 'string') {
+                    features[index] = { text: features[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                features[index].text = newText.trim();
+                this.updateTarifFeatureInDOM('plan3', index, features[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            updatePlan3FeatureEmoji(index, newEmoji) {
+                console.log('🎨 updatePlan3FeatureEmoji called:', index, newEmoji);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan3Features;
+                if (index < 0 || index >= features.length) return;
+                
+                if (typeof features[index] === 'string') {
+                    features[index] = { text: features[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                features[index].emoji = newEmoji;
+                this.updateTarifFeatureInDOM('plan3', index, features[index]);
+                this.updatePreview();
+                this.renderCanvas();
+                setTimeout(() => {
+                    this.verifyAndFixTarifEmojiDisplay('plan3', index, features[index]);
+                }, 100);
+                this.autoSave();
+            }
+            
+            updatePlan3FeatureColor(index, newColor) {
+                console.log('🌈 updatePlan3FeatureColor called:', index, newColor);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'tarif-location') return;
+                
+                const features = this.selectedWidget.data.plan3Features;
+                if (index < 0 || index >= features.length) return;
+                
+                if (typeof features[index] === 'string') {
+                    features[index] = { text: features[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                features[index].color = newColor;
+                this.updateTarifFeatureInDOM('plan3', index, features[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+
+            // Fonctions utilitaires pour TarifLocationWidget - avec système de fallback
+            updateTarifFeatureInDOM(planType, index, itemData) {
+                console.log(`🔄 updateTarifFeatureInDOM: ${planType}, index=${index}`, itemData);
+                
+                // Mise à jour dans la fenêtre d'édition (canvas)
+                const editorContainer = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (editorContainer) {
+                    const planSelector = `.${planType}-features`;
+                    const planColumn = editorContainer.querySelector(planSelector);
+                    
+                    if (planColumn) {
+                        const featureItems = planColumn.querySelectorAll(`.${planType}-feature`);
+                        
+                        if (featureItems[index]) {
+                            const featureItem = featureItems[index];
+                            const emojiElement = featureItem.querySelector('.feature-emoji');
+                            const textElement = featureItem.querySelector('.feature-text');
+                            
+                            if (emojiElement) {
+                                emojiElement.textContent = itemData.emoji || '✅';
+                                console.log(`✅ Emoji mis à jour dans l'éditeur:`, emojiElement.textContent);
+                            }
+                            if (textElement) {
+                                textElement.textContent = itemData.text || '';
+                                textElement.style.color = itemData.color || '#ffffff';
+                                console.log(`✅ Texte mis à jour dans l'éditeur:`, textElement.textContent, textElement.style.color);
+                            }
+                        }
+                    }
+                }
+                
+                // Mise à jour dans l'aperçu temps réel (preview)
+                const previewContainer = document.getElementById('preview');
+                if (previewContainer) {
+                    const previewPlanSelector = `.${planType}-features`;
+                    const previewPlanColumn = previewContainer.querySelector(previewPlanSelector);
+                    
+                    if (previewPlanColumn) {
+                        const previewFeatureItems = previewPlanColumn.querySelectorAll(`.${planType}-feature`);
+                        
+                        if (previewFeatureItems[index]) {
+                            const previewFeatureItem = previewFeatureItems[index];
+                            const previewEmojiElement = previewFeatureItem.querySelector('.feature-emoji');
+                            const previewTextElement = previewFeatureItem.querySelector('.feature-text');
+                            
+                            if (previewEmojiElement) {
+                                previewEmojiElement.textContent = itemData.emoji || '✅';
+                                console.log(`✅ Emoji mis à jour dans l'aperçu:`, previewEmojiElement.textContent);
+                            }
+                            if (previewTextElement) {
+                                previewTextElement.textContent = itemData.text || '';
+                                previewTextElement.style.color = itemData.color || '#ffffff';
+                                console.log(`✅ Texte mis à jour dans l'aperçu:`, previewTextElement.textContent, previewTextElement.style.color);
+                            }
+                        }
+                    }
+                }
+                
+                console.log(`🎯 updateTarifFeatureInDOM terminé pour ${planType}[${index}]`);
+            }
+            
+            // Fonction de vérification et correction des emoji - FALLBACK SÉCURISÉ pour TarifLocation
+            verifyAndFixTarifEmojiDisplay(planType, index, expectedData) {
+                console.log(`🔍 verifyAndFixTarifEmojiDisplay: Vérification ${planType}[${index}]`, expectedData);
+                
+                let needsRefresh = false;
+                
+                // Vérifier la fenêtre d'édition
+                const editorContainer = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (editorContainer) {
+                    const planSelector = `.${planType}-features`;
+                    const planColumn = editorContainer.querySelector(planSelector);
+                    
+                    if (planColumn) {
+                        const featureItems = planColumn.querySelectorAll(`.${planType}-feature`);
+                        
+                        if (featureItems[index]) {
+                            const featureItem = featureItems[index];
+                            const emojiElement = featureItem.querySelector('.feature-emoji');
+                            
+                            if (emojiElement && emojiElement.textContent !== expectedData.emoji) {
+                                console.log(`❌ Emoji mismatch dans l'éditeur - Attendu: "${expectedData.emoji}", Trouvé: "${emojiElement.textContent}"`);
+                                needsRefresh = true;
+                            }
+                        }
+                    }
+                }
+                
+                // Vérifier l'aperçu
+                const previewContainer = document.getElementById('preview');
+                if (previewContainer) {
+                    const previewPlanSelector = `.${planType}-features`;
+                    const previewPlanColumn = previewContainer.querySelector(previewPlanSelector);
+                    
+                    if (previewPlanColumn) {
+                        const previewFeatureItems = previewPlanColumn.querySelectorAll(`.${planType}-feature`);
+                        
+                        if (previewFeatureItems[index]) {
+                            const previewFeatureItem = previewFeatureItems[index];
+                            const previewEmojiElement = previewFeatureItem.querySelector('.feature-emoji');
+                            
+                            if (previewEmojiElement && previewEmojiElement.textContent !== expectedData.emoji) {
+                                console.log(`❌ Emoji mismatch dans l'aperçu - Attendu: "${expectedData.emoji}", Trouvé: "${previewEmojiElement.textContent}"`);
+                                needsRefresh = true;
+                            }
+                        }
+                    }
+                }
+                
+                // Si des problèmes sont détectés, forcer un re-render complet
+                if (needsRefresh) {
+                    console.log(`🔄 Forçage du re-render complet pour corriger les emoji`);
+                    this.renderCanvas();
+                    this.updatePreview();
+                } else {
+                    console.log(`✅ Emoji correctement affiché partout`);
                 }
             }
         }
