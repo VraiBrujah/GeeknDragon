@@ -22,7 +22,8 @@
       "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\modern\\editors\\widget-editor.html\")",
       "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\modern\\test-simple.html\")",
       "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\modern\\editors\\widget-editor-standalone.html\")",
-      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\modern\\editors\\widget-editor-complete.html\")"
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\modern\\editors\\widget-editor-complete.html\")",
+      "Bash(start \"\" \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVSOLD\\modern\\editors\\widget-editor-hierarchical.html\")"
     ],
     "deny": [],
     "ask": []

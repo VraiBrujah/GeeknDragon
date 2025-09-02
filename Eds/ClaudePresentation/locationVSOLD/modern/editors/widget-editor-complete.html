@@ -551,6 +551,27 @@
         .widget-item:hover .widget-actions {
             opacity: 1;
         }
+        
+        /* Badge pour widgets personnalisés */
+        .widget-custom-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: var(--accent-green);
+            color: white;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            border: 1px solid var(--bg-secondary);
+        }
+        
+        .widget-icon {
+            position: relative;
+        }
 
         /* Canvas d'édition */
         .editor-canvas {
@@ -1515,7 +1536,7 @@
                     <div class="folder-item active" data-folder="root">
                         <i class="fas fa-home folder-icon"></i>
                         <span class="folder-name">Tous les widgets</span>
-                        <span class="folder-count" id="totalWidgetCount">5</span>
+                        <span class="folder-count" id="totalWidgetCount">6</span>
                     </div>
                     
                     <div class="folder-item" data-folder="favorites">
@@ -1724,6 +1745,25 @@
                             </button>
                         </div>
                     </div>
+                    
+                    <div class="property-group">
+                        <h4><i class="fas fa-save"></i> Widget Personnalisé</h4>
+                        <div class="property-field">
+                            <label class="property-label">Nom du widget</label>
+                            <input type="text" id="customWidgetName" class="property-input" 
+                                   placeholder="Mon Widget Personnalisé" disabled>
+                        </div>
+                        <div class="property-field" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+                            <button class="btn btn-sm" id="saveCustomWidgetBtn" disabled>
+                                <i class="fas fa-save"></i>
+                                Sauvegarder
+                            </button>
+                            <button class="btn btn-sm" id="updateCustomWidgetBtn" disabled style="display: none;">
+                                <i class="fas fa-sync-alt"></i>
+                                Mettre à jour
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1778,6 +1818,187 @@
     <script>
         // WIDGETS INTÉGRÉS
         
+        class TextSimpleWidget {
+            constructor() {
+                this.id = 'text-simple';
+                this.name = 'Texte Simple';
+                this.category = 'Contenu';
+                this.icon = '📝';
+                this.description = 'Texte formaté avec styles visuels';
+                
+                this.defaultData = {
+                    text: 'Votre texte ici...',
+                    textType: 'paragraph',
+                    size: 'medium',
+                    color: 'default',
+                    customColor: '#F8FAFC',
+                    alignment: 'left',
+                    isBold: false,
+                    isItalic: false,
+                    marginTop: 'medium',
+                    marginBottom: 'medium'
+                };
+
+                this.stylePresets = {
+                    paragraph: { fontSize: 'var(--text-base)', fontWeight: 'var(--font-normal)', lineHeight: '1.7', fontFamily: 'var(--font-primary)' },
+                    title: { fontSize: 'var(--text-3xl)', fontWeight: 'var(--font-bold)', lineHeight: '1.2', fontFamily: 'var(--font-heading)' },
+                    subtitle: { fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', lineHeight: '1.4', fontFamily: 'var(--font-primary)' },
+                    quote: { fontSize: 'var(--text-lg)', fontWeight: 'var(--font-medium)', lineHeight: '1.6', fontFamily: 'var(--font-primary)', fontStyle: 'italic' },
+                    note: { fontSize: 'var(--text-sm)', fontWeight: 'var(--font-normal)', lineHeight: '1.5', fontFamily: 'var(--font-primary)' }
+                };
+
+                this.sizeScale = { small: 0.875, medium: 1, large: 1.25, xlarge: 1.5 };
+                this.colorPalette = {
+                    default: 'var(--text-white)', primary: 'var(--accent-green)', secondary: 'var(--text-gray)',
+                    muted: 'var(--text-muted)', success: 'var(--success-green)', warning: 'var(--warning-orange)', danger: 'var(--danger-red)'
+                };
+                this.spacings = { none: '0', small: 'var(--spacing-sm)', medium: 'var(--spacing-md)', large: 'var(--spacing-lg)' };
+            }
+
+            render(data = {}) {
+                const widgetData = { ...this.defaultData, ...data };
+                const styles = this.generateInlineStyles(widgetData);
+                const typeClass = `text-widget-${widgetData.textType}`;
+                const processedText = this.processTextContent(widgetData.text);
+
+                return `
+                    <div class="text-simple-widget ${typeClass} editable" 
+                         data-widget-id="${this.id}"
+                         data-field="text-content"
+                         style="${styles}">
+                        ${processedText}
+                    </div>
+                `;
+            }
+
+            generateInlineStyles(data) {
+                const baseStyle = this.stylePresets[data.textType];
+                const sizeMultiplier = this.sizeScale[data.size];
+                const finalColor = data.color === 'custom' ? data.customColor : this.colorPalette[data.color] || this.colorPalette.default;
+
+                const styleRules = [
+                    `font-size: calc(${baseStyle.fontSize} * ${sizeMultiplier})`,
+                    `font-weight: ${baseStyle.fontWeight}`,
+                    `line-height: ${baseStyle.lineHeight}`,
+                    `font-family: ${baseStyle.fontFamily}`,
+                    `color: ${finalColor}`,
+                    `text-align: ${data.alignment}`,
+                    `margin-top: ${this.spacings[data.marginTop]}`,
+                    `margin-bottom: ${this.spacings[data.marginBottom]}`
+                ];
+
+                if (data.isBold && data.textType !== 'title') styleRules.push('font-weight: var(--font-bold)');
+                if (data.isItalic) styleRules.push('font-style: italic');
+                if (baseStyle.fontStyle) styleRules.push(`font-style: ${baseStyle.fontStyle}`);
+
+                return styleRules.join('; ');
+            }
+
+            processTextContent(text) {
+                const escapedText = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                return escapedText.replace(/\n/g, '<br>');
+            }
+
+            getStyles() {
+                return `
+                    .text-simple-widget {
+                        transition: var(--transition-normal);
+                        cursor: default;
+                        word-wrap: break-word;
+                        hyphens: auto;
+                    }
+                    .text-simple-widget.editable:hover {
+                        background: rgba(16, 185, 129, 0.05);
+                        outline: 1px dashed rgba(16, 185, 129, 0.3);
+                        outline-offset: 4px;
+                        border-radius: var(--border-radius-sm);
+                    }
+                    .text-widget-title {
+                        background: var(--gradient-green);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                    }
+                    .text-widget-quote {
+                        position: relative;
+                        padding-left: var(--spacing-lg);
+                        border-left: 4px solid var(--accent-green);
+                        background: rgba(16, 185, 129, 0.05);
+                        padding-top: var(--spacing-sm);
+                        padding-bottom: var(--spacing-sm);
+                        padding-right: var(--spacing-md);
+                        border-radius: var(--border-radius-sm);
+                    }
+                    .text-widget-quote:before {
+                        content: '"';
+                        position: absolute;
+                        left: var(--spacing-xs);
+                        top: -var(--spacing-xs);
+                        font-size: var(--text-2xl);
+                        color: var(--accent-green);
+                        font-weight: var(--font-bold);
+                    }
+                    .text-widget-note {
+                        background: rgba(59, 130, 246, 0.1);
+                        border: 1px solid rgba(59, 130, 246, 0.2);
+                        border-radius: var(--border-radius-sm);
+                        padding: var(--spacing-sm) var(--spacing-md);
+                        position: relative;
+                    }
+                    .text-widget-note:before {
+                        content: 'ℹ️';
+                        margin-right: var(--spacing-xs);
+                    }
+                    .text-simple-widget {
+                        opacity: 0;
+                        transform: translateY(10px);
+                        animation: textAppear 0.6s ease-out forwards;
+                    }
+                    @keyframes textAppear {
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                    @media (max-width: 768px) {
+                        .text-widget-title { font-size: var(--text-2xl) !important; }
+                        .text-widget-subtitle { font-size: var(--text-lg) !important; }
+                        .text-widget-quote { padding-left: var(--spacing-md); margin-left: var(--spacing-sm); margin-right: var(--spacing-sm); }
+                    }
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    { name: 'text', label: 'Texte', type: 'textarea', placeholder: 'Votre texte ici...', rows: 4, defaultValue: this.defaultData.text },
+                    { name: 'textType', label: 'Type de texte', type: 'select', options: [
+                        { value: 'paragraph', label: '📝 Paragraphe' }, { value: 'title', label: '🎯 Titre' },
+                        { value: 'subtitle', label: '📋 Sous-titre' }, { value: 'quote', label: '💭 Citation' }, { value: 'note', label: '📝 Note' }
+                    ], defaultValue: this.defaultData.textType },
+                    { name: 'size', label: 'Taille', type: 'select', options: [
+                        { value: 'small', label: 'Petit' }, { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }, { value: 'xlarge', label: 'Très grand' }
+                    ], defaultValue: this.defaultData.size },
+                    { name: 'color', label: 'Couleur', type: 'select', options: [
+                        { value: 'default', label: 'Blanc' }, { value: 'primary', label: 'Vert EDS' },
+                        { value: 'secondary', label: 'Gris' }, { value: 'muted', label: 'Gris clair' }
+                    ], defaultValue: this.defaultData.color },
+                    { name: 'alignment', label: 'Alignement', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' }, { value: 'center', label: 'Centre' }, { value: 'right', label: 'Droite' }
+                    ], defaultValue: this.defaultData.alignment },
+                    { name: 'isBold', label: 'Gras', type: 'checkbox', defaultValue: this.defaultData.isBold },
+                    { name: 'isItalic', label: 'Italique', type: 'checkbox', defaultValue: this.defaultData.isItalic }
+                ];
+            }
+
+            validate(data) {
+                const errors = [];
+                if (!data.text || data.text.trim() === '') errors.push('Le texte ne peut pas être vide');
+                if (data.text && data.text.length > 2000) errors.push('Texte trop long (max 2000 caractères)');
+                return { isValid: errors.length === 0, errors: errors };
+            }
+        }
+
         class LogoWidget {
             constructor() {
                 this.id = 'logo';
@@ -2015,7 +2236,6 @@
                     // Dimensions et position
                     { name: 'width', label: 'Largeur (px)', type: 'range', min: 30, max: 200, category: 'Dimensions' },
                     { name: 'height', label: 'Hauteur (px)', type: 'range', min: 30, max: 200, category: 'Dimensions' },
-                    { name: 'containerPaddingX', label: 'Espacement largeur (px)', type: 'range', min: 0, max: 50, category: 'Dimensions' },
                     { name: 'containerPaddingY', label: 'Espacement hauteur (px)', type: 'range', min: 0, max: 50, category: 'Dimensions' },
                     { name: 'containerAlignment', label: 'Alignement', type: 'select', category: 'Dimensions', options: [
                         { value: 'left', label: 'Gauche' },
@@ -2561,14 +2781,18 @@
                 this.widgets = [];
                 this.selectedWidget = null;
                 
-                // Widgets disponibles
-                this.availableWidgets = [
+                // Widgets disponibles (classes de base + widgets personnalisés)
+                this.baseWidgets = [
+                    TextSimpleWidget,
                     LogoWidget,
                     HeroTitleWidget,
                     PricingCardWidget,
                     CallToActionWidget,
                     FeatureGridWidget
                 ];
+                
+                // Charger les widgets disponibles (base + personnalisés)
+                this.availableWidgets = this.loadAvailableWidgets();
                 
                 // Système de dossiers et de recherche
                 this.currentFolder = 'root';
@@ -2605,6 +2829,53 @@
                 this.updateWidthIndicator();
                 
                 this.setStatus('Éditeur prêt', 'success');
+            }
+
+            // Rôle      : Charger tous les widgets disponibles (classes de base + widgets personnalisés)
+            // Type      : function
+            // Unité     : sans unité
+            // Formule   : widgets_disponibles = widgets_base + widgets_personnalisés_localStorage
+            // Exemple   : [LogoWidget, HeroTitleWidget, MonLogoPersonnalisé, MonTitreCustom]
+            loadAvailableWidgets() {
+                // Commencer avec les widgets de base
+                let widgets = [...this.baseWidgets];
+                
+                // Ajouter les widgets personnalisés depuis localStorage
+                const customWidgets = JSON.parse(localStorage.getItem('customWidgets') || '[]');
+                
+                customWidgets.forEach(customWidget => {
+                    // Créer une classe dynamique pour le widget personnalisé
+                    const CustomWidgetClass = class extends (this.baseWidgets.find(w => new w().id === customWidget.originalType)) {
+                        constructor() {
+                            super();
+                            this.id = customWidget.id;
+                            this.name = customWidget.name;
+                            this.description = `Widget personnalisé basé sur ${customWidget.originalType}`;
+                            this.category = 'Personnalisés';
+                            this.isCustom = true;
+                            this.customId = customWidget.id;
+                            this.originalType = customWidget.originalType;
+                            
+                            // Remplacer les données par défaut par celles du widget personnalisé
+                            this.defaultData = { ...customWidget.data };
+                        }
+                        
+                        // Permettre la suppression depuis la bibliothèque
+                        getActions() {
+                            return [
+                                {
+                                    icon: 'fas fa-trash text-red-400',
+                                    action: () => widgetEditor.deleteCustomWidget(this.customId),
+                                    title: 'Supprimer ce widget personnalisé'
+                                }
+                            ];
+                        }
+                    };
+                    
+                    widgets.push(CustomWidgetClass);
+                });
+                
+                return widgets;
             }
 
             setupWidgetCategories() {
@@ -2824,6 +3095,10 @@
                 document.getElementById('duplicateBtn').addEventListener('click', () => this.duplicateWidget());
                 document.getElementById('deleteBtn').addEventListener('click', () => this.deleteWidget());
                 
+                // Boutons widgets personnalisés
+                document.getElementById('saveCustomWidgetBtn').addEventListener('click', () => this.saveCustomWidget());
+                document.getElementById('updateCustomWidgetBtn').addEventListener('click', () => this.updateCustomWidget());
+                
                 // Boutons préréglages de taille
                 document.getElementById('fullScreenBtn').addEventListener('click', () => this.setFullScreen());
                 document.getElementById('fillParentBtn').addEventListener('click', () => this.fillParent());
@@ -2887,6 +3162,13 @@
 
             // Nouvelle méthode : rendu de la bibliothèque avec dossiers
             renderWidgetLibrary() {
+                // Recharger les widgets disponibles pour inclure les nouveaux widgets personnalisés
+                this.availableWidgets = this.loadAvailableWidgets();
+                
+                // Réinitialiser les catégories
+                this.widgetCategories = {};
+                this.setupWidgetCategories();
+                
                 this.updateFolderStructure();
                 this.renderCurrentFolder();
                 this.loadSavedProjects();
@@ -2979,15 +3261,33 @@
                 const isFavorite = this.favoriteWidgets.has(widget.id);
                 const isRecent = this.recentWidgets.has(widget.id);
                 
+                // Générer les actions personnalisées si disponibles
+                let customActionsHtml = '';
+                if (widget.getActions && typeof widget.getActions === 'function') {
+                    const actions = widget.getActions();
+                    actions.forEach(action => {
+                        customActionsHtml += `
+                            <button class="btn btn-sm" onclick="event.stopPropagation(); (${action.action.toString()})()" title="${action.title}">
+                                <i class="${action.icon}"></i>
+                            </button>
+                        `;
+                    });
+                }
+                
+                // Marquer visuellement les widgets personnalisés
+                const customBadge = widget.isCustom ? '<div class="widget-custom-badge" title="Widget personnalisé"><i class="fas fa-user"></i></div>' : '';
+                
                 item.innerHTML = `
                     <div class="widget-icon">
                         <i class="${widget.icon || 'fas fa-puzzle-piece'}"></i>
+                        ${customBadge}
                     </div>
                     <div class="widget-info">
                         <div class="widget-name">${widget.name}</div>
                         <div class="widget-description">${widget.description}</div>
                     </div>
                     <div class="widget-actions">
+                        ${customActionsHtml}
                         <button class="btn btn-sm" onclick="event.stopPropagation(); widgetEditor.toggleFavorite('${widget.id}')" 
                                 title="${isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}">
                             <i class="fas fa-star" style="color: ${isFavorite ? '#fbbf24' : 'var(--text-muted)'}"></i>
@@ -3534,7 +3834,8 @@
                     const controls = [
                         'widthSlider', 'heightSlider', 'widthInput', 'heightInput',
                         'positionColSlider', 'positionRowSlider', 'positionColInput', 'positionRowInput',
-                        'duplicateBtn', 'deleteBtn', 'fullScreenBtn', 'fillParentBtn'
+                        'duplicateBtn', 'deleteBtn', 'fullScreenBtn', 'fillParentBtn',
+                        'customWidgetName', 'saveCustomWidgetBtn', 'updateCustomWidgetBtn'
                     ];
                     
                     controls.forEach(id => {
@@ -3633,11 +3934,28 @@
                 const deleteBtn = document.getElementById('deleteBtn');
                 const fullScreenBtn = document.getElementById('fullScreenBtn');
                 const fillParentBtn = document.getElementById('fillParentBtn');
+                const customWidgetName = document.getElementById('customWidgetName');
+                const saveCustomWidgetBtn = document.getElementById('saveCustomWidgetBtn');
+                const updateCustomWidgetBtn = document.getElementById('updateCustomWidgetBtn');
                 
                 if (duplicateBtn) duplicateBtn.disabled = false;
                 if (deleteBtn) deleteBtn.disabled = false;
                 if (fullScreenBtn) fullScreenBtn.disabled = false;
                 if (fillParentBtn) fillParentBtn.disabled = false;
+                if (customWidgetName) customWidgetName.disabled = false;
+                if (saveCustomWidgetBtn) saveCustomWidgetBtn.disabled = false;
+                
+                // Vérifier si le widget est déjà un widget personnalisé pour afficher le bouton "Mettre à jour"
+                if (updateCustomWidgetBtn) {
+                    if (this.selectedWidget.isCustom) {
+                        updateCustomWidgetBtn.style.display = 'inline-block';
+                        updateCustomWidgetBtn.disabled = false;
+                        if (customWidgetName) customWidgetName.value = this.selectedWidget.customName || '';
+                    } else {
+                        updateCustomWidgetBtn.style.display = 'none';
+                        if (customWidgetName) customWidgetName.value = '';
+                    }
+                }
                 
                 console.log(`✅ Contrôles Organisation activés pour widget ${this.selectedWidget.id}`);
                 console.log(`📊 Taille: ${size.width}x${size.height}, Position: col=${position.col}, row=${position.row}`);
@@ -5213,6 +5531,136 @@ Folder('${id}')" title="Renommer">
                 this.updatePreview();
                 
                 this.setStatus('Widget configuré pour remplir le conteneur parent', 'success');
+            }
+
+            // Rôle      : Sauvegarder un widget comme widget personnalisé réutilisable
+            // Type      : function
+            // Unité     : sans unité
+            // Formule   : nouveau_widget_template = {name, data, type, isCustom: true}
+            // Exemple   : Widget logo sauvé comme "Mon Logo Corporate" dans localStorage
+            saveCustomWidget() {
+                if (!this.selectedWidget) return;
+                
+                const nameInput = document.getElementById('customWidgetName');
+                const customName = nameInput ? nameInput.value.trim() : '';
+                
+                if (!customName) {
+                    alert('Veuillez saisir un nom pour votre widget personnalisé.');
+                    return;
+                }
+                
+                /* 
+                # Rôle      : Création du template de widget personnalisé
+                # Type      : object creation
+                # Unité     : sans unité
+                # Formule   : template = {id, name, data_copiée, type, timestamp, isCustom}
+                # Exemple   : {id: "custom_123", name: "Mon Logo", data: {...}, type: "logo", isCustom: true}
+                */
+                const customTemplate = {
+                    id: `custom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+                    name: customName,
+                    type: this.selectedWidget.type,
+                    data: JSON.parse(JSON.stringify(this.selectedWidget.data)), // Deep copy
+                    size: JSON.parse(JSON.stringify(this.selectedWidget.size || { width: 3, height: 2 })),
+                    isCustom: true,
+                    createdAt: new Date().toISOString(),
+                    originalType: this.selectedWidget.type
+                };
+                
+                // Sauvegarder dans localStorage
+                let customWidgets = JSON.parse(localStorage.getItem('customWidgets') || '[]');
+                
+                // Vérifier si un widget avec ce nom existe déjà
+                const existingIndex = customWidgets.findIndex(w => w.name === customName);
+                if (existingIndex >= 0) {
+                    if (!confirm(`Un widget nommé "${customName}" existe déjà. Voulez-vous le remplacer ?`)) {
+                        return;
+                    }
+                    customWidgets[existingIndex] = customTemplate;
+                } else {
+                    customWidgets.push(customTemplate);
+                }
+                
+                localStorage.setItem('customWidgets', JSON.stringify(customWidgets));
+                
+                // Marquer le widget actuel comme personnalisé
+                this.selectedWidget.isCustom = true;
+                this.selectedWidget.customName = customName;
+                this.selectedWidget.customId = customTemplate.id;
+                
+                // Actualiser la bibliothèque de widgets
+                this.renderWidgetLibrary();
+                
+                // Mettre à jour l'interface
+                this.updateOrganizationControls();
+                
+                console.log(`💾 Widget personnalisé sauvé: ${customName}`, customTemplate);
+                this.setStatus(`Widget "${customName}" sauvegardé avec succès`, 'success');
+            }
+            
+            // Rôle      : Mettre à jour un widget personnalisé existant
+            // Type      : function
+            // Unité     : sans unité
+            // Formule   : widget_existant.data = nouvelles_données_actuelles
+            // Exemple   : "Mon Logo Corporate" mis à jour avec nouvelles couleurs
+            updateCustomWidget() {
+                if (!this.selectedWidget || !this.selectedWidget.isCustom) return;
+                
+                const customName = this.selectedWidget.customName;
+                if (!customName) return;
+                
+                if (!confirm(`Voulez-vous vraiment mettre à jour le widget "${customName}" avec la configuration actuelle ?`)) {
+                    return;
+                }
+                
+                let customWidgets = JSON.parse(localStorage.getItem('customWidgets') || '[]');
+                const index = customWidgets.findIndex(w => w.name === customName);
+                
+                if (index >= 0) {
+                    // Mettre à jour le template
+                    customWidgets[index].data = JSON.parse(JSON.stringify(this.selectedWidget.data));
+                    customWidgets[index].size = JSON.parse(JSON.stringify(this.selectedWidget.size || { width: 3, height: 2 }));
+                    customWidgets[index].updatedAt = new Date().toISOString();
+                    
+                    localStorage.setItem('customWidgets', JSON.stringify(customWidgets));
+                    
+                    // Actualiser la bibliothèque
+                    this.renderWidgetLibrary();
+                    
+                    console.log(`🔄 Widget personnalisé mis à jour: ${customName}`);
+                    this.setStatus(`Widget "${customName}" mis à jour avec succès`, 'success');
+                } else {
+                    this.setStatus(`Erreur: Widget "${customName}" non trouvé`, 'error');
+                }
+            }
+            
+            // Rôle      : Supprimer un widget personnalisé de la bibliothèque
+            // Type      : function
+            // Unité     : sans unité
+            // Formule   : customWidgets = customWidgets.filter(w => w.id !== id_à_supprimer)
+            // Exemple   : Widget "Mon Logo Corporate" supprimé de localStorage
+            deleteCustomWidget(customId) {
+                let customWidgets = JSON.parse(localStorage.getItem('customWidgets') || '[]');
+                const widget = customWidgets.find(w => w.id === customId);
+                
+                if (!widget) {
+                    this.setStatus('Widget personnalisé non trouvé', 'error');
+                    return;
+                }
+                
+                if (!confirm(`Êtes-vous sûr de vouloir supprimer définitivement le widget "${widget.name}" ?`)) {
+                    return;
+                }
+                
+                // Filtrer le widget à supprimer
+                customWidgets = customWidgets.filter(w => w.id !== customId);
+                localStorage.setItem('customWidgets', JSON.stringify(customWidgets));
+                
+                // Actualiser la bibliothèque
+                this.renderWidgetLibrary();
+                
+                console.log(`🗑️ Widget personnalisé supprimé: ${widget.name}`);
+                this.setStatus(`Widget "${widget.name}" supprimé avec succès`, 'success');
             }
 
             // Gestion des fonctionnalités de la grille
