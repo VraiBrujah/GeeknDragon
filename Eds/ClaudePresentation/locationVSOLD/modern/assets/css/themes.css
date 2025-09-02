@@ -720,6 +720,14 @@ img {
     transform: scale(1);
 }
 
+.pricing-price-hover {
+    transition: transform 0.3s ease;
+}
+
+.pricing-price-hover:hover {
+    transform: scale(1.05);
+}
+
 /* Bloc du logo : styles génériques pilotés par variables CSS */
 .logo-container {
     text-align: var(--logo-align, center);
