@@ -1965,6 +1965,7 @@
                 # Exemple   : "Espacement: Y=20px X=15px → padding: 20px 15px"
                 */
                 console.log(`🔧 Espacement Logo: Y=${d.containerPaddingY}px X=${d.containerPaddingX}px → padding: ${d.containerPaddingY}px ${d.containerPaddingX}px`);
+                console.log(`📋 Données complètes du logo:`, d);
                 
                 return `
                     <div class="logo-container" style="text-align: ${d.containerAlignment}; 
@@ -3516,12 +3517,24 @@
             updateProperty(propertyName, value) {
                 if (!this.selectedWidget) return;
                 
+                console.log(`🔧 updateProperty: ${propertyName} = ${value} (type: ${typeof value})`);
                 
                 // Conversion des types
                 if (value === 'true') value = true;
                 if (value === 'false') value = false;
-                if (!isNaN(value) && value !== '' && typeof this.selectedWidget.data[propertyName] === 'number') {
+                
+                // Rôle      : Conversion en nombre pour les propriétés numériques
+                // Type      : number conversion  
+                // Unité     : sans unité
+                // Formule   : Si valeur est numérique, convertir en float
+                // Exemple   : "25" → 25 pour containerPaddingX
+                const isNumericProperty = ['width', 'height', 'containerPaddingX', 'containerPaddingY', 'containerPadding', 
+                                          'backgroundOpacity', 'borderWidth', 'borderRadius', 'borderOpacity', 
+                                          'imageSize', 'shadowOpacity', 'shadowOffsetX', 'shadowOffsetY', 'shadowBlur'].includes(propertyName);
+                
+                if (!isNaN(value) && value !== '' && (typeof this.selectedWidget.data[propertyName] === 'number' || isNumericProperty)) {
                     value = parseFloat(value);
+                    console.log(`📊 Converti en nombre: ${propertyName} = ${value}`);
                 }
                 
                 // Gestion spéciale pour featuresCount dans feature-grid
