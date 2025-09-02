@@ -12,9 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        /* ============================================================================
-         * ÉDITEUR DE WIDGETS COMPLET - INTERFACE AVANCÉE 
-         * ============================================================================ */
+        /* Éditeur de widgets complet */
         
         .widget-editor {
             display: grid;
@@ -1128,6 +1126,49 @@
             opacity: 0.5;
             cursor: not-allowed;
         }
+        
+        /* Classes utilitaires pour réduire la duplication */
+        .title-semibold {
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+        }
+        
+        .title-bold {
+            font-weight: bold;
+            color: var(--text-white);
+        }
+        
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .flex-between {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .text-accent {
+            color: var(--accent-green);
+        }
+        
+        .text-muted {
+            color: var(--text-muted);
+        }
+        
+        .bg-card {
+            background: var(--bg-card);
+        }
+        
+        .border-accent {
+            border-color: var(--accent-green);
+        }
+        
+        .transition-normal {
+            transition: var(--transition-normal);
+        }
 
         /* État vide */
         .empty-state {
@@ -1333,6 +1374,10 @@
                 <button class="btn btn-primary" id="addWidgetBtn">
                     <i class="fas fa-plus"></i>
                     Ajouter Widget
+                </button>
+                <button class="btn btn-outline" id="testLogoBtn" title="Ajouter un logo pour test">
+                    <i class="fas fa-image"></i>
+                    Test Logo
                 </button>
             </div>
             
@@ -1566,16 +1611,6 @@
                     <div class="property-group">
                         <h4><i class="fas fa-arrows-alt"></i> Organisation</h4>
                         <div class="property-field">
-                            <button class="btn btn-sm" id="moveUpBtn" disabled>
-                                <i class="fas fa-arrow-up"></i>
-                                Monter
-                            </button>
-                            <button class="btn btn-sm" id="moveDownBtn" disabled>
-                                <i class="fas fa-arrow-down"></i>
-                                Descendre
-                            </button>
-                        </div>
-                        <div class="property-field">
                             <button class="btn btn-sm" id="duplicateBtn" disabled>
                                 <i class="fas fa-copy"></i>
                                 Dupliquer
@@ -1638,9 +1673,7 @@
     </div>
 
     <script>
-        // ========================================================================
-        // WIDGETS INTÉGRÉS - Tous les widgets du test-simple.html
-        // ========================================================================
+        // WIDGETS INTÉGRÉS
         
         class LogoWidget {
             constructor() {
@@ -1659,7 +1692,7 @@
                     hoverEffect: true,
                     
                     // Propriétés d'arrière-plan avancées
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    backgroundColor: '#10b981',
                     backgroundOpacity: 10,
                     backgroundType: 'solid', // solid, gradient, transparent
                     gradientStart: '#10b981',
@@ -1667,7 +1700,7 @@
                     gradientDirection: 'to bottom',
                     
                     // Propriétés de bordure
-                    borderColor: 'rgba(16, 185, 129, 0.3)',
+                    borderColor: '#10b981',
                     borderWidth: 2,
                     borderStyle: 'solid', // solid, dashed, dotted, none
                     borderRadius: 12,
@@ -2368,9 +2401,7 @@
             }
         }
 
-        // ========================================================================
         // ÉDITEUR DE WIDGETS COMPLET
-        // ========================================================================
 
         class WidgetEditorComplete {
             constructor() {
@@ -2427,9 +2458,15 @@
             }
 
             setupEventListeners() {
-                // Boutons principaux
-                document.getElementById('addWidgetBtn').addEventListener('click', () => this.showAddWidgetDialog());
-                document.getElementById('firstWidgetBtn').addEventListener('click', () => this.showAddWidgetDialog());
+                // Boutons principaux (utilisation directe des widgets)
+                document.getElementById('addWidgetBtn').addEventListener('click', () => this.addWidget('hero-title'));
+                document.getElementById('firstWidgetBtn').addEventListener('click', () => this.addWidget('hero-title'));
+                document.getElementById('testLogoBtn').addEventListener('click', () => {
+                    // Rôle      : Ajouter et sélectionner automatiquement un logo pour test
+                    // Type      : function
+                    // Exemple   : Ajoute logo, le sélectionne, affiche propriétés
+                    this.addWidget('logo');
+                });
                 document.getElementById('saveBtn').addEventListener('click', () => this.saveProject());
                 document.getElementById('exportBtn').addEventListener('click', () => this.exportProject());
                 
@@ -2439,8 +2476,6 @@
                 });
                 
                 // Boutons organisation
-                document.getElementById('moveUpBtn').addEventListener('click', () => this.moveWidget(-1));
-                document.getElementById('moveDownBtn').addEventListener('click', () => this.moveWidget(1));
                 document.getElementById('duplicateBtn').addEventListener('click', () => this.duplicateWidget());
                 document.getElementById('deleteBtn').addEventListener('click', () => this.deleteWidget());
                 
@@ -2628,10 +2663,7 @@
                 return item;
             }
 
-            showAddWidgetDialog() {
-                // Pour simplifier, ajouter directement un widget par défaut
-                this.addWidget('hero-title');
-            }
+            // Méthode showAddWidgetDialog supprimée - utilisation directe de addWidget dans les événements
 
             addWidget(widgetType) {
                 const WidgetClass = this.availableWidgets.find(w => new w().id === widgetType);
@@ -2680,7 +2712,7 @@
                 };
                 
                 this.widgets.push(widgetData);
-                this.saveToHistory('Ajout widget');
+                // Historique supprimé
                 this.renderCanvas();
                 this.selectWidget(widgetData.id);
                 this.updatePreview();
@@ -3133,6 +3165,15 @@
             updateProperty(propertyName, value) {
                 if (!this.selectedWidget) return;
                 
+                /* 
+                # Rôle      : Log de débogage pour tracer les mises à jour de propriétés
+                # Type      : console.log
+                # Unité     : sans unité
+                # Formule   : console.log(nom_propriété, valeur, type_widget)
+                # Exemple   : "Mise à jour imagePath: ../assets/test.png pour widget logo"
+                */
+                console.log(`🔄 Mise à jour ${propertyName}: ${value} pour widget ${this.selectedWidget.type}`);
+                
                 // Conversion des types
                 if (value === 'true') value = true;
                 if (value === 'false') value = false;
@@ -3180,11 +3221,22 @@
                 
                 // Mise à jour temps réel spécifique par type de widget et propriété
                 const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                
+                /* 
+                # Rôle      : Log de débogage pour vérifier la sélection du conteneur
+                # Type      : console.log
+                # Unité     : sans unité
+                # Formule   : console.log(sélecteur, élément_trouvé)
+                # Exemple   : "Conteneur trouvé: true pour sélecteur [data-widget-id='widget-123']"
+                */
+                console.log(`📦 Conteneur trouvé: ${container ? 'OUI' : 'NON'} pour sélecteur [data-widget-id="${this.selectedWidget.id}"]`);
+                
                 if (container) {
                     this.updateWidgetRealTime(container, propertyName, value);
                 }
                 
                 // Mettre à jour aussi le viewer
+                console.log(`🔄 Mise à jour de l'aperçu...`);
                 this.updatePreview();
                 
                 // Pas de setStatus pour éviter le spam lors de l'input continu
@@ -3192,52 +3244,54 @@
             
             // Mise à jour temps réel spécifique selon le type de widget
             updateWidgetRealTime(container, propertyName, value) {
-                const widgetType = this.selectedWidget.type;
+                // Rôle      : Re-rendu complet du widget pour éviter les conflits
+                // Type      : function
+                // Unité     : sans unité
+                // Formule   : nouveau_HTML = widget.render(données_actuelles)
+                // Exemple   : Le widget logo se re-rend avec imagePath mise à jour
                 
-                switch (widgetType) {
-                    case 'logo':
-                        this.updateLogoRealTime(container, propertyName, value);
-                        break;
-                    case 'hero-title':
-                        this.updateHeroTitleRealTime(container, propertyName, value);
-                        break;
-                    case 'pricing-card':
-                        this.updatePricingCardRealTime(container, propertyName, value);
-                        break;
-                    case 'call-to-action':
-                        this.updateCTARealTime(container, propertyName, value);
-                        break;
-                    case 'feature-grid':
-                        this.updateFeatureGridRealTime(container, propertyName, value);
-                        break;
-                }
+                /* 
+                # Rôle      : Mise à jour temps réel complète pour tous les widgets
+                # Type      : function
+                # Unité     : sans unité
+                # Formule   : re_rendu_complet = widget.render(nouvelles_données)
+                # Exemple   : Le widget logo se re-rend avec imagePath mise à jour
+                */
+                
+                // Re-rendu complet pour toutes les propriétés
+                this.rerenderWidget(container);
             }
             
-            // Mise à jour temps réel pour le logo
-            updateLogoRealTime(container, propertyName, value) {
-                const logoImage = container.querySelector('.logo-image, .nav-logo');
+            // Rôle      : Re-rendu complet d'un widget avec ses données actuelles
+            // Type      : function
+            // Unité     : sans unité
+            // Formule   : nouveau_HTML = widget_instance.render(widget_data)
+            // Exemple   : Le widget se re-rend avec les nouvelles données
+            rerenderWidget(container) {
+                if (!this.selectedWidget || !this.selectedWidget.instance) return;
                 
-                switch (propertyName) {
-                    case 'imagePath':
-                        if (logoImage) {
-                            logoImage.style.backgroundImage = `url('${value}')`;
-                        }
-                        break;
-                    case 'width':
-                        if (logoImage) {
-                            logoImage.style.width = `${value}px`;
-                        }
-                        break;
-                    case 'height':
-                        if (logoImage) {
-                            logoImage.style.height = `${value}px`;
-                        }
-                        break;
-                    case 'link':
-                        if (logoImage) {
-                            logoImage.href = value;
-                        }
-                        break;
+                try {
+                    /* 
+                    # Rôle      : Log de débogage pour le re-rendu du widget
+                    # Type      : console.log
+                    # Unité     : sans unité
+                    # Formule   : console.log(type_widget, données_actuelles)
+                    # Exemple   : "Re-rendu widget logo avec données: {imagePath: '../test.png', ...}"
+                    */
+                    console.log(`🎨 Re-rendu widget ${this.selectedWidget.type} avec données:`, this.selectedWidget.data);
+                    
+                    // Générer le nouveau HTML avec les données actuelles
+                    const newHTML = this.selectedWidget.instance.render(this.selectedWidget.data);
+                    
+                    console.log(`📝 Nouveau HTML généré:`, newHTML.substring(0, 200) + '...');
+                    
+                    // Remplacer le contenu du container
+                    container.innerHTML = newHTML;
+                    
+                    console.log(`✅ Container mis à jour dans l'éditeur`);
+                    
+                } catch (error) {
+                    console.error('❌ Erreur lors du re-rendu du widget:', error);
                 }
             }
             
@@ -3475,24 +3529,6 @@
                 document.getElementById(tabName + 'Tab').classList.add('active');
             }
 
-            moveWidget(direction, widgetId = null) {
-                const id = widgetId || (this.selectedWidget ? this.selectedWidget.id : null);
-                if (!id) return;
-                
-                const currentIndex = this.widgets.findIndex(w => w.id === id);
-                const newIndex = currentIndex + direction;
-                
-                if (newIndex < 0 || newIndex >= this.widgets.length) return;
-                
-                // Échanger les widgets dans la liste de rendu
-                [this.widgets[currentIndex], this.widgets[newIndex]] = [this.widgets[newIndex], this.widgets[currentIndex]];
-                
-                this.renderCanvas();
-                this.selectWidget(id);
-                this.updatePreview();
-                
-                this.setStatus('Ordre des widgets modifié', 'success');
-            }
 
             duplicateWidget(widgetId = null) {
                 const id = widgetId || (this.selectedWidget ? this.selectedWidget.id : null);
@@ -3512,7 +3548,7 @@
                 const index = this.widgets.findIndex(w => w.id === id);
                 this.widgets.splice(index + 1, 0, duplicatedWidget);
                 
-                this.saveToHistory('Duplication widget');
+                // Historique supprimé
                 this.renderCanvas();
                 this.selectWidget(duplicatedWidget.id);
                 this.updatePreview();
@@ -3533,13 +3569,11 @@
                 // Réinitialiser la sélection
                 this.selectedWidget = null;
                 
-                // Sauvegarder dans l'historique
-                this.saveToHistory('Suppression widget');
+                // Historique supprimé
                 
                 // Mettre à jour l'interface
                 this.renderCanvas();
                 this.updatePropertiesPanel();
-                this.updateOrganizationButtons();
                 this.updatePreview();
                 
                 // Mettre à jour le compteur
@@ -3689,16 +3723,7 @@
                 }
             }
 
-            // Historique simplifié
-            saveToHistory(action) {
-                // Sauvegarde simple pour référence future
-                console.log(`Action: ${action} - ${new Date().toLocaleTimeString()}`);
-            }
-
-            updateHistoryButtons() {
-                document.getElementById('undoBtn').disabled = this.historyIndex <= 0;
-                document.getElementById('redoBtn').disabled = this.historyIndex >= this.history.length - 1;
-            }
+            // Système d'historique supprimé pour simplifier le code
 
             // Sauvegarde complète du conteneur avec tous les widgets et leur configuration
             saveProject() {
@@ -3815,7 +3840,7 @@
                 };
             }
             
-            // ============= NOUVELLES MÉTHODES DOSSIERS ET RECHERCHE =============
+            // Méthodes dossiers et recherche
             
             // Sélection d'un dossier
             selectFolder(folderId) {
@@ -4023,7 +4048,7 @@ Folder('${id}')" title="Renommer">
                             const WidgetClass = this.availableWidgets.find(w => w.id === widgetData.type);
                             if (WidgetClass) {
                                 const widget = {
-                                    id: widgetData.id || this.generateId(),
+                                    id: widgetData.id || `widget-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
                                     type: widgetData.type,
                                     data: widgetData.data || {},
                                     position: widgetData.position || { col: 1, row: 1 },
@@ -4051,7 +4076,7 @@ Folder('${id}')" title="Renommer">
                 }
             }
             
-            // ============= MÉTHODES DE PRÉVISUALISATION PLEIN ÉCRAN =============
+            // Méthodes prévisualisation plein écran
             
             // Ouvrir la popup de prévisualisation plein écran
             openFullscreenPreview() {
@@ -4465,7 +4490,7 @@ Folder('${id}')" title="Renommer">
                     }, 3000);
                 }
                 
-                console.log(`[${type.toUpperCase()}] ${message}`);
+                // Log supprimé pour le nettoyage
             }
             
             // Gestion dynamique des fonctionnalités pour Pricing Card
@@ -4532,9 +4557,7 @@ Folder('${id}')" title="Renommer">
                 }
             }
 
-            // ================================================================
-            // NOUVELLES FONCTIONS - GESTION TAILLE ET POSITION
-            // ================================================================
+            // Gestion taille et position
             
             // Mettre à jour la taille d'un widget
             updateWidgetSize(dimension, value) {
@@ -4657,9 +4680,7 @@ Folder('${id}')" title="Renommer">
                 this.setStatus('Widget configuré pour remplir le conteneur parent', 'success');
             }
 
-            // ================================================================
-            // GESTION DES FONCTIONNALITÉS DE LA GRILLE
-            // ================================================================
+            // Gestion des fonctionnalités de la grille
             
             // Ajouter une nouvelle fonctionnalité à la grille
             addFeatureToGrid() {
@@ -5050,11 +5071,15 @@ Folder('${id}')" title="Renommer">
             }
         }
 
-        // Initialisation
-        const widgetEditor = new WidgetEditorComplete();
-        
-        // Exposition globale
-        window.widgetEditor = widgetEditor;
+        // Initialisation et exposition globale une fois le DOM chargé
+        document.addEventListener('DOMContentLoaded', function() {
+            // Rôle      : Créer l'instance globale widgetEditor
+            // Type      : WidgetEditorComplete
+            // Unité     : sans unité
+            // Exemple   : window.widgetEditor devient accessible globalement
+            window.widgetEditor = new WidgetEditorComplete();
+            console.log('WidgetEditor initialisé avec succès');
+        });
         
         // CSS pour les animations
         const style = document.createElement('style');
