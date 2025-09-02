@@ -3,10 +3,8 @@
 <head>
     <!-- Configuration éditeur de widgets -->
     <title>Éditeur de Widgets - Li-CUBE PRO™</title>
-    <link rel="import" href="editor-layout.html">
-    <script>
-        const layout = document.querySelector('link[rel="import"]').import.getElementById('layout');
-        document.head.appendChild(layout.content.cloneNode(true));
+    <script type="module">
+        import './layout-loader.js';
     </script>
 
     <!-- Styles modernes pour éditeur -->
