@@ -3480,33 +3480,8 @@ class MainEditor {
                 </div>
                 
                 <div class="size-selector-body">
-                    <div class="size-group">
-                        <label>Largeur de l'élément</label>
-                        <div class="size-options" data-dimension="width">
-                            <button class="size-option" data-value="25%">25%</button>
-                            <button class="size-option" data-value="33.333%">33%</button>
-                            <button class="size-option active" data-value="50%">50%</button>
-                            <button class="size-option" data-value="75%">75%</button>
-                            <button class="size-option" data-value="100%">100%</button>
-                        </div>
-                        <div class="size-custom">
-                            <input type="text" class="size-custom-input" data-dimension="width" placeholder="350px" />
-                        </div>
-                    </div>
-
-                    <div class="size-group">
-                        <label>Hauteur de l'élément</label>
-                        <div class="size-options" data-dimension="height">
-                            <button class="size-option active" data-value="auto">Auto</button>
-                            <button class="size-option" data-value="200px">200px</button>
-                            <button class="size-option" data-value="300px">300px</button>
-                            <button class="size-option" data-value="50vh">50vh</button>
-                            <button class="size-option" data-value="100vh">100vh</button>
-                        </div>
-                        <div class="size-custom">
-                            <input type="text" class="size-custom-input" data-dimension="height" placeholder="200px" />
-                        </div>
-                    </div>
+                    ${this.generateSizeOptionsHTML(elementType)}
+                </div>
 
                     <div class="size-group">
                         <label>Titre de l'élément (optionnel)</label>
@@ -3990,6 +3965,126 @@ class MainEditor {
         };
 
         return displayNames[elementType] || 'un Élément';
+    }
+
+    /**
+     * Génère les options de taille adaptées au type d'élément
+     * 
+     * Rôle : Création d'options de dimensions contextuelles
+     * Type : Méthode de génération HTML
+     * Paramètre : elementType - Type d'élément pour adapter les options
+     * Retour : String - HTML des options de taille
+     */
+    generateSizeOptionsHTML(elementType) {
+        // Rôle : Options de largeur selon le type d'élément
+        // Type : Object (mapping type → options)
+        // Unité : Valeurs CSS (%, px, auto)
+        // Domaine : Options logiques par type d'élément
+        // Formule : Différenciation contextuelle des dimensions
+        // Exemple : widgets → px, sections → %
+        let widthOptions, heightOptions, widthDefault, heightDefault;
+
+        if (elementType === 'widget') {
+            // Pour les widgets : dimensions fixes ou adaptatives
+            widthOptions = [
+                { value: 'auto', label: 'Auto' },
+                { value: '150px', label: '150px' },
+                { value: '250px', label: '250px' },
+                { value: '350px', label: '350px' },
+                { value: '500px', label: '500px' }
+            ];
+            heightOptions = [
+                { value: 'auto', label: 'Auto' },
+                { value: '80px', label: '80px' },
+                { value: '120px', label: '120px' },
+                { value: '200px', label: '200px' },
+                { value: '300px', label: '300px' }
+            ];
+            widthDefault = '250px';
+            heightDefault = 'auto';
+        } else {
+            // Pour les sections : dimensions relatives et viewport
+            widthOptions = [
+                { value: '25%', label: '25%' },
+                { value: '33.333%', label: '33%' },
+                { value: '50%', label: '50%' },
+                { value: '75%', label: '75%' },
+                { value: '100%', label: '100%' }
+            ];
+            heightOptions = [
+                { value: 'auto', label: 'Auto' },
+                { value: '200px', label: '200px' },
+                { value: '300px', label: '300px' },
+                { value: '50vh', label: '50vh' },
+                { value: '100vh', label: '100vh' }
+            ];
+            widthDefault = '50%';
+            heightDefault = 'auto';
+        }
+
+        // Rôle : Génération des boutons d'options de largeur
+        // Type : String (HTML des boutons)
+        // Unité : Sans unité
+        // Domaine : HTML valide avec classes et data-attributes
+        // Formule : Map + join pour créer les boutons
+        // Exemple : "<button class='size-option' data-value='250px'>250px</button>"
+        const widthButtonsHTML = widthOptions.map(option => 
+            `<button class="size-option ${option.value === widthDefault ? 'active' : ''}" data-value="${option.value}">${option.label}</button>`
+        ).join('');
+
+        // Rôle : Génération des boutons d'options de hauteur
+        // Type : String (HTML des boutons)
+        // Unité : Sans unité
+        // Domaine : HTML valide avec classes et data-attributes
+        // Formule : Map + join pour créer les boutons
+        // Exemple : "<button class='size-option' data-value='auto'>Auto</button>"
+        const heightButtonsHTML = heightOptions.map(option => 
+            `<button class="size-option ${option.value === heightDefault ? 'active' : ''}" data-value="${option.value}">${option.label}</button>`
+        ).join('');
+
+        // Rôle : Placeholder pour l'input personnalisé de largeur
+        // Type : String (valeur d'exemple)
+        // Unité : Unité CSS appropriée au type
+        // Domaine : Exemple de dimension valide
+        // Formule : Sélection contextuelle d'exemple
+        // Exemple : "350px" pour widgets, "75%" pour sections
+        const widthPlaceholder = elementType === 'widget' ? '350px' : '75%';
+
+        // Rôle : Placeholder pour l'input personnalisé de hauteur
+        // Type : String (valeur d'exemple)
+        // Unité : pixels pour exemple concret
+        // Domaine : Exemple de hauteur réaliste
+        // Formule : Valeur fixe appropriée
+        // Exemple : "200px" pour tous les types
+        const heightPlaceholder = '200px';
+
+        return `
+            <div class="size-group">
+                <label>Largeur de l'élément</label>
+                <div class="size-options" data-dimension="width">
+                    ${widthButtonsHTML}
+                </div>
+                <div class="size-custom">
+                    <input type="text" class="size-custom-input" data-dimension="width" placeholder="${widthPlaceholder}" />
+                </div>
+            </div>
+
+            <div class="size-group">
+                <label>Hauteur de l'élément</label>
+                <div class="size-options" data-dimension="height">
+                    ${heightButtonsHTML}
+                </div>
+                <div class="size-custom">
+                    <input type="text" class="size-custom-input" data-dimension="height" placeholder="${heightPlaceholder}" />
+                </div>
+            </div>
+
+            <div class="size-group">
+                <label>Titre de l'élément (optionnel)</label>
+                <input type="text" id="element-title" class="size-custom-input" 
+                       placeholder="Mon ${this.getElementDisplayName(elementType)}" />
+            </div>
+        `;
     }
 
     /**

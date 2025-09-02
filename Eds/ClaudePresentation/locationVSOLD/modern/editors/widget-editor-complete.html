@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur de Widgets Complet - Li-CUBE PRO™</title>
+    <link rel="stylesheet" href="../assets/css/themes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============================================================================
+         * ÉDITEUR DE WIDGETS COMPLET - INTERFACE AVANCÉE 
+         * ============================================================================ */
+        
+        .widget-editor {
+            display: grid;
+            grid-template-areas: 
+                "toolbar toolbar toolbar"
+                "library canvas properties"
+                "viewer viewer viewer"
+                "footer footer footer";
+            grid-template-columns: 280px 1fr 320px;
+            grid-template-rows: 60px 1fr 200px 40px;
+            height: 100vh;
+            background: var(--bg-primary);
+            font-family: var(--font-primary);
+        }
+
+        /* Barre d'outils */
+        .editor-toolbar {
+            grid-area: toolbar;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-lg);
+            backdrop-filter: blur(10px);
+        }
+
+        .toolbar-left, .toolbar-center, .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .toolbar-title {
+            font-size: var(--text-xl);
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .toolbar-title i {
+            color: var(--accent-green);
+            font-size: var(--text-2xl);
+        }
+
+        /* Bibliothèque de widgets */
+        .widget-library {
+            grid-area: library;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .library-header {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .library-title {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .library-search {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+        }
+
+        .library-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-md);
+        }
+
+        .widget-category {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .category-title {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-sm);
+            padding: 0 var(--spacing-sm);
+        }
+
+        .widget-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            margin-bottom: var(--spacing-xs);
+            background: var(--bg-card);
+            border: 1px solid transparent;
+            border-radius: var(--border-radius);
+            cursor: grab;
+            transition: var(--transition-normal);
+            user-select: none;
+        }
+
+        .widget-item:hover {
+            border-color: var(--border-hover);
+            background: rgba(16, 185, 129, 0.05);
+            transform: translateX(4px);
+        }
+
+        .widget-icon {
+            font-size: var(--text-xl);
+            width: 32px;
+            text-align: center;
+        }
+
+        .widget-info {
+            flex: 1;
+        }
+
+        .widget-name {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--text-white);
+            margin-bottom: 2px;
+        }
+
+        .widget-description {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        /* Canvas d'édition */
+        .editor-canvas {
+            grid-area: canvas;
+            background: var(--bg-primary);
+            position: relative;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .canvas-toolbar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .canvas-workspace {
+            flex: 1;
+            padding: var(--spacing-lg);
+            background: white;
+            color: var(--text-dark);
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, minmax(100px, 1fr));
+            gap: 8px;
+            grid-auto-rows: minmax(100px, auto);
+        }
+
+        /* Widget containers dans le canvas - Grille 2D */
+        .widget-container {
+            position: relative;
+            padding: var(--spacing-md);
+            background: rgba(248, 250, 252, 0.95);
+            border: 2px dashed #e5e7eb;
+            border-radius: var(--border-radius);
+            transition: var(--transition-normal);
+            cursor: move;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .widget-container.dragging {
+            opacity: 0.7;
+            transform: rotate(2deg);
+            z-index: 1000;
+        }
+
+        .widget-container:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+            border-style: solid;
+        }
+
+        .widget-container.selected {
+            border-color: var(--accent-green);
+            border-style: solid;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            background: rgba(16, 185, 129, 0.05);
+        }
+        
+        /* Poignées de redimensionnement */
+        .resize-handles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        
+        .resize-handle {
+            position: absolute;
+            background: var(--accent-green);
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            pointer-events: all;
+            cursor: nw-resize;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .widget-container.selected .resize-handle {
+            opacity: 1;
+        }
+        
+        .resize-handle.nw { top: -6px; left: -6px; cursor: nw-resize; }
+        .resize-handle.ne { top: -6px; right: -6px; cursor: ne-resize; }
+        .resize-handle.sw { bottom: -6px; left: -6px; cursor: sw-resize; }
+        .resize-handle.se { bottom: -6px; right: -6px; cursor: se-resize; }
+        .resize-handle.n { top: -6px; left: calc(50% - 6px); cursor: n-resize; }
+        .resize-handle.s { bottom: -6px; left: calc(50% - 6px); cursor: s-resize; }
+        .resize-handle.w { top: calc(50% - 6px); left: -6px; cursor: w-resize; }
+        .resize-handle.e { top: calc(50% - 6px); right: -6px; cursor: e-resize; }
+
+        .widget-container-header {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            right: 0;
+            background: var(--accent-green);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px 4px 0 0;
+            font-size: var(--text-xs);
+            font-weight: var(--font-bold);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .widget-container:hover .widget-container-header,
+        .widget-container.selected .widget-container-header {
+            opacity: 1;
+        }
+
+        .widget-header-title {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .widget-header-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .widget-control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .widget-control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Panneau de propriétés avancé */
+        .properties-panel {
+            grid-area: properties;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .properties-header {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .properties-title {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .properties-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-md);
+        }
+
+        .properties-tabs {
+            display: flex;
+            margin-bottom: var(--spacing-md);
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: var(--border-radius);
+            padding: 4px;
+        }
+
+        .properties-tab {
+            flex: 1;
+            padding: var(--spacing-sm);
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            border-radius: calc(var(--border-radius) - 4px);
+            cursor: pointer;
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
+            transition: all 0.3s ease;
+        }
+
+        .properties-tab.active {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .property-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .property-group h4 {
+            color: var(--text-white);
+            margin-bottom: var(--spacing-sm);
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .property-group h4 i {
+            color: var(--accent-green);
+        }
+
+        .property-field {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .property-label {
+            display: block;
+            color: var(--text-gray);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .property-control {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .property-input {
+            flex: 1;
+            padding: var(--spacing-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+        }
+
+        .property-range {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-primary);
+            outline: none;
+            border-radius: 3px;
+            -webkit-appearance: none;
+        }
+
+        .property-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .range-value {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: var(--border-radius);
+            padding: 0.25rem 0.5rem;
+            text-align: center;
+            font-size: var(--text-xs);
+            color: var(--accent-green);
+            font-weight: var(--font-medium);
+            min-width: 50px;
+        }
+
+        /* Viewer temps réel - Miroir du canvas */
+        .editor-viewer {
+            grid-area: viewer;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .viewer-header {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .viewer-title {
+            color: var(--text-white);
+            font-weight: var(--font-semibold);
+            font-size: var(--text-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .viewer-controls {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+
+        .viewer-content {
+            flex: 1;
+            overflow: auto;
+            padding: var(--spacing-md);
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .presentation-preview {
+            width: 100%;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, minmax(80px, 1fr));
+            gap: 6px;
+            padding: 12px;
+            min-height: 600px;
+        }
+        
+        .preview-widget {
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Boutons et contrôles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-card);
+            color: var(--text-white);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            text-decoration: none;
+            min-height: 32px;
+        }
+
+        .btn:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-secondary);
+        }
+
+        .btn.btn-primary {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: white;
+        }
+
+        .btn.btn-primary:hover {
+            background: #0d9488;
+            border-color: #0d9488;
+        }
+
+        .btn.btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: var(--text-xs);
+            min-height: 24px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* État vide */
+        .empty-state {
+            grid-column: 1 / -1;
+            grid-row: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .empty-text {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .empty-state.hidden {
+            display: none;
+        }
+
+        /* Pied de page */
+        .editor-footer {
+            grid-area: footer;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-lg);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-green);
+        }
+
+        .status-indicator.error {
+            background: var(--danger-red);
+        }
+
+        .status-indicator.warning {
+            background: var(--warning-orange);
+        }
+        
+        /* Animations */
+        .widget-container {
+            animation: slideInUp 0.3s ease-out;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .widget-editor {
+                grid-template-areas: 
+                    "toolbar toolbar"
+                    "canvas properties"
+                    "viewer viewer"
+                    "footer footer";
+                grid-template-columns: 1fr 320px;
+            }
+            
+            .widget-library {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="widget-editor">
+        <!-- Barre d'outils -->
+        <div class="editor-toolbar">
+            <div class="toolbar-left">
+                <div class="toolbar-title">
+                    <i class="fas fa-puzzle-piece"></i>
+                    Éditeur de Widgets Complet
+                </div>
+            </div>
+            
+            <div class="toolbar-center">
+                <button class="btn btn-primary" id="addWidgetBtn">
+                    <i class="fas fa-plus"></i>
+                    Ajouter Widget
+                </button>
+            </div>
+            
+            <div class="toolbar-right">
+                <button class="btn btn-primary" id="saveBtn">
+                    <i class="fas fa-save"></i>
+                    Sauvegarder
+                </button>
+                <button class="btn" id="exportBtn">
+                    <i class="fas fa-download"></i>
+                    Exporter
+                </button>
+            </div>
+        </div>
+
+        <!-- Bibliothèque de widgets -->
+        <div class="widget-library">
+            <div class="library-header">
+                <h3 class="library-title">Widgets Disponibles</h3>
+                <input type="text" class="library-search" placeholder="Rechercher..." id="widgetSearch">
+            </div>
+            
+            <div class="library-content" id="widgetLibrary">
+                <!-- Widgets chargés dynamiquement -->
+            </div>
+        </div>
+
+        <!-- Canvas d'édition -->
+        <div class="editor-canvas">
+            <div class="canvas-toolbar">
+                <div class="canvas-tools">
+                    <button class="btn btn-sm" id="selectModeBtn">
+                        <i class="fas fa-mouse-pointer"></i>
+                        Sélection
+                    </button>
+                    <button class="btn btn-sm" id="previewModeBtn">
+                        <i class="fas fa-eye"></i>
+                        Aperçu
+                    </button>
+                </div>
+                
+                <div class="canvas-info">
+                    <span>Widgets: <span id="widgetCount">0</span></span>
+                </div>
+            </div>
+            
+            <div class="canvas-workspace" id="canvasWorkspace">
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <div class="empty-text">
+                        <strong>Canvas Vide</strong><br>
+                        Cliquez sur "Ajouter Widget" ou glissez un widget depuis la bibliothèque
+                    </div>
+                    <button class="btn btn-primary" id="firstWidgetBtn">
+                        <i class="fas fa-plus"></i>
+                        Ajouter le premier widget
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panneau de propriétés -->
+        <div class="properties-panel">
+            <div class="properties-header">
+                <h3 class="properties-title">
+                    <i class="fas fa-sliders-h"></i>
+                    Propriétés
+                </h3>
+            </div>
+            
+            <div class="properties-content" id="propertiesContent">
+                <div class="properties-tabs">
+                    <button class="properties-tab active" data-tab="properties">Propriétés</button>
+                    <button class="properties-tab" data-tab="elements">Éléments</button>
+                    <button class="properties-tab" data-tab="organization">Organisation</button>
+                </div>
+                
+                <div class="tab-content active" id="propertiesTab">
+                    <div class="properties-empty">
+                        <i class="fas fa-info-circle" style="font-size: 2rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+                        <p>Sélectionnez un widget pour voir ses propriétés</p>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="elementsTab">
+                    <div class="property-group">
+                        <h4><i class="fas fa-list"></i> Éléments du Widget</h4>
+                        <div id="elementsContainer">
+                            <p style="color: var(--text-muted); font-style: italic;">Aucun widget sélectionné</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="organizationTab">
+                    <div class="property-group">
+                        <h4><i class="fas fa-arrows-alt"></i> Organisation</h4>
+                        <div class="property-field">
+                            <button class="btn btn-sm" id="moveUpBtn" disabled>
+                                <i class="fas fa-arrow-up"></i>
+                                Monter
+                            </button>
+                            <button class="btn btn-sm" id="moveDownBtn" disabled>
+                                <i class="fas fa-arrow-down"></i>
+                                Descendre
+                            </button>
+                        </div>
+                        <div class="property-field">
+                            <button class="btn btn-sm" id="duplicateBtn" disabled>
+                                <i class="fas fa-copy"></i>
+                                Dupliquer
+                            </button>
+                            <button class="btn btn-sm" id="deleteBtn" disabled>
+                                <i class="fas fa-trash"></i>
+                                Supprimer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Viewer temps réel -->
+        <div class="editor-viewer">
+            <div class="viewer-header">
+                <div class="viewer-title">
+                    <i class="fas fa-desktop"></i>
+                    Aperçu Temps Réel
+                </div>
+                <div class="viewer-controls">
+                    <button class="btn btn-sm" id="refreshPreviewBtn">
+                        <i class="fas fa-sync"></i>
+                        Actualiser
+                    </button>
+                    <button class="btn btn-sm" id="fullscreenPreviewBtn">
+                        <i class="fas fa-expand"></i>
+                        Plein écran
+                    </button>
+                </div>
+            </div>
+            
+            <div class="viewer-content" id="viewerContent">
+                <div class="presentation-preview" id="presentationPreview">
+                    <div style="padding: 2rem; text-align: center; color: #6b7280;">
+                        <i class="fas fa-eye" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                        <div>L'aperçu temps réel apparaîtra ici</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pied de page -->
+        <div class="editor-footer">
+            <div class="footer-status">
+                <div class="status-item">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText">Prêt</span>
+                </div>
+                <div class="status-item">
+                    <span>Dernière sauvegarde: <span id="lastSave">Jamais</span></span>
+                </div>
+            </div>
+            
+            <div class="footer-actions">
+                <span>Éditeur de Widgets Li-CUBE PRO™ v2.0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================================================
+        // WIDGETS INTÉGRÉS - Tous les widgets du test-simple.html
+        // ========================================================================
+        
+        class LogoWidget {
+            constructor() {
+                this.id = 'logo';
+                this.name = 'Logo';
+                this.category = 'Navigation';
+                this.icon = '🏢';
+                this.description = 'Logo avec image et effets hover';
+                
+                this.defaultData = {
+                    imagePath: '../assets/images/logo-eds.png',
+                    altText: 'Logo EDS Québec',
+                    width: 60,
+                    height: 60,
+                    link: '#',
+                    hoverEffect: true
+                };
+            }
+
+            render(data = {}) {
+                const d = { ...this.defaultData, ...data };
+                
+                return `
+                    <div class="logo-container" style="text-align: center; padding: 20px; height: 100%;">
+                        <a href="${d.link}" 
+                           class="nav-logo logo-image ${d.hoverEffect ? 'hover-effect' : ''}"
+                           style="display: inline-block; width: ${d.width}px; height: ${d.height}px; 
+                                  border-radius: 12px; background: rgba(16, 185, 129, 0.1);
+                                  border: 2px solid rgba(16, 185, 129, 0.3);
+                                  background-image: url('${d.imagePath}');
+                                  background-size: 80%; background-repeat: no-repeat; 
+                                  background-position: center; transition: all 0.3s ease;
+                                  text-decoration: none;">
+                            <span style="position: absolute; width: 1px; height: 1px; overflow: hidden;">
+                                ${d.altText}
+                            </span>
+                        </a>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    { name: 'imagePath', label: 'Chemin image', type: 'text' },
+                    { name: 'altText', label: 'Texte alternatif', type: 'text' },
+                    { name: 'width', label: 'Largeur', type: 'range', min: 30, max: 150 },
+                    { name: 'height', label: 'Hauteur', type: 'range', min: 30, max: 150 },
+                    { name: 'link', label: 'Lien', type: 'text' },
+                    { name: 'hoverEffect', label: 'Effet hover', type: 'checkbox' }
+                ];
+            }
+
+            getElements() {
+                return [
+                    { id: 'container', name: 'Conteneur', editable: true },
+                    { id: 'link', name: 'Lien', editable: true },
+                    { id: 'image', name: 'Image', editable: true }
+                ];
+            }
+        }
+
+        class HeroTitleWidget {
+            constructor() {
+                this.id = 'hero-title';
+                this.name = 'Titre Hero';
+                this.category = 'Contenu';
+                this.icon = '✨';
+                this.description = 'Titre principal avec gradient';
+                
+                this.defaultData = {
+                    title: 'Li-CUBE PRO™',
+                    subtitle: 'LOCATION INTELLIGENTE ZÉRO RISQUE',
+                    titleSize: 48,
+                    subtitleSize: 24,
+                    gradient: true,
+                    animation: 'slide-up',
+                    alignment: 'center'
+                };
+            }
+
+            render(data = {}) {
+                const d = { ...this.defaultData, ...data };
+                
+                const gradientStyle = d.gradient ? 
+                    'background: linear-gradient(135deg, #10b981, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;' : 
+                    'color: #10b981;';
+                
+                return `
+                    <div class="hero-section" style="text-align: ${d.alignment}; padding: 60px 20px;">
+                        <h1 class="hero-title ${d.animation}" 
+                            style="font-size: ${d.titleSize}px; font-weight: 900; 
+                                   ${gradientStyle} margin-bottom: 20px; line-height: 1.1;
+                                   animation-delay: 0.2s;">
+                            ${d.title}
+                        </h1>
+                        <div class="hero-subtitle ${d.animation}"
+                             style="font-size: ${d.subtitleSize}px; font-weight: 600; 
+                                    color: #6b7280; line-height: 1.3; max-width: 600px; 
+                                    margin: 0 auto; animation-delay: 0.4s;">
+                            ${d.subtitle}
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    { name: 'title', label: 'Titre', type: 'text' },
+                    { name: 'subtitle', label: 'Sous-titre', type: 'textarea' },
+                    { name: 'titleSize', label: 'Taille titre', type: 'range', min: 24, max: 72 },
+                    { name: 'subtitleSize', label: 'Taille sous-titre', type: 'range', min: 14, max: 36 },
+                    { name: 'gradient', label: 'Gradient', type: 'checkbox' },
+                    { name: 'alignment', label: 'Alignement', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' },
+                        { value: 'center', label: 'Centre' },
+                        { value: 'right', label: 'Droite' }
+                    ]}
+                ];
+            }
+
+            getElements() {
+                return [
+                    { id: 'section', name: 'Section Hero', editable: true },
+                    { id: 'title', name: 'Titre principal', editable: true },
+                    { id: 'subtitle', name: 'Sous-titre', editable: true }
+                ];
+            }
+        }
+
+        class PricingCardWidget {
+            constructor() {
+                this.id = 'pricing-card';
+                this.name = 'Carte Tarification';
+                this.category = 'Commerce';
+                this.icon = '💰';
+                this.description = 'Carte de prix complète';
+                
+                this.defaultData = {
+                    planName: 'ESSENTIEL',
+                    price: '299',
+                    currency: '$',
+                    period: '/mois',
+                    ctaText: 'Choisir ce plan',
+                    ctaLink: '#contact',
+                    featured: false,
+                    badge: '',
+                    features: [
+                        'Installation gratuite',
+                        'Maintenance incluse',
+                        'Support par email',
+                        'Jusqu\'à 50 équipements'
+                    ]
+                };
+            }
+
+            render(data = {}) {
+                const d = { ...this.defaultData, ...data };
+                
+                const featuresHtml = d.features.map(feature => 
+                    `<li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #6b7280;">
+                        <span style="color: #10b981; font-size: 14px;">✓</span>
+                        <span>${feature}</span>
+                    </li>`
+                ).join('');
+
+                const badgeHtml = d.badge ? 
+                    `<div class="pricing-badge" style="position: absolute; top: -10px; left: 50%; 
+                                                      transform: translateX(-50%); background: #10b981; 
+                                                      color: white; padding: 4px 12px; border-radius: 6px; 
+                                                      font-size: 12px; font-weight: bold;">
+                        ${d.badge}
+                    </div>` : '';
+
+                return `
+                    <div class="pricing-card ${d.featured ? 'featured' : ''}" 
+                         style="background: #1f2937; border: 2px solid ${d.featured ? '#10b981' : '#374151'}; 
+                                border-radius: 12px; padding: 32px; text-align: center; position: relative; 
+                                backdrop-filter: blur(10px); margin: 20px;">
+                        ${badgeHtml}
+                        
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: white; margin-bottom: 20px; 
+                                       text-transform: uppercase; letter-spacing: 0.05em;">
+                                ${d.planName}
+                            </h3>
+                            
+                            <div style="display: flex; align-items: baseline; justify-content: center; gap: 8px; margin-bottom: 20px;">
+                                <span style="font-size: 2rem; font-weight: 600; color: #10b981;">${d.currency}</span>
+                                <span style="font-size: 3.5rem; font-weight: 900; color: white; line-height: 1;">${d.price}</span>
+                                <span style="font-size: 1.125rem; color: #9ca3af; font-weight: 500;">${d.period}</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 32px;">
+                            <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                                ${featuresHtml}
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <a href="${d.ctaLink}" 
+                               style="width: 100%; padding: 16px 24px; background: #10b981; color: white;
+                                      border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+                                      text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;
+                                      text-decoration: none; display: inline-block; cursor: pointer;">
+                                ${d.ctaText}
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    { name: 'planName', label: 'Nom du plan', type: 'text' },
+                    { name: 'price', label: 'Prix', type: 'text' },
+                    { name: 'currency', label: 'Devise', type: 'text' },
+                    { name: 'period', label: 'Période', type: 'text' },
+                    { name: 'ctaText', label: 'Texte bouton', type: 'text' },
+                    { name: 'ctaLink', label: 'Lien bouton', type: 'text' },
+                    { name: 'featured', label: 'Plan vedette', type: 'checkbox' },
+                    { name: 'badge', label: 'Badge', type: 'text' }
+                ];
+            }
+
+            getElements() {
+                return [
+                    { id: 'card', name: 'Carte principale', editable: true },
+                    { id: 'header', name: 'En-tête', editable: true },
+                    { id: 'price', name: 'Prix', editable: true },
+                    { id: 'features', name: 'Fonctionnalités', editable: true },
+                    { id: 'cta', name: 'Bouton action', editable: true }
+                ];
+            }
+        }
+
+        class CallToActionWidget {
+            constructor() {
+                this.id = 'call-to-action';
+                this.name = 'Call to Action';
+                this.category = 'Action';
+                this.icon = '🎯';
+                this.description = 'Section d\'appel à l\'action';
+                
+                this.defaultData = {
+                    title: 'Prêt à commencer ?',
+                    description: 'Contactez-nous dès aujourd\'hui pour une consultation gratuite',
+                    primaryButtonText: 'Nous Contacter',
+                    primaryButtonLink: '#contact',
+                    secondaryButtonText: 'En savoir plus',
+                    secondaryButtonLink: '#info',
+                    backgroundColor: '#10b981',
+                    showSecondaryButton: true
+                };
+            }
+
+            render(data = {}) {
+                const d = { ...this.defaultData, ...data };
+                
+                const secondaryButton = d.showSecondaryButton ? 
+                    `<a href="${d.secondaryButtonLink}" 
+                       style="padding: 12px 24px; background: transparent; color: white; 
+                              border: 2px solid white; border-radius: 8px; font-weight: 600; 
+                              text-decoration: none; margin-left: 16px; display: inline-block;">
+                        ${d.secondaryButtonText}
+                    </a>` : '';
+
+                return `
+                    <div class="cta-section" 
+                         style="background: ${d.backgroundColor}; color: white; padding: 80px 20px; 
+                                text-align: center; margin: 40px 0;">
+                        <h2 style="font-size: 2.5rem; font-weight: bold; margin-bottom: 20px;">
+                            ${d.title}
+                        </h2>
+                        <p style="font-size: 1.25rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                            ${d.description}
+                        </p>
+                        <div class="cta-buttons">
+                            <a href="${d.primaryButtonLink}" 
+                               style="padding: 16px 32px; background: white; color: ${d.backgroundColor}; 
+                                      border-radius: 8px; font-size: 1.125rem; font-weight: 600; 
+                                      text-decoration: none; display: inline-block;">
+                                ${d.primaryButtonText}
+                            </a>
+                            ${secondaryButton}
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    { name: 'title', label: 'Titre', type: 'text' },
+                    { name: 'description', label: 'Description', type: 'textarea' },
+                    { name: 'primaryButtonText', label: 'Texte bouton principal', type: 'text' },
+                    { name: 'primaryButtonLink', label: 'Lien bouton principal', type: 'text' },
+                    { name: 'secondaryButtonText', label: 'Texte bouton secondaire', type: 'text' },
+                    { name: 'secondaryButtonLink', label: 'Lien bouton secondaire', type: 'text' },
+                    { name: 'showSecondaryButton', label: 'Afficher bouton secondaire', type: 'checkbox' },
+                    { name: 'backgroundColor', label: 'Couleur de fond', type: 'color' }
+                ];
+            }
+
+            getElements() {
+                return [
+                    { id: 'section', name: 'Section CTA', editable: true },
+                    { id: 'title', name: 'Titre', editable: true },
+                    { id: 'description', name: 'Description', editable: true },
+                    { id: 'buttons', name: 'Boutons', editable: true }
+                ];
+            }
+        }
+
+        class FeatureGridWidget {
+            constructor() {
+                this.id = 'feature-grid';
+                this.name = 'Grille de Fonctionnalités';
+                this.category = 'Contenu';
+                this.icon = '⭐';
+                this.description = 'Grille de fonctionnalités avec icônes';
+                
+                this.defaultData = {
+                    title: 'Pourquoi Nous Choisir ?',
+                    features: [
+                        {
+                            icon: '🚀',
+                            title: 'Performance',
+                            description: 'Des solutions rapides et efficaces'
+                        },
+                        {
+                            icon: '🔒',
+                            title: 'Sécurité',
+                            description: 'Protection maximale de vos données'
+                        },
+                        {
+                            icon: '💡',
+                            title: 'Innovation',
+                            description: 'Technologies de pointe'
+                        },
+                        {
+                            icon: '🤝',
+                            title: 'Support',
+                            description: 'Équipe dédiée à votre service'
+                        }
+                    ],
+                    columns: 2
+                };
+            }
+
+            render(data = {}) {
+                const d = { ...this.defaultData, ...data };
+                
+                const featuresHtml = d.features.map(feature => 
+                    `<div class="feature-card" 
+                          style="background: var(--bg-card); padding: 32px; border-radius: 12px; 
+                                 text-align: center; border: 1px solid var(--border-color);">
+                        <div style="font-size: 3rem; margin-bottom: 20px;">${feature.icon}</div>
+                        <h3 style="color: white; font-size: 1.5rem; margin-bottom: 16px; font-weight: bold;">
+                            ${feature.title}
+                        </h3>
+                        <p style="color: var(--text-gray); line-height: 1.6;">
+                            ${feature.description}
+                        </p>
+                    </div>`
+                ).join('');
+
+                return `
+                    <div class="features-section" style="padding: 80px 20px; background: var(--bg-primary);">
+                        <h2 style="text-align: center; font-size: 2.5rem; font-weight: bold; 
+                                   color: white; margin-bottom: 60px;">
+                            ${d.title}
+                        </h2>
+                        <div class="features-grid" 
+                             style="display: grid; grid-template-columns: repeat(${d.columns}, 1fr); 
+                                    gap: 32px; max-width: 1200px; margin: 0 auto;">
+                            ${featuresHtml}
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    { name: 'title', label: 'Titre', type: 'text' },
+                    { name: 'columns', label: 'Nombre de colonnes', type: 'range', min: 1, max: 4 }
+                ];
+            }
+
+            getElements() {
+                return [
+                    { id: 'section', name: 'Section fonctionnalités', editable: true },
+                    { id: 'title', name: 'Titre', editable: true },
+                    { id: 'grid', name: 'Grille', editable: true },
+                    { id: 'features', name: 'Fonctionnalités', editable: true }
+                ];
+            }
+        }
+
+        // ========================================================================
+        // ÉDITEUR DE WIDGETS COMPLET
+        // ========================================================================
+
+        class WidgetEditorComplete {
+            constructor() {
+                this.widgets = [];
+                this.selectedWidget = null;
+                
+                // Widgets disponibles
+                this.availableWidgets = [
+                    LogoWidget,
+                    HeroTitleWidget,
+                    PricingCardWidget,
+                    CallToActionWidget,
+                    FeatureGridWidget
+                ];
+                
+                this.widgetCategories = {
+                    'Navigation': [],
+                    'Contenu': [],
+                    'Commerce': [],
+                    'Action': []
+                };
+                
+                this.init();
+            }
+
+            init() {
+                this.setupWidgetCategories();
+                this.setupEventListeners();
+                this.renderWidgetLibrary();
+                this.updatePreview();
+                this.setStatus('Éditeur prêt', 'success');
+            }
+
+            setupWidgetCategories() {
+                this.availableWidgets.forEach(WidgetClass => {
+                    const instance = new WidgetClass();
+                    if (!this.widgetCategories[instance.category]) {
+                        this.widgetCategories[instance.category] = [];
+                    }
+                    this.widgetCategories[instance.category].push(instance);
+                });
+            }
+
+            setupEventListeners() {
+                // Boutons principaux
+                document.getElementById('addWidgetBtn').addEventListener('click', () => this.showAddWidgetDialog());
+                document.getElementById('firstWidgetBtn').addEventListener('click', () => this.showAddWidgetDialog());
+                document.getElementById('saveBtn').addEventListener('click', () => this.saveProject());
+                document.getElementById('exportBtn').addEventListener('click', () => this.exportProject());
+                
+                // Onglets propriétés
+                document.querySelectorAll('.properties-tab').forEach(tab => {
+                    tab.addEventListener('click', () => this.switchPropertiesTab(tab.dataset.tab));
+                });
+                
+                // Boutons organisation
+                document.getElementById('moveUpBtn').addEventListener('click', () => this.moveWidget(-1));
+                document.getElementById('moveDownBtn').addEventListener('click', () => this.moveWidget(1));
+                document.getElementById('duplicateBtn').addEventListener('click', () => this.duplicateWidget());
+                document.getElementById('deleteBtn').addEventListener('click', () => this.deleteWidget());
+                
+                // Recherche
+                const searchInput = document.getElementById('widgetSearch');
+                if (searchInput) {
+                    searchInput.addEventListener('input', (e) => this.filterWidgets(e.target.value));
+                }
+                
+                // Refresh preview
+                document.getElementById('refreshPreviewBtn').addEventListener('click', () => this.updatePreview());
+            }
+
+            renderWidgetLibrary() {
+                const library = document.getElementById('widgetLibrary');
+                library.innerHTML = '';
+                
+                Object.entries(this.widgetCategories).forEach(([category, widgets]) => {
+                    if (widgets.length === 0) return;
+                    
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'widget-category';
+                    
+                    const categoryTitle = document.createElement('div');
+                    categoryTitle.className = 'category-title';
+                    categoryTitle.textContent = category;
+                    categoryDiv.appendChild(categoryTitle);
+                    
+                    widgets.forEach(widget => {
+                        const widgetItem = this.createWidgetItem(widget);
+                        categoryDiv.appendChild(widgetItem);
+                    });
+                    
+                    library.appendChild(categoryDiv);
+                });
+            }
+
+            createWidgetItem(widget) {
+                const item = document.createElement('div');
+                item.className = 'widget-item';
+                item.dataset.widgetType = widget.id;
+                
+                item.innerHTML = `
+                    <div class="widget-icon">${widget.icon}</div>
+                    <div class="widget-info">
+                        <div class="widget-name">${widget.name}</div>
+                        <div class="widget-description">${widget.description}</div>
+                    </div>
+                `;
+                
+                item.addEventListener('click', () => this.addWidget(widget.id));
+                
+                return item;
+            }
+
+            showAddWidgetDialog() {
+                // Pour simplifier, ajouter directement un widget par défaut
+                this.addWidget('hero-title');
+            }
+
+            addWidget(widgetType) {
+                const WidgetClass = this.availableWidgets.find(w => new w().id === widgetType);
+                if (!WidgetClass) return;
+                
+                const widgetInstance = new WidgetClass();
+                
+                // Trouver une position libre sur la grille
+                const position = this.findFreeGridPosition();
+                
+                const widgetData = {
+                    id: `widget-${Date.now()}`,
+                    type: widgetType,
+                    instance: widgetInstance,
+                    data: { ...widgetInstance.defaultData },
+                    position: position,
+                    size: { width: 3, height: 2 } // Taille par défaut
+                };
+                
+                this.widgets.push(widgetData);
+                this.saveToHistory('Ajout widget');
+                this.renderCanvas();
+                this.selectWidget(widgetData.id);
+                this.updatePreview();
+                
+                // Masquer l'état vide
+                const emptyState = document.getElementById('emptyState');
+                if (emptyState) {
+                    emptyState.classList.add('hidden');
+                    emptyState.style.display = 'none';
+                }
+                
+                document.getElementById('widgetCount').textContent = this.widgets.length;
+                this.setStatus(`Widget ${widgetInstance.name} ajouté`, 'success');
+            }
+
+            renderCanvas() {
+                const workspace = document.getElementById('canvasWorkspace');
+                const emptyState = document.getElementById('emptyState');
+                
+                if (this.widgets.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    emptyState.style.display = 'flex';
+                    return;
+                }
+                
+                emptyState.classList.add('hidden');
+                emptyState.style.display = 'none';
+                
+                // Supprimer les widgets existants
+                workspace.querySelectorAll('.widget-container').forEach(w => w.remove());
+                
+                this.widgets.forEach((widget, index) => {
+                    const container = this.createWidgetContainer(widget, index);
+                    workspace.appendChild(container);
+                });
+            }
+
+            createWidgetContainer(widget, index) {
+                const container = document.createElement('div');
+                container.className = 'widget-container';
+                container.dataset.widgetId = widget.id;
+                
+                // Position sur la grille
+                const pos = widget.position || { col: 1, row: 1 };
+                const size = widget.size || { width: 3, height: 2 };
+                
+                container.style.gridColumnStart = pos.col;
+                container.style.gridColumnEnd = pos.col + size.width;
+                container.style.gridRowStart = pos.row;
+                container.style.gridRowEnd = pos.row + size.height;
+                
+                const headerContent = `
+                    <div class="widget-header-title">
+                        <span>${widget.instance.icon}</span>
+                        <span>${widget.instance.name}</span>
+                    </div>
+                    <div class="widget-header-controls">
+                        <button class="widget-control-btn" onclick="widgetEditor.duplicateWidget('${widget.id}')" title="Dupliquer">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="widget-control-btn" onclick="widgetEditor.deleteWidget('${widget.id}')" title="Supprimer">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                
+                const resizeHandles = `
+                    <div class="resize-handles">
+                        <div class="resize-handle nw" data-direction="nw"></div>
+                        <div class="resize-handle n" data-direction="n"></div>
+                        <div class="resize-handle ne" data-direction="ne"></div>
+                        <div class="resize-handle w" data-direction="w"></div>
+                        <div class="resize-handle e" data-direction="e"></div>
+                        <div class="resize-handle sw" data-direction="sw"></div>
+                        <div class="resize-handle s" data-direction="s"></div>
+                        <div class="resize-handle se" data-direction="se"></div>
+                    </div>
+                `;
+                
+                container.innerHTML = `
+                    <div class="widget-container-header">${headerContent}</div>
+                    <div class="widget-content" style="flex: 1;">${widget.instance.render(widget.data)}</div>
+                    ${resizeHandles}
+                `;
+                
+                // Events
+                container.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.selectWidget(widget.id);
+                });
+                
+                // Drag & drop
+                this.setupDragDrop(container, widget);
+                
+                // Resize
+                this.setupResize(container, widget);
+                
+                return container;
+            }
+
+            selectWidget(widgetId) {
+                // Désélectionner l'ancien
+                document.querySelectorAll('.widget-container.selected').forEach(w => {
+                    w.classList.remove('selected');
+                });
+                
+                // Sélectionner le nouveau
+                const container = document.querySelector(`[data-widget-id="${widgetId}"]`);
+                if (container) {
+                    container.classList.add('selected');
+                    this.selectedWidget = this.widgets.find(w => w.id === widgetId);
+                    this.updatePropertiesPanel();
+                    this.updateOrganizationButtons();
+                }
+            }
+
+            updatePropertiesPanel() {
+                if (!this.selectedWidget) {
+                    document.getElementById('propertiesTab').innerHTML = `
+                        <div class="properties-empty">
+                            <i class="fas fa-info-circle" style="font-size: 2rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+                            <p>Sélectionnez un widget pour voir ses propriétés</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const widget = this.selectedWidget;
+                const fields = widget.instance.getEditableFields();
+                
+                let propertiesHtml = `
+                    <div class="property-group">
+                        <h4><i class="fas fa-info-circle"></i> Informations</h4>
+                        <div style="color: var(--text-muted); margin-bottom: 1rem;">
+                            Type: ${widget.instance.name}<br>
+                            ID: ${widget.id}
+                        </div>
+                    </div>
+                    
+                    <div class="property-group">
+                        <h4><i class="fas fa-sliders-h"></i> Propriétés</h4>
+                `;
+                
+                fields.forEach(field => {
+                    propertiesHtml += this.createPropertyField(field, widget);
+                });
+                
+                propertiesHtml += '</div>';
+                
+                document.getElementById('propertiesTab').innerHTML = propertiesHtml;
+                
+                // Update elements tab
+                this.updateElementsTab();
+            }
+
+            createPropertyField(field, widget) {
+                const value = widget.data[field.name];
+                const fieldId = `prop-${field.name}`;
+                
+                let inputHtml = '';
+                
+                switch (field.type) {
+                    case 'text':
+                        inputHtml = `
+                            <input type="text" id="${fieldId}" class="property-input" 
+                                   value="${value}" 
+                                   onchange="widgetEditor.updateProperty('${field.name}', this.value)"
+                                   oninput="widgetEditor.updateProperty('${field.name}', this.value)">
+                        `;
+                        break;
+                        
+                    case 'textarea':
+                        inputHtml = `
+                            <textarea id="${fieldId}" class="property-input" rows="3"
+                                      onchange="widgetEditor.updateProperty('${field.name}', this.value)"
+                                      oninput="widgetEditor.updateProperty('${field.name}', this.value)">${value}</textarea>
+                        `;
+                        break;
+                        
+                    case 'range':
+                        inputHtml = `
+                            <div class="property-control">
+                                <input type="range" id="${fieldId}" class="property-range" 
+                                       min="${field.min || 0}" max="${field.max || 100}" value="${value}"
+                                       oninput="widgetEditor.updateProperty('${field.name}', this.value)"
+                                       onchange="widgetEditor.updateProperty('${field.name}', this.value)">
+                                <span class="range-value" id="${fieldId}-value">${value}</span>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'checkbox':
+                        inputHtml = `
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                <input type="checkbox" id="${fieldId}" ${value ? 'checked' : ''} 
+                                       onchange="widgetEditor.updateProperty('${field.name}', this.checked)">
+                                <span>Activé</span>
+                            </label>
+                        `;
+                        break;
+                        
+                    case 'select':
+                        const options = field.options.map(opt => 
+                            `<option value="${opt.value}" ${opt.value === value ? 'selected' : ''}>${opt.label}</option>`
+                        ).join('');
+                        inputHtml = `
+                            <select id="${fieldId}" class="property-input" 
+                                    onchange="widgetEditor.updateProperty('${field.name}', this.value)"
+                                    oninput="widgetEditor.updateProperty('${field.name}', this.value)">
+                                ${options}
+                            </select>
+                        `;
+                        break;
+                        
+                    case 'color':
+                        inputHtml = `
+                            <div class="property-control">
+                                <input type="color" id="${fieldId}" value="${value}" 
+                                       onchange="widgetEditor.updateProperty('${field.name}', this.value)"
+                                       oninput="widgetEditor.updateProperty('${field.name}', this.value)">
+                                <input type="text" class="property-input" style="flex: 1; margin-left: 8px;" 
+                                       value="${value}" 
+                                       onchange="widgetEditor.updateProperty('${field.name}', this.value)"
+                                       oninput="widgetEditor.updateProperty('${field.name}', this.value)">
+                            </div>
+                        `;
+                        break;
+                        
+                    default:
+                        inputHtml = `
+                            <input type="text" id="${fieldId}" class="property-input" 
+                                   value="${value}" 
+                                   onchange="widgetEditor.updateProperty('${field.name}', this.value)"
+                                   oninput="widgetEditor.updateProperty('${field.name}', this.value)">
+                        `;
+                }
+                
+                return `
+                    <div class="property-field">
+                        <label class="property-label" for="${fieldId}">${field.label}</label>
+                        ${inputHtml}
+                    </div>
+                `;
+            }
+
+            updateElementsTab() {
+                if (!this.selectedWidget) {
+                    document.getElementById('elementsContainer').innerHTML = `
+                        <p style="color: var(--text-muted); font-style: italic;">Aucun widget sélectionné</p>
+                    `;
+                    return;
+                }
+                
+                const elements = this.selectedWidget.instance.getElements();
+                let elementsHtml = '';
+                
+                elements.forEach(element => {
+                    elementsHtml += `
+                        <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                        border-radius: 8px; margin-bottom: 8px; 
+                                                        display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div style="color: white; font-weight: 500;">${element.name}</div>
+                                <div style="color: var(--text-muted); font-size: 12px;">ID: ${element.id}</div>
+                            </div>
+                            <div class="element-controls" style="display: flex; gap: 4px; color: var(--text-muted); font-size: 12px;">
+                                <span>Éditible via propriétés</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('elementsContainer').innerHTML = elementsHtml;
+            }
+
+            updateProperty(propertyName, value) {
+                if (!this.selectedWidget) return;
+                
+                // Conversion des types
+                if (value === 'true') value = true;
+                if (value === 'false') value = false;
+                if (!isNaN(value) && value !== '' && typeof this.selectedWidget.data[propertyName] === 'number') {
+                    value = parseFloat(value);
+                }
+                
+                // Sauvegarder la valeur
+                this.selectedWidget.data[propertyName] = value;
+                
+                // Mettre à jour l'affichage de la valeur pour les ranges
+                const valueDisplay = document.getElementById(`prop-${propertyName}-value`);
+                if (valueDisplay) {
+                    const unit = propertyName.includes('Size') || propertyName.includes('width') || propertyName.includes('height') || propertyName.includes('Width') || propertyName.includes('Height') ? 'px' : '';
+                    valueDisplay.textContent = value + unit;
+                }
+                
+                // Mise à jour temps réel spécifique par type de widget et propriété
+                const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (container) {
+                    this.updateWidgetRealTime(container, propertyName, value);
+                }
+                
+                // Mettre à jour aussi le viewer
+                this.updatePreview();
+                
+                // Pas de setStatus pour éviter le spam lors de l'input continu
+            }
+            
+            // Mise à jour temps réel spécifique selon le type de widget
+            updateWidgetRealTime(container, propertyName, value) {
+                const widgetType = this.selectedWidget.type;
+                
+                switch (widgetType) {
+                    case 'logo':
+                        this.updateLogoRealTime(container, propertyName, value);
+                        break;
+                    case 'hero-title':
+                        this.updateHeroTitleRealTime(container, propertyName, value);
+                        break;
+                    case 'pricing-card':
+                        this.updatePricingCardRealTime(container, propertyName, value);
+                        break;
+                    case 'call-to-action':
+                        this.updateCTARealTime(container, propertyName, value);
+                        break;
+                    case 'feature-grid':
+                        this.updateFeatureGridRealTime(container, propertyName, value);
+                        break;
+                }
+            }
+            
+            // Mise à jour temps réel pour le logo
+            updateLogoRealTime(container, propertyName, value) {
+                const logoImage = container.querySelector('.logo-image, .nav-logo');
+                
+                switch (propertyName) {
+                    case 'imagePath':
+                        if (logoImage) {
+                            logoImage.style.backgroundImage = `url('${value}')`;
+                        }
+                        break;
+                    case 'width':
+                        if (logoImage) {
+                            logoImage.style.width = `${value}px`;
+                        }
+                        break;
+                    case 'height':
+                        if (logoImage) {
+                            logoImage.style.height = `${value}px`;
+                        }
+                        break;
+                    case 'link':
+                        if (logoImage) {
+                            logoImage.href = value;
+                        }
+                        break;
+                }
+            }
+            
+            // Mise à jour temps réel pour le hero title
+            updateHeroTitleRealTime(container, propertyName, value) {
+                const title = container.querySelector('.hero-title, h1');
+                const subtitle = container.querySelector('.hero-subtitle, .hero-section div');
+                
+                switch (propertyName) {
+                    case 'title':
+                        if (title) {
+                            title.textContent = value;
+                        }
+                        break;
+                    case 'subtitle':
+                        if (subtitle) {
+                            subtitle.innerHTML = value;
+                        }
+                        break;
+                    case 'titleSize':
+                        if (title) {
+                            title.style.fontSize = `${value}px`;
+                        }
+                        break;
+                    case 'subtitleSize':
+                        if (subtitle) {
+                            subtitle.style.fontSize = `${value}px`;
+                        }
+                        break;
+                    case 'alignment':
+                        const section = container.querySelector('.hero-section');
+                        if (section) {
+                            section.style.textAlign = value;
+                        }
+                        break;
+                }
+            }
+            
+            // Mise à jour temps réel pour pricing card
+            updatePricingCardRealTime(container, propertyName, value) {
+                const planName = container.querySelector('h3');
+                const price = container.querySelector('.pricing-amount, [style*="font-size: 3.5rem"]');
+                const currency = container.querySelector('[style*="font-size: 2rem"]');
+                const ctaButton = container.querySelector('a[style*="width: 100%"]');
+                
+                switch (propertyName) {
+                    case 'planName':
+                        if (planName) {
+                            planName.textContent = value;
+                        }
+                        break;
+                    case 'price':
+                        if (price) {
+                            price.textContent = value;
+                        }
+                        break;
+                    case 'currency':
+                        if (currency) {
+                            currency.textContent = value;
+                        }
+                        break;
+                    case 'ctaText':
+                        if (ctaButton) {
+                            ctaButton.textContent = value;
+                        }
+                        break;
+                    case 'ctaLink':
+                        if (ctaButton) {
+                            ctaButton.href = value;
+                        }
+                        break;
+                }
+            }
+            
+            // Mise à jour temps réel pour CTA
+            updateCTARealTime(container, propertyName, value) {
+                const title = container.querySelector('h2');
+                const description = container.querySelector('p');
+                const primaryBtn = container.querySelector('a[style*="background: white"]');
+                const secondaryBtn = container.querySelector('a[style*="background: transparent"]');
+                const section = container.querySelector('.cta-section');
+                
+                switch (propertyName) {
+                    case 'title':
+                        if (title) title.textContent = value;
+                        break;
+                    case 'description':
+                        if (description) description.textContent = value;
+                        break;
+                    case 'primaryButtonText':
+                        if (primaryBtn) primaryBtn.textContent = value;
+                        break;
+                    case 'primaryButtonLink':
+                        if (primaryBtn) primaryBtn.href = value;
+                        break;
+                    case 'secondaryButtonText':
+                        if (secondaryBtn) secondaryBtn.textContent = value;
+                        break;
+                    case 'secondaryButtonLink':
+                        if (secondaryBtn) secondaryBtn.href = value;
+                        break;
+                    case 'backgroundColor':
+                        if (section) section.style.background = value;
+                        break;
+                }
+            }
+            
+            // Mise à jour temps réel pour feature grid
+            updateFeatureGridRealTime(container, propertyName, value) {
+                const title = container.querySelector('h2');
+                const grid = container.querySelector('.features-grid');
+                
+                switch (propertyName) {
+                    case 'title':
+                        if (title) title.textContent = value;
+                        break;
+                    case 'columns':
+                        if (grid) {
+                            grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
+                        }
+                        break;
+                }
+            }
+
+            switchPropertiesTab(tabName) {
+                // Mettre à jour les boutons
+                document.querySelectorAll('.properties-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+                
+                // Mettre à jour le contenu
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(tabName + 'Tab').classList.add('active');
+            }
+
+            moveWidget(direction, widgetId = null) {
+                const id = widgetId || (this.selectedWidget ? this.selectedWidget.id : null);
+                if (!id) return;
+                
+                const currentIndex = this.widgets.findIndex(w => w.id === id);
+                const newIndex = currentIndex + direction;
+                
+                if (newIndex < 0 || newIndex >= this.widgets.length) return;
+                
+                // Échanger les widgets dans la liste de rendu
+                [this.widgets[currentIndex], this.widgets[newIndex]] = [this.widgets[newIndex], this.widgets[currentIndex]];
+                
+                this.renderCanvas();
+                this.selectWidget(id);
+                this.updatePreview();
+                
+                this.setStatus('Ordre des widgets modifié', 'success');
+            }
+
+            duplicateWidget(widgetId = null) {
+                const id = widgetId || (this.selectedWidget ? this.selectedWidget.id : null);
+                if (!id) return;
+                
+                const originalWidget = this.widgets.find(w => w.id === id);
+                if (!originalWidget) return;
+                
+                const duplicatedWidget = {
+                    id: `widget-${Date.now()}`,
+                    type: originalWidget.type,
+                    instance: originalWidget.instance,
+                    data: { ...originalWidget.data }
+                };
+                
+                // Insérer après l'original
+                const index = this.widgets.findIndex(w => w.id === id);
+                this.widgets.splice(index + 1, 0, duplicatedWidget);
+                
+                this.saveToHistory('Duplication widget');
+                this.renderCanvas();
+                this.selectWidget(duplicatedWidget.id);
+                this.updatePreview();
+                
+                document.getElementById('widgetCount').textContent = this.widgets.length;
+                this.setStatus('Widget dupliqué', 'success');
+            }
+
+            deleteWidget(widgetId = null) {
+                const id = widgetId || (this.selectedWidget ? this.selectedWidget.id : null);
+                if (!id) return;
+                
+                if (!confirm('Êtes-vous sûr de vouloir supprimer ce widget ?')) return;
+                
+                // Supprimer le widget
+                this.widgets = this.widgets.filter(w => w.id !== id);
+                
+                // Réinitialiser la sélection
+                this.selectedWidget = null;
+                
+                // Sauvegarder dans l'historique
+                this.saveToHistory('Suppression widget');
+                
+                // Mettre à jour l'interface
+                this.renderCanvas();
+                this.updatePropertiesPanel();
+                this.updateOrganizationButtons();
+                this.updatePreview();
+                
+                // Mettre à jour le compteur
+                document.getElementById('widgetCount').textContent = this.widgets.length;
+                
+                // Afficher l'état vide si nécessaire
+                const emptyState = document.getElementById('emptyState');
+                if (this.widgets.length === 0 && emptyState) {
+                    emptyState.classList.remove('hidden');
+                    emptyState.style.display = 'flex';
+                }
+                
+                this.setStatus('Widget supprimé', 'success');
+            }
+
+            updateOrganizationButtons() {
+                const hasSelection = this.selectedWidget !== null;
+                const currentIndex = hasSelection ? this.widgets.findIndex(w => w.id === this.selectedWidget.id) : -1;
+                
+                document.getElementById('moveUpBtn').disabled = !hasSelection || currentIndex <= 0;
+                document.getElementById('moveDownBtn').disabled = !hasSelection || currentIndex >= this.widgets.length - 1;
+                document.getElementById('duplicateBtn').disabled = !hasSelection;
+                document.getElementById('deleteBtn').disabled = !hasSelection;
+            }
+
+            updatePreview() {
+                const preview = document.getElementById('presentationPreview');
+                
+                if (this.widgets.length === 0) {
+                    preview.innerHTML = `
+                        <div style="grid-column: 1 / -1; grid-row: 1 / -1; display: flex; 
+                                    flex-direction: column; align-items: center; justify-content: center; 
+                                    text-align: center; color: #6b7280;">
+                            <i class="fas fa-eye" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                            <div>L'aperçu temps réel apparaîtra ici</div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let previewHtml = '';
+                this.widgets.forEach(widget => {
+                    const pos = widget.position || { col: 1, row: 1 };
+                    const size = widget.size || { width: 3, height: 2 };
+                    
+                    previewHtml += `
+                        <div class="preview-widget" 
+                             style="grid-column: ${pos.col} / ${pos.col + size.width}; 
+                                    grid-row: ${pos.row} / ${pos.row + size.height}; 
+                                    background: rgba(248, 250, 252, 0.95); 
+                                    border: 1px solid #e5e7eb;">
+                            ${widget.instance.render(widget.data)}
+                        </div>
+                    `;
+                });
+                
+                preview.innerHTML = previewHtml;
+            }
+
+            filterWidgets(searchTerm) {
+                const term = searchTerm.toLowerCase().trim();
+                const widgetItems = document.querySelectorAll('.widget-item');
+                
+                widgetItems.forEach(item => {
+                    const name = item.querySelector('.widget-name').textContent.toLowerCase();
+                    const description = item.querySelector('.widget-description').textContent.toLowerCase();
+                    const matches = name.includes(term) || description.includes(term);
+                    
+                    item.style.display = matches ? 'flex' : 'none';
+                });
+                
+                // Masquer les catégories vides
+                document.querySelectorAll('.widget-category').forEach(category => {
+                    const visibleItems = category.querySelectorAll('.widget-item:not([style*="display: none"])');
+                    category.style.display = visibleItems.length > 0 ? 'block' : 'none';
+                });
+            }
+
+            // Historique simplifié
+            saveToHistory(action) {
+                // Sauvegarde simple pour référence future
+                console.log(`Action: ${action} - ${new Date().toLocaleTimeString()}`);
+            }
+
+            updateHistoryButtons() {
+                document.getElementById('undoBtn').disabled = this.historyIndex <= 0;
+                document.getElementById('redoBtn').disabled = this.historyIndex >= this.history.length - 1;
+            }
+
+            saveProject() {
+                const projectData = {
+                    version: '2.0.0',
+                    timestamp: new Date().toISOString(),
+                    widgets: this.widgets.map(w => ({
+                        id: w.id,
+                        type: w.type,
+                        data: w.data
+                    }))
+                };
+                
+                const blob = new Blob([JSON.stringify(projectData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `widget-project-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                document.getElementById('lastSave').textContent = new Date().toLocaleString();
+                this.setStatus('Projet sauvegardé', 'success');
+            }
+
+            exportProject() {
+                let html = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation - Li-CUBE PRO™</title>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+        .presentation { max-width: 1200px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+`;
+                
+                this.widgets.forEach(widget => {
+                    html += widget.instance.render(widget.data);
+                });
+                
+                html += `
+    </div>
+</body>
+</html>`;
+                
+                const blob = new Blob([html], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `presentation-${new Date().toISOString().split('T')[0]}.html`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                this.setStatus('Export HTML généré', 'success');
+            }
+
+
+            // Trouver une position libre sur la grille
+            findFreeGridPosition() {
+                for (let row = 1; row <= 8; row++) {
+                    for (let col = 1; col <= 12; col++) {
+                        if (this.isPositionFree(col, row, 3, 2)) {
+                            return { col, row };
+                        }
+                    }
+                }
+                // Si pas de place, utiliser la position 1,1
+                return { col: 1, row: 1 };
+            }
+            
+            // Vérifier si une position est libre
+            isPositionFree(col, row, width, height) {
+                // Vérifier les limites de grille
+                if (col + width - 1 > 12 || row + height - 1 > 8) {
+                    return false;
+                }
+                
+                // Vérifier les collisions avec d'autres widgets
+                for (const widget of this.widgets) {
+                    const pos = widget.position || { col: 1, row: 1 };
+                    const size = widget.size || { width: 3, height: 2 };
+                    
+                    // Vérifier si les rectangles se chevauchent
+                    if (!(col >= pos.col + size.width || 
+                          col + width <= pos.col || 
+                          row >= pos.row + size.height || 
+                          row + height <= pos.row)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+            
+            // Configuration du drag & drop
+            setupDragDrop(container, widget) {
+                container.draggable = true;
+                
+                container.addEventListener('dragstart', (e) => {
+                    container.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', widget.id);
+                });
+                
+                container.addEventListener('dragend', (e) => {
+                    container.classList.remove('dragging');
+                });
+            }
+            
+            // Configuration du redimensionnement
+            setupResize(container, widget) {
+                const handles = container.querySelectorAll('.resize-handle');
+                
+                handles.forEach(handle => {
+                    handle.addEventListener('mousedown', (e) => {
+                        e.stopPropagation();
+                        this.startResize(e, handle, container, widget);
+                    });
+                });
+            }
+            
+            // Démarrer le redimensionnement
+            startResize(e, handle, container, widget) {
+                const direction = handle.dataset.direction;
+                const startX = e.clientX;
+                const startY = e.clientY;
+                const startSize = { ...widget.size } || { width: 3, height: 2 };
+                const startPos = { ...widget.position } || { col: 1, row: 1 };
+                
+                const handleMouseMove = (e) => {
+                    const deltaX = e.clientX - startX;
+                    const deltaY = e.clientY - startY;
+                    
+                    // Calculer la nouvelle taille selon la direction
+                    let newSize = { ...startSize };
+                    let newPos = { ...startPos };
+                    
+                    if (direction.includes('e')) {
+                        newSize.width = Math.max(1, startSize.width + Math.round(deltaX / 60));
+                    }
+                    if (direction.includes('w')) {
+                        const deltaWidth = Math.round(deltaX / -60);
+                        newSize.width = Math.max(1, startSize.width + deltaWidth);
+                        newPos.col = Math.max(1, startPos.col - deltaWidth);
+                    }
+                    if (direction.includes('s')) {
+                        newSize.height = Math.max(1, startSize.height + Math.round(deltaY / 60));
+                    }
+                    if (direction.includes('n')) {
+                        const deltaHeight = Math.round(deltaY / -60);
+                        newSize.height = Math.max(1, startSize.height + deltaHeight);
+                        newPos.row = Math.max(1, startPos.row - deltaHeight);
+                    }
+                    
+                    // Vérifier les limites
+                    if (newPos.col + newSize.width - 1 <= 12 && newPos.row + newSize.height - 1 <= 8) {
+                        widget.size = newSize;
+                        widget.position = newPos;
+                        
+                        // Mettre à jour le style du conteneur
+                        container.style.gridColumnStart = newPos.col;
+                        container.style.gridColumnEnd = newPos.col + newSize.width;
+                        container.style.gridRowStart = newPos.row;
+                        container.style.gridRowEnd = newPos.row + newSize.height;
+                    }
+                };
+                
+                const handleMouseUp = () => {
+                    document.removeEventListener('mousemove', handleMouseMove);
+                    document.removeEventListener('mouseup', handleMouseUp);
+                    
+                    this.updatePreview();
+                    this.setStatus('Widget redimensionné', 'success');
+                };
+                
+                document.addEventListener('mousemove', handleMouseMove);
+                document.addEventListener('mouseup', handleMouseUp);
+            }
+            
+            setStatus(message, type = 'info') {
+                const statusText = document.getElementById('statusText');
+                const statusIndicator = document.getElementById('statusIndicator');
+                
+                if (statusText) statusText.textContent = message;
+                if (statusIndicator) statusIndicator.className = `status-indicator ${type}`;
+                
+                if (type === 'success' || type === 'info') {
+                    setTimeout(() => {
+                        if (statusText && statusText.textContent === message) {
+                            this.setStatus('Prêt', 'success');
+                        }
+                    }, 3000);
+                }
+                
+                console.log(`[${type.toUpperCase()}] ${message}`);
+            }
+        }
+
+        // Initialisation
+        const widgetEditor = new WidgetEditorComplete();
+        
+        // Exposition globale
+        window.widgetEditor = widgetEditor;
+        
+        // CSS pour les animations
+        const style = document.createElement('style');
+        style.textContent = `
+            .slide-up {
+                opacity: 0;
+                transform: translateY(30px);
+                animation: slideUp 0.6s ease-out forwards;
+            }
+            
+            @keyframes slideUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .hover-effect:hover {
+                transform: scale(1.1) !important;
+                box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3) !important;
+            }
+        `;
+        document.head.appendChild(style);
+        
+    </script>
+</body>
+</html>

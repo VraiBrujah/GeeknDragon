@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔴 Debug LIVE - Erreur Persistante Widget</title>
+    <style>
+        body { 
+            background: #0F172A; 
+            color: #F1F5F9; 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            padding: 20px; 
+            line-height: 1.6;
+        }
+        .debug-section { 
+            background: #1E293B; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 20px 0; 
+            border-left: 4px solid #EF4444; 
+        }
+        .critical { background-color: rgba(239, 68, 68, 0.1); border-color: #EF4444; }
+        .success { color: #10B981; font-weight: bold; }
+        .error { color: #EF4444; font-weight: bold; }
+        .warning { color: #F59E0B; font-weight: bold; }
+        button {
+            background: linear-gradient(135deg, #EF4444 0%, #F59E0B 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-weight: 600;
+        }
+        .log { 
+            font-family: monospace; 
+            background: #111827; 
+            padding: 8px; 
+            border-radius: 4px; 
+            margin: 3px 0; 
+            font-size: 12px;
+            word-break: break-all;
+        }
+        .step-by-step {
+            background: #1E40AF;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .test-result {
+            padding: 10px;
+            border-radius: 6px;
+            margin: 5px 0;
+            border-left: 4px solid;
+        }
+        .pass { background: rgba(16, 185, 129, 0.1); border-color: #10B981; }
+        .fail { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; }
+    </style>
+</head>
+<body>
+    <h1>🔴 Debug LIVE - Investigation Erreur Persistante</h1>
+    
+    <div class="debug-section critical">
+        <h2>🚨 Problème : Erreur Persiste Malgré Corrections</h2>
+        <p class="error">Message : "Impossible de créer un Widget"</p>
+        <p class="warning">Corrections appliquées : Ordre scripts ✅, Options largeur ✅</p>
+        <p>Il faut identifier la cause EXACTE avec les erreurs console du navigateur.</p>
+    </div>
+
+    <div class="debug-section">
+        <h2>🔍 Étape par Étape - Diagnostic Complet</h2>
+        <div class="step-by-step">
+            <h3>1️⃣ Vérification des dépendances</h3>
+            <button onclick="step1_checkDependencies()">▶️ Vérifier Dépendances</button>
+            <div id="step1-results"></div>
+        </div>
+
+        <div class="step-by-step">
+            <h3>2️⃣ Test direct PresentationEngine</h3>
+            <button onclick="step2_testEngine()">▶️ Test Engine Direct</button>
+            <div id="step2-results"></div>
+        </div>
+
+        <div class="step-by-step">
+            <h3>3️⃣ Simulation processus complet</h3>
+            <button onclick="step3_simulateProcess()">▶️ Simuler Processus Widget</button>
+            <div id="step3-results"></div>
+        </div>
+
+        <div class="step-by-step">
+            <h3>4️⃣ Test MainEditor direct</h3>
+            <button onclick="step4_testMainEditor()">▶️ Test MainEditor</button>
+            <div id="step4-results"></div>
+        </div>
+    </div>
+
+    <div class="debug-section">
+        <h2>📋 Console Logs en Temps Réel</h2>
+        <button onclick="clearLogs()">🗑️ Clear</button>
+        <button onclick="openMainApp()">🚀 Ouvrir App (Nouvel Onglet)</button>
+        <div id="console-logs" style="max-height: 300px; overflow-y: auto; background: #111827; padding: 15px; border-radius: 6px;"></div>
+    </div>
+
+    <!-- Tous les scripts dans l'ordre EXACT de index.html -->
+    <!-- Widgets AVANT WidgetManager -->
+    <script src="src/widgets/BaseWidget.js"></script>
+    <script src="src/widgets/TextWidget.js"></script>
+    <script src="src/widgets/ImageWidget.js"></script>
+    <script src="src/widgets/ButtonWidget.js"></script>
+    <script src="src/widgets/SpacerWidget.js"></script>
+    <script src="src/widgets/DividerWidget.js"></script>
+    
+    <!-- Core classes -->
+    <script src="src/core/PresentationEngine.js"></script>
+    <script src="src/core/HistoryManager.js"></script>
+    <script src="src/core/SyncManager.js"></script>
+    <script src="src/core/WidgetManager.js"></script>
+    <script src="src/core/SectionManager.js"></script>
+    <script src="src/core/HierarchyManager.js"></script>
+    <script src="src/core/HierarchyElement.js"></script>
+    
+    <!-- Éditeurs -->
+    <script src="src/editors/MainEditor.js"></script>
+    
+    <!-- Utilitaires -->
+    <script src="src/utils/UIUtils.js"></script>
+    
+    <script>
+        // Capture des erreurs console
+        const originalConsoleError = console.error;
+        const originalConsoleWarn = console.warn;
+        const originalConsoleLog = console.log;
+        
+        let capturedLogs = [];
+        
+        console.error = function(...args) {
+            capturedLogs.push({type: 'error', message: args.join(' '), timestamp: new Date().toLocaleTimeString()});
+            updateConsoleLogs();
+            originalConsoleError.apply(console, args);
+        };
+        
+        console.warn = function(...args) {
+            capturedLogs.push({type: 'warn', message: args.join(' '), timestamp: new Date().toLocaleTimeString()});
+            updateConsoleLogs();
+            originalConsoleWarn.apply(console, args);
+        };
+        
+        console.log = function(...args) {
+            capturedLogs.push({type: 'log', message: args.join(' '), timestamp: new Date().toLocaleTimeString()});
+            updateConsoleLogs();
+            originalConsoleLog.apply(console, args);
+        };
+        
+        // Capture des erreurs non gérées
+        window.addEventListener('error', (event) => {
+            capturedLogs.push({
+                type: 'error',
+                message: `ERREUR NON GÉRÉE: ${event.message} (${event.filename}:${event.lineno})`,
+                timestamp: new Date().toLocaleTimeString()
+            });
+            updateConsoleLogs();
+        });
+        
+        function updateConsoleLogs() {
+            const container = document.getElementById('console-logs');
+            container.innerHTML = capturedLogs.map(log => {
+                const className = log.type === 'error' ? 'error' : log.type === 'warn' ? 'warning' : '';
+                return `<div class="log ${className}">[${log.timestamp}] ${log.type.toUpperCase()}: ${log.message}</div>`;
+            }).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function clearLogs() {
+            capturedLogs = [];
+            updateConsoleLogs();
+        }
+        
+        function addResult(stepId, message, success = true) {
+            const container = document.getElementById(`${stepId}-results`);
+            const className = success ? 'pass' : 'fail';
+            const icon = success ? '✅' : '❌';
+            container.innerHTML += `<div class="test-result ${className}">${icon} ${message}</div>`;
+        }
+        
+        function step1_checkDependencies() {
+            const stepId = 'step1';
+            document.getElementById(`${stepId}-results`).innerHTML = '';
+            
+            // Vérifier toutes les classes nécessaires
+            const dependencies = [
+                { name: 'BaseWidget', obj: window.BaseWidget },
+                { name: 'TextWidget', obj: window.TextWidget },
+                { name: 'HierarchyElement', obj: window.HierarchyElement },
+                { name: 'PresentationEngine', obj: window.PresentationEngine },
+                { name: 'WidgetManager', obj: window.WidgetManager },
+                { name: 'HierarchyManager', obj: window.HierarchyManager },
+                { name: 'MainEditor', obj: window.MainEditor }
+            ];
+            
+            dependencies.forEach(dep => {
+                const exists = typeof dep.obj === 'function';
+                addResult(stepId, `${dep.name} ${exists ? 'disponible' : 'MANQUANT'}`, exists);
+                
+                if (!exists) {
+                    addResult(stepId, `⚠️ ${dep.name} n'est pas défini dans window`, false);
+                }
+            });
+        }
+        
+        async function step2_testEngine() {
+            const stepId = 'step2';
+            document.getElementById(`${stepId}-results`).innerHTML = '';
+            
+            try {
+                addResult(stepId, 'Création instance PresentationEngine...', true);
+                const engine = new PresentationEngine();
+                
+                addResult(stepId, 'Initialisation engine...', true);
+                await engine.init();
+                
+                addResult(stepId, 'Création présentation test...', true);
+                const presentation = await engine.createPresentation('Test Debug', 'blank');
+                
+                addResult(stepId, `Présentation créée: "${presentation.title}"`, true);
+                addResult(stepId, `currentPresentation défini: ${!!engine.currentPresentation}`, !!engine.currentPresentation);
+                
+                // Test direct addHierarchicalElement
+                addResult(stepId, 'Test addHierarchicalElement...', true);
+                
+                try {
+                    const result = engine.addHierarchicalElement('widget', {
+                        title: 'Widget Test Debug Direct',
+                        width: '250px',
+                        height: 'auto'
+                    });
+                    
+                    if (result) {
+                        addResult(stepId, `✅ Widget créé via engine: ${result.id}`, true);
+                        addResult(stepId, `Type: ${result.type}, Titre: ${result.title}`, true);
+                    } else {
+                        addResult(stepId, 'addHierarchicalElement retourne null', false);
+                    }
+                } catch (addError) {
+                    addResult(stepId, `ERREUR addHierarchicalElement: ${addError.message}`, false);
+                    addResult(stepId, `Stack: ${addError.stack}`, false);
+                }
+                
+            } catch (error) {
+                addResult(stepId, `ERREUR step2: ${error.message}`, false);
+                addResult(stepId, `Stack: ${error.stack}`, false);
+            }
+        }
+        
+        async function step3_simulateProcess() {
+            const stepId = 'step3';
+            document.getElementById(`${stepId}-results`).innerHTML = '';
+            
+            try {
+                addResult(stepId, 'Simulation processus complet de création...', true);
+                
+                // 1. Créer engine et présentation
+                const engine = new PresentationEngine();
+                await engine.init();
+                await engine.createPresentation('Test Simulation', 'blank');
+                
+                // 2. Créer MainEditor
+                const editor = new MainEditor(engine);
+                await editor.init();
+                
+                addResult(stepId, 'MainEditor initialisé', true);
+                
+                // 3. Test createHierarchicalElement directement
+                addResult(stepId, 'Test createHierarchicalElement...', true);
+                
+                try {
+                    editor.createHierarchicalElement('widget', {
+                        title: 'Widget Simulation Test',
+                        width: '250px',
+                        height: 'auto'
+                    });
+                    
+                    addResult(stepId, 'createHierarchicalElement exécuté sans erreur', true);
+                    
+                    // Vérifier si l'élément a été ajouté
+                    const elements = engine.currentPresentation?.hierarchicalElements || [];
+                    const widgets = elements.filter(el => el.type === 'widget');
+                    addResult(stepId, `Widgets dans présentation: ${widgets.length}`, widgets.length > 0);
+                    
+                } catch (createError) {
+                    addResult(stepId, `ERREUR createHierarchicalElement: ${createError.message}`, false);
+                    addResult(stepId, `Stack: ${createError.stack}`, false);
+                }
+                
+            } catch (error) {
+                addResult(stepId, `ERREUR simulation: ${error.message}`, false);
+                addResult(stepId, `Stack: ${error.stack}`, false);
+            }
+        }
+        
+        async function step4_testMainEditor() {
+            const stepId = 'step4';
+            document.getElementById(`${stepId}-results`).innerHTML = '';
+            
+            try {
+                addResult(stepId, 'Test showElementSizeSelector...', true);
+                
+                const engine = new PresentationEngine();
+                await engine.init();
+                await engine.createPresentation('Test MainEditor', 'blank');
+                
+                const editor = new MainEditor(engine);
+                
+                // Test showElementSizeSelector
+                if (typeof editor.showElementSizeSelector === 'function') {
+                    addResult(stepId, 'showElementSizeSelector existe', true);
+                } else {
+                    addResult(stepId, 'showElementSizeSelector MANQUANTE', false);
+                }
+                
+                // Test generateSizeOptionsHTML
+                if (typeof editor.generateSizeOptionsHTML === 'function') {
+                    addResult(stepId, 'generateSizeOptionsHTML existe', true);
+                    
+                    const widgetHTML = editor.generateSizeOptionsHTML('widget');
+                    addResult(stepId, `HTML widget généré: ${widgetHTML.length} caractères`, widgetHTML.length > 0);
+                    
+                    if (widgetHTML.includes('250px')) {
+                        addResult(stepId, 'Options largeur widget (250px) trouvées', true);
+                    } else {
+                        addResult(stepId, 'Options largeur widget MANQUANTES', false);
+                    }
+                    
+                } else {
+                    addResult(stepId, 'generateSizeOptionsHTML MANQUANTE', false);
+                }
+                
+            } catch (error) {
+                addResult(stepId, `ERREUR step4: ${error.message}`, false);
+                addResult(stepId, `Stack: ${error.stack}`, false);
+            }
+        }
+        
+        function openMainApp() {
+            window.open('index.html', '_blank');
+        }
+        
+        // Auto-start
+        window.addEventListener('load', () => {
+            addResult('step1', '🔄 Page de debug chargée', true);
+            updateConsoleLogs();
+        });
+    </script>
+</body>
+</html>

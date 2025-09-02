@@ -4,6 +4,7 @@ Architecture multi-tenant avec Row-Level Security
 """
 
 import logging
+import time
 from typing import AsyncGenerator, Optional, Dict, Any
 from contextlib import asynccontextmanager
 from functools import lru_cache
@@ -164,7 +165,7 @@ class DatabaseManager:
                     "version": version,
                     "connection_stats": self._connection_stats,
                     "pgbouncer_stats": pgbouncer_stats,
-                    "timestamp": str(asyncio.get_event_loop().time())
+                    "timestamp": str(time.time())
                 }
                 
         except Exception as e:
@@ -173,7 +174,7 @@ class DatabaseManager:
                 "status": "unhealthy",
                 "error": str(e),
                 "connection_stats": self._connection_stats,
-                "timestamp": str(asyncio.get_event_loop().time())
+                "timestamp": str(time.time())
             }
     
     async def _get_pgbouncer_stats(self, session: AsyncSession) -> Optional[Dict[str, Any]]:
