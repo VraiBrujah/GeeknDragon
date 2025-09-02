@@ -1964,7 +1964,13 @@
                 # Formule   : padding = paddingY + 'px ' + paddingX + 'px'
                 # Exemple   : "Espacement: Y=20px X=15px → padding: 20px 15px"
                 */
-                console.log(`🔧 Espacement Logo: Y=${d.containerPaddingY}px X=${d.containerPaddingX}px → padding: ${d.containerPaddingY}px ${d.containerPaddingX}px`);
+                console.log(`🔧 Espacement Logo: Y=${d.containerPaddingY}px X=${d.containerPaddingX}px → CSS généré`);
+                console.log(`📐 Détail CSS:`, {
+                    'padding-top': `${d.containerPaddingY}px`,
+                    'padding-bottom': `${d.containerPaddingY}px`, 
+                    'padding-left': `${d.containerPaddingX}px`,
+                    'padding-right': `${d.containerPaddingX}px`
+                });
                 console.log(`📋 Données complètes du logo:`, d);
                 
                 return `
@@ -3206,6 +3212,9 @@
                 
                 // Update elements tab
                 this.updateElementsTab();
+                
+                // Activer les contrôles de l'onglet Organisation
+                this.updateOrganizationControls();
             }
 
             createPropertyField(field, widget) {
@@ -3514,6 +3523,126 @@
                 document.getElementById('elementsContainer').innerHTML = elementsHtml;
             }
 
+            // Rôle      : Activer/désactiver et mettre à jour les contrôles de l'onglet Organisation
+            // Type      : function
+            // Unité     : sans unité
+            // Formule   : Si widget sélectionné, activer tous les contrôles et mettre à jour les valeurs
+            // Exemple   : Slider largeur activé avec valeur 3, position col activée avec valeur 1
+            updateOrganizationControls() {
+                if (!this.selectedWidget) {
+                    // Désactiver tous les contrôles si aucun widget sélectionné
+                    const controls = [
+                        'widthSlider', 'heightSlider', 'widthInput', 'heightInput',
+                        'positionColSlider', 'positionRowSlider', 'positionColInput', 'positionRowInput',
+                        'duplicateBtn', 'deleteBtn', 'fullScreenBtn', 'fillParentBtn'
+                    ];
+                    
+                    controls.forEach(id => {
+                        const element = document.getElementById(id);
+                        if (element) {
+                            element.disabled = true;
+                        }
+                    });
+                    return;
+                }
+                
+                /* 
+                # Rôle      : Initialisation des valeurs par défaut pour taille et position
+                # Type      : object initialization
+                # Unité     : colonnes (width), rangées (height), position (col, row)
+                # Formule   : taille = widget.size || défaut, position = widget.position || défaut
+                # Exemple   : {width: 3, height: 2} et {col: 1, row: 1}
+                */
+                const size = this.selectedWidget.size || { width: 3, height: 2 };
+                const position = this.selectedWidget.position || { col: 1, row: 1 };
+                
+                // Sauvegarder les valeurs dans le widget si elles n'existent pas
+                if (!this.selectedWidget.size) {
+                    this.selectedWidget.size = size;
+                }
+                if (!this.selectedWidget.position) {
+                    this.selectedWidget.position = position;
+                }
+                
+                /* 
+                # Rôle      : Activation et mise à jour des contrôles de taille
+                # Type      : DOM manipulation
+                # Unité     : colonnes (1-12) et rangées (1-8)
+                # Formule   : slider.value = taille_widget, input.value = taille_widget, disabled = false
+                # Exemple   : widthSlider.value = 3, widthInput.value = 3, disabled = false
+                */
+                const widthSlider = document.getElementById('widthSlider');
+                const heightSlider = document.getElementById('heightSlider');
+                const widthInput = document.getElementById('widthInput');
+                const heightInput = document.getElementById('heightInput');
+                
+                if (widthSlider) {
+                    widthSlider.disabled = false;
+                    widthSlider.value = size.width;
+                }
+                if (heightSlider) {
+                    heightSlider.disabled = false;
+                    heightSlider.value = size.height;
+                }
+                if (widthInput) {
+                    widthInput.disabled = false;
+                    widthInput.value = size.width;
+                }
+                if (heightInput) {
+                    heightInput.disabled = false;
+                    heightInput.value = size.height;
+                }
+                
+                /* 
+                # Rôle      : Activation et mise à jour des contrôles de position
+                # Type      : DOM manipulation
+                # Unité     : colonnes (1-12) et rangées (1-8)
+                # Formule   : slider.value = position_widget, input.value = position_widget, disabled = false
+                # Exemple   : positionColSlider.value = 1, positionRowInput.value = 1, disabled = false
+                */
+                const positionColSlider = document.getElementById('positionColSlider');
+                const positionRowSlider = document.getElementById('positionRowSlider');
+                const positionColInput = document.getElementById('positionColInput');
+                const positionRowInput = document.getElementById('positionRowInput');
+                
+                if (positionColSlider) {
+                    positionColSlider.disabled = false;
+                    positionColSlider.value = position.col;
+                }
+                if (positionRowSlider) {
+                    positionRowSlider.disabled = false;
+                    positionRowSlider.value = position.row;
+                }
+                if (positionColInput) {
+                    positionColInput.disabled = false;
+                    positionColInput.value = position.col;
+                }
+                if (positionRowInput) {
+                    positionRowInput.disabled = false;
+                    positionRowInput.value = position.row;
+                }
+                
+                /* 
+                # Rôle      : Activation des boutons d'action
+                # Type      : DOM manipulation
+                # Unité     : sans unité
+                # Formule   : button.disabled = false
+                # Exemple   : duplicateBtn.disabled = false, deleteBtn.disabled = false
+                */
+                const duplicateBtn = document.getElementById('duplicateBtn');
+                const deleteBtn = document.getElementById('deleteBtn');
+                const fullScreenBtn = document.getElementById('fullScreenBtn');
+                const fillParentBtn = document.getElementById('fillParentBtn');
+                
+                if (duplicateBtn) duplicateBtn.disabled = false;
+                if (deleteBtn) deleteBtn.disabled = false;
+                if (fullScreenBtn) fullScreenBtn.disabled = false;
+                if (fillParentBtn) fillParentBtn.disabled = false;
+                
+                console.log(`✅ Contrôles Organisation activés pour widget ${this.selectedWidget.id}`);
+                console.log(`📊 Taille: ${size.width}x${size.height}, Position: col=${position.col}, row=${position.row}`);
+            }
+
             updateProperty(propertyName, value) {
                 if (!this.selectedWidget) return;
                 
@@ -3568,6 +3697,22 @@
                 // Sauvegarder la valeur
                 this.selectedWidget.data[propertyName] = value;
                 
+                /* 
+                # Rôle      : Log spécifique pour espacement largeur après sauvegarde
+                # Type      : console.log conditionnel
+                # Unité     : pixels
+                # Formule   : si propriété = containerPaddingX, alors log état complet
+                # Exemple   : "ESPACEMENT X SAUVÉ: valeur dans data + état complet widget"
+                */
+                if (propertyName === 'containerPaddingX' || propertyName === 'containerPaddingY') {
+                    console.log(`💾 ESPACEMENT ${propertyName === 'containerPaddingX' ? 'LARGEUR (X)' : 'HAUTEUR (Y)'} SAUVÉ: ${value}`);
+                    console.log(`📦 État des espacements:`, {
+                        containerPaddingX: this.selectedWidget.data.containerPaddingX,
+                        containerPaddingY: this.selectedWidget.data.containerPaddingY,
+                        containerPadding: this.selectedWidget.data.containerPadding
+                    });
+                }
+                
                 // Mettre à jour l'affichage de la valeur pour les ranges
                 const valueDisplay = document.getElementById(`prop-${propertyName}-value`);
                 if (valueDisplay) {
@@ -3594,15 +3739,62 @@
             
             // Mise à jour temps réel spécifique selon le type de widget
             updateWidgetRealTime(container, propertyName, value) {
-                // Rôle      : Re-rendu complet du widget pour éviter les conflits
-                // Type      : function
-                // Unité     : sans unité
-                // Formule   : nouveau_HTML = widget.render(données_actuelles)
-                // Exemple   : Le widget logo se re-rend avec imagePath mise à jour
+                /* 
+                # Rôle      : Mise à jour hybride : directe immédiate + re-rendu complet
+                # Type      : function
+                # Unité     : sans unité
+                # Formule   : mise_à_jour_directe(propriété_critique) + nouveau_HTML = widget.render(données_actuelles)
+                # Exemple   : imagePath mise à jour directe en CSS + re-rendu complet pour cohérence
+                */
                 
+                // ✅ SOLUTION HYBRIDE : Mise à jour directe immédiate pour les propriétés critiques
+                this.updateCriticalPropertiesDirectly(container, propertyName, value);
                 
-                // Re-rendu complet pour toutes les propriétés
+                // Puis re-rendu complet pour maintenir la cohérence
                 this.rerenderWidget(container);
+            }
+            
+            // Rôle      : Mise à jour directe immédiate des propriétés critiques pour temps réel
+            // Type      : function  
+            // Unité     : sans unité
+            // Formule   : Si propriété critique, modifier directement le DOM sans re-rendu
+            // Exemple   : imagePath → backgroundImage du logo mis à jour instantanément
+            updateCriticalPropertiesDirectly(container, propertyName, value) {
+                if (!this.selectedWidget) return;
+                
+                /* 
+                # Rôle      : Traitement spécialisé par type de widget et propriété
+                # Type      : switch statement
+                # Unité     : sans unité  
+                # Formule   : Si (type_widget === 'logo' && propriété === 'imagePath') alors mise_à_jour_directe_CSS
+                # Exemple   : Widget logo + imagePath → backgroundImage actualisé immédiatement
+                */
+                switch (this.selectedWidget.type) {
+                    case 'logo':
+                        if (propertyName === 'imagePath') {
+                            const logoElement = container.querySelector('.nav-logo');
+                            if (logoElement) {
+                                logoElement.style.backgroundImage = `url('${value}')`;
+                                console.log(`🚀 Mise à jour directe imagePath: ${value}`);
+                            }
+                        }
+                        break;
+                        
+                    case 'hero-title':
+                        if (propertyName === 'text') {
+                            const titleElement = container.querySelector('.hero-title, h1');
+                            if (titleElement) {
+                                titleElement.textContent = value;
+                                console.log(`🚀 Mise à jour directe text: ${value}`);
+                            }
+                        }
+                        break;
+                        
+                    // Ajouter d'autres cas au besoin pour d'autres types de widgets
+                    default:
+                        // Pas de mise à jour directe pour ce type/propriété
+                        break;
+                }
             }
             
             // Rôle      : Re-rendu complet d'un widget avec ses données actuelles
