@@ -3427,6 +3427,44 @@ Fabrication et Support 100% Québécois</textarea>
             let avantages_courants = [...avantages_par_defaut];
 
             /**
+             * Sauvegarde automatique des structures de données
+             */
+            function saveStructureData() {
+                const structureData = {
+                    faiblesses: faiblesses_courantes,
+                    avantages: avantages_courants,
+                    lastModified: Date.now()
+                };
+                
+                try {
+                    localStorage.setItem('licubepro-location-structures', JSON.stringify(structureData));
+                    console.log('💾 Structures sauvegardées:', structureData);
+                } catch (error) {
+                    console.error('❌ Erreur sauvegarde structures:', error);
+                }
+            }
+
+            /**
+             * Chargement automatique des structures de données
+             */
+            function loadStructureData() {
+                try {
+                    const saved = localStorage.getItem('licubepro-location-structures');
+                    if (saved) {
+                        const structureData = JSON.parse(saved);
+                        faiblesses_courantes = structureData.faiblesses || [...faiblesses_par_defaut];
+                        avantages_courants = structureData.avantages || [...avantages_par_defaut];
+                        console.log('📂 Structures chargées:', structureData);
+                        return true;
+                    }
+                } catch (error) {
+                    console.error('❌ Erreur chargement structures:', error);
+                }
+                console.log('🔄 Utilisation des structures par défaut');
+                return false;
+            }
+
+            /**
              * Crée un bloc HTML uniforme pour une faiblesse
              * 
              * @param {Object} faiblesse - Objet contenant les données de la faiblesse
@@ -3632,6 +3670,9 @@ Fabrication et Support 100% Québécois</textarea>
                 });
                 
                 console.log(`📡 ${newSyncFields.length} nouveaux champs enregistrés avec InstantSync`);
+                if (newSyncFields.length > 0) {
+                    console.log('🔍 Nouveaux champs trouvés:', Array.from(newSyncFields).map(f => f.getAttribute('data-field')));
+                }
             }
 
             // Note : La synchronisation des champs individuels est maintenant gérée automatiquement 
@@ -3704,6 +3745,7 @@ Fabrication et Support 100% Québécois</textarea>
                 };
                 
                 faiblesses_courantes.push(nouvelleFaiblesse);
+                saveStructureData(); // 💾 Sauvegarde immédiate
                 renderWeaknesses();
                 
                 notifyDynamicStructureChange('weakness-added', {
@@ -3714,6 +3756,7 @@ Fabrication et Support 100% Québécois</textarea>
                 });
                 
                 console.log(`📋 Faiblesse ${originalId} dupliquée avec ID ${nouvelId}`);
+                console.log(`🔍 Debug: renderWeaknesses() va être appelé...`);
             };
 
             /**
@@ -3749,6 +3792,7 @@ Fabrication et Support 100% Québécois</textarea>
                 faiblesses_courantes = faiblesses_courantes.filter(faiblesse => faiblesse.id !== id);
                 
                 if (faiblesses_courantes.length < indexInitial) {
+                    saveStructureData(); // 💾 Sauvegarde immédiate
                     renderWeaknesses();
                     
                     // ✅ SYNCHRONISATION TEMPS RÉEL : Notification de la suppression
@@ -3831,6 +3875,7 @@ Fabrication et Support 100% Québécois</textarea>
                 };
                 
                 avantages_courants.push(nouvelAvantage);
+                saveStructureData(); // 💾 Sauvegarde immédiate
                 renderStrengths();
                 
                 notifyDynamicStructureChange('strength-added', {
@@ -3876,6 +3921,7 @@ Fabrication et Support 100% Québécois</textarea>
                 avantages_courants = avantages_courants.filter(avantage => avantage.id !== id);
                 
                 if (avantages_courants.length < indexInitial) {
+                    saveStructureData(); // 💾 Sauvegarde immédiate
                     renderStrengths();
                     
                     // ✅ SYNCHRONISATION TEMPS RÉEL : Notification de la suppression
@@ -3922,7 +3968,7 @@ Fabrication et Support 100% Québécois</textarea>
                 };
                 
                 // Communication inter-onglets : via localStorage temporaire
-                const tempKey = `licubepro-instant-location-dynamic-${Date.now()}-${Math.random()}`;
+                const tempKey = `licubepro-instant-location-${Date.now()}-${Math.random()}`;
                 localStorage.setItem(tempKey, JSON.stringify(syncMessage));
                 
                 // Nettoyage : suppression du message temporaire après utilisation
@@ -3953,8 +3999,13 @@ Fabrication et Support 100% Québécois</textarea>
             }
 
             // Initialisation du module au chargement de la page
-            // Rôle : Rendu initial des deux sections avec les données par défaut
+            // Rôle : Chargement des données sauvegardées puis rendu des sections
             // Timing : Exécuté une seule fois après DOMContentLoaded
+            
+            // 📂 CHARGEMENT : Tentative de récupération des structures sauvegardées
+            loadStructureData();
+            
+            // 🎨 RENDU : Affichage des faiblesses et avantages (sauvegardés ou par défaut)
             renderWeaknesses();
             renderStrengths();
             
