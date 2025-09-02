@@ -259,41 +259,7 @@
             background: rgba(16, 185, 129, 0.05);
         }
         
-        /* Poignées de redimensionnement */
-        .resize-handles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-        }
-        
-        .resize-handle {
-            position: absolute;
-            background: var(--accent-green);
-            border: 2px solid white;
-            border-radius: 50%;
-            width: 12px;
-            height: 12px;
-            pointer-events: all;
-            cursor: nw-resize;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-        
-        .widget-container.selected .resize-handle {
-            opacity: 1;
-        }
-        
-        .resize-handle.nw { top: -6px; left: -6px; cursor: nw-resize; }
-        .resize-handle.ne { top: -6px; right: -6px; cursor: ne-resize; }
-        .resize-handle.sw { bottom: -6px; left: -6px; cursor: sw-resize; }
-        .resize-handle.se { bottom: -6px; right: -6px; cursor: se-resize; }
-        .resize-handle.n { top: -6px; left: calc(50% - 6px); cursor: n-resize; }
-        .resize-handle.s { bottom: -6px; left: calc(50% - 6px); cursor: s-resize; }
-        .resize-handle.w { top: calc(50% - 6px); left: -6px; cursor: w-resize; }
-        .resize-handle.e { top: calc(50% - 6px); right: -6px; cursor: e-resize; }
+        /* Poignées de redimensionnement supprimées - utilisation des sliders dans l'onglet Organisation */
 
         .widget-container-header {
             position: absolute;
@@ -1612,8 +1578,8 @@
                 
                 const widgetInstance = new WidgetClass();
                 
-                // Trouver une position libre sur la grille
-                const position = this.findFreeGridPosition();
+                // Position sera définie après la taille
+                let position;
                 
                 // Définir une taille par défaut selon le type de widget
                 let defaultSize = { width: 3, height: 2 };
@@ -1636,6 +1602,9 @@
                     default:
                         defaultSize = { width: 3, height: 2 };
                 }
+                
+                // Trouver une position libre avec la taille appropriée (centre vers l'extérieur)
+                position = this.findFreeGridPosition(defaultSize.width, defaultSize.height);
                 
                 const widgetData = {
                     id: `widget-${Date.now()}`,
@@ -1714,23 +1683,9 @@
                     </div>
                 `;
                 
-                const resizeHandles = `
-                    <div class="resize-handles">
-                        <div class="resize-handle nw" data-direction="nw"></div>
-                        <div class="resize-handle n" data-direction="n"></div>
-                        <div class="resize-handle ne" data-direction="ne"></div>
-                        <div class="resize-handle w" data-direction="w"></div>
-                        <div class="resize-handle e" data-direction="e"></div>
-                        <div class="resize-handle sw" data-direction="sw"></div>
-                        <div class="resize-handle s" data-direction="s"></div>
-                        <div class="resize-handle se" data-direction="se"></div>
-                    </div>
-                `;
-                
                 container.innerHTML = `
                     <div class="widget-container-header">${headerContent}</div>
                     <div class="widget-content" style="flex: 1;">${widget.instance.render(widget.data)}</div>
-                    ${resizeHandles}
                 `;
                 
                 // Events
@@ -1739,11 +1694,8 @@
                     this.selectWidget(widget.id);
                 });
                 
-                // Drag & drop
+                // Drag & drop pour placement libre
                 this.setupDragDrop(container, widget);
-                
-                // Resize
-                this.setupResize(container, widget);
                 
                 return container;
             }
@@ -2705,17 +2657,48 @@
             }
 
 
-            // Trouver une position libre sur la grille
-            findFreeGridPosition() {
+            // Trouver une position libre sur la grille (placement intelligent centre-vers-extérieur)
+            findFreeGridPosition(width = 3, height = 2) {
+                // Positions prioritaires : centre vers l'extérieur
+                const centerCol = Math.floor(12 / 2) - Math.floor(width / 2) + 1;
+                const centerRow = Math.floor(8 / 2) - Math.floor(height / 2) + 1;
+                
+                // Positions candidates par priorité (centre vers extérieur)
+                const candidates = [];
+                
+                // Ajouter le centre en premier
+                candidates.push({ col: centerCol, row: centerRow });
+                
+                // Puis ajouter les positions en spirale depuis le centre
+                for (let radius = 1; radius <= 6; radius++) {
+                    for (let row = Math.max(1, centerRow - radius); row <= Math.min(8, centerRow + radius); row++) {
+                        for (let col = Math.max(1, centerCol - radius); col <= Math.min(12, centerCol + radius); col++) {
+                            // Éviter les positions déjà ajoutées
+                            if (!candidates.some(c => c.col === col && c.row === row)) {
+                                candidates.push({ col, row });
+                            }
+                        }
+                    }
+                }
+                
+                // Tester chaque position candidate
+                for (const pos of candidates) {
+                    if (this.isPositionFree(pos.col, pos.row, width, height)) {
+                        return pos;
+                    }
+                }
+                
+                // Fallback : première position disponible
                 for (let row = 1; row <= 8; row++) {
                     for (let col = 1; col <= 12; col++) {
-                        if (this.isPositionFree(col, row, 3, 2)) {
+                        if (this.isPositionFree(col, row, width, height)) {
                             return { col, row };
                         }
                     }
                 }
-                // Si pas de place, utiliser la position 1,1
-                return { col: 1, row: 1 };
+                
+                // Si vraiment pas de place, placer au centre avec chevauchement
+                return { col: centerCol, row: centerRow };
             }
             
             // Vérifier si une position est libre
