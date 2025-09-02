@@ -4983,7 +4983,26 @@
                         }
                     ],
                     columns: 2,
-                    featuresCount: 4
+                    featuresCount: 4,
+                    
+                    // Propriétés d'arrière-plan de la section
+                    hasBackground: false,
+                    backgroundColor: '#1e293b',
+                    backgroundOpacity: 80,
+                    backgroundType: 'solid', // solid, gradient, transparent
+                    gradientStart: '#1e293b',
+                    gradientEnd: '#0f172a',
+                    gradientDirection: 'to bottom',
+                    
+                    // Propriétés de bordure de la section
+                    hasBorder: false,
+                    borderColor: '#10b981',
+                    borderWidth: 2,
+                    borderStyle: 'solid',
+                    
+                    // Propriétés de coins arrondis de la section
+                    hasRoundedCorners: false,
+                    borderRadius: 12
                 };
             }
 
@@ -5050,11 +5069,59 @@
                 return styleRules.join('; ');
             }
 
+            // Génère les styles CSS pour la section complète
+            generateSectionStyles(data) {
+                const styleRules = [];
+                
+                // Style de base par défaut
+                styleRules.push('padding: 80px 20px');
+                
+                // Arrière-plan
+                if (data.hasBackground) {
+                    let backgroundStyle;
+                    if (data.backgroundType === 'transparent') {
+                        backgroundStyle = 'transparent';
+                    } else if (data.backgroundType === 'gradient') {
+                        backgroundStyle = `linear-gradient(${data.gradientDirection}, ${data.gradientStart}, ${data.gradientEnd})`;
+                    } else {
+                        const opacity = (data.backgroundOpacity || 80) / 100;
+                        const bgColor = data.backgroundColor || '#1e293b';
+                        const hex = bgColor.replace('#', '');
+                        const r = parseInt(hex.substr(0, 2), 16);
+                        const g = parseInt(hex.substr(2, 2), 16);
+                        const b = parseInt(hex.substr(4, 2), 16);
+                        backgroundStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                    }
+                    styleRules.push(`background: ${backgroundStyle}`);
+                } else {
+                    styleRules.push('background: var(--bg-primary)');
+                }
+                
+                // Contour
+                if (data.hasBorder) {
+                    const borderWidth = data.borderWidth || 2;
+                    const borderStyle = data.borderStyle || 'solid';
+                    const borderColor = data.borderColor || '#10b981';
+                    styleRules.push(`border: ${borderWidth}px ${borderStyle} ${borderColor}`);
+                }
+                
+                // Coins arrondis
+                if (data.hasRoundedCorners) {
+                    const borderRadius = data.borderRadius || 12;
+                    styleRules.push(`border-radius: ${borderRadius}px`);
+                }
+                
+                return styleRules.join('; ');
+            }
+
             render(data = {}) {
                 const d = { ...this.defaultData, ...data };
                 
                 // Générer les styles du titre
                 const titleStyles = this.generateTitleStyles(d);
+                
+                // Générer les styles de la section
+                const sectionStyles = this.generateSectionStyles(d);
                 
                 // Limiter les features affichées selon featuresCount
                 const displayedFeatures = d.features.slice(0, d.featuresCount || 4);
@@ -5081,7 +5148,7 @@
                 ).join('');
 
                 return `
-                    <div class="features-section" style="padding: 80px 20px; background: var(--bg-primary);">
+                    <div class="features-section" style="${sectionStyles}">
                         <h2 class="features-main-title" style="${titleStyles}">
                             ${d.title}
                         </h2>
@@ -5164,7 +5231,42 @@
                     
                     // Section 7: Configuration de la grille
                     { name: 'featuresCount', label: 'Nombre de fonctionnalités', type: 'range', min: 1, max: 12, category: 'Grille' },
-                    { name: 'columns', label: 'Colonnes dans la grille', type: 'range', min: 1, max: 4, category: 'Grille' }
+                    { name: 'columns', label: 'Colonnes dans la grille', type: 'range', min: 1, max: 4, category: 'Grille' },
+                    
+                    // Section 8: Arrière-plan de la section
+                    { name: 'hasBackground', label: 'Arrière-plan personnalisé', type: 'checkbox', category: 'Section - Arrière-plan' },
+                    { name: 'backgroundType', label: 'Type d\'arrière-plan', type: 'select', options: [
+                        { value: 'solid', label: 'Couleur unie' },
+                        { value: 'gradient', label: 'Dégradé' },
+                        { value: 'transparent', label: 'Transparent' }
+                    ], category: 'Section - Arrière-plan', condition: { field: 'hasBackground', value: true } },
+                    { name: 'backgroundColor', label: 'Couleur de fond', type: 'color', category: 'Section - Arrière-plan', condition: { field: 'hasBackground', value: true } },
+                    { name: 'backgroundOpacity', label: 'Transparence du fond (%)', type: 'range', min: 0, max: 100, step: 5, category: 'Section - Arrière-plan', condition: { field: 'hasBackground', value: true } },
+                    { name: 'gradientStart', label: 'Couleur de début (dégradé)', type: 'color', category: 'Section - Arrière-plan', condition: { field: 'backgroundType', value: 'gradient' } },
+                    { name: 'gradientEnd', label: 'Couleur de fin (dégradé)', type: 'color', category: 'Section - Arrière-plan', condition: { field: 'backgroundType', value: 'gradient' } },
+                    { name: 'gradientDirection', label: 'Direction du dégradé', type: 'select', options: [
+                        { value: 'to bottom', label: 'Haut vers bas' },
+                        { value: 'to top', label: 'Bas vers haut' },
+                        { value: 'to right', label: 'Gauche vers droite' },
+                        { value: 'to left', label: 'Droite vers gauche' },
+                        { value: 'to bottom right', label: 'Diagonale (bas-droite)' },
+                        { value: 'to bottom left', label: 'Diagonale (bas-gauche)' }
+                    ], category: 'Section - Arrière-plan', condition: { field: 'backgroundType', value: 'gradient' } },
+                    
+                    // Section 9: Bordure de la section
+                    { name: 'hasBorder', label: 'Bordure personnalisée', type: 'checkbox', category: 'Section - Bordure' },
+                    { name: 'borderColor', label: 'Couleur de bordure', type: 'color', category: 'Section - Bordure', condition: { field: 'hasBorder', value: true } },
+                    { name: 'borderWidth', label: 'Épaisseur bordure (px)', type: 'range', min: 1, max: 10, step: 1, category: 'Section - Bordure', condition: { field: 'hasBorder', value: true } },
+                    { name: 'borderStyle', label: 'Style de bordure', type: 'select', options: [
+                        { value: 'solid', label: 'Solide' },
+                        { value: 'dashed', label: 'Tirets' },
+                        { value: 'dotted', label: 'Points' },
+                        { value: 'double', label: 'Double' }
+                    ], category: 'Section - Bordure', condition: { field: 'hasBorder', value: true } },
+                    
+                    // Section 10: Coins arrondis de la section
+                    { name: 'hasRoundedCorners', label: 'Coins arrondis', type: 'checkbox', category: 'Section - Forme' },
+                    { name: 'borderRadius', label: 'Niveau d\'arrondi (px)', type: 'range', min: 0, max: 50, step: 2, category: 'Section - Forme', condition: { field: 'hasRoundedCorners', value: true } }
                 ];
             }
 
