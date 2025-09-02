@@ -22,8 +22,7 @@ class WidgetLoader {
         // Configuration des chemins - Base paths pour modules
         this.basePaths = {
             widgets: '../templates/widgets/',
-            sections: '../templates/sections/',
-            metaSections: './templates/meta-sections/'
+            sections: '../templates/sections/'
         };
         
         // État de chargement - Tracking des modules
@@ -259,7 +258,6 @@ class WidgetLoader {
 
         // Méthodes requises - Interface minimale
         const requiredMethods = ['render', 'getEditableFields'];
-        const optionalMethods = ['getStyles', 'validate', 'attachBehavior'];
 
         // Vérification méthodes requises - Conformité interface
         for (const method of requiredMethods) {
