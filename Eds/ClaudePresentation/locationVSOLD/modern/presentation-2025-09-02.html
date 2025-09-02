@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation - Li-CUBE PRO™</title>
-    <style>
-        body { font-family: system-ui, sans-serif; margin: 0; padding: 0; }
-        .presentation { max-width: 1200px; margin: 0 auto; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Présentation</title>
+  <script type="module">
+    import widgetLoader from './core/widget-loader.js';
+    async function init() {
+      const container = document.getElementById('app');
+      const logo = await widgetLoader.createWidget('logo');
+      container.appendChild(logo.render());
+    }
+    init();
+  </script>
 </head>
 <body>
-    <div class="presentation">
-
-                    <div class="logo-container" style="--logo-align: center; --logo-padding-y: 20px; --logo-padding-x: 20px;">
-                        <a href="#"
-                           class="nav-logo logo-image hover-effect logo-link"
-                           style="--logo-width: 60px; --logo-bg: rgba(16, 185, 129, 0.1); --logo-border: 2px solid rgba(16, 185, 129, 0.3); --logo-radius: 12px; --logo-image: url('../assets/images/logo-eds.png'); --logo-size: 80%; --logo-position: center; --logo-fit: contain; --logo-shadow: none;">
-                            <span class="sr-only">
-                                Logo EDS Québec
-                            </span>
-                        </a>
-                    </div>
-                
-    </div>
+  <div id="app"></div>
 </body>
 </html>
