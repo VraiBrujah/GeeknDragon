@@ -2448,8 +2448,10 @@
                 this.defaultData = {
                     title: 'Li-CUBE PRO™',
                     subtitle: 'LOCATION INTELLIGENTE ZÉRO RISQUE',
+                    text: 'Découvrez nos solutions innovantes pour votre entreprise. Nos équipements de dernière génération vous accompagnent dans tous vos projets avec une fiabilité exceptionnelle.',
                     titleSize: 48,
                     subtitleSize: 24,
+                    textSize: 16,
                     gradient: true,
                     animation: 'slide-up',
                     alignment: 'center',
@@ -2486,8 +2488,14 @@
                         <div class="hero-subtitle ${d.animation}"
                              style="font-size: ${d.subtitleSize}px; font-weight: 600; 
                                     color: #6b7280; line-height: 1.3; max-width: 600px; 
-                                    margin: 0 auto; animation-delay: 0.4s;">
+                                    margin: 0 auto 30px auto; animation-delay: 0.4s;">
                             ${d.subtitle}
+                        </div>
+                        <div class="hero-text ${d.animation}"
+                             style="font-size: ${d.textSize}px; font-weight: 400; 
+                                    color: #9ca3af; line-height: 1.6; max-width: 700px; 
+                                    margin: 0 auto; animation-delay: 0.6s;">
+                            ${d.text}
                         </div>
                     </div>
                 `;
@@ -2497,8 +2505,10 @@
                 return [
                     { name: 'title', label: 'Titre', type: 'text', category: 'Contenu' },
                     { name: 'subtitle', label: 'Sous-titre', type: 'textarea', category: 'Contenu' },
+                    { name: 'text', label: 'Texte descriptif', type: 'textarea', category: 'Contenu' },
                     { name: 'titleSize', label: 'Taille titre', type: 'range', min: 24, max: 72, category: 'Typographie' },
                     { name: 'subtitleSize', label: 'Taille sous-titre', type: 'range', min: 14, max: 36, category: 'Typographie' },
+                    { name: 'textSize', label: 'Taille texte', type: 'range', min: 12, max: 24, category: 'Typographie' },
                     { name: 'gradient', label: 'Gradient', type: 'checkbox', category: 'Style' },
                     { name: 'alignment', label: 'Alignement', type: 'select', category: 'Layout', options: [
                         { value: 'left', label: 'Gauche' },
@@ -2514,7 +2524,8 @@
                 return [
                     { id: 'section', name: 'Section Hero', editable: true },
                     { id: 'title', name: 'Titre principal', editable: true },
-                    { id: 'subtitle', name: 'Sous-titre', editable: true }
+                    { id: 'subtitle', name: 'Sous-titre', editable: true },
+                    { id: 'text', name: 'Texte descriptif', editable: true }
                 ];
             }
         }
@@ -4272,7 +4283,8 @@
             // Mise à jour temps réel pour le hero title
             updateHeroTitleRealTime(container, propertyName, value) {
                 const title = container.querySelector('.hero-title, h1');
-                const subtitle = container.querySelector('.hero-subtitle, .hero-section div');
+                const subtitle = container.querySelector('.hero-subtitle');
+                const text = container.querySelector('.hero-text');
                 const section = container.querySelector('.hero-section');
                 
                 switch (propertyName) {
@@ -4286,6 +4298,11 @@
                             subtitle.innerHTML = value;
                         }
                         break;
+                    case 'text':
+                        if (text) {
+                            text.innerHTML = value;
+                        }
+                        break;
                     case 'titleSize':
                         if (title) {
                             title.style.fontSize = `${value}px`;
@@ -4294,6 +4311,11 @@
                     case 'subtitleSize':
                         if (subtitle) {
                             subtitle.style.fontSize = `${value}px`;
+                        }
+                        break;
+                    case 'textSize':
+                        if (text) {
+                            text.style.fontSize = `${value}px`;
                         }
                         break;
                     case 'alignment':
