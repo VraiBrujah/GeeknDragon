@@ -21,7 +21,7 @@
                 "library canvas properties"
                 "viewer viewer viewer"
                 "footer footer footer";
-            grid-template-columns: 280px 1fr var(--properties-width, 350px);
+            grid-template-columns: 280px 1fr var(--properties-width, 300px);
             grid-template-rows: 60px 1fr 200px 40px;
             height: 100vh;
             background: var(--bg-primary);
@@ -71,26 +71,84 @@
         }
 
         .library-header {
-            padding: var(--spacing-md) var(--spacing-lg);
+            padding: var(--spacing-lg);
             border-bottom: 1px solid var(--border-color);
-            background: var(--bg-card);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
         }
 
         .library-title {
-            font-size: var(--text-lg);
-            font-weight: var(--font-semibold);
+            font-size: var(--text-xl);
+            font-weight: var(--font-bold);
             color: var(--text-white);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .library-title::before {
+            content: "🎨";
+            font-size: 1.5em;
+        }
+
+        .search-container {
+            position: relative;
             margin-bottom: var(--spacing-sm);
         }
 
         .library-search {
             width: 100%;
-            padding: var(--spacing-sm);
-            background: var(--bg-input);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
+            padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 40px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-xl);
             color: var(--text-white);
             font-size: var(--text-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .library-search:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15), 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .library-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        .action-btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            color: var(--text-white);
+            font-size: var(--text-xs);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .action-btn:hover {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            transform: translateY(-1px);
         }
 
         .library-content {
@@ -111,24 +169,61 @@
         .folder-item {
             display: flex;
             align-items: center;
-            padding: var(--spacing-xs) var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
             cursor: pointer;
-            border-radius: var(--border-radius);
-            transition: var(--transition-normal);
+            border-radius: var(--border-radius-xl);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: var(--text-sm);
             color: var(--text-muted);
-            margin-bottom: 2px;
+            margin-bottom: var(--spacing-xs);
+            border: 1px solid transparent;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .folder-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), transparent);
+            transition: width 0.3s ease;
+            z-index: 0;
         }
         
         .folder-item:hover {
-            background: rgba(16, 185, 129, 0.05);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
             color: var(--text-white);
+            border-color: rgba(16, 185, 129, 0.3);
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+
+        .folder-item:hover::before {
+            width: 4px;
         }
         
         .folder-item.active {
-            background: rgba(16, 185, 129, 0.1);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
             color: var(--accent-green);
-            border-left: 3px solid var(--accent-green);
+            border-color: var(--accent-green);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.2);
+        }
+
+        .folder-item.active::before {
+            width: 4px;
+        }
+
+        .folder-item.active .folder-icon {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
         .folder-icon {
@@ -645,7 +740,7 @@
             position: relative;
             min-width: 280px;
             max-width: 600px;
-            width: var(--properties-width, 350px);
+            width: var(--properties-width, 300px);
             border-left: 1px solid var(--border-color);
             box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
@@ -1393,10 +1488,22 @@
         <div class="widget-library">
             <div class="library-header">
                 <h3 class="library-title">Widgets Disponibles</h3>
-                <div style="display: flex; gap: 8px; align-items: center;">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
                     <input type="text" class="library-search" placeholder="Rechercher widgets et dossiers..." id="widgetSearch">
-                    <button class="btn btn-sm" id="createFolderBtn" title="Créer un dossier">
+                </div>
+                <div class="library-actions">
+                    <button class="action-btn" id="createFolderBtn" title="Créer un dossier">
                         <i class="fas fa-folder-plus"></i>
+                        <span>Nouveau dossier</span>
+                    </button>
+                    <button class="action-btn" id="refreshLibraryBtn" title="Actualiser la bibliothèque">
+                        <i class="fas fa-sync"></i>
+                        <span>Actualiser</span>
+                    </button>
+                    <button class="action-btn" id="importWidgetBtn" title="Importer un widget">
+                        <i class="fas fa-upload"></i>
+                        <span>Importer</span>
                     </button>
                 </div>
             </div>
@@ -1503,7 +1610,7 @@
                     Propriétés
                 </div>
                 <div class="properties-header-actions">
-                    <div class="properties-width-indicator" id="widthIndicator">350px</div>
+                    <div class="properties-width-indicator" id="widthIndicator"></div>
                     <button class="properties-collapse-btn" id="collapsePropertiesBtn" title="Réduire/Agrandir">
                         <i class="fas fa-chevron-right"></i>
                     </button>
@@ -1716,7 +1823,24 @@
                     shadowBlur: 8,
                     
                     // Propriétés de conteneur
-                    containerPadding: 20,
+                    /* 
+                    # Rôle      : Espacement horizontal du conteneur (gauche et droite)
+                    # Type      : number
+                    # Unité     : pixels
+                    # Domaine   : 0 ≤ valeur ≤ 50
+                    # Exemple   : 20 pour 20px de chaque côté
+                    */
+                    containerPaddingX: 20,
+                    
+                    /* 
+                    # Rôle      : Espacement vertical du conteneur (haut et bas)
+                    # Type      : number
+                    # Unité     : pixels
+                    # Domaine   : 0 ≤ valeur ≤ 50
+                    # Exemple   : 20 pour 20px en haut et en bas
+                    */
+                    containerPaddingY: 20,
+                    
                     containerAlignment: 'center'
                 };
             }
@@ -1729,6 +1853,19 @@
                 // Formule   : d = {...defaultData, ...data}
                 // Exemple   : {width: 60, backgroundColor: '#ff0000', ...}
                 const d = { ...this.defaultData, ...data };
+                
+                /* 
+                # Rôle      : Migration des anciennes données containerPadding vers containerPaddingX/Y
+                # Type      : compatibility check
+                # Unité     : pixels
+                # Formule   : Si containerPadding existe et pas containerPaddingX/Y, copier la valeur
+                # Exemple   : containerPadding=25 → containerPaddingX=25, containerPaddingY=25
+                */
+                if (data.containerPadding !== undefined && data.containerPaddingX === undefined) {
+                    d.containerPaddingX = data.containerPadding;
+                    d.containerPaddingY = data.containerPadding;
+                    console.log(`📦 Migration containerPadding: ${data.containerPadding} → X=${d.containerPaddingX}, Y=${d.containerPaddingY}`);
+                }
                 
                 // Rôle      : Calcul de la couleur d'arrière-plan selon le type choisi
                 // Type      : string (CSS)
@@ -1820,9 +1957,21 @@
                     shadowStyle = `${d.shadowOffsetX}px ${d.shadowOffsetY}px ${d.shadowBlur}px ${shadowColor}`;
                 }
                 
+                /* 
+                # Rôle      : Log de débogage pour tracer les valeurs d'espacement
+                # Type      : console.log
+                # Unité     : pixels
+                # Formule   : padding = paddingY + 'px ' + paddingX + 'px'
+                # Exemple   : "Espacement: Y=20px X=15px → padding: 20px 15px"
+                */
+                console.log(`🔧 Espacement Logo: Y=${d.containerPaddingY}px X=${d.containerPaddingX}px → padding: ${d.containerPaddingY}px ${d.containerPaddingX}px`);
+                
                 return `
                     <div class="logo-container" style="text-align: ${d.containerAlignment}; 
-                                                       padding: ${d.containerPadding}px; 
+                                                       padding-top: ${d.containerPaddingY}px;
+                                                       padding-bottom: ${d.containerPaddingY}px;
+                                                       padding-left: ${d.containerPaddingX}px;
+                                                       padding-right: ${d.containerPaddingX}px; 
                                                        height: 100%;">
                         <a href="${d.link}" 
                            class="nav-logo logo-image ${d.hoverEffect ? 'hover-effect' : ''}"
@@ -1859,7 +2008,8 @@
                     // Dimensions et position
                     { name: 'width', label: 'Largeur (px)', type: 'range', min: 30, max: 200, category: 'Dimensions' },
                     { name: 'height', label: 'Hauteur (px)', type: 'range', min: 30, max: 200, category: 'Dimensions' },
-                    { name: 'containerPadding', label: 'Espacement conteneur (px)', type: 'range', min: 0, max: 50, category: 'Dimensions' },
+                    { name: 'containerPaddingX', label: 'Espacement largeur (px)', type: 'range', min: 0, max: 50, category: 'Dimensions' },
+                    { name: 'containerPaddingY', label: 'Espacement hauteur (px)', type: 'range', min: 0, max: 50, category: 'Dimensions' },
                     { name: 'containerAlignment', label: 'Alignement', type: 'select', category: 'Dimensions', options: [
                         { value: 'left', label: 'Gauche' },
                         { value: 'center', label: 'Centre' },
@@ -2444,6 +2594,9 @@
                 // Restaurer l'état précédent si disponible
                 this.restoreState();
                 
+                // Initialiser l'indicateur de largeur du panneau
+                this.updateWidthIndicator();
+                
                 this.setStatus('Éditeur prêt', 'success');
             }
 
@@ -2455,6 +2608,93 @@
                     }
                     this.widgetCategories[instance.category].push(instance);
                 });
+            }
+
+            // Rôle      : Obtenir la largeur actuelle du panneau propriétés
+            // Type      : function
+            // Unité     : pixels (avec unité 'px')
+            // Formule   : largeur = propertiesPanel.style.width || variable_CSS || défaut
+            // Exemple   : '350px'
+            getCurrentPropertiesWidth() {
+                const propertiesPanel = document.querySelector('.properties-panel');
+                if (propertiesPanel) {
+                    // Priorité 1: largeur directement appliquée au style
+                    if (propertiesPanel.style.width) {
+                        console.log(`📏 Largeur depuis style.width: ${propertiesPanel.style.width}`);
+                        return propertiesPanel.style.width;
+                    }
+                    
+                    // Priorité 2: variable CSS custom
+                    const cssVar = getComputedStyle(document.documentElement).getPropertyValue('--properties-width').trim();
+                    if (cssVar) {
+                        console.log(`📏 Largeur depuis CSS var: ${cssVar}`);
+                        return cssVar;
+                    }
+                    
+                    // Priorité 3: largeur calculée actuelle
+                    const offsetWidth = `${propertiesPanel.offsetWidth}px`;
+                    console.log(`📏 Largeur depuis offsetWidth: ${offsetWidth}`);
+                    return offsetWidth;
+                }
+                
+                // Défaut si aucun panneau trouvé
+                console.log('📏 Largeur par défaut: 300px');
+                return '300px';
+            }
+
+            // Rôle      : Restaurer la largeur du panneau propriétés
+            // Type      : function
+            // Unité     : pixels (string avec 'px')
+            // Formule   : application complète largeur = variable_CSS + style_direct + grid + indicateur
+            // Exemple   : restorePropertiesWidth('420px')
+            restorePropertiesWidth(width) {
+                const propertiesPanel = document.querySelector('.properties-panel');
+                const widgetEditor = document.querySelector('.widget-editor');
+                
+                if (!propertiesPanel || !widgetEditor || !width) {
+                    console.warn('❌ restorePropertiesWidth: Éléments manquants', {propertiesPanel, widgetEditor, width});
+                    return;
+                }
+                
+                // Extraire la valeur numérique (enlever 'px' si présent)
+                const numericWidth = parseInt(width);
+                const widthWithPx = `${numericWidth}px`;
+                
+                console.log(`🔧 Restauration largeur: ${width} → ${widthWithPx}`);
+                
+                // 1. Définir la variable CSS custom
+                document.documentElement.style.setProperty('--properties-width', widthWithPx);
+                
+                // 2. Appliquer le style direct au panneau
+                propertiesPanel.style.width = widthWithPx;
+                
+                // 3. Mettre à jour le grid layout principal
+                widgetEditor.style.gridTemplateColumns = `280px 1fr ${widthWithPx}`;
+                
+                // 4. Force un reflow pour s'assurer que les changements sont appliqués
+                propertiesPanel.offsetWidth;
+                
+                // 5. Mettre à jour l'indicateur de largeur après le reflow
+                setTimeout(() => {
+                    const widthIndicator = document.querySelector('.properties-width-indicator');
+                    if (widthIndicator) {
+                        widthIndicator.textContent = widthWithPx;
+                    }
+                    console.log(`✅ Largeur appliquée: ${widthWithPx}`);
+                }, 10);
+            }
+
+            // Rôle      : Mettre à jour l'indicateur de largeur du panneau
+            // Type      : function
+            // Unité     : sans unité
+            // Formule   : indicateur.textContent = largeur_actuelle
+            // Exemple   : Met à jour l'indicateur avec '420px'
+            updateWidthIndicator() {
+                const widthIndicator = document.querySelector('.properties-width-indicator');
+                if (widthIndicator) {
+                    const currentWidth = this.getCurrentPropertiesWidth();
+                    widthIndicator.textContent = currentWidth;
+                }
             }
 
             // Rôle      : Sauvegarder automatiquement l'état actuel de l'éditeur
@@ -2478,7 +2718,7 @@
                         selectedWidgetId: this.selectedWidget ? this.selectedWidget.id : null,
                         
                         // Largeur du panneau propriétés
-                        propertiesWidth: getComputedStyle(document.documentElement).getPropertyValue('--properties-width'),
+                        propertiesWidth: this.getCurrentPropertiesWidth(),
                         
                         // État de l'interface
                         currentFolder: this.currentFolder,
@@ -2508,6 +2748,12 @@
                     
                     const state = JSON.parse(savedState);
                     
+                    // Restaurer PREMIÈREMENT la largeur du panneau propriétés
+                    // pour éviter qu'elle soit réinitialisée lors de la sélection
+                    if (state.propertiesWidth) {
+                        this.restorePropertiesWidth(state.propertiesWidth);
+                    }
+                    
                     // Restaurer les widgets
                     if (state.widgets && state.widgets.length > 0) {
                         this.widgets = [];
@@ -2535,20 +2781,12 @@
                             this.selectWidget(state.selectedWidgetId);
                         }
                         
+                        
                         // Masquer l'état vide
                         const emptyState = document.getElementById('emptyState');
                         if (emptyState) {
                             emptyState.classList.add('hidden');
                             emptyState.style.display = 'none';
-                        }
-                    }
-                    
-                    // Restaurer la largeur du panneau propriétés
-                    if (state.propertiesWidth) {
-                        document.documentElement.style.setProperty('--properties-width', state.propertiesWidth);
-                        const propertiesPanel = document.querySelector('.properties-panel');
-                        if (propertiesPanel) {
-                            propertiesPanel.style.width = state.propertiesWidth;
                         }
                     }
                     
@@ -2923,6 +3161,9 @@
                     this.updatePropertiesPanel();
                 }
                 
+                // Mise à jour de l'indicateur de largeur après sélection
+                this.updateWidthIndicator();
+                
                 // Sauvegarde automatique après sélection/désélection
                 this.autoSave();
             }
@@ -2967,7 +3208,11 @@
             }
 
             createPropertyField(field, widget) {
-                const value = widget.data[field.name];
+                // Rôle      : Obtenir la valeur de la propriété (donnée actuelle ou défaut)
+                // Type      : any
+                // Formule   : valeur = widget.data[nom] ?? field.defaultValue
+                // Exemple   : imagePath = widget.data.imagePath ?? '../assets/logo.png'
+                const value = widget.data[field.name] !== undefined ? widget.data[field.name] : field.defaultValue;
                 const fieldId = `prop-${field.name}`;
                 
                 let inputHtml = '';
@@ -5130,7 +5375,9 @@ Folder('${id}')" title="Renommer">
                     // Formule   : panel.classList.remove('collapsed')
                     // Exemple   : panneau fermé -> panneau ouvert (largeur normale)
                     propertiesPanel.classList.remove('collapsed');
-                    propertiesPanel.style.width = propertiesPanel.style.getPropertyValue('--properties-width') || '350px';
+                    // Restaurer la largeur sauvegardée ou utiliser la largeur actuelle
+                    const currentWidth = this.getCurrentPropertiesWidth();
+                    propertiesPanel.style.width = currentWidth;
                 } else {
                     // Rôle      : Collapse du panneau (fermeture)
                     // Type      : opération (ajout de classe CSS)
