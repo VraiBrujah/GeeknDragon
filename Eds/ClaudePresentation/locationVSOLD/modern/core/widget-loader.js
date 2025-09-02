@@ -18,11 +18,11 @@ class WidgetLoader {
         
         // Cache des instances - Optimisation performance
         this.instanceCache = new Map();
-        
+
         // Configuration des chemins - Base paths pour modules
         this.basePaths = {
-            widgets: './templates/widgets/',
-            sections: './templates/sections/',
+            widgets: '../templates/widgets/',
+            sections: '../templates/sections/',
             metaSections: './templates/meta-sections/'
         };
         
