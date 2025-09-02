@@ -6043,16 +6043,6 @@
                     if (state.favoriteWidgets) this.favoriteWidgets = new Set(state.favoriteWidgets);
                     if (state.recentWidgets) this.recentWidgets = new Set(state.recentWidgets);
                     
-                    // Restaurer les dimensions de la grille personnalisée
-                    if (state.gridColumns !== undefined) this.gridColumns = state.gridColumns;
-                    if (state.gridRows !== undefined) this.gridRows = state.gridRows;
-                    
-                    // Appliquer immédiatement les dimensions restaurées
-                    if (state.gridColumns !== undefined || state.gridRows !== undefined) {
-                        this.updateGridLayout();
-                        console.log(`🔄 Grille restaurée: ${this.gridColumns}×${this.gridRows}`);
-                    }
-                    
                 } catch (error) {
                     console.warn('Erreur lors de la restauration:', error);
                 }
