@@ -402,56 +402,36 @@
             border-color: #ef4444;
         }
         
-        /* Contenu de la popup */
+        /* Contenu de la popup - exactement comme .viewer-content */
         .preview-content {
             margin-top: 80px;
-            min-height: calc(100vh - 80px);
+            width: 100%;
+            height: calc(100vh - 80px);
             background: var(--bg-primary);
             position: relative;
+            overflow: auto;
+            padding: var(--spacing-md);
+            box-sizing: border-box;
+            color: var(--text-white);
         }
         
-        /* Grille de prévisualisation finale */
+        /* Grille de prévisualisation finale - exactement comme .presentation-preview */
         .preview-grid {
-            padding: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
+            width: 100%;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            grid-template-rows: repeat(8, minmax(120px, auto));
-            gap: 20px;
-            min-height: calc(100vh - 160px);
+            grid-template-rows: repeat(8, minmax(80px, 1fr));
+            gap: 6px;
+            padding: 12px;
+            min-height: 600px;
         }
         
-        /* Widget dans la prévisualisation finale */
-        .preview-widget-final {
-            border-radius: 16px;
-            background: rgba(30, 41, 59, 0.8);
-            border: 2px solid rgba(16, 185, 129, 0.2);
-            padding: 2rem;
-            transition: all 0.3s ease;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .preview-widget-final:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-green);
-            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
-        }
-        
-        /* Styles spécifiques aux widgets dans la prévisualisation */
-        .preview-widget-final .widget-content {
-            color: var(--text-white);
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .preview-widget-final h1,
-        .preview-widget-final h2,
-        .preview-widget-final h3 {
-            color: var(--accent-green);
-            font-family: 'Playfair Display', serif;
-        }
+        /* Les widgets du popup utilisent la même classe que l'éditeur : .preview-widget */
+        /* Aucun style spécifique nécessaire - ils héritent des styles de .preview-widget */
         
         /* Animation d'apparition */
         @keyframes fadeInPreview {
@@ -7995,9 +7975,7 @@
                     previewHtml += `
                         <div class="preview-widget" 
                              style="grid-column: ${pos.col} / ${pos.col + size.width}; 
-                                    grid-row: ${pos.row} / ${pos.row + size.height}; 
-                                    background: rgba(248, 250, 252, 0.95); 
-                                    border: 1px solid #e5e7eb;">
+                                    grid-row: ${pos.row} / ${pos.row + size.height};">
                             ${widget.instance.render(widget.data)}
                         </div>
                     `;
@@ -8328,58 +8306,37 @@ Folder('${id}')" title="Renommer">
                 this.setStatus('Prévisualisation fermée', 'info');
             }
             
-            // Rendre la prévisualisation finale avec le style du viewer exporté
+            // Rendre la prévisualisation finale - copie exacte de updatePreview()
             renderFullscreenPreview() {
                 const previewGrid = document.getElementById('previewGrid');
                 
                 if (this.widgets.length === 0) {
                     previewGrid.innerHTML = `
-                        <div class="preview-empty">
-                            <i class="fas fa-cube"></i>
-                            <div>Aucun widget à prévisualiser</div>
-                            <div style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.7;">
-                                Ajoutez des widgets pour voir la prévisualisation
-                            </div>
+                        <div style="grid-column: 1 / -1; grid-row: 1 / -1; display: flex; 
+                                    flex-direction: column; align-items: center; justify-content: center; 
+                                    text-align: center; color: #6b7280;">
+                            <i class="fas fa-eye" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+                            <div>L'aperçu temps réel apparaîtra ici</div>
                         </div>
                     `;
                     return;
                 }
                 
                 let previewHtml = '';
-                
-                // Rendu de chaque widget avec le style final
                 this.widgets.forEach(widget => {
                     const pos = widget.position || { col: 1, row: 1 };
                     const size = widget.size || { width: 3, height: 2 };
                     
-                    // Contenu du widget rendu avec le style final
-                    const widgetContent = widget.instance.render(widget.data);
-                    
                     previewHtml += `
-                        <div class="preview-widget-final" 
+                        <div class="preview-widget" 
                              style="grid-column: ${pos.col} / ${pos.col + size.width}; 
                                     grid-row: ${pos.row} / ${pos.row + size.height};">
-                            <div class="widget-content">
-                                ${widgetContent}
-                            </div>
+                            ${widget.instance.render(widget.data)}
                         </div>
                     `;
                 });
                 
                 previewGrid.innerHTML = previewHtml;
-                
-                // Appliquer les animations d'entrée
-                const widgets = previewGrid.querySelectorAll('.preview-widget-final');
-                widgets.forEach((widget, index) => {
-                    widget.style.opacity = '0';
-                    widget.style.transform = 'translateY(20px)';
-                    
-                    setTimeout(() => {
-                        widget.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-                        widget.style.opacity = '1';
-                        widget.style.transform = 'translateY(0)';
-                    }, index * 100);
-                });
             }
             
             // Mettre à jour la prévisualisation si elle est ouverte
