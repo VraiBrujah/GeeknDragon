@@ -432,6 +432,68 @@
         
         /* Les widgets du popup utilisent la même classe que l'éditeur : .preview-widget */
         /* Aucun style spécifique nécessaire - ils héritent des styles de .preview-widget */
+
+        /* Styles pour l'aperçu du header dans l'onglet Viewer */
+        .header-preview-container {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-secondary);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .header-preview {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+            border-bottom: 2px solid var(--accent-green);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--text-sm);
+            color: var(--text-white);
+        }
+
+        .header-preview-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-weight: var(--font-bold);
+        }
+
+        .header-preview-logo i {
+            color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+            padding: var(--spacing-xs);
+            border-radius: 4px;
+            font-size: 1.2em;
+        }
+
+        .header-preview-info {
+            text-align: right;
+            font-size: 0.8em;
+            color: var(--text-gray);
+        }
+
+        .header-preview-date {
+            font-weight: var(--font-medium);
+            color: var(--text-white);
+            margin-bottom: 2px;
+        }
+
+        .viewer-config-section {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .config-preview-note {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            text-align: center;
+            padding: var(--spacing-sm);
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: var(--border-radius);
+            margin-top: var(--spacing-sm);
+        }
         
         /* Animation d'apparition */
         @keyframes fadeInPreview {
@@ -1605,6 +1667,9 @@
                     <button class="properties-tab active" data-tab="properties">Propriétés</button>
                     <button class="properties-tab" data-tab="elements">Éléments</button>
                     <button class="properties-tab" data-tab="organization">Organisation</button>
+                    <button class="properties-tab" data-tab="viewer">
+                        <i class="fas fa-presentation"></i> Viewer
+                    </button>
                 </div>
                 
                 <div class="tab-content active" id="propertiesTab">
@@ -1723,6 +1788,104 @@
                             <button class="btn btn-sm" id="updateCustomWidgetBtn" disabled style="display: none;">
                                 <i class="fas fa-sync-alt"></i>
                                 Mettre à jour
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Onglet Viewer pour configuration header présentation -->
+                <div class="tab-content" id="viewerTab">
+                    <div class="property-group">
+                        <h4><i class="fas fa-presentation"></i> Configuration Viewer</h4>
+                        <div class="viewer-preview-header">
+                            <div class="property-field">
+                                <label class="property-label">Aperçu du Header</label>
+                                <div id="headerPreview" class="header-preview-container">
+                                    <!-- Aperçu du header sera généré ici -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="property-group">
+                        <h4><i class="fas fa-heading"></i> Titre Principal</h4>
+                        <div class="property-field">
+                            <label class="property-label">Titre de la présentation</label>
+                            <input type="text" id="viewerTitle" class="property-input" 
+                                   placeholder="Eds Québec - Présentation Marketing" 
+                                   value="Eds Québec - Présentation Marketing">
+                        </div>
+                        <div class="property-field">
+                            <label class="property-label">Sous-titre</label>
+                            <input type="text" id="viewerSubtitle" class="property-input" 
+                                   placeholder="Version Client - Confidentiel" 
+                                   value="Version Client - Confidentiel">
+                        </div>
+                    </div>
+                    
+                    <div class="property-group">
+                        <h4><i class="fas fa-building"></i> Informations Client</h4>
+                        <div class="property-field">
+                            <label class="property-label">Nom du client</label>
+                            <input type="text" id="clientName" class="property-input" 
+                                   placeholder="Nom de l'entreprise cliente">
+                        </div>
+                        <div class="property-field">
+                            <label class="property-label">Projet</label>
+                            <input type="text" id="projectName" class="property-input" 
+                                   placeholder="Nom du projet">
+                        </div>
+                        <div class="property-field">
+                            <label class="property-label">Date de présentation</label>
+                            <input type="date" id="presentationDate" class="property-input">
+                        </div>
+                    </div>
+                    
+                    <div class="property-group">
+                        <h4><i class="fas fa-palette"></i> Personnalisation</h4>
+                        <div class="property-field">
+                            <label class="property-label">Couleur d'accent</label>
+                            <input type="color" id="accentColor" class="property-input" 
+                                   value="#10b981">
+                        </div>
+                        <div class="property-field">
+                            <label class="property-label">Logo personnalisé</label>
+                            <div style="display: flex; gap: 8px; align-items: center;">
+                                <input type="url" id="customLogo" class="property-input" 
+                                       placeholder="URL du logo (optionnel)" style="flex: 1;">
+                                <button class="btn btn-sm" id="testLogoBtn">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="property-group">
+                        <h4><i class="fas fa-info-circle"></i> Footer</h4>
+                        <div class="property-field">
+                            <label class="property-label">Copyright</label>
+                            <input type="text" id="copyrightText" class="property-input" 
+                                   placeholder="© 2024 Eds Québec - Présentation Marketing" 
+                                   value="© 2024 Eds Québec - Présentation Marketing">
+                        </div>
+                        <div class="property-field">
+                            <label class="property-label">Mentions légales</label>
+                            <input type="text" id="legalText" class="property-input" 
+                                   placeholder="Document confidentiel - Ne pas diffuser" 
+                                   value="Document confidentiel - Ne pas diffuser">
+                        </div>
+                    </div>
+                    
+                    <div class="property-group">
+                        <h4><i class="fas fa-cog"></i> Actions</h4>
+                        <div class="property-field" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button class="btn btn-sm" id="updateHeaderPreviewBtn">
+                                <i class="fas fa-sync"></i>
+                                Actualiser Aperçu
+                            </button>
+                            <button class="btn btn-sm" id="resetViewerConfigBtn">
+                                <i class="fas fa-undo"></i>
+                                Réinitialiser
                             </button>
                         </div>
                     </div>
@@ -5405,6 +5568,9 @@
                 // Ajouter bouton d'export vers viewer
                 this.createExportButton();
                 
+                // Initialiser l'onglet Viewer
+                this.initializeViewerConfig();
+                
                 // Fermer la popup avec Échap
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
@@ -7958,11 +8124,15 @@
             updatePreview() {
                 const preview = document.getElementById('presentationPreview');
                 
+                // Générer le header de prévisualisation
+                const headerHtml = this.generatePreviewHeader();
+                
                 if (this.widgets.length === 0) {
                     preview.innerHTML = `
+                        ${headerHtml}
                         <div style="grid-column: 1 / -1; grid-row: 1 / -1; display: flex; 
                                     flex-direction: column; align-items: center; justify-content: center; 
-                                    text-align: center; color: #6b7280;">
+                                    text-align: center; color: #6b7280; margin-top: 60px;">
                             <i class="fas fa-eye" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;"></i>
                             <div>L'aperçu temps réel apparaîtra ici</div>
                         </div>
@@ -7984,10 +8154,58 @@
                     `;
                 });
                 
-                preview.innerHTML = previewHtml;
+                preview.innerHTML = headerHtml + previewHtml;
                 
                 // Mettre à jour aussi la prévisualisation plein écran si elle est ouverte
                 this.updateFullscreenPreviewIfOpen();
+            }
+
+            // Générer le header pour la prévisualisation
+            generatePreviewHeader() {
+                if (!this.viewerConfig) {
+                    return ''; // Pas de header si la config n'est pas initialisée
+                }
+
+                const config = this.viewerConfig;
+                const presentationDate = config.presentationDate ? 
+                    new Date(config.presentationDate).toLocaleDateString('fr-FR', { 
+                        year: 'numeric', month: 'long', day: 'numeric' 
+                    }) : 
+                    new Date().toLocaleDateString('fr-FR', { 
+                        year: 'numeric', month: 'long', day: 'numeric' 
+                    });
+
+                // Construire le titre complet
+                let fullTitle = config.title;
+                if (config.clientName) {
+                    fullTitle += ` - ${config.clientName}`;
+                }
+                if (config.projectName) {
+                    fullTitle += ` (${config.projectName})`;
+                }
+
+                return `
+                    <div class="preview-header-overlay" 
+                         style="position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+                                background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+                                border-bottom: 2px solid ${config.accentColor};
+                                padding: 12px 16px; display: flex; justify-content: space-between;
+                                align-items: center; font-size: 0.875rem; color: var(--text-white);">
+                        <div style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
+                            ${config.customLogo ? 
+                                `<img src="${config.customLogo}" style="width: 20px; height: 20px; border-radius: 4px;" onerror="this.style.display='none'; this.nextSibling.style.display='inline';">` : 
+                                ''
+                            }
+                            <i class="fas fa-presentation" style="color: ${config.accentColor}; ${config.customLogo ? 'display: none;' : ''}"></i>
+                            <span>${fullTitle}</span>
+                        </div>
+                        <div style="text-align: right; font-size: 0.75rem; color: var(--text-gray);">
+                            <div style="font-weight: 600; color: var(--text-white); margin-bottom: 2px;">${presentationDate}</div>
+                            <div>${config.subtitle}</div>
+                        </div>
+                    </div>
+                    <div style="height: 60px;"></div>
+                `;
             }
 
             // Gestion de la recherche dynamique
@@ -8667,8 +8885,20 @@ Folder('${id}')" title="Renommer">
                 }
             }
 
-            // Générer le HTML du viewer client
+            // Générer le HTML du viewer client avec configuration personnalisée
             generateViewerHtml(widgetsData) {
+                const config = this.viewerConfig || {
+                    title: 'Eds Québec - Présentation Marketing',
+                    subtitle: 'Version Client - Confidentiel',
+                    clientName: '',
+                    projectName: '',
+                    presentationDate: new Date().toISOString().split('T')[0],
+                    accentColor: '#10b981',
+                    customLogo: '',
+                    copyrightText: '© 2024 Eds Québec - Présentation Marketing',
+                    legalText: 'Document confidentiel - Ne pas diffuser'
+                };
+
                 const widgetsHtml = widgetsData.map(widget => `
                     <div class="widget-item" 
                          style="grid-column: ${widget.position.col} / ${widget.position.col + widget.size.width}; 
@@ -8678,32 +8908,50 @@ Folder('${id}')" title="Renommer">
                     </div>
                 `).join('');
 
+                // Utiliser la date configurée ou la date actuelle
+                const presentationDate = config.presentationDate ? 
+                    new Date(config.presentationDate) : new Date();
+                const dateStr = presentationDate.toLocaleDateString('fr-FR', { 
+                    year: 'numeric', month: 'long', day: 'numeric' 
+                });
                 const now = new Date();
-                const dateStr = now.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
                 const timeStr = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
+                // Construire le titre complet
+                let fullTitle = config.title;
+                if (config.clientName) {
+                    fullTitle += ` - ${config.clientName}`;
+                }
+                if (config.projectName) {
+                    fullTitle += ` (${config.projectName})`;
+                }
 
                 return `<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Présentation Eds Québec - Viewer Marketing</title>
+    <title>${fullTitle} - Viewer Marketing</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    ${this.getViewerStyles()}
+    ${this.getViewerStyles(config.accentColor)}
 </head>
 <body>
     <div class="viewer-container">
         <div class="viewer-header">
             <div class="viewer-header-content">
                 <div class="viewer-logo">
-                    <i class="fas fa-presentation"></i>
-                    <span>Eds Québec - Présentation Marketing</span>
+                    ${config.customLogo ? 
+                        `<img src="${config.customLogo}" style="width: 32px; height: 32px; border-radius: var(--border-radius);" onerror="this.style.display='none'; this.nextSibling.style.display='inline';">` : 
+                        ''
+                    }
+                    <i class="fas fa-presentation" style="${config.customLogo ? 'display: none;' : ''}"></i>
+                    <span>${fullTitle}</span>
                 </div>
                 <div class="viewer-info">
                     <div class="viewer-date">${dateStr}</div>
-                    <div>Version Client - Confidentiel</div>
+                    <div>${config.subtitle}</div>
                 </div>
             </div>
         </div>
@@ -8716,8 +8964,11 @@ Folder('${id}')" title="Renommer">
         
         <div class="viewer-footer">
             <div class="footer-content">
-                <span>© ${now.getFullYear()} Eds Québec - Présentation Marketing Confidentielle</span>
-                <span>Généré le ${dateStr} à ${timeStr}</span>
+                <span>${config.copyrightText}</span>
+                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                    <span>Généré le ${now.toLocaleDateString('fr-FR')} à ${timeStr}</span>
+                    <span style="font-size: 0.75em;">${config.legalText}</span>
+                </div>
             </div>
         </div>
     </div>
@@ -8725,8 +8976,8 @@ Folder('${id}')" title="Renommer">
 </html>`;
             }
 
-            // Obtenir les styles CSS pour le viewer
-            getViewerStyles() {
+            // Obtenir les styles CSS pour le viewer avec couleur d'accent personnalisée
+            getViewerStyles(accentColor = '#10b981') {
                 return `<style>
                     /* Variables CSS pour le viewer */
                     :root {
@@ -8736,7 +8987,7 @@ Folder('${id}')" title="Renommer">
                         --text-white: #ffffff;
                         --text-gray: #94a3b8;
                         --text-muted: #64748b;
-                        --accent-green: #10b981;
+                        --accent-green: ${accentColor};
                         --border-color: #334155;
                         --spacing-md: 1rem;
                         --spacing-lg: 1.5rem;
@@ -8953,6 +9204,178 @@ Folder('${id}')" title="Renommer">
                 a.click();
                 document.body.removeChild(a);
                 window.URL.revokeObjectURL(url);
+            }
+
+            // Configuration du viewer
+            initializeViewerConfig() {
+                // Configuration par défaut du viewer
+                this.viewerConfig = {
+                    title: 'Eds Québec - Présentation Marketing',
+                    subtitle: 'Version Client - Confidentiel',
+                    clientName: '',
+                    projectName: '',
+                    presentationDate: new Date().toISOString().split('T')[0],
+                    accentColor: '#10b981',
+                    customLogo: '',
+                    copyrightText: '© 2024 Eds Québec - Présentation Marketing',
+                    legalText: 'Document confidentiel - Ne pas diffuser'
+                };
+
+                // Event listeners pour l'onglet viewer
+                this.setupViewerEventListeners();
+
+                // Générer l'aperçu initial
+                this.updateHeaderPreview();
+            }
+
+            // Configurer les event listeners pour l'onglet viewer
+            setupViewerEventListeners() {
+                const inputs = [
+                    'viewerTitle', 'viewerSubtitle', 'clientName', 'projectName', 
+                    'presentationDate', 'accentColor', 'customLogo', 
+                    'copyrightText', 'legalText'
+                ];
+
+                inputs.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.addEventListener('input', () => this.updateViewerConfig(id, element.value));
+                        element.addEventListener('change', () => this.updateViewerConfig(id, element.value));
+                    }
+                });
+
+                // Boutons d'action
+                const updateBtn = document.getElementById('updateHeaderPreviewBtn');
+                if (updateBtn) {
+                    updateBtn.addEventListener('click', () => this.updateHeaderPreview());
+                }
+
+                const resetBtn = document.getElementById('resetViewerConfigBtn');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => this.resetViewerConfig());
+                }
+
+                const testLogoBtn = document.getElementById('testLogoBtn');
+                if (testLogoBtn) {
+                    testLogoBtn.addEventListener('click', () => this.testCustomLogo());
+                }
+            }
+
+            // Mettre à jour la configuration du viewer
+            updateViewerConfig(field, value) {
+                // Mapper les IDs des éléments aux propriétés de configuration
+                const fieldMapping = {
+                    'viewerTitle': 'title',
+                    'viewerSubtitle': 'subtitle',
+                    'clientName': 'clientName',
+                    'projectName': 'projectName',
+                    'presentationDate': 'presentationDate',
+                    'accentColor': 'accentColor',
+                    'customLogo': 'customLogo',
+                    'copyrightText': 'copyrightText',
+                    'legalText': 'legalText'
+                };
+
+                const configField = fieldMapping[field];
+                if (configField) {
+                    this.viewerConfig[configField] = value;
+                    this.updateHeaderPreview();
+                    this.setStatus(`Configuration viewer mise à jour : ${configField}`, 'info');
+                }
+            }
+
+            // Mettre à jour l'aperçu du header
+            updateHeaderPreview() {
+                const previewContainer = document.getElementById('headerPreview');
+                if (!previewContainer) return;
+
+                const config = this.viewerConfig;
+                const presentationDate = config.presentationDate ? 
+                    new Date(config.presentationDate).toLocaleDateString('fr-FR', { 
+                        year: 'numeric', month: 'long', day: 'numeric' 
+                    }) : 
+                    new Date().toLocaleDateString('fr-FR', { 
+                        year: 'numeric', month: 'long', day: 'numeric' 
+                    });
+
+                // Construire le titre complet
+                let fullTitle = config.title;
+                if (config.clientName) {
+                    fullTitle += ` - ${config.clientName}`;
+                }
+                if (config.projectName) {
+                    fullTitle += ` (${config.projectName})`;
+                }
+
+                // Construire le sous-titre
+                let fullSubtitle = config.subtitle;
+
+                previewContainer.innerHTML = `
+                    <div class="header-preview" style="border-bottom-color: ${config.accentColor};">
+                        <div class="header-preview-logo">
+                            ${config.customLogo ? 
+                                `<img src="${config.customLogo}" style="width: 24px; height: 24px; border-radius: 4px;" onerror="this.style.display='none'; this.nextSibling.style.display='inline';">` : 
+                                ''
+                            }
+                            <i class="fas fa-presentation" style="color: ${config.accentColor}; ${config.customLogo ? 'display: none;' : ''}"></i>
+                            <span>${fullTitle}</span>
+                        </div>
+                        <div class="header-preview-info">
+                            <div class="header-preview-date">${presentationDate}</div>
+                            <div>${fullSubtitle}</div>
+                        </div>
+                    </div>
+                    <div class="config-preview-note">
+                        <i class="fas fa-info-circle"></i>
+                        Aperçu du header qui apparaîtra dans le viewer exporté
+                    </div>
+                `;
+            }
+
+            // Tester le logo personnalisé
+            testCustomLogo() {
+                const logoUrl = document.getElementById('customLogo').value;
+                if (!logoUrl) {
+                    this.setStatus('Veuillez entrer une URL de logo', 'error');
+                    return;
+                }
+
+                const img = new Image();
+                img.onload = () => {
+                    this.setStatus('Logo testé avec succès !', 'success');
+                    this.updateHeaderPreview();
+                };
+                img.onerror = () => {
+                    this.setStatus('Erreur : Impossible de charger le logo', 'error');
+                };
+                img.src = logoUrl;
+            }
+
+            // Réinitialiser la configuration du viewer
+            resetViewerConfig() {
+                // Réinitialiser les valeurs par défaut
+                const defaults = {
+                    viewerTitle: 'Eds Québec - Présentation Marketing',
+                    viewerSubtitle: 'Version Client - Confidentiel',
+                    clientName: '',
+                    projectName: '',
+                    presentationDate: new Date().toISOString().split('T')[0],
+                    accentColor: '#10b981',
+                    customLogo: '',
+                    copyrightText: '© 2024 Eds Québec - Présentation Marketing',
+                    legalText: 'Document confidentiel - Ne pas diffuser'
+                };
+
+                Object.keys(defaults).forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.value = defaults[id];
+                        this.updateViewerConfig(id, defaults[id]);
+                    }
+                });
+
+                this.updateHeaderPreview();
+                this.setStatus('Configuration viewer réinitialisée', 'success');
             }
 
             setStatus(message, type = 'info') {
