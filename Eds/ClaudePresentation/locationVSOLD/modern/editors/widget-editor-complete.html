@@ -2749,6 +2749,26 @@
                 
                 this.defaultData = {
                     title: 'Pourquoi Nous Choisir ?',
+                    // Propriétés du titre principal (inspirées du TextSimple)
+                    titleSize: 32,
+                    titleColor: '#ffffff',
+                    titleAlignment: 'center',
+                    titleIsBold: true,
+                    titleIsItalic: false,
+                    titleHasBackground: false,
+                    titleBackgroundColor: '#10b981',
+                    titleBackgroundOpacity: 20,
+                    titleHasBorder: false,
+                    titleBorderColor: '#10b981',
+                    titleBorderWidth: 2,
+                    titleBorderStyle: 'solid',
+                    titleHasRoundedCorners: false,
+                    titleBorderRadius: 8,
+                    titlePaddingTop: 'medium',
+                    titlePaddingBottom: 'medium',
+                    titlePaddingLeft: 'medium',
+                    titlePaddingRight: 'medium',
+                    titleMarginBottom: 'large',
                     features: [
                         {
                             icon: '🚀',
@@ -2823,13 +2843,79 @@
                             borderColor: 'var(--border-color)'
                         }
                     ],
-                    columns: 3,
+                    columns: 2,
                     featuresCount: 4
                 };
             }
 
+            // Helper pour convertir les valeurs d'espacement en pixels (inspiré du TextSimple)
+            getSpacingValue(spacingType) {
+                const spacingMap = {
+                    'none': '0px',
+                    'small': '8px',
+                    'medium': '16px',
+                    'large': '32px'
+                };
+                return spacingMap[spacingType] || '16px';
+            }
+
+            // Génère les styles CSS pour le titre
+            generateTitleStyles(data) {
+                const styleRules = [];
+                
+                // Style de base
+                styleRules.push('text-align: ' + (data.titleAlignment || 'center'));
+                styleRules.push('font-size: ' + (data.titleSize || 32) + 'px');
+                styleRules.push('color: ' + (data.titleColor || '#ffffff'));
+                styleRules.push('font-weight: ' + (data.titleIsBold ? 'bold' : 'normal'));
+                styleRules.push('font-style: ' + (data.titleIsItalic ? 'italic' : 'normal'));
+                styleRules.push('line-height: 1.2');
+                
+                // Arrière-plan
+                if (data.titleHasBackground) {
+                    const opacity = (data.titleBackgroundOpacity || 20) / 100;
+                    const bgColor = data.titleBackgroundColor || '#10b981';
+                    // Convertir hex en rgba
+                    const hex = bgColor.replace('#', '');
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    styleRules.push(`background-color: rgba(${r}, ${g}, ${b}, ${opacity})`);
+                }
+                
+                // Contour
+                if (data.titleHasBorder) {
+                    const borderWidth = data.titleBorderWidth || 2;
+                    const borderStyle = data.titleBorderStyle || 'solid';
+                    const borderColor = data.titleBorderColor || '#10b981';
+                    styleRules.push(`border: ${borderWidth}px ${borderStyle} ${borderColor}`);
+                }
+                
+                // Coins arrondis
+                if (data.titleHasRoundedCorners) {
+                    const borderRadius = data.titleBorderRadius || 8;
+                    styleRules.push(`border-radius: ${borderRadius}px`);
+                }
+                
+                // Espacement interne (padding)
+                const paddingTop = this.getSpacingValue(data.titlePaddingTop || 'medium');
+                const paddingBottom = this.getSpacingValue(data.titlePaddingBottom || 'medium');
+                const paddingLeft = this.getSpacingValue(data.titlePaddingLeft || 'medium');
+                const paddingRight = this.getSpacingValue(data.titlePaddingRight || 'medium');
+                styleRules.push(`padding: ${paddingTop} ${paddingRight} ${paddingBottom} ${paddingLeft}`);
+                
+                // Marge du bas
+                const marginBottom = this.getSpacingValue(data.titleMarginBottom || 'large');
+                styleRules.push(`margin-bottom: ${marginBottom}`);
+                
+                return styleRules.join('; ');
+            }
+
             render(data = {}) {
                 const d = { ...this.defaultData, ...data };
+                
+                // Générer les styles du titre
+                const titleStyles = this.generateTitleStyles(d);
                 
                 // Limiter les features affichées selon featuresCount
                 const displayedFeatures = d.features.slice(0, d.featuresCount || 4);
@@ -2857,8 +2943,7 @@
 
                 return `
                     <div class="features-section" style="padding: 80px 20px; background: var(--bg-primary);">
-                        <h2 style="text-align: center; font-size: 2.5rem; font-weight: bold; 
-                                   color: white; margin-bottom: 60px; line-height: 1.2;">
+                        <h2 class="features-main-title" style="${titleStyles}">
                             ${d.title}
                         </h2>
                         <div class="features-grid" 
@@ -2872,9 +2957,75 @@
 
             getEditableFields() {
                 return [
-                    { name: 'title', label: 'Titre principal', type: 'text' },
-                    { name: 'featuresCount', label: 'Nombre de fonctionnalités', type: 'range', min: 1, max: 12 },
-                    { name: 'columns', label: 'Colonnes dans la grille', type: 'range', min: 1, max: 4 }
+                    // Section 1: Contenu
+                    { name: 'title', label: 'Titre principal', type: 'text', category: 'Contenu' },
+                    
+                    // Section 2: Style du titre principal
+                    { name: 'titleSize', label: 'Taille du titre', type: 'range', min: 16, max: 60, category: 'Titre - Typographie' },
+                    { name: 'titleColor', label: 'Couleur du titre', type: 'color', category: 'Titre - Typographie' },
+                    { name: 'titleAlignment', label: 'Alignement du titre', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' },
+                        { value: 'center', label: 'Centre' },
+                        { value: 'right', label: 'Droite' }
+                    ], category: 'Titre - Typographie' },
+                    { name: 'titleIsBold', label: 'Titre en gras', type: 'checkbox', category: 'Titre - Typographie' },
+                    { name: 'titleIsItalic', label: 'Titre en italique', type: 'checkbox', category: 'Titre - Typographie' },
+                    
+                    // Section 3: Arrière-plan du titre
+                    { name: 'titleHasBackground', label: 'Arrière-plan du titre', type: 'checkbox', category: 'Titre - Arrière-plan' },
+                    { name: 'titleBackgroundColor', label: 'Couleur de fond du titre', type: 'color', category: 'Titre - Arrière-plan', condition: { field: 'titleHasBackground', value: true } },
+                    { name: 'titleBackgroundOpacity', label: 'Transparence du fond', type: 'range', min: 0, max: 100, step: 5, category: 'Titre - Arrière-plan', condition: { field: 'titleHasBackground', value: true } },
+                    
+                    // Section 4: Contour du titre
+                    { name: 'titleHasBorder', label: 'Contour du titre', type: 'checkbox', category: 'Titre - Contour' },
+                    { name: 'titleBorderColor', label: 'Couleur du contour', type: 'color', category: 'Titre - Contour', condition: { field: 'titleHasBorder', value: true } },
+                    { name: 'titleBorderWidth', label: 'Épaisseur du contour', type: 'range', min: 1, max: 10, step: 1, category: 'Titre - Contour', condition: { field: 'titleHasBorder', value: true } },
+                    { name: 'titleBorderStyle', label: 'Style du contour', type: 'select', options: [
+                        { value: 'solid', label: 'Solide' },
+                        { value: 'dashed', label: 'Tirets' },
+                        { value: 'dotted', label: 'Points' },
+                        { value: 'double', label: 'Double' }
+                    ], category: 'Titre - Contour', condition: { field: 'titleHasBorder', value: true } },
+                    
+                    // Section 5: Coins arrondis du titre
+                    { name: 'titleHasRoundedCorners', label: 'Coins arrondis du titre', type: 'checkbox', category: 'Titre - Forme' },
+                    { name: 'titleBorderRadius', label: 'Niveau d\'arrondi', type: 'range', min: 0, max: 50, step: 2, category: 'Titre - Forme', condition: { field: 'titleHasRoundedCorners', value: true } },
+                    
+                    // Section 6: Espacement du titre
+                    { name: 'titlePaddingTop', label: 'Espacement haut du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'titlePaddingBottom', label: 'Espacement bas du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'titlePaddingLeft', label: 'Espacement gauche du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'titlePaddingRight', label: 'Espacement droite du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'titleMarginBottom', label: 'Marge du bas du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucune' },
+                        { value: 'small', label: 'Petite' },
+                        { value: 'medium', label: 'Moyenne' },
+                        { value: 'large', label: 'Grande' }
+                    ], category: 'Titre - Espacement' },
+                    
+                    // Section 7: Configuration de la grille
+                    { name: 'featuresCount', label: 'Nombre de fonctionnalités', type: 'range', min: 1, max: 12, category: 'Grille' },
+                    { name: 'columns', label: 'Colonnes dans la grille', type: 'range', min: 1, max: 4, category: 'Grille' }
                 ];
             }
 
@@ -4496,17 +4647,147 @@
             
             // Mise à jour temps réel pour feature grid
             updateFeatureGridRealTime(container, propertyName, value) {
-                const title = container.querySelector('h2');
+                const title = container.querySelector('h2.features-main-title');
                 const grid = container.querySelector('.features-grid');
                 
                 switch (propertyName) {
+                    // Contenu du titre
                     case 'title':
                         if (title) title.textContent = value;
                         break;
+                    
+                    // Propriétés de style du titre
+                    case 'titleSize':
+                        if (title) title.style.fontSize = `${value}px`;
+                        break;
+                    case 'titleColor':
+                        if (title) title.style.color = value;
+                        break;
+                    case 'titleAlignment':
+                        if (title) title.style.textAlign = value;
+                        break;
+                    case 'titleIsBold':
+                        if (title) title.style.fontWeight = value ? 'bold' : 'normal';
+                        break;
+                    case 'titleIsItalic':
+                        if (title) title.style.fontStyle = value ? 'italic' : 'normal';
+                        break;
+                    
+                    // Arrière-plan du titre
+                    case 'titleHasBackground':
+                        if (title) {
+                            if (value) {
+                                const data = this.selectedWidget.data;
+                                const opacity = (data.titleBackgroundOpacity || 20) / 100;
+                                const bgColor = data.titleBackgroundColor || '#10b981';
+                                const hex = bgColor.replace('#', '');
+                                const r = parseInt(hex.substr(0, 2), 16);
+                                const g = parseInt(hex.substr(2, 2), 16);
+                                const b = parseInt(hex.substr(4, 2), 16);
+                                title.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                            } else {
+                                title.style.backgroundColor = 'transparent';
+                            }
+                        }
+                        break;
+                    case 'titleBackgroundColor':
+                        if (title && this.selectedWidget.data.titleHasBackground) {
+                            const opacity = (this.selectedWidget.data.titleBackgroundOpacity || 20) / 100;
+                            const hex = value.replace('#', '');
+                            const r = parseInt(hex.substr(0, 2), 16);
+                            const g = parseInt(hex.substr(2, 2), 16);
+                            const b = parseInt(hex.substr(4, 2), 16);
+                            title.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                        }
+                        break;
+                    case 'titleBackgroundOpacity':
+                        if (title && this.selectedWidget.data.titleHasBackground) {
+                            const opacity = value / 100;
+                            const bgColor = this.selectedWidget.data.titleBackgroundColor || '#10b981';
+                            const hex = bgColor.replace('#', '');
+                            const r = parseInt(hex.substr(0, 2), 16);
+                            const g = parseInt(hex.substr(2, 2), 16);
+                            const b = parseInt(hex.substr(4, 2), 16);
+                            title.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                        }
+                        break;
+                    
+                    // Contour du titre
+                    case 'titleHasBorder':
+                        if (title) {
+                            if (value) {
+                                const data = this.selectedWidget.data;
+                                const borderWidth = data.titleBorderWidth || 2;
+                                const borderStyle = data.titleBorderStyle || 'solid';
+                                const borderColor = data.titleBorderColor || '#10b981';
+                                title.style.border = `${borderWidth}px ${borderStyle} ${borderColor}`;
+                            } else {
+                                title.style.border = 'none';
+                            }
+                        }
+                        break;
+                    case 'titleBorderColor':
+                        if (title && this.selectedWidget.data.titleHasBorder) {
+                            const borderWidth = this.selectedWidget.data.titleBorderWidth || 2;
+                            const borderStyle = this.selectedWidget.data.titleBorderStyle || 'solid';
+                            title.style.border = `${borderWidth}px ${borderStyle} ${value}`;
+                        }
+                        break;
+                    case 'titleBorderWidth':
+                        if (title && this.selectedWidget.data.titleHasBorder) {
+                            const borderStyle = this.selectedWidget.data.titleBorderStyle || 'solid';
+                            const borderColor = this.selectedWidget.data.titleBorderColor || '#10b981';
+                            title.style.border = `${value}px ${borderStyle} ${borderColor}`;
+                        }
+                        break;
+                    case 'titleBorderStyle':
+                        if (title && this.selectedWidget.data.titleHasBorder) {
+                            const borderWidth = this.selectedWidget.data.titleBorderWidth || 2;
+                            const borderColor = this.selectedWidget.data.titleBorderColor || '#10b981';
+                            title.style.border = `${borderWidth}px ${value} ${borderColor}`;
+                        }
+                        break;
+                    
+                    // Coins arrondis du titre
+                    case 'titleHasRoundedCorners':
+                        if (title) {
+                            if (value) {
+                                const borderRadius = this.selectedWidget.data.titleBorderRadius || 8;
+                                title.style.borderRadius = `${borderRadius}px`;
+                            } else {
+                                title.style.borderRadius = '0px';
+                            }
+                        }
+                        break;
+                    case 'titleBorderRadius':
+                        if (title && this.selectedWidget.data.titleHasRoundedCorners) {
+                            title.style.borderRadius = `${value}px`;
+                        }
+                        break;
+                    
+                    // Espacement du titre - mise à jour complète via generateTitleStyles
+                    case 'titlePaddingTop':
+                    case 'titlePaddingBottom':
+                    case 'titlePaddingLeft':
+                    case 'titlePaddingRight':
+                    case 'titleMarginBottom':
+                        if (title) {
+                            // Régénérer tous les styles pour l'espacement
+                            const instance = this.selectedWidget.instance;
+                            const newStyles = instance.generateTitleStyles(this.selectedWidget.data);
+                            title.setAttribute('style', newStyles);
+                        }
+                        break;
+                    
+                    // Configuration de la grille
                     case 'columns':
                         if (grid) {
                             grid.style.gridTemplateColumns = `repeat(${value}, 1fr)`;
                         }
+                        break;
+                    case 'featuresCount':
+                        // Pour le nombre de fonctionnalités, il faut refaire un rendu complet
+                        this.renderCanvas();
                         break;
                 }
             }
@@ -5679,9 +5960,58 @@ Folder('${id}')" title="Renommer">
                 
                 features[index][field] = value;
                 
-                // Mettre à jour le rendu en temps réel
-                this.renderCanvas();
-                this.updatePreview();
+                // Mise à jour temps réel optimisée - seulement l'élément modifié
+                const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (container) {
+                    const featureCards = container.querySelectorAll('.feature-card');
+                    if (featureCards[index]) {
+                        const card = featureCards[index];
+                        
+                        switch (field) {
+                            case 'icon':
+                                const iconDiv = card.querySelector('div:first-child');
+                                if (iconDiv) iconDiv.textContent = value;
+                                break;
+                            case 'iconSize':
+                                const iconElement = card.querySelector('div:first-child');
+                                if (iconElement) iconElement.style.fontSize = value;
+                                break;
+                            case 'title':
+                                const titleElement = card.querySelector('h3');
+                                if (titleElement) titleElement.textContent = value;
+                                break;
+                            case 'titleColor':
+                                const titleColorElement = card.querySelector('h3');
+                                if (titleColorElement) titleColorElement.style.color = value;
+                                break;
+                            case 'titleSize':
+                                const titleSizeElement = card.querySelector('h3');
+                                if (titleSizeElement) titleSizeElement.style.fontSize = value;
+                                break;
+                            case 'description':
+                                const descElement = card.querySelector('p');
+                                if (descElement) descElement.textContent = value;
+                                break;
+                            case 'descriptionColor':
+                                const descColorElement = card.querySelector('p');
+                                if (descColorElement) descColorElement.style.color = value;
+                                break;
+                            case 'descriptionSize':
+                                const descSizeElement = card.querySelector('p');
+                                if (descSizeElement) descSizeElement.style.fontSize = value;
+                                break;
+                            case 'backgroundColor':
+                                card.style.background = value;
+                                break;
+                            case 'borderColor':
+                                card.style.borderColor = value;
+                                break;
+                        }
+                    }
+                }
+                
+                // Sauvegarde automatique
+                this.autoSave();
                 
                 // Message de statut discret uniquement pour les changements importants
                 if (field === 'title') {
