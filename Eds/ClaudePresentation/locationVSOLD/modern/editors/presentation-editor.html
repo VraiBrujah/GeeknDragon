@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
   <title>Éditeur de Présentation</title>
+  <link rel="import" href="editor-layout.html">
+  <script>
+    const layout = document.querySelector('link[rel="import"]').import.getElementById('layout');
+    document.head.appendChild(layout.content.cloneNode(true));
+  </script>
   <script type="module">
     import widgetLoader from '../core/widget-loader.js';
     async function init() {
