@@ -320,12 +320,102 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            position: relative;
+            min-width: 280px;
+            max-width: 600px;
+            width: var(--properties-width, 350px);
+            border-left: 1px solid var(--border-color);
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Handle de redimensionnement */
+        .resize-handle {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--border-color);
+            cursor: ew-resize;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.2s ease;
+            border-radius: 2px;
+        }
+
+        .resize-handle:hover,
+        .resize-handle.resizing {
+            opacity: 1;
+            background: var(--accent-green);
+            width: 6px;
+            left: -1px;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .resize-handle::after {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 30px;
+            background: transparent;
+        }
+
+        .properties-panel:hover .resize-handle {
+            opacity: 0.6;
+        }
+        
+        /* État collapsed du panneau propriétés */
+        .properties-panel.collapsed {
+            width: 40px !important;
+            min-width: 40px;
+            overflow: hidden;
+        }
+        
+        .properties-panel.collapsed .properties-content {
+            display: none;
+        }
+        
+        .properties-panel.collapsed .properties-header {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: var(--spacing-lg) var(--spacing-sm);
+            justify-content: center;
+            min-height: auto;
+        }
+        
+        .properties-panel.collapsed .properties-title {
+            font-size: var(--text-sm);
+            writing-mode: vertical-rl;
+        }
+        
+        .properties-panel.collapsed .properties-header-actions {
+            position: absolute;
+            top: var(--spacing-sm);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .properties-panel.collapsed .properties-width-indicator {
+            display: none;
         }
 
         .properties-header {
             padding: var(--spacing-md) var(--spacing-lg);
             border-bottom: 1px solid var(--border-color);
-            background: var(--bg-card);
+            background: linear-gradient(135deg, 
+                rgba(30, 41, 59, 0.9) 0%, 
+                rgba(30, 41, 59, 0.7) 100%);
+            backdrop-filter: blur(15px);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 60px;
         }
 
         .properties-title {
@@ -337,63 +427,164 @@
             gap: var(--spacing-sm);
         }
 
+        .properties-header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .properties-collapse-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .properties-collapse-btn:hover {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .properties-width-indicator {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            min-width: 50px;
+            text-align: center;
+        }
+
         .properties-content {
             flex: 1;
             overflow-y: auto;
-            padding: var(--spacing-md);
+            padding: 0;
+            background: var(--bg-primary);
         }
 
         .properties-tabs {
             display: flex;
-            margin-bottom: var(--spacing-md);
-            background: rgba(30, 41, 59, 0.3);
-            border-radius: var(--border-radius);
-            padding: 4px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            margin: 0;
         }
 
         .properties-tab {
             flex: 1;
-            padding: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
             background: transparent;
-            color: var(--text-muted);
             border: none;
-            border-radius: calc(var(--border-radius) - 4px);
+            color: var(--text-muted);
             cursor: pointer;
-            font-size: var(--text-xs);
-            font-weight: var(--font-medium);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 3px solid transparent;
+            font-size: var(--text-sm);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .properties-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(16, 185, 129, 0.1) 0%, 
+                rgba(16, 185, 129, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .properties-tab:hover {
+            color: var(--text-white);
+            transform: translateY(-1px);
+        }
+
+        .properties-tab:hover::before {
+            opacity: 1;
         }
 
         .properties-tab.active {
-            background: var(--accent-green);
-            color: white;
+            color: var(--accent-green);
+            border-bottom-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.15);
+            font-weight: 600;
+        }
+
+        .properties-tab.active::before {
+            opacity: 1;
         }
 
         .tab-content {
             display: none;
+            padding: var(--spacing-lg);
+            animation: fadeIn 0.3s ease-in-out;
         }
 
         .tab-content.active {
             display: block;
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .property-group {
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .property-group:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
         }
 
         .property-group h4 {
             color: var(--text-white);
-            margin-bottom: var(--spacing-sm);
-            font-size: var(--text-sm);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-lg);
+            font-size: var(--text-md);
+            font-weight: var(--font-semibold);
             display: flex;
             align-items: center;
-            gap: var(--spacing-xs);
+            gap: var(--spacing-sm);
+            position: relative;
+            padding-bottom: var(--spacing-sm);
+        }
+
+        .property-group h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-green), transparent);
+            border-radius: 1px;
         }
 
         .property-group h4 i {
             color: var(--accent-green);
+            font-size: 1.1em;
         }
 
         .property-field {
@@ -416,12 +607,24 @@
 
         .property-input {
             flex: 1;
-            padding: var(--spacing-sm);
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
             color: var(--text-white);
             font-size: var(--text-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .property-input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .property-input:hover {
+            border-color: rgba(16, 185, 129, 0.5);
         }
 
         .property-range {
@@ -645,6 +848,13 @@
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .properties-panel {
+                --properties-width: 300px;
+                width: 300px;
+            }
+        }
+        
         @media (max-width: 1024px) {
             .widget-editor {
                 grid-template-areas: 
@@ -652,11 +862,93 @@
                     "canvas properties"
                     "viewer viewer"
                     "footer footer";
-                grid-template-columns: 1fr 320px;
+                grid-template-columns: 1fr 280px;
             }
             
             .widget-library {
                 display: none;
+            }
+            
+            .properties-panel {
+                --properties-width: 280px;
+                width: 280px;
+            }
+            
+            .properties-panel.collapsed {
+                width: 30px !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .widget-editor {
+                grid-template-areas: 
+                    "toolbar"
+                    "canvas"
+                    "properties"
+                    "viewer"
+                    "footer";
+                grid-template-columns: 1fr;
+                grid-template-rows: 60px 1fr 250px 150px 40px;
+            }
+            
+            .properties-panel {
+                --properties-width: 100%;
+                width: 100% !important;
+                height: 250px;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+                position: relative;
+            }
+            
+            .properties-panel.collapsed {
+                height: 40px !important;
+                width: 100% !important;
+            }
+            
+            .properties-panel.collapsed .properties-header {
+                writing-mode: horizontal-tb;
+                text-orientation: mixed;
+                padding: var(--spacing-sm) var(--spacing-lg);
+                justify-content: space-between;
+            }
+            
+            .properties-panel.collapsed .properties-title {
+                writing-mode: horizontal-tb;
+                font-size: var(--text-md);
+            }
+            
+            .properties-panel.collapsed .properties-header-actions {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+            }
+            
+            .resize-handle {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .widget-editor {
+                grid-template-rows: 50px 1fr 200px 120px 35px;
+            }
+            
+            .toolbar-title {
+                font-size: var(--text-md);
+            }
+            
+            .properties-panel {
+                height: 200px;
+            }
+            
+            .properties-panel.collapsed {
+                height: 35px !important;
+            }
+            
+            .properties-header {
+                padding: var(--spacing-sm);
+                min-height: 35px;
             }
         }
     </style>
@@ -741,11 +1033,18 @@
 
         <!-- Panneau de propriétés -->
         <div class="properties-panel">
+            <div class="resize-handle" id="propertiesResizeHandle"></div>
             <div class="properties-header">
-                <h3 class="properties-title">
+                <div class="properties-title">
                     <i class="fas fa-sliders-h"></i>
                     Propriétés
-                </h3>
+                </div>
+                <div class="properties-header-actions">
+                    <div class="properties-width-indicator" id="widthIndicator">350px</div>
+                    <button class="properties-collapse-btn" id="collapsePropertiesBtn" title="Réduire/Agrandir">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
             
             <div class="properties-content" id="propertiesContent">
@@ -1513,6 +1812,12 @@
                 
                 // Refresh preview
                 document.getElementById('refreshPreviewBtn').addEventListener('click', () => this.updatePreview());
+                
+                // Système de redimensionnement du panneau propriétés
+                this.setupPropertiesResize();
+                
+                // Bouton de collapse du panneau propriétés
+                document.getElementById('collapsePropertiesBtn').addEventListener('click', () => this.togglePropertiesPanel());
                 
                 // Event pour clic sur workspace (désélection)
                 const workspace = document.getElementById('canvasWorkspace');
@@ -3124,6 +3429,197 @@
                         'Grille masquée - Mode édition normal';
                     
                     this.setStatus(statusMessage, 'info');
+                }
+            }
+            
+            // Rôle      : Configuration du système de redimensionnement du panneau propriétés
+            // Type      : méthode (sans paramètres)
+            // Unité     : sans unité
+            // Domaine   : méthode d'initialisation
+            // Formule   : configuration des event listeners pour le handle de redimensionnement
+            // Exemple   : setupPropertiesResize() - active le redimensionnement par glisser-déposer
+            setupPropertiesResize() {
+                // Rôle      : Handle de redimensionnement du panneau
+                // Type      : HTMLElement
+                // Unité     : sans unité  
+                // Domaine   : élément DOM existant ou null
+                // Formule   : sélecteur CSS .resize-handle
+                // Exemple   : <div class="resize-handle"></div>
+                const resizeHandle = document.querySelector('.resize-handle');
+                if (!resizeHandle) return;
+                
+                // Rôle      : Indicateur de redimensionnement actif
+                // Type      : boolean
+                // Unité     : sans unité
+                // Domaine   : true/false
+                // Formule   : état = mousedown && mousemove
+                // Exemple   : true pendant le glisser-déposer
+                let isResizing = false;
+                
+                // Rôle      : Position initiale de la souris
+                // Type      : number
+                // Unité     : pixels (px)
+                // Domaine   : coordonnées écran >= 0
+                // Formule   : position = event.clientX
+                // Exemple   : 1200 (pixels depuis le bord gauche de l'écran)
+                let startX = 0;
+                
+                // Rôle      : Largeur initiale du panneau
+                // Type      : number  
+                // Unité     : pixels (px)
+                // Domaine   : largeur >= 250px et <= 600px
+                // Formule   : largeur = getComputedStyle(panel).width
+                // Exemple   : 350 (largeur par défaut)
+                let startWidth = 0;
+                
+                // Gestionnaire de début de redimensionnement
+                resizeHandle.addEventListener('mousedown', (e) => {
+                    // Rôle      : Activation du mode redimensionnement
+                    // Type      : opération (changement d'état)
+                    // Unité     : sans unité
+                    // Domaine   : isResizing = false -> true
+                    // Formule   : état = true + capture position/taille initiales
+                    // Exemple   : mousedown -> isResizing=true, startX=1200, startWidth=350
+                    isResizing = true;
+                    startX = e.clientX;
+                    
+                    const propertiesPanel = document.querySelector('.properties-panel');
+                    if (propertiesPanel) {
+                        // Rôle      : Récupération largeur actuelle
+                        // Type      : number (conversion string->number)
+                        // Unité     : pixels (px)
+                        // Domaine   : largeur >= 0
+                        // Formule   : parseInt(getComputedStyle().width)
+                        // Exemple   : "350px" -> 350
+                        startWidth = parseInt(getComputedStyle(propertiesPanel).width);
+                    }
+                    
+                    // Ajout des classes visuelles
+                    resizeHandle.classList.add('resizing');
+                    document.body.style.cursor = 'ew-resize';
+                    document.body.style.userSelect = 'none';
+                    
+                    e.preventDefault();
+                });
+                
+                // Gestionnaire de mouvement de redimensionnement
+                document.addEventListener('mousemove', (e) => {
+                    if (!isResizing) return;
+                    
+                    // Rôle      : Calcul du déplacement de la souris
+                    // Type      : number (différence)
+                    // Unité     : pixels (px)
+                    // Domaine   : delta peut être négatif ou positif
+                    // Formule   : delta = position_actuelle - position_initiale
+                    // Exemple   : 1150 - 1200 = -50 (souris vers la gauche)
+                    const deltaX = e.clientX - startX;
+                    
+                    // Rôle      : Nouvelle largeur calculée
+                    // Type      : number (soustraction car handle à gauche)
+                    // Unité     : pixels (px)  
+                    // Domaine   : 250 <= newWidth <= 600
+                    // Formule   : nouvelle_largeur = largeur_initiale - déplacement
+                    // Exemple   : 350 - (-50) = 400 (panneau plus large)
+                    const newWidth = startWidth - deltaX;
+                    
+                    // Rôle      : Largeur contrainte dans les limites
+                    // Type      : number (application des bornes min/max)
+                    // Unité     : pixels (px)
+                    // Domaine   : 250 <= constrainedWidth <= 600
+                    // Formule   : width = Math.max(min_width, Math.min(max_width, calculated_width))
+                    // Exemple   : Math.max(250, Math.min(600, 400)) = 400
+                    const constrainedWidth = Math.max(250, Math.min(600, newWidth));
+                    
+                    const propertiesPanel = document.querySelector('.properties-panel');
+                    if (propertiesPanel) {
+                        // Application de la nouvelle largeur
+                        propertiesPanel.style.setProperty('--properties-width', `${constrainedWidth}px`);
+                        propertiesPanel.style.width = `${constrainedWidth}px`;
+                        
+                        // Mise à jour de l'indicateur de largeur
+                        const widthIndicator = document.querySelector('.properties-width-indicator');
+                        if (widthIndicator) {
+                            widthIndicator.textContent = `${constrainedWidth}px`;
+                        }
+                    }
+                });
+                
+                // Gestionnaire de fin de redimensionnement
+                document.addEventListener('mouseup', () => {
+                    if (!isResizing) return;
+                    
+                    // Rôle      : Désactivation du mode redimensionnement
+                    // Type      : opération (remise à l'état initial)
+                    // Unité     : sans unité
+                    // Domaine   : isResizing = true -> false
+                    // Formule   : état = false + suppression classes/styles temporaires
+                    // Exemple   : mouseup -> isResizing=false, cursor=default
+                    isResizing = false;
+                    resizeHandle.classList.remove('resizing');
+                    document.body.style.cursor = '';
+                    document.body.style.userSelect = '';
+                });
+            }
+            
+            // Rôle      : Basculement de l'état collapsed/expanded du panneau propriétés  
+            // Type      : méthode (sans paramètres)
+            // Unité     : sans unité
+            // Domaine   : méthode de toggle UI
+            // Formule   : état = !état_actuel
+            // Exemple   : togglePropertiesPanel() - panneau ouvert -> fermé ou fermé -> ouvert
+            togglePropertiesPanel() {
+                // Rôle      : Panneau de propriétés à basculer
+                // Type      : HTMLElement
+                // Unité     : sans unité
+                // Domaine   : élément DOM existant ou null
+                // Formule   : sélecteur CSS .properties-panel
+                // Exemple   : <div class="properties-panel">...</div>
+                const propertiesPanel = document.querySelector('.properties-panel');
+                if (!propertiesPanel) return;
+                
+                // Rôle      : État collapsed actuel du panneau
+                // Type      : boolean
+                // Unité     : sans unité
+                // Domaine   : true/false
+                // Formule   : isCollapsed = panel.classList.contains('collapsed')
+                // Exemple   : false (panneau ouvert)
+                const isCollapsed = propertiesPanel.classList.contains('collapsed');
+                
+                if (isCollapsed) {
+                    // Rôle      : Expansion du panneau (ouverture)
+                    // Type      : opération (changement de classe CSS)
+                    // Unité     : sans unité
+                    // Domaine   : suppression classe 'collapsed'
+                    // Formule   : panel.classList.remove('collapsed')
+                    // Exemple   : panneau fermé -> panneau ouvert (largeur normale)
+                    propertiesPanel.classList.remove('collapsed');
+                    propertiesPanel.style.width = propertiesPanel.style.getPropertyValue('--properties-width') || '350px';
+                } else {
+                    // Rôle      : Collapse du panneau (fermeture)
+                    // Type      : opération (ajout de classe CSS)
+                    // Unité     : sans unité
+                    // Domaine   : ajout classe 'collapsed'
+                    // Formule   : panel.classList.add('collapsed')
+                    // Exemple   : panneau ouvert -> panneau fermé (largeur minimale 40px)
+                    propertiesPanel.classList.add('collapsed');
+                    propertiesPanel.style.width = '40px';
+                }
+                
+                // Rôle      : Icône du bouton de collapse
+                // Type      : HTMLElement
+                // Unité     : sans unité
+                // Domaine   : élément DOM existant ou null
+                // Formule   : sélecteur CSS du bouton collapse
+                // Exemple   : <i class="fas fa-chevron-right"></i>
+                const collapseIcon = document.querySelector('.properties-collapse-btn i');
+                if (collapseIcon) {
+                    // Rôle      : Rotation de l'icône selon l'état
+                    // Type      : string (classe CSS)
+                    // Unité     : sans unité
+                    // Domaine   : 'fa-chevron-right' ou 'fa-chevron-left'
+                    // Formule   : classe = isCollapsed ? 'fa-chevron-left' : 'fa-chevron-right'
+                    // Exemple   : panneau fermé -> 'fa-chevron-left' (flèche vers la gauche pour ouvrir)
+                    collapseIcon.className = isCollapsed ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
                 }
             }
         }
