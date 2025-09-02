@@ -3241,13 +3241,13 @@
                     obsoleteBorderColor: '#ef4444',
                     obsoleteIcon: '❌',
                     obsoleteDisadvantages: [
-                        'Cadmium Hautement Toxique',
-                        'Maintenance Obligatoire Coûteuse',
-                        'Durée de Vie Limitée',
-                        'Poids et Encombrement',
-                        'Charge Lente 8-12h',
-                        'Aucune Connectivité',
-                        'Réglementation Transport Stricte'
+                        { text: 'Cadmium Hautement Toxique', emoji: '☠️', color: '#ff6b6b' },
+                        { text: 'Maintenance Obligatoire Coûteuse', emoji: '🔧', color: '#ff8c42' },
+                        { text: 'Durée de Vie Limitée', emoji: '⏳', color: '#ffd93d' },
+                        { text: 'Poids et Encombrement', emoji: '🏋️', color: '#ff6b6b' },
+                        { text: 'Charge Lente 8-12h', emoji: '🐌', color: '#ff8c42' },
+                        { text: 'Aucune Connectivité', emoji: '📵', color: '#ff6b6b' },
+                        { text: 'Réglementation Transport Stricte', emoji: '⚖️', color: '#ffd93d' }
                     ],
                     
                     // Colonne Moderne - SIMPLIFIÉ COMME PRICING CARD
@@ -3257,13 +3257,13 @@
                     modernBorderColor: '#10b981',
                     modernIcon: '✅',
                     modernAdvantages: [
-                        'Durée Vie Exceptionnelle',
-                        'Zéro Maintenance',
-                        'Surveillance Temps Réel',
-                        'Performance Énergétique',
-                        'Climat Canadien',
-                        '100% Écologique',
-                        'Sécurité BMS Multi-niveau'
+                        { text: 'Durée Vie Exceptionnelle', emoji: '🔋', color: '#4ecdc4' },
+                        { text: 'Zéro Maintenance', emoji: '🛡️', color: '#45b7d1' },
+                        { text: 'Surveillance Temps Réel', emoji: '📡', color: '#96ceb4' },
+                        { text: 'Performance Énergétique', emoji: '⚡', color: '#ffeaa7' },
+                        { text: 'Climat Canadien', emoji: '🌡️', color: '#74b9ff' },
+                        { text: '100% Écologique', emoji: '🍃', color: '#00b894' },
+                        { text: 'Sécurité BMS Multi-niveau', emoji: '🛡️', color: '#6c5ce7' }
                     ],
                     
                     // Section VS (Séparateur central) - Inspirée du TextSimple
@@ -3499,31 +3499,41 @@
                 const titleStyles = this.generateTitleStyles(d);
                 const vsStyles = this.generateVSStyles(d);
                 
-                // Créer les listes d'inconvénients (obsolète) - SIMPLIFIÉ COMME PRICING CARD
+                // Créer les listes d'inconvénients (obsolète) - AVEC EMOJI ET COULEUR PERSONNALISÉS
                 const disadvantagesHtml = d.obsoleteDisadvantages.map((item, index) => {
+                    // Support rétrocompatibilité : si item est string, le convertir en objet
+                    const itemData = typeof item === 'string' ? { text: item, emoji: d.obsoleteIcon, color: '#ffffff' } : item;
+                    const displayEmoji = itemData.emoji && itemData.emoji.trim() !== '' ? itemData.emoji : d.obsoleteIcon;
+                    const textColor = itemData.color || '#ffffff';
+                    
                     return `
                         <div class="comparison-item obsolete-item" style="margin-bottom: 16px; padding: 12px; 
                                                                            background: rgba(239, 68, 68, 0.1); 
                                                                            border-left: 3px solid #ef4444; 
                                                                            border-radius: 6px; display: flex; align-items: center; gap: 12px;">
-                            <div style="color: #ef4444; font-size: 1.2rem;">${d.obsoleteIcon}</div>
-                            <div style="color: #ffffff; font-size: 0.95rem; line-height: 1.4;">
-                                ${item}
+                            <div class="item-emoji" style="font-size: 1.4rem; min-width: 24px; text-align: center;">${displayEmoji}</div>
+                            <div class="item-text" style="color: ${textColor}; font-size: 0.95rem; line-height: 1.4; flex: 1;">
+                                ${itemData.text}
                             </div>
                         </div>
                     `;
                 }).join('');
                 
-                // Créer les listes d'avantages (moderne) - SIMPLIFIÉ COMME PRICING CARD
+                // Créer les listes d'avantages (moderne) - AVEC EMOJI ET COULEUR PERSONNALISÉS
                 const advantagesHtml = d.modernAdvantages.map((item, index) => {
+                    // Support rétrocompatibilité : si item est string, le convertir en objet
+                    const itemData = typeof item === 'string' ? { text: item, emoji: d.modernIcon, color: '#ffffff' } : item;
+                    const displayEmoji = itemData.emoji && itemData.emoji.trim() !== '' ? itemData.emoji : d.modernIcon;
+                    const textColor = itemData.color || '#ffffff';
+                    
                     return `
                         <div class="comparison-item modern-item" style="margin-bottom: 16px; padding: 12px; 
                                                                         background: rgba(16, 185, 129, 0.1); 
                                                                         border-left: 3px solid #10b981; 
                                                                         border-radius: 6px; display: flex; align-items: center; gap: 12px;">
-                            <div style="color: #10b981; font-size: 1.2rem;">${d.modernIcon}</div>
-                            <div style="color: #ffffff; font-size: 0.95rem; line-height: 1.4;">
-                                ${item}
+                            <div class="item-emoji" style="font-size: 1.4rem; min-width: 24px; text-align: center;">${displayEmoji}</div>
+                            <div class="item-text" style="color: ${textColor}; font-size: 0.95rem; line-height: 1.4; flex: 1;">
+                                ${itemData.text}
                             </div>
                         </div>
                     `;
@@ -5172,26 +5182,43 @@
                                     </div>
                                     
                                     <div class="disadvantages-list" style="max-height: 200px; overflow-y: auto;">
-                                        ${obsoleteDisadvantages.map((item, index) => `
-                                            <div class="disadvantage-item" style="display: flex; align-items: center; gap: 8px; 
-                                                                                       padding: 8px 12px; background: rgba(239, 68, 68, 0.1); 
-                                                                                       border: 1px solid rgba(239, 68, 68, 0.3); 
-                                                                                       border-radius: 6px; margin-bottom: 6px;">
-                                                <span style="color: #ef4444; font-weight: bold; min-width: 16px;">❌</span>
-                                                <input type="text" value="${item}" 
-                                                       onchange="widgetEditor.updateObsoleteDisadvantage(${index}, this.value)"
-                                                       oninput="widgetEditor.updateObsoleteDisadvantage(${index}, this.value)"
-                                                       style="flex: 1; background: transparent; border: none; 
-                                                              color: var(--text-white); font-size: 14px; outline: none;">
-                                                <button onclick="widgetEditor.removeObsoleteDisadvantage(${index})" 
-                                                        title="Supprimer cet inconvénient"
-                                                        style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
-                                                               border: 1px solid var(--danger-red); border-radius: 4px; 
-                                                               width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
-                                                    <i class="fas fa-times"></i>
-                                                </button>
+                                        ${obsoleteDisadvantages.map((item, index) => {
+                                            // Support rétrocompatibilité : si item est string, le convertir en objet
+                                            const itemData = typeof item === 'string' ? { text: item, emoji: '❌', color: '#ffffff' } : item;
+                                            return `
+                                            <div class="disadvantage-item" style="padding: 12px; background: rgba(239, 68, 68, 0.1); 
+                                                                                   border: 1px solid rgba(239, 68, 68, 0.3); 
+                                                                                   border-radius: 8px; margin-bottom: 12px;">
+                                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                                    <input type="text" value="${itemData.emoji}" placeholder="📱" 
+                                                           onchange="widgetEditor.updateObsoleteDisadvantageEmoji(${index}, this.value)"
+                                                           style="width: 40px; background: rgba(0,0,0,0.3); border: 1px solid rgba(239, 68, 68, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 16px; text-align: center; padding: 4px;"
+                                                           title="Emoji ou caractère (ex: ☠️, 🔧, ou logo)">
+                                                    <input type="text" value="${itemData.text}" 
+                                                           onchange="widgetEditor.updateObsoleteDisadvantageText(${index}, this.value)"
+                                                           oninput="widgetEditor.updateObsoleteDisadvantageText(${index}, this.value)"
+                                                           style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(239, 68, 68, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 14px; padding: 6px;"
+                                                           placeholder="Texte de l'inconvénient">
+                                                    <button onclick="widgetEditor.removeObsoleteDisadvantage(${index})" 
+                                                            title="Supprimer cet inconvénient"
+                                                            style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                                   border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                                   width: 28px; height: 28px; cursor: pointer; font-size: 12px;">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <label style="color: var(--text-muted); font-size: 12px; min-width: 60px;">Couleur :</label>
+                                                    <input type="color" value="${itemData.color || '#ffffff'}" 
+                                                           onchange="widgetEditor.updateObsoleteDisadvantageColor(${index}, this.value)"
+                                                           style="width: 40px; height: 24px; border-radius: 4px; border: none; cursor: pointer;">
+                                                    <span style="color: var(--text-muted); font-size: 11px;">Couleur du texte</span>
+                                                </div>
                                             </div>
-                                        `).join('')}
+                                            `;
+                                        }).join('')}
                                     </div>
                                 </div>
                             </div>
@@ -5225,26 +5252,43 @@
                                     </div>
                                     
                                     <div class="advantages-list" style="max-height: 200px; overflow-y: auto;">
-                                        ${modernAdvantages.map((item, index) => `
-                                            <div class="advantage-item" style="display: flex; align-items: center; gap: 8px; 
-                                                                                   padding: 8px 12px; background: rgba(16, 185, 129, 0.1); 
-                                                                                   border: 1px solid rgba(16, 185, 129, 0.3); 
-                                                                                   border-radius: 6px; margin-bottom: 6px;">
-                                                <span style="color: var(--accent-green); font-weight: bold; min-width: 16px;">✅</span>
-                                                <input type="text" value="${item}" 
-                                                       onchange="widgetEditor.updateModernAdvantage(${index}, this.value)"
-                                                       oninput="widgetEditor.updateModernAdvantage(${index}, this.value)"
-                                                       style="flex: 1; background: transparent; border: none; 
-                                                              color: var(--text-white); font-size: 14px; outline: none;">
-                                                <button onclick="widgetEditor.removeModernAdvantage(${index})" 
-                                                        title="Supprimer cet avantage"
-                                                        style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
-                                                               border: 1px solid var(--danger-red); border-radius: 4px; 
-                                                               width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
-                                                    <i class="fas fa-times"></i>
-                                                </button>
+                                        ${modernAdvantages.map((item, index) => {
+                                            // Support rétrocompatibilité : si item est string, le convertir en objet
+                                            const itemData = typeof item === 'string' ? { text: item, emoji: '✅', color: '#ffffff' } : item;
+                                            return `
+                                            <div class="advantage-item" style="padding: 12px; background: rgba(16, 185, 129, 0.1); 
+                                                                                 border: 1px solid rgba(16, 185, 129, 0.3); 
+                                                                                 border-radius: 8px; margin-bottom: 12px;">
+                                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                                    <input type="text" value="${itemData.emoji}" placeholder="✅" 
+                                                           onchange="widgetEditor.updateModernAdvantageEmoji(${index}, this.value)"
+                                                           style="width: 40px; background: rgba(0,0,0,0.3); border: 1px solid rgba(16, 185, 129, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 16px; text-align: center; padding: 4px;"
+                                                           title="Emoji ou caractère (ex: 🔋, ⚡, ou logo)">
+                                                    <input type="text" value="${itemData.text}" 
+                                                           onchange="widgetEditor.updateModernAdvantageText(${index}, this.value)"
+                                                           oninput="widgetEditor.updateModernAdvantageText(${index}, this.value)"
+                                                           style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(16, 185, 129, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 14px; padding: 6px;"
+                                                           placeholder="Texte de l'avantage">
+                                                    <button onclick="widgetEditor.removeModernAdvantage(${index})" 
+                                                            title="Supprimer cet avantage"
+                                                            style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                                   border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                                   width: 28px; height: 28px; cursor: pointer; font-size: 12px;">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <label style="color: var(--text-muted); font-size: 12px; min-width: 60px;">Couleur :</label>
+                                                    <input type="color" value="${itemData.color || '#ffffff'}" 
+                                                           onchange="widgetEditor.updateModernAdvantageColor(${index}, this.value)"
+                                                           style="width: 40px; height: 24px; border-radius: 4px; border: none; cursor: pointer;">
+                                                    <span style="color: var(--text-muted); font-size: 11px;">Couleur du texte</span>
+                                                </div>
                                             </div>
-                                        `).join('')}
+                                            `;
+                                        }).join('')}
                                     </div>
                                 </div>
                             </div>
@@ -7442,11 +7486,18 @@ Folder('${id}')" title="Renommer">
                     return;
                 }
                 
-                const newDisadvantage = input.value.trim();
-                console.log('📝 New disadvantage:', newDisadvantage);
+                const newDisadvantageText = input.value.trim();
+                console.log('📝 New disadvantage text:', newDisadvantageText);
                 
-                // Pas de validation du format pour le moment, pour tester
-                this.selectedWidget.data.obsoleteDisadvantages.push(newDisadvantage);
+                // Créer un nouvel objet avec emoji et couleur par défaut
+                const newDisadvantageObj = {
+                    text: newDisadvantageText,
+                    emoji: '❌', // Emoji par défaut pour obsolète
+                    color: '#ffffff' // Couleur par défaut
+                };
+                
+                this.selectedWidget.data.obsoleteDisadvantages.push(newDisadvantageObj);
+                console.log('📋 New disadvantage object:', newDisadvantageObj);
                 console.log('📋 Current disadvantages:', this.selectedWidget.data.obsoleteDisadvantages);
                 
                 // Vider l'input
@@ -7535,11 +7586,18 @@ Folder('${id}')" title="Renommer">
                     return;
                 }
                 
-                const newAdvantage = input.value.trim();
-                console.log('📝 New advantage:', newAdvantage);
+                const newAdvantageText = input.value.trim();
+                console.log('📝 New advantage text:', newAdvantageText);
                 
-                // Pas de validation du format pour le moment, pour tester
-                this.selectedWidget.data.modernAdvantages.push(newAdvantage);
+                // Créer un nouvel objet avec emoji et couleur par défaut
+                const newAdvantageObj = {
+                    text: newAdvantageText,
+                    emoji: '✅', // Emoji par défaut pour moderne
+                    color: '#ffffff' // Couleur par défaut
+                };
+                
+                this.selectedWidget.data.modernAdvantages.push(newAdvantageObj);
+                console.log('📋 New advantage object:', newAdvantageObj);
                 console.log('📋 Current advantages:', this.selectedWidget.data.modernAdvantages);
                 
                 // Vider l'input
@@ -7607,6 +7665,144 @@ Folder('${id}')" title="Renommer">
                 
                 // Sauvegarde automatique
                 this.autoSave();
+            }
+            
+            // NOUVELLES FONCTIONS POUR GESTION DÉTAILLÉE DES ÉLÉMENTS (EMOJI + COULEUR + TEXTE)
+            
+            // Fonctions pour les inconvénients obsolètes
+            updateObsoleteDisadvantageText(index, newText) {
+                console.log('✏️ updateObsoleteDisadvantageText called:', index, newText);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const disadvantages = this.selectedWidget.data.obsoleteDisadvantages;
+                if (index < 0 || index >= disadvantages.length) return;
+                
+                // S'assurer que l'élément est un objet
+                if (typeof disadvantages[index] === 'string') {
+                    disadvantages[index] = { text: disadvantages[index], emoji: '❌', color: '#ffffff' };
+                }
+                
+                disadvantages[index].text = newText.trim();
+                this.updateComparisonElementInDOM('obsolete', index, disadvantages[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            updateObsoleteDisadvantageEmoji(index, newEmoji) {
+                console.log('🎨 updateObsoleteDisadvantageEmoji called:', index, newEmoji);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const disadvantages = this.selectedWidget.data.obsoleteDisadvantages;
+                if (index < 0 || index >= disadvantages.length) return;
+                
+                // S'assurer que l'élément est un objet
+                if (typeof disadvantages[index] === 'string') {
+                    disadvantages[index] = { text: disadvantages[index], emoji: '❌', color: '#ffffff' };
+                }
+                
+                disadvantages[index].emoji = newEmoji;
+                this.updateComparisonElementInDOM('obsolete', index, disadvantages[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            updateObsoleteDisadvantageColor(index, newColor) {
+                console.log('🌈 updateObsoleteDisadvantageColor called:', index, newColor);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const disadvantages = this.selectedWidget.data.obsoleteDisadvantages;
+                if (index < 0 || index >= disadvantages.length) return;
+                
+                // S'assurer que l'élément est un objet
+                if (typeof disadvantages[index] === 'string') {
+                    disadvantages[index] = { text: disadvantages[index], emoji: '❌', color: '#ffffff' };
+                }
+                
+                disadvantages[index].color = newColor;
+                this.updateComparisonElementInDOM('obsolete', index, disadvantages[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            // Fonctions pour les avantages modernes
+            updateModernAdvantageText(index, newText) {
+                console.log('✏️ updateModernAdvantageText called:', index, newText);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const advantages = this.selectedWidget.data.modernAdvantages;
+                if (index < 0 || index >= advantages.length) return;
+                
+                // S'assurer que l'élément est un objet
+                if (typeof advantages[index] === 'string') {
+                    advantages[index] = { text: advantages[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                advantages[index].text = newText.trim();
+                this.updateComparisonElementInDOM('modern', index, advantages[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            updateModernAdvantageEmoji(index, newEmoji) {
+                console.log('🎨 updateModernAdvantageEmoji called:', index, newEmoji);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const advantages = this.selectedWidget.data.modernAdvantages;
+                if (index < 0 || index >= advantages.length) return;
+                
+                // S'assurer que l'élément est un objet
+                if (typeof advantages[index] === 'string') {
+                    advantages[index] = { text: advantages[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                advantages[index].emoji = newEmoji;
+                this.updateComparisonElementInDOM('modern', index, advantages[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            updateModernAdvantageColor(index, newColor) {
+                console.log('🌈 updateModernAdvantageColor called:', index, newColor);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
+                
+                const advantages = this.selectedWidget.data.modernAdvantages;
+                if (index < 0 || index >= advantages.length) return;
+                
+                // S'assurer que l'élément est un objet
+                if (typeof advantages[index] === 'string') {
+                    advantages[index] = { text: advantages[index], emoji: '✅', color: '#ffffff' };
+                }
+                
+                advantages[index].color = newColor;
+                this.updateComparisonElementInDOM('modern', index, advantages[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            // Fonction utilitaire pour mettre à jour un élément dans le DOM
+            updateComparisonElementInDOM(type, index, itemData) {
+                const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (!container) return;
+                
+                const columnSelector = type === 'obsolete' ? '.obsolete-column .disadvantages-list' : '.modern-column .advantages-list';
+                const column = container.querySelector(columnSelector);
+                if (!column) return;
+                
+                const itemSelector = type === 'obsolete' ? '.comparison-item.obsolete-item' : '.comparison-item.modern-item';
+                const items = column.querySelectorAll(itemSelector);
+                if (!items[index]) return;
+                
+                const item = items[index];
+                const emojiElement = item.querySelector('.item-emoji');
+                const textElement = item.querySelector('.item-text');
+                
+                if (emojiElement) {
+                    emojiElement.textContent = itemData.emoji || (type === 'obsolete' ? '❌' : '✅');
+                }
+                if (textElement) {
+                    textElement.textContent = itemData.text || '';
+                    textElement.style.color = itemData.color || '#ffffff';
+                }
             }
             
             // Fonction pour re-render un widget spécifique
