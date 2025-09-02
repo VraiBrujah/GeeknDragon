@@ -1,4 +1,5 @@
 /* eslint-env browser */
+import stateManager from './widget-state-manager.js';
 
 class BaseWidget {
   constructor({ id = `widget-${Date.now()}`, x = 0, y = 0, width = 100, height = 100, zIndex = 1, styles = {} } = {}) {
@@ -18,6 +19,7 @@ class BaseWidget {
     };
     this.el = null;
     this.events = {};
+    stateManager.register(this);
   }
 
   render(container) {
@@ -93,21 +95,13 @@ class BaseWidget {
     if (data.styles) this.updateStyles(data.styles);
   }
 
-  saveState(storage = window.localStorage) {
-    try {
-      storage.setItem(this.id, JSON.stringify(this.serialize()));
-    } catch (e) {
-      // ignore
-    }
+  saveState() {
+    stateManager.setState(this.id, this.serialize());
   }
 
-  loadState(storage = window.localStorage) {
-    try {
-      const raw = storage.getItem(this.id);
-      if (raw) this.hydrate(JSON.parse(raw));
-    } catch (e) {
-      // ignore
-    }
+  loadState() {
+    const data = stateManager.getState(this.id);
+    if (data) this.hydrate(data);
   }
 
   on(event, handler) {

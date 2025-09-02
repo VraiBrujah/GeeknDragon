@@ -9,6 +9,8 @@
  */
 
 import widgetLoader from '../core/widget-loader.js';
+import stateManager from '../../../../../core/widget-state-manager.js';
+window.widgetStateManager = stateManager;
 
 class WidgetEditor {
     constructor() {
