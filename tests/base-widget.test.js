@@ -63,4 +63,20 @@ describe('BaseWidget', () => {
     expect(clone.data).toEqual({ message: 'hello' });
     expect(clone.extra).toBe(99);
   });
+
+  test('style setters delegate to updateStyles', () => {
+    const widget = new BaseWidget();
+    const container = document.getElementById('root');
+    widget.render(container);
+    widget.setBackground('blue');
+    widget.setBorder('1px solid red');
+    widget.setBorderRadius('5px');
+    widget.setOpacity(0.5);
+    widget.setBoxShadow('0 0 5px black');
+    expect(widget.el.style.background).toBe('blue');
+    expect(widget.el.style.border).toBe('1px solid red');
+    expect(widget.el.style.borderRadius).toBe('5px');
+    expect(widget.el.style.opacity).toBe('0.5');
+    expect(widget.el.style.boxShadow).toBe('0 0 5px black');
+  });
 });

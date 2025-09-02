@@ -102,6 +102,51 @@ class BaseWidget {
   }
 
   /**
+   * Set widget background style.
+   *
+   * @param {string} background CSS background value
+   */
+  setBackground(background) {
+    this.updateStyles({ background });
+  }
+
+  /**
+   * Set widget border style.
+   *
+   * @param {string} border CSS border value
+   */
+  setBorder(border) {
+    this.updateStyles({ border });
+  }
+
+  /**
+   * Set widget border radius.
+   *
+   * @param {string} borderRadius CSS border-radius value
+   */
+  setBorderRadius(borderRadius) {
+    this.updateStyles({ borderRadius });
+  }
+
+  /**
+   * Set widget opacity.
+   *
+   * @param {number} opacity CSS opacity value between 0 and 1
+   */
+  setOpacity(opacity) {
+    this.updateStyles({ opacity });
+  }
+
+  /**
+   * Set widget box shadow.
+   *
+   * @param {string} boxShadow CSS box-shadow value
+   */
+  setBoxShadow(boxShadow) {
+    this.updateStyles({ boxShadow });
+  }
+
+  /**
    * Update widget coordinates.
    *
    * @param {number} x New horizontal position
@@ -178,15 +223,7 @@ class BaseWidget {
    * @param {Object} [data] Serialized widget data
    */
   hydrate(data = {}) {
-    const {
-      x,
-      y,
-      width,
-      height,
-      zIndex,
-      styles,
-      ...rest
-    } = data;
+    const { x, y, width, height, zIndex, styles, ...rest } = data;
 
     // Assign any additional properties directly
     Object.keys(rest).forEach((key) => {
