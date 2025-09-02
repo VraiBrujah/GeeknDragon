@@ -21,6 +21,21 @@ système révolutionnaire :
 
 ## 🏗️ ARCHITECTURE TECHNIQUES CLÉS
 
+### Technologies utilisées
+
+- **Framework** : JavaScript/HTML5 sans serveur, TailwindCSS pour le style
+- **Langage** : TypeScript pour la robustesse du code
+- **Stockage** : `localStorage` pour la persistance automatique
+
+Schéma de communication :  
+`Editor ↔ Viewer ↔ LocalStorage`
+
+```mermaid
+graph LR
+  Editor <--> Viewer <--> LocalStorage
+```
+![Diagramme Editor-Viewer-LocalStorage](https://mermaid.ink/img/pako:Sy9KLMhQ8AniUlBwTcksyS9SsNHVtVMIy0wtT4WyffKTE3OCS_KLEtNTAQ)
+
 ### 1. **BaseWidget (Classe Abstraite Universelle)**
 ```javascript
 class BaseWidget {
