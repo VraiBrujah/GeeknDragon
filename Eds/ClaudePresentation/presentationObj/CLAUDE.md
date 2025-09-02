@@ -5,6 +5,7 @@
 **Projet** : Éditeur standalone WYSIWYG avancé pour création de widgets custom et présentations marketing  
 **Objectif** : Créer un éditeur de niveau professionnel comparable à Figma/Webflow, 100% local sans serveur  
 **Public cible** : Équipes marketing pour présentations produits clients  
+**Widgets totaux** : **34 widgets hiérarchiques** (6 atomiques → 28 composés)  
 
 ### 🎯 Vision Révolutionnaire
 
@@ -55,37 +56,66 @@ class BaseWidget {
 5. **IconeAtomique** - FontAwesome/SVG
 6. **EspaceurAtomique** - Zones vides espacement
 
-#### **NIVEAU 1 : COMPOSÉS SIMPLES** (Assemblages atomiques)
+#### **NIVEAU 1 : COMPOSÉS SIMPLES** (5 widgets)
 7. **ÉlémentUniversel** ⭐ **RÉVOLUTIONNAIRE** - Widget modulaire universel
 8. **BoutonAction** - Bouton + Icône optionnelle
 9. **ElementListe** - Icône + Texte (pour listes)
+10. **FormField** - Champ formulaire + validation
+11. **CardBase** - Carte de base réutilisable
 
-#### **NIVEAU 2 : COMPOSÉS COMPLEXES** (Multi-widgets)
-10. **GrilleComposition** ⭐ **GÉNÉRATEUR** - Tableau dynamique X*Y
-11. **Hero, CarteTarif, CarteFeature, ElementComparaison...**
+#### **NIVEAU 2 : COMPOSÉS COMPLEXES** (13 widgets + 6 Marketing)
+12. **GrilleComposition** ⭐ **GÉNÉRATEUR** - Tableau dynamique X*Y
+13. **Hero, CarteTarif, CarteFeature, ElementComparaison, NavigationMenu, MediaGallery**
+14. **🎥 VideoWidget** - Vidéo YouTube/Vimeo + contrôles
+15. **📝 FormWidget** - Formulaires contact + validation
+16. **🔗 SocialWidget** - Boutons partage réseaux sociaux
+17. **💬 TestimonialWidget** - Témoignages clients + photos
+18. **📈 CounterWidget** - Compteurs animés + stats
+19. **⏳ TimelineWidget** - Chronologie produit/entreprise
 
-#### **NIVEAU 3 : META-WIDGETS** (Orchestration)
-15. **GrilleCanvas** ⭐ **GRILLE PRINCIPALE** - Canvas illimité principal
-16. **HeaderViewer** - Header presentations éditable
-17. **FeatureGridWidget, TarifLocationWidget, ComparisonWidget...**
-21. **PresentationComplète** ⭐ **WIDGET RACINE** - Présentation entière
+#### **NIVEAU 3 : META-WIDGETS** (10 widgets)
+20. **GrilleCanvas** ⭐ **GRILLE PRINCIPALE** - Canvas illimité principal
+21. **AssetsManager** 🖼️ - Gestionnaire images/icônes/polices
+22. **AnalyticsWidget** 📉 - Tracking performance + métriques
+23. **TemplateLibrary** - Bibliothèque composants prêts
+24. **HeaderViewer, FeatureGridWidget, TarifLocationWidget, ComparisonWidget, CallToActionWidget**
+25. **PresentationComplète** ⭐ **WIDGET RACINE** - Présentation entière
 
 ---
 
 ## 🌟 INNOVATIONS MAJEURES
 
-### **ÉlémentUniversel** - Le Widget qui Remplace Tout
+### **ÉlémentUniversel** - Le Widget Modulaire Révolutionnaire
 **Concept** : Un seul widget modulaire qui remplace LogoWidget, TextSimpleWidget, HeroTitleWidget
 - **Image optionnelle** : Path local OU URL OU emoji picker + zoom + filtres
-- **3 niveaux texte optionnels** : H1 (titre) + H2 (sous-titre) + P (texte) 
+- **3 niveaux texte optionnels** : H1 (titre) + H2 (sous-titre) + P (texte)
 - **Tous activables indépendamment** : Si rien activé = zone vide pour organisation
 - **Styles indépendants** : Chaque niveau a son style personnalisable
 
-**Configurations multiples :**
-- LogoWidget → Image seule activée
-- TextSimpleWidget → Un niveau texte activé  
-- HeroTitleWidget → Image + H1 + H2 + P tous activés
-- EspaceurWidget → Rien activé = zone vide
+### **Widgets Marketing Spécialisés** - Avantage Concurrentiel
+**6 widgets dédiés marketing** :
+- **VideoWidget** : Intégration YouTube/Vimeo + contrôles avancés
+- **FormWidget** : Formulaires de contact + validation + envoi email
+- **SocialWidget** : Boutons partage réseaux sociaux optimisés
+- **TestimonialWidget** : Témoignages clients avec photos + étoiles
+- **CounterWidget** : Compteurs animés pour stats impressionnantes
+- **TimelineWidget** : Chronologie produit/entreprise interactive
+
+### **AssetsManager** - Gestionnaire Professionnel
+**Concept** : Gestionnaire centralisé pour tous les assets du projet
+- **Images** : Upload, compression auto, formats optimaux (WebP/AVIF)
+- **Icônes** : Banque FontAwesome + SVG custom + recherche intelligente  
+- **Polices** : Import Google Fonts + polices locales + preview temps réel
+- **Couleurs** : Palettes marque + générateur harmonique
+- **Cache intelligent** : Optimisations performances + réutilisation
+
+### **AnalyticsWidget** - Marketing Intelligence
+**Concept** : Analytics intégré pour mesurer performance des présentations
+- **Tracking interactions** : Clics, vues, temps passé, parcours utilisateur
+- **Heatmaps** : Zones chaudes interactions visuelles
+- **A/B Testing** : Variantes widgets pour optimiser conversions
+- **Métriques business** : Taux conversion, engagement, rebond
+- **Rapports visuels** : Graphiques + export PDF/Excel
 
 ### **GrilleComposition** - Générateur de Tableaux Dynamiques
 **Concept** : Widget qui crée des tableaux dynamiques X*Y configurables
@@ -217,7 +247,7 @@ projet-presentation/
 ## 🎯 **VALIDATION PHASE 1 REQUISE**
 
 Le document REQUIS-DETAILLES.md reflète cette vision révolutionnaire.  
-**Statut** : ✅ **ARCHITECTURE NIVEAU FIGMA 2024 VALIDÉE - PRÊT POUR PHASE 1**
+**Statut** : ✅ **ARCHITECTURE SUPÉRIEURE À FIGMA 2024 - 34 WIDGETS - PRÊT POUR PHASE 1**
 
 ## 🔥 **COMPARAISON vs FIGMA 2024**
 
@@ -232,10 +262,16 @@ Le document REQUIS-DETAILLES.md reflète cette vision révolutionnaire.
 | **Multi-sélection avancée** | ✅ | ✅ Rectangle + groupée | ✅ **ÉGAL** |
 | **Historique Ctrl+Z/Y** | ✅ | ✅ 100 actions persistantes | ✅ **ÉGAL** |
 | **Interface personnalisable** | ✅ | ✅ Panels + arborescence | ✅ **ÉGAL** |
+| **Widgets marketing** | ❌ | ✅ **6 widgets spécialisés** | 🚀 **SUPÉRIEUR** |
+| **Analytics intégré** | ❌ | ✅ **Tracking + heatmaps** | 🚀 **SUPÉRIEUR** |
+| **Assets Manager** | ✅ | ✅ **Compression + cache** | ✅ **ÉGAL** |
+| **Permissions & Sécurité** | ✅ | ✅ **Verrouillage + accès** | ✅ **ÉGAL** |
+| **Accessibilité WCAG** | ✅ | ✅ **Audit intégré** | ✅ **ÉGAL** |
 | **Standalone 100%** | ❌ | ✅ **Aucune dépendance web** | 🚀 **SUPÉRIEUR** |
 | **Marketing-First** | ❌ | ✅ **Spécialisé présentations** | 🚀 **SUPÉRIEUR** |
 | **Sync Editor↔Viewer** | ❌ | ✅ **Preview temps réel intégré** | 🚀 **SUPÉRIEUR** |
 | **Mode Présentation** | Figma Slides | ✅ **Plein écran interactif** | 🚀 **SUPÉRIEUR** |
+| **Intégrations CRM/Email** | ❌ | ✅ **Multi-canal marketing** | 🚀 **SUPÉRIEUR** |
 
 **Prochaine étape** : Démarrer implémentation Phase 1 (BaseWidget + 6 Atomiques + GrilleCanvas + ÉlémentUniversel)
 **Validation humaine** : À chaque étape majeure avant passage phase suivante
