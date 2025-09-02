@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
     <title>Widget Editor Extendu</title>
+    <link rel="import" href="editor-layout.html">
+    <script>
+        const layout = document.querySelector('link[rel="import"]').import.getElementById('layout');
+        document.head.appendChild(layout.content.cloneNode(true));
+    </script>
 </head>
 <body>
     <div class="widget-editor"></div>
