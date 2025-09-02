@@ -362,14 +362,7 @@ class PricingCardWidget {
         // Effet pulse au hover sur prix
         const priceElement = element.querySelector('.pricing-price');
         if (priceElement) {
-            priceElement.addEventListener('mouseenter', () => {
-                priceElement.style.transform = 'scale(1.05)';
-                priceElement.style.transition = 'transform 0.3s ease';
-            });
-
-            priceElement.addEventListener('mouseleave', () => {
-                priceElement.style.transform = 'scale(1)';
-            });
+            priceElement.classList.add('pricing-price-hover');
         }
 
         // Click tracking pour analytics
