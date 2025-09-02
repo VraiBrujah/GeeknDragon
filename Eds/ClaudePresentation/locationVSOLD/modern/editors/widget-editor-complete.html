@@ -2,10 +2,8 @@
 <html lang="fr">
 <head>
     <title>Widget Editor Extendu</title>
-    <link rel="import" href="editor-layout.html">
-    <script>
-        const layout = document.querySelector('link[rel="import"]').import.getElementById('layout');
-        document.head.appendChild(layout.content.cloneNode(true));
+    <script type="module">
+        import './layout-loader.js';
     </script>
 </head>
 <body>
