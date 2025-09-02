@@ -1,11 +1,11 @@
 /**
  * ============================================================================
- * WIDGET TEXTE SIMPLE - Template et Logique
+ * WIDGET TEXTE SIMPLE - Template et Logique COMPLÈTE
  * ============================================================================
  * 
- * Rôle : Widget de texte formaté avec styles visuels simples
+ * Rôle : Widget de texte formaté avec styles visuels avancés
  * Type : Widget contenu - Composant réutilisable pour texte
- * Usage : Utilisé pour ajouter du contenu textuel formaté dans les sections
+ * Usage : Utilisé pour ajouter du contenu textuel formaté avec contrôles complets
  */
 
 class TextSimpleWidget {
@@ -15,20 +15,44 @@ class TextSimpleWidget {
         this.name = 'Texte Simple';
         this.category = 'Contenu';
         this.icon = '📝';
-        this.description = 'Texte formaté avec styles visuels';
+        this.description = 'Texte formaté avec styles visuels complets';
         
-        // Données par défaut - Configuration initiale
+        // Données par défaut - Configuration complète
         this.defaultData = {
             text: 'Votre texte ici...',
             textType: 'paragraph', // paragraph, title, subtitle, quote, note
             size: 'medium', // small, medium, large, xlarge
-            color: 'default', // default, primary, secondary, custom
+            color: 'default', // default, primary, secondary, custom (rétrocompatibilité)
             customColor: '#F8FAFC',
             alignment: 'left', // left, center, right
             isBold: false,
             isItalic: false,
             marginTop: 'medium', // none, small, medium, large
-            marginBottom: 'medium'
+            marginBottom: 'medium',
+            // Couleur de texte (nouvelle)
+            textColor: 'default',
+            customTextColor: '#F8FAFC',
+            // Arrière-plan
+            hasBackground: false,
+            backgroundColor: 'transparent',
+            customBackgroundColor: '#1E293B',
+            backgroundOpacity: 100,
+            // Contour
+            hasBorder: false,
+            borderColor: 'primary',
+            customBorderColor: '#10B981',
+            borderWidth: 1,
+            borderStyle: 'solid',
+            // Coins arrondis
+            hasRoundedCorners: false,
+            borderRadius: 8,
+            // Organisation & Dimensions
+            width: 'auto',
+            height: 'auto',
+            paddingTop: 'medium',
+            paddingBottom: 'medium',
+            paddingLeft: 'medium',
+            paddingRight: 'medium'
         };
 
         // Presets de styles - Configurations prédéfinies
@@ -74,7 +98,7 @@ class TextSimpleWidget {
             xlarge: 1.5
         };
 
-        // Couleurs prédéfinies - Palette du thème
+        // Couleurs prédéfinies - Palette du thème étendue
         this.colorPalette = {
             default: 'var(--text-white)',
             primary: 'var(--accent-green)',
@@ -85,7 +109,7 @@ class TextSimpleWidget {
             danger: 'var(--danger-red)'
         };
 
-        // Espacements - Marges standardisées
+        // Espacements - Marges et paddings standardisées
         this.spacings = {
             none: '0',
             small: 'var(--spacing-sm)',
@@ -95,8 +119,8 @@ class TextSimpleWidget {
     }
 
     /**
-     * Rôle : Génération du template HTML
-     * Type : Template rendering - HTML structure avec styles
+     * Rôle : Génération du template HTML avec tous les styles
+     * Type : Template rendering - HTML structure avec styles complets
      * Retour : String HTML du widget texte
      */
     render(data = {}) {
@@ -123,8 +147,8 @@ class TextSimpleWidget {
     }
 
     /**
-     * Rôle : Génération des styles inline calculés
-     * Type : Style computation - CSS dynamique
+     * Rôle : Génération des styles inline calculés (Version complète)
+     * Type : Style computation - CSS dynamique avec tous les paramètres
      * Retour : String CSS inline
      */
     generateInlineStyles(data) {
@@ -134,24 +158,24 @@ class TextSimpleWidget {
         // Échelle de taille - Size multiplier
         const sizeMultiplier = this.sizeScale[data.size];
         
-        // Couleur finale - Color resolution
-        const finalColor = data.color === 'custom' ? 
-            data.customColor : 
-            this.colorPalette[data.color] || this.colorPalette.default;
+        // Couleur de texte (priorité: textColor > color pour compatibilité)
+        const finalTextColor = data.textColor === 'custom' ? 
+            data.customTextColor : 
+            this.colorPalette[data.textColor] || this.colorPalette[data.color] || this.colorPalette.default;
 
-        // Construction du style - Style assembly
+        // Construction du style de base - Style assembly
         const styleRules = [
             `font-size: calc(${baseStyle.fontSize} * ${sizeMultiplier})`,
             `font-weight: ${baseStyle.fontWeight}`,
             `line-height: ${baseStyle.lineHeight}`,
             `font-family: ${baseStyle.fontFamily}`,
-            `color: ${finalColor}`,
+            `color: ${finalTextColor}`,
             `text-align: ${data.alignment}`,
             `margin-top: ${this.spacings[data.marginTop]}`,
             `margin-bottom: ${this.spacings[data.marginBottom]}`
         ];
 
-        // Ajout conditionnel - Style additionnels
+        // Style de police - Ajouts conditionnels
         if (data.isBold && data.textType !== 'title') {
             styleRules.push('font-weight: var(--font-bold)');
         }
@@ -162,6 +186,53 @@ class TextSimpleWidget {
 
         if (baseStyle.fontStyle) {
             styleRules.push(`font-style: ${baseStyle.fontStyle}`);
+        }
+
+        // Arrière-plan - Gestion avec transparence
+        if (data.hasBackground && data.backgroundColor !== 'transparent') {
+            const bgColor = data.backgroundColor === 'custom' ? 
+                data.customBackgroundColor : 
+                this.colorPalette[data.backgroundColor] || data.backgroundColor;
+            
+            const opacity = data.backgroundOpacity / 100;
+            if (bgColor.startsWith('#')) {
+                // Conversion hex vers rgba avec opacité
+                const r = parseInt(bgColor.slice(1, 3), 16);
+                const g = parseInt(bgColor.slice(3, 5), 16);
+                const b = parseInt(bgColor.slice(5, 7), 16);
+                styleRules.push(`background-color: rgba(${r}, ${g}, ${b}, ${opacity})`);
+            } else {
+                styleRules.push(`background-color: ${bgColor}`);
+                if (opacity < 1) styleRules.push(`opacity: ${opacity}`);
+            }
+        }
+
+        // Contour - Style de bordure
+        if (data.hasBorder) {
+            const borderColor = data.borderColor === 'custom' ? 
+                data.customBorderColor : 
+                this.colorPalette[data.borderColor] || data.borderColor;
+            
+            styleRules.push(`border: ${data.borderWidth}px ${data.borderStyle} ${borderColor}`);
+        }
+
+        // Coins arrondis - Border radius
+        if (data.hasRoundedCorners) {
+            styleRules.push(`border-radius: ${data.borderRadius}px`);
+        }
+
+        // Padding (organisation) - Espacement interne
+        styleRules.push(`padding-top: ${this.spacings[data.paddingTop]}`);
+        styleRules.push(`padding-bottom: ${this.spacings[data.paddingBottom]}`);
+        styleRules.push(`padding-left: ${this.spacings[data.paddingLeft]}`);
+        styleRules.push(`padding-right: ${this.spacings[data.paddingRight]}`);
+
+        // Dimensions (organisation) - Taille du conteneur
+        if (data.width !== 'auto') {
+            styleRules.push(`width: ${typeof data.width === 'number' ? data.width + 'px' : data.width}`);
+        }
+        if (data.height !== 'auto') {
+            styleRules.push(`height: ${typeof data.height === 'number' ? data.height + 'px' : data.height}`);
         }
 
         return styleRules.join('; ');
@@ -184,8 +255,8 @@ class TextSimpleWidget {
     }
 
     /**
-     * Rôle : Styles CSS du composant
-     * Type : Component styling - CSS classes
+     * Rôle : Styles CSS du composant (Version étendue)
+     * Type : Component styling - CSS classes avec nouveaux styles
      * Retour : String CSS des styles
      */
     getStyles() {
@@ -195,6 +266,8 @@ class TextSimpleWidget {
                 cursor: default;
                 word-wrap: break-word;
                 hyphens: auto;
+                position: relative;
+                display: block;
             }
 
             .text-simple-widget.editable:hover {
@@ -245,7 +318,7 @@ class TextSimpleWidget {
                 margin-right: var(--spacing-xs);
             }
 
-            /* Responsive - Ajustements mobiles */
+            /* Responsive - Ajustements mobiles étendus */
             @media (max-width: 768px) {
                 .text-widget-title {
                     font-size: var(--text-2xl) !important;
@@ -260,9 +333,14 @@ class TextSimpleWidget {
                     margin-left: var(--spacing-sm);
                     margin-right: var(--spacing-sm);
                 }
+
+                .text-simple-widget {
+                    padding-left: var(--spacing-sm) !important;
+                    padding-right: var(--spacing-sm) !important;
+                }
             }
 
-            /* Animation d'apparition */
+            /* Animation d'apparition améliorée */
             .text-simple-widget {
                 opacity: 0;
                 transform: translateY(10px);
@@ -275,154 +353,313 @@ class TextSimpleWidget {
                     transform: translateY(0);
                 }
             }
+
+            /* États d'interaction améliorés */
+            .text-simple-widget:hover {
+                transform: translateY(-1px);
+            }
+
+            .text-simple-widget:focus {
+                outline: 2px solid var(--accent-green);
+                outline-offset: 2px;
+            }
+
+            /* Support pour les contours personnalisés */
+            .text-simple-widget[style*="border"] {
+                box-shadow: var(--shadow-sm);
+            }
+
+            .text-simple-widget[style*="border"]:hover {
+                box-shadow: var(--shadow-md);
+            }
         `;
     }
 
     /**
-     * Rôle : Configuration des champs éditables
-     * Type : Editor configuration - Interface utilisateur
-     * Retour : Array des champs avec interface visuelle
+     * Rôle : Configuration des champs éditables (Version complète)
+     * Type : Editor configuration - Interface utilisateur étendue
+     * Retour : Array des champs avec toutes les nouvelles options
      */
     getEditableFields() {
         return [
-            // Section 1 : Contenu
+            // Section 1: Contenu
             {
-                section: 'Contenu',
-                fields: [
-                    {
-                        name: 'text',
-                        label: 'Texte',
-                        type: 'textarea',
-                        placeholder: 'Votre texte ici...',
-                        rows: 4,
-                        defaultValue: this.defaultData.text,
-                        help: 'Saisissez votre texte. Les retours à la ligne sont automatiquement pris en compte.'
-                    },
-                    {
-                        name: 'textType',
-                        label: 'Type de texte',
-                        type: 'select',
-                        options: [
-                            { value: 'paragraph', label: '📝 Paragraphe', preview: 'Texte normal' },
-                            { value: 'title', label: '🎯 Titre', preview: 'Titre Important' },
-                            { value: 'subtitle', label: '📋 Sous-titre', preview: 'Sous-titre' },
-                            { value: 'quote', label: '💭 Citation', preview: 'Citation inspirante' },
-                            { value: 'note', label: '📝 Note', preview: 'Note informative' }
-                        ],
-                        defaultValue: this.defaultData.textType,
-                        help: 'Choisissez le style prédéfini de votre texte'
-                    }
-                ]
+                name: 'text',
+                label: 'Texte',
+                type: 'textarea',
+                placeholder: 'Votre texte ici...',
+                rows: 4,
+                defaultValue: this.defaultData.text,
+                help: 'Saisissez votre texte. Les retours à la ligne sont automatiquement pris en compte.'
+            },
+            {
+                name: 'textType',
+                label: 'Type de texte',
+                type: 'select',
+                options: [
+                    { value: 'paragraph', label: '📝 Paragraphe', preview: 'Texte normal' },
+                    { value: 'title', label: '🎯 Titre', preview: 'Titre Important' },
+                    { value: 'subtitle', label: '📋 Sous-titre', preview: 'Sous-titre' },
+                    { value: 'quote', label: '💭 Citation', preview: 'Citation inspirante' },
+                    { value: 'note', label: '📝 Note', preview: 'Note informative' }
+                ],
+                defaultValue: this.defaultData.textType,
+                help: 'Choisissez le style prédéfini de votre texte'
             },
             
-            // Section 2 : Apparence
+            // Section 2: Style de texte
             {
-                section: 'Apparence',
-                fields: [
-                    {
-                        name: 'size',
-                        label: 'Taille',
-                        type: 'range',
-                        min: 0,
-                        max: 3,
-                        step: 1,
-                        options: [
-                            { value: 'small', label: 'Petit' },
-                            { value: 'medium', label: 'Moyen' },
-                            { value: 'large', label: 'Grand' },
-                            { value: 'xlarge', label: 'Très grand' }
-                        ],
-                        defaultValue: this.defaultData.size,
-                        preview: true,
-                        help: 'Ajustez la taille du texte'
-                    },
-                    {
-                        name: 'color',
-                        label: 'Couleur',
-                        type: 'color-palette',
-                        palette: [
-                            { value: 'default', label: 'Blanc', color: '#F8FAFC' },
-                            { value: 'primary', label: 'Vert EDS', color: '#10B981' },
-                            { value: 'secondary', label: 'Gris', color: '#CBD5E1' },
-                            { value: 'muted', label: 'Gris clair', color: '#94A3B8' },
-                            { value: 'success', label: 'Vert succès', color: '#059669' },
-                            { value: 'warning', label: 'Orange', color: '#F59E0B' },
-                            { value: 'danger', label: 'Rouge', color: '#EF4444' }
-                        ],
-                        customColor: true,
-                        customField: 'customColor',
-                        defaultValue: this.defaultData.color,
-                        help: 'Sélectionnez une couleur prédéfinie ou personnalisée'
-                    },
-                    {
-                        name: 'alignment',
-                        label: 'Alignement',
-                        type: 'button-group',
-                        options: [
-                            { value: 'left', label: '◀', title: 'Aligné à gauche' },
-                            { value: 'center', label: '■', title: 'Centré' },
-                            { value: 'right', label: '▶', title: 'Aligné à droite' }
-                        ],
-                        defaultValue: this.defaultData.alignment,
-                        help: 'Choisissez l\'alignement du texte'
-                    }
-                ]
+                name: 'size',
+                label: 'Taille',
+                type: 'select',
+                options: [
+                    { value: 'small', label: 'Petit' },
+                    { value: 'medium', label: 'Moyen' },
+                    { value: 'large', label: 'Grand' },
+                    { value: 'xlarge', label: 'Très grand' }
+                ],
+                defaultValue: this.defaultData.size,
+                help: 'Ajustez la taille du texte'
             },
-
-            // Section 3 : Style
             {
-                section: 'Style',
-                fields: [
-                    {
-                        name: 'isBold',
-                        label: 'Texte en gras',
-                        type: 'toggle',
-                        icon: '📝',
-                        defaultValue: this.defaultData.isBold,
-                        help: 'Rendre le texte plus épais'
-                    },
-                    {
-                        name: 'isItalic',
-                        label: 'Texte en italique',
-                        type: 'toggle',
-                        icon: '🌟',
-                        defaultValue: this.defaultData.isItalic,
-                        help: 'Incliner le texte'
-                    }
-                ]
+                name: 'textColor',
+                label: 'Couleur du texte',
+                type: 'select',
+                options: [
+                    { value: 'default', label: 'Blanc' },
+                    { value: 'primary', label: 'Vert EDS' },
+                    { value: 'secondary', label: 'Gris' },
+                    { value: 'muted', label: 'Gris clair' },
+                    { value: 'success', label: 'Vert succès' },
+                    { value: 'warning', label: 'Orange' },
+                    { value: 'danger', label: 'Rouge' },
+                    { value: 'custom', label: 'Personnalisée' }
+                ],
+                defaultValue: this.defaultData.textColor,
+                help: 'Sélectionnez une couleur prédéfinie ou personnalisée'
             },
-
-            // Section 4 : Espacement
             {
-                section: 'Espacement',
-                fields: [
-                    {
-                        name: 'marginTop',
-                        label: 'Marge du haut',
-                        type: 'select',
-                        options: [
-                            { value: 'none', label: 'Aucune' },
-                            { value: 'small', label: 'Petite' },
-                            { value: 'medium', label: 'Moyenne' },
-                            { value: 'large', label: 'Grande' }
-                        ],
-                        defaultValue: this.defaultData.marginTop,
-                        help: 'Espace au-dessus du texte'
-                    },
-                    {
-                        name: 'marginBottom',
-                        label: 'Marge du bas',
-                        type: 'select',
-                        options: [
-                            { value: 'none', label: 'Aucune' },
-                            { value: 'small', label: 'Petite' },
-                            { value: 'medium', label: 'Moyenne' },
-                            { value: 'large', label: 'Grande' }
-                        ],
-                        defaultValue: this.defaultData.marginBottom,
-                        help: 'Espace en-dessous du texte'
-                    }
-                ]
+                name: 'customTextColor',
+                label: 'Couleur personnalisée',
+                type: 'color',
+                defaultValue: this.defaultData.customTextColor,
+                condition: { field: 'textColor', value: 'custom' }
+            },
+            {
+                name: 'alignment',
+                label: 'Alignement',
+                type: 'select',
+                options: [
+                    { value: 'left', label: 'Gauche' },
+                    { value: 'center', label: 'Centre' },
+                    { value: 'right', label: 'Droite' }
+                ],
+                defaultValue: this.defaultData.alignment,
+                help: 'Choisissez l\'alignement du texte'
+            },
+            {
+                name: 'isBold',
+                label: 'Texte en gras',
+                type: 'checkbox',
+                defaultValue: this.defaultData.isBold,
+                help: 'Rendre le texte plus épais'
+            },
+            {
+                name: 'isItalic',
+                label: 'Texte en italique',
+                type: 'checkbox',
+                defaultValue: this.defaultData.isItalic,
+                help: 'Incliner le texte'
+            },
+            
+            // Section 3: Arrière-plan
+            {
+                name: 'hasBackground',
+                label: 'Ajouter un arrière-plan',
+                type: 'checkbox',
+                defaultValue: this.defaultData.hasBackground
+            },
+            {
+                name: 'backgroundColor',
+                label: 'Couleur de fond',
+                type: 'select',
+                options: [
+                    { value: 'transparent', label: 'Transparent' },
+                    { value: 'primary', label: 'Vert EDS' },
+                    { value: 'secondary', label: 'Gris' },
+                    { value: 'success', label: 'Vert succès' },
+                    { value: 'warning', label: 'Orange' },
+                    { value: 'danger', label: 'Rouge' },
+                    { value: 'custom', label: 'Personnalisée' }
+                ],
+                defaultValue: this.defaultData.backgroundColor,
+                condition: { field: 'hasBackground', value: true }
+            },
+            {
+                name: 'customBackgroundColor',
+                label: 'Couleur de fond personnalisée',
+                type: 'color',
+                defaultValue: this.defaultData.customBackgroundColor,
+                condition: { field: 'backgroundColor', value: 'custom' }
+            },
+            {
+                name: 'backgroundOpacity',
+                label: 'Transparence du fond (%)',
+                type: 'range',
+                min: 0,
+                max: 100,
+                step: 5,
+                defaultValue: this.defaultData.backgroundOpacity,
+                condition: { field: 'hasBackground', value: true }
+            },
+            
+            // Section 4: Contour
+            {
+                name: 'hasBorder',
+                label: 'Ajouter un contour',
+                type: 'checkbox',
+                defaultValue: this.defaultData.hasBorder
+            },
+            {
+                name: 'borderColor',
+                label: 'Couleur du contour',
+                type: 'select',
+                options: [
+                    { value: 'primary', label: 'Vert EDS' },
+                    { value: 'secondary', label: 'Gris' },
+                    { value: 'success', label: 'Vert succès' },
+                    { value: 'warning', label: 'Orange' },
+                    { value: 'danger', label: 'Rouge' },
+                    { value: 'custom', label: 'Personnalisée' }
+                ],
+                defaultValue: this.defaultData.borderColor,
+                condition: { field: 'hasBorder', value: true }
+            },
+            {
+                name: 'customBorderColor',
+                label: 'Couleur de contour personnalisée',
+                type: 'color',
+                defaultValue: this.defaultData.customBorderColor,
+                condition: { field: 'borderColor', value: 'custom' }
+            },
+            {
+                name: 'borderWidth',
+                label: 'Épaisseur du contour (px)',
+                type: 'range',
+                min: 1,
+                max: 10,
+                step: 1,
+                defaultValue: this.defaultData.borderWidth,
+                condition: { field: 'hasBorder', value: true }
+            },
+            {
+                name: 'borderStyle',
+                label: 'Style du contour',
+                type: 'select',
+                options: [
+                    { value: 'solid', label: 'Solide' },
+                    { value: 'dashed', label: 'Tirets' },
+                    { value: 'dotted', label: 'Points' },
+                    { value: 'double', label: 'Double' }
+                ],
+                defaultValue: this.defaultData.borderStyle,
+                condition: { field: 'hasBorder', value: true }
+            },
+            
+            // Section 5: Coins arrondis
+            {
+                name: 'hasRoundedCorners',
+                label: 'Coins arrondis',
+                type: 'checkbox',
+                defaultValue: this.defaultData.hasRoundedCorners
+            },
+            {
+                name: 'borderRadius',
+                label: 'Niveau d\'arrondi (px)',
+                type: 'range',
+                min: 0,
+                max: 50,
+                step: 2,
+                defaultValue: this.defaultData.borderRadius,
+                condition: { field: 'hasRoundedCorners', value: true }
+            },
+            
+            // Section 6: Espacement (Organisation)
+            {
+                name: 'paddingTop',
+                label: 'Espacement haut',
+                type: 'select',
+                options: [
+                    { value: 'none', label: 'Aucun' },
+                    { value: 'small', label: 'Petit' },
+                    { value: 'medium', label: 'Moyen' },
+                    { value: 'large', label: 'Grand' }
+                ],
+                defaultValue: this.defaultData.paddingTop
+            },
+            {
+                name: 'paddingBottom',
+                label: 'Espacement bas',
+                type: 'select',
+                options: [
+                    { value: 'none', label: 'Aucun' },
+                    { value: 'small', label: 'Petit' },
+                    { value: 'medium', label: 'Moyen' },
+                    { value: 'large', label: 'Grand' }
+                ],
+                defaultValue: this.defaultData.paddingBottom
+            },
+            {
+                name: 'paddingLeft',
+                label: 'Espacement gauche',
+                type: 'select',
+                options: [
+                    { value: 'none', label: 'Aucun' },
+                    { value: 'small', label: 'Petit' },
+                    { value: 'medium', label: 'Moyen' },
+                    { value: 'large', label: 'Grand' }
+                ],
+                defaultValue: this.defaultData.paddingLeft
+            },
+            {
+                name: 'paddingRight',
+                label: 'Espacement droite',
+                type: 'select',
+                options: [
+                    { value: 'none', label: 'Aucun' },
+                    { value: 'small', label: 'Petit' },
+                    { value: 'medium', label: 'Moyen' },
+                    { value: 'large', label: 'Grand' }
+                ],
+                defaultValue: this.defaultData.paddingRight
+            },
+            
+            // Section 7: Marges
+            {
+                name: 'marginTop',
+                label: 'Marge du haut',
+                type: 'select',
+                options: [
+                    { value: 'none', label: 'Aucune' },
+                    { value: 'small', label: 'Petite' },
+                    { value: 'medium', label: 'Moyenne' },
+                    { value: 'large', label: 'Grande' }
+                ],
+                defaultValue: this.defaultData.marginTop,
+                help: 'Espace au-dessus du texte'
+            },
+            {
+                name: 'marginBottom',
+                label: 'Marge du bas',
+                type: 'select',
+                options: [
+                    { value: 'none', label: 'Aucune' },
+                    { value: 'small', label: 'Petite' },
+                    { value: 'medium', label: 'Moyenne' },
+                    { value: 'large', label: 'Grande' }
+                ],
+                defaultValue: this.defaultData.marginBottom,
+                help: 'Espace en-dessous du texte'
             }
         ];
     }
@@ -447,17 +684,21 @@ class TextSimpleWidget {
 
         // Effet hover subtil - Interaction feedback
         element.addEventListener('mouseenter', () => {
-            element.style.transform = 'translateY(-1px)';
+            if (!element.style.transform || element.style.transform === 'none') {
+                element.style.transform = 'translateY(-1px)';
+            }
         });
 
         element.addEventListener('mouseleave', () => {
-            element.style.transform = 'translateY(0)';
+            if (element.style.transform === 'translateY(-1px)') {
+                element.style.transform = 'translateY(0)';
+            }
         });
     }
 
     /**
-     * Rôle : Validation des données du widget
-     * Type : Data validation - Contrôle basique
+     * Rôle : Validation des données du widget (Version étendue)
+     * Type : Data validation - Contrôle complet
      */
     validate(data) {
         const errors = [];
@@ -473,11 +714,40 @@ class TextSimpleWidget {
         }
 
         // Validation couleur personnalisée - Format hex
-        if (data.color === 'custom' && data.customColor) {
+        if (data.textColor === 'custom' && data.customTextColor) {
             const hexPattern = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-            if (!hexPattern.test(data.customColor)) {
+            if (!hexPattern.test(data.customTextColor)) {
                 errors.push('La couleur personnalisée doit être au format hexadécimal (#000000)');
             }
+        }
+
+        // Validation couleur de fond personnalisée
+        if (data.backgroundColor === 'custom' && data.customBackgroundColor) {
+            const hexPattern = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+            if (!hexPattern.test(data.customBackgroundColor)) {
+                errors.push('La couleur de fond personnalisée doit être au format hexadécimal (#000000)');
+            }
+        }
+
+        // Validation couleur de contour personnalisée
+        if (data.borderColor === 'custom' && data.customBorderColor) {
+            const hexPattern = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
+            if (!hexPattern.test(data.customBorderColor)) {
+                errors.push('La couleur de contour personnalisée doit être au format hexadécimal (#000000)');
+            }
+        }
+
+        // Validation des plages numériques
+        if (data.backgroundOpacity < 0 || data.backgroundOpacity > 100) {
+            errors.push('La transparence doit être comprise entre 0 et 100%');
+        }
+
+        if (data.borderWidth < 1 || data.borderWidth > 10) {
+            errors.push('L\'épaisseur du contour doit être comprise entre 1 et 10px');
+        }
+
+        if (data.borderRadius < 0 || data.borderRadius > 50) {
+            errors.push('L\'arrondi doit être compris entre 0 et 50px');
         }
 
         return {
@@ -497,13 +767,13 @@ class TextSimpleWidget {
 
     /**
      * Rôle : Configuration des données pour sauvegarde
-     * Type : Data serialization - Export des données
+     * Type : Data serialization - Export des données optimisé
      */
     serialize(data) {
         // Nettoyer les données pour sauvegarde
         const cleanData = { ...data };
         
-        // Supprimer les champs vides ou par défaut
+        // Supprimer les champs vides ou par défaut pour optimiser
         Object.keys(cleanData).forEach(key => {
             if (cleanData[key] === this.defaultData[key]) {
                 delete cleanData[key];
@@ -511,6 +781,16 @@ class TextSimpleWidget {
         });
 
         return cleanData;
+    }
+
+    /**
+     * Rôle : Définition des données nécessaires
+     * Type : Data requirements - Définition des champs obligatoires
+     */
+    setData(data) {
+        // Fusionner avec les données par défaut
+        this.currentData = { ...this.defaultData, ...data };
+        return this.currentData;
     }
 }
 
