@@ -13,7 +13,7 @@ class PricingCardWidget {
         // Configuration : Propriétés du widget pricing card
         this.id = 'pricing-card';
         this.name = 'Carte Tarification';
-        this.category = 'pricing';
+        this.category = 'Commerce';
         this.icon = '💰';
         this.description = 'Carte de prix avec plan et fonctionnalités';
         
