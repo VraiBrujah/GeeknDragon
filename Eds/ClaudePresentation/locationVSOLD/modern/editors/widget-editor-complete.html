@@ -178,8 +178,8 @@
         .canvas-workspace {
             flex: 1;
             padding: var(--spacing-lg);
-            background: white;
-            color: var(--text-dark);
+            background: var(--bg-primary);
+            color: var(--text-white);
             position: relative;
             display: grid;
             grid-template-columns: repeat(12, 1fr);
@@ -192,8 +192,8 @@
         .widget-container {
             position: relative;
             padding: var(--spacing-md);
-            background: rgba(248, 250, 252, 0.95);
-            border: 2px dashed #e5e7eb;
+            background: var(--bg-card);
+            border: 2px dashed var(--border-color);
             border-radius: var(--border-radius);
             transition: var(--transition-normal);
             cursor: move;
@@ -201,7 +201,7 @@
             display: flex;
             flex-direction: column;
             backdrop-filter: blur(5px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
         
         .widget-container.dragging {
@@ -488,13 +488,13 @@
             flex: 1;
             overflow: auto;
             padding: var(--spacing-md);
-            background: white;
-            color: var(--text-dark);
+            background: var(--bg-primary);
+            color: var(--text-white);
         }
 
         .presentation-preview {
             width: 100%;
-            background: white;
+            background: var(--bg-secondary);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-lg);
             overflow: hidden;
@@ -771,6 +771,70 @@
                 
                 <div class="tab-content" id="organizationTab">
                     <div class="property-group">
+                        <h4><i class="fas fa-expand-arrows-alt"></i> Taille & Position</h4>
+                        
+                        <div class="property-field">
+                            <label class="property-label">Préréglages de taille</label>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button class="btn btn-sm" id="fullScreenBtn" disabled>
+                                    <i class="fas fa-expand"></i>
+                                    Plein écran
+                                </button>
+                                <button class="btn btn-sm" id="fillParentBtn" disabled>
+                                    <i class="fas fa-arrows-alt"></i>
+                                    Remplir parent
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="property-field">
+                            <label class="property-label">Largeur (colonnes)</label>
+                            <div class="property-control">
+                                <input type="range" id="widthSlider" class="property-range" 
+                                       min="1" max="12" value="3" disabled
+                                       oninput="widgetEditor.updateWidgetSize('width', this.value)">
+                                <input type="number" id="widthInput" class="property-input" 
+                                       min="1" max="12" value="3" disabled
+                                       style="width: 60px; text-align: center;"
+                                       onchange="widgetEditor.updateWidgetSize('width', this.value)">
+                            </div>
+                        </div>
+                        
+                        <div class="property-field">
+                            <label class="property-label">Hauteur (rangées)</label>
+                            <div class="property-control">
+                                <input type="range" id="heightSlider" class="property-range" 
+                                       min="1" max="8" value="2" disabled
+                                       oninput="widgetEditor.updateWidgetSize('height', this.value)">
+                                <input type="number" id="heightInput" class="property-input" 
+                                       min="1" max="8" value="2" disabled
+                                       style="width: 60px; text-align: center;"
+                                       onchange="widgetEditor.updateWidgetSize('height', this.value)">
+                            </div>
+                        </div>
+                        
+                        <div class="property-field">
+                            <label class="property-label">Position</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                <div>
+                                    <label class="property-label" style="font-size: var(--text-xs); margin-bottom: 4px;">Colonne</label>
+                                    <input type="number" id="positionColInput" class="property-input" 
+                                           min="1" max="12" value="1" disabled
+                                           style="text-align: center;"
+                                           onchange="widgetEditor.updateWidgetPosition('col', this.value)">
+                                </div>
+                                <div>
+                                    <label class="property-label" style="font-size: var(--text-xs); margin-bottom: 4px;">Rangée</label>
+                                    <input type="number" id="positionRowInput" class="property-input" 
+                                           min="1" max="8" value="1" disabled
+                                           style="text-align: center;"
+                                           onchange="widgetEditor.updateWidgetPosition('row', this.value)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="property-group">
                         <h4><i class="fas fa-arrows-alt"></i> Organisation</h4>
                         <div class="property-field">
                             <button class="btn btn-sm" id="moveUpBtn" disabled>
@@ -994,6 +1058,9 @@
                     ctaLink: '#contact',
                     featured: false,
                     badge: '',
+                    accentColor: '#10b981',
+                    backgroundColor: '#1f2937',
+                    textColor: '#ffffff',
                     features: [
                         'Installation gratuite',
                         'Maintenance incluse',
@@ -1007,15 +1074,15 @@
                 const d = { ...this.defaultData, ...data };
                 
                 const featuresHtml = d.features.map(feature => 
-                    `<li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #6b7280;">
-                        <span style="color: #10b981; font-size: 14px;">✓</span>
+                    `<li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: ${d.textColor || '#6b7280'};">
+                        <span style="color: ${d.accentColor || '#10b981'}; font-size: 14px;">✓</span>
                         <span>${feature}</span>
                     </li>`
                 ).join('');
 
                 const badgeHtml = d.badge ? 
                     `<div class="pricing-badge" style="position: absolute; top: -10px; left: 50%; 
-                                                      transform: translateX(-50%); background: #10b981; 
+                                                      transform: translateX(-50%); background: ${d.accentColor || '#10b981'}; 
                                                       color: white; padding: 4px 12px; border-radius: 6px; 
                                                       font-size: 12px; font-weight: bold;">
                         ${d.badge}
@@ -1023,20 +1090,21 @@
 
                 return `
                     <div class="pricing-card ${d.featured ? 'featured' : ''}" 
-                         style="background: #1f2937; border: 2px solid ${d.featured ? '#10b981' : '#374151'}; 
+                         style="background: ${d.backgroundColor || '#1f2937'}; 
+                                border: 2px solid ${d.featured ? (d.accentColor || '#10b981') : '#374151'}; 
                                 border-radius: 12px; padding: 32px; text-align: center; position: relative; 
-                                backdrop-filter: blur(10px); margin: 20px;">
+                                backdrop-filter: blur(10px); margin: 20px; color: ${d.textColor || '#ffffff'};">
                         ${badgeHtml}
                         
                         <div style="margin-bottom: 32px;">
-                            <h3 style="font-size: 1.25rem; font-weight: bold; color: white; margin-bottom: 20px; 
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: ${d.textColor || 'white'}; margin-bottom: 20px; 
                                        text-transform: uppercase; letter-spacing: 0.05em;">
                                 ${d.planName}
                             </h3>
                             
                             <div style="display: flex; align-items: baseline; justify-content: center; gap: 8px; margin-bottom: 20px;">
-                                <span style="font-size: 2rem; font-weight: 600; color: #10b981;">${d.currency}</span>
-                                <span style="font-size: 3.5rem; font-weight: 900; color: white; line-height: 1;">${d.price}</span>
+                                <span style="font-size: 2rem; font-weight: 600; color: ${d.accentColor || '#10b981'};">${d.currency}</span>
+                                <span style="font-size: 3.5rem; font-weight: 900; color: ${d.textColor || 'white'}; line-height: 1;">${d.price}</span>
                                 <span style="font-size: 1.125rem; color: #9ca3af; font-weight: 500;">${d.period}</span>
                             </div>
                         </div>
@@ -1049,7 +1117,7 @@
                         
                         <div>
                             <a href="${d.ctaLink}" 
-                               style="width: 100%; padding: 16px 24px; background: #10b981; color: white;
+                               style="width: 100%; padding: 16px 24px; background: ${d.accentColor || '#10b981'}; color: white;
                                       border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
                                       text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;
                                       text-decoration: none; display: inline-block; cursor: pointer;">
@@ -1062,14 +1130,17 @@
 
             getEditableFields() {
                 return [
-                    { name: 'planName', label: 'Nom du plan', type: 'text' },
-                    { name: 'price', label: 'Prix', type: 'text' },
-                    { name: 'currency', label: 'Devise', type: 'text' },
-                    { name: 'period', label: 'Période', type: 'text' },
-                    { name: 'ctaText', label: 'Texte bouton', type: 'text' },
-                    { name: 'ctaLink', label: 'Lien bouton', type: 'text' },
-                    { name: 'featured', label: 'Plan vedette', type: 'checkbox' },
-                    { name: 'badge', label: 'Badge', type: 'text' }
+                    { name: 'planName', label: 'Nom du plan', type: 'text', category: 'Contenu' },
+                    { name: 'price', label: 'Prix', type: 'text', category: 'Contenu' },
+                    { name: 'currency', label: 'Devise', type: 'text', category: 'Contenu' },
+                    { name: 'period', label: 'Période', type: 'text', category: 'Contenu' },
+                    { name: 'ctaText', label: 'Texte bouton', type: 'text', category: 'Contenu' },
+                    { name: 'ctaLink', label: 'Lien bouton', type: 'text', category: 'Contenu' },
+                    { name: 'featured', label: 'Plan vedette', type: 'checkbox', category: 'Contenu' },
+                    { name: 'badge', label: 'Badge', type: 'text', category: 'Contenu' },
+                    { name: 'accentColor', label: 'Couleur principale', type: 'color', category: 'Style' },
+                    { name: 'backgroundColor', label: 'Couleur de fond', type: 'color', category: 'Style' },
+                    { name: 'textColor', label: 'Couleur du texte', type: 'color', category: 'Style' }
                 ];
             }
 
@@ -1078,9 +1149,27 @@
                     { id: 'card', name: 'Carte principale', editable: true },
                     { id: 'header', name: 'En-tête', editable: true },
                     { id: 'price', name: 'Prix', editable: true },
-                    { id: 'features', name: 'Fonctionnalités', editable: true },
+                    { id: 'features', name: 'Fonctionnalités', editable: true, manageable: true },
                     { id: 'cta', name: 'Bouton action', editable: true }
                 ];
+            }
+            
+            // Méthodes pour gestion dynamique des fonctionnalités
+            addFeature(newFeature) {
+                if (!newFeature || newFeature.trim() === '') return;
+                this.defaultData.features.push(newFeature.trim());
+            }
+            
+            removeFeature(index) {
+                if (index >= 0 && index < this.defaultData.features.length) {
+                    this.defaultData.features.splice(index, 1);
+                }
+            }
+            
+            updateFeature(index, newText) {
+                if (index >= 0 && index < this.defaultData.features.length) {
+                    this.defaultData.features[index] = newText;
+                }
             }
         }
 
@@ -1310,6 +1399,10 @@
                 document.getElementById('duplicateBtn').addEventListener('click', () => this.duplicateWidget());
                 document.getElementById('deleteBtn').addEventListener('click', () => this.deleteWidget());
                 
+                // Boutons préréglages de taille
+                document.getElementById('fullScreenBtn').addEventListener('click', () => this.setFullScreen());
+                document.getElementById('fillParentBtn').addEventListener('click', () => this.fillParent());
+                
                 // Recherche
                 const searchInput = document.getElementById('widgetSearch');
                 if (searchInput) {
@@ -1416,6 +1509,9 @@
                 const workspace = document.getElementById('canvasWorkspace');
                 const emptyState = document.getElementById('emptyState');
                 
+                // Toujours supprimer les widgets existants du DOM en premier
+                workspace.querySelectorAll('.widget-container').forEach(w => w.remove());
+                
                 if (this.widgets.length === 0) {
                     emptyState.classList.remove('hidden');
                     emptyState.style.display = 'flex';
@@ -1424,9 +1520,6 @@
                 
                 emptyState.classList.add('hidden');
                 emptyState.style.display = 'none';
-                
-                // Supprimer les widgets existants
-                workspace.querySelectorAll('.widget-container').forEach(w => w.remove());
                 
                 this.widgets.forEach((widget, index) => {
                     const container = this.createWidgetContainer(widget, index);
@@ -1661,19 +1754,77 @@
                 let elementsHtml = '';
                 
                 elements.forEach(element => {
-                    elementsHtml += `
-                        <div class="element-item" style="padding: 12px; background: var(--bg-card); 
-                                                        border-radius: 8px; margin-bottom: 8px; 
-                                                        display: flex; align-items: center; justify-content: space-between;">
-                            <div>
-                                <div style="color: white; font-weight: 500;">${element.name}</div>
-                                <div style="color: var(--text-muted); font-size: 12px;">ID: ${element.id}</div>
+                    const isFeatures = element.id === 'features' && this.selectedWidget.type === 'pricing-card';
+                    
+                    if (isFeatures) {
+                        // Interface spéciale pour les fonctionnalités du Pricing Card
+                        const features = this.selectedWidget.data.features || [];
+                        
+                        elementsHtml += `
+                            <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                            border-radius: 8px; margin-bottom: 8px;">
+                                <div style="margin-bottom: 12px;">
+                                    <div style="color: white; font-weight: 500; margin-bottom: 8px;">
+                                        <i class="fas fa-list"></i> ${element.name} (${features.length})
+                                    </div>
+                                    <div style="color: var(--text-muted); font-size: 12px;">Gestion dynamique des fonctionnalités</div>
+                                </div>
+                                
+                                <div class="features-manager" style="margin-bottom: 12px;">
+                                    <div class="feature-input-group" style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                        <input type="text" id="newFeatureInput" placeholder="✓ Nouvelle fonctionnalité..." 
+                                               style="flex: 1; padding: 8px 12px; background: var(--bg-primary); 
+                                                      border: 1px solid var(--border-color); border-radius: 6px; 
+                                                      color: var(--text-white); font-size: 14px;">
+                                        <button onclick="widgetEditor.addFeatureToSelected()" 
+                                                style="padding: 8px 16px; background: var(--accent-green); 
+                                                       color: white; border: none; border-radius: 6px; 
+                                                       cursor: pointer; font-size: 14px; font-weight: 500;">
+                                            <i class="fas fa-plus"></i> Ajouter
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="features-list" style="max-height: 200px; overflow-y: auto;">
+                                        ${features.map((feature, index) => `
+                                            <div class="feature-item" style="display: flex; align-items: center; gap: 8px; 
+                                                                           padding: 8px 12px; background: rgba(16, 185, 129, 0.1); 
+                                                                           border: 1px solid rgba(16, 185, 129, 0.3); 
+                                                                           border-radius: 6px; margin-bottom: 6px;">
+                                                <span style="color: var(--accent-green); font-weight: bold; min-width: 16px;">✓</span>
+                                                <input type="text" value="${feature}" 
+                                                       onchange="widgetEditor.updateFeatureAtIndex(${index}, this.value)"
+                                                       oninput="widgetEditor.updateFeatureAtIndex(${index}, this.value)"
+                                                       style="flex: 1; background: transparent; border: none; 
+                                                              color: var(--text-white); font-size: 14px; outline: none;">
+                                                <button onclick="widgetEditor.removeFeatureAtIndex(${index})" 
+                                                        title="Supprimer cette fonctionnalité"
+                                                        style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                               border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                               width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="element-controls" style="display: flex; gap: 4px; color: var(--text-muted); font-size: 12px;">
-                                <span>Éditible via propriétés</span>
+                        `;
+                    } else {
+                        // Interface standard pour les autres éléments
+                        elementsHtml += `
+                            <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                            border-radius: 8px; margin-bottom: 8px; 
+                                                            display: flex; align-items: center; justify-content: space-between;">
+                                <div>
+                                    <div style="color: white; font-weight: 500;">${element.name}</div>
+                                    <div style="color: var(--text-muted); font-size: 12px;">ID: ${element.id}</div>
+                                </div>
+                                <div class="element-controls" style="display: flex; gap: 4px; color: var(--text-muted); font-size: 12px;">
+                                    <span>Éditible via propriétés</span>
+                                </div>
                             </div>
-                        </div>
-                    `;
+                        `;
+                    }
                 });
                 
                 document.getElementById('elementsContainer').innerHTML = elementsHtml;
@@ -1803,6 +1954,9 @@
                 const price = container.querySelector('.pricing-amount, [style*="font-size: 3.5rem"]');
                 const currency = container.querySelector('[style*="font-size: 2rem"]');
                 const ctaButton = container.querySelector('a[style*="width: 100%"]');
+                const card = container.querySelector('.pricing-card');
+                const badge = container.querySelector('.pricing-badge');
+                const featuresList = container.querySelector('ul');
                 
                 switch (propertyName) {
                     case 'planName':
@@ -1828,6 +1982,66 @@
                     case 'ctaLink':
                         if (ctaButton) {
                             ctaButton.href = value;
+                        }
+                        break;
+                    case 'accentColor':
+                        if (currency) {
+                            currency.style.color = value;
+                        }
+                        if (ctaButton) {
+                            ctaButton.style.background = value;
+                        }
+                        if (badge) {
+                            badge.style.background = value;
+                        }
+                        if (card) {
+                            const isFeatured = this.selectedWidget.data.featured;
+                            if (isFeatured) {
+                                card.style.borderColor = value;
+                            }
+                        }
+                        // Mettre à jour les checkmarks des fonctionnalités
+                        if (featuresList) {
+                            const checkmarks = featuresList.querySelectorAll('span[style*="color"]');
+                            checkmarks.forEach(check => {
+                                check.style.color = value;
+                            });
+                        }
+                        break;
+                    case 'backgroundColor':
+                        if (card) {
+                            card.style.background = value;
+                        }
+                        break;
+                    case 'textColor':
+                        if (card) {
+                            card.style.color = value;
+                        }
+                        if (planName) {
+                            planName.style.color = value;
+                        }
+                        if (featuresList) {
+                            const textElements = featuresList.querySelectorAll('span:not([style*="color: #10b981"])');
+                            textElements.forEach(el => {
+                                if (!el.textContent.includes('✓')) {
+                                    el.style.color = value;
+                                }
+                            });
+                        }
+                        break;
+                    case 'badge':
+                        // Re-render complet pour le badge car il peut être ajouté/supprimé
+                        this.renderSelectedWidget();
+                        break;
+                    case 'featured':
+                        if (card) {
+                            const accentColor = this.selectedWidget.data.accentColor || '#10b981';
+                            card.style.borderColor = value ? accentColor : '#374151';
+                            if (value) {
+                                card.classList.add('featured');
+                            } else {
+                                card.classList.remove('featured');
+                            }
                         }
                         break;
                 }
@@ -1981,10 +2195,50 @@
                 const hasSelection = this.selectedWidget !== null;
                 const currentIndex = hasSelection ? this.widgets.findIndex(w => w.id === this.selectedWidget.id) : -1;
                 
+                // Boutons de mouvement et actions
                 document.getElementById('moveUpBtn').disabled = !hasSelection || currentIndex <= 0;
                 document.getElementById('moveDownBtn').disabled = !hasSelection || currentIndex >= this.widgets.length - 1;
                 document.getElementById('duplicateBtn').disabled = !hasSelection;
                 document.getElementById('deleteBtn').disabled = !hasSelection;
+                
+                // Contrôles de taille et position
+                const sizeControls = ['widthSlider', 'heightSlider', 'widthInput', 'heightInput', 
+                                    'positionColInput', 'positionRowInput', 'fullScreenBtn', 'fillParentBtn'];
+                
+                sizeControls.forEach(controlId => {
+                    const control = document.getElementById(controlId);
+                    if (control) {
+                        control.disabled = !hasSelection;
+                    }
+                });
+                
+                // Mettre à jour les valeurs si un widget est sélectionné
+                if (hasSelection) {
+                    this.updateSizeControls();
+                }
+            }
+            
+            updateSizeControls() {
+                if (!this.selectedWidget) return;
+                
+                const widget = this.selectedWidget;
+                const size = widget.size || { width: 3, height: 2 };
+                const position = widget.position || { col: 1, row: 1 };
+                
+                // Mettre à jour les sliders et inputs
+                const widthSlider = document.getElementById('widthSlider');
+                const heightSlider = document.getElementById('heightSlider');
+                const widthInput = document.getElementById('widthInput');
+                const heightInput = document.getElementById('heightInput');
+                const positionColInput = document.getElementById('positionColInput');
+                const positionRowInput = document.getElementById('positionRowInput');
+                
+                if (widthSlider) widthSlider.value = size.width;
+                if (heightSlider) heightSlider.value = size.height;
+                if (widthInput) widthInput.value = size.width;
+                if (heightInput) heightInput.value = size.height;
+                if (positionColInput) positionColInput.value = position.col;
+                if (positionRowInput) positionRowInput.value = position.row;
             }
 
             updatePreview() {
@@ -2254,6 +2508,70 @@
                 console.log(`[${type.toUpperCase()}] ${message}`);
             }
             
+            // Gestion dynamique des fonctionnalités pour Pricing Card
+            addFeatureToSelected() {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'pricing-card') return;
+                
+                const input = document.getElementById('newFeatureInput');
+                if (!input || !input.value.trim()) return;
+                
+                const newFeature = input.value.trim();
+                this.selectedWidget.data.features.push(newFeature);
+                
+                // Vider l'input
+                input.value = '';
+                
+                // Mettre à jour l'interface
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                
+                this.setStatus(`Fonctionnalité "${newFeature}" ajoutée`, 'success');
+            }
+            
+            removeFeatureAtIndex(index) {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'pricing-card') return;
+                
+                const features = this.selectedWidget.data.features;
+                if (index < 0 || index >= features.length) return;
+                
+                const removedFeature = features[index];
+                features.splice(index, 1);
+                
+                // Mettre à jour l'interface
+                this.updateElementsTab();
+                this.renderSelectedWidget();
+                this.updatePreview();
+                
+                this.setStatus(`Fonctionnalité "${removedFeature}" supprimée`, 'success');
+            }
+            
+            updateFeatureAtIndex(index, newValue) {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'pricing-card') return;
+                
+                const features = this.selectedWidget.data.features;
+                if (index < 0 || index >= features.length) return;
+                
+                features[index] = newValue.trim();
+                
+                // Mettre à jour uniquement l'affichage (pas l'onglet Elements pour éviter la perte de focus)
+                this.renderSelectedWidget();
+                this.updatePreview();
+            }
+            
+            // Fonction pour re-render un widget spécifique
+            renderSelectedWidget() {
+                if (!this.selectedWidget) return;
+                
+                const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (!container) return;
+                
+                const contentDiv = container.querySelector('.widget-content');
+                if (contentDiv) {
+                    contentDiv.innerHTML = this.selectedWidget.instance.render(this.selectedWidget.data);
+                }
+            }
+
             // Fonction toggle grille
             toggleGrid() {
                 const workspace = document.getElementById('canvasWorkspace');
