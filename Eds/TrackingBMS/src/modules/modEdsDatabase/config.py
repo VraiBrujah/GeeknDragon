@@ -6,7 +6,8 @@ Gestion des variables d'environnement et paramètres
 import os
 from functools import lru_cache
 from typing import Optional, List
-from pydantic import BaseSettings, validator, Field
+from pydantic import BaseModel, Field, field_validator
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -72,21 +73,24 @@ class Settings(BaseSettings):
     MAX_MEMORY_MB: int = Field(default=512, env="MAX_MEMORY_MB")  # Limite HostPapa
     MAX_CPU_PERCENT: int = Field(default=80, env="MAX_CPU_PERCENT")
     
-    @validator("ALLOWED_ORIGINS", pre=True)
+    @field_validator("ALLOWED_ORIGINS", mode='before')
+    @classmethod
     def parse_cors_origins(cls, v):
         """Parse CORS origins from string or list"""
         if isinstance(v, str):
             return [origin.strip() for origin in v.split(",")]
         return v
     
-    @validator("DATABASE_URL")
+    @field_validator("DATABASE_URL")
+    @classmethod
     def validate_database_url(cls, v):
         """Validation de l'URL de base de données"""
-        if not v.startswith(("postgresql://", "postgresql+asyncpg://")):
-            raise ValueError("DATABASE_URL doit être PostgreSQL")
+        if not v.startswith(("postgresql://", "postgresql+asyncpg://", "sqlite://")):
+            raise ValueError("DATABASE_URL doit être PostgreSQL ou SQLite")
         return v
     
-    @validator("SECRET_KEY")
+    @field_validator("SECRET_KEY")
+    @classmethod
     def validate_secret_key(cls, v):
         """Validation de la clé secrète"""
         if len(v) < 32:
@@ -108,10 +112,12 @@ class Settings(BaseSettings):
         """Préfixe pour les clés Redis"""
         return f"{self.APP_NAME}:{self.VERSION}"
     
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = True
+    model_config = {
+        "env_file": ".env",
+        "env_file_encoding": "utf-8",
+        "case_sensitive": True,
+        "extra": "ignore"
+    }
 
 
 @lru_cache()

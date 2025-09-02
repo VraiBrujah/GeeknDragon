@@ -2572,6 +2572,134 @@
                 }
             }
 
+            // ================================================================
+            // NOUVELLES FONCTIONS - GESTION TAILLE ET POSITION
+            // ================================================================
+            
+            // Mettre à jour la taille d'un widget
+            updateWidgetSize(dimension, value) {
+                if (!this.selectedWidget) return;
+                
+                const numValue = parseInt(value, 10);
+                if (isNaN(numValue)) return;
+                
+                // Initialiser size si nécessaire
+                if (!this.selectedWidget.size) {
+                    this.selectedWidget.size = { width: 3, height: 2 };
+                }
+                
+                // Mettre à jour la dimension
+                this.selectedWidget.size[dimension] = numValue;
+                
+                // Synchroniser les contrôles
+                this.syncSizeControls(dimension, numValue);
+                
+                // Vérifier que le widget reste dans les limites de la grille
+                this.constrainWidgetToGrid();
+                
+                // Mettre à jour l'affichage
+                this.renderCanvas();
+                this.updatePreview();
+                
+                this.setStatus(`${dimension === 'width' ? 'Largeur' : 'Hauteur'} mise à jour: ${numValue}`, 'info');
+            }
+            
+            // Mettre à jour la position d'un widget
+            updateWidgetPosition(dimension, value) {
+                if (!this.selectedWidget) return;
+                
+                const numValue = parseInt(value, 10);
+                if (isNaN(numValue)) return;
+                
+                // Initialiser position si nécessaire
+                if (!this.selectedWidget.position) {
+                    this.selectedWidget.position = { col: 1, row: 1 };
+                }
+                
+                // Mettre à jour la dimension
+                this.selectedWidget.position[dimension] = numValue;
+                
+                // Vérifier que le widget reste dans les limites de la grille
+                this.constrainWidgetToGrid();
+                
+                // Mettre à jour l'affichage
+                this.renderCanvas();
+                this.updatePreview();
+                
+                this.setStatus(`Position ${dimension === 'col' ? 'colonne' : 'rangée'} mise à jour: ${numValue}`, 'info');
+            }
+            
+            // Synchroniser les contrôles de taille
+            syncSizeControls(changedDimension, value) {
+                if (changedDimension === 'width') {
+                    const widthSlider = document.getElementById('widthSlider');
+                    const widthInput = document.getElementById('widthInput');
+                    if (widthSlider && widthSlider.value != value) widthSlider.value = value;
+                    if (widthInput && widthInput.value != value) widthInput.value = value;
+                } else if (changedDimension === 'height') {
+                    const heightSlider = document.getElementById('heightSlider');
+                    const heightInput = document.getElementById('heightInput');
+                    if (heightSlider && heightSlider.value != value) heightSlider.value = value;
+                    if (heightInput && heightInput.value != value) heightInput.value = value;
+                }
+            }
+            
+            // Contraindre le widget aux limites de la grille
+            constrainWidgetToGrid() {
+                if (!this.selectedWidget) return;
+                
+                const size = this.selectedWidget.size || { width: 3, height: 2 };
+                const position = this.selectedWidget.position || { col: 1, row: 1 };
+                
+                // Limiter la taille maximale
+                size.width = Math.max(1, Math.min(12, size.width));
+                size.height = Math.max(1, Math.min(8, size.height));
+                
+                // Ajuster la position si le widget dépasse
+                position.col = Math.max(1, Math.min(12 - size.width + 1, position.col));
+                position.row = Math.max(1, Math.min(8 - size.height + 1, position.row));
+                
+                // Mettre à jour l'objet
+                this.selectedWidget.size = size;
+                this.selectedWidget.position = position;
+                
+                // Mettre à jour les contrôles
+                this.updateSizeControls();
+            }
+            
+            // Définir un widget en plein écran
+            setFullScreen() {
+                if (!this.selectedWidget) return;
+                
+                this.selectedWidget.size = { width: 12, height: 8 };
+                this.selectedWidget.position = { col: 1, row: 1 };
+                
+                this.updateSizeControls();
+                this.renderCanvas();
+                this.updatePreview();
+                
+                this.setStatus('Widget mis en plein écran', 'success');
+            }
+            
+            // Remplir le conteneur parent (version simplifiée - toute la largeur, hauteur adaptative)
+            fillParent() {
+                if (!this.selectedWidget) return;
+                
+                // Pour cette version, "remplir parent" = largeur maximale avec hauteur de 4 rangées
+                this.selectedWidget.size = { width: 12, height: 4 };
+                
+                // Garder la position actuelle en colonne, mais vérifier les limites
+                const currentPosition = this.selectedWidget.position || { col: 1, row: 1 };
+                this.selectedWidget.position = { col: 1, row: currentPosition.row };
+                
+                this.constrainWidgetToGrid();
+                this.updateSizeControls();
+                this.renderCanvas();
+                this.updatePreview();
+                
+                this.setStatus('Widget configuré pour remplir le conteneur parent', 'success');
+            }
+
             // Fonction toggle grille
             toggleGrid() {
                 const workspace = document.getElementById('canvasWorkspace');
