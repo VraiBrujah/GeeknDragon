@@ -254,7 +254,25 @@ class WidgetManager {
             widget.updateData(updates.data, updates.mergeData !== false);
         }
         if (updates.styles) {
-            widget.updateStyles(updates.styles, updates.mergeStyles !== false);
+            // Rôle : Sépare les styles pour utiliser les setters dédiés de BaseWidget
+            const {
+                background,
+                border,
+                borderRadius,
+                opacity,
+                boxShadow,
+                ...otherStyles
+            } = updates.styles;
+
+            if (background !== undefined) widget.setBackground(background);
+            if (border !== undefined) widget.setBorder(border);
+            if (borderRadius !== undefined) widget.setBorderRadius(borderRadius);
+            if (opacity !== undefined) widget.setOpacity(opacity);
+            if (boxShadow !== undefined) widget.setBoxShadow(boxShadow);
+
+            if (Object.keys(otherStyles).length) {
+                widget.updateStyles(otherStyles, updates.mergeStyles !== false);
+            }
         }
         if (updates.position) {
             widget.updatePosition(updates.position);

@@ -11,6 +11,7 @@ Ce projet repose sur une architecture orientée objet centrée sur deux composan
 2. **Séparation des responsabilités** : la logique de rendu appartient aux widgets, la gestion de l'état au `WidgetStateManager`.
 3. **Événements** : utilisez `on`, `off` et `emit` de `BaseWidget` pour la communication interne.
 4. **Persistance** : appelez `saveState()` et `loadState()` lorsque nécessaire pour synchroniser l'état.
+5. **Styles** : utilisez les setters (`setBackground`, `setBorder`, `setBorderRadius`, `setOpacity`, `setBoxShadow`) pour modifier l'apparence des widgets.
 
 ## Flux de travail
 
