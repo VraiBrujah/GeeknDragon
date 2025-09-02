@@ -3234,41 +3234,94 @@
                     
                     subtitle: 'Pourquoi payer plus cher pour une technologie obsolète ? Li-CUBE PRO™ écrase la concurrence sur tous les critères techniques.',
                     
-                    // Colonne Obsolète
+                    // Colonne Obsolète - SIMPLIFIÉ COMME PRICING CARD
                     obsoleteTitle: 'Batteries Ni-Cd (Obsolètes)',
                     obsoleteTitleColor: '#ef4444',
                     obsoleteBackgroundColor: '#1f1f1f',
                     obsoleteBorderColor: '#ef4444',
                     obsoleteIcon: '❌',
                     obsoleteDisadvantages: [
-                        '☠️ Cadmium Hautement Toxique|Classé dangereux REACH, recyclage coûteux, manipulation à risque',
-                        '🔧 Maintenance Obligatoire Coûteuse|Appoint électrolyte, fuites KOH, interventions techniques fréquentes',
-                        '⏳ Durée de Vie Limitée|2000-3000 cycles seulement (5-6 ans) → remplacement fréquent',
-                        '🏋️ Poids et Encombrement|80-100 kg, manipulation dangereuse, installation contraignante',
-                        '🐌 Charge Lente 8-12h|Indisponibilité longue, productivité réduite',
-                        '📵 Aucune Connectivité|Pas de télémétrie, aucun suivi à distance, pannes surprises',
-                        '⚖️ Réglementation Transport Stricte|Classé UN2795 Batteries Wet Alkali, transport coûteux et contraignant'
+                        'Cadmium Hautement Toxique',
+                        'Maintenance Obligatoire Coûteuse',
+                        'Durée de Vie Limitée',
+                        'Poids et Encombrement',
+                        'Charge Lente 8-12h',
+                        'Aucune Connectivité',
+                        'Réglementation Transport Stricte'
                     ],
                     
-                    // Colonne Moderne
+                    // Colonne Moderne - SIMPLIFIÉ COMME PRICING CARD
                     modernTitle: 'Li-CUBE PRO™ (Technologie Moderne)',
                     modernTitleColor: '#10b981',
                     modernBackgroundColor: '#0f1419',
                     modernBorderColor: '#10b981',
                     modernIcon: '✅',
                     modernAdvantages: [
-                        '🔋 Durée Vie Exceptionnelle|≥8000 cycles (20-25 ans réels) → 4× plus longue que Ni-Cd',
-                        '🛡️ Zéro Maintenance|Aucun électrolyte, aucun effet mémoire, suivi automatisé par BMS',
-                        '📡 Surveillance Temps Réel|GPS, Bluetooth, Wi-Fi, GPRS → maintenance préventive, zéro panne surprise',
-                        '⚡ Performance Énergétique|110 Wh/kg (4× plus), 157 Wh/L (6× plus compact), charge 1-2h',
-                        '🌡️ Climat Canadien|Fonctionnement -40°C à +55°C, BMS intelligent, hivers québécois',
-                        '🍃 100% Écologique|Zéro cadmium, conforme RoHS, recyclable, image environnementale',
-                        '🛡️ Sécurité BMS Multi-niveau|Protections OVP, UVP, OCP, OTP, court-circuit → risques incidents réduits drastiquement'
+                        'Durée Vie Exceptionnelle',
+                        'Zéro Maintenance',
+                        'Surveillance Temps Réel',
+                        'Performance Énergétique',
+                        'Climat Canadien',
+                        '100% Écologique',
+                        'Sécurité BMS Multi-niveau'
                     ],
                     
                     conclusion: 'Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !',
                     conclusionDetails: 'Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d\'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.'
                 };
+            }
+
+            // Méthodes pour gestion dynamique - COPIÉES EXACTEMENT DE PRICING CARD
+            addObsoleteDisadvantage(newDisadvantage) {
+                console.log('🚀 addObsoleteDisadvantage called with:', newDisadvantage);
+                if (!newDisadvantage || newDisadvantage.trim() === '') return;
+                this.defaultData.obsoleteDisadvantages.push(newDisadvantage.trim());
+                console.log('✅ Added disadvantage:', newDisadvantage.trim());
+                console.log('🔍 Current disadvantages:', this.defaultData.obsoleteDisadvantages);
+            }
+            
+            removeObsoleteDisadvantage(index) {
+                console.log('🗑️ removeObsoleteDisadvantage called with index:', index);
+                if (index >= 0 && index < this.defaultData.obsoleteDisadvantages.length) {
+                    const removed = this.defaultData.obsoleteDisadvantages[index];
+                    this.defaultData.obsoleteDisadvantages.splice(index, 1);
+                    console.log('✅ Removed disadvantage:', removed);
+                    console.log('🔍 Remaining disadvantages:', this.defaultData.obsoleteDisadvantages);
+                }
+            }
+            
+            updateObsoleteDisadvantage(index, newText) {
+                console.log('✏️ updateObsoleteDisadvantage called with:', index, newText);
+                if (index >= 0 && index < this.defaultData.obsoleteDisadvantages.length) {
+                    this.defaultData.obsoleteDisadvantages[index] = newText.trim();
+                    console.log('✅ Updated disadvantage at index', index, ':', newText.trim());
+                }
+            }
+
+            addModernAdvantage(newAdvantage) {
+                console.log('🚀 addModernAdvantage called with:', newAdvantage);
+                if (!newAdvantage || newAdvantage.trim() === '') return;
+                this.defaultData.modernAdvantages.push(newAdvantage.trim());
+                console.log('✅ Added advantage:', newAdvantage.trim());
+                console.log('🔍 Current advantages:', this.defaultData.modernAdvantages);
+            }
+            
+            removeModernAdvantage(index) {
+                console.log('🗑️ removeModernAdvantage called with index:', index);
+                if (index >= 0 && index < this.defaultData.modernAdvantages.length) {
+                    const removed = this.defaultData.modernAdvantages[index];
+                    this.defaultData.modernAdvantages.splice(index, 1);
+                    console.log('✅ Removed advantage:', removed);
+                    console.log('🔍 Remaining advantages:', this.defaultData.modernAdvantages);
+                }
+            }
+            
+            updateModernAdvantage(index, newText) {
+                console.log('✏️ updateModernAdvantage called with:', index, newText);
+                if (index >= 0 && index < this.defaultData.modernAdvantages.length) {
+                    this.defaultData.modernAdvantages[index] = newText.trim();
+                    console.log('✅ Updated advantage at index', index, ':', newText.trim());
+                }
             }
 
             // Helper pour convertir les valeurs d'espacement en pixels
@@ -3340,47 +3393,31 @@
                 // Générer les styles du titre
                 const titleStyles = this.generateTitleStyles(d);
                 
-                // Créer les listes d'inconvénients (obsolète)
+                // Créer les listes d'inconvénients (obsolète) - SIMPLIFIÉ COMME PRICING CARD
                 const disadvantagesHtml = d.obsoleteDisadvantages.map((item, index) => {
-                    const [title, description] = item.split('|');
                     return `
-                        <div class="comparison-item obsolete-item" style="margin-bottom: 20px; padding: 16px; 
-                                                                         background: rgba(239, 68, 68, 0.1); 
-                                                                         border-left: 4px solid #ef4444; 
-                                                                         border-radius: 8px;">
-                            <div style="display: flex; align-items: flex-start; gap: 12px;">
-                                <div style="font-size: 1.2rem; margin-top: 2px;">${d.obsoleteIcon}</div>
-                                <div style="flex: 1;">
-                                    <h4 style="color: #ef4444; font-size: 1rem; font-weight: bold; margin: 0 0 8px 0; line-height: 1.3;">
-                                        ${title}
-                                    </h4>
-                                    <p style="color: #d1d5db; font-size: 0.9rem; margin: 0; line-height: 1.5;">
-                                        ${description}
-                                    </p>
-                                </div>
+                        <div class="comparison-item obsolete-item" style="margin-bottom: 16px; padding: 12px; 
+                                                                           background: rgba(239, 68, 68, 0.1); 
+                                                                           border-left: 3px solid #ef4444; 
+                                                                           border-radius: 6px; display: flex; align-items: center; gap: 12px;">
+                            <div style="color: #ef4444; font-size: 1.2rem;">${d.obsoleteIcon}</div>
+                            <div style="color: #ffffff; font-size: 0.95rem; line-height: 1.4;">
+                                ${item}
                             </div>
                         </div>
                     `;
                 }).join('');
                 
-                // Créer les listes d'avantages (moderne)
+                // Créer les listes d'avantages (moderne) - SIMPLIFIÉ COMME PRICING CARD
                 const advantagesHtml = d.modernAdvantages.map((item, index) => {
-                    const [title, description] = item.split('|');
                     return `
-                        <div class="comparison-item modern-item" style="margin-bottom: 20px; padding: 16px; 
+                        <div class="comparison-item modern-item" style="margin-bottom: 16px; padding: 12px; 
                                                                         background: rgba(16, 185, 129, 0.1); 
-                                                                        border-left: 4px solid #10b981; 
-                                                                        border-radius: 8px;">
-                            <div style="display: flex; align-items: flex-start; gap: 12px;">
-                                <div style="font-size: 1.2rem; margin-top: 2px;">${d.modernIcon}</div>
-                                <div style="flex: 1;">
-                                    <h4 style="color: #10b981; font-size: 1rem; font-weight: bold; margin: 0 0 8px 0; line-height: 1.3;">
-                                        ${title}
-                                    </h4>
-                                    <p style="color: #d1d5db; font-size: 0.9rem; margin: 0; line-height: 1.5;">
-                                        ${description}
-                                    </p>
-                                </div>
+                                                                        border-left: 3px solid #10b981; 
+                                                                        border-radius: 6px; display: flex; align-items: center; gap: 12px;">
+                            <div style="color: #10b981; font-size: 1.2rem;">${d.modernIcon}</div>
+                            <div style="color: #ffffff; font-size: 0.95rem; line-height: 1.4;">
+                                ${item}
                             </div>
                         </div>
                     `;
@@ -4963,7 +5000,7 @@
                                 
                                 <div class="disadvantages-manager" style="margin-bottom: 12px;">
                                     <div class="disadvantage-input-group" style="display: flex; gap: 8px; margin-bottom: 12px;">
-                                        <input type="text" id="newDisadvantageInput" placeholder="⚠️ Titre|Description du problème..." 
+                                        <input type="text" id="newObsoleteInput" placeholder="⚠️ Titre|Description du problème..." 
                                                style="flex: 1; padding: 8px 12px; background: var(--bg-primary); 
                                                       border: 1px solid #ef4444; border-radius: 6px; 
                                                       color: var(--text-white); font-size: 14px;">
@@ -4976,38 +5013,26 @@
                                     </div>
                                     
                                     <div class="disadvantages-list" style="max-height: 200px; overflow-y: auto;">
-                                        ${obsoleteDisadvantages.map((item, index) => {
-                                            const [title, description] = item.split('|');
-                                            return `
-                                                <div class="disadvantage-item" style="display: flex; flex-direction: column; gap: 8px; 
-                                                                                     padding: 12px; background: rgba(239, 68, 68, 0.1); 
-                                                                                     border: 1px solid rgba(239, 68, 68, 0.3); 
-                                                                                     border-radius: 6px; margin-bottom: 8px;">
-                                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                                        <span style="color: #ef4444; font-weight: bold; min-width: 20px;">❌</span>
-                                                        <input type="text" value="${title || ''}" 
-                                                               placeholder="Titre de l'inconvénient"
-                                                               onchange="widgetEditor.updateObsoleteDisadvantage(${index}, this.value + '|' + this.parentElement.nextElementSibling.querySelector('textarea').value)"
-                                                               style="flex: 1; background: transparent; border: none; 
-                                                                      color: #ef4444; font-size: 14px; font-weight: bold; outline: none;">
-                                                        <button onclick="widgetEditor.removeObsoleteDisadvantage(${index})" 
-                                                                title="Supprimer cet inconvénient"
-                                                                style="background: rgba(239, 68, 68, 0.2); color: #ef4444; 
-                                                                       border: 1px solid #ef4444; border-radius: 4px; 
-                                                                       width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div style="margin-left: 28px;">
-                                                        <textarea placeholder="Description détaillée du problème..."
-                                                                  onchange="widgetEditor.updateObsoleteDisadvantage(${index}, this.parentElement.previousElementSibling.querySelector('input').value + '|' + this.value)"
-                                                                  style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(239, 68, 68, 0.3); 
-                                                                         border-radius: 4px; padding: 6px 8px; color: #d1d5db; font-size: 13px; 
-                                                                         resize: vertical; min-height: 40px; font-family: inherit;">${description || ''}</textarea>
-                                                    </div>
-                                                </div>
-                                            `;
-                                        }).join('')}
+                                        ${obsoleteDisadvantages.map((item, index) => `
+                                            <div class="disadvantage-item" style="display: flex; align-items: center; gap: 8px; 
+                                                                                       padding: 8px 12px; background: rgba(239, 68, 68, 0.1); 
+                                                                                       border: 1px solid rgba(239, 68, 68, 0.3); 
+                                                                                       border-radius: 6px; margin-bottom: 6px;">
+                                                <span style="color: #ef4444; font-weight: bold; min-width: 16px;">❌</span>
+                                                <input type="text" value="${item}" 
+                                                       onchange="widgetEditor.updateObsoleteDisadvantage(${index}, this.value)"
+                                                       oninput="widgetEditor.updateObsoleteDisadvantage(${index}, this.value)"
+                                                       style="flex: 1; background: transparent; border: none; 
+                                                              color: var(--text-white); font-size: 14px; outline: none;">
+                                                <button onclick="widgetEditor.removeObsoleteDisadvantage(${index})" 
+                                                        title="Supprimer cet inconvénient"
+                                                        style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                               border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                               width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        `).join('')}
                                     </div>
                                 </div>
                             </div>
@@ -5028,7 +5053,7 @@
                                 
                                 <div class="advantages-manager" style="margin-bottom: 12px;">
                                     <div class="advantage-input-group" style="display: flex; gap: 8px; margin-bottom: 12px;">
-                                        <input type="text" id="newAdvantageInput" placeholder="✅ Titre|Description de l'avantage..." 
+                                        <input type="text" id="newModernInput" placeholder="✅ Titre|Description de l'avantage..." 
                                                style="flex: 1; padding: 8px 12px; background: var(--bg-primary); 
                                                       border: 1px solid #10b981; border-radius: 6px; 
                                                       color: var(--text-white); font-size: 14px;">
@@ -5041,38 +5066,26 @@
                                     </div>
                                     
                                     <div class="advantages-list" style="max-height: 200px; overflow-y: auto;">
-                                        ${modernAdvantages.map((item, index) => {
-                                            const [title, description] = item.split('|');
-                                            return `
-                                                <div class="advantage-item" style="display: flex; flex-direction: column; gap: 8px; 
-                                                                                   padding: 12px; background: rgba(16, 185, 129, 0.1); 
+                                        ${modernAdvantages.map((item, index) => `
+                                            <div class="advantage-item" style="display: flex; align-items: center; gap: 8px; 
+                                                                                   padding: 8px 12px; background: rgba(16, 185, 129, 0.1); 
                                                                                    border: 1px solid rgba(16, 185, 129, 0.3); 
-                                                                                   border-radius: 6px; margin-bottom: 8px;">
-                                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                                        <span style="color: #10b981; font-weight: bold; min-width: 20px;">✅</span>
-                                                        <input type="text" value="${title || ''}" 
-                                                               placeholder="Titre de l'avantage"
-                                                               onchange="widgetEditor.updateModernAdvantage(${index}, this.value + '|' + this.parentElement.nextElementSibling.querySelector('textarea').value)"
-                                                               style="flex: 1; background: transparent; border: none; 
-                                                                      color: #10b981; font-size: 14px; font-weight: bold; outline: none;">
-                                                        <button onclick="widgetEditor.removeModernAdvantage(${index})" 
-                                                                title="Supprimer cet avantage"
-                                                                style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
-                                                                       border: 1px solid var(--danger-red); border-radius: 4px; 
-                                                                       width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
-                                                            <i class="fas fa-times"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div style="margin-left: 28px;">
-                                                        <textarea placeholder="Description détaillée de l'avantage..."
-                                                                  onchange="widgetEditor.updateModernAdvantage(${index}, this.parentElement.previousElementSibling.querySelector('input').value + '|' + this.value)"
-                                                                  style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(16, 185, 129, 0.3); 
-                                                                         border-radius: 4px; padding: 6px 8px; color: #d1d5db; font-size: 13px; 
-                                                                         resize: vertical; min-height: 40px; font-family: inherit;">${description || ''}</textarea>
-                                                    </div>
-                                                </div>
-                                            `;
-                                        }).join('')}
+                                                                                   border-radius: 6px; margin-bottom: 6px;">
+                                                <span style="color: var(--accent-green); font-weight: bold; min-width: 16px;">✅</span>
+                                                <input type="text" value="${item}" 
+                                                       onchange="widgetEditor.updateModernAdvantage(${index}, this.value)"
+                                                       oninput="widgetEditor.updateModernAdvantage(${index}, this.value)"
+                                                       style="flex: 1; background: transparent; border: none; 
+                                                              color: var(--text-white); font-size: 14px; outline: none;">
+                                                <button onclick="widgetEditor.removeModernAdvantage(${index})" 
+                                                        title="Supprimer cet avantage"
+                                                        style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                               border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                               width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        `).join('')}
                                     </div>
                                 </div>
                             </div>
@@ -7209,18 +7222,29 @@ Folder('${id}')" title="Renommer">
             
             // Gestion dynamique des inconvénients pour Comparison Widget (colonne obsolète)
             addObsoleteDisadvantage() {
-                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
-                
-                const input = document.getElementById('newDisadvantageInput');
-                if (!input || !input.value.trim()) return;
-                
-                const newDisadvantage = input.value.trim();
-                if (!newDisadvantage.includes('|')) {
-                    this.setStatus('Format requis: "Titre|Description"', 'warning');
+                console.log('🚀 addObsoleteDisadvantage called');
+                if (!this.selectedWidget) {
+                    console.log('❌ No selectedWidget');
+                    return;
+                }
+                if (this.selectedWidget.type !== 'comparison') {
+                    console.log('❌ Wrong widget type:', this.selectedWidget.type);
                     return;
                 }
                 
+                const input = document.getElementById('newObsoleteInput');
+                console.log('🔍 Input element:', input);
+                if (!input || !input.value.trim()) {
+                    console.log('❌ No input or empty value');
+                    return;
+                }
+                
+                const newDisadvantage = input.value.trim();
+                console.log('📝 New disadvantage:', newDisadvantage);
+                
+                // Pas de validation du format pour le moment, pour tester
                 this.selectedWidget.data.obsoleteDisadvantages.push(newDisadvantage);
+                console.log('📋 Current disadvantages:', this.selectedWidget.data.obsoleteDisadvantages);
                 
                 // Vider l'input
                 input.value = '';
@@ -7230,29 +7254,30 @@ Folder('${id}')" title="Renommer">
                 this.renderSelectedWidget();
                 this.updatePreview();
                 
-                const [title] = newDisadvantage.split('|');
-                this.setStatus(`Inconvénient "${title}" ajouté`, 'success');
+                this.setStatus(`Inconvénient "${newDisadvantage}" ajouté`, 'success');
             }
             
             removeObsoleteDisadvantage(index) {
+                console.log('🗑️ removeObsoleteDisadvantage called with index:', index);
                 if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
                 
                 const disadvantages = this.selectedWidget.data.obsoleteDisadvantages;
                 if (index < 0 || index >= disadvantages.length) return;
                 
                 const removedItem = disadvantages[index];
-                const [title] = removedItem.split('|');
                 disadvantages.splice(index, 1);
+                console.log('📋 After removal:', disadvantages);
                 
                 // Mettre à jour l'interface
                 this.updateElementsTab();
                 this.renderSelectedWidget();
                 this.updatePreview();
                 
-                this.setStatus(`Inconvénient "${title}" supprimé`, 'success');
+                this.setStatus(`Inconvénient supprimé`, 'success');
             }
             
             updateObsoleteDisadvantage(index, newValue) {
+                console.log('✏️ updateObsoleteDisadvantage called:', index, newValue);
                 if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
                 
                 const disadvantages = this.selectedWidget.data.obsoleteDisadvantages;
@@ -7260,8 +7285,24 @@ Folder('${id}')" title="Renommer">
                 
                 disadvantages[index] = newValue.trim();
                 
-                // Mise à jour temps réel
-                this.renderSelectedWidget();
+                // Mise à jour temps réel optimisée - comme PricingCard
+                const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (container) {
+                    const obsoleteColumn = container.querySelector('.obsolete-column');
+                    if (obsoleteColumn) {
+                        const disadvantageItems = obsoleteColumn.querySelectorAll('.obsolete-item');
+                        if (disadvantageItems[index]) {
+                            // Mettre à jour le titre et la description
+                            const [title, description] = newValue.split('|');
+                            const titleElement = disadvantageItems[index].querySelector('h4');
+                            const descElement = disadvantageItems[index].querySelector('p');
+                            if (titleElement) titleElement.textContent = title || newValue;
+                            if (descElement) descElement.textContent = description || '';
+                        }
+                    }
+                }
+                
+                // Mettre à jour le viewer
                 this.updatePreview();
                 
                 // Sauvegarde automatique
@@ -7270,18 +7311,29 @@ Folder('${id}')" title="Renommer">
             
             // Gestion dynamique des avantages pour Comparison Widget (colonne moderne)
             addModernAdvantage() {
-                if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
-                
-                const input = document.getElementById('newAdvantageInput');
-                if (!input || !input.value.trim()) return;
-                
-                const newAdvantage = input.value.trim();
-                if (!newAdvantage.includes('|')) {
-                    this.setStatus('Format requis: "Titre|Description"', 'warning');
+                console.log('🚀 addModernAdvantage called');
+                if (!this.selectedWidget) {
+                    console.log('❌ No selectedWidget');
+                    return;
+                }
+                if (this.selectedWidget.type !== 'comparison') {
+                    console.log('❌ Wrong widget type:', this.selectedWidget.type);
                     return;
                 }
                 
+                const input = document.getElementById('newModernInput');
+                console.log('🔍 Input element:', input);
+                if (!input || !input.value.trim()) {
+                    console.log('❌ No input or empty value');
+                    return;
+                }
+                
+                const newAdvantage = input.value.trim();
+                console.log('📝 New advantage:', newAdvantage);
+                
+                // Pas de validation du format pour le moment, pour tester
                 this.selectedWidget.data.modernAdvantages.push(newAdvantage);
+                console.log('📋 Current advantages:', this.selectedWidget.data.modernAdvantages);
                 
                 // Vider l'input
                 input.value = '';
@@ -7291,29 +7343,30 @@ Folder('${id}')" title="Renommer">
                 this.renderSelectedWidget();
                 this.updatePreview();
                 
-                const [title] = newAdvantage.split('|');
-                this.setStatus(`Avantage "${title}" ajouté`, 'success');
+                this.setStatus(`Avantage "${newAdvantage}" ajouté`, 'success');
             }
             
             removeModernAdvantage(index) {
+                console.log('🗑️ removeModernAdvantage called with index:', index);
                 if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
                 
                 const advantages = this.selectedWidget.data.modernAdvantages;
                 if (index < 0 || index >= advantages.length) return;
                 
                 const removedItem = advantages[index];
-                const [title] = removedItem.split('|');
                 advantages.splice(index, 1);
+                console.log('📋 After removal:', advantages);
                 
                 // Mettre à jour l'interface
                 this.updateElementsTab();
                 this.renderSelectedWidget();
                 this.updatePreview();
                 
-                this.setStatus(`Avantage "${title}" supprimé`, 'success');
+                this.setStatus(`Avantage supprimé`, 'success');
             }
             
             updateModernAdvantage(index, newValue) {
+                console.log('✏️ updateModernAdvantage called:', index, newValue);
                 if (!this.selectedWidget || this.selectedWidget.type !== 'comparison') return;
                 
                 const advantages = this.selectedWidget.data.modernAdvantages;
@@ -7321,8 +7374,24 @@ Folder('${id}')" title="Renommer">
                 
                 advantages[index] = newValue.trim();
                 
-                // Mise à jour temps réel
-                this.renderSelectedWidget();
+                // Mise à jour temps réel optimisée - comme PricingCard
+                const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (container) {
+                    const modernColumn = container.querySelector('.modern-column');
+                    if (modernColumn) {
+                        const advantageItems = modernColumn.querySelectorAll('.modern-item');
+                        if (advantageItems[index]) {
+                            // Mettre à jour le titre et la description
+                            const [title, description] = newValue.split('|');
+                            const titleElement = advantageItems[index].querySelector('h4');
+                            const descElement = advantageItems[index].querySelector('p');
+                            if (titleElement) titleElement.textContent = title || newValue;
+                            if (descElement) descElement.textContent = description || '';
+                        }
+                    }
+                }
+                
+                // Mettre à jour le viewer
                 this.updatePreview();
                 
                 // Sauvegarde automatique
