@@ -4965,6 +4965,7 @@
                 
                 this.defaultData = {
                     title: 'Pourquoi Nous Choisir ?',
+                    subtitle: 'Découvrez nos avantages concurrentiels',
                     // Propriétés du titre principal (inspirées du TextSimple)
                     titleSize: 32,
                     titleColor: '#ffffff',
@@ -4985,6 +4986,28 @@
                     titlePaddingLeft: 'medium',
                     titlePaddingRight: 'medium',
                     titleMarginBottom: 'large',
+                    
+                    // Propriétés du sous-titre
+                    subtitleSize: 18,
+                    subtitleColor: '#94a3b8',
+                    subtitleAlignment: 'center',
+                    subtitleIsBold: false,
+                    subtitleIsItalic: false,
+                    subtitleHasBackground: false,
+                    subtitleBackgroundColor: '#10b981',
+                    subtitleBackgroundOpacity: 15,
+                    subtitleHasBorder: false,
+                    subtitleBorderColor: '#10b981',
+                    subtitleBorderWidth: 1,
+                    subtitleBorderStyle: 'solid',
+                    subtitleHasRoundedCorners: false,
+                    subtitleBorderRadius: 4,
+                    subtitlePaddingTop: 'small',
+                    subtitlePaddingBottom: 'small',
+                    subtitlePaddingLeft: 'medium',
+                    subtitlePaddingRight: 'medium',
+                    subtitleMarginBottom: 'large',
+                    
                     features: [
                         {
                             icon: '🚀',
@@ -5146,6 +5169,58 @@
                 return styleRules.join('; ');
             }
 
+            // Génère les styles CSS pour le sous-titre
+            generateSubtitleStyles(data) {
+                const styleRules = [];
+                
+                // Style de base
+                styleRules.push('text-align: ' + (data.subtitleAlignment || 'center'));
+                styleRules.push('font-size: ' + (data.subtitleSize || 18) + 'px');
+                styleRules.push('color: ' + (data.subtitleColor || '#94a3b8'));
+                styleRules.push('font-weight: ' + (data.subtitleIsBold ? 'bold' : 'normal'));
+                styleRules.push('font-style: ' + (data.subtitleIsItalic ? 'italic' : 'normal'));
+                styleRules.push('line-height: 1.4');
+                
+                // Arrière-plan
+                if (data.subtitleHasBackground) {
+                    const opacity = (data.subtitleBackgroundOpacity || 15) / 100;
+                    const bgColor = data.subtitleBackgroundColor || '#10b981';
+                    // Convertir hex en rgba
+                    const hex = bgColor.replace('#', '');
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    styleRules.push(`background-color: rgba(${r}, ${g}, ${b}, ${opacity})`);
+                }
+                
+                // Contour
+                if (data.subtitleHasBorder) {
+                    const borderWidth = data.subtitleBorderWidth || 1;
+                    const borderStyle = data.subtitleBorderStyle || 'solid';
+                    const borderColor = data.subtitleBorderColor || '#10b981';
+                    styleRules.push(`border: ${borderWidth}px ${borderStyle} ${borderColor}`);
+                }
+                
+                // Coins arrondis
+                if (data.subtitleHasRoundedCorners) {
+                    const borderRadius = data.subtitleBorderRadius || 4;
+                    styleRules.push(`border-radius: ${borderRadius}px`);
+                }
+                
+                // Espacement interne (padding)
+                const paddingTop = this.getSpacingValue(data.subtitlePaddingTop || 'small');
+                const paddingBottom = this.getSpacingValue(data.subtitlePaddingBottom || 'small');
+                const paddingLeft = this.getSpacingValue(data.subtitlePaddingLeft || 'medium');
+                const paddingRight = this.getSpacingValue(data.subtitlePaddingRight || 'medium');
+                styleRules.push(`padding: ${paddingTop} ${paddingRight} ${paddingBottom} ${paddingLeft}`);
+                
+                // Marge du bas
+                const marginBottom = this.getSpacingValue(data.subtitleMarginBottom || 'large');
+                styleRules.push(`margin-bottom: ${marginBottom}`);
+                
+                return styleRules.join('; ');
+            }
+
             // Génère les styles CSS pour la section complète
             generateSectionStyles(data) {
                 const styleRules = [];
@@ -5197,6 +5272,9 @@
                 // Générer les styles du titre
                 const titleStyles = this.generateTitleStyles(d);
                 
+                // Générer les styles du sous-titre
+                const subtitleStyles = this.generateSubtitleStyles(d);
+                
                 // Générer les styles de la section
                 const sectionStyles = this.generateSectionStyles(d);
                 
@@ -5229,6 +5307,9 @@
                         <h2 class="features-main-title" style="${titleStyles}">
                             ${d.title}
                         </h2>
+                        <p class="features-subtitle" style="${subtitleStyles}">
+                            ${d.subtitle}
+                        </p>
                         <div class="features-grid" 
                              style="display: grid; grid-template-columns: repeat(${d.columns}, 1fr); 
                                     gap: 32px; max-width: 1400px; margin: 0 auto; width: 100%;">
@@ -5242,6 +5323,7 @@
                 return [
                     // Section 1: Contenu
                     { name: 'title', label: 'Titre principal', type: 'text', category: 'Contenu' },
+                    { name: 'subtitle', label: '📝 Sous-titre', type: 'text', category: 'Contenu' },
                     
                     // Section 2: Style du titre principal
                     { name: 'titleSize', label: 'Taille du titre', type: 'range', min: 16, max: 60, category: 'Titre - Typographie' },
@@ -5305,6 +5387,17 @@
                         { value: 'medium', label: 'Moyenne' },
                         { value: 'large', label: 'Grande' }
                     ], category: 'Titre - Espacement' },
+                    
+                    // Section 6B: Style du sous-titre
+                    { name: 'subtitleSize', label: 'Taille du sous-titre', type: 'range', min: 12, max: 28, category: 'Sous-titre - Typographie' },
+                    { name: 'subtitleColor', label: 'Couleur du sous-titre', type: 'color', category: 'Sous-titre - Typographie' },
+                    { name: 'subtitleAlignment', label: 'Alignement du sous-titre', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' },
+                        { value: 'center', label: 'Centre' },
+                        { value: 'right', label: 'Droite' }
+                    ], category: 'Sous-titre - Typographie' },
+                    { name: 'subtitleIsBold', label: 'Sous-titre en gras', type: 'checkbox', category: 'Sous-titre - Typographie' },
+                    { name: 'subtitleIsItalic', label: 'Sous-titre en italique', type: 'checkbox', category: 'Sous-titre - Typographie' },
                     
                     // Section 7: Configuration de la grille
                     { name: 'featuresCount', label: 'Nombre de fonctionnalités', type: 'range', min: 1, max: 12, category: 'Grille' },
