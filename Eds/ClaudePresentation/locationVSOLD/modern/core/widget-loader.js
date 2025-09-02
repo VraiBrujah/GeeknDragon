@@ -138,7 +138,11 @@ class WidgetLoader {
         
         // Configuration des données - Initialisation
         if (data && Object.keys(data).length > 0) {
-            instance.setData(data);
+            if (typeof instance.setData === 'function') {
+                instance.setData(data);
+            } else {
+                instance.data = data;
+            }
         }
 
         // Mise en cache - Optimisation future
