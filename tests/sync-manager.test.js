@@ -1,0 +1,54 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { jest } from '@jest/globals';
+import syncManager from '../core/sync-manager.js';
+
+class DummyWidget {
+  constructor(id) {
+    this.id = id;
+    this.state = {
+      id,
+      x: 0,
+      y: 0,
+      width: 10,
+      height: 10,
+      zIndex: 1,
+      styles: {},
+    };
+    this.hydrate = jest.fn((data) => {
+      this.state = { ...this.state, ...data };
+    });
+  }
+
+  serialize() {
+    return { ...this.state };
+  }
+}
+
+describe('SyncManager', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    syncManager.widgets.clear();
+  });
+
+  test('saveState and loadState roundtrip', () => {
+    const widget = new DummyWidget('w1');
+    syncManager.saveState(widget);
+    expect(syncManager.loadState('w1')).toEqual(widget.serialize());
+  });
+
+  test('subscribe hydrates existing state', () => {
+    const saved = {
+      id: 'w2',
+      x: 5,
+      y: 6,
+      width: 20,
+      height: 30,
+      zIndex: 2,
+      styles: { color: 'red' },
+    };
+    localStorage.setItem('widget-w2', JSON.stringify(saved));
+    const widget = new DummyWidget('w2');
+    syncManager.subscribe(widget);
+    expect(widget.hydrate).toHaveBeenCalledWith(saved);
+  });
+});
