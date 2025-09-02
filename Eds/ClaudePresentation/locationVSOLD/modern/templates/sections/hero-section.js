@@ -20,11 +20,9 @@ class HeroSection {
         // Widgets inclus - Composition modulaire
         this.allowedWidgets = [
             'hero-title',
-            'hero-description', 
-            'price-banner',
-            'benefits-grid',
-            'product-showcase',
-            'call-to-action'
+            'text-simple',
+            'logo',
+            'pricing-card'
         ];
         
         // Configuration par défaut - Structure de base
@@ -47,17 +45,19 @@ class HeroSection {
                 order: 1
             },
             {
-                type: 'hero-description',
+                type: 'text-simple',
                 data: {
                     text: '<strong>Pourquoi prendre des risques ?</strong> Louez votre Li-CUBE PRO™ et bénéficiez d\'une maintenance complète, d\'un monitoring 24/7 et d\'une garantie totale.'
                 },
                 order: 2
             },
             {
-                type: 'product-showcase',
+                type: 'logo',
                 data: {
                     imagePath: './images/Li-CUBE PRO.png',
-                    altText: 'Li-CUBE PRO™'
+                    altText: 'Li-CUBE PRO™',
+                    width: 300,
+                    height: 300
                 },
                 order: 3
             }
@@ -120,10 +120,10 @@ class HeroSection {
      * Retour : HTML des widgets texte
      */
     renderTextWidgets(widgets) {
-        const textWidgets = widgets.filter(w => 
-            ['hero-title', 'hero-description', 'price-banner', 'benefits-grid', 'call-to-action'].includes(w.type)
+        const textWidgets = widgets.filter(w =>
+            ['hero-title', 'text-simple'].includes(w.type)
         );
-        
+
         return textWidgets.map(widget => this.renderWidget(widget)).join('');
     }
 
@@ -133,10 +133,10 @@ class HeroSection {
      * Retour : HTML des widgets visuels
      */
     renderVisualWidgets(widgets) {
-        const visualWidgets = widgets.filter(w => 
-            ['product-showcase', 'hero-image', 'video-embed'].includes(w.type)
+        const visualWidgets = widgets.filter(w =>
+            ['logo', 'pricing-card'].includes(w.type)
         );
-        
+
         return visualWidgets.map(widget => this.renderWidget(widget)).join('');
     }
 
@@ -508,11 +508,9 @@ class HeroSection {
         // Mapping des types vers les classes
         const widgetMap = {
             'hero-title': 'HeroTitleWidget',
-            'hero-description': 'HeroDescriptionWidget',
-            'price-banner': 'PriceBannerWidget',
-            'benefits-grid': 'BenefitsGridWidget',
-            'product-showcase': 'ProductShowcaseWidget',
-            'call-to-action': 'CallToActionWidget'
+            'text-simple': 'TextSimpleWidget',
+            'logo': 'LogoWidget',
+            'pricing-card': 'PricingCardWidget'
         };
 
         // Import dynamique (à implémenter selon le système de modules)
