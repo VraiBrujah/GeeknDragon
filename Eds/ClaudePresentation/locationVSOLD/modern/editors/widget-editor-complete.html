@@ -707,11 +707,11 @@
                 <div class="canvas-tools">
                     <button class="btn btn-sm" id="selectModeBtn">
                         <i class="fas fa-mouse-pointer"></i>
-                        Sélection
+                        Édition
                     </button>
-                    <button class="btn btn-sm" id="previewModeBtn">
-                        <i class="fas fa-eye"></i>
-                        Aperçu
+                    <button class="btn btn-sm" id="gridToggleBtn" onclick="widgetEditor.toggleGrid()">
+                        <i class="fas fa-th"></i>
+                        Grille
                     </button>
                 </div>
                 
@@ -1318,6 +1318,16 @@
                 
                 // Refresh preview
                 document.getElementById('refreshPreviewBtn').addEventListener('click', () => this.updatePreview());
+                
+                // Event pour clic sur workspace (désélection)
+                const workspace = document.getElementById('canvasWorkspace');
+                if (workspace) {
+                    workspace.addEventListener('click', (e) => {
+                        if (e.target === workspace) {
+                            this.selectWidget(null);
+                        }
+                    });
+                }
             }
 
             renderWidgetLibrary() {
@@ -1493,11 +1503,18 @@
                     w.classList.remove('selected');
                 });
                 
-                // Sélectionner le nouveau
-                const container = document.querySelector(`[data-widget-id="${widgetId}"]`);
-                if (container) {
-                    container.classList.add('selected');
-                    this.selectedWidget = this.widgets.find(w => w.id === widgetId);
+                if (widgetId) {
+                    // Sélectionner le nouveau
+                    const container = document.querySelector(`[data-widget-id="${widgetId}"]`);
+                    if (container) {
+                        container.classList.add('selected');
+                        this.selectedWidget = this.widgets.find(w => w.id === widgetId);
+                        this.updatePropertiesPanel();
+                        this.updateOrganizationButtons();
+                    }
+                } else {
+                    // Désélection
+                    this.selectedWidget = null;
                     this.updatePropertiesPanel();
                     this.updateOrganizationButtons();
                 }
@@ -2235,6 +2252,15 @@
                 }
                 
                 console.log(`[${type.toUpperCase()}] ${message}`);
+            }
+            
+            // Fonction toggle grille
+            toggleGrid() {
+                const workspace = document.getElementById('canvasWorkspace');
+                if (workspace) {
+                    workspace.classList.toggle('show-grid');
+                    this.setStatus('Grille basculée', 'info');
+                }
             }
         }
 
