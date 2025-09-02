@@ -53,12 +53,13 @@ BaseWidget (Héritage obligatoire pour TOUS les widgets)
 ├── 👥 ÉDITION MULTI-COLLABORATEUR TEMPS RÉEL (Phase 1)
 │   ├── Curseurs collaborateurs: position + nom utilisateur en temps réel
 │   ├── Sélections simultanées: couleurs distinctes par utilisateur
-│   ├── Édition concurrent: résolution automatique des conflits
+│   ├── Édition concurrente: algorithme CRDT (horodatage + fusion LWW)
+│   ├── Modèle de données: document JSON versionné par widget (id unique, propriétés, historique ops)
+│   ├── Gestion hors ligne: file d'opérations locale + merge CRDT à la reconnexion
 │   ├── Chat intégré: commentaires sur widgets + fil discussion
 │   ├── Historique partagé: who/when/what pour chaque modification
 │   ├── Permissions collaborateur: view, edit, admin par utilisateur
 │   ├── Synchronisation WebSocket: mise à jour <50ms entre collaborateurs
-│   ├── Mode offline: sync automatique à la reconnexion
 │   ├── Gestion des versions: branches parallèles + merge
 │   └── Notifications: entrées/sorties collaborateurs + modifications
 ├── ✓ VALIDATION & CONTRAINTES (Phase 1)
@@ -109,6 +110,13 @@ BaseWidget (Héritage obligatoire pour TOUS les widgets)
 ├── Drag & Drop (glisser-déposer + contraintes parent)
 └── Export (JSON widget + HTML statique + interactions + assets)
 ```
+
+#### Exemple de séquence de modification simultanée
+1. Alice et Bob ouvrent le widget **TexteAtomique#42**.
+2. Alice change la propriété `texte` en « Promo A » et envoie l'opération A1 (ts=10).
+3. Bob modifie la même propriété en « Promo B » et envoie l'opération B1 (ts=11).
+4. Le serveur fusionne via CRDT LWW : B1 écrase A1 grâce à son horodatage plus récent.
+5. Les deux clients reçoivent l'état final `texte = "Promo B"` ainsi que l'historique {A1, B1}.
 
 ### 📊 WIDGETS HIÉRARCHIQUES (Héritage BaseWidget + Figma Features)
 
