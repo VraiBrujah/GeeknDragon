@@ -439,7 +439,10 @@
             if (window.WidgetEditor && 
                 window.WidgetEditor.Editor && 
                 window.WidgetEditor.BaseWidget && 
-                window.WidgetEditor.WidgetCanvas) {
+                window.WidgetEditor.WidgetCanvas &&
+                window.WidgetEditor.Grid &&
+                window.WidgetEditor.DragDrop &&
+                window.WidgetEditor.Persistence) {
                 modulesLoaded = true;
                 if (domReady) initializeEditor();
             } else {

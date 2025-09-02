@@ -369,7 +369,7 @@ window.WidgetEditor.Persistence = class Persistence {
      * Annulation dernière action (Undo)
      * Restauration état précédent
      */
-    undo() {
+    async undo() {
         if (!this.canUndo()) {
             this.debugLog('Undo impossible');
             return;
@@ -405,7 +405,7 @@ window.WidgetEditor.Persistence = class Persistence {
      * Rétablissement action annulée (Redo)
      * Restauration depuis pile redo
      */
-    redo() {
+    async redo() {
         if (!this.canRedo()) {
             this.debugLog('Redo impossible');
             return;
