@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(grep:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)",
+      "Read(C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\ClaudePresentation\\locationVS/**)"
     ],
     "deny": [],
     "ask": []

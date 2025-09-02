@@ -3408,6 +3408,266 @@
             }
         }
 
+        class ImageAnimatedWidget {
+            constructor() {
+                this.id = 'image-animated';
+                this.name = 'Image Animée';
+                this.category = 'Médias';
+                this.icon = '🎬';
+                this.description = 'Image avec animations flottantes et effets visuels avancés';
+                
+                this.defaultData = {
+                    // Configuration widget
+                    defaultWidth: 6,
+                    
+                    // Propriétés de l'image
+                    imagePath: './images/Li-CUBE PRO.png',
+                    altText: 'Image animée',
+                    
+                    // Dimensions
+                    width: 500,
+                    height: 400,
+                    
+                    // Animations
+                    floatAnimation: true,
+                    floatDuration: 6,
+                    floatDistance: 20,
+                    shineAnimation: true,
+                    shineDuration: 4,
+                    
+                    // Style du conteneur
+                    borderRadius: 24,
+                    border: true,
+                    borderWidth: 3,
+                    borderColor: '#10b981',
+                    borderOpacity: 30,
+                    
+                    // Arrière-plan
+                    backgroundType: 'gradient', // solid, gradient, transparent
+                    backgroundColor: '#10b981',
+                    gradientStart: '#10b981',
+                    gradientEnd: '#065f46',
+                    gradientDirection: 'to bottom',
+                    backgroundOpacity: 100,
+                    
+                    // Ombre
+                    shadowEnabled: true,
+                    shadowColor: '#000000',
+                    shadowOpacity: 50,
+                    shadowBlur: 15,
+                    shadowOffsetX: 0,
+                    shadowOffsetY: 10,
+                    
+                    // Image
+                    imageSize: 100, // pourcentage de la taille du conteneur
+                    imageFit: 'contain', // contain, cover, fill
+                    imagePosition: 'center',
+                    
+                    // Positioning
+                    containerAlignment: 'center',
+                    containerPaddingTop: 20,
+                    containerPaddingBottom: 20,
+                    containerPaddingLeft: 20,
+                    containerPaddingRight: 20
+                };
+            }
+
+            render(data = {}) {
+                const d = { ...this.defaultData, ...data };
+                
+                // Générer les styles d'arrière-plan
+                let backgroundStyle;
+                if (d.backgroundType === 'transparent') {
+                    backgroundStyle = 'transparent';
+                } else if (d.backgroundType === 'gradient') {
+                    backgroundStyle = `linear-gradient(${d.gradientDirection}, ${d.gradientStart}, ${d.gradientEnd})`;
+                } else {
+                    const opacity = (d.backgroundOpacity || 100) / 100;
+                    const hex = d.backgroundColor.replace('#', '');
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    backgroundStyle = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                }
+                
+                // Générer les styles de bordure
+                let borderStyle = 'none';
+                if (d.border) {
+                    const borderOpacity = (d.borderOpacity || 30) / 100;
+                    const hex = d.borderColor.replace('#', '');
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    borderStyle = `${d.borderWidth}px solid rgba(${r}, ${g}, ${b}, ${borderOpacity})`;
+                }
+                
+                // Générer les styles d'ombre
+                let boxShadowStyle = 'none';
+                if (d.shadowEnabled) {
+                    const shadowOpacity = (d.shadowOpacity || 50) / 100;
+                    const hex = d.shadowColor.replace('#', '');
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    boxShadowStyle = `${d.shadowOffsetX}px ${d.shadowOffsetY}px ${d.shadowBlur}px rgba(${r}, ${g}, ${b}, ${shadowOpacity})`;
+                }
+                
+                // Générer les animations CSS
+                const floatAnimation = d.floatAnimation ? `
+                    @keyframes image-float-${Date.now()} {
+                        0%, 100% { transform: translateY(0px); }
+                        50% { transform: translateY(-${d.floatDistance}px); }
+                    }
+                ` : '';
+                
+                const shineAnimation = d.shineAnimation ? `
+                    @keyframes image-shine-${Date.now()} {
+                        0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+                        100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+                    }
+                ` : '';
+                
+                const animationStyle = d.floatAnimation ? `animation: image-float-${Date.now()} ${d.floatDuration}s ease-in-out infinite;` : '';
+                const shineAnimationStyle = d.shineAnimation ? `animation: image-shine-${Date.now()} ${d.shineDuration}s infinite;` : '';
+                
+                return `
+                    <style>
+                        ${floatAnimation}
+                        ${shineAnimation}
+                    </style>
+                    <div style="text-align: ${d.containerAlignment}; padding: ${d.containerPaddingTop}px ${d.containerPaddingRight}px ${d.containerPaddingBottom}px ${d.containerPaddingLeft}px;">
+                        <div class="image-animated-showcase" 
+                             style="width: ${d.width}px; 
+                                    height: ${d.height}px; 
+                                    background: ${backgroundStyle};
+                                    border-radius: ${d.borderRadius}px; 
+                                    position: relative; 
+                                    overflow: hidden;
+                                    box-shadow: ${boxShadowStyle};
+                                    ${animationStyle}
+                                    background-image: url('${d.imagePath}');
+                                    background-size: ${d.imageSize}%;
+                                    background-repeat: no-repeat; 
+                                    background-position: ${d.imagePosition};
+                                    object-fit: ${d.imageFit};
+                                    border: ${borderStyle};
+                                    display: inline-block;">
+                            ${d.shineAnimation ? `
+                                <div style="content: ''; 
+                                           position: absolute; 
+                                           top: -50%; 
+                                           left: -50%;
+                                           width: 200%; 
+                                           height: 200%;
+                                           background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+                                           ${shineAnimationStyle}
+                                           pointer-events: none;"></div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    // Image
+                    { name: 'imagePath', label: 'Chemin de l\'image', type: 'text', category: 'Image' },
+                    { name: 'altText', label: 'Texte alternatif', type: 'text', category: 'Image' },
+                    { name: 'imageSize', label: 'Taille image (%)', type: 'range', min: 20, max: 150, category: 'Image' },
+                    { name: 'imageFit', label: 'Ajustement', type: 'select', options: [
+                        { value: 'contain', label: 'Contenir (proportions)' },
+                        { value: 'cover', label: 'Couvrir (remplir)' },
+                        { value: 'fill', label: 'Étirer (déformer)' }
+                    ], category: 'Image' },
+                    { name: 'imagePosition', label: 'Position', type: 'select', options: [
+                        { value: 'center', label: 'Centre' },
+                        { value: 'top', label: 'Haut' },
+                        { value: 'bottom', label: 'Bas' },
+                        { value: 'left', label: 'Gauche' },
+                        { value: 'right', label: 'Droite' },
+                        { value: 'top left', label: 'Haut-gauche' },
+                        { value: 'top right', label: 'Haut-droite' },
+                        { value: 'bottom left', label: 'Bas-gauche' },
+                        { value: 'bottom right', label: 'Bas-droite' }
+                    ], category: 'Image' },
+                    
+                    // Dimensions
+                    { name: 'width', label: 'Largeur (px)', type: 'range', min: 200, max: 800, category: 'Dimensions' },
+                    { name: 'height', label: 'Hauteur (px)', type: 'range', min: 150, max: 600, category: 'Dimensions' },
+                    { name: 'borderRadius', label: 'Coins arrondis (px)', type: 'range', min: 0, max: 50, category: 'Dimensions' },
+                    
+                    // Animations
+                    { name: 'floatAnimation', label: 'Animation flottante', type: 'checkbox', category: 'Animations' },
+                    { name: 'floatDuration', label: 'Durée flottement (s)', type: 'range', min: 2, max: 12, category: 'Animations', condition: { field: 'floatAnimation', value: true } },
+                    { name: 'floatDistance', label: 'Distance flottement (px)', type: 'range', min: 5, max: 50, category: 'Animations', condition: { field: 'floatAnimation', value: true } },
+                    { name: 'shineAnimation', label: 'Effet brillant', type: 'checkbox', category: 'Animations' },
+                    { name: 'shineDuration', label: 'Durée brillant (s)', type: 'range', min: 2, max: 8, category: 'Animations', condition: { field: 'shineAnimation', value: true } },
+                    
+                    // Bordure
+                    { name: 'border', label: 'Bordure', type: 'checkbox', category: 'Bordure' },
+                    { name: 'borderWidth', label: 'Épaisseur (px)', type: 'range', min: 1, max: 10, category: 'Bordure', condition: { field: 'border', value: true } },
+                    { name: 'borderColor', label: 'Couleur bordure', type: 'color', category: 'Bordure', condition: { field: 'border', value: true } },
+                    { name: 'borderOpacity', label: 'Opacité bordure (%)', type: 'range', min: 0, max: 100, category: 'Bordure', condition: { field: 'border', value: true } },
+                    
+                    // Arrière-plan
+                    { name: 'backgroundType', label: 'Type arrière-plan', type: 'select', options: [
+                        { value: 'solid', label: 'Couleur unie' },
+                        { value: 'gradient', label: 'Dégradé' },
+                        { value: 'transparent', label: 'Transparent' }
+                    ], category: 'Arrière-plan' },
+                    { name: 'backgroundColor', label: 'Couleur de base', type: 'color', category: 'Arrière-plan', condition: { field: 'backgroundType', value: 'solid' } },
+                    { name: 'gradientStart', label: 'Couleur début', type: 'color', category: 'Arrière-plan', condition: { field: 'backgroundType', value: 'gradient' } },
+                    { name: 'gradientEnd', label: 'Couleur fin', type: 'color', category: 'Arrière-plan', condition: { field: 'backgroundType', value: 'gradient' } },
+                    { name: 'gradientDirection', label: 'Direction', type: 'select', options: [
+                        { value: 'to bottom', label: 'Vers le bas' },
+                        { value: 'to top', label: 'Vers le haut' },
+                        { value: 'to right', label: 'Vers la droite' },
+                        { value: 'to left', label: 'Vers la gauche' },
+                        { value: '45deg', label: 'Diagonal (45°)' },
+                        { value: '135deg', label: 'Diagonal (135°)' }
+                    ], category: 'Arrière-plan', condition: { field: 'backgroundType', value: 'gradient' } },
+                    { name: 'backgroundOpacity', label: 'Opacité (%)', type: 'range', min: 0, max: 100, category: 'Arrière-plan' },
+                    
+                    // Ombre
+                    { name: 'shadowEnabled', label: 'Ombre', type: 'checkbox', category: 'Ombre' },
+                    { name: 'shadowColor', label: 'Couleur ombre', type: 'color', category: 'Ombre', condition: { field: 'shadowEnabled', value: true } },
+                    { name: 'shadowOpacity', label: 'Opacité ombre (%)', type: 'range', min: 0, max: 100, category: 'Ombre', condition: { field: 'shadowEnabled', value: true } },
+                    { name: 'shadowBlur', label: 'Flou (px)', type: 'range', min: 0, max: 30, category: 'Ombre', condition: { field: 'shadowEnabled', value: true } },
+                    { name: 'shadowOffsetX', label: 'Décalage X (px)', type: 'range', min: -20, max: 20, category: 'Ombre', condition: { field: 'shadowEnabled', value: true } },
+                    { name: 'shadowOffsetY', label: 'Décalage Y (px)', type: 'range', min: -20, max: 20, category: 'Ombre', condition: { field: 'shadowEnabled', value: true } },
+                    
+                    // Position
+                    { name: 'containerAlignment', label: 'Alignement', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' },
+                        { value: 'center', label: 'Centre' },
+                        { value: 'right', label: 'Droite' }
+                    ], category: 'Position' },
+                    { name: 'containerPaddingTop', label: 'Espacement haut (px)', type: 'range', min: 0, max: 100, category: 'Position' },
+                    { name: 'containerPaddingBottom', label: 'Espacement bas (px)', type: 'range', min: 0, max: 100, category: 'Position' },
+                    { name: 'containerPaddingLeft', label: 'Espacement gauche (px)', type: 'range', min: 0, max: 100, category: 'Position' },
+                    { name: 'containerPaddingRight', label: 'Espacement droite (px)', type: 'range', min: 0, max: 100, category: 'Position' }
+                ];
+            }
+
+            getElements() {
+                return [
+                    { id: 'image-container', name: 'Conteneur image', editable: true },
+                    { id: 'animated-image', name: 'Image animée', editable: true },
+                    { id: 'shine-effect', name: 'Effet brillant', editable: true }
+                ];
+            }
+
+            validate(data) {
+                const errors = [];
+                if (!data.imagePath || data.imagePath.trim() === '') {
+                    errors.push('Le chemin de l\'image ne peut pas être vide');
+                }
+                if (data.width < 100) errors.push('La largeur doit être d\'au moins 100px');
+                if (data.height < 75) errors.push('La hauteur doit être d\'au moins 75px');
+                return { isValid: errors.length === 0, errors: errors };
+            }
+        }
+
         class ComparisonWidget {
             constructor() {
                 this.id = 'comparison';
@@ -4808,6 +5068,7 @@
                 this.baseWidgets = [
                     TextSimpleWidget,
                     LogoWidget,
+                    ImageAnimatedWidget,
                     HeroTitleWidget,
                     PricingCardWidget,
                     CallToActionWidget,
@@ -4834,6 +5095,7 @@
                 this.widgetCategories = {
                     'Navigation': [],
                     'Contenu': [],
+                    'Médias': [],
                     'Commerce': [],
                     'Action': []
                 };
@@ -7122,6 +7384,11 @@
                 // Gestion des propriétés avancées du titre CTA
                 if (this.selectedWidget && this.selectedWidget.type === 'call-to-action') {
                     this.updateCallToActionRealTime(container, propertyName, value);
+                }
+                
+                // Gestion des propriétés avancées du widget Image Animée
+                if (this.selectedWidget && this.selectedWidget.type === 'image-animated') {
+                    this.updateImageAnimatedRealTime(container, propertyName, value);
                 }
                 
                 // Gestion des propriétés avancées du widget Comparison
@@ -10308,6 +10575,120 @@ Folder('${id}')" title="Renommer">
                 }
                 
                 console.log(`✅ updateCallToActionRealTime terminé pour ${propertyName}`);
+            }
+
+            // Fonction de mise à jour temps réel spécialement pour le ImageAnimatedWidget
+            updateImageAnimatedRealTime(container, propertyName, value) {
+                console.log(`🔄 updateImageAnimatedRealTime: ${propertyName} = ${value}`);
+                
+                // Rôle      : Sélecteur de l'image principale du widget
+                // Type      : HTMLElement
+                // Unité     : sans unité (élément DOM)
+                // Exemple   : <img> ou élément avec background-image
+                const imageElement = container.querySelector('.animated-image, img');
+                
+                // Rôle      : Conteneur principal du widget image animée
+                // Type      : HTMLElement  
+                // Unité     : sans unité (élément DOM)
+                // Exemple   : <div class="image-animated-container">
+                const imageContainer = container.querySelector('.image-animated-container, .image-animated-widget');
+                
+                // Propriétés de l'image
+                if (propertyName === 'imagePath') {
+                    if (imageElement) {
+                        if (imageElement.tagName === 'IMG') {
+                            imageElement.src = value;
+                        } else {
+                            imageElement.style.backgroundImage = `url('${value}')`;
+                        }
+                        console.log(`✅ Chemin d'image mis à jour: ${value}`);
+                    }
+                }
+                else if (propertyName === 'altText') {
+                    if (imageElement && imageElement.tagName === 'IMG') {
+                        imageElement.alt = value;
+                        console.log(`✅ Texte alternatif mis à jour: ${value}`);
+                    }
+                }
+                
+                // Propriétés de dimensions
+                else if (propertyName === 'width') {
+                    if (imageContainer) {
+                        imageContainer.style.width = `${value}px`;
+                        console.log(`✅ Largeur mise à jour: ${value}px`);
+                    }
+                }
+                else if (propertyName === 'height') {
+                    if (imageContainer) {
+                        imageContainer.style.height = `${value}px`;
+                        console.log(`✅ Hauteur mise à jour: ${value}px`);
+                    }
+                }
+                
+                // Propriétés d'animations
+                else if (propertyName === 'floatAnimation') {
+                    if (imageContainer) {
+                        if (value) {
+                            imageContainer.style.animation = 'float 6s ease-in-out infinite';
+                        } else {
+                            imageContainer.style.animation = 'none';
+                        }
+                        console.log(`✅ Animation flottante ${value ? 'activée' : 'désactivée'}`);
+                    }
+                }
+                else if (propertyName === 'floatDuration') {
+                    if (imageContainer && imageContainer.style.animation.includes('float')) {
+                        imageContainer.style.animation = `float ${value}s ease-in-out infinite`;
+                        console.log(`✅ Durée animation flottante: ${value}s`);
+                    }
+                }
+                
+                // Propriétés de bordure
+                else if (propertyName === 'borderRadius') {
+                    if (imageContainer) {
+                        imageContainer.style.borderRadius = `${value}px`;
+                        console.log(`✅ Bordure arrondie mise à jour: ${value}px`);
+                    }
+                }
+                else if (propertyName === 'borderWidth') {
+                    if (imageContainer) {
+                        const currentBorder = imageContainer.style.border || '';
+                        const borderParts = currentBorder.split(' ');
+                        borderParts[0] = `${value}px`;
+                        imageContainer.style.borderWidth = `${value}px`;
+                        console.log(`✅ Épaisseur bordure mise à jour: ${value}px`);
+                    }
+                }
+                else if (propertyName === 'borderColor' || propertyName === 'borderOpacity') {
+                    if (imageContainer) {
+                        // Récupérer les valeurs actuelles depuis les données du widget
+                        const widget = this.selectedWidget;
+                        if (widget) {
+                            const borderColor = widget.data.borderColor || '#10b981';
+                            const borderOpacity = (widget.data.borderOpacity || 30) / 100;
+                            const borderWidth = widget.data.borderWidth || 3;
+                            
+                            // Convertir hex en rgba
+                            const hex = borderColor.replace('#', '');
+                            const r = parseInt(hex.substr(0, 2), 16);
+                            const g = parseInt(hex.substr(2, 2), 16);
+                            const b = parseInt(hex.substr(4, 2), 16);
+                            
+                            if (widget.data.border) {
+                                imageContainer.style.border = `${borderWidth}px solid rgba(${r}, ${g}, ${b}, ${borderOpacity})`;
+                            }
+                            console.log(`✅ Couleur/opacité bordure mise à jour`);
+                        }
+                    }
+                }
+                
+                // Pour les propriétés complexes (arrière-plan, ombre), forcer un re-render complet
+                else if (propertyName.includes('background') || propertyName.includes('shadow') || propertyName.includes('shine')) {
+                    console.log(`🔄 Propriété complexe détectée (${propertyName}), re-render complet...`);
+                    this.updatePreview();
+                }
+                
+                console.log(`✅ updateImageAnimatedRealTime terminé pour ${propertyName}`);
             }
         }
 
