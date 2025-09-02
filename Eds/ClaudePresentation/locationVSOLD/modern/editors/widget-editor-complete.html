@@ -3083,6 +3083,7 @@
                         { text: 'Contrat flexible adapté à vos besoins', emoji: '✅', color: '#10b981' },
                         { text: 'Support québécois en français 24/7', emoji: '✅', color: '#10b981' }
                     ],
+                    advantagesColumns: 2,
                     
                     // Style général
                     backgroundColor: '#1e40af',
@@ -3164,11 +3165,12 @@
                 const mainTitleStyles = this.generateTextStyles(d, 'mainTitle');
                 const subtitleStyles = this.generateTextStyles(d, 'subtitle');
                 
-                // Créer la liste des avantages
+                // Créer la liste des avantages avec système de colonnes
+                const columnsCount = Math.min(Math.max(d.advantagesColumns || 2, 1), 4);
                 const advantagesHtml = d.advantages.map(advantage => `
-                    <div style="display: flex; align-items: center; margin-bottom: 15px; font-size: 16px;">
-                        <span style="font-size: 20px; margin-right: 12px;">${advantage.emoji}</span>
-                        <span style="color: ${advantage.color}; font-weight: 500;">${advantage.text}</span>
+                    <div class="advantage-item" style="display: flex; align-items: center; margin-bottom: 15px; font-size: 16px;">
+                        <span class="advantage-emoji" style="font-size: 20px; margin-right: 12px;">${advantage.emoji}</span>
+                        <span class="advantage-text" style="color: ${advantage.color}; font-weight: 500;">${advantage.text}</span>
                     </div>
                 `).join('');
                 
@@ -3240,7 +3242,7 @@
                         </div>
                         
                         <!-- Section Avantages -->
-                        <div style="max-width: 800px; margin: 0 auto;">
+                        <div class="advantages-container" style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(${columnsCount}, 1fr); gap: 20px; align-items: start;">
                             ${advantagesHtml}
                         </div>
                         
@@ -3336,7 +3338,10 @@
                     { name: 'secondaryButtonColor', label: 'Couleur bouton secondaire', type: 'color', category: 'Boutons' },
                     { name: 'secondaryButtonTextColor', label: 'Couleur texte secondaire', type: 'color', category: 'Boutons' },
                     
-                    // 7. Style général
+                    // 7. Avantages - Mise en page
+                    { name: 'advantagesColumns', label: 'Nombre de colonnes', type: 'range', min: 1, max: 4, category: 'Avantages - Affichage' },
+                    
+                    // 8. Style général
                     { name: 'backgroundColor', label: 'Couleur de fond', type: 'color', category: 'Style Général' },
                     { name: 'containerPadding', label: 'Espacement conteneur', type: 'range', min: 20, max: 120, category: 'Style Général' },
                     { name: 'borderRadius', label: 'Coins arrondis', type: 'range', min: 0, max: 32, category: 'Style Général' },
@@ -7116,7 +7121,7 @@
                 
                 // Gestion des propriétés avancées du titre CTA
                 if (this.selectedWidget && this.selectedWidget.type === 'call-to-action') {
-                    this.updateCTAAdvancedRealTime(container, propertyName, value);
+                    this.updateCallToActionRealTime(container, propertyName, value);
                 }
                 
                 // Gestion des propriétés avancées du widget Comparison
@@ -10073,7 +10078,7 @@ Folder('${id}')" title="Renommer">
             updateCallToActionAdvantageInDOM(index, advantageData) {
                 console.log(`🔄 updateCallToActionAdvantageInDOM: Mise à jour avantage[${index}]`, advantageData);
                 
-                // Mettre à jour dans l'onglet Elements
+                // 1. Mettre à jour dans l'onglet Elements (éditeur)
                 const advantageItem = document.querySelector(`[data-advantage-index="${index}"]`);
                 if (advantageItem) {
                     const textInput = advantageItem.querySelector('.advantage-text');
@@ -10084,8 +10089,44 @@ Folder('${id}')" title="Renommer">
                     if (emojiInput) emojiInput.value = advantageData.emoji;
                     if (colorInput) colorInput.value = advantageData.color;
                     
-                    console.log(`✅ DOM mis à jour pour l'avantage[${index}]`);
+                    console.log(`✅ DOM éditeur mis à jour pour l'avantage[${index}]`);
                 }
+                
+                // 2. Mettre à jour dans le widget canvas
+                const widget = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (widget) {
+                    const canvasAdvantages = widget.querySelectorAll('.advantage-item');
+                    if (canvasAdvantages[index]) {
+                        const emojiSpan = canvasAdvantages[index].querySelector('.advantage-emoji');
+                        const textSpan = canvasAdvantages[index].querySelector('.advantage-text');
+                        
+                        if (emojiSpan) emojiSpan.textContent = advantageData.emoji;
+                        if (textSpan) {
+                            textSpan.textContent = advantageData.text;
+                            textSpan.style.color = advantageData.color;
+                        }
+                        console.log(`✅ Canvas mis à jour pour l'avantage[${index}]`);
+                    }
+                }
+                
+                // 3. Mettre à jour dans la preview
+                const preview = document.getElementById('preview');
+                if (preview) {
+                    const previewAdvantages = preview.querySelectorAll('.cta-location-section .advantage-item');
+                    if (previewAdvantages[index]) {
+                        const emojiSpan = previewAdvantages[index].querySelector('.advantage-emoji');
+                        const textSpan = previewAdvantages[index].querySelector('.advantage-text');
+                        
+                        if (emojiSpan) emojiSpan.textContent = advantageData.emoji;
+                        if (textSpan) {
+                            textSpan.textContent = advantageData.text;
+                            textSpan.style.color = advantageData.color;
+                        }
+                        console.log(`✅ Preview mis à jour pour l'avantage[${index}]`);
+                    }
+                }
+                
+                console.log(`✅ updateCallToActionAdvantageInDOM complet pour l'avantage[${index}]`);
             }
             
             verifyAndFixCallToActionEmojiDisplay(index, expectedData) {
@@ -10107,10 +10148,10 @@ Folder('${id}')" title="Renommer">
                 // Vérifier la prévisualisation
                 const preview = document.getElementById('preview');
                 if (preview) {
-                    const advantageElements = preview.querySelectorAll('.cta-location-section div[style*="display: flex"]');
+                    const advantageElements = preview.querySelectorAll('.cta-location-section .advantage-item');
                     
                     if (advantageElements[index]) {
-                        const emojiSpan = advantageElements[index].querySelector('span:first-child');
+                        const emojiSpan = advantageElements[index].querySelector('.advantage-emoji');
                         
                         if (emojiSpan && emojiSpan.textContent !== expectedData.emoji) {
                             console.log(`❌ Emoji mismatch dans la preview - Attendu: "${expectedData.emoji}", Trouvé: "${emojiSpan.textContent}"`);
@@ -10127,6 +10168,146 @@ Folder('${id}')" title="Renommer">
                 } else {
                     console.log(`✅ Emoji correctement affiché partout pour l'avantage[${index}]`);
                 }
+            }
+            
+            // Nouvelle fonction de mise à jour temps réel spécialement pour le CallToActionWidget
+            updateCallToActionRealTime(container, propertyName, value) {
+                console.log(`🔄 updateCallToActionRealTime: ${propertyName} = ${value}`);
+                
+                // Propriétés du titre principal (mainTitle)
+                if (propertyName.startsWith('mainTitle')) {
+                    const mainTitle = container.querySelector('h1, .cta-location-section h1');
+                    if (mainTitle) {
+                        switch (propertyName) {
+                            case 'mainTitle':
+                                mainTitle.textContent = value;
+                                break;
+                            case 'mainTitleSize':
+                                mainTitle.style.fontSize = `${value}px`;
+                                break;
+                            case 'mainTitleColor':
+                                mainTitle.style.color = value;
+                                break;
+                            case 'mainTitleAlignment':
+                                mainTitle.style.textAlign = value;
+                                break;
+                            case 'mainTitleIsBold':
+                                mainTitle.style.fontWeight = value ? 'bold' : 'normal';
+                                break;
+                            case 'mainTitleIsItalic':
+                                mainTitle.style.fontStyle = value ? 'italic' : 'normal';
+                                break;
+                        }
+                        console.log(`✅ Titre principal mis à jour: ${propertyName}`);
+                    }
+                }
+                
+                // Propriétés du sous-titre
+                else if (propertyName.startsWith('subtitle')) {
+                    const subtitle = container.querySelector('.cta-location-section > p:first-of-type');
+                    if (subtitle) {
+                        switch (propertyName) {
+                            case 'subtitle':
+                                subtitle.textContent = value;
+                                break;
+                            case 'subtitleSize':
+                                subtitle.style.fontSize = `${value}px`;
+                                break;
+                            case 'subtitleColor':
+                                subtitle.style.color = value;
+                                break;
+                            case 'subtitleAlignment':
+                                subtitle.style.textAlign = value;
+                                break;
+                            case 'subtitleIsBold':
+                                subtitle.style.fontWeight = value ? 'bold' : 'normal';
+                                break;
+                            case 'subtitleIsItalic':
+                                subtitle.style.fontStyle = value ? 'italic' : 'normal';
+                                break;
+                        }
+                        console.log(`✅ Sous-titre mis à jour: ${propertyName}`);
+                    }
+                }
+                
+                // Propriétés de colonnes des avantages
+                else if (propertyName === 'advantagesColumns') {
+                    const advantagesContainer = container.querySelector('.advantages-container');
+                    if (advantagesContainer) {
+                        const columnsCount = Math.min(Math.max(parseInt(value), 1), 4);
+                        advantagesContainer.style.gridTemplateColumns = `repeat(${columnsCount}, 1fr)`;
+                        console.log(`✅ Colonnes des avantages mises à jour: ${columnsCount}`);
+                    }
+                    
+                    // Aussi mettre à jour dans la preview
+                    const preview = document.getElementById('preview');
+                    if (preview) {
+                        const previewContainer = preview.querySelector('.advantages-container');
+                        if (previewContainer) {
+                            const columnsCount = Math.min(Math.max(parseInt(value), 1), 4);
+                            previewContainer.style.gridTemplateColumns = `repeat(${columnsCount}, 1fr)`;
+                        }
+                    }
+                }
+                
+                // Propriétés de style général
+                else if (propertyName === 'backgroundColor') {
+                    const ctaSection = container.querySelector('.cta-location-section');
+                    if (ctaSection) {
+                        ctaSection.style.background = value;
+                        console.log(`✅ Couleur de fond mise à jour: ${value}`);
+                    }
+                }
+                else if (propertyName === 'containerPadding') {
+                    const ctaSection = container.querySelector('.cta-location-section');
+                    if (ctaSection) {
+                        ctaSection.style.padding = `${value}px`;
+                        console.log(`✅ Padding conteneur mis à jour: ${value}px`);
+                    }
+                }
+                else if (propertyName === 'borderRadius') {
+                    const ctaSection = container.querySelector('.cta-location-section');
+                    if (ctaSection) {
+                        ctaSection.style.borderRadius = `${value}px`;
+                        console.log(`✅ Border radius mis à jour: ${value}px`);
+                    }
+                }
+                
+                // Pour les propriétés complexes (sections de contact, boutons), forcer un re-render complet
+                else if (propertyName.includes('phone') || propertyName.includes('email') || propertyName.includes('delivery') || propertyName.includes('Button')) {
+                    console.log(`🔄 Propriété complexe détectée (${propertyName}), re-render complet...`);
+                    this.updatePreview();
+                }
+                
+                // Anciennes propriétés pour rétrocompatibilité
+                else if (['title', 'titleSize', 'titleColor', 'titleAlignment', 'titleIsBold', 'titleIsItalic'].includes(propertyName)) {
+                    const title = container.querySelector('.cta-title, h2, h1');
+                    if (title) {
+                        switch (propertyName) {
+                            case 'title':
+                                title.textContent = value;
+                                break;
+                            case 'titleSize':
+                                title.style.fontSize = `${value}px`;
+                                break;
+                            case 'titleColor':
+                                title.style.color = value;
+                                break;
+                            case 'titleAlignment':
+                                title.style.textAlign = value;
+                                break;
+                            case 'titleIsBold':
+                                title.style.fontWeight = value ? 'bold' : 'normal';
+                                break;
+                            case 'titleIsItalic':
+                                title.style.fontStyle = value ? 'italic' : 'normal';
+                                break;
+                        }
+                        console.log(`✅ Propriété de rétrocompatibilité mise à jour: ${propertyName}`);
+                    }
+                }
+                
+                console.log(`✅ updateCallToActionRealTime terminé pour ${propertyName}`);
             }
         }
 
