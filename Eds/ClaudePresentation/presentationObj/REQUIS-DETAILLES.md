@@ -1,13 +1,24 @@
 # 📋 SPÉCIFICATIONS DÉTAILLÉES - ÉDITEUR DE WIDGETS & PRESENTATIONS STANDALONE
 
-## 🎯 VISION GÉNÉRALE
+## Sommaire
+- [Vision générale](#vision-generale)
+- [Nouvelle architecture widgets](#architecture-widgets)
+- [Décomposition widgets – architecture atomique](#decomposition-widgets)
+  - [Widgets atomiques](#widgets-atomiques)
+- [Plan d'implémentation](#plan-implementation)
+  - [Phase 1 : Fondations](#phase1)
+  - [Phase 2 : Niveau Figma](#phase2)
+  - [Phase 3 : Pro Features & Marketing avancé](#phase3)
+  - [Phase 4 : Innovation](#phase4)
+
+## <a id="vision-generale"></a>🎯 VISION GÉNÉRALE
 Éditeur standalone WYSIWYG avancé pour création de widgets custom et presentations marketing avec architecture BaseWidget universelle, composition hiérarchique récursive infinie, glisser-déposer intelligent, sync temps réel editor↔viewer et sauvegarde automatique complète. 
 
 **Mission** : Créer un éditeur de **niveau égal ou supérieur à Figma 2024** spécialisé pour presentations marketing, 100% standalone avec **34 widgets** et fonctionnalités avancées marketing.
 
 ---
 
-## 🎨 NOUVELLE ARCHITECTURE WIDGETS - NIVEAU FIGMA 2024
+## <a id="architecture-widgets"></a>🎨 NOUVELLE ARCHITECTURE WIDGETS - NIVEAU FIGMA 2024
 
 ### 🏗️ ARCHITECTURE BASEWIDGET (Classe Abstraite Universelle + Figma Features)
 ```
@@ -880,9 +891,9 @@ DÉCOMPOSITION MODULAIRE:
 - **Visibilité** : Show/hide widgets individuels
 - **Verrouillage** : Lock/unlock pour éviter déplacements accidentels
 
-## 🧩 DÉCOMPOSITION WIDGETS - ARCHITECTURE ATOMIQUE
+## <a id="decomposition-widgets"></a>🧩 DÉCOMPOSITION WIDGETS - ARCHITECTURE ATOMIQUE
 
-### WIDGETS ATOMIQUES (Niveau 0 - Non décomposables)
+### <a id="widgets-atomiques"></a>WIDGETS ATOMIQUES (Niveau 0 - Non décomposables)
 
 #### 1. **TexteAtomique**
 ```
@@ -1245,9 +1256,9 @@ Layout options:
 | **Mode Présentation** | Figma Slides | ✅ **Plein écran interactif** | 🚀 **SUPÉRIEUR** |
 | **Intégrations CRM/Email** | ❌ | ✅ **Multi-canal marketing** | 🚀 **SUPÉRIEUR** |
 
-## 🎆 PLAN D'IMPLÉMENTATION RÉVISÉ - NIVEAU FIGMA 2024
+## <a id="plan-implementation"></a>🎆 PLAN D'IMPLÉMENTATION RÉVISÉ - NIVEAU FIGMA 2024
 
-### **PHASE 1 : FONDATIONS** ⭐ **PRIORITÉ VALIDÉE**
+### <a id="phase1"></a>**PHASE 1 : FONDATIONS** ⭐ **PRIORITÉ VALIDÉE**
 1. **BaseWidget** + propriétés universelles + sync temps réel
 2. **Widgets Atomiques** (6 widgets de base avec états hover/focus)
 3. **GrilleCanvas** illimitée + glisser-déposer de base
@@ -1255,7 +1266,7 @@ Layout options:
 5. **Sync basique** Editor↔Viewer temps réel
 6. **ÉlémentUniversel** (widget modulaire universel)
 
-### **PHASE 2 : NIVEAU FIGMA** 🔥 **NOUVELLES PRIORITÉS CRITIQUES**
+### <a id="phase2"></a>**PHASE 2 : NIVEAU FIGMA** 🔥 **NOUVELLES PRIORITÉS CRITIQUES**
 7. **Auto-Layout Responsive** (contraintes + 3 breakpoints + preview)
 8. **Design Tokens & Variables** (couleurs, espacement, typo globales)
 9. **Prototypage Interactif** (états multiples + animations + transitions)
@@ -1266,7 +1277,7 @@ Layout options:
 14. **Accessibilité WCAG 2.2** (alt, aria, contraste, navigation clavier)
 15. **Templates & Composants** (bibliothèque + import/export)
 
-### **PHASE 3 : PRO FEATURES & MARKETING AVANCÉ**
+### <a id="phase3"></a>**PHASE 3 : PRO FEATURES & MARKETING AVANCÉ**
 16. **Analytics & Performance Marketing** (tracking, heatmaps, A/B testing)
 17. **Internationalisation** (5 langues + RTL + traductions temps réel)
 18. **Modes spécialisés** (Design, Prototype, Inspect, Comment)
@@ -1276,7 +1287,7 @@ Layout options:
 22. **AI Assistant** (suggestions layout, optimisations, génération)
 23. **Export ZIP** complet + API d'intégration
 
-### **PHASE 4 : INNOVATION** 🚀 **AVANTAGES UNIQUES vs FIGMA**
+### <a id="phase4"></a>**PHASE 4 : INNOVATION** 🚀 **AVANTAGES UNIQUES vs FIGMA**
 18. **Mode Présentation** interactif plein écran (comme PowerPoint avancé)
 19. **Standalone 100%** (aucune dépendance cloud/internet)
 20. **Marketing-First** (templates spécialisés présentations produits)
