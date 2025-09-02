@@ -2440,6 +2440,10 @@
                 this.setupEventListeners();
                 this.renderWidgetLibrary();
                 this.updatePreview();
+                
+                // Restaurer l'état précédent si disponible
+                this.restoreState();
+                
                 this.setStatus('Éditeur prêt', 'success');
             }
 
@@ -2451,6 +2455,112 @@
                     }
                     this.widgetCategories[instance.category].push(instance);
                 });
+            }
+
+            // Rôle      : Sauvegarder automatiquement l'état actuel de l'éditeur
+            // Type      : function
+            // Unité     : sans unité
+            // Formule   : localStorage = JSON.stringify(état_complet)
+            // Exemple   : Sauvegarde widgets, panneau, sélection dans le localStorage
+            autoSave() {
+                try {
+                    const state = {
+                        // État des widgets
+                        widgets: this.widgets.map(widget => ({
+                            id: widget.id,
+                            type: widget.type,
+                            data: widget.data,
+                            position: widget.position,
+                            size: widget.size
+                        })),
+                        
+                        // Widget sélectionné
+                        selectedWidgetId: this.selectedWidget ? this.selectedWidget.id : null,
+                        
+                        // Largeur du panneau propriétés
+                        propertiesWidth: getComputedStyle(document.documentElement).getPropertyValue('--properties-width'),
+                        
+                        // État de l'interface
+                        currentFolder: this.currentFolder,
+                        searchTerm: this.searchTerm,
+                        favoriteWidgets: Array.from(this.favoriteWidgets),
+                        recentWidgets: Array.from(this.recentWidgets),
+                        
+                        // Timestamp de sauvegarde
+                        savedAt: Date.now()
+                    };
+                    
+                    localStorage.setItem('widgetEditor_autoSave', JSON.stringify(state));
+                } catch (error) {
+                    console.warn('Erreur lors de la sauvegarde automatique:', error);
+                }
+            }
+
+            // Rôle      : Restaurer l'état précédemment sauvegardé
+            // Type      : function  
+            // Unité     : sans unité
+            // Formule   : état_restauré = JSON.parse(localStorage)
+            // Exemple   : Recharge widgets, panneau, sélection depuis localStorage
+            restoreState() {
+                try {
+                    const savedState = localStorage.getItem('widgetEditor_autoSave');
+                    if (!savedState) return;
+                    
+                    const state = JSON.parse(savedState);
+                    
+                    // Restaurer les widgets
+                    if (state.widgets && state.widgets.length > 0) {
+                        this.widgets = [];
+                        
+                        state.widgets.forEach(widgetData => {
+                            const WidgetClass = this.availableWidgets.find(w => new w().id === widgetData.type);
+                            if (WidgetClass) {
+                                const widget = {
+                                    id: widgetData.id,
+                                    type: widgetData.type,
+                                    data: widgetData.data || {},
+                                    position: widgetData.position || { col: 1, row: 1 },
+                                    size: widgetData.size || { width: 3, height: 2 },
+                                    instance: new WidgetClass()
+                                };
+                                this.widgets.push(widget);
+                            }
+                        });
+                        
+                        // Re-rendre la grille avec les widgets restaurés
+                        this.renderCanvas();
+                        
+                        // Restaurer la sélection
+                        if (state.selectedWidgetId) {
+                            this.selectWidget(state.selectedWidgetId);
+                        }
+                        
+                        // Masquer l'état vide
+                        const emptyState = document.getElementById('emptyState');
+                        if (emptyState) {
+                            emptyState.classList.add('hidden');
+                            emptyState.style.display = 'none';
+                        }
+                    }
+                    
+                    // Restaurer la largeur du panneau propriétés
+                    if (state.propertiesWidth) {
+                        document.documentElement.style.setProperty('--properties-width', state.propertiesWidth);
+                        const propertiesPanel = document.querySelector('.properties-panel');
+                        if (propertiesPanel) {
+                            propertiesPanel.style.width = state.propertiesWidth;
+                        }
+                    }
+                    
+                    // Restaurer l'état de l'interface
+                    if (state.currentFolder) this.currentFolder = state.currentFolder;
+                    if (state.searchTerm) this.searchTerm = state.searchTerm;
+                    if (state.favoriteWidgets) this.favoriteWidgets = new Set(state.favoriteWidgets);
+                    if (state.recentWidgets) this.recentWidgets = new Set(state.recentWidgets);
+                    
+                } catch (error) {
+                    console.warn('Erreur lors de la restauration:', error);
+                }
             }
 
             setupEventListeners() {
@@ -2720,6 +2830,9 @@
                 this.updateBackgroundContainer();
                 
                 this.setStatus(`Widget ${widgetInstance.name} ajouté`, 'success');
+                
+                // Sauvegarde automatique après ajout du widget
+                this.autoSave();
             }
 
             renderCanvas() {
@@ -2809,6 +2922,9 @@
                     this.selectedWidget = null;
                     this.updatePropertiesPanel();
                 }
+                
+                // Sauvegarde automatique après sélection/désélection
+                this.autoSave();
             }
 
             updatePropertiesPanel() {
@@ -3155,14 +3271,6 @@
             updateProperty(propertyName, value) {
                 if (!this.selectedWidget) return;
                 
-                /* 
-                # Rôle      : Log de débogage pour tracer les mises à jour de propriétés
-                # Type      : console.log
-                # Unité     : sans unité
-                # Formule   : console.log(nom_propriété, valeur, type_widget)
-                # Exemple   : "Mise à jour imagePath: ../assets/test.png pour widget logo"
-                */
-                console.log(`🔄 Mise à jour ${propertyName}: ${value} pour widget ${this.selectedWidget.type}`);
                 
                 // Conversion des types
                 if (value === 'true') value = true;
@@ -3219,6 +3327,9 @@
                 
                 // Mettre à jour aussi le viewer
                 this.updatePreview();
+                
+                // Sauvegarde automatique après mise à jour de propriété
+                this.autoSave();
                 
                 // Pas de setStatus pour éviter le spam lors de l'input continu
             }
@@ -3558,6 +3669,9 @@
                 }
                 
                 this.setStatus('Widget supprimé', 'success');
+                
+                // Sauvegarde automatique après suppression du widget
+                this.autoSave();
             }
 
             updatePreview() {
@@ -4976,6 +5090,11 @@ Folder('${id}')" title="Renommer">
                     resizeHandle.classList.remove('resizing');
                     document.body.style.cursor = '';
                     document.body.style.userSelect = '';
+                    
+                    // Sauvegarde automatique après redimensionnement
+                    if (window.widgetEditor) {
+                        window.widgetEditor.autoSave();
+                    }
                 });
             }
             
