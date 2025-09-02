@@ -5605,11 +5605,26 @@
                 
                 const widgetInstance = new WidgetClass();
                 
+                // Rôle      : Vérifier s'il s'agit d'un widget personnalisé pour restaurer ses propriétés
+                // Type      : boolean check et object retrieval
+                // Unité     : sans unité
+                // Exemple   : Widget "Mon Logo" avec size: {width: 6, height: 4}, position: {col: 2, row: 1}
+                let customWidget = null;
+                if (widgetInstance.isCustom && widgetInstance.customId) {
+                    const customWidgets = JSON.parse(localStorage.getItem('customWidgets') || '[]');
+                    customWidget = customWidgets.find(w => w.id === widgetInstance.customId);
+                }
+                
                 // Position sera définie après la taille
                 let position;
                 
-                // Définir une taille par défaut selon le type de widget
+                // Définir une taille par défaut selon le type de widget ou restaurer depuis le widget personnalisé
                 let defaultSize = { width: 3, height: 2 };
+                
+                // Si c'est un widget personnalisé, utiliser ses dimensions sauvegardées
+                if (customWidget && customWidget.size) {
+                    defaultSize = customWidget.size;
+                } else {
                 switch (widgetType) {
                     case 'feature-grid':
                         defaultSize = { width: 8, height: 4 }; // Plus large pour éviter le crop
@@ -5632,18 +5647,47 @@
                     default:
                         defaultSize = { width: 3, height: 2 };
                 }
+                }
                 
                 // Trouver une position libre avec la taille appropriée (centre vers l'extérieur)
-                position = this.findFreeGridPosition(defaultSize.width, defaultSize.height);
+                // ou utiliser la position sauvegardée pour les widgets personnalisés
+                if (customWidget && customWidget.position) {
+                    position = customWidget.position;
+                } else {
+                    position = this.findFreeGridPosition(defaultSize.width, defaultSize.height);
+                }
                 
+                // Rôle      : Créer l'objet widgetData avec toutes les propriétés restaurées
+                // Type      : object creation
+                // Unité     : sans unité  
+                // Formule   : widget = données_par_défaut + propriétés_personnalisées_si_présentes
+                // Exemple   : Widget personnalisé avec data, size, position, elements, organization restaurées
                 const widgetData = {
                     id: `widget-${Date.now()}`,
                     type: widgetType,
                     instance: widgetInstance,
-                    data: { ...widgetInstance.defaultData },
+                    data: customWidget ? { ...customWidget.data } : { ...widgetInstance.defaultData },
                     position: position,
                     size: defaultSize
                 };
+                
+                // Restaurer les propriétés supplémentaires des widgets personnalisés
+                if (customWidget) {
+                    // Restaurer les éléments personnalisés si présents
+                    if (customWidget.elements) {
+                        widgetData.elements = customWidget.elements;
+                    }
+                    
+                    // Restaurer les propriétés d'organisation si présentes
+                    if (customWidget.organization) {
+                        widgetData.organization = customWidget.organization;
+                    }
+                    
+                    // Marquer comme widget personnalisé pour permettre la suppression
+                    widgetData.isCustom = true;
+                    widgetData.customName = customWidget.name;
+                    widgetData.customId = customWidget.id;
+                }
                 
                 this.widgets.push(widgetData);
                 // Historique supprimé
@@ -9321,18 +9365,47 @@ Folder('${id}')" title="Renommer">
                 }
                 
                 /* 
-                # Rôle      : Création du template de widget personnalisé
+                # Rôle      : Création du template de widget personnalisé complet
                 # Type      : object creation
                 # Unité     : sans unité
-                # Formule   : template = {id, name, data_copiée, type, timestamp, isCustom}
-                # Exemple   : {id: "custom_123", name: "Mon Logo", data: {...}, type: "logo", isCustom: true}
+                # Formule   : template = {id, name, data_copiée, type, size, position, elements, timestamp, isCustom}
+                # Exemple   : {id: "custom_123", name: "Mon Logo", data: {...}, type: "logo", size: {width: 6, height: 4}, position: {col: 2, row: 1}, isCustom: true}
                 */
                 const customTemplate = {
                     id: `custom_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
                     name: customName,
                     type: this.selectedWidget.type,
-                    data: JSON.parse(JSON.stringify(this.selectedWidget.data)), // Deep copy
+                    
+                    // Rôle      : Copie profonde de toutes les propriétés éditables du widget
+                    // Type      : object (deep copy)
+                    // Unité     : sans unité
+                    // Exemple   : {imagePath: "./logo.png", width: 500, borderColor: "#10b981"}
+                    data: JSON.parse(JSON.stringify(this.selectedWidget.data)),
+                    
+                    // Rôle      : Dimensions du widget dans la grille (onglet Organisation)
+                    // Type      : object {width: number, height: number}
+                    // Unité     : colonnes/rangées de grille
+                    // Exemple   : {width: 6, height: 4}
                     size: JSON.parse(JSON.stringify(this.selectedWidget.size || { width: 3, height: 2 })),
+                    
+                    // Rôle      : Position du widget dans la grille (onglet Organisation)
+                    // Type      : object {col: number, row: number}
+                    // Unité     : coordonnées de grille (col: 1-12, row: 1-8)
+                    // Exemple   : {col: 2, row: 1}
+                    position: JSON.parse(JSON.stringify(this.selectedWidget.position || { col: 1, row: 1 })),
+                    
+                    // Rôle      : Éléments personnalisés du widget si disponibles (onglet Éléments)
+                    // Type      : object ou null
+                    // Unité     : sans unité
+                    // Exemple   : {customElements: [...], elementConfig: {...}}
+                    elements: this.selectedWidget.elements ? JSON.parse(JSON.stringify(this.selectedWidget.elements)) : null,
+                    
+                    // Rôle      : Propriétés d'organisation avancées si présentes
+                    // Type      : object ou null
+                    // Unité     : sans unité
+                    // Exemple   : {zIndex: 10, opacity: 0.9, visible: true}
+                    organization: this.selectedWidget.organization ? JSON.parse(JSON.stringify(this.selectedWidget.organization)) : null,
+                    
                     isCustom: true,
                     createdAt: new Date().toISOString(),
                     originalType: this.selectedWidget.type
@@ -9388,9 +9461,17 @@ Folder('${id}')" title="Renommer">
                 const index = customWidgets.findIndex(w => w.name === customName);
                 
                 if (index >= 0) {
-                    // Mettre à jour le template
+                    // Rôle      : Mise à jour complète de toutes les propriétés du widget personnalisé
+                    // Type      : object property updates
+                    // Unité     : sans unité
+                    // Exemple   : data, size, position, elements, organization mis à jour
+                    
+                    // Mettre à jour toutes les propriétés éditables
                     customWidgets[index].data = JSON.parse(JSON.stringify(this.selectedWidget.data));
                     customWidgets[index].size = JSON.parse(JSON.stringify(this.selectedWidget.size || { width: 3, height: 2 }));
+                    customWidgets[index].position = JSON.parse(JSON.stringify(this.selectedWidget.position || { col: 1, row: 1 }));
+                    customWidgets[index].elements = this.selectedWidget.elements ? JSON.parse(JSON.stringify(this.selectedWidget.elements)) : null;
+                    customWidgets[index].organization = this.selectedWidget.organization ? JSON.parse(JSON.stringify(this.selectedWidget.organization)) : null;
                     customWidgets[index].updatedAt = new Date().toISOString();
                     
                     localStorage.setItem('customWidgets', JSON.stringify(customWidgets));
