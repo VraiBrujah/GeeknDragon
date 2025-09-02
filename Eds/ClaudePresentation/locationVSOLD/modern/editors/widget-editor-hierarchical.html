@@ -30,7 +30,10 @@
                     Nouveau Canevas
                 </button>
             </div>
-            
+
+            <!-- Chemin hiérarchique actif -->
+            <div class="toolbar-breadcrumb" id="hierarchyBreadcrumb"></div>
+
             <div class="toolbar-right">
                 <button class="btn btn-sm" id="saveWidgetBtn" disabled>
                     <i class="fas fa-save"></i>
@@ -520,7 +523,8 @@
                 this.currentCanvas = null;
                 this.selectedWidget = null;
                 this.customWidgets = this.loadCustomWidgets();
-                
+                this.navigationPath = [];
+
                 this.init();
             }
 
@@ -533,6 +537,8 @@
                 this.setupEventListeners();
                 this.renderWidgetLibrary();
                 this.updateUI();
+                this.updateNavigationUI();
+                this.loadTemplate();
                 this.showStatus('Éditeur hiérarchique prêt', 'success');
             }
 
@@ -596,6 +602,8 @@
                 this.updateProperties();
                 this.updatePreview();
                 this.updateUI();
+                this.buildNavigationPath(canvas);
+                this.updateNavigationUI();
                 this.showStatus('Nouveau canevas créé', 'success');
             }
 
@@ -757,7 +765,8 @@
                 });
 
                 this.selectedWidget = widget;
-                
+                this.buildNavigationPath(widget);
+
                 // Ajouter la nouvelle sélection
                 const widgetElement = document.querySelector(`[data-widget-id="${widget.id}"]`);
                 if (widgetElement) {
@@ -766,6 +775,7 @@
 
                 this.updateProperties();
                 this.updateUI();
+                this.updateNavigationUI();
                 this.showStatus(`Widget ${widget.name} sélectionné`, 'info');
             }
 
@@ -1245,6 +1255,39 @@
 
                 if (saveBtn) saveBtn.disabled = !this.currentCanvas;
                 if (clearBtn) clearBtn.disabled = !this.currentCanvas;
+            }
+
+            // Construit le chemin hiérarchique depuis la page jusqu'au widget
+            buildNavigationPath(widget) {
+                const path = [];
+                let current = widget;
+                while (current) {
+                    path.unshift(current);
+                    current = current.parent;
+                }
+                this.navigationPath = path;
+            }
+
+            // Met à jour l'affichage du fil d'Ariane
+            updateNavigationUI() {
+                const breadcrumb = document.getElementById('hierarchyBreadcrumb');
+                if (!breadcrumb) return;
+                const labels = ['page', 'section', 'widget', 'sous-widget'];
+                const text = this.navigationPath
+                    .map((_, idx) => labels[idx] || 'sous-widget')
+                    .join(' > ');
+                breadcrumb.textContent = text;
+            }
+
+            // Charge un projet complet depuis le template JSON
+            async loadTemplate() {
+                try {
+                    const res = await fetch('/presentation-template.json');
+                    const data = await res.json();
+                    console.log('Template chargé', data);
+                } catch (e) {
+                    console.warn('Impossible de charger le template', e);
+                }
             }
 
             // Rôle      : Charger les widgets personnalisés depuis localStorage
