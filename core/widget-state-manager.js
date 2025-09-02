@@ -1,5 +1,13 @@
 /* eslint-env browser */
 
+/**
+ * Manages the state of widgets and provides persistence/synchronization.
+ *
+ * @property {Map<string, import('./base-widget.js').default>} widgets Registry of widgets
+ * @property {Map<string, Object>} states Stored widget states
+ * @property {BroadcastChannel|null} channel Communication channel across tabs
+ * @property {WebSocket|null} socket Real-time synchronization socket
+ */
 class WidgetStateManager {
   constructor() {
     this.widgets = new Map();
@@ -20,7 +28,10 @@ class WidgetStateManager {
     }
 
     // Setup BroadcastChannel for cross-tab communication
-    this.channel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('widget-state') : null;
+    this.channel =
+      typeof BroadcastChannel !== 'undefined'
+        ? new BroadcastChannel('widget-state')
+        : null;
     if (this.channel) {
       this.channel.addEventListener('message', (event) => {
         const { id, data } = event.data || {};
@@ -58,6 +69,11 @@ class WidgetStateManager {
     }
   }
 
+  /**
+   * Register a widget and listen to its changes.
+   *
+   * @param {import('./base-widget.js').default} widget Widget instance
+   */
   register(widget) {
     this.widgets.set(widget.id, widget);
     widget.onChange((data) => {
@@ -67,6 +83,12 @@ class WidgetStateManager {
     if (existing) widget.hydrate(existing);
   }
 
+  /**
+   * Retrieve state for a widget.
+   *
+   * @param {string} id Widget identifier
+   * @returns {Object|null} Stored state or null
+   */
   getState(id) {
     if (this.states.has(id)) return this.states.get(id);
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -84,6 +106,12 @@ class WidgetStateManager {
     return null;
   }
 
+  /**
+   * Persist state and broadcast changes.
+   *
+   * @param {string} id Widget identifier
+   * @param {Object} data Serialized widget data
+   */
   setState(id, data) {
     this.states.set(id, data);
     this._persist(id, data);
@@ -105,6 +133,13 @@ class WidgetStateManager {
     }
   }
 
+  /**
+   * Persist data to localStorage.
+   *
+   * @param {string} id Widget identifier
+   * @param {Object} data Serialized widget data
+   * @private
+   */
   _persist(id, data) {
     if (typeof window !== 'undefined' && window.localStorage) {
       try {
@@ -118,4 +153,3 @@ class WidgetStateManager {
 
 const widgetStateManager = new WidgetStateManager();
 export default widgetStateManager;
-
