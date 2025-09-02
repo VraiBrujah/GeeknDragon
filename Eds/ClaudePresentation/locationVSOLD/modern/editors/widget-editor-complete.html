@@ -5402,6 +5402,9 @@
                 document.getElementById('fullscreenPreviewBtn').addEventListener('click', () => this.openFullscreenPreview());
                 document.getElementById('closePreviewBtn').addEventListener('click', () => this.closeFullscreenPreview());
                 
+                // Ajouter bouton d'export vers viewer
+                this.createExportButton();
+                
                 // Fermer la popup avec Échap
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape') {
@@ -8621,6 +8624,337 @@ Folder('${id}')" title="Renommer">
                 document.addEventListener('mouseup', handleMouseUp);
             }
             
+            // Créer le bouton d'export vers viewer
+            createExportButton() {
+                const viewerControls = document.querySelector('.viewer-controls');
+                if (viewerControls && !document.getElementById('exportViewerBtn')) {
+                    const exportBtn = document.createElement('button');
+                    exportBtn.id = 'exportViewerBtn';
+                    exportBtn.className = 'btn btn-sm';
+                    exportBtn.innerHTML = '<i class="fas fa-download"></i> Exporter Viewer';
+                    exportBtn.title = 'Exporter vers le dossier viewers pour présentation client';
+                    exportBtn.addEventListener('click', () => this.exportToStaticViewer());
+                    viewerControls.appendChild(exportBtn);
+                }
+            }
+
+            // Exporter vers le viewer statique
+            exportToStaticViewer() {
+                try {
+                    // Préparer les données des widgets
+                    const widgetsData = this.widgets.map(widget => ({
+                        type: widget.type,
+                        position: widget.position || { col: 1, row: 1 },
+                        size: widget.size || { width: 3, height: 2 },
+                        content: widget.instance.render(widget.data)
+                    }));
+
+                    // Générer le nom de fichier avec timestamp
+                    const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, -5);
+                    const filename = `presentation-client-${timestamp}.html`;
+
+                    // Créer le contenu du viewer
+                    const viewerHtml = this.generateViewerHtml(widgetsData);
+
+                    // Télécharger le fichier
+                    this.downloadFile(viewerHtml, filename);
+
+                    this.setStatus('Viewer exporté avec succès !', 'success');
+
+                } catch (error) {
+                    console.error('Erreur lors de l\'export:', error);
+                    this.setStatus('Erreur lors de l\'export du viewer', 'error');
+                }
+            }
+
+            // Générer le HTML du viewer client
+            generateViewerHtml(widgetsData) {
+                const widgetsHtml = widgetsData.map(widget => `
+                    <div class="widget-item" 
+                         style="grid-column: ${widget.position.col} / ${widget.position.col + widget.size.width}; 
+                                grid-row: ${widget.position.row} / ${widget.position.row + widget.size.height};"
+                         data-widget-type="${widget.type}">
+                        ${widget.content}
+                    </div>
+                `).join('');
+
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+                const timeStr = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
+                return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation Eds Québec - Viewer Marketing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    ${this.getViewerStyles()}
+</head>
+<body>
+    <div class="viewer-container">
+        <div class="viewer-header">
+            <div class="viewer-header-content">
+                <div class="viewer-logo">
+                    <i class="fas fa-presentation"></i>
+                    <span>Eds Québec - Présentation Marketing</span>
+                </div>
+                <div class="viewer-info">
+                    <div class="viewer-date">${dateStr}</div>
+                    <div>Version Client - Confidentiel</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="viewer-content">
+            <div class="presentation-grid">
+                ${widgetsHtml || '<div class="presentation-empty"><i class="fas fa-presentation"></i><h3>Aucun contenu</h3><p>Cette présentation ne contient aucun widget</p></div>'}
+            </div>
+        </div>
+        
+        <div class="viewer-footer">
+            <div class="footer-content">
+                <span>© ${now.getFullYear()} Eds Québec - Présentation Marketing Confidentielle</span>
+                <span>Généré le ${dateStr} à ${timeStr}</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>`;
+            }
+
+            // Obtenir les styles CSS pour le viewer
+            getViewerStyles() {
+                return `<style>
+                    /* Variables CSS pour le viewer */
+                    :root {
+                        --bg-primary: #0f172a;
+                        --bg-secondary: #1e293b;
+                        --bg-card: #334155;
+                        --text-white: #ffffff;
+                        --text-gray: #94a3b8;
+                        --text-muted: #64748b;
+                        --accent-green: #10b981;
+                        --border-color: #334155;
+                        --spacing-md: 1rem;
+                        --spacing-lg: 1.5rem;
+                        --spacing-xl: 2rem;
+                        --border-radius: 0.5rem;
+                        --border-radius-lg: 0.75rem;
+                        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+                        --font-primary: 'Inter', system-ui, sans-serif;
+                        --font-semibold: 600;
+                        --font-bold: 700;
+                        --text-sm: 0.875rem;
+                        --text-lg: 1.125rem;
+                        --text-xl: 1.25rem;
+                        --text-2xl: 1.5rem;
+                        --transition-normal: 0.3s ease;
+                    }
+
+                    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+                    body {
+                        font-family: var(--font-primary);
+                        background: var(--bg-primary);
+                        color: var(--text-white);
+                        min-height: 100vh;
+                        line-height: 1.6;
+                    }
+
+                    .viewer-container {
+                        width: 100%;
+                        min-height: 100vh;
+                        display: flex;
+                        flex-direction: column;
+                    }
+
+                    .viewer-header {
+                        background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+                        border-bottom: 2px solid var(--accent-green);
+                        padding: var(--spacing-lg) var(--spacing-xl);
+                        position: sticky;
+                        top: 0;
+                        z-index: 1000;
+                        backdrop-filter: blur(10px);
+                        box-shadow: var(--shadow-lg);
+                    }
+
+                    .viewer-header-content {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        max-width: 1400px;
+                        margin: 0 auto;
+                    }
+
+                    .viewer-logo {
+                        display: flex;
+                        align-items: center;
+                        gap: var(--spacing-md);
+                        font-size: var(--text-xl);
+                        font-weight: var(--font-bold);
+                        color: var(--text-white);
+                    }
+
+                    .viewer-logo i {
+                        font-size: var(--text-2xl);
+                        color: var(--accent-green);
+                        background: rgba(16, 185, 129, 0.1);
+                        padding: var(--spacing-md);
+                        border-radius: var(--border-radius);
+                    }
+
+                    .viewer-info {
+                        text-align: right;
+                        color: var(--text-gray);
+                        font-size: var(--text-sm);
+                    }
+
+                    .viewer-date {
+                        font-weight: var(--font-semibold);
+                        color: var(--text-white);
+                        margin-bottom: 0.25rem;
+                    }
+
+                    .viewer-content {
+                        flex: 1;
+                        padding: var(--spacing-xl);
+                        overflow: auto;
+                        background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(15, 23, 42, 0.95) 100%);
+                    }
+
+                    .presentation-grid {
+                        width: 100%;
+                        max-width: 1400px;
+                        margin: 0 auto;
+                        background: var(--bg-secondary);
+                        border-radius: var(--border-radius-lg);
+                        box-shadow: var(--shadow-xl);
+                        overflow: hidden;
+                        display: grid;
+                        grid-template-columns: repeat(12, 1fr);
+                        grid-template-rows: repeat(8, minmax(100px, 1fr));
+                        gap: 8px;
+                        padding: var(--spacing-lg);
+                        min-height: 700px;
+                        border: 1px solid var(--border-color);
+                    }
+
+                    .widget-item {
+                        border-radius: var(--border-radius);
+                        overflow: hidden;
+                        display: flex;
+                        flex-direction: column;
+                        background: rgba(248, 250, 252, 0.02);
+                        transition: var(--transition-normal);
+                        position: relative;
+                    }
+
+                    .widget-item:hover {
+                        transform: translateY(-2px);
+                        box-shadow: var(--shadow-lg);
+                        background: rgba(248, 250, 252, 0.05);
+                    }
+
+                    .presentation-empty {
+                        grid-column: 1 / -1;
+                        grid-row: 1 / -1;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        color: var(--text-muted);
+                        font-size: var(--text-lg);
+                        padding: var(--spacing-xl);
+                    }
+
+                    .presentation-empty i {
+                        font-size: 4rem;
+                        margin-bottom: var(--spacing-lg);
+                        opacity: 0.3;
+                        color: var(--accent-green);
+                    }
+
+                    .presentation-empty h3 {
+                        font-size: var(--text-xl);
+                        font-weight: var(--font-semibold);
+                        margin-bottom: 0.5rem;
+                        color: var(--text-white);
+                    }
+
+                    .viewer-footer {
+                        background: var(--bg-secondary);
+                        border-top: 1px solid var(--border-color);
+                        padding: var(--spacing-lg) var(--spacing-xl);
+                        margin-top: auto;
+                    }
+
+                    .footer-content {
+                        max-width: 1400px;
+                        margin: 0 auto;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        font-size: var(--text-sm);
+                        color: var(--text-muted);
+                    }
+
+                    .footer-content span:first-child {
+                        font-weight: var(--font-semibold);
+                        color: var(--text-white);
+                    }
+
+                    @keyframes fadeInUp {
+                        from { opacity: 0; transform: translateY(30px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+
+                    .widget-item { animation: fadeInUp 0.6s ease-out; }
+                    .widget-item:nth-child(2) { animation-delay: 0.1s; }
+                    .widget-item:nth-child(3) { animation-delay: 0.2s; }
+                    .widget-item:nth-child(4) { animation-delay: 0.3s; }
+                    .widget-item:nth-child(5) { animation-delay: 0.4s; }
+
+                    @media (max-width: 768px) {
+                        .viewer-header { padding: var(--spacing-md); }
+                        .viewer-header-content { flex-direction: column; gap: 0.5rem; text-align: center; }
+                        .viewer-content { padding: var(--spacing-md); }
+                        .presentation-grid {
+                            grid-template-columns: repeat(6, 1fr);
+                            grid-template-rows: repeat(12, minmax(80px, 1fr));
+                            padding: var(--spacing-md);
+                        }
+                        .footer-content { flex-direction: column; gap: 0.25rem; text-align: center; }
+                    }
+
+                    @media print {
+                        body { background: white; color: black; }
+                        .viewer-header, .viewer-footer { background: white; color: black; border-color: #ccc; }
+                        .presentation-grid { background: white; box-shadow: none; border: 1px solid #ccc; }
+                        .widget-item { background: white; border: 1px solid #eee; }
+                    }
+                </style>`;
+            }
+
+            // Fonction pour télécharger un fichier
+            downloadFile(content, filename) {
+                const blob = new Blob([content], { type: 'text/html;charset=utf-8' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }
+
             setStatus(message, type = 'info') {
                 const statusText = document.getElementById('statusText');
                 const statusIndicator = document.getElementById('statusIndicator');
