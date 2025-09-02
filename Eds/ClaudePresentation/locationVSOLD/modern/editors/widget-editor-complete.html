@@ -7285,19 +7285,23 @@ Folder('${id}')" title="Renommer">
                 
                 disadvantages[index] = newValue.trim();
                 
-                // Mise à jour temps réel optimisée - comme PricingCard
+                // Mise à jour temps réel optimisée - CORRIGÉE POUR LE NOUVEAU RENDU SIMPLIFIÉ
                 const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                console.log('🔍 Container found:', !!container);
                 if (container) {
-                    const obsoleteColumn = container.querySelector('.obsolete-column');
+                    const obsoleteColumn = container.querySelector('.obsolete-column .disadvantages-list');
+                    console.log('🔍 Obsolete column found:', !!obsoleteColumn);
                     if (obsoleteColumn) {
-                        const disadvantageItems = obsoleteColumn.querySelectorAll('.obsolete-item');
+                        const disadvantageItems = obsoleteColumn.querySelectorAll('.comparison-item.obsolete-item');
+                        console.log('🔍 Found', disadvantageItems.length, 'disadvantage items, updating index', index);
                         if (disadvantageItems[index]) {
-                            // Mettre à jour le titre et la description
-                            const [title, description] = newValue.split('|');
-                            const titleElement = disadvantageItems[index].querySelector('h4');
-                            const descElement = disadvantageItems[index].querySelector('p');
-                            if (titleElement) titleElement.textContent = title || newValue;
-                            if (descElement) descElement.textContent = description || '';
+                            // Dans le nouveau rendu simplifié, le texte est dans le deuxième div enfant
+                            const textElement = disadvantageItems[index].querySelector('div:last-child');
+                            console.log('🔍 Text element found:', !!textElement);
+                            if (textElement) {
+                                textElement.textContent = newValue.trim();
+                                console.log('✅ Updated text in DOM:', newValue.trim());
+                            }
                         }
                     }
                 }
@@ -7374,19 +7378,23 @@ Folder('${id}')" title="Renommer">
                 
                 advantages[index] = newValue.trim();
                 
-                // Mise à jour temps réel optimisée - comme PricingCard
+                // Mise à jour temps réel optimisée - CORRIGÉE POUR LE NOUVEAU RENDU SIMPLIFIÉ
                 const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                console.log('🔍 Container found:', !!container);
                 if (container) {
-                    const modernColumn = container.querySelector('.modern-column');
+                    const modernColumn = container.querySelector('.modern-column .advantages-list');
+                    console.log('🔍 Modern column found:', !!modernColumn);
                     if (modernColumn) {
-                        const advantageItems = modernColumn.querySelectorAll('.modern-item');
+                        const advantageItems = modernColumn.querySelectorAll('.comparison-item.modern-item');
+                        console.log('🔍 Found', advantageItems.length, 'advantage items, updating index', index);
                         if (advantageItems[index]) {
-                            // Mettre à jour le titre et la description
-                            const [title, description] = newValue.split('|');
-                            const titleElement = advantageItems[index].querySelector('h4');
-                            const descElement = advantageItems[index].querySelector('p');
-                            if (titleElement) titleElement.textContent = title || newValue;
-                            if (descElement) descElement.textContent = description || '';
+                            // Dans le nouveau rendu simplifié, le texte est dans le deuxième div enfant
+                            const textElement = advantageItems[index].querySelector('div:last-child');
+                            console.log('🔍 Text element found:', !!textElement);
+                            if (textElement) {
+                                textElement.textContent = newValue.trim();
+                                console.log('✅ Updated text in DOM:', newValue.trim());
+                            }
                         }
                     }
                 }
