@@ -1650,11 +1650,11 @@
                         <div class="property-field">
                             <label class="property-label">Préréglages de taille</label>
                             <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                <button class="btn btn-sm" id="fullScreenBtn" disabled>
+                                <button class="btn btn-sm" id="fullScreenBtn">
                                     <i class="fas fa-expand"></i>
                                     Plein écran
                                 </button>
-                                <button class="btn btn-sm" id="fillParentBtn" disabled>
+                                <button class="btn btn-sm" id="fillParentBtn">
                                     <i class="fas fa-arrows-alt"></i>
                                     Remplir parent
                                 </button>
@@ -1665,10 +1665,10 @@
                             <label class="property-label">Largeur (colonnes)</label>
                             <div class="property-control">
                                 <input type="range" id="widthSlider" class="property-range" 
-                                       min="1" max="12" value="3" disabled
+                                       min="1" max="12" value="3"
                                        oninput="widgetEditor.updateWidgetSize('width', this.value)">
                                 <input type="number" id="widthInput" class="property-input" 
-                                       min="1" max="12" value="3" disabled
+                                       min="1" max="12" value="3"
                                        style="width: 60px; text-align: center;"
                                        onchange="widgetEditor.updateWidgetSize('width', this.value)">
                             </div>
@@ -1678,10 +1678,10 @@
                             <label class="property-label">Hauteur (rangées)</label>
                             <div class="property-control">
                                 <input type="range" id="heightSlider" class="property-range" 
-                                       min="1" max="8" value="2" disabled
+                                       min="1" max="8" value="2"
                                        oninput="widgetEditor.updateWidgetSize('height', this.value)">
                                 <input type="number" id="heightInput" class="property-input" 
-                                       min="1" max="8" value="2" disabled
+                                       min="1" max="8" value="2"
                                        style="width: 60px; text-align: center;"
                                        onchange="widgetEditor.updateWidgetSize('height', this.value)">
                             </div>
@@ -1691,10 +1691,10 @@
                             <label class="property-label">Position - Colonne (1-12)</label>
                             <div class="property-control">
                                 <input type="range" id="positionColSlider" class="property-range" 
-                                       min="1" max="12" value="1" disabled
+                                       min="1" max="12" value="1"
                                        oninput="widgetEditor.updateWidgetPosition('col', this.value)">
                                 <input type="number" id="positionColInput" class="property-input" 
-                                       min="1" max="12" value="1" disabled
+                                       min="1" max="12" value="1"
                                        style="width: 60px; text-align: center;"
                                        onchange="widgetEditor.updateWidgetPosition('col', this.value)">
                             </div>
@@ -1704,10 +1704,10 @@
                             <label class="property-label">Position - Rangée (1-8)</label>
                             <div class="property-control">
                                 <input type="range" id="positionRowSlider" class="property-range" 
-                                       min="1" max="8" value="1" disabled
+                                       min="1" max="8" value="1"
                                        oninput="widgetEditor.updateWidgetPosition('row', this.value)">
                                 <input type="number" id="positionRowInput" class="property-input" 
-                                       min="1" max="8" value="1" disabled
+                                       min="1" max="8" value="1"
                                        style="width: 60px; text-align: center;"
                                        onchange="widgetEditor.updateWidgetPosition('row', this.value)">
                             </div>
@@ -1717,11 +1717,11 @@
                     <div class="property-group">
                         <h4><i class="fas fa-arrows-alt"></i> Organisation</h4>
                         <div class="property-field">
-                            <button class="btn btn-sm" id="duplicateBtn" disabled>
+                            <button class="btn btn-sm" id="duplicateBtn">
                                 <i class="fas fa-copy"></i>
                                 Dupliquer
                             </button>
-                            <button class="btn btn-sm" id="deleteBtn" disabled>
+                            <button class="btn btn-sm" id="deleteBtn">
                                 <i class="fas fa-trash"></i>
                                 Supprimer
                             </button>
