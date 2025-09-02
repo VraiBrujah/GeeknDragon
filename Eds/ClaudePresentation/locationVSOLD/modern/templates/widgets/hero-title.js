@@ -13,7 +13,7 @@ class HeroTitleWidget {
         // Configuration : Propriétés du widget titre hero
         this.id = 'hero-title';
         this.name = 'Titre Hero';
-        this.category = 'content';
+        this.category = 'Contenu';
         this.icon = '✨';
         this.description = 'Titre principal avec gradient et animations';
         
