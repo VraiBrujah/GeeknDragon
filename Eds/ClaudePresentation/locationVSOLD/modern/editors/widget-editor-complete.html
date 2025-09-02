@@ -720,7 +720,84 @@
             background: rgba(16, 185, 129, 0.05);
         }
         
-        /* Poignées de redimensionnement supprimées - utilisation des sliders dans l'onglet Organisation */
+        /* Poignées de redimensionnement modernes et visuelles */
+        .widget-resize-handles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .widget-container.selected .widget-resize-handles,
+        .widget-container:hover .widget-resize-handles {
+            opacity: 1;
+        }
+
+        .resize-handle {
+            position: absolute;
+            pointer-events: all;
+            background: var(--accent-green);
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.2s ease;
+        }
+
+        .resize-handle:hover {
+            background: var(--accent-blue);
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Poignées spécifiques */
+        .resize-handle.bottom-right {
+            bottom: -6px;
+            right: -6px;
+            cursor: nw-resize;
+        }
+
+        .resize-handle.bottom-center {
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: ns-resize;
+        }
+
+        .resize-handle.right-center {
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: ew-resize;
+        }
+
+        /* Indicateurs de taille pendant le redimensionnement */
+        .resize-indicator {
+            position: absolute;
+            top: -30px;
+            right: 0;
+            background: var(--accent-green);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1002;
+            transition: opacity 0.2s ease;
+        }
+
+        .widget-container.resizing .resize-indicator {
+            opacity: 1;
+        }
         
         /* Conteneur arrière-plan global adaptatif */
         .global-background-container {
@@ -6000,6 +6077,9 @@
                 container.style.gridRowStart = pos.row;
                 container.style.gridRowEnd = pos.row + size.height;
                 
+                // Ajouter propriétés d'alignement et dimensions dynamiques du widget
+                this.applyWidgetLayoutProperties(container, widget);
+                
                 const headerContent = `
                     <div class="widget-header-title">
                         <span>${widget.instance.icon}</span>
@@ -6017,7 +6097,17 @@
                 
                 container.innerHTML = `
                     <div class="widget-container-header">${headerContent}</div>
-                    <div class="widget-content" style="flex: 1;">${widget.instance.render(widget.data)}</div>
+                    <div class="widget-content widget-isolated-${widget.id}" style="flex: 1; position: relative; overflow: hidden;">
+                        <div class="widget-inner-content" style="width: 100%; height: 100%; isolation: isolate;">
+                            ${widget.instance.render(widget.data)}
+                        </div>
+                    </div>
+                    <div class="widget-resize-handles">
+                        <div class="resize-handle bottom-right" data-direction="both" title="Redimensionner largeur et hauteur"></div>
+                        <div class="resize-handle right-center" data-direction="width" title="Redimensionner largeur"></div>
+                        <div class="resize-handle bottom-center" data-direction="height" title="Redimensionner hauteur"></div>
+                        <div class="resize-indicator">${size.width}×${size.height}</div>
+                    </div>
                 `;
                 
                 // Events
@@ -6029,7 +6119,373 @@
                 // Drag & drop pour placement libre
                 this.setupDragDrop(container, widget);
                 
+                // Redimensionnement visuel moderne
+                this.setupVisualResize(container, widget);
+                
                 return container;
+            }
+
+            // Appliquer les propriétés de layout dynamiques à un widget
+            applyWidgetLayoutProperties(container, widget) {
+                // Ajouter les propriétés de layout par défaut si elles n'existent pas
+                if (!widget.layout) {
+                    widget.layout = {
+                        // Alignement horizontal : 'left', 'center', 'right', 'stretch'
+                        alignHorizontal: 'stretch',
+                        // Alignement vertical : 'top', 'center', 'bottom', 'stretch'
+                        alignVertical: 'stretch',
+                        // Dimensions du widget par rapport à son conteneur (pourcentage)
+                        widthPercent: 100,
+                        heightPercent: 100,
+                        // Marges internes
+                        paddingTop: 16,
+                        paddingRight: 16,
+                        paddingBottom: 16,
+                        paddingLeft: 16,
+                        // Contrôle de débordement
+                        overflow: 'visible'
+                    };
+                }
+                
+                const layout = widget.layout;
+                
+                // Appliquer les styles d'alignement et de dimensionnement
+                const alignStyles = this.generateAlignmentStyles(layout);
+                Object.assign(container.style, alignStyles);
+            }
+
+            // Générer les styles CSS d'alignement
+            generateAlignmentStyles(layout) {
+                const styles = {};
+                
+                // Alignement horizontal
+                switch (layout.alignHorizontal) {
+                    case 'left':
+                        styles.justifyContent = 'flex-start';
+                        break;
+                    case 'center':
+                        styles.justifyContent = 'center';
+                        break;
+                    case 'right':
+                        styles.justifyContent = 'flex-end';
+                        break;
+                    case 'stretch':
+                        styles.justifyContent = 'stretch';
+                        break;
+                }
+                
+                // Alignement vertical
+                switch (layout.alignVertical) {
+                    case 'top':
+                        styles.alignItems = 'flex-start';
+                        break;
+                    case 'center':
+                        styles.alignItems = 'center';
+                        break;
+                    case 'bottom':
+                        styles.alignItems = 'flex-end';
+                        break;
+                    case 'stretch':
+                        styles.alignItems = 'stretch';
+                        break;
+                }
+                
+                // S'assurer que le conteneur est un flex container
+                styles.display = 'flex';
+                styles.flexDirection = 'column';
+                
+                return styles;
+            }
+
+            // Générer les contrôles de layout dynamique
+            generateLayoutControls(widget) {
+                // S'assurer que les propriétés de layout existent
+                if (!widget.layout) {
+                    widget.layout = {
+                        alignHorizontal: 'stretch',
+                        alignVertical: 'stretch',
+                        widthPercent: 100,
+                        heightPercent: 100,
+                        paddingTop: 16,
+                        paddingRight: 16,
+                        paddingBottom: 16,
+                        paddingLeft: 16,
+                        overflow: 'visible'
+                    };
+                }
+
+                const layout = widget.layout;
+
+                return `
+                    <div class="property-group">
+                        <h4><i class="fas fa-expand-arrows-alt"></i> Layout & Alignement</h4>
+                        
+                        <!-- Alignement horizontal -->
+                        <div class="property-field">
+                            <label for="layout-align-h">Alignement horizontal :</label>
+                            <select id="layout-align-h" onchange="widgetEditor.updateWidgetLayout('alignHorizontal', this.value)">
+                                <option value="left" ${layout.alignHorizontal === 'left' ? 'selected' : ''}>⬅️ Gauche</option>
+                                <option value="center" ${layout.alignHorizontal === 'center' ? 'selected' : ''}>↔️ Centre</option>
+                                <option value="right" ${layout.alignHorizontal === 'right' ? 'selected' : ''}>➡️ Droite</option>
+                                <option value="stretch" ${layout.alignHorizontal === 'stretch' ? 'selected' : ''}>↔️ Étirer</option>
+                            </select>
+                        </div>
+
+                        <!-- Alignement vertical -->
+                        <div class="property-field">
+                            <label for="layout-align-v">Alignement vertical :</label>
+                            <select id="layout-align-v" onchange="widgetEditor.updateWidgetLayout('alignVertical', this.value)">
+                                <option value="top" ${layout.alignVertical === 'top' ? 'selected' : ''}>⬆️ Haut</option>
+                                <option value="center" ${layout.alignVertical === 'center' ? 'selected' : ''}>↕️ Centre</option>
+                                <option value="bottom" ${layout.alignVertical === 'bottom' ? 'selected' : ''}>⬇️ Bas</option>
+                                <option value="stretch" ${layout.alignVertical === 'stretch' ? 'selected' : ''}>↕️ Étirer</option>
+                            </select>
+                        </div>
+
+                        <!-- Largeur en pourcentage -->
+                        <div class="property-field">
+                            <label for="layout-width">Largeur du contenu (%) :</label>
+                            <input type="range" id="layout-width" min="10" max="100" step="5" 
+                                   value="${layout.widthPercent}" 
+                                   onchange="widgetEditor.updateWidgetLayout('widthPercent', this.value)">
+                            <span class="range-value">${layout.widthPercent}%</span>
+                        </div>
+
+                        <!-- Hauteur en pourcentage -->
+                        <div class="property-field">
+                            <label for="layout-height">Hauteur du contenu (%) :</label>
+                            <input type="range" id="layout-height" min="10" max="100" step="5" 
+                                   value="${layout.heightPercent}" 
+                                   onchange="widgetEditor.updateWidgetLayout('heightPercent', this.value)">
+                            <span class="range-value">${layout.heightPercent}%</span>
+                        </div>
+
+                        <!-- Padding -->
+                        <div class="property-field">
+                            <label>Marges internes (px) :</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;">
+                                <div>
+                                    <label for="layout-padding-top" style="font-size: 0.8rem;">Haut :</label>
+                                    <input type="range" id="layout-padding-top" min="0" max="50" 
+                                           value="${layout.paddingTop}" 
+                                           onchange="widgetEditor.updateWidgetLayout('paddingTop', this.value)">
+                                    <span class="range-value" style="font-size: 0.8rem;">${layout.paddingTop}px</span>
+                                </div>
+                                <div>
+                                    <label for="layout-padding-right" style="font-size: 0.8rem;">Droite :</label>
+                                    <input type="range" id="layout-padding-right" min="0" max="50" 
+                                           value="${layout.paddingRight}" 
+                                           onchange="widgetEditor.updateWidgetLayout('paddingRight', this.value)">
+                                    <span class="range-value" style="font-size: 0.8rem;">${layout.paddingRight}px</span>
+                                </div>
+                                <div>
+                                    <label for="layout-padding-bottom" style="font-size: 0.8rem;">Bas :</label>
+                                    <input type="range" id="layout-padding-bottom" min="0" max="50" 
+                                           value="${layout.paddingBottom}" 
+                                           onchange="widgetEditor.updateWidgetLayout('paddingBottom', this.value)">
+                                    <span class="range-value" style="font-size: 0.8rem;">${layout.paddingBottom}px</span>
+                                </div>
+                                <div>
+                                    <label for="layout-padding-left" style="font-size: 0.8rem;">Gauche :</label>
+                                    <input type="range" id="layout-padding-left" min="0" max="50" 
+                                           value="${layout.paddingLeft}" 
+                                           onchange="widgetEditor.updateWidgetLayout('paddingLeft', this.value)">
+                                    <span class="range-value" style="font-size: 0.8rem;">${layout.paddingLeft}px</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contrôle de débordement -->
+                        <div class="property-field">
+                            <label for="layout-overflow">Débordement :</label>
+                            <select id="layout-overflow" onchange="widgetEditor.updateWidgetLayout('overflow', this.value)">
+                                <option value="visible" ${layout.overflow === 'visible' ? 'selected' : ''}>👁️ Visible</option>
+                                <option value="hidden" ${layout.overflow === 'hidden' ? 'selected' : ''}>🚫 Masqué</option>
+                                <option value="scroll" ${layout.overflow === 'scroll' ? 'selected' : ''}>📜 Défilement</option>
+                                <option value="auto" ${layout.overflow === 'auto' ? 'selected' : ''}>🔄 Auto</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Mettre à jour les propriétés de layout d'un widget
+            updateWidgetLayout(property, value) {
+                if (!this.selectedWidget) return;
+
+                // Convertir en nombre si nécessaire
+                const numericValue = ['widthPercent', 'heightPercent', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].includes(property) 
+                    ? parseInt(value, 10) : value;
+
+                // Mettre à jour la propriété
+                this.selectedWidget.layout[property] = numericValue;
+
+                // Réappliquer les styles de layout
+                const container = document.querySelector(`.widget-container[data-widget-id="${this.selectedWidget.id}"]`);
+                if (container) {
+                    this.applyWidgetLayoutProperties(container, this.selectedWidget);
+                    
+                    // Appliquer aussi les styles au contenu interne
+                    this.applyContentLayout(container, this.selectedWidget.layout);
+                }
+
+                // Mettre à jour les indicateurs dans le panneau
+                const rangeElement = document.getElementById(`layout-${property.replace('Percent', '').toLowerCase()}`);
+                if (rangeElement && rangeElement.nextElementSibling) {
+                    const unit = property.includes('Percent') ? '%' : 'px';
+                    rangeElement.nextElementSibling.textContent = `${numericValue}${unit}`;
+                }
+
+                // Sauvegarder et actualiser
+                this.autoSave();
+                this.updatePreview();
+            }
+
+            // Appliquer le layout au contenu interne du widget
+            applyContentLayout(container, layout) {
+                const widgetContent = container.querySelector('.widget-content');
+                const widgetInner = container.querySelector('.widget-inner-content');
+                
+                if (widgetContent && widgetInner) {
+                    // Styles du conteneur de contenu
+                    Object.assign(widgetContent.style, {
+                        display: 'flex',
+                        alignItems: layout.alignVertical === 'stretch' ? 'stretch' : 
+                                  layout.alignVertical === 'center' ? 'center' :
+                                  layout.alignVertical === 'bottom' ? 'flex-end' : 'flex-start',
+                        justifyContent: layout.alignHorizontal === 'stretch' ? 'stretch' : 
+                                       layout.alignHorizontal === 'center' ? 'center' :
+                                       layout.alignHorizontal === 'right' ? 'flex-end' : 'flex-start',
+                        padding: `${layout.paddingTop}px ${layout.paddingRight}px ${layout.paddingBottom}px ${layout.paddingLeft}px`,
+                        overflow: layout.overflow
+                    });
+
+                    // Styles du contenu interne
+                    Object.assign(widgetInner.style, {
+                        width: layout.alignHorizontal === 'stretch' ? '100%' : `${layout.widthPercent}%`,
+                        height: layout.alignVertical === 'stretch' ? '100%' : `${layout.heightPercent}%`,
+                        maxWidth: '100%',
+                        maxHeight: '100%'
+                    });
+                }
+            }
+
+            // Configuration du redimensionnement visuel moderne
+            setupVisualResize(container, widget) {
+                const resizeHandles = container.querySelectorAll('.resize-handle');
+                const indicator = container.querySelector('.resize-indicator');
+                
+                resizeHandles.forEach(handle => {
+                    let isResizing = false;
+                    let startX, startY, startWidth, startHeight;
+
+                    handle.addEventListener('mousedown', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        isResizing = true;
+                        startX = e.clientX;
+                        startY = e.clientY;
+                        startWidth = widget.size.width;
+                        startHeight = widget.size.height;
+                        
+                        container.classList.add('resizing');
+                        document.body.style.cursor = handle.style.cursor;
+                        
+                        // Empêcher la sélection de texte pendant le redimensionnement
+                        document.body.style.userSelect = 'none';
+                        
+                        const handleMouseMove = (e) => {
+                            if (!isResizing) return;
+                            
+                            const deltaX = e.clientX - startX;
+                            const deltaY = e.clientY - startY;
+                            const direction = handle.dataset.direction;
+                            
+                            // Calculer les nouvelles dimensions basées sur les colonnes/rangées de la grille
+                            const gridCellWidth = container.parentElement.offsetWidth / 12; // 12 colonnes
+                            const gridCellHeight = container.parentElement.offsetHeight / 8; // 8 rangées
+                            
+                            let newWidth = startWidth;
+                            let newHeight = startHeight;
+                            
+                            if (direction === 'width' || direction === 'both') {
+                                const widthChange = Math.round(deltaX / gridCellWidth);
+                                newWidth = Math.max(1, Math.min(12, startWidth + widthChange));
+                            }
+                            
+                            if (direction === 'height' || direction === 'both') {
+                                const heightChange = Math.round(deltaY / gridCellHeight);
+                                newHeight = Math.max(1, Math.min(8, startHeight + heightChange));
+                            }
+                            
+                            // Mettre à jour l'indicateur
+                            indicator.textContent = `${newWidth}×${newHeight}`;
+                            
+                            // Appliquer le redimensionnement temporaire visuellement
+                            container.style.gridColumnEnd = `${widget.position.col + newWidth}`;
+                            container.style.gridRowEnd = `${widget.position.row + newHeight}`;
+                        };
+                        
+                        const handleMouseUp = (e) => {
+                            if (!isResizing) return;
+                            
+                            isResizing = false;
+                            container.classList.remove('resizing');
+                            document.body.style.cursor = '';
+                            document.body.style.userSelect = '';
+                            
+                            // Calculer les nouvelles dimensions finales
+                            const deltaX = e.clientX - startX;
+                            const deltaY = e.clientY - startY;
+                            const direction = handle.dataset.direction;
+                            
+                            const gridCellWidth = container.parentElement.offsetWidth / 12;
+                            const gridCellHeight = container.parentElement.offsetHeight / 8;
+                            
+                            let newWidth = startWidth;
+                            let newHeight = startHeight;
+                            
+                            if (direction === 'width' || direction === 'both') {
+                                const widthChange = Math.round(deltaX / gridCellWidth);
+                                newWidth = Math.max(1, Math.min(12, startWidth + widthChange));
+                            }
+                            
+                            if (direction === 'height' || direction === 'both') {
+                                const heightChange = Math.round(deltaY / gridCellHeight);
+                                newHeight = Math.max(1, Math.min(8, startHeight + heightChange));
+                            }
+                            
+                            // Appliquer le changement définitif si différent
+                            if (newWidth !== startWidth || newHeight !== startHeight) {
+                                widget.size.width = newWidth;
+                                widget.size.height = newHeight;
+                                
+                                // Mettre à jour les contrôles dans l'interface
+                                this.syncSizeControls('width', newWidth);
+                                this.syncSizeControls('height', newHeight);
+                                
+                                // Sauvegarder et actualiser
+                                this.autoSave();
+                                this.updatePreview();
+                                
+                                // Réappliquer les styles de layout
+                                this.applyWidgetLayoutProperties(container, widget);
+                                this.applyContentLayout(container, widget.layout);
+                            }
+                            
+                            // Réinitialiser l'indicateur
+                            indicator.textContent = `${widget.size.width}×${widget.size.height}`;
+                            
+                            // Nettoyer les événements
+                            document.removeEventListener('mousemove', handleMouseMove);
+                            document.removeEventListener('mouseup', handleMouseUp);
+                        };
+                        
+                        document.addEventListener('mousemove', handleMouseMove);
+                        document.addEventListener('mouseup', handleMouseUp);
+                    });
+                });
             }
 
             selectWidget(widgetId) {
@@ -6091,6 +6547,9 @@
                 });
                 
                 propertiesHtml += '</div>';
+                
+                // Ajouter les contrôles de layout dynamique
+                propertiesHtml += this.generateLayoutControls(widget);
                 
                 document.getElementById('propertiesTab').innerHTML = propertiesHtml;
                 
@@ -7173,14 +7632,17 @@
                     // Formule   : widget_content.innerHTML = nouveau_rendu
                     // Exemple   : Seul le contenu .widget-content est mis à jour, les contrôles restent
                     
-                    // Chercher le div de contenu spécifiquement
-                    const contentDiv = container.querySelector('.widget-content');
-                    if (contentDiv) {
+                    // Chercher le div de contenu interne spécifiquement
+                    const innerContentDiv = container.querySelector('.widget-inner-content');
+                    if (innerContentDiv) {
                         // Générer le nouveau HTML avec les données actuelles
                         const newHTML = this.selectedWidget.instance.render(this.selectedWidget.data);
                         
-                        // Remplacer SEULEMENT le contenu, pas les contrôles
-                        contentDiv.innerHTML = newHTML;
+                        // Remplacer SEULEMENT le contenu interne isolé
+                        innerContentDiv.innerHTML = newHTML;
+                        
+                        // Réappliquer les styles de layout après le rendu
+                        this.applyContentLayout(container, this.selectedWidget.layout);
                     }
                     
                 } catch (error) {
@@ -10035,9 +10497,12 @@ Folder('${id}')" title="Renommer">
                 const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
                 if (!container) return;
                 
-                const contentDiv = container.querySelector('.widget-content');
-                if (contentDiv) {
-                    contentDiv.innerHTML = this.selectedWidget.instance.render(this.selectedWidget.data);
+                const innerContentDiv = container.querySelector('.widget-inner-content');
+                if (innerContentDiv) {
+                    innerContentDiv.innerHTML = this.selectedWidget.instance.render(this.selectedWidget.data);
+                    
+                    // Réappliquer les styles de layout après le rendu
+                    this.applyContentLayout(container, this.selectedWidget.layout);
                 }
             }
 
