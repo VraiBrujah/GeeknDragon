@@ -2978,38 +2978,119 @@
                 this.id = 'call-to-action';
                 this.name = 'Call to Action';
                 this.category = 'Action';
-                this.icon = '🎯';
-                this.description = 'Section d\'appel à l\'action';
+                this.icon = '🚀';
+                this.description = 'Section complète d\'appel à l\'action avec toutes les informations de contact';
                 
                 this.defaultData = {
-                    title: 'Prêt à commencer ?',
-                    // Propriétés avancées du titre principal (inspirées du TextSimple)
-                    titleSize: 40,
-                    titleColor: '#ffffff',
-                    titleAlignment: 'center',
-                    titleIsBold: true,
-                    titleIsItalic: false,
-                    titleHasBackground: false,
-                    titleBackgroundColor: '#10b981',
-                    titleBackgroundOpacity: 20,
-                    titleHasBorder: false,
-                    titleBorderColor: '#10b981',
-                    titleBorderWidth: 2,
-                    titleBorderStyle: 'solid',
-                    titleHasRoundedCorners: false,
-                    titleBorderRadius: 8,
-                    titlePaddingTop: 'none',
-                    titlePaddingBottom: 'small',
-                    titlePaddingLeft: 'none',
-                    titlePaddingRight: 'none',
-                    titleMarginBottom: 'small',
-                    description: 'Contactez-nous dès aujourd\'hui pour une consultation gratuite',
-                    primaryButtonText: 'Nous Contacter',
+                    // Configuration widget
+                    defaultWidth: 9,
+                    
+                    // Titre principal
+                    mainTitle: 'LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT',
+                    mainTitleSize: 48,
+                    mainTitleColor: '#ffffff',
+                    mainTitleAlignment: 'center',
+                    mainTitleIsBold: true,
+                    mainTitleIsItalic: false,
+                    mainTitleHasBackground: false,
+                    mainTitleBackgroundColor: '#10b981',
+                    mainTitleBackgroundOpacity: 20,
+                    mainTitleHasBorder: false,
+                    mainTitleBorderColor: '#10b981',
+                    mainTitleBorderWidth: 2,
+                    mainTitleBorderStyle: 'solid',
+                    mainTitleHasRoundedCorners: false,
+                    mainTitleBorderRadius: 8,
+                    mainTitlePaddingTop: 'medium',
+                    mainTitlePaddingBottom: 'small',
+                    mainTitlePaddingLeft: 'medium',
+                    mainTitlePaddingRight: 'medium',
+                    mainTitleMarginBottom: 'medium',
+                    
+                    // Sous-titre
+                    subtitle: 'Zéro risque, zéro surprise, performance maximale garantie',
+                    subtitleSize: 24,
+                    subtitleColor: '#e0e7ff',
+                    subtitleAlignment: 'center',
+                    subtitleIsBold: false,
+                    subtitleIsItalic: false,
+                    subtitleHasBackground: false,
+                    subtitleBackgroundColor: '#10b981',
+                    subtitleBackgroundOpacity: 20,
+                    subtitleHasBorder: false,
+                    subtitleBorderColor: '#10b981',
+                    subtitleBorderWidth: 2,
+                    subtitleBorderStyle: 'solid',
+                    subtitleHasRoundedCorners: false,
+                    subtitleBorderRadius: 8,
+                    subtitlePaddingTop: 'none',
+                    subtitlePaddingBottom: 'large',
+                    subtitlePaddingLeft: 'medium',
+                    subtitlePaddingRight: 'medium',
+                    subtitleMarginBottom: 'large',
+                    
+                    // Section Contact
+                    phoneIcon: '📞',
+                    phoneTitle: 'Division Location',
+                    phoneNumber: '819-323-5622',
+                    phoneSubtitle: 'Service commercial 8h-17h',
+                    phoneTitleSize: 20,
+                    phoneTitleColor: '#ffffff',
+                    phoneNumberSize: 28,
+                    phoneNumberColor: '#10b981',
+                    phoneSubtitleSize: 16,
+                    phoneSubtitleColor: '#e0e7ff',
+                    
+                    // Section Email
+                    emailIcon: '✉️',
+                    emailTitle: 'Email Location',
+                    emailAddress: 'location@edsquebec.com',
+                    emailSubtitle: 'Devis sous 2h ouvrées',
+                    emailTitleSize: 20,
+                    emailTitleColor: '#ffffff',
+                    emailAddressSize: 22,
+                    emailAddressColor: '#10b981',
+                    emailSubtitleSize: 16,
+                    emailSubtitleColor: '#e0e7ff',
+                    
+                    // Section Délai
+                    deliveryIcon: '🚀',
+                    deliveryTitle: 'Mise en Service',
+                    deliveryTime: '48h',
+                    deliverySubtitle: 'Après signature du contrat',
+                    deliveryTitleSize: 20,
+                    deliveryTitleColor: '#ffffff',
+                    deliveryTimeSize: 32,
+                    deliveryTimeColor: '#10b981',
+                    deliverySubtitleSize: 16,
+                    deliverySubtitleColor: '#e0e7ff',
+                    
+                    // Boutons d'action
+                    primaryButtonText: 'CONCLURE LA VENTE',
                     primaryButtonLink: '#contact',
-                    secondaryButtonText: 'En savoir plus',
-                    secondaryButtonLink: '#info',
-                    backgroundColor: '#10b981',
-                    showSecondaryButton: true
+                    primaryButtonColor: '#10b981',
+                    primaryButtonTextColor: '#ffffff',
+                    
+                    secondaryButtonText: 'PRÉPARER CONTRAT',
+                    secondaryButtonLink: '#contract',
+                    secondaryButtonColor: '#374151',
+                    secondaryButtonTextColor: '#ffffff',
+                    
+                    // Section Avantages
+                    advantages: [
+                        { text: 'Devis gratuit et sans engagement', emoji: '✅', color: '#10b981' },
+                        { text: 'Installation par techniciens certifiés EDS', emoji: '✅', color: '#10b981' },
+                        { text: 'Contrat flexible adapté à vos besoins', emoji: '✅', color: '#10b981' },
+                        { text: 'Support québécois en français 24/7', emoji: '✅', color: '#10b981' }
+                    ],
+                    
+                    // Style général
+                    backgroundColor: '#1e40af',
+                    containerPadding: 60,
+                    borderRadius: 16,
+                    hasShadow: true,
+                    shadowColor: '#000000',
+                    shadowOpacity: 30
                 };
             }
 
@@ -3024,22 +3105,21 @@
                 return spacingMap[spacingType] || '20px';
             }
 
-            // Génère les styles CSS pour le titre CTA
-            generateTitleStyles(data) {
+            // Génère les styles CSS pour un texte avec personnalisation complète
+            generateTextStyles(data, prefix) {
                 const styleRules = [];
                 
                 // Style de base
-                styleRules.push('text-align: ' + (data.titleAlignment || 'center'));
-                styleRules.push('font-size: ' + (data.titleSize || 40) + 'px');
-                styleRules.push('color: ' + (data.titleColor || '#ffffff'));
-                styleRules.push('font-weight: ' + (data.titleIsBold ? 'bold' : 'normal'));
-                styleRules.push('font-style: ' + (data.titleIsItalic ? 'italic' : 'normal'));
+                styleRules.push('text-align: ' + (data[prefix + 'Alignment'] || 'center'));
+                styleRules.push('font-size: ' + (data[prefix + 'Size'] || 20) + 'px');
+                styleRules.push('color: ' + (data[prefix + 'Color'] || '#ffffff'));
+                styleRules.push('font-weight: ' + (data[prefix + 'IsBold'] ? 'bold' : 'normal'));
+                styleRules.push('font-style: ' + (data[prefix + 'IsItalic'] ? 'italic' : 'normal'));
                 
                 // Arrière-plan
-                if (data.titleHasBackground) {
-                    const opacity = (data.titleBackgroundOpacity || 20) / 100;
-                    const bgColor = data.titleBackgroundColor || '#10b981';
-                    // Convertir hex en rgba
+                if (data[prefix + 'HasBackground']) {
+                    const opacity = (data[prefix + 'BackgroundOpacity'] || 20) / 100;
+                    const bgColor = data[prefix + 'BackgroundColor'] || '#10b981';
                     const hex = bgColor.replace('#', '');
                     const r = parseInt(hex.substr(0, 2), 16);
                     const g = parseInt(hex.substr(2, 2), 16);
@@ -3048,29 +3128,31 @@
                 }
                 
                 // Contour
-                if (data.titleHasBorder) {
-                    const borderWidth = data.titleBorderWidth || 2;
-                    const borderStyle = data.titleBorderStyle || 'solid';
-                    const borderColor = data.titleBorderColor || '#10b981';
+                if (data[prefix + 'HasBorder']) {
+                    const borderWidth = data[prefix + 'BorderWidth'] || 2;
+                    const borderStyle = data[prefix + 'BorderStyle'] || 'solid';
+                    const borderColor = data[prefix + 'BorderColor'] || '#10b981';
                     styleRules.push(`border: ${borderWidth}px ${borderStyle} ${borderColor}`);
                 }
                 
                 // Coins arrondis
-                if (data.titleHasRoundedCorners) {
-                    const borderRadius = data.titleBorderRadius || 8;
+                if (data[prefix + 'HasRoundedCorners']) {
+                    const borderRadius = data[prefix + 'BorderRadius'] || 8;
                     styleRules.push(`border-radius: ${borderRadius}px`);
                 }
                 
                 // Espacement interne (padding)
-                const paddingTop = this.getSpacingValue(data.titlePaddingTop || 'none');
-                const paddingBottom = this.getSpacingValue(data.titlePaddingBottom || 'small');
-                const paddingLeft = this.getSpacingValue(data.titlePaddingLeft || 'none');
-                const paddingRight = this.getSpacingValue(data.titlePaddingRight || 'none');
+                const paddingTop = this.getSpacingValue(data[prefix + 'PaddingTop'] || 'none');
+                const paddingBottom = this.getSpacingValue(data[prefix + 'PaddingBottom'] || 'none');
+                const paddingLeft = this.getSpacingValue(data[prefix + 'PaddingLeft'] || 'none');
+                const paddingRight = this.getSpacingValue(data[prefix + 'PaddingRight'] || 'none');
                 styleRules.push(`padding: ${paddingTop} ${paddingRight} ${paddingBottom} ${paddingLeft}`);
                 
                 // Marge du bas
-                const marginBottom = this.getSpacingValue(data.titleMarginBottom || 'small');
-                styleRules.push(`margin-bottom: ${marginBottom}`);
+                if (data[prefix + 'MarginBottom']) {
+                    const marginBottom = this.getSpacingValue(data[prefix + 'MarginBottom']);
+                    styleRules.push(`margin-bottom: ${marginBottom}`);
+                }
                 
                 return styleRules.join('; ');
             }
@@ -3078,125 +3160,245 @@
             render(data = {}) {
                 const d = { ...this.defaultData, ...data };
                 
-                // Générer les styles du titre CTA
-                const titleStyles = this.generateTitleStyles(d);
+                // Générer les styles des textes
+                const mainTitleStyles = this.generateTextStyles(d, 'mainTitle');
+                const subtitleStyles = this.generateTextStyles(d, 'subtitle');
                 
-                const secondaryButton = d.showSecondaryButton ? 
-                    `<a href="${d.secondaryButtonLink}" 
-                       style="padding: 12px 24px; background: transparent; color: white; 
-                              border: 2px solid white; border-radius: 8px; font-weight: 600; 
-                              text-decoration: none; margin-left: 16px; display: inline-block;">
-                        ${d.secondaryButtonText}
-                    </a>` : '';
+                // Créer la liste des avantages
+                const advantagesHtml = d.advantages.map(advantage => `
+                    <div style="display: flex; align-items: center; margin-bottom: 15px; font-size: 16px;">
+                        <span style="font-size: 20px; margin-right: 12px;">${advantage.emoji}</span>
+                        <span style="color: ${advantage.color}; font-weight: 500;">${advantage.text}</span>
+                    </div>
+                `).join('');
+                
+                // Style du conteneur avec ombre
+                const containerShadow = d.hasShadow ? 
+                    `box-shadow: 0 20px 40px rgba(${parseInt((d.shadowColor || '#000000').substring(1, 3), 16)}, ${parseInt((d.shadowColor || '#000000').substring(3, 5), 16)}, ${parseInt((d.shadowColor || '#000000').substring(5, 7), 16)}, ${(d.shadowOpacity || 30) / 100});` : '';
 
                 return `
-                    <div class="cta-section" 
-                         style="background: ${d.backgroundColor}; color: white; padding: 80px 20px; 
-                                text-align: center; margin: 40px 0;">
-                        <h2 class="cta-title" style="${titleStyles}">
-                            ${d.title}
-                        </h2>
-                        <p style="font-size: 1.25rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                            ${d.description}
+                    <div class="cta-location-section" 
+                         style="background: ${d.backgroundColor}; color: white; 
+                                padding: ${d.containerPadding}px; border-radius: ${d.borderRadius}px; 
+                                margin: 40px 0; ${containerShadow}">
+                        
+                        <!-- Titre principal -->
+                        <h1 style="${mainTitleStyles}">
+                            ${d.mainTitle}
+                        </h1>
+                        
+                        <!-- Sous-titre -->
+                        <p style="${subtitleStyles}">
+                            ${d.subtitle}
                         </p>
-                        <div class="cta-buttons">
+                        
+                        <!-- Sections d'information -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 50px;">
+                            
+                            <!-- Section Téléphone -->
+                            <div style="text-align: center; padding: 30px; background: rgba(255,255,255,0.1); border-radius: 12px;">
+                                <div style="font-size: 48px; margin-bottom: 15px;">${d.phoneIcon}</div>
+                                <h3 style="font-size: ${d.phoneTitleSize}px; color: ${d.phoneTitleColor}; margin-bottom: 10px;">${d.phoneTitle}</h3>
+                                <a href="tel:${d.phoneNumber.replace(/[^0-9]/g, '')}" style="font-size: ${d.phoneNumberSize}px; color: ${d.phoneNumberColor}; font-weight: bold; text-decoration: none; display: block; margin-bottom: 10px;">${d.phoneNumber}</a>
+                                <p style="font-size: ${d.phoneSubtitleSize}px; color: ${d.phoneSubtitleColor}; margin: 0;">${d.phoneSubtitle}</p>
+                            </div>
+                            
+                            <!-- Section Email -->
+                            <div style="text-align: center; padding: 30px; background: rgba(255,255,255,0.1); border-radius: 12px;">
+                                <div style="font-size: 48px; margin-bottom: 15px;">${d.emailIcon}</div>
+                                <h3 style="font-size: ${d.emailTitleSize}px; color: ${d.emailTitleColor}; margin-bottom: 10px;">${d.emailTitle}</h3>
+                                <a href="mailto:${d.emailAddress}" style="font-size: ${d.emailAddressSize}px; color: ${d.emailAddressColor}; font-weight: bold; text-decoration: none; display: block; margin-bottom: 10px;">${d.emailAddress}</a>
+                                <p style="font-size: ${d.emailSubtitleSize}px; color: ${d.emailSubtitleColor}; margin: 0;">${d.emailSubtitle}</p>
+                            </div>
+                            
+                            <!-- Section Délai -->
+                            <div style="text-align: center; padding: 30px; background: rgba(255,255,255,0.1); border-radius: 12px;">
+                                <div style="font-size: 48px; margin-bottom: 15px;">${d.deliveryIcon}</div>
+                                <h3 style="font-size: ${d.deliveryTitleSize}px; color: ${d.deliveryTitleColor}; margin-bottom: 10px;">${d.deliveryTitle}</h3>
+                                <div style="font-size: ${d.deliveryTimeSize}px; color: ${d.deliveryTimeColor}; font-weight: bold; display: block; margin-bottom: 10px;">${d.deliveryTime}</div>
+                                <p style="font-size: ${d.deliverySubtitleSize}px; color: ${d.deliverySubtitleColor}; margin: 0;">${d.deliverySubtitle}</p>
+                            </div>
+                            
+                        </div>
+                        
+                        <!-- Boutons d'action -->
+                        <div style="text-align: center; margin-bottom: 40px;">
                             <a href="${d.primaryButtonLink}" 
-                               style="padding: 16px 32px; background: white; color: ${d.backgroundColor}; 
-                                      border-radius: 8px; font-size: 1.125rem; font-weight: 600; 
-                                      text-decoration: none; display: inline-block;">
+                               style="padding: 16px 32px; background: ${d.primaryButtonColor}; color: ${d.primaryButtonTextColor}; 
+                                      border-radius: 8px; font-size: 18px; font-weight: 700; 
+                                      text-decoration: none; display: inline-block; margin: 0 10px; 
+                                      border: 3px solid ${d.primaryButtonColor}; transition: all 0.3s ease;">
                                 ${d.primaryButtonText}
                             </a>
-                            ${secondaryButton}
+                            <a href="${d.secondaryButtonLink}" 
+                               style="padding: 16px 32px; background: ${d.secondaryButtonColor}; color: ${d.secondaryButtonTextColor}; 
+                                      border-radius: 8px; font-size: 18px; font-weight: 700; 
+                                      text-decoration: none; display: inline-block; margin: 0 10px; 
+                                      border: 3px solid ${d.secondaryButtonColor}; transition: all 0.3s ease;">
+                                ${d.secondaryButtonText}
+                            </a>
                         </div>
+                        
+                        <!-- Section Avantages -->
+                        <div style="max-width: 800px; margin: 0 auto;">
+                            ${advantagesHtml}
+                        </div>
+                        
                     </div>
                 `;
             }
 
             getEditableFields() {
                 return [
-                    // Section 1: Contenu
-                    { name: 'title', label: 'Titre', type: 'text', category: 'Contenu' },
+                    // 1. Titre principal
+                    { name: 'mainTitle', label: 'Titre principal', type: 'text', category: 'Titre Principal' },
+                    { name: 'mainTitleSize', label: 'Taille du titre', type: 'range', min: 20, max: 72, category: 'Titre Principal' },
+                    { name: 'mainTitleColor', label: 'Couleur du titre', type: 'color', category: 'Titre Principal' },
+                    { name: 'mainTitleAlignment', label: 'Alignement', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' }, { value: 'center', label: 'Centre' }, { value: 'right', label: 'Droite' }
+                    ], category: 'Titre Principal' },
+                    { name: 'mainTitleIsBold', label: 'Gras', type: 'checkbox', category: 'Titre Principal' },
+                    { name: 'mainTitleIsItalic', label: 'Italique', type: 'checkbox', category: 'Titre Principal' },
                     
-                    // Section 2: Style du titre principal
-                    { name: 'titleSize', label: 'Taille du titre', type: 'range', min: 20, max: 60, category: 'Titre - Typographie' },
-                    { name: 'titleColor', label: 'Couleur du titre', type: 'color', category: 'Titre - Typographie' },
-                    { name: 'titleAlignment', label: 'Alignement du titre', type: 'select', options: [
-                        { value: 'left', label: 'Gauche' },
-                        { value: 'center', label: 'Centre' },
-                        { value: 'right', label: 'Droite' }
-                    ], category: 'Titre - Typographie' },
-                    { name: 'titleIsBold', label: 'Titre en gras', type: 'checkbox', category: 'Titre - Typographie' },
-                    { name: 'titleIsItalic', label: 'Titre en italique', type: 'checkbox', category: 'Titre - Typographie' },
-                    
-                    // Section 3: Arrière-plan du titre
-                    { name: 'titleHasBackground', label: 'Arrière-plan du titre', type: 'checkbox', category: 'Titre - Arrière-plan' },
-                    { name: 'titleBackgroundColor', label: 'Couleur de fond du titre', type: 'color', category: 'Titre - Arrière-plan', condition: { field: 'titleHasBackground', value: true } },
-                    { name: 'titleBackgroundOpacity', label: 'Transparence du fond', type: 'range', min: 0, max: 100, step: 5, category: 'Titre - Arrière-plan', condition: { field: 'titleHasBackground', value: true } },
-                    
-                    // Section 4: Contour du titre
-                    { name: 'titleHasBorder', label: 'Contour du titre', type: 'checkbox', category: 'Titre - Contour' },
-                    { name: 'titleBorderColor', label: 'Couleur du contour', type: 'color', category: 'Titre - Contour', condition: { field: 'titleHasBorder', value: true } },
-                    { name: 'titleBorderWidth', label: 'Épaisseur du contour', type: 'range', min: 1, max: 10, step: 1, category: 'Titre - Contour', condition: { field: 'titleHasBorder', value: true } },
-                    { name: 'titleBorderStyle', label: 'Style du contour', type: 'select', options: [
-                        { value: 'solid', label: 'Solide' },
-                        { value: 'dashed', label: 'Tirets' },
-                        { value: 'dotted', label: 'Points' },
-                        { value: 'double', label: 'Double' }
-                    ], category: 'Titre - Contour', condition: { field: 'titleHasBorder', value: true } },
-                    
-                    // Section 5: Coins arrondis du titre
-                    { name: 'titleHasRoundedCorners', label: 'Coins arrondis du titre', type: 'checkbox', category: 'Titre - Forme' },
-                    { name: 'titleBorderRadius', label: 'Niveau d\'arrondi', type: 'range', min: 0, max: 50, step: 2, category: 'Titre - Forme', condition: { field: 'titleHasRoundedCorners', value: true } },
-                    
-                    // Section 6: Espacement du titre
-                    { name: 'titlePaddingTop', label: 'Espacement haut du titre', type: 'select', options: [
-                        { value: 'none', label: 'Aucun' },
-                        { value: 'small', label: 'Petit' },
-                        { value: 'medium', label: 'Moyen' },
-                        { value: 'large', label: 'Grand' }
+                    // Style titre principal
+                    { name: 'mainTitleHasBackground', label: 'Arrière-plan', type: 'checkbox', category: 'Titre - Style' },
+                    { name: 'mainTitleBackgroundColor', label: 'Couleur fond', type: 'color', category: 'Titre - Style', condition: { field: 'mainTitleHasBackground', value: true } },
+                    { name: 'mainTitleBackgroundOpacity', label: 'Opacité fond (%)', type: 'range', min: 0, max: 100, category: 'Titre - Style', condition: { field: 'mainTitleHasBackground', value: true } },
+                    { name: 'mainTitleHasBorder', label: 'Contour', type: 'checkbox', category: 'Titre - Style' },
+                    { name: 'mainTitleBorderColor', label: 'Couleur contour', type: 'color', category: 'Titre - Style', condition: { field: 'mainTitleHasBorder', value: true } },
+                    { name: 'mainTitleBorderWidth', label: 'Épaisseur contour', type: 'range', min: 1, max: 10, category: 'Titre - Style', condition: { field: 'mainTitleHasBorder', value: true } },
+                    { name: 'mainTitlePaddingTop', label: 'Espacement haut', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' }, { value: 'small', label: 'Petit' }, { value: 'medium', label: 'Moyen' }, { value: 'large', label: 'Grand' }
                     ], category: 'Titre - Espacement' },
-                    { name: 'titlePaddingBottom', label: 'Espacement bas du titre', type: 'select', options: [
-                        { value: 'none', label: 'Aucun' },
-                        { value: 'small', label: 'Petit' },
-                        { value: 'medium', label: 'Moyen' },
-                        { value: 'large', label: 'Grand' }
+                    { name: 'mainTitlePaddingBottom', label: 'Espacement bas', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' }, { value: 'small', label: 'Petit' }, { value: 'medium', label: 'Moyen' }, { value: 'large', label: 'Grand' }
                     ], category: 'Titre - Espacement' },
-                    { name: 'titlePaddingLeft', label: 'Espacement gauche du titre', type: 'select', options: [
-                        { value: 'none', label: 'Aucun' },
-                        { value: 'small', label: 'Petit' },
-                        { value: 'medium', label: 'Moyen' },
-                        { value: 'large', label: 'Grand' }
-                    ], category: 'Titre - Espacement' },
-                    { name: 'titlePaddingRight', label: 'Espacement droite du titre', type: 'select', options: [
-                        { value: 'none', label: 'Aucun' },
-                        { value: 'small', label: 'Petit' },
-                        { value: 'medium', label: 'Moyen' },
-                        { value: 'large', label: 'Grand' }
-                    ], category: 'Titre - Espacement' },
-                    { name: 'titleMarginBottom', label: 'Marge du bas du titre', type: 'select', options: [
-                        { value: 'none', label: 'Aucune' },
-                        { value: 'small', label: 'Petite' },
-                        { value: 'medium', label: 'Moyenne' },
-                        { value: 'large', label: 'Grande' }
+                    { name: 'mainTitleMarginBottom', label: 'Marge du bas', type: 'select', options: [
+                        { value: 'none', label: 'Aucune' }, { value: 'small', label: 'Petite' }, { value: 'medium', label: 'Moyenne' }, { value: 'large', label: 'Grande' }
                     ], category: 'Titre - Espacement' },
                     
-                    // Section 7: Autres éléments
-                    { name: 'description', label: 'Description', type: 'textarea', category: 'Contenu' },
+                    // 2. Sous-titre
+                    { name: 'subtitle', label: 'Sous-titre', type: 'text', category: 'Sous-titre' },
+                    { name: 'subtitleSize', label: 'Taille sous-titre', type: 'range', min: 14, max: 48, category: 'Sous-titre' },
+                    { name: 'subtitleColor', label: 'Couleur sous-titre', type: 'color', category: 'Sous-titre' },
+                    { name: 'subtitleAlignment', label: 'Alignement', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' }, { value: 'center', label: 'Centre' }, { value: 'right', label: 'Droite' }
+                    ], category: 'Sous-titre' },
+                    { name: 'subtitleIsBold', label: 'Gras', type: 'checkbox', category: 'Sous-titre' },
+                    { name: 'subtitleIsItalic', label: 'Italique', type: 'checkbox', category: 'Sous-titre' },
+                    { name: 'subtitleMarginBottom', label: 'Marge du bas', type: 'select', options: [
+                        { value: 'none', label: 'Aucune' }, { value: 'small', label: 'Petite' }, { value: 'medium', label: 'Moyenne' }, { value: 'large', label: 'Grande' }
+                    ], category: 'Sous-titre' },
+                    
+                    // 3. Section Contact (Téléphone)
+                    { name: 'phoneIcon', label: 'Icône téléphone', type: 'text', category: 'Contact - Téléphone' },
+                    { name: 'phoneTitle', label: 'Titre section', type: 'text', category: 'Contact - Téléphone' },
+                    { name: 'phoneNumber', label: 'Numéro téléphone', type: 'text', category: 'Contact - Téléphone' },
+                    { name: 'phoneSubtitle', label: 'Sous-titre', type: 'text', category: 'Contact - Téléphone' },
+                    { name: 'phoneTitleSize', label: 'Taille titre', type: 'range', min: 14, max: 32, category: 'Contact - Téléphone' },
+                    { name: 'phoneTitleColor', label: 'Couleur titre', type: 'color', category: 'Contact - Téléphone' },
+                    { name: 'phoneNumberSize', label: 'Taille numéro', type: 'range', min: 16, max: 40, category: 'Contact - Téléphone' },
+                    { name: 'phoneNumberColor', label: 'Couleur numéro', type: 'color', category: 'Contact - Téléphone' },
+                    { name: 'phoneSubtitleSize', label: 'Taille sous-titre', type: 'range', min: 12, max: 24, category: 'Contact - Téléphone' },
+                    { name: 'phoneSubtitleColor', label: 'Couleur sous-titre', type: 'color', category: 'Contact - Téléphone' },
+                    
+                    // 4. Section Email
+                    { name: 'emailIcon', label: 'Icône email', type: 'text', category: 'Contact - Email' },
+                    { name: 'emailTitle', label: 'Titre section', type: 'text', category: 'Contact - Email' },
+                    { name: 'emailAddress', label: 'Adresse email', type: 'text', category: 'Contact - Email' },
+                    { name: 'emailSubtitle', label: 'Sous-titre', type: 'text', category: 'Contact - Email' },
+                    { name: 'emailTitleSize', label: 'Taille titre', type: 'range', min: 14, max: 32, category: 'Contact - Email' },
+                    { name: 'emailTitleColor', label: 'Couleur titre', type: 'color', category: 'Contact - Email' },
+                    { name: 'emailAddressSize', label: 'Taille email', type: 'range', min: 16, max: 32, category: 'Contact - Email' },
+                    { name: 'emailAddressColor', label: 'Couleur email', type: 'color', category: 'Contact - Email' },
+                    { name: 'emailSubtitleSize', label: 'Taille sous-titre', type: 'range', min: 12, max: 24, category: 'Contact - Email' },
+                    { name: 'emailSubtitleColor', label: 'Couleur sous-titre', type: 'color', category: 'Contact - Email' },
+                    
+                    // 5. Section Délai
+                    { name: 'deliveryIcon', label: 'Icône délai', type: 'text', category: 'Contact - Délai' },
+                    { name: 'deliveryTitle', label: 'Titre section', type: 'text', category: 'Contact - Délai' },
+                    { name: 'deliveryTime', label: 'Temps délai', type: 'text', category: 'Contact - Délai' },
+                    { name: 'deliverySubtitle', label: 'Sous-titre', type: 'text', category: 'Contact - Délai' },
+                    { name: 'deliveryTitleSize', label: 'Taille titre', type: 'range', min: 14, max: 32, category: 'Contact - Délai' },
+                    { name: 'deliveryTitleColor', label: 'Couleur titre', type: 'color', category: 'Contact - Délai' },
+                    { name: 'deliveryTimeSize', label: 'Taille délai', type: 'range', min: 20, max: 48, category: 'Contact - Délai' },
+                    { name: 'deliveryTimeColor', label: 'Couleur délai', type: 'color', category: 'Contact - Délai' },
+                    { name: 'deliverySubtitleSize', label: 'Taille sous-titre', type: 'range', min: 12, max: 24, category: 'Contact - Délai' },
+                    { name: 'deliverySubtitleColor', label: 'Couleur sous-titre', type: 'color', category: 'Contact - Délai' },
+                    
+                    // 6. Boutons d'action
                     { name: 'primaryButtonText', label: 'Texte bouton principal', type: 'text', category: 'Boutons' },
                     { name: 'primaryButtonLink', label: 'Lien bouton principal', type: 'text', category: 'Boutons' },
+                    { name: 'primaryButtonColor', label: 'Couleur bouton principal', type: 'color', category: 'Boutons' },
+                    { name: 'primaryButtonTextColor', label: 'Couleur texte principal', type: 'color', category: 'Boutons' },
                     { name: 'secondaryButtonText', label: 'Texte bouton secondaire', type: 'text', category: 'Boutons' },
                     { name: 'secondaryButtonLink', label: 'Lien bouton secondaire', type: 'text', category: 'Boutons' },
-                    { name: 'showSecondaryButton', label: 'Afficher bouton secondaire', type: 'checkbox', category: 'Boutons' },
-                    { name: 'backgroundColor', label: 'Couleur de fond', type: 'color', category: 'Style' }
+                    { name: 'secondaryButtonColor', label: 'Couleur bouton secondaire', type: 'color', category: 'Boutons' },
+                    { name: 'secondaryButtonTextColor', label: 'Couleur texte secondaire', type: 'color', category: 'Boutons' },
+                    
+                    // 7. Style général
+                    { name: 'backgroundColor', label: 'Couleur de fond', type: 'color', category: 'Style Général' },
+                    { name: 'containerPadding', label: 'Espacement conteneur', type: 'range', min: 20, max: 120, category: 'Style Général' },
+                    { name: 'borderRadius', label: 'Coins arrondis', type: 'range', min: 0, max: 32, category: 'Style Général' },
+                    { name: 'hasShadow', label: 'Ombre', type: 'checkbox', category: 'Style Général' },
+                    { name: 'shadowColor', label: 'Couleur ombre', type: 'color', category: 'Style Général', condition: { field: 'hasShadow', value: true } },
+                    { name: 'shadowOpacity', label: 'Opacité ombre (%)', type: 'range', min: 0, max: 100, category: 'Style Général', condition: { field: 'hasShadow', value: true } }
                 ];
+            }
+
+            // Méthodes pour gestion dynamique des avantages (inspirées du PricingCard et TarifLocation)
+            addAdvantage(newAdvantage) {
+                console.log('🚀 addAdvantage called with:', newAdvantage);
+                if (!newAdvantage || newAdvantage.trim() === '') return;
+                this.defaultData.advantages.push({
+                    text: newAdvantage.trim(),
+                    emoji: '✅',
+                    color: '#10b981'
+                });
+                console.log('✅ Added advantage:', newAdvantage.trim());
+                console.log('🔍 Current advantages:', this.defaultData.advantages);
+            }
+            
+            removeAdvantage(index) {
+                console.log('🗑️ removeAdvantage called with index:', index);
+                if (index < 0 || index >= this.defaultData.advantages.length) return;
+                const removed = this.defaultData.advantages.splice(index, 1);
+                console.log('✅ Removed advantage:', removed[0]);
+                console.log('🔍 Remaining advantages:', this.defaultData.advantages);
+            }
+            
+            updateAdvantageText(index, newText) {
+                console.log('📝 updateAdvantageText called:', index, newText);
+                if (index < 0 || index >= this.defaultData.advantages.length) return;
+                if (!newText || newText.trim() === '') return;
+                this.defaultData.advantages[index].text = newText.trim();
+                console.log('✅ Updated advantage text:', this.defaultData.advantages[index]);
+            }
+            
+            updateAdvantageEmoji(index, newEmoji) {
+                console.log('😊 updateAdvantageEmoji called:', index, newEmoji);
+                if (index < 0 || index >= this.defaultData.advantages.length) return;
+                if (!newEmoji || newEmoji.trim() === '') return;
+                this.defaultData.advantages[index].emoji = newEmoji.trim();
+                console.log('✅ Updated advantage emoji:', this.defaultData.advantages[index]);
+            }
+            
+            updateAdvantageColor(index, newColor) {
+                console.log('🎨 updateAdvantageColor called:', index, newColor);
+                if (index < 0 || index >= this.defaultData.advantages.length) return;
+                if (!newColor || newColor.trim() === '') return;
+                this.defaultData.advantages[index].color = newColor.trim();
+                console.log('✅ Updated advantage color:', this.defaultData.advantages[index]);
             }
 
             getElements() {
                 return [
-                    { id: 'section', name: 'Section CTA', editable: true },
-                    { id: 'title', name: 'Titre', editable: true },
-                    { id: 'description', name: 'Description', editable: true },
-                    { id: 'buttons', name: 'Boutons', editable: true }
+                    { id: 'main-section', name: 'Section principale', editable: true },
+                    { id: 'main-title', name: 'Titre principal', editable: true },
+                    { id: 'subtitle', name: 'Sous-titre', editable: true },
+                    { id: 'contact-sections', name: 'Sections de contact', editable: true },
+                    { id: 'buttons', name: 'Boutons d\'action', editable: true },
+                    { id: 'advantages', name: 'Liste des avantages', editable: true }
                 ];
             }
         }
@@ -3807,6 +4009,9 @@
                 this.description = 'Grille tarifaire 3 colonnes avec fonctionnalités par plan';
                 
                 this.defaultData = {
+                    // Configuration widget
+                    defaultWidth: 9,
+                    
                     // Titre principal
                     title: 'TARIFS DE LOCATION TRANSPARENTS',
                     titleSize: 32,
@@ -5457,6 +5662,7 @@
                     const isPlan1Features = element.id === 'plan1-features' && this.selectedWidget.type === 'tarif-location';
                     const isPlan2Features = element.id === 'plan2-features' && this.selectedWidget.type === 'tarif-location';
                     const isPlan3Features = element.id === 'plan3-features' && this.selectedWidget.type === 'tarif-location';
+                    const isCallToActionAdvantages = element.id === 'advantages' && this.selectedWidget.type === 'call-to-action';
                     
                     if (isPricingFeatures) {
                         // Interface spéciale pour les fonctionnalités du Pricing Card
@@ -5969,6 +6175,78 @@
                                                     <label style="color: var(--text-muted); font-size: 12px; min-width: 60px;">Couleur :</label>
                                                     <input type="color" value="${itemData.color || '#ffffff'}" 
                                                            onchange="widgetEditor.updatePlan3FeatureColor(${index}, this.value)"
+                                                           style="width: 40px; height: 24px; border-radius: 4px; border: none; cursor: pointer;">
+                                                    <span style="color: var(--text-muted); font-size: 11px;">Couleur du texte</span>
+                                                </div>
+                                            </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (isCallToActionAdvantages) {
+                        // Interface spéciale pour les avantages du Call to Action
+                        const advantages = this.selectedWidget.data.advantages || [];
+                        
+                        elementsHtml += `
+                            <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                            border-radius: 8px; margin-bottom: 8px;">
+                                <div style="margin-bottom: 12px;">
+                                    <div style="color: #10b981; font-weight: 500; margin-bottom: 8px;">
+                                        <i class="fas fa-check-circle"></i> ${element.name} (${advantages.length})
+                                    </div>
+                                    <div style="color: var(--text-muted); font-size: 12px;">Gestion des avantages avec emoji et couleur personnalisables</div>
+                                </div>
+                                
+                                <div class="advantages-manager" style="margin-bottom: 12px;">
+                                    <div class="advantage-input-group" style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                        <input type="text" id="newAdvantageInput" placeholder="✅ Nouvel avantage..." 
+                                               style="flex: 1; padding: 8px 12px; background: var(--bg-primary); 
+                                                      border: 1px solid #10b981; border-radius: 6px; 
+                                                      color: var(--text-white); font-size: 14px;">
+                                        <button onclick="widgetEditor.addCallToActionAdvantage()" 
+                                                style="padding: 8px 16px; background: #10b981; 
+                                                       color: white; border: none; border-radius: 6px; 
+                                                       cursor: pointer; font-size: 14px; font-weight: 500;">
+                                            <i class="fas fa-plus"></i> Ajouter
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="advantages-list" style="max-height: 200px; overflow-y: auto;">
+                                        ${advantages.map((item, index) => {
+                                            return `
+                                            <div class="advantage-item" data-advantage-index="${index}" style="padding: 12px; background: rgba(16, 185, 129, 0.1); 
+                                                                              border: 1px solid rgba(16, 185, 129, 0.3); 
+                                                                              border-radius: 8px; margin-bottom: 12px;">
+                                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                                    <input type="text" value="${item.emoji}" placeholder="✅" 
+                                                           onchange="widgetEditor.updateCallToActionAdvantageEmoji(${index}, this.value)"
+                                                           oninput="widgetEditor.updateCallToActionAdvantageEmoji(${index}, this.value)"
+                                                           class="advantage-emoji"
+                                                           style="width: 40px; background: rgba(0,0,0,0.3); border: 1px solid rgba(16, 185, 129, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 16px; text-align: center; padding: 4px;"
+                                                           title="Emoji ou caractère (ex: ✅, 🎯, 🚀)">
+                                                    <input type="text" value="${item.text}" 
+                                                           onchange="widgetEditor.updateCallToActionAdvantageText(${index}, this.value)"
+                                                           oninput="widgetEditor.updateCallToActionAdvantageText(${index}, this.value)"
+                                                           class="advantage-text"
+                                                           style="flex: 1; background: rgba(0,0,0,0.3); border: 1px solid rgba(16, 185, 129, 0.5); 
+                                                                  border-radius: 4px; color: var(--text-white); font-size: 14px; padding: 6px;"
+                                                           placeholder="Texte de l'avantage">
+                                                    <button onclick="widgetEditor.removeCallToActionAdvantage(${index})" 
+                                                            title="Supprimer cet avantage"
+                                                            style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                                   border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                                   width: 28px; height: 28px; cursor: pointer; font-size: 12px;">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                <div style="display: flex; align-items: center; gap: 8px;">
+                                                    <label style="color: var(--text-muted); font-size: 12px; min-width: 60px;">Couleur :</label>
+                                                    <input type="color" value="${item.color || '#10b981'}" 
+                                                           onchange="widgetEditor.updateCallToActionAdvantageColor(${index}, this.value)"
+                                                           class="advantage-color"
                                                            style="width: 40px; height: 24px; border-radius: 4px; border: none; cursor: pointer;">
                                                     <span style="color: var(--text-muted); font-size: 11px;">Couleur du texte</span>
                                                 </div>
@@ -9715,6 +9993,139 @@ Folder('${id}')" title="Renommer">
                     this.updatePreview();
                 } else {
                     console.log(`✅ Emoji correctement affiché partout`);
+                }
+            }
+            
+            // ===== FONCTIONS POUR CALL TO ACTION WIDGET - GESTION DES AVANTAGES =====
+            
+            addCallToActionAdvantage() {
+                console.log('🚀 addCallToActionAdvantage called');
+                if (!this.selectedWidget) return;
+                if (this.selectedWidget.type !== 'call-to-action') return;
+                
+                const input = document.getElementById('newAdvantageInput');
+                if (!input || !input.value.trim()) return;
+                
+                const newAdvantage = input.value.trim();
+                this.selectedWidget.data.advantages.push({ text: newAdvantage, emoji: '✅', color: '#10b981' });
+                input.value = '';
+                
+                this.updateElementsTab();
+                this.updatePreview();
+                this.autoSave();
+                console.log('✅ Advantage added to CallToAction widget');
+            }
+            
+            removeCallToActionAdvantage(index) {
+                console.log('🗑️ removeCallToActionAdvantage called with index:', index);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'call-to-action') return;
+                if (index < 0 || index >= this.selectedWidget.data.advantages.length) return;
+                
+                this.selectedWidget.data.advantages.splice(index, 1);
+                this.updateElementsTab();
+                this.updatePreview();
+                this.autoSave();
+                console.log('✅ Advantage removed from CallToAction widget');
+            }
+            
+            updateCallToActionAdvantageText(index, newText) {
+                console.log('📝 updateCallToActionAdvantageText called:', index, newText);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'call-to-action') return;
+                
+                const advantages = this.selectedWidget.data.advantages;
+                if (index < 0 || index >= advantages.length) return;
+                
+                advantages[index].text = newText;
+                this.updateCallToActionAdvantageInDOM(index, advantages[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            updateCallToActionAdvantageEmoji(index, newEmoji) {
+                console.log('😊 updateCallToActionAdvantageEmoji called:', index, newEmoji);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'call-to-action') return;
+                
+                const advantages = this.selectedWidget.data.advantages;
+                if (index < 0 || index >= advantages.length) return;
+                
+                advantages[index].emoji = newEmoji;
+                this.updateCallToActionAdvantageInDOM(index, advantages[index]);
+                this.updatePreview();
+                setTimeout(() => {
+                    this.verifyAndFixCallToActionEmojiDisplay(index, advantages[index]);
+                }, 100);
+                this.autoSave();
+            }
+            
+            updateCallToActionAdvantageColor(index, newColor) {
+                console.log('🌈 updateCallToActionAdvantageColor called:', index, newColor);
+                if (!this.selectedWidget || this.selectedWidget.type !== 'call-to-action') return;
+                
+                const advantages = this.selectedWidget.data.advantages;
+                if (index < 0 || index >= advantages.length) return;
+                
+                advantages[index].color = newColor;
+                this.updateCallToActionAdvantageInDOM(index, advantages[index]);
+                this.updatePreview();
+                this.autoSave();
+            }
+            
+            updateCallToActionAdvantageInDOM(index, advantageData) {
+                console.log(`🔄 updateCallToActionAdvantageInDOM: Mise à jour avantage[${index}]`, advantageData);
+                
+                // Mettre à jour dans l'onglet Elements
+                const advantageItem = document.querySelector(`[data-advantage-index="${index}"]`);
+                if (advantageItem) {
+                    const textInput = advantageItem.querySelector('.advantage-text');
+                    const emojiInput = advantageItem.querySelector('.advantage-emoji');
+                    const colorInput = advantageItem.querySelector('.advantage-color');
+                    
+                    if (textInput) textInput.value = advantageData.text;
+                    if (emojiInput) emojiInput.value = advantageData.emoji;
+                    if (colorInput) colorInput.value = advantageData.color;
+                    
+                    console.log(`✅ DOM mis à jour pour l'avantage[${index}]`);
+                }
+            }
+            
+            verifyAndFixCallToActionEmojiDisplay(index, expectedData) {
+                console.log(`🔍 verifyAndFixCallToActionEmojiDisplay: Vérification avantage[${index}]`, expectedData);
+                
+                let needsRefresh = false;
+                
+                // Vérifier la fenêtre d'édition
+                const advantageItem = document.querySelector(`[data-advantage-index="${index}"]`);
+                if (advantageItem) {
+                    const emojiInput = advantageItem.querySelector('.advantage-emoji');
+                    
+                    if (emojiInput && emojiInput.value !== expectedData.emoji) {
+                        console.log(`❌ Emoji mismatch dans l'éditeur - Attendu: "${expectedData.emoji}", Trouvé: "${emojiInput.value}"`);
+                        needsRefresh = true;
+                    }
+                }
+                
+                // Vérifier la prévisualisation
+                const preview = document.getElementById('preview');
+                if (preview) {
+                    const advantageElements = preview.querySelectorAll('.cta-location-section div[style*="display: flex"]');
+                    
+                    if (advantageElements[index]) {
+                        const emojiSpan = advantageElements[index].querySelector('span:first-child');
+                        
+                        if (emojiSpan && emojiSpan.textContent !== expectedData.emoji) {
+                            console.log(`❌ Emoji mismatch dans la preview - Attendu: "${expectedData.emoji}", Trouvé: "${emojiSpan.textContent}"`);
+                            needsRefresh = true;
+                        }
+                    }
+                }
+                
+                // Si des problèmes sont détectés, forcer un re-render complet
+                if (needsRefresh) {
+                    console.log(`🔄 Forçage du re-render complet pour corriger les emoji des avantages`);
+                    this.renderCanvas();
+                    this.updatePreview();
+                } else {
+                    console.log(`✅ Emoji correctement affiché partout pour l'avantage[${index}]`);
                 }
             }
         }
