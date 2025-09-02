@@ -532,9 +532,9 @@
                             backgroundColor: '#0F172A'
                         },
                         template: `
-                            <div class="hero-section" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 80px 40px; text-align: center; color: white;">
-                                <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; margin-bottom: 1rem; background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{title}}</h1>
-                                <div style="font-size: 1.5rem; color: #10B981; font-weight: 600; margin-bottom: 1rem;">{{subtitle}}</div>
+                            <div class="hero-section" style="--hero-bg: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);">
+                                <h1 class="hero-title" style="--hero-title-bg: linear-gradient(135deg, #10B981 0%, #14B8A6 100%);">{{title}}</h1>
+                                <div class="hero-subtitle" style="--hero-subtitle-color: #10B981;">{{subtitle}}</div>
                                 <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem auto; opacity: 0.9;">{{description}}</p>
                                 <button style="background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%); color: white; border: none; padding: 1rem 2rem; font-size: 1.1rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease;">{{ctaText}}</button>
                             </div>
@@ -583,7 +583,7 @@
                                 <h2 style="text-align: center; font-size: 2.5rem; font-weight: 900; color: #0F172A; margin-bottom: 3rem;">{{title}}</h2>
                                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto;">
                                     {{#each plans}}
-                                    <div class="pricing-card" style="background: {{#if featured}}linear-gradient(135deg, #0F172A 0%, #1E293B 100%){{else}}white{{/if}}; border: 2px solid {{#if featured}}#10B981{{else}}#E2E8F0{{/if}}; border-radius: 16px; padding: 2rem; text-align: center; position: relative; {{#if featured}}transform: scale(1.05);{{/if}}">
+                                    <div class="pricing-card" style="--pricing-card-bg: {{#if featured}}linear-gradient(135deg, #0F172A 0%, #1E293B 100%){{else}}white{{/if}}; --pricing-card-border: {{#if featured}}#10B981{{else}}#E2E8F0{{/if}}; --pricing-card-transform: {{#if featured}}scale(1.05){{else}}none{{/if}};">
                                         {{#if featured}}<div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">POPULAIRE</div>{{/if}}
                                         <h3 style="color: {{#if featured}}#10B981{{else}}#0F172A{{/if}}; font-size: 1.5rem; margin-bottom: 1rem;">{{name}}</h3>
                                         <div style="margin-bottom: 2rem;">
@@ -592,10 +592,10 @@
                                         </div>
                                         <ul style="list-style: none; margin-bottom: 2rem; text-align: left;">
                                             {{#each features}}
-                                            <li style="margin-bottom: 0.5rem; color: {{#if ../featured}}#CBD5E1{{else}}#475569{{/if}};">✅ {{this}}</li>
+                                            <li class="pricing-feature" style="--pricing-feature-color: {{#if ../featured}}#CBD5E1{{else}}#475569{{/if}};">✅ {{this}}</li>
                                             {{/each}}
                                         </ul>
-                                        <button style="width: 100%; padding: 1rem; background: {{#if featured}}linear-gradient(135deg, #10B981 0%, #14B8A6 100%){{else}}#0F172A{{/if}}; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Choisir ce Plan</button>
+                                        <button class="pricing-cta" style="--pricing-cta-bg: {{#if featured}}linear-gradient(135deg, #10B981 0%, #14B8A6 100%){{else}}#0F172A{{/if}};">Choisir ce Plan</button>
                                     </div>
                                     {{/each}}
                                 </div>

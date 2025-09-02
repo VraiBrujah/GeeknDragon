@@ -399,7 +399,7 @@ class WidgetEditor {
                     this.selectedContainer = null;
                     this.elements.propertiesContent.innerHTML = `
                         <div class="properties-empty">
-                            <i class="fas fa-info-circle" style="font-size: 2rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+                            <i class="fas fa-info-circle properties-empty-icon"></i>
                             <p>Sélectionnez un widget pour voir ses propriétés</p>
                         </div>
                     `;
@@ -1771,7 +1771,7 @@ class WidgetEditor {
             this.selectedContainer = null;
             this.elements.propertiesContent.innerHTML = `
                 <div class="properties-empty">
-                    <i class="fas fa-info-circle" style="font-size: 2rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+                    <i class="fas fa-info-circle properties-empty-icon"></i>
                     <p>Sélectionnez un widget pour voir ses propriétés</p>
                 </div>
             `;
