@@ -1653,13 +1653,108 @@
         });
     </script>
     
-    <!-- Récepteur de Synchronisation Instantanée Li-CUBE PRO™ -->
+    <!-- Système de Synchronisation Instantanée Li-CUBE PRO™ -->
+    <script src="js/instant-sync.js"></script>
     <script src="js/presentation-receiver.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // 📂 PERSISTANCE : Fonctions de chargement des structures sauvegardées
+            function loadStructureDataFromStorage() {
+                try {
+                    const saved = localStorage.getItem('licubepro-location-structures');
+                    if (saved) {
+                        const structureData = JSON.parse(saved);
+                        console.log('📂 Structures chargées dans location.html:', structureData);
+                        
+                        // 🔄 RECONSTRUCTION : Remplacement du contenu existant par les structures sauvegardées
+                        if (structureData.faiblesses) {
+                            rebuildWeaknessList(structureData.faiblesses);
+                        }
+                        if (structureData.avantages) {
+                            rebuildStrengthsList(structureData.avantages);
+                        }
+                        
+                        return true;
+                    }
+                } catch (error) {
+                    console.error('❌ Erreur chargement structures dans location.html:', error);
+                }
+                return false;
+            }
+            
+            // 🛠️ RECONSTRUCTION : Reconstruction complète de la liste des faiblesses
+            function rebuildWeaknessList(faiblesses) {
+                const container = document.querySelector('.weakness-list');
+                if (!container) return;
+                
+                const weaknessHTML = faiblesses.map(faiblesse => `
+                    <div class="weakness-item" data-weakness-id="${faiblesse.id}">
+                        <div class="weakness-icon">
+                            <span class="editable" data-field="weakness${faiblesse.id}-emoji">${faiblesse.emoji}</span>
+                        </div>
+                        <div class="weakness-content">
+                            <h4 class="editable" data-field="weakness${faiblesse.id}-title">${faiblesse.titre}</h4>
+                            <p class="editable" data-field="weakness${faiblesse.id}-desc">${faiblesse.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+                
+                container.innerHTML = weaknessHTML;
+                
+                // 📡 REGISTRATION : Enregistrement de tous les nouveaux champs
+                setTimeout(() => {
+                    const editableFields = container.querySelectorAll('[data-field]');
+                    editableFields.forEach(field => {
+                        if (window.instantSync) {
+                            window.instantSync.registerNewField(field);
+                        }
+                    });
+                }, 100);
+            }
+            
+            // 🛠️ RECONSTRUCTION : Reconstruction complète de la liste des avantages
+            function rebuildStrengthsList(avantages) {
+                const container = document.querySelector('.strength-list');
+                if (!container) return;
+                
+                const strengthHTML = avantages.map(avantage => `
+                    <div class="strength-item" data-strength-id="${avantage.id}">
+                        <div class="strength-icon">
+                            <span class="editable" data-field="strength${avantage.id}-emoji">${avantage.emoji}</span>
+                        </div>
+                        <div class="strength-content">
+                            <h4 class="editable" data-field="strength${avantage.id}-title">${avantage.titre}</h4>
+                            <p class="editable" data-field="strength${avantage.id}-desc">${avantage.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+                
+                container.innerHTML = strengthHTML;
+                
+                // 📡 REGISTRATION : Enregistrement de tous les nouveaux champs
+                setTimeout(() => {
+                    const editableFields = container.querySelectorAll('[data-field]');
+                    editableFields.forEach(field => {
+                        if (window.instantSync) {
+                            window.instantSync.registerNewField(field);
+                        }
+                    });
+                }, 100);
+            }
+            
+            // 📡 Initialisation du système de synchronisation instantanée
+            window.instantSync = new InstantSync('location');
+            
+            // 📡 Initialisation du récepteur de présentation
             window.presentationReceiver = new PresentationReceiver('location');
-            console.log('📡 PresentationReceiver activé');
+            
+            // 📂 CHARGEMENT : Tentative de récupération des structures sauvegardées
+            setTimeout(() => {
+                loadStructureDataFromStorage();
+            }, 200);
+            
+            console.log('📡 Synchronisation instantanée et PresentationReceiver activés avec persistance');
         });
     </script>
 </body>

@@ -105,9 +105,15 @@ class PresentationReceiver {
         
         try {
             const syncMessage = JSON.parse(event.newValue);
-            this.queueUpdate(syncMessage);
             
-            console.log(`📨 Message storage reçu: ${syncMessage.fieldName || 'complet'}`);
+            // 🔄 CORRECTION : traitement spécial pour les changements de structure dynamique
+            if (syncMessage.type === 'dynamic-structure-change') {
+                console.log(`📨 Message structure dynamique reçu: ${syncMessage.action}`);
+                this.handleSyncMessage(syncMessage);
+            } else {
+                this.queueUpdate(syncMessage);
+                console.log(`📨 Message storage reçu: ${syncMessage.fieldName || 'complet'}`);
+            }
             
         } catch (error) {
             console.error('Erreur traitement message storage:', error);
@@ -226,6 +232,14 @@ class PresentationReceiver {
         const newElement = weaknessList.querySelector(`[data-weakness-id="${weakness.id}"]`);
         if (newElement) {
             this.animateNewElement(newElement);
+            
+            // 📡 REGISTRATION : enregistrement des nouveaux champs avec instant-sync
+            const editableFields = newElement.querySelectorAll('[data-field]');
+            editableFields.forEach(field => {
+                if (window.instantSync) {
+                    window.instantSync.registerNewField(field);
+                }
+            });
         }
         
         console.log(`✅ Faiblesse ${weakness.id} ajoutée à la présentation`);
@@ -284,6 +298,14 @@ class PresentationReceiver {
         const newElement = strengthList.querySelector(`[data-strength-id="${strength.id}"]`);
         if (newElement) {
             this.animateNewElement(newElement);
+            
+            // 📡 REGISTRATION : enregistrement des nouveaux champs avec instant-sync
+            const editableFields = newElement.querySelectorAll('[data-field]');
+            editableFields.forEach(field => {
+                if (window.instantSync) {
+                    window.instantSync.registerNewField(field);
+                }
+            });
         }
         
         console.log(`✅ Avantage ${strength.id} ajouté à la présentation`);

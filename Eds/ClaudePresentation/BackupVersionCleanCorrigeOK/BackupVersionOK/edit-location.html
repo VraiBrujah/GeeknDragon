@@ -3707,9 +3707,22 @@ Fabrication et Support 100% Québécois</textarea>
                     description: 'Description de la nouvelle faiblesse...'
                 };
                 
-                // Ajout à la liste et re-rendu
+                // Ajout à la liste et ajout manuel à l'interface
                 faiblesses_courantes.push(nouvelleFaiblesse);
-                renderWeaknesses();
+                
+                // 🎨 AJOUT MANUEL : Création et ajout du nouvel élément sans re-rendu complet
+                const container = document.getElementById('faiblesses-container');
+                if (container) {
+                    const newElementHTML = createWeaknessBlock(nouvelleFaiblesse);
+                    container.insertAdjacentHTML('beforeend', newElementHTML);
+                    
+                    // 📡 Enregistrement du nouvel élément avec instant-sync
+                    const newElement = container.querySelector(`[data-weakness-id="${nouvelId}"]`);
+                    if (newElement && window.instantSync) {
+                        const editableFields = newElement.querySelectorAll('[data-field]');
+                        editableFields.forEach(field => window.instantSync.registerNewField(field));
+                    }
+                }
                 
                 // ✅ SYNCHRONISATION TEMPS RÉEL : Notification de l'ajout
                 notifyDynamicStructureChange('weakness-added', {
@@ -3793,7 +3806,12 @@ Fabrication et Support 100% Québécois</textarea>
                 
                 if (faiblesses_courantes.length < indexInitial) {
                     saveStructureData(); // 💾 Sauvegarde immédiate
-                    renderWeaknesses();
+                    
+                    // 🗑️ SUPPRESSION MANUELLE : Retrait de l'élément de l'interface sans re-rendu complet
+                    const elementToRemove = document.querySelector(`[data-weakness-id="${id}"]`);
+                    if (elementToRemove) {
+                        elementToRemove.remove();
+                    }
                     
                     // ✅ SYNCHRONISATION TEMPS RÉEL : Notification de la suppression
                     notifyDynamicStructureChange('weakness-removed', {
@@ -3837,9 +3855,22 @@ Fabrication et Support 100% Québécois</textarea>
                     description: 'Description du nouvel avantage...'
                 };
                 
-                // Ajout à la liste et re-rendu
+                // Ajout à la liste et ajout manuel à l'interface
                 avantages_courants.push(nouvelAvantage);
-                renderStrengths();
+                
+                // 🎨 AJOUT MANUEL : Création et ajout du nouvel élément sans re-rendu complet
+                const container = document.getElementById('avantages-container');
+                if (container) {
+                    const newElementHTML = createStrengthBlock(nouvelAvantage);
+                    container.insertAdjacentHTML('beforeend', newElementHTML);
+                    
+                    // 📡 Enregistrement du nouvel élément avec instant-sync
+                    const newElement = container.querySelector(`[data-strength-id="${nouvelId}"]`);
+                    if (newElement && window.instantSync) {
+                        const editableFields = newElement.querySelectorAll('[data-field]');
+                        editableFields.forEach(field => window.instantSync.registerNewField(field));
+                    }
+                }
                 
                 // ✅ SYNCHRONISATION TEMPS RÉEL : Notification de l'ajout
                 notifyDynamicStructureChange('strength-added', {
@@ -3922,7 +3953,12 @@ Fabrication et Support 100% Québécois</textarea>
                 
                 if (avantages_courants.length < indexInitial) {
                     saveStructureData(); // 💾 Sauvegarde immédiate
-                    renderStrengths();
+                    
+                    // 🗑️ SUPPRESSION MANUELLE : Retrait de l'élément de l'interface sans re-rendu complet
+                    const elementToRemove = document.querySelector(`[data-strength-id="${id}"]`);
+                    if (elementToRemove) {
+                        elementToRemove.remove();
+                    }
                     
                     // ✅ SYNCHRONISATION TEMPS RÉEL : Notification de la suppression
                     notifyDynamicStructureChange('strength-removed', {
