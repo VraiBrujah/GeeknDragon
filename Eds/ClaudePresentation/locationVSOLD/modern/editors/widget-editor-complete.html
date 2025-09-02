@@ -2540,6 +2540,26 @@
                 
                 this.defaultData = {
                     planName: 'ESSENTIEL',
+                    // Propriétés du titre principal (planName) - inspirées du TextSimple
+                    planNameSize: 20,
+                    planNameColor: '#ffffff',
+                    planNameAlignment: 'center',
+                    planNameIsBold: true,
+                    planNameIsItalic: false,
+                    planNameHasBackground: false,
+                    planNameBackgroundColor: '#10b981',
+                    planNameBackgroundOpacity: 20,
+                    planNameHasBorder: false,
+                    planNameBorderColor: '#10b981',
+                    planNameBorderWidth: 2,
+                    planNameBorderStyle: 'solid',
+                    planNameHasRoundedCorners: false,
+                    planNameBorderRadius: 8,
+                    planNamePaddingTop: 'small',
+                    planNamePaddingBottom: 'large',
+                    planNamePaddingLeft: 'medium',
+                    planNamePaddingRight: 'medium',
+                    planNameMarginBottom: 'large',
                     price: '299',
                     currency: '$',
                     period: '/mois',
@@ -2559,8 +2579,75 @@
                 };
             }
 
+            // Helper pour convertir les valeurs d'espacement en pixels (inspiré du TextSimple)
+            getSpacingValue(spacingType) {
+                const spacingMap = {
+                    'none': '0px',
+                    'small': '8px',
+                    'medium': '16px',
+                    'large': '32px'
+                };
+                return spacingMap[spacingType] || '16px';
+            }
+
+            // Génère les styles CSS pour le titre du plan
+            generatePlanNameStyles(data) {
+                const styleRules = [];
+                
+                // Style de base
+                styleRules.push('text-align: ' + (data.planNameAlignment || 'center'));
+                styleRules.push('font-size: ' + (data.planNameSize || 20) + 'px');
+                styleRules.push('color: ' + (data.planNameColor || '#ffffff'));
+                styleRules.push('font-weight: ' + (data.planNameIsBold ? 'bold' : 'normal'));
+                styleRules.push('font-style: ' + (data.planNameIsItalic ? 'italic' : 'normal'));
+                styleRules.push('text-transform: uppercase');
+                styleRules.push('letter-spacing: 0.05em');
+                
+                // Arrière-plan
+                if (data.planNameHasBackground) {
+                    const opacity = (data.planNameBackgroundOpacity || 20) / 100;
+                    const bgColor = data.planNameBackgroundColor || '#10b981';
+                    // Convertir hex en rgba
+                    const hex = bgColor.replace('#', '');
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    styleRules.push(`background-color: rgba(${r}, ${g}, ${b}, ${opacity})`);
+                }
+                
+                // Contour
+                if (data.planNameHasBorder) {
+                    const borderWidth = data.planNameBorderWidth || 2;
+                    const borderStyle = data.planNameBorderStyle || 'solid';
+                    const borderColor = data.planNameBorderColor || '#10b981';
+                    styleRules.push(`border: ${borderWidth}px ${borderStyle} ${borderColor}`);
+                }
+                
+                // Coins arrondis
+                if (data.planNameHasRoundedCorners) {
+                    const borderRadius = data.planNameBorderRadius || 8;
+                    styleRules.push(`border-radius: ${borderRadius}px`);
+                }
+                
+                // Espacement interne (padding)
+                const paddingTop = this.getSpacingValue(data.planNamePaddingTop || 'small');
+                const paddingBottom = this.getSpacingValue(data.planNamePaddingBottom || 'large');
+                const paddingLeft = this.getSpacingValue(data.planNamePaddingLeft || 'medium');
+                const paddingRight = this.getSpacingValue(data.planNamePaddingRight || 'medium');
+                styleRules.push(`padding: ${paddingTop} ${paddingRight} ${paddingBottom} ${paddingLeft}`);
+                
+                // Marge du bas
+                const marginBottom = this.getSpacingValue(data.planNameMarginBottom || 'large');
+                styleRules.push(`margin-bottom: ${marginBottom}`);
+                
+                return styleRules.join('; ');
+            }
+
             render(data = {}) {
                 const d = { ...this.defaultData, ...data };
+                
+                // Générer les styles du titre du plan
+                const planNameStyles = this.generatePlanNameStyles(d);
                 
                 const featuresHtml = d.features.map(feature => 
                     `<li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: ${d.textColor || '#6b7280'};">
@@ -2586,8 +2673,7 @@
                         ${badgeHtml}
                         
                         <div style="margin-bottom: 32px;">
-                            <h3 style="font-size: 1.25rem; font-weight: bold; color: ${d.textColor || 'white'}; margin-bottom: 20px; 
-                                       text-transform: uppercase; letter-spacing: 0.05em;">
+                            <h3 class="pricing-plan-name" style="${planNameStyles}">
                                 ${d.planName}
                             </h3>
                             
@@ -2619,7 +2705,73 @@
 
             getEditableFields() {
                 return [
+                    // Section 1: Contenu
                     { name: 'planName', label: 'Nom du plan', type: 'text', category: 'Contenu' },
+                    
+                    // Section 2: Style du titre du plan
+                    { name: 'planNameSize', label: 'Taille du titre', type: 'range', min: 12, max: 40, category: 'Titre - Typographie' },
+                    { name: 'planNameColor', label: 'Couleur du titre', type: 'color', category: 'Titre - Typographie' },
+                    { name: 'planNameAlignment', label: 'Alignement du titre', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' },
+                        { value: 'center', label: 'Centre' },
+                        { value: 'right', label: 'Droite' }
+                    ], category: 'Titre - Typographie' },
+                    { name: 'planNameIsBold', label: 'Titre en gras', type: 'checkbox', category: 'Titre - Typographie' },
+                    { name: 'planNameIsItalic', label: 'Titre en italique', type: 'checkbox', category: 'Titre - Typographie' },
+                    
+                    // Section 3: Arrière-plan du titre
+                    { name: 'planNameHasBackground', label: 'Arrière-plan du titre', type: 'checkbox', category: 'Titre - Arrière-plan' },
+                    { name: 'planNameBackgroundColor', label: 'Couleur de fond du titre', type: 'color', category: 'Titre - Arrière-plan', condition: { field: 'planNameHasBackground', value: true } },
+                    { name: 'planNameBackgroundOpacity', label: 'Transparence du fond', type: 'range', min: 0, max: 100, step: 5, category: 'Titre - Arrière-plan', condition: { field: 'planNameHasBackground', value: true } },
+                    
+                    // Section 4: Contour du titre
+                    { name: 'planNameHasBorder', label: 'Contour du titre', type: 'checkbox', category: 'Titre - Contour' },
+                    { name: 'planNameBorderColor', label: 'Couleur du contour', type: 'color', category: 'Titre - Contour', condition: { field: 'planNameHasBorder', value: true } },
+                    { name: 'planNameBorderWidth', label: 'Épaisseur du contour', type: 'range', min: 1, max: 10, step: 1, category: 'Titre - Contour', condition: { field: 'planNameHasBorder', value: true } },
+                    { name: 'planNameBorderStyle', label: 'Style du contour', type: 'select', options: [
+                        { value: 'solid', label: 'Solide' },
+                        { value: 'dashed', label: 'Tirets' },
+                        { value: 'dotted', label: 'Points' },
+                        { value: 'double', label: 'Double' }
+                    ], category: 'Titre - Contour', condition: { field: 'planNameHasBorder', value: true } },
+                    
+                    // Section 5: Coins arrondis du titre
+                    { name: 'planNameHasRoundedCorners', label: 'Coins arrondis du titre', type: 'checkbox', category: 'Titre - Forme' },
+                    { name: 'planNameBorderRadius', label: 'Niveau d\'arrondi', type: 'range', min: 0, max: 50, step: 2, category: 'Titre - Forme', condition: { field: 'planNameHasRoundedCorners', value: true } },
+                    
+                    // Section 6: Espacement du titre
+                    { name: 'planNamePaddingTop', label: 'Espacement haut du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'planNamePaddingBottom', label: 'Espacement bas du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'planNamePaddingLeft', label: 'Espacement gauche du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'planNamePaddingRight', label: 'Espacement droite du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucun' },
+                        { value: 'small', label: 'Petit' },
+                        { value: 'medium', label: 'Moyen' },
+                        { value: 'large', label: 'Grand' }
+                    ], category: 'Titre - Espacement' },
+                    { name: 'planNameMarginBottom', label: 'Marge du bas du titre', type: 'select', options: [
+                        { value: 'none', label: 'Aucune' },
+                        { value: 'small', label: 'Petite' },
+                        { value: 'medium', label: 'Moyenne' },
+                        { value: 'large', label: 'Grande' }
+                    ], category: 'Titre - Espacement' },
+                    
+                    // Section 7: Autres éléments de la carte
                     { name: 'price', label: 'Prix', type: 'text', category: 'Contenu' },
                     { name: 'currency', label: 'Devise', type: 'text', category: 'Contenu' },
                     { name: 'period', label: 'Période', type: 'text', category: 'Contenu' },
@@ -4515,7 +4667,7 @@
             
             // Mise à jour temps réel pour pricing card
             updatePricingCardRealTime(container, propertyName, value) {
-                const planName = container.querySelector('h3');
+                const planName = container.querySelector('h3.pricing-plan-name');
                 const price = container.querySelector('.pricing-amount, [style*="font-size: 3.5rem"]');
                 const currency = container.querySelector('[style*="font-size: 2rem"]');
                 const ctaButton = container.querySelector('a[style*="width: 100%"]');
@@ -4607,6 +4759,129 @@
                             } else {
                                 card.classList.remove('featured');
                             }
+                        }
+                        break;
+                    
+                    // Propriétés de style du titre du plan
+                    case 'planNameSize':
+                        if (planName) planName.style.fontSize = `${value}px`;
+                        break;
+                    case 'planNameColor':
+                        if (planName) planName.style.color = value;
+                        break;
+                    case 'planNameAlignment':
+                        if (planName) planName.style.textAlign = value;
+                        break;
+                    case 'planNameIsBold':
+                        if (planName) planName.style.fontWeight = value ? 'bold' : 'normal';
+                        break;
+                    case 'planNameIsItalic':
+                        if (planName) planName.style.fontStyle = value ? 'italic' : 'normal';
+                        break;
+                    
+                    // Arrière-plan du titre du plan
+                    case 'planNameHasBackground':
+                        if (planName) {
+                            if (value) {
+                                const data = this.selectedWidget.data;
+                                const opacity = (data.planNameBackgroundOpacity || 20) / 100;
+                                const bgColor = data.planNameBackgroundColor || '#10b981';
+                                const hex = bgColor.replace('#', '');
+                                const r = parseInt(hex.substr(0, 2), 16);
+                                const g = parseInt(hex.substr(2, 2), 16);
+                                const b = parseInt(hex.substr(4, 2), 16);
+                                planName.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                            } else {
+                                planName.style.backgroundColor = 'transparent';
+                            }
+                        }
+                        break;
+                    case 'planNameBackgroundColor':
+                        if (planName && this.selectedWidget.data.planNameHasBackground) {
+                            const opacity = (this.selectedWidget.data.planNameBackgroundOpacity || 20) / 100;
+                            const hex = value.replace('#', '');
+                            const r = parseInt(hex.substr(0, 2), 16);
+                            const g = parseInt(hex.substr(2, 2), 16);
+                            const b = parseInt(hex.substr(4, 2), 16);
+                            planName.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                        }
+                        break;
+                    case 'planNameBackgroundOpacity':
+                        if (planName && this.selectedWidget.data.planNameHasBackground) {
+                            const opacity = value / 100;
+                            const bgColor = this.selectedWidget.data.planNameBackgroundColor || '#10b981';
+                            const hex = bgColor.replace('#', '');
+                            const r = parseInt(hex.substr(0, 2), 16);
+                            const g = parseInt(hex.substr(2, 2), 16);
+                            const b = parseInt(hex.substr(4, 2), 16);
+                            planName.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                        }
+                        break;
+                    
+                    // Contour du titre du plan
+                    case 'planNameHasBorder':
+                        if (planName) {
+                            if (value) {
+                                const data = this.selectedWidget.data;
+                                const borderWidth = data.planNameBorderWidth || 2;
+                                const borderStyle = data.planNameBorderStyle || 'solid';
+                                const borderColor = data.planNameBorderColor || '#10b981';
+                                planName.style.border = `${borderWidth}px ${borderStyle} ${borderColor}`;
+                            } else {
+                                planName.style.border = 'none';
+                            }
+                        }
+                        break;
+                    case 'planNameBorderColor':
+                        if (planName && this.selectedWidget.data.planNameHasBorder) {
+                            const borderWidth = this.selectedWidget.data.planNameBorderWidth || 2;
+                            const borderStyle = this.selectedWidget.data.planNameBorderStyle || 'solid';
+                            planName.style.border = `${borderWidth}px ${borderStyle} ${value}`;
+                        }
+                        break;
+                    case 'planNameBorderWidth':
+                        if (planName && this.selectedWidget.data.planNameHasBorder) {
+                            const borderStyle = this.selectedWidget.data.planNameBorderStyle || 'solid';
+                            const borderColor = this.selectedWidget.data.planNameBorderColor || '#10b981';
+                            planName.style.border = `${value}px ${borderStyle} ${borderColor}`;
+                        }
+                        break;
+                    case 'planNameBorderStyle':
+                        if (planName && this.selectedWidget.data.planNameHasBorder) {
+                            const borderWidth = this.selectedWidget.data.planNameBorderWidth || 2;
+                            const borderColor = this.selectedWidget.data.planNameBorderColor || '#10b981';
+                            planName.style.border = `${borderWidth}px ${value} ${borderColor}`;
+                        }
+                        break;
+                    
+                    // Coins arrondis du titre du plan
+                    case 'planNameHasRoundedCorners':
+                        if (planName) {
+                            if (value) {
+                                const borderRadius = this.selectedWidget.data.planNameBorderRadius || 8;
+                                planName.style.borderRadius = `${borderRadius}px`;
+                            } else {
+                                planName.style.borderRadius = '0px';
+                            }
+                        }
+                        break;
+                    case 'planNameBorderRadius':
+                        if (planName && this.selectedWidget.data.planNameHasRoundedCorners) {
+                            planName.style.borderRadius = `${value}px`;
+                        }
+                        break;
+                    
+                    // Espacement du titre du plan - mise à jour complète via generatePlanNameStyles
+                    case 'planNamePaddingTop':
+                    case 'planNamePaddingBottom':
+                    case 'planNamePaddingLeft':
+                    case 'planNamePaddingRight':
+                    case 'planNameMarginBottom':
+                        if (planName) {
+                            // Régénérer tous les styles pour l'espacement
+                            const instance = this.selectedWidget.instance;
+                            const newStyles = instance.generatePlanNameStyles(this.selectedWidget.data);
+                            planName.setAttribute('style', newStyles);
                         }
                         break;
                 }
@@ -5625,9 +5900,23 @@ Folder('${id}')" title="Renommer">
                 
                 features[index] = newValue.trim();
                 
-                // Mettre à jour uniquement l'affichage (pas l'onglet Elements pour éviter la perte de focus)
-                this.renderSelectedWidget();
-                this.updatePreview();
+                // Mise à jour temps réel optimisée - seulement la fonctionnalité modifiée
+                const container = document.querySelector(`[data-widget-id="${this.selectedWidget.id}"]`);
+                if (container) {
+                    const featuresList = container.querySelector('ul');
+                    if (featuresList) {
+                        const featureItems = featuresList.querySelectorAll('li');
+                        if (featureItems[index]) {
+                            const textSpan = featureItems[index].querySelector('span:last-child');
+                            if (textSpan) {
+                                textSpan.textContent = newValue.trim();
+                            }
+                        }
+                    }
+                }
+                
+                // Sauvegarde automatique
+                this.autoSave();
             }
             
             // Fonction pour re-render un widget spécifique
