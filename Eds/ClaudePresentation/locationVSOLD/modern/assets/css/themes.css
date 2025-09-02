@@ -720,6 +720,45 @@ img {
     transform: scale(1);
 }
 
+/* Bloc du logo : styles génériques pilotés par variables CSS */
+.logo-container {
+    text-align: var(--logo-align, center);
+    padding-top: var(--logo-padding-y, 20px);
+    padding-bottom: var(--logo-padding-y, 20px);
+    padding-left: var(--logo-padding-x, 20px);
+    padding-right: var(--logo-padding-x, 20px);
+    height: 100%;
+}
+
+.logo-link {
+    display: inline-block;
+    width: var(--logo-width, 60px);
+    height: var(--logo-width, 60px);
+    border-radius: var(--logo-radius, 12px);
+    background: var(--logo-bg, rgba(16, 185, 129, 0.1));
+    border: var(--logo-border, 2px solid rgba(16, 185, 129, 0.3));
+    background-image: var(--logo-image);
+    background-size: var(--logo-size, 80%);
+    background-repeat: no-repeat;
+    background-position: var(--logo-position, center);
+    object-fit: var(--logo-fit, contain);
+    box-shadow: var(--logo-shadow, none);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* Mode sombre - Variations de thème */
 .dark-mode {
     --text-primary: var(--text-white);
