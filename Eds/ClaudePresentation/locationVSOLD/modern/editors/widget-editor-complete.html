@@ -1819,18 +1819,15 @@
                     isItalic: false,
                     marginTop: 'medium',
                     marginBottom: 'medium',
-                    // Couleur de texte
-                    textColor: 'default',
-                    customTextColor: '#F8FAFC',
-                    // Arrière-plan
+                    // Couleur de texte (pipette directe)
+                    textColor: '#F8FAFC',
+                    // Arrière-plan  
                     hasBackground: false,
-                    backgroundColor: 'transparent',
-                    customBackgroundColor: '#1E293B',
+                    backgroundColor: '#1E293B',
                     backgroundOpacity: 100,
                     // Contour
                     hasBorder: false,
-                    borderColor: 'primary',
-                    customBorderColor: '#10B981',
+                    borderColor: '#10B981',
                     borderWidth: 1,
                     borderStyle: 'solid',
                     // Coins arrondis
@@ -1842,7 +1839,15 @@
                     paddingTop: 'medium',
                     paddingBottom: 'medium',
                     paddingLeft: 'medium',
-                    paddingRight: 'medium'
+                    paddingRight: 'medium',
+                    // Sliders numériques pour contrôle précis
+                    usePreciseSpacing: false,
+                    paddingTopPx: 16,
+                    paddingBottomPx: 16,
+                    paddingLeftPx: 16,
+                    paddingRightPx: 16,
+                    marginTopPx: 16,
+                    marginBottomPx: 16
                 };
 
                 this.stylePresets = {
@@ -1881,10 +1886,8 @@
                 const baseStyle = this.stylePresets[data.textType];
                 const sizeMultiplier = this.sizeScale[data.size];
                 
-                // Couleur de texte (priorité: textColor > color pour compatibilité)
-                const finalTextColor = data.textColor === 'custom' ? 
-                    data.customTextColor : 
-                    this.colorPalette[data.textColor] || this.colorPalette[data.color] || this.colorPalette.default;
+                // Couleur de texte (directe avec pipette)
+                const finalTextColor = data.textColor;
 
                 const styleRules = [
                     `font-size: calc(${baseStyle.fontSize} * ${sizeMultiplier})`,
@@ -1892,9 +1895,7 @@
                     `line-height: ${baseStyle.lineHeight}`,
                     `font-family: ${baseStyle.fontFamily}`,
                     `color: ${finalTextColor}`,
-                    `text-align: ${data.alignment}`,
-                    `margin-top: ${this.spacings[data.marginTop]}`,
-                    `margin-bottom: ${this.spacings[data.marginBottom]}`
+                    `text-align: ${data.alignment}`
                 ];
 
                 // Style de police
@@ -1902,31 +1903,22 @@
                 if (data.isItalic) styleRules.push('font-style: italic');
                 if (baseStyle.fontStyle) styleRules.push(`font-style: ${baseStyle.fontStyle}`);
 
-                // Arrière-plan
-                if (data.hasBackground && data.backgroundColor !== 'transparent') {
-                    const bgColor = data.backgroundColor === 'custom' ? 
-                        data.customBackgroundColor : 
-                        this.colorPalette[data.backgroundColor] || data.backgroundColor;
-                    
+                // Arrière-plan (pipette moderne)
+                if (data.hasBackground) {
                     const opacity = data.backgroundOpacity / 100;
-                    if (bgColor.startsWith('#')) {
-                        const r = parseInt(bgColor.slice(1, 3), 16);
-                        const g = parseInt(bgColor.slice(3, 5), 16);
-                        const b = parseInt(bgColor.slice(5, 7), 16);
+                    if (data.backgroundColor.startsWith('#')) {
+                        const r = parseInt(data.backgroundColor.slice(1, 3), 16);
+                        const g = parseInt(data.backgroundColor.slice(3, 5), 16);
+                        const b = parseInt(data.backgroundColor.slice(5, 7), 16);
                         styleRules.push(`background-color: rgba(${r}, ${g}, ${b}, ${opacity})`);
                     } else {
-                        styleRules.push(`background-color: ${bgColor}`);
-                        if (opacity < 1) styleRules.push(`opacity: ${opacity}`);
+                        styleRules.push(`background-color: ${data.backgroundColor}`);
                     }
                 }
 
-                // Contour
+                // Contour (pipette moderne)
                 if (data.hasBorder) {
-                    const borderColor = data.borderColor === 'custom' ? 
-                        data.customBorderColor : 
-                        this.colorPalette[data.borderColor] || data.borderColor;
-                    
-                    styleRules.push(`border: ${data.borderWidth}px ${data.borderStyle} ${borderColor}`);
+                    styleRules.push(`border: ${data.borderWidth}px ${data.borderStyle} ${data.borderColor}`);
                 }
 
                 // Coins arrondis
@@ -1934,11 +1926,28 @@
                     styleRules.push(`border-radius: ${data.borderRadius}px`);
                 }
 
-                // Padding (organisation)
-                styleRules.push(`padding-top: ${this.spacings[data.paddingTop]}`);
-                styleRules.push(`padding-bottom: ${this.spacings[data.paddingBottom]}`);
-                styleRules.push(`padding-left: ${this.spacings[data.paddingLeft]}`);
-                styleRules.push(`padding-right: ${this.spacings[data.paddingRight]}`);
+                // Padding (organisation) - Mode adaptatif selon usePreciseSpacing
+                if (data.usePreciseSpacing) {
+                    // Mode précis avec sliders en pixels
+                    styleRules.push(`padding-top: ${data.paddingTopPx}px`);
+                    styleRules.push(`padding-bottom: ${data.paddingBottomPx}px`);
+                    styleRules.push(`padding-left: ${data.paddingLeftPx}px`);
+                    styleRules.push(`padding-right: ${data.paddingRightPx}px`);
+                    
+                    // Marges précises en pixels
+                    styleRules.push(`margin-top: ${data.marginTopPx}px`);
+                    styleRules.push(`margin-bottom: ${data.marginBottomPx}px`);
+                } else {
+                    // Mode rapide avec sélecteurs CSS variables  
+                    styleRules.push(`padding-top: ${this.spacings[data.paddingTop]}`);
+                    styleRules.push(`padding-bottom: ${this.spacings[data.paddingBottom]}`);
+                    styleRules.push(`padding-left: ${this.spacings[data.paddingLeft]}`);
+                    styleRules.push(`padding-right: ${this.spacings[data.paddingRight]}`);
+                    
+                    // Marges avec variables CSS (mode existant)
+                    styleRules.push(`margin-top: ${this.spacings[data.marginTop]}`);
+                    styleRules.push(`margin-bottom: ${this.spacings[data.marginBottom]}`);
+                }
 
                 // Dimensions (organisation)
                 if (data.width !== 'auto') {
@@ -2039,13 +2048,7 @@
                         { value: 'small', label: 'Petit' }, { value: 'medium', label: 'Moyen' },
                         { value: 'large', label: 'Grand' }, { value: 'xlarge', label: 'Très grand' }
                     ], defaultValue: this.defaultData.size },
-                    { name: 'textColor', label: 'Couleur du texte', type: 'select', options: [
-                        { value: 'default', label: 'Blanc' }, { value: 'primary', label: 'Vert EDS' },
-                        { value: 'secondary', label: 'Gris' }, { value: 'muted', label: 'Gris clair' },
-                        { value: 'success', label: 'Vert succès' }, { value: 'warning', label: 'Orange' },
-                        { value: 'danger', label: 'Rouge' }, { value: 'custom', label: 'Personnalisée' }
-                    ], defaultValue: this.defaultData.textColor },
-                    { name: 'customTextColor', label: 'Couleur personnalisée', type: 'color', defaultValue: this.defaultData.customTextColor, condition: { field: 'textColor', value: 'custom' } },
+                    { name: 'textColor', label: 'Couleur du texte', type: 'color', defaultValue: this.defaultData.textColor },
                     { name: 'alignment', label: 'Alignement', type: 'select', options: [
                         { value: 'left', label: 'Gauche' }, { value: 'center', label: 'Centre' }, { value: 'right', label: 'Droite' }
                     ], defaultValue: this.defaultData.alignment },
@@ -2054,22 +2057,12 @@
                     
                     // Section 3: Arrière-plan
                     { name: 'hasBackground', label: 'Ajouter un arrière-plan', type: 'checkbox', defaultValue: this.defaultData.hasBackground },
-                    { name: 'backgroundColor', label: 'Couleur de fond', type: 'select', options: [
-                        { value: 'transparent', label: 'Transparent' }, { value: 'primary', label: 'Vert EDS' },
-                        { value: 'secondary', label: 'Gris' }, { value: 'success', label: 'Vert succès' },
-                        { value: 'warning', label: 'Orange' }, { value: 'danger', label: 'Rouge' }, { value: 'custom', label: 'Personnalisée' }
-                    ], defaultValue: this.defaultData.backgroundColor, condition: { field: 'hasBackground', value: true } },
-                    { name: 'customBackgroundColor', label: 'Couleur de fond personnalisée', type: 'color', defaultValue: this.defaultData.customBackgroundColor, condition: { field: 'backgroundColor', value: 'custom' } },
+                    { name: 'backgroundColor', label: 'Couleur de fond', type: 'color', defaultValue: this.defaultData.backgroundColor },
                     { name: 'backgroundOpacity', label: 'Transparence du fond', type: 'range', min: 0, max: 100, step: 5, defaultValue: this.defaultData.backgroundOpacity, condition: { field: 'hasBackground', value: true } },
                     
                     // Section 4: Contour
                     { name: 'hasBorder', label: 'Ajouter un contour', type: 'checkbox', defaultValue: this.defaultData.hasBorder },
-                    { name: 'borderColor', label: 'Couleur du contour', type: 'select', options: [
-                        { value: 'primary', label: 'Vert EDS' }, { value: 'secondary', label: 'Gris' },
-                        { value: 'success', label: 'Vert succès' }, { value: 'warning', label: 'Orange' },
-                        { value: 'danger', label: 'Rouge' }, { value: 'custom', label: 'Personnalisée' }
-                    ], defaultValue: this.defaultData.borderColor, condition: { field: 'hasBorder', value: true } },
-                    { name: 'customBorderColor', label: 'Couleur de contour personnalisée', type: 'color', defaultValue: this.defaultData.customBorderColor, condition: { field: 'borderColor', value: 'custom' } },
+                    { name: 'borderColor', label: 'Couleur du contour', type: 'color', defaultValue: this.defaultData.borderColor },
                     { name: 'borderWidth', label: 'Épaisseur du contour', type: 'range', min: 1, max: 10, step: 1, defaultValue: this.defaultData.borderWidth, condition: { field: 'hasBorder', value: true } },
                     { name: 'borderStyle', label: 'Style du contour', type: 'select', options: [
                         { value: 'solid', label: 'Solide' }, { value: 'dashed', label: 'Tirets' },
@@ -2081,32 +2074,45 @@
                     { name: 'borderRadius', label: 'Niveau d\'arrondi', type: 'range', min: 0, max: 50, step: 2, defaultValue: this.defaultData.borderRadius, condition: { field: 'hasRoundedCorners', value: true } },
                     
                     // Section 6: Espacement (Organisation)
+                    { name: 'usePreciseSpacing', label: 'Contrôle précis des espacements', type: 'checkbox', defaultValue: this.defaultData.usePreciseSpacing },
+                    
+                    // Mode rapide (sélecteurs)
                     { name: 'paddingTop', label: 'Espacement haut', type: 'select', options: [
                         { value: 'none', label: 'Aucun' }, { value: 'small', label: 'Petit' },
                         { value: 'medium', label: 'Moyen' }, { value: 'large', label: 'Grand' }
-                    ], defaultValue: this.defaultData.paddingTop },
+                    ], defaultValue: this.defaultData.paddingTop, condition: { field: 'usePreciseSpacing', value: false } },
                     { name: 'paddingBottom', label: 'Espacement bas', type: 'select', options: [
                         { value: 'none', label: 'Aucun' }, { value: 'small', label: 'Petit' },
                         { value: 'medium', label: 'Moyen' }, { value: 'large', label: 'Grand' }
-                    ], defaultValue: this.defaultData.paddingBottom },
+                    ], defaultValue: this.defaultData.paddingBottom, condition: { field: 'usePreciseSpacing', value: false } },
                     { name: 'paddingLeft', label: 'Espacement gauche', type: 'select', options: [
                         { value: 'none', label: 'Aucun' }, { value: 'small', label: 'Petit' },
                         { value: 'medium', label: 'Moyen' }, { value: 'large', label: 'Grand' }
-                    ], defaultValue: this.defaultData.paddingLeft },
+                    ], defaultValue: this.defaultData.paddingLeft, condition: { field: 'usePreciseSpacing', value: false } },
                     { name: 'paddingRight', label: 'Espacement droite', type: 'select', options: [
                         { value: 'none', label: 'Aucun' }, { value: 'small', label: 'Petit' },
                         { value: 'medium', label: 'Moyen' }, { value: 'large', label: 'Grand' }
-                    ], defaultValue: this.defaultData.paddingRight },
+                    ], defaultValue: this.defaultData.paddingRight, condition: { field: 'usePreciseSpacing', value: false } },
+                    
+                    // Mode précis (sliders en pixels)
+                    { name: 'paddingTopPx', label: 'Espacement haut (px)', type: 'range', min: 0, max: 100, step: 2, defaultValue: this.defaultData.paddingTopPx, condition: { field: 'usePreciseSpacing', value: true } },
+                    { name: 'paddingBottomPx', label: 'Espacement bas (px)', type: 'range', min: 0, max: 100, step: 2, defaultValue: this.defaultData.paddingBottomPx, condition: { field: 'usePreciseSpacing', value: true } },
+                    { name: 'paddingLeftPx', label: 'Espacement gauche (px)', type: 'range', min: 0, max: 100, step: 2, defaultValue: this.defaultData.paddingLeftPx, condition: { field: 'usePreciseSpacing', value: true } },
+                    { name: 'paddingRightPx', label: 'Espacement droite (px)', type: 'range', min: 0, max: 100, step: 2, defaultValue: this.defaultData.paddingRightPx, condition: { field: 'usePreciseSpacing', value: true } },
                     
                     // Section 7: Marges
                     { name: 'marginTop', label: 'Marge du haut', type: 'select', options: [
                         { value: 'none', label: 'Aucune' }, { value: 'small', label: 'Petite' },
                         { value: 'medium', label: 'Moyenne' }, { value: 'large', label: 'Grande' }
-                    ], defaultValue: this.defaultData.marginTop },
+                    ], defaultValue: this.defaultData.marginTop, condition: { field: 'usePreciseSpacing', value: false } },
                     { name: 'marginBottom', label: 'Marge du bas', type: 'select', options: [
                         { value: 'none', label: 'Aucune' }, { value: 'small', label: 'Petite' },
                         { value: 'medium', label: 'Moyenne' }, { value: 'large', label: 'Grande' }
-                    ], defaultValue: this.defaultData.marginBottom }
+                    ], defaultValue: this.defaultData.marginBottom, condition: { field: 'usePreciseSpacing', value: false } },
+                    
+                    // Marges précises (sliders en pixels)
+                    { name: 'marginTopPx', label: 'Marge du haut (px)', type: 'range', min: 0, max: 100, step: 2, defaultValue: this.defaultData.marginTopPx, condition: { field: 'usePreciseSpacing', value: true } },
+                    { name: 'marginBottomPx', label: 'Marge du bas (px)', type: 'range', min: 0, max: 100, step: 2, defaultValue: this.defaultData.marginBottomPx, condition: { field: 'usePreciseSpacing', value: true } }
                 ];
             }
 
