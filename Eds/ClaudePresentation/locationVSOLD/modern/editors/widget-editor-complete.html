@@ -3266,6 +3266,37 @@
                         'Sécurité BMS Multi-niveau'
                     ],
                     
+                    // Section VS (Séparateur central) - Inspirée du TextSimple
+                    vsText: 'VS',
+                    vsSize: 20,
+                    vsColor: '#ffffff',
+                    vsAlignment: 'center',
+                    vsIsBold: true,
+                    vsIsItalic: false,
+                    vsHasBackground: true,
+                    vsBackgroundColor: '#10b981',
+                    vsBackgroundOpacity: 100,
+                    vsBackgroundGradient: true,
+                    vsGradientStart: '#ef4444',
+                    vsGradientEnd: '#10b981',
+                    vsGradientDirection: '135deg',
+                    vsHasBorder: false,
+                    vsBorderColor: '#ffffff',
+                    vsBorderWidth: 2,
+                    vsBorderStyle: 'solid',
+                    vsHasRoundedCorners: true,
+                    vsBorderRadius: 12,
+                    vsPaddingTop: 12,
+                    vsPaddingBottom: 12,
+                    vsPaddingLeft: 8,
+                    vsPaddingRight: 8,
+                    vsHasShadow: true,
+                    vsShadowColor: '#000000',
+                    vsShadowOpacity: 30,
+                    vsShadowOffsetX: 0,
+                    vsShadowOffsetY: 4,
+                    vsShadowBlur: 12,
+                    
                     conclusion: 'Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !',
                     conclusionDetails: 'Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d\'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.'
                 };
@@ -3335,6 +3366,80 @@
                 return spacingMap[spacingType] || '16px';
             }
 
+            // Génère les styles CSS pour la section VS
+            generateVSStyles(data) {
+                const styleRules = [];
+                
+                // Style de base
+                styleRules.push('text-align: ' + (data.vsAlignment || 'center'));
+                styleRules.push('font-size: ' + (data.vsSize || 20) + 'px');
+                styleRules.push('color: ' + (data.vsColor || '#ffffff'));
+                styleRules.push('font-weight: ' + (data.vsIsBold ? 'bold' : 'normal'));
+                styleRules.push('font-style: ' + (data.vsIsItalic ? 'italic' : 'normal'));
+                styleRules.push('line-height: 1.2');
+                
+                // Arrière-plan
+                if (data.vsHasBackground) {
+                    if (data.vsBackgroundGradient) {
+                        // Gradient linéaire
+                        const gradientStart = data.vsGradientStart || '#ef4444';
+                        const gradientEnd = data.vsGradientEnd || '#10b981';
+                        const direction = data.vsGradientDirection || '135deg';
+                        styleRules.push(`background: linear-gradient(${direction}, ${gradientStart}, ${gradientEnd})`);
+                    } else {
+                        // Couleur unie avec opacité
+                        const opacity = (data.vsBackgroundOpacity || 100) / 100;
+                        const bgColor = data.vsBackgroundColor || '#10b981';
+                        // Convertir hex en rgba
+                        const hex = bgColor.replace('#', '');
+                        const r = parseInt(hex.substr(0, 2), 16);
+                        const g = parseInt(hex.substr(2, 2), 16);
+                        const b = parseInt(hex.substr(4, 2), 16);
+                        styleRules.push(`background-color: rgba(${r}, ${g}, ${b}, ${opacity})`);
+                    }
+                }
+                
+                // Contour
+                if (data.vsHasBorder) {
+                    const borderWidth = data.vsBorderWidth || 2;
+                    const borderStyle = data.vsBorderStyle || 'solid';
+                    const borderColor = data.vsBorderColor || '#ffffff';
+                    styleRules.push(`border: ${borderWidth}px ${borderStyle} ${borderColor}`);
+                }
+                
+                // Coins arrondis
+                if (data.vsHasRoundedCorners) {
+                    const borderRadius = data.vsBorderRadius || 12;
+                    styleRules.push(`border-radius: ${borderRadius}px`);
+                }
+                
+                // Espacement interne (padding)
+                const paddingTop = data.vsPaddingTop || 12;
+                const paddingBottom = data.vsPaddingBottom || 12;
+                const paddingLeft = data.vsPaddingLeft || 8;
+                const paddingRight = data.vsPaddingRight || 8;
+                styleRules.push(`padding: ${paddingTop}px ${paddingRight}px ${paddingBottom}px ${paddingLeft}px`);
+                
+                // Ombre
+                if (data.vsHasShadow) {
+                    const shadowColor = data.vsShadowColor || '#000000';
+                    const shadowOpacity = (data.vsShadowOpacity || 30) / 100;
+                    const offsetX = data.vsShadowOffsetX || 0;
+                    const offsetY = data.vsShadowOffsetY || 4;
+                    const blur = data.vsShadowBlur || 12;
+                    
+                    // Convertir couleur hex en rgba
+                    const hex = shadowColor.replace('#', '');
+                    const r = parseInt(hex.substr(0, 2), 16);
+                    const g = parseInt(hex.substr(2, 2), 16);
+                    const b = parseInt(hex.substr(4, 2), 16);
+                    
+                    styleRules.push(`box-shadow: ${offsetX}px ${offsetY}px ${blur}px rgba(${r}, ${g}, ${b}, ${shadowOpacity})`);
+                }
+                
+                return styleRules.join('; ');
+            }
+
             // Génère les styles CSS pour le titre principal
             generateTitleStyles(data) {
                 const styleRules = [];
@@ -3390,8 +3495,9 @@
             render(data = {}) {
                 const d = { ...this.defaultData, ...data };
                 
-                // Générer les styles du titre
+                // Générer les styles du titre et de la section VS
                 const titleStyles = this.generateTitleStyles(d);
+                const vsStyles = this.generateVSStyles(d);
                 
                 // Créer les listes d'inconvénients (obsolète) - SIMPLIFIÉ COMME PRICING CARD
                 const disadvantagesHtml = d.obsoleteDisadvantages.map((item, index) => {
@@ -3453,13 +3559,10 @@
                                 </div>
                             </div>
                             
-                            <!-- Séparateur VS -->
+                            <!-- Séparateur VS - MAINTENANT ÉDITABLE -->
                             <div style="display: flex; align-items: center; justify-content: center;">
-                                <div style="background: linear-gradient(135deg, #ef4444, #10b981); 
-                                           color: white; padding: 12px 8px; border-radius: 12px; 
-                                           font-weight: bold; font-size: 1.2rem; text-align: center; 
-                                           transform: rotate(0deg); box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
-                                    VS
+                                <div class="vs-section" style="${vsStyles}">
+                                    ${d.vsText}
                                 </div>
                             </div>
                             
@@ -3576,7 +3679,62 @@
                     { name: 'modernTitleColor', label: 'Couleur titre moderne', type: 'color', category: 'Colonne Moderne' },
                     { name: 'modernBackgroundColor', label: 'Fond colonne moderne', type: 'color', category: 'Colonne Moderne' },
                     { name: 'modernBorderColor', label: 'Bordure colonne moderne', type: 'color', category: 'Colonne Moderne' },
-                    { name: 'modernIcon', label: 'Icône moderne', type: 'text', category: 'Colonne Moderne' }
+                    { name: 'modernIcon', label: 'Icône moderne', type: 'text', category: 'Colonne Moderne' },
+                    
+                    // Section 9: Section VS (Séparateur) - Inspirée du TextSimple
+                    { name: 'vsText', label: 'Texte VS', type: 'text', category: 'Section VS' },
+                    { name: 'vsSize', label: 'Taille du texte VS', type: 'range', min: 10, max: 40, category: 'Section VS - Typographie' },
+                    { name: 'vsColor', label: 'Couleur du texte VS', type: 'color', category: 'Section VS - Typographie' },
+                    { name: 'vsAlignment', label: 'Alignement du texte VS', type: 'select', options: [
+                        { value: 'left', label: 'Gauche' },
+                        { value: 'center', label: 'Centre' },
+                        { value: 'right', label: 'Droite' }
+                    ], category: 'Section VS - Typographie' },
+                    { name: 'vsIsBold', label: 'Texte VS en gras', type: 'checkbox', category: 'Section VS - Typographie' },
+                    { name: 'vsIsItalic', label: 'Texte VS en italique', type: 'checkbox', category: 'Section VS - Typographie' },
+                    
+                    // Section 10: Arrière-plan VS
+                    { name: 'vsHasBackground', label: 'Arrière-plan VS', type: 'checkbox', category: 'Section VS - Arrière-plan' },
+                    { name: 'vsBackgroundGradient', label: 'Gradient VS', type: 'checkbox', category: 'Section VS - Arrière-plan', condition: { field: 'vsHasBackground', value: true } },
+                    { name: 'vsBackgroundColor', label: 'Couleur de fond VS', type: 'color', category: 'Section VS - Arrière-plan', condition: { field: 'vsBackgroundGradient', value: false } },
+                    { name: 'vsBackgroundOpacity', label: 'Transparence du fond VS', type: 'range', min: 0, max: 100, step: 5, category: 'Section VS - Arrière-plan', condition: { field: 'vsBackgroundGradient', value: false } },
+                    { name: 'vsGradientStart', label: 'Couleur début gradient VS', type: 'color', category: 'Section VS - Arrière-plan', condition: { field: 'vsBackgroundGradient', value: true } },
+                    { name: 'vsGradientEnd', label: 'Couleur fin gradient VS', type: 'color', category: 'Section VS - Arrière-plan', condition: { field: 'vsBackgroundGradient', value: true } },
+                    { name: 'vsGradientDirection', label: 'Direction gradient VS', type: 'select', options: [
+                        { value: '90deg', label: 'Vertical' },
+                        { value: '0deg', label: 'Horizontal' },
+                        { value: '135deg', label: 'Diagonal (défaut)' },
+                        { value: '45deg', label: 'Diagonal inversé' }
+                    ], category: 'Section VS - Arrière-plan', condition: { field: 'vsBackgroundGradient', value: true } },
+                    
+                    // Section 11: Contour VS
+                    { name: 'vsHasBorder', label: 'Contour VS', type: 'checkbox', category: 'Section VS - Contour' },
+                    { name: 'vsBorderColor', label: 'Couleur du contour VS', type: 'color', category: 'Section VS - Contour', condition: { field: 'vsHasBorder', value: true } },
+                    { name: 'vsBorderWidth', label: 'Épaisseur du contour VS', type: 'range', min: 1, max: 10, step: 1, category: 'Section VS - Contour', condition: { field: 'vsHasBorder', value: true } },
+                    { name: 'vsBorderStyle', label: 'Style du contour VS', type: 'select', options: [
+                        { value: 'solid', label: 'Solide' },
+                        { value: 'dashed', label: 'Tirets' },
+                        { value: 'dotted', label: 'Points' },
+                        { value: 'double', label: 'Double' }
+                    ], category: 'Section VS - Contour', condition: { field: 'vsHasBorder', value: true } },
+                    
+                    // Section 12: Forme VS
+                    { name: 'vsHasRoundedCorners', label: 'Coins arrondis VS', type: 'checkbox', category: 'Section VS - Forme' },
+                    { name: 'vsBorderRadius', label: 'Niveau d\'arrondi VS', type: 'range', min: 0, max: 50, step: 2, category: 'Section VS - Forme', condition: { field: 'vsHasRoundedCorners', value: true } },
+                    
+                    // Section 13: Espacement VS
+                    { name: 'vsPaddingTop', label: 'Espacement haut VS', type: 'range', min: 0, max: 50, category: 'Section VS - Espacement' },
+                    { name: 'vsPaddingBottom', label: 'Espacement bas VS', type: 'range', min: 0, max: 50, category: 'Section VS - Espacement' },
+                    { name: 'vsPaddingLeft', label: 'Espacement gauche VS', type: 'range', min: 0, max: 50, category: 'Section VS - Espacement' },
+                    { name: 'vsPaddingRight', label: 'Espacement droite VS', type: 'range', min: 0, max: 50, category: 'Section VS - Espacement' },
+                    
+                    // Section 14: Ombre VS
+                    { name: 'vsHasShadow', label: 'Ombre VS', type: 'checkbox', category: 'Section VS - Ombres' },
+                    { name: 'vsShadowColor', label: 'Couleur de l\'ombre VS', type: 'color', category: 'Section VS - Ombres', condition: { field: 'vsHasShadow', value: true } },
+                    { name: 'vsShadowOpacity', label: 'Opacité ombre VS', type: 'range', min: 0, max: 100, category: 'Section VS - Ombres', condition: { field: 'vsHasShadow', value: true } },
+                    { name: 'vsShadowOffsetX', label: 'Décalage X ombre VS', type: 'range', min: -20, max: 20, category: 'Section VS - Ombres', condition: { field: 'vsHasShadow', value: true } },
+                    { name: 'vsShadowOffsetY', label: 'Décalage Y ombre VS', type: 'range', min: -20, max: 20, category: 'Section VS - Ombres', condition: { field: 'vsHasShadow', value: true } },
+                    { name: 'vsShadowBlur', label: 'Flou de l\'ombre VS', type: 'range', min: 0, max: 30, category: 'Section VS - Ombres', condition: { field: 'vsHasShadow', value: true } }
                 ];
             }
 
@@ -3585,6 +3743,7 @@
                     { id: 'widget', name: 'Widget complet', editable: true },
                     { id: 'title', name: 'Titre principal', editable: true },
                     { id: 'obsolete-column', name: 'Colonne obsolète', editable: true, manageable: true },
+                    { id: 'vs-section', name: 'Section VS (Séparateur)', editable: true },
                     { id: 'modern-column', name: 'Colonne moderne', editable: true, manageable: true },
                     { id: 'conclusion', name: 'Section conclusion', editable: true }
                 ];
@@ -6351,6 +6510,50 @@
                         const modernColumnBorder = container.querySelector('.modern-column');
                         if (modernColumnBorder) {
                             modernColumnBorder.style.borderColor = value;
+                        }
+                        break;
+                    
+                    // NOUVELLES PROPRIÉTÉS VS (SECTION VS)
+                    case 'vsText':
+                    case 'vsSize':
+                    case 'vsColor':
+                    case 'vsAlignment':
+                    case 'vsIsBold':
+                    case 'vsIsItalic':
+                    case 'vsHasBackground':
+                    case 'vsBackgroundColor':
+                    case 'vsBackgroundOpacity':
+                    case 'vsBackgroundGradient':
+                    case 'vsGradientStart':
+                    case 'vsGradientEnd':
+                    case 'vsGradientDirection':
+                    case 'vsHasBorder':
+                    case 'vsBorderColor':
+                    case 'vsBorderWidth':
+                    case 'vsBorderStyle':
+                    case 'vsHasRoundedCorners':
+                    case 'vsBorderRadius':
+                    case 'vsPaddingTop':
+                    case 'vsPaddingBottom':
+                    case 'vsPaddingLeft':
+                    case 'vsPaddingRight':
+                    case 'vsHasShadow':
+                    case 'vsShadowColor':
+                    case 'vsShadowOpacity':
+                    case 'vsShadowOffsetX':
+                    case 'vsShadowOffsetY':
+                    case 'vsShadowBlur':
+                        // Pour toutes les propriétés VS, régénérer complètement les styles
+                        const vsSection = container.querySelector('.vs-section');
+                        if (vsSection) {
+                            const instanceForVS = this.selectedWidget.instance;
+                            const newVSStyles = instanceForVS.generateVSStyles(this.selectedWidget.data);
+                            vsSection.setAttribute('style', newVSStyles);
+                            
+                            // Mettre à jour le texte si c'est vsText
+                            if (propertyName === 'vsText') {
+                                vsSection.textContent = value;
+                            }
                         }
                         break;
                     
