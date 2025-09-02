@@ -187,6 +187,41 @@
             gap: 8px;
             grid-auto-rows: minmax(100px, auto);
         }
+        
+        /* Grille visible - lignes de la grille CSS */
+        .canvas-workspace.show-grid {
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent calc(100% / 12 - 1px),
+                    rgba(16, 185, 129, 0.3) calc(100% / 12 - 1px),
+                    rgba(16, 185, 129, 0.3) calc(100% / 12)
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent calc(100px - 1px),
+                    rgba(16, 185, 129, 0.3) calc(100px - 1px),
+                    rgba(16, 185, 129, 0.3) 100px
+                );
+        }
+        
+        /* Indicateurs de grille sur chaque cellule */
+        .canvas-workspace.show-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(16, 185, 129, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16, 185, 129, 0.2) 1px, transparent 1px);
+            background-size: calc(100% / 12) 100px;
+            z-index: 1;
+        }
 
         /* Widget containers dans le canvas - Grille 2D */
         .widget-container {
@@ -202,6 +237,7 @@
             flex-direction: column;
             backdrop-filter: blur(5px);
             box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            z-index: 10; /* Au-dessus de la grille */
         }
         
         .widget-container.dragging {
@@ -988,7 +1024,9 @@
                     subtitleSize: 24,
                     gradient: true,
                     animation: 'slide-up',
-                    alignment: 'center'
+                    alignment: 'center',
+                    backgroundColor: 'transparent',
+                    borderRadius: 0
                 };
             }
 
@@ -999,8 +1037,18 @@
                     'background: linear-gradient(135deg, #10b981, #0d9488); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;' : 
                     'color: #10b981;';
                 
+                const backgroundStyle = d.backgroundColor !== 'transparent' ? 
+                    `background-color: ${d.backgroundColor}; ` : 
+                    '';
+                
+                const borderRadiusStyle = d.borderRadius > 0 ? 
+                    `border-radius: ${d.borderRadius}px; overflow: hidden; ` : 
+                    '';
+                
                 return `
-                    <div class="hero-section" style="text-align: ${d.alignment}; padding: 60px 20px;">
+                    <div class="hero-section" style="text-align: ${d.alignment}; padding: 60px 20px; 
+                                                   ${backgroundStyle}${borderRadiusStyle}
+                                                   transition: all 0.3s ease;">
                         <h1 class="hero-title ${d.animation}" 
                             style="font-size: ${d.titleSize}px; font-weight: 900; 
                                    ${gradientStyle} margin-bottom: 20px; line-height: 1.1;
@@ -1019,16 +1067,18 @@
 
             getEditableFields() {
                 return [
-                    { name: 'title', label: 'Titre', type: 'text' },
-                    { name: 'subtitle', label: 'Sous-titre', type: 'textarea' },
-                    { name: 'titleSize', label: 'Taille titre', type: 'range', min: 24, max: 72 },
-                    { name: 'subtitleSize', label: 'Taille sous-titre', type: 'range', min: 14, max: 36 },
-                    { name: 'gradient', label: 'Gradient', type: 'checkbox' },
-                    { name: 'alignment', label: 'Alignement', type: 'select', options: [
+                    { name: 'title', label: 'Titre', type: 'text', category: 'Contenu' },
+                    { name: 'subtitle', label: 'Sous-titre', type: 'textarea', category: 'Contenu' },
+                    { name: 'titleSize', label: 'Taille titre', type: 'range', min: 24, max: 72, category: 'Typographie' },
+                    { name: 'subtitleSize', label: 'Taille sous-titre', type: 'range', min: 14, max: 36, category: 'Typographie' },
+                    { name: 'gradient', label: 'Gradient', type: 'checkbox', category: 'Style' },
+                    { name: 'alignment', label: 'Alignement', type: 'select', category: 'Layout', options: [
                         { value: 'left', label: 'Gauche' },
                         { value: 'center', label: 'Centre' },
                         { value: 'right', label: 'Droite' }
-                    ]}
+                    ]},
+                    { name: 'backgroundColor', label: 'Couleur d\'arrière-plan', type: 'color', category: 'Style' },
+                    { name: 'borderRadius', label: 'Arrondi des bords', type: 'range', min: 0, max: 50, category: 'Style' }
                 ];
             }
 
@@ -1256,7 +1306,7 @@
                 this.name = 'Grille de Fonctionnalités';
                 this.category = 'Contenu';
                 this.icon = '⭐';
-                this.description = 'Grille de fonctionnalités avec icônes';
+                this.description = 'Grille de fonctionnalités avec icônes éditables';
                 
                 this.defaultData = {
                     title: 'Pourquoi Nous Choisir ?',
@@ -1280,25 +1330,40 @@
                             icon: '🤝',
                             title: 'Support',
                             description: 'Équipe dédiée à votre service'
+                        },
+                        {
+                            icon: '🎯',
+                            title: 'Précision',
+                            description: 'Résultats ciblés et mesurables'
+                        },
+                        {
+                            icon: '🌟',
+                            title: 'Excellence',
+                            description: 'Standards de qualité élevés'
                         }
                     ],
-                    columns: 2
+                    columns: 3,
+                    featuresCount: 4
                 };
             }
 
             render(data = {}) {
                 const d = { ...this.defaultData, ...data };
                 
-                const featuresHtml = d.features.map(feature => 
+                // Limiter les features affichées selon featuresCount
+                const displayedFeatures = d.features.slice(0, d.featuresCount || 4);
+                
+                const featuresHtml = displayedFeatures.map(feature => 
                     `<div class="feature-card" 
                           style="background: var(--bg-card); padding: 32px; border-radius: 12px; 
-                                 text-align: center; border: 1px solid var(--border-color);">
-                        <div style="font-size: 3rem; margin-bottom: 20px;">${feature.icon}</div>
+                                 text-align: center; border: 1px solid var(--border-color); 
+                                 transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        <div style="font-size: 3rem; margin-bottom: 20px; line-height: 1;">${feature.icon || '⭐'}</div>
                         <h3 style="color: white; font-size: 1.5rem; margin-bottom: 16px; font-weight: bold;">
-                            ${feature.title}
+                            ${feature.title || 'Titre'}
                         </h3>
-                        <p style="color: var(--text-gray); line-height: 1.6;">
-                            ${feature.description}
+                        <p style="color: var(--text-gray); line-height: 1.6; font-size: 0.95rem;">
+                            ${feature.description || 'Description de la fonctionnalité'}
                         </p>
                     </div>`
                 ).join('');
@@ -1306,12 +1371,12 @@
                 return `
                     <div class="features-section" style="padding: 80px 20px; background: var(--bg-primary);">
                         <h2 style="text-align: center; font-size: 2.5rem; font-weight: bold; 
-                                   color: white; margin-bottom: 60px;">
+                                   color: white; margin-bottom: 60px; line-height: 1.2;">
                             ${d.title}
                         </h2>
                         <div class="features-grid" 
                              style="display: grid; grid-template-columns: repeat(${d.columns}, 1fr); 
-                                    gap: 32px; max-width: 1200px; margin: 0 auto;">
+                                    gap: 32px; max-width: 1400px; margin: 0 auto; width: 100%;">
                             ${featuresHtml}
                         </div>
                     </div>
@@ -1320,18 +1385,41 @@
 
             getEditableFields() {
                 return [
-                    { name: 'title', label: 'Titre', type: 'text' },
-                    { name: 'columns', label: 'Nombre de colonnes', type: 'range', min: 1, max: 4 }
+                    { name: 'title', label: 'Titre principal', type: 'text' },
+                    { name: 'featuresCount', label: 'Nombre de fonctionnalités', type: 'range', min: 1, max: 12 },
+                    { name: 'columns', label: 'Colonnes dans la grille', type: 'range', min: 1, max: 4 }
                 ];
             }
 
             getElements() {
                 return [
                     { id: 'section', name: 'Section fonctionnalités', editable: true },
-                    { id: 'title', name: 'Titre', editable: true },
+                    { id: 'title', name: 'Titre principal', editable: true },
                     { id: 'grid', name: 'Grille', editable: true },
-                    { id: 'features', name: 'Fonctionnalités', editable: true }
+                    { id: 'features', name: 'Fonctionnalités individuelles', editable: true }
                 ];
+            }
+            
+            // Méthodes pour gérer les fonctionnalités
+            addFeature() {
+                if (!this.defaultData.features) this.defaultData.features = [];
+                this.defaultData.features.push({
+                    icon: '⭐',
+                    title: 'Nouvelle fonctionnalité',
+                    description: 'Description de la fonctionnalité'
+                });
+            }
+            
+            removeFeature(index) {
+                if (this.defaultData.features && index >= 0 && index < this.defaultData.features.length) {
+                    this.defaultData.features.splice(index, 1);
+                }
+            }
+            
+            updateFeature(index, field, value) {
+                if (this.defaultData.features && index >= 0 && index < this.defaultData.features.length) {
+                    this.defaultData.features[index][field] = value;
+                }
             }
         }
 
@@ -1479,13 +1567,35 @@
                 // Trouver une position libre sur la grille
                 const position = this.findFreeGridPosition();
                 
+                // Définir une taille par défaut selon le type de widget
+                let defaultSize = { width: 3, height: 2 };
+                switch (widgetType) {
+                    case 'feature-grid':
+                        defaultSize = { width: 8, height: 4 }; // Plus large pour éviter le crop
+                        break;
+                    case 'hero-title':
+                        defaultSize = { width: 6, height: 3 };
+                        break;
+                    case 'pricing-card':
+                        defaultSize = { width: 4, height: 4 };
+                        break;
+                    case 'call-to-action':
+                        defaultSize = { width: 8, height: 2 };
+                        break;
+                    case 'logo':
+                        defaultSize = { width: 2, height: 1 };
+                        break;
+                    default:
+                        defaultSize = { width: 3, height: 2 };
+                }
+                
                 const widgetData = {
                     id: `widget-${Date.now()}`,
                     type: widgetType,
                     instance: widgetInstance,
                     data: { ...widgetInstance.defaultData },
                     position: position,
-                    size: { width: 3, height: 2 } // Taille par défaut
+                    size: defaultSize
                 };
                 
                 this.widgets.push(widgetData);
@@ -1754,9 +1864,10 @@
                 let elementsHtml = '';
                 
                 elements.forEach(element => {
-                    const isFeatures = element.id === 'features' && this.selectedWidget.type === 'pricing-card';
+                    const isPricingFeatures = element.id === 'features' && this.selectedWidget.type === 'pricing-card';
+                    const isGridFeatures = element.id === 'features' && this.selectedWidget.type === 'feature-grid';
                     
-                    if (isFeatures) {
+                    if (isPricingFeatures) {
                         // Interface spéciale pour les fonctionnalités du Pricing Card
                         const features = this.selectedWidget.data.features || [];
                         
@@ -1803,6 +1914,89 @@
                                                                width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
                                                     <i class="fas fa-times"></i>
                                                 </button>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else if (isGridFeatures) {
+                        // Interface spéciale pour les fonctionnalités de la Grille
+                        const features = this.selectedWidget.data.features || [];
+                        const featuresCount = this.selectedWidget.data.featuresCount || 4;
+                        
+                        elementsHtml += `
+                            <div class="element-item" style="padding: 12px; background: var(--bg-card); 
+                                                            border-radius: 8px; margin-bottom: 8px;">
+                                <div style="margin-bottom: 12px;">
+                                    <div style="color: white; font-weight: 500; margin-bottom: 8px;">
+                                        <i class="fas fa-th-large"></i> ${element.name} (${featuresCount} actives sur ${features.length} disponibles)
+                                    </div>
+                                    <div style="color: var(--text-muted); font-size: 12px;">Édition avancée des fonctionnalités avec icônes</div>
+                                </div>
+                                
+                                <div class="features-manager" style="margin-bottom: 12px;">
+                                    <div class="feature-actions" style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                        <button onclick="widgetEditor.addFeatureToGrid()" 
+                                                style="flex: 1; padding: 8px 16px; background: var(--accent-green); 
+                                                       color: white; border: none; border-radius: 6px; 
+                                                       cursor: pointer; font-size: 14px; font-weight: 500;">
+                                            <i class="fas fa-plus"></i> Ajouter Fonctionnalité
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="features-list" style="max-height: 300px; overflow-y: auto;">
+                                        ${features.map((feature, index) => `
+                                            <div class="feature-grid-item" style="padding: 12px; background: ${index < featuresCount ? 'rgba(16, 185, 129, 0.1)' : 'rgba(107, 114, 128, 0.1)'}; 
+                                                                           border: 1px solid ${index < featuresCount ? 'rgba(16, 185, 129, 0.3)' : 'rgba(107, 114, 128, 0.3)'}; 
+                                                                           border-radius: 8px; margin-bottom: 8px;">
+                                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                                                    <div style="display: flex; align-items: center; gap: 8px; flex: 1;">
+                                                        <span style="color: var(--text-muted); font-size: 12px; font-weight: bold;">#${index + 1}</span>
+                                                        <span style="color: ${index < featuresCount ? 'var(--accent-green)' : 'var(--text-muted)'}; font-weight: bold;">
+                                                            ${index < featuresCount ? 'ACTIVE' : 'INACTIVE'}
+                                                        </span>
+                                                    </div>
+                                                    <button onclick="widgetEditor.removeGridFeature(${index})" 
+                                                            title="Supprimer cette fonctionnalité"
+                                                            style="background: rgba(239, 68, 68, 0.2); color: var(--danger-red); 
+                                                                   border: 1px solid var(--danger-red); border-radius: 4px; 
+                                                                   width: 24px; height: 24px; cursor: pointer; font-size: 12px;">
+                                                        <i class="fas fa-times"></i>
+                                                    </button>
+                                                </div>
+                                                
+                                                <div class="feature-fields">
+                                                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px; margin-bottom: 8px;">
+                                                        <label style="color: var(--text-gray); font-size: 12px; align-self: center;">Icône:</label>
+                                                        <input type="text" value="${feature.icon || '⭐'}" maxlength="2" 
+                                                               onchange="widgetEditor.updateGridFeature(${index}, 'icon', this.value)"
+                                                               oninput="widgetEditor.updateGridFeature(${index}, 'icon', this.value)"
+                                                               style="padding: 6px 8px; background: var(--bg-primary); 
+                                                                      border: 1px solid var(--border-color); border-radius: 4px; 
+                                                                      color: var(--text-white); font-size: 16px; text-align: center; width: 50px;">
+                                                    </div>
+                                                    
+                                                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px; margin-bottom: 8px;">
+                                                        <label style="color: var(--text-gray); font-size: 12px; align-self: center;">Titre:</label>
+                                                        <input type="text" value="${feature.title || 'Titre'}" 
+                                                               onchange="widgetEditor.updateGridFeature(${index}, 'title', this.value)"
+                                                               oninput="widgetEditor.updateGridFeature(${index}, 'title', this.value)"
+                                                               style="padding: 6px 8px; background: var(--bg-primary); 
+                                                                      border: 1px solid var(--border-color); border-radius: 4px; 
+                                                                      color: var(--text-white); font-size: 14px;">
+                                                    </div>
+                                                    
+                                                    <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px;">
+                                                        <label style="color: var(--text-gray); font-size: 12px; align-self: start; padding-top: 6px;">Description:</label>
+                                                        <textarea rows="2" placeholder="Description de la fonctionnalité"
+                                                                  onchange="widgetEditor.updateGridFeature(${index}, 'description', this.value)"
+                                                                  oninput="widgetEditor.updateGridFeature(${index}, 'description', this.value)"
+                                                                  style="padding: 6px 8px; background: var(--bg-primary); 
+                                                                         border: 1px solid var(--border-color); border-radius: 4px; 
+                                                                         color: var(--text-white); font-size: 13px; resize: vertical; min-height: 40px;">${feature.description || 'Description'}</textarea>
+                                                    </div>
+                                                </div>
                                             </div>
                                         `).join('')}
                                     </div>
@@ -1917,6 +2111,7 @@
             updateHeroTitleRealTime(container, propertyName, value) {
                 const title = container.querySelector('.hero-title, h1');
                 const subtitle = container.querySelector('.hero-subtitle, .hero-section div');
+                const section = container.querySelector('.hero-section');
                 
                 switch (propertyName) {
                     case 'title':
@@ -1940,9 +2135,44 @@
                         }
                         break;
                     case 'alignment':
-                        const section = container.querySelector('.hero-section');
                         if (section) {
                             section.style.textAlign = value;
+                        }
+                        break;
+                    case 'backgroundColor':
+                        if (section) {
+                            if (value === 'transparent' || value === '') {
+                                section.style.backgroundColor = 'transparent';
+                            } else {
+                                section.style.backgroundColor = value;
+                            }
+                        }
+                        break;
+                    case 'borderRadius':
+                        if (section) {
+                            if (parseInt(value) > 0) {
+                                section.style.borderRadius = `${value}px`;
+                                section.style.overflow = 'hidden';
+                            } else {
+                                section.style.borderRadius = '0px';
+                                section.style.overflow = 'visible';
+                            }
+                        }
+                        break;
+                    case 'gradient':
+                        if (title) {
+                            if (value) {
+                                title.style.background = 'linear-gradient(135deg, #10b981, #0d9488)';
+                                title.style.webkitBackgroundClip = 'text';
+                                title.style.webkitTextFillColor = 'transparent';
+                                title.style.backgroundClip = 'text';
+                            } else {
+                                title.style.background = 'none';
+                                title.style.webkitBackgroundClip = 'initial';
+                                title.style.webkitTextFillColor = 'initial';
+                                title.style.backgroundClip = 'initial';
+                                title.style.color = '#10b981';
+                            }
                         }
                         break;
                 }
@@ -2700,12 +2930,104 @@
                 this.setStatus('Widget configuré pour remplir le conteneur parent', 'success');
             }
 
-            // Fonction toggle grille
+            // ================================================================
+            // GESTION DES FONCTIONNALITÉS DE LA GRILLE
+            // ================================================================
+            
+            // Ajouter une nouvelle fonctionnalité à la grille
+            addFeatureToGrid() {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'feature-grid') return;
+                
+                if (!this.selectedWidget.data.features) {
+                    this.selectedWidget.data.features = [];
+                }
+                
+                this.selectedWidget.data.features.push({
+                    icon: '⭐',
+                    title: 'Nouvelle fonctionnalité',
+                    description: 'Description de la nouvelle fonctionnalité'
+                });
+                
+                // Mettre à jour l'interface
+                this.updateElementsTab();
+                this.renderCanvas();
+                this.updatePreview();
+                
+                this.setStatus('Nouvelle fonctionnalité ajoutée', 'success');
+            }
+            
+            // Supprimer une fonctionnalité de la grille
+            removeGridFeature(index) {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'feature-grid') return;
+                
+                const features = this.selectedWidget.data.features;
+                if (!features || index < 0 || index >= features.length) return;
+                
+                if (confirm(`Supprimer la fonctionnalité "${features[index].title}" ?`)) {
+                    features.splice(index, 1);
+                    
+                    // Ajuster le nombre de fonctionnalités actives si nécessaire
+                    if (this.selectedWidget.data.featuresCount > features.length) {
+                        this.selectedWidget.data.featuresCount = features.length;
+                    }
+                    
+                    // Mettre à jour l'interface
+                    this.updateElementsTab();
+                    this.renderCanvas();
+                    this.updatePreview();
+                    
+                    this.setStatus('Fonctionnalité supprimée', 'success');
+                }
+            }
+            
+            // Mettre à jour une fonctionnalité de la grille
+            updateGridFeature(index, field, value) {
+                if (!this.selectedWidget || this.selectedWidget.type !== 'feature-grid') return;
+                
+                const features = this.selectedWidget.data.features;
+                if (!features || index < 0 || index >= features.length) return;
+                
+                features[index][field] = value;
+                
+                // Mettre à jour le rendu en temps réel
+                this.renderCanvas();
+                this.updatePreview();
+                
+                // Message de statut discret uniquement pour les changements importants
+                if (field === 'title') {
+                    this.setStatus(`Titre mis à jour: ${value}`, 'info');
+                }
+            }
+
+            // Fonction toggle grille avec indicateur visuel
             toggleGrid() {
                 const workspace = document.getElementById('canvasWorkspace');
+                const gridButton = document.getElementById('gridToggleBtn');
+                
                 if (workspace) {
-                    workspace.classList.toggle('show-grid');
-                    this.setStatus('Grille basculée', 'info');
+                    const isGridVisible = workspace.classList.toggle('show-grid');
+                    
+                    // Mettre à jour l'apparence du bouton
+                    if (gridButton) {
+                        if (isGridVisible) {
+                            gridButton.classList.add('btn-primary');
+                            gridButton.innerHTML = '<i class="fas fa-th"></i> Masquer Grille';
+                            gridButton.style.background = 'var(--accent-green)';
+                            gridButton.style.borderColor = 'var(--accent-green)';
+                        } else {
+                            gridButton.classList.remove('btn-primary');
+                            gridButton.innerHTML = '<i class="fas fa-th"></i> Grille';
+                            gridButton.style.background = '';
+                            gridButton.style.borderColor = '';
+                        }
+                    }
+                    
+                    // Message de statut informatif
+                    const statusMessage = isGridVisible ? 
+                        'Grille 12×8 affichée - Positionnement visuel activé' : 
+                        'Grille masquée - Mode édition normal';
+                    
+                    this.setStatus(statusMessage, 'info');
                 }
             }
         }
