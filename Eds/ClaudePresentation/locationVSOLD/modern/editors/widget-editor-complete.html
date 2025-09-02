@@ -1971,10 +1971,10 @@
                                 <label class="property-label" style="font-size: 11px; margin-bottom: 4px;">Largeur</label>
                                 <div style="display: flex; align-items: center; gap: 4px;">
                                     <input type="range" id="widthSlider" class="property-range" 
-                                           min="1" max="12" value="3" style="flex: 1;"
+                                           min="1" max="100" value="3" style="flex: 1;"
                                            oninput="widgetEditor.updateWidgetSize('width', this.value)">
                                     <input type="number" id="widthInput" class="property-input" 
-                                           min="1" max="12" value="3"
+                                           min="1" max="100" value="3"
                                            style="width: 40px; text-align: center; font-size: 11px;"
                                            onchange="widgetEditor.updateWidgetSize('width', this.value)">
                                 </div>
@@ -1984,10 +1984,10 @@
                                 <label class="property-label" style="font-size: 11px; margin-bottom: 4px;">Hauteur</label>
                                 <div style="display: flex; align-items: center; gap: 4px;">
                                     <input type="range" id="heightSlider" class="property-range" 
-                                           min="1" max="8" value="2" style="flex: 1;"
+                                           min="1" max="100" value="2" style="flex: 1;"
                                            oninput="widgetEditor.updateWidgetSize('height', this.value)">
                                     <input type="number" id="heightInput" class="property-input" 
-                                           min="1" max="8" value="2"
+                                           min="1" max="100" value="2"
                                            style="width: 40px; text-align: center; font-size: 11px;"
                                            onchange="widgetEditor.updateWidgetSize('height', this.value)">
                                 </div>
@@ -1999,10 +1999,10 @@
                                 <label class="property-label" style="font-size: 11px; margin-bottom: 4px;">Colonne</label>
                                 <div style="display: flex; align-items: center; gap: 4px;">
                                     <input type="range" id="positionColSlider" class="property-range" 
-                                           min="1" max="12" value="1" style="flex: 1;"
+                                           min="1" max="100" value="1" style="flex: 1;"
                                            oninput="widgetEditor.updateWidgetPosition('col', this.value)">
                                     <input type="number" id="positionColInput" class="property-input" 
-                                           min="1" max="12" value="1"
+                                           min="1" max="100" value="1"
                                            style="width: 40px; text-align: center; font-size: 11px;"
                                            onchange="widgetEditor.updateWidgetPosition('col', this.value)">
                                 </div>
@@ -2012,10 +2012,10 @@
                                 <label class="property-label" style="font-size: 11px; margin-bottom: 4px;">Rangée</label>
                                 <div style="display: flex; align-items: center; gap: 4px;">
                                     <input type="range" id="positionRowSlider" class="property-range" 
-                                           min="1" max="8" value="1" style="flex: 1;"
+                                           min="1" max="100" value="1" style="flex: 1;"
                                            oninput="widgetEditor.updateWidgetPosition('row', this.value)">
                                     <input type="number" id="positionRowInput" class="property-input" 
-                                           min="1" max="8" value="1"
+                                           min="1" max="100" value="1"
                                            style="width: 40px; text-align: center; font-size: 11px;"
                                            onchange="widgetEditor.updateWidgetPosition('row', this.value)">
                                 </div>
@@ -5947,6 +5947,10 @@
                         favoriteWidgets: Array.from(this.favoriteWidgets),
                         recentWidgets: Array.from(this.recentWidgets),
                         
+                        // Dimensions de la grille personnalisée
+                        gridColumns: this.gridColumns || 12,
+                        gridRows: this.gridRows || 8,
+                        
                         // Timestamp de sauvegarde
                         savedAt: Date.now()
                     };
@@ -6016,6 +6020,16 @@
                     if (state.searchTerm) this.searchTerm = state.searchTerm;
                     if (state.favoriteWidgets) this.favoriteWidgets = new Set(state.favoriteWidgets);
                     if (state.recentWidgets) this.recentWidgets = new Set(state.recentWidgets);
+                    
+                    // Restaurer les dimensions de la grille personnalisée
+                    if (state.gridColumns !== undefined) this.gridColumns = state.gridColumns;
+                    if (state.gridRows !== undefined) this.gridRows = state.gridRows;
+                    
+                    // Appliquer immédiatement les dimensions restaurées
+                    if (state.gridColumns !== undefined || state.gridRows !== undefined) {
+                        this.updateGridLayout();
+                        console.log(`🔄 Grille restaurée: ${this.gridColumns}×${this.gridRows}`);
+                    }
                     
                 } catch (error) {
                     console.warn('Erreur lors de la restauration:', error);
@@ -6737,20 +6751,22 @@
                             const direction = handle.dataset.direction;
                             
                             // Calculer les nouvelles dimensions basées sur les colonnes/rangées de la grille
-                            const gridCellWidth = container.parentElement.offsetWidth / 12; // 12 colonnes
-                            const gridCellHeight = container.parentElement.offsetHeight / 8; // 8 rangées
+                            const gridCols = this.gridColumns || 12;
+                            const gridRows = this.gridRows || 8;
+                            const gridCellWidth = container.parentElement.offsetWidth / gridCols;
+                            const gridCellHeight = container.parentElement.offsetHeight / gridRows;
                             
                             let newWidth = startWidth;
                             let newHeight = startHeight;
                             
                             if (direction === 'width' || direction === 'both') {
                                 const widthChange = Math.round(deltaX / gridCellWidth);
-                                newWidth = Math.max(1, Math.min(12, startWidth + widthChange));
+                                newWidth = Math.max(1, Math.min(gridCols, startWidth + widthChange));
                             }
                             
                             if (direction === 'height' || direction === 'both') {
                                 const heightChange = Math.round(deltaY / gridCellHeight);
-                                newHeight = Math.max(1, Math.min(8, startHeight + heightChange));
+                                newHeight = Math.max(1, Math.min(gridRows, startHeight + heightChange));
                             }
                             
                             // Mettre à jour l'indicateur
@@ -6774,20 +6790,22 @@
                             const deltaY = e.clientY - startY;
                             const direction = handle.dataset.direction;
                             
-                            const gridCellWidth = container.parentElement.offsetWidth / 12;
-                            const gridCellHeight = container.parentElement.offsetHeight / 8;
+                            const gridCols = this.gridColumns || 12;
+                            const gridRows = this.gridRows || 8;
+                            const gridCellWidth = container.parentElement.offsetWidth / gridCols;
+                            const gridCellHeight = container.parentElement.offsetHeight / gridRows;
                             
                             let newWidth = startWidth;
                             let newHeight = startHeight;
                             
                             if (direction === 'width' || direction === 'both') {
                                 const widthChange = Math.round(deltaX / gridCellWidth);
-                                newWidth = Math.max(1, Math.min(12, startWidth + widthChange));
+                                newWidth = Math.max(1, Math.min(gridCols, startWidth + widthChange));
                             }
                             
                             if (direction === 'height' || direction === 'both') {
                                 const heightChange = Math.round(deltaY / gridCellHeight);
-                                newHeight = Math.max(1, Math.min(8, startHeight + heightChange));
+                                newHeight = Math.max(1, Math.min(gridRows, startHeight + heightChange));
                             }
                             
                             // Appliquer le changement définitif si différent
@@ -9471,9 +9489,13 @@ Folder('${id}')" title="Renommer">
 
             // Trouver une position libre sur la grille (placement intelligent centre-vers-extérieur)
             findFreeGridPosition(width = 3, height = 2) {
+                // Utiliser les dimensions dynamiques de la grille
+                const gridCols = this.gridColumns || 12;
+                const gridRows = this.gridRows || 8;
+                
                 // Positions prioritaires : centre vers l'extérieur
-                const centerCol = Math.floor(12 / 2) - Math.floor(width / 2) + 1;
-                const centerRow = Math.floor(8 / 2) - Math.floor(height / 2) + 1;
+                const centerCol = Math.floor(gridCols / 2) - Math.floor(width / 2) + 1;
+                const centerRow = Math.floor(gridRows / 2) - Math.floor(height / 2) + 1;
                 
                 // Positions candidates par priorité (centre vers extérieur)
                 const candidates = [];
@@ -9482,9 +9504,10 @@ Folder('${id}')" title="Renommer">
                 candidates.push({ col: centerCol, row: centerRow });
                 
                 // Puis ajouter les positions en spirale depuis le centre
-                for (let radius = 1; radius <= 6; radius++) {
-                    for (let row = Math.max(1, centerRow - radius); row <= Math.min(8, centerRow + radius); row++) {
-                        for (let col = Math.max(1, centerCol - radius); col <= Math.min(12, centerCol + radius); col++) {
+                const maxRadius = Math.max(gridCols, gridRows);
+                for (let radius = 1; radius <= maxRadius; radius++) {
+                    for (let row = Math.max(1, centerRow - radius); row <= Math.min(gridRows, centerRow + radius); row++) {
+                        for (let col = Math.max(1, centerCol - radius); col <= Math.min(gridCols, centerCol + radius); col++) {
                             // Éviter les positions déjà ajoutées
                             if (!candidates.some(c => c.col === col && c.row === row)) {
                                 candidates.push({ col, row });
@@ -9501,8 +9524,8 @@ Folder('${id}')" title="Renommer">
                 }
                 
                 // Fallback : première position disponible
-                for (let row = 1; row <= 8; row++) {
-                    for (let col = 1; col <= 12; col++) {
+                for (let row = 1; row <= gridRows; row++) {
+                    for (let col = 1; col <= gridCols; col++) {
                         if (this.isPositionFree(col, row, width, height)) {
                             return { col, row };
                         }
@@ -9515,8 +9538,12 @@ Folder('${id}')" title="Renommer">
             
             // Vérifier si une position est libre
             isPositionFree(col, row, width, height) {
+                // Utiliser les dimensions dynamiques de la grille
+                const gridCols = this.gridColumns || 12;
+                const gridRows = this.gridRows || 8;
+                
                 // Vérifier les limites de grille
-                if (col + width - 1 > 12 || row + height - 1 > 8) {
+                if (col + width - 1 > gridCols || row + height - 1 > gridRows) {
                     return false;
                 }
                 
@@ -9591,10 +9618,12 @@ Folder('${id}')" title="Renommer">
                     const deltaCol = Math.round(deltaX / (cellWidth + 8)); // +8 pour le gap
                     const deltaRow = Math.round(deltaY / (cellHeight + 8)); // +8 pour le gap
                     
-                    // Nouvelle position avec contraintes
+                    // Nouvelle position avec contraintes dynamiques
                     const size = widget.size || { width: 3, height: 2 };
-                    let newCol = Math.max(1, Math.min(12 - size.width + 1, originalPosition.col + deltaCol));
-                    let newRow = Math.max(1, Math.min(8 - size.height + 1, originalPosition.row + deltaRow));
+                    const gridCols = this.gridColumns || 12;
+                    const gridRows = this.gridRows || 8;
+                    let newCol = Math.max(1, Math.min(gridCols - size.width + 1, originalPosition.col + deltaCol));
+                    let newRow = Math.max(1, Math.min(gridRows - size.height + 1, originalPosition.row + deltaRow));
                     
                     // Mise à jour visuelle temporaire
                     container.style.gridColumnStart = newCol;
@@ -9618,9 +9647,11 @@ Folder('${id}')" title="Renommer">
                     const rect = workspace.getBoundingClientRect();
                     const padding = 32;
                     const gridWidth = rect.width - (padding * 2);
+                    const gridCols = this.gridColumns || 12;
+                    const gridRows = this.gridRows || 8;
                     const gridHeight = rect.height - (padding * 2);
-                    const cellWidth = (gridWidth - (11 * 8)) / 12;
-                    const cellHeight = (gridHeight - (7 * 8)) / 8;
+                    const cellWidth = (gridWidth - ((gridCols - 1) * 8)) / gridCols;
+                    const cellHeight = (gridHeight - ((gridRows - 1) * 8)) / gridRows;
                     
                     const deltaX = e.clientX - startX;
                     const deltaY = e.clientY - startY;
@@ -9628,8 +9659,8 @@ Folder('${id}')" title="Renommer">
                     const deltaRow = Math.round(deltaY / (cellHeight + 8));
                     
                     const size = widget.size || { width: 3, height: 2 };
-                    let newCol = Math.max(1, Math.min(12 - size.width + 1, originalPosition.col + deltaCol));
-                    let newRow = Math.max(1, Math.min(8 - size.height + 1, originalPosition.row + deltaRow));
+                    let newCol = Math.max(1, Math.min(gridCols - size.width + 1, originalPosition.col + deltaCol));
+                    let newRow = Math.max(1, Math.min(gridRows - size.height + 1, originalPosition.row + deltaRow));
                     
                     // CRUCIAL: Sauvegarder définitivement la nouvelle position
                     widget.position = { col: newCol, row: newRow };
@@ -9715,8 +9746,10 @@ Folder('${id}')" title="Renommer">
                         newPos.row = Math.max(1, startPos.row - deltaHeight);
                     }
                     
-                    // Vérifier les limites
-                    if (newPos.col + newSize.width - 1 <= 12 && newPos.row + newSize.height - 1 <= 8) {
+                    // Vérifier les limites dynamiques
+                    const gridCols = this.gridColumns || 12;
+                    const gridRows = this.gridRows || 8;
+                    if (newPos.col + newSize.width - 1 <= gridCols && newPos.row + newSize.height - 1 <= gridRows) {
                         widget.size = newSize;
                         widget.position = newPos;
                         
@@ -10917,13 +10950,17 @@ Folder('${id}')" title="Renommer">
                 const size = this.selectedWidget.size || { width: 3, height: 2 };
                 const position = this.selectedWidget.position || { col: 1, row: 1 };
                 
+                // Utiliser les dimensions dynamiques de la grille
+                const gridCols = this.gridColumns || 12;
+                const gridRows = this.gridRows || 8;
+                
                 // Limiter la taille maximale
-                size.width = Math.max(1, Math.min(12, size.width));
-                size.height = Math.max(1, Math.min(8, size.height));
+                size.width = Math.max(1, Math.min(gridCols, size.width));
+                size.height = Math.max(1, Math.min(gridRows, size.height));
                 
                 // Ajuster la position si le widget dépasse
-                position.col = Math.max(1, Math.min(12 - size.width + 1, position.col));
-                position.row = Math.max(1, Math.min(8 - size.height + 1, position.row));
+                position.col = Math.max(1, Math.min(gridCols - size.width + 1, position.col));
+                position.row = Math.max(1, Math.min(gridRows - size.height + 1, position.row));
                 
                 // Mettre à jour l'objet
                 this.selectedWidget.size = size;
@@ -10936,7 +10973,10 @@ Folder('${id}')" title="Renommer">
             setFullScreen() {
                 if (!this.selectedWidget) return;
                 
-                this.selectedWidget.size = { width: 12, height: 8 };
+                // Utiliser les dimensions dynamiques de la grille
+                const gridCols = this.gridColumns || 12;
+                const gridRows = this.gridRows || 8;
+                this.selectedWidget.size = { width: gridCols, height: gridRows };
                 this.selectedWidget.position = { col: 1, row: 1 };
                 
                 // Marquer le widget comme plein écran pour le CSS responsive
@@ -11317,7 +11357,9 @@ Folder('${id}')" title="Renommer">
                 if (!container || this.widgets.length === 0) return;
                 
                 // Calculer les dimensions englobantes de tous les widgets
-                let minCol = 12, maxCol = 1, minRow = 8, maxRow = 1;
+                const gridCols = this.gridColumns || 12;
+                const gridRows = this.gridRows || 8;
+                let minCol = gridCols, maxCol = 1, minRow = gridRows, maxRow = 1;
                 
                 this.widgets.forEach(widget => {
                     const pos = widget.position || { col: 1, row: 1 };
@@ -11332,9 +11374,9 @@ Folder('${id}')" title="Renommer">
                 // Ajouter une marge de padding autour des widgets
                 const padding = 1;
                 minCol = Math.max(1, minCol - padding);
-                maxCol = Math.min(12, maxCol + padding);
+                maxCol = Math.min(gridCols, maxCol + padding);
                 minRow = Math.max(1, minRow - padding);
-                maxRow = Math.min(8, maxRow + padding);
+                maxRow = Math.min(gridRows, maxRow + padding);
                 
                 // Appliquer les dimensions CSS Grid au conteneur
                 container.style.gridColumnStart = minCol;
@@ -11411,6 +11453,9 @@ Folder('${id}')" title="Renommer">
                     this.gridColumns = newColumns;
                     this.updateGridLayout();
                     
+                    // Sauvegarder automatiquement la nouvelle configuration
+                    this.autoSave();
+                    
                     // Message de statut informatif
                     this.setStatus(`Grille ajustée : ${newColumns} colonnes`, 'success');
                 }
@@ -11438,6 +11483,9 @@ Folder('${id}')" title="Renommer">
                     this.gridRows = newRows;
                     this.updateGridLayout();
                     
+                    // Sauvegarder automatiquement la nouvelle configuration
+                    this.autoSave();
+                    
                     // Message de statut informatif
                     this.setStatus(`Grille ajustée : ${newRows} lignes`, 'success');
                 }
@@ -11455,6 +11503,9 @@ Folder('${id}')" title="Renommer">
                 this.gridColumns = 12;
                 this.gridRows = 8;
                 this.updateGridLayout();
+                
+                // Sauvegarder automatiquement la réinitialisation
+                this.autoSave();
                 
                 this.setStatus('Grille réinitialisée : 12 colonnes × 8 lignes', 'info');
             }
@@ -11511,6 +11562,9 @@ Folder('${id}')" title="Renommer">
                     rowsDisplay.textContent = this.gridRows;
                 }
                 
+                // Mettre à jour les limites des sliders d'organisation
+                this.updateSliderLimits();
+                
                 // Rôle      : Forcer la reconstruction de la grille CSS
                 // Type      : méthode DOM
                 // Unité     : sans unité
@@ -11520,6 +11574,65 @@ Folder('${id}')" title="Renommer">
                 if (workspace) {
                     workspace.offsetHeight; // Force reflow pour appliquer les changements
                 }
+            }
+
+            /**
+             * Rôle      : Met à jour les limites maximales des sliders d'organisation
+             * Type      : méthode privée (sans paramètres)
+             * Unité     : sans unité
+             * Domaine   : mise à jour des attributs max des sliders HTML
+             * Formule   : max = this.gridColumns ou this.gridRows
+             * Exemple   : Si grille 20×15, largeur max=20, hauteur max=15
+             */
+            updateSliderLimits() {
+                // Rôle      : Dimensions actuelles de la grille
+                // Type      : number (entiers)
+                // Unité     : colonnes/lignes
+                // Domaine   : gridCols >= 6, gridRows >= 4
+                // Formule   : valeurs des propriétés de la classe
+                // Exemple   : gridCols = 20, gridRows = 15
+                const gridCols = this.gridColumns || 12;
+                const gridRows = this.gridRows || 8;
+
+                // Mettre à jour les sliders de taille
+                const widthSlider = document.getElementById('widthSlider');
+                const heightSlider = document.getElementById('heightSlider');
+                const widthInput = document.getElementById('widthInput');
+                const heightInput = document.getElementById('heightInput');
+
+                if (widthSlider) {
+                    widthSlider.max = gridCols;
+                }
+                if (heightSlider) {
+                    heightSlider.max = gridRows;
+                }
+                if (widthInput) {
+                    widthInput.max = gridCols;
+                }
+                if (heightInput) {
+                    heightInput.max = gridRows;
+                }
+
+                // Mettre à jour les sliders de position
+                const colSlider = document.getElementById('positionColSlider');
+                const rowSlider = document.getElementById('positionRowSlider');
+                const colInput = document.getElementById('positionColInput');
+                const rowInput = document.getElementById('positionRowInput');
+
+                if (colSlider) {
+                    colSlider.max = gridCols;
+                }
+                if (rowSlider) {
+                    rowSlider.max = gridRows;
+                }
+                if (colInput) {
+                    colInput.max = gridCols;
+                }
+                if (rowInput) {
+                    rowInput.max = gridRows;
+                }
+
+                console.log(`🎚️ Limites sliders mises à jour: largeur/col max=${gridCols}, hauteur/row max=${gridRows}`);
             }
             
             // Rôle      : Configuration du système de redimensionnement du panneau propriétés
