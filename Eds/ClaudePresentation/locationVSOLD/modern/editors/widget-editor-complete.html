@@ -3587,6 +3587,9 @@
                 });
                 
                 preview.innerHTML = previewHtml;
+                
+                // Mettre à jour aussi la prévisualisation plein écran si elle est ouverte
+                this.updateFullscreenPreviewIfOpen();
             }
 
             // Gestion de la recherche dynamique
@@ -4127,6 +4130,14 @@ Folder('${id}')" title="Renommer">
                         widget.style.transform = 'translateY(0)';
                     }, index * 100);
                 });
+            }
+            
+            // Mettre à jour la prévisualisation si elle est ouverte
+            updateFullscreenPreviewIfOpen() {
+                const popup = document.getElementById('previewPopup');
+                if (popup && popup.classList.contains('active')) {
+                    this.renderFullscreenPreview();
+                }
             }
 
             exportProject() {
