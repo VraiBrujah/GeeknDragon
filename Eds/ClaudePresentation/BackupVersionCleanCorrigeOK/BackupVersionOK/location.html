@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Configuration de la page de location Li-CUBE PRO™ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Outil Présentation LOCATION | EDS Québec</title>
+    <meta name="description" content="Outil de présentation commerciale Li-CUBE PRO™ LOCATION : Arguments de service et tranquillité pour équipes de vente EDS Québec.">
+    
+    <!-- Polices modernes pour une présentation de location professionnelle -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variables CSS pour le thème de location : vert et bleu */
+        :root {
+            --primary-dark: #0F172A;
+            --secondary-dark: #1E293B;
+            --accent-green: #10B981;
+            --accent-blue: #3B82F6;
+            --accent-teal: #14B8A6;
+            --success-green: #059669;
+            --warning-orange: #F59E0B;
+            --text-white: #F8FAFC;
+            --text-gray: #CBD5E1;
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            --gradient-green: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+            --gradient-blue: linear-gradient(135deg, var(--accent-blue) 0%, #60A5FA 100%);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-primary);
+            color: var(--text-white);
+            line-height: 1.6;
+        }
+        
+        /* Navigation spécifique version LOCATION */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
+            padding: 1rem 2rem; border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        
+        .nav-content {
+            display: flex; justify-content: center; align-items: center;
+            max-width: 1400px; margin: 0 auto;
+        }
+        
+        .nav-brand { display: flex; align-items: center; gap: 1rem; }
+        
+        .nav-logo {
+            width: 50px; height: 50px; border-radius: 12px;
+            background: rgba(16, 185, 129, 0.1); border: 2px solid rgba(16, 185, 129, 0.3);
+            background-image: url('./images/logo edsquebec.png');
+            background-size: 80%; background-repeat: no-repeat; background-position: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-logo:hover {
+            background-color: rgba(16, 185, 129, 0.2); transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .nav-title {
+            font-size: 1.8rem; font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-green);
+        }
+        
+        .nav-menu { display: flex; gap: 2rem; align-items: center; }
+        
+        .nav-item {
+            color: var(--text-gray); text-decoration: none; font-weight: 500;
+            padding: 0.75rem 1.25rem; border-radius: 10px; transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-white); background: rgba(16, 185, 129, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Image de l'entreprise affichée dans la présentation */
+        .company-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin: 2rem auto;
+            display: block;
+        }
+        
+        /* Sections espacement éditables */
+        .header-spacer, .section-spacer {
+            width: 100%;
+            background: transparent;
+            display: block;
+        }
+        
+        .header-spacer {
+            height: 80px; /* Hauteur par défaut header */
+        }
+        
+        .section-spacer {
+            height: 0px; /* Hauteur par défaut sections (espacement actuel nul) */
+        }
+        
+        /* Section principale avec focus LOCATION */
+        .section {
+            min-height: 100vh; padding: 6rem 2rem 4rem;
+            position: relative; display: flex; align-items: center;
+        }
+        
+        .container { max-width: 1400px; margin: 0 auto; width: 100%; }
+        
+        /* Héro orienté LOCATION/SERVICE */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, var(--primary-dark) 100%);
+            position: relative; overflow: hidden;
+        }
+        
+        .hero::before {
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 60%; height: 100%; z-index: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="%2310B981" stroke-width="0.5" opacity="0.02"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            align-items: center; position: relative; z-index: 10;
+        }
+        
+        .hero-text h1 {
+            font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-highlight {
+            color: var(--accent-green); font-size: 5rem;
+            text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+            display: block; margin-bottom: 0.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.4rem; color: var(--text-gray);
+            margin-bottom: 2.5rem; font-weight: 500; line-height: 1.7;
+        }
+        
+        .price-banner {
+            background: var(--gradient-green); color: white;
+            padding: 1.5rem 2rem; border-radius: 15px; margin-bottom: 2rem;
+            text-align: center; box-shadow: var(--shadow-lg);
+        }
+        
+        .price-main {
+            font-size: 3.5rem; font-weight: 900; line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .price-sub {
+            font-size: 1.1rem; opacity: 0.9; margin-top: 0.5rem;
+        }
+        
+        .rental-benefits {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem; margin-bottom: 3rem;
+        }
+        
+        .benefit-card {
+            background: rgba(16, 185, 129, 0.1); backdrop-filter: blur(15px);
+            border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 16px;
+            padding: 1.8rem 1.2rem; text-align: center; transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-4px); background: rgba(16, 185, 129, 0.15);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem; color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-title {
+            font-size: 1.1rem; font-weight: 700; color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .benefit-text {
+            font-size: 0.9rem; color: var(--text-gray);
+        }
+        
+        .cta-rental {
+            background: var(--gradient-green); color: white;
+            padding: 1.2rem 2.5rem; border: none; border-radius: 12px;
+            font-size: 1.2rem; font-weight: 700; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.8rem;
+        }
+        
+        .cta-rental:hover {
+            transform: translateY(-3px); box-shadow: var(--shadow-lg);
+        }
+        
+        .product-showcase {
+            width: 500px; height: 400px; background: var(--gradient-green);
+            border-radius: 24px; position: relative; overflow: hidden;
+            box-shadow: var(--shadow-lg); animation: float 6s ease-in-out infinite;
+            background-image: url('./images/Li-CUBE PRO.png');
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+            border: 3px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .product-showcase::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 4s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        /* Rôle : Container pour la comparaison produits (principal vs concurrent) */
+        /* Structure : Flexbox horizontal avec 3 éléments alignés au centre */
+        /* Responsive : Passage en colonne sur mobile avec gap adaptatif */
+        .product-comparison-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        /* Rôle : Styles spécifiques pour l'image concurrent */
+        /* Héritage : Basé sur .product-showcase mais avec image différente */
+        /* Synchronisation : Image changée dynamiquement via data-field */
+        .competitor-showcase {
+            width: 500px; height: 400px; background: var(--gradient-blue);
+            border-radius: 24px; position: relative; overflow: hidden;
+            box-shadow: var(--shadow-lg); animation: float 6s ease-in-out infinite 3s;
+            background-image: url('./images/concurrent.png');
+            background-size: contain; background-repeat: no-repeat; background-position: center;
+            border: 3px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Rôle : Effet de brillance sur l'image concurrent */
+        /* Décalage : Animation démarrée avec 2s de délai par rapport au produit principal */
+        .competitor-showcase::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 4s infinite 2s;
+        }
+        
+        /* Rôle : Élément séparateur VS entre les deux produits */
+        /* Design : Badge circulaire avec dégradé et animation pulsante */
+        /* Éditable : Texte modifiable via système d'édition */
+        .vs-element {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            border-radius: 50%;
+            box-shadow: var(--shadow-lg);
+            animation: pulse-vs 2s ease-in-out infinite;
+            position: relative;
+            z-index: 10;
+            border: 4px solid var(--surface-light);
+        }
+        
+        /* Rôle : Animation pulsante pour l'élément VS */
+        /* Effet : Changement d'échelle et d'ombre pour attirer l'attention */
+        @keyframes pulse-vs {
+            0%, 100% { transform: scale(1); box-shadow: var(--shadow-lg); }
+            50% { transform: scale(1.1); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        }
+        
+        /* Rôle : Texte VS à l'intérieur du badge */
+        /* Design : Style distinct éditable, différent des boutons */
+        /* Contraste : Style personnalisable via variables CSS pour édition */
+        /* Éditable : Compatible avec le système d'édition inline et contrôles de style */
+        .vs-text {
+            font-size: var(--vs-font-size, 2.2rem);
+            font-weight: var(--vs-font-weight, 900);
+            color: var(--vs-text-color, #1E293B);
+            text-shadow: var(--vs-text-shadow, 0 2px 4px rgba(255,255,255,0.4));
+            letter-spacing: var(--vs-letter-spacing, 0.15em);
+            font-family: var(--vs-font-family, 'Playfair Display', serif);
+            text-transform: var(--vs-text-transform, uppercase);
+            transition: all 0.3s ease;
+        }
+        
+        /* Rôle : Responsive design pour écrans mobiles */
+        /* Comportement : Réduction des tailles et passage en colonne */
+        @media (max-width: 768px) {
+            .product-comparison-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .competitor-showcase {
+                width: 350px;
+                height: 280px;
+            }
+            
+            .vs-element {
+                width: 100px;
+                height: 100px;
+                order: 1;
+            }
+            
+            .vs-text {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Section Tarifs */
+        .pricing-section {
+            background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--primary-dark) 100%);
+        }
+        
+        .section-title {
+            font-size: 3.5rem; font-weight: 800; text-align: center;
+            margin-bottom: 3rem; background: var(--gradient-green);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+        
+        .section-title.editable:hover {
+            background: var(--gradient-green) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            border-radius: 8px !important;
+        }
+        
+        .pricing-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+          margin-bottom: 3rem;
+          align-items: stretch; 
+       }
+        
+        .pricing-card {
+            background: rgba(16, 185, 129, 0.1); border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.3s ease; position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .pricing-card.featured {
+            transform: scale(1.05); border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.15);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'RECOMMANDÉ'; position: absolute; top: -10px; left: 50%;
+            transform: translateX(-50%); background: var(--accent-green); color: white;
+            padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px); background: rgba(16, 185, 129, 0.15);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        .pricing-duration {
+            font-size: 1.1rem; font-weight: 600; color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-value {
+            font-size: 3rem; font-weight: 900; color: var(--text-white);
+            margin-bottom: 0.5rem; display: block;
+        }
+        
+        .pricing-unit {
+            font-size: 1rem; color: var(--text-gray); margin-bottom: 1.5rem;
+        }
+        
+        .pricing-features {
+            text-align: center; margin-bottom: 2rem;
+        }
+        
+        .pricing-feature {
+            display: flex; align-items: center; gap: 0.5rem;
+            margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--text-gray);
+        }
+        
+        .pricing-feature .fa-check {
+            color: var(--accent-green); font-weight: 600;
+        }
+        
+        .pricing-cta {
+            background: var(--gradient-green); color: white;
+            padding: 0.8rem 1.5rem; border: none; border-radius: 8px;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+            width: 100%;
+            margin-top: auto;
+        }
+        
+        .pricing-cta:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Section Avantages Location */
+        .advantages-section {
+            background: var(--gradient-primary);
+        }
+        
+        .advantages-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 2rem; margin-top: 3rem;
+        }
+        
+        .advantage-card {
+                background: rgba(16, 185, 129, 0.08);
+                border-radius: 18px;
+                padding: 2rem;
+                border-left: 4px solid var(--accent-green);
+                transition: all 0.3s ease;
+                
+                display: flex;                  /* Active flexbox */
+                flex-direction: column;         /* Aligne en colonne */
+                align-items: center;            /* Centre horizontalement */
+                justify-content: flex-start;    /* Le contenu démarre en haut mais reste centré */
+                text-align: center;             /* Centre le texte */
+        }
+        
+        .advantage-card:hover {
+            transform: translateX(8px); background: rgba(16, 185, 129, 0.12);
+        }
+        
+        .advantage-icon {
+            font-size: 2.5rem; color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        
+        .advantage-title {
+            font-size: 1.4rem; font-weight: 700; color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+        
+        .advantage-text {
+            color: var(--text-gray); line-height: 1.6;
+        }
+        
+        /* Section Contact Location */
+        
+        /* Section Conclusion et Appel à l'Action Final */
+        .conclusion-action-section {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 50%, #1A202C 100%);
+            text-align: center;
+        }
+        
+        .conclusion-action-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .conclusion-action-message {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            padding: 0 2rem;
+        }
+        
+        .urgency-banner {
+            background: linear-gradient(135deg, var(--warning-orange) 0%, #F97316 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            color: white;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .urgency-banner::before {
+            content: '⚡';
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-size: 3rem;
+            opacity: 0.3;
+            animation: flash 2s infinite;
+        }
+        
+        @keyframes flash {
+            0%, 50%, 100% { opacity: 0.3; }
+            25%, 75% { opacity: 1; }
+        }
+        
+        .urgency-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .cta-final-message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .signature-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .signature-text {
+            font-size: 1rem;
+            color: var(--accent-green);
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        /* Section Conclusion Finale Comparative */
+        .conclusion-comparative-section {
+            background: var(--gradient-primary);
+            padding: 6rem 2rem;
+        }
+        
+        .final-comparison-content {
+            text-align: center;
+        }
+        
+        .final-conclusion-box {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            color: white;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .final-conclusion-box::before {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+        
+        .final-conclusion-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .final-conclusion-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+        
+        /* Section comparaison technique */
+        .technical-comparison {
+            background: var(--gradient-primary);
+            padding: 6rem 2rem;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+        
+        .old-tech-column, .new-tech-column {
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+        
+        .old-tech-column {
+            border: 2px solid var(--warning-red);
+            background: rgba(239, 68, 68, 0.05);
+        }
+        
+        .new-tech-column {
+            border: 2px solid var(--success-green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+        
+        .old-tech-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--warning-red);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .new-tech-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--success-green);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .weakness-item, .strength-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .weakness-item {
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .strength-item {
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .weakness-item:hover {
+            background: rgba(239, 68, 68, 0.15);
+            transform: translateY(-3px) scale(1.02);
+        }
+        
+        .strength-item:hover {
+            background: rgba(16, 185, 129, 0.15);
+            transform: translateY(-3px) scale(1.02);
+        }
+        
+        .weakness-icon, .strength-icon {
+            font-size: 2.5rem;
+            width: auto;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            min-height: 60px;
+        }
+        
+        .weakness-content h4, .strength-content h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--text-white);
+            text-align: center;
+        }
+        
+        .weakness-content p, .strength-content p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+            text-align: center;
+            max-width: 280px;
+        }
+        
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .vs-text {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-green);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .conclusion-box {
+            background: var(--gradient-green);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .conclusion-box h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .conclusion-box p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        
+        .contact-section {
+            background: var(--gradient-green); color: white;
+            text-align: center; padding: 6rem 2rem;
+        }
+        
+        .contact-content h2 {
+            font-size: 3rem; font-weight: 800; margin-bottom: 2rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .contact-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 2rem; margin: 3rem 0; max-width: 900px;
+            margin-left: auto; margin-right: auto;
+        }
+        
+        .contact-card {
+            background: rgba(255,255,255,0.1); border-radius: 15px;
+            padding: 1.8rem; backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .contact-icon { font-size: 2rem; margin-bottom: 1rem; }
+        
+        .contact-actions {
+            display: flex; gap: 2rem; justify-content: center;
+            flex-wrap: wrap; margin-top: 3rem;
+        }
+        
+        .btn-contact {
+            background: white; color: var(--accent-green);
+            padding: 1.2rem 3rem; border: none; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 700; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.8rem;
+        }
+        
+        .btn-contact:hover {
+            transform: translateY(-2px); box-shadow: var(--shadow-lg);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .pricing-grid, .advantages-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .comparison-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .vs-divider { order: 2; }
+            .vs-text { font-size: 2rem; transform: rotate(90deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .section { padding: 4rem 1rem 2rem; }
+            .nav-menu { display: none; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-highlight { font-size: 3rem; }
+            .rental-benefits, .contact-grid { grid-template-columns: 1fr; }
+            .product-showcase { width: 350px; height: 280px; }
+            .pricing-card.featured { transform: none; }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .animate-on-scroll.in-view {
+            opacity: 1; transform: translateY(0);
+        }
+        
+        .editable {
+            position: relative; transition: all 0.3s ease;
+        }
+        
+        .editable:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 5px; padding: 2px 5px; margin: -2px -5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation LOCATION -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <a href="#" class="nav-logo" data-image-field="logo-path" title="EDS Québec - Version LocationVS"></a>
+                <div class="nav-title" data-field="nav-title">🛡️ SOLUTION ZÉRO RISQUE</div>
+            </div>
+            <div class="nav-menu">
+                <a href="#hero" class="nav-item active" data-field="nav-btn1">Sans Risque</a>
+                <a href="#pricing" class="nav-item" data-field="nav-btn2">Tarifs</a>
+                <a href="#advantages" class="nav-item" data-field="nav-btn3">Avantages</a>
+                <a href="#contact" class="nav-item" data-field="nav-btn4">Louer Maintenant</a>
+                <a href="#" class="nav-item" data-field="nav-btn5">Voir Achat (Indisponible)</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Liste des spacers utilisés :
+         - heroSpacerHeight
+         - hero-pricing-spacer
+         - pricing-advantages-spacer
+         - advantages-comparison-spacer
+         - contact-conclusionAction-spacer
+         - conclusionAction-conclusionComparative-spacer
+         - conclusionComparative-contact-spacer -->
+    <!-- Section Espacement Éditable -->
+    <section class="header-spacer" data-field="heroSpacerHeight"></section>
+
+    <!-- Section Héro LOCATION -->
+    <section id="hero" class="section hero" data-section-id="hero" data-section-order="1">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span class="hero-highlight editable" data-field="hero-title">Li-CUBE PRO™</span>
+                        <span class="editable" data-field="hero-subtitle">LOCATION INTELLIGENTE<br>ZÉRO RISQUE</span>
+                    </h1>
+                    <p class="hero-subtitle editable" data-field="hero-description">
+                        <strong>Pourquoi prendre des risques ?</strong> Louez votre Li-CUBE PRO™ et laissez EDS gérer 
+                        tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. 
+                        <strong>Vous payez, vous utilisez, nous nous occupons du reste.</strong>
+                    </p>
+                    
+                    <div class="price-banner">
+                        <div class="price-main">
+                            <span class="editable" data-field="monthly-price">150 $</span><span style="font-size: 2rem;">/mois</span>
+                        </div>
+                        <div class="price-sub editable" data-field="price-included">
+                            Maintenance, monitoring, support et garantie totale inclus
+                        </div>
+                    </div>
+
+                    <img src="./images/edsQuebec.png" alt="Image de l'entreprise" class="company-image" data-image-field="company-image-path">
+
+                    <div class="rental-benefits">
+                        <div class="benefit-card animate-on-scroll">
+                            <div class="benefit-icon editable" data-field="hero-arg1-icon">🛡️</div>
+                            <div class="benefit-title editable" data-field="hero-arg1-title">ZÉRO RISQUE</div>
+                            <div class="benefit-text editable" data-field="hero-arg1-desc">EDS assume 100% des pannes</div>
+                        </div>
+                        <div class="benefit-card animate-on-scroll">
+                            <div class="benefit-icon editable" data-field="hero-arg2-icon">💰</div>
+                            <div class="benefit-title editable" data-field="hero-arg2-title">BUDGET PRÉVISIBLE</div>
+                            <div class="benefit-text editable" data-field="hero-arg2-desc">Coût fixe mensuel garanti</div>
+                        </div>
+                        <div class="benefit-card animate-on-scroll">
+                            <div class="benefit-icon editable" data-field="hero-arg3-icon">🔧</div>
+                            <div class="benefit-title editable" data-field="hero-arg3-title">MAINTENANCE INCLUSE</div>
+                            <div class="benefit-text editable" data-field="hero-arg3-desc">Monitoring 24/7 automatique</div>
+                        </div>
+                        <div class="benefit-card animate-on-scroll">
+                            <div class="benefit-icon editable" data-field="hero-arg4-icon">⚡</div>
+                            <div class="benefit-title editable" data-field="hero-arg4-title">MISE À JOUR CONTINUE</div>
+                            <div class="benefit-text editable" data-field="hero-arg4-desc">Dernière technologie toujours</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="cta-rental">
+                        <i class="fas fa-handshake"></i>
+                        <span class="editable" data-field="cta-text">ARGUMENTS DE CLOSING - 150-200$/MOIS</span>
+                    </a>
+                </div>
+                
+                <div class="hero-visual">
+                    <!-- Rôle : Section comparative des produits (principal vs concurrent) -->
+                    <!-- Structure : Flex container avec 3 éléments (image1 + VS + image2) -->
+                    <!-- Responsabilité : Affichage visuel de la comparaison produits -->
+                    <div class="product-comparison-container">
+                        <!-- Produit principal (Li-CUBE PRO) -->
+                        <div class="product-showcase animate-on-scroll" data-image-field="product-image-path">
+                            <!-- Image produit principal chargée via CSS -->
+                        </div>
+                        
+                        <!-- Élément séparateur VS éditable -->
+                        <div class="vs-element">
+                            <span class="editable vs-text" data-field="vs-element-text">VS</span>
+                        </div>
+                        
+                        <!-- Produit concurrent -->
+                        <div class="competitor-showcase animate-on-scroll" data-image-field="competitor-image-path">
+                            <!-- Image produit concurrent chargée via CSS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Section Tarifs de Location -->
+    <!-- Espacement Hero-Pricing -->
+    <section class="section-spacer" data-field="hero-pricing-spacer"></section>
+    
+    <section id="pricing" class="section pricing-section" data-section-id="pricing" data-section-order="2">
+        <div class="container">
+            <h2 class="section-title editable" data-field="pricing-title">TARIFS DE LOCATION TRANSPARENTS</h2>
+            <p class="editable" data-field="pricing-subtitle" style="text-align: center; font-size: 1.2rem; color: var(--text-gray); margin-bottom: 3rem;">
+                Prix tout inclus, sans surprise. Plus vous louez longtemps, moins vous payez !
+            </p>
+            
+            <div class="pricing-grid animate-on-scroll">
+                <div class="pricing-card">
+                    <div class="pricing-duration editable" data-field="pricing-duration-6m">ESSAI 6 MOIS</div>
+                    <span class="pricing-value editable" data-field="price-6months">200 $</span>
+                    <div class="pricing-unit">par mois</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 1 du pack 6 mois : installation sans frais -->
+                            <span class="editable" data-field="pack6-service1">Installation gratuite</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 2 du pack 6 mois : entretien compris -->
+                            <span class="editable" data-field="pack6-service2">Maintenance incluse</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 3 du pack 6 mois : assistance aux heures de bureau -->
+                            <span class="editable" data-field="pack6-service3">Support 8h-17h</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 4 du pack 6 mois : surveillance basique -->
+                            <span class="editable" data-field="pack6-service4">Monitoring de base</span>
+                        </div>
+                    </div>
+                    <button class="pricing-cta">Commencer l'essai</button>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-duration editable" data-field="pricing-duration-2y">STANDARD 2 ANS</div>
+                    <span class="pricing-value editable" data-field="price-2years">175 $</span>
+                    <div class="pricing-unit">par mois</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 1 du pack 2 ans : installation offerte -->
+                            <span class="editable" data-field="pack24-service1">Installation gratuite</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 2 du pack 2 ans : entretien compris -->
+                            <span class="editable" data-field="pack24-service2">Maintenance incluse</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 3 du pack 2 ans : assistance en continu -->
+                            <span class="editable" data-field="pack24-service3">Support 24/7</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 4 du pack 2 ans : suivi avancé des appareils -->
+                            <span class="editable" data-field="pack24-service4">Monitoring avancé IoT</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 5 du pack 2 ans : remplacement rapide en cas de panne -->
+                            <span class="editable" data-field="pack24-service5">Remplacement immédiat</span>
+                        </div>
+                    </div>
+                    <button class="pricing-cta">Choisir Standard</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-duration editable" data-field="pricing-duration-5y">PREMIUM 5 ANS</div>
+                    <span class="pricing-value editable" data-field="price-5years">150 $</span>
+                    <div class="pricing-unit">par mois</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 1 du pack 5 ans : installation offerte -->
+                            <span class="editable" data-field="pack60-service1">Installation gratuite</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 2 du pack 5 ans : entretien compris -->
+                            <span class="editable" data-field="pack60-service2">Maintenance incluse</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 3 du pack 5 ans : assistance de luxe en tout temps -->
+                            <span class="editable" data-field="pack60-service3">Support premium 24/7</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 4 du pack 5 ans : surveillance prédictive grâce à l'IA -->
+                            <span class="editable" data-field="pack60-service4">Monitoring IA prédictif</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 5 du pack 5 ans : mise à niveau technologique incluse -->
+                            <span class="editable" data-field="pack60-service5">Upgrade technologique inclus</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <i class="fas fa-check"></i>
+                            <!-- Service 6 du pack 5 ans : option d'achat prioritaire en fin de contrat -->
+                            <span class="editable" data-field="pack60-service6">Option d'achat privilégiée</span>
+                        </div>
+                    </div>
+                    <button class="pricing-cta">Choisir Premium</button>
+                </div>
+            </div>
+            
+            <div class="pricing-note" style="background: rgba(16, 185, 129, 0.15); border-radius: 15px; padding: 2rem; text-align: center;">
+                <p class="editable" data-field="pricing-note" style="font-size: 1.1rem; color: var(--text-white); margin-bottom: 1rem;">
+                    <strong>💡 Astuce :</strong> Tarifs dégressifs pour multiple unités !
+                </p>
+                <p class="editable" data-field="volume-discounts" style="color: var(--text-gray);">
+                    2-4 unités : -10% | 5-9 unités : -15% | 10+ unités : -20% | 20+ unités : sur devis personnalisé
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Section Avantages Location -->
+    <!-- Espacement Pricing-Advantages -->
+    <section class="section-spacer" data-field="pricing-advantages-spacer"></section>
+    
+    <section id="advantages" class="section advantages-section" data-section-id="advantages" data-section-order="3">
+        <div class="container">
+            <h2 class="section-title editable" data-field="advantages-title">POURQUOI CHOISIR LA LOCATION ?</h2>
+            
+            <div class="advantages-grid">
+                <div class="advantage-card animate-on-scroll">
+                    <div class="advantage-icon">🚫</div>
+                    <h3 class="advantage-title editable" data-field="adv1-title">ZÉRO INVESTISSEMENT INITIAL</h3>
+                    <p class="advantage-text editable" data-field="adv1-text">
+                        Pas de sortie de cash importante ! Préservez votre trésorerie pour votre cœur de métier. 
+                        150 $/mois c'est accessible à toutes les entreprises, même les plus petites. 
+                        Déductible fiscalement comme charge d'exploitation.
+                    </p>
+                </div>
+                
+                <div class="advantage-card animate-on-scroll">
+                    <div class="advantage-icon">🛡️</div>
+                    <h3 class="advantage-title editable" data-field="adv2-title">RISQUE ZÉRO GARANTI</h3>
+                    <p class="advantage-text editable" data-field="adv2-text">
+                        Panne ? Nous remplaçons. Obsolescence ? Nous mettons à jour. Performance insuffisante ? 
+                        Nous optimisons. Vous n'assumez JAMAIS aucun risque technique ou financier. 
+                        EDS est responsable de TOUT.
+                    </p>
+                </div>
+                
+                <div class="advantage-card animate-on-scroll">
+                    <div class="advantage-icon">📊</div>
+                    <h3 class="advantage-title editable" data-field="adv3-title">MONITORING INTELLIGENT INCLUS</h3>
+                    <p class="advantage-text editable" data-field="adv3-text">
+                        Surveillance 24/7 automatique, alertes prédictives, rapports de performance mensuel. 
+                        Vous savez toujours où vous en êtes. Optimisation continue de vos opérations 
+                        grâce aux données IoT en temps réel.
+                    </p>
+                </div>
+                
+                <div class="advantage-card animate-on-scroll">
+                    <div class="advantage-icon">💼</div>
+                    <h3 class="advantage-title editable" data-field="adv4-title">BUDGET PRÉVISIBLE</h3>
+                    <p class="advantage-text editable" data-field="adv4-text">
+                        Coût fixe mensuel, aucune surprise, aucun dépassement. Planification financière 
+                        facilitée, comptabilité simplifiée. Pas de provisions pour maintenance, 
+                        pas de budget remplacement à prévoir.
+                    </p>
+                </div>
+                
+                <div class="advantage-card animate-on-scroll">
+                    <div class="advantage-icon">🔄</div>
+                    <h3 class="advantage-title editable" data-field="adv5-title">ÉVOLUTION TECHNOLOGIQUE</h3>
+                    <p class="advantage-text editable" data-field="adv5-text">
+                        Toujours la dernière version ! Mises à jour logicielles automatiques, 
+                        upgrade matériel inclus après 3 ans. Vous restez à la pointe sans effort 
+                        ni investissement supplémentaire.
+                    </p>
+                </div>
+                
+                <div class="advantage-card animate-on-scroll">
+                    <div class="advantage-icon">🏢</div>
+                    <h3 class="advantage-title editable" data-field="adv6-title">FLEXIBILITÉ CONTRACTUELLE</h3>
+                    <p class="advantage-text editable" data-field="adv6-text">
+                        Contrats adaptés à vos besoins : court terme pour tests, long terme pour économies. 
+                        Possibilité d'ajustement du parc, option d'achat privilégiée, 
+                        résiliation facilitée si évolution de vos besoins.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Section Avantages Techniques Comparatifs -->
+    <!-- Espacement Advantages-Comparison -->
+    <section class="section-spacer" data-field="advantages-comparison-spacer"></section>
+    
+    <section class="section technical-comparison" data-section-id="technical" data-section-order="4">
+        <div class="container">
+            <h2 class="section-title editable" data-field="tech-title">Li-CUBE PRO™ vs BATTERIES Ni-Cd OBSOLÈTES</h2>
+            <p class="editable" data-field="tech-subtitle" style="text-align: center; font-size: 1.2rem; color: var(--text-gray); margin-bottom: 3rem;">
+                Comparaison technique objective : Pourquoi Li-CUBE PRO™ surclasse totalement les anciennes batteries Ni-Cd
+            </p>
+            
+            <div class="comparison-grid">
+                <div class="old-tech-column">
+                    <h3 class="old-tech-title"><span class="editable" data-field="weakness-title-emoji">❌</span> Batteries Ni-Cd (Obsolètes)</h3>
+                    <div class="weakness-list">
+                        <div class="weakness-item" data-weakness-id="1">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness1-emoji">☠️</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness1-title">Cadmium Hautement Toxique</h4>
+                                <p class="editable" data-field="weakness1-desc">Classé dangereux REACH, recyclage coûteux, manipulation à risque</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="2">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness2-emoji">🔧</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness2-title">Maintenance Obligatoire Coûteuse</h4>
+                                <p class="editable" data-field="weakness2-desc">Appoint électrolyte, fuites KOH, interventions techniques fréquentes</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="3">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness3-emoji">⏳</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness3-title">Durée de Vie Limitée</h4>
+                                <p class="editable" data-field="weakness3-desc">2000-3000 cycles seulement (5-6 ans) → remplacement fréquent</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="4">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness4-emoji">🏋️</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness4-title">Poids et Encombrement</h4>
+                                <p class="editable" data-field="weakness4-desc">80-100 kg, manipulation dangereuse, installation contraignante</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="5">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness5-emoji">🐌</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness5-title">Charge Lente 8-12h</h4>
+                                <p class="editable" data-field="weakness5-desc">Indisponibilité longue, productivité réduite</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="6">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness6-emoji">📵</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness6-title">Aucune Connectivité</h4>
+                                <p class="editable" data-field="weakness6-desc">Pas de télémétrie, aucun suivi à distance, pannes surprises</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="7">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness7-emoji">⚖️</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness7-title">Réglementation Transport Stricte</h4>
+                                <p class="editable" data-field="weakness7-desc">Classé UN2795 Batteries Wet Alkali, transport coûteux et contraignant</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="8">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness8-emoji">🧠</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness8-title">Effet Mémoire Dégradant</h4>
+                                <p class="editable" data-field="weakness8-desc">Perte capacité progressive avec cycles partiels, performance décroissante</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="9">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness9-emoji">📊</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness9-title">Profondeur Décharge Limitée</h4>
+                                <p class="editable" data-field="weakness9-desc">60% seulement exploitable vs 96% Li-CUBE PRO™ → capacité réelle inférieure</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="10">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness10-emoji">💸</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness10-title">Location Plus Chère</h4>
+                                <p class="editable" data-field="weakness10-desc">250$/mois vs 150-200$ Li-CUBE PRO™ → 25% plus cher sans maintenance incluse</p>
+                            </div>
+                        </div>
+                        <div class="weakness-item" data-weakness-id="11">
+                            <div class="weakness-icon"><span class="editable" data-field="weakness11-emoji">🔄</span></div>
+                            <div class="weakness-content">
+                                <h4 class="editable" data-field="weakness11-title">Remplacements Fréquents</h4>
+                                <p class="editable" data-field="weakness11-desc">3 remplacements sur 20 ans (4 unités au total) vs 0 pour Li-CUBE PRO™</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="vs-divider">
+                    <span class="vs-text">VS</span>
+                </div>
+                
+                <div class="new-tech-column">
+                    <h3 class="new-tech-title"><span class="editable" data-field="strength-title-emoji">✅</span> Li-CUBE PRO™ (Technologie Moderne)</h3>
+                    <div class="strength-list">
+                        <div class="strength-item" data-strength-id="1">
+                            <div class="strength-icon"><span class="editable" data-field="strength1-emoji">🔋</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength1-title">Durée Vie Exceptionnelle</h4>
+                                <p class="editable" data-field="strength1-desc">≥8000 cycles (20-25 ans réels) → 4× plus longue que Ni-Cd</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="2">
+                            <div class="strength-icon"><span class="editable" data-field="strength2-emoji">🛡️</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength2-title">Zéro Maintenance</h4>
+                                <p class="editable" data-field="strength2-desc">Aucun électrolyte, aucun effet mémoire, suivi automatisé par BMS</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="3">
+                            <div class="strength-icon"><span class="editable" data-field="strength3-emoji">📡</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength3-title">Surveillance Temps Réel</h4>
+                                <p class="editable" data-field="strength3-desc">GPS, Bluetooth, Wi-Fi, GPRS → maintenance préventive, zéro panne surprise</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="4">
+                            <div class="strength-icon"><span class="editable" data-field="strength4-emoji">⚡</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength4-title">Performance Énergétique</h4>
+                                <p class="editable" data-field="strength4-desc">110 Wh/kg (4× plus), 157 Wh/L (6× plus compact), charge 1-2h</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="5">
+                            <div class="strength-icon"><span class="editable" data-field="strength5-emoji">🌡️</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength5-title">Climat Canadien</h4>
+                                <p class="editable" data-field="strength5-desc">Fonctionnement -40°C à +55°C, BMS intelligent, hivers québécois</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="6">
+                            <div class="strength-icon"><span class="editable" data-field="strength6-emoji">🍃</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength6-title">100% Écologique</h4>
+                                <p class="editable" data-field="strength6-desc">Zéro cadmium, conforme RoHS, recyclable, image environnementale</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="7">
+                            <div class="strength-icon"><span class="editable" data-field="strength7-emoji">🛡️</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength7-title">Sécurité BMS Multi-niveau</h4>
+                                <p class="editable" data-field="strength7-desc">Protections OVP, UVP, OCP, OTP, court-circuit → risques incidents réduits drastiquement</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="8">
+                            <div class="strength-icon"><span class="editable" data-field="strength8-emoji">💰</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength8-title">Réduction Coûts Opérationnels</h4>
+                                <p class="editable" data-field="strength8-desc">Moins d'interventions, déplacements équipes réduits, fiabilité accrue</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="9">
+                            <div class="strength-icon"><span class="editable" data-field="strength9-emoji">🇨🇦</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength9-title">Fabrication SAV Québec</h4>
+                                <p class="editable" data-field="strength9-desc">Délais réduits, service local français, réactivité pièces et support</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="10">
+                            <div class="strength-icon"><span class="editable" data-field="strength10-emoji">📦</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength10-title">Installation Simplifiée</h4>
+                                <p class="editable" data-field="strength10-desc">23 kg vs 80 kg, boîtier compact acier, manutention sécurisée</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="11">
+                            <div class="strength-icon"><span class="editable" data-field="strength11-emoji">🔋</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength11-title">Profondeur Décharge Optimale</h4>
+                                <p class="editable" data-field="strength11-desc">96% exploitable vs 60% Ni-Cd → capacité réelle supérieure</p>
+                            </div>
+                        </div>
+                        <div class="strength-item" data-strength-id="12">
+                            <div class="strength-icon"><span class="editable" data-field="strength12-emoji">💵</span></div>
+                            <div class="strength-content">
+                                <h4 class="editable" data-field="strength12-title">Location Flexible Avantageuse</h4>
+                                <p class="editable" data-field="strength12-desc">150-200$/mois vs 250$ Ni-Cd → plus économique avec maintenance incluse</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="conclusion-box animate-on-scroll">
+                <h3 class="tech-conclusion-title">
+                    <span class="editable" data-field="tech-conclusion-emoji" style="margin-right: 0.5rem;">📊</span>
+                    <span class="editable" data-field="tech-conclusion-title">RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !</span>
+                </h3>
+                <p class="editable" data-field="tech-conclusion-text">
+                    <strong>TCO Location 20 ans :</strong> Li-CUBE PRO™ 48500$ (200$/mois) vs Ni-Cd 60000$ → <strong>20% d'économies + maintenance incluse !</strong><br>
+                    <strong>Zéro risque technique</strong> (EDS assume tout), <strong>monitoring 24/7 inclus</strong>, <strong>remplacement immédiat</strong> si panne.<br>
+                    Location Li-CUBE PRO™ = <strong>La tranquillité absolue</strong> avec technologie de pointe et budget maîtrisé.
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Section Conclusion et Appel à l'Action Final -->
+    <!-- Espacement Contact-ConclusionAction -->
+    <section class="section-spacer" data-field="contact-conclusionAction-spacer"></section>
+    
+    <section id="conclusion-action" class="section conclusion-action-section" data-section-id="conclusion-action" data-section-order="6">
+        <div class="container">
+            <div class="conclusion-action-content">
+                <h2 class="section-title editable" data-field="final-title">LE CHOIX EST ÉVIDENT</h2>
+                <p class="editable conclusion-action-message" data-field="final-message">
+                    Pourquoi risquer avec des technologies obsolètes ? Li-CUBE PRO™ en location vous offre le meilleur des deux mondes : technologie de pointe + risque zéro. Pendant que vos concurrents subissent pannes et remplacements, vous fonctionnez sereinement.
+                </p>
+                
+                <div class="urgency-banner">
+                    <h3 class="editable urgency-title" data-field="urgency-message">NE LAISSEZ PAS LA CONCURRENCE PRENDRE L'AVANTAGE !</h3>
+                    <div class="cta-final-message editable" data-field="cta-final">
+                        Appelez maintenant 819-323-LOCA ou écrivez à location@edsquebec.com<br>
+                        Votre devis personnalisé sous 24h, installation sous 48h.<br>
+                        <strong>L'énergie fiable, c'est maintenant ou jamais !</strong>
+                    </div>
+                </div>
+                
+                <div class="signature-box">
+                    <p class="editable signature-text" data-field="signature">
+                        <strong>EDS Québec - Votre partenaire énergétique depuis plus de 25 ans</strong><br>
+                        Solutions Batteries Lithium Li-CUBE PRO™<br>
+                        Fabrication et Support 100% Québécois
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Conclusion Finale Comparative -->
+    <!-- Espacement ConclusionAction-ConclusionComparative -->
+    <section class="section-spacer" data-field="conclusionAction-conclusionComparative-spacer"></section>
+    
+    <section id="conclusion-comparative" class="section conclusion-comparative-section" data-section-id="conclusion-comparative" data-section-order="7">
+        <div class="container">
+            <div class="final-comparison-content">
+                <div class="final-conclusion-box animate-on-scroll">
+                    <h3 class="final-conclusion-title">
+                        <span class="editable" data-field="conclusion-emoji" style="margin-right: 0.5rem;">🎯</span>
+                        <span class="editable" data-field="conclusion-title">RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !</span>
+                    </h3>
+                    <p class="editable final-conclusion-text" data-field="conclusion-text">
+                        Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact et Location DÉPLACÉE À LA FIN -->
+    <!-- Espacement ConclusionComparative-Contact -->
+    <section class="section-spacer" data-field="conclusionComparative-contact-spacer"></section>
+    
+    <section id="contact" class="section contact-section" data-section-id="contact" data-section-order="8">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="editable" data-field="contact-title">LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT</h2>
+                <p class="editable" data-field="contact-subtitle" style="font-size: 1.3rem; margin-bottom: 2rem;">
+                    Zéro risque, zéro surprise, performance maximale garantie
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card animate-on-scroll">
+                        <div class="contact-icon">📞</div>
+                        <h4>Division Location</h4>
+                        <p style="font-size: 1.2rem; font-weight: 600; margin: 0.5rem 0;">
+                            <span class="editable" data-field="rental-phone">819-323-5622</span>
+                        </p>
+                        <small>Service commercial 8h-17h</small>
+                    </div>
+                    <div class="contact-card animate-on-scroll">
+                        <div class="contact-icon">✉️</div>
+                        <h4>Email Location</h4>
+                        <p style="font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0;">
+                            <span class="editable" data-field="rental-email">location@edsquebec.com</span>
+                        </p>
+                        <small>Devis sous 2h ouvrées</small>
+                    </div>
+                    <div class="contact-card animate-on-scroll">
+                        <div class="contact-icon">🚀</div>
+                        <h4>Mise en Service</h4>
+                        <p style="font-size: 1.1rem; font-weight: 600; margin: 0.5rem 0;">
+                            <span class="editable" data-field="installation-time">48h</span>
+                        </p>
+                        <small>Après signature du contrat</small>
+                    </div>
+                </div>
+                
+                <div class="contact-actions">
+                    <a href="tel:8193235622" class="btn-contact" data-phone-field="phone-number">
+                        <i class="fas fa-phone"></i>
+                        <span data-field="btn-phone-text">CONCLURE LA VENTE</span>
+                    </a>
+                    <a href="mailto:location@edsquebec.com?subject=Demande de location Li-CUBE PRO&body=Bonjour,%0A%0AJe souhaite obtenir un devis de location pour Li-CUBE PRO 24V 105Ah.%0A%0ANombre d'unités souhaitées:%0ADurée envisagée:%0ADate de mise en service:%0A%0AMerci" class="btn-contact" data-email-field="email-address">
+                        <i class="fas fa-file-contract"></i>
+                        <span data-field="btn-email-text">PRÉPARER CONTRAT</span>
+                    </a>
+                </div>
+                
+                <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.9;">
+                    <span class="editable" data-field="rental-guarantees">
+                        ✅ Devis gratuit et sans engagement ✅ Installation par techniciens certifiés EDS ✅ Contrat flexible adapté à vos besoins ✅ Support québécois en français 24/7
+                    </span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Navigation fluide
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animation au scroll
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Gestion navigation active
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        console.log('Li-CUBE PRO™ LOCATION - Page de location optimisée chargée');
+    </script>
+    
+    <!-- Récepteur de Styles Dynamiques depuis edit-location.html -->
+    <script>
+        let dynamicStyleElement = null;
+        
+        // Application du CSS dynamique
+        function applyDynamicCSS(css) {
+            // Suppression de l'ancien style dynamique
+            if (dynamicStyleElement) {
+                dynamicStyleElement.remove();
+            }
+            
+            // Création du nouveau style
+            dynamicStyleElement = document.createElement('style');
+            dynamicStyleElement.id = 'dynamic-locationVS-styles';
+            dynamicStyleElement.textContent = css;
+            document.head.appendChild(dynamicStyleElement);
+            
+            console.log('🎨 Styles dynamiques appliqués à location.html');
+        }
+        
+        // Écoute des messages de synchronisation CSS
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'locationVS-css-broadcast' && e.newValue) {
+                try {
+                    const message = JSON.parse(e.newValue);
+                    if (message.type === 'LOCATION_CSS_UPDATE') {
+                        applyDynamicCSS(message.css);
+                        console.log('📡 Styles reçus depuis edit-location.html');
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Erreur lors de la réception des styles:', error);
+                }
+            }
+        });
+        
+        // Chargement initial des styles sauvegardés
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCSS = localStorage.getItem('locationVS-dynamic-css');
+            if (savedCSS) {
+                applyDynamicCSS(savedCSS);
+                console.log('🔄 Styles sauvegardés appliqués au chargement');
+            }
+        });
+    </script>
+    
+    <!-- Script de Réorganisation des Sections -->
+    <script>
+        // ==========================================
+        // SYSTÈME DE RÉORGANISATION DES SECTIONS (PRÉSENTATION)
+        // ==========================================
+        
+        // Obtient l'ordre actuel des sections depuis localStorage (pour la présentation)
+        function getSectionOrder() {
+            const savedOrder = localStorage.getItem('locationVS-sectionOrder');
+            return savedOrder ? JSON.parse(savedOrder) : {
+                'hero': 1,
+                'pricing': 2, 
+                'advantages': 3,
+                'technical': 4,
+                'contact': 5,
+                'conclusion-action': 6,
+                'conclusion-comparative': 7
+            };
+        }
+        
+        // Applique l'ordre des sections dans la page de présentation
+        function applySectionOrderToPresentation() {
+            const order = getSectionOrder();
+            const body = document.body;
+            
+            // Récupère toutes les sections et leurs spacers associés
+            const sectionGroups = [];
+            
+            // Pour chaque section, trouve son groupe (section + spacer suivant)
+            Object.keys(order).forEach(sectionId => {
+                const section = document.querySelector(`[data-section-id="${sectionId}"]`);
+                if (section) {
+                    const group = { section, spacers: [], order: order[sectionId] };
+                    
+                    // Trouve le spacer qui suit cette section
+                    let nextElement = section.nextElementSibling;
+                    while (nextElement && nextElement.classList.contains('section-spacer')) {
+                        group.spacers.push(nextElement);
+                        nextElement = nextElement.nextElementSibling;
+                    }
+                    
+                    sectionGroups.push(group);
+                }
+            });
+            
+            // Trie les groupes par ordre
+            sectionGroups.sort((a, b) => a.order - b.order);
+            
+            // Trouve le point d'insertion (après le header)
+            const header = document.querySelector('header') || document.querySelector('.header');
+            let insertAfter = header;
+            
+            // Réinsère les sections dans le bon ordre
+            sectionGroups.forEach(group => {
+                // Insère la section
+                if (insertAfter.nextSibling) {
+                    body.insertBefore(group.section, insertAfter.nextSibling);
+                } else {
+                    body.appendChild(group.section);
+                }
+                insertAfter = group.section;
+                
+                // Insère les spacers
+                group.spacers.forEach(spacer => {
+                    if (insertAfter.nextSibling) {
+                        body.insertBefore(spacer, insertAfter.nextSibling);
+                    } else {
+                        body.appendChild(spacer);
+                    }
+                    insertAfter = spacer;
+                });
+            });
+            
+            console.log('📋 Ordre des sections appliqué à la présentation:', order);
+        }
+        
+        // Écoute les changements d'ordre de sections
+        function listenForSectionOrderChanges() {
+            // Écoute les événements de localStorage
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'locationVS-sectionOrder') {
+                    console.log('🔄 Changement d\'ordre détecté, réorganisation...');
+                    applySectionOrderToPresentation();
+                }
+            });
+            
+            // Écoute les événements personnalisés (pour même onglet)
+            window.addEventListener('storage', function(e) {
+                if (e.detail && e.detail.key === 'locationVS-sectionOrder') {
+                    console.log('🔄 Changement d\'ordre détecté (même onglet), réorganisation...');
+                    applySectionOrderToPresentation();
+                }
+            });
+        }
+        
+        // Initialisation au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            applySectionOrderToPresentation();
+            listenForSectionOrderChanges();
+            console.log('✅ Système de réorganisation des sections initialisé sur présentation');
+        });
+    </script>
+    
+    <!-- Récepteur de Synchronisation Instantanée Li-CUBE PRO™ -->
+    <script src="js/presentation-receiver.js"></script>
+</body>
+</html>

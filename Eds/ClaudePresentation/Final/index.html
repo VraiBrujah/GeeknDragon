@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Métadonnées optimisées pour performance et SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur de Widgets Atomiques | EDS Québec</title>
+    <meta name="description" content="Éditeur WYSIWYG avec architecture universelle - WidgetCanvas et BaseWidget">
+    
+    <!-- Performance optimisations pour protocole file:// -->
+    <link rel="preload" href="css/core.css" as="style">
+    <link rel="preload" href="js/core/BaseWidget.js" as="script">
+    <link rel="preload" href="js/widgets/WidgetCanvas.js" as="script">
+    
+    <!-- Polices système optimisées pour file:// -->
+    <style>
+        /* Police système universelle - fonctionne partout sans internet */
+        :root {
+            --font-primary: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        }
+        
+        /* Icônes intégrées - remplacent Font Awesome */
+        .fa, .fas { font-style: normal; font-weight: normal; }
+        .fa-puzzle-piece:before { content: '🧩'; }
+        .fa-cog:before { content: '⚙️'; }
+        .fa-eye:before { content: '👁'; }
+        .fa-download:before { content: '📥'; }
+        .fa-save:before { content: '💾'; }
+        .fa-undo:before { content: '↶'; }
+        .fa-redo:before { content: '↷'; }
+        .fa-search:before { content: '🔍'; }
+        .fa-plus-circle:before { content: '⊕'; }
+        .fa-layer-group:before { content: '📋'; }
+        .fa-cube:before { content: '📦'; }
+        .fa-image:before { content: '🖼'; }
+        .fa-lightbulb:before { content: '💡'; }
+        .fa-chevron-left:before { content: '‹'; }
+        .fa-chevron-right:before { content: '›'; }
+        .fa-chevron-up:before { content: '⌄'; }
+        .fa-chevron-down:before { content: '⌄'; }
+        .fa-border-all:before { content: '▦'; }
+        .fa-search-minus:before { content: '🔍−'; }
+        .fa-search-plus:before { content: '🔍+'; }
+        .fa-expand-arrows-alt:before { content: '⤢'; }
+        .fa-sitemap:before { content: '🗂'; }
+        .fa-unlock:before { content: '🔓'; }
+        .fa-sync-alt:before { content: '🔄'; }
+        .fa-database:before { content: '🗄'; }
+        .fa-history:before { content: '📜'; }
+        .fa-mouse-pointer:before { content: '🖱'; }
+        .fa-info-circle:before { content: 'ℹ️'; }
+        .fa-clock:before { content: '🕒'; }
+    </style>
+    
+    <!-- Bibliothèques intégrées pour fonctionnement sans serveur -->
+    <script>
+        // Détection protocole file:// et adaptation
+        window.isFileProtocol = window.location.protocol === 'file:';
+        
+        // Parser Markdown simple intégré (remplace marked.js)
+        window.marked = {
+            parse: function(markdown) {
+                if (!markdown) return '';
+                
+                // Conversions Markdown → HTML basiques mais fonctionnelles
+                let html = markdown
+                    // Headers
+                    .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+                    .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+                    .replace(/^# (.*$)/gm, '<h1>$1</h1>')
+                    // Formatage
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/`(.*?)`/g, '<code>$1</code>')
+                    // Liens
+                    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+                    // Paragraphes
+                    .replace(/\n\n/g, '</p><p>')
+                    // Listes
+                    .replace(/^\- (.*$)/gm, '<li>$1</li>')
+                    .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+                    // Citations
+                    .replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>');
+                    
+                // Enveloppement paragraphe si nécessaire
+                if (!html.includes('<h') && !html.includes('<ul') && !html.includes('<blockquote')) {
+                    html = '<p>' + html + '</p>';
+                }
+                
+                return html;
+            }
+        };
+        
+        // Sécurisation HTML simple (remplace DOMPurify)
+        window.DOMPurify = {
+            sanitize: function(dirty) {
+                if (!dirty) return '';
+                
+                // Suppression tags dangereux de base
+                const cleanHtml = dirty
+                    .replace(/<script[^>]*>.*?<\/script>/gi, '')
+                    .replace(/<iframe[^>]*>.*?<\/iframe>/gi, '')
+                    .replace(/javascript:/gi, '')
+                    .replace(/on\w+="[^"]*"/gi, '')
+                    .replace(/on\w+='[^']*'/gi, '');
+                    
+                return cleanHtml;
+            }
+        };
+        
+        // Export simple (remplace JSZip + FileSaver)
+        window.saveAs = function(blob, filename) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        };
+        
+        // Helper pour créer blobs
+        window.createBlob = function(content, type = 'text/html') {
+            return new Blob([content], {type: type});
+        };
+        
+        console.log('✅ Bibliothèques intégrées chargées pour protocole file://');
+    </script>
+    
+    <link rel="stylesheet" href="css/core.css">
+    <link rel="stylesheet" href="css/widgets.css">
+    <link rel="stylesheet" href="css/atomic-widgets.css">
+    <link rel="stylesheet" href="css/themes.css">
+</head>
+
+<body class="editor-interface">
+    <!-- Container principal de l'éditeur modulaire -->
+    <div class="editor-container" id="editor-container">
+        
+        <!-- En-tête de l'éditeur avec outils globaux -->
+        <header class="editor-header" id="editor-header">
+            <!-- Logo et branding EDS Québec -->
+            <div class="header-brand">
+                <img src="assets/images/logo-eds-quebec.svg" alt="EDS Québec" class="brand-logo">
+                <div class="brand-info">
+                    <h1 class="brand-title">Éditeur Atomique</h1>
+                    <span class="brand-subtitle">Architecture Universelle - WidgetCanvas</span>
+                </div>
+            </div>
+            
+            <!-- Informations projet et contrôles rapides -->
+            <div class="project-controls">
+                <div class="project-info">
+                    <input type="text" id="project-name" class="project-name-input" placeholder="Nom du projet..." value="Mon Projet Marketing">
+                    <span class="save-status" id="save-status">
+                        <i class="fas fa-save"></i>
+                        <span class="save-text">Sauvegardé</span>
+                    </span>
+                </div>
+                
+                <!-- Actions principales -->
+                <div class="header-actions">
+                    <button class="btn-header" id="btn-undo" title="Annuler (Ctrl+Z)">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button class="btn-header" id="btn-redo" title="Rétablir (Ctrl+Y)">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="btn-header" id="btn-preview" title="Aperçu viewer">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                    <button class="btn-header" id="btn-export" title="Exporter projet">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Interface principale modulaire -->
+        <main class="editor-main" id="editor-main">
+            
+            <!-- Panneau gauche : Banque de widgets -->
+            <aside class="widgets-panel" id="widgets-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-puzzle-piece"></i>
+                        Banque Widgets
+                    </h2>
+                    <button class="btn-panel-toggle" id="btn-toggle-widgets" title="Masquer/Afficher">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+                
+                <!-- Recherche et filtres widgets -->
+                <div class="widgets-search">
+                    <div class="search-input-container">
+                        <input type="text" id="widgets-search" class="search-input" placeholder="Rechercher widgets...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    
+                    <!-- Filtres par catégorie -->
+                    <div class="search-filters">
+                        <label class="filter-option">
+                            <input type="checkbox" id="filter-all" checked>
+                            <span>Tous</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" id="filter-universal">
+                            <span>Universels</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" id="filter-atomic">
+                            <span>Atomiques</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Liste des widgets disponibles -->
+                <div class="widgets-list" id="widgets-list">
+                    
+                    <!-- Catégorie Widgets Atomiques -->
+                    <div class="widget-category" data-category="atomic">
+                        <h3 class="category-title">
+                            <i class="fas fa-cube"></i>
+                            Widgets Atomiques
+                            <span class="category-badge ready">Prêt</span>
+                        </h3>
+                        <div class="category-items">
+                            
+                            <!-- WidgetCanvas Universel -->
+                            <div class="widget-item" draggable="true" data-widget-type="canvas">
+                                <div class="widget-icon">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <span class="widget-name">Widget Canvas</span>
+                                    <span class="widget-desc">Contenu universel (texte, images, widgets imbriqués)</span>
+                                </div>
+                                <div class="widget-actions">
+                                    <button class="btn-widget-info" title="Widget universel pour tout type de contenu">
+                                        <i class="fas fa-info-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Widgets Futurs -->
+                            <div class="widget-item disabled" draggable="false" data-widget-type="image">
+                                <div class="widget-icon">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                <div class="widget-info">
+                                    <span class="widget-name">Widget Image</span>
+                                    <span class="widget-desc">Bientôt disponible</span>
+                                </div>
+                                <div class="widget-actions">
+                                    <button class="btn-widget-info" title="En cours de développement">
+                                        <i class="fas fa-clock"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Information Architecture Atomique -->
+                    <div class="widget-category" data-category="info">
+                        <h3 class="category-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Architecture Atomique
+                        </h3>
+                        <div class="category-items">
+                            <div class="widget-info-box">
+                                <i class="fas fa-cube"></i>
+                                <p><strong>Widgets spécialisés</strong> pour chaque besoin</p>
+                                <p>• <em>WidgetCanvas</em> : Contenu universel (texte, Markdown, HTML, widgets imbriqués)</p>
+                                <p>• <em>BaseWidget</em> : Classe parente avec fonctionnalités communes</p>
+                                <p>• <em>Composition</em> : Widgets imbriqués récursivement</p>
+                                <p>• <em>Réutilisable</em> : Héritage BaseWidget pour simplicité</p>
+                                <p>• <em>Export HTML</em> : Génération standalone propre</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </aside>
+
+            <!-- Zone centrale : Grille d'édition -->
+            <section class="editor-canvas" id="editor-canvas">
+                <div class="canvas-header">
+                    <div class="canvas-info">
+                        <span class="canvas-title">Grille Édition</span>
+                        <span class="canvas-size">Infinie</span>
+                    </div>
+                    
+                    <!-- Outils de grille -->
+                    <div class="canvas-tools">
+                        <button class="btn-canvas-tool" id="btn-grid-snap" title="Accrochage grille">
+                            <i class="fas fa-border-all"></i>
+                        </button>
+                        <button class="btn-canvas-tool" id="btn-zoom-out" title="Zoom arrière">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <span class="zoom-level" id="zoom-level">100%</span>
+                        <button class="btn-canvas-tool" id="btn-zoom-in" title="Zoom avant">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button class="btn-canvas-tool" id="btn-zoom-fit" title="Ajuster à la vue">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Grille infinie de composition -->
+                <div class="infinite-grid" id="infinite-grid">
+                    <!-- Zone de drop principal -->
+                    <div class="drop-zone" id="main-drop-zone">
+                        <div class="drop-zone-content">
+                            <i class="fas fa-plus-circle"></i>
+                            <p class="drop-message">Glissez un widget ici pour commencer</p>
+                            <p class="drop-hint">ou double-cliquez pour créer un WidgetCanvas</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panneau droit : Propriétés contextuelles -->
+            <aside class="properties-panel" id="properties-panel">
+                <div class="panel-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-cog"></i>
+                        Propriétés
+                    </h2>
+                    <button class="btn-panel-toggle" id="btn-toggle-properties" title="Masquer/Afficher">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Contenu dynamique des propriétés -->
+                <div class="properties-content" id="properties-content">
+                    <div class="no-selection">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <p>Sélectionnez un widget pour afficher ses propriétés</p>
+                    </div>
+                </div>
+            </aside>
+
+        </main>
+
+        <!-- Arborescence hiérarchique (style Gimp) -->
+        <section class="hierarchy-panel" id="hierarchy-panel">
+            <div class="panel-header">
+                <h2 class="panel-title">
+                    <i class="fas fa-sitemap"></i>
+                    Structure
+                </h2>
+                <button class="btn-panel-toggle" id="btn-toggle-hierarchy" title="Masquer/Afficher">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+            </div>
+            
+            <div class="hierarchy-content" id="hierarchy-content">
+                <div class="hierarchy-tree">
+                    <div class="tree-item root-item" data-widget-id="root">
+                        <div class="tree-item-content">
+                            <button class="tree-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="tree-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <span class="tree-name">Grille Principale</span>
+                            <div class="tree-actions">
+                                <button class="btn-tree-action" title="Visible">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-tree-action" title="Déverrouillé">
+                                    <i class="fas fa-unlock"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tree-children" id="hierarchy-root">
+                            <!-- Les widgets ajoutés apparaîtront ici -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statut et informations système -->
+        <footer class="editor-footer" id="editor-footer">
+            <div class="footer-status">
+                <span class="status-item">
+                    <i class="fas fa-sync-alt"></i>
+                    <span id="sync-status">Sync: Actif</span>
+                </span>
+                <span class="status-item">
+                    <i class="fas fa-database"></i>
+                    <span id="storage-usage">0 widgets</span>
+                </span>
+                <span class="status-item">
+                    <i class="fas fa-history"></i>
+                    <span id="history-count">0 actions</span>
+                </span>
+            </div>
+            
+            <div class="footer-info">
+                <span class="version-info">Architecture Atomique - Widgets Spécialisés</span>
+                <span class="build-info">v2.0.0</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts de l'application - ARCHITECTURE ATOMIQUE -->
+    <!-- 1. BaseWidget d'abord (classe parent) -->
+    <script src="js/core/BaseWidget.js"></script>
+    
+    <!-- 2. Widgets atomiques -->
+    <script src="js/widgets/WidgetCanvas.js"></script>
+    
+    <!-- 3. Modules core essentiels -->
+    <script src="js/core/Grid.js"></script>
+    <script src="js/core/DragDrop.js"></script>
+    <script src="js/core/Persistence.js"></script>
+    
+    <!-- 4. Editor principal en dernier -->
+    <script src="js/core/Editor.js"></script>
+    
+    <!-- 4. Initialisation optimisée avec loading progressif -->
+    <script>
+        // Optimisation chargement : attendre que tous les scripts soient chargés
+        let modulesLoaded = false;
+        let domReady = false;
+        
+        // Vérification périodique des modules atomiques
+        function checkModulesReady() {
+            if (window.WidgetEditor && 
+                window.WidgetEditor.Editor && 
+                window.WidgetEditor.BaseWidget && 
+                window.WidgetEditor.WidgetCanvas) {
+                modulesLoaded = true;
+                if (domReady) initializeEditor();
+            } else {
+                setTimeout(checkModulesReady, 50); // Check toutes les 50ms
+            }
+        }
+        
+        // Initialisation dès que DOM + modules sont prêts
+        function initializeEditor() {
+            if (!modulesLoaded || !domReady) return;
+            
+            try {
+                // Affichage loading
+                const loadingDiv = document.createElement('div');
+                loadingDiv.id = 'loading-screen';
+                loadingDiv.style.cssText = `
+                    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                    background: linear-gradient(135deg, #0f172a, #1e293b);
+                    display: flex; align-items: center; justify-content: center;
+                    z-index: 10000; color: white; font-family: Inter, sans-serif;
+                `;
+                loadingDiv.innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="font-size: 48px; margin-bottom: 20px;">🚀</div>
+                        <h2>Chargement Éditeur Atomique</h2>
+                        <p style="opacity: 0.7;">Initialisation widgets atomiques...</p>
+                    </div>
+                `;
+                document.body.appendChild(loadingDiv);
+                
+                // Création instance éditeur atomique (async pour UI responsive)
+                setTimeout(async () => {
+                    window.editor = new window.WidgetEditor.Editor();
+                    console.log('🚀 Éditeur Atomique - Démarré');
+                    console.log('✅ WidgetCanvas prêt - Double-clic direct!');
+                    console.log('⚡ Architecture: BaseWidget + WidgetCanvas universels');
+                    
+                    // Suppression écran loading avec animation
+                    loadingDiv.style.opacity = '0';
+                    loadingDiv.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => loadingDiv.remove(), 500);
+                }, 100);
+                
+            } catch (error) {
+                console.error('❌ Erreur démarrage éditeur:', error);
+                
+                // Affichage erreur optimisé
+                const errorDiv = document.createElement('div');
+                errorDiv.style.cssText = `
+                    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                    background: #FEE2E2; color: #DC2626; padding: 16px 24px;
+                    border: 1px solid #FECACA; border-radius: 8px;
+                    font-family: Inter, sans-serif; z-index: 9999;
+                    max-width: 500px; text-align: center;
+                    box-shadow: 0 10px 25px rgba(220, 38, 38, 0.15);
+                `;
+                errorDiv.innerHTML = `
+                    <strong>❌ Erreur initialisation éditeur</strong><br>
+                    <small>${error.message}</small><br>
+                    <small style="opacity: 0.7;">Vérifiez la console pour plus de détails</small>
+                `;
+                document.body.appendChild(errorDiv);
+                
+                // Auto-remove après 15 secondes avec animation
+                setTimeout(() => {
+                    errorDiv.style.opacity = '0';
+                    errorDiv.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => errorDiv.remove(), 500);
+                }, 15000);
+            }
+        }
+        
+        // Event listeners optimisés
+        document.addEventListener('DOMContentLoaded', () => {
+            domReady = true;
+            if (modulesLoaded) initializeEditor();
+        });
+        
+        // Démarrer vérification modules immédiatement
+        checkModulesReady();
+        
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            const loadTime = performance.now();
+            console.log(`⚡ Performance: Chargement complet en ${Math.round(loadTime)}ms`);
+        });
+    </script>
+
+</body>
+</html>

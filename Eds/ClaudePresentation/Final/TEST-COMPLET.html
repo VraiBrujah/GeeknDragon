@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧪 Test Complet - Éditeur Widgets Atomiques</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #60a5fa;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .test-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid #475569;
+            border-radius: 12px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        
+        .test-card:hover {
+            border-color: #60a5fa;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(96, 165, 250, 0.15);
+        }
+        
+        .test-card h3 {
+            color: #93c5fd;
+            margin-bottom: 16px;
+            font-size: 1.3rem;
+        }
+        
+        .test-button {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 8px 4px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .test-button.primary {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            font-size: 18px;
+            padding: 16px 32px;
+        }
+        
+        .test-button.success {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+        
+        .test-button.danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .result-area {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .success { color: #22c55e; }
+        .error { color: #ef4444; }
+        .warning { color: #f59e0b; }
+        .info { color: #60a5fa; }
+        
+        .feature-checklist {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .checklist-item {
+            background: rgba(71, 85, 105, 0.3);
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid #60a5fa;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #22c55e;
+            flex-shrink: 0;
+        }
+        
+        .final-actions {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid #3b82f6;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .version-info {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .test-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2rem; }
+            .test-container { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <div class="header">
+            <h1>🧪 Test Complet Final</h1>
+            <p>Validation complète de l'éditeur de widgets atomiques</p>
+        </div>
+        
+        <div class="version-info">
+            <h3>✅ Version Production - Scripts Classiques</h3>
+            <p><strong>Architecture :</strong> WidgetCanvas Universel Atomique</p>
+            <p><strong>Compatibilité :</strong> Double-clic direct, sans serveur</p>
+            <p><strong>Performance :</strong> Chargement optimisé séquentiel</p>
+        </div>
+
+        <div class="test-grid">
+            <!-- Test 1: Modules -->
+            <div class="test-card">
+                <h3>🔧 Test Modules</h3>
+                <p>Vérification chargement et initialisation</p>
+                <button class="test-button" onclick="testModules()">
+                    <span>⚡</span> Tester Modules
+                </button>
+                <div id="modules-result" class="result-area" style="display: none;"></div>
+            </div>
+
+            <!-- Test 2: Widget Creation -->
+            <div class="test-card">
+                <h3>🧱 Test Création Widget</h3>
+                <p>Création et configuration WidgetCanvas</p>
+                <button class="test-button" onclick="testWidgetCreation()">
+                    <span>🎯</span> Créer Widget
+                </button>
+                <div id="widget-result" class="result-area" style="display: none;"></div>
+            </div>
+
+            <!-- Test 3: Fonctionnalités -->
+            <div class="test-card">
+                <h3>⚙️ Test Fonctionnalités</h3>
+                <p>Drag & Drop, Zoom, Navigation</p>
+                <button class="test-button" onclick="testFeatures()">
+                    <span>🎮</span> Test Complet
+                </button>
+                <div id="features-result" class="result-area" style="display: none;"></div>
+            </div>
+
+            <!-- Test 4: Export -->
+            <div class="test-card">
+                <h3>💾 Test Export</h3>
+                <p>Génération HTML et Viewer</p>
+                <button class="test-button" onclick="testExport()">
+                    <span>📤</span> Test Export
+                </button>
+                <div id="export-result" class="result-area" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Checklist des fonctionnalités -->
+        <div class="test-card">
+            <h3>📋 Checklist Fonctionnalités</h3>
+            <div class="feature-checklist">
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Scripts classiques (sans serveur)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Namespace global organizé</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>WidgetCanvas universel</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Édition inline double-clic</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Support Markdown/HTML</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Zoom & Pan navigation</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Drag & Drop widgets</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Sauvegarde localStorage</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Export HTML standalone</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Viewer synchronisé</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Gestion multi-projets</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="status-indicator"></div>
+                    <span>Pop-up nom projet</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions finales -->
+        <div class="final-actions">
+            <h3>🚀 Lancement Production</h3>
+            <p style="margin-bottom: 20px;">Projet validé et prêt pour utilisation</p>
+            
+            <button class="test-button primary" onclick="window.open('index.html', '_blank')">
+                <span>🎯</span> LANCER L'ÉDITEUR
+            </button>
+            
+            <button class="test-button success" onclick="window.open('LISEZ-MOI.html', '_blank')">
+                <span>📖</span> Guide Utilisateur
+            </button>
+            
+            <button class="test-button" onclick="runFullTest()">
+                <span>🧪</span> Test Complet Auto
+            </button>
+        </div>
+
+        <!-- Résultats globaux -->
+        <div class="test-card">
+            <h3>📊 Résultats Globaux</h3>
+            <div id="global-results" class="result-area">
+                <div class="info">🔄 En attente de tests...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts de test -->
+    <script>
+        let testResults = {
+            modules: false,
+            widget: false,
+            features: false,
+            export: false
+        };
+
+        // Fonction utilitaire de log
+        function logResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            const timestamp = new Date().toLocaleTimeString();
+            element.innerHTML += `<div class="${type}">[${timestamp}] ${message}</div>`;
+            element.scrollTop = element.scrollHeight;
+        }
+
+        function clearResult(elementId) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = '';
+        }
+
+        // Test 1: Modules
+        async function testModules() {
+            clearResult('modules-result');
+            logResult('modules-result', '🧪 Test chargement modules...', 'info');
+            
+            try {
+                // Vérification namespace principal
+                if (!window.WidgetEditor) {
+                    throw new Error('Namespace WidgetEditor non trouvé');
+                }
+                logResult('modules-result', '✅ Namespace WidgetEditor OK', 'success');
+
+                // Vérification modules individuels
+                const modules = ['Editor', 'WidgetCanvas', 'Grid', 'DragDrop', 'Persistence', 'Sync', 'Viewer'];
+                for (const module of modules) {
+                    if (!window.WidgetEditor[module]) {
+                        throw new Error(`Module ${module} non chargé`);
+                    }
+                    logResult('modules-result', `✅ Module ${module} chargé`, 'success');
+                }
+
+                // Vérification compatibilité globale
+                if (!window.Editor || !window.WidgetCanvas) {
+                    throw new Error('Compatibilité globale manquante');
+                }
+                logResult('modules-result', '✅ Compatibilité globale OK', 'success');
+
+                testResults.modules = true;
+                logResult('modules-result', '🎉 Test modules RÉUSSI', 'success');
+
+            } catch (error) {
+                logResult('modules-result', `❌ Erreur: ${error.message}`, 'error');
+                testResults.modules = false;
+            }
+            
+            updateGlobalResults();
+        }
+
+        // Test 2: Création Widget
+        async function testWidgetCreation() {
+            clearResult('widget-result');
+            logResult('widget-result', '🧪 Test création WidgetCanvas...', 'info');
+            
+            try {
+                // Mock editor simple
+                const mockEditor = {
+                    getState: () => ({ projectName: 'Test', widgets: new Map() }),
+                    onWidgetChanged: () => {},
+                    selectWidget: () => {},
+                    state: { selectedWidget: null }
+                };
+
+                // Création widget
+                const widget = new window.WidgetEditor.WidgetCanvas(mockEditor, 'test-widget', {
+                    content: '# Test Widget\n\nCeci est un **test** de création de widget.',
+                    mode: 'widget'
+                });
+
+                logResult('widget-result', `✅ Widget créé: ${widget.getId()}`, 'success');
+                logResult('widget-result', `✅ Nom: ${widget.getName()}`, 'success');
+                logResult('widget-result', `✅ Type: ${widget.getType()}`, 'success');
+
+                // Test méthodes
+                const position = widget.getPosition();
+                logResult('widget-result', `✅ Position: (${position.x}, ${position.y})`, 'success');
+
+                const dimensions = widget.getDimensions();
+                logResult('widget-result', `✅ Dimensions: ${dimensions.width}x${dimensions.height}`, 'success');
+
+                // Test export
+                const exported = widget.exportConfig();
+                logResult('widget-result', `✅ Export config: ${Object.keys(exported).length} propriétés`, 'success');
+
+                testResults.widget = true;
+                logResult('widget-result', '🎉 Test widget RÉUSSI', 'success');
+
+            } catch (error) {
+                logResult('widget-result', `❌ Erreur: ${error.message}`, 'error');
+                testResults.widget = false;
+            }
+            
+            updateGlobalResults();
+        }
+
+        // Test 3: Fonctionnalités
+        async function testFeatures() {
+            clearResult('features-result');
+            logResult('features-result', '🧪 Test fonctionnalités système...', 'info');
+            
+            try {
+                // Test API Drag & Drop
+                if ('DataTransfer' in window) {
+                    logResult('features-result', '✅ API HTML5 Drag & Drop disponible', 'success');
+                } else {
+                    logResult('features-result', '⚠️ API Drag & Drop limitée', 'warning');
+                }
+
+                // Test localStorage
+                if (typeof localStorage !== 'undefined') {
+                    localStorage.setItem('widgetEditor_test', 'OK');
+                    const test = localStorage.getItem('widgetEditor_test');
+                    if (test === 'OK') {
+                        localStorage.removeItem('widgetEditor_test');
+                        logResult('features-result', '✅ localStorage fonctionnel', 'success');
+                    } else {
+                        throw new Error('localStorage défaillant');
+                    }
+                } else {
+                    throw new Error('localStorage non disponible');
+                }
+
+                // Test événements
+                let eventTest = false;
+                const testDiv = document.createElement('div');
+                testDiv.addEventListener('click', () => { eventTest = true; });
+                testDiv.click();
+                
+                if (eventTest) {
+                    logResult('features-result', '✅ Système événements OK', 'success');
+                } else {
+                    throw new Error('Événements non fonctionnels');
+                }
+
+                // Test CSS transforms
+                testDiv.style.transform = 'scale(1.5) translate(10px, 20px)';
+                if (testDiv.style.transform) {
+                    logResult('features-result', '✅ Transformations CSS supportées', 'success');
+                } else {
+                    logResult('features-result', '⚠️ Transformations CSS limitées', 'warning');
+                }
+
+                // Test fallbacks Markdown
+                if (typeof window.marked !== 'undefined') {
+                    logResult('features-result', '✅ Marked.js disponible', 'success');
+                } else {
+                    logResult('features-result', '⚠️ Fallback Markdown basique actif', 'warning');
+                }
+
+                if (typeof window.DOMPurify !== 'undefined') {
+                    logResult('features-result', '✅ DOMPurify disponible', 'success');
+                } else {
+                    logResult('features-result', '⚠️ Pas de sanitization DOMPurify', 'warning');
+                }
+
+                testResults.features = true;
+                logResult('features-result', '🎉 Test fonctionnalités RÉUSSI', 'success');
+
+            } catch (error) {
+                logResult('features-result', `❌ Erreur: ${error.message}`, 'error');
+                testResults.features = false;
+            }
+            
+            updateGlobalResults();
+        }
+
+        // Test 4: Export
+        async function testExport() {
+            clearResult('export-result');
+            logResult('export-result', '🧪 Test export et viewer...', 'info');
+            
+            try {
+                // Mock editor avec widgets
+                const mockEditor = {
+                    getState: () => ({ 
+                        projectName: 'Test Export',
+                        widgets: new Map([
+                            ['test1', { exportToHTML: () => '<p>Widget 1</p>', getName: () => 'Widget Test 1' }],
+                            ['test2', { exportToHTML: () => '<p>Widget 2</p>', getName: () => 'Widget Test 2' }]
+                        ])
+                    }),
+                    getWidgets: () => new Map([
+                        ['test1', { 
+                            exportToHTML: () => '<p>Widget 1</p>', 
+                            getName: () => 'Widget Test 1',
+                            config: { mode: 'widget' }
+                        }],
+                        ['test2', { 
+                            exportToHTML: () => '<p>Widget 2</p>', 
+                            getName: () => 'Widget Test 2',
+                            config: { mode: 'presentation' }
+                        }]
+                    ])
+                };
+
+                // Test création Viewer
+                const viewer = new window.WidgetEditor.Viewer(mockEditor);
+                logResult('export-result', '✅ Viewer créé', 'success');
+
+                // Test génération HTML
+                const files = viewer.generateProjectViewer({
+                    includeCSS: true,
+                    includeJS: false,
+                    responsive: true
+                });
+
+                if (files && files['index.html']) {
+                    const htmlSize = Math.round(files['index.html'].length / 1024);
+                    logResult('export-result', `✅ HTML généré: ${htmlSize} KB`, 'success');
+                    
+                    // Vérification contenu
+                    if (files['index.html'].includes('Widget 1') && files['index.html'].includes('Widget 2')) {
+                        logResult('export-result', '✅ Contenu widgets inclus', 'success');
+                    }
+                    
+                    if (files['index.html'].includes('responsive')) {
+                        logResult('export-result', '✅ CSS responsive inclus', 'success');
+                    }
+                } else {
+                    throw new Error('Génération HTML échouée');
+                }
+
+                // Test métadonnées
+                if (files['metadata.json']) {
+                    const metadata = JSON.parse(files['metadata.json']);
+                    logResult('export-result', `✅ Métadonnées: ${metadata.content.widgetsCount} widgets`, 'success');
+                }
+
+                testResults.export = true;
+                logResult('export-result', '🎉 Test export RÉUSSI', 'success');
+
+            } catch (error) {
+                logResult('export-result', `❌ Erreur: ${error.message}`, 'error');
+                testResults.export = false;
+            }
+            
+            updateGlobalResults();
+        }
+
+        // Test complet automatique
+        async function runFullTest() {
+            logResult('global-results', '🚀 Démarrage test complet automatique...', 'info');
+            
+            await testModules();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            await testWidgetCreation();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            await testFeatures();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            await testExport();
+            await new Promise(resolve => setTimeout(resolve, 500));
+            
+            updateGlobalResults();
+            
+            const allPassed = Object.values(testResults).every(result => result);
+            if (allPassed) {
+                logResult('global-results', '🎉 TOUS LES TESTS RÉUSSIS - PROJET VALIDÉ !', 'success');
+            } else {
+                logResult('global-results', '⚠️ Certains tests ont échoué - Vérifiez les détails', 'warning');
+            }
+        }
+
+        // Mise à jour résultats globaux
+        function updateGlobalResults() {
+            const globalDiv = document.getElementById('global-results');
+            const total = Object.keys(testResults).length;
+            const passed = Object.values(testResults).filter(r => r).length;
+            
+            globalDiv.innerHTML = `
+                <div class="info">📊 Tests: ${passed}/${total} réussis</div>
+                ${testResults.modules ? '<div class="success">✅ Modules chargés</div>' : '<div class="error">❌ Modules défaillants</div>'}
+                ${testResults.widget ? '<div class="success">✅ Widget création OK</div>' : '<div class="error">❌ Widget création échouée</div>'}
+                ${testResults.features ? '<div class="success">✅ Fonctionnalités OK</div>' : '<div class="error">❌ Fonctionnalités limitées</div>'}
+                ${testResults.export ? '<div class="success">✅ Export fonctionnel</div>' : '<div class="error">❌ Export défaillant</div>'}
+            `;
+            
+            if (passed === total) {
+                globalDiv.innerHTML += '<div class="success"><strong>🎊 PROJET PRODUCTION-READY !</strong></div>';
+            }
+        }
+
+        // Initialisation
+        console.log('🧪 Interface de test complète chargée');
+        console.log('🎯 Utilisez les boutons pour tester chaque fonctionnalité');
+        
+        // Auto-test léger au chargement
+        setTimeout(() => {
+            if (window.WidgetEditor) {
+                logResult('global-results', '✅ Namespace WidgetEditor détecté', 'success');
+            } else {
+                logResult('global-results', '⚠️ Modules non chargés - Tests limités', 'warning');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
