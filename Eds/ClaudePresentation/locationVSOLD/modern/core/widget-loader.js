@@ -2,6 +2,7 @@ import LogoWidget from '../templates/widgets/logo.js';
 import HeroTitleWidget from '../templates/widgets/hero-title.js';
 import PricingCardWidget from '../templates/widgets/pricing-card.js';
 import TextSimpleWidget from '../templates/widgets/text-simple.js';
+import BaseWidget from '../../../../../core/base-widget.js';
 
 /**
  * ============================================================================
@@ -38,11 +39,15 @@ class WidgetLoader {
         };
     }
 
-    register(type, WidgetClass) {
-        if (this.validateWidgetClass(WidgetClass)) {
-            this.widgetRegistry.set(type, WidgetClass);
+    registerWidgetClass(type, classRef) {
+        if (this.validateWidgetClass(classRef)) {
+            this.widgetRegistry.set(type, classRef);
             this.loadingState.loaded.add(type);
         }
+    }
+
+    register(type, WidgetClass) {
+        this.registerWidgetClass(type, WidgetClass);
     }
 
     /**
@@ -149,7 +154,9 @@ class WidgetLoader {
         
         // Configuration des données - Initialisation
         if (data && Object.keys(data).length > 0) {
-            if (typeof instance.setData === 'function') {
+            if (typeof instance.fromJSON === 'function') {
+                instance.fromJSON(data);
+            } else if (typeof instance.setData === 'function') {
                 instance.setData(data);
             } else {
                 instance.data = data;
@@ -267,6 +274,12 @@ class WidgetLoader {
 
         // Instance temporaire - Test des méthodes
         const instance = new WidgetClass();
+
+        // Vérification héritage - doit étendre BaseWidget
+        if (!(instance instanceof BaseWidget)) {
+            console.warn('Widget doit étendre BaseWidget');
+            return false;
+        }
 
         // Méthodes requises - Interface minimale
         const requiredMethods = ['render', 'getEditableFields'];
@@ -510,10 +523,10 @@ class WidgetLoader {
 
 // Instance globale du widget loader
 const widgetLoader = new WidgetLoader();
-widgetLoader.register('logo', LogoWidget);
-widgetLoader.register('hero-title', HeroTitleWidget);
-widgetLoader.register('pricing-card', PricingCardWidget);
-widgetLoader.register('text-simple', TextSimpleWidget);
+widgetLoader.registerWidgetClass('logo', LogoWidget);
+widgetLoader.registerWidgetClass('hero-title', HeroTitleWidget);
+widgetLoader.registerWidgetClass('pricing-card', PricingCardWidget);
+widgetLoader.registerWidgetClass('text-simple', TextSimpleWidget);
 
 // Export pour utilisation
 export default widgetLoader;
