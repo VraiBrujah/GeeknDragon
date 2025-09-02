@@ -140,18 +140,36 @@ class BaseWidget {
   /**
    * Create a plain object representation of the widget.
    *
+   * Iterates over all own properties, excluding DOM references and event
+   * listeners. This allows widgets to easily add custom state by simply
+   * assigning new properties on the instance.
+   *
    * @returns {Object} Serializable widget state
    */
   serialize() {
-    return {
-      id: this.id,
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height,
-      zIndex: this.zIndex,
-      styles: { ...this.styles },
-    };
+    const data = {};
+    Object.keys(this).forEach((key) => {
+      const value = this[key];
+
+      // Exclude DOM references, event listeners and functions
+      if (
+        key === 'el' ||
+        key === 'events' ||
+        typeof value === 'function' ||
+        (typeof Node !== 'undefined' && value instanceof Node)
+      ) {
+        return;
+      }
+
+      // Shallow clone objects to avoid external mutation
+      if (value && typeof value === 'object') {
+        data[key] = Array.isArray(value) ? [...value] : { ...value };
+      } else {
+        data[key] = value;
+      }
+    });
+
+    return data;
   }
 
   /**
@@ -160,16 +178,30 @@ class BaseWidget {
    * @param {Object} [data] Serialized widget data
    */
   hydrate(data = {}) {
-    if (data.id) this.id = data.id;
-    if (typeof data.x === 'number' && typeof data.y === 'number')
-      this.setPosition(data.x, data.y);
-    if (typeof data.width === 'number' && typeof data.height === 'number')
-      this.setSize(data.width, data.height);
-    if (typeof data.zIndex === 'number') {
-      this.zIndex = data.zIndex;
-      if (this.el) this.el.style.zIndex = data.zIndex;
+    const {
+      x,
+      y,
+      width,
+      height,
+      zIndex,
+      styles,
+      ...rest
+    } = data;
+
+    // Assign any additional properties directly
+    Object.keys(rest).forEach((key) => {
+      if (key === 'el' || key === 'events') return;
+      this[key] = rest[key];
+    });
+
+    if (typeof x === 'number' && typeof y === 'number') this.setPosition(x, y);
+    if (typeof width === 'number' && typeof height === 'number')
+      this.setSize(width, height);
+    if (typeof zIndex === 'number') {
+      this.zIndex = zIndex;
+      if (this.el) this.el.style.zIndex = zIndex;
     }
-    if (data.styles) this.updateStyles(data.styles);
+    if (styles) this.updateStyles(styles);
   }
 
   /** Persist current state using the widget state manager. */
@@ -177,6 +209,7 @@ class BaseWidget {
     const data = this.serialize();
     stateManager.setState(this.id, data);
     syncManager.saveState(this);
+    return data;
   }
 
   /** Load state from the widget state manager if available. */
@@ -184,6 +217,7 @@ class BaseWidget {
     const data =
       stateManager.getState(this.id) || syncManager.loadState(this.id);
     if (data) this.hydrate(data);
+    return data;
   }
 
   /**
