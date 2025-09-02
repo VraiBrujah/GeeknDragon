@@ -215,30 +215,37 @@ class LogoWidget {
         const safeShadow = escapeHTML(shadowStyle);
         const altText = escapeHTML(d.altText);
 
+        const uniqueClass = `logo-${Math.random().toString(36).substring(2, 9)}`;
+
+        const dynamicStyles = `
+            .${uniqueClass}-container {
+                text-align: ${containerAlignment};
+                padding-top: ${d.containerPaddingY}px;
+                padding-bottom: ${d.containerPaddingY}px;
+                padding-left: ${d.containerPaddingX}px;
+                padding-right: ${d.containerPaddingX}px;
+                height: 100%;
+            }
+            .${uniqueClass} {
+                width: ${d.width}px;
+                height: ${d.height}px;
+                border-radius: ${d.borderRadius}px;
+                background: ${safeBackground};
+                border: ${safeBorder};
+                background-image: url('${imagePath}');
+                background-size: ${d.imageSize}%;
+                background-repeat: no-repeat;
+                background-position: ${imagePosition};
+                object-fit: ${imageFit};
+                box-shadow: ${safeShadow};
+            }
+        `;
+
         return `
-            <div class="logo-container" style="text-align: ${containerAlignment};
-                                               padding-top: ${d.containerPaddingY}px;
-                                               padding-bottom: ${d.containerPaddingY}px;
-                                               padding-left: ${d.containerPaddingX}px;
-                                               padding-right: ${d.containerPaddingX}px;
-                                               height: 100%;">
-                <a href="${link}"
-                   class="nav-logo logo-image ${d.hoverEffect ? 'hover-effect' : ''}"
-                   style="display: inline-block;
-                          width: ${d.width}px;
-                          height: ${d.height}px;
-                          border-radius: ${d.borderRadius}px;
-                          background: ${safeBackground};
-                          border: ${safeBorder};
-                          background-image: url('${imagePath}');
-                          background-size: ${d.imageSize}%;
-                          background-repeat: no-repeat;
-                          background-position: ${imagePosition};
-                          object-fit: ${imageFit};
-                          box-shadow: ${safeShadow};
-                          transition: all 0.3s ease;
-                          text-decoration: none;">
-                    <span style="position: absolute; width: 1px; height: 1px; overflow: hidden;">
+            <style>${dynamicStyles}</style>
+            <div class="logo-container ${uniqueClass}-container">
+                <a href="${link}" class="nav-logo logo-image ${uniqueClass} ${d.hoverEffect ? 'hover-effect' : ''}">
+                    <span class="sr-only">
                         ${altText}
                     </span>
                 </a>

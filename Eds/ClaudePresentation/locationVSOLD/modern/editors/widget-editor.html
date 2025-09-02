@@ -135,7 +135,7 @@
             
             <div class="properties-content" id="propertiesContent">
                 <div class="properties-empty">
-                    <i class="fas fa-info-circle" style="font-size: 2rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+                    <i class="fas fa-info-circle info-icon"></i>
                     <p>Sélectionnez un widget pour voir ses propriétés</p>
                 </div>
             </div>
@@ -186,15 +186,9 @@
                 const widgetData = { ...this.defaultData, ...data };
                 
                 return `
-                    <div style="text-align: center; padding: 20px;">
-                        <a href="${widgetData.link}" 
-                           style="display: inline-block; width: ${widgetData.width}; height: ${widgetData.height}; 
-                                  border-radius: 12px; background: rgba(16, 185, 129, 0.1);
-                                  border: 2px solid rgba(16, 185, 129, 0.3);
-                                  background-image: url('${widgetData.imagePath}');
-                                  background-size: 80%; background-repeat: no-repeat; background-position: center;
-                                  transition: all 0.3s ease; text-decoration: none;">
-                            <span style="position: absolute; width: 1px; height: 1px; overflow: hidden;">${widgetData.altText}</span>
+                    <div class="logo-preview">
+                        <a href="${widgetData.link}" class="logo-link">
+                            <span class="sr-only">${widgetData.altText}</span>
                         </a>
                     </div>
                 `;
@@ -243,17 +237,9 @@
                 const widgetData = { ...this.defaultData, ...data };
                 
                 return `
-                    <div style="text-align: center; padding: 40px 20px;">
-                        <h1 style="font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; 
-                                   background: linear-gradient(135deg, #10b981, #0d9488); 
-                                   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-                                   background-clip: text; margin-bottom: 20px; line-height: 1.1;">
-                            ${widgetData.title}
-                        </h1>
-                        <div style="font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 600; 
-                                    color: #6b7280; line-height: 1.3; max-width: 600px; margin: 0 auto;">
-                            ${widgetData.subtitle}
-                        </div>
+                    <div class="hero-preview">
+                        <h1 class="hero-title">${widgetData.title}</h1>
+                        <div class="hero-subtitle">${widgetData.subtitle}</div>
                     </div>
                 `;
             }
@@ -303,41 +289,32 @@
             render(data = {}) {
                 const cardData = { ...this.defaultData, ...data };
                 
-                const featuresHtml = cardData.features.map(feature => 
-                    `<li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #6b7280;">
-                        <span style="color: #10b981; font-size: 14px;">✓</span>
+                const featuresHtml = cardData.features.map(feature =>
+                    `<li class="pricing-feature-item">
+                        <span class="pricing-feature-icon">✓</span>
                         <span>${feature}</span>
                     </li>`
                 ).join('');
 
                 return `
-                    <div style="background: #1f2937; border: 2px solid #374151; border-radius: 12px; 
-                                padding: 32px; text-align: center; position: relative; backdrop-filter: blur(10px);">
-                        <div style="margin-bottom: 32px;">
-                            <h3 style="font-size: 1.25rem; font-weight: bold; color: white; margin-bottom: 20px; 
-                                       text-transform: uppercase; letter-spacing: 0.05em;">
-                                ${cardData.planName}
-                            </h3>
-                            
-                            <div style="display: flex; align-items: baseline; justify-content: center; gap: 8px; margin-bottom: 20px;">
-                                <span style="font-size: 2rem; font-weight: 600; color: #10b981;">${cardData.currency}</span>
-                                <span style="font-size: 3.5rem; font-weight: 900; color: white; line-height: 1;">${cardData.price}</span>
-                                <span style="font-size: 1.125rem; color: #9ca3af; font-weight: 500;">${cardData.period}</span>
+                    <div class="pricing-card-preview">
+                        <div class="pricing-card-header">
+                            <h3 class="pricing-card-title">${cardData.planName}</h3>
+                            <div class="pricing-card-price">
+                                <span class="pricing-card-currency">${cardData.currency}</span>
+                                <span class="pricing-card-amount">${cardData.price}</span>
+                                <span class="pricing-card-period">${cardData.period}</span>
                             </div>
                         </div>
-                        
-                        <div style="margin-bottom: 32px;">
-                            <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+
+                        <div class="pricing-card-body">
+                            <ul class="pricing-feature-list">
                                 ${featuresHtml}
                             </ul>
                         </div>
-                        
+
                         <div>
-                            <a href="${cardData.ctaLink}" 
-                               style="width: 100%; padding: 16px 24px; background: #10b981; color: white;
-                                      border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
-                                      text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;
-                                      text-decoration: none; display: inline-block; cursor: pointer;">
+                            <a href="${cardData.ctaLink}" class="pricing-card-button">
                                 ${cardData.ctaText}
                             </a>
                         </div>
