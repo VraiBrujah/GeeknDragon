@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Éditeur de Présentation Complet</title>
+    <link rel="stylesheet" href="../assets/css/themes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles spécifiques à l'éditeur complet */
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg-primary);
+            color: var(--text-light);
+            font-family: var(--font-system);
+            overflow: hidden;
+        }
+
+        /* Layout principal en onglets */
+        .editor-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header avec navigation par onglets */
+        .editor-header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .editor-logo {
+            padding: 0 var(--spacing-lg);
+            border-right: 1px solid var(--border-color);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-blue) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .logo-text {
+            font-weight: var(--font-bold);
+            color: var(--accent-green);
+            font-size: 1.1rem;
+        }
+
+        .editor-tabs {
+            display: flex;
+            height: 100%;
+            flex: 1;
+        }
+
+        .tab-button {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            padding: 0 var(--spacing-lg);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .tab-button:hover {
+            background: var(--bg-card);
+            color: var(--accent-green);
+        }
+
+        .tab-button.active {
+            color: var(--accent-green);
+            border-bottom-color: var(--accent-green);
+            background: var(--bg-card);
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: var(--spacing-xs);
+            padding: 0 var(--spacing-lg);
+            height: 100%;
+            align-items: center;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .action-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: var(--text-sm);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .action-btn:hover {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        .action-btn.primary {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        /* Contenu des onglets */
+        .tab-content {
+            flex: 1;
+            display: none;
+            overflow: hidden;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Styles pour l'intégration des éditeurs */
+        .editor-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: var(--bg-primary);
+        }
+
+        /* Mode plein écran */
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            background: var(--bg-primary);
+        }
+
+        /* Status bar */
+        .status-bar {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: var(--spacing-xs) var(--spacing-lg);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 24px;
+        }
+
+        .status-info {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Welcome screen */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: var(--spacing-xl);
+        }
+
+        .welcome-icon {
+            font-size: 4rem;
+            color: var(--accent-green);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: var(--font-bold);
+            color: var(--text-light);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .welcome-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+        }
+
+        .welcome-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .welcome-btn {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-sm);
+            min-width: 160px;
+        }
+
+        .welcome-btn:hover {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--accent-green);
+            transform: translateY(-2px);
+        }
+
+        .welcome-btn-icon {
+            font-size: 2rem;
+        }
+
+        .welcome-btn-title {
+            font-weight: var(--font-bold);
+        }
+
+        .welcome-btn-desc {
+            font-size: var(--text-sm);
+            opacity: 0.8;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .editor-tabs {
+                overflow-x: auto;
+            }
+            
+            .tab-button {
+                white-space: nowrap;
+                min-width: 120px;
+            }
+            
+            .welcome-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .welcome-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <!-- Header avec navigation -->
+        <div class="editor-header">
+            <div class="editor-logo">
+                <div class="logo-icon">LC</div>
+                <div class="logo-text">Li-CUBE PRO™</div>
+            </div>
+            
+            <div class="editor-tabs">
+                <button class="tab-button active" data-tab="welcome">
+                    <i class="fas fa-home"></i>
+                    Accueil
+                </button>
+                <button class="tab-button" data-tab="widgets">
+                    <i class="fas fa-puzzle-piece"></i>
+                    Éditeur de Widgets
+                </button>
+                <button class="tab-button" data-tab="sections">
+                    <i class="fas fa-layer-group"></i>
+                    Éditeur de Sections
+                </button>
+                <button class="tab-button" data-tab="presentation">
+                    <i class="fas fa-presentation"></i>
+                    Présentation Complète
+                </button>
+            </div>
+            
+            <div class="editor-actions">
+                <button class="action-btn" id="newBtn">
+                    <i class="fas fa-file-plus"></i>
+                    Nouveau
+                </button>
+                <button class="action-btn" id="saveBtn">
+                    <i class="fas fa-save"></i>
+                    Sauvegarder
+                </button>
+                <button class="action-btn" id="exportBtn">
+                    <i class="fas fa-download"></i>
+                    Exporter
+                </button>
+                <button class="action-btn primary" id="previewBtn">
+                    <i class="fas fa-eye"></i>
+                    Aperçu
+                </button>
+            </div>
+        </div>
+
+        <!-- Contenu des onglets -->
+        <div class="tab-content active" id="welcome">
+            <div class="welcome-screen">
+                <div class="welcome-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h1 class="welcome-title">Bienvenue dans Li-CUBE PRO™</h1>
+                <p class="welcome-subtitle">
+                    Créez des présentations professionnelles exceptionnelles avec notre système modulaire avancé. 
+                    Choisissez votre mode d'édition pour commencer.
+                </p>
+                
+                <div class="welcome-actions">
+                    <a href="#" class="welcome-btn" data-open-tab="widgets">
+                        <div class="welcome-btn-icon">🧩</div>
+                        <div class="welcome-btn-title">Éditeur de Widgets</div>
+                        <div class="welcome-btn-desc">Créez et personnalisez des widgets individuels</div>
+                    </a>
+                    
+                    <a href="#" class="welcome-btn" data-open-tab="sections">
+                        <div class="welcome-btn-icon">📚</div>
+                        <div class="welcome-btn-title">Éditeur de Sections</div>
+                        <div class="welcome-btn-desc">Assemblez des sections complètes</div>
+                    </a>
+                    
+                    <a href="#" class="welcome-btn" data-open-tab="presentation">
+                        <div class="welcome-btn-icon">🎬</div>
+                        <div class="welcome-btn-title">Présentation Complète</div>
+                        <div class="welcome-btn-desc">Mode avancé avec toutes les fonctionnalités</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="widgets">
+            <iframe class="editor-iframe" src="widget-editor-standalone.html" title="Éditeur de Widgets"></iframe>
+        </div>
+
+        <div class="tab-content" id="sections">
+            <iframe class="editor-iframe" src="section-editor.html" title="Éditeur de Sections"></iframe>
+        </div>
+
+        <div class="tab-content" id="presentation">
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; color: var(--text-muted);">
+                <i class="fas fa-tools" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                <h3>Mode Présentation Complète</h3>
+                <p>Fonctionnalité en développement - Combinaison des éditeurs widgets et sections</p>
+                <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                    <button class="action-btn" onclick="switchTab('widgets')">
+                        <i class="fas fa-puzzle-piece"></i>
+                        Utiliser l'Éditeur de Widgets
+                    </button>
+                    <button class="action-btn" onclick="switchTab('sections')">
+                        <i class="fas fa-layer-group"></i>
+                        Utiliser l'Éditeur de Sections
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status bar -->
+        <div class="status-bar">
+            <div class="status-info">
+                <div class="status-item">
+                    <div class="status-indicator"></div>
+                    <span>Li-CUBE PRO™ v2.0</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-save"></i>
+                    <span>Sauvegarde automatique activée</span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-users"></i>
+                    <span>Mode: Éditeur Solo</span>
+                </div>
+            </div>
+            <div class="status-info">
+                <div class="status-item">
+                    <i class="fas fa-clock"></i>
+                    <span id="currentTime"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * ============================================================================
+         * ÉDITEUR DE PRÉSENTATION COMPLET - Interface Unifiée
+         * ============================================================================
+         * 
+         * Rôle : Interface principale regroupant tous les éditeurs spécialisés
+         * Type : Application Shell - Conteneur et navigation
+         * Usage : Point d'entrée unique pour toutes les fonctionnalités d'édition
+         */
+
+        class PresentationEditor {
+            constructor() {
+                // Configuration de l'éditeur principal
+                this.currentTab = 'welcome'; // Onglet actuel affiché
+                this.autosaveEnabled = true; // Sauvegarde automatique activée
+                this.autosaveInterval = 30000; // Intervalle de sauvegarde (30s)
+                this.lastSaved = null; // Dernière sauvegarde
+                
+                // Initialisation de l'interface
+                this.init();
+            }
+
+            /**
+             * Rôle : Initialisation complète de l'éditeur principal
+             * Type : Setup - Configuration de l'interface et événements
+             * Retour : void
+             */
+            init() {
+                // Configuration des événements de navigation
+                this.setupTabNavigation();
+                
+                // Configuration des actions globales
+                this.setupGlobalActions();
+                
+                // Démarrage de l'horloge temps réel
+                this.startClock();
+                
+                // Configuration de la sauvegarde automatique
+                if (this.autosaveEnabled) {
+                    this.startAutosave();
+                }
+            }
+
+            /**
+             * Rôle : Configuration de la navigation par onglets
+             * Type : UI Navigation - Gestion des onglets et transitions
+             * Retour : void
+             */
+            setupTabNavigation() {
+                // Boutons d'onglets - Navigation principale
+                const tabButtons = document.querySelectorAll('.tab-button');
+                const tabContents = document.querySelectorAll('.tab-content');
+                
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const tabId = button.dataset.tab;
+                        this.switchTab(tabId);
+                    });
+                });
+                
+                // Liens d'actions dans l'écran d'accueil
+                const welcomeLinks = document.querySelectorAll('[data-open-tab]');
+                welcomeLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const tabId = link.dataset.openTab;
+                        this.switchTab(tabId);
+                    });
+                });
+            }
+
+            /**
+             * Rôle : Changement d'onglet actif
+             * Type : UI State - Modification de l'affichage principal
+             * Retour : void
+             */
+            switchTab(tabId) {
+                // Mise à jour des boutons d'onglets
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.tab === tabId) {
+                        btn.classList.add('active');
+                    }
+                });
+                
+                // Mise à jour du contenu affiché
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === tabId) {
+                        content.classList.add('active');
+                    }
+                });
+                
+                this.currentTab = tabId;
+                
+                // Notification du changement d'onglet
+                this.onTabChanged(tabId);
+            }
+
+            /**
+             * Rôle : Configuration des actions globales
+             * Type : Event Setup - Liaison des boutons d'action
+             * Retour : void
+             */
+            setupGlobalActions() {
+                // Nouveau projet
+                document.getElementById('newBtn').addEventListener('click', () => {
+                    this.newProject();
+                });
+                
+                // Sauvegarde manuelle
+                document.getElementById('saveBtn').addEventListener('click', () => {
+                    this.saveProject();
+                });
+                
+                // Export
+                document.getElementById('exportBtn').addEventListener('click', () => {
+                    this.exportProject();
+                });
+                
+                // Aperçu
+                document.getElementById('previewBtn').addEventListener('click', () => {
+                    this.previewProject();
+                });
+            }
+
+            /**
+             * Rôle : Démarrage de l'horloge temps réel
+             * Type : UI Update - Affichage de l'heure actuelle
+             * Retour : void
+             */
+            startClock() {
+                const updateTime = () => {
+                    const now = new Date();
+                    const timeString = now.toLocaleTimeString('fr-FR', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    });
+                    
+                    const timeElement = document.getElementById('currentTime');
+                    if (timeElement) {
+                        timeElement.textContent = timeString;
+                    }
+                };
+                
+                // Mise à jour immédiate et chaque seconde
+                updateTime();
+                setInterval(updateTime, 1000);
+            }
+
+            /**
+             * Rôle : Démarrage de la sauvegarde automatique
+             * Type : Auto Save - Persistance périodique des données
+             * Retour : void
+             */
+            startAutosave() {
+                setInterval(() => {
+                    if (this.hasUnsavedChanges()) {
+                        this.saveProject(true); // Sauvegarde silencieuse
+                    }
+                }, this.autosaveInterval);
+            }
+
+            /**
+             * Rôle : Gestion du changement d'onglet
+             * Type : Event Handler - Actions lors du changement de vue
+             * Retour : void
+             */
+            onTabChanged(tabId) {
+                // Actions spécifiques selon l'onglet
+                switch (tabId) {
+                    case 'widgets':
+                        console.log('Éditeur de widgets activé');
+                        break;
+                    case 'sections':
+                        console.log('Éditeur de sections activé');
+                        break;
+                    case 'presentation':
+                        console.log('Mode présentation complète activé');
+                        break;
+                    default:
+                        console.log('Écran d\'accueil affiché');
+                }
+                
+                // Mise à jour du titre de la page
+                this.updatePageTitle(tabId);
+            }
+
+            /**
+             * Rôle : Mise à jour du titre de page
+             * Type : UI Update - Modification du titre du document
+             * Retour : void
+             */
+            updatePageTitle(tabId) {
+                const titles = {
+                    'welcome': 'Li-CUBE PRO™ - Éditeur de Présentation',
+                    'widgets': 'Li-CUBE PRO™ - Éditeur de Widgets',
+                    'sections': 'Li-CUBE PRO™ - Éditeur de Sections',
+                    'presentation': 'Li-CUBE PRO™ - Présentation Complète'
+                };
+                
+                document.title = titles[tabId] || 'Li-CUBE PRO™ - Éditeur';
+            }
+
+            /**
+             * Rôle : Création d'un nouveau projet
+             * Type : Project Management - Initialisation d'un projet vierge
+             * Retour : void
+             */
+            newProject() {
+                if (this.hasUnsavedChanges() && 
+                    !confirm('Créer un nouveau projet ? Les modifications non sauvegardées seront perdues.')) {
+                    return;
+                }
+                
+                // Réinitialisation de l'état
+                this.clearAllData();
+                
+                // Retour à l'écran d'accueil
+                this.switchTab('welcome');
+                
+                // Notification
+                this.showNotification('Nouveau projet créé', 'success');
+            }
+
+            /**
+             * Rôle : Sauvegarde du projet
+             * Type : Data Persistence - Sauvegarde des données
+             * Retour : void
+             */
+            saveProject(silent = false) {
+                try {
+                    // Collecte des données de tous les éditeurs
+                    const projectData = this.collectProjectData();
+                    
+                    // Sauvegarde en localStorage (pour la démo)
+                    localStorage.setItem('licubepro_presentation', JSON.stringify({
+                        ...projectData,
+                        saved: new Date().toISOString(),
+                        version: '2.0'
+                    }));
+                    
+                    this.lastSaved = new Date();
+                    
+                    if (!silent) {
+                        this.showNotification('Projet sauvegardé avec succès', 'success');
+                    }
+                    
+                } catch (error) {
+                    console.error('Erreur lors de la sauvegarde:', error);
+                    if (!silent) {
+                        this.showNotification('Erreur lors de la sauvegarde', 'error');
+                    }
+                }
+            }
+
+            /**
+             * Rôle : Collecte des données de tous les éditeurs
+             * Type : Data Collection - Agrégation des données
+             * Retour : Object données du projet
+             */
+            collectProjectData() {
+                // Données de base du projet
+                const projectData = {
+                    currentTab: this.currentTab,
+                    widgets: [],
+                    sections: [],
+                    settings: {
+                        theme: 'licube-pro',
+                        language: 'fr'
+                    }
+                };
+                
+                // Tentative de récupération des données des iframes
+                try {
+                    // Note: En production, il faudrait implémenter une communication
+                    // entre les iframes via postMessage pour récupérer les données
+                    
+                    // Simulation des données pour la démo
+                    projectData.widgets = this.getMockWidgetData();
+                    projectData.sections = this.getMockSectionData();
+                    
+                } catch (error) {
+                    console.warn('Impossible de récupérer les données des éditeurs:', error);
+                }
+                
+                return projectData;
+            }
+
+            /**
+             * Rôle : Données simulées pour les widgets (démo)
+             * Type : Mock Data - Données d'exemple
+             * Retour : Array données de widgets
+             */
+            getMockWidgetData() {
+                return [
+                    {
+                        id: 'widget_demo_1',
+                        type: 'logo',
+                        data: { imagePath: '../images/logo.png', altText: 'Li-CUBE PRO™' }
+                    },
+                    {
+                        id: 'widget_demo_2',
+                        type: 'hero-title',
+                        data: { 
+                            title: 'Li-CUBE PRO™', 
+                            subtitle: 'LOCATION INTELLIGENTE ZÉRO RISQUE' 
+                        }
+                    }
+                ];
+            }
+
+            /**
+             * Rôle : Données simulées pour les sections (démo)
+             * Type : Mock Data - Données d'exemple
+             * Retour : Array données de sections
+             */
+            getMockSectionData() {
+                return [
+                    {
+                        id: 'section_demo_1',
+                        type: 'hero',
+                        data: {
+                            title: 'Li-CUBE PRO™',
+                            subtitle: 'LOCATION INTELLIGENTE ZÉRO RISQUE',
+                            description: 'La solution révolutionnaire pour professionnels'
+                        }
+                    }
+                ];
+            }
+
+            /**
+             * Rôle : Export du projet
+             * Type : Data Export - Génération de fichiers de sortie
+             * Retour : void
+             */
+            exportProject() {
+                try {
+                    const projectData = this.collectProjectData();
+                    
+                    // Export HTML complet
+                    const htmlContent = this.generateCompleteHTML(projectData);
+                    
+                    // Téléchargement du fichier
+                    const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `licube-pro-presentation-${new Date().toISOString().slice(0, 10)}.html`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    this.showNotification('Présentation exportée avec succès', 'success');
+                    
+                } catch (error) {
+                    console.error('Erreur lors de l\'export:', error);
+                    this.showNotification('Erreur lors de l\'export', 'error');
+                }
+            }
+
+            /**
+             * Rôle : Génération du HTML complet
+             * Type : HTML Generation - Création du fichier final
+             * Retour : String contenu HTML
+             */
+            generateCompleteHTML(projectData) {
+                return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Location Intelligente Zéro Risque</title>
+    <link rel="stylesheet" href="../assets/css/themes.css">
+    <style>
+        body { margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+    </style>
+</head>
+<body>
+    <!-- Présentation générée par Li-CUBE PRO™ v2.0 -->
+    <div class="presentation-container">
+        <!-- Contenu généré dynamiquement -->
+        <section class="hero-section" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 80px 40px; text-align: center; color: white;">
+            <h1 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; margin-bottom: 1rem; background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Li-CUBE PRO™</h1>
+            <div style="font-size: 1.5rem; color: #10B981; font-weight: 600; margin-bottom: 1rem;">LOCATION INTELLIGENTE ZÉRO RISQUE</div>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem auto; opacity: 0.9;">La solution révolutionnaire pour professionnels exigeants</p>
+            <button style="background: linear-gradient(135deg, #10B981 0%, #14B8A6 100%); color: white; border: none; padding: 1rem 2rem; font-size: 1.1rem; font-weight: 600; border-radius: 8px; cursor: pointer;">Découvrir</button>
+        </section>
+    </div>
+    
+    <script>
+        console.log('Présentation Li-CUBE PRO™ chargée');
+        // Scripts d'interaction si nécessaires
+    </script>
+</body>
+</html>`;
+            }
+
+            /**
+             * Rôle : Aperçu du projet
+             * Type : Preview - Affichage de prévisualisation
+             * Retour : void
+             */
+            previewProject() {
+                const projectData = this.collectProjectData();
+                const htmlContent = this.generateCompleteHTML(projectData);
+                
+                // Ouverture dans une nouvelle fenêtre
+                const previewWindow = window.open('', '_blank');
+                previewWindow.document.write(htmlContent);
+                previewWindow.document.close();
+            }
+
+            /**
+             * Rôle : Vérification de modifications non sauvegardées
+             * Type : State Check - Détection de changements
+             * Retour : Boolean présence de changements
+             */
+            hasUnsavedChanges() {
+                // Logique simplifiée pour la démo
+                // En production, comparer l'état actuel avec la dernière sauvegarde
+                return !this.lastSaved || (Date.now() - this.lastSaved.getTime()) > this.autosaveInterval;
+            }
+
+            /**
+             * Rôle : Nettoyage de toutes les données
+             * Type : Data Management - Réinitialisation complète
+             * Retour : void
+             */
+            clearAllData() {
+                // Nettoyage du localStorage
+                localStorage.removeItem('licubepro_presentation');
+                
+                // Réinitialisation des états internes
+                this.lastSaved = null;
+                
+                // Communication aux iframes pour réinitialisation
+                // (à implémenter avec postMessage en production)
+            }
+
+            /**
+             * Rôle : Affichage de notifications utilisateur
+             * Type : UI Feedback - Messages de statut
+             * Retour : void
+             */
+            showNotification(message, type = 'info') {
+                // Création de l'élément de notification
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    right: 20px;
+                    z-index: 10001;
+                    padding: 1rem 1.5rem;
+                    border-radius: 8px;
+                    color: white;
+                    font-weight: 600;
+                    max-width: 350px;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                `;
+                
+                // Style selon le type
+                switch (type) {
+                    case 'success':
+                        notification.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
+                        break;
+                    case 'error':
+                        notification.style.background = 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)';
+                        break;
+                    default:
+                        notification.style.background = 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)';
+                }
+                
+                notification.textContent = message;
+                document.body.appendChild(notification);
+                
+                // Animation d'entrée
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 10);
+                
+                // Suppression automatique
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => document.body.removeChild(notification), 300);
+                }, 3000);
+            }
+        }
+
+        // Fonction globale pour le changement d'onglet (accessible depuis les iframes)
+        function switchTab(tabId) {
+            if (window.presentationEditor) {
+                window.presentationEditor.switchTab(tabId);
+            }
+        }
+
+        // Initialisation de l'éditeur principal
+        window.presentationEditor = new PresentationEditor();
+        
+        // Gestion des raccourcis clavier
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+S pour sauvegarder
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                window.presentationEditor.saveProject();
+            }
+            
+            // Ctrl+N pour nouveau projet
+            if (e.ctrlKey && e.key === 'n') {
+                e.preventDefault();
+                window.presentationEditor.newProject();
+            }
+            
+            // F5 pour aperçu
+            if (e.key === 'F5') {
+                e.preventDefault();
+                window.presentationEditor.previewProject();
+            }
+        });
+    </script>
+</body>
+</html>

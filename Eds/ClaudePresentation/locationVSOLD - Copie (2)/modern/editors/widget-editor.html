@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Configuration éditeur de widgets -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur de Widgets - Li-CUBE PRO™</title>
+    
+    <!-- Styles modernes pour éditeur -->
+    <link rel="stylesheet" href="../assets/css/themes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ============================================================================
+         * ÉDITEUR DE WIDGETS - INTERFACE MODERNE
+         * ============================================================================ */
+        
+        .widget-editor {
+            display: grid;
+            grid-template-areas: 
+                "toolbar toolbar toolbar"
+                "library canvas properties"
+                "footer footer footer";
+            grid-template-columns: 300px 1fr 350px;
+            grid-template-rows: 60px 1fr 40px;
+            height: 100vh;
+            background: var(--bg-primary);
+            font-family: var(--font-primary);
+        }
+
+        /* Barre d'outils - Actions principales */
+        .editor-toolbar {
+            grid-area: toolbar;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-lg);
+            backdrop-filter: blur(10px);
+        }
+
+        .toolbar-left,
+        .toolbar-center,
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .toolbar-title {
+            font-size: var(--text-xl);
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .toolbar-title i {
+            color: var(--accent-green);
+            font-size: var(--text-2xl);
+        }
+
+        /* Bibliothèque de widgets - Palette gauche */
+        .widget-library {
+            grid-area: library;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .library-header {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .library-title {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .library-search {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+        }
+
+        .library-search::placeholder {
+            color: var(--text-muted);
+        }
+
+        .library-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-md);
+        }
+
+        .widget-category {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .category-title {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-sm);
+            padding: 0 var(--spacing-sm);
+        }
+
+        .widget-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            margin-bottom: var(--spacing-xs);
+            background: var(--bg-card);
+            border: 1px solid transparent;
+            border-radius: var(--border-radius);
+            cursor: grab;
+            transition: var(--transition-normal);
+            user-select: none;
+        }
+
+        .widget-item:hover {
+            border-color: var(--border-hover);
+            background: rgba(16, 185, 129, 0.05);
+            transform: translateX(4px);
+        }
+
+        .widget-item:active {
+            cursor: grabbing;
+        }
+
+        .widget-item.dragging {
+            opacity: 0.5;
+            transform: rotate(2deg);
+        }
+
+        .widget-icon {
+            font-size: var(--text-xl);
+            width: 32px;
+            text-align: center;
+        }
+
+        .widget-info {
+            flex: 1;
+        }
+
+        .widget-name {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--text-white);
+            margin-bottom: 2px;
+        }
+
+        .widget-description {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        /* Canvas d'édition - Zone centrale */
+        .editor-canvas {
+            grid-area: canvas;
+            background: var(--bg-primary);
+            position: relative;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .canvas-toolbar {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .canvas-zoom {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .zoom-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            width: 32px;
+            height: 32px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-btn:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-secondary);
+        }
+
+        .zoom-level {
+            font-size: var(--text-sm);
+            color: var(--text-gray);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .canvas-workspace {
+            flex: 1;
+            padding: var(--spacing-xl);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 0;
+        }
+
+        .widget-preview {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-xl);
+            min-width: 400px;
+            min-height: 300px;
+            position: relative;
+            padding: var(--spacing-lg);
+            transform-origin: center top;
+            transition: var(--transition-normal);
+        }
+
+        .widget-preview.empty {
+            border: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            color: var(--text-muted);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            opacity: 0.5;
+        }
+
+        .empty-text {
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .drop-zone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px dashed transparent;
+            border-radius: var(--border-radius);
+            background: rgba(16, 185, 129, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-normal);
+        }
+
+        .drop-zone.active {
+            opacity: 1;
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .drop-indicator {
+            background: var(--accent-green);
+            color: var(--text-white);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--border-radius);
+            font-weight: var(--font-medium);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        /* Panneau de propriétés - Configuration droite */
+        .properties-panel {
+            grid-area: properties;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .properties-header {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .properties-title {
+            font-size: var(--text-lg);
+            font-weight: var(--font-semibold);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .properties-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-lg);
+        }
+
+        .properties-empty {
+            text-align: center;
+            color: var(--text-muted);
+            padding: var(--spacing-2xl);
+            line-height: 1.6;
+        }
+
+        .property-group {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .group-title {
+            font-size: var(--text-sm);
+            font-weight: var(--font-semibold);
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .property-field {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .field-label {
+            display: block;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--text-gray);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .field-input {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+            transition: var(--transition-normal);
+        }
+
+        .field-input:focus {
+            outline: none;
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .field-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .field-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        .field-checkbox {
+            width: auto;
+            margin-right: var(--spacing-xs);
+        }
+
+        .field-color {
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+        }
+
+        .field-range {
+            width: 100%;
+        }
+
+
+        /* Styles des boutons - Système unifié */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-card);
+            color: var(--text-white);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            text-decoration: none;
+            min-height: 36px;
+        }
+        
+        .btn:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-secondary);
+            color: var(--text-white);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .btn.btn-primary {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: var(--text-white);
+        }
+        
+        .btn.btn-primary:hover {
+            background: #0d9488;
+            border-color: #0d9488;
+        }
+        
+        .btn.btn-secondary {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-gray);
+        }
+        
+        .btn.btn-secondary:hover {
+            background: var(--bg-primary);
+            border-color: var(--border-hover);
+        }
+        
+        .btn.btn-sm {
+            padding: 0.5rem 0.75rem;
+            font-size: var(--text-xs);
+            min-height: 32px;
+        }
+        
+        .btn.btn-danger {
+            background: var(--danger-red);
+            border-color: var(--danger-red);
+            color: var(--text-white);
+        }
+        
+        .btn.btn-danger:hover {
+            background: #dc2626;
+            border-color: #dc2626;
+        }
+        
+        .btn.active {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: var(--text-white);
+        }
+        
+        /* Actions du widget */
+        .widget-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* Séparateur de toolbar */
+        .toolbar-divider {
+            width: 1px;
+            height: 20px;
+            background: var(--border-color);
+            margin: 0 0.5rem;
+        }
+
+        /* Pied de page - Statut */
+        .editor-footer {
+            grid-area: footer;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-lg);
+            font-size: var(--text-sm);
+            color: var(--text-muted);
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-green);
+        }
+
+        .status-indicator.error {
+            background: var(--danger-red);
+        }
+
+        .status-indicator.warning {
+            background: var(--warning-orange);
+        }
+
+        /* ============================================================================
+         * SYSTÈME DE GRILLE ET CONTENEURS REDIMENSIONNABLES
+         * ============================================================================ */
+
+        /* Rôle : Zone de travail avec grille de placement */
+        .canvas-workspace {
+            flex: 1;
+            position: relative;
+            overflow: auto;
+            background: var(--bg-primary);
+        }
+
+        /* Rôle : Grille CSS 12x8 pour placement précis des widgets */
+        /* Type : CSS Grid avec guides visuels */
+        /* Propriétés : 12 colonnes × 8 rangées, gap 16px, responsive */
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, minmax(120px, 1fr));
+            gap: 16px;
+            padding: 24px;
+            min-height: 100%;
+            position: relative;
+        }
+
+        /* Rôle : Affichage de la grille (optionnel, toggle) */
+        /* Action : Guides visuels pour alignement précis */
+        .widget-grid.show-grid::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            right: 24px;
+            bottom: 24px;
+            background-image: 
+                linear-gradient(to right, rgba(16, 185, 129, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 185, 129, 0.1) 1px, transparent 1px);
+            background-size: calc(100% / 12) calc((100% - 7 * 16px) / 8);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Rôle : Conteneur individuel de widget redimensionnable */
+        /* Type : Div avec propriétés grid et resize handles */
+        .widget-container {
+            position: relative;
+            background: var(--bg-card);
+            border: 2px solid transparent;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition-normal);
+            cursor: pointer;
+            min-height: 120px;
+        }
+
+        .widget-container:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .widget-container.selected {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .widget-container.selected::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px dashed var(--accent-green);
+            border-radius: var(--border-radius);
+            pointer-events: none;
+            animation: dash 1s linear infinite;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 16px;
+            }
+        }
+
+        /* Rôle : En-tête du conteneur avec contrôles */
+        .widget-container-header {
+            background: rgba(16, 185, 129, 0.1);
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .widget-container-title {
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .widget-container-controls {
+            display: flex;
+            gap: 4px;
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .widget-container:hover .widget-container-controls {
+            opacity: 1;
+        }
+
+        .widget-control-btn {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--text-white);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-normal);
+        }
+
+        .widget-control-btn:hover {
+            background: var(--accent-green);
+        }
+
+        /* Rôle : Zone de contenu du widget */
+        .widget-container-content {
+            padding: 16px;
+            height: calc(100% - 41px);
+            overflow: auto;
+        }
+
+        /* Rôle : Poignées de redimensionnement */
+        /* Type : 8 handles (4 coins + 4 côtés) */
+        .resize-handle {
+            position: absolute;
+            background: var(--accent-green);
+            opacity: 0;
+            transition: var(--transition-fast);
+        }
+
+        .widget-container.selected .resize-handle {
+            opacity: 1;
+        }
+
+        .resize-handle:hover {
+            opacity: 1;
+            background: var(--accent-blue);
+        }
+
+        /* Handles des coins */
+        .resize-handle.nw { top: -4px; left: -4px; width: 8px; height: 8px; cursor: nw-resize; }
+        .resize-handle.ne { top: -4px; right: -4px; width: 8px; height: 8px; cursor: ne-resize; }
+        .resize-handle.sw { bottom: -4px; left: -4px; width: 8px; height: 8px; cursor: sw-resize; }
+        .resize-handle.se { bottom: -4px; right: -4px; width: 8px; height: 8px; cursor: se-resize; }
+
+        /* Handles des côtés */
+        .resize-handle.n { top: -4px; left: 20px; right: 20px; height: 8px; cursor: n-resize; }
+        .resize-handle.s { bottom: -4px; left: 20px; right: 20px; height: 8px; cursor: s-resize; }
+        .resize-handle.w { left: -4px; top: 20px; bottom: 20px; width: 8px; cursor: w-resize; }
+        .resize-handle.e { right: -4px; top: 20px; bottom: 20px; width: 8px; cursor: e-resize; }
+
+        /* État vide du canvas */
+        .empty-state {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .empty-state .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .empty-state .empty-text {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .empty-state.hidden {
+            display: none;
+        }
+
+        /* ============================================================================
+         * STYLES POUR PANNEAU DE PROPRIÉTÉS AVANCÉ
+         * ============================================================================ */
+
+        .properties-section {
+            margin-bottom: 2rem;
+        }
+
+        .properties-section h4 {
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .properties-section h4 i {
+            color: var(--accent-green);
+        }
+
+        .property-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .property-row:last-child {
+            border-bottom: none;
+        }
+
+        .property-row label {
+            color: var(--text-muted);
+            font-size: var(--text-sm);
+        }
+
+        .property-row span {
+            color: var(--text-white);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+        }
+
+        .property-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .property-group label {
+            display: block;
+            color: var(--text-white);
+            font-size: var(--text-sm);
+            font-weight: var(--font-medium);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .property-slider {
+            flex: 1;
+            height: 6px;
+            background: var(--bg-primary);
+            outline: none;
+            border-radius: 3px;
+            -webkit-appearance: none;
+        }
+
+        .property-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .property-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .property-input {
+            width: 60px;
+            padding: 0.25rem 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            text-align: center;
+            font-size: var(--text-sm);
+        }
+
+        .property-input.full-width {
+            width: 100%;
+            text-align: left;
+        }
+
+        .property-textarea {
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+            resize: vertical;
+            min-height: 80px;
+            font-family: var(--font-primary);
+        }
+
+        .property-color {
+            width: 40px;
+            height: 30px;
+            padding: 0;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: none;
+            cursor: pointer;
+        }
+
+        .property-select {
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--text-white);
+            font-size: var(--text-sm);
+        }
+
+        .property-unit {
+            color: var(--text-muted);
+            font-size: var(--text-xs);
+            min-width: 35px;
+            text-align: right;
+        }
+
+        .properties-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .properties-actions .btn {
+            flex: 1;
+        }
+
+        /* Responsive - Adaptations */
+        @media (max-width: 1200px) {
+            .widget-editor {
+                grid-template-columns: 250px 1fr 300px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .widget-editor {
+                grid-template-areas: 
+                    "toolbar toolbar"
+                    "canvas canvas"
+                    "footer footer";
+                grid-template-columns: 1fr;
+                grid-template-rows: 60px 1fr 40px;
+            }
+
+            .widget-library,
+            .properties-panel {
+                display: none;
+            }
+
+            .widget-library.active,
+            .properties-panel.active {
+                display: flex;
+                position: fixed;
+                top: 60px;
+                bottom: 40px;
+                width: 320px;
+                z-index: 1000;
+                box-shadow: var(--shadow-xl);
+            }
+
+            .widget-library.active {
+                left: 0;
+            }
+
+            .properties-panel.active {
+                right: 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes dragPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .widget-item.dragging {
+            animation: dragPulse 1s ease-in-out infinite;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="widget-editor">
+        <!-- Barre d'outils principale -->
+        <div class="editor-toolbar">
+            <div class="toolbar-left">
+                <div class="toolbar-title">
+                    <i class="fas fa-puzzle-piece"></i>
+                    Éditeur de Widgets
+                </div>
+            </div>
+            
+            <div class="toolbar-center">
+                <!-- Rôle : Bouton principal de création de widgets -->
+                <!-- Action : Ouvre l'interface de création avec grille et sélection de taille -->
+                <button class="btn btn-primary btn-sm" id="createWidgetBtn">
+                    <i class="fas fa-plus"></i>
+                    Créer Widget
+                </button>
+                <div class="toolbar-divider"></div>
+                <button class="btn btn-sm" id="undoBtn" disabled>
+                    <i class="fas fa-undo"></i>
+                    Annuler
+                </button>
+                <button class="btn btn-sm" id="redoBtn" disabled>
+                    <i class="fas fa-redo"></i>
+                    Refaire
+                </button>
+                <div class="toolbar-divider"></div>
+                <button class="btn btn-sm" id="previewBtn">
+                    <i class="fas fa-eye"></i>
+                    Aperçu
+                </button>
+            </div>
+            
+            <div class="toolbar-right">
+                <button class="btn btn-primary btn-sm" id="saveBtn">
+                    <i class="fas fa-save"></i>
+                    Sauvegarder
+                </button>
+                <button class="btn btn-secondary btn-sm" id="exportBtn">
+                    <i class="fas fa-download"></i>
+                    Exporter
+                </button>
+            </div>
+        </div>
+
+        <!-- Bibliothèque de widgets -->
+        <div class="widget-library">
+            <div class="library-header">
+                <h3 class="library-title">Widgets Disponibles</h3>
+                <input type="text" class="library-search" placeholder="Rechercher un widget..." id="widgetSearch">
+            </div>
+            
+            <div class="library-content" id="widgetLibrary">
+                <!-- Les widgets seront chargés dynamiquement -->
+            </div>
+        </div>
+
+        <!-- Canvas d'édition -->
+        <div class="editor-canvas">
+            <div class="canvas-toolbar">
+                <div class="canvas-zoom">
+                    <button class="zoom-btn" id="zoomOut">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="zoom-level" id="zoomLevel">100%</div>
+                    <button class="zoom-btn" id="zoomIn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="zoom-btn" id="zoomFit">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </button>
+                </div>
+                
+                <div class="canvas-actions">
+                    <button class="btn btn-sm" id="gridToggle">
+                        <i class="fas fa-th"></i>
+                        Grille
+                    </button>
+                    <button class="btn btn-sm" id="guidesToggle">
+                        <i class="fas fa-ruler"></i>
+                        Guides
+                    </button>
+                </div>
+            </div>
+            
+            <div class="canvas-workspace">
+                <!-- Rôle : Grille principale pour placer les conteneurs de widgets -->
+                <!-- Type : Grid CSS 12x8 colonnes avec redimensionnement dynamique -->
+                <!-- Action : Zone de travail avec snap-to-grid et redimensionnement -->
+                <div class="widget-grid" id="widgetGrid">
+                    <!-- La grille sera générée dynamiquement par JavaScript -->
+                </div>
+                
+                <!-- Rôle : État vide initial -->
+                <!-- Condition : Affiché seulement si aucun widget créé -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">
+                        <i class="fas fa-th"></i>
+                    </div>
+                    <div class="empty-text">
+                        <strong>Canvas de Création Vide</strong><br>
+                        Cliquez sur "Créer Widget" pour commencer votre mise en page
+                    </div>
+                    <button class="btn btn-primary" id="firstWidgetBtn">
+                        <i class="fas fa-plus"></i>
+                        Créer votre premier widget
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panneau de propriétés -->
+        <div class="properties-panel">
+            <div class="properties-header">
+                <h3 class="properties-title">
+                    <i class="fas fa-sliders-h"></i>
+                    Propriétés
+                </h3>
+            </div>
+            
+            <div class="properties-content" id="propertiesContent">
+                <div class="properties-empty">
+                    <i class="fas fa-info-circle" style="font-size: 2rem; opacity: 0.3; margin-bottom: 1rem;"></i>
+                    <p>Sélectionnez un widget pour voir ses propriétés</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pied de page avec statut -->
+        <div class="editor-footer">
+            <div class="footer-status">
+                <div class="status-item">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                    <span id="statusText">Prêt</span>
+                </div>
+                <div class="status-item">
+                    <span>Widgets: <span id="widgetCount">0</span></span>
+                </div>
+                <div class="status-item">
+                    <span>Taille: <span id="canvasSize">400x300</span></span>
+                </div>
+            </div>
+            
+            <div class="footer-actions">
+                <span>Éditeur de Widgets Li-CUBE PRO™</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts - Version standalone sans modules ES6 -->
+    <script>
+        // Widgets intégrés directement
+        class LogoWidget {
+            constructor() {
+                this.id = 'logo';
+                this.name = 'Logo';
+                this.category = 'Navigation';
+                this.icon = '🏢';
+                this.description = 'Logo avec image et effets hover';
+                
+                this.defaultData = {
+                    imagePath: './images/logo edsquebec.png',
+                    altText: 'Logo EDS Québec',
+                    width: '50px',
+                    height: '50px',
+                    link: '#'
+                };
+            }
+
+            render(data = {}) {
+                const widgetData = { ...this.defaultData, ...data };
+                
+                return `
+                    <div style="text-align: center; padding: 20px;">
+                        <a href="${widgetData.link}" 
+                           style="display: inline-block; width: ${widgetData.width}; height: ${widgetData.height}; 
+                                  border-radius: 12px; background: rgba(16, 185, 129, 0.1);
+                                  border: 2px solid rgba(16, 185, 129, 0.3);
+                                  background-image: url('${widgetData.imagePath}');
+                                  background-size: 80%; background-repeat: no-repeat; background-position: center;
+                                  transition: all 0.3s ease; text-decoration: none;">
+                            <span style="position: absolute; width: 1px; height: 1px; overflow: hidden;">${widgetData.altText}</span>
+                        </a>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    {
+                        name: 'imagePath',
+                        label: 'Chemin de l\'image',
+                        type: 'text',
+                        defaultValue: './images/logo edsquebec.png'
+                    },
+                    {
+                        name: 'altText',
+                        label: 'Texte alternatif',
+                        type: 'text',
+                        defaultValue: 'Logo EDS Québec'
+                    },
+                    {
+                        name: 'link',
+                        label: 'Lien de destination',
+                        type: 'text',
+                        defaultValue: '#'
+                    }
+                ];
+            }
+        }
+
+        class HeroTitleWidget {
+            constructor() {
+                this.id = 'hero-title';
+                this.name = 'Titre Hero';
+                this.category = 'Contenu';
+                this.icon = '✨';
+                this.description = 'Titre principal avec gradient et animations';
+                
+                this.defaultData = {
+                    title: 'Li-CUBE PRO™',
+                    subtitle: 'LOCATION INTELLIGENTE<br>ZÉRO RISQUE',
+                    gradient: 'green'
+                };
+            }
+
+            render(data = {}) {
+                const widgetData = { ...this.defaultData, ...data };
+                
+                return `
+                    <div style="text-align: center; padding: 40px 20px;">
+                        <h1 style="font-size: clamp(2rem, 6vw, 4rem); font-weight: 900; 
+                                   background: linear-gradient(135deg, #10b981, #0d9488); 
+                                   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+                                   background-clip: text; margin-bottom: 20px; line-height: 1.1;">
+                            ${widgetData.title}
+                        </h1>
+                        <div style="font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 600; 
+                                    color: #6b7280; line-height: 1.3; max-width: 600px; margin: 0 auto;">
+                            ${widgetData.subtitle}
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    {
+                        name: 'title',
+                        label: 'Titre principal',
+                        type: 'text',
+                        defaultValue: 'Li-CUBE PRO™'
+                    },
+                    {
+                        name: 'subtitle',
+                        label: 'Sous-titre',
+                        type: 'textarea',
+                        defaultValue: 'LOCATION INTELLIGENTE<br>ZÉRO RISQUE'
+                    }
+                ];
+            }
+        }
+
+        class PricingCardWidget {
+            constructor() {
+                this.id = 'pricing-card';
+                this.name = 'Carte Tarification';
+                this.category = 'Commerce';
+                this.icon = '💰';
+                this.description = 'Carte de prix avec plan et fonctionnalités';
+                
+                this.defaultData = {
+                    planName: 'ESSENTIEL',
+                    price: '299',
+                    currency: '$',
+                    period: '/mois',
+                    ctaText: 'Choisir ce plan',
+                    ctaLink: '#contact',
+                    features: [
+                        'Installation gratuite',
+                        'Maintenance incluse',
+                        'Support par email',
+                        'Jusqu\'à 50 équipements'
+                    ]
+                };
+            }
+
+            render(data = {}) {
+                const cardData = { ...this.defaultData, ...data };
+                
+                const featuresHtml = cardData.features.map(feature => 
+                    `<li style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: #6b7280;">
+                        <span style="color: #10b981; font-size: 14px;">✓</span>
+                        <span>${feature}</span>
+                    </li>`
+                ).join('');
+
+                return `
+                    <div style="background: #1f2937; border: 2px solid #374151; border-radius: 12px; 
+                                padding: 32px; text-align: center; position: relative; backdrop-filter: blur(10px);">
+                        <div style="margin-bottom: 32px;">
+                            <h3 style="font-size: 1.25rem; font-weight: bold; color: white; margin-bottom: 20px; 
+                                       text-transform: uppercase; letter-spacing: 0.05em;">
+                                ${cardData.planName}
+                            </h3>
+                            
+                            <div style="display: flex; align-items: baseline; justify-content: center; gap: 8px; margin-bottom: 20px;">
+                                <span style="font-size: 2rem; font-weight: 600; color: #10b981;">${cardData.currency}</span>
+                                <span style="font-size: 3.5rem; font-weight: 900; color: white; line-height: 1;">${cardData.price}</span>
+                                <span style="font-size: 1.125rem; color: #9ca3af; font-weight: 500;">${cardData.period}</span>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 32px;">
+                            <ul style="list-style: none; padding: 0; margin: 0; text-align: left;">
+                                ${featuresHtml}
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <a href="${cardData.ctaLink}" 
+                               style="width: 100%; padding: 16px 24px; background: #10b981; color: white;
+                                      border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+                                      text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.3s;
+                                      text-decoration: none; display: inline-block; cursor: pointer;">
+                                ${cardData.ctaText}
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            getEditableFields() {
+                return [
+                    {
+                        name: 'planName',
+                        label: 'Nom du plan',
+                        type: 'text',
+                        defaultValue: 'ESSENTIEL'
+                    },
+                    {
+                        name: 'price',
+                        label: 'Prix',
+                        type: 'text',
+                        defaultValue: '299'
+                    },
+                    {
+                        name: 'currency',
+                        label: 'Devise',
+                        type: 'text',
+                        defaultValue: '$'
+                    },
+                    {
+                        name: 'ctaText',
+                        label: 'Texte du bouton',
+                        type: 'text',
+                        defaultValue: 'Choisir ce plan'
+                    }
+                ];
+            }
+        }
+    </script>
+    <script src="./widget-editor-standalone.js"></script>
+</body>
+</html>

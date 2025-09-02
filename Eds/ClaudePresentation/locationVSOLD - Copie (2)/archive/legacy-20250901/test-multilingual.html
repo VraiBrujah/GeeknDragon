@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Métadonnées : configuration de la page de test -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Multilingue - Li-CUBE PRO™</title>
+    
+    <!-- Styles : interface d'administration -->
+    <link rel="stylesheet" href="css/admin-interface.css">
+    
+    <!-- Icônes : FontAwesome pour l'interface -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles : page de test spécifiques -->
+    <style>
+        /* Variables : couleurs du thème */
+        :root {
+            --test-primary: #409eff;
+            --test-success: #67c23a;
+            --test-warning: #e6a23c;
+            --test-dark: #2c3e50;
+            --test-light: #ecf0f1;
+        }
+        
+        /* Layout : page de test */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--test-dark) 0%, #34495e 100%);
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            color: var(--test-light);
+        }
+        
+        /* Container : contenu principal */
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Titre : page de test */
+        .test-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--test-primary);
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+        
+        /* Grille : zones de test */
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        /* Card : zone de test */
+        .test-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .test-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .test-card h3 {
+            color: var(--test-primary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Bouton : test */
+        .test-button {
+            background: var(--test-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .test-button:hover {
+            background: #3a8ee6;
+            transform: translateY(-2px);
+        }
+        
+        .test-button.success {
+            background: var(--test-success);
+        }
+        
+        .test-button.warning {
+            background: var(--test-warning);
+        }
+        
+        /* Zone : résultats de test */
+        .test-results {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        /* Indicateur : statut de langue */
+        .language-indicator {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--test-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 1000;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Contenu : traduisible */
+        .translatable-content {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        /* Status : service */
+        .service-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--test-warning);
+        }
+        
+        .status-dot.active {
+            background: var(--test-success);
+        }
+    </style>
+</head>
+<body>
+    <!-- Indicateur : langue courante -->
+    <div class="language-indicator" id="language-indicator">
+        🌐 Chargement...
+    </div>
+    
+    <!-- Container : page de test principale -->
+    <div class="test-container">
+        <h1 class="test-title">
+            <i class="fas fa-globe"></i>
+            <span data-i18n="admin.title">Test Système Multilingue</span>
+        </h1>
+        
+        <!-- Grille : zones de test -->
+        <div class="test-grid">
+            
+            <!-- Card : Gestionnaire de langues -->
+            <div class="test-card">
+                <h3>
+                    <i class="fas fa-language"></i>
+                    <span data-i18n="languages.title">Gestionnaire de Langues</span>
+                </h3>
+                
+                <div class="service-status">
+                    <div class="status-dot" id="language-manager-status"></div>
+                    <span>LanguageManager</span>
+                </div>
+                
+                <div class="service-status">
+                    <div class="status-dot" id="translations-status"></div>
+                    <span data-i18n="languages.availableLanguages">Traductions chargées</span>
+                </div>
+                
+                <button class="test-button" onclick="testLanguageManager()">
+                    <i class="fas fa-play"></i>
+                    <span data-i18n="admin.confirm">Tester</span>
+                </button>
+                
+                <button class="test-button success" onclick="switchToFrench()">
+                    🇫🇷 Français
+                </button>
+                
+                <button class="test-button success" onclick="switchToEnglish()">
+                    🇺🇸 English
+                </button>
+                
+                <div class="test-results" id="language-test-results"></div>
+            </div>
+            
+            <!-- Card : Interface d'administration -->
+            <div class="test-card">
+                <h3>
+                    <i class="fas fa-cogs"></i>
+                    <span data-i18n="admin.title">Interface d'Administration</span>
+                </h3>
+                
+                <div class="service-status">
+                    <div class="status-dot" id="admin-interface-status"></div>
+                    <span>AdminInterface</span>
+                </div>
+                
+                <button class="test-button" onclick="testAdminInterface()">
+                    <i class="fas fa-play"></i>
+                    <span data-i18n="admin.confirm">Tester Interface</span>
+                </button>
+                
+                <button class="test-button warning" onclick="toggleAdminPanel()">
+                    <i class="fas fa-toggle-on"></i>
+                    <span data-i18n="admin.preview">Basculer Panneau</span>
+                </button>
+                
+                <div class="test-results" id="admin-test-results"></div>
+            </div>
+            
+            <!-- Card : Traductions en temps réel -->
+            <div class="test-card">
+                <h3>
+                    <i class="fas fa-sync-alt"></i>
+                    <span data-i18n="content.title">Traductions Temps Réel</span>
+                </h3>
+                
+                <div class="translatable-content">
+                    <p><strong data-i18n="messages.success">Succès</strong></p>
+                    <p><small data-i18n="messages.loading">Chargement en cours...</small></p>
+                    <p><em data-i18n="validation.required">Ce champ est requis</em></p>
+                </div>
+                
+                <button class="test-button" onclick="testRealTimeTranslation()">
+                    <i class="fas fa-magic"></i>
+                    <span data-i18n="admin.refresh">Test Traduction</span>
+                </button>
+                
+                <div class="test-results" id="translation-test-results"></div>
+            </div>
+            
+            <!-- Card : Framework Li-CUBE -->
+            <div class="test-card">
+                <h3>
+                    <i class="fas fa-cube"></i>
+                    Li-CUBE Framework
+                </h3>
+                
+                <div class="service-status">
+                    <div class="status-dot" id="framework-status"></div>
+                    <span>Framework Core</span>
+                </div>
+                
+                <div class="service-status">
+                    <div class="status-dot" id="services-status"></div>
+                    <span data-i18n="settings.title">Services chargés</span>
+                </div>
+                
+                <button class="test-button" onclick="testFramework()">
+                    <i class="fas fa-diagnostics"></i>
+                    <span data-i18n="admin.confirm">Diagnostic</span>
+                </button>
+                
+                <div class="test-results" id="framework-test-results"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts : Framework Li-CUBE PRO™ -->
+    <script type="module">
+        // Import : modules principaux du framework
+        import LiCubeFramework from './js/core/licube-framework.js';
+        import LanguageManager from './js/core/language-manager.js';
+        import AdminInterface from './js/advanced/admin-interface.js';
+        import SectionManager from './js/advanced/section-manager.js';
+        
+        // Variables globales pour les tests
+        window.testFramework = null;
+        window.testLanguageManager = null;
+        window.testAdminInterface = null;
+        
+        /**
+         * Initialisation : framework de test
+         */
+        async function initializeTestFramework() {
+            try {
+                // Création : instance du framework
+                window.testFramework = new LiCubeFramework({
+                    debug: true,
+                    autoStart: false
+                });
+                
+                // Initialisation : framework
+                await window.testFramework.init();
+                
+                // Récupération : services
+                window.testLanguageManager = window.testFramework.getService('LanguageManager');
+                
+                // Création : SectionManager pour AdminInterface
+                const sectionManager = new SectionManager(window.testFramework);
+                window.testAdminInterface = new AdminInterface(window.testFramework, sectionManager);
+                
+                // Mise à jour : statuts des services
+                updateServiceStatuses();
+                
+                // Configuration : indicateur de langue
+                updateLanguageIndicator();
+                
+                // Écoute : changements de langue
+                if (window.testLanguageManager) {
+                    window.testLanguageManager.on('languageChanged', (newLanguage) => {
+                        updateLanguageIndicator();
+                        logToResults('language-test-results', `🌐 Langue changée: ${newLanguage}`);
+                    });
+                }
+                
+                console.log('✅ Framework de test initialisé');
+                
+            } catch (error) {
+                console.error('❌ Erreur initialisation test:', error);
+                logToResults('framework-test-results', `❌ Erreur: ${error.message}`);
+            }
+        }
+        
+        /**
+         * Mise à jour : statuts des services
+         */
+        function updateServiceStatuses() {
+            // LanguageManager
+            const langStatus = document.getElementById('language-manager-status');
+            if (langStatus) {
+                langStatus.classList.toggle('active', !!window.testLanguageManager);
+            }
+            
+            // Traductions
+            const translationsStatus = document.getElementById('translations-status');
+            if (translationsStatus && window.testLanguageManager) {
+                const status = window.testLanguageManager.getStatus();
+                translationsStatus.classList.toggle('active', status.translationsLoaded.length > 0);
+            }
+            
+            // AdminInterface
+            const adminStatus = document.getElementById('admin-interface-status');
+            if (adminStatus) {
+                adminStatus.classList.toggle('active', !!window.testAdminInterface);
+            }
+            
+            // Framework
+            const frameworkStatus = document.getElementById('framework-status');
+            if (frameworkStatus) {
+                frameworkStatus.classList.toggle('active', !!window.testFramework);
+            }
+            
+            // Services
+            const servicesStatus = document.getElementById('services-status');
+            if (servicesStatus && window.testFramework) {
+                const serviceCount = Object.keys(window.testFramework.services || {}).length;
+                servicesStatus.classList.toggle('active', serviceCount > 0);
+            }
+        }
+        
+        /**
+         * Mise à jour : indicateur de langue
+         */
+        function updateLanguageIndicator() {
+            const indicator = document.getElementById('language-indicator');
+            if (indicator && window.testLanguageManager) {
+                const currentLang = window.testLanguageManager.getCurrentLanguage();
+                const langData = window.testLanguageManager.getCurrentLanguageData();
+                indicator.textContent = `${langData?.flag || '🌐'} ${langData?.name || currentLang}`;
+            }
+        }
+        
+        /**
+         * Utilitaire : ajout de logs aux résultats
+         */
+        function logToResults(elementId, message) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                const timestamp = new Date().toLocaleTimeString();
+                element.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+                element.scrollTop = element.scrollHeight;
+            }
+        }
+        
+        // Export : fonctions globales pour les boutons
+        window.testLanguageManager = function() {
+            if (!window.testLanguageManager) {
+                logToResults('language-test-results', '❌ LanguageManager non disponible');
+                return;
+            }
+            
+            const status = window.testLanguageManager.getStatus();
+            logToResults('language-test-results', `✅ Langue courante: ${status.currentLanguage}`);
+            logToResults('language-test-results', `📊 Traductions: ${status.translationsLoaded.join(', ')}`);
+            logToResults('language-test-results', `👥 Observateurs: ${status.observers}`);
+        };
+        
+        window.switchToFrench = function() {
+            if (window.testLanguageManager) {
+                window.testLanguageManager.setLanguage('fr');
+                logToResults('language-test-results', '🇫🇷 Basculement vers le français');
+            }
+        };
+        
+        window.switchToEnglish = function() {
+            if (window.testLanguageManager) {
+                window.testLanguageManager.setLanguage('en');
+                logToResults('language-test-results', '🇺🇸 Switching to English');
+            }
+        };
+        
+        window.testAdminInterface = function() {
+            if (!window.testAdminInterface) {
+                logToResults('admin-test-results', '❌ AdminInterface non disponible');
+                return;
+            }
+            
+            const status = window.testAdminInterface.getStatus();
+            logToResults('admin-test-results', `👁️ Visible: ${status.isVisible}`);
+            logToResults('admin-test-results', `📑 Onglet actif: ${status.activeTab}`);
+            logToResults('admin-test-results', `📋 Sections: ${status.sectionsCount}`);
+        };
+        
+        window.toggleAdminPanel = function() {
+            if (window.testAdminInterface) {
+                if (window.testAdminInterface.state?.isVisible) {
+                    window.testAdminInterface.hide();
+                    logToResults('admin-test-results', '🔽 Panneau masqué');
+                } else {
+                    window.testAdminInterface.show();
+                    logToResults('admin-test-results', '🔼 Panneau affiché');
+                }
+            }
+        };
+        
+        window.testRealTimeTranslation = function() {
+            if (window.testLanguageManager) {
+                // Force une mise à jour des traductions DOM
+                window.testLanguageManager.applyTranslationsToDOM();
+                logToResults('translation-test-results', '🔄 Traductions DOM mises à jour');
+                
+                // Test de traductions spécifiques
+                const testKeys = ['admin.title', 'messages.success', 'validation.required'];
+                testKeys.forEach(key => {
+                    const translation = window.testLanguageManager.t(key);
+                    logToResults('translation-test-results', `${key}: "${translation}"`);
+                });
+            }
+        };
+        
+        window.testFramework = function() {
+            if (!window.testFramework) {
+                logToResults('framework-test-results', '❌ Framework non disponible');
+                return;
+            }
+            
+            const services = Object.keys(window.testFramework.services || {});
+            logToResults('framework-test-results', `🔧 Services: ${services.join(', ')}`);
+            
+            const config = window.testFramework.config;
+            logToResults('framework-test-results', `⚙️ Debug: ${config?.debug}`);
+            logToResults('framework-test-results', `🚀 Auto-start: ${config?.autoStart}`);
+        };
+        
+        // Initialisation automatique
+        initializeTestFramework();
+    </script>
+</body>
+</html>

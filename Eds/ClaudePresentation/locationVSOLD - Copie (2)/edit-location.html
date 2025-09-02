@@ -1,0 +1,3205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Configuration éditeur version LOCATION -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur Présentation LOCATION - Interface Vendeur</title>
+    <meta name="description" content="Interface d'édition pour vendeurs - Personnaliser les arguments de présentation LOCATION">
+    
+    <!-- Polices cohérentes avec la page de location -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Variables CSS thème LOCATION : vert et bleu - IDENTIQUES à location.html */
+        :root {
+            --primary-dark: #0F172A;
+            --secondary-dark: #1E293B;
+            --accent-green: #10B981;
+            --accent-blue: #3B82F6;
+            --accent-teal: #14B8A6;
+            --success-green: #059669;
+            --warning-orange: #F59E0B;
+            --text-white: #F8FAFC;
+            --text-gray: #CBD5E1;
+            
+            --gradient-primary: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            --gradient-green: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+            --gradient-blue: linear-gradient(135deg, var(--accent-blue) 0%, #60A5FA 100%);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.4);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif; background: var(--gradient-primary);
+            color: var(--text-white); line-height: 1.6; min-height: 100vh;
+        }
+        
+        .editor-header {
+            background: rgba(15, 23, 42, 0.95); 
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem; 
+            border-bottom: 1px solid var(--accent-green);
+            position: sticky; top: 0; z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1200px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        
+        .editor-title {
+            font-size: 1.8rem; font-weight: 700;
+            background: var(--gradient-green);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        
+        .header-actions { display: flex; gap: 1rem; align-items: center; }
+        
+        .btn {
+            padding: 0.75rem 1.5rem; border: none; border-radius: 8px;
+            font-size: 0.95rem; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+        
+        .btn-back {
+            background: rgba(16, 185, 129, 0.1); 
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+        
+        .btn-save { 
+            background: var(--gradient-green); 
+            color: white; 
+            border: none;
+        }
+        
+        .btn-preview { 
+            background: var(--gradient-blue); 
+            color: white; 
+            border: none;
+        }
+        
+        /* Rôle : Bouton d'accès à l'interface d'administration */
+        /* Type : Button - Déclencheur pour panneau admin */
+        /* Couleur : Orange warning pour visibilité maximum */
+        .btn-admin { 
+            background: var(--gradient-orange); 
+            background: linear-gradient(135deg, var(--warning-orange) 0%, #FB923C 100%);
+            color: white; 
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Animation : pulsation pour attirer l'attention */
+        .btn-admin::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        
+        .btn-admin:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: var(--shadow-glow); 
+        }
+        
+        /* Rôle : Styles modernes pour boutons d'ajout/suppression de faiblesses et avantages */
+        /* Type : Boutons interactifs - Design moderne avec icônes et animations */
+        .modern-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn-modern {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 160px;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-modern:hover::before {
+            left: 100%;
+        }
+        
+        .btn-add-weakness, .btn-add-strength {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-teal) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-add-weakness:hover, .btn-add-strength:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+            background: linear-gradient(135deg, var(--accent-teal) 0%, var(--success-green) 100%);
+        }
+        
+        .btn-remove-weakness, .btn-remove-strength {
+            background: linear-gradient(135deg, var(--warning-orange) 0%, #FB923C 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .btn-remove-weakness:hover, .btn-remove-strength:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.5);
+            background: linear-gradient(135deg, #FB923C 0%, #F97316 100%);
+        }
+        
+        .btn-modern i {
+            font-size: 1.1rem;
+        }
+        
+        .btn-modern:active {
+            transform: translateY(-1px);
+            transition: transform 0.1s ease;
+        }
+        
+        /* Animation de pulsation pour indiquer l'interaction */
+        .btn-modern:focus {
+            outline: none;
+            animation: pulse-focus 0.6s ease-in-out;
+        }
+        
+        @keyframes pulse-focus {
+            0% { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 8px 30px rgba(16, 185, 129, 0.6); }
+            100% { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+        }
+        
+        /* Rôle : Boutons de contrôle individuels pour chaque section */
+        /* Type : Contrôles flottants - Position absolue sur chaque bloc */
+        .section-controls-individual {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .btn-control {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            opacity: 0.8;
+        }
+        
+        .btn-control:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .btn-add-after {
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--success-green) 100%);
+            color: white;
+        }
+        
+        .btn-add-after:hover {
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-remove-this {
+            background: linear-gradient(135deg, var(--warning-orange) 0%, #EF4444 100%);
+            color: white;
+        }
+        
+        .btn-remove-this:hover {
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+        
+        /* Animation de suppression */
+        .content-block.removing {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.4s ease;
+        }
+        
+        /* Style pour les blocs avec index dynamique */
+        .weakness-block, .strength-block {
+            transition: all 0.3s ease;
+        }
+        
+        .weakness-block:hover .section-controls-individual,
+        .strength-block:hover .section-controls-individual {
+            opacity: 1;
+        }
+        
+        .editor-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        
+        .status-message {
+            background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-green);
+            border-radius: 10px; padding: 1rem; margin-bottom: 2rem;
+            text-align: center; display: none;
+        }
+        
+        .status-message.success {
+            background: rgba(16, 185, 129, 0.1); border-color: var(--success-green);
+            color: var(--success-green); display: block;
+        }
+        
+        .status-message.error {
+            background: rgba(239, 68, 68, 0.1); border-color: var(--warning-red);
+            color: var(--warning-red); display: block;
+        }
+        
+        .edit-section {
+            background: var(--gradient-primary);
+            border-radius: 18px;
+            padding: 2rem; 
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--accent-green);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .section-title {
+            font-size: 1.5rem; font-weight: 700; color: var(--accent-green);
+            margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;
+        }
+        
+        .edit-grid { display: grid; gap: 1.5rem; }
+        
+        .edit-field { display: flex; flex-direction: column; gap: 0.5rem; }
+        
+        .field-label {
+            font-weight: 600; color: var(--text-white); font-size: 0.95rem;
+        }
+        
+        .field-description {
+            font-size: 0.85rem; color: var(--text-gray); font-style: italic;
+        }
+        
+        .field-input {
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px; 
+            padding: 1rem; 
+            color: var(--text-white);
+            font-size: 1rem; 
+            transition: all 0.3s ease; 
+            font-family: inherit;
+        }
+        
+        /*
+         * Rôle : style commun pour les blocs éditables multiligne
+         * Effet : imite l'apparence et le comportement d'une zone
+         *         de texte classique tout en autorisant le texte riche
+         */
+        .field-textarea {
+            min-height: 100px;
+            resize: vertical;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        /*
+         * Astuce UX : affichage d'un texte indicatif lorsque le champ
+         * est vide, équivalent du placeholder des <textarea>
+         */
+        .field-input[contenteditable="true"]:empty::before {
+            content: attr(data-placeholder);
+            color: rgba(203, 213, 225, 0.5);
+            pointer-events: none;
+        }
+        
+        .field-input:focus {
+            outline: none; 
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.12);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-1px);
+        }
+        
+        .field-input::placeholder { color: rgba(203, 213, 225, 0.5); }
+        
+        .numeric-field { display: flex; align-items: center; gap: 1rem; }
+        .numeric-input { flex: 1; }
+        .field-unit { color: var(--text-gray); font-size: 0.9rem; font-weight: 500; }
+        
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem; margin-top: 1rem;
+        }
+        
+        .pricing-edit-card {
+            background: rgba(16, 185, 129, 0.08); 
+            border-radius: 18px;
+            padding: 2rem; 
+            border-left: 4px solid var(--accent-green);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .pricing-edit-card:hover {
+            transform: translateX(8px); 
+            background: rgba(16, 185, 129, 0.12);
+        }
+        
+        .pricing-edit-card.featured {
+            border-left: 4px solid var(--warning-orange);
+            background: rgba(245, 158, 11, 0.08);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .live-preview {
+            background: rgba(30, 41, 59, 0.3); border-radius: 10px;
+            padding: 1rem; margin-top: 1rem;
+            border-left: 4px solid var(--accent-green);
+        }
+        
+        .preview-title {
+            font-size: 0.9rem; color: var(--accent-green);
+            font-weight: 600; margin-bottom: 0.5rem;
+        }
+        
+        .preview-content { color: var(--text-gray); font-style: italic; }
+        
+        .editor-actions {
+            position: sticky; bottom: 0;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem; border-top: 1px solid rgba(16, 185, 129, 0.2);
+            margin-top: 3rem;
+        }
+        
+        .actions-content {
+            max-width: 1200px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        
+        .save-status { display: flex; align-items: center; gap: 0.5rem;
+            color: var(--text-gray); font-size: 0.9rem; }
+        
+        .status-icon { font-size: 1rem; }
+        
+        .status-icon.saving {
+            color: var(--accent-teal); animation: spin 1s infinite;
+        }
+        
+        .status-icon.saved { color: var(--success-green); }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* === ÉDITEUR CSS SIMPLE === */
+        .css-editor-section {
+            background: rgba(31, 154, 60, 0.1);
+            border: 1px solid var(--primary-green);
+            border-radius: 12px;
+            margin: 1rem auto;
+            max-width: 1200px;
+            overflow: hidden;
+        }
+        
+        .css-title {
+            background: var(--primary-green);
+            color: white;
+            padding: 1rem;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .css-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        
+        .css-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .css-editor {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .css-editor.collapsed {
+            display: none;
+        }
+        
+        .css-group {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .css-group h3 {
+            color: var(--accent-green);
+            margin: 0 0 1rem 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .css-group h4 {
+            color: var(--text-white);
+            margin: 1.5rem 0 0.8rem 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding-bottom: 0.3rem;
+        }
+        
+        /* Grille de couleurs 2D optimisée (4 colonnes × 3 lignes) */
+        .color-grid-2d {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            max-width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        
+        /* Responsive : réduction en 2 colonnes sur petits écrans */
+        @media (max-width: 768px) {
+            .color-grid-2d {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.6rem;
+            }
+        }
+        
+        /* Ancienne grille de couleurs (conservée pour compatibilité) */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-sizing: border-box;
+            min-width: 0;
+            overflow: hidden;
+        }
+        
+        .color-item:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        
+        .color-item span {
+            color: var(--text-white);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
+            margin-bottom: 0.2rem;
+            /* Texte sur 2 lignes max pour meilleure lisibilité */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .color-item input[type="color"] {
+            width: 100%;
+            height: 35px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        
+        .color-item small {
+            color: var(--text-gray);
+            font-size: 0.65rem;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.2;
+            /* Description sur 2 lignes max avec tooltip */
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            cursor: help;
+        }
+        
+        /* Tooltip pour les descriptions complètes */
+        .color-item {
+            position: relative;
+        }
+        
+        .color-item:hover small::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .color-item:hover small[title]::after {
+            opacity: 1;
+        }
+        
+        /* Système de réorganisation des sections */
+        .reorganizable-section {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .section-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .section-btn {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-green);
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+        
+        .section-btn:hover {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.5);
+            transform: translateY(-1px);
+        }
+        
+        .section-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .section-spacer-control {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-spacer-control label {
+            color: var(--text-gray);
+            font-size: 0.75rem;
+            margin: 0;
+        }
+        
+        /* Contrôles d'espacement de sections (ne s'appliquent QUE à location.html) */
+        .section-spacing-input {
+            width: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        
+        .section-spacing-input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+        
+        /* Contrôles d'espacement pour l'éditeur de styles avancé */
+        .spacing-input {
+            width: 60px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        
+        .spacing-input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+        
+        .section-moving {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+        
+        .css-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .css-controls label {
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .css-controls input[type="color"] {
+            width: 40px;
+            height: 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .css-controls input[type="range"] {
+            flex: 1;
+            margin: 0 0.5rem;
+        }
+        
+        .css-controls select {
+            background: var(--bg-field, #475569);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary, #FFFFFF);
+            padding: 0.3rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .css-controls select option {
+            background: var(--bg-field, #475569);
+            color: var(--text-primary, #FFFFFF);
+            padding: 0.3rem;
+        }
+        
+        .css-controls span {
+            color: var(--accent-green);
+            font-weight: 500;
+            min-width: 60px;
+            text-align: right;
+            font-size: 0.85rem;
+        }
+        
+        .range-control {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        
+        .range-control .range-label {
+            color: var(--text-white);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .range-control .range-value {
+            color: var(--accent-green);
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.85rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .range-control input[type="range"] {
+            width: 100%;
+        }
+        
+        .css-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .css-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .css-btn.reset {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .css-btn.save {
+            background: var(--success-green);
+            color: white;
+        }
+        
+        .css-btn.import {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .css-btn.export {
+            background: #28a745;
+            color: white;
+        }
+        
+        .css-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .editor-container { padding: 1rem; }
+            .header-content { flex-direction: column; gap: 1rem; text-align: center; }
+            .header-actions { flex-wrap: wrap; justify-content: center; }
+            .actions-content { flex-direction: column; gap: 1rem; text-align: center; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .css-editor { grid-template-columns: 1fr; }
+            .css-actions { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 🔄 Script de restauration automatique des modifications -->
+<!-- Rôle : Restaurer le contenu HTML complet sauvegardé dans localStorage -->
+<!-- Type : Script de restauration immédiate -->
+<!-- Domaine : Exécuté au chargement de page -->
+<!-- Formule : Si localStorage contient HTML complet → remplacer innerHTML -->
+<!-- Exemple : Restauration après ajout/suppression de sections -->
+<script>
+(function() {
+    // Rôle : Clé de stockage pour la page d'édition
+    // Type : String (identifiant localStorage)
+    // Unité : Sans unité
+    // Domaine : Chaîne de caractères non vide
+    // Formule : Préfixe 'licubepro-' + nom de la page
+    // Exemple : 'licubepro-edit-location-html-complete'
+    const storageKey = 'licubepro-edit-location-html-complete';
+    
+    // Rôle : Contenu HTML complet sauvegardé précédemment
+    // Type : String (HTML complet) ou null
+    // Unité : Sans unité
+    // Domaine : HTML valide ou null si pas de sauvegarde
+    // Formule : Récupération depuis localStorage
+    // Exemple : '<!DOCTYPE html><html>...</html>'
+    const savedHtml = localStorage.getItem(storageKey);
+    
+    if (savedHtml) {
+        console.log('🔄 Restauration du contenu HTML complet depuis localStorage');
+        console.log(`📊 Taille des données sauvegardées: ${savedHtml.length} caractères`);
+        
+        // Rôle : Parser DOM pour extraire le contenu du body
+        // Type : DOMParser (API native du navigateur)
+        // Unité : Sans unité
+        // Domaine : Instance valide de DOMParser
+        // Formule : new DOMParser() → instance de parsing HTML
+        // Exemple : Permet de transformer string HTML en DOM
+        const parser = new DOMParser();
+        
+        // Rôle : Document HTML parsé depuis la sauvegarde
+        // Type : Document (objet DOM)
+        // Unité : Sans unité
+        // Domaine : Document HTML valide
+        // Formule : parser.parseFromString(HTML, 'text/html')
+        // Exemple : Document DOM manipulable
+        const savedDoc = parser.parseFromString(savedHtml, 'text/html');
+        
+        // Rôle : Nouveau contenu du body à restaurer
+        // Type : String (HTML du body)
+        // Unité : Sans unité
+        // Domaine : HTML valide du body
+        // Formule : savedDoc.body.innerHTML
+        // Exemple : '<div class="editor-header">...</div>'
+        const newBodyContent = savedDoc.body.innerHTML;
+        
+        // APPROCHE SÉLECTIVE : restaurer seulement les sections dynamiques, pas tout le body
+        console.log('🔄 Restauration sélective des sections dynamiques...');
+        
+        // Extraction : conteneurs de sections dynamiques depuis la sauvegarde
+        const weaknessContainer = savedDoc.querySelector('#weaknesses-container');
+        const strengthsContainer = savedDoc.querySelector('#strengths-container');
+        
+        // Restauration : sections de faiblesses
+        if (weaknessContainer) {
+            const currentWeaknessContainer = document.querySelector('#weaknesses-container');
+            if (currentWeaknessContainer) {
+                currentWeaknessContainer.innerHTML = weaknessContainer.innerHTML;
+                console.log('✅ Sections faiblesses restaurées');
+            }
+        }
+        
+        // Restauration : sections d'avantages  
+        if (strengthsContainer) {
+            const currentStrengthsContainer = document.querySelector('#strengths-container');
+            if (currentStrengthsContainer) {
+                currentStrengthsContainer.innerHTML = strengthsContainer.innerHTML;
+                console.log('✅ Sections avantages restaurées');
+            }
+        }
+        
+        console.log('✅ Sections dynamiques edit-location.html restaurées avec succès');
+        
+        // RESTAURATION des valeurs des champs éditables (maintenant que les sections existent)
+        setTimeout(() => {
+            // Rôle : Valeurs sauvegardées des champs éditables
+            // Type : Object (dictionnaire clé-valeur)
+            // Unité : Sans unité
+            // Domaine : Paires fieldName -> valeurSaisie
+            // Formule : JSON.parse(localStorage.getItem('licubepro-field-values'))
+            // Exemple : {"weakness11-title": "Remplacements Fréquents de la batterie"}
+            const savedFieldValues = JSON.parse(localStorage.getItem('licubepro-field-values') || '{}');
+            
+            if (Object.keys(savedFieldValues).length > 0) {
+                console.log(`🔄 Restauration de ${Object.keys(savedFieldValues).length} valeurs de champs...`);
+                
+                // Restauration : application des valeurs sauvegardées
+                Object.entries(savedFieldValues).forEach(([fieldName, value]) => {
+                    const field = document.querySelector(`[data-field="${fieldName}"]`);
+                    if (field && value) {
+                        // Formule : Assignation conditionnelle selon le type d'élément
+                        // Symboles :
+                        //   - field.value : pour input et textarea [String]
+                        //   - field.textContent : pour div et span éditables [String]
+                        // Hypothèses : field existe et value n'est pas vide
+                        // Exemple : field.value = "Remplacements Fréquents de la batterie"
+                        if (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') {
+                            field.value = value;
+                        } else {
+                            field.textContent = value;
+                        }
+                        console.log(`✅ ${fieldName}: "${value}"`);
+                    }
+                });
+                
+                console.log('✅ Toutes les valeurs de champs restaurées');
+                
+                // RÉINITIALISATION : event listeners pour les nouveaux éléments
+                if (window.instantSync && typeof window.instantSync.setupInstantListeners === 'function') {
+                    window.instantSync.setupInstantListeners();
+                    console.log('🔄 Event listeners réinitialisés après restauration');
+                }
+                
+            } else {
+                console.log('ℹ️ Aucune valeur de champ sauvegardée trouvée');
+            }
+            
+            // Test : vérifier quelques champs restaurés
+            const testFields = document.querySelectorAll('[data-field]');
+            console.log(`📋 ${testFields.length} champs data-field détectés après restauration complète`);
+            
+        }, 200); // Délai augmenté pour s'assurer que tout est chargé
+    } else {
+        console.log('ℹ️ Aucune sauvegarde trouvée dans localStorage');
+    }
+})();
+</script>
+    <!-- En-tête éditeur LOCATION -->
+    <header class="editor-header">
+        <div class="header-content">
+            <h1 class="editor-title">
+                <i class="fas fa-presentation"></i>
+                Interface Vendeur - SOLUTION ZÉRO RISQUE
+            </h1>
+            <div class="header-actions">
+                <a href="location.html" class="btn btn-back">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour Présentation Location
+                </a>
+                <button class="btn btn-preview" onclick="togglePreview()">
+                    <i class="fas fa-sync"></i>
+                    Synchroniser & Prévisualiser
+                </button>
+                <button class="btn btn-save" onclick="window.instantSync.exportContent()">
+                    <i class="fas fa-download"></i>
+                    Exporter
+                </button>
+                <label for="import-file" class="btn btn-preview">
+                    <i class="fas fa-upload"></i>
+                    Importer
+                </label>
+                <input type="file" id="import-file" accept="application/json" style="display:none" onchange="handleImport(event)">
+            </div>
+        </div>
+    </header>
+
+    <!-- Message de statut -->
+    <div class="status-message" id="statusMessage">
+        <i class="fas fa-info-circle"></i>
+        <span id="statusText">Interface Vendeur LOCATION prête</span>
+    </div>
+
+    <!-- Section Styles CSS Globaux -->
+    <section class="css-editor-section">
+        <h2 class="css-title">
+            <i class="fas fa-palette"></i>
+            Style de la Page
+            <button class="css-toggle" onclick="toggleCSSEditor()">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </h2>
+        <div class="css-editor" id="cssEditor">
+            <!-- Couleurs Thème Location - Grille 2D Optimisée -->
+            <div class="css-group">
+                <h3>🎨 Couleurs Thème Location</h3>
+                <p class="section-description">Personnalisez toutes les couleurs de votre présentation avec cette grille complète 2D</p>
+                
+                <!-- Grille de Couleurs 2D (4x3) -->
+                <div class="color-grid-2d">
+                    <!-- Ligne 1: Couleurs de Base -->
+                    <label class="color-item">
+                        <span>Fond Principal</span>
+                        <input type="color" id="primaryDark" data-field="style-primaryDark" value="#0F172A">
+                        <small title="Couleur d'arrière-plan principal de toute la présentation">Arrière-plan principal</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Fond Sections</span>
+                        <input type="color" id="secondaryDark" data-field="style-secondaryDark" value="#1E293B">
+                        <small title="Couleur d'arrière-plan des sections et contenus">Arrière-plan sections</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Texte Blanc</span>
+                        <input type="color" id="textWhite" data-field="style-textWhite" value="#F8FAFC">
+                        <small title="Couleur du texte principal blanc utilisé partout">Texte principal blanc</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Texte Gris</span>
+                        <input type="color" id="textGray" data-field="style-textGray" value="#CBD5E1">
+                        <small title="Couleur du texte gris pour descriptions et détails">Texte gris descriptif</small>
+                    </label>
+                    
+                    <!-- Ligne 2: Couleurs d'Accent -->
+                    <label class="color-item">
+                        <span>Vert Principal</span>
+                        <input type="color" id="accentGreen" data-field="style-accentGreen" value="#10B981">
+                        <small title="Couleur principale pour boutons, liens et éléments interactifs">Boutons et éléments</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Bleu Accent</span>
+                        <input type="color" id="accentBlue" data-field="style-accentBlue" value="#3B82F6">
+                        <small title="Couleur d'accent bleu pour liens et détails visuels">Liens et détails</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Teal Accent</span>
+                        <input type="color" id="accentTeal" data-field="style-accentTeal" value="#14B8A6">
+                        <small title="Couleur teal pour gradients, bordures et effets spéciaux">Gradients et effets</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Vert Succès</span>
+                        <input type="color" id="successGreen" data-field="style-successGreen" value="#059669">
+                        <small title="Couleur verte pour messages de succès et éléments positifs">Messages positifs</small>
+                    </label>
+                    
+                    <!-- Ligne 3: Couleurs d'État -->
+                    <label class="color-item">
+                        <span>Orange Alert</span>
+                        <input type="color" id="warningOrange" data-field="style-warningOrange" value="#F59E0B">
+                        <small title="Couleur orange pour alertes, avertissements et warnings">Alertes et warnings</small>
+                    </label>
+                    <label class="color-item">
+                        <span>Rouge Erreur</span>
+                        <input type="color" id="warningRed" data-field="style-warningRed" value="#EF4444">
+                        <small title="Couleur rouge pour erreurs, annulations et éléments négatifs">Erreurs et négatif</small>
+                    </label>
+                </div>
+                
+                <!-- Test de synchronisation -->
+                <div class="color-group">
+                    <h4>🧪 Test Synchronisation</h4>
+                    <button onclick="testStyleSync()" style="
+                        background: linear-gradient(135deg, #10B981, #14B8A6);
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-weight: 600;
+                        margin: 10px 0;
+                    ">
+                        🎨 Test Changement Couleur
+                    </button>
+                    <p style="font-size: 12px; color: #9CA3AF;">
+                        Cliquez pour tester si la synchronisation fonctionne.<br>
+                        Regardez la console pour les logs détaillés.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="css-group">
+                <h3>Navigation</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Titre Nav:</span>
+                        <span class="range-value" id="navTitleSizeValue">28px</span>
+                        <input type="range" id="navTitleSize" min="20" max="40" value="28">
+                    </div>
+                    <label>Épaisseur Titre Nav: 
+                        <select id="navTitleWeight">
+                            <option value="600">Semi-Bold</option>
+                            <option value="700">Bold</option>
+                            <option value="800">Extra-Bold</option>
+                            <option value="900">Black</option>
+                        </select>
+                    </label>
+                    <div class="range-control">
+                        <span class="range-label">Taille Items Nav:</span>
+                        <span class="range-value" id="navItemSizeValue">16px</span>
+                        <input type="range" id="navItemSize" min="12" max="22" value="16">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Padding Nav:</span>
+                        <span class="range-value" id="navPaddingValue">12px</span>
+                        <input type="range" id="navPadding" min="8" max="24" value="12">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hero Section -->
+            <div class="css-group">
+                <h3>Section Hero</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Titre Hero:</span>
+                        <span class="range-value" id="heroTitleSizeValue">72px</span>
+                        <input type="range" id="heroTitleSize" min="40" max="100" value="72">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Highlight Hero:</span>
+                        <span class="range-value" id="heroHighlightSizeValue">80px</span>
+                        <input type="range" id="heroHighlightSize" min="50" max="120" value="80">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Sous-titre:</span>
+                        <span class="range-value" id="heroSubtitleSizeValue">22px</span>
+                        <input type="range" id="heroSubtitleSize" min="16" max="32" value="22">
+                    </div>
+                    <label>Épaisseur Titre Hero: 
+                        <select id="heroTitleWeight">
+                            <option value="700">Bold</option>
+                            <option value="800">Extra-Bold</option>
+                            <option value="900">Black</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Prix Banner -->
+            <div class="css-group">
+                <h3>Bannière Prix</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Prix Principal:</span>
+                        <span class="range-value" id="priceMainSizeValue">56px</span>
+                        <input type="range" id="priceMainSize" min="30" max="80" value="56">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Prix Secondaire:</span>
+                        <span class="range-value" id="priceSubSizeValue">18px</span>
+                        <input type="range" id="priceSubSize" min="12" max="26" value="18">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Padding Prix:</span>
+                        <span class="range-value" id="pricePaddingValue">24px</span>
+                        <input type="range" id="pricePadding" min="12" max="40" value="24">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Titres de Sections -->
+            <div class="css-group">
+                <h3>Titres de Sections</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Titre Section:</span>
+                        <span class="range-value" id="sectionTitleSizeValue">56px</span>
+                        <input type="range" id="sectionTitleSize" min="30" max="80" value="56">
+                    </div>
+                    <label>Épaisseur Titre Section: 
+                        <select id="sectionTitleWeight">
+                            <option value="600">Semi-Bold</option>
+                            <option value="700">Bold</option>
+                            <option value="800">Extra-Bold</option>
+                            <option value="900">Black</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Rôle : Contrôles de style pour l'élément VS de comparaison -->
+            <!-- Responsabilité : Personnalisation visuelle du texte VS entre les produits -->
+            <!-- Synchronisation : Variables CSS transmises vers location.html en temps réel -->
+            <!-- Élément VS (Comparaison Produits) -->
+            <div class="css-group">
+                <h3>Élément VS (Comparaison)</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Police VS:</span>
+                        <span class="range-value" id="vsFontSizeValue">2.2rem</span>
+                        <input type="range" id="vsFontSize" min="1.5" max="4" step="0.1" value="2.2">
+                    </div>
+                    <label>Épaisseur Police VS: 
+                        <select id="vsFontWeight">
+                            <option value="700">Bold</option>
+                            <option value="800">Extra-Bold</option>
+                            <option value="900" selected>Black</option>
+                        </select>
+                    </label>
+                    <label>Couleur Texte VS:
+                        <input type="color" id="vsTextColor" data-field="style-vsTextColor" value="#1E293B">
+                    </label>
+                    <label>Police VS:
+                        <select id="vsFontFamily">
+                            <option value="'Playfair Display', serif" selected>Playfair Display (Serif)</option>
+                            <option value="'Inter', sans-serif">Inter (Sans-serif)</option>
+                            <option value="'JetBrains Mono', monospace">JetBrains Mono (Monospace)</option>
+                        </select>
+                    </label>
+                    <label>Style Texte VS:
+                        <select id="vsTextTransform">
+                            <option value="uppercase" selected>MAJUSCULES</option>
+                            <option value="lowercase">minuscules</option>
+                            <option value="capitalize">Première Lettre</option>
+                            <option value="none">Normal</option>
+                        </select>
+                    </label>
+                    <div class="range-control">
+                        <span class="range-label">Espacement Lettres:</span>
+                        <span class="range-value" id="vsLetterSpacingValue">0.15em</span>
+                        <input type="range" id="vsLetterSpacing" min="0" max="0.5" step="0.01" value="0.15">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cards et Benefits -->
+            <div class="css-group">
+                <h3>Cartes et Avantages</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Padding Cartes:</span>
+                        <span class="range-value" id="cardPaddingValue">28px</span>
+                        <input type="range" id="cardPadding" min="16" max="50" value="28">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Border Radius:</span>
+                        <span class="range-value" id="cardBorderRadiusValue">16px</span>
+                        <input type="range" id="cardBorderRadius" min="8" max="30" value="16">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Icônes:</span>
+                        <span class="range-value" id="benefitIconSizeValue">40px</span>
+                        <input type="range" id="benefitIconSize" min="24" max="60" value="40">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Titre Avantage:</span>
+                        <span class="range-value" id="benefitTitleSizeValue">18px</span>
+                        <input type="range" id="benefitTitleSize" min="14" max="26" value="18">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Texte Avantage:</span>
+                        <span class="range-value" id="benefitTextSizeValue">14px</span>
+                        <input type="range" id="benefitTextSize" min="12" max="20" value="14">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cartes de Prix -->
+            <div class="css-group">
+                <h3>Cartes de Prix</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Padding Prix Cards:</span>
+                        <span class="range-value" id="pricingCardPaddingValue">40px</span>
+                        <input type="range" id="pricingCardPadding" min="20" max="60" value="40">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Valeur Prix:</span>
+                        <span class="range-value" id="pricingValueSizeValue">48px</span>
+                        <input type="range" id="pricingValueSize" min="30" max="70" value="48">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Taille Durée:</span>
+                        <span class="range-value" id="pricingDurationSizeValue">18px</span>
+                        <input type="range" id="pricingDurationSize" min="14" max="24" value="18">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Boutons CTA -->
+            <div class="css-group">
+                <h3>Boutons d'Action</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Taille Police CTA:</span>
+                        <span class="range-value" id="ctaFontSizeValue">19px</span>
+                        <input type="range" id="ctaFontSize" min="14" max="26" value="19">
+                    </div>
+                    <label>Épaisseur CTA: 
+                        <select id="ctaFontWeight">
+                            <option value="600">Semi-Bold</option>
+                            <option value="700">Bold</option>
+                            <option value="800">Extra-Bold</option>
+                        </select>
+                    </label>
+                    <div class="range-control">
+                        <span class="range-label">Padding CTA:</span>
+                        <span class="range-value" id="ctaPaddingValue">19px</span>
+                        <input type="range" id="ctaPadding" min="12" max="30" value="19">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Espacement Global -->
+            <div class="css-group">
+                <h3>Espacement Global</h3>
+                <div class="css-controls">
+                    <div class="range-control">
+                        <span class="range-label">Padding Sections:</span>
+                        <span class="range-value" id="sectionPaddingValue">64px</span>
+                        <input type="range" id="sectionPadding" min="32" max="100" value="64">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Largeur Max Container:</span>
+                        <span class="range-value" id="containerMaxWidthValue">1400px</span>
+                        <input type="range" id="containerMaxWidth" min="1000" max="1800" value="1400">
+                    </div>
+                    <div class="range-control">
+                        <span class="range-label">Espacement Grid:</span>
+                        <span class="range-value" id="gridGapValue">32px</span>
+                        <input type="range" id="gridGap" min="16" max="60" value="32">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="css-actions">
+                <button onclick="resetCSS()" class="css-btn reset">
+                    <i class="fas fa-undo"></i> Réinitialiser
+                </button>
+                <button onclick="saveCSS()" class="css-btn save">
+                    <i class="fas fa-save"></i> Sauvegarder
+                </button>
+                <button onclick="importCSS()" class="css-btn import">
+                    <i class="fas fa-upload"></i> Importer
+                </button>
+                <button onclick="exportCSS()" class="css-btn export">
+                    <i class="fas fa-download"></i> Exporter
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteneur principal éditeur LOCATION -->
+    <main class="editor-container">
+        
+        <!-- Section Configuration Header et Métadonnées -->
+        <section class="edit-section">
+            <h2 class="section-title">
+                <i class="fas fa-cog"></i>
+                Configuration Header et Métadonnées
+            </h2>
+            <div class="edit-grid">
+                <!-- Métadonnées de la page -->
+                <div class="edit-field">
+                    <label class="field-label" for="page-title">Titre de la page (title)</label>
+                    <p class="field-description">Titre affiché dans l'onglet du navigateur</p>
+                    <input type="text" id="page-title" class="field-input" data-field="page-title" 
+                           placeholder="Li-CUBE PRO™ - Outil Présentation LOCATION | EDS Québec" 
+                           value="Li-CUBE PRO™ - Outil Présentation LOCATION | EDS Québec">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="page-description">Description SEO (meta description)</label>
+                    <p class="field-description">Description pour les moteurs de recherche et réseaux sociaux</p>
+                    <div contenteditable="true" id="page-description" class="field-input field-textarea" data-field="page-description" 
+                              data-placeholder="Outil de présentation commerciale Li-CUBE PRO™ LOCATION...">Outil de présentation commerciale Li-CUBE PRO™ LOCATION : Arguments de service et tranquillité pour équipes de vente EDS Québec.</div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="nav-title">Titre navigation header</label>
+                    <p class="field-description">Titre affiché dans la barre de navigation (actuellement: 🛡️ SOLUTION ZÉRO RISQUE)</p>
+                    <input type="text" id="nav-title" class="field-input" data-field="nav-title" 
+                           placeholder="🛡️ SOLUTION ZÉRO RISQUE" value="🛡️ SOLUTION ZÉRO RISQUE">
+                </div>
+
+                <!-- Boutons de navigation du header -->
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn1">Bouton navigation 1</label>
+                    <p class="field-description">Premier bouton de navigation (actuellement: Sans Risque)</p>
+                    <input type="text" id="nav-btn1" class="field-input" data-field="nav-btn1" 
+                           placeholder="Sans Risque" value="Sans Risque">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn2">Bouton navigation 2</label>
+                    <p class="field-description">Deuxième bouton de navigation (actuellement: Tarifs)</p>
+                    <input type="text" id="nav-btn2" class="field-input" data-field="nav-btn2" 
+                           placeholder="Tarifs" value="Tarifs">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn3">Bouton navigation 3</label>
+                    <p class="field-description">Troisième bouton de navigation (actuellement: Avantages)</p>
+                    <input type="text" id="nav-btn3" class="field-input" data-field="nav-btn3" 
+                           placeholder="Avantages" value="Avantages">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn4">Bouton navigation 4</label>
+                    <p class="field-description">Quatrième bouton de navigation (actuellement: Louer Maintenant)</p>
+                    <input type="text" id="nav-btn4" class="field-input" data-field="nav-btn4" 
+                           placeholder="Louer Maintenant" value="Louer Maintenant">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="nav-btn5">Bouton navigation 5</label>
+                    <p class="field-description">Cinquième bouton de navigation (actuellement: Voir Achat)</p>
+                    <input type="text" id="nav-btn5" class="field-input" data-field="nav-btn5" 
+                           placeholder="Voir Achat" value="Voir Achat">
+                </div>
+                
+                <div class="edit-field">
+                    <label class="field-label" for="logo-path">Chemin logo entreprise</label>
+                    <p class="field-description">Chemin vers le logo de l'entreprise dans la navigation</p>
+                    <input type="text" id="logo-path" class="field-input" data-field="logo-path" 
+                           placeholder="./images/logo edsquebec.png" value="./images/logo edsquebec.png">
+                </div>
+                
+                
+                <div class="edit-field">
+                    <label class="field-label" for="company-image-path">Chemin image entreprise</label>
+                    <p class="field-description">Chemin vers l'image de l'entreprise</p>
+                    <input type="text" id="company-image-path" class="field-input" data-field="company-image-path" 
+                           placeholder="./images/edsQuebec.png" value="./images/edsQuebec.png">
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section Héro Principal -->
+        <section class="edit-section reorganizable-section" data-section-id="hero" data-section-order="1">
+            <h2 class="section-title">
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-home"></i>
+                        Section Héro Principale
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('hero')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('hero')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="heroSpacerHeight">Espacement (px):</label>
+                            <input type="number" id="heroSpacerHeight" class="section-spacing-input" data-field="heroSpacerHeight"
+                                   value="80" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
+            </h2>
+            <div class="edit-grid">
+                <!-- COLONNE GAUCHE : Texte Héro (comme dans location.html) -->
+                <div style="grid-column: span 2; background: rgba(16, 185, 129, 0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem;">
+                    <h3 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-align-left"></i> Contenu Textuel (Colonne Gauche)
+                    </h3>
+                    
+                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="edit-field">
+                            <label class="field-label" for="hero-title">Titre héro principal</label>
+                            <p class="field-description">Titre principal dans la section héro</p>
+                            <input type="text" id="hero-title" class="field-input" data-field="hero-title" 
+                                   placeholder="Li-CUBE PRO™" value="Li-CUBE PRO™">
+                        </div>
+
+                        <div class="edit-field">
+                            <label class="field-label" for="hero-subtitle">Sous-titre héro</label>
+                            <p class="field-description">Sous-titre accrocheur</p>
+                            <input type="text" id="hero-subtitle" class="field-input" data-field="hero-subtitle" 
+                                   placeholder="LOCATION INTELLIGENTE ZÉRO RISQUE" value="LOCATION INTELLIGENTE ZÉRO RISQUE">
+                        </div>
+                    </div>
+
+                    <div class="edit-field">
+                        <label class="field-label" for="hero-description">Description héro</label>
+                        <p class="field-description">Description détaillée du service de location</p>
+                        <div contenteditable="true" id="hero-description" class="field-input field-textarea" data-field="hero-description" 
+                                  data-placeholder="Pourquoi prendre des risques...">Pourquoi prendre des risques ? Louez votre Li-CUBE PRO™ et laissez EDS gérer tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. Vous payez, vous utilisez, nous nous occupons du reste.</div>
+                    </div>
+
+                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="edit-field">
+                            <label class="field-label" for="monthly-price">Prix mensuel</label>
+                            <p class="field-description">Prix affiché (avec $)</p>
+                            <input type="text" id="monthly-price" class="field-input" data-field="monthly-price" 
+                                   placeholder="150 $" value="150 $">
+                        </div>
+
+                        <div class="edit-field">
+                            <label class="field-label" for="cta-text">Texte bouton</label>
+                            <p class="field-description">Appel à l'action</p>
+                            <input type="text" id="cta-text" class="field-input" data-field="cta-text" 
+                                   placeholder="ARGUMENTS DE CLOSING - 150-200$/MOIS" value="ARGUMENTS DE CLOSING - 150-200$/MOIS">
+                        </div>
+                    </div>
+
+                    <div class="edit-field">
+                        <label class="field-label" for="price-included">Services inclus</label>
+                        <p class="field-description">Liste des services inclus</p>
+                        <div contenteditable="true" id="price-included" class="field-input field-textarea" data-field="price-included" 
+                                  data-placeholder="Maintenance, monitoring, support...">Maintenance, monitoring, support et garantie totale inclus</div>
+                    </div>
+                </div>
+
+                <!-- COLONNE DROITE : Gestion des Images (comme dans location.html) -->
+                <div style="grid-column: span 2; background: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 1.5rem;">
+                    <h3 style="color: var(--accent-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-image"></i> Gestion des Images (Colonne Droite)
+                    </h3>
+                    
+                    <!-- Rôle : Configuration des chemins d'images pour la section héro -->
+                    <!-- Type : input text (chemin de fichier) -->
+                    <!-- Domaine : chemins relatifs vers images (.png, .jpg, .jpeg, .webp, .svg) -->
+                    <!-- Usage : définir les images affichées dans la présentation héro -->
+                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="edit-field">
+                            <label class="field-label" for="product-image-path">Chemin image produit principal</label>
+                            <p class="field-description">Chemin vers l'image du produit principal dans la section héro</p>
+                            <input type="text" id="product-image-path" class="field-input" data-field="product-image-path" 
+                                   placeholder="./images/Li-CUBE PRO.png" value="./images/Li-CUBE PRO.png">
+                        </div>
+
+                        <div class="edit-field">
+                            <label class="field-label" for="competitor-image-path">Chemin image produit concurrent</label>
+                            <p class="field-description">Chemin vers l'image du produit concurrent pour comparaison</p>
+                            <input type="text" id="competitor-image-path" class="field-input" data-field="competitor-image-path" 
+                                   placeholder="./images/concurrent.png" value="./images/concurrent.png">
+                        </div>
+                    </div>
+
+                    <!-- Rôle : Élément visuel VS pour la comparaison -->
+                    <!-- Type : input text (texte court) -->
+                    <!-- Domaine : texte de 1-10 caractères (généralement "VS" ou équivalent) -->
+                    <!-- Usage : séparateur visuel entre les deux produits comparés -->
+                    <div class="edit-field">
+                        <label class="field-label" for="vs-element-text">Texte élément VS</label>
+                        <p class="field-description">Texte affiché entre les deux images (produit vs concurrent)</p>
+                        <input type="text" id="vs-element-text" class="field-input" data-field="vs-element-text" 
+                               placeholder="VS" value="VS" maxlength="10">
+                    </div>
+
+                    <p style="color: var(--text-gray); font-style: italic; margin-top: 1rem; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> Les images seront affichées côte à côte dans la présentation avec l'élément VS au centre
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section Arguments Héro LOCATION -->
+        <section class="edit-section reorganizable-section" data-section-id="hero-arguments" data-section-order="1.5">
+            <h2 class="section-title">
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-shield-alt"></i>
+                        Arguments de Location Principaux
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('hero-arguments')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('hero-arguments')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="hero-title">Titre produit principal</label>
+                    <p class="field-description">Nom du produit pour la version LOCATION</p>
+                    <input type="text" id="hero-title" class="field-input" data-field="hero-title" 
+                           placeholder="Li-CUBE PRO™" value="Li-CUBE PRO™">
+                    <div class="live-preview">
+                        <div class="preview-title">Aperçu location :</div>
+                        <div class="preview-content" id="preview-hero-title">Produit Principal</div>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-subtitle">Accroche location sans risque</label>
+                    <p class="field-description">Message principal axé sur l'absence de risque</p>
+                    <input type="text" id="hero-subtitle" class="field-input" data-field="hero-subtitle" 
+                           placeholder="LOCATION INTELLIGENTE ZÉRO RISQUE" 
+                           value="LOCATION INTELLIGENTE ZÉRO RISQUE">
+                    <div class="live-preview">
+                        <div class="preview-title">Aperçu location :</div>
+                        <div class="preview-content" id="preview-hero-subtitle">LOCATION INTELLIGENTE ZÉRO RISQUE</div>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-description">Description argumentaire de location</label>
+                    <p class="field-description">Paragraphe de location avec arguments zéro risque et service inclus</p>
+                    <div contenteditable="true" id="hero-description" class="field-input field-textarea" data-field="hero-description" 
+                              data-placeholder="Pourquoi prendre des risques...">Pourquoi prendre des risques ? Louez votre Li-CUBE PRO™ et laissez EDS gérer tout ! Performance garantie, maintenance incluse, remplacement immédiat en cas de problème. Vous payez, vous utilisez, nous nous occupons du reste.</div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="monthly-price">Prix mensuel principal</label>
+                    <p class="field-description">Tarif de location mis en avant</p>
+                    <div class="numeric-field">
+                        <input type="text" id="monthly-price" class="field-input numeric-input" data-field="monthly-price" 
+                               placeholder="150 $" value="150 $">
+                        <span class="field-unit">/mois</span>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="price-included">Services inclus dans le prix</label>
+                    <p class="field-description">Ce qui est compris dans le tarif mensuel</p>
+                    <div contenteditable="true" id="price-included" class="field-input field-textarea" data-field="price-included" 
+                              data-placeholder="Maintenance, monitoring, support...">Maintenance, monitoring, support et garantie totale inclus</div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="cta-text">Call-to-action principal</label>
+                    <p class="field-description">Texte du bouton d'action avec prix de location</p>
+                    <input type="text" id="cta-text" class="field-input" data-field="cta-text" 
+                           placeholder="LOUER MAINTENANT - 150$/MOIS" 
+                           value="LOUER MAINTENANT - 150$/MOIS">
+                </div>
+
+                <!-- Arguments de Vente Héro -->
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg1-icon">Icône argument 1</label>
+                    <p class="field-description">Icône pour ZÉRO RISQUE</p>
+                    <input type="text" id="hero-arg1-icon" class="field-input" data-field="hero-arg1-icon" 
+                           placeholder="🛡️" value="🛡️">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg1-title">Titre argument 1</label>
+                    <p class="field-description">Titre principal premier argument</p>
+                    <input type="text" id="hero-arg1-title" class="field-input" data-field="hero-arg1-title" 
+                           placeholder="ZÉRO RISQUE" value="ZÉRO RISQUE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg1-desc">Description argument 1</label>
+                    <p class="field-description">Explication ZÉRO RISQUE</p>
+                    <input type="text" id="hero-arg1-desc" class="field-input" data-field="hero-arg1-desc" 
+                           placeholder="EDS assume 100% des pannes" value="EDS assume 100% des pannes">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg2-icon">Icône argument 2</label>
+                    <p class="field-description">Icône pour BUDGET PRÉVISIBLE</p>
+                    <input type="text" id="hero-arg2-icon" class="field-input" data-field="hero-arg2-icon" 
+                           placeholder="💰" value="💰">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg2-title">Titre argument 2</label>
+                    <p class="field-description">Titre principal deuxième argument</p>
+                    <input type="text" id="hero-arg2-title" class="field-input" data-field="hero-arg2-title" 
+                           placeholder="BUDGET PRÉVISIBLE" value="BUDGET PRÉVISIBLE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg2-desc">Description argument 2</label>
+                    <p class="field-description">Explication BUDGET PRÉVISIBLE</p>
+                    <input type="text" id="hero-arg2-desc" class="field-input" data-field="hero-arg2-desc" 
+                           placeholder="Coût fixe mensuel garanti" value="Coût fixe mensuel garanti">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg3-icon">Icône argument 3</label>
+                    <p class="field-description">Icône pour MAINTENANCE INCLUSE</p>
+                    <input type="text" id="hero-arg3-icon" class="field-input" data-field="hero-arg3-icon" 
+                           placeholder="🔧" value="🔧">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg3-title">Titre argument 3</label>
+                    <p class="field-description">Titre principal troisième argument</p>
+                    <input type="text" id="hero-arg3-title" class="field-input" data-field="hero-arg3-title" 
+                           placeholder="MAINTENANCE INCLUSE" value="MAINTENANCE INCLUSE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg3-desc">Description argument 3</label>
+                    <p class="field-description">Explication MAINTENANCE INCLUSE</p>
+                    <input type="text" id="hero-arg3-desc" class="field-input" data-field="hero-arg3-desc" 
+                           placeholder="Monitoring 24/7 automatique" value="Monitoring 24/7 automatique">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg4-icon">Icône argument 4</label>
+                    <p class="field-description">Icône pour MISE À JOUR CONTINUE</p>
+                    <input type="text" id="hero-arg4-icon" class="field-input" data-field="hero-arg4-icon" 
+                           placeholder="⚡" value="⚡">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg4-title">Titre argument 4</label>
+                    <p class="field-description">Titre principal quatrième argument</p>
+                    <input type="text" id="hero-arg4-title" class="field-input" data-field="hero-arg4-title" 
+                           placeholder="MISE À JOUR CONTINUE" value="MISE À JOUR CONTINUE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="hero-arg4-desc">Description argument 4</label>
+                    <p class="field-description">Explication MISE À JOUR CONTINUE</p>
+                    <input type="text" id="hero-arg4-desc" class="field-input" data-field="hero-arg4-desc" 
+                           placeholder="Dernière technologie toujours" value="Dernière technologie toujours">
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Grille Tarifaire -->
+        <section class="edit-section reorganizable-section" data-section-id="pricing" data-section-order="2">
+            <h2 class="section-title">
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-dollar-sign"></i>
+                        Grille Tarifaire de Location
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('pricing')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('pricing')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="hero-pricing-spacer">Espacement (px):</label>
+                            <input type="number" id="hero-pricing-spacer" class="section-spacing-input" data-field="hero-pricing-spacer"
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="pricing-title">Titre section tarifs</label>
+                    <p class="field-description">Titre accrocheur pour la grille de prix</p>
+                    <input type="text" id="pricing-title" class="field-input" data-field="pricing-title" 
+                           placeholder="TARIFS DE LOCATION TRANSPARENTS" value="TARIFS DE LOCATION TRANSPARENTS">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="pricing-subtitle">Explication tarifs</label>
+                    <p class="field-description">Phrase explicative des avantages tarifaires</p>
+                    <div contenteditable="true" id="pricing-subtitle" class="field-input field-textarea" data-field="pricing-subtitle" 
+                              data-placeholder="Prix tout inclus, sans surprise...">Prix tout inclus, sans surprise. Plus vous louez longtemps, moins vous payez !</div>
+                </div>
+
+                <!-- Grille des 3 offres de location -->
+                <div class="pricing-grid">
+                    <!-- Offre 6 mois -->
+                    <div class="pricing-edit-card">
+                        <div class="edit-field">
+                            <label class="field-label" for="pricing-duration-6m">Titre durée pack 1</label>
+                            <p class="field-description">Titre affiché pour la première offre</p>
+                            <input type="text" id="pricing-duration-6m" class="field-input" data-field="pricing-duration-6m" 
+                                   placeholder="ESSAI 6 MOIS" value="ESSAI 6 MOIS">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="price-6months">Prix 6 mois</label>
+                            <div class="numeric-field">
+                                <input type="text" id="price-6months" class="field-input numeric-input" data-field="price-6months" 
+                                       placeholder="175 $" value="175 $">
+                                <span class="field-unit">/mois</span>
+                            </div>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack6-service1">Service 1 (6 mois)</label>
+                            <input type="text" id="pack6-service1" class="field-input" data-field="pack6-service1" 
+                                   placeholder="Installation gratuite" value="Installation gratuite">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack6-service2">Service 2 (6 mois)</label>
+                            <input type="text" id="pack6-service2" class="field-input" data-field="pack6-service2" 
+                                   placeholder="Maintenance incluse" value="Maintenance incluse">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack6-service3">Service 3 (6 mois)</label>
+                            <input type="text" id="pack6-service3" class="field-input" data-field="pack6-service3" 
+                                   placeholder="Support 8h-17h" value="Support 8h-17h">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack6-service4">Service 4 (6 mois)</label>
+                            <input type="text" id="pack6-service4" class="field-input" data-field="pack6-service4" 
+                                   placeholder="Monitoring de base" value="Monitoring de base">
+                        </div>
+                    </div>
+
+                    <!-- Offre 2 ans (recommandée) -->
+                    <div class="pricing-edit-card featured">
+                        <div class="edit-field">
+                            <label class="field-label" for="pricing-duration-2y">Titre durée pack 2</label>
+                            <p class="field-description">Titre affiché pour l'offre standard (recommandée)</p>
+                            <input type="text" id="pricing-duration-2y" class="field-input" data-field="pricing-duration-2y" 
+                                   placeholder="STANDARD 2 ANS" value="STANDARD 2 ANS">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="price-2years">Prix 2 ans (recommandé)</label>
+                            <div class="numeric-field">
+                                <input type="text" id="price-2years" class="field-input numeric-input" data-field="price-2years" 
+                                       placeholder="150 $" value="150 $">
+                                <span class="field-unit">/mois</span>
+                            </div>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service1">Service 1 (2 ans)</label>
+                            <input type="text" id="pack24-service1" class="field-input" data-field="pack24-service1" 
+                                   placeholder="Installation gratuite" value="Installation gratuite">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service2">Service 2 (2 ans)</label>
+                            <input type="text" id="pack24-service2" class="field-input" data-field="pack24-service2" 
+                                   placeholder="Maintenance incluse" value="Maintenance incluse">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service3">Service 3 (2 ans)</label>
+                            <input type="text" id="pack24-service3" class="field-input" data-field="pack24-service3" 
+                                   placeholder="Support 24/7" value="Support 24/7">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service4">Service 4 (2 ans)</label>
+                            <input type="text" id="pack24-service4" class="field-input" data-field="pack24-service4" 
+                                   placeholder="Monitoring avancé IoT" value="Monitoring avancé IoT">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack24-service5">Service 5 (2 ans)</label>
+                            <input type="text" id="pack24-service5" class="field-input" data-field="pack24-service5" 
+                                   placeholder="Remplacement immédiat" value="Remplacement immédiat">
+                        </div>
+                    </div>
+
+                    <!-- Offre 5 ans -->
+                    <div class="pricing-edit-card">
+                        <div class="edit-field">
+                            <label class="field-label" for="pricing-duration-5y">Titre durée pack 3</label>
+                            <p class="field-description">Titre affiché pour l'offre longue durée</p>
+                            <input type="text" id="pricing-duration-5y" class="field-input" data-field="pricing-duration-5y" 
+                                   placeholder="PREMIUM 5 ANS" value="PREMIUM 5 ANS">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="price-5years">Prix 5 ans</label>
+                            <div class="numeric-field">
+                                <input type="text" id="price-5years" class="field-input numeric-input" data-field="price-5years" 
+                                       placeholder="125 $" value="125 $">
+                                <span class="field-unit">/mois</span>
+                            </div>
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service1">Service 1 (5 ans)</label>
+                            <input type="text" id="pack60-service1" class="field-input" data-field="pack60-service1" 
+                                   placeholder="Installation gratuite" value="Installation gratuite">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service2">Service 2 (5 ans)</label>
+                            <input type="text" id="pack60-service2" class="field-input" data-field="pack60-service2" 
+                                   placeholder="Maintenance incluse" value="Maintenance incluse">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service3">Service 3 (5 ans)</label>
+                            <input type="text" id="pack60-service3" class="field-input" data-field="pack60-service3" 
+                                   placeholder="Support premium 24/7" value="Support premium 24/7">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service4">Service 4 (5 ans)</label>
+                            <input type="text" id="pack60-service4" class="field-input" data-field="pack60-service4" 
+                                   placeholder="Monitoring IA prédictif" value="Monitoring IA prédictif">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service5">Service 5 (5 ans)</label>
+                            <input type="text" id="pack60-service5" class="field-input" data-field="pack60-service5" 
+                                   placeholder="Upgrade technologique inclus" value="Upgrade technologique inclus">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="pack60-service6">Service 6 (5 ans)</label>
+                            <input type="text" id="pack60-service6" class="field-input" data-field="pack60-service6" 
+                                   placeholder="Option d'achat privilégiée" value="Option d'achat privilégiée">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="pricing-note">Note tarifaire</label>
+                    <p class="field-description">Information complémentaire sur les prix</p>
+                    <div contenteditable="true" id="pricing-note" class="field-input field-textarea" data-field="pricing-note" 
+                              data-placeholder="💡 Astuce : Tarifs dégressifs...">💡 Astuce : Tarifs dégressifs pour multiple unités !</div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="volume-discounts">Remises volume</label>
+                    <p class="field-description">Détail des remises selon quantité</p>
+                    <div contenteditable="true" id="volume-discounts" class="field-input field-textarea" data-field="volume-discounts" 
+                              data-placeholder="2-4 unités : -10%...">2-4 unités : -10% | 5-9 unités : -15% | 10+ unités : -20% | 20+ unités : sur devis personnalisé</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section Avantages Location -->
+        <section class="edit-section reorganizable-section" data-section-id="advantages" data-section-order="3">
+            <h2 class="section-title">
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-thumbs-up"></i>
+                        Arguments Avantages Location
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('advantages')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('advantages')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="pricing-advantages-spacer">Espacement (px):</label>
+                            <input type="number" id="pricing-advantages-spacer" class="section-spacing-input" data-field="pricing-advantages-spacer"
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
+            </h2>
+            <div class="edit-grid">
+                <!-- TITRE DE LA SECTION -->
+                <div class="edit-field" style="grid-column: span 2; margin-bottom: 1.5rem;">
+                    <label class="field-label" for="advantages-title">Titre avantages location</label>
+                    <p class="field-description">Question engageante pour les avantages location</p>
+                    <input type="text" id="advantages-title" class="field-input" data-field="advantages-title" 
+                           placeholder="POURQUOI CHOISIR LA LOCATION ?" value="POURQUOI CHOISIR LA LOCATION ?">
+                </div>
+
+                <!-- GRILLE 2x3 DES AVANTAGES (comme dans location.html) -->
+                
+                <!-- LIGNE 1 -->
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🚫</span> Avantage 1 (Position: Haut-Gauche)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv1-title">Titre avantage 1</label>
+                        <input type="text" id="adv1-title" class="field-input" data-field="adv1-title" 
+                               placeholder="ZÉRO INVESTISSEMENT INITIAL" value="ZÉRO INVESTISSEMENT INITIAL">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv1-text">Description avantage 1</label>
+                        <div contenteditable="true" id="adv1-text" class="field-input field-textarea" data-field="adv1-text" 
+                                  data-placeholder="Pas de sortie de cash...">Pas de sortie de cash importante ! Préservez votre trésorerie pour votre cœur de métier. 150 $/mois c'est accessible à toutes les entreprises, même les plus petites. Déductible fiscalement comme charge d'exploitation.</div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🛡️</span> Avantage 2 (Position: Haut-Droite)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv2-title">Titre avantage 2</label>
+                        <input type="text" id="adv2-title" class="field-input" data-field="adv2-title" 
+                               placeholder="RISQUE ZÉRO GARANTI" value="RISQUE ZÉRO GARANTI">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv2-text">Description avantage 2</label>
+                        <div contenteditable="true" id="adv2-text" class="field-input field-textarea" data-field="adv2-text" 
+                                  data-placeholder="Panne ? Nous remplaçons...">Panne ? Nous remplaçons. Obsolescence ? Nous mettons à jour. Performance insuffisante ? Nous optimisons. Vous n'assumez JAMAIS aucun risque technique ou financier. EDS est responsable de TOUT.</div>
+                    </div>
+                </div>
+
+                <!-- LIGNE 2 -->
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📊</span> Avantage 3 (Position: Milieu-Gauche)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv3-title">Titre avantage 3</label>
+                        <input type="text" id="adv3-title" class="field-input" data-field="adv3-title" 
+                               placeholder="MONITORING INTELLIGENT INCLUS" value="MONITORING INTELLIGENT INCLUS">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv3-text">Description avantage 3</label>
+                        <div contenteditable="true" id="adv3-text" class="field-input field-textarea" data-field="adv3-text" 
+                                  data-placeholder="Surveillance 24/7 automatique...">Surveillance 24/7 automatique, alertes prédictives, rapports de performance mensuel. Vous savez toujours où vous en êtes. Optimisation continue de vos opérations grâce aux données IoT en temps réel.</div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>💼</span> Avantage 4 (Position: Milieu-Droite)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv4-title">Titre avantage 4</label>
+                        <input type="text" id="adv4-title" class="field-input" data-field="adv4-title" 
+                               placeholder="BUDGET PRÉVISIBLE" value="BUDGET PRÉVISIBLE">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv4-text">Description avantage 4</label>
+                        <div contenteditable="true" id="adv4-text" class="field-input field-textarea" data-field="adv4-text" 
+                                  data-placeholder="Coût fixe mensuel...">Coût fixe mensuel, aucune surprise, aucun dépassement. Planification financière facilitée, comptabilité simplifiée. Pas de provisions pour maintenance, pas de budget remplacement à prévoir.</div>
+                    </div>
+                </div>
+
+                <!-- LIGNE 3 -->
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🔄</span> Avantage 5 (Position: Bas-Gauche)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv5-title">Titre avantage 5</label>
+                        <input type="text" id="adv5-title" class="field-input" data-field="adv5-title" 
+                               placeholder="ÉVOLUTION TECHNOLOGIQUE" value="ÉVOLUTION TECHNOLOGIQUE">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv5-text">Description avantage 5</label>
+                        <div contenteditable="true" id="adv5-text" class="field-input field-textarea" data-field="adv5-text" 
+                                  data-placeholder="Toujours la dernière version...">Toujours la dernière version ! Mises à jour logicielles automatiques, upgrade matériel inclus après 3 ans. Vous restez à la pointe sans effort ni investissement supplémentaire.</div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--accent-green);">
+                    <h4 style="color: var(--accent-green); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🏢</span> Avantage 6 (Position: Bas-Droite)
+                    </h4>
+                    
+                    <div class="edit-field">
+                        <label class="field-label" for="adv6-title">Titre avantage 6</label>
+                        <input type="text" id="adv6-title" class="field-input" data-field="adv6-title" 
+                               placeholder="FLEXIBILITÉ CONTRACTUELLE" value="FLEXIBILITÉ CONTRACTUELLE">
+                    </div>
+                    <div class="edit-field">
+                        <label class="field-label" for="adv6-text">Description avantage 6</label>
+                        <div contenteditable="true" id="adv6-text" class="field-input field-textarea" data-field="adv6-text" 
+                                  data-placeholder="Contrats adaptés...">Contrats adaptés à vos besoins : court terme pour tests, long terme pour économies. Possibilité d'ajustement du parc, option d'achat privilégiée, résiliation facilitée.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section Comparaison Technique -->
+        <section class="edit-section reorganizable-section" data-section-id="technical" data-section-order="4">
+            <h2 class="section-title">
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-balance-scale"></i>
+                        Comparaison Technique
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('technical')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('technical')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="advantages-comparison-spacer">Espacement (px):</label>
+                            <input type="number" id="advantages-comparison-spacer" class="section-spacing-input" data-field="advantages-comparison-spacer"
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
+            </h2>
+            <div class="edit-grid">
+                <!-- TITRES DE LA SECTION -->
+                <div class="edit-field" style="grid-column: span 2; margin-bottom: 2rem;">
+                    <label class="field-label" for="tech-title">Titre section comparaison</label>
+                    <p class="field-description">Titre accrocheur pour la comparaison technique</p>
+                    <input type="text" id="tech-title" class="field-input" data-field="tech-title" 
+                           placeholder="Li-CUBE PRO™ vs BATTERIES Ni-Cd OBSOLÈTES" value="Li-CUBE PRO™ vs BATTERIES Ni-Cd OBSOLÈTES">
+                </div>
+
+                <div class="edit-field" style="grid-column: span 2; margin-bottom: 3rem;">
+                    <label class="field-label" for="tech-subtitle">Sous-titre comparaison</label>
+                    <p class="field-description">Explication de la supériorité technique</p>
+                    <div contenteditable="true" id="tech-subtitle" class="field-input field-textarea" data-field="tech-subtitle" 
+                              data-placeholder="Comparaison technique objective...">Comparaison technique objective : Pourquoi Li-CUBE PRO™ surclasse totalement les anciennes batteries Ni-Cd</div>
+                </div>
+
+                <!-- EMOJIS TITRES DE COLONNES -->
+                <div style="grid-column: span 2; background: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+                    <h3 style="color: var(--accent-blue); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-smile"></i> Emojis Titres de Colonnes
+                    </h3>
+                    
+                    <!-- Rôle : Configuration des emojis de titres de colonnes -->
+                    <!-- Responsabilité : Personnalisation des symboles visuels des en-têtes -->
+                    <!-- Synchronisation : Modification instantanée dans la page de présentation -->
+                    <div class="edit-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="edit-field">
+                            <label class="field-label" for="weakness-title-emoji">Emoji Titre Concurrent</label>
+                            <p class="field-description">Emoji affiché devant "Batteries Ni-Cd"</p>
+                            <input type="text" id="weakness-title-emoji" class="field-input" data-field="weakness-title-emoji" 
+                                   placeholder="❌" value="❌" maxlength="2" style="font-size: 1.2rem;">
+                        </div>
+                        <div class="edit-field">
+                            <label class="field-label" for="strength-title-emoji">Emoji Titre Principal</label>
+                            <p class="field-description">Emoji affiché devant "Li-CUBE PRO™"</p>
+                            <input type="text" id="strength-title-emoji" class="field-input" data-field="strength-title-emoji" 
+                                   placeholder="✅" value="✅" maxlength="2" style="font-size: 1.2rem;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMPARAISON EN 2 COLONNES (comme dans location.html) -->
+                
+                <!-- FAIBLESSES AVEC MINI-SECTIONS EMOJI -->
+                <div id="weaknesses-container" style="background: rgba(239, 68, 68, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--warning-red);">
+                    <h3 style="color: var(--warning-red); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>❌</span> Batteries Ni-Cd (Obsolètes) - Faiblesses
+                    </h3>
+                    
+                    <!-- Rôle : Organisation des faiblesses avec emojis intégrés -->
+                    <!-- Structure : Mini-section emoji au-dessus de chaque groupe de contenu -->
+                    <!-- Synchronisation : Modification temps réel entre édition et présentation -->
+                    
+                    <!-- Faiblesse 1 : Cadmium Toxique -->
+                    <div class="content-block weakness-block" data-index="1" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;">
+                        <!-- Boutons de contrôle pour cette section -->
+                        <div class="section-controls-individual">
+                            <button class="btn-control btn-add-after" onclick="addWeaknessAfter(1)" title="Ajouter une faiblesse après celle-ci">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn-control btn-remove-this" onclick="removeWeaknessAt(1)" title="Supprimer cette faiblesse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness1-emoji" placeholder="☠️" value="☠️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 1</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness1-title">Titre</label>
+                                <input type="text" id="weakness1-title" class="field-input" data-field="weakness1-title" 
+                                       placeholder="Cadmium Hautement Toxique" value="Cadmium Hautement Toxique">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness1-desc">Description</label>
+                                <div contenteditable="true" id="weakness1-desc" class="field-input field-textarea" data-field="weakness1-desc" 
+                                          data-placeholder="Classé dangereux REACH...">Classé dangereux REACH, recyclage coûteux, manipulation à risque</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 2 : Maintenance Coûteuse -->
+                    <div class="content-block weakness-block" data-index="2" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;">
+                        <!-- Boutons de contrôle pour cette section -->
+                        <div class="section-controls-individual">
+                            <button class="btn-control btn-add-after" onclick="addWeaknessAfter(2)" title="Ajouter une faiblesse après celle-ci">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn-control btn-remove-this" onclick="removeWeaknessAt(2)" title="Supprimer cette faiblesse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness2-emoji" placeholder="🔧" value="🔧" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 2</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness2-title">Titre</label>
+                                <input type="text" id="weakness2-title" class="field-input" data-field="weakness2-title" 
+                                       placeholder="Maintenance Obligatoire Coûteuse" value="Maintenance Obligatoire Coûteuse">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness2-desc">Description</label>
+                                <div contenteditable="true" id="weakness2-desc" class="field-input field-textarea" data-field="weakness2-desc" 
+                                          data-placeholder="Appoint électrolyte, fuites KOH...">Appoint électrolyte, fuites KOH, interventions techniques fréquentes</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 3 : Durée de Vie Limitée -->
+                    <div class="content-block weakness-block" data-index="3" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;">
+                        <!-- Boutons de contrôle pour cette section -->
+                        <div class="section-controls-individual">
+                            <button class="btn-control btn-add-after" onclick="addWeaknessAfter(3)" title="Ajouter une faiblesse après celle-ci">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn-control btn-remove-this" onclick="removeWeaknessAt(3)" title="Supprimer cette faiblesse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness3-emoji" placeholder="⏳" value="⏳" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 3</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness3-title">Titre</label>
+                                <input type="text" id="weakness3-title" class="field-input" data-field="weakness3-title" 
+                                       placeholder="Durée de Vie Limitée" value="Durée de Vie Limitée">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness3-desc">Description</label>
+                                <div contenteditable="true" id="weakness3-desc" class="field-input field-textarea" data-field="weakness3-desc" 
+                                          data-placeholder="2000-3000 cycles seulement...">2000-3000 cycles seulement (5-6 ans) → remplacement fréquent</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 4 : Poids et Encombrement -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness4-emoji" placeholder="🏋️" value="🏋️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 4</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness4-title">Titre</label>
+                                <input type="text" id="weakness4-title" class="field-input" data-field="weakness4-title" 
+                                       placeholder="Poids et Encombrement" value="Poids et Encombrement">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness4-desc">Description</label>
+                                <div contenteditable="true" id="weakness4-desc" class="field-input field-textarea" data-field="weakness4-desc" 
+                                          data-placeholder="80-100 kg, manipulation dangereuse...">80-100 kg, manipulation dangereuse, installation contraignante</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 5 : Charge Lente -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness5-emoji" placeholder="🐌" value="🐌" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 5</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness5-title">Titre</label>
+                                <input type="text" id="weakness5-title" class="field-input" data-field="weakness5-title" 
+                                       placeholder="Charge Lente 8-12h" value="Charge Lente 8-12h">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness5-desc">Description</label>
+                                <div contenteditable="true" id="weakness5-desc" class="field-input field-textarea" data-field="weakness5-desc" 
+                                          data-placeholder="Indisponibilité longue...">Indisponibilité longue, productivité réduite</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 6 : Aucune Connectivité -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness6-emoji" placeholder="📵" value="📵" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 6</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness6-title">Titre</label>
+                                <input type="text" id="weakness6-title" class="field-input" data-field="weakness6-title" 
+                                       placeholder="Aucune Connectivité" value="Aucune Connectivité">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness6-desc">Description</label>
+                                <div contenteditable="true" id="weakness6-desc" class="field-input field-textarea" data-field="weakness6-desc" 
+                                          data-placeholder="Pas de télémétrie...">Pas de télémétrie, aucun suivi à distance, pannes surprises</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 7 : Réglementation Transport -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness7-emoji" placeholder="⚖️" value="⚖️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 7</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness7-title">Titre</label>
+                                <input type="text" id="weakness7-title" class="field-input" data-field="weakness7-title" 
+                                       placeholder="Réglementation Transport Stricte" value="Réglementation Transport Stricte">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness7-desc">Description</label>
+                                <div contenteditable="true" id="weakness7-desc" class="field-input field-textarea" data-field="weakness7-desc" 
+                                          data-placeholder="Classé UN2795 Batteries Wet Alkali...">Classé UN2795 Batteries Wet Alkali, transport coûteux et contraignant</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 8 : Effet Mémoire -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness8-emoji" placeholder="🧠" value="🧠" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 8</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness8-title">Titre</label>
+                                <input type="text" id="weakness8-title" class="field-input" data-field="weakness8-title" 
+                                       placeholder="Effet Mémoire Dégradant" value="Effet Mémoire Dégradant">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness8-desc">Description</label>
+                                <div contenteditable="true" id="weakness8-desc" class="field-input field-textarea" data-field="weakness8-desc" 
+                                          data-placeholder="Perte capacité progressive...">Perte capacité progressive avec cycles partiels, performance décroissante</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 9 : Profondeur Décharge -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness9-emoji" placeholder="📊" value="📊" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 9</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness9-title">Titre</label>
+                                <input type="text" id="weakness9-title" class="field-input" data-field="weakness9-title" 
+                                       placeholder="Profondeur Décharge Limitée" value="Profondeur Décharge Limitée">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness9-desc">Description</label>
+                                <div contenteditable="true" id="weakness9-desc" class="field-input field-textarea" data-field="weakness9-desc" 
+                                          data-placeholder="60% seulement exploitable...">60% seulement exploitable vs 96% Li-CUBE PRO™ → capacité réelle inférieure</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 10 : Location Plus Chère -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness10-emoji" placeholder="💸" value="💸" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 10</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness10-title">Titre</label>
+                                <input type="text" id="weakness10-title" class="field-input" data-field="weakness10-title" 
+                                       placeholder="Location Plus Chère" value="Location Plus Chère">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness10-desc">Description</label>
+                                <div contenteditable="true" id="weakness10-desc" class="field-input field-textarea" data-field="weakness10-desc" 
+                                          data-placeholder="250$/mois vs 150-200$...">250$/mois vs 150-200$ Li-CUBE PRO™ → 25% plus cher sans maintenance incluse</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Faiblesse 11 : Remplacements Fréquents -->
+                    <div class="content-block" style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="weakness11-emoji" placeholder="🔄" value="🔄" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse 11</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness11-title">Titre</label>
+                                <input type="text" id="weakness11-title" class="field-input" data-field="weakness11-title" 
+                                       placeholder="Remplacements Fréquents" value="Remplacements Fréquents">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="weakness11-desc">Description</label>
+                                <div contenteditable="true" id="weakness11-desc" class="field-input field-textarea" data-field="weakness11-desc" 
+                                          data-placeholder="3 remplacements sur 20 ans...">3 remplacements sur 20 ans (4 unités au total) vs 0 pour Li-CUBE PRO™</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BOUTONS GLOBAUX REMPLACÉS PAR BOUTONS INDIVIDUELS SUR CHAQUE SECTION -->
+
+                <!-- AVANTAGES AVEC MINI-SECTIONS EMOJI -->
+                <div id="strengths-container" style="background: rgba(16, 185, 129, 0.08); border-radius: 12px; padding: 1.5rem; border-left: 4px solid var(--success-green);">
+                    <h3 style="color: var(--success-green); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>✅</span> Li-CUBE PRO™ - Avantages
+                    </h3>
+                    
+                    <!-- Rôle : Organisation des avantages avec emojis intégrés -->
+                    <!-- Structure : Mini-section emoji au-dessus de chaque groupe de contenu -->
+                    <!-- Synchronisation : Modification temps réel entre édition et présentation -->
+                    <!-- Avantage 1 : Durée Vie Exceptionnelle -->
+                    <div class="content-block strength-block" data-index="1" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; position: relative;">
+                        <!-- Boutons de contrôle pour cette section -->
+                        <div class="section-controls-individual">
+                            <button class="btn-control btn-add-after" onclick="addStrengthAfter(1)" title="Ajouter un avantage après celui-ci">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="btn-control btn-remove-this" onclick="removeStrengthAt(1)" title="Supprimer cet avantage">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength1-emoji" placeholder="🔋" value="🔋" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 1</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength1-title">Titre</label>
+                                <input type="text" id="strength1-title" class="field-input" data-field="strength1-title" 
+                                       placeholder="Durée Vie Exceptionnelle" value="Durée Vie Exceptionnelle">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength1-desc">Description</label>
+                                <div contenteditable="true" id="strength1-desc" class="field-input field-textarea" data-field="strength1-desc" 
+                                          data-placeholder="≥8000 cycles...">≥8000 cycles (20-25 ans réels) → 4× plus longue que Ni-Cd</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 2 : Zéro Maintenance -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength2-emoji" placeholder="🛡️" value="🛡️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 2</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength2-title">Titre</label>
+                                <input type="text" id="strength2-title" class="field-input" data-field="strength2-title" 
+                                       placeholder="Zéro Maintenance" value="Zéro Maintenance">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength2-desc">Description</label>
+                                <div contenteditable="true" id="strength2-desc" class="field-input field-textarea" data-field="strength2-desc" 
+                                          data-placeholder="Aucun électrolyte...">Aucun électrolyte, aucun effet mémoire, suivi automatisé par BMS</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 3 : Surveillance Temps Réel -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength3-emoji" placeholder="📡" value="📡" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 3</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength3-title">Titre</label>
+                                <input type="text" id="strength3-title" class="field-input" data-field="strength3-title" 
+                                       placeholder="Surveillance Temps Réel" value="Surveillance Temps Réel">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength3-desc">Description</label>
+                                <div contenteditable="true" id="strength3-desc" class="field-input field-textarea" data-field="strength3-desc" 
+                                          data-placeholder="GPS, Bluetooth, Wi-Fi...">GPS, Bluetooth, Wi-Fi, GPRS → maintenance préventive, zéro panne surprise</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 4 : Performance Énergétique -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength4-emoji" placeholder="⚡" value="⚡" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 4</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength4-title">Titre</label>
+                                <input type="text" id="strength4-title" class="field-input" data-field="strength4-title" 
+                                       placeholder="Performance Énergétique" value="Performance Énergétique">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength4-desc">Description</label>
+                                <div contenteditable="true" id="strength4-desc" class="field-input field-textarea" data-field="strength4-desc" 
+                                          data-placeholder="110 Wh/kg (4× plus)...">110 Wh/kg (4× plus), 157 Wh/L (6× plus compact), charge 1-2h</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 5 : Climat Canadien -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength5-emoji" placeholder="🌡️" value="🌡️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 5</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength5-title">Titre</label>
+                                <input type="text" id="strength5-title" class="field-input" data-field="strength5-title" 
+                                       placeholder="Climat Canadien" value="Climat Canadien">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength5-desc">Description</label>
+                                <div contenteditable="true" id="strength5-desc" class="field-input field-textarea" data-field="strength5-desc" 
+                                          data-placeholder="Fonctionnement -40°C à +55°C...">Fonctionnement -40°C à +55°C, BMS intelligent, hivers québécois</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 6 : 100% Écologique -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength6-emoji" placeholder="🍃" value="🍃" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 6</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength6-title">Titre</label>
+                                <input type="text" id="strength6-title" class="field-input" data-field="strength6-title" 
+                                       placeholder="100% Écologique" value="100% Écologique">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength6-desc">Description</label>
+                                <div contenteditable="true" id="strength6-desc" class="field-input field-textarea" data-field="strength6-desc" 
+                                          data-placeholder="Zéro cadmium...">Zéro cadmium, conforme RoHS, recyclable, image environnementale</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 7 : Sécurité BMS Multi-niveau -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength7-emoji" placeholder="🛡️" value="🛡️" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 7</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength7-title">Titre</label>
+                                <input type="text" id="strength7-title" class="field-input" data-field="strength7-title" 
+                                       placeholder="Sécurité BMS Multi-niveau" value="Sécurité BMS Multi-niveau">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength7-desc">Description</label>
+                                <div contenteditable="true" id="strength7-desc" class="field-input field-textarea" data-field="strength7-desc" 
+                                          data-placeholder="Protections OVP, UVP, OCP...">Protections OVP, UVP, OCP, OTP, court-circuit → risques incidents réduits drastiquement</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 8 : Réduction Coûts Opérationnels -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength8-emoji" placeholder="💰" value="💰" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 8</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength8-title">Titre</label>
+                                <input type="text" id="strength8-title" class="field-input" data-field="strength8-title" 
+                                       placeholder="Réduction Coûts Opérationnels" value="Réduction Coûts Opérationnels">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength8-desc">Description</label>
+                                <div contenteditable="true" id="strength8-desc" class="field-input field-textarea" data-field="strength8-desc" 
+                                          data-placeholder="Moins d'interventions...">Moins d'interventions, déplacements équipes réduits, fiabilité accrue</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 9 : Fabrication SAV Québec -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength9-emoji" placeholder="🇨🇦" value="🇨🇦" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 9</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength9-title">Titre</label>
+                                <input type="text" id="strength9-title" class="field-input" data-field="strength9-title" 
+                                       placeholder="Fabrication SAV Québec" value="Fabrication SAV Québec">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength9-desc">Description</label>
+                                <div contenteditable="true" id="strength9-desc" class="field-input field-textarea" data-field="strength9-desc" 
+                                          data-placeholder="Délais réduits, service local...">Délais réduits, service local français, réactivité pièces et support</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 10 : Installation Simplifiée -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength10-emoji" placeholder="📦" value="📦" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 10</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength10-title">Titre</label>
+                                <input type="text" id="strength10-title" class="field-input" data-field="strength10-title" 
+                                       placeholder="Installation Simplifiée" value="Installation Simplifiée">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength10-desc">Description</label>
+                                <div contenteditable="true" id="strength10-desc" class="field-input field-textarea" data-field="strength10-desc" 
+                                          data-placeholder="23 kg vs 80 kg...">23 kg vs 80 kg, boîtier compact acier, manutention sécurisée</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 11 : Profondeur Décharge Optimale -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength11-emoji" placeholder="🔋" value="🔋" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 11</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength11-title">Titre</label>
+                                <input type="text" id="strength11-title" class="field-input" data-field="strength11-title" 
+                                       placeholder="Profondeur Décharge Optimale" value="Profondeur Décharge Optimale">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength11-desc">Description</label>
+                                <div contenteditable="true" id="strength11-desc" class="field-input field-textarea" data-field="strength11-desc" 
+                                          data-placeholder="96% exploitable vs 60% Ni-Cd...">96% exploitable vs 60% Ni-Cd → capacité réelle supérieure</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Avantage 12 : Location Flexible Avantageuse -->
+                    <div class="content-block" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                            <input type="text" class="field-input" data-field="strength12-emoji" placeholder="💵" value="💵" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                            <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage 12</small>
+                        </div>
+                        <div class="content-fields">
+                            <div class="edit-field">
+                                <label class="field-label" for="strength12-title">Titre</label>
+                                <input type="text" id="strength12-title" class="field-input" data-field="strength12-title" 
+                                       placeholder="Location Flexible Avantageuse" value="Location Flexible Avantageuse">
+                            </div>
+                            <div class="edit-field">
+                                <label class="field-label" for="strength12-desc">Description</label>
+                                <div contenteditable="true" id="strength12-desc" class="field-input field-textarea" data-field="strength12-desc" 
+                                          data-placeholder="150-200$/mois vs 250$ Ni-Cd...">150-200$/mois vs 250$ Ni-Cd → plus économique avec maintenance incluse</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- BOUTONS GLOBAUX REMPLACÉS PAR BOUTONS INDIVIDUELS SUR CHAQUE SECTION -->
+                </div>
+
+                <!-- Conclusion comparative -->
+                <div class="edit-field">
+                    <label class="field-label" for="conclusion-emoji">Emoji conclusion comparative</label>
+                    <input type="text" id="conclusion-emoji" class="field-input" data-field="conclusion-emoji" placeholder="🎯" value="🎯" maxlength="2">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="conclusion-title">Titre conclusion comparative</label>
+                    <p class="field-description">Titre de la conclusion finale</p>
+                    <input type="text" id="conclusion-title" class="field-input" data-field="conclusion-title"
+                           placeholder="RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !"
+                           value="RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="conclusion-text">Texte conclusion</label>
+                    <p class="field-description">Explication détaillée de la supériorité économique</p>
+                    <div contenteditable="true" id="conclusion-text" class="field-input field-textarea" data-field="conclusion-text" 
+                              data-placeholder="Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd...">Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.</div>
+                </div>
+
+                <!-- Conclusion technique intermédiaire -->
+                <div class="edit-field">
+                    <label class="field-label" for="tech-conclusion-emoji">Emoji conclusion technique</label>
+                    <input type="text" id="tech-conclusion-emoji" class="field-input" data-field="tech-conclusion-emoji" placeholder="📊" value="📊" maxlength="2">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="tech-conclusion-title">Titre conclusion technique</label>
+                    <p class="field-description">Conclusion dans la section comparaison technique</p>
+                    <input type="text" id="tech-conclusion-title" class="field-input" data-field="tech-conclusion-title"
+                           placeholder="RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !"
+                           value="RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="tech-conclusion-text">Texte conclusion technique</label>
+                    <p class="field-description">Conclusion intermédiaire dans la section technique</p>
+                    <div contenteditable="true" id="tech-conclusion-text" class="field-input field-textarea" data-field="tech-conclusion-text" 
+                              data-placeholder="TCO Location 20 ans..."><strong>TCO Location 20 ans :</strong> Li-CUBE PRO™ 48500$ (200$/mois) vs Ni-Cd 60000$ → <strong>20% d'économies + maintenance incluse !</strong><br>
+<strong>Zéro risque technique</strong> (EDS assume tout), <strong>monitoring 24/7 inclus</strong>, <strong>remplacement immédiat</strong> si panne.<br>
+Location Li-CUBE PRO™ = <strong>La tranquillité absolue</strong> avec technologie de pointe et budget maîtrisé.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Conclusion et Appel à l'Action -->
+        <section class="edit-section reorganizable-section" data-section-id="conclusion-action" data-section-order="6">
+            <h2 class="section-title">
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-flag-checkered"></i>
+                        Conclusion et Appel à l'Action Final
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('conclusion-action')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('conclusion-action')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="contact-conclusionAction-spacer">Espacement (px):</label>
+                            <input type="number" id="contact-conclusionAction-spacer" class="section-spacing-input" data-field="contact-conclusionAction-spacer"
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="final-title">Titre conclusion finale</label>
+                    <p class="field-description">Message final percutant</p>
+                    <input type="text" id="final-title" class="field-input" data-field="final-title" 
+                           placeholder="LE CHOIX EST ÉVIDENT" value="LE CHOIX EST ÉVIDENT">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="final-message">Message conclusion</label>
+                    <p class="field-description">Résumé des bénéfices décisifs</p>
+                    <div contenteditable="true" id="final-message" class="field-input field-textarea" data-field="final-message" 
+                              data-placeholder="Pourquoi risquer avec des technologies obsolètes...">Pourquoi risquer avec des technologies obsolètes ? Li-CUBE PRO™ en location vous offre le meilleur des deux mondes : technologie de pointe + risque zéro. Pendant que vos concurrents subissent pannes et remplacements, vous fonctionnez sereinement.</div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="urgency-message">Message d'urgence</label>
+                    <p class="field-description">Incitation à l'action immédiate</p>
+                    <input type="text" id="urgency-message" class="field-input" data-field="urgency-message" 
+                           placeholder="NE LAISSEZ PAS LA CONCURRENCE PRENDRE L'AVANTAGE !" value="NE LAISSEZ PAS LA CONCURRENCE PRENDRE L'AVANTAGE !">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="cta-final">Appel à l'action final</label>
+                    <p class="field-description">Demande d'action concrète</p>
+                    <div contenteditable="true" id="cta-final" class="field-input field-textarea" data-field="cta-final" 
+                              data-placeholder="Appelez maintenant...">Appelez maintenant 819-323-LOCA ou écrivez à location@edsquebec.com
+Votre devis personnalisé sous 24h, installation sous 48h.
+L'énergie fiable, c'est maintenant ou jamais !</div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="signature">Signature EDS</label>
+                    <p class="field-description">Signature professionnelle finale</p>
+                    <div contenteditable="true" id="signature" class="field-input field-textarea" data-field="signature" 
+                              data-placeholder="EDS Québec - Votre partenaire énergétique...">EDS Québec - Votre partenaire énergétique depuis plus de 25 ans
+Solutions Batteries Lithium Li-CUBE PRO™
+Fabrication et Support 100% Québécois</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Conclusion Comparative -->
+        <section class="edit-section reorganizable-section" data-section-id="conclusion-comparative" data-section-order="7">
+            <h2 class="section-title">
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-trophy"></i>
+                        Conclusion Finale Comparative
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('conclusion-comparative')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('conclusion-comparative')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="conclusionAction-conclusionComparative-spacer">Espacement (px):</label>
+                            <input type="number" id="conclusionAction-conclusionComparative-spacer" class="section-spacing-input" data-field="conclusionAction-conclusionComparative-spacer"
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="conclusion-emoji">Emoji conclusion comparative</label>
+                    <input type="text" id="conclusion-emoji" class="field-input" data-field="conclusion-emoji" placeholder="🎯" value="🎯" maxlength="2">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="conclusion-title">Titre conclusion comparative</label>
+                    <p class="field-description">Titre de la conclusion finale</p>
+                    <input type="text" id="conclusion-title" class="field-input" data-field="conclusion-title" 
+                           placeholder="RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !" 
+                           value="RÉSULTAT : Li-CUBE PRO™ LOCATION = 25% PLUS ÉCONOMIQUE !">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="conclusion-text">Texte conclusion</label>
+                    <p class="field-description">Explication détaillée de la supériorité économique</p>
+                    <div contenteditable="true" id="conclusion-text" class="field-input field-textarea" data-field="conclusion-text" 
+                              data-placeholder="Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd...">Location Li-CUBE PRO™ 150-200$/mois vs Ni-Cd 250$/mois + maintenance = minimum 25% d'économies + performance supérieure + zéro risque technique. Le choix rationnel est évident : Li-CUBE PRO™ domine sur TOUS les critères économiques, techniques et environnementaux.</div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-title">Titre section contact final</label>
+                    <p class="field-description">Titre de la section contact finale</p>
+                    <input type="text" id="contact-title" class="field-input" data-field="contact-title" 
+                           placeholder="CLOSING - ARGUMENTS FINAUX LOCATION" value="CLOSING - ARGUMENTS FINAUX LOCATION">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-subtitle">Sous-titre contact final</label>
+                    <p class="field-description">Message de renforcement final</p>
+                    <div contenteditable="true" id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
+                              data-placeholder="Votre équipe commerciale dispose maintenant...">Votre équipe commerciale dispose maintenant de TOUS les arguments techniques et économiques pour conclure la location Li-CUBE PRO™</div>
+                </div>
+
+                <!-- Boutons d'action finaux -->
+                <div class="edit-field">
+                    <label class="field-label" for="btn-phone-text">Texte bouton téléphone</label>
+                    <p class="field-description">Texte du bouton d'action téléphone</p>
+                    <input type="text" id="btn-phone-text" class="field-input" data-field="btn-phone-text" 
+                           placeholder="CONCLURE LA VENTE" value="CONCLURE LA VENTE">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="btn-email-text">Texte bouton email</label>
+                    <p class="field-description">Texte du bouton d'action email</p>
+                    <input type="text" id="btn-email-text" class="field-input" data-field="btn-email-text" 
+                           placeholder="PRÉPARER CONTRAT" value="PRÉPARER CONTRAT">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="phone-number">Numéro de téléphone</label>
+                    <p class="field-description">Numéro de téléphone pour le bouton d'action</p>
+                    <input type="tel" id="phone-number" class="field-input" data-field="phone-number" 
+                           placeholder="8193235622" value="8193235622">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="email-address">Adresse email</label>
+                    <p class="field-description">Adresse email pour le bouton d'action</p>
+                    <input type="email" id="email-address" class="field-input" data-field="email-address" 
+                           placeholder="location@edsquebec.com" value="location@edsquebec.com">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Statut de synchronisation automatique -->
+    <footer class="editor-actions">
+        <div class="actions-content">
+            <div class="sync-status">
+                <i class="fas fa-sync status-icon" id="syncStatusIcon"></i>
+                <span id="syncStatusText">Synchronisation LOCATION automatique activée</span>
+            </div>
+            <div class="sync-info">
+                <span class="live-indicator">🔴 EN DIRECT</span>
+                <span class="sync-counter" id="syncCounter">0 modifications synchronisées</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 
+        EDS Template Generator Framework - Version 2.0
+        Stratégie : Framework générique pour tout type de produit
+        Fonctionnalité : Interface Admin universelle avec générateur de templates
+    -->
+    
+    <!-- Catalogue des Templates Produits -->
+    <script src="js/templates/product-templates.js"></script>
+    
+    <!-- Core EDS Framework - Version Compatible Navigateur -->
+    <script src="js/core/eds-framework.js"></script>
+    
+    <!-- Système de Synchronisation Instantanée -->
+    <script src="js/instant-sync.js"></script>
+    
+    <!-- Interface d'édition spécialisée -->
+    <script src="js/edit-location.js"></script>
+    
+    <!-- Bouton d'accès à l'interface d'administration -->
+    <div id="eds-admin-trigger" style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        background: linear-gradient(135deg, #10B981, #14B8A6);
+        color: #0F172A;
+        padding: 12px 20px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 14px;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    " onclick="toggleEDSAdmin()">
+        <i class="fas fa-magic"></i>
+        EDS Admin
+    </div>
+    
+    <!-- Vérification : EDS Framework chargé correctement -->
+    <script>
+        // Rôle : Vérification du chargement EDS Template Generator Framework
+        // Type : Health check - Validation rapide des composants
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🔍 Vérification EDS Template Generator Framework...');
+            
+            // Délai court pour laisser le temps au framework et InstantSync de s'initialiser
+            setTimeout(() => {
+                if (window.EDSFramework && window.EDSFramework.admin) {
+                    console.log('✅ EDS Framework chargé avec succès');
+                    console.log('📊 API disponible:', {
+                        framework: !!window.EDSFramework,
+                        templates: !!window.EDSProductTemplates,
+                        admin: !!window.EDSFramework.admin,
+                        instantSync: !!window.instantSync,
+                        detectPageType: !!window.detectPageType
+                    });
+                    
+                    // Statistiques : Templates disponibles
+                    const templates = window.EDSProductTemplates.utils.getAllTemplates();
+                    console.log(`🎨 ${templates.length} templates disponibles:`, 
+                        templates.map(t => `${t.name} (${t.type})`));
+                    
+                    // Vérification : InstantSync spécifique
+                    if (window.instantSync && window.instantSync.isInitialized) {
+                        console.log('🔄 InstantSync opérationnel');
+                        console.log('📊 Statistiques InstantSync:', window.getSyncStats ? window.getSyncStats() : 'Non disponible');
+                    } else if (!window.instantSync) {
+                        console.warn('⚠️ InstantSync non initialisé - vérifiez page-type.js et instant-sync.js');
+                    }
+                } else {
+                    console.error('❌ Échec du chargement EDS Framework');
+                    console.warn('🔍 État window:', {
+                        EDSFramework: !!window.EDSFramework,
+                        EDSProductTemplates: !!window.EDSProductTemplates,
+                        instantSync: !!window.instantSync,
+                        detectPageType: !!window.detectPageType
+                    });
+                }
+            }, 1000); // Délai augmenté pour InstantSync
+        });
+        
+        /**
+         * Fonction de basculement de l'interface EDS Admin
+         * 
+         * Rôle : Ouvrir/fermer l'interface d'administration EDS
+         * Type : Event handler pour le bouton admin
+         */
+        function toggleEDSAdmin() {
+            console.log('🔍 Diagnostic EDS Admin:');
+            console.log('- window.EDSFramework:', !!window.EDSFramework);
+            console.log('- typeof EDSFramework:', typeof window.EDSFramework);
+            console.log('- EDSFramework.admin:', !!window.EDSFramework?.admin);
+            console.log('- EDSFramework complet:', window.EDSFramework);
+
+            if (window.EDSFramework && window.EDSFramework.admin) {
+                console.log('✅ Ouverture interface EDS Admin');
+                window.EDSFramework.admin.toggle();
+            } else {
+                console.error('❌ EDS Framework Admin non disponible');
+                console.error('État détaillé:', {
+                    hasEDSFramework: !!window.EDSFramework,
+                    EDSFrameworkType: typeof window.EDSFramework,
+                    hasAdmin: !!window.EDSFramework?.admin,
+                    adminType: typeof window.EDSFramework?.admin,
+                    windowKeys: Object.keys(window).filter(key => key.includes('EDS'))
+                });
+                alert('Interface EDS Admin non disponible.\n\nVérifiez la console pour plus de détails.');
+            }
+        }
+        
+        // Style : Effet hover pour le bouton admin
+        document.addEventListener('DOMContentLoaded', () => {
+            const adminTrigger = document.getElementById('eds-admin-trigger');
+            if (adminTrigger) {
+                adminTrigger.addEventListener('mouseenter', () => {
+                    adminTrigger.style.transform = 'translateY(-2px)';
+                    adminTrigger.style.boxShadow = '0 6px 20px rgba(16, 185, 129, 0.6)';
+                });
+                
+                adminTrigger.addEventListener('mouseleave', () => {
+                    adminTrigger.style.transform = 'translateY(0)';
+                    adminTrigger.style.boxShadow = '0 4px 15px rgba(16, 185, 129, 0.4)';
+                });
+            }
+        });
+    </script>
+
+        
+        <!-- Section Contact et Location DÉPLACÉE À LA FIN -->
+        <section class="edit-section reorganizable-section" data-section-id="contact" data-section-order="8">
+            <h2 class="section-title">
+                <div class="section-header">
+                    <div class="section-info">
+                        <i class="fas fa-phone"></i>
+                        LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT
+                    </div>
+                    <div class="section-controls">
+                        <button class="section-btn move-up" onclick="moveSectionUp('contact')" title="Monter la section">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="section-btn move-down" onclick="moveSectionDown('contact')" title="Descendre la section">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="section-spacer-control">
+                            <label for="conclusionComparative-contact-spacer">Espacement (px):</label>
+                            <input type="number" id="conclusionComparative-contact-spacer" class="section-spacing-input" data-field="conclusionComparative-contact-spacer"
+                                   value="0" min="0" max="500" step="10">
+                        </div>
+                    </div>
+                </div>
+            </h2>
+            <div class="edit-grid">
+                <div class="edit-field">
+                    <label class="field-label" for="contact-title">Titre section contact</label>
+                    <p class="field-description">Appel à l'action pour louer - Zéro risque, zéro surprise</p>
+                    <input type="text" id="contact-title" class="field-input" data-field="contact-title" 
+                           placeholder="LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT" value="LOUEZ VOTRE Li-CUBE PRO™ MAINTENANT">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="contact-subtitle">Sous-titre contact</label>
+                    <p class="field-description">Message de renforcement pour la location</p>
+                    <div contenteditable="true" id="contact-subtitle" class="field-input field-textarea" data-field="contact-subtitle" 
+                              data-placeholder="Zéro risque, zéro surprise...">Zéro risque, zéro surprise, performance maximale garantie</div>
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="rental-phone">Téléphone division location</label>
+                    <p class="field-description">Numéro spécialisé pour les locations</p>
+                    <input type="tel" id="rental-phone" class="field-input" data-field="rental-phone" 
+                           placeholder="819-323-5622" value="819-323-5622">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="rental-email">Email location</label>
+                    <p class="field-description">Email spécialisé pour les demandes de location</p>
+                    <input type="email" id="rental-email" class="field-input" data-field="rental-email" 
+                           placeholder="location@edsquebec.com" value="location@edsquebec.com">
+                </div>
+
+                <div class="edit-field">
+                    <label class="field-label" for="installation-time">Délai de mise en service</label>
+                    <p class="field-description">Temps entre signature et installation</p>
+                    <input type="text" id="installation-time" class="field-input" data-field="installation-time" 
+                           placeholder="48h" value="48h">
+                </div>
+
+                <div class="edit-field" style="grid-column: span 2;">
+                    <label class="field-label" for="rental-guarantees">Garanties location</label>
+                    <p class="field-description">Liste des garanties offertes en location</p>
+                    <div contenteditable="true" id="rental-guarantees" class="field-input field-textarea" data-field="rental-guarantees" 
+                              data-placeholder="✅ Devis gratuit...">✅ Devis gratuit et sans engagement ✅ Installation par techniciens certifiés EDS ✅ Contrat flexible adapté à vos besoins ✅ Support québécois en français 24/7</div>
+                </div>
+            </div>
+        </section>
+
+        
+    <!-- Systèmes Avancés -->
+    <link rel="stylesheet" href="css/advanced-style-editor.css">
+    <script src="js/advanced-style-editor.js"></script>
+    <script src="js/dynamic-descriptions.js"></script>
+
+    <template id="weakness-template">
+        <div class="content-block">
+            <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 6px;">
+                <input type="text" class="field-input" data-field="weaknessX-emoji" placeholder="❓" value="❓" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(239, 68, 68, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Faiblesse X</small>
+            </div>
+            <div class="content-fields">
+                <div class="edit-field">
+                    <label class="field-label" for="weaknessX-title">Titre</label>
+                    <input type="text" id="weaknessX-title" class="field-input" data-field="weaknessX-title" placeholder="Titre de la faiblesse">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="weaknessX-desc">Description</label>
+                    <div contenteditable="true" id="weaknessX-desc" class="field-input field-textarea" data-field="weaknessX-desc" data-placeholder="Description détaillée"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="strength-template">
+        <div class="content-block">
+            <div class="emoji-header" style="text-align: center; margin-bottom: 0.8rem; padding: 0.5rem; background: rgba(16, 185, 129, 0.1); border-radius: 6px;">
+                <input type="text" class="field-input" data-field="strengthX-emoji" placeholder="⭐" value="⭐" maxlength="2" style="width: 100px; height: 60px; font-size: 2.2rem; text-align: center; border: 2px solid rgba(16, 185, 129, 0.3); background: rgba(255,255,255,0.9); border-radius: 8px;">
+                <small style="display: block; color: var(--text-gray); font-size: 0.8rem; margin-top: 0.2rem;">Avantage X</small>
+            </div>
+            <div class="content-fields">
+                <div class="edit-field">
+                    <label class="field-label" for="strengthX-title">Titre</label>
+                    <input type="text" id="strengthX-title" class="field-input" data-field="strengthX-title" placeholder="Titre de l'avantage">
+                </div>
+                <div class="edit-field">
+                    <label class="field-label" for="strengthX-desc">Description</label>
+                    <div contenteditable="true" id="strengthX-desc" class="field-input field-textarea" data-field="strengthX-desc" data-placeholder="Description détaillée"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    
+    <!-- Script de restauration COMPLÈTE de la page sauvegardée -->
+    <script>
+        // Restauration COMPLÈTE du HTML sauvegardé (simulation écrasement fichier)
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof(Storage) !== "undefined") {
+                const savedCompleteHTML = localStorage.getItem('licubepro-edit-location-html-complete');
+                if (savedCompleteHTML) {
+                    console.log('🔄 Restauration COMPLÈTE de edit-location.html...');
+                    
+                    // Créer un document temporaire pour parser le HTML sauvé
+                    const tempDoc = new DOMParser().parseFromString(savedCompleteHTML, 'text/html');
+                    
+                    // Restaurer TOUT le contenu sauvegardé (corps de la page)
+                    const currentBody = document.body;
+                    const savedBody = tempDoc.body;
+                    
+                    if (currentBody && savedBody && savedBody.innerHTML.trim().length > 0) {
+                        // Sauvegarder les scripts actuels avant remplacement
+                        const currentScripts = Array.from(currentBody.querySelectorAll('script')).map(script => script.outerHTML);
+                        
+                        // Remplacer tout le contenu du body
+                        currentBody.innerHTML = savedBody.innerHTML;
+                        
+                        // Re-ajouter les scripts de fonctionnement si nécessaire
+                        const hasInstantSync = currentBody.querySelector('script[src*="instant-sync"]');
+                        const hasEditLocation = currentBody.querySelector('script[src*="edit-location"]');
+                        
+                        if (!hasInstantSync || !hasEditLocation) {
+                            currentScripts.forEach(scriptHTML => {
+                                if (scriptHTML.includes('instant-sync') || scriptHTML.includes('edit-location')) {
+                                    currentBody.insertAdjacentHTML('beforeend', scriptHTML);
+                                }
+                            });
+                        }
+                        
+                        console.log('✅ Page edit-location.html COMPLÈTEMENT restaurée');
+                        
+                        // Réinitialiser le système de synchronisation après restauration
+                        setTimeout(() => {
+                            if (window.instantSync) {
+                                window.instantSync.setupInstantListeners();
+                                console.log('🔄 Système de synchronisation réinitialisé');
+                            }
+                        }, 500);
+                    }
+                }
+            }
+        });
+    </script>
+    
+    <script src="js/edit-location.js"></script>
+    
+    <script>
+        // Fonction de test pour diagnostiquer la synchronisation
+        function testStyleSync() {
+            console.log('🧪 === TEST DE SYNCHRONISATION DÉMARRÉ ===');
+            
+            // Test 1 : Vérifier qu'InstantSync est initialisé
+            console.log('1️⃣ Vérification InstantSync:', !!window.instantSync);
+            console.log('   - isInitialized:', window.instantSync?.isInitialized);
+            
+            // Test 2 : Changer programmatiquement une couleur
+            const primaryDarkInput = document.getElementById('primaryDark');
+            console.log('2️⃣ Input primaryDark trouvé:', !!primaryDarkInput);
+            console.log('   - data-field:', primaryDarkInput?.dataset.field);
+            console.log('   - valeur actuelle:', primaryDarkInput?.value);
+            
+            if (primaryDarkInput) {
+                // Changer la couleur pour déclencher la synchronisation
+                const newColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+                console.log('3️⃣ Changement couleur vers:', newColor);
+                
+                primaryDarkInput.value = newColor;
+                
+                // Déclencher les événements manuellement
+                primaryDarkInput.dispatchEvent(new Event('input', { bubbles: true }));
+                primaryDarkInput.dispatchEvent(new Event('change', { bubbles: true }));
+                
+                console.log('4️⃣ Événements input et change déclenchés');
+            }
+            
+            // Test 3 : Vérifier le stockage après 1 seconde
+            setTimeout(() => {
+                const stored = localStorage.getItem('licubepro-locationVSOLD-live');
+                console.log('5️⃣ Données localStorage:', stored ? JSON.parse(stored) : 'Aucune');
+                console.log('🧪 === FIN TEST DE SYNCHRONISATION ===');
+            }, 1000);
+        }
+    </script>
+    
+    <!-- Script temporaire de correction automatique des sections -->
+    <script src="fix-sections.js"></script>
+    </body>
+</html>

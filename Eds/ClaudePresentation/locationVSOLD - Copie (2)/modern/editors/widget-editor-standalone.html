@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Éditeur de Widgets Avancé - Li-CUBE PRO™</title>
+    
+    <style>
+        /* Variables CSS Li-CUBE PRO™ */
+        :root {
+            --primary-dark: #0F172A;
+            --secondary-dark: #1E293B;
+            --accent-green: #10B981;
+            --accent-blue: #3B82F6;
+            --success-green: #059669;
+            --warning-orange: #F59E0B;
+            --danger-red: #EF4444;
+            --text-white: #FFFFFF;
+            --text-gray: #94A3B8;
+            --text-muted: #64748B;
+            --border-color: #334155;
+            --bg-primary: #0F172A;
+            --bg-secondary: #1E293B;
+            --bg-tertiary: #334155;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --border-radius: 8px;
+            --border-radius-sm: 4px;
+            --font-system: system-ui, -apple-system, 'Segoe UI', sans-serif;
+            --font-bold: 700;
+            --font-medium: 500;
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-system);
+            background: var(--bg-primary);
+            color: var(--text-white);
+            overflow: hidden;
+        }
+
+        /* Layout Principal */
+        .editor-layout {
+            display: grid;
+            grid-template-areas: 
+                "toolbar toolbar toolbar"
+                "sidebar canvas properties"
+                "footer footer footer";
+            grid-template-columns: 300px 1fr 400px;
+            grid-template-rows: 60px 1fr 30px;
+            height: 100vh;
+        }
+
+        /* Toolbar */
+        .editor-toolbar {
+            grid-area: toolbar;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+
+        .toolbar-title {
+            font-size: var(--text-xl);
+            font-weight: var(--font-bold);
+            color: var(--accent-green);
+        }
+
+        .toolbar-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .toolbar-btn {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-white);
+            cursor: pointer;
+            font-size: var(--text-xs);
+            transition: all 0.3s ease;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        /* Sidebar - Widgets disponibles */
+        .editor-sidebar {
+            grid-area: sidebar;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            font-weight: var(--font-bold);
+            color: var(--accent-green);
+        }
+
+        .widget-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-sm);
+        }
+
+        .widget-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: var(--spacing-xs);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .widget-item:hover {
+            background: var(--accent-green);
+            transform: translateX(2px);
+        }
+
+        .widget-icon {
+            font-size: var(--text-lg);
+        }
+
+        .widget-info {
+            flex: 1;
+        }
+
+        .widget-name {
+            font-weight: var(--font-medium);
+            margin-bottom: 2px;
+        }
+
+        .widget-desc {
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+        }
+
+        /* Canvas - Zone de prévisualisation */
+        .editor-canvas {
+            grid-area: canvas;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .canvas-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-sm);
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            gap: var(--spacing-sm);
+        }
+
+        .canvas-content {
+            flex: 1;
+            padding: var(--spacing-xl);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            overflow-y: auto;
+            background: linear-gradient(45deg, #1a1a1a 25%, transparent 25%), 
+                        linear-gradient(-45deg, #1a1a1a 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #1a1a1a 75%), 
+                        linear-gradient(-45deg, transparent 75%, #1a1a1a 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .widget-preview {
+            background: white;
+            border-radius: var(--border-radius);
+            min-width: 400px;
+            min-height: 300px;
+            padding: var(--spacing-lg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .widget-preview.empty {
+            border: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--text-muted);
+        }
+
+        /* Properties Panel */
+        .editor-properties {
+            grid-area: properties;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .properties-header {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .properties-title {
+            font-weight: var(--font-bold);
+            color: var(--accent-green);
+        }
+
+        .properties-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* Système d'onglets */
+        .tabs-container {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .tabs-header {
+            display: flex;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: var(--spacing-sm);
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            cursor: pointer;
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .tab-content {
+            background: var(--bg-tertiary);
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            padding: var(--spacing-md);
+            min-height: 300px;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        /* Grille de propriétés moderne */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .property-section {
+            background: rgba(30, 41, 59, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+        }
+
+        .property-section-title {
+            color: var(--accent-green);
+            font-weight: var(--font-bold);
+            font-size: var(--text-sm);
+            margin-bottom: var(--spacing-sm);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .property-group {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .property-label {
+            display: block;
+            font-size: var(--text-xs);
+            color: var(--text-gray);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .property-input {
+            width: 100%;
+            padding: var(--spacing-xs);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-white);
+            font-size: var(--text-xs);
+            transition: border-color 0.3s ease;
+        }
+
+        .property-input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+
+        /* Interface CRUD pour éléments */
+        .elements-manager {
+            margin-top: var(--spacing-md);
+        }
+
+        .elements-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .element-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            cursor: grab;
+        }
+
+        .element-item:hover {
+            border-color: var(--accent-green);
+        }
+
+        .element-item.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .element-handle {
+            color: var(--text-muted);
+            cursor: grab;
+        }
+
+        .element-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .element-icon {
+            font-size: var(--text-sm);
+        }
+
+        .element-text {
+            font-size: var(--text-xs);
+            color: var(--text-white);
+        }
+
+        .element-actions {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+
+        .element-action {
+            padding: 2px 4px;
+            background: transparent;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .element-action:hover {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .element-action.danger:hover {
+            background: var(--danger-red);
+        }
+
+        .add-element-btn {
+            width: 100%;
+            padding: var(--spacing-sm);
+            background: var(--accent-green);
+            border: none;
+            border-radius: var(--border-radius-sm);
+            color: white;
+            cursor: pointer;
+            font-size: var(--text-xs);
+            margin-top: var(--spacing-sm);
+            transition: all 0.3s ease;
+        }
+
+        .add-element-btn:hover {
+            background: var(--success-green);
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .editor-footer {
+            grid-area: footer;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-md);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+        }
+
+        /* Range inputs avec affichage valeur */
+        .range-group {
+            display: grid;
+            grid-template-columns: 1fr 50px;
+            gap: var(--spacing-xs);
+            align-items: center;
+        }
+
+        .range-value {
+            background: var(--accent-green);
+            color: white;
+            padding: var(--spacing-xs);
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            font-size: var(--text-xs);
+            font-weight: var(--font-medium);
+        }
+
+        /* States et animations */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-layout">
+        <!-- Toolbar -->
+        <div class="editor-toolbar">
+            <div class="toolbar-left">
+                <div class="toolbar-title">🎨 Éditeur de Widgets Avancé</div>
+                <div class="toolbar-actions">
+                    <button class="toolbar-btn" onclick="editor.newProject()">📄 Nouveau</button>
+                    <button class="toolbar-btn" onclick="editor.saveProject()">💾 Sauvegarder</button>
+                    <button class="toolbar-btn" onclick="editor.exportWidget()">📤 Exporter</button>
+                </div>
+            </div>
+            <div class="toolbar-right">
+                <button class="toolbar-btn" onclick="editor.undo()">↶ Annuler</button>
+                <button class="toolbar-btn" onclick="editor.redo()">↷ Refaire</button>
+                <button class="toolbar-btn" onclick="editor.preview()">👁 Aperçu</button>
+            </div>
+        </div>
+
+        <!-- Sidebar - Widgets disponibles -->
+        <div class="editor-sidebar">
+            <div class="sidebar-header">📦 Widgets Disponibles</div>
+            <div class="widget-list">
+                <div class="widget-item" onclick="editor.selectWidget('logo')">
+                    <div class="widget-icon">🏢</div>
+                    <div class="widget-info">
+                        <div class="widget-name">Logo Widget</div>
+                        <div class="widget-desc">Logo avec image et effets</div>
+                    </div>
+                </div>
+                <div class="widget-item" onclick="editor.selectWidget('hero-title')">
+                    <div class="widget-icon">🎯</div>
+                    <div class="widget-info">
+                        <div class="widget-name">Hero Title</div>
+                        <div class="widget-desc">Titre principal avec sous-titre</div>
+                    </div>
+                </div>
+                <div class="widget-item" onclick="editor.selectWidget('pricing-card')">
+                    <div class="widget-icon">💰</div>
+                    <div class="widget-info">
+                        <div class="widget-name">Pricing Card</div>
+                        <div class="widget-desc">Carte de tarification</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas -->
+        <div class="editor-canvas">
+            <div class="canvas-toolbar">
+                <button class="toolbar-btn" onclick="editor.zoomOut()">🔍-</button>
+                <span id="zoomLevel">100%</span>
+                <button class="toolbar-btn" onclick="editor.zoomIn()">🔍+</button>
+                <button class="toolbar-btn" onclick="editor.resetZoom()">🎯 Reset</button>
+            </div>
+            <div class="canvas-content">
+                <div class="widget-preview empty" id="widgetPreview">
+                    <div>
+                        <div style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;">🎨</div>
+                        <div>Sélectionnez un widget pour commencer l'édition</div>
+                        <div style="font-size: 0.875rem; color: #666; margin-top: 0.5rem;">
+                            Choisissez un widget dans le panneau de gauche
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Properties Panel -->
+        <div class="editor-properties">
+            <div class="properties-header">
+                <div class="properties-title">⚙️ Propriétés</div>
+                <div class="properties-title" id="currentWidgetName">Aucun widget</div>
+            </div>
+            <div class="properties-content" id="propertiesContent">
+                <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                    <div style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;">⚙️</div>
+                    <div>Sélectionnez un widget pour voir ses propriétés</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="editor-footer">
+            <div>Li-CUBE PRO™ - Éditeur de Widgets Avancé v2.0</div>
+            <div id="statusBar">Prêt</div>
+        </div>
+    </div>
+
+    <script>
+        // Éditeur de Widgets Avancé - Li-CUBE PRO™
+        class AdvancedWidgetEditor {
+            constructor() {
+                this.currentWidget = null;
+                this.currentWidgetType = null;
+                this.zoomLevel = 100;
+                this.history = [];
+                this.historyIndex = -1;
+                this.widgetData = {};
+                this.widgetElements = {};
+                
+                this.initializeEditor();
+            }
+
+            initializeEditor() {
+                this.setupWidgetDefinitions();
+                this.updateStatus('Éditeur initialisé et prêt');
+            }
+
+            // Définitions des widgets avec système CRUD étendu
+            setupWidgetDefinitions() {
+                this.widgetDefinitions = {
+                    'logo': {
+                        name: 'Logo Widget',
+                        icon: '🏢',
+                        elements: {
+                            logo: {
+                                type: 'logo',
+                                name: 'Logo Principal',
+                                icon: '🏢',
+                                selector: '.nav-logo',
+                                allowMultiple: false,
+                                properties: [
+                                    { name: 'imagePath', type: 'text', label: 'Chemin Image', defaultValue: './assets/images/logo.png', category: 'Image' },
+                                    { name: 'altText', type: 'text', label: 'Texte alternatif', defaultValue: 'Logo', category: 'Image' },
+                                    { name: 'width', type: 'range', label: 'Largeur (px)', defaultValue: 80, min: 20, max: 200, category: 'Dimensions' },
+                                    { name: 'height', type: 'range', label: 'Hauteur (px)', defaultValue: 80, min: 20, max: 200, category: 'Dimensions' },
+                                    { name: 'borderColor', type: 'color', label: 'Couleur bordure', defaultValue: '#10B981', category: 'Style' },
+                                    { name: 'backgroundColor', type: 'color', label: 'Couleur fond', defaultValue: '#1E293B', category: 'Style' },
+                                    { name: 'borderRadius', type: 'range', label: 'Arrondi (px)', defaultValue: 12, min: 0, max: 50, category: 'Style' }
+                                ]
+                            }
+                        }
+                    },
+                    'hero-title': {
+                        name: 'Hero Title Widget',
+                        icon: '🎯',
+                        elements: {
+                            title: {
+                                type: 'title',
+                                name: 'Titre Principal',
+                                icon: '📝',
+                                selector: '.hero-title',
+                                allowMultiple: true,
+                                properties: [
+                                    { name: 'text', type: 'text', label: 'Texte', defaultValue: 'Titre Principal', category: 'Contenu' },
+                                    { name: 'fontSize', type: 'range', label: 'Taille (px)', defaultValue: 32, min: 16, max: 72, category: 'Typographie' },
+                                    { name: 'color', type: 'color', label: 'Couleur', defaultValue: '#FFFFFF', category: 'Couleurs' },
+                                    { name: 'fontWeight', type: 'select', label: 'Poids', defaultValue: '700', options: [
+                                        { value: '400', label: 'Normal' },
+                                        { value: '500', label: 'Medium' },
+                                        { value: '600', label: 'Semi-bold' },
+                                        { value: '700', label: 'Bold' },
+                                        { value: '900', label: 'Black' }
+                                    ], category: 'Typographie' },
+                                    { name: 'textAlign', type: 'select', label: 'Alignement', defaultValue: 'center', options: [
+                                        { value: 'left', label: 'Gauche' },
+                                        { value: 'center', label: 'Centré' },
+                                        { value: 'right', label: 'Droite' }
+                                    ], category: 'Alignement' }
+                                ]
+                            },
+                            subtitle: {
+                                type: 'subtitle',
+                                name: 'Sous-titre',
+                                icon: '📄',
+                                selector: '.hero-subtitle',
+                                allowMultiple: true,
+                                properties: [
+                                    { name: 'text', type: 'textarea', label: 'Texte', defaultValue: 'Sous-titre descriptif', category: 'Contenu' },
+                                    { name: 'fontSize', type: 'range', label: 'Taille (px)', defaultValue: 18, min: 12, max: 36, category: 'Typographie' },
+                                    { name: 'color', type: 'color', label: 'Couleur', defaultValue: '#94A3B8', category: 'Couleurs' },
+                                    { name: 'textAlign', type: 'select', label: 'Alignement', defaultValue: 'center', options: [
+                                        { value: 'left', label: 'Gauche' },
+                                        { value: 'center', label: 'Centré' },
+                                        { value: 'right', label: 'Droite' }
+                                    ], category: 'Alignement' }
+                                ]
+                            }
+                        }
+                    },
+                    'pricing-card': {
+                        name: 'Pricing Card Widget',
+                        icon: '💰',
+                        elements: {
+                            badge: {
+                                type: 'badge',
+                                name: 'Badge',
+                                icon: '🏷️',
+                                selector: '.pricing-badge',
+                                allowMultiple: false,
+                                properties: [
+                                    { name: 'text', type: 'text', label: 'Texte', defaultValue: 'POPULAIRE', category: 'Contenu' },
+                                    { name: 'backgroundColor', type: 'color', label: 'Couleur fond', defaultValue: '#10B981', category: 'Style' },
+                                    { name: 'textColor', type: 'color', label: 'Couleur texte', defaultValue: '#FFFFFF', category: 'Style' }
+                                ]
+                            },
+                            planName: {
+                                type: 'plan-name',
+                                name: 'Nom du Plan',
+                                icon: '🎯',
+                                selector: 'h3',
+                                allowMultiple: false,
+                                properties: [
+                                    { name: 'text', type: 'text', label: 'Nom', defaultValue: 'PROFESSIONNEL', category: 'Contenu' },
+                                    { name: 'fontSize', type: 'range', label: 'Taille (px)', defaultValue: 24, min: 16, max: 36, category: 'Typographie' },
+                                    { name: 'color', type: 'color', label: 'Couleur', defaultValue: '#10B981', category: 'Couleurs' },
+                                    { name: 'textAlign', type: 'select', label: 'Alignement', defaultValue: 'center', options: [
+                                        { value: 'left', label: 'Gauche' },
+                                        { value: 'center', label: 'Centré' },
+                                        { value: 'right', label: 'Droite' }
+                                    ], category: 'Alignement' }
+                                ]
+                            },
+                            price: {
+                                type: 'price',
+                                name: 'Prix',
+                                icon: '💰',
+                                selector: '.pricing-price',
+                                allowMultiple: false,
+                                properties: [
+                                    { name: 'amount', type: 'number', label: 'Prix', defaultValue: 599, category: 'Contenu' },
+                                    { name: 'currency', type: 'text', label: 'Devise', defaultValue: '$', category: 'Contenu' },
+                                    { name: 'period', type: 'text', label: 'Période', defaultValue: '/mois', category: 'Contenu' },
+                                    { name: 'fontSize', type: 'range', label: 'Taille (px)', defaultValue: 48, min: 24, max: 72, category: 'Typographie' },
+                                    { name: 'color', type: 'color', label: 'Couleur', defaultValue: '#FFFFFF', category: 'Couleurs' },
+                                    { name: 'textAlign', type: 'select', label: 'Alignement', defaultValue: 'center', options: [
+                                        { value: 'left', label: 'Gauche' },
+                                        { value: 'center', label: 'Centré' },
+                                        { value: 'right', label: 'Droite' }
+                                    ], category: 'Alignement' }
+                                ]
+                            },
+                            feature: {
+                                type: 'feature',
+                                name: 'Fonctionnalité',
+                                icon: '✅',
+                                selector: 'ul li',
+                                allowMultiple: true,
+                                properties: [
+                                    { name: 'text', type: 'text', label: 'Texte', defaultValue: '✅ Nouvelle fonctionnalité', category: 'Contenu' },
+                                    { name: 'color', type: 'color', label: 'Couleur', defaultValue: '#CBD5E1', category: 'Style' }
+                                ]
+                            },
+                            cta: {
+                                type: 'cta',
+                                name: 'Bouton CTA',
+                                icon: '🔘',
+                                selector: '.pricing-cta',
+                                allowMultiple: false,
+                                properties: [
+                                    { name: 'text', type: 'text', label: 'Texte', defaultValue: 'Choisir ce Plan', category: 'Contenu' },
+                                    { name: 'backgroundColor', type: 'color', label: 'Couleur fond', defaultValue: '#10B981', category: 'Style' },
+                                    { name: 'textColor', type: 'color', label: 'Couleur texte', defaultValue: '#FFFFFF', category: 'Style' },
+                                    { name: 'borderRadius', type: 'range', label: 'Arrondi (px)', defaultValue: 8, min: 0, max: 25, category: 'Style' },
+                                    { name: 'textAlign', type: 'select', label: 'Alignement', defaultValue: 'center', options: [
+                                        { value: 'left', label: 'Gauche' },
+                                        { value: 'center', label: 'Centré' },
+                                        { value: 'right', label: 'Droite' }
+                                    ], category: 'Alignement' }
+                                ]
+                            }
+                        }
+                    }
+                };
+            }
+
+            // Sélection d'un widget
+            selectWidget(widgetType) {
+                this.currentWidgetType = widgetType;
+                this.widgetElements = this.getDefaultElementsForWidget(widgetType);
+                this.renderWidget();
+                this.renderProperties();
+                this.updateStatus(`Widget ${widgetType} sélectionné`);
+                
+                // Mise à jour du titre
+                document.getElementById('currentWidgetName').textContent = this.widgetDefinitions[widgetType].name;
+            }
+
+            // Obtenir les éléments par défaut pour un widget
+            getDefaultElementsForWidget(widgetType) {
+                const definition = this.widgetDefinitions[widgetType];
+                const elements = {};
+                
+                Object.entries(definition.elements).forEach(([elementType, elementDef]) => {
+                    if (!elementDef.allowMultiple) {
+                        // Élément unique
+                        elements[elementType] = {
+                            id: elementType + '_1',
+                            type: elementType,
+                            properties: this.getDefaultPropertiesForElement(elementDef)
+                        };
+                    } else {
+                        // Éléments multiples - créer un exemplaire par défaut
+                        elements[elementType] = [{
+                            id: elementType + '_1',
+                            type: elementType,
+                            properties: this.getDefaultPropertiesForElement(elementDef)
+                        }];
+                        
+                        // Pour les fonctionnalités, créer 4 par défaut
+                        if (elementType === 'feature') {
+                            const defaultFeatures = [
+                                '✅ Installation gratuite',
+                                '✅ Maintenance incluse', 
+                                '✅ Support 24/7',
+                                '✅ Jusqu\'à 200 équipements'
+                            ];
+                            
+                            elements[elementType] = defaultFeatures.map((text, index) => ({
+                                id: `feature_${index + 1}`,
+                                type: 'feature',
+                                properties: {
+                                    text: text,
+                                    color: '#CBD5E1'
+                                }
+                            }));
+                        }
+                    }
+                });
+                
+                return elements;
+            }
+
+            // Propriétés par défaut pour un élément
+            getDefaultPropertiesForElement(elementDef) {
+                const properties = {};
+                elementDef.properties.forEach(prop => {
+                    properties[prop.name] = prop.defaultValue;
+                });
+                return properties;
+            }
+
+            // Rendu du widget
+            renderWidget() {
+                const preview = document.getElementById('widgetPreview');
+                
+                if (!this.currentWidgetType) {
+                    preview.className = 'widget-preview empty';
+                    preview.innerHTML = `
+                        <div>
+                            <div style="font-size: 3rem; opacity: 0.3; margin-bottom: 1rem;">🎨</div>
+                            <div>Sélectionnez un widget pour commencer l'édition</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                preview.className = 'widget-preview';
+                
+                switch (this.currentWidgetType) {
+                    case 'logo':
+                        this.renderLogoWidget(preview);
+                        break;
+                    case 'hero-title':
+                        this.renderHeroTitleWidget(preview);
+                        break;
+                    case 'pricing-card':
+                        this.renderPricingCardWidget(preview);
+                        break;
+                }
+                
+                this.currentWidget = preview;
+            }
+
+            // Rendu Logo Widget
+            renderLogoWidget(container) {
+                const logoElement = this.widgetElements.logo;
+                const props = logoElement.properties;
+                
+                container.innerHTML = `
+                    <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
+                        <div class="nav-logo" style="
+                            width: ${props.width}px;
+                            height: ${props.height}px;
+                            background-image: url('${props.imagePath}');
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            border: 2px solid ${props.borderColor};
+                            background-color: ${props.backgroundColor};
+                            border-radius: ${props.borderRadius}px;
+                            transition: all 0.3s ease;
+                        " title="${props.altText}"></div>
+                    </div>
+                `;
+            }
+
+            // Rendu Hero Title Widget  
+            renderHeroTitleWidget(container) {
+                let titlesHTML = '';
+                let subtitlesHTML = '';
+                
+                // Générer les titres
+                if (Array.isArray(this.widgetElements.title)) {
+                    this.widgetElements.title.forEach((titleElement, index) => {
+                        const props = titleElement.properties;
+                        titlesHTML += `
+                            <h1 class="hero-title" data-element-id="${titleElement.id}" style="
+                                font-size: ${props.fontSize}px;
+                                color: ${props.color};
+                                font-weight: ${props.fontWeight};
+                                text-align: ${props.textAlign};
+                                margin-bottom: 1rem;
+                                line-height: 1.2;
+                            ">${props.text}</h1>
+                        `;
+                    });
+                } else {
+                    const props = this.widgetElements.title.properties;
+                    titlesHTML = `
+                        <h1 class="hero-title" data-element-id="${this.widgetElements.title.id}" style="
+                            font-size: ${props.fontSize}px;
+                            color: ${props.color};
+                            font-weight: ${props.fontWeight};
+                            text-align: ${props.textAlign};
+                            margin-bottom: 1rem;
+                            line-height: 1.2;
+                        ">${props.text}</h1>
+                    `;
+                }
+                
+                // Générer les sous-titres
+                if (Array.isArray(this.widgetElements.subtitle)) {
+                    this.widgetElements.subtitle.forEach((subtitleElement, index) => {
+                        const props = subtitleElement.properties;
+                        subtitlesHTML += `
+                            <div class="hero-subtitle" data-element-id="${subtitleElement.id}" style="
+                                font-size: ${props.fontSize}px;
+                                color: ${props.color};
+                                text-align: ${props.textAlign};
+                                margin-bottom: 1rem;
+                                line-height: 1.5;
+                            ">${props.text.replace(/\n/g, '<br>')}</div>
+                        `;
+                    });
+                } else {
+                    const props = this.widgetElements.subtitle.properties;
+                    subtitlesHTML = `
+                        <div class="hero-subtitle" data-element-id="${this.widgetElements.subtitle.id}" style="
+                            font-size: ${props.fontSize}px;
+                            color: ${props.color};
+                            text-align: ${props.textAlign};
+                            margin-bottom: 1rem;
+                            line-height: 1.5;
+                        ">${props.text.replace(/\n/g, '<br>')}</div>
+                    `;
+                }
+                
+                container.innerHTML = `
+                    <div class="hero-text-content" style="text-align: center; padding: 2rem;">
+                        ${titlesHTML}
+                        ${subtitlesHTML}
+                    </div>
+                `;
+            }
+
+            // Rendu Pricing Card Widget
+            renderPricingCardWidget(container) {
+                const badge = this.widgetElements.badge;
+                const planName = this.widgetElements.planName;
+                const price = this.widgetElements.price;
+                const cta = this.widgetElements.cta;
+                
+                // Générer les fonctionnalités
+                let featuresHTML = '';
+                if (Array.isArray(this.widgetElements.feature)) {
+                    this.widgetElements.feature.forEach((featureElement) => {
+                        const props = featureElement.properties;
+                        featuresHTML += `
+                            <li data-element-id="${featureElement.id}" style="
+                                margin-bottom: 0.5rem; 
+                                color: ${props.color};
+                            ">${props.text}</li>
+                        `;
+                    });
+                }
+                
+                container.innerHTML = `
+                    <div class="pricing-card" style="
+                        background: rgba(30, 41, 59, 0.8);
+                        border: 2px solid rgba(16, 185, 129, 0.2);
+                        border-radius: 16px;
+                        padding: 2rem;
+                        text-align: center;
+                        max-width: 300px;
+                        margin: 0 auto;
+                        color: white;
+                    ">
+                        <div class="pricing-badge" data-element-id="${badge.id}" style="
+                            background: ${badge.properties.backgroundColor};
+                            color: ${badge.properties.textColor};
+                            padding: 0.5rem 1rem;
+                            border-radius: 8px;
+                            font-size: 0.875rem;
+                            font-weight: bold;
+                            margin-bottom: 1rem;
+                            display: inline-block;
+                        ">${badge.properties.text}</div>
+                        
+                        <h3 data-element-id="${planName.id}" style="
+                            font-size: ${planName.properties.fontSize}px; 
+                            margin-bottom: 1rem; 
+                            color: ${planName.properties.color};
+                            text-align: ${planName.properties.textAlign};
+                        ">${planName.properties.text}</h3>
+                        
+                        <div class="pricing-price" data-element-id="${price.id}" style="
+                            margin-bottom: 2rem;
+                            text-align: ${price.properties.textAlign};
+                        ">
+                            <span style="font-size: 1.5rem; color: #10B981;">${price.properties.currency}</span>
+                            <span style="font-size: ${price.properties.fontSize}px; font-weight: 900; color: ${price.properties.color};">${price.properties.amount}</span>
+                            <span style="color: #94A3B8;">${price.properties.period}</span>
+                        </div>
+                        
+                        <ul style="list-style: none; margin-bottom: 2rem; text-align: left;">
+                            ${featuresHTML}
+                        </ul>
+                        
+                        <button class="pricing-cta" data-element-id="${cta.id}" style="
+                            width: 100%;
+                            padding: 1rem;
+                            background: ${cta.properties.backgroundColor};
+                            color: ${cta.properties.textColor};
+                            border: none;
+                            border-radius: ${cta.properties.borderRadius}px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            text-align: ${cta.properties.textAlign};
+                        ">${cta.properties.text}</button>
+                    </div>
+                `;
+            }
+
+            // Interface des propriétés avec onglets et CRUD
+            renderProperties() {
+                const container = document.getElementById('propertiesContent');
+                
+                if (!this.currentWidgetType) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+                            <div style="font-size: 2rem; margin-bottom: 1rem; opacity: 0.5;">⚙️</div>
+                            <div>Sélectionnez un widget pour voir ses propriétés</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button class="tab-button active" onclick="editor.switchPropertiesTab('properties')">📝 Propriétés</button>
+                            <button class="tab-button" onclick="editor.switchPropertiesTab('elements')">🧩 Éléments</button>
+                            <button class="tab-button" onclick="editor.switchPropertiesTab('organization')">🔀 Organisation</button>
+                        </div>
+                        
+                        <div class="tab-content">
+                            <div id="propertiesTab" class="tab-pane active">
+                                ${this.renderPropertiesContent()}
+                            </div>
+                            
+                            <div id="elementsTab" class="tab-pane">
+                                ${this.renderElementsManager()}
+                            </div>
+                            
+                            <div id="organizationTab" class="tab-pane">
+                                ${this.renderOrganizationInterface()}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Contenu de l'onglet Propriétés
+            renderPropertiesContent() {
+                let html = '<div class="properties-grid">';
+                
+                // Pour chaque type d'élément dans le widget
+                Object.entries(this.widgetDefinitions[this.currentWidgetType].elements).forEach(([elementType, elementDef]) => {
+                    const elements = this.widgetElements[elementType];
+                    
+                    if (Array.isArray(elements)) {
+                        // Éléments multiples
+                        elements.forEach((element, index) => {
+                            html += this.renderElementProperties(element, elementDef, `${elementDef.name} #${index + 1}`);
+                        });
+                    } else {
+                        // Élément unique
+                        html += this.renderElementProperties(elements, elementDef, elementDef.name);
+                    }
+                });
+                
+                html += '</div>';
+                return html;
+            }
+
+            // Rendu des propriétés d'un élément
+            renderElementProperties(element, elementDef, title) {
+                const categories = {};
+                
+                elementDef.properties.forEach(prop => {
+                    const category = prop.category || 'Général';
+                    if (!categories[category]) categories[category] = [];
+                    categories[category].push(prop);
+                });
+                
+                let html = `<div class="property-section">
+                    <div class="property-section-title">${elementDef.icon} ${title}</div>`;
+                
+                Object.entries(categories).forEach(([categoryName, props]) => {
+                    html += `<div style="margin-bottom: 1rem;">
+                        <div style="font-weight: 600; color: var(--accent-green); margin-bottom: 0.5rem; font-size: 0.75rem;">${categoryName}</div>`;
+                    
+                    props.forEach(prop => {
+                        html += this.renderPropertyInput(element, prop);
+                    });
+                    
+                    html += '</div>';
+                });
+                
+                html += '</div>';
+                return html;
+            }
+
+            // Rendu d'un input de propriété
+            renderPropertyInput(element, prop) {
+                const value = element.properties[prop.name];
+                let input = '';
+                
+                switch (prop.type) {
+                    case 'text':
+                        input = `<input type="text" class="property-input" value="${value}" 
+                                onchange="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)" 
+                                oninput="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)">`;
+                        break;
+                    case 'textarea':
+                        input = `<textarea class="property-input" rows="3" 
+                                onchange="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)" 
+                                oninput="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)">${value}</textarea>`;
+                        break;
+                    case 'number':
+                        input = `<input type="number" class="property-input" value="${value}" 
+                                onchange="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)" 
+                                oninput="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)">`;
+                        break;
+                    case 'color':
+                        input = `<input type="color" class="property-input" value="${value}" 
+                                onchange="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)">`;
+                        break;
+                    case 'range':
+                        input = `<div class="range-group">
+                            <input type="range" class="property-input" value="${value}" 
+                                   min="${prop.min}" max="${prop.max}" 
+                                   onchange="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)" 
+                                   oninput="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)">
+                            <span class="range-value">${value}</span>
+                        </div>`;
+                        break;
+                    case 'select':
+                        let options = '';
+                        prop.options.forEach(option => {
+                            options += `<option value="${option.value}" ${option.value === value ? 'selected' : ''}>${option.label}</option>`;
+                        });
+                        input = `<select class="property-input" onchange="editor.updateElementProperty('${element.id}', '${prop.name}', this.value)">${options}</select>`;
+                        break;
+                }
+                
+                return `<div class="property-group">
+                    <label class="property-label">${prop.label}</label>
+                    ${input}
+                </div>`;
+            }
+
+            // Gestionnaire d'éléments (CRUD)
+            renderElementsManager() {
+                let html = '<div class="elements-manager">';
+                
+                Object.entries(this.widgetDefinitions[this.currentWidgetType].elements).forEach(([elementType, elementDef]) => {
+                    html += `<div class="property-section">
+                        <div class="property-section-title">${elementDef.icon} ${elementDef.name} ${elementDef.allowMultiple ? '(Multi)' : ''}</div>
+                        <div class="elements-list" id="elements-${elementType}">`;
+                    
+                    const elements = this.widgetElements[elementType];
+                    
+                    if (Array.isArray(elements)) {
+                        elements.forEach((element, index) => {
+                            html += this.renderElementItem(element, elementDef, index);
+                        });
+                    } else {
+                        html += this.renderElementItem(elements, elementDef, 0);
+                    }
+                    
+                    html += '</div>';
+                    
+                    if (elementDef.allowMultiple) {
+                        html += `<button class="add-element-btn" onclick="editor.addElement('${elementType}')">
+                            ➕ Ajouter ${elementDef.name}
+                        </button>`;
+                    }
+                    
+                    html += '</div>';
+                });
+                
+                html += '</div>';
+                return html;
+            }
+
+            // Élément individuel dans le gestionnaire
+            renderElementItem(element, elementDef, index) {
+                const isMultiple = Array.isArray(this.widgetElements[element.type]);
+                const displayText = element.properties.text || element.properties.amount || 'Élément';
+                
+                return `<div class="element-item" data-element-id="${element.id}" draggable="true">
+                    <div class="element-handle">⋮⋮</div>
+                    <div class="element-content">
+                        <div class="element-icon">${elementDef.icon}</div>
+                        <div class="element-text">${displayText}</div>
+                    </div>
+                    <div class="element-actions">
+                        ${isMultiple ? `<button class="element-action" onclick="editor.moveElement('${element.type}', '${element.id}', 'up')" title="Déplacer vers le haut">⬆️</button>` : ''}
+                        ${isMultiple ? `<button class="element-action" onclick="editor.moveElement('${element.type}', '${element.id}', 'down')" title="Déplacer vers le bas">⬇️</button>` : ''}
+                        ${isMultiple ? `<button class="element-action" onclick="editor.duplicateElement('${element.type}', '${element.id}')">📋</button>` : ''}
+                        ${isMultiple ? `<button class="element-action danger" onclick="editor.deleteElement('${element.type}', '${element.id}')">🗑️</button>` : ''}
+                        <button class="element-action" onclick="editor.editElement('${element.id}')">✏️</button>
+                    </div>
+                </div>`;
+            }
+
+            // Interface d'organisation avancée (gestion multi-éléments)
+            // Rôle     : Fournit une vue d'ensemble complète pour gérer tous les éléments
+            // Type     : string (HTML interface)
+            // Action   : Génère l'interface complète de gestion des éléments multiples
+            renderOrganizationInterface() {
+                // Rôle     : Statistiques des éléments présents
+                // Type     : object {totalElements, byType}
+                // Action   : Calcule le nombre total et par type d'élément
+                const stats = this.calculateElementStats();
+                
+                return `
+                    <div class="organization-header" style="text-align: center; margin-bottom: 1rem;">
+                        <div style="color: var(--accent-green); font-weight: bold; margin-bottom: 0.5rem;">
+                            🔀 Gestion Avancée Multi-Éléments
+                        </div>
+                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                            ${stats.totalElements} éléments • ${Object.keys(stats.byType).length} types différents
+                        </div>
+                        <div class="stats-bar" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
+                            ${Object.entries(stats.byType).map(([type, count]) => 
+                                `<span class="stat-item" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; background: var(--secondary-dark); border-radius: 0.3rem;">
+                                    ${this.getElementTypeIcon(type)} ${count}
+                                </span>`
+                            ).join('')}
+                        </div>
+                    </div>
+
+                    <div class="organization-tools" style="margin-bottom: 1rem;">
+                        <div class="tool-row" style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 0.5rem;">
+                            <button class="toolbar-btn" onclick="editor.addMultipleElements()" title="Ajouter plusieurs éléments">
+                                ➕ Ajout Multiple
+                            </button>
+                            <button class="toolbar-btn" onclick="editor.duplicateAllElements()" title="Dupliquer tous les éléments">
+                                📋 Dupliquer Tout
+                            </button>
+                            <button class="toolbar-btn" onclick="editor.resetElementsOrder()" title="Réinitialiser l'ordre">
+                                🔄 Réorganiser
+                            </button>
+                        </div>
+                        <div class="tool-row" style="display: flex; gap: 0.5rem; justify-content: center;">
+                            <button class="toolbar-btn" onclick="editor.toggleElementsVisibility()" title="Masquer/Afficher éléments">
+                                👁️ Visibilité
+                            </button>
+                            <button class="toolbar-btn danger" onclick="editor.clearAllElements()" title="Supprimer tous les éléments">
+                                🗑️ Vider Tout
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="organizationElements">
+                        ${this.renderOrganizationElements()}
+                    </div>
+                    
+                    <div class="organization-footer" style="text-align: center; margin-top: 1rem; font-size: 0.7rem; color: var(--text-muted);">
+                        💡 Utilisez les boutons ⬆️ ⬇️ pour réorganiser • 📋 pour dupliquer • 🗑️ pour supprimer
+                    </div>
+                `;
+            }
+
+            renderOrganizationElements() {
+                // Implémentation de l'organisation des éléments
+                return '<div style="text-align: center; padding: 2rem; color: var(--text-muted);">Fonctionnalité d\'organisation en développement</div>';
+            }
+
+            // === MÉTHODES CRUD ===
+
+            // Ajouter un élément
+            addElement(elementType) {
+                const elementDef = this.widgetDefinitions[this.currentWidgetType].elements[elementType];
+                const elements = this.widgetElements[elementType];
+                
+                if (!Array.isArray(elements)) {
+                    this.updateStatus('Impossible d\'ajouter : élément non multiple');
+                    return;
+                }
+                
+                const newId = `${elementType}_${Date.now()}`;
+                const newElement = {
+                    id: newId,
+                    type: elementType,
+                    properties: this.getDefaultPropertiesForElement(elementDef)
+                };
+                
+                elements.push(newElement);
+                this.renderWidget();
+                this.renderProperties();
+                this.updateStatus(`Élément ${elementDef.name} ajouté`);
+            }
+
+            // Dupliquer un élément
+            duplicateElement(elementType, elementId) {
+                const elements = this.widgetElements[elementType];
+                if (!Array.isArray(elements)) return;
+                
+                const elementIndex = elements.findIndex(el => el.id === elementId);
+                if (elementIndex === -1) return;
+                
+                const originalElement = elements[elementIndex];
+                const newId = `${elementType}_${Date.now()}`;
+                const duplicatedElement = {
+                    id: newId,
+                    type: elementType,
+                    properties: { ...originalElement.properties }
+                };
+                
+                elements.splice(elementIndex + 1, 0, duplicatedElement);
+                this.renderWidget();
+                this.renderProperties();
+                this.updateStatus(`Élément dupliqué`);
+            }
+
+            // Supprimer un élément
+            deleteElement(elementType, elementId) {
+                const elements = this.widgetElements[elementType];
+                if (!Array.isArray(elements) || elements.length <= 1) {
+                    this.updateStatus('Impossible de supprimer : au moins un élément requis');
+                    return;
+                }
+                
+                const elementIndex = elements.findIndex(el => el.id === elementId);
+                if (elementIndex === -1) return;
+                
+                elements.splice(elementIndex, 1);
+                this.renderWidget();
+                this.renderProperties();
+                this.updateStatus(`Élément supprimé`);
+            }
+
+            // Méthode : Déplacer un élément (haut/bas dans la liste)
+            // Rôle     : Change l'ordre d'affichage des éléments multiples
+            // Paramètres : elementType (string), elementId (string), direction ('up'|'down')
+            // Action   : Réorganise les éléments dans le DOM et met à jour les données
+            moveElement(elementType, elementId, direction) {
+                console.log(`🔄 Déplacement ${elementType} ${elementId} vers ${direction}`);
+                
+                // Rôle     : Récupération du tableau d'éléments de même type
+                // Type     : Array d'objets element
+                // Action   : Trouve la liste des éléments à réorganiser
+                const elements = this.widgetElements[elementType];
+                if (!Array.isArray(elements) || elements.length <= 1) {
+                    this.updateStatus('Déplacement impossible : un seul élément présent');
+                    return;
+                }
+
+                // Rôle     : Index actuel de l'élément dans la liste
+                // Type     : number (position dans le tableau)
+                // Domaine  : 0 ≤ currentIndex < elements.length
+                const currentIndex = elements.findIndex(el => el.id === elementId);
+                if (currentIndex === -1) {
+                    this.updateStatus('Élément introuvable pour déplacement');
+                    return;
+                }
+
+                let targetIndex;
+
+                // Rôle     : Calcul de l'index de destination
+                // Type     : number (nouvelle position)
+                // Action   : Détermine où déplacer l'élément selon la direction
+                if (direction === 'up') {
+                    targetIndex = Math.max(0, currentIndex - 1);
+                } else if (direction === 'down') {
+                    targetIndex = Math.min(elements.length - 1, currentIndex + 1);
+                } else {
+                    this.updateStatus('Direction invalide pour déplacement');
+                    return;
+                }
+
+                // Rôle     : Vérification si déplacement nécessaire
+                // Type     : boolean
+                // Action   : Évite les opérations inutiles si position identique
+                if (currentIndex === targetIndex) {
+                    this.updateStatus('Élément déjà à la position demandée');
+                    return;
+                }
+
+                // Rôle     : Échange des éléments dans le tableau
+                // Type     : void (manipulation array)
+                // Action   : Intervertit les positions dans la liste des éléments
+                const elementToMove = elements[currentIndex];
+                elements.splice(currentIndex, 1);
+                elements.splice(targetIndex, 0, elementToMove);
+
+                // Rôle     : Mise à jour de l'affichage
+                // Type     : void (rendu)
+                // Action   : Actualise le widget et l'interface pour refléter le nouvel ordre
+                this.renderWidget();
+                this.renderProperties();
+                
+                // Rôle     : Message de confirmation
+                // Type     : string (feedback utilisateur)
+                // Action   : Indique le succès de l'opération
+                const directionText = direction === 'up' ? 'vers le haut' : 'vers le bas';
+                this.updateStatus(`Élément déplacé ${directionText} avec succès`);
+                
+                console.log(`✅ Élément ${elementId} déplacé avec succès ${direction}`);
+            }
+
+            // Modifier les propriétés d'un élément
+            updateElementProperty(elementId, propertyName, value) {
+                let found = false;
+                
+                Object.values(this.widgetElements).forEach(elements => {
+                    if (Array.isArray(elements)) {
+                        elements.forEach(element => {
+                            if (element.id === elementId) {
+                                element.properties[propertyName] = value;
+                                found = true;
+                            }
+                        });
+                    } else {
+                        if (elements.id === elementId) {
+                            elements.properties[propertyName] = value;
+                            found = true;
+                        }
+                    }
+                });
+                
+                if (found) {
+                    this.renderWidget();
+                    // Mettre à jour l'affichage de la valeur pour les ranges
+                    const rangeValue = document.querySelector(`.range-value`);
+                    if (rangeValue && propertyName.includes('Size') || propertyName === 'width' || propertyName === 'height') {
+                        rangeValue.textContent = value;
+                    }
+                }
+            }
+
+            // === MÉTHODES D'INTERFACE ===
+
+            // Changer d'onglet dans les propriétés
+            switchPropertiesTab(tabName) {
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+                
+                document.querySelector(`button[onclick="editor.switchPropertiesTab('${tabName}')"]`).classList.add('active');
+                document.getElementById(`${tabName}Tab`).classList.add('active');
+            }
+
+            // === MÉTHODES D'ÉDITION ===
+
+            // Zoom
+            zoomIn() {
+                this.zoomLevel = Math.min(this.zoomLevel + 25, 200);
+                this.updateZoom();
+            }
+
+            zoomOut() {
+                this.zoomLevel = Math.max(this.zoomLevel - 25, 25);
+                this.updateZoom();
+            }
+
+            resetZoom() {
+                this.zoomLevel = 100;
+                this.updateZoom();
+            }
+
+            updateZoom() {
+                document.getElementById('zoomLevel').textContent = `${this.zoomLevel}%`;
+                const preview = document.getElementById('widgetPreview');
+                preview.style.transform = `scale(${this.zoomLevel / 100})`;
+                preview.style.transformOrigin = 'center top';
+            }
+
+            // === MÉTHODES UTILITAIRES ===
+
+            updateStatus(message) {
+                document.getElementById('statusBar').textContent = message;
+                console.log(`[Widget Editor] ${message}`);
+            }
+
+            // Méthodes de sauvegarde/export (à implémenter)
+            newProject() {
+                if (confirm('Créer un nouveau projet ? Les modifications non sauvegardées seront perdues.')) {
+                    this.currentWidget = null;
+                    this.currentWidgetType = null;
+                    this.widgetElements = {};
+                    this.renderWidget();
+                    this.renderProperties();
+                    this.updateStatus('Nouveau projet créé');
+                }
+            }
+
+            saveProject() {
+                const projectData = {
+                    widgetType: this.currentWidgetType,
+                    elements: this.widgetElements,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Sauvegarder dans localStorage pour cette démo
+                localStorage.setItem('widget_editor_project', JSON.stringify(projectData));
+                this.updateStatus('Projet sauvegardé');
+            }
+
+            exportWidget() {
+                if (!this.currentWidget) {
+                    this.updateStatus('Aucun widget à exporter');
+                    return;
+                }
+                
+                const exportData = {
+                    html: this.currentWidget.innerHTML,
+                    widgetType: this.currentWidgetType,
+                    elements: this.widgetElements
+                };
+                
+                const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `widget_${this.currentWidgetType}_${Date.now()}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                this.updateStatus('Widget exporté');
+            }
+
+            undo() {
+                this.updateStatus('Annuler (à implémenter)');
+            }
+
+            redo() {
+                this.updateStatus('Refaire (à implémenter)');
+            }
+
+            preview() {
+                this.updateStatus('Aperçu (à implémenter)');
+            }
+
+            // ===============================================
+            // MÉTHODES DE GESTION MULTI-ÉLÉMENTS AVANCÉES
+            // ===============================================
+
+            // Méthode : Calcul des statistiques des éléments
+            // Rôle     : Comptabilise les éléments par type pour l'interface d'organisation
+            // Type     : object {totalElements, byType}
+            // Action   : Analyse la répartition des éléments dans le widget actuel
+            calculateElementStats() {
+                const stats = {
+                    totalElements: 0,
+                    byType: {}
+                };
+
+                if (!this.widgetElements) return stats;
+
+                // Rôle     : Parcours de tous les types d'éléments
+                // Type     : void (comptage)
+                // Action   : Comptabilise chaque type et calcule le total
+                Object.entries(this.widgetElements).forEach(([type, elements]) => {
+                    const count = Array.isArray(elements) ? elements.length : 1;
+                    stats.byType[type] = count;
+                    stats.totalElements += count;
+                });
+
+                return stats;
+            }
+
+            // Méthode : Récupération d'icône par type d'élément
+            // Rôle     : Fournit l'icône emoji correspondant au type d'élément
+            // Paramètres : type (string) - le type d'élément (title, subtitle, feature, etc.)
+            // Retour   : string (emoji)
+            getElementTypeIcon(type) {
+                // Rôle     : Mapping des types vers leurs icônes
+                // Type     : object (dictionnaire type->icône)
+                const typeIcons = {
+                    'title': '📝',
+                    'subtitle': '📄',
+                    'feature': '✨',
+                    'logo': '🏢',
+                    'badge': '🏷️',
+                    'planName': '💼',
+                    'price': '💰',
+                    'cta': '🔘'
+                };
+                
+                return typeIcons[type] || '📦';
+            }
+
+            // Méthode : Ajout de plusieurs éléments en une fois
+            // Rôle     : Interface pour ajouter rapidement plusieurs éléments
+            // Action   : Ouvre une boîte de dialogue pour sélection multiple
+            addMultipleElements() {
+                if (!this.currentWidget) {
+                    this.updateStatus('Aucun widget sélectionné');
+                    return;
+                }
+
+                // Rôle     : Types d'éléments pouvant être multiples
+                // Type     : Array de strings
+                // Action   : Filtre les éléments du widget actuel qui permettent la multiplicité
+                const multipleTypes = Object.entries(this.widgetDefinitions[this.currentWidgetType].elements)
+                    .filter(([key, def]) => def.allowMultiple)
+                    .map(([key, def]) => ({ type: key, name: def.name, icon: def.icon }));
+
+                if (multipleTypes.length === 0) {
+                    this.updateStatus('Aucun élément multiple disponible pour ce widget');
+                    return;
+                }
+
+                // Rôle     : Interface de sélection multiple
+                // Type     : string (HTML prompt)
+                // Action   : Génère une liste de checkboxes pour sélection
+                const checkboxList = multipleTypes.map(item => 
+                    `<label style="display: block; margin: 0.5rem 0;">
+                        <input type="checkbox" value="${item.type}" style="margin-right: 0.5rem;">
+                        ${item.icon} ${item.name}
+                    </label>`
+                ).join('');
+
+                // Rôle     : Boîte de dialogue personnalisée
+                // Type     : boolean (confirmation)
+                // Action   : Affiche les options et traite la sélection
+                const dialog = document.createElement('div');
+                dialog.innerHTML = `
+                    <div style="background: var(--bg-primary); border: 2px solid var(--accent-green); padding: 1rem; border-radius: 0.5rem; max-width: 400px;">
+                        <h3 style="color: var(--accent-green); margin-top: 0;">➕ Ajout Multiple d'Éléments</h3>
+                        <div style="margin: 1rem 0;">
+                            ${checkboxList}
+                        </div>
+                        <div style="text-align: right; margin-top: 1rem;">
+                            <button onclick="this.parentElement.parentElement.remove()" style="margin-right: 0.5rem;">Annuler</button>
+                            <button onclick="editor.processMultipleAddition()" style="background: var(--accent-green); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.3rem;">Ajouter</button>
+                        </div>
+                    </div>
+                `;
+                
+                dialog.style.position = 'fixed';
+                dialog.style.top = '50%';
+                dialog.style.left = '50%';
+                dialog.style.transform = 'translate(-50%, -50%)';
+                dialog.style.zIndex = '10000';
+                dialog.style.background = 'rgba(0,0,0,0.8)';
+                dialog.style.width = '100%';
+                dialog.style.height = '100%';
+                dialog.style.display = 'flex';
+                dialog.style.alignItems = 'center';
+                dialog.style.justifyContent = 'center';
+                
+                document.body.appendChild(dialog);
+                this.multiAddDialog = dialog;
+            }
+
+            // Méthode : Traitement de l'ajout multiple
+            // Rôle     : Ajoute les éléments sélectionnés dans la boîte de dialogue
+            // Action   : Lit les checkboxes cochées et crée les éléments correspondants
+            processMultipleAddition() {
+                if (!this.multiAddDialog) return;
+
+                // Rôle     : Récupération des sélections
+                // Type     : Array de strings (types sélectionnés)
+                const selectedTypes = Array.from(this.multiAddDialog.querySelectorAll('input[type="checkbox"]:checked'))
+                    .map(cb => cb.value);
+
+                // Rôle     : Ajout de chaque type sélectionné
+                // Type     : void (création d'éléments)
+                selectedTypes.forEach(type => {
+                    this.addElement(type);
+                });
+
+                // Rôle     : Fermeture et nettoyage
+                // Type     : void (cleanup UI)
+                this.multiAddDialog.remove();
+                this.multiAddDialog = null;
+
+                if (selectedTypes.length > 0) {
+                    this.updateStatus(`${selectedTypes.length} nouveaux éléments ajoutés`);
+                } else {
+                    this.updateStatus('Aucun élément sélectionné');
+                }
+            }
+
+            // Méthode : Duplication de tous les éléments multiples
+            // Rôle     : Crée une copie de chaque élément qui permet la multiplicité
+            // Action   : Parcourt tous les éléments et les duplique si possible
+            duplicateAllElements() {
+                if (!this.currentWidget) {
+                    this.updateStatus('Aucun widget sélectionné');
+                    return;
+                }
+
+                let duplicatedCount = 0;
+
+                // Rôle     : Parcours de tous les types d'éléments
+                // Type     : void (duplication)
+                // Action   : Duplique chaque élément s'il permet la multiplicité
+                Object.entries(this.widgetElements).forEach(([type, elements]) => {
+                    const elementDef = this.widgetDefinitions[this.currentWidgetType].elements[type];
+                    
+                    if (elementDef && elementDef.allowMultiple) {
+                        if (Array.isArray(elements)) {
+                            // Dupliquer le dernier élément de chaque type
+                            const lastElement = elements[elements.length - 1];
+                            if (lastElement) {
+                                this.duplicateElement(type, lastElement.id);
+                                duplicatedCount++;
+                            }
+                        }
+                    }
+                });
+
+                if (duplicatedCount > 0) {
+                    this.updateStatus(`${duplicatedCount} éléments dupliqués`);
+                } else {
+                    this.updateStatus('Aucun élément à dupliquer');
+                }
+            }
+
+            // Méthode : Basculer la visibilité des éléments
+            // Rôle     : Cache/affiche temporairement certains types d'éléments
+            // Action   : Toggle la propriété CSS visibility pour prévisualisation
+            toggleElementsVisibility() {
+                if (!this.currentWidget || !this.currentWidget.instance) {
+                    this.updateStatus('Aucun widget sélectionné');
+                    return;
+                }
+
+                // Rôle     : État de visibilité global
+                // Type     : boolean (toggle state)
+                // Action   : Détermine si les éléments sont actuellement cachés
+                this.elementsHidden = !this.elementsHidden;
+                
+                const widget = this.currentWidget.instance;
+                const opacity = this.elementsHidden ? '0.3' : '1';
+
+                // Rôle     : Application du style de visibilité
+                // Type     : void (manipulation CSS)
+                // Action   : Change l'opacité de tous les éléments avec data-element-id
+                widget.querySelectorAll('[data-element-id]').forEach(element => {
+                    element.style.opacity = opacity;
+                    element.style.transition = 'opacity 0.3s ease';
+                });
+
+                const statusText = this.elementsHidden ? 'Éléments masqués (30% opacité)' : 'Éléments affichés normalement';
+                this.updateStatus(statusText);
+            }
+
+            // Méthode : Vider tous les éléments (avec confirmation)
+            // Rôle     : Supprime tous les éléments multiples après confirmation
+            // Action   : Remet le widget à son état minimal avec un élément par type
+            clearAllElements() {
+                if (!this.currentWidget) {
+                    this.updateStatus('Aucun widget sélectionné');
+                    return;
+                }
+
+                // Rôle     : Confirmation de sécurité
+                // Type     : boolean (confirmation utilisateur)
+                // Action   : Empêche les suppressions accidentelles
+                const confirmed = confirm('⚠️ Êtes-vous sûr de vouloir supprimer tous les éléments multiples ?\n\nCette action ne peut pas être annulée.');
+                
+                if (!confirmed) {
+                    this.updateStatus('Opération annulée');
+                    return;
+                }
+
+                let clearedCount = 0;
+
+                // Rôle     : Suppression des éléments multiples
+                // Type     : void (nettoyage)
+                // Action   : Garde uniquement le premier élément de chaque type
+                Object.entries(this.widgetElements).forEach(([type, elements]) => {
+                    const elementDef = this.widgetDefinitions[this.currentWidgetType].elements[type];
+                    
+                    if (elementDef && elementDef.allowMultiple && Array.isArray(elements) && elements.length > 1) {
+                        const elementsToRemove = elements.length - 1;
+                        // Garder seulement le premier élément
+                        this.widgetElements[type] = [elements[0]];
+                        clearedCount += elementsToRemove;
+                    }
+                });
+
+                if (clearedCount > 0) {
+                    this.renderWidget();
+                    this.renderProperties();
+                    this.updateStatus(`${clearedCount} éléments supprimés - Widget remis à l'état minimal`);
+                } else {
+                    this.updateStatus('Aucun élément multiple à supprimer');
+                }
+            }
+
+            // Méthode : Réinitialiser l'ordre des éléments
+            // Rôle     : Remet les éléments dans leur ordre d'origine par type
+            // Action   : Trie les éléments par ID pour un ordre cohérent
+            resetElementsOrder() {
+                if (!this.currentWidget) {
+                    this.updateStatus('Aucun widget sélectionné');
+                    return;
+                }
+
+                // Rôle     : Tri des éléments par ID
+                // Type     : void (réorganisation)
+                // Action   : Trie chaque type d'élément par ordre alphabétique d'ID
+                Object.entries(this.widgetElements).forEach(([type, elements]) => {
+                    if (Array.isArray(elements) && elements.length > 1) {
+                        elements.sort((a, b) => a.id.localeCompare(b.id));
+                    }
+                });
+
+                this.renderWidget();
+                this.renderProperties();
+                this.updateStatus('Ordre des éléments réinitialisé');
+            }
+        }
+
+        // Initialisation
+        const editor = new AdvancedWidgetEditor();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Configuration de la page de location Li-CUBE PRO™ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li-CUBE PRO™ - Outil Présentation LOCATION | EDS Québec</title>
+    <meta name="description" content="Outil de présentation commerciale Li-CUBE PRO™ LOCATION : Arguments de service et tranquillité pour équipes de vente EDS Québec.">
+    
+    <!-- Polices modernes pour une présentation de location professionnelle -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Système CSS unifié Li-CUBE PRO™ -->
+    <link rel="stylesheet" href="assets/css/themes.css">
+    
+    <style>
+        /* Styles spécifiques à la présentation finale */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gradient-primary);
+            color: var(--text-white);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Navigation spécifique version LOCATION */
+        .navbar {
+            position: fixed; 
+            top: 0; 
+            width: 100%; 
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95); 
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem; 
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        
+        .nav-content {
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            max-width: 1400px; 
+            margin: 0 auto;
+        }
+        
+        .nav-brand { 
+            display: flex; 
+            align-items: center; 
+            gap: 1rem; 
+        }
+        
+        .nav-logo {
+            width: 50px; 
+            height: 50px; 
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.1); 
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            background-image: url('../images/logo edsquebec.png');
+            background-size: 80%; 
+            background-repeat: no-repeat; 
+            background-position: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .nav-logo:hover {
+            background-color: rgba(16, 185, 129, 0.2); 
+            transform: scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .nav-title {
+            font-size: 1.8rem; 
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-green);
+        }
+
+        /* Container principal */
+        .main-container {
+            margin-top: 80px;
+            min-height: 100vh;
+        }
+
+        /* Section hero avec titre principal */
+        .hero-section {
+            text-align: center;
+            padding: 80px 40px;
+            background: var(--gradient-primary);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            font-family: 'Playfair Display', serif;
+            background: var(--gradient-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* Section d'informations d'entreprise */
+        .company-section {
+            padding: 80px 40px;
+            background: rgba(30, 41, 59, 0.3);
+        }
+
+        .company-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .company-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Section tarification */
+        .pricing-section {
+            padding: 80px 40px;
+            background: rgba(248, 250, 252, 0.05);
+        }
+
+        .pricing-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            color: var(--accent-green);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-green);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.2);
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            border-color: var(--accent-green);
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .pricing-plan-name {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-price {
+            margin-bottom: 2rem;
+        }
+
+        .pricing-price .currency {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+        }
+
+        .pricing-price .amount {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-white);
+        }
+
+        .pricing-price .period {
+            color: var(--text-gray);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            margin-bottom: 0.5rem;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li::before {
+            content: '✅';
+            font-size: 0.9rem;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Section avantages */
+        .advantages-section {
+            padding: 80px 40px;
+            background: var(--gradient-primary);
+        }
+
+        .advantages-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .advantages-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            color: var(--text-white);
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .advantage-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            background: rgba(248, 250, 252, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        .advantage-icon {
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .advantage-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+
+        .advantage-description {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Section CTA finale */
+        .cta-section {
+            padding: 100px 40px;
+            background: var(--gradient-green);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-btn.primary {
+            background: white;
+            color: var(--accent-green);
+            border: none;
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .cta-btn.primary:hover {
+            background: #f0f9ff;
+        }
+
+        .cta-btn.secondary:hover {
+            background: white;
+            color: var(--accent-green);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.5rem 1rem;
+            }
+
+            .nav-title {
+                font-size: 1.4rem;
+            }
+
+            .hero-section,
+            .company-section,
+            .pricing-section,
+            .advantages-section {
+                padding: 60px 20px;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+                margin-bottom: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Mode édition (désactivé par défaut) */
+        .edit-mode .editable {
+            border: 2px dashed rgba(16, 185, 129, 0.5);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .edit-mode .editable:hover {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation principale -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <a href="#" class="nav-logo" title="EDS Québec - Accueil"></a>
+                <h1 class="nav-title">Li-CUBE PRO™</h1>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Container principal -->
+    <main class="main-container">
+        <!-- Section Hero -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title editable" data-field="hero.title">Li-CUBE PRO™</h1>
+                <div class="hero-subtitle editable" data-field="hero.subtitle">LOCATION INTELLIGENTE<br>ZÉRO RISQUE</div>
+                <p class="hero-description editable" data-field="hero.description">
+                    La solution révolutionnaire pour professionnels exigeants. 
+                    Transformez votre activité avec notre système de location intelligent.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section entreprise -->
+        <section class="company-section">
+            <div class="company-content">
+                <img src="../images/logo edsquebec.png" alt="EDS Québec" class="company-image">
+                <h2 class="section-title editable" data-field="company.title">EDS Québec - Votre Partenaire Technologique</h2>
+                <p class="editable" data-field="company.description">
+                    Forte de son expertise reconnue, EDS Québec accompagne les entreprises dans leur transformation digitale 
+                    avec des solutions innovantes et sur mesure.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section tarification -->
+        <section class="pricing-section">
+            <div class="pricing-content">
+                <h2 class="pricing-title editable" data-field="pricing.title">Nos Offres Li-CUBE PRO™</h2>
+                
+                <div class="pricing-grid">
+                    <!-- Plan Essentiel -->
+                    <div class="pricing-card">
+                        <h3 class="pricing-plan-name editable" data-field="pricing.essential.name">ESSENTIEL</h3>
+                        <div class="pricing-price">
+                            <span class="currency">$</span>
+                            <span class="amount editable" data-field="pricing.essential.price">299</span>
+                            <span class="period">/mois</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li class="editable" data-field="pricing.essential.feature1">Installation gratuite</li>
+                            <li class="editable" data-field="pricing.essential.feature2">Support standard</li>
+                            <li class="editable" data-field="pricing.essential.feature3">Jusqu'à 50 équipements</li>
+                            <li class="editable" data-field="pricing.essential.feature4">Maintenance de base</li>
+                        </ul>
+                        <button class="pricing-cta">Choisir Essentiel</button>
+                    </div>
+
+                    <!-- Plan Professionnel (Featured) -->
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">POPULAIRE</div>
+                        <h3 class="pricing-plan-name editable" data-field="pricing.professional.name">PROFESSIONNEL</h3>
+                        <div class="pricing-price">
+                            <span class="currency">$</span>
+                            <span class="amount editable" data-field="pricing.professional.price">599</span>
+                            <span class="period">/mois</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li class="editable" data-field="pricing.professional.feature1">Installation gratuite</li>
+                            <li class="editable" data-field="pricing.professional.feature2">Maintenance incluse</li>
+                            <li class="editable" data-field="pricing.professional.feature3">Support 24/7</li>
+                            <li class="editable" data-field="pricing.professional.feature4">Jusqu'à 200 équipements</li>
+                            <li class="editable" data-field="pricing.professional.feature5">Analytiques avancés</li>
+                        </ul>
+                        <button class="pricing-cta">Choisir Professionnel</button>
+                    </div>
+
+                    <!-- Plan Enterprise -->
+                    <div class="pricing-card">
+                        <h3 class="pricing-plan-name editable" data-field="pricing.enterprise.name">ENTERPRISE</h3>
+                        <div class="pricing-price">
+                            <span class="currency">$</span>
+                            <span class="amount editable" data-field="pricing.enterprise.price">999</span>
+                            <span class="period">/mois</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li class="editable" data-field="pricing.enterprise.feature1">Installation gratuite</li>
+                            <li class="editable" data-field="pricing.enterprise.feature2">Maintenance incluse</li>
+                            <li class="editable" data-field="pricing.enterprise.feature3">Support prioritaire</li>
+                            <li class="editable" data-field="pricing.enterprise.feature4">Équipements illimités</li>
+                            <li class="editable" data-field="pricing.enterprise.feature5">Formation équipe</li>
+                            <li class="editable" data-field="pricing.enterprise.feature6">API personnalisée</li>
+                        </ul>
+                        <button class="pricing-cta">Choisir Enterprise</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section avantages -->
+        <section class="advantages-section">
+            <div class="advantages-content">
+                <h2 class="advantages-title editable" data-field="advantages.title">Pourquoi Choisir Li-CUBE PRO™</h2>
+                
+                <div class="advantages-grid">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">⚡</div>
+                        <h3 class="advantage-title editable" data-field="advantages.speed.title">Installation Express</h3>
+                        <p class="advantage-description editable" data-field="advantages.speed.description">
+                            Mise en service en moins de 24h avec notre équipe certifiée. 
+                            Aucune interruption de votre activité.
+                        </p>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🔧</div>
+                        <h3 class="advantage-title editable" data-field="advantages.maintenance.title">Maintenance Préventive</h3>
+                        <p class="advantage-description editable" data-field="advantages.maintenance.description">
+                            Interventions programmées pour éviter les pannes. 
+                            Votre matériel reste opérationnel en permanence.
+                        </p>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-icon">📊</div>
+                        <h3 class="advantage-title editable" data-field="advantages.analytics.title">Analytique Avancée</h3>
+                        <p class="advantage-description editable" data-field="advantages.analytics.description">
+                            Tableaux de bord et rapports détaillés en temps réel. 
+                            Prenez des décisions éclairées.
+                        </p>
+                    </div>
+
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🛡️</div>
+                        <h3 class="advantage-title editable" data-field="advantages.security.title">Garantie Zéro Risque</h3>
+                        <p class="advantage-description editable" data-field="advantages.security.description">
+                            Assurance tous risques incluse sans franchise. 
+                            Votre investissement est protégé à 100%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section CTA finale -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title editable" data-field="cta.title">Prêt à Transformer Votre Activité ?</h2>
+                <p class="cta-subtitle editable" data-field="cta.subtitle">
+                    Rejoignez plus de 500 entreprises qui font confiance à Li-CUBE PRO™ 
+                    pour optimiser leurs opérations.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-btn primary">Demander une Démo</a>
+                    <a href="#" class="cta-btn secondary">Voir les Tarifs</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        /**
+         * ============================================================================
+         * PRÉSENTATION FINALE Li-CUBE PRO™ - Version de Production
+         * ============================================================================
+         * 
+         * Rôle : Page de présentation finale avec reproduction exacte du design
+         * Type : Production Page - Version finale optimisée
+         * Usage : Présentation commerciale pour équipes de vente EDS Québec
+         */
+
+        // Configuration de la présentation
+        const presentationConfig = {
+            // Mode d'édition activable (pour démonstration)
+            editMode: false,
+            
+            // Configuration par défaut des données
+            defaultData: {
+                hero: {
+                    title: 'Li-CUBE PRO™',
+                    subtitle: 'LOCATION INTELLIGENTE\nZÉRO RISQUE',
+                    description: 'La solution révolutionnaire pour professionnels exigeants. Transformez votre activité avec notre système de location intelligent.'
+                },
+                company: {
+                    title: 'EDS Québec - Votre Partenaire Technologique',
+                    description: 'Forte de son expertise reconnue, EDS Québec accompagne les entreprises dans leur transformation digitale avec des solutions innovantes et sur mesure.'
+                },
+                pricing: {
+                    title: 'Nos Offres Li-CUBE PRO™',
+                    essential: {
+                        name: 'ESSENTIEL',
+                        price: '299'
+                    },
+                    professional: {
+                        name: 'PROFESSIONNEL', 
+                        price: '599'
+                    },
+                    enterprise: {
+                        name: 'ENTERPRISE',
+                        price: '999'
+                    }
+                },
+                advantages: {
+                    title: 'Pourquoi Choisir Li-CUBE PRO™'
+                },
+                cta: {
+                    title: 'Prêt à Transformer Votre Activité ?',
+                    subtitle: 'Rejoignez plus de 500 entreprises qui font confiance à Li-CUBE PRO™ pour optimiser leurs opérations.'
+                }
+            }
+        };
+
+        /**
+         * Rôle : Initialisation de la présentation
+         * Type : Setup - Configuration initiale de la page
+         * Retour : void
+         */
+        function initPresentation() {
+            // Animation d'entrée des éléments
+            animateElementsOnScroll();
+            
+            // Configuration des interactions
+            setupInteractions();
+            
+            // Chargement des données personnalisées si disponibles
+            loadCustomData();
+            
+            // Configuration du mode édition (si activé)
+            if (presentationConfig.editMode) {
+                enableEditMode();
+            }
+        }
+
+        /**
+         * Rôle : Animation des éléments lors du défilement
+         * Type : UI Animation - Animations progressives
+         * Retour : void
+         */
+        function animateElementsOnScroll() {
+            // Observer pour les animations au défilement
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Application aux sections principales
+            const animatedElements = document.querySelectorAll('.hero-content, .pricing-card, .advantage-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                observer.observe(el);
+            });
+        }
+
+        /**
+         * Rôle : Configuration des interactions utilisateur
+         * Type : Event Setup - Gestion des clics et interactions
+         * Retour : void
+         */
+        function setupInteractions() {
+            // Boutons de tarification
+            const ctaButtons = document.querySelectorAll('.pricing-cta, .cta-btn');
+            ctaButtons.forEach(button => {
+                button.addEventListener('click', handleCTAClick);
+                
+                // Effet de survol amélioré
+                button.addEventListener('mouseenter', () => {
+                    button.style.transform = 'translateY(-2px) scale(1.02)';
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Navigation smooth scroll (si des ancres étaient ajoutées)
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.querySelector(link.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        }
+
+        /**
+         * Rôle : Gestion des clics sur les boutons d'action
+         * Type : Event Handler - Actions commerciales
+         * Retour : void
+         */
+        function handleCTAClick(event) {
+            event.preventDefault();
+            
+            const buttonText = event.target.textContent.trim();
+            
+            // Simulation d'actions selon le bouton cliqué
+            switch (true) {
+                case buttonText.includes('Essentiel'):
+                    showPlanDetails('essentiel');
+                    break;
+                case buttonText.includes('Professionnel'):
+                    showPlanDetails('professionnel');
+                    break;
+                case buttonText.includes('Enterprise'):
+                    showPlanDetails('enterprise');
+                    break;
+                case buttonText.includes('Démo'):
+                    requestDemo();
+                    break;
+                case buttonText.includes('Tarifs'):
+                    scrollToPricing();
+                    break;
+                default:
+                    console.log('Action CTA:', buttonText);
+            }
+        }
+
+        /**
+         * Rôle : Affichage des détails d'un plan tarifaire
+         * Type : UI Interaction - Modal ou redirection
+         * Retour : void
+         */
+        function showPlanDetails(plan) {
+            // Simulation d'une action commerciale
+            const planNames = {
+                'essentiel': 'ESSENTIEL (299$/mois)',
+                'professionnel': 'PROFESSIONNEL (599$/mois)',
+                'enterprise': 'ENTERPRISE (999$/mois)'
+            };
+            
+            // Animation de feedback
+            const card = event.target.closest('.pricing-card');
+            if (card) {
+                card.style.animation = 'pulse 0.6s ease-out';
+                setTimeout(() => {
+                    card.style.animation = '';
+                }, 600);
+            }
+            
+            // Notification (en production, rediriger vers système de commande)
+            showNotification(`Plan ${planNames[plan]} sélectionné. Redirection vers la commande...`, 'success');
+            
+            // Simulation d'une redirection après 2s
+            setTimeout(() => {
+                console.log(`Redirection vers commande du plan ${plan}`);
+                // window.location.href = `/commander/${plan}`;
+            }, 2000);
+        }
+
+        /**
+         * Rôle : Demande de démonstration
+         * Type : Lead Generation - Capture de prospect
+         * Retour : void
+         */
+        function requestDemo() {
+            showNotification('Demande de démo enregistrée. Un conseiller vous contactera sous 24h.', 'success');
+            
+            // En production, ouvrir formulaire de contact ou rediriger
+            console.log('Demande de démo - ouverture formulaire de contact');
+        }
+
+        /**
+         * Rôle : Défilement vers la section tarifaire
+         * Type : Navigation - Scroll automatique
+         * Retour : void
+         */
+        function scrollToPricing() {
+            const pricingSection = document.querySelector('.pricing-section');
+            if (pricingSection) {
+                pricingSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        /**
+         * Rôle : Chargement des données personnalisées
+         * Type : Data Loading - Personnalisation de contenu
+         * Retour : void
+         */
+        function loadCustomData() {
+            // Tentative de chargement depuis localStorage ou API
+            try {
+                const savedData = localStorage.getItem('licubepro_presentation_data');
+                if (savedData) {
+                    const customData = JSON.parse(savedData);
+                    applyCustomData(customData);
+                }
+            } catch (error) {
+                console.log('Aucune donnée personnalisée trouvée, utilisation des valeurs par défaut');
+            }
+        }
+
+        /**
+         * Rôle : Application des données personnalisées
+         * Type : Data Binding - Mise à jour du contenu
+         * Retour : void
+         */
+        function applyCustomData(data) {
+            // Mise à jour des éléments éditables avec les données personnalisées
+            const editableElements = document.querySelectorAll('.editable[data-field]');
+            
+            editableElements.forEach(element => {
+                const fieldPath = element.dataset.field;
+                const value = getNestedValue(data, fieldPath);
+                
+                if (value) {
+                    if (element.tagName === 'IMG') {
+                        element.src = value;
+                    } else {
+                        element.textContent = value;
+                    }
+                }
+            });
+        }
+
+        /**
+         * Rôle : Récupération d'une valeur imbriquée dans un objet
+         * Type : Utility - Navigation dans un objet complexe
+         * Retour : Any valeur trouvée ou undefined
+         */
+        function getNestedValue(obj, path) {
+            return path.split('.').reduce((current, key) => {
+                return current && current[key] !== undefined ? current[key] : undefined;
+            }, obj);
+        }
+
+        /**
+         * Rôle : Activation du mode édition (démonstration)
+         * Type : Edit Mode - Interface d'édition en ligne
+         * Retour : void
+         */
+        function enableEditMode() {
+            document.body.classList.add('edit-mode');
+            
+            // Rendre les éléments éditables cliquables
+            const editableElements = document.querySelectorAll('.editable[data-field]');
+            
+            editableElements.forEach(element => {
+                element.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    editElement(element);
+                });
+                
+                element.title = `Cliquer pour éditer: ${element.dataset.field}`;
+            });
+            
+            // Ajouter un indicateur de mode édition
+            const editIndicator = document.createElement('div');
+            editIndicator.innerHTML = '✏️ Mode Édition Activé';
+            editIndicator.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--accent-green);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                z-index: 1001;
+            `;
+            document.body.appendChild(editIndicator);
+        }
+
+        /**
+         * Rôle : Édition d'un élément en ligne
+         * Type : Inline Editing - Modification directe
+         * Retour : void
+         */
+        function editElement(element) {
+            const currentValue = element.textContent;
+            const fieldName = element.dataset.field;
+            
+            // Création d'un champ d'édition temporaire
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentValue;
+            input.style.cssText = `
+                background: rgba(16, 185, 129, 0.1);
+                border: 2px solid var(--accent-green);
+                color: var(--text-white);
+                padding: 0.5rem;
+                border-radius: 4px;
+                font-size: inherit;
+                font-family: inherit;
+                width: 100%;
+            `;
+            
+            // Remplacement temporaire
+            element.style.display = 'none';
+            element.parentNode.insertBefore(input, element);
+            input.focus();
+            
+            // Gestion de la validation
+            const validateEdit = () => {
+                const newValue = input.value.trim();
+                element.textContent = newValue || currentValue;
+                element.style.display = '';
+                input.remove();
+                
+                // Sauvegarde de la modification
+                saveElementChange(fieldName, newValue);
+                
+                showNotification(`Champ "${fieldName}" mis à jour`, 'success');
+            };
+            
+            // Événements de validation
+            input.addEventListener('blur', validateEdit);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    validateEdit();
+                } else if (e.key === 'Escape') {
+                    element.style.display = '';
+                    input.remove();
+                }
+            });
+        }
+
+        /**
+         * Rôle : Sauvegarde d'un changement d'élément
+         * Type : Data Persistence - Sauvegarde des modifications
+         * Retour : void
+         */
+        function saveElementChange(fieldPath, newValue) {
+            try {
+                // Récupération des données existantes
+                let savedData = {};
+                const existing = localStorage.getItem('licubepro_presentation_data');
+                if (existing) {
+                    savedData = JSON.parse(existing);
+                }
+                
+                // Mise à jour de la valeur
+                setNestedValue(savedData, fieldPath, newValue);
+                
+                // Sauvegarde
+                localStorage.setItem('licubepro_presentation_data', JSON.stringify(savedData));
+                
+            } catch (error) {
+                console.error('Erreur lors de la sauvegarde:', error);
+            }
+        }
+
+        /**
+         * Rôle : Définition d'une valeur imbriquée dans un objet
+         * Type : Utility - Manipulation d'objet complexe
+         * Retour : void
+         */
+        function setNestedValue(obj, path, value) {
+            const keys = path.split('.');
+            const lastKey = keys.pop();
+            
+            let current = obj;
+            for (const key of keys) {
+                if (!current[key] || typeof current[key] !== 'object') {
+                    current[key] = {};
+                }
+                current = current[key];
+            }
+            
+            current[lastKey] = value;
+        }
+
+        /**
+         * Rôle : Affichage de notifications utilisateur
+         * Type : UI Feedback - Messages de statut
+         * Retour : void
+         */
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                z-index: 10001;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                color: white;
+                font-weight: 600;
+                max-width: 350px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                background: ${type === 'success' ? 'var(--success-green)' : 'var(--accent-blue)'};
+                box-shadow: var(--shadow-lg);
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animation d'entrée
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 10);
+            
+            // Suppression automatique
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, 3000);
+        }
+
+        // Initialisation lors du chargement de la page
+        document.addEventListener('DOMContentLoaded', initPresentation);
+
+        // Gestion du redimensionnement
+        window.addEventListener('resize', () => {
+            // Recalcul des animations si nécessaire
+            console.log('Fenêtre redimensionnée - ajustement des animations');
+        });
+
+        // CSS additionnel pour les animations
+        const additionalStyles = document.createElement('style');
+        additionalStyles.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+            
+            .pricing-card {
+                animation-fill-mode: forwards;
+            }
+            
+            .advantage-card {
+                animation-delay: 0.1s;
+                animation-fill-mode: forwards;
+            }
+        `;
+        document.head.appendChild(additionalStyles);
+    </script>
+</body>
+</html>
