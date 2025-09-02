@@ -10,6 +10,9 @@
 
 import { escapeHTML } from '../utils/sanitize.js';
 
+// Toggle debug logs by setting this flag to true
+const DEBUG = false;
+
 class LogoWidget {
     constructor() {
         this.id = 'logo';
@@ -96,7 +99,9 @@ class LogoWidget {
         if (data.containerPadding !== undefined && data.containerPaddingX === undefined) {
             d.containerPaddingX = data.containerPadding;
             d.containerPaddingY = data.containerPadding;
-            console.log(`📦 Migration containerPadding: ${data.containerPadding} → X=${d.containerPaddingX}, Y=${d.containerPaddingY}`);
+            if (DEBUG) {
+                console.log(`📦 Migration containerPadding: ${data.containerPadding} → X=${d.containerPaddingX}, Y=${d.containerPaddingY}`);
+            }
         }
         
         // Rôle      : Calcul de la couleur d'arrière-plan selon le type choisi
@@ -189,21 +194,23 @@ class LogoWidget {
             shadowStyle = `${d.shadowOffsetX}px ${d.shadowOffsetY}px ${d.shadowBlur}px ${shadowColor}`;
         }
         
-        /* 
+        /*
         # Rôle      : Log de débogage pour tracer les valeurs d'espacement
         # Type      : console.log
         # Unité     : pixels
         # Formule   : padding = paddingY + 'px ' + paddingX + 'px'
         # Exemple   : "Espacement: Y=20px X=15px → padding: 20px 15px"
         */
-        console.log(`🔧 Espacement Logo: Y=${d.containerPaddingY}px X=${d.containerPaddingX}px → CSS généré`);
-        console.log(`📐 Détail CSS:`, {
-            'padding-top': `${d.containerPaddingY}px`,
-            'padding-bottom': `${d.containerPaddingY}px`, 
-            'padding-left': `${d.containerPaddingX}px`,
-            'padding-right': `${d.containerPaddingX}px`
-        });
-        console.log(`📋 Données complètes du logo:`, d);
+        if (DEBUG) {
+            console.log(`🔧 Espacement Logo: Y=${d.containerPaddingY}px X=${d.containerPaddingX}px → CSS généré`);
+            console.log(`📐 Détail CSS:`, {
+                'padding-top': `${d.containerPaddingY}px`,
+                'padding-bottom': `${d.containerPaddingY}px`,
+                'padding-left': `${d.containerPaddingX}px`,
+                'padding-right': `${d.containerPaddingX}px`
+            });
+            console.log(`📋 Données complètes du logo:`, d);
+        }
         
         const containerAlignment = escapeHTML(d.containerAlignment);
         const link = escapeHTML(d.link);
