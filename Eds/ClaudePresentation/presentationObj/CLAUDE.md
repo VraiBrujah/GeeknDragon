@@ -261,7 +261,7 @@ projet-presentation/
 
 ## 🎯 **VALIDATION PHASE 1 REQUISE**
 
-Le document REQUIS-DETAILLES.md reflète cette vision révolutionnaire.  
+Le document [REQUIS-DETAILLES.md](REQUIS-DETAILLES.md) est organisé avec un sommaire détaillé. Consulte les sections [Widgets atomiques](REQUIS-DETAILLES.md#widgets-atomiques) et [Phase 1 : Fondations](REQUIS-DETAILLES.md#phase1) pour plus d'informations.
 **Statut** : ✅ **ARCHITECTURE SUPÉRIEURE À FIGMA 2024 - 34 WIDGETS - PRÊT POUR PHASE 1**
 
 ## 🔥 **COMPARAISON vs FIGMA 2024**
