@@ -65,17 +65,28 @@ class BaseWidget {
    */
   render(container) {
     if (!container) throw new Error('Container is required');
+    const el = this.ensureElement(container);
+    this.applyStyles();
+    this.setPosition(this.x, this.y);
+    this.setSize(this.width, this.height);
+    return el;
+  }
+
+  /**
+   * Ensure the widget has a DOM element attached to the container.
+   *
+   * @param {HTMLElement} container Container that should host the element
+   * @returns {HTMLElement} The widget's root element
+   */
+  ensureElement(container) {
     if (!this.el) {
       this.el = document.createElement('div');
       this.el.id = this.id;
       this.el.style.position = 'absolute';
-      container.appendChild(this.el);
-    } else if (!this.el.parentNode) {
+    }
+    if (this.el.parentNode !== container) {
       container.appendChild(this.el);
     }
-    this.applyStyles();
-    this.setPosition(this.x, this.y);
-    this.setSize(this.width, this.height);
     return this.el;
   }
 

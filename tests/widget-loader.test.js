@@ -22,8 +22,8 @@ describe('WidgetLoader', () => {
         this.name = 'json';
         this.category = 'test';
       }
-      render() {
-        return '';
+      render(container) {
+        return super.render(container);
       }
       getEditableFields() {
         return [];
