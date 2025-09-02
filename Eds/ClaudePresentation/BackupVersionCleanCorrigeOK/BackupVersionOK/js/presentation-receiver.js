@@ -33,6 +33,7 @@ class PresentationReceiver {
         this.setupMessageListeners();
         this.startUpdateProcessing();
         this.loadInitialContent();
+        this.setupHeartbeat();
         
         this.isListening = true;
         console.log(`✅ Récepteur PRÉSENTATION ${this.pageType.toUpperCase()} - En écoute`);
@@ -212,6 +213,13 @@ class PresentationReceiver {
             return;
         }
         
+        // 🔍 VÉRIFICATION : Éviter les doublons
+        const existingElement = document.querySelector(`[data-weakness-id="${weakness.id}"]`);
+        if (existingElement) {
+            console.warn(`⚠️ Faiblesse ${weakness.id} existe déjà - ignorée`);
+            return;
+        }
+        
         // Création : élément HTML pour la nouvelle faiblesse
         const weaknessHTML = `
             <div class="weakness-item" data-weakness-id="${weakness.id}">
@@ -235,11 +243,29 @@ class PresentationReceiver {
             
             // 📡 REGISTRATION : enregistrement des nouveaux champs avec instant-sync
             const editableFields = newElement.querySelectorAll('[data-field]');
-            editableFields.forEach(field => {
-                if (window.instantSync) {
-                    window.instantSync.registerNewField(field);
+            if (editableFields.length > 0) {
+                if (window.instantSync && typeof window.instantSync.registerNewField === 'function') {
+                    editableFields.forEach(field => {
+                        try {
+                            window.instantSync.registerNewField(field);
+                            console.log(`📡 Champ enregistré: ${field.getAttribute('data-field')}`);
+                        } catch (error) {
+                            console.error(`❌ Erreur enregistrement champ ${field.getAttribute('data-field')}:`, error);
+                        }
+                    });
+                } else {
+                    console.warn('⚠️ InstantSync non disponible pour l\'enregistrement');
+                    // 🔄 RETRY : Tentative différée si InstantSync n'est pas encore prêt
+                    setTimeout(() => {
+                        if (window.instantSync && typeof window.instantSync.registerNewField === 'function') {
+                            editableFields.forEach(field => {
+                                window.instantSync.registerNewField(field);
+                            });
+                            console.log('🔄 Enregistrement différé réussi');
+                        }
+                    }, 200);
                 }
-            });
+            }
         }
         
         console.log(`✅ Faiblesse ${weakness.id} ajoutée à la présentation`);
@@ -278,6 +304,13 @@ class PresentationReceiver {
             return;
         }
         
+        // 🔍 VÉRIFICATION : Éviter les doublons
+        const existingElement = document.querySelector(`[data-strength-id="${strength.id}"]`);
+        if (existingElement) {
+            console.warn(`⚠️ Avantage ${strength.id} existe déjà - ignoré`);
+            return;
+        }
+        
         // Création : élément HTML pour le nouvel avantage
         const strengthHTML = `
             <div class="strength-item" data-strength-id="${strength.id}">
@@ -301,11 +334,29 @@ class PresentationReceiver {
             
             // 📡 REGISTRATION : enregistrement des nouveaux champs avec instant-sync
             const editableFields = newElement.querySelectorAll('[data-field]');
-            editableFields.forEach(field => {
-                if (window.instantSync) {
-                    window.instantSync.registerNewField(field);
+            if (editableFields.length > 0) {
+                if (window.instantSync && typeof window.instantSync.registerNewField === 'function') {
+                    editableFields.forEach(field => {
+                        try {
+                            window.instantSync.registerNewField(field);
+                            console.log(`📡 Champ enregistré: ${field.getAttribute('data-field')}`);
+                        } catch (error) {
+                            console.error(`❌ Erreur enregistrement champ ${field.getAttribute('data-field')}:`, error);
+                        }
+                    });
+                } else {
+                    console.warn('⚠️ InstantSync non disponible pour l\'enregistrement');
+                    // 🔄 RETRY : Tentative différée si InstantSync n'est pas encore prêt
+                    setTimeout(() => {
+                        if (window.instantSync && typeof window.instantSync.registerNewField === 'function') {
+                            editableFields.forEach(field => {
+                                window.instantSync.registerNewField(field);
+                            });
+                            console.log('🔄 Enregistrement différé réussi');
+                        }
+                    }, 200);
                 }
-            });
+            }
         }
         
         console.log(`✅ Avantage ${strength.id} ajouté à la présentation`);
@@ -844,6 +895,47 @@ class PresentationReceiver {
         clearTimeout(this.processTimeout);
         this.updateQueue = [];
         console.log(`🛑 Récepteur ${this.pageType} désactivé`);
+    }
+
+    /**
+     * Configuration : système de heartbeat pour vérifier la synchronisation
+     */
+    setupHeartbeat() {
+        // 💓 HEARTBEAT : Vérification périodique de la synchronisation
+        setInterval(() => {
+            this.checkSyncHealth();
+        }, 5000); // Vérification toutes les 5 secondes
+    }
+
+    /**
+     * Vérification : santé de la synchronisation
+     */
+    checkSyncHealth() {
+        try {
+            // Vérification : structures sauvegardées vs structures affichées
+            const saved = localStorage.getItem('licubepro-location-structures');
+            if (saved) {
+                const structureData = JSON.parse(saved);
+                const weaknessCount = document.querySelectorAll('[data-weakness-id]').length;
+                const strengthCount = document.querySelectorAll('[data-strength-id]').length;
+                
+                const expectedWeaknesses = structureData.faiblesses ? structureData.faiblesses.length : 0;
+                const expectedStrengths = structureData.avantages ? structureData.avantages.length : 0;
+                
+                // 🚨 DÉSYNCHRONISATION : Reconstruction si nécessaire
+                if (weaknessCount !== expectedWeaknesses || strengthCount !== expectedStrengths) {
+                    console.warn(`⚠️ Désynchronisation détectée: Faiblesses ${weaknessCount}/${expectedWeaknesses}, Avantages ${strengthCount}/${expectedStrengths}`);
+                    
+                    // 🔄 AUTO-CORRECTION : Reconstruction automatique
+                    if (typeof loadStructureDataFromStorage === 'function') {
+                        loadStructureDataFromStorage();
+                        console.log('🔄 Auto-correction de synchronisation effectuée');
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('❌ Erreur vérification sync:', error);
+        }
     }
 }
 

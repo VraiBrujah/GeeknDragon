@@ -3716,11 +3716,26 @@ Fabrication et Support 100% Québécois</textarea>
                     const newElementHTML = createWeaknessBlock(nouvelleFaiblesse);
                     container.insertAdjacentHTML('beforeend', newElementHTML);
                     
-                    // 📡 Enregistrement du nouvel élément avec instant-sync
+                    // 📡 Enregistrement du nouvel élément avec instant-sync et retry
                     const newElement = container.querySelector(`[data-weakness-id="${nouvelId}"]`);
-                    if (newElement && window.instantSync) {
+                    if (newElement) {
                         const editableFields = newElement.querySelectorAll('[data-field]');
-                        editableFields.forEach(field => window.instantSync.registerNewField(field));
+                        if (window.instantSync && typeof window.instantSync.registerNewField === 'function') {
+                            editableFields.forEach(field => {
+                                try {
+                                    window.instantSync.registerNewField(field);
+                                } catch (error) {
+                                    console.error(`❌ Erreur enregistrement faiblesse: ${field.getAttribute('data-field')}`, error);
+                                }
+                            });
+                        } else {
+                            console.warn('⚠️ InstantSync pas prêt - retry pour nouvelle faiblesse');
+                            setTimeout(() => {
+                                if (window.instantSync) {
+                                    editableFields.forEach(field => window.instantSync.registerNewField(field));
+                                }
+                            }, 100);
+                        }
                     }
                 }
                 
@@ -3864,11 +3879,26 @@ Fabrication et Support 100% Québécois</textarea>
                     const newElementHTML = createStrengthBlock(nouvelAvantage);
                     container.insertAdjacentHTML('beforeend', newElementHTML);
                     
-                    // 📡 Enregistrement du nouvel élément avec instant-sync
+                    // 📡 Enregistrement du nouvel élément avec instant-sync et retry
                     const newElement = container.querySelector(`[data-strength-id="${nouvelId}"]`);
-                    if (newElement && window.instantSync) {
+                    if (newElement) {
                         const editableFields = newElement.querySelectorAll('[data-field]');
-                        editableFields.forEach(field => window.instantSync.registerNewField(field));
+                        if (window.instantSync && typeof window.instantSync.registerNewField === 'function') {
+                            editableFields.forEach(field => {
+                                try {
+                                    window.instantSync.registerNewField(field);
+                                } catch (error) {
+                                    console.error(`❌ Erreur enregistrement avantage: ${field.getAttribute('data-field')}`, error);
+                                }
+                            });
+                        } else {
+                            console.warn('⚠️ InstantSync pas prêt - retry pour nouvel avantage');
+                            setTimeout(() => {
+                                if (window.instantSync) {
+                                    editableFields.forEach(field => window.instantSync.registerNewField(field));
+                                }
+                            }, 100);
+                        }
                     }
                 }
                 
@@ -4003,13 +4033,17 @@ Fabrication et Support 100% Québécois</textarea>
                     source: 'editor-dynamic'
                 };
                 
+                console.log(`📤 ENVOI: ${action} - ID:${data.id || 'N/A'}`, syncMessage);
+                
                 // Communication inter-onglets : via localStorage temporaire
                 const tempKey = `licubepro-instant-location-${Date.now()}-${Math.random()}`;
                 localStorage.setItem(tempKey, JSON.stringify(syncMessage));
+                console.log(`📤 Message envoyé via clé: ${tempKey}`);
                 
                 // Nettoyage : suppression du message temporaire après utilisation
                 setTimeout(() => {
                     localStorage.removeItem(tempKey);
+                    console.log(`🧹 Clé temporaire nettoyée: ${tempKey}`);
                 }, 1000);
                 
                 // Broadcast : événement personnalisé pour communication intra-page

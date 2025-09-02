@@ -1702,14 +1702,29 @@
                 
                 container.innerHTML = weaknessHTML;
                 
-                // 📡 REGISTRATION : Enregistrement de tous les nouveaux champs
+                // 📡 REGISTRATION : Enregistrement de tous les nouveaux champs avec retry
                 setTimeout(() => {
                     const editableFields = container.querySelectorAll('[data-field]');
-                    editableFields.forEach(field => {
-                        if (window.instantSync) {
-                            window.instantSync.registerNewField(field);
+                    if (editableFields.length > 0) {
+                        if (window.instantSync && typeof window.instantSync.registerNewField === 'function') {
+                            editableFields.forEach(field => {
+                                try {
+                                    window.instantSync.registerNewField(field);
+                                } catch (error) {
+                                    console.error(`❌ Erreur enregistrement: ${field.getAttribute('data-field')}`, error);
+                                }
+                            });
+                            console.log(`📡 ${editableFields.length} champs enregistrés`);
+                        } else {
+                            console.warn('⚠️ InstantSync pas encore prêt - retry dans 300ms');
+                            setTimeout(() => {
+                                if (window.instantSync) {
+                                    editableFields.forEach(field => window.instantSync.registerNewField(field));
+                                    console.log('🔄 Enregistrement différé réussi');
+                                }
+                            }, 300);
                         }
-                    });
+                    }
                 }, 100);
             }
             
@@ -1732,29 +1747,50 @@
                 
                 container.innerHTML = strengthHTML;
                 
-                // 📡 REGISTRATION : Enregistrement de tous les nouveaux champs
+                // 📡 REGISTRATION : Enregistrement de tous les nouveaux champs avec retry
                 setTimeout(() => {
                     const editableFields = container.querySelectorAll('[data-field]');
-                    editableFields.forEach(field => {
-                        if (window.instantSync) {
-                            window.instantSync.registerNewField(field);
+                    if (editableFields.length > 0) {
+                        if (window.instantSync && typeof window.instantSync.registerNewField === 'function') {
+                            editableFields.forEach(field => {
+                                try {
+                                    window.instantSync.registerNewField(field);
+                                } catch (error) {
+                                    console.error(`❌ Erreur enregistrement: ${field.getAttribute('data-field')}`, error);
+                                }
+                            });
+                            console.log(`📡 ${editableFields.length} champs enregistrés`);
+                        } else {
+                            console.warn('⚠️ InstantSync pas encore prêt - retry dans 300ms');
+                            setTimeout(() => {
+                                if (window.instantSync) {
+                                    editableFields.forEach(field => window.instantSync.registerNewField(field));
+                                    console.log('🔄 Enregistrement différé réussi');
+                                }
+                            }, 300);
                         }
-                    });
+                    }
                 }, 100);
             }
             
-            // 📡 Initialisation du système de synchronisation instantanée
+            // 📡 INITIALISATION SÉQUENTIELLE : Éviter les race conditions
+            // Étape 1: InstantSync d'abord
             window.instantSync = new InstantSync('location');
             
-            // 📡 Initialisation du récepteur de présentation
-            window.presentationReceiver = new PresentationReceiver('location');
-            
-            // 📂 CHARGEMENT : Tentative de récupération des structures sauvegardées
+            // Étape 2: Attendre que InstantSync soit prêt, puis initialiser PresentationReceiver
             setTimeout(() => {
-                loadStructureDataFromStorage();
-            }, 200);
+                window.presentationReceiver = new PresentationReceiver('location');
+                console.log('📡 PresentationReceiver initialisé après InstantSync');
+                
+                // Étape 3: Charger les structures après que tout soit prêt
+                setTimeout(() => {
+                    loadStructureDataFromStorage();
+                    console.log('📂 Structures chargées après initialisation complète');
+                }, 100);
+                
+            }, 100);
             
-            console.log('📡 Synchronisation instantanée et PresentationReceiver activés avec persistance');
+            console.log('📡 Séquence d\'initialisation démarrée');
         });
     </script>
 </body>
