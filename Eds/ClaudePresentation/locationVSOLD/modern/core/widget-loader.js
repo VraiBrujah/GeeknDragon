@@ -1,3 +1,8 @@
+import LogoWidget from '../templates/widgets/logo.js';
+import HeroTitleWidget from '../templates/widgets/hero-title.js';
+import PricingCardWidget from '../templates/widgets/pricing-card.js';
+import TextSimpleWidget from '../templates/widgets/text-simple.js';
+
 /**
  * ============================================================================
  * WIDGET LOADER - Système de Chargement Modulaire
@@ -31,6 +36,13 @@ class WidgetLoader {
             loading: new Set(),
             failed: new Set()
         };
+    }
+
+    register(type, WidgetClass) {
+        if (this.validateWidgetClass(WidgetClass)) {
+            this.widgetRegistry.set(type, WidgetClass);
+            this.loadingState.loaded.add(type);
+        }
     }
 
     /**
@@ -498,6 +510,10 @@ class WidgetLoader {
 
 // Instance globale du widget loader
 const widgetLoader = new WidgetLoader();
+widgetLoader.register('logo', LogoWidget);
+widgetLoader.register('hero-title', HeroTitleWidget);
+widgetLoader.register('pricing-card', PricingCardWidget);
+widgetLoader.register('text-simple', TextSimpleWidget);
 
 // Export pour utilisation
 export default widgetLoader;
