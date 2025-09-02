@@ -3,7 +3,7 @@ Modèles d'authentification et autorisation
 Gestion des utilisateurs, rôles et permissions
 """
 
-from sqlalchemy import Column, String, Boolean, ForeignKey, Table, Index
+from sqlalchemy import Column, String, Boolean, ForeignKey, Table, Index, Integer, DateTime, Text, TIMESTAMP
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.hybrid import hybrid_property

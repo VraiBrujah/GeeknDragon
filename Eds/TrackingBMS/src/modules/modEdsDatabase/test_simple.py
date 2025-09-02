@@ -6,6 +6,10 @@ import sys
 import os
 from pathlib import Path
 
+# Fix encoding pour Windows
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
 # Ajouter le répertoire src au path
 sys.path.insert(0, str(Path(__file__).parent))
 
