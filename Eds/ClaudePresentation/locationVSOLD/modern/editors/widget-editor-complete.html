@@ -11428,11 +11428,11 @@ Folder('${id}')" title="Renommer">
                 // Rôle      : Nombre de lignes actuel
                 // Type      : number (entier)
                 // Unité     : lignes
-                // Domaine   : 4 ≤ lignes ≤ 20
-                // Formule   : this.gridRows = Math.max(4, Math.min(20, current + delta))
+                // Domaine   : 4 ≤ lignes ≤ ∞ (pas de limite maximale)
+                // Formule   : this.gridRows = Math.max(4, current + delta)
                 // Exemple   : 8
                 const currentRows = this.gridRows || 8;
-                const newRows = Math.max(4, Math.min(20, currentRows + delta));
+                const newRows = Math.max(4, currentRows + delta);
                 
                 if (newRows !== currentRows) {
                     this.gridRows = newRows;
@@ -11496,7 +11496,7 @@ Folder('${id}')" title="Renommer">
                     // Rôle      : Variables CSS pour dimensions de grille
                     // Type      : CSS custom properties
                     // Unité     : colonnes/lignes (entiers)
-                    // Domaine   : --grid-columns: 6-24, --grid-rows: 4-20
+                    // Domaine   : --grid-columns: 6-24, --grid-rows: 4-∞ (pas de limite maximale)
                     // Formule   : setProperty(nom, valeur)
                     // Exemple   : --grid-columns: 12, --grid-rows: 8
                     workspace.style.setProperty('--grid-columns', this.gridColumns);
