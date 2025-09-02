@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Éditeur de Widgets Universels - Architecture Révolutionnaire</title>
+    
+    <!-- 
+        Rôle : Page principale de l'éditeur révolutionnaire
+        Type : Interface modulaire complètement personnalisable
+        Innovation : 2 widgets universels couvrent 90% des besoins
+        Architecture : ES6+ Classes orientées objet extensibles
+    -->
+    
+    <!-- Styles modulaires -->
+    <link rel="stylesheet" href="./css/core.css">
+    <link rel="stylesheet" href="./css/editor.css">
+    <link rel="stylesheet" href="./css/widgets.css">
+    <link rel="stylesheet" href="./css/themes.css">
+    
+    <!-- Bibliothèques externes (locales) -->
+    <script src="./js/lib/marked.min.js"></script>
+    <script src="./js/lib/dompurify.min.js"></script>
+    
+    <!-- Core système -->
+    <script src="./js/core/Utils.js"></script>
+    <script src="./js/core/EventManager.js"></script>
+    <script src="./js/core/Persistence.js"></script>
+    <script src="./js/core/GridEngine.js"></script>
+    <script src="./js/core/DragDropSystem.js"></script>
+    <script src="./js/core/SyncManager.js"></script>
+    
+    <!-- Widgets universels -->
+    <script src="./js/widgets/BaseWidget.js"></script>
+    <script src="./js/widgets/ElementUniversel.js"></script>
+    <script src="./js/widgets/GrilleComposition.js"></script>
+    
+    <!-- Interface utilisateur -->
+    <script src="./js/ui/PropertyPanel.js"></script>
+    <script src="./js/ui/WidgetBank.js"></script>
+    <script src="./js/ui/Toolbar.js"></script>
+    <script src="./js/ui/TreeView.js"></script>
+    
+    <!-- Éditeur principal -->
+    <script src="./js/PresentationEditor.js"></script>
+</head>
+
+<body class="editor-body">
+    <!-- 
+        === INTERFACE MODULAIRE ===
+        
+        Panneau Gauche : Banque widgets (dossiers, recherche, filtres)
+        Zone Centrale  : Éditeur grille infinie + outils
+        Panneau Droit  : Propriétés contextuelles détaillées
+        Arborescence   : Structure Gimp-like (noms, visibilité, lock)
+    -->
+    
+    <!-- Barre d'outils principale -->
+    <header class="main-toolbar">
+        <div class="toolbar-section toolbar-left">
+            <div class="logo-container">
+                <h1 class="editor-title">🎯 Éditeur Révolutionnaire</h1>
+                <span class="version-badge">Phase 1 - Widgets Universels</span>
+            </div>
+        </div>
+        
+        <div class="toolbar-section toolbar-center">
+            <div class="project-controls">
+                <button id="btn-nouveau-projet" class="btn-primary" title="Nouveau Projet">
+                    <span class="icon">📄</span> Nouveau
+                </button>
+                <button id="btn-ouvrir-projet" class="btn-secondary" title="Ouvrir Projet">
+                    <span class="icon">📂</span> Ouvrir
+                </button>
+                <button id="btn-sauvegarder" class="btn-secondary" title="Sauvegarder (Ctrl+S)">
+                    <span class="icon">💾</span> Sauvegarder
+                </button>
+            </div>
+            
+            <div class="history-controls">
+                <button id="btn-undo" class="btn-icon" title="Annuler (Ctrl+Z)" disabled>
+                    <span class="icon">↶</span>
+                </button>
+                <button id="btn-redo" class="btn-icon" title="Refaire (Ctrl+Y)" disabled>
+                    <span class="icon">↷</span>
+                </button>
+                <span id="history-counter" class="history-info">0/100</span>
+            </div>
+        </div>
+        
+        <div class="toolbar-section toolbar-right">
+            <div class="sync-controls">
+                <button id="btn-sync-viewer" class="btn-sync" title="Synchroniser Viewer">
+                    <span class="icon">🔄</span>
+                    <span class="sync-status" id="sync-status">●</span>
+                </button>
+                <button id="btn-open-viewer" class="btn-secondary" title="Ouvrir Viewer">
+                    <span class="icon">👁</span> Viewer
+                </button>
+            </div>
+            
+            <div class="export-controls">
+                <button id="btn-export-zip" class="btn-primary" title="Exporter ZIP Complet">
+                    <span class="icon">📦</span> Export ZIP
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Interface principale à 3 panneaux -->
+    <main class="main-interface">
+        
+        <!-- === PANNEAU GAUCHE - Banque Widgets ===-->
+        <aside class="left-panel" id="widget-bank-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">🧩 Banque Widgets</h3>
+                <div class="panel-controls">
+                    <button class="btn-collapse" title="Réduire Panneau">−</button>
+                </div>
+            </div>
+            
+            <div class="panel-content">
+                <!-- Recherche et filtres -->
+                <div class="search-section">
+                    <input type="text" id="widget-search" class="search-input" 
+                           placeholder="🔍 Rechercher widget..." autocomplete="off">
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Tous</button>
+                        <button class="filter-btn" data-filter="universel">Universels</button>
+                        <button class="filter-btn" data-filter="atomique">Atomiques</button>
+                    </div>
+                </div>
+                
+                <!-- Widgets Universels - 90% des besoins -->
+                <div class="widget-category expanded">
+                    <h4 class="category-title">
+                        <span class="expand-icon">▼</span>
+                        ⭐ Widgets Universels
+                        <span class="category-badge">2</span>
+                    </h4>
+                    <div class="widget-list">
+                        <div class="widget-item" 
+                             data-widget-type="element-universel" 
+                             draggable="true"
+                             title="Widget modulaire tout-en-un : image optionnelle + 3 textes (H1/H2/P)">
+                            <div class="widget-icon">🌟</div>
+                            <div class="widget-info">
+                                <div class="widget-name">Élément Universel</div>
+                                <div class="widget-desc">Image + 3 textes modulaires</div>
+                                <div class="widget-usage">Remplace: Logo, Texte, Hero</div>
+                            </div>
+                        </div>
+                        
+                        <div class="widget-item" 
+                             data-widget-type="grille-composition" 
+                             draggable="true"
+                             title="Compositeur dynamique : 3 modes (colonne/ligne/grille 2D)">
+                            <div class="widget-icon">🏗️</div>
+                            <div class="widget-info">
+                                <div class="widget-name">Grille Composition</div>
+                                <div class="widget-desc">Générateur tableaux N×M</div>
+                                <div class="widget-usage">3 modes : Col/Ligne/Grille 2D</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Widgets Atomiques Futurs -->
+                <div class="widget-category">
+                    <h4 class="category-title">
+                        <span class="expand-icon">▶</span>
+                        ⚡ Widgets Atomiques
+                        <span class="category-badge">5</span>
+                    </h4>
+                    <div class="widget-list" style="display: none;">
+                        <div class="widget-item coming-soon">
+                            <div class="widget-icon">🔘</div>
+                            <div class="widget-info">
+                                <div class="widget-name">Bouton Atomique</div>
+                                <div class="widget-desc">Phase 2</div>
+                            </div>
+                        </div>
+                        
+                        <div class="widget-item coming-soon">
+                            <div class="widget-icon">🎯</div>
+                            <div class="widget-info">
+                                <div class="widget-name">Icône Atomique</div>
+                                <div class="widget-desc">Phase 2</div>
+                            </div>
+                        </div>
+                        
+                        <div class="widget-item coming-soon">
+                            <div class="widget-icon">🏷️</div>
+                            <div class="widget-info">
+                                <div class="widget-name">Badge Atomique</div>
+                                <div class="widget-desc">Phase 2</div>
+                            </div>
+                        </div>
+                        
+                        <div class="widget-item coming-soon">
+                            <div class="widget-icon">➖</div>
+                            <div class="widget-info">
+                                <div class="widget-name">Séparateur Atomique</div>
+                                <div class="widget-desc">Phase 2</div>
+                            </div>
+                        </div>
+                        
+                        <div class="widget-item coming-soon">
+                            <div class="widget-icon">🎬</div>
+                            <div class="widget-info">
+                                <div class="widget-name">Vidéo Atomique</div>
+                                <div class="widget-desc">Phase 2</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- === ZONE CENTRALE - Éditeur Grille Infinie ===-->
+        <section class="center-area">
+            <!-- Barre d'outils grille -->
+            <div class="grid-toolbar">
+                <div class="grid-info">
+                    <span id="grid-dimensions">Grille: Infinie</span>
+                    <span id="zoom-level">Zoom: 100%</span>
+                    <span id="selected-widget">Aucun widget sélectionné</span>
+                </div>
+                
+                <div class="grid-controls">
+                    <button id="btn-grid-snap" class="btn-toggle active" title="Magnétisme Grille">
+                        <span class="icon">⊞</span>
+                    </button>
+                    <button id="btn-grid-visible" class="btn-toggle active" title="Afficher Grille">
+                        <span class="icon">⊡</span>
+                    </button>
+                    <button id="btn-zoom-fit" class="btn-icon" title="Ajuster Zoom">
+                        <span class="icon">⊟</span>
+                    </button>
+                    <button id="btn-zoom-out" class="btn-icon" title="Dézoomer">
+                        <span class="icon">−</span>
+                    </button>
+                    <button id="btn-zoom-in" class="btn-icon" title="Zoomer">
+                        <span class="icon">+</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Conteneur grille infinie avec scroll -->
+            <div class="grid-container" id="grid-container">
+                <div class="grid-canvas" id="grid-canvas">
+                    <!-- 
+                        Grille infinie dynamique
+                        - Taille libre définie par utilisateur (AUCUN maximum)
+                        - Cellules pixels précises (pas de contraintes grid)
+                        - Récursion illimitée (chaque widget peut contenir sous-grille)
+                        - Resize handles visuels
+                    -->
+                    <div class="grid-overlay" id="grid-overlay"></div>
+                    <div class="widgets-container" id="widgets-container">
+                        <!-- Les widgets seront injectés ici dynamiquement -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- === PANNEAU DROIT - Propriétés ===-->
+        <aside class="right-panel" id="properties-panel">
+            <div class="panel-header">
+                <h3 class="panel-title">⚙️ Propriétés</h3>
+                <div class="panel-controls">
+                    <button class="btn-collapse" title="Réduire Panneau">−</button>
+                </div>
+            </div>
+            
+            <div class="panel-content" id="properties-content">
+                <!-- Propriétés contextuelles -->
+                <div class="no-selection-state">
+                    <div class="empty-state-icon">⚙️</div>
+                    <h4>Aucun widget sélectionné</h4>
+                    <p>Cliquez sur un widget ou faites glisser-déposer depuis la banque pour commencer l'édition.</p>
+                    
+                    <div class="quick-actions">
+                        <button class="btn-primary" id="btn-add-element-universel">
+                            <span class="icon">🌟</span> Ajouter Élément Universel
+                        </button>
+                        <button class="btn-secondary" id="btn-add-grille-composition">
+                            <span class="icon">🏗️</span> Ajouter Grille Composition
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Les panneaux de propriétés seront injectés ici selon le widget sélectionné -->
+            </div>
+        </aside>
+    </main>
+    
+    <!-- === ARBORESCENCE GIMP-LIKE (Position flottante) ===-->
+    <div class="tree-panel" id="tree-panel">
+        <div class="panel-header">
+            <h3 class="panel-title">🌳 Structure</h3>
+            <div class="panel-controls">
+                <button class="btn-collapse" title="Réduire Arborescence">−</button>
+                <button class="btn-close" title="Fermer Arborescence">×</button>
+            </div>
+        </div>
+        
+        <div class="panel-content">
+            <div class="tree-toolbar">
+                <button class="btn-icon" id="btn-expand-all" title="Tout Développer">
+                    <span class="icon">⊞</span>
+                </button>
+                <button class="btn-icon" id="btn-collapse-all" title="Tout Réduire">
+                    <span class="icon">⊟</span>
+                </button>
+                <button class="btn-icon" id="btn-show-all" title="Tout Afficher">
+                    <span class="icon">👁</span>
+                </button>
+                <button class="btn-icon" id="btn-unlock-all" title="Tout Déverrouiller">
+                    <span class="icon">🔓</span>
+                </button>
+            </div>
+            
+            <div class="tree-content" id="tree-content">
+                <!-- Structure hiérarchique des widgets -->
+                <div class="tree-item root-item">
+                    <div class="tree-node">
+                        <span class="tree-icon">📄</span>
+                        <span class="tree-name editable" contenteditable="false">Projet Sans Titre</span>
+                        <div class="tree-controls">
+                            <button class="tree-btn" title="Visibilité">👁</button>
+                            <button class="tree-btn" title="Verrouillage">🔓</button>
+                        </div>
+                    </div>
+                    <div class="tree-children" id="root-children">
+                        <!-- Widgets enfants seront ajoutés ici -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- === OVERLAY SYSTÈME ===-->
+    <div class="system-overlay" id="system-overlay" style="display: none;">
+        <div class="loading-screen">
+            <div class="spinner"></div>
+            <div class="loading-text">Chargement...</div>
+        </div>
+    </div>
+    
+    <!-- === MODALS ===-->
+    
+    <!-- Modal Nouveau Projet -->
+    <div class="modal" id="modal-nouveau-projet" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🆕 Nouveau Projet</h3>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="project-name">Nom du projet :</label>
+                    <input type="text" id="project-name" class="form-input" 
+                           placeholder="Mon Projet Marketing" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="project-template">Template :</label>
+                    <select id="project-template" class="form-select">
+                        <option value="vide">Projet vide</option>
+                        <option value="marketing">Page marketing</option>
+                        <option value="presentation">Présentation</option>
+                        <option value="portfolio">Portfolio</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="btn-annuler-projet">Annuler</button>
+                <button class="btn-primary" id="btn-creer-projet">Créer</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+    
+    <!-- Script d'initialisation -->
+    <script>
+        // 
+        // Rôle : Point d'entrée de l'application révolutionnaire
+        // Type : Initialisation système complet
+        // Responsabilité : Orchestration des modules et démarrage interface
+        //
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                console.log('🚀 Démarrage Éditeur Révolutionnaire - Phase 1');
+                
+                // Initialisation du système
+                window.presentationEditor = new PresentationEditor();
+                
+                console.log('✅ Éditeur initialisé avec succès');
+                
+                // Animation d'entrée
+                document.body.classList.add('app-loaded');
+                
+            } catch (error) {
+                console.error('❌ Erreur lors de l\'initialisation:', error);
+                
+                // Affichage d'erreur utilisateur
+                document.body.innerHTML = `
+                    <div class="error-screen">
+                        <h2>⚠️ Erreur de Chargement</h2>
+                        <p>L'éditeur n'a pas pu démarrer correctement.</p>
+                        <details>
+                            <summary>Détails techniques</summary>
+                            <pre>${error.stack}</pre>
+                        </details>
+                        <button onclick="location.reload()" class="btn-primary">Recharger</button>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
