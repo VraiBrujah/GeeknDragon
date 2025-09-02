@@ -1,5 +1,6 @@
 import BaseWidget from '../core/base-widget.js';
 import stateManager from '../core/widget-state-manager.js';
+import syncManager from '../core/sync-manager.js';
 
 describe('BaseWidget', () => {
   beforeEach(() => {
@@ -7,6 +8,7 @@ describe('BaseWidget', () => {
     stateManager.widgets.clear();
     stateManager.states.clear();
     localStorage.clear();
+    syncManager.widgets.clear();
   });
 
   test('renders element and applies styles', () => {

@@ -1,5 +1,6 @@
 /* eslint-env browser */
 import stateManager from './widget-state-manager.js';
+import syncManager from './sync-manager.js';
 
 /**
  * Base class representing a visual widget that can be positioned and styled.
@@ -53,6 +54,7 @@ class BaseWidget {
     this.el = null;
     this.events = {};
     stateManager.register(this);
+    syncManager.subscribe(this);
   }
 
   /**
@@ -95,6 +97,8 @@ class BaseWidget {
     this.styles = { ...this.styles, ...partialStyles };
     this.applyStyles();
     this.emit('change', this.serialize());
+    this.saveState();
+    syncManager.broadcastChange(this);
   }
 
   /**
@@ -111,6 +115,8 @@ class BaseWidget {
       this.el.style.top = `${y}px`;
     }
     this.emit('change', this.serialize());
+    this.saveState();
+    syncManager.broadcastChange(this);
   }
 
   /**
@@ -127,6 +133,8 @@ class BaseWidget {
       this.el.style.height = `${height}px`;
     }
     this.emit('change', this.serialize());
+    this.saveState();
+    syncManager.broadcastChange(this);
   }
 
   /**
@@ -166,12 +174,15 @@ class BaseWidget {
 
   /** Persist current state using the widget state manager. */
   saveState() {
-    stateManager.setState(this.id, this.serialize());
+    const data = this.serialize();
+    stateManager.setState(this.id, data);
+    syncManager.saveState(this);
   }
 
   /** Load state from the widget state manager if available. */
   loadState() {
-    const data = stateManager.getState(this.id);
+    const data =
+      stateManager.getState(this.id) || syncManager.loadState(this.id);
     if (data) this.hydrate(data);
   }
 
