@@ -52,4 +52,23 @@ describe('SyncManager', () => {
     syncManager.subscribe(widget);
     expect(widget.hydrate).toHaveBeenCalledWith(saved);
   });
+
+  test('undo and redo apply previous widget states', () => {
+    const widget = new DummyWidget('w3');
+    // initial state
+    syncManager.saveState(widget);
+
+    // change x position and save
+    widget.state.x = 10;
+    syncManager.saveState(widget);
+    expect(syncManager.loadState('w3').x).toBe(10);
+
+    // undo should revert to previous x
+    syncManager.undo();
+    expect(syncManager.loadState('w3').x).toBe(0);
+
+    // redo should re-apply x = 10
+    syncManager.redo();
+    expect(syncManager.loadState('w3').x).toBe(10);
+  });
 });
