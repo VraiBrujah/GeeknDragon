@@ -71,4 +71,26 @@ describe('SyncManager', () => {
     syncManager.redo();
     expect(syncManager.loadState('w3').x).toBe(10);
   });
+
+  test('encodeState and applyUpdate merge remote changes', () => {
+    const widget = new DummyWidget('w4');
+    widget.state.x = 15;
+    syncManager.saveState(widget);
+    const update = syncManager.encodeState();
+    syncManager.clear();
+    // simulate loading into a fresh document
+    syncManager.isInitialized = false;
+    syncManager.applyUpdate(update);
+    expect(syncManager.loadState('w4').x).toBe(15);
+  });
+
+  test('getHistory exposes counts of undo and redo stacks', () => {
+    const widget = new DummyWidget('w5');
+    syncManager.saveState(widget);
+    widget.state.x = 20;
+    syncManager.saveState(widget);
+    expect(syncManager.getHistory()).toEqual({ undo: 2, redo: 0 });
+    syncManager.undo();
+    expect(syncManager.getHistory()).toEqual({ undo: 1, redo: 1 });
+  });
 });
