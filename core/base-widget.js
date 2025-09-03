@@ -47,7 +47,12 @@ class BaseWidget {
     this.zIndex = zIndex;
     this.rotation = rotation;
     this.styles = {
-      background: 'transparent',
+      color: 'var(--color-text-base)',
+      background: 'var(--color-background-base)',
+      fontFamily: 'var(--font-family-base)',
+      fontSize: 'var(--font-size-base)',
+      padding: 'var(--spacing-s)',
+      margin: 'var(--spacing-xs)',
       border: 'none',
       borderRadius: '0px',
       boxShadow: 'none',

@@ -21,6 +21,15 @@ describe('BaseWidget', () => {
     syncManager.clear();
   });
 
+  test('defaults use CSS variables', () => {
+    const widget = new BaseWidget();
+    const container = document.getElementById('root');
+    const el = widget.render(container);
+    expect(widget.styles.background).toBe('var(--color-background-base)');
+    expect(widget.styles.color).toBe('var(--color-text-base)');
+    expect(widget.styles.padding).toBe('var(--spacing-s)');
+  });
+
   test('renders element and applies styles', () => {
     const widget = new BaseWidget({
       x: 10,
