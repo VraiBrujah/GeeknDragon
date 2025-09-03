@@ -624,6 +624,9 @@
         <!-- Les notifications apparaîtront ici -->
     </div>
 
+    <!-- Zone racine pour l'éditeur React utilisant dnd-kit -->
+    <div id="dnd-editor-root"></div>
+
     <!-- Scripts de l'application -->
     
     <!-- Widgets (doivent être chargés AVANT WidgetManager) -->
@@ -645,7 +648,9 @@
     
     <!-- Éditeurs -->
     <script src="src/editors/MainEditor.js"></script>
-    
+    <!-- Initialisation de l'éditeur React avec dnd-kit -->
+    <script type="module" src="src/editors/initDndEditor.js"></script>
+
     <!-- Utilitaires -->
     <script src="src/utils/UIUtils.js"></script>
     
