@@ -1,12 +1,22 @@
-import BaseWidget from '../core/base-widget.js';
-import stateManager from '../core/widget-state-manager.js';
-import syncManager from '../core/sync-manager.js';
+import 'fake-indexeddb/auto';
+
+if (typeof globalThis.structuredClone !== 'function') {
+  globalThis.structuredClone = (val) => JSON.parse(JSON.stringify(val));
+}
+let BaseWidget;
+let stateManager;
+let syncManager;
+
+beforeAll(async () => {
+  ({ default: BaseWidget } = await import('../core/base-widget.js'));
+  ({ default: stateManager } = await import('../core/widget-state-manager.js'));
+  ({ default: syncManager } = await import('../core/sync-manager.js'));
+});
 
 describe('BaseWidget', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     document.body.innerHTML = '<div id="root"></div>';
-    stateManager.widgets.clear();
-    stateManager.states.clear();
+    await stateManager.clear();
     localStorage.clear();
     syncManager.clear();
   });

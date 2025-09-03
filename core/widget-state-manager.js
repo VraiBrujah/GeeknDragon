@@ -1,4 +1,5 @@
 /* eslint-env browser */
+import db from './presentation-db.js';
 
 /**
  * Manages the state of widgets and provides persistence/synchronization.
@@ -13,19 +14,12 @@ class WidgetStateManager {
     this.widgets = new Map();
     this.states = new Map();
 
-    // Load existing states from localStorage
-    if (typeof window !== 'undefined' && window.localStorage) {
-      Object.keys(localStorage).forEach((key) => {
-        try {
-          const data = JSON.parse(localStorage.getItem(key));
-          if (data && typeof data === 'object') {
-            this.states.set(key, data);
-          }
-        } catch (e) {
-          // ignore
-        }
+    // Load existing states from IndexedDB via Dexie
+    this.ready = db.widgets.toArray().then((rows) => {
+      rows.forEach(({ id, data }) => {
+        this.states.set(id, data);
       });
-    }
+    });
 
     // Setup BroadcastChannel for cross-tab communication
     this.channel =
@@ -81,6 +75,11 @@ class WidgetStateManager {
     });
     const existing = this.getState(widget.id);
     if (existing) widget.hydrate(existing);
+    else
+      this.ready.then(() => {
+        const later = this.getState(widget.id);
+        if (later) widget.hydrate(later);
+      });
   }
 
   /**
@@ -91,18 +90,6 @@ class WidgetStateManager {
    */
   getState(id) {
     if (this.states.has(id)) return this.states.get(id);
-    if (typeof window !== 'undefined' && window.localStorage) {
-      try {
-        const raw = localStorage.getItem(id);
-        if (raw) {
-          const data = JSON.parse(raw);
-          this.states.set(id, data);
-          return data;
-        }
-      } catch (e) {
-        // ignore
-      }
-    }
     return null;
   }
 
@@ -140,14 +127,31 @@ class WidgetStateManager {
    * @param {Object} data Serialized widget data
    * @private
    */
-  _persist(id, data) {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      try {
-        localStorage.setItem(id, JSON.stringify(data));
-      } catch (e) {
-        // ignore
-      }
+  async _persist(id, data) {
+    try {
+      await db.transaction('rw', db.widgets, db.histories, async () => {
+        await db.widgets.put({ id, data });
+        await db.histories.add({ widgetId: id, data, createdAt: Date.now() });
+      });
+    } catch (e) {
+      // ignore
     }
+  }
+
+  async clear() {
+    this.widgets.clear();
+    this.states.clear();
+    await db.transaction(
+      'rw',
+      db.widgets,
+      db.snapshots,
+      db.histories,
+      async () => {
+        await db.widgets.clear();
+        await db.snapshots.clear();
+        await db.histories.clear();
+      },
+    );
   }
 }
 
