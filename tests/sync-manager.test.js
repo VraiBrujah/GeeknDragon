@@ -26,8 +26,8 @@ class DummyWidget {
 
 describe('SyncManager', () => {
   beforeEach(() => {
-    localStorage.clear();
-    syncManager.widgets.clear();
+    // reset the internal Y.Doc and maps
+    syncManager.clear();
   });
 
   test('saveState and loadState roundtrip', () => {
@@ -46,7 +46,8 @@ describe('SyncManager', () => {
       zIndex: 2,
       styles: { color: 'red' },
     };
-    localStorage.setItem('widget-w2', JSON.stringify(saved));
+    // Directly set state in the Y.Doc map before subscribing
+    syncManager.map.set('w2', saved);
     const widget = new DummyWidget('w2');
     syncManager.subscribe(widget);
     expect(widget.hydrate).toHaveBeenCalledWith(saved);
