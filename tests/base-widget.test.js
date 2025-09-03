@@ -41,7 +41,13 @@ describe('BaseWidget', () => {
   });
 
   test('serialize and hydrate maintain state', () => {
-    const widget = new BaseWidget({ x: 5, y: 6, width: 70, height: 80 });
+    const widget = new BaseWidget({
+      x: 5,
+      y: 6,
+      width: 70,
+      height: 80,
+      rotation: 10,
+    });
     widget.data = { foo: 'bar' };
     widget.custom = 42;
     widget.el = document.createElement('div');
@@ -51,6 +57,7 @@ describe('BaseWidget', () => {
 
     expect(data.data).toEqual({ foo: 'bar' });
     expect(data.custom).toBe(42);
+    expect(data.rotation).toBe(10);
     expect(data.el).toBeUndefined();
     expect(data.events).toBeUndefined();
 
@@ -58,6 +65,7 @@ describe('BaseWidget', () => {
     clone.hydrate(data);
     expect(clone.data).toEqual({ foo: 'bar' });
     expect(clone.custom).toBe(42);
+    expect(clone.rotation).toBe(10);
     expect(clone.serialize()).toEqual(data);
   });
 
@@ -83,10 +91,12 @@ describe('BaseWidget', () => {
     widget.setBorderRadius('5px');
     widget.setOpacity(0.5);
     widget.setBoxShadow('0 0 5px black');
+    widget.setRotation(45);
     expect(widget.el.style.background).toBe('blue');
     expect(widget.el.style.border).toBe('1px solid red');
     expect(widget.el.style.borderRadius).toBe('5px');
     expect(widget.el.style.opacity).toBe('0.5');
     expect(widget.el.style.boxShadow).toBe('0 0 5px black');
+    expect(widget.el.style.transform).toBe('rotate(45deg)');
   });
 });
