@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "tailwindcss -i ./editor/input.css -o ./viewer/output.css --minify",
+    "build": "npm run tsc && tailwindcss -i ./editor/input.css -o ./viewer/output.css --minify",
     "watch": "tailwindcss -i ./editor/input.css -o ./viewer/output.css --watch",
     "tsc": "tsc"
   },
