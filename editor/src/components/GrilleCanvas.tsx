@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Stage, Layer, Rect, Text, Transformer } from 'react-konva';
 
 export interface Widget {
@@ -14,11 +14,17 @@ export interface Widget {
 
 interface GrilleCanvasProps {
   widgets: Widget[];
+  selectedId: string | null;
+  onSelect?: (id: string | null) => void;
   onChange?: (widgets: Widget[]) => void;
 }
 
-export default function GrilleCanvas({ widgets, onChange }: GrilleCanvasProps) {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+export default function GrilleCanvas({
+  widgets,
+  selectedId,
+  onSelect,
+  onChange,
+}: GrilleCanvasProps) {
   const stageRef = useRef<any>(null);
   const transformerRef = useRef<any>(null);
 
@@ -73,7 +79,7 @@ export default function GrilleCanvas({ widgets, onChange }: GrilleCanvasProps) {
         ref={stageRef}
         onMouseDown={(e) => {
           if (e.target === e.target.getStage()) {
-            setSelectedId(null);
+            onSelect?.(null);
           }
         }}
       >
@@ -99,7 +105,7 @@ export default function GrilleCanvas({ widgets, onChange }: GrilleCanvasProps) {
                   height: Math.max(5, node.height() * scaleY),
                 });
               },
-              onClick: () => setSelectedId(w.id),
+              onClick: () => onSelect?.(w.id),
             };
             if (w.type === 'rect') {
               return <Rect {...commonProps} width={w.width} height={w.height} fill={w.fill} />;
