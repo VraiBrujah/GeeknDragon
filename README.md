@@ -114,3 +114,14 @@ To ensure the currency converter handles invalid inputs correctly:
 3. Enter a negative value such as `-3`. The converter clamps the amount to `0` and displays the warning.
 4. Remove the invalid characters and verify that the warning disappears and the totals update.
 
+
+## Generated files
+
+The presentation tool under `Eds/ClaudePresentation/presentationObj` generates temporary assets that are not committed to the repository:
+
+- `node_modules/`
+- `viewer/output.css`
+- `viewer/*.html`
+- build directories such as `dist/`, `tsbuild/` and `build/`
+
+These files can be recreated as needed and are ignored via `.gitignore`.
