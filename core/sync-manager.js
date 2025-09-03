@@ -1,6 +1,7 @@
 /* eslint-env browser */
 import * as Y from 'yjs';
 import { WebsocketProvider } from 'y-websocket';
+import { WebrtcProvider } from 'y-webrtc';
 import { IndexeddbPersistence } from 'y-indexeddb';
 
 /**
@@ -23,6 +24,8 @@ class SyncManager {
     this.suppress = false;
     // History manager to allow undo/redo of changes
     this.undoManager = null;
+    // Which provider type is currently used (websocket or webrtc)
+    this.providerType = 'websocket';
   }
 
   /**
@@ -30,10 +33,11 @@ class SyncManager {
    *
    * @param {string} [name='default'] Unique name for the shared document
    */
-  init(name = 'default') {
+  init(name = 'default', { provider = 'websocket' } = {}) {
     if (this.isInitialized) return;
     this.isInitialized = true;
 
+    this.providerType = provider;
     this.doc = new Y.Doc();
     this.map = this.doc.getMap('widgets');
     // Track operations on the shared map to enable undo/redo history
@@ -64,14 +68,14 @@ class SyncManager {
       this.persistence = new IndexeddbPersistence(name, this.doc);
     }
 
-    // Setup WebSocket provider (disabled during tests)
-    if (
-      typeof window !== 'undefined' &&
-      typeof window.WebSocket !== 'undefined' &&
-      process.env.NODE_ENV !== 'test'
-    ) {
-      const url = 'ws://localhost:1234';
-      this.provider = new WebsocketProvider(url, name, this.doc);
+    // Setup real-time provider (disabled during tests)
+    if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'test') {
+      if (provider === 'webrtc') {
+        this.provider = new WebrtcProvider(name, this.doc);
+      } else if (typeof window.WebSocket !== 'undefined') {
+        const url = 'ws://localhost:1234';
+        this.provider = new WebsocketProvider(url, name, this.doc);
+      }
     }
   }
 
@@ -127,6 +131,30 @@ class SyncManager {
   /** Redo the previously undone change. */
   redo() {
     this.undoManager?.redo();
+  }
+
+  /** Retrieve basic information about the undo/redo history. */
+  getHistory() {
+    return {
+      undo: this.undoManager?.undoStack.length || 0,
+      redo: this.undoManager?.redoStack.length || 0,
+    };
+  }
+
+  /** Export the current Yjs document as an update. */
+  encodeState() {
+    if (!this.isInitialized) this.init();
+    return Y.encodeStateAsUpdate(this.doc);
+  }
+
+  /**
+   * Merge an incoming Yjs update into the current document.
+   *
+   * @param {Uint8Array} update Binary update produced by Yjs
+   */
+  applyUpdate(update) {
+    if (!this.isInitialized) this.init();
+    Y.applyUpdate(this.doc, update);
   }
 
   /** Connect the underlying WebSocket provider if available. */
