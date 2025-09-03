@@ -34,7 +34,7 @@ Schéma de communication :
 graph LR
   Editor <--> Viewer <--> LocalStorage
 ```
-![Diagramme Editor-Viewer-LocalStorage](https://mermaid.ink/img/pako:Sy9KLMhQ8AniUlBwTcksyS9SsNHVtVMIy0wtT4WyffKTE3OCS_KLEtNTAQ)
+![Diagramme Editor-Viewer-LocalStorage](images/editor-viewer-localstorage.svg)
 
 ### 1. **BaseWidget (Classe Abstraite Universelle)**
 ```javascript
