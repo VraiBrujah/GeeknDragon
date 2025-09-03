@@ -1,7 +1,13 @@
 import { create } from 'zustand';
-import * as Y from 'yjs';
-import { WebsocketProvider } from 'y-websocket';
-import { loadProject, saveProject, loadUIState, saveUIState } from './storage';
+import { produce } from 'immer';
+import {
+  loadProject,
+  saveProject,
+  loadUIState,
+  saveUIState,
+  loadHistory,
+  saveHistory,
+} from './storage';
 import type { Widget } from '../components/GrilleCanvas';
 
 const defaultWidget: Widget = {
@@ -15,17 +21,10 @@ const defaultWidget: Widget = {
   fill: '#000',
 };
 
-const doc = new Y.Doc();
-const yWidgets = doc.getArray<Widget>('widgets');
-const undoManager = new Y.UndoManager(yWidgets);
-
-let wsProvider: WebsocketProvider | null = null;
-if (typeof window !== 'undefined' && typeof window.WebSocket !== 'undefined') {
-  wsProvider = new WebsocketProvider('ws://localhost:1234', 'editor', doc);
-}
-
 interface EditorStore {
   widgets: Widget[];
+  history: Widget[][];
+  pointer: number;
   selectedId: string | null;
   setWidgets: (widgets: Widget[]) => void;
   select: (id: string | null) => void;
@@ -33,36 +32,73 @@ interface EditorStore {
   redo: () => void;
 }
 
-export const useEditorStore = create<EditorStore>((set) => {
-  yWidgets.observe(() => {
-    const data = yWidgets.toArray() as Widget[];
-    set({ widgets: data });
-    saveProject(data);
-  });
+export const useEditorStore = create<EditorStore>((set, get) => ({
+  widgets: [defaultWidget],
+  history: [[defaultWidget]],
+  pointer: 0,
+  selectedId: null,
 
-  (async () => {
-    const [project, ui] = await Promise.all([loadProject(), loadUIState()]);
-    doc.transact(() => {
-      yWidgets.delete(0, yWidgets.length);
-      yWidgets.insert(0, project || [defaultWidget]);
-    });
-    set({ selectedId: ui?.selectedId ?? null });
-  })();
-
-  return {
-    widgets: yWidgets.toArray(),
-    selectedId: null,
-    setWidgets: (widgets) => {
-      doc.transact(() => {
-        yWidgets.delete(0, yWidgets.length);
-        yWidgets.insert(0, widgets);
+  setWidgets: (widgets) => {
+    set((state) => {
+      const newWidgets = produce(state.widgets, (draft) => {
+        draft.splice(0, draft.length, ...widgets);
       });
-    },
-    select: (id) => {
-      set({ selectedId: id });
-      saveUIState({ selectedId: id });
-    },
-    undo: () => undoManager.undo(),
-    redo: () => undoManager.redo(),
-  };
-});
+      const history = state.history.slice(0, state.pointer + 1);
+      history.push(newWidgets);
+      saveProject(newWidgets);
+      saveHistory({ stack: history, pointer: history.length - 1 });
+      return {
+        widgets: newWidgets,
+        history,
+        pointer: history.length - 1,
+      };
+    });
+  },
+
+  select: (id) => {
+    set({ selectedId: id });
+    saveUIState({ selectedId: id });
+  },
+
+  undo: () => {
+    const { pointer, history } = get();
+    if (pointer > 0) {
+      const newPointer = pointer - 1;
+      const widgets = history[newPointer];
+      set({ widgets, pointer: newPointer });
+      saveProject(widgets);
+      saveHistory({ stack: history, pointer: newPointer });
+    }
+  },
+
+  redo: () => {
+    const { pointer, history } = get();
+    if (pointer < history.length - 1) {
+      const newPointer = pointer + 1;
+      const widgets = history[newPointer];
+      set({ widgets, pointer: newPointer });
+      saveProject(widgets);
+      saveHistory({ stack: history, pointer: newPointer });
+    }
+  },
+}));
+
+(async () => {
+  const [project, history, ui] = await Promise.all([
+    loadProject(),
+    loadHistory(),
+    loadUIState(),
+  ]);
+
+  let widgets = project ?? [defaultWidget];
+  let histStack = history?.stack ?? [widgets];
+  let pointer = history?.pointer ?? histStack.length - 1;
+
+  useEditorStore.setState({
+    widgets,
+    history: histStack,
+    pointer,
+    selectedId: ui?.selectedId ?? null,
+  });
+})();
+
