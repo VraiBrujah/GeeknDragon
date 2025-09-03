@@ -12,7 +12,8 @@
     "test:e2e": "playwright test",
     "lint": "eslint core/base-widget.js core/widget-state-manager.js core/sync-manager.js tests/base-widget.test.js tests/widget-state-manager.test.js tests/sync-manager.test.js",
     "format": "prettier --write .",
-    "build:location": "NODE_ENV=production postcss css/location.css -o css/location.min.css"
+    "build:location": "NODE_ENV=production postcss css/location.css -o css/location.min.css",
+    "build:tokens": "style-dictionary build --config style-dictionary.config.json"
   },
   "keywords": [],
   "author": "",
@@ -35,6 +36,7 @@
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.0",
     "prettier": "^3.3.3",
+    "style-dictionary": "^4.4.0",
     "tailwindcss": "^3.4.17"
   },
   "dependencies": {
