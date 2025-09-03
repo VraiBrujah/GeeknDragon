@@ -367,9 +367,9 @@ const ProductPage = {
     if (button.classList.contains('voted')) return;
 
     button.classList.add('voted');
-    button.style.backgroundColor = 'rgba(76, 175, 80, 0.1)';
-    button.style.borderColor = '#4CAF50';
-    button.style.color = '#4CAF50';
+    button.style.backgroundColor = 'var(--color-success-light)';
+    button.style.borderColor = 'var(--color-success)';
+    button.style.color = 'var(--color-success)';
 
     // Incrémenter le compteur
     const currentText = button.textContent;
@@ -392,7 +392,13 @@ const ProductPage = {
             position: fixed;
             top: 120px;
             right: 2rem;
-            background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+            background: ${
+              type === 'success'
+                ? 'var(--color-success)'
+                : type === 'error'
+                ? 'var(--color-error)'
+                : 'var(--color-info)'
+            };
             color: white;
             padding: 1rem 1.5rem;
             border-radius: var(--border-radius);
