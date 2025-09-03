@@ -1,5 +1,6 @@
+import TextWidget from './TextWidget';
 import { getInitialContent } from '../modules/editorStore';
 
 export default function Editor() {
-  return <div>{getInitialContent()}</div>;
+  return <TextWidget initialContent={getInitialContent()} />;
 }
