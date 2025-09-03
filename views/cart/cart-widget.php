@@ -17,30 +17,33 @@ $isEmpty = $cartService->isEmpty();
 <!-- Widget Panier Custom -->
 <div id="gd-cart-widget" class="relative">
     <!-- Bouton panier -->
-    <button 
-        id="gd-cart-toggle-widget" 
+    <button
+        id="gd-cart-toggle-widget"
         class="gd-cart-btn flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
         aria-label="<?= $helper->t('nav.cart') ?>"
         aria-expanded="false"
         aria-haspopup="dialog"
+        aria-controls="gd-cart-panel"
     >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9m-9 0h9"/>
         </svg>
         <span class="sr-only"><?= $helper->t('nav.cart') ?></span>
-        <span id="gd-cart-count-widget" class="gd-cart-badge bg-red-500 text-white text-xs rounded-full px-2 py-1">
+        <span id="gd-cart-count-widget" class="gd-cart-badge bg-red-500 text-white text-xs rounded-full px-2 py-1" aria-live="polite">
             <?= $itemCount ?>
         </span>
     </button>
 
     <!-- Panneau panier (caché par défaut) -->
-    <div 
-        id="gd-cart-panel" 
+    <div
+        id="gd-cart-panel"
         class="gd-cart-panel absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-xl z-50 hidden"
         role="dialog"
         aria-labelledby="cart-title"
         aria-hidden="true"
+        aria-modal="true"
+        tabindex="-1"
     >
         <!-- En-tête -->
         <div class="p-4 border-b border-gray-200">
