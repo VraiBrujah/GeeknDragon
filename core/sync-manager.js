@@ -21,6 +21,8 @@ class SyncManager {
     this.map = null;
     this.isInitialized = false;
     this.suppress = false;
+    // History manager to allow undo/redo of changes
+    this.undoManager = null;
   }
 
   /**
@@ -34,6 +36,9 @@ class SyncManager {
 
     this.doc = new Y.Doc();
     this.map = this.doc.getMap('widgets');
+    // Track operations on the shared map to enable undo/redo history
+    // captureTimeout=0 ensures each change is a distinct undo step
+    this.undoManager = new Y.UndoManager(this.map, { captureTimeout: 0 });
 
     // Observe Yjs changes and hydrate local widgets accordingly
     this.map.observe((event) => {
@@ -114,6 +119,16 @@ class SyncManager {
     this.saveState(widget);
   }
 
+  /** Undo the last change recorded in the shared document. */
+  undo() {
+    this.undoManager?.undo();
+  }
+
+  /** Redo the previously undone change. */
+  redo() {
+    this.undoManager?.redo();
+  }
+
   /** Connect the underlying WebSocket provider if available. */
   connect() {
     this.provider?.connect();
@@ -131,6 +146,7 @@ class SyncManager {
     if (this.map) {
       Array.from(this.map.keys()).forEach((key) => this.map.delete(key));
     }
+    this.undoManager?.clear();
   }
 }
 
