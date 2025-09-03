@@ -5,9 +5,14 @@ interface ProjectRecord {
   data: any;
 }
 
+export interface HistoryData {
+  stack: any[];
+  pointer: number;
+}
+
 interface HistoryRecord {
   id: string;
-  data: any;
+  data: HistoryData;
 }
 
 interface UIRecord {
@@ -41,11 +46,11 @@ export async function loadProject(): Promise<any | null> {
   return record?.data ?? null;
 }
 
-export async function saveHistory(data: any) {
+export async function saveHistory(data: HistoryData) {
   await db.history.put({ id: 'history', data });
 }
 
-export async function loadHistory(): Promise<any | null> {
+export async function loadHistory(): Promise<HistoryData | null> {
   const record = await db.history.get('history');
   return record?.data ?? null;
 }
