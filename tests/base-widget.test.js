@@ -8,7 +8,7 @@ describe('BaseWidget', () => {
     stateManager.widgets.clear();
     stateManager.states.clear();
     localStorage.clear();
-    syncManager.widgets.clear();
+    syncManager.clear();
   });
 
   test('renders element and applies styles', () => {
