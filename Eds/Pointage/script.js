@@ -1606,12 +1606,17 @@ class MaisonQuebecApp {
         const premierJourSemaine = premierJour.getDay(); // 0 = dimanche
         const joursEnMois = dernierJour.getDate();
         
-        // Grouper les pointages par jour
+        // Grouper les pointages par jour ET par date complète
         const pointagesParJour = {};
+        const pointagesParDateComplete = {};
         pointages.forEach(p => {
             const jour = new Date(p.date).getDate();
             if (!pointagesParJour[jour]) pointagesParJour[jour] = [];
             pointagesParJour[jour].push(p);
+            
+            // Aussi grouper par date complète pour le clic
+            if (!pointagesParDateComplete[p.date]) pointagesParDateComplete[p.date] = [];
+            pointagesParDateComplete[p.date].push(p);
         });
         
         let calendrierHtml = `
@@ -1652,9 +1657,15 @@ class MaisonQuebecApp {
                     const pointagesJour = pointagesParJour[jour] || [];
                     const aDesPointages = pointagesJour.length > 0;
                     
+                    // Si on a des pointages, utiliser la vraie date du premier pointage
+                    let dateReelle = `${annee}-${mois.toString().padStart(2, '0')}-${jour.toString().padStart(2, '0')}`;
+                    if (aDesPointages && pointagesJour.length > 0) {
+                        dateReelle = pointagesJour[0].date; // Utiliser la vraie date du pointage
+                    }
+                    
                     calendrierHtml += `
                         <td class="has-background-grey-dark ${aDesPointages ? 'is-clickable' : ''}" 
-                            ${aDesPointages ? `onclick="app.afficherPointagesJour('${annee}-${mois.toString().padStart(2, '0')}-${jour.toString().padStart(2, '0')}')" style="cursor: pointer;"` : ''}>
+                            ${aDesPointages ? `onclick="app.afficherPointagesJour('${dateReelle}')" style="cursor: pointer;"` : ''}>
                             <div class="p-2">
                                 <div class="has-text-white has-text-weight-bold mb-1">${jour}</div>
                                 ${pointagesJour.map(p => {
@@ -1696,13 +1707,13 @@ class MaisonQuebecApp {
     }
 
     afficherPointagesJour(dateStr) {
-        const pointages = this.storage.get('pointages');
-        const artisans = this.storage.get('artisans');
+        const pointages = this.storage.get('pointages') || [];
+        const artisans = this.storage.get('artisans') || [];
         
         const pointagesJour = pointages.filter(p => p.date === dateStr);
         
         if (pointagesJour.length === 0) {
-            this.showNotification('Aucun pointage trouvé pour cette date', 'info');
+            this.showNotification(`Aucun pointage trouvé pour le ${dateStr}`, 'info');
             return;
         }
         
