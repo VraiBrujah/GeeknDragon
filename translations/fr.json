@@ -70,45 +70,45 @@
   "footer": {
     "made": "Conçu au Québec."
   },
-    "contact": {
-      "title": "Demande de devis",
-      "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
-      "requestQuote": "Demander un devis",
-      "form": {
-        "name": "Nom complet",
-        "email": "Adresse e-mail",
-        "phone": "Téléphone (optionnel)",
-        "message": "Détail de la demande",
-        "submit": "Envoyer ma demande"
-      },
-      "info": {
-        "role": "Responsable produit",
-        "roleCommunity": "Responsable produit & communauté"
-      }
+  "contact": {
+    "title": "Demande de devis",
+    "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
+    "requestQuote": "Demander un devis",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone (optionnel)",
+      "message": "Détail de la demande",
+      "submit": "Envoyer ma demande"
     },
-    "quote": {
-      "title": "Demande de devis",
-      "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
-      "form": {
-        "name": "Nom complet",
-        "email": "Adresse e-mail",
-        "phone": "Téléphone (optionnel)",
-        "service": "Sujet / Service",
-        "message": "Votre demande",
-        "consent": "En envoyant ce formulaire, vous acceptez que nous utilisions vos informations pour vous répondre par email.",
-        "submit": "Envoyer ma demande"
-      },
-      "errors": {
-        "csrf": "Token CSRF invalide.",
-        "honeypot": "Spam détecté.",
-        "rate": "Trop de tentatives. Veuillez patienter.",
-        "name": "Le nom est requis.",
-        "email": "L'adresse e-mail est invalide.",
-        "phone": "Le numéro de téléphone est invalide.",
-        "message": "Le message est requis.",
-        "too_long": "Message trop long."
-      }
+    "info": {
+      "role": "Responsable produit",
+      "roleCommunity": "Responsable produit & communauté"
+    }
+  },
+  "quote": {
+    "title": "Demande de devis",
+    "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone (optionnel)",
+      "service": "Sujet / Service",
+      "message": "Votre demande",
+      "consent": "En envoyant ce formulaire, vous acceptez que nous utilisions vos informations pour vous répondre par email.",
+      "submit": "Envoyer ma demande"
     },
+    "errors": {
+      "csrf": "Token CSRF invalide.",
+      "honeypot": "Spam détecté.",
+      "rate": "Trop de tentatives. Veuillez patienter.",
+      "name": "Le nom est requis.",
+      "email": "L'adresse e-mail est invalide.",
+      "phone": "Le numéro de téléphone est invalide.",
+      "message": "Le message est requis.",
+      "too_long": "Message trop long."
+    }
+  },
   "thankyou": {
     "title": "Merci !",
     "message": "Votre demande a bien été transmise à notre équipe.",
@@ -217,5 +217,12 @@
       "text": "Ma grande découverte au FLIM, mes enfants sont tombés en amours avec les pièces et depuis font pleins de tâches pour pouvoir échanger leur point contre une chasse au trésor qui pourront avoir leur propre coffre au trésor. Merci à Mathieu pour offrir ce super ajout pour l'initiation des enfants aux jeux de rôles.",
       "author": "— Gabrielle"
     }
+  },
+  "editor": {
+    "undo": "Annuler",
+    "redo": "Refaire",
+    "bold": "Gras",
+    "italic": "Italique",
+    "markdown": "Markdown"
   }
 }

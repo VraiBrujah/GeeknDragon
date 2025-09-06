@@ -1,14 +1,33 @@
-import BaseWidget from '../core/base-widget.js';
-import stateManager from '../core/widget-state-manager.js';
-import syncManager from '../core/sync-manager.js';
+import 'fake-indexeddb/auto';
+
+if (typeof globalThis.structuredClone !== 'function') {
+  globalThis.structuredClone = (val) => JSON.parse(JSON.stringify(val));
+}
+let BaseWidget;
+let stateManager;
+let syncManager;
+
+beforeAll(async () => {
+  ({ default: BaseWidget } = await import('../core/base-widget.js'));
+  ({ default: stateManager } = await import('../core/widget-state-manager.js'));
+  ({ default: syncManager } = await import('../core/sync-manager.js'));
+});
 
 describe('BaseWidget', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     document.body.innerHTML = '<div id="root"></div>';
-    stateManager.widgets.clear();
-    stateManager.states.clear();
+    await stateManager.clear();
     localStorage.clear();
-    syncManager.widgets.clear();
+    syncManager.clear();
+  });
+
+  test('defaults use CSS variables', () => {
+    const widget = new BaseWidget();
+    const container = document.getElementById('root');
+    const el = widget.render(container);
+    expect(widget.styles.background).toBe('var(--color-background-base)');
+    expect(widget.styles.color).toBe('var(--color-text-base)');
+    expect(widget.styles.padding).toBe('var(--spacing-s)');
   });
 
   test('renders element and applies styles', () => {
@@ -31,7 +50,13 @@ describe('BaseWidget', () => {
   });
 
   test('serialize and hydrate maintain state', () => {
-    const widget = new BaseWidget({ x: 5, y: 6, width: 70, height: 80 });
+    const widget = new BaseWidget({
+      x: 5,
+      y: 6,
+      width: 70,
+      height: 80,
+      rotation: 10,
+    });
     widget.data = { foo: 'bar' };
     widget.custom = 42;
     widget.el = document.createElement('div');
@@ -41,6 +66,7 @@ describe('BaseWidget', () => {
 
     expect(data.data).toEqual({ foo: 'bar' });
     expect(data.custom).toBe(42);
+    expect(data.rotation).toBe(10);
     expect(data.el).toBeUndefined();
     expect(data.events).toBeUndefined();
 
@@ -48,6 +74,7 @@ describe('BaseWidget', () => {
     clone.hydrate(data);
     expect(clone.data).toEqual({ foo: 'bar' });
     expect(clone.custom).toBe(42);
+    expect(clone.rotation).toBe(10);
     expect(clone.serialize()).toEqual(data);
   });
 
@@ -73,10 +100,12 @@ describe('BaseWidget', () => {
     widget.setBorderRadius('5px');
     widget.setOpacity(0.5);
     widget.setBoxShadow('0 0 5px black');
+    widget.setRotation(45);
     expect(widget.el.style.background).toBe('blue');
     expect(widget.el.style.border).toBe('1px solid red');
     expect(widget.el.style.borderRadius).toBe('5px');
     expect(widget.el.style.opacity).toBe('0.5');
     expect(widget.el.style.boxShadow).toBe('0 0 5px black');
+    expect(widget.el.style.transform).toBe('rotate(45deg)');
   });
 });

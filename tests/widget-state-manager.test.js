@@ -1,11 +1,19 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { jest } from '@jest/globals';
-import stateManager from '../core/widget-state-manager.js';
+import 'fake-indexeddb/auto';
+
+if (typeof globalThis.structuredClone !== 'function') {
+  globalThis.structuredClone = (val) => JSON.parse(JSON.stringify(val));
+}
+let stateManager;
+
+beforeAll(async () => {
+  ({ default: stateManager } = await import('../core/widget-state-manager.js'));
+});
 
 describe('WidgetStateManager', () => {
-  beforeEach(() => {
-    stateManager.widgets.clear();
-    stateManager.states.clear();
+  beforeEach(async () => {
+    await stateManager.clear();
     localStorage.clear();
   });
 

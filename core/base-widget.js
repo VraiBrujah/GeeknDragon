@@ -26,6 +26,7 @@ class BaseWidget {
    * @param {number} [options.width=100]  Initial width
    * @param {number} [options.height=100] Initial height
    * @param {number} [options.zIndex=1]   Initial z-index
+   * @param {number} [options.rotation=0] Initial rotation in degrees
    * @param {Object} [options.styles]     Initial CSS styles
    */
   constructor({
@@ -35,6 +36,7 @@ class BaseWidget {
     width = 100,
     height = 100,
     zIndex = 1,
+    rotation = 0,
     styles = {},
   } = {}) {
     this.id = id;
@@ -43,8 +45,14 @@ class BaseWidget {
     this.width = width;
     this.height = height;
     this.zIndex = zIndex;
+    this.rotation = rotation;
     this.styles = {
-      background: 'transparent',
+      color: 'var(--color-text-base)',
+      background: 'var(--color-background-base)',
+      fontFamily: 'var(--font-family-base)',
+      fontSize: 'var(--font-size-base)',
+      padding: 'var(--spacing-s)',
+      margin: 'var(--spacing-xs)',
       border: 'none',
       borderRadius: '0px',
       boxShadow: 'none',
@@ -69,6 +77,7 @@ class BaseWidget {
     this.applyStyles();
     this.setPosition(this.x, this.y);
     this.setSize(this.width, this.height);
+    this.setRotation(this.rotation);
     return el;
   }
 
@@ -97,6 +106,7 @@ class BaseWidget {
       this.el.style[key] = value;
     });
     this.el.style.zIndex = this.zIndex;
+    this.el.style.transform = `rotate(${this.rotation}deg)`;
   }
 
   /**
@@ -155,6 +165,21 @@ class BaseWidget {
    */
   setBoxShadow(boxShadow) {
     this.updateStyles({ boxShadow });
+  }
+
+  /**
+   * Set widget rotation.
+   *
+   * @param {number} rotation Rotation in degrees
+   */
+  setRotation(rotation) {
+    this.rotation = rotation;
+    if (this.el) {
+      this.el.style.transform = `rotate(${rotation}deg)`;
+    }
+    this.emit('change', this.serialize());
+    this.saveState();
+    syncManager.broadcastChange(this);
   }
 
   /**
@@ -234,7 +259,7 @@ class BaseWidget {
    * @param {Object} [data] Serialized widget data
    */
   hydrate(data = {}) {
-    const { x, y, width, height, zIndex, styles, ...rest } = data;
+    const { x, y, width, height, zIndex, styles, rotation, ...rest } = data;
 
     // Assign any additional properties directly
     Object.keys(rest).forEach((key) => {
@@ -250,6 +275,7 @@ class BaseWidget {
       if (this.el) this.el.style.zIndex = zIndex;
     }
     if (styles) this.updateStyles(styles);
+    if (typeof rotation === 'number') this.setRotation(rotation);
   }
 
   /** Persist current state using the widget state manager. */

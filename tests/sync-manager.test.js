@@ -26,8 +26,8 @@ class DummyWidget {
 
 describe('SyncManager', () => {
   beforeEach(() => {
-    localStorage.clear();
-    syncManager.widgets.clear();
+    // reset the internal Y.Doc and maps
+    syncManager.clear();
   });
 
   test('saveState and loadState roundtrip', () => {
@@ -46,9 +46,51 @@ describe('SyncManager', () => {
       zIndex: 2,
       styles: { color: 'red' },
     };
-    localStorage.setItem('widget-w2', JSON.stringify(saved));
+    // Directly set state in the Y.Doc map before subscribing
+    syncManager.map.set('w2', saved);
     const widget = new DummyWidget('w2');
     syncManager.subscribe(widget);
     expect(widget.hydrate).toHaveBeenCalledWith(saved);
+  });
+
+  test('undo and redo apply previous widget states', () => {
+    const widget = new DummyWidget('w3');
+    // initial state
+    syncManager.saveState(widget);
+
+    // change x position and save
+    widget.state.x = 10;
+    syncManager.saveState(widget);
+    expect(syncManager.loadState('w3').x).toBe(10);
+
+    // undo should revert to previous x
+    syncManager.undo();
+    expect(syncManager.loadState('w3').x).toBe(0);
+
+    // redo should re-apply x = 10
+    syncManager.redo();
+    expect(syncManager.loadState('w3').x).toBe(10);
+  });
+
+  test('encodeState and applyUpdate merge remote changes', () => {
+    const widget = new DummyWidget('w4');
+    widget.state.x = 15;
+    syncManager.saveState(widget);
+    const update = syncManager.encodeState();
+    syncManager.clear();
+    // simulate loading into a fresh document
+    syncManager.isInitialized = false;
+    syncManager.applyUpdate(update);
+    expect(syncManager.loadState('w4').x).toBe(15);
+  });
+
+  test('getHistory exposes counts of undo and redo stacks', () => {
+    const widget = new DummyWidget('w5');
+    syncManager.saveState(widget);
+    widget.state.x = 20;
+    syncManager.saveState(widget);
+    expect(syncManager.getHistory()).toEqual({ undo: 2, redo: 0 });
+    syncManager.undo();
+    expect(syncManager.getHistory()).toEqual({ undo: 1, redo: 1 });
   });
 });

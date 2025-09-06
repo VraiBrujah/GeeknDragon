@@ -15,6 +15,17 @@
     <!-- Styles de base de l'application -->
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/editor.css">
+
+    <!-- Import map pour les dépendances externes -->
+    <script type="importmap">
+    {
+        "imports": {
+            "html2canvas": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.esm.js",
+            "jszip": "https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm",
+            "jspdf": "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/+esm"
+        }
+    }
+    </script>
 </head>
 <body class="editor-body">
     
@@ -47,6 +58,11 @@
                 <button id="btn-preview-presentation" class="btn btn-info" title="Aperçu">
                     <i class="fas fa-eye"></i>
                     <span>Aperçu</span>
+                </button>
+
+                <button id="btn-export" class="btn btn-outline" title="Exporter la présentation">
+                    <i class="fas fa-download"></i>
+                    <span>Exporter</span>
                 </button>
                 
                 <div class="header-separator"></div>
@@ -624,6 +640,9 @@
         <!-- Les notifications apparaîtront ici -->
     </div>
 
+    <!-- Zone racine pour l'éditeur React utilisant dnd-kit -->
+    <div id="dnd-editor-root"></div>
+
     <!-- Scripts de l'application -->
     
     <!-- Widgets (doivent être chargés AVANT WidgetManager) -->
@@ -645,9 +664,12 @@
     
     <!-- Éditeurs -->
     <script src="src/editors/MainEditor.js"></script>
-    
+    <!-- Initialisation de l'éditeur React avec dnd-kit -->
+    <script type="module" src="src/editors/initDndEditor.js"></script>
+
     <!-- Utilitaires -->
     <script src="src/utils/UIUtils.js"></script>
+    <script type="module" src="src/utils/exporter.js"></script>
     
     <!-- Script principal -->
     <script>

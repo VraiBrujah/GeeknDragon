@@ -9,17 +9,24 @@ class Section extends BaseWidget {
   } = {}) {
     super(rest);
     this.layout = layout;
-    this.layoutConfig = { ...layoutConfig };
+    const defaults =
+      layout === 'grid'
+        ? {
+            gap: 'var(--layout-grid-gap)',
+            gridTemplateColumns:
+              'repeat(auto-fill, minmax(var(--layout-grid-min-width), 1fr))',
+          }
+        : {
+            gap: 'var(--layout-flex-gap)',
+            flexWrap: 'wrap',
+          };
+    this.layoutConfig = { ...defaults, ...layoutConfig };
     this.widgets = widgets;
   }
 
   render(container) {
     const el = super.render(container);
-    if (this.layout === 'flex') {
-      el.style.display = 'flex';
-    } else if (this.layout === 'grid') {
-      el.style.display = 'grid';
-    }
+    el.style.display = this.layout === 'grid' ? 'grid' : 'flex';
     Object.assign(el.style, this.layoutConfig);
     this.widgets.forEach((w) => w.render(el));
     return el;
@@ -35,7 +42,9 @@ class Section extends BaseWidget {
     const index = this.widgets.indexOf(widget);
     if (index !== -1) {
       this.widgets.splice(index, 1);
-      if (widget.el && widget.el.parentNode) widget.el.parentNode.removeChild(widget.el);
+      if (widget.el && widget.el.parentNode) {
+        widget.el.parentNode.removeChild(widget.el);
+      }
       this.emit('change', this.serialize());
     }
   }
@@ -49,13 +58,23 @@ class Section extends BaseWidget {
     };
   }
 
-  hydrate(data = {}, widgetFactory) {
-    super.hydrate(data);
-    if (data.layout) this.layout = data.layout;
-    if (data.layoutConfig) this.layoutConfig = { ...data.layoutConfig };
-    if (Array.isArray(data.widgets) && typeof widgetFactory === 'function') {
-      this.widgets = data.widgets.map((d) => widgetFactory(d));
+  hydrate(data, widgetFactory) {
+    const src = data || {};
+    super.hydrate(src);
+    if (src.layout) this.layout = src.layout;
+    if (src.layoutConfig) this.layoutConfig = { ...src.layoutConfig };
+    if (Array.isArray(src.widgets) && typeof widgetFactory === 'function') {
+      this.widgets = src.widgets.map((d) => widgetFactory(d));
     }
+  }
+
+  setPreviewDevice(device) {
+    if (!this.el) return;
+    const varName = `--breakpoint-${device}`;
+    const value = getComputedStyle(document.documentElement)
+      .getPropertyValue(varName)
+      .trim();
+    this.el.style.width = value || `var(${varName})`;
   }
 }
 
