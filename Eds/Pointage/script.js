@@ -126,12 +126,19 @@ class StorageService {
         try {
             const storageKey = this.prefix + APP_CONFIG.storage.keys[key];
             const data = localStorage.getItem(storageKey);
-            // Retourner un objet vide pour les configurations, un tableau vide pour les autres
-            const defaultValue = (key === 'config' || key === 'config_maison') ? {} : [];
-            return data ? JSON.parse(data) : defaultValue;
+            // Retourner un objet vide SEULEMENT pour les configurations
+            if (key === 'config' || key === 'config_maison') {
+                return data ? JSON.parse(data) : {};
+            } else {
+                return data ? JSON.parse(data) : [];
+            }
         } catch (error) {
             console.error('Erreur de lecture localStorage:', error);
-            return (key === 'config' || key === 'config_maison') ? {} : [];
+            if (key === 'config' || key === 'config_maison') {
+                return {};
+            } else {
+                return [];
+            }
         }
     }
 
@@ -2639,13 +2646,15 @@ class MaisonQuebecApp {
         let config = this.storage.get('config_maison');
         console.log('Configuration chargée:', config);
         
-        // Initialiser une configuration par défaut si elle est vide
-        if (!config || Object.keys(config).length === 0) {
+        // Vérifier si config est un tableau (données corrompues) ou vide
+        if (!config || Array.isArray(config) || Object.keys(config).length === 0) {
+            console.log('Configuration corrompue ou vide, réinitialisation...');
             config = {
                 nom_projet: 'Ma Maison - Québec',
                 adresse_complete: '',
                 type_construction: 'Maison unifamiliale neuve',
                 superficie_carree: 1850,
+                etages: 2,
                 budget_total_estime: 450000.00,
                 budget_main_oeuvre: 180000.00,
                 budget_materiaux: 270000.00,
@@ -2653,6 +2662,7 @@ class MaisonQuebecApp {
                 date_fin_prevue: '',
                 permis_construction: '',
                 licence_rbq: '',
+                assurance_chantier: '',
                 proprietaire: {
                     nom: '',
                     telephone: '',
@@ -2689,7 +2699,7 @@ class MaisonQuebecApp {
                                 <label class="label has-text-white">Nom du projet</label>
                                 <div class="control">
                                     <input type="text" class="input" name="nom_projet" 
-                                        value="${config.nom_projet}" required>
+                                        value="${config.nom_projet || ''}" required>
                                 </div>
                             </div>
                             
@@ -2697,7 +2707,7 @@ class MaisonQuebecApp {
                                 <label class="label has-text-white">Adresse complète</label>
                                 <div class="control">
                                     <input type="text" class="input" name="adresse_complete" 
-                                        value="${config.adresse_complete}" required>
+                                        value="${config.adresse_complete || ''}" required>
                                 </div>
                             </div>
                             
@@ -2705,7 +2715,7 @@ class MaisonQuebecApp {
                                 <label class="label has-text-white">Type de construction</label>
                                 <div class="control">
                                     <input type="text" class="input" name="type_construction" 
-                                        value="${config.type_construction}" required>
+                                        value="${config.type_construction || ''}" required>
                                 </div>
                             </div>
                             
@@ -2715,7 +2725,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Superficie (pi²)</label>
                                         <div class="control">
                                             <input type="number" class="input" name="superficie_carree" 
-                                                value="${config.superficie_carree}" min="0" required>
+                                                value="${config.superficie_carree || 0}" min="0" required>
                                         </div>
                                     </div>
                                 </div>
@@ -2724,7 +2734,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Étages</label>
                                         <div class="control">
                                             <input type="number" class="input" name="etages" 
-                                                value="${config.etages}" min="1" max="5" required>
+                                                value="${config.etages || 2}" min="1" max="5" required>
                                         </div>
                                     </div>
                                 </div>
@@ -2736,7 +2746,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Date début prévue</label>
                                         <div class="control">
                                             <input type="date" class="input" name="date_debut_prevue" 
-                                                value="${config.date_debut_prevue}" required>
+                                                value="${config.date_debut_prevue || ''}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -2745,7 +2755,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Date fin prévue</label>
                                         <div class="control">
                                             <input type="date" class="input" name="date_fin_prevue" 
-                                                value="${config.date_fin_prevue}" required>
+                                                value="${config.date_fin_prevue || ''}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -2755,7 +2765,7 @@ class MaisonQuebecApp {
                                 <label class="label has-text-white">Budget total estimé ($)</label>
                                 <div class="control">
                                     <input type="number" class="input" name="budget_total_estime" 
-                                        value="${config.budget_total_estime}" step="0.01" min="0" required>
+                                        value="${config.budget_total_estime || 0}" step="0.01" min="0" required>
                                 </div>
                             </div>
                             
@@ -2765,7 +2775,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Budget main-d'œuvre ($)</label>
                                         <div class="control">
                                             <input type="number" class="input" name="budget_main_oeuvre" 
-                                                value="${config.budget_main_oeuvre}" step="0.01" min="0" required>
+                                                value="${config.budget_main_oeuvre || 0}" step="0.01" min="0" required>
                                         </div>
                                     </div>
                                 </div>
@@ -2774,7 +2784,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Budget matériaux ($)</label>
                                         <div class="control">
                                             <input type="number" class="input" name="budget_materiaux" 
-                                                value="${config.budget_materiaux}" step="0.01" min="0" required>
+                                                value="${config.budget_materiaux || 0}" step="0.01" min="0" required>
                                         </div>
                                     </div>
                                 </div>
@@ -2787,7 +2797,7 @@ class MaisonQuebecApp {
                                 <label class="label has-text-white">Nom</label>
                                 <div class="control">
                                     <input type="text" class="input" name="proprietaire_nom" 
-                                        value="${config.proprietaire.nom}" required>
+                                        value="${config.proprietaire?.nom || ''}" required>
                                 </div>
                             </div>
                             
@@ -2797,7 +2807,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Téléphone</label>
                                         <div class="control">
                                             <input type="tel" class="input" name="proprietaire_telephone" 
-                                                value="${config.proprietaire.telephone}">
+                                                value="${config.proprietaire?.telephone || ''}">
                                         </div>
                                     </div>
                                 </div>
@@ -2806,7 +2816,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Email</label>
                                         <div class="control">
                                             <input type="email" class="input" name="proprietaire_email" 
-                                                value="${config.proprietaire.email}">
+                                                value="${config.proprietaire?.email || ''}">
                                         </div>
                                     </div>
                                 </div>
@@ -2819,7 +2829,7 @@ class MaisonQuebecApp {
                                 <label class="label has-text-white">Nom</label>
                                 <div class="control">
                                     <input type="text" class="input" name="entrepreneur_nom" 
-                                        value="${config.entrepreneur_general.nom}" required>
+                                        value="${config.entrepreneur_general?.nom || ''}" required>
                                 </div>
                             </div>
                             
@@ -2829,7 +2839,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Licence RBQ</label>
                                         <div class="control">
                                             <input type="text" class="input" name="licence_rbq" 
-                                                value="${config.entrepreneur_general.licence_rbq}">
+                                                value="${config.entrepreneur_general?.licence_rbq || ''}">
                                         </div>
                                     </div>
                                 </div>
@@ -2838,7 +2848,7 @@ class MaisonQuebecApp {
                                         <label class="label has-text-white">Téléphone</label>
                                         <div class="control">
                                             <input type="tel" class="input" name="entrepreneur_telephone" 
-                                                value="${config.entrepreneur_general.telephone}">
+                                                value="${config.entrepreneur_general?.telephone || ''}">
                                         </div>
                                     </div>
                                 </div>
@@ -2848,7 +2858,7 @@ class MaisonQuebecApp {
                                 <label class="label has-text-white">Permis construction</label>
                                 <div class="control">
                                     <input type="text" class="input" name="permis_construction" 
-                                        value="${config.permis_construction}">
+                                        value="${config.permis_construction || ''}">
                                 </div>
                             </div>
                             
@@ -2856,7 +2866,7 @@ class MaisonQuebecApp {
                                 <label class="label has-text-white">Assurance chantier</label>
                                 <div class="control">
                                     <input type="text" class="input" name="assurance_chantier" 
-                                        value="${config.assurance_chantier}">
+                                        value="${config.assurance_chantier || ''}">
                                 </div>
                             </div>
                         </form>
@@ -2900,6 +2910,7 @@ class MaisonQuebecApp {
         config.adresse_complete = formData.get('adresse_complete') || '';
         config.type_construction = formData.get('type_construction') || '';
         config.superficie_carree = parseInt(formData.get('superficie_carree')) || 0;
+        config.etages = parseInt(formData.get('etages')) || 2;
         config.date_debut_prevue = formData.get('date_debut_prevue') || '';
         config.date_fin_prevue = formData.get('date_fin_prevue') || '';
         config.budget_total_estime = parseFloat(formData.get('budget_total_estime')) || 0;
@@ -2907,6 +2918,7 @@ class MaisonQuebecApp {
         config.budget_materiaux = parseFloat(formData.get('budget_materiaux')) || 0;
         config.permis_construction = formData.get('permis_construction') || '';
         config.licence_rbq = formData.get('licence_rbq') || '';
+        config.assurance_chantier = formData.get('assurance_chantier') || '';
         
         // Propriétaire
         config.proprietaire.nom = formData.get('proprietaire_nom') || '';
@@ -2929,8 +2941,71 @@ class MaisonQuebecApp {
 
     editEtapesConstruction() {
         console.log('editEtapesConstruction appelée');
-        const etapes = this.storage.get('etapes_construction');
+        let etapes = this.storage.get('etapes_construction');
         console.log('Étapes chargées:', etapes);
+        
+        // S'assurer qu'on a un tableau
+        if (!Array.isArray(etapes)) {
+            console.log('Étapes n\'est pas un tableau, conversion...');
+            etapes = [];
+        }
+        
+        // Initialiser les étapes par défaut si elles n'existent pas
+        if (!etapes || etapes.length === 0) {
+            etapes = [
+                {
+                    nom: "Excavation et Fondation",
+                    duree_estimee_jours: 10,
+                    statut: "planifie",
+                    pourcent_complete: 0,
+                    budget_main_oeuvre: 15000,
+                    budget_materiaux: 25000
+                },
+                {
+                    nom: "Charpente et Structure",
+                    duree_estimee_jours: 15,
+                    statut: "planifie", 
+                    pourcent_complete: 0,
+                    budget_main_oeuvre: 25000,
+                    budget_materiaux: 35000
+                },
+                {
+                    nom: "Toiture et Étanchéité",
+                    duree_estimee_jours: 8,
+                    statut: "planifie",
+                    pourcent_complete: 0,
+                    budget_main_oeuvre: 12000,
+                    budget_materiaux: 18000
+                },
+                {
+                    nom: "Électricité et Plomberie",
+                    duree_estimee_jours: 12,
+                    statut: "planifie",
+                    pourcent_complete: 0,
+                    budget_main_oeuvre: 18000,
+                    budget_materiaux: 15000
+                },
+                {
+                    nom: "Isolation et Cloisons",
+                    duree_estimee_jours: 10,
+                    statut: "planifie",
+                    pourcent_complete: 0,
+                    budget_main_oeuvre: 15000,
+                    budget_materiaux: 20000
+                },
+                {
+                    nom: "Revêtements et Finitions",
+                    duree_estimee_jours: 20,
+                    statut: "planifie",
+                    pourcent_complete: 0,
+                    budget_main_oeuvre: 30000,
+                    budget_materiaux: 40000
+                }
+            ];
+            // Sauvegarder les étapes par défaut
+            this.storage.save('etapes_construction', etapes);
+            console.log('Étapes par défaut créées:', etapes);
+        }
         
         let etapesHTML = '';
         etapes.forEach((etape, index) => {
