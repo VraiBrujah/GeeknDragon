@@ -126,10 +126,12 @@ class StorageService {
         try {
             const storageKey = this.prefix + APP_CONFIG.storage.keys[key];
             const data = localStorage.getItem(storageKey);
-            return data ? JSON.parse(data) : (key === 'config' ? {} : []);
+            // Retourner un objet vide pour les configurations, un tableau vide pour les autres
+            const defaultValue = (key === 'config' || key === 'config_maison') ? {} : [];
+            return data ? JSON.parse(data) : defaultValue;
         } catch (error) {
             console.error('Erreur de lecture localStorage:', error);
-            return key === 'config' ? {} : [];
+            return (key === 'config' || key === 'config_maison') ? {} : [];
         }
     }
 
@@ -467,6 +469,16 @@ class MaisonQuebecApp {
         // File input for restore
         const restoreInput = document.getElementById('restoreFileInput');
         restoreInput?.addEventListener('change', (e) => this.handleRestore(e));
+        
+        // Configuration - boutons de configuration
+        document.getElementById('btnEditConfigMaison')?.addEventListener('click', () => {
+            console.log('Bouton Configuration cliqué');
+            this.editConfigMaison();
+        });
+        document.getElementById('btnEditEtapesConstruction')?.addEventListener('click', () => {
+            console.log('Bouton Étapes cliqué');
+            this.editEtapesConstruction();
+        });
     }
 
     loadPage(page) {
@@ -2561,26 +2573,41 @@ class MaisonQuebecApp {
     }
 
     loadConfigMaisonDetails() {
-        const config = this.storage.get('config_maison');
+        let config = this.storage.get('config_maison');
         const container = document.getElementById('configMaisonDetails');
         
         if (!container) return;
         
+        // Utiliser configuration par défaut si vide
+        if (!config || Object.keys(config).length === 0) {
+            config = {
+                nom_projet: 'Configuration non définie',
+                adresse_complete: 'Non définie',
+                type_construction: 'Non défini',
+                superficie_carree: 0,
+                budget_total_estime: 0,
+                budget_main_oeuvre: 0,
+                budget_materiaux: 0,
+                date_debut_prevue: 'Non définie',
+                date_fin_prevue: 'Non définie',
+                permis_construction: 'Non défini',
+                licence_rbq: 'Non définie'
+            };
+        }
+        
         container.innerHTML = `
             <div class="content has-text-white">
-                <p><strong>Nom du projet:</strong> ${config.nom_projet}</p>
-                <p><strong>Adresse:</strong> ${config.adresse_complete}</p>
-                <p><strong>Type:</strong> ${config.type_construction}</p>
-                <p><strong>Superficie:</strong> ${config.superficie_carree} pi²</p>
-                <p><strong>Étages:</strong> ${config.etages}</p>
-                <p><strong>Dates:</strong> ${config.date_debut_prevue} à ${config.date_fin_prevue}</p>
-                <p><strong>Budget total:</strong> ${this.formatCurrency(config.budget_total_estime)}</p>
-                <p><strong>Budget main-d'œuvre:</strong> ${this.formatCurrency(config.budget_main_oeuvre)}</p>
-                <p><strong>Budget matériaux:</strong> ${this.formatCurrency(config.budget_materiaux)}</p>
+                <p><strong>Nom du projet:</strong> ${config.nom_projet || 'Non défini'}</p>
+                <p><strong>Adresse:</strong> ${config.adresse_complete || 'Non définie'}</p>
+                <p><strong>Type:</strong> ${config.type_construction || 'Non défini'}</p>
+                <p><strong>Superficie:</strong> ${config.superficie_carree || 0} pi²</p>
+                <p><strong>Dates:</strong> ${config.date_debut_prevue || 'Non définie'} à ${config.date_fin_prevue || 'Non définie'}</p>
+                <p><strong>Budget total:</strong> ${this.formatCurrency(config.budget_total_estime || 0)}</p>
+                <p><strong>Budget main-d'œuvre:</strong> ${this.formatCurrency(config.budget_main_oeuvre || 0)}</p>
+                <p><strong>Budget matériaux:</strong> ${this.formatCurrency(config.budget_materiaux || 0)}</p>
                 <hr>
-                <p><strong>Propriétaire:</strong> ${config.proprietaire.nom}</p>
-                <p><strong>Entrepreneur:</strong> ${config.entrepreneur_general.nom}</p>
-                <p><strong>Permis:</strong> ${config.permis_construction}</p>
+                <p><strong>Permis construction:</strong> ${config.permis_construction || 'Non défini'}</p>
+                <p><strong>Licence RBQ:</strong> ${config.licence_rbq || 'Non définie'}</p>
             </div>
         `;
     }
@@ -2608,7 +2635,45 @@ class MaisonQuebecApp {
     }
 
     editConfigMaison() {
-        const config = this.storage.get('config_maison');
+        console.log('editConfigMaison appelée');
+        let config = this.storage.get('config_maison');
+        console.log('Configuration chargée:', config);
+        
+        // Initialiser une configuration par défaut si elle est vide
+        if (!config || Object.keys(config).length === 0) {
+            config = {
+                nom_projet: 'Ma Maison - Québec',
+                adresse_complete: '',
+                type_construction: 'Maison unifamiliale neuve',
+                superficie_carree: 1850,
+                budget_total_estime: 450000.00,
+                budget_main_oeuvre: 180000.00,
+                budget_materiaux: 270000.00,
+                date_debut_prevue: '',
+                date_fin_prevue: '',
+                permis_construction: '',
+                licence_rbq: '',
+                proprietaire: {
+                    nom: '',
+                    telephone: '',
+                    email: ''
+                },
+                entrepreneur_general: {
+                    nom: '',
+                    licence_rbq: '',
+                    telephone: ''
+                }
+            };
+            console.log('Configuration par défaut créée:', config);
+        }
+        
+        // S'assurer que les sous-objets existent même si la config existe déjà
+        if (!config.proprietaire) {
+            config.proprietaire = { nom: '', telephone: '', email: '' };
+        }
+        if (!config.entrepreneur_general) {
+            config.entrepreneur_general = { nom: '', licence_rbq: '', telephone: '' };
+        }
         
         const modalHTML = `
             <div class="modal is-active" id="configMaisonModal">
@@ -2810,33 +2875,50 @@ class MaisonQuebecApp {
     }
 
     saveConfigMaison() {
+        console.log('saveConfigMaison appelée');
         const form = document.getElementById('formConfigMaison');
         const formData = new FormData(form);
         
-        const config = this.storage.get('config_maison');
+        let config = this.storage.get('config_maison');
+        console.log('Configuration récupérée pour sauvegarde:', config);
         
-        // Mettre à jour la configuration
-        config.nom_projet = formData.get('nom_projet');
-        config.adresse_complete = formData.get('adresse_complete');
-        config.type_construction = formData.get('type_construction');
-        config.superficie_carree = parseInt(formData.get('superficie_carree'));
-        config.etages = parseInt(formData.get('etages'));
-        config.date_debut_prevue = formData.get('date_debut_prevue');
-        config.date_fin_prevue = formData.get('date_fin_prevue');
-        config.budget_total_estime = parseFloat(formData.get('budget_total_estime'));
-        config.budget_main_oeuvre = parseFloat(formData.get('budget_main_oeuvre'));
-        config.budget_materiaux = parseFloat(formData.get('budget_materiaux'));
+        // S'assurer que la config est un objet valide avec toutes les propriétés
+        if (!config || Object.keys(config).length === 0) {
+            config = {};
+        }
         
-        config.proprietaire.nom = formData.get('proprietaire_nom');
-        config.proprietaire.telephone = formData.get('proprietaire_telephone');
-        config.proprietaire.email = formData.get('proprietaire_email');
+        // S'assurer que les sous-objets existent
+        if (!config.proprietaire) {
+            config.proprietaire = {};
+        }
+        if (!config.entrepreneur_general) {
+            config.entrepreneur_general = {};
+        }
         
-        config.entrepreneur_general.nom = formData.get('entrepreneur_nom');
-        config.entrepreneur_general.licence_rbq = formData.get('licence_rbq');
-        config.entrepreneur_general.telephone = formData.get('entrepreneur_telephone');
+        // Mettre à jour la configuration avec protection pour les valeurs numériques
+        config.nom_projet = formData.get('nom_projet') || '';
+        config.adresse_complete = formData.get('adresse_complete') || '';
+        config.type_construction = formData.get('type_construction') || '';
+        config.superficie_carree = parseInt(formData.get('superficie_carree')) || 0;
+        config.date_debut_prevue = formData.get('date_debut_prevue') || '';
+        config.date_fin_prevue = formData.get('date_fin_prevue') || '';
+        config.budget_total_estime = parseFloat(formData.get('budget_total_estime')) || 0;
+        config.budget_main_oeuvre = parseFloat(formData.get('budget_main_oeuvre')) || 0;
+        config.budget_materiaux = parseFloat(formData.get('budget_materiaux')) || 0;
+        config.permis_construction = formData.get('permis_construction') || '';
+        config.licence_rbq = formData.get('licence_rbq') || '';
         
-        config.permis_construction = formData.get('permis_construction');
-        config.assurance_chantier = formData.get('assurance_chantier');
+        // Propriétaire
+        config.proprietaire.nom = formData.get('proprietaire_nom') || '';
+        config.proprietaire.telephone = formData.get('proprietaire_telephone') || '';
+        config.proprietaire.email = formData.get('proprietaire_email') || '';
+        
+        // Entrepreneur
+        config.entrepreneur_general.nom = formData.get('entrepreneur_nom') || '';
+        config.entrepreneur_general.licence_rbq = formData.get('licence_rbq') || '';
+        config.entrepreneur_general.telephone = formData.get('entrepreneur_telephone') || '';
+        
+        console.log('Configuration finale à sauvegarder:', config);
         
         this.storage.save('config_maison', config);
         
@@ -2846,7 +2928,9 @@ class MaisonQuebecApp {
     }
 
     editEtapesConstruction() {
+        console.log('editEtapesConstruction appelée');
         const etapes = this.storage.get('etapes_construction');
+        console.log('Étapes chargées:', etapes);
         
         let etapesHTML = '';
         etapes.forEach((etape, index) => {
