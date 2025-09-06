@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #34495e; }
+      .box { fill: #ecf0f1; stroke: #34495e; stroke-width: 2; rx: 8; }
+      .box-primary { fill: #3498db; stroke: #2980b9; stroke-width: 2; rx: 8; }
+      .box-success { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; rx: 8; }
+      .box-warning { fill: #f39c12; stroke: #e67e22; stroke-width: 2; rx: 8; }
+      .box-danger { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; rx: 8; }
+      .box-dark { fill: #2c3e50; stroke: #34495e; stroke-width: 2; rx: 8; }
+      .box-chart { fill: #9b59b6; stroke: #8e44ad; stroke-width: 2; rx: 8; }
+      .text-white { fill: white; font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; }
+      .text-small { fill: white; font-family: Arial, sans-serif; font-size: 10px; }
+      .text-dark { fill: #2c3e50; font-family: Arial, sans-serif; font-size: 10px; }
+      .arrow { stroke: #34495e; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34495e" />
+    </marker>
+  </defs>
+  
+  <!-- Titre principal -->
+  <text x="500" y="30" text-anchor="middle" class="title">🏠 Rapports Complets Construction MAISON</text>
+  
+  <!-- Tableau de Bord Principal -->
+  <rect x="50" y="60" width="900" height="80" class="box-dark" />
+  <text x="500" y="80" text-anchor="middle" class="text-white" font-size="14">🏠 TABLEAU DE BORD CONSTRUCTION MAISON</text>
+  <text x="60" y="100" class="text-white">MAIN-D'ŒUVRE: 45,250$ | MATÉRIAUX: 78,650$ | TOTAL MAISON: 123,900$ | PAYÉ: 98,200$ | DÛ: 25,700$</text>
+  <text x="60" y="115" class="text-small">AVANCEMENT: 72% terminé | BUDGET: 68% utilisé | TEMPS RESTANT: 45 jours | PHOTOS: 347 prises</text>
+  <text x="60" y="130" class="text-small">🏠 MA MAISON en temps réel | 💾 Sauvegarde auto: 2025-01-15 14:30 | 🔒 100% Local</text>
+  
+  <!-- Rapports Main-d'Œuvre -->
+  <rect x="50" y="160" width="280" height="150" class="box-primary" />
+  <text x="190" y="180" text-anchor="middle" class="text-white">👷 MAIN-D'ŒUVRE</text>
+  <text x="60" y="200" class="text-small">• Jean Dupont (Charpentier 35$/h)</text>
+  <text x="70" y="213" class="text-small">145.5h - 5,092.50$ - 18 jours</text>
+  <text x="60" y="228" class="text-small">• Marie Tremblay (Électricienne 40$/h)</text>
+  <text x="70" y="241" class="text-small">98.0h - 3,920.00$ - 12 jours</text>
+  <text x="60" y="256" class="text-small">• Paul Leblanc (Plombier 38$/h)</text>
+  <text x="70" y="269" class="text-small">84.5h - 3,211.00$ - 11 jours</text>
+  <text x="60" y="284" class="text-small">TOTAL MAIN-D'ŒUVRE: 45,250$</text>
+  <text x="60" y="297" class="text-small">📄 Acomptes versés: 32,100$</text>
+  
+  <!-- Rapports Matériaux -->
+  <rect x="360" y="160" width="280" height="150" class="box-success" />
+  <text x="500" y="180" text-anchor="middle" class="text-white">🧾 MATÉRIAUX</text>
+  <text x="370" y="200" class="text-small">🏠 Fondation: 12,450$ (BMR)</text>
+  <text x="370" y="213" class="text-small">🪚 Charpente: 18,950$ (Réno-Dépôt)</text>
+  <text x="370" y="228" class="text-small">⚡ Électricité: 8,750$ (Électro-Dépôt)</text>
+  <text x="370" y="241" class="text-small">🔧 Plomberie: 11,200$ (Plomberie Plus)</text>
+  <text x="370" y="256" class="text-small">🧱 Isolation: 6,850$ (Isolation Pro)</text>
+  <text x="370" y="269" class="text-small">🏠 Revêtements: 20,450$ (Multi-mag)</text>
+  <text x="370" y="284" class="text-small">TOTAL MATÉRIAUX: 78,650$</text>
+  <text x="370" y="297" class="text-small">💳 Payé fournisseurs: 66,100$</text>
+  
+  <!-- Rapport Financier Global -->
+  <rect x="670" y="160" width="280" height="150" class="box-warning" />
+  <text x="810" y="180" text-anchor="middle" class="text-white">💰 FINANCIER GLOBAL</text>
+  <text x="680" y="200" class="text-small">🏠 COÛT TOTAL MAISON:</text>
+  <text x="690" y="213" class="text-small">Main-d'œuvre: 45,250$</text>
+  <text x="690" y="226" class="text-small">Matériaux: 78,650$</text>
+  <text x="690" y="239" class="text-small">TOTAL: 123,900$</text>
+  <text x="680" y="256" class="text-small">💸 PAYÉ TOTAL: 98,200$</text>
+  <text x="680" y="269" class="text-small">📊 SOLDE DÛ: 25,700$</text>
+  <text x="680" y="284" class="text-small">📈 Avancement: 72%</text>
+  <text x="680" y="297" class="text-small">🏦 Rapport banque/assurance</text>
+  
+  <!-- Graphiques Maison -->
+  <rect x="50" y="340" width="450" height="180" class="box-chart" />
+  <text x="275" y="360" text-anchor="middle" class="text-white">📈 GRAPHIQUES CONSTRUCTION MAISON</text>
+  
+  <!-- Graphique barres Main-d'œuvre vs Matériaux -->
+  <rect x="80" y="380" width="60" height="70" fill="#3498db" />
+  <rect x="160" y="380" width="60" height="115" fill="#2ecc71" />
+  <text x="110" y="465" text-anchor="middle" class="text-small">Main-d'œuvre</text>
+  <text x="110" y="478" text-anchor="middle" class="text-small">45,250$</text>
+  <text x="190" y="465" text-anchor="middle" class="text-small">Matériaux</text>
+  <text x="190" y="478" text-anchor="middle" class="text-small">78,650$</text>
+  
+  <!-- Camembert Avancement -->
+  <circle cx="350" cy="420" r="35" fill="#2ecc71" />
+  <path d="M 350 420 L 350 385 A 35 35 0 0 1 385 420 Z" fill="#ecf0f1" />
+  <text x="350" y="470" text-anchor="middle" class="text-small">Avancement</text>
+  <text x="350" y="483" text-anchor="middle" class="text-small">72% / 28%</text>
+  
+  <!-- Timeline Étapes -->
+  <rect x="250" y="385" width="10" height="5" fill="#2ecc71" />
+  <rect x="265" y="385" width="10" height="5" fill="#2ecc71" />
+  <rect x="280" y="385" width="10" height="5" fill="#2ecc71" />
+  <rect x="295" y="385" width="10" height="5" fill="#f39c12" />
+  <rect x="310" y="385" width="10" height="5" fill="#ecf0f1" />
+  <text x="280" y="405" text-anchor="middle" class="text-small">Étapes Maison</text>
+  
+  <!-- Exports Maison -->
+  <rect x="520" y="340" width="430" height="180" class="box-danger" />
+  <text x="735" y="360" text-anchor="middle" class="text-white">📄 EXPORTS POUR MAISON</text>
+  
+  <text x="530" y="385" class="text-small">🏠 Rapports Propriétaire:</text>
+  <text x="540" y="398" class="text-small">• Rapport financier banque (prêt/refinancement)</text>
+  <text x="540" y="411" class="text-small">• Dossier assurance habitation complète</text>
+  <text x="540" y="424" class="text-small">• Suivi comptable pour impôts</text>
+  <text x="540" y="437" class="text-small">• Portfolio photos progression (347 images)</text>
+  
+  <text x="530" y="460" class="text-small">📊 Formats Disponibles:</text>
+  <text x="540" y="473" class="text-small">• PDF rapports avec photos intégrées</text>
+  <text x="540" y="486" class="text-small">• Excel tableaux financiers détaillés</text>
+  <text x="540" y="499" class="text-small">• CSV pour logiciels comptables</text>
+  <text x="540" y="512" class="text-small">• ZIP photos par étapes construction</text>
+  
+  <!-- KPI Maison -->
+  <rect x="50" y="550" width="900" height="120" class="box-dark" />
+  <text x="500" y="570" text-anchor="middle" class="text-white" font-size="14">🏠 INDICATEURS CLÉS CONSTRUCTION MAISON</text>
+  
+  <!-- KPI Cards Maison -->
+  <rect x="60" y="590" width="170" height="60" class="box-success" />
+  <text x="145" y="610" text-anchor="middle" class="text-white">🏠 Avancement</text>
+  <text x="145" y="625" text-anchor="middle" class="text-white">72%</text>
+  <text x="145" y="640" text-anchor="middle" class="text-small">Maison terminée</text>
+  
+  <rect x="250" y="590" width="170" height="60" class="box-primary" />
+  <text x="335" y="610" text-anchor="middle" class="text-white">💰 Budget</text>
+  <text x="335" y="625" text-anchor="middle" class="text-white">68%</text>
+  <text x="335" y="640" text-anchor="middle" class="text-small">Utilisé / Prévu</text>
+  
+  <rect x="440" y="590" width="170" height="60" class="box-warning" />
+  <text x="525" y="610" text-anchor="middle" class="text-white">📅 Temps</text>
+  <text x="525" y="625" text-anchor="middle" class="text-white">45j</text>
+  <text x="525" y="640" text-anchor="middle" class="text-small">Restants estimés</text>
+  
+  <rect x="630" y="590" width="170" height="60" class="box-danger" />
+  <text x="715" y="610" text-anchor="middle" class="text-white">💸 Solde Dû</text>
+  <text x="715" y="625" text-anchor="middle" class="text-white">25,700$</text>
+  <text x="715" y="640" text-anchor="middle" class="text-small">À payer total</text>
+  
+  <rect x="820" y="590" width="120" height="60" class="box" />
+  <text x="880" y="610" text-anchor="middle" class="text-dark">📸 Photos</text>
+  <text x="880" y="625" text-anchor="middle" class="text-dark">347</text>
+  <text x="880" y="640" text-anchor="middle" class="text-dark">Progression</text>
+  
+  <!-- Technologies Maison -->
+  <rect x="50" y="700" width="900" height="60" class="box" />
+  <text x="500" y="720" text-anchor="middle" class="text-dark" font-weight="bold">🏠 Technologies Simple Construction Maison</text>
+  <text x="60" y="735" class="text-dark">Chart.js (graphiques main-d'œuvre/matériaux) • jsPDF (rapports banque/assurance) • File API (photos factures+progression)</text>
+  <text x="60" y="750" class="text-dark">LocalStorage (sauvegarde locale totale) • JavaScript (calculs temps réel) • HostPapa (hébergement 100% statique)</text>
+  
+  <!-- Flèches de connexion -->
+  <line x1="190" y1="310" x2="275" y2="340" class="arrow" />
+  <line x1="500" y1="310" x2="735" y2="340" class="arrow" />
+  <line x1="810" y1="310" x2="400" y2="340" class="arrow" />
+  <line x1="500" y1="520" x2="500" y2="550" class="arrow" />
+</svg>

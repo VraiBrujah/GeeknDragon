@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Application Construction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #3a3a3a;
+            border-radius: 5px;
+            background: #2d2d2d;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 3px;
+        }
+        .success {
+            background: #28a745;
+            color: white;
+        }
+        .error {
+            background: #dc3545;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tests Fonctionnels - Application Construction Québec</h1>
+    
+    <div class="test-section">
+        <h2>1. Test de Chargement</h2>
+        <button onclick="testChargement()">Tester le chargement</button>
+        <div id="result-chargement"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Test Artisans</h2>
+        <button onclick="testArtisans()">Créer un artisan test</button>
+        <button onclick="listArtisans()">Lister les artisans</button>
+        <div id="result-artisans"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Test Pointage</h2>
+        <button onclick="testPointage()">Créer un pointage test</button>
+        <button onclick="listPointages()">Lister les pointages</button>
+        <div id="result-pointages"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Test Factures Matériaux</h2>
+        <button onclick="testFacture()">Créer une facture test</button>
+        <button onclick="listFactures()">Lister les factures</button>
+        <div id="result-factures"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. Test Calculs Taxes</h2>
+        <button onclick="testTaxes()">Tester calculs TPS/TVQ</button>
+        <div id="result-taxes"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>6. Test Storage</h2>
+        <button onclick="testStorage()">Tester LocalStorage</button>
+        <button onclick="clearStorage()">Vider le storage</button>
+        <div id="result-storage"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>7. Application Complète</h2>
+        <button onclick="window.open('index.html', '_blank')">Ouvrir l'application</button>
+        <p>Ouvrez la console (F12) pour voir les erreurs éventuelles</p>
+    </div>
+
+    <script>
+        const PREFIX = 'maison_qc_';
+        
+        function showResult(elementId, message, isSuccess = true) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="test-result ${isSuccess ? 'success' : 'error'}">${message}</div>`;
+        }
+
+        function testChargement() {
+            try {
+                // Vérifier que les bibliothèques sont chargées
+                const libs = [];
+                
+                // Test fetch des fichiers vendor
+                Promise.all([
+                    fetch('vendor/chart.min.js'),
+                    fetch('vendor/jspdf.min.js'),
+                    fetch('vendor/flatpickr.min.js'),
+                    fetch('vendor/bulma.min.css')
+                ]).then(responses => {
+                    const allOk = responses.every(r => r.ok);
+                    if (allOk) {
+                        showResult('result-chargement', '✅ Toutes les bibliothèques sont accessibles');
+                    } else {
+                        showResult('result-chargement', '❌ Certaines bibliothèques manquent', false);
+                    }
+                }).catch(err => {
+                    showResult('result-chargement', '❌ Erreur: ' + err.message, false);
+                });
+            } catch (error) {
+                showResult('result-chargement', '❌ Erreur: ' + error.message, false);
+            }
+        }
+
+        function testArtisans() {
+            try {
+                const artisan = {
+                    id: 'artisan_test_' + Date.now(),
+                    nom: 'Tremblay',
+                    prenom: 'Jean',
+                    specialite: 'Charpentier-menuisier',
+                    taux_horaire_ttc: 38.00,
+                    taxes_incluses: true,
+                    calcul_taxes_actif: false,
+                    statut: 'actif',
+                    telephone: '514-555-1234',
+                    type_travailleur: 'autonome'
+                };
+                
+                // Sauvegarder
+                let artisans = JSON.parse(localStorage.getItem(PREFIX + 'artisans') || '[]');
+                artisans.push(artisan);
+                localStorage.setItem(PREFIX + 'artisans', JSON.stringify(artisans));
+                
+                showResult('result-artisans', `✅ Artisan créé: ${artisan.prenom} ${artisan.nom} - ${artisan.taux_horaire_ttc}$/h`);
+            } catch (error) {
+                showResult('result-artisans', '❌ Erreur: ' + error.message, false);
+            }
+        }
+
+        function listArtisans() {
+            try {
+                const artisans = JSON.parse(localStorage.getItem(PREFIX + 'artisans') || '[]');
+                if (artisans.length === 0) {
+                    showResult('result-artisans', 'Aucun artisan enregistré');
+                } else {
+                    const html = artisans.map(a => 
+                        `${a.prenom} ${a.nom} - ${a.specialite} - ${a.taux_horaire_ttc}$/h`
+                    ).join('<br>');
+                    showResult('result-artisans', `Artisans (${artisans.length}):<br>${html}`);
+                }
+            } catch (error) {
+                showResult('result-artisans', '❌ Erreur: ' + error.message, false);
+            }
+        }
+
+        function testPointage() {
+            try {
+                // Récupérer le premier artisan
+                const artisans = JSON.parse(localStorage.getItem(PREFIX + 'artisans') || '[]');
+                if (artisans.length === 0) {
+                    showResult('result-pointages', '⚠️ Créez d\'abord un artisan', false);
+                    return;
+                }
+                
+                const artisan = artisans[0];
+                const heuresTravaillees = 7.5;
+                const coutMainOeuvre = heuresTravaillees * artisan.taux_horaire_ttc;
+                
+                const pointage = {
+                    id: 'pointage_test_' + Date.now(),
+                    artisan_id: artisan.id,
+                    date: new Date().toISOString().split('T')[0],
+                    heure_debut: '08:00',
+                    heure_fin: '16:30',
+                    temps_pause_minutes: 60,
+                    heures_travaillees: heuresTravaillees,
+                    taux_horaire_ttc: artisan.taux_horaire_ttc,
+                    cout_main_oeuvre_ttc: coutMainOeuvre,
+                    type_travaux: 'Installation charpente',
+                    etape_maison: 'Charpente et Structure',
+                    termine: true
+                };
+                
+                // Sauvegarder
+                let pointages = JSON.parse(localStorage.getItem(PREFIX + 'pointages') || '[]');
+                pointages.push(pointage);
+                localStorage.setItem(PREFIX + 'pointages', JSON.stringify(pointages));
+                
+                showResult('result-pointages', 
+                    `✅ Pointage créé: ${heuresTravaillees}h = ${coutMainOeuvre.toFixed(2)}$ CAD`);
+            } catch (error) {
+                showResult('result-pointages', '❌ Erreur: ' + error.message, false);
+            }
+        }
+
+        function listPointages() {
+            try {
+                const pointages = JSON.parse(localStorage.getItem(PREFIX + 'pointages') || '[]');
+                if (pointages.length === 0) {
+                    showResult('result-pointages', 'Aucun pointage enregistré');
+                } else {
+                    const total = pointages.reduce((sum, p) => sum + p.cout_main_oeuvre_ttc, 0);
+                    const html = pointages.map(p => 
+                        `${p.date} - ${p.heures_travaillees}h - ${p.cout_main_oeuvre_ttc.toFixed(2)}$`
+                    ).join('<br>');
+                    showResult('result-pointages', 
+                        `Pointages (${pointages.length}):<br>${html}<br><b>Total: ${total.toFixed(2)}$ CAD</b>`);
+                }
+            } catch (error) {
+                showResult('result-pointages', '❌ Erreur: ' + error.message, false);
+            }
+        }
+
+        function testFacture() {
+            try {
+                const montantHT = 1500.00;
+                const tps = montantHT * 0.05;
+                const tvq = montantHT * 0.09975;
+                const montantTotal = montantHT + tps + tvq;
+                
+                const facture = {
+                    id: 'facture_test_' + Date.now(),
+                    date_achat: new Date().toISOString().split('T')[0],
+                    fournisseur: 'Réno-Dépôt Laval',
+                    numero_facture: 'RD-2025-TEST',
+                    montant_ht: montantHT,
+                    tps_5_pct: tps,
+                    tvq_9975_pct: tvq,
+                    taxes_totales: tps + tvq,
+                    montant_total: montantTotal,
+                    categorie: 'Bois d\'œuvre',
+                    etape_maison: 'Charpente et Structure',
+                    description: 'Poutres et planches OSB',
+                    payee: true
+                };
+                
+                // Sauvegarder
+                let factures = JSON.parse(localStorage.getItem(PREFIX + 'factures-materiaux') || '[]');
+                factures.push(facture);
+                localStorage.setItem(PREFIX + 'factures-materiaux', JSON.stringify(factures));
+                
+                showResult('result-factures', 
+                    `✅ Facture créée: ${montantHT}$ HT + ${tps.toFixed(2)}$ TPS + ${tvq.toFixed(2)}$ TVQ = ${montantTotal.toFixed(2)}$ TTC`);
+            } catch (error) {
+                showResult('result-factures', '❌ Erreur: ' + error.message, false);
+            }
+        }
+
+        function listFactures() {
+            try {
+                const factures = JSON.parse(localStorage.getItem(PREFIX + 'factures-materiaux') || '[]');
+                if (factures.length === 0) {
+                    showResult('result-factures', 'Aucune facture enregistrée');
+                } else {
+                    const total = factures.reduce((sum, f) => sum + f.montant_total, 0);
+                    const totalTPS = factures.reduce((sum, f) => sum + f.tps_5_pct, 0);
+                    const totalTVQ = factures.reduce((sum, f) => sum + f.tvq_9975_pct, 0);
+                    
+                    const html = factures.map(f => 
+                        `${f.fournisseur} - ${f.montant_total.toFixed(2)}$ TTC`
+                    ).join('<br>');
+                    
+                    showResult('result-factures', 
+                        `Factures (${factures.length}):<br>${html}<br>
+                        <b>Total: ${total.toFixed(2)}$ CAD</b><br>
+                        TPS à récupérer: ${totalTPS.toFixed(2)}$<br>
+                        TVQ à récupérer: ${totalTVQ.toFixed(2)}$`);
+                }
+            } catch (error) {
+                showResult('result-factures', '❌ Erreur: ' + error.message, false);
+            }
+        }
+
+        function testTaxes() {
+            try {
+                const montantHT = 100.00;
+                const tps = montantHT * 0.05;
+                const tvq = montantHT * 0.09975;
+                const total = montantHT + tps + tvq;
+                
+                showResult('result-taxes', 
+                    `✅ Calcul taxes sur 100$ HT:<br>
+                    TPS (5%): ${tps.toFixed(2)}$<br>
+                    TVQ (9.975%): ${tvq.toFixed(2)}$<br>
+                    Taxes totales: ${(tps + tvq).toFixed(2)}$ (14.975%)<br>
+                    <b>Total TTC: ${total.toFixed(2)}$ CAD</b>`);
+            } catch (error) {
+                showResult('result-taxes', '❌ Erreur: ' + error.message, false);
+            }
+        }
+
+        function testStorage() {
+            try {
+                const keys = Object.keys(localStorage).filter(k => k.startsWith(PREFIX));
+                const data = {};
+                keys.forEach(key => {
+                    const cleanKey = key.replace(PREFIX, '');
+                    const value = localStorage.getItem(key);
+                    try {
+                        data[cleanKey] = JSON.parse(value);
+                    } catch {
+                        data[cleanKey] = value;
+                    }
+                });
+                
+                showResult('result-storage', 
+                    `✅ LocalStorage contient ${keys.length} clés:<br>` + 
+                    keys.map(k => `- ${k}`).join('<br>') +
+                    '<br><br>Données: ' + JSON.stringify(data, null, 2).substring(0, 500) + '...');
+            } catch (error) {
+                showResult('result-storage', '❌ Erreur: ' + error.message, false);
+            }
+        }
+
+        function clearStorage() {
+            if (confirm('Êtes-vous sûr de vouloir vider toutes les données ?')) {
+                const keys = Object.keys(localStorage).filter(k => k.startsWith(PREFIX));
+                keys.forEach(key => localStorage.removeItem(key));
+                showResult('result-storage', '✅ Storage vidé');
+            }
+        }
+    </script>
+</body>
+</html>

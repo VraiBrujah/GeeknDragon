@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Pointage/**)",
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Pointage/**)",
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Pointage/**)",
+      "Read(/C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Pointage/**)",
+      "Bash(python:*)",
+      "Bash(start \"C:\\Users\\Brujah\\Documents\\GitHub\\GeeknDragon\\Eds\\Pointage\\index.html\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
