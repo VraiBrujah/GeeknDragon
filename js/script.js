@@ -73,14 +73,17 @@ const Navigation = {
         header.style.background = 'rgba(26, 26, 26, 0.95)';
       }
 
-      // Auto-hide header sur mobile
-      if (window.innerWidth <= 768) {
-        if (scrollTop > lastScrollTop && scrollTop > 200) {
-          header.style.transform = 'translateY(-100%)';
-        } else {
-          header.style.transform = 'translateY(0)';
-        }
-      }
+      // Maintenir l'en-tête visible sur toutes les tailles d'écran
+      header.style.transform = 'translateY(0)';
+
+      // Ancien comportement d'auto-masquage sur mobile supprimé
+      // if (window.innerWidth <= 768) {
+      //   if (scrollTop > lastScrollTop && scrollTop > 200) {
+      //     header.style.transform = 'translateY(-100%)';
+      //   } else {
+      //     header.style.transform = 'translateY(0)';
+      //   }
+      // }
 
       lastScrollTop = scrollTop;
     });
