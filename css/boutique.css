@@ -8,8 +8,8 @@
     min-height: 70vh;
     display: flex;
     align-items: center;
-    margin-top: -70px;
-    padding-top: 140px;
+    margin-top: calc(-1 * var(--header-height));
+    padding-top: calc(2 * var(--header-height));
 }
 
 /* Utiliser le même overlay que index.html */
