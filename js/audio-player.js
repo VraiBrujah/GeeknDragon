@@ -172,62 +172,36 @@ class GeeknDragonAudioPlayer {
     
     async quickStart() {
         console.log('🚀 Démarrage rapide - recherche de la première musique disponible...');
-        
-        // Essayer d'abord le fichier hero-intro.mp3
-        const quickStartPath = `musique/${this.state.currentPage}/${this.state.quickStartFile}`;
-        
-        try {
-            const response = await fetch(quickStartPath, { method: 'HEAD' });
-            if (response.ok) {
-                this.state.playlist = [quickStartPath];
-                this.state.isPlaying = true;
-                this.loadTrack(0);
-                this.updatePlayButton();
-                console.log('🎵 Démarrage rapide avec:', this.state.quickStartFile);
-                return;
-            }
-        } catch (e) {
-            console.log('ℹ️ Hero-intro non trouvé, recherche première musique alphabétique...');
-        }
-        
-        // Sinon, chercher la première musique alphabétiquement
         await this.findFirstAvailableMusic();
     }
-    
+
     async findFirstAvailableMusic() {
         // Créer le scanner si pas encore fait
         if (!this.musicScanner) {
             await this.loadMusicScanner();
             this.musicScanner = new window.MusicFileScanner();
         }
-        
-        // Liste de noms de fichiers courants triés alphabétiquement
-        const commonNames = this.musicScanner.commonMusicNames.slice().sort();
+
         const directories = [`musique/${this.state.currentPage}`, 'musique'];
-        
-        // Essayer chaque fichier dans chaque répertoire jusqu'à en trouver un
+
         for (const directory of directories) {
-            for (const fileName of commonNames) {
-                const filePath = `${directory}/${fileName}`;
-                try {
-                    const response = await fetch(filePath, { method: 'HEAD' });
-                    if (response.ok) {
-                        this.state.playlist = [filePath];
-                        this.state.isPlaying = true;
-                        this.loadTrack(0);
-                        this.updatePlayButton();
-                        console.log(`🎵 Démarrage rapide avec première musique trouvée: ${fileName} dans ${directory}`);
-                        
-                        // Lancer le scan complet en arrière-plan après le démarrage
-                        setTimeout(() => this.scanMusicFiles(), 500);
-                        return;
-                    }
-                } catch (e) {
-                    // Continuer silencieusement
-                }
+            const files = await this.musicScanner.scanDirectory(directory);
+            if (files.length > 0) {
+                files.sort();
+                const heroIntro = files.find(f => f.endsWith(this.state.quickStartFile));
+                const firstFile = heroIntro || files[0];
+                this.state.playlist = [firstFile];
+                this.state.isPlaying = true;
+                this.loadTrack(0);
+                this.updatePlayButton();
+                console.log(`🎵 Démarrage rapide avec ${firstFile.split('/').pop()}`);
+
+                // Lancer le scan complet en arrière-plan après le démarrage
+                setTimeout(() => this.scanMusicFiles(), 500);
+                return;
             }
         }
-        
+
         console.log('⚠️ Aucune musique trouvée pour démarrage rapide, scan complet...');
         await this.scanMusicFiles();
     }
