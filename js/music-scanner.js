@@ -49,17 +49,17 @@ class MusicFileScanner {
      */
     async scanDirectory(directory) {
         console.log(`🔍 Scan du répertoire: ${directory}`);
-        
+
         let foundFiles = [];
-        
-        // Méthode 1: Tester les noms courants
-        foundFiles = await this.scanCommonFiles(directory);
-        
+
+        // Méthode 1: Endpoint serveur pour obtenir la liste réelle
+        foundFiles = await this.scanWithServerEndpoint(directory);
+
         // Méthode 2: Désactivée - pas d'interaction utilisateur requise
-        
-        // Méthode 3: Endpoint serveur si disponible
+
+        // Méthode 3: Tester les noms courants en secours
         if (foundFiles.length === 0) {
-            foundFiles = await this.scanWithServerEndpoint(directory);
+            foundFiles = await this.scanCommonFiles(directory);
         }
         
         console.log(`✅ ${foundFiles.length} fichiers trouvés dans ${directory}`);
@@ -67,7 +67,7 @@ class MusicFileScanner {
     }
     
     /**
-     * Méthode 1: Tester les noms de fichiers courants
+     * Méthode de secours : tester les noms de fichiers courants
      */
     async scanCommonFiles(directory) {
         const foundFiles = [];
@@ -90,7 +90,7 @@ class MusicFileScanner {
     
     
     /**
-     * Méthode 3: Endpoint serveur (PHP ou autre)
+     * Méthode principale : endpoint serveur (PHP ou autre)
      */
     async scanWithServerEndpoint(directory) {
         try {

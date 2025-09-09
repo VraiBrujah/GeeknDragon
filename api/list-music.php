@@ -14,7 +14,10 @@ $allowedDirectories = [
     'musique',
     'musique/index',
     'musique/boutique',
-    'musique/produit'
+    'musique/produit',
+    'musique/campagne',
+    'musique/guerre',
+    'musique/navi'
 ];
 
 $directory = $_GET['dir'] ?? 'musique';
