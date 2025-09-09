@@ -48,6 +48,7 @@ body {
     color: var(--light-text);
     background: var(--dark-bg);
     overflow-x: hidden;
+    /* réserve l'espace du header fixe */
     padding-top: var(--header-height);
 }
 
