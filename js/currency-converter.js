@@ -77,6 +77,41 @@
     return { text, remaining, items };
   };
 
+  const updateBaseFromAdvanced = (currency) => {
+    const total = Array.from(advancedInputs)
+      .filter((input) => input.dataset.currency === currency)
+      .reduce((sum, input) => {
+        const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
+        const mult = parseInt(input.dataset.multiplier, 10);
+        return sum + amount * mult;
+      }, 0);
+    const source = document.querySelector(
+      `#currency-sources input[data-currency="${currency}"]`
+    );
+    if (source) source.value = total;
+  };
+
+  const updateAdvancedFromBase = (currency) => {
+    const source = document.querySelector(
+      `#currency-sources input[data-currency="${currency}"]`
+    );
+    if (!source) return;
+    let value = Math.max(0, Math.floor(parseFloat(source.value) || 0));
+    multipliers
+      .slice()
+      .reverse()
+      .forEach((mult) => {
+        const field = document.querySelector(
+          `.advanced-group input[data-currency="${currency}"][data-multiplier="${mult}"]`
+        );
+        if (field) {
+          const qty = Math.floor(value / mult);
+          field.value = qty;
+          value -= qty * mult;
+        }
+      });
+  };
+
   /**
    * Render converted values for all currencies.
    */
@@ -98,12 +133,7 @@
       const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
       return sum + amount * rates[currency];
     }, 0);
-    const baseAdvanced = Array.from(advancedInputs).reduce((sum, input) => {
-      const { currency, multiplier } = input.dataset;
-      const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
-      return sum + amount * rates[currency] * parseInt(multiplier, 10);
-    }, 0);
-    const baseValue = baseSources + baseAdvanced;
+    const baseValue = baseSources;
     const minimal = minimalParts(baseValue, currencyNames, andText);
     const totalPieces = minimal.items.reduce((sum, { qty }) => sum + qty, 0);
     best.innerHTML = minimal.text
@@ -183,7 +213,7 @@
     equivContainer.classList.toggle('hidden', !hasEquiv);
   };
 
-  const addHandlers = (inputEl) => {
+  const addHandlers = (inputEl, onInput) => {
     const el = inputEl;
     el.addEventListener('focus', () => {
       if (el.value === '0') el.value = '';
@@ -194,12 +224,17 @@
       const invalid = Number.isFinite(value) && (value < 0 || !Number.isInteger(value));
       el.setCustomValidity(invalid ? 'Veuillez saisir un entier positif' : '');
       if (invalid) el.reportValidity();
+      if (typeof onInput === 'function') onInput(el);
       render();
     });
   };
 
-  sources.forEach(addHandlers);
-  advancedInputs.forEach(addHandlers);
+  sources.forEach((input) =>
+    addHandlers(input, (el) => updateAdvancedFromBase(el.dataset.currency))
+  );
+  advancedInputs.forEach((input) =>
+    addHandlers(input, (el) => updateBaseFromAdvanced(el.dataset.currency))
+  );
 
   advancedToggle?.addEventListener('click', () => {
     advancedGroups.forEach((group) => group.classList.toggle('hidden'));
