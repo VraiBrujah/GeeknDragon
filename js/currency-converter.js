@@ -22,7 +22,12 @@
   const multipliers = [1, 10, 100, 1000, 10000];
   const coins = Object.keys(rates).sort((a, b) => rates[b] - rates[a]);
 
-  const nf = new Intl.NumberFormat('fr-FR');
+  const locale =
+    window?.i18n?.lang ||
+    document.documentElement?.lang ||
+    window.navigator?.language ||
+    'fr-FR';
+  const nf = new Intl.NumberFormat(locale);
 
   const denominations = multipliers
     .flatMap((multiplier) => coins.map((coin) => ({
