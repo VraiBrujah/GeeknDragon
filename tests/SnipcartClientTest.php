@@ -36,5 +36,10 @@ final class SnipcartClientTest extends TestCase
         $this->assertIsArray($customer, 'Le client mock doit être un tableau');
         $profile = $client->getCustomer($customer['id']);
         $this->assertSame($customer['id'], $profile['id'], 'Le profil client doit correspondre');
+
+        $rates = $client->fetchShippingRates(['postalCode' => 'H1A1A1']);
+        $this->assertNotEmpty($rates, 'Les tarifs de livraison mock doivent être disponibles');
+
+        $this->assertTrue($client->validateWebhookToken('dummy'), 'La validation du token mock doit réussir');
     }
 }

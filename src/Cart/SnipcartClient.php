@@ -126,6 +126,64 @@ class SnipcartClient
         $result = $this->makeRequest('GET', '/customers?' . $query);
         return $result['items'][0] ?? null;
     }
+
+    /**
+     * Récupère les tarifs de livraison via l'API Snipcart
+     */
+    public function fetchShippingRates(array $data): array
+    {
+        if ($this->mockMode) {
+            return $this->getMockShippingRates();
+        }
+
+        return $this->makeRequest('POST', '/shippingrates', $data);
+    }
+
+    /**
+     * Valide un token webhook Snipcart
+     */
+    public function validateWebhookToken(string $token): bool
+    {
+        if ($this->mockMode) {
+            return true;
+        }
+
+        $url = $this->baseUrl . '/requestvalidation/' . urlencode($token);
+
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_USERPWD => $this->secretKey . ':',
+            CURLOPT_HTTPHEADER => [
+                'Accept: application/json',
+                'User-Agent: GeeknDragon/1.0'
+            ],
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_CONNECTTIMEOUT => 5,
+        ]);
+
+        curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            throw new \RuntimeException("Erreur cURL Snipcart : {$error}");
+        }
+
+        if ($httpCode === 401 || $httpCode === 403) {
+            error_log("Snipcart API auth error {$httpCode} for requestvalidation: {$token}");
+            throw new SnipcartException('Configuration Snipcart invalide', $httpCode);
+        }
+
+        if ($httpCode >= 400) {
+            error_log("Snipcart API error {$httpCode} for requestvalidation: {$token}");
+            throw new \RuntimeException("Erreur API Snipcart : {$httpCode}");
+        }
+
+        return $httpCode === 200 || $httpCode === 204;
+    }
     
     /**
      * Effectue une requête HTTP vers l'API Snipcart
@@ -269,6 +327,17 @@ class SnipcartClient
             'email' => $email,
             'firstName' => 'Test',
             'lastName' => 'User'
+        ];
+    }
+
+    private function getMockShippingRates(): array
+    {
+        return [
+            [
+                'cost' => 5.99,
+                'description' => 'Livraison standard',
+                'guaranteedDaysToDelivery' => 5
+            ]
         ];
     }
 }
