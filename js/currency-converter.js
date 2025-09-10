@@ -8,10 +8,10 @@
     platinum: 1000,
   };
 
-  const sources = document.querySelectorAll('#currency-sources input');
-  const advanced = document.querySelectorAll('.advanced input');
+  const sources = document.querySelectorAll('#currency-sources input:not([data-multiplier])');
+  const advancedInputs = document.querySelectorAll('.advanced-group input');
+  const advancedGroups = document.querySelectorAll('.advanced-group');
   const advancedToggle = document.getElementById('currency-advanced-toggle');
-  const advancedSection = document.getElementById('currency-advanced');
   const best = document.getElementById('currency-best');
   const equivContainer = document.getElementById('currency-equivalences');
   const equivTable = document.getElementById('currency-equivalences-list');
@@ -98,7 +98,7 @@
       const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
       return sum + amount * rates[currency];
     }, 0);
-    const baseAdvanced = Array.from(advanced).reduce((sum, input) => {
+    const baseAdvanced = Array.from(advancedInputs).reduce((sum, input) => {
       const { currency, multiplier } = input.dataset;
       const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
       return sum + amount * rates[currency] * parseInt(multiplier, 10);
@@ -199,10 +199,10 @@
   };
 
   sources.forEach(addHandlers);
-  advanced.forEach(addHandlers);
+  advancedInputs.forEach(addHandlers);
 
   advancedToggle?.addEventListener('click', () => {
-    advancedSection?.classList.toggle('hidden');
+    advancedGroups.forEach((group) => group.classList.toggle('hidden'));
   });
 
   // Initial render
