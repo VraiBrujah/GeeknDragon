@@ -42,19 +42,12 @@
     })))
     .sort((a, b) => b.value - a.value);
 
-  const minimalParts = (value, currencyNames, andText) => {
-    let remaining = value;
-    const items = [];
-    denominations.forEach(({ coin, multiplier, value: val }) => {
-      if (remaining <= 0) return;
-      const qty = Math.floor(remaining / val);
-      if (qty > 0) {
-        remaining -= qty * val;
-        items.push({ coin, multiplier, qty });
-      }
-    });
+  const formatItemsText = (items, currencyNames, andText) => {
     const parts = items.map(({ coin, multiplier, qty }) => {
-      const label = currencyNames[coin].replace(/^pièce/, qty > 1 ? 'pièces' : 'pièce');
+      const label = currencyNames[coin].replace(
+        /^pièce/,
+        qty > 1 ? 'pièces' : 'pièce',
+      );
       return multiplier === 1
         ? `${nf.format(qty)} ${label}`
         : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
@@ -78,8 +71,35 @@
         .map((g) => (Array.isArray(g) ? g.join(', ') : g))
         .join(',<br>');
     }
+    return text;
+  };
+
+  const minimalParts = (value, currencyNames, andText) => {
+    let remaining = value;
+    const items = [];
+    denominations.forEach(({ coin, multiplier, value: val }) => {
+      if (remaining <= 0) return;
+      const qty = Math.floor(remaining / val);
+      if (qty > 0) {
+        remaining -= qty * val;
+        items.push({ coin, multiplier, qty });
+      }
+    });
+    const text = formatItemsText(items, currencyNames, andText);
 
     return { text, remaining, items };
+  };
+
+  const goldEquivalent = (value, currencyNames, andText) => {
+    const items = [];
+    const goldQty = Math.floor(value / rates.gold);
+    if (goldQty > 0) items.push({ coin: 'gold', multiplier: 1, qty: goldQty });
+    const remainder = value % rates.gold;
+    if (remainder > 0) {
+      items.push(...minimalParts(remainder, currencyNames, andText).items);
+    }
+    const text = formatItemsText(items, currencyNames, andText);
+    return { items, text };
   };
 
   const updateBaseFromAdvanced = (currency) => {
@@ -135,8 +155,10 @@
 
     const calculateTotals = (copperValue) => {
       const minimal = minimalParts(copperValue, currencyNames, andText);
+      const goldTotal = goldEquivalent(copperValue, currencyNames, andText);
       const perCoinCounts = {};
       const remainderItems = {};
+      const remainderGold = {};
 
       coins.forEach((coin) => {
         const base = rates[coin];
@@ -161,6 +183,10 @@
           remainder > 0
             ? minimalParts(remainder, currencyNames, andText).items
             : [];
+        remainderGold[coin] =
+          remainder > 0
+            ? goldEquivalent(remainder, currencyNames, andText).text
+            : '';
       });
 
       const totalPieces = minimal.items.reduce(
@@ -170,8 +196,11 @@
       return {
         minimalText: minimal.text,
         minimalItems: minimal.items,
+        goldText: goldTotal.text,
+        goldItems: goldTotal.items,
         perCoinCounts,
         remainderItems,
+        remainderGold,
         totalPieces,
       };
     };
@@ -185,7 +214,7 @@
 
     const totalsData = calculateTotals(baseValue);
     best.innerHTML = totalsData.minimalText
-      ? `${bestLabel}<br>${totalsData.minimalText}<br><span class="total-pieces">${totalPiecesLabel} ${nf.format(
+      ? `${bestLabel}<br>${totalsData.minimalText}<br>${totalsData.goldText}<br><span class="total-pieces">${totalPiecesLabel} ${nf.format(
           Math.floor(totalsData.totalPieces),
         )}</span>`
       : '';
@@ -218,6 +247,12 @@
             : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
         })
         .join('<br>');
+      const remainderGold = totalsData.remainderGold[coin];
+      const remainderText = remainderPhrase
+        ? remainderGold
+          ? `${remainderPhrase}<br>${remainderGold}`
+          : remainderPhrase
+        : remainderGold;
       const totalRowPieces = Math.floor(
         parts.reduce((sum, { qty }) => sum + qty, 0) +
           remainderItems.reduce((sum, { qty }) => sum + qty, 0),
@@ -237,12 +272,12 @@
       );
       const summary = `${summaryParts.join('<br>')}<br>${
         tr.equivTotalValue || 'Total:'
-      } ${nf.format(totalValue)} ${label}`;
+      } ${nf.format(totalValue)} ${label}<br>${totalsData.goldText}`;
       const row = document.createElement('tr');
       const coinTitle = currencyNames[coin]
         .replace(/^pièces?\s+(?:de|d['’])\s*/i, '')
         .replace(/^./, (ch) => ch.toUpperCase());
-      row.innerHTML = `<th>${coinTitle}</th><td>${summary}</td><td>${remainderPhrase}</td><td>${nf.format(
+      row.innerHTML = `<th>${coinTitle}</th><td>${summary}</td><td>${remainderText}</td><td>${nf.format(
         totalRowPieces,
       )}</td>`;
       equivBody.appendChild(row);
