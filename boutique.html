@@ -303,6 +303,63 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <button id="currency-advanced-toggle" data-i18n="shop.converter.advancedToggle">Détails</button>
+                        <section id="currency-advanced" class="advanced hidden">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th data-i18n="shop.converter.multiplier10000">x10 000</th>
+                                        <th data-i18n="shop.converter.multiplier1000">x1 000</th>
+                                        <th data-i18n="shop.converter.multiplier100">x100</th>
+                                        <th data-i18n="shop.converter.multiplier10">x10</th>
+                                        <th data-i18n="shop.converter.multiplier1">x1</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th data-i18n="shop.converter.copper">pièce de cuivre</th>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="10000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="1000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="100"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="10"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-i18n="shop.converter.silver">pièce d’argent</th>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="10000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="1000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="100"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="10"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-i18n="shop.converter.electrum">pièce d’électrum</th>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="10000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="1000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="100"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="10"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-i18n="shop.converter.gold">pièce d’or</th>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="10000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="1000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="100"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="10"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="1"></td>
+                                    </tr>
+                                    <tr>
+                                        <th data-i18n="shop.converter.platinum">pièce de platine</th>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="10000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="1000"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="100"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="10"></td>
+                                        <td><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="1"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
                     </div>
                     <div id="currency-equivalences" class="hidden">
                         <h5 data-i18n="shop.converter.equivTitle">Équivalences totales par métal</h5>
