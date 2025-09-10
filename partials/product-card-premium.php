@@ -1,30 +1,30 @@
 <?php
-// Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
+// Variables attendues dans $viewData : 'product' (array), 'lang' (fr|en), 'translations' (array), 'inventoryService'
 
 require_once __DIR__ . '/../includes/video-utils.php';
 
-if (!isset($product['id'])) {
+if (!isset($viewData['product']['id'])) {
     return;
 }
-$id = (string)$product['id'];
+$id = (string)$viewData['product']['id'];
 
-$name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
-$summary     = $lang === 'en'
-    ? ($product['summary_en'] ?? $product['summary'] ?? null)
-    : ($product['summary'] ?? $product['summary_en'] ?? null);
-$desc        = $summary ?? ($lang === 'en'
-    ? ($product['description_en'] ?? $product['description'])
-    : $product['description']);
-$img         = $product['img'] ?? ($product['images'][0] ?? '');
+$name        = $viewData['lang'] === 'en' ? ($viewData['product']['name_en'] ?? $viewData['product']['name']) : $viewData['product']['name'];
+$summary     = $viewData['lang'] === 'en'
+    ? ($viewData['product']['summary_en'] ?? $viewData['product']['summary'] ?? null)
+    : ($viewData['product']['summary'] ?? $viewData['product']['summary_en'] ?? null);
+$desc        = $summary ?? ($viewData['lang'] === 'en'
+    ? ($viewData['product']['description_en'] ?? $viewData['product']['description'])
+    : $viewData['product']['description']);
+$img         = $viewData['product']['img'] ?? ($viewData['product']['images'][0] ?? '');
 $isVideo     = preg_match('/\.mp4$/i', $img);
 $posterPath  = $isVideo ? generateVideoPoster($img) : null;
-$url         = $product['url'] ?? ('/product.php?id=' . urlencode($id));
-$price       = number_format((float)$product['price'], 2, '.', '');
+$url         = $viewData['product']['url'] ?? ('/product.php?id=' . urlencode($id));
+$price       = number_format((float)$viewData['product']['price'], 2, '.', '');
 
 static $parsedown;
 $parsedown = $parsedown ?? new Parsedown();
 $htmlDesc  = $parsedown->text($desc);
-$isInStock = $inventoryService->isInStock($id);
+$isInStock = $viewData['inventoryService']->isInStock($id);
 ?>
 
 <div class="product-card animate-scale-in <?= $isInStock ? '' : 'loading' ?>">
@@ -54,8 +54,8 @@ $isInStock = $inventoryService->isInStock($id);
     <?php else : ?>
       <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
            alt="<?= htmlspecialchars($desc) ?>"
-           data-alt-fr="<?= htmlspecialchars($product['summary'] ?? $product['description'] ?? $desc) ?>"
-           data-alt-en="<?= htmlspecialchars($product['summary_en'] ?? $product['summary'] ?? $product['description_en'] ?? $product['description'] ?? $desc) ?>"
+           data-alt-fr="<?= htmlspecialchars($viewData['product']['summary'] ?? $viewData['product']['description'] ?? $desc) ?>"
+           data-alt-en="<?= htmlspecialchars($viewData['product']['summary_en'] ?? $viewData['product']['summary'] ?? $viewData['product']['description_en'] ?? $viewData['product']['description'] ?? $desc) ?>"
            class="product-media" loading="lazy">
     <?php endif; ?>
   </a>
@@ -64,15 +64,15 @@ $isInStock = $inventoryService->isInStock($id);
   <div class="product-content">
     <a href="<?= htmlspecialchars($url) ?>">
       <h4 class="product-title"
-          data-name-fr="<?= htmlspecialchars($product['name']) ?>"
-          data-name-en="<?= htmlspecialchars($product['name_en'] ?? $product['name']) ?>">
+          data-name-fr="<?= htmlspecialchars($viewData['product']['name']) ?>"
+          data-name-en="<?= htmlspecialchars($viewData['product']['name_en'] ?? $viewData['product']['name']) ?>">
         <?= htmlspecialchars($name) ?>
       </h4>
     </a>
 
     <div class="product-description"
-         data-desc-fr="<?= htmlspecialchars($product['summary'] ?? $product['description'] ?? $desc) ?>"
-         data-desc-en="<?= htmlspecialchars($product['summary_en'] ?? $product['summary'] ?? $product['description_en'] ?? $product['description'] ?? $desc) ?>">
+         data-desc-fr="<?= htmlspecialchars($viewData['product']['summary'] ?? $viewData['product']['description'] ?? $desc) ?>"
+         data-desc-en="<?= htmlspecialchars($viewData['product']['summary_en'] ?? $viewData['product']['summary'] ?? $viewData['product']['description_en'] ?? $viewData['product']['description'] ?? $desc) ?>">
       <?= strip_tags($htmlDesc) ?>
     </div>
 

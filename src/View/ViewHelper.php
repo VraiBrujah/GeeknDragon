@@ -102,20 +102,17 @@ class ViewHelper
     /**
      * Inclut un partial avec variables
      */
-    public function partial(string $name, array $vars = []): void
+    public function partial(string $name, array $viewData = []): void
     {
         $partialPath = __DIR__ . '/../../partials/' . $name . '.php';
-        
+
         if (!file_exists($partialPath)) {
             throw new \RuntimeException("Partial non trouvé : $name");
         }
-        
-        // Extraire les variables dans le scope local
-        extract($vars);
-        
+
         // Rendre le helper disponible dans le partial
         $helper = $this;
-        
+
         include $partialPath;
     }
     
