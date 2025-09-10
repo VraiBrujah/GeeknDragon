@@ -1,0 +1,38 @@
+Critère	Li-CUBE PRO™ 24V 105Ah (EDS Québec)	Batterie Ni-Cd industrielle 24V 100Ah (Saft)
+Technologie	Lithium Fer Phosphate (LiFePO₄)	Nickel Cadmium (Ni-Cd)
+Énergie totale	2520 Wh	2400 Wh
+Durée de vie	≥ 8000 cycles à 80 % DOD	2000 à 3000 cycles typiques
+Nombre de remplacements sur 20 ans	0 remplacement	2 à 3 remplacements
+Densité massique	≈ 110 Wh/kg (23 kg)	≈ 30 Wh/kg (~80 kg)
+Densité volumique	≈ 161 Wh/L	≈ 27 Wh/L
+Profondeur de décharge utile	Jusqu’à ~96 % exploitable	~60 % recommandé
+Charge rapide	Oui, 1 à 2 h (≈ 100 A)	Non, 8 à 12 h
+Maintenance	Zéro maintenance (BMS, équilibrage, OTA)	Appoint électrolyte, inspections périodiques, 2 visites/an
+Sécurité	Protections OVP, UVP, OCP, OTP, court-circuit	Pas de protections électroniques
+Connectivité et surveillance	GPS, Bluetooth, Wi-Fi, GPRS, Cloud, télémétrie, alarmes	Aucune connectivité native
+Température de fonctionnement	−40 °C à +55 °C avec auto-chauffage	−50 °C à +70 °C, performances limitées
+Spécificité auto-chauffage	Système auto-chauffant pour usage à −40 °C	Non disponible
+Format et intégration	Boîtier métal compact, installation facile	Boîtier plastique, installation sur place plus lourde
+Fiabilité en milieu ferroviaire et industriel	Supervision à distance, prévention des pannes	Robuste mais vieillissement plus rapide, pas de contrôle intelligent
+Impact environnemental	Sans métaux lourds, recyclable, RoHS	Contient du cadmium, recyclage complexe et coûteux
+Transport et réglementation	UN38.3, CSA, UL1973, UL9540A	Classé UN2795 Batteries Wet, Alkali
+Encombrement et poids	420 × 240 × 155 mm, 23 kg	600 × 500 × 300 mm, ~80 kg
+Prix unitaire (achat)	5000 à 5500 CAD (monitoring en option 25 CAD/mois)	12 000 CAD
+Prix location mensuel	150 à 200 CAD, monitoring inclus, frais d’installation unique 500 CAD	60000/240 mois = 250/mois
+TCO estimé sur 20 ans — achat	Matériel 5000 à 5500 CAD, 0 remplacement, maintenance nulle. Monitoring en option + 6000 CAD. Total matériel seul 5000 à 5500 CAD. Total avec monitoring 11 000 à 11 500 CAD.	Matériel 36 000 à 48 000 CAD selon 3 ou 4 unités, + maintenance 8000 à 12 000 CAD. Total 44 000 à 60 000 CAD.
+TCO estimé sur 20 ans — location	150 à 200 CAD × 240 mois = 36 000 à 48 000 CAD + 500 CAD d’installation. Monitoring inclus.	60 000$  / 240 mois = 250
+
+concidere que a 20 ans pour la ni-cd on es a 4 unité!!! 
+
+
+
+
+
+
+
+
+
+
+
+
+Matériel 36 000 à 48 000 CAD selon 3 ou 4 unités, + maintenance 8000 à 12 000 CAD. Total 44 000 à 60 000 CAD.

@@ -1,0 +1,89 @@
+creer moin un prompte pour creer un site webe de presentation pour ce produit avec une page de presentation et une page d'edition qui permet l'edition live sur la page de tout eles champ de texte et qui une fois s'auvgader s'applique sur la page presentation qui est celle qui serra Utiliser par notre quipe de vente pour presenter live le produit au client eventuel. le tout edoit etre facillement editable par une perssone qui nasaucune connessance en informatioque et la presentation doit etre magnifique il faux du texte avec phrase coup de point
+
+les requsi suivant creer moi un site webe moderne manifique en monde sombre et bleu claire qui affiche d,une facon tres vendeurse et  │ 
+│   inteligente pour une presentaton de produit magnifique  web dynamique  les information suivante: [Pasted text #1 +25    │
+│   lines] ajoute de point markting fort des phrase vente coup de point et utilise les image du des sous dosseir       │
+│   image qui sont nomer de facon exdplicite   
+
+ces une presentation pour le produit Li-CUBE  PRO de la compagne edsquebec. tu pexu faire des recherche sur edsquebec.com pourmieunx definir les requis.  et le but de la presentation est de montrais touts les avantage de passer des batterie actuel d'un clien Ni-Cd a nos nbatterie Li-CUBE PRO
+
+les image sont toute des carrer :
+images\edsQuebec.png : le nom et le logo 
+logo edsquebec.png : le logo
+Li-CUBE PRO.png une image le la Li-CUBE PRO notre prosuit phare a metre en avant
+NiCd.png le produit actuel du client qui paie trop pour rien::
+
+<informations fournies>
+Critère	Li-CUBE PRO™ 24V 105Ah (EDS Québec)	Batterie Ni-Cd industrielle 24V 100Ah (Saft)
+Technologie	Lithium Fer Phosphate (LiFePO₄)	Nickel Cadmium (Ni-Cd)
+Énergie totale	2520 Wh	2400 Wh
+Durée de vie	≥ 8000 cycles à 80 % DOD	2000 à 3000 cycles typiques
+Nombre de remplacements sur 20 ans	0 remplacement	3 remplacements (4 unités au total)
+Densité massique	≈ 110 Wh/kg (23 kg)	≈ 30 Wh/kg (~80 kg)
+Densité volumique	≈ 161 Wh/L	≈ 27 Wh/L
+Profondeur de décharge utile	Jusqu’à ~96 % exploitable	~60 % recommandé
+Charge rapide	Oui, 1 à 2 h (≈ 100 A)	Non, 8 à 12 h
+Maintenance	Zéro maintenance (BMS, équilibrage, OTA)	Appoint électrolyte, inspections périodiques, 2 visites/an
+Sécurité	Protections OVP, UVP, OCP, OTP, court-circuit	Pas de protections électroniques
+Connectivité et surveillance	GPS, Bluetooth, Wi-Fi, GPRS, Cloud, télémétrie, alarmes	Aucune connectivité native
+Température de fonctionnement	−40 °C à +55 °C avec auto-chauffage	−50 °C à +70 °C, performances limitées
+Spécificité auto-chauffage	Système auto-chauffant pour usage à −40 °C	Non disponible
+Format et intégration	Boîtier métal compact, installation facile	Boîtier plastique, installation sur place plus lourde
+Fiabilité en milieu ferroviaire et industriel	Supervision à distance, prévention des pannes	Robuste mais vieillissement plus rapide, pas de contrôle intelligent
+Impact environnemental	Sans métaux lourds, recyclable, RoHS	Contient du cadmium, recyclage complexe et coûteux
+Transport et réglementation	UN38.3, CSA, UL1973, UL9540A	Classé UN2795 Batteries Wet, Alkali
+Encombrement et poids	420 × 240 × 155 mm, 23 kg	600 × 500 × 300 mm, ~80 kg
+Prix unitaire (achat)	5000 à 5500 CAD (monitoring en option 25 CAD/mois)	12 000 CAD
+Prix location mensuel	150 à 200 CAD, monitoring inclus, frais d’installation unique 500 CAD	250 CAD/mois (déduit de 60 000 CAD / 240 mois)
+TCO estimé sur 20 ans (achat)	Matériel 5000 à 5500 CAD, 0 remplacement, maintenance nulle. Option monitoring + 6000 CAD. → Total matériel seul 5000 à 5500 CAD. Total avec monitoring 11 000 à 11 500 CAD.	Matériel 48 000 CAD (4 unités) + maintenance 8000 à 12 000 CAD. → Total 56 000 à 60 000 CAD.
+TCO estimé sur 20 ans (location)	150 à 200 CAD × 240 mois = 36 000 à 48 000 CAD + 500 CAD d’installation. Monitoring inclus.	250 CAD × 240 mois = 60 000 CAD.
+</informations fournies>
+
+les information doivent etre claire siommple a comprendre et tres pertinante et acrocheuse et coup de point
+
+Points faibles majeurs des batteries Ni-Cd (Saft SPL/SBLE)
+1.	Cadmium hautement toxique : classé dangereux par REACH, recyclage et manipulation coûteux.
+2.	Maintenance obligatoire : appoint d’électrolyte, suivi régulier, intervention de techniciens, risques de fuites de KOH corrosif.
+3.	Durée de vie réduite : 2000–3000 cycles (5–6 ans) → remplacement fréquent.
+4.	Poids et encombrement : 80–100 kg, manipulation difficile, installation contraignante.
+5.	Charge lente : 8–12 h → indisponibilité longue en cas de panne.
+6.	Pas de connectivité : aucune télémétrie, aucun suivi à distance.
+7.	Réglementation stricte : classées UN2795 (Batteries Wet, Alkali), transport coûteux et contraignant.
+8.	Effet mémoire : perte de capacité avec les cycles partiels.
+9.	Coût initial très élevé : ≈ 12 000 CAD pour une batterie 24V–100Ah.
+
+
+
+
+
+
+Avantages stratégiques des batteries Li-CUBE PRO™ LFP (EDS Québec)
+1.	Durée de vie exceptionnelle : ≥ 8000 cycles (20–25 ans réels) → 4× plus que Ni-Cd.
+2.	Zéro maintenance : pas d’électrolyte, pas d’effet mémoire, suivi automatisé par BMS.
+3.	Surveillance en temps réel : grâce au GPS, Bluetooth, Wi-Fi et GPRS, l’état de la batterie peut être suivi à distance, permettant une maintenance préventive et évitant les pannes imprévues sur des infrastructures critiques.
+4.	Réduction des coûts opérationnels : pas de maintenance, réduction des interventions sur site (moins de déplacements des équipes), meilleure fiabilité → baisse du coût total de possession.
+5.	Sécurité renforcée : BMS sophistiqué Multi-niveau protège contre toutes les anomalies électriques (surcharge, court-circuit, température), réduisant drastiquement les risques d’incident (OVP, UVP, OCP, OTP, court-circuit).
+6.	Performance énergétique :
+o	110 Wh/kg (≈ 4× plus que Ni-Cd).
+o	157 Wh/L (≈ 6× plus compact).
+o	Charge rapide : 1–2 h au lieu de 8–12 h.
+7.	Adaptée au climat canadien : gestion thermique par BMS, fonctionnement garanti en conditions hivernales extrêmes, fonctionnement de –40 °C à +55 °C.
+8.	Écologique : pas de cadmium, conforme RoHS, recyclable, image environnementale positive.
+9.	Fabrication et SAV au Québec : délais réduits, service local, réactivité pour pièces et support.
+10.	Prix d’achat compétitif : ≈ 2500 - 3000 CAD pour une batterie 24V–105Ah (≈ 5× moins cher qu’une Ni-Cd équivalente).
+11.	Facilité d’intégration et d’installation : boîtier compact acier, 23 kg seulement → manutention sécurisée pour les techniciens.
+
+Conclusion pour l’exploitant ferroviaire
+•	La Ni-Cd, historiquement d’une robustesse mécanique et d’une bonne tolérance aux températures extrêmes, elles sont désormais dépassées technologiquement et écologiquement, et coûte aujourd’hui jusqu’à 20× plus cher sur le cycle de vie (prix d’achat + maintenance + interventions).
+
+•	La Li-CUBE PRO™ LFP d’EDS Québec est non seulement plus fiable et sécurisée, mais aussi beaucoup plus économique dès l’achat.
+o	Fiabilité accrue (pas de panne imprévue grâce au monitoring).
+o	Sécurité renforcée (BMS intelligent + alarmes + GPS de localisation).
+o	Réduction des coûts opérationnels (moins d’interventions, durée de vie 4× plus longue).
+o	Respect de l’environnement et des réglementations (sans cadmium).
+
+En un mot, la Li-CUBE PRO™ de EDS Québec est la seule solution qui combine performance, économie et conformité environnementale, tout en réduisant drastiquement les coûts d’exploitation. Elle représente une solution moderne, écologique et stratégique pour la sécurité des passages à niveau.
+
+
+
+tu peux utilsier internet pour trouver des information de vente auquelle on as ppas penser. ces pour le marcher canadien
