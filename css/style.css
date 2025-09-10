@@ -1,4 +1,5 @@
 /* Variables CSS pour thème D&D médiéval authentique */
+@import url('cart-widget.css');
 :root {
     --primary-color: #8b4513;
     --primary-dark: #654321;

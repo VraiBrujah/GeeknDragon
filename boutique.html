@@ -26,6 +26,16 @@
                 <li><a href="#filters" class="nav-link">Filtres</a></li>
                 <li><a href="index.html#contact" class="nav-link">Contact</a></li>
             </ul>
+            
+            <!-- Widget Panier D&D -->
+            <div class="nav-cart">
+                <button id="gd-cart-toggle-widget" class="cart-toggle" aria-label="Ouvrir le sac d'aventurier">
+                    <span class="cart-icon">🎒</span>
+                    <span class="cart-text">Sac</span>
+                    <span id="gd-cart-count-widget" class="cart-count">0</span>
+                </button>
+            </div>
+            
             <div class="nav-toggle">
                 <span></span>
                 <span></span>
@@ -492,11 +502,30 @@
         </div>
     </footer>
 
+    <!-- Variables d'environnement pour Snipcart -->
+    <script>
+        window.SNIPCART_API_KEY = 'YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1'; // À remplacer par votre vraie clé
+    </script>
+    
+    <!-- Scripts existants -->
     <script src="js/script.js"></script>
     <script src="js/hero-videos.js"></script>
     <script src="js/boutique.js"></script>
     <script src="js/currency-converter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
     <script src="js/audio-player.js"></script>
+    
+    <!-- Intégration Snipcart avec thème D&D -->
+    <script src="js/snipcart-products.js"></script>
+    <script src="js/snipcart-integration.js"></script>
+    
+    <!-- Container Snipcart (hidden) -->
+    <div id="snipcart" 
+         data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1"
+         data-config-modal-style="side"
+         data-config-add-product-behavior="none"
+         data-templates-url="/templates/snipcart-templates.html"
+         style="display: none;">
+    </div>
 </body>
 </html>

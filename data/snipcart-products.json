@@ -1,0 +1,188 @@
+{
+    "lot10": {
+        "id": "lot10",
+        "name": "L\u2019Offrande du Voyageur",
+        "name_en": "The Traveler's Offering",
+        "price": 60,
+        "currency": "CAD",
+        "description": "Tr\u00e9sor de d\u00e9part immersif\n10 pi\u00e8ces en m\u00e9tal\u202f: 2 de chaque m\u00e9tal (cuivre, argent, \u00e9lectrum, or, platine). Vous choisissez un seul multiplicateur pour tout le lot\u202f: unitaire par d\u00e9faut (brillant, sans gravure) ou x10 \/ x100 \/ x1&nbsp;000 \/ x10&nbsp;000 (gravure nette, finition l\u00e9g\u00e8rement mate).\nUtilisez les multiplicateurs pour acc\u00e9l\u00e9rer les comptes sans perdre l\u2019immersion.",
+        "description_en": "Immersive starter hoard\n10 metal coins\u202f: 2 of each metal (copper, silver, electrum, gold, platinum). Choose one multiplier for the whole set: unit by default (shiny, no engraving) or x10 \/ x100 \/ x1,000 \/ x10,000 (crisp engraving, slightly matte).\nUse multipliers to speed up counting without breaking immersion.",
+        "image": "\/images\/optimized-modern\/webp\/Vagabon.webp",
+        "weight": 150,
+        "shipping_category": "coins",
+        "customFields": [
+            {
+                "name": "Multiplicateur",
+                "options": "\u200e\u2001\u2014 x1|\u200e\u2001\u2014 x10|\u200e\u2001\u2014 x100|\u200e\u2001\u2014 x1 000|\u200e\u2001\u2014 x10 000",
+                "required": true,
+                "type": "dropdown"
+            }
+        ],
+        "metadata": {
+            "category": "accessories",
+            "summary": "10 pi\u00e8ces m\u00e9talliques pour d\u00e9marrer l'aventure.",
+            "summary_en": "10 metal coins to kickstart your adventure."
+        }
+    },
+    "lot25": {
+        "id": "lot25",
+        "name": "La Monnaie des Cinq Royaumes",
+        "name_en": "Currency of the Five Realms",
+        "price": 145,
+        "currency": "CAD",
+        "description": "25 pi\u00e8ces, z\u00e9ro doublon\n5 m\u00e9taux \u00d7 5 multiplicateurs = 25 mod\u00e8les uniques. Chaque m\u00e9tal existe en unitaire (brillant) et x10 \/ x100 \/ x1&nbsp;000 \/ x10&nbsp;000 (gravure mate).\nUtilisez les multiplicateurs pour acc\u00e9l\u00e9rer les comptes sans perdre l\u2019immersion.",
+        "description_en": "25 coins, no duplicates\n5 metals \u00d7 5 multipliers = 25 unique designs. Each metal comes in unit (shiny) and x10 \/ x100 \/ x1,000 \/ x10,000 (matte engraving). Everything included\u202f\u2014 no selection needed.\nUse multipliers to speed up counting without breaking immersion.",
+        "image": "\/images\/optimized-modern\/webp\/Seignieur.webp",
+        "weight": 350,
+        "shipping_category": "coins",
+        "customFields": [],
+        "metadata": {
+            "category": "accessories",
+            "summary": "25 pi\u00e8ces uniques couvrant tous m\u00e9taux et multiplicateurs.",
+            "summary_en": "25 unique coins covering every metal and multiplier."
+        }
+    },
+    "lot50-essence": {
+        "id": "lot50-essence",
+        "name": "L\u2019Essence du Marchand",
+        "name_en": "Essence of the Merchant",
+        "price": 275,
+        "currency": "CAD",
+        "description": "50 pi\u00e8ces, double vari\u00e9t\u00e9\n2 exemplaires de chacun des 25 mod\u00e8les de la Monnaie des Cinq Royaumes\u202f: total 50 pi\u00e8ces. Unitaire (brillant) et x10\/x100\/x1&nbsp;000\/x10&nbsp;000 (gravure mate).\nUtilisez les multiplicateurs pour acc\u00e9l\u00e9rer les comptes sans perdre l\u2019immersion.",
+        "description_en": "50 coins, double the variety\n2 copies of each of the 25 designs from the Currency of the Five Realms\u202f\u2014 total 50 coins. Unit (shiny) and x10\/x100\/x1,000\/x10,000 (matte engraving). Everything included\u202f\u2014 no selection needed.\nUse multipliers to speed up counting without breaking immersion.",
+        "image": "\/images\/optimized-modern\/webp\/Royaume.webp",
+        "weight": 700,
+        "shipping_category": "coins",
+        "customFields": [],
+        "metadata": {
+            "category": "accessories",
+            "summary": "50 pi\u00e8ces, deux de chaque mod\u00e8le pour une bourse compl\u00e8te.",
+            "summary_en": "50 coins, two of each design for a full purse."
+        }
+    },
+    "lot50-tresorerie": {
+        "id": "lot50-tresorerie",
+        "name": "La Tr\u00e9sorerie du Seigneur",
+        "name_en": "The Lord's Treasury",
+        "price": 275,
+        "currency": "CAD",
+        "description": "50 pi\u00e8ces pour l\u2019opulence\n10 pi\u00e8ces de chaque m\u00e9tal (cuivre, argent, \u00e9lectrum, or, platine) appliquant le m\u00eame multiplicateur choisi \u00e0 l\u2019achat\u202f: unitaire par d\u00e9faut (brillant) ou x10 \/ x100 \/ x1&nbsp;000 \/ x10&nbsp;000 (gravure mate).\nUtilisez les multiplicateurs pour acc\u00e9l\u00e9rer les comptes sans perdre l\u2019immersion.",
+        "description_en": "50 coins for opulence\n10 coins of each metal (copper, silver, electrum, gold, platinum) using the same multiplier selected at checkout: unit by default (shiny) or x10 \/ x100 \/ x1,000 \/ x10,000 (matte engraving).\nUse multipliers to speed up counting without breaking immersion.",
+        "image": "\/images\/optimized-modern\/webp\/Essence.webp",
+        "weight": 700,
+        "shipping_category": "coins",
+        "customFields": [
+            {
+                "name": "Multiplicateur",
+                "options": "\u200e\u2001\u2014 x1|\u2001\u2014 x10|\u2001\u2014 x100|\u200e\u2001\u2014 x1 000|\u2001\u2014 x10 000",
+                "required": true,
+                "type": "dropdown"
+            }
+        ],
+        "metadata": {
+            "category": "accessories",
+            "summary": "50 pi\u00e8ces d'un m\u00eame multiplicateur pour une tr\u00e9sorerie somptueuse.",
+            "summary_en": "50 coins sharing one multiplier for a lavish treasury."
+        }
+    },
+    "pack-182-arsenal-aventurier": {
+        "id": "pack-182-arsenal-aventurier",
+        "name": "Arsenal de l\u2019Aventurier\n182 cartes",
+        "name_en": "Adventurer\u2019s Arsenal\n182 Cards",
+        "price": 49.99,
+        "currency": "CAD",
+        "description": "Armes \u2022 Armures \u2022 \u00c9quipementUn lot massif et pr\u00eat-\u00e0-jouer pour \u00e9quiper tout un groupe\u2009: armes classiques et exotiques, protections pour chaque style, et l\u2019essentiel d\u2019aventure en cartes illustr\u00e9es.Armes\u00a0: m\u00eal\u00e9e & distance.Armures & boucliers\u00a0: l\u00e9g\u00e8res, interm\u00e9diaires et lourdes.\u00c9quipement\u00a0: cordes, torches, rations, outils de terrain, etc.Id\u00e9al pour la table\u2009: pioche, pose, \u00e9change\nfini la fouille dans le manuel.",
+        "description_en": "Weapons \u2022 Armor \u2022 EquipmentA massive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards.Weapons: melee & ranged.Armor & shields: light, medium, and heavy.Equipment: ropes, torches, rations, field tools, etc.Perfect at the table: draw, place, trade\nno more digging through the rulebook.",
+        "image": "\/images\/optimized-modern\/webp\/arme-recto.webp",
+        "weight": 300,
+        "shipping_category": "cards",
+        "customFields": [
+            {
+                "name": "Langue",
+                "options": "\u2001\u2014 Fran\u00e7ais|\u2001\u2014 English",
+                "required": true,
+                "type": "dropdown"
+            }
+        ],
+        "metadata": {
+            "category": "cards",
+            "summary": "182 cartes d'armes, d'armures et d'\u00e9quipement pr\u00eats \u00e0 jouer.",
+            "summary_en": "182 cards of weapons, armor and gear ready to play."
+        }
+    },
+    "pack-182-butins-ingenieries": {
+        "id": "pack-182-butins-ingenieries",
+        "name": "Butins & Ing\u00e9nieries\n182 cartes",
+        "name_en": "Loot & Ingeniery\n182 Cards",
+        "price": 36.99,
+        "currency": "CAD",
+        "description": "Butin \u2022 Explosifs & armes modernes\/futuristes \u2022 Marchandises \u2022 OutilsPour des campagnes qui osent : tr\u00e9sors vari\u00e9s, mat\u00e9riel instable, techno\u2011reliques et les indispensables de l\u2019artisan.Butin\u00a0: gemmes, objets curieux, artefacts mineurs, reliques.Explosifs & armes modernes\/futuristes\u00a0: grenades, charges, armes \u00e0 feu & \u00e0 \u00e9nergie.Marchandises\u00a0: denr\u00e9es, tissus, minerais.Outils\u00a0: artisanats, crochetage, alchimie l\u00e9g\u00e8re, kits sp\u00e9ciaux.\nInjecte de la vari\u00e9t\u00e9 et des choix tactiques\ndu troc de march\u00e9 au braquage high\u2011fantasy.\nfini la fouille dans le manuel.",
+        "description_en": "Loot \u2022 Explosives & Modern\/Futuristic Weapons \u2022 Trade Goods \u2022 ToolsFor campaigns that push the envelope: varied treasures, volatile hardware, techno\u2011relics, and every crafter\u2019s staple.Loot: gems, curios, minor artifacts, relics.Explosives & modern\/futur weapons: grenades, charges, firearms & energy weapons.Trade goods: foodstuffs, fabrics, ores.Tools: crafts, lockpicks, light alchemy, specialty kits.Add variety and tactical choices\nfrom market bartering to high\u2011fantasy heists.\nno more digging through the rulebook.",
+        "image": "\/images\/optimized-modern\/webp\/alexandrite-recto.webp",
+        "weight": 300,
+        "shipping_category": "cards",
+        "customFields": [
+            {
+                "name": "Langue",
+                "options": "\u2001\u2014 Fran\u00e7ais|\u2001\u2014 English",
+                "required": true,
+                "type": "dropdown"
+            }
+        ],
+        "metadata": {
+            "category": "cards",
+            "summary": "182 cartes de butin, explosifs, marchandises et outils.",
+            "summary_en": "182 cards of loot, explosives, trade goods and tools."
+        }
+    },
+    "pack-182-routes-services": {
+        "id": "pack-182-routes-services",
+        "name": "Routes & Services\n182 cartes",
+        "name_en": "Roads & Services\n182 Cards",
+        "price": 34.99,
+        "currency": "CAD",
+        "description": "Paquetages \u2022 Services \u2022 V\u00e9hicules \u2022 PoisonsTout pour mettre le monde en mouvement\u2009: pr\u00e9pare tes PJ, voyage, n\u00e9gocie, et risque\navec des cartes claires et pratiques.Paquetages\u00a0: artiste, cambrioleur, diplomate, eccl\u00e9siastique, \u00e9rudit, explorateur, exploration souterraine.\nServices\u00a0: h\u00e9bergements, soins, transport, passeurs, mercenaires.\nV\u00e9hicules\u00a0: terrestres, marins, animaux de b\u00e2t.\nPoison\u00a0: effets et raret\u00e9.\nParfait pour les campagnes orient\u00e9es exploration, voyage et intrigue.\nfini la fouille dans le manuel.",
+        "description_en": "Packs \u2022 Services \u2022 Vehicles \u2022 PoisonsEverything to set your world in motion: ready your PCs, travel, bargain, and take risks\nwith clean, table\u2011friendly cards.Packs: artist, burglar, diplomat, acolyte\/cleric, scholar, explorer, underdark exploration.\nServices: lodging, healing, transport, smugglers, mercenaries.\nVehicles: land, sea, beasts of burden.\nPoisons: effects & rarity.\nPerfect for exploration\u2011, travel\u2011 and intrigue\u2011heavy campaigns.\nno more digging through the rulebook.",
+        "image": "\/images\/optimized-modern\/webp\/sac-aa-dos-recto.webp",
+        "weight": 300,
+        "shipping_category": "cards",
+        "customFields": [
+            {
+                "name": "Langue",
+                "options": "\u2001\u2014 Fran\u00e7ais|\u2001\u2014 English",
+                "required": true,
+                "type": "dropdown"
+            }
+        ],
+        "metadata": {
+            "category": "cards",
+            "summary": "182 cartes de paquetages, services, v\u00e9hicules et poisons.",
+            "summary_en": "182 cards for packs, services, vehicles and poisons."
+        }
+    },
+    "triptyque-aleatoire": {
+        "id": "triptyque-aleatoire",
+        "name": "Triptyques Myst\u00e8res\nOrigines Compl\u00e8tes",
+        "name_en": "Mystery Triptychs\nComplete Origins",
+        "price": 59.99,
+        "currency": "CAD",
+        "description": "Trois triptyques, un h\u00e9ros cl\u00e9 en main\nTire au sort 1 Classe, 1 Esp\u00e8ce et 1 Historique pour forger une origine unique, puis joue imm\u00e9diatement avec\u202f:\n\nCartes d\u2019\u00e9quipement assorties correspondant au paquetage.\nPi\u00e8ces de d\u00e9part.\nCompatibilit\u00e9 5e 2024\n\nUn bundle id\u00e9al pour des one-shots, des tables d\u00e9butantes ou pour surprendre des joueurs v\u00e9t\u00e9rans.\nfini la fouille dans le manuel.",
+        "description_en": "Three triptychs, a plug\u2011and\u2011play hero\nDraw at random 1 Class, 1 Species and 1 Background to forge a unique origin, then play right away with:\n\nMatching equipment cards based on the linked pack.\nStarting coins.\n5e 2024 compatible\n\nPerfect for one\u2011shots, new tables, or to surprise veteran players.\nno more digging through the rulebook.",
+        "image": "videos\/trip2.mp4",
+        "weight": 200,
+        "shipping_category": "triptychs",
+        "customFields": [
+            {
+                "name": "Langue",
+                "options": "\u2001\u2014 Fran\u00e7ais|\u2001\u2014 English",
+                "required": true,
+                "type": "dropdown"
+            }
+        ],
+        "metadata": {
+            "category": "triptychs",
+            "summary": "Tire classe, esp\u00e8ce et historique pour un h\u00e9ros pr\u00eat \u00e0 jouer.",
+            "summary_en": "Draw class, species and background to forge a ready-to-play hero."
+        }
+    }
+}
