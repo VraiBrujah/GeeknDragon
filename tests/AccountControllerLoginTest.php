@@ -1,15 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace GeeknDragon\Controller {
-    if (!function_exists(__NAMESPACE__ . '\\file_get_contents')) {
-        function file_get_contents(string $filename): string|false {
-            if ($filename === 'php://input') {
-                return json_encode(['email' => 'mock@example.com']);
-            }
-            return \file_get_contents($filename);
-        }
-    }
+namespace {
+    require_once __DIR__ . '/../bootstrap.php';
 }
 
 namespace {
@@ -44,6 +37,7 @@ namespace {
             $controller = new TestAccountController($config);
             $_SESSION['csrf_token'] = 'token';
             $_POST['_token'] = 'token';
+            $GLOBALS['__TEST_PHP_INPUT__'] = json_encode(['email' => 'mock@example.com']);
             $originalId = session_id();
 
             $controller->login();
