@@ -14,6 +14,8 @@
   const advancedToggle = document.getElementById('currency-advanced-toggle');
   const best = document.getElementById('currency-best');
   const totals = document.getElementById('currency-totals');
+  const remainderTotals = document.getElementById('currency-remainder');
+  const totalsTitleEl = totals?.querySelector('h5');
   const equivContainer = document.getElementById('currency-equivalences');
   const equivTable = document.getElementById('currency-equivalences-list');
   const equivBody = equivTable?.querySelector('tbody');
@@ -21,7 +23,15 @@
     'currency-equivalences-total-pieces',
   );
 
-  if (!sources.length || !best || !totals || !equivContainer || !equivTable || !equivBody)
+  if (
+    !sources.length ||
+    !best ||
+    !totals ||
+    !remainderTotals ||
+    !equivContainer ||
+    !equivTable ||
+    !equivBody
+  )
     return;
 
   const multipliers = [1, 10, 100, 1000, 10000];
@@ -151,7 +161,10 @@
     };
     const andText = tr.and || 'and';
     const bestLabel = tr.bestLabel || '';
+    const goldEquivalentLabel = tr.goldEquivalent || '';
+    const remainderTotalsLabel = tr.remainderTotalsTitle || '';
     const totalPiecesLabel = tr.totalPieces || 'Total pieces:';
+    if (totalsTitleEl) totalsTitleEl.textContent = tr.totalsTitle || totalsTitleEl.textContent;
 
     const calculateTotals = (copperValue) => {
       const minimal = minimalParts(copperValue, currencyNames, andText);
@@ -213,11 +226,28 @@
     const baseValue = baseSources;
 
     const totalsData = calculateTotals(baseValue);
+    const remainderTotalsText = coins
+      .map((coin) => {
+        const items = totalsData.remainderItems[coin];
+        if (!items.length) return '';
+        const text = formatItemsText(items, currencyNames, andText);
+        const coinTitle = currencyNames[coin]
+          .replace(/^pièces?\s+(?:de|d['’])\s*/i, '')
+          .replace(/^./, (ch) => ch.toUpperCase());
+        return `${coinTitle}: ${text}`;
+      })
+      .filter(Boolean)
+      .join('<br>');
+
     best.innerHTML = totalsData.minimalText
-      ? `${bestLabel}<br>${totalsData.minimalText}<br>${totalsData.goldText}<br><span class="total-pieces">${totalPiecesLabel} ${nf.format(
+      ? `${bestLabel}<br>${totalsData.minimalText}<br>${goldEquivalentLabel} ${totalsData.goldText}<br><span class="total-pieces">${totalPiecesLabel} ${nf.format(
           Math.floor(totalsData.totalPieces),
         )}</span>`
       : '';
+    remainderTotals.innerHTML = remainderTotalsText
+      ? `${remainderTotalsLabel}<br>${remainderTotalsText}`
+      : '';
+    remainderTotals.classList.toggle('hidden', !remainderTotalsText);
     best.classList.toggle('hidden', !totalsData.minimalText);
     totals.classList.toggle('hidden', !totalsData.minimalText);
 
