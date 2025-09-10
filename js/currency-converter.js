@@ -17,6 +17,9 @@
   const equivContainer = document.getElementById('currency-equivalences');
   const equivTable = document.getElementById('currency-equivalences-list');
   const equivBody = equivTable?.querySelector('tbody');
+  const equivTotalsCell = document.getElementById(
+    'currency-equivalences-total-pieces',
+  );
 
   if (!sources.length || !best || !totals || !equivContainer || !equivTable || !equivBody)
     return;
@@ -130,51 +133,80 @@
     const bestLabel = tr.bestLabel || '';
     const totalPiecesLabel = tr.totalPieces || 'Total pieces:';
 
+    const calculateTotals = (copperValue) => {
+      const minimal = minimalParts(copperValue, currencyNames, andText);
+      const perCoinCounts = {};
+      const remainderItems = {};
+
+      coins.forEach((coin) => {
+        const base = rates[coin];
+        const units = Math.floor(copperValue / base);
+        const parts = [];
+        if (units > 0) {
+          let rest = units;
+          multipliers
+            .slice()
+            .reverse()
+            .forEach((mult) => {
+              const qty = Math.floor(rest / mult);
+              if (qty > 0) {
+                parts.push({ qty, mult });
+                rest -= qty * mult;
+              }
+            });
+        }
+        perCoinCounts[coin] = parts;
+        const remainder = copperValue % base;
+        remainderItems[coin] =
+          remainder > 0
+            ? minimalParts(remainder, currencyNames, andText).items
+            : [];
+      });
+
+      const totalPieces = minimal.items.reduce(
+        (sum, { qty }) => sum + qty,
+        0,
+      );
+      return {
+        minimalText: minimal.text,
+        minimalItems: minimal.items,
+        perCoinCounts,
+        remainderItems,
+        totalPieces,
+      };
+    };
+
     const baseSources = Array.from(sources).reduce((sum, input) => {
       const { currency } = input.dataset;
       const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
       return sum + amount * rates[currency];
     }, 0);
     const baseValue = baseSources;
-    const minimal = minimalParts(baseValue, currencyNames, andText);
-    const totalPieces = minimal.items.reduce((sum, { qty }) => sum + qty, 0);
-    best.innerHTML = minimal.text
-      ? `${bestLabel}<br>${minimal.text}<br><span class="total-pieces">${totalPiecesLabel} ${nf.format(totalPieces)}</span>`
+
+    const totalsData = calculateTotals(baseValue);
+    best.innerHTML = totalsData.minimalText
+      ? `${bestLabel}<br>${totalsData.minimalText}<br><span class="total-pieces">${totalPiecesLabel} ${nf.format(
+          Math.floor(totalsData.totalPieces),
+        )}</span>`
       : '';
-    best.classList.toggle('hidden', !minimal.text);
-    totals.classList.toggle('hidden', !minimal.text);
+    best.classList.toggle('hidden', !totalsData.minimalText);
+    totals.classList.toggle('hidden', !totalsData.minimalText);
 
     equivBody.innerHTML = '';
     let hasEquiv = false;
     coins.forEach((coin) => {
-      const base = rates[coin];
-      const units = Math.floor(baseValue / base);
-      if (!units) return;
-      let rest = units;
-      const parts = [];
-      multipliers.slice().reverse().forEach((mult) => {
-        const qty = Math.floor(rest / mult);
-        if (qty > 0) {
-          const label = currencyNames[coin].replace(
-            /^pièce/,
-            qty > 1 ? 'pièces' : 'pièce',
-          );
-          const text =
-            mult === 1
-              ? `${nf.format(qty)} ${label}`
-              : `${nf.format(qty)} ${label} x${nf.format(mult)}`;
-          parts.push({ qty, mult, text });
-          rest -= qty * mult;
-        }
-      });
+      const parts = totalsData.perCoinCounts[coin];
       if (!parts.length) return;
-      const summaryParts = parts.map((p) => p.text);
-      const remainder = baseValue % base;
-      let remainderItems = [];
-      if (remainder > 0) {
-        const rem = minimalParts(remainder, currencyNames, andText);
-        remainderItems = rem.items;
-      }
+      const summaryParts = parts.map(({ qty, mult }) => {
+        const label = currencyNames[coin].replace(
+          /^pièce/,
+          qty > 1 ? 'pièces' : 'pièce',
+        );
+        return mult === 1
+          ? `${nf.format(qty)} ${label}`
+          : `${nf.format(qty)} ${label} x${nf.format(mult)}`;
+      });
+      const remainderItems = totalsData.remainderItems[coin];
       const remainderPhrase = remainderItems
         .map(({ coin: rCoin, multiplier, qty }) => {
           const label = currencyNames[rCoin].replace(
@@ -186,16 +218,19 @@
             : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
         })
         .join('<br>');
-      const totalRowPieces =
+      const totalRowPieces = Math.floor(
         parts.reduce((sum, { qty }) => sum + qty, 0) +
-        remainderItems.reduce((sum, { qty }) => sum + qty, 0);
-      const totalValue =
+          remainderItems.reduce((sum, { qty }) => sum + qty, 0),
+      );
+      const base = rates[coin];
+      const totalValue = Math.floor(
         parts.reduce((sum, { qty, mult: m }) => sum + qty * m, 0) +
-        remainderItems.reduce(
-          (sum, { coin: rCoin, multiplier, qty }) =>
-            sum + (qty * multiplier * rates[rCoin]) / base,
-          0,
-        );
+          remainderItems.reduce(
+            (sum, { coin: rCoin, multiplier, qty }) =>
+              sum + (qty * multiplier * rates[rCoin]) / base,
+            0,
+          ),
+      );
       const label = currencyNames[coin].replace(
         /^pièce/,
         totalValue > 1 ? 'pièces' : 'pièce',
@@ -213,6 +248,11 @@
       equivBody.appendChild(row);
       hasEquiv = true;
     });
+    if (equivTotalsCell) {
+      equivTotalsCell.textContent = hasEquiv
+        ? nf.format(Math.floor(totalsData.totalPieces))
+        : '';
+    }
     equivContainer.classList.toggle('hidden', !hasEquiv);
   };
 

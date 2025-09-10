@@ -239,6 +239,12 @@ echo $snipcartInit;
                 </tr>
               </thead>
               <tbody></tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="3" class="font-semibold" data-i18n="shop.converter.equivTotalPieces">Nombre total de pièces</th>
+                  <td id="currency-equivalences-total-pieces"></td>
+                </tr>
+              </tfoot>
             </table>
           </div>
           <section id="currency-totals" class="mt-4 pt-4 border-t border-gray-700 hidden">
