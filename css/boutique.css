@@ -800,6 +800,13 @@
 
 #currency-best {
     background: var(--gradient-primary);
+    margin-top: 0;
+}
+
+#currency-totals {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
 }
 
 #currency-best .total-pieces {

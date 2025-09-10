@@ -241,7 +241,9 @@ echo $snipcartInit;
               <tbody></tbody>
             </table>
           </div>
-          <div id="currency-best" class="mt-1 bg-gray-900 rounded-lg p-4 text-gray-200 hidden" data-i18n="shop.converter.bestLabel"></div>
+          <section id="currency-totals" class="mt-4 pt-4 border-t border-gray-700 hidden">
+            <div id="currency-best" class="bg-gray-900 rounded-lg p-4 text-gray-200" data-i18n="shop.converter.bestLabel"></div>
+          </section>
         </div>
       </section>
 
