@@ -13,11 +13,13 @@
   const advancedGroups = document.querySelectorAll('.advanced-group');
   const advancedToggle = document.getElementById('currency-advanced-toggle');
   const best = document.getElementById('currency-best');
+  const totals = document.getElementById('currency-totals');
   const equivContainer = document.getElementById('currency-equivalences');
   const equivTable = document.getElementById('currency-equivalences-list');
   const equivBody = equivTable?.querySelector('tbody');
 
-  if (!sources.length || !best || !equivContainer || !equivTable || !equivBody) return;
+  if (!sources.length || !best || !totals || !equivContainer || !equivTable || !equivBody)
+    return;
 
   const multipliers = [1, 10, 100, 1000, 10000];
   const coins = Object.keys(rates).sort((a, b) => rates[b] - rates[a]);
@@ -140,6 +142,7 @@
       ? `${bestLabel}<br>${minimal.text}<br><span class="total-pieces">${totalPiecesLabel} ${nf.format(totalPieces)}</span>`
       : '';
     best.classList.toggle('hidden', !minimal.text);
+    totals.classList.toggle('hidden', !minimal.text);
 
     equivBody.innerHTML = '';
     let hasEquiv = false;
