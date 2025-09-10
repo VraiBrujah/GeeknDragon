@@ -126,6 +126,65 @@ class SnipcartClient
         $result = $this->makeRequest('GET', '/customers?' . $query);
         return $result['items'][0] ?? null;
     }
+
+    /**
+     * Récupère les tarifs de livraison
+     */
+    public function getShippingRates(array $data): array
+    {
+        if ($this->mockMode) {
+            return $this->getMockShippingRates();
+        }
+
+        return $this->makeRequest('POST', '/shippingrates', $data);
+    }
+
+    /**
+     * Valide un token de requête Snipcart
+     */
+    public function validateToken(string $token): bool
+    {
+        if ($this->mockMode) {
+            return !empty($token);
+        }
+
+        $url = $this->baseUrl . '/requestvalidation/' . urlencode($token);
+        $ch = curl_init();
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_USERPWD => $this->secretKey . ':',
+            CURLOPT_HTTPHEADER => [
+                'Accept: application/json',
+                'User-Agent: GeeknDragon/1.0'
+            ],
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_SSL_VERIFYHOST => 2,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_CONNECTTIMEOUT => 10,
+        ]);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($response === false) {
+            throw new \RuntimeException("Erreur cURL Snipcart : {$error}");
+        }
+
+        if ($httpCode === 401 || $httpCode === 403) {
+            error_log("Snipcart API auth error {$httpCode} for requestvalidation: {$response}");
+            throw new SnipcartException('Configuration Snipcart invalide', $httpCode);
+        }
+
+        if ($httpCode >= 400) {
+            error_log("Snipcart API error {$httpCode} for requestvalidation: {$response}");
+            return false;
+        }
+
+        return $httpCode === 200 || $httpCode === 204;
+    }
     
     /**
      * Effectue une requête HTTP vers l'API Snipcart
@@ -211,7 +270,21 @@ class SnipcartClient
             'modificationDate' => date('c')
         ];
     }
-    
+
+    private function getMockShippingRates(): array
+    {
+        return [
+            'rates' => [
+                [
+                    'cost' => 10.0,
+                    'description' => 'Livraison standard mock',
+                    'guaranteedDaysToDelivery' => 5,
+                    'userDefinedId' => 'standard',
+                ],
+            ],
+        ];
+    }
+
     private function getMockOrders(): array
     {
         return [
