@@ -84,6 +84,8 @@
     const andText = tr.and || 'and';
     const bestLabel = tr.bestLabel || '';
     const totalPiecesLabel = tr.totalPieces || 'Total pieces:';
+    const remainderTotalLabel = tr.equivRemainderTotal || 'Total:';
+    const grandTotalLabel = tr.equivGrandTotal || 'Total';
 
     const baseValue = Array.from(sources).reduce((sum, input) => {
       const { currency } = input.dataset;
@@ -108,41 +110,93 @@
       multipliers.slice().reverse().forEach((mult) => {
         const qty = Math.floor(rest / mult);
         if (qty > 0) {
-          const label = currencyNames[coin].replace(/^pièce/, qty > 1 ? 'pièces' : 'pièce');
-          const text = mult === 1
-            ? `${nf.format(qty)} ${label}`
-            : `${nf.format(qty)} ${label} x${nf.format(mult)}`;
-          parts.push({ qty, text });
+          const label = currencyNames[coin].replace(
+            /^pièce/,
+            qty > 1 ? 'pièces' : 'pièce',
+          );
+          const text =
+            mult === 1
+              ? `${nf.format(qty)} ${label}`
+              : `${nf.format(qty)} ${label} x${nf.format(mult)}`;
+          parts.push({ qty, mult, text });
           rest -= qty * mult;
         }
       });
       if (!parts.length) return;
       const summaryParts = parts.map((p) => p.text);
-      const summary = summaryParts.join('<br>');
       const remainder = baseValue % base;
       let remainderItems = [];
       if (remainder > 0) {
         const rem = minimalParts(remainder, currencyNames, andText);
         remainderItems = rem.items;
       }
-      const remainderPhrase = remainderItems
+      let remainderPhrase = remainderItems
         .map(({ coin: rCoin, multiplier, qty }) => {
-          const label = currencyNames[rCoin].replace(/^pièce/, qty > 1 ? 'pièces' : 'pièce');
+          const label = currencyNames[rCoin].replace(
+            /^pièce/,
+            qty > 1 ? 'pièces' : 'pièce',
+          );
           return multiplier === 1
             ? `${nf.format(qty)} ${label}`
             : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
         })
         .join('<br>');
-      const totalRowPieces = parts.reduce((sum, { qty }) => sum + qty, 0)
-        + remainderItems.reduce((sum, { qty }) => sum + qty, 0);
+      if (remainderItems.length) {
+        const remainderTotals = remainderItems.reduce((acc, { coin: rCoin, multiplier, qty }) => {
+          acc[rCoin] = (acc[rCoin] || 0) + qty * multiplier;
+          return acc;
+        }, {});
+        const remainderTotalParts = Object.entries(remainderTotals).map(([rCoin, amount]) => {
+          const label = currencyNames[rCoin].replace(
+            /^pièce/,
+            amount > 1 ? 'pièces' : 'pièce',
+          );
+          return `${nf.format(amount)} ${label}`;
+        });
+        let remainderTotalText = '';
+        if (remainderTotalParts.length === 1) {
+          [remainderTotalText] = remainderTotalParts;
+        } else if (remainderTotalParts.length > 1) {
+          const last = remainderTotalParts.pop();
+          remainderTotalText = `${remainderTotalParts.join(', ')} ${andText} ${last}`;
+        }
+        remainderPhrase = `${remainderPhrase}<br>${remainderTotalLabel} ${remainderTotalText}`;
+      }
+      const totalRowPieces =
+        parts.reduce((sum, { qty }) => sum + qty, 0) +
+        remainderItems.reduce((sum, { qty }) => sum + qty, 0);
+      const totalValue = Math.floor(
+        parts.reduce((sum, { qty, mult: m }) => sum + qty * m, 0) +
+          remainderItems.reduce(
+            (sum, { coin: rCoin, multiplier, qty }) =>
+              sum + (qty * multiplier * rates[rCoin]) / base,
+            0,
+          ),
+      );
+      const label = currencyNames[coin].replace(
+        /^pièce/,
+        totalValue > 1 ? 'pièces' : 'pièce',
+      );
+      const summary = `${summaryParts.join('<br>')}<br>${
+        tr.equivTotalValue || 'Total:'
+      } ${nf.format(totalValue)} ${label}`;
       const row = document.createElement('tr');
       const coinTitle = currencyNames[coin]
         .replace(/^pièces?\s+(?:de|d['’])\s*/i, '')
         .replace(/^./, (ch) => ch.toUpperCase());
-      row.innerHTML = `<th>${coinTitle}</th><td>${summary}</td><td>${remainderPhrase}</td><td>${nf.format(totalRowPieces)}</td>`;
+      row.innerHTML = `<th>${coinTitle}</th><td>${summary}</td><td>${remainderPhrase}</td><td>${nf.format(
+        totalRowPieces,
+      )}</td>`;
       equivBody.appendChild(row);
       hasEquiv = true;
     });
+    if (hasEquiv && minimal.items.length) {
+      const totalRow = document.createElement('tr');
+      totalRow.innerHTML = `<th>${grandTotalLabel}</th><td>${minimal.text}</td><td></td><td>${nf.format(
+        totalPieces,
+      )}</td>`;
+      equivBody.appendChild(totalRow);
+    }
     equivContainer.classList.toggle('hidden', !hasEquiv);
   };
 

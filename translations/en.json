@@ -158,7 +158,10 @@
       "totalPieces": "total pieces:",
       "equivMetal": "Metal",
       "equivEquivalent": "Equivalent",
-      "equivTotalPieces": "Total pieces"
+      "equivTotalPieces": "Total pieces",
+      "equivTotalValue": "Total:",
+      "equivRemainderTotal": "Remainder total:",
+      "equivGrandTotal": "Total"
     },
     "chest": {
       "title": "Custom chests",
