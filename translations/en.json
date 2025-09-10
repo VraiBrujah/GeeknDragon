@@ -159,7 +159,13 @@
       "equivMetal": "Metal",
       "equivEquivalent": "Equivalent",
       "equivTotalPieces": "Total pieces",
-      "equivTotalValue": "Total:"
+      "equivTotalValue": "Total:",
+      "advancedToggle": "Details",
+      "multiplier10000": "x10,000",
+      "multiplier1000": "x1,000",
+      "multiplier100": "x100",
+      "multiplier10": "x10",
+      "multiplier1": "x1"
     },
     "chest": {
       "title": "Custom chests",

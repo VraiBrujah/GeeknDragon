@@ -855,6 +855,45 @@
     padding: 0.5rem;
 }
 
+#currency-advanced-toggle {
+    margin-top: 1rem;
+    background: var(--primary-color);
+    color: var(--light-text);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+#currency-advanced {
+    margin-top: 1rem;
+}
+
+#currency-advanced table {
+    width: 100%;
+}
+
+#currency-advanced th,
+#currency-advanced td {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#currency-advanced input {
+    width: 100%;
+    background: var(--dark-bg);
+    color: var(--light-text);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    #currency-advanced-toggle {
+        width: 100%;
+    }
+}
+
 .hidden {
     display: none;
 }

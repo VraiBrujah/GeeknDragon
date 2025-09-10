@@ -9,6 +9,9 @@
   };
 
   const sources = document.querySelectorAll('#currency-sources input');
+  const advanced = document.querySelectorAll('.advanced input');
+  const advancedToggle = document.getElementById('currency-advanced-toggle');
+  const advancedSection = document.getElementById('currency-advanced');
   const best = document.getElementById('currency-best');
   const equivContainer = document.getElementById('currency-equivalences');
   const equivTable = document.getElementById('currency-equivalences-list');
@@ -85,11 +88,17 @@
     const bestLabel = tr.bestLabel || '';
     const totalPiecesLabel = tr.totalPieces || 'Total pieces:';
 
-    const baseValue = Array.from(sources).reduce((sum, input) => {
+    const baseSources = Array.from(sources).reduce((sum, input) => {
       const { currency } = input.dataset;
       const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
       return sum + amount * rates[currency];
     }, 0);
+    const baseAdvanced = Array.from(advanced).reduce((sum, input) => {
+      const { currency, multiplier } = input.dataset;
+      const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
+      return sum + amount * rates[currency] * parseInt(multiplier, 10);
+    }, 0);
+    const baseValue = baseSources + baseAdvanced;
     const minimal = minimalParts(baseValue, currencyNames, andText);
     const totalPieces = minimal.items.reduce((sum, { qty }) => sum + qty, 0);
     best.innerHTML = minimal.text
@@ -169,7 +178,7 @@
     equivContainer.classList.toggle('hidden', !hasEquiv);
   };
 
-  sources.forEach((inputEl) => {
+  const addHandlers = (inputEl) => {
     const el = inputEl;
     el.addEventListener('focus', () => {
       if (el.value === '0') el.value = '';
@@ -182,6 +191,13 @@
       if (invalid) el.reportValidity();
       render();
     });
+  };
+
+  sources.forEach(addHandlers);
+  advanced.forEach(addHandlers);
+
+  advancedToggle?.addEventListener('click', () => {
+    advancedSection?.classList.toggle('hidden');
   });
 
   // Initial render
