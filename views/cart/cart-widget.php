@@ -1,17 +1,17 @@
 <?php
 /**
  * Widget panier custom
- * Variables disponibles : $helper (ViewHelper), $cartService (CartService)
+ * Variables disponibles : $helper (ViewHelper), $viewData['cartService'] (CartService)
  */
 
-if (!isset($helper) || !isset($cartService)) {
+if (!isset($helper) || !isset($viewData['cartService'])) {
     throw new RuntimeException('Variables requises manquantes pour cart-widget');
 }
 
-$items = $cartService->getItems();
-$itemCount = $cartService->getItemCount();
-$total = $cartService->getTotal();
-$isEmpty = $cartService->isEmpty();
+$items = $viewData['cartService']->getItems();
+$itemCount = $viewData['cartService']->getItemCount();
+$total = $viewData['cartService']->getTotal();
+$isEmpty = $viewData['cartService']->isEmpty();
 ?>
 
 <!-- Widget Panier Custom -->

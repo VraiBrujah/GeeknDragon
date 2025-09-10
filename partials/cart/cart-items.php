@@ -1,15 +1,15 @@
 <?php
 /**
  * Contenu HTML des articles du panier pour le widget
- * Variables disponibles : $helper (ViewHelper), $cartService (CartService)
+ * Variables disponibles : $helper (ViewHelper), $viewData['cartService'] (CartService)
  */
 
-if (!isset($helper) || !isset($cartService)) {
+if (!isset($helper) || !isset($viewData['cartService'])) {
     throw new RuntimeException('Variables requises manquantes pour cart-items');
 }
 
-$items = $cartService->getItems();
-$isEmpty = $cartService->isEmpty();
+$items = $viewData['cartService']->getItems();
+$isEmpty = $viewData['cartService']->isEmpty();
 ?>
 
 <?php if ($isEmpty): ?>

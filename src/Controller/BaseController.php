@@ -29,31 +29,28 @@ abstract class BaseController
     /**
      * Rend une vue avec les variables fournies
      */
-    protected function render(string $view, array $vars = []): void
+    protected function render(string $view, array $viewData = []): void
     {
         $viewPath = __DIR__ . '/../../views/' . $view . '.php';
-        
+
         if (!file_exists($viewPath)) {
             throw new \RuntimeException("Vue non trouvée : $view");
         }
-        
-        // Extraire les variables dans le scope
-        extract($vars);
-        
+
         // Rendre les helpers disponibles
         $helper = $this->helper;
         $translator = $this->translator;
         $config = $this->config;
-        
+
         include $viewPath;
     }
-    
+
     /**
      * Rend un partial avec variables
      */
-    protected function renderPartial(string $partial, array $vars = []): void
+    protected function renderPartial(string $partial, array $viewData = []): void
     {
-        $this->helper->partial($partial, $vars);
+        $this->helper->partial($partial, $viewData);
     }
     
     /**
