@@ -2132,15 +2132,20 @@
         });
         
         // Utility Functions
+        const locale =
+            window?.i18n?.lang ||
+            document.documentElement?.lang ||
+            window.navigator?.language ||
+            'fr-FR';
         const Utils = {
             // Format numbers with locale
             formatNumber: (num) => {
-                return new Intl.NumberFormat('fr-FR').format(num);
+                return new Intl.NumberFormat(locale).format(num);
             },
-            
+
             // Format dates
             formatDate: (date) => {
-                return new Intl.DateTimeFormat('fr-FR', {
+                return new Intl.DateTimeFormat(locale, {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric'
