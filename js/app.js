@@ -187,11 +187,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!data) return;
         window.i18n = data;
 
-        document.querySelectorAll('[data-i18n]').forEach((el) => {
-          const keys = el.dataset.i18n.split('.');
-          let text = data; keys.forEach((k) => { if (text) text = text[k]; });
-          if (text != null) el.innerHTML = text;
-        });
+        // Helper to (re)apply translations on any DOM subtree, including hidden
+        // advanced groups so their labels are ready before being shown.
+        window.i18n.apply = (root = document) => {
+          root.querySelectorAll('[data-i18n]').forEach((el) => {
+            const keys = el.dataset.i18n.split('.');
+            let text = window.i18n; keys.forEach((k) => { if (text) text = text[k]; });
+            if (text != null) el.innerHTML = text;
+          });
+        };
+
+        // Initial application on page load
+        window.i18n.apply();
 
         // Champs produits (nom/desc/alt)
         document.querySelectorAll('[data-name-fr]').forEach((el) => {
