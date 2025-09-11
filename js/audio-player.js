@@ -192,6 +192,7 @@ class GeeknDragonAudioPlayer {
                 const firstFile = heroIntro || files[0];
                 this.state.playlist = [firstFile];
                 this.state.isPlaying = true;
+                this.state.currentTime = 0;
                 this.loadTrack(0);
                 this.updatePlayButton();
                 console.log(`🎵 Démarrage rapide avec ${firstFile.split('/').pop()}`);
@@ -248,6 +249,7 @@ class GeeknDragonAudioPlayer {
                 if (!this.state.isPlaying) {
                     this.state.isPlaying = true;
                 }
+                this.state.currentTime = 0;
                 this.loadTrack(0);
                 this.updatePlayButton();
             }
@@ -325,7 +327,7 @@ class GeeknDragonAudioPlayer {
         this.state.shuffleOrder = indices;
     }
     
-    loadTrack(index) {
+    loadTrack(index, resume = false) {
         if (!this.state.playlist[index]) return;
 
         const actualIndex = this.state.shuffleOrder[index] || index;
@@ -343,7 +345,7 @@ class GeeknDragonAudioPlayer {
             onplayerror: () => this.setupAutoplayFallback()
         });
 
-        if (this.state.currentTime > 0) {
+        if (resume && this.state.currentTime > 0) {
             this.sound.once('load', () => {
                 this.sound.seek(this.state.currentTime);
             });
@@ -410,6 +412,7 @@ class GeeknDragonAudioPlayer {
         
         console.log(`🎵 Chargement piste ${nextTrack + 1}/${this.state.playlist.length}`);
         this.state.isPlaying = true;
+        this.state.currentTime = 0;
         this.loadTrack(nextTrack);
         this.updatePlayButton();
     }
@@ -629,7 +632,7 @@ class GeeknDragonAudioPlayer {
                     this.state.currentPlaylistType = state.currentPlaylistType;
                 }
 
-                this.loadTrack(this.state.currentTrack);
+                this.loadTrack(this.state.currentTrack, true);
                 this.updatePlayButton();
 
                 console.log('🔄 État restauré - Continuité de lecture maintenue');
