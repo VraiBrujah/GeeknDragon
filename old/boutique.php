@@ -242,15 +242,15 @@ echo $snipcartInit;
               <tfoot>
                 <tr class="totals-header">
                   <th></th>
-                  <th data-i18n="shop.converter.totalEquivalences">Total :</th>
-                  <th data-i18n="shop.converter.totalRemainder">Total :</th>
+                  <th data-i18n="shop.converter.totalBreakdown">Total :</th>
                   <th data-i18n="shop.converter.totalGold">Total en or</th>
+                  <th data-i18n="shop.converter.totalPieces">Nombre total de pièces :</th>
                 </tr>
                 <tr class="totals-values">
                   <td></td>
-                  <td id="currency-total-best"></td>
-                  <td id="currency-total-remainder"></td>
+                  <td id="currency-total-breakdown"></td>
                   <td id="currency-total-gold"></td>
+                  <td id="currency-total-pieces"></td>
                 </tr>
               </tfoot>
             </table>
