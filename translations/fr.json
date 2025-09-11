@@ -168,7 +168,10 @@
       "multiplier1000": "x1 000",
       "multiplier100": "x100",
       "multiplier10": "x10",
-      "multiplier1": "x1"
+      "multiplier1": "x1",
+      "totalEquivalences": "Total :",
+      "totalRemainder": "Total :",
+      "totalGold": "Total en or"
     },
     "chest": {
       "title": "Coffres sur mesure",

@@ -12,25 +12,23 @@
   const advancedInputs = document.querySelectorAll('.advanced-group input');
   const advancedGroups = document.querySelectorAll('.advanced-group');
   const advancedToggle = document.getElementById('currency-advanced-toggle');
-  const best = document.getElementById('currency-best');
-  const totals = document.getElementById('currency-totals');
-  const remainderTotals = document.getElementById('currency-remainder');
-  const totalsTitleEl = totals?.querySelector('h5');
+  const totalBest = document.getElementById('currency-total-best');
+  const totalRemainder = document.getElementById('currency-total-remainder');
+  const totalGold = document.getElementById('currency-total-gold');
   const equivContainer = document.getElementById('currency-equivalences');
   const equivTable = document.getElementById('currency-equivalences-list');
   const equivBody = equivTable?.querySelector('tbody');
-  const equivTotalsCell = document.getElementById(
-    'currency-equivalences-total-pieces',
-  );
+  const equivFoot = equivTable?.querySelector('tfoot');
 
   if (
     !sources.length ||
-    !best ||
-    !totals ||
-    !remainderTotals ||
+    !totalBest ||
+    !totalRemainder ||
+    !totalGold ||
     !equivContainer ||
     !equivTable ||
-    !equivBody
+    !equivBody ||
+    !equivFoot
   )
     return;
 
@@ -160,11 +158,6 @@
       platinum: tr.platinum || 'pièce de platine',
     };
     const andText = tr.and || 'and';
-    const bestLabel = tr.bestLabel || '';
-    const goldEquivalentLabel = tr.goldEquivalent || '';
-    const remainderTotalsLabel = tr.remainderTotalsTitle || '';
-    const totalPiecesLabel = tr.totalPieces || 'Total pieces:';
-    if (totalsTitleEl) totalsTitleEl.textContent = tr.totalsTitle || totalsTitleEl.textContent;
 
     const calculateTotals = (copperValue) => {
       const minimal = minimalParts(copperValue, currencyNames, andText);
@@ -202,10 +195,6 @@
             : '';
       });
 
-      const totalPieces = minimal.items.reduce(
-        (sum, { qty }) => sum + qty,
-        0,
-      );
       return {
         minimalText: minimal.text,
         minimalItems: minimal.items,
@@ -214,7 +203,6 @@
         perCoinCounts,
         remainderItems,
         remainderGold,
-        totalPieces,
       };
     };
 
@@ -226,30 +214,18 @@
     const baseValue = baseSources;
 
     const totalsData = calculateTotals(baseValue);
-    const remainderTotalsText = coins
-      .map((coin) => {
-        const items = totalsData.remainderItems[coin];
-        if (!items.length) return '';
-        const text = formatItemsText(items, currencyNames, andText);
-        const coinTitle = currencyNames[coin]
-          .replace(/^pièces?\s+(?:de|d['’])\s*/i, '')
-          .replace(/^./, (ch) => ch.toUpperCase());
-        return `${coinTitle}: ${text}`;
-      })
-      .filter(Boolean)
-      .join('<br>');
-
-    best.innerHTML = totalsData.minimalText
-      ? `${bestLabel}<br>${totalsData.minimalText}<br>${goldEquivalentLabel} ${totalsData.goldText}<br><span class="total-pieces">${totalPiecesLabel} ${nf.format(
-          Math.floor(totalsData.totalPieces),
-        )}</span>`
+    const [firstItem, ...restItems] = totalsData.minimalItems;
+    const bestText = firstItem
+      ? formatItemsText([firstItem], currencyNames, andText)
       : '';
-    remainderTotals.innerHTML = remainderTotalsText
-      ? `${remainderTotalsLabel}<br>${remainderTotalsText}`
+    const remainderText = restItems.length
+      ? formatItemsText(restItems, currencyNames, andText)
       : '';
-    remainderTotals.classList.toggle('hidden', !remainderTotalsText);
-    best.classList.toggle('hidden', !totalsData.minimalText);
-    totals.classList.toggle('hidden', !totalsData.minimalText);
+    totalBest.innerHTML = bestText;
+    totalRemainder.innerHTML = remainderText;
+    totalGold.innerHTML = totalsData.goldText;
+    const showTotals = bestText || remainderText || totalsData.goldText;
+    equivFoot.classList.toggle('hidden', !showTotals);
 
     equivBody.innerHTML = '';
     let hasEquiv = false;
@@ -302,7 +278,7 @@
       );
       const summary = `${summaryParts.join('<br>')}<br>${
         tr.equivTotalValue || 'Total:'
-      } ${nf.format(totalValue)} ${label}<br>${totalsData.goldText}`;
+      } ${nf.format(totalValue)} ${label}`;
       const row = document.createElement('tr');
       const coinTitle = currencyNames[coin]
         .replace(/^pièces?\s+(?:de|d['’])\s*/i, '')
@@ -313,12 +289,7 @@
       equivBody.appendChild(row);
       hasEquiv = true;
     });
-    if (equivTotalsCell) {
-      equivTotalsCell.textContent = hasEquiv
-        ? nf.format(Math.floor(totalsData.totalPieces))
-        : '';
-    }
-    equivContainer.classList.toggle('hidden', !hasEquiv);
+    equivContainer.classList.toggle('hidden', !hasEquiv && !showTotals);
   };
 
   const addHandlers = (inputEl, onInput) => {
