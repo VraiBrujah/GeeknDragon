@@ -390,30 +390,41 @@ class GeeknDragonAudioPlayer {
     const actualIndex = this.state.shuffleOrder[index] || index;
     const trackPath = this.state.playlist[actualIndex];
 
-    if (this.sound) {
-      this.sound.unload();
-    }
-
-    this.sound = new Howl({
-      src: [trackPath],
-      html5: true,
-      volume: this.state.volume,
-      onend: () => this.playNext(),
-      onplayerror: () => this.setupAutoplayFallback(),
-    });
-
-    if (resume && this.state.currentTime > 0) {
-      this.sound.once('load', () => {
+    if (this.sound && this.sound._src === trackPath) {
+      if (resume && this.state.currentTime > 0) {
         this.sound.seek(this.state.currentTime);
-      });
+      } else {
+        this.state.currentTime = 0;
+        this.sound.seek(0);
+      }
     } else {
-      this.state.currentTime = 0;
-      this.sound.once('load', () => this.sound.seek(0));
+      if (this.sound) {
+        this.sound.unload();
+      }
+
+      this.sound = new Howl({
+        src: [trackPath],
+        html5: true,
+        volume: this.state.volume,
+        onend: () => this.playNext(),
+        onplayerror: () => this.setupAutoplayFallback(),
+      });
+
+      if (resume && this.state.currentTime > 0) {
+        this.sound.once('load', () => {
+          this.sound.seek(this.state.currentTime);
+        });
+      } else {
+        this.state.currentTime = 0;
+        this.sound.once('load', () => this.sound.seek(0));
+      }
     }
 
     this.state.currentTrack = index;
     if (this.state.isPlaying) {
-      this.sound.play();
+      if (!this.sound.playing()) {
+        this.sound.play();
+      }
       this.startTimeUpdater();
     }
 
