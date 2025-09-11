@@ -853,6 +853,13 @@
     background: var(--dark-bg);
 }
 
+#currency-equivalences td hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 0.5rem 0;
+    width: 100%;
+}
+
 #currency-sources input {
     width: 100%;
     background: var(--dark-bg);
