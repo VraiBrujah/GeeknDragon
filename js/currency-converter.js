@@ -157,7 +157,12 @@
       gold: tr.gold || 'pièce d’or',
       platinum: tr.platinum || 'pièce de platine',
     };
-    const andText = tr.and || 'and';
+    const localeConjunction =
+      new Intl.ListFormat(locale, { type: 'conjunction' })
+        .formatToParts(['a', 'b'])
+        .find((p) => p.type === 'literal')
+        ?.value.trim() || 'and';
+    const andText = tr.and || localeConjunction;
 
     const calculateTotals = (copperValue) => {
       const minimal = minimalParts(copperValue, currencyNames, andText);
