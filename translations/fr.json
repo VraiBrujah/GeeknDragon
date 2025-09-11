@@ -168,8 +168,7 @@
       "multiplier100": "x100",
       "multiplier10": "x10",
       "multiplier1": "x1",
-      "totalEquivalences": "Total :",
-      "totalRemainder": "Total :",
+      "totalBreakdown": "Total :",
       "totalGold": "Total en or"
     },
     "chest": {

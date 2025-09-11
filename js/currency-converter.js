@@ -12,8 +12,7 @@
   const advancedInputs = document.querySelectorAll('.advanced-group input');
   const advancedGroups = document.querySelectorAll('.advanced-group');
   const advancedToggle = document.getElementById('currency-advanced-toggle');
-  const totalBest = document.getElementById('currency-total-best');
-  const totalRemainder = document.getElementById('currency-total-remainder');
+  const totalBreakdown = document.getElementById('currency-total-breakdown');
   const totalGold = document.getElementById('currency-total-gold');
   const totalPiecesEl = document.getElementById('currency-total-pieces');
   const equivContainer = document.getElementById('currency-equivalences');
@@ -23,8 +22,7 @@
 
   if (
     !sources.length ||
-    !totalBest ||
-    !totalRemainder ||
+    !totalBreakdown ||
     !totalGold ||
     !totalPiecesEl ||
     !equivContainer ||
@@ -215,22 +213,14 @@
     const baseValue = baseSources;
 
     const totalsData = calculateTotals(baseValue);
-    const [firstItem, ...restItems] = totalsData.minimalItems;
-    const bestText = firstItem
-      ? formatItemsText([firstItem], currencyNames, andText)
-      : '';
-    const remainderText = restItems.length
-      ? formatItemsText(restItems, currencyNames, andText)
-      : '';
-    totalBest.innerHTML = bestText;
-    totalRemainder.innerHTML = remainderText;
+    totalBreakdown.innerHTML = totalsData.minimalText;
     totalGold.innerHTML = totalsData.goldText;
     const totalPiecesCount = totalsData.minimalItems.reduce(
       (sum, { qty }) => sum + qty,
       0,
     );
     totalPiecesEl.textContent = nf.format(totalPiecesCount);
-    const showTotals = bestText || remainderText || totalsData.goldText;
+    const showTotals = totalsData.minimalText || totalsData.goldText;
     equivFoot.classList.toggle('hidden', !showTotals);
 
     equivBody.innerHTML = '';

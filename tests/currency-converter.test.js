@@ -6,8 +6,7 @@ describe('currency converter', () => {
       <div id="currency-sources"><input data-currency="copper" value="111"></div>
       <div class="advanced-group"><input data-currency="copper" data-multiplier="1"></div>
       <button id="currency-advanced-toggle"></button>
-      <div id="currency-total-best"></div>
-      <div id="currency-total-remainder"></div>
+      <div id="currency-total-breakdown"></div>
       <div id="currency-total-gold"></div>
       <div id="currency-total-pieces"></div>
       <div id="currency-equivalences">
@@ -24,7 +23,7 @@ describe('currency converter', () => {
 
     expect(window.i18n.shop.converter.and).toBe('et');
     expect(
-      document.getElementById('currency-total-remainder').innerHTML,
+      document.getElementById('currency-total-breakdown').innerHTML,
     ).toContain('et');
   });
 });
