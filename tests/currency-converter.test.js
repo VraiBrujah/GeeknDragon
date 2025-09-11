@@ -39,23 +39,23 @@ describe('currency converter', () => {
               <input data-currency="copper" value="0" />
               <div class="advanced-group hidden">
                 <label>
-                  <span data-i18n="shop.converter.multiplier10000"></span>
+                  <span data-i18n="shop.converter.multiplier10000">x10 000</span>
                   <input data-currency="copper" data-multiplier="10000" />
                 </label>
                 <label>
-                  <span data-i18n="shop.converter.multiplier1000"></span>
+                  <span data-i18n="shop.converter.multiplier1000">x1 000</span>
                   <input data-currency="copper" data-multiplier="1000" />
                 </label>
                 <label>
-                  <span data-i18n="shop.converter.multiplier100"></span>
+                  <span data-i18n="shop.converter.multiplier100">x100</span>
                   <input data-currency="copper" data-multiplier="100" />
                 </label>
                 <label>
-                  <span data-i18n="shop.converter.multiplier10"></span>
+                  <span data-i18n="shop.converter.multiplier10">x10</span>
                   <input data-currency="copper" data-multiplier="10" />
                 </label>
                 <label>
-                  <span data-i18n="shop.converter.multiplier1"></span>
+                  <span data-i18n="shop.converter.multiplier1">x1</span>
                   <input data-currency="copper" data-multiplier="1" />
                 </label>
               </div>
@@ -87,6 +87,59 @@ describe('currency converter', () => {
       },
       lang: 'fr',
     };
+    document.documentElement.lang = 'fr';
+
+    await import('../js/currency-converter.js');
+    document.getElementById('currency-advanced-toggle').click();
+
+    const labels = Array.from(
+      document.querySelectorAll('.advanced-group label'),
+    ).map((el) => el.textContent.trim());
+    expect(labels).toEqual(['x10 000', 'x1 000', 'x100', 'x10', 'x1']);
+  });
+
+  test('displays default multiplier labels without translations', async () => {
+    jest.resetModules();
+    document.body.innerHTML = `
+      <table id="currency-sources">
+        <tbody>
+          <tr>
+            <td>
+              <input data-currency="copper" value="0" />
+              <div class="advanced-group hidden">
+                <label>
+                  <span data-i18n="shop.converter.multiplier10000">x10 000</span>
+                  <input data-currency="copper" data-multiplier="10000" />
+                </label>
+                <label>
+                  <span data-i18n="shop.converter.multiplier1000">x1 000</span>
+                  <input data-currency="copper" data-multiplier="1000" />
+                </label>
+                <label>
+                  <span data-i18n="shop.converter.multiplier100">x100</span>
+                  <input data-currency="copper" data-multiplier="100" />
+                </label>
+                <label>
+                  <span data-i18n="shop.converter.multiplier10">x10</span>
+                  <input data-currency="copper" data-multiplier="10" />
+                </label>
+                <label>
+                  <span data-i18n="shop.converter.multiplier1">x1</span>
+                  <input data-currency="copper" data-multiplier="1" />
+                </label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button id="currency-advanced-toggle"></button>
+      <div id="currency-total-breakdown"></div>
+      <div id="currency-total-gold"></div>
+      <div id="currency-total-pieces"></div>
+      <div id="currency-equivalences">
+        <table id="currency-equivalences-list"><tbody></tbody><tfoot></tfoot></table>
+      </div>`;
+    window.i18n = { lang: 'fr' }; // no apply method
     document.documentElement.lang = 'fr';
 
     await import('../js/currency-converter.js');
