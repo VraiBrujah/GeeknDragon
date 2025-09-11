@@ -242,8 +242,8 @@
           : `${nf.format(qty)} ${label} x${nf.format(mult)}`;
       });
       const remainderItems = totalsData.remainderItems[coin];
-      const remainderPhrase = remainderItems
-        .map(({ coin: rCoin, multiplier, qty }) => {
+      const remainderLines = remainderItems.map(
+        ({ coin: rCoin, multiplier, qty }) => {
           const label = currencyNames[rCoin].replace(
             /^pièce/,
             qty > 1 ? 'pièces' : 'pièce',
@@ -251,14 +251,18 @@
           return multiplier === 1
             ? `${nf.format(qty)} ${label}`
             : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
-        })
-        .join('<br>');
+        }
+      );
       const remainderGold = totalsData.remainderGold[coin];
-      const remainderText = remainderPhrase
-        ? remainderGold
-          ? `${remainderPhrase}<br>${remainderGold}`
-          : remainderPhrase
-        : remainderGold;
+      if (
+        remainderGold &&
+        remainderGold !== remainderLines.join('<br>')
+      ) {
+        remainderLines.push(
+          `${tr.goldEquivalent || 'Gold equivalent:'} ${remainderGold}`,
+        );
+      }
+      const remainderText = remainderLines.join('<br>');
       const totalRowPieces = Math.floor(
         parts.reduce((sum, { qty }) => sum + qty, 0) +
           remainderItems.reduce((sum, { qty }) => sum + qty, 0),
