@@ -386,6 +386,10 @@ class GeeknDragonAudioPlayer {
   }
 
   loadTrack(index, resume = false) {
+    // Arrêter tout intervalle précédent pour éviter de sauvegarder une
+    // position obsolète pendant le changement de piste
+    this.stopTimeUpdater();
+
     if (!this.state.playlist[index]) return;
 
     const actualIndex = this.state.shuffleOrder[index] || index;
@@ -428,6 +432,10 @@ class GeeknDragonAudioPlayer {
     }
 
     this.state.currentTrack = index;
+
+    // Sauvegarder immédiatement l'état pour assurer une reprise à 0 si la page change
+    this.savePlaybackState(true);
+
     if (this.state.isPlaying) {
       if (!this.sound.playing()) {
         this.sound.play();
