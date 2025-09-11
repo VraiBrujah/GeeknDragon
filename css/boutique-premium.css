@@ -711,6 +711,13 @@
   background: var(--boutique-surface);
 }
 
+#currency-equivalences td hr {
+  margin: var(--boutique-space-sm) 0;
+  border: none;
+  border-top: 1px solid var(--boutique-border);
+  width: 100%;
+}
+
 .advanced-group {
   display: flex;
   flex-direction: column;

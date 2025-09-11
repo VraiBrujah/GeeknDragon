@@ -276,7 +276,7 @@
         /^pièce/,
         totalValue > 1 ? 'pièces' : 'pièce',
       );
-      const summary = `${summaryParts.join('<br>')}<br>${
+      const summary = `${summaryParts.join('<br>')}<hr>${
         tr.equivTotalValue || 'Total:'
       } ${nf.format(totalValue)} ${label}`;
       const row = document.createElement('tr');
