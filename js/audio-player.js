@@ -270,7 +270,8 @@ class GeeknDragonAudioPlayer {
       if (currentTrackUrl) {
         const newActualIndex = this.state.playlist.indexOf(currentTrackUrl);
         if (newActualIndex !== -1) {
-          const newShuffleIndex = this.state.shuffleOrder.indexOf(newActualIndex);
+          const newShuffleIndex =
+            this.state.shuffleOrder.indexOf(newActualIndex);
           if (
             newShuffleIndex !== -1 &&
             newShuffleIndex !== currentShuffleIndex
@@ -412,7 +413,13 @@ class GeeknDragonAudioPlayer {
 
       if (resume && this.state.currentTime > 0) {
         this.sound.once('load', () => {
-          this.sound.seek(this.state.currentTime);
+          const duration = this.sound.duration();
+          if (this.state.currentTime >= duration) {
+            this.state.currentTime = 0;
+            this.sound.seek(0);
+          } else {
+            this.sound.seek(this.state.currentTime);
+          }
         });
       } else {
         this.state.currentTime = 0;
