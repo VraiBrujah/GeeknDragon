@@ -171,7 +171,6 @@
       const goldTotal = goldEquivalent(copperValue, currencyNames, andText);
       const perCoinCounts = {};
       const remainderItems = {};
-      const remainderGold = {};
 
       coins.forEach((coin) => {
         const base = rates[coin];
@@ -196,10 +195,6 @@
           remainder > 0
             ? minimalParts(remainder, currencyNames, andText).items
             : [];
-        remainderGold[coin] =
-          remainder > 0
-            ? goldEquivalent(remainder, currencyNames, andText).text
-            : '';
       });
 
       return {
@@ -209,7 +204,6 @@
         goldItems: goldTotal.items,
         perCoinCounts,
         remainderItems,
-        remainderGold,
       };
     };
 
@@ -265,15 +259,6 @@
             : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
         }
       );
-      const remainderGold = totalsData.remainderGold[coin];
-      if (
-        remainderGold &&
-        remainderGold !== remainderLines.join('<br>')
-      ) {
-        remainderLines.push(
-          `${tr.goldEquivalent || 'Gold equivalent:'} ${remainderGold}`,
-        );
-      }
       const remainderText = remainderLines.join('<br>');
       const totalRowPieces = Math.floor(
         parts.reduce((sum, { qty }) => sum + qty, 0) +
