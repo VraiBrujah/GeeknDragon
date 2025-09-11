@@ -243,9 +243,9 @@ class GeeknDragonAudioPlayer {
         
         if (this.state.playlist.length > 0) {
             this.shufflePlaylist();
-            
-            // Si on n'avait que le fichier de démarrage, charger la première piste
-            if (this.state.playlist.length > 1 || !this.state.isPlaying) {
+
+            // Charger la première piste uniquement si rien ne joue actuellement
+            if (!this.state.isPlaying || !this.sound) {
                 if (!this.state.isPlaying) {
                     this.state.isPlaying = true;
                 }
