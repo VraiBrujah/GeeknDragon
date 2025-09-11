@@ -15,6 +15,7 @@
   const totalBest = document.getElementById('currency-total-best');
   const totalRemainder = document.getElementById('currency-total-remainder');
   const totalGold = document.getElementById('currency-total-gold');
+  const totalPiecesEl = document.getElementById('currency-total-pieces');
   const equivContainer = document.getElementById('currency-equivalences');
   const equivTable = document.getElementById('currency-equivalences-list');
   const equivBody = equivTable?.querySelector('tbody');
@@ -25,6 +26,7 @@
     !totalBest ||
     !totalRemainder ||
     !totalGold ||
+    !totalPiecesEl ||
     !equivContainer ||
     !equivTable ||
     !equivBody ||
@@ -229,6 +231,11 @@
     totalBest.innerHTML = bestText;
     totalRemainder.innerHTML = remainderText;
     totalGold.innerHTML = totalsData.goldText;
+    const totalPiecesCount = totalsData.minimalItems.reduce(
+      (sum, { qty }) => sum + qty,
+      0,
+    );
+    totalPiecesEl.textContent = nf.format(totalPiecesCount);
     const showTotals = bestText || remainderText || totalsData.goldText;
     equivFoot.classList.toggle('hidden', !showTotals);
 
