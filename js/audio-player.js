@@ -1183,6 +1183,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.gndAudioPlayer.sound) {
           window.gndAudioPlayer.state.currentTime =
             window.gndAudioPlayer.sound.seek();
+          window.gndAudioPlayer.sound.pause();
+          window.gndAudioPlayer.stopTimeUpdater();
+          window.gndAudioPlayer.sound.unload();
         }
         window.gndAudioPlayer.savePlaybackState(true);
       }
