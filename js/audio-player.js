@@ -218,6 +218,15 @@ class GeeknDragonAudioPlayer {
 
   async scanMusicFiles() {
     console.log('🔍 Scan intelligent des fichiers musicaux...');
+    // Conserver l'état de lecture actuel
+    const wasPlaying = !!(this.sound && this.state.isPlaying);
+    const currentShuffleIndex = this.state.currentTrack;
+    let currentTrackUrl = null;
+    if (wasPlaying && this.state.playlist.length > 0) {
+      const actualIndex =
+        this.state.shuffleOrder[currentShuffleIndex] || currentShuffleIndex;
+      currentTrackUrl = this.state.playlist[actualIndex];
+    }
 
     // Créer le scanner si pas encore fait
     if (!this.musicScanner) {
@@ -258,13 +267,35 @@ class GeeknDragonAudioPlayer {
     if (this.state.playlist.length > 0) {
       this.shufflePlaylist();
 
-      // Charger la première piste uniquement si rien ne joue actuellement
-      if (!this.state.isPlaying || !this.sound) {
-        if (!this.state.isPlaying) {
-          this.state.isPlaying = true;
+      if (currentTrackUrl) {
+        const newActualIndex = this.state.playlist.indexOf(currentTrackUrl);
+        if (newActualIndex !== -1) {
+          const newShuffleIndex = this.state.shuffleOrder.indexOf(newActualIndex);
+          if (
+            newShuffleIndex !== -1 &&
+            newShuffleIndex !== currentShuffleIndex
+          ) {
+            [
+              this.state.shuffleOrder[newShuffleIndex],
+              this.state.shuffleOrder[currentShuffleIndex],
+            ] = [
+              this.state.shuffleOrder[currentShuffleIndex],
+              this.state.shuffleOrder[newShuffleIndex],
+            ];
+          }
+          this.state.currentTrack = currentShuffleIndex;
+        } else {
+          this.state.currentTrack = 0;
         }
+      } else {
+        this.state.currentTrack = 0;
+      }
+
+      // Charger la première piste uniquement si rien ne joue actuellement
+      if (!wasPlaying) {
+        this.state.isPlaying = true;
         this.state.currentTime = 0;
-        this.loadTrack(0);
+        this.loadTrack(this.state.currentTrack);
         this.updatePlayButton();
       }
 
