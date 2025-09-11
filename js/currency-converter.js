@@ -326,6 +326,8 @@
 
   advancedToggle?.addEventListener('click', () => {
     advancedGroups.forEach((group) => group.classList.toggle('hidden'));
+    // Ensure freshly revealed fields get their translated labels
+    window?.i18n?.apply?.();
   });
 
   // Initial render
