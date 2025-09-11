@@ -9,6 +9,7 @@ describe('currency converter', () => {
       <div id="currency-total-best"></div>
       <div id="currency-total-remainder"></div>
       <div id="currency-total-gold"></div>
+      <div id="currency-total-pieces"></div>
       <div id="currency-equivalences">
         <table id="currency-equivalences-list"><tbody></tbody><tfoot></tfoot></table>
       </div>`;

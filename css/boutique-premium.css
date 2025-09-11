@@ -737,7 +737,7 @@
 }
 
 #currency-equivalences tfoot {
-  border-top: 1px solid var(--boutique-border);
+  border-top: 2px solid var(--boutique-border);
 }
 
 #currency-equivalences tfoot th,
