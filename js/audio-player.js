@@ -1066,6 +1066,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!window.gndAudioPlayer) {
         window.gndAudioPlayer = new GeeknDragonAudioPlayer();
         gndAudioPlayer = window.gndAudioPlayer;
+
+        // Sauvegarder l'état de lecture juste avant de quitter la page
+        window.addEventListener('pagehide', () => {
+            if (window.gndAudioPlayer) {
+                if (window.gndAudioPlayer.sound) {
+                    window.gndAudioPlayer.state.currentTime = window.gndAudioPlayer.sound.seek();
+                }
+                window.gndAudioPlayer.savePlaybackState();
+            }
+        });
     }
 });
 
