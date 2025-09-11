@@ -286,6 +286,11 @@ class GeeknDragonAudioPlayer {
           this.state.currentTrack = currentShuffleIndex;
         } else {
           this.state.currentTrack = 0;
+          if (this.sound) {
+            this.sound.stop();
+          }
+          this.state.currentTime = 0;
+          this.loadTrack(0);
         }
       } else {
         this.state.currentTrack = 0;
