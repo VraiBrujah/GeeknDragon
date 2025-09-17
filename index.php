@@ -232,7 +232,7 @@
             <div class="container">
                 <div class="cta-content">
                     <h2>Prêt à vivre l'aventure ?</h2>
-                    <p>Rejoignez des milliers d'aventuriers qui ont déjà transformé leurs parties avec nos accessoires immersifs.</p>
+                    <p>Rejoignez les aventuriers qui ont déjà transformé leurs parties avec nos accessoires immersifs.</p>
                     <a href="boutique.html" class="cta-primary large">Commencer mon Aventure</a>
                 </div>
             </div>
