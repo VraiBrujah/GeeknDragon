@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Essence du Marchand | Geek&Dragon</title>
+  <meta name="description" content="50 pièces pour une richesse instantanée (2 exemplaires de chacun des 25 modèles). Double variété pour flexibilité en jeu.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><span class="logo-text">Geek&Dragon</span></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Accueil</a></li>
+        <li><a href="boutique.html" class="nav-link">Boutique</a></li>
+        <li><a href="boutique.html#coins" class="nav-link">Pièces</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-toggle"><span></span><span></span><span></span></div>
+    </nav>
+  </header>
+
+  <main class="product-main">
+    <section class="breadcrumb">
+      <div class="container">
+        <nav class="breadcrumb-nav">
+          <a href="index.html">Accueil</a><span>›</span>
+          <a href="boutique.html">Boutique</a><span>›</span>
+          <a href="boutique.html#coins">Pièces Métalliques</a><span>›</span>
+          <span class="current">L'Essence du Marchand</span>
+        </nav>
+      </div>
+    </section>
+
+    <section class="product-hero">
+      <div class="container">
+        <div class="product-hero-content">
+          <div class="product-gallery">
+            <div class="main-image">
+              <img src="images/optimized-modern/webp/Essence.webp" alt="L'Essence du Marchand" id="mainProductImage">
+              <div class="image-badges"><span class="badge premium">Premium</span></div>
+            </div>
+            <div class="thumbnail-gallery">
+              <img src="images/optimized-modern/webp/Essence.webp" alt="Vue principale" class="thumbnail active" onclick="changeMainImage(this)">
+              <img src="images/optimized-modern/webp/EssencePlast.webp" alt="Détails du coffret" class="thumbnail" onclick="changeMainImage(this)">
+              <img src="images/optimized-modern/webp/coin-copper-10.webp" alt="Pièces cuivre" class="thumbnail" onclick="changeMainImage(this)">
+            </div>
+          </div>
+
+          <div class="product-info">
+            <div class="product-category"><span class="category-tag">Pièces Métalliques</span><span class="product-id">#GD-LE-050</span></div>
+            <h1 class="product-title">L'Essence du Marchand</h1>
+            <p class="product-subtitle">50 pièces — 2 exemplaires de chacun des 25 modèles</p>
+
+            <div class="product-pricing">
+              <div class="price-main"><span class="price">275$ <small>CAD</small></span><span class="price-note">Double variété</span></div>
+              <div class="payment-options"><span>Paiement sécurisé</span><span>Livraison gratuite CA</span></div>
+            </div>
+
+            <div class="product-actions">
+              <button class="snipcart-add-item btn-primary"
+                data-item-id="lot50-essence"
+                data-item-price="275.00"
+                data-item-url="/api/products/lot50-essence"
+                data-item-name="L'Essence du Marchand"
+                data-item-description="50 pièces (2x chaque modèle), flexibilité maximale."
+                data-item-image="/images/optimized-modern/webp/Essence.webp"
+                data-item-currency="CAD"
+                data-item-categories="coins">
+                Ajouter à l'inventaire
+              </button>
+              <button class="btn-wishlist" title="Ajouter aux favoris">❤</button>
+            </div>
+
+            <div class="product-tabs">
+              <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="description">Description</button>
+                <button class="tab-btn" data-tab="specifications">Spécifications</button>
+                <button class="tab-btn" data-tab="usage">Guide d'Usage</button>
+                <button class="tab-btn" data-tab="reviews">Avis (0)</button>
+              </div>
+              <div class="tab-content active" id="description">
+                <p>Le meilleur des deux mondes : collection complète et quantité doublée pour équiper à la fois le MJ et les joueurs sans compromis.</p>
+              </div>
+              <div class="tab-content" id="specifications">
+                <ul><li>50 pièces — 2× chaque design</li><li>Coffret de présentation inclus</li></ul>
+              </div>
+              <div class="tab-content" id="usage">
+                <ul><li>Idéal pour tables nombreuses et banque de guilde</li></ul>
+              </div>
+              <div class="tab-content" id="reviews"><p>Aucun avis pour le moment</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section"><h3>Geek&Dragon</h3><p>Accessoires immersifs pour jeux de rôle.</p></div>
+        <div class="footer-section"><h4>Boutique</h4><ul><li><a href="boutique.html#coins">Pièces</a></li></ul></div>
+        <div class="footer-section"><h4>Support</h4><ul><li><a href="mailto:support@geekndragon.com">Support</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2024 Geek&Dragon. Tous droits réservés.</p></div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/product.js"></script>
+  <script src="js/snipcart-products.js"></script>
+  <script src="js/snipcart-integration.js"></script>
+  <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.html" style="display:none;"></div>
+</body>
+</html>
+

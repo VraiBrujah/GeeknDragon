@@ -1,7 +1,8 @@
 /**
- * Configuration des Produits Snipcart - GeeknDragon
- * ==================================================
- * Ce fichier transforme les données produits JSON en boutons Snipcart
+        // Remplacer le texte du bouton
+        try {
+            button.textContent = (this.currentLanguage === 'fr') ? 'Ajouter � l\\'inventaire' : 'Add to Inventory';
+        } catch (e) {}
  * avec personnalisation complète selon le thème D&D.
  */
 

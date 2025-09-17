@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Monnaie des Cinq Royaumes | Geek&Dragon</title>
+  <meta name="description" content="Collection complète de 25 pièces uniques (5 métaux × 5 multiplicateurs), zéro doublon. Immersion premium pour D&D.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/product.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo"><a href="index.html"><span class="logo-text">Geek&Dragon</span></a></div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Accueil</a></li>
+        <li><a href="boutique.html" class="nav-link">Boutique</a></li>
+        <li><a href="boutique.html#coins" class="nav-link">Pièces</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-toggle"><span></span><span></span><span></span></div>
+    </nav>
+  </header>
+
+  <main class="product-main">
+    <section class="breadcrumb">
+      <div class="container">
+        <nav class="breadcrumb-nav">
+          <a href="index.html">Accueil</a><span>›</span>
+          <a href="boutique.html">Boutique</a><span>›</span>
+          <a href="boutique.html#coins">Pièces Métalliques</a><span>›</span>
+          <span class="current">La Monnaie des Cinq Royaumes</span>
+        </nav>
+      </div>
+    </section>
+
+    <section class="product-hero">
+      <div class="container">
+        <div class="product-hero-content">
+          <div class="product-gallery">
+            <div class="main-image">
+              <img src="images/optimized-modern/webp/Royaume.webp" alt="La Monnaie des Cinq Royaumes" id="mainProductImage">
+              <div class="image-badges"><span class="badge quality">Premium</span></div>
+            </div>
+            <div class="thumbnail-gallery">
+              <img src="images/optimized-modern/webp/Royaume.webp" alt="Vue principale" class="thumbnail active" onclick="changeMainImage(this)">
+              <img src="images/optimized-modern/webp/RoyaumePlast.webp" alt="Détails du coffret" class="thumbnail" onclick="changeMainImage(this)">
+              <img src="images/optimized-modern/webp/coin-copper-1.webp" alt="Pièces cuivre" class="thumbnail" onclick="changeMainImage(this)">
+              <img src="images/optimized-modern/webp/coin-silver-1.webp" alt="Pièces argent" class="thumbnail" onclick="changeMainImage(this)">
+            </div>
+          </div>
+
+          <div class="product-info">
+            <div class="product-category"><span class="category-tag">Pièces Métalliques</span><span class="product-id">#GD-L25-001</span></div>
+            <h1 class="product-title">La Monnaie des Cinq Royaumes</h1>
+            <p class="product-subtitle">25 pièces, zéro doublon — 5 métaux × 5 multiplicateurs</p>
+
+            <div class="product-pricing">
+              <div class="price-main"><span class="price">145$ <small>CAD</small></span><span class="price-note">Tout inclus</span></div>
+              <div class="payment-options"><span>Paiement sécurisé</span><span>Livraison gratuite CA</span></div>
+            </div>
+
+            <div class="product-actions">
+              <button class="snipcart-add-item btn-primary"
+                data-item-id="lot25"
+                data-item-price="145.00"
+                data-item-url="/api/products/lot25"
+                data-item-name="La Monnaie des Cinq Royaumes"
+                data-item-description="Collection complète de 25 pièces uniques (5 métaux × 5 multiplicateurs)."
+                data-item-image="/images/optimized-modern/webp/Royaume.webp"
+                data-item-currency="CAD"
+                data-item-categories="coins">
+                Ajouter à l'inventaire
+              </button>
+              <button class="btn-wishlist" title="Ajouter aux favoris">❤</button>
+            </div>
+
+            <div class="product-tabs">
+              <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="description">Description</button>
+                <button class="tab-btn" data-tab="specifications">Spécifications</button>
+                <button class="tab-btn" data-tab="usage">Guide d'Usage</button>
+                <button class="tab-btn" data-tab="reviews">Avis (0)</button>
+              </div>
+              <div class="tab-content active" id="description">
+                <h3>Collection complète sans compromis</h3>
+                <p><strong>5 métaux</strong> (cuivre, argent, électrum, or, platine) déclinés en <strong>5 multiplicateurs</strong> (unitaire, x10, x100, x1 000, x10 000). Aucun doublon : 25 modèles uniques pour une immersion maximale.</p>
+              </div>
+              <div class="tab-content" id="specifications">
+                <ul>
+                  <li>25 pièces uniques — aucun doublon</li>
+                  <li>Gravure nette sur variantes multipliées</li>
+                  <li>Coffret de présentation inclus</li>
+                </ul>
+              </div>
+              <div class="tab-content" id="usage">
+                <ul>
+                  <li>Idéal pour tables haut niveau et trésors épiques</li>
+                  <li>Parfait pour matérialiser la richesse et les échanges</li>
+                </ul>
+              </div>
+              <div class="tab-content" id="reviews"><p>Aucun avis pour le moment</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section"><h3>Geek&Dragon</h3><p>Accessoires immersifs pour jeux de rôle.</p></div>
+        <div class="footer-section"><h4>Boutique</h4><ul><li><a href="boutique.html#coins">Pièces</a></li></ul></div>
+        <div class="footer-section"><h4>Support</h4><ul><li><a href="mailto:support@geekndragon.com">Support</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2024 Geek&Dragon. Tous droits réservés.</p></div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/product.js"></script>
+  <script src="js/snipcart-products.js"></script>
+  <script src="js/snipcart-integration.js"></script>
+  <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.html" style="display:none;"></div>
+</body>
+</html>
+
