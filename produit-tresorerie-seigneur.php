@@ -24,6 +24,7 @@
                 <li><a href="boutique.php" class="nav-link">Boutique</a></li>
                 <li><a href="boutique.php#coins" class="nav-link">💰 Pièces Métalliques</a></li>
                 <li><a href="index.php#contact" class="nav-link">Contact</a></li>
+                <li><a href="compte.php" class="nav-link account-link" title="Mon compte">👤</a></li>
             </ul>
             <div class="nav-toggle">
                 <span></span>
@@ -85,11 +86,11 @@
                         <div class="product-pricing">
                             <div class="price-main">
                                 <span class="price">275$ <small>CAD</small></span>
-                                <span class="price-note">Tout inclus</span>
+                                <span class="price-note">+ taxes</span>
                             </div>
                             <div class="payment-options">
                                 <span>💳 Paiement sécurisé</span>
-                                <span>🚚 Livraison gratuite au Canada</span>
+                                <span>🚚 Livraison gratuite dès 250$ CAD</span>
                             </div>
                         </div>
 
@@ -107,13 +108,37 @@
                         
                         <div class="product-configuration">
                             <h3>Choisissez votre multiplicateur :</h3>
-                            <select id="product-variant" onchange="updatePrice()">
-                                <option value="x1" data-price="275">x1 - Finition brillante, sans gravure (275$ CAD)</option>
-                                <option value="x10" data-price="275">x10 - Gravure nette, finition mate (275$ CAD)</option>
-                                <option value="x100" data-price="275">x100 - Gravure nette, finition mate (275$ CAD)</option>
-                                <option value="x1000" data-price="275">x1000 - Gravure nette, finition mate (275$ CAD)</option>
-                                <option value="x10000" data-price="275">x10000 - Gravure nette, finition mate (275$ CAD)</option>
-                            </select>
+                            <div class="custom-dropdown" id="custom-dropdown">
+                                <div class="dropdown-selected" onclick="toggleDropdown()">
+                                    <span class="selected-text">x1 - 275$ CAD</span>
+                                    <span class="dropdown-arrow">▼</span>
+                                </div>
+                                <div class="dropdown-options" id="dropdown-options">
+                                    <div class="dropdown-option active" data-value="x1" data-price="275" data-description="Finition brillante sans gravure pour un aspect "neuf" authentique." onclick="selectOption(this)">
+                                        <span class="option-title">x1</span>
+                                        <span class="option-price">275$ CAD</span>
+                                    </div>
+                                    <div class="dropdown-option" data-value="x10" data-price="275" data-description="Gravure précise avec finition mate pour un aspect vieilli authentique." onclick="selectOption(this)">
+                                        <span class="option-title">x10</span>
+                                        <span class="option-price">275$ CAD</span>
+                                    </div>
+                                    <div class="dropdown-option" data-value="x100" data-price="275" data-description="Gravure précise avec finition mate pour un aspect vieilli authentique." onclick="selectOption(this)">
+                                        <span class="option-title">x100</span>
+                                        <span class="option-price">275$ CAD</span>
+                                    </div>
+                                    <div class="dropdown-option" data-value="x1000" data-price="275" data-description="Gravure précise avec finition mate pour un aspect vieilli authentique." onclick="selectOption(this)">
+                                        <span class="option-title">x1000</span>
+                                        <span class="option-price">275$ CAD</span>
+                                    </div>
+                                    <div class="dropdown-option" data-value="x10000" data-price="275" data-description="Gravure précise avec finition mate pour un aspect vieilli authentique." onclick="selectOption(this)">
+                                        <span class="option-title">x10000</span>
+                                        <span class="option-price">275$ CAD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="config-description" id="config-description">
+                                Finition brillante sans gravure pour un aspect "neuf" authentique.
+                            </div>
                         </div>
 
                         <div class="product-actions">
@@ -128,8 +153,9 @@
                                 data-item-categories="coins">
                                 Ajouter à l'inventaire
                             </button>
-                            <button class="btn-wishlist" onclick="toggleWishlist()" title="Ajouter aux favoris">
-                                ❤️
+                            <button class="btn-wishlist" onclick="handleWishlist('lot50-tresorerie')" title="Ajouter aux favoris">
+                                <span class="wishlist-icon">🤍</span>
+                                <span class="wishlist-text">Favoris</span>
                             </button>
                         </div>
 
@@ -138,10 +164,10 @@
                                 <strong>🚚 Expédition :</strong> 2-3 jours ouvrables
                             </div>
                             <div class="shipping-item">
-                                <strong>📦 Livraison gratuite :</strong> Partout au Canada
+                                <strong>📦 Livraison gratuite :</strong> Dès 250$ CAD au Canada
                             </div>
                             <div class="shipping-item">
-                                <strong>↩️ Retours :</strong> 30 jours satisfait ou remboursé
+                                <strong>↩️ Retours :</strong> <a href="retours.php" style="color: var(--secondary-color);">Politique de retours</a>
                             </div>
                         </div>
                     </div>
@@ -346,6 +372,7 @@
     <script src="api/public-config.js.php"></script>
     <script src="js/product.js"></script>
     <script src="js/reviews.js"></script>
+    <script src="js/wishlist.js"></script>
     <script src="js/snipcart-products.js"></script>
     <script src="js/snipcart-integration.js"></script>
     <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" style="display:none;"></div>

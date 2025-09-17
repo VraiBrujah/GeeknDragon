@@ -24,6 +24,7 @@
                 <li><a href="boutique.php" class="nav-link">Boutique</a></li>
                 <li><a href="boutique.php#coins" class="nav-link">💰 Pièces Métalliques</a></li>
                 <li><a href="index.php#contact" class="nav-link">Contact</a></li>
+                <li><a href="compte.php" class="nav-link account-link" title="Mon compte">👤</a></li>
             </ul>
             <div class="nav-toggle">
                 <span></span>
@@ -85,11 +86,11 @@
                         <div class="product-pricing">
                             <div class="price-main">
                                 <span class="price">275$ <small>CAD</small></span>
-                                <span class="price-note">Tout inclus</span>
+                                <span class="price-note">+ taxes</span>
                             </div>
                             <div class="payment-options">
                                 <span>💳 Paiement sécurisé</span>
-                                <span>🚚 Livraison gratuite au Canada</span>
+                                <span>🚚 Livraison gratuite dès 250$ CAD</span>
                             </div>
                         </div>
 
@@ -118,8 +119,9 @@
                                 data-item-categories="coins">
                                 Ajouter à l'inventaire
                             </button>
-                            <button class="btn-wishlist" onclick="toggleWishlist()" title="Ajouter aux favoris">
-                                ❤️
+                            <button class="btn-wishlist" onclick="handleWishlist('lot50-essence')" title="Ajouter aux favoris">
+                                <span class="wishlist-icon">🤍</span>
+                                <span class="wishlist-text">Favoris</span>
                             </button>
                         </div>
 
@@ -128,10 +130,10 @@
                                 <strong>🚚 Expédition :</strong> 2-3 jours ouvrables
                             </div>
                             <div class="shipping-item">
-                                <strong>📦 Livraison gratuite :</strong> Partout au Canada
+                                <strong>📦 Livraison gratuite :</strong> Dès 250$ CAD au Canada
                             </div>
                             <div class="shipping-item">
-                                <strong>↩️ Retours :</strong> 30 jours satisfait ou remboursé
+                                <strong>↩️ Retours :</strong> <a href="retours.php" style="color: var(--secondary-color);">Politique de retours</a>
                             </div>
                         </div>
                     </div>
@@ -336,6 +338,7 @@
     <script src="api/public-config.js.php"></script>
     <script src="js/product.js"></script>
     <script src="js/reviews.js"></script>
+    <script src="js/wishlist.js"></script>
     <script src="js/snipcart-products.js"></script>
     <script src="js/snipcart-integration.js"></script>
     <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" style="display:none;"></div>

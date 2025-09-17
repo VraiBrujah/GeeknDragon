@@ -24,6 +24,7 @@
                 <li><a href="boutique.php" class="nav-link">Boutique</a></li>
                 <li><a href="boutique.php#cards" class="nav-link">🃏 Cartes d'Équipement</a></li>
                 <li><a href="index.php#contact" class="nav-link">Contact</a></li>
+                <li><a href="compte.php" class="nav-link account-link" title="Mon compte">👤</a></li>
             </ul>
             <div class="nav-toggle">
                 <span></span>
@@ -85,11 +86,11 @@
                         <div class="product-pricing">
                             <div class="price-main">
                                 <span class="price">36.99$ <small>CAD</small></span>
-                                <span class="price-note">Tout inclus</span>
+                                <span class="price-note">+ taxes</span>
                             </div>
                             <div class="payment-options">
                                 <span>💳 Paiement sécurisé</span>
-                                <span>🚚 Livraison gratuite au Canada</span>
+                                <span>🚚 Livraison gratuite dès 250$ CAD</span>
                             </div>
                         </div>
 
@@ -107,10 +108,25 @@
                         
                         <div class="product-configuration">
                             <h3>Choisissez votre langue :</h3>
-                            <select id="product-variant" onchange="updatePrice()">
-                                <option value="fr" data-price="36.99">Français</option>
-                                <option value="en" data-price="36.99">English</option>
-                            </select>
+                            <div class="custom-dropdown" id="custom-dropdown">
+                                <div class="dropdown-selected" onclick="toggleDropdown()">
+                                    <span class="selected-text">fr - 36.99$ CAD</span>
+                                    <span class="dropdown-arrow">▼</span>
+                                </div>
+                                <div class="dropdown-options" id="dropdown-options">
+                                    <div class="dropdown-option active" data-value="fr" data-price="36.99" data-description="Version française complète avec illustrations." onclick="selectOption(this)">
+                                        <span class="option-title">fr</span>
+                                        <span class="option-price">36.99$ CAD</span>
+                                    </div>
+                                    <div class="dropdown-option" data-value="en" data-price="36.99" data-description="Complete English version with illustrations." onclick="selectOption(this)">
+                                        <span class="option-title">en</span>
+                                        <span class="option-price">36.99$ CAD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="config-description" id="config-description">
+                                Version française complète avec illustrations.
+                            </div>
                         </div>
 
                         <div class="product-actions">
@@ -125,8 +141,9 @@
                                 data-item-categories="cards">
                                 Ajouter à l'inventaire
                             </button>
-                            <button class="btn-wishlist" onclick="toggleWishlist()" title="Ajouter aux favoris">
-                                ❤️
+                            <button class="btn-wishlist" onclick="handleWishlist('pack-182-butins-ingenieries')" title="Ajouter aux favoris">
+                                <span class="wishlist-icon">🤍</span>
+                                <span class="wishlist-text">Favoris</span>
                             </button>
                         </div>
 
@@ -135,10 +152,10 @@
                                 <strong>🚚 Expédition :</strong> 2-3 jours ouvrables
                             </div>
                             <div class="shipping-item">
-                                <strong>📦 Livraison gratuite :</strong> Partout au Canada
+                                <strong>📦 Livraison gratuite :</strong> Dès 250$ CAD au Canada
                             </div>
                             <div class="shipping-item">
-                                <strong>↩️ Retours :</strong> 30 jours satisfait ou remboursé
+                                <strong>↩️ Retours :</strong> <a href="retours.php" style="color: var(--secondary-color);">Politique de retours</a>
                             </div>
                         </div>
                     </div>
@@ -345,6 +362,7 @@
     <script src="api/public-config.js.php"></script>
     <script src="js/product.js"></script>
     <script src="js/reviews.js"></script>
+    <script src="js/wishlist.js"></script>
     <script src="js/snipcart-products.js"></script>
     <script src="js/snipcart-integration.js"></script>
     <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" style="display:none;"></div>

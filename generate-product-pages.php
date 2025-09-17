@@ -40,6 +40,7 @@ function generateProductPage($product) {
                 <li><a href="boutique.php" class="nav-link">Boutique</a></li>
                 <li><a href="boutique.php#{$product['category']}" class="nav-link">{$product['category_name']}</a></li>
                 <li><a href="index.php#contact" class="nav-link">Contact</a></li>
+                <li><a href="compte.php" class="nav-link account-link" title="Mon compte">👤</a></li>
             </ul>
             <div class="nav-toggle">
                 <span></span>
@@ -126,11 +127,11 @@ HTML;
                         <div class="product-pricing">
                             <div class="price-main">
                                 <span class="price">{$product['price']}$ <small>{$product['currency']}</small></span>
-                                <span class="price-note">Tout inclus</span>
+                                <span class="price-note">+ taxes</span>
                             </div>
                             <div class="payment-options">
                                 <span>💳 Paiement sécurisé</span>
-                                <span>🚚 Livraison gratuite au Canada</span>
+                                <span>🚚 Livraison gratuite dès 250$ CAD</span>
                             </div>
                         </div>
 
@@ -158,14 +159,30 @@ HTML;
 
                         <div class="product-configuration">
                             <h3>{$product['configuration']['label']}</h3>
-                            <select id="product-variant" onchange="updatePrice()">
+                            <div class="custom-dropdown" id="custom-dropdown">
+                                <div class="dropdown-selected" onclick="toggleDropdown()">
+                                    <span class="selected-text">{$product['configuration']['options'][0]['value']} - {$product['configuration']['options'][0]['price']}$ CAD</span>
+                                    <span class="dropdown-arrow">▼</span>
+                                </div>
+                                <div class="dropdown-options" id="dropdown-options">
 HTML;
-        foreach ($product['configuration']['options'] as $option) {
-            $template .= "\n                                <option value=\"{$option['value']}\" data-price=\"{$option['price']}\">{$option['label']}</option>";
+        foreach ($product['configuration']['options'] as $index => $option) {
+            $activeClass = $index === 0 ? ' active' : '';
+            $template .= <<<HTML
+
+                                    <div class="dropdown-option{$activeClass}" data-value="{$option['value']}" data-price="{$option['price']}" data-description="{$option['description']}" onclick="selectOption(this)">
+                                        <span class="option-title">{$option['value']}</span>
+                                        <span class="option-price">{$option['price']}$ CAD</span>
+                                    </div>
+HTML;
         }
         $template .= <<<HTML
 
-                            </select>
+                                </div>
+                            </div>
+                            <div class="config-description" id="config-description">
+                                {$product['configuration']['options'][0]['description']}
+                            </div>
                         </div>
 HTML;
     }
@@ -185,8 +202,9 @@ HTML;
                                 data-item-categories="{$product['category']}">
                                 Ajouter à l'inventaire
                             </button>
-                            <button class="btn-wishlist" onclick="toggleWishlist()" title="Ajouter aux favoris">
-                                ❤️
+                            <button class="btn-wishlist" onclick="handleWishlist('{$product['id']}')" title="Ajouter aux favoris">
+                                <span class="wishlist-icon">🤍</span>
+                                <span class="wishlist-text">Favoris</span>
                             </button>
                         </div>
 
@@ -195,10 +213,10 @@ HTML;
                                 <strong>🚚 Expédition :</strong> {$product['shipping']['time']}
                             </div>
                             <div class="shipping-item">
-                                <strong>📦 Livraison gratuite :</strong> Partout au Canada
+                                <strong>📦 Livraison gratuite :</strong> Dès 250$ CAD au Canada
                             </div>
                             <div class="shipping-item">
-                                <strong>↩️ Retours :</strong> {$product['shipping']['returns']}
+                                <strong>↩️ Retours :</strong> <a href="retours.php" style="color: var(--secondary-color);">Politique de retours</a>
                             </div>
                         </div>
                     </div>
@@ -414,6 +432,7 @@ HTML;
     <script src="api/public-config.js.php"></script>
     <script src="js/product.js"></script>
     <script src="js/reviews.js"></script>
+    <script src="js/wishlist.js"></script>
     <script src="js/snipcart-products.js"></script>
     <script src="js/snipcart-integration.js"></script>
     <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" style="display:none;"></div>
