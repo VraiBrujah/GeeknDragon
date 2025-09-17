@@ -11,12 +11,12 @@
 <body>
   <header class="header">
     <nav class="nav-container">
-      <div class="logo"><a href="index.html"><span class="logo-text">Geek&Dragon</span></a></div>
+      <div class="logo"><a href="index.php"><span class="logo-text">Geek&Dragon</span></a></div>
       <ul class="nav-menu">
-        <li><a href="index.html" class="nav-link">Accueil</a></li>
+        <li><a href="index.php" class="nav-link">Accueil</a></li>
         <li><a href="boutique.php" class="nav-link">Boutique</a></li>
         <li><a href="boutique.php#coins" class="nav-link">Pièces</a></li>
-        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="index.php#contact" class="nav-link">Contact</a></li>
       </ul>
       <div class="nav-toggle"><span></span><span></span><span></span></div>
     </nav>
@@ -26,7 +26,7 @@
     <section class="breadcrumb">
       <div class="container">
         <nav class="breadcrumb-nav">
-          <a href="index.html">Accueil</a><span>›</span>
+          <a href="index.php">Accueil</a><span>›</span>
           <a href="boutique.php">Boutique</a><span>›</span>
           <a href="boutique.php#coins">Pièces Métalliques</a><span>›</span>
           <span class="current">La Trésorerie du Seigneur</span>
@@ -109,7 +109,7 @@
   <script src="js/product.js"></script>
   <script src="js/snipcart-products.js"></script>
   <script src="js/snipcart-integration.js"></script>
-  <div id="snipcart"  data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.html" style="display:none;"></div>
+  <div id="snipcart"  data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.php" style="display:none;"></div>
 </body>
 </html>
 

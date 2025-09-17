@@ -15,16 +15,16 @@
     <header class="header">
         <nav class="nav-container">
             <div class="logo">
-                <a href="index.html">
+                <a href="index.php">
                     <img src="images/brand-geekndragon-white.webp" alt="Geek&Dragon" class="logo-image">
                     <span class="logo-text">Geek&Dragon</span>
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Accueil</a></li>
-                <li><a href="boutique.html" class="nav-link active">Boutique</a></li>
+                <li><a href="index.php" class="nav-link">Accueil</a></li>
+                <li><a href="boutique.php" class="nav-link active">Boutique</a></li>
                 <li><a href="#filters" class="nav-link">Filtres</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="index.php#contact" class="nav-link">Contact</a></li>
             </ul>
             
             <!-- Widget Panier D&D -->
@@ -121,7 +121,7 @@
                             <img src="images/optimized-modern/webp/Vagabon.webp" alt="L'Offrande du Voyageur - Starter pack de pièces métalliques" loading="lazy">
                             <div class="product-badge starter">Starter Pack</div>
                             <div class="product-overlay">
-                                <a href="produit-offrande-voyageur.html" class="product-quick-view">Voir Détails</a>
+                                <a href="produit-offrande-voyageur.php" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -140,14 +140,14 @@
                                         data-product-id="lot10"
                                         data-product-name="L'Offrande du Voyageur"
                                         data-product-price="60.00"
-                                        data-product-url="/produit-offrande-voyageur.html"
+                                        data-product-url="/produit-offrande-voyageur.php"
                                         data-product-image="/images/optimized-modern/webp/Vagabon.webp"
                                         data-product-description="Starter pack immersif avec 10 pièces métalliques authentiques"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="produit-offrande-voyageur.html" class="btn-secondary-small">Détails</a>
+                                <a href="produit-offrande-voyageur.php" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -158,7 +158,7 @@
                             <img src="images/optimized-modern/webp/Royaume.webp" alt="La Monnaie des Cinq Royaumes - Collection complète" loading="lazy">
                             <div class="product-badge popular">Plus Populaire</div>
                             <div class="product-overlay">
-                                <a href="produit-monnaie-cinq-royaumes.html" class="product-quick-view">Voir Détails</a>
+                                <a href="produit-monnaie-cinq-royaumes.php" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -177,14 +177,14 @@
                                         data-product-id="lot25"
                                         data-product-name="La Monnaie des Cinq Royaumes"
                                         data-product-price="145.00"
-                                        data-product-url="/produit-monnaie-cinq-royaumes.html"
+                                        data-product-url="/produit-monnaie-cinq-royaumes.php"
                                         data-product-image="/images/optimized-modern/webp/Royaume.webp"
                                         data-product-description="Collection complète de 25 pièces uniques sans aucun doublon"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="produit-monnaie-cinq-royaumes.html" class="btn-secondary-small">Détails</a>
+                                <a href="produit-monnaie-cinq-royaumes.php" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -195,7 +195,7 @@
                             <img src="images/optimized-modern/webp/Essence.webp" alt="L'Essence du Marchand - Double variété" loading="lazy">
                             <div class="product-badge premium">Premium</div>
                             <div class="product-overlay">
-                                <a href="produit-essence-marchand.html" class="product-quick-view">Voir Détails</a>
+                                <a href="produit-essence-marchand.php" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -214,14 +214,14 @@
                                         data-product-id="lot50-essence"
                                         data-product-name="L'Essence du Marchand"
                                         data-product-price="275.00"
-                                        data-product-url="/produit-essence-marchand.html"
+                                        data-product-url="/produit-essence-marchand.php"
                                         data-product-image="/images/optimized-modern/webp/Essence.webp"
                                         data-product-description="Double variété pour richesse : 50 pièces (2 exemplaires de chacun des 25 modèles)"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="produit-essence-marchand.html" class="btn-secondary-small">Détails</a>
+                                <a href="produit-essence-marchand.php" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -232,7 +232,7 @@
                             <img src="images/optimized-modern/webp/Seignieur.webp" alt="La Trésorerie du Seigneur - Opulence uniforme" loading="lazy">
                             <div class="product-badge luxury">Luxe</div>
                             <div class="product-overlay">
-                                <a href="produit-tresorerie-seigneur.html" class="product-quick-view">Voir Détails</a>
+                                <a href="produit-tresorerie-seigneur.php" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -251,14 +251,14 @@
                                         data-product-id="lot50-tresorerie"
                                         data-product-name="La Trésorerie du Seigneur"
                                         data-product-price="275.00"
-                                        data-product-url="/produit-tresorerie-seigneur.html"
+                                        data-product-url="/produit-tresorerie-seigneur.php"
                                         data-product-image="/images/optimized-modern/webp/Seignieur.webp"
                                         data-product-description="Opulence uniforme : 50 pièces (10 de chaque métal) avec un multiplicateur unique"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="produit-tresorerie-seigneur.html" class="btn-secondary-small">Détails</a>
+                                <a href="produit-tresorerie-seigneur.php" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -417,7 +417,7 @@
                                         data-product-id="arsenal-aventurier"
                                         data-product-name="Arsenal de l'Aventurier"
                                         data-product-price="49.99"
-                                        data-product-url="/produit-arsenal-aventurier.html"
+                                        data-product-url="/produit-arsenal-aventurier.php"
                                         data-product-image="/images/optimized-modern/webp/arme-recto.webp"
                                         data-product-description="Équipement de base complet : armes, armures et équipement de terrain"
                                         data-quantity="1">
@@ -455,7 +455,7 @@
                                         data-product-id="butins-ingenieries"
                                         data-product-name="Butins & Ingénieries"
                                         data-product-price="36.99"
-                                        data-product-url="/produit-butins-ingenieries.html"
+                                        data-product-url="/produit-butins-ingenieries.php"
                                         data-product-image="/images/optimized-modern/webp/bomb-recto.webp"
                                         data-product-description="Contenu avancé et moderne : gemmes, explosifs et outils spécialisés"
                                         data-quantity="1">
@@ -493,7 +493,7 @@
                                         data-product-id="routes-services"
                                         data-product-name="Routes & Services"
                                         data-product-price="34.99"
-                                        data-product-url="/produit-routes-services.html"
+                                        data-product-url="/produit-routes-services.php"
                                         data-product-image="/images/optimized-modern/webp/backpack-recto.webp"
                                         data-product-description="Monde vivant et voyages : paquetages spécialisés et services urbains"
                                         data-quantity="1">
@@ -559,7 +559,7 @@
                                         data-product-id="triptyques-mysteres"
                                         data-product-name="Triptyques Mystères - Origines Complètes"
                                         data-product-price="59.99"
-                                        data-product-url="/produit-triptyques-mysteres.html"
+                                        data-product-url="/produit-triptyques-mysteres.php"
                                         data-product-image="/images/triptyque-fiche.webp"
                                         data-product-description="Héros aléatoire clé en main : 3 triptyques tirés au sort + équipement"
                                         data-quantity="1">
@@ -674,7 +674,7 @@
          data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1"
          data-config-modal-style="side"
          data-config-add-product-behavior="none"
-         data-templates-url="/templates/snipcart-templates.html"
+         data-templates-url="/templates/snipcart-templates.php"
          style="display: none;">
     </div>
 </body>

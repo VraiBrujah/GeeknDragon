@@ -14,13 +14,13 @@
     <header class="header">
         <nav class="nav-container">
             <div class="logo">
-                <a href="index.html">
+                <a href="index.php">
                     <img src="images/brand-geekndragon-white.webp" alt="Geek&Dragon" class="logo-image">
                     <span class="logo-text">Geek&Dragon</span>
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="boutique.html" class="nav-link">Boutique</a></li>
+                <li><a href="boutique.php" class="nav-link">Boutique</a></li>
                 <li><a href="#catalogue" class="nav-link">Catalogue</a></li>
                 <li><a href="#actualites" class="nav-link">Actualités</a></li>
                 <li><a href="#about" class="nav-link">À Propos</a></li>
@@ -54,7 +54,7 @@
                 <h1 class="hero-title animated-text"><strong>Transformez vos aventures en <span class="highlight">épopées légendaires</span></strong></h1>
                 <p class="hero-subtitle"><strong>Découvrez notre collection d'accessoires immersifs pour vos parties de jeux de rôle : pièces métalliques authentiques, cartes d'équipement illustrées et triptyques mystères.</strong></p>
                 <div class="hero-cta">
-                    <a href="boutique.html" class="cta-primary">Découvrir la Boutique</a>
+                    <a href="boutique.php" class="cta-primary">Découvrir la Boutique</a>
                     <a href="#catalogue" class="cta-secondary">Voir le Catalogue</a>
                 </div>
             </div>
@@ -191,7 +191,7 @@
                     <h3>Des héros niveau 20, un raton trop tenace, et… nos pièces</h3>
                     <p>Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.</p>
                     <div class="text-center">
-                        <a href="actualites/es-tu-game.html" class="cta-primary">Lire l'article complet</a>
+                        <a href="actualites/es-tu-game.php" class="cta-primary">Lire l'article complet</a>
                     </div>
                 </article>
                 <article class="testimonial-card">
@@ -233,7 +233,7 @@
                 <div class="cta-content">
                     <h2>Prêt à vivre l'aventure ?</h2>
                     <p>Rejoignez les aventuriers qui ont déjà transformé leurs parties avec nos accessoires immersifs.</p>
-                    <a href="boutique.html" class="cta-primary large">Commencer mon Aventure</a>
+                    <a href="boutique.php" class="cta-primary large">Commencer mon Aventure</a>
                 </div>
             </div>
         </section>
@@ -249,7 +249,7 @@
                 <div class="footer-section">
                     <h4>Navigation</h4>
                     <ul>
-                        <li><a href="boutique.html">Boutique</a></li>
+                        <li><a href="boutique.php">Boutique</a></li>
                         <li><a href="#catalogue">Catalogue</a></li>
                         <li><a href="#actualites">Actualités</a></li>
                         <li><a href="#about">À Propos</a></li>

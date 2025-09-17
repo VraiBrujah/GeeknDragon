@@ -11,8 +11,8 @@
 <body>
   <header class="header">
     <nav class="nav-container">
-      <div class="logo"><a href="index.html"><span class="logo-text">Geek&Dragon</span></a></div>
-      <ul class="nav-menu"><li><a href="index.html" class="nav-link">Accueil</a></li><li><a href="boutique.php" class="nav-link">Boutique</a></li><li><a href="boutique.php#triptych" class="nav-link">Triptyques</a></li></ul>
+      <div class="logo"><a href="index.php"><span class="logo-text">Geek&Dragon</span></a></div>
+      <ul class="nav-menu"><li><a href="index.php" class="nav-link">Accueil</a></li><li><a href="boutique.php" class="nav-link">Boutique</a></li><li><a href="boutique.php#triptych" class="nav-link">Triptyques</a></li></ul>
       <div class="nav-toggle"><span></span><span></span><span></span></div>
     </nav>
   </header>
@@ -45,7 +45,7 @@
   <script src="js/product.js"></script>
   <script src="js/snipcart-products.js"></script>
   <script src="js/snipcart-integration.js"></script>
-  <div id="snipcart"  data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.html" style="display:none;"></div>
+  <div id="snipcart"  data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.php" style="display:none;"></div>
 </body>
 </html>
 

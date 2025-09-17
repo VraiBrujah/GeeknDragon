@@ -15,15 +15,15 @@
     <header class="header">
         <nav class="nav-container">
             <div class="logo">
-                <a href="index.html">
+                <a href="index.php">
                     <span class="logo-text">Geek&Dragon</span>
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Accueil</a></li>
+                <li><a href="index.php" class="nav-link">Accueil</a></li>
                 <li><a href="boutique.php" class="nav-link">Boutique</a></li>
                 <li><a href="boutique.php#coins" class="nav-link">Pièces</a></li>
-                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="index.php#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-toggle">
                 <span></span>
@@ -38,7 +38,7 @@
         <section class="breadcrumb">
             <div class="container">
                 <nav class="breadcrumb-nav">
-                    <a href="index.html">Accueil</a>
+                    <a href="index.php">Accueil</a>
                     <span>›</span>
                     <a href="boutique.php">Boutique</a>
                     <span>›</span>
@@ -232,7 +232,7 @@
                             <h3>La Monnaie des Cinq Royaumes</h3>
                             <p>Collection complète sans doublon</p>
                             <div class="price">145$ <small>CAD</small></div>
-                            <a href="produit-monnaie-cinq-royaumes.html" class="btn-secondary">Découvrir</a>
+                            <a href="produit-monnaie-cinq-royaumes.php" class="btn-secondary">Découvrir</a>
                         </div>
                     </div>
                     
@@ -286,7 +286,7 @@
 
     <script src="js/script.js"></script>`n    <script src="api/public-config.js.php"></script>
     <script src="js/product.js"></script>
-  <script src=" js/snipcart-products.js\></script>`n <script src=js/snipcart-integration.js></script>`n <div id=snipcart data-api-key=YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1 data-config-modal-style=side data-config-add-product-behavior=none data-templates-url=/templates/snipcart-templates.html style=display:none;></div>`n</body>
+  <script src=" js/snipcart-products.js\></script>`n <script src=js/snipcart-integration.js></script>`n <div id=snipcart data-api-key=YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1 data-config-modal-style=side data-config-add-product-behavior=none data-templates-url=/templates/snipcart-templates.php style=display:none;></div>`n</body>
 </html>
 
 

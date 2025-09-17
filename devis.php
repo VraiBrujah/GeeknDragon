@@ -14,12 +14,12 @@
   <header class="header">
     <nav class="nav-container">
       <div class="logo">
-        <a href="index.html">
+        <a href="index.php">
           <span class="logo-text">Geek&Dragon</span>
         </a>
       </div>
       <ul class="nav-menu">
-        <li><a href="boutique.html" class="nav-link">Boutique</a></li>
+        <li><a href="boutique.php" class="nav-link">Boutique</a></li>
         <li><a href="#catalogue" class="nav-link">Catalogue</a></li>
         <li><a href="#about" class="nav-link">À Propos</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -36,7 +36,7 @@
     <div class="parchment rounded-3xl p-10 md:p-14 w-full max-w-2xl text-gray-900">
       <h1 class="text-4xl font-bold text-center mb-6">Demande de devis</h1>
       <p class="text-center mb-8 text-lg txt-court">Pour recevoir une offre personnalisée, remplis ce formulaire magique.</p>
-      <form action="merci.html" method="GET" class="space-y-6" novalidate>
+      <form action="merci.php" method="GET" class="space-y-6" novalidate>
         <div>
           <label for="name" class="block text-[#4b3e2c] font-semibold mb-2">Nom complet *</label>
           <input id="name" name="name" type="text" required minlength="2" maxlength="120" placeholder="Ex. Jean Dupont" class="w-full rounded-md border border-gray-300 p-3 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600" />
