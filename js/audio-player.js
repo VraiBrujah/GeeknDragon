@@ -117,8 +117,33 @@ class GeeknDragonAudioPlayer {
   }
 
   initHowler() {
+    // Configuration optimisée pour éviter l'épuisement du pool audio
     Howler.autoUnlock = true;
     Howler.volume(this.state.volume);
+    
+    // Limite globale du pool HTML5 Audio
+    if (window.Howler && window.Howler._html5AudioPool) {
+      window.Howler._html5AudioPool = [];
+    }
+    
+    // Configuration pour limiter les instances
+    Howler.html5PoolSize = 3; // Limite à 3 instances max
+  }
+
+  cleanupAudioPool() {
+    // Force le nettoyage du pool audio pour éviter l'épuisement
+    try {
+      if (window.Howler && window.Howler._html5AudioPool) {
+        window.Howler._html5AudioPool.forEach(audio => {
+          if (audio && typeof audio.remove === 'function') {
+            audio.remove();
+          }
+        });
+        window.Howler._html5AudioPool = [];
+      }
+    } catch (e) {
+      console.warn('🔧 Nettoyage du pool audio:', e.message);
+    }
   }
 
   createAudioElement() {
@@ -405,12 +430,18 @@ class GeeknDragonAudioPlayer {
     } else {
       if (this.sound) {
         this.sound.unload();
+        this.sound = null;
       }
+      
+      // Nettoyer le pool audio si nécessaire
+      this.cleanupAudioPool();
 
       this.sound = new Howl({
         src: [trackPath],
         html5: true,
         volume: this.state.volume,
+        pool: 1, // Limite le nombre d'instances audio
+        preload: false, // Ne précharge pas automatiquement
         onend: () => this.playNext(),
         onplayerror: () => this.setupAutoplayFallback(),
       });

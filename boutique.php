@@ -62,7 +62,7 @@
                             <span>Qualité Premium</span>
                         </div>
                         <div class="stat">
-                            <img src="images/logo-fabrique-BqFMdtDT.png" alt="Fabriqué au Québec" class="quebec-logo">
+                            <img src="images/logo-fabrique-BqFMdtDT.webp" alt="Fabriqué au Québec" class="quebec-logo">
                             <span>Fabriqué au Québec</span>
                         </div>
                     </div>

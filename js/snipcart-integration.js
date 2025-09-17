@@ -434,6 +434,15 @@ class GeeknDragonSnipcart {
         console.log('🐉 GeeknDragon Snipcart prêt !');
         this.isInitialized = true;
         
+        // Désactiver le tracking e-commerce pour éviter les erreurs
+        if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.analytics) {
+            try {
+                window.Snipcart.api.analytics.disable();
+            } catch (e) {
+                console.warn('🔇 Tracking e-commerce désactivé (normal)');
+            }
+        }
+        
         // Personnalisations post-chargement
         this.customizeCheckoutFlow();
     }

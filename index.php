@@ -81,16 +81,16 @@
                     <a href="boutique.php#coins" class="product-highlight-link">
                         <div class="product-highlight">
                             <div class="product-image">
-                                <img src="images/Piece/pro/coin-copper-10.png" alt="Pièces métalliques" loading="lazy">
+                                <img src="images/optimized-modern/coin-copper-10.webp" alt="Pièces métalliques" loading="lazy">
                             </div>
                             <div class="product-info">
                                 <h4>💰 Pièces Métalliques</h4>
                                 <p class="product-count">4 collections disponibles</p>
                                 <p class="product-desc">De l'Offrande du Voyageur (60$ CAD) à la Trésorerie du Seigneur (275$ CAD). Chaque pièce apporte le poids réel du trésor à votre table.</p>
                                 <div class="product-features">
-                                    <span class="feature-tag">✨ 5 métaux nobles</span>
-                                    <span class="feature-tag">⚖️ Poids authentique</span>
-                                    <span class="feature-tag">🔢 Multiplicateurs gravés</span>
+                                    <span class="feature-tag">5 métaux nobles</span>
+                                    <span class="feature-tag">Poids authentique</span>
+                                    <span class="feature-tag">Multiplicateurs gravés</span>
                                 </div>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                     <h2 class="section-title">Actualité – FLIM 2025</h2>
                 </header>
                 <article class="news-item">
-                    <img src="images/es-tu-game-demo.png" alt="One‑shot niveau 20 avec pièces" loading="lazy">
+                    <img src="images/optimized-modern/webp/es-tu-game-demo.webp" alt="One‑shot niveau 20 avec pièces" loading="lazy">
                     <h3>Des héros niveau 20, un raton trop tenace, et… nos pièces</h3>
                     <p>Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.</p>
                     <div class="text-center">
@@ -209,7 +209,7 @@
                     <h2 class="section-title">À Propos</h2>
                 </header>
                 <div class="about-content">
-                    <img src="images/team-brujah.png" alt="Équipe Geek&Dragon" class="about-photo" loading="lazy">
+                    <img src="images/optimized-modern/webp/team-brujah.webp" alt="Équipe Geek&Dragon" class="about-photo" loading="lazy">
                     <p>Geek&Dragon est né de la passion du jeu de rôle. Conçu au Québec, notre collectif crée des accessoires immersifs — pièces métalliques, cartes d'équipement et fiches triptyques — pour mettre l'aventure au cœur de la table.</p>
                 </div>
             </div>
@@ -221,7 +221,7 @@
                     <h2 class="section-title">Contact</h2>
                 </header>
                 <div class="contact-content">
-                    <img src="images/team-brujah.png" alt="Brujah" class="contact-photo" loading="lazy">
+                    <img src="images/optimized-modern/webp/team-brujah.webp" alt="Brujah" class="contact-photo" loading="lazy">
                     <p><a href="mailto:contact@geekndragon.com">contact@geekndragon.com</a></p>
                     <p><a href="tel:+14387642612">+1&nbsp;438&nbsp;764‑2612</a></p>
                 </div>
@@ -304,7 +304,6 @@
          data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1"
          data-config-modal-style="side"
          data-config-add-product-behavior="none"
-         data-templates-url="/templates/snipcart-templates.html"
          style="display: none;">
     </div>
 </body>
