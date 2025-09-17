@@ -209,7 +209,7 @@
                     <h2 class="section-title">À Propos</h2>
                 </header>
                 <div class="about-content">
-                    <img src="images/optimized-modern/webp/team-brujah.webp" alt="Équipe Geek&Dragon" class="about-photo" loading="lazy">
+                    <img src="images/optimized-modern/webp/brand-geekndragon-main.webp" alt="Équipe Geek&Dragon" class="about-photo" loading="lazy">
                     <p>Geek&Dragon est né de la passion du jeu de rôle. Conçu au Québec, notre collectif crée des accessoires immersifs — pièces métalliques, cartes d'équipement et fiches triptyques — pour mettre l'aventure au cœur de la table.</p>
                 </div>
             </div>
