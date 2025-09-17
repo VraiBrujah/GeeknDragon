@@ -21,8 +21,8 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Accueil</a></li>
-                <li><a href="boutique.html" class="nav-link">Boutique</a></li>
-                <li><a href="boutique.html#coins" class="nav-link">Pièces</a></li>
+                <li><a href="boutique.php" class="nav-link">Boutique</a></li>
+                <li><a href="boutique.php#coins" class="nav-link">Pièces</a></li>
                 <li><a href="index.html#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-toggle">
@@ -40,9 +40,9 @@
                 <nav class="breadcrumb-nav">
                     <a href="index.html">Accueil</a>
                     <span>›</span>
-                    <a href="boutique.html">Boutique</a>
+                    <a href="boutique.php">Boutique</a>
                     <span>›</span>
-                    <a href="boutique.html#coins">Pièces Métalliques</a>
+                    <a href="boutique.php#coins">Pièces Métalliques</a>
                     <span>›</span>
                     <span class="current">L'Offrande du Voyageur</span>
                 </nav>
@@ -262,9 +262,9 @@
                 <div class="footer-section">
                     <h4>Boutique</h4>
                     <ul>
-                        <li><a href="boutique.html#coins">Pièces Métalliques</a></li>
-                        <li><a href="boutique.html#cards">Cartes d'Équipement</a></li>
-                        <li><a href="boutique.html#triptych">Triptyques Mystères</a></li>
+                        <li><a href="boutique.php#coins">Pièces Métalliques</a></li>
+                        <li><a href="boutique.php#cards">Cartes d'Équipement</a></li>
+                        <li><a href="boutique.php#triptych">Triptyques Mystères</a></li>
                         <li><a href="#">Guide d'Achat</a></li>
                     </ul>
                 </div>
@@ -284,8 +284,9 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="js/script.js"></script>`n    <script src="api/public-config.js.php"></script>
     <script src="js/product.js"></script>
   <script src=" js/snipcart-products.js\></script>`n <script src=js/snipcart-integration.js></script>`n <div id=snipcart data-api-key=YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1 data-config-modal-style=side data-config-add-product-behavior=none data-templates-url=/templates/snipcart-templates.html style=display:none;></div>`n</body>
 </html>
+
 

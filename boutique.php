@@ -145,7 +145,7 @@
                                         data-product-description="Starter pack immersif avec 10 pièces métalliques authentiques"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
-                                    <span>Ajouter au sac</span>
+                                    <span>Ajouter à l'inventaire</span>
                                 </button>
                                 <a href="produit-offrande-voyageur.html" class="btn-secondary-small">Détails</a>
                             </div>
@@ -182,7 +182,7 @@
                                         data-product-description="Collection complète de 25 pièces uniques sans aucun doublon"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
-                                    <span>Ajouter au sac</span>
+                                    <span>Ajouter à l'inventaire</span>
                                 </button>
                                 <a href="produit-monnaie-cinq-royaumes.html" class="btn-secondary-small">Détails</a>
                             </div>
@@ -219,7 +219,7 @@
                                         data-product-description="Double variété pour richesse : 50 pièces (2 exemplaires de chacun des 25 modèles)"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
-                                    <span>Ajouter au sac</span>
+                                    <span>Ajouter à l'inventaire</span>
                                 </button>
                                 <a href="produit-essence-marchand.html" class="btn-secondary-small">Détails</a>
                             </div>
@@ -256,7 +256,7 @@
                                         data-product-description="Opulence uniforme : 50 pièces (10 de chaque métal) avec un multiplicateur unique"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
-                                    <span>Ajouter au sac</span>
+                                    <span>Ajouter à l'inventaire</span>
                                 </button>
                                 <a href="produit-tresorerie-seigneur.html" class="btn-secondary-small">Détails</a>
                             </div>
@@ -422,7 +422,7 @@
                                         data-product-description="Équipement de base complet : armes, armures et équipement de terrain"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
-                                    <span>Ajouter au sac</span>
+                                    <span>Ajouter à l'inventaire</span>
                                 </button>
                                 <a href="#" class="btn-secondary-small">Détails</a>
                             </div>
@@ -460,7 +460,7 @@
                                         data-product-description="Contenu avancé et moderne : gemmes, explosifs et outils spécialisés"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
-                                    <span>Ajouter au sac</span>
+                                    <span>Ajouter à l'inventaire</span>
                                 </button>
                                 <a href="#" class="btn-secondary-small">Détails</a>
                             </div>
@@ -498,7 +498,7 @@
                                         data-product-description="Monde vivant et voyages : paquetages spécialisés et services urbains"
                                         data-quantity="1">
                                     <span class="cart-icon">🎒</span>
-                                    <span>Ajouter au sac</span>
+                                    <span>Ajouter à l'inventaire</span>
                                 </button>
                                 <a href="#" class="btn-secondary-small">Détails</a>
                             </div>
@@ -679,4 +679,6 @@
     </div>
 </body>
 </html>
+
+
 

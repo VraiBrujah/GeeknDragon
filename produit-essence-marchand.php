@@ -14,8 +14,8 @@
       <div class="logo"><a href="index.html"><span class="logo-text">Geek&Dragon</span></a></div>
       <ul class="nav-menu">
         <li><a href="index.html" class="nav-link">Accueil</a></li>
-        <li><a href="boutique.html" class="nav-link">Boutique</a></li>
-        <li><a href="boutique.html#coins" class="nav-link">Pièces</a></li>
+        <li><a href="boutique.php" class="nav-link">Boutique</a></li>
+        <li><a href="boutique.php#coins" class="nav-link">Pièces</a></li>
         <li><a href="index.html#contact" class="nav-link">Contact</a></li>
       </ul>
       <div class="nav-toggle"><span></span><span></span><span></span></div>
@@ -27,8 +27,8 @@
       <div class="container">
         <nav class="breadcrumb-nav">
           <a href="index.html">Accueil</a><span>›</span>
-          <a href="boutique.html">Boutique</a><span>›</span>
-          <a href="boutique.html#coins">Pièces Métalliques</a><span>›</span>
+          <a href="boutique.php">Boutique</a><span>›</span>
+          <a href="boutique.php#coins">Pièces Métalliques</a><span>›</span>
           <span class="current">L'Essence du Marchand</span>
         </nav>
       </div>
@@ -102,18 +102,19 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-section"><h3>Geek&Dragon</h3><p>Accessoires immersifs pour jeux de rôle.</p></div>
-        <div class="footer-section"><h4>Boutique</h4><ul><li><a href="boutique.html#coins">Pièces</a></li></ul></div>
+        <div class="footer-section"><h4>Boutique</h4><ul><li><a href="boutique.php#coins">Pièces</a></li></ul></div>
         <div class="footer-section"><h4>Support</h4><ul><li><a href="mailto:support@geekndragon.com">Support</a></li></ul></div>
       </div>
       <div class="footer-bottom"><p>&copy; 2024 Geek&Dragon. Tous droits réservés.</p></div>
     </div>
   </footer>
 
-  <script src="js/script.js"></script>
+  <script src="js/script.js"></script>`n    <script src="api/public-config.js.php"></script>
   <script src="js/product.js"></script>
   <script src="js/snipcart-products.js"></script>
   <script src="js/snipcart-integration.js"></script>
-  <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.html" style="display:none;"></div>
+  <div id="snipcart"  data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.html" style="display:none;"></div>
 </body>
 </html>
+
 

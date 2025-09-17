@@ -12,7 +12,7 @@
   <header class="header">
     <nav class="nav-container">
       <div class="logo"><a href="index.html"><span class="logo-text">Geek&Dragon</span></a></div>
-      <ul class="nav-menu"><li><a href="index.html" class="nav-link">Accueil</a></li><li><a href="boutique.html" class="nav-link">Boutique</a></li><li><a href="boutique.html#cards" class="nav-link">Cartes</a></li></ul>
+      <ul class="nav-menu"><li><a href="index.html" class="nav-link">Accueil</a></li><li><a href="boutique.php" class="nav-link">Boutique</a></li><li><a href="boutique.php#cards" class="nav-link">Cartes</a></li></ul>
       <div class="nav-toggle"><span></span><span></span><span></span></div>
     </nav>
   </header>
@@ -41,11 +41,12 @@
     </div></div></section>
   </main>
   <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2024 Geek&Dragon.</p></div></div></footer>
-  <script src="js/script.js"></script>
+  <script src="js/script.js"></script>`n    <script src="api/public-config.js.php"></script>
   <script src="js/product.js"></script>
   <script src="js/snipcart-products.js"></script>
   <script src="js/snipcart-integration.js"></script>
-  <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.html" style="display:none;"></div>
+  <div id="snipcart"  data-config-modal-style="side" data-config-add-product-behavior="none" data-templates-url="/templates/snipcart-templates.html" style="display:none;"></div>
 </body>
 </html>
+
 

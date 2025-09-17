@@ -53,6 +53,67 @@ body {
     padding-top: var(--header-height);
 }
 
+/* Spacing harmonisation for major sections */
+.products,
+.catalogue-preview,
+.testimonials,
+.about-section,
+.contact-section,
+.cta-section {
+    padding: 60px 0;
+}
+
+/* Catalogue preview grid ("Au‑delà des Produits") */
+.catalogue-preview .catalogue-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+.product-category {
+    background: var(--card-bg, rgba(26,26,26,0.95));
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 220px;
+}
+.product-category .category-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+.product-category .category-content {
+    padding: 16px;
+}
+
+/* Testimonials ("Ce que disent nos aventuriers") */
+.testimonials .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+.testimonial-card {
+    background: var(--card-bg, rgba(26,26,26,0.95));
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 12px;
+    padding: 18px;
+}
+.testimonial-content {
+    font-style: italic;
+}
+.testimonial-author {
+    margin-top: 8px;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+/* Reduce excessive vertical gaps between sections */
+.products + .catalogue-preview,
+.catalogue-preview + .testimonials,
+.testimonials + .about-section {
+    margin-top: -20px;
+}
+
 section {
     scroll-margin-top: 80px;
 }
