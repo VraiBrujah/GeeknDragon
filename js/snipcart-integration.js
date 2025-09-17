@@ -44,6 +44,8 @@ class GeeknDragonSnipcart {
             modalStyle: 'side', // Sidebar pour mobile-friendly
             currency: 'cad',
             defaultLanguage: 'fr',
+            // Verrouille la version Snipcart pour éviter les changements incompatibles
+            version: '3.4.1',
             templatesUrl: '/templates/snipcart-templates.html',
             
             // Configuration e-commerce

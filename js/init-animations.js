@@ -7,7 +7,8 @@ import AnimationService from './animation-service.js';
 document.addEventListener('DOMContentLoaded', () => {
   AnimationService.animate('.logo-image', { rotation: 360, duration: 1 }, 'click');
   AnimationService.animate('.logo-text', { scale: 1.2, duration: 0.2, yoyo: true, repeat: 1 }, 'hover');
-  gsap.set('#footer', { opacity: 0, y: 40 });
-  AnimationService.animate('#footer', { opacity: 1, y: 0, duration: 0.6 }, 'scroll');
+  // Animation du footer désactivée temporairement pour debug
+  // gsap.set('#footer', { opacity: 0, y: 40 });
+  // AnimationService.animate('#footer', { opacity: 1, y: 0, duration: 0.6 }, 'scroll');
 });
 

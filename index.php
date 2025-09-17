@@ -63,28 +63,6 @@
             </div>
         </section>
 
-        <section id="produits" class="products">
-            <div class="container">
-                <h3 class="text-4xl font-bold text-center mb-12">Nos Incontournables</h3>
-                <div class="catalogue-grid">
-                    <a href="boutique.html#cartes" class="card-product block no-underline hover:no-underline text-gray-100">
-                        <h4 class="text-center text-2xl font-semibold mb-2">Cartes d'Équipement</h4>
-                        <p class="text-center">560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
-                        <img src="images/cartes-equipement.webp" alt="560 cartes d’équipement illustrées" class="rounded mb-4" loading="lazy">
-                    </a>
-                    <a href="boutique.html#triptyques" class="card-product block no-underline hover:no-underline text-gray-100">
-                        <h4 class="text-center text-2xl font-semibold mb-2">Fiche Triptyque</h4>
-                        <p class="text-center">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
-                        <img src="images/triptyque-fiche.webp" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
-                    </a>
-                    <a href="boutique.html#pieces" class="card-product block no-underline hover:no-underline text-gray-100">
-                        <h4 class="text-center text-2xl font-semibold mb-2">Pièces Métalliques</h4>
-                        <p class="text-center">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
-                        <img src="images/Piece/pro/coin-copper-10.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
-                    </a>
-                </div>
-            </div>
-        </section>
 
         <section id="boutique" class="boutique-section">
             <div class="container">
@@ -97,8 +75,66 @@
                         <img src="images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
                     </div>
                 </header>
+                
+                <!-- Grid de produits phares -->
+                <div class="boutique-products-grid">
+                    <a href="boutique.php#coins" class="product-highlight-link">
+                        <div class="product-highlight">
+                            <div class="product-image">
+                                <img src="images/Piece/pro/coin-copper-10.png" alt="Pièces métalliques" loading="lazy">
+                            </div>
+                            <div class="product-info">
+                                <h4>💰 Pièces Métalliques</h4>
+                                <p class="product-count">4 collections disponibles</p>
+                                <p class="product-desc">De l'Offrande du Voyageur (60$ CAD) à la Trésorerie du Seigneur (275$ CAD). Chaque pièce apporte le poids réel du trésor à votre table.</p>
+                                <div class="product-features">
+                                    <span class="feature-tag">✨ 5 métaux nobles</span>
+                                    <span class="feature-tag">⚖️ Poids authentique</span>
+                                    <span class="feature-tag">🔢 Multiplicateurs gravés</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="boutique.php#cards" class="product-highlight-link">
+                        <div class="product-highlight">
+                            <div class="product-image">
+                                <img src="images/cartes-equipement.webp" alt="Cartes d'équipement" loading="lazy">
+                            </div>
+                            <div class="product-info">
+                                <h4>🃏 Cartes d'Équipement</h4>
+                                <p class="product-count">560 cartes illustrées</p>
+                                <p class="product-desc">3 packs thématiques : Arsenal de l'Aventurier, Butins & Ingénieries, Routes & Services. Fini la recherche dans les manuels !</p>
+                                <div class="product-features">
+                                    <span class="feature-tag">🎨 Illustrations uniques</span>
+                                    <span class="feature-tag">🇫🇷 Français/Anglais</span>
+                                    <span class="feature-tag">⚡ Parties plus fluides</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="boutique.php#triptych" class="product-highlight-link">
+                        <div class="product-highlight">
+                            <div class="product-image">
+                                <img src="images/triptyque-fiche.webp" alt="Triptyques Mystères" loading="lazy">
+                            </div>
+                            <div class="product-info">
+                                <h4>📋 Triptyques Mystères</h4>
+                                <p class="product-count">Héros prêt à jouer</p>
+                                <p class="product-desc">3 triptyques tirés au sort + équipement + pièces de départ. Votre aventurier est immédiatement opérationnel !</p>
+                                <div class="product-features">
+                                    <span class="feature-tag">🎲 Surprise garantie</span>
+                                    <span class="feature-tag">🛡️ Tout inclus</span>
+                                    <span class="feature-tag">🚀 Prêt à jouer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
                 <div class="boutique-cta">
-                    <a href="boutique.html" class="cta-primary">Visiter la boutique</a>
+                    <a href="boutique.php" class="cta-primary">Visiter la boutique</a>
                     <a href="#contact" class="cta-secondary">Demander un devis</a>
                 </div>
             </div>
@@ -119,56 +155,13 @@
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🎲</div>
-                        <h3>Compatible D&D</h3>
-                        <p>Tous nos produits sont conçus pour les règles officielles de Donjons & Dragons</p>
+                        <h3>Compatible D&D 2024</h3>
+                        <p>Tous nos produits sont conçus pour les règles officielles de Donjons & Dragons 2024</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="catalogue-preview" id="catalogue">
-            <div class="container">
-                <header class="section-header">
-                    <h2 class="section-title">Au-delà des Produits</h2>
-                    <p class="section-subtitle">Explorez notre univers et nos ressources pour la communauté</p>
-                </header>
-
-                <div class="catalogue-grid">
-                    <div class="product-category">
-                        <div class="category-image">
-                            <img src="images/es-tu-game-demo.png" alt="Démonstration de jeu de rôle" loading="lazy">
-                        </div>
-                        <div class="category-content">
-                            <h3>Ateliers &amp; Démos</h3>
-                            <p>Rejoignez-nous lors d'événements pour tester nos accessoires en action.</p>
-                            <a href="#actualites" class="category-link">Voir les prochaines dates</a>
-                        </div>
-                    </div>
-
-                    <div class="product-category">
-                        <div class="category-image">
-                            <img src="images/team-brujah.png" alt="Équipe Geek&amp;Dragon" loading="lazy">
-                        </div>
-                        <div class="category-content">
-                            <h3>Communauté</h3>
-                            <p>Partagez vos aventures et découvrez celles des autres passionnés.</p>
-                            <a href="#contact" class="category-link">Rejoindre</a>
-                        </div>
-                    </div>
-
-                    <div class="product-category">
-                        <div class="category-image">
-                            <img src="images/logo-fabrique-BqFMdtDT.png" alt="Accessoires personnalisés" loading="lazy">
-                        </div>
-                        <div class="category-content">
-                            <h3>Créations Sur Mesure</h3>
-                            <p>Imaginez des accessoires uniques adaptés à votre campagne.</p>
-                            <a href="contact.html" class="category-link">Nous contacter</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section class="testimonials">
             <div class="container">
@@ -178,26 +171,10 @@
                 <div class="testimonials-grid">
                     <div class="testimonial-card">
                         <div class="testimonial-content">
-                            <p>"Les pièces métalliques ont complètement transformé l'immersion de nos parties. Le poids et la texture donnent une dimension tactile incroyable !"</p>
+                            <p>"Ma grande découverte au FLIM, mes enfants sont tombés en amours avec les pièces et depuis font pleins de tâches pour pouvoir échanger leur point contre une chasse au trésor qui pourront avoir leur propre coffre au trésor. Merci à Mathieu pour offrir ce super ajout pour l'initiation des enfants aux jeux de rôles."</p>
                         </div>
                         <div class="testimonial-author">
-                            <strong>Marc, Maître de Jeu</strong>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"Enfin fini de chercher dans le manuel ! Les cartes d'équipement sont magnifiques et super pratiques pendant les parties."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <strong>Sarah, Joueuse passionnée</strong>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"La qualité est exceptionnelle, les finitions parfaites. Un investissement qui vaut chaque dollar !"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <strong>Alex, Collectionneur</strong>
+                            <strong>Gabrielle</strong>
                         </div>
                     </div>
                 </div>
@@ -214,13 +191,13 @@
                     <h3>Des héros niveau 20, un raton trop tenace, et… nos pièces</h3>
                     <p>Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.</p>
                     <div class="text-center">
-                        <a href="actualites/es-tu-game.html" class="cta-primary">Lire l’article</a>
+                        <a href="actualites/es-tu-game.html" class="cta-primary">Lire l'article complet</a>
                     </div>
                 </article>
                 <article class="testimonial-card">
                     <img src="images/optimized-modern/webp/avisJoueurFlim2025.webp" alt="Avis joueurs sur pièces" loading="lazy">
                     <h4>« Finis les combats contre nos feuilles de personnage ! »</h4>
-                    <p>De nombreux joueurs présents l’affirment : les pièces physiques changent tout.</p>
+                    <p>De nombreux joueurs présents l'affirment : les pièces physiques changent tout.</p>
                     <p><strong>Fini les combats contre les feuilles de perso</strong>, les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek &amp; Dragon, tout commence quand la pièce tombe sur la table.</p>
                 </article>
             </div>
@@ -308,6 +285,14 @@
     <script src="js/audio-player-override.js"></script>
     <script src="js/music-scanner-override.js"></script>
     <script src="js/audio-header-ui.js"></script>
+    <!-- Map ESM bare imports used by modules (e.g., gsap) -->
+    <script type="importmap">
+    {
+      "imports": {
+        "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/index.js"
+      }
+    }
+    </script>
     <script type="module" src="js/init-animations.js"></script>
     
     <!-- Intégration Snipcart avec thème D&D -->

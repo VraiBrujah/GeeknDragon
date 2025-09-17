@@ -54,37 +54,144 @@ body {
 }
 
 /* Spacing harmonisation for major sections */
-.products,
-.catalogue-preview,
+.boutique-section,
+.features,
 .testimonials,
+.news,
 .about-section,
 .contact-section,
 .cta-section {
     padding: 60px 0;
+    display: block;
+    opacity: 1;
+    visibility: visible;
 }
 
-/* Catalogue preview grid ("Au‑delà des Produits") */
-.catalogue-preview .catalogue-grid {
+/* Ensure sections don't disappear */
+.testimonials,
+.news {
+    min-height: 200px;
+}
+
+/* Force visibility for problematic sections */
+.features,
+.testimonials,
+.news,
+.feature-card,
+.testimonial-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Override any fade-in classes that might be applied */
+.features .fade-in,
+.testimonials .fade-in,
+.news .fade-in,
+.feature-card.fade-in,
+.testimonial-card.fade-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Ensure content is always visible */
+.features > .container,
+.testimonials > .container,
+.news > .container {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure features grid is always visible */
+.features-grid {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: grid !important;
+}
+
+/* Boutique section styles */
+.boutique-products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
 }
-.product-category {
-    background: var(--card-bg, rgba(26,26,26,0.95));
-    border: 1px solid rgba(212, 175, 55, 0.25);
-    border-radius: 12px;
-    overflow: hidden;
-    min-height: 220px;
-}
-.product-category .category-image img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+
+.product-highlight-link {
+    text-decoration: none;
+    color: inherit;
     display: block;
+    transition: var(--transition);
 }
-.product-category .category-content {
-    padding: 16px;
+
+.product-highlight-link:hover {
+    transform: translateY(-4px);
 }
+
+.product-highlight {
+    background: var(--card-bg);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: var(--transition);
+}
+
+.product-highlight-link:hover .product-highlight {
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-medium);
+}
+
+.product-highlight .product-image {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.product-highlight .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-highlight .product-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+}
+
+.product-highlight .product-count {
+    font-size: 0.9rem;
+    color: var(--medium-text);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.product-highlight .product-desc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.product-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.feature-tag {
+    background: rgba(212, 175, 55, 0.2);
+    color: var(--secondary-color);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
 
 /* Testimonials ("Ce que disent nos aventuriers") */
 .testimonials .testimonials-grid {
@@ -97,20 +204,116 @@ body {
     border: 1px solid rgba(212, 175, 55, 0.25);
     border-radius: 12px;
     padding: 18px;
+    transition: var(--transition);
 }
+
+.testimonial-card:hover {
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-light);
+}
+
+.testimonial-card.featured {
+    border-color: var(--secondary-color);
+    background: rgba(212, 175, 55, 0.05);
+    grid-column: span 2;
+}
+
+.testimonial-card.featured h4 {
+    color: var(--secondary-color);
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+}
+
 .testimonial-content {
     font-style: italic;
 }
+
+.testimonial-content h4 {
+    font-style: normal;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
 .testimonial-author {
     margin-top: 8px;
     color: var(--secondary-color);
     font-weight: 600;
 }
 
+/* News section enhancements */
+.news-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.highlight-point {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.highlight-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.highlight-point p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.featured-news {
+    background: var(--card-bg);
+    border-color: var(--secondary-color);
+}
+
+.impact-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 8px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    line-height: 1;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--medium-text);
+    margin-top: 4px;
+}
+
+.main-quote {
+    background: rgba(26,26,26,0.8);
+    padding: 20px;
+    border-left: 4px solid var(--secondary-color);
+    margin: 20px 0;
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+}
+
 /* Reduce excessive vertical gaps between sections */
-.products + .catalogue-preview,
-.catalogue-preview + .testimonials,
-.testimonials + .about-section {
+.testimonials + .news,
+.news + .about-section {
     margin-top: -20px;
 }
 

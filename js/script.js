@@ -5,6 +5,31 @@ document.addEventListener('DOMContentLoaded', () => {
   ScrollEffects.init();
   Animations.init();
   Performance.init();
+  
+  // Force l'affichage des sections critiques
+  const ensureVisibility = () => {
+    const criticalSections = document.querySelectorAll('.features, .testimonials, .news, .feature-card, .testimonial-card');
+    criticalSections.forEach(section => {
+      section.style.opacity = '1';
+      section.style.visibility = 'visible';
+      section.style.display = 'block';
+      section.classList.remove('fade-in'); // Retire la classe problématique
+    });
+    
+    // Protection spéciale pour la grille des features
+    const featuresGrid = document.querySelector('.features-grid');
+    if (featuresGrid) {
+      featuresGrid.style.opacity = '1';
+      featuresGrid.style.visibility = 'visible';
+      featuresGrid.style.display = 'grid';
+    }
+  };
+  
+  // Forcer l'affichage immédiatement et après un délai
+  ensureVisibility();
+  setTimeout(ensureVisibility, 100);
+  setTimeout(ensureVisibility, 500);
+  setTimeout(ensureVisibility, 1000);
 
   // Accessibilité/label du panier: renommer pour plus d'immersion (icône seule visible)
   try {
@@ -184,8 +209,8 @@ const ScrollEffects = {
       observer.observe(element);
     });
 
-    // Ajouter la classe fade-in aux cartes
-    const cards = document.querySelectorAll('.feature-card, .product-category, .testimonial-card');
+    // Ajouter la classe fade-in aux cartes (sauf feature-card et testimonial-card pour débugger)
+    const cards = document.querySelectorAll('.product-category');
     cards.forEach((card, index) => {
       card.classList.add('fade-in');
       card.style.transitionDelay = `${index * 0.1}s`;
