@@ -1,10 +1,26 @@
+<?php
+/**
+ * Script de génération automatique des pages produits
+ * Génère toutes les pages depuis products-complete.json
+ */
+
+// Charger les données des produits
+$productsData = json_decode(file_get_contents(__DIR__ . '/data/products-complete.json'), true);
+
+if (!$productsData) {
+    die("Erreur : Impossible de charger les données des produits\n");
+}
+
+// Template de base pour les pages produits
+function generateProductPage($product) {
+    $template = <<<HTML
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triptyques Mystères | Geek&Dragon</title>
-    <meta name="description" content="3 triptyques tirés au sort + équipement + pièces de départ. Votre aventurier est immédiatement opérationnel !">
+    <title>{$product['name']} | Geek&Dragon</title>
+    <meta name="description" content="{$product['description']['short']}">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/product.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +38,7 @@
             <ul class="nav-menu">
                 <li><a href="index.php" class="nav-link">Accueil</a></li>
                 <li><a href="boutique.php" class="nav-link">Boutique</a></li>
-                <li><a href="boutique.php#triptychs" class="nav-link">📋 Triptyques Mystères</a></li>
+                <li><a href="boutique.php#{$product['category']}" class="nav-link">{$product['category_name']}</a></li>
                 <li><a href="index.php#contact" class="nav-link">Contact</a></li>
             </ul>
             <div class="nav-toggle">
@@ -42,9 +58,9 @@
                     <span>›</span>
                     <a href="boutique.php">Boutique</a>
                     <span>›</span>
-                    <a href="boutique.php#triptychs">📋 Triptyques Mystères</a>
+                    <a href="boutique.php#{$product['category']}">{$product['category_name']}</a>
                     <span>›</span>
-                    <span class="current">Triptyques Mystères</span>
+                    <span class="current">{$product['name']}</span>
                 </nav>
             </div>
         </section>
@@ -55,37 +71,61 @@
                 <div class="product-hero-content">
                     <div class="product-gallery">
                         <div class="main-image">
-                            <img src="/images/optimized-modern/webp/triptyque-fiche.webp" alt="Triptyques Mystères - Vue principale" id="mainProductImage">
+                            <img src="{$product['images']['main']}" alt="{$product['name']} - Vue principale" id="mainProductImage">
                             <div class="image-badges">
-                                <span class="badge mystery">Mystère</span>
-                                <span class="badge complete">Complet</span>
+HTML;
+
+    // Ajouter les badges
+    foreach ($product['badges'] as $badge) {
+        $badgeText = match($badge) {
+            'premium' => 'Premium',
+            'starter' => 'Starter',
+            'ready-to-play' => 'Prêt à jouer',
+            'advanced' => 'Avancé',
+            'exploration' => 'Exploration',
+            'mystery' => 'Mystère',
+            'complete' => 'Complet',
+            default => ucfirst($badge)
+        };
+        $template .= "\n                                <span class=\"badge {$badge}\">{$badgeText}</span>";
+    }
+
+    $template .= <<<HTML
+
                             </div>
                         </div>
                         <div class="thumbnail-gallery">
-                            <img src="/images/optimized-modern/webp/triptyque-fiche.webp" alt="Vue 1" class="thumbnail active" onclick="changeMainImage(this)">
-                            <img src="/images/optimized-modern/webp/drakaeide-airain-recto.webp" alt="Vue 2" class="thumbnail" onclick="changeMainImage(this)">
-                            <img src="/images/optimized-modern/webp/Barbare-Voie-du-Berserker_recto.webp" alt="Vue 3" class="thumbnail" onclick="changeMainImage(this)">
-                            <img src="/images/optimized-modern/webp/character-acolyte-fr-front.webp" alt="Vue 4" class="thumbnail" onclick="changeMainImage(this)">
+HTML;
+
+    // Ajouter les thumbnails
+    foreach ($product['images']['gallery'] as $index => $image) {
+        $activeClass = $index === 0 ? ' active' : '';
+        $altText = "Vue " . ($index + 1);
+        $template .= "\n                            <img src=\"{$image}\" alt=\"{$altText}\" class=\"thumbnail{$activeClass}\" onclick=\"changeMainImage(this)\">";
+    }
+
+    $template .= <<<HTML
+
                         </div>
                     </div>
 
                     <div class="product-info">
                         <div class="product-category">
-                            <span class="category-tag">📋 Triptyques Mystères</span>
-                            <span class="product-id">#GD-TM-001</span>
+                            <span class="category-tag">{$product['category_name']}</span>
+                            <span class="product-id">{$product['product_id']}</span>
                         </div>
                         
-                        <h1 class="product-title">Triptyques Mystères</h1>
-                        <p class="product-subtitle">Héros prêt à jouer</p>
+                        <h1 class="product-title">{$product['name']}</h1>
+                        <p class="product-subtitle">{$product['subtitle']}</p>
 
                         <div class="product-rating">
                             <div class="stars">★★★★★</div>
-                            <span class="rating-text">(0/5 - 0 avis)</span>
+                            <span class="rating-text">({$product['rating']['average']}/5 - {$product['rating']['total']} avis)</span>
                         </div>
 
                         <div class="product-pricing">
                             <div class="price-main">
-                                <span class="price">59.99$ <small>CAD</small></span>
+                                <span class="price">{$product['price']}$ <small>{$product['currency']}</small></span>
                                 <span class="price-note">Tout inclus</span>
                             </div>
                             <div class="payment-options">
@@ -97,33 +137,52 @@
                         <div class="product-highlights">
                             <h3>Points Forts</h3>
                             <ul>
-                                <li>🎲 3 triptyques tirés au sort (Classe, Espèce, Historique)</li>
-                                <li>🛡️ Équipement correspondant au paquetage</li>
-                                <li>💰 Pièces de départ incluses</li>
-                                <li>🚀 Prêt à jouer immédiatement</li>
-                                <li>🎯 Parfait pour one-shots et découverte</li>
+HTML;
+
+    // Ajouter les points forts
+    foreach ($product['highlights'] as $highlight) {
+        $template .= "\n                                <li>{$highlight}</li>";
+    }
+
+    $template .= <<<HTML
+
                             </ul>
                         </div>
 
                         
+HTML;
+
+    // Ajouter la configuration si elle existe
+    if (isset($product['configuration'])) {
+        $template .= <<<HTML
+
                         <div class="product-configuration">
-                            <h3>Choisissez votre langue :</h3>
+                            <h3>{$product['configuration']['label']}</h3>
                             <select id="product-variant" onchange="updatePrice()">
-                                <option value="fr" data-price="59.99">Français</option>
-                                <option value="en" data-price="59.99">English</option>
+HTML;
+        foreach ($product['configuration']['options'] as $option) {
+            $template .= "\n                                <option value=\"{$option['value']}\" data-price=\"{$option['price']}\">{$option['label']}</option>";
+        }
+        $template .= <<<HTML
+
                             </select>
                         </div>
+HTML;
+    }
+
+    $template .= <<<HTML
+
 
                         <div class="product-actions">
                             <button class="snipcart-add-item btn-primary"
-                                data-item-id="triptyque-aleatoire"
-                                data-item-price="59.99"
-                                data-item-url="/api/products/triptyque-aleatoire"
-                                data-item-name="Triptyques Mystères"
-                                data-item-description="3 triptyques tirés au sort + équipement + pièces de départ. Votre aventurier est immédiatement opérationnel !"
-                                data-item-image="/images/optimized-modern/webp/triptyque-fiche.webp"
-                                data-item-currency="CAD"
-                                data-item-categories="triptychs">
+                                data-item-id="{$product['id']}"
+                                data-item-price="{$product['price']}"
+                                data-item-url="/api/products/{$product['id']}"
+                                data-item-name="{$product['name']}"
+                                data-item-description="{$product['description']['short']}"
+                                data-item-image="{$product['images']['main']}"
+                                data-item-currency="{$product['currency']}"
+                                data-item-categories="{$product['category']}">
                                 Ajouter à l'inventaire
                             </button>
                             <button class="btn-wishlist" onclick="toggleWishlist()" title="Ajouter aux favoris">
@@ -133,13 +192,13 @@
 
                         <div class="shipping-info">
                             <div class="shipping-item">
-                                <strong>🚚 Expédition :</strong> 2-3 jours ouvrables
+                                <strong>🚚 Expédition :</strong> {$product['shipping']['time']}
                             </div>
                             <div class="shipping-item">
                                 <strong>📦 Livraison gratuite :</strong> Partout au Canada
                             </div>
                             <div class="shipping-item">
-                                <strong>↩️ Retours :</strong> 30 jours satisfait ou remboursé
+                                <strong>↩️ Retours :</strong> {$product['shipping']['returns']}
                             </div>
                         </div>
                     </div>
@@ -155,30 +214,40 @@
                         <button class="tab-btn active" onclick="switchTab('description')">Description</button>
                         <button class="tab-btn" onclick="switchTab('specifications')">Spécifications</button>
                         <button class="tab-btn" onclick="switchTab('usage')">Guide d'Usage</button>
-                        <button class="tab-btn" onclick="switchTab('reviews')">Avis (0)</button>
+                        <button class="tab-btn" onclick="switchTab('reviews')">Avis ({$product['rating']['total']})</button>
                     </div>
 
                     <div class="tab-content active" id="description">
-                        <h3>Trois triptyques, un héros clé en main</h3><p>Tire au sort <strong>1 Classe</strong>, <strong>1 Espèce</strong> et <strong>1 Historique</strong> pour forger une origine unique, puis joue immédiatement avec :</p><ul><li><strong>Cartes d'équipement assorties</strong> correspondant au paquetage.</li><li><strong>Pièces de départ</strong>.</li><li><strong>Compatibilité 5e 2024</strong></li></ul><p>Un bundle idéal pour des <em>one-shots</em>, des tables débutantes ou pour surprendre des joueurs vétérans.</p>
+                        {$product['description']['full']}
                     </div>
 
                     <div class="tab-content" id="specifications">
                         <h3>Spécifications techniques</h3>
                         <ul>
-                            <li><strong>Contenu</strong>: 3 triptyques + équipement + pièces</li>
-                            <li><strong>Tirage</strong>: Aléatoire garanti</li>
-                            <li><strong>Compatibilité</strong>: D&D 5e 2024</li>
-                            <li><strong>Usage</strong>: One-shots, découverte, surprise</li>
+HTML;
+
+    // Ajouter les spécifications
+    foreach ($product['specifications'] as $spec) {
+        $template .= "\n                            <li><strong>{$spec['label']}</strong>: {$spec['value']}</li>";
+    }
+
+    $template .= <<<HTML
+
                         </ul>
                     </div>
 
                     <div class="tab-content" id="usage">
                         <h3>Guide d'usage</h3>
                         <ul>
-                            <li>Parfait pour initier de nouveaux joueurs</li>
-                            <li>Idéal pour des parties improvisées</li>
-                            <li>Excellent pour découvrir de nouvelles combinaisons</li>
-                            <li>Simplifie la création de personnage</li>
+HTML;
+
+    // Ajouter les conseils d'usage
+    foreach ($product['usage_tips'] as $tip) {
+        $template .= "\n                            <li>{$tip}</li>";
+    }
+
+    $template .= <<<HTML
+
                         </ul>
                     </div>
 
@@ -195,33 +264,26 @@
                         <!-- Statistiques des avis -->
                         <div class="reviews-summary">
                             <div class="rating-overview">
-                                <div class="rating-score">0.0</div>
+                                <div class="rating-score">{$product['rating']['average']}.0</div>
                                 <div class="rating-bars">
-                                    <div class="rating-bar" data-rating="5">
-                                        <span>5★</span>
-                                        <div class="bar"><div class="fill" style="width: 0%"></div></div>
-                                        <span class="count">0</span>
+HTML;
+
+    // Générer les barres de notation
+    for ($i = 5; $i >= 1; $i--) {
+        $count = $product['rating']['distribution'][$i] ?? 0;
+        $percentage = $product['rating']['total'] > 0 ? ($count / $product['rating']['total']) * 100 : 0;
+        $template .= <<<HTML
+
+                                    <div class="rating-bar" data-rating="{$i}">
+                                        <span>{$i}★</span>
+                                        <div class="bar"><div class="fill" style="width: {$percentage}%"></div></div>
+                                        <span class="count">{$count}</span>
                                     </div>
-                                    <div class="rating-bar" data-rating="4">
-                                        <span>4★</span>
-                                        <div class="bar"><div class="fill" style="width: 0%"></div></div>
-                                        <span class="count">0</span>
-                                    </div>
-                                    <div class="rating-bar" data-rating="3">
-                                        <span>3★</span>
-                                        <div class="bar"><div class="fill" style="width: 0%"></div></div>
-                                        <span class="count">0</span>
-                                    </div>
-                                    <div class="rating-bar" data-rating="2">
-                                        <span>2★</span>
-                                        <div class="bar"><div class="fill" style="width: 0%"></div></div>
-                                        <span class="count">0</span>
-                                    </div>
-                                    <div class="rating-bar" data-rating="1">
-                                        <span>1★</span>
-                                        <div class="bar"><div class="fill" style="width: 0%"></div></div>
-                                        <span class="count">0</span>
-                                    </div>
+HTML;
+    }
+
+    $template .= <<<HTML
+
                                 </div>
                             </div>
                         </div>
@@ -283,28 +345,34 @@
                 <h2>Produits Complémentaires</h2>
                 <div class="products-grid">
                     
+HTML;
+
+    // Ajouter les produits liés
+    if (isset($product['related_products'])) {
+        global $productsData;
+        foreach ($product['related_products'] as $relatedId) {
+            if (isset($productsData[$relatedId])) {
+                $related = $productsData[$relatedId];
+                $template .= <<<HTML
+
                     <div class="product-card">
                         <div class="product-image">
-                            <img src="/images/optimized-modern/webp/arme-recto.webp" alt="Arsenal de l'Aventurier">
+                            <img src="{$related['images']['main']}" alt="{$related['name']}">
                         </div>
                         <div class="product-content">
-                            <h3>Arsenal de l'Aventurier</h3>
-                            <p>182 cartes d'équipement illustrées</p>
-                            <div class="price">49.99$ <small>CAD</small></div>
-                            <a href="produit-arsenal-aventurier.php" class="btn-secondary">Découvrir</a>
+                            <h3>{$related['name']}</h3>
+                            <p>{$related['subtitle']}</p>
+                            <div class="price">{$related['price']}$ <small>{$related['currency']}</small></div>
+                            <a href="produit-{$related['slug']}.php" class="btn-secondary">Découvrir</a>
                         </div>
                     </div>
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="/images/optimized-modern/webp/Vagabon.webp" alt="L'Offrande du Voyageur">
-                        </div>
-                        <div class="product-content">
-                            <h3>L'Offrande du Voyageur</h3>
-                            <p>Starter pack immersif pour débuter votre aventure tactile</p>
-                            <div class="price">60$ <small>CAD</small></div>
-                            <a href="produit-offrande-voyageur.php" class="btn-secondary">Découvrir</a>
-                        </div>
-                    </div>
+HTML;
+            }
+        }
+    }
+
+    $template .= <<<HTML
+
                 </div>
             </div>
         </section>
@@ -351,3 +419,19 @@
     <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" style="display:none;"></div>
 </body>
 </html>
+HTML;
+
+    return $template;
+}
+
+// Générer toutes les pages
+foreach ($productsData as $productId => $product) {
+    $filename = "produit-{$product['slug']}.php";
+    $content = generateProductPage($product);
+    
+    file_put_contents(__DIR__ . '/' . $filename, $content);
+    echo "✅ Généré : {$filename}\n";
+}
+
+echo "\n🎉 Toutes les pages produits ont été générées avec les bonnes images !\n";
+?>

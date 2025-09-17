@@ -32,7 +32,8 @@
       "Bash(del:*)",
       "Bash(npm install:*)",
       "Bash(npm audit:*)",
-      "WebFetch(domain:geekndragon.com)"
+      "WebFetch(domain:geekndragon.com)",
+      "Read(H:\\GeeknDragon\\oldSiteWeb\\data/**)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

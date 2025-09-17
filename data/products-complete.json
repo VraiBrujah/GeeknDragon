@@ -1,0 +1,536 @@
+{
+    "lot10": {
+        "id": "lot10",
+        "slug": "offrande-voyageur",
+        "name": "L'Offrande du Voyageur",
+        "name_en": "The Traveler's Offering",
+        "subtitle": "Starter pack immersif pour débuter votre aventure tactile",
+        "subtitle_en": "Immersive starter pack to begin your tactical adventure",
+        "price": 60,
+        "currency": "CAD",
+        "category": "coins",
+        "category_name": "💰 Pièces Métalliques",
+        "product_id": "#GD-OV-001",
+        "rating": {
+            "average": 0,
+            "total": 0,
+            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+        },
+        "badges": ["starter", "premium"],
+        "images": {
+            "main": "/images/optimized-modern/webp/Vagabon.webp",
+            "gallery": [
+                "/images/optimized-modern/webp/Vagabon.webp",
+                "/images/optimized-modern/webp/VagabonPlast.webp",
+                "/images/optimized-modern/webp/coin-copper-1.webp",
+                "/images/optimized-modern/webp/coin-silver-1.webp"
+            ]
+        },
+        "description": {
+            "short": "10 pièces métalliques authentiques (cuivre, argent, électrum, or, platine) avec 5 options de multiplicateurs. Point d'entrée idéal pour l'immersion D&D.",
+            "full": "<h3>L'Immersion Tactile Commence Ici</h3><p>L'Offrande du Voyageur représente votre premier pas vers une immersion totale dans vos parties de Donjons & Dragons. Ce starter pack soigneusement conçu contient tout ce dont vous avez besoin pour découvrir la magie des accessoires physiques.</p><h4>Contenu de l'Offrande</h4><ul><li><strong>2 pièces en cuivre véritable</strong> - L'essence de la monnaie du peuple</li><li><strong>2 pièces en argent authentique</strong> - La devise des marchands</li><li><strong>2 pièces en électrum noble</strong> - L'alliage mystérieux des sages</li><li><strong>2 pièces en or pur</strong> - La richesse des nobles</li><li><strong>2 pièces en platine rare</strong> - La fortune des rois</li></ul><h4>L'Art du Multiplicateur</h4><p>Choisissez parmi 5 multiplicateurs qui transforment vos pièces selon vos besoins de jeu :</p><ul><li><strong>x1 (Brillant)</strong> : Finition miroir sans gravure, aspect \"neuf\" pour débuter l'aventure</li><li><strong>x10 à x10000 (Mate gravé)</strong> : Gravure précise du multiplicateur, finition légèrement vieillie pour l'authenticité</li></ul><h4>Pourquoi Choisir l'Offrande ?</h4><p>Ce pack a été spécialement conçu pour les maîtres de jeu et joueurs qui souhaitent découvrir l'impact transformateur des accessoires physiques sans investissement majeur. Chaque pièce est fabriquée selon nos standards les plus élevés, vous garantissant une expérience premium dès votre première utilisation.</p>"
+        },
+        "highlights": [
+            "✨ 10 pièces métalliques authentiques",
+            "🏆 5 métaux nobles (cuivre, argent, électrum, or, platine)",
+            "⚖️ 5 multiplicateurs au choix",
+            "🎯 Point d'entrée idéal pour l'immersion D&D",
+            "🎁 Finitions variables selon le multiplicateur"
+        ],
+        "specifications": [
+            {"label": "Matériaux", "value": "cuivre, argent, électrum, or et platine"},
+            {"label": "Dimensions", "value": "diamètre 25 mm, épaisseur 2.5 mm"},
+            {"label": "Poids total", "value": "environ 45 g"},
+            {"label": "Emballage", "value": "coffret en bois gravé"}
+        ],
+        "usage_tips": [
+            "Récompensez vos joueurs avec de vraies pièces",
+            "Utilisez-les pour gérer la trésorerie en jeu",
+            "Ajoutez une touche tactile à vos négociations"
+        ],
+        "configuration": {
+            "type": "dropdown",
+            "label": "Choisissez votre multiplicateur :",
+            "options": [
+                {"value": "x1", "label": "x1 - Finition brillante, sans gravure (60$ CAD)", "price": 60, "description": "Finition brillante sans gravure pour un aspect \"neuf\" authentique."},
+                {"value": "x10", "label": "x10 - Gravure nette, finition mate (60$ CAD)", "price": 60, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
+                {"value": "x100", "label": "x100 - Gravure nette, finition mate (60$ CAD)", "price": 60, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
+                {"value": "x1000", "label": "x1000 - Gravure nette, finition mate (60$ CAD)", "price": 60, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
+                {"value": "x10000", "label": "x10000 - Gravure nette, finition mate (60$ CAD)", "price": 60, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."}
+            ]
+        },
+        "snipcart": {
+            "weight": 150,
+            "shipping_category": "coins"
+        },
+        "related_products": ["lot25", "pack-182-arsenal-aventurier"],
+        "shipping": {
+            "time": "2-3 jours ouvrables",
+            "free_canada": true,
+            "returns": "30 jours satisfait ou remboursé"
+        }
+    },
+    "lot25": {
+        "id": "lot25",
+        "slug": "monnaie-cinq-royaumes",
+        "name": "La Monnaie des Cinq Royaumes",
+        "name_en": "Currency of the Five Realms",
+        "subtitle": "Collection complète sans doublon",
+        "subtitle_en": "Complete collection without duplicates",
+        "price": 145,
+        "currency": "CAD",
+        "category": "coins",
+        "category_name": "💰 Pièces Métalliques",
+        "product_id": "#GD-L25-001",
+        "rating": {
+            "average": 0,
+            "total": 0,
+            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+        },
+        "badges": ["premium"],
+        "images": {
+            "main": "/images/optimized-modern/webp/Seignieur.webp",
+            "gallery": [
+                "/images/optimized-modern/webp/Seignieur.webp",
+                "/images/optimized-modern/webp/Seignieurplast.webp",
+                "/images/optimized-modern/webp/x1f2.webp",
+                "/images/optimized-modern/webp/x1p2.webp"
+            ]
+        },
+        "description": {
+            "short": "25 pièces uniques (5 métaux × 5 multiplicateurs), zéro doublon. Immersion premium pour D&D.",
+            "full": "<h3>Collection complète sans compromis</h3><p><strong>5 métaux</strong> (cuivre, argent, électrum, or, platine) déclinés en <strong>5 multiplicateurs</strong> (unitaire, x10, x100, x1 000, x10 000). Aucun doublon : 25 modèles uniques pour une immersion maximale.</p>"
+        },
+        "highlights": [
+            "🏆 25 pièces uniques - aucun doublon",
+            "⚖️ 5 métaux × 5 multiplicateurs = variété maximale",
+            "✨ Finitions variables selon le multiplicateur",
+            "🎯 Solution complète pour tous les besoins de jeu",
+            "📦 Coffret de présentation inclus"
+        ],
+        "specifications": [
+            {"label": "Contenu", "value": "25 pièces uniques — aucun doublon"},
+            {"label": "Finitions", "value": "Gravure nette sur variantes multipliées"},
+            {"label": "Emballage", "value": "Coffret de présentation inclus"}
+        ],
+        "usage_tips": [
+            "Idéal pour tables haut niveau et trésors épiques",
+            "Parfait pour matérialiser la richesse et les échanges"
+        ],
+        "snipcart": {
+            "weight": 350,
+            "shipping_category": "coins"
+        },
+        "related_products": ["lot10", "lot50-essence"],
+        "shipping": {
+            "time": "2-3 jours ouvrables",
+            "free_canada": true,
+            "returns": "30 jours satisfait ou remboursé"
+        }
+    },
+    "lot50-essence": {
+        "id": "lot50-essence",
+        "slug": "essence-marchand",
+        "name": "L'Essence du Marchand",
+        "name_en": "Essence of the Merchant",
+        "subtitle": "Double variété pour richesse",
+        "subtitle_en": "Double variety for wealth",
+        "price": 275,
+        "currency": "CAD",
+        "category": "coins",
+        "category_name": "💰 Pièces Métalliques",
+        "product_id": "#GD-EM-001",
+        "rating": {
+            "average": 0,
+            "total": 0,
+            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+        },
+        "badges": ["premium"],
+        "images": {
+            "main": "/images/optimized-modern/webp/Royaume.webp",
+            "gallery": [
+                "/images/optimized-modern/webp/Royaume.webp",
+                "/images/optimized-modern/webp/RoyaumePlast.webp",
+                "/images/optimized-modern/webp/coin-copper-1.webp",
+                "/images/optimized-modern/webp/coin-silver-1.webp"
+            ]
+        },
+        "description": {
+            "short": "50 pièces (2 exemplaires de chacun des 25 modèles), version \"double\" de la Monnaie des Cinq Royaumes.",
+            "full": "<h3>50 pièces, double variété</h3><p><strong>2 exemplaires</strong> de chacun des <strong>25 modèles</strong> de la <em>Monnaie des Cinq Royaumes</em> : total <strong>50 pièces</strong>. Unitaire (brillant) et x10/x100/x1 000/x10 000 (gravure mate).</p>"
+        },
+        "highlights": [
+            "🏆 50 pièces, deux de chaque modèle",
+            "⚖️ Version \"double\" de la Monnaie des Cinq Royaumes",
+            "✨ Finitions variables selon le multiplicateur",
+            "👥 Pour groupes nombreux ou campagnes riches",
+            "📦 Coffret de présentation renforcé"
+        ],
+        "specifications": [
+            {"label": "Contenu", "value": "50 pièces (2 × 25 modèles uniques)"},
+            {"label": "Finitions", "value": "Gravure nette sur variantes multipliées"},
+            {"label": "Emballage", "value": "Coffret de présentation renforcé"}
+        ],
+        "usage_tips": [
+            "Idéal pour groupes nombreux",
+            "Parfait pour campagnes à hautes richesses",
+            "Excellent pour distributions de trésors"
+        ],
+        "snipcart": {
+            "weight": 700,
+            "shipping_category": "coins"
+        },
+        "related_products": ["lot25", "lot50-tresorerie"],
+        "shipping": {
+            "time": "2-3 jours ouvrables",
+            "free_canada": true,
+            "returns": "30 jours satisfait ou remboursé"
+        }
+    },
+    "lot50-tresorerie": {
+        "id": "lot50-tresorerie",
+        "slug": "tresorerie-seigneur",
+        "name": "La Trésorerie du Seigneur",
+        "name_en": "The Lord's Treasury",
+        "subtitle": "Opulence uniforme",
+        "subtitle_en": "Uniform opulence",
+        "price": 275,
+        "currency": "CAD",
+        "category": "coins",
+        "category_name": "💰 Pièces Métalliques",
+        "product_id": "#GD-TS-001",
+        "rating": {
+            "average": 0,
+            "total": 0,
+            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+        },
+        "badges": ["premium"],
+        "images": {
+            "main": "/images/optimized-modern/webp/Essence.webp",
+            "gallery": [
+                "/images/optimized-modern/webp/Essence.webp",
+                "/images/optimized-modern/webp/EssencePlast.webp",
+                "/images/optimized-modern/webp/coin-copper-1.webp",
+                "/images/optimized-modern/webp/coin-silver-1.webp"
+            ]
+        },
+        "description": {
+            "short": "50 pièces (10 de chaque métal : cuivre, argent, électrum, or, platine) avec un multiplicateur uniforme choisi.",
+            "full": "<h3>50 pièces pour l'opulence</h3><p><strong>10 pièces de chaque métal</strong> (cuivre, argent, électrum, or, platine) appliquant <strong>le même multiplicateur</strong> choisi à l'achat : <em>unitaire</em> par défaut (brillant) ou <strong>x10 / x100 / x1 000 / x10 000</strong> (gravure mate).</p>"
+        },
+        "highlights": [
+            "🏆 50 pièces d'opulence",
+            "⚖️ 10 pièces de chaque métal noble",
+            "🎯 Multiplicateur uniforme pour simplifier les calculs",
+            "✨ Trésor somptueux avec finition cohérente",
+            "📦 Coffret seigneurial inclus"
+        ],
+        "specifications": [
+            {"label": "Contenu", "value": "50 pièces (10 × 5 métaux)"},
+            {"label": "Multiplicateur", "value": "Uniforme selon votre choix"},
+            {"label": "Emballage", "value": "Coffret seigneurial"}
+        ],
+        "usage_tips": [
+            "Parfait pour les trésors royaux",
+            "Simplifie les calculs avec un multiplicateur unique",
+            "Idéal pour les récompenses somptueuses"
+        ],
+        "configuration": {
+            "type": "dropdown",
+            "label": "Choisissez votre multiplicateur :",
+            "options": [
+                {"value": "x1", "label": "x1 - Finition brillante, sans gravure (275$ CAD)", "price": 275, "description": "Finition brillante sans gravure pour un aspect \"neuf\" authentique."},
+                {"value": "x10", "label": "x10 - Gravure nette, finition mate (275$ CAD)", "price": 275, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
+                {"value": "x100", "label": "x100 - Gravure nette, finition mate (275$ CAD)", "price": 275, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
+                {"value": "x1000", "label": "x1000 - Gravure nette, finition mate (275$ CAD)", "price": 275, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
+                {"value": "x10000", "label": "x10000 - Gravure nette, finition mate (275$ CAD)", "price": 275, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."}
+            ]
+        },
+        "snipcart": {
+            "weight": 700,
+            "shipping_category": "coins"
+        },
+        "related_products": ["lot50-essence", "lot25"],
+        "shipping": {
+            "time": "2-3 jours ouvrables",
+            "free_canada": true,
+            "returns": "30 jours satisfait ou remboursé"
+        }
+    },
+    "pack-182-arsenal-aventurier": {
+        "id": "pack-182-arsenal-aventurier",
+        "slug": "arsenal-aventurier",
+        "name": "Arsenal de l'Aventurier",
+        "name_en": "Adventurer's Arsenal",
+        "subtitle": "182 cartes d'équipement illustrées",
+        "subtitle_en": "182 illustrated equipment cards",
+        "price": 49.99,
+        "currency": "CAD",
+        "category": "cards",
+        "category_name": "🃏 Cartes d'Équipement",
+        "product_id": "#GD-AA-001",
+        "rating": {
+            "average": 0,
+            "total": 0,
+            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+        },
+        "badges": ["ready-to-play"],
+        "images": {
+            "main": "/images/optimized-modern/webp/arme-recto.webp",
+            "gallery": [
+                "/images/optimized-modern/webp/arme-recto.webp",
+                "/images/optimized-modern/webp/arme-verso.webp",
+                "/images/optimized-modern/webp/greatclub-recto.webp",
+                "/images/optimized-modern/webp/armure-recto.webp"
+            ]
+        },
+        "description": {
+            "short": "182 cartes illustrées d'armes, armures et équipement. Remplace la fouille dans le manuel pour l'équipement classique.",
+            "full": "<h3>Armes • Armures • Équipement</h3><p>Un lot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées.</p><ul><li><strong>Armes</strong> : mêlée & distance.</li><li><strong>Armures & boucliers</strong> : légères, intermédiaires et lourdes.</li><li><strong>Équipement</strong> : cordes, torches, rations, outils de terrain, etc.</li></ul><p><em>Idéal pour la table : pioche, pose, échange<br>fini la fouille dans le manuel.</em></p>"
+        },
+        "highlights": [
+            "🗡️ Armes mêlée & distance (classiques et exotiques)",
+            "🛡️ Armures & boucliers (légères, intermédiaires, lourdes)",
+            "🎒 Équipement d'aventure (cordes, torches, rations)",
+            "🎨 Illustrations uniques pour chaque carte",
+            "⚡ Parties plus fluides - fini la recherche dans les livres"
+        ],
+        "specifications": [
+            {"label": "Contenu", "value": "182 cartes illustrées"},
+            {"label": "Types", "value": "Armes, armures, équipement"},
+            {"label": "Compatibilité", "value": "D&D 5e 2024"},
+            {"label": "Qualité", "value": "Cartes professionnelles plastifiées"}
+        ],
+        "usage_tips": [
+            "Distribuez les cartes selon les achats des joueurs",
+            "Utilisez pour la gestion d'inventaire visuelle",
+            "Parfait pour les échanges entre personnages",
+            "Idéal pour équiper rapidement un groupe"
+        ],
+        "configuration": {
+            "type": "dropdown",
+            "label": "Choisissez votre langue :",
+            "options": [
+                {"value": "fr", "label": "Français", "price": 49.99, "description": "Version française complète avec illustrations."},
+                {"value": "en", "label": "English", "price": 49.99, "description": "Complete English version with illustrations."}
+            ]
+        },
+        "snipcart": {
+            "weight": 300,
+            "shipping_category": "cards"
+        },
+        "related_products": ["pack-182-butins-ingenieries", "pack-182-routes-services"],
+        "shipping": {
+            "time": "2-3 jours ouvrables",
+            "free_canada": true,
+            "returns": "30 jours satisfait ou remboursé"
+        }
+    },
+    "pack-182-butins-ingenieries": {
+        "id": "pack-182-butins-ingenieries",
+        "slug": "butins-ingenieries",
+        "name": "Butins & Ingénieries",
+        "name_en": "Loot & Engineering",
+        "subtitle": "182 cartes pour campagnes audacieuses",
+        "subtitle_en": "182 cards for bold campaigns",
+        "price": 36.99,
+        "currency": "CAD",
+        "category": "cards",
+        "category_name": "🃏 Cartes d'Équipement",
+        "product_id": "#GD-BI-001",
+        "rating": {
+            "average": 0,
+            "total": 0,
+            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+        },
+        "badges": ["advanced"],
+        "images": {
+            "main": "/images/optimized-modern/webp/alexandrite-recto.webp",
+            "gallery": [
+                "/images/optimized-modern/webp/alexandrite-recto.webp",
+                "/images/optimized-modern/webp/bombe-recto.webp",
+                "/images/optimized-modern/webp/chaevre-recto.webp",
+                "/images/optimized-modern/webp/mataerield-alchimiste-recto.webp"
+            ]
+        },
+        "description": {
+            "short": "182 cartes de butin, explosifs, marchandises et outils pour campagnes qui osent sortir du médiéval pur.",
+            "full": "<h3>Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils</h3><p>Pour des campagnes qui osent : trésors variés, matériel instable, techno‑reliques et les indispensables de l'artisan.</p><ul><li><strong>Butin</strong> : gemmes, objets curieux, artefacts mineurs, reliques.</li><li><strong>Explosifs & armes modernes/futuristes</strong> : grenades, charges, armes à feu & à énergie.</li><li><strong>Marchandises</strong> : denrées, tissus, minerais.</li><li><strong>Outils</strong> : artisanats, crochetage, alchimie légère, kits spéciaux.</li></ul><p><em>Injecte de la variété et des choix tactiques<br>du troc de marché au braquage high‑fantasy.</em></p>"
+        },
+        "highlights": [
+            "💎 Butin varié (gemmes, artefacts, reliques)",
+            "💥 Explosifs & armes modernes/futuristes",
+            "📦 Marchandises de commerce",
+            "🔧 Outils d'artisanat et kits spéciaux",
+            "🎯 Parfait pour campagnes non-conventionnelles"
+        ],
+        "specifications": [
+            {"label": "Contenu", "value": "182 cartes illustrées"},
+            {"label": "Types", "value": "Butin, explosifs, marchandises, outils"},
+            {"label": "Style", "value": "Moderne/futuriste compatible fantasy"},
+            {"label": "Qualité", "value": "Cartes professionnelles plastifiées"}
+        ],
+        "usage_tips": [
+            "Idéal pour campagnes steampunk ou technofantasy",
+            "Parfait pour diversifier les récompenses",
+            "Excellent pour les scenarios de commerce",
+            "Ajoute des options tactiques innovantes"
+        ],
+        "configuration": {
+            "type": "dropdown",
+            "label": "Choisissez votre langue :",
+            "options": [
+                {"value": "fr", "label": "Français", "price": 36.99, "description": "Version française complète avec illustrations."},
+                {"value": "en", "label": "English", "price": 36.99, "description": "Complete English version with illustrations."}
+            ]
+        },
+        "snipcart": {
+            "weight": 300,
+            "shipping_category": "cards"
+        },
+        "related_products": ["pack-182-arsenal-aventurier", "pack-182-routes-services"],
+        "shipping": {
+            "time": "2-3 jours ouvrables",
+            "free_canada": true,
+            "returns": "30 jours satisfait ou remboursé"
+        }
+    },
+    "pack-182-routes-services": {
+        "id": "pack-182-routes-services",
+        "slug": "routes-services",
+        "name": "Routes & Services",
+        "name_en": "Roads & Services",
+        "subtitle": "182 cartes pour exploration et voyage",
+        "subtitle_en": "182 cards for exploration and travel",
+        "price": 34.99,
+        "currency": "CAD",
+        "category": "cards",
+        "category_name": "🃏 Cartes d'Équipement",
+        "product_id": "#GD-RS-001",
+        "rating": {
+            "average": 0,
+            "total": 0,
+            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+        },
+        "badges": ["exploration"],
+        "images": {
+            "main": "/images/optimized-modern/webp/sac-aa-dos-recto.webp",
+            "gallery": [
+                "/images/optimized-modern/webp/sac-aa-dos-recto.webp",
+                "/images/optimized-modern/webp/biaere-chope-recto.webp",
+                "/images/optimized-modern/webp/vaisseau-aaerien-recto.webp",
+                "/images/optimized-modern/webp/sang-d-assassin-recto.webp"
+            ]
+        },
+        "description": {
+            "short": "182 cartes de paquetages, services, véhicules et poisons. Parfait pour campagnes orientées exploration, voyage et intrigue.",
+            "full": "<h3>Paquetages • Services • Véhicules • Poisons</h3><p>Tout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque avec des cartes claires et pratiques.</p><ul><li><strong>Paquetages</strong> : <em>artiste, cambrioleur, diplomate, ecclésiastique, érudit, explorateur, exploration souterraine</em>.</li><li><strong>Services</strong> : hébergements, soins, transport, passeurs, mercenaires.</li><li><strong>Véhicules</strong> : terrestres, marins, animaux de bât.</li><li><strong>Poison</strong> : effets et rareté.</li></ul><p><em>Parfait pour les campagnes orientées exploration, voyage et intrigue.</em></p>"
+        },
+        "highlights": [
+            "🎒 Paquetages thématiques (artiste, cambrioleur, diplomate...)",
+            "🏨 Services (hébergement, soins, transport)",
+            "🚢 Véhicules (terrestres, marins, animaux)",
+            "☠️ Poisons avec effets et rareté",
+            "🗺️ Parfait pour campagnes d'exploration"
+        ],
+        "specifications": [
+            {"label": "Contenu", "value": "182 cartes illustrées"},
+            {"label": "Types", "value": "Paquetages, services, véhicules, poisons"},
+            {"label": "Focus", "value": "Exploration, voyage, intrigue"},
+            {"label": "Qualité", "value": "Cartes professionnelles plastifiées"}
+        ],
+        "usage_tips": [
+            "Gérez les voyages et l'exploration visuellement",
+            "Facilitez les interactions avec les PNJ",
+            "Organisez les services disponibles en ville",
+            "Ajoutez du réalisme aux déplacements"
+        ],
+        "configuration": {
+            "type": "dropdown",
+            "label": "Choisissez votre langue :",
+            "options": [
+                {"value": "fr", "label": "Français", "price": 34.99, "description": "Version française complète avec illustrations."},
+                {"value": "en", "label": "English", "price": 34.99, "description": "Complete English version with illustrations."}
+            ]
+        },
+        "snipcart": {
+            "weight": 300,
+            "shipping_category": "cards"
+        },
+        "related_products": ["pack-182-arsenal-aventurier", "pack-182-butins-ingenieries"],
+        "shipping": {
+            "time": "2-3 jours ouvrables",
+            "free_canada": true,
+            "returns": "30 jours satisfait ou remboursé"
+        }
+    },
+    "triptyque-aleatoire": {
+        "id": "triptyque-aleatoire",
+        "slug": "triptyques-mysteres",
+        "name": "Triptyques Mystères",
+        "name_en": "Mystery Triptychs",
+        "subtitle": "Héros prêt à jouer",
+        "subtitle_en": "Ready-to-play hero",
+        "price": 59.99,
+        "currency": "CAD",
+        "category": "triptychs",
+        "category_name": "📋 Triptyques Mystères",
+        "product_id": "#GD-TM-001",
+        "rating": {
+            "average": 0,
+            "total": 0,
+            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+        },
+        "badges": ["mystery", "complete"],
+        "images": {
+            "main": "/images/optimized-modern/webp/triptyque-fiche.webp",
+            "gallery": [
+                "/images/optimized-modern/webp/triptyque-fiche.webp",
+                "/images/optimized-modern/webp/drakaeide-airain-recto.webp",
+                "/images/optimized-modern/webp/Barbare-Voie-du-Berserker_recto.webp",
+                "/images/optimized-modern/webp/character-acolyte-fr-front.webp"
+            ]
+        },
+        "description": {
+            "short": "3 triptyques tirés au sort + équipement + pièces de départ. Votre aventurier est immédiatement opérationnel !",
+            "full": "<h3>Trois triptyques, un héros clé en main</h3><p>Tire au sort <strong>1 Classe</strong>, <strong>1 Espèce</strong> et <strong>1 Historique</strong> pour forger une origine unique, puis joue immédiatement avec :</p><ul><li><strong>Cartes d'équipement assorties</strong> correspondant au paquetage.</li><li><strong>Pièces de départ</strong>.</li><li><strong>Compatibilité 5e 2024</strong></li></ul><p>Un bundle idéal pour des <em>one-shots</em>, des tables débutantes ou pour surprendre des joueurs vétérans.</p>"
+        },
+        "highlights": [
+            "🎲 3 triptyques tirés au sort (Classe, Espèce, Historique)",
+            "🛡️ Équipement correspondant au paquetage",
+            "💰 Pièces de départ incluses",
+            "🚀 Prêt à jouer immédiatement",
+            "🎯 Parfait pour one-shots et découverte"
+        ],
+        "specifications": [
+            {"label": "Contenu", "value": "3 triptyques + équipement + pièces"},
+            {"label": "Tirage", "value": "Aléatoire garanti"},
+            {"label": "Compatibilité", "value": "D&D 5e 2024"},
+            {"label": "Usage", "value": "One-shots, découverte, surprise"}
+        ],
+        "usage_tips": [
+            "Parfait pour initier de nouveaux joueurs",
+            "Idéal pour des parties improvisées",
+            "Excellent pour découvrir de nouvelles combinaisons",
+            "Simplifie la création de personnage"
+        ],
+        "configuration": {
+            "type": "dropdown",
+            "label": "Choisissez votre langue :",
+            "options": [
+                {"value": "fr", "label": "Français", "price": 59.99, "description": "Version française complète avec triptyques."},
+                {"value": "en", "label": "English", "price": 59.99, "description": "Complete English version with triptychs."}
+            ]
+        },
+        "snipcart": {
+            "weight": 200,
+            "shipping_category": "triptychs"
+        },
+        "related_products": ["pack-182-arsenal-aventurier", "lot10"],
+        "shipping": {
+            "time": "2-3 jours ouvrables",
+            "free_canada": true,
+            "returns": "30 jours satisfait ou remboursé"
+        }
+    }
+}
