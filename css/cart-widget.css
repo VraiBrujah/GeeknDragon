@@ -13,11 +13,11 @@
 .cart-toggle {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: rgba(212, 175, 55, 0.1);
     border: 2px solid var(--secondary-color, #d4af37);
     color: var(--secondary-color, #d4af37);
-    padding: 10px 16px;
+    padding: 8px 12px;
     border-radius: 25px;
     font-family: 'Cinzel', serif;
     font-weight: 600;
@@ -42,19 +42,23 @@
 }
 
 .cart-icon {
-    font-size: 1.2rem;
+    /* Remplacé par une icône image (sac à dos) */
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    background: url('../images/backpack.webp') center/contain no-repeat;
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
-    transition: all 0.3s ease;
+    transition: transform 0.2s ease;
+    font-size: 0; /* masque tout éventuel texte/emoji */
+    color: transparent;
 }
 
 .cart-toggle:hover .cart-icon {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.08) rotate(4deg);
 }
 
-.cart-text {
-    font-size: 0.85rem;
-    font-weight: 700;
-}
+/* Masquer le libellé pour un rendu plus immersif (icône seule) */
+.cart-text { display: none; }
 
 .cart-count {
     background: var(--dragon-red, #dc143c);

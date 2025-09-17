@@ -5,6 +5,66 @@ document.addEventListener('DOMContentLoaded', () => {
   ScrollEffects.init();
   Animations.init();
   Performance.init();
+
+  // Accessibilité/label du panier: renommer pour plus d'immersion (icône seule visible)
+  try {
+    const cartBtn = document.getElementById('gd-cart-toggle-widget');
+    if (cartBtn) {
+      cartBtn.setAttribute('aria-label', "Ouvrir l'inventaire");
+      const txt = cartBtn.querySelector('.cart-text');
+      if (txt) txt.remove();
+
+      // Ouvrir Snipcart si disponible, sinon fallback panier custom s'il existe
+      cartBtn.addEventListener('click', (e) => {
+        // Si Snipcart est prêt
+        if (window.Snipcart && window.Snipcart.api) {
+          // v3: theme.openCart() ou cart.open()
+          if (window.Snipcart.api.theme && typeof window.Snipcart.api.theme.openCart === 'function') {
+            window.Snipcart.api.theme.openCart();
+          } else if (window.Snipcart.api.cart && typeof window.Snipcart.api.cart.open === 'function') {
+            window.Snipcart.api.cart.open();
+          }
+          return;
+        }
+
+        // Fallback: panier custom si présent
+        if (window.gdCart && typeof window.gdCart.toggle === 'function') {
+          window.gdCart.toggle();
+        }
+      }, { capture: true });
+    }
+  } catch (_) {}
+
+  // Harmoniser la terminologie Snipcart => "Inventaire"
+  try {
+    const applyInventoryTerms = (root = document) => {
+      const sel = '.snipcart, [class*="snipcart-"]';
+      const scope = root.querySelector ? root : document;
+      const nodes = scope.querySelectorAll ? scope.querySelectorAll(sel) : [];
+      nodes.forEach((n) => {
+        // Remplace quelques occurrences visibles
+        if (n.textContent && n.textContent.includes("Sac d'Aventurier")) {
+          n.textContent = n.textContent.replace("Sac d'Aventurier", 'Inventaire');
+        }
+        if (n.textContent && n.textContent.includes("sac d'aventurier")) {
+          n.textContent = n.textContent.replace("sac d'aventurier", 'inventaire');
+        }
+        if (n.textContent && n.textContent.includes('Votre sac')) {
+          n.textContent = n.textContent.replace('Votre sac', 'Votre inventaire');
+        }
+      });
+    };
+
+    document.addEventListener('snipcart.ready', () => {
+      applyInventoryTerms();
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((m) => m.addedNodes && m.addedNodes.forEach((node) => {
+          if (node.nodeType === 1) applyInventoryTerms(node);
+        }));
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+  } catch(_) {}
 });
 
 // Module Navigation

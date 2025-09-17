@@ -110,7 +110,6 @@ class LinkChecker
         // JavaScript
         $jsFiles = [
             'js/app.js',
-            'js/cart-custom.js',
             'js/hero-videos.js',
             'js/lazy-load-enhanced.js'
         ];

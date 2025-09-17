@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="/css/checkout-dnd.css?v=<?= filemtime(__DIR__.'/css/checkout-dnd.css') ?>">
   <script src="/js/lazy-load-enhanced.js" defer></script>
   <script src="/js/universal-image-gallery.js" defer></script>
-  <script src="/js/cart-custom.js" defer></script>
+  <!-- Retiré: ancien panier custom non utilisé -->
   <?php if (!empty($extraHead)) echo $extraHead; ?>
 </head>
 

@@ -57,7 +57,7 @@ class GeeknDragonSnipcart {
                         items: 'articles',
                         checkout: 'Finaliser ma Commande',
                         continue_shopping: 'Continuer mes Achats',
-                        empty_cart_message: 'Votre sac d\'aventurier est vide...',
+                        empty_cart_message: 'Votre inventaire est vide...',
                         subtotal: 'Sous-total',
                         total: 'Total de votre Trésor'
                     },
@@ -325,6 +325,11 @@ class GeeknDragonSnipcart {
             }
             </style>
         `;
+        // Standardiser le libellé: inventaire
+        try {
+            const txtEl = notification.querySelector('.gd-notification-text');
+            if (txtEl) txtEl.innerHTML = `<strong>${item.name}</strong> ajouté à votre inventaire !`;
+        } catch (e) {}
 
         // Injection du CSS dans le head
         document.head.insertAdjacentHTML('beforeend', customCSS);
@@ -506,7 +511,7 @@ class GeeknDragonSnipcart {
         // Autres personnalisations DOM si nécessaire
         const titles = element.querySelectorAll('.snipcart-layout__header-title');
         titles.forEach(title => {
-            title.textContent = title.textContent.replace('Cart', 'Sac d\'Aventurier');
+            title.textContent = title.textContent.replace('Cart', 'Inventaire');
         });
     }
 
