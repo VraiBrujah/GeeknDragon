@@ -233,6 +233,9 @@
     transition: var(--transition);
     border: 1px solid var(--border-color);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .product-card:hover {
@@ -356,6 +359,9 @@
 /* Product Content */
 .product-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .product-title {
@@ -451,6 +457,7 @@
 .product-actions {
     display: flex;
     gap: 1rem;
+    margin-top: auto;
 }
 
 .btn-primary {
