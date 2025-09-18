@@ -635,10 +635,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
     <script src="js/boutique.js"></script>
     <script src="js/currency-converter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+    <script src="js/audio-player-engine.js"></script>
+    <script src="js/audio-player-scanner.js"></script>
+    <script src="js/audio-player-ui.js"></script>
     <script src="js/audio-player.js"></script>
-    <script src="js/audio-player-override.js"></script>
-    <script src="js/music-scanner-override.js"></script>
-    <script src="js/audio-header-ui.js"></script>
     <script src="api/public-config.js.php"></script>
 
     <!-- Intégration Snipcart avec thème D&D -->
