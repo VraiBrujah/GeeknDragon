@@ -22,17 +22,42 @@ $paths = [
     '/product',
 ];
 
+$legacyProductPaths = [
+    '/lot10',
+    '/lot25',
+    '/lot50-essence',
+    '/lot50-tresorerie',
+    '/lot10.php',
+    '/lot25.php',
+    '/lot50-essence.php',
+    '/lot50-tresorerie.php',
+];
+
 $actualitesDir = realpath(__DIR__ . '/../actualites');
 if ($actualitesDir !== false) {
+    $actualitesPaths = [];
     foreach (glob($actualitesDir . '/*.{php,html}', GLOB_BRACE) as $file) {
         $relative = substr($file, strlen(dirname(__DIR__)));
         if ($relative === false) {
             continue;
         }
 
-        $relative = str_replace('\\', '/', $relative);
-        $paths[] = '/' . ltrim($relative, '/');
+        $relative = '/' . ltrim(str_replace('\\', '/', $relative), '/');
+
+        if (str_ends_with($relative, '.php')) {
+            $htmlCandidate = preg_replace('/\.php$/', '.html', $relative);
+            if ($htmlCandidate !== null) {
+                $htmlCandidatePath = dirname(__DIR__) . $htmlCandidate;
+                if (is_file($htmlCandidatePath)) {
+                    continue;
+                }
+            }
+        }
+
+        $actualitesPaths[] = $relative;
     }
+
+    $paths = array_merge($paths, $actualitesPaths);
 }
 
 $productsFile = dirname(__DIR__) . '/data/products.json';
@@ -56,7 +81,12 @@ $normalized = array_map(
     $paths
 );
 
-$uniquePaths = array_values(array_unique($normalized));
+$uniquePaths = array_values(array_unique(array_filter(
+    $normalized,
+    static function (string $path) use ($legacyProductPaths): bool {
+        return !in_array($path, $legacyProductPaths, true);
+    }
+)));
 sort($uniquePaths);
 
 $xml = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"/>');
