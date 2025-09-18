@@ -594,12 +594,12 @@
                     <div class="info-card">
                         <div class="info-icon">🛡️</div>
                         <h3>Qualité Garantie</h3>
-                        <p>Matériaux premium et contrôle qualité rigoureux. Garantie satisfaction ou remboursement.</p>
+                        <p>Matériaux premium et contrôle qualité rigoureux. Garantie satisfait ou remboursé 30 jours.</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon">🎲</div>
-                        <h3>Compatible D&D</h3>
-                        <p>Tous nos produits respectent les règles officielles de Donjons & Dragons 5ème édition.</p>
+                        <h3>Compatible D&D 5e (Édition 2024)</h3>
+                        <p>Tous nos produits respectent les règles officielles de Donjons & Dragons 5e, édition 2024.</p>
                     </div>
                     <div class="info-card">
                         <div class="info-icon">💬</div>
