@@ -80,7 +80,7 @@
                         " onmouseover="this.style.borderColor='var(--secondary-color)'" onmouseout="this.style.borderColor='var(--border-color)'">
                             <div style="font-size: 2rem; margin-bottom: 0.5rem;">↩️</div>
                             <h4 style="color: var(--secondary-color); margin-bottom: 0.5rem;">Retours</h4>
-                            <p style="color: var(--medium-text); font-size: 0.9rem;">Politique de retours</p>
+                            <p style="color: var(--medium-text); font-size: 0.9rem;">Retours 30 jours – satisfait ou remboursé</p>
                         </a>
 
                         <a href="mailto:support@geekndragon.com" style="

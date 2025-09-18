@@ -155,8 +155,8 @@
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🎲</div>
-                        <h3>Compatible D&D 2024</h3>
-                        <p>Tous nos produits sont conçus pour les règles officielles de Donjons & Dragons 2024</p>
+                        <h3>Compatible D&D 5e (Édition 2024)</h3>
+                        <p>Tous nos produits sont conçus pour les règles officielles de Donjons & Dragons 5e, édition 2024</p>
                     </div>
                 </div>
             </div>
