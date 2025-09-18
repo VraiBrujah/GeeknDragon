@@ -1,9 +1,9 @@
 /**
         // Remplacer le texte du bouton
         try {
-            button.textContent = (this.currentLanguage === 'fr') ? 'Ajouter � l\\'inventaire' : 'Add to Inventory';
+            button.textContent = (this.currentLanguage === 'fr') ? 'Ajouter à l\\'inventaire' : 'Add to Inventory';
         } catch (e) {}
- * avec personnalisation complète selon le thème D&D.
+ * avec personnalisation complÃ¨te selon le thÃ¨me D&D.
  */
 
 class GeeknDragonProducts {
@@ -16,7 +16,7 @@ class GeeknDragonProducts {
 
     async init() {
         try {
-            // Charger les données produits
+            // Charger les donnÃ©es produits
             await this.loadProducts();
             
             // Transformer les boutons existants
@@ -25,14 +25,14 @@ class GeeknDragonProducts {
             // Configurer les attributs Snipcart sur tous les produits
             this.setupSnipcartAttributes();
             
-            console.log('🐉 GeeknDragon Products initialized');
+            console.log('ð GeeknDragon Products initialized');
         } catch (error) {
-            console.error('❌ Erreur lors de l\'initialisation des produits:', error);
+            console.error('â Erreur lors de l\'initialisation des produits:', error);
         }
     }
 
     /**
-     * Charge les données produits depuis le JSON
+     * Charge les donnÃ©es produits depuis le JSON
      */
     async loadProducts() {
         const response = await fetch('/data/products.json');
@@ -43,7 +43,7 @@ class GeeknDragonProducts {
      * Transforme les boutons existants en boutons Snipcart
      */
     transformProductButtons() {
-        // Transformer les boutons "Découvrir" en "Ajouter au Panier"
+        // Transformer les boutons "DÃ©couvrir" en "Ajouter au Panier"
         const productButtons = document.querySelectorAll('.btn-primary[href="#"]');
         
         productButtons.forEach(button => {
@@ -107,7 +107,7 @@ class GeeknDragonProducts {
     }
 
     /**
-     * Extrait le prix numérique d'une chaîne
+     * Extrait le prix numÃ©rique d'une chaÃ®ne
      */
     extractPrice(priceText) {
         const match = priceText.match(/(\d+(?:\.\d{2})?)/);
@@ -123,8 +123,8 @@ class GeeknDragonProducts {
 
         // Remplacer le texte du bouton
         button.textContent = lang === 'fr' ? 
-            '⚔️ Ajouter à mon Sac' : 
-            '⚔️ Add to my Bag';
+            'âï¸ Ajouter Ã  mon Sac' : 
+            'âï¸ Add to my Bag';
         
         // Supprimer href et ajouter les attributs Snipcart
         button.removeAttribute('href');
@@ -133,7 +133,7 @@ class GeeknDragonProducts {
         // Attributs Snipcart de base
         this.setSnipcartAttributes(button, productId, product);
         
-        // Ajouter classe pour styling personnalisé
+        // Ajouter classe pour styling personnalisÃ©
         button.classList.add('gd-add-to-cart');
         
         // Event listener pour tracking
@@ -143,7 +143,7 @@ class GeeknDragonProducts {
     }
 
     /**
-     * Configure les attributs Snipcart sur un élément
+     * Configure les attributs Snipcart sur un Ã©lÃ©ment
      */
     setSnipcartAttributes(element, productId, product) {
         const lang = this.currentLanguage;
@@ -171,17 +171,17 @@ class GeeknDragonProducts {
         element.setAttribute('data-item-weight', this.getProductWeight(productId));
         element.setAttribute('data-item-shipping', this.getShippingCategory(productId));
         
-        // Variantes personnalisées (multiplicateurs, langues, etc.)
+        // Variantes personnalisÃ©es (multiplicateurs, langues, etc.)
         this.addCustomFields(element, product);
     }
 
     /**
-     * Ajoute les champs personnalisés (variantes) à un produit
+     * Ajoute les champs personnalisÃ©s (variantes) Ã  un produit
      */
     addCustomFields(element, product) {
         let customFields = [];
 
-        // Multiplicateurs pour les pièces
+        // Multiplicateurs pour les piÃ¨ces
         if (product.multipliers && product.multipliers.length > 0) {
             element.setAttribute('data-item-custom1-name', 'Multiplicateur');
             element.setAttribute('data-item-custom1-options', 
@@ -198,36 +198,36 @@ class GeeknDragonProducts {
             element.setAttribute(`data-item-${langField}-value`, product.languages[0]);
         }
 
-        // Catégorie pour l'organisation
+        // CatÃ©gorie pour l'organisation
         if (product.category) {
             element.setAttribute('data-item-categories', product.category);
         }
     }
 
     /**
-     * Détermine le poids d'un produit pour les frais de port
+     * DÃ©termine le poids d'un produit pour les frais de port
      */
     getProductWeight(productId) {
         const weights = {
-            'lot10': 150,        // 10 pièces métalliques
-            'lot25': 350,        // 25 pièces métalliques
-            'lot50-essence': 700, // 50 pièces métalliques
-            'lot50-tresorerie': 700, // 50 pièces métalliques
+            'lot10': 150,        // 10 piÃ¨ces mÃ©talliques
+            'lot25': 350,        // 25 piÃ¨ces mÃ©talliques
+            'lot50-essence': 700, // 50 piÃ¨ces mÃ©talliques
+            'lot50-tresorerie': 700, // 50 piÃ¨ces mÃ©talliques
             'pack-182-arsenal-aventurier': 300,    // 182 cartes
             'pack-182-butins-ingenieries': 300,    // 182 cartes
             'pack-182-routes-services': 300,       // 182 cartes
-            'triptyque-aleatoire': 200 // Triptyques + cartes + pièces
+            'triptyque-aleatoire': 200 // Triptyques + cartes + piÃ¨ces
         };
         
-        return weights[productId] || 100; // Poids par défaut 100g
+        return weights[productId] || 100; // Poids par dÃ©faut 100g
     }
 
     /**
-     * Détermine la catégorie d'expédition
+     * DÃ©termine la catÃ©gorie d'expÃ©dition
      */
     getShippingCategory(productId) {
         if (productId.startsWith('lot')) {
-            return 'coins'; // Pièces métalliques
+            return 'coins'; // PiÃ¨ces mÃ©talliques
         } else if (productId.startsWith('pack-182')) {
             return 'cards'; // Cartes
         } else if (productId.startsWith('triptyque')) {
@@ -253,10 +253,10 @@ class GeeknDragonProducts {
     }
 
     /**
-     * Ajoute le script Snipcart si pas déjà présent
+     * Ajoute le script Snipcart si pas dÃ©jÃ  prÃ©sent
      */
     addSnipcartScript() {
-        // Variables d'environnement (à définir dans votre .env)
+        // Variables d'environnement (Ã  dÃ©finir dans votre .env)
         const apiKey = window.SNIPCART_API_KEY || 'pk_test_your_key_here';
         
         // Div hidden pour Snipcart
@@ -276,7 +276,7 @@ class GeeknDragonProducts {
      * Configure les variantes de produits
      */
     setupProductVariants() {
-        // Gestion des sélecteurs de multiplicateurs
+        // Gestion des sÃ©lecteurs de multiplicateurs
         const multiplierSelects = document.querySelectorAll('[data-product-multiplier]');
         multiplierSelects.forEach(select => {
             select.addEventListener('change', (e) => {
@@ -284,7 +284,7 @@ class GeeknDragonProducts {
             });
         });
 
-        // Gestion des sélecteurs de langue
+        // Gestion des sÃ©lecteurs de langue
         const languageSelects = document.querySelectorAll('[data-product-language]');
         languageSelects.forEach(select => {
             select.addEventListener('change', (e) => {
@@ -294,7 +294,7 @@ class GeeknDragonProducts {
     }
 
     /**
-     * Met à jour les variantes d'un produit
+     * Met Ã  jour les variantes d'un produit
      */
     updateProductVariant(selectElement) {
         const productCard = selectElement.closest('.product-card');
@@ -307,7 +307,7 @@ class GeeknDragonProducts {
     }
 
     /**
-     * Met à jour la langue d'un produit
+     * Met Ã  jour la langue d'un produit
      */
     updateProductLanguage(selectElement) {
         const productCard = selectElement.closest('.product-card');
@@ -324,18 +324,27 @@ class GeeknDragonProducts {
      * Configure les liens directs vers les pages de produits
      */
     setupDirectProductLinks() {
-        // Pages de produits individuelles
-        const productPages = {
-            '/lot10.html': 'lot10',
-            '/lot25.html': 'lot25',
-            '/lot50-essence.html': 'lot50-essence',
-            '/lot50-tresorerie.html': 'lot50-tresorerie',
-            '/produit-offrande-voyageur.html': 'lot10'
-        };
+        const currentUrl = new URL(window.location.href);
+        let productId = null;
 
-        const currentPath = window.location.pathname;
-        if (productPages[currentPath]) {
-            this.setupSingleProductPage(productPages[currentPath]);
+        if (currentUrl.pathname.endsWith('/product.php')) {
+            productId = currentUrl.searchParams.get('id');
+        }
+
+        if (!productId) {
+            // Compatibilité avec les anciennes pages statiques encore en circulation
+            const productPages = {
+                '/lot10.html': 'lot10',
+                '/lot25.html': 'lot25',
+                '/lot50-essence.html': 'lot50-essence',
+                '/lot50-tresorerie.html': 'lot50-tresorerie'
+            };
+
+            productId = productPages[currentUrl.pathname] ?? null;
+        }
+
+        if (productId && this.products[productId]) {
+            this.setupSingleProductPage(productId);
         }
     }
 
@@ -357,12 +366,12 @@ class GeeknDragonProducts {
             }
         });
 
-        // Mettre à jour les métadonnées de la page
+        // Mettre Ã  jour les mÃ©tadonnÃ©es de la page
         this.updatePageMeta(product);
     }
 
     /**
-     * Met à jour les métadonnées de la page
+     * Met Ã  jour les mÃ©tadonnÃ©es de la page
      */
     updatePageMeta(product) {
         const lang = this.currentLanguage;
@@ -433,7 +442,7 @@ class GeeknDragonProducts {
             });
         }
 
-        console.log(`🛒 Produit ajouté au panier: ${product.name} - ${product.price}$ CAD`);
+        console.log(`ð Produit ajoutÃ© au panier: ${product.name} - ${product.price}$ CAD`);
     }
 
     /**
@@ -447,18 +456,18 @@ class GeeknDragonProducts {
     }
 
     /**
-     * Rafraîchit l'affichage des produits selon la langue
+     * RafraÃ®chit l'affichage des produits selon la langue
      */
     refreshProductDisplay() {
         // Re-transformer les boutons avec la nouvelle langue
         this.transformProductButtons();
         
-        // Mettre à jour les textes de boutons existants
+        // Mettre Ã  jour les textes de boutons existants
         const cartButtons = document.querySelectorAll('.gd-add-to-cart');
         cartButtons.forEach(button => {
             button.textContent = this.currentLanguage === 'fr' ? 
-                '⚔️ Ajouter à mon Sac' : 
-                '⚔️ Add to my Bag';
+                'âï¸ Ajouter Ã  mon Sac' : 
+                'âï¸ Add to my Bag';
         });
     }
 }

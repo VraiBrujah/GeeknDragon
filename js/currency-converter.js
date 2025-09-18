@@ -328,7 +328,7 @@
       pieces: { copper: 2, silver: 2, electrum: 2, gold: 2, platinum: 2 },
       multiplierChoice: true, // Un seul multiplicateur pour tout le lot
       maxMultiplier: 10000,
-      url: '/produit-offrande-voyageur.php'
+      url: '/product.php?id=lot10'
     },
     'lot25': {
       id: 'lot25', 
@@ -337,7 +337,7 @@
       pieces: { copper: 5, silver: 5, electrum: 5, gold: 5, platinum: 5 }, // 1 de chaque métal/multiplicateur
       multiplierChoice: false, // Tout inclus
       maxMultiplier: 10000,
-      url: '/produit-monnaie-cinq-royaumes.php'
+      url: '/product.php?id=lot25'
     },
     'lot50-essence': {
       id: 'lot50-essence',
@@ -346,7 +346,7 @@
       pieces: { copper: 10, silver: 10, electrum: 10, gold: 10, platinum: 10 }, // 2 de chaque métal/multiplicateur
       multiplierChoice: false, // Tout inclus
       maxMultiplier: 10000,
-      url: '/produit-essence-marchand.php'
+      url: '/product.php?id=lot50-essence'
     },
     'lot50-tresorerie': {
       id: 'lot50-tresorerie',
@@ -355,7 +355,7 @@
       pieces: { copper: 10, silver: 10, electrum: 10, gold: 10, platinum: 10 },
       multiplierChoice: true, // Un seul multiplicateur pour tout le lot
       maxMultiplier: 10000,
-      url: '/produit-tresorerie-seigneur.php'
+      url: '/product.php?id=lot50-tresorerie'
     }
   };
 

@@ -36,8 +36,12 @@ class ReviewsManager {
         }
         
         // Fallback : extraire depuis l'URL
-        const path = window.location.pathname;
-        const match = path.match(/produit-([^\.]+)/);
+        const currentUrl = new URL(window.location.href);
+        if (currentUrl.pathname.endsWith('/product.php')) {
+            return currentUrl.searchParams.get('id');
+        }
+
+        const match = currentUrl.pathname.match(/produit-([^\.]+)/);
         return match ? match[1] : null;
     }
 
