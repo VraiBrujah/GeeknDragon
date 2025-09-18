@@ -1,50 +1,20 @@
 # Feuille de route
 
-Ce document présente la trajectoire de développement du framework de widgets de GeeknDragon.
+## Socle web 2025
+- [x] Centraliser la configuration applicative via `config.php` (normalisation des variables d'environnement, calcul d'URL de base).
+- [x] Uniformiser les gabarits publics (`head-common.php`, `header.php`, `footer.php`) et partager la logique i18n.
+- [x] Moderniser les formulaires `contact.php` et `devis.php` avec CSRF, honeypot et persistance des erreurs.
+- [x] Retirer les dossiers historiques `old/` et `backup-phase1/` pour ne conserver que la nouvelle source de vérité (`src/`, racine PHP, `views/`, `partials/`).
+- [x] Migrer le générateur de sitemap vers `tools/build-sitemap.php` pour suivre les routes actives.
 
-## 0. MVP : BaseWidget, widgets atomiques et GrilleCanvas
-**Objectif :** disposer d'une base fonctionnelle minimale sur laquelle bâtir les phases ultérieures.
+## Phase en cours — Consolidation formulaires & Snipcart
+- [ ] Finaliser les tests fonctionnels sur `contact-handler.php` et `devis-handler.php` (CSRF, anti-spam, limites de taille).
+- [ ] Vérifier les redirections `public/index.php` après soumission (merci, erreurs) sur chaque langue.
+- [ ] Harmoniser les textes i18n restants (`quote.*`, `contact.*`) et compléter les traductions manquantes.
+- [ ] Couvrir les nouvelles pages par `composer test` et s'assurer que `ProjectFilesTest` détecte les gabarits partagés.
 
-**Livrables :**
-- `BaseWidget` gérant cycle de vie et propriétés communes.
-- Bibliothèque de widgets atomiques (Bouton, Texte, Champ de saisie, Image).
-- `GrilleCanvas` permettant l'agencement des widgets sur une grille.
-
-**Critères d'acceptation limités :**
-- Chaque widget atomique peut être instancié, configuré et détruit sans erreur.
-- La `GrilleCanvas` positionne et redimensionne les widgets au sein d'une grille réactive.
-- Documentation succincte et exemples de code pour les éléments ci-dessus.
-- Tests unitaires de base pour `BaseWidget` et deux widgets atomiques.
-
-## 1. Jalons ultérieurs
-
-### Phase 1 – Widgets composés
-**Objectif :** combiner les widgets atomiques pour créer des composants usuels (ex : carte, formulaire).
-**Critères d'acceptation limités :**
-- Deux widgets composés publiés avec tests unitaires.
-- Chaque widget composé expose au moins une option de configuration.
-
-### Phase 2 – Gestion d'état et persistance
-**Objectif :** centraliser l'état des widgets et synchroniser avec un stockage local.
-**Critères d'acceptation limités :**
-- Un gestionnaire d'état global disponible.
-- Sauvegarde/restauration de l'état dans `localStorage`.
-
-### Phase 3 – Connecteurs externes
-**Objectif :** permettre la communication avec des API externes pour alimenter les widgets.
-**Critères d'acceptation limités :**
-- Connecteur HTTP minimal avec authentification par jeton.
-- Exemple d'intégration affichant des données distantes dans un widget.
-
-### Phase 4 – Personnalisation et thèmes
-**Objectif :** offrir un système de thèmes pour adapter l'apparence des widgets.
-**Critères d'acceptation limités :**
-- Deux thèmes prédéfinis avec documentation.
-- API pour surcharger les variables de thème.
-
-### Phase 5 – Documentation et distribution
-**Objectif :** préparer la diffusion publique de la bibliothèque.
-**Critères d'acceptation limités :**
-- Guide de démarrage rapide.
-- Publication d'une version `1.0.0` empaquetée.
-
+## Phase suivante — Expérience compte & automatisation
+- [ ] Étendre les tests autour de `AccountController` (login local, commandes, factures).
+- [ ] Documenter l'API interne (`src/Controller/*`) et exposer les flux attendus pour l'équipe produit.
+- [ ] Automatiser la régénération de `sitemap.xml` via CI après chaque déploiement.
+- [ ] Auditer l'admin (`admin/`) afin d'aligner les variables d'environnement et supprimer les restes de Phase 0.
