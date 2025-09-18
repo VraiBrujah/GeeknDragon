@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer Votre Aventurier - Geek&Dragon</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .character-creation {
+            background: var(--dark-bg);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .creation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .creation-header {
+            background: linear-gradient(135deg, var(--secondary-color), #b8860b);
+            color: var(--dark-bg);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .creation-header h1 {
+            margin: 0;
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+        }
+        
+        .creation-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+        
+        .creation-form {
+            padding: 2rem;
+        }
+        
+        .step {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        .step-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .step-title {
+            color: var(--secondary-color);
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .step-description {
+            color: var(--medium-text);
+            margin: 0.5rem 0 0 0;
+        }
+        
+        .character-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .character-option {
+            background: var(--darker-bg);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .character-option:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .character-option.selected {
+            border-color: var(--secondary-color);
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        .character-option input[type="radio"] {
+            display: none;
+        }
+        
+        .option-title {
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .option-description {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+        
+        .option-traits {
+            color: var(--medium-text);
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: var(--light-text);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            color: var(--light-text);
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-group {
+            text-align: center;
+            background: var(--darker-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-name {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            color: var(--light-text);
+            font-weight: bold;
+        }
+        
+        .stat-modifier {
+            color: var(--medium-text);
+            font-size: 0.8rem;
+        }
+        
+        .dice-button {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+        
+        .dice-button:hover {
+            background: #b8860b;
+            transform: scale(1.05);
+        }
+        
+        .character-preview {
+            background: var(--darker-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .preview-title {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .preview-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .preview-item {
+            background: var(--dark-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+        
+        .preview-label {
+            color: var(--medium-text);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .preview-value {
+            color: var(--light-text);
+            font-weight: bold;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+        }
+        
+        .btn-primary:hover {
+            background: #b8860b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--darker-bg);
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .recommendations-preview {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .recommendations-title {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .recommendations-list {
+            color: var(--light-text);
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="character-creation">
+        <div class="container">
+            <div class="creation-container">
+                <header class="creation-header">
+                    <h1>🎲 Créer Votre Aventurier</h1>
+                    <p>Forgez votre identité d'aventurier pour des recommandations personnalisées</p>
+                </header>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <form class="creation-form" id="characterForm">
+                    
+                    <!-- Étape 1: Informations de Base -->
+                    <div class="step active" data-step="1">
+                        <div class="step-header">
+                            <div class="step-number">1</div>
+                            <h2 class="step-title">Informations de Base</h2>
+                            <p class="step-description">Commençons par les bases de votre compte</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Adresse Email</label>
+                            <input type="email" id="email" name="email" required 
+                                   placeholder="votre@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Mot de Passe</label>
+                            <input type="password" id="password" name="password" required 
+                                   placeholder="Minimum 8 caractères">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nomAventurier">Nom de votre Aventurier</label>
+                            <input type="text" id="nomAventurier" name="nom_aventurier" required 
+                                   placeholder="Ex: Gandalf le Gris, Legolas, Gimli...">
+                        </div>
+                    </div>
+
+                    <!-- Étape 2: Choix de l'Espèce -->
+                    <div class="step" data-step="2">
+                        <div class="step-header">
+                            <div class="step-number">2</div>
+                            <h2 class="step-title">Choisissez votre Espèce</h2>
+                            <p class="step-description">Votre héritage définit vos affinités naturelles</p>
+                        </div>
+
+                        <div class="character-options" id="especeOptions">
+                            <!-- Options générées dynamiquement -->
+                        </div>
+                    </div>
+
+                    <!-- Étape 3: Choix de la Classe -->
+                    <div class="step" data-step="3">
+                        <div class="step-header">
+                            <div class="step-number">3</div>
+                            <h2 class="step-title">Choisissez votre Classe</h2>
+                            <p class="step-description">Votre entraînement et votre rôle d'aventurier</p>
+                        </div>
+
+                        <div class="character-options" id="classeOptions">
+                            <!-- Options générées dynamiquement -->
+                        </div>
+                    </div>
+
+                    <!-- Étape 4: Choix de l'Historique -->
+                    <div class="step" data-step="4">
+                        <div class="step-header">
+                            <div class="step-number">4</div>
+                            <h2 class="step-title">Choisissez votre Historique</h2>
+                            <p class="step-description">Votre passé influence vos préférences</p>
+                        </div>
+
+                        <div class="character-options" id="historiqueOptions">
+                            <!-- Options générées dynamiquement -->
+                        </div>
+                    </div>
+
+                    <!-- Étape 5: Préférences de Jeu -->
+                    <div class="step" data-step="5">
+                        <div class="step-header">
+                            <div class="step-number">5</div>
+                            <h2 class="step-title">Préférences de Jeu</h2>
+                            <p class="step-description">Aidez-nous à mieux vous recommander</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="styleJeu">Style de Jeu Préféré</label>
+                            <select id="styleJeu" name="style_jeu">
+                                <option value="roleplay">Roleplay & Interprétation</option>
+                                <option value="combat">Combat & Tactique</option>
+                                <option value="exploration">Exploration & Aventure</option>
+                                <option value="social">Interactions Sociales</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experienceJeu">Niveau d'Expérience</label>
+                            <select id="experienceJeu" name="experience_jeu">
+                                <option value="debutant">Débutant (nouveau dans D&D)</option>
+                                <option value="intermediaire">Intermédiaire (quelques parties)</option>
+                                <option value="expert">Expert (joueur régulier)</option>
+                                <option value="maitre">Maître (MJ ou vétéran)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="campagnesPreferees">Campagnes Préférées</label>
+                            <select id="campagnesPreferees" name="campagnes_preferees">
+                                <option value="classique">Classique Fantasy (Tolkien)</option>
+                                <option value="moderne">Moderne/Urbain</option>
+                                <option value="science-fiction">Science-Fiction</option>
+                                <option value="horreur">Horreur/Gothic</option>
+                            </select>
+                        </div>
+
+                        <!-- Statistiques Aléatoires (pour le fun) -->
+                        <div class="stats-container" id="statsContainer">
+                            <div class="stat-group">
+                                <div class="stat-name">Force</div>
+                                <div class="stat-value" id="statForce">10</div>
+                                <div class="stat-modifier">(+0)</div>
+                            </div>
+                            <div class="stat-group">
+                                <div class="stat-name">Dextérité</div>
+                                <div class="stat-value" id="statDexterite">10</div>
+                                <div class="stat-modifier">(+0)</div>
+                            </div>
+                            <div class="stat-group">
+                                <div class="stat-name">Constitution</div>
+                                <div class="stat-value" id="statConstitution">10</div>
+                                <div class="stat-modifier">(+0)</div>
+                            </div>
+                            <div class="stat-group">
+                                <div class="stat-name">Intelligence</div>
+                                <div class="stat-value" id="statIntelligence">10</div>
+                                <div class="stat-modifier">(+0)</div>
+                            </div>
+                            <div class="stat-group">
+                                <div class="stat-name">Sagesse</div>
+                                <div class="stat-value" id="statSagesse">10</div>
+                                <div class="stat-modifier">(+0)</div>
+                            </div>
+                            <div class="stat-group">
+                                <div class="stat-name">Charisme</div>
+                                <div class="stat-value" id="statCharisme">10</div>
+                                <div class="stat-modifier">(+0)</div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <button type="button" class="dice-button" onclick="rollStats()">
+                                🎲 Lancer les Dés pour les Stats
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Étape 6: Récapitulatif -->
+                    <div class="step" data-step="6">
+                        <div class="step-header">
+                            <div class="step-number">6</div>
+                            <h2 class="step-title">Récapitulatif de votre Aventurier</h2>
+                            <p class="step-description">Vérifiez votre profil avant validation</p>
+                        </div>
+
+                        <div class="character-preview">
+                            <h3 class="preview-title">🏷️ Fiche d'Aventurier</h3>
+                            <div class="preview-details" id="character-preview">
+                                <!-- Généré dynamiquement -->
+                            </div>
+                        </div>
+
+                        <div class="recommendations-preview">
+                            <div class="recommendations-title">🎯 Recommandations Personnalisées</div>
+                            <div class="recommendations-list" id="recommendationsPreview">
+                                <!-- Généré dynamiquement -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="navigation-buttons">
+                        <button type="button" class="btn btn-secondary" id="prev-step">
+                            ← Précédent
+                        </button>
+                        <button type="button" class="btn btn-primary" id="next-step">
+                            Suivant →
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="submit-character" style="display: none;">
+                            🚀 Créer mon Aventurier
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/character-creation.js"></script>
+</body>
+</html>

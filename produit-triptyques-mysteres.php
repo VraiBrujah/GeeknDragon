@@ -22,7 +22,7 @@
             <ul class="nav-menu">
                 <li><a href="index.php" class="nav-link">Accueil</a></li>
                 <li><a href="boutique.php" class="nav-link">Boutique</a></li>
-                <li><a href="boutique.php#triptychs" class="nav-link">📋 Triptyques Mystères</a></li>
+                <li><a href="boutique.php#triptych" class="nav-link">📋 Triptyques Mystères</a></li>
                 <li><a href="index.php#contact" class="nav-link">Contact</a></li>
                 <li><a href="compte.php" class="nav-link account-link" title="Mon compte">👤</a></li>
             </ul>
@@ -43,7 +43,7 @@
                     <span>›</span>
                     <a href="boutique.php">Boutique</a>
                     <span>›</span>
-                    <a href="boutique.php#triptychs">📋 Triptyques Mystères</a>
+                    <a href="boutique.php#triptych">📋 Triptyques Mystères</a>
                     <span>›</span>
                     <span class="current">Triptyques Mystères</span>
                 </nav>

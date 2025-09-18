@@ -29,9 +29,9 @@
             
             <!-- Widget Panier D&D -->
             <div class="nav-cart">
-                <button id="gd-cart-toggle-widget" class="cart-toggle" aria-label="Ouvrir le sac d'aventurier">
+                <button id="gd-cart-toggle-widget" class="cart-toggle" aria-label="Ouvrir l'inventaire d'aventurier">
                     <span class="cart-icon">🎒</span>
-                    <span class="cart-text">Sac</span>
+                    <span class="cart-text">Inventaire</span>
                     <span id="gd-cart-count-widget" class="cart-count">0</span>
                 </button>
             </div>
@@ -378,6 +378,14 @@
                             </tfoot>
                         </table>
                     </div>
+                    
+                    <!-- Section Recommandations GeeknDragon -->
+                    <div id="gd-recommendations" class="hidden">
+                        <h3>🎒 Lots Geek&Dragon Recommandés</h3>
+                        <div class="gd-recommendations-content">
+                            <!-- Contenu généré dynamiquement par JavaScript -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -397,7 +405,7 @@
                             <img src="images/optimized-modern/webp/arme-recto.webp" alt="Arsenal de l'Aventurier - Équipement de base" loading="lazy">
                             <div class="product-badge essential">Essentiel</div>
                             <div class="product-overlay">
-                                <a href="#" class="product-quick-view">Voir Détails</a>
+                                <a href="produit-arsenal-aventurier.php" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -424,7 +432,7 @@
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="#" class="btn-secondary-small">Détails</a>
+                                <a href="produit-arsenal-aventurier.php" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -435,7 +443,7 @@
                             <img src="images/optimized-modern/webp/bomb-recto.webp" alt="Butins & Ingénieries - Contenu avancé" loading="lazy">
                             <div class="product-badge advanced">Avancé</div>
                             <div class="product-overlay">
-                                <a href="#" class="product-quick-view">Voir Détails</a>
+                                <a href="produit-butins-ingenieries.php" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -462,7 +470,7 @@
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="#" class="btn-secondary-small">Détails</a>
+                                <a href="produit-butins-ingenieries.php" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -473,7 +481,7 @@
                             <img src="images/optimized-modern/webp/backpack-recto.webp" alt="Routes & Services - Monde vivant" loading="lazy">
                             <div class="product-badge exploration">Exploration</div>
                             <div class="product-overlay">
-                                <a href="#" class="product-quick-view">Voir Détails</a>
+                                <a href="produit-routes-services.php" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -500,7 +508,7 @@
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="#" class="btn-secondary-small">Détails</a>
+                                <a href="produit-routes-services.php" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -524,7 +532,7 @@
                             <img src="images/triptyque-fiche.webp" alt="Triptyques Mystères - Origines Complètes" loading="lazy">
                             <div class="product-badge mystery">Mystère</div>
                             <div class="product-overlay">
-                                <a href="#" class="product-quick-view">Voir Détails</a>
+                                <a href="produit-triptyques-mysteres.php" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -566,7 +574,7 @@
                                     <span class="cart-icon">🎒</span>
                                     <span>Découvrir le Mystère</span>
                                 </button>
-                                <a href="#" class="btn-secondary-small">Détails</a>
+                                <a href="produit-triptyques-mysteres.php" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>

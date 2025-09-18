@@ -185,6 +185,145 @@ class SnipcartClient
 
         return $httpCode === 200 || $httpCode === 204;
     }
+
+    /**
+     * Récupère les commandes récentes (fonctionnalité administrative)
+     */
+    public function getRecentOrders(int $limit = 20): array
+    {
+        if ($this->mockMode) {
+            return $this->getMockRecentOrders($limit);
+        }
+
+        return $this->makeRequest('GET', "/orders?limit={$limit}&offset=0");
+    }
+
+    /**
+     * Récupère les statistiques de vente détaillées (fonctionnalité administrative)
+     */
+    public function getSalesStats(?string $from = null, ?string $to = null): array
+    {
+        if ($this->mockMode) {
+            return $this->getMockSalesStats($from, $to);
+        }
+
+        $from = $from ?: date('Y-m-01');
+        $to = $to ?: date('Y-m-d');
+        
+        $orders = $this->makeRequest('GET', "/orders?from={$from}&to={$to}");
+        
+        $stats = [
+            'total_orders' => count($orders['items'] ?? []),
+            'total_revenue' => 0,
+            'average_order_value' => 0,
+            'top_products' => [],
+            'orders_by_status' => [
+                'InProgress' => 0,
+                'Processed' => 0,
+                'Shipped' => 0,
+                'Delivered' => 0,
+                'Cancelled' => 0
+            ]
+        ];
+        
+        $productSales = [];
+        
+        foreach ($orders['items'] ?? [] as $order) {
+            $stats['total_revenue'] += $order['finalGrandTotal'] ?? 0;
+            $status = $order['status'] ?? 'Unknown';
+            if (isset($stats['orders_by_status'][$status])) {
+                $stats['orders_by_status'][$status]++;
+            }
+            
+            foreach ($order['items'] ?? [] as $item) {
+                $productId = $item['id'] ?? 'unknown';
+                $productName = $item['name'] ?? 'Produit inconnu';
+                $quantity = $item['quantity'] ?? 1;
+                
+                if (!isset($productSales[$productId])) {
+                    $productSales[$productId] = [
+                        'name' => $productName,
+                        'quantity' => 0,
+                        'revenue' => 0
+                    ];
+                }
+                
+                $productSales[$productId]['quantity'] += $quantity;
+                $productSales[$productId]['revenue'] += ($item['price'] ?? 0) * $quantity;
+            }
+        }
+        
+        if ($stats['total_orders'] > 0) {
+            $stats['average_order_value'] = $stats['total_revenue'] / $stats['total_orders'];
+        }
+        
+        uasort($productSales, function($a, $b) {
+            return $b['quantity'] <=> $a['quantity'];
+        });
+        
+        $stats['top_products'] = array_slice($productSales, 0, 5, true);
+        
+        return $stats;
+    }
+
+    /**
+     * Récupère les clients avec pagination (fonctionnalité administrative)
+     */
+    public function getCustomers(int $limit = 50): array
+    {
+        if ($this->mockMode) {
+            return $this->getMockCustomers($limit);
+        }
+
+        return $this->makeRequest('GET', "/customers?limit={$limit}");
+    }
+
+    /**
+     * Met à jour le statut d'une commande (fonctionnalité administrative)
+     */
+    public function updateOrderStatus(string $orderId, string $status): array
+    {
+        if ($this->mockMode) {
+            return $this->getMockOrderStatusUpdate($orderId, $status);
+        }
+
+        return $this->makeRequest('PUT', "/orders/{$orderId}", ['status' => $status]);
+    }
+
+    /**
+     * Récupère les statistiques des produits avec données catalogue (fonctionnalité administrative)
+     */
+    public function getProductStats(): array
+    {
+        return [
+            'lot10' => ['name' => "L'Offrande du Voyageur", 'price' => 60.00],
+            'lot25' => ['name' => "La Monnaie des Cinq Royaumes", 'price' => 145.00],
+            'lot50-essence' => ['name' => "L'Essence du Marchand", 'price' => 275.00],
+            'lot50-tresorerie' => ['name' => "La Trésorerie du Seigneur", 'price' => 275.00],
+            'arsenal-aventurier' => ['name' => "Arsenal de l'Aventurier", 'price' => 49.99],
+            'butins-ingenieries' => ['name' => "Butins & Ingénieries", 'price' => 36.99],
+            'routes-services' => ['name' => "Routes & Services", 'price' => 34.99],
+            'triptyques-mysteres' => ['name' => "Triptyques Mystères", 'price' => 59.99]
+        ];
+    }
+
+    /**
+     * Teste la connexion à l'API Snipcart (fonctionnalité administrative)
+     */
+    public function testConnection(): bool
+    {
+        if ($this->mockMode) {
+            return true;
+        }
+
+        try {
+            $result = $this->makeRequest('GET', '/orders?limit=1');
+            return true;
+        } catch (\Exception $e) {
+            error_log("Test de connexion Snipcart échoué: " . $e->getMessage());
+            return false;
+        }
+    }
     
     /**
      * Effectue une requête HTTP vers l'API Snipcart
@@ -342,6 +481,84 @@ class SnipcartClient
             'email' => $email,
             'firstName' => 'Test',
             'lastName' => 'User'
+        ];
+    }
+
+    /**
+     * Données mock pour les fonctionnalités administratives
+     */
+    private function getMockRecentOrders(int $limit): array
+    {
+        $orders = [];
+        for ($i = 1; $i <= min($limit, 5); $i++) {
+            $orders[] = $this->getMockOrder("recent-order-{$i}");
+        }
+        
+        return [
+            'totalItems' => $limit,
+            'items' => $orders
+        ];
+    }
+
+    private function getMockSalesStats(?string $from, ?string $to): array
+    {
+        return [
+            'total_orders' => 42,
+            'total_revenue' => 2847.58,
+            'average_order_value' => 67.80,
+            'top_products' => [
+                'lot25' => [
+                    'name' => 'La Monnaie des Cinq Royaumes',
+                    'quantity' => 15,
+                    'revenue' => 2175.00
+                ],
+                'lot10' => [
+                    'name' => "L'Offrande du Voyageur",
+                    'quantity' => 8,
+                    'revenue' => 480.00
+                ],
+                'arsenal-aventurier' => [
+                    'name' => "Arsenal de l'Aventurier",
+                    'quantity' => 4,
+                    'revenue' => 199.96
+                ]
+            ],
+            'orders_by_status' => [
+                'InProgress' => 2,
+                'Processed' => 35,
+                'Shipped' => 4,
+                'Delivered' => 1,
+                'Cancelled' => 0
+            ]
+        ];
+    }
+
+    private function getMockCustomers(int $limit): array
+    {
+        $customers = [];
+        for ($i = 1; $i <= min($limit, 10); $i++) {
+            $customers[] = [
+                'id' => "customer-{$i}",
+                'email' => "client{$i}@geekndragon.com",
+                'firstName' => "Client{$i}",
+                'lastName' => 'Test',
+                'creationDate' => date('c', strtotime("-{$i} days"))
+            ];
+        }
+        
+        return [
+            'totalItems' => $limit,
+            'items' => $customers
+        ];
+    }
+
+    private function getMockOrderStatusUpdate(string $orderId, string $status): array
+    {
+        return [
+            'token' => $orderId,
+            'status' => $status,
+            'modificationDate' => date('c'),
+            'message' => "Statut mis à jour vers {$status} (mode mock)"
         ];
     }
 }
