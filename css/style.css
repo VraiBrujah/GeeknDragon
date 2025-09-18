@@ -1752,6 +1752,50 @@ p {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1.5rem;
     }
+
+    /* Corrections pour les sections boutique sur mobile */
+    .boutique-products-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .product-highlight {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .product-highlight .product-image {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+    }
+
+    .product-highlight .product-info h4 {
+        font-size: 1.1rem;
+    }
+
+    .product-highlight .product-desc {
+        font-size: 0.9rem;
+    }
+
+    .product-features {
+        justify-content: center;
+    }
+
+    .boutique-cta {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .boutique-cta .cta-primary,
+    .boutique-cta .cta-secondary {
+        width: 100%;
+        max-width: 280px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1763,6 +1807,16 @@ p {
         padding: 0 1rem;
     }
 
+    .hero-title {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        padding: 1rem 1.5rem;
+    }
+
     .feature-card,
     .testimonial-card {
         padding: 1.5rem;
@@ -1770,6 +1824,47 @@ p {
 
     .category-content {
         padding: 1.5rem;
+    }
+
+    /* Corrections supplémentaires pour très petits écrans */
+    .boutique-section {
+        padding: 3rem 0;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .product-highlight {
+        padding: 1rem;
+        gap: 0.8rem;
+    }
+
+    .product-highlight .product-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .product-highlight .product-info h4 {
+        font-size: 1rem;
+    }
+
+    .product-highlight .product-desc {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .feature-tag {
+        font-size: 0.75rem;
+        padding: 3px 6px;
+    }
+
+    .payment-icons {
+        gap: 0.5rem;
+    }
+
+    .payment-icons img {
+        height: 25px;
     }
 }
 

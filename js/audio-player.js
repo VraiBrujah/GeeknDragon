@@ -43,6 +43,8 @@ class GeeknDragonAudioPlayer {
     this.currentDirectory = '';
     this.timeUpdater = null;
     this.volumeTimeout = null;
+    this.autoplayFallbackActive = false;
+    this.oneTimePlayHandler = null;
 
     this.init();
   }
@@ -444,6 +446,12 @@ class GeeknDragonAudioPlayer {
         preload: false, // Ne précharge pas automatiquement
         onend: () => this.playNext(),
         onplayerror: () => this.setupAutoplayFallback(),
+        onload: () => {
+          // Configurer le fallback autoplay dès que la piste est chargée
+          if (this.state.isPlaying) {
+            this.setupAutoplayFallback();
+          }
+        }
       });
 
       if (resume && this.state.currentTime > 0) {
@@ -808,55 +816,70 @@ class GeeknDragonAudioPlayer {
   }
 
   setupAutoplayFallback() {
-    const oneTimePlay = () => {
-      if (!this.state.isPlaying && this.sound) {
-        if (this.audioElement) {
-          this.audioElement.muted = false;
-        }
-        this.sound.play();
-        this.startTimeUpdater();
-        this.state.isPlaying = true;
-        this.updatePlayButton();
-        console.log('🎵 Lecture activée après interaction utilisateur');
-        document.removeEventListener('click', oneTimePlay);
-        document.removeEventListener('keydown', oneTimePlay);
-        document.removeEventListener('scroll', oneTimePlay);
-        document.removeEventListener('touchstart', oneTimePlay);
-        document.removeEventListener('mousemove', oneTimePlay);
+    // Éviter les configurations multiples
+    if (this.autoplayFallbackActive) {
+      return;
+    }
+    this.autoplayFallbackActive = true;
+
+    const oneTimePlay = (event) => {
+      console.log('🎵 Interaction détectée:', event?.type || 'inconnue');
+      
+      if (this.sound) {
+        this.sound.play()
+          .then(() => {
+            this.state.isPlaying = true;
+            this.startTimeUpdater();
+            this.updatePlayButton();
+            console.log('🎵 Lecture activée après interaction utilisateur');
+            this.cleanupAutoplayListeners();
+          })
+          .catch((error) => {
+            console.log('🎵 Erreur de lecture après interaction:', error);
+          });
       }
     };
 
-    // Écouter plusieurs types d'événements pour démarrer la lecture
-    document.addEventListener('click', oneTimePlay, { once: true });
-    document.addEventListener('keydown', oneTimePlay, { once: true });
-    document.addEventListener('scroll', oneTimePlay, { once: true });
-    document.addEventListener('touchstart', oneTimePlay, { once: true });
-    document.addEventListener('mousemove', oneTimePlay, { once: true });
+    // Stocker la référence pour pouvoir nettoyer
+    this.oneTimePlayHandler = oneTimePlay;
 
-    // Essayer de démarrer automatiquement après 2 secondes
+    // Écouter plusieurs types d'événements pour démarrer la lecture
+    document.addEventListener('click', oneTimePlay, { once: true, passive: true });
+    document.addEventListener('keydown', oneTimePlay, { once: true, passive: true });
+    document.addEventListener('scroll', oneTimePlay, { once: true, passive: true });
+    document.addEventListener('touchstart', oneTimePlay, { once: true, passive: true });
+    document.addEventListener('mousemove', oneTimePlay, { once: true, passive: true });
+
+    console.log('🎵 Fallback autoplay configuré - En attente d\'interaction...');
+
+    // Essayer de démarrer automatiquement après 1 seconde (plus rapide)
     setTimeout(() => {
-      if (!this.state.isPlaying && this.sound) {
-        this.sound
-          .play()
+      if (this.sound && !this.sound.playing()) {
+        this.sound.play()
           .then(() => {
             this.state.isPlaying = true;
             this.updatePlayButton();
             this.startTimeUpdater();
             console.log('🎵 Démarrage automatique réussi');
-            // Nettoyer les événements si le démarrage automatique marche
-            document.removeEventListener('click', oneTimePlay);
-            document.removeEventListener('keydown', oneTimePlay);
-            document.removeEventListener('scroll', oneTimePlay);
-            document.removeEventListener('touchstart', oneTimePlay);
-            document.removeEventListener('mousemove', oneTimePlay);
+            this.cleanupAutoplayListeners();
           })
           .catch(() => {
-            console.log(
-              "🎵 Autoplay bloqué, en attente d'interaction utilisateur...",
-            );
+            console.log('🎵 Autoplay bloqué, en attente d\'interaction utilisateur...');
           });
       }
-    }, 2000);
+    }, 1000);
+  }
+
+  cleanupAutoplayListeners() {
+    if (this.oneTimePlayHandler) {
+      document.removeEventListener('click', this.oneTimePlayHandler);
+      document.removeEventListener('keydown', this.oneTimePlayHandler);
+      document.removeEventListener('scroll', this.oneTimePlayHandler);
+      document.removeEventListener('touchstart', this.oneTimePlayHandler);
+      document.removeEventListener('mousemove', this.oneTimePlayHandler);
+      this.oneTimePlayHandler = null;
+    }
+    this.autoplayFallbackActive = false;
   }
 
   startTimeUpdater() {
