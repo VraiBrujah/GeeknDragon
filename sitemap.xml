@@ -1,54 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://geekndragon.com/</loc>
+    <loc>http://localhost/</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/actualites/es-tu-game.html</loc>
+    <loc>http://localhost/actualites/es-tu-game.html</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/actualites/es-tu-game.php</loc>
+    <loc>http://localhost/boutique</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/boutique</loc>
+    <loc>http://localhost/checkout</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/checkout</loc>
+    <loc>http://localhost/contact</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/contact</loc>
+    <loc>http://localhost/devis</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/devis</loc>
+    <loc>http://localhost/merci</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/merci</loc>
+    <loc>http://localhost/product</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product</loc>
+    <loc>http://localhost/product?id=lot10</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product?id=lot10</loc>
+    <loc>http://localhost/product?id=lot25</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product?id=lot25</loc>
+    <loc>http://localhost/product?id=lot50-essence</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product?id=lot50-essence</loc>
+    <loc>http://localhost/product?id=lot50-tresorerie</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product?id=lot50-tresorerie</loc>
+    <loc>http://localhost/product?id=pack-182-arsenal-aventurier</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product?id=pack-182-arsenal-aventurier</loc>
+    <loc>http://localhost/product?id=pack-182-butins-ingenieries</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product?id=pack-182-butins-ingenieries</loc>
+    <loc>http://localhost/product?id=pack-182-routes-services</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product?id=pack-182-routes-services</loc>
-  </url>
-  <url>
-    <loc>https://geekndragon.com/product?id=triptyque-aleatoire</loc>
+    <loc>http://localhost/product?id=triptyque-aleatoire</loc>
   </url>
 </urlset>

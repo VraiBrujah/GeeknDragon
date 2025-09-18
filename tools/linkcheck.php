@@ -15,7 +15,7 @@ class LinkChecker
     private string $baseUrl;
     private string $basePath;
     
-    public function __construct(string $baseUrl = 'http://localhost', string $basePath = null)
+    public function __construct(string $baseUrl = 'http://localhost', ?string $basePath = null)
     {
         $this->baseUrl = rtrim($baseUrl, '/');
         $this->basePath = $basePath ?? __DIR__ . '/..';
@@ -36,11 +36,14 @@ class LinkChecker
         
         // 3. Vérifier les includes PHP
         $this->checkPhpIncludes();
-        
-        // 4. Vérifier les liens internes dans les pages
+
+        // 4. Vérifier les points d'accès produit dynamiques et statiques
+        $this->checkProductEntryPoints();
+
+        // 5. Vérifier les liens internes dans les pages
         $this->checkInternalLinks();
-        
-        // 5. Vérifier les dépendances
+
+        // 6. Vérifier les dépendances
         $this->checkDependencies();
         
         // Résumé final
@@ -142,7 +145,7 @@ class LinkChecker
     private function checkPhpIncludes(): void
     {
         echo "🔗 Vérification des includes PHP...\n";
-        
+
         $includeFiles = [
             'bootstrap.php',
             'config.php',
@@ -161,6 +164,74 @@ class LinkChecker
         
         // Vérifier les chemins d'include dans les fichiers
         $this->checkIncludePaths();
+    }
+
+    /**
+     * Vérifie les points d'accès produits (routes dynamiques et pages statiques).
+     */
+    private function checkProductEntryPoints(): void
+    {
+        echo "🛒 Vérification des points d'accès produit...\n";
+
+        $products = $this->loadProductCatalog();
+
+        if (empty($products)) {
+            $this->addResult('product_endpoints', 'catalogue', 'WARNING', 'Aucun produit détecté dans data/products.json');
+            return;
+        }
+
+        $productScript = $this->basePath . '/product.php';
+        $productScriptExists = is_file($productScript);
+
+        foreach ($products as $productId => $productData) {
+            $productId = (string) $productId;
+
+            $dynamicUrl = '/product.php?id=' . rawurlencode($productId);
+            if (!isset($this->checked[$dynamicUrl])) {
+                if ($productScriptExists) {
+                    $this->addResult('product_endpoints', $dynamicUrl, 'OK', 'Route dynamique gérée par product.php');
+                } else {
+                    $this->addResult('product_endpoints', $dynamicUrl, 'ERROR', 'product.php introuvable pour cette route dynamique');
+                }
+                $this->checked[$dynamicUrl] = true;
+            }
+
+            if (is_array($productData) && isset($productData['slug'])) {
+                $slug = (string) $productData['slug'];
+                if ($slug !== '') {
+                    $staticPage = '/produit-' . $slug . '.php';
+                    if (!isset($this->checked[$staticPage])) {
+                        $staticFilePath = $this->basePath . $staticPage;
+                        if (is_file($staticFilePath)) {
+                            $this->addResult('product_endpoints', $staticPage, 'OK', 'Page produit statique détectée');
+                        }
+                        $this->checked[$staticPage] = true;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Charge le catalogue produit centralisé.
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    private function loadProductCatalog(): array
+    {
+        $productsPath = $this->basePath . '/data/products.json';
+        if (!is_file($productsPath)) {
+            return [];
+        }
+
+        $content = file_get_contents($productsPath);
+        if ($content === false) {
+            return [];
+        }
+
+        $data = json_decode($content, true);
+
+        return is_array($data) ? $data : [];
     }
     
     /**
