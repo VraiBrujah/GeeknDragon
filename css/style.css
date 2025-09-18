@@ -348,6 +348,7 @@
     --light-text: #ffffff;
     --medium-text: #e0e0e0;
     --border-color: #444444;
+    --nav-inline-spacing: clamp(1.5rem, 2.5vw, 2.5rem); /* Espacement latéral par défaut pour le menu principal */
     --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     --gradient-secondary: linear-gradient(135deg, var(--secondary-color) 0%, #b8860b 100%);
     --gradient-mystical: linear-gradient(135deg, var(--mystical-purple) 0%, var(--dragon-red) 50%, var(--forest-green) 100%);
@@ -760,6 +761,8 @@ p {
     display: flex;
     list-style: none;
     gap: 2rem;
+    /* Préserve un espace lisible entre le bloc logo et les premiers liens. */
+    margin-left: var(--nav-inline-spacing);
 }
 
 .nav-link {
@@ -1716,6 +1719,7 @@ p {
         padding: 2rem;
         transform: translateX(-100%);
         transition: var(--transition);
+        margin-left: 0;
     }
 
     .nav-menu.active {
