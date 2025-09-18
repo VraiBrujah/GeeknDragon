@@ -816,6 +816,9 @@ class GeeknDragonAudioPlayer {
   }
 
   setupAutoplayFallback() {
+    if (this.sound?.playing?.()) {
+      return;
+    }
     // Éviter les configurations multiples
     if (this.autoplayFallbackActive) {
       return;
@@ -849,18 +852,22 @@ class GeeknDragonAudioPlayer {
         return;
       }
 
-      this.sound
-        .play()
-        .then(() => {
-          this.state.isPlaying = true;
-          this.startTimeUpdater();
-          this.updatePlayButton();
-          console.log('🎵 Lecture activée après interaction utilisateur');
-          this.cleanupAutoplayListeners();
-        })
-        .catch((error) => {
-          console.log('🎵 Erreur de lecture après interaction:', error);
-        });
+      if (typeof this.sound?.playing === 'function' && !this.sound.playing()) {
+        this.sound
+          .play()
+          .then(() => {
+            this.state.isPlaying = true;
+            this.startTimeUpdater();
+            this.updatePlayButton();
+            console.log('🎵 Lecture activée après interaction utilisateur');
+            this.cleanupAutoplayListeners();
+          })
+          .catch((error) => {
+            console.log('🎵 Erreur de lecture après interaction:', error);
+          });
+      } else {
+        this.cleanupAutoplayListeners();
+      }
     };
 
     // Stocker la référence pour pouvoir nettoyer
