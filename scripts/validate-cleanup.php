@@ -51,21 +51,21 @@ foreach ($essentialFiles as $file => $desc) {
     }
 }
 
-// 3. Vérifier que la sauvegarde existe
-echo "\n💾 Vérification de la sauvegarde...\n";
+// 3. Vérifier l'absence des dossiers legacy
+echo "\n💾 Vérification des archives legacy...\n";
 
-$backupDir = __DIR__ . '/../backup-phase1';
-if (is_dir($backupDir)) {
-    $backupFiles = scandir($backupDir);
-    $backupCount = count($backupFiles) - 2; // Enlever . et ..
-    
-    if ($backupCount > 0) {
-        $success[] = "✅ Sauvegarde créée: {$backupCount} fichiers";
+$legacyDirs = [
+    'old' => 'Ancien dossier front',
+    'backup-phase1' => 'Sauvegarde temporaire phase 1',
+];
+
+foreach ($legacyDirs as $dir => $label) {
+    $fullPath = __DIR__ . '/../' . $dir;
+    if (is_dir($fullPath)) {
+        $errors[] = "❌ Dossier legacy encore présent: {$dir} ({$label})";
     } else {
-        $warnings[] = "⚠️ Sauvegarde vide";
+        $success[] = "✅ {$label} archivé via Git: {$dir}";
     }
-} else {
-    $errors[] = "❌ Dossier de sauvegarde manquant";
 }
 
 // 4. Vérifier la structure finale

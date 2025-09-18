@@ -17,7 +17,7 @@ The shop offers several coin bundles:
 
 The corresponding product identifiers are `lot10`, `lot25`, `lot50-essence` and `lot50-tresorerie`. When adding or removing products, update `data/products.json` accordingly.
 
-Need more than 50 pieces or a custom assortment? Request a personalized chest through the [quote form](index.php#contact).
+Need more than 50 pieces or a custom assortment? Request a personalized chest through the quote form available at `/contact`.
 
 ### Adding product images
 
@@ -25,25 +25,19 @@ Place product photos under `images/Piece/pro/`. Each item typically uses a full�
 
 ## Environment variables
 
-The application expects a few secrets to be provided through the environment. Snipcart now manages payments end to end, so no additional payment gateway keys are needed:
+The central configuration file `config.php` normalises environment values before they are consumed by the application. Define the following entries in your `.env` file or hosting control panel:
 
-- `SNIPCART_API_KEY` – your public Snipcart API key.
-- `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates. **Keep this key strictly server-side; it must never be exposed to client-side code or shipped to the browser.**
-- `SNIPCART_LANGUAGE` – locale used by Snipcart (for example `fr`).
-- `SENDGRID_API_KEY` – API key for the SendGrid SMTP service used to send emails.
-- `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
-
-To send emails from the contact form using SendGrid's SMTP service, configure credentials for the fixed sender address `contact@geekndragon.com`:
-
-- `SMTP_HOST` – SMTP server hostname (for SendGrid use `smtp.sendgrid.net`).
-- `SMTP_PORT` – SMTP server port (defaults to 587 if unset).
-- `SMTP_USERNAME` – account username (for SendGrid use `apikey`).
-- `SMTP_PASSWORD` – password for the SMTP account (the same as `SENDGRID_API_KEY`).
+- `APP_ENV` and `APP_DEBUG` – select between `production` and `development`, and toggle verbose logging locally.
+- `SNIPCART_API_KEY` – public Snipcart key exposed to the storefront.
+- `SNIPCART_SECRET_API_KEY` – private Snipcart key used server-side (the legacy name `SNIPCART_SECRET_KEY` remains supported for the admin dashboard).
+- `QUOTE_EMAIL` – destination address for contact and quote submissions (defaults to `commande@geekndragon.com`).
+- `MAX_MESSAGE_CHARS` and `RATE_LIMIT_WINDOW` – tune the size and anti-spam throttling of the public forms.
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD` and `SMTP_SECURE` – credentials for the transactional mailbox used by `SmtpMailer`.
 
 ## Local setup
 
 1. Install PHP (7.4 or newer) and clone this repository.
-2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SNIPCART_LANGUAGE`, `SNIPCART_ADD_PRODUCT_BEHAVIOR`, `SENDGRID_API_KEY` and the SMTP variables. No additional payment gateway key is required.
+2. Copy `.env.example` to `.env` and provide values for `APP_ENV`, `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY` (or the legacy `SNIPCART_SECRET_KEY`), `QUOTE_EMAIL`, the SMTP variables and the form limits (`MAX_MESSAGE_CHARS`, `RATE_LIMIT_WINDOW`).
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
 3. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
 
@@ -104,6 +98,14 @@ In the Snipcart dashboard:
 1. Set **Dynamic shipping** to `https://your-domain.com/snipcart/webhook` and select the **POST** method.
 
 With this hook enabled, shipping rates are calculated dynamically when customers check out.
+
+## Maintenance tasks
+
+- Regenerate `sitemap.xml` after adding or removing public pages:
+
+  ```bash
+  php tools/build-sitemap.php
+  ```
 
 ## Manual tests
 
