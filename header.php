@@ -53,6 +53,12 @@ $navItems = [
         'label' => 'Devis',
         'i18n' => 'nav.contact',
     ],
+    '/compte.php' => [
+        'slug' => 'compte',
+        'label' => 'Compte',
+        'i18n' => 'nav.account',
+        'icon' => '👤',
+    ],
 ];
 
 if (!function_exists('gdRenderNav')) {
@@ -66,20 +72,34 @@ if (!function_exists('gdRenderNav')) {
                 . ($mobile ? 'text-lg' : 'text-sm md:text-base')
                 . ' ' . gdNavClass($item['slug'], $active);
             $link = langUrl($href);
+            $isActive = ($item['slug'] ?? '') === $active;
+            $ariaCurrent = $isActive ? ' aria-current="page"' : '';
+
+            $labelText = htmlspecialchars($item['label'] ?? '', ENT_QUOTES, 'UTF-8');
+            $i18nKey = htmlspecialchars($item['i18n'] ?? '', ENT_QUOTES, 'UTF-8');
+            $label = '<span data-i18n="' . $i18nKey . '">' . $labelText . '</span>';
+
+            if (!empty($item['icon'])) {
+                $icon = htmlspecialchars((string) $item['icon'], ENT_QUOTES, 'UTF-8');
+                $label = '<span class="inline-flex items-center justify-center gap-2">'
+                    . '<span aria-hidden="true">' . $icon . '</span>'
+                    . $label
+                    . '</span>';
+            }
 
             if (isset($item['children']) && !$mobile) {
                 echo '<li class="relative group">';
                 echo '<a href="' . htmlspecialchars($link, ENT_QUOTES, 'UTF-8')
-                    . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">'
-                    . htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') . '</a>';
+                    . '" class="' . $class . ' block px-2 py-1"' . $ariaCurrent . '>'
+                    . $label . '</a>';
                 echo '<ul class="absolute left-0 top-full hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-1">';
                 gdRenderNav($item['children'], $active, $mobile);
                 echo '</ul></li>';
             } else {
                 echo '<li>';
                 echo '<a href="' . htmlspecialchars($link, ENT_QUOTES, 'UTF-8')
-                    . '" class="' . $class . ' block px-2 py-1" data-i18n="' . $item['i18n'] . '">'
-                    . htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8') . '</a>';
+                    . '" class="' . $class . ' block px-2 py-1"' . $ariaCurrent . '>'
+                    . $label . '</a>';
                 if (isset($item['children']) && $mobile) {
                     echo '<ul class="pl-4 flex flex-col space-y-2 mt-2">';
                     gdRenderNav($item['children'], $active, $mobile);
