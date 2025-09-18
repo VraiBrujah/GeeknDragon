@@ -1,4 +1,22 @@
-<?php declare(strict_types=1); $title = 'Actualités – FLIM 2025'; include __DIR__ . '/../header.php'; ?>
+<?php
+declare(strict_types=1);
+
+require __DIR__ . '/../bootstrap.php';
+
+$config = require __DIR__ . '/../config.php';
+$translator = require __DIR__ . '/../i18n.php';
+
+$lang = $translator->getCurrentLanguage();
+$title = __('news.es_tu_game.title', 'Actualités – FLIM 2025 | Geek & Dragon');
+$metaDescription = __('news.es_tu_game.description', 'Revivez notre démonstration Es-tu Game ? au FLIM 2025 avec vidéos et anecdotes immersives.');
+$active = 'actus';
+$extraHead = $extraHead ?? '';
+?>
+<!DOCTYPE html>
+<html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8'); ?>">
+<?php include __DIR__ . '/../head-common.php'; ?>
+<body>
+<?php include __DIR__ . '/../header.php'; ?>
 <main id="main" class="pt-[var(--header-height)]">
   <section id="actus" class="py-16" style="background: rgba(0,0,0,0.6)">
     <div class="container max-w-5xl mx-auto px-6">
@@ -41,3 +59,5 @@
   </section>
 </main>
 <?php include __DIR__ . '/../footer.php'; ?>
+</body>
+</html>
