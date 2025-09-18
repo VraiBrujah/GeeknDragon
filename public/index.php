@@ -22,7 +22,16 @@ $router = new Router();
 $router->middleware(function (string $uri) use ($router) {
     if (str_ends_with($uri, '.php')) {
         $canonical = substr($uri, 0, -4) ?: '/';
-        $router->redirect($uri, $canonical);
+
+        // Table de correspondance des anciennes fiches produit statiques
+        $legacyProductRedirects = [
+            '/lot10.php' => '/product?id=lot10',
+            '/lot25.php' => '/product?id=lot25',
+            '/lot50-essence.php' => '/product?id=lot50-essence',
+            '/lot50-tresorerie.php' => '/product?id=lot50-tresorerie',
+        ];
+
+        $router->redirect($uri, $legacyProductRedirects[$uri] ?? $canonical);
     }
     return $uri;
 });
@@ -82,24 +91,13 @@ $router->post('/snipcart/webhook', function () use ($config) {
 });
 
 // ===============================
-// PRODUITS SPÉCIFIQUES
+// PRODUITS - REDIRECTIONS VERS LA FICHE DYNAMIQUE
 // ===============================
 
-$router->get('/lot10', function () {
-    require __DIR__ . '/../lot10.php';
-});
-
-$router->get('/lot25', function () {
-    require __DIR__ . '/../lot25.php';
-});
-
-$router->get('/lot50-essence', function () {
-    require __DIR__ . '/../lot50-essence.php';
-});
-
-$router->get('/lot50-tresorerie', function () {
-    require __DIR__ . '/../lot50-tresorerie.php';
-});
+$router->redirect('/lot10', '/product?id=lot10');
+$router->redirect('/lot25', '/product?id=lot25');
+$router->redirect('/lot50-essence', '/product?id=lot50-essence');
+$router->redirect('/lot50-tresorerie', '/product?id=lot50-tresorerie');
 
 // Page produit générique
 $router->get('/product', function () {
@@ -190,10 +188,10 @@ $router->redirect('/contact.php', '/contact');
 $router->redirect('/devis.php', '/devis');
 $router->redirect('/checkout.php', '/checkout');
 $router->redirect('/merci.php', '/merci');
-$router->redirect('/lot10.php', '/lot10');
-$router->redirect('/lot25.php', '/lot25');
-$router->redirect('/lot50-essence.php', '/lot50-essence');
-$router->redirect('/lot50-tresorerie.php', '/lot50-tresorerie');
+$router->redirect('/lot10.php', '/product?id=lot10');
+$router->redirect('/lot25.php', '/product?id=lot25');
+$router->redirect('/lot50-essence.php', '/product?id=lot50-essence');
+$router->redirect('/lot50-tresorerie.php', '/product?id=lot50-tresorerie');
 $router->redirect('/product.php', '/product');
 $router->redirect('/actualites/es-tu-game.php', '/actualites/es-tu-game.html');
 $router->redirect('/actualites/es-tu-game', '/actualites/es-tu-game.html');
