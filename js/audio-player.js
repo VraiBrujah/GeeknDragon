@@ -52,7 +52,7 @@ class GeeknDragonAudioPlayer {
   getCurrentPage() {
     const path = window.location.pathname;
     if (path.includes('boutique')) return 'boutique';
-    if (path.includes('produit-')) return 'produit';
+    if (path.includes('product.php') || path.includes('produit-')) return 'produit';
     return 'index';
   }
 

@@ -14,9 +14,18 @@
         "rating": {
             "average": 0,
             "total": 0,
-            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+            "distribution": {
+                "5": 0,
+                "4": 0,
+                "3": 0,
+                "2": 0,
+                "1": 0
+            }
         },
-        "badges": ["starter", "premium"],
+        "badges": [
+            "starter",
+            "premium"
+        ],
         "images": {
             "main": "/images/optimized-modern/webp/Vagabon.webp",
             "gallery": [
@@ -38,10 +47,22 @@
             "🎁 Finitions variables selon le multiplicateur"
         ],
         "specifications": [
-            {"label": "Matériaux", "value": "cuivre, argent, électrum, or et platine"},
-            {"label": "Dimensions", "value": "diamètre 25 mm, épaisseur 2.5 mm"},
-            {"label": "Poids total", "value": "environ 45 g"},
-            {"label": "Emballage", "value": "coffret en bois gravé"}
+            {
+                "label": "Matériaux",
+                "value": "cuivre, argent, électrum, or et platine"
+            },
+            {
+                "label": "Dimensions",
+                "value": "diamètre 25 mm, épaisseur 2.5 mm"
+            },
+            {
+                "label": "Poids total",
+                "value": "environ 45 g"
+            },
+            {
+                "label": "Emballage",
+                "value": "coffret en bois gravé"
+            }
         ],
         "usage_tips": [
             "Récompensez vos joueurs avec de vraies pièces",
@@ -52,23 +73,106 @@
             "type": "dropdown",
             "label": "Choisissez votre multiplicateur :",
             "options": [
-                {"value": "x1", "label": "x1 - Finition brillante, sans gravure (60$ CAD)", "price": 60, "description": "Finition brillante sans gravure pour un aspect \"neuf\" authentique."},
-                {"value": "x10", "label": "x10 - Gravure nette, finition mate (60$ CAD)", "price": 60, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
-                {"value": "x100", "label": "x100 - Gravure nette, finition mate (60$ CAD)", "price": 60, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
-                {"value": "x1000", "label": "x1000 - Gravure nette, finition mate (60$ CAD)", "price": 60, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
-                {"value": "x10000", "label": "x10000 - Gravure nette, finition mate (60$ CAD)", "price": 60, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."}
+                {
+                    "value": "x1",
+                    "label": "x1 - Finition brillante, sans gravure (60$ CAD)",
+                    "price": 60,
+                    "description": "Finition brillante sans gravure pour un aspect \"neuf\" authentique."
+                },
+                {
+                    "value": "x10",
+                    "label": "x10 - Gravure nette, finition mate (60$ CAD)",
+                    "price": 60,
+                    "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."
+                },
+                {
+                    "value": "x100",
+                    "label": "x100 - Gravure nette, finition mate (60$ CAD)",
+                    "price": 60,
+                    "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."
+                },
+                {
+                    "value": "x1000",
+                    "label": "x1000 - Gravure nette, finition mate (60$ CAD)",
+                    "price": 60,
+                    "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."
+                },
+                {
+                    "value": "x10000",
+                    "label": "x10000 - Gravure nette, finition mate (60$ CAD)",
+                    "price": 60,
+                    "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."
+                }
             ]
         },
         "snipcart": {
             "weight": 150,
             "shipping_category": "coins"
         },
-        "related_products": ["lot25", "pack-182-arsenal-aventurier"],
+        "related_products": [
+            "lot25",
+            "pack-182-arsenal-aventurier"
+        ],
         "shipping": {
             "time": "2-3 jours ouvrables",
             "free_canada": true,
-            "returns": "30 jours satisfait ou remboursé"
-        }
+            "returns": "30 jours satisfait ou remboursé",
+            "items": [
+                {
+                    "icon": "🚚",
+                    "label": "Expédition :",
+                    "text": "2-3 jours ouvrables"
+                },
+                {
+                    "icon": "📦",
+                    "label": "Livraison gratuite :",
+                    "text": "Dès 250$ CAD au Canada"
+                },
+                {
+                    "icon": "↩️",
+                    "label": "Retours :",
+                    "text": "Politique de retours",
+                    "url": "retours.php",
+                    "details": "30 jours satisfait ou remboursé"
+                }
+            ],
+            "free_threshold": 250,
+            "currency": "CAD"
+        },
+        "category_anchor": "boutique.php#coins",
+        "price_note": "+ taxes",
+        "payment_options": [
+            "💳 Paiement sécurisé",
+            "🚚 Livraison gratuite dès 250$ CAD"
+        ],
+        "meta_description": "10 pièces métalliques pour démarrer l'aventure.",
+        "tabs": [
+            {
+                "id": "description",
+                "title": "Description",
+                "type": "html",
+                "content_field": "description"
+            },
+            {
+                "id": "specifications",
+                "title": "Spécifications",
+                "type": "specifications",
+                "heading": "Spécifications techniques"
+            },
+            {
+                "id": "usage",
+                "title": "Guide d'Usage",
+                "type": "list",
+                "heading": "Guide d'usage",
+                "items_field": "usage_tips"
+            },
+            {
+                "id": "reviews",
+                "title": "Avis",
+                "type": "reviews",
+                "heading": "Avis des aventuriers"
+            }
+        ]
     },
     "lot25": {
         "id": "lot25",
@@ -85,9 +189,17 @@
         "rating": {
             "average": 0,
             "total": 0,
-            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+            "distribution": {
+                "5": 0,
+                "4": 0,
+                "3": 0,
+                "2": 0,
+                "1": 0
+            }
         },
-        "badges": ["premium"],
+        "badges": [
+            "premium"
+        ],
         "images": {
             "main": "/images/optimized-modern/webp/Seignieur.webp",
             "gallery": [
@@ -109,9 +221,18 @@
             "📦 Coffret de présentation inclus"
         ],
         "specifications": [
-            {"label": "Contenu", "value": "25 pièces uniques — aucun doublon"},
-            {"label": "Finitions", "value": "Gravure nette sur variantes multipliées"},
-            {"label": "Emballage", "value": "Coffret de présentation inclus"}
+            {
+                "label": "Contenu",
+                "value": "25 pièces uniques — aucun doublon"
+            },
+            {
+                "label": "Finitions",
+                "value": "Gravure nette sur variantes multipliées"
+            },
+            {
+                "label": "Emballage",
+                "value": "Coffret de présentation inclus"
+            }
         ],
         "usage_tips": [
             "Idéal pour tables haut niveau et trésors épiques",
@@ -121,12 +242,70 @@
             "weight": 350,
             "shipping_category": "coins"
         },
-        "related_products": ["lot10", "lot50-essence"],
+        "related_products": [
+            "lot10",
+            "lot50-essence"
+        ],
         "shipping": {
             "time": "2-3 jours ouvrables",
             "free_canada": true,
-            "returns": "30 jours satisfait ou remboursé"
-        }
+            "returns": "30 jours satisfait ou remboursé",
+            "items": [
+                {
+                    "icon": "🚚",
+                    "label": "Expédition :",
+                    "text": "2-3 jours ouvrables"
+                },
+                {
+                    "icon": "📦",
+                    "label": "Livraison gratuite :",
+                    "text": "Dès 250$ CAD au Canada"
+                },
+                {
+                    "icon": "↩️",
+                    "label": "Retours :",
+                    "text": "Politique de retours",
+                    "url": "retours.php",
+                    "details": "30 jours satisfait ou remboursé"
+                }
+            ],
+            "free_threshold": 250,
+            "currency": "CAD"
+        },
+        "category_anchor": "boutique.php#coins",
+        "price_note": "+ taxes",
+        "payment_options": [
+            "💳 Paiement sécurisé",
+            "🚚 Livraison gratuite dès 250$ CAD"
+        ],
+        "meta_description": "25 pièces uniques couvrant tous métaux et multiplicateurs.",
+        "tabs": [
+            {
+                "id": "description",
+                "title": "Description",
+                "type": "html",
+                "content_field": "description"
+            },
+            {
+                "id": "specifications",
+                "title": "Spécifications",
+                "type": "specifications",
+                "heading": "Spécifications techniques"
+            },
+            {
+                "id": "usage",
+                "title": "Guide d'Usage",
+                "type": "list",
+                "heading": "Guide d'usage",
+                "items_field": "usage_tips"
+            },
+            {
+                "id": "reviews",
+                "title": "Avis",
+                "type": "reviews",
+                "heading": "Avis des aventuriers"
+            }
+        ]
     },
     "lot50-essence": {
         "id": "lot50-essence",
@@ -143,9 +322,17 @@
         "rating": {
             "average": 0,
             "total": 0,
-            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+            "distribution": {
+                "5": 0,
+                "4": 0,
+                "3": 0,
+                "2": 0,
+                "1": 0
+            }
         },
-        "badges": ["premium"],
+        "badges": [
+            "premium"
+        ],
         "images": {
             "main": "/images/optimized-modern/webp/Royaume.webp",
             "gallery": [
@@ -167,9 +354,18 @@
             "📦 Coffret de présentation renforcé"
         ],
         "specifications": [
-            {"label": "Contenu", "value": "50 pièces (2 × 25 modèles uniques)"},
-            {"label": "Finitions", "value": "Gravure nette sur variantes multipliées"},
-            {"label": "Emballage", "value": "Coffret de présentation renforcé"}
+            {
+                "label": "Contenu",
+                "value": "50 pièces (2 × 25 modèles uniques)"
+            },
+            {
+                "label": "Finitions",
+                "value": "Gravure nette sur variantes multipliées"
+            },
+            {
+                "label": "Emballage",
+                "value": "Coffret de présentation renforcé"
+            }
         ],
         "usage_tips": [
             "Idéal pour groupes nombreux",
@@ -180,12 +376,70 @@
             "weight": 700,
             "shipping_category": "coins"
         },
-        "related_products": ["lot25", "lot50-tresorerie"],
+        "related_products": [
+            "lot25",
+            "lot50-tresorerie"
+        ],
         "shipping": {
             "time": "2-3 jours ouvrables",
             "free_canada": true,
-            "returns": "30 jours satisfait ou remboursé"
-        }
+            "returns": "30 jours satisfait ou remboursé",
+            "items": [
+                {
+                    "icon": "🚚",
+                    "label": "Expédition :",
+                    "text": "2-3 jours ouvrables"
+                },
+                {
+                    "icon": "📦",
+                    "label": "Livraison gratuite :",
+                    "text": "Dès 250$ CAD au Canada"
+                },
+                {
+                    "icon": "↩️",
+                    "label": "Retours :",
+                    "text": "Politique de retours",
+                    "url": "retours.php",
+                    "details": "30 jours satisfait ou remboursé"
+                }
+            ],
+            "free_threshold": 250,
+            "currency": "CAD"
+        },
+        "category_anchor": "boutique.php#coins",
+        "price_note": "+ taxes",
+        "payment_options": [
+            "💳 Paiement sécurisé",
+            "🚚 Livraison gratuite dès 250$ CAD"
+        ],
+        "meta_description": "50 pièces, deux de chaque modèle pour une bourse complète.",
+        "tabs": [
+            {
+                "id": "description",
+                "title": "Description",
+                "type": "html",
+                "content_field": "description"
+            },
+            {
+                "id": "specifications",
+                "title": "Spécifications",
+                "type": "specifications",
+                "heading": "Spécifications techniques"
+            },
+            {
+                "id": "usage",
+                "title": "Guide d'Usage",
+                "type": "list",
+                "heading": "Guide d'usage",
+                "items_field": "usage_tips"
+            },
+            {
+                "id": "reviews",
+                "title": "Avis",
+                "type": "reviews",
+                "heading": "Avis des aventuriers"
+            }
+        ]
     },
     "lot50-tresorerie": {
         "id": "lot50-tresorerie",
@@ -202,9 +456,17 @@
         "rating": {
             "average": 0,
             "total": 0,
-            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+            "distribution": {
+                "5": 0,
+                "4": 0,
+                "3": 0,
+                "2": 0,
+                "1": 0
+            }
         },
-        "badges": ["premium"],
+        "badges": [
+            "premium"
+        ],
         "images": {
             "main": "/images/optimized-modern/webp/Essence.webp",
             "gallery": [
@@ -226,9 +488,18 @@
             "📦 Coffret seigneurial inclus"
         ],
         "specifications": [
-            {"label": "Contenu", "value": "50 pièces (10 × 5 métaux)"},
-            {"label": "Multiplicateur", "value": "Uniforme selon votre choix"},
-            {"label": "Emballage", "value": "Coffret seigneurial"}
+            {
+                "label": "Contenu",
+                "value": "50 pièces (10 × 5 métaux)"
+            },
+            {
+                "label": "Multiplicateur",
+                "value": "Uniforme selon votre choix"
+            },
+            {
+                "label": "Emballage",
+                "value": "Coffret seigneurial"
+            }
         ],
         "usage_tips": [
             "Parfait pour les trésors royaux",
@@ -239,23 +510,106 @@
             "type": "dropdown",
             "label": "Choisissez votre multiplicateur :",
             "options": [
-                {"value": "x1", "label": "x1 - Finition brillante, sans gravure (275$ CAD)", "price": 275, "description": "Finition brillante sans gravure pour un aspect \"neuf\" authentique."},
-                {"value": "x10", "label": "x10 - Gravure nette, finition mate (275$ CAD)", "price": 275, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
-                {"value": "x100", "label": "x100 - Gravure nette, finition mate (275$ CAD)", "price": 275, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
-                {"value": "x1000", "label": "x1000 - Gravure nette, finition mate (275$ CAD)", "price": 275, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."},
-                {"value": "x10000", "label": "x10000 - Gravure nette, finition mate (275$ CAD)", "price": 275, "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."}
+                {
+                    "value": "x1",
+                    "label": "x1 - Finition brillante, sans gravure (275$ CAD)",
+                    "price": 275,
+                    "description": "Finition brillante sans gravure pour un aspect \"neuf\" authentique."
+                },
+                {
+                    "value": "x10",
+                    "label": "x10 - Gravure nette, finition mate (275$ CAD)",
+                    "price": 275,
+                    "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."
+                },
+                {
+                    "value": "x100",
+                    "label": "x100 - Gravure nette, finition mate (275$ CAD)",
+                    "price": 275,
+                    "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."
+                },
+                {
+                    "value": "x1000",
+                    "label": "x1000 - Gravure nette, finition mate (275$ CAD)",
+                    "price": 275,
+                    "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."
+                },
+                {
+                    "value": "x10000",
+                    "label": "x10000 - Gravure nette, finition mate (275$ CAD)",
+                    "price": 275,
+                    "description": "Gravure précise avec finition mate pour un aspect vieilli authentique."
+                }
             ]
         },
         "snipcart": {
             "weight": 700,
             "shipping_category": "coins"
         },
-        "related_products": ["lot50-essence", "lot25"],
+        "related_products": [
+            "lot50-essence",
+            "lot25"
+        ],
         "shipping": {
             "time": "2-3 jours ouvrables",
             "free_canada": true,
-            "returns": "30 jours satisfait ou remboursé"
-        }
+            "returns": "30 jours satisfait ou remboursé",
+            "items": [
+                {
+                    "icon": "🚚",
+                    "label": "Expédition :",
+                    "text": "2-3 jours ouvrables"
+                },
+                {
+                    "icon": "📦",
+                    "label": "Livraison gratuite :",
+                    "text": "Dès 250$ CAD au Canada"
+                },
+                {
+                    "icon": "↩️",
+                    "label": "Retours :",
+                    "text": "Politique de retours",
+                    "url": "retours.php",
+                    "details": "30 jours satisfait ou remboursé"
+                }
+            ],
+            "free_threshold": 250,
+            "currency": "CAD"
+        },
+        "category_anchor": "boutique.php#coins",
+        "price_note": "+ taxes",
+        "payment_options": [
+            "💳 Paiement sécurisé",
+            "🚚 Livraison gratuite dès 250$ CAD"
+        ],
+        "meta_description": "50 pièces d'un même multiplicateur pour une trésorerie somptueuse.",
+        "tabs": [
+            {
+                "id": "description",
+                "title": "Description",
+                "type": "html",
+                "content_field": "description"
+            },
+            {
+                "id": "specifications",
+                "title": "Spécifications",
+                "type": "specifications",
+                "heading": "Spécifications techniques"
+            },
+            {
+                "id": "usage",
+                "title": "Guide d'Usage",
+                "type": "list",
+                "heading": "Guide d'usage",
+                "items_field": "usage_tips"
+            },
+            {
+                "id": "reviews",
+                "title": "Avis",
+                "type": "reviews",
+                "heading": "Avis des aventuriers"
+            }
+        ]
     },
     "pack-182-arsenal-aventurier": {
         "id": "pack-182-arsenal-aventurier",
@@ -272,9 +626,17 @@
         "rating": {
             "average": 0,
             "total": 0,
-            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+            "distribution": {
+                "5": 0,
+                "4": 0,
+                "3": 0,
+                "2": 0,
+                "1": 0
+            }
         },
-        "badges": ["ready-to-play"],
+        "badges": [
+            "ready-to-play"
+        ],
         "images": {
             "main": "/images/optimized-modern/webp/arme-recto.webp",
             "gallery": [
@@ -296,10 +658,22 @@
             "⚡ Parties plus fluides - fini la recherche dans les livres"
         ],
         "specifications": [
-            {"label": "Contenu", "value": "182 cartes illustrées"},
-            {"label": "Types", "value": "Armes, armures, équipement"},
-            {"label": "Compatibilité", "value": "D&D 5e 2024"},
-            {"label": "Qualité", "value": "Cartes professionnelles plastifiées"}
+            {
+                "label": "Contenu",
+                "value": "182 cartes illustrées"
+            },
+            {
+                "label": "Types",
+                "value": "Armes, armures, équipement"
+            },
+            {
+                "label": "Compatibilité",
+                "value": "D&D 5e 2024"
+            },
+            {
+                "label": "Qualité",
+                "value": "Cartes professionnelles plastifiées"
+            }
         ],
         "usage_tips": [
             "Distribuez les cartes selon les achats des joueurs",
@@ -311,20 +685,88 @@
             "type": "dropdown",
             "label": "Choisissez votre langue :",
             "options": [
-                {"value": "fr", "label": "Français", "price": 49.99, "description": "Version française complète avec illustrations."},
-                {"value": "en", "label": "English", "price": 49.99, "description": "Complete English version with illustrations."}
+                {
+                    "value": "fr",
+                    "label": "Français",
+                    "price": 49.99,
+                    "description": "Version française complète avec illustrations."
+                },
+                {
+                    "value": "en",
+                    "label": "English",
+                    "price": 49.99,
+                    "description": "Complete English version with illustrations."
+                }
             ]
         },
         "snipcart": {
             "weight": 300,
             "shipping_category": "cards"
         },
-        "related_products": ["pack-182-butins-ingenieries", "pack-182-routes-services"],
+        "related_products": [
+            "pack-182-butins-ingenieries",
+            "pack-182-routes-services"
+        ],
         "shipping": {
             "time": "2-3 jours ouvrables",
             "free_canada": true,
-            "returns": "30 jours satisfait ou remboursé"
-        }
+            "returns": "30 jours satisfait ou remboursé",
+            "items": [
+                {
+                    "icon": "🚚",
+                    "label": "Expédition :",
+                    "text": "2-3 jours ouvrables"
+                },
+                {
+                    "icon": "📦",
+                    "label": "Livraison gratuite :",
+                    "text": "Dès 250$ CAD au Canada"
+                },
+                {
+                    "icon": "↩️",
+                    "label": "Retours :",
+                    "text": "Politique de retours",
+                    "url": "retours.php",
+                    "details": "30 jours satisfait ou remboursé"
+                }
+            ],
+            "free_threshold": 250,
+            "currency": "CAD"
+        },
+        "category_anchor": "boutique.php#cards",
+        "price_note": "+ taxes",
+        "payment_options": [
+            "💳 Paiement sécurisé",
+            "🚚 Livraison gratuite dès 250$ CAD"
+        ],
+        "meta_description": "182 cartes d'armes, d'armures et d'équipement prêts à jouer.",
+        "tabs": [
+            {
+                "id": "description",
+                "title": "Description",
+                "type": "html",
+                "content_field": "description"
+            },
+            {
+                "id": "specifications",
+                "title": "Spécifications",
+                "type": "specifications",
+                "heading": "Spécifications techniques"
+            },
+            {
+                "id": "usage",
+                "title": "Guide d'Usage",
+                "type": "list",
+                "heading": "Guide d'usage",
+                "items_field": "usage_tips"
+            },
+            {
+                "id": "reviews",
+                "title": "Avis",
+                "type": "reviews",
+                "heading": "Avis des aventuriers"
+            }
+        ]
     },
     "pack-182-butins-ingenieries": {
         "id": "pack-182-butins-ingenieries",
@@ -341,9 +783,17 @@
         "rating": {
             "average": 0,
             "total": 0,
-            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+            "distribution": {
+                "5": 0,
+                "4": 0,
+                "3": 0,
+                "2": 0,
+                "1": 0
+            }
         },
-        "badges": ["advanced"],
+        "badges": [
+            "advanced"
+        ],
         "images": {
             "main": "/images/optimized-modern/webp/alexandrite-recto.webp",
             "gallery": [
@@ -365,10 +815,22 @@
             "🎯 Parfait pour campagnes non-conventionnelles"
         ],
         "specifications": [
-            {"label": "Contenu", "value": "182 cartes illustrées"},
-            {"label": "Types", "value": "Butin, explosifs, marchandises, outils"},
-            {"label": "Style", "value": "Moderne/futuriste compatible fantasy"},
-            {"label": "Qualité", "value": "Cartes professionnelles plastifiées"}
+            {
+                "label": "Contenu",
+                "value": "182 cartes illustrées"
+            },
+            {
+                "label": "Types",
+                "value": "Butin, explosifs, marchandises, outils"
+            },
+            {
+                "label": "Style",
+                "value": "Moderne/futuriste compatible fantasy"
+            },
+            {
+                "label": "Qualité",
+                "value": "Cartes professionnelles plastifiées"
+            }
         ],
         "usage_tips": [
             "Idéal pour campagnes steampunk ou technofantasy",
@@ -380,20 +842,88 @@
             "type": "dropdown",
             "label": "Choisissez votre langue :",
             "options": [
-                {"value": "fr", "label": "Français", "price": 36.99, "description": "Version française complète avec illustrations."},
-                {"value": "en", "label": "English", "price": 36.99, "description": "Complete English version with illustrations."}
+                {
+                    "value": "fr",
+                    "label": "Français",
+                    "price": 36.99,
+                    "description": "Version française complète avec illustrations."
+                },
+                {
+                    "value": "en",
+                    "label": "English",
+                    "price": 36.99,
+                    "description": "Complete English version with illustrations."
+                }
             ]
         },
         "snipcart": {
             "weight": 300,
             "shipping_category": "cards"
         },
-        "related_products": ["pack-182-arsenal-aventurier", "pack-182-routes-services"],
+        "related_products": [
+            "pack-182-arsenal-aventurier",
+            "pack-182-routes-services"
+        ],
         "shipping": {
             "time": "2-3 jours ouvrables",
             "free_canada": true,
-            "returns": "30 jours satisfait ou remboursé"
-        }
+            "returns": "30 jours satisfait ou remboursé",
+            "items": [
+                {
+                    "icon": "🚚",
+                    "label": "Expédition :",
+                    "text": "2-3 jours ouvrables"
+                },
+                {
+                    "icon": "📦",
+                    "label": "Livraison gratuite :",
+                    "text": "Dès 250$ CAD au Canada"
+                },
+                {
+                    "icon": "↩️",
+                    "label": "Retours :",
+                    "text": "Politique de retours",
+                    "url": "retours.php",
+                    "details": "30 jours satisfait ou remboursé"
+                }
+            ],
+            "free_threshold": 250,
+            "currency": "CAD"
+        },
+        "category_anchor": "boutique.php#cards",
+        "price_note": "+ taxes",
+        "payment_options": [
+            "💳 Paiement sécurisé",
+            "🚚 Livraison gratuite dès 250$ CAD"
+        ],
+        "meta_description": "182 cartes de butin, explosifs, marchandises et outils.",
+        "tabs": [
+            {
+                "id": "description",
+                "title": "Description",
+                "type": "html",
+                "content_field": "description"
+            },
+            {
+                "id": "specifications",
+                "title": "Spécifications",
+                "type": "specifications",
+                "heading": "Spécifications techniques"
+            },
+            {
+                "id": "usage",
+                "title": "Guide d'Usage",
+                "type": "list",
+                "heading": "Guide d'usage",
+                "items_field": "usage_tips"
+            },
+            {
+                "id": "reviews",
+                "title": "Avis",
+                "type": "reviews",
+                "heading": "Avis des aventuriers"
+            }
+        ]
     },
     "pack-182-routes-services": {
         "id": "pack-182-routes-services",
@@ -410,9 +940,17 @@
         "rating": {
             "average": 0,
             "total": 0,
-            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+            "distribution": {
+                "5": 0,
+                "4": 0,
+                "3": 0,
+                "2": 0,
+                "1": 0
+            }
         },
-        "badges": ["exploration"],
+        "badges": [
+            "exploration"
+        ],
         "images": {
             "main": "/images/optimized-modern/webp/sac-aa-dos-recto.webp",
             "gallery": [
@@ -434,10 +972,22 @@
             "🗺️ Parfait pour campagnes d'exploration"
         ],
         "specifications": [
-            {"label": "Contenu", "value": "182 cartes illustrées"},
-            {"label": "Types", "value": "Paquetages, services, véhicules, poisons"},
-            {"label": "Focus", "value": "Exploration, voyage, intrigue"},
-            {"label": "Qualité", "value": "Cartes professionnelles plastifiées"}
+            {
+                "label": "Contenu",
+                "value": "182 cartes illustrées"
+            },
+            {
+                "label": "Types",
+                "value": "Paquetages, services, véhicules, poisons"
+            },
+            {
+                "label": "Focus",
+                "value": "Exploration, voyage, intrigue"
+            },
+            {
+                "label": "Qualité",
+                "value": "Cartes professionnelles plastifiées"
+            }
         ],
         "usage_tips": [
             "Gérez les voyages et l'exploration visuellement",
@@ -449,20 +999,88 @@
             "type": "dropdown",
             "label": "Choisissez votre langue :",
             "options": [
-                {"value": "fr", "label": "Français", "price": 34.99, "description": "Version française complète avec illustrations."},
-                {"value": "en", "label": "English", "price": 34.99, "description": "Complete English version with illustrations."}
+                {
+                    "value": "fr",
+                    "label": "Français",
+                    "price": 34.99,
+                    "description": "Version française complète avec illustrations."
+                },
+                {
+                    "value": "en",
+                    "label": "English",
+                    "price": 34.99,
+                    "description": "Complete English version with illustrations."
+                }
             ]
         },
         "snipcart": {
             "weight": 300,
             "shipping_category": "cards"
         },
-        "related_products": ["pack-182-arsenal-aventurier", "pack-182-butins-ingenieries"],
+        "related_products": [
+            "pack-182-arsenal-aventurier",
+            "pack-182-butins-ingenieries"
+        ],
         "shipping": {
             "time": "2-3 jours ouvrables",
             "free_canada": true,
-            "returns": "30 jours satisfait ou remboursé"
-        }
+            "returns": "30 jours satisfait ou remboursé",
+            "items": [
+                {
+                    "icon": "🚚",
+                    "label": "Expédition :",
+                    "text": "2-3 jours ouvrables"
+                },
+                {
+                    "icon": "📦",
+                    "label": "Livraison gratuite :",
+                    "text": "Dès 250$ CAD au Canada"
+                },
+                {
+                    "icon": "↩️",
+                    "label": "Retours :",
+                    "text": "Politique de retours",
+                    "url": "retours.php",
+                    "details": "30 jours satisfait ou remboursé"
+                }
+            ],
+            "free_threshold": 250,
+            "currency": "CAD"
+        },
+        "category_anchor": "boutique.php#cards",
+        "price_note": "+ taxes",
+        "payment_options": [
+            "💳 Paiement sécurisé",
+            "🚚 Livraison gratuite dès 250$ CAD"
+        ],
+        "meta_description": "182 cartes de paquetages, services, véhicules et poisons.",
+        "tabs": [
+            {
+                "id": "description",
+                "title": "Description",
+                "type": "html",
+                "content_field": "description"
+            },
+            {
+                "id": "specifications",
+                "title": "Spécifications",
+                "type": "specifications",
+                "heading": "Spécifications techniques"
+            },
+            {
+                "id": "usage",
+                "title": "Guide d'Usage",
+                "type": "list",
+                "heading": "Guide d'usage",
+                "items_field": "usage_tips"
+            },
+            {
+                "id": "reviews",
+                "title": "Avis",
+                "type": "reviews",
+                "heading": "Avis des aventuriers"
+            }
+        ]
     },
     "triptyque-aleatoire": {
         "id": "triptyque-aleatoire",
@@ -479,9 +1097,18 @@
         "rating": {
             "average": 0,
             "total": 0,
-            "distribution": {"5": 0, "4": 0, "3": 0, "2": 0, "1": 0}
+            "distribution": {
+                "5": 0,
+                "4": 0,
+                "3": 0,
+                "2": 0,
+                "1": 0
+            }
         },
-        "badges": ["mystery", "complete"],
+        "badges": [
+            "mystery",
+            "complete"
+        ],
         "images": {
             "main": "/images/optimized-modern/webp/triptyque-fiche.webp",
             "gallery": [
@@ -503,10 +1130,22 @@
             "🎯 Parfait pour one-shots et découverte"
         ],
         "specifications": [
-            {"label": "Contenu", "value": "3 triptyques + équipement + pièces"},
-            {"label": "Tirage", "value": "Aléatoire garanti"},
-            {"label": "Compatibilité", "value": "D&D 5e 2024"},
-            {"label": "Usage", "value": "One-shots, découverte, surprise"}
+            {
+                "label": "Contenu",
+                "value": "3 triptyques + équipement + pièces"
+            },
+            {
+                "label": "Tirage",
+                "value": "Aléatoire garanti"
+            },
+            {
+                "label": "Compatibilité",
+                "value": "D&D 5e 2024"
+            },
+            {
+                "label": "Usage",
+                "value": "One-shots, découverte, surprise"
+            }
         ],
         "usage_tips": [
             "Parfait pour initier de nouveaux joueurs",
@@ -518,19 +1157,87 @@
             "type": "dropdown",
             "label": "Choisissez votre langue :",
             "options": [
-                {"value": "fr", "label": "Français", "price": 59.99, "description": "Version française complète avec triptyques."},
-                {"value": "en", "label": "English", "price": 59.99, "description": "Complete English version with triptychs."}
+                {
+                    "value": "fr",
+                    "label": "Français",
+                    "price": 59.99,
+                    "description": "Version française complète avec triptyques."
+                },
+                {
+                    "value": "en",
+                    "label": "English",
+                    "price": 59.99,
+                    "description": "Complete English version with triptychs."
+                }
             ]
         },
         "snipcart": {
             "weight": 200,
             "shipping_category": "triptychs"
         },
-        "related_products": ["pack-182-arsenal-aventurier", "lot10"],
+        "related_products": [
+            "pack-182-arsenal-aventurier",
+            "lot10"
+        ],
         "shipping": {
             "time": "2-3 jours ouvrables",
             "free_canada": true,
-            "returns": "30 jours satisfait ou remboursé"
-        }
+            "returns": "30 jours satisfait ou remboursé",
+            "items": [
+                {
+                    "icon": "🚚",
+                    "label": "Expédition :",
+                    "text": "2-3 jours ouvrables"
+                },
+                {
+                    "icon": "📦",
+                    "label": "Livraison gratuite :",
+                    "text": "Dès 250$ CAD au Canada"
+                },
+                {
+                    "icon": "↩️",
+                    "label": "Retours :",
+                    "text": "Politique de retours",
+                    "url": "retours.php",
+                    "details": "30 jours satisfait ou remboursé"
+                }
+            ],
+            "free_threshold": 250,
+            "currency": "CAD"
+        },
+        "category_anchor": "boutique.php#triptych",
+        "price_note": "+ taxes",
+        "payment_options": [
+            "💳 Paiement sécurisé",
+            "🚚 Livraison gratuite dès 250$ CAD"
+        ],
+        "meta_description": "Tire classe, espèce et historique pour un héros prêt à jouer.",
+        "tabs": [
+            {
+                "id": "description",
+                "title": "Description",
+                "type": "html",
+                "content_field": "description"
+            },
+            {
+                "id": "specifications",
+                "title": "Spécifications",
+                "type": "specifications",
+                "heading": "Spécifications techniques"
+            },
+            {
+                "id": "usage",
+                "title": "Guide d'Usage",
+                "type": "list",
+                "heading": "Guide d'usage",
+                "items_field": "usage_tips"
+            },
+            {
+                "id": "reviews",
+                "title": "Avis",
+                "type": "reviews",
+                "heading": "Avis des aventuriers"
+            }
+        ]
     }
 }
