@@ -1,28 +1,128 @@
 /**
- * Système de favoris avec gestion de compte utilisateur
+ * Module unifié pour la gestion des favoris et du sélecteur de variantes produit.
  */
+const WishlistModule = {
+  /**
+   * Initialise le module après chargement du DOM.
+   */
+  init() {
+    this.cacheElements();
+    this.initWishlistButton();
+    this.initDropdown();
+  },
 
-// Vérifier si l'utilisateur est connecté
-function isUserLoggedIn() {
-    // Ici, vous devrez implémenter la vérification réelle avec votre système d'auth
-    // Pour l'instant, on vérifie s'il y a un token ou une session
-    return localStorage.getItem('user_token') || sessionStorage.getItem('user_session');
-}
+  /**
+   * Met en cache les éléments nécessaires aux interactions.
+   */
+  cacheElements() {
+    this.wishlistButton = document.querySelector('.btn-wishlist');
+    this.wishlistIcon = this.wishlistButton?.querySelector('.wishlist-icon');
+    this.wishlistText = this.wishlistButton?.querySelector('.wishlist-text');
+    this.defaultWishlistText = this.wishlistText?.textContent?.trim() || 'Favoris';
+    this.productId = this.wishlistButton?.getAttribute('data-product-id') || null;
 
-// Gérer l'ajout/suppression des favoris
-function handleWishlist(productId) {
-    if (!isUserLoggedIn()) {
-        // Rediriger vers la page de connexion
-        showLoginPrompt();
-        return;
+    this.dropdownRoot = document.querySelector('[data-dropdown-root]');
+    this.dropdownToggle = this.dropdownRoot?.querySelector('[data-dropdown-toggle]');
+    this.dropdownOptions = this.dropdownRoot?.querySelector('[data-dropdown-options]');
+    this.dropdownSelectedText = this.dropdownRoot?.querySelector('[data-selected-text]');
+
+    this.priceElement = document.querySelector('.price');
+    const currencyElement = this.priceElement?.querySelector('small');
+    this.currency = currencyElement?.textContent?.trim() || 'CAD';
+    this.descriptionElement = document.getElementById('config-description');
+    this.snipcartButton = document.querySelector('.snipcart-add-item');
+    this.snipcartBaseName = this.snipcartButton?.getAttribute('data-item-name') || '';
+
+    this.boundOutsideClick = this.handleOutsideClick.bind(this);
+    this.boundEscapeKey = this.handleEscapeKey.bind(this);
+  },
+
+  /**
+   * Prépare le bouton de favoris si présent.
+   */
+  initWishlistButton() {
+    if (!this.wishlistButton || !this.productId) {
+      return;
     }
-    
-    toggleWishlist(productId);
-}
 
-// Afficher une invitation à se connecter
-function showLoginPrompt() {
+    this.syncWishlistState();
+
+    this.wishlistButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.handleWishlist(this.productId);
+    });
+  },
+
+  /**
+   * Synchronise l'état visuel du bouton favoris avec le stockage.
+   */
+  syncWishlistState() {
+    const wishlist = this.loadWishlist();
+    const isActive = wishlist.includes(this.productId);
+    this.updateWishlistButton(isActive);
+  },
+
+  /**
+   * Ajoute ou retire un produit de la liste de favoris.
+   */
+  handleWishlist(productIdParam) {
+    const id = productIdParam || this.productId;
+    if (!id) {
+      return;
+    }
+
+    if (!this.ensureUserLoggedIn()) {
+      return;
+    }
+
+    const wishlist = this.loadWishlist();
+    const isAlreadyInWishlist = wishlist.includes(id);
+    const updatedWishlist = isAlreadyInWishlist
+      ? wishlist.filter((item) => item !== id)
+      : [...wishlist, id];
+
+    this.saveWishlist(updatedWishlist);
+    this.updateWishlistButton(!isAlreadyInWishlist);
+    this.animateWishlistButton();
+
+    if (isAlreadyInWishlist) {
+      this.showToast('Retiré des favoris', 'info');
+    } else {
+      this.showToast('Ajouté aux favoris ❤️', 'success');
+    }
+
+    this.trackWishlistAction(id, !isAlreadyInWishlist);
+  },
+
+  /**
+   * Vérifie si l'utilisateur est connecté, sinon affiche la modale de connexion.
+   */
+  ensureUserLoggedIn() {
+    if (this.isUserLoggedIn()) {
+      return true;
+    }
+
+    this.showLoginPrompt();
+    return false;
+  },
+
+  /**
+   * Retourne true si des informations d'identification sont disponibles.
+   */
+  isUserLoggedIn() {
+    return Boolean(localStorage.getItem('user_token') || sessionStorage.getItem('user_session'));
+  },
+
+  /**
+   * Affiche une fenêtre invitant l'utilisateur à se connecter.
+   */
+  showLoginPrompt() {
+    if (document.querySelector('[data-login-modal="true"]')) {
+      return;
+    }
+
     const modal = document.createElement('div');
+    modal.setAttribute('data-login-modal', 'true');
     modal.style.cssText = `
         position: fixed;
         top: 0;
@@ -35,7 +135,7 @@ function showLoginPrompt() {
         align-items: center;
         z-index: 10000;
     `;
-    
+
     modal.innerHTML = `
         <div style="
             background: var(--dark-bg, #2a1810);
@@ -45,7 +145,10 @@ function showLoginPrompt() {
             max-width: 400px;
             text-align: center;
             color: var(--light-text, #f5f5f5);
+            position: relative;
         ">
+            <button type="button" data-login-close
+                style="position: absolute; top: 0.5rem; right: 0.5rem; background: none; border: none; color: inherit; font-size: 1.5rem; cursor: pointer;">&times;</button>
             <h3 style="color: var(--secondary-color, #d4af37); margin-bottom: 1rem;">
                 🔒 Connexion Requise
             </h3>
@@ -61,7 +164,7 @@ function showLoginPrompt() {
                     text-decoration: none;
                     font-weight: 600;
                 ">Se Connecter</a>
-                <button onclick="this.closest('[style*=fixed]').remove()" style="
+                <button type="button" data-login-cancel style="
                     background: transparent;
                     border: 1px solid var(--border-color, #4a3728);
                     color: var(--light-text, #f5f5f5);
@@ -72,57 +175,89 @@ function showLoginPrompt() {
             </div>
         </div>
     `;
-    
-    document.body.appendChild(modal);
-    
-    // Fermer avec Échap
-    const closeModal = (e) => {
-        if (e.key === 'Escape' || e.target === modal) {
-            modal.remove();
-            document.removeEventListener('keydown', closeModal);
-        }
+
+    const onKeydown = (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
     };
-    document.addEventListener('keydown', closeModal);
-    modal.addEventListener('click', closeModal);
-}
 
-// Gérer les favoris pour utilisateur connecté
-function toggleWishlist(productId) {
-    const wishlistBtn = document.querySelector('.btn-wishlist');
-    const icon = wishlistBtn.querySelector('.wishlist-icon');
-    const text = wishlistBtn.querySelector('.wishlist-text');
-    
-    // Récupérer la liste des favoris
-    let wishlist = JSON.parse(localStorage.getItem('user_wishlist') || '[]');
-    
-    const isInWishlist = wishlist.includes(productId);
-    
-    if (isInWishlist) {
-        // Retirer des favoris
-        wishlist = wishlist.filter(id => id !== productId);
-        icon.textContent = '🤍';
-        text.textContent = 'Favoris';
-        showToast('Retiré des favoris', 'info');
-    } else {
-        // Ajouter aux favoris
-        wishlist.push(productId);
-        icon.textContent = '❤️';
-        text.textContent = 'Favori';
-        showToast('Ajouté aux favoris', 'success');
+    const closeModal = () => {
+      modal.remove();
+      document.removeEventListener('keydown', onKeydown);
+    };
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    modal.querySelector('[data-login-close]')?.addEventListener('click', closeModal);
+    modal.querySelector('[data-login-cancel]')?.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', onKeydown);
+
+    document.body.appendChild(modal);
+  },
+
+  /**
+   * Charge la liste des favoris depuis le stockage local.
+   */
+  loadWishlist() {
+    try {
+      return JSON.parse(localStorage.getItem('user_wishlist') || '[]');
+    } catch (error) {
+      console.error('GeeknDragon: impossible de lire les favoris', error);
+      return [];
     }
-    
-    // Sauvegarder
-    localStorage.setItem('user_wishlist', JSON.stringify(wishlist));
-    
-    // Animation du bouton
-    wishlistBtn.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        wishlistBtn.style.transform = 'scale(1)';
-    }, 150);
-}
+  },
 
-// Afficher un toast de confirmation
-function showToast(message, type = 'info') {
+  /**
+   * Sauvegarde la liste des favoris.
+   */
+  saveWishlist(wishlist) {
+    localStorage.setItem('user_wishlist', JSON.stringify(wishlist));
+  },
+
+  /**
+   * Met à jour l'apparence du bouton de favoris.
+   */
+  updateWishlistButton(isActive) {
+    if (!this.wishlistButton) {
+      return;
+    }
+
+    this.wishlistButton.classList.toggle('active', isActive);
+    this.wishlistButton.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+
+    if (this.wishlistIcon) {
+      this.wishlistIcon.textContent = isActive ? '❤️' : '🤍';
+    }
+
+    if (this.wishlistText) {
+      this.wishlistText.textContent = isActive ? 'Favori' : this.defaultWishlistText;
+    }
+  },
+
+  /**
+   * Ajoute une petite animation au bouton de favoris.
+   */
+  animateWishlistButton() {
+    if (!this.wishlistButton) {
+      return;
+    }
+
+    this.wishlistButton.style.transform = 'scale(0.95)';
+    window.setTimeout(() => {
+      this.wishlistButton.style.transform = 'scale(1)';
+    }, 150);
+  },
+
+  /**
+   * Affiche un toast de confirmation.
+   */
+  showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.style.cssText = `
         position: fixed;
@@ -139,132 +274,228 @@ function showToast(message, type = 'info') {
         border: 1px solid var(--border-color, #4a3728);
     `;
     toast.textContent = message;
-    
+
     document.body.appendChild(toast);
-    
-    // Animation d'entrée
-    setTimeout(() => {
-        toast.style.transform = 'translateX(0)';
+
+    window.setTimeout(() => {
+      toast.style.transform = 'translateX(0)';
     }, 100);
-    
-    // Retirer après 3 secondes
-    setTimeout(() => {
-        toast.style.transform = 'translateX(100%)';
-        setTimeout(() => toast.remove(), 300);
+
+    window.setTimeout(() => {
+      toast.style.transform = 'translateX(100%)';
+      window.setTimeout(() => toast.remove(), 300);
     }, 3000);
-}
+  },
 
-// Initialiser l'état des favoris au chargement de la page
-document.addEventListener('DOMContentLoaded', function() {
-    if (!isUserLoggedIn()) return;
-    
-    const wishlistBtn = document.querySelector('.btn-wishlist');
-    if (!wishlistBtn) return;
-    
-    const productId = wishlistBtn.getAttribute('onclick').match(/'([^']+)'/)[1];
-    const wishlist = JSON.parse(localStorage.getItem('user_wishlist') || '[]');
-    
-    if (wishlist.includes(productId)) {
-        const icon = wishlistBtn.querySelector('.wishlist-icon');
-        const text = wishlistBtn.querySelector('.wishlist-text');
-        icon.textContent = '❤️';
-        text.textContent = 'Favori';
+  /**
+   * Initialise les interactions du dropdown de variantes.
+   */
+  initDropdown() {
+    if (!this.dropdownRoot || !this.dropdownToggle || !this.dropdownOptions) {
+      return;
     }
-});
 
-// Gestion du dropdown custom
-function toggleDropdown() {
-    const dropdown = document.querySelector('#custom-dropdown');
-    const options = document.querySelector('#dropdown-options');
-    const selected = dropdown.querySelector('.dropdown-selected');
-    
-    dropdown.classList.toggle('active');
-    selected.classList.toggle('active');
-    options.classList.toggle('show');
-    
-    // Fermer en cliquant ailleurs
-    if (options.classList.contains('show')) {
-        document.addEventListener('click', closeDropdownOutside);
+    this.dropdownToggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.toggleDropdown();
+    });
+
+    this.dropdownToggle.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        this.toggleDropdown();
+      }
+    });
+
+    this.dropdownOptions.addEventListener('click', (event) => {
+      const option = event.target.closest('[data-dropdown-option]');
+      if (option) {
+        event.preventDefault();
+        this.selectOption(option);
+      }
+    });
+
+    const activeOption = this.dropdownOptions.querySelector('[data-dropdown-option].active')
+      || this.dropdownOptions.querySelector('[data-dropdown-option]');
+    if (activeOption) {
+      this.selectOption(activeOption, { shouldClose: false });
+    }
+  },
+
+  /**
+   * Ouvre ou ferme le dropdown selon son état courant.
+   */
+  toggleDropdown() {
+    if (this.dropdownRoot.classList.contains('active')) {
+      this.closeDropdown();
     } else {
-        document.removeEventListener('click', closeDropdownOutside);
+      this.openDropdown();
     }
-}
+  },
 
-function closeDropdownOutside(event) {
-    const dropdown = document.querySelector('#custom-dropdown');
-    if (!dropdown.contains(event.target)) {
-        closeDropdown();
-    }
-}
+  /**
+   * Ouvre la liste des variantes.
+   */
+  openDropdown() {
+    this.dropdownRoot.classList.add('active');
+    this.dropdownToggle.classList.add('active');
+    this.dropdownToggle.setAttribute('aria-expanded', 'true');
+    this.dropdownOptions.classList.add('show');
 
-function closeDropdown() {
-    const dropdown = document.querySelector('#custom-dropdown');
-    const options = document.querySelector('#dropdown-options');
-    const selected = dropdown.querySelector('.dropdown-selected');
-    
-    dropdown.classList.remove('active');
-    selected.classList.remove('active');
-    options.classList.remove('show');
-    document.removeEventListener('click', closeDropdownOutside);
-}
+    document.addEventListener('click', this.boundOutsideClick);
+    document.addEventListener('keydown', this.boundEscapeKey);
+  },
 
-function selectOption(optionElement) {
-    // Retirer l'ancienne sélection
-    document.querySelectorAll('.dropdown-option').forEach(opt => opt.classList.remove('active'));
-    
-    // Marquer la nouvelle option comme active
-    optionElement.classList.add('active');
-    
-    // Mettre à jour le texte sélectionné
-    const selectedText = document.querySelector('.selected-text');
-    const value = optionElement.getAttribute('data-value');
-    const price = optionElement.getAttribute('data-price');
-    selectedText.textContent = `${value} - ${price}$ CAD`;
-    
-    // Mettre à jour la description et le prix
-    updatePrice(optionElement);
-    
-    // Fermer le dropdown
-    closeDropdown();
-}
+  /**
+   * Ferme la liste des variantes.
+   */
+  closeDropdown() {
+    this.dropdownRoot.classList.remove('active');
+    this.dropdownToggle.classList.remove('active');
+    this.dropdownToggle.setAttribute('aria-expanded', 'false');
+    this.dropdownOptions.classList.remove('show');
 
-// Fonction pour mettre à jour le prix lors du changement de variante
-function updatePrice(selectedOption = null) {
-    if (!selectedOption) {
-        selectedOption = document.querySelector('.dropdown-option.active');
-    }
-    
-    if (!selectedOption) return;
-    
-    const newPrice = selectedOption.getAttribute('data-price');
-    const newDescription = selectedOption.getAttribute('data-description');
-    const newValue = selectedOption.getAttribute('data-value');
-    
-    const priceElement = document.querySelector('.price');
-    const snipcartBtn = document.querySelector('.snipcart-add-item');
-    const descriptionElement = document.querySelector('#config-description');
-    
-    if (priceElement && newPrice) {
-        priceElement.innerHTML = `${newPrice}$ <small>CAD</small>`;
-    }
-    
-    if (snipcartBtn && newPrice) {
-        snipcartBtn.setAttribute('data-item-price', newPrice);
-        // Mettre à jour aussi la variante dans les données Snipcart si nécessaire
-        const currentName = snipcartBtn.getAttribute('data-item-name');
-        if (newValue && newValue !== 'x1') {
-            snipcartBtn.setAttribute('data-item-name', `${currentName} (${newValue})`);
-        }
-    }
-    
-    if (descriptionElement && newDescription) {
-        descriptionElement.textContent = newDescription;
-    }
-}
+    document.removeEventListener('click', this.boundOutsideClick);
+    document.removeEventListener('keydown', this.boundEscapeKey);
+  },
 
-// Fermer le dropdown avec Échap
-document.addEventListener('keydown', function(event) {
+  /**
+   * Ferme le dropdown si un clic a lieu à l'extérieur.
+   */
+  handleOutsideClick(event) {
+    if (!this.dropdownRoot || this.dropdownRoot.contains(event.target)) {
+      return;
+    }
+
+    this.closeDropdown();
+  },
+
+  /**
+   * Gère la fermeture du dropdown via la touche Échap.
+   */
+  handleEscapeKey(event) {
     if (event.key === 'Escape') {
-        closeDropdown();
+      this.closeDropdown();
     }
-});
+  },
+
+  /**
+   * Sélectionne une variante et met à jour l'affichage.
+   */
+  selectOption(optionElement, { shouldClose = true } = {}) {
+    if (!optionElement || !this.dropdownOptions) {
+      return;
+    }
+
+    this.dropdownOptions
+      .querySelectorAll('[data-dropdown-option]')
+      .forEach((option) => {
+        option.classList.remove('active');
+        option.setAttribute('aria-selected', 'false');
+        option.setAttribute('tabindex', '-1');
+      });
+
+    optionElement.classList.add('active');
+    optionElement.setAttribute('aria-selected', 'true');
+    optionElement.setAttribute('tabindex', '0');
+
+    const value = optionElement.getAttribute('data-value') || '';
+    const price = optionElement.getAttribute('data-price') || '';
+    const description = optionElement.getAttribute('data-description') || '';
+    const label = optionElement.querySelector('.option-title')?.textContent?.trim() || value;
+
+    if (this.dropdownSelectedText && label) {
+      const formattedPrice = this.formatPrice(price);
+      this.dropdownSelectedText.textContent = formattedPrice
+        ? `${label} - ${formattedPrice}$ ${this.currency}`
+        : label;
+    }
+
+    this.updateDisplayedPrice(price);
+    this.updateDescription(description);
+    this.updateSnipcartData(value, price);
+
+    if (shouldClose) {
+      this.closeDropdown();
+    }
+  },
+
+  /**
+   * Met à jour le prix affiché sur la page.
+   */
+  updateDisplayedPrice(price) {
+    if (!this.priceElement || !price) {
+      return;
+    }
+
+    const formattedPrice = this.formatPrice(price);
+    this.priceElement.innerHTML = `${formattedPrice}$ <small>${this.currency}</small>`;
+  },
+
+  /**
+   * Met à jour la description de la variante sélectionnée.
+   */
+  updateDescription(description) {
+    if (!this.descriptionElement) {
+      return;
+    }
+
+    this.descriptionElement.textContent = description || '';
+  },
+
+  /**
+   * Synchronise les données Snipcart avec la variante choisie.
+   */
+  updateSnipcartData(value, price) {
+    if (!this.snipcartButton) {
+      return;
+    }
+
+    if (price) {
+      const numericPrice = Number.parseFloat(String(price).replace(',', '.'));
+      if (!Number.isNaN(numericPrice)) {
+        this.snipcartButton.setAttribute('data-item-price', numericPrice.toFixed(2));
+      }
+    }
+
+    const baseName = this.snipcartBaseName || '';
+    if (baseName) {
+      const variantLabel = value && value !== 'x1' ? ` (${value})` : '';
+      this.snipcartButton.setAttribute('data-item-name', `${baseName}${variantLabel}`);
+    }
+  },
+
+  /**
+   * Formate un prix pour afficher des décimales cohérentes.
+   */
+  formatPrice(value) {
+    if (value === null || value === undefined || value === '') {
+      return '';
+    }
+
+    const numeric = Number.parseFloat(String(value).replace(',', '.'));
+    if (Number.isNaN(numeric)) {
+      return String(value);
+    }
+
+    const formatted = numeric.toFixed(2);
+    return formatted.endsWith('.00') ? formatted.slice(0, -3) : formatted;
+  },
+
+  /**
+   * Enregistre un évènement Analytics pour la wishlist.
+   */
+  trackWishlistAction(productId, added) {
+    if (window.GeeknDragon && window.GeeknDragon.Analytics) {
+      const action = added ? 'wishlist_add' : 'wishlist_remove';
+      window.GeeknDragon.Analytics.trackEvent(action, 'product_page', productId);
+    }
+  },
+};
+
+// Initialisation automatique après le chargement du DOM
+document.addEventListener('DOMContentLoaded', () => WishlistModule.init());
+
+// Exposition de l'API publique unique
+window.GeeknDragon = window.GeeknDragon || {};
+window.GeeknDragon.handleWishlist = (productId) => WishlistModule.handleWishlist(productId);

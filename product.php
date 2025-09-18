@@ -181,7 +181,14 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
                         <?php if (count($gallery) > 1): ?>
                         <div class="thumbnail-gallery">
                             <?php foreach ($gallery as $index => $image): ?>
-                                <img src="<?= htmlspecialchars($image, ENT_QUOTES, 'UTF-8') ?>" alt="Vue <?= $index + 1 ?>" class="thumbnail<?= $index === 0 ? ' active' : '' ?>" data-tab-index="<?= $index ?>" onclick="changeMainImage(this)">
+                                <img
+                                    src="<?= htmlspecialchars($image, ENT_QUOTES, 'UTF-8') ?>"
+                                    alt="Vue <?= $index + 1 ?>"
+                                    class="thumbnail<?= $index === 0 ? ' active' : '' ?>"
+                                    data-gallery-index="<?= $index ?>"
+                                    role="button"
+                                    tabindex="0"
+                                >
                             <?php endforeach; ?>
                         </div>
                         <?php endif; ?>
@@ -231,16 +238,25 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
                         <?php if (is_array($configuration) && ($configuration['type'] ?? '') === 'dropdown' && !empty($configuration['options'])): ?>
                         <div class="product-configuration">
                             <h3><?= htmlspecialchars($configuration['label'] ?? 'Configuration', ENT_QUOTES, 'UTF-8') ?></h3>
-                            <div class="custom-dropdown" id="custom-dropdown">
+                            <div class="custom-dropdown" id="custom-dropdown" data-dropdown-root>
                                 <?php $defaultOption = $configuration['options'][0]; ?>
-                                <div class="dropdown-selected" onclick="toggleDropdown()">
-                                    <span class="selected-text"><?= htmlspecialchars(($defaultOption['label'] ?? $defaultOption['value'] ?? ''), ENT_QUOTES, 'UTF-8') ?> - <?= htmlspecialchars(gd_format_price((float)($defaultOption['price'] ?? $price)), ENT_QUOTES, 'UTF-8') ?>$ <?= htmlspecialchars($currency, ENT_QUOTES, 'UTF-8') ?></span>
-                                    <span class="dropdown-arrow">▼</span>
+                                <div class="dropdown-selected" data-dropdown-toggle role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                                    <span class="selected-text" data-selected-text><?= htmlspecialchars(($defaultOption['label'] ?? $defaultOption['value'] ?? ''), ENT_QUOTES, 'UTF-8') ?> - <?= htmlspecialchars(gd_format_price((float)($defaultOption['price'] ?? $price)), ENT_QUOTES, 'UTF-8') ?>$ <?= htmlspecialchars($currency, ENT_QUOTES, 'UTF-8') ?></span>
+                                    <span class="dropdown-arrow" aria-hidden="true">▼</span>
                                 </div>
-                                <div class="dropdown-options" id="dropdown-options">
+                                <div class="dropdown-options" id="dropdown-options" data-dropdown-options role="listbox">
                                     <?php foreach ($configuration['options'] as $index => $option): ?>
                                         <?php $isActive = $index === 0 ? ' active' : ''; ?>
-                                        <div class="dropdown-option<?= $isActive ?>" data-value="<?= htmlspecialchars((string)($option['value'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" data-price="<?= htmlspecialchars((string)($option['price'] ?? $price), ENT_QUOTES, 'UTF-8') ?>" data-description="<?= htmlspecialchars((string)($option['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" onclick="selectOption(this)">
+                                        <div
+                                            class="dropdown-option<?= $isActive ?>"
+                                            data-dropdown-option
+                                            role="option"
+                                            tabindex="<?= $isActive !== '' ? '0' : '-1' ?>"
+                                            aria-selected="<?= $isActive !== '' ? 'true' : 'false' ?>"
+                                            data-value="<?= htmlspecialchars((string)($option['value'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                                            data-price="<?= htmlspecialchars((string)($option['price'] ?? $price), ENT_QUOTES, 'UTF-8') ?>"
+                                            data-description="<?= htmlspecialchars((string)($option['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                                        >
                                             <span class="option-title"><?= htmlspecialchars((string)($option['label'] ?? $option['value'] ?? ''), ENT_QUOTES, 'UTF-8') ?></span>
                                             <span class="option-price"><?= htmlspecialchars(gd_format_price((float)($option['price'] ?? $price)), ENT_QUOTES, 'UTF-8') ?>$ <?= htmlspecialchars($currency, ENT_QUOTES, 'UTF-8') ?></span>
                                         </div>
@@ -265,7 +281,7 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
                                 data-item-categories="<?= htmlspecialchars($categoryKey, ENT_QUOTES, 'UTF-8') ?>">
                                 Ajouter à l'inventaire
                             </button>
-                            <button class="btn-wishlist" onclick="handleWishlist('<?= htmlspecialchars($id, ENT_QUOTES, 'UTF-8') ?>')" title="Ajouter aux favoris">
+                            <button class="btn-wishlist" type="button" data-product-id="<?= htmlspecialchars($id, ENT_QUOTES, 'UTF-8') ?>" title="Ajouter aux favoris">
                                 <span class="wishlist-icon">🤍</span>
                                 <span class="wishlist-text">Favoris</span>
                             </button>
@@ -304,7 +320,7 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
                                     $tabTitle .= ' (' . $ratingTotal . ')';
                                 }
                             ?>
-                            <button class="tab-btn<?= $index === 0 ? ' active' : '' ?>" data-tab="<?= htmlspecialchars($tabId, ENT_QUOTES, 'UTF-8') ?>" onclick="switchTab('<?= htmlspecialchars($tabId, ENT_QUOTES, 'UTF-8') ?>')">
+                            <button class="tab-btn<?= $index === 0 ? ' active' : '' ?>" type="button" data-tab-target="<?= htmlspecialchars($tabId, ENT_QUOTES, 'UTF-8') ?>">
                                 <?= htmlspecialchars($tabTitle, ENT_QUOTES, 'UTF-8') ?>
                             </button>
                         <?php endforeach; ?>
@@ -358,7 +374,7 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
                                     <h3><?= htmlspecialchars($tabHeading, ENT_QUOTES, 'UTF-8') ?></h3>
                                 <?php endif; ?>
                                 <div class="review-cta" style="text-align: center; margin-bottom: 2rem;">
-                                    <button onclick="document.getElementById('reviewForm').scrollIntoView({behavior: 'smooth'}); document.getElementById('reviewName').focus();" class="btn-submit-review">
+                                    <button class="btn-submit-review" type="button" data-scroll-target="#reviewForm" data-focus-target="#reviewName">
                                         ✍️ Laisser un avis
                                     </button>
                                 </div>
