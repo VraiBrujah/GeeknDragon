@@ -822,22 +822,45 @@ class GeeknDragonAudioPlayer {
     }
     this.autoplayFallbackActive = true;
 
+    const canResumePlayback = () =>
+      this.state.isPlaying &&
+      this.sound &&
+      typeof this.sound.playing === 'function' &&
+      !this.sound.playing();
+
     const oneTimePlay = (event) => {
       console.log('🎵 Interaction détectée:', event?.type || 'inconnue');
-      
-      if (this.sound) {
-        this.sound.play()
-          .then(() => {
-            this.state.isPlaying = true;
-            this.startTimeUpdater();
-            this.updatePlayButton();
-            console.log('🎵 Lecture activée après interaction utilisateur');
-            this.cleanupAutoplayListeners();
-          })
-          .catch((error) => {
-            console.log('🎵 Erreur de lecture après interaction:', error);
-          });
+
+      if (!canResumePlayback()) {
+        if (!this.state.isPlaying) {
+          console.log(
+            '🎵 Fallback annulé: la lecture est en pause sur demande de l\'utilisateur.',
+          );
+        } else if (
+          this.sound &&
+          typeof this.sound.playing === 'function' &&
+          this.sound.playing()
+        ) {
+          console.log(
+            '🎵 Fallback inutile: la lecture est déjà en cours.',
+          );
+        }
+        this.cleanupAutoplayListeners();
+        return;
       }
+
+      this.sound
+        .play()
+        .then(() => {
+          this.state.isPlaying = true;
+          this.startTimeUpdater();
+          this.updatePlayButton();
+          console.log('🎵 Lecture activée après interaction utilisateur');
+          this.cleanupAutoplayListeners();
+        })
+        .catch((error) => {
+          console.log('🎵 Erreur de lecture après interaction:', error);
+        });
     };
 
     // Stocker la référence pour pouvoir nettoyer
@@ -854,19 +877,39 @@ class GeeknDragonAudioPlayer {
 
     // Essayer de démarrer automatiquement après 1 seconde (plus rapide)
     setTimeout(() => {
-      if (this.sound && !this.sound.playing()) {
-        this.sound.play()
-          .then(() => {
-            this.state.isPlaying = true;
-            this.updatePlayButton();
-            this.startTimeUpdater();
-            console.log('🎵 Démarrage automatique réussi');
-            this.cleanupAutoplayListeners();
-          })
-          .catch(() => {
-            console.log('🎵 Autoplay bloqué, en attente d\'interaction utilisateur...');
-          });
+      if (!canResumePlayback()) {
+        if (!this.state.isPlaying) {
+          console.log(
+            '🎵 Relance automatique annulée: la lecture a été mise en pause par l\'utilisateur.',
+          );
+          this.cleanupAutoplayListeners();
+        } else if (
+          this.sound &&
+          typeof this.sound.playing === 'function' &&
+          this.sound.playing()
+        ) {
+          console.log(
+            '🎵 Relance automatique inutile: la lecture est déjà en cours.',
+          );
+          this.cleanupAutoplayListeners();
+        }
+        return;
       }
+
+      this.sound
+        .play()
+        .then(() => {
+          this.state.isPlaying = true;
+          this.updatePlayButton();
+          this.startTimeUpdater();
+          console.log('🎵 Démarrage automatique réussi');
+          this.cleanupAutoplayListeners();
+        })
+        .catch(() => {
+          console.log(
+            '🎵 Autoplay bloqué, en attente d\'interaction utilisateur...',
+          );
+        });
     }, 1000);
   }
 
