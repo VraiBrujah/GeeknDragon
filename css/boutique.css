@@ -108,66 +108,6 @@
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
 }
 
-/* Filters */
-.shop-filters {
-    background: var(--darker-bg);
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--border-color);
-    position: static;
-    z-index: 100;
-}
-
-.filters-container {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.filter-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.filter-group label {
-    font-weight: 600;
-    color: var(--secondary-color);
-    white-space: nowrap;
-}
-
-.filter-select {
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    background: var(--dark-bg);
-    color: var(--light-text);
-    font-family: inherit;
-    transition: var(--transition);
-}
-
-.filter-select:focus {
-    outline: none;
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
-}
-
-.filter-reset {
-    padding: 0.5rem 1rem;
-    background: transparent;
-    border: 1px solid var(--secondary-color);
-    color: var(--secondary-color);
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: var(--transition);
-    font-weight: 500;
-}
-
-.filter-reset:hover {
-    background: var(--secondary-color);
-    color: var(--dark-bg);
-}
-
 /* Product Sections */
 .product-section {
     padding: 4rem 0;
@@ -677,21 +617,6 @@
     
     .stat strong {
         font-size: 1.5rem;
-    }
-    
-    .filters-container {
-        gap: 1rem;
-    }
-    
-    .filter-group {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.3rem;
-    }
-    
-    .filter-select {
-        width: 100%;
-        min-width: 150px;
     }
     
     .products-grid {

@@ -23,7 +23,6 @@
             <ul class="nav-menu">
                 <li><a href="index.php" class="nav-link">Accueil</a></li>
                 <li><a href="boutique.php" class="nav-link active">Boutique</a></li>
-                <li><a href="#filters" class="nav-link">Filtres</a></li>
                 <li><a href="index.php#contact" class="nav-link">Contact</a></li>
             </ul>
             
@@ -66,42 +65,6 @@
                             <span>Fabriqué au Québec</span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="shop-filters" id="filters">
-            <div class="container">
-                <div class="filters-container">
-                    <div class="filter-group">
-                        <label>Catégorie:</label>
-                        <select id="categoryFilter" class="filter-select">
-                            <option value="all">Toutes les catégories</option>
-                            <option value="coins">Pièces Métalliques</option>
-                            <option value="cards">Cartes d'Équipement</option>
-                            <option value="triptych">Triptyques Mystères</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Prix:</label>
-                        <select id="priceFilter" class="filter-select">
-                            <option value="all">Tous les prix</option>
-                            <option value="0-50">0$ - 50$ CAD</option>
-                            <option value="50-100">50$ - 100$ CAD</option>
-                            <option value="100-200">100$ - 200$ CAD</option>
-                            <option value="200+">200$ CAD et plus</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label>Langue:</label>
-                        <select id="languageFilter" class="filter-select">
-                            <option value="all">Toutes les langues</option>
-                            <option value="fr">Français</option>
-                            <option value="en">Anglais</option>
-                            <option value="both">Bilingue</option>
-                        </select>
-                    </div>
-                    <button id="resetFilters" class="filter-reset">Réinitialiser</button>
                 </div>
             </div>
         </section>

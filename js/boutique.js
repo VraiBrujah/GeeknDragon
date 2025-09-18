@@ -1,258 +1,8 @@
 // JavaScript spécifique pour la page boutique
 document.addEventListener('DOMContentLoaded', () => {
-  ShopFilters.init();
   ShopAnimations.init();
   ProductInteractions.init();
 });
-
-// Module de filtrage des produits
-const ShopFilters = {
-  init() {
-    this.setupFilters();
-    this.setupSearch();
-    this.bindEvents();
-  },
-
-  setupFilters() {
-    this.categoryFilter = document.getElementById('categoryFilter');
-    this.priceFilter = document.getElementById('priceFilter');
-    this.languageFilter = document.getElementById('languageFilter');
-    this.resetButton = document.getElementById('resetFilters');
-    this.productCards = document.querySelectorAll('.product-card');
-
-    this.currentFilters = {
-      category: 'all',
-      price: 'all',
-      language: 'all',
-    };
-  },
-
-  setupSearch() {
-    // Créer une barre de recherche dynamique
-    const filtersContainer = document.querySelector('.filters-container');
-    if (filtersContainer) {
-      const searchGroup = document.createElement('div');
-      searchGroup.className = 'filter-group';
-      searchGroup.innerHTML = `
-                <label for="searchFilter">Recherche:</label>
-                <input type="text" id="searchFilter" class="filter-select" placeholder="Nom du produit..." style="min-width: 200px;">
-            `;
-      filtersContainer.insertBefore(searchGroup, filtersContainer.firstChild);
-
-      this.searchInput = document.getElementById('searchFilter');
-    }
-  },
-
-  bindEvents() {
-    // Événements des filtres
-    if (this.categoryFilter) {
-      this.categoryFilter.addEventListener('change', () => {
-        this.currentFilters.category = this.categoryFilter.value;
-        this.applyFilters();
-        this.trackFilterUsage('category', this.categoryFilter.value);
-      });
-    }
-
-    if (this.priceFilter) {
-      this.priceFilter.addEventListener('change', () => {
-        this.currentFilters.price = this.priceFilter.value;
-        this.applyFilters();
-        this.trackFilterUsage('price', this.priceFilter.value);
-      });
-    }
-
-    if (this.languageFilter) {
-      this.languageFilter.addEventListener('change', () => {
-        this.currentFilters.language = this.languageFilter.value;
-        this.applyFilters();
-        this.trackFilterUsage('language', this.languageFilter.value);
-      });
-    }
-
-    if (this.searchInput) {
-      this.searchInput.addEventListener('input', Utils.debounce(() => {
-        this.currentFilters.search = this.searchInput.value.toLowerCase();
-        this.applyFilters();
-      }, 300));
-    }
-
-    if (this.resetButton) {
-      this.resetButton.addEventListener('click', () => {
-        this.resetFilters();
-      });
-    }
-
-    // Filtres par URL (liens directs)
-    this.handleUrlFilters();
-  },
-
-  applyFilters() {
-    let visibleCount = 0;
-
-    this.productCards.forEach((card) => {
-      const shouldShow = this.shouldShowProduct(card);
-
-      if (shouldShow) {
-        card.classList.remove('hidden');
-        card.classList.remove('filtered');
-        visibleCount++;
-        // Animation d'entrée
-        setTimeout(() => {
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }, visibleCount * 50);
-      } else {
-        card.classList.add('filtered');
-        card.style.opacity = '0.3';
-        card.style.transform = 'translateY(10px)';
-        // Cacher complètement après l'animation
-        setTimeout(() => {
-          if (card.classList.contains('filtered')) {
-            card.classList.add('hidden');
-          }
-        }, 300);
-      }
-    });
-
-    // Mettre à jour le compteur
-    this.updateResultCount(visibleCount);
-
-    // Mise à jour de l'URL
-    this.updateUrl();
-  },
-
-  shouldShowProduct(card) {
-    const { category } = card.dataset;
-    const price = parseFloat(card.dataset.price);
-    const language = card.dataset.language || 'both';
-    const title = card.querySelector('.product-title').textContent.toLowerCase();
-    const description = card.querySelector('.product-description').textContent.toLowerCase();
-
-    // Filtre par catégorie
-    if (this.currentFilters.category !== 'all' && category !== this.currentFilters.category) {
-      return false;
-    }
-
-    // Filtre par prix
-    if (this.currentFilters.price !== 'all') {
-      const priceRange = this.currentFilters.price;
-      if (priceRange === '0-50' && price > 50) return false;
-      if (priceRange === '50-100' && (price <= 50 || price > 100)) return false;
-      if (priceRange === '100-200' && (price <= 100 || price > 200)) return false;
-      if (priceRange === '200+' && price <= 200) return false;
-    }
-
-    // Filtre par langue
-    if (this.currentFilters.language !== 'all') {
-      const langFilter = this.currentFilters.language;
-      if (langFilter === 'fr' && !(language.includes('fr') || language === 'both')) return false;
-      if (langFilter === 'en' && !(language.includes('en') || language === 'both')) return false;
-      if (langFilter === 'both' && language !== 'both') return false;
-    }
-
-    // Filtre par recherche
-    if (this.currentFilters.search) {
-      const searchTerm = this.currentFilters.search;
-      if (!title.includes(searchTerm) && !description.includes(searchTerm)) {
-        return false;
-      }
-    }
-
-    return true;
-  },
-
-  resetFilters() {
-    this.currentFilters = {
-      category: 'all',
-      price: 'all',
-      language: 'all',
-      search: '',
-    };
-
-    // Réinitialiser les contrôles
-    if (this.categoryFilter) this.categoryFilter.value = 'all';
-    if (this.priceFilter) this.priceFilter.value = 'all';
-    if (this.languageFilter) this.languageFilter.value = 'all';
-    if (this.searchInput) this.searchInput.value = '';
-
-    // Appliquer les filtres
-    this.applyFilters();
-
-    // Nettoyer l'URL
-    window.history.replaceState({}, '', window.location.pathname);
-  },
-
-  updateResultCount(count) {
-    let resultCounter = document.querySelector('.result-counter');
-    if (!resultCounter) {
-      resultCounter = document.createElement('div');
-      resultCounter.className = 'result-counter';
-      resultCounter.style.cssText = `
-                text-align: center;
-                color: var(--medium-text);
-                margin: 1rem 0;
-                font-style: italic;
-            `;
-
-      const firstSection = document.querySelector('.product-section');
-      if (firstSection) {
-        firstSection.insertBefore(resultCounter, firstSection.querySelector('.container'));
-      }
-    }
-
-    const total = this.productCards.length;
-    if (count === total) {
-      resultCounter.textContent = `Tous les produits (${total})`;
-    } else {
-      resultCounter.textContent = `${count} produit(s) sur ${total}`;
-    }
-  },
-
-  handleUrlFilters() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const hash = window.location.hash.substring(1);
-
-    // Filtre par hash (ex: #coins)
-    if (hash && ['coins', 'cards', 'triptych'].includes(hash)) {
-      this.currentFilters.category = hash;
-      if (this.categoryFilter) this.categoryFilter.value = hash;
-    }
-
-    // Filtres par paramètres URL
-    for (const [key, value] of urlParams) {
-      if (this.currentFilters.hasOwnProperty(key)) {
-        this.currentFilters[key] = value;
-        const filterElement = document.getElementById(`${key}Filter`);
-        if (filterElement) filterElement.value = value;
-      }
-    }
-
-    // Appliquer les filtres de l'URL
-    this.applyFilters();
-  },
-
-  updateUrl() {
-    const params = new URLSearchParams();
-
-    for (const [key, value] of Object.entries(this.currentFilters)) {
-      if (value && value !== 'all' && value !== '') {
-        params.set(key, value);
-      }
-    }
-
-    const newUrl = params.toString()
-      ? `${window.location.pathname}?${params.toString()}`
-      : window.location.pathname;
-
-    window.history.replaceState({}, '', newUrl);
-  },
-
-  trackFilterUsage(filterType, filterValue) {
-    if (window.GeeknDragon && window.GeeknDragon.Analytics) {
-      window.GeeknDragon.Analytics.trackEvent('filter_use', 'shop', `${filterType}:${filterValue}`);
-    }
-  },
-};
 
 // Module d'animations pour la boutique
 const ShopAnimations = {
@@ -323,8 +73,10 @@ const ShopAnimations = {
         const targetSection = document.getElementById(targetId);
 
         if (targetSection) {
-          const headerHeight = document.querySelector('.header').offsetHeight;
-          const filtersHeight = document.querySelector('.shop-filters').offsetHeight;
+          const headerElement = document.querySelector('.header');
+          const filtersElement = document.querySelector('.shop-filters');
+          const headerHeight = headerElement ? headerElement.offsetHeight : 0;
+          const filtersHeight = filtersElement ? filtersElement.offsetHeight : 0;
           const offset = headerHeight + filtersHeight + 20;
 
           window.scrollTo({
@@ -680,7 +432,7 @@ const ProductInteractions = {
   },
 };
 
-// Initialisation des filtres depuis l'URL au chargement
+// Initialisation du défilement vers la section ciblée au chargement
 window.addEventListener('load', () => {
   if (window.location.hash) {
     const targetSection = document.querySelector(window.location.hash);
@@ -695,7 +447,6 @@ window.addEventListener('load', () => {
 // Export pour utilisation globale
 window.GeeknDragon = window.GeeknDragon || {};
 window.GeeknDragon.Shop = {
-  ShopFilters,
   ShopAnimations,
   ProductInteractions,
 };
