@@ -815,7 +815,8 @@ class GeeknDragonAudioPlayer {
     return false; // Aucun état restauré
   }
 
-  setupAutoplayFallback() {
+  setupAutoplayFallback(options = {}) {
+    const { skipAutoAttempt = false } = options;
     if (this.sound?.playing?.()) {
       return;
     }
@@ -830,6 +831,68 @@ class GeeknDragonAudioPlayer {
       this.sound &&
       typeof this.sound.playing === 'function' &&
       !this.sound.playing();
+
+    /**
+     * Tente la lecture en s'appuyant sur les événements Howler pour suivre le résultat.
+     *
+     * @param {Object} params Paramètres de configuration.
+     * @param {string} params.successLog Message de confirmation à afficher quand la lecture démarre.
+     * @param {string} params.errorLog Message d'erreur à afficher si la lecture échoue.
+     * @param {boolean} [params.rearmOnError=false] Indique si le fallback doit être réarmé après un échec.
+     */
+    const attemptPlaybackWithHowlerEvents = ({
+      successLog,
+      errorLog,
+      rearmOnError = false,
+    }) => {
+      if (!this.sound || typeof this.sound.play !== 'function') {
+        this.cleanupAutoplayListeners();
+        return;
+      }
+
+      const handlePlaySuccess = () => {
+        this.state.isPlaying = true;
+        this.startTimeUpdater();
+        this.updatePlayButton();
+        if (successLog) {
+          console.log(successLog);
+        }
+        this.cleanupAutoplayListeners();
+      };
+
+      const handlePlayError = (soundId, error) => {
+        if (errorLog) {
+          if (error) {
+            console.log(errorLog, error);
+          } else {
+            console.log(errorLog);
+          }
+        }
+        this.cleanupAutoplayListeners();
+        if (rearmOnError && canResumePlayback()) {
+          this.setupAutoplayFallback({ skipAutoAttempt: true });
+        }
+      };
+
+      this.sound.once('play', handlePlaySuccess);
+      this.sound.once('playerror', handlePlayError);
+
+      try {
+        this.sound.play();
+      } catch (error) {
+        if (typeof this.sound?.off === 'function') {
+          this.sound.off('play', handlePlaySuccess);
+          this.sound.off('playerror', handlePlayError);
+        }
+        if (errorLog) {
+          console.log(errorLog, error);
+        }
+        this.cleanupAutoplayListeners();
+        if (rearmOnError && canResumePlayback()) {
+          this.setupAutoplayFallback({ skipAutoAttempt: true });
+        }
+      }
+    };
 
     const oneTimePlay = (event) => {
       console.log('🎵 Interaction détectée:', event?.type || 'inconnue');
@@ -853,18 +916,10 @@ class GeeknDragonAudioPlayer {
       }
 
       if (typeof this.sound?.playing === 'function' && !this.sound.playing()) {
-        this.sound
-          .play()
-          .then(() => {
-            this.state.isPlaying = true;
-            this.startTimeUpdater();
-            this.updatePlayButton();
-            console.log('🎵 Lecture activée après interaction utilisateur');
-            this.cleanupAutoplayListeners();
-          })
-          .catch((error) => {
-            console.log('🎵 Erreur de lecture après interaction:', error);
-          });
+        attemptPlaybackWithHowlerEvents({
+          successLog: '🎵 Lecture activée après interaction utilisateur',
+          errorLog: '🎵 Erreur de lecture après interaction:',
+        });
       } else {
         this.cleanupAutoplayListeners();
       }
@@ -883,41 +938,38 @@ class GeeknDragonAudioPlayer {
     console.log('🎵 Fallback autoplay configuré - En attente d\'interaction...');
 
     // Essayer de démarrer automatiquement après 1 seconde (plus rapide)
-    setTimeout(() => {
-      if (!canResumePlayback()) {
-        if (!this.state.isPlaying) {
-          console.log(
-            '🎵 Relance automatique annulée: la lecture a été mise en pause par l\'utilisateur.',
-          );
-          this.cleanupAutoplayListeners();
-        } else if (
-          this.sound &&
-          typeof this.sound.playing === 'function' &&
-          this.sound.playing()
-        ) {
-          console.log(
-            '🎵 Relance automatique inutile: la lecture est déjà en cours.',
-          );
-          this.cleanupAutoplayListeners();
+    if (!skipAutoAttempt) {
+      setTimeout(() => {
+        if (!this.autoplayFallbackActive) {
+          return;
         }
-        return;
-      }
 
-      this.sound
-        .play()
-        .then(() => {
-          this.state.isPlaying = true;
-          this.updatePlayButton();
-          this.startTimeUpdater();
-          console.log('🎵 Démarrage automatique réussi');
-          this.cleanupAutoplayListeners();
-        })
-        .catch(() => {
-          console.log(
-            '🎵 Autoplay bloqué, en attente d\'interaction utilisateur...',
-          );
+        if (!canResumePlayback()) {
+          if (!this.state.isPlaying) {
+            console.log(
+              '🎵 Relance automatique annulée: la lecture a été mise en pause par l\'utilisateur.',
+            );
+            this.cleanupAutoplayListeners();
+          } else if (
+            this.sound &&
+            typeof this.sound.playing === 'function' &&
+            this.sound.playing()
+          ) {
+            console.log(
+              '🎵 Relance automatique inutile: la lecture est déjà en cours.',
+            );
+            this.cleanupAutoplayListeners();
+          }
+          return;
+        }
+
+        attemptPlaybackWithHowlerEvents({
+          successLog: '🎵 Démarrage automatique réussi',
+          errorLog: '🎵 Autoplay bloqué, en attente d\'interaction utilisateur...',
+          rearmOnError: true,
         });
-    }, 1000);
+      }, 1000);
+    }
   }
 
   cleanupAutoplayListeners() {
