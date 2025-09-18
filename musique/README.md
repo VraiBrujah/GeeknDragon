@@ -86,20 +86,70 @@ Quand vous changez de page :
 
 ## 🔧 Configuration
 
-### Réglage de la priorité
-Pour modifier les pourcentages (défaut 70/30), changez cette ligne dans `audio-player.js` :
-```javascript
-priorityRatio: { current: 0.7, default: 0.3 } // 70% - 30%
+### Initialisation via options officielles
+Avant d'inclure `js/audio-player.js`, vous pouvez définir une configuration globale :
+
+```html
+<script>
+  window.GeeknDragonAudioPlayerOptions = {
+    welcome: {
+      track: 'musique/hero-intro.mp3',
+      storageKey: 'gnd-audio-welcome-played'
+    },
+    quickStartFile: 'hero-intro.mp3',
+    priorityRatio: { current: 0.7, default: 0.3 },
+    defaultVolume: 0.15,
+    scanner: {
+      enableRangeFallback: true,
+      // Exemple : remplacer la sonde réseau par une version custom
+      // fileProbe: async (path) => myHeadThenRangeCheck(path),
+    },
+    ui: {
+      attachHeader: true,
+      hideFloatingWhenHeader: true,
+    },
+    listeners: {
+      ready: (event) => console.log('Lecteur prêt', event.detail.player),
+    },
+  };
+</script>
 ```
 
-### Volume par défaut
-Le volume est configuré à 15% par défaut :
+### Priorité des playlists
+- `priorityRatio.current` : probabilité de piocher dans le dossier de la page courante.
+- `priorityRatio.default` : probabilité de piocher dans le dossier général.
+
+Les valeurs sont normalisées automatiquement afin que la somme vaille 1.
+
+### Piste de bienvenue
+Utilisez `welcome.track` pour forcer un morceau spécifique au premier lancement (le lecteur se charge de la persistance via `welcome.storageKey`).
+
+### Volume et stockage
+- `defaultVolume` contrôle le volume initial si aucun réglage n'est présent dans `localStorage`.
+- `storageKeys` permet de renommer les clés utilisées pour `state`, `volume` et `collapsed` si besoin.
+
+### Interface
+- `ui.attachHeader` : ajoute les contrôles compacts dans l'en-tête.
+- `ui.hideFloatingWhenHeader` : masque le widget flottant lorsqu'un header existe.
+
+### Bus d'événements
+`window.gndAudioPlayer` expose un bus (`on`, `off`, `emit`) et une promesse `ready`.
+
+Événements disponibles :
+- `ready` : émis à la fin de l'initialisation.
+- `playback-change` : lecture/pause confirmée.
+- `volume-change` : variation du volume global.
+- `track-change` : nouvelle piste sélectionnée.
+- `playlist-update` : playlists reconstruites après scan.
+
 ```javascript
-volume: parseFloat(localStorage.getItem('gnd-audio-volume')) || 0.15, // 15%
+window.gndAudioPlayer.on('track-change', (event) => {
+  console.log('Piste en lecture :', event.detail.fileName);
+});
 ```
 
 ### Position du lecteur
-Le lecteur apparaît en bas à droite et peut être réduit/agrandi en cliquant sur l'icône de musique.
+Le lecteur apparaît en bas à droite et peut être réduit/agrandi en cliquant sur l'icône principale.
 
 ## 🎨 Style
 
