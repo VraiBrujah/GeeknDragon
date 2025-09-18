@@ -65,6 +65,11 @@ $router->get('/checkout', function () {
     require __DIR__ . '/../checkout.php';
 });
 
+// Compte client
+$router->get('/compte', function () {
+    require __DIR__ . '/../compte.php';
+});
+
 // Page de remerciement
 $router->get('/merci', function () {
     require __DIR__ . '/../merci.php';
