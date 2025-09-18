@@ -62,13 +62,18 @@ class LinkChecker
             'contact.php',
             'checkout.php',
             'product.php',
-            'lot10.php',
-            'lot25.php',
-            'lot50-essence.php',
-            'lot50-tresorerie.php',
             'merci.php',
             'actualites/es-tu-game.html'
         ];
+
+        $standaloneProductPages = glob($this->basePath . '/produit-*.php');
+        if ($standaloneProductPages !== false) {
+            foreach ($standaloneProductPages as $productPage) {
+                $phpFiles[] = basename($productPage);
+            }
+        }
+
+        $phpFiles = array_values(array_unique($phpFiles));
         
         foreach ($phpFiles as $file) {
             $path = $this->basePath . '/' . $file;

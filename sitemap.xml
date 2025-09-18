@@ -4,24 +4,51 @@
     <loc>https://geekndragon.com/</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/boutique.php</loc>
-  </url>
-  <url>
-    <loc>https://geekndragon.com/index.php#contact</loc>
-  </url>
-  <url>
     <loc>https://geekndragon.com/actualites/es-tu-game.html</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product.php?id=lot10</loc>
+    <loc>https://geekndragon.com/actualites/es-tu-game.php</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product.php?id=lot25</loc>
+    <loc>https://geekndragon.com/boutique</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product.php?id=lot50-essence</loc>
+    <loc>https://geekndragon.com/checkout</loc>
   </url>
   <url>
-    <loc>https://geekndragon.com/product.php?id=lot50-tresorerie</loc>
+    <loc>https://geekndragon.com/contact</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/devis</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/merci</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/product</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/product?id=lot10</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/product?id=lot25</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/product?id=lot50-essence</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/product?id=lot50-tresorerie</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/product?id=pack-182-arsenal-aventurier</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/product?id=pack-182-butins-ingenieries</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/product?id=pack-182-routes-services</loc>
+  </url>
+  <url>
+    <loc>https://geekndragon.com/product?id=triptyque-aleatoire</loc>
   </url>
 </urlset>

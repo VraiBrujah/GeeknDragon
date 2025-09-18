@@ -8,14 +8,18 @@ use GeeknDragon\I18n\TranslationService;
 $translator = TranslationService::getInstance();
 $translator->setLanguage($translator->detectLanguage());
 
-function __(string $key, string $default = ''): string
-{
-    return TranslationService::getInstance()->get($key, $default);
+if (!function_exists('__')) {
+    function __(string $key, string $default = ''): string
+    {
+        return TranslationService::getInstance()->get($key, $default);
+    }
 }
 
-function langUrl(string $path): string
-{
-    return TranslationService::getInstance()->langUrl($path);
+if (!function_exists('langUrl')) {
+    function langUrl(string $path): string
+    {
+        return TranslationService::getInstance()->langUrl($path);
+    }
 }
 
 return $translator;
