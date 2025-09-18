@@ -760,6 +760,7 @@ p {
     display: flex;
     list-style: none;
     gap: 2rem;
+    margin-left: clamp(1.5rem, 3vw, 3rem);
 }
 
 .nav-link {
@@ -1707,6 +1708,7 @@ p {
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-menu {
+        margin-left: 0;
         position: fixed;
         top: 100%;
         left: 0;
