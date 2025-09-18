@@ -90,7 +90,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <a href="boutique.php#coins" class="product-highlight-link">
                         <div class="product-highlight">
                             <div class="product-image">
-                                <img src="images/optimized-modern/webp/coin-copper-10.webp" alt="Pièces métalliques" loading="lazy">
+                                <img src="images/optimized-modern/webp/all252.webp" alt="Pièces métalliques" loading="lazy">
                             </div>
                             <div class="product-info">
                                 <h4>💰 Pièces Métalliques</h4>
