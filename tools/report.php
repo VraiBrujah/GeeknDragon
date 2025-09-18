@@ -225,22 +225,89 @@ class ReportGenerator
     }
     
     /**
-     * Retourne les routes configurées
+     * Retourne les routes configurées à partir des pages actives et du catalogue produit.
+     *
+     * @return array<string, string>
      */
     private function getRoutes(): array
     {
-        // Routes extraites du Front Controller
-        return [
+        $routes = [
             '/' => 'Page d\'accueil (index.php)',
             '/boutique.php' => 'Boutique principale',
             '/contact.php' => 'Formulaire de contact',
             '/checkout.php' => 'Processus de commande',
-            '/lot10.php' => 'Produit L\'Offrande du Voyageur',
-            '/lot25.php' => 'Produit La Monnaie des Cinq Royaumes',
-            '/lot50-essence.php' => 'Produit L\'Essence du Marchand',
-            '/lot50-tresorerie.php' => 'Produit La Trésorerie du Seigneur',
-            '/actualites/es-tu-game.html' => 'Article Es-tu Game FLIM 2025'
+            '/devis.php' => 'Formulaire de devis',
+            '/product' => 'Listing produit (rendu dynamique)',
+            '/product.php' => 'Contrôleur de fiches produit',
+            '/merci.php' => 'Page de confirmation de commande'
         ];
+
+        if (file_exists($this->basePath . '/boutique.php')) {
+            $routes['/boutique'] = 'Alias propre de la boutique (réécriture vers boutique.php)';
+        }
+
+        if (file_exists($this->basePath . '/devis.php')) {
+            $routes['/devis'] = 'Alias propre du formulaire de devis';
+        }
+
+        $products = $this->loadProductCatalog();
+
+        foreach ($products as $productId => $productData) {
+            $productName = is_array($productData) && isset($productData['name'])
+                ? (string) $productData['name']
+                : (string) $productId;
+
+            $routes['/product?id=' . rawurlencode((string) $productId)] = 'Fiche produit : ' . $productName;
+        }
+
+        $slugToName = [];
+        foreach ($products as $productData) {
+            if (is_array($productData) && isset($productData['slug'])) {
+                $slug = (string) $productData['slug'];
+                $slugToName[$slug] = isset($productData['name']) ? (string) $productData['name'] : ucwords(str_replace('-', ' ', $slug));
+            }
+        }
+
+        $standaloneProductPages = glob($this->basePath . '/produit-*.php');
+        if ($standaloneProductPages !== false) {
+            foreach ($standaloneProductPages as $productPage) {
+                $fileName = basename($productPage);
+                $slug = str_replace(['produit-', '.php'], '', $fileName);
+                $label = $slugToName[$slug] ?? ucwords(str_replace('-', ' ', $slug));
+                $routes['/' . $fileName] = 'Page produit statique : ' . $label;
+            }
+        }
+
+        $actualitesRoute = '/actualites/es-tu-game.html';
+        if (file_exists($this->basePath . $actualitesRoute)) {
+            $routes[$actualitesRoute] = 'Article Es-tu Game FLIM 2025';
+        }
+
+        ksort($routes);
+
+        return $routes;
+    }
+
+    /**
+     * Charge le catalogue produit déclaré en JSON pour centraliser les informations de routage.
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    private function loadProductCatalog(): array
+    {
+        $productsPath = $this->basePath . '/data/products.json';
+        if (!is_file($productsPath)) {
+            return [];
+        }
+
+        $content = file_get_contents($productsPath);
+        if ($content === false) {
+            return [];
+        }
+
+        $data = json_decode($content, true);
+
+        return is_array($data) ? $data : [];
     }
     
     /**

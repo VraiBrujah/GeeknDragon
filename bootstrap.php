@@ -7,10 +7,36 @@ namespace {
         header('Permissions-Policy: payment=(self)');
     }
 
-    // Require Composer autoloader if available
+    // Require Composer autoloader si tous les fichiers nécessaires sont présents
     $autoload = __DIR__ . '/vendor/autoload.php';
     if (is_file($autoload)) {
-        require_once $autoload;
+        $mandatoryVendors = [
+            __DIR__ . '/vendor/symfony/polyfill-ctype/bootstrap.php',
+            __DIR__ . '/vendor/symfony/polyfill-mbstring/bootstrap.php',
+            __DIR__ . '/vendor/symfony/polyfill-php80/bootstrap.php',
+        ];
+
+        $missingVendors = array_filter($mandatoryVendors, static fn(string $path): bool => !is_file($path));
+
+        if ($missingVendors === []) {
+            require_once $autoload;
+        } else {
+            spl_autoload_register(
+                static function (string $class): void {
+                    $prefix = 'GeeknDragon\\';
+                    if (!str_starts_with($class, $prefix)) {
+                        return;
+                    }
+
+                    $relativeClass = substr($class, strlen($prefix));
+                    $file = __DIR__ . '/src/' . str_replace('\\', '/', $relativeClass) . '.php';
+
+                    if (is_file($file)) {
+                        require_once $file;
+                    }
+                }
+            );
+        }
     }
 
     // Load environment variables

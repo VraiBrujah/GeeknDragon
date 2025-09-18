@@ -174,17 +174,12 @@ class TranslationService
      */
     public function langUrl(string $path): string
     {
-        // Préserver la logique existante si elle existe
-        if (function_exists('langUrl')) {
-            return langUrl($path);
-        }
-
-        // Fallback simple
         $lang = $this->currentLang;
-        if ($lang === 'fr') {
-            return $path; // Français par défaut, pas de préfixe
+
+        if ($lang === 'fr' || $path === '') {
+            return $path ?: '/';
         }
 
-        return "/{$lang}{$path}";
+        return '/' . trim($lang . '/' . ltrim($path, '/'), '/');
     }
 }

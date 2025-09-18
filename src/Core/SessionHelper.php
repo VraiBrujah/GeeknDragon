@@ -13,6 +13,10 @@ class SessionHelper
      */
     public static function ensureSession(): void
     {
+        if (PHP_SAPI === 'cli') {
+            return;
+        }
+
         if (session_status() === PHP_SESSION_NONE) {
             if (PHP_SAPI === 'cli' || !headers_sent()) {
                 ini_set('session.cookie_httponly', '1');

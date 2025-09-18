@@ -20,10 +20,6 @@ $paths = [
     '/checkout',
     '/merci',
     '/product',
-    '/lot10',
-    '/lot25',
-    '/lot50-essence',
-    '/lot50-tresorerie',
 ];
 
 $actualitesDir = realpath(__DIR__ . '/../actualites');
@@ -33,12 +29,13 @@ if ($actualitesDir !== false) {
         if ($relative === false) {
             continue;
         }
-        $relative = str_replace('\', '/', $relative);
+
+        $relative = str_replace('\\', '/', $relative);
         $paths[] = '/' . ltrim($relative, '/');
     }
 }
 
-$productsFile = __DIR__ . '/../data/products.json';
+$productsFile = dirname(__DIR__) . '/data/products.json';
 if (is_file($productsFile)) {
     $data = json_decode((string) file_get_contents($productsFile), true);
     if (is_array($data)) {
@@ -53,6 +50,7 @@ $normalized = array_map(
         if ($path === '' || $path === '/') {
             return '/';
         }
+
         return '/' . ltrim($path, '/');
     },
     $paths
