@@ -90,12 +90,12 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <a href="boutique.php#coins" class="product-highlight-link">
                         <div class="product-highlight">
                             <div class="product-image">
-                                <img src="images/optimized-modern/coin-copper-10.webp" alt="Pièces métalliques" loading="lazy">
+                                <img src="images/optimized-modern/webp/coin-copper-10.webp" alt="Pièces métalliques" loading="lazy">
                             </div>
                             <div class="product-info">
                                 <h4>💰 Pièces Métalliques</h4>
                                 <p class="product-count">4 collections disponibles</p>
-                                <p class="product-desc">De l'Offrande du Voyageur (60$ CAD) à la Trésorerie du Seigneur (275$ CAD). Chaque pièce apporte le poids réel du trésor à votre table.</p>
+                                <p class="product-desc">De l'Offrande du Voyageur à la Trésorerie du Seigneur. Chaque pièce apporte le poids réel du trésor à votre table.</p>
                                 <div class="product-features">
                                     <span class="feature-tag">5 métaux nobles</span>
                                     <span class="feature-tag">Poids authentique</span>
