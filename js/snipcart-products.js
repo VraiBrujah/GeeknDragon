@@ -321,29 +321,78 @@ class GeeknDragonProducts {
     }
 
     /**
+     * Retrouve l'identifiant produit à partir d'un slug public
+     *
+     * @param {string|null} slug Slug provenant de l'URL
+     * @returns {string|null} Identifiant du produit si trouvé
+     */
+    findProductIdBySlug(slug) {
+        if (!slug || !this.products) {
+            return null;
+        }
+
+        const normalizedSlug = slug.toLowerCase();
+
+        for (const [id, product] of Object.entries(this.products)) {
+            const productSlug = (product.slug || '').toLowerCase();
+            if (productSlug === normalizedSlug) {
+                return id;
+            }
+
+            const legacySlugs = Array.isArray(product.legacy_slugs) ? product.legacy_slugs : [];
+            for (const legacySlug of legacySlugs) {
+                if (String(legacySlug).toLowerCase() === normalizedSlug) {
+                    return id;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Configure les liens directs vers les pages de produits
      */
     setupDirectProductLinks() {
         const currentUrl = new URL(window.location.href);
+        const normalizedPath = currentUrl.pathname.replace(/\/+$/, '') || '/';
         let productId = null;
 
-        if (currentUrl.pathname.endsWith('/product.php')) {
+        // Pages dynamiques actuelles
+        if (normalizedPath === '/product' || normalizedPath === '/product.php') {
             productId = currentUrl.searchParams.get('id');
         }
 
+        // Routes raccourcies de type /lot10
         if (!productId) {
-            // Compatibilité avec les anciennes pages statiques encore en circulation
-            const productPages = {
-                '/lot10.html': 'lot10',
-                '/lot25.html': 'lot25',
-                '/lot50-essence.html': 'lot50-essence',
-                '/lot50-tresorerie.html': 'lot50-tresorerie'
-            };
-
-            productId = productPages[currentUrl.pathname] ?? null;
+            const directCandidate = normalizedPath.replace(/^\/+/, '');
+            if (directCandidate && this.products && this.products[directCandidate]) {
+                productId = directCandidate;
+            }
         }
 
-        if (productId && this.products[productId]) {
+        // Alias générés produit-<slug>
+        if (!productId) {
+            const slugMatch = normalizedPath.match(/^\/produit-([a-z0-9-]+)(?:\.php)?$/i);
+            if (slugMatch) {
+                productId = this.findProductIdBySlug(slugMatch[1]);
+            }
+        }
+
+        // Compatibilité résiduelle avec les anciens fichiers .php ou .html
+        if (!productId) {
+            const legacyMatch = normalizedPath.match(/^\/([a-z0-9-]+)\.(?:php|html)$/i);
+            if (legacyMatch) {
+                const candidate = legacyMatch[1];
+                if (this.products && this.products[candidate]) {
+                    productId = candidate;
+                } else {
+                    productId = this.findProductIdBySlug(candidate);
+                }
+            }
+        }
+
+        if (productId && this.products && this.products[productId]) {
             this.setupSingleProductPage(productId);
         }
     }
