@@ -1,3 +1,12 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * Prépare la configuration Snipcart exposée à la boutique.
+ */
+$config = require __DIR__ . '/config.php';
+$snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snipcart_api_key'] : '';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -620,11 +629,6 @@
         </div>
     </footer>
 
-    <!-- Variables d'environnement pour Snipcart -->
-    <script>
-        window.SNIPCART_API_KEY = 'YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1'; // À remplacer par votre vraie clé
-    </script>
-    
     <!-- Scripts existants -->
     <script src="js/script.js"></script>
     <script src="js/hero-videos.js"></script>
@@ -635,14 +639,15 @@
     <script src="js/audio-player-override.js"></script>
     <script src="js/music-scanner-override.js"></script>
     <script src="js/audio-header-ui.js"></script>
-    
+    <script src="api/public-config.js.php"></script>
+
     <!-- Intégration Snipcart avec thème D&D -->
     <script src="js/snipcart-products.js"></script>
     <script src="js/snipcart-integration.js"></script>
-    
+
     <!-- Container Snipcart (hidden) -->
-    <div id="snipcart" 
-         data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1"
+    <div id="snipcart"
+         data-api-key="<?= htmlspecialchars($snipcartApiKey, ENT_QUOTES, 'UTF-8') ?>"
          data-config-modal-style="side"
          data-config-add-product-behavior="none"
          data-templates-url="/templates/snipcart-templates.php"
