@@ -9,6 +9,7 @@ declare(strict_types=1);
 // Bootstrap et autoloading
 require_once __DIR__ . '/../bootstrap.php';
 
+use GeeknDragon\Controller\AccountController;
 use GeeknDragon\Core\Router;
 
 // Configuration globale
@@ -149,25 +150,16 @@ $router->get('/api/products/{id}', function ($id) use ($config) {
 });
 
 // Endpoints compte client
-$router->post('/api/account/login', function () use ($config) {
-    $controller = new GeeknDragon\Controller\AccountController($config);
-    $controller->login();
-});
+$accountController = new AccountController($config);
 
-$router->get('/api/account/profile', function () use ($config) {
-    $controller = new GeeknDragon\Controller\AccountController($config);
-    $controller->profile();
-});
-
-$router->get('/api/account/orders', function () use ($config) {
-    $controller = new GeeknDragon\Controller\AccountController($config);
-    $controller->orders();
-});
-
-$router->get('/api/account/status', function () use ($config) {
-    $controller = new GeeknDragon\Controller\AccountController($config);
-    $controller->status();
-});
+$router->get('/api/account/session-check', [$accountController, 'sessionCheck']);
+$router->post('/api/account/register', [$accountController, 'register']);
+$router->post('/api/account/login-local', [$accountController, 'loginLocal']);
+$router->post('/api/account/login', [$accountController, 'login']);
+$router->post('/api/account/logout', [$accountController, 'logout']);
+$router->get('/api/account/profile', [$accountController, 'profile']);
+$router->get('/api/account/orders', [$accountController, 'orders']);
+$router->get('/api/account/status', [$accountController, 'status']);
 
 // ===============================
 // ASSETS STATIQUES (BYPASS)
