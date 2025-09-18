@@ -20,6 +20,7 @@ class GeeknDragonAudioPlayer {
 
     this.state = {
       isPlaying: false,
+      shouldResume: false,
       currentTrack: 0,
       currentTime: 0,
       volume: storedVolume,
@@ -54,6 +55,88 @@ class GeeknDragonAudioPlayer {
     if (path.includes('boutique')) return 'boutique';
     if (path.includes('product.php') || path.includes('produit-')) return 'produit';
     return 'index';
+  }
+
+  /**
+   * Vérifie auprès de Howler si une piste est réellement en cours de lecture.
+   *
+   * @returns {boolean} Indique si Howler diffuse effectivement un morceau.
+   */
+  isActuallyPlaying() {
+    return (
+      !!this.sound &&
+      typeof this.sound.playing === 'function' &&
+      this.sound.playing()
+    );
+  }
+
+  /**
+   * Synchronise l'état interne `isPlaying` et les timers avec Howler.
+   *
+   * @param {boolean} playing Vaut `true` si la lecture est confirmée.
+   */
+  setActualPlayingState(playing) {
+    this.state.isPlaying = Boolean(playing);
+
+    if (this.state.isPlaying) {
+      this.startTimeUpdater();
+    } else {
+      this.stopTimeUpdater();
+    }
+
+    this.updatePlayButton();
+  }
+
+  /**
+   * Centralise la gestion des erreurs de lecture Howler.
+   *
+   * @param {Error|undefined} error Erreur renvoyée par Howler.
+   */
+  handlePlayError(error) {
+    if (error) {
+      console.log('Erreur de lecture détectée:', error);
+    }
+    this.setActualPlayingState(false);
+  }
+
+  /**
+   * Callback Howler exécuté lorsque la lecture démarre réellement.
+   */
+  handleHowlerPlay() {
+    this.state.shouldResume = true;
+    this.setActualPlayingState(this.isActuallyPlaying());
+  }
+
+  /**
+   * Callback Howler exécuté lors d'une mise en pause.
+   */
+  handleHowlerPause() {
+    this.setActualPlayingState(false);
+  }
+
+  /**
+   * Callback Howler exécuté lors d'un arrêt brutal de la piste.
+   */
+  handleHowlerStop() {
+    this.setActualPlayingState(false);
+  }
+
+  /**
+   * Callback Howler exécuté quand un morceau se termine.
+   */
+  handleHowlerEnd() {
+    this.setActualPlayingState(false);
+    this.playNext();
+  }
+
+  /**
+   * Callback Howler exécuté en cas d'impossibilité de lancer la lecture.
+   *
+   * @param {Error|undefined} error Erreur optionnelle fournie par Howler.
+   */
+  handleHowlerPlayError(error) {
+    this.handlePlayError(error);
+    this.setupAutoplayFallback();
   }
 
   async init() {
@@ -225,10 +308,10 @@ class GeeknDragonAudioPlayer {
         );
         const firstFile = heroIntro || files[0];
         this.state.playlist = [firstFile];
-        this.state.isPlaying = true;
+        this.state.shouldResume = true;
         this.state.currentTime = 0;
         this.loadTrack(0);
-        this.updatePlayButton();
+        this.setActualPlayingState(this.isActuallyPlaying());
         console.log(`🎵 Démarrage rapide avec ${firstFile.split('/').pop()}`);
 
         // Lancer le scan complet en arrière-plan après le démarrage
@@ -246,7 +329,7 @@ class GeeknDragonAudioPlayer {
   async scanMusicFiles() {
     console.log('🔍 Scan intelligent des fichiers musicaux...');
     // Conserver l'état de lecture actuel
-    const wasPlaying = !!(this.sound && this.state.isPlaying);
+    const wasPlaying = this.state.shouldResume || this.isActuallyPlaying();
     const currentShuffleIndex = this.state.currentTrack;
     let currentTrackUrl = null;
     if (wasPlaying && this.state.playlist.length > 0) {
@@ -326,10 +409,10 @@ class GeeknDragonAudioPlayer {
 
       // Charger la première piste uniquement si rien ne joue actuellement
       if (!wasPlaying) {
-        this.state.isPlaying = true;
+        this.state.shouldResume = true;
         this.state.currentTime = 0;
         this.loadTrack(this.state.currentTrack);
-        this.updatePlayButton();
+        this.setActualPlayingState(this.isActuallyPlaying());
       }
 
       this.updateTrackInfo();
@@ -340,6 +423,8 @@ class GeeknDragonAudioPlayer {
       console.log('⚠️ Aucune musique trouvée');
       this.updateTrackInfo('Aucune musique disponible');
       this.showMusicSuggestions();
+      this.state.shouldResume = false;
+      this.setActualPlayingState(false);
     }
   }
 
@@ -444,14 +529,17 @@ class GeeknDragonAudioPlayer {
         volume: this.state.volume,
         pool: 1, // Limite le nombre d'instances audio
         preload: false, // Ne précharge pas automatiquement
-        onend: () => this.playNext(),
-        onplayerror: () => this.setupAutoplayFallback(),
+        onplay: () => this.handleHowlerPlay(),
+        onpause: () => this.handleHowlerPause(),
+        onstop: () => this.handleHowlerStop(),
+        onend: () => this.handleHowlerEnd(),
+        onplayerror: (soundId, error) => this.handleHowlerPlayError(error),
         onload: () => {
           // Configurer le fallback autoplay dès que la piste est chargée
-          if (this.state.isPlaying) {
+          if (this.state.shouldResume) {
             this.setupAutoplayFallback();
           }
-        }
+        },
       });
 
       if (resume && this.state.currentTime > 0) {
@@ -475,11 +563,13 @@ class GeeknDragonAudioPlayer {
     // Sauvegarder immédiatement l'état pour assurer une reprise à 0 si la page change
     this.savePlaybackState(true);
 
-    if (this.state.isPlaying) {
+    if (this.state.shouldResume) {
       if (!this.sound.playing()) {
         this.sound.play();
       }
-      this.startTimeUpdater();
+      this.setActualPlayingState(this.isActuallyPlaying());
+    } else {
+      this.setActualPlayingState(false);
     }
 
     const fileName = trackPath.split('/').pop().replace('.mp3', '');
@@ -497,27 +587,32 @@ class GeeknDragonAudioPlayer {
   async togglePlay() {
     if (!this.sound) return;
 
-    if (this.state.isPlaying) {
+    if (this.state.shouldResume && (this.state.isPlaying || this.isActuallyPlaying())) {
+      this.state.shouldResume = false;
       this.sound.pause();
-      this.stopTimeUpdater();
-      this.state.isPlaying = false;
+      this.setActualPlayingState(false);
     } else {
       try {
         this.sound.play();
-        this.startTimeUpdater();
-        this.state.isPlaying = true;
+        this.state.shouldResume = true;
+        this.setActualPlayingState(this.isActuallyPlaying());
       } catch (error) {
-        console.log('Erreur de lecture:', error);
+        this.state.shouldResume = false;
+        this.handlePlayError(error);
         return;
       }
     }
 
-    this.updatePlayButton();
-    this.savePlaybackState(!this.state.isPlaying);
+    this.savePlaybackState(!this.state.shouldResume);
   }
 
   playNext() {
-    console.log('🔄 playNext() appelé - État isPlaying:', this.state.isPlaying);
+    console.log(
+      '🔄 playNext() appelé - Lecture confirmée:',
+      this.state.isPlaying,
+      '- Intention:',
+      this.state.shouldResume,
+    );
 
     // Logique de sélection intelligente de la prochaine piste
     this.selectNextPlaylistWithPriority();
@@ -538,10 +633,9 @@ class GeeknDragonAudioPlayer {
     console.log(
       `🎵 Chargement piste ${nextTrack + 1}/${this.state.playlist.length}`,
     );
-    this.state.isPlaying = true;
+    this.state.shouldResume = true;
     this.state.currentTime = 0;
     this.loadTrack(nextTrack);
-    this.updatePlayButton();
   }
 
   selectNextPlaylistWithPriority() {
@@ -585,8 +679,6 @@ class GeeknDragonAudioPlayer {
     if (type === this.state.currentPlaylistType) {
       return; // Déjà sur la bonne playlist
     }
-
-    const wasPlaying = this.state.isPlaying;
 
     if (type === 'current' && this.state.currentPagePlaylist.length > 0) {
       this.state.currentPlaylistType = 'current';
@@ -691,9 +783,21 @@ class GeeknDragonAudioPlayer {
   }
 
   updatePlayButton() {
+    if (!this.playerElement) {
+      return;
+    }
+
     const playBtn = this.playerElement.querySelector('.main-play-button i');
     if (playBtn) {
       playBtn.className = `fas ${this.state.isPlaying ? 'fa-pause' : 'fa-play'}`;
+    }
+
+    const playButtonWrapper = this.playerElement.querySelector('.main-play-button');
+    if (playButtonWrapper) {
+      playButtonWrapper.setAttribute(
+        'aria-pressed',
+        this.state.isPlaying ? 'true' : 'false',
+      );
     }
   }
 
@@ -750,6 +854,7 @@ class GeeknDragonAudioPlayer {
 
     const state = {
       isPlaying: this.state.isPlaying,
+      shouldResume: this.state.shouldResume,
       currentTrack: this.state.currentTrack,
       currentTime: this.state.currentTime,
       playlist: this.state.playlist,
@@ -788,7 +893,13 @@ class GeeknDragonAudioPlayer {
         this.state.shuffleOrder = state.shuffleOrder || [];
         this.state.currentTrack = state.currentTrack || 0;
         this.state.currentTime = state.currentTime || 0;
-        this.state.isPlaying = state.isPlaying || false;
+        const restoredShouldResume =
+          typeof state.shouldResume === 'boolean'
+            ? state.shouldResume
+            : Boolean(state.isPlaying);
+
+        this.state.shouldResume = restoredShouldResume;
+        this.state.isPlaying = false;
         this.currentDirectory = state.currentDirectory || this.currentDirectory;
 
         // Restaurer les playlists séparées si disponibles
@@ -827,7 +938,7 @@ class GeeknDragonAudioPlayer {
     this.autoplayFallbackActive = true;
 
     const canResumePlayback = () =>
-      this.state.isPlaying &&
+      this.state.shouldResume &&
       this.sound &&
       typeof this.sound.playing === 'function' &&
       !this.sound.playing();
@@ -851,9 +962,8 @@ class GeeknDragonAudioPlayer {
       }
 
       const handlePlaySuccess = () => {
-        this.state.isPlaying = true;
-        this.startTimeUpdater();
-        this.updatePlayButton();
+        this.state.shouldResume = true;
+        this.setActualPlayingState(this.isActuallyPlaying());
         if (successLog) {
           console.log(successLog);
         }
@@ -868,6 +978,7 @@ class GeeknDragonAudioPlayer {
             console.log(errorLog);
           }
         }
+        this.handlePlayError(error);
         this.cleanupAutoplayListeners();
         if (rearmOnError && canResumePlayback()) {
           this.setupAutoplayFallback({ skipAutoAttempt: true });
@@ -898,15 +1009,11 @@ class GeeknDragonAudioPlayer {
       console.log('🎵 Interaction détectée:', event?.type || 'inconnue');
 
       if (!canResumePlayback()) {
-        if (!this.state.isPlaying) {
+        if (!this.state.shouldResume) {
           console.log(
             '🎵 Fallback annulé: la lecture est en pause sur demande de l\'utilisateur.',
           );
-        } else if (
-          this.sound &&
-          typeof this.sound.playing === 'function' &&
-          this.sound.playing()
-        ) {
+        } else if (this.isActuallyPlaying()) {
           console.log(
             '🎵 Fallback inutile: la lecture est déjà en cours.',
           );
@@ -945,16 +1052,12 @@ class GeeknDragonAudioPlayer {
         }
 
         if (!canResumePlayback()) {
-          if (!this.state.isPlaying) {
+          if (!this.state.shouldResume) {
             console.log(
               '🎵 Relance automatique annulée: la lecture a été mise en pause par l\'utilisateur.',
             );
             this.cleanupAutoplayListeners();
-          } else if (
-            this.sound &&
-            typeof this.sound.playing === 'function' &&
-            this.sound.playing()
-          ) {
+          } else if (this.isActuallyPlaying()) {
             console.log(
               '🎵 Relance automatique inutile: la lecture est déjà en cours.',
             );

@@ -10,6 +10,11 @@
     wrap.id = 'gndHeaderAudio';
     wrap.className = 'gnd-header-audio';
     wrap.setAttribute('aria-label', 'Contrôles musique');
+    const isPlaying =
+      typeof player?.isActuallyPlaying === 'function'
+        ? player.isActuallyPlaying()
+        : !!(player?.state?.isPlaying);
+
     wrap.innerHTML = [
       '<div class="gnd-header-vol">',
       '  <input class="gnd-header-volume" type="range" min="0" max="100" value="',
@@ -17,8 +22,10 @@
       '" aria-label="Volume">',
       '</div>',
       '<div class="gnd-header-controls">',
-      '  <button class="gnd-header-play" type="button" title="Lecture/Pause" aria-label="Lecture/Pause">',
-      (player && player.state && player.state.isPlaying) ? '⏸' : '▶',
+      '  <button class="gnd-header-play" type="button" title="Lecture/Pause" aria-label="Lecture/Pause" aria-pressed="',
+      isPlaying ? 'true' : 'false',
+      '">',
+      isPlaying ? '⏸' : '▶',
       '</button>',
       '  <button class="gnd-header-next" type="button" title="Morceau suivant" aria-label="Morceau suivant">⏭</button>',
       '</div>'
@@ -100,7 +107,14 @@
     player.updatePlayButton = function () {
       try {
         const b = header.querySelector('.gnd-header-play');
-        if (b) b.textContent = this.state.isPlaying ? '⏸' : '▶';
+        if (b) {
+          const playing =
+            typeof this.isActuallyPlaying === 'function'
+              ? this.isActuallyPlaying()
+              : !!this.state?.isPlaying;
+          b.textContent = playing ? '⏸' : '▶';
+          b.setAttribute('aria-pressed', playing ? 'true' : 'false');
+        }
       } catch {}
       return updPlay();
     };
@@ -112,7 +126,7 @@
         const v = header.querySelector('.gnd-header-volume');
         if (v) v.value = Math.round((this.state?.volume || 0) * 100);
       } catch {}
-        return r;
+      return r;
     };
   }
 
