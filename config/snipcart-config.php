@@ -113,18 +113,67 @@ class SnipcartConfig
     public static function generateJavaScriptConfig(): string
     {
         $config = self::getConfig();
-        
-        $jsConfig = [
-            'apiKey' => $config['api_key'],
-            'currency' => $config['currency'],
-            'language' => $config['language'],
-            'modalStyle' => $config['modal_style'],
-            'addProductBehavior' => $config['add_product_behavior'],
-            'templatesUrl' => $config['templates_url'],
-            'environment' => $config['environment'],
-        ];
 
-        return 'window.GEEKNDRAGON_SNIPCART_CONFIG = ' . json_encode($jsConfig, JSON_PRETTY_PRINT) . ';';
+        $templatesUrl = '/templates/snipcart-templates.html';
+        if (!empty($config['templates_url'])) {
+            $parsed = parse_url((string) $config['templates_url']);
+            if (!empty($parsed['path'])) {
+                $templatesUrl = $parsed['path'];
+                if (!empty($parsed['query'])) {
+                    $templatesUrl .= '?' . $parsed['query'];
+                }
+            }
+        }
+
+        $encode = static function (string $value): string {
+            return json_encode($value, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        };
+
+        $currency = $encode((string) $config['currency']);
+        $language = $encode((string) $config['language']);
+        $modalStyle = $encode((string) $config['modal_style']);
+        $addProductBehavior = $encode((string) $config['add_product_behavior']);
+        $templatesUrlJson = $encode($templatesUrl);
+        $environment = $encode((string) $config['environment']);
+
+        $template = <<<'JS'
+/**
+ * Configuration Snipcart générée côté client sans inclure de secret.
+ *
+ * La clé publique est récupérée depuis api/public-config.js.php qui se charge
+ * d'exposer window.SNIPCART_API_KEY après lecture du fichier config.php.
+ */
+(function () {
+    const publicKey = typeof window !== 'undefined' ? window.SNIPCART_API_KEY || '' : '';
+
+    const baseConfig = {
+        apiKey: publicKey,
+        currency: %s,
+        language: %s,
+        modalStyle: %s,
+        addProductBehavior: %s,
+        templatesUrl: %s,
+        environment: %s
+    };
+
+    if (typeof window !== 'undefined') {
+        window.GEEKNDRAGON_SNIPCART_CONFIG = {
+            ...(window.GEEKNDRAGON_SNIPCART_CONFIG || {}),
+            ...baseConfig
+        };
+    }
+})();
+JS;
+
+        return sprintf(
+            $template,
+            $currency,
+            $language,
+            $modalStyle,
+            $addProductBehavior,
+            $templatesUrlJson,
+            $environment
+        );
     }
 
     /**

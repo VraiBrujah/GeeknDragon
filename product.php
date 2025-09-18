@@ -1,6 +1,14 @@
 <?php
 declare(strict_types=1);
 
+require __DIR__ . '/bootstrap.php';
+$config = require __DIR__ . '/config.php';
+
+/**
+ * Clé publique Snipcart partagée avec la couche de présentation.
+ */
+$snipcartApiKey = (string)($config['snipcart_api_key'] ?? '');
+
 /**
  * Page produit dynamique.
  *
@@ -503,6 +511,6 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
     <script src="js/wishlist.js"></script>
     <script src="js/snipcart-products.js"></script>
     <script src="js/snipcart-integration.js"></script>
-    <div id="snipcart" data-api-key="YmFhMjM0ZDEtM2VhNy00YTVlLWI0NGYtM2ZiOWI2Y2IzYmU1NjM4ODkxMjUzMDE3NzIzMjc1" data-config-modal-style="side" data-config-add-product-behavior="none" style="display:none;"></div>
+    <div id="snipcart" data-api-key="<?= htmlspecialchars($snipcartApiKey, ENT_QUOTES, 'UTF-8') ?>" data-config-modal-style="side" data-config-add-product-behavior="none" style="display:none;"></div>
 </body>
 </html>
