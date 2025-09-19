@@ -16,17 +16,6 @@ use GeeknDragon\Security\CsrfProtection;
  * - $extraHead        : contenu HTML additionnel
  */
 
-if (!function_exists('gdAssetVersion')) {
-    /**
-     * Retourne un hash basé sur le timestamp du fichier pour l'auto-versionning.
-     */
-    function gdAssetVersion(string $relativePath): string
-    {
-        $path = __DIR__ . '/' . ltrim($relativePath, '/');
-        return is_file($path) ? (string) filemtime($path) : '0';
-    }
-}
-
 $title = $title ?? 'Geek & Dragon';
 $metaDescription = $metaDescription ?? '';
 $metaUrl = $metaUrl ?? (gdComputeBaseUrl() . ($_SERVER['REQUEST_URI'] ?? '/'));
