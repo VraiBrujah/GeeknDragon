@@ -1,9 +1,0 @@
-<svg width="120" height="40" xmlns="http://www.w3.org/2000/svg">
-  <rect width="120" height="40" fill="#0F172A" rx="8"/>
-  <text x="60" y="15" font-family="Inter, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#60A5FA">
-    EDS
-  </text>
-  <text x="60" y="30" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="#93C5FD">
-    QUÉBEC
-  </text>
-</svg>

@@ -1,8 +1,0 @@
-# Protection du dossier notes
-Order deny,allow
-Deny from all
-# Seul PHP peut accéder
-<Files "*.md">
-Order deny,allow
-Deny from all
-</Files>
