@@ -946,21 +946,97 @@ class CharacterCreation {
     }
 
     /**
+     * Récupère le token CSRF depuis la balise meta dédiée.
+     */
+    getCsrfToken() {
+        const meta = document.querySelector('meta[name="csrf-token"]');
+        const token = meta?.getAttribute('content');
+        return typeof token === 'string' ? token.trim() : '';
+    }
+
+    /**
+     * Construit les en-têtes standards pour les requêtes JSON envoyées à l'API.
+     */
+    buildApiHeaders() {
+        const headers = {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        };
+
+        const csrfToken = this.getCsrfToken();
+        if (csrfToken) {
+            headers['X-CSRF-TOKEN'] = csrfToken;
+        }
+
+        return headers;
+    }
+
+    /**
+     * Détermine le message d'erreur à afficher à partir de la réponse API.
+     */
+    resolveApiErrorMessage(response, payload) {
+        if (payload) {
+            const apiMessage = typeof payload.message === 'string' ? payload.message.trim() : '';
+            if (apiMessage) {
+                return apiMessage;
+            }
+
+            const legacyMessage = typeof payload.error === 'string' ? payload.error.trim() : '';
+            if (legacyMessage) {
+                return legacyMessage;
+            }
+
+            if (payload.errors && typeof payload.errors === 'object') {
+                const aggregatedErrors = Object.values(payload.errors).reduce((accumulator, value) => {
+                    if (typeof value === 'string') {
+                        const cleaned = value.trim();
+                        if (cleaned) {
+                            accumulator.push(cleaned);
+                        }
+                    } else if (Array.isArray(value)) {
+                        value.forEach((entry) => {
+                            if (typeof entry === 'string') {
+                                const cleanedEntry = entry.trim();
+                                if (cleanedEntry) {
+                                    accumulator.push(cleanedEntry);
+                                }
+                            }
+                        });
+                    }
+
+                    return accumulator;
+                }, []);
+
+                if (aggregatedErrors.length > 0) {
+                    return aggregatedErrors.join(' ');
+                }
+            }
+        }
+
+        const statusLabel = Number.isFinite(response?.status) ? ` (HTTP ${response.status})` : '';
+        return `Erreur lors de la création du compte${statusLabel}`;
+    }
+
+    /**
      * Soumission du formulaire de création de personnage
      */
     async submitCharacter(e) {
         e.preventDefault();
-        
+
         if (!this.validateCurrentStep()) {
             return;
         }
 
+        const submitBtn = document.getElementById('submit-character');
+        const originalText = submitBtn?.textContent ?? '';
+
         try {
             // Affichage du loading
-            const submitBtn = document.getElementById('submit-character');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Création en cours...';
-            submitBtn.disabled = true;
+            if (submitBtn) {
+                submitBtn.textContent = 'Création en cours...';
+                submitBtn.disabled = true;
+            }
 
             // Préparation des données pour l'envoi
             const formData = {
@@ -969,25 +1045,29 @@ class CharacterCreation {
                 nom_aventurier: this.characterData.nom_aventurier.trim(),
                 password: this.characterData.password
             };
-            
+
             // Appel API d'inscription
-            const response = await fetch('api/register.php', {
+            const response = await fetch('/api/account/register', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: this.buildApiHeaders(),
                 body: JSON.stringify(formData)
             });
 
-            const result = await response.json();
+            let result;
+            try {
+                result = await response.json();
+            } catch (jsonError) {
+                throw new Error('Réponse inattendue du serveur lors de la création du compte.');
+            }
 
-            if (!response.ok || !result.success) {
-                throw new Error(result.error || 'Erreur lors de la création du compte');
+            if (!response.ok || !result?.success) {
+                const errorMessage = this.resolveApiErrorMessage(response, result);
+                throw new Error(errorMessage);
             }
 
             // Succès - afficher un message et rediriger
             this.showSuccessMessage(result);
-            
+
             // Redirection après un délai
             setTimeout(() => {
                 window.location.href = '../compte.php';
@@ -995,12 +1075,14 @@ class CharacterCreation {
 
         } catch (error) {
             console.error('Erreur lors de la création du compte:', error);
-            this.showErrorMessage(error.message);
-            
+            const message = error instanceof Error && error.message ? error.message : 'Erreur lors de la création du compte.';
+            this.showErrorMessage(message);
+
             // Restaurer le bouton
-            const submitBtn = document.getElementById('submit-character');
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
+            if (submitBtn) {
+                submitBtn.textContent = originalText || 'Créer mon personnage';
+                submitBtn.disabled = false;
+            }
         }
     }
 
@@ -1009,6 +1091,13 @@ class CharacterCreation {
      */
     showSuccessMessage(result) {
         const container = document.querySelector('.creation-form');
+        if (!container) {
+            return;
+        }
+
+        const adventurerName = result?.user?.nom_aventurier || this.characterData.nom_aventurier || 'Aventurier';
+        const successMessage = result?.message || 'Aventurier créé avec succès !';
+
         const successDiv = document.createElement('div');
         successDiv.className = 'alert alert-success';
         successDiv.style.cssText = `
@@ -1021,17 +1110,20 @@ class CharacterCreation {
             text-align: center;
             animation: fadeIn 0.5s ease-in-out;
         `;
-        
+
         successDiv.innerHTML = `
-            <h3 style="margin: 0 0 1rem 0; color: #22c55e;">🎉 Aventurier créé avec succès !</h3>
-            <p style="margin: 0 0 1rem 0;">Bienvenue dans l'univers Geek&Dragon, <strong>${result.adventurer_name}</strong> !</p>
+            <h3 style="margin: 0 0 1rem 0; color: #22c55e;">🎉 ${successMessage}</h3>
+            <p style="margin: 0 0 1rem 0;">Bienvenue dans l'univers Geek&Dragon, <strong>${adventurerName}</strong> !</p>
             <p style="margin: 0; font-size: 0.9rem; opacity: 0.8;">Redirection en cours vers votre espace personnel...</p>
         `;
-        
+
         container.insertBefore(successDiv, container.firstChild);
-        
+
         // Masquer le formulaire
-        document.querySelector('form').style.display = 'none';
+        const formElement = document.querySelector('form');
+        if (formElement) {
+            formElement.style.display = 'none';
+        }
     }
 
     /**
