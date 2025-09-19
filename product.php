@@ -145,7 +145,7 @@ HTML;
 <body>
 <?php include __DIR__ . '/header.php'; ?>
 
-    <main id="main" class="product-main pt-[var(--header-height)]">
+    <main id="main" class="product-main pt-32">
         <section class="breadcrumb">
             <div class="container">
                 <nav class="breadcrumb-nav">

@@ -16,7 +16,7 @@ $active = 'compte';
 <body class="account-invoices-page">
 <?php include __DIR__ . '/../../header.php'; ?>
 
-<main id="main" class="pt-[var(--header-height)]">
+<main id="main" class="pt-32">
   <div class="invoice-wrapper">
     <section class="invoice-hero">
       <h1>🧾 Mes Factures d'Aventurier</h1>

@@ -5,10 +5,36 @@ require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/i18n.php';
 
 /**
- * Système audio temporairement désactivé pour éviter les erreurs.
- * Sera réactivé comme "nice to have" plus tard.
+ * Détermine si le lecteur audio doit être injecté automatiquement.
+ *
+ * Les pages peuvent définir :
+ * - $enableAudioPlayer = false pour désactiver explicitement le lecteur.
+ * - $disableAudioPlayer = true pour conserver la compatibilité descendante.
  */
-$shouldLoadAudioPlayer = false;
+$shouldLoadAudioPlayer = true;
+
+if (array_key_exists('enableAudioPlayer', $GLOBALS)) {
+    $shouldLoadAudioPlayer = (bool) $GLOBALS['enableAudioPlayer'];
+} elseif (array_key_exists('disableAudioPlayer', $GLOBALS)) {
+    $shouldLoadAudioPlayer = !(bool) $GLOBALS['disableAudioPlayer'];
+}
+
+if (!function_exists('gdRenderAudioPlayerScripts')) {
+    /**
+     * Affiche les balises <script> nécessaires au lecteur audio global.
+     */
+    function gdRenderAudioPlayerScripts(): void
+    {
+        echo <<<'HTML'
+    <!-- Lecteur audio partagé -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+    <script src="/js/audio-player-engine.js"></script>
+    <script src="/js/audio-player-scanner.js"></script>
+    <script src="/js/audio-player-ui.js"></script>
+    <script src="/js/audio-player.js"></script>
+HTML;
+    }
+}
 
 /**
  * Gère le rendu du pied de page.
@@ -91,7 +117,11 @@ if (!$hasSections) {
   © <?= date('Y'); ?> Geek &amp; Dragon — <span data-i18n="footer.made">Conçu au Québec.</span>
 </footer>
 
-    // Audio système supprimé
+<?php
+    if ($shouldLoadAudioPlayer) {
+        gdRenderAudioPlayerScripts();
+    }
+    return;
 }
 
 $footerBottomText = isset($footerBottomText) ? trim((string) $footerBottomText) : '';
@@ -142,4 +172,8 @@ if ($footerBottomText === '') {
     </div>
 </footer>
 
-<!-- Audio système supprimé -->
+<?php
+if ($shouldLoadAudioPlayer) {
+    gdRenderAudioPlayerScripts();
+}
+?>

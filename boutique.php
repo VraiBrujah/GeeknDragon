@@ -28,7 +28,7 @@ HTML;
 <body>
 <?php include __DIR__ . '/header.php'; ?>
 
-    <main id="main" class="shop-main pt-[var(--header-height)]">
+    <main id="main" class="shop-main pt-32">
         <section class="shop-hero">
             <div class="hero-videos" data-main="/videos/Fontaine12.mp4" data-videos='["/videos/Carte1.mp4","/videos/fontaine6.mp4","/videos/trip2.mp4","/videos/fontaine7.mp4","/videos/cartearme.mp4","/videos/fontaine8.mp4","/videos/fontaine9.mp4","/videos/fontaine4.mp4"]'></div>
             <div class="hero-overlay"></div>

@@ -1082,14 +1082,9 @@ p {
 }
 
 .payment-icons img {
-    height: 24px !important;
-    width: auto !important;
+    height: 30px;
+    width: auto;
     opacity: 0.8;
-    transition: opacity 0.2s ease;
-}
-
-.payment-icons img:hover {
-    opacity: 1;
 }
 
 .boutique-cta {
@@ -1918,7 +1913,7 @@ p {
     }
 
     .payment-icons img {
-        height: 20px !important;
+        height: 25px;
     }
 }
 

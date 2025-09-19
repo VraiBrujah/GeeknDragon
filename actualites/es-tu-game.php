@@ -12,6 +12,7 @@ $metaDescription = __('news.es_tu_game.description', 'Revivez notre démonstrati
 $ogImage = '/images/optimized-modern/webp/es-tu-game-demo.webp';
 $active = 'actus';
 $extraHead = $extraHead ?? '';
+$disableAudioPlayer = true; // Pas de lecteur audio sur cette page
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8'); ?>">
@@ -19,7 +20,7 @@ $extraHead = $extraHead ?? '';
 <body>
 <?php include __DIR__ . '/../header.php'; ?>
 <main id="main" class="pt-[var(--header-height)]">
-  <section id="actus" class="pt-8 pb-16 bg-gray-900/80">
+  <section id="actus" class="py-16 bg-gray-900/80">
     <div class="max-w-5xl mx-auto px-6">
       <h2 class="text-4xl font-bold text-center mb-12 text-white" data-i18n="news.flim2025.heading">
         <?= __('news.flim2025.heading', 'Actualité – FLIM 2025'); ?>
