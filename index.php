@@ -29,11 +29,11 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="boutique.php" class="nav-link">Boutique</a></li>
-                <li><a href="#catalogue" class="nav-link">Catalogue</a></li>
-                <li><a href="#actualites" class="nav-link">Actualités</a></li>
-                <li><a href="#about" class="nav-link">À Propos</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="boutique.php" class="nav-link whitespace-nowrap">Boutique</a></li>
+                <li><a href="#catalogue" class="nav-link whitespace-nowrap">Catalogue</a></li>
+                <li><a href="#actualites" class="nav-link whitespace-nowrap">Actualités</a></li>
+                <li><a href="#about" class="nav-link whitespace-nowrap">À Propos</a></li>
+                <li><a href="#contact" class="nav-link whitespace-nowrap">Contact</a></li>
             </ul>
             
             <!-- Accès compte et panier -->
