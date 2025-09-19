@@ -3,7 +3,8 @@
     "allow": [
       "Bash(start:*)",
       "Bash(php:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "WebFetch(domain:geekndragon.com)"
     ],
     "deny": [],
     "ask": []
