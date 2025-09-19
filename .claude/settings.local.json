@@ -34,7 +34,9 @@
       "Bash(npm audit:*)",
       "WebFetch(domain:geekndragon.com)",
       "Read(H:\\GeeknDragon\\oldSiteWeb\\data/**)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(start http://localhost/test-header-simple.php)",
+      "Bash(start http://localhost/boutique.php)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

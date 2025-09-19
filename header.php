@@ -280,13 +280,13 @@ if (!function_exists('gdDefaultHeaderActionsMobile')) {
         </svg>
       </button>
 
-      <nav class="hidden md:flex order-3 md:order-2 flex-1 uppercase tracking-wide text-center text-white overflow-x-auto" aria-label="Navigation principale">
+      <nav class="flex order-3 md:order-2 flex-1 uppercase tracking-wide text-center text-white overflow-x-auto" aria-label="Navigation principale">
         <ul class="flex flex-nowrap items-center justify-center gap-6 whitespace-nowrap">
           <?php gdRenderNav($navItems, $active); ?>
         </ul>
       </nav>
 
-      <div id="lang-switcher" class="hidden md:flex items-center gap-2 order-2 md:order-3 ml-2 flex-shrink-0">
+      <div id="lang-switcher" class="flex items-center gap-2 order-2 md:order-3 ml-2 flex-shrink-0">
         <button type="button" data-lang="fr" class="flag-btn" aria-label="Français" aria-current="<?= $lang === 'fr' ? 'true' : 'false'; ?>">
           <img src="/images/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
         </button>
@@ -295,7 +295,7 @@ if (!function_exists('gdDefaultHeaderActionsMobile')) {
         </button>
       </div>
 
-      <div class="hidden md:flex items-center gap-4 flex-shrink-0 order-2 md:order-3 md:ml-auto" data-gd-header-actions>
+      <div class="flex items-center gap-4 flex-shrink-0 order-2 md:order-3 md:ml-auto" data-gd-header-actions>
         <div id="gd-header-audio-anchor" class="flex items-center gap-2"></div>
         <?= gdRenderHeaderActions($headerActions ?? null, 'gdDefaultHeaderActionsDesktop'); ?>
       </div>
