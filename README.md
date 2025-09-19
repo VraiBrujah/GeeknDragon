@@ -35,6 +35,7 @@ The application expects a few secrets to be provided through the environment:
 - `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates. **Keep this key strictly server-side; it must never be exposed to client-side code or shipped to the browser.**
 - `SNIPCART_LANGUAGE` – locale used by Snipcart (for example `fr`).
 - `SNIPCART_ADD_PRODUCT_BEHAVIOR` – how products are added to the cart (`overlay`, `sidecart`, ...).
+- `GA_MEASUREMENT_ID` – identifiant de mesure Google Analytics 4 (ex. `G-XXXXXXX`) chargé automatiquement avant Snipcart afin d'éviter l'avertissement « e-commerce tracking is enabled but no service found ».
 - `SENDGRID_API_KEY` – API key for the SendGrid SMTP service used to send emails.
 - `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
 
