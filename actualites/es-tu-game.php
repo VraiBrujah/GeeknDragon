@@ -12,6 +12,7 @@ $metaDescription = __('news.es_tu_game.description', 'Revivez notre démonstrati
 $ogImage = '/images/optimized-modern/webp/es-tu-game-demo.webp';
 $active = 'actus';
 $extraHead = $extraHead ?? '';
+$disableAudioPlayer = true; // Pas de lecteur audio sur cette page
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8'); ?>">
@@ -102,8 +103,10 @@ $extraHead = $extraHead ?? '';
               id="video1"
               src="/videos/leMaireDoneUnePieceDargentFLIM.mp4"
               class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
+              controls
               playsinline
               preload="metadata"
+              muted
             ></video>
             <button
               type="button"
@@ -123,8 +126,10 @@ $extraHead = $extraHead ?? '';
               id="video2"
               src="/videos/pileoufaceled2duFLIM2025.mp4"
               class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
+              controls
               playsinline
               preload="metadata"
+              muted
             ></video>
             <button
               type="button"
@@ -144,8 +149,10 @@ $extraHead = $extraHead ?? '';
               id="video3"
               src="/videos/finestugameFLIM2025.mp4"
               class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
+              controls
               playsinline
               preload="metadata"
+              muted
             ></video>
             <button
               type="button"
@@ -165,5 +172,78 @@ $extraHead = $extraHead ?? '';
   </section>
 </main>
 <?php include __DIR__ . '/../footer.php'; ?>
+
+<!-- Script vidéo simple pour es-tu-game -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const videos = document.querySelectorAll('video');
+    
+    if (videos.length === 0) {
+        console.log('❌ Aucune vidéo trouvée');
+        return;
+    }
+
+    console.log('🎬 Vidéos trouvées:', videos.length);
+
+    // Fonction pour passer à la vidéo suivante
+    function playNextVideo(currentIndex) {
+        const nextIndex = (currentIndex + 1) % videos.length;
+        const nextVideo = videos[nextIndex];
+        
+        console.log('▶️ Passage à la vidéo', nextIndex + 1);
+        
+        // Pause d'1 seconde puis lecture
+        setTimeout(() => {
+            nextVideo.currentTime = 0;
+            nextVideo.play().then(() => {
+                console.log('✅ Vidéo', nextIndex + 1, 'démarrée');
+            }).catch(e => {
+                console.log('⚠️ Lecture automatique bloquée pour vidéo', nextIndex + 1);
+            });
+        }, 1000);
+    }
+
+    // Configurer chaque vidéo
+    videos.forEach((video, index) => {
+        console.log('🔧 Configuration vidéo', index + 1, ':', video.src);
+        
+        // S'assurer que la vidéo est bien configurée
+        video.load();
+        
+        // Événement fin de vidéo
+        video.addEventListener('ended', function() {
+            console.log('🏁 Vidéo', index + 1, 'terminée');
+            playNextVideo(index);
+        });
+
+        // Test de chargement
+        video.addEventListener('loadeddata', function() {
+            console.log('📥 Vidéo', index + 1, 'chargée');
+        });
+
+        video.addEventListener('error', function(e) {
+            console.error('❌ Erreur vidéo', index + 1, ':', e);
+        });
+    });
+
+    // Gestion des boutons de son (optionnel avec controls)
+    const muteButtons = document.querySelectorAll('.mute-btn');
+    muteButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const videoId = this.getAttribute('data-video');
+            const video = document.getElementById(videoId);
+            
+            if (video) {
+                video.muted = !video.muted;
+                this.textContent = video.muted ? '🔇' : '🔊';
+                console.log('🔊 Son vidéo', videoId, video.muted ? 'coupé' : 'activé');
+            }
+        });
+    });
+
+    console.log('✅ Lecteur vidéo Es-tu Game initialisé');
+});
+</script>
 </body>
 </html>
