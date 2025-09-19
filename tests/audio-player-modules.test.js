@@ -267,6 +267,43 @@ describe('GeeknDragonAudioPlayer - Scanner', () => {
 });
 
 describe('GeeknDragonAudioPlayer - Interface', () => {
+  test('le bouton header anticipe la reprise planifiée', async () => {
+    document.body.innerHTML = `
+      <header class="nav-container">
+        <button class="nav-toggle">Menu</button>
+      </header>
+    `;
+
+    const player = createPlayer(
+      {
+        ui: { attachHeader: true, hideFloatingWhenHeader: true },
+      },
+      {
+        'musique/index': ['musique/index/ambient.mp3'],
+      },
+    );
+
+    await player.ready;
+
+    const header = document.querySelector('#gndHeaderAudio');
+    expect(header).not.toBeNull();
+
+    const playButton = header.querySelector('.gnd-header-play');
+    expect(playButton).not.toBeNull();
+
+    player.emit('playback-change', { isPlaying: false, shouldResume: false });
+    expect(playButton.textContent).toBe('▶');
+    expect(playButton.getAttribute('aria-pressed')).toBe('false');
+
+    player.emit('playback-change', { isPlaying: false, shouldResume: true });
+    expect(playButton.textContent).toBe('⏸');
+    expect(playButton.getAttribute('aria-pressed')).toBe('true');
+
+    player.emit('playback-change', { isPlaying: false, shouldResume: false });
+    expect(playButton.textContent).toBe('▶');
+    expect(playButton.getAttribute('aria-pressed')).toBe('false');
+  });
+
   test('synchronisation du header via le bus d\'événements', async () => {
     document.body.innerHTML = `
       <header class="nav-container">
