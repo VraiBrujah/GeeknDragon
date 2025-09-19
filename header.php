@@ -68,7 +68,7 @@ if (!function_exists('gdRenderNav')) {
     function gdRenderNav(array $items, string $active, bool $mobile = false): void
     {
         foreach ($items as $href => $item) {
-            $class = 'nav-link font-medium transition-colors duration-200 '
+            $class = 'nav-link font-medium transition-colors duration-200 whitespace-nowrap '
                 . ($mobile ? 'text-lg' : 'text-sm md:text-base')
                 . ' ' . gdNavClass($item['slug'], $active);
             $link = langUrl($href);
