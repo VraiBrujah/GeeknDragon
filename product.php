@@ -17,7 +17,20 @@ if (!$id || !isset($data[$id])) {
 $product = $data[$id];
 
 $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
-$productDesc = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
+
+$descriptionFr = (string) ($product['description'] ?? '');
+$descriptionEn = (string) ($product['description_en'] ?? $descriptionFr);
+
+$parsedFr = gd_parse_markdown($descriptionFr);
+$parsedEn = gd_parse_markdown($descriptionEn);
+
+$descriptionHtmlFr = $parsedFr['html'];
+$descriptionHtmlEn = $parsedEn['html'];
+$descriptionHtml = $lang === 'en' ? $descriptionHtmlEn : $descriptionHtmlFr;
+
+$descriptionTextFr = $parsedFr['text'];
+$descriptionTextEn = $parsedEn['text'];
+$productDesc = $lang === 'en' ? $descriptionTextEn : $descriptionTextFr;
 
 $title  = $productName . ' | Geek & Dragon';
 $metaDescription = $productDesc;
@@ -58,7 +71,8 @@ function inStock(string $id): bool
 
 $displayName   = str_replace(' – ', '<br>', $product['name']);
 $displayNameEn = str_replace(' – ', '<br>', $product['name_en'] ?? $product['name']);
-$descriptionEn = $product['description_en'] ?? $product['description'];
+$sliderAltFr   = $descriptionTextFr;
+$sliderAltEn   = $descriptionTextEn;
 $multipliers   = $product['multipliers'] ?? [];
 $images        = $product['images'] ?? [];
 
@@ -98,9 +112,9 @@ echo $snipcartInit;
           <div class="swiper-slide">
             <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
               <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
-                   alt="<?= htmlspecialchars($product['description']) ?>"
-                   data-alt-fr="<?= htmlspecialchars($product['description']) ?>"
-                   data-alt-en="<?= htmlspecialchars($descriptionEn) ?>"
+                   alt="<?= htmlspecialchars($lang === 'en' ? $sliderAltEn : $sliderAltFr, ENT_QUOTES, 'UTF-8') ?>"
+                   data-alt-fr="<?= htmlspecialchars($sliderAltFr, ENT_QUOTES, 'UTF-8') ?>"
+                   data-alt-en="<?= htmlspecialchars($sliderAltEn, ENT_QUOTES, 'UTF-8') ?>"
                    class="rounded w-full object-cover">
             </a>
           </div>
@@ -116,9 +130,11 @@ echo $snipcartInit;
           data-name-fr="<?= $displayName ?>"
           data-name-en="<?= $displayNameEn ?>"><?= $displayName ?></h1>
 
-      <p class="mb-6 text-gray-300 text-center"
-         data-desc-fr="<?= htmlspecialchars($product['description']) ?>"
-         data-desc-en="<?= htmlspecialchars($descriptionEn) ?>"><?= htmlspecialchars($product['description']) ?></p>
+      <div class="mb-6 text-gray-300 text-center"
+           data-desc-fr="<?= htmlspecialchars($descriptionHtmlFr, ENT_QUOTES, 'UTF-8') ?>"
+           data-desc-en="<?= htmlspecialchars($descriptionHtmlEn, ENT_QUOTES, 'UTF-8') ?>">
+        <?= $descriptionHtml !== '' ? $descriptionHtml : '' ?>
+      </div>
 
       <?php if (inStock($id)) : ?>
       <div class="text-center mb-4 w-full">
@@ -137,9 +153,9 @@ echo $snipcartInit;
         data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
         data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
         data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-        data-item-description="<?= htmlspecialchars($productDesc) ?>"
-        data-item-description-fr="<?= htmlspecialchars($product['description']) ?>"
-        data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $product['description']) ?>"
+        data-item-description="<?= htmlspecialchars($productDesc, ENT_QUOTES, 'UTF-8') ?>"
+        data-item-description-fr="<?= htmlspecialchars($descriptionTextFr, ENT_QUOTES, 'UTF-8') ?>"
+        data-item-description-en="<?= htmlspecialchars($descriptionTextEn, ENT_QUOTES, 'UTF-8') ?>"
         data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
         data-item-url="<?= htmlspecialchars($metaUrl) ?>"
         data-item-quantity="1"
