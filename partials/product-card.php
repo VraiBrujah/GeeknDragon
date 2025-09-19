@@ -12,16 +12,35 @@ $name = $lang === 'en' ? $nameEn : $nameFr;
 
 $descriptionFr = (string) ($product['description'] ?? '');
 $descriptionEn = (string) ($product['description_en'] ?? $descriptionFr);
+$description = $lang === 'en' ? $descriptionEn : $descriptionFr;
 
-$parsedFr = gd_parse_markdown($descriptionFr);
-$parsedEn = gd_parse_markdown($descriptionEn);
+/**
+ * Convertit une description Markdown en texte brut pour Snipcart ou les attributs alt.
+ */
+$toPlainText = static function (string $value): string {
+    if ($value === '') {
+        return '';
+    }
 
-$descriptionHtmlFr = $parsedFr['html'];
-$descriptionHtmlEn = $parsedEn['html'];
-$descriptionHtml = $lang === 'en' ? $descriptionHtmlEn : $descriptionHtmlFr;
+    $text = str_replace(["\r\n", "\r"], "\n", $value);
+    $text = preg_replace('/^\s{0,3}#{1,6}\s*/mu', '', $text) ?? $text;
+    $text = preg_replace('/^\s{0,3}>\s?/mu', '', $text) ?? $text;
+    $text = preg_replace('/^\s{0,3}[-*+]\s+/mu', '', $text) ?? $text;
+    $text = preg_replace('/!\[(.*?)\]\((.*?)\)/u', '$1', $text) ?? $text;
+    $text = preg_replace('/\[(.*?)\]\((.*?)\)/u', '$1', $text) ?? $text;
+    $text = preg_replace('/(`{1,3})(.+?)\1/u', '$2', $text) ?? $text;
+    $text = preg_replace('/([*_~]{1,2})(.+?)\1/u', '$2', $text) ?? $text;
 
-$altFr = $parsedFr['text'];
-$altEn = $parsedEn['text'];
+    $text = strip_tags($text);
+    $text = preg_replace('/\s+/u', ' ', $text) ?? $text;
+
+    $text = trim($text);
+
+    return $text !== '' ? $text : trim(strip_tags($value));
+};
+
+$altFr = $toPlainText($descriptionFr);
+$altEn = $toPlainText($descriptionEn);
 $alt = $lang === 'en' ? $altEn : $altFr;
 
 $img = $product['img'] ?? ($product['images'][0] ?? '');
@@ -35,9 +54,9 @@ $multipliers = $product['multipliers'] ?? [];
             min-w-[21rem] sm:min-w-[22rem] md:min-w-[23rem]">
   <a href="<?= htmlspecialchars($url) ?>">
     <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-         alt="<?= htmlspecialchars($alt, ENT_QUOTES, 'UTF-8') ?>"
-         data-alt-fr="<?= htmlspecialchars($altFr, ENT_QUOTES, 'UTF-8') ?>"
-         data-alt-en="<?= htmlspecialchars($altEn, ENT_QUOTES, 'UTF-8') ?>"
+         alt="<?= htmlspecialchars($alt) ?>"
+         data-alt-fr="<?= htmlspecialchars($altFr) ?>"
+         data-alt-en="<?= htmlspecialchars($altEn) ?>"
          class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
   </a>
 
@@ -49,11 +68,11 @@ $multipliers = $product['multipliers'] ?? [];
     </h4>
   </a>
 
-  <div class="text-center mb-4 text-gray-300 flex-grow"
-       data-desc-fr="<?= htmlspecialchars($descriptionHtmlFr, ENT_QUOTES, 'UTF-8') ?>"
-       data-desc-en="<?= htmlspecialchars($descriptionHtmlEn, ENT_QUOTES, 'UTF-8') ?>">
-    <?= $descriptionHtml !== '' ? $descriptionHtml : '' ?>
-  </div>
+  <p class="text-center mb-4 text-gray-300 flex-grow"
+     data-desc-fr="<?= htmlspecialchars($descriptionFr) ?>"
+     data-desc-en="<?= htmlspecialchars($descriptionEn) ?>">
+    <?= htmlspecialchars($description) ?>
+  </p>
 
 
 
@@ -79,9 +98,9 @@ $multipliers = $product['multipliers'] ?? [];
                 data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
                 data-item-name-fr="<?= htmlspecialchars(strip_tags($nameFr)) ?>"
                 data-item-name-en="<?= htmlspecialchars(strip_tags($nameEn)) ?>"
-                data-item-description="<?= htmlspecialchars($alt, ENT_QUOTES, 'UTF-8') ?>"
-                data-item-description-fr="<?= htmlspecialchars($altFr, ENT_QUOTES, 'UTF-8') ?>"
-                data-item-description-en="<?= htmlspecialchars($altEn, ENT_QUOTES, 'UTF-8') ?>"
+                data-item-description="<?= htmlspecialchars($alt) ?>"
+                data-item-description-fr="<?= htmlspecialchars($altFr) ?>"
+                data-item-description-en="<?= htmlspecialchars($altEn) ?>"
                 data-item-price="<?= htmlspecialchars($price) ?>"
                 data-item-url="<?= htmlspecialchars($url) ?>"
                 data-item-quantity="1"

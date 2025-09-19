@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.querySelectorAll('[data-desc-fr]').forEach((el) => {
           const target = current === 'en' ? el.dataset.descEn : el.dataset.descFr;
-          if (target !== undefined) el.innerHTML = target || '';
+          if (target) el.textContent = target;
         });
         document.querySelectorAll('[data-alt-fr]').forEach((el) => {
           const target = current === 'en' ? el.dataset.altEn : el.dataset.altFr;
