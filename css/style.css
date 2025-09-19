@@ -1246,16 +1246,18 @@ header img.rounded {
 /* Media query pour écrans larges - Augmentation taille hero-subtitle */
 @media (min-width: 1200px) {
     .hero-subtitle {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
         padding: 2rem 3rem;
+        line-height: 1.4;
     }
 }
 
 /* Media query pour très grands écrans */
 @media (min-width: 1600px) {
     .hero-subtitle {
-        font-size: 2rem;
+        font-size: 2.6rem;
         padding: 2.5rem 3.5rem;
+        line-height: 1.4;
     }
 }
 
