@@ -22,6 +22,12 @@ $active = $active ?? '';
 $snipcartConfigured = $config['snipcart_configured']
     ?? ((bool) ($config['snipcart_api_key'] ?? '') && (bool) ($config['snipcart_secret_api_key'] ?? ''));
 
+$headerActions = isset($headerActions) && is_array($headerActions) ? $headerActions : [];
+$showLangSwitcher = $showLangSwitcher ?? true;
+$showAccountControls = $showAccountControls ?? true;
+$showCartControls = $showCartControls ?? true;
+$showSnipcartWarning = $showSnipcartWarning ?? true;
+
 if (!function_exists('gdNavClass')) {
     /**
      * Retourne la classe CSS pour un item actif.
@@ -32,35 +38,37 @@ if (!function_exists('gdNavClass')) {
     }
 }
 
-$navItems = [
-    '/boutique.php' => [
-        'slug' => 'boutique',
-        'label' => 'Boutique',
-        'i18n' => 'nav.shop',
-        'children' => [
-            '/boutique.php#pieces' => ['slug' => 'pieces', 'label' => 'Pièces', 'i18n' => 'nav.pieces'],
-            '/boutique.php#cartes' => ['slug' => 'cartes', 'label' => 'Cartes', 'i18n' => 'nav.cards'],
-            '/boutique.php#triptyques' => ['slug' => 'triptyques', 'label' => 'Triptyques', 'i18n' => 'nav.triptychs'],
+if (!isset($navItems) || !is_array($navItems)) {
+    $navItems = [
+        '/boutique.php' => [
+            'slug' => 'boutique',
+            'label' => 'Boutique',
+            'i18n' => 'nav.shop',
+            'children' => [
+                '/boutique.php#pieces' => ['slug' => 'pieces', 'label' => 'Pièces', 'i18n' => 'nav.pieces'],
+                '/boutique.php#cartes' => ['slug' => 'cartes', 'label' => 'Cartes', 'i18n' => 'nav.cards'],
+                '/boutique.php#triptyques' => ['slug' => 'triptyques', 'label' => 'Triptyques', 'i18n' => 'nav.triptychs'],
+            ],
         ],
-    ],
-    '/index.php#actus' => [
-        'slug' => 'actus',
-        'label' => 'Actualités',
-        'i18n' => 'nav.news',
-    ],
-    '/devis.php' => [
-        'slug' => 'contact',
-        'label' => 'Devis',
-        'i18n' => 'nav.contact',
-    ],
-    '/compte.php' => [
-        'slug' => 'compte',
-        'label' => 'Compte',
-        'i18n' => 'nav.account',
-        'icon' => '👤',
-        'icon_only' => true,
-    ],
-];
+        '/index.php#actus' => [
+            'slug' => 'actus',
+            'label' => 'Actualités',
+            'i18n' => 'nav.news',
+        ],
+        '/devis.php' => [
+            'slug' => 'contact',
+            'label' => 'Devis',
+            'i18n' => 'nav.contact',
+        ],
+        '/compte.php' => [
+            'slug' => 'compte',
+            'label' => 'Compte',
+            'i18n' => 'nav.account',
+            'icon' => '👤',
+            'icon_only' => true,
+        ],
+    ];
+}
 
 if (!function_exists('gdRenderNav')) {
     /**
@@ -69,10 +77,14 @@ if (!function_exists('gdRenderNav')) {
     function gdRenderNav(array $items, string $active, bool $mobile = false): void
     {
         foreach ($items as $href => $item) {
+            if (!is_array($item)) {
+                continue;
+            }
             $class = 'nav-link font-medium transition-colors duration-200 whitespace-nowrap '
                 . ($mobile ? 'text-lg' : 'text-sm md:text-base')
                 . ' ' . gdNavClass($item['slug'], $active);
-            $link = langUrl($href);
+            $shouldLocalize = !array_key_exists('localized', $item) || (bool) $item['localized'];
+            $link = $shouldLocalize ? langUrl($href) : $href;
             $isActive = ($item['slug'] ?? '') === $active;
             $ariaCurrent = $isActive ? ' aria-current="page"' : '';
 
@@ -124,6 +136,127 @@ if (!function_exists('gdRenderNav')) {
         }
     }
 }
+
+if (!function_exists('gdRenderHeaderActions')) {
+    /**
+     * Affiche les actions complémentaires dans l'en-tête.
+     *
+     * @param array<int, array<string, mixed>> $actions Liste d'actions configurables.
+     * @param bool                              $mobile  Indique si le rendu est mobile.
+     */
+    function gdRenderHeaderActions(array $actions, bool $mobile = false): void
+    {
+        foreach ($actions as $action) {
+            if (!is_array($action)) {
+                continue;
+            }
+
+            $display = $action['display'] ?? 'all';
+            if (($mobile && $display === 'desktop') || (!$mobile && $display === 'mobile')) {
+                continue;
+            }
+
+            if (isset($action['html'])) {
+                echo (string) $action['html'];
+                continue;
+            }
+
+            $baseClasses = $mobile
+                ? 'w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-lg uppercase tracking-wide rounded border border-indigo-400/60 text-white hover:bg-indigo-500/30 transition-colors duration-200'
+                : 'inline-flex items-center justify-center gap-2 px-3 py-2 text-sm md:text-base uppercase tracking-wide rounded border border-indigo-400/60 text-white hover:bg-indigo-500/30 transition-colors duration-200';
+
+            if (!empty($action['class'])) {
+                $baseClasses .= ' ' . $action['class'];
+            }
+
+            $icon = '';
+            if (!empty($action['icon'])) {
+                $icon = '<span aria-hidden="true">'
+                    . htmlspecialchars((string) $action['icon'], ENT_QUOTES, 'UTF-8')
+                    . '</span>';
+            }
+
+            $label = htmlspecialchars((string) ($action['label'] ?? ''), ENT_QUOTES, 'UTF-8');
+
+            if (($action['type'] ?? 'link') === 'form') {
+                $method = strtolower((string) ($action['method'] ?? 'post'));
+                $formAction = (string) ($action['action'] ?? '');
+                $hiddenFields = is_array($action['hidden'] ?? null) ? $action['hidden'] : [];
+                $confirmAttr = '';
+                if (!empty($action['confirm'])) {
+                    $confirmAttr = ' data-confirm="'
+                        . htmlspecialchars((string) $action['confirm'], ENT_QUOTES, 'UTF-8')
+                        . '"';
+                }
+
+                $buttonAttributes = '';
+                $buttonAttrs = $action['button_attributes'] ?? [];
+                if (is_array($buttonAttrs)) {
+                    foreach ($buttonAttrs as $attrName => $attrValue) {
+                        $buttonAttributes .= ' '
+                            . htmlspecialchars((string) $attrName, ENT_QUOTES, 'UTF-8')
+                            . '="'
+                            . htmlspecialchars((string) $attrValue, ENT_QUOTES, 'UTF-8')
+                            . '"';
+                    }
+                }
+
+                echo '<form method="'
+                    . htmlspecialchars($method, ENT_QUOTES, 'UTF-8')
+                    . '" action="'
+                    . htmlspecialchars($formAction, ENT_QUOTES, 'UTF-8')
+                    . '" class="inline">';
+
+                foreach ($hiddenFields as $fieldName => $fieldValue) {
+                    if (is_array($fieldValue)) {
+                        continue;
+                    }
+                    echo '<input type="hidden" name="'
+                        . htmlspecialchars((string) $fieldName, ENT_QUOTES, 'UTF-8')
+                        . '" value="'
+                        . htmlspecialchars((string) $fieldValue, ENT_QUOTES, 'UTF-8')
+                        . '">';
+                }
+
+                echo '<button type="submit" class="'
+                    . $baseClasses
+                    . '"'
+                    . $confirmAttr
+                    . $buttonAttributes
+                    . '>'
+                    . $icon
+                    . '<span>' . $label . '</span>'
+                    . '</button>';
+                echo '</form>';
+                continue;
+            }
+
+            $href = (string) ($action['href'] ?? '#');
+            $attributes = '';
+            $attrList = $action['attributes'] ?? [];
+            if (is_array($attrList)) {
+                foreach ($attrList as $name => $value) {
+                    $attributes .= ' '
+                        . htmlspecialchars((string) $name, ENT_QUOTES, 'UTF-8')
+                        . '="'
+                        . htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8')
+                        . '"';
+                }
+            }
+
+            echo '<a href="'
+                . htmlspecialchars($href, ENT_QUOTES, 'UTF-8')
+                . '" class="'
+                . $baseClasses
+                . '"'
+                . $attributes
+                . '>'
+                . $icon
+                . '<span>' . $label . '</span>'
+                . '</a>';
+        }
+    }
+}
 ?>
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
@@ -152,6 +285,7 @@ if (!function_exists('gdRenderNav')) {
         </ul>
       </nav>
 
+      <?php if ($showLangSwitcher): ?>
       <div id="lang-switcher" class="hidden md:flex items-center gap-2 order-2 md:order-3 ml-2 flex-shrink-0">
         <button type="button" data-lang="fr" class="flag-btn" aria-label="Français" aria-current="<?= $lang === 'fr' ? 'true' : 'false'; ?>">
           <img src="/images/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
@@ -160,15 +294,20 @@ if (!function_exists('gdRenderNav')) {
           <img src="/images/flags/flag-en-us-uk-diagonal-medieval.svg" width="32" height="24" alt="">
         </button>
       </div>
+      <?php endif; ?>
 
+      <?php if ($showAccountControls || $showCartControls || !empty($headerActions)): ?>
       <div class="flex items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
+        <?php if ($showAccountControls): ?>
         <button id="gd-account-toggle" class="gd-header-btn flex items-center justify-center text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte" aria-expanded="false" aria-haspopup="dialog">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
           </svg>
           <span class="sr-only" data-i18n="nav.account">Compte</span>
         </button>
+        <?php endif; ?>
 
+        <?php if ($showCartControls): ?>
         <button id="gd-cart-toggle" class="gd-header-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Panier" aria-expanded="false" aria-haspopup="dialog">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
@@ -176,7 +315,15 @@ if (!function_exists('gdRenderNav')) {
           <span id="gd-cart-count" class="gd-cart-badge" aria-label="Articles dans le panier">0</span>
           <span class="sr-only" data-i18n="nav.cart">Panier</span>
         </button>
+        <?php endif; ?>
+
+        <?php if (!empty($headerActions)): ?>
+        <div class="hidden md:flex items-center gap-2">
+          <?php gdRenderHeaderActions($headerActions); ?>
+        </div>
+        <?php endif; ?>
       </div>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -187,6 +334,7 @@ if (!function_exists('gdRenderNav')) {
     </ul>
 
     <div class="mt-8 flex flex-col items-center gap-6 w-full">
+      <?php if ($showLangSwitcher): ?>
       <div class="flex items-center gap-2">
         <button type="button" data-lang="fr" class="flag-btn" aria-label="Français" aria-current="<?= $lang === 'fr' ? 'true' : 'false'; ?>">
           <img src="/images/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
@@ -195,15 +343,20 @@ if (!function_exists('gdRenderNav')) {
           <img src="/images/flags/flag-en-us-uk-diagonal-medieval.svg" width="32" height="24" alt="">
         </button>
       </div>
+      <?php endif; ?>
 
+      <?php if ($showAccountControls || $showCartControls || !empty($headerActions)): ?>
       <div class="flex flex-col w-full gap-6">
+        <?php if ($showAccountControls): ?>
         <button id="gd-account-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
           <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
           </svg>
           <span class="sr-only" data-i18n="nav.account">Compte</span>
         </button>
+        <?php endif; ?>
 
+        <?php if ($showCartControls): ?>
         <button id="gd-cart-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
           <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
@@ -211,7 +364,15 @@ if (!function_exists('gdRenderNav')) {
           <span class="gd-cart-badge-mobile">0</span>
           <span class="sr-only" data-i18n="nav.cart">Panier</span>
         </button>
+        <?php endif; ?>
+
+        <?php if (!empty($headerActions)): ?>
+        <div class="flex flex-col w-full gap-4">
+          <?php gdRenderHeaderActions($headerActions, true); ?>
+        </div>
+        <?php endif; ?>
       </div>
+      <?php endif; ?>
 
       <button id="menu-close" aria-label="Fermer le menu" class="mt-8 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +383,7 @@ if (!function_exists('gdRenderNav')) {
   </nav>
 </header>
 
-<?php if (!$snipcartConfigured): ?>
+<?php if ($showSnipcartWarning && !$snipcartConfigured): ?>
 <div id="api-warning" style="position: fixed; top: var(--header-height, 96px); left: 0; right: 0; background: linear-gradient(45deg, #dc2626, #b91c1c); color: white; text-align: center; padding: 0.75rem; z-index: 1100;">
   <strong>Snipcart</strong> n'est pas complètement configuré. Vérifiez vos clés API.
 </div>
