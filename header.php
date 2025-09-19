@@ -58,6 +58,7 @@ $navItems = [
         'label' => 'Compte',
         'i18n' => 'nav.account',
         'icon' => '👤',
+        'icon_only' => true,
     ],
 ];
 
@@ -77,13 +78,26 @@ if (!function_exists('gdRenderNav')) {
 
             $labelText = htmlspecialchars($item['label'] ?? '', ENT_QUOTES, 'UTF-8');
             $i18nKey = htmlspecialchars($item['i18n'] ?? '', ENT_QUOTES, 'UTF-8');
-            $label = '<span data-i18n="' . $i18nKey . '">' . $labelText . '</span>';
+            // Mode indicateur pour rendre l'icône seule visible tout en conservant le texte pour les lecteurs d'écran.
+            $isIconOnly = !empty($item['icon_only']);
+
+            $labelContent = '<span data-i18n="' . $i18nKey . '">' . $labelText . '</span>';
+            if ($isIconOnly) {
+                $labelContent = '<span class="sr-only" data-i18n="' . $i18nKey . '">' . $labelText . '</span>';
+            }
+
+            $label = $labelContent;
 
             if (!empty($item['icon'])) {
                 $icon = htmlspecialchars((string) $item['icon'], ENT_QUOTES, 'UTF-8');
-                $label = '<span class="inline-flex items-center justify-center gap-2">'
+                $iconContainerClasses = 'inline-flex items-center justify-center';
+                if (!$isIconOnly) {
+                    $iconContainerClasses .= ' gap-2';
+                }
+
+                $label = '<span class="' . $iconContainerClasses . '">'
                     . '<span aria-hidden="true">' . $icon . '</span>'
-                    . $label
+                    . $labelContent
                     . '</span>';
             }
 
