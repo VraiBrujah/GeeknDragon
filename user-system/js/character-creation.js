@@ -20,7 +20,44 @@ class CharacterCreation {
             campagnes_preferees: ''
         };
         this.dndData = null;
-        
+        this.productCatalog = {
+            'lot10': {
+                title: "L'Offrande du Voyageur",
+                baseReason: 'Kit de pièces polyvalent pour démarrer vos quêtes',
+                score: 82
+            },
+            'lot25': {
+                title: 'La Monnaie des Cinq Royaumes',
+                baseReason: 'Trésor conséquent pour aventuriers accomplis',
+                score: 84
+            },
+            'lot50-essence': {
+                title: "L'Essence du Marchand",
+                baseReason: 'Coffret prestigieux inspiré des marchés draconiques',
+                score: 90
+            },
+            'pack-182-arsenal-aventurier': {
+                title: "Arsenal de l'Aventurier",
+                baseReason: "Cartes d'équipement offensif et défensif",
+                score: 92
+            },
+            'pack-182-butins-ingenieries': {
+                title: 'Butins & Ingénieries',
+                baseReason: 'Sélection arcanique et gadgets ingénieux',
+                score: 88
+            },
+            'pack-182-routes-services': {
+                title: 'Routes & Services',
+                baseReason: 'Services et cartes utilitaires pour explorateurs',
+                score: 86
+            },
+            'triptyque-aleatoire': {
+                title: 'Triptyques Mystères - Origines Complètes',
+                baseReason: 'Tirages thématiques pour forger de nouvelles origines',
+                score: 75
+            }
+        };
+
         this.init();
     }
 
@@ -39,110 +76,259 @@ class CharacterCreation {
      */
     async loadDndData() {
         try {
-            // Simulation des données D&D - à remplacer par un appel API réel
-            this.dndData = {
-                especes: [
-                    {
-                        nom: 'Humain',
-                        description: 'Polyvalents et ambitieux, les humains excellent dans tous les domaines',
-                        traits: { bonus: 'Polyvalence', trait: 'Adaptation' },
-                        recommandations: ['pieces', 'cartes', 'triptyques']
-                    },
-                    {
-                        nom: 'Elfe',
-                        description: 'Gracieux et magiques, connectés à la nature et aux arcanes',
-                        traits: { bonus: 'Dextérité +2', trait: 'Vision dans le noir' },
-                        recommandations: ['pieces', 'bijoux_elfiques', 'cartes_nature']
-                    },
-                    {
-                        nom: 'Nain',
-                        description: 'Robustes et déterminés, maîtres de la forge et de la guerre',
-                        traits: { bonus: 'Constitution +2', trait: 'Résistance poison' },
-                        recommandations: ['pieces_metal', 'armes', 'cartes_combat']
-                    },
-                    {
-                        nom: 'Halfelin',
-                        description: 'Petits mais courageux, chanceux et pleins de ressources',
-                        traits: { bonus: 'Dextérité +2', trait: 'Chanceux' },
-                        recommandations: ['pieces', 'cartes_voyage', 'equipement_discret']
-                    },
-                    {
-                        nom: 'Drakéide',
-                        description: 'Descendants de dragons, fiers et puissants',
-                        traits: { bonus: 'Force +2', trait: 'Souffle de dragon' },
-                        recommandations: ['pieces_precieuses', 'bijoux_dragon', 'cartes_combat']
-                    }
-                ],
-                classes: [
-                    {
-                        nom: 'Guerrier',
-                        description: 'Maître des armes et du combat, protecteur redoutable',
-                        traits: { role: 'Tank/DPS', HD: 'd10' },
-                        recommandations: ['cartes_armes', 'cartes_armures', 'pieces_metal']
-                    },
-                    {
-                        nom: 'Magicien',
-                        description: 'Érudit des arcanes, manipulateur de la magie pure',
-                        traits: { role: 'Contrôleur/DPS', HD: 'd6' },
-                        recommandations: ['cartes_magie', 'bijoux_arcanes', 'pieces_rares']
-                    },
-                    {
-                        nom: 'Roublard',
-                        description: 'Expert en discrétion et en techniques sournoises',
-                        traits: { role: 'DPS/Utilitaire', HD: 'd8' },
-                        recommandations: ['cartes_outils', 'equipement_discret', 'pieces']
-                    },
-                    {
-                        nom: 'Clerc',
-                        description: 'Serviteur divin, guérisseur et protecteur',
-                        traits: { role: 'Heal/Support', HD: 'd8' },
-                        recommandations: ['bijoux_divins', 'cartes_sacrees', 'pieces_benedites']
-                    },
-                    {
-                        nom: 'Rôdeur',
-                        description: 'Gardien des contrées sauvages, traqueur expert',
-                        traits: { role: 'DPS/Utilitaire', HD: 'd10' },
-                        recommandations: ['cartes_nature', 'equipement_voyage', 'pieces']
-                    }
-                ],
-                historiques: [
-                    {
-                        nom: 'Noble',
-                        description: 'Né dans les privilèges, habitué au commandement',
-                        traits: { competences: 'Histoire, Persuasion' },
-                        recommandations: ['bijoux_nobles', 'pieces_precieuses']
-                    },
-                    {
-                        nom: 'Criminel',
-                        description: 'Passé dans l\'illégalité, expert en subterfuge',
-                        traits: { competences: 'Discrétion, Tromperie' },
-                        recommandations: ['cartes_outils_voleur', 'equipement_discret']
-                    },
-                    {
-                        nom: 'Artisan de Guilde',
-                        description: 'Membre d\'une guilde marchande ou artisanale',
-                        traits: { competences: 'Perspicacité, Persuasion' },
-                        recommandations: ['cartes_artisanat', 'pieces_commerce']
-                    },
-                    {
-                        nom: 'Héros du Peuple',
-                        description: 'Champion des opprimés, proche du peuple',
-                        traits: { competences: 'Dressage, Survie' },
-                        recommandations: ['cartes_peuple', 'equipement_simple']
-                    },
-                    {
-                        nom: 'Sage',
-                        description: 'Érudit et chercheur, assoiffé de connaissance',
-                        traits: { competences: 'Arcanes, Histoire' },
-                        recommandations: ['cartes_savoir', 'bijoux_erudition']
-                    }
-                ]
-            };
-            
-            this.populateSelections();
+            const response = await fetch('/api/account/dnd-config');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const payload = await response.json();
+            if (payload?.success && payload.data) {
+                this.dndData = payload.data;
+            } else {
+                throw new Error('Réponse de configuration invalide');
+            }
         } catch (error) {
-            console.error('Erreur lors du chargement des données D&D:', error);
+            console.warn('Impossible de charger la configuration D&D depuis l\'API:', error);
+            this.dndData = this.getFallbackDndData();
         }
+
+        this.populateSelections();
+    }
+
+    getFallbackDndData() {
+        return {
+            especes: [
+                {
+                    nom: 'Aasimar',
+                    description: "Descendants célestes, porteurs d'une lumière protectrice",
+                    traits: { bonus: 'Charisme +2', trait: 'Lueur divine' },
+                    recommandations: ['triptyque-aleatoire', 'pack-182-routes-services']
+                },
+                {
+                    nom: 'Drakéide',
+                    description: 'Descendants de dragons, fiers et puissants',
+                    traits: { bonus: 'Force +2', trait: 'Souffle draconique' },
+                    recommandations: ['lot50-essence', 'pack-182-arsenal-aventurier']
+                },
+                {
+                    nom: 'Elfe',
+                    description: 'Gracieux et connectés aux arcanes et à la nature',
+                    traits: { bonus: 'Dextérité +2', trait: 'Vision dans le noir' },
+                    recommandations: ['pack-182-routes-services', 'pack-182-butins-ingenieries']
+                },
+                {
+                    nom: 'Demi-Elfe',
+                    description: 'Entre deux mondes, charismatiques et adaptables',
+                    traits: { bonus: 'Charisme +2', trait: 'Polyvalence elfique' },
+                    recommandations: ['pack-182-butins-ingenieries', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Demi-Orc',
+                    description: "Robustes et tenaces, forgés par l'adversité",
+                    traits: { bonus: 'Force +2', trait: 'Endurance implacable' },
+                    recommandations: ['pack-182-arsenal-aventurier', 'lot25']
+                },
+                {
+                    nom: 'Gnome',
+                    description: 'Inventifs, curieux et animés par la magie',
+                    traits: { bonus: 'Intelligence +2', trait: 'Ruse gnome' },
+                    recommandations: ['pack-182-butins-ingenieries', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Halfelin',
+                    description: 'Petits mais courageux, chanceux et débrouillards',
+                    traits: { bonus: 'Dextérité +2', trait: 'Chanceux' },
+                    recommandations: ['lot10', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Humain',
+                    description: 'Polyvalents et ambitieux, experts dans tous les domaines',
+                    traits: { bonus: 'Polyvalence', trait: 'Adaptation rapide' },
+                    recommandations: ['lot10', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Nain',
+                    description: 'Robustes et déterminés, maîtres artisans et guerriers',
+                    traits: { bonus: 'Constitution +2', trait: 'Résistance au poison' },
+                    recommandations: ['lot25', 'pack-182-arsenal-aventurier']
+                },
+                {
+                    nom: 'Tieffelin',
+                    description: 'Héritiers infernaux, mystérieux et charismatiques',
+                    traits: { bonus: 'Charisme +2', trait: 'Héritage infernal' },
+                    recommandations: ['pack-182-butins-ingenieries', 'triptyque-aleatoire']
+                }
+            ],
+            classes: [
+                {
+                    nom: 'Barbare',
+                    description: 'Guerrier sauvage porté par une rage primale',
+                    traits: { role: 'DPS/Tank', HD: 'd12' },
+                    recommandations: ['pack-182-arsenal-aventurier', 'lot50-essence']
+                },
+                {
+                    nom: 'Barde',
+                    description: 'Artiste inspirant mêlant magie et musique',
+                    traits: { role: 'Support/Contrôle', HD: 'd8' },
+                    recommandations: ['pack-182-butins-ingenieries', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Clerc',
+                    description: 'Serviteur divin, guérisseur et protecteur',
+                    traits: { role: 'Soutien/Guérison', HD: 'd8' },
+                    recommandations: ['pack-182-routes-services', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Druide',
+                    description: 'Gardien de la nature capable de métamorphose',
+                    traits: { role: 'Soutien/Nature', HD: 'd8' },
+                    recommandations: ['pack-182-routes-services', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Ensorceleur',
+                    description: 'Canalise une magie innée et dévastatrice',
+                    traits: { role: 'DPS/Contrôleur', HD: 'd6' },
+                    recommandations: ['pack-182-butins-ingenieries', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Guerrier',
+                    description: 'Maître des armes et des tactiques martiales',
+                    traits: { role: 'Tank/DPS', HD: 'd10' },
+                    recommandations: ['pack-182-arsenal-aventurier', 'lot25']
+                },
+                {
+                    nom: 'Magicien',
+                    description: 'Érudit des arcanes et stratège de la magie',
+                    traits: { role: 'Contrôleur/DPS', HD: 'd6' },
+                    recommandations: ['pack-182-butins-ingenieries', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Moine',
+                    description: 'Artiste martial en quête de perfection intérieure',
+                    traits: { role: 'DPS/Utilitaire', HD: 'd8' },
+                    recommandations: ['pack-182-arsenal-aventurier', 'pack-182-routes-services']
+                },
+                {
+                    nom: 'Occultiste',
+                    description: 'Tisse des pactes mystérieux pour puiser sa magie',
+                    traits: { role: 'DPS/Support', HD: 'd8' },
+                    recommandations: ['triptyque-aleatoire', 'pack-182-butins-ingenieries']
+                },
+                {
+                    nom: 'Paladin',
+                    description: 'Champion sacré alliant foi et épée',
+                    traits: { role: 'Tank/Soutien', HD: 'd10' },
+                    recommandations: ['lot50-essence', 'pack-182-routes-services']
+                },
+                {
+                    nom: 'Rôdeur',
+                    description: 'Protecteur des contrées sauvages et pisteur expert',
+                    traits: { role: 'DPS/Explorateur', HD: 'd10' },
+                    recommandations: ['pack-182-routes-services', 'lot10']
+                },
+                {
+                    nom: 'Roublard',
+                    description: 'Spécialiste de la discrétion et des attaques précises',
+                    traits: { role: 'DPS/Subtilité', HD: 'd8' },
+                    recommandations: ['pack-182-butins-ingenieries', 'lot10']
+                }
+            ],
+            historiques: [
+                {
+                    nom: 'Acolyte',
+                    description: "Serviteur d'un temple, proche du divin",
+                    traits: { competences: 'Religion, Perspicacité' },
+                    recommandations: ['pack-182-routes-services', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Artisan',
+                    description: "Maître d'un atelier ou membre d'une confrérie artisanale",
+                    traits: { competences: 'Perspicacité, Artisanat' },
+                    recommandations: ['lot25', 'pack-182-butins-ingenieries']
+                },
+                {
+                    nom: 'Charlatan',
+                    description: 'Escroc charmeur toujours prêt à une nouvelle combine',
+                    traits: { competences: 'Tromperie, Escamotage' },
+                    recommandations: ['pack-182-butins-ingenieries', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Criminel',
+                    description: "Vécu dans l'ombre entre filouteries et opérations clandestines",
+                    traits: { competences: 'Discrétion, Intimidation' },
+                    recommandations: ['pack-182-butins-ingenieries', 'lot10']
+                },
+                {
+                    nom: 'Ermite',
+                    description: 'Retiré du monde pour méditer et étudier en solitude',
+                    traits: { competences: 'Médecine, Religion' },
+                    recommandations: ['triptyque-aleatoire', 'pack-182-routes-services']
+                },
+                {
+                    nom: 'Explorateur',
+                    description: 'A parcouru territoires sauvages et ruines oubliées',
+                    traits: { competences: 'Survie, Athlétisme' },
+                    recommandations: ['pack-182-routes-services', 'lot10']
+                },
+                {
+                    nom: 'Héros du Peuple',
+                    description: 'Protecteur des communautés et symbole d\'espoir',
+                    traits: { competences: 'Dressage, Survie' },
+                    recommandations: ['lot10', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Marin',
+                    description: 'Vie passée en mer entre cordages et embruns',
+                    traits: { competences: 'Athlétisme, Perception' },
+                    recommandations: ['pack-182-routes-services', 'lot10']
+                },
+                {
+                    nom: 'Noble',
+                    description: 'Élevé dans le luxe et rompu aux intrigues politiques',
+                    traits: { competences: 'Histoire, Persuasion' },
+                    recommandations: ['lot50-essence', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Sage',
+                    description: 'Chercheur infatigable avide de connaissances',
+                    traits: { competences: 'Arcanes, Histoire' },
+                    recommandations: ['pack-182-butins-ingenieries', 'triptyque-aleatoire']
+                },
+                {
+                    nom: 'Soldat',
+                    description: 'Combattant discipliné formé à la guerre et aux tactiques',
+                    traits: { competences: 'Athlétisme, Intimidation' },
+                    recommandations: ['pack-182-arsenal-aventurier', 'lot25']
+                },
+                {
+                    nom: 'Vagabond',
+                    description: 'A grandi dans les rues en développant débrouillardise et survie',
+                    traits: { competences: 'Discrétion, Survie' },
+                    recommandations: ['lot10', 'pack-182-routes-services']
+                }
+            ]
+        };
+    }
+
+    /**
+     * Récupère le titre lisible d'un produit à partir de son identifiant
+     */
+    resolveProductTitle(productId) {
+        const product = this.productCatalog?.[productId];
+        return product?.title ?? productId;
+    }
+
+    /**
+     * Formate la liste des recommandations produit pour les fiches descriptives
+     */
+    formatRecommendationList(recommandations) {
+        if (!Array.isArray(recommandations) || recommandations.length === 0) {
+            return '—';
+        }
+
+        return recommandations
+            .map(code => this.resolveProductTitle(code))
+            .join(', ');
     }
 
     /**
@@ -160,7 +346,7 @@ class CharacterCreation {
                     </div>
                     <p class="option-description">${espece.description}</p>
                     <div class="option-recommendations">
-                        <small>Recommandé : ${espece.recommandations.join(', ')}</small>
+                        <small>Recommandé : ${this.formatRecommendationList(espece.recommandations)}</small>
                     </div>
                 </div>
             `).join('');
@@ -177,7 +363,7 @@ class CharacterCreation {
                     </div>
                     <p class="option-description">${classe.description}</p>
                     <div class="option-recommendations">
-                        <small>Recommandé : ${classe.recommandations.join(', ')}</small>
+                        <small>Recommandé : ${this.formatRecommendationList(classe.recommandations)}</small>
                     </div>
                 </div>
             `).join('');
@@ -194,7 +380,7 @@ class CharacterCreation {
                     </div>
                     <p class="option-description">${historique.description}</p>
                     <div class="option-recommendations">
-                        <small>Recommandé : ${historique.recommandations.join(', ')}</small>
+                        <small>Recommandé : ${this.formatRecommendationList(historique.recommandations)}</small>
                     </div>
                 </div>
             `).join('');
@@ -679,89 +865,82 @@ class CharacterCreation {
     /**
      * Génération des recommandations basées sur le profil
      */
+    buildContextReason(type, nom) {
+        switch (type) {
+            case 'espece':
+                return `Harmonisé avec votre espèce ${nom}`;
+            case 'classe':
+                return `Optimisé pour votre classe de ${nom}`;
+            case 'historique':
+                return `Adapté à votre historique ${nom}`;
+            default:
+                return 'Suggestion thématique';
+        }
+    }
+
+    /**
+     * Génère des recommandations harmonisées entre front et back-office
+     */
     generateRecommendations() {
-        const recommendations = [];
-        
-        if (!this.dndData) return recommendations;
+        if (!this.dndData) {
+            return [];
+        }
 
-        // Récupération des données sélectionnées
-        const espece = this.dndData.especes.find(e => e.nom === this.characterData.espece);
-        const classe = this.dndData.classes.find(c => c.nom === this.characterData.classe);
-        const historique = this.dndData.historiques.find(h => h.nom === this.characterData.historique);
-
-        // Mapping des produits disponibles
-        const produits = {
-            'pieces': 'Pièces Métalliques - L\'Offrande du Voyageur',
-            'pieces_metal': 'Pièces Métalliques - La Monnaie des Cinq Royaumes',
-            'pieces_precieuses': 'Pièces Métalliques - L\'Essence du Marchand',
-            'cartes_armes': 'Cartes d\'Équipement - Arsenal de l\'Aventurier',
-            'cartes_magie': 'Cartes d\'Équipement - Butins & Ingénieries',
-            'cartes_nature': 'Cartes d\'Équipement - Routes & Services',
-            'triptyques': 'Triptyques Mystères - Origines Complètes'
+        const selections = {
+            espece: this.dndData.especes.find(e => e.nom === this.characterData.espece),
+            classe: this.dndData.classes.find(c => c.nom === this.characterData.classe),
+            historique: this.dndData.historiques.find(h => h.nom === this.characterData.historique)
         };
 
-        // Score basé sur l'espèce
-        if (espece) {
-            espece.recommandations.forEach(rec => {
-                if (produits[rec]) {
-                    recommendations.push({
-                        titre: produits[rec],
-                        raison: `Recommandé pour les ${espece.nom}s - ${espece.traits.bonus}`,
-                        score: 85
-                    });
+        const aggregated = {};
+        const contexts = [
+            { type: 'espece', selection: selections.espece },
+            { type: 'classe', selection: selections.classe },
+            { type: 'historique', selection: selections.historique }
+        ];
+
+        contexts.forEach(({ type, selection }) => {
+            if (!selection) {
+                return;
+            }
+
+            const recommandations = Array.isArray(selection.recommandations) ? selection.recommandations : [];
+            recommandations.forEach((code, index) => {
+                const product = this.productCatalog?.[code];
+                if (!product) {
+                    return;
+                }
+
+                const contextReason = this.buildContextReason(type, selection.nom);
+                const reasonBase = product.baseReason ?? '';
+                const reason = reasonBase ? `${reasonBase} — ${contextReason}` : contextReason;
+                const baseScore = Number.isFinite(product.score) ? product.score : 75;
+                const scoreBoost = Math.max(0, 10 - index * 3);
+                const computedScore = Math.min(100, Math.round(baseScore + scoreBoost));
+
+                if (!aggregated[code]) {
+                    aggregated[code] = {
+                        titre: product.title,
+                        raison: reason,
+                        score: computedScore
+                    };
+                } else {
+                    aggregated[code].score = Math.min(100, aggregated[code].score + 5);
+                    aggregated[code].raison += ` + ${contextReason.toLowerCase()}`;
                 }
             });
+        });
+
+        if (!aggregated['triptyque-aleatoire'] && this.productCatalog?.['triptyque-aleatoire']) {
+            const fallback = this.productCatalog['triptyque-aleatoire'];
+            aggregated['triptyque-aleatoire'] = {
+                titre: fallback.title,
+                raison: `${fallback.baseReason} — compatible avec toutes les combinaisons`,
+                score: Math.min(100, Math.round(fallback.score ?? 75))
+            };
         }
 
-        // Score basé sur la classe
-        if (classe) {
-            classe.recommandations.forEach(rec => {
-                if (produits[rec]) {
-                    const existing = recommendations.find(r => r.titre === produits[rec]);
-                    if (existing) {
-                        existing.score = Math.min(100, existing.score + 10);
-                        existing.raison += ` + Parfait pour un ${classe.nom} (${classe.traits.role})`;
-                    } else {
-                        recommendations.push({
-                            titre: produits[rec],
-                            raison: `Idéal pour un ${classe.nom} - ${classe.traits.role}`,
-                            score: 80
-                        });
-                    }
-                }
-            });
-        }
-
-        // Score basé sur l'historique
-        if (historique) {
-            historique.recommandations.forEach(rec => {
-                if (produits[rec]) {
-                    const existing = recommendations.find(r => r.titre === produits[rec]);
-                    if (existing) {
-                        existing.score = Math.min(100, existing.score + 5);
-                        existing.raison += ` + Adapté à votre passé de ${historique.nom}`;
-                    } else {
-                        recommendations.push({
-                            titre: produits[rec],
-                            raison: `Correspond à votre historique de ${historique.nom}`,
-                            score: 75
-                        });
-                    }
-                }
-            });
-        }
-
-        // Recommandation spéciale pour les triptyques
-        if (!recommendations.find(r => r.titre.includes('Triptyques'))) {
-            recommendations.push({
-                titre: 'Triptyques Mystères - Origines Complètes',
-                raison: 'Idéal pour explorer de nouveaux personnages et découvrir d\'autres combinaisons',
-                score: 70
-            });
-        }
-
-        // Trier par score décroissant et limiter à 3
-        return recommendations
+        return Object.values(aggregated)
             .sort((a, b) => b.score - a.score)
             .slice(0, 3);
     }

@@ -143,18 +143,89 @@
             constructor() {
                 this.contentContainer = document.getElementById('account-content');
                 this.user = null;
-                
+                this.dndConfig = null;
+                this.dndConfigLoaded = false;
+                this.dndConfigError = null;
+                this.productCatalog = {
+                    'lot10': {
+                        title: "L'Offrande du Voyageur",
+                        baseReason: 'Kit de pièces polyvalent pour démarrer vos quêtes',
+                        score: 82
+                    },
+                    'lot25': {
+                        title: 'La Monnaie des Cinq Royaumes',
+                        baseReason: 'Trésor conséquent pour aventuriers accomplis',
+                        score: 84
+                    },
+                    'lot50-essence': {
+                        title: "L'Essence du Marchand",
+                        baseReason: 'Coffret prestigieux inspiré des marchés draconiques',
+                        score: 90
+                    },
+                    'pack-182-arsenal-aventurier': {
+                        title: "Arsenal de l'Aventurier",
+                        baseReason: "Cartes d'équipement offensif et défensif",
+                        score: 92
+                    },
+                    'pack-182-butins-ingenieries': {
+                        title: 'Butins & Ingénieries',
+                        baseReason: 'Sélection arcanique et gadgets ingénieux',
+                        score: 88
+                    },
+                    'pack-182-routes-services': {
+                        title: 'Routes & Services',
+                        baseReason: 'Services et cartes utilitaires pour explorateurs',
+                        score: 86
+                    },
+                    'triptyque-aleatoire': {
+                        title: 'Triptyques Mystères - Origines Complètes',
+                        baseReason: 'Tirages thématiques pour forger de nouvelles origines',
+                        score: 75
+                    }
+                };
+
                 this.init();
             }
 
             async init() {
-                // Vérifier l'authentification
+                await this.ensureDndConfigLoaded();
+
                 const isAuthenticated = await this.checkAuthentication();
-                
+
                 if (isAuthenticated) {
                     this.renderUserDashboard();
                 } else {
                     this.renderLoginPrompt();
+                }
+            }
+
+            async ensureDndConfigLoaded() {
+                if (this.dndConfigLoaded) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/account/dnd-config');
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+
+                    const payload = await response.json();
+                    if (payload?.success && payload.data) {
+                        this.dndConfig = {
+                            especes: Array.isArray(payload.data.especes) ? payload.data.especes : [],
+                            classes: Array.isArray(payload.data.classes) ? payload.data.classes : [],
+                            historiques: Array.isArray(payload.data.historiques) ? payload.data.historiques : []
+                        };
+                    } else {
+                        throw new Error('Réponse de configuration invalide');
+                    }
+                } catch (error) {
+                    console.error('Erreur lors du chargement de la configuration D&D:', error);
+                    this.dndConfigError = error;
+                    this.dndConfig = { especes: [], classes: [], historiques: [] };
+                } finally {
+                    this.dndConfigLoaded = true;
                 }
             }
 
@@ -367,104 +438,168 @@
 
             async loadUserData() {
                 try {
-                    // Charger les favoris (simulation)
-                    setTimeout(() => {
-                        document.getElementById('user-favorites').innerHTML = `
+                    const favoritesContainer = document.getElementById('user-favorites');
+                    if (favoritesContainer) {
+                        favoritesContainer.innerHTML = `
                             <p style="color: var(--medium-text); text-align: center; font-style: italic;">
                                 Aucun favori encore.<br>
                                 <small>Explorez notre boutique pour ajouter des produits !</small>
                             </p>
                         `;
-                    }, 500);
+                    }
 
-                    // Charger les recommandations basées sur le profil D&D
-                    setTimeout(() => {
-                        const recommendations = this.generateRecommendations();
-                        const recHtml = recommendations.map(rec => `
-                            <div style="margin-bottom: 1rem; padding: 1rem; background: var(--dark-bg); border-radius: var(--border-radius); border: 1px solid var(--border-color);">
-                                <h4 style="color: var(--light-text); margin: 0 0 0.5rem 0; font-size: 0.9rem;">${rec.title}</h4>
-                                <p style="color: var(--medium-text); margin: 0; font-size: 0.8rem;">${rec.reason}</p>
-                                <div style="margin-top: 0.5rem;">
-                                    <span style="background: rgba(212, 175, 55, 0.2); color: var(--secondary-color); padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.7rem;">
-                                        ${rec.score}% compatible
-                                    </span>
-                                </div>
-                            </div>
-                        `).join('');
-                        
-                        document.getElementById('user-recommendations').innerHTML = recHtml || '<p style="color: var(--medium-text); text-align: center;">Aucune recommandation disponible</p>';
-                    }, 800);
+                    await this.renderRecommendationsSection();
 
-                    // Charger l'activité récente
-                    setTimeout(() => {
-                        document.getElementById('user-activity').innerHTML = `
+                    const activityContainer = document.getElementById('user-activity');
+                    if (activityContainer) {
+                        const creation = this.user?.date_creation ? new Date(this.user.date_creation).toLocaleDateString('fr-FR') : '—';
+                        const lastLogin = this.user?.derniere_connexion ? new Date(this.user.derniere_connexion).toLocaleDateString('fr-FR') : null;
+
+                        activityContainer.innerHTML = `
                             <div style="color: var(--medium-text); font-size: 0.9rem;">
                                 <div style="margin-bottom: 0.5rem;">
-                                    <span style="color: var(--secondary-color);">✨</span> Compte créé le ${new Date(this.user.date_creation).toLocaleDateString('fr-FR')}
+                                    <span style="color: var(--secondary-color);">✨</span> Compte créé le ${creation}
                                 </div>
-                                ${this.user.derniere_connexion ? `
-                                <div>
-                                    <span style="color: var(--secondary-color);">🗡️</span> Dernière connexion : ${new Date(this.user.derniere_connexion).toLocaleDateString('fr-FR')}
-                                </div>
-                                ` : ''}
+                                ${lastLogin ? `<div><span style="color: var(--secondary-color);">🗡️</span> Dernière connexion : ${lastLogin}</div>` : ''}
                             </div>
                         `;
-                    }, 1200);
-
+                    }
                 } catch (error) {
                     console.error('Erreur lors du chargement des données utilisateur:', error);
                 }
             }
 
+            async renderRecommendationsSection() {
+                const container = document.getElementById('user-recommendations');
+                if (!container) {
+                    return;
+                }
+
+                container.innerHTML = '<p style="color: var(--medium-text); text-align: center;">Chargement des recommandations...</p>';
+
+                try {
+                    const response = await fetch('/api/account/recommendations');
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}`);
+                    }
+
+                    const payload = await response.json();
+                    if (payload?.success && Array.isArray(payload.recommendations) && payload.recommendations.length > 0) {
+                        container.innerHTML = payload.recommendations.map(rec => this.renderRecommendationCard(rec)).join('');
+                        return;
+                    }
+
+                    throw new Error('Aucune recommandation disponible');
+                } catch (error) {
+                    console.warn('Recommandations API indisponible:', error);
+                    await this.ensureDndConfigLoaded();
+                    const fallback = this.generateRecommendations();
+                    container.innerHTML = fallback.length > 0
+                        ? fallback.map(rec => this.renderRecommendationCard(rec)).join('')
+                        : '<p style="color: var(--medium-text); text-align: center;">Aucune recommandation disponible</p>';
+                }
+            }
+
+            renderRecommendationCard(recommendation) {
+                const title = this.escapeHtml(recommendation?.title ?? '');
+                const reason = this.escapeHtml(recommendation?.reason ?? '');
+                const rawScore = Number(recommendation?.score ?? 0);
+                const score = Number.isFinite(rawScore) ? Math.min(100, Math.max(0, Math.round(rawScore))) : 75;
+
+                return `
+                    <div style="margin-bottom: 1rem; padding: 1rem; background: var(--dark-bg); border-radius: var(--border-radius); border: 1px solid var(--border-color);">
+                        <h4 style="color: var(--light-text); margin: 0 0 0.5rem 0; font-size: 0.9rem;">${title}</h4>
+                        <p style="color: var(--medium-text); margin: 0; font-size: 0.8rem;">${reason}</p>
+                        <div style="margin-top: 0.5rem;">
+                            <span style="background: rgba(212, 175, 55, 0.2); color: var(--secondary-color); padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.7rem;">
+                                ${score}% compatible
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            buildContextReason(type, nom) {
+                switch (type) {
+                    case 'espece':
+                        return `Harmonisé avec votre espèce ${nom}`;
+                    case 'classe':
+                        return `Optimisé pour votre classe de ${nom}`;
+                    case 'historique':
+                        return `Adapté à votre historique ${nom}`;
+                    default:
+                        return 'Suggestion thématique';
+                }
+            }
+
+            escapeHtml(value) {
+                return String(value ?? '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
             generateRecommendations() {
-                const recommendations = [];
-                
-                // Recommandations basées sur l'espèce
-                const especeRecs = {
-                    'Humain': [{ title: 'L\'Offrande du Voyageur', reason: 'Starter pack parfait pour les humains polyvalents', score: 85 }],
-                    'Elfe': [{ title: 'Routes & Services', reason: 'Idéal pour les elfes voyageurs et mystiques', score: 90 }],
-                    'Nain': [{ title: 'La Monnaie des Cinq Royaumes', reason: 'Collection complète pour les nains amateurs de richesse', score: 88 }],
-                    'Halfelin': [{ title: 'L\'Offrande du Voyageur', reason: 'Parfait pour débuter l\'aventure halfeline', score: 82 }],
-                    'Drakéide': [{ title: 'L\'Essence du Marchand', reason: 'Opulence digne des descendants de dragons', score: 92 }]
-                };
-
-                // Recommandations basées sur la classe
-                const classeRecs = {
-                    'Guerrier': [{ title: 'Arsenal de l\'Aventurier', reason: 'Équipement de combat pour guerriers', score: 95 }],
-                    'Magicien': [{ title: 'Butins & Ingénieries', reason: 'Objets magiques et merveilles arcanes', score: 93 }],
-                    'Roublard': [{ title: 'Butins & Ingénieries', reason: 'Outils spécialisés et équipement discret', score: 87 }],
-                    'Clerc': [{ title: 'Routes & Services', reason: 'Services divins et équipement ecclésiastique', score: 85 }]
-                };
-
-                // Ajouter les recommandations
-                if (especeRecs[this.user.espece]) {
-                    recommendations.push(...especeRecs[this.user.espece]);
-                }
-                
-                if (classeRecs[this.user.classe]) {
-                    recommendations.push(...classeRecs[this.user.classe]);
+                if (!this.user) {
+                    return [];
                 }
 
-                // Recommandation universelle
-                recommendations.push({
-                    title: 'Triptyques Mystères - Origines Complètes',
-                    reason: 'Explorez de nouveaux personnages et combinaisons',
-                    score: 75
+                const config = this.dndConfig || { especes: [], classes: [], historiques: [] };
+                const recommendations = {};
+
+                const contexts = [
+                    { type: 'espece', key: 'espece', group: 'especes' },
+                    { type: 'classe', key: 'classe', group: 'classes' },
+                    { type: 'historique', key: 'historique', group: 'historiques' }
+                ];
+
+                contexts.forEach(({ type, key, group }) => {
+                    const list = Array.isArray(config[group]) ? config[group] : [];
+                    const selected = list.find(item => item.nom === this.user[key]);
+                    if (!selected) {
+                        return;
+                    }
+
+                    const codes = Array.isArray(selected.recommandations) ? selected.recommandations : [];
+                    codes.forEach((code, index) => {
+                        const product = this.productCatalog[code];
+                        if (!product) {
+                            return;
+                        }
+
+                        const contextReason = this.buildContextReason(type, selected.nom);
+                        const reasonBase = product.baseReason || '';
+                        const reason = reasonBase ? `${reasonBase} — ${contextReason}` : contextReason;
+                        const baseScore = product.score ?? 75;
+                        const score = Math.min(100, baseScore + Math.max(0, 10 - index * 3));
+
+                        if (!recommendations[code]) {
+                            recommendations[code] = {
+                                title: product.title,
+                                reason,
+                                score
+                            };
+                        } else {
+                            recommendations[code].score = Math.min(100, recommendations[code].score + 5);
+                            recommendations[code].reason += ` + ${contextReason.toLowerCase()}`;
+                        }
+                    });
                 });
 
-                // Retourner les 3 meilleures recommandations uniques
-                const uniqueRecs = recommendations.reduce((acc, current) => {
-                    const exists = acc.find(item => item.title === current.title);
-                    if (!exists) {
-                        acc.push(current);
-                    } else if (current.score > exists.score) {
-                        exists.score = current.score;
-                        exists.reason += ` + ${current.reason}`;
-                    }
-                    return acc;
-                }, []);
+                if (!recommendations['triptyque-aleatoire']) {
+                    const fallback = this.productCatalog['triptyque-aleatoire'];
+                    recommendations['triptyque-aleatoire'] = {
+                        title: fallback.title,
+                        reason: `${fallback.baseReason} — compatible avec toutes les combinaisons`,
+                        score: fallback.score
+                    };
+                }
 
-                return uniqueRecs.sort((a, b) => b.score - a.score).slice(0, 3);
+                return Object.values(recommendations)
+                    .sort((a, b) => b.score - a.score)
+                    .slice(0, 3);
             }
 
             logout() {
@@ -490,7 +625,7 @@
                 this.contentContainer.innerHTML = `
                     <div style="max-width: 400px; margin: 0 auto; background: var(--dark-bg); padding: 2rem; border-radius: var(--border-radius); border: 1px solid var(--border-color);">
                         <h2 style="color: var(--secondary-color); text-align: center; margin-bottom: 2rem;">🗡️ Connexion Aventurier</h2>
-                        
+
                         <form id="login-form" style="display: flex; flex-direction: column; gap: 1rem;">
                             <div>
                                 <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Email de l'aventurier</label>
@@ -531,15 +666,37 @@
                         <div id="login-message" style="margin-top: 1rem; text-align: center;"></div>
                     </div>
                 `;
-                
+
                 document.getElementById('login-form').addEventListener('submit', this.handleLogin.bind(this));
             }
-            
-            showRegisterForm() {
+
+            async showRegisterForm() {
+                await this.ensureDndConfigLoaded();
+
+                const config = this.dndConfig || { especes: [], classes: [], historiques: [] };
+
+                const buildOptions = (collection) => (Array.isArray(collection) ? collection : [])
+                    .map(option => `<option value="${this.escapeHtml(option.nom)}" title="${this.escapeHtml(option.description ?? '')}">${this.escapeHtml(option.nom)}</option>`)
+                    .join('');
+
+                const especeOptions = buildOptions(config.especes);
+                const classeOptions = buildOptions(config.classes);
+                const historiqueOptions = buildOptions(config.historiques);
+
+                const hasOptions = [config.especes, config.classes, config.historiques]
+                    .some(list => Array.isArray(list) && list.length > 0);
+
+                const selectsDisabled = hasOptions ? '' : ' disabled';
+                const configurationWarning = hasOptions
+                    ? ''
+                    : `<div style="background: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.3); color: #ffadad; padding: 0.75rem; border-radius: var(--border-radius); margin-bottom: 1rem;">
+                        Configuration D&D momentanément indisponible. Vous pourrez finaliser votre inscription dès son retour ou contacter le support.
+                      </div>`;
+
                 this.contentContainer.innerHTML = `
                     <div style="max-width: 500px; margin: 0 auto; background: var(--dark-bg); padding: 2rem; border-radius: var(--border-radius); border: 1px solid var(--border-color);">
                         <h2 style="color: var(--secondary-color); text-align: center; margin-bottom: 2rem;">⚔️ Créer un Aventurier</h2>
-                        
+                        ${configurationWarning}
                         <form id="register-form" style="display: flex; flex-direction: column; gap: 1rem;">
                             <div>
                                 <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Email</label>
@@ -561,66 +718,36 @@
                                 <input type="text" id="register-name" required
                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--darker-bg); color: var(--light-text);">
                             </div>
-                            
+
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                                 <div>
                                     <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Espèce</label>
-                                    <select id="register-espece" required 
+                                    <select id="register-espece" required${selectsDisabled}
                                             style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--darker-bg); color: var(--light-text);">
                                         <option value="">Choisir...</option>
-                                        <option value="Humain">Humain</option>
-                                        <option value="Elfe">Elfe</option>
-                                        <option value="Nain">Nain</option>
-                                        <option value="Halfelin">Halfelin</option>
-                                        <option value="Drakéide">Drakéide</option>
-                                        <option value="Gnome">Gnome</option>
-                                        <option value="Demi-Elfe">Demi-Elfe</option>
-                                        <option value="Demi-Orc">Demi-Orc</option>
-                                        <option value="Tieffelin">Tieffelin</option>
+                                        ${especeOptions}
                                     </select>
                                 </div>
-                                
+
                                 <div>
                                     <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Classe</label>
-                                    <select id="register-classe" required 
+                                    <select id="register-classe" required${selectsDisabled}
                                             style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--darker-bg); color: var(--light-text);">
                                         <option value="">Choisir...</option>
-                                        <option value="Guerrier">Guerrier</option>
-                                        <option value="Magicien">Magicien</option>
-                                        <option value="Roublard">Roublard</option>
-                                        <option value="Clerc">Clerc</option>
-                                        <option value="Rôdeur">Rôdeur</option>
-                                        <option value="Paladin">Paladin</option>
-                                        <option value="Sorcier">Sorcier</option>
-                                        <option value="Barde">Barde</option>
-                                        <option value="Barbare">Barbare</option>
-                                        <option value="Moine">Moine</option>
-                                        <option value="Druide">Druide</option>
-                                        <option value="Occultiste">Occultiste</option>
+                                        ${classeOptions}
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Historique</label>
-                                <select id="register-historique" required 
+                                <select id="register-historique" required${selectsDisabled}
                                         style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--darker-bg); color: var(--light-text);">
                                     <option value="">Choisir...</option>
-                                    <option value="Acolyte">Acolyte</option>
-                                    <option value="Criminel">Criminel</option>
-                                    <option value="Artisan de Guilde">Artisan de Guilde</option>
-                                    <option value="Noble">Noble</option>
-                                    <option value="Héros du Peuple">Héros du Peuple</option>
-                                    <option value="Ermite">Ermite</option>
-                                    <option value="Artiste">Artiste</option>
-                                    <option value="Marin">Marin</option>
-                                    <option value="Soldat">Soldat</option>
-                                    <option value="Vagabond">Vagabond</option>
-                                    <option value="Sage">Sage</option>
-                                    <option value="Explorateur">Explorateur</option>
+                                    ${historiqueOptions}
                                 </select>
                             </div>
-                            
+
                             <button type="submit" style="
                                 background: var(--secondary-color);
                                 color: var(--dark-bg);
@@ -631,7 +758,7 @@
                                 cursor: pointer;
                                 transition: var(--transition);
                             ">Créer l'aventurier</button>
-                            
+
                             <button type="button" onclick="accountPage.renderLoginPrompt()" style="
                                 background: transparent;
                                 color: var(--medium-text);
@@ -641,13 +768,14 @@
                                 cursor: pointer;
                             ">Retour</button>
                         </form>
-                        
+
                         <div id="register-message" style="margin-top: 1rem; text-align: center;"></div>
                     </div>
                 `;
-                
+
                 document.getElementById('register-form').addEventListener('submit', this.handleRegister.bind(this));
             }
+            
             
             async handleLogin(event) {
                 event.preventDefault();
@@ -684,7 +812,7 @@
             
             async handleRegister(event) {
                 event.preventDefault();
-                
+
                 const formData = {
                     email: document.getElementById('register-email').value.trim(),
                     password: document.getElementById('register-password').value,
@@ -693,9 +821,17 @@
                     classe: document.getElementById('register-classe').value,
                     historique: document.getElementById('register-historique').value
                 };
-                
+
                 const messageDiv = document.getElementById('register-message');
-                
+
+                const hasOptions = this.dndConfig && [this.dndConfig.especes, this.dndConfig.classes, this.dndConfig.historiques]
+                    .some(list => Array.isArray(list) && list.length > 0);
+
+                if (!hasOptions) {
+                    messageDiv.innerHTML = '<p style="color: #ff6b6b;">❌ Configuration D&D indisponible. Réessayez ultérieurement.</p>';
+                    return;
+                }
+
                 try {
                     const response = await fetch('/api/account/register', {
                         method: 'POST',
