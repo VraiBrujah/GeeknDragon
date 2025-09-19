@@ -35,15 +35,22 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                 <li><a href="index.php#contact" class="nav-link">Contact</a></li>
             </ul>
             
-            <!-- Widget Panier D&D -->
+            <!-- Accès compte et panier -->
             <div class="nav-cart">
+                <a href="compte.php" class="gd-header-btn nav-account-link" aria-label="Accéder à l'espace compte" aria-haspopup="false">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" focusable="false">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z" />
+                    </svg>
+                    <span class="account-label" data-i18n="nav.account">Compte</span>
+                </a>
+
                 <button id="gd-cart-toggle-widget" class="cart-toggle" aria-label="Ouvrir l'inventaire d'aventurier">
                     <span class="cart-icon">🎒</span>
                     <span class="cart-text">Inventaire</span>
                     <span id="gd-cart-count-widget" class="cart-count">0</span>
                 </button>
             </div>
-            
+
             <div class="nav-toggle">
                 <span></span>
                 <span></span>
