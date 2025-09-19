@@ -5,6 +5,38 @@ require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/i18n.php';
 
 /**
+ * Détermine si le lecteur audio doit être injecté automatiquement.
+ *
+ * Les pages peuvent définir :
+ * - $enableAudioPlayer = false pour désactiver explicitement le lecteur.
+ * - $disableAudioPlayer = true pour conserver la compatibilité descendante.
+ */
+$shouldLoadAudioPlayer = true;
+
+if (array_key_exists('enableAudioPlayer', $GLOBALS)) {
+    $shouldLoadAudioPlayer = (bool) $GLOBALS['enableAudioPlayer'];
+} elseif (array_key_exists('disableAudioPlayer', $GLOBALS)) {
+    $shouldLoadAudioPlayer = !(bool) $GLOBALS['disableAudioPlayer'];
+}
+
+if (!function_exists('gdRenderAudioPlayerScripts')) {
+    /**
+     * Affiche les balises <script> nécessaires au lecteur audio global.
+     */
+    function gdRenderAudioPlayerScripts(): void
+    {
+        echo <<<'HTML'
+    <!-- Lecteur audio partagé -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+    <script src="/js/audio-player-engine.js"></script>
+    <script src="/js/audio-player-scanner.js"></script>
+    <script src="/js/audio-player-ui.js"></script>
+    <script src="/js/audio-player.js"></script>
+HTML;
+    }
+}
+
+/**
  * Gère le rendu du pied de page.
  *
  * @var array<int, array<string, mixed>> $footerSections Sections contextuelles (titre, description, liens).
@@ -84,7 +116,11 @@ if (!$hasSections) {
 <footer class="bg-gray-800 py-6 text-center text-gray-400 txt-court">
   © <?= date('Y'); ?> Geek &amp; Dragon — <span data-i18n="footer.made">Conçu au Québec.</span>
 </footer>
+
 <?php
+    if ($shouldLoadAudioPlayer) {
+        gdRenderAudioPlayerScripts();
+    }
     return;
 }
 
@@ -135,3 +171,9 @@ if ($footerBottomText === '') {
         </div>
     </div>
 </footer>
+
+<?php
+if ($shouldLoadAudioPlayer) {
+    gdRenderAudioPlayerScripts();
+}
+?>
