@@ -38,9 +38,9 @@ $navItems = [
         'label' => 'Boutique',
         'i18n' => 'nav.shop',
         'children' => [
-            '/boutique.php#pieces' => ['slug' => 'pieces', 'label' => 'Pièces', 'i18n' => 'nav.pieces'],
-            '/boutique.php#cartes' => ['slug' => 'cartes', 'label' => 'Cartes', 'i18n' => 'nav.cards'],
-            '/boutique.php#triptyques' => ['slug' => 'triptyques', 'label' => 'Triptyques', 'i18n' => 'nav.triptychs'],
+            '/boutique.php#coins' => ['slug' => 'coins', 'label' => 'Pièces', 'i18n' => 'nav.pieces'],
+            '/boutique.php#cards' => ['slug' => 'cards', 'label' => 'Cartes', 'i18n' => 'nav.cards'],
+            '/boutique.php#triptych' => ['slug' => 'triptych', 'label' => 'Triptyques', 'i18n' => 'nav.triptychs'],
         ],
     ],
     '/index.php#actus' => [

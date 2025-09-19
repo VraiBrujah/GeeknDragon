@@ -59,6 +59,8 @@ HTML;
 
         <!-- SECTION PIÈCES MÉTALLIQUES -->
         <section class="product-section" id="coins">
+            <!-- Ancre héritée pour préserver la compatibilité avec #pieces -->
+            <span id="pieces" class="sr-only" aria-hidden="true"></span>
             <div class="container">
                 <header class="section-header">
                     <h2 class="section-title">💰 Pièces Métalliques</h2>
@@ -343,6 +345,8 @@ HTML;
 
         <!-- SECTION CARTES D'ÉQUIPEMENT -->
         <section class="product-section" id="cards">
+            <!-- Ancre héritée pour préserver la compatibilité avec #cartes -->
+            <span id="cartes" class="sr-only" aria-hidden="true"></span>
             <div class="container">
                 <header class="section-header">
                     <h2 class="section-title">🃏 Cartes d'Équipement</h2>
@@ -469,7 +473,8 @@ HTML;
 
         <!-- SECTION TRIPTYQUES -->
         <section class="product-section" id="triptych">
-            <span id="triptyques"></span>
+            <!-- Alias historique conservé pour l'ancre #triptyques -->
+            <span id="triptyques" class="sr-only" aria-hidden="true"></span>
             <div class="container">
                 <header class="section-header">
                     <h2 class="section-title">📋 Triptyques Mystères</h2>
