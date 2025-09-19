@@ -17,11 +17,9 @@ $metaDescription = __('meta.shop.desc', "Découvrez notre collection complète :
 $active = 'boutique';
 $styleVersion = gdLocalAssetVersion('css/style.css');
 $boutiqueVersion = gdLocalAssetVersion('css/boutique.css');
-$heroFixVersion = gdLocalAssetVersion('css/hero-videos-fix.css');
 $extraHead = <<<HTML
   <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
   <link rel="stylesheet" href="/css/boutique.css?v={$boutiqueVersion}">
-  <link rel="stylesheet" href="/css/hero-videos-fix.css?v={$heroFixVersion}">
 HTML;
 ?>
 <!DOCTYPE html>
@@ -32,11 +30,7 @@ HTML;
 
     <main id="main" class="shop-main pt-[var(--header-height)]">
         <section class="shop-hero">
-            <div class="hero-videos">
-                <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; z-index: 1;">
-                    <source src="/videos/Fontaine12.mp4" type="video/mp4">
-                </video>
-            </div>
+            <div class="hero-videos" data-main="/videos/Fontaine12.mp4" data-videos='["/videos/Carte1.mp4","/videos/fontaine6.mp4","/videos/trip2.mp4","/videos/fontaine7.mp4","/videos/cartearme.mp4","/videos/fontaine8.mp4","/videos/fontaine9.mp4","/videos/fontaine4.mp4"]'></div>
             <div class="hero-overlay"></div>
             <div class="container">
                 <div class="shop-hero-content">
@@ -616,7 +610,7 @@ include __DIR__ . '/footer.php';
     <!-- Scripts existants -->
     <script src="/js/app.js"></script>
     <script src="/js/script.js"></script>
-    <script src="/js/hero-videos-simple.js"></script>
+    <script src="/js/hero-videos.js"></script>
     <script src="/js/boutique.js"></script>
     <script src="/js/currency-converter.js"></script>
     <script src="/api/public-config.js.php"></script>
