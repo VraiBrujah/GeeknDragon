@@ -175,7 +175,10 @@
 
       this.headerElement = wrapper;
       this.ensureHeaderVisibility();
-      this.updateHeaderPlayback({ isPlaying: this.state.isPlaying });
+      this.updateHeaderPlayback({
+        isPlaying: this.state.isPlaying,
+        shouldResume: this.state.shouldResume,
+      });
       this.syncVolumeControls(this.state.volume);
     },
 
@@ -325,14 +328,21 @@
       }
     },
 
+    /**
+     * Met à jour le bouton lecture du header en tenant compte des reprises prévues.
+     *
+     * @param {{ isPlaying?: boolean, shouldResume?: boolean }} [detail] Informations de lecture à refléter.
+     */
     updateHeaderPlayback(detail) {
       if (!this.headerElement) {
         return;
       }
       const button = this.headerElement.querySelector('.gnd-header-play');
       if (button) {
-        button.textContent = detail.isPlaying ? '⏸' : '▶';
-        button.setAttribute('aria-pressed', detail.isPlaying ? 'true' : 'false');
+        const { isPlaying = false, shouldResume = false } = detail || {};
+        const isActive = Boolean(isPlaying || shouldResume);
+        button.textContent = isActive ? '⏸' : '▶';
+        button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       }
     },
 
