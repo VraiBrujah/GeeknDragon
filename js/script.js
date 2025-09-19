@@ -395,42 +395,62 @@ const Navigation = {
   setupSmoothScrolling() {
     // Smooth scroll pour les liens d'ancrage
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    if (!anchorLinks.length) {
+      return;
+    }
+
+    const headerElement = document.querySelector('.header') || document.querySelector('header');
+
     anchorLinks.forEach((link) => {
       link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
+        const href = link.getAttribute('href');
+        if (!href || href === '#') {
+          return;
+        }
+
+        const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
 
-        if (targetElement) {
-          const headerHeight = document.querySelector('.header').offsetHeight;
-          const targetPosition = targetElement.offsetTop - headerHeight - 20;
-
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth',
-          });
+        if (!targetElement) {
+          return;
         }
+
+        e.preventDefault();
+        const headerHeight = headerElement ? headerElement.offsetHeight : 0;
+        const targetPosition = targetElement.offsetTop - headerHeight - 20;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth',
+        });
       });
     });
   },
 
   setupActiveStates() {
     // Header transparence au scroll
-    const header = document.querySelector('.header');
+    const header = document.querySelector('.header') || document.querySelector('header');
+    if (!header) {
+      return;
+    }
+
+    const isLegacyHeader = header.classList.contains('header');
     let lastScrollTop = 0;
 
     window.addEventListener('scroll', () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      // Effet de transparence
-      if (scrollTop > 100) {
-        header.style.background = 'rgba(26, 26, 26, 0.98)';
-      } else {
-        header.style.background = 'rgba(26, 26, 26, 0.95)';
-      }
+      if (isLegacyHeader) {
+        // Effet de transparence uniquement pour l'ancien header
+        if (scrollTop > 100) {
+          header.style.background = 'rgba(26, 26, 26, 0.98)';
+        } else {
+          header.style.background = 'rgba(26, 26, 26, 0.95)';
+        }
 
-      // Maintenir l'en-tête visible sur toutes les tailles d'écran
-      header.style.transform = 'translateY(0)';
+        // Maintenir l'en-tête visible sur toutes les tailles d'écran
+        header.style.transform = 'translateY(0)';
+      }
 
       // Ancien comportement d'auto-masquage sur mobile supprimé
       // if (window.innerWidth <= 768) {

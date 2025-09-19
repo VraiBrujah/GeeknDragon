@@ -1,38 +1,40 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politique de Retours | Geek&Dragon</title>
-    <meta name="description" content="Politique de retours Geek&Dragon - 30 jours pour retourner vos produits en parfait état.">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <a href="index.php">
-                    <span class="logo-text">Geek&Dragon</span>
-                </a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.php" class="nav-link">Accueil</a></li>
-                <li><a href="boutique.php" class="nav-link">Boutique</a></li>
-                <li><a href="index.php#contact" class="nav-link">Contact</a></li>
-                <li><a href="compte.php" class="nav-link account-link" title="Mon compte">👤</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+<?php
+declare(strict_types=1);
 
-    <main style="margin-top: 80px;">
+require __DIR__ . '/bootstrap.php';
+
+$translator = require __DIR__ . '/i18n.php';
+$lang = $translator->getCurrentLanguage();
+
+if (!function_exists('gdLocalAssetVersion')) {
+    /**
+     * Retourne le timestamp de dernière modification pour versionner les assets.
+     */
+    function gdLocalAssetVersion(string $relativePath): string
+    {
+        $absolute = __DIR__ . '/' . ltrim($relativePath, '/');
+        return is_file($absolute) ? (string) filemtime($absolute) : '0';
+    }
+}
+
+$title = __('meta.returns.title', 'Politique de retours | Geek & Dragon');
+$metaDescription = __('meta.returns.desc', 'Politique de retours Geek & Dragon - 30 jours pour retourner vos produits.');
+$active = 'contact';
+$styleVersion = gdLocalAssetVersion('css/style.css');
+$extraHead = <<<HTML
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
+HTML;
+?>
+<!DOCTYPE html>
+<html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8'); ?>">
+<?php include __DIR__ . '/head-common.php'; ?>
+<body>
+<?php include __DIR__ . '/header.php'; ?>
+
+    <main id="main" class="pt-32">
         <section class="policy-hero" style="background: var(--dark-bg); padding: 4rem 0;">
             <div class="container">
                 <h1 style="color: var(--secondary-color); text-align: center; margin-bottom: 1rem;">Politique de Retours</h1>
@@ -125,16 +127,16 @@
                 <div class="footer-section">
                     <h4>Boutique</h4>
                     <ul>
-                        <li><a href="boutique.php#coins">Pièces Métalliques</a></li>
-                        <li><a href="boutique.php#cards">Cartes d'Équipement</a></li>
-                        <li><a href="boutique.php#triptych">Triptyques Mystères</a></li>
+                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php#coins'), ENT_QUOTES, 'UTF-8'); ?>">Pièces Métalliques</a></li>
+                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php#cards'), ENT_QUOTES, 'UTF-8'); ?>">Cartes d'Équipement</a></li>
+                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php#triptych'), ENT_QUOTES, 'UTF-8'); ?>">Triptyques Mystères</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Support</h4>
                     <ul>
                         <li><a href="mailto:support@geekndragon.com">Support Client</a></li>
-                        <li><a href="retours.php">Retours</a></li>
+                        <li><a href="<?= htmlspecialchars(langUrl('/retours.php'), ENT_QUOTES, 'UTF-8'); ?>">Retours</a></li>
                         <li><a href="#">Livraison</a></li>
                     </ul>
                 </div>
@@ -145,6 +147,7 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>

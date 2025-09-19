@@ -79,6 +79,7 @@ $metaDescription = gd_clean_text($product['meta_description'] ?? ($product['summ
 $pageTitle = ($product['name'] ?? $id) . ' | Geek&Dragon';
 $categoryLabel = $product['category_label'] ?? 'Produit';
 $categoryLink = $product['category_anchor'] ?? 'boutique.php';
+$categoryPath = '/' . ltrim($categoryLink, '/');
 $subtitle = $product['subtitle'] ?? '';
 $productCode = $product['product_code'] ?? ('#' . strtoupper($id));
 $currency = $product['currency'] ?? 'CAD';
@@ -117,51 +118,53 @@ $relatedIds = array_values(array_filter(
 
 $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description'] ?? ($product['name'] ?? '')), 180);
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') ?></title>
-    <meta name="description" content="<?= htmlspecialchars($metaDescription, ENT_QUOTES, 'UTF-8') ?>">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/product.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <a href="index.php">
-                    <span class="logo-text">Geek&Dragon</span>
-                </a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.php" class="nav-link">Accueil</a></li>
-                <li><a href="boutique.php" class="nav-link">Boutique</a></li>
-                <li><a href="<?= htmlspecialchars($categoryLink, ENT_QUOTES, 'UTF-8') ?>" class="nav-link"><?= htmlspecialchars($categoryLabel, ENT_QUOTES, 'UTF-8') ?></a></li>
-                <li><a href="index.php#contact" class="nav-link">Contact</a></li>
-                <li><a href="compte.php" class="nav-link account-link" title="Mon compte">👤</a></li>
-            </ul>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+<?php
+require __DIR__ . '/bootstrap.php';
 
-    <main class="product-main">
+$translator = require __DIR__ . '/i18n.php';
+$lang = $translator->getCurrentLanguage();
+$categoryUrl = langUrl($categoryPath);
+
+if (!function_exists('gdLocalAssetVersion')) {
+    /**
+     * Retourne le timestamp de dernière modification pour versionner les assets.
+     */
+    function gdLocalAssetVersion(string $relativePath): string
+    {
+        $absolute = __DIR__ . '/' . ltrim($relativePath, '/');
+        return is_file($absolute) ? (string) filemtime($absolute) : '0';
+    }
+}
+
+$title = $pageTitle;
+$metaDescription = $metaDescription;
+$ogImage = $mainImage;
+$active = 'boutique';
+$styleVersion = gdLocalAssetVersion('css/style.css');
+$productVersion = gdLocalAssetVersion('css/product.css');
+$extraHead = <<<HTML
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
+  <link rel="stylesheet" href="/css/product.css?v={$productVersion}">
+HTML;
+?>
+<!DOCTYPE html>
+<html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8'); ?>">
+<?php include __DIR__ . '/head-common.php'; ?>
+<body>
+<?php include __DIR__ . '/header.php'; ?>
+
+    <main id="main" class="product-main pt-32">
         <section class="breadcrumb">
             <div class="container">
                 <nav class="breadcrumb-nav">
-                    <a href="index.php">Accueil</a>
+                    <a href="<?= htmlspecialchars(langUrl('/index.php'), ENT_QUOTES, 'UTF-8'); ?>">Accueil</a>
                     <span>›</span>
-                    <a href="boutique.php">Boutique</a>
+                    <a href="<?= htmlspecialchars(langUrl('/boutique.php'), ENT_QUOTES, 'UTF-8'); ?>">Boutique</a>
                     <span>›</span>
-                    <a href="<?= htmlspecialchars($categoryLink, ENT_QUOTES, 'UTF-8') ?>"><?= htmlspecialchars($categoryLabel, ENT_QUOTES, 'UTF-8') ?></a>
+                    <a href="<?= htmlspecialchars($categoryUrl, ENT_QUOTES, 'UTF-8'); ?>"><?= htmlspecialchars($categoryLabel, ENT_QUOTES, 'UTF-8') ?></a>
                     <span>›</span>
                     <span class="current"><?= htmlspecialchars($product['name'] ?? $id, ENT_QUOTES, 'UTF-8') ?></span>
                 </nav>
@@ -460,7 +463,7 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
                                     <p><?= htmlspecialchars((string)$related['subtitle'], ENT_QUOTES, 'UTF-8') ?></p>
                                 <?php endif; ?>
                                 <div class="price"><?= htmlspecialchars(gd_format_price($relatedPrice), ENT_QUOTES, 'UTF-8') ?>$ <small><?= htmlspecialchars($related['currency'] ?? $currency, ENT_QUOTES, 'UTF-8') ?></small></div>
-                                <a href="product.php?id=<?= urlencode($relatedId) ?>" class="btn-secondary">Découvrir</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=' . urlencode($relatedId)), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary">Découvrir</a>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -480,9 +483,9 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
                 <div class="footer-section">
                     <h4>Boutique</h4>
                     <ul>
-                        <li><a href="boutique.php#coins">Pièces Métalliques</a></li>
-                        <li><a href="boutique.php#cards">Cartes d'Équipement</a></li>
-                        <li><a href="boutique.php#triptych">Triptyques Mystères</a></li>
+                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php#coins'), ENT_QUOTES, 'UTF-8'); ?>">Pièces Métalliques</a></li>
+                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php#cards'), ENT_QUOTES, 'UTF-8'); ?>">Cartes d'Équipement</a></li>
+                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php#triptych'), ENT_QUOTES, 'UTF-8'); ?>">Triptyques Mystères</a></li>
                         <li><a href="#">Guide d'Achat</a></li>
                     </ul>
                 </div>
@@ -490,7 +493,7 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
                     <h4>Support</h4>
                     <ul>
                         <li><a href="mailto:support@geekndragon.com">Support Client</a></li>
-                        <li><a href="retours.php">Livraison & Retours</a></li>
+                        <li><a href="<?= htmlspecialchars(langUrl('/retours.php'), ENT_QUOTES, 'UTF-8'); ?>">Livraison & Retours</a></li>
                         <li><a href="#">Garantie Qualité</a></li>
                         <li><a href="#">FAQ</a></li>
                     </ul>
@@ -502,13 +505,14 @@ $buttonDescription = gd_clean_text($product['summary'] ?? ($product['description
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
-    <script src="api/public-config.js.php"></script>
-    <script src="js/product.js"></script>
-    <script src="js/reviews.js"></script>
-    <script src="js/wishlist.js"></script>
-    <script src="js/snipcart-products.js"></script>
-    <script src="js/snipcart-integration.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/api/public-config.js.php"></script>
+    <script src="/js/product.js"></script>
+    <script src="/js/reviews.js"></script>
+    <script src="/js/wishlist.js"></script>
+    <script src="/js/snipcart-products.js"></script>
+    <script src="/js/snipcart-integration.js"></script>
     <div id="snipcart" data-api-key="<?= htmlspecialchars($snipcartApiKey, ENT_QUOTES, 'UTF-8') ?>" data-config-modal-style="side" data-config-add-product-behavior="none" style="display:none;"></div>
 </body>
 </html>

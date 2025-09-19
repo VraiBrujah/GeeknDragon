@@ -7,61 +7,44 @@ declare(strict_types=1);
 $config = require __DIR__ . '/config.php';
 $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snipcart_api_key'] : '';
 ?>
+require __DIR__ . '/bootstrap.php';
+
+$translator = require __DIR__ . '/i18n.php';
+$lang = $translator->getCurrentLanguage();
+
+if (!function_exists('gdLocalAssetVersion')) {
+    /**
+     * Retourne le timestamp de dernière modification pour versionner les assets.
+     */
+    function gdLocalAssetVersion(string $relativePath): string
+    {
+        $absolute = __DIR__ . '/' . ltrim($relativePath, '/');
+        return is_file($absolute) ? (string) filemtime($absolute) : '0';
+    }
+}
+
+$title = __('meta.shop.title', 'Boutique - Geek & Dragon | Accessoires de jeux de rôle premium');
+$metaDescription = __('meta.shop.desc', "Découvrez notre collection complète : pièces métalliques authentiques, cartes d'équipement illustrées et triptyques mystères pour D&D. Livraison rapide au Canada.");
+$active = 'boutique';
+$styleVersion = gdLocalAssetVersion('css/style.css');
+$boutiqueVersion = gdLocalAssetVersion('css/boutique.css');
+$extraHead = <<<HTML
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
+  <link rel="stylesheet" href="/css/boutique.css?v={$boutiqueVersion}">
+HTML;
+?>
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boutique - Geek&Dragon | Accessoires de Jeux de Rôle Premium</title>
-    <meta name="description" content="Découvrez notre collection complète : pièces métalliques authentiques, cartes d'équipement illustrées et triptyques mystères pour D&D. Livraison rapide au Canada.">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/boutique.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
+<html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8'); ?>">
+<?php include __DIR__ . '/head-common.php'; ?>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <a href="index.php">
-                    <img src="images/brand-geekndragon-white.webp" alt="Geek&Dragon" class="logo-image">
-                    <span class="logo-text">Geek&Dragon</span>
-                </a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.php" class="nav-link">Accueil</a></li>
-                <li><a href="boutique.php" class="nav-link active">Boutique</a></li>
-                <li><a href="index.php#contact" class="nav-link">Contact</a></li>
-            </ul>
-            
-            <!-- Accès compte et panier -->
-            <div class="nav-cart">
-                <a href="compte.php" class="gd-header-btn nav-account-link" aria-label="Accéder à l'espace compte" aria-haspopup="false">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" focusable="false">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z" />
-                    </svg>
-                    <span class="account-label sr-only" data-i18n="nav.account">Compte</span>
-                </a>
+<?php include __DIR__ . '/header.php'; ?>
 
-                <button id="gd-cart-toggle-widget" class="cart-toggle" aria-label="Ouvrir l'inventaire d'aventurier">
-                    <span class="cart-icon">🎒</span>
-                    <span class="cart-text">Inventaire</span>
-                    <span id="gd-cart-count-widget" class="cart-count">0</span>
-                </button>
-            </div>
-
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <main class="shop-main">
+    <main id="main" class="shop-main pt-32">
         <section class="shop-hero">
-            <div class="hero-videos" data-main="videos/Fontaine12.mp4" data-videos='["videos/Carte1.mp4","videos/fontaine6.mp4","videos/trip2.mp4","videos/fontaine7.mp4","videos/cartearme.mp4","videos/fontaine8.mp4","videos/fontaine9.mp4","videos/fontaine4.mp4"]'></div>
+            <div class="hero-videos" data-main="/videos/Fontaine12.mp4" data-videos='["/videos/Carte1.mp4","/videos/fontaine6.mp4","/videos/trip2.mp4","/videos/fontaine7.mp4","/videos/cartearme.mp4","/videos/fontaine8.mp4","/videos/fontaine9.mp4","/videos/fontaine4.mp4"]'></div>
             <div class="hero-overlay"></div>
             <div class="container">
                 <div class="shop-hero-content">
@@ -77,7 +60,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                             <span>Qualité Premium</span>
                         </div>
                         <div class="stat">
-                            <img src="images/logo-fabriqueQC.webp" alt="Fabriqué au Québec" class="quebec-logo">
+                            <img src="/images/logo-fabriqueQC.webp" alt="Fabriqué au Québec" class="quebec-logo">
                             <span>Fabriqué au Québec</span>
                         </div>
                     </div>
@@ -97,10 +80,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <!-- L'Offrande du Voyageur -->
                     <article class="product-card fade-in" data-category="coins" data-price="60" data-language="both">
                         <div class="product-image">
-                            <img src="images/optimized-modern/webp/Vagabon.webp" alt="L'Offrande du Voyageur - Starter pack de pièces métalliques" loading="lazy">
+                            <img src="/images/optimized-modern/webp/Vagabon.webp" alt="L'Offrande du Voyageur - Starter pack de pièces métalliques" loading="lazy">
                             <div class="product-badge starter">Starter Pack</div>
                             <div class="product-overlay">
-                                <a href="product.php?id=lot10" class="product-quick-view">Voir Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot10'), ENT_QUOTES, 'UTF-8'); ?>" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -126,7 +109,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="product.php?id=lot10" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot10'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -134,10 +117,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <!-- La Monnaie des Cinq Royaumes -->
                     <article class="product-card fade-in" data-category="coins" data-price="145" data-language="both">
                         <div class="product-image">
-                            <img src="images/optimized-modern/webp/Royaume.webp" alt="La Monnaie des Cinq Royaumes - Collection complète" loading="lazy">
+                            <img src="/images/optimized-modern/webp/Royaume.webp" alt="La Monnaie des Cinq Royaumes - Collection complète" loading="lazy">
                             <div class="product-badge popular">Plus Populaire</div>
                             <div class="product-overlay">
-                                <a href="product.php?id=lot25" class="product-quick-view">Voir Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot25'), ENT_QUOTES, 'UTF-8'); ?>" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -163,7 +146,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="product.php?id=lot25" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot25'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -171,10 +154,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <!-- L'Essence du Marchand -->
                     <article class="product-card fade-in" data-category="coins" data-price="275" data-language="both">
                         <div class="product-image">
-                            <img src="images/optimized-modern/webp/Essence.webp" alt="L'Essence du Marchand - Double variété" loading="lazy">
+                            <img src="/images/optimized-modern/webp/Essence.webp" alt="L'Essence du Marchand - Double variété" loading="lazy">
                             <div class="product-badge premium">Premium</div>
                             <div class="product-overlay">
-                                <a href="product.php?id=lot50-essence" class="product-quick-view">Voir Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot50-essence'), ENT_QUOTES, 'UTF-8'); ?>" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -200,7 +183,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="product.php?id=lot50-essence" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot50-essence'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -208,10 +191,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <!-- La Trésorerie du Seigneur -->
                     <article class="product-card fade-in" data-category="coins" data-price="275" data-language="both">
                         <div class="product-image">
-                            <img src="images/optimized-modern/webp/Seignieur.webp" alt="La Trésorerie du Seigneur - Opulence uniforme" loading="lazy">
+                            <img src="/images/optimized-modern/webp/Seignieur.webp" alt="La Trésorerie du Seigneur - Opulence uniforme" loading="lazy">
                             <div class="product-badge luxury">Luxe</div>
                             <div class="product-overlay">
-                                <a href="product.php?id=lot50-tresorerie" class="product-quick-view">Voir Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot50-tresorerie'), ENT_QUOTES, 'UTF-8'); ?>" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -237,7 +220,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="product.php?id=lot50-tresorerie" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot50-tresorerie'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -381,10 +364,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <!-- Arsenal de l'Aventurier -->
                     <article class="product-card fade-in" data-category="cards" data-price="49.99" data-language="fr en">
                         <div class="product-image">
-                            <img src="images/optimized-modern/webp/arme-recto.webp" alt="Arsenal de l'Aventurier - Équipement de base" loading="lazy">
+                            <img src="/images/optimized-modern/webp/arme-recto.webp" alt="Arsenal de l'Aventurier - Équipement de base" loading="lazy">
                             <div class="product-badge essential">Essentiel</div>
                             <div class="product-overlay">
-                                <a href="product.php?id=pack-182-arsenal-aventurier" class="product-quick-view">Voir Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-arsenal-aventurier'), ENT_QUOTES, 'UTF-8'); ?>" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -411,7 +394,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="product.php?id=pack-182-arsenal-aventurier" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-arsenal-aventurier'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -419,10 +402,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <!-- Butins & Ingénieries -->
                     <article class="product-card fade-in" data-category="cards" data-price="36.99" data-language="fr en">
                         <div class="product-image">
-                            <img src="images/optimized-modern/webp/bomb-recto.webp" alt="Butins & Ingénieries - Contenu avancé" loading="lazy">
+                            <img src="/images/optimized-modern/webp/bomb-recto.webp" alt="Butins & Ingénieries - Contenu avancé" loading="lazy">
                             <div class="product-badge advanced">Avancé</div>
                             <div class="product-overlay">
-                                <a href="product.php?id=pack-182-butins-ingenieries" class="product-quick-view">Voir Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-butins-ingenieries'), ENT_QUOTES, 'UTF-8'); ?>" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -449,7 +432,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="product.php?id=pack-182-butins-ingenieries" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-butins-ingenieries'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -457,10 +440,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <!-- Routes & Services -->
                     <article class="product-card fade-in" data-category="cards" data-price="34.99" data-language="fr en">
                         <div class="product-image">
-                            <img src="images/optimized-modern/webp/backpack-recto.webp" alt="Routes & Services - Monde vivant" loading="lazy">
+                            <img src="/images/optimized-modern/webp/backpack-recto.webp" alt="Routes & Services - Monde vivant" loading="lazy">
                             <div class="product-badge exploration">Exploration</div>
                             <div class="product-overlay">
-                                <a href="product.php?id=pack-182-routes-services" class="product-quick-view">Voir Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-routes-services'), ENT_QUOTES, 'UTF-8'); ?>" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -487,7 +470,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                                     <span class="cart-icon">🎒</span>
                                     <span>Ajouter à l'inventaire</span>
                                 </button>
-                                <a href="product.php?id=pack-182-routes-services" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-routes-services'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -508,10 +491,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <!-- Triptyques Mystères -->
                     <article class="product-card fade-in featured-product" data-category="triptych" data-price="59.99" data-language="fr en">
                         <div class="product-image">
-                            <img src="images/triptyque-fiche.webp" alt="Triptyques Mystères - Origines Complètes" loading="lazy">
+                            <img src="/images/triptyque-fiche.webp" alt="Triptyques Mystères - Origines Complètes" loading="lazy">
                             <div class="product-badge mystery">Mystère</div>
                             <div class="product-overlay">
-                                <a href="product.php?id=triptyque-aleatoire" class="product-quick-view">Voir Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=triptyque-aleatoire'), ENT_QUOTES, 'UTF-8'); ?>" class="product-quick-view">Voir Détails</a>
                             </div>
                         </div>
                         <div class="product-content">
@@ -553,7 +536,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                                     <span class="cart-icon">🎒</span>
                                     <span>Découvrir le Mystère</span>
                                 </button>
-                                <a href="product.php?id=triptyque-aleatoire" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=triptyque-aleatoire'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
                             </div>
                         </div>
                     </article>
@@ -637,20 +620,21 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
     </footer>
 
     <!-- Scripts existants -->
-    <script src="js/script.js"></script>
-    <script src="js/hero-videos.js"></script>
-    <script src="js/boutique.js"></script>
-    <script src="js/currency-converter.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/hero-videos.js"></script>
+    <script src="/js/boutique.js"></script>
+    <script src="/js/currency-converter.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
-    <script src="js/audio-player-engine.js"></script>
-    <script src="js/audio-player-scanner.js"></script>
-    <script src="js/audio-player-ui.js"></script>
-    <script src="js/audio-player.js"></script>
-    <script src="api/public-config.js.php"></script>
+    <script src="/js/audio-player-engine.js"></script>
+    <script src="/js/audio-player-scanner.js"></script>
+    <script src="/js/audio-player-ui.js"></script>
+    <script src="/js/audio-player.js"></script>
+    <script src="/api/public-config.js.php"></script>
 
     <!-- Intégration Snipcart avec thème D&D -->
-    <script src="js/snipcart-products.js"></script>
-    <script src="js/snipcart-integration.js"></script>
+    <script src="/js/snipcart-products.js"></script>
+    <script src="/js/snipcart-integration.js"></script>
 
     <!-- Container Snipcart (hidden) -->
     <div id="snipcart"

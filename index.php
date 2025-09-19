@@ -1,76 +1,56 @@
 <?php
 declare(strict_types=1);
 
+require __DIR__ . '/bootstrap.php';
+
 /**
  * Prépare la configuration Snipcart exposée au frontend.
  */
 $config = require __DIR__ . '/config.php';
 $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snipcart_api_key'] : '';
+
+$translator = require __DIR__ . '/i18n.php';
+$lang = $translator->getCurrentLanguage();
+
+if (!function_exists('gdLocalAssetVersion')) {
+    /**
+     * Retourne le timestamp de dernière modification pour versionner les assets.
+     */
+    function gdLocalAssetVersion(string $relativePath): string
+    {
+        $absolute = __DIR__ . '/' . ltrim($relativePath, '/');
+        return is_file($absolute) ? (string) filemtime($absolute) : '0';
+    }
+}
+
+$title = __('meta.home.title', 'Geek & Dragon - Accessoires immersifs pour jeux de rôle');
+$metaDescription = __('meta.home.desc', "Découvrez notre collection exclusive de pièces métalliques, cartes d'équipement et triptyques pour transformer vos parties de D&D en aventures inoubliables.");
+$active = '';
+$styleVersion = gdLocalAssetVersion('css/style.css');
+$extraHead = <<<HTML
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Uncial+Antiqua&family=MedievalSharp&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
+HTML;
 ?>
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geek&Dragon - Accessoires Immersifs pour Jeux de Rôle</title>
-    <meta name="description" content="Découvrez notre collection exclusive de pièces métalliques, cartes d'équipement et triptyques pour transformer vos parties de D&D en aventures inoubliables.">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Uncial+Antiqua&family=MedievalSharp&display=swap" rel="stylesheet">
-</head>
+<html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8'); ?>">
+<?php include __DIR__ . '/head-common.php'; ?>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <a href="index.php">
-                    <img src="images/brand-geekndragon-white.webp" alt="Geek&Dragon" class="logo-image">
-                    <span class="logo-text">Geek&Dragon</span>
-                </a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="boutique.php" class="nav-link whitespace-nowrap">Boutique</a></li>
-                <li><a href="#catalogue" class="nav-link whitespace-nowrap">Catalogue</a></li>
-                <li><a href="#actualites" class="nav-link whitespace-nowrap">Actualités</a></li>
-                <li><a href="#about" class="nav-link whitespace-nowrap">À Propos</a></li>
-                <li><a href="#contact" class="nav-link whitespace-nowrap">Contact</a></li>
-            </ul>
-            
-            <!-- Accès compte et panier -->
-            <div class="nav-cart">
-                <a href="compte.php" class="gd-header-btn nav-account-link" aria-label="Accéder à l'espace compte" aria-haspopup="false">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5" focusable="false">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0A17.933 17.933 0 0 1 12 21.75a17.933 17.933 0 0 1-7.5-1.632Z" />
-                    </svg>
-                    <span class="account-label sr-only" data-i18n="nav.account">Compte</span>
-                </a>
+<?php include __DIR__ . '/header.php'; ?>
 
-                <button id="gd-cart-toggle-widget" class="cart-toggle" aria-label="Ouvrir le sac d'aventurier">
-                    <span class="cart-icon">🎒</span>
-                    <span class="cart-text">Sac</span>
-                    <span id="gd-cart-count-widget" class="cart-count">0</span>
-                </button>
-            </div>
-
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <main>
+    <main id="main" class="pt-32">
         <section class="hero">
             <div class="hero-background">
-                <div class="hero-videos" data-main="videos/video-mage-hero.mp4" data-videos='["videos/cascade_HD.mp4","videos/fontaine11.mp4","videos/Carte1.mp4","videos/fontaine4.mp4","videos/fontaine3.mp4","videos/fontaine2.mp4","videos/fontaine1.mp4"]'></div>
+            <div class="hero-videos" data-main="/videos/video-mage-hero.mp4" data-videos='["/videos/cascade_HD.mp4","/videos/fontaine11.mp4","/videos/Carte1.mp4","/videos/fontaine4.mp4","/videos/fontaine3.mp4","/videos/fontaine2.mp4","/videos/fontaine1.mp4"]'></div>
                 <div class="hero-overlay"></div>
             </div>
             <div class="hero-content">
                 <h1 class="hero-title animated-text"><strong>Transformez vos aventures en <span class="highlight">épopées légendaires</span></strong></h1>
                 <p class="hero-subtitle"><strong>Découvrez notre collection d'accessoires immersifs pour vos parties de jeux de rôle : pièces métalliques authentiques, cartes d'équipement illustrées et triptyques mystères.</strong></p>
                 <div class="hero-cta">
-                    <a href="boutique.php" class="cta-primary">Découvrir la Boutique</a>
+                    <a href="<?= htmlspecialchars(langUrl('/boutique.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Découvrir la Boutique</a>
                     <a href="#catalogue" class="cta-secondary">Voir le Catalogue</a>
                 </div>
             </div>
@@ -86,18 +66,18 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <h3 class="section-title">Boutique</h3>
                     <p class="section-subtitle">Paiement sécurisé via Snipcart</p>
                     <div class="payment-icons">
-                        <img src="images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-                        <img src="images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-                        <img src="images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
+                        <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
+                        <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
+                        <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
                     </div>
                 </header>
                 
                 <!-- Grid de produits phares -->
                 <div class="boutique-products-grid">
-                    <a href="boutique.php#coins" class="product-highlight-link">
+                    <a href="<?= htmlspecialchars(langUrl('/boutique.php#coins'), ENT_QUOTES, 'UTF-8'); ?>" class="product-highlight-link">
                         <div class="product-highlight">
                             <div class="product-image">
-                                <img src="images/optimized-modern/webp/all252.webp" alt="Pièces métalliques" loading="lazy">
+                                <img src="/images/optimized-modern/webp/all252.webp" alt="Pièces métalliques" loading="lazy">
                             </div>
                             <div class="product-info">
                                 <h4>💰 Pièces Métalliques</h4>
@@ -112,10 +92,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                         </div>
                     </a>
                     
-                    <a href="boutique.php#cards" class="product-highlight-link">
+                    <a href="<?= htmlspecialchars(langUrl('/boutique.php#cards'), ENT_QUOTES, 'UTF-8'); ?>" class="product-highlight-link">
                         <div class="product-highlight">
                             <div class="product-image">
-                                <img src="images/cartes-equipement.webp" alt="Cartes d'équipement" loading="lazy">
+                                <img src="/images/cartes-equipement.webp" alt="Cartes d'équipement" loading="lazy">
                             </div>
                             <div class="product-info">
                                 <h4>🃏 Cartes d'Équipement</h4>
@@ -130,10 +110,10 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                         </div>
                     </a>
                     
-                    <a href="boutique.php#triptych" class="product-highlight-link">
+                    <a href="<?= htmlspecialchars(langUrl('/boutique.php#triptych'), ENT_QUOTES, 'UTF-8'); ?>" class="product-highlight-link">
                         <div class="product-highlight">
                             <div class="product-image">
-                                <img src="images/triptyque-fiche.webp" alt="Triptyques Mystères" loading="lazy">
+                                <img src="/images/triptyque-fiche.webp" alt="Triptyques Mystères" loading="lazy">
                             </div>
                             <div class="product-info">
                                 <h4>📋 Triptyques Mystères</h4>
@@ -150,7 +130,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                 </div>
                 
                 <div class="boutique-cta">
-                    <a href="boutique.php" class="cta-primary">Visiter la boutique</a>
+                    <a href="<?= htmlspecialchars(langUrl('/boutique.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Visiter la boutique</a>
                     <a href="#contact" class="cta-secondary">Demander un devis</a>
                 </div>
             </div>
@@ -203,15 +183,15 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <h2 class="section-title">Actualité – FLIM 2025</h2>
                 </header>
                 <article class="news-item">
-                    <img src="images/optimized-modern/webp/es-tu-game-demo.webp" alt="One‑shot niveau 20 avec pièces" loading="lazy">
+                    <img src="/images/optimized-modern/webp/es-tu-game-demo.webp" alt="One‑shot niveau 20 avec pièces" loading="lazy">
                     <h3>Des héros niveau 20, un raton trop tenace, et… nos pièces</h3>
                     <p>Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.</p>
                     <div class="text-center">
-                        <a href="actualites/es-tu-game.php" class="cta-primary">Lire l'article complet</a>
+                        <a href="<?= htmlspecialchars(langUrl('/actualites/es-tu-game.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Lire l'article complet</a>
                     </div>
                 </article>
                 <article class="testimonial-card">
-                    <img src="images/optimized-modern/webp/avisJoueurFlim2025.webp" alt="Avis joueurs sur pièces" loading="lazy">
+                    <img src="/images/optimized-modern/webp/avisJoueurFlim2025.webp" alt="Avis joueurs sur pièces" loading="lazy">
                     <h4>« Finis les combats contre nos feuilles de personnage ! »</h4>
                     <p>De nombreux joueurs présents l'affirment : les pièces physiques changent tout.</p>
                     <p><strong>Fini les combats contre les feuilles de perso</strong>, les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek &amp; Dragon, tout commence quand la pièce tombe sur la table.</p>
@@ -225,7 +205,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <h2 class="section-title">À Propos</h2>
                 </header>
                 <div class="about-content">
-                    <img src="images/optimized-modern/webp/brand-geekndragon-main.webp" alt="Équipe Geek&Dragon" class="about-photo" loading="lazy">
+                    <img src="/images/optimized-modern/webp/brand-geekndragon-main.webp" alt="Équipe Geek&Dragon" class="about-photo" loading="lazy">
                     <p>Geek&Dragon est né de la passion du jeu de rôle. Conçu au Québec, notre collectif crée des accessoires immersifs — pièces métalliques, cartes d'équipement et fiches triptyques — pour mettre l'aventure au cœur de la table.</p>
                 </div>
             </div>
@@ -237,7 +217,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                     <h2 class="section-title">Contact</h2>
                 </header>
                 <div class="contact-content">
-                    <img src="images/optimized-modern/webp/team-brujah.webp" alt="Brujah" class="contact-photo" loading="lazy">
+                    <img src="/images/optimized-modern/webp/team-brujah.webp" alt="Brujah" class="contact-photo" loading="lazy">
                     <p><a href="mailto:contact@geekndragon.com">contact@geekndragon.com</a></p>
                     <p><a href="tel:+14387642612">+1&nbsp;438&nbsp;764‑2612</a></p>
                 </div>
@@ -249,7 +229,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                 <div class="cta-content">
                     <h2>Prêt à vivre l'aventure ?</h2>
                     <p>Rejoignez les aventuriers qui ont déjà transformé leurs parties avec nos accessoires immersifs.</p>
-                    <a href="boutique.php" class="cta-primary large">Commencer mon Aventure</a>
+                    <a href="<?= htmlspecialchars(langUrl('/boutique.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary large">Commencer mon Aventure</a>
                 </div>
             </div>
         </section>
@@ -265,7 +245,7 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
                 <div class="footer-section">
                     <h4>Navigation</h4>
                     <ul>
-                        <li><a href="boutique.php">Boutique</a></li>
+                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php'), ENT_QUOTES, 'UTF-8'); ?>">Boutique</a></li>
                         <li><a href="#catalogue">Catalogue</a></li>
                         <li><a href="#actualites">Actualités</a></li>
                         <li><a href="#about">À Propos</a></li>
@@ -289,14 +269,15 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
     </footer>
 
     <!-- Scripts existants -->
-    <script src="js/script.js"></script>
-    <script src="js/hero-videos.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/hero-videos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
-    <script src="js/audio-player-engine.js"></script>
-    <script src="js/audio-player-scanner.js"></script>
-    <script src="js/audio-player-ui.js"></script>
-    <script src="js/audio-player.js"></script>
-    <script src="api/public-config.js.php"></script>
+    <script src="/js/audio-player-engine.js"></script>
+    <script src="/js/audio-player-scanner.js"></script>
+    <script src="/js/audio-player-ui.js"></script>
+    <script src="/js/audio-player.js"></script>
+    <script src="/api/public-config.js.php"></script>
     <!-- Map ESM bare imports used by modules (e.g., gsap) -->
     <script type="importmap">
     {
@@ -305,11 +286,11 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
       }
     }
     </script>
-    <script type="module" src="js/init-animations.js"></script>
+    <script type="module" src="/js/init-animations.js"></script>
     
     <!-- Intégration Snipcart avec thème D&D -->
-    <script src="js/snipcart-products.js"></script>
-    <script src="js/snipcart-integration.js"></script>
+    <script src="/js/snipcart-products.js"></script>
+    <script src="/js/snipcart-integration.js"></script>
     
     <!-- Container Snipcart (hidden) -->
     <div id="snipcart"
