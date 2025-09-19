@@ -1,14 +1,51 @@
 <?php
 // Variables attendues dans le scope : $product (array), $lang (fr|en), $translations (array)
 
-if (!isset($product['id'])) return;
-$id = (string)$product['id'];
+if (!isset($product['id'])) {
+    return;
+}
+$id = (string) $product['id'];
 
-$name        = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
-$desc        = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
-$img         = $product['img'] ?? ($product['images'][0] ?? '');
-$url         = $product['url'] ?? ('product.php?id=' . urlencode($id));
-$price       = number_format((float)$product['price'], 2, '.', '');
+$nameFr = (string) ($product['name'] ?? '');
+$nameEn = (string) ($product['name_en'] ?? $nameFr);
+$name = $lang === 'en' ? $nameEn : $nameFr;
+
+$descriptionFr = (string) ($product['description'] ?? '');
+$descriptionEn = (string) ($product['description_en'] ?? $descriptionFr);
+$description = $lang === 'en' ? $descriptionEn : $descriptionFr;
+
+/**
+ * Convertit une description Markdown en texte brut pour Snipcart ou les attributs alt.
+ */
+$toPlainText = static function (string $value): string {
+    if ($value === '') {
+        return '';
+    }
+
+    $text = str_replace(["\r\n", "\r"], "\n", $value);
+    $text = preg_replace('/^\s{0,3}#{1,6}\s*/mu', '', $text) ?? $text;
+    $text = preg_replace('/^\s{0,3}>\s?/mu', '', $text) ?? $text;
+    $text = preg_replace('/^\s{0,3}[-*+]\s+/mu', '', $text) ?? $text;
+    $text = preg_replace('/!\[(.*?)\]\((.*?)\)/u', '$1', $text) ?? $text;
+    $text = preg_replace('/\[(.*?)\]\((.*?)\)/u', '$1', $text) ?? $text;
+    $text = preg_replace('/(`{1,3})(.+?)\1/u', '$2', $text) ?? $text;
+    $text = preg_replace('/([*_~]{1,2})(.+?)\1/u', '$2', $text) ?? $text;
+
+    $text = strip_tags($text);
+    $text = preg_replace('/\s+/u', ' ', $text) ?? $text;
+
+    $text = trim($text);
+
+    return $text !== '' ? $text : trim(strip_tags($value));
+};
+
+$altFr = $toPlainText($descriptionFr);
+$altEn = $toPlainText($descriptionEn);
+$alt = $lang === 'en' ? $altEn : $altFr;
+
+$img = $product['img'] ?? ($product['images'][0] ?? '');
+$url = $product['url'] ?? ('product.php?id=' . urlencode($id));
+$price = number_format((float) ($product['price'] ?? 0), 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
 ?>
 
@@ -17,24 +54,24 @@ $multipliers = $product['multipliers'] ?? [];
             min-w-[21rem] sm:min-w-[22rem] md:min-w-[23rem]">
   <a href="<?= htmlspecialchars($url) ?>">
     <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
-         alt="<?= htmlspecialchars($desc) ?>"
-         data-alt-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-         data-alt-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
+         alt="<?= htmlspecialchars($alt) ?>"
+         data-alt-fr="<?= htmlspecialchars($altFr) ?>"
+         data-alt-en="<?= htmlspecialchars($altEn) ?>"
          class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
   </a>
 
   <a href="<?= htmlspecialchars($url) ?>" class="block">
     <h4 class="text-center text-2xl font-semibold mb-2"
-        data-name-fr="<?= htmlspecialchars($product['name']) ?>"
-        data-name-en="<?= htmlspecialchars($product['name_en'] ?? $product['name']) ?>">
+        data-name-fr="<?= htmlspecialchars($nameFr) ?>"
+        data-name-en="<?= htmlspecialchars($nameEn) ?>">
       <?= htmlspecialchars($name) ?>
     </h4>
   </a>
 
   <p class="text-center mb-4 text-gray-300 flex-grow"
-     data-desc-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-     data-desc-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>">
-    <?= htmlspecialchars($desc) ?>
+     data-desc-fr="<?= htmlspecialchars($descriptionFr) ?>"
+     data-desc-en="<?= htmlspecialchars($descriptionEn) ?>">
+    <?= htmlspecialchars($description) ?>
   </p>
 
 
@@ -59,11 +96,11 @@ $multipliers = $product['multipliers'] ?? [];
           <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
                 data-item-id="<?= htmlspecialchars($id) ?>"
                 data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
-                data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-                data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-                data-item-description="<?= htmlspecialchars($desc) ?>"
-                data-item-description-fr="<?= htmlspecialchars($product['description'] ?? $desc) ?>"
-                data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $desc) ?>"
+                data-item-name-fr="<?= htmlspecialchars(strip_tags($nameFr)) ?>"
+                data-item-name-en="<?= htmlspecialchars(strip_tags($nameEn)) ?>"
+                data-item-description="<?= htmlspecialchars($alt) ?>"
+                data-item-description-fr="<?= htmlspecialchars($altFr) ?>"
+                data-item-description-en="<?= htmlspecialchars($altEn) ?>"
                 data-item-price="<?= htmlspecialchars($price) ?>"
                 data-item-url="<?= htmlspecialchars($url) ?>"
                 data-item-quantity="1"
