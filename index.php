@@ -268,11 +268,6 @@ include __DIR__ . '/footer.php';
     <script src="/js/app.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/hero-videos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
-    <script src="/js/audio-player-engine.js"></script>
-    <script src="/js/audio-player-scanner.js"></script>
-    <script src="/js/audio-player-ui.js"></script>
-    <script src="/js/audio-player.js"></script>
     <script src="/api/public-config.js.php"></script>
     <!-- Map ESM bare imports used by modules (e.g., gsap) -->
     <script type="importmap">

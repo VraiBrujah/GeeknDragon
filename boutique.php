@@ -622,11 +622,6 @@ include __DIR__ . '/footer.php';
     <script src="/js/hero-videos.js"></script>
     <script src="/js/boutique.js"></script>
     <script src="/js/currency-converter.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
-    <script src="/js/audio-player-engine.js"></script>
-    <script src="/js/audio-player-scanner.js"></script>
-    <script src="/js/audio-player-ui.js"></script>
-    <script src="/js/audio-player.js"></script>
     <script src="/api/public-config.js.php"></script>
 
     <!-- Intégration Snipcart avec thème D&D -->
