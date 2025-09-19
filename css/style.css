@@ -738,7 +738,9 @@ p {
  * Conteneur principal de navigation.
  * Les espacements latéraux et le comportement responsive (flex-wrap/md:flex-nowrap)
  * sont gérés par les utilitaires Tailwind appliqués dans le markup du header, ce
- * qui évite tout conflit avec l'injection du lecteur audio.
+ * qui évite tout conflit avec l'injection du lecteur audio. Par défaut, on laisse
+ * donc Tailwind piloter le wrapping tout en appliquant une contrainte desktop via
+ * une media query dédiée.
  */
 .nav-container {
     display: flex;
@@ -748,6 +750,13 @@ p {
     margin: 0;
     max-width: none;
     position: relative;
+}
+
+@media (min-width: 768px) {
+    /* Assure une navigation alignée sans retour à la ligne sur desktop. */
+    .nav-container {
+        flex-wrap: nowrap;
+    }
 }
 
 .logo {
