@@ -102,7 +102,13 @@ button {
 /* Titre du site plus élégant */
 .site-title {
   font-weight: 600 !important;
-  letter-spacing: 0.1em !important;
+  letter-spacing: 0.05em !important;
+}
+
+@media (min-width: 640px) {
+  .site-title {
+    letter-spacing: 0.1em !important;
+  }
 }
 
 /* Hero title plus compact mais impactant */

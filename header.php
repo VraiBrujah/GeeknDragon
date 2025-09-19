@@ -276,7 +276,7 @@ if (!function_exists('gdDefaultHeaderActionsMobile')) {
 
     <div class="flex-1 px-3 sm:px-4 text-center min-w-0">
       <a href="<?= langUrl('/index.php'); ?>" class="group">
-        <span class="site-title inline-block text-lg sm:text-2xl md:text-3xl font-semibold leading-none text-white uppercase whitespace-nowrap overflow-hidden text-ellipsis group-hover:text-indigo-300 transition-colors duration-200">GEEK &amp; DRAGON</span>
+        <span class="site-title inline-block text-base sm:text-2xl md:text-3xl font-semibold leading-none text-white uppercase sm:whitespace-nowrap sm:overflow-hidden sm:text-ellipsis group-hover:text-indigo-300 transition-colors duration-200">GEEK &amp; DRAGON</span>
       </a>
     </div>
 
