@@ -117,7 +117,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
   </p>
 
           <p class="text-lg mt-4 leading-relaxed text-gray-200">
-            <strong data-i18n="testimonials.quote1.p2strong">Fini les combats contre les feuilles de perso</strong>, <span data-i18n="testimonials.quote1.p2rest">les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la pièce tombe sur la table.</span>
+            <strong data-i18n="testimonials.quote1.p2strong">Fini les combats contre les feuilles de perso</strong>, <span data-i18n="testimonials.quote1.p2rest">les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la première pièce tombe sur la table.</span>
           </p>
         </article>
     
