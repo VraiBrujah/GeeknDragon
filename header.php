@@ -302,7 +302,7 @@ if (!function_exists('gdDefaultHeaderActionsMobile')) {
         </button>
       </div>
 
-      <div class="flex items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
+      <div class="hidden md:flex items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
         <?= gdRenderHeaderActions($headerActions ?? null, 'gdDefaultHeaderActionsDesktop'); ?>
       </div>
     </div>
