@@ -587,37 +587,34 @@ HTML;
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Geek&Dragon</h3>
-                    <p>Votre spécialiste en accessoires immersifs pour jeux de rôle depuis 2024.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Boutique</h4>
-                    <ul>
-                        <li><a href="#coins">Pièces Métalliques</a></li>
-                        <li><a href="#cards">Cartes d'Équipement</a></li>
-                        <li><a href="#triptych">Triptyques Mystères</a></li>
-                        <li><a href="#">Guide d'Achat</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="mailto:support@geekndragon.com">Support Client</a></li>
-                        <li><a href="#">Livraison & Retours</a></li>
-                        <li><a href="#">Guide de Compatibilité</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Geek&Dragon. Tous droits réservés. | Boutique spécialisée en accessoires D&D au Canada</p>
-            </div>
-        </div>
-    </footer>
+<?php
+$footerSections = [
+    [
+        'title' => 'Geek&Dragon',
+        'description' => 'Votre spécialiste en accessoires immersifs pour jeux de rôle depuis 2024.',
+    ],
+    [
+        'title' => 'Boutique',
+        'links' => [
+            ['label' => 'Pièces Métalliques', 'href' => '#coins'],
+            ['label' => "Cartes d'Équipement", 'href' => '#cards'],
+            ['label' => 'Triptyques Mystères', 'href' => '#triptych'],
+            ['label' => "Guide d'Achat", 'href' => '#'],
+        ],
+    ],
+    [
+        'title' => 'Support',
+        'links' => [
+            ['label' => 'Support Client', 'href' => 'mailto:support@geekndragon.com'],
+            ['label' => 'Livraison & Retours', 'href' => langUrl('/retours.php')],
+            ['label' => 'Guide de Compatibilité', 'href' => '#'],
+            ['label' => 'FAQ', 'href' => '#'],
+        ],
+    ],
+];
+$footerBottomText = '© ' . date('Y') . ' Geek&Dragon. Tous droits réservés. | Boutique spécialisée en accessoires D&D au Canada';
+include __DIR__ . '/footer.php';
+?>
 
     <!-- Scripts existants -->
     <script src="/js/app.js"></script>
