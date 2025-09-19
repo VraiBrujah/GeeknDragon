@@ -25,14 +25,7 @@ if (!function_exists('gdRenderAudioPlayerScripts')) {
      */
     function gdRenderAudioPlayerScripts(): void
     {
-        echo <<<'HTML'
-    <!-- Lecteur audio partagé -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
-    <script src="/js/audio-player-engine.js"></script>
-    <script src="/js/audio-player-scanner.js"></script>
-    <script src="/js/audio-player-ui.js"></script>
-    <script src="/js/audio-player.js"></script>
-HTML;
+        // Audio player temporairement désactivé
     }
 }
 

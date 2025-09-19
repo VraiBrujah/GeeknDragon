@@ -596,14 +596,7 @@
     color: var(--secondary-color);
 }
 
-/* Active Navigation */
-.nav-link.active {
-    color: var(--secondary-color);
-}
-
-.nav-link.active::after {
-    width: 100%;
-}
+/* Ces styles ont été déplacés vers style.css pour cohérence globale */
 
 /* Responsive pour la boutique */
 @media (max-width: 768px) {

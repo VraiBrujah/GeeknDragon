@@ -86,18 +86,10 @@ HTML;
                                 <span class="price-note">Point d'entrée idéal</span>
                             </div>
                             <div class="product-actions">
-                                <button class="gd-add-to-cart btn-primary"
-                                        data-product-id="lot10"
-                                        data-product-name="L'Offrande du Voyageur"
-                                        data-product-price="60.00"
-                                        data-product-url="/product.php?id=lot10"
-                                        data-product-image="/images/optimized-modern/webp/Vagabon.webp"
-                                        data-product-description="Starter pack immersif avec 10 pièces métalliques authentiques"
-                                        data-quantity="1">
-                                    <span class="cart-icon">🎒</span>
-                                    <span>Ajouter à l'inventaire</span>
-                                </button>
-                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot10'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot10'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-primary">
+                                    <span class="cart-icon">👁️</span>
+                                    <span>Voir les détails</span>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -123,18 +115,10 @@ HTML;
                                 <span class="price-note">Solution complète</span>
                             </div>
                             <div class="product-actions">
-                                <button class="gd-add-to-cart btn-primary"
-                                        data-product-id="lot25"
-                                        data-product-name="La Monnaie des Cinq Royaumes"
-                                        data-product-price="145.00"
-                                        data-product-url="/product.php?id=lot25"
-                                        data-product-image="/images/optimized-modern/webp/Royaume.webp"
-                                        data-product-description="Collection complète de 25 pièces uniques sans aucun doublon"
-                                        data-quantity="1">
-                                    <span class="cart-icon">🎒</span>
-                                    <span>Ajouter à l'inventaire</span>
-                                </button>
-                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot25'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot25'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-primary">
+                                    <span class="cart-icon">👁️</span>
+                                    <span>Voir les détails</span>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -160,18 +144,10 @@ HTML;
                                 <span class="price-note">Groupes nombreux</span>
                             </div>
                             <div class="product-actions">
-                                <button class="gd-add-to-cart btn-primary"
-                                        data-product-id="lot50-essence"
-                                        data-product-name="L'Essence du Marchand"
-                                        data-product-price="275.00"
-                                        data-product-url="/product.php?id=lot50-essence"
-                                        data-product-image="/images/optimized-modern/webp/Essence.webp"
-                                        data-product-description="Double variété pour richesse : 50 pièces (2 exemplaires de chacun des 25 modèles)"
-                                        data-quantity="1">
-                                    <span class="cart-icon">🎒</span>
-                                    <span>Ajouter à l'inventaire</span>
-                                </button>
-                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot50-essence'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot50-essence'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-primary">
+                                    <span class="cart-icon">👁️</span>
+                                    <span>Voir les détails</span>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -197,18 +173,10 @@ HTML;
                                 <span class="price-note">Trésor somptueux</span>
                             </div>
                             <div class="product-actions">
-                                <button class="gd-add-to-cart btn-primary"
-                                        data-product-id="lot50-tresorerie"
-                                        data-product-name="La Trésorerie du Seigneur"
-                                        data-product-price="275.00"
-                                        data-product-url="/product.php?id=lot50-tresorerie"
-                                        data-product-image="/images/optimized-modern/webp/Seignieur.webp"
-                                        data-product-description="Opulence uniforme : 50 pièces (10 de chaque métal) avec un multiplicateur unique"
-                                        data-quantity="1">
-                                    <span class="cart-icon">🎒</span>
-                                    <span>Ajouter à l'inventaire</span>
-                                </button>
-                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot50-tresorerie'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=lot50-tresorerie'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-primary">
+                                    <span class="cart-icon">👁️</span>
+                                    <span>Voir les détails</span>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -228,115 +196,7 @@ HTML;
                     </div>
                 </div>
 
-                <!-- Convertisseur de monnaie -->
-                <div id="currency-converter">
-                    <h4 data-i18n="shop.converter.title">Convertisseur de monnaie</h4>
-                    <div class="converter-inputs">
-                        <p data-i18n="shop.converter.sourcesLabel">Monnaies sources</p>
-                        <table id="currency-sources">
-                            <thead>
-                                <tr>
-                                    <th data-i18n="shop.converter.copper">pièce de cuivre</th>
-                                    <th data-i18n="shop.converter.silver">pièce d’argent</th>
-                                    <th data-i18n="shop.converter.electrum">pièce d’électrum</th>
-                                    <th data-i18n="shop.converter.gold">pièce d’or</th>
-                                    <th data-i18n="shop.converter.platinum">pièce de platine</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper">
-                                        <div class="advanced-group hidden">
-                                            <label><span data-i18n="shop.converter.multiplier10000">x10 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="10000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1000">x1 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="1000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier100">x100</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="100"></label>
-                                            <label><span data-i18n="shop.converter.multiplier10">x10</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="10"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1">x1</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" data-multiplier="1"></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver">
-                                        <div class="advanced-group hidden">
-                                            <label><span data-i18n="shop.converter.multiplier10000">x10 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="10000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1000">x1 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="1000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier100">x100</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="100"></label>
-                                            <label><span data-i18n="shop.converter.multiplier10">x10</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="10"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1">x1</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" data-multiplier="1"></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum">
-                                        <div class="advanced-group hidden">
-                                            <label><span data-i18n="shop.converter.multiplier10000">x10 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="10000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1000">x1 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="1000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier100">x100</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="100"></label>
-                                            <label><span data-i18n="shop.converter.multiplier10">x10</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="10"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1">x1</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" data-multiplier="1"></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold">
-                                        <div class="advanced-group hidden">
-                                            <label><span data-i18n="shop.converter.multiplier10000">x10 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="10000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1000">x1 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="1000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier100">x100</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="100"></label>
-                                            <label><span data-i18n="shop.converter.multiplier10">x10</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="10"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1">x1</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" data-multiplier="1"></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum">
-                                        <div class="advanced-group hidden">
-                                            <label><span data-i18n="shop.converter.multiplier10000">x10 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="10000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1000">x1 000</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="1000"></label>
-                                            <label><span data-i18n="shop.converter.multiplier100">x100</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="100"></label>
-                                            <label><span data-i18n="shop.converter.multiplier10">x10</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="10"></label>
-                                            <label><span data-i18n="shop.converter.multiplier1">x1</span><input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" data-multiplier="1"></label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <button id="currency-advanced-toggle" data-i18n="shop.converter.advancedToggle">Détails</button>
-                    </div>
-                    <div id="currency-equivalences" class="hidden">
-                        <h5 data-i18n="shop.converter.equivTitle">Équivalences totales par métal</h5>
-                        <table id="currency-equivalences-list">
-                            <thead>
-                                <tr>
-                                    <th data-i18n="shop.converter.equivMetal">Métal</th>
-                                    <th data-i18n="shop.converter.equivEquivalent">Équivalence</th>
-                                    <th data-i18n="shop.converter.remainder">Reste</th>
-                                    <th data-i18n="shop.converter.equivTotalPieces">Nombre total de pièces</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                            <tfoot>
-                                <tr class="totals-header">
-                                    <th></th>
-                                    <th data-i18n="shop.converter.totalBreakdown">Total :</th>
-                                    <th data-i18n="shop.converter.totalGold">Total en or</th>
-                                    <th data-i18n="shop.converter.totalPieces">Nombre total de pièces :</th>
-                                </tr>
-                                <tr class="totals-values">
-                                    <td></td>
-                                    <td id="currency-total-breakdown"></td>
-                                    <td id="currency-total-gold"></td>
-                                    <td id="currency-total-pieces"></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    
-                    <!-- Section Recommandations GeeknDragon -->
-                    <div id="gd-recommendations" class="hidden">
-                        <h3>🎒 Lots Geek&Dragon Recommandés</h3>
-                        <div class="gd-recommendations-content">
-                            <!-- Contenu généré dynamiquement par JavaScript -->
-                        </div>
-                    </div>
-                </div>
+                <!-- Convertisseur de monnaie temporairement désactivé -->
             </div>
         </section>
 
@@ -373,18 +233,10 @@ HTML;
                                 <span class="price-note">Parfait pour débuter</span>
                             </div>
                             <div class="product-actions">
-                                <button class="gd-add-to-cart btn-primary"
-                                        data-product-id="arsenal-aventurier"
-                                        data-product-name="Arsenal de l'Aventurier"
-                                        data-product-price="49.99"
-                                        data-product-url="/product.php?id=pack-182-arsenal-aventurier"
-                                        data-product-image="/images/optimized-modern/webp/arme-recto.webp"
-                                        data-product-description="Équipement de base complet : armes, armures et équipement de terrain"
-                                        data-quantity="1">
-                                    <span class="cart-icon">🎒</span>
-                                    <span>Ajouter à l'inventaire</span>
-                                </button>
-                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-arsenal-aventurier'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-arsenal-aventurier'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-primary">
+                                    <span class="cart-icon">👁️</span>
+                                    <span>Voir les détails</span>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -411,18 +263,10 @@ HTML;
                                 <span class="price-note">Sortir du médiéval</span>
                             </div>
                             <div class="product-actions">
-                                <button class="gd-add-to-cart btn-primary"
-                                        data-product-id="butins-ingenieries"
-                                        data-product-name="Butins & Ingénieries"
-                                        data-product-price="36.99"
-                                        data-product-url="/product.php?id=pack-182-butins-ingenieries"
-                                        data-product-image="/images/optimized-modern/webp/bomb-recto.webp"
-                                        data-product-description="Contenu avancé et moderne : gemmes, explosifs et outils spécialisés"
-                                        data-quantity="1">
-                                    <span class="cart-icon">🎒</span>
-                                    <span>Ajouter à l'inventaire</span>
-                                </button>
-                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-butins-ingenieries'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-butins-ingenieries'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-primary">
+                                    <span class="cart-icon">👁️</span>
+                                    <span>Voir les détails</span>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -449,18 +293,10 @@ HTML;
                                 <span class="price-note">Campagnes d'exploration</span>
                             </div>
                             <div class="product-actions">
-                                <button class="gd-add-to-cart btn-primary"
-                                        data-product-id="routes-services"
-                                        data-product-name="Routes & Services"
-                                        data-product-price="34.99"
-                                        data-product-url="/product.php?id=pack-182-routes-services"
-                                        data-product-image="/images/optimized-modern/webp/backpack-recto.webp"
-                                        data-product-description="Monde vivant et voyages : paquetages spécialisés et services urbains"
-                                        data-quantity="1">
-                                    <span class="cart-icon">🎒</span>
-                                    <span>Ajouter à l'inventaire</span>
-                                </button>
-                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-routes-services'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=pack-182-routes-services'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-primary">
+                                    <span class="cart-icon">👁️</span>
+                                    <span>Voir les détails</span>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -516,18 +352,10 @@ HTML;
                                 <span class="price-note">Héros surprise complet</span>
                             </div>
                             <div class="product-actions">
-                                <button class="gd-add-to-cart btn-primary"
-                                        data-product-id="triptyques-mysteres"
-                                        data-product-name="Triptyques Mystères - Origines Complètes"
-                                        data-product-price="59.99"
-                                        data-product-url="/product.php?id=triptyque-aleatoire"
-                                        data-product-image="/images/triptyque-fiche.webp"
-                                        data-product-description="Héros aléatoire clé en main : 3 triptyques tirés au sort + équipement"
-                                        data-quantity="1">
-                                    <span class="cart-icon">🎒</span>
+                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=triptyque-aleatoire'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-primary">
+                                    <span class="cart-icon">👁️</span>
                                     <span>Découvrir le Mystère</span>
-                                </button>
-                                <a href="<?= htmlspecialchars(langUrl('/product.php?id=triptyque-aleatoire'), ENT_QUOTES, 'UTF-8'); ?>" class="btn-secondary-small">Détails</a>
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -612,21 +440,9 @@ include __DIR__ . '/footer.php';
     <script src="/js/script.js"></script>
     <script src="/js/hero-videos.js"></script>
     <script src="/js/boutique.js"></script>
-    <script src="/js/currency-converter.js"></script>
+    <script src="/js/accessibility-fixes.js"></script>
     <script src="/api/public-config.js.php"></script>
 
-    <!-- Intégration Snipcart avec thème D&D -->
-    <script src="/js/snipcart-products.js"></script>
-    <script src="/js/snipcart-integration.js"></script>
-
-    <!-- Container Snipcart (hidden) -->
-    <div id="snipcart"
-         data-api-key="<?= htmlspecialchars($snipcartApiKey, ENT_QUOTES, 'UTF-8') ?>"
-         data-config-modal-style="side"
-         data-config-add-product-behavior="none"
-         data-templates-url="/templates/snipcart-templates.php"
-         style="display: none;">
-    </div>
 </body>
 </html>
 

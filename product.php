@@ -496,8 +496,5 @@ include __DIR__ . '/footer.php';
     <script src="/js/product.js"></script>
     <script src="/js/reviews.js"></script>
     <script src="/js/wishlist.js"></script>
-    <script src="/js/snipcart-products.js"></script>
-    <script src="/js/snipcart-integration.js"></script>
-    <div id="snipcart" data-api-key="<?= htmlspecialchars($snipcartApiKey, ENT_QUOTES, 'UTF-8') ?>" data-config-modal-style="side" data-config-add-product-behavior="none" style="display:none;"></div>
 </body>
 </html>

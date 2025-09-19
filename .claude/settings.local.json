@@ -34,7 +34,9 @@
       "Bash(npm audit:*)",
       "WebFetch(domain:geekndragon.com)",
       "Read(H:\\GeeknDragon\\oldSiteWeb\\data/**)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(start http://localhost:8000/index.php)",
+      "Bash(start http://localhost:8000/contact.php)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

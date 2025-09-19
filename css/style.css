@@ -842,6 +842,17 @@ p {
     width: 100%;
 }
 
+/* États actifs des liens de navigation */
+.nav-link.active,
+.nav-link.is-active {
+    color: var(--secondary-color);
+}
+
+.nav-link.active::after,
+.nav-link.is-active::after {
+    width: 100%;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -1098,6 +1109,22 @@ p {
 .header-logo.rounded,
 header img.rounded {
     border: none !important;
+}
+
+/* Garantit l'uniformité du header sur toutes les pages */
+header {
+    height: var(--header-height);
+    min-height: var(--header-height);
+}
+
+.site-title {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.nav-container {
+    min-height: var(--header-height);
 }
 
 /* Features Section - Section plus large et immersive D&D */
