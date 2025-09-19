@@ -52,6 +52,7 @@ $extraHead = $extraHead ?? '';
   <link rel="icon" type="image/png" href="/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Uncial+Antiqua&family=MedievalSharp&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= gdAssetVersion('css/vendor.bundle.min.css'); ?>" />
   <link rel="stylesheet" href="/css/styles.css?v=<?= gdAssetVersion('css/styles.css'); ?>">
   <link rel="stylesheet" href="/css/boutique-style-global.css?v=<?= gdAssetVersion('css/boutique-style-global.css'); ?>">

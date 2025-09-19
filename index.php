@@ -17,9 +17,6 @@ $metaDescription = __('meta.home.desc', "Découvrez notre collection exclusive d
 $active = '';
 $styleVersion = gdLocalAssetVersion('css/style.css');
 $extraHead = <<<HTML
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Uncial+Antiqua&family=MedievalSharp&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
 HTML;
 ?>

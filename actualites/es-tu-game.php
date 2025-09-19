@@ -21,7 +21,7 @@ $extraHead = $extraHead ?? '';
 <main id="main" class="pt-[var(--header-height)]">
   <section id="actus" class="py-16 bg-gray-900/80">
     <div class="max-w-5xl mx-auto px-6">
-      <h2 class="text-4xl font-bold text-center mb-12" data-i18n="news.flim2025.heading">
+      <h2 class="text-4xl font-bold text-center mb-12 text-white" data-i18n="news.flim2025.heading">
         <?= __('news.flim2025.heading', 'Actualité – FLIM 2025'); ?>
       </h2>
 
@@ -100,7 +100,7 @@ $extraHead = $extraHead ?? '';
           <div class="relative group">
             <video
               id="video1"
-              src="/videos/video-lemairedoneunepiecedargentflim.mp4"
+              src="/videos/leMaireDoneUnePieceDargentFLIM.mp4"
               class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
               playsinline
               preload="metadata"
@@ -121,7 +121,7 @@ $extraHead = $extraHead ?? '';
           <div class="relative group">
             <video
               id="video2"
-              src="/videos/video-pileoufaceled2duflim2025.mp4"
+              src="/videos/pileoufaceled2duFLIM2025.mp4"
               class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
               playsinline
               preload="metadata"
@@ -142,7 +142,7 @@ $extraHead = $extraHead ?? '';
           <div class="relative group">
             <video
               id="video3"
-              src="/videos/video-finestugameflim2025.mp4"
+              src="/videos/finestugameFLIM2025.mp4"
               class="rounded shadow-lg w-full aspect-video transition-transform duration-300"
               playsinline
               preload="metadata"

@@ -62,13 +62,6 @@ if (!isset($navItems)) {
             'label' => 'Devis',
             'i18n' => 'nav.contact',
         ],
-        '/compte.php' => [
-            'slug' => 'compte',
-            'label' => 'Compte',
-            'i18n' => 'nav.account',
-            'icon' => '👤',
-            'icon_only' => true,
-        ],
     ];
 }
 

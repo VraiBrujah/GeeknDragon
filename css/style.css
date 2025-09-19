@@ -384,10 +384,17 @@
     --shadow-text: 2px 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.7);
     --border-radius: 12px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --header-height: 80px;
+    --header-height: 64px; /* Réduit pour mobile */
     --font-heading: 'Cinzel', serif;
     --font-body: 'Cinzel', serif;
     --font-decorative: 'Uncial Antiqua', serif;
+}
+
+/* Header responsive: taille desktop */
+@media (min-width: 768px) {
+    :root {
+        --header-height: 80px; /* Taille normale pour desktop */
+    }
 }
 
 /* Reset et base */
