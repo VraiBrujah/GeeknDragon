@@ -114,12 +114,12 @@ if (!function_exists('gdRenderNav')) {
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
-  <div class="max-w-7xl mx-auto relative flex flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
+  <div class="max-w-7xl mx-auto relative flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
     <a href="<?= langUrl('/index.php'); ?>" class="relative z-10 flex items-center group transition-colors duration-200 flex-shrink-0">
       <img src="/images/optimized-modern/webp/brand-geekndragon-white.webp" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105 rounded" width="80" height="80">
     </a>
 
-    <div class="flex-1 text-center">
+    <div class="flex-1 px-3 sm:px-4 text-center">
       <a href="<?= langUrl('/index.php'); ?>" class="group">
         <span class="site-title flex flex-col items-center text-2xl md:text-3xl font-semibold leading-none text-white group-hover:text-indigo-300 transition-colors duration-200">
           <span>GEEK</span>
