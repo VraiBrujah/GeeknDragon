@@ -286,8 +286,9 @@ class CharacterCreation {
         const emailInput = document.getElementById('email');
         if (emailInput) {
             emailInput.addEventListener('input', (e) => {
-                this.characterData.email = e.target.value;
-                this.validateEmail(e.target.value);
+                const emailValue = e.target.value.trim();
+                this.characterData.email = emailValue;
+                this.validateEmail(emailValue);
             });
         }
 
@@ -304,8 +305,9 @@ class CharacterCreation {
         const nameInput = document.getElementById('nom_aventurier');
         if (nameInput) {
             nameInput.addEventListener('input', (e) => {
-                this.characterData.nom_aventurier = e.target.value;
-                this.validateName(e.target.value);
+                const nameValue = e.target.value.trim();
+                this.characterData.nom_aventurier = nameValue;
+                this.validateName(nameValue);
             });
         }
 
@@ -782,7 +784,12 @@ class CharacterCreation {
             submitBtn.disabled = true;
 
             // Préparation des données pour l'envoi
-            const formData = { ...this.characterData };
+            const formData = {
+                ...this.characterData,
+                email: this.characterData.email.trim(),
+                nom_aventurier: this.characterData.nom_aventurier.trim(),
+                password: this.characterData.password
+            };
             
             // Appel API d'inscription
             const response = await fetch('api/register.php', {

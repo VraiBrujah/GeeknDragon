@@ -494,10 +494,19 @@
                         <form id="login-form" style="display: flex; flex-direction: column; gap: 1rem;">
                             <div>
                                 <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Email de l'aventurier</label>
-                                <input type="email" id="login-email" required 
+                                <input type="email" id="login-email" required autocomplete="email"
                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--darker-bg); color: var(--light-text);">
                             </div>
-                            
+
+                            <div>
+                                <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Mot de passe</label>
+                                <input type="password" id="login-password" autocomplete="current-password"
+                                       style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--darker-bg); color: var(--light-text);">
+                                <small style="display: block; margin-top: 0.5rem; color: var(--medium-text);">
+                                    Optionnel tant que l'authentification par mot de passe n'est pas activée.
+                                </small>
+                            </div>
+
                             <button type="submit" style="
                                 background: var(--secondary-color);
                                 color: var(--dark-bg);
@@ -534,13 +543,22 @@
                         <form id="register-form" style="display: flex; flex-direction: column; gap: 1rem;">
                             <div>
                                 <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Email</label>
-                                <input type="email" id="register-email" required 
+                                <input type="email" id="register-email" required autocomplete="email"
                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--darker-bg); color: var(--light-text);">
                             </div>
-                            
+
+                            <div>
+                                <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Mot de passe</label>
+                                <input type="password" id="register-password" required minlength="8" autocomplete="new-password"
+                                       style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--darker-bg); color: var(--light-text);">
+                                <small style="display: block; margin-top: 0.5rem; color: var(--medium-text);">
+                                    8 caractères minimum pour protéger votre compte.
+                                </small>
+                            </div>
+
                             <div>
                                 <label style="color: var(--light-text); margin-bottom: 0.5rem; display: block;">Nom d'aventurier</label>
-                                <input type="text" id="register-name" required 
+                                <input type="text" id="register-name" required
                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--darker-bg); color: var(--light-text);">
                             </div>
                             
@@ -634,7 +652,9 @@
             async handleLogin(event) {
                 event.preventDefault();
                 
-                const email = document.getElementById('login-email').value;
+                const email = document.getElementById('login-email').value.trim();
+                const passwordField = document.getElementById('login-password');
+                const password = passwordField ? passwordField.value : '';
                 const messageDiv = document.getElementById('login-message');
                 
                 try {
@@ -643,7 +663,7 @@
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ email })
+                        body: JSON.stringify(password ? { email, password } : { email })
                     });
                     
                     const result = await response.json();
@@ -666,8 +686,9 @@
                 event.preventDefault();
                 
                 const formData = {
-                    email: document.getElementById('register-email').value,
-                    nom_aventurier: document.getElementById('register-name').value,
+                    email: document.getElementById('register-email').value.trim(),
+                    password: document.getElementById('register-password').value,
+                    nom_aventurier: document.getElementById('register-name').value.trim(),
                     espece: document.getElementById('register-espece').value,
                     classe: document.getElementById('register-classe').value,
                     historique: document.getElementById('register-historique').value

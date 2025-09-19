@@ -50,9 +50,18 @@ class AccountController extends BaseController
                 return;
             }
 
-            $errors = $this->validate($input, [
+            $passwordAuthEnabled = $this->isPasswordAuthEnabled();
+            $passwordProvided = isset($input['password']) && $input['password'] !== '';
+
+            $rules = [
                 'email' => 'required|email'
-            ]);
+            ];
+
+            if ($passwordAuthEnabled) {
+                $rules['password'] = 'required|min:8';
+            }
+
+            $errors = $this->validate($input, $rules);
 
             if (!empty($errors)) {
                 $this->json(['success' => false, 'errors' => $errors], 400);
@@ -238,26 +247,6 @@ class AccountController extends BaseController
     }
     
     /**
-     * Récupère l'ID utilisateur local par email
-     */
-    private function getUserIdByEmail(string $email): ?int
-    {
-        if (empty($email)) return null;
-        
-        try {
-            $pdo = $this->getDatabase();
-            $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-            $stmt->execute([$email]);
-            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-            
-            return $user ? (int) $user['id'] : null;
-        } catch (\Exception $e) {
-            error_log("Erreur getUserIdByEmail: " . $e->getMessage());
-            return null;
-        }
-    }
-    
-    /**
      * GET /api/account/session-check - Vérification de session unifiée
      */
     public function sessionCheck(): void
@@ -334,6 +323,7 @@ class AccountController extends BaseController
             
             $errors = $this->validate($input, [
                 'email' => 'required|email',
+                'password' => 'required|min:8',
                 'nom_aventurier' => 'required|min:2|max:50',
                 'espece' => 'required',
                 'classe' => 'required',
@@ -355,17 +345,21 @@ class AccountController extends BaseController
                 return;
             }
             
+            // Hasher le mot de passe avant insertion
+            $passwordHash = password_hash($input['password'], PASSWORD_DEFAULT);
+
             // Insérer le nouvel utilisateur
-            $stmt = $pdo->prepare("
+            $stmt = $pdo->prepare(" 
                 INSERT INTO users (
-                    email, nom_aventurier, espece, classe, historique,
+                    email, password_hash, nom_aventurier, espece, classe, historique,
                     style_jeu, experience_jeu, campagnes_preferees,
                     force, dexterite, constitution, intelligence, sagesse, charisme
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
-            
+
             $stmt->execute([
                 $input['email'],
+                $passwordHash,
                 $input['nom_aventurier'],
                 $input['espece'],
                 $input['classe'],
@@ -390,7 +384,11 @@ class AccountController extends BaseController
             $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
             $stmt->execute([$userId]);
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-            
+
+            if (is_array($user)) {
+                unset($user['password_hash']);
+            }
+
             $this->json([
                 'success' => true,
                 'message' => 'Aventurier créé avec succès',
@@ -403,7 +401,7 @@ class AccountController extends BaseController
     }
     
     /**
-     * POST /api/account/login-local - Connexion utilisateur D&D par email seulement
+     * POST /api/account/login-local - Connexion utilisateur D&D (email + mot de passe optionnel)
      */
     public function loginLocal(): void
     {
@@ -418,10 +416,19 @@ class AccountController extends BaseController
                 $this->json(['success' => false, 'message' => 'Données invalides'], 400);
                 return;
             }
-            
-            $errors = $this->validate($input, [
+
+            $passwordAuthEnabled = $this->isPasswordAuthEnabled();
+            $passwordProvided = isset($input['password']) && $input['password'] !== '';
+
+            $rules = [
                 'email' => 'required|email'
-            ]);
+            ];
+
+            if ($passwordAuthEnabled) {
+                $rules['password'] = 'required|min:8';
+            }
+
+            $errors = $this->validate($input, $rules);
             
             if (!empty($errors)) {
                 $this->json(['success' => false, 'errors' => $errors], 400);
@@ -440,18 +447,40 @@ class AccountController extends BaseController
                 $this->json(['success' => false, 'message' => 'Aventurier introuvable'], 404);
                 return;
             }
-            
+
+            if ($passwordAuthEnabled || $passwordProvided) {
+                if (!$passwordProvided) {
+                    $this->json([
+                        'success' => false,
+                        'message' => 'Mot de passe requis pour cette connexion'
+                    ], 400);
+                    return;
+                }
+
+                $hash = $user['password_hash'] ?? '';
+                if ($hash === '' || !password_verify($input['password'], $hash)) {
+                    $this->json([
+                        'success' => false,
+                        'message' => 'Mot de passe invalide'
+                    ], 401);
+                    return;
+                }
+            }
+
             // Créer une session
             $this->createUserSession((int)$user['id']);
-            
+
             // Mettre à jour la dernière connexion
             $stmt = $pdo->prepare("UPDATE users SET derniere_connexion = datetime('now') WHERE id = ?");
             $stmt->execute([$user['id']]);
-            
+
+            $sanitizedUser = $user;
+            unset($sanitizedUser['password_hash']);
+
             $this->json([
                 'success' => true,
                 'message' => 'Connexion réussie',
-                'user' => $user
+                'user' => $sanitizedUser
             ]);
             
         } catch (\Exception $e) {
@@ -601,7 +630,7 @@ class AccountController extends BaseController
     private function createUserSession(int $userId): void
     {
         session_regenerate_id(true);
-        
+
         $_SESSION['user_id'] = $userId;
         $_SESSION['session_token'] = bin2hex(random_bytes(32));
         
@@ -620,7 +649,15 @@ class AccountController extends BaseController
             $_SERVER['HTTP_USER_AGENT'] ?? ''
         ]);
     }
-    
+
+    /**
+     * Indique si l'authentification locale par mot de passe est activée.
+     */
+    private function isPasswordAuthEnabled(): bool
+    {
+        return (bool)($this->config['features']['local_password_auth'] ?? false);
+    }
+
     /**
      * Génère des recommandations basées sur le profil D&D
      */
