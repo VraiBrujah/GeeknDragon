@@ -248,7 +248,6 @@
       this.enhanceButtons();
       this.addHoverEffects();
       this.setupQuantityControls();
-      this.addSoundEffects();
       this.setupLoadingStates();
     }
 
@@ -411,38 +410,6 @@
       }
     }
 
-    addSoundEffects() {
-      // Créer des sons synthétiques simples
-      const audioCtx = window.AudioContext ? new AudioContext() : null;
-
-      const playSound = (frequency, duration = 100) => {
-        if (!audioCtx) return;
-
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-
-        oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration / 1000);
-
-        oscillator.start();
-        oscillator.stop(audioCtx.currentTime + duration / 1000);
-      };
-
-      // Sons pour les interactions
-      document.addEventListener('click', (e) => {
-        if (e.target.closest('.quantity-btn.plus')) {
-          playSound(800, 150);
-        } else if (e.target.closest('.quantity-btn.minus')) {
-          playSound(400, 150);
-        } else if (e.target.closest('.add-to-cart-btn')) {
-          playSound(600, 200);
-        }
-      });
-    }
 
     setupLoadingStates() {
       // États de chargement pour les boutons d'achat

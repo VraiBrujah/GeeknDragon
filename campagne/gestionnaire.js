@@ -525,21 +525,6 @@
                 }
             },
 
-            // MUSIC SYSTEM
-            music: {
-                currentTrack: null,
-                currentContext: "campagne",
-                volume: 0.15,
-                musicPaths: {
-                    "campagne": ["musique/01 - L'Aurore Céleste.mp3", "musique/08 - Héros de Verdure.mp3"],
-                    "campagne/acte1": ["musique/L'Écho des Donjons.mp3"],
-                    "campagne/acte1/hall_principal": ["musique/boutique/L'Épopée du Donjon.mp3"],
-                    "campagne/acte2": ["musique/guerre/Eywa's Whisper.mp3"],
-                    "campagne/acte2/vortex_bleu": ["musique/guerre/Eywa's Whisper.mp3"],
-                    "campagne/acte2/prisons_vertes": ["musique/guerre/Eywa's Whisper (1).mp3"],
-                    "campagne/acte3/dragon_vert": ["musique/Agdon.mp3"]
-                }
-            }
         };
 
         // MAP STATE
@@ -550,9 +535,6 @@
             addPinMode: false
         };
 
-        // Current music player
-        let currentSound = null;
-        let musicEnabled = true;
 
         // ========================================
         // INITIALIZATION
@@ -563,7 +545,6 @@
             initializeCampaign();
             generateNavigation();
             showContent(campaignData.currentNode);
-            initializeMusic();
         });
 
         function loadCampaignState() {
@@ -701,8 +682,6 @@
             // Show content
             showContent(nodeId);
             
-            // Update music context
-            updateMusicContext();
             
             // Save state
             saveData();
@@ -1747,90 +1726,6 @@
             saveData();
         }
 
-        // ========================================
-        // MUSIC SYSTEM
-        // ========================================
-        
-        function initializeMusic() {
-            updateMusicContext();
-        }
-
-        function updateMusicContext() {
-            const contextPath = campaignData.currentPath.join('/');
-            let musicPath = null;
-            
-            // Find best matching music path
-            for (let i = campaignData.currentPath.length; i > 0; i--) {
-                const testPath = campaignData.currentPath.slice(0, i).join('/');
-                if (campaignData.music.musicPaths[testPath]) {
-                    musicPath = testPath;
-                    break;
-                }
-            }
-            
-            if (musicPath && musicPath !== campaignData.music.currentContext) {
-                campaignData.music.currentContext = musicPath;
-                playContextualMusic();
-            }
-        }
-
-        function playContextualMusic() {
-            const musicFiles = campaignData.music.musicPaths[campaignData.music.currentContext];
-            if (!musicFiles || musicFiles.length === 0) return;
-            
-            // Stop current music
-            if (currentSound) {
-                currentSound.stop();
-                currentSound.unload();
-            }
-            
-            // Play random track from context
-            const randomTrack = musicFiles[Math.floor(Math.random() * musicFiles.length)];
-            
-            currentSound = new Howl({
-                src: [randomTrack],
-                html5: true,
-                loop: false,
-                volume: campaignData.music.volume,
-                onend: () => {
-                    // Auto-play next track after a short delay
-                    setTimeout(() => {
-                        if (musicEnabled) playContextualMusic();
-                    }, 2000);
-                }
-            });
-            
-            if (musicEnabled) {
-                currentSound.play();
-                campaignData.music.currentTrack = randomTrack;
-                console.log(`🎵 Now playing: ${randomTrack} (Context: ${campaignData.music.currentContext})`);
-            }
-        }
-
-        function toggleMusic() {
-            musicEnabled = !musicEnabled;
-            const button = document.getElementById('musicToggle');
-            
-            if (musicEnabled) {
-                button.innerHTML = '<i class="fas fa-pause"></i> Pause';
-                if (!currentSound || !currentSound.playing()) {
-                    playContextualMusic();
-                }
-            } else {
-                button.innerHTML = '<i class="fas fa-play"></i> Lecture';
-                if (currentSound) {
-                    currentSound.pause();
-                }
-            }
-        }
-
-        function setMusicVolume(volume) {
-            campaignData.music.volume = volume / 100;
-            if (currentSound) {
-                currentSound.volume(campaignData.music.volume);
-            }
-            saveData();
-        }
 
         // ========================================
         // MARKDOWN EDITOR SYSTEM
@@ -2878,7 +2773,6 @@
                         // Reinitialize everything
                         generateNavigation();
                         showContent(campaignData.currentNode);
-                        updateMusicContext();
                         
                         alert('✅ Données chargées avec succès');
                     } catch (err) {

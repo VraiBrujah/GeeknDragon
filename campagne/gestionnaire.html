@@ -839,20 +839,6 @@
                 </ul>
             </div>
 
-            <!-- Section Musique -->
-            <div class="nav-section">
-                <h3 class="nav-section-title">
-                    <i class="fas fa-music"></i> Ambiance
-                </h3>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" onclick="showPage('music', this)">
-                            <i class="nav-icon fas fa-play"></i>
-                            <span class="nav-text">Musique</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </nav>
 
         <!-- MAIN CONTENT -->
@@ -1226,12 +1212,6 @@
                     subtitle: 'Combats et défis préparés',
                     content: getEncountersContent()
                 },
-                'music': {
-                    title: 'Musique d\'Ambiance',
-                    icon: 'fas fa-music',
-                    subtitle: 'Créez l\'atmosphère parfaite',
-                    content: getMusicContent()
-                }
             };
 
             const config = pageConfigs[pageId] || {
@@ -1408,22 +1388,6 @@
             `;
         }
 
-        function getMusicContent() {
-            return `
-                <div class="empty-state">
-                    <div class="empty-state-icon">
-                        <i class="fas fa-music"></i>
-                    </div>
-                    <h3 class="empty-state-title">Aucune playlist configurée</h3>
-                    <p class="empty-state-description">
-                        Ajoutez de la musique d'ambiance pour immerger vos joueurs.
-                    </p>
-                    <button class="btn btn-success" onclick="setupMusic()">
-                        <i class="fas fa-plus"></i> Configurer la musique
-                    </button>
-                </div>
-            `;
-        }
 
         // ========================================
         // FONCTIONS UTILITAIRES POUR LES CARTES
@@ -1827,7 +1791,6 @@
         function createPuzzle() { showAddModal('puzzles'); }
         function createNPC() { showAddModal('npcs'); }
         function createEncounter() { console.log('Créer une rencontre'); }
-        function setupMusic() { console.log('Configurer la musique'); }
         function uploadMap() { console.log('Upload de carte'); }
 
         // Fonctions d'édition

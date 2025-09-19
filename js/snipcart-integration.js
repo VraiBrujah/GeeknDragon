@@ -349,10 +349,6 @@ class GeeknDragonSnipcart {
             }
         });
 
-        // Effet sonore (si Howler.js est disponible)
-        if (window.Howl) {
-            this.initSoundEffects();
-        }
 
         // Injection des keyframes d'animation
         const animationCSS = `
@@ -393,27 +389,6 @@ class GeeknDragonSnipcart {
     /**
      * Effets sonores D&D (optionnel)
      */
-    initSoundEffects() {
-        // Son d'ajout au panier (pièce qui tombe)
-        const coinSound = new Howl({
-            src: ['/sounds/coin-drop.mp3'],
-            volume: 0.3
-        });
-
-        // Son d'ouverture du panier
-        const openCartSound = new Howl({
-            src: ['/sounds/scroll-unroll.mp3'],
-            volume: 0.2
-        });
-
-        document.addEventListener('snipcart.item.added', () => {
-            coinSound.play();
-        });
-
-        document.addEventListener('snipcart.cart.opened', () => {
-            openCartSound.play();
-        });
-    }
 
     /**
      * Configuration des event listeners

@@ -399,8 +399,6 @@ class SnipcartPerformanceOptimizer {
     setupScriptLazyLoading() {
         // Scripts non critiques à charger après interaction
         const nonCriticalScripts = [
-            '/js/audio-player.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js'
         ];
 
         // Charger après première interaction

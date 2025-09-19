@@ -1094,6 +1094,12 @@ p {
     flex-wrap: wrap;
 }
 
+/* Fix pour le logo du header - supprime le contour blanc */
+.header-logo.rounded,
+header img.rounded {
+    border: none !important;
+}
+
 /* Features Section - Section plus large et immersive D&D */
 .features {
     padding: 5rem 0 6rem;
