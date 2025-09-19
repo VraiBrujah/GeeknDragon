@@ -158,24 +158,20 @@ HTML;
             </div>
         </section>
 
-
-        <section class="testimonials">
-            <div class="container">
-                <header class="section-header">
-                    <h2 class="section-title">Ce que disent nos aventuriers</h2>
-                </header>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"Ma grande découverte au FLIM, mes enfants sont tombés en amours avec les pièces et depuis font pleins de tâches pour pouvoir échanger leur point contre une chasse au trésor qui pourront avoir leur propre coffre au trésor. Merci à Mathieu pour offrir ce super ajout pour l'initiation des enfants aux jeux de rôles."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <strong>Gabrielle</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <?php
+        $viewData = [
+            'variant' => 'home',
+            'titleKey' => 'home.testimonials.title',
+            'testimonials' => [
+                [
+                    'textKey' => 'testimonials.quote2.text',
+                    'authorKey' => 'testimonials.quote2.author',
+                ],
+            ],
+        ];
+        include __DIR__ . '/partials/testimonials.php';
+        unset($viewData);
+        ?>
 
         <section class="news" id="actualites">
             <div class="container">

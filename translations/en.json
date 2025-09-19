@@ -73,6 +73,9 @@
         "title": "Triptych Sheet",
         "desc": "Create and manage your character without opening a book, on three sturdy panels"
       }
+    },
+    "testimonials": {
+      "title": "What our adventurers say"
     }
   },
   "footer": {

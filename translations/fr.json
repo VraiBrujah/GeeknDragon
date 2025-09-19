@@ -73,6 +73,9 @@
         "title": "Fiche Triptyque",
         "desc": "Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes"
       }
+    },
+    "testimonials": {
+      "title": "Ce que disent nos aventuriers"
     }
   },
   "footer": {
