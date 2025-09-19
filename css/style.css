@@ -734,13 +734,20 @@ p {
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
+/*
+ * Conteneur principal de navigation.
+ * Harmonisation avec la structure Tailwind du header fixe pour accueillir le lecteur audio sans modifier les espacements existants.
+ */
 .nav-container {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: nowrap;
     align-items: center;
-    padding: 1rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    position: relative;
 }
 
 .logo {
@@ -1830,7 +1837,7 @@ p {
 
 @media (max-width: 480px) {
     .nav-container {
-        padding: 1rem;
+        padding: 0;
     }
 
     .hero-content {

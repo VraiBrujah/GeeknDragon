@@ -106,7 +106,9 @@
         return;
       }
 
+      // On privilégie le conteneur de navigation du header pour fixer les contrôles audio.
       const nav =
+        document.querySelector('header .nav-container') ||
         document.querySelector('.nav-container') ||
         document.querySelector('header');
       if (!nav) {
