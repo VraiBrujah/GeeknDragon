@@ -235,38 +235,34 @@ HTML;
         </section>
     </main>
 
-    <footer class="footer" id="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Geek&Dragon</h3>
-                    <p>Votre spécialiste en accessoires immersifs pour jeux de rôle depuis 2024.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php'), ENT_QUOTES, 'UTF-8'); ?>">Boutique</a></li>
-                        <li><a href="#catalogue">Catalogue</a></li>
-                        <li><a href="#actualites">Actualités</a></li>
-                        <li><a href="#about">À Propos</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="mailto:support@geekndragon.com">Support Client</a></li>
-                        <li><a href="#">Livraison</a></li>
-                        <li><a href="#">Retours</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Geek&Dragon. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
+<?php
+$footerSections = [
+    [
+        'title' => 'Geek&Dragon',
+        'description' => 'Votre spécialiste en accessoires immersifs pour jeux de rôle depuis 2024.',
+    ],
+    [
+        'title' => 'Navigation',
+        'links' => [
+            ['label' => 'Boutique', 'href' => langUrl('/boutique.php')],
+            ['label' => 'Catalogue', 'href' => '#catalogue'],
+            ['label' => 'Actualités', 'href' => '#actualites'],
+            ['label' => 'À Propos', 'href' => '#about'],
+            ['label' => 'Contact', 'href' => '#contact'],
+        ],
+    ],
+    [
+        'title' => 'Support',
+        'links' => [
+            ['label' => 'Support Client', 'href' => 'mailto:support@geekndragon.com'],
+            ['label' => 'Livraison', 'href' => '#'],
+            ['label' => 'Retours', 'href' => langUrl('/retours.php')],
+            ['label' => 'FAQ', 'href' => '#'],
+        ],
+    ],
+];
+include __DIR__ . '/footer.php';
+?>
 
     <!-- Scripts existants -->
     <script src="/js/app.js"></script>

@@ -473,37 +473,33 @@ HTML;
         <?php endif; ?>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Geek&Dragon</h3>
-                    <p>Votre spécialiste en accessoires immersifs pour jeux de rôle depuis 2024.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Boutique</h4>
-                    <ul>
-                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php#coins'), ENT_QUOTES, 'UTF-8'); ?>">Pièces Métalliques</a></li>
-                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php#cards'), ENT_QUOTES, 'UTF-8'); ?>">Cartes d'Équipement</a></li>
-                        <li><a href="<?= htmlspecialchars(langUrl('/boutique.php#triptych'), ENT_QUOTES, 'UTF-8'); ?>">Triptyques Mystères</a></li>
-                        <li><a href="#">Guide d'Achat</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="mailto:support@geekndragon.com">Support Client</a></li>
-                        <li><a href="<?= htmlspecialchars(langUrl('/retours.php'), ENT_QUOTES, 'UTF-8'); ?>">Livraison & Retours</a></li>
-                        <li><a href="#">Garantie Qualité</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Geek&Dragon. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
+<?php
+$footerSections = [
+    [
+        'title' => 'Geek&Dragon',
+        'description' => 'Votre spécialiste en accessoires immersifs pour jeux de rôle depuis 2024.',
+    ],
+    [
+        'title' => 'Boutique',
+        'links' => [
+            ['label' => 'Pièces Métalliques', 'href' => langUrl('/boutique.php#coins')],
+            ['label' => "Cartes d'Équipement", 'href' => langUrl('/boutique.php#cards')],
+            ['label' => 'Triptyques Mystères', 'href' => langUrl('/boutique.php#triptych')],
+            ['label' => "Guide d'Achat", 'href' => '#'],
+        ],
+    ],
+    [
+        'title' => 'Support',
+        'links' => [
+            ['label' => 'Support Client', 'href' => 'mailto:support@geekndragon.com'],
+            ['label' => 'Livraison & Retours', 'href' => langUrl('/retours.php')],
+            ['label' => 'Garantie Qualité', 'href' => '#'],
+            ['label' => 'FAQ', 'href' => '#'],
+        ],
+    ],
+];
+include __DIR__ . '/footer.php';
+?>
 
     <script src="/js/app.js"></script>
     <script src="/js/script.js"></script>
