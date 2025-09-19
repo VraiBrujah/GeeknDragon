@@ -9,7 +9,7 @@ $lang = $translator->getCurrentLanguage();
 $title = __('meta.returns.title', 'Politique de retours | Geek & Dragon');
 $metaDescription = __('meta.returns.desc', 'Politique de retours Geek & Dragon - 30 jours pour retourner vos produits.');
 $active = 'contact';
-$styleVersion = gdLocalAssetVersion('css/style.css');
+$styleVersion = gdAssetVersion('css/style.css');
 $extraHead = <<<HTML
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -129,8 +129,8 @@ $title = $pageTitle;
 $metaDescription = $metaDescription;
 $ogImage = $mainImage;
 $active = 'boutique';
-$styleVersion = gdLocalAssetVersion('css/style.css');
-$productVersion = gdLocalAssetVersion('css/product.css');
+$styleVersion = gdAssetVersion('css/style.css');
+$productVersion = gdAssetVersion('css/product.css');
 $extraHead = <<<HTML
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
