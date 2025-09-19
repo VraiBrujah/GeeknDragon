@@ -2,5 +2,3 @@ node_modules
 js/*.min.js
 js/snipcart.js
 js/fancybox.umd.js
-js/boutique.js
-js/music-scanner.js

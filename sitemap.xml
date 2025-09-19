@@ -1,51 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://localhost/</loc>
+    <loc>https://geekndragon.com/</loc>
   </url>
   <url>
-    <loc>http://localhost/actualites/es-tu-game</loc>
+    <loc>https://geekndragon.com/boutique.php</loc>
   </url>
   <url>
-    <loc>http://localhost/boutique</loc>
+    <loc>https://geekndragon.com/contact.php</loc>
   </url>
   <url>
-    <loc>http://localhost/checkout</loc>
+    <loc>https://geekndragon.com/actualites/es-tu-game.php</loc>
   </url>
   <url>
-    <loc>http://localhost/contact</loc>
+    <loc>https://geekndragon.com/product.php?id=lot10</loc>
   </url>
   <url>
-    <loc>http://localhost/devis</loc>
+    <loc>https://geekndragon.com/product.php?id=lot25</loc>
   </url>
   <url>
-    <loc>http://localhost/merci</loc>
+    <loc>https://geekndragon.com/product.php?id=lot50-essence</loc>
   </url>
   <url>
-    <loc>http://localhost/product</loc>
-  </url>
-  <url>
-    <loc>http://localhost/product?id=lot10</loc>
-  </url>
-  <url>
-    <loc>http://localhost/product?id=lot25</loc>
-  </url>
-  <url>
-    <loc>http://localhost/product?id=lot50-essence</loc>
-  </url>
-  <url>
-    <loc>http://localhost/product?id=lot50-tresorerie</loc>
-  </url>
-  <url>
-    <loc>http://localhost/product?id=pack-182-arsenal-aventurier</loc>
-  </url>
-  <url>
-    <loc>http://localhost/product?id=pack-182-butins-ingenieries</loc>
-  </url>
-  <url>
-    <loc>http://localhost/product?id=pack-182-routes-services</loc>
-  </url>
-  <url>
-    <loc>http://localhost/product?id=triptyque-aleatoire</loc>
+    <loc>https://geekndragon.com/product.php?id=lot50-tresorerie</loc>
   </url>
 </urlset>

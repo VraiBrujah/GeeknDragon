@@ -16,10 +16,6 @@
       "title": "Merci !!! | Geek & Dragon",
       "desc": "Confirmation de l'envoi de votre message à Geek & Dragon."
     },
-    "quote": {
-      "title": "Demande de devis | Geek & Dragon",
-      "desc": "Demande de devis et informations pour vos projets immersifs."
-    },
     "news": {
       "flim2025": {
         "title": "Des héros niveau 20, un raton trop tenace, et… nos pièces | Geek & Dragon",
@@ -38,24 +34,10 @@
     "cards": "Cartes",
     "triptychs": "Triptyques"
   },
-  "account": {
-    "modalTitle": "Espace client Geek & Dragon",
-    "modalDescription": "Connectez-vous pour suivre vos commandes, consulter vos factures et retrouver vos favoris.",
-    "ctaDashboard": "Ouvrir mon espace client",
-    "ctaPage": "Consulter la page Compte",
-    "modalHint": "Astuce : si vous n'avez pas encore de compte, ouvrez la page dédiée pour en créer un ou demander de l'aide.",
-    "close": "Fermer la fenêtre"
-  },
-  "auth": {
-    "login": "Se connecter",
-    "logout": "Se déconnecter",
-    "connected": "Connecté",
-    "disconnected": "Déconnecté"
-  },
   "hero": {
     "title": "L'immersion au cœur du jeu",
     "subtitle1": "Cartes, pièces et fiches prêtes à jouer pour vos parties D&D",
-    "subtitle2": "Fabriqué au Québec",
+    "subtitle2": "Conçues au Québec",
     "visitShop": "Visiter la boutique"
   },
   "home": {
@@ -73,9 +55,6 @@
         "title": "Fiche Triptyque",
         "desc": "Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes"
       }
-    },
-    "testimonials": {
-      "title": "Ce que disent nos aventuriers"
     }
   },
   "footer": {
@@ -97,46 +76,21 @@
       "roleCommunity": "Responsable produit & communauté"
     }
   },
-  "quote": {
-    "title": "Demande de devis",
-    "subtitle": "Pour recevoir une offre personnalisée, remplis ce formulaire magique.",
-    "form": {
-      "name": "Nom complet",
-      "email": "Adresse e-mail",
-      "phone": "Téléphone (optionnel)",
-      "service": "Sujet / Service",
-      "message": "Votre demande",
-      "consent": "En envoyant ce formulaire, vous acceptez que nous utilisions vos informations pour vous répondre par email.",
-      "submit": "Envoyer ma demande"
-    },
-    "errors": {
-      "csrf": "Token CSRF invalide.",
-      "honeypot": "Spam détecté.",
-      "rate": "Trop de tentatives. Veuillez patienter.",
-      "name": "Le nom est requis.",
-      "email": "L'adresse e-mail est invalide.",
-      "phone": "Le numéro de téléphone est invalide.",
-      "message": "Le message est requis.",
-      "too_long": "Message trop long."
-    }
-  },
   "thankyou": {
     "title": "Merci !",
     "message": "Votre demande a bien été transmise à notre équipe.",
-    "errorTitle": "Oups...",
-    "errorMessage": "Votre message n'a pas pu être envoyé. Veuillez réessayer ou nous contacter directement.",
     "backHome": "Retour à l'accueil"
   },
   "product": {
     "back": "Retour à la boutique",
     "multiplier": "Multiplicateur",
-    "language": "Langue",
     "quantity": "Quantité",
     "unit": "unitaire",
-    "add": "Ajouter au panier",
-    "inStock": "En stock",
+    "add": "Ajouter",
     "outOfStock": "Rupture de stock",
-    "securePayment": "Paiement sécurisé"
+    "insufficientStock": "Stock insuffisant",
+    "securePayment": "Paiement sécurisé via Snipcart",
+    "realTimeStock": "Stocks mis à jour en temps réel."
   },
   "shop": {
     "hero": {
@@ -147,40 +101,13 @@
     "intro": {
       "title": "Trésors artisanaux",
       "description": "Objets de collection et aides de jeu artisanaux, fabriqués au&nbsp;Québec.",
-      "payment": "Paiement sécurisé"
+      "payment": "Paiement sécurisé via Snipcart",
+      "stock": "Stocks mis à jour en temps réel."
     },
     "pieces": {
       "title": "Pièces métalliques",
-      "description": "<strong>Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets :</strong> ça fonctionne, mais ça perd toute sa saveur.<br><br>Le trésor est au cœur de presque toutes les campagnes de D&D… et pourtant, quand il se réduit à des chiffres qu’on inscrit puis efface cent fois, il perd toute magie et tout impact.<br><br>Par souci de simplicité, on se limite presque toujours à la pièce d’or, oubliant la richesse des autres monnaies.<br><br>Avec nos pièces physiques, les calculs restent simples, mais chaque butin devient tangible, mémorable — digne des plus grandes quêtes.",
-      "video": "Regardez la vidéo de Pierre-Louis (Es-Tu Game ?) — « L’Économie de D&D 💰 Conseils Jeux de Rôle »"
-    },
-    "converter": {
-      "title": "Convertisseur de monnaie",
-      "sourcesLabel": "Monnaies sources",
-      "copper": "pièce de cuivre",
-      "silver": "pièce d’argent",
-      "electrum": "pièce d’électrum",
-      "gold": "pièce d’or",
-      "platinum": "pièce de platine",
-      "equivTitle": "Équivalences totales par métal",
-      "totalsTitle": "Totaux",
-      "remainderTotalsTitle": "Total des restes",
-      "bestLabel": "Représentation minimale",
-      "remainder": "Reste",
-      "and": "et",
-      "totalPieces": "Nombre total de pièces :",
-      "equivMetal": "Métal",
-      "equivEquivalent": "Équivalence",
-      "equivTotalPieces": "Nombre total de pièces",
-      "equivTotalValue": "Total :",
-      "advancedToggle": "Détails",
-      "multiplier10000": "x10 000",
-      "multiplier1000": "x1 000",
-      "multiplier100": "x100",
-      "multiplier10": "x10",
-      "multiplier1": "x1",
-      "totalBreakdown": "Total :",
-      "totalGold": "Total en or"
+      "description": "Un jeu de rôle sans pièces physiques, c’est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.",
+      "video": "Voir la démonstration en vidéo&nbsp;>"
     },
     "chest": {
       "title": "Coffres sur mesure",
@@ -189,16 +116,21 @@
     },
     "cards": {
       "title": "Cartes d’équipement",
-      "description": "Paquets thématiques de cartes illustrées pour gérer l’inventaire."
+      "coming": "À venir",
+      "description1": "Nos scribes enchantent encore ces parchemins d’aventure.",
+      "description2": "Les cartes d’équipement forgeront leur entrée lors de la prochaine lune."
     },
     "triptychs": {
       "title": "Triptyques de personnage",
-      "description": "Fiches rigides en trois volets pour classes, espèces et historiques."
+      "coming": "À venir",
+      "description1": "Les artisans façonnent encore ces grimoires de héros.",
+      "description2": "Les triptyques rejoindront la boutique sous peu."
     },
     "collective": {
       "title": "Investissez ensemble, partagez l’aventure",
       "description1": "Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.",
-      "description2": "À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne."
+      "description2": "À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.",
+      "description3": "Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté."
     }
   },
   "news": {
@@ -230,21 +162,10 @@
     "trictrac": "TricTrac",
     "quote1": {
       "title": "« Finis les combats contre nos feuilles de personnage ! »",
-      "intro": "De nombreux joueurs le confirment : les pièces physiques changent tout.",
-      "p1": "Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sent le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, tout le corps réagit : la main hésite, l’œil soupèse, la gorge se serre. Le trésor prend chair. Il devient enjeu dramatique, émotion viscérale, souvenir marquant.",
-      "p2strong": "Finies aussi les batailles contre les feuilles de personnage",
-      "p2rest": "les recherches interminables dans les manuels pendant que les autres décrochent… ou encore les sessions 0 qui s’étirent. La « session 0 », c’est ce moment censé préparer le jeu : on crée les personnages, on définit les règles, on équipe les héros. Mais souvent, elle s’allonge en « 0.1 », « 0.2 », « 0.3 »… plusieurs soirées passées à remplir des cases plutôt qu’à vivre des aventures.<br><br>Avec Geek & Dragon, tout change : plus besoin d’administratif à rallonge. L’aventure commence au premier cling quand la pièce tombe sur la table."
-    },
-    "quote2": {
-      "text": "Ma grande découverte au FLIM, mes enfants sont tombés en amours avec les pièces et depuis font pleins de tâches pour pouvoir échanger leur point contre une chasse au trésor qui pourront avoir leur propre coffre au trésor. Merci à Mathieu pour offrir ce super ajout pour l'initiation des enfants aux jeux de rôles.",
-      "author": "— Gabrielle"
+      "intro": "De nombreux joueurs présents l’affirment : les pièces physiques changent tout.",
+      "p1": "Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sentait le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, c’était tout le corps qui réagissait : la main qui hésite, l’œil qui soupèse, la gorge qui sèche. Le trésor prenait chair. Il devenait enjeu dramatique, émotion viscérale, c’est un événement, un souvenir marquant...",
+      "p2strong": "Fini les combats contre les feuilles de perso",
+      "p2rest": "les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la pièce tombe sur la table."
     }
-  },
-  "editor": {
-    "undo": "Annuler",
-    "redo": "Refaire",
-    "bold": "Gras",
-    "italic": "Italique",
-    "markdown": "Markdown"
   }
 }

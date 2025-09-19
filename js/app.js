@@ -15,19 +15,8 @@
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  // Logging sécurisé avec fallback
-  const log = (...args) => { 
-    try { 
-      if (typeof console !== 'undefined' && console.log) {
-        console.log('[GD]', ...args); 
-      }
-    } catch (error) {
-      // En mode développement, on peut vouloir voir l'erreur
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.warn('[GD] Logging error:', error);
-      }
-    }
-  };
+  // Pas d’erreurs si console absente
+  const log = (...args) => { try { console.log('[GD]', ...args); } catch (_) {} };
 
   // Throttle / Debounce
   const throttle = (fn, wait = 100) => {
@@ -85,6 +74,7 @@
   const setLang = (lang) => {
     const safe = LANGS.includes(lang) ? lang : DEFAULT_LANG;
     localStorage.setItem('lang', safe);
+    localStorage.setItem('snipcartLanguage', safe);
     setCookie('lang', safe);
     document.documentElement.lang = safe;
     return safe;
@@ -117,6 +107,17 @@
     };
   };
 
+  // Snipcart ready (polling léger)
+  const whenSnipcart = (cb) => {
+    if (window.Snipcart && window.Snipcart.store && window.Snipcart.api) { cb(); return; }
+    const int = setInterval(() => {
+      if (window.Snipcart && window.Snipcart.store && window.Snipcart.api) {
+        clearInterval(int); cb();
+      }
+    }, 200);
+  };
+  window.whenSnipcart = whenSnipcart;
+
   // Expose utilitaires
   window.GD = Object.assign(window.GD || {}, {
     qs,
@@ -134,16 +135,16 @@
 })();
 
 /* ========================================================================
-   HAUTEUR D’EN-TÊTE → variables CSS (global + panier)
+   HAUTEUR D’EN-TÊTE → variables CSS (global + Snipcart)
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('header');
   if (!header) return;
   const setHeaderVars = () => {
-    const h = header.offsetHeight || 80;
+    const h = header.getBoundingClientRect().height || 96;
     // utilisé par ton site
     document.documentElement.style.setProperty('--header-height', `${h}px`);
-    // utilisé par les éléments e-commerce (modales, résumés, etc.)
+    // utilisé par snipcart-custom.css (modal/summary sticky)
     document.documentElement.style.setProperty('--gd-header-h', `${h}px`);
   };
   setHeaderVars();
@@ -170,12 +171,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
   setCurrent(lang);
+  whenSnipcart(() => window.Snipcart.api.session.setLanguage(lang));
 
   document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const picked = btn.dataset.lang;
       window.GD.setLang(picked);
       setCurrent(picked);
+      whenSnipcart(() => window.Snipcart.api.session.setLanguage(picked));
       loadTranslations(picked);
     });
   });
@@ -187,18 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!data) return;
         window.i18n = data;
 
-        // Helper to (re)apply translations on any DOM subtree, including hidden
-        // advanced groups so their labels are ready before being shown.
-        window.i18n.apply = (root = document) => {
-          root.querySelectorAll('[data-i18n]').forEach((el) => {
-            const keys = el.dataset.i18n.split('.');
-            let text = window.i18n; keys.forEach((k) => { if (text) text = text[k]; });
-            if (text != null) el.innerHTML = text;
-          });
-        };
-
-        // Initial application on page load
-        window.i18n.apply();
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const keys = el.dataset.i18n.split('.');
+          let text = data; keys.forEach((k) => { if (text) text = text[k]; });
+          if (text != null) el.innerHTML = text;
+        });
 
         // Champs produits (nom/desc/alt)
         document.querySelectorAll('[data-name-fr]').forEach((el) => {
@@ -207,11 +203,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.querySelectorAll('[data-desc-fr]').forEach((el) => {
           const target = current === 'en' ? el.dataset.descEn : el.dataset.descFr;
-          if (target) el.innerHTML = target;
+          if (target) el.textContent = target;
         });
         document.querySelectorAll('[data-alt-fr]').forEach((el) => {
           const target = current === 'en' ? el.dataset.altEn : el.dataset.altFr;
           if (target) el.setAttribute('alt', target);
+        });
+
+        // Boutons Snipcart (nom/description + libellé custom)
+        document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
+          if (current === 'en') {
+            if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
+            if (btn.dataset.itemDescriptionEn) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionEn);
+          } else {
+            if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
+            if (btn.dataset.itemDescriptionFr) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
+          }
+          const hasCustom = btn.hasAttribute('data-item-custom1-name') && data?.product?.multiplier;
+          if (hasCustom) btn.setAttribute('data-item-custom1-name', data.product.multiplier);
         });
 
         // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)
@@ -309,7 +318,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 /* ========================================================================
    NAV — Surbrillance au clic + Scroll-Spy
    ===================================================================== */
@@ -368,123 +376,25 @@ function fullyVisible(el) {
          && r.bottom <= (window.innerHeight || document.documentElement.clientHeight)
          && r.right <= (window.innerWidth || document.documentElement.clientWidth);
 }
-// Fonction universelle de gestion des vidéos
-function initVideoManager(videoIds) {
-  const videos = videoIds.map((id) => document.getElementById(id)).filter(Boolean);
-  if (videos.length === 0) return;
-  
+document.addEventListener('DOMContentLoaded', () => {
+  const videos = ['video1', 'video2', 'video3']
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
   let current = 0;
   let audioOK = false;
   let playSeq;
-  const isSequenceMode = videos.length > 1;
 
   videos.forEach((vid) => {
     vid.dataset.userPaused = 'false';
     vid.dataset.autoPaused = 'false';
-    
-    // Créer un wrapper pour la vidéo et son titre (si pas déjà fait)
-    let wrapper = vid.closest('.video-section-wrapper');
-    if (!wrapper) {
-      wrapper = document.createElement('div');
-      wrapper.className = 'video-section-wrapper';
-      wrapper.style.cssText = `
-        background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
-        border: 1px solid rgba(139, 92, 246, 0.2);
-        border-radius: 16px;
-        padding: 20px;
-        margin: 16px 0;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-      `;
-      
-      // Structure actuelle : div.relative.group > video + button + p
-      const currentContainer = vid.parentNode; // div.relative.group
-      const grandParent = currentContainer.parentNode;
-      
-      // Insérer le wrapper avant le container actuel
-      grandParent.insertBefore(wrapper, currentContainer);
-      
-      // Déplacer le container dans le wrapper
-      wrapper.appendChild(currentContainer);
-      
-      // Chercher le titre qui suit
-      let titleElement = wrapper.nextElementSibling;
-      while (titleElement) {
-        if (titleElement.tagName === 'P' && titleElement.classList.contains('text-center')) {
-          // Déplacer le titre dans le wrapper
-          wrapper.appendChild(titleElement);
-          titleElement.style.marginTop = '24px';
-          titleElement.style.marginBottom = '0';
-          titleElement.style.paddingTop = '12px';
-          titleElement.style.borderTop = '1px solid rgba(139, 92, 246, 0.1)';
-          
-          // Réappliquer les traductions sur le titre déplacé
-          if (titleElement.hasAttribute('data-i18n')) {
-            // Déclencher la retraduction via le système existant
-            if (window.updateTranslations && typeof window.updateTranslations === 'function') {
-              window.updateTranslations();
-            } else if (window.i18n && window.i18n.update) {
-              window.i18n.update();
-            } else {
-              // Fallback : déclencher un événement pour forcer la retraduction
-              document.dispatchEvent(new CustomEvent('translatePage'));
-            }
-          }
-          break;
-        }
-        titleElement = titleElement.nextElementSibling;
-      }
-    }
-    
-    // Style pour la vidéo
-    vid.style.border = '1px solid rgba(139, 92, 246, 0.3)';
-    vid.style.borderRadius = '12px';
-    vid.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
-    vid.style.transition = 'all 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease';
-    vid.style.width = '100%';
-    vid.style.display = 'block';
-    
-    const addClass = () => {
-      vid.classList.add('scale-105', 'z-10');
-      vid.style.borderColor = 'rgba(139, 92, 246, 0.6)';
-      vid.style.boxShadow = '0 8px 32px rgba(139, 92, 246, 0.3)';
-      // Effet sur le wrapper aussi
-      const wrapper = vid.closest('.video-section-wrapper');
-      if (wrapper) {
-        wrapper.style.borderColor = 'rgba(139, 92, 246, 0.4)';
-        wrapper.style.boxShadow = '0 12px 40px rgba(139, 92, 246, 0.2)';
-      }
-    };
-    const removeClass = () => {
-      vid.classList.remove('scale-105', 'z-10');
-      vid.style.borderColor = 'rgba(139, 92, 246, 0.3)';
-      vid.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.2)';
-      // Restaurer le wrapper
-      const wrapper = vid.closest('.video-section-wrapper');
-      if (wrapper) {
-        wrapper.style.borderColor = 'rgba(139, 92, 246, 0.2)';
-        wrapper.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
-      }
-    };
-    
-    vid.addEventListener('play', () => { 
-      addClass(); 
-      vid.dataset.userPaused = 'false'; 
-      vid.dataset.autoPaused = 'false'; 
-    });
+    const addClass = () => vid.classList.add('scale-105', 'z-10');
+    const removeClass = () => vid.classList.remove('scale-105', 'z-10');
+    vid.addEventListener('play', () => { addClass(); vid.dataset.userPaused = 'false'; vid.dataset.autoPaused = 'false'; });
     vid.addEventListener('playing', addClass);
-    vid.addEventListener('pause', () => { 
-      removeClass(); 
-      if (vid.dataset.autopausing === 'true') { 
-        vid.dataset.autopausing = 'false'; 
-      } else { 
-        vid.dataset.userPaused = 'true'; 
-      } 
-    });
+    vid.addEventListener('pause', () => { removeClass(); if (vid.dataset.autopausing === 'true') { vid.dataset.autopausing = 'false'; } else { vid.dataset.userPaused = 'true'; } });
     vid.addEventListener('ended', removeClass);
   });
 
-  // Observer pour la visibilité
   const visibilityObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const vid = entry.target;
@@ -501,139 +411,76 @@ function initVideoManager(videoIds) {
       }
     });
   }, { threshold: 0.2 });
-  
   videos.forEach((vid) => visibilityObserver.observe(vid));
 
   function updateBtn(vid) {
     const b = document.querySelector(`.mute-btn[data-video="${vid.id}"]`);
-    if (b) b.innerHTML = vid.muted ? '🔇' : '🔊';
+    if (b) b.textContent = vid.muted ? '🔇' : '🔊';
   }
 
   const enableAudio = () => {
     if (audioOK) return;
     audioOK = true;
-    // En mode boucle, on utilise la première vidéo
-    const v = isSequenceMode ? videos[current] : videos[0];
-    if (v && !v.paused) { 
-      v.muted = false; 
-      updateBtn(v); 
-    }
+    const v = videos[current];
+    if (v && !v.paused) { v.muted = false; updateBtn(v); }
   };
-
-  ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => {
-    window.addEventListener(evt, enableAudio, { once: true, passive: true });
-  });
-
-  // Gestion des boutons mute
+  ['click', 'touchstart', 'keydown', 'wheel'].forEach((evt) => window.addEventListener(evt, enableAudio, { once: true, passive: true }));
   document.querySelectorAll('.mute-btn').forEach((btn) => {
     const vid = videos.find((v) => v.id === btn.dataset.video);
     if (!vid) return;
-    btn.addEventListener('click', (e) => { 
-      e.stopPropagation(); 
-      vid.muted = !vid.muted; 
-      updateBtn(vid); 
-    });
+    btn.addEventListener('click', (e) => { e.stopPropagation(); vid.muted = !vid.muted; updateBtn(vid); });
   });
 
   function start(vid) {
     vid.muted = !audioOK;
     vid.currentTime = 0;
-    vid.play().then(() => { 
-      if (audioOK) vid.muted = false; 
-      updateBtn(vid); 
-    }).catch(() => { 
-      vid.muted = true; 
-      vid.play(); 
-      updateBtn(vid); 
-    });
-    
-    // Mode boucle pour vidéo unique, séquence pour multiple
-    if (isSequenceMode) {
-      vid.onended = () => { 
-        current += 1; 
-        if (current < videos.length) playSeq(current); 
-      };
-    } else {
-      vid.loop = true;
-      vid.onended = null;
-    }
+    vid.play().then(() => { if (audioOK) vid.muted = false; updateBtn(vid); })
+      .catch(() => { vid.muted = true; vid.play(); updateBtn(vid); });
+    vid.onended = () => { current += 1; if (current < videos.length) playSeq(current); };
   }
 
-  if (isSequenceMode) {
-    // Mode séquence : jouer les vidéos l'une après l'autre
-    playSeq = (idx) => {
-      const vid = videos[idx];
-      if (!vid) return;
-      videos.forEach((v, i) => { if (i !== idx) { v.pause(); v.currentTime = 0; } });
-      const io = new IntersectionObserver((ent) => {
-        if (ent[0].isIntersecting && fullyVisible(vid)) { 
-          io.disconnect(); 
-          start(vid); 
-        }
-      }, { threshold: 1 });
-      io.observe(vid);
-    };
+  playSeq = (idx) => {
+    const vid = videos[idx];
+    if (!vid) return;
+    videos.forEach((v, i) => { if (i !== idx) { v.pause(); v.currentTime = 0; } });
+    const io = new IntersectionObserver((ent) => {
+      if (ent[0].isIntersecting && fullyVisible(vid)) { io.disconnect(); start(vid); }
+    }, { threshold: 1 });
+    io.observe(vid);
+  };
 
-    videos.forEach((vid, idx) => {
-      vid.addEventListener('click', () => {
-        if (vid.paused) { 
-          if (!audioOK) enableAudio(); 
-          current = idx; 
-          start(vid); 
-        } else { 
-          vid.pause(); 
-        }
-      });
-    });
-
-    if (videos.length) playSeq(current);
-  } else {
-    // Mode boucle : démarrer la vidéo unique quand visible
-    const vid = videos[0];
-    
-    // Ajouter l'événement click
+  videos.forEach((vid, idx) => {
     vid.addEventListener('click', () => {
-      if (vid.paused) { 
-        if (!audioOK) enableAudio(); 
-        start(vid); 
-      } else { 
-        vid.pause(); 
-      }
+      if (vid.paused) { if (!audioOK) enableAudio(); current = idx; start(vid); } else { vid.pause(); }
     });
-    
-    // Observer pour démarrer automatiquement quand visible
-    const startObserver = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      if (entry.isIntersecting) {
-        startObserver.disconnect();
-        start(vid);
-      }
-    }, { threshold: 0.1 });
-    
-    startObserver.observe(vid);
-  }
-}
+  });
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Vidéos de es-tu-game.php (séquence)
-  initVideoManager(['video1', 'video2', 'video3']);
-  
-  // Vidéo de boutique.php (boucle)
-  initVideoManager(['video4']);
+  if (videos.length) playSeq(current);
 });
 
 /* ========================================================================
    BOUTIQUE — quantités + multiplicateur + Swiper + Fancybox
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
+  const stock = window.stock || {};
+
   const updatePlus = (id) => {
-    const qty = parseInt(document.getElementById(`qty-${id}`)?.innerHTML || '1', 10);
+    const max = stock[id];
+    const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
+    const plusBtn = document.querySelector(`.quantity-btn.plus[data-target="${id}"]`);
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
+    const over = max != null && (max <= 0 || qty >= max);
     const hidePrice = addBtn?.dataset.hidePrice !== undefined;
     const unitPrice = addBtn ? parseFloat(addBtn.dataset.itemPrice || '0') : 0;
     const tr = window.i18n?.product || {};
-    const addText = tr.add || 'Ajouter au panier';
+    const addText = tr.add || 'Ajouter';
+    const insufficientText = tr.insufficientStock || 'Stock insuffisant';
 
+    if (plusBtn) {
+      const nextQty = qty + 1;
+      plusBtn.disabled = max != null && (max <= 0 || nextQty > max);
+      plusBtn.title = plusBtn.disabled ? insufficientText : '';
+    }
     if (addBtn) {
       const label = addBtn.querySelector('[data-i18n="product.add"]');
       let priceSpan = addBtn.querySelector('.price-text');
@@ -642,10 +489,10 @@ document.addEventListener('DOMContentLoaded', () => {
         priceSpan.className = 'price-text';
         addBtn.append(' ', priceSpan);
       }
-      addBtn.disabled = false;
-      addBtn.title = '';
-      if (label) label.innerHTML = addText;
-      priceSpan.innerHTML = (hidePrice || !unitPrice) ? '' : `— ${unitPrice * qty} $`;
+      addBtn.disabled = over;
+      addBtn.title = over ? insufficientText : '';
+      if (label) label.textContent = over ? insufficientText : addText;
+      priceSpan.textContent = (over || hidePrice || !unitPrice) ? '' : `— ${unitPrice * qty} $`;
     }
   };
   window.updatePlus = updatePlus;
@@ -656,10 +503,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = btn.dataset.target;
       const qtySpan = document.getElementById(`qty-${id}`);
       if (!qtySpan) return;
-      let qty = parseInt(qtySpan.innerHTML, 10) || 1;
+      let qty = parseInt(qtySpan.textContent, 10) || 1;
+      const max = stock[id];
       if (btn.classList.contains('minus')) qty = Math.max(1, qty - 1);
-      else qty += 1;
-      qtySpan.innerHTML = qty;
+      else if (max == null || qty + 1 <= max) qty += 1;
+      qtySpan.textContent = qty;
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
       if (addBtn) addBtn.setAttribute('data-item-quantity', String(qty));
       updatePlus(id);
@@ -684,7 +532,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = sel.dataset.target;
     const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
     const update = () => {
-      const qty = parseInt(document.getElementById(`qty-${id}`)?.innerHTML || '1', 10);
+      const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
       if (addBtn) {
         addBtn.setAttribute('data-item-custom1-value', sel.value);
         addBtn.setAttribute('data-item-quantity', String(qty));
@@ -700,48 +548,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sw.classList.contains('swiper-thumbs')) return;
     const container = sw.parentElement;
     const thumbsEl = container.querySelector('.swiper-thumbs');
-    const opts = {
-      loop: true,
-      autoplay: { delay: 5000 },
-      pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
-      navigation: { nextEl: sw.querySelector('.swiper-button-next'), prevEl: sw.querySelector('.swiper-button-prev') },
-      on: {
-        slideChange() {
-          const videos = this.slides.map((s) => s.querySelector('video')).filter(Boolean);
-          videos.forEach((v) => { v.pause(); v.currentTime = 0; });
-          const active = this.slides[this.activeIndex].querySelector('video');
-          if (active) {
-            this.autoplay.stop();
-            active.play();
-            active.onended = () => { this.autoplay.start(); };
-          } else if (this.autoplay) {
-            this.autoplay.start();
-          }
-        },
-      },
-    };
     if (thumbsEl) {
       const thumbsSwiper = new Swiper(thumbsEl, { slidesPerView: 4, freeMode: true, watchSlidesProgress: true });
-      opts.thumbs = { swiper: thumbsSwiper };
-    }
-    const swiper = new Swiper(sw, opts);
-    swiper.emit('slideChange');
-  });
-
-  // Orientation for media
-  const setOrientation = (el) => {
-    const w = el.videoWidth || el.naturalWidth;
-    const h = el.videoHeight || el.naturalHeight;
-    if (!w || !h) return;
-    if (w < h) el.classList.add('portrait');
-  };
-  document.querySelectorAll('.product-media').forEach((el) => {
-    if (el.tagName === 'VIDEO') {
-      el.addEventListener('loadedmetadata', () => setOrientation(el), { once: true });
-    } else if (el.complete) {
-      setOrientation(el);
+      // eslint-disable-next-line no-new
+      new Swiper(sw, {
+        loop: true,
+        autoplay: { delay: 5000 },
+        pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
+        navigation: { nextEl: sw.querySelector('.swiper-button-next'), prevEl: sw.querySelector('.swiper-button-prev') },
+        thumbs: { swiper: thumbsSwiper },
+      });
     } else {
-      el.addEventListener('load', () => setOrientation(el), { once: true });
+      // eslint-disable-next-line no-new
+      new Swiper(sw, {
+        loop: true,
+        autoplay: { delay: 5000 },
+        pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
+        navigation: { nextEl: sw.querySelector('.swiper-button-next'), prevEl: sw.querySelector('.swiper-button-prev') },
+      });
     }
   });
 
@@ -755,6 +579,47 @@ document.addEventListener('DOMContentLoaded', () => {
       on: { close: () => window.history.back() },
     });
   }
+});
+
+/* ========================================================================
+   SNIPCART — évite double ouverture + badges actifs
+   ===================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const cartBtns = document.querySelectorAll('.snipcart-checkout');
+  const accountBtns = document.querySelectorAll('.snipcart-customer-signin');
+
+  const cartVisible = () => window.Snipcart?.store?.getState()?.cart?.status === 'visible';
+  const accountVisible = () => window.Snipcart?.store?.getState()?.customer?.status === 'visible';
+
+  cartBtns.forEach((btn) => btn.addEventListener('click', (e) => {
+    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
+    if (cartVisible()) {
+      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+      window.Snipcart.api.theme.cart.close();
+      e.currentTarget.blur();
+    }
+  }));
+  accountBtns.forEach((btn) => btn.addEventListener('click', (e) => {
+    if (!window.Snipcart?.store || !window.Snipcart?.api?.theme) return;
+    if (accountVisible()) {
+      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+      window.Snipcart.api.theme.customer.close();
+      e.currentTarget.blur();
+    }
+  }));
+
+  const setBtnState = () => {
+    const cv = cartVisible();
+    const av = accountVisible();
+    cartBtns.forEach((b) => b.classList.toggle('is-active', cv));
+    accountBtns.forEach((b) => b.classList.toggle('is-active', av));
+  };
+  window.addEventListener('snipcart.ready', setBtnState);
+  window.addEventListener('snipcart.opened', setBtnState);
+  window.addEventListener('snipcart.closed', setBtnState);
+
+  const hookStore = () => { try { const { store } = window.Snipcart; if (store) store.subscribe(() => setBtnState()); } catch (_) {} };
+  (function poll() { if (window.Snipcart && window.Snipcart.store) hookStore(); else setTimeout(poll, 300); }());
 });
 
 /* ========================================================================
@@ -840,5 +705,50 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
 });
 
+/* ========================================================================
+   SNIPCART — synchronisation au clic "Ajouter au panier"
+   ===================================================================== */
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.snipcart-add-item');
+  if (!btn) return;
 
+  const id = btn.dataset.itemId;
 
+  // Quantité depuis l’UI carte
+  const qtyEl = document.getElementById(`qty-${id}`);
+  if (qtyEl) {
+    const q = parseInt(qtyEl.textContent, 10);
+    if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
+  }
+
+  // Valeur du multiplicateur choisie sur la fiche (si présente)
+  const sel = document.querySelector(`.multiplier-select[data-target="${id}"]`);
+  if (sel) btn.setAttribute('data-item-custom1-value', sel.value);
+}, false);
+
+/* ========================================================================
+   SNIPCART — cacher UNIQUEMENT "Multiplicateur/Multiplier" dans le panier
+   (la quantité reste affichée)
+   ===================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.getElementById('snipcart');
+  if (!root) return;
+});
+
+// Verrouille le scroll de la page uniquement pour le panier/checkout (pas pour la facture)
+const toggleSnipcartScroll = () => {
+  const root = document.getElementById('snipcart');
+  const inOrder = !!root?.querySelector('.snipcart-order');
+  const visible = window.Snipcart?.store?.getState()?.cart?.status === 'visible';
+  document.body.classList.toggle('snipcart-open', visible && !inOrder);
+};
+
+window.addEventListener('snipcart.opened', toggleSnipcartScroll);
+window.addEventListener('snipcart.closed', toggleSnipcartScroll);
+window.addEventListener('snipcart.ready', () => {
+  const root = document.getElementById('snipcart');
+  if (root) {
+    new MutationObserver(toggleSnipcartScroll).observe(root, { childList: true, subtree: true });
+  }
+  toggleSnipcartScroll();
+});

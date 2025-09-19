@@ -1,265 +1,152 @@
 <?php
-declare(strict_types=1);
-
 require __DIR__ . '/bootstrap.php';
-
-/**
- * Prépare la configuration Snipcart exposée au frontend.
- */
 $config = require __DIR__ . '/config.php';
-$snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snipcart_api_key'] : '';
-
-$translator = require __DIR__ . '/i18n.php';
-$lang = $translator->getCurrentLanguage();
-
-$title = __('meta.home.title', 'Geek & Dragon - Accessoires immersifs pour jeux de rôle');
-$metaDescription = __('meta.home.desc', "Découvrez notre collection exclusive de pièces métalliques, cartes d'équipement et triptyques pour transformer vos parties de D&D en aventures inoubliables.");
-$active = '';
-$styleVersion = gdAssetVersion('css/style.css');
-$extraHead = <<<HTML
-  <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
-HTML;
+// No active nav item on homepage
+require __DIR__ . '/i18n.php';
+$title  = $translations['meta']['home']['title'] ?? 'Geek & Dragon';
+$metaDescription = $translations['meta']['home']['desc'] ?? '';
 ?>
 <!DOCTYPE html>
-<html lang="<?= htmlspecialchars($lang, ENT_QUOTES, 'UTF-8'); ?>">
-<?php include __DIR__ . '/head-common.php'; ?>
+<html lang="<?= htmlspecialchars($lang) ?>">
+<?php include 'head-common.php'; ?>
+
 <body>
-<?php include __DIR__ . '/header.php'; ?>
 
-    <main id="main" class="pt-[var(--header-height)]">
-        <section class="hero">
-            <div class="hero-background">
-            <div class="hero-videos" data-main="/videos/video-mage-hero.mp4" data-videos='["/videos/cascade_HD.mp4","/videos/fontaine11.mp4","/videos/Carte1.mp4","/videos/fontaine4.mp4","/videos/fontaine3.mp4","/videos/fontaine2.mp4","/videos/fontaine1.mp4"]'></div>
-                <div class="hero-overlay"></div>
-            </div>
-            <div class="hero-content">
-                <h1 class="hero-title animated-text"><strong>Transformez vos aventures en <span class="highlight">épopées légendaires</span></strong></h1>
-                <p class="hero-subtitle"><strong>Découvrez notre collection d'accessoires immersifs pour vos parties de jeux de rôle : pièces métalliques authentiques, cartes d'équipement illustrées et triptyques mystères.</strong></p>
-                <div class="hero-cta">
-                    <a href="<?= htmlspecialchars(langUrl('/boutique.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Découvrir la Boutique</a>
-                </div>
-            </div>
-            <div class="hero-scroll-indicator">
-                <div class="scroll-arrow"></div>
-            </div>
-        </section>
+  <?php
+  ob_start();
+  include 'snipcart-init.php';
+  $snipcartInit = ob_get_clean();
+  include 'header.php';
+  echo $snipcartInit;
+  ?>
+
+  <main id="main" class="pt-[var(--header-height)]">
+  
+
+    <!-- ===== HERO ===== -->
+    <section class="min-h-screen flex items-center justify-center text-center relative text-white">
+      <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/mage.mp4" data-videos='["videos/cascade_HD.mp4","videos/fontaine11.mp4","videos/Carte1.mp4","videos/fontaine4.mp4","videos/fontaine3.mp4","videos/fontaine2.mp4","videos/fontaine1.mp4"]'></div>
+      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="relative z-10 max-w-3xl p-6 hero-text">
+        <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
+          <p class="text-xl mb-2 txt-court" data-i18n="hero.subtitle1">Cartes, pièces et fiches prêtes à jouer pour vos parties D&D</p>
+          <p class="text-xl mb-8 txt-court" data-i18n="hero.subtitle2">Conçues au Québec</p>
+<a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+            Visiter la boutique
+          </a>
+      </div>
+    </section>
+
+    <!-- ===== PRODUITS ===== -->
+    <section id="produits" class="py-24 bg-gray-900/80 scroll-mt-24">
+      <div class="max-w-6xl mx-auto px-6">
+        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="home.mustHave.heading">Nos Incontournables</h3>
+        <div class="grid md:grid-cols-3 gap-10">
+          <a href="<?= langUrl('boutique.php#cartes') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
+            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d’équipement</h4>
+            <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
+              <img src="images/cartes_equipement.png" alt="560 cartes d’équipement illustrées" class="rounded mb-4" loading="lazy">
+          </a>
+          <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
+            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
+            <p class="text-center" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
+              <img src="images/Piece/pro/lot10Piece2-300.png" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
+          </a>
+          <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
+            <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>
+            <p class="text-center" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
+              <img src="images/triptyque_fiche.png" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </section>
 
 
-        <section id="boutique" class="boutique-section">
-            <div class="container">
-                <header class="section-header">
-                    <h3 class="section-title">Boutique</h3>
-                    <p class="section-subtitle">Paiement sécurisé via Snipcart</p>
-                    <div class="payment-icons">
-                        <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-                        <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-                        <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
-                    </div>
-                </header>
-                
-                <!-- Grid de produits phares -->
-                <div class="boutique-products-grid">
-                    <a href="<?= htmlspecialchars(langUrl('/boutique.php#coins'), ENT_QUOTES, 'UTF-8'); ?>" class="product-highlight-link">
-                        <div class="product-highlight">
-                            <div class="product-image">
-                                <img src="/images/optimized-modern/webp/all252.webp" alt="Pièces métalliques" loading="lazy">
-                            </div>
-                            <div class="product-info">
-                                <h4>💰 Pièces Métalliques</h4>
-                                <p class="product-count">4 collections disponibles</p>
-                                <p class="product-desc">De l'Offrande du Voyageur à la Trésorerie du Seigneur. Chaque pièce apporte le poids réel du trésor à votre table.</p>
-                                <div class="product-features">
-                                    <span class="feature-tag">5 métaux nobles</span>
-                                    <span class="feature-tag">Poids authentique</span>
-                                    <span class="feature-tag">Multiplicateurs gravés</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="<?= htmlspecialchars(langUrl('/boutique.php#cards'), ENT_QUOTES, 'UTF-8'); ?>" class="product-highlight-link">
-                        <div class="product-highlight">
-                            <div class="product-image">
-                                <img src="/images/cartes-equipement.webp" alt="Cartes d'équipement" loading="lazy">
-                            </div>
-                            <div class="product-info">
-                                <h4>🃏 Cartes d'Équipement</h4>
-                                <p class="product-count">560 cartes illustrées</p>
-                                <p class="product-desc">3 packs thématiques : Arsenal de l'Aventurier, Butins & Ingénieries, Routes & Services. Fini la recherche dans les manuels !</p>
-                                <div class="product-features">
-                                    <span class="feature-tag">🎨 Illustrations uniques</span>
-                                    <span class="feature-tag">🇫🇷 Français/Anglais</span>
-                                    <span class="feature-tag">⚡ Parties plus fluides</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="<?= htmlspecialchars(langUrl('/boutique.php#triptych'), ENT_QUOTES, 'UTF-8'); ?>" class="product-highlight-link">
-                        <div class="product-highlight">
-                            <div class="product-image">
-                                <img src="/images/triptyque-fiche.webp" alt="Triptyques Mystères" loading="lazy">
-                            </div>
-                            <div class="product-info">
-                                <h4>📋 Triptyques Mystères</h4>
-                                <p class="product-count">Héros prêt à jouer</p>
-                                <p class="product-desc">3 triptyques tirés au sort + équipement + pièces de départ. Votre aventurier est immédiatement opérationnel !</p>
-                                <div class="product-features">
-                                    <span class="feature-tag">🎲 Surprise garantie</span>
-                                    <span class="feature-tag">🛡️ Tout inclus</span>
-                                    <span class="feature-tag">🚀 Prêt à jouer</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="boutique-cta">
-                    <a href="<?= htmlspecialchars(langUrl('/boutique.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Visiter la boutique</a>
-                    <a href="#contact" class="cta-secondary">Demander un devis</a>
-                </div>
-            </div>
-        </section>
+<!-- ===== BOUTIQUE ===== -->
+    <section id="boutique" class="py-16 bg-gray-900/80 scroll-mt-24">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <h3 class="text-4xl font-bold mb-12" data-i18n="nav.shop">Boutique</h3>
+          <p class="mb-8 txt-court"><span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
+            <span class="payment-icons">
+              <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
+              <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
+              <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
+          </p>
+        <div class="flex flex-col md:flex-row gap-6 justify-center">
+          <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
+            Visiter la boutique
+          </a>
+          <a href="<?= langUrl('contact.php') ?>" class="btn btn-outline" data-i18n="contact.requestQuote">
+            Demander un devis
+          </a>
+        </div>
+      </div>
+    </section>
 
-        <section class="features" id="features">
-            <div class="container">
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">⚔️</div>
-                        <h3>Immersion Totale</h3>
-                        <p>Des accessoires physiques qui transforment chaque partie en aventure mémorable</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🏆</div>
-                        <h3>Qualité Premium</h3>
-                        <p>Matériaux nobles et finitions soignées pour des produits durables</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎲</div>
-                        <h3>Compatible D&D 5e (Édition 2024)</h3>
-                        <p>Tous nos produits sont conçus pour les règles officielles de Donjons & Dragons 5e, édition 2024</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+ 
 
-        <?php
-        $viewData = [
-            'variant' => 'home',
-            'titleKey' => 'home.testimonials.title',
-            'testimonials' => [
-                [
-                    'textKey' => 'testimonials.quote2.text',
-                    'authorKey' => 'testimonials.quote2.author',
-                ],
-            ],
-        ];
-        include __DIR__ . '/partials/testimonials.php';
-        unset($viewData);
-        ?>
-
-        <section class="news" id="actualites">
-            <div class="container">
-                <header class="section-header">
-                    <h2 class="section-title">Actualité – FLIM 2025</h2>
-                </header>
-                <article class="news-item">
-                    <img src="/images/optimized-modern/webp/es-tu-game-demo.webp" alt="One‑shot niveau 20 avec pièces" loading="lazy">
-                    <h3>Des héros niveau 20, un raton trop tenace, et… nos pièces</h3>
-                    <p>Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.</p>
-                    <div class="text-center">
-                        <a href="<?= htmlspecialchars(langUrl('/actualites/es-tu-game.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Lire l'article complet</a>
-                    </div>
-                </article>
-                <article class="testimonial-card">
-                    <img src="/images/optimized-modern/webp/avisJoueurFlim2025.webp" alt="Avis joueurs sur pièces" loading="lazy">
-                    <h4>« Finis les combats contre nos feuilles de personnage ! »</h4>
-                    <p>De nombreux joueurs présents l'affirment : les pièces physiques changent tout.</p>
-                    <p><strong>Fini les combats contre les feuilles de perso</strong>, les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek &amp; Dragon, tout commence quand la pièce tombe sur la table.</p>
-                </article>
-            </div>
-        </section>
-
-        <section id="about" class="about-section">
-            <div class="container">
-                <header class="section-header">
-                    <h2 class="section-title">À Propos</h2>
-                </header>
-                <div class="about-content">
-                    <img src="/images/optimized-modern/webp/brand-geekndragon-main.webp" alt="Équipe Geek&Dragon" class="about-photo" loading="lazy">
-                    <p>Geek&Dragon est né de la passion du jeu de rôle. Conçu au Québec, notre collectif crée des accessoires immersifs — pièces métalliques, cartes d'équipement et fiches triptyques — pour mettre l'aventure au cœur de la table.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-section" id="contact">
-            <div class="container">
-                <header class="section-header">
-                    <h2 class="section-title">Contact</h2>
-                </header>
-                <div class="contact-content">
-                    <img src="/images/optimized-modern/webp/team-brujah.webp" alt="Brujah" class="contact-photo" loading="lazy">
-                    <p><a href="mailto:contact@geekndragon.com">contact@geekndragon.com</a></p>
-                    <p><a href="tel:+14387642612">+1&nbsp;438&nbsp;764‑2612</a></p>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>Prêt à vivre l'aventure ?</h2>
-                    <p>Rejoignez les aventuriers qui ont déjà transformé leurs parties avec nos accessoires immersifs.</p>
-                    <a href="<?= htmlspecialchars(langUrl('/boutique.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary large">Commencer mon Aventure</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-<?php
-$footerSections = [
-    [
-        'title' => 'Geek&Dragon',
-        'description' => 'Votre spécialiste en accessoires immersifs pour jeux de rôle depuis 2024.',
-    ],
-    [
-        'title' => 'Navigation',
-        'links' => [
-            ['label' => 'Boutique', 'href' => langUrl('/boutique.php')],
-            ['label' => 'Actualités', 'href' => '#actualites'],
-            ['label' => 'À Propos', 'href' => '#about'],
-            ['label' => 'Contact', 'href' => '#contact'],
-        ],
-    ],
-    [
-        'title' => 'Support',
-        'links' => [
-            ['label' => 'Support Client', 'href' => 'mailto:support@geekndragon.com'],
-            ['label' => 'Livraison', 'href' => '#'],
-            ['label' => 'Retours', 'href' => langUrl('/retours.php')],
-            ['label' => 'FAQ', 'href' => '#'],
-        ],
-    ],
-];
-include __DIR__ . '/footer.php';
-?>
-
-    <!-- Scripts existants -->
-    <script src="/js/app.js"></script>
-    <script src="/js/script.js"></script>
-    <script src="/js/hero-videos.js"></script>
-    <script src="/api/public-config.js.php"></script>
-    <!-- Map ESM bare imports used by modules (e.g., gsap) -->
-    <script type="importmap">
-    {
-      "imports": {
-        "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/index.js"
-      }
-    }
-    </script>
-    <script type="module" src="/js/init-animations.js"></script>
     
+    <!-- ===== ACTUALITÉS ===== -->
+    <section id="actus" class="py-16 bg-gray-900/80 scroll-mt-24">
+      <div class="max-w-5xl mx-auto px-6">
+    
+        <h3 class="text-4xl font-bold text-center mb-12" data-i18n="news.flim2025.heading">Actualité – FLIM 2025</h3>
+    
+        <!-- Résumé d'article - dupliquer ce bloc pour chaque actualité -->
+        <article class="bg-gray-800 p-6 rounded-xl shadow-lg mb-12">
+            <img src="/images/es_tu_game_demo.png" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces" loading="lazy">
+          <h4 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
+          <p class="text-lg text-gray-200 mb-4" data-i18n="news.flim2025.summary">
+            Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.
+          </p>
+          <div class="text-center">
+            <a href="<?= langUrl('actualites/es-tu-game.php') ?>" class="btn btn-primary" data-i18n="news.flim2025.read">Lire l’article</a>
+          </div>
+        </article>
+    
+        <!-- Bloc témoignage -->
+        <article class="bg-gray-800 p-6 mt-12 rounded-xl shadow-lg">
+          <img src="images/avisJoueurFlim2025.jpg" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
+          <h4 class="text-center text-2xl font-semibold mb-4" data-i18n="testimonials.quote1.title">« Finis les combats contre nos feuilles de personnage ! »</h4>
+          <p class="text-lg leading-relaxed text-gray-200" data-i18n="testimonials.quote1.intro">
+            De nombreux joueurs présents l’affirment : les pièces physiques changent tout.
+          </p>
+
+          <p class="text-lg leading-relaxed text-gray-200" data-i18n="testimonials.quote1.p1">
+    Terminées les colonnes de chiffres gribouillées à la hâte sur une fiche froissée. Désormais, chaque joueur sentait le poids réel du butin, glissant entre ses doigts comme un héritage oublié. Un trésor devenu palpable. À chaque échange, c’était tout le corps qui réagissait : la main qui hésite, l’œil qui soupèse, la gorge qui sèche. Le trésor prenait chair. Il devenait enjeu dramatique, émotion viscérale, c’est un événement, un souvenir marquant...
+  </p>
+
+          <p class="text-lg mt-4 leading-relaxed text-gray-200">
+            <strong data-i18n="testimonials.quote1.p2strong">Fini les combats contre les feuilles de perso</strong>, <span data-i18n="testimonials.quote1.p2rest">les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek & Dragon, tout commence quand la pièce tombe sur la table.</span>
+          </p>
+        </article>
+    
+      </div>
+    </section>
+
+
+<!-- ===== CONTACT ===== -->
+    <section id="contact" class="py-16 bg-gray-900/80 scroll-mt-32">
+      <div class="max-w-xl mx-auto text-center">
+        <h3 class="text-4xl font-bold mb-6" data-i18n="nav.contact">Contact</h3>
+        <img src="images/team_brujah.png" alt="Brujah" class="mx-auto h-32 w-32 rounded-full mb-4" loading="lazy">
+          <p class="mb-2 txt-court"><strong>Brujah</strong> — <span data-i18n="contact.info.roleCommunity">Responsable produit & communauté</span></p>
+          <p class="mb-2 txt-court"><a href="mailto:contact@geekndragon.com" class="text-indigo-400 hover:underline">contact@geekndragon.com</a></p>
+          <p class="txt-court"><a href="tel:+14387642612" class="text-indigo-400 hover:underline">+1 438 764-2612</a></p>
+          <div class="mt-6">
+            <a href="<?= langUrl('contact.php') ?>" class="btn btn-primary" data-i18n="contact.requestQuote">
+              Demander un devis
+            </a>
+          </div>
+      </div>
+    </section>
+
+  </main>
+ 
+
+   
+  <?php include 'footer.php'; ?>
+  <script src="/js/app.js"></script>
+  <script src="/js/hero-videos.js"></script>
 </body>
 </html>
-
-

@@ -4,7 +4,7 @@ Site web Geek&Dragon
 
 ## Project overview
 
-GeeknDragon is a lightweight PHP web shop. It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and checkout is processed through Snipcart's API via a single server‑side webhook. Stock levels are managed directly through Snipcart's Inventory API.
+GeeknDragon is a lightweight PHP web shop powered by [Snipcart](https://snipcart.com/). It showcases and sells immersive accessories for role‑playing games. The project does not rely on a framework: PHP files render the pages and Snipcart handles the shopping cart and checkout. Stock levels are managed through Snipcart's Inventory API and automatically updated via webhooks when an order is completed.
 
 ## Product lots and custom chests
 
@@ -17,27 +17,38 @@ The shop offers several coin bundles:
 
 The corresponding product identifiers are `lot10`, `lot25`, `lot50-essence` and `lot50-tresorerie`. When adding or removing products, update `data/products.json` accordingly.
 
-Need more than 50 pieces or a custom assortment? Request a personalized chest through the quote form available at `/contact`.
+Need more than 50 pieces or a custom assortment? Request a personalized chest through the [quote form](contact.php).
 
 ### Adding product images
 
 Place product photos under `images/Piece/pro/`. Each item typically uses a full‑resolution image and a 300 px thumbnail (e.g. `lot10Piece.png` and `lot10Piece-300.png`).
 
+### Configuring multipliers in Snipcart
+
+Multipliers are handled with Snipcart custom fields. Add a `<select>` with the class `multiplier-select` and set the `data-item-custom1-name`, `data-item-custom1-options` (such as `1|10|100|1000|10000`) and `data-item-custom1-value` attributes on the `snipcart-add-item` button to let customers choose the desired multiplier.
+
 ## Environment variables
 
-The central configuration file `config.php` normalises environment values before they are consumed by the application. Define the following entries in your `.env` file or hosting control panel:
+The application expects a few secrets to be provided through the environment:
 
-- `APP_ENV` and `APP_DEBUG` – select between `production` and `development`, and toggle verbose logging locally.
-- `SNIPCART_API_KEY` – public Snipcart key exposed to the storefront.
-- `SNIPCART_SECRET_API_KEY` – private Snipcart key used server-side (the legacy name `SNIPCART_SECRET_KEY` remains supported for the admin dashboard).
-- `QUOTE_EMAIL` – destination address for contact and quote submissions (defaults to `commande@geekndragon.com`).
-- `MAX_MESSAGE_CHARS` and `RATE_LIMIT_WINDOW` – tune the size and anti-spam throttling of the public forms.
-- `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD` and `SMTP_SECURE` – credentials for the transactional mailbox used by `SmtpMailer`.
+- `SNIPCART_API_KEY` – your public Snipcart API key.
+- `SNIPCART_SECRET_API_KEY` – secret key used to query Snipcart's API for inventory updates. **Keep this key strictly server-side; it must never be exposed to client-side code or shipped to the browser.**
+- `SNIPCART_LANGUAGE` – locale used by Snipcart (for example `fr`).
+- `SNIPCART_ADD_PRODUCT_BEHAVIOR` – how products are added to the cart (`overlay`, `sidecart`, ...).
+- `SENDGRID_API_KEY` – API key for the SendGrid SMTP service used to send emails.
+- `QUOTE_EMAIL` – recipient for quote requests (defaults to `contact@geekndragon.com`).
+
+To send emails from the contact form using SendGrid's SMTP service, configure credentials for the fixed sender address `no-reply@geekndragon.com`:
+
+- `SMTP_HOST` – SMTP server hostname (for SendGrid use `smtp.sendgrid.net`).
+- `SMTP_PORT` – SMTP server port (defaults to 587 if unset).
+- `SMTP_USERNAME` – account username (for SendGrid use `apikey`).
+- `SMTP_PASSWORD` – password for the SMTP account (the same as `SENDGRID_API_KEY`).
 
 ## Local setup
 
 1. Install PHP (7.4 or newer) and clone this repository.
-2. Copy `.env.example` to `.env` and provide values for `APP_ENV`, `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY` (or the legacy `SNIPCART_SECRET_KEY`), `QUOTE_EMAIL`, the SMTP variables and the form limits (`MAX_MESSAGE_CHARS`, `RATE_LIMIT_WINDOW`).
+2. Copy `.env.example` to `.env` and fill in `SNIPCART_API_KEY`, `SNIPCART_SECRET_API_KEY`, `SNIPCART_LANGUAGE`, `SNIPCART_ADD_PRODUCT_BEHAVIOR`, `SENDGRID_API_KEY` and the SMTP variables.
    Load these variables in your shell with `source .env`; `SNIPCART_API_KEY` must be exported before running PHP.
 3. (Optional) Install Node dependencies if you need to rebuild CSS or JavaScript assets:
 
@@ -56,7 +67,7 @@ The central configuration file `config.php` normalises environment values before
 
 Make sure that the domain you are using is allowed in your Snipcart dashboard; otherwise the cart may remain stuck at the "préparation" step.
 
-The unified Snipcart webhook (`/snipcart/webhook`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
+The Snipcart webhooks (`shipping.php` and `decrement-stock.php`) must be reachable via HTTPS. When testing locally you can expose your development server with a tool such as ngrok.
 
 ## Error logging
 
@@ -91,39 +102,12 @@ deployment:
     - /usr/bin/rsync -av --delete --exclude='.git/' . "$DEPLOYPATH"
 ```
 
-Adjust the path as needed for your own hosting. Ensure the environment variables are set in cPanel so that the Snipcart webhook works.
+Adjust the path as needed for your own hosting. Ensure the environment variables are set in cPanel so that the Snipcart webhooks work.
 
 In the Snipcart dashboard:
 
-1. Set **Dynamic shipping** to `https://your-domain.com/snipcart/webhook` and select the **POST** method.
+1. Set **Dynamic shipping** to `https://your-domain.com/shipping.php` and select the **POST** method.
+2. Set **Order completed** webhook to `https://your-domain.com/decrement-stock.php`.
 
-With this hook enabled, shipping rates are calculated dynamically when customers check out.
+With these hooks enabled, stock levels update automatically and shipping rates are calculated dynamically when customers check out.
 
-## Maintenance tasks
-
-- Regenerate `sitemap.xml` after adding or removing public pages:
-
-  ```bash
-  php tools/build-sitemap.php
-  ```
-
-## Manual tests
-
-To ensure the currency converter handles invalid inputs correctly:
-
-1. Open the shop page (`boutique.php`) in a browser.
-2. In the currency converter, enter a decimal such as `1.5` and move focus away. The converter floors the value to `1` and a warning appears.
-3. Enter a negative value such as `-3`. The converter clamps the amount to `0` and displays the warning.
-4. Remove the invalid characters and verify that the warning disappears and the totals update.
-
-
-## Generated files
-
-The presentation tool under `Eds/ClaudePresentation/presentationObj` generates temporary assets that are not committed to the repository:
-
-- `node_modules/`
-- `viewer/output.css`
-- `viewer/*.html`
-- build directories such as `dist/`, `tsbuild/` and `build/`
-
-These files can be recreated as needed and are ignored via `.gitignore`.
