@@ -736,7 +736,8 @@ p {
 
 /*
  * Conteneur principal de navigation.
- * Harmonisation avec la structure Tailwind du header fixe pour accueillir le lecteur audio sans modifier les espacements existants.
+ * Les espacements latéraux sont désormais gérés par les utilitaires Tailwind (px-4/md:px-6)
+ * appliqués dans le markup du header, ce qui évite tout conflit avec l'injection du lecteur audio.
  */
 .nav-container {
     display: flex;
@@ -745,7 +746,6 @@ p {
     justify-content: space-between;
     width: 100%;
     margin: 0;
-    padding: 0;
     max-width: none;
     position: relative;
 }
@@ -1836,10 +1836,6 @@ p {
 }
 
 @media (max-width: 480px) {
-    .nav-container {
-        padding: 0;
-    }
-
     .hero-content {
         padding: 0 1rem;
     }
