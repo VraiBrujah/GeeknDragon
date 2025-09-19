@@ -38,6 +38,14 @@
     "cards": "Cartes",
     "triptychs": "Triptyques"
   },
+  "account": {
+    "modalTitle": "Espace client Geek & Dragon",
+    "modalDescription": "Connectez-vous pour suivre vos commandes, consulter vos factures et retrouver vos favoris.",
+    "ctaDashboard": "Ouvrir mon espace client",
+    "ctaPage": "Consulter la page Compte",
+    "modalHint": "Astuce : si vous n'avez pas encore de compte, ouvrez la page dédiée pour en créer un ou demander de l'aide.",
+    "close": "Fermer la fenêtre"
+  },
   "auth": {
     "login": "Se connecter",
     "logout": "Se déconnecter",

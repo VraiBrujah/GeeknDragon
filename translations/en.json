@@ -38,6 +38,14 @@
     "cards": "Cards",
     "triptychs": "Triptychs"
   },
+  "account": {
+    "modalTitle": "Geek & Dragon customer area",
+    "modalDescription": "Sign in to track your orders, download invoices and find your favourites.",
+    "ctaDashboard": "Open my customer area",
+    "ctaPage": "Go to the account page",
+    "modalHint": "Tip: if you don't have an account yet, open the dedicated page to create one or contact us for assistance.",
+    "close": "Close the window"
+  },
   "auth": {
     "login": "Log in",
     "logout": "Log out",
