@@ -17,6 +17,51 @@ class AccountController extends BaseController
     private SnipcartClient $client;
     private InvoiceService $invoiceService;
 
+    private const PRODUCT_SUGGESTIONS = [
+        'lot10' => [
+            'product_id' => 'lot10',
+            'title' => "L'Offrande du Voyageur",
+            'base_reason' => 'Kit de pièces polyvalent pour démarrer vos quêtes',
+            'base_score' => 82,
+        ],
+        'lot25' => [
+            'product_id' => 'lot25',
+            'title' => 'La Monnaie des Cinq Royaumes',
+            'base_reason' => 'Trésor conséquent pour aventuriers accomplis',
+            'base_score' => 84,
+        ],
+        'lot50-essence' => [
+            'product_id' => 'lot50-essence',
+            'title' => "L'Essence du Marchand",
+            'base_reason' => 'Coffret prestigieux inspiré des marchés draconiques',
+            'base_score' => 90,
+        ],
+        'pack-182-arsenal-aventurier' => [
+            'product_id' => 'pack-182-arsenal-aventurier',
+            'title' => "Arsenal de l'Aventurier",
+            'base_reason' => "Cartes d'équipement offensif et défensif", 
+            'base_score' => 92,
+        ],
+        'pack-182-butins-ingenieries' => [
+            'product_id' => 'pack-182-butins-ingenieries',
+            'title' => 'Butins & Ingénieries',
+            'base_reason' => 'Sélection arcanique et gadgets ingénieux',
+            'base_score' => 88,
+        ],
+        'pack-182-routes-services' => [
+            'product_id' => 'pack-182-routes-services',
+            'title' => 'Routes & Services',
+            'base_reason' => 'Services et cartes utilitaires pour explorateurs',
+            'base_score' => 86,
+        ],
+        'triptyque-aleatoire' => [
+            'product_id' => 'triptyque-aleatoire',
+            'title' => 'Triptyques Mystères - Origines Complètes',
+            'base_reason' => 'Tirages thématiques pour forger de nouvelles origines',
+            'base_score' => 75,
+        ],
+    ];
+
     public function __construct(array $config)
     {
         parent::__construct($config);
@@ -129,6 +174,59 @@ class AccountController extends BaseController
     {
         $authenticated = !empty($_SESSION['customer']);
         $this->json(['authenticated' => $authenticated]);
+    }
+
+    /**
+     * GET /api/account/dnd-config - Configuration D&D de référence
+     */
+    public function dndConfig(): void
+    {
+        try {
+            $pdo = DatabaseService::getInstance();
+            $stmt = $pdo->query(
+                "SELECT type, nom, description, traits, recommandations_produits, image_url
+                 FROM dnd_config
+                 WHERE actif = 1
+                 ORDER BY type, ordre_affichage, nom"
+            );
+
+            $config = [
+                'especes' => [],
+                'classes' => [],
+                'historiques' => [],
+            ];
+
+            while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+                $entry = [
+                    'nom' => $row['nom'],
+                    'description' => $row['description'],
+                    'traits' => $this->decodeJson($row['traits'] ?? null, []),
+                    'recommandations' => $this->decodeJson($row['recommandations_produits'] ?? null, []),
+                ];
+
+                if (!empty($row['image_url'])) {
+                    $entry['image'] = $row['image_url'];
+                }
+
+                $key = match ($row['type']) {
+                    'espece' => 'especes',
+                    'classe' => 'classes',
+                    'historique' => 'historiques',
+                    default => null,
+                };
+
+                if ($key) {
+                    $config[$key][] = $entry;
+                }
+            }
+
+            $this->json([
+                'success' => true,
+                'data' => $config,
+            ]);
+        } catch (\Throwable $e) {
+            $this->handleError($e, 'AccountController::dndConfig');
+        }
     }
     
     /**
@@ -663,72 +761,119 @@ class AccountController extends BaseController
      */
     private function generateRecommendations(array $user): array
     {
+        $pdo = DatabaseService::getInstance();
+
+        $contexts = [
+            'espece' => $this->fetchDndConfigEntry($pdo, 'espece', $user['espece'] ?? null),
+            'classe' => $this->fetchDndConfigEntry($pdo, 'classe', $user['classe'] ?? null),
+            'historique' => $this->fetchDndConfigEntry($pdo, 'historique', $user['historique'] ?? null),
+        ];
+
         $recommendations = [];
-        
-        // Recommandations par espèce
-        $especeRecs = [
-            'Humain' => [
-                ['product_id' => 'lot10', 'title' => 'L\'Offrande du Voyageur', 'reason' => 'Starter pack parfait pour les humains polyvalents', 'score' => 85],
-            ],
-            'Elfe' => [
-                ['product_id' => 'routes-services', 'title' => 'Routes & Services', 'reason' => 'Idéal pour les elfes voyageurs et mystiques', 'score' => 90],
-            ],
-            'Nain' => [
-                ['product_id' => 'lot25', 'title' => 'La Monnaie des Cinq Royaumes', 'reason' => 'Collection complète pour les nains amateurs de richesse', 'score' => 88],
-            ],
-            'Halfelin' => [
-                ['product_id' => 'lot10', 'title' => 'L\'Offrande du Voyageur', 'reason' => 'Parfait pour débuter l\'aventure halfeline', 'score' => 82],
-            ],
-            'Drakéide' => [
-                ['product_id' => 'lot50-essence', 'title' => 'L\'Essence du Marchand', 'reason' => 'Opulence digne des descendants de dragons', 'score' => 92],
-            ]
-        ];
-        
-        // Recommandations par classe
-        $classeRecs = [
-            'Guerrier' => [
-                ['product_id' => 'arsenal-aventurier', 'title' => 'Arsenal de l\'Aventurier', 'reason' => 'Équipement de combat pour guerriers', 'score' => 95],
-            ],
-            'Magicien' => [
-                ['product_id' => 'butins-ingenieries', 'title' => 'Butins & Ingénieries', 'reason' => 'Objets magiques et merveilles arcanes', 'score' => 93],
-            ],
-            'Roublard' => [
-                ['product_id' => 'butins-ingenieries', 'title' => 'Butins & Ingénieries', 'reason' => 'Outils spécialisés et équipement discret', 'score' => 87],
-            ],
-            'Clerc' => [
-                ['product_id' => 'routes-services', 'title' => 'Routes & Services', 'reason' => 'Services divins et équipement ecclésiastique', 'score' => 85],
-            ]
-        ];
-        
-        // Ajouter les recommandations
-        if (isset($especeRecs[$user['espece']])) {
-            $recommendations = array_merge($recommendations, $especeRecs[$user['espece']]);
-        }
-        
-        if (isset($classeRecs[$user['classe']])) {
-            $recommendations = array_merge($recommendations, $classeRecs[$user['classe']]);
-        }
-        
-        // Recommandation universelle
-        $recommendations[] = [
-            'product_id' => 'triptyques-mysteres',
-            'title' => 'Triptyques Mystères - Origines Complètes',
-            'reason' => 'Explorez de nouveaux personnages et combinaisons',
-            'score' => 75
-        ];
-        
-        // Dédupliquer et trier par score
-        $uniqueRecs = [];
-        foreach ($recommendations as $rec) {
-            $key = $rec['product_id'];
-            if (!isset($uniqueRecs[$key]) || $rec['score'] > $uniqueRecs[$key]['score']) {
-                $uniqueRecs[$key] = $rec;
+
+        foreach ($contexts as $type => $entry) {
+            if (!$entry) {
+                continue;
+            }
+
+            $codes = $entry['recommandations'] ?? [];
+            foreach ($codes as $index => $code) {
+                if (!isset(self::PRODUCT_SUGGESTIONS[$code])) {
+                    continue;
+                }
+
+                $suggestion = self::PRODUCT_SUGGESTIONS[$code];
+                $productId = $suggestion['product_id'];
+
+                $contextReason = $this->buildContextReason($type, $entry['nom']);
+                $baseReason = $suggestion['base_reason'] ?? '';
+                $fullReason = $baseReason !== '' ? $baseReason . ' — ' . $contextReason : $contextReason;
+                $baseScore = $suggestion['base_score'] ?? 75;
+                $scoreBoost = max(0, 10 - ($index * 3));
+                $score = min(100, $baseScore + $scoreBoost);
+
+                if (!isset($recommendations[$productId])) {
+                    $recommendations[$productId] = [
+                        'product_id' => $productId,
+                        'title' => $suggestion['title'],
+                        'reason' => $fullReason,
+                        'score' => $score,
+                    ];
+                } else {
+                    $recommendations[$productId]['score'] = min(100, $recommendations[$productId]['score'] + 5);
+                    $recommendations[$productId]['reason'] .= ' + ' . strtolower($contextReason);
+                }
             }
         }
-        
-        usort($uniqueRecs, fn($a, $b) => $b['score'] <=> $a['score']);
-        
-        return array_slice($uniqueRecs, 0, 3);
+
+        if (!isset($recommendations['triptyque-aleatoire'])) {
+            $triptyque = self::PRODUCT_SUGGESTIONS['triptyque-aleatoire'];
+            $recommendations['triptyque-aleatoire'] = [
+                'product_id' => $triptyque['product_id'],
+                'title' => $triptyque['title'],
+                'reason' => ($triptyque['base_reason'] ?? '') . ' — compatible avec toutes les combinaisons',
+                'score' => $triptyque['base_score'] ?? 75,
+            ];
+        }
+
+        $recommendationsList = array_values($recommendations);
+        usort($recommendationsList, static fn(array $a, array $b): int => $b['score'] <=> $a['score']);
+
+        return array_slice($recommendationsList, 0, 3);
+    }
+
+    private function fetchDndConfigEntry(\PDO $pdo, string $type, ?string $nom): ?array
+    {
+        if (empty($nom)) {
+            return null;
+        }
+
+        $stmt = $pdo->prepare(
+            "SELECT nom, description, traits, recommandations_produits
+             FROM dnd_config
+             WHERE type = :type AND nom = :nom AND actif = 1
+             LIMIT 1"
+        );
+        $stmt->execute([
+            ':type' => $type,
+            ':nom' => $nom,
+        ]);
+
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if (!$row) {
+            return null;
+        }
+
+        return [
+            'nom' => $row['nom'],
+            'description' => $row['description'],
+            'traits' => $this->decodeJson($row['traits'] ?? null, []),
+            'recommandations' => $this->decodeJson($row['recommandations_produits'] ?? null, []),
+        ];
+    }
+
+    private function buildContextReason(string $type, string $nom): string
+    {
+        return match ($type) {
+            'espece' => "Harmonisé avec votre espèce {$nom}",
+            'classe' => "Optimisé pour votre classe de {$nom}",
+            'historique' => "Adapté à votre historique {$nom}",
+            default => 'Suggestion thématique',
+        };
+    }
+
+    /**
+     * @param mixed $default
+     */
+    private function decodeJson(?string $json, $default)
+    {
+        if ($json === null || $json === '') {
+            return $default;
+        }
+
+        $decoded = json_decode($json, true);
+
+        return is_array($decoded) ? $decoded : $default;
     }
     
     /**

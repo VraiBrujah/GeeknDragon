@@ -163,6 +163,7 @@ $router->post('/api/account/logout', [$accountController, 'logout']);
 $router->get('/api/account/profile', [$accountController, 'profile']);
 $router->get('/api/account/orders', [$accountController, 'orders']);
 $router->get('/api/account/status', [$accountController, 'status']);
+$router->get('/api/account/dnd-config', [$accountController, 'dndConfig']);
 
 // ===============================
 // ASSETS STATIQUES (BYPASS)
