@@ -46,6 +46,64 @@ h6 {
   line-height: 1.25;
 }
 
+/* Styles pour les descriptions de produits avec Markdown */
+.product-description {
+  text-align: left;
+}
+
+.product-description h1,
+.product-description h2,
+.product-description h3 {
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #f3f4f6;
+}
+
+.product-description h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-description p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.product-description strong {
+  font-weight: 600;
+  color: #f3f4f6;
+}
+
+.product-description em {
+  font-style: italic;
+  color: #e5e7eb;
+}
+
+.product-description ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.product-description ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.product-description blockquote {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  border-left: 4px solid #6366f1;
+  background-color: rgba(99, 102, 241, 0.1);
+  border-radius: 0.375rem;
+}
+
+.product-description blockquote p {
+  margin-bottom: 0;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
 .txt-court {
   text-align: center;
   line-height: 1.6;

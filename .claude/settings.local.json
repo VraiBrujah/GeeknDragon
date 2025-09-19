@@ -4,7 +4,9 @@
       "Bash(start:*)",
       "Bash(php:*)",
       "Bash(rm:*)",
-      "WebFetch(domain:geekndragon.com)"
+      "WebFetch(domain:geekndragon.com)",
+      "Bash(npm run build:*)",
+      "Bash(npm install)"
     ],
     "deny": [],
     "ask": []

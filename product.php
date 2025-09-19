@@ -19,6 +19,11 @@ $product = $data[$id];
 $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
 $productDesc = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
 
+// Utilisation de la fonction partagée pour la conversion Markdown
+require_once __DIR__ . '/includes/markdown-utils.php';
+
+$productDescHtml = convertMarkdownToHtml($productDesc);
+
 $title  = $productName . ' | Geek & Dragon';
 $metaDescription = $productDesc;
 $host = $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
@@ -101,7 +106,7 @@ echo $snipcartInit;
                    alt="<?= htmlspecialchars($product['description']) ?>"
                    data-alt-fr="<?= htmlspecialchars($product['description']) ?>"
                    data-alt-en="<?= htmlspecialchars($descriptionEn) ?>"
-                   class="rounded w-full object-cover">
+                   class="rounded w-full object-contain">
             </a>
           </div>
           <?php endforeach; ?>
@@ -116,9 +121,7 @@ echo $snipcartInit;
           data-name-fr="<?= $displayName ?>"
           data-name-en="<?= $displayNameEn ?>"><?= $displayName ?></h1>
 
-      <p class="mb-6 text-gray-300 text-center"
-         data-desc-fr="<?= htmlspecialchars($product['description']) ?>"
-         data-desc-en="<?= htmlspecialchars($descriptionEn) ?>"><?= htmlspecialchars($product['description']) ?></p>
+      <div class="mb-6 text-gray-300 text-center product-description"><?= $productDescHtml ?></div>
 
       <?php if (inStock($id)) : ?>
       <div class="text-center mb-4 w-full">

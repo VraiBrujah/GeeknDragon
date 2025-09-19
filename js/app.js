@@ -202,8 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
           if (target) el.innerHTML = target;
         });
         document.querySelectorAll('[data-desc-fr]').forEach((el) => {
-          const target = current === 'en' ? el.dataset.descEn : el.dataset.descFr;
-          if (target) el.textContent = target;
+          // On garde le HTML déjà converti, pas besoin de traduction côté JS
+          // Le PHP gère déjà la traduction avec le bon format HTML
         });
         document.querySelectorAll('[data-alt-fr]').forEach((el) => {
           const target = current === 'en' ? el.dataset.altEn : el.dataset.altFr;

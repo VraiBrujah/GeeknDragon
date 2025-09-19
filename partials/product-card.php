@@ -14,6 +14,13 @@ $descriptionFr = (string) ($product['description'] ?? '');
 $descriptionEn = (string) ($product['description_en'] ?? $descriptionFr);
 $description = $lang === 'en' ? $descriptionEn : $descriptionFr;
 
+// Utilisation de la fonction partagée pour la conversion Markdown
+require_once __DIR__ . '/../includes/markdown-utils.php';
+
+$descriptionHtmlFr = convertMarkdownToHtml($descriptionFr);
+$descriptionHtmlEn = convertMarkdownToHtml($descriptionEn);
+$descriptionHtml = $lang === 'en' ? $descriptionHtmlEn : $descriptionHtmlFr;
+
 /**
  * Convertit une description Markdown en texte brut pour Snipcart ou les attributs alt.
  */
@@ -57,7 +64,7 @@ $multipliers = $product['multipliers'] ?? [];
          alt="<?= htmlspecialchars($alt) ?>"
          data-alt-fr="<?= htmlspecialchars($altFr) ?>"
          data-alt-en="<?= htmlspecialchars($altEn) ?>"
-         class="rounded mb-4 w-full h-48 object-cover" loading="lazy">
+         class="rounded mb-4 w-full max-h-48 object-contain" loading="lazy">
   </a>
 
   <a href="<?= htmlspecialchars($url) ?>" class="block">
@@ -68,11 +75,9 @@ $multipliers = $product['multipliers'] ?? [];
     </h4>
   </a>
 
-  <p class="text-center mb-4 text-gray-300 flex-grow"
-     data-desc-fr="<?= htmlspecialchars($descriptionFr) ?>"
-     data-desc-en="<?= htmlspecialchars($descriptionEn) ?>">
-    <?= htmlspecialchars($description) ?>
-  </p>
+  <div class="text-center mb-4 text-gray-300 flex-grow product-description">
+    <?= $descriptionHtml ?>
+  </div>
 
 
 
