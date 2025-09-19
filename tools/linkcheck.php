@@ -66,7 +66,7 @@ class LinkChecker
             'checkout.php',
             'product.php',
             'merci.php',
-            'actualites/es-tu-game.html'
+            'actualites/es-tu-game.php'
         ];
 
         $standaloneProductPages = glob($this->basePath . '/produit-*.php');
