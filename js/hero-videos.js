@@ -4,19 +4,38 @@
 // - Plusieurs sources : double-buffer + préchargement, on ne retire l'ancien
 //   qu'après que le nouveau joue vraiment (plus d'écran vide).
 
+console.log('🚀 Script hero-videos.js chargé !');
+
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('🎬 Hero Videos script chargé');
   const FADE_MS = 1000;
 
-  document.querySelectorAll('.hero-videos').forEach((container) => {
+  const containers = document.querySelectorAll('.hero-videos');
+  console.log('📹 Containers hero-videos trouvés:', containers.length);
+
+  containers.forEach((container, index) => {
+    console.log(`🎥 Traitement container ${index + 1}:`, {
+      main: container.dataset.main,
+      videos: container.dataset.videos,
+      parent: container.parentElement.className
+    });
     // 1) Lire et valider la liste aléatoire + éventuelle vidéo principale
     let list = [];
     try {
       const raw = container.dataset.videos || '[]';
-      const arr = JSON.parse(raw);
-      if (Array.isArray(arr)) {
-        list = arr.filter((s) => typeof s === 'string' && s.trim() !== '');
+      console.log('📝 Raw videos data:', raw);
+      
+      // Validation plus stricte pour éviter les problèmes CSP
+      if (raw && raw.startsWith('[') && raw.endsWith(']')) {
+        const arr = JSON.parse(raw);
+        if (Array.isArray(arr)) {
+          list = arr.filter((s) => typeof s === 'string' && s.trim() !== '');
+          console.log('✅ Liste vidéos validée:', list);
+        }
       }
-    } catch { /* ignore */ }
+    } catch (e) { 
+      console.error('❌ Erreur parse JSON:', e);
+    }
 
     const mainSrc = (container.dataset.main || '').trim();
 
@@ -28,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Helper de création <video>
     const makeVideo = (src, hidden = true) => {
+      console.log('🎞️ Création vidéo:', src);
       const v = document.createElement('video');
       v.src = src;
       v.muted = true;
@@ -46,6 +66,15 @@ document.addEventListener('DOMContentLoaded', () => {
       v.style.transition = `opacity ${FADE_MS}ms ease, filter ${FADE_MS}ms ease`;
       v.style.opacity = hidden ? '0' : '1';
       v.style.filter = hidden ? 'blur(8px)' : 'blur(0)';
+      
+      v.addEventListener('loadeddata', () => {
+        console.log('📺 Vidéo chargée:', src);
+      });
+      
+      v.addEventListener('error', (e) => {
+        console.error('❌ Erreur vidéo:', src, e);
+      });
+      
       return v;
     };
 

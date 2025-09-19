@@ -16,8 +16,10 @@ $title = __('meta.home.title', 'Geek & Dragon - Accessoires immersifs pour jeux 
 $metaDescription = __('meta.home.desc', "Découvrez notre collection exclusive de pièces métalliques, cartes d'équipement et triptyques pour transformer vos parties de D&D en aventures inoubliables.");
 $active = '';
 $styleVersion = gdLocalAssetVersion('css/style.css');
+$heroFixVersion = gdLocalAssetVersion('css/hero-videos-fix.css');
 $extraHead = <<<HTML
   <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
+  <link rel="stylesheet" href="/css/hero-videos-fix.css?v={$heroFixVersion}">
 HTML;
 ?>
 <!DOCTYPE html>
@@ -29,7 +31,11 @@ HTML;
     <main id="main" class="pt-[var(--header-height)]">
         <section class="hero">
             <div class="hero-background">
-            <div class="hero-videos" data-main="/videos/video-mage-hero.mp4" data-videos='["/videos/cascade_HD.mp4","/videos/fontaine11.mp4","/videos/Carte1.mp4","/videos/fontaine4.mp4","/videos/fontaine3.mp4","/videos/fontaine2.mp4","/videos/fontaine1.mp4"]'></div>
+            <div class="hero-videos">
+                <video autoplay muted loop playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; z-index: 1;">
+                    <source src="/videos/video-mage-hero.mp4" type="video/mp4">
+                </video>
+            </div>
                 <div class="hero-overlay"></div>
             </div>
             <div class="hero-content">
@@ -249,7 +255,7 @@ include __DIR__ . '/footer.php';
     <!-- Scripts existants -->
     <script src="/js/app.js"></script>
     <script src="/js/script.js"></script>
-    <script src="/js/hero-videos.js"></script>
+    <script src="/js/hero-videos-simple.js"></script>
     <script src="/api/public-config.js.php"></script>
     <!-- Map ESM bare imports used by modules (e.g., gsap) -->
     <script type="importmap">
