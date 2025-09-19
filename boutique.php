@@ -56,8 +56,8 @@ foreach ($data as $id => $p) {
         'name_en' => str_replace(' – ', '<br>', $p['name_en'] ?? $p['name']),
         'price' => $p['price'],
         'img' => $p['images'][0] ?? '',
-        'desc' => $p['description'],
-        'desc_en' => $p['description_en'] ?? $p['description'],
+        'description' => $p['description'] ?? '',
+        'description_en' => $p['description_en'] ?? ($p['description'] ?? ''),
         'url' => 'product.php?id=' . urlencode($id) . '&from=pieces',
         'multipliers' => $p['multipliers'] ?? [],
     ];
@@ -190,7 +190,7 @@ echo $snipcartInit;
         return [
             '@type' => 'Product',
             'name' => strip_tags($p['name']),
-            'description' => $p['desc'],
+            'description' => $p['description'],
             'image' => 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/' . $p['img'],
             'sku' => $p['id'],
             'offers' => [
