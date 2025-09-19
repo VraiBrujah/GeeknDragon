@@ -736,12 +736,12 @@ p {
 
 /*
  * Conteneur principal de navigation.
- * Les espacements latéraux sont désormais gérés par les utilitaires Tailwind (px-4/md:px-6)
- * appliqués dans le markup du header, ce qui évite tout conflit avec l'injection du lecteur audio.
+ * Les espacements latéraux et le comportement responsive (flex-wrap/md:flex-nowrap)
+ * sont gérés par les utilitaires Tailwind appliqués dans le markup du header, ce
+ * qui évite tout conflit avec l'injection du lecteur audio.
  */
 .nav-container {
     display: flex;
-    flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
     width: 100%;
