@@ -79,13 +79,6 @@ if (!in_array($appEnv, ['production', 'development'], true)) {
     $appEnv = 'production';
 }
 
-$apiKey = gdValidateApiKey($env('SNIPCART_API_KEY', ''));
-$secretCandidate = $env('SNIPCART_SECRET_API_KEY', '');
-if ($secretCandidate === '') {
-    $secretCandidate = $env('SNIPCART_SECRET_KEY', '');
-}
-$secretKey = gdValidateApiKey($secretCandidate);
-$snipcartConfigured = $apiKey !== null && $secretKey !== null;
 
 return [
     'APP_ENV' => $appEnv,
@@ -93,9 +86,6 @@ return [
     'base_url' => gdComputeBaseUrl(),
     'current_host' => validateHost($_SERVER['HTTP_HOST'] ?? 'localhost'),
     'storage_path' => __DIR__ . '/storage',
-    'snipcart_api_key' => $apiKey ?? '',
-    'snipcart_secret_api_key' => $secretKey ?? '',
-    'snipcart_configured' => $snipcartConfigured,
     'quote_email' => $env('QUOTE_EMAIL', 'commande@geekndragon.com'),
     'max_message_chars' => (int) $env('MAX_MESSAGE_CHARS', 3000),
     'rate_limit_window' => (int) $env('RATE_LIMIT_WINDOW', 120),

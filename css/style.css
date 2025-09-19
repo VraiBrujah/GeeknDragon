@@ -941,7 +941,7 @@ p {
 }
 
 .hero-subtitle {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin-bottom: 3rem;
     color: var(--light-text);
     text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
@@ -1240,6 +1240,22 @@ header img.rounded {
 @media (min-width: 1024px) {
     .catalogue-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Media query pour écrans larges - Augmentation taille hero-subtitle */
+@media (min-width: 1200px) {
+    .hero-subtitle {
+        font-size: 1.8rem;
+        padding: 2rem 3rem;
+    }
+}
+
+/* Media query pour très grands écrans */
+@media (min-width: 1600px) {
+    .hero-subtitle {
+        font-size: 2rem;
+        padding: 2.5rem 3.5rem;
     }
 }
 

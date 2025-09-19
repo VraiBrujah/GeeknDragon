@@ -332,8 +332,3 @@ if (!function_exists('gdDefaultHeaderActionsMobile')) {
   </nav>
 </header>
 
-<?php if (!$snipcartConfigured): ?>
-<div id="api-warning" style="position: fixed; top: var(--header-height, 96px); left: 0; right: 0; background: linear-gradient(45deg, #dc2626, #b91c1c); color: white; text-align: center; padding: 0.75rem; z-index: 1100;">
-  <strong>Snipcart</strong> n'est pas complètement configuré. Vérifiez vos clés API.
-</div>
-<?php endif; ?>

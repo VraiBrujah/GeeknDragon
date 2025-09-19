@@ -261,17 +261,6 @@ include __DIR__ . '/footer.php';
     </script>
     <script type="module" src="/js/init-animations.js"></script>
     
-    <!-- Intégration Snipcart avec thème D&D -->
-    <script src="/js/snipcart-products.js"></script>
-    <script src="/js/snipcart-integration.js"></script>
-    
-    <!-- Container Snipcart (hidden) -->
-    <div id="snipcart"
-         data-api-key="<?= htmlspecialchars($snipcartApiKey, ENT_QUOTES, 'UTF-8') ?>"
-         data-config-modal-style="side"
-         data-config-add-product-behavior="none"
-         style="display: none;">
-    </div>
 </body>
 </html>
 
