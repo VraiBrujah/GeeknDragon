@@ -12,6 +12,10 @@ use GeeknDragon\Core\SessionHelper;
  * - $active : identifiant du menu actif.
  * - $config : tableau de configuration existant.
  * - $navItems : tableau personnalisé d'éléments de navigation.
+ *   Chaque élément peut définir :
+ *     - 'href' pour forcer l'URL utilisée;
+ *     - 'use_lang' (bool) pour activer/désactiver l'ajout du préfixe de langue;
+ *     - 'target' et 'rel' pour ajuster les attributs d'ouverture de lien.
  * - $headerActions : actions additionnelles pour l'entête (chaîne échappée,
  *   tableau de chaînes ou callback retournant du HTML sécurisé).
  * - $headerActionsMobile : équivalent mobile pour les actions supplémentaires.
@@ -75,12 +79,34 @@ if (!function_exists('gdRenderNav')) {
     function gdRenderNav(array $items, string $active, bool $mobile = false): void
     {
         foreach ($items as $href => $item) {
+            $rawLink = $item['href'] ?? $href;
+            $useLangUrl = $item['use_lang'] ?? !isset($item['href']);
+            $link = $rawLink;
+
+            if ($useLangUrl) {
+                $link = langUrl($rawLink);
+            } elseif (
+                !preg_match('#^(?:https?:|mailto:|tel:)#i', (string) $rawLink)
+                && strpos((string) $rawLink, '/') !== 0
+            ) {
+                $link = '/' . ltrim((string) $rawLink, '/');
+            }
+
             $class = 'nav-link font-medium transition-colors duration-200 whitespace-nowrap '
                 . ($mobile ? 'text-lg' : 'text-sm md:text-base')
                 . ' ' . gdNavClass($item['slug'], $active);
-            $link = langUrl($href);
             $isActive = ($item['slug'] ?? '') === $active;
             $ariaCurrent = $isActive ? ' aria-current="page"' : '';
+
+            $targetAttr = '';
+            if (!empty($item['target'])) {
+                $targetAttr = ' target="' . htmlspecialchars((string) $item['target'], ENT_QUOTES, 'UTF-8') . '"';
+            }
+
+            $relAttr = '';
+            if (!empty($item['rel'])) {
+                $relAttr = ' rel="' . htmlspecialchars((string) $item['rel'], ENT_QUOTES, 'UTF-8') . '"';
+            }
 
             $labelText = htmlspecialchars($item['label'] ?? '', ENT_QUOTES, 'UTF-8');
             $i18nKey = htmlspecialchars($item['i18n'] ?? '', ENT_QUOTES, 'UTF-8');
@@ -110,7 +136,7 @@ if (!function_exists('gdRenderNav')) {
             if (isset($item['children']) && !$mobile) {
                 echo '<li class="relative group">';
                 echo '<a href="' . htmlspecialchars($link, ENT_QUOTES, 'UTF-8')
-                    . '" class="' . $class . ' block px-2 py-1"' . $ariaCurrent . '>'
+                    . '" class="' . $class . ' block px-2 py-1"' . $ariaCurrent . $targetAttr . $relAttr . '>'
                     . $label . '</a>';
                 echo '<ul class="absolute left-0 top-full hidden group-hover:flex flex-col bg-gray-900/80 p-2 rounded z-10 space-y-1">';
                 gdRenderNav($item['children'], $active, $mobile);
@@ -118,7 +144,7 @@ if (!function_exists('gdRenderNav')) {
             } else {
                 echo '<li>';
                 echo '<a href="' . htmlspecialchars($link, ENT_QUOTES, 'UTF-8')
-                    . '" class="' . $class . ' block px-2 py-1"' . $ariaCurrent . '>'
+                    . '" class="' . $class . ' block px-2 py-1"' . $ariaCurrent . $targetAttr . $relAttr . '>'
                     . $label . '</a>';
                 if (isset($item['children']) && $mobile) {
                     echo '<ul class="pl-4 flex flex-col space-y-2 mt-2">';
