@@ -145,9 +145,17 @@ abstract class BaseController
                 $errors[$field] = "Le champ $field doit être numérique";
             }
             
+            if (preg_match('/min:(\d+)/', $rule, $matches)) {
+                $min = (int)$matches[1];
+                if (strlen((string)$value) < $min) {
+                    $errors[$field] = "Le champ $field doit contenir au moins $min caractères";
+                    continue;
+                }
+            }
+
             if (preg_match('/max:(\d+)/', $rule, $matches)) {
                 $max = (int)$matches[1];
-                if (strlen($value) > $max) {
+                if (strlen((string)$value) > $max) {
                     $errors[$field] = "Le champ $field ne doit pas dépasser $max caractères";
                 }
             }

@@ -106,6 +106,9 @@ return [
         'port' => (int) $env('SMTP_PORT', 587),
         'secure' => $env('SMTP_SECURE', 'tls'),
     ],
+    'features' => [
+        'local_password_auth' => gdSanitizeBoolean($env('LOCAL_PASSWORD_AUTH', false)),
+    ],
     'security' => [
         'force_https' => gdSanitizeBoolean($env('FORCE_HTTPS', true), true),
         'csrf_token_name' => '_token',
