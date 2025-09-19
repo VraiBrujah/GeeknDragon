@@ -9,8 +9,12 @@ use GeeknDragon\Core\SessionHelper;
  * Barre de navigation principale.
  *
  * Les pages peuvent définir :
- * - $active : identifiant du menu actif
- * - $config : tableau de configuration existant
+ * - $active : identifiant du menu actif.
+ * - $config : tableau de configuration existant.
+ * - $navItems : tableau personnalisé d'éléments de navigation.
+ * - $headerActions : actions additionnelles pour l'entête (chaîne échappée,
+ *   tableau de chaînes ou callback retournant du HTML sécurisé).
+ * - $headerActionsMobile : équivalent mobile pour les actions supplémentaires.
  */
 SessionHelper::ensureSession();
 
@@ -32,35 +36,37 @@ if (!function_exists('gdNavClass')) {
     }
 }
 
-$navItems = [
-    '/boutique.php' => [
-        'slug' => 'boutique',
-        'label' => 'Boutique',
-        'i18n' => 'nav.shop',
-        'children' => [
-            '/boutique.php#coins' => ['slug' => 'coins', 'label' => 'Pièces', 'i18n' => 'nav.pieces'],
-            '/boutique.php#cards' => ['slug' => 'cards', 'label' => 'Cartes', 'i18n' => 'nav.cards'],
-            '/boutique.php#triptych' => ['slug' => 'triptych', 'label' => 'Triptyques', 'i18n' => 'nav.triptychs'],
+if (!isset($navItems)) {
+    $navItems = [
+        '/boutique.php' => [
+            'slug' => 'boutique',
+            'label' => 'Boutique',
+            'i18n' => 'nav.shop',
+            'children' => [
+                '/boutique.php#coins' => ['slug' => 'coins', 'label' => 'Pièces', 'i18n' => 'nav.pieces'],
+                '/boutique.php#cards' => ['slug' => 'cards', 'label' => 'Cartes', 'i18n' => 'nav.cards'],
+                '/boutique.php#triptych' => ['slug' => 'triptych', 'label' => 'Triptyques', 'i18n' => 'nav.triptychs'],
+            ],
         ],
-    ],
-    '/index.php#actus' => [
-        'slug' => 'actus',
-        'label' => 'Actualités',
-        'i18n' => 'nav.news',
-    ],
-    '/devis.php' => [
-        'slug' => 'contact',
-        'label' => 'Devis',
-        'i18n' => 'nav.contact',
-    ],
-    '/compte.php' => [
-        'slug' => 'compte',
-        'label' => 'Compte',
-        'i18n' => 'nav.account',
-        'icon' => '👤',
-        'icon_only' => true,
-    ],
-];
+        '/index.php#actus' => [
+            'slug' => 'actus',
+            'label' => 'Actualités',
+            'i18n' => 'nav.news',
+        ],
+        '/devis.php' => [
+            'slug' => 'contact',
+            'label' => 'Devis',
+            'i18n' => 'nav.contact',
+        ],
+        '/compte.php' => [
+            'slug' => 'compte',
+            'label' => 'Compte',
+            'i18n' => 'nav.account',
+            'icon' => '👤',
+            'icon_only' => true,
+        ],
+    ];
+}
 
 if (!function_exists('gdRenderNav')) {
     /**
@@ -124,6 +130,115 @@ if (!function_exists('gdRenderNav')) {
         }
     }
 }
+
+if (!function_exists('gdRenderHeaderActions')) {
+    /**
+     * Normalise et rend les actions additionnelles de l'entête.
+     *
+     * @param mixed    $actions          Valeur définie par la page (chaîne, tableau ou callback).
+     * @param callable $defaultProvider  Générateur de contenu par défaut.
+     */
+    function gdRenderHeaderActions($actions, callable $defaultProvider): string
+    {
+        if ($actions === null) {
+            return (string) call_user_func($defaultProvider);
+        }
+
+        if (is_callable($actions)) {
+            $result = $actions();
+            if (is_string($result) || (is_object($result) && method_exists($result, '__toString'))) {
+                return (string) $result;
+            }
+
+            return (string) call_user_func($defaultProvider);
+        }
+
+        if (is_string($actions) || (is_object($actions) && method_exists($actions, '__toString'))) {
+            return htmlspecialchars((string) $actions, ENT_QUOTES, 'UTF-8');
+        }
+
+        if (is_array($actions)) {
+            $htmlParts = [];
+            foreach ($actions as $action) {
+                if (is_callable($action)) {
+                    $value = $action();
+                    if (is_string($value) || (is_object($value) && method_exists($value, '__toString'))) {
+                        $htmlParts[] = (string) $value;
+                    }
+                    continue;
+                }
+
+                if (is_string($action) || (is_object($action) && method_exists($action, '__toString'))) {
+                    $htmlParts[] = htmlspecialchars((string) $action, ENT_QUOTES, 'UTF-8');
+                }
+            }
+
+            if ($htmlParts !== []) {
+                return implode('', $htmlParts);
+            }
+
+            return (string) call_user_func($defaultProvider);
+        }
+
+        return (string) call_user_func($defaultProvider);
+    }
+}
+
+if (!function_exists('gdDefaultHeaderActionsDesktop')) {
+    /**
+     * Fournit les actions par défaut de l'entête (version bureau).
+     */
+    function gdDefaultHeaderActionsDesktop(): string
+    {
+        ob_start();
+        ?>
+        <button id="gd-account-toggle" class="gd-header-btn flex items-center justify-center text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte" aria-expanded="false" aria-haspopup="dialog">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+          </svg>
+          <span class="sr-only" data-i18n="nav.account">Compte</span>
+        </button>
+
+        <button id="gd-cart-toggle" class="gd-header-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Panier" aria-expanded="false" aria-haspopup="dialog">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+          </svg>
+          <span id="gd-cart-count" class="gd-cart-badge" aria-label="Articles dans le panier">0</span>
+          <span class="sr-only" data-i18n="nav.cart">Panier</span>
+        </button>
+        <?php
+
+        return (string) ob_get_clean();
+    }
+}
+
+if (!function_exists('gdDefaultHeaderActionsMobile')) {
+    /**
+     * Fournit les actions par défaut de l'entête (version mobile).
+     */
+    function gdDefaultHeaderActionsMobile(): string
+    {
+        ob_start();
+        ?>
+        <button id="gd-account-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
+          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+          </svg>
+          <span class="sr-only" data-i18n="nav.account">Compte</span>
+        </button>
+
+        <button id="gd-cart-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
+          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+          </svg>
+          <span class="gd-cart-badge-mobile">0</span>
+          <span class="sr-only" data-i18n="nav.cart">Panier</span>
+        </button>
+        <?php
+
+        return (string) ob_get_clean();
+    }
+}
 ?>
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
@@ -162,20 +277,7 @@ if (!function_exists('gdRenderNav')) {
       </div>
 
       <div class="flex items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
-        <button id="gd-account-toggle" class="gd-header-btn flex items-center justify-center text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte" aria-expanded="false" aria-haspopup="dialog">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-          </svg>
-          <span class="sr-only" data-i18n="nav.account">Compte</span>
-        </button>
-
-        <button id="gd-cart-toggle" class="gd-header-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Panier" aria-expanded="false" aria-haspopup="dialog">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-          </svg>
-          <span id="gd-cart-count" class="gd-cart-badge" aria-label="Articles dans le panier">0</span>
-          <span class="sr-only" data-i18n="nav.cart">Panier</span>
-        </button>
+        <?= gdRenderHeaderActions($headerActions ?? null, 'gdDefaultHeaderActionsDesktop'); ?>
       </div>
     </div>
   </div>
@@ -197,20 +299,7 @@ if (!function_exists('gdRenderNav')) {
       </div>
 
       <div class="flex flex-col w-full gap-6">
-        <button id="gd-account-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte">
-          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-          </svg>
-          <span class="sr-only" data-i18n="nav.account">Compte</span>
-        </button>
-
-        <button id="gd-cart-toggle-mobile" class="gd-header-btn w-full text-center text-lg uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Panier">
-          <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-          </svg>
-          <span class="gd-cart-badge-mobile">0</span>
-          <span class="sr-only" data-i18n="nav.cart">Panier</span>
-        </button>
+        <?= gdRenderHeaderActions($headerActionsMobile ?? null, 'gdDefaultHeaderActionsMobile'); ?>
       </div>
 
       <button id="menu-close" aria-label="Fermer le menu" class="mt-8 text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded transition-colors duration-200">
