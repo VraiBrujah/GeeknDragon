@@ -172,7 +172,7 @@ HTML;
                     <h3>Des héros niveau 20, un raton trop tenace, et… nos pièces</h3>
                     <p>Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.</p>
                     <div class="text-center">
-                        <a href="<?= htmlspecialchars(langUrl('/actualites/es-tu-game.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Lire l'article complet</a>
+                        <a href="<?= htmlspecialchars(langUrl('/actualites/es-tu-game'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Lire l'article complet</a>
                     </div>
                 </article>
                 <article class="testimonial-card">
