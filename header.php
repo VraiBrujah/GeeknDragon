@@ -114,18 +114,14 @@ if (!function_exists('gdRenderNav')) {
 <a href="#main" class="sr-only focus:not-sr-only">Passer au contenu</a>
 
 <header class="backdrop-blur bg-gradient-to-r from-gray-900/80 to-gray-800/60 shadow-lg fixed top-0 w-full z-[1200]">
-  <div class="max-w-7xl mx-auto relative flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 gap-x-4 gap-y-2 overflow-visible">
+  <div class="w-full relative flex flex-nowrap items-center justify-between px-4 md:px-6 gap-4 overflow-visible">
     <a href="<?= langUrl('/index.php'); ?>" class="relative z-10 flex items-center group transition-colors duration-200 flex-shrink-0">
       <img src="/images/optimized-modern/webp/brand-geekndragon-white.webp" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105 rounded" width="80" height="80">
     </a>
 
     <div class="flex-1 px-3 sm:px-4 text-center">
       <a href="<?= langUrl('/index.php'); ?>" class="group">
-        <span class="site-title flex flex-col items-center text-2xl md:text-3xl font-semibold leading-none text-white group-hover:text-indigo-300 transition-colors duration-200">
-          <span>GEEK</span>
-          <span>&amp;</span>
-          <span>DRAGON</span>
-        </span>
+        <span class="site-title inline-block text-lg sm:text-2xl md:text-3xl font-semibold leading-none text-white uppercase whitespace-nowrap overflow-hidden text-ellipsis group-hover:text-indigo-300 transition-colors duration-200">GEEK &amp; DRAGON</span>
       </a>
     </div>
 
@@ -136,8 +132,8 @@ if (!function_exists('gdRenderNav')) {
         </svg>
       </button>
 
-      <nav class="hidden md:block order-3 md:order-2 basis-full md:basis-auto uppercase tracking-wide mt-2 md:mt-0 flex-1 text-center text-white" aria-label="Navigation principale">
-        <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+      <nav class="hidden md:flex order-3 md:order-2 flex-1 uppercase tracking-wide text-center text-white overflow-x-auto" aria-label="Navigation principale">
+        <ul class="flex flex-nowrap items-center justify-center gap-6 whitespace-nowrap">
           <?php gdRenderNav($navItems, $active); ?>
         </ul>
       </nav>
@@ -152,7 +148,7 @@ if (!function_exists('gdRenderNav')) {
       </div>
 
       <div class="flex items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
-        <button id="gd-account-toggle" class="gd-header-btn flex items-center justify-center gap-1 w-full text-center md:w-auto text-sm md:text-base uppercase tracking-wide text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte" aria-expanded="false" aria-haspopup="dialog">
+        <button id="gd-account-toggle" class="gd-header-btn flex items-center justify-center text-white hover:text-indigo-400 transition-colors duration-200" aria-label="Compte" aria-expanded="false" aria-haspopup="dialog">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
           </svg>
