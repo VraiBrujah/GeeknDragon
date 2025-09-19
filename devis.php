@@ -27,7 +27,7 @@ $maxChars = (int) ($config['max_message_chars'] ?? getSecureEnvVar('MAX_MESSAGE_
 <?php include __DIR__ . '/head-common.php'; ?>
 <body>
 <?php include __DIR__ . '/header.php'; ?>
-<main id="main" class="pt-32 flex items-center justify-center min-h-screen px-4">
+<main id="main" class="pt-[var(--header-height)] flex items-center justify-center min-h-screen px-4">
   <div class="parchment rounded-3xl p-10 md:p-14 w-full max-w-2xl text-gray-900">
     <h1 class="text-4xl font-bold text-center mb-6" data-i18n="quote.title">Demande de devis</h1>
     <p class="text-center mb-8 text-lg txt-court" data-i18n="quote.subtitle">Pour recevoir une offre personnalisée, remplis ce formulaire magique.</p>

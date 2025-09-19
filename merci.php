@@ -11,9 +11,6 @@ $metaDescription = __('meta.thanks.desc', 'Merci pour votre message. Nous reveno
 $active = 'contact';
 $styleVersion = gdLocalAssetVersion('css/style.css');
 $extraHead = <<<HTML
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
 HTML;
 ?>
@@ -23,7 +20,7 @@ HTML;
 <body>
 <?php include __DIR__ . '/header.php'; ?>
 
-  <main id="main" class="pt-32 flex items-center justify-center min-h-screen">
+  <main id="main" class="pt-[var(--header-height)] flex items-center justify-center min-h-screen">
     <div class="text-center max-w-xl bg-gray-900/70 backdrop-blur p-10 rounded-3xl border border-yellow-500 shadow-2xl">
       <h1 class="text-4xl font-bold mb-4 text-yellow-400">Merci !</h1>
       <p class="text-lg mb-6 txt-court">Votre demande a bien été transmise à notre équipe.</p>

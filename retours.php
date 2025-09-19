@@ -11,9 +11,6 @@ $metaDescription = __('meta.returns.desc', 'Politique de retours Geek & Dragon -
 $active = 'contact';
 $styleVersion = gdLocalAssetVersion('css/style.css');
 $extraHead = <<<HTML
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
 HTML;
 ?>
@@ -23,7 +20,7 @@ HTML;
 <body>
 <?php include __DIR__ . '/header.php'; ?>
 
-    <main id="main" class="pt-32">
+    <main id="main" class="pt-[var(--header-height)]">
         <section class="policy-hero" style="background: var(--dark-bg); padding: 4rem 0;">
             <div class="container">
                 <h1 style="color: var(--secondary-color); text-align: center; margin-bottom: 1rem;">Politique de Retours</h1>

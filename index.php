@@ -169,14 +169,14 @@ HTML;
                     <h3>Des héros niveau 20, un raton trop tenace, et… nos pièces</h3>
                     <p>Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.</p>
                     <div class="text-center">
-                        <a href="<?= htmlspecialchars(langUrl('/actualites/es-tu-game'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Lire l'article complet</a>
+                        <a href="<?= htmlspecialchars(langUrl('/actualites/es-tu-game.php'), ENT_QUOTES, 'UTF-8'); ?>" class="cta-primary">Lire l'article complet</a>
                     </div>
                 </article>
                 <article class="testimonial-card">
                     <img src="/images/optimized-modern/webp/avisJoueurFlim2025.webp" alt="Avis joueurs sur pièces" loading="lazy">
                     <h4>« Finis les combats contre nos feuilles de personnage ! »</h4>
                     <p>De nombreux joueurs présents l'affirment : les pièces physiques changent tout.</p>
-                    <p><strong>Fini les combats contre les feuilles de perso</strong>, les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 / 0.1 / 0.2 / 0.3... de création de personnages qui découragent avant même que le jeu commence. Avec Geek &amp; Dragon, tout commence quand la pièce tombe sur la table.</p>
+                    <p><strong>Fini les combats contre les feuilles de perso</strong>, les recherches interminables dans les livres pendant que les autres décrochent, ou les longues sessions 0 de création de personnages qui découragent avant même que le jeu commence. Avec Geek &amp; Dragon, tout commence quand les pièces d'or tombe sur la table.</p>
                 </article>
             </div>
         </section>
