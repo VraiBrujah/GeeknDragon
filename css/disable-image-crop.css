@@ -30,10 +30,12 @@
   height: 100% !important;
 }
 
-/* Images dans toutes les sections */
-#produits img,
-#boutique img,
-.boutique img {
+/* Visuels produits dans la section boutique (hors icônes de paiement) */
+#boutique .product-highlight img,
+#boutique .product-image img,
+.product-highlight img,
+.boutique .product-card img,
+#produits .product-card img {
   object-fit: contain !important;
   width: 100% !important;
   height: auto !important;
