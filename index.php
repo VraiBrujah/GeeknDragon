@@ -29,7 +29,7 @@ HTML;
 <body>
 <?php include __DIR__ . '/header.php'; ?>
 
-    <main id="main" class="pt-32">
+    <main id="main" class="pt-[var(--header-height)]">
         <section class="hero">
             <div class="hero-background">
             <div class="hero-videos" data-main="/videos/video-mage-hero.mp4" data-videos='["/videos/cascade_HD.mp4","/videos/fontaine11.mp4","/videos/Carte1.mp4","/videos/fontaine4.mp4","/videos/fontaine3.mp4","/videos/fontaine2.mp4","/videos/fontaine1.mp4"]'></div>
