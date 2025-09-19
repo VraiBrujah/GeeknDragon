@@ -302,7 +302,8 @@ if (!function_exists('gdDefaultHeaderActionsMobile')) {
         </button>
       </div>
 
-      <div class="hidden md:flex items-center gap-2 flex-shrink-0 order-2 md:order-3 md:ml-auto">
+      <div class="hidden md:flex items-center gap-4 flex-shrink-0 order-2 md:order-3 md:ml-auto" data-gd-header-actions>
+        <div id="gd-header-audio-anchor" class="flex items-center gap-2"></div>
         <?= gdRenderHeaderActions($headerActions ?? null, 'gdDefaultHeaderActionsDesktop'); ?>
       </div>
     </div>
@@ -324,7 +325,8 @@ if (!function_exists('gdDefaultHeaderActionsMobile')) {
         </button>
       </div>
 
-      <div class="flex flex-col w-full gap-6">
+      <div class="flex flex-col w-full gap-6" data-gd-mobile-actions>
+        <div id="gd-mobile-audio-anchor" class="w-full"></div>
         <?= gdRenderHeaderActions($headerActionsMobile ?? null, 'gdDefaultHeaderActionsMobile'); ?>
       </div>
 
