@@ -61,6 +61,9 @@ namespace {
             }
         }
     }
+
+    // Charge les utilitaires partagés pour tout le projet
+    require_once __DIR__ . '/includes/assets.php';
 }
 
 // --------------------------------------------------

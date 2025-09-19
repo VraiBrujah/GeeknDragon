@@ -12,17 +12,6 @@ $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snip
 $translator = require __DIR__ . '/i18n.php';
 $lang = $translator->getCurrentLanguage();
 
-if (!function_exists('gdLocalAssetVersion')) {
-    /**
-     * Retourne le timestamp de dernière modification pour versionner les assets.
-     */
-    function gdLocalAssetVersion(string $relativePath): string
-    {
-        $absolute = __DIR__ . '/' . ltrim($relativePath, '/');
-        return is_file($absolute) ? (string) filemtime($absolute) : '0';
-    }
-}
-
 $title = __('meta.home.title', 'Geek & Dragon - Accessoires immersifs pour jeux de rôle');
 $metaDescription = __('meta.home.desc', "Découvrez notre collection exclusive de pièces métalliques, cartes d'équipement et triptyques pour transformer vos parties de D&D en aventures inoubliables.");
 $active = '';

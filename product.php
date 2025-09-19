@@ -125,17 +125,6 @@ $translator = require __DIR__ . '/i18n.php';
 $lang = $translator->getCurrentLanguage();
 $categoryUrl = langUrl($categoryPath);
 
-if (!function_exists('gdLocalAssetVersion')) {
-    /**
-     * Retourne le timestamp de dernière modification pour versionner les assets.
-     */
-    function gdLocalAssetVersion(string $relativePath): string
-    {
-        $absolute = __DIR__ . '/' . ltrim($relativePath, '/');
-        return is_file($absolute) ? (string) filemtime($absolute) : '0';
-    }
-}
-
 $title = $pageTitle;
 $metaDescription = $metaDescription;
 $ogImage = $mainImage;

@@ -6,17 +6,6 @@ require __DIR__ . '/bootstrap.php';
 $translator = require __DIR__ . '/i18n.php';
 $lang = $translator->getCurrentLanguage();
 
-if (!function_exists('gdLocalAssetVersion')) {
-    /**
-     * Retourne le timestamp de dernière modification pour versionner les assets.
-     */
-    function gdLocalAssetVersion(string $relativePath): string
-    {
-        $absolute = __DIR__ . '/' . ltrim($relativePath, '/');
-        return is_file($absolute) ? (string) filemtime($absolute) : '0';
-    }
-}
-
 $title = __('meta.account.title', 'Mon Compte | Geek & Dragon');
 $metaDescription = __('meta.account.desc', 'Gérez votre compte Geek & Dragon : connexion, création et favoris.');
 $active = 'compte';

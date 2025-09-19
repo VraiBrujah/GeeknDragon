@@ -6,17 +6,6 @@ require __DIR__ . '/bootstrap.php';
 $translator = require __DIR__ . '/i18n.php';
 $lang = $translator->getCurrentLanguage();
 
-if (!function_exists('gdLocalAssetVersion')) {
-    /**
-     * Retourne le timestamp de dernière modification pour versionner les assets.
-     */
-    function gdLocalAssetVersion(string $relativePath): string
-    {
-        $absolute = __DIR__ . '/' . ltrim($relativePath, '/');
-        return is_file($absolute) ? (string) filemtime($absolute) : '0';
-    }
-}
-
 $title = __('meta.returns.title', 'Politique de retours | Geek & Dragon');
 $metaDescription = __('meta.returns.desc', 'Politique de retours Geek & Dragon - 30 jours pour retourner vos produits.');
 $active = 'contact';
