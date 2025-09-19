@@ -39,7 +39,8 @@
       "Bash(start http://localhost:8000/contact.php)",
       "Bash(start http://localhost:8080/boutique.php)",
       "Bash(start http://localhost:8080/devis.php)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [
