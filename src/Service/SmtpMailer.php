@@ -22,13 +22,32 @@ class SmtpMailer
         $secure = getSecureEnvVar('SMTP_SECURE', $port === 465 ? 'ssl' : 'tls');
 
         $this->mailer = new PHPMailer(true);
-        $this->mailer->isSMTP();
-        $this->mailer->Host = $host;
-        $this->mailer->Port = $port;
-        $this->mailer->SMTPAuth = true;
-        $this->mailer->Username = $username;
-        $this->mailer->Password = $password;
-        $this->mailer->SMTPSecure = $secure;
+        
+        // Si l'host SMTP est configuré, utiliser SMTP
+        if (!empty($host)) {
+            $this->mailer->isSMTP();
+            $this->mailer->Host = $host;
+            $this->mailer->Port = $port;
+            $this->mailer->SMTPAuth = true;
+            $this->mailer->Username = $username;
+            $this->mailer->Password = $password;
+            $this->mailer->SMTPSecure = $secure;
+            
+            // Désactiver la vérification SSL en mode développement
+            if (getSecureEnvVar('APP_ENV', 'production') === 'development') {
+                $this->mailer->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
+            }
+        } else {
+            // Fallback: utiliser la fonction mail() de PHP
+            $this->mailer->isMail();
+        }
+        
         $this->mailer->CharSet = 'UTF-8';
     }
 
@@ -44,6 +63,12 @@ class SmtpMailer
     public function send(string $to, string $subject, string $htmlBody, string $textBody, string $replyTo = ''): bool
     {
         $from = getSecureEnvVar('SMTP_USERNAME', 'commande@geekndragon.com');
+        
+        // En mode développement, sauvegarder l'email dans un fichier pour simulation
+        if (getSecureEnvVar('APP_ENV', 'production') === 'development') {
+            return $this->saveEmailToFile($to, $subject, $htmlBody, $textBody, $replyTo, $from);
+        }
+        
         try {
             $this->mailer->clearAllRecipients();
             $this->mailer->setFrom($from);
@@ -60,5 +85,34 @@ class SmtpMailer
             error_log('SMTP send error: ' . $e->getMessage());
             return false;
         }
+    }
+    
+    /**
+     * Sauvegarde l'email dans un fichier pour simulation en mode développement
+     */
+    private function saveEmailToFile(string $to, string $subject, string $htmlBody, string $textBody, string $replyTo, string $from): bool
+    {
+        $storageDir = __DIR__ . '/../../storage/emails';
+        if (!is_dir($storageDir)) {
+            mkdir($storageDir, 0777, true);
+        }
+        
+        $emailContent = [
+            'timestamp' => date('Y-m-d H:i:s'),
+            'from' => $from,
+            'to' => $to,
+            'replyTo' => $replyTo,
+            'subject' => $subject,
+            'htmlBody' => $htmlBody,
+            'textBody' => $textBody
+        ];
+        
+        $filename = $storageDir . '/email_' . date('Y-m-d_H-i-s') . '_' . uniqid() . '.json';
+        $result = file_put_contents($filename, json_encode($emailContent, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+        
+        // Log pour information
+        error_log("Email simulé sauvegardé: $filename");
+        
+        return $result !== false;
     }
 }
