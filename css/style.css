@@ -773,6 +773,8 @@ p {
     transition: var(--transition);
     position: relative;
     font-size: 1.1rem;
+    /* Empêche les intitulés du menu principal de passer sur plusieurs lignes. */
+    white-space: nowrap;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
 
