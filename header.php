@@ -52,7 +52,7 @@ if (!isset($navItems)) {
                 '/boutique.php#triptych' => ['slug' => 'triptych', 'label' => 'Triptyques', 'i18n' => 'nav.triptychs'],
             ],
         ],
-        '/index.php#actus' => [
+        '/index.php#actualites' => [
             'slug' => 'actus',
             'label' => 'Actualités',
             'i18n' => 'nav.news',
