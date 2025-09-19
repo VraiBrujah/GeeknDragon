@@ -15,8 +15,8 @@ $lang = $translator->getCurrentLanguage();
 $title = __('meta.shop.title', 'Boutique - Geek & Dragon | Accessoires de jeux de rôle premium');
 $metaDescription = __('meta.shop.desc', "Découvrez notre collection complète : pièces métalliques authentiques, cartes d'équipement illustrées et triptyques mystères pour D&D. Livraison rapide au Canada.");
 $active = 'boutique';
-$styleVersion = gdLocalAssetVersion('css/style.css');
-$boutiqueVersion = gdLocalAssetVersion('css/boutique.css');
+$styleVersion = gdAssetVersion('css/style.css');
+$boutiqueVersion = gdAssetVersion('css/boutique.css');
 $extraHead = <<<HTML
   <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
   <link rel="stylesheet" href="/css/boutique.css?v={$boutiqueVersion}">

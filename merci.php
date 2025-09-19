@@ -9,7 +9,7 @@ $lang = $translator->getCurrentLanguage();
 $title = __('meta.thanks.title', 'Merci - Geek & Dragon');
 $metaDescription = __('meta.thanks.desc', 'Merci pour votre message. Nous revenons vers vous rapidement.');
 $active = 'contact';
-$styleVersion = gdLocalAssetVersion('css/style.css');
+$styleVersion = gdAssetVersion('css/style.css');
 $extraHead = <<<HTML
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

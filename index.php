@@ -15,7 +15,7 @@ $lang = $translator->getCurrentLanguage();
 $title = __('meta.home.title', 'Geek & Dragon - Accessoires immersifs pour jeux de rôle');
 $metaDescription = __('meta.home.desc', "Découvrez notre collection exclusive de pièces métalliques, cartes d'équipement et triptyques pour transformer vos parties de D&D en aventures inoubliables.");
 $active = '';
-$styleVersion = gdLocalAssetVersion('css/style.css');
+$styleVersion = gdAssetVersion('css/style.css');
 $extraHead = <<<HTML
   <link rel="stylesheet" href="/css/style.css?v={$styleVersion}">
 HTML;
