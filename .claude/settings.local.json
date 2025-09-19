@@ -36,7 +36,9 @@
       "Read(H:\\GeeknDragon\\oldSiteWeb\\data/**)",
       "Bash(cat:*)",
       "Bash(start http://localhost:8000/index.php)",
-      "Bash(start http://localhost:8000/contact.php)"
+      "Bash(start http://localhost:8000/contact.php)",
+      "Bash(start http://localhost:8080/boutique.php)",
+      "Bash(start http://localhost:8080/devis.php)"
     ],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [

@@ -36,6 +36,8 @@ $extraHead = $extraHead ?? '';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Content Security Policy de secours -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://js.snipcart.com https://cdn.snipcart.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.snipcart.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com https://cdn.snipcart.com; connect-src 'self' https://app.snipcart.com https://cdn.snipcart.com; frame-src https://app.snipcart.com; worker-src 'self' blob:;">
   <?= CsrfProtection::getMetaTag(); ?>
   <title><?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></title>
   <meta name="description" content="<?= htmlspecialchars($metaDescription, ENT_QUOTES, 'UTF-8'); ?>" />
