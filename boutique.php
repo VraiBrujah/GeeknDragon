@@ -6,7 +6,7 @@ declare(strict_types=1);
  */
 $config = require __DIR__ . '/config.php';
 $snipcartApiKey = is_string($config['snipcart_api_key'] ?? null) ? $config['snipcart_api_key'] : '';
-?>
+
 require __DIR__ . '/bootstrap.php';
 
 $translator = require __DIR__ . '/i18n.php';
