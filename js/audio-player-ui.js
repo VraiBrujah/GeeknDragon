@@ -106,14 +106,32 @@
         return;
       }
 
-      // On privilégie le conteneur de navigation du header pour fixer les contrôles audio.
-      const nav =
-        document.querySelector('header .nav-container') ||
-        document.querySelector('.nav-container') ||
-        document.querySelector('header');
-      if (!nav) {
-        return;
+      let anchor = document.getElementById('gd-header-audio-anchor');
+      if (!anchor) {
+        const fallbackContainer =
+          document.querySelector('[data-gd-header-actions]') ||
+          document.querySelector('header .nav-container') ||
+          document.querySelector('.nav-container') ||
+          document.querySelector('header');
+
+        if (!fallbackContainer) {
+          return;
+        }
+
+        anchor = document.createElement('div');
+        anchor.id = 'gd-header-audio-anchor';
+        anchor.className = 'gnd-header-audio-anchor';
+
+        if (typeof fallbackContainer.prepend === 'function') {
+          fallbackContainer.prepend(anchor);
+        } else {
+          fallbackContainer.insertBefore(anchor, fallbackContainer.firstChild);
+        }
       }
+
+      this.desktopHeaderAnchor = anchor;
+      this.mobileHeaderAnchor =
+        document.getElementById('gd-mobile-audio-anchor') || null;
 
       this.injectHeaderStyles();
 
@@ -138,12 +156,7 @@
         '</div>',
       ].join('');
 
-      const toggle = nav.querySelector('.nav-toggle');
-      if (toggle && toggle.parentElement === nav) {
-        toggle.insertAdjacentElement('beforebegin', wrapper);
-      } else {
-        nav.appendChild(wrapper);
-      }
+      anchor.appendChild(wrapper);
 
       const playBtn = wrapper.querySelector('.gnd-header-play');
       const nextBtn = wrapper.querySelector('.gnd-header-next');
@@ -176,12 +189,92 @@
       }
 
       this.headerElement = wrapper;
-      this.ensureHeaderVisibility();
+      this.registerMobileHeaderSync();
       this.updateHeaderPlayback({
         isPlaying: this.state.isPlaying,
         shouldResume: this.state.shouldResume,
       });
       this.syncVolumeControls(this.state.volume);
+    },
+
+    /**
+     * Synchronise l'emplacement des contrôles header entre bureau et mobile.
+     */
+    registerMobileHeaderSync() {
+      if (!this.headerElement) {
+        return;
+      }
+
+      if (this._headerPlacementHandler) {
+        this._headerPlacementHandler();
+        return;
+      }
+
+      this._headerPlacementHandler = () => {
+        this.updateHeaderPlacement();
+      };
+
+      window.addEventListener('resize', this._headerPlacementHandler);
+
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenu) {
+        if (typeof MutationObserver === 'function') {
+          const observer = new MutationObserver(this._headerPlacementHandler);
+          observer.observe(mobileMenu, {
+            attributes: true,
+            attributeFilter: ['class', 'aria-hidden'],
+          });
+          this._mobileMenuObserver = observer;
+        }
+        mobileMenu.addEventListener('transitionend', this._headerPlacementHandler);
+      }
+
+      this._headerPlacementHandler();
+    },
+
+    /**
+     * Place les contrôles audio dans l'ancrage le plus pertinent.
+     */
+    updateHeaderPlacement() {
+      if (!this.headerElement) {
+        return;
+      }
+
+      if (!this.desktopHeaderAnchor || !document.contains(this.desktopHeaderAnchor)) {
+        this.desktopHeaderAnchor =
+          document.getElementById('gd-header-audio-anchor') ||
+          this.desktopHeaderAnchor;
+      }
+
+      if (!this.mobileHeaderAnchor || !document.contains(this.mobileHeaderAnchor)) {
+        this.mobileHeaderAnchor =
+          document.getElementById('gd-mobile-audio-anchor') ||
+          null;
+      }
+
+      const mobileMenu = document.getElementById('mobile-menu');
+      const isMobileViewport = window.matchMedia
+        ? window.matchMedia('(max-width: 767px)').matches
+        : window.innerWidth <= 767;
+      const isMenuOpen =
+        Boolean(mobileMenu) &&
+        !mobileMenu.classList.contains('hidden') &&
+        mobileMenu.getAttribute('aria-hidden') === 'false';
+
+      const useMobileAnchor =
+        Boolean(this.mobileHeaderAnchor) && isMobileViewport && isMenuOpen;
+
+      const target = useMobileAnchor
+        ? this.mobileHeaderAnchor
+        : this.desktopHeaderAnchor;
+
+      if (target && this.headerElement.parentElement !== target) {
+        target.appendChild(this.headerElement);
+      }
+
+      this.headerElement.classList.toggle('gnd-header-audio--mobile', useMobileAnchor);
+
+      this.ensureHeaderVisibility();
     },
 
     /**
@@ -358,13 +451,21 @@
       );
     },
 
+    /**
+     * Ajuste la visibilité du widget flottant en fonction de l'UI du header.
+     */
     ensureHeaderVisibility() {
-      if (!this.headerElement) {
+      if (!this.playerElement || this.options?.ui?.hideFloatingWhenHeader === false) {
         return;
       }
-      if (this.options?.ui?.hideFloatingWhenHeader !== false && this.playerElement) {
-        this.playerElement.style.display = this.headerElement ? 'none' : '';
+
+      let headerVisible = false;
+      if (this.headerElement && document.contains(this.headerElement)) {
+        const rect = this.headerElement.getBoundingClientRect();
+        headerVisible = rect.width > 0 && rect.height > 0;
       }
+
+      this.playerElement.style.display = headerVisible ? 'none' : '';
     },
 
     updateTrackInfo(trackName = null) {
@@ -529,16 +630,17 @@
       const styles = `
         <style id="gnd-header-audio-styles">
           .gnd-header-audio {
-            display: flex;
-            flex-direction: column;
+            display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            margin-left: auto;
-            padding: 0.25rem 0.4rem;
+            gap: 0.5rem;
+            padding: 0.35rem 0.6rem;
             border: 1px solid var(--secondary-color, #d4af37);
-            border-radius: 8px;
+            border-radius: 9999px;
             background: rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(6px);
+            color: inherit;
+            flex-wrap: nowrap;
+            box-sizing: border-box;
           }
           .gnd-header-audio .gnd-header-controls {
             display: flex;
@@ -551,14 +653,25 @@
             border: 2px solid var(--secondary-color, #d4af37);
             background: var(--secondary-color, #d4af37);
             color: var(--dark-bg, #1a1a1a);
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            flex-shrink: 0;
+            transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+          }
+          .gnd-header-audio .gnd-header-play:hover,
+          .gnd-header-audio .gnd-header-next:hover {
+            transform: scale(1.05);
+          }
+          .gnd-header-audio .gnd-header-play:focus-visible,
+          .gnd-header-audio .gnd-header-next:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 2px;
           }
           .gnd-header-audio .gnd-header-next {
             background: transparent;
@@ -567,31 +680,35 @@
           .gnd-header-audio .gnd-header-vol {
             display: flex;
             align-items: center;
-            gap: 0.2rem;
+            gap: 0.3rem;
+            min-width: 0;
           }
           .gnd-header-audio .gnd-header-volume {
-            width: 100px;
+            width: 110px;
+            max-width: 140px;
             accent-color: var(--secondary-color, #d4af37);
           }
-          @media (max-width: 767px) {
-            .gnd-header-audio {
-              flex-direction: row;
-              align-items: center;
-              flex-wrap: nowrap;
-              gap: 0.25rem;
-              padding: 0.15rem 0.3rem;
-            }
-            .gnd-header-audio .gnd-header-vol {
-              flex: 1 1 auto;
-              min-width: 0;
-            }
-            .gnd-header-audio .gnd-header-controls {
-              flex: 0 0 auto;
-            }
-            .gnd-header-audio .gnd-header-volume {
-              width: 100%;
-              max-width: 88px;
-            }
+          .gnd-header-audio--mobile {
+            width: 100%;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.75rem;
+            border-radius: 12px;
+            padding: 0.6rem 0.75rem;
+          }
+          .gnd-header-audio--mobile .gnd-header-controls {
+            justify-content: center;
+          }
+          .gnd-header-audio--mobile .gnd-header-vol {
+            width: 100%;
+          }
+          .gnd-header-audio--mobile .gnd-header-volume {
+            width: 100%;
+            max-width: none;
+          }
+          .gnd-header-audio-anchor {
+            display: flex;
+            align-items: center;
           }
         </style>`;
       document.head.insertAdjacentHTML('beforeend', styles);
