@@ -32,16 +32,21 @@ class SmtpMailer
             $this->mailer->Username = $username;
             $this->mailer->Password = $password;
             $this->mailer->SMTPSecure = $secure;
+            $this->mailer->Hostname = 'geekndragon.com'; // Définir le nom d'hôte HELO
             
-            // Désactiver la vérification SSL en mode développement
-            if (getSecureEnvVar('APP_ENV', 'production') === 'development') {
-                $this->mailer->SMTPOptions = array(
-                    'ssl' => array(
-                        'verify_peer' => false,
-                        'verify_peer_name' => false,
-                        'allow_self_signed' => true
-                    )
-                );
+            // Désactiver la vérification SSL pour contourner les problèmes OpenSSL
+            $this->mailer->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+            
+            // Désactiver l'authentification SSL si extension manquante
+            if (!extension_loaded('openssl')) {
+                $this->mailer->SMTPSecure = false;
+                $this->mailer->SMTPAuth = false;
             }
         } else {
             // Fallback: utiliser la fonction mail() de PHP
