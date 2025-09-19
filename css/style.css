@@ -1107,12 +1107,12 @@ p {
 
 /* Fix pour le logo du header - supprime le contour blanc */
 .header-logo.rounded,
-header img.rounded {
+.site-header img.rounded {
     border: none !important;
 }
 
 /* Garantit l'uniformité du header sur toutes les pages */
-header {
+.site-header {
     height: var(--header-height);
     min-height: var(--header-height);
 }
