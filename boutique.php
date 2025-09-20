@@ -116,7 +116,7 @@ echo $snipcartInit;
 
   <!-- ===== HERO ===== -->
   <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/compressed/Fontaine12_compressed.mp4" data-videos='["videos/compressed/Carte1_compressed.mp4","videos/compressed/fontaine6_compressed.mp4","videos/compressed/trip2_compressed.mp4","videos/compressed/fontaine7_compressed.mp4","videos/compressed/cartearme_compressed.mp4","videos/compressed/fontaine8_compressed.mp4","videos/compressed/fontaine9_compressed.mp4","videos/compressed/fontaine4_compressed.mp4"]'></div>
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/compressed/mage_compressed.mp4" data-videos='["videos/compressed/cascade_HD_compressed.mp4","videos/compressed/fontaine11_compressed.mp4","videos/compressed/Carte1_compressed.mp4","videos/compressed/fontaine4_compressed.mp4","videos/compressed/fontaine3_compressed.mp4","videos/compressed/fontaine2_compressed.mp4","videos/compressed/fontaine1_compressed.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6 hero-text">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
@@ -357,9 +357,9 @@ echo $snipcartInit;
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
 </script>
   <script>window.stock = <?= json_encode($stock) ?>;</script>
-  <!-- Priorité absolue aux vidéos hero -->
-  <script src="/js/hero-videos.js"></script>
+  <!-- Ordre correct comme index.php -->
   <script src="/js/app.js"></script>
+  <script src="/js/hero-videos.js"></script>
   <script src="/js/boutique-premium.js"></script>
   
   <script>

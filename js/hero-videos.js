@@ -120,9 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
     container.style.setProperty('--hero-managed', 'true');
     const prefersReducedMotion = readMediaQuery(reduceMotionQuery);
     const isCoarsePointer = readMediaQuery(coarsePointerQuery);
-    // Force continuous playback - ignore motion/touch preferences for hero videos
-    const freezeCarousel = false;
-    const autoPlayAllowed = true;
+    // LOGIQUE ORIGINALE RESTAURÉE
+    const freezeCarousel = prefersReducedMotion || isCoarsePointer;
+    const autoPlayAllowed = !prefersReducedMotion;
     
     // Force global loop - vérification plus agressive (variable locale par container)
     let containerLoopInterval = null;
