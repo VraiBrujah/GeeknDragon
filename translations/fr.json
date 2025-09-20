@@ -84,6 +84,11 @@
   "product": {
     "back": "Retour à la boutique",
     "multiplier": "Multiplicateur",
+    "language": "Langue",
+    "languageOptions": {
+      "FR": "Français",
+      "EN": "Anglais"
+    },
     "quantity": "Quantité",
     "unit": "unitaire",
     "add": "Ajouter",

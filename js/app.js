@@ -527,21 +527,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Sélecteurs de multiplicateur (sur fiche produit)
-  document.querySelectorAll('.multiplier-select').forEach((sel) => {
-    const id = sel.dataset.target;
-    const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
-    const update = () => {
-      const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
-      if (addBtn) {
-        addBtn.setAttribute('data-item-custom1-value', sel.value);
-        addBtn.setAttribute('data-item-quantity', String(qty));
-      }
-      updatePlus(id);
-    };
-    update();
-    sel.addEventListener('change', update);
+  // Synchronise les sélecteurs (multiplicateur, langue, ...)
+  const bindCustomSelect = (selector, { onUpdate } = {}) => {
+    document.querySelectorAll(selector).forEach((sel) => {
+      const id = sel.dataset.target;
+      if (!id) return;
+      const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
+      const indexAttr = parseInt(sel.dataset.customIndex || '1', 10);
+      const fieldIndex = Number.isFinite(indexAttr) && indexAttr > 0 ? indexAttr : 1;
+      const update = () => {
+        const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
+        if (addBtn) {
+          addBtn.setAttribute(`data-item-custom${fieldIndex}-value`, sel.value);
+          addBtn.setAttribute('data-item-quantity', String(qty));
+          if (typeof onUpdate === 'function') {
+            onUpdate({ id, addBtn, select: sel, value: sel.value, index: fieldIndex });
+          }
+        }
+        updatePlus(id);
+      };
+      update();
+      sel.addEventListener('change', update);
+    });
+  };
+
+  bindCustomSelect('.multiplier-select', {
+    onUpdate: ({ addBtn, value }) => {
+      const lang = document.documentElement.lang;
+      const baseName = lang === 'en'
+        ? (addBtn.dataset.itemNameEn || addBtn.getAttribute('data-item-name'))
+        : (addBtn.dataset.itemNameFr || addBtn.getAttribute('data-item-name'));
+      addBtn.setAttribute('data-item-name', value !== '1' ? `${baseName} x${value}` : baseName);
+    },
   });
+
+  bindCustomSelect('.language-select');
 
   // Swiper
   document.querySelectorAll('.swiper').forEach((sw) => {

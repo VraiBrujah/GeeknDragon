@@ -67,6 +67,29 @@ $descriptionEn = $product['description_en'] ?? $product['description'];
 $multipliers   = $product['multipliers'] ?? [];
 $images        = $product['images'] ?? [];
 
+// Préparation des langues proposées lorsqu'elles sont définies dans le catalogue.
+$languagesRaw = $product['languages'] ?? [];
+$languages = [];
+if (is_array($languagesRaw)) {
+    foreach ($languagesRaw as $languageCode) {
+        $normalized = strtoupper(trim((string) $languageCode));
+        if ($normalized === '') {
+            continue;
+        }
+        $languages[] = $normalized;
+    }
+}
+$languages = array_values(array_unique($languages));
+$languageLabels = [];
+foreach ($languages as $code) {
+    $languageLabels[$code] = (string) ($translations['product']['languageOptions'][$code] ?? $code);
+}
+$languageFieldIndex = !empty($languageLabels) ? 1 : null;
+$customFieldCursor = $languageFieldIndex !== null ? 2 : 1;
+$multiplierFieldIndex = !empty($multipliers) ? $customFieldCursor : null;
+$defaultLanguage = $languages[0] ?? '';
+$multiplierOptions = array_map(static fn ($value) => (string) $value, $multipliers);
+
 $extraHead = <<<HTML
 <style>
   /* évite @apply en inline : on garde les classes utilitaires dans le HTML */
@@ -153,6 +176,21 @@ echo $snipcartInit;
             </div>
 
 
+            <?php if ($languageFieldIndex !== null) : ?>
+            <div>
+              <label for="language-<?= htmlspecialchars($id) ?>" class="block mb-3 text-lg font-medium text-white" data-i18n="product.language">Langue</label>
+              <select id="language-<?= htmlspecialchars($id) ?>"
+                      class="language-select w-full md:w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      data-target="<?= htmlspecialchars($id) ?>"
+                      data-custom-index="<?= (int) $languageFieldIndex ?>">
+                <?php foreach ($languageLabels as $value => $label) : ?>
+                <option value="<?= htmlspecialchars($value) ?>" <?= $value === $defaultLanguage ? 'selected' : '' ?>><?= htmlspecialchars($label) ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <?php endif; ?>
+
+
             <button class="snipcart-add-item btn btn-primary w-full text-lg py-4 font-bold bg-indigo-600 hover:bg-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg"
               data-item-id="<?= htmlspecialchars($id) ?>"
               data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
@@ -164,10 +202,15 @@ echo $snipcartInit;
               data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
               data-item-url="<?= htmlspecialchars($metaUrl) ?>"
               data-item-quantity="1"
-              <?php if (!empty($multipliers)) : ?>
-                data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-                data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-                data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+              <?php if ($languageFieldIndex !== null) : ?>
+                data-item-custom<?= (int) $languageFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['language'] ?? 'Langue') ?>"
+                data-item-custom<?= (int) $languageFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $languages)) ?>"
+                data-item-custom<?= (int) $languageFieldIndex ?>-value="<?= htmlspecialchars($defaultLanguage) ?>"
+              <?php endif; ?>
+              <?php if ($multiplierFieldIndex !== null) : ?>
+                data-item-custom<?= (int) $multiplierFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+                data-item-custom<?= (int) $multiplierFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $multiplierOptions)) ?>"
+                data-item-custom<?= (int) $multiplierFieldIndex ?>-value="<?= htmlspecialchars($multiplierOptions[0] ?? '') ?>"
               <?php endif; ?>
             >
               🛒 <span data-i18n="product.add">Ajouter au panier</span> — <?= htmlspecialchars(number_format((float)$product['price'], 2, ',', ' ')) ?> $ CAD

@@ -97,7 +97,11 @@
       "/images/optimized-modern/webp/greatclub-recto.webp",
       "/images/optimized-modern/webp/armure-recto.webp"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "languages": [
+      "FR",
+      "EN"
+    ]
   },
   "pack-182-butins-ingenieries": {
     "name": "Butins & Ingénieries",
@@ -113,7 +117,11 @@
       "/images/optimized-modern/webp/chaevre-recto.webp",
       "/images/optimized-modern/webp/mataerield-alchimiste-recto.webp"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "languages": [
+      "FR",
+      "EN"
+    ]
   },
   "pack-182-routes-services": {
     "name": "Routes & Services",
@@ -129,7 +137,11 @@
       "/images/optimized-modern/webp/vaisseau-aaerien-recto.webp",
       "/images/optimized-modern/webp/sang-d-assassin-recto.webp"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "languages": [
+      "FR",
+      "EN"
+    ]
   },
   "triptyque-aleatoire": {
     "name": "Triptyques Mystères",
@@ -145,7 +157,11 @@
       "/images/optimized-modern/webp/Barbare-Voie-du-Berserker_recto.webp",
       "/images/optimized-modern/webp/character-acolyte-fr-front.webp"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "languages": [
+      "FR",
+      "EN"
+    ]
   },
   "pack-10-cartes-aleatoires": {
     "name": "10 Cartes Surprise",
@@ -161,6 +177,10 @@
       "/images/optimized-modern/webp/sac-aa-dos-recto.webp",
       "/images/optimized-modern/webp/bombe-recto.webp"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "languages": [
+      "FR",
+      "EN"
+    ]
   }
 }

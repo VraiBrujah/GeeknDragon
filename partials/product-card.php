@@ -76,6 +76,31 @@ $img = $product['img'] ?? ($product['images'][0] ?? '');
 $url = $product['url'] ?? ('product.php?id=' . urlencode($id));
 $price = number_format((float) ($product['price'] ?? 0), 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
+
+// Prépare les codes de langue disponibles pour les produits de cartes.
+$languagesRaw = $product['languages'] ?? [];
+$languages = [];
+if (is_array($languagesRaw)) {
+    foreach ($languagesRaw as $languageCode) {
+        $normalized = strtoupper(trim((string) $languageCode));
+        if ($normalized === '') {
+            continue;
+        }
+        $languages[] = $normalized;
+    }
+}
+$languages = array_values(array_unique($languages));
+
+$languageLabels = [];
+foreach ($languages as $code) {
+    $languageLabels[$code] = (string) ($translations['product']['languageOptions'][$code] ?? $code);
+}
+
+$languageFieldIndex = !empty($languageLabels) ? 1 : null;
+$customFieldCursor = $languageFieldIndex !== null ? 2 : 1;
+$multiplierFieldIndex = !empty($multipliers) ? $customFieldCursor : null;
+$defaultLanguage = $languages[0] ?? '';
+$multiplierOptions = array_map(static fn ($value) => (string) $value, $multipliers);
 ?>
 
 <?php if (inStock($id)) : ?>
@@ -109,19 +134,37 @@ $multipliers = $product['multipliers'] ?? [];
   <div class="mt-auto w-full flex flex-col items-center gap-4">
 
 
-	  <!-- Bloc quantité -->
-	  <div class="flex flex-col items-center">
-		<label class="mb-2 text-center" data-i18n="product.quantity">Quantité</label>
-		<div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($id) ?>">
-		  <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
-		  <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-		  <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
-		</div>
-	  </div>
+          <!-- Bloc quantité -->
+          <div class="flex flex-col items-center">
+                <label class="mb-2 text-center" data-i18n="product.quantity">Quantité</label>
+                <div class="quantity-selector mx-auto text-center" data-id="<?= htmlspecialchars($id) ?>">
+                  <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+                  <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
+                  <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+                </div>
+          </div>
 
 
 
-	  <!-- Bouton ajouter -->
+          <?php if ($languageFieldIndex !== null) : ?>
+            <div class="flex flex-col items-center w-full">
+              <label for="language-<?= htmlspecialchars($id) ?>" class="mb-2 text-center" data-i18n="product.language">Langue</label>
+              <select id="language-<?= htmlspecialchars($id) ?>"
+                      class="language-select w-full max-w-[12rem] bg-gray-700 text-gray-100 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      data-target="<?= htmlspecialchars($id) ?>"
+                      data-custom-index="<?= (int) $languageFieldIndex ?>">
+                <?php foreach ($languageLabels as $value => $label) : ?>
+                  <option value="<?= htmlspecialchars($value) ?>" <?= $value === $defaultLanguage ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($label) ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          <?php endif; ?>
+
+
+
+          <!-- Bouton ajouter -->
           <button class="snipcart-add-item btn btn-shop px-6 whitespace-nowrap"
                 data-item-id="<?= htmlspecialchars($id) ?>"
                 data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
@@ -133,15 +176,20 @@ $multipliers = $product['multipliers'] ?? [];
                 data-item-price="<?= htmlspecialchars($price) ?>"
                 data-item-url="<?= htmlspecialchars($url) ?>"
                 data-item-quantity="1"
-		<?php if (!empty($multipliers)) : ?>
-		  data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-		  data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-		  data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
-		<?php endif; ?>
-	  >
-		<span data-i18n="product.add">Ajouter</span>
-	  </button>
-	</div>
+                <?php if ($languageFieldIndex !== null) : ?>
+                  data-item-custom<?= (int) $languageFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['language'] ?? 'Langue') ?>"
+                  data-item-custom<?= (int) $languageFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $languages)) ?>"
+                  data-item-custom<?= (int) $languageFieldIndex ?>-value="<?= htmlspecialchars($defaultLanguage) ?>"
+                <?php endif; ?>
+                <?php if ($multiplierFieldIndex !== null) : ?>
+                  data-item-custom<?= (int) $multiplierFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+                  data-item-custom<?= (int) $multiplierFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $multiplierOptions)) ?>"
+                  data-item-custom<?= (int) $multiplierFieldIndex ?>-value="<?= htmlspecialchars($multiplierOptions[0] ?? '') ?>"
+                <?php endif; ?>
+          >
+                <span data-i18n="product.add">Ajouter</span>
+          </button>
+        </div>
 </div>
 
 <!-- Petit patch local si la page liste n'inclut pas déjà le listener global -->
@@ -163,16 +211,23 @@ $multipliers = $product['multipliers'] ?? [];
       if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
     }
 
-    const multEl = document.getElementById('multiplier-' + id);
-    if (multEl) {
-      const mult = multEl.value;
-      btn.setAttribute('data-item-custom1-value', mult);
-      const lang = document.documentElement.lang;
-      const baseName = lang === 'en'
-        ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
-        : (btn.dataset.itemNameFr || btn.getAttribute('data-item-name'));
-      btn.setAttribute('data-item-name', mult !== '1' ? baseName + ' x' + mult : baseName);
-    }
+    const baseNameFr = btn.dataset.itemNameFr || btn.getAttribute('data-item-name');
+    const baseNameEn = btn.dataset.itemNameEn || btn.getAttribute('data-item-name');
+
+    const syncSelect = (selectEl, type) => {
+      if (!selectEl) return;
+      const index = selectEl.getAttribute('data-custom-index') || '1';
+      const value = selectEl.value;
+      btn.setAttribute(`data-item-custom${index}-value`, value);
+      if (type === 'multiplier') {
+        const lang = document.documentElement.lang;
+        const baseName = lang === 'en' ? baseNameEn : baseNameFr;
+        btn.setAttribute('data-item-name', value !== '1' ? `${baseName} x${value}` : baseName);
+      }
+    };
+
+    syncSelect(document.getElementById('language-' + id), 'language');
+    syncSelect(document.getElementById('multiplier-' + id), 'multiplier');
   }, { passive: true });
 })();
 </script>
