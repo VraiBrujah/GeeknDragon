@@ -941,17 +941,19 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 }
 
 /* Centrage spécial pour sections avec peu d'items (ex: triptyques) */
-.shop-grid:has(.card-product:only-child),
-.shop-grid:has(.card-product:first-child:nth-last-child(-n+2)){
+.shop-grid:has(.card:only-child),
+.shop-grid:has(.card:first-child:nth-last-child(-n+2)){
   justify-content:center;
   justify-items:center;
 }
 
 /* Version de secours pour navigateurs sans :has() */
 @supports not selector(:has(*)) {
-  .shop-grid.single-item{
-    justify-content:center;
-    justify-items:center;
+  .shop-grid > .card:only-child,
+  .shop-grid > .card:first-child:nth-last-child(-n+2),
+  .shop-grid > .card:first-child:nth-last-child(-n+2) ~ .card{
+    margin-inline:auto;
+    justify-self:center;
   }
 }
 
