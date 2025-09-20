@@ -359,8 +359,8 @@ echo $snipcartInit;
   <script>window.stock = <?= json_encode($stock) ?>;</script>
   <!-- Priorité absolue aux vidéos hero -->
   <script src="/js/hero-videos.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/boutique-premium.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/boutique-premium.js"></script>
   
   <script>
     // Convertisseur de monnaie Premium avec synchronisation temps réel

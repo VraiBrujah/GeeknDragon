@@ -29,7 +29,9 @@
       "Bash(magick:*)",
       "Bash(powershell:*)",
       "Bash(dir videos)",
-      "Bash(npx tailwindcss:*)"
+      "Bash(npx tailwindcss:*)",
+      "Bash(grep:*)",
+      "Bash(mediainfo:*)"
     ],
     "deny": [],
     "ask": []

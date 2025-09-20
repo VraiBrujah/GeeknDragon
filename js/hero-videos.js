@@ -6,7 +6,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const FADE_MS = 1000;
-  const LOAD_AHEAD_SECONDS = 3;
+  const LOAD_AHEAD_SECONDS = 10; // Augmenté pour les vidéos lourdes
   const supportsMatchMedia = typeof window.matchMedia === 'function';
   const reduceMotionQuery = supportsMatchMedia
     ? window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('playsinline', ''); // iOS
-      v.preload = 'metadata';
+      v.preload = 'auto'; // Changé pour précharger les vidéos lourdes
       v.autoplay = autoPlayAllowed;
       v.loop = false; // géré au cas par cas
       // Layout + anim
@@ -262,18 +262,30 @@ document.addEventListener('DOMContentLoaded', () => {
         lazy.prime();
 
         const startTransition = () => {
-          if (autoPlayAllowed) {
-            next.play().catch(() => {});
-          }
-          requestAnimationFrame(() => {
-            next.style.opacity = '1';
-            next.style.filter = 'blur(0)';
+          // Attendre que la vidéo soit vraiment prête pour les gros fichiers
+          const ensureVideoReady = (video, callback) => {
+            if (video.readyState >= 3) { // HAVE_FUTURE_DATA ou plus
+              callback();
+            } else {
+              video.addEventListener('canplaythrough', callback, { once: true });
+              // Timeout de sécurité pour éviter les blocages
+              setTimeout(callback, 5000);
+            }
+          };
+          
+          ensureVideoReady(next, () => {
+            if (autoPlayAllowed) {
+              next.play().catch(() => {});
+            }
+            requestAnimationFrame(() => {
+              next.style.opacity = '1';
+              next.style.filter = 'blur(0)';
 
-            current.style.opacity = '0';
-            current.style.filter = 'blur(8px)';
+              current.style.opacity = '0';
+              current.style.filter = 'blur(8px)';
 
-            const old = current;
-            current = next;
+              const old = current;
+              current = next;
 
             old.addEventListener('transitionend', () => {
               lazy.reset(old);
@@ -288,6 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
               }
               buildAndStageNextRandom();
             }, { once: true });
+            });
           });
         };
 
@@ -454,20 +467,32 @@ document.addEventListener('DOMContentLoaded', () => {
       lazy.prime();
 
       const startTransition = () => {
-        if (autoPlayAllowed) {
-          next.play().catch(() => {});
-        }
-        requestAnimationFrame(() => {
-          // Faire apparaître la nouvelle
-          next.style.opacity = '1';
-          next.style.filter = 'blur(0)';
+        // Attendre que la vidéo soit vraiment prête pour les gros fichiers
+        const ensureVideoReady = (video, callback) => {
+          if (video.readyState >= 3) { // HAVE_FUTURE_DATA ou plus
+            callback();
+          } else {
+            video.addEventListener('canplaythrough', callback, { once: true });
+            // Timeout de sécurité pour éviter les blocages
+            setTimeout(callback, 5000);
+          }
+        };
+        
+        ensureVideoReady(next, () => {
+          if (autoPlayAllowed) {
+            next.play().catch(() => {});
+          }
+          requestAnimationFrame(() => {
+            // Faire apparaître la nouvelle
+            next.style.opacity = '1';
+            next.style.filter = 'blur(0)';
 
-          // Faire disparaître l'ancienne APRÈS le démarrage de la nouvelle
-          current.style.opacity = '0';
-          current.style.filter = 'blur(8px)';
+            // Faire disparaître l'ancienne APRÈS le démarrage de la nouvelle
+            current.style.opacity = '0';
+            current.style.filter = 'blur(8px)';
 
-          const old = current;
-          current = next;
+            const old = current;
+            current = next;
 
           old.addEventListener('transitionend', () => {
             lazy.reset(old);
@@ -484,6 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Préparer la suivante
             buildAndStageNext();
           }, { once: true });
+          });
         });
       };
 
