@@ -148,6 +148,26 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
 
 
 
+          <?php if (!empty($multipliers)) : ?>
+            <div class="multiplier-wrapper flex flex-col items-center w-full">
+              <label for="multiplier-<?= htmlspecialchars($id) ?>"
+                     class="mb-2 text-center"
+                     data-i18n="product.multiplier">
+                <?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>
+              </label>
+              <select id="multiplier-<?= htmlspecialchars($id) ?>"
+                      class="multiplier-select w-full max-w-[12rem] bg-gray-700 text-gray-100 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      data-target="<?= htmlspecialchars($id) ?>"
+                      data-custom-index="<?= (int) $multiplierFieldIndex ?>">
+                <?php foreach ($multiplierOptions as $index => $value) : ?>
+                  <option value="<?= htmlspecialchars($value) ?>" <?= $index === 0 ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($value) ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          <?php endif; ?>
+
           <?php if ($languageFieldIndex !== null) : ?>
             <div class="flex flex-col items-center w-full">
               <label for="language-<?= htmlspecialchars($id) ?>" class="mb-2 text-center" data-i18n="product.language">Langue</label>
