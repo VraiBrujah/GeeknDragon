@@ -194,51 +194,46 @@ echo $snipcartInit;
                   <tbody>
                     <tr class="border-b border-gray-700/30" data-currency="platinum">
                       <td class="p-3 text-cyan-300 font-medium">💎 Platine</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                     </tr>
                     <tr class="border-b border-gray-700/30" data-currency="gold">
                       <td class="p-3 text-yellow-300 font-medium">🥇 Or</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                     </tr>
                     <tr class="border-b border-gray-700/30" data-currency="electrum">
                       <td class="p-3 text-yellow-300 font-medium">⚡ Électrum</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                     </tr>
                     <tr class="border-b border-gray-700/30" data-currency="silver">
                       <td class="p-3 text-gray-300 font-medium">🥈 Argent</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                     </tr>
                     <tr data-currency="copper">
                       <td class="p-3 text-amber-300 font-medium">🪙 Cuivre</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
                     </tr>
                   </tbody>
                 </table>
-              </div>
-              <div class="mt-4 text-center">
-                <button id="toggle-edit-mode" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
-                  🔓 Activer édition
-                </button>
               </div>
             </div>
           </div>
@@ -372,11 +367,10 @@ echo $snipcartInit;
         this.rates = {copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000};
         this.multipliers = [1, 10, 100, 1000, 10000];
         this.nf = new Intl.NumberFormat('fr-FR');
-        this.editMode = false;
+        this.editMode = true; // Édition activée par défaut
         
         this.sourceInputs = document.querySelectorAll('#currency-converter-premium input[data-currency]');
         this.multiplierInputs = document.querySelectorAll('.multiplier-input');
-        this.toggleButton = document.getElementById('toggle-edit-mode');
         this.bestDisplay = document.getElementById('currency-best');
         
         // Références vers les cartes positionnées
@@ -417,38 +411,13 @@ echo $snipcartInit;
           });
         });
         
-        // Événements pour les inputs multiplicateur (quand édition activée)
+        // Événements pour les inputs multiplicateur (édition activée par défaut)
         this.multiplierInputs.forEach(input => {
           input.addEventListener('input', () => {
-            if (this.editMode) {
-              input.value = input.value.replace(/[^0-9]/g, '');
-              this.updateFromMultipliers();
-            }
+            input.value = input.value.replace(/[^0-9]/g, '');
+            this.updateFromMultipliers();
           });
         });
-        
-        // Bouton toggle édition
-        this.toggleButton.addEventListener('click', () => {
-          this.toggleEditMode();
-        });
-      }
-      
-      toggleEditMode() {
-        this.editMode = !this.editMode;
-        
-        this.multiplierInputs.forEach(input => {
-          input.readOnly = !this.editMode;
-          input.classList.toggle('cursor-pointer', this.editMode);
-        });
-        
-        this.toggleButton.innerHTML = this.editMode 
-          ? '🔒 Désactiver édition'
-          : '🔓 Activer édition';
-          
-        this.toggleButton.classList.toggle('bg-red-600', this.editMode);
-        this.toggleButton.classList.toggle('hover:bg-red-700', this.editMode);
-        this.toggleButton.classList.toggle('bg-indigo-600', !this.editMode);
-        this.toggleButton.classList.toggle('hover:bg-indigo-700', !this.editMode);
       }
       
       getTotalBaseValue() {
@@ -653,7 +622,7 @@ echo $snipcartInit;
             <p class="text-lg mb-2"><strong>Conversion optimale:</strong></p>
             <p class="text-indigo-300 font-medium mb-2">${optimal}</p>
             <p class="text-sm text-gray-400">Total: ${this.nf.format(totalPieces)} pièces</p>
-            <p class="text-sm text-gray-400">• Valeur: ${goldValueDisplay}</p>
+            <p class="text-sm text-gray-400"><br>Valeur: ${goldValueDisplay}</p>
           </div>
         `;
       }
