@@ -50,6 +50,68 @@
     return el;
   };
 
+  // Normalisation des champs personnalisés Snipcart (langue, multiplicateur, ...)
+  const CUSTOM_FIELD_INDEXES = Object.freeze({
+    language: 1,
+    multiplier: 2,
+  });
+
+  const normalizeCustomRole = (role) => (typeof role === 'string' ? role.trim().toLowerCase() : '');
+
+  const findCustomFieldIndexOnButton = (button, role) => {
+    const normalizedRole = normalizeCustomRole(role);
+    if (!button || !normalizedRole) return null;
+
+    const attrs = Array.from(button.attributes || []);
+    for (const attr of attrs) {
+      const match = /^data-item-custom(\d+)-role$/i.exec(attr.name);
+      if (!match) continue;
+      if (normalizeCustomRole(attr.value) !== normalizedRole) continue;
+      const parsed = parseInt(match[1], 10);
+      if (Number.isFinite(parsed) && parsed > 0) {
+        return parsed;
+      }
+    }
+
+    return null;
+  };
+
+  const resolveCustomFieldIndex = (element, { button = null, fallbackIndexes = [], position = 0 } = {}) => {
+    if (!element) return null;
+
+    const attrIndex = parseInt(element.dataset?.customIndex ?? '', 10);
+    if (Number.isFinite(attrIndex) && attrIndex > 0) {
+      return attrIndex;
+    }
+
+    const roleFromElement = normalizeCustomRole(
+      (element.dataset?.itemCustomRole ?? element.dataset?.customRole) || '',
+    );
+    if (roleFromElement) {
+      const buttonIndex = findCustomFieldIndexOnButton(button, roleFromElement);
+      if (Number.isFinite(buttonIndex) && buttonIndex > 0) {
+        return buttonIndex;
+      }
+      const defaultIndex = CUSTOM_FIELD_INDEXES[roleFromElement];
+      if (Number.isFinite(defaultIndex) && defaultIndex > 0) {
+        return defaultIndex;
+      }
+    }
+
+    if (Array.isArray(fallbackIndexes) && fallbackIndexes.length > 0) {
+      const candidate = fallbackIndexes[position];
+      if (Number.isFinite(candidate) && candidate > 0) {
+        return candidate;
+      }
+      const last = fallbackIndexes[fallbackIndexes.length - 1];
+      if (Number.isFinite(last) && last > 0) {
+        return last;
+      }
+    }
+
+    return null;
+  };
+
   // Cookies
   const setCookie = (name, value, maxAge = 31536000) => {
     try { document.cookie = `${name}=${value};path=/;max-age=${maxAge}`; } catch (_) {}
@@ -131,6 +193,12 @@
     smoothScrollTo,
     getHeaderOffset,
     focusTrap,
+    customFields: {
+      indexesByRole: CUSTOM_FIELD_INDEXES,
+      normalizeRole: normalizeCustomRole,
+      findIndexOnButton: findCustomFieldIndexOnButton,
+      resolveIndex: resolveCustomFieldIndex,
+    },
   });
 })();
 
@@ -212,6 +280,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Boutons Snipcart (nom/description + libellé custom)
         const multiplierLabelPattern = /(multiplicat(eur|or)|multiplier)/i;
+        const customFieldHelpers = window.GD?.customFields || {};
+        const findCustomIndexByRole =
+          typeof customFieldHelpers.findIndexOnButton === 'function'
+            ? customFieldHelpers.findIndexOnButton
+            : (() => null);
 
         document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
           if (current === 'en') {
@@ -221,11 +294,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
             if (btn.dataset.itemDescriptionFr) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
           }
-          const hasCustom = btn.hasAttribute('data-item-custom1-name') && data?.product?.multiplier;
+          const rawMultiplierIndex = findCustomIndexByRole(btn, 'multiplier');
+          const multiplierIndex = (() => {
+            const parsed = Number.parseInt(rawMultiplierIndex, 10);
+            return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+          })();
+          const hasCustom =
+            multiplierIndex !== null
+            && btn.hasAttribute(`data-item-custom${multiplierIndex}-name`)
+            && data?.product?.multiplier;
           if (hasCustom) {
-            const currentLabel = btn.getAttribute('data-item-custom1-name') || '';
+            const currentLabel = btn.getAttribute(`data-item-custom${multiplierIndex}-name`) || '';
+            const datasetRole = btn.dataset[`itemCustom${multiplierIndex}Role`] || '';
             const explicitMultiplierFlag =
-              (btn.dataset.itemCustom1Role && btn.dataset.itemCustom1Role.toLowerCase() === 'multiplier')
+              (datasetRole && datasetRole.toLowerCase() === 'multiplier')
               || btn.hasAttribute('data-multiplier-label')
               || (btn.dataset.multiplierLabel
                 && ['1', 'true', 'yes', 'oui'].includes(btn.dataset.multiplierLabel.toLowerCase()));
@@ -234,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // On ne remplace le libellé que s'il est explicitement identifié comme un multiplicateur
             // afin d'éviter d'écraser d'autres champs personnalisés (ex. sélecteur de langue).
             if (explicitMultiplierFlag || labelLooksLikeMultiplier) {
-              btn.setAttribute('data-item-custom1-name', data.product.multiplier);
+              btn.setAttribute(`data-item-custom${multiplierIndex}-name`, data.product.multiplier);
             }
           }
         });
@@ -480,6 +562,17 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const stock = window.stock || {};
 
+  const toPositiveInt = (value) => {
+    const parsed = Number.parseInt(value, 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+  };
+
+  const customFieldHelpers = window.GD?.customFields || {};
+  const resolveCustomIndex =
+    typeof customFieldHelpers.resolveIndex === 'function'
+      ? customFieldHelpers.resolveIndex
+      : null;
+
   const updatePlus = (id) => {
     const max = stock[id];
     const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
@@ -549,8 +642,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = sel.dataset.target;
       if (!id) return;
       const addBtn = document.querySelector(`.btn-shop[data-item-id="${id}"]`);
-      const indexAttr = parseInt(sel.dataset.customIndex || '1', 10);
-      const fieldIndex = Number.isFinite(indexAttr) && indexAttr > 0 ? indexAttr : 1;
+      const resolvedIndex = resolveCustomIndex ? resolveCustomIndex(sel, { button: addBtn }) : null;
+      let fieldIndex = toPositiveInt(resolvedIndex);
+      if (!fieldIndex) {
+        fieldIndex = toPositiveInt(sel.dataset.customIndex) ?? 1;
+      }
+      sel.dataset.customIndex = String(fieldIndex);
       const update = () => {
         const qty = parseInt(document.getElementById(`qty-${id}`)?.textContent || '1', 10);
         if (addBtn) {
@@ -754,6 +851,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
   };
 
+  const customFieldHelpers = window.GD?.customFields || {};
+  const resolveCustomIndex =
+    typeof customFieldHelpers.resolveIndex === 'function'
+      ? customFieldHelpers.resolveIndex
+      : null;
+
   const collectCustomFieldIndexes = (btn) => {
     const indexes = [];
     Array.from(btn.attributes).forEach((attr) => {
@@ -795,11 +898,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const baseNameEn = btn.dataset.itemNameEn || baseNameFallback;
 
         selects.forEach((selectEl, position) => {
-          const attrIndex = parseIndex(selectEl.dataset.customIndex || '');
-          let fieldIndex = attrIndex ?? indexes[position];
-          if (!fieldIndex) {
-            fieldIndex = indexes[indexes.length - 1] ?? (position + 1);
+          let fieldIndex = null;
+          if (resolveCustomIndex) {
+            fieldIndex = resolveCustomIndex(selectEl, {
+              button: btn,
+              fallbackIndexes: indexes,
+              position,
+            });
           }
+          if (!Number.isFinite(fieldIndex) || fieldIndex <= 0) {
+            const attrIndex = parseIndex(selectEl.dataset.customIndex || '');
+            fieldIndex = attrIndex
+              ?? indexes[position]
+              ?? indexes[indexes.length - 1]
+              ?? (position + 1);
+          }
+          selectEl.dataset.customIndex = String(fieldIndex);
           const rawValue = selectEl.value == null ? '' : `${selectEl.value}`;
           let customValue = rawValue;
 
