@@ -726,23 +726,84 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ========================================================================
    SNIPCART — synchronisation au clic "Ajouter au panier"
    ===================================================================== */
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.snipcart-add-item');
-  if (!btn) return;
+(() => {
+  const parseIndex = (value) => {
+    const parsed = parseInt(value, 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+  };
 
-  const id = btn.dataset.itemId;
+  const collectCustomFieldIndexes = (btn) => {
+    const indexes = [];
+    Array.from(btn.attributes).forEach((attr) => {
+      const match = /^data-item-custom(\d+)-/i.exec(attr.name);
+      if (!match) return;
+      const parsed = parseInt(match[1], 10);
+      if (Number.isFinite(parsed)) {
+        indexes.push(parsed);
+      }
+    });
+    return indexes.sort((a, b) => a - b);
+  };
 
-  // Quantité depuis l’UI carte
-  const qtyEl = document.getElementById(`qty-${id}`);
-  if (qtyEl) {
-    const q = parseInt(qtyEl.textContent, 10);
-    if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
+  const ensureSnipcartQtyPatch = () => {
+    if (window.__snipcartQtyPatch === true) return;
+
+    document.addEventListener('click', (event) => {
+      const btn = event.target.closest('.snipcart-add-item');
+      if (!btn) return;
+
+      const id = btn.getAttribute('data-item-id') || btn.dataset.itemId;
+      if (!id) return;
+
+      const qtyEl = document.getElementById(`qty-${id}`);
+      if (qtyEl) {
+        const qty = parseInt(qtyEl.textContent, 10);
+        if (!Number.isNaN(qty) && qty > 0) {
+          btn.setAttribute('data-item-quantity', String(qty));
+        }
+      }
+
+      const selects = Array.from(document.querySelectorAll('select[data-target]'))
+        .filter((selectEl) => selectEl.dataset.target === id);
+
+      if (selects.length) {
+        const indexes = collectCustomFieldIndexes(btn);
+        const baseNameFallback = btn.getAttribute('data-item-name') || '';
+        const baseNameFr = btn.dataset.itemNameFr || baseNameFallback;
+        const baseNameEn = btn.dataset.itemNameEn || baseNameFallback;
+
+        selects.forEach((selectEl, position) => {
+          const attrIndex = parseIndex(selectEl.dataset.customIndex || '');
+          let fieldIndex = attrIndex ?? indexes[position];
+          if (!fieldIndex) {
+            fieldIndex = indexes[indexes.length - 1] ?? (position + 1);
+          }
+          const value = `${selectEl.value ?? ''}`;
+
+          btn.setAttribute(`data-item-custom${fieldIndex}-value`, value);
+
+          if (selectEl.classList.contains('multiplier-select')) {
+            const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+            const baseName = lang === 'en' ? baseNameEn : baseNameFr;
+            if (baseName) {
+              btn.setAttribute('data-item-name', value && value !== '1' ? `${baseName} x${value}` : baseName);
+            }
+          }
+        });
+      }
+    }, { passive: true });
+
+    window.__snipcartQtyPatch = true;
+  };
+
+  window.__ensureSnipcartQtyPatch = ensureSnipcartQtyPatch;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureSnipcartQtyPatch, { once: true });
+  } else {
+    ensureSnipcartQtyPatch();
   }
-
-  // Valeur du multiplicateur choisie sur la fiche (si présente)
-  const sel = document.querySelector(`.multiplier-select[data-target="${id}"]`);
-  if (sel) btn.setAttribute('data-item-custom1-value', sel.value);
-}, false);
+})();
 
 /* ========================================================================
    SNIPCART — cacher UNIQUEMENT "Multiplicateur/Multiplier" dans le panier

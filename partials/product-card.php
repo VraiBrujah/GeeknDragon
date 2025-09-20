@@ -192,43 +192,4 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
         </div>
 </div>
 
-<!-- Petit patch local si la page liste n'inclut pas déjà le listener global -->
-<script>
-(function(){
-  if (window.__snipcartQtyPatch) return;
-  window.__snipcartQtyPatch = true;
-
-  document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.snipcart-add-item');
-    if (!btn) return;
-
-    const id = btn.getAttribute('data-item-id');
-    if (!id) return;
-
-    const qtyEl = document.getElementById('qty-' + id);
-    if (qtyEl) {
-      const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
-    }
-
-    const baseNameFr = btn.dataset.itemNameFr || btn.getAttribute('data-item-name');
-    const baseNameEn = btn.dataset.itemNameEn || btn.getAttribute('data-item-name');
-
-    const syncSelect = (selectEl, type) => {
-      if (!selectEl) return;
-      const index = selectEl.getAttribute('data-custom-index') || '1';
-      const value = selectEl.value;
-      btn.setAttribute(`data-item-custom${index}-value`, value);
-      if (type === 'multiplier') {
-        const lang = document.documentElement.lang;
-        const baseName = lang === 'en' ? baseNameEn : baseNameFr;
-        btn.setAttribute('data-item-name', value !== '1' ? `${baseName} x${value}` : baseName);
-      }
-    };
-
-    syncSelect(document.getElementById('language-' + id), 'language');
-    syncSelect(document.getElementById('multiplier-' + id), 'multiplier');
-  }, { passive: true });
-})();
-</script>
 <?php endif; ?>

@@ -261,38 +261,23 @@ echo $snipcartInit;
 <script>window.stock = <?= json_encode([$id => getStock($id)]) ?>;</script>
 <script src="js/app.js"></script>
 
-<!-- Patch robuste : met à jour quantité & multiplicateur juste avant l’ajout -->
+<!-- Snipcart — initialisation du patch quantité/champs personnalisés -->
 <script>
-(function(){
-  if (window.__snipcartQtyPatch) return;
-  window.__snipcartQtyPatch = true;
+(function () {
+  if (window.__snipcartQtyPatchBootstrap) return;
+  window.__snipcartQtyPatchBootstrap = true;
 
-  document.addEventListener('click', function (e) {
-    const btn = e.target.closest('.snipcart-add-item');
-    if (!btn) return;
-
-    const id = btn.getAttribute('data-item-id');
-    if (!id) return;
-
-    // Quantité
-    const qtyEl = document.getElementById('qty-' + id);
-    if (qtyEl) {
-      const q = parseInt(qtyEl.textContent, 10);
-      if (!isNaN(q) && q > 0) btn.setAttribute('data-item-quantity', String(q));
+  const bootstrap = () => {
+    if (typeof window.__ensureSnipcartQtyPatch === 'function') {
+      window.__ensureSnipcartQtyPatch();
     }
+  };
 
-    // Multiplicateur
-    const multEl = document.getElementById('multiplier-' + id);
-    if (multEl) {
-      const mult = multEl.value;
-      btn.setAttribute('data-item-custom1-value', mult);
-      const lang = document.documentElement.lang;
-      const baseName = lang === 'en'
-        ? (btn.dataset.itemNameEn || btn.getAttribute('data-item-name'))
-        : (btn.dataset.itemNameFr || btn.getAttribute('data-item-name'));
-      btn.setAttribute('data-item-name', mult !== '1' ? baseName + ' x' + mult : baseName);
-    }
-  }, { passive: true });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrap, { once: true });
+  } else {
+    bootstrap();
+  }
 })();
 </script>
 </body>
