@@ -58,7 +58,7 @@ $multipliers = $product['multipliers'] ?? [];
 
 <?php if (inStock($id)) : ?>
 <div class="card h-full flex flex-col bg-gray-800 p-4 rounded-xl shadow
-            min-w-[21rem] sm:min-w-[22rem] md:min-w-[23rem]">
+            min-w-[14.5rem] sm:min-w-[15rem]">
   <a href="<?= htmlspecialchars($url) ?>">
     <img src="/<?= ltrim(htmlspecialchars($img), '/') ?>"
          alt="<?= htmlspecialchars($alt) ?>"
