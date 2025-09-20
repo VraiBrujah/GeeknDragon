@@ -568,12 +568,18 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   bindCustomSelect('.multiplier-select', {
-    onUpdate: ({ addBtn, value }) => {
+    onUpdate: ({ addBtn }) => {
       const lang = document.documentElement.lang;
-      const baseName = lang === 'en'
-        ? (addBtn.dataset.itemNameEn || addBtn.getAttribute('data-item-name'))
-        : (addBtn.dataset.itemNameFr || addBtn.getAttribute('data-item-name'));
-      addBtn.setAttribute('data-item-name', value !== '1' ? `${baseName} x${value}` : baseName);
+      const datasetKey = lang === 'en' ? 'itemNameEn' : 'itemNameFr';
+      // On conserve le libellé de base pour Snipcart tout en le stockant pour des usages futurs.
+      const storedBase = addBtn.dataset.gdBaseName || addBtn.getAttribute('data-item-name') || '';
+      if (!addBtn.dataset.gdBaseName && storedBase) {
+        addBtn.dataset.gdBaseName = storedBase;
+      }
+      const localizedBaseName = addBtn.dataset[datasetKey] || addBtn.dataset.gdBaseName || storedBase;
+      if (localizedBaseName) {
+        addBtn.setAttribute('data-item-name', localizedBaseName);
+      }
     },
   });
 
