@@ -96,9 +96,9 @@ foreach ($languages as $code) {
     $languageLabels[$code] = (string) ($translations['product']['languageOptions'][$code] ?? $code);
 }
 
-// Toujours utiliser les mêmes index : custom1=langue, custom2=multiplicateur
-$languageFieldIndex = 1;
-$multiplierFieldIndex = 2;
+$languageFieldIndex = !empty($languageLabels) ? 1 : null;
+$customFieldCursor = $languageFieldIndex !== null ? 2 : 1;
+$multiplierFieldIndex = !empty($multipliers) ? $customFieldCursor : null;
 $defaultLanguage = $languages[0] ?? '';
 $multiplierOptions = array_map(static fn ($value) => (string) $value, $multipliers);
 ?>
