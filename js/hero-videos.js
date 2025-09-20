@@ -117,8 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.hero-videos').forEach((container) => {
     const prefersReducedMotion = readMediaQuery(reduceMotionQuery);
     const isCoarsePointer = readMediaQuery(coarsePointerQuery);
-    const freezeCarousel = prefersReducedMotion || isCoarsePointer;
-    const autoPlayAllowed = !prefersReducedMotion;
+    // Force continuous playback - ignore motion/touch preferences for hero videos
+    const freezeCarousel = false;
+    const autoPlayAllowed = true;
 
     // 1) Lire et valider la liste aléatoire + éventuelle vidéo principale
     let list = [];
@@ -503,11 +504,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, 300);
 
-    // Reprise à retour d’onglet
+    // Reprise à retour d'onglet
     document.addEventListener('visibilitychange', () => {
       if (document.visibilityState === 'visible' && autoPlayAllowed) {
         [current, next].forEach((v) => v && v.paused && v.play().catch(() => {}));
       }
     });
+
+    // Protection supplémentaire : vérification périodique que les vidéos tournent
+    setInterval(() => {
+      if (document.visibilityState === 'visible' && autoPlayAllowed) {
+        if (current && current.paused && !current.ended) {
+          current.play().catch(() => {});
+        }
+      }
+    }, 5000); // Check toutes les 5 secondes
   });
 });
