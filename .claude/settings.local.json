@@ -18,7 +18,8 @@
       "Read(H:\\Nouveau dossier (3)\\new-old/**)",
       "Read(H:\\Nouveau dossier (3)\\new-old\\css/**)",
       "Read(H:\\Nouveau dossier (3)\\new-old/**)",
-      "Read(H:\\Nouveau dossier (3)\\new-old\\js/**)"
+      "Read(H:\\Nouveau dossier (3)\\new-old\\js/**)",
+      "Bash(npm run:*)"
     ],
     "deny": [],
     "ask": []
