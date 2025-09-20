@@ -75,8 +75,8 @@ $multipliers = $product['multipliers'] ?? [];
     </h4>
   </a>
 
-  <div class="text-center mb-4 text-gray-300 flex-grow product-description">
-    <?= $descriptionHtml ?>
+  <div class="text-center mb-4 text-gray-300 flex-grow overflow-hidden text-sm leading-tight h-20">
+    <?= strip_tags($description) ?>
   </div>
 
 
