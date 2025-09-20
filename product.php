@@ -176,6 +176,24 @@ echo $snipcartInit;
             </div>
 
 
+            <?php if (!empty($multipliers)) : ?>
+            <div class="multiplier-wrapper">
+              <label for="multiplier-<?= htmlspecialchars($id) ?>"
+                     class="block mb-3 text-lg font-medium text-white"
+                     data-i18n="product.multiplier">
+                <?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>
+              </label>
+              <select id="multiplier-<?= htmlspecialchars($id) ?>"
+                      class="multiplier-select w-full md:w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      data-target="<?= htmlspecialchars($id) ?>"
+                      data-custom-index="<?= (int) $multiplierFieldIndex ?>">
+                <?php foreach ($multiplierOptions as $index => $value) : ?>
+                <option value="<?= htmlspecialchars($value) ?>" <?= $index === 0 ? 'selected' : '' ?>><?= htmlspecialchars($value) ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <?php endif; ?>
+
             <?php if ($languageFieldIndex !== null) : ?>
             <div>
               <label for="language-<?= htmlspecialchars($id) ?>" class="block mb-3 text-lg font-medium text-white" data-i18n="product.language">Langue</label>
