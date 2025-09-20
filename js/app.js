@@ -800,17 +800,42 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!fieldIndex) {
             fieldIndex = indexes[indexes.length - 1] ?? (position + 1);
           }
-          const value = `${selectEl.value ?? ''}`;
-
-          btn.setAttribute(`data-item-custom${fieldIndex}-value`, value);
+          const rawValue = selectEl.value == null ? '' : `${selectEl.value}`;
+          let customValue = rawValue;
 
           if (selectEl.classList.contains('multiplier-select')) {
-            const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
-            const baseName = lang === 'en' ? baseNameEn : baseNameFr;
-            if (baseName) {
-              btn.setAttribute('data-item-name', value && value !== '1' ? `${baseName} x${value}` : baseName);
+            const normalizedValue = rawValue && `${rawValue}`.trim() !== '' ? `${rawValue}` : '1';
+            customValue = normalizedValue;
+
+            if (baseNameFr && !btn.dataset.gdBaseNameFr) {
+              btn.dataset.gdBaseNameFr = baseNameFr;
             }
+            if (baseNameEn && !btn.dataset.gdBaseNameEn) {
+              btn.dataset.gdBaseNameEn = baseNameEn;
+            }
+
+            const lang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+            const localizedBase = lang === 'en'
+              ? (btn.dataset.gdBaseNameEn || baseNameEn)
+              : (btn.dataset.gdBaseNameFr || baseNameFr);
+            const storedBase = localizedBase
+              || btn.dataset.gdBaseName
+              || baseNameFallback
+              || btn.getAttribute('data-item-name')
+              || '';
+
+            if (storedBase) {
+              if (!btn.dataset.gdBaseName) {
+                btn.dataset.gdBaseName = storedBase;
+              }
+              // On restaure systématiquement le nom de base pour Snipcart : le multiplicateur reste dans le champ personnalisé.
+              btn.setAttribute('data-item-name', storedBase);
+            }
+
+            btn.dataset.gdMultiplier = normalizedValue;
           }
+
+          btn.setAttribute(`data-item-custom${fieldIndex}-value`, customValue);
         });
       }
     }, { passive: true });
