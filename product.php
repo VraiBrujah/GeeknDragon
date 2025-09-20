@@ -115,7 +115,6 @@ echo $snipcartInit;
               </div>
               <?php endforeach; ?>
             </div>
-            <div class="swiper-pagination !bottom-4"></div>
             <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
             <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
           </div>

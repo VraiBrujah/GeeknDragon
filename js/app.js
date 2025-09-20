@@ -554,7 +554,6 @@ document.addEventListener('DOMContentLoaded', () => {
       new Swiper(sw, {
         loop: true,
         autoplay: { delay: 5000 },
-        pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
         navigation: { nextEl: sw.querySelector('.swiper-button-next'), prevEl: sw.querySelector('.swiper-button-prev') },
         thumbs: { swiper: thumbsSwiper },
       });
@@ -563,7 +562,6 @@ document.addEventListener('DOMContentLoaded', () => {
       new Swiper(sw, {
         loop: true,
         autoplay: { delay: 5000 },
-        pagination: { el: sw.querySelector('.swiper-pagination'), clickable: true },
         navigation: { nextEl: sw.querySelector('.swiper-button-next'), prevEl: sw.querySelector('.swiper-button-prev') },
       });
     }
