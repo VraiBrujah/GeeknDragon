@@ -96,10 +96,10 @@ echo $snipcartInit;
     </div>
 
     <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[600px]">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
         
         <!-- Section Image (Gauche) -->
-        <div class="bg-gray-900/50 p-6 flex items-center justify-center">
+        <div class="bg-gray-900/50 p-6 flex items-center justify-center min-h-[400px]">
           <?php if (!empty($images)) : ?>
           <div class="swiper w-full max-w-lg relative">
             <div class="swiper-wrapper">
@@ -137,7 +137,7 @@ echo $snipcartInit;
               <?= htmlspecialchars(number_format((float)$product['price'], 2, ',', ' ')) ?> $ CAD
             </div>
 
-            <div class="mb-6 text-gray-200 leading-relaxed product-description overflow-y-auto max-h-40">
+            <div class="mb-6 text-gray-200 leading-relaxed product-description">
               <?= $productDescHtml ?>
             </div>
           </div>
