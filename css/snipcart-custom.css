@@ -434,9 +434,11 @@
   background: var(--gd-card) !important;
   color: var(--gd-text) !important;
   border: 1px solid var(--gd-border) !important;
-  padding: 0.5rem !important;
+  padding: 0.5rem 2rem 0.5rem 0.5rem !important;
   min-height: 2rem !important;
-  min-width: 80px !important;
+  width: 120px !important;
+  min-width: 120px !important;
+  max-width: none !important;
   font-size: 14px !important;
   line-height: 1.4 !important;
 }
@@ -446,6 +448,53 @@
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+/* Positionnement spécifique de l'icône dropdown */
+.snipcart select {
+  background-position: calc(100% - 0.5rem) center !important;
+  background-size: 16px !important;
+  padding-right: 2.5rem !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+/* SOLUTION : réduire la taille du font et compacter */
+.snipcart .snipcart-dropdown-custom-field,
+.snipcart select[name*="Multiplicateur"],
+.snipcart select[name*="Langue"],
+.snipcart .snipcart-form__select {
+  width: 85px !important;
+  min-width: 85px !important;
+  position: relative !important;
+  background: var(--gd-card) !important;
+  border: 1px solid var(--gd-border) !important;
+  color: var(--gd-text) !important;
+  padding: 0.5rem !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+
+/* Masquer l'icône avec un pseudo-élément */
+.snipcart .snipcart-dropdown-custom-field::after,
+.snipcart select[name*="Multiplicateur"]::after,
+.snipcart select[name*="Langue"]::after,
+.snipcart .snipcart-form__select::after {
+  content: "▼" !important;
+  position: absolute !important;
+  right: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+  color: var(--gd-text) !important;
+  font-size: 12px !important;
+  z-index: 1 !important;
+  background: var(--gd-card) !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 /* Espacement global du panier */
