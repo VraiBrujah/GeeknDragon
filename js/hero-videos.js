@@ -6,8 +6,120 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const FADE_MS = 1000;
+  const LOAD_AHEAD_SECONDS = 3;
+  const supportsMatchMedia = typeof window.matchMedia === 'function';
+  const reduceMotionQuery = supportsMatchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : null;
+  const coarsePointerQuery = supportsMatchMedia
+    ? window.matchMedia('(pointer: coarse)')
+    : null;
+  const readMediaQuery = (query) => (query && 'matches' in query ? query.matches : false);
+
+  // Gestion paresseuse du préchargement : charge la prochaine vidéo seulement
+  // lorsque l'utilisateur interagit ou quand la lecture courante approche de sa fin.
+  const createLazyManager = ({ container, getNext, thresholdSeconds }) => {
+    const primed = new WeakMap();
+    const watchers = new WeakMap();
+
+    const mark = (video) => {
+      if (video) {
+        primed.set(video, false);
+      }
+    };
+
+    const prime = () => {
+      const candidate = getNext();
+      if (!candidate) return;
+      if (candidate.readyState >= 2) {
+        primed.set(candidate, true);
+        return;
+      }
+      if (primed.get(candidate)) return;
+      primed.set(candidate, true);
+      try {
+        candidate.load();
+      } catch (error) {
+        // ignore
+      }
+    };
+
+    const monitor = (video) => {
+      if (!video) return;
+
+      if (watchers.has(video)) {
+        const previous = watchers.get(video);
+        video.removeEventListener('timeupdate', previous);
+        watchers.delete(video);
+      }
+
+      const handler = () => {
+        const candidate = getNext();
+        if (!candidate) return;
+        if (candidate.readyState >= 2) {
+          primed.set(candidate, true);
+          video.removeEventListener('timeupdate', handler);
+          watchers.delete(video);
+          return;
+        }
+        if (primed.get(candidate)) return;
+
+        const { duration, currentTime } = video;
+        if (!Number.isFinite(duration) || duration <= 0) {
+          if (currentTime >= thresholdSeconds) {
+            prime();
+            video.removeEventListener('timeupdate', handler);
+            watchers.delete(video);
+          }
+          return;
+        }
+
+        if (duration - currentTime <= thresholdSeconds) {
+          prime();
+          video.removeEventListener('timeupdate', handler);
+          watchers.delete(video);
+        }
+      };
+
+      watchers.set(video, handler);
+      video.addEventListener('timeupdate', handler);
+    };
+
+    const reset = (video) => {
+      if (!video) return;
+      const handler = watchers.get(video);
+      if (handler) {
+        video.removeEventListener('timeupdate', handler);
+        watchers.delete(video);
+      }
+    };
+
+    const events = [
+      ['pointerdown', { passive: true }],
+      ['pointerenter', false],
+      ['touchstart', { passive: true }],
+      ['focusin', false],
+    ];
+
+    events.forEach(([eventName, options]) => {
+      const opts = typeof options === 'undefined' ? false : options;
+      container.addEventListener(eventName, prime, opts);
+    });
+
+    return {
+      mark,
+      prime,
+      monitor,
+      reset,
+    };
+  };
 
   document.querySelectorAll('.hero-videos').forEach((container) => {
+    const prefersReducedMotion = readMediaQuery(reduceMotionQuery);
+    const isCoarsePointer = readMediaQuery(coarsePointerQuery);
+    const freezeCarousel = prefersReducedMotion || isCoarsePointer;
+    const autoPlayAllowed = !prefersReducedMotion;
+
     // 1) Lire et valider la liste aléatoire + éventuelle vidéo principale
     let list = [];
     try {
@@ -33,8 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('playsinline', ''); // iOS
-      v.preload = 'auto';
-      v.autoplay = true;
+      v.preload = 'metadata';
+      v.autoplay = autoPlayAllowed;
       v.loop = false; // géré au cas par cas
       // Layout + anim
       v.style.position = 'absolute';
@@ -67,7 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const showWhenReady = (video) => {
         const vid = video;
         const run = () => {
-          vid.play().catch(() => {});
+          if (autoPlayAllowed && vid.paused) {
+            vid.play().catch(() => {});
+          }
           requestAnimationFrame(() => {
             vid.style.opacity = '1';
             vid.style.filter = 'blur(0)';
@@ -76,6 +190,44 @@ document.addEventListener('DOMContentLoaded', () => {
         if (vid.readyState >= 2) run();
         else vid.addEventListener('canplay', run, { once: true });
       };
+
+      if (freezeCarousel) {
+        current.loop = true;
+
+        current.addEventListener('loadeddata', () => {
+          if (autoPlayAllowed && current.paused) {
+            current.play().catch(() => {});
+          }
+          showWhenReady(current);
+        }, { once: true });
+
+        current.addEventListener('ended', () => {
+          if (autoPlayAllowed) {
+            current.currentTime = 0;
+            current.play().catch(() => {});
+          }
+        });
+
+        setTimeout(() => {
+          if (current.style.opacity !== '1') {
+            showWhenReady(current);
+          }
+        }, 300);
+
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible' && autoPlayAllowed && current.paused) {
+            current.play().catch(() => {});
+          }
+        });
+
+        return;
+      }
+
+      const lazy = createLazyManager({
+        container,
+        getNext: () => next,
+        thresholdSeconds: LOAD_AHEAD_SECONDS,
+      });
 
       const buildNextRandom = () => {
         const src = lastWasMain ? pickRandom() : mainSrc;
@@ -93,15 +245,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const buildAndStageNextRandom = () => {
         next = buildNextRandom();
+        lazy.mark(next);
         container.appendChild(next);
-        if (next.readyState < 2) next.load();
       };
 
       const goToNext = () => {
         if (!next) buildAndStageNextRandom();
 
+        lazy.prime();
+
         const startTransition = () => {
-          next.play().catch(() => {});
+          if (autoPlayAllowed) {
+            next.play().catch(() => {});
+          }
           requestAnimationFrame(() => {
             next.style.opacity = '1';
             next.style.filter = 'blur(0)';
@@ -113,8 +269,16 @@ document.addEventListener('DOMContentLoaded', () => {
             current = next;
 
             old.addEventListener('transitionend', () => {
+              lazy.reset(old);
               if (old.parentNode) old.parentNode.removeChild(old);
               current.addEventListener('ended', goToNext, { once: true });
+              if (current.paused) {
+                current.addEventListener('playing', () => {
+                  lazy.monitor(current);
+                }, { once: true });
+              } else {
+                lazy.monitor(current);
+              }
               buildAndStageNextRandom();
             }, { once: true });
           });
@@ -131,6 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
       current.addEventListener('playing', () => {
         buildAndStageNextRandom();
         current.addEventListener('ended', goToNext, { once: true });
+        lazy.monitor(current);
       }, { once: true });
 
       setTimeout(() => {
@@ -140,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 300);
 
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') {
+        if (document.visibilityState === 'visible' && autoPlayAllowed) {
           [current, next].forEach((v) => v && v.paused && v.play().catch(() => {}));
         }
       });
@@ -162,27 +327,33 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       vid.addEventListener('loadeddata', () => {
-        vid.play().catch(() => {});
+        if (autoPlayAllowed && vid.paused) {
+          vid.play().catch(() => {});
+        }
         reveal();
       }, { once: true });
 
       // Filets de sécurité : si loop est ignoré (certains contextes/sommeil d’onglet)
       vid.addEventListener('ended', () => {
         vid.currentTime = 0;
-        vid.play().catch(() => {});
+        if (autoPlayAllowed) {
+          vid.play().catch(() => {});
+        }
       });
 
       vid.addEventListener('error', () => {
         setTimeout(() => {
           vid.load();
-          vid.play().catch(() => {});
+          if (autoPlayAllowed) {
+            vid.play().catch(() => {});
+          }
         }, 500);
       });
 
       container.appendChild(vid);
 
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && vid.paused) {
+        if (document.visibilityState === 'visible' && autoPlayAllowed && vid.paused) {
           vid.play().catch(() => {});
         }
       });
@@ -200,7 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const showWhenReady = (video) => {
       const vid = video;
       const run = () => {
-        vid.play().catch(() => {});
+        if (autoPlayAllowed && vid.paused) {
+          vid.play().catch(() => {});
+        }
         requestAnimationFrame(() => {
           vid.style.opacity = '1';
           vid.style.filter = 'blur(0)';
@@ -209,6 +382,44 @@ document.addEventListener('DOMContentLoaded', () => {
       if (vid.readyState >= 2) run();
       else vid.addEventListener('canplay', run, { once: true });
     };
+
+    if (freezeCarousel) {
+      current.loop = true;
+
+      current.addEventListener('loadeddata', () => {
+        if (autoPlayAllowed && current.paused) {
+          current.play().catch(() => {});
+        }
+        showWhenReady(current);
+      }, { once: true });
+
+      current.addEventListener('ended', () => {
+        if (autoPlayAllowed) {
+          current.currentTime = 0;
+          current.play().catch(() => {});
+        }
+      });
+
+      setTimeout(() => {
+        if (current.style.opacity !== '1') {
+          showWhenReady(current);
+        }
+      }, 300);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && autoPlayAllowed && current.paused) {
+          current.play().catch(() => {});
+        }
+      });
+
+      return;
+    }
+
+    const lazy = createLazyManager({
+      container,
+      getNext: () => next,
+      thresholdSeconds: LOAD_AHEAD_SECONDS,
+    });
 
     const buildNext = () => {
       idx = (idx + 1) % list.length;
@@ -226,15 +437,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const buildAndStageNext = () => {
       next = buildNext();
+      lazy.mark(next);
       container.appendChild(next); // on l'ajoute cachée pour bufferiser
-      if (next.readyState < 2) next.load();
     };
 
     const goToNext = () => {
       if (!next) buildAndStageNext();
 
+      lazy.prime();
+
       const startTransition = () => {
-        next.play().catch(() => {});
+        if (autoPlayAllowed) {
+          next.play().catch(() => {});
+        }
         requestAnimationFrame(() => {
           // Faire apparaître la nouvelle
           next.style.opacity = '1';
@@ -248,9 +463,17 @@ document.addEventListener('DOMContentLoaded', () => {
           current = next;
 
           old.addEventListener('transitionend', () => {
+            lazy.reset(old);
             if (old.parentNode) old.parentNode.removeChild(old);
             // Écouter la fin de la "nouvelle actuelle"
             current.addEventListener('ended', goToNext, { once: true });
+            if (current.paused) {
+              current.addEventListener('playing', () => {
+                lazy.monitor(current);
+              }, { once: true });
+            } else {
+              lazy.monitor(current);
+            }
             // Préparer la suivante
             buildAndStageNext();
           }, { once: true });
@@ -270,6 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
     current.addEventListener('playing', () => {
       buildAndStageNext();
       current.addEventListener('ended', goToNext, { once: true });
+      lazy.monitor(current);
     }, { once: true });
 
     // Sécurité anti-écran vide si "playing" est lent/bloqué
@@ -281,7 +505,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reprise à retour d’onglet
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
+      if (document.visibilityState === 'visible' && autoPlayAllowed) {
         [current, next].forEach((v) => v && v.paused && v.play().catch(() => {}));
       }
     });
