@@ -202,7 +202,18 @@ echo $snipcartInit;
               data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
               data-item-url="<?= htmlspecialchars($metaUrl) ?>"
               data-item-quantity="1"
-<?php if (!empty($languages)) : ?>data-item-custom1-name="<?= htmlspecialchars($translations['product']['language'] ?? 'Langue', ENT_QUOTES, 'UTF-8') ?>" data-item-custom1-type="dropdown" data-item-custom1-options="<?= htmlspecialchars(implode('|', $languages), ENT_QUOTES, 'UTF-8') ?>" data-item-custom1-value="<?= htmlspecialchars($defaultLanguage, ENT_QUOTES, 'UTF-8') ?>" <?php endif; ?><?php if (!empty($multipliers)) : ?>data-item-custom2-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur', ENT_QUOTES, 'UTF-8') ?>" data-item-custom2-type="dropdown" data-item-custom2-options="<?= htmlspecialchars(implode('|', $multiplierOptions), ENT_QUOTES, 'UTF-8') ?>" data-item-custom2-value="<?= htmlspecialchars($multiplierOptions[0] ?? '', ENT_QUOTES, 'UTF-8') ?>" <?php endif; ?>
+<?php if (!empty($languages)) : ?>
+              data-item-custom1-name="<?= htmlspecialchars($translations['product']['language'] ?? 'Langue', ENT_QUOTES, 'UTF-8') ?>"
+              data-item-custom1-type="dropdown"
+              data-item-custom1-options="<?= htmlspecialchars(implode('|', $languages), ENT_QUOTES, 'UTF-8') ?>"
+              data-item-custom1-value="<?= htmlspecialchars($defaultLanguage, ENT_QUOTES, 'UTF-8') ?>"
+<?php endif; ?>
+<?php if (!empty($multipliers)) : ?>
+              data-item-custom2-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur', ENT_QUOTES, 'UTF-8') ?>"
+              data-item-custom2-type="dropdown"
+              data-item-custom2-options="<?= htmlspecialchars(implode('|', $multiplierOptions), ENT_QUOTES, 'UTF-8') ?>"
+              data-item-custom2-value="<?= htmlspecialchars($multiplierOptions[0] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+<?php endif; ?>
             >
               🛒 <span data-i18n="product.add">Ajouter au panier</span> — <?= htmlspecialchars(number_format((float)$product['price'], 2, ',', ' ')) ?> $ CAD
             </button>
