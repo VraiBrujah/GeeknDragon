@@ -19,7 +19,16 @@
       "Read(H:\\Nouveau dossier (3)\\new-old\\css/**)",
       "Read(H:\\Nouveau dossier (3)\\new-old/**)",
       "Read(H:\\Nouveau dossier (3)\\new-old\\js/**)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(where:*)",
+      "Bash(winget install:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(refreshenv)",
+      "Bash(\"C:\\ffmpeg\\bin\\ffmpeg.exe\" -version)",
+      "Read(\\/**)",
+      "Bash(magick:*)",
+      "Bash(powershell:*)",
+      "Bash(dir videos)"
     ],
     "deny": [],
     "ask": []
