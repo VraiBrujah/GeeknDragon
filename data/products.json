@@ -12,11 +12,11 @@
       "/images/optimized-modern/webp/VagabonPlast.webp",
       "/images/optimized-modern/webp/coin-copper-1.webp",
       "/images/optimized-modern/webp/coin-silver-1.webp",
-      "/images/optimized-modern/webp/coin-electrum-1.webp",
-      "/images/optimized-modern/webp/coin-gold-1.webp",
-      "/images/optimized-modern/webp/coin-platinum-1.webp",
+      "/images/optimized-modern/webp/ef.webp",
+      "/images/optimized-modern/webp/of.webp",
+      "/images/optimized-modern/webp/pf.webp",
       "/images/optimized-modern/webp/x1f2.webp",
-      "/images/optimized-modern/webp/x1p2.webp"
+      "/images/optimized-modern/webp/x100f3.webp"
     ],
     "multipliers": [1, 10, 100, 1000, 10000]
   },

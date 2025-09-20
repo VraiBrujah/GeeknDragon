@@ -88,85 +88,109 @@ include 'header.php';
 echo $snipcartInit;
 ?>
 <main id="main" class="py-10 pt-[var(--header-height)] main-product">
-  <section class="max-w-md mx-auto px-6">
+  <section class="max-w-6xl mx-auto px-6">
     <div class="flex justify-center mb-6">
       <a href="boutique.php#<?= htmlspecialchars($from) ?>" class="btn btn-outline">&larr;
         <span data-i18n="product.back">Retour à la boutique</span>
       </a>
     </div>
 
-    <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center card">
-      <?php if (!empty($images)) : ?>
-      <div class="swiper mb-6 w-full">
-        <div class="swiper-wrapper">
-          <?php foreach ($images as $img) : ?>
-          <div class="swiper-slide">
-            <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
-              <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
-                   alt="<?= htmlspecialchars($product['description']) ?>"
-                   data-alt-fr="<?= htmlspecialchars($product['description']) ?>"
-                   data-alt-en="<?= htmlspecialchars($descriptionEn) ?>"
-                   class="rounded w-full object-contain">
-            </a>
+    <div class="bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[600px]">
+        
+        <!-- Section Image (Gauche) -->
+        <div class="bg-gray-900/50 p-6 flex items-center justify-center">
+          <?php if (!empty($images)) : ?>
+          <div class="swiper w-full max-w-lg relative">
+            <div class="swiper-wrapper">
+              <?php foreach ($images as $img) : ?>
+              <div class="swiper-slide">
+                <a href="<?= htmlspecialchars($img) ?>" data-fancybox="<?= htmlspecialchars($id) ?>">
+                  <img loading="lazy" src="<?= htmlspecialchars($img) ?>"
+                       alt="<?= htmlspecialchars($product['description']) ?>"
+                       data-alt-fr="<?= htmlspecialchars($product['description']) ?>"
+                       data-alt-en="<?= htmlspecialchars($descriptionEn) ?>"
+                       class="rounded-lg w-full object-contain h-80">
+                </a>
+              </div>
+              <?php endforeach; ?>
+            </div>
+            <div class="swiper-pagination !bottom-4"></div>
+            <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
+            <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
           </div>
-          <?php endforeach; ?>
+          <?php else : ?>
+          <div class="w-full max-w-lg h-96 bg-gray-700 rounded-lg flex items-center justify-center">
+            <span class="text-gray-400">Aucune image disponible</span>
+          </div>
+          <?php endif; ?>
         </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
-        <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
-      </div>
-      <?php endif; ?>
+        
+        <!-- Section Informations Produit (Droite) -->
+        <div class="p-8 flex flex-col">
+          <div class="flex-1">
+            <h1 class="text-3xl lg:text-4xl font-bold mb-4 text-white leading-tight"
+                data-name-fr="<?= $displayName ?>"
+                data-name-en="<?= $displayNameEn ?>"><?= $displayName ?></h1>
 
-      <h1 class="text-3xl font-bold mb-4 text-center"
-          data-name-fr="<?= $displayName ?>"
-          data-name-en="<?= $displayNameEn ?>"><?= $displayName ?></h1>
+            <div class="text-xl font-bold text-indigo-400 mb-6">
+              <?= htmlspecialchars(number_format((float)$product['price'], 2, ',', ' ')) ?> $ CAD
+            </div>
 
-      <div class="mb-6 text-gray-300 text-center product-description"><?= $productDescHtml ?></div>
+            <div class="mb-6 text-gray-200 leading-relaxed product-description overflow-y-auto max-h-40">
+              <?= $productDescHtml ?>
+            </div>
+          </div>
 
-      <?php if (inStock($id)) : ?>
-      <div class="text-center mb-4 w-full">
-        <label class="block mb-2" data-i18n="product.quantity">Quantité</label>
-        <div class="quantity-selector justify-center mx-auto" data-id="<?= htmlspecialchars($id) ?>">
-          <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
-          <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
-          <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+          <?php if (inStock($id)) : ?>
+          <div class="space-y-6">
+            <div>
+              <label class="block mb-3 text-lg font-medium text-white" data-i18n="product.quantity">Quantité</label>
+              <div class="quantity-selector" data-id="<?= htmlspecialchars($id) ?>">
+                <button type="button" class="quantity-btn minus" data-target="<?= htmlspecialchars($id) ?>">−</button>
+                <span class="qty-value" id="qty-<?= htmlspecialchars($id) ?>">1</span>
+                <button type="button" class="quantity-btn plus" data-target="<?= htmlspecialchars($id) ?>">+</button>
+              </div>
+            </div>
+
+
+            <button class="snipcart-add-item btn btn-primary w-full text-lg py-4 font-bold bg-indigo-600 hover:bg-indigo-700 transform hover:scale-105 transition-all duration-200 shadow-lg"
+              data-item-id="<?= htmlspecialchars($id) ?>"
+              data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
+              data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
+              data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
+              data-item-description="<?= htmlspecialchars($productDesc) ?>"
+              data-item-description-fr="<?= htmlspecialchars($product['description']) ?>"
+              data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $product['description']) ?>"
+              data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
+              data-item-url="<?= htmlspecialchars($metaUrl) ?>"
+              data-item-quantity="1"
+              <?php if (!empty($multipliers)) : ?>
+                data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+                data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
+                data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
+              <?php endif; ?>
+            >
+              🛒 <span data-i18n="product.add">Ajouter au panier</span> — <?= htmlspecialchars(number_format((float)$product['price'], 2, ',', ' ')) ?> $ CAD
+            </button>
+
+            <p class="mt-4 text-center text-sm text-gray-400">
+              <span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
+              <span class="payment-icons inline-flex gap-1 align-middle ml-2">
+                <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy" class="h-4">
+                <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy" class="h-4">
+                <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy" class="h-4">
+              </span>
+            </p>
+          </div>
+
+          <?php else : ?>
+          <div class="space-y-6">
+            <span class="btn w-full text-lg py-4 bg-gray-600 cursor-not-allowed opacity-60" disabled data-i18n="product.outOfStock">Rupture de stock</span>
+          </div>
+          <?php endif; ?>
         </div>
       </div>
-
-
-
-      <button class="snipcart-add-item btn btn-shop"
-        data-item-id="<?= htmlspecialchars($id) ?>"
-        data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
-        data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
-        data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-        data-item-description="<?= htmlspecialchars($productDesc) ?>"
-        data-item-description-fr="<?= htmlspecialchars($product['description']) ?>"
-        data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $product['description']) ?>"
-        data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
-        data-item-url="<?= htmlspecialchars($metaUrl) ?>"
-        data-item-quantity="1"
-        <?php if (!empty($multipliers)) : ?>
-          data-item-custom1-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
-          data-item-custom1-options="<?= htmlspecialchars(implode('|', array_map('strval', $multipliers))) ?>"
-          data-item-custom1-value="<?= htmlspecialchars((string)$multipliers[0]) ?>"
-        <?php endif; ?>
-      >
-        <span data-i18n="product.add">Ajouter</span>
-      </button>
-
-      <?php else : ?>
-        <span class="btn btn-shop opacity-60 cursor-not-allowed" disabled data-i18n="product.outOfStock">Rupture de stock</span>
-      <?php endif; ?>
-
-      <p class="mt-4 text-center txt-court">
-        <span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
-        <span class="payment-icons inline-flex gap-2 align-middle ml-2">
-          <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-          <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-          <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
-        </span>
-      </p>
     </div>
   </section>
 
