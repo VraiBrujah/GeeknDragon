@@ -211,6 +211,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Boutons Snipcart (nom/description + libellé custom)
+        const MULTIPLIER_LABEL_PATTERN = /(multiplicateur|multiplier)s?/i;
+        // Traduction sécurisée du libellé multiplicateur : on garde la valeur initiale pour vérifier qu'il s'agit bien d'un champ dédié.
+        const multiplierLabel = typeof data?.product?.multiplier === 'string' ? data.product.multiplier : '';
+        const multiplierFieldMap = new Map();
+        if (multiplierLabel) {
+          document.querySelectorAll('.multiplier-select[data-target]').forEach((sel) => {
+            // On mémorise les sélecteurs multiplicateurs pour repérer l'index exact du champ custom.
+            const target = sel.dataset.target;
+            if (!target) return;
+            const indexValue = String(sel.dataset.customIndex || '1');
+            if (!multiplierFieldMap.has(target)) multiplierFieldMap.set(target, new Set());
+            multiplierFieldMap.get(target).add(indexValue);
+          });
+        }
+
+        const hasExplicitMultiplierMarker = (button, fieldIndex, totalCustomFields) => {
+          // Ce helper vérifie si un attribut spécifique signale que le champ courant est bien un multiplicateur.
+          const indexValue = String(fieldIndex);
+          const rawMarker = button.getAttribute('data-multiplier-field');
+          if (typeof rawMarker === 'string' && rawMarker.trim() !== '') {
+            const tokens = rawMarker.split(/[,|]/)
+              .map((token) => token.trim().toLowerCase())
+              .filter(Boolean);
+            if (tokens.some((token) => token === indexValue || token === `custom${indexValue}`)) return true;
+            if (totalCustomFields === 1 && tokens.some((token) => ['true', 'yes', '1', 'multiplicateur', 'multiplier'].includes(token))) return true;
+          } else if (button.hasAttribute('data-multiplier-field') && totalCustomFields === 1) {
+            return true;
+          }
+
+          const targetId = button.dataset.itemId;
+          if (targetId && multiplierFieldMap.get(targetId)?.has(indexValue)) return true;
+
+          const hintAttrs = [
+            button.getAttribute(`data-item-custom${indexValue}-role`),
+            button.getAttribute(`data-item-custom${indexValue}-type`),
+            button.getAttribute(`data-item-custom${indexValue}-flag`),
+          ];
+          return hintAttrs.some((hint) => /multiplier/i.test(hint || ''));
+        };
+
         document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
           if (current === 'en') {
             if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
@@ -219,8 +259,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
             if (btn.dataset.itemDescriptionFr) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
           }
-          const hasCustom = btn.hasAttribute('data-item-custom1-name') && data?.product?.multiplier;
-          if (hasCustom) btn.setAttribute('data-item-custom1-name', data.product.multiplier);
+
+          if (!multiplierLabel) return; // Aucun libellé de multiplicateur : on ne touche pas aux champs custom.
+
+          const customNameAttrs = Array.from(btn.attributes).filter((attr) => /^data-item-custom\d+-name$/i.test(attr.name));
+          const totalCustomFields = customNameAttrs.length;
+
+          customNameAttrs.forEach((attr) => {
+            const match = attr.name.match(/^data-item-custom(\d+)-name$/i);
+            if (!match) return;
+            const fieldIndex = match[1];
+            const currentLabel = (attr.value || '').trim();
+            const shouldOverride = MULTIPLIER_LABEL_PATTERN.test(currentLabel) || hasExplicitMultiplierMarker(btn, fieldIndex, totalCustomFields);
+            if (shouldOverride) btn.setAttribute(attr.name, multiplierLabel);
+          });
         });
 
         // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)
