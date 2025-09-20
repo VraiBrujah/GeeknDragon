@@ -211,6 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Boutons Snipcart (nom/description + libellé custom)
+        const multiplierLabelPattern = /(multiplicat(eur|or)|multiplier)/i;
+
         document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
           if (current === 'en') {
             if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
@@ -220,7 +222,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (btn.dataset.itemDescriptionFr) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
           }
           const hasCustom = btn.hasAttribute('data-item-custom1-name') && data?.product?.multiplier;
-          if (hasCustom) btn.setAttribute('data-item-custom1-name', data.product.multiplier);
+          if (hasCustom) {
+            const currentLabel = btn.getAttribute('data-item-custom1-name') || '';
+            const explicitMultiplierFlag =
+              (btn.dataset.itemCustom1Role && btn.dataset.itemCustom1Role.toLowerCase() === 'multiplier')
+              || btn.hasAttribute('data-multiplier-label')
+              || (btn.dataset.multiplierLabel
+                && ['1', 'true', 'yes', 'oui'].includes(btn.dataset.multiplierLabel.toLowerCase()));
+            const labelLooksLikeMultiplier = multiplierLabelPattern.test(currentLabel);
+
+            // On ne remplace le libellé que s'il est explicitement identifié comme un multiplicateur
+            // afin d'éviter d'écraser d'autres champs personnalisés (ex. sélecteur de langue).
+            if (explicitMultiplierFlag || labelLooksLikeMultiplier) {
+              btn.setAttribute('data-item-custom1-name', data.product.multiplier);
+            }
+          }
         });
 
         // affiche uniquement le sélecteur FR/EN correspondant (si tu en as deux)
