@@ -705,13 +705,29 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 .shop-grid{
   display:grid;
   grid-template-columns:repeat(1,minmax(0,1fr));
-  gap:2rem;                /* espace entre les cartes */
+  gap:3rem;                /* espace augmenté entre les cartes */
+  justify-content:center;  /* centre les items quand il y en a peu */
 }
 @media (min-width:640px){  /* >= sm */
   .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (min-width:1024px){ /* >= lg */
   .shop-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+/* Centrage spécial pour sections avec peu d'items (ex: triptyques) */
+.shop-grid:has(.card-product:only-child),
+.shop-grid:has(.card-product:first-child:nth-last-child(-n+2)){
+  justify-content:center;
+  justify-items:center;
+}
+
+/* Version de secours pour navigateurs sans :has() */
+@supports not selector(:has(*)) {
+  .shop-grid.single-item{
+    justify-content:center;
+    justify-items:center;
+  }
 }
 
 /* carte homogène, centrée et égales en hauteur */
