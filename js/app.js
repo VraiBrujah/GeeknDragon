@@ -1,42 +1,155 @@
 /* ========================================================================
-   Geek & Dragon — app.js (optimized)
-   Dernière mise à jour : Refactorisation avec modules ES6
+   Geek & Dragon — app.js (full)
+   Dernière mise à jour : Header/Nav fixes + i18n + mobile panel + boutique
+   + vidéos séquentielles + Swiper/Fancybox + helpers utilitaires.
    ===================================================================== */
 
 /* global Swiper, Fancybox */
-
-// Import des utilitaires centralisés
-import { 
-  qs, qsa, log, throttle, debounce, createEl, 
-  getLang, setLang, smoothScrollTo, getHeaderOffset, 
-  focusTrap, whenSnipcart, updateHeaderVars, fullyVisible
-} from './core/utils.js';
-
-import { 
-  initScrollAnimations, initSmoothScroll, initNavigation,
-  initHeaderEffects, initBackToTop, initCollapse, initLazyLoading
-} from './core/dom.js';
-
-import { initI18n } from './core/i18n.js';
-
-// Expose les utilitaires globalement pour compatibilité
-window.GD = {
-  qs, qsa, log, throttle, debounce, createEl,
-  getLang, setLang, smoothScrollTo, getHeaderOffset, focusTrap
-};
-
-window.whenSnipcart = whenSnipcart;
+/* eslint-disable */
 
 /* ========================================================================
-   HAUTEUR D'EN-TÊTE → variables CSS (global + Snipcart)
+   UTILITAIRES GÉNÉRIQUES
+   ===================================================================== */
+(() => {
+  // Sélecteurs rapides
+  const qs = (sel, root = document) => root.querySelector(sel);
+  const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  // Pas d’erreurs si console absente
+  const log = (...args) => { try { console.log('[GD]', ...args); } catch (_) {} };
+
+  // Throttle / Debounce
+  const throttle = (fn, wait = 100) => {
+    let last = 0; let
+      timer = null;
+    return function throttled(...args) {
+      const now = Date.now();
+      if (now - last >= wait) {
+        last = now; fn.apply(this, args);
+      } else if (!timer) {
+        timer = setTimeout(() => { last = Date.now(); timer = null; fn.apply(this, args); }, wait - (now - last));
+      }
+    };
+  };
+  const debounce = (fn, wait = 120) => {
+    let t; return function debounced(...args) { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), wait); };
+  };
+
+  // Helpers DOM
+  const createEl = (tag, attrs = {}, children = []) => {
+    const el = document.createElement(tag);
+    Object.entries(attrs).forEach(([k, v]) => {
+      if (k === 'class') el.className = v;
+      else if (k === 'style') Object.assign(el.style, v);
+      else if (v !== null && v !== undefined) el.setAttribute(k, v);
+    });
+    [].concat(children).forEach((c) => {
+      if (typeof c === 'string') el.appendChild(document.createTextNode(c));
+      else if (c) el.appendChild(c);
+    });
+    return el;
+  };
+
+  // Cookies
+  const setCookie = (name, value, maxAge = 31536000) => {
+    try { document.cookie = `${name}=${value};path=/;max-age=${maxAge}`; } catch (_) {}
+  };
+  const getCookie = (name) => {
+    try {
+      const m = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]+)`));
+      return m ? m[1] : null;
+    } catch (_) { return null; }
+  };
+
+  // Langue
+  const LANGS = ['fr', 'en'];
+  const DEFAULT_LANG = 'fr';
+  const getLang = () => {
+    const fromStorage = localStorage.getItem('lang');
+    const fromCookie = getCookie('lang');
+    const fromHtml = document.documentElement.lang;
+    const lang = (fromStorage || fromCookie || fromHtml || DEFAULT_LANG).toLowerCase();
+    return LANGS.includes(lang) ? lang : DEFAULT_LANG;
+  };
+  const setLang = (lang) => {
+    const safe = LANGS.includes(lang) ? lang : DEFAULT_LANG;
+    localStorage.setItem('lang', safe);
+    localStorage.setItem('snipcartLanguage', safe);
+    setCookie('lang', safe);
+    document.documentElement.lang = safe;
+    return safe;
+  };
+
+  // Smooth scroll + offset du header
+  const prefersNoMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const getHeaderOffset = () => {
+    const header = qs('header');
+    return header ? header.offsetHeight : 0;
+  };
+  const smoothScrollTo = (target, options = {}) => {
+    const top = Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - (options.offset ?? getHeaderOffset() + 12));
+    if (prefersNoMotion) { window.scrollTo(0, top); return; }
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
+  // Focus trap
+  const focusTrap = (container) => {
+    const focusableSel = 'a[href], button:not([disabled]), select, textarea, input, [tabindex]:not([tabindex="-1"])';
+    let nodes = []; let first = null; let last = null;
+    const set = () => { nodes = qsa(focusableSel, container); [first] = nodes; last = nodes[nodes.length - 1]; };
+    const handler = (e) => {
+      if (e.key !== 'Tab' || !nodes.length) return;
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+    return {
+      mount() { set(); container.addEventListener('keydown', handler); },
+      unmount() { container.removeEventListener('keydown', handler); },
+    };
+  };
+
+  // Snipcart ready (polling léger)
+  const whenSnipcart = (cb) => {
+    if (window.Snipcart && window.Snipcart.store && window.Snipcart.api) { cb(); return; }
+    const int = setInterval(() => {
+      if (window.Snipcart && window.Snipcart.store && window.Snipcart.api) {
+        clearInterval(int); cb();
+      }
+    }, 200);
+  };
+  window.whenSnipcart = whenSnipcart;
+
+  // Expose utilitaires
+  window.GD = Object.assign(window.GD || {}, {
+    qs,
+    qsa,
+    log,
+    throttle,
+    debounce,
+    createEl,
+    getLang,
+    setLang,
+    smoothScrollTo,
+    getHeaderOffset,
+    focusTrap,
+  });
+})();
+
+/* ========================================================================
+   HAUTEUR D’EN-TÊTE → variables CSS (global + Snipcart)
    ===================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  const header = qs('header');
+  const header = document.querySelector('header');
   if (!header) return;
-  
-  updateHeaderVars();
-  new ResizeObserver(updateHeaderVars).observe(header);
-  window.addEventListener('resize', updateHeaderVars);
+  const setHeaderVars = () => {
+    const h = header.getBoundingClientRect().height || 96;
+    // utilisé par ton site
+    document.documentElement.style.setProperty('--header-height', `${h}px`);
+    // utilisé par snipcart-custom.css (modal/summary sticky)
+    document.documentElement.style.setProperty('--gd-header-h', `${h}px`);
+  };
+  setHeaderVars();
+  new ResizeObserver(setHeaderVars).observe(header);
+  window.addEventListener('resize', setHeaderVars);
 });
 
 /* ========================================================================
