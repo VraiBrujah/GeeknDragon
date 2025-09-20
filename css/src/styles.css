@@ -611,6 +611,18 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   text-shadow:0 1px 3px rgba(0,0,0,.8);
 }
 
+/* Fix hero overlap on scroll - boutique page */
+.min-h-screen:has(.hero-videos) {
+  position: relative;
+  z-index: 1;
+}
+
+.min-h-screen:has(.hero-videos) + section {
+  position: relative;
+  z-index: 2;
+  background: rgba(17, 24, 39, 0.95);
+}
+
 /* Breadcrumbs */
 .breadcrumbs{ display:flex; gap:.5rem; align-items:center; color:#cbd5e1; font-size:.9rem; }
 .breadcrumbs a{ color:#e5e7eb; }
