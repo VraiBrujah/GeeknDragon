@@ -709,20 +709,234 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 .t-ease:hover{ transform: translateY(-1px); }
 
 /* ========================================================================
+   CONVERTISSEUR DE MONNAIE PREMIUM
+   ===================================================================== */
+#currency-converter,
+#currency-equivalences,
+#currency-best {
+  background: var(--boutique-card);
+  padding: var(--boutique-space-lg);
+  border-radius: var(--boutique-radius-lg);
+  color: var(--boutique-text);
+  overflow-x: auto;
+  border: 1px solid var(--boutique-border);
+  box-shadow: var(--boutique-shadow-md);
+  transition: var(--boutique-transition);
+}
+
+#currency-best {
+  background: var(--boutique-gradient-card);
+  border: 1px solid var(--boutique-border-accent);
+}
+
+#currency-totals {
+  margin-top: var(--boutique-space-lg);
+  padding-top: var(--boutique-space-lg);
+  border-top: 1px solid var(--boutique-border);
+}
+
+#currency-best .total-pieces {
+  display: inline-block;
+  background: var(--boutique-surface);
+  padding: var(--boutique-space-xs) var(--boutique-space-sm);
+  border-radius: var(--boutique-radius-sm);
+  margin-top: var(--boutique-space-sm);
+  border: 1px solid var(--boutique-border);
+}
+
+#currency-converter table,
+#currency-equivalences table,
+#currency-best table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+#currency-converter th,
+#currency-converter td,
+#currency-equivalences th,
+#currency-equivalences td,
+#currency-best th,
+#currency-best td {
+  padding: var(--boutique-space-sm) var(--boutique-space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--boutique-border);
+  transition: var(--boutique-transition-fast);
+}
+
+#currency-sources th,
+#currency-sources td {
+  text-align: center;
+}
+
+#currency-equivalences th,
+#currency-equivalences td {
+  text-align: center;
+}
+
+#currency-converter th,
+#currency-equivalences th,
+#currency-best th {
+  color: var(--boutique-text-accent);
+  font-weight: 600;
+  background: rgba(139, 92, 246, 0.1);
+}
+
+#currency-equivalences-list tbody tr:nth-child(even) {
+  background: var(--boutique-surface);
+}
+
+#currency-equivalences-list tbody tr:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+#currency-equivalences td hr {
+  margin: var(--boutique-space-sm) 0;
+  border: none;
+  border-top: 1px solid var(--boutique-border);
+  width: 100%;
+}
+
+.advanced-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--boutique-space-sm);
+  margin-top: var(--boutique-space-sm);
+}
+
+.advanced-group label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--boutique-space-xs);
+}
+
+.advanced-group label input {
+  width: 100%;
+  background: var(--boutique-surface);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-sm);
+  padding: var(--boutique-space-sm);
+  color: var(--boutique-text);
+  transition: var(--boutique-transition-fast);
+}
+
+.advanced-group label input:focus {
+  border-color: var(--boutique-primary);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+  outline: none;
+}
+
+#currency-equivalences tfoot {
+  border-top: 2px solid var(--boutique-border);
+}
+
+#currency-equivalences tfoot th,
+#currency-equivalences tfoot td {
+  border-bottom: none;
+  text-align: center;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--boutique-secondary);
+  font-weight: 600;
+}
+
+/* Animation pour les changements de valeurs */
+#currency-results td {
+  transition: all 0.3s ease;
+}
+
+#currency-results td.value-changed {
+  background: rgba(139, 92, 246, 0.2);
+  transform: scale(1.05);
+}
+
+/* Hover effect sur le convertisseur */
+#currency-converter:hover,
+#currency-equivalences:hover,
+#currency-best:hover {
+  box-shadow: var(--boutique-shadow-lg);
+  border-color: var(--boutique-border-accent);
+}
+
+/* ========================================================================
    FIN – (le fichier dépasse 500 lignes pour inclure des utilitaires utiles)
    ===================================================================== */
 
-/* === Boutique — grille & cartes produits === */
+/* ========================================================================
+   VARIABLES PREMIUM POUR LA BOUTIQUE
+   ===================================================================== */
+:root {
+  /* Couleurs boutique premium */
+  --boutique-primary: #8b5cf6;
+  --boutique-primary-hover: #a855f7;
+  --boutique-secondary: #10b981;
+  --boutique-accent: #f59e0b;
+  --boutique-danger: #ef4444;
+  
+  /* Surfaces et arrière-plans */
+  --boutique-bg: #0f172a;
+  --boutique-surface: #1e293b;
+  --boutique-card: #334155;
+  --boutique-elevated: #475569;
+  
+  /* Textes */
+  --boutique-text: #f1f5f9;
+  --boutique-text-muted: #94a3b8;
+  --boutique-text-accent: #c7d2fe;
+  
+  /* Bordures et dividers */
+  --boutique-border: rgba(255, 255, 255, 0.1);
+  --boutique-border-accent: rgba(139, 92, 246, 0.3);
+  
+  /* Ombres premium */
+  --boutique-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --boutique-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --boutique-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --boutique-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.3);
+  --boutique-shadow-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  
+  /* Gradients premium */
+  --boutique-gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
+  --boutique-gradient-secondary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --boutique-gradient-card: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+  --boutique-gradient-overlay: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  
+  /* Animations et transitions */
+  --boutique-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --boutique-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --boutique-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Espacements boutique */
+  --boutique-space-xs: 0.25rem;
+  --boutique-space-sm: 0.5rem;
+  --boutique-space-md: 1rem;
+  --boutique-space-lg: 1.5rem;
+  --boutique-space-xl: 2rem;
+  --boutique-space-2xl: 3rem;
+  --boutique-space-3xl: 4rem;
+  
+  /* Border radius */
+  --boutique-radius-sm: 8px;
+  --boutique-radius-md: 12px;
+  --boutique-radius-lg: 16px;
+  --boutique-radius-xl: 20px;
+}
 
-/* conteneur centré : largeur max et padding latéraux */
-.shop-wrap{max-width:1200px;margin-inline:auto;padding-inline:1rem}
+/* === Boutique — grille & cartes produits PREMIUM === */
 
-/* grille responsive avec espaces réguliers */
+/* conteneur centré : largeur max et padding latéraux améliorés */
+.shop-wrap{max-width:1440px;margin-inline:auto;padding-inline:var(--boutique-space-lg)}
+
+/* grille responsive premium avec flexbox pour plus de contrôle */
 .shop-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-  gap:2rem;
-  justify-content:center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--boutique-space-xl);
+  justify-content: center;
+  align-items: stretch;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--boutique-space-lg);
 }
 
 /* Centrage spécial pour sections avec peu d'items (ex: triptyques) */
@@ -740,10 +954,53 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   }
 }
 
-/* carte homogène, centrée et égales en hauteur */
+/* cartes premium avec hauteurs flexibles et design élégant */
 .shop-grid .card{
-  height: 500px !important;
-  max-width: 350px !important;
+  background: var(--boutique-gradient-card);
+  border: 1px solid var(--boutique-border);
+  border-radius: var(--boutique-radius-lg);
+  padding: var(--boutique-space-lg);
+  transition: var(--boutique-transition);
+  position: relative;
+  overflow: hidden;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  /* largeur par défaut (petits/moyens écrans) */
+  flex: 0 1 320px;
+  max-width: 320px;
+  margin: 0;
+  box-shadow: var(--boutique-shadow-md);
+}
+
+/* trait violet en haut de chaque carte */
+.shop-grid .card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--boutique-gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+/* effet hover premium */
+.shop-grid .card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--boutique-shadow-xl), var(--boutique-shadow-glow);
+  border-color: var(--boutique-border-accent);
+}
+
+.shop-grid .card:hover::before { 
+  transform: scaleX(1); 
+}
+
+/* 4 colonnes stables en 1080p+ */
+@media (min-width: 1280px) {
+  .shop-grid .card {
+    flex: 0 1 calc((100% - 3 * var(--boutique-space-xl)) / 4);
+    max-width: calc((100% - 3 * var(--boutique-space-xl)) / 4);
+  }
 }
 
 /* Effet de brillance subtile au survol */

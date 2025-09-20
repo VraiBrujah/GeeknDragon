@@ -127,6 +127,87 @@ echo $snipcartInit;
           <span data-i18n="shop.pieces.description">Un jeu de rôle sans pièces physiques, c'est comme un Monopoly sans billets. Offrez‑vous le poids authentique du trésor.</span><br>
           <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank" class="underline text-indigo-400 hover:text-indigo-300" data-i18n="shop.pieces.video">Voir la démonstration en vidéo&nbsp;></a>
         </p>
+
+        <!-- Convertisseur de monnaie -->
+        <div class="mt-12 text-center" id="currency-converter">
+          <h4 class="text-gray-200 mb-4" data-i18n="shop.converter.title">Convertisseur de monnaie</h4>
+          <div class="mx-auto">
+            <p class="text-gray-200 mb-2" data-i18n="shop.converter.sourcesLabel">Monnaies sources</p>
+            <table id="currency-sources" class="w-full text-gray-200">
+              <thead>
+                <tr>
+                  <th data-i18n="shop.converter.copper">pièce de cuivre</th>
+                  <th data-i18n="shop.converter.silver">pièce d'argent</th>
+                  <th data-i18n="shop.converter.electrum">pièce d'électrum</th>
+                  <th data-i18n="shop.converter.gold">pièce d'or</th>
+                  <th data-i18n="shop.converter.platinum">pièce de platine</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                  </td>
+                  <td>
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                  </td>
+                  <td>
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                  </td>
+                  <td>
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                  </td>
+                  <td>
+                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-4 bg-gray-800 rounded-lg p-4 overflow-x-auto">
+            <table id="currency-results" class="w-full text-gray-200" aria-live="polite">
+              <thead>
+                <tr>
+                  <th class="text-left" data-i18n="shop.converter.multiplier">Multiplicateur</th>
+                  <th>×1</th>
+                  <th>×10</th>
+                  <th>×100</th>
+                  <th>×1000</th>
+                  <th>×10000</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-currency="copper">
+                  <th class="text-left" data-i18n="shop.converter.copper">pièce de cuivre</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr data-currency="silver">
+                  <th class="text-left" data-i18n="shop.converter.silver">pièce d'argent</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr data-currency="electrum">
+                  <th class="text-left" data-i18n="shop.converter.electrum">pièce d'électrum</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr data-currency="gold">
+                  <th class="text-left" data-i18n="shop.converter.gold">pièce d'or</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr data-currency="platinum">
+                  <th class="text-left" data-i18n="shop.converter.platinum">pièce de platine</th>
+                  <td></td><td></td><td></td><td></td><td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="currency-equivalences" class="mt-4 bg-gray-800 rounded-lg p-4 text-gray-200 hidden">
+            <h5 class="mb-2" data-i18n="shop.converter.equivTitle">Équivalences totales par métal</h5>
+            <table class="w-full text-left text-sm">
+              <tbody id="currency-equivalences-list"></tbody>
+            </table>
+          </div>
+          <p id="currency-best" class="mt-4"></p>
+        </div>
       </div>
     </section>
 
@@ -228,6 +309,138 @@ echo $snipcartInit;
   <script>window.stock = <?= json_encode($stock) ?>;</script>
   <script src="js/app.js"></script>
   <script src="/js/hero-videos.js"></script>
+  <script src="js/boutique-premium.js"></script>
+  
+  <script>
+    // Convertisseur de monnaie complet (réutilisation code existant)
+    (() => {
+      const rates = {copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000};
+      const sources = document.querySelectorAll('#currency-sources input');
+      const results = document.getElementById('currency-results');
+      const best = document.getElementById('currency-best');
+      const equivContainer = document.getElementById('currency-equivalences');
+      const equivList = document.getElementById('currency-equivalences-list');
+
+      if (!sources.length || !results || !best || !equivContainer || !equivList) return;
+
+      const multipliers = [1, 10, 100, 1000, 10000];
+      const coins = Object.keys(rates).sort((a, b) => rates[b] - rates[a]);
+      const nf = new Intl.NumberFormat('fr-FR');
+
+      const getCurrencyNames = () => Array.from(results.querySelectorAll('tbody tr')).reduce(
+        (acc, row) => ({
+          ...acc,
+          [row.dataset.currency]: row.querySelector('th').textContent,
+        }),
+        {},
+      );
+
+      const denominations = multipliers
+        .flatMap((multiplier) => coins.map((coin) => ({
+          coin,
+          multiplier,
+          value: rates[coin] * multiplier,
+        })))
+        .sort((a, b) => b.value - a.value);
+
+      const minimalParts = (value, currencyNames, andText) => {
+        let remaining = value;
+        const items = [];
+        denominations.forEach(({ coin, multiplier, value: val }) => {
+          if (remaining <= 0) return;
+          const qty = Math.floor(remaining / val);
+          if (qty > 0) {
+            remaining -= qty * val;
+            items.push({ coin, multiplier, qty });
+          }
+        });
+        const parts = items.map(({ coin, multiplier, qty }) => {
+          const label = currencyNames[coin].replace(/^pièce/, qty > 1 ? 'pièces' : 'pièce');
+          return multiplier === 1
+            ? `${nf.format(qty)} ${label}`
+            : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
+        });
+        const text = parts.length > 1
+          ? `${parts.slice(0, -1).join(', ')} et ${parts[parts.length - 1]}`
+          : (parts[0] || '');
+        const total = items.reduce((sum, { qty }) => sum + qty, 0);
+        return { text, remaining, items, total };
+      };
+
+      const render = () => {
+        const currencyNames = getCurrencyNames();
+        const baseValue = Array.from(sources).reduce((sum, input) => {
+          const { currency } = input.dataset;
+          const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
+          return sum + amount * rates[currency];
+        }, 0);
+        
+        results.querySelectorAll('tbody tr').forEach((row) => {
+          const { currency } = row.dataset;
+          const cells = row.querySelectorAll('td');
+          multipliers.forEach((multiplier, idx) => {
+            const converted = Math.floor(baseValue / (rates[currency] * multiplier));
+            cells[idx].textContent = converted ? nf.format(converted) : '';
+          });
+        });
+
+        const minimal = minimalParts(baseValue, currencyNames, 'et');
+        best.innerHTML = minimal.text
+          ? `<strong>Conversion optimale:</strong> ${minimal.text}<br><small>Total pièces: ${nf.format(minimal.total)}</small>`
+          : '';
+
+        equivList.innerHTML = '';
+        let hasEquiv = false;
+        coins.forEach((coin) => {
+          const base = rates[coin];
+          const units = Math.floor(baseValue / base);
+          if (!units) return;
+          let rest = units;
+          const parts = [];
+          multipliers.slice().reverse().forEach((mult) => {
+            const qty = Math.floor(rest / mult);
+            if (qty > 0) {
+              const label = currencyNames[coin].replace(/^pièce/, qty > 1 ? 'pièces' : 'pièce');
+              parts.push(mult === 1
+                ? `${nf.format(qty)} ${label}`
+                : `${nf.format(qty)} ${label} x${nf.format(mult)}`);
+              rest -= qty * mult;
+            }
+          });
+          if (!parts.length) return;
+          const summary = parts.length > 1
+            ? `${parts.slice(0, -1).join(', ')} et ${parts[parts.length - 1]}`
+            : parts[0];
+          const remainder = baseValue % base;
+          let remainderSummary = '';
+          if (remainder > 0) {
+            const rem = minimalParts(remainder, currencyNames, 'et');
+            if (rem.text) remainderSummary = `Reste: ${rem.text}`;
+          }
+          const row = document.createElement('tr');
+          const coinTitle = currencyNames[coin]
+            .replace(/^pièces?\s+(?:de|d[''])\s*/i, '')
+            .replace(/^./, (ch) => ch.toUpperCase());
+          row.innerHTML = `<td><strong>${coinTitle}</strong></td><td>${summary}</td><td>${remainderSummary}</td>`;
+          equivList.appendChild(row);
+          hasEquiv = true;
+        });
+        equivContainer.classList.toggle('hidden', !hasEquiv);
+      };
+
+      sources.forEach((inputEl) => {
+        inputEl.addEventListener('focus', () => {
+          if (inputEl.value === '0') inputEl.value = '';
+        });
+        inputEl.addEventListener('input', () => {
+          inputEl.value = inputEl.value.replace(/[^0-9.-]/g, '');
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
 </body>
 
 
