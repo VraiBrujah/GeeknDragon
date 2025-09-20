@@ -50,6 +50,28 @@ $altFr = $toPlainText($descriptionFr);
 $altEn = $toPlainText($descriptionEn);
 $alt = $lang === 'en' ? $altEn : $altFr;
 
+// Gestion d'un résumé multilingue avec repli sur la description nettoyée
+$summaryRawFr = trim((string) ($product['summary'] ?? ''));
+$summaryRawEn = trim((string) ($product['summary_en'] ?? ''));
+if ($summaryRawFr === '' && $summaryRawEn !== '') {
+    $summaryRawFr = $summaryRawEn;
+}
+if ($summaryRawEn === '' && $summaryRawFr !== '') {
+    $summaryRawEn = $summaryRawFr;
+}
+
+$summaryFr = $summaryRawFr !== '' ? $toPlainText($summaryRawFr) : $altFr;
+$summaryEn = $summaryRawEn !== '' ? $toPlainText($summaryRawEn) : $altEn;
+
+if ($summaryFr === '') {
+    $summaryFr = $altFr;
+}
+if ($summaryEn === '') {
+    $summaryEn = $altEn;
+}
+
+$summary = $lang === 'en' ? $summaryEn : $summaryFr;
+
 $img = $product['img'] ?? ($product['images'][0] ?? '');
 $url = $product['url'] ?? ('product.php?id=' . urlencode($id));
 $price = number_format((float) ($product['price'] ?? 0), 2, '.', '');
@@ -75,8 +97,10 @@ $multipliers = $product['multipliers'] ?? [];
     </h4>
   </a>
 
-  <div class="text-center mb-4 text-gray-300 flex-grow overflow-hidden text-sm leading-tight h-20">
-    <?= strip_tags($description) ?>
+  <div class="text-center mb-4 text-gray-300 flex-grow overflow-hidden text-sm leading-tight h-20"
+       data-summary-fr="<?= htmlspecialchars($summaryFr) ?>"
+       data-summary-en="<?= htmlspecialchars($summaryEn) ?>">
+    <?= htmlspecialchars($summary) ?>
   </div>
 
 
