@@ -459,11 +459,10 @@
   overflow: hidden !important;
 }
 
-/* SOLUTION : réduire la taille du font et compacter */
+/* SOLUTION : réduire la taille du font et compacter SEULEMENT pour les custom fields */
 .snipcart .snipcart-dropdown-custom-field,
 .snipcart select[name*="Multiplicateur"],
-.snipcart select[name*="Langue"],
-.snipcart .snipcart-form__select {
+.snipcart select[name*="Langue"] {
   width: 85px !important;
   min-width: 85px !important;
   position: relative !important;
@@ -475,11 +474,10 @@
   font-weight: 400 !important;
 }
 
-/* Masquer l'icône avec un pseudo-élément */
+/* Masquer l'icône avec un pseudo-élément SEULEMENT pour custom fields */
 .snipcart .snipcart-dropdown-custom-field::after,
 .snipcart select[name*="Multiplicateur"]::after,
-.snipcart select[name*="Langue"]::after,
-.snipcart .snipcart-form__select::after {
+.snipcart select[name*="Langue"]::after {
   content: "▼" !important;
   position: absolute !important;
   right: 8px !important;
@@ -495,6 +493,39 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+/* Affichage forcé des custom fields dans le sommaire */
+.snipcart .snipcart-cart-summary-item__custom-fields,
+.snipcart .snipcart-item-line__custom-fields,
+.snipcart .snipcart-cart-item__custom-fields {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-top: 0.25rem !important;
+  font-size: 0.875rem !important;
+  color: var(--gd-muted) !important;
+}
+
+.snipcart .snipcart-cart-summary-item__custom-fields select,
+.snipcart .snipcart-item-line__custom-fields select,
+.snipcart .snipcart-cart-item__custom-fields select {
+  background: var(--gd-card) !important;
+  color: var(--gd-text) !important;
+  border: 1px solid var(--gd-border) !important;
+  border-radius: 4px !important;
+  padding: 0.25rem 0.5rem !important;
+  font-size: 0.875rem !important;
+  margin-left: 0.5rem !important;
+}
+
+/* Labels des custom fields dans le sommaire */
+.snipcart .snipcart-cart-summary-item__custom-fields label,
+.snipcart .snipcart-item-line__custom-fields label,
+.snipcart .snipcart-cart-item__custom-fields label {
+  color: var(--gd-muted) !important;
+  font-size: 0.875rem !important;
+  margin-right: 0.5rem !important;
 }
 
 /* Espacement global du panier */

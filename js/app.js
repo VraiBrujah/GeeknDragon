@@ -878,10 +878,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const ensureSnipcartQtyPatch = () => {
     if (window.__snipcartQtyPatch === true) return;
-    // TEMPORAIREMENT DÉSACTIVÉ POUR DEBUG - ÉCRASE LES CUSTOM FIELDS
-    console.log('ensureSnipcartQtyPatch: DÉSACTIVÉ pour debug variations');
-    window.__snipcartQtyPatch = true;
-    return;
 
     document.addEventListener('click', (event) => {
       const btn = event.target.closest('.snipcart-add-item');
@@ -968,6 +964,41 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.__ensureSnipcartQtyPatch = ensureSnipcartQtyPatch;
+
+  // Synchronisation des selects avec les attributs Snipcart
+  const syncSelectsWithSnipcart = () => {
+    // Fonction pour synchroniser un select spécifique
+    const syncSelect = (select) => {
+      const targetId = select.dataset.target;
+      const customIndex = select.dataset.customIndex;
+      const snipcartBtn = document.querySelector(`.snipcart-add-item[data-item-id="${targetId}"]`);
+      
+      if (snipcartBtn && customIndex) {
+        snipcartBtn.setAttribute(`data-item-custom${customIndex}-value`, select.value);
+        console.log(`Synced custom${customIndex} to:`, select.value, 'for product:', targetId);
+      }
+    };
+
+    // Synchroniser au changement
+    document.querySelectorAll('select[data-target][data-custom-index]').forEach(select => {
+      select.addEventListener('change', () => syncSelect(select));
+      // Synchroniser aussi immédiatement pour la valeur par défaut
+      syncSelect(select);
+    });
+
+    // Synchroniser avant chaque ajout au panier
+    document.querySelectorAll('.snipcart-add-item').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const targetId = btn.dataset.itemId || btn.getAttribute('data-item-id');
+        const selects = document.querySelectorAll(`select[data-target="${targetId}"]`);
+        selects.forEach(select => syncSelect(select));
+        console.log('Pre-sync before add to cart for:', targetId);
+      });
+    });
+  };
+
+  // Initialiser la synchronisation au chargement
+  document.addEventListener('DOMContentLoaded', syncSelectsWithSnipcart);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', ensureSnipcartQtyPatch, { once: true });
