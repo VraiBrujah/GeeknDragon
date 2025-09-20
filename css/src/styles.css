@@ -22,10 +22,18 @@ body {
 }
 
 body {
-  background: url('/images/bg_texture.jpg') center/cover;
-  background-attachment: scroll;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #1e293b 75%, #0f172a 100%);
+  background-attachment: fixed;
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
   color: #e5e7eb;
   line-height: 1.6;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Titres + éléments “hero” en Cinzel (pour le côté médiéval) */
