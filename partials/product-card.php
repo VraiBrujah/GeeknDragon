@@ -97,10 +97,10 @@ $multipliers = $product['multipliers'] ?? [];
     </h4>
   </a>
 
-  <div class="text-center mb-4 text-gray-300 flex-grow overflow-hidden text-sm leading-tight h-20"
-       data-summary-fr="<?= htmlspecialchars($summaryFr) ?>"
-       data-summary-en="<?= htmlspecialchars($summaryEn) ?>">
-    <?= htmlspecialchars($summary) ?>
+  <div class="text-center mb-4 text-gray-300 flex-grow text-sm leading-relaxed"
+       data-description-fr="<?= htmlspecialchars($descriptionFr) ?>"
+       data-description-en="<?= htmlspecialchars($descriptionEn) ?>">
+    <?= $descriptionHtml ?>
   </div>
 
 
