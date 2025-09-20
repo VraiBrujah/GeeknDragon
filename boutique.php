@@ -73,6 +73,7 @@ foreach ($data as $id => $p) {
         'summary' => $summaryFr,
         'summary_en' => $summaryEn,
         'multipliers' => $p['multipliers'] ?? [],
+        'languages' => $p['languages'] ?? [],
     ];
     
     // Catégorisation des produits
