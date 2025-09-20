@@ -89,19 +89,9 @@
     const mkBtn = (txt, aria) => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = '__qty-btn';
+      b.className = '__qty-btn gd-qty-button';
       b.setAttribute('aria-label', aria);
       b.textContent = txt;
-      // Styles sombres cohérents avec ton thème
-      b.style.background = '#333333';
-      b.style.color = '#ffffff';
-      b.style.border = '1px solid #444';
-      b.style.borderRadius = '6px';
-      b.style.width = '32px';
-      b.style.height = '32px';
-      b.style.lineHeight = '30px';
-      b.style.fontSize = '18px';
-      b.style.cursor = 'pointer';
       return b;
     };
 

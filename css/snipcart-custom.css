@@ -179,52 +179,140 @@
 .snipcart .snipcart-button-secondary:hover{ filter:brightness(1.05); }
 
 /* =================================================================== */
-/* LIGNES PRODUIT (corbeille à gauche + quantité lisible)               */
+/* LIGNES PRODUIT (layout simplifié et lisible)                        */
 /* =================================================================== */
-.snipcart .snipcart-item-line{ display:flex; align-items:center; gap:.5rem; padding:.5rem 0; }
-.snipcart .snipcart-item-line + .snipcart-item-line{ margin-top:.5rem; }
+.snipcart .snipcart-item-line{ 
+  display: flex; 
+  align-items: center; 
+  gap: 1rem; 
+  padding: 1rem 0; 
+  border-bottom: 1px solid var(--gd-border);
+}
+.snipcart .snipcart-item-line:last-child{ 
+  border-bottom: none; 
+}
 
-.snipcart .snipcart-item-line__header{ display:flex; align-items:center; }
-.snipcart .snipcart-item-line__media--small{ order:1; }
-.snipcart .snipcart-item-line__actions{ order:2; margin:0 .75rem 0 .25rem !important; opacity:1 !important; }
-.snipcart .snipcart-item-line__title{ order:3; }
+/* Header avec image et titre plus lisible */
+.snipcart .snipcart-item-line__header{ 
+  display: flex; 
+  align-items: center; 
+  flex: 1;
+  gap: 1rem;
+}
 
-/* Bouton corbeille visible */
+/* Image produit */
+.snipcart .snipcart-item-line__media--small{ 
+  order: 1; 
+  flex-shrink: 0;
+}
+
+/* Actions (corbeille) en premier */
+.snipcart .snipcart-item-line__actions{ 
+  order: 0; 
+  margin: 0 !important; 
+  opacity: 1 !important;
+  flex-shrink: 0;
+}
+
+/* Titre du produit */
+.snipcart .snipcart-item-line__title{ 
+  order: 2; 
+  flex: 1;
+  color: var(--gd-heading) !important;
+  font-weight: 500;
+}
+
+/* Bouton corbeille amélioré */
 .snipcart .snipcart-item-line__actions .snipcart__button--icon{
-  width:36px; height:36px; border:0; background:transparent;
-  display:inline-flex; align-items:center; justify-content:center; cursor:pointer;
+  width: 2.25rem; 
+  height: 2.25rem; 
+  border: 1px solid var(--gd-border); 
+  background: var(--gd-card);
+  border-radius: 6px;
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.snipcart .snipcart-item-line__actions .snipcart__button--icon:hover{
+  background: var(--gd-error);
+  border-color: var(--gd-error);
 }
 .snipcart .snipcart-item-line__actions .snipcart__icon,
 .snipcart .snipcart-item-line__actions svg{
-  width:18px; height:18px; color:#ff4d4f !important; fill:currentColor !important; opacity:1 !important;
+  width: 1rem; 
+  height: 1rem; 
+  color: var(--gd-error) !important; 
+  fill: currentColor !important; 
+  opacity: 1 !important;
+}
+.snipcart .snipcart-item-line__actions .snipcart__button--icon:hover .snipcart__icon,
+.snipcart .snipcart-item-line__actions .snipcart__button--icon:hover svg{
+  color: white !important;
 }
 
-/* Quantité : champ + boutons plus grands */
+/* Quantité : layout amélioré */
 .snipcart .snipcart-item-line__quantity,
-.snipcart .snipcart-item-quantity{ display:flex; align-items:center; gap:.5rem; }
+.snipcart .snipcart-item-quantity{ 
+  display: flex; 
+  align-items: center; 
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
 
-.snipcart .gd-qty-input {
-  background: var(--gd-card);
-  color: var(--gd-text);
-  border: 1px solid var(--gd-border);
+/* Input quantité amélioré */
+.snipcart .gd-qty-input,
+.snipcart .snipcart-item-line__quantity input[type="number"],
+.snipcart .snipcart-item-quantity input[type="number"] {
+  background: var(--gd-card) !important;
+  color: var(--gd-text) !important;
+  border: 1px solid var(--gd-border) !important;
   border-radius: 6px;
   height: 2rem;
   padding: 0 0.5rem;
-  font-size: 18px;
+  font-size: 1rem;
+  font-weight: 600;
   text-align: center;
   min-width: 3rem;
-  max-width: 5rem;
+  max-width: 4rem;
+  transition: all 0.2s ease;
+}
+.snipcart .gd-qty-input:focus,
+.snipcart .snipcart-item-line__quantity input[type="number"]:focus,
+.snipcart .snipcart-item-quantity input[type="number"]:focus {
+  border-color: var(--gd-focus) !important;
+  outline: 2px solid var(--gd-focus) !important;
 }
 
-/* Cercles +/- (quel que soit le markup v3) */
+/* Boutons quantité +/- améliorés */
+.snipcart .gd-qty-button,
 .snipcart .snipcart-item-line__quantity button,
 .snipcart .snipcart-item-quantity button{
-  background:var(--gd-card); color:var(--gd-text);
-  border:1px solid var(--gd-border);
-  width:2rem; height:2rem; border-radius:999px;
+  background: var(--gd-card);
+  color: var(--gd-text);
+  border: 1px solid var(--gd-border);
+  width: 2rem; 
+  height: 2rem; 
+  border-radius: 6px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.snipcart .gd-qty-button:hover,
+.snipcart .snipcart-item-line__quantity button:hover,
+.snipcart .snipcart-item-quantity button:hover{
+  background: var(--gd-card-2);
+  border-color: var(--gd-accent);
 }
 .snipcart .snipcart-item-line__quantity button .snipcart__icon,
-.snipcart .snipcart-item-quantity button .snipcart__icon{ color:var(--gd-text); }
+.snipcart .snipcart-item-quantity button .snipcart__icon{ 
+  color: var(--gd-text); 
+}
 
 /* =================================================================== */
 /* PAIEMENT — champs + erreurs lisibles                                 */
@@ -298,7 +386,7 @@
 }
 
 /* =================================================================== */
-/* DIVERS                                                               */
+/* DIVERS ET AMÉLIORATIONS LAYOUT                                      */
 /* =================================================================== */
 
 /* Dropdown options (fond sombre) */
@@ -306,9 +394,51 @@
   background:var(--gd-card); color:var(--gd-text);
 }
 
-/* Résumé sticky sous le header si la colonne est sticky */
+/* Espacement global du panier */
+.snipcart .snipcart-cart{
+  padding: 1rem;
+}
+
+/* Header du panier plus clair */
+.snipcart .snipcart__box--header{
+  padding: 1rem !important;
+  border-bottom: 1px solid var(--gd-border) !important;
+}
+
+/* Titres du panier plus lisibles */
+.snipcart .snipcart__font--title{
+  color: var(--gd-heading) !important;
+  font-size: 1.5rem !important;
+}
+
+/* Réduction de l'espacement vertical excessif */
+.snipcart .snipcart-item-line__content{
+  padding: 0.5rem 0 !important;
+}
+
+/* Résumé et layout du panier améliorés */
 .snipcart .snipcart-cart-summary{
-  position:sticky; top: calc(var(--gd-header-h) + 12px);
+  position: sticky; 
+  top: calc(var(--gd-header-h) + 12px);
+  background: var(--gd-bg);
+  border: 1px solid var(--gd-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+/* Amélioration du contraste des prix et totaux */
+.snipcart .snipcart-summary-fees__amount,
+.snipcart .snipcart-cart-summary__amount,
+.snipcart .snipcart__font--large{
+  color: var(--gd-heading) !important;
+  font-weight: 600;
+}
+
+/* Titre multiplicateur plus lisible */
+.snipcart .snipcart-item-line__title + div,
+.snipcart .snipcart-item-line .snipcart__font--small{
+  color: var(--gd-muted) !important;
+  font-size: 0.875rem;
 }
 
 /* Modal Snipcart (version overlay) sous header fixe */
