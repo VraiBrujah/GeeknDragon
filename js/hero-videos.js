@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Force continuous playback - ignore motion/touch preferences for hero videos
     const freezeCarousel = false;
     const autoPlayAllowed = true;
+    
+    // Force global loop - vérification plus agressive
+    let globalLoopInterval = null;
 
     // 1) Lire et valider la liste aléatoire + éventuelle vidéo principale
     let list = [];
@@ -511,13 +514,39 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Protection supplémentaire : vérification périodique que les vidéos tournent
-    setInterval(() => {
-      if (document.visibilityState === 'visible' && autoPlayAllowed) {
-        if (current && current.paused && !current.ended) {
-          current.play().catch(() => {});
+    // FORCE ABSOLUE - garantit la lecture perpétuelle
+    const forceGlobalLoop = () => {
+      if (document.visibilityState !== 'visible') return;
+      
+      const allVideos = container.querySelectorAll('video');
+      let hasActiveVideo = false;
+      
+      allVideos.forEach(video => {
+        if (video.style.opacity === '1' || (!hasActiveVideo && video.parentNode)) {
+          if (video.paused || video.ended) {
+            video.currentTime = 0;
+            video.play().catch(() => {});
+          }
+          hasActiveVideo = true;
         }
+      });
+      
+      // Si aucune vidéo active, redémarre la première
+      if (!hasActiveVideo && allVideos.length > 0) {
+        const firstVideo = allVideos[0];
+        firstVideo.style.opacity = '1';
+        firstVideo.style.filter = 'blur(0)';
+        firstVideo.currentTime = 0;
+        firstVideo.play().catch(() => {});
       }
-    }, 5000); // Check toutes les 5 secondes
+    };
+
+    // Vérification ultra-aggressive toutes les 2 secondes
+    globalLoopInterval = setInterval(forceGlobalLoop, 2000);
+    
+    // Nettoyage à la fermeture de page
+    window.addEventListener('beforeunload', () => {
+      if (globalLoopInterval) clearInterval(globalLoopInterval);
+    });
   });
 });
