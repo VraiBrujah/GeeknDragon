@@ -28,7 +28,8 @@
       "Read(\\/**)",
       "Bash(magick:*)",
       "Bash(powershell:*)",
-      "Bash(dir videos)"
+      "Bash(dir videos)",
+      "Bash(npx tailwindcss:*)"
     ],
     "deny": [],
     "ask": []

@@ -1012,20 +1012,7 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   }
 }
 
-/* Effet de brillance subtile au survol */
-.card::before, .card-product::before{
-  content:'';
-  position:absolute;
-  top:-50%;left:-50%;width:200%;height:200%;
-  background:linear-gradient(45deg,transparent,rgba(129,140,248,.08),transparent);
-  transform:translateX(-100%) translateY(-100%) rotate(45deg);
-  transition:transform .6s ease-out;
-  pointer-events:none;
-}
-
-.card:hover::before, .card-product:hover::before{
-  transform:translateX(0) translateY(0) rotate(45deg);
-}
+/* Effet de brillance supprimé - losange blanc semi-transparent retiré */
 
 .card:hover, .card-product:hover{
   transform:translateY(-8px) scale(1.02) !important;

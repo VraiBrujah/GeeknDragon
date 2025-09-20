@@ -357,8 +357,9 @@ echo $snipcartInit;
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
 </script>
   <script>window.stock = <?= json_encode($stock) ?>;</script>
-  <script src="js/app.js"></script>
+  <!-- Priorité absolue aux vidéos hero -->
   <script src="/js/hero-videos.js"></script>
+  <script src="js/app.js"></script>
   <script src="js/boutique-premium.js"></script>
   
   <script>
@@ -400,25 +401,38 @@ echo $snipcartInit;
       }
       
       setupEventListeners() {
-        // Événements pour les inputs sources
-        this.sourceInputs.forEach(input => {
-          input.addEventListener('focus', () => {
-            if (input.value === '0') input.value = '';
-          });
-          
-          input.addEventListener('input', () => {
-            input.value = input.value.replace(/[^0-9]/g, '');
-            this.updateFromSources();
-          });
-        });
+        // Utilisation de la délégation d'événements pour réduire le nombre de listeners
+        const converterContainer = document.getElementById('currency-converter-premium');
+        if (!converterContainer) return;
         
-        // Événements pour les inputs multiplicateur (édition activée par défaut)
-        this.multiplierInputs.forEach(input => {
-          input.addEventListener('input', () => {
-            input.value = input.value.replace(/[^0-9]/g, '');
-            this.updateFromMultipliers();
-          });
-        });
+        // Débounce pour éviter les calculs trop fréquents
+        const debounce = (func, delay) => {
+          let timeoutId;
+          return (...args) => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func.apply(this, args), delay);
+          };
+        };
+        
+        const debouncedUpdateSources = debounce(() => this.updateFromSources(), 150);
+        const debouncedUpdateMultipliers = debounce(() => this.updateFromMultipliers(), 150);
+        
+        // Délégation d'événements sur le container principal
+        converterContainer.addEventListener('input', (e) => {
+          if (e.target.matches('input[data-currency]')) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            debouncedUpdateSources();
+          } else if (e.target.matches('.multiplier-input')) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            debouncedUpdateMultipliers();
+          }
+        }, { passive: true });
+        
+        converterContainer.addEventListener('focus', (e) => {
+          if (e.target.matches('input[data-currency]') && e.target.value === '0') {
+            e.target.value = '';
+          }
+        }, { passive: true });
       }
       
       getTotalBaseValue() {
@@ -646,13 +660,64 @@ echo $snipcartInit;
       updateDisplay() {
         this.updateFromSources();
       }
+      
+      // Méthode de nettoyage pour éviter les fuites mémoire
+      destroy() {
+        const converterContainer = document.getElementById('currency-converter-premium');
+        if (converterContainer) {
+          // Clone et replace pour supprimer tous les event listeners
+          const newContainer = converterContainer.cloneNode(true);
+          converterContainer.parentNode.replaceChild(newContainer, converterContainer);
+        }
+      }
     }
     
-    // Initialiser le convertisseur quand le DOM est prêt
-    document.addEventListener('DOMContentLoaded', () => {
-      if (document.getElementById('currency-converter-premium')) {
-        new CurrencyConverterPremium();
+    // Nettoyage automatique à la fermeture de page
+    window.addEventListener('beforeunload', () => {
+      if (converterInstance && typeof converterInstance.destroy === 'function') {
+        converterInstance.destroy();
       }
+    });
+    
+    // Initialisation paresseuse du convertisseur - ne charge que si l'utilisateur interagit
+    let converterInitialized = false;
+    let converterInstance = null;
+    
+    const initConverter = () => {
+      if (converterInitialized) return;
+      converterInitialized = true;
+      
+      // Petite priorité au héro - délai de 100ms
+      setTimeout(() => {
+        if (document.getElementById('currency-converter-premium')) {
+          converterInstance = new CurrencyConverterPremium();
+        }
+      }, 100);
+    };
+    
+    // Observateur d'intersection pour charger le convertisseur quand il devient visible
+    document.addEventListener('DOMContentLoaded', () => {
+      const converterElement = document.getElementById('currency-converter-premium');
+      if (!converterElement) return;
+      
+      // Chargement paresseux quand la section devient visible
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            initConverter();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(converterElement);
+      
+      // Fallback : chargement après interaction utilisateur
+      ['click', 'scroll', 'touchstart'].forEach(event => {
+        document.addEventListener(event, () => {
+          setTimeout(initConverter, 500);
+        }, { once: true, passive: true });
+      });
     });
   </script>
 </body>

@@ -481,14 +481,25 @@ function fullyVisible(el) {
          && r.right <= (window.innerWidth || document.documentElement.clientWidth);
 }
 document.addEventListener('DOMContentLoaded', () => {
+  // EXCLUSION EXPLICITE : Ignorer les vidéos hero gérées par hero-videos.js
   const videos = ['video1', 'video2', 'video3']
     .map((id) => document.getElementById(id))
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter(video => {
+      // Exclure les vidéos qui sont dans un container .hero-videos
+      return !video.closest('.hero-videos');
+    });
   let current = 0;
   let audioOK = false;
   let playSeq;
 
   videos.forEach((vid) => {
+    // DOUBLE PROTECTION : Vérifier que ce n'est pas une vidéo hero
+    if (vid.closest('.hero-videos')) {
+      console.log('[GD] Skipping hero video from app.js management:', vid);
+      return;
+    }
+    
     vid.dataset.userPaused = 'false';
     vid.dataset.autoPaused = 'false';
     const addClass = () => vid.classList.add('scale-105', 'z-10');
@@ -502,6 +513,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const visibilityObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       const vid = entry.target;
+      
+      // PROTECTION : Ignorer les vidéos gérées par hero-videos.js
+      if (vid.closest('[data-managed-by="hero-videos"]')) {
+        return;
+      }
+      
       if (!entry.isIntersecting) {
         if (!vid.paused) {
           vid.dataset.autopausing = 'true';
@@ -515,7 +532,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.2 });
-  videos.forEach((vid) => visibilityObserver.observe(vid));
+  // Observer seulement les vidéos non-hero (protection supplémentaire)
+  videos.forEach((vid) => {
+    if (!vid.closest('[data-managed-by="hero-videos"]') && !vid.closest('.hero-videos')) {
+      visibilityObserver.observe(vid);
+    }
+  });
 
   function updateBtn(vid) {
     const b = document.querySelector(`.mute-btn[data-video="${vid.id}"]`);

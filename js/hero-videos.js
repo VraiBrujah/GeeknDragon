@@ -115,14 +115,17 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   document.querySelectorAll('.hero-videos').forEach((container) => {
+    // PROTECTION : Marquer le container comme géré par hero-videos.js
+    container.setAttribute('data-managed-by', 'hero-videos');
+    container.style.setProperty('--hero-managed', 'true');
     const prefersReducedMotion = readMediaQuery(reduceMotionQuery);
     const isCoarsePointer = readMediaQuery(coarsePointerQuery);
     // Force continuous playback - ignore motion/touch preferences for hero videos
     const freezeCarousel = false;
     const autoPlayAllowed = true;
     
-    // Force global loop - vérification plus agressive
-    let globalLoopInterval = null;
+    // Force global loop - vérification plus agressive (variable locale par container)
+    let containerLoopInterval = null;
 
     // 1) Lire et valider la liste aléatoire + éventuelle vidéo principale
     let list = [];
@@ -514,39 +517,63 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // FORCE ABSOLUE - garantit la lecture perpétuelle
+    // FORCE ABSOLUE - garantit la lecture perpétuelle (logique corrigée)
     const forceGlobalLoop = () => {
       if (document.visibilityState !== 'visible') return;
       
       const allVideos = container.querySelectorAll('video');
-      let hasActiveVideo = false;
+      if (allVideos.length === 0) return;
       
-      allVideos.forEach(video => {
-        if (video.style.opacity === '1' || (!hasActiveVideo && video.parentNode)) {
-          if (video.paused || video.ended) {
-            video.currentTime = 0;
-            video.play().catch(() => {});
-          }
-          hasActiveVideo = true;
+      // Trouver la vidéo actuellement visible (opacity proche de 1)
+      let activeVideo = null;
+      for (const video of allVideos) {
+        const opacity = parseFloat(video.style.opacity || '0');
+        if (opacity > 0.5) { // Plus robuste que === '1'
+          activeVideo = video;
+          break; // IMPORTANT: sortir de la boucle dès qu'on trouve LA vidéo active
         }
-      });
+      }
       
-      // Si aucune vidéo active, redémarre la première
-      if (!hasActiveVideo && allVideos.length > 0) {
+      // Si on a une vidéo active, s'assurer qu'elle joue
+      if (activeVideo) {
+        if (activeVideo.paused || activeVideo.ended) {
+          activeVideo.currentTime = 0;
+          activeVideo.play().catch(() => {});
+        }
+      } else {
+        // Aucune vidéo visible : activer la première
         const firstVideo = allVideos[0];
-        firstVideo.style.opacity = '1';
-        firstVideo.style.filter = 'blur(0)';
-        firstVideo.currentTime = 0;
-        firstVideo.play().catch(() => {});
+        if (firstVideo) {
+          // Masquer toutes les autres d'abord
+          allVideos.forEach(v => {
+            if (v !== firstVideo) {
+              v.style.opacity = '0';
+              v.style.filter = 'blur(8px)';
+              v.pause();
+            }
+          });
+          
+          // Activer la première
+          firstVideo.style.opacity = '1';
+          firstVideo.style.filter = 'blur(0)';
+          firstVideo.currentTime = 0;
+          firstVideo.play().catch(() => {});
+        }
       }
     };
 
-    // Vérification ultra-aggressive toutes les 2 secondes
-    globalLoopInterval = setInterval(forceGlobalLoop, 2000);
+    // Vérification ultra-aggressive toutes les 3 secondes (réduit la charge CPU)
+    containerLoopInterval = setInterval(forceGlobalLoop, 3000);
     
-    // Nettoyage à la fermeture de page
-    window.addEventListener('beforeunload', () => {
-      if (globalLoopInterval) clearInterval(globalLoopInterval);
-    });
+    // Nettoyage propre à la fermeture de page
+    const cleanup = () => {
+      if (containerLoopInterval) {
+        clearInterval(containerLoopInterval);
+        containerLoopInterval = null;
+      }
+    };
+    
+    window.addEventListener('beforeunload', cleanup);
+    window.addEventListener('pagehide', cleanup); // Pour mobile/Safari
   });
 });
