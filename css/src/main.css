@@ -1,0 +1,16 @@
+/* ========================================================================
+   Geek & Dragon — Main Stylesheet
+   Fichier principal qui importe tous les composants
+   ===================================================================== */
+
+/* Styles de base et variables */
+@import './base.css';
+
+/* Composants principaux */
+@import './components.css';
+
+/* Boutique et e-commerce */
+@import './boutique.css';
+
+/* Utilitaires et helpers */
+@import './utilities.css';

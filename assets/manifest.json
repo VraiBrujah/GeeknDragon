@@ -1,0 +1,9 @@
+{
+    "css": {
+        "main": "\/assets\/css\/styles.css?v=1758338841"
+    },
+    "js": {
+        "app": "\/assets\/js\/app.min.js?v=1758338841",
+        "hero-videos": "\/js\/hero-videos.js?v=1758318208"
+    }
+}

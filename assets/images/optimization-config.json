@@ -1,0 +1,14 @@
+{
+    "images_found": 169,
+    "total_size_mb": 261.72,
+    "extensions_supported": {
+        "gd": false,
+        "imagick": false,
+        "webp": false
+    },
+    "optimization_ready": false,
+    "recommended_actions": [
+        "Installer l'extension GD ou ImageMagick pour PHP",
+        "Activer le support WebP dans PHP"
+    ]
+}
