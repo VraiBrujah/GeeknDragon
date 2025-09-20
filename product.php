@@ -203,9 +203,11 @@ echo $snipcartInit;
               data-item-url="<?= htmlspecialchars($metaUrl) ?>"
               data-item-quantity="1"
               data-item-custom1-name="<?= !empty($languages) ? htmlspecialchars($translations['product']['language'] ?? 'Langue', ENT_QUOTES, 'UTF-8') : 'N/A' ?>"
+              data-item-custom1-type="<?= !empty($languages) ? 'dropdown' : 'hidden' ?>"
               data-item-custom1-options="<?= !empty($languages) ? htmlspecialchars(implode('|', $languages), ENT_QUOTES, 'UTF-8') : 'N/A' ?>"
               data-item-custom1-value="<?= !empty($languages) ? htmlspecialchars($defaultLanguage, ENT_QUOTES, 'UTF-8') : 'N/A' ?>"
               data-item-custom2-name="<?= !empty($multipliers) ? htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur', ENT_QUOTES, 'UTF-8') : 'N/A' ?>"
+              data-item-custom2-type="<?= !empty($multipliers) ? 'dropdown' : 'hidden' ?>"
               data-item-custom2-options="<?= !empty($multipliers) ? htmlspecialchars(implode('|', $multiplierOptions), ENT_QUOTES, 'UTF-8') : 'N/A' ?>"
               data-item-custom2-value="<?= !empty($multipliers) ? htmlspecialchars($multiplierOptions[0] ?? '', ENT_QUOTES, 'UTF-8') : 'N/A' ?>"
             >
