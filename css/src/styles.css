@@ -59,11 +59,6 @@ h6 {
   text-align: left;
   font-size: 0.85rem !important;
   line-height: 1.4 !important;
-  overflow: hidden !important;
-  display: -webkit-box !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: 4 !important;
-  max-height: 4.2rem !important;
 }
 
 .product-description h1,
