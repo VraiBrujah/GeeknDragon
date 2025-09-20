@@ -394,6 +394,60 @@
   background:var(--gd-card); color:var(--gd-text);
 }
 
+/* Custom fields dropdowns (variations produits) */
+.snipcart .snipcart-product-option,
+.snipcart .snipcart-product-option__select,
+.snipcart .snipcart-item-line__custom-fields select,
+.snipcart .snipcart-cart-item__custom-fields select,
+.snipcart select[name*="custom"]{
+  background: var(--gd-card) !important;
+  color: var(--gd-text) !important;
+  border: 1px solid var(--gd-border) !important;
+  border-radius: 6px;
+  padding: 0.5rem;
+  min-width: 120px;
+}
+
+.snipcart .snipcart-product-option__select option,
+.snipcart .snipcart-item-line__custom-fields select option,
+.snipcart .snipcart-cart-item__custom-fields select option,
+.snipcart select[name*="custom"] option{
+  background: var(--gd-card) !important;
+  color: var(--gd-text) !important;
+  padding: 0.5rem;
+}
+
+/* Labels des custom fields */
+.snipcart .snipcart-product-option__label,
+.snipcart .snipcart-item-line__custom-fields label,
+.snipcart .snipcart-cart-item__custom-fields label{
+  color: var(--gd-text) !important;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* FIX FORÇÉ pour TOUS les selects et options dans Snipcart */
+.snipcart select,
+.snipcart select *,
+.snipcart option {
+  background: var(--gd-card) !important;
+  color: var(--gd-text) !important;
+  border: 1px solid var(--gd-border) !important;
+  padding: 0.5rem !important;
+  min-height: 2rem !important;
+  min-width: 80px !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+/* Force l'affichage du texte dans les options */
+.snipcart select option {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 /* Espacement global du panier */
 .snipcart .snipcart-cart{
   padding: 1rem;
