@@ -128,85 +128,125 @@ echo $snipcartInit;
           <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank" class="underline text-indigo-400 hover:text-indigo-300" data-i18n="shop.pieces.video">Voir la démonstration en vidéo&nbsp;></a>
         </p>
 
-        <!-- Convertisseur de monnaie -->
-        <div class="mt-12 text-center" id="currency-converter">
-          <h4 class="text-gray-200 mb-4" data-i18n="shop.converter.title">Convertisseur de monnaie</h4>
-          <div class="mx-auto">
-            <p class="text-gray-200 mb-2" data-i18n="shop.converter.sourcesLabel">Monnaies sources</p>
-            <table id="currency-sources" class="w-full text-gray-200">
-              <thead>
-                <tr>
-                  <th data-i18n="shop.converter.copper">pièce de cuivre</th>
-                  <th data-i18n="shop.converter.silver">pièce d'argent</th>
-                  <th data-i18n="shop.converter.electrum">pièce d'électrum</th>
-                  <th data-i18n="shop.converter.gold">pièce d'or</th>
-                  <th data-i18n="shop.converter.platinum">pièce de platine</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="copper" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="silver" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="electrum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="gold" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                  <td>
-                    <input type="number" min="0" step="1" inputmode="numeric" pattern="[0-9]*" value="0" data-currency="platinum" class="w-full bg-gray-800 text-gray-200 border border-gray-700 rounded p-2" />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- Convertisseur de monnaie Premium -->
+        <div class="mt-12" id="currency-converter-premium">
+          <h4 class="text-2xl font-bold text-center text-gray-200 mb-8" data-i18n="shop.converter.title">Convertisseur de monnaie</h4>
+          
+          <!-- Section 1: Monnaies sources avec design premium -->
+          <div class="mb-8">
+            <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel">💰 Monnaies sources</h5>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
+              <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-4 rounded-xl border border-amber-700/30">
+                <label class="block text-amber-300 font-medium mb-2">🪙 Cuivre</label>
+                <input type="number" min="0" step="1" value="0" data-currency="copper" 
+                       class="w-full bg-gray-800/80 text-amber-300 border border-amber-700/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" />
+              </div>
+              <div class="currency-input-card bg-gradient-to-br from-gray-600/20 to-gray-500/20 p-4 rounded-xl border border-gray-500/30">
+                <label class="block text-gray-300 font-medium mb-2">🥈 Argent</label>
+                <input type="number" min="0" step="1" value="0" data-currency="silver" 
+                       class="w-full bg-gray-800/80 text-gray-300 border border-gray-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all" />
+              </div>
+              <div class="currency-input-card bg-gradient-to-br from-yellow-600/20 to-green-600/20 p-4 rounded-xl border border-yellow-500/30">
+                <label class="block text-yellow-300 font-medium mb-2">⚡ Électrum</label>
+                <input type="number" min="0" step="1" value="0" data-currency="electrum" 
+                       class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
+              </div>
+              <div class="currency-input-card bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 p-4 rounded-xl border border-yellow-400/30">
+                <label class="block text-yellow-300 font-medium mb-2">🥇 Or</label>
+                <input type="number" min="0" step="1" value="0" data-currency="gold" 
+                       class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
+              </div>
+              <div class="currency-input-card bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-4 rounded-xl border border-cyan-400/30">
+                <label class="block text-cyan-300 font-medium mb-2">💎 Platine</label>
+                <input type="number" min="0" step="1" value="0" data-currency="platinum" 
+                       class="w-full bg-gray-800/80 text-cyan-300 border border-cyan-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" />
+              </div>
+            </div>
           </div>
-          <div class="mt-4 bg-gray-800 rounded-lg p-4 overflow-x-auto">
-            <table id="currency-results" class="w-full text-gray-200" aria-live="polite">
-              <thead>
-                <tr>
-                  <th class="text-left" data-i18n="shop.converter.multiplier">Multiplicateur</th>
-                  <th>×1</th>
-                  <th>×10</th>
-                  <th>×100</th>
-                  <th>×1000</th>
-                  <th>×10000</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr data-currency="copper">
-                  <th class="text-left" data-i18n="shop.converter.copper">pièce de cuivre</th>
-                  <td></td><td></td><td></td><td></td><td></td>
-                </tr>
-                <tr data-currency="silver">
-                  <th class="text-left" data-i18n="shop.converter.silver">pièce d'argent</th>
-                  <td></td><td></td><td></td><td></td><td></td>
-                </tr>
-                <tr data-currency="electrum">
-                  <th class="text-left" data-i18n="shop.converter.electrum">pièce d'électrum</th>
-                  <td></td><td></td><td></td><td></td><td></td>
-                </tr>
-                <tr data-currency="gold">
-                  <th class="text-left" data-i18n="shop.converter.gold">pièce d'or</th>
-                  <td></td><td></td><td></td><td></td><td></td>
-                </tr>
-                <tr data-currency="platinum">
-                  <th class="text-left" data-i18n="shop.converter.platinum">pièce de platine</th>
-                  <td></td><td></td><td></td><td></td><td></td>
-                </tr>
-              </tbody>
-            </table>
+
+          <!-- Section 2: Tableau multiplicateur interactif toujours visible -->
+          <div class="mb-8">
+            <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.multiplierLabel">⚖️ Tableau multiplicateur (éditable)</h5>
+            <div class="bg-gray-800/50 rounded-xl p-6 max-w-6xl mx-auto border border-gray-700/30">
+              <div class="overflow-x-auto">
+                <table class="w-full text-gray-200" id="multiplier-table">
+                  <thead>
+                    <tr class="border-b border-gray-600/50">
+                      <th class="text-left p-3 text-gray-300">Monnaie</th>
+                      <th class="text-center p-3 text-gray-300">×1</th>
+                      <th class="text-center p-3 text-gray-300">×10</th>
+                      <th class="text-center p-3 text-gray-300">×100</th>
+                      <th class="text-center p-3 text-gray-300">×1000</th>
+                      <th class="text-center p-3 text-gray-300">×10000</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-b border-gray-700/30" data-currency="platinum">
+                      <td class="p-3 text-cyan-300 font-medium">💎 Platine</td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30" data-currency="gold">
+                      <td class="p-3 text-yellow-300 font-medium">🥇 Or</td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30" data-currency="electrum">
+                      <td class="p-3 text-yellow-300 font-medium">⚡ Électrum</td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                    </tr>
+                    <tr class="border-b border-gray-700/30" data-currency="silver">
+                      <td class="p-3 text-gray-300 font-medium">🥈 Argent</td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                    </tr>
+                    <tr data-currency="copper">
+                      <td class="p-3 text-amber-300 font-medium">🪙 Cuivre</td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="1" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="10" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="100" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="1000" readonly></td>
+                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center" data-multiplier="10000" readonly></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="mt-4 text-center">
+                <button id="toggle-edit-mode" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                  🔓 Activer édition
+                </button>
+              </div>
+            </div>
           </div>
-          <div id="currency-equivalences" class="mt-4 bg-gray-800 rounded-lg p-4 text-gray-200 hidden">
-            <h5 class="mb-2" data-i18n="shop.converter.equivTitle">Équivalences totales par métal</h5>
-            <table class="w-full text-left text-sm">
-              <tbody id="currency-equivalences-list"></tbody>
-            </table>
+
+          <!-- Section 3: Équivalences totales par métal avec cards claires -->
+          <div class="mb-8" id="metal-totals-section">
+            <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.equivalences">💼 Équivalences totales par métal</h5>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto" id="metal-cards-container">
+              <!-- Les cartes seront générées dynamiquement -->
+            </div>
           </div>
-          <p id="currency-best" class="mt-4"></p>
+
+          <!-- Section 4: Recommandations optimales -->
+          <div class="text-center">
+            <div id="optimal-recommendations" class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-6 max-w-4xl mx-auto border border-indigo-500/30">
+              <h5 class="text-lg font-semibold text-indigo-300 mb-3">✨ Recommandations optimales</h5>
+              <div id="currency-best" class="text-gray-200"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -312,134 +352,269 @@ echo $snipcartInit;
   <script src="js/boutique-premium.js"></script>
   
   <script>
-    // Convertisseur de monnaie complet (réutilisation code existant)
-    (() => {
-      const rates = {copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000};
-      const sources = document.querySelectorAll('#currency-sources input');
-      const results = document.getElementById('currency-results');
-      const best = document.getElementById('currency-best');
-      const equivContainer = document.getElementById('currency-equivalences');
-      const equivList = document.getElementById('currency-equivalences-list');
-
-      if (!sources.length || !results || !best || !equivContainer || !equivList) return;
-
-      const multipliers = [1, 10, 100, 1000, 10000];
-      const coins = Object.keys(rates).sort((a, b) => rates[b] - rates[a]);
-      const nf = new Intl.NumberFormat('fr-FR');
-
-      const getCurrencyNames = () => Array.from(results.querySelectorAll('tbody tr')).reduce(
-        (acc, row) => ({
-          ...acc,
-          [row.dataset.currency]: row.querySelector('th').textContent,
-        }),
-        {},
-      );
-
-      const denominations = multipliers
-        .flatMap((multiplier) => coins.map((coin) => ({
-          coin,
-          multiplier,
-          value: rates[coin] * multiplier,
-        })))
-        .sort((a, b) => b.value - a.value);
-
-      const minimalParts = (value, currencyNames, andText) => {
-        let remaining = value;
-        const items = [];
-        denominations.forEach(({ coin, multiplier, value: val }) => {
-          if (remaining <= 0) return;
-          const qty = Math.floor(remaining / val);
-          if (qty > 0) {
-            remaining -= qty * val;
-            items.push({ coin, multiplier, qty });
-          }
-        });
-        const parts = items.map(({ coin, multiplier, qty }) => {
-          const label = currencyNames[coin].replace(/^pièce/, qty > 1 ? 'pièces' : 'pièce');
-          return multiplier === 1
-            ? `${nf.format(qty)} ${label}`
-            : `${nf.format(qty)} ${label} x${nf.format(multiplier)}`;
-        });
-        const text = parts.length > 1
-          ? `${parts.slice(0, -1).join(', ')} et ${parts[parts.length - 1]}`
-          : (parts[0] || '');
-        const total = items.reduce((sum, { qty }) => sum + qty, 0);
-        return { text, remaining, items, total };
-      };
-
-      const render = () => {
-        const currencyNames = getCurrencyNames();
-        const baseValue = Array.from(sources).reduce((sum, input) => {
-          const { currency } = input.dataset;
-          const amount = Math.max(0, Math.floor(parseFloat(input.value) || 0));
-          return sum + amount * rates[currency];
-        }, 0);
+    // Convertisseur de monnaie Premium avec synchronisation temps réel
+    class CurrencyConverterPremium {
+      constructor() {
+        this.rates = {copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000};
+        this.multipliers = [1, 10, 100, 1000, 10000];
+        this.nf = new Intl.NumberFormat('fr-FR');
+        this.editMode = false;
         
-        results.querySelectorAll('tbody tr').forEach((row) => {
-          const { currency } = row.dataset;
-          const cells = row.querySelectorAll('td');
-          multipliers.forEach((multiplier, idx) => {
-            const converted = Math.floor(baseValue / (rates[currency] * multiplier));
-            cells[idx].textContent = converted ? nf.format(converted) : '';
+        this.sourceInputs = document.querySelectorAll('#currency-converter-premium input[data-currency]');
+        this.multiplierInputs = document.querySelectorAll('.multiplier-input');
+        this.toggleButton = document.getElementById('toggle-edit-mode');
+        this.bestDisplay = document.getElementById('currency-best');
+        this.metalCardsContainer = document.getElementById('metal-cards-container');
+        
+        this.currencyData = {
+          copper: { name: 'Cuivre', emoji: '🪙', color: 'amber' },
+          silver: { name: 'Argent', emoji: '🥈', color: 'gray' },
+          electrum: { name: 'Électrum', emoji: '⚡', color: 'yellow' },
+          gold: { name: 'Or', emoji: '🥇', color: 'yellow' },
+          platinum: { name: 'Platine', emoji: '💎', color: 'cyan' }
+        };
+        
+        this.init();
+      }
+      
+      init() {
+        this.setupEventListeners();
+        this.updateDisplay();
+      }
+      
+      setupEventListeners() {
+        // Événements pour les inputs sources
+        this.sourceInputs.forEach(input => {
+          input.addEventListener('focus', () => {
+            if (input.value === '0') input.value = '';
+          });
+          
+          input.addEventListener('input', () => {
+            input.value = input.value.replace(/[^0-9]/g, '');
+            this.updateFromSources();
           });
         });
-
-        const minimal = minimalParts(baseValue, currencyNames, 'et');
-        best.innerHTML = minimal.text
-          ? `<strong>Conversion optimale:</strong> ${minimal.text}<br><small>Total pièces: ${nf.format(minimal.total)}</small>`
-          : '';
-
-        equivList.innerHTML = '';
-        let hasEquiv = false;
-        coins.forEach((coin) => {
-          const base = rates[coin];
-          const units = Math.floor(baseValue / base);
-          if (!units) return;
-          let rest = units;
-          const parts = [];
-          multipliers.slice().reverse().forEach((mult) => {
-            const qty = Math.floor(rest / mult);
-            if (qty > 0) {
-              const label = currencyNames[coin].replace(/^pièce/, qty > 1 ? 'pièces' : 'pièce');
-              parts.push(mult === 1
-                ? `${nf.format(qty)} ${label}`
-                : `${nf.format(qty)} ${label} x${nf.format(mult)}`);
-              rest -= qty * mult;
+        
+        // Événements pour les inputs multiplicateur (quand édition activée)
+        this.multiplierInputs.forEach(input => {
+          input.addEventListener('input', () => {
+            if (this.editMode) {
+              input.value = input.value.replace(/[^0-9]/g, '');
+              this.updateFromMultipliers();
             }
           });
-          if (!parts.length) return;
-          const summary = parts.length > 1
-            ? `${parts.slice(0, -1).join(', ')} et ${parts[parts.length - 1]}`
-            : parts[0];
-          const remainder = baseValue % base;
-          let remainderSummary = '';
-          if (remainder > 0) {
-            const rem = minimalParts(remainder, currencyNames, 'et');
-            if (rem.text) remainderSummary = `Reste: ${rem.text}`;
+        });
+        
+        // Bouton toggle édition
+        this.toggleButton.addEventListener('click', () => {
+          this.toggleEditMode();
+        });
+      }
+      
+      toggleEditMode() {
+        this.editMode = !this.editMode;
+        
+        this.multiplierInputs.forEach(input => {
+          input.readOnly = !this.editMode;
+          input.classList.toggle('cursor-pointer', this.editMode);
+        });
+        
+        this.toggleButton.innerHTML = this.editMode 
+          ? '🔒 Désactiver édition'
+          : '🔓 Activer édition';
+          
+        this.toggleButton.classList.toggle('bg-red-600', this.editMode);
+        this.toggleButton.classList.toggle('hover:bg-red-700', this.editMode);
+        this.toggleButton.classList.toggle('bg-indigo-600', !this.editMode);
+        this.toggleButton.classList.toggle('hover:bg-indigo-700', !this.editMode);
+      }
+      
+      getTotalBaseValue() {
+        return Array.from(this.sourceInputs).reduce((sum, input) => {
+          const currency = input.dataset.currency;
+          const amount = Math.max(0, parseInt(input.value) || 0);
+          return sum + amount * this.rates[currency];
+        }, 0);
+      }
+      
+      updateFromSources() {
+        const baseValue = this.getTotalBaseValue();
+        
+        // Mettre à jour le tableau multiplicateur
+        this.multiplierInputs.forEach(input => {
+          const currency = input.closest('tr').dataset.currency;
+          const multiplier = parseInt(input.dataset.multiplier);
+          const value = Math.floor(baseValue / (this.rates[currency] * multiplier));
+          input.value = value > 0 ? this.nf.format(value) : '';
+        });
+        
+        this.updateMetalCards(baseValue);
+        this.updateOptimalRecommendations(baseValue);
+      }
+      
+      updateFromMultipliers() {
+        // Calculer la valeur totale depuis les inputs multiplicateur
+        let totalValue = 0;
+        this.multiplierInputs.forEach(input => {
+          const currency = input.closest('tr').dataset.currency;
+          const multiplier = parseInt(input.dataset.multiplier);
+          const quantity = parseInt(input.value.replace(/\s/g, '')) || 0;
+          totalValue += quantity * this.rates[currency] * multiplier;
+        });
+        
+        // Mettre à jour les sources
+        this.sourceInputs.forEach(input => {
+          input.value = '0';
+        });
+        
+        // Distribuer la valeur de manière optimale dans les sources
+        this.distributeOptimally(totalValue);
+        this.updateMetalCards(totalValue);
+        this.updateOptimalRecommendations(totalValue);
+      }
+      
+      distributeOptimally(totalValue) {
+        let remaining = totalValue;
+        const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+        
+        currencies.forEach(currency => {
+          const input = document.querySelector(`input[data-currency="${currency}"]`);
+          const rate = this.rates[currency];
+          const count = Math.floor(remaining / rate);
+          if (count > 0) {
+            input.value = count.toString();
+            remaining -= count * rate;
           }
-          const row = document.createElement('tr');
-          const coinTitle = currencyNames[coin]
-            .replace(/^pièces?\s+(?:de|d[''])\s*/i, '')
-            .replace(/^./, (ch) => ch.toUpperCase());
-          row.innerHTML = `<td><strong>${coinTitle}</strong></td><td>${summary}</td><td>${remainderSummary}</td>`;
-          equivList.appendChild(row);
-          hasEquiv = true;
         });
-        equivContainer.classList.toggle('hidden', !hasEquiv);
-      };
-
-      sources.forEach((inputEl) => {
-        inputEl.addEventListener('focus', () => {
-          if (inputEl.value === '0') inputEl.value = '';
+      }
+      
+      updateMetalCards(baseValue) {
+        if (baseValue === 0) {
+          this.metalCardsContainer.innerHTML = '<p class="text-gray-400 text-center col-span-full">Entrez des valeurs pour voir les équivalences</p>';
+          return;
+        }
+        
+        let cardsHTML = '';
+        
+        Object.keys(this.rates).forEach(currency => {
+          const data = this.currencyData[currency];
+          const rate = this.rates[currency];
+          const totalUnits = Math.floor(baseValue / rate);
+          
+          if (totalUnits === 0) return;
+          
+          let breakdown = [];
+          let remaining = totalUnits;
+          
+          // Calcul de la répartition par multiplicateur
+          this.multipliers.slice().reverse().forEach(mult => {
+            const qty = Math.floor(remaining / mult);
+            if (qty > 0) {
+              breakdown.push({
+                multiplier: mult,
+                quantity: qty,
+                total: qty * mult
+              });
+              remaining -= qty * mult;
+            }
+          });
+          
+          const remainderValue = baseValue % rate;
+          let remainderText = '';
+          if (remainderValue > 0) {
+            remainderText = this.getOptimalBreakdown(remainderValue);
+          }
+          
+          cardsHTML += `
+            <div class="currency-total-card bg-gradient-to-br from-${data.color}-900/20 to-${data.color}-800/20 rounded-xl p-6 border border-${data.color}-700/30">
+              <div class="flex items-center justify-between mb-4">
+                <h6 class="text-${data.color}-300 font-bold text-lg">${data.emoji} ${data.name}</h6>
+                <span class="text-2xl font-bold text-${data.color}-300">${this.nf.format(totalUnits)}</span>
+              </div>
+              
+              <div class="space-y-2 mb-4">
+                ${breakdown.map(item => `
+                  <div class="flex justify-between text-sm">
+                    <span class="text-gray-300">${item.multiplier === 1 ? 'Unités' : `Lots ×${this.nf.format(item.multiplier)}`}:</span>
+                    <span class="text-${data.color}-300 font-medium">${this.nf.format(item.quantity)}</span>
+                  </div>
+                `).join('')}
+              </div>
+              
+              ${remainderText ? `
+                <div class="border-t border-${data.color}-700/30 pt-3">
+                  <p class="text-xs text-gray-400">Reste: ${remainderText}</p>
+                </div>
+              ` : ''}
+            </div>
+          `;
         });
-        inputEl.addEventListener('input', () => {
-          inputEl.value = inputEl.value.replace(/[^0-9.-]/g, '');
-          render();
+        
+        this.metalCardsContainer.innerHTML = cardsHTML;
+      }
+      
+      getOptimalBreakdown(value) {
+        const breakdown = [];
+        let remaining = value;
+        const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+        
+        currencies.forEach(currency => {
+          const rate = this.rates[currency];
+          const count = Math.floor(remaining / rate);
+          if (count > 0) {
+            const data = this.currencyData[currency];
+            breakdown.push(`${count} ${data.emoji} ${data.name.toLowerCase()}`);
+            remaining -= count * rate;
+          }
         });
-      });
-
-      render();
-    })();
+        
+        return breakdown.join(', ');
+      }
+      
+      updateOptimalRecommendations(baseValue) {
+        if (baseValue === 0) {
+          this.bestDisplay.innerHTML = 'Entrez des montants pour voir les recommandations optimales';
+          return;
+        }
+        
+        const optimal = this.getOptimalBreakdown(baseValue);
+        const totalPieces = this.calculateTotalPieces(baseValue);
+        
+        this.bestDisplay.innerHTML = `
+          <div class="text-center">
+            <p class="text-lg mb-2"><strong>Conversion optimale:</strong></p>
+            <p class="text-indigo-300 font-medium mb-2">${optimal}</p>
+            <p class="text-sm text-gray-400">Total: ${this.nf.format(totalPieces)} pièces • Valeur: ${this.nf.format(baseValue)} cuivre</p>
+          </div>
+        `;
+      }
+      
+      calculateTotalPieces(baseValue) {
+        let total = 0;
+        let remaining = baseValue;
+        const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+        
+        currencies.forEach(currency => {
+          const rate = this.rates[currency];
+          const count = Math.floor(remaining / rate);
+          total += count;
+          remaining -= count * rate;
+        });
+        
+        return total;
+      }
+      
+      updateDisplay() {
+        this.updateFromSources();
+      }
+    }
+    
+    // Initialiser le convertisseur quand le DOM est prêt
+    document.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('currency-converter-premium')) {
+        new CurrencyConverterPremium();
+      }
+    });
   </script>
 </body>
 
