@@ -17,12 +17,18 @@ if (!$id || !isset($data[$id])) {
 $product = $data[$id];
 
 $productName = $lang === 'en' ? ($product['name_en'] ?? $product['name']) : $product['name'];
-$productDesc = $lang === 'en' ? ($product['description_en'] ?? $product['description']) : $product['description'];
+$descriptionFr = (string) ($product['description'] ?? '');
+$descriptionEn = (string) ($product['description_en'] ?? $descriptionFr);
+$productDesc = $lang === 'en' ? $descriptionEn : $descriptionFr;
 
 // Utilisation de la fonction partagée pour la conversion Markdown
 require_once __DIR__ . '/includes/markdown-utils.php';
 
-$productDescHtml = convertMarkdownToHtml($productDesc);
+$productDescHtmlFr = convertMarkdownToHtml($descriptionFr);
+$productDescHtmlEn = $descriptionEn === $descriptionFr
+    ? $productDescHtmlFr
+    : convertMarkdownToHtml($descriptionEn);
+$productDescHtml = $lang === 'en' ? $productDescHtmlEn : $productDescHtmlFr;
 
 $title  = $productName . ' | Geek & Dragon';
 $metaDescription = $productDesc;
@@ -63,7 +69,6 @@ function inStock(string $id): bool
 
 $displayName   = str_replace(' – ', '<br>', $product['name']);
 $displayNameEn = str_replace(' – ', '<br>', $product['name_en'] ?? $product['name']);
-$descriptionEn = $product['description_en'] ?? $product['description'];
 $multipliers   = $product['multipliers'] ?? [];
 $images        = $product['images'] ?? [];
 
@@ -214,9 +219,9 @@ echo $snipcartInit;
               data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
               data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
               data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-              data-item-description="<?= htmlspecialchars($productDesc) ?>"
-              data-item-description-fr="<?= htmlspecialchars($product['description']) ?>"
-              data-item-description-en="<?= htmlspecialchars($product['description_en'] ?? $product['description']) ?>"
+              data-item-description="<?= htmlspecialchars($productDescHtml, ENT_QUOTES, 'UTF-8') ?>"
+              data-item-description-fr="<?= htmlspecialchars($productDescHtmlFr, ENT_QUOTES, 'UTF-8') ?>"
+              data-item-description-en="<?= htmlspecialchars($productDescHtmlEn, ENT_QUOTES, 'UTF-8') ?>"
               data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
               data-item-url="<?= htmlspecialchars($metaUrl) ?>"
               data-item-quantity="1"

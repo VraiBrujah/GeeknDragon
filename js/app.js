@@ -216,10 +216,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.snipcart-add-item').forEach((btn) => {
           if (current === 'en') {
             if (btn.dataset.itemNameEn) btn.setAttribute('data-item-name', btn.dataset.itemNameEn);
-            if (btn.dataset.itemDescriptionEn) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionEn);
+            if (btn.dataset.itemDescriptionEn) {
+              btn.dataset.itemDescription = btn.dataset.itemDescriptionEn;
+              btn.setAttribute('data-item-description', btn.dataset.itemDescriptionEn);
+            }
           } else {
             if (btn.dataset.itemNameFr) btn.setAttribute('data-item-name', btn.dataset.itemNameFr);
-            if (btn.dataset.itemDescriptionFr) btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
+            if (btn.dataset.itemDescriptionFr) {
+              btn.dataset.itemDescription = btn.dataset.itemDescriptionFr;
+              btn.setAttribute('data-item-description', btn.dataset.itemDescriptionFr);
+            }
           }
           const hasCustom = btn.hasAttribute('data-item-custom1-name') && data?.product?.multiplier;
           if (hasCustom) {
