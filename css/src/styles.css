@@ -927,12 +927,13 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
 /* conteneur centré : largeur max et padding latéraux améliorés */
 .shop-wrap{max-width:1440px;margin-inline:auto;padding-inline:var(--boutique-space-lg)}
 
-/* grille responsive premium avec flexbox pour plus de contrôle */
+/* grille responsive premium en CSS Grid pour un contrôle précis */
 .shop-grid{
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: var(--boutique-space-xl);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   justify-content: center;
+  justify-items: center;
   align-items: stretch;
   max-width: 1440px;
   margin: 0 auto;
@@ -967,8 +968,7 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   display: flex;
   flex-direction: column;
   /* largeur par défaut (petits/moyens écrans) */
-  flex: 0 1 320px;
-  max-width: 320px;
+  width: clamp(240px, 100%, 320px);
   margin: 0;
   box-shadow: var(--boutique-shadow-md);
 }
@@ -995,11 +995,11 @@ code{ background:rgba(0,0,0,.25); border-radius:.35rem; padding:.1rem .25rem; }
   transform: scaleX(1); 
 }
 
-/* 4 colonnes stables en 1080p+ */
+/* 4 colonnes stables en 1280px+ avec espacement ajusté */
 @media (min-width: 1280px) {
-  .shop-grid .card {
-    flex: 0 1 calc((100% - 3 * var(--boutique-space-xl)) / 4);
-    max-width: calc((100% - 3 * var(--boutique-space-xl)) / 4);
+  .shop-grid {
+    gap: var(--boutique-space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 }
 
