@@ -241,7 +241,7 @@ echo $snipcartInit;
     <section id="triptyques" class="py-24 scroll-mt-24">
       <div class="max-w-6xl mx-auto px-6">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-i18n="shop.triptychs.title">Triptyques de personnage</h2>
-        <div class="shop-grid <?= count($triptychs) <= 2 ? 'single-item' : '' ?>">
+        <div class="shop-grid">
           <?php foreach ($triptychs as $product) : ?>
               <?php include __DIR__ . '/partials/product-card.php'; ?>
           <?php endforeach; ?>
