@@ -53,6 +53,15 @@ $cards = [];
 $triptychs = [];
 
 foreach ($data as $id => $p) {
+    $summaryFr = (string) ($p['summary'] ?? ($p['description'] ?? ''));
+    $summaryEn = (string) ($p['summary_en'] ?? ($p['description_en'] ?? ''));
+    if ($summaryFr === '' && $summaryEn !== '') {
+        $summaryFr = $summaryEn;
+    }
+    if ($summaryEn === '' && $summaryFr !== '') {
+        $summaryEn = $summaryFr;
+    }
+
     $product = [
         'id' => $id,
         'name' => str_replace(' – ', '<br>', $p['name']),
@@ -61,6 +70,8 @@ foreach ($data as $id => $p) {
         'img' => $p['images'][0] ?? '',
         'description' => $p['description'] ?? '',
         'description_en' => $p['description_en'] ?? ($p['description'] ?? ''),
+        'summary' => $summaryFr,
+        'summary_en' => $summaryEn,
         'multipliers' => $p['multipliers'] ?? [],
     ];
     

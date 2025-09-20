@@ -5,6 +5,8 @@
     "price": 60,
     "description": "### Trésor de départ immersif\n**10 pièces en métal** : **2 de chaque métal** (cuivre, argent, électrum, or, platine). Vous choisissez **un seul multiplicateur** pour tout le lot : *unitaire* par défaut (brillant, sans gravure) ou **x10 / x100 / x1 000 / x10 000** (gravure nette, finition légèrement mate).\n\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
     "description_en": "### Immersive starter hoard\n**10 metal coins** : **2 of each metal** (copper, silver, electrum, gold, platinum). Choose **one multiplier** for the whole set: *unit* by default (shiny, no engraving) or **x10 / x100 / x1,000 / x10,000** (crisp engraving, slightly matte).\n\n*Use multipliers to speed up counting without breaking immersion.*",
+    "summary": "Ensemble de 10 pièces métalliques assorties avec multiplicateur unique pour accélérer les comptes.",
+    "summary_en": "Set of 10 assorted metal coins with a single multiplier to speed up tallying.",
     "images": [
       "/images/optimized-modern/webp/Vagabon.webp",
       "/images/optimized-modern/webp/VagabonPlast.webp",
@@ -24,6 +26,8 @@
     "price": 145,
     "description": "### 25 pièces, zéro doublon\n**5 métaux × 5 multiplicateurs** = **25 modèles uniques**. Chaque métal existe en *unitaire* (brillant) et **x10 / x100 / x1 000 / x10 000** (gravure mate).\n\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
     "description_en": "### 25 coins, no duplicates\n**5 metals × 5 multipliers** = **25 unique designs**. Each metal comes in *unit* (shiny) and **x10 / x100 / x1,000 / x10,000** (matte engraving). **Everything included** — no selection needed.\n\n*Use multipliers to speed up counting without breaking immersion.*",
+    "summary": "Collection de 25 pièces uniques couvrant les cinq métaux et tous les multiplicateurs pour la table.",
+    "summary_en": "Collection of 25 unique coins covering five metals and every multiplier for the table.",
     "images": [
       "/images/optimized-modern/webp/Seignieur.webp",
       "/images/optimized-modern/webp/Seignieurplast.webp",
@@ -43,6 +47,8 @@
     "price": 275,
     "description": "### 50 pièces, double variété\n**2 exemplaires** de chacun des **25 modèles** de la *Monnaie des Cinq Royaumes* : total **50 pièces**. Unitaire (brillant) et x10/x100/x1 000/x10 000 (gravure mate).\n\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
     "description_en": "### 50 coins, double the variety\n**2 copies** of each of the **25 designs** from the *Currency of the Five Realms* — total **50 coins**. Unit (shiny) and x10/x100/x1,000/x10,000 (matte engraving). **Everything included** — no selection needed.\n\n*Use multipliers to speed up counting without breaking immersion.*",
+    "summary": "Double exemplaire de chaque modèle pour 50 pièces prêtes à l'emploi avec tous les multiplicateurs.",
+    "summary_en": "Two copies of every design for 50 ready-to-play coins including every multiplier.",
     "images": [
       "/images/optimized-modern/webp/Royaume.webp",
       "/images/optimized-modern/webp/RoyaumePlast.webp",
@@ -62,6 +68,8 @@
     "price": 275,
     "description": "### 50 pièces pour l'opulence\n**10 pièces de chaque métal** (cuivre, argent, électrum, or, platine) appliquant **le même multiplicateur** choisi à l'achat : *unitaire* par défaut (brillant) ou **x10 / x100 / x1 000 / x10 000** (gravure mate).\n\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
     "description_en": "### 50 coins for opulence\n**10 coins of each metal** (copper, silver, electrum, gold, platinum) using the **same multiplier** selected at checkout: *unit* by default (shiny) or **x10 / x100 / x1,000 / x10,000** (matte engraving).\n\n*Use multipliers to speed up counting without breaking immersion.*",
+    "summary": "Sélection de 50 pièces d'un même multiplicateur pour assurer une trésorerie abondante et cohérente.",
+    "summary_en": "Selection of 50 coins sharing one multiplier to deliver a plentiful, consistent treasury.",
     "images": [
       "/images/optimized-modern/webp/Essence.webp",
       "/images/optimized-modern/webp/EssencePlast.webp",
@@ -81,6 +89,8 @@
     "price": 49.99,
     "description": "### Armes • Armures • Équipement\nUn lot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées.\n\n**Contenu :**\n- **Armes** : mêlée & distance\n- **Armures & boucliers** : légères, intermédiaires et lourdes\n- **Équipement** : cordes, torches, rations, outils de terrain\n\n*Idéal pour la table : pioche, pose, échange — fini la fouille dans le manuel.*",
     "description_en": "### Weapons • Armor • Equipment\nA massive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards.\n\n**Contents:**\n- **Weapons**: melee & ranged\n- **Armor & shields**: light, medium, and heavy\n- **Equipment**: ropes, torches, rations, field tools\n\n*Perfect at the table: draw, place, trade — no more digging through the rulebook.*",
+    "summary": "Boîte de cartes illustrées couvrant armes, armures et équipement pour équiper immédiatement un groupe.",
+    "summary_en": "Box of illustrated cards covering weapons, armor, and gear to outfit a party instantly.",
     "images": [
       "/images/optimized-modern/webp/arme-recto.webp",
       "/images/optimized-modern/webp/arme-verso.webp",
@@ -95,6 +105,8 @@
     "price": 36.99,
     "description": "### Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils\nPour des campagnes qui osent : trésors variés, matériel instable, techno-reliques et les indispensables de l'artisan.\n\n**Contenu :**\n- **Butin** : gemmes, objets curieux, artefacts mineurs, reliques\n- **Explosifs & armes modernes/futuristes** : grenades, charges, armes à feu & à énergie\n- **Marchandises** : denrées, tissus, minerais\n- **Outils** : artisanats, crochetage, alchimie légère, kits spéciaux\n\n*Injecte de la variété et des choix tactiques — du troc de marché au braquage high-fantasy.*",
     "description_en": "### Loot • Explosives & Modern/Futuristic Weapons • Trade Goods • Tools\nFor campaigns that push the envelope: varied treasures, volatile hardware, techno-relics, and every crafter's staple.\n\n**Contents:**\n- **Loot**: gems, curios, minor artifacts, relics\n- **Explosives & modern/futur weapons**: grenades, charges, firearms & energy weapons\n- **Trade goods**: foodstuffs, fabrics, ores\n- **Tools**: crafts, lockpicks, light alchemy, specialty kits\n\n*Add variety and tactical choices — from market bartering to high-fantasy heists.*",
+    "summary": "Cartes de butin et matériel exotique mêlant trésors, explosifs et outils pour campagnes audacieuses.",
+    "summary_en": "Cards of loot and exotic gear mixing treasures, explosives, and tools for daring campaigns.",
     "images": [
       "/images/optimized-modern/webp/alexandrite-recto.webp",
       "/images/optimized-modern/webp/bombe-recto.webp",
@@ -109,6 +121,8 @@
     "price": 34.99,
     "description": "### Paquetages • Services • Véhicules • Poisons\nTout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque avec des cartes claires et pratiques.\n\n**Contenu :**\n- **Paquetages** : *artiste, cambrioleur, diplomate, ecclésiastique, érudit, explorateur, exploration souterraine*\n- **Services** : hébergements, soins, transport, passeurs, mercenaires\n- **Véhicules** : terrestres, marins, animaux de bât\n- **Poisons** : effets et rareté\n\n*Parfait pour les campagnes orientées exploration, voyage et intrigue.*",
     "description_en": "### Packs • Services • Vehicles • Poisons\nEverything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards.\n\n**Contents:**\n- **Packs**: *artist, burglar, diplomat, acolyte/cleric, scholar, explorer, underdark exploration*\n- **Services**: lodging, healing, transport, smugglers, mercenaries\n- **Vehicles**: land, sea, beasts of burden\n- **Poisons**: effects & rarity\n\n*Perfect for exploration-, travel- and intrigue-heavy campaigns.*",
+    "summary": "Sélection de cartes dédiées aux voyages, services, véhicules et poisons pour dynamiser l'exploration.",
+    "summary_en": "Selection of cards focused on travel, services, vehicles, and poisons to energize exploration.",
     "images": [
       "/images/optimized-modern/webp/sac-aa-dos-recto.webp",
       "/images/optimized-modern/webp/biaere-chope-recto.webp",
@@ -123,6 +137,8 @@
     "price": 59.99,
     "description": "### Trois triptyques, un héros clé en main\nTire au sort **1 Classe**, **1 Espèce** et **1 Historique** pour forger une origine unique, puis joue immédiatement avec :\n\n**Inclus :**\n- **Cartes d'équipement assorties** correspondant au paquetage\n- **Pièces de départ**\n- **Compatibilité 5e 2024**\n\nUn bundle idéal pour des *one-shots*, des tables débutantes ou pour surprendre des joueurs vétérans.\n\n*Fini la fouille dans le manuel.*",
     "description_en": "### Three triptychs, a plug-and-play hero\nDraw at random **1 Class**, **1 Species** and **1 Background** to forge a unique origin, then play right away with:\n\n**Included:**\n- **Matching equipment cards** based on the linked pack\n- **Starting coins**\n- **5e 2024 compatible**\n\nPerfect for one-shots, new tables, or to surprise veteran players.\n\n*No more digging through the rulebook.*",
+    "summary": "Lot de triptyques aléatoires pour créer un héros complet avec équipement assorti et pièces de départ.",
+    "summary_en": "Bundle of random triptychs to build a complete hero with matching gear and starting coins.",
     "images": [
       "/images/optimized-modern/webp/triptyque-fiche.webp",
       "/images/optimized-modern/webp/drakaeide-airain-recto.webp",
@@ -137,6 +153,8 @@
     "price": 10,
     "description": "### Découverte aléatoire\n**10 cartes tirées au sort** dans nos collections. Choisissez simplement votre catégorie préférée et laissez-vous surprendre !\n\n**Catégories disponibles :**\n- **Totalement aléatoire** : mélange de toutes nos cartes\n- **Armes** : mêlée & distance\n- **Armures** : protection & boucliers\n- **Équipement** : outils d'aventure\n- **Butin** : trésors & artefacts\n- **Services** : voyages & commerce\n- **Explosifs** : matériel moderne\n- **Véhicules** : moyens de transport\n- **Poisons** : substances dangereuses\n\n*Parfait pour découvrir nos cartes ou compléter une collection !*",
     "description_en": "### Random discovery\n**10 randomly drawn cards** from our collections. Simply choose your preferred category and let yourself be surprised!\n\n**Available categories:**\n- **Totally random**: mix of all our cards\n- **Weapons**: melee & ranged\n- **Armor**: protection & shields\n- **Equipment**: adventure tools\n- **Loot**: treasures & artifacts\n- **Services**: travel & trade\n- **Explosives**: modern gear\n- **Vehicles**: means of transport\n- **Poisons**: dangerous substances\n\n*Perfect for discovering our cards or completing a collection!*",
+    "summary": "Paquet de dix cartes surprises selon la catégorie choisie pour découvrir ou compléter la collection.",
+    "summary_en": "Pack of ten surprise cards in the chosen category to discover or round out the collection.",
     "images": [
       "/images/optimized-modern/webp/arme-recto.webp",
       "/images/optimized-modern/webp/alexandrite-recto.webp",
