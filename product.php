@@ -30,6 +30,38 @@ $productDescHtmlEn = $descriptionEn === $descriptionFr
     : convertMarkdownToHtml($descriptionEn);
 $productDescHtml = $lang === 'en' ? $productDescHtmlEn : $productDescHtmlFr;
 
+// Traitement du résumé comme dans product-card.php
+$toPlainText = static function (string $value): string {
+    if ($value === '') {
+        return '';
+    }
+    $text = str_replace(["\r\n", "\r"], "\n", $value);
+    $text = preg_replace('/^\s{0,3}#{1,6}\s*/mu', '', $text) ?? $text;
+    $text = preg_replace('/^\s{0,3}>\s?/mu', '', $text) ?? $text;
+    $text = preg_replace('/^\s{0,3}[-*+]\s+/mu', '', $text) ?? $text;
+    $text = preg_replace('/!\[(.*?)\]\((.*?)\)/u', '$1', $text) ?? $text;
+    $text = preg_replace('/\[(.*?)\]\((.*?)\)/u', '$1', $text) ?? $text;
+    $text = preg_replace('/(`{1,3})(.+?)\1/u', '$2', $text) ?? $text;
+    $text = preg_replace('/([*_~]{1,2})(.+?)\1/u', '$2', $text) ?? $text;
+    $text = strip_tags($text);
+    $text = preg_replace('/\s+/u', ' ', $text) ?? $text;
+    $text = trim($text);
+    return $text !== '' ? $text : trim(strip_tags($value));
+};
+
+$summaryRawFr = trim((string) ($product['summary'] ?? ''));
+$summaryRawEn = trim((string) ($product['summary_en'] ?? ''));
+if ($summaryRawFr === '' && $summaryRawEn !== '') {
+    $summaryRawFr = $summaryRawEn;
+}
+if ($summaryRawEn === '' && $summaryRawFr !== '') {
+    $summaryRawEn = $summaryRawFr;
+}
+
+$summaryFr = $summaryRawFr !== '' ? $toPlainText($summaryRawFr) : $toPlainText($descriptionFr);
+$summaryEn = $summaryRawEn !== '' ? $toPlainText($summaryRawEn) : $toPlainText($descriptionEn);
+$summary = $lang === 'en' ? $summaryEn : $summaryFr;
+
 $title  = $productName . ' | Geek & Dragon';
 $metaDescription = $productDesc;
 $host = $_SERVER['HTTP_HOST'] ?? 'geekndragon.com';
@@ -228,23 +260,23 @@ echo $snipcartInit;
               data-item-name="<?= htmlspecialchars(strip_tags($productName)) ?>"
               data-item-name-fr="<?= htmlspecialchars(strip_tags($product['name'])) ?>"
               data-item-name-en="<?= htmlspecialchars(strip_tags($product['name_en'] ?? $product['name'])) ?>"
-              data-item-description="<?= htmlspecialchars($productDescHtml, ENT_QUOTES, 'UTF-8') ?>"
-              data-item-description-fr="<?= htmlspecialchars($productDescHtmlFr, ENT_QUOTES, 'UTF-8') ?>"
-              data-item-description-en="<?= htmlspecialchars($productDescHtmlEn, ENT_QUOTES, 'UTF-8') ?>"
+              data-item-description="<?= htmlspecialchars($summary, ENT_QUOTES, 'UTF-8') ?>"
+              data-item-description-fr="<?= htmlspecialchars($summaryFr, ENT_QUOTES, 'UTF-8') ?>"
+              data-item-description-en="<?= htmlspecialchars($summaryEn, ENT_QUOTES, 'UTF-8') ?>"
               data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
               data-item-url="<?= htmlspecialchars($metaUrl) ?>"
               data-item-quantity="1"
               <?php if ($languageFieldIndex !== null) : ?>
                 data-item-custom<?= (int) $languageFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['language'] ?? 'Langue') ?>"
+                data-item-custom<?= (int) $languageFieldIndex ?>-type="dropdown"
                 data-item-custom<?= (int) $languageFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $languages)) ?>"
                 data-item-custom<?= (int) $languageFieldIndex ?>-value="<?= htmlspecialchars($defaultLanguage) ?>"
-                data-item-custom<?= (int) $languageFieldIndex ?>-role="language"
               <?php endif; ?>
               <?php if ($multiplierFieldIndex !== null) : ?>
                 data-item-custom<?= (int) $multiplierFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+                data-item-custom<?= (int) $multiplierFieldIndex ?>-type="dropdown"
                 data-item-custom<?= (int) $multiplierFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $multiplierOptions)) ?>"
                 data-item-custom<?= (int) $multiplierFieldIndex ?>-value="<?= htmlspecialchars($multiplierOptions[0] ?? '') ?>"
-                data-item-custom<?= (int) $multiplierFieldIndex ?>-role="multiplier"
               <?php endif; ?>
             >
               🛒 <span data-i18n="product.add">Ajouter au panier</span> — <?= htmlspecialchars(number_format((float)$product['price'], 2, ',', ' ')) ?> $ CAD

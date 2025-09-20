@@ -200,23 +200,23 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                 data-item-name="<?= htmlspecialchars(strip_tags($name)) ?>"
                 data-item-name-fr="<?= htmlspecialchars(strip_tags($nameFr)) ?>"
                 data-item-name-en="<?= htmlspecialchars(strip_tags($nameEn)) ?>"
-                data-item-description="<?= htmlspecialchars($alt) ?>"
-                data-item-description-fr="<?= htmlspecialchars($altFr) ?>"
-                data-item-description-en="<?= htmlspecialchars($altEn) ?>"
+                data-item-description="<?= htmlspecialchars($summary) ?>"
+                data-item-description-fr="<?= htmlspecialchars($summaryFr) ?>"
+                data-item-description-en="<?= htmlspecialchars($summaryEn) ?>"
                 data-item-price="<?= htmlspecialchars($price) ?>"
                 data-item-url="<?= htmlspecialchars($url) ?>"
                 data-item-quantity="1"
                 <?php if ($languageFieldIndex !== null) : ?>
                   data-item-custom<?= (int) $languageFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['language'] ?? 'Langue') ?>"
+                  data-item-custom<?= (int) $languageFieldIndex ?>-type="dropdown"
                   data-item-custom<?= (int) $languageFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $languages)) ?>"
                   data-item-custom<?= (int) $languageFieldIndex ?>-value="<?= htmlspecialchars($defaultLanguage) ?>"
-                  data-item-custom<?= (int) $languageFieldIndex ?>-role="language"
                 <?php endif; ?>
                 <?php if ($multiplierFieldIndex !== null) : ?>
                   data-item-custom<?= (int) $multiplierFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
+                  data-item-custom<?= (int) $multiplierFieldIndex ?>-type="dropdown"
                   data-item-custom<?= (int) $multiplierFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $multiplierOptions)) ?>"
                   data-item-custom<?= (int) $multiplierFieldIndex ?>-value="<?= htmlspecialchars($multiplierOptions[0] ?? '') ?>"
-                  data-item-custom<?= (int) $multiplierFieldIndex ?>-role="multiplier"
                 <?php endif; ?>
           >
                 <span data-i18n="product.add">Ajouter</span>

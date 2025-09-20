@@ -878,6 +878,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const ensureSnipcartQtyPatch = () => {
     if (window.__snipcartQtyPatch === true) return;
+    // TEMPORAIREMENT DÉSACTIVÉ POUR DEBUG - ÉCRASE LES CUSTOM FIELDS
+    console.log('ensureSnipcartQtyPatch: DÉSACTIVÉ pour debug variations');
+    window.__snipcartQtyPatch = true;
+    return;
 
     document.addEventListener('click', (event) => {
       const btn = event.target.closest('.snipcart-add-item');
