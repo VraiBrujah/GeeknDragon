@@ -232,19 +232,22 @@ echo $snipcartInit;
             </div>
           </div>
 
-          <!-- Section 3: Équivalences totales par métal avec cards claires -->
+          <!-- Section 3: Équivalences totales par métal avec recommandations optimales -->
           <div class="mb-8" id="metal-totals-section">
             <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.equivalences">💼 Équivalences totales par métal</h5>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto" id="metal-cards-container">
-              <!-- Les cartes seront générées dynamiquement -->
-            </div>
-          </div>
-
-          <!-- Section 4: Recommandations optimales -->
-          <div class="text-center">
-            <div id="optimal-recommendations" class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-6 max-w-4xl mx-auto border border-indigo-500/30">
-              <h5 class="text-lg font-semibold text-indigo-300 mb-3">✨ Recommandations optimales</h5>
-              <div id="currency-best" class="text-gray-200"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+              <!-- Première ligne: Cuivre, Argent, Électrum -->
+              <div id="copper-card"></div>
+              <div id="silver-card"></div>
+              <div id="electrum-card"></div>
+              
+              <!-- Deuxième ligne: Or, Platine, Recommandations optimales -->
+              <div id="gold-card"></div>
+              <div id="platinum-card"></div>
+              <div id="optimal-recommendations" class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-6 border border-indigo-500/30">
+                <h6 class="text-indigo-300 font-bold text-lg mb-4">✨ Recommandations optimales</h6>
+                <div id="currency-best" class="text-gray-200"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -364,7 +367,15 @@ echo $snipcartInit;
         this.multiplierInputs = document.querySelectorAll('.multiplier-input');
         this.toggleButton = document.getElementById('toggle-edit-mode');
         this.bestDisplay = document.getElementById('currency-best');
-        this.metalCardsContainer = document.getElementById('metal-cards-container');
+        
+        // Références vers les cartes positionnées
+        this.metalCards = {
+          copper: document.getElementById('copper-card'),
+          silver: document.getElementById('silver-card'),
+          electrum: document.getElementById('electrum-card'),
+          gold: document.getElementById('gold-card'),
+          platinum: document.getElementById('platinum-card')
+        };
         
         this.currencyData = {
           copper: { name: 'Cuivre', emoji: '🪙', color: 'amber' },
@@ -490,42 +501,31 @@ echo $snipcartInit;
       
       updateMetalCards(baseValue) {
         if (baseValue === 0) {
-          this.metalCardsContainer.innerHTML = '<p class="text-gray-400 text-center col-span-full">Entrez des valeurs pour voir les équivalences</p>';
+          Object.keys(this.metalCards).forEach(currency => {
+            this.metalCards[currency].innerHTML = '';
+          });
           return;
         }
-        
-        let cardsHTML = '';
         
         Object.keys(this.rates).forEach(currency => {
           const data = this.currencyData[currency];
           const rate = this.rates[currency];
           const totalUnits = Math.floor(baseValue / rate);
           
-          if (totalUnits === 0) return;
+          if (totalUnits === 0) {
+            this.metalCards[currency].innerHTML = '';
+            return;
+          }
           
-          let breakdown = [];
-          let remaining = totalUnits;
-          
-          // Calcul de la répartition par multiplicateur
-          this.multipliers.slice().reverse().forEach(mult => {
-            const qty = Math.floor(remaining / mult);
-            if (qty > 0) {
-              breakdown.push({
-                multiplier: mult,
-                quantity: qty,
-                total: qty * mult
-              });
-              remaining -= qty * mult;
-            }
-          });
-          
+          // Calcul du nombre minimal de pièces avec multiplicateurs
+          const minimalCoins = this.getMinimalCoinsBreakdown(totalUnits);
           const remainderValue = baseValue % rate;
           let remainderText = '';
           if (remainderValue > 0) {
             remainderText = this.getOptimalBreakdown(remainderValue);
           }
           
-          cardsHTML += `
+          this.metalCards[currency].innerHTML = `
             <div class="currency-total-card bg-gradient-to-br from-${data.color}-900/20 to-${data.color}-800/20 rounded-xl p-6 border border-${data.color}-700/30">
               <div class="flex items-center justify-between mb-4">
                 <h6 class="text-${data.color}-300 font-bold text-lg">${data.emoji} ${data.name}</h6>
@@ -533,12 +533,21 @@ echo $snipcartInit;
               </div>
               
               <div class="space-y-2 mb-4">
-                ${breakdown.map(item => `
-                  <div class="flex justify-between text-sm">
+                <div class="text-sm">
+                  <span class="text-gray-300">Nombre minimal de pièces:</span>
+                </div>
+                ${minimalCoins.map(item => `
+                  <div class="flex justify-between text-sm pl-2">
                     <span class="text-gray-300">${item.multiplier === 1 ? 'Unités' : `Lots ×${this.nf.format(item.multiplier)}`}:</span>
                     <span class="text-${data.color}-300 font-medium">${this.nf.format(item.quantity)}</span>
                   </div>
                 `).join('')}
+                <div class="border-t border-${data.color}-700/30 pt-2 mt-3">
+                  <div class="flex justify-between text-sm">
+                    <span class="text-gray-300">Total pièces:</span>
+                    <span class="text-${data.color}-300 font-bold">${this.nf.format(minimalCoins.reduce((sum, item) => sum + item.quantity, 0))}</span>
+                  </div>
+                </div>
               </div>
               
               ${remainderText ? `
@@ -549,15 +558,35 @@ echo $snipcartInit;
             </div>
           `;
         });
+      }
+      
+      getMinimalCoinsBreakdown(totalUnits) {
+        const breakdown = [];
+        let remaining = totalUnits;
         
-        this.metalCardsContainer.innerHTML = cardsHTML;
+        // Calcul de la répartition optimale par multiplicateur (du plus grand au plus petit)
+        this.multipliers.slice().reverse().forEach(mult => {
+          const qty = Math.floor(remaining / mult);
+          if (qty > 0) {
+            breakdown.push({
+              multiplier: mult,
+              quantity: qty
+            });
+            remaining -= qty * mult;
+          }
+        });
+        
+        return breakdown;
       }
       
       getOptimalBreakdown(value) {
+        if (value <= 0) return '';
+        
         const breakdown = [];
         let remaining = value;
-        const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+        const currencies = ['platinum', 'gold', 'electrum', 'silver'];
         
+        // Traiter les métaux de valeur élevée d'abord (sans le cuivre)
         currencies.forEach(currency => {
           const rate = this.rates[currency];
           const count = Math.floor(remaining / rate);
@@ -568,7 +597,20 @@ echo $snipcartInit;
           }
         });
         
-        return breakdown.join(', ');
+        // Ajouter le cuivre restant (il devrait toujours y en avoir car remaining >= 0)
+        if (remaining > 0) {
+          const copperCount = remaining; // remaining est déjà en cuivre
+          const copperData = this.currencyData.copper;
+          breakdown.push(`${copperCount} ${copperData.emoji} ${copperData.name.toLowerCase()}`);
+        }
+        
+        // Ajouter le connecteur "et" avant le dernier élément si il y en a plusieurs
+        if (breakdown.length > 1) {
+          const last = breakdown.pop();
+          return breakdown.join(', ') + ' et ' + last;
+        }
+        
+        return breakdown.join('');
       }
       
       updateOptimalRecommendations(baseValue) {
@@ -580,11 +622,27 @@ echo $snipcartInit;
         const optimal = this.getOptimalBreakdown(baseValue);
         const totalPieces = this.calculateTotalPieces(baseValue);
         
+        // Calcul de la valeur en or avec reste
+        const goldValue = Math.floor(baseValue / this.rates.gold);
+        const goldRemainder = baseValue % this.rates.gold;
+        
+        let goldValueDisplay = '';
+        if (goldValue > 0) {
+          goldValueDisplay = `${this.nf.format(goldValue)} 🥇 or`;
+          if (goldRemainder > 0) {
+            const remainderBreakdown = this.getOptimalBreakdown(goldRemainder);
+            goldValueDisplay += ` et ${remainderBreakdown}`;
+          }
+        } else {
+          goldValueDisplay = this.getOptimalBreakdown(baseValue);
+        }
+        
         this.bestDisplay.innerHTML = `
           <div class="text-center">
             <p class="text-lg mb-2"><strong>Conversion optimale:</strong></p>
             <p class="text-indigo-300 font-medium mb-2">${optimal}</p>
-            <p class="text-sm text-gray-400">Total: ${this.nf.format(totalPieces)} pièces • Valeur: ${this.nf.format(baseValue)} cuivre</p>
+            <p class="text-sm text-gray-400">Total: ${this.nf.format(totalPieces)} pièces</p>
+            <p class="text-sm text-gray-400">• Valeur: ${goldValueDisplay}</p>
           </div>
         `;
       }
