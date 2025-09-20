@@ -23,9 +23,14 @@ Need more than 50 pieces or a custom assortment? Request a personalized chest th
 
 Place product photos under `images/Piece/pro/`. Each item typically uses a full‑resolution image and a 300 px thumbnail (e.g. `lot10Piece.png` and `lot10Piece-300.png`).
 
-### Configuring multipliers in Snipcart
+### Configuring custom fields in Snipcart
 
-Multipliers are handled with Snipcart custom fields. Add a `<select>` with the class `multiplier-select` and set the `data-item-custom1-name`, `data-item-custom1-options` (such as `1|10|100|1000|10000`) and `data-item-custom1-value` attributes on the `snipcart-add-item` button to let customers choose the desired multiplier.
+The shop reserves fixed Snipcart custom field indexes to avoid conflicts when several selectors are displayed simultaneously:
+
+- `custom1` — language selector (`Langue`)
+- `custom2` — multiplier (`Multiplicateur`)
+
+Each `<select>` must expose its role through `data-item-custom-role="language"` or `data-item-custom-role="multiplier"` in addition to the existing `data-custom-index` attribute. On the matching `snipcart-add-item` button, set the `data-item-custom1-*` attributes for languages and the `data-item-custom2-*` attributes for multipliers, including the helper `data-item-customX-role` attribute so that the JavaScript synchronisation keeps the right labels in French and English.
 
 ## Environment variables
 

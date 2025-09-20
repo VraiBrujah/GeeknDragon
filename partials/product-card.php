@@ -96,9 +96,15 @@ foreach ($languages as $code) {
     $languageLabels[$code] = (string) ($translations['product']['languageOptions'][$code] ?? $code);
 }
 
-$languageFieldIndex = !empty($languageLabels) ? 1 : null;
-$customFieldCursor = $languageFieldIndex !== null ? 2 : 1;
-$multiplierFieldIndex = !empty($multipliers) ? $customFieldCursor : null;
+if (!defined('GD_CUSTOM_FIELD_LANGUAGE_INDEX')) {
+    define('GD_CUSTOM_FIELD_LANGUAGE_INDEX', 1);
+}
+if (!defined('GD_CUSTOM_FIELD_MULTIPLIER_INDEX')) {
+    define('GD_CUSTOM_FIELD_MULTIPLIER_INDEX', 2);
+}
+
+$languageFieldIndex = !empty($languageLabels) ? GD_CUSTOM_FIELD_LANGUAGE_INDEX : null;
+$multiplierFieldIndex = !empty($multipliers) ? GD_CUSTOM_FIELD_MULTIPLIER_INDEX : null;
 $defaultLanguage = $languages[0] ?? '';
 $multiplierOptions = array_map(static fn ($value) => (string) $value, $multipliers);
 ?>
@@ -158,7 +164,8 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
               <select id="multiplier-<?= htmlspecialchars($id) ?>"
                       class="multiplier-select w-full max-w-[12rem] bg-gray-700 text-gray-100 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       data-target="<?= htmlspecialchars($id) ?>"
-                      data-custom-index="<?= (int) $multiplierFieldIndex ?>">
+                      data-custom-index="<?= (int) $multiplierFieldIndex ?>"
+                      data-item-custom-role="multiplier">
                 <?php foreach ($multiplierOptions as $index => $value) : ?>
                   <option value="<?= htmlspecialchars($value) ?>" <?= $index === 0 ? 'selected' : '' ?>>
                     <?= htmlspecialchars($value) ?>
@@ -174,7 +181,8 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
               <select id="language-<?= htmlspecialchars($id) ?>"
                       class="language-select w-full max-w-[12rem] bg-gray-700 text-gray-100 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                       data-target="<?= htmlspecialchars($id) ?>"
-                      data-custom-index="<?= (int) $languageFieldIndex ?>">
+                      data-custom-index="<?= (int) $languageFieldIndex ?>"
+                      data-item-custom-role="language">
                 <?php foreach ($languageLabels as $value => $label) : ?>
                   <option value="<?= htmlspecialchars($value) ?>" <?= $value === $defaultLanguage ? 'selected' : '' ?>>
                     <?= htmlspecialchars($label) ?>
@@ -202,11 +210,13 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                   data-item-custom<?= (int) $languageFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['language'] ?? 'Langue') ?>"
                   data-item-custom<?= (int) $languageFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $languages)) ?>"
                   data-item-custom<?= (int) $languageFieldIndex ?>-value="<?= htmlspecialchars($defaultLanguage) ?>"
+                  data-item-custom<?= (int) $languageFieldIndex ?>-role="language"
                 <?php endif; ?>
                 <?php if ($multiplierFieldIndex !== null) : ?>
                   data-item-custom<?= (int) $multiplierFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['multiplier'] ?? 'Multiplicateur') ?>"
                   data-item-custom<?= (int) $multiplierFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $multiplierOptions)) ?>"
                   data-item-custom<?= (int) $multiplierFieldIndex ?>-value="<?= htmlspecialchars($multiplierOptions[0] ?? '') ?>"
+                  data-item-custom<?= (int) $multiplierFieldIndex ?>-role="multiplier"
                 <?php endif; ?>
           >
                 <span data-i18n="product.add">Ajouter</span>
