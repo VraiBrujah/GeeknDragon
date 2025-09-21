@@ -105,27 +105,8 @@
     }
 
     handleScroll() {
-      const speed = 0.5;
-
-      // Effet parallax sur le hero
-      const heroContent = document.querySelector('.hero-text');
-      if (!heroContent) {
-        return;
-      }
-
-      const heroSection = heroContent.closest('section');
-      if (!heroSection) {
-        return;
-      }
-
-      const rect = heroSection.getBoundingClientRect();
-      if (rect.bottom <= 0 || rect.top >= window.innerHeight) {
-        heroContent.style.transform = 'translateY(0)';
-        return;
-      }
-
-      const distance = Math.min(Math.max(-rect.top, 0), rect.height);
-      heroContent.style.transform = `translateY(${distance * speed}px)`;
+      // Effet parallax sur le hero DÉSACTIVÉ pour comportement identique à index.php
+      // Le hero reste maintenant fixe comme demandé
     }
   }
 

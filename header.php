@@ -33,11 +33,6 @@ $navItems = [
       ]
     ]
   ],
-  '/index.php#produits' => [
-    'slug'  => 'produits',
-    'label' => 'Produits',
-    'i18n'  => 'nav.products'
-  ],
   '/index.php#actus' => [
     'slug'  => 'actus',
     'label' => 'Actualités',
