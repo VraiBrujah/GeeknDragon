@@ -31,7 +31,12 @@
       "Bash(dir videos)",
       "Bash(npx tailwindcss:*)",
       "Bash(grep:*)",
-      "Bash(mediainfo:*)"
+      "Bash(mediainfo:*)",
+      "Bash(move \"Sans titre.png\" \"assets-a-venir\\images\\\")",
+      "Bash(dir)",
+      "Bash(dir:*)",
+      "Bash(find:*)",
+      "Bash(bash:*)"
     ],
     "deny": [],
     "ask": []
