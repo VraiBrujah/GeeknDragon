@@ -20,11 +20,11 @@ class CurrencyConverterPremium {
     };
     
     this.currencyData = {
-      copper: { name: 'Cuivre', emoji: '🪙', color: 'amber' },
-      silver: { name: 'Argent', emoji: '🥈', color: 'gray' },
-      electrum: { name: 'Électrum', emoji: '⚡', color: 'yellow' },
-      gold: { name: 'Or', emoji: '🥇', color: 'yellow' },
-      platinum: { name: 'Platine', emoji: '💎', color: 'cyan' }
+      copper: { name: 'Cuivre', nameEn: 'Copper', emoji: '🪙', color: 'amber' },
+      silver: { name: 'Argent', nameEn: 'Silver', emoji: '🥈', color: 'gray' },
+      electrum: { name: 'Électrum', nameEn: 'Electrum', emoji: '⚡', color: 'yellow' },
+      gold: { name: 'Or', nameEn: 'Gold', emoji: '🥇', color: 'yellow' },
+      platinum: { name: 'Platine', nameEn: 'Platinum', emoji: '💎', color: 'cyan' }
     };
     
     this.init();
@@ -33,6 +33,32 @@ class CurrencyConverterPremium {
   init() {
     this.setupEventListeners();
     this.updateDisplay();
+  }
+  
+  getCurrentLang() {
+    return document.documentElement.lang || 'fr';
+  }
+  
+  getTranslation(key, fallback = '') {
+    if (window.i18n) {
+      const keys = key.split('.');
+      let value = window.i18n;
+      for (const k of keys) {
+        if (value && typeof value === 'object' && k in value) {
+          value = value[k];
+        } else {
+          return fallback;
+        }
+      }
+      return typeof value === 'string' ? value : fallback;
+    }
+    return fallback;
+  }
+  
+  getCurrencyName(currency) {
+    const lang = this.getCurrentLang();
+    const data = this.currencyData[currency];
+    return lang === 'en' ? data.nameEn : data.name;
   }
   
   setupEventListeners() {
@@ -158,23 +184,23 @@ class CurrencyConverterPremium {
       this.metalCards[currency].innerHTML = `
         <div class="currency-total-card bg-gradient-to-br from-${data.color}-900/20 to-${data.color}-800/20 rounded-xl p-6 border border-${data.color}-700/30">
           <div class="flex items-center justify-between mb-4">
-            <h6 class="text-${data.color}-300 font-bold text-lg">${data.emoji} ${data.name}</h6>
+            <h6 class="text-${data.color}-300 font-bold text-lg">${data.emoji} ${this.getCurrencyName(currency)}</h6>
             <span class="text-2xl font-bold text-${data.color}-300">${this.nf.format(totalUnits)}</span>
           </div>
           
           <div class="space-y-2 mb-4">
             <div class="text-sm">
-              <span class="text-gray-300">Nombre minimal de pièces:</span>
+              <span class="text-gray-300">${this.getTranslation('shop.converter.minimalCoins', 'Nombre minimal de pièces')}:</span>
             </div>
             ${minimalCoins.map(item => `
               <div class="flex justify-between text-sm pl-2">
-                <span class="text-gray-300">${item.multiplier === 1 ? 'Unités' : `Lots ×${this.nf.format(item.multiplier)}`}:</span>
+                <span class="text-gray-300">${item.multiplier === 1 ? this.getTranslation('shop.converter.units', 'Unités') : `${this.getTranslation('shop.converter.lots', 'Lots')} ×${this.nf.format(item.multiplier)}`}:</span>
                 <span class="text-${data.color}-300 font-medium">${this.nf.format(item.quantity)}</span>
               </div>
             `).join('')}
             <div class="border-t border-${data.color}-700/30 pt-2 mt-3">
               <div class="flex justify-between text-sm">
-                <span class="text-gray-300">Total pièces:</span>
+                <span class="text-gray-300">${this.getTranslation('shop.converter.totalCoins', 'Total pièces')}:</span>
                 <span class="text-${data.color}-300 font-bold">${this.nf.format(minimalCoins.reduce((sum, item) => sum + item.quantity, 0))}</span>
               </div>
             </div>
@@ -182,7 +208,7 @@ class CurrencyConverterPremium {
           
           ${remainderText ? `
             <div class="border-t border-${data.color}-700/30 pt-3">
-              <p class="text-xs text-gray-400">Reste: ${remainderText}</p>
+              <p class="text-xs text-gray-400">${this.getTranslation('shop.converter.remainder', 'Reste')}: ${remainderText}</p>
             </div>
           ` : ''}
         </div>
@@ -222,7 +248,7 @@ class CurrencyConverterPremium {
       const count = Math.floor(remaining / rate);
       if (count > 0) {
         const data = this.currencyData[currency];
-        breakdown.push(`${count} ${data.emoji} ${data.name.toLowerCase()}`);
+        breakdown.push(`${count} ${data.emoji} ${this.getCurrencyName(currency).toLowerCase()}`);
         remaining -= count * rate;
       }
     });
@@ -230,14 +256,13 @@ class CurrencyConverterPremium {
     // Ajouter le cuivre restant (il devrait toujours y en avoir car remaining >= 0)
     if (remaining > 0) {
       const copperCount = remaining; // remaining est déjà en cuivre
-      const copperData = this.currencyData.copper;
-      breakdown.push(`${copperCount} ${copperData.emoji} ${copperData.name.toLowerCase()}`);
+      breakdown.push(`${copperCount} ${this.currencyData.copper.emoji} ${this.getCurrencyName('copper').toLowerCase()}`);
     }
     
     // Ajouter le connecteur "et" avant le dernier élément si il y en a plusieurs
     if (breakdown.length > 1) {
       const last = breakdown.pop();
-      return breakdown.join(', ') + ' et ' + last;
+      return breakdown.join(', ') + ` ${this.getTranslation('shop.converter.and', 'et')} ` + last;
     }
     
     return breakdown.join('');
@@ -245,7 +270,8 @@ class CurrencyConverterPremium {
   
   updateOptimalRecommendations(baseValue) {
     if (baseValue === 0) {
-      this.bestDisplay.innerHTML = 'Entrez des montants pour voir les recommandations optimales';
+      const enterAmountsText = this.getTranslation('shop.converter.enterAmounts', 'Entrez des montants pour voir les recommandations optimales');
+      this.bestDisplay.innerHTML = enterAmountsText;
       return;
     }
     
@@ -258,21 +284,25 @@ class CurrencyConverterPremium {
     
     let goldValueDisplay = '';
     if (goldValue > 0) {
-      goldValueDisplay = `${this.nf.format(goldValue)} 🥇 or`;
+      goldValueDisplay = `${this.nf.format(goldValue)} 🥇 ${this.getCurrencyName('gold').toLowerCase()}`;
       if (goldRemainder > 0) {
         const remainderBreakdown = this.getOptimalBreakdown(goldRemainder);
-        goldValueDisplay += ` et ${remainderBreakdown}`;
+        goldValueDisplay += ` ${this.getTranslation('shop.converter.and', 'et')} ${remainderBreakdown}`;
       }
     } else {
       goldValueDisplay = this.getOptimalBreakdown(baseValue);
     }
     
+    const optimalConversionText = this.getTranslation('shop.converter.optimalConversion', 'Conversion optimale');
+    const totalText = this.getTranslation('shop.converter.total', 'Total');
+    const valueText = this.getTranslation('shop.converter.value', 'Valeur');
+    
     this.bestDisplay.innerHTML = `
       <div class="text-center">
-        <p class="text-lg mb-2"><strong>Conversion optimale:</strong></p>
+        <p class="text-lg mb-2"><strong>${optimalConversionText}:</strong></p>
         <p class="text-indigo-300 font-medium mb-2">${optimal}</p>
-        <p class="text-sm text-gray-400">Total: ${this.nf.format(totalPieces)} pièces</p>
-        <p class="text-sm text-gray-400"><br>Valeur: ${goldValueDisplay}</p>
+        <p class="text-sm text-gray-400">${totalText}: ${this.nf.format(totalPieces)} ${this.getTranslation('shop.converter.coins', 'pièces')}</p>
+        <p class="text-sm text-gray-400"><br>${valueText}: ${goldValueDisplay}</p>
       </div>
     `;
   }

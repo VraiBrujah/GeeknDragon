@@ -244,10 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.flag-btn[data-lang]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const picked = btn.dataset.lang;
+      // Sauvegarder la langue choisie
       window.GD.setLang(picked);
-      setCurrent(picked);
-      whenSnipcart(() => window.Snipcart.api.session.setLanguage(picked));
-      loadTranslations(picked);
+      // Recharger la page pour que toutes les traductions se mettent à jour
+      window.location.reload();
     });
   });
 

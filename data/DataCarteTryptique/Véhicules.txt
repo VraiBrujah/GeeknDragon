@@ -1,0 +1,462 @@
+nom: Mule
+nom 1: Mule
+model: Véhicules.json
+prix: **8 po**
+prix 1: **8 po**
+poids: **400 kg**\n\n**(900 lb)**
+poids 1: **400 kg**\n\n**(900 lb)**
+type: Bête Moyenne, Non-alignée
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 1
+attca_image2: symbole/vit.png
+attca2: **12 m**\n\n**(40 ft, 8c)**
+image: image/Vehicules/mule.png
+description: \n\n>---\n\nLes **mules** sont des animaux de bât fiables, connus pour leur force et leur endurance. Elles sont souvent utilisées pour transporter de lourdes charges sur des terrains difficiles.\n\n>---\n\n**Classe d'Armure:** 10\n\n**Points de Vie:** 11 (2d8 + 2)\n\n**Vitesse:** 12 m (40 ft, 8c)\n\n>---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 14 (+2) | 10 (+0) | 13 (+1) | 2 (-4) | 10 (+0) | 5 (-3) |\n\n>---\n\n**Sens:** Perception passive 10\n\n**Langues:** Aucune\n\n**Bonus de Maîtrise:** +2\n\n**Capacités spéciales**\n\n>- **Bête de Bât:** La mule compte comme une créature d'une taille supérieure pour déterminer sa capacité de charge.\n\n**Actions**\n\n>- **Sabots :** *Attaque d'Arme de Mêlée:* +4 pour toucher, portée <br>**1.5 m (5 ft, 1c)**, une cible. *Touché :* **4 (1d4 + 2) dégâts contondants**.\n\n>---\n\n**Capacité de Charge:** 210 kg (420 lb)
+
+nom: Chameau
+nom 1: Chameau
+model: Véhicules.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **500 kg**\n\n**(1 100 lb)**
+poids 1: **500 kg**\n\n**(1 100 lb)**
+type: Bête Grande, Non-alignée
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 1
+attca_image2: symbole/vit.png
+attca2: **15 m**\n\n**(50 ft, 10c)**
+image: image/Vehicules/camel.png
+description: \n\n>---\n\nLes **chameaux** sont adaptés aux environnements désertiques, capables de transporter de lourdes charges et de parcourir de longues distances sans eau. Ils sont souvent utilisés comme animaux de bât et montures dans les régions arides.\n\n>---\n\n**Classe d'Armure:** 10\n\n**Points de Vie:** 17 (2d10 + 6)\n\n**Vitesse:** 15 m (50 ft, 10c)\n\n>---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 15 (+2) | 8 (-1) | 16 (+3) | 2 (-4) | 10 (+0) | 6 (-2) |\n\n>---\n\n**Sens:** Perception passive 10\n\n**Langues:** Aucune\n\n**Bonus de Maîtrise:** +2\n\n**Capacités spéciales :**\n\n>- **Adaptation au Désert:** Le chameau peut survivre jusqu'à **7 jours sans eau** dans des conditions normales.\n\n**Actions**\n\n>- **Morsure :** *Attaque d'Arme de Mêlée:* +4 pour toucher, portée <br>**1.5 m (5 ft, 1c)**, une cible. *Touché :* **4 (1d4 + 2) dégâts perforants**.\n\n>---\n\n**Capacité de Charge:** 240 kg (450 lb)
+
+nom: Cheval de Guerre
+nom 1: Cheval de Guerre
+model: Véhicules.json
+prix: **400 po**
+prix 1: **400 po**
+poids: **540 kg**\n\n**(1 200 lb)**
+poids 1: **540 kg**\n\n**(1 200 lb)**
+type: Bête Grande, Non-alignée
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 1
+attca_image2: symbole/vit.png
+attca2: **18 m**\n\n**(60 ft, 12c)**
+image: image/Vehicules/warhorse.png
+description: \n\n>---\n\nLes **chevaux de guerre** sont puissants et entraînés pour le combat, capables de charger au cœur de la bataille tout en portant des cavaliers lourdement armés.\n\n>---\n\n**Classe d'Armure:** 11\n\n**Points de Vie:** 19 (3d10 + 3)\n\n**Vitesse:** 18 m (60 ft, 12c)\n\n>---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 18 (+4) | 12 (+1) | 13 (+1) | 2 (-4) | 12 (+1) | 7 (-2) |\n\n>---\n\n**Sens:** Perception passive 11\n\n**Langues:** Aucune\n\n**Bonus de Maîtrise:** +2\n\n**Actions**\n\n>- **Sabots :** *Attaque d'Arme de Mêlée:* +6 pour toucher, portée <br>**1.5 m (5 ft, 1c)**, une cible. *Touché :* **9 (2d4 + 4) dégâts contondants**.\n\n>- **Charge Piétinante :** Si le cheval de guerre se déplace d'au moins **6 m (20 ft)** en ligne droite vers une créature et la touche avec une **attaque de Sabots** au même tour, la cible subit **5 (2d4) dégâts contondants supplémentaires** et doit réussir un **jet de sauvegarde de Force (DC 14)** ou être **renversée au sol**.\n\n>---\n\n**Capacité de Charge:** 270 kg (540 lb)
+
+nom: Cheval de Selle
+nom 1: Cheval de Selle
+model: Véhicules.json
+prix: **75 po**
+prix 1: **75 po**
+poids: **450 kg**\n\n**(1 000 lb)**
+poids 1: **450 kg**\n\n**(1 000 lb)**
+type: Bête Grande, Non-alignée
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 1
+attca_image2: symbole/vit.png
+attca2: **18 m**\n\n**(60 ft, 12c)**
+image: image/Vehicules/riding_horse.png
+description: \n\n>---\n\nLes **chevaux de selle** sont élevés pour leur vitesse et leur agilité, les rendant idéaux pour les voyages rapides et les tâches de cavalerie légère.\n\n>---\n\n**Classe d'Armure:** 11\n\n**Points de Vie:** 13 (2d10 + 2)\n\n**Vitesse:** 18 m (60 ft, 12c)\n\n>---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 16 (+3) | 13 (+1) | 12 (+1) | 2 (-4) | 11 (+0) | 7 (-2) |\n\n>---\n\n**Sens:** Perception passive 10\n\n**Langues:** Aucune\n\n**Bonus de Maîtrise:** +2\n\n**Actions**\n\n>- **Sabots :** *Attaque d'Arme de Mêlée:* +5 pour toucher, portée <br>**1.5 m (5 ft, 1c)**, une cible. *Touché :* **7 (1d8 + 3) dégâts contondants**.\n\n>---\n\n**Capacité de Charge:** 240 kg (480 lb)
+
+nom: Cheval de Trait
+nom 1: Cheval de Trait
+model: Véhicules.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **540 kg**\n\n**(1 200 lb)**
+poids 1: **540 kg**\n\n**(1 200 lb)**
+type: Bête Grande, Non-alignée
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 1
+attca_image2: symbole/vit.png
+attca2: **12 m**\n\n**(40 ft, 8c)**
+image: image/Vehicules/draft_horse.png
+description: \n\n>---\n\nLes **chevaux de trait** sont robustes et élevés pour leur force et leur endurance. Ils sont fréquemment utilisés pour tirer des chariots, labourer les champs et transporter de lourdes charges.\n\n>---\n\n**Classe d'Armure:** 10\n\n**Points de Vie:** 15 (2d10 + 4)\n\n**Vitesse:** 12 m (40 ft, 8c)\n\n>---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 18 (+4) | 10 (+0) | 15 (+2) | 2 (-4) | 11 (+0) | 7 (-2) |\n\n>---\n\n**Sens:** Perception passive 10\n\n**Langues:** Aucune\n\n**Bonus de Maîtrise:** +2\n\n**Actions**\n\n>- **Sabots :** *Attaque d'Arme de Mêlée:* +6 pour toucher, portée <br>**1.5 m (5 ft, 1c)**, une cible. *Touché :* **6 (1d4 + 4) dégâts contondants**.\n\n>---\n\n**Capacité de Charge:** 270 kg (540 lb)
+
+nom: Éléphant
+nom 1: Éléphant
+model: Véhicules.json
+prix: **200 po**
+prix 1: **200 po**
+poids: **2 700 kg**\n\n**(6 000 lb)**
+poids 1: **2 700 kg**\n\n**(6 000 lb)**
+type: Bête Énorme, Non-alignée
+attca_image: symbole/equip.png
+attca: 2
+attca_image1: symbole/passag.png
+attca1: 4
+attca_image2: symbole/vit.png
+attca2: **12 m**\n\n**(40 ft, 8c)**
+image: image/Vehicules/elephant.png
+description: \n\n>---\n\nLes **éléphants** sont des créatures massives souvent utilisées comme bêtes de somme ou dans des rôles cérémoniels. Ils peuvent transporter de lourdes charges et intimider les ennemis sur le champ de bataille.\n\n>---\n\n**Classe d'Armure:** 12\n\n**Points de Vie:** 76 (8d12 + 24)\n\n**Vitesse:** 12 m (40 ft, 8c)\n\n>---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 22 (+6) | 9 (-1) | 17 (+3) | 3 (-4) | 11 (+0) | 6 (-2) |\n\n>---\n\n**Sens:** Perception passive 10\n\n**Langues:** Aucune\n\n**Bonus de Maîtrise:** +2\n\n**Actions**\n\n>- **Empalement :** *Attaque d'Arme de Mêlée:* +8 pour toucher, portée <br>**1.5 m (5 ft, 1c)**, une cible. *Touché :* **15 (2d8 + 6) dégâts perforants**. Si l'éléphant s'est déplacé d'au moins **6 m (20 ft)** en ligne droite avant l'attaque, la cible est également **renversée au sol**.\n\n**Actions Bonus :**\n\n>- **Piétinement :** *Jet de sauvegarde de Dextérité :* **DC 16**, une créature dans un rayon de **1.5 m (5 ft, 1c)** ayant la condition **à terre**. *Échec :* **17 (2d10 + 6) dégâts contondants**. *Réussite :* Moitié des dégâts.\n\n>---\n\n**Capacité de Charge:** 660 kg (1 320 lb, 1)
+
+nom: Molosse
+nom 1: Molosse
+model: Véhicules.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **40 kg**\n\n**(90 lb)**
+poids 1: **40 kg**\n\n**(90 lb)**
+type: Bête Moyenne, Non-alignée
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 0
+attca_image2: symbole/vit.png
+attca2: **12 m**\n\n**(40 ft, 8c)**
+image: image/Vehicules/mastiff.png
+description: \n\n>---\n\nLes **molosses** sont de grands chiens puissants, souvent utilisés pour la chasse, la garde ou comme compagnons fidèles des aventuriers.\n\n>---\n\n**Classe d'Armure:** 12\n\n**Points de Vie:** 5 (1d8 + 1)\n\n**Vitesse:** 12 m (40 ft, 8c)\n\n>---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 13 (+1) | 14 (+2) | 12 (+1) | 3 (-4) | 12 (+1) | 7 (-2) |\n\n>---\n\n**Compétences :** Perception +5\n\n**Sens :** Vision dans le noir 18 m (60 ft), Perception passive 15\n\n**Langues :** Aucune\n\n**Bonus de Maîtrise :** +2\n\n**Actions**\n\n>- **Morsure :** *Attaque d'Arme de Mêlée :* +3 pour toucher, portée <br>**1.5 m (5 ft, 1c)**, une cible. *Touché :* **4 (1d6 + 1) dégâts perforants**. Si la cible est de taille **Grande** ou inférieure, elle est également **à terre**.\n\n>---\n\n**Capacité de Charge:** 97.5 kg (195 lb)
+
+nom: Poney
+nom 1: Poney
+model: Véhicules.json
+prix: **30 po**
+prix 1: **30 po**
+poids: **270 kg**\n\n**(600 lb)**
+poids 1: **270 kg**\n\n**(600 lb)**
+type: Bête Moyenne, Non-alignée
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 1
+attca_image2: symbole/vit.png
+attca2: **12 m**\n\n**(40 ft, 8c)**
+image: image/Vehicules/pony.png
+description: \n\n>---\n\nLes **poneys** sont plus petits que les chevaux, mais sont appréciés pour leur force, leur endurance et leur capacité à transporter des cavaliers ou des fournitures.\n\n>---\n\n**Classe d'Armure:** 10\n\n**Points de Vie:** 11 (2d8 + 2)\n\n**Vitesse:** 12 m (40 ft, 8c)\n\n>---\n\n| **FOR** | **DEX** | **CON** | **INT** | **SAG** | **CHA** |\n|---------|---------|---------|---------|---------|---------|\n| 15 (+2) | 10 (+0) | 13 (+1) | 2 (-4) | 11 (+0) | 7 (-2) |\n\n>---\n\n**Sens :** Perception passive 10\n\n**Langues :** Aucune\n\n**Bonus de Maîtrise :** +2\n\n**Actions**\n\n>- **Sabots :** *Attaque d'Arme de Mêlée :* +4 pour toucher, portée <br>**1.5 m (5 ft, 1c)**, une cible. *Touché :* **4 (1d4 + 2) dégâts contondants**.\n\n>---\n\n**Capacité de Charge:** 112.5 kg (225 lb)
+
+nom: Barde
+nom 1: Barde
+model: Véhicules.json
+prix: **x4**
+prix 1: **x4**
+poids: **x2**
+poids 1: **x2**
+type: Armure de monture
+attca_image: symbole/ac.png
+attca: Variable
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Vehicules/horse_barding.png
+description: \n\n>---\n\nUne **barde** est une armure spécialement conçue pour protéger une monture au combat ou dans des conditions dangereuses. Elle existe en plusieurs types, offrant des niveaux croissants de protection au détriment du poids et de la mobilité.\n\n**Règles pour la Barde:**\n\n>- Une barde suit les mêmes règles que les armures standard, mais **pèse deux fois plus lourd** et coûte **quatre fois plus cher**.\n\n>- Une monture doit être formée au port de la barde pour éviter d'avoir un désavantage aux tests de **Dextérité**, aux jets de sauvegarde et aux attaques.\n\n**Exemples de Barde:**\n\n>- **Armure légère:** Barde en cuir\n>- **Armure intermédiaire:** Barde en écailles\n>- **Armure lourde:** Barde en plaques
+
+nom: Barde en Cuir
+nom 1: Barde en Cuir
+model: Véhicules.json
+prix: **40 po**
+prix 1: **40 po**
+poids: **10 kg**\n\n**(22 lb)**
+poids 1: **10 kg**\n\n**(22 lb)**
+type: Armure légère pour monture
+attca_image: symbole/ac.png
+attca: 11 + Mod. Dex
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+discrétion: Oui
+image: image/Vehicules/barde-en-cuir.png
+description: \n\n>---\n\nLa **barde en cuir** est fabriquée à partir de cuir tanné robuste, offrant une protection adéquate tout en préservant la vitesse et l'agilité de la monture. Elle est idéale pour les éclaireurs et les messagers.\n\n>---\n\n**Mécanique:**\n\n>- **Classe d'Armure (CA):** 11 + Mod. de **Dextérité**
+
+nom: Barde en Écailles
+nom 1: Barde en Écailles
+model: Véhicules.json
+prix: **200 po**
+prix 1: **200 po**
+poids: **45 kg**\n\n**(100 lb)**
+poids 1: **45 kg**\n\n**(100 lb)**
+type: Armure intermédiaire pour monture
+attca_image: symbole/ac.png
+attca: 14 + Mod. Dex (max +2)
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+discrétion: Non
+image: image/Vehicules/barde-en-ecailles.png
+description: \n\n>---\n\nLa **barde en écailles** est composée de plaques métalliques qui se chevauchent, offrant une protection solide tout en conservant une certaine flexibilité. Elle est idéale pour les montures utilisées dans les batailles.\n\n>---\n\n**Mécanique:**\n\n>- **Classe d'Armure (CA):** 14 + Mod. de **Dextérité** (max +2)\n\n>- **Désavantage:** Impose un **Désavantage** aux tests de **Dextérité (Discrétion)**.
+
+nom: Barde en Plaques
+nom 1: Barde en Plaques
+model: Véhicules.json
+prix: **6 000 po**
+prix 1: **6 000 po**
+poids: **65 kg**\n\n**(140 lb)**
+poids 1: **65 kg**\n\n**(140 lb)**
+type: Armure lourde pour monture
+attca_image: symbole/ac.png
+attca: 18
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+discrétion: Non
+image: image/Vehicules/barde-harnois.png
+description: \n\n>---\n\nLa **barde en plaques** est l'ultime protection pour une monture, constituée de plaques d'acier épaisses. Bien qu'elle offre une défense exceptionnelle, elle réduit considérablement la vitesse et l'agilité de la monture.\n\n>---\n\n**Mécanique:**\n\n>- **Classe d'Armure (CA):** 18\n\n>- **Désavantage:** Impose un **Désavantage** aux tests de **Dextérité (Discrétion)**.
+
+nom: Calèche
+nom 1: Calèche
+model: Véhicules.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **300 kg**\n\n**(600 lb)**
+poids 1: **300 kg**\n\n**(600 lb)**
+type: Véhicule (Terrestre)
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 4
+attca_image2: symbole/vit.png
+attca2: **8 km/h**\n\n**(5 mph, 40c)**
+image: image/Vehicules/carriage.png
+description: \n\n>---\n\nUne **Calèche** est un véhicule couvert à quatre roues conçu pour transporter confortablement des passagers sur de longues distances. Il est généralement tiré par deux chevaux ou plus.\n\n**Spécifications :**\n\n>- **Capacité :** Jusqu'à **4 passagers** et une cargaison modérée.\n\n>- **Structure :** Cabine fermée avec sièges rembourrés.\n\n>- **Exigence de harnachement :** **2 chevaux minimum**.\n\n**Mécanismes :**\n\n>- Les animaux harnachés peuvent tirer jusqu'à **5 fois leur capacité de transport**, poids de la calèche inclus.\n\n>- Adapté aux **longs trajets** sur des routes bien entretenues.\n\n>- Offre un **abri contre les intempéries** et une **intimité basique**.\n\n**Utilisation en jeu :**\n\n>- Idéal pour les nobles, marchands ou dignitaires.\n\n>- Peut attirer des **bandits** sur des routes moins sécurisées.\n\n>- Peut être personnalisé avec du **bois renforcé ou des pièges**.
+
+
+nom: Charrette
+nom 1: Charrette
+model: Véhicules.json
+prix: **15 po**
+prix 1: **15 po**
+poids: **100 kg**\n\n**(200 lb)**
+poids 1: **100 kg**\n\n**(200 lb)**
+type: Véhicule (Terrestre)
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 1
+attca_image2: symbole/vit.png
+attca2: **8 km/h**\n\n**(5 mph, 40c)**
+image: image/Vehicules/cart.png
+description: \n\n>---\n\nUne **Charrette** est un véhicule simple à deux roues principalement utilisé pour transporter des marchandises et des cargaisons légères. Elle est généralement tirée par un animal de trait.\n\n**Spécifications :**\n\n>- **Capacité :** Jusqu'à **1 passager** et une cargaison importante.\n\n>- **Structure :** Plateforme ouverte avec des côtés en bois.\n\n>- **Exigence de harnachement :** **1 cheval ou une mule minimum**.\n\n**Mécanismes :**\n\n>- Les animaux harnachés peuvent tirer jusqu'à **5 fois leur capacité de transport**, poids de la charrette inclus.\n\n>- Adaptée aux **courtes distances** ou aux trajets lents.\n\n>- Nécessite un **terrain plat ou stable**.\n\n**Utilisation en jeu :**\n\n>- Couramment utilisée par les fermiers, commerçants et aventuriers.\n\n>- Vitesse limitée par rapport à des véhicules plus sophistiqués.\n\n>- Vulnérable au **vol ou aux dommages**.
+
+nom: Chariot
+nom 1: Chariot
+model: Véhicules.json
+prix: **35 po**
+prix 1: **35 po**
+poids: **200 kg**\n\n**(400 lb)**
+poids 1: **200 kg**\n\n**(400 lb)**
+type: Véhicule (Terrestre)
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 2
+attca_image2: symbole/vit.png
+attca2: **8 km/h**\n\n**(5 mph, 40c)**
+image: image/Vehicules/wagon.png
+description: \n\n>---\n\nUn **Chariot** est un véhicule robuste à quatre roues conçu pour transporter des marchandises lourdes et plusieurs passagers. Il est généralement tiré par deux animaux de trait ou plus.\n\n**Spécifications :**\n\n>- **Capacité :** Jusqu'à **2 passagers** et une cargaison volumineuse.\n\n>- **Structure :** Cadre en bois avec une bâche optionnelle.\n\n>- **Exigence de harnachement :** **2 chevaux ou bœufs minimum**.\n\n**Mécanismes :**\n\n>- Les animaux harnachés peuvent tirer jusqu'à **5 fois leur capacité de transport**, poids du chariot inclus.\n\n>- Adapté aux **longs trajets et aux routes commerciales importantes**.\n\n>- Nécessite des **routes stables** pour un voyage fluide.\n\n**Utilisation en jeu :**\n\n>- Courant parmi les **marchands et les caravanes de ravitaillement**.\n\n>- Offre un **espace de stockage important**.\n\n>- Peut attirer des **bandits** sur les routes commerciales.
+
+nom: Traîneau
+nom 1: Traîneau
+model: Véhicules.json
+prix: **20 po**
+prix 1: **20 po**
+poids: **150 kg**\n\n**(300 lb)**
+poids 1: **150 kg**\n\n**(300 lb)**
+type: Véhicule (Terrestre/Neige)
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 1
+attca_image2: symbole/vit.png
+attca2: **5 km/h**\n\n**(3 mph, 24c)**
+image: image/Vehicules/sled.png
+description: \n\n>---\n\nUn **Traîneau** est un véhicule plat conçu pour se déplacer sur la neige ou la glace. Il est généralement tiré par des chiens, des chevaux ou d'autres animaux de trait.\n\n**Spécifications :**\n\n>- **Capacité :** **1 passager** et une cargaison modérée.\n\n>- **Structure :** Plateforme ouverte avec des cordes ou des attaches en cuir.\n\n>- **Exigence de harnachement :** **1 animal ou plus adapté au climat neigeux**.\n\n**Mécanismes :**\n\n>- Les animaux harnachés peuvent tirer jusqu'à **5 fois leur capacité de transport**, poids du traîneau inclus.\n\n>- Adapté aux **environnements enneigés ou glacés**.\n\n>- Inefficace sur les terrains secs ou durs.\n\n**Utilisation en jeu :**\n\n>- Essentiel pour les **explorations arctiques** et les terrains enneigés.\n\n>- Plus lent que les véhicules à roues mais fiable dans la neige.
+
+nom: Carriole
+nom 1: Carriole
+model: Véhicules.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **50 kg**\n\n**(100 lb)**
+poids 1: **50 kg**\n\n**(100 lb)**
+type: Véhicule (Terrestre)
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 1
+attca_image2: symbole/vit.png
+attca2: **16 km/h**\n\n**(10 mph, 80c)**
+image: image/Vehicules/chariot.png
+description: \n\n>---\n\nUne **Carriole** est un véhicule léger à deux roues conçu pour la vitesse et la maniabilité en combat ou lors d'événements cérémoniels. Il est généralement tiré par deux chevaux.\n\n**Spécifications :**\n\n>- **Capacité :** **1 passager** et une petite cargaison.\n\n>- **Structure :** Design ouvert avec protection minimale.\n\n>- **Exigence de harnachement :** **2 chevaux minimum**.\n\n**Utilisation en jeu :**\n\n>- Utilisé dans les **arènes de gladiateurs** ou les batailles.\n\n>- Offre une grande vitesse mais une protection minimale.
+
+nom: Selle d'Équitation
+nom 1: Selle d'Équitation
+model: Véhicules.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **12.5 kg**\n\n**(25 lb)**
+poids 1: **12.5 kg**\n\n**(25 lb)**
+type: Équipement de monte
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Vehicules/riding_saddle.png
+description: \n\n>---\n\nUne **selle d'équitation** est conçue pour offrir stabilité et contrôle à un cavalier monté sur une créature standard comme un cheval, une mule ou un poney.\n\n**Caractéristiques:**\n\n>- **Type de monture:** Convient à la plupart des montures standards (chevaux, mules, poneys, etc.)\n\n>- **Avantages:** Assure une assise sécurisée et facilite le contrôle de la monture.\n\n>- **Restrictions:** Ne peut pas être utilisée sur des montures exotiques sans modifications spécifiques.\n\n**Utilisation:** Idéale pour les longs voyages et les déplacements rapides.
+
+nom: Selle Exotique
+nom 1: Selle Exotique
+model: Véhicules.json
+prix: **60 po**
+prix 1: **60 po**
+poids: **20 kg**\n\n**(40 lb)**
+poids 1: **20 kg**\n\n**(40 lb)**
+type: Équipement de monte
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Vehicules/exotic_saddle.png
+description: \n\n>---\n\nUne **selle exotique** est spécialement conçue pour les montures inhabituelles, comme les griffons, les pégases ou d'autres créatures volantes ou aquatiques.\n\n**Caractéristiques:**\n\n>- **Type de monture:** Requise pour les créatures exotiques (griffons, pégases, créatures aquatiques, etc.)\n\n>- **Avantages:** Fournit une assise sécurisée et une maîtrise optimale lors des mouvements spécifiques (vol, nage, etc.)\n\n>- **Restrictions:** Doit être adaptée spécifiquement à chaque type de monture.\n\n**Utilisation:** Indispensable pour les aventuriers chevauchant des créatures extraordinaires.
+
+nom: Selle Militaire
+nom 1: Selle Militaire
+model: Véhicules.json
+prix: **20 po**
+prix 1: **20 po**
+poids: **15 kg**\n\n**(30 lb)**
+poids 1: **15 kg**\n\n**(30 lb)**
+type: Équipement de monte
+attca_image: symbole/vide.png
+attca:
+attca_image1: symbole/vide.png
+attca1:
+attca_image2: symbole/vide.png
+attca2:
+image: image/Vehicules/military_saddle.png
+description: \n\n>---\n\nUne **selle militaire** est renforcée pour offrir une meilleure stabilité au cavalier en situation de combat.\n\n**Caractéristiques:**\n\n>- **Type de monture:** Convient aux montures de guerre (chevaux de guerre, créatures entraînées pour le combat)\n\n>- **Avantages:** Confère **l'avantage** aux tests d'aptitude pour rester en selle lors d'un combat ou d'une manœuvre difficile.\n\n>- **Utilisation en combat:** Dispose de points d'attache pour des armes, un bouclier ou d'autres équipements.\n\n**Utilisation:** Parfait pour les cavaliers engagés dans des batailles ou des situations dangereuses.
+
+nom: Barque
+nom 1: Barque
+model: Véhicules.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **250 kg**\n\n**(500 lb)**
+poids 1: **250 kg**\n\n**(500 lb)**
+type: Véhicule (Aquatique)
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 3
+attca_image2: symbole/vit.png
+attca2: **2.5 km/h**\n\n**(1.5 mph, 15c)**
+image: image/Vehicules/rowboat.png
+description: \n\n>---\n\nUne **barque** est une petite embarcation manuelle idéale pour les traversées courtes sur les rivières, les lacs ou les eaux côtières calmes.\n\n>---\n\n**Équipage requis:** 1 rameur\n\n**Capacité de passagers:** Jusqu'à 3 créatures de taille Moyenne\n\n**Capacité de charge:** **100 kg (220 lb)**\n\n**Vitesse:** Se déplace à **2.5 km/h (1.5 mph, 3c)** lorsqu'elle est manœuvrée par un rameur.\n\n>---\n\n**Structure:**\n>- **Classe d'armure (CA):** 11 (bois léger)\n>- **Points de vie:** 50\n>- **Dimensions:** Longueur 4 m (13', 3c), Largeur 15 m (5', 1c)
+
+nom: Barge
+nom 1: Barge
+model: Véhicules.json
+prix: **3 000 po**
+prix 1: **3 000 po**
+poids: **1 300 kg**\n\n**(3 000 lb)**
+poids 1: **1 300 kg**\n\n**(3 000 lb)**
+type: Véhicule (Aquatique)
+attca_image: symbole/equip.png
+attca: 1
+attca_image1: symbole/passag.png
+attca1: 6
+attca_image2: symbole/vit.png
+attca2: **1.5 km/h**\n\n**(1 mph, 10c)**
+image: image/Vehicules/keelboat.png
+description: \n\n>---\n\nUn **bateau à fond plat** est une embarcation pratique pour les rivières et les eaux peu profondes, souvent utilisée pour le transport de marchandises et de passagers.\n\n>---\n\n**Équipage requis:** 1 personne\n\n**Capacité de passagers:** Jusqu'à 6 créatures de taille Moyenne\n\n**Capacité de charge:** **500 kg (1100 lb)**\n\n**Vitesse:** Se déplace à **1.5 km/h (1 mph, 10c)** lorsqu'il est manœuvré par un équipage expérimenté.\n\n>---\n\n**Structure:**\n>- **Classe d'armure (CA):** 15 (bois renforcé)\n>- **Points de vie:** 100\n>- **Seuil de dégâts:** 10\n>- **Dimensions:** Longueur 12 m (40', 8c), Largeur 3 m (10', 2c)
+
+nom: Bateau à Voiles
+nom 1: Bateau à Voiles
+model: Véhicules.json
+prix: **10 000 po**
+prix 1: **10 000 po**
+poids: **7000 kg**\n\n**(15 000 lb)**
+poids 1: **7000 kg**\n\n**(15 000 lb)**
+type: Véhicule (Aquatique)
+attca_image: symbole/equip.png
+attca: 20
+attca_image1: symbole/passag.png
+attca1: 20
+attca_image2: symbole/vit.png
+attca2: **3 km/h**\n\n**(2 mph, 20c)**
+image: image/Vehicules/sailing_ship.png
+description: \n\n>---\n\nUn **navire à voiles** est un navire polyvalent conçu pour le commerce, l'exploration et le transport de passagers sur de longues distances.\n\n>---\n\n**Équipage requis:** 20 marins\n\n**Capacité de passagers:** Jusqu'à 20 créatures de taille Moyenne\n\n**Capacité de charge:** **100 tonnes (100 000 kg, 220 000 lb)**\n\n**Vitesse:** Se déplace à **3 km/h (2 mph, 20c)** sous des vents favorables.\n\n>---\n\n**Structure:**\n>- **Classe d'armure (CA):** 15 (bois renforcé)\n>- **Points de vie:** 300\n>- **Seuil de dégâts:** 15\n>- **Dimensions:** Longueur 20 m (65', 13c), Largeur 6 m (20', 4c)
+
+nom: Drakkar
+nom 1: Drakkar
+model: Véhicules.json
+prix: **10 000 po**
+prix 1: **10 000 po**
+poids: **4 500 kg**\n\n**(10 000 lb)**
+poids 1: **4 500 kg**\n\n**(10 000 lb)**
+type: Véhicule (Aquatique)
+attca_image: symbole/equip.png
+attca: 40
+attca_image1: symbole/passag.png
+attca1: 150
+attca_image2: symbole/vit.png
+attca2: **4.5 km/h**\n\n**(3 mph, 30c)**
+image: image/Vehicules/longship.png
+description: \n\n>---\n\nUn **drakkar** est un navire long et étroit, conçu pour la vitesse et les raids côtiers.\n\n>---\n\n**Équipage requis:** 40 rameurs\n\n**Capacité de passagers:** Jusqu'à 150 créatures de taille Moyenne\n\n**Capacité de charge:** **10 tonnes (10 000 kg, 22 000 lb, 10) Vitesse:** Se déplace à **4.5 km/h (3 mph, 30c)** avec des rames ou des voiles.\n\n>---\n\n**Structure:**\n>- **Classe d'armure (CA):** 15 (bois robuste)\n>- **Points de vie:** 300\n>- **Seuil de dégâts:** 15\n>- **Dimensions:** Longueur 24 m (80', 16c), Largeur 5 m (16', 3c)
+
+nom: Galère
+nom 1: Galère
+model: Véhicules.json
+prix: **30 000 po**
+prix 1: **30 000 po**
+poids: **30 000 kg**\n\n**(60 000 lb)**
+poids 1: **30 000 kg**\n\n**(60 000 lb)**
+type: Véhicule (Aquatique)
+attca_image: symbole/equip.png
+attca: 80
+attca_image1: symbole/passag.png
+attca1: 150
+attca_image2: symbole/vit.png
+attca2: **6km/h**\n\n**(4 mph, 40c)**
+image: image/Vehicules/galley.png
+description: \n\n>---\n\nUne **galère** est un navire massif utilisé pour le commerce et les opérations militaires, propulsé par des rames et des voiles.\n\n>---\n\n**Équipage requis:** 80 rameurs\n\n**Capacité de passagers:** Jusqu'à 150 créatures de taille Moyenne\n\n**Capacité de charge:** **150 tonnes (150 000 kg, 330 000 lb)**\n\n**Vitesse:** Se déplace à **6km/h (4 mph, 40c)**.\n\n>---\n\n**Structure:**\n>- **Classe d'armure (CA):** 15 (coque renforcée)\n>- **Points de vie:** 500\n>- **Seuil de dégâts:** 20\n>- **Dimensions:** Longueur 50 m (164', 33c), Largeur 10 m (33', 7c)
+
+nom: Navire de Guerre
+nom 1: Navire de Guerre
+model: Véhicules.json
+prix: **25 000 po**
+prix 1: **25 000 po**
+poids: **22 500 kg**\n\n**(50 000 lb)**
+poids 1: **22 500 kg**\n\n**(50 000 lb)**
+type: Véhicule (Aquatique)
+attca_image: symbole/equip.png
+attca: 60
+attca_image1: symbole/passag.png
+attca1: 60
+attca_image2: symbole/vit.png
+attca2: **4km/h**\n\n**(2.5 mph, 25c)**
+image: image/Vehicules/warship.png
+description: \n\n>---\n\nUn **navire de guerre** est un bâtiment lourdement armé et renforcé, conçu pour dominer les batailles navales et résister aux attaques ennemies.\n\n>---\n\n**Équipage requis:** 60 marins\n\n**Capacité de passagers:** Jusqu'à 60 créatures de taille Moyenne\n\n**Capacité de charge:** **200 tonnes (200 000 kg, 440 000 lb)**\n\n**Vitesse:** Se déplace à **4km/h (25 mph, 25c)** sous voile ou propulsion manuelle.\n\n>---\n\n**Structure:**\n>- **Classe d'armure (CA):** 15 (structure renforcée)\n>- **Points de vie:** 500\n>- **Seuil de dégâts:** 20\n>- **Dimensions:** Longueur 40 m (130', 26c), Largeur 10 m (33', 7c)\n\n**Armement:**\n>- **4 Balistes**: Portée 120 m/480 m (400'/1600'). *Dégâts:* **3d10 perforants**.\n>- **2 Catapultes**: Portée 150 m/600 m (500'/2000'). *Dégâts:* **4d10 contondants**, effet de zone (3 m/10', 2c).
+
+nom: Vaisseau Aérien
+nom 1: Vaisseau Aérien
+model: Véhicules.json
+prix: **40 000 po**
+prix 1: **40 000 po**
+poids: **13 500 kg**\n\n**(30 000 lb)**
+poids 1: **13 500 kg**\n\n**(30 000 lb)**
+type: Véhicule (Aérien)
+attca_image: symbole/equip.png
+attca: 10
+attca_image1: symbole/passag.png
+attca1: 20
+attca_image2: symbole/vit.png
+attca2: **12.8km/h**\n\n**(8 mph, 80c)**
+image: image/Vehicules/airship.png
+description: \n\n>---\n\nUn **vaisseau aérien** est une merveille d'ingénierie magique, permettant de voyager sur de vastes distances et au-dessus de terrains infranchissables. Suspendu par une énergie magique, il offre une mobilité et des avantages stratégiques inégalés.\n\n>---\n\n**Équipage requis:** 10\n\n**Capacité de passagers:** Jusqu'à 20 créatures de taille **Moyenne Capacité de transport:** 1 tonne (**1 000 kg**, **2200 lb**, **1 **)\n\n**Vitesse:** Se déplace à **12.8km/h (8 mph, 160c)** lorsqu'il est alimenté par son système de propulsion magique.\n\n>---\n\n**Structure:**\n>- **Classe d'Armure (CA):** 13 (bois renforcé et bouclier magique)\n>- **Points de Vie (PV):** 300\n>- **Dimensions:** Longueur **40 m (130', 26c)**, Largeur **10 m (33', 7c)**\n\n>---\n\n**Caractéristiques spéciales:**\n>- **Capacité de vol:** Peut léviter et manœuvrer librement dans un espace tridimensionnel.\n>- **Altitude maximale:** Fonctionne généralement à une altitude de **3 000 m (10 000 pieds)**.\n\n**Remarques:**\n>- Le **vaisseau aérien** nécessite un équipage qualifié maîtrisant la navigation aérienne.\n>- Les dommages au système de propulsion peuvent entraîner une défaillance catastrophique ou une descente forcée.

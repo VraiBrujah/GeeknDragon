@@ -11,7 +11,8 @@
       "Read(E:\\GitHub\\GeeknDragon/**)",
       "Read(E:\\GitHub\\GeeknDragon/**)",
       "Read(E:\\GitHub\\GeeknDragon/**)",
-      "Bash(php:*)"
+      "Bash(php:*)",
+      "Bash(grep:*)"
     ],
     "deny": [],
     "ask": []

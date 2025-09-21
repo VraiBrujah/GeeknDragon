@@ -1,0 +1,399 @@
+nom: Acolyte
+nom 1: Acolyte
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/acolyte.png
+symbole 2: symbole/acolyte.png
+symbole 3: symbole/acolyte.png
+symbole 4: symbole/acolyte.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Acolyte/acolyte.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant qu'**acolyte**, ton apprentissage sacré ne se limite pas aux prières : il t'accorde des **pouvoirs divins** et des **savoirs pratiques**.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Intuition**, **Religion** | **Matériel de calligraphe** |\n\n<center>## Don associé : Initié à la magie (Clerc)</center>\n\n| \t\tSorts mineurs\t\t  | Sort de niveau 1 | Remplacement des sorts |\n| ------------------------- | ---------------- | ---------------------- |\n| 2 de la liste du Clerc <br> ![Ligne](symbole/LigneD.png) ![Ligne](symbole/LigneD.png) | 1 de la liste du Clerc <br> ![Ligne](symbole/LigneD.png) Toujours préparé <br> **1 fois/repos long** sans emplacement ![Case](symbole/caseDcocher.png) | À chaque niveau, échange possible avec un sort du même niveau de la même liste |\n\n<center>**Répétable**: Peut être choisi plusieurs fois</center>\n\n| Incantation | Valeur | Calcul |\n|---|---|---|\n| Caractéristique d’incantation | ![Ligne](symbole/LigneD5.png) | **Intelligence / Sagesse / Charisme**<br>(au choix à l’acquisition) |\n| Mod. Caract. d’incantation | ![caseD](symbole/caseD5.png) | (Valeur − 10) ÷ 2<br>(arrondi à l’inférieur) |\n| DD des sorts | ![caseD](symbole/caseD5.png) | 8 + Mod. Caract. d’incantation<br>+ Bonus de maîtrise |\n| Bonus d’att. de sort | ![caseD](symbole/caseD5.png) | Mod. Caract. d’incantation<br>+ Bonus de maîtrise |\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n’ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Matériel de calligraphe, livre de prières, symbole sacré, 10 parchemins, une robe et une bourse de 8 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Artisan
+nom 1: Artisan
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/artisan.png
+symbole 2: symbole/artisan.png
+symbole 3: symbole/artisan.png
+symbole 4: symbole/artisan.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Artisan/artisan.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>## Don associé : Façonneur</center>\n\nEn tant qu'**artisan**, ton apprentissage dans l'artisanat ne se limite pas à une seule spécialité : il t'accorde des **capacités polyvalentes** et des **avantages commerciaux**.\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Investigation**, **Persuasion** | **Outils d'artisan** (1 type au choix) |\n\n\n\n| Maîtrise d'outils | Ristourne | Façonnage rapide |\n| ------------------ | --------- | ---------------- |\n| **3 outils d'artisan** de la table Façonnage rapide | **-20%** sur tous objets non magiques | **1 objet/Repos long** (temporaire) |\n\n\n\n<center>### **Table Façonnage rapide**</center>\n\n| Outils d'artisan | Équipement fabriqué | \n|------------------|----------------------| \n| <left>![Case!](symbole/noMaitrise.png) **Outils de bricoleur**</left> | Boîte à amadou, cloche, pelle | \n| <left>![Case!](symbole/noMaitrise.png)  **Outils de charpentier** </left> | Échelle, torche | |\n| <left>![Case!](symbole/noMaitrise.png)  **Outils de forgeron**</left> | Billes, chasses-trappes, grappin, pot en fer, seau |\n| <left>![Case!](symbole/noMaitrise.png)  **Outils de maçon** </left> | Palan |\n| <left>![Case!](symbole/noMaitrise.png) **Outils de menuisier**</left> | Gourdin, massue, bâton de combat |\n| <left>![Case!](symbole/noMaitrise.png) **Outils de potier** </left> | Cruche, lampe |\n| <left>![Case!](symbole/noMaitrise.png) **Outils de tanneur**</left> | Étui, sacoche |\n| <left>![Case!](symbole/noMaitrise.png) **Outils de tisserand**</left> | Corde, filet, panier, tente |\n\n<center>**Objet façonné actuel** (actif jusqu'au prochain Repos long) ![Ligne](symbole/LigneD1.png)</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Outils d'artisan (identiques à ci-dessus), 2 sacoches, tenue de voyage, 32 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Artiste
+nom 1: Artiste
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/artiste.png
+symbole 2: symbole/artiste.png
+symbole 3: symbole/artiste.png
+symbole 4: symbole/artiste.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Artiste/artiste.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant qu'**artiste**, ton apprentissage des arts de la scène t'accorde des **capacités musicales polyvalentes** et le pouvoir d'**inspirer tes alliés**.</center>\n\n| Compétences maîtrisées | Instrument de musique maîtrisé |\n| ---------------------- | --------------- |\n| **Acrobaties**, **Représentation** | ![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD.png) |\n\n<center>## Don associé : Musicien</center>\n\n####<center>Formation aux instruments</center>\n\n | **3** Instruments de musique **maîtrisés** | \n|------------------| \n| <left>![Case!](symbole/noMaitrise.png)  ![Ligne](symbole/LigneD6.png)</left> | \n| <left>![Case!](symbole/noMaitrise.png)  ![Ligne](symbole/LigneD6.png)</left> |\n| <left>![Case!](symbole/noMaitrise.png)  ![Ligne](symbole/LigneD6.png)</left> |\n\n<center>**Chant d'encouragement :** À la fin d'un **Repos court ou long**, jouez un morceau pour octroyer l'**Inspiration héroïque** à un nombre d'alliés égal à votre **bonus de maîtrise**.</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Instrument de musique (identique à ci-dessus), 2 costumes, miroir, parfum, tenue de voyage, 11 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Charlatan
+nom 1: Charlatan
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/charlatan.png
+symbole 2: symbole/charlatan.png
+symbole 3: symbole/charlatan.png
+symbole 4: symbole/charlatan.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Charlatan/charlatan.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **charlatan**, ton apprentissage des arts de la duperie t'a rendu **polyvalent** dans de multiples domaines pour mieux tromper tes cibles.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Escamotage**, **Tromperie** | **Matériel de contrefaçon** |\n\n<center>## Don associé : Doué</center>\n\n| 3 Maîtrise supplémentaire (compétences ou outils) | \n|------------------------ \n| <left>![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD6.png)</left> |  \n| <left>![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD6.png)</left> |\n| <left>![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD6.png)</left> |\n\n<center>**Répétable**: Peut être choisi plusieurs fois, chaque fois avec une liste de sorts différente</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Matériel de contrefaçon, beaux habits, costume, 15 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Criminel
+nom 1: Criminel
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/criminel.png
+symbole 2: symbole/criminel.png
+symbole 3: symbole/criminel.png
+symbole 4: symbole/criminel.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Criminel/criminel.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **criminel**, ton expérience de la vie dans l'ombre t'a rendu constamment **vigilant** et capable de détecter les menaces.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Discrétion**, **Escamotage** | **Outils de voleur** |\n\n<center>## Don associé : Vigilant</center>\n\n| Maîtrise de l'Initiative | Échange d'Initiative |\n| ------------------------ | -------------------- |\n| **+Bonus de maîtrise** au jet d'Initiative | **Échangez** votre Initiative avec celle d'un allié volontaire (après avoir joué) |\n\n<center>**Condition d'échange** : Ni vous ni l'allié ne devez subir l'état *Neutralisé*</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : 2 dagues, outils de voleur, 2 sacoches, pied-de-biche, tenue de voyage, 16 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Ermite
+nom 1: Ermite
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/ermite.png
+symbole 2: symbole/ermite.png
+symbole 3: symbole/ermite.png
+symbole 4: symbole/ermite.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Ermite/ermite.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant qu'**ermite**, ton isolement et ta méditation t'ont enseigné l'art de la **guérison** et de la préservation de la vie.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Médecine**, **Religion** | **Matériel d'herboriste** |\n\n<center>## Don associé : Guérisseur</center>\n\n| \tSoigneur&nbsp;de&nbsp;bataille\t | Retirage de soins |\n| -------------------- | ----------------- |\n| Si vous disposez d'une **trousse de soins**, vous pouvez en **dépenser une utilisation** pour **soigner une créature** dans un rayon de **1,50 m** par une **action Utilisation**. La créature soignée peut **dépenser l'un de ses dés de vie**, et **c'est vous qui lancez ce dé**. La créature **récupère** autant de **points de vie** que le **total obtenu + votre bonus de maîtrise**. | Chaque fois que vous **lancez un dé** pour déterminer le nombre de **points de vie** que vous faites récupérer avec un **sort** ou le bénéfice **Soigneur de bataille** de ce don, vous pouvez **relancer le dé** si le résultat est **1**, le **nouveau jet s'appliquant alors**. |\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Bâton de combat, matériel d'herboriste, huile (3 flasques), lampe, livre (philosophie), sac de couchage, tenue de voyage, 16 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement\n\n
+
+nom: Fermier
+nom 1: Fermier
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/fermier.png
+symbole 2: symbole/fermier.png
+symbole 3: symbole/fermier.png
+symbole 4: symbole/fermier.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Fermier/fermier.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **fermier**, ta vie au contact de la nature t'a rendu plus **résistant** et t'a appris à soigner les créatures vivantes.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Dressage**, **Nature** | **Outils de charpentier** |\n\n<center>## Don associé : Robuste</center>\n\n| Points de vie supplémentaires Niv. 1 | Augmentation permanente |\n| ----------------------------- | ----------------------- |\n| **+2** | **+2** pv à chaque niveau gagné |\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Serpe, outils de charpentier, trousse de soins, pelle, pot en fer, tenue de voyage, 30 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Garde
+nom 1: Garde
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/garde.png
+symbole 2: symbole/garde.png
+symbole 3: symbole/garde.png
+symbole 4: symbole/garde.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Garde/garde.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **garde**, ton expérience de surveillance et de protection t'a rendu constamment **vigilant** et capable de détecter les menaces.</center>\n\n| Compétences maîtrisées | Boîte de jeux maîtrisé |\n| ---------------------- | --------------- |\n| **Athlétisme**, **Perception** | ![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD.png) |\n\n<center>## Don associé : Vigilant</center>\n\n| Maîtrise de l'Initiative | Échange d'Initiative |\n| ------------------------ | -------------------- |\n| **+Bonus de maîtrise** au jet d'Initiative | **Échangez** votre Initiative avec celle d'un allié volontaire (après avoir joué) |\n\n<center>**Condition d'échange** : Ni vous ni l'allié ne devez subir l'état *Neutralisé*</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Arbalète légère + 20 carreaux, carquois, lance, boîte de jeux (identique à ci-dessus), lanterne à capote, menottes, tenue de voyage, 12 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Guide
+nom 1: Guide
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/guide.png
+symbole 2: symbole/guide.png
+symbole 3: symbole/guide.png
+symbole 4: symbole/guide.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Guide/guide.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **guide**, ton expérience de la nature sauvage t'a enseigné les **secrets de la magie naturelle** et la survie en milieu hostile.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Discrétion**, **Survie** | **Outils de cartographe** |\n\n<center>## Don associé : Initié à la magie (Druide)</center>\n\n| \t\tSorts mineurs\t\t  | Sort de niveau 1 | Remplacement des sorts |\n| ------------------------- | ---------------- | ---------------------- |\n| 2 de la liste du Druide <br> ![Ligne](symbole/LigneD.png) ![Ligne](symbole/LigneD.png) | 1 de la liste du Druide <br> ![Ligne](symbole/LigneD.png) Toujours préparé <br> **1 fois/repos long** sans emplacement ![Case](symbole/caseDcocher.png) | À chaque niveau, échange possible avec un sort du même niveau de la même liste |\n\n<center>**Répétable**: Peut être choisi plusieurs fois</center>\n\n| Incantation | Valeur | Calcul |\n|---|---|---|\n| Caractéristique d'incantation | ![Ligne](symbole/LigneD5.png) | **Intelligence / Sagesse / Charisme**<br>(au choix à l'acquisition) |\n| Mod. Caract. d'incantation | ![caseD](symbole/caseD5.png) | (Valeur − 10) ÷ 2<br>(arrondi à l'inférieur) |\n| DD des sorts | ![caseD](symbole/caseD5.png) | 8 + Mod. Caract. d'incantation<br>+ Bonus de maîtrise |\n| Bonus d'att. de sort | ![caseD](symbole/caseD5.png) | Mod. Caract. d'incantation<br>+ Bonus de maîtrise |\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Arc court + 20 flèches, carquois, outils de cartographe, sac de couchage, tente, tenue de voyage, 3 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Marchand
+nom 1: Marchand
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/marchand.png
+symbole 2: symbole/marchand.png
+symbole 3: symbole/marchand.png
+symbole 4: symbole/marchand.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Marchand/marchand.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **marchand**, ton expérience du commerce t'a appris à saisir les **opportunités** et à tirer parti de la **chance** quand elle se présente.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Dressage**, **Persuasion** | **Instruments de navigateur** |\n\n<center>## Don associé : Chanceux</center>\n\n| Points de chance | Avantage | Désavantage |\n| ---------------- | -------- | ----------- |\n| **Bonus de maîtrise** points/Repos long | **1 point** : Avantage sur un Test d20 | **1 point** : Désavantage à un adversaire sur son jet d'attaque contre vous |\n\n<center>**Points de chance actuels** : ![caseD](symbole/caseD5.png) / ![caseD](symbole/caseD5.png)</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Instruments de navigateur, 2 sacoches, tenue de voyage, 22 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Marin
+nom 1: Marin
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/marin.png
+symbole 2: symbole/marin.png
+symbole 3: symbole/marin.png
+symbole 4: symbole/marin.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Marin/marin.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **marin**, ta vie en mer t'a appris à te **battre** avec les moyens du bord et à survivre dans des environnements hostiles.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Acrobaties**, **Perception** | **Instruments de navigateur** |\n\n<center>## Don associé : Bagarreur de tavernes</center>\n\n| Attaque à mains nues améliorée | Relancer des dégâts | Armement improvisé |\n| ------------------------------ | ------------------- | ------------------ |\n| **1d4 + Force** dégâts contondants | Relancez une fois chaque **1** sur les dés de dégâts | **Maîtrise** des armes improvisées |\n\n**Bourrade** : Lors d'une attaque à mains nues (action Attaque), vous pouvez infliger les dégâts normaux et **repousser** la cible de 1,50 m. (**1/tour**)\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Dague, instruments de navigateur, corde, tenue de voyage, 20 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Noble
+nom 1: Noble
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/noble.png
+symbole 2: symbole/noble.png
+symbole 3: symbole/noble.png
+symbole 4: symbole/noble.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Noble/noble.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **noble**, ton éducation aristocratique t'a rendu **polyvalent** dans de nombreux domaines nécessaires à ton rang.</center>\n\n| Boîte de jeux maîtrisé | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Histoire**, **Persuasion** | ![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD.png) |\n\n<center>## Don associé : Doué</center>\n\n| 3 Maîtrise supplémentaire (compétences ou outils) | \n|------------------------ \n| <left>![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD6.png)</left> |  \n| <left>![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD6.png)</left> |\n| <left>![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD6.png)</left> |\n\n<center>**Répétable**: Peut être choisi plusieurs fois</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Boîte de jeux (du même type que ci-dessus), beaux habits, parfum, 29 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Sage
+nom 1: Sage
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/sage.png
+symbole 2: symbole/sage.png
+symbole 3: symbole/sage.png
+symbole 4: symbole/sage.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Sage/sage.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **sage**, ton apprentissage t'a initié aux **mystères de la magie** et aux **secrets de l'érudition**.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Arcanes**, **Histoire** | **Matériel de calligraphe** |\n\n<center>## Don associé : Initié à la magie (Magicien)</center>\n\n| \t\tSorts mineurs\t\t  | Sort de niveau 1 | Remplacement des sorts |\n| ------------------------- | ---------------- | ---------------------- |\n| 2 de la liste du Magicien <br> ![Ligne](symbole/LigneD.png) ![Ligne](symbole/LigneD.png) | 1 de la liste du Magicien <br> ![Ligne](symbole/LigneD.png) Toujours préparé <br> **1 fois/repos long** sans emplacement ![Case](symbole/caseDcocher.png) | À chaque niveau, échange possible avec un sort du même niveau de la même liste |\n\n<center>**Répétable**: Peut être choisi plusieurs fois</center>\n\n| Incantation | Valeur | Calcul |\n|---|---|---|\n| Caractéristique d'incantation | ![Ligne](symbole/LigneD5.png) | **Intelligence / Sagesse / Charisme**<br>(au choix à l'acquisition) |\n| Mod. Caract. d'incantation | ![caseD](symbole/caseD5.png) | (Valeur − 10) ÷ 2<br>(arrondi à l'inférieur) |\n| DD des sorts | ![caseD](symbole/caseD5.png) | 8 + Mod. Caract. d'incantation<br>+ Bonus de maîtrise |\n| Bonus d'att. de sort | ![caseD](symbole/caseD5.png) | Mod. Caract. d'incantation<br>+ Bonus de maîtrise |\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Bâton de combat, matériel de calligraphe, livre (d'histoire), parchemin (8 feuilles), robe, 8 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Scribe
+nom 1: Scribe
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/scribe.png
+symbole 2: symbole/scribe.png
+symbole 3: symbole/scribe.png
+symbole 4: symbole/scribe.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Scribe/scribe.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **scribe**, ton apprentissage de l'écriture et de la recherche t'a rendu **polyvalent** dans de multiples compétences intellectuelles.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Investigation**, **Perception** | **Matériel de calligraphe** |\n\n<center>## Don associé : Doué</center>\n\n| 3 Maîtrise supplémentaire (compétences ou outils) | \n|------------------------ \n| <left>![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD6.png)</left> |  \n| <left>![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD6.png)</left> |\n| <left>![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD6.png)</left> |\n\n<center>**Répétable**: Peut être choisi plusieurs fois</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Matériel de calligraphe, beaux habits, lampe, huile (3 flasques), parchemin (12 feuilles), 23 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Soldat
+nom 1: Soldat
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/soldat.png
+symbole 2: symbole/soldat.png
+symbole 3: symbole/soldat.png
+symbole 4: symbole/soldat.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Soldat/soldat.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **soldat**, ton entraînement militaire t'a appris à porter des coups **dévastateurs** au moment opportun.</center>\n\n| Compétences maîtrisées | Boîte de jeux maîtrisée |\n| ---------------------- | --------------- |\n| **Athlétisme**, **Intimidation** | ![Case!](symbole/noMaitrise.png) ![Ligne](symbole/LigneD.png) |\n\n<center>## Don associé : Sauvagerie martiale</center>\n\n| Coup critique amélioré |\n| ---------------------- |\n| **1/tour** : Lancez **2 fois** les dés de dégâts de l'arme et utilisez l'un des résultats |\n\n<center>**Condition** : Uniquement lors d'un **coup qui touche** avec une arme</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : Arc court + 20 flèches, carquois, lance, boîte de jeux (du même type que ci-dessus), trousse de soins, tenue de voyage, 14 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement
+
+nom: Voyageur
+nom 1: Voyageur
+model: Historique.json
+type: Historique
+recto: arriere_plan/historique.png
+symbole 1: symbole/voyageur.png
+symbole 2: symbole/voyageur.png
+symbole 3: symbole/voyageur.png
+symbole 4: symbole/voyageur.png
+taille image: symbole/vide.png
+taille:
+age image: symbole/vide.png
+age:
+deplacement image: symbole/vide.png
+deplacement:
+image: image/Historique/Voyageur/voyageur.png
+dv:
+dv image: symbole/vide.png
+DD5: 5e 2024 Compatible
+DD5-2: 5e 2024 Compatible
+nomali: Nom du Personnage
+aligne: Alignement
+don: <center>En tant que **voyageur** de la rue, tu as appris à compter sur ta **chance** pour t'en sortir dans les moments difficiles.</center>\n\n| Compétences maîtrisées | Outil maîtrisé |\n| ---------------------- | --------------- |\n| **Discrétion**, **Intuition** | **Outils de voleur** |\n\n<center>## Don associé : Chanceux</center>\n\n| Points de chance | Avantage | Désavantage |\n| ---------------- | -------- | ----------- |\n| **Bonus de maîtrise** points/Repos long | **1 point** : Avantage sur un Test d20 | **1 point** : Désavantage à un adversaire sur son jet d'attaque contre vous |\n\n<center>**Points de chance actuels** : ![caseD](symbole/caseD5.png) / ![caseD](symbole/caseD5.png)</center>\n\n| Catégorie | Maîtrises |\n|---|---|\n| Armures | ![Case!](symbole/caseD2cocher.png) Légères ![Case!](symbole/caseD2cocher.png) Intermédiaires ![Case!](symbole/caseD2cocher.png) Lourdes ![Case!](symbole/caseD2cocher.png) Boucliers |\n| Armes   | ![Ligne](symbole/LigneD6.png) |\n| Outils  | ![Ligne](symbole/LigneD6.png) |\n\n<center>### Actions hors combat</center>\n\n• **Étude (INT)** • **Observation (SAG)** • **Influence (CHA)** / **Dressage (SAG)** \n\n• **Intention** — Déclencheur : ![Ligne](symbole/LigneD.png)  Réaction : ![Ligne](symbole/LigneD5.png)\n\n • **Furtivité** — Effectuez un test **Dextérité (Discrétion) DD 15** si vous êtes hors vue (obscurité totale, abri supérieur/total, pas dans le champ visuel d’un ennemi) → en cas de réussite, vous êtes **caché = Invisible** ; le résultat du test devient le **DD de Perception** pour vous repérer. Vous cessez d’être caché si : vous faites du bruit, êtes détecté, attaquez ou lancez un sort verbal.\n\n<center>### Aide-mémoire de création de personnage</center>\n\n| Valeurs de caractéristique | Méthode de<br>\tgénération\t | Modificateur de caractéristique | Classe d'armure |\n| ------------------------- | --------------------- | ----------------------------- | ----------------------------- |\n| Standard <br>15/14/13/12/10/8 | Aléatoire<br>4d6, gardez les 3 plus hauts (×6) | (Valeur − 10) ÷ 2 arrondi à l'inférieur | 10 + modificateur de Dextérité |\n\n<center>#### **Compétences**</center>\n\n | Non maîtrisé | Maîtrisé | Expertise | Perception passive |\n| --------------------- | ---------------- | ---------------- | ---------------- |\n| ![maitrise](symbole/noMaitrise.png)<br>Vous n'ajoutez rien | ![maitrise](symbole/maitrise1.png)<br>Ajoutez le bonus de maîtrise (BM) | ![maitrise](symbole/maitrise2.png)<br>Ajoutez deux fois le BM | 10 + modificateur de Perception (+ 0 ou +BM si Maîtrisé ou +2×BM si Expertise) | \n\n | Bonus de Maîtrise | Niv. 1–4 | Niv. 5–8 | Niv. 9–12 | Niv. 13–16 | Niv. 17–20 |\n| ---------------- | ------------- | ------------- | -------------- | --------------- | ---------------- |\n| Valeur | ![Case!](symbole/caseD2cocher.png) **+2** | ![Case!](symbole/caseD2cocher.png) **+3** | ![Case!](symbole/caseD2cocher.png) **+4** | ![Case!](symbole/caseD2cocher.png) **+5** | ![Case!](symbole/caseD2cocher.png) **+6** |\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)\n\n<br>![Ligne!](symbole/Ligne1875.png)
+equipement: ### **Équipement de départ**\n\n**Option A** : 2 dagues, outils de voleur, boîte de jeux (tout type), sac de couchage, 2 sacoches, tenue de voyage, 16 po\n\n**Option B** : Une bourse de 50 po pour acheter votre équipement

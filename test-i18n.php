@@ -35,7 +35,16 @@ $testKeys = [
     'shop.converter.currency.gold',
     'shop.converter.currency.platinum',
     'shop.cards.description',
-    'shop.triptychs.description'
+    'shop.triptychs.description',
+    'shop.converter.enterAmounts',
+    'shop.converter.optimalConversion',
+    'shop.converter.minimalCoins',
+    'shop.converter.totalCoins',
+    'shop.converter.remainder',
+    'shop.converter.units',
+    'shop.converter.lots',
+    'shop.converter.coins',
+    'shop.converter.and'
 ];
 
 foreach ($testKeys as $key) {

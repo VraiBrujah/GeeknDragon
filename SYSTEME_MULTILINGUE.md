@@ -6,9 +6,10 @@ Le système multilingue a été **simplifié et optimisé** pour faciliter l'ajo
 
 ### ✅ Problèmes corrigés
 - ✅ Éléments hardcodés dans les pages produits maintenant traduits
-- ✅ Convertisseur de monnaie entièrement traduit
+- ✅ Convertisseur de monnaie **entièrement traduit** (100% des textes)
 - ✅ Messages d'interface utilisateur (images, navigation) traduits
 - ✅ Descriptions de cartes et triptyques traduites
+- ✅ Boutons de langue **forcent maintenant le rechargement** (F5) pour mise à jour complète
 - ✅ Système simplifié avec fonctions helper
 
 ### 🆕 Nouvelles fonctionnalités
@@ -123,6 +124,15 @@ echo '<button ' . ariaLabel('ui.close', 'Fermer') . '>×</button>';
 - `shop.converter.multiplierLabel` : "⚖️ Tableau multiplicateur" / "⚖️ Multiplier table"
 - `shop.converter.equivalences` : "💼 Équivalences totales" / "💼 Total equivalences"
 - `shop.converter.recommendations` : "✨ Recommandations optimales" / "✨ Optimal recommendations"
+- `shop.converter.enterAmounts` : "Entrez des montants..." / "Enter amounts..."
+- `shop.converter.optimalConversion` : "Conversion optimale" / "Optimal conversion"
+- `shop.converter.minimalCoins` : "Nombre minimal de pièces" / "Minimum number of coins"
+- `shop.converter.totalCoins` : "Total pièces" / "Total coins"
+- `shop.converter.remainder` : "Reste" / "Remainder"
+- `shop.converter.units` : "Unités" / "Units"
+- `shop.converter.lots` : "Lots" / "Lots"
+- `shop.converter.coins` : "pièces" / "coins"
+- `shop.converter.and` : "et" / "and"
 
 ### Monnaies
 - `shop.converter.currency.copper` : "Cuivre" / "Copper"

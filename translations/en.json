@@ -151,7 +151,18 @@
         "electrum": "Electrum",
         "gold": "Gold",
         "platinum": "Platinum"
-      }
+      },
+      "enterAmounts": "Enter amounts to see optimal recommendations",
+      "optimalConversion": "Optimal conversion",
+      "total": "Total",
+      "value": "Value",
+      "minimalCoins": "Minimum number of coins",
+      "totalCoins": "Total coins",
+      "remainder": "Remainder",
+      "units": "Units",
+      "lots": "Lots",
+      "coins": "coins",
+      "and": "and"
     }
   },
   "news": {

@@ -1,0 +1,1563 @@
+nom: Azurite
+nom 1: Azurite
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/azurite.png
+description: \n\n---\n\nL'azurite est une pierre bleue foncée, marbrée et opaque, souvent extraite dans des grottes profondes et des mines de cuivre. Grâce à sa couleur intense, elle était autrefois utilisée comme pigment pour les fresques et les peintures murales. Aujourd'hui, elle est prisée pour créer des bijoux simples et des ornements mineurs.<br>\n\nCette pierre est également liée à des traditions mystiques : certains pensent qu'elle stimule l'intuition et aide à la méditation. Sa faible valeur en fait une trouvaille commune mais appréciée.
+
+nom: Agate Enrubanée
+nom 1: Agate Enrubanée
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/agate_rubanée.png
+description: \n\n---\n\nL'agate enrubanée est une pierre translucide ornée de bandes brunes, bleues, blanches ou rouges. Elle se trouve souvent dans les rivières et les zones volcaniques où les minéraux se déposent lentement en couches distinctes.<br>\n\nUtilisée pour fabriquer des amulettes et des colliers, cette pierre est connue pour ses motifs uniques. Les artisans apprécient particulièrement les spécimens avec des bandes contrastées, et certaines cultures l'associent à la protection et à l'équilibre spirituel.
+
+nom: Quartz Bleu
+nom 1: Quartz Bleu
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/quartz_bleu.png
+description: \n\n---\n\nLe quartz bleu est une pierre cristalline translucide avec une teinte bleuâtre douce et apaisante. Il est souvent extrait des veines de quartz dans des régions rocheuses et montagneuses.<br>\n\nCe minéral est particulièrement populaire pour des bijoux tels que des pendentifs ou des bagues. Dans certaines cultures, il est utilisé comme talisman pour calmer l'esprit et favoriser la sérénité. Sa beauté simple en fait une pierre prisée malgré sa faible valeur.
+
+nom: Agate Œillée
+nom 1: Agate Œillée
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/agate_oeillée.png
+description: \n\n---\n\nL'agate œillée est célèbre pour ses cercles translucides ressemblant à des yeux, affichant diverses couleurs telles que le gris, le blanc, le brun, le bleu et le vert. Ces pierres proviennent généralement de dépôts minéraux autour de sources chaudes et de geysers.<br>\n\nDans les bijoux, ces pierres sont souvent serties en pendentifs pour leur apparence intrigante. Elles sont censées offrir un regard protecteur à leur porteur, améliorant la vigilance face aux dangers.
+
+nom: Hématite
+nom 1: Hématite
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/hematite.png
+description: \n\n---\n\nL'hématite est une pierre opaque gris-noir remarquable pour sa densité et son éclat. Formée dans des dépôts riches en fer, elle est souvent polie pour obtenir une brillance métallique impressionnante.<br>\n\nUtilisée à la fois comme ornement et outil mystique, l'hématite est censée équilibrer les énergies et renforcer la confiance. En raison de sa durabilité, elle était autrefois utilisée pour fabriquer des talismans protecteurs.
+
+nom: Lapis-Lazuli
+nom 1: Lapis-Lazuli
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/lapis_lazuli.png
+description: \n\n---\n\nLe lapis-lazuli est une pierre bleu profond avec des inclusions dorées de pyrite, lui donnant une apparence étoilée. Ce joyau est souvent trouvé dans des régions désertiques et montagneuses.<br>\n\nRecherché depuis des siècles, il symbolise la royauté et la divinité. Souvent sculpté en talismans ou monté en bijoux, il était également utilisé comme pigment rare par des artistes renommés.
+
+nom: Malachite
+nom 1: Malachite
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/malachite.png
+description: \n\n---\n\nLa malachite est une pierre verte, reconnaissable par ses veines alternantes claires et foncées. Elle est souvent trouvée dans d'anciennes mines de cuivre ou près de sources chaudes riches en minéraux.<br>\n\nCette pierre est prisée pour son apparence naturelle et est souvent sculptée en amulettes ou utilisée dans des colliers. Les alchimistes croient que la malachite est liée à l'énergie de la nature et protège son porteur des influences négatives.
+
+nom: Agate Mousse
+nom 1: Agate Mousse
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/agate_mousse.png
+description: \n\n---\n\nL'agate mousse est une pierre translucide avec des motifs verts ou gris rappelant des filaments de mousse. Elle est fréquemment découverte dans les dépôts de silice ou les lits de rivière.<br>\n\nAppréciée pour ses motifs uniques, elle est souvent montée en bagues ou pendentifs. Certaines traditions associent cette pierre à la fertilité et à l'harmonie avec la nature, la considérant comme un lien direct avec le règne végétal.
+
+nom: Obsidienne
+nom 1: Obsidienne
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/obsidienne.png
+description: \n\n---\n\nL'obsidienne est une pierre noire opaque formée par le refroidissement rapide de la lave volcanique. Ses bords tranchants étaient autrefois utilisés pour fabriquer des armes et des outils primitifs.<br>\n\nAu-delà de son utilisation pratique, cette pierre est souvent employée dans des rituels pour repousser les énergies négatives. Elle est également appréciée en joaillerie pour son éclat brillant et mystérieux.
+
+nom: Rhodochrosite
+nom 1: Rhodochrosite
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/rhodochrosite.png
+description: \n\n---\n\nLa rhodochrosite est une pierre opaque rose pâle souvent extraite des dépôts de manganèse. Ses teintes chaudes et douces en font un choix idéal pour des ornements délicats.<br>\n\nLes légendes disent qu'elle représente l'amour et la compassion, capable de réchauffer l'âme de son porteur. En joaillerie, elle est particulièrement prisée pour des broches ou de petits pendentifs.
+
+nom: Œil-de-Tigre
+nom 1: Œil-de-Tigre
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/oeil_de_tigre.png
+description: \n\n---\n\nL'œil-de-tigre est une pierre translucide brune avec des reflets dorés soyeux rappelant l'œil d'un félin. Cette pierre se forme dans des veines de quartz, souvent près de gisements d'or.<br>\n\nElle est considérée comme une amulette de protection contre les malédictions et les influences négatives. En joaillerie, l'œil-de-tigre est utilisé pour des colliers, bracelets et amulettes symboliques.
+
+nom: Turquoise
+nom 1: Turquoise
+model: Butin.json
+prix: **10 po**
+prix 1: **10 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/turquoise.png
+description: \n\n---\n\nLa turquoise est une pierre opaque bleu-vert clair, extraite dans les régions arides et montagneuses. Elle est utilisée depuis l'Antiquité dans la fabrication de bijoux et de talismans.<br>\n\nCette pierre est associée à la protection et à la chance, souvent offerte comme symbole de paix et d'amitié. Sa popularité en artisanat en fait une pierre convoitée par les orfèvres et les bijoutiers.
+
+nom: Héliotrope
+nom 1: Héliotrope
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/heliotrope.png
+description: \n\n---\n\nL’héliotrope, également appelée pierre de sang, est une gemme gris foncé opaque parsemée de taches rouges. Elle se forme dans des dépôts de silice riches en oxyde de fer.<br>\n\nCette pierre est liée au courage et à la vitalité dans de nombreuses traditions. Elle est fréquemment utilisée pour fabriquer des amulettes protectrices et des bagues symbolisant la force. En alchimie, elle est parfois utilisée pour canaliser les énergies vitales.
+
+nom: Cornaline
+nom 1: Cornaline
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/cornaline.png
+description: \n\n---\n\nLa cornaline est une pierre opaque aux teintes allant de l'orange au rouge brique, souvent trouvée dans les régions désertiques ou près des volcans. Ses couleurs profondes évoquent le feu et la passion.<br>\n\nUtilisée depuis des millénaires, elle est associée à la créativité et à la motivation. Les artisans la façonnent en cabochons pour orner des colliers, bracelets et pendentifs. En magie, elle symbolise le courage et la protection émotionnelle.
+
+nom: Calcédoine
+nom 1: Calcédoine
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/calcédoine.png
+description: \n\n---\n\nLa calcédoine est une pierre opaque blanche avec parfois des teintes légèrement bleutées. Elle se forme dans les cavités rocheuses riches en silice.<br>\n\nSymbolisant la sérénité et la communication, elle est utilisée pour fabriquer des bijoux discrets tels que des boucles d'oreilles ou des pendentifs. Dans certaines cultures, on croit qu'elle favorise l'harmonie dans les relations et apaise les tensions.
+
+nom: Chrysoprase
+nom 1: Chrysoprase
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/chrysoprase.png
+description: \n\n---\n\nLa chrysoprase est une pierre translucide verte, souvent extraite des dépôts de nickel. Sa couleur vive et lumineuse rappelle les jeunes feuilles du printemps.<br>\n\nLes joailliers utilisent cette pierre pour des bijoux élégants et légers. Associée à l'abondance et au renouveau, elle est considérée comme une pierre porte-bonheur dans les cultures anciennes.
+
+nom: Citrine
+nom 1: Citrine
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/citrine.png
+description: \n\n---\n\nLa citrine est une pierre translucide de couleur jaune brunâtre, souvent trouvée dans des veines de quartz chauffées par des processus volcaniques. Sa teinte chaude évoque la lumière du soleil.<br>\n\nCette pierre est prisée pour ses propriétés énergisantes et fréquemment utilisée dans des pendentifs et bagues. Les légendes disent qu'elle attire la prospérité et protège des influences financières négatives.
+
+nom: Jaspe
+nom 1: Jaspe
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/jaspe.png
+description: \n\n---\n\nLe jaspe est une pierre opaque qui peut être brune, noire ou bleue, souvent marquée de motifs uniques créés par des dépôts minéraux. On le trouve dans les dépôts de silice à travers le monde.<br>\n\nSymbolisant la stabilité et la persévérance, le jaspe est souvent monté en talismans ou en bagues robustes. Chaque pierre est unique, ce qui en fait un objet très prisé des collectionneurs.
+
+nom: Pierre de Lune
+nom 1: Pierre de Lune
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/pierre_de_lune.png
+description: \n\n---\n\nLa pierre de lune est translucide avec des reflets blancs et une légère iridescence bleutée. Elle est souvent trouvée dans les régions montagneuses riches en feldspath.<br>\n\nAssociée à la féminité, à l'intuition et aux cycles lunaires, cette pierre est prisée en joaillerie pour sa beauté éthérée. On dit qu'elle encourage les rêves et l'équilibre émotionnel.
+
+nom: Onyx
+nom 1: Onyx
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/onyx.png
+description: \n\n---\n\nL'onyx est une pierre opaque noire ou blanche, parfois marquée de bandes distinctes. Elle se forme dans les dépôts volcaniques riches en silice.<br>\n\nCette pierre est souvent utilisée pour des sceaux, des bijoux et des ornements rituels. Associée à la concentration et à la détermination, l'onyx est considérée comme un talisman puissant contre les distractions et les énergies négatives.
+
+nom: Quartz
+nom 1: Quartz
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/quartz.png
+description: \n\n---\n\nLe quartz est une pierre translucide qui peut être blanche, gris ardoise ou jaune. Ce minéral universel est présent dans presque toutes les régions montagneuses et volcaniques.<br>\n\nRenommé pour sa clarté et sa pureté, le quartz est souvent utilisé pour des colliers, des bracelets et des décorations. Dans certaines traditions, il est considéré comme un amplificateur d'énergie et fréquemment utilisé dans les rituels magiques.
+
+nom: Sardonyx
+nom 1: Sardonyx
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/sardonyx.png
+description: \n\n---\n\nLa sardonyx est une pierre opaque avec des bandes rouges et blanches. Elle est souvent trouvée dans les dépôts de silice des zones volcaniques.<br>\n\nConnue pour sa robustesse et sa beauté, cette pierre est très prisée pour les pendentifs, les sceaux et les camées. Dans les traditions anciennes, la sardonyx est considérée comme une pierre de force et de courage, souvent portée par les guerriers cherchant protection.
+
+nom: Quartz Rose Étoilé
+nom 1: Quartz Rose Étoilé
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/quartz_rose_etoile.png
+description: \n\n---\n\nCe quartz rose translucide présente un noyau en forme d'étoile lumineuse, visible lorsqu'il est taillé et éclairé à un angle précis. Il provient de dépôts profonds de quartz.<br>\n\nAppréciée pour son apparence romantique, elle est souvent utilisée dans des bagues et des pendentifs. Cette pierre est également associée à l'amour et à l'harmonie émotionnelle, souvent offerte comme symbole de tendresse et de compassion.
+
+nom: Zircon
+nom 1: Zircon
+model: Butin.json
+prix: **50 po**
+prix 1: **50 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/zircon.png
+description: \n\n---\n\nLe zircon est une pierre translucide bleu-vert clair, souvent confondue avec des diamants en raison de son éclat brillant. Il se forme dans les zones riches en zirconium dans les veines de granit.<br>\n\nTrès prisé pour les bijoux de haute qualité, il est souvent serti dans des bagues ou des broches. On dit qu'il possède des propriétés apaisantes et la capacité de clarifier l'esprit tout en repoussant les cauchemars.
+
+nom: Ambre
+nom 1: Ambre
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/ambre.png
+description: \n\n---\n\nL'ambre est une pierre translucide allant du jaune pâle au brun profond, formée à partir de résines fossilisées. On la trouve souvent dans les régions boisées anciennes ou sur les rivages des lacs.<br>\n\nCette pierre est célèbre pour ses inclusions, comme des insectes ou des plantes piégés dans la résine. En joaillerie, elle est utilisée pour des colliers, bracelets et pendentifs. Les croyances populaires lui attribuent des propriétés curatives et protectrices contre les maladies.
+
+nom: Améthyste
+nom 1: Améthyste
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/amethyste.png
+description: \n\n---\n\nL'améthyste est une pierre translucide aux nuances violettes profondes et vibrantes. Elle se forme dans les cavités rocheuses riches en quartz, souvent près des sources chaudes.<br>\n\nSymbole de sérénité et de sagesse, cette gemme est utilisée pour créer des bijoux précieux. En magie, elle est connue pour repousser les influences négatives et favoriser la clarté mentale. L'améthyste est également associée à la sobriété et à la paix intérieure.
+
+nom: Chrysobéryl
+nom 1: Chrysobéryl
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/chrysobéryl.png
+description: \n\n---\n\nLe chrysobéryl est une pierre translucide allant du jaune pâle au vert, souvent trouvée dans des dépôts près des formations granitiques. Elle est renommée pour son éclat vif et ses reflets chatoyants.<br>\n\nAssocié à la prospérité et à la chance, le chrysobéryl est utilisé dans des bagues, pendentifs et broches. En magie, il est considéré comme un bouclier contre les malédictions et les énergies négatives.
+
+nom: Corail
+nom 1: Corail
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/corail.png
+description: \n\n---\n\nLe corail est une gemme rose, rouge ou violette formée par les colonies de coraux marins durcis au fil du temps. Il est souvent trouvé dans les récifs tropicaux.<br>\n\nCette gemme est prisée pour les ornements marins et utilisée pour fabriquer des colliers, bracelets et sculptures. Certains marins croient qu'elle offre une protection contre les tempêtes et assure des voyages en mer sûrs.
+
+nom: Grenat
+nom 1: Grenat
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/grenat.png
+description: \n\n---\n\nLe grenat est une pierre translucide rouge, brun-vert ou violette, souvent extraite dans les zones riches en métamorphisme géologique.<br>\n\nSymbole de passion et de protection, le grenat est utilisé pour créer des bijoux élégants et des talismans. Les croyances anciennes lui attribuent la capacité de renforcer les liens romantiques et de protéger les voyageurs des périls.
+
+nom: Jade
+nom 1: Jade
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/jade.png
+description: \n\n---\n\nLe jade est une pierre verte claire ou foncée, parfois blanche translucide, trouvée dans les lits de rivières montagneuses. Appréciée depuis des millénaires, elle est utilisée pour les sculptures et les ornements précieux.<br>\n\nSymbole de pureté et d'harmonie, le jade est souvent porté comme amulette pour attirer la paix et la chance. Les artisans apprécient sa texture lisse et durable pour créer des objets rituels et décoratifs.
+
+nom: Jais
+nom 1: Jais
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/jaspe_noir.png
+description: \n\n---\n\nLe jais est une pierre opaque intensément noire souvent utilisée pour des ornements sombres et élégants. Il est trouvé dans les dépôts volcaniques et les zones riches en silice.<br>\n\nSymbole de force et de résilience, cette pierre est portée pour améliorer la concentration et repousser les peurs. En joaillerie, elle est souvent sertie dans des bagues, pendentifs ou bracelets.
+
+nom: Perle
+nom 1: Perle
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/perle.png
+description: \n\n---\n\nLa perle est une gemme organique trouvée à l'intérieur des coquillages dans les océans et les lagons. Elle peut être blanche, jaune ou rose, avec une surface nacrée et souvent parfaitement ronde.<br>\n\nRecherchée pour sa rareté et sa beauté naturelle, la perle est utilisée pour créer des colliers, broches et diadèmes. Symbole de pureté et de noblesse, elle est parfois associée à des rituels de protection ou de bénédiction.
+
+nom: Spinelle
+nom 1: Spinelle
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/spinelle.png
+description: \n\n---\n\nLe spinelle est une pierre translucide pouvant être rouge, rouge brique ou vert foncé. Elle est souvent trouvée dans les mines de rubis et les dépôts alluviaux.<br>\n\nSouvent confondu avec le rubis, le spinelle est apprécié pour sa dureté et son éclat vif. Les joailliers l'utilisent dans des bagues et des pendentifs élégants. En magie, cette pierre est réputée apporter de l'énergie et améliorer l'endurance.
+
+nom: Tourmaline
+nom 1: Tourmaline
+model: Butin.json
+prix: **100 po**
+prix 1: **100 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/tourmaline.png
+description: \n\n---\n\nLa tourmaline est une pierre translucide, souvent multicolore, pouvant être verte, bleue, brune ou rouge. Elle est extraite des dépôts minéraux riches en bore.<br>\n\nCette pierre est associée à l'équilibre émotionnel et à la protection contre les énergies négatives. En joaillerie, elle est sertie dans des bagues ou colliers, et ses teintes vibrantes ajoutent une touche exotique d'élégance.
+
+nom: Alexandrite
+nom 1: Alexandrite
+model: Butin.json
+prix: **500 po**
+prix 1: **500 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/alexandrite.png
+description: \n\n---\n\nL'Alexandrite est une pierre translucide vert foncé célèbre pour son changement de couleur selon la lumière, passant du vert au rouge. Elle est souvent extraite dans les dépôts granitiques.<br>\n\nCette gemme rare est prisée pour ses propriétés magiques uniques et est souvent sertie dans des bagues ou pendentifs de luxe. Elle est associée à l'équilibre et à la prospérité, ainsi qu'à la transformation et à l'adaptabilité.
+
+nom: Aigue-Marine
+nom 1: Aigue-Marine
+model: Butin.json
+prix: **500 po**
+prix 1: **500 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/aigue-marine.png
+description: \n\n---\n\nL'aigue-marine est une pierre translucide bleu pâle à vert pâle, dérivée des dépôts de béryl. Son nom évoque la mer, et elle était souvent utilisée comme talisman par les marins.<br>\n\nCette gemme est idéale pour des bijoux raffinés comme des boucles d'oreilles ou des colliers. Elle est réputée apaiser les émotions et clarifier l'esprit, et est parfois liée aux voyages et à la communication.
+
+nom: Perle Noire
+nom 1: Perle Noire
+model: Butin.json
+prix: **500 po**
+prix 1: **500 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/perle_noire.png
+description: \n\n---\n\nLa perle noire est une gemme organique, intense et opaque, souvent trouvée dans les huîtres des lagons tropicaux. Sa couleur sombre et mystérieuse la distingue des perles classiques.<br>\n\nSymbole de mystère et d'élégance, elle est utilisée pour des bijoux sophistiqués. Certains disent qu'elle protège son porteur des malédictions et des énergies maléfiques, renforçant leur aura personnelle.
+
+nom: Spinelle Bleu
+nom 1: Spinelle Bleu
+model: Butin.json
+prix: **500 po**
+prix 1: **500 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/spinelle_bleu.png
+description: \n\n---\n\nLe spinelle bleu est une pierre translucide d'un bleu profond et brillant. Souvent confondu avec le saphir, il est extrait des dépôts riches en magnésium et aluminium.<br>\n\nCette gemme rare est utilisée pour des colliers ou bagues haut de gamme. En magie, elle favoriserait la créativité et protègerait des influences négatives.
+
+nom: Péridot
+nom 1: Péridot
+model: Butin.json
+prix: **500 po**
+prix 1: **500 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/peridot.png
+description: \n\n---\n\nLe péridot est une gemme éblouissante d'un vert olive riche avec des reflets dorés. Il est connu comme la "pierre du soleil" et n'existe que dans une seule couleur, ce qui le rend distinctif.<br>\n\nAssocié à la vitalité, à la prospérité et au bonheur, le péridot est prisé dans les regalia royaux ou les incrustations d'armes cérémonielles. Il était également utilisé comme talisman pour chasser les cauchemars et les mauvais esprits.
+
+nom: Topaze
+nom 1: Topaze
+model: Butin.json
+prix: **500 po**
+prix 1: **500 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/topaze.png
+description: \n\n---\n\nLa topaze est une gemme translucide jaune doré extraite des dépôts granitiques et des veines volcaniques. Son éclat vif rappelle la lumière du soleil.<br>\n\nSouvent taillée pour des bagues ou pendentifs, elle est associée à la richesse et à la clarté mentale. On dit qu'elle protège contre les maladies et amplifie la confiance en soi.
+
+nom: Opale Noire
+nom 1: Opale Noire
+model: Butin.json
+prix: **1 000 po**
+prix 1: **1 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/opale_noire.png
+description: \n\n---\n\nL'opale noire est une pierre translucide vert foncé parsemée de motifs irisés de noir et d'or. Elle est extraite des dépôts de silice dans les régions volcaniques et désertiques.<br>\n\nCette gemme rare et mystérieuse est utilisée pour des bijoux prestigieux. Considérée comme une pierre d'introspection et de protection, elle est également associée à la chance et à l'inspiration.
+
+nom: Saphir Bleu
+nom 1: Saphir Bleu
+model: Butin.json
+prix: **1 000 po**
+prix 1: **1 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/saphir_bleu.png
+description: \n\n---\n\nLe saphir bleu est une pierre translucide d'un bleu profond, extraite des dépôts de corindon dans les montagnes. Symbole de royauté et de sagesse, il est prisé depuis l'Antiquité.<br>\n\nUtilisé dans des diadèmes, bagues et colliers précieux, ce bijou est souvent associé à la vérité et à la loyauté. En magie, il est réputé canaliser les énergies protectrices et améliorer la concentration mentale.
+
+nom: Émeraude
+nom 1: Émeraude
+model: Butin.json
+prix: **1 000 po**
+prix 1: **1 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/emeraude.png
+description: \n\n---\n\nL'émeraude est une pierre translucide vert vif provenant de dépôts riches en béryllium. Elle est réputée pour sa beauté envoûtante et son éclat unique.<br>\n\nPortée par les rois et les sorciers, cette pierre est utilisée dans des colliers et bagues de haute qualité. Elle est censée avoir des propriétés curatives et renforcer les liens émotionnels. Elle symbolise la renaissance, la croissance et l'harmonie.
+
+nom: Opale de Feu
+nom 1: Opale de Feu
+model: Butin.json
+prix: **1 000 po**
+prix 1: **1 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/opale_de_feu.png
+description: \n\n---\n\nL'opale de feu est une pierre translucide aux tons orangés flamboyants, souvent trouvée dans les dépôts volcaniques riches en silice. Sa couleur vibrante semble contenir une flamme intérieure.<br>\n\nTrès recherchée pour des bijoux exotiques, cette gemme est associée à la passion, à l'énergie et au courage. En magie, elle est utilisée pour amplifier les sorts liés à la chaleur et à la lumière.
+
+nom: Opale
+nom 1: Opale
+model: Butin.json
+prix: **1 000 po**
+prix 1: **1 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/opale_bleue.png
+description: \n\n---\n\nL'opale est une pierre translucide avec des reflets irisés mélangeant des teintes vertes, bleues et dorées. Elle est extraite des dépôts riches en silice des régions volcaniques.<br>\n\nUtilisée pour des colliers et pendentifs luxueux, cette pierre symbolise la paix intérieure et favorise la créativité. Dans certaines cultures, elle est censée connecter son porteur aux énergies divines.
+
+nom: Rubis Étoilé
+nom 1: Rubis Étoilé
+model: Butin.json
+prix: **1 000 po**
+prix 1: **1 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/rubis_etoile.png
+description: \n\n---\n\nLe rubis étoilé est une pierre translucide d'un rouge intense avec une étoile blanche visible en son centre lorsqu'elle est taillée en cabochon. Ce phénomène, appelé astérisme, est extrêmement rare.<br>\n\nPrisée pour les bijoux royaux et magiques, cette pierre est censée protéger contre les malédictions et renforcer la vitalité. En magie, elle est utilisée pour canaliser les énergies du feu et fortifier les sorts de puissance.
+
+nom: Saphir Étoilé
+nom 1: Saphir Étoilé
+model: Butin.json
+prix: **1 000 po**
+prix 1: **1 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/saphir_etoile.png
+description: \n\n---\n\nLe saphir étoilé est une pierre translucide de couleur bleue avec une étoile blanche visible sous un éclairage spécifique. Ce phénomène rare en fait une gemme très recherchée.<br>\n\nUtilisé pour des bijoux royaux et mystiques, il est associé à la vérité et à la protection divine. En magie, il améliore la clarté mentale et les visions prophétiques.
+
+nom: Saphir Jaune
+nom 1: Saphir Jaune
+model: Butin.json
+prix: **1 000 po**
+prix 1: **1 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/saphir_jaune.png
+description: \n\n---\n\nLe saphir jaune est une pierre translucide aux teintes dorées flamboyantes, trouvée dans les dépôts de corindon. Elle reflète la lumière avec une intensité solaire.<br>\n\nUtilisée pour des bijoux luxueux, elle symbolise la richesse et la prospérité. En magie, elle est censée attirer la fortune et renforcer la confiance en soi.
+
+nom: Saphir Noir
+nom 1: Saphir Noir
+model: Butin.json
+prix: **5 000 po**
+prix 1: **5 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/saphir_noir.png
+description: \n\n---\n\nLe saphir noir est une pierre translucide et brillante d'un noir intense, parsemée de reflets scintillants. Rare et mystérieuse, elle est extraite des dépôts de corindon volcanique.<br>\n\nUtilisée dans les bijoux royaux et mystiques, elle symbolise le pouvoir et la protection contre les forces obscures. En magie, elle est réputée amplifier les capacités psychiques et renforcer les sorts défensifs.
+
+nom: Diamant
+nom 1: Diamant
+model: Butin.json
+prix: **5 000 po**
+prix 1: **5 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/diamant.png
+description: \n\n---\n\nLe diamant est une pierre translucide extrêmement dure, disponible dans une variété de couleurs, notamment blanc, bleu, jaune canari, rose et brun. Il est extrait des dépôts de kimberlite.<br>\n\nSymbole d'éternité et de perfection, le diamant est prisé pour les somptueuses bagues et diadèmes. En magie, il est un composant clé pour les sorts puissants comme **Résurrection** et **Sanctification**, et il est souvent utilisé pour renforcer la concentration magique.
+
+nom: Jacinthe
+nom 1: Jacinthe
+model: Butin.json
+prix: **5 000 po**
+prix 1: **5 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/jacinthe.png
+description: \n\n---\n\nLa jacinthe est une pierre translucide orange flamboyant extraite des veines volcaniques riches en zirconium. Extrêmement rare, elle est souvent associée aux ornements royaux.<br>\n\nUtilisée pour des bijoux précieux, elle est également liée à la passion et à la créativité. En magie, la jacinthe renforce les sorts de feu et attire la fortune.
+
+nom: Rubis
+nom 1: Rubis
+model: Butin.json
+prix: **5 000 po**
+prix 1: **5 000 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Pierre précieuse, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Butin/rubis.png
+description: \n\n---\n\nLe rubis est une pierre translucide d'un rouge profond ou pourpre sombre, considérée comme l'une des plus précieuses au monde. Il est extrait des dépôts de corindon dans les montagnes.<br>\n\nAssocié à la passion et à la vitalité, il est utilisé pour des diadèmes royaux, des colliers et des bagues. En magie, il est employé pour des sorts de protection et d'amplification des énergies, renforçant les pouvoirs liés au feu et au cœur.
+
+nom: Aiguière en argent
+nom 1: Aiguière en argent
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/aiguiere_argent.png
+description: \n\n---\n\nCette aiguière en argent finement ciselée est ornée de motifs floraux délicats. Elle est souvent utilisée pour servir des boissons lors de cérémonies ou de réceptions luxueuses.<br>\n\nBien que davantage décorative que fonctionnelle, elle reflète un artisanat raffiné et la richesse de son propriétaire. Elle peut parfois comporter des inscriptions ou des symboles indiquant une origine noble ou religieuse.
+
+nom: Statuette en os sculpté
+nom 1: Statuette en os sculpté
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/statuette_os.png
+description: \n\n---\n\nCette petite statuette en os représente souvent un animal ou une figure mythologique. Soigneusement sculptée, elle révèle un niveau de détail élevé et reflète une tradition artisanale ancienne.<br>\n\nElle est fréquemment utilisée comme décoration ou objet rituel. Les collectionneurs apprécient ces statuettes pour leur caractère unique et leur lien avec des cultures disparues.
+
+nom: Bracelet en or
+nom 1: Bracelet en or
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **0.2 kg**\n\n**(0.4 lb)**
+poids 1: **0.2 kg**\n\n**(0.4 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/bracelet_or.png
+description: \n\n---\n\nCe petit bracelet en or finement conçu est orné de motifs simples mais élégants. Il est souvent offert en cadeau ou porté comme symbole de richesse modeste.<br>\n\nSa taille et son design en font un accessoire discret mais raffiné. Certaines pièces peuvent inclure de petites inscriptions ou gravures personnalisées.
+
+nom: Habits en tissu d'or
+nom 1: Habits en tissu d'or
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/habit_d_or.png
+description: \n\n---\n\nCes somptueux vêtements cérémoniels sont fabriqués à partir d'un tissu de haute qualité brodé de fil d'or. Ils sont généralement portés lors de cérémonies officielles ou de célébrations importantes.<br>\n\nEn raison de leur rareté et de leur coût élevé, ces habits sont réservés aux nobles et aux dignitaires. Les broderies peuvent représenter des motifs religieux, familiaux ou mythologiques.
+
+nom: Masque en velours noir
+nom 1: Masque en velours noir
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **0.3 kg**\n\n**(0.6 lb)**
+poids 1: **0.3 kg**\n\n**(0.6 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/masque_velours.png
+description: \n\n---\n\nCe masque en velours noir est brodé de fil d'argent et orné de motifs élégants. Il est conçu pour les bals masqués et les événements aristocratiques.<br>\n\nLes masques de ce type étaient souvent portés pour préserver l'anonymat lors de négociations secrètes ou de festivités. Cet objet est à la fois une œuvre d'art et un symbole de mystère et d'élégance.
+
+nom: Calice en cuivre
+nom 1: Calice en cuivre
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/calice_cuivre.png
+description: \n\n---\n\nCe calice en cuivre est décoré de figures en argent représentant des scènes mythologiques ou religieuses. Utilisé lors de rituels ou banquets, il témoigne d'un artisanat exceptionnel.<br>\n\nEn plus de son usage fonctionnel, ce calice est souvent conservé comme relique ou symbole de statut social. Sa valeur réside autant dans ses matériaux que dans son histoire.
+
+nom: Paire de dés en os
+nom 1: Paire de dés en os
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/des_os.png
+description: \n\n---\n\nCette paire de dés est sculptée dans l'os et finement gravée de motifs anciens. Elle est utilisée pour des jeux de hasard ou des pratiques divinatoires.<br>\n\nLes dés en os sont souvent associés à la chance et au destin, et certains spécimens portent des inscriptions cryptiques ou magiques. Ce sont à la fois des objets ludiques et des artefacts culturels.
+
+nom: Petit miroir en bois
+nom 1: Petit miroir en bois
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/miroir_bois.png
+description: \n\n---\n\nCe petit miroir est encadré de bois peint, souvent orné de motifs floraux ou géométriques. Il est à la fois fonctionnel et décoratif, utilisé aussi bien dans des foyers modestes que dans des palais.<br>\n\nLe bois peut être sculpté ou gravé, rendant chaque pièce unique. Ce miroir reflète l'artisanat local et les goûts esthétiques de son époque.
+
+nom: Mouchoir en soie
+nom 1: Mouchoir en soie
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/mouchoir_soie.png
+description: \n\n---\n\nCe mouchoir en soie est finement brodé de motifs délicats, souvent floraux ou géométriques. Il est un symbole d'élégance et de raffinement, fréquemment utilisé lors de rencontres formelles.<br>\n\nLes nobles et riches marchands possèdent souvent de tels mouchoirs, qui peuvent également servir de cadeau précieux ou de souvenir.
+
+nom: Médaillon en or
+nom 1: Médaillon en or
+model: Butin.json
+prix: **25 po**
+prix 1: **25 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Objet d'art, Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/medaillon_or.png
+description: \n\n---\n\nCe médaillon en or est délicatement conçu et contient un petit portrait peint à la main. De tels bijoux sont souvent portés en mémoire d'un être cher ou comme symbole d'allégeance familiale.<br>\n\nCes médaillons sont des pièces uniques, dont la valeur réside autant dans leurs matériaux que dans l'histoire qu'ils racontent.
+
+nom: Anneau en or
+nom 1: Anneau en or
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **0.05 kg**\n\n**(0.1 lb)**
+poids 1: **0.05 kg**\n\n**(0.1 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/anneau_or.png
+description: \n\n---\n\nCet anneau en or raffiné est incrusté de petites pierres d'héliotrope, connues pour leur teinte sombre ponctuée de rouge. Son design élégant le rend prisé par les nobles et riches marchands.<br>\n\nDe tels anneaux sont souvent offerts lors d'accords importants ou portés comme symbole de pouvoir. Certains peuvent également comporter des gravures secrètes ou des sceaux personnels.
+
+nom: Statuette en ivoire
+nom 1: Statuette en ivoire
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/statuette_ivoire.png
+description: \n\n---\n\nCette statuette en ivoire finement sculptée représente souvent une figure mythologique, animale ou divine. Elle est polie pour un éclat naturel doux.<br>\n\nLes statuettes en ivoire sont prisées pour leur rareté et leur finesse. Elles sont souvent exposées dans les maisons de collectionneurs ou utilisées comme offrandes dans les temples. Leur origine peut parfois révéler des secrets de cultures disparues.
+
+nom: Bracelet en or massif
+nom 1: Bracelet en or massif
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **0.3 kg**\n\n**(0.6 lb)**
+poids 1: **0.3 kg**\n\n**(0.6 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/bracelet_or_gros.png
+description: \n\n---\n\nCe bracelet en or massif est décoré de motifs gravés représentant des scènes mythologiques ou naturelles. Sa largeur et son poids reflètent la richesse de son porteur.<br>\n\nPorté lors d'événements importants, il est à la fois un accessoire de mode et un symbole de statut social. Les artisans ajoutent souvent des détails complexes pour rehausser son éclat et sa valeur.
+
+nom: Collier en argent
+nom 1: Collier en argent
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **0.2 kg**\n\n**(0.4 lb)**
+poids 1: **0.2 kg**\n\n**(0.4 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/collier_argent.png
+description: \n\n---\n\nCe collier en argent est orné d'une pierre précieuse au centre, souvent une améthyste ou une topaze. Les maillons de la chaîne sont gravés de motifs délicats.<br>\n\nClassique bijou, ce collier est porté lors de cérémonies ou d'événements formels. Il symbolise l'élégance et le raffinement de son porteur.
+
+nom: Couronne en bronze
+nom 1: Couronne en bronze
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/couronne_bronze.png
+description: \n\n---\n\nCette couronne en bronze est ornée de reliefs représentant des scènes héroïques ou des motifs naturels. Bien que plus modeste que les couronnes en or, elle est souvent portée par des chefs militaires ou des dignitaires.<br>\n\nLa couronne est un symbole de commandement et d'autorité. Certains anciens exemplaires peuvent comporter des inscriptions ou des enchantements subtils.
+
+nom: Robe de soie
+nom 1: Robe de soie
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/robe_soie.png
+description: \n\n---\n\nCette somptueuse robe est confectionnée en fine soie et ornée de broderies complexes en fil d'or. Les motifs peuvent représenter des scènes florales ou des symboles religieux.<br>\n\nPortée par des nobles lors de cérémonies importantes, cette robe est à la fois un vêtement cérémonial et une œuvre d'art. Chaque détail témoigne de l'habileté de l'artisan.
+
+nom: Grande tapisserie
+nom 1: Grande tapisserie
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **6 kg**\n\n**(13 lb)**
+poids 1: **6 kg**\n\n**(13 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/tapisserie.png
+description: \n\n---\n\nCette grande tapisserie est tissée avec soin et représente souvent des scènes historiques, mythologiques ou naturelles. Les fils utilisés sont teints avec des pigments naturels de haute qualité.<br>\n\nAccrochée dans des halls ou salles de banquet, la tapisserie reflète la richesse et le raffinement de son propriétaire. Certaines pièces rares peuvent contenir des messages ou symboles cachés.
+
+nom: Grande tasse en laiton
+nom 1: Grande tasse en laiton
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/tasse_laiton.png
+description: \n\n---\n\nCette tasse en laiton est richement décorée et incrustée de morceaux de jade. Les motifs gravés à sa surface représentent souvent des scènes naturelles ou mythologiques.<br>\n\nUtilisée lors de banquets prestigieux, elle est à la fois un objet utilitaire et une pièce de collection. Sa rareté la rend prisée par les nobles et les marchands.
+
+nom: Coffret à figurines
+nom 1: Coffret à figurines
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/boite_figurines.png
+description: \n\n---\n\nCe coffret finement sculpté contient des figurines d'animaux en turquoise. Chaque figurine est méticuleusement détaillée, représentant des créatures telles que des loups, des oiseaux ou des cerfs.<br>\n\nLe coffret et son contenu sont souvent offerts comme cadeaux diplomatiques ou conservés comme objets de collection. Certaines légendes affirment que ces figurines possèdent des propriétés magiques.
+
+nom: Cage à oiseaux
+nom 1: Cage à oiseaux
+model: Butin.json
+prix: **250 po**
+prix 1: **250 po**
+poids: **3 kg**\n\n**(7 lb)**
+poids 1: **3 kg**\n\n**(7 lb)**
+type: Objet d'art, Peu Commun
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/cage_electrum.png
+description: \n\n---\n\nCette fine cage en métal est décorée de filigranes en électrum, représentant des motifs délicats de plantes et d'oiseaux. Elle est conçue pour abriter de petits oiseaux exotiques.<br>\n\nUtilisée à la fois comme pièce décorative et habitat, elle est souvent exposée dans des salons ou jardins nobles. Sa délicatesse en fait une œuvre d'art à part entière.
+
+nom: Calice en argent
+nom 1: Calice en argent
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/calice_argent_pierres.png
+description: \n\n---\n\nCe calice en argent finement ciselé est serti de plusieurs pierres de lune. Les motifs gravés représentent des scènes célestes ou mystiques, ajoutant une touche divine à son design.<br>\n\nSouvent utilisé lors de cérémonies sacrées ou de banquets prestigieux, ce calice est également un symbole de richesse et de piété. Les collectionneurs le convoitent pour son éclat et sa rareté.
+
+nom: Partitions musicales
+nom 1: Partitions musicales
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **0.25 kg**\n\n**(0.5 lb)**
+poids 1: **0.25 kg**\n\n**(0.5 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/sheet_music_bundle.png
+description: \n\n---\n\nCet ensemble de partitions jaunies est une relique irremplaçable représentant les chants perdus d'un compositeur autrefois célèbre. Chaque page est méticuleusement écrite à la main, ornée de notes et de fioritures complexes.<br>\n\nLes érudits et les bardes vénèrent cette collection pour sa signification historique et artistique, car la musique est réputée évoquer une profonde mélancolie et transcendance lorsqu'elle est jouée.
+
+nom: Harpe en bois sculptée
+nom 1: Harpe en bois sculptée
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/wooden_harp_zircon.png
+description: \n\n---\n\nCette harpe en bois finement sculptée est ornée d'incrustations d'ivoire délicates et de zircons étincelants. Sa conception artisanale permet non seulement une esthétique éblouissante, mais aussi une qualité sonore enchanteresse, rivalisant avec les instruments magiques.<br>\n\nTrésor des bardes et des nobles, cette harpe est souvent exposée lors d'événements grandioses ou conservée dans des collections privées.
+
+nom: Petite idole en or
+nom 1: Petite idole en or
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **1 kg**\n\n**(2 lb)**
+poids 1: **1 kg**\n\n**(2 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/idole_or.png
+description: \n\n---\n\nCette petite idole en or massif représente une divinité ou une figure mythologique. Les détails sont sculptés avec précision, révélant une expertise exceptionnelle.<br>\n\nElle est souvent utilisée comme objet rituel ou conservée comme précieuse relique. Certains croient que ces idoles peuvent accorder des bénédictions à leurs propriétaires.
+
+nom: Peigne en or
+nom 1: Peigne en or
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/peigne_dragon.png
+description: \n\n---\n\nCe peigne en or massif est façonné en forme de dragon, avec des yeux en grenat rouge qui scintillent. Les détails minutieux du travail en font une pièce unique.<br>\n\nUtilisé par les nobles pour améliorer leur apparence, ce peigne est également un symbole de pouvoir et d'autorité. Il est souvent transmis comme héritage familial.
+
+nom: Bouchon de carafe
+nom 1: Bouchon de carafe
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/bouchon_carafe.png
+description: \n\n---\n\nCe bouchon de carafe est une véritable œuvre d'art, décoré de feuilles d'or et incrusté de minuscules améthystes. Sa base est finement sculptée pour s'adapter parfaitement à une carafe de luxe.<br>\n\nSouvent associé à des vaisselles de table cérémonielles, ce bouchon est un symbole de raffinement et de richesse. Il est parfois offert comme cadeau diplomatique.
+
+nom: Crâne de drakéide en électrum
+nom 1: Crâne de drakéide en électrum
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **9 kg**\n\n**(20 lb)**
+poids 1: **9 kg**\n\n**(20 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/dragonborn_skull.png
+description: \n\n---\n\nCette reproduction réaliste d’un crâne de drakéide est faite d’électrum, mélangeant or et argent pour un éclat surnaturel. Chaque crête et caractéristique est réalisée avec un détail exceptionnel, rendant cette pièce aussi fascinante qu’élégante.<br>\n\nCes crânes sont souvent exposés dans des bibliothèques arcaniques ou utilisés comme pièces décoratives par ceux qui cherchent à honorer ou imiter l'héritage draconique.
+
+nom: Broche en argent et or
+nom 1: Broche en argent et or
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **0.3 kg**\n\n**(0.6 lb)**
+poids 1: **0.3 kg**\n\n**(0.6 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/broche_argent_or.png
+description: \n\n---\n\nCette broche raffinée combine des éléments d'argent et d'or, ornée de gravures florales délicates et peut-être de petites pierres précieuses serties.<br>\n\nPortée par des nobles lors d'événements officiels, elle symbolise à la fois le goût esthétique et la richesse de son porteur.
+
+nom: Statuette en obsidienne
+nom 1: Statuette en obsidienne
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **2.5 kg**\n\n**(5 lb)**
+poids 1: **2.5 kg**\n\n**(5 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/obsidian_statuette.png
+description: \n\n---\n\nCette statuette en obsidienne brille de surfaces noires polies, rehaussées par des garnitures et incrustations délicates en or. Représentant une figure abstraite ou une bête mythologique, elle est à la fois énigmatique et fascinante.<br>\n\nElle est vénérée pour son artisanat et sa capacité à capturer la lumière dans des motifs hypnotisants.
+
+nom: Masque de guerre
+nom 1: Masque de guerre
+model: Butin.json
+prix: **750 po**
+prix 1: **750 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Objet d'art, Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/masque_guerre.png
+description: \n\n---\n\nCe masque de guerre en or est peint avec des motifs élaborés, souvent symboliques, représentant le pouvoir et la domination. Il est porté par des chefs militaires ou exposé comme trophée.<br>\n\nCe masque est à la fois fonctionnel et une œuvre artistique, souvent lié à des rituels ou des cérémonies de victoire.
+
+nom: Chaîne en or
+nom 1: Chaîne en or
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/chainette_opale_feu.png
+description: \n\n---\n\nCette chaîne en or est ornée d'une opale de feu étincelante, dont les reflets lumineux semblent capturer une flamme vivante. La délicatesse de son design en fait un bijou unique et raffiné.<br>\n\nCette pièce est souvent portée par des nobles ou des figures influentes comme symbole de leur richesse et de leur pouvoir. Sa rareté et son artisanat complexe en font un trésor très convoité.
+
+nom: Chef d'oeuvre
+nom 1: Chef d'oeuvre
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **8 kg**\n\n**(18 lb)**
+poids 1: **8 kg**\n\n**(18 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/tableau_maitre.png
+description: \n\n---\n\nCe tableau ancien représente une scène mythologique, historique ou naturelle, peint par un artiste renommé. Les couleurs et les détails témoignent d'une maîtrise exceptionnelle.<br>\n\nAccroché dans des résidences nobles ou des temples prestigieux, ce tableau est à la fois un symbole de goût artistique et de richesse. Certains spécimens peuvent contenir des indices ou des secrets cachés.
+
+nom: Manteau de soie et velours
+nom 1: Manteau de soie et velours
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **3 kg**\n\n**(7 lb)**
+poids 1: **3 kg**\n\n**(7 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/manteau_soie_velours.png
+description: \n\n---\n\nCe manteau somptueux est confectionné en fine soie et velours de la plus haute qualité, brodé de motifs complexes et incrusté de pierres de lune scintillantes.<br>\n\nPorté lors de cérémonies ou de rencontres diplomatiques importantes, il symbolise le pouvoir et le raffinement. Sa rareté et son design en font une pièce exceptionnelle réservée à l'élite.
+
+nom: Bracelet en platine
+nom 1: Bracelet en platine
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **0.7 kg**\n\n**(1.5 lb)**
+poids 1: **0.7 kg**\n\n**(1.5 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/bracelet_platine_saphir.png
+description: \n\n---\n\nCe bracelet en platine est magnifiquement conçu et orné d'un grand saphir bleu d'une pureté exceptionnelle. Son éclat en fait une pièce remarquable.<br>\n\nPorté par des nobles et des figures influentes, ce bijou reflète leur statut élevé. Sa valeur réside autant dans les matériaux utilisés que dans le savoir-faire nécessaire à sa création.
+
+nom: Gants brodés
+nom 1: Gants brodés
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **0.15 kg**\n\n**(0.3 lb)**
+poids 1: **0.15 kg**\n\n**(0.3 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/jewel_chip_glove.png
+description: \n\n---\n\nCe gant finement taillé est brodé de motifs complexes et incrusté de minuscules éclats de joyaux scintillants. Il sert à la fois d'accessoire pratique et de déclaration de mode éblouissante.<br>\n\nApprécié par les nobles et les artistes, il attire l’attention et inspire l’admiration.
+
+nom: Bracelet de cheville
+nom 1: Bracelet de cheville
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **0.1 kg**\n\n**(0.2 lb)**
+poids 1: **0.1 kg**\n\n**(0.2 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/jeweled_anklet.png
+description: \n\n---\n\nCe bracelet de cheville exquis est fabriqué à partir de délicats maillons en or et orné de petites gemmes étincelantes. Porté comme signe d’élégance et de richesse, il émet un doux tintement en mouvement, captivant ceux qui l’entendent.<br>\n\nCouramment aperçu dans les cours royales et les danses, il est à la fois captivant et envoûtant.
+
+nom: Boîte à musique en or
+nom 1: Boîte à musique en or
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/gold_music_box.png
+description: \n\n---\n\nCette boîte à musique en or finement ouvragée joue une mélodie d'une beauté poignante lorsqu'elle est remontée. Son couvercle est gravé d’une scène d’amour et de perte, ajoutant une profondeur émotionnelle à son air délicat.<br>\n\nOfferte entre amants ou collectionneurs, la boîte évoque des sentiments de nostalgie et de sérénité.
+
+nom: Diadème en or avec aigue-marines
+nom 1: Diadème en or avec aigue-marines
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **0.25 kg**\n\n**(0.5 lb)**
+poids 1: **0.25 kg**\n\n**(0.5 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/gold_circlet_aquamarines.png
+description: \n\n---\n\nCe magnifique diadème est fabriqué en or étincelant et serti de cinq aigue-marines qui scintillent comme des vagues océaniques claires. Porté comme une couronne ou un diadème, il symbolise la sagesse et l'autorité.<br>\n\nCette pièce est prisée des souverains et des sages qui cherchent à allier beauté et pouvoir.
+
+nom: Cache-œil orné
+nom 1: Cache-œil orné
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **0.6 kg**\n\n**(1.5 lb)**
+poids 1: **0.6 kg**\n\n**(1.5 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/cache_oeil.png
+description: \n\n---\n\nCe cache-œil luxueux est confectionné en fine soie noire et orné de minuscules saphirs bleus et pierres de lune. Il dégage une aura de mystère et de sophistication, souvent porté par des nobles excentriques ou des capitaines légendaires. Les pierres précieuses sont disposées dans un motif rappelant le ciel nocturne.<br>\n\nPièce unique, il est conçu pour les nobles ou figures charismatiques, souvent porteurs de légendes ou d’histoires impressionnantes.
+
+nom: Collier de perles roses
+nom 1: Collier de perles roses
+model: Butin.json
+prix: **2 500 po**
+prix 1: **2 500 po**
+poids: **0.5 kg**\n\n**(1 lb)**
+poids 1: **0.5 kg**\n\n**(1 lb)**
+type: Objet d'art, Très Rare
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/collier_perles_roses.png
+description: \n\n---\n\nCe collier délicat est composé de petites perles roses parfaitement assorties, enfilées sur un fil de soie renforcé. Sa simplicité élégante en fait une pièce très prisée.<br>\n\nLes perles roses symbolisent l’amour et la beauté, et ce collier est souvent offert comme cadeau prestigieux ou porté lors de mariages et d’événements royaux.
+
+nom: Couronne en or
+nom 1: Couronne en or
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/couronne_or_pierres.png
+description: \n\n---\n\nCette couronne en or massif est ornée de nombreux joyaux scintillants, tels que des rubis, des saphirs et des émeraudes. Elle est finement ciselée avec des motifs représentant des scènes royales ou des symboles mythologiques.<br>\n\nPortée par les rois et reines lors des cérémonies, cette couronne est le symbole absolu du pouvoir et de la richesse. Sa rareté et sa magnificence en font un trésor inestimable, convoité par les collectionneurs et les voleurs.
+
+nom: Anneau en platine
+nom 1: Anneau en platine
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **0.3 kg**\n\n**(0.5 lb)**
+poids 1: **0.3 kg**\n\n**(0.5 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/anneau_platine.png
+description: \n\n---\n\nCet anneau en platine est serti de multiples pierres précieuses disposées en un motif harmonieux et étincelant. Son design résulte d’un savoir-faire exceptionnel.<br>\n\nPorté par des nobles influents ou des marchands fortunés, il symbolise l’autorité et la prospérité. Cet anneau est souvent transmis comme héritage familial ou offert comme preuve d’une alliance prestigieuse.
+
+nom: Statuette en or
+nom 1: Statuette en or
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/statuette_or_rubis.png
+description: \n\n---\n\nCette statuette en or massif est incrustée de rubis étincelants, soigneusement disposés pour accentuer les détails de la sculpture. Elle représente souvent une figure mythologique ou divine.<br>\n\nExposée dans les palais ou les temples, elle est à la fois un symbole de dévotion et un trésor artistique. Sa rareté et sa splendeur la rendent inestimable.
+
+nom: Coupe en or
+nom 1: Coupe en or
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **2 kg**\n\n**(4 lb)**
+poids 1: **2 kg**\n\n**(4 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/coupe_or_emeraudes.png
+description: \n\n---\n\nCette coupe en or massif est richement décorée et incrustée de nombreuses émeraudes formant des motifs floraux ou géométriques. Sa surface est gravée de scènes représentant des célébrations ou des rituels.<br>\n\nUtilisée lors des banquets royaux ou offerte dans les temples, elle symbolise le prestige et l’opulence. Chaque détail de cette pièce témoigne d’un savoir-faire exceptionnel.
+
+nom: Boîte à bijoux en or
+nom 1: Boîte à bijoux en or
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **3 kg**\n\n**(6 lb)**
+poids 1: **3 kg**\n\n**(6 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/boite_bijoux_or.png
+description: \n\n---\n\nCette boîte à bijoux est fabriquée en or massif, ornée de délicates filigranes en platine et incrustée de petites pierres précieuses. L’intérieur est doublé de velours pour protéger les trésors qu’elle contient.<br>\n\nObjet de luxe ultime, elle est souvent offerte en cadeau royal ou utilisée pour conserver des bijoux inestimables. Son design reflète un savoir-faire artisanal extraordinaire.
+
+nom: Poupées gigognes en or
+nom 1: Poupées gigognes en or
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **1.5 kg**\n\n**(3 lb)**
+poids 1: **1.5 kg**\n\n**(3 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/gold_nesting_dolls.png
+description: \n\n---\n\nCet ensemble enchanteur de poupées gigognes en or présente de fines gravures et des détails colorés en émail. Chaque poupée est une réplique plus petite de la précédente, la plus petite étant ornée d'une gemme brillante unique.<br>\n\nUn chef-d'œuvre artisanal, cet ensemble est prisé par les monarques et les marchands fortunés.
+
+nom: Plateau de jeu en jade
+nom 1: Plateau de jeu en jade
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **5 kg**\n\n**(11 lb)**
+poids 1: **5 kg**\n\n**(11 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/plateau_jeu_jade.png
+description: \n\n---\n\nCe plateau de jeu est taillé dans un jade de haute qualité et accompagné de pièces finement sculptées en or massif. Les cases du plateau sont incrustées de motifs détaillés.<br>\n\nUtilisé par les nobles pour se divertir ou collectionné comme artefact, sa rareté et son savoir-faire en font un trésor convoité par les amateurs de jeux et les collectionneurs.
+
+nom: Corne à boire en ivoire
+nom 1: Corne à boire en ivoire
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **2.5 kg**\n\n**(5.5 lb)**
+poids 1: **2.5 kg**\n\n**(5.5 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/corne_boire_ivoire.png
+description: \n\n---\n\nCette corne à boire est sculptée dans de l’ivoire et décorée de filigranes en or ainsi que de pierres précieuses scintillantes. Les gravures représentent des scènes mythologiques ou des motifs animaliers.<br>\n\nSouvent utilisée lors des cérémonies royales ou des banquets prestigieux, cette pièce est à la fois fonctionnelle et décorative. Son design sophistiqué en fait un symbole de luxe et de pouvoir.
+
+nom: Armure cérémoniale en or
+nom 1: Armure cérémoniale en or
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **25 kg**\n\n**(50 lb)**
+poids 1: **25 kg**\n\n**(50 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/gold_armor_black_pearls.png
+description: \n\n---\n\nCette armure cérémoniale, entièrement forgée en or, est incrustée de perles noires étincelantes le long de ses bords. Bien qu’elle ne soit pas pratique pour le combat, elle est un symbole d’honneur martial et de faveur divine, souvent portée lors de couronnements ou de rituels sacrés.<br>\n\nSon savoir-faire est inégalé, faisant d’elle un véritable joyau artistique et statutaire. \n\n---\n\n**Mécanique** : Fournit une Classe d’Armure (CA) fixe de 16. Nécessite une valeur de **Force** de 15 ou plus pour éviter une réduction de vitesse de **3 m (10', 2c)**. Porter cette armure impose un **Désavantage** aux tests de **Dextérité (Discrétion)**.\n\n<br>**Temps pour l’enfiler** : 10 minutes.\n\n**Temps pour l’ôter** : 5 minutes.
+
+nom: Carrosse royal doré
+nom 1: Carrosse royal doré
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **900 kg**\n\n**(2 000 lb)**
+poids 1: **900 kg**\n\n**(2 000 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/gilded_royal_coach.png
+description: \n\n---\n\nLe carrosse royal doré est un chef-d’œuvre d’artisanat et d’ingénierie, conçu pour les rois, reines et nobles de haut rang. Fabriqué en bois massif et recouvert d’or, le carrosse arbore des gravures complexes, des intérieurs en velours et des fenêtres en verre ornées de filigranes dorés.<br>\n\nTiré par des chevaux majestueux, il symbolise l’autorité royale et l’opulence, souvent utilisé lors de processions grandioses et de cérémonies.\n\n---\n\n**Caractéristiques** :\n\n>- **Capacité de Passagers** : Jusqu'à 4 créatures de taille moyenne.\n\n>- **Capacité de Charge** : 500 lb (227 kg,).\n\n>- **Exigences de Traction** : Nécessite au moins deux animaux de trait.\n\n>- **Vitesse** : Correspond à la vitesse des animaux qui le tirent, réduite de moitié lorsqu'il est pleinement chargé.\n\n>- **Protection** : Offre une protection contre les intempéries et une protection mineure contre les attaques.
+
+nom: Barge funéraire dorée
+nom 1: Barge funéraire dorée
+model: Butin.json
+prix: **7 500 po**
+prix 1: **7 500 po**
+poids: **900 kg**\n\n**(2 000 lb)**
+poids 1: **900 kg**\n\n**(2 000 lb)**
+type: Objet d'art, Légendaire
+charge:
+attca_image: symbole/vide.png
+attca:
+discrétion:
+image: image/Objet/gilded_funeral_barge.png
+description: \n\n---\n\nLa barge funéraire dorée est un navire à la fois solennel et magnifique, conçu pour honorer les défunts. Sa coque est faite de bois poli et ornée de feuilles d'or, tandis que le pont présente des gravures de motifs célestes. Des draperies en soie noire et des lanternes dorées ajoutent à sa beauté sombre.<br>\n\nUtilisée pour le transport cérémoniel des dépouilles nobles ou royales, elle incarne un équilibre parfait entre révérence et grandeur. \n\n---\n\n**Caractéristiques** :\n\n>- **Poids** : 3 000 lb (1400 kg).\n\n>- **Capacité de Passagers** : Peut accueillir jusqu'à **6 passagers**.\n\n>- **Équipage** : Nécessite un équipage minimum de **1 personne**.\n\n>- **Vitesse** : Navigue à **1.5 km/h** (1 mph, 10c).\n\n---\n\n **Structure** :\n>- **Classe d'Armure** : 15 (bois renforcé)\n>- **Points de Vie** : 100\n>- **Seuil de Dégâts** : 10\n>- **Dimensions** : Longueur 12 m (40', 8c), Largeur 3 m (10', 2c).
+
+nom: ![Case!](symbole/cadre4.png)
+nom 1: ![Case!](symbole/cadre4.png)
+model: Butin.json
+prix: ![Case!](symbole/caseD2.png)
+prix 1: ![Case!](symbole/caseD2.png)
+poids: ![Case!](symbole/caseD2.png)
+poids 1: ![Case!](symbole/caseD2.png)
+symbole 1: image/categorie/Tresor.png
+symbole 2: image/categorie/Tresor.png
+symbole 3: image/categorie/Tresor.png
+symbole 4: image/categorie/Tresor.png
+type:
+charge:
+attca_image: symbole/vide.png
+attca: 
+discrétion:
+image: image/categorie/Tresor.png
+description: ![Case!](symbole/Cadreplein.png)
