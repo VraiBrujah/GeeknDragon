@@ -148,24 +148,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper de création <video>
     const makeVideo = (src, hidden = true) => {
       const v = document.createElement('video');
-      
-      // Utilisation du gestionnaire de streaming optimisé pour éviter les erreurs HTTP/2
-      const isLocalPath = src.startsWith('/media/videos/') || src.startsWith('/videos/');
-      if (isLocalPath) {
-        // Utilise le script de streaming optimisé
-        v.src = `/stream-video.php?file=${encodeURIComponent(src)}`;
-        v.setAttribute('data-original-src', src);
-      } else {
-        v.src = src;
-      }
-      
+      v.src = src;
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('playsinline', ''); // iOS
-      v.preload = 'metadata'; // Optimisé pour éviter les timeouts
+      v.preload = 'auto'; // Changé pour précharger les vidéos lourdes
       v.autoplay = autoPlayAllowed;
       v.loop = false; // géré au cas par cas
-      
       // Layout + anim
       v.style.position = 'absolute';
       v.style.inset = '0';
@@ -176,28 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
       v.style.transition = `opacity ${FADE_MS}ms ease, filter ${FADE_MS}ms ease`;
       v.style.opacity = hidden ? '0' : '1';
       v.style.filter = hidden ? 'blur(8px)' : 'blur(0)';
-      
-      // Gestion d'erreur robuste avec retry pour les erreurs de streaming
-      if (isLocalPath) {
-        let retryCount = 0;
-        const maxRetries = 2;
-        
-        const handleError = () => {
-          if (retryCount < maxRetries) {
-            retryCount++;
-            console.log(`[HERO] Retry ${retryCount}/${maxRetries} pour:`, src);
-            // Fallback vers l'URL directe après échec du streaming
-            v.src = src;
-          } else {
-            console.error('[HERO] Échec définitif du chargement pour:', src);
-            // Dispatcher l'événement d'erreur pour que le système de rotation continue
-            v.dispatchEvent(new Event('error'));
-          }
-        };
-        
-        v.addEventListener('error', handleError);
-      }
-      
       return v;
     };
 

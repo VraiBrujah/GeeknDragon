@@ -14,12 +14,41 @@ $extraHead = <<<HTML
 HTML;
 
 /* ───── STOCK ───── */
+$snipcartSecret = $config['snipcart_secret_api_key'] ?? null;
+$stockData = json_decode(file_get_contents(__DIR__ . '/data/stock.json'), true) ?? [];
 function getStock(string $id): ?int
 {
-    // Pour de meilleures performances, désactivez la vérification du stock en temps réel
-    // Le stock sera géré directement par Snipcart côté client
-    // Retourne null = stock illimité (pas de vérification serveur)
-    return null;
+    global $snipcartSecret, $stockData;
+    static $cache = [];
+    if (isset($cache[$id])) {
+        return $cache[$id];
+    }
+    
+    // Mode développement : utilise uniquement les données locales (rapide)
+    // En production, activez la synchronisation API en définissant SNIPCART_SYNC=true
+    $useApiSync = ($_ENV['SNIPCART_SYNC'] ?? false) && $snipcartSecret;
+    
+    if ($useApiSync) {
+        // Appel API Snipcart (lent mais précis)
+        $ch = curl_init('https://app.snipcart.com/api/inventory/' . urlencode($id));
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_USERPWD => $snipcartSecret . ':',
+            CURLOPT_TIMEOUT => 2, // Timeout rapide pour éviter les blocages
+        ]);
+        $res = curl_exec($ch);
+        $status = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        
+        if ($res !== false && $status < 400) {
+            $inv = json_decode($res, true);
+            return $cache[$id] = $inv['stock'] ?? $inv['available'] ?? null;
+        }
+        // En cas d'erreur API, fallback vers les données locales
+    }
+    
+    // Utilise les données locales (par défaut)
+    return $cache[$id] = $stockData[$id] ?? null;
 }
 function inStock(string $id): bool
 {
@@ -72,8 +101,10 @@ foreach ($data as $id => $p) {
 
 // Pour compatibilité (si du code utilise encore $products)
 $products = array_merge($pieces, $cards, $triptychs);
-// Stock géré par Snipcart - pas de vérification serveur pour des performances optimales
 $stock = [];
+foreach ($products as $p) {
+    $stock[$p['id']] = getStock($p['id']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
