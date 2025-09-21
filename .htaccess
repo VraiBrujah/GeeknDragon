@@ -1,0 +1,64 @@
+# Configuration pour le streaming vidéo optimisé
+RewriteEngine On
+
+# Redirection des anciennes URLs vidéo vers le nouveau chemin
+RewriteRule ^videos/compressed/(.+)\.mp4$ /media/videos/backgrounds/$1.mp4 [R=301,L]
+
+# Configuration pour les fichiers vidéo - Support des requêtes de plage (Range Requests)
+<FilesMatch "\.(mp4|webm|mov|avi)$">
+    # Active le support des requêtes de plage pour le streaming
+    Header set Accept-Ranges bytes
+    
+    # Optimisation du cache pour les vidéos
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    
+    # Headers pour améliorer la compatibilité streaming
+    Header set Cache-Control "public, max-age=2592000"
+    
+    # Évite les erreurs HTTP/2 en forçant HTTP/1.1 pour les gros fichiers
+    Header set Connection "Keep-Alive"
+    Header unset X-Frame-Options
+    
+    # Configuration pour éviter les timeouts sur les gros fichiers
+    SetEnv nokeepalive ssl-unclean-shutdown
+    
+    # Limite la taille des chunks pour éviter les erreurs de connexion
+    <IfModule mod_deflate.c>
+        SetEnvIfNoCase Request_URI "\.(?:mp4|webm|mov|avi)$" no-gzip dont-vary
+    </IfModule>
+</FilesMatch>
+
+# Configuration spécifique pour éviter les erreurs HTTP/2 sur les vidéos
+<IfModule mod_http2.c>
+    # Désactive HTTP/2 pour les fichiers vidéo pour éviter les erreurs de stream
+    <FilesMatch "\.(mp4|webm|mov|avi)$">
+        H2Push off
+        H2EarlyHints off
+    </FilesMatch>
+</IfModule>
+
+# Configuration de sécurité pour les médias
+<FilesMatch "\.(mp4|webm|mov|avi|jpg|jpeg|png|gif|webp)$">
+    # Empêche l'exécution de scripts dans les dossiers média
+    RemoveHandler .php .phtml .php3 .php4 .php5 .php6
+    RemoveType .php .phtml .php3 .php4 .php5 .php6
+    
+    # Headers de sécurité
+    Header set X-Content-Type-Options nosniff
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</FilesMatch>
+
+# Optimisation générale pour éviter les erreurs de connexion
+<IfModule mod_reqtimeout.c>
+    # Augmente les timeouts pour les gros fichiers
+    RequestReadTimeout header=20-40,MinRate=500 body=20,MinRate=500
+</IfModule>
+
+# Configuration MIME pour s'assurer du bon type de contenu
+<IfModule mod_mime.c>
+    AddType video/mp4 .mp4
+    AddType video/webm .webm
+    AddType video/quicktime .mov
+    AddType video/x-msvideo .avi
+</IfModule>
