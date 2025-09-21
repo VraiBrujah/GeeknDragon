@@ -247,7 +247,7 @@ echo $snipcartInit;
 
   <!-- ===== HERO ===== -->
   <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/Carte1_compressed.mp4" data-videos='["/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4","/media/videos/backgrounds/mage_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4"]'></div>
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/trip2_compressed.mp4" data-videos='["/media/videos/backgrounds/Carte1_compressed.mp4","/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative z-10 max-w-4xl p-6 hero-text">
       <h1 class="text-5xl font-extrabold mb-6" data-i18n="gameHelp.hero.title">
@@ -298,7 +298,7 @@ echo $snipcartInit;
   </section>
 
   <!-- ===== INTRODUCTION AUX TRIPTYQUES ===== -->
-  <section class="py-16 bg-gray-900/80" id="guide-triptyques">
+  <section class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6 text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-8 text-indigo-400">
         Qu'est-ce qu'un triptyque Geek & Dragon ?
@@ -756,6 +756,66 @@ echo $snipcartInit;
     </div>
   </section>
 
+  <!-- ===== COMMENT UTILISER VOS TRIPTYQUES ===== -->
+  <section class="py-16 bg-gradient-to-r from-indigo-900/30 to-purple-900/30">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-indigo-400">
+          Comment utiliser vos triptyques
+        </h2>
+        <p class="text-xl text-gray-300 txt-court">
+          Vos triptyques cartonnés sont conçus pour être pliés et organisés sur votre table de jeu
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="usage-step">
+          <div class="step-number">1</div>
+          <h3 class="text-xl font-semibold mb-4 text-indigo-400">📁 Pliez en 3 volets</h3>
+          <p class="text-gray-300">
+            Chaque triptyque se plie facilement en 3 sections. Le carton robuste maintient la forme 
+            et permet une consultation rapide des informations sur les 3 volets.
+          </p>
+        </div>
+
+        <div class="usage-step">
+          <div class="step-number">2</div>
+          <h3 class="text-xl font-semibold mb-4 text-blue-400">🎯 Organisez sur votre table</h3>
+          <p class="text-gray-300">
+            Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. 
+            Accès instantané à toutes vos capacités.
+          </p>
+        </div>
+
+        <div class="usage-step">
+          <div class="step-number">3</div>
+          <h3 class="text-xl font-semibold mb-4 text-purple-400">⚡ Consultez pendant le jeu</h3>
+          <p class="text-gray-300">
+            Plus besoin d'ouvrir les manuels ! Toutes vos aptitudes sont visibles d'un coup d'œil. 
+            Le MJ et les autres joueurs restent concentrés sur l'action.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <div class="bg-gray-800/50 rounded-xl p-8 border border-gray-700">
+          <h3 class="text-2xl font-bold mb-4 text-yellow-400">💡 Conseil Pro</h3>
+          <p class="text-gray-300 text-lg">
+            Gardez vos triptyques ouverts pendant toute la session. 
+            Ils remplacent efficacement la feuille de personnage traditionnelle et accélèrent considérablement le jeu !
+          </p>
+        </div>
+      </div>
+      
+      <!-- Bouton de retour au hero -->
+      <div class="text-center mt-16">
+        <a href="#main" class="btn btn-outline">
+          ⬆️ Retour aux guides principaux
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== GUIDE DES CARTES À JOUER ===== -->
   <section class="py-24 bg-gradient-to-r from-gray-900/80 to-slate-900/80 scroll-mt-24" id="guide-cartes">
     <div class="max-w-7xl mx-auto px-6">
@@ -950,6 +1010,13 @@ echo $snipcartInit;
             </div>
           </div>
         </div>
+      </div>
+      
+      <!-- Bouton de retour au hero -->
+      <div class="text-center mt-16">
+        <a href="#main" class="btn btn-outline">
+          ⬆️ Retour aux guides principaux
+        </a>
       </div>
 
     </div>
@@ -1329,60 +1396,14 @@ echo $snipcartInit;
           </div>
         </div>
       </div>
-
-    </div>
-  </section>
-
-  <!-- ===== COMMENT UTILISER VOS TRIPTYQUES ===== -->
-  <section class="py-16 bg-gradient-to-r from-indigo-900/30 to-purple-900/30">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6 text-indigo-400">
-          Comment utiliser vos triptyques
-        </h2>
-        <p class="text-xl text-gray-300 txt-court">
-          Vos triptyques cartonnés sont conçus pour être pliés et organisés sur votre table de jeu
-        </p>
+      
+      <!-- Bouton de retour au hero -->
+      <div class="text-center mt-16">
+        <a href="#main" class="btn btn-outline">
+          ⬆️ Retour aux guides principaux
+        </a>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="usage-step">
-          <div class="step-number">1</div>
-          <h3 class="text-xl font-semibold mb-4 text-indigo-400">📁 Pliez en 3 volets</h3>
-          <p class="text-gray-300">
-            Chaque triptyque se plie facilement en 3 sections. Le carton robuste maintient la forme 
-            et permet une consultation rapide des informations sur les 3 volets.
-          </p>
-        </div>
-
-        <div class="usage-step">
-          <div class="step-number">2</div>
-          <h3 class="text-xl font-semibold mb-4 text-blue-400">🎯 Organisez sur votre table</h3>
-          <p class="text-gray-300">
-            Disposez vos 3 triptyques devant vous : Espèce à gauche, Classe au centre, Historique à droite. 
-            Accès instantané à toutes vos capacités.
-          </p>
-        </div>
-
-        <div class="usage-step">
-          <div class="step-number">3</div>
-          <h3 class="text-xl font-semibold mb-4 text-purple-400">⚡ Consultez pendant le jeu</h3>
-          <p class="text-gray-300">
-            Plus besoin d'ouvrir les manuels ! Toutes vos aptitudes sont visibles d'un coup d'œil. 
-            Le MJ et les autres joueurs restent concentrés sur l'action.
-          </p>
-        </div>
-      </div>
-
-      <div class="text-center mt-12">
-        <div class="bg-gray-800/50 rounded-xl p-8 border border-gray-700">
-          <h3 class="text-2xl font-bold mb-4 text-yellow-400">💡 Conseil Pro</h3>
-          <p class="text-gray-300 text-lg">
-            Gardez vos triptyques ouverts pendant toute la session. 
-            Ils remplacent efficacement la feuille de personnage traditionnelle et accélèrent considérablement le jeu !
-          </p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1391,15 +1412,19 @@ echo $snipcartInit;
     <div class="max-w-4xl mx-auto px-6 text-center">
       <h2 class="text-3xl font-bold mb-6 text-indigo-400">Prêt à révolutionner vos parties ?</h2>
       <p class="text-xl text-gray-300 mb-8 txt-court">
-        Découvrez notre collection complète de triptyques et transformez votre expérience de jeu de rôle.
+        Découvrez notre collection complète : triptyques, cartes d'équipement et pièces métalliques. 
+        Transformez votre expérience de jeu de rôle avec nos accessoires artisanaux conçus au Québec.
       </p>
       
       <div class="flex flex-col md:flex-row gap-6 justify-center">
         <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-primary text-lg px-8 py-4">
-          🛒 Acheter mes Triptyques
+          🃏 Triptyques & Cartes
+        </a>
+        <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary text-lg px-8 py-4">
+          🪙 Pièces Métalliques
         </a>
         <a href="<?= langUrl('boutique.php') ?>" class="btn btn-outline text-lg px-8 py-4">
-          🎲 Voir tous les produits
+          🛒 Voir toute la boutique
         </a>
       </div>
     </div>
@@ -1898,7 +1923,7 @@ function printMoneySheets() {
         };
     </script>
 </body>
-</html>`;
+</html>\`;
     
     // Écrire le contenu dans la nouvelle fenêtre
     printWindow.document.write(printContent);
@@ -1922,6 +1947,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 </script>
+<script src="/js/hero-videos.js"></script>
 <script src="/js/boutique-premium.js"></script>
 <script src="/js/currency-converter.js"></script>
 
