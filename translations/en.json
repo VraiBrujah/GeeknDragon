@@ -122,12 +122,14 @@
     "cards": {
       "title": "Equipment cards",
       "coming": "Coming soon",
+      "description": "Themed packs of illustrated cards to manage inventory visually.",
       "description1": "Our scribes are still enchanting these adventure parchments.",
       "description2": "The equipment cards will forge their way in by the next moon."
     },
     "triptychs": {
       "title": "Character triptychs",
       "coming": "Coming soon",
+      "description": "Ready-to-play heroes for improvised sessions.",
       "description1": "The artisans are still shaping these hero grimoires.",
       "description2": "The triptychs will join the shop shortly."
     },
@@ -136,6 +138,20 @@
       "description1": "Don't let the game master go broke for your pleasure: each player will soon be able to contribute by buying their triptych, cards and coins.",
       "description2": "By comparison, some dragon figurines sell for over <strong>$300</strong> each and are generally used only once in an entire campaign—and even then, only when the scenario allows it, because it's not systematic. Our coins, however, are used in every session for years of campaigning.",
       "description3": "Fill out the <em>ownership card</em> opposite by writing your name and the number of coins purchased, sign it and hand your treasures to the game master. At the end of the campaign, they will return them to you without difficulty."
+    },
+    "converter": {
+      "title": "Currency converter",
+      "sourcesLabel": "💰 Source currencies",
+      "multiplierLabel": "⚖️ Multiplier table (editable)",
+      "equivalences": "💼 Total equivalences by metal",
+      "recommendations": "✨ Optimal recommendations",
+      "currency": {
+        "copper": "Copper",
+        "silver": "Silver",
+        "electrum": "Electrum",
+        "gold": "Gold",
+        "platinum": "Platinum"
+      }
     }
   },
   "news": {
@@ -160,6 +176,14 @@
       "p6": "But the attempted burglary of the mayor’s residence went awry. A rustle in the trash, an overly curious raccoon, and a poorly sorted compost threw the operation into chaos, abruptly halting our heroic scoundrels’ exploits.",
       "p7": "The climax? A cosmic raccoon sucked into the stars by inverted gravity, while the mayor, in tears, emptied his safe in a whirl of copper and silver coins in homage to his lost sons, and the spectators and table erupted in laughter—completely swept away by the immersion."
     }
+  },
+  "ui": {
+    "noImageAvailable": "No image available",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close"
   },
   "testimonials": {
     "title": "Testimonials",

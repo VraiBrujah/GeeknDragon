@@ -292,7 +292,7 @@ echo $snipcartInit;
         </div>
 
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
-          <span data-i18n="shop.cards.description">Paquets thématiques de cartes illustrées pour gérer l'inventaire visuellement.</span>
+          <span data-i18n="shop.cards.description"><?= __('shop.cards.description', 'Paquets thématiques de cartes illustrées pour gérer l\'inventaire visuellement.') ?></span>
         </p>
       </div>
     </section>
@@ -308,7 +308,7 @@ echo $snipcartInit;
         </div>
 
         <p class="text-center mt-8 italic max-w-3xl mx-auto text-gray-300">
-          <span data-i18n="shop.triptychs.description">Héros clé en main pour des parties improvisées.</span>
+          <span data-i18n="shop.triptychs.description"><?= __('shop.triptychs.description', 'Héros clé en main pour des parties improvisées.') ?></span>
         </p>
       </div>
     </section>

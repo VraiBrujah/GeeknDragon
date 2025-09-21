@@ -1,11 +1,14 @@
 <?php
 /**
- * Basic internationalisation bootstrap.
+ * Système d'internationalisation amélioré.
  *
- * Language is resolved from the `lang` query parameter or the stored cookie.
- * The helper `langUrl()` appends the current language to internal links when
- * needed so that navigation remains consistent across pages.
+ * La langue est résolue depuis le paramètre `lang` ou le cookie stocké.
+ * La fonction `langUrl()` ajoute la langue courante aux liens internes quand
+ * nécessaire pour que la navigation reste cohérente entre les pages.
  */
+
+// Inclusion du helper d'internationalisation
+require_once __DIR__ . '/includes/i18n-helper.php';
 
 $availableLangs = ['fr', 'en'];
 $lang = $_GET['lang'] ?? ($_COOKIE['lang'] ?? 'fr');
@@ -15,7 +18,7 @@ if (!in_array($lang, $availableLangs, true)) {
 setcookie('lang', $lang, time() + 31536000, '/');
 
 /**
- * Append the current language as query parameter to a URL.
+ * Ajoute la langue courante comme paramètre de requête à une URL.
  */
 function langUrl(string $url): string
 {
@@ -34,6 +37,22 @@ function langUrl(string $url): string
     return isset($parts[1]) ? $parts[0] . '#' . $parts[1] : $parts[0];
 }
 
+/**
+ * Charge les traductions depuis le fichier JSON correspondant à la langue
+ */
 $translations = json_decode(file_get_contents(__DIR__ . "/translations/$lang.json"), true) ?: [];
+
+/**
+ * Alias global pour la fonction t() du helper
+ */
+function __(string $key, string $fallback = ''): string 
+{
+    global $translations;
+    return t($key, $translations, $fallback);
+}
+
+// Expose les variables globales pour compatibilité
+$GLOBALS['lang'] = $lang;
+$GLOBALS['translations'] = $translations;
 ?>
 

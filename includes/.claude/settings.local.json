@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir)",
+      "Read(E:\\GitHub\\GeeknDragon/**)",
+      "Read(E:\\GitHub\\GeeknDragon/**)",
+      "Read(E:\\GitHub\\GeeknDragon\\translations/**)",
+      "Read(E:\\GitHub\\GeeknDragon\\translations/**)",
+      "Read(E:\\GitHub\\GeeknDragon\\translations/**)",
+      "Read(E:\\GitHub\\GeeknDragon/**)",
+      "Read(E:\\GitHub\\GeeknDragon/**)",
+      "Read(E:\\GitHub\\GeeknDragon/**)",
+      "Read(E:\\GitHub\\GeeknDragon/**)",
+      "Bash(php:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

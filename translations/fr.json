@@ -120,14 +120,16 @@
       "button": "Demander un devis"
     },
     "cards": {
-      "title": "Cartes d’équipement",
+      "title": "Cartes d'équipement",
       "coming": "À venir",
-      "description1": "Nos scribes enchantent encore ces parchemins d’aventure.",
-      "description2": "Les cartes d’équipement forgeront leur entrée lors de la prochaine lune."
+      "description": "Paquets thématiques de cartes illustrées pour gérer l'inventaire visuellement.",
+      "description1": "Nos scribes enchantent encore ces parchemins d'aventure.",
+      "description2": "Les cartes d'équipement forgeront leur entrée lors de la prochaine lune."
     },
     "triptychs": {
       "title": "Triptyques de personnage",
       "coming": "À venir",
+      "description": "Héros clé en main pour des parties improvisées.",
       "description1": "Les artisans façonnent encore ces grimoires de héros.",
       "description2": "Les triptyques rejoindront la boutique sous peu."
     },
@@ -136,6 +138,20 @@
       "description1": "Ne laissez pas le maître de jeu se ruiner pour votre plaisir&nbsp;: chaque joueur pourra bientôt contribuer en achetant son triptyque, ses cartes et ses pièces.",
       "description2": "À titre de comparaison, certaines figurines de dragon se vendent plus de <strong>300&nbsp;$</strong> l'unité et ne sont généralement utilisées qu’une seule fois dans toute une campagne — et encore, seulement lorsque le scénario le permet, car ce n’est pas systématique. Nos pièces, elles, servent à chaque session et pour des années de campagne.",
       "description3": "Complétez la <em>carte de propriété</em> ci‑contre en indiquant votre nom et le nombre de pièces achetées, signez-la et remettez vos trésors au maître de jeu. À la fin de la campagne, il vous les restituera sans difficulté."
+    },
+    "converter": {
+      "title": "Convertisseur de monnaie",
+      "sourcesLabel": "💰 Monnaies sources",
+      "multiplierLabel": "⚖️ Tableau multiplicateur (éditable)",
+      "equivalences": "💼 Équivalences totales par métal",
+      "recommendations": "✨ Recommandations optimales",
+      "currency": {
+        "copper": "Cuivre",
+        "silver": "Argent",
+        "electrum": "Électrum",
+        "gold": "Or",
+        "platinum": "Platine"
+      }
     }
   },
   "news": {
@@ -160,6 +176,14 @@
       "p6": "Mais la tentative de cambriolage de la demeure du maire tourna court. Un bruissement dans les poubelles, un raton laveur trop curieux et un compost mal ordonné plongèrent l’opération dans le chaos, stoppant net les exploits de nos trois héros-voyous.",
       "p7": "Le point culminant ? Un raton laveur cosmique aspiré dans les étoiles, emporté par une gravité inversée, tandis que le maire, en larmes, vidait son coffre dans un tourbillon de pièces de cuivre et d’argent en hommage à ses fils disparus, et que le public et la table éclatait de rire dans une immersion totale."
     }
+  },
+  "ui": {
+    "noImageAvailable": "Aucune image disponible",
+    "previousImage": "Image précédente",
+    "nextImage": "Image suivante",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "close": "Fermer"
   },
   "testimonials": {
     "title": "Témoignages",

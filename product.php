@@ -182,12 +182,12 @@ echo $snipcartInit;
               </div>
               <?php endforeach; ?>
             </div>
-            <div class="swiper-button-prev" role="button" aria-label="Image précédente"></div>
-            <div class="swiper-button-next" role="button" aria-label="Image suivante"></div>
+            <div class="swiper-button-prev" role="button" aria-label="<?= __('ui.previousImage', 'Image précédente') ?>"></div>
+            <div class="swiper-button-next" role="button" aria-label="<?= __('ui.nextImage', 'Image suivante') ?>"></div>
           </div>
           <?php else : ?>
           <div class="w-full max-w-lg h-96 bg-gray-700 rounded-lg flex items-center justify-center">
-            <span class="text-gray-400">Aucune image disponible</span>
+            <span class="text-gray-400" data-i18n="ui.noImageAvailable"><?= __('ui.noImageAvailable', 'Aucune image disponible') ?></span>
           </div>
           <?php endif; ?>
         </div>
