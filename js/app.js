@@ -15,7 +15,8 @@
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-  const log = () => {};
+  // Pas d’erreurs si console absente
+  const log = (...args) => { try { console.log('[GD]', ...args); } catch (_) {} };
 
   // Throttle / Debounce
   const throttle = (fn, wait = 100) => {
@@ -495,6 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
   videos.forEach((vid) => {
     // DOUBLE PROTECTION : Vérifier que ce n'est pas une vidéo hero
     if (vid.closest('.hero-videos')) {
+      console.log('[GD] Skipping hero video from app.js management:', vid);
       return;
     }
     
@@ -995,6 +997,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (snipcartBtn && customIndex) {
         snipcartBtn.setAttribute(`data-item-custom${customIndex}-value`, select.value);
+        console.log(`Synced custom${customIndex} to:`, select.value, 'for product:', targetId);
       }
     };
 
@@ -1011,6 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetId = btn.dataset.itemId || btn.getAttribute('data-item-id');
         const selects = document.querySelectorAll(`select[data-target="${targetId}"]`);
         selects.forEach(select => syncSelect(select));
+        console.log('Pre-sync before add to cart for:', targetId);
       });
     });
   };
