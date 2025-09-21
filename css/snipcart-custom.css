@@ -166,6 +166,10 @@
   position:static;
   margin:0;
 }
+/* Espacement constant entre les boutons « Appliquer » et « Annuler » */
+.snipcart .snipcart-discount-box__cancel{
+  margin-left:0.75rem;
+}
 
 /* =================================================================== */
 /* LIVRAISON (retour webhook)                                           */
