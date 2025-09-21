@@ -21,7 +21,8 @@
       "Read(H:\\GitHub\\CreationCarteRPG\\exports\\Race/**)",
       "Read(H:\\GitHub\\CreationCarteRPG\\exports\\Race\\01- 01- Aasimar - Espèce/**)",
       "Read(H:\\GitHub\\CreationCarteRPG\\exports\\Classe/**)",
-      "Bash(start http://localhost:8000/aide-jeux.php)"
+      "Bash(start http://localhost:8000/aide-jeux.php)",
+      "Bash(move:*)"
     ],
     "deny": [],
     "ask": []

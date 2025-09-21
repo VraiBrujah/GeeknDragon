@@ -1276,27 +1276,27 @@ echo $snipcartInit;
           <!-- Image carte de propriété cliquable -->
           <div class="order-2 md:order-1 flex flex-col">
             <div class="bg-gray-800/30 rounded-xl p-6 border border-amber-600/20">
-              <div class="relative group cursor-pointer" onclick="openPrintModal()">
+              <div class="relative group cursor-pointer" onclick="downloadMoneySheet()">
                 <img src="/media/content/carte_propriete.webp" alt="Carte de propriété des pièces Geek & Dragon" 
                      class="rounded-lg shadow-lg w-full object-cover border border-amber-600/30 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105" loading="lazy">
                 
-                <!-- Overlay d'impression au survol -->
+                <!-- Overlay de téléchargement au survol -->
                 <div class="absolute inset-0 bg-black/50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div class="text-center text-white">
-                    <div class="text-3xl mb-2">🖨️</div>
-                    <div class="font-bold text-lg">Imprimer</div>
-                    <div class="text-sm text-amber-300">6 fiches par page</div>
+                    <div class="text-3xl mb-2">📥</div>
+                    <div class="font-bold text-lg">Télécharger</div>
+                    <div class="text-sm text-amber-300">Fiche à imprimer</div>
                   </div>
                 </div>
               </div>
               
               <div class="mt-4 text-center">
                 <p class="text-amber-300 font-medium mb-2">📄 Fiche de Monnaie officielle</p>
-                <p class="text-xs text-gray-400 mb-3">Cliquez sur l'image pour imprimer 6 fiches par page</p>
+                <p class="text-xs text-gray-400 mb-3">Cliquez sur l'image pour télécharger la fiche à imprimer</p>
                 
-                <button onclick="openPrintModal()" 
+                <button onclick="downloadMoneySheet()" 
                         class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">
-                  🖨️ Imprimer les fiches
+                  📥 Télécharger la fiche
                 </button>
               </div>
             </div>
@@ -1328,8 +1328,8 @@ echo $snipcartInit;
               <div class="bg-amber-900/20 p-6 rounded-lg border border-amber-600/30 mt-8">
                 <h4 class="text-lg font-bold text-amber-400 mb-4 flex items-center justify-between">
                   <span>📋 Système de Propriété</span>
-                  <button onclick="openPrintModal()" class="text-xs bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded-full transition-colors">
-                    🖨️ Imprimer
+                  <button onclick="downloadMoneySheet()" class="text-xs bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded-full transition-colors">
+                    📥 Télécharger
                   </button>
                 </h4>
                 <p class="text-sm leading-relaxed">
@@ -1416,63 +1416,22 @@ echo $snipcartInit;
         Transformez votre expérience de jeu de rôle avec nos accessoires artisanaux conçus au Québec.
       </p>
       
-      <div class="flex flex-col md:flex-row gap-6 justify-center">
-        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-primary text-lg px-8 py-4">
-          🃏 Triptyques & Cartes
+      <div class="flex flex-col md:flex-row gap-4 justify-center">
+        <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-primary text-lg px-6 py-4">
+          📁 Triptyques
         </a>
-        <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary text-lg px-8 py-4">
+        <a href="<?= langUrl('boutique.php#cartes') ?>" class="btn btn-primary text-lg px-6 py-4">
+          🃏 Cartes d'Équipement
+        </a>
+        <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary text-lg px-6 py-4">
           🪙 Pièces Métalliques
         </a>
-        <a href="<?= langUrl('boutique.php') ?>" class="btn btn-outline text-lg px-8 py-4">
+        <a href="<?= langUrl('boutique.php') ?>" class="btn btn-outline text-lg px-6 py-4">
           🛒 Voir toute la boutique
         </a>
       </div>
     </div>
   </section>
-
-</main>
-
-<!-- Modal d'impression des fiches de monnaie -->
-<div id="printModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center">
-  <div class="bg-gray-800 rounded-xl p-6 max-w-md w-full mx-4 border border-amber-600/30">
-    <div class="text-center mb-6">
-      <div class="text-4xl mb-3">🖨️</div>
-      <h3 class="text-xl font-bold text-amber-400 mb-2">Imprimer les Fiches de Monnaie</h3>
-      <p class="text-gray-300 text-sm">
-        Imprimez 6 fiches de monnaie par page pour vos joueurs
-      </p>
-    </div>
-    
-    <div class="space-y-4">
-      <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-600/30">
-        <h4 class="font-bold text-amber-400 mb-2">📋 Format d'impression :</h4>
-        <ul class="text-sm text-gray-300 space-y-1">
-          <li>• 6 fiches par page (3×2)</li>
-          <li>• Format A4 / Lettre</li>
-          <li>• Orientation Portrait</li>
-          <li>• Qualité optimale pour impression</li>
-        </ul>
-      </div>
-      
-      <div class="bg-blue-900/20 p-4 rounded-lg border border-blue-600/30">
-        <h4 class="font-bold text-blue-400 mb-2">💡 Conseil d'impression :</h4>
-        <p class="text-sm text-gray-300">
-          Utilisez du papier cartonné (200-250g) pour une meilleure durabilité. 
-          Vous pouvez aussi plastifier les fiches pour une utilisation répétée.
-        </p>
-      </div>
-    </div>
-    
-    <div class="flex gap-3 mt-6">
-      <button onclick="printMoneySheets()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-        🖨️ Imprimer
-      </button>
-      <button onclick="closePrintModal()" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-        Annuler
-      </button>
-    </div>
-  </div>
-</div>
 
 </main>
 
@@ -1651,301 +1610,65 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Gestion du modal d'impression des fiches de monnaie
-function openPrintModal() {
-    document.getElementById('printModal').classList.remove('hidden');
+// Fonction simple de téléchargement des fiches de monnaie
+function downloadMoneySheet() {
+    // Créer un popup de confirmation dans le style du site
+    const popup = document.createElement('div');
+    popup.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center';
+    popup.innerHTML = `
+        <div class="bg-gray-800 rounded-xl p-6 max-w-md w-full mx-4 border border-amber-600/30">
+            <div class="text-center mb-6">
+                <div class="text-4xl mb-3">📥</div>
+                <h3 class="text-xl font-bold text-amber-400 mb-2">Télécharger la Fiche de Monnaie</h3>
+                <p class="text-gray-300 text-sm">
+                    Téléchargez l'image de la fiche de monnaie pour l'imprimer chez vous
+                </p>
+            </div>
+            
+            <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-600/30 mb-4">
+                <h4 class="font-bold text-amber-400 mb-2">💡 Conseil d'impression :</h4>
+                <p class="text-sm text-gray-300">
+                    Imprimez sur du papier cartonné (200-250g) pour une meilleure durabilité. 
+                    Vous pouvez plastifier la fiche pour une utilisation répétée.
+                </p>
+            </div>
+            
+            <div class="flex gap-3">
+                <button onclick="confirmDownload()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    📥 Télécharger
+                </button>
+                <button onclick="closeDownloadPopup()" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
     document.body.style.overflow = 'hidden';
+    window.currentDownloadPopup = popup;
 }
 
-function closePrintModal() {
-    document.getElementById('printModal').classList.add('hidden');
-    document.body.style.overflow = 'auto';
+function closeDownloadPopup() {
+    if (window.currentDownloadPopup) {
+        document.body.removeChild(window.currentDownloadPopup);
+        document.body.style.overflow = 'auto';
+        window.currentDownloadPopup = null;
+    }
 }
 
-function printMoneySheets() {
-    // Créer une nouvelle fenêtre pour l'impression
-    const printWindow = window.open('', '_blank', 'width=800,height=600');
+function confirmDownload() {
+    // Lancer le téléchargement
+    const link = document.createElement('a');
+    link.href = '/media/content/carte_propriete.webp';
+    link.download = 'fiche-monnaie-geek-dragon.webp';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     
-    // Attendre que la fenêtre soit prête
-    printWindow.document.open();
-    
-    // HTML pour l'impression de 6 fiches par page (3x2)
-    const printContent = `<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiches de Monnaie - Geek & Dragon</title>
-    <style>
-        @page {
-            size: A4;
-            margin: 8mm;
-        }
-        
-        * {
-            box-sizing: border-box;
-        }
-        
-        body {
-            margin: 0;
-            padding: 5mm;
-            font-family: 'Arial', sans-serif;
-            background: white;
-            color: #000;
-        }
-        
-        .print-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 4mm;
-            width: 100%;
-            height: 277mm; /* A4 height minus margins */
-        }
-        
-        .money-sheet {
-            border: 2px solid #8B4513;
-            border-radius: 6px;
-            padding: 3mm;
-            background: #F5F5DC;
-            display: flex;
-            flex-direction: column;
-            font-size: 9px;
-            line-height: 1.1;
-            page-break-inside: avoid;
-        }
-        
-        .sheet-header {
-            text-align: center;
-            border-bottom: 2px solid #8B4513;
-            padding-bottom: 2mm;
-            margin-bottom: 2mm;
-        }
-        
-        .sheet-title {
-            font-size: 11px;
-            font-weight: bold;
-            color: #8B4513;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .form-field {
-            margin-bottom: 2mm;
-            display: flex;
-            align-items: center;
-        }
-        
-        .form-field label {
-            font-weight: bold;
-            margin-right: 2mm;
-            color: #654321;
-            font-size: 8px;
-            min-width: 35mm;
-        }
-        
-        .form-field .line {
-            flex: 1;
-            border-bottom: 1px solid #8B4513;
-            height: 4mm;
-        }
-        
-        .section-title {
-            margin: 2mm 0;
-            font-weight: bold;
-            text-align: center;
-            font-size: 8px;
-            color: #654321;
-        }
-        
-        .coins-table {
-            flex: 1;
-            margin: 1mm 0;
-        }
-        
-        .coins-table table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 7px;
-        }
-        
-        .coins-table th,
-        .coins-table td {
-            border: 1px solid #8B4513;
-            padding: 1mm;
-            text-align: center;
-            background: white;
-        }
-        
-        .coins-table th {
-            background: #D2B48C;
-            font-weight: bold;
-            color: #654321;
-            font-size: 7px;
-        }
-        
-        .coins-table .coin-name {
-            text-align: left;
-            font-weight: bold;
-            background: #E6D7C0;
-            font-size: 7px;
-            padding-left: 2mm;
-        }
-        
-        .signature-section {
-            display: flex;
-            justify-content: space-between;
-            margin-top: auto;
-            padding-top: 2mm;
-            border-top: 1px solid #8B4513;
-        }
-        
-        .signature-field {
-            flex: 1;
-            margin: 0 1mm;
-        }
-        
-        .signature-field label {
-            font-size: 7px;
-            font-weight: bold;
-            color: #654321;
-            display: block;
-            margin-bottom: 1mm;
-        }
-        
-        .signature-field .line {
-            border-bottom: 1px solid #8B4513;
-            height: 4mm;
-        }
-        
-        @media print {
-            body { 
-                -webkit-print-color-adjust: exact !important;
-                color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-            
-            .money-sheet {
-                break-inside: avoid;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="print-container">`;
-    
-    // Générer 6 fiches identiques
-    for (let i = 1; i <= 6; i++) {
-        printContent += `
-        <div class="money-sheet">
-            <div class="sheet-header">
-                <div class="sheet-title">Fiche de Monnaie – Geek & Dragon</div>
-            </div>
-            
-            <div class="form-field">
-                <label>Nom du personnage:</label>
-                <div class="line"></div>
-            </div>
-            
-            <div class="form-field">
-                <label>Nom du joueur:</label>
-                <div class="line"></div>
-            </div>
-            
-            <div class="section-title">
-                PIÈCES POSSÉDÉES (À REMPLIR AVANT CAMPAGNE):
-            </div>
-            
-            <div class="coins-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width: 25%;">Pièce</th>
-                            <th style="width: 15%;">×1</th>
-                            <th style="width: 15%;">×10</th>
-                            <th style="width: 15%;">×100</th>
-                            <th style="width: 15%;">×1000</th>
-                            <th style="width: 15%;">×10000</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="coin-name">Cuivre (pc)</td>
-                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="coin-name">Argent (pa)</td>
-                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="coin-name">Électrum (pe)</td>
-                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="coin-name">Or (po)</td>
-                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="coin-name">Platine (pp)</td>
-                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="signature-section">
-                <div class="signature-field">
-                    <label>Signature du joueur:</label>
-                    <div class="line"></div>
-                </div>
-                <div class="signature-field">
-                    <label>Date:</label>
-                    <div class="line"></div>
-                </div>
-            </div>
-        </div>`;
-    }
-    
-    printContent += `
-    </div>
-    
-    <script>
-        // Auto-impression après chargement
-        window.onload = function() {
-            setTimeout(function() {
-                window.print();
-            }, 500);
-        };
-        
-        // Fermer après impression ou annulation
-        window.onafterprint = function() {
-            window.close();
-        };
-    </script>
-</body>
-</html>\`;
-    
-    // Écrire le contenu dans la nouvelle fenêtre
-    printWindow.document.write(printContent);
-    printWindow.document.close();
-    
-    // Fermer le modal
-    closePrintModal();
+    // Fermer le popup
+    closeDownloadPopup();
 }
-
-// Fermer le modal si on clique en dehors
-document.getElementById('printModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closePrintModal();
-    }
-});
-
-// Fermer avec Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && !document.getElementById('printModal').classList.contains('hidden')) {
-        closePrintModal();
-    }
-});
 </script>
 <script src="/js/hero-videos.js"></script>
 <script src="/js/boutique-premium.js"></script>

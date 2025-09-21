@@ -10,12 +10,12 @@ Subject: 💬 Nouveau message concernant votre commande {{ order.invoiceNumber }
     <title>Commentaire de commande</title>
 </head>
 <body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 14px; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f8fafc;">
-    <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <div style="max-width: 1200px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
         
         <!-- En-tête -->
-        <div style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); color: white; padding: 40px 30px; text-align: center; position: relative; overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; padding: 40px 30px; text-align: center; position: relative; overflow: hidden;">
             <!-- Parchemin et plume en arrière-plan -->
-            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#ffffff" opacity="0.06"><rect x="20" y="25" width="15" height="20" rx="2" stroke="#ffffff" stroke-width="0.5" fill="none"/><path d="M30,20 L35,15 M32,22 L37,17" stroke="#ffffff" stroke-width="0.5"/><rect x="65" y="60" width="20" height="15" rx="2" stroke="#ffffff" stroke-width="0.5" fill="none"/></g></svg>');>
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="%23ffffff" opacity="0.06"><rect x="20" y="25" width="15" height="20" rx="2" stroke="%23ffffff" stroke-width="0.5" fill="none"/><path d="M30,20 L35,15 M32,22 L37,17" stroke="%23ffffff" stroke-width="0.5"/><rect x="65" y="60" width="20" height="15" rx="2" stroke="%23ffffff" stroke-width="0.5" fill="none"/></g></svg>
             </div>
             <div style="position: relative; z-index: 1;">
                 <img src="{{ settings.logoUrl }}" style="max-height: 70px; margin-bottom: 15px;" alt="Geek & Dragon" />
@@ -29,15 +29,15 @@ Subject: 💬 Nouveau message concernant votre commande {{ order.invoiceNumber }
 
         <div style="padding: 30px;">
             <!-- Référence de commande -->
-            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #7c3aed; margin-bottom: 30px;">
-                <h2 style="color: #7c3aed; margin: 0 0 10px 0; font-size: 18px;">Référence de Commande</h2>
+            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; border-left: 4px solid #1e40af; margin-bottom: 30px;">
+                <h2 style="color: #1e40af; margin: 0 0 10px 0; font-size: 18px;">Référence de Commande</h2>
                 <p style="margin: 0 0 5px 0;"><strong>Numéro de commande :</strong> {{ order.invoiceNumber }}</p>
                 <p style="margin: 0;"><strong>Date de commande :</strong> {{ date order.completionDate 'dd MMMM yyyy' }}</p>
             </div>
 
             <!-- Contenu du message -->
-            <div style="background-color: #faf5ff; padding: 25px; border-radius: 12px; border: 1px solid #7c3aed; margin-bottom: 30px;">
-                <h3 style="color: #7c3aed; margin: 0 0 15px 0; font-size: 20px;">📨 Message de notre équipe :</h3>
+            <div style="background-color: #faf5ff; padding: 25px; border-radius: 12px; border: 1px solid #1e40af; margin-bottom: 30px;">
+                <h3 style="color: #1e40af; margin: 0 0 15px 0; font-size: 20px;">📨 Message de notre équipe :</h3>
                 <div style="background-color: white; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb;">
                     <p style="margin: 0; color: #374151; font-size: 16px; line-height: 1.6;">{{ comment.message }}</p>
                 </div>
@@ -79,9 +79,9 @@ Subject: 💬 Nouveau message concernant votre commande {{ order.invoiceNumber }
             </div>
 
             <!-- Section CTA -->
-            <div style="text-align: center; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 30px; border-radius: 12px; position: relative; overflow: hidden;">
+            <div style="text-align: center; background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; padding: 30px; border-radius: 12px; position: relative; overflow: hidden;">
                 <!-- Bouclier et support en arrière-plan -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="#ffffff" opacity="0.05"><path d="M30,25 Q30,15 40,15 Q50,15 50,25 L50,40 Q50,45 45,45 L35,45 Q30,45 30,40 Z" stroke="#ffffff" stroke-width="1" fill="none"/><circle cx="70" cy="70" r="8" stroke="#ffffff" stroke-width="1" fill="none"/></g></svg>');>
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="%23ffffff" opacity="0.05"><path d="M30,25 Q30,15 40,15 Q50,15 50,25 L50,40 Q50,45 45,45 L35,45 Q30,45 30,40 Z" stroke="%23ffffff" stroke-width="1" fill="none"/><circle cx="70" cy="70" r="8" stroke="%23ffffff" stroke-width="1" fill="none"/></g></svg>
                 </div>
                 <div style="position: relative; z-index: 1;">
                     <div style="font-size: 48px; margin-bottom: 15px;">🛡️</div>
@@ -89,7 +89,7 @@ Subject: 💬 Nouveau message concernant votre commande {{ order.invoiceNumber }
                     <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6;">
                         Nos champions du service client légendaires sont prêts à vous aider avec toute question concernant votre équipement d'aventure.
                     </p>
-                    <a href="mailto:contact@geekndragon.com?subject=Commande {{ order.invoiceNumber }}" style="display: inline-block; background-color: white; color: #4f46e5; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.2s;">
+                    <a href="mailto:contact@geekndragon.com?subject=Commande {{ order.invoiceNumber }}" style="display: inline-block; background-color: white; color: #1e40af; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.2s;">
                         ⚔️ Contacter Nos Champions
                     </a>
                 </div>
