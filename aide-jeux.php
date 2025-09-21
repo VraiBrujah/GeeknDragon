@@ -1204,7 +1204,7 @@ echo $snipcartInit;
           </div>
           
           <!-- Texte explicatif avec plus d'espacement -->
-          <div class="order-1 md:order-2 space-y-8 flex flex-col justify-center">
+          <div class="order-1 md:order-2 space-y-8 flex flex-col justify-center px-4 md:px-8">
             <h3 class="text-3xl font-bold text-amber-400">🏆 Pourquoi le Trésor Physique ?</h3>
             
             <div class="space-y-6 text-gray-300">
@@ -1214,7 +1214,7 @@ echo $snipcartInit;
               
               <div class="space-y-4">
                 <p class="text-base leading-relaxed">
-                  En Donjons & Dragons, les <strong class="text-amber-400">deux objectifs principaux</strong> sont l'expérience et le trésor. 
+                  Dans Donjons & Dragons, les <strong class="text-amber-400">deux objectifs principaux</strong> sont l'expérience et le trésor. 
                   Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. 
                   Le trésor mérite d'être <strong class="text-yellow-400">tangible, pesé, manipulé</strong>.
                 </p>
