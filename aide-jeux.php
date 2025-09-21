@@ -259,6 +259,7 @@ echo $snipcartInit;
       <div class="flex flex-wrap justify-center gap-4">
         <a href="#guide-triptyques" class="btn btn-primary">Découvrir les Triptyques</a>
         <a href="#guide-cartes" class="btn btn-primary">Guide des Cartes</a>
+        <a href="#guide-monnaie" class="btn btn-primary">Guide de la Monnaie</a>
         <a href="<?= langUrl('boutique.php#triptyques') ?>" class="btn btn-outline">Acheter mes Triptyques</a>
       </div>
     </div>
@@ -922,6 +923,384 @@ echo $snipcartInit;
     </div>
   </section>
 
+  <!-- ===== GUIDE DE LA MONNAIE D&D ===== -->
+  <section class="py-24 bg-gradient-to-r from-yellow-900/80 to-amber-900/80 scroll-mt-24" id="guide-monnaie">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-8 text-yellow-400">
+          💰 Guide de la Monnaie D&D
+        </h2>
+        <p class="text-xl text-gray-300 max-w-4xl mx-auto txt-court">
+          Découvrez le système monétaire de D&D, nos pièces physiques Geek & Dragon, 
+          et utilisez notre convertisseur pour gérer facilement vos finances d'aventurier !
+        </p>
+      </div>
+
+      <!-- ===== SYSTÈME MONÉTAIRE D&D ===== -->
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        
+        <!-- Types de Pièces -->
+        <div class="bg-gradient-to-b from-amber-900/30 to-yellow-900/20 p-8 rounded-xl border border-amber-700/50">
+          <h3 class="text-2xl font-bold mb-6 text-center text-amber-400">💎 Types de Pièces</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
+              <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold">PP</div>
+              <div>
+                <h4 class="font-semibold text-yellow-400">Pièce de Platine (pp)</h4>
+                <p class="text-gray-300 text-sm">La plus précieuse • 1 pp = 10 po</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
+              <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-black font-bold">PO</div>
+              <div>
+                <h4 class="font-semibold text-yellow-400">Pièce d'Or (po)</h4>
+                <p class="text-gray-300 text-sm">Monnaie de référence • 1 po = 10 pa</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
+              <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center text-black font-bold">PA</div>
+              <div>
+                <h4 class="font-semibold text-gray-400">Pièce d'Argent (pa)</h4>
+                <p class="text-gray-300 text-sm">Monnaie courante • 1 pa = 10 pe</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
+              <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold">PE</div>
+              <div>
+                <h4 class="font-semibold text-orange-400">Pièce d'Électrum (pe)</h4>
+                <p class="text-gray-300 text-sm">Alliage or-argent • 1 pe = 5 pc</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
+              <div class="w-12 h-12 bg-orange-800 rounded-full flex items-center justify-center text-white font-bold">PC</div>
+              <div>
+                <h4 class="font-semibold text-orange-400">Pièce de Cuivre (pc)</h4>
+                <p class="text-gray-300 text-sm">Menue monnaie • La plus commune</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tableau de Conversion -->
+        <div class="bg-gradient-to-b from-gray-900/30 to-slate-900/20 p-8 rounded-xl border border-slate-700/50">
+          <h3 class="text-2xl font-bold mb-6 text-center text-slate-400">🔄 Tableau de Conversion</h3>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-gray-600">
+                  <th class="text-left py-2 text-gray-300">Pièce</th>
+                  <th class="text-center py-2 text-yellow-400">PP</th>
+                  <th class="text-center py-2 text-yellow-400">PO</th>
+                  <th class="text-center py-2 text-gray-400">PA</th>
+                  <th class="text-center py-2 text-orange-400">PE</th>
+                  <th class="text-center py-2 text-orange-400">PC</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-300">
+                <tr class="border-b border-gray-700">
+                  <td class="py-2 font-semibold text-yellow-400">Platine (pp)</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">10</td>
+                  <td class="text-center">100</td>
+                  <td class="text-center">200</td>
+                  <td class="text-center">1000</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                  <td class="py-2 font-semibold text-yellow-400">Or (po)</td>
+                  <td class="text-center">1/10</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">10</td>
+                  <td class="text-center">20</td>
+                  <td class="text-center">100</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                  <td class="py-2 font-semibold text-gray-400">Argent (pa)</td>
+                  <td class="text-center">1/100</td>
+                  <td class="text-center">1/10</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">2</td>
+                  <td class="text-center">10</td>
+                </tr>
+                <tr class="border-b border-gray-700">
+                  <td class="py-2 font-semibold text-orange-400">Électrum (pe)</td>
+                  <td class="text-center">1/200</td>
+                  <td class="text-center">1/20</td>
+                  <td class="text-center">1/2</td>
+                  <td class="text-center">1</td>
+                  <td class="text-center">5</td>
+                </tr>
+                <tr>
+                  <td class="py-2 font-semibold text-orange-400">Cuivre (pc)</td>
+                  <td class="text-center">1/1000</td>
+                  <td class="text-center">1/100</td>
+                  <td class="text-center">1/10</td>
+                  <td class="text-center">1/5</td>
+                  <td class="text-center">1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CONVERTISSEUR INTERACTIF ===== -->
+      <!-- Convertisseur de monnaie Premium (identique à celui de boutique.php) -->
+      <div class="mt-12" id="currency-converter-premium">
+        <h4 class="text-2xl font-bold text-center text-gray-200 mb-8" data-i18n="shop.converter.title">🧮 Convertisseur de monnaie</h4>
+        
+        <!-- Section 1: Monnaies sources avec design premium -->
+        <div class="mb-8">
+          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel">💰 Monnaies sources</h5>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
+            <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-4 rounded-xl border border-amber-700/30">
+              <label class="block text-amber-300 font-medium mb-2">🪙 Cuivre</label>
+              <input type="number" min="0" step="1" value="0" data-currency="copper" 
+                     class="w-full bg-gray-800/80 text-amber-300 border border-amber-700/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" />
+            </div>
+            <div class="currency-input-card bg-gradient-to-br from-gray-600/20 to-gray-500/20 p-4 rounded-xl border border-gray-500/30">
+              <label class="block text-gray-300 font-medium mb-2">🥈 Argent</label>
+              <input type="number" min="0" step="1" value="0" data-currency="silver" 
+                     class="w-full bg-gray-800/80 text-gray-300 border border-gray-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all" />
+            </div>
+            <div class="currency-input-card bg-gradient-to-br from-yellow-600/20 to-green-600/20 p-4 rounded-xl border border-yellow-500/30">
+              <label class="block text-yellow-300 font-medium mb-2">⚡ Électrum</label>
+              <input type="number" min="0" step="1" value="0" data-currency="electrum" 
+                     class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
+            </div>
+            <div class="currency-input-card bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 p-4 rounded-xl border border-yellow-400/30">
+              <label class="block text-yellow-300 font-medium mb-2">🥇 Or</label>
+              <input type="number" min="0" step="1" value="0" data-currency="gold" 
+                     class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
+            </div>
+            <div class="currency-input-card bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-4 rounded-xl border border-cyan-400/30">
+              <label class="block text-cyan-300 font-medium mb-2">💎 Platine</label>
+              <input type="number" min="0" step="1" value="0" data-currency="platinum" 
+                     class="w-full bg-gray-800/80 text-cyan-300 border border-cyan-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Tableau multiplicateur interactif toujours visible -->
+        <div class="mb-8">
+          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.multiplierLabel">⚖️ Tableau multiplicateur (éditable)</h5>
+          <div class="bg-gray-800/50 rounded-xl p-6 max-w-6xl mx-auto border border-gray-700/30">
+            <div class="overflow-x-auto">
+              <table class="w-full text-gray-200" id="multiplier-table">
+                <thead>
+                  <tr class="border-b border-gray-600/50">
+                    <th class="text-left p-3 text-gray-300">Monnaie</th>
+                    <th class="text-center p-3 text-gray-300">×1</th>
+                    <th class="text-center p-3 text-gray-300">×10</th>
+                    <th class="text-center p-3 text-gray-300">×100</th>
+                    <th class="text-center p-3 text-gray-300">×1000</th>
+                    <th class="text-center p-3 text-gray-300">×10000</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-gray-700/30" data-currency="platinum">
+                    <td class="p-3 text-cyan-300 font-medium">💎 Platine</td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
+                  </tr>
+                  <tr class="border-b border-gray-700/30" data-currency="gold">
+                    <td class="p-3 text-yellow-300 font-medium">🥇 Or</td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
+                  </tr>
+                  <tr class="border-b border-gray-700/30" data-currency="electrum">
+                    <td class="p-3 text-yellow-300 font-medium">⚡ Électrum</td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
+                  </tr>
+                  <tr class="border-b border-gray-700/30" data-currency="silver">
+                    <td class="p-3 text-gray-300 font-medium">🥈 Argent</td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
+                  </tr>
+                  <tr data-currency="copper">
+                    <td class="p-3 text-amber-300 font-medium">🪙 Cuivre</td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
+                    <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Équivalences totales par métal avec recommandations optimales -->
+        <div class="mb-8" id="metal-totals-section">
+          <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.equivalences">💼 Équivalences totales par métal</h5>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            <!-- Première ligne: Cuivre, Argent, Électrum -->
+            <div id="copper-card"></div>
+            <div id="silver-card"></div>
+            <div id="electrum-card"></div>
+            
+            <!-- Deuxième ligne: Or, Platine, Recommandations optimales -->
+            <div id="gold-card"></div>
+            <div id="platinum-card"></div>
+            <div id="optimal-recommendations" class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-6 border border-indigo-500/30">
+              <h6 class="text-indigo-300 font-bold text-lg mb-4">✨ Recommandations optimales</h6>
+              <div id="currency-best" class="text-gray-200"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== L'IMPORTANCE DU TRÉSOR PHYSIQUE ===== -->
+      <div class="bg-gradient-to-r from-amber-900/30 to-yellow-900/20 rounded-xl p-8 border border-amber-700/50 mb-16">
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+          
+          <!-- Image carte de propriété cliquable -->
+          <div class="order-2 md:order-1 flex flex-col">
+            <div class="bg-gray-800/30 rounded-xl p-6 border border-amber-600/20">
+              <div class="relative group cursor-pointer" onclick="openPrintModal()">
+                <img src="/media/content/carte_propriete.webp" alt="Carte de propriété des pièces Geek & Dragon" 
+                     class="rounded-lg shadow-lg w-full object-cover border border-amber-600/30 transition-all duration-300 group-hover:shadow-2xl group-hover:scale-105" loading="lazy">
+                
+                <!-- Overlay d'impression au survol -->
+                <div class="absolute inset-0 bg-black/50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div class="text-center text-white">
+                    <div class="text-3xl mb-2">🖨️</div>
+                    <div class="font-bold text-lg">Imprimer</div>
+                    <div class="text-sm text-amber-300">6 fiches par page</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-4 text-center">
+                <p class="text-amber-300 font-medium mb-2">📄 Fiche de Monnaie officielle</p>
+                <p class="text-xs text-gray-400 mb-3">Cliquez sur l'image pour imprimer 6 fiches par page</p>
+                
+                <button onclick="openPrintModal()" 
+                        class="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm">
+                  🖨️ Imprimer les fiches
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Texte explicatif avec plus d'espacement -->
+          <div class="order-1 md:order-2 space-y-8 flex flex-col justify-center">
+            <h3 class="text-3xl font-bold text-amber-400">🏆 Pourquoi le Trésor Physique ?</h3>
+            
+            <div class="space-y-6 text-gray-300">
+              <blockquote class="text-lg font-medium text-amber-300 italic border-l-4 border-amber-500 pl-6 bg-amber-900/10 py-4 rounded-r-lg">
+                "S'il n'y avait plus de billets dans le Monopoly, le jeu perdrait tout son intérêt..."
+              </blockquote>
+              
+              <div class="space-y-4">
+                <p class="text-base leading-relaxed">
+                  En Donjons & Dragons, les <strong class="text-amber-400">deux objectifs principaux</strong> sont l'expérience et le trésor. 
+                  Devoir écrire le trésor sur papier puis le gommer ne lui rend pas hommage. 
+                  Le trésor mérite d'être <strong class="text-yellow-400">tangible, pesé, manipulé</strong>.
+                </p>
+                
+                <p class="text-base leading-relaxed">
+                  Nos pièces physiques transforment chaque récompense en moment mémorable. 
+                  Quand le MJ fait <em class="text-amber-300">tinter les pièces d'or</em> dans sa main avant de les distribuer, 
+                  c'est toute l'immersion qui s'intensifie.
+                </p>
+              </div>
+              
+              <div class="bg-amber-900/20 p-6 rounded-lg border border-amber-600/30 mt-8">
+                <h4 class="text-lg font-bold text-amber-400 mb-4 flex items-center justify-between">
+                  <span>📋 Système de Propriété</span>
+                  <button onclick="openPrintModal()" class="text-xs bg-amber-600 hover:bg-amber-700 px-3 py-1 rounded-full transition-colors">
+                    🖨️ Imprimer
+                  </button>
+                </h4>
+                <p class="text-sm leading-relaxed">
+                  Utilisez notre <strong>fiche de monnaie</strong> pour répertorier vos trésors. 
+                  Inscrivez votre nom, comptez vos pièces, signez et remettez au MJ. 
+                  En fin de campagne, récupérez facilement votre investissement !
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PIÈCES PHYSIQUES GEEK & DRAGON ===== -->
+      <div class="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl p-8 border border-purple-700/50">
+        <h3 class="text-3xl font-bold mb-8 text-center text-purple-400">🪙 Pièces Physiques Geek & Dragon</h3>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          
+          <!-- Description -->
+          <div class="space-y-6">
+            <div>
+              <h4 class="text-xl font-bold mb-4 text-purple-400">✨ Des Pièces Authentiques</h4>
+              <p class="text-gray-300 mb-4">
+                Nos pièces métalliques reproduisent fidèlement le système monétaire de D&D. 
+                Chaque type de pièce a son propre design et sa finition unique.
+              </p>
+              <ul class="text-gray-300 space-y-2">
+                <li>• <strong>Métal véritable</strong> avec finitions spécifiques</li>
+                <li>• <strong>Gravures détaillées</strong> inspirées de l'univers D&D</li>
+                <li>• <strong>Poids authentique</strong> pour une expérience immersive</li>
+                <li>• <strong>Sets complets</strong> ou pièces individuelles</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 class="text-xl font-bold mb-4 text-purple-400">🎯 Utilisation en Jeu</h4>
+              <ul class="text-gray-300 space-y-2">
+                <li>• <strong>Immersion totale</strong> lors des transactions</li>
+                <li>• <strong>Gestion tactile</strong> de votre trésor</li>
+                <li>• <strong>Récompenses physiques</strong> pour les joueurs</li>
+                <li>• <strong>Ambiance medievale-fantastique</strong> renforcée</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Call to Action -->
+          <div class="flex flex-col justify-center">
+            <div class="bg-gradient-to-r from-yellow-900/30 to-amber-900/30 rounded-lg p-6 border border-yellow-600/50 text-center">
+              <h4 class="text-xl font-bold mb-4 text-yellow-400">💰 Commandez vos Pièces</h4>
+              <p class="text-gray-300 mb-6">
+                Découvrez notre collection complète de pièces métalliques 
+                et donnez vie à l'économie de vos parties !
+              </p>
+              <div class="space-y-4">
+                <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary w-full">
+                  🛒 Voir les Pièces en Boutique
+                </a>
+                <a href="<?= langUrl('product.php?id=tresorerie-complete') ?>" class="btn btn-outline w-full">
+                  ⭐ Set Complet de Trésorerie
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ===== COMMENT UTILISER VOS TRIPTYQUES ===== -->
   <section class="py-16 bg-gradient-to-r from-indigo-900/30 to-purple-900/30">
     <div class="max-w-6xl mx-auto px-6">
@@ -996,6 +1375,50 @@ echo $snipcartInit;
 
 </main>
 
+<!-- Modal d'impression des fiches de monnaie -->
+<div id="printModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+  <div class="bg-gray-800 rounded-xl p-6 max-w-md w-full mx-4 border border-amber-600/30">
+    <div class="text-center mb-6">
+      <div class="text-4xl mb-3">🖨️</div>
+      <h3 class="text-xl font-bold text-amber-400 mb-2">Imprimer les Fiches de Monnaie</h3>
+      <p class="text-gray-300 text-sm">
+        Imprimez 6 fiches de monnaie par page pour vos joueurs
+      </p>
+    </div>
+    
+    <div class="space-y-4">
+      <div class="bg-amber-900/20 p-4 rounded-lg border border-amber-600/30">
+        <h4 class="font-bold text-amber-400 mb-2">📋 Format d'impression :</h4>
+        <ul class="text-sm text-gray-300 space-y-1">
+          <li>• 6 fiches par page (3×2)</li>
+          <li>• Format A4 / Lettre</li>
+          <li>• Orientation Portrait</li>
+          <li>• Qualité optimale pour impression</li>
+        </ul>
+      </div>
+      
+      <div class="bg-blue-900/20 p-4 rounded-lg border border-blue-600/30">
+        <h4 class="font-bold text-blue-400 mb-2">💡 Conseil d'impression :</h4>
+        <p class="text-sm text-gray-300">
+          Utilisez du papier cartonné (200-250g) pour une meilleure durabilité. 
+          Vous pouvez aussi plastifier les fiches pour une utilisation répétée.
+        </p>
+      </div>
+    </div>
+    
+    <div class="flex gap-3 mt-6">
+      <button onclick="printMoneySheets()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+        🖨️ Imprimer
+      </button>
+      <button onclick="closePrintModal()" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+        Annuler
+      </button>
+    </div>
+  </div>
+</div>
+
+</main>
+
 <?php include 'footer.php'; ?>
 
 <script src="/js/app.js"></script>
@@ -1010,6 +1433,66 @@ function flipCard(cardId) {
 function flipCardExample(cardId) {
     const container = document.getElementById(cardId).parentElement;
     container.classList.toggle('flipped');
+}
+
+// Convertisseur de monnaie D&D
+const currencyRates = {
+    pp: 1000,    // 1 pp = 1000 pc
+    po: 100,     // 1 po = 100 pc
+    pa: 10,      // 1 pa = 10 pc
+    pe: 5,       // 1 pe = 5 pc
+    pc: 1        // 1 pc = 1 pc
+};
+
+function convertCurrency(fromCurrency) {
+    // Récupérer la valeur saisie
+    const inputValue = parseFloat(document.getElementById(`input-${fromCurrency}`).value) || 0;
+    
+    // Convertir tout en pièces de cuivre (base)
+    const totalCopper = inputValue * currencyRates[fromCurrency];
+    
+    // Calculer les équivalences
+    const pp = Math.floor(totalCopper / currencyRates.pp);
+    const po = Math.floor(totalCopper / currencyRates.po);
+    const pa = Math.floor(totalCopper / currencyRates.pa);
+    const pe = Math.floor(totalCopper / currencyRates.pe);
+    const pc = totalCopper;
+    
+    // Calculer la valeur en or pour l'affichage principal
+    const totalGold = totalCopper / currencyRates.po;
+    
+    // Mettre à jour l'affichage
+    document.getElementById('total-po').textContent = `${totalGold.toLocaleString('fr-FR', {maximumFractionDigits: 2})} po`;
+    document.getElementById('result-pp').textContent = `${pp.toLocaleString('fr-FR')} pp`;
+    document.getElementById('result-po').textContent = `${po.toLocaleString('fr-FR')} po`;
+    document.getElementById('result-pa').textContent = `${pa.toLocaleString('fr-FR')} pa`;
+    document.getElementById('result-pe').textContent = `${pe.toLocaleString('fr-FR')} pe`;
+    document.getElementById('result-pc').textContent = `${pc.toLocaleString('fr-FR')} pc`;
+    
+    // Effacer les autres champs (éviter la confusion)
+    Object.keys(currencyRates).forEach(currency => {
+        if (currency !== fromCurrency) {
+            const input = document.getElementById(`input-${currency}`);
+            if (input.value !== '') {
+                input.value = '';
+            }
+        }
+    });
+}
+
+function clearConverter() {
+    // Effacer tous les champs
+    Object.keys(currencyRates).forEach(currency => {
+        document.getElementById(`input-${currency}`).value = '';
+    });
+    
+    // Remettre à zéro l'affichage
+    document.getElementById('total-po').textContent = '0 po';
+    document.getElementById('result-pp').textContent = '0 pp';
+    document.getElementById('result-po').textContent = '0 po';
+    document.getElementById('result-pa').textContent = '0 pa';
+    document.getElementById('result-pe').textContent = '0 pe';
+    document.getElementById('result-pc').textContent = '0 pc';
 }
 
 // Fonctions pour le lanceur de dés
@@ -1110,7 +1593,305 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 });
+
+// Gestion du modal d'impression des fiches de monnaie
+function openPrintModal() {
+    document.getElementById('printModal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closePrintModal() {
+    document.getElementById('printModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+function printMoneySheets() {
+    // Créer une nouvelle fenêtre pour l'impression
+    const printWindow = window.open('', '_blank', 'width=800,height=600');
+    
+    // Attendre que la fenêtre soit prête
+    printWindow.document.open();
+    
+    // HTML pour l'impression de 6 fiches par page (3x2)
+    const printContent = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiches de Monnaie - Geek & Dragon</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 8mm;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 5mm;
+            font-family: 'Arial', sans-serif;
+            background: white;
+            color: #000;
+        }
+        
+        .print-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 4mm;
+            width: 100%;
+            height: 277mm; /* A4 height minus margins */
+        }
+        
+        .money-sheet {
+            border: 2px solid #8B4513;
+            border-radius: 6px;
+            padding: 3mm;
+            background: #F5F5DC;
+            display: flex;
+            flex-direction: column;
+            font-size: 9px;
+            line-height: 1.1;
+            page-break-inside: avoid;
+        }
+        
+        .sheet-header {
+            text-align: center;
+            border-bottom: 2px solid #8B4513;
+            padding-bottom: 2mm;
+            margin-bottom: 2mm;
+        }
+        
+        .sheet-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: #8B4513;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-field {
+            margin-bottom: 2mm;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-field label {
+            font-weight: bold;
+            margin-right: 2mm;
+            color: #654321;
+            font-size: 8px;
+            min-width: 35mm;
+        }
+        
+        .form-field .line {
+            flex: 1;
+            border-bottom: 1px solid #8B4513;
+            height: 4mm;
+        }
+        
+        .section-title {
+            margin: 2mm 0;
+            font-weight: bold;
+            text-align: center;
+            font-size: 8px;
+            color: #654321;
+        }
+        
+        .coins-table {
+            flex: 1;
+            margin: 1mm 0;
+        }
+        
+        .coins-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 7px;
+        }
+        
+        .coins-table th,
+        .coins-table td {
+            border: 1px solid #8B4513;
+            padding: 1mm;
+            text-align: center;
+            background: white;
+        }
+        
+        .coins-table th {
+            background: #D2B48C;
+            font-weight: bold;
+            color: #654321;
+            font-size: 7px;
+        }
+        
+        .coins-table .coin-name {
+            text-align: left;
+            font-weight: bold;
+            background: #E6D7C0;
+            font-size: 7px;
+            padding-left: 2mm;
+        }
+        
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 2mm;
+            border-top: 1px solid #8B4513;
+        }
+        
+        .signature-field {
+            flex: 1;
+            margin: 0 1mm;
+        }
+        
+        .signature-field label {
+            font-size: 7px;
+            font-weight: bold;
+            color: #654321;
+            display: block;
+            margin-bottom: 1mm;
+        }
+        
+        .signature-field .line {
+            border-bottom: 1px solid #8B4513;
+            height: 4mm;
+        }
+        
+        @media print {
+            body { 
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            .money-sheet {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-container">`;
+    
+    // Générer 6 fiches identiques
+    for (let i = 1; i <= 6; i++) {
+        printContent += `
+        <div class="money-sheet">
+            <div class="sheet-header">
+                <div class="sheet-title">Fiche de Monnaie – Geek & Dragon</div>
+            </div>
+            
+            <div class="form-field">
+                <label>Nom du personnage:</label>
+                <div class="line"></div>
+            </div>
+            
+            <div class="form-field">
+                <label>Nom du joueur:</label>
+                <div class="line"></div>
+            </div>
+            
+            <div class="section-title">
+                PIÈCES POSSÉDÉES (À REMPLIR AVANT CAMPAGNE):
+            </div>
+            
+            <div class="coins-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">Pièce</th>
+                            <th style="width: 15%;">×1</th>
+                            <th style="width: 15%;">×10</th>
+                            <th style="width: 15%;">×100</th>
+                            <th style="width: 15%;">×1000</th>
+                            <th style="width: 15%;">×10000</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="coin-name">Cuivre (pc)</td>
+                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="coin-name">Argent (pa)</td>
+                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="coin-name">Électrum (pe)</td>
+                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="coin-name">Or (po)</td>
+                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="coin-name">Platine (pp)</td>
+                            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="signature-section">
+                <div class="signature-field">
+                    <label>Signature du joueur:</label>
+                    <div class="line"></div>
+                </div>
+                <div class="signature-field">
+                    <label>Date:</label>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>`;
+    }
+    
+    printContent += `
+    </div>
+    
+    <script>
+        // Auto-impression après chargement
+        window.onload = function() {
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        };
+        
+        // Fermer après impression ou annulation
+        window.onafterprint = function() {
+            window.close();
+        };
+    </script>
+</body>
+</html>`;
+    
+    // Écrire le contenu dans la nouvelle fenêtre
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+    
+    // Fermer le modal
+    closePrintModal();
+}
+
+// Fermer le modal si on clique en dehors
+document.getElementById('printModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closePrintModal();
+    }
+});
+
+// Fermer avec Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !document.getElementById('printModal').classList.contains('hidden')) {
+        closePrintModal();
+    }
+});
 </script>
+<script src="/js/boutique-premium.js"></script>
+<script src="/js/currency-converter.js"></script>
 
 </body>
 </html>

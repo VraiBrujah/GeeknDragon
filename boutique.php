@@ -153,122 +153,17 @@ echo $snipcartInit;
           <a href="https://www.youtube.com/watch?v=y96eAFtC4xE&t=624s" target="_blank" class="underline text-indigo-400 hover:text-indigo-300" data-i18n="shop.pieces.video">Voir la démonstration en vidéo&nbsp;></a>
         </p>
 
-        <!-- Convertisseur de monnaie Premium -->
-        <div class="mt-12" id="currency-converter-premium">
-          <h4 class="text-2xl font-bold text-center text-gray-200 mb-8" data-i18n="shop.converter.title">Convertisseur de monnaie</h4>
-          
-          <!-- Section 1: Monnaies sources avec design premium -->
-          <div class="mb-8">
-            <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.sourcesLabel">💰 Monnaies sources</h5>
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-6xl mx-auto">
-              <div class="currency-input-card bg-gradient-to-br from-amber-900/20 to-orange-800/20 p-4 rounded-xl border border-amber-700/30">
-                <label class="block text-amber-300 font-medium mb-2">🪙 Cuivre</label>
-                <input type="number" min="0" step="1" value="0" data-currency="copper" 
-                       class="w-full bg-gray-800/80 text-amber-300 border border-amber-700/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all" />
-              </div>
-              <div class="currency-input-card bg-gradient-to-br from-gray-600/20 to-gray-500/20 p-4 rounded-xl border border-gray-500/30">
-                <label class="block text-gray-300 font-medium mb-2">🥈 Argent</label>
-                <input type="number" min="0" step="1" value="0" data-currency="silver" 
-                       class="w-full bg-gray-800/80 text-gray-300 border border-gray-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-gray-400 focus:border-transparent transition-all" />
-              </div>
-              <div class="currency-input-card bg-gradient-to-br from-yellow-600/20 to-green-600/20 p-4 rounded-xl border border-yellow-500/30">
-                <label class="block text-yellow-300 font-medium mb-2">⚡ Électrum</label>
-                <input type="number" min="0" step="1" value="0" data-currency="electrum" 
-                       class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-500/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
-              </div>
-              <div class="currency-input-card bg-gradient-to-br from-yellow-500/20 to-yellow-600/20 p-4 rounded-xl border border-yellow-400/30">
-                <label class="block text-yellow-300 font-medium mb-2">🥇 Or</label>
-                <input type="number" min="0" step="1" value="0" data-currency="gold" 
-                       class="w-full bg-gray-800/80 text-yellow-300 border border-yellow-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all" />
-              </div>
-              <div class="currency-input-card bg-gradient-to-br from-cyan-500/20 to-blue-600/20 p-4 rounded-xl border border-cyan-400/30">
-                <label class="block text-cyan-300 font-medium mb-2">💎 Platine</label>
-                <input type="number" min="0" step="1" value="0" data-currency="platinum" 
-                       class="w-full bg-gray-800/80 text-cyan-300 border border-cyan-400/50 rounded-lg p-3 text-center font-bold focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all" />
-              </div>
-            </div>
-          </div>
-
-          <!-- Section 2: Tableau multiplicateur interactif toujours visible -->
-          <div class="mb-8">
-            <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.multiplierLabel">⚖️ Tableau multiplicateur (éditable)</h5>
-            <div class="bg-gray-800/50 rounded-xl p-6 max-w-6xl mx-auto border border-gray-700/30">
-              <div class="overflow-x-auto">
-                <table class="w-full text-gray-200" id="multiplier-table">
-                  <thead>
-                    <tr class="border-b border-gray-600/50">
-                      <th class="text-left p-3 text-gray-300">Monnaie</th>
-                      <th class="text-center p-3 text-gray-300">×1</th>
-                      <th class="text-center p-3 text-gray-300">×10</th>
-                      <th class="text-center p-3 text-gray-300">×100</th>
-                      <th class="text-center p-3 text-gray-300">×1000</th>
-                      <th class="text-center p-3 text-gray-300">×10000</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="border-b border-gray-700/30" data-currency="platinum">
-                      <td class="p-3 text-cyan-300 font-medium">💎 Platine</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-cyan-300 border border-cyan-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
-                    </tr>
-                    <tr class="border-b border-gray-700/30" data-currency="gold">
-                      <td class="p-3 text-yellow-300 font-medium">🥇 Or</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-400/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
-                    </tr>
-                    <tr class="border-b border-gray-700/30" data-currency="electrum">
-                      <td class="p-3 text-yellow-300 font-medium">⚡ Électrum</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-yellow-300 border border-yellow-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
-                    </tr>
-                    <tr class="border-b border-gray-700/30" data-currency="silver">
-                      <td class="p-3 text-gray-300 font-medium">🥈 Argent</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-gray-300 border border-gray-500/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
-                    </tr>
-                    <tr data-currency="copper">
-                      <td class="p-3 text-amber-300 font-medium">🪙 Cuivre</td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="100"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="1000"></td>
-                      <td class="p-2"><input type="number" min="0" class="multiplier-input bg-gray-700/50 text-amber-300 border border-amber-700/30 rounded p-2 w-full text-center cursor-pointer" data-multiplier="10000"></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section 3: Équivalences totales par métal avec recommandations optimales -->
-          <div class="mb-8" id="metal-totals-section">
-            <h5 class="text-lg font-semibold text-gray-200 mb-4 text-center" data-i18n="shop.converter.equivalences">💼 Équivalences totales par métal</h5>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-              <!-- Première ligne: Cuivre, Argent, Électrum -->
-              <div id="copper-card"></div>
-              <div id="silver-card"></div>
-              <div id="electrum-card"></div>
-              
-              <!-- Deuxième ligne: Or, Platine, Recommandations optimales -->
-              <div id="gold-card"></div>
-              <div id="platinum-card"></div>
-              <div id="optimal-recommendations" class="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 rounded-xl p-6 border border-indigo-500/30">
-                <h6 class="text-indigo-300 font-bold text-lg mb-4">✨ Recommandations optimales</h6>
-                <div id="currency-best" class="text-gray-200"></div>
-              </div>
-            </div>
+        <!-- Le convertisseur de monnaie a été déplacé vers la page d'aide -->
+        <div class="mt-12 text-center">
+          <div class="bg-indigo-900/20 border border-indigo-500/30 rounded-xl p-6 max-w-2xl mx-auto">
+            <h4 class="text-xl font-bold text-indigo-400 mb-4">🧮 Convertisseur de Monnaie</h4>
+            <p class="text-gray-300 mb-4">
+              Notre convertisseur de monnaie interactif a été déplacé vers la page d'aide des jeux 
+              pour une meilleure organisation et une expérience utilisateur optimisée.
+            </p>
+            <a href="<?= langUrl('aide-jeux.php#guide-monnaie') ?>" class="btn btn-primary">
+              Utiliser le Convertisseur
+            </a>
           </div>
         </div>
       </div>
@@ -373,8 +268,7 @@ echo $snipcartInit;
   <!-- Ordre correct comme index.php -->
   <script src="/js/app.js"></script>
   <script src="/js/hero-videos.js"></script>
-  <script src="/js/boutique-premium.js"></script>
-  <script src="/js/currency-converter.js"></script>
+  <!-- Scripts convertisseur supprimés: déplacés vers aide-jeux.php -->
 </body>
 
 
