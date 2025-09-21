@@ -156,10 +156,21 @@
   position:static;
   align-items:center;
 }
+.snipcart .snipcart-discount-box__form-container{
+  display:flex;
+  justify-content:flex-start;
+  gap:0.75rem;
+  align-items:stretch;
+  flex:1 1 auto;
+}
 .snipcart .snipcart-discount-box .snipcart-input{
   flex:1 1 auto;
   min-width:0;
   padding-right:1rem;
+}
+.snipcart .snipcart-discount-box .snipcart-form__field{
+  flex:1 1 auto;
+  min-width:0;
 }
 .snipcart .snipcart-discount-box__submit,
 .snipcart .snipcart-discount-box__cancel{
