@@ -1,0 +1,111 @@
+Subject: 💰 Remboursement traité pour la commande {{ order.invoiceNumber }}
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remboursement traité</title>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 14px; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f8fafc;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        
+        <!-- En-tête -->
+        <div style="background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color: white; padding: 40px 30px; text-align: center; position: relative; overflow: hidden;">
+            <!-- Pièces et trésor en arrière-plan -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="%23ffffff" opacity="0.08"><circle cx="25" cy="25" r="6" stroke="%23ffffff" stroke-width="1" fill="none"/><circle cx="75" cy="75" r="4" stroke="%23ffffff" stroke-width="1" fill="none"/><text x="25" y="30" font-size="8" text-anchor="middle">¢</text></g></svg>');">
+            </div>
+            <div style="position: relative; z-index: 1;">
+                <img src="{{ settings.logoUrl }}" style="max-height: 70px; margin-bottom: 15px; filter: brightness(0) invert(1);" alt="Geek & Dragon" />
+                <div style="font-size: 48px; margin-bottom: 15px;">💰</div>
+                <h1 style="margin: 0; font-size: 28px; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Trésor Retourné</h1>
+                <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">
+                    Bonjour {{ order.billingAddress.fullName }}, votre or a été retourné en sécurité.
+                </p>
+            </div>
+        </div>
+
+        <div style="padding: 30px;">
+            <!-- Détails du remboursement -->
+            <div style="background-color: #f0f9ff; padding: 25px; border-radius: 12px; border: 1px solid #0ea5e9; margin-bottom: 30px;">
+                <h2 style="color: #0ea5e9; margin: 0 0 15px 0; font-size: 20px;">✅ Confirmation de Remboursement</h2>
+                <p style="margin: 0 0 10px 0; font-size: 16px;"><strong>Numéro de commande :</strong> {{ order.invoiceNumber }}</p>
+                <p style="margin: 0 0 10px 0;"><strong>Montant remboursé :</strong> {{ money refund.amount }}</p>
+                <p style="margin: 0 0 10px 0;"><strong>Date de remboursement :</strong> {{ date refund.completionDate 'dd MMMM yyyy' }}</p>
+                <p style="margin: 0;"><strong>Délai de traitement :</strong> 3-5 jours ouvrables</p>
+            </div>
+
+            <!-- À quoi s'attendre -->
+            <div style="background-color: #fffbeb; padding: 25px; border-radius: 12px; border: 1px solid #f59e0b; margin-bottom: 30px;">
+                <h3 style="color: #f59e0b; margin: 0 0 15px 0; font-size: 18px;">📅 À quoi s'attendre :</h3>
+                <ul style="margin: 0; padding-left: 20px; color: #92400e;">
+                    <li style="margin-bottom: 8px;">Votre remboursement a été traité avec succès</li>
+                    <li style="margin-bottom: 8px;">Les fonds apparaîtront dans votre compte dans 3-5 jours ouvrables</li>
+                    <li style="margin-bottom: 8px;">Vous le verrez comme "Remboursement Geek & Dragon" sur votre relevé</li>
+                    <li>Si vous ne le voyez pas après 5 jours ouvrables, contactez-nous</li>
+                </ul>
+            </div>
+
+            <!-- Articles remboursés -->
+            {{ #if refund.items }}
+            <h3 style="color: #374151; margin: 0 0 20px 0; font-size: 18px;">📦 Articles Remboursés :</h3>
+            <div style="background-color: #f9fafb; border-radius: 12px; overflow: hidden; margin-bottom: 30px;">
+                {{ #each refund.items }}
+                <div style="padding: 20px; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 15px;">
+                    {{ #if ../settings.includeProductImagesInInvoice }}
+                    {{ #is_absolute_url this.image }}
+                    <img src="{{ this.image }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 2px solid #e5e7eb;" />
+                    {{ /is_absolute_url }}
+                    {{ /if }}
+                    <div style="flex: 1;">
+                        <p style="margin: 0; font-weight: bold; color: #111827;">{{ this.name }}</p>
+                        <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 14px;">Quantité : {{ this.quantity }} • {{ money this.refundAmount }}</p>
+                    </div>
+                </div>
+                {{ /each }}
+            </div>
+            {{ /if }}
+
+            <!-- Raison (si fournie) -->
+            {{ #if refund.reason }}
+            <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                <h3 style="color: #374151; margin: 0 0 10px 0; font-size: 16px;">Motif du remboursement :</h3>
+                <p style="margin: 0; color: #6b7280;">{{ refund.reason }}</p>
+            </div>
+            {{ /if }}
+
+            <!-- Message de regret -->
+            <div style="background-color: #fef2f2; padding: 25px; border-radius: 12px; border: 1px solid #ef4444; margin-bottom: 30px;">
+                <h3 style="color: #dc2626; margin: 0 0 15px 0; font-size: 18px;">😔 Nous sommes désolés de vous voir partir</h3>
+                <p style="margin: 0; color: #7f1d1d;">
+                    Nous nous excusons que votre équipement d'aventure n'ait pas répondu à vos attentes. Vos commentaires 
+                    nous aident à améliorer notre quête pour offrir la meilleure expérience de jeu de table possible.
+                </p>
+            </div>
+
+            <!-- Section CTA -->
+            <div style="text-align: center; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 30px; border-radius: 12px; position: relative; overflow: hidden;">
+                <!-- Phénix renaissant en arrière-plan -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="%23ffffff" opacity="0.05"><path d="M30,70 Q50,40 70,70" stroke="%23ffffff" stroke-width="2" fill="none"/><circle cx="50" cy="55" r="3"/><path d="M45,50 L55,50 M50,45 L50,55" stroke="%23ffffff" stroke-width="1"/></g></svg>');">
+                </div>
+                <div style="position: relative; z-index: 1;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🔥</div>
+                    <h3 style="margin: 0 0 15px 0; font-size: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">🎯 Donnez Une Autre Quête à Notre Guilde ?</h3>
+                    <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6;">
+                        Nous forgeons constamment de meilleurs équipements et serions honorés de regagner votre confiance avec nos derniers trésors.
+                    </p>
+                    <a href="https://geekndragon.com/boutique.php" style="display: inline-block; background-color: white; color: #4f46e5; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.2s;">
+                        ✨ Découvrir de Nouveaux Trésors
+                    </a>
+                </div>
+            </div>
+
+            <!-- Support -->
+            <div style="margin-top: 30px; text-align: center; color: #6b7280; font-size: 14px;">
+                <p style="margin: 0;">Des questions sur votre remboursement ? Contactez-nous à <a href="mailto:contact@geekndragon.com" style="color: #4f46e5;">contact@geekndragon.com</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

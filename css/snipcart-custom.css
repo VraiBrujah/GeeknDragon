@@ -607,4 +607,98 @@ body.snipcart-open { overflow: hidden; }
   overflow: visible !important;
 }
 
+/* =================================================================== */
+/* CODE PROMO CUSTOM FIELD                                             */
+/* =================================================================== */
+.snipcart .custom-promo-field {
+  background: var(--gd-card) !important;
+  border: 1px solid var(--gd-border) !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  margin: 1rem 0 !important;
+}
+
+.snipcart .custom-promo-field label {
+  color: var(--gd-heading) !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  margin-bottom: 0.5rem !important;
+  display: block !important;
+}
+
+.snipcart .custom-promo-field input {
+  background: var(--gd-bg) !important;
+  color: var(--gd-text) !important;
+  border: 1px solid var(--gd-border) !important;
+  border-radius: 6px !important;
+  padding: 0.75rem !important;
+  font-size: 0.875rem !important;
+  flex: 1 !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.snipcart .custom-promo-field input:focus {
+  border-color: var(--gd-focus) !important;
+  outline: 2px solid var(--gd-focus) !important;
+}
+
+.snipcart .custom-promo-field input::placeholder {
+  color: var(--gd-muted) !important;
+}
+
+.snipcart .custom-promo-field button {
+  background: var(--gd-accent) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+.snipcart .custom-promo-field button:hover:not(:disabled) {
+  background: var(--gd-card-2) !important;
+  border: 1px solid var(--gd-accent) !important;
+  color: var(--gd-accent) !important;
+}
+
+.snipcart .custom-promo-field button:disabled {
+  background: var(--gd-muted) !important;
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+}
+
+.snipcart .custom-promo-field #promo-message.success {
+  color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  border-radius: 4px !important;
+  padding: 0.5rem !important;
+  margin-top: 0.5rem !important;
+}
+
+.snipcart .custom-promo-field #promo-message.error {
+  color: var(--gd-error) !important;
+  background: rgba(248, 113, 113, 0.1) !important;
+  border: 1px solid rgba(248, 113, 113, 0.3) !important;
+  border-radius: 4px !important;
+  padding: 0.5rem !important;
+  margin-top: 0.5rem !important;
+}
+
+/* Responsive pour mobile */
+@media (max-width: 768px) {
+  .snipcart .custom-promo-field > div:nth-child(2) {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  .snipcart .custom-promo-field button {
+    width: 100% !important;
+  }
+}
+
 }

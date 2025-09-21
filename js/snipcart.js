@@ -137,9 +137,109 @@
     enhanceQuantity(line);
   }
 
+  // Ajoute un champ code promo dans le panier
+  function addPromoCodeField() {
+    // Cherche le container du panier où ajouter le champ promo
+    const cartContent = $('.snipcart-cart__content') || $('.snipcart__box--cart-summary') || $('.snipcart-cart');
+    const existingPromo = $('.custom-promo-field');
+    
+    if (!cartContent || existingPromo) return;
+
+    // Crée le champ code promo
+    const promoSection = document.createElement('div');
+    promoSection.className = 'custom-promo-field snipcart__box';
+    promoSection.style.cssText = `
+      margin: 16px 0;
+      padding: 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background: #f9f9f9;
+    `;
+
+    promoSection.innerHTML = `
+      <div style="margin-bottom: 8px;">
+        <label for="promo-code-input" style="font-weight: bold; color: #333;">Code promo :</label>
+      </div>
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <input 
+          type="text" 
+          id="promo-code-input" 
+          placeholder="Entrez votre code promo"
+          style="flex: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;"
+        />
+        <button 
+          type="button" 
+          id="apply-promo-btn"
+          style="padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; white-space: nowrap;"
+        >
+          Appliquer
+        </button>
+      </div>
+      <div id="promo-message" style="margin-top: 8px; font-size: 12px; display: none;"></div>
+    `;
+
+    // Insère le champ avant le total ou à la fin du contenu
+    const totalSection = $('.snipcart-cart__footer') || $('.snipcart__box--cart-summary');
+    if (totalSection) {
+      cartContent.insertBefore(promoSection, totalSection);
+    } else {
+      cartContent.appendChild(promoSection);
+    }
+
+    // Gestion de l'application du code promo
+    const input = promoSection.querySelector('#promo-code-input');
+    const button = promoSection.querySelector('#apply-promo-btn');
+    const message = promoSection.querySelector('#promo-message');
+
+    const applyPromoCode = async () => {
+      const code = input.value.trim();
+      if (!code) {
+        showMessage('Veuillez entrer un code promo', 'error');
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = 'Application...';
+
+      try {
+        // Utilise l'API Snipcart pour appliquer le code promo
+        if (window.Snipcart && window.Snipcart.api && window.Snipcart.api.cart) {
+          await window.Snipcart.api.cart.setDiscountCode(code);
+          showMessage('Code promo appliqué avec succès !', 'success');
+          input.value = '';
+        } else {
+          throw new Error('API Snipcart non disponible');
+        }
+      } catch (error) {
+        console.error('Erreur lors de l\'application du code promo:', error);
+        showMessage('Code promo invalide ou erreur d\'application', 'error');
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Appliquer';
+      }
+    };
+
+    const showMessage = (text, type) => {
+      message.textContent = text;
+      message.style.display = 'block';
+      message.style.color = type === 'success' ? '#28a745' : '#dc3545';
+      setTimeout(() => {
+        message.style.display = 'none';
+      }, 5000);
+    };
+
+    button.addEventListener('click', applyPromoCode);
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        applyPromoCode();
+      }
+    });
+  }
+
   // Traite toutes les lignes visibles du panier
   function processAll() {
     $$('.snipcart-item-line').forEach(processItemLine);
+    addPromoCodeField();
   }
 
   // Observer les re-renders de Snipcart
