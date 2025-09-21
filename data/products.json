@@ -8,15 +8,15 @@
     "summary": "Ensemble de 10 pièces métalliques assorties avec multiplicateur unique pour accélérer les comptes.",
     "summary_en": "Set of 10 assorted metal coins with a single multiplier to speed up tallying.",
     "images": [
-      "/images/optimized-modern/webp/Vagabon.webp",
-      "/images/optimized-modern/webp/VagabonPlast.webp",
-      "/images/optimized-modern/webp/coin-copper-1.webp",
-      "/images/optimized-modern/webp/coin-silver-1.webp",
-      "/images/optimized-modern/webp/ef.webp",
-      "/images/optimized-modern/webp/of.webp",
-      "/images/optimized-modern/webp/pf.webp",
-      "/images/optimized-modern/webp/x1f2.webp",
-      "/images/optimized-modern/webp/x100f3.webp"
+      "/media/products/bundles/Vagabon.webp",
+      "/media/products/bundles/VagabonPlast.webp",
+      "/media/products/coins/coin-copper-1.webp",
+      "/media/products/coins/coin-silver-1.webp",
+      "/media/products/coins/ef.webp",
+      "/media/products/coins/of.webp",
+      "/media/products/coins/pf.webp",
+      "/media/products/coins/x1f2.webp",
+      "/media/products/coins/x100f3.webp"
     ],
     "multipliers": [1, 10, 100, 1000, 10000]
   },
@@ -29,15 +29,15 @@
     "summary": "Collection de 25 pièces uniques couvrant les cinq métaux et tous les multiplicateurs pour la table.",
     "summary_en": "Collection of 25 unique coins covering five metals and every multiplier for the table.",
     "images": [
-      "/images/optimized-modern/webp/Seignieur.webp",
-      "/images/optimized-modern/webp/Seignieurplast.webp",
-      "/images/optimized-modern/webp/x1f2.webp",
-      "/images/optimized-modern/webp/x1p2.webp",
-      "/images/optimized-modern/webp/coin-copper-1.webp",
-      "/images/optimized-modern/webp/coin-silver-1.webp",
-      "/images/optimized-modern/webp/coin-electrum-1.webp",
-      "/images/optimized-modern/webp/coin-gold-1.webp",
-      "/images/optimized-modern/webp/coin-platinum-1.webp"
+      "/media/products/bundles/Seignieur.webp",
+      "/media/products/bundles/Seignieurplast.webp",
+      "/media/products/coins/x1f2.webp",
+      "/media/products/coins/x1p2.webp",
+      "/media/products/coins/coin-copper-1.webp",
+      "/media/products/coins/coin-silver-1.webp",
+      "/media/products/coins/coin-electrum-1.webp",
+      "/media/products/coins/coin-gold-1.webp",
+      "/media/products/coins/coin-platinum-1.webp"
     ],
     "multipliers": [1, 10, 100, 1000, 10000]
   },
@@ -50,15 +50,15 @@
     "summary": "Double exemplaire de chaque modèle pour 50 pièces prêtes à l'emploi avec tous les multiplicateurs.",
     "summary_en": "Two copies of every design for 50 ready-to-play coins including every multiplier.",
     "images": [
-      "/images/optimized-modern/webp/Royaume.webp",
-      "/images/optimized-modern/webp/RoyaumePlast.webp",
-      "/images/optimized-modern/webp/coin-copper-1.webp",
-      "/images/optimized-modern/webp/coin-silver-1.webp",
-      "/images/optimized-modern/webp/coin-electrum-1.webp",
-      "/images/optimized-modern/webp/coin-gold-1.webp",
-      "/images/optimized-modern/webp/coin-platinum-1.webp",
-      "/images/optimized-modern/webp/x1f2.webp",
-      "/images/optimized-modern/webp/x1p2.webp"
+      "/media/products/bundles/Royaume.webp",
+      "/media/products/bundles/RoyaumePlast.webp",
+      "/media/products/coins/coin-copper-1.webp",
+      "/media/products/coins/coin-silver-1.webp",
+      "/media/products/coins/coin-electrum-1.webp",
+      "/media/products/coins/coin-gold-1.webp",
+      "/media/products/coins/coin-platinum-1.webp",
+      "/media/products/coins/x1f2.webp",
+      "/media/products/coins/x1p2.webp"
     ],
     "multipliers": [1, 10, 100, 1000, 10000]
   },
@@ -71,15 +71,15 @@
     "summary": "Sélection de 50 pièces d'un même multiplicateur pour assurer une trésorerie abondante et cohérente.",
     "summary_en": "Selection of 50 coins sharing one multiplier to deliver a plentiful, consistent treasury.",
     "images": [
-      "/images/optimized-modern/webp/Essence.webp",
-      "/images/optimized-modern/webp/EssencePlast.webp",
-      "/images/optimized-modern/webp/coin-copper-1.webp",
-      "/images/optimized-modern/webp/coin-silver-1.webp",
-      "/images/optimized-modern/webp/coin-electrum-1.webp",
-      "/images/optimized-modern/webp/coin-gold-1.webp",
-      "/images/optimized-modern/webp/coin-platinum-1.webp",
-      "/images/optimized-modern/webp/x1f2.webp",
-      "/images/optimized-modern/webp/x1p2.webp"
+      "/media/products/bundles/Essence.webp",
+      "/media/products/bundles/EssencePlast.webp",
+      "/media/products/coins/coin-copper-1.webp",
+      "/media/products/coins/coin-silver-1.webp",
+      "/media/products/coins/coin-electrum-1.webp",
+      "/media/products/coins/coin-gold-1.webp",
+      "/media/products/coins/coin-platinum-1.webp",
+      "/media/products/coins/x1f2.webp",
+      "/media/products/coins/x1p2.webp"
     ],
     "multipliers": [1, 10, 100, 1000, 10000]
   },
@@ -92,10 +92,10 @@
     "summary": "Boîte de cartes illustrées couvrant armes, armures et équipement pour équiper immédiatement un groupe.",
     "summary_en": "Box of illustrated cards covering weapons, armor, and gear to outfit a party instantly.",
     "images": [
-      "/images/optimized-modern/webp/arme-recto.webp",
-      "/images/optimized-modern/webp/arme-verso.webp",
-      "/images/optimized-modern/webp/greatclub-recto.webp",
-      "/images/optimized-modern/webp/armure-recto.webp"
+      "/media/products/cards/arme-recto.webp",
+      "/media/products/cards/arme-verso.webp",
+      "/media/products/cards/greatclub-recto.webp",
+      "/media/products/cards/armure-recto.webp"
     ],
     "multipliers": [],
     "languages": [
@@ -112,10 +112,10 @@
     "summary": "Cartes de butin et matériel exotique mêlant trésors, explosifs et outils pour campagnes audacieuses.",
     "summary_en": "Cards of loot and exotic gear mixing treasures, explosives, and tools for daring campaigns.",
     "images": [
-      "/images/optimized-modern/webp/alexandrite-recto.webp",
-      "/images/optimized-modern/webp/bombe-recto.webp",
-      "/images/optimized-modern/webp/chaevre-recto.webp",
-      "/images/optimized-modern/webp/mataerield-alchimiste-recto.webp"
+      "/media/products/cards/alexandrite-recto.webp",
+      "/media/products/cards/bombe-recto.webp",
+      "/media/products/cards/chaevre-recto.webp",
+      "/media/products/cards/mataerield-alchimiste-recto.webp"
     ],
     "multipliers": [],
     "languages": [
@@ -132,10 +132,10 @@
     "summary": "Sélection de cartes dédiées aux voyages, services, véhicules et poisons pour dynamiser l'exploration.",
     "summary_en": "Selection of cards focused on travel, services, vehicles, and poisons to energize exploration.",
     "images": [
-      "/images/optimized-modern/webp/sac-aa-dos-recto.webp",
-      "/images/optimized-modern/webp/biaere-chope-recto.webp",
-      "/images/optimized-modern/webp/vaisseau-aaerien-recto.webp",
-      "/images/optimized-modern/webp/sang-d-assassin-recto.webp"
+      "/media/products/cards/sac-aa-dos-recto.webp",
+      "/media/products/cards/biaere-chope-recto.webp",
+      "/media/products/cards/vaisseau-aaerien-recto.webp",
+      "/media/products/cards/sang-d-assassin-recto.webp"
     ],
     "multipliers": [],
     "languages": [
@@ -152,10 +152,10 @@
     "summary": "Lot de triptyques aléatoires pour créer un héros complet avec équipement assorti et pièces de départ.",
     "summary_en": "Bundle of random triptychs to build a complete hero with matching gear and starting coins.",
     "images": [
-      "/images/optimized-modern/webp/triptyque-fiche.webp",
-      "/images/optimized-modern/webp/drakaeide-airain-recto.webp",
-      "/images/optimized-modern/webp/Barbare-Voie-du-Berserker_recto.webp",
-      "/images/optimized-modern/webp/character-acolyte-fr-front.webp"
+      "/media/products/cards/triptyque-fiche.webp",
+      "/media/products/cards/drakaeide-airain-recto.webp",
+      "/media/products/cards/Barbare-Voie-du-Berserker_recto.webp",
+      "/media/products/cards/character-acolyte-fr-front.webp"
     ],
     "multipliers": [],
     "languages": [
@@ -172,10 +172,10 @@
     "summary": "Paquet de dix cartes surprises selon la catégorie choisie pour découvrir ou compléter la collection.",
     "summary_en": "Pack of ten surprise cards in the chosen category to discover or round out the collection.",
     "images": [
-      "/images/optimized-modern/webp/arme-recto.webp",
-      "/images/optimized-modern/webp/alexandrite-recto.webp",
-      "/images/optimized-modern/webp/sac-aa-dos-recto.webp",
-      "/images/optimized-modern/webp/bombe-recto.webp"
+      "/media/products/cards/arme-recto.webp",
+      "/media/products/cards/alexandrite-recto.webp",
+      "/media/products/cards/sac-aa-dos-recto.webp",
+      "/media/products/cards/bombe-recto.webp"
     ],
     "multipliers": [],
     "languages": [

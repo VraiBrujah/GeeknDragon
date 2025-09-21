@@ -116,7 +116,7 @@ echo $snipcartInit;
 
   <!-- ===== HERO ===== -->
   <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/compressed/coffreFic_compressed.mp4" data-videos='["videos/compressed/cascade_HD_compressed.mp4","videos/compressed/fontaine11_compressed.mp4","videos/compressed/Carte1_compressed.mp4","videos/compressed/fontaine4_compressed.mp4","videos/compressed/fontaine3_compressed.mp4","videos/compressed/fontaine2_compressed.mp4","videos/compressed/fontaine1_compressed.mp4"]'></div>
+    <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/coffreFic_compressed.mp4" data-videos='["/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4","/media/videos/backgrounds/Carte1_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4"]'></div>
     <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6 hero-text">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="shop.hero.title">Boutique Geek & Dragon</h1>
@@ -265,7 +265,7 @@ echo $snipcartInit;
     <section class="py-24">
       <div class="max-w-3xl mx-auto px-6 text-center">
         <h3 class="text-4xl font-bold mb-6" data-i18n="shop.chest.title">Coffres sur mesure</h3>
-        <a href="<?= langUrl('index.php#contact') ?>"><img src="images/webp/Piece/pro/coffre.webp" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
+        <a href="<?= langUrl('index.php#contact') ?>"><img src="/media/products/bundles/coffre.webp" alt="Coffre de pièces personnalisable" class="rounded mb-4 w-full h-124 object-cover" loading="lazy"></a>
         <p class="mb-6 text-gray-300" data-i18n="shop.chest.description">Besoin de plus de 50 pièces ? Des coffres personnalisés sont disponibles sur demande.</p>
         <a href="<?= langUrl('index.php#contact') ?>" class="btn btn-primary" data-i18n="shop.chest.button">Demander un devis</a>
       </div>
@@ -309,7 +309,7 @@ echo $snipcartInit;
   <section class="py-16 bg-gray-900/80">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
       <div class="md:w-1/3">
-        <img src="images/webp/carte_propriete.webp" alt="Carte de propriété à remplir" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
+        <img src="/media/content/carte_propriete.webp" alt="Carte de propriété à remplir" class="rounded-xl shadow-lg w-full object-cover" loading="lazy">
       </div>
       <div class="md:w-2/3 text-gray-200 space-y-4">
         <h3 class="text-3xl font-bold" data-i18n="shop.collective.title">Investissez ensemble, partagez l’aventure</h3>
@@ -327,9 +327,9 @@ echo $snipcartInit;
         <p class="mt-4 txt-court">
           <span data-i18n="shop.intro.payment">Paiement sécurisé via Snipcart</span>
           <span class="payment-icons">
-            <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-            <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-            <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
+            <img src="/media/ui/payments/visa.svg" alt="Logo Visa" loading="lazy">
+            <img src="/media/ui/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
+            <img src="/media/ui/payments/american-express.svg" alt="Logo American Express" loading="lazy">
         </p>
     </section>
 

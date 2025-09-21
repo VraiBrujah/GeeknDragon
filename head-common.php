@@ -24,14 +24,14 @@ if (is_string($gaMeasurementId)) {
   <meta name="description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
   <meta property="og:title" content="<?= htmlspecialchars($title ?? 'Geek & Dragon') ?>" />
   <meta property="og:description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
-  <meta property="og:image" content="<?= htmlspecialchars($ogImage ?? '/images/webp/logo.webp') ?>" />
+  <meta property="og:image" content="<?= htmlspecialchars($ogImage ?? '/media/branding/logos/logo.webp') ?>" />
   <meta property="og:url" content="<?= htmlspecialchars($metaUrl ?? ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? '') . ($_SERVER['REQUEST_URI'] ?? ''))) ?>" />
   <meta property="og:type" content="website" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="<?= htmlspecialchars($title ?? 'Geek & Dragon') ?>" />
   <meta name="twitter:description" content="<?= htmlspecialchars($metaDescription ?? '') ?>" />
-  <meta name="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/images/webp/logo.webp') ?>" />
+  <meta name="twitter:image" content="<?= htmlspecialchars($ogImage ?? '/media/branding/logos/logo.webp') ?>" />
   <link rel="canonical" href="<?= htmlspecialchars($metaUrl ?? '') ?>">
   <link rel="stylesheet" href="/css/vendor.bundle.min.css?v=<?= filemtime(__DIR__.'/css/vendor.bundle.min.css') ?>" />
   <script src="/js/vendor.bundle.min.js?v=<?= filemtime(__DIR__.'/js/vendor.bundle.min.js') ?>"></script>

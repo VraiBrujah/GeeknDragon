@@ -5,7 +5,7 @@ $active = 'actus';
 require __DIR__ . '/../i18n.php';
 $title  = $translations['meta']['news']['flim2025']['title'] ?? 'Geek & Dragon';
 $metaDescription = $translations['meta']['news']['flim2025']['desc'] ?? '';
-$ogImage = '/images/webp/es_tu_game_demo.webp';
+$ogImage = '/media/content/es_tu_game_demo.webp';
 ?>
 <!DOCTYPE html>
 <html lang="<?= htmlspecialchars($lang) ?>">
@@ -26,7 +26,7 @@ $ogImage = '/images/webp/es_tu_game_demo.webp';
 
         <!-- Article complet : Es-tu Game ? -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg">
-          <img loading="lazy" src="/images/webp/es_tu_game_demo.webp" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
+          <img loading="lazy" src="/media/content/es_tu_game_demo.webp" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces">
 
           <h1 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h1>
 
@@ -87,7 +87,7 @@ $ogImage = '/images/webp/es_tu_game_demo.webp';
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
 
             <div class="relative group">
-              <video id="video1" src="/videos/compressed/leMaireDoneUnePieceDargentFLIM_compressed.mp4"
+              <video id="video1" src="/media/videos/demos/leMaireDoneUnePieceDargentFLIM_compressed.mp4"
                      class="rounded shadow-lg w-full aspect-video transition-transform duration-300" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"
@@ -98,7 +98,7 @@ $ogImage = '/images/webp/es_tu_game_demo.webp';
             </div>
 
             <div class="relative group">
-              <video id="video2" src="/videos/compressed/pileoufaceled2duFLIM2025_compressed.mp4"
+              <video id="video2" src="/media/videos/demos/pileoufaceled2duFLIM2025_compressed.mp4"
                      class="rounded shadow-lg w-full aspect-video transition-transform duration-300" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block
                              absolute top-2 right-2 z-10 bg-black/60 text-white text-sm px-2 py-1 rounded"
@@ -109,7 +109,7 @@ $ogImage = '/images/webp/es_tu_game_demo.webp';
             </div>
 
             <div class="relative group">
-              <video id="video3" src="/videos/compressed/finestugameFLIM2025_compressed.mp4"
+              <video id="video3" src="/media/videos/demos/finestugameFLIM2025_compressed.mp4"
                      class="rounded shadow-lg w-full aspect-video transition-transform duration-300" playsinline preload="metadata"></video>
               <button class="mute-btn hidden group-hover:block absolute top-2 right-2 z-10
                              bg-black/60 text-white text-sm px-2 py-1 rounded"

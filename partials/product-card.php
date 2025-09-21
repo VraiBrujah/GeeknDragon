@@ -119,7 +119,7 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
          data-alt-en="<?= htmlspecialchars($altEn) ?>"
          class="rounded mb-4 w-full max-h-48 object-contain" 
          loading="lazy"
-         onerror="this.src='/images/placeholder-product.svg'; this.onerror=null;">
+         onerror="this.src='/media/ui/placeholders/placeholder-product.svg'; this.onerror=null;">
   </a>
 
   <a href="<?= htmlspecialchars($url) ?>" class="block">

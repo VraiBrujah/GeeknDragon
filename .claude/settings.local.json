@@ -36,7 +36,10 @@
       "Bash(dir)",
       "Bash(dir:*)",
       "Bash(find:*)",
-      "Bash(bash:*)"
+      "Bash(bash:*)",
+      "Bash(sed:*)",
+      "Bash(md5sum:*)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

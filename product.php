@@ -285,9 +285,9 @@ echo $snipcartInit;
             <p class="mt-4 text-center text-sm text-gray-400">
               <span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
               <span class="payment-icons inline-flex gap-1 align-middle ml-2">
-                <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy" class="h-4">
-                <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy" class="h-4">
-                <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy" class="h-4">
+                <img src="/media/ui/payments/visa.svg" alt="Logo Visa" loading="lazy" class="h-4">
+                <img src="/media/ui/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy" class="h-4">
+                <img src="/media/ui/payments/american-express.svg" alt="Logo American Express" loading="lazy" class="h-4">
               </span>
             </p>
           </div>

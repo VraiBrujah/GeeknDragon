@@ -418,13 +418,13 @@
                 coffre_fort_principal: {
                     id: "coffre_fort_principal",
                     name: "Vue d'ensemble du Coffre-fort",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: []
                 },
                 coffre_fort_entree: {
                     id: "coffre_fort_entree",
                     name: "Entrée du Coffre-fort",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: [
                         { x: 50, y: 80, note: "# Point d'arrivée du Portoloin\n\nLes aventuriers arrivent ici via le **Portoloin** magique.\n\n*L'air crépite d'énergie résiduelle.*" }
                     ]
@@ -432,7 +432,7 @@
                 salle_coeur: {
                     id: "salle_coeur",
                     name: "Salle du Cœur",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: [
                         { x: 50, y: 30, note: "# Socle de la Relique de l'Aube\n\n**Objectif principal** : Récupérer l'artefact.\n\n*Émet une lumière dorée pulsante.*" },
                         { x: 70, y: 60, note: "# Repaire du Dragon Vert\n\n⚠️ **DANGER** : Jeune Dragon Vert Gallois\n\n- **FP :** 8\n- **PV :** 136\n- **CA :** 18\n\n*Enchaîné aux lueurs magiques du coffre-fort.*" }
@@ -441,43 +441,43 @@
                 escalier_spirale: {
                     id: "escalier_spirale",
                     name: "Escalier en spirale",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: []
                 },
                 hall_principal: {
                     id: "hall_principal",
                     name: "Hall principal",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: []
                 },
                 vortex_bleu: {
                     id: "vortex_bleu",
                     name: "Salle du Vortex bleu",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: []
                 },
                 prisons_vertes: {
                     id: "prisons_vertes",
                     name: "Prisons vertes",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: []
                 },
                 autel_rouge: {
                     id: "autel_rouge",
                     name: "Autel rouge",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: []
                 },
                 jardin_fongique: {
                     id: "jardin_fongique",
                     name: "Jardin fongique",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: []
                 },
                 coffre_fort_salles: {
                     id: "coffre_fort_salles",
                     name: "Plan des salles",
-                    image: "images/Carte_Donjon_1.webp",
+                    image: "/media/campaign/maps/Carte_Donjon_1.webp",
                     pins: []
                 }
             },

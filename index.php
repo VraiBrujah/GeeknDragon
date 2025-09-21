@@ -25,7 +25,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
 
     <!-- ===== HERO ===== -->
     <section class="min-h-screen flex items-center justify-center text-center relative text-white">
-      <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="videos/compressed/mage_compressed.mp4" data-videos='["videos/compressed/cascade_HD_compressed.mp4","videos/compressed/fontaine11_compressed.mp4","videos/compressed/Carte1_compressed.mp4","videos/compressed/fontaine4_compressed.mp4","videos/compressed/fontaine3_compressed.mp4","videos/compressed/fontaine2_compressed.mp4","videos/compressed/fontaine1_compressed.mp4"]'></div>
+      <div class="hero-videos absolute inset-0 w-full h-full" style="z-index:-1" data-main="/media/videos/backgrounds/mage_compressed.mp4" data-videos='["/media/videos/backgrounds/cascade_HD_compressed.mp4","/media/videos/backgrounds/fontaine11_compressed.mp4","/media/videos/backgrounds/Carte1_compressed.mp4","/media/videos/backgrounds/fontaine4_compressed.mp4","/media/videos/backgrounds/fontaine3_compressed.mp4","/media/videos/backgrounds/fontaine2_compressed.mp4","/media/videos/backgrounds/fontaine1_compressed.mp4"]'></div>
       <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 max-w-3xl p-6 hero-text">
         <h1 class="text-5xl font-extrabold mb-6" data-i18n="hero.title">L'immersion au cœur du jeu</h1>
@@ -45,17 +45,17 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
           <a href="<?= langUrl('boutique.php#cartes') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.equipment.title">Cartes d’équipement</h4>
             <p class="text-center" data-i18n="home.mustHave.equipment.desc">560 cartes d’équipement illustrées pour remplacer la lecture fastidieuse du manuel</p>
-              <img src="images/webp/cartes_equipement.webp" alt="560 cartes d'équipement illustrées" class="rounded mb-4" loading="lazy">
+              <img src="/media/content/cartes_equipement.webp" alt="560 cartes d'équipement illustrées" class="rounded mb-4" loading="lazy">
           </a>
           <a href="<?= langUrl('boutique.php#pieces') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.coins.title">Pièces métalliques</h4>
             <p class="text-center" data-i18n="home.mustHave.coins.desc">Monnaie physique pour ressentir chaque trésor et influencer la chance à la table</p>
-              <img src="images/webp/Piece/pro/lot10Piece2-300.webp" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
+              <img src="/media/products/bundles/lot10Piece2-300.webp" alt="Pièces métalliques gravées pour JDR" class="rounded mb-4" loading="lazy">
           </a>
           <a href="<?= langUrl('boutique.php#triptyques') ?>" class="card-product block no-underline hover:no-underline text-gray-100">
             <h4 class="text-center text-2xl font-semibold mb-2" data-i18n="home.mustHave.triptych.title">Fiche Triptyque</h4>
             <p class="text-center" data-i18n="home.mustHave.triptych.desc">Créez et gérez votre perso sans ouvrir le moindre livre, sur trois volets robustes</p>
-              <img src="images/webp/triptyque_fiche.webp" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
+              <img src="/media/content/triptyque_fiche.webp" alt="Fiche de personnage triptyque rigide" class="rounded mb-4" loading="lazy">
           </a>
         </div>
       </div>
@@ -68,9 +68,9 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
         <h3 class="text-4xl font-bold mb-12" data-i18n="nav.shop">Boutique</h3>
           <p class="mb-8 txt-court"><span data-i18n="product.securePayment">Paiement sécurisé via Snipcart</span>
             <span class="payment-icons">
-              <img src="/images/payments/visa.svg" alt="Logo Visa" loading="lazy">
-              <img src="/images/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
-              <img src="/images/payments/american-express.svg" alt="Logo American Express" loading="lazy">
+              <img src="/media/ui/payments/visa.svg" alt="Logo Visa" loading="lazy">
+              <img src="/media/ui/payments/mastercard.svg" alt="Logo Mastercard" loading="lazy">
+              <img src="/media/ui/payments/american-express.svg" alt="Logo American Express" loading="lazy">
           </p>
         <div class="flex flex-col md:flex-row gap-6 justify-center">
           <a href="<?= langUrl('boutique.php') ?>" class="btn btn-primary" data-hide-price="1" data-i18n="hero.visitShop">
@@ -94,7 +94,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     
         <!-- Résumé d'article - dupliquer ce bloc pour chaque actualité -->
         <article class="bg-gray-800 p-6 rounded-xl shadow-lg mb-12">
-            <img src="/images/webp/es_tu_game_demo.webp" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces" loading="lazy">
+            <img src="/media/content/es_tu_game_demo.webp" class="rounded mb-6 w-full" alt="One‑shot niveau 20 avec pièces" loading="lazy">
           <h4 class="text-3xl font-semibold mb-4" data-i18n="news.flim2025.title">Des héros niveau 20, un raton trop tenace, et… nos pièces</h4>
           <p class="text-lg text-gray-200 mb-4" data-i18n="news.flim2025.summary">
             Notre première démonstration de pièces au FLIM 2025 a pris la forme d’un one-shot légendaire animé par Es‑tu Game ?.
@@ -106,7 +106,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     
         <!-- Bloc témoignage -->
         <article class="bg-gray-800 p-6 mt-12 rounded-xl shadow-lg">
-          <img src="images/webp/avisJoueurFlim2025.webp" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
+          <img src="/media/content/avisJoueurFlim2025.webp" class="rounded mb-4 w-full" alt="Avis joueurs sur pièces" loading="lazy">
           <h4 class="text-center text-2xl font-semibold mb-4" data-i18n="testimonials.quote1.title">« Finis les combats contre nos feuilles de personnage ! »</h4>
           <p class="text-lg leading-relaxed text-gray-200" data-i18n="testimonials.quote1.intro">
             De nombreux joueurs présents l’affirment : les pièces physiques changent tout.
@@ -129,7 +129,7 @@ $metaDescription = $translations['meta']['home']['desc'] ?? '';
     <section id="contact" class="py-16 bg-gray-900/80 scroll-mt-32">
       <div class="max-w-xl mx-auto text-center">
         <h3 class="text-4xl font-bold mb-6" data-i18n="nav.contact">Contact</h3>
-        <img src="images/webp/team_brujah.webp" alt="Brujah" class="mx-auto h-32 w-32 rounded-full mb-4" loading="lazy">
+        <img src="/media/content/team_brujah.webp" alt="Brujah" class="mx-auto h-32 w-32 rounded-full mb-4" loading="lazy">
           <p class="mb-2 txt-court"><strong>Brujah</strong> — <span data-i18n="contact.info.roleCommunity">Responsable produit & communauté</span></p>
           <p class="mb-2 txt-court"><a href="mailto:contact@geekndragon.com" class="text-indigo-400 hover:underline">contact@geekndragon.com</a></p>
           <p class="mb-2 txt-court"><a href="mailto:commande@geekndragon.com" class="text-indigo-400 hover:underline">commande@geekndragon.com</a></p>

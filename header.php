@@ -80,7 +80,7 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     <!-- Logo + Titre cliquables ensemble -->
     <a href="<?= langUrl('/index.php') ?>" class="relative z-10 flex flex-col md:flex-row items-center group transition-colors duration-200 flex-shrink-0 space-y-1 md:space-y-0 md:space-x-3 text-center md:text-left">
       <!-- Nouveau SVG très grand : on le bride via la classe header-logo -->
-      <img src="/images/webp/geekndragon_logo_blanc.webp" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105" width="160" height="160">
+      <img src="/media/branding/logos/geekndragon_logo_blanc.webp" alt="Logo Geek &amp; Dragon" class="header-logo logo-lighten transition-transform duration-200 group-hover:scale-105" width="160" height="160">
       <span class="site-title text-2xl md:text-3xl font-semibold text-white group-hover:text-indigo-300 transition-colors duration-200">
         <span class="sm:hidden leading-snug">Geek<br>&amp;<br>Dragon</span>
         <span class="hidden sm:inline">Geek &amp; Dragon</span>
@@ -105,10 +105,10 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
       <!-- Sélecteur de langue (drapeaux) -->
       <div id="lang-switcher" class="hidden md:flex items-center gap-2 order-2 md:order-3 ml-2">
         <button type="button" data-lang="fr" class="flag-btn" aria-label="Français" aria-current="false">
-          <img src="/images/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
+          <img src="/media/ui/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
         </button>
         <button type="button" data-lang="en" class="flag-btn" aria-label="English" aria-current="false">
-          <img src="/images/flags/flag-en-us-uk-diagonal-medieval.svg" width="32" height="24" alt="">
+          <img src="/media/ui/flags/flag-en-us-uk-diagonal-medieval.svg" width="32" height="24" alt="">
         </button>
       </div>
 
@@ -145,10 +145,10 @@ function renderNav(array $items, string $active, bool $mobile = false): void {
     <div class="mt-8 flex flex-col items-center gap-6 w-full">
       <div class="flex items-center gap-2">
         <button type="button" data-lang="fr" class="flag-btn" aria-label="Français" aria-current="false">
-          <img src="/images/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
+          <img src="/media/ui/flags/flag-fr-medieval-rim-on-top.svg" width="32" height="24" alt="">
         </button>
         <button type="button" data-lang="en" class="flag-btn" aria-label="English" aria-current="false">
-          <img src="/images/flags/flag-en-us-uk-diagonal-medieval.svg" width="32" height="24" alt="">
+          <img src="/media/ui/flags/flag-en-us-uk-diagonal-medieval.svg" width="32" height="24" alt="">
         </button>
       </div>
 
