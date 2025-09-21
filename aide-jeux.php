@@ -5,7 +5,7 @@ $active = 'aide-jeux';
 require __DIR__ . '/i18n.php';
 
 $title = 'Aide de Jeux - ' . ($translations['meta']['home']['title'] ?? 'Geek & Dragon');
-$metaDescription = 'Guide complet pour comprendre et utiliser vos triptyques Geek & Dragon : Espèce, Classe et Historique. Découvrez tous les secrets de vos fiches de personnage cartonnées.';
+$metaDescription = 'Guide complet pour vos accessoires D&D Geek & Dragon : triptyques de personnage, cartes d\'équipement, monnaie physique et convertisseur. Tout pour enrichir vos parties de jeu de rôle.';
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/aide-jeux.php';
 
 // Ajouter les traductions spécifiques pour cette page
@@ -13,8 +13,8 @@ $gameHelpTranslations = [
     'fr' => [
         'gameHelp' => [
             'hero' => [
-                'title' => 'Guide des Triptyques',
-                'subtitle' => 'Maîtrisez vos fiches de personnage Geek & Dragon'
+                'title' => 'Guides d\'Aide aux Jeux',
+                'subtitle' => 'Maîtrisez tous vos accessoires Geek & Dragon : triptyques, cartes et monnaie'
             ],
             'triptychGuide' => [
                 'title' => 'Les 3 Triptyques de votre Personnage',
@@ -35,8 +35,8 @@ $gameHelpTranslations = [
     'en' => [
         'gameHelp' => [
             'hero' => [
-                'title' => 'Triptych Guide',
-                'subtitle' => 'Master your Geek & Dragon character sheets'
+                'title' => 'Game Help Guides',
+                'subtitle' => 'Master all your Geek & Dragon accessories: triptychs, cards and currency'
             ],
             'triptychGuide' => [
                 'title' => 'Your Character\'s 3 Triptychs',
@@ -265,8 +265,40 @@ echo $snipcartInit;
     </div>
   </section>
 
+  <!-- ===== NAVIGATION RAPIDE ===== -->
+  <section class="py-12 bg-gray-800/50">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-2xl font-bold text-center mb-8 text-white">Navigation Rapide</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="#guide-triptyques" class="group bg-gradient-to-br from-indigo-900/50 to-purple-900/50 rounded-xl p-6 border border-indigo-500/30 hover:border-indigo-400/50 transition-all">
+          <div class="text-center">
+            <div class="text-4xl mb-3">📜</div>
+            <h3 class="text-xl font-bold text-indigo-400 mb-2">Guide des Triptyques</h3>
+            <p class="text-gray-300 text-sm">Espèce, Classe, Historique - D&D 2024</p>
+          </div>
+        </a>
+        
+        <a href="#guide-cartes" class="group bg-gradient-to-br from-emerald-900/50 to-teal-900/50 rounded-xl p-6 border border-emerald-500/30 hover:border-emerald-400/50 transition-all">
+          <div class="text-center">
+            <div class="text-4xl mb-3">🃏</div>
+            <h3 class="text-xl font-bold text-emerald-400 mb-2">Guide des Cartes</h3>
+            <p class="text-gray-300 text-sm">Armes, Équipements, Sorts</p>
+          </div>
+        </a>
+        
+        <a href="#guide-monnaie" class="group bg-gradient-to-br from-amber-900/50 to-yellow-900/50 rounded-xl p-6 border border-amber-500/30 hover:border-amber-400/50 transition-all">
+          <div class="text-center">
+            <div class="text-4xl mb-3">💰</div>
+            <h3 class="text-xl font-bold text-amber-400 mb-2">Guide de la Monnaie</h3>
+            <p class="text-gray-300 text-sm">Système monétaire + Convertisseur</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== INTRODUCTION AUX TRIPTYQUES ===== -->
-  <section class="py-16 bg-gray-900/80">
+  <section class="py-16 bg-gray-900/80" id="guide-triptyques">
     <div class="max-w-6xl mx-auto px-6 text-center">
       <h2 class="text-3xl md:text-4xl font-bold mb-8 text-indigo-400">
         Qu'est-ce qu'un triptyque Geek & Dragon ?
