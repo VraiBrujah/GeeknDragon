@@ -149,6 +149,80 @@
 .snipcart input[type=checkbox],
 .snipcart input[type=radio]{ accent-color: var(--gd-accent); }
 
+/* Champ code promo : bloc mis en valeur, alignement flexible et boutons lisibles */
+.snipcart .snipcart-discount-box{
+  margin-top:1.25rem;
+  padding:1rem 1.25rem;
+  background:var(--gd-card);
+  border:1px solid var(--gd-border);
+  border-radius:0.75rem;
+  box-shadow:0 18px 36px rgba(8,13,23,0.45);
+}
+.snipcart .snipcart-discount-box__form{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.75rem;
+  position:static;
+  align-items:stretch;
+}
+.snipcart .snipcart-discount-box .snipcart-input{
+  flex:1 1 220px;
+  min-width:10rem;
+  padding:0.75rem 1rem;
+  border-radius:0.65rem;
+  background:var(--gd-card-2) !important;
+  border-color:var(--gd-border) !important;
+}
+.snipcart .snipcart-discount-box .snipcart-input:focus{
+  background:var(--gd-card-2) !important;
+}
+.snipcart .snipcart-discount-box__submit,
+.snipcart .snipcart-discount-box__cancel{
+  position:static;
+  margin:0;
+  min-height:2.75rem;
+  padding:0.65rem 1.25rem;
+  border-radius:0.6rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+  transition:transform 0.15s ease,filter 0.2s ease,border-color 0.2s ease,background-color 0.2s ease;
+}
+.snipcart .snipcart-discount-box__submit{
+  background:var(--gd-accent);
+  color:#fff !important;
+  border:1px solid transparent;
+  box-shadow:0 12px 24px rgba(139,92,246,0.35);
+}
+.snipcart .snipcart-discount-box__submit:hover,
+.snipcart .snipcart-discount-box__submit:focus-visible{
+  filter:brightness(1.08);
+  transform:translateY(-1px);
+}
+.snipcart .snipcart-discount-box__cancel{
+  background:transparent;
+  border:1px solid var(--gd-border);
+  color:var(--gd-muted) !important;
+  text-decoration:none !important;
+}
+.snipcart .snipcart-discount-box__cancel:hover,
+.snipcart .snipcart-discount-box__cancel:focus-visible{
+  border-color:var(--gd-accent);
+  color:var(--color-linkHover) !important;
+}
+@media (max-width:640px){
+  .snipcart .snipcart-discount-box__form{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .snipcart .snipcart-discount-box__submit,
+  .snipcart .snipcart-discount-box__cancel{
+    width:100%;
+  }
+}
+
 /* =================================================================== */
 /* LIVRAISON (retour webhook)                                           */
 /* =================================================================== */
