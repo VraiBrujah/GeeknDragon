@@ -14,40 +14,20 @@ $descriptionFr = (string) ($product['description'] ?? '');
 $descriptionEn = (string) ($product['description_en'] ?? $descriptionFr);
 $description = $lang === 'en' ? $descriptionEn : $descriptionFr;
 
-// Utilisation de la fonction partagée pour la conversion Markdown
-require_once __DIR__ . '/../includes/markdown-utils.php';
+// Utilisation du cache Markdown optimisé
+require_once __DIR__ . '/../includes/markdown-cache.php';
 
-$descriptionHtmlFr = convertMarkdownToHtml($descriptionFr);
-$descriptionHtmlEn = convertMarkdownToHtml($descriptionEn);
+// Génération de clés de cache uniques basées sur l'ID produit
+$cacheKeyFr = $id . '_desc_fr';
+$cacheKeyEn = $id . '_desc_en';
+
+$descriptionHtmlFr = MarkdownCache::convertToHtml($descriptionFr, $cacheKeyFr);
+$descriptionHtmlEn = MarkdownCache::convertToHtml($descriptionEn, $cacheKeyEn);
 $descriptionHtml = $lang === 'en' ? $descriptionHtmlEn : $descriptionHtmlFr;
 
-/**
- * Convertit une description Markdown en texte brut pour Snipcart ou les attributs alt.
- */
-$toPlainText = static function (string $value): string {
-    if ($value === '') {
-        return '';
-    }
-
-    $text = str_replace(["\r\n", "\r"], "\n", $value);
-    $text = preg_replace('/^\s{0,3}#{1,6}\s*/mu', '', $text) ?? $text;
-    $text = preg_replace('/^\s{0,3}>\s?/mu', '', $text) ?? $text;
-    $text = preg_replace('/^\s{0,3}[-*+]\s+/mu', '', $text) ?? $text;
-    $text = preg_replace('/!\[(.*?)\]\((.*?)\)/u', '$1', $text) ?? $text;
-    $text = preg_replace('/\[(.*?)\]\((.*?)\)/u', '$1', $text) ?? $text;
-    $text = preg_replace('/(`{1,3})(.+?)\1/u', '$2', $text) ?? $text;
-    $text = preg_replace('/([*_~]{1,2})(.+?)\1/u', '$2', $text) ?? $text;
-
-    $text = strip_tags($text);
-    $text = preg_replace('/\s+/u', ' ', $text) ?? $text;
-
-    $text = trim($text);
-
-    return $text !== '' ? $text : trim(strip_tags($value));
-};
-
-$altFr = $toPlainText($descriptionFr);
-$altEn = $toPlainText($descriptionEn);
+// Conversion optimisée vers texte brut avec cache
+$altFr = MarkdownCache::convertToPlainText($descriptionFr, $id . '_alt_fr');
+$altEn = MarkdownCache::convertToPlainText($descriptionEn, $id . '_alt_en');
 $alt = $lang === 'en' ? $altEn : $altFr;
 
 // Gestion d'un résumé multilingue avec repli sur la description nettoyée
@@ -60,8 +40,8 @@ if ($summaryRawEn === '' && $summaryRawFr !== '') {
     $summaryRawEn = $summaryRawFr;
 }
 
-$summaryFr = $summaryRawFr !== '' ? $toPlainText($summaryRawFr) : $altFr;
-$summaryEn = $summaryRawEn !== '' ? $toPlainText($summaryRawEn) : $altEn;
+$summaryFr = $summaryRawFr !== '' ? MarkdownCache::convertToPlainText($summaryRawFr, $id . '_sum_fr') : $altFr;
+$summaryEn = $summaryRawEn !== '' ? MarkdownCache::convertToPlainText($summaryRawEn, $id . '_sum_en') : $altEn;
 
 if ($summaryFr === '') {
     $summaryFr = $altFr;
