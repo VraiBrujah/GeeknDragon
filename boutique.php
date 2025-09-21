@@ -13,18 +13,13 @@ $extraHead = <<<HTML
 </style>
 HTML;
 
-/* ───── STOCK ───── */
 function getStock(string $id): ?int
 {
-    // Pour de meilleures performances, désactivez la vérification du stock en temps réel
-    // Le stock sera géré directement par Snipcart côté client
-    // Retourne null = stock illimité (pas de vérification serveur)
     return null;
 }
 function inStock(string $id): bool
 {
-    $stock = getStock($id);
-    return $stock === null || $stock > 0;      // true si illimité ou quantité > 0
+    return true;
 }
 
 // Liste des produits séparés par catégorie
@@ -70,9 +65,7 @@ foreach ($data as $id => $p) {
     }
 }
 
-// Pour compatibilité (si du code utilise encore $products)
 $products = array_merge($pieces, $cards, $triptychs);
-// Stock géré par Snipcart - pas de vérification serveur pour des performances optimales
 $stock = [];
 ?>
 <!DOCTYPE html>
@@ -336,7 +329,6 @@ echo $snipcartInit;
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
 </script>
   <script>window.stock = <?= json_encode($stock) ?>;</script>
-  <!-- Ordre correct comme index.php -->
   <script src="/js/app.js"></script>
   <script src="/js/hero-videos.js"></script>
   <script src="/js/boutique-premium.js"></script>

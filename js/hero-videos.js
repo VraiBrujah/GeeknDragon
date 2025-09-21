@@ -185,11 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const handleError = () => {
           if (retryCount < maxRetries) {
             retryCount++;
-            console.log(`[HERO] Retry ${retryCount}/${maxRetries} pour:`, src);
             // Fallback vers l'URL directe après échec du streaming
             v.src = src;
           } else {
-            console.error('[HERO] Échec définitif du chargement pour:', src);
             // Dispatcher l'événement d'erreur pour que le système de rotation continue
             v.dispatchEvent(new Event('error'));
           }
