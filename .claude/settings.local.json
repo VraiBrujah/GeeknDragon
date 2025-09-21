@@ -39,7 +39,8 @@
       "Bash(bash:*)",
       "Bash(sed:*)",
       "Bash(md5sum:*)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

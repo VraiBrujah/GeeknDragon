@@ -1047,40 +1047,40 @@ echo $snipcartInit;
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold">PP</div>
               <div>
-                <h4 class="font-semibold text-yellow-400">Pièce de Platine (pp)</h4>
-                <p class="text-gray-300 text-sm">La plus précieuse • 1 pp = 10 po</p>
+                <h4 class="font-semibold text-yellow-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Platine (pp)</h4>
+                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;La plus précieuse • 1 pp = 10 po</p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-black font-bold">PO</div>
               <div>
-                <h4 class="font-semibold text-yellow-400">Pièce d'Or (po)</h4>
-                <p class="text-gray-300 text-sm">Monnaie de référence • 1 po = 10 pa</p>
+                <h4 class="font-semibold text-yellow-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce d'Or (po)</h4>
+                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;Monnaie de référence • 1 po = 10 pa</p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center text-black font-bold">PA</div>
               <div>
-                <h4 class="font-semibold text-gray-400">Pièce d'Argent (pa)</h4>
-                <p class="text-gray-300 text-sm">Monnaie courante • 1 pa = 10 pe</p>
+                <h4 class="font-semibold text-gray-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce d'Argent (pa)</h4>
+                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;Monnaie courante • 1 pa = 10 pe</p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold">PE</div>
               <div>
-                <h4 class="font-semibold text-orange-400">Pièce d'Électrum (pe)</h4>
-                <p class="text-gray-300 text-sm">Alliage or-argent • 1 pe = 5 pc</p>
+                <h4 class="font-semibold text-orange-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce d'Électrum (pe)</h4>
+                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;Alliage or-argent • 1 pe = 5 pc</p>
               </div>
             </div>
             
             <div class="flex items-center space-x-4 p-3 bg-gray-800/50 rounded-lg">
               <div class="w-12 h-12 bg-orange-800 rounded-full flex items-center justify-center text-white font-bold">PC</div>
               <div>
-                <h4 class="font-semibold text-orange-400">Pièce de Cuivre (pc)</h4>
-                <p class="text-gray-300 text-sm">Menue monnaie • La plus commune</p>
+                <h4 class="font-semibold text-orange-400">&nbsp;&nbsp;&nbsp;&nbsp;Pièce de Cuivre (pc)</h4>
+                <p class="text-gray-300 text-sm">&nbsp;&nbsp;&nbsp;&nbsp;Menue monnaie • La plus commune</p>
               </div>
             </div>
           </div>
