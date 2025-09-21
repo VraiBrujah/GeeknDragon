@@ -149,6 +149,24 @@
 .snipcart input[type=checkbox],
 .snipcart input[type=radio]{ accent-color: var(--gd-accent); }
 
+/* Champ code promo : alignement responsive et boutons accessibles */
+.snipcart .snipcart-discount-box__form{
+  display:flex;
+  gap:0.75rem;
+  position:static;
+  align-items:center;
+}
+.snipcart .snipcart-discount-box .snipcart-input{
+  flex:1 1 auto;
+  min-width:0;
+  padding-right:1rem;
+}
+.snipcart .snipcart-discount-box__submit,
+.snipcart .snipcart-discount-box__cancel{
+  position:static;
+  margin:0;
+}
+
 /* =================================================================== */
 /* LIVRAISON (retour webhook)                                           */
 /* =================================================================== */
