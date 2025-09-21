@@ -39,7 +39,7 @@
       "/media/products/coins/coin-gold-1.webp",
       "/media/products/coins/coin-platinum-1.webp"
     ],
-    "multipliers": [1, 10, 100, 1000, 10000]
+    "multipliers": []
   },
   "lot50-essence": {
     "name": "L'Essence du Marchand", 
@@ -60,7 +60,7 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x1p2.webp"
     ],
-    "multipliers": [1, 10, 100, 1000, 10000]
+    "multipliers": []
   },
   "lot50-tresorerie": {
     "name": "La Trésorerie du Seigneur",

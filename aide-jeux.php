@@ -1388,7 +1388,7 @@ echo $snipcartInit;
                 <a href="<?= langUrl('boutique.php#pieces') ?>" class="btn btn-primary w-full">
                   🛒 Voir les Pièces en Boutique
                 </a>
-                <a href="<?= langUrl('product.php?id=tresorerie-complete') ?>" class="btn btn-outline w-full">
+                <a href="<?= langUrl('product.php?id=lot50-tresorerie&from=pieces') ?>" class="btn btn-outline w-full">
                   ⭐ Set Complet de Trésorerie
                 </a>
               </div>
