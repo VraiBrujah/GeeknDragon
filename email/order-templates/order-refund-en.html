@@ -1,0 +1,111 @@
+Subject: 💰 Refund processed for order {{ order.invoiceNumber }}
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refund Processed</title>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 14px; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f8fafc;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); color: white; padding: 40px 30px; text-align: center; position: relative; overflow: hidden;">
+            <!-- Coin and treasure background -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="%23ffffff" opacity="0.08"><circle cx="25" cy="25" r="6" stroke="%23ffffff" stroke-width="1" fill="none"/><circle cx="75" cy="75" r="4" stroke="%23ffffff" stroke-width="1" fill="none"/><text x="25" y="30" font-size="8" text-anchor="middle">¢</text></g></svg>');">
+            </div>
+            <div style="position: relative; z-index: 1;">
+                <img src="{{ settings.logoUrl }}" style="max-height: 70px; margin-bottom: 15px; filter: brightness(0) invert(1);" alt="Geek & Dragon" />
+                <div style="font-size: 48px; margin-bottom: 15px;">💰</div>
+                <h1 style="margin: 0; font-size: 28px; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Treasure Returned</h1>
+                <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">
+                    Hi {{ order.billingAddress.fullName }}, your gold has been safely returned.
+                </p>
+            </div>
+        </div>
+
+        <div style="padding: 30px;">
+            <!-- Refund details -->
+            <div style="background-color: #f0f9ff; padding: 25px; border-radius: 12px; border: 1px solid #0ea5e9; margin-bottom: 30px;">
+                <h2 style="color: #0ea5e9; margin: 0 0 15px 0; font-size: 20px;">✅ Refund Confirmation</h2>
+                <p style="margin: 0 0 10px 0; font-size: 16px;"><strong>Order Number:</strong> {{ order.invoiceNumber }}</p>
+                <p style="margin: 0 0 10px 0;"><strong>Refund Amount:</strong> {{ money refund.amount }}</p>
+                <p style="margin: 0 0 10px 0;"><strong>Refund Date:</strong> {{ date refund.completionDate 'MMMM dd, yyyy' }}</p>
+                <p style="margin: 0;"><strong>Processing Time:</strong> 3-5 business days</p>
+            </div>
+
+            <!-- What to expect -->
+            <div style="background-color: #fffbeb; padding: 25px; border-radius: 12px; border: 1px solid #f59e0b; margin-bottom: 30px;">
+                <h3 style="color: #f59e0b; margin: 0 0 15px 0; font-size: 18px;">📅 What to expect:</h3>
+                <ul style="margin: 0; padding-left: 20px; color: #92400e;">
+                    <li style="margin-bottom: 8px;">Your refund has been processed successfully</li>
+                    <li style="margin-bottom: 8px;">Funds will appear in your account within 3-5 business days</li>
+                    <li style="margin-bottom: 8px;">You'll see it as "Geek & Dragon Refund" on your statement</li>
+                    <li>If you don't see it after 5 business days, please contact us</li>
+                </ul>
+            </div>
+
+            <!-- Refunded items -->
+            {{ #if refund.items }}
+            <h3 style="color: #374151; margin: 0 0 20px 0; font-size: 18px;">📦 Refunded Items:</h3>
+            <div style="background-color: #f9fafb; border-radius: 12px; overflow: hidden; margin-bottom: 30px;">
+                {{ #each refund.items }}
+                <div style="padding: 20px; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 15px;">
+                    {{ #if ../settings.includeProductImagesInInvoice }}
+                    {{ #is_absolute_url this.image }}
+                    <img src="{{ this.image }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 2px solid #e5e7eb;" />
+                    {{ /is_absolute_url }}
+                    {{ /if }}
+                    <div style="flex: 1;">
+                        <p style="margin: 0; font-weight: bold; color: #111827;">{{ this.name }}</p>
+                        <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 14px;">Quantity: {{ this.quantity }} • {{ money this.refundAmount }}</p>
+                    </div>
+                </div>
+                {{ /each }}
+            </div>
+            {{ /if }}
+
+            <!-- Reason (if provided) -->
+            {{ #if refund.reason }}
+            <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                <h3 style="color: #374151; margin: 0 0 10px 0; font-size: 16px;">Reason for refund:</h3>
+                <p style="margin: 0; color: #6b7280;">{{ refund.reason }}</p>
+            </div>
+            {{ /if }}
+
+            <!-- We're sorry message -->
+            <div style="background-color: #fef2f2; padding: 25px; border-radius: 12px; border: 1px solid #ef4444; margin-bottom: 30px;">
+                <h3 style="color: #dc2626; margin: 0 0 15px 0; font-size: 18px;">😔 We're sorry to see you go</h3>
+                <p style="margin: 0; color: #7f1d1d;">
+                    We apologize that your adventure gear didn't meet your expectations. Your feedback helps us improve 
+                    our quest to provide the best tabletop gaming experience possible.
+                </p>
+            </div>
+
+            <!-- CTA Section -->
+            <div style="text-align: center; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 30px; border-radius: 12px; position: relative; overflow: hidden;">
+                <!-- Phoenix rising background -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="%23ffffff" opacity="0.05"><path d="M30,70 Q50,40 70,70" stroke="%23ffffff" stroke-width="2" fill="none"/><circle cx="50" cy="55" r="3"/><path d="M45,50 L55,50 M50,45 L50,55" stroke="%23ffffff" stroke-width="1"/></g></svg>');">
+                </div>
+                <div style="position: relative; z-index: 1;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🔥</div>
+                    <h3 style="margin: 0 0 15px 0; font-size: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">🎯 Give Our Guild Another Quest?</h3>
+                    <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6;">
+                        We're constantly forging better gear and would be honored to earn back your trust with our latest treasures.
+                    </p>
+                    <a href="https://geekndragon.com/boutique.php" style="display: inline-block; background-color: white; color: #4f46e5; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.2s;">
+                        ✨ Discover New Treasures
+                    </a>
+                </div>
+            </div>
+
+            <!-- Support -->
+            <div style="margin-top: 30px; text-align: center; color: #6b7280; font-size: 14px;">
+                <p style="margin: 0;">Questions about your refund? Contact us at <a href="mailto:contact@geekndragon.com" style="color: #4f46e5;">contact@geekndragon.com</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

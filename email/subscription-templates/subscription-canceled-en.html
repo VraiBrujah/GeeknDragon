@@ -1,0 +1,113 @@
+Subject: 📭 Subscription canceled - We'll miss you, adventurer
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Canceled</title>
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 14px; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f8fafc;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); color: white; padding: 40px 30px; text-align: center; position: relative; overflow: hidden;">
+            <!-- Fading quest background -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="%23ffffff" opacity="0.06"><path d="M20,30 L30,20 L40,30 L30,40 Z" stroke="%23ffffff" stroke-width="1" fill="none"/><circle cx="70" cy="70" r="6" stroke="%23ffffff" stroke-width="1" fill="none" stroke-dasharray="2,2"/></g></svg>');">
+            </div>
+            <div style="position: relative; z-index: 1;">
+                <img src="{{ settings.logoUrl }}" style="max-height: 70px; margin-bottom: 15px; filter: brightness(0) invert(1);" alt="Geek & Dragon" />
+                <div style="font-size: 48px; margin-bottom: 15px;">🌅</div>
+                <h1 style="margin: 0; font-size: 28px; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Your quest has concluded</h1>
+                <p style="margin: 10px 0 0 0; font-size: 16px; opacity: 0.9;">
+                    Hi {{ customer.fullName }}, may your adventures continue elsewhere.
+                </p>
+            </div>
+        </div>
+
+        <div style="padding: 30px;">
+            <!-- Cancellation details -->
+            <div style="background-color: #f9fafb; padding: 25px; border-radius: 12px; border: 1px solid #6b7280; margin-bottom: 30px;">
+                <h2 style="color: #6b7280; margin: 0 0 15px 0; font-size: 20px;">📋 Cancellation Details</h2>
+                <p style="margin: 0 0 10px 0; font-size: 16px;"><strong>Subscription:</strong> {{ subscription.name }}</p>
+                <p style="margin: 0 0 10px 0;"><strong>Cancellation Date:</strong> {{ date subscription.canceledOn 'MMMM dd, yyyy' }}</p>
+                {{ #if subscription.endDate }}
+                <p style="margin: 0;"><strong>Access Until:</strong> {{ date subscription.endDate 'MMMM dd, yyyy' }}</p>
+                {{ else }}
+                <p style="margin: 0;"><strong>Status:</strong> Ended immediately</p>
+                {{ /if }}
+            </div>
+
+            <!-- What this means -->
+            <div style="background-color: #fffbeb; padding: 25px; border-radius: 12px; border: 1px solid #f59e0b; margin-bottom: 30px;">
+                <h3 style="color: #f59e0b; margin: 0 0 15px 0; font-size: 18px;">⚠️ What this means:</h3>
+                <ul style="margin: 0; padding-left: 20px; color: #92400e;">
+                    <li style="margin-bottom: 8px;">No future charges will be made to your account</li>
+                    {{ #if subscription.endDate }}
+                    <li style="margin-bottom: 8px;">You'll continue to have access until {{ date subscription.endDate 'MMMM dd, yyyy' }}</li>
+                    {{ else }}
+                    <li style="margin-bottom: 8px;">Your access has ended immediately</li>
+                    {{ /if }}
+                    <li style="margin-bottom: 8px;">You can still purchase individual items from our store</li>
+                    <li>Your account data will be kept for future reactivation</li>
+                </ul>
+            </div>
+
+            <!-- We're sorry to see you go -->
+            <div style="background-color: #fef2f2; padding: 25px; border-radius: 12px; border: 1px solid #ef4444; margin-bottom: 30px;">
+                <h3 style="color: #dc2626; margin: 0 0 15px 0; font-size: 18px;">😔 We're sorry to see you go</h3>
+                <p style="margin: 0; color: #7f1d1d;">
+                    Your epic adventures with us have been legendary! We hope the gear you've collected serves you well 
+                    in many future campaigns. If there's anything we could have done better, please let us know.
+                </p>
+            </div>
+
+            <!-- Feedback section -->
+            <div style="background-color: #f0f9ff; padding: 25px; border-radius: 12px; border: 1px solid #0ea5e9; margin-bottom: 30px;">
+                <h3 style="color: #0ea5e9; margin: 0 0 15px 0; font-size: 18px;">💭 Help Us Improve</h3>
+                <p style="margin: 0 0 15px 0; color: #0c4a6e;">
+                    Your feedback matters! A quick note about why you canceled helps us create better experiences for future adventurers.
+                </p>
+                <a href="mailto:contact@geekndragon.com?subject=Subscription Feedback" style="display: inline-block; background-color: #0ea5e9; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: 500;">
+                    Share Feedback
+                </a>
+            </div>
+
+            <!-- Reactivation offer -->
+            <div style="text-align: center; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; position: relative; overflow: hidden;">
+                <!-- Portal and return magic -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><g fill=\"%23ffffff\" opacity=\"0.05\"><circle cx=\"50\" cy=\"50\" r=\"15\" stroke=\"%23ffffff\" stroke-width=\"2\" fill=\"none\" stroke-dasharray=\"5,5\"/><circle cx=\"50\" cy=\"50\" r=\"8\" stroke=\"%23ffffff\" stroke-width=\"1\" fill=\"none\"/><path d=\"M35,35 L65,65 M65,35 L35,65\" stroke=\"%23ffffff\" stroke-width=\"0.5\"/></g></svg>');">
+                </div>
+                <div style="position: relative; z-index: 1;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">🌀</div>
+                    <h3 style="margin: 0 0 15px 0; font-size: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">🎯 Changed Your Mind?</h3>
+                    <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6;">
+                        The guild portal remains open. Reactivate anytime to continue your epic journey with legendary gear delivered regularly.
+                    </p>
+                    <a href="https://geekndragon.com/boutique.php" style="display: inline-block; background-color: white; color: #4f46e5; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: transform 0.2s;">
+                        ✨ Rejoin the Guild
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stay connected -->
+            <div style="background-color: #f0fdf4; padding: 25px; border-radius: 12px; border: 1px solid #10b981;">
+                <h3 style="color: #10b981; margin: 0 0 15px 0; font-size: 18px;">🤝 Stay Connected</h3>
+                <p style="margin: 0 0 15px 0; color: #065f46;">
+                    Even without a subscription, you're still part of the Geek & Dragon family! 
+                    Keep following our adventures and grab individual items when something catches your eye.
+                </p>
+                <p style="margin: 0; color: #065f46;">
+                    <strong>Browse our collection:</strong> <a href="https://geekndragon.com/boutique.php" style="color: #10b981;">geekndragon.com/boutique.php</a>
+                </p>
+            </div>
+
+            <!-- Support -->
+            <div style="margin-top: 30px; text-align: center; color: #6b7280; font-size: 14px;">
+                <p style="margin: 0;">Questions? We're here to help at <a href="mailto:contact@geekndragon.com" style="color: #4f46e5;">contact@geekndragon.com</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
