@@ -150,12 +150,22 @@
 .snipcart input[type=radio]{ accent-color: var(--gd-accent); }
 
 /* Champ code promo : alignement responsive et boutons accessibles */
+.snipcart .snipcart-discount-box{
+  background: var(--gd-card) !important;
+  border: 1px solid var(--gd-border) !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  margin: 1rem 0 !important;
+}
+
 .snipcart .snipcart-discount-box__form{
   display:flex;
   gap:0.75rem;
   position:static;
-  align-items:center;
+  align-items:stretch;
+  width: 100%;
 }
+
 .snipcart .snipcart-discount-box__form-container{
   display:flex;
   justify-content:flex-start;
@@ -163,23 +173,78 @@
   align-items:stretch;
   flex:1 1 auto;
 }
+
 .snipcart .snipcart-discount-box .snipcart-input{
   flex:1 1 auto;
   min-width:0;
-  padding-right:1rem;
+  background: var(--gd-bg) !important;
+  color: var(--gd-text) !important;
+  border: 1px solid var(--gd-border) !important;
+  border-radius: 6px !important;
+  padding: 0.75rem !important;
+  font-size: 0.875rem !important;
 }
+
+.snipcart .snipcart-discount-box .snipcart-input:focus{
+  border-color: var(--gd-focus) !important;
+  outline: 2px solid var(--gd-focus) !important;
+}
+
+.snipcart .snipcart-discount-box .snipcart-input::placeholder{
+  color: var(--gd-muted) !important;
+}
+
 .snipcart .snipcart-discount-box .snipcart-form__field{
   flex:1 1 auto;
   min-width:0;
 }
+
 .snipcart .snipcart-discount-box__submit,
 .snipcart .snipcart-discount-box__cancel{
   position:static;
   margin:0;
+  background: var(--gd-accent) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+  min-height: 2.5rem !important;
 }
+
+.snipcart .snipcart-discount-box__submit:hover,
+.snipcart .snipcart-discount-box__cancel:hover{
+  background: var(--gd-card-2) !important;
+  border: 1px solid var(--gd-accent) !important;
+  color: var(--gd-accent) !important;
+}
+
 /* Espacement constant entre les boutons « Appliquer » et « Annuler » */
 .snipcart .snipcart-discount-box__cancel{
   margin-left:0.75rem;
+  background: var(--gd-card) !important;
+  color: var(--gd-text) !important;
+  border: 1px solid var(--gd-border) !important;
+}
+
+.snipcart .snipcart-discount-box__cancel:hover{
+  background: var(--gd-card-2) !important;
+  border-color: var(--gd-error) !important;
+  color: var(--gd-error) !important;
+}
+
+/* Label du code promo */
+.snipcart .snipcart-discount-box .snipcart-form__label,
+.snipcart .snipcart-discount-box label{
+  color: var(--gd-heading) !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  margin-bottom: 0.5rem !important;
+  display: block !important;
 }
 
 /* =================================================================== */
