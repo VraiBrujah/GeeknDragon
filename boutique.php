@@ -84,6 +84,9 @@ foreach ($data as $id => $p) {
         'summary_en' => $summaryEn,
         'multipliers' => $p['multipliers'] ?? [],
         'languages' => $p['languages'] ?? [],
+        'triptych_options' => $p['triptych_options'] ?? [],
+        'triptych_type' => $p['triptych_type'] ?? null,
+        'customizable' => $p['customizable'] ?? false,
     ];
     
     // Catégorisation des produits

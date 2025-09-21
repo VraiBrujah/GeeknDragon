@@ -709,6 +709,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   bindCustomSelect('.language-select');
+  bindCustomSelect('.triptych-select');
 
   // Swiper
   document.querySelectorAll('.swiper').forEach((sw) => {

@@ -89,6 +89,10 @@
       "FR": "French",
       "EN": "English"
     },
+    "triptychSpecies": "Species",
+    "triptychClass": "Class",
+    "triptychBackground": "Background",
+    "triptychOption": "Option",
     "quantity": "Quantity",
     "unit": "single",
     "add": "Add",

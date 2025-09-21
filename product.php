@@ -122,14 +122,31 @@ foreach ($languages as $code) {
     $languageLabels[$code] = (string) ($translations['product']['languageOptions'][$code] ?? $code);
 }
 
+// Préparation des options de triptyque
+$triptychOptions = $product['triptych_options'] ?? [];
+$triptychType = $product['triptych_type'] ?? null;
+
 if (!defined('GD_CUSTOM_FIELD_LANGUAGE_INDEX')) {
     define('GD_CUSTOM_FIELD_LANGUAGE_INDEX', 1);
 }
 if (!defined('GD_CUSTOM_FIELD_MULTIPLIER_INDEX')) {
     define('GD_CUSTOM_FIELD_MULTIPLIER_INDEX', 2);
 }
+if (!defined('GD_CUSTOM_FIELD_TRIPTYCH_INDEX')) {
+    define('GD_CUSTOM_FIELD_TRIPTYCH_INDEX', 1);
+}
 
-$languageFieldIndex = !empty($languageLabels) ? GD_CUSTOM_FIELD_LANGUAGE_INDEX : null;
+// Pour les triptyques, utiliser les options de triptyque au lieu des langues
+if (!empty($triptychOptions)) {
+    $languageFieldIndex = null; // Pas de sélection de langue pour les triptyques
+    $triptychFieldIndex = GD_CUSTOM_FIELD_TRIPTYCH_INDEX;
+    $defaultTriptychOption = $triptychOptions[0] ?? '';
+} else {
+    $languageFieldIndex = !empty($languageLabels) ? GD_CUSTOM_FIELD_LANGUAGE_INDEX : null;
+    $triptychFieldIndex = null;
+    $defaultTriptychOption = '';
+}
+
 $multiplierFieldIndex = !empty($multipliers) ? GD_CUSTOM_FIELD_MULTIPLIER_INDEX : null;
 $defaultLanguage = $languages[0] ?? '';
 $multiplierOptions = array_map(static fn ($value) => (string) $value, $multipliers);
@@ -239,6 +256,31 @@ echo $snipcartInit;
             </div>
             <?php endif; ?>
 
+            <?php if ($triptychFieldIndex !== null) : ?>
+            <div>
+              <label for="triptych-<?= htmlspecialchars($id) ?>" class="block mb-3 text-lg font-medium text-white">
+                <?php
+                $triptychLabel = match($triptychType) {
+                    'espece' => $translations['product']['triptychSpecies'] ?? 'Espèce',
+                    'classe' => $translations['product']['triptychClass'] ?? 'Classe',
+                    'historique' => $translations['product']['triptychBackground'] ?? 'Historique',
+                    default => $translations['product']['triptychOption'] ?? 'Option'
+                };
+                echo htmlspecialchars($triptychLabel);
+                ?>
+              </label>
+              <select id="triptych-<?= htmlspecialchars($id) ?>"
+                      class="triptych-select w-full md:w-64 px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      data-target="<?= htmlspecialchars($id) ?>"
+                      data-custom-index="<?= (int) $triptychFieldIndex ?>"
+                      data-item-custom-role="triptych">
+                <?php foreach ($triptychOptions as $option) : ?>
+                <option value="<?= htmlspecialchars($option) ?>" <?= $option === $defaultTriptychOption ? 'selected' : '' ?>><?= htmlspecialchars($option) ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <?php endif; ?>
+
             <?php if ($languageFieldIndex !== null) : ?>
             <div>
               <label for="language-<?= htmlspecialchars($id) ?>" class="block mb-3 text-lg font-medium text-white" data-i18n="product.language">Langue</label>
@@ -266,6 +308,12 @@ echo $snipcartInit;
               data-item-price="<?= htmlspecialchars(number_format((float)$product['price'], 2, '.', '')) ?>"
               data-item-url="<?= htmlspecialchars($metaUrl) ?>"
               data-item-quantity="1"
+              <?php if ($triptychFieldIndex !== null) : ?>
+                data-item-custom<?= (int) $triptychFieldIndex ?>-name="<?= htmlspecialchars($triptychLabel ?? 'Option') ?>"
+                data-item-custom<?= (int) $triptychFieldIndex ?>-type="dropdown"
+                data-item-custom<?= (int) $triptychFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $triptychOptions)) ?>"
+                data-item-custom<?= (int) $triptychFieldIndex ?>-value="<?= htmlspecialchars($defaultTriptychOption) ?>"
+              <?php endif; ?>
               <?php if ($languageFieldIndex !== null) : ?>
                 data-item-custom<?= (int) $languageFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['language'] ?? 'Langue') ?>"
                 data-item-custom<?= (int) $languageFieldIndex ?>-type="dropdown"

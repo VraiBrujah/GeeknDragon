@@ -89,6 +89,10 @@
       "FR": "Français",
       "EN": "Anglais"
     },
+    "triptychSpecies": "Espèce",
+    "triptychClass": "Classe",
+    "triptychBackground": "Historique",
+    "triptychOption": "Option",
     "quantity": "Quantité",
     "unit": "unitaire",
     "add": "Ajouter",

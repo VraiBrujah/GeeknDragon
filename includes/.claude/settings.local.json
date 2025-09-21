@@ -12,7 +12,16 @@
       "Read(E:\\GitHub\\GeeknDragon/**)",
       "Read(E:\\GitHub\\GeeknDragon/**)",
       "Bash(php:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Read(H:\\GitHub\\CreationCarteRPG/**)",
+      "Read(H:\\GitHub\\CreationCarteRPG/**)",
+      "Read(H:\\GitHub\\CreationCarteRPG/**)",
+      "Read(H:\\GitHub\\CreationCarteRPG/**)",
+      "Read(H:\\GitHub\\CreationCarteRPG\\symbole/**)",
+      "Read(H:\\GitHub\\CreationCarteRPG\\exports\\Race/**)",
+      "Read(H:\\GitHub\\CreationCarteRPG\\exports\\Race\\01- 01- Aasimar - Espèce/**)",
+      "Read(H:\\GitHub\\CreationCarteRPG\\exports\\Classe/**)",
+      "Bash(start http://localhost:8000/aide-jeux.php)"
     ],
     "deny": [],
     "ask": []

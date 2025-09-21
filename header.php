@@ -38,6 +38,11 @@ $navItems = [
     'label' => 'Actualités',
     'i18n'  => 'nav.news'
   ],
+  '/aide-jeux.php' => [
+    'slug'  => 'aide-jeux',
+    'label' => 'Aide de Jeux',
+    'i18n'  => 'nav.gameHelp'
+  ],
   '/index.php#contact' => [
     'slug'  => 'contact',
     'label' => 'Contact',
