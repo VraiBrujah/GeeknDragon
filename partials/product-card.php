@@ -287,7 +287,7 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                   data-item-custom<?= (int) $triptychFieldIndex ?>-value="<?= htmlspecialchars($defaultTriptychOption) ?>"
                 <?php endif; ?>
                 <?php if ($metalFieldIndex !== null) : ?>
-                  data-item-custom<?= (int) $metalFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['metal'] ?? 'Métal') ?>"
+                  data-item-custom<?= (int) $metalFieldIndex ?>-name="Metal"
                   data-item-custom<?= (int) $metalFieldIndex ?>-type="dropdown"
                   data-item-custom<?= (int) $metalFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $metalsDisplay)) ?>"
                   data-item-custom<?= (int) $metalFieldIndex ?>-value="<?= htmlspecialchars($defaultMetal) ?>"

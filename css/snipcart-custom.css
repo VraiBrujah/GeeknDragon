@@ -501,9 +501,12 @@
   background: var(--gd-card) !important;
   color: var(--gd-text) !important;
   border: 1px solid var(--gd-border) !important;
-  border-radius: 6px;
-  padding: 0.5rem;
-  min-width: 120px;
+  border-radius: 6px !important;
+  padding: 0.5rem !important;
+  min-width: 120px !important;
+  margin: 0.25rem !important;
+  font-size: 0.875rem !important;
+  height: 2.5rem !important;
 }
 
 .snipcart .snipcart-product-option__select option,
@@ -515,14 +518,16 @@
   padding: 0.5rem;
 }
 
-/* Labels des custom fields */
+/* Labels des custom fields avec espacement uniforme */
 .snipcart .snipcart-product-option__label,
 .snipcart .snipcart-item-line__custom-fields label,
 .snipcart .snipcart-cart-item__custom-fields label{
   color: var(--gd-text) !important;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  display: block;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  margin: 0.5rem 0.5rem 0.25rem 0 !important;
+  display: inline-block !important;
+  min-width: 80px !important;
 }
 
 /* FIX FORÇÉ pour TOUS les selects et options dans Snipcart */
@@ -560,21 +565,50 @@
   overflow: hidden !important;
 }
 
-/* SOLUTION : réduire la taille du font et compacter SEULEMENT pour les custom fields */
+/* Dropdowns custom fields - style de base */
 .snipcart .snipcart-dropdown-custom-field,
 .snipcart .snipcart-item-line__custom-fields .snipcart-form__select,
 .snipcart .snipcart-item-line__custom-fields .snipcart-form__select select,
 .snipcart select[name*="Multiplicateur"],
+.snipcart select[name*="Métal"],
+.snipcart select[name*="Metal"],
 .snipcart select[name*="Langue"] {
-  width: 85px !important;
-  min-width: 85px !important;
   position: relative !important;
   background: var(--gd-card) !important;
   border: 1px solid var(--gd-border) !important;
   color: var(--gd-text) !important;
   padding: 0.5rem !important;
-  font-size: 12px !important;
+  font-size: 0.875rem !important;
   font-weight: 400 !important;
+  margin: 0.25rem 0.5rem 0.25rem 0 !important;
+  height: 2.5rem !important;
+  border-radius: 6px !important;
+  box-sizing: border-box !important;
+}
+
+/* Largeurs spécifiques par type de dropdown */
+.snipcart select[name*="Multiplicateur"] {
+  width: 80px !important;
+  min-width: 80px !important;
+}
+
+.snipcart select[name*="Métal"],
+.snipcart select[name*="Metal"] {
+  width: 130px !important;
+  min-width: 130px !important;
+}
+
+.snipcart select[name*="Langue"] {
+  width: 100px !important;
+  min-width: 100px !important;
+}
+
+/* Largeur par défaut pour les autres custom fields */
+.snipcart .snipcart-dropdown-custom-field,
+.snipcart .snipcart-item-line__custom-fields .snipcart-form__select,
+.snipcart .snipcart-item-line__custom-fields .snipcart-form__select select {
+  width: 110px !important;
+  min-width: 110px !important;
 }
 
 /* Masquer l'icône avec un pseudo-élément SEULEMENT pour custom fields */
@@ -599,14 +633,19 @@
   justify-content: center !important;
 }
 
-/* Affichage forcé des custom fields dans le sommaire */
+/* Affichage forcé des custom fields dans le sommaire avec espacement */
 .snipcart .snipcart-cart-summary-item__custom-fields,
 .snipcart .snipcart-item-line__custom-fields,
 .snipcart .snipcart-cart-item__custom-fields {
-  display: block !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.75rem !important;
   visibility: visible !important;
   opacity: 1 !important;
-  margin-top: 0.25rem !important;
+  margin: 0.75rem 0 !important;
+  padding: 0.5rem !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  border-radius: 6px !important;
   font-size: 0.875rem !important;
   color: var(--gd-muted) !important;
 }
@@ -617,19 +656,80 @@
   background: var(--gd-card) !important;
   color: var(--gd-text) !important;
   border: 1px solid var(--gd-border) !important;
-  border-radius: 4px !important;
-  padding: 0.25rem 0.5rem !important;
+  border-radius: 6px !important;
+  padding: 0.5rem !important;
   font-size: 0.875rem !important;
-  margin-left: 0.5rem !important;
+  height: 2.5rem !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+/* Largeurs spécifiques dans le sommaire aussi */
+.snipcart .snipcart-cart-summary-item__custom-fields select[name*="Multiplicateur"],
+.snipcart .snipcart-item-line__custom-fields select[name*="Multiplicateur"],
+.snipcart .snipcart-cart-item__custom-fields select[name*="Multiplicateur"] {
+  width: 80px !important;
+  min-width: 80px !important;
+}
+
+.snipcart .snipcart-cart-summary-item__custom-fields select[name*="Métal"],
+.snipcart .snipcart-item-line__custom-fields select[name*="Métal"],
+.snipcart .snipcart-cart-item__custom-fields select[name*="Métal"],
+.snipcart .snipcart-cart-summary-item__custom-fields select[name*="Metal"],
+.snipcart .snipcart-item-line__custom-fields select[name*="Metal"],
+.snipcart .snipcart-cart-item__custom-fields select[name*="Metal"] {
+  width: 130px !important;
+  min-width: 130px !important;
+}
+
+.snipcart .snipcart-cart-summary-item__custom-fields select[name*="Langue"],
+.snipcart .snipcart-item-line__custom-fields select[name*="Langue"],
+.snipcart .snipcart-cart-item__custom-fields select[name*="Langue"] {
+  width: 100px !important;
+  min-width: 100px !important;
+}
+
+/* Largeur par défaut pour les autres dans le sommaire */
+.snipcart .snipcart-cart-summary-item__custom-fields select:not([name*="Multiplicateur"]):not([name*="Métal"]):not([name*="Metal"]):not([name*="Langue"]),
+.snipcart .snipcart-item-line__custom-fields select:not([name*="Multiplicateur"]):not([name*="Métal"]):not([name*="Metal"]):not([name*="Langue"]),
+.snipcart .snipcart-cart-item__custom-fields select:not([name*="Multiplicateur"]):not([name*="Métal"]):not([name*="Metal"]):not([name*="Langue"]) {
+  width: 110px !important;
+  min-width: 110px !important;
 }
 
 /* Labels des custom fields dans le sommaire */
 .snipcart .snipcart-cart-summary-item__custom-fields label,
 .snipcart .snipcart-item-line__custom-fields label,
 .snipcart .snipcart-cart-item__custom-fields label {
-  color: var(--gd-muted) !important;
+  color: var(--gd-text) !important;
   font-size: 0.875rem !important;
-  margin-right: 0.5rem !important;
+  font-weight: 500 !important;
+  margin: 0 0.5rem 0 0 !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  min-width: fit-content !important;
+}
+
+/* Groupes de custom fields pour organisation claire */
+.snipcart .snipcart-cart-summary-item__custom-fields > div,
+.snipcart .snipcart-item-line__custom-fields > div,
+.snipcart .snipcart-cart-item__custom-fields > div {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  margin: 0.25rem 0 !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Séparateurs visuels entre groupes de custom fields */
+.snipcart .snipcart-cart-summary-item__custom-fields > div:not(:last-child)::after,
+.snipcart .snipcart-item-line__custom-fields > div:not(:last-child)::after,
+.snipcart .snipcart-cart-item__custom-fields > div:not(:last-child)::after {
+  content: "•" !important;
+  color: var(--gd-border) !important;
+  margin-left: 0.75rem !important;
+  font-weight: bold !important;
 }
 
 /* Espacement global du panier */
