@@ -1745,7 +1745,7 @@ function confirmDownload() {
 <script src="/js/currency-converter.js"></script>
 
 <script>
-// Gestionnaire pour le bouton d'ajout au panier
+// Gestionnaire pour le bouton d'ajout au panier Snipcart
 document.addEventListener('DOMContentLoaded', function() {
   const addToCartButton = document.getElementById('add-all-lots-to-cart');
   
@@ -1758,25 +1758,41 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // Créer un lien vers la boutique avec les produits sélectionnés
-      const productParams = lotsData.map(lot => {
-        const multiplierParam = lot.multiplier !== null ? `-x${lot.multiplier}` : '';
-        return `${lot.productId}${multiplierParam}:${lot.quantity}`;
-      }).join(',');
+      // Ajouter chaque lot au panier Snipcart
+      lotsData.forEach(lot => {
+        // Construire l'ID du produit avec multiplicateur si nécessaire
+        const productId = lot.multiplier !== null ? `${lot.productId}-x${lot.multiplier}` : lot.productId;
+        
+        // Obtenir le nom du produit
+        const getProductName = (id) => {
+          const recommender = window.converterInstance?.lotsRecommender;
+          if (recommender && recommender.products && recommender.products[id]) {
+            return recommender.products[id].name;
+          }
+          const fallbackNames = {
+            'lot10': "L'Offrande du Voyageur",
+            'lot25': "La Monnaie des Cinq Royaumes", 
+            'lot50-essence': "L'Essence du Marchand",
+            'lot50-tresorerie': "La Trésorerie du Seigneur"
+          };
+          return fallbackNames[id] || id;
+        };
+        
+        const productName = getProductName(lot.productId);
+        const finalName = lot.multiplier !== null ? `${productName} (×${lot.multiplier})` : productName;
+        
+        // Ajouter au panier Snipcart
+        window.Snipcart.api.cart.items.add({
+          id: productId,
+          name: finalName,
+          price: lot.price / lot.quantity, // Prix unitaire
+          quantity: lot.quantity,
+          url: window.location.href
+        });
+      });
       
-      // Rediriger vers la boutique avec les produits présélectionnés
-      const shopUrl = `/boutique.php?add=${encodeURIComponent(productParams)}`;
-      
-      // Afficher les détails avant redirection
-      const details = lotsData.map(lot => 
-        `• ${lot.quantity}x ${window.converterInstance?.lotsRecommender?.coinProducts[lot.productId]?.name || lot.productId}${lot.multiplier !== null ? ` (×${lot.multiplier})` : ''}`
-      ).join('\n');
-      
-      const confirmMessage = `Redirection vers la boutique avec :\n\n${details}\n\nTotal : $${lotsData.reduce((sum, lot) => sum + lot.price, 0)}\n\nConfirmer ?`;
-      
-      if (confirm(confirmMessage)) {
-        window.location.href = shopUrl;
-      }
+      // Ouvrir le panier Snipcart
+      window.Snipcart.api.modal.show();
     });
   }
 });
