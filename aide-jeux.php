@@ -1303,6 +1303,41 @@ echo $snipcartInit;
         </div>
       </div>
 
+      <!-- ===== RECOMMANDATIONS DE LOTS DE PIÈCES ===== -->
+      <div id="coin-lots-recommendations" class="mt-12 mb-16" style="display: none;">
+        <div class="bg-gradient-to-r from-green-900/30 to-emerald-900/20 rounded-xl p-8 border border-green-700/50">
+          <h4 class="text-2xl font-bold text-center text-gray-200 mb-8">
+            🛒 Lots de pièces recommandés
+          </h4>
+          
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-6">
+              <p class="text-gray-300 mb-4">
+                Voici les lots minimaux recommandés pour couvrir exactement vos besoins en pièces physiques :
+              </p>
+            </div>
+            
+            <!-- Contenu des recommandations -->
+            <div id="coin-lots-content" class="mb-8">
+              <!-- Le contenu sera injecté dynamiquement par JavaScript -->
+            </div>
+            
+            <!-- Bouton d'ajout au panier global -->
+            <div class="text-center">
+              <button id="add-all-lots-to-cart" 
+                      class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                      style="display: none;">
+                🛒 Ajouter tous les lots au panier
+              </button>
+              
+              <p class="text-sm text-gray-400 mt-4">
+                Ces recommandations optimisent le nombre de lots nécessaires pour le prix le plus avantageux.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- ===== L'IMPORTANCE DU TRÉSOR PHYSIQUE ===== -->
       <div class="bg-gradient-to-r from-amber-900/30 to-yellow-900/20 rounded-xl p-8 border border-amber-700/50 mb-16">
         <div class="grid md:grid-cols-2 gap-16 items-start">
@@ -1706,7 +1741,46 @@ function confirmDownload() {
 </script>
 <script src="/js/hero-videos.js"></script>
 <script src="/js/boutique-premium.js"></script>
+<script src="/js/coin-lots-recommender.js"></script>
 <script src="/js/currency-converter.js"></script>
+
+<script>
+// Gestionnaire pour le bouton d'ajout au panier
+document.addEventListener('DOMContentLoaded', function() {
+  const addToCartButton = document.getElementById('add-all-lots-to-cart');
+  
+  if (addToCartButton) {
+    addToCartButton.addEventListener('click', function() {
+      const lotsData = JSON.parse(this.dataset.lotsData || '[]');
+      
+      if (lotsData.length === 0) {
+        alert('Aucun lot à ajouter au panier.');
+        return;
+      }
+      
+      // Créer un lien vers la boutique avec les produits sélectionnés
+      const productParams = lotsData.map(lot => {
+        const multiplierParam = lot.multiplier !== null ? `-x${lot.multiplier}` : '';
+        return `${lot.productId}${multiplierParam}:${lot.quantity}`;
+      }).join(',');
+      
+      // Rediriger vers la boutique avec les produits présélectionnés
+      const shopUrl = `/boutique.php?add=${encodeURIComponent(productParams)}`;
+      
+      // Afficher les détails avant redirection
+      const details = lotsData.map(lot => 
+        `• ${lot.quantity}x ${window.converterInstance?.lotsRecommender?.coinProducts[lot.productId]?.name || lot.productId}${lot.multiplier !== null ? ` (×${lot.multiplier})` : ''}`
+      ).join('\n');
+      
+      const confirmMessage = `Redirection vers la boutique avec :\n\n${details}\n\nTotal : $${lotsData.reduce((sum, lot) => sum + lot.price, 0)}\n\nConfirmer ?`;
+      
+      if (confirm(confirmMessage)) {
+        window.location.href = shopUrl;
+      }
+    });
+  }
+});
+</script>
 
 </body>
 </html>

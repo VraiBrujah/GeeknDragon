@@ -26,6 +26,9 @@ class CurrencyConverterPremium {
       gold: { name: 'Or', nameEn: 'Gold', emoji: '🥇', color: 'yellow' },
       platinum: { name: 'Platine', nameEn: 'Platinum', emoji: '💎', color: 'cyan' }
     };
+
+    // Initialiser le recommandeur de lots
+    this.lotsRecommender = new CoinLotsRecommender();
     
     this.init();
   }
@@ -117,6 +120,7 @@ class CurrencyConverterPremium {
     
     this.updateMetalCards(baseValue);
     this.updateOptimalRecommendations(baseValue);
+    this.updateCoinLotsRecommendations(baseValue);
   }
   
   updateFromMultipliers() {
@@ -138,6 +142,7 @@ class CurrencyConverterPremium {
     this.distributeOptimally(totalValue);
     this.updateMetalCards(totalValue);
     this.updateOptimalRecommendations(totalValue);
+    this.updateCoinLotsRecommendations(totalValue);
   }
   
   distributeOptimally(totalValue) {
@@ -194,7 +199,7 @@ class CurrencyConverterPremium {
             </div>
             ${minimalCoins.map(item => `
               <div class="flex justify-between text-sm pl-2">
-                <span class="text-gray-300">${item.multiplier === 1 ? this.getTranslation('shop.converter.units', 'Unités') : `${this.getTranslation('shop.converter.lots', 'Lots')} ×${this.nf.format(item.multiplier)}`}:</span>
+                <span class="text-gray-300">${item.multiplier === 1 ? this.getTranslation('shop.converter.units', 'Unités') : `Multiplicateur ×${this.nf.format(item.multiplier)}`}:</span>
                 <span class="text-${data.color}-300 font-medium">${this.nf.format(item.quantity)}</span>
               </div>
             `).join('')}
@@ -238,11 +243,96 @@ class CurrencyConverterPremium {
   getOptimalBreakdown(value) {
     if (value <= 0) return '';
     
+    // Trouver la combinaison avec le minimum de pièces physiques
+    let bestOption = null;
+    let minPieces = Infinity;
+    
+    // Tester chaque devise comme devise principale
+    const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+    
+    currencies.forEach(primaryCurrency => {
+      const rate = this.rates[primaryCurrency];
+      const maxUnits = Math.floor(value / rate);
+      
+      if (maxUnits > 0) {
+        // Calculer le nombre minimal de pièces pour cette devise
+        const breakdown = this.getMinimalCoinsBreakdown(maxUnits);
+        const piecesCount = breakdown.reduce((sum, item) => sum + item.quantity, 0);
+        
+        // Calculer le reste
+        const remainderValue = value - (maxUnits * rate);
+        let remainderPieces = 0;
+        if (remainderValue > 0) {
+          remainderPieces = this.calculateRemainderPieces(remainderValue);
+        }
+        
+        const totalPieces = piecesCount + remainderPieces;
+        
+        if (totalPieces < minPieces) {
+          minPieces = totalPieces;
+          bestOption = {
+            primary: primaryCurrency,
+            primaryBreakdown: breakdown,
+            remainder: remainderValue
+          };
+        }
+      }
+    });
+    
+    if (!bestOption) return '';
+    
+    // Formater l'affichage
+    const result = [];
+    const primaryData = this.currencyData[bestOption.primary];
+    
+    // Ajouter les pièces principales avec multiplicateurs
+    bestOption.primaryBreakdown.forEach(item => {
+      if (item.multiplier === 1) {
+        result.push(`${this.nf.format(item.quantity)} ${primaryData.emoji} ${this.getCurrencyName(bestOption.primary).toLowerCase()}`);
+      } else {
+        result.push(`${this.nf.format(item.quantity)} ${primaryData.emoji} ${this.getCurrencyName(bestOption.primary).toLowerCase()}(×${this.nf.format(item.multiplier)})`);
+      }
+    });
+    
+    // Ajouter le reste
+    if (bestOption.remainder > 0) {
+      const remainderText = this.getRemainderBreakdown(bestOption.remainder);
+      if (remainderText) {
+        result.push(remainderText);
+      }
+    }
+    
+    // Joindre avec "et"
+    if (result.length > 1) {
+      const last = result.pop();
+      return result.join(', ') + ` ${this.getTranslation('shop.converter.and', 'et')} ` + last;
+    }
+    
+    return result.join('');
+  }
+  
+  calculateRemainderPieces(remainderValue) {
+    let pieces = 0;
+    let remaining = remainderValue;
+    const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+    
+    currencies.forEach(currency => {
+      const rate = this.rates[currency];
+      const count = Math.floor(remaining / rate);
+      if (count > 0) {
+        pieces += count;
+        remaining -= count * rate;
+      }
+    });
+    
+    return pieces;
+  }
+  
+  getRemainderBreakdown(remainderValue) {
     const breakdown = [];
-    let remaining = value;
+    let remaining = remainderValue;
     const currencies = ['platinum', 'gold', 'electrum', 'silver'];
     
-    // Traiter les métaux de valeur élevée d'abord (sans le cuivre)
     currencies.forEach(currency => {
       const rate = this.rates[currency];
       const count = Math.floor(remaining / rate);
@@ -253,19 +343,11 @@ class CurrencyConverterPremium {
       }
     });
     
-    // Ajouter le cuivre restant (il devrait toujours y en avoir car remaining >= 0)
     if (remaining > 0) {
-      const copperCount = remaining; // remaining est déjà en cuivre
-      breakdown.push(`${copperCount} ${this.currencyData.copper.emoji} ${this.getCurrencyName('copper').toLowerCase()}`);
+      breakdown.push(`${remaining} ${this.currencyData.copper.emoji} ${this.getCurrencyName('copper').toLowerCase()}`);
     }
     
-    // Ajouter le connecteur "et" avant le dernier élément si il y en a plusieurs
-    if (breakdown.length > 1) {
-      const last = breakdown.pop();
-      return breakdown.join(', ') + ` ${this.getTranslation('shop.converter.and', 'et')} ` + last;
-    }
-    
-    return breakdown.join('');
+    return breakdown.join(', ');
   }
   
   updateOptimalRecommendations(baseValue) {
@@ -308,20 +390,65 @@ class CurrencyConverterPremium {
   }
   
   calculateTotalPieces(baseValue) {
-    let total = 0;
+    // Calculer le nombre minimal de pièces en utilisant tous les multiplicateurs
+    let minimalPieces = 0;
     let remaining = baseValue;
+    
+    // Utiliser les plus gros multiplicateurs d'abord pour minimiser le nombre de pièces
     const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
     
     currencies.forEach(currency => {
       const rate = this.rates[currency];
-      const count = Math.floor(remaining / rate);
-      total += count;
-      remaining -= count * rate;
+      const totalUnitsForThisCurrency = Math.floor(remaining / rate);
+      
+      if (totalUnitsForThisCurrency > 0) {
+        // Calculer le nombre minimal de pièces pour cette devise avec multiplicateurs
+        const breakdown = this.getMinimalCoinsBreakdown(totalUnitsForThisCurrency);
+        const piecesForThisCurrency = breakdown.reduce((sum, item) => sum + item.quantity, 0);
+        minimalPieces += piecesForThisCurrency;
+        remaining -= totalUnitsForThisCurrency * rate;
+      }
     });
     
-    return total;
+    return minimalPieces;
   }
   
+  updateCoinLotsRecommendations(baseValue) {
+    const recommendationsContainer = document.getElementById('coin-lots-recommendations');
+    
+    if (!recommendationsContainer) {
+      return; // Le conteneur n'existe pas encore
+    }
+
+    if (baseValue === 0) {
+      recommendationsContainer.style.display = 'none';
+      return;
+    }
+
+    // Afficher la section
+    recommendationsContainer.style.display = 'block';
+
+    // Calculer la répartition optimale des pièces
+    const coinsBreakdown = this.lotsRecommender.getOptimalCoinsBreakdown(baseValue);
+    
+    // Calculer les lots minimaux recommandés
+    const recommendedLots = this.lotsRecommender.calculateMinimalLots(coinsBreakdown);
+    
+    // Mettre à jour l'affichage
+    const recommendationsContent = document.getElementById('coin-lots-content');
+    const addToCartButton = document.getElementById('add-all-lots-to-cart');
+    
+    if (recommendationsContent) {
+      recommendationsContent.innerHTML = this.lotsRecommender.formatRecommendation(recommendedLots);
+    }
+
+    // Stocker les données pour l'ajout au panier
+    if (addToCartButton) {
+      addToCartButton.dataset.lotsData = JSON.stringify(this.lotsRecommender.generateCartData(recommendedLots));
+      addToCartButton.style.display = recommendedLots.length > 0 ? 'block' : 'none';
+    }
+  }
+
   updateDisplay() {
     this.updateFromSources();
   }

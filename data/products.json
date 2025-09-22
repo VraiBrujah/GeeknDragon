@@ -18,7 +18,14 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x100f3.webp"
     ],
-    "multipliers": [1, 10, 100, 1000, 10000]
+    "multipliers": [1, 10, 100, 1000, 10000],
+    "coin_lots": {
+      "copper": 2,
+      "silver": 2, 
+      "electrum": 2,
+      "gold": 2,
+      "platinum": 2
+    }
   },
   "lot25": {
     "name": "La Monnaie des Cinq Royaumes",
@@ -39,7 +46,14 @@
       "/media/products/coins/coin-gold-1.webp",
       "/media/products/coins/coin-platinum-1.webp"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "coin_lots": {
+      "copper": { "1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1 },
+      "silver": { "1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1 },
+      "electrum": { "1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1 },
+      "gold": { "1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1 },
+      "platinum": { "1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1 }
+    }
   },
   "lot50-essence": {
     "name": "L'Essence du Marchand", 
@@ -60,7 +74,14 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x1p2.webp"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "coin_lots": {
+      "copper": { "1": 2, "10": 2, "100": 2, "1000": 2, "10000": 2 },
+      "silver": { "1": 2, "10": 2, "100": 2, "1000": 2, "10000": 2 },
+      "electrum": { "1": 2, "10": 2, "100": 2, "1000": 2, "10000": 2 },
+      "gold": { "1": 2, "10": 2, "100": 2, "1000": 2, "10000": 2 },
+      "platinum": { "1": 2, "10": 2, "100": 2, "1000": 2, "10000": 2 }
+    }
   },
   "lot50-tresorerie": {
     "name": "La Trésorerie du Seigneur",
@@ -81,7 +102,14 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x1p2.webp"
     ],
-    "multipliers": [1, 10, 100, 1000, 10000]
+    "multipliers": [1, 10, 100, 1000, 10000],
+    "coin_lots": {
+      "copper": 10,
+      "silver": 10,
+      "electrum": 10,
+      "gold": 10,
+      "platinum": 10
+    }
   },
   "pack-182-arsenal-aventurier": {
     "name": "Arsenal de l'Aventurier",

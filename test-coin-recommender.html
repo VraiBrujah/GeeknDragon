@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test du Recommandeur de Lots de Pièces</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: #fff; }
+        .test-case { background: #2a2a2a; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .result { background: #0a3a0a; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #3a0a0a; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        pre { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>Test du Recommandeur de Lots de Pièces</h1>
+
+    <div class="test-case">
+        <h2>Test 1: Cas simple</h2>
+        <p>1 pièce de platine x1 (devrait recommander: 1x L'Offrande du Voyageur x1)</p>
+        <div id="test1-result"></div>
+    </div>
+
+    <div class="test-case">
+        <h2>Test 2: Exemple utilisateur complet</h2>
+        <p>1 platine x1, 1 or x1, 1 électrum x1, 1 électrum x100, 1 argent x1, 1 cuivre x1</p>
+        <p>(devrait recommander: 1x L'Offrande du Voyageur x1 + 1x L'Offrande du Voyageur x100)</p>
+        <div id="test2-result"></div>
+    </div>
+
+    <div class="test-case">
+        <h2>Test 3: Plusieurs multiplicateurs d'une même pièce</h2>
+        <p>1 or de chaque multiplicateur (1, 10, 100, 1000, 10000)</p>
+        <p>(devrait optimiser: peut-être lot25 ou lots individuels selon le prix)</p>
+        <div id="test3-result"></div>
+    </div>
+
+    <script src="js/coin-lots-recommender.js"></script>
+    <script>
+        // Test de l'algorithme
+        const recommender = new CoinLotsRecommender();
+
+        function testRecommendations(testId, coinsBreakdown, description) {
+            try {
+                console.log(`\n=== ${description} ===`);
+                console.log('Input:', coinsBreakdown);
+                
+                const recommendations = recommender.calculateMinimalLots(coinsBreakdown);
+                console.log('Recommendations:', recommendations);
+                
+                const formattedResult = recommender.formatRecommendation(recommendations);
+                
+                document.getElementById(testId).innerHTML = `
+                    <div class="result">
+                        <strong>Résultat:</strong><br>
+                        ${formattedResult || 'Aucune recommandation'}
+                    </div>
+                    <details>
+                        <summary>Détails techniques</summary>
+                        <pre>Input: ${JSON.stringify(coinsBreakdown, null, 2)}</pre>
+                        <pre>Output: ${JSON.stringify(recommendations, null, 2)}</pre>
+                    </details>
+                `;
+            } catch (error) {
+                console.error(`Erreur dans ${description}:`, error);
+                document.getElementById(testId).innerHTML = `
+                    <div class="error">
+                        <strong>Erreur:</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Test 1: Cas simple - 1 pièce de platine x1
+        const test1Input = { platinum: { 1: 1 } };
+        testRecommendations('test1-result', test1Input, 'Test 1: 1 platine x1');
+
+        // Test 2: Exemple utilisateur complet
+        // 1 platine (1000) + 1 or (100) + 1 électrum (50) + 1 argent (10) + 1 cuivre (1) + 1 électrum x100 (5000)
+        const test2Input = {
+            platinum: { 1: 1 },
+            gold: { 1: 1 },
+            electrum: { 1: 1, 100: 1 },
+            silver: { 1: 1 },
+            copper: { 1: 1 }
+        };
+        testRecommendations('test2-result', test2Input, 'Test 2: Exemple utilisateur');
+
+        // Test 3: 1 or de chaque multiplicateur (doit préférer lot25)
+        const test3Input = {
+            gold: { 1: 1, 10: 1, 100: 1, 1000: 1, 10000: 1 }
+        };
+        testRecommendations('test3-result', test3Input, 'Test 3: Or tous multiplicateurs');
+    </script>
+</body>
+</html>
