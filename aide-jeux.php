@@ -1794,11 +1794,12 @@ document.addEventListener('DOMContentLoaded', function() {
         tempButton.setAttribute('data-item-quantity', lot.quantity.toString());
         
         // Si le produit a un multiplicateur, l'ajouter comme champ personnalisé (comme sur la boutique)
+        // Utilise l'index 2 comme défini par GD_CUSTOM_FIELD_MULTIPLIER_INDEX
         if (lot.multiplier !== null && lot.multiplier !== undefined) {
-          tempButton.setAttribute('data-item-custom1-name', 'Multiplicateur');
-          tempButton.setAttribute('data-item-custom1-type', 'dropdown');
-          tempButton.setAttribute('data-item-custom1-options', '×1|×10|×100|×1000|×10000');
-          tempButton.setAttribute('data-item-custom1-value', `×${lot.multiplier}`);
+          tempButton.setAttribute('data-item-custom2-name', 'Multiplicateur');
+          tempButton.setAttribute('data-item-custom2-type', 'dropdown');
+          tempButton.setAttribute('data-item-custom2-options', '×1|×10|×100|×1000|×10000');
+          tempButton.setAttribute('data-item-custom2-value', `×${lot.multiplier}`);
         }
         
         // Ajouter temporairement au DOM et cliquer
