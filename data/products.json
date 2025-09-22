@@ -18,6 +18,60 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x100f3.webp"
     ],
+    "coin_breakdown": {
+      "per_multiplier": {
+        "1": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        },
+        "10": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        },
+        "100": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        },
+        "1000": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        },
+        "10000": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        }
+      }
+    },
     "multipliers": [1, 10, 100, 1000, 10000]
   },
   "lot25": {
@@ -39,6 +93,60 @@
       "/media/products/coins/coin-gold-1.webp",
       "/media/products/coins/coin-platinum-1.webp"
     ],
+    "coin_breakdown": {
+      "per_multiplier": {
+        "1": {
+          "total": 5,
+          "metals": {
+            "cuivre": 1,
+            "argent": 1,
+            "electrum": 1,
+            "or": 1,
+            "platine": 1
+          }
+        },
+        "10": {
+          "total": 5,
+          "metals": {
+            "cuivre": 1,
+            "argent": 1,
+            "electrum": 1,
+            "or": 1,
+            "platine": 1
+          }
+        },
+        "100": {
+          "total": 5,
+          "metals": {
+            "cuivre": 1,
+            "argent": 1,
+            "electrum": 1,
+            "or": 1,
+            "platine": 1
+          }
+        },
+        "1000": {
+          "total": 5,
+          "metals": {
+            "cuivre": 1,
+            "argent": 1,
+            "electrum": 1,
+            "or": 1,
+            "platine": 1
+          }
+        },
+        "10000": {
+          "total": 5,
+          "metals": {
+            "cuivre": 1,
+            "argent": 1,
+            "electrum": 1,
+            "or": 1,
+            "platine": 1
+          }
+        }
+      }
+    },
     "multipliers": []
   },
   "lot50-essence": {
@@ -60,6 +168,60 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x1p2.webp"
     ],
+    "coin_breakdown": {
+      "per_multiplier": {
+        "1": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        },
+        "10": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        },
+        "100": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        },
+        "1000": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        },
+        "10000": {
+          "total": 10,
+          "metals": {
+            "cuivre": 2,
+            "argent": 2,
+            "electrum": 2,
+            "or": 2,
+            "platine": 2
+          }
+        }
+      }
+    },
     "multipliers": []
   },
   "lot50-tresorerie": {
@@ -81,6 +243,60 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x1p2.webp"
     ],
+    "coin_breakdown": {
+      "per_multiplier": {
+        "1": {
+          "total": 50,
+          "metals": {
+            "cuivre": 10,
+            "argent": 10,
+            "electrum": 10,
+            "or": 10,
+            "platine": 10
+          }
+        },
+        "10": {
+          "total": 50,
+          "metals": {
+            "cuivre": 10,
+            "argent": 10,
+            "electrum": 10,
+            "or": 10,
+            "platine": 10
+          }
+        },
+        "100": {
+          "total": 50,
+          "metals": {
+            "cuivre": 10,
+            "argent": 10,
+            "electrum": 10,
+            "or": 10,
+            "platine": 10
+          }
+        },
+        "1000": {
+          "total": 50,
+          "metals": {
+            "cuivre": 10,
+            "argent": 10,
+            "electrum": 10,
+            "or": 10,
+            "platine": 10
+          }
+        },
+        "10000": {
+          "total": 50,
+          "metals": {
+            "cuivre": 10,
+            "argent": 10,
+            "electrum": 10,
+            "or": 10,
+            "platine": 10
+          }
+        }
+      }
+    },
     "multipliers": [1, 10, 100, 1000, 10000]
   },
   "pack-182-arsenal-aventurier": {
