@@ -359,22 +359,25 @@
   flex-shrink: 0;
 }
 
-/* Input quantité amélioré */
+/* Input quantité amélioré - uniformisé avec les dropdowns */
 .snipcart .gd-qty-input,
 .snipcart .snipcart-item-line__quantity input[type="number"],
 .snipcart .snipcart-item-quantity input[type="number"] {
   background: var(--gd-card) !important;
   color: var(--gd-text) !important;
   border: 1px solid var(--gd-border) !important;
-  border-radius: 6px;
-  height: 2rem;
-  padding: 0 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: 6px !important;
+  height: 2.5rem !important;
+  padding: 0.5rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
   text-align: center;
-  min-width: 3rem;
-  max-width: 4rem;
+  min-width: 70px !important;
+  max-width: 70px !important;
+  width: 70px !important;
   transition: all 0.2s ease;
+  margin: 0.25rem 0.5rem 0.25rem 0 !important;
+  box-sizing: border-box !important;
 }
 .snipcart .gd-qty-input:focus,
 .snipcart .snipcart-item-line__quantity input[type="number"]:focus,
@@ -383,23 +386,25 @@
   outline: 2px solid var(--gd-focus) !important;
 }
 
-/* Boutons quantité +/- améliorés */
+/* Boutons quantité +/- améliorés - uniformisés avec les dropdowns */
 .snipcart .gd-qty-button,
 .snipcart .snipcart-item-line__quantity button,
 .snipcart .snipcart-item-quantity button{
-  background: var(--gd-card);
-  color: var(--gd-text);
-  border: 1px solid var(--gd-border);
-  width: 2rem; 
-  height: 2rem; 
-  border-radius: 6px;
-  font-size: 1.125rem;
-  font-weight: 600;
+  background: var(--gd-card) !important;
+  color: var(--gd-text) !important;
+  border: 1px solid var(--gd-border) !important;
+  width: 2.5rem !important; 
+  height: 2.5rem !important; 
+  border-radius: 6px !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  margin: 0.25rem 0.25rem 0.25rem 0 !important;
+  box-sizing: border-box !important;
 }
 .snipcart .gd-qty-button:hover,
 .snipcart .snipcart-item-line__quantity button:hover,
@@ -577,19 +582,22 @@
   background: var(--gd-card) !important;
   border: 1px solid var(--gd-border) !important;
   color: var(--gd-text) !important;
-  padding: 0.5rem !important;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem !important;
   font-size: 0.875rem !important;
   font-weight: 400 !important;
   margin: 0.25rem 0.5rem 0.25rem 0 !important;
   height: 2.5rem !important;
   border-radius: 6px !important;
   box-sizing: border-box !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
 }
 
 /* Largeurs spécifiques par type de dropdown */
 .snipcart select[name*="Multiplicateur"] {
-  width: 80px !important;
-  min-width: 80px !important;
+  width: 100px !important;
+  min-width: 100px !important;
 }
 
 .snipcart select[name*="Métal"],
@@ -611,10 +619,15 @@
   min-width: 110px !important;
 }
 
-/* Masquer l'icône avec un pseudo-élément SEULEMENT pour custom fields */
+/* Flèches des dropdowns custom fields positionnées à droite */
 .snipcart .snipcart-dropdown-custom-field::after,
 .snipcart .snipcart-item-line__custom-fields .snipcart-form__select::after,
+.snipcart .snipcart-cart-summary-item__custom-fields select::after,
+.snipcart .snipcart-item-line__custom-fields select::after,
+.snipcart .snipcart-cart-item__custom-fields select::after,
 .snipcart select[name*="Multiplicateur"]::after,
+.snipcart select[name*="Métal"]::after,
+.snipcart select[name*="Metal"]::after,
 .snipcart select[name*="Langue"]::after {
   content: "▼" !important;
   position: absolute !important;
@@ -625,7 +638,7 @@
   color: var(--gd-text) !important;
   font-size: 12px !important;
   z-index: 1 !important;
-  background: var(--gd-card) !important;
+  background: transparent !important;
   width: 20px !important;
   height: 20px !important;
   display: flex !important;
@@ -653,23 +666,27 @@
 .snipcart .snipcart-cart-summary-item__custom-fields select,
 .snipcart .snipcart-item-line__custom-fields select,
 .snipcart .snipcart-cart-item__custom-fields select {
+  position: relative !important;
   background: var(--gd-card) !important;
   color: var(--gd-text) !important;
   border: 1px solid var(--gd-border) !important;
   border-radius: 6px !important;
-  padding: 0.5rem !important;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem !important;
   font-size: 0.875rem !important;
   height: 2.5rem !important;
   margin: 0 !important;
   flex-shrink: 0 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
 }
 
 /* Largeurs spécifiques dans le sommaire aussi */
 .snipcart .snipcart-cart-summary-item__custom-fields select[name*="Multiplicateur"],
 .snipcart .snipcart-item-line__custom-fields select[name*="Multiplicateur"],
 .snipcart .snipcart-cart-item__custom-fields select[name*="Multiplicateur"] {
-  width: 80px !important;
-  min-width: 80px !important;
+  width: 100px !important;
+  min-width: 100px !important;
 }
 
 .snipcart .snipcart-cart-summary-item__custom-fields select[name*="Métal"],
