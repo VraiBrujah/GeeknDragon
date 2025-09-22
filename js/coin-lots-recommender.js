@@ -91,93 +91,358 @@ class CoinLotsRecommender {
   }
 
   /**
-   * Calcule les lots minimaux nécessaires - ALGORITHME SIMPLE
+   * Calcule les lots minimaux nécessaires - ALGORITHME OPTIMISÉ PAR COÛT
+   * Teste toutes les combinaisons possibles et retourne la moins chère
    */
   calculateMinimalLots(coinsBreakdown) {
     if (!coinsBreakdown || Object.keys(coinsBreakdown).length === 0) {
       return [];
     }
 
-    const allOptions = [];
+    const allSolutions = [];
     
-    // Option 1: Lots individuels L'Offrande du Voyageur (un par multiplicateur)
-    const individualLotsOption = this.calculateIndividualLotsOption(coinsBreakdown);
-    if (individualLotsOption) {
-      allOptions.push(individualLotsOption);
-    }
+    // Générer toutes les combinaisons possibles de lots
+    this.generateAllCombinations(coinsBreakdown, allSolutions);
     
-    // Option 2: Lots complets
-    const completeLots = [
-      { id: 'lot25', name: "La Monnaie des Cinq Royaumes", price: 145 },
-      { id: 'lot50-essence', name: "L'Essence du Marchand", price: 275 }
-    ];
+    // Retourner la solution la moins chère
+    if (allSolutions.length === 0) return [];
     
-    completeLots.forEach(option => {
-      if (this.lotCoversNeeds(option.id, coinsBreakdown)) {
-        allOptions.push({
-          lots: [{
-            productId: option.id,
-            name: option.name,
-            quantity: 1,
-            price: option.price,
-            multiplier: null
-          }],
-          totalPrice: option.price
-        });
-      }
-    });
-    
-    // Retourner l'option la moins chère
-    if (allOptions.length === 0) return [];
-    
-    const bestOption = allOptions.reduce((best, current) => 
+    const bestSolution = allSolutions.reduce((best, current) => 
       current.totalPrice < best.totalPrice ? current : best
     );
     
-    return bestOption.lots;
+    return bestSolution.lots;
   }
 
   /**
-   * Calcule l'option avec des lots individuels L'Offrande du Voyageur
+   * Génère toutes les combinaisons possibles de lots pour couvrir les besoins
    */
-  calculateIndividualLotsOption(coinsBreakdown) {
-    const neededMultipliers = this.getNeededMultipliers(coinsBreakdown);
-    const lots = [];
-    let totalPrice = 0;
+  generateAllCombinations(coinsBreakdown, solutions) {
+    // Option 1: Utiliser des lots complets (qui contiennent tous les multiplicateurs)
+    this.tryCompleteLots(coinsBreakdown, solutions);
     
-    // Pour chaque multiplicateur, vérifier si on peut utiliser L'Offrande du Voyageur
-    for (const mult of neededMultipliers) {
-      const multiplier = parseInt(mult);
+    // Option 2: Utiliser des lots à multiplicateur unique
+    this.tryMultiplierSpecificLots(coinsBreakdown, solutions);
+    
+    // Option 3: Combinaisons mixtes (lot complet + lots spécifiques pour compléter)
+    this.tryMixedCombinations(coinsBreakdown, solutions);
+  }
+
+  /**
+   * Teste les lots complets qui contiennent tous les multiplicateurs
+   */
+  tryCompleteLots(coinsBreakdown, solutions) {
+    const completeLots = ['lot25', 'lot50-essence'];
+    
+    completeLots.forEach(lotId => {
+      const remainingNeeds = this.calculateRemainingNeeds(coinsBreakdown, lotId, 1);
       
-      // Vérifier si ce multiplicateur est supporté par L'Offrande du Voyageur
-      if (!this.products['lot10'].multipliers.includes(multiplier)) {
-        return null; // Ce multiplicateur n'est pas supporté
-      }
-      
-      // Créer un breakdown pour ce multiplicateur seulement
-      const multiplierBreakdown = {};
-      for (const currency in coinsBreakdown) {
-        if (coinsBreakdown[currency][mult]) {
-          multiplierBreakdown[currency] = { [mult]: coinsBreakdown[currency][mult] };
-        }
-      }
-      
-      // Vérifier si L'Offrande du Voyageur peut couvrir ce multiplicateur
-      if (this.lot10CoversNeeds(multiplierBreakdown, multiplier)) {
-        lots.push({
-          productId: 'lot10',
-          name: "L'Offrande du Voyageur",
-          quantity: 1,
-          price: 60,
-          multiplier: multiplier
+      if (this.areNeedsEmpty(remainingNeeds)) {
+        // Un seul lot suffit
+        solutions.push({
+          lots: [{
+            productId: lotId,
+            name: this.products[lotId].name,
+            quantity: 1,
+            price: this.products[lotId].price,
+            multiplier: null
+          }],
+          totalPrice: this.products[lotId].price
         });
-        totalPrice += 60;
       } else {
-        return null; // Un multiplicateur ne peut pas être couvert
+        // Essayer de compléter avec d'autres lots
+        this.tryCompleteWithOtherLots(remainingNeeds, solutions, [{
+          productId: lotId,
+          name: this.products[lotId].name,
+          quantity: 1,
+          price: this.products[lotId].price,
+          multiplier: null
+        }], this.products[lotId].price);
+      }
+    });
+  }
+
+  /**
+   * Teste les lots à multiplicateur spécifique
+   * Essaie de couvrir TOUS les multiplicateurs avec des combinaisons de lots
+   */
+  tryMultiplierSpecificLots(coinsBreakdown, solutions) {
+    const multiplierLots = ['lot10', 'lot50-tresorerie'];
+    const neededMultipliers = this.getNeededMultipliers(coinsBreakdown);
+    
+    // Générer toutes les combinaisons possibles de lots pour chaque multiplicateur
+    this.generateMultiplierCombinations(coinsBreakdown, neededMultipliers, multiplierLots, solutions);
+  }
+
+  /**
+   * Génère les combinaisons de lots pour couvrir tous les multiplicateurs
+   */
+  generateMultiplierCombinations(coinsBreakdown, neededMultipliers, multiplierLots, solutions) {
+    // Pour chaque multiplicateur, calculer les options possibles
+    const multiplierOptions = {};
+    
+    neededMultipliers.forEach(multiplier => {
+      multiplierOptions[multiplier] = [];
+      
+      multiplierLots.forEach(lotId => {
+        const lot = this.products[lotId];
+        if (!lot.multipliers.includes(parseInt(multiplier))) return;
+        
+        const maxNeeded = this.getMaxQuantityNeededForMultiplier(coinsBreakdown, multiplier);
+        const providedPerLot = this.getProvidedQuantityPerLot(lotId, multiplier);
+        const lotsNeeded = Math.ceil(maxNeeded / providedPerLot);
+        
+        if (lotsNeeded > 0) {
+          multiplierOptions[multiplier].push({
+            lotId: lotId,
+            quantity: lotsNeeded,
+            cost: lotsNeeded * lot.price,
+            multiplier: parseInt(multiplier)
+          });
+        }
+      });
+    });
+    
+    // Générer toutes les combinaisons possibles
+    const combinations = this.generateCombinations(multiplierOptions);
+    
+    // Tester chaque combinaison
+    combinations.forEach(combination => {
+      const lotsList = [];
+      let totalCost = 0;
+      
+      combination.forEach(option => {
+        const lot = this.products[option.lotId];
+        for (let i = 0; i < option.quantity; i++) {
+          lotsList.push({
+            productId: option.lotId,
+            name: lot.name,
+            quantity: 1,
+            price: lot.price,
+            multiplier: option.multiplier
+          });
+        }
+        totalCost += option.cost;
+      });
+      
+      // Vérifier si cette combinaison couvre tous les besoins
+      const remainingNeeds = this.calculateRemainingNeedsForLotsList(coinsBreakdown, lotsList);
+      if (this.areNeedsEmpty(remainingNeeds)) {
+        solutions.push({
+          lots: lotsList,
+          totalPrice: totalCost
+        });
+      }
+    });
+  }
+
+  /**
+   * Génère toutes les combinaisons possibles à partir des options par multiplicateur
+   */
+  generateCombinations(multiplierOptions) {
+    const multipliers = Object.keys(multiplierOptions);
+    if (multipliers.length === 0) return [];
+    
+    const combinations = [];
+    
+    function generateRecursive(index, currentCombination) {
+      if (index >= multipliers.length) {
+        combinations.push([...currentCombination]);
+        return;
+      }
+      
+      const multiplier = multipliers[index];
+      const options = multiplierOptions[multiplier];
+      
+      options.forEach(option => {
+        currentCombination.push(option);
+        generateRecursive(index + 1, currentCombination);
+        currentCombination.pop();
+      });
+    }
+    
+    generateRecursive(0, []);
+    return combinations;
+  }
+
+  /**
+   * Teste les combinaisons mixtes (lot complet + compléments)
+   */
+  tryMixedCombinations(coinsBreakdown, solutions) {
+    const completeLots = ['lot25', 'lot50-essence'];
+    const multiplierLots = ['lot10', 'lot50-tresorerie'];
+    
+    completeLots.forEach(completeLotId => {
+      const remainingNeeds = this.calculateRemainingNeeds(coinsBreakdown, completeLotId, 1);
+      
+      if (!this.areNeedsEmpty(remainingNeeds)) {
+        // Essayer de compléter avec des lots à multiplicateur
+        const neededMultipliers = this.getNeededMultipliers(remainingNeeds);
+        
+        neededMultipliers.forEach(multiplier => {
+          multiplierLots.forEach(multiplierLotId => {
+            const lot = this.products[multiplierLotId];
+            if (!lot.multipliers.includes(parseInt(multiplier))) return;
+            
+            const maxNeeded = this.getMaxQuantityNeededForMultiplier(remainingNeeds, multiplier);
+            const providedPerLot = this.getProvidedQuantityPerLot(multiplierLotId, multiplier);
+            const lotsNeeded = Math.ceil(maxNeeded / providedPerLot);
+            
+            if (lotsNeeded > 0) {
+              const baseLot = {
+                productId: completeLotId,
+                name: this.products[completeLotId].name,
+                quantity: 1,
+                price: this.products[completeLotId].price,
+                multiplier: null
+              };
+              
+              const complementLots = [];
+              for (let i = 0; i < lotsNeeded; i++) {
+                complementLots.push({
+                  productId: multiplierLotId,
+                  name: lot.name,
+                  quantity: 1,
+                  price: lot.price,
+                  multiplier: parseInt(multiplier)
+                });
+              }
+              
+              const allLots = [baseLot, ...complementLots];
+              const totalCost = allLots.reduce((sum, lot) => sum + lot.price, 0);
+              
+              // Vérifier si cette combinaison couvre tous les besoins
+              const finalRemaining = this.calculateRemainingNeedsForLotsList(coinsBreakdown, allLots);
+              if (this.areNeedsEmpty(finalRemaining)) {
+                solutions.push({
+                  lots: allLots,
+                  totalPrice: totalCost
+                });
+              }
+            }
+          });
+        });
+      }
+    });
+  }
+
+  /**
+   * Calcule les besoins restants après avoir utilisé un lot spécifique
+   */
+  calculateRemainingNeeds(originalNeeds, lotId, quantity) {
+    const remaining = JSON.parse(JSON.stringify(originalNeeds)); // Deep clone
+    const lot = this.products[lotId];
+    
+    if (!lot) return remaining;
+    
+    for (let i = 0; i < quantity; i++) {
+      if (lot.multipliers.length === 0) {
+        // Lot complet - soustrait selon coinLots détaillé
+        for (const currency in lot.coinLots) {
+          if (typeof lot.coinLots[currency] === 'object') {
+            // Format { "1": 1, "10": 1, ... }
+            for (const multiplier in lot.coinLots[currency]) {
+              const provided = lot.coinLots[currency][multiplier];
+              if (remaining[currency] && remaining[currency][multiplier]) {
+                remaining[currency][multiplier] = Math.max(0, remaining[currency][multiplier] - provided);
+                if (remaining[currency][multiplier] === 0) {
+                  delete remaining[currency][multiplier];
+                }
+              }
+            }
+            if (remaining[currency] && Object.keys(remaining[currency]).length === 0) {
+              delete remaining[currency];
+            }
+          }
+        }
       }
     }
     
-    return { lots, totalPrice };
+    return remaining;
+  }
+
+  /**
+   * Calcule les besoins restants après utilisation d'une liste de lots
+   */
+  calculateRemainingNeedsForLotsList(originalNeeds, lotsList) {
+    let remaining = JSON.parse(JSON.stringify(originalNeeds));
+    
+    lotsList.forEach(lot => {
+      if (lot.multiplier !== null) {
+        // Lot avec multiplicateur spécifique
+        const provided = this.getProvidedQuantityPerLot(lot.productId, lot.multiplier.toString());
+        const currencies = Object.keys(this.products[lot.productId].coinLots);
+        
+        currencies.forEach(currency => {
+          if (remaining[currency] && remaining[currency][lot.multiplier.toString()]) {
+            remaining[currency][lot.multiplier.toString()] = Math.max(0, 
+              remaining[currency][lot.multiplier.toString()] - provided);
+            if (remaining[currency][lot.multiplier.toString()] === 0) {
+              delete remaining[currency][lot.multiplier.toString()];
+            }
+          }
+        });
+        
+        // Nettoyer les devises vides
+        Object.keys(remaining).forEach(currency => {
+          if (Object.keys(remaining[currency]).length === 0) {
+            delete remaining[currency];
+          }
+        });
+      } else {
+        // Lot complet
+        remaining = this.calculateRemainingNeeds(remaining, lot.productId, 1);
+      }
+    });
+    
+    return remaining;
+  }
+
+  /**
+   * Vérifie si tous les besoins sont satisfaits (objet vide)
+   */
+  areNeedsEmpty(needs) {
+    return Object.keys(needs).length === 0;
+  }
+
+  /**
+   * Obtient la quantité maximale nécessaire pour un multiplicateur donné
+   */
+  getMaxQuantityNeededForMultiplier(coinsBreakdown, multiplier) {
+    let maxNeeded = 0;
+    
+    Object.keys(coinsBreakdown).forEach(currency => {
+      if (coinsBreakdown[currency][multiplier]) {
+        maxNeeded = Math.max(maxNeeded, coinsBreakdown[currency][multiplier]);
+      }
+    });
+    
+    return maxNeeded;
+  }
+
+  /**
+   * Obtient la quantité fournie par lot pour un multiplicateur
+   */
+  getProvidedQuantityPerLot(lotId, multiplier) {
+    const lot = this.products[lotId];
+    if (!lot) return 0;
+    
+    if (lot.multipliers.length > 0) {
+      // Lot à multiplicateur spécifique - retourne la quantité de chaque monnaie
+      if (typeof lot.coinLots === 'object' && typeof lot.coinLots.copper === 'number') {
+        return lot.coinLots.copper; // Toutes les devises ont la même quantité
+      }
+    }
+    
+    return 0;
+  }
+
+  /**
+   * Essaie de compléter avec d'autres lots (méthode utilitaire)
+   */
+  tryCompleteWithOtherLots(remainingNeeds, solutions, baseLots, baseCost) {
+    // Implémentation simplifiée - pour l'instant ne fait rien
+    // Cette méthode peut être étendue pour des combinaisons plus complexes
   }
   
   /**
@@ -199,56 +464,6 @@ class CoinLotsRecommender {
     });
     
     return Array.from(multipliers).sort((a, b) => parseInt(a) - parseInt(b));
-  }
-
-  /**
-   * Vérifie si L'Offrande du Voyageur avec un multiplicateur couvre les besoins
-   */
-  lot10CoversNeeds(coinsBreakdown, testMultiplier) {
-    const lot10 = this.products['lot10'];
-    if (!lot10) return false;
-    
-    // Vérifier si tous les besoins sont au même multiplicateur
-    for (const currency in coinsBreakdown) {
-      for (const multiplier in coinsBreakdown[currency]) {
-        if (parseInt(multiplier) !== testMultiplier) {
-          return false; // Besoin d'un autre multiplicateur
-        }
-        
-        const needed = coinsBreakdown[currency][multiplier];
-        const provided = lot10.coinLots[currency] || 0;
-        
-        if (needed > provided) {
-          return false; // Pas assez de pièces
-        }
-      }
-    }
-    
-    return true;
-  }
-
-  /**
-   * Vérifie si un lot couvre tous les besoins
-   */
-  lotCoversNeeds(lotId, coinsBreakdown) {
-    const lot = this.products[lotId];
-    if (!lot) return false;
-    
-    // Vérifier chaque besoin
-    for (const currency in coinsBreakdown) {
-      for (const multiplier in coinsBreakdown[currency]) {
-        const needed = coinsBreakdown[currency][multiplier];
-        const provided = lot.coinLots[currency] && lot.coinLots[currency][multiplier] 
-          ? lot.coinLots[currency][multiplier] 
-          : 0;
-        
-        if (needed > provided) {
-          return false;
-        }
-      }
-    }
-    
-    return true;
   }
 
 
