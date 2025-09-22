@@ -301,37 +301,6 @@
     buildRequirements() {
       const requirements = new Map();
       const inputs = this.converter?.sourceInputs ? Array.from(this.converter.sourceInputs) : [];
-      const multiplierInputs = this.converter?.multiplierInputs
-        ? Array.from(this.converter.multiplierInputs)
-        : [];
-
-      const manualMultiplierNeeds = new Map();
-
-      // Les cases multiplicateurs saisies manuellement (> ×1) doivent être prises en compte
-      // explicitement afin d'ajouter les lots correspondants en recommandation.
-
-      multiplierInputs.forEach((input) => {
-        if (!input || input.dataset?.userEdited !== 'true') {
-          return;
-        }
-
-        const multiplier = Number.parseInt(input.dataset?.multiplier, 10);
-        if (!Number.isFinite(multiplier) || multiplier <= 1) {
-          return;
-        }
-
-        const quantity = sanitizeInteger(input.value);
-        if (quantity <= 0) {
-          return;
-        }
-
-        const previous = manualMultiplierNeeds.get(multiplier) || 0;
-        manualMultiplierNeeds.set(multiplier, previous + quantity);
-      });
-
-      manualMultiplierNeeds.forEach((quantity, multiplier) => {
-        requirements.set(multiplier, quantity);
-      });
 
       inputs.forEach((input) => {
         const value = sanitizeInteger(input?.value);
