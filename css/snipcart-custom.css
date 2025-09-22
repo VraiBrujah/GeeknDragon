@@ -155,11 +155,7 @@
   min-width: fit-content !important;
 }
 
-/* Largeurs spécifiques */
-.snipcart select[name*="Multiplicateur"] { width: 100px !important; }
-.snipcart select[name*="Metal"], 
-.snipcart select[name*="Métal"] { width: 130px !important; }
-.snipcart select[name*="Langue"] { width: 100px !important; }
+/* Largeurs spécifiques - SUPPRIMÉES pour uniformisation */
 
 /* =================================================================== */
 /* BOUTONS                                                              */
@@ -481,28 +477,35 @@ select[id*="triptych"] {
   padding: 8px !important;
 }
 
-/* Largeurs spécifiques pour page produit */
+/* Largeurs uniformes pour tous les dropdowns page produit - FORCE OVERRIDE */
+select.metal-select.w-full.max-w-\[12rem\].bg-gray-700,
+select.multiplier-select.w-full.max-w-\[12rem\].bg-gray-700,
+select.language-select.w-full.max-w-\[12rem\].bg-gray-700,
+select.triptych-select.w-full.max-w-\[12rem\].bg-gray-700,
+.metal-select.w-full.max-w-\[12rem\],
+.multiplier-select.w-full.max-w-\[12rem\],
+.language-select.w-full.max-w-\[12rem\],
+.triptych-select.w-full.max-w-\[12rem\],
+select[id*="metal"],
+select[id*="multiplier"],
+select[id*="language"],
+select[id*="triptych"],
 .metal-select,
-select[id*="metal"] { 
-  min-width: 130px !important; 
-  max-width: 200px !important;
-}
-
 .multiplier-select,
-select[id*="multiplier"] { 
-  min-width: 100px !important; 
-  max-width: 150px !important;
-}
-
 .language-select,
-select[id*="language"] { 
-  min-width: 100px !important; 
-  max-width: 150px !important;
+.triptych-select { 
+  width: 180px !important;
+  min-width: 180px !important; 
+  max-width: 180px !important;
+  flex-basis: 180px !important;
 }
 
-.triptych-select,
-select[id*="triptych"] { 
-  min-width: 120px !important; 
+/* Force override avec sélecteur très spécifique */
+*[class*="metal-select"],
+*[class*="multiplier-select"],
+*[id*="metal-"],
+*[id*="multiplier-"] {
+  width: 180px !important;
   max-width: 180px !important;
 }
 
