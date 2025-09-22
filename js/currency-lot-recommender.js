@@ -60,7 +60,7 @@
 
       this.converter = null;
       this.rawProductData = null;
-      this.productsData = { singlesByMultiplier: new Map(), bundles: [] };
+      this.productsData = { singlesByMultiplier: new Map(), bundles: [], products: [] };
       this.multipliers = [...DEFAULT_MULTIPLIERS];
       this.recommendations = [];
       this.loading = false;
@@ -173,6 +173,7 @@
       const result = {
         singlesByMultiplier: new Map(),
         bundles: [],
+        products: [],
       };
 
       const multipliers = this.getMultipliers();
@@ -184,13 +185,10 @@
         return result;
       }
 
+      let orderCounter = 0;
+
       Object.entries(data).forEach(([id, product]) => {
         if (typeof id !== 'string' || !/^lot/iu.test(id) || !product || typeof product !== 'object') {
-          return;
-        }
-
-        const totalCoins = this.extractTotalCoins(product);
-        if (!Number.isFinite(totalCoins) || totalCoins <= 0) {
           return;
         }
 
@@ -203,85 +201,201 @@
         const price = Number.parseFloat(product.price);
         const normalizedPrice = Number.isFinite(price) ? price : 0;
         const url = `${this.origin}/product.php?id=${encodeURIComponent(id)}`;
-        const rawMultipliers = Array.isArray(product.multipliers) ? product.multipliers : [];
-        const selectableMultipliers = rawMultipliers
-          .map((value) => Number.parseInt(value, 10))
-          .filter((value) => Number.isFinite(value));
+        const selectableMultipliers = Array.isArray(product.multipliers)
+          ? product.multipliers
+            .map((value) => Number.parseInt(value, 10))
+            .filter((value) => Number.isFinite(value))
+          : [];
+
+        const coinBreakdown = this.buildCoinBreakdown(product);
 
         if (selectableMultipliers.length > 0) {
-          const baseInfo = {
-            productId: id,
-            names,
-            price: normalizedPrice,
-            url,
-            totalCoins,
-            coinsPerMultiplier: totalCoins,
-            type: 'single',
-          };
-          selectableMultipliers.forEach((mult) => {
-            if (!result.singlesByMultiplier.has(mult)) {
-              result.singlesByMultiplier.set(mult, []);
+          selectableMultipliers.forEach((multiplier) => {
+            const entry = coinBreakdown.get(multiplier);
+            if (!entry || !Number.isFinite(entry.total) || entry.total <= 0) {
+              return;
             }
-            result.singlesByMultiplier.get(mult).push({
-              ...baseInfo,
-              multiplier: mult,
-            });
+
+            const variant = {
+              productId: id,
+              names,
+              price: normalizedPrice,
+              url,
+              totalCoins: entry.total,
+              type: 'single',
+              multiplier,
+              coverage: new Map([[multiplier, entry.total]]),
+              breakdown: new Map([[multiplier, entry]]),
+              order: orderCounter,
+            };
+            orderCounter += 1;
+
+            if (!result.singlesByMultiplier.has(multiplier)) {
+              result.singlesByMultiplier.set(multiplier, []);
+            }
+            result.singlesByMultiplier.get(multiplier).push(variant);
+            result.products.push(variant);
           });
-        } else {
-          const perMultiplierCoins = totalCoins / multipliers.length;
-          if (!Number.isFinite(perMultiplierCoins) || perMultiplierCoins <= 0) {
-            return;
-          }
-          result.bundles.push({
-            productId: id,
-            names,
-            price: normalizedPrice,
-            url,
-            totalCoins,
-            coinsPerMultiplier: perMultiplierCoins,
-            type: 'bundle',
-          });
+          return;
         }
+
+        if (coinBreakdown.size === 0) {
+          return;
+        }
+
+        const breakdownEntries = Array.from(coinBreakdown.entries())
+          .filter(([, entry]) => Number.isFinite(entry?.total) && entry.total > 0);
+        if (breakdownEntries.length === 0) {
+          return;
+        }
+
+        const coverage = new Map();
+        let totalCoins = 0;
+        breakdownEntries.forEach(([multiplier, entry]) => {
+          coverage.set(multiplier, entry.total);
+          totalCoins += entry.total;
+        });
+
+        if (totalCoins <= 0) {
+          return;
+        }
+
+        const bundle = {
+          productId: id,
+          names,
+          price: normalizedPrice,
+          url,
+          totalCoins,
+          type: 'bundle',
+          coverage,
+          breakdown: new Map(breakdownEntries),
+          order: orderCounter,
+        };
+        orderCounter += 1;
+
+        result.products.push(bundle);
+        result.bundles.push(bundle);
       });
 
       result.singlesByMultiplier.forEach((options) => {
         options.sort((a, b) => b.totalCoins - a.totalCoins);
       });
-      result.bundles.sort((a, b) => b.coinsPerMultiplier - a.coinsPerMultiplier);
+      result.bundles.sort((a, b) => b.totalCoins - a.totalCoins);
 
       return result;
     }
 
-    extractTotalCoins(product) {
-      const patterns = [
-        /(\d+(?:[\s\u00A0]\d{3})*)\s*pi[eè]ces?/iu,
-        /(\d+(?:[\s\u00A0]\d{3})*)\s*coins?/iu,
-      ];
-      const sources = [
-        product.summary,
-        product.summary_en,
-        product.description,
-        product.description_en,
-        product.name,
-        product.name_en,
-      ];
-
-      for (const source of sources) {
-        if (typeof source !== 'string') {
-          continue;
-        }
-        for (const pattern of patterns) {
-          const match = pattern.exec(source);
-          if (match && match[1]) {
-            const normalized = match[1].replace(/[\s\u00A0]/gu, '');
-            const parsed = Number.parseInt(normalized, 10);
-            if (Number.isFinite(parsed)) {
-              return parsed;
-            }
-          }
-        }
+    /**
+     * Construit la répartition des pièces décrite dans le produit.
+     * @param {object} product Données brutes du produit.
+     * @returns {Map<number, {total: number, metals: Record<string, number>}>}
+     * Map des multiplicateurs vers les quantités correspondantes.
+     */
+    buildCoinBreakdown(product) {
+      const breakdown = new Map();
+      if (!product || typeof product !== 'object') {
+        return breakdown;
       }
-      return null;
+
+      const rawBreakdown = product.coin_breakdown;
+      if (!rawBreakdown || typeof rawBreakdown !== 'object') {
+        return breakdown;
+      }
+
+      const perMultiplier = rawBreakdown.per_multiplier || rawBreakdown.perMultiplier;
+      if (!perMultiplier || typeof perMultiplier !== 'object') {
+        return breakdown;
+      }
+
+      Object.entries(perMultiplier).forEach(([multiplierKey, entry]) => {
+        const multiplier = Number.parseInt(multiplierKey, 10);
+        if (!Number.isFinite(multiplier)) {
+          return;
+        }
+        const sanitized = this.sanitizeCoinBreakdownEntry(entry);
+        if (!sanitized) {
+          return;
+        }
+        breakdown.set(multiplier, sanitized);
+      });
+
+      return breakdown;
+    }
+
+    /**
+     * Nettoie les détails d'un multiplicateur pour n'en conserver que les valeurs entières.
+     * @param {object} entry Détail brut.
+     * @returns {{total: number, metals: Record<string, number>}|null} Données nettoyées.
+     */
+    sanitizeCoinBreakdownEntry(entry) {
+      if (!entry || typeof entry !== 'object') {
+        return null;
+      }
+
+      const cleanedMetals = {};
+      let metalsTotal = 0;
+      if (entry.metals && typeof entry.metals === 'object') {
+        Object.entries(entry.metals).forEach(([metal, quantity]) => {
+          const parsed = Number.parseInt(quantity, 10);
+          if (Number.isFinite(parsed) && parsed > 0) {
+            cleanedMetals[metal] = parsed;
+            metalsTotal += parsed;
+          }
+        });
+      }
+
+      let total = Number.parseInt(entry.total, 10);
+      if (!Number.isFinite(total) || total <= 0) {
+        total = metalsTotal;
+      }
+
+      if (!Number.isFinite(total) || total <= 0) {
+        return null;
+      }
+
+      return {
+        total,
+        metals: cleanedMetals,
+      };
+    }
+
+    /**
+     * Liste les multiplicateurs couverts par un produit avec leurs quantités.
+     * @param {object} product Produit enrichi par parseProducts.
+     * @returns {Array<[number, number]>} Paires multiplicateur/quantité triées.
+     */
+    getCoverageEntries(product) {
+      if (!product || !(product.coverage instanceof Map)) {
+        return [];
+      }
+      return Array.from(product.coverage.entries())
+        .filter(([, value]) => Number.isFinite(value) && value > 0)
+        .sort((a, b) => a[0] - b[0]);
+    }
+
+    /**
+     * Produit une description lisible de la couverture d'un bundle.
+     * @param {object} product Produit considéré.
+     * @param {string} perMultiplierLabel Libellé « pièces par multiplicateur ».
+     * @returns {string} Description prête à afficher.
+     */
+    describeBundleCoverage(product, perMultiplierLabel) {
+      const entries = this.getCoverageEntries(product);
+      if (!entries.length) {
+        return '';
+      }
+      const values = entries.map(([, value]) => value);
+      const allEqual = values.every((value) => value === values[0]);
+      if (allEqual) {
+        return `${this.numberFormatter.format(values[0])} ${perMultiplierLabel}`;
+      }
+      return entries
+        .map(([multiplier, value]) => {
+          const multiplierText = `×${this.numberFormatter.format(multiplier)}`;
+          const valueText = this.numberFormatter.format(value);
+          return `${multiplierText} : ${valueText}`;
+        })
+        .join(' • ');
     }
 
     getMultipliers() {
@@ -354,98 +468,177 @@
     }
 
     computeRecommendations(requirements) {
-      const multipliers = Array.from(new Set([
-        ...this.getMultipliers(),
-        ...requirements.keys(),
-      ]))
-        .filter((value) => Number.isFinite(value))
-        .sort((a, b) => a - b);
+      const positiveRequirements = Array.from(requirements.entries())
+        .filter(([, quantity]) => Number.isFinite(quantity) && quantity > 0)
+        .sort((a, b) => a[0] - b[0]);
 
-      const remaining = new Map();
-      multipliers.forEach((mult) => {
-        const qty = requirements.get(mult) || 0;
-        remaining.set(mult, qty);
-        if (!this.productsData.singlesByMultiplier.has(mult)) {
-          this.productsData.singlesByMultiplier.set(mult, []);
+      if (positiveRequirements.length === 0) {
+        return [];
+      }
+
+      const multipliers = positiveRequirements.map(([multiplier]) => multiplier);
+      const targets = positiveRequirements.map(([, quantity]) => quantity);
+
+      const products = Array.isArray(this.productsData?.products)
+        ? this.productsData.products
+        : [];
+      if (!products.length) {
+        return [];
+      }
+
+      const candidateProducts = [];
+      const coverageVectors = [];
+
+      products.forEach((product) => {
+        if (!(product?.coverage instanceof Map)) {
+          return;
         }
+        const vector = multipliers.map((multiplier) => {
+          const value = product.coverage.get(multiplier);
+          return Number.isFinite(value) && value > 0 ? value : 0;
+        });
+        if (vector.every((value) => value === 0)) {
+          return;
+        }
+        candidateProducts.push(product);
+        coverageVectors.push(vector);
       });
 
-      const selected = [];
+      if (!candidateProducts.length) {
+        return [];
+      }
 
-      this.productsData.bundles.forEach((bundle) => {
-        const coinsPerMultiplier = bundle.coinsPerMultiplier;
-        if (!Number.isFinite(coinsPerMultiplier) || coinsPerMultiplier <= 0) {
-          return;
-        }
-        const minimalNeed = multipliers.reduce((min, mult) => {
-          const current = remaining.get(mult) || 0;
-          return Math.min(min, current);
-        }, Number.POSITIVE_INFINITY);
-        if (!Number.isFinite(minimalNeed) || minimalNeed < coinsPerMultiplier) {
-          return;
-        }
-        const count = Math.floor(minimalNeed / coinsPerMultiplier);
-        if (count <= 0) {
-          return;
-        }
-        selected.push({
-          type: 'bundle',
-          product: bundle,
-          quantity: count,
-        });
-        multipliers.forEach((mult) => {
-          const current = remaining.get(mult) || 0;
-          const updated = Math.max(0, current - (coinsPerMultiplier * count));
-          remaining.set(mult, updated);
-        });
-      });
+      const impossible = multipliers.some((multiplier, index) => coverageVectors
+        .every((vector) => vector[index] === 0));
+      if (impossible) {
+        return [];
+      }
 
-      multipliers.forEach((mult) => {
-        let needed = remaining.get(mult) || 0;
-        if (needed <= 0) {
-          return;
-        }
-        const options = this.productsData.singlesByMultiplier.get(mult) || [];
-        if (options.length === 0) {
-          return;
-        }
+      const startCoverage = targets.map(() => 0);
+      const startKey = startCoverage.join('|');
+      const goalKey = targets.join('|');
 
-        const localSelections = [];
-        options.forEach((option) => {
-          if (needed < option.totalCoins) {
-            return;
-          }
-          const count = Math.floor(needed / option.totalCoins);
-          if (count > 0) {
-            localSelections.push({ option, count });
-            needed -= option.totalCoins * count;
-          }
-        });
+      const queue = [{
+        key: startKey,
+        coverage: startCoverage,
+        cost: 0,
+        totalCoins: 0,
+      }];
+      const visited = new Map([[startKey, { cost: 0, totalCoins: 0 }]]);
+      const parents = new Map();
 
-        if (needed > 0) {
-          const fallback = options[options.length - 1];
-          if (fallback) {
-            localSelections.push({ option: fallback, count: 1 });
-            needed = Math.max(0, needed - fallback.totalCoins);
+      while (queue.length > 0) {
+        let bestIndex = 0;
+        for (let i = 1; i < queue.length; i += 1) {
+          const candidate = queue[i];
+          const best = queue[bestIndex];
+          if (candidate.cost < best.cost
+            || (candidate.cost === best.cost && candidate.totalCoins < best.totalCoins)) {
+            bestIndex = i;
           }
         }
 
-        localSelections.forEach(({ option, count }) => {
-          if (!option || count <= 0) {
-            return;
-          }
-          selected.push({
-            type: 'single',
-            product: option,
-            multiplier: option.multiplier,
-            quantity: count,
+        const current = queue.splice(bestIndex, 1)[0];
+
+        if (current.key === goalKey) {
+          break;
+        }
+
+        candidateProducts.forEach((product, productIndex) => {
+          const vector = coverageVectors[productIndex];
+          let contributes = false;
+          const newCoverage = current.coverage.map((value, idx) => {
+            const addition = vector[idx];
+            if (addition > 0) {
+              contributes = true;
+              const target = targets[idx];
+              const updated = value + addition;
+              return updated >= target ? target : updated;
+            }
+            return value;
           });
-          const current = remaining.get(mult) || 0;
-          remaining.set(mult, Math.max(0, current - (option.totalCoins * count)));
+
+          if (!contributes) {
+            return;
+          }
+
+          const newKey = newCoverage.join('|');
+          if (newKey === current.key) {
+            return;
+          }
+
+          const productPrice = Number.isFinite(product.price) ? product.price : 0;
+          const newCost = current.cost + productPrice;
+          const productCoins = Number.isFinite(product.totalCoins) ? product.totalCoins : 0;
+          const newTotalCoins = current.totalCoins + productCoins;
+
+          const existing = visited.get(newKey);
+          if (existing && (existing.cost < newCost
+            || (existing.cost === newCost && existing.totalCoins <= newTotalCoins))) {
+            return;
+          }
+
+          visited.set(newKey, { cost: newCost, totalCoins: newTotalCoins });
+          parents.set(newKey, { prevKey: current.key, productIndex });
+          queue.push({
+            key: newKey,
+            coverage: newCoverage,
+            cost: newCost,
+            totalCoins: newTotalCoins,
+          });
         });
+      }
+
+      if (!visited.has(goalKey)) {
+        return [];
+      }
+
+      const counts = new Map();
+      let cursor = goalKey;
+
+      while (cursor !== startKey) {
+        const step = parents.get(cursor);
+        if (!step) {
+          return [];
+        }
+        counts.set(step.productIndex, (counts.get(step.productIndex) || 0) + 1);
+        cursor = step.prevKey;
+      }
+
+      const recommendations = Array.from(counts.entries())
+        .map(([index, quantity]) => {
+          const product = candidateProducts[index];
+          const normalizedQuantity = Number.isFinite(quantity) ? quantity : 0;
+          if (!product || normalizedQuantity <= 0) {
+            return null;
+          }
+          const item = {
+            type: product.type,
+            product,
+            quantity: normalizedQuantity,
+          };
+          if (product.type === 'single' && Number.isFinite(product.multiplier)) {
+            item.multiplier = product.multiplier;
+          }
+          return item;
+        })
+        .filter((item) => item);
+
+      recommendations.sort((a, b) => {
+        const orderA = Number.isFinite(a.product?.order) ? a.product.order : 0;
+        const orderB = Number.isFinite(b.product?.order) ? b.product.order : 0;
+        if (orderA !== orderB) {
+          return orderA - orderB;
+        }
+        const priceA = Number.isFinite(a.product?.price) ? a.product.price : 0;
+        const priceB = Number.isFinite(b.product?.price) ? b.product.price : 0;
+        if (priceA !== priceB) {
+          return priceA - priceB;
+        }
+        return 0;
       });
 
-      return selected;
+      return recommendations;
     }
 
     handleUpdate(baseValue) {
@@ -530,7 +723,10 @@
           detailParts.push(`${this.numberFormatter.format(item.product.totalCoins)} ${coinsLabel}/lot`);
         } else if (item.type === 'bundle') {
           detailParts.push(bundleLabel);
-          detailParts.push(`${this.numberFormatter.format(item.product.coinsPerMultiplier)} ${perMultiplierLabel}`);
+          const coverageDetail = this.describeBundleCoverage(item.product, perMultiplierLabel);
+          if (coverageDetail) {
+            detailParts.push(coverageDetail);
+          }
         }
         details.textContent = detailParts.join(' • ');
 
