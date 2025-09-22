@@ -342,10 +342,11 @@
 .snipcart .snipcart-modal__container {
   background: rgba(15, 23, 42, 0.95) !important;
   backdrop-filter: blur(8px) !important;
-  top: var(--gd-header-h, 96px) !important;
-  height: calc(100vh - var(--gd-header-h, 96px)) !important;
+  top: 120px !important;
+  height: calc(100vh - 120px) !important;
   position: fixed !important;
   z-index: 9999 !important;
+  padding-top: 20px !important;
 }
 
 /* Scroll et responsive */
@@ -529,4 +530,75 @@ body.snipcart-open {
   background-position: unset !important;
   background-size: unset !important;
   padding-right: 16px !important;
+}
+
+/* FORCE texte quantité blanc */
+.snipcart input[type="number"],
+#snipcart input[type="number"],
+.snipcart .snipcart-item-line__quantity input {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: var(--gd-bg-secondary) !important;
+}
+
+/* SUPPRIME barre "Sécurisé par Snipcart" */
+.snipcart *[class*="security"],
+.snipcart *[class*="powered"],
+.snipcart *[class*="footer"],
+#snipcart *[class*="security"],
+#snipcart *[class*="powered"] {
+  text-decoration: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  color: #94a3b8 !important;
+}
+
+.snipcart *::before,
+.snipcart *::after {
+  border: none !important;
+  background: none !important;
+  content: none !important;
+}
+
+/* =================================================================== */
+/* CORRECTIONS FINALES VISIBILITÉ                                     */
+/* =================================================================== */
+
+/* Force ALL inputs to be white text */
+.snipcart input,
+.snipcart input[type="text"],
+.snipcart input[type="number"],
+.snipcart input[type="email"],
+.snipcart textarea {
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  background: var(--gd-bg-secondary) !important;
+  border: 1px solid var(--gd-border) !important;
+}
+
+/* Code promo visible */
+.snipcart .snipcart-discount-box,
+.snipcart [class*="discount"],
+.snipcart [class*="promo"] {
+  background: var(--gd-bg-secondary) !important;
+  color: white !important;
+  border: 1px solid var(--gd-border) !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+}
+
+.snipcart .snipcart-discount-box input,
+.snipcart [class*="discount"] input {
+  background: var(--gd-bg-primary) !important;
+  color: white !important;
+  border: 1px solid var(--gd-border) !important;
+}
+
+/* Sécurisé par Snipcart sans barre */
+.snipcart [class*="security"] *,
+.snipcart [class*="powered"] *,
+.snipcart [class*="footer"] * {
+  color: #94a3b8 !important;
+  text-decoration: none !important;
+  border: none !important;
 }
