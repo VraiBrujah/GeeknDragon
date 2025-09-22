@@ -528,7 +528,9 @@
 /* FIX FORÇÉ pour TOUS les selects et options dans Snipcart */
 .snipcart select,
 .snipcart select *,
-.snipcart option {
+.snipcart option,
+.snipcart .snipcart-item-line__custom-fields .snipcart-form__select,
+.snipcart .snipcart-item-line__custom-fields .snipcart-form__select select {
   background: var(--gd-card) !important;
   color: var(--gd-text) !important;
   border: 1px solid var(--gd-border) !important;
@@ -539,6 +541,7 @@
   max-width: none !important;
   font-size: 14px !important;
   line-height: 1.4 !important;
+  box-sizing: border-box !important;
 }
 
 /* Force l'affichage du texte dans les options */
@@ -559,6 +562,8 @@
 
 /* SOLUTION : réduire la taille du font et compacter SEULEMENT pour les custom fields */
 .snipcart .snipcart-dropdown-custom-field,
+.snipcart .snipcart-item-line__custom-fields .snipcart-form__select,
+.snipcart .snipcart-item-line__custom-fields .snipcart-form__select select,
 .snipcart select[name*="Multiplicateur"],
 .snipcart select[name*="Langue"] {
   width: 85px !important;
@@ -574,6 +579,7 @@
 
 /* Masquer l'icône avec un pseudo-élément SEULEMENT pour custom fields */
 .snipcart .snipcart-dropdown-custom-field::after,
+.snipcart .snipcart-item-line__custom-fields .snipcart-form__select::after,
 .snipcart select[name*="Multiplicateur"]::after,
 .snipcart select[name*="Langue"]::after {
   content: "▼" !important;
