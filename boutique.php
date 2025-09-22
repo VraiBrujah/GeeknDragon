@@ -264,7 +264,10 @@ echo $snipcartInit;
     }, $products),
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
 </script>
-  <script>window.stock = <?= json_encode($stock) ?>;</script>
+  <script>
+    window.stock = <?= json_encode($stock) ?>;
+    window.products = <?= json_encode($data) ?>;
+  </script>
   <!-- Ordre correct comme index.php -->
   <script src="/js/app.js"></script>
   <script src="/js/hero-videos.js"></script>

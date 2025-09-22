@@ -4,6 +4,9 @@ $config = require __DIR__ . '/config.php';
 $active = 'aide-jeux';
 require __DIR__ . '/i18n.php';
 
+// Charger les données des produits pour le système de recommandation
+$products_data = json_decode(file_get_contents(__DIR__ . '/data/products.json'), true) ?? [];
+
 $title = 'Aide de Jeux - ' . ($translations['meta']['home']['title'] ?? 'Geek & Dragon');
 $metaDescription = 'Guide complet pour vos accessoires D&D Geek & Dragon : triptyques de personnage, cartes d\'équipement, monnaie physique et convertisseur. Tout pour enrichir vos parties de jeu de rôle.';
 $metaUrl = 'https://' . ($_SERVER['HTTP_HOST'] ?? 'geekndragon.com') . '/aide-jeux.php';
@@ -1507,6 +1510,10 @@ echo $snipcartInit;
 
 <?php include 'footer.php'; ?>
 
+<script>
+  // Exposer les données des produits pour le système de recommandation
+  window.products = <?= json_encode($products_data) ?>;
+</script>
 <script src="/js/app.js"></script>
 <script>
 // Fonction pour retourner les cartes (triptyques)

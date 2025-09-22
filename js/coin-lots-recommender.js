@@ -5,19 +5,61 @@
 class CoinLotsRecommender {
   constructor() {
     this.nf = new Intl.NumberFormat('en-US');
+    this.products = {};
+    this.loadProductsFromGlobal();
+  }
+
+  /**
+   * Charge les produits depuis window.products ou utilise des données par défaut
+   */
+  loadProductsFromGlobal() {
+    if (window.products) {
+      // Charge dynamiquement depuis les données du site
+      this.products = this.convertGlobalProducts(window.products);
+    } else {
+      // Données par défaut en cas d'échec
+      this.products = this.getDefaultProducts();
+    }
+  }
+
+  /**
+   * Convertit les données globales au format attendu par le recommandeur
+   */
+  convertGlobalProducts(globalProducts) {
+    const convertedProducts = {};
     
-    // Charger les vrais produits depuis le JSON (en dur pour l'instant, à terme depuis fetch)
-    this.products = {
+    Object.keys(globalProducts).forEach(id => {
+      const product = globalProducts[id];
+      
+      // Ne traiter que les lots de pièces
+      if (id.startsWith('lot') || id.includes('essence') || id.includes('tresorerie')) {
+        convertedProducts[id] = {
+          name: product.name || product.name_fr || id,
+          price: product.price || 0,
+          multipliers: product.multipliers || [],
+          coinLots: product.coin_lots || {}
+        };
+      }
+    });
+    
+    return convertedProducts;
+  }
+
+  /**
+   * Données par défaut en cas d'échec de chargement
+   */
+  getDefaultProducts() {
+    return {
       'lot10': {
-        name: "L'Offrande du Voyageur",
+        name: "Offrande du Voyageur",
         price: 60,
-        multipliers: [1, 10, 100, 1000, 10000], // Multiplicateur à choisir
+        multipliers: [1, 10, 100, 1000, 10000],
         coinLots: { copper: 2, silver: 2, electrum: 2, gold: 2, platinum: 2 }
       },
       'lot25': {
         name: "La Monnaie des Cinq Royaumes", 
         price: 145,
-        multipliers: [], // Pas de choix, contient tous les multiplicateurs
+        multipliers: [],
         coinLots: {
           copper: { "1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1 },
           silver: { "1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1 },
@@ -27,7 +69,7 @@ class CoinLotsRecommender {
         }
       },
       'lot50-essence': {
-        name: "L'Essence du Marchand",
+        name: "Essence du Marchand",
         price: 275,
         multipliers: [],
         coinLots: {
@@ -482,7 +524,7 @@ class CoinLotsRecommender {
       // Vérifier que toutes les propriétés existent
       const quantity = lot.quantity || 1;
       const price = lot.price || 60;
-      const name = lot.name || "L'Offrande du Voyageur";
+      const name = lot.name || "Offrande du Voyageur";
       const multiplier = lot.multiplier;
       
       const multiplierText = multiplier !== null && multiplier !== undefined
