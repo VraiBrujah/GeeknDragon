@@ -1,924 +1,532 @@
-/* Geek & Dragon — Snipcart custom (DARK + clean, v5)
-   Place ce fichier APRES snipcart.css dans le <head>.
-   Palette sombre cohérente + paiement lisible + erreurs très visibles. */
-
 /* =================================================================== */
-/* PALETTE & TOKENS                                                     */
+/* GEEK & DRAGON - SNIPCART DARK THEME v2.0                           */
+/* Mode sombre élégant, interface simplifiée et moderne                */
 /* =================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Cinzel:wght@400;600;700&display=swap');
 
-:root{
-  /* Tons proches → transitions douces entre sections */
-  --gd-bg:        #101826; /* fond global */
-  --gd-card:      #121d2a; /* cartes/champs (≈ fond +1 cran) */
-  --gd-card-2:    #162338; /* état sélectionné/hover discret */
-
-  --gd-text:      #e7ebf2;
-  --gd-muted:     #a0a9b8;
-  --gd-heading:   #f4f6fa;
-
-  --gd-border:    #2b3650;
-  --gd-accent:    #8b5cf6; /* violet */
-  --gd-focus:     #22d3ee; /* focus */
-
-  /* Hauteur header fixe (mise à jour par JS) */
-  --gd-header-h:  96px;
-
-  /* Couleurs d’alerte */
-  --gd-error:     #f87171;
-  --gd-warning:   #f59e0b;
+/* Variables CSS pour cohérence */
+:root {
+  --gd-bg-primary:    #0f172a;    /* Fond principal très sombre */
+  --gd-bg-secondary:  #1e293b;    /* Cartes et conteneurs */
+  --gd-bg-tertiary:   #334155;    /* États hover/focus */
+  
+  --gd-text-primary:  #f8fafc;    /* Texte principal */
+  --gd-text-secondary: #cbd5e1;   /* Texte secondaire */
+  --gd-text-muted:    #94a3b8;    /* Texte atténué */
+  
+  --gd-border:        #475569;    /* Bordures */
+  --gd-accent:        #8b5cf6;    /* Accent violet */
+  --gd-focus:         #22d3ee;    /* Focus cyan */
+  --gd-success:       #10b981;    /* Succès */
+  --gd-error:         #ef4444;    /* Erreurs */
+  --gd-warning:       #f59e0b;    /* Alertes */
+  
+  --gd-shadow:        0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --gd-shadow-lg:     0 10px 15px -3px rgba(0, 0, 0, 0.4);
 }
 
 /* =================================================================== */
-/* ROOT THEME OVERRIDES (variables Snipcart)                            */
+/* BASE SNIPCART OVERRIDE                                              */
 /* =================================================================== */
-#snipcart, .snipcart{
-  --bgColor-default:  var(--gd-bg);
-  --bgColor-alt:      var(--gd-card);
-  --bgColor-input:    var(--gd-card);
 
-  --color-default:    var(--gd-text);
-  --color-heading:    var(--gd-heading);
-  --color-link:       #c1c8ff;
-  --color-linkHover:  #e0e4ff;
-
-  --color-input:      var(--gd-text);
-  --color-inputLabel: var(--gd-text);
-  --color-inputIcon:  var(--gd-text);
-  --color-inputPlaceholder: var(--gd-muted);
-
-  --borderColor:        var(--gd-border);
-  --borderColor-input:  var(--gd-border);
-  --focusColor:         var(--gd-focus);
+/* Container principal */
+#snipcart, .snipcart {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--gd-bg-primary) !important;
+  color: var(--gd-text-primary) !important;
 }
 
-/* =================================================================== */
-/* BASE TYPO & CONTAINERS                                               */
-/* =================================================================== */
-.snipcart{
-  font-family:'Open Sans',system-ui,-apple-system,Segoe UI,sans-serif;
-  color:var(--color-default);
-  background:var(--bgColor-default);
-}
-.snipcart h1,.snipcart h2,.snipcart h3,.snipcart__button--primary{
-  font-family:'Cinzel',serif;
-}
-
-/* Boîtes/panneaux (couleur unifiée) */
+/* Conteneurs et boîtes */
+.snipcart .snipcart-layout,
 .snipcart .snipcart-layout__content,
-.snipcart .snipcart-checkout__content,
 .snipcart .snipcart__box,
-.snipcart .snipcart__box--header,
-.snipcart .snipcart__box--content,
-.snipcart .snipcart__box--footer,
-.snipcart .snipcart-summary-fees,
-.snipcart .snipcart-item-line{
-  background:var(--bgColor-default) !important;
-  color:var(--color-default) !important;
-  border-color:var(--borderColor) !important;
+.snipcart .snipcart-modal__container,
+.snipcart .snipcart-cart {
+  background: var(--gd-bg-primary) !important;
+  color: var(--gd-text-primary) !important;
+  border-color: var(--gd-border) !important;
 }
 
-/* Liens d’action (“Modifier”, etc.) bien visibles */
-.snipcart .snipcart__actions--link,
-.snipcart a.snipcart__font--small,
-.snipcart .snipcart-button-link{
-  color:var(--color-link) !important;
-  text-decoration:underline;
-}
-.snipcart .snipcart__actions--link:hover,
-.snipcart a.snipcart__font--small:hover,
-.snipcart .snipcart-button-link:hover{
-  color:var(--color-linkHover) !important;
-}
-
-/* Petits textes */
-.snipcart .snipcart__font--tiny,
-.snipcart .snipcart__font--small{
-  color:var(--gd-muted) !important;
+/* Headers et titres */
+.snipcart h1, .snipcart h2, .snipcart h3,
+.snipcart .snipcart__font--title,
+.snipcart .snipcart__font--subtitle {
+  color: var(--gd-text-primary) !important;
+  font-weight: 600 !important;
 }
 
 /* =================================================================== */
-/* FORMES & CHAMPS                                                      */
+/* FORMULAIRES ET CHAMPS                                               */
 /* =================================================================== */
-.snipcart .snipcart-input,
-.snipcart input[type=text],
-.snipcart input[type=email],
-.snipcart input[type=tel],
-.snipcart input[type=number],
-.snipcart .snipcart-form__select,
-.snipcart select,
-.snipcart .snipcart-typeahead__input,
-.snipcart textarea{
-  background:var(--bgColor-input) !important;
-  color:var(--color-input) !important;
-  border:1px solid var(--borderColor-input) !important;
-}
-.snipcart input::placeholder,
-.snipcart textarea::placeholder,
-.snipcart .snipcart-typeahead__input::placeholder{
-  color:var(--color-inputPlaceholder) !important;
-}
-.snipcart label,
-.snipcart .snipcart-form__label{ color:var(--color-inputLabel) !important; }
 
-/* Focus accessible */
-.snipcart .snipcart-input:focus,
-.snipcart input:focus,
-.snipcart select:focus,
-.snipcart textarea:focus,
-.snipcart .snipcart-typeahead__input:focus{
-  outline:2px solid var(--focusColor) !important;
-  border-color:var(--focusColor) !important;
-}
-
-/* Chrome autofill (sinon fond blanc) */
-.snipcart input:-webkit-autofill,
-.snipcart input:-webkit-autofill:hover,
-.snipcart input:-webkit-autofill:focus{
-  -webkit-box-shadow:0 0 0 1000px var(--bgColor-input) inset !important;
-  -webkit-text-fill-color:var(--color-input) !important;
-  caret-color:var(--color-input) !important;
-}
-
-/* Spinners number → off */
-.snipcart input[type=number]::-webkit-outer-spin-button,
-.snipcart input[type=number]::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
-.snipcart input[type=number]{ -moz-appearance:textfield; }
-
-/* Radio/checkbox accent */
-.snipcart input[type=checkbox],
-.snipcart input[type=radio]{ accent-color: var(--gd-accent); }
-
-/* Champ code promo : alignement responsive et boutons accessibles */
-.snipcart .snipcart-discount-box{
-  background: var(--gd-card) !important;
-  border: 1px solid var(--gd-border) !important;
+/* Inputs généraux */
+.snipcart input[type="text"],
+.snipcart input[type="email"],
+.snipcart input[type="tel"],
+.snipcart input[type="number"],
+.snipcart textarea,
+.snipcart .snipcart-input {
+  background: var(--gd-bg-secondary) !important;
+  color: var(--gd-text-primary) !important;
+  border: 2px solid var(--gd-border) !important;
   border-radius: 8px !important;
-  padding: 1rem !important;
-  margin: 1rem 0 !important;
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
 }
 
-.snipcart .snipcart-discount-box__form{
-  display:flex;
-  gap:0.75rem;
-  position:static;
-  align-items:stretch;
-  width: 100%;
-}
-
-.snipcart .snipcart-discount-box__form-container{
-  display:flex;
-  justify-content:flex-start;
-  gap:0.75rem;
-  align-items:stretch;
-  flex:1 1 auto;
-}
-
-.snipcart .snipcart-discount-box .snipcart-input{
-  flex:1 1 auto;
-  min-width:0;
-  background: var(--gd-bg) !important;
-  color: var(--gd-text) !important;
-  border: 1px solid var(--gd-border) !important;
-  border-radius: 6px !important;
-  padding: 0.75rem !important;
-  font-size: 0.875rem !important;
-}
-
-.snipcart .snipcart-discount-box .snipcart-input:focus{
+.snipcart input:focus,
+.snipcart textarea:focus,
+.snipcart .snipcart-input:focus {
   border-color: var(--gd-focus) !important;
-  outline: 2px solid var(--gd-focus) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1) !important;
 }
 
-.snipcart .snipcart-discount-box .snipcart-input::placeholder{
-  color: var(--gd-muted) !important;
+.snipcart input::placeholder,
+.snipcart textarea::placeholder {
+  color: var(--gd-text-muted) !important;
 }
 
-.snipcart .snipcart-discount-box .snipcart-form__field{
-  flex:1 1 auto;
-  min-width:0;
+/* Labels */
+.snipcart label,
+.snipcart .snipcart-form__label {
+  color: var(--gd-text-secondary) !important;
+  font-weight: 500 !important;
+  margin-bottom: 6px !important;
 }
 
-.snipcart .snipcart-discount-box__submit,
-.snipcart .snipcart-discount-box__cancel{
-  position:static;
-  margin:0;
+/* =================================================================== */
+/* SELECTS ET DROPDOWNS                                                */
+/* =================================================================== */
+
+/* Style uniforme pour tous les selects */
+.snipcart select,
+.snipcart .snipcart-form__select {
+  background: var(--gd-bg-secondary) !important;
+  color: var(--gd-text-primary) !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+  height: 48px !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.snipcart select:hover {
+  border-color: var(--gd-bg-tertiary) !important;
+}
+
+.snipcart select:focus {
+  border-color: var(--gd-focus) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1) !important;
+}
+
+.snipcart select option {
+  background: var(--gd-bg-secondary) !important;
+  color: var(--gd-text-primary) !important;
+  padding: 8px !important;
+}
+
+/* Custom fields dans le panier */
+.snipcart .snipcart-item-line__custom-fields,
+.snipcart .snipcart-cart-item__custom-fields {
+  margin: 12px 0 !important;
+  padding: 16px !important;
+  background: rgba(30, 41, 59, 0.3) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--gd-border) !important;
+}
+
+.snipcart .snipcart-item-line__custom-fields select {
+  margin: 4px 8px 4px 0 !important;
+  min-width: fit-content !important;
+}
+
+/* Largeurs spécifiques */
+.snipcart select[name*="Multiplicateur"] { width: 100px !important; }
+.snipcart select[name*="Metal"], 
+.snipcart select[name*="Métal"] { width: 130px !important; }
+.snipcart select[name*="Langue"] { width: 100px !important; }
+
+/* =================================================================== */
+/* BOUTONS                                                              */
+/* =================================================================== */
+
+/* Bouton principal */
+.snipcart .snipcart__button--primary,
+.snipcart .snipcart-button-primary {
   background: var(--gd-accent) !important;
   color: white !important;
   border: none !important;
-  border-radius: 6px !important;
-  padding: 0.75rem 1rem !important;
-  font-size: 0.875rem !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
   font-weight: 600 !important;
+  font-size: 14px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  white-space: nowrap !important;
-  min-height: 2.5rem !important;
+  box-shadow: var(--gd-shadow) !important;
 }
 
-.snipcart .snipcart-discount-box__submit:hover,
-.snipcart .snipcart-discount-box__cancel:hover{
-  background: var(--gd-card-2) !important;
-  border: 1px solid var(--gd-accent) !important;
+.snipcart .snipcart__button--primary:hover {
+  background: #7c3aed !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--gd-shadow-lg) !important;
+}
+
+/* Boutons secondaires */
+.snipcart .snipcart__button--secondary,
+.snipcart .snipcart-button-secondary {
+  background: var(--gd-bg-secondary) !important;
+  color: var(--gd-text-primary) !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.snipcart .snipcart__button--secondary:hover {
+  border-color: var(--gd-accent) !important;
   color: var(--gd-accent) !important;
 }
 
-/* Espacement constant entre les boutons « Appliquer » et « Annuler » */
-.snipcart .snipcart-discount-box__cancel{
-  margin-left:0.75rem;
-  background: var(--gd-card) !important;
-  color: var(--gd-text) !important;
-  border: 1px solid var(--gd-border) !important;
+/* Boutons quantité */
+.snipcart .snipcart-item-line__quantity {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
 }
 
-.snipcart .snipcart-discount-box__cancel:hover{
-  background: var(--gd-card-2) !important;
+.snipcart .snipcart-item-line__quantity button {
+  background: var(--gd-bg-secondary) !important;
+  color: var(--gd-text-primary) !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 6px !important;
+  width: 40px !important;
+  height: 40px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s ease !important;
+}
+
+.snipcart .snipcart-item-line__quantity button:hover {
+  border-color: var(--gd-accent) !important;
+  color: var(--gd-accent) !important;
+}
+
+.snipcart .snipcart-item-line__quantity input[type="number"] {
+  background: var(--gd-bg-secondary) !important;
+  color: var(--gd-text-primary) !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 6px !important;
+  width: 60px !important;
+  height: 40px !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+/* =================================================================== */
+/* ITEMS DU PANIER                                                     */
+/* =================================================================== */
+
+.snipcart .snipcart-item-line {
+  background: var(--gd-bg-secondary) !important;
+  border: 1px solid var(--gd-border) !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  margin: 16px 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.snipcart .snipcart-item-line:hover {
+  border-color: var(--gd-bg-tertiary) !important;
+  box-shadow: var(--gd-shadow) !important;
+}
+
+.snipcart .snipcart-item-line__title {
+  color: var(--gd-text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  margin-bottom: 8px !important;
+}
+
+.snipcart .snipcart-item-line__price,
+.snipcart .snipcart__font--large {
+  color: var(--gd-accent) !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+}
+
+/* Bouton supprimer */
+.snipcart .snipcart-item-line__actions .snipcart__button--icon {
+  background: rgba(239, 68, 68, 0.1) !important;
+  border: 2px solid rgba(239, 68, 68, 0.3) !important;
+  border-radius: 8px !important;
+  color: var(--gd-error) !important;
+  width: 40px !important;
+  height: 40px !important;
+  transition: all 0.2s ease !important;
+}
+
+.snipcart .snipcart-item-line__actions .snipcart__button--icon:hover {
+  background: var(--gd-error) !important;
+  color: white !important;
+}
+
+/* =================================================================== */
+/* RÉSUMÉ ET TOTAUX                                                    */
+/* =================================================================== */
+
+.snipcart .snipcart-cart-summary {
+  background: var(--gd-bg-secondary) !important;
+  border: 1px solid var(--gd-border) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  box-shadow: var(--gd-shadow) !important;
+}
+
+.snipcart .snipcart-summary-fees__amount,
+.snipcart .snipcart-cart-summary__amount {
+  color: var(--gd-accent) !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+}
+
+/* =================================================================== */
+/* NOTIFICATIONS ET ALERTES                                            */
+/* =================================================================== */
+
+.snipcart .snipcart__notice,
+.snipcart [role="alert"] {
+  background: var(--gd-bg-secondary) !important;
+  border: 2px solid var(--gd-warning) !important;
+  border-radius: 8px !important;
+  color: var(--gd-text-primary) !important;
+  padding: 16px !important;
+  margin: 16px 0 !important;
+}
+
+.snipcart .snipcart__notice--error {
+  border-color: var(--gd-error) !important;
+  background: rgba(239, 68, 68, 0.1) !important;
+}
+
+.snipcart .snipcart-field-error {
+  color: var(--gd-error) !important;
+  font-size: 12px !important;
+  margin-top: 4px !important;
+}
+
+/* États d'erreur sur les champs */
+.snipcart .snipcart-form__field--error input,
+.snipcart .snipcart-form__field--error select {
+  border-color: var(--gd-error) !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+/* =================================================================== */
+/* MODAL ET OVERLAY                                                    */
+/* =================================================================== */
+
+.snipcart .snipcart-modal__container {
+  background: rgba(15, 23, 42, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+  top: var(--gd-header-h, 96px) !important;
+  height: calc(100vh - var(--gd-header-h, 96px)) !important;
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
+/* Scroll et responsive */
+body.snipcart-open {
+  overflow: hidden;
+}
+
+/* =================================================================== */
+/* RESPONSIVE                                                          */
+/* =================================================================== */
+
+@media (max-width: 768px) {
+  .snipcart .snipcart-item-line {
+    padding: 16px !important;
+    margin: 12px 0 !important;
+  }
+  
+  .snipcart .snipcart-cart-summary {
+    padding: 20px !important;
+  }
+  
+  .snipcart select {
+    font-size: 16px !important; /* Évite le zoom sur iOS */
+  }
+}
+
+/* =================================================================== */
+/* UTILITAIRES                                                         */
+/* =================================================================== */
+
+/* Textes */
+.snipcart .snipcart__font--small,
+.snipcart .snipcart__font--tiny {
+  color: var(--gd-text-muted) !important;
+}
+
+/* Liens */
+.snipcart a,
+.snipcart .snipcart__actions--link {
+  color: var(--gd-accent) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.snipcart a:hover {
+  color: #7c3aed !important;
+  text-decoration: underline !important;
+}
+
+/* Chrome autofill */
+.snipcart input:-webkit-autofill,
+.snipcart input:-webkit-autofill:hover,
+.snipcart input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--gd-bg-secondary) inset !important;
+  -webkit-text-fill-color: var(--gd-text-primary) !important;
+  caret-color: var(--gd-text-primary) !important;
+}
+
+/* =================================================================== */
+/* CODE PROMO ET CORRECTIONS SPÉCIALES                                 */
+/* =================================================================== */
+
+/* Conteneur code promo avec layout vertical */
+.snipcart .snipcart-discount-box {
+  background: var(--gd-bg-secondary) !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  margin: 16px 0 !important;
+}
+
+.snipcart .snipcart-discount-box__form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.snipcart .snipcart-discount-box__form-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+.snipcart .snipcart-discount-box .snipcart-input {
+  background: var(--gd-bg-primary) !important;
+  color: var(--gd-text-primary) !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+  width: 100% !important;
+}
+
+.snipcart .snipcart-discount-box .snipcart-input:focus {
+  border-color: var(--gd-focus) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1) !important;
+}
+
+.snipcart .snipcart-discount-box .snipcart-input::placeholder {
+  color: var(--gd-text-muted) !important;
+}
+
+/* Boutons code promo en bas */
+.snipcart .snipcart-discount-box__actions {
+  display: flex !important;
+  gap: 12px !important;
+  justify-content: flex-start !important;
+  margin-top: 8px !important;
+}
+
+.snipcart .snipcart-discount-box__submit,
+.snipcart .snipcart-discount-box__cancel {
+  background: var(--gd-accent) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 20px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  position: static !important;
+  margin: 0 !important;
+}
+
+.snipcart .snipcart-discount-box__cancel {
+  background: var(--gd-bg-tertiary) !important;
+  color: var(--gd-text-primary) !important;
+  border: 2px solid var(--gd-border) !important;
+}
+
+.snipcart .snipcart-discount-box__submit:hover {
+  background: #7c3aed !important;
+  transform: translateY(-1px) !important;
+}
+
+.snipcart .snipcart-discount-box__cancel:hover {
   border-color: var(--gd-error) !important;
   color: var(--gd-error) !important;
 }
 
-/* Label du code promo */
-.snipcart .snipcart-discount-box .snipcart-form__label,
-.snipcart .snipcart-discount-box label{
-  color: var(--gd-heading) !important;
+/* Label code promo */
+.snipcart .snipcart-discount-box .snipcart-form__label {
+  color: var(--gd-text-primary) !important;
   font-weight: 600 !important;
-  font-size: 0.875rem !important;
-  margin-bottom: 0.5rem !important;
-  display: block !important;
+  margin-bottom: 8px !important;
 }
 
 /* =================================================================== */
-/* LIVRAISON (retour webhook)                                           */
-/* =================================================================== */
-.snipcart .snipcart-shipping-rates-list-item{
-  background:var(--gd-card) !important;
-  border:1px solid var(--gd-border) !important;
-  color:var(--gd-text) !important;
-}
-.snipcart .snipcart-shipping-rates-list-item *{
-  color:var(--gd-text) !important;
-}
-.snipcart .snipcart-radio__input:checked + .snipcart-shipping-rates-list-item,
-.snipcart .snipcart-shipping-rates-list-item.is-selected{
-  background:var(--gd-card-2) !important;
-  border-color:var(--gd-accent) !important;
-}
-
-/* =================================================================== */
-/* BOUTONS SECONDAIRES                                                  */
-/* =================================================================== */
-.snipcart .snipcart__button--secondary,
-.snipcart .snipcart-button-secondary{
-  background:var(--gd-card) !important;
-  color:var(--gd-text) !important;
-  border:1px solid var(--gd-text) !important;
-}
-.snipcart .snipcart__button--secondary:hover,
-.snipcart .snipcart-button-secondary:hover{ filter:brightness(1.05); }
-
-/* =================================================================== */
-/* LIGNES PRODUIT (layout simplifié et lisible)                        */
-/* =================================================================== */
-.snipcart .snipcart-item-line{ 
-  display: flex; 
-  align-items: center; 
-  gap: 1rem; 
-  padding: 1rem 0; 
-  border-bottom: 1px solid var(--gd-border);
-}
-.snipcart .snipcart-item-line:last-child{ 
-  border-bottom: none; 
-}
-
-/* Header avec image et titre plus lisible */
-.snipcart .snipcart-item-line__header{ 
-  display: flex; 
-  align-items: center; 
-  flex: 1;
-  gap: 1rem;
-}
-
-/* Image produit */
-.snipcart .snipcart-item-line__media--small{ 
-  order: 1; 
-  flex-shrink: 0;
-}
-
-/* Actions (corbeille) en premier */
-.snipcart .snipcart-item-line__actions{ 
-  order: 0; 
-  margin: 0 !important; 
-  opacity: 1 !important;
-  flex-shrink: 0;
-}
-
-/* Titre du produit */
-.snipcart .snipcart-item-line__title{ 
-  order: 2; 
-  flex: 1;
-  color: var(--gd-heading) !important;
-  font-weight: 500;
-}
-
-/* Bouton corbeille amélioré */
-.snipcart .snipcart-item-line__actions .snipcart__button--icon{
-  width: 2.25rem; 
-  height: 2.25rem; 
-  border: 1px solid var(--gd-border); 
-  background: var(--gd-card);
-  border-radius: 6px;
-  display: inline-flex; 
-  align-items: center; 
-  justify-content: center; 
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.snipcart .snipcart-item-line__actions .snipcart__button--icon:hover{
-  background: var(--gd-error);
-  border-color: var(--gd-error);
-}
-.snipcart .snipcart-item-line__actions .snipcart__icon,
-.snipcart .snipcart-item-line__actions svg{
-  width: 1rem; 
-  height: 1rem; 
-  color: var(--gd-error) !important; 
-  fill: currentColor !important; 
-  opacity: 1 !important;
-}
-.snipcart .snipcart-item-line__actions .snipcart__button--icon:hover .snipcart__icon,
-.snipcart .snipcart-item-line__actions .snipcart__button--icon:hover svg{
-  color: white !important;
-}
-
-/* Quantité : layout amélioré */
-.snipcart .snipcart-item-line__quantity,
-.snipcart .snipcart-item-quantity{ 
-  display: flex; 
-  align-items: center; 
-  gap: 0.5rem;
-  flex-shrink: 0;
-}
-
-/* Input quantité amélioré - uniformisé avec les dropdowns */
-.snipcart .gd-qty-input,
-.snipcart .snipcart-item-line__quantity input[type="number"],
-.snipcart .snipcart-item-quantity input[type="number"] {
-  background: var(--gd-card) !important;
-  color: var(--gd-text) !important;
-  border: 1px solid var(--gd-border) !important;
-  border-radius: 6px !important;
-  height: 2.5rem !important;
-  padding: 0.5rem !important;
-  font-size: 0.875rem !important;
-  font-weight: 400 !important;
-  text-align: center;
-  min-width: 70px !important;
-  max-width: 70px !important;
-  width: 70px !important;
-  transition: all 0.2s ease;
-  margin: 0.25rem 0.5rem 0.25rem 0 !important;
-  box-sizing: border-box !important;
-}
-.snipcart .gd-qty-input:focus,
-.snipcart .snipcart-item-line__quantity input[type="number"]:focus,
-.snipcart .snipcart-item-quantity input[type="number"]:focus {
-  border-color: var(--gd-focus) !important;
-  outline: 2px solid var(--gd-focus) !important;
-}
-
-/* Boutons quantité +/- améliorés - uniformisés avec les dropdowns */
-.snipcart .gd-qty-button,
-.snipcart .snipcart-item-line__quantity button,
-.snipcart .snipcart-item-quantity button{
-  background: var(--gd-card) !important;
-  color: var(--gd-text) !important;
-  border: 1px solid var(--gd-border) !important;
-  width: 2.5rem !important; 
-  height: 2.5rem !important; 
-  border-radius: 6px !important;
-  font-size: 0.875rem !important;
-  font-weight: 400 !important;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  margin: 0.25rem 0.25rem 0.25rem 0 !important;
-  box-sizing: border-box !important;
-}
-.snipcart .gd-qty-button:hover,
-.snipcart .snipcart-item-line__quantity button:hover,
-.snipcart .snipcart-item-quantity button:hover{
-  background: var(--gd-card-2);
-  border-color: var(--gd-accent);
-}
-.snipcart .snipcart-item-line__quantity button .snipcart__icon,
-.snipcart .snipcart-item-quantity button .snipcart__icon{ 
-  color: var(--gd-text); 
-}
-
-/* =================================================================== */
-/* PAIEMENT — champs + erreurs lisibles                                 */
+/* CORRECTIONS SPÉCIFIQUES POUR ÉLÉMENTS BLANCS                      */
 /* =================================================================== */
 
-/* Titres/labels bien clairs */
-.snipcart .snipcart-payment__form .snipcart__font--subtitle,
-.snipcart .snipcart-payment__form label,
-.snipcart .snipcart__font--subtitle{
-  color:var(--gd-heading) !important;
+/* Force tous les backgrounds Snipcart à être sombres */
+.snipcart * {
+  background-color: transparent !important;
 }
 
-/* Inputs du formulaire de carte (conteneurs contrôlés par Snipcart) */
-.snipcart .snipcart-payment__form .snipcart-input,
-.snipcart .snipcart-payment-card-form .snipcart-input,
-.snipcart .snipcart-payment__form input[type="text"],
-.snipcart .snipcart-payment-card-form input[type="text"]{
-  background:var(--gd-card) !important;
-  color:var(--gd-text) !important;
-  border:1px solid var(--gd-border) !important;
-}
-.snipcart .snipcart-payment__form .snipcart-input::placeholder,
-.snipcart .snipcart-payment-card-form input::placeholder{
-  color:var(--gd-muted) !important;
-}
-.snipcart .snipcart-payment__form .snipcart-input:focus,
-.snipcart .snipcart-payment-card-form input:focus{
-  outline:2px solid var(--gd-focus) !important;
-  border-color:var(--gd-focus) !important;
-}
-
-/* Stripe/Snipcart v3 : iframes des éléments de carte (non stylables à l’intérieur) */
-.snipcart iframe[title*="card"],
-.snipcart iframe[title*="Card"],
-.snipcart iframe[title*="number"],
-.snipcart iframe[title*="expiry"],
-.snipcart iframe[title*="cvc"]{
-  background:var(--gd-card) !important; /* contour/zone */
-  color-scheme: dark;                    /* hint pour thème sombre */
-  border-radius:8px;
-}
-
-/* États d’erreur sur champs */
-.snipcart .snipcart-form__field--error .snipcart-input,
-.snipcart .snipcart-form__field--error input,
-.snipcart .snipcart-form__field--error select{
-  border-color:var(--gd-error) !important;
-  box-shadow:0 0 0 2px rgba(248,113,113,.25);
-}
-.snipcart .snipcart-field-error,
-.snipcart .snipcart__error{
-  color:var(--gd-heading) !important;
-}
-
-/* Bandeaux/notifications d’erreur (ex. "Unable to process payment") */
-.snipcart [role="alert"],
-.snipcart .snipcart__notice,
-.snipcart .snipcart__notice--error,
-.snipcart .snipcart__notice--warning,
-.snipcart .snipcart-notification,
-.snipcart .snipcart-alert,
-.snipcart .snipcart__box--error{
-  background:var(--gd-card-2) !important;
-  color:var(--gd-heading) !important;
-  border:1px solid var(--gd-error) !important;
-}
-.snipcart .snipcart__notice a,
-.snipcart [role="alert"] a{
-  color:#fff !important;
-  text-decoration:underline;
-}
-
-/* =================================================================== */
-/* DIVERS ET AMÉLIORATIONS LAYOUT                                      */
-/* =================================================================== */
-
-/* Dropdown options (fond sombre) */
-.snipcart .snipcart-form__select option{
-  background:var(--gd-card); color:var(--gd-text);
-}
-
-/* Custom fields dropdowns (variations produits) */
-.snipcart .snipcart-product-option,
-.snipcart .snipcart-product-option__select,
-.snipcart .snipcart-item-line__custom-fields select,
-.snipcart .snipcart-cart-item__custom-fields select,
-.snipcart select[name*="custom"]{
-  background: var(--gd-card) !important;
-  color: var(--gd-text) !important;
-  border: 1px solid var(--gd-border) !important;
-  border-radius: 6px !important;
-  padding: 0.5rem !important;
-  min-width: 120px !important;
-  margin: 0.25rem !important;
-  font-size: 0.875rem !important;
-  height: 2.5rem !important;
-}
-
-.snipcart .snipcart-product-option__select option,
-.snipcart .snipcart-item-line__custom-fields select option,
-.snipcart .snipcart-cart-item__custom-fields select option,
-.snipcart select[name*="custom"] option{
-  background: var(--gd-card) !important;
-  color: var(--gd-text) !important;
-  padding: 0.5rem;
-}
-
-/* Labels des custom fields avec espacement uniforme */
-.snipcart .snipcart-product-option__label,
-.snipcart .snipcart-item-line__custom-fields label,
-.snipcart .snipcart-cart-item__custom-fields label{
-  color: var(--gd-text) !important;
-  font-weight: 500 !important;
-  font-size: 0.875rem !important;
-  margin: 0.5rem 0.5rem 0.25rem 0 !important;
-  display: inline-block !important;
-  min-width: 80px !important;
-}
-
-/* FIX FORÇÉ pour TOUS les selects et options dans Snipcart */
-.snipcart select,
-.snipcart select *,
-.snipcart option,
-.snipcart .snipcart-item-line__custom-fields .snipcart-form__select,
-.snipcart .snipcart-item-line__custom-fields .snipcart-form__select select {
-  background: var(--gd-card) !important;
-  color: var(--gd-text) !important;
-  border: 1px solid var(--gd-border) !important;
-  padding: 0.5rem 2rem 0.5rem 0.5rem !important;
-  min-height: 2rem !important;
-  width: 120px !important;
-  min-width: 120px !important;
-  max-width: none !important;
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-  box-sizing: border-box !important;
-}
-
-/* Force l'affichage du texte dans les options */
-.snipcart select option {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-/* Positionnement spécifique de l'icône dropdown */
-.snipcart select {
-  background-position: calc(100% - 0.5rem) center !important;
-  background-size: 16px !important;
-  padding-right: 2.5rem !important;
-  text-overflow: ellipsis !important;
-  overflow: hidden !important;
-}
-
-/* Dropdowns custom fields - style de base */
-.snipcart .snipcart-dropdown-custom-field,
-.snipcart .snipcart-item-line__custom-fields .snipcart-form__select,
-.snipcart .snipcart-item-line__custom-fields .snipcart-form__select select,
-.snipcart select[name*="Multiplicateur"],
-.snipcart select[name*="Métal"],
-.snipcart select[name*="Metal"],
-.snipcart select[name*="Langue"] {
-  position: relative !important;
-  background: var(--gd-card) !important;
-  border: 1px solid var(--gd-border) !important;
-  color: var(--gd-text) !important;
-  padding: 0.5rem 2.5rem 0.5rem 0.5rem !important;
-  font-size: 0.875rem !important;
-  font-weight: 400 !important;
-  margin: 0.25rem 0.5rem 0.25rem 0 !important;
-  height: 2.5rem !important;
-  border-radius: 6px !important;
-  box-sizing: border-box !important;
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-}
-
-/* Largeurs spécifiques par type de dropdown */
-.snipcart select[name*="Multiplicateur"] {
-  width: 100px !important;
-  min-width: 100px !important;
-}
-
-.snipcart select[name*="Métal"],
-.snipcart select[name*="Metal"] {
-  width: 130px !important;
-  min-width: 130px !important;
-}
-
-.snipcart select[name*="Langue"] {
-  width: 100px !important;
-  min-width: 100px !important;
-}
-
-/* Largeur par défaut pour les autres custom fields */
-.snipcart .snipcart-dropdown-custom-field,
-.snipcart .snipcart-item-line__custom-fields .snipcart-form__select,
-.snipcart .snipcart-item-line__custom-fields .snipcart-form__select select {
-  width: 110px !important;
-  min-width: 110px !important;
-}
-
-/* Flèches des dropdowns custom fields positionnées à droite */
-.snipcart .snipcart-dropdown-custom-field::after,
-.snipcart .snipcart-item-line__custom-fields .snipcart-form__select::after,
-.snipcart .snipcart-cart-summary-item__custom-fields select::after,
-.snipcart .snipcart-item-line__custom-fields select::after,
-.snipcart .snipcart-cart-item__custom-fields select::after,
-.snipcart select[name*="Multiplicateur"]::after,
-.snipcart select[name*="Métal"]::after,
-.snipcart select[name*="Metal"]::after,
-.snipcart select[name*="Langue"]::after {
-  content: "▼" !important;
-  position: absolute !important;
-  right: 8px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  pointer-events: none !important;
-  color: var(--gd-text) !important;
-  font-size: 12px !important;
-  z-index: 1 !important;
-  background: transparent !important;
-  width: 20px !important;
-  height: 20px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Affichage forcé des custom fields dans le sommaire avec espacement */
-.snipcart .snipcart-cart-summary-item__custom-fields,
-.snipcart .snipcart-item-line__custom-fields,
-.snipcart .snipcart-cart-item__custom-fields {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 0.75rem !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  margin: 0.75rem 0 !important;
-  padding: 0.5rem !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  border-radius: 6px !important;
-  font-size: 0.875rem !important;
-  color: var(--gd-muted) !important;
-}
-
-.snipcart .snipcart-cart-summary-item__custom-fields select,
-.snipcart .snipcart-item-line__custom-fields select,
-.snipcart .snipcart-cart-item__custom-fields select {
-  position: relative !important;
-  background: var(--gd-card) !important;
-  color: var(--gd-text) !important;
-  border: 1px solid var(--gd-border) !important;
-  border-radius: 6px !important;
-  padding: 0.5rem 2.5rem 0.5rem 0.5rem !important;
-  font-size: 0.875rem !important;
-  height: 2.5rem !important;
-  margin: 0 !important;
-  flex-shrink: 0 !important;
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-}
-
-/* Largeurs spécifiques dans le sommaire aussi */
-.snipcart .snipcart-cart-summary-item__custom-fields select[name*="Multiplicateur"],
-.snipcart .snipcart-item-line__custom-fields select[name*="Multiplicateur"],
-.snipcart .snipcart-cart-item__custom-fields select[name*="Multiplicateur"] {
-  width: 100px !important;
-  min-width: 100px !important;
-}
-
-.snipcart .snipcart-cart-summary-item__custom-fields select[name*="Métal"],
-.snipcart .snipcart-item-line__custom-fields select[name*="Métal"],
-.snipcart .snipcart-cart-item__custom-fields select[name*="Métal"],
-.snipcart .snipcart-cart-summary-item__custom-fields select[name*="Metal"],
-.snipcart .snipcart-item-line__custom-fields select[name*="Metal"],
-.snipcart .snipcart-cart-item__custom-fields select[name*="Metal"] {
-  width: 130px !important;
-  min-width: 130px !important;
-}
-
-.snipcart .snipcart-cart-summary-item__custom-fields select[name*="Langue"],
-.snipcart .snipcart-item-line__custom-fields select[name*="Langue"],
-.snipcart .snipcart-cart-item__custom-fields select[name*="Langue"] {
-  width: 100px !important;
-  min-width: 100px !important;
-}
-
-/* Largeur par défaut pour les autres dans le sommaire */
-.snipcart .snipcart-cart-summary-item__custom-fields select:not([name*="Multiplicateur"]):not([name*="Métal"]):not([name*="Metal"]):not([name*="Langue"]),
-.snipcart .snipcart-item-line__custom-fields select:not([name*="Multiplicateur"]):not([name*="Métal"]):not([name*="Metal"]):not([name*="Langue"]),
-.snipcart .snipcart-cart-item__custom-fields select:not([name*="Multiplicateur"]):not([name*="Métal"]):not([name*="Metal"]):not([name*="Langue"]) {
-  width: 110px !important;
-  min-width: 110px !important;
-}
-
-/* Labels des custom fields dans le sommaire */
-.snipcart .snipcart-cart-summary-item__custom-fields label,
-.snipcart .snipcart-item-line__custom-fields label,
-.snipcart .snipcart-cart-item__custom-fields label {
-  color: var(--gd-text) !important;
-  font-size: 0.875rem !important;
-  font-weight: 500 !important;
-  margin: 0 0.5rem 0 0 !important;
-  white-space: nowrap !important;
-  display: flex !important;
-  align-items: center !important;
-  min-width: fit-content !important;
-}
-
-/* Groupes de custom fields pour organisation claire */
-.snipcart .snipcart-cart-summary-item__custom-fields > div,
-.snipcart .snipcart-item-line__custom-fields > div,
-.snipcart .snipcart-cart-item__custom-fields > div {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.5rem !important;
-  margin: 0.25rem 0 !important;
-  flex-wrap: nowrap !important;
-}
-
-/* Séparateurs visuels entre groupes de custom fields */
-.snipcart .snipcart-cart-summary-item__custom-fields > div:not(:last-child)::after,
-.snipcart .snipcart-item-line__custom-fields > div:not(:last-child)::after,
-.snipcart .snipcart-cart-item__custom-fields > div:not(:last-child)::after {
-  content: "•" !important;
-  color: var(--gd-border) !important;
-  margin-left: 0.75rem !important;
-  font-weight: bold !important;
-}
-
-/* Espacement global du panier */
-.snipcart .snipcart-cart{
-  padding: 1rem;
-}
-
-/* Header du panier plus clair */
-.snipcart .snipcart__box--header{
-  padding: 1rem !important;
-  border-bottom: 1px solid var(--gd-border) !important;
-}
-
-/* Titres du panier plus lisibles */
-.snipcart .snipcart__font--title{
-  color: var(--gd-heading) !important;
-  font-size: 1.5rem !important;
-}
-
-/* Réduction de l'espacement vertical excessif */
-.snipcart .snipcart-item-line__content{
-  padding: 0.5rem 0 !important;
-}
-
-/* Résumé et layout du panier améliorés */
-.snipcart .snipcart-cart-summary{
-  position: sticky; 
-  top: calc(var(--gd-header-h) + 12px);
-  background: var(--gd-bg);
-  border: 1px solid var(--gd-border);
-  border-radius: 12px;
-  padding: 1.5rem;
-}
-
-/* Amélioration du contraste des prix et totaux */
-.snipcart .snipcart-summary-fees__amount,
-.snipcart .snipcart-cart-summary__amount,
-.snipcart .snipcart__font--large{
-  color: var(--gd-heading) !important;
-  font-weight: 600;
-}
-
-/* Titre multiplicateur plus lisible */
-.snipcart .snipcart-item-line__title + div,
-.snipcart .snipcart-item-line .snipcart__font--small{
-  color: var(--gd-muted) !important;
-  font-size: 0.875rem;
-}
-
-/* Modal Snipcart (version overlay) sous header fixe */
-.snipcart .snipcart-modal__container{
-  top:var(--gd-header-h);
-  height:calc(100vh - var(--gd-header-h));
-}
-
-/* ===== Scroll correct: la modale Snipcart gère le scroll, pas l'arrière-plan ===== */
-
-/* Quand la modale Snipcart est ouverte, on fige le body */
-body.snipcart-open { overflow: hidden; }
-
-/* La modale (overlay) sous le header fixe, et ELLE scrolle */
-.snipcart .snipcart-modal__container{
-  position: fixed;
-  top: var(--gd-header-h);
-  left: 0; right: 0; bottom: 0;
-  height: auto;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Checkout/Order en page pleine (pas d’overlay) : on laisse scroller la page,
-   on s’assure que les sections Snipcart ne bloquent pas le scroll */
 .snipcart .snipcart-layout,
-.snipcart .snipcart-checkout,
-.snipcart .snipcart-order{
-  position: static !important;
-  height: auto !important;
-  max-height: none !important;
-  overflow: visible !important;
+.snipcart .snipcart-layout__content,
+.snipcart .snipcart__box,
+.snipcart .snipcart-cart,
+.snipcart .snipcart-modal__container,
+.snipcart input,
+.snipcart select,
+.snipcart textarea,
+.snipcart .snipcart-input,
+.snipcart .snipcart-form__select {
+  background: var(--gd-bg-secondary) !important;
 }
 
-/* =================================================================== */
-/* CODE PROMO CUSTOM FIELD                                             */
-/* =================================================================== */
-.snipcart .custom-promo-field {
-  background: var(--gd-card) !important;
-  border: 1px solid var(--gd-border) !important;
-  border-radius: 8px !important;
-  padding: 1rem !important;
-  margin: 1rem 0 !important;
+/* Conteneur principal panier */
+.snipcart .snipcart-cart {
+  background: var(--gd-bg-primary) !important;
+  padding: 20px !important;
 }
 
-.snipcart .custom-promo-field label {
-  color: var(--gd-heading) !important;
-  font-weight: 600 !important;
-  font-size: 0.875rem !important;
-  margin-bottom: 0.5rem !important;
-  display: block !important;
+/* Correction des chevrons dropdown - utilise les natifs */
+.snipcart select {
+  background-image: none !important;
+  background-position: unset !important;
+  background-size: unset !important;
+  padding-right: 16px !important;
 }
-
-.snipcart .custom-promo-field input {
-  background: var(--gd-bg) !important;
-  color: var(--gd-text) !important;
-  border: 1px solid var(--gd-border) !important;
-  border-radius: 6px !important;
-  padding: 0.75rem !important;
-  font-size: 0.875rem !important;
-  flex: 1 !important;
-  transition: border-color 0.2s ease !important;
-}
-
-.snipcart .custom-promo-field input:focus {
-  border-color: var(--gd-focus) !important;
-  outline: 2px solid var(--gd-focus) !important;
-}
-
-.snipcart .custom-promo-field input::placeholder {
-  color: var(--gd-muted) !important;
-}
-
-.snipcart .custom-promo-field button {
-  background: var(--gd-accent) !important;
-  color: white !important;
-  border: none !important;
-  border-radius: 6px !important;
-  padding: 0.75rem 1rem !important;
-  font-size: 0.875rem !important;
-  font-weight: 600 !important;
-  cursor: pointer !important;
-  transition: all 0.2s ease !important;
-  white-space: nowrap !important;
-}
-
-.snipcart .custom-promo-field button:hover:not(:disabled) {
-  background: var(--gd-card-2) !important;
-  border: 1px solid var(--gd-accent) !important;
-  color: var(--gd-accent) !important;
-}
-
-.snipcart .custom-promo-field button:disabled {
-  background: var(--gd-muted) !important;
-  cursor: not-allowed !important;
-  opacity: 0.6 !important;
-}
-
-.snipcart .custom-promo-field #promo-message.success {
-  color: #10b981 !important;
-  background: rgba(16, 185, 129, 0.1) !important;
-  border: 1px solid rgba(16, 185, 129, 0.3) !important;
-  border-radius: 4px !important;
-  padding: 0.5rem !important;
-  margin-top: 0.5rem !important;
-}
-
-.snipcart .custom-promo-field #promo-message.error {
-  color: var(--gd-error) !important;
-  background: rgba(248, 113, 113, 0.1) !important;
-  border: 1px solid rgba(248, 113, 113, 0.3) !important;
-  border-radius: 4px !important;
-  padding: 0.5rem !important;
-  margin-top: 0.5rem !important;
-}
-
-/* Responsive pour mobile */
-@media (max-width: 768px) {
-  .snipcart .custom-promo-field > div:nth-child(2) {
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-  }
-  
-  .snipcart .custom-promo-field button {
-    width: 100% !important;
-  }
-}
-
