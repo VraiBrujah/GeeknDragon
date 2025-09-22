@@ -31,8 +31,8 @@ class CoinLotsRecommender {
     Object.keys(globalProducts).forEach(id => {
       const product = globalProducts[id];
       
-      // Ne traiter que les lots de pièces
-      if (id.startsWith('lot') || id.includes('essence') || id.includes('tresorerie')) {
+      // Ne traiter que les lots de pièces et pièces personnalisées
+      if (id.startsWith('lot') || id.startsWith('piece') || id.includes('essence') || id.includes('tresorerie')) {
         convertedProducts[id] = {
           name: product.name || product.name_fr || id,
           price: product.price || 0,
@@ -168,6 +168,9 @@ class CoinLotsRecommender {
     
     // Option 3: Combinaisons mixtes (lot complet + lots spécifiques pour compléter)
     this.tryMixedCombinations(coinsBreakdown, solutions);
+    
+    // Option 4: Utiliser des pièces personnalisées pour de petites quantités
+    this.tryCustomCoins(coinsBreakdown, solutions);
   }
 
   /**
@@ -510,6 +513,54 @@ class CoinLotsRecommender {
 
 
   /**
+   * Essaie de couvrir les besoins avec des pièces personnalisées
+   */
+  tryCustomCoins(coinsBreakdown, solutions) {
+    const customCoinProducts = Object.keys(this.products).filter(id => 
+      id.startsWith('piece') && this.products[id].customizable
+    );
+    
+    if (customCoinProducts.length === 0) return;
+    
+    customCoinProducts.forEach(productId => {
+      const customCoin = this.products[productId];
+      const lots = [];
+      let totalCost = 0;
+      
+      // Pour chaque combinaison métal/multiplicateur nécessaire
+      Object.keys(coinsBreakdown).forEach(currency => {
+        const currencyNeeds = coinsBreakdown[currency];
+        
+        Object.keys(currencyNeeds).forEach(multiplier => {
+          const quantity = currencyNeeds[multiplier];
+          
+          if (quantity > 0) {
+            // Ajouter une pièce personnalisée pour chaque pièce nécessaire
+            for (let i = 0; i < quantity; i++) {
+              lots.push({
+                productId: productId,
+                name: customCoin.name,
+                quantity: 1,
+                price: customCoin.price,
+                multiplier: parseInt(multiplier),
+                metal: currency
+              });
+              totalCost += customCoin.price;
+            }
+          }
+        });
+      });
+      
+      if (lots.length > 0) {
+        solutions.push({
+          lots: lots,
+          totalPrice: totalCost
+        });
+      }
+    });
+  }
+
+  /**
    * Formate une recommandation pour l'affichage
    */
   formatRecommendation(lots) {
@@ -526,16 +577,23 @@ class CoinLotsRecommender {
       const price = lot.price || 60;
       const name = lot.name || "Offrande du Voyageur";
       const multiplier = lot.multiplier;
+      const metal = lot.metal;
       
-      const multiplierText = multiplier !== null && multiplier !== undefined
-        ? ` <span class="text-sm text-gray-400">(×${this.nf.format(multiplier)})</span>`
-        : '';
+      let detailsText = '';
+      if (multiplier !== null && multiplier !== undefined) {
+        detailsText += ` <span class="text-sm text-gray-400">(×${this.nf.format(multiplier)}</span>`;
+      }
+      if (metal) {
+        detailsText += detailsText ? `, ${metal})` : ` <span class="text-sm text-gray-400">(${metal})</span>`;
+      } else if (detailsText) {
+        detailsText += ')';
+      }
         
       html += `
         <div class="flex items-center justify-between bg-gray-800/50 rounded-lg p-3 border border-gray-700">
           <div class="flex-1">
             <span class="font-medium text-gray-200">${quantity}× ${name}</span>
-            ${multiplierText}
+            ${detailsText}
           </div>
           <div class="text-right">
             <span class="text-green-400 font-medium">$${this.nf.format(price * quantity)}</span>
@@ -565,6 +623,7 @@ class CoinLotsRecommender {
       productId: lot.productId || 'lot10',
       quantity: lot.quantity || 1,
       multiplier: lot.multiplier,
+      metal: lot.metal,
       price: (lot.price || 60) * (lot.quantity || 1)
     }));
   }

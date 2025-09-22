@@ -83,6 +83,8 @@ foreach ($data as $id => $p) {
         'summary' => $summaryFr,
         'summary_en' => $summaryEn,
         'multipliers' => $p['multipliers'] ?? [],
+        'metals' => $p['metals'] ?? [],
+        'metals_en' => $p['metals_en'] ?? [],
         'languages' => $p['languages'] ?? [],
         'triptych_options' => $p['triptych_options'] ?? [],
         'triptych_type' => $p['triptych_type'] ?? null,
@@ -90,7 +92,7 @@ foreach ($data as $id => $p) {
     ];
     
     // Catégorisation des produits
-    if (str_starts_with($id, 'lot') || str_contains($id, 'essence') || str_contains($id, 'tresorerie')) {
+    if (str_starts_with($id, 'lot') || str_starts_with($id, 'piece') || str_contains($id, 'essence') || str_contains($id, 'tresorerie')) {
         $product['url'] = 'product.php?id=' . urlencode($id) . '&from=pieces';
         $pieces[] = $product;
     } elseif (str_starts_with($id, 'triptyque')) {

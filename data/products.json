@@ -1,4 +1,31 @@
 {
+  "piece-personnalisee": {
+    "name": "Pièce Personnalisée",
+    "name_en": "Custom Coin",
+    "price": 10,
+    "description": "### Pièce unique à votre choix\nChoisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.\n\n*Parfait pour compléter une collection ou remplacer une pièce perdue.*",
+    "description_en": "### Single coin of your choice\nSelect **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.\n\n*Perfect for completing a collection or replacing a lost coin.*",
+    "summary": "Pièce métallique personnalisable avec choix du métal et du multiplicateur.",
+    "summary_en": "Customizable metal coin with choice of metal and multiplier.",
+    "images": [
+      "/media/products/coins/coin-copper-1.webp",
+      "/media/products/coins/coin-silver-1.webp",
+      "/media/products/coins/coin-electrum-1.webp",
+      "/media/products/coins/coin-gold-1.webp",
+      "/media/products/coins/coin-platinum-1.webp"
+    ],
+    "multipliers": [1, 10, 100, 1000, 10000],
+    "metals": ["cuivre", "argent", "électrum", "or", "platine"],
+    "metals_en": ["copper", "silver", "electrum", "gold", "platinum"],
+    "customizable": true,
+    "coin_lots": {
+      "copper": 1,
+      "silver": 1,
+      "electrum": 1,
+      "gold": 1,
+      "platinum": 1
+    }
+  },
   "lot10": {
     "name": "Offrande du Voyageur",
     "name_en": "The Traveler Offering", 

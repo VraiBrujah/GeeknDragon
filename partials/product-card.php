@@ -56,6 +56,8 @@ $img = $product['img'] ?? ($product['images'][0] ?? '');
 $url = $product['url'] ?? ('product.php?id=' . urlencode($id));
 $price = number_format((float) ($product['price'] ?? 0), 2, '.', '');
 $multipliers = $product['multipliers'] ?? [];
+$metals = $product['metals'] ?? [];
+$metalsEn = $product['metals_en'] ?? [];
 
 // Prépare les codes de langue disponibles pour les produits de cartes.
 $languagesRaw = $product['languages'] ?? [];
@@ -86,22 +88,49 @@ if (!defined('GD_CUSTOM_FIELD_LANGUAGE_INDEX')) {
 if (!defined('GD_CUSTOM_FIELD_MULTIPLIER_INDEX')) {
     define('GD_CUSTOM_FIELD_MULTIPLIER_INDEX', 2);
 }
+if (!defined('GD_CUSTOM_FIELD_METAL_INDEX')) {
+    define('GD_CUSTOM_FIELD_METAL_INDEX', 1);
+}
 if (!defined('GD_CUSTOM_FIELD_TRIPTYCH_INDEX')) {
     define('GD_CUSTOM_FIELD_TRIPTYCH_INDEX', 1);
 }
 
-// Pour les triptyques, utiliser les options de triptyque au lieu des langues
+// Gestion des champs personnalisés avec index dynamiques
+$metalFieldIndex = null;
+$languageFieldIndex = null;
+$triptychFieldIndex = null;
+$multiplierFieldIndex = null;
+
+$currentIndex = 1;
+
+// Pour les triptyques, utiliser les options de triptyque
 if (!empty($triptychOptions)) {
-    $languageFieldIndex = null; // Pas de sélection de langue pour les triptyques
-    $triptychFieldIndex = GD_CUSTOM_FIELD_TRIPTYCH_INDEX;
+    $triptychFieldIndex = $currentIndex++;
     $defaultTriptychOption = $triptychOptions[0] ?? '';
 } else {
-    $languageFieldIndex = !empty($languageLabels) ? GD_CUSTOM_FIELD_LANGUAGE_INDEX : null;
-    $triptychFieldIndex = null;
     $defaultTriptychOption = '';
 }
 
-$multiplierFieldIndex = !empty($multipliers) ? GD_CUSTOM_FIELD_MULTIPLIER_INDEX : null;
+// Pour les métaux (pièces personnalisables)
+if (!empty($metals)) {
+    $metalFieldIndex = $currentIndex++;
+    $metalsDisplay = $lang === 'en' ? $metalsEn : $metals;
+    $defaultMetal = $metalsDisplay[0] ?? '';
+} else {
+    $metalsDisplay = [];
+    $defaultMetal = '';
+}
+
+// Pour les langues (cartes)
+if (!empty($languageLabels) && empty($triptychOptions) && empty($metals)) {
+    $languageFieldIndex = $currentIndex++;
+}
+
+// Pour les multiplicateurs
+if (!empty($multipliers)) {
+    $multiplierFieldIndex = $currentIndex++;
+}
+
 $defaultLanguage = $languages[0] ?? '';
 $multiplierOptions = array_map(static fn ($value) => (string) $value, $multipliers);
 ?>
@@ -150,6 +179,27 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
           </div>
 
 
+
+          <?php if ($metalFieldIndex !== null) : ?>
+            <div class="metal-wrapper flex flex-col items-center w-full">
+              <label for="metal-<?= htmlspecialchars($id) ?>"
+                     class="mb-2 text-center"
+                     data-i18n="product.metal">
+                <?= __('product.metal', 'Métal') ?>
+              </label>
+              <select id="metal-<?= htmlspecialchars($id) ?>"
+                      class="metal-select w-full max-w-[12rem] bg-gray-700 text-gray-100 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      data-target="<?= htmlspecialchars($id) ?>"
+                      data-custom-index="<?= (int) $metalFieldIndex ?>"
+                      data-item-custom-role="metal">
+                <?php foreach ($metalsDisplay as $index => $metal) : ?>
+                  <option value="<?= htmlspecialchars($metal) ?>" <?= $index === 0 ? 'selected' : '' ?>>
+                    <?= htmlspecialchars(ucfirst($metal)) ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          <?php endif; ?>
 
           <?php if (!empty($multipliers)) : ?>
             <div class="multiplier-wrapper flex flex-col items-center w-full">
@@ -235,6 +285,12 @@ $multiplierOptions = array_map(static fn ($value) => (string) $value, $multiplie
                   data-item-custom<?= (int) $triptychFieldIndex ?>-type="dropdown"
                   data-item-custom<?= (int) $triptychFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $triptychOptions)) ?>"
                   data-item-custom<?= (int) $triptychFieldIndex ?>-value="<?= htmlspecialchars($defaultTriptychOption) ?>"
+                <?php endif; ?>
+                <?php if ($metalFieldIndex !== null) : ?>
+                  data-item-custom<?= (int) $metalFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['metal'] ?? 'Métal') ?>"
+                  data-item-custom<?= (int) $metalFieldIndex ?>-type="dropdown"
+                  data-item-custom<?= (int) $metalFieldIndex ?>-options="<?= htmlspecialchars(implode('|', $metalsDisplay)) ?>"
+                  data-item-custom<?= (int) $metalFieldIndex ?>-value="<?= htmlspecialchars($defaultMetal) ?>"
                 <?php endif; ?>
                 <?php if ($languageFieldIndex !== null) : ?>
                   data-item-custom<?= (int) $languageFieldIndex ?>-name="<?= htmlspecialchars($translations['product']['language'] ?? 'Langue') ?>"
