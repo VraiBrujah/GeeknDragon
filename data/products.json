@@ -1,7 +1,7 @@
 {
   "lot10": {
-    "name": "L'Offrande du Voyageur",
-    "name_en": "The Traveler's Offering", 
+    "name": "Offrande du Voyageur",
+    "name_en": "The Traveler Offering", 
     "price": 60,
     "description": "### Trésor de départ immersif\n**10 pièces en métal** : **2 de chaque métal** (cuivre, argent, électrum, or, platine). Vous choisissez **un seul multiplicateur** pour tout le lot : *unitaire* par défaut (brillant, sans gravure) ou **x10 / x100 / x1 000 / x10 000** (gravure nette, finition légèrement mate).\n\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
     "description_en": "### Immersive starter hoard\n**10 metal coins** : **2 of each metal** (copper, silver, electrum, gold, platinum). Choose **one multiplier** for the whole set: *unit* by default (shiny, no engraving) or **x10 / x100 / x1,000 / x10,000** (crisp engraving, slightly matte).\n\n*Use multipliers to speed up counting without breaking immersion.*",
@@ -56,7 +56,7 @@
     }
   },
   "lot50-essence": {
-    "name": "L'Essence du Marchand", 
+    "name": "Essence du Marchand", 
     "name_en": "Essence of the Merchant",
     "price": 275,
     "description": "### 50 pièces, double variété\n**2 exemplaires** de chacun des **25 modèles** de la *Monnaie des Cinq Royaumes* : total **50 pièces**. Unitaire (brillant) et x10/x100/x1 000/x10 000 (gravure mate).\n\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
