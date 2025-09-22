@@ -800,10 +800,32 @@ echo $snipcartInit;
       <div class="text-center mt-12">
         <div class="bg-gray-800/50 rounded-xl p-8 border border-gray-700">
           <h3 class="text-2xl font-bold mb-4 text-yellow-400">💡 Conseil Pro</h3>
-          <p class="text-gray-300 text-lg">
-            Gardez vos triptyques ouverts pendant toute la session. 
+          <p class="text-gray-300 text-lg mb-6">
+            Gardez vos triptyques ouverts pendant toute la session.
             Ils remplacent efficacement la feuille de personnage traditionnelle et accélèrent considérablement le jeu !
           </p>
+
+          <div class="bg-gray-700/30 rounded-lg p-6 border border-yellow-500/30">
+            <h4 class="text-xl font-bold mb-4 text-yellow-300">✏️ Astuce d'Écriture & Effacement</h4>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h5 class="font-semibold text-yellow-200 mb-2">Pour les Triptyques :</h5>
+                <p class="text-gray-300 text-sm mb-3">
+                  <strong>Marqueurs permanents Sharpie + gomme Staedtler</strong> = combinaison parfaite !
+                  Vous pouvez effacer complètement le marqueur sur les triptyques, même sur les zones colorées.
+                  N'hésitez pas à gommer énergiquement, le carton résiste parfaitement.
+                </p>
+              </div>
+              <div>
+                <h5 class="font-semibold text-yellow-200 mb-2">Pour les Cartes :</h5>
+                <p class="text-gray-300 text-sm mb-3">
+                  La technique fonctionne aussi sur les cartes, mais <strong>limitez le gommage aux zones blanches</strong>
+                  idéalement car elles sont plus fines. Les cartes devraient être personnalisées à chaque personnage
+                  pour une expérience optimale !
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -843,7 +865,7 @@ echo $snipcartInit;
             <li>• <strong>Armes :</strong> Statistiques complètes, propriétés spéciales</li>
             <li>• <strong>Armures :</strong> CA, poids, restrictions de classe</li>
             <li>• <strong>Équipement :</strong> Objets d'aventure et outils</li>
-            <li>• <strong>Objets magiques :</strong> Pouvoirs et malédictions</li>
+            <li>• <strong>Objets magiques :</strong> Pouvoirs et malédictions <span class="text-amber-300 text-xs italic">(en cours de création par nos gobelins dans nos forges...)</span></li>
           </ul>
         </div>
         
@@ -874,6 +896,18 @@ echo $snipcartInit;
             <li>• <strong>Marchandises :</strong> Commerce et économie</li>
           </ul>
         </div>
+      </div>
+
+      <!-- Note disponibilité cartes -->
+      <div class="bg-gradient-to-r from-green-900/20 to-emerald-900/20 rounded-xl p-6 border border-green-700/50 mb-16 text-center">
+        <h4 class="text-xl font-bold mb-3 text-green-400">📦 Disponibilité des Cartes</h4>
+        <p class="text-gray-300 mb-2">
+          <strong>Toutes les cartes d'objets sont disponibles</strong> dans notre boutique !
+          Personnalisez vos decks selon vos besoins et votre personnage.
+        </p>
+        <p class="text-green-300 text-sm italic">
+          ✨ Les cartes d'objets magiques arrivent bientôt, nos gobelins travaillent dur dans nos forges pour vous créer des merveilles !
+        </p>
       </div>
 
       <!-- ===== EXEMPLES DE CARTES ===== -->
