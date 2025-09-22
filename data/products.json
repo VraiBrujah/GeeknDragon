@@ -1,7 +1,7 @@
 {
   "lot10": {
     "name": "L'Offrande du Voyageur",
-    "name_en": "The Traveler's Offering", 
+    "name_en": "The Traveler's Offering",
     "price": 60,
     "description": "### Trésor de départ immersif\n**10 pièces en métal** : **2 de chaque métal** (cuivre, argent, électrum, or, platine). Vous choisissez **un seul multiplicateur** pour tout le lot : *unitaire* par défaut (brillant, sans gravure) ou **x10 / x100 / x1 000 / x10 000** (gravure nette, finition légèrement mate).\n\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
     "description_en": "### Immersive starter hoard\n**10 metal coins** : **2 of each metal** (copper, silver, electrum, gold, platinum). Choose **one multiplier** for the whole set: *unit* by default (shiny, no engraving) or **x10 / x100 / x1,000 / x10,000** (crisp engraving, slightly matte).\n\n*Use multipliers to speed up counting without breaking immersion.*",
@@ -18,7 +18,30 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x100f3.webp"
     ],
-    "multipliers": [1, 10, 100, 1000, 10000]
+    "multipliers": [
+      1,
+      10,
+      100,
+      1000,
+      10000
+    ],
+    "coinBundles": {
+      "type": "singleMultiplier",
+      "perMetal": {
+        "copper": 2,
+        "silver": 2,
+        "electrum": 2,
+        "gold": 2,
+        "platinum": 2
+      },
+      "multipliers": [
+        1,
+        10,
+        100,
+        1000,
+        10000
+      ]
+    }
   },
   "lot25": {
     "name": "La Monnaie des Cinq Royaumes",
@@ -39,10 +62,50 @@
       "/media/products/coins/coin-gold-1.webp",
       "/media/products/coins/coin-platinum-1.webp"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "coinBundles": {
+      "type": "fullSpectrum",
+      "perMetal": {
+        "copper": {
+          "1": 1,
+          "10": 1,
+          "100": 1,
+          "1000": 1,
+          "10000": 1
+        },
+        "silver": {
+          "1": 1,
+          "10": 1,
+          "100": 1,
+          "1000": 1,
+          "10000": 1
+        },
+        "electrum": {
+          "1": 1,
+          "10": 1,
+          "100": 1,
+          "1000": 1,
+          "10000": 1
+        },
+        "gold": {
+          "1": 1,
+          "10": 1,
+          "100": 1,
+          "1000": 1,
+          "10000": 1
+        },
+        "platinum": {
+          "1": 1,
+          "10": 1,
+          "100": 1,
+          "1000": 1,
+          "10000": 1
+        }
+      }
+    }
   },
   "lot50-essence": {
-    "name": "L'Essence du Marchand", 
+    "name": "L'Essence du Marchand",
     "name_en": "Essence of the Merchant",
     "price": 275,
     "description": "### 50 pièces, double variété\n**2 exemplaires** de chacun des **25 modèles** de la *Monnaie des Cinq Royaumes* : total **50 pièces**. Unitaire (brillant) et x10/x100/x1 000/x10 000 (gravure mate).\n\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
@@ -60,11 +123,51 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x1p2.webp"
     ],
-    "multipliers": []
+    "multipliers": [],
+    "coinBundles": {
+      "type": "fullSpectrum",
+      "perMetal": {
+        "copper": {
+          "1": 2,
+          "10": 2,
+          "100": 2,
+          "1000": 2,
+          "10000": 2
+        },
+        "silver": {
+          "1": 2,
+          "10": 2,
+          "100": 2,
+          "1000": 2,
+          "10000": 2
+        },
+        "electrum": {
+          "1": 2,
+          "10": 2,
+          "100": 2,
+          "1000": 2,
+          "10000": 2
+        },
+        "gold": {
+          "1": 2,
+          "10": 2,
+          "100": 2,
+          "1000": 2,
+          "10000": 2
+        },
+        "platinum": {
+          "1": 2,
+          "10": 2,
+          "100": 2,
+          "1000": 2,
+          "10000": 2
+        }
+      }
+    }
   },
   "lot50-tresorerie": {
     "name": "La Trésorerie du Seigneur",
-    "name_en": "The Lord's Treasury", 
+    "name_en": "The Lord's Treasury",
     "price": 275,
     "description": "### 50 pièces pour l'opulence\n**10 pièces de chaque métal** (cuivre, argent, électrum, or, platine) appliquant **le même multiplicateur** choisi à l'achat : *unitaire* par défaut (brillant) ou **x10 / x100 / x1 000 / x10 000** (gravure mate).\n\n*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*",
     "description_en": "### 50 coins for opulence\n**10 coins of each metal** (copper, silver, electrum, gold, platinum) using the **same multiplier** selected at checkout: *unit* by default (shiny) or **x10 / x100 / x1,000 / x10,000** (matte engraving).\n\n*Use multipliers to speed up counting without breaking immersion.*",
@@ -81,7 +184,30 @@
       "/media/products/coins/x1f2.webp",
       "/media/products/coins/x1p2.webp"
     ],
-    "multipliers": [1, 10, 100, 1000, 10000]
+    "multipliers": [
+      1,
+      10,
+      100,
+      1000,
+      10000
+    ],
+    "coinBundles": {
+      "type": "singleMultiplier",
+      "perMetal": {
+        "copper": 10,
+        "silver": 10,
+        "electrum": 10,
+        "gold": 10,
+        "platinum": 10
+      },
+      "multipliers": [
+        1,
+        10,
+        100,
+        1000,
+        10000
+      ]
+    }
   },
   "pack-182-arsenal-aventurier": {
     "name": "Arsenal de l'Aventurier",
@@ -125,7 +251,7 @@
   },
   "pack-182-routes-services": {
     "name": "Routes & Services",
-    "name_en": "Roads & Services", 
+    "name_en": "Roads & Services",
     "price": 34.99,
     "description": "### Paquetages • Services • Véhicules • Poisons\nTout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque avec des cartes claires et pratiques.\n\n**Contenu :**\n- **Paquetages** : *artiste, cambrioleur, diplomate, ecclésiastique, érudit, explorateur, exploration souterraine*\n- **Services** : hébergements, soins, transport, passeurs, mercenaires\n- **Véhicules** : terrestres, marins, animaux de bât\n- **Poisons** : effets et rareté\n\n*Parfait pour les campagnes orientées exploration, voyage et intrigue.*",
     "description_en": "### Packs • Services • Vehicles • Poisons\nEverything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards.\n\n**Contents:**\n- **Packs**: *artist, burglar, diplomat, acolyte/cleric, scholar, explorer, underdark exploration*\n- **Services**: lodging, healing, transport, smugglers, mercenaries\n- **Vehicles**: land, sea, beasts of burden\n- **Poisons**: effects & rarity\n\n*Perfect for exploration-, travel- and intrigue-heavy campaigns.*",
