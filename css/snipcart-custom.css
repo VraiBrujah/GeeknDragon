@@ -602,3 +602,90 @@ body.snipcart-open {
   text-decoration: none !important;
   border: none !important;
 }
+
+/* =================================================================== */
+/* CORRECTION QUANTITÉ - SUPPRESSION CARRÉ BLANC                     */
+/* =================================================================== */
+
+/* Supprime TOUS les backgrounds blancs sur quantité */
+.snipcart .snipcart-item-line__quantity,
+.snipcart .snipcart-item-line__quantity *,
+.snipcart [class*="quantity"],
+.snipcart [class*="quantity"] * {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Force le style uniquement sur les éléments input et boutons */
+.snipcart .snipcart-item-line__quantity input[type="number"] {
+  background: var(--gd-bg-secondary) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 8px !important;
+  text-align: center !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+}
+
+.snipcart .snipcart-item-line__quantity button {
+  background: var(--gd-bg-secondary) !important;
+  color: #ffffff !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 8px !important;
+}
+
+/* =================================================================== */
+/* CODE PROMO AMÉLIORÉ                                                */
+/* =================================================================== */
+
+/* Container code promo très visible */
+.snipcart .snipcart-discount-box {
+  background: linear-gradient(135deg, var(--gd-bg-secondary) 0%, rgba(139, 92, 246, 0.1) 100%) !important;
+  border: 2px solid var(--gd-accent) !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  margin: 20px 0 !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2) !important;
+}
+
+/* Label code promo visible */
+.snipcart .snipcart-discount-box .snipcart-form__label {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  margin-bottom: 12px !important;
+}
+
+/* Input code promo contrasté */
+.snipcart .snipcart-discount-box input {
+  background: var(--gd-bg-primary) !important;
+  color: #ffffff !important;
+  border: 2px solid var(--gd-border) !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  font-size: 14px !important;
+  width: 100% !important;
+}
+
+/* Boutons code promo très visibles */
+.snipcart .snipcart-discount-box button {
+  background: var(--gd-accent) !important;
+  color: white !important;
+  border: 2px solid var(--gd-accent) !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 3px 8px rgba(139, 92, 246, 0.3) !important;
+}
+
+.snipcart .snipcart-discount-box button:hover {
+  background: #7c3aed !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 12px rgba(139, 92, 246, 0.4) !important;
+}
