@@ -1745,7 +1745,7 @@ function confirmDownload() {
 <script src="/js/currency-converter.js"></script>
 
 <script>
-// Gestionnaire pour le bouton d'ajout au panier Snipcart
+// Gestionnaire pour le bouton d'ajout au panier (utilise le même système que la boutique)
 document.addEventListener('DOMContentLoaded', function() {
   const addToCartButton = document.getElementById('add-all-lots-to-cart');
   
@@ -1758,12 +1758,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      // Ajouter chaque lot au panier Snipcart
-      lotsData.forEach(lot => {
-        // Construire l'ID du produit avec multiplicateur si nécessaire
-        const productId = lot.multiplier !== null ? `${lot.productId}-x${lot.multiplier}` : lot.productId;
+      // Créer des boutons Snipcart virtuels et les cliquer (même système que la boutique)
+      lotsData.forEach((lot, index) => {
+        // L'ID reste le même (pas de multiplicateur dans l'ID)
+        const productId = lot.productId;
         
-        // Obtenir le nom du produit
+        // Obtenir le nom du produit (sans multiplicateur dans le nom)
         const getProductName = (id) => {
           const recommender = window.converterInstance?.lotsRecommender;
           if (recommender && recommender.products && recommender.products[id]) {
@@ -1779,20 +1779,39 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         
         const productName = getProductName(lot.productId);
-        const finalName = lot.multiplier !== null ? `${productName} (×${lot.multiplier})` : productName;
         
-        // Ajouter au panier Snipcart
-        window.Snipcart.api.cart.items.add({
-          id: productId,
-          name: finalName,
-          price: lot.price / lot.quantity, // Prix unitaire
-          quantity: lot.quantity,
-          url: window.location.href
-        });
+        // Créer un bouton temporaire invisible avec les mêmes attributs que la boutique
+        const tempButton = document.createElement('button');
+        tempButton.className = 'snipcart-add-item';
+        tempButton.style.display = 'none';
+        tempButton.setAttribute('data-item-id', productId);
+        tempButton.setAttribute('data-item-name', productName);
+        tempButton.setAttribute('data-item-name-fr', productName);
+        tempButton.setAttribute('data-item-name-en', productName);
+        tempButton.setAttribute('data-item-description', `Lot de pièces D&D - ${productName}`);
+        tempButton.setAttribute('data-item-price', (lot.price / lot.quantity).toFixed(2));
+        tempButton.setAttribute('data-item-url', window.location.href);
+        tempButton.setAttribute('data-item-quantity', lot.quantity.toString());
+        
+        // Si le produit a un multiplicateur, l'ajouter comme champ personnalisé (comme sur la boutique)
+        if (lot.multiplier !== null && lot.multiplier !== undefined) {
+          tempButton.setAttribute('data-item-custom1-name', 'Multiplicateur');
+          tempButton.setAttribute('data-item-custom1-type', 'dropdown');
+          tempButton.setAttribute('data-item-custom1-options', '×1|×10|×100|×1000|×10000');
+          tempButton.setAttribute('data-item-custom1-value', `×${lot.multiplier}`);
+        }
+        
+        // Ajouter temporairement au DOM et cliquer
+        document.body.appendChild(tempButton);
+        tempButton.click();
+        
+        // Nettoyer après un délai court
+        setTimeout(() => {
+          if (tempButton.parentNode) {
+            tempButton.parentNode.removeChild(tempButton);
+          }
+        }, 100);
       });
-      
-      // Ouvrir le panier Snipcart
-      window.Snipcart.api.modal.show();
     });
   }
 });
