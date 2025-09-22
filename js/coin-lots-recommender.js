@@ -48,19 +48,23 @@ class CoinLotsRecommender {
   }
 
   /**
-   * Calcule les besoins en pièces par multiplicateur depuis le convertisseur
+   * Calcule les besoins en pièces basés sur la conversion optimale du convertisseur
+   * Se base sur les valeurs du tableau multiplicateur éditable qui reflète la conversion optimale
    */
   getOptimalCoinsBreakdown(baseValue) {
-    const rates = { copper: 1, silver: 10, electrum: 50, gold: 100, platinum: 1000 };
-    const multipliers = [1, 10, 100, 1000, 10000];
-    
     const breakdown = {};
     
-    // Calculer pour chaque type de monnaie
-    Object.keys(rates).forEach(currency => {
-      const totalUnits = Math.floor(baseValue / rates[currency]);
-      if (totalUnits > 0) {
-        breakdown[currency] = this.getMinimalCoinsForCurrency(totalUnits, multipliers);
+    // Lire les valeurs du tableau multiplicateur qui reflète la conversion optimale
+    const multiplierInputs = document.querySelectorAll('.multiplier-input');
+    
+    multiplierInputs.forEach(input => {
+      const currency = input.closest('tr').dataset.currency;
+      const multiplier = parseInt(input.dataset.multiplier);
+      const quantity = parseInt(input.value.replace(/\s/g, '')) || 0;
+      
+      if (quantity > 0) {
+        if (!breakdown[currency]) breakdown[currency] = {};
+        breakdown[currency][multiplier.toString()] = quantity;
       }
     });
     
@@ -87,277 +91,95 @@ class CoinLotsRecommender {
   }
 
   /**
-   * Calcule les lots minimaux nécessaires - ALGORITHME VRAIMENT OPTIMISÉ
+   * Calcule les lots minimaux nécessaires - ALGORITHME SIMPLE
    */
   calculateMinimalLots(coinsBreakdown) {
     if (!coinsBreakdown || Object.keys(coinsBreakdown).length === 0) {
       return [];
     }
 
-    // Analyser les besoins réels
-    const neededMultipliers = this.getNeededMultipliers(coinsBreakdown);
-    const neededCurrencies = Object.keys(coinsBreakdown);
+    const allOptions = [];
     
-    console.log('Debug - coinsBreakdown:', coinsBreakdown);
-    console.log('Debug - neededMultipliers:', neededMultipliers);
+    // Option 1: Lots individuels L'Offrande du Voyageur (un par multiplicateur)
+    const individualLotsOption = this.calculateIndividualLotsOption(coinsBreakdown);
+    if (individualLotsOption) {
+      allOptions.push(individualLotsOption);
+    }
     
-    // Générer toutes les options possibles
-    const options = [];
+    // Option 2: Lots complets
+    const completeLots = [
+      { id: 'lot25', name: "La Monnaie des Cinq Royaumes", price: 145 },
+      { id: 'lot50-essence', name: "L'Essence du Marchand", price: 275 }
+    ];
     
-    // Option 1: Tester si un seul lot peut couvrir TOUS les besoins (tous multiplicateurs confondus)
-    // Tester L'Offrande du Voyageur pour chaque multiplicateur possible
-    neededMultipliers.forEach(mult => {
-      const multiplierInt = parseInt(mult);
-      
-      if (this.products['lot10'].multipliers.includes(multiplierInt)) {
-        const lot10 = this.products['lot10'];
-        if (this.canSingleLotCoverAllNeeds(coinsBreakdown, multiplierInt, lot10)) {
-          options.push({
-            lots: [{
-              productId: 'lot10',
-              name: lot10.name,
-              quantity: 1,
-              price: lot10.price,
-              multiplier: multiplierInt
-            }],
-            totalPrice: lot10.price
-          });
-        }
-      }
-      
-      // Tester La Trésorerie du Seigneur
-      if (this.products['lot50-tresorerie'].multipliers.includes(multiplierInt)) {
-        const lot50 = this.products['lot50-tresorerie'];
-        if (this.canSingleLotCoverAllNeeds(coinsBreakdown, multiplierInt, lot50)) {
-          options.push({
-            lots: [{
-              productId: 'lot50-tresorerie',
-              name: lot50.name,
-              quantity: 1,
-              price: lot50.price,
-              multiplier: multiplierInt
-            }],
-            totalPrice: lot50.price
-          });
-        }
+    completeLots.forEach(option => {
+      if (this.lotCoversNeeds(option.id, coinsBreakdown)) {
+        allOptions.push({
+          lots: [{
+            productId: option.id,
+            name: option.name,
+            quantity: 1,
+            price: option.price,
+            multiplier: null
+          }],
+          totalPrice: option.price
+        });
       }
     });
     
-    // Option 2: lots complets (lot25, lot50-essence) si ils couvrent les besoins
-    options.push(...this.calculateCompleteLots(coinsBreakdown, neededMultipliers, neededCurrencies));
-    
-    // Option 3: Combinaisons de lots individuels si aucune option simple ne fonctionne
-    if (options.length === 0) {
-      options.push(this.calculateMultiLotSolution(coinsBreakdown, neededMultipliers));
-    }
-    
-    // Filtrer les options valides et trouver la moins chère
-    const validOptions = options.filter(option => 
-      option && option.lots && option.lots.length > 0 && this.coversAllNeeds(option.lots, coinsBreakdown)
-    );
-    
-    console.log('Debug - validOptions:', validOptions);
-    
-    if (validOptions.length === 0) {
-      return [];
-    }
-    
     // Retourner l'option la moins chère
-    const bestOption = validOptions.reduce((best, current) => 
+    if (allOptions.length === 0) return [];
+    
+    const bestOption = allOptions.reduce((best, current) => 
       current.totalPrice < best.totalPrice ? current : best
     );
     
-    console.log('Debug - bestOption:', bestOption);
     return bestOption.lots;
   }
 
   /**
-   * Vérifie si un lot unique peut couvrir TOUS les besoins (tous multiplicateurs confondus)
+   * Calcule l'option avec des lots individuels L'Offrande du Voyageur
    */
-  canSingleLotCoverAllNeeds(coinsBreakdown, multiplier, product) {
-    // Vérifier pour chaque type de pièce et chaque multiplicateur si le lot couvre le besoin
-    for (const currency of Object.keys(coinsBreakdown)) {
-      for (const mult of Object.keys(coinsBreakdown[currency])) {
-        const needed = coinsBreakdown[currency][mult] || 0;
-        if (needed > 0) {
-          // Le lot doit pouvoir fournir avec le multiplicateur testé
-          if (parseInt(mult) === multiplier) {
-            const provided = product.coinLots[currency] || 0;
-            if (needed > provided) {
-              return false;
-            }
-          } else {
-            // Si on a besoin d'un autre multiplicateur, ce lot ne peut pas tout couvrir
-            return false;
-          }
-        }
-      }
-    }
-    return true;
-  }
-
-  /**
-   * Calcule une solution avec plusieurs lots individuels
-   */
-  calculateMultiLotSolution(coinsBreakdown, neededMultipliers) {
+  calculateIndividualLotsOption(coinsBreakdown) {
+    const neededMultipliers = this.getNeededMultipliers(coinsBreakdown);
     const lots = [];
     let totalPrice = 0;
     
-    neededMultipliers.forEach(mult => {
-      const multiplierInt = parseInt(mult);
+    // Pour chaque multiplicateur, vérifier si on peut utiliser L'Offrande du Voyageur
+    for (const mult of neededMultipliers) {
+      const multiplier = parseInt(mult);
       
-      // Choisir le lot le moins cher qui supporte ce multiplicateur
-      if (this.products['lot10'].multipliers.includes(multiplierInt)) {
+      // Vérifier si ce multiplicateur est supporté par L'Offrande du Voyageur
+      if (!this.products['lot10'].multipliers.includes(multiplier)) {
+        return null; // Ce multiplicateur n'est pas supporté
+      }
+      
+      // Créer un breakdown pour ce multiplicateur seulement
+      const multiplierBreakdown = {};
+      for (const currency in coinsBreakdown) {
+        if (coinsBreakdown[currency][mult]) {
+          multiplierBreakdown[currency] = { [mult]: coinsBreakdown[currency][mult] };
+        }
+      }
+      
+      // Vérifier si L'Offrande du Voyageur peut couvrir ce multiplicateur
+      if (this.lot10CoversNeeds(multiplierBreakdown, multiplier)) {
         lots.push({
           productId: 'lot10',
-          name: this.products['lot10'].name,
+          name: "L'Offrande du Voyageur",
           quantity: 1,
-          price: this.products['lot10'].price,
-          multiplier: multiplierInt
+          price: 60,
+          multiplier: multiplier
         });
-        totalPrice += this.products['lot10'].price;
-      }
-    });
-    
-    return {
-      lots: lots,
-      totalPrice: totalPrice
-    };
-  }
-
-
-  /**
-   * Calcule les options avec des lots complets
-   */
-  calculateCompleteLots(coinsBreakdown, neededMultipliers, neededCurrencies) {
-    const options = [];
-    
-    // Vérifier lot25
-    if (this.canLot25Cover(coinsBreakdown, neededMultipliers, neededCurrencies)) {
-      options.push({
-        lots: [{
-          productId: 'lot25',
-          name: "La Monnaie des Cinq Royaumes",
-          quantity: 1,
-          price: 145,
-          multiplier: null
-        }],
-        totalPrice: 145
-      });
-    }
-    
-    // Vérifier lot50-essence si besoin de plus de quantité
-    if (this.canLot50EssenceCover(coinsBreakdown, neededMultipliers, neededCurrencies)) {
-      options.push({
-        lots: [{
-          productId: 'lot50-essence',
-          name: "L'Essence du Marchand",
-          quantity: 1,
-          price: 275,
-          multiplier: null
-        }],
-        totalPrice: 275
-      });
-    }
-    
-    return options;
-  }
-
-  /**
-   * Calcule les options mixtes (combinaisons)
-   */
-  calculateMixedOptions(coinsBreakdown, neededMultipliers, neededCurrencies) {
-    // Pour l'instant, on garde simple - peut être étendu plus tard
-    return [];
-  }
-
-  /**
-   * Vérifie si lot25 peut couvrir les besoins
-   */
-  canLot25Cover(coinsBreakdown, neededMultipliers, neededCurrencies) {
-    const lot25 = this.products['lot25'];
-    
-    // Vérifier pour chaque besoin
-    for (const currency of neededCurrencies) {
-      for (const mult of neededMultipliers) {
-        const needed = coinsBreakdown[currency][mult] || 0;
-        const provided = lot25.coinLots[currency] && lot25.coinLots[currency][mult] ? lot25.coinLots[currency][mult] : 0;
-        
-        if (needed > provided) {
-          return false;
-        }
-      }
-    }
-    
-    return true;
-  }
-
-  /**
-   * Vérifie si lot50-essence peut couvrir les besoins
-   */
-  canLot50EssenceCover(coinsBreakdown, neededMultipliers, neededCurrencies) {
-    const lot50 = this.products['lot50-essence'];
-    
-    // Vérifier pour chaque besoin
-    for (const currency of neededCurrencies) {
-      for (const mult of neededMultipliers) {
-        const needed = coinsBreakdown[currency][mult] || 0;
-        const provided = lot50.coinLots[currency] && lot50.coinLots[currency][mult] ? lot50.coinLots[currency][mult] : 0;
-        
-        if (needed > provided) {
-          return false;
-        }
-      }
-    }
-    
-    return true;
-  }
-
-  /**
-   * Vérifie si une combinaison de lots couvre tous les besoins
-   */
-  coversAllNeeds(lots, coinsBreakdown) {
-    const provided = {};
-    
-    // Calculer ce que fournissent les lots
-    lots.forEach(lot => {
-      const product = this.products[lot.productId];
-      if (!product) return;
-      
-      if (lot.multiplier !== null && lot.multiplier !== undefined) {
-        // Lot avec multiplicateur spécifique
-        Object.keys(product.coinLots).forEach(currency => {
-          if (!provided[currency]) provided[currency] = {};
-          if (!provided[currency][lot.multiplier.toString()]) provided[currency][lot.multiplier.toString()] = 0;
-          provided[currency][lot.multiplier.toString()] += product.coinLots[currency] * lot.quantity;
-        });
+        totalPrice += 60;
       } else {
-        // Lot complet (lot25, lot50-essence)
-        Object.keys(product.coinLots).forEach(currency => {
-          if (!provided[currency]) provided[currency] = {};
-          Object.keys(product.coinLots[currency]).forEach(mult => {
-            if (!provided[currency][mult]) provided[currency][mult] = 0;
-            provided[currency][mult] += product.coinLots[currency][mult] * lot.quantity;
-          });
-        });
-      }
-    });
-    
-    // Vérifier que tous les besoins sont couverts
-    for (const currency of Object.keys(coinsBreakdown)) {
-      for (const mult of Object.keys(coinsBreakdown[currency])) {
-        const needed = coinsBreakdown[currency][mult];
-        const available = provided[currency] && provided[currency][mult] ? provided[currency][mult] : 0;
-        
-        if (needed > available) {
-          return false;
-        }
+        return null; // Un multiplicateur ne peut pas être couvert
       }
     }
     
-    return true;
+    return { lots, totalPrice };
   }
-
+  
   /**
    * Récupère tous les multiplicateurs nécessaires
    */
@@ -378,6 +200,57 @@ class CoinLotsRecommender {
     
     return Array.from(multipliers).sort((a, b) => parseInt(a) - parseInt(b));
   }
+
+  /**
+   * Vérifie si L'Offrande du Voyageur avec un multiplicateur couvre les besoins
+   */
+  lot10CoversNeeds(coinsBreakdown, testMultiplier) {
+    const lot10 = this.products['lot10'];
+    if (!lot10) return false;
+    
+    // Vérifier si tous les besoins sont au même multiplicateur
+    for (const currency in coinsBreakdown) {
+      for (const multiplier in coinsBreakdown[currency]) {
+        if (parseInt(multiplier) !== testMultiplier) {
+          return false; // Besoin d'un autre multiplicateur
+        }
+        
+        const needed = coinsBreakdown[currency][multiplier];
+        const provided = lot10.coinLots[currency] || 0;
+        
+        if (needed > provided) {
+          return false; // Pas assez de pièces
+        }
+      }
+    }
+    
+    return true;
+  }
+
+  /**
+   * Vérifie si un lot couvre tous les besoins
+   */
+  lotCoversNeeds(lotId, coinsBreakdown) {
+    const lot = this.products[lotId];
+    if (!lot) return false;
+    
+    // Vérifier chaque besoin
+    for (const currency in coinsBreakdown) {
+      for (const multiplier in coinsBreakdown[currency]) {
+        const needed = coinsBreakdown[currency][multiplier];
+        const provided = lot.coinLots[currency] && lot.coinLots[currency][multiplier] 
+          ? lot.coinLots[currency][multiplier] 
+          : 0;
+        
+        if (needed > provided) {
+          return false;
+        }
+      }
+    }
+    
+    return true;
+  }
+
 
   /**
    * Formate une recommandation pour l'affichage
