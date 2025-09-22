@@ -231,7 +231,7 @@ HTML;
 <html lang="<?= htmlspecialchars($lang) ?>">
 <?php include 'head-common.php'; ?>
 
-<body>
+<body data-page="aide-jeux">
 <?php
 $snipcartLanguage = $lang;
 $snipcartLocales = 'fr,en';
@@ -1798,8 +1798,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (lot.multiplier !== null && lot.multiplier !== undefined) {
           tempButton.setAttribute('data-item-custom2-name', 'Multiplicateur');
           tempButton.setAttribute('data-item-custom2-type', 'dropdown');
-          tempButton.setAttribute('data-item-custom2-options', '×1|×10|×100|×1000|×10000');
-          tempButton.setAttribute('data-item-custom2-value', `×${lot.multiplier}`);
+          tempButton.setAttribute('data-item-custom2-options', '1|10|100|1000|10000');
+          tempButton.setAttribute('data-item-custom2-value', `${lot.multiplier}`);
         }
         
         // Ajouter temporairement au DOM et cliquer
