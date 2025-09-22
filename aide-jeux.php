@@ -1324,10 +1324,11 @@ echo $snipcartInit;
             
             <!-- Bouton d'ajout au panier global -->
             <div class="text-center">
-              <button id="add-all-lots-to-cart" 
-                      class="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              <button id="add-all-lots-to-cart"
+                      class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"
                       style="display: none;">
-                🛒 Ajouter tous les lots au panier
+
+                Ajouter tous les lots au panier
               </button>
               
               <p class="text-sm text-gray-400 mt-4">
