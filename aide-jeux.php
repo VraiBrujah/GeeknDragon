@@ -29,7 +29,20 @@ $gameHelpTranslations = [
                 'organize' => 'Organisez sur votre table',
                 'reference' => 'Consultez pendant le jeu'
             ],
-            'comingSoon' => 'Bientôt disponible'
+            'comingSoon' => 'Bientôt disponible',
+            'currencyLots' => [
+                'title' => 'Lots de pièces recommandés',
+                'subtitle' => 'Transformez instantanément la conversion en trésor physique optimisé.',
+                'empty' => 'Aucun lot recommandé pour le montant actuel.',
+                'button' => 'Ajouter tout au panier',
+                'error' => 'Impossible d\'ajouter les lots recommandés pour le moment. Veuillez réessayer.',
+                'bundleLabel' => 'Couvre tous les multiplicateurs',
+                'perMultiplier' => 'pièces par multiplicateur',
+                'lotCount' => 'Lots',
+                'multiplierLabel' => 'Multiplicateur',
+                'coinsLabel' => 'Pièces',
+                'summary' => 'Total de pièces recommandées'
+            ]
         ]
     ],
     'en' => [
@@ -48,10 +61,23 @@ $gameHelpTranslations = [
             'howToUse' => [
                 'title' => 'How to use your triptychs',
                 'fold' => 'Fold into 3 panels',
-                'organize' => 'Organize on your table', 
+                'organize' => 'Organize on your table',
                 'reference' => 'Reference during play'
             ],
-            'comingSoon' => 'Coming soon'
+            'comingSoon' => 'Coming soon',
+            'currencyLots' => [
+                'title' => 'Recommended coin bundles',
+                'subtitle' => 'Turn the conversion into an optimised physical treasury with one click.',
+                'empty' => 'No bundle recommendation for this amount yet.',
+                'button' => 'Add all to cart',
+                'error' => 'Unable to add the recommended bundles for now. Please try again.',
+                'bundleLabel' => 'Covers every multiplier',
+                'perMultiplier' => 'coins per multiplier',
+                'lotCount' => 'Bundles',
+                'multiplierLabel' => 'Multiplier',
+                'coinsLabel' => 'Coins',
+                'summary' => 'Recommended coins in total'
+            ]
         ]
     ]
 ];
@@ -1301,6 +1327,24 @@ echo $snipcartInit;
             </div>
           </div>
         </div>
+
+        <section id="currency-lot-recommendations" class="mb-12 hidden bg-indigo-900/10 border border-indigo-700/30 rounded-xl p-6" hidden aria-hidden="true">
+          <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col gap-4">
+              <div>
+                <h6 class="text-indigo-300 font-bold text-lg" data-i18n="gameHelp.currencyLots.title">Lots de pièces recommandés</h6>
+                <p class="text-sm text-gray-300" data-i18n="gameHelp.currencyLots.subtitle">Transformez instantanément la conversion en trésor physique optimisé.</p>
+              </div>
+              <ul id="currency-lot-recommendations-list" class="space-y-3"></ul>
+              <p id="currency-lot-recommendations-empty" class="text-sm text-gray-400" data-i18n="gameHelp.currencyLots.empty" hidden>Aucun lot recommandé pour le montant actuel.</p>
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <p id="currency-lot-recommendations-summary" class="text-sm text-gray-200"></p>
+                <button type="button" id="currency-lot-recommendations-button" class="btn btn-primary px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed" data-i18n="gameHelp.currencyLots.button" disabled>Ajouter tout au panier</button>
+              </div>
+              <p id="currency-lot-recommendations-error" class="text-sm text-red-400 hidden" role="alert" data-i18n="gameHelp.currencyLots.error">Impossible d'ajouter les lots recommandés pour le moment. Veuillez réessayer.</p>
+            </div>
+          </div>
+        </section>
       </div>
 
       <!-- ===== L'IMPORTANCE DU TRÉSOR PHYSIQUE ===== -->
@@ -1707,6 +1751,7 @@ function confirmDownload() {
 <script src="/js/hero-videos.js"></script>
 <script src="/js/boutique-premium.js"></script>
 <script src="/js/currency-converter.js"></script>
+<script src="/js/currency-lot-recommender.js"></script>
 
 </body>
 </html>
