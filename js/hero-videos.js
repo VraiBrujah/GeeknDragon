@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
       v.muted = true;
       v.playsInline = true;
       v.setAttribute('playsinline', ''); // iOS
-      v.preload = 'auto'; // Changé pour précharger les vidéos lourdes
+      v.preload = 'metadata'; // Optimisation: charge seulement les métadonnées
       v.autoplay = autoPlayAllowed;
       v.loop = false; // géré au cas par cas
       // Layout + anim
