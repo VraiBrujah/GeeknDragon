@@ -58,6 +58,38 @@ $gameHelpTranslations = [
 
 $translations = array_merge_recursive($translations, $gameHelpTranslations[$lang]);
 
+$coinBundleIds = ['lot10', 'lot25', 'lot50-essence', 'lot50-tresorerie'];
+$coinBundleMetadata = [];
+$productsPath = __DIR__ . '/data/products.json';
+
+if (is_file($productsPath)) {
+    $productsContent = file_get_contents($productsPath);
+    if ($productsContent !== false) {
+        $productsData = json_decode($productsContent, true);
+        if (is_array($productsData)) {
+            foreach ($coinBundleIds as $productId) {
+                if (!isset($productsData[$productId]['coinBundles'])) {
+                    continue;
+                }
+
+                $productData = $productsData[$productId];
+                $coinBundleMetadata[] = [
+                    'id' => $productId,
+                    'name' => [
+                        'fr' => $productData['name'] ?? '',
+                        'en' => $productData['name_en'] ?? ($productData['name'] ?? ''),
+                    ],
+                    'price' => $productData['price'] ?? null,
+                    'coinBundles' => $productData['coinBundles'],
+                    'url' => langUrl('product.php?id=' . rawurlencode($productId)),
+                ];
+            }
+        }
+    }
+}
+
+$coinBundleJson = json_encode($coinBundleMetadata, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?: '[]';
+
 $extraHead = <<<HTML
 <style>
 .tool-content { display: none; }
@@ -1265,12 +1297,19 @@ echo $snipcartInit;
               <h6 class="text-indigo-300 font-bold text-lg mb-4">✨ Recommandations optimales</h6>
               <div id="currency-best" class="text-gray-200"></div>
             </div>
-          </div>
         </div>
       </div>
+    </div>
 
-      <!-- ===== L'IMPORTANCE DU TRÉSOR PHYSIQUE ===== -->
-      <div class="bg-gradient-to-r from-amber-900/30 to-yellow-900/20 rounded-xl p-8 border border-amber-700/50 mb-16">
+    <div class="mt-12" id="coin-bundle-advisor">
+      <h4 id="coin-bundle-advisor-title" class="text-2xl font-bold text-center text-indigo-300 mb-6">📦 Lots recommandés</h4>
+      <div id="coin-bundle-advisor-content" class="bg-gray-800/60 rounded-xl border border-indigo-700/40 p-6 text-gray-300 text-sm leading-relaxed">
+        <p class="text-center text-gray-400">Utilisez le convertisseur pour définir vos besoins en pièces.</p>
+      </div>
+    </div>
+
+    <!-- ===== L'IMPORTANCE DU TRÉSOR PHYSIQUE ===== -->
+    <div class="bg-gradient-to-r from-amber-900/30 to-yellow-900/20 rounded-xl p-8 border border-amber-700/50 mb-16">
         <div class="grid md:grid-cols-2 gap-16 items-start">
           
           <!-- Image carte de propriété cliquable -->
@@ -1437,6 +1476,7 @@ echo $snipcartInit;
 
 <?php include 'footer.php'; ?>
 
+<script id="coin-bundle-metadata" type="application/json"><?= htmlspecialchars($coinBundleJson, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?></script>
 <script src="/js/app.js"></script>
 <script>
 // Fonction pour retourner les cartes (triptyques)
@@ -1665,10 +1705,680 @@ function confirmDownload() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
+
     // Fermer le popup
     closeDownloadPopup();
 }
+
+/**
+ * Conseiller de lots permettant de proposer une combinaison minimale
+ * de produits de pièces métalliques selon les besoins saisis.
+ */
+class CoinBundleAdvisor {
+    constructor(options = {}) {
+        this.products = Array.isArray(options.products) ? options.products : [];
+        this.lang = (document.documentElement.lang || 'fr').toLowerCase();
+        this.container = document.getElementById('coin-bundle-advisor-content');
+        this.title = document.getElementById('coin-bundle-advisor-title');
+        this.section = document.getElementById('coin-bundle-advisor');
+        this.numberFormatter = new Intl.NumberFormat(this.lang === 'fr' ? 'fr-FR' : 'en-US');
+        this.currencyFormatter = new Intl.NumberFormat(this.lang === 'fr' ? 'fr-CA' : 'en-CA', { style: 'currency', currency: 'CAD' });
+        this.metalOrder = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+        this.metalInfo = {
+            platinum: { emoji: '💎', fr: 'Platine', en: 'Platinum' },
+            gold: { emoji: '🥇', fr: 'Or', en: 'Gold' },
+            electrum: { emoji: '⚡', fr: 'Électrum', en: 'Electrum' },
+            silver: { emoji: '🥈', fr: 'Argent', en: 'Silver' },
+            copper: { emoji: '🪙', fr: 'Cuivre', en: 'Copper' }
+        };
+        this.texts = this.buildTexts();
+        this.variants = this.buildVariants();
+        this.variantMap = this.variants.reduce((map, variant) => {
+            map[variant.key] = variant;
+            return map;
+        }, {});
+        this.boundConverterUpdate = (event) => {
+            if (event && event.detail && event.detail.instance) {
+                this.refreshFromConverter(event.detail.instance);
+            }
+        };
+        this.hooksInstalled = false;
+    }
+
+    buildTexts() {
+        if (this.lang === 'en') {
+            return {
+                title: 'Recommended bundles',
+                placeholder: 'Enter quantities in the multiplier table to receive a bundle combination.',
+                empty: 'No bundle required: every quantity is zero.',
+                partialCoverage: 'Some requirements cannot be fully matched. The bundles below minimise the number of purchases.',
+                combinationLabel: 'Minimal combination',
+                lotSingular: 'bundle',
+                lotPlural: 'bundles',
+                priceLabel: 'Estimated subtotal',
+                coverageTitle: 'Coverage per metal and multiplier',
+                requiredLabel: 'Required',
+                providedLabel: 'Provided',
+                variantAll: 'Every multiplier',
+                variantSinglePrefix: 'Multiplier ×',
+                coverageOk: 'Coverage secured.',
+                coverageMissing: 'Remaining quantities after optimization',
+                coinsSuppliedLabel: 'Coins supplied',
+                solutionIntro: 'Suggested bundles',
+                zeroMessage: 'Use the converter to describe your needs.',
+                solutionEmpty: 'No combination available.',
+                linkLabel: 'View bundle',
+                shortagePrefix: 'Remaining needs for',
+                noData: 'Coin bundles are not available on this page.',
+                coinsSingular: 'coin',
+                coinsPlural: 'coins',
+                perLotSuffix: 'per bundle',
+                totalSuffix: 'total'
+            };
+        }
+
+        return {
+            title: 'Lots recommandés',
+            placeholder: 'Indiquez des quantités dans le tableau multiplicateur pour obtenir une combinaison de lots.',
+            empty: 'Aucun lot nécessaire : toutes les quantités sont à zéro.',
+            partialCoverage: 'Certaines exigences ne peuvent pas être couvertes automatiquement. Les lots suivants minimisent le nombre d’achats.',
+            combinationLabel: 'Combinaison minimale',
+            lotSingular: 'lot',
+            lotPlural: 'lots',
+            priceLabel: 'Sous-total indicatif',
+            coverageTitle: 'Couverture par métal et multiplicateur',
+            requiredLabel: 'Demandé',
+            providedLabel: 'Fourni',
+            variantAll: 'Tous les multiplicateurs',
+            variantSinglePrefix: 'Multiplicateur ×',
+            coverageOk: 'Couverture assurée.',
+            coverageMissing: 'Quantités restantes après optimisation',
+            coinsSuppliedLabel: 'Pièces fournies',
+            solutionIntro: 'Lots à prévoir',
+            zeroMessage: 'Utilisez le convertisseur pour définir vos besoins.',
+            solutionEmpty: 'Aucune combinaison disponible.',
+            linkLabel: 'Voir le lot',
+            shortagePrefix: 'Besoins restants pour',
+            noData: 'Les lots de pièces ne sont pas disponibles pour cette page.',
+            coinsSingular: 'pièce',
+            coinsPlural: 'pièces',
+            perLotSuffix: 'par lot',
+            totalSuffix: 'au total'
+        };
+    }
+
+    init() {
+        if (!this.container || !this.section) {
+            return;
+        }
+
+        if (this.title) {
+            this.title.textContent = this.texts.title;
+        }
+
+        if (this.products.length === 0) {
+            this.renderNoData();
+            return;
+        }
+
+        this.renderPlaceholder();
+        this.setupManualListeners();
+        this.installConverterHooks();
+        if (window.converterInstance) {
+            this.refreshFromConverter(window.converterInstance);
+        }
+    }
+
+    renderNoData() {
+        if (!this.container) {
+            return;
+        }
+        this.container.innerHTML = `<p class="text-center text-amber-300">${this.escapeHtml(this.texts.noData)}</p>`;
+    }
+
+    renderPlaceholder(isZero = false) {
+        if (!this.container) {
+            return;
+        }
+        const message = isZero ? this.texts.empty : this.texts.placeholder;
+        this.container.innerHTML = `<p class="text-center text-gray-400">${this.escapeHtml(message)}</p>`;
+    }
+
+    setupManualListeners() {
+        const table = document.getElementById('multiplier-table');
+        if (!table) {
+            return;
+        }
+        table.addEventListener('input', () => {
+            window.setTimeout(() => {
+                this.refreshFromConverter(window.converterInstance || null);
+            }, 120);
+        }, { passive: true });
+        table.addEventListener('change', () => {
+            window.setTimeout(() => {
+                this.refreshFromConverter(window.converterInstance || null);
+            }, 120);
+        }, { passive: true });
+    }
+
+    installConverterHooks() {
+        if (this.hooksInstalled) {
+            return;
+        }
+
+        const attemptPatch = () => {
+            if (typeof CurrencyConverterPremium !== 'function') {
+                window.setTimeout(attemptPatch, 150);
+                return;
+            }
+
+            if (!CurrencyConverterPremium.prototype.__coinBundleAdvisorPatched) {
+                ['updateFromSources', 'updateFromMultipliers'].forEach((method) => {
+                    const original = CurrencyConverterPremium.prototype[method];
+                    if (typeof original !== 'function') {
+                        return;
+                    }
+                    CurrencyConverterPremium.prototype[method] = function patchedUpdate(...args) {
+                        const result = original.apply(this, args);
+                        window.dispatchEvent(new CustomEvent('gnd:converter-updated', { detail: { instance: this } }));
+                        return result;
+                    };
+                });
+                CurrencyConverterPremium.prototype.__coinBundleAdvisorPatched = true;
+            }
+
+            window.addEventListener('gnd:converter-updated', this.boundConverterUpdate);
+            this.hooksInstalled = true;
+        };
+
+        attemptPatch();
+    }
+
+    refreshFromConverter(instance) {
+        if (!this.container) {
+            return;
+        }
+
+        const requirements = this.gatherRequirements(instance);
+        const totalRequired = this.sumRequirement(requirements);
+
+        if (totalRequired === 0) {
+            this.renderPlaceholder(true);
+            return;
+        }
+
+        if (this.variants.length === 0) {
+            this.renderNoData();
+            return;
+        }
+
+        const solution = this.computeSolution(requirements);
+
+        if (solution.solution.length === 0) {
+            this.container.innerHTML = `<p class="text-center text-amber-300">${this.escapeHtml(this.texts.solutionEmpty)}</p>`;
+            return;
+        }
+
+        this.renderSolution(requirements, solution);
+    }
+
+    gatherRequirements(instance) {
+        const requirements = {};
+        const inputs = instance && instance.multiplierInputs ? Array.from(instance.multiplierInputs) : Array.from(document.querySelectorAll('#multiplier-table .multiplier-input'));
+
+        inputs.forEach((input) => {
+            const row = input.closest('tr');
+            if (!row) {
+                return;
+            }
+            const currency = row.dataset.currency;
+            if (!currency) {
+                return;
+            }
+            const multiplier = Number(input.dataset.multiplier || 0);
+            const rawValue = (input.value || '').toString().replace(/\D/g, '');
+            const quantity = rawValue ? parseInt(rawValue, 10) : 0;
+            if (!requirements[currency]) {
+                requirements[currency] = {};
+            }
+            requirements[currency][multiplier] = quantity;
+        });
+
+        return requirements;
+    }
+
+    sumRequirement(requirements) {
+        let total = 0;
+        Object.values(requirements).forEach((combos) => {
+            Object.values(combos).forEach((value) => {
+                total += Number(value) || 0;
+            });
+        });
+        return total;
+    }
+
+    computeSolution(requirements) {
+        const remaining = this.cloneRequirement(requirements);
+        const usageMap = {};
+        const orderedUsage = [];
+        let iterations = 0;
+        const maxIterations = 250;
+
+        while (this.hasRemaining(remaining) && iterations < maxIterations) {
+            const best = this.selectBestVariant(remaining);
+            if (!best) {
+                break;
+            }
+
+            const { variant } = best;
+            const key = variant.key;
+            if (!usageMap[key]) {
+                usageMap[key] = { variant, quantity: 0 };
+                orderedUsage.push(usageMap[key]);
+            }
+            usageMap[key].quantity += 1;
+            this.applyVariant(remaining, variant);
+            iterations += 1;
+        }
+
+        const provided = this.computeProvidedTotals(orderedUsage);
+        const covered = !this.hasRemaining(remaining);
+
+        return {
+            solution: orderedUsage,
+            provided,
+            remaining,
+            covered
+        };
+    }
+
+    buildVariants() {
+        const variants = [];
+
+        this.products.forEach((product) => {
+            const bundle = product.coinBundles;
+            if (!bundle || !bundle.type) {
+                return;
+            }
+
+            if (bundle.type === 'singleMultiplier') {
+                const perMetal = bundle.perMetal || {};
+                const multipliers = Array.isArray(bundle.multipliers) ? bundle.multipliers : [];
+                multipliers.forEach((multiplier) => {
+                    const composition = {};
+                    let totalCoins = 0;
+                    Object.entries(perMetal).forEach(([metal, count]) => {
+                        const quantity = Number(count) || 0;
+                        totalCoins += quantity;
+                        if (!composition[metal]) {
+                            composition[metal] = {};
+                        }
+                        composition[metal][Number(multiplier)] = quantity;
+                    });
+                    variants.push({
+                        key: `${product.id}__${multiplier}`,
+                        product,
+                        type: 'singleMultiplier',
+                        multiplier: Number(multiplier),
+                        composition,
+                        totalCoins
+                    });
+                });
+                return;
+            }
+
+            if (bundle.type === 'fullSpectrum') {
+                const perMetal = bundle.perMetal || {};
+                const composition = {};
+                let totalCoins = 0;
+                Object.entries(perMetal).forEach(([metal, counts]) => {
+                    const metalComposition = {};
+                    Object.entries(counts || {}).forEach(([multiplier, count]) => {
+                        const numericMultiplier = Number(multiplier);
+                        const quantity = Number(count) || 0;
+                        metalComposition[numericMultiplier] = quantity;
+                        totalCoins += quantity;
+                    });
+                    composition[metal] = metalComposition;
+                });
+                variants.push({
+                    key: `${product.id}__all`,
+                    product,
+                    type: 'fullSpectrum',
+                    multiplier: null,
+                    composition,
+                    totalCoins
+                });
+            }
+        });
+
+        return variants;
+    }
+
+    cloneRequirement(requirements) {
+        const clone = {};
+        Object.entries(requirements).forEach(([metal, combos]) => {
+            const comboClone = {};
+            Object.entries(combos || {}).forEach(([multiplier, value]) => {
+                const quantity = Number(value) || 0;
+                if (quantity > 0) {
+                    comboClone[Number(multiplier)] = quantity;
+                }
+            });
+            if (Object.keys(comboClone).length > 0) {
+                clone[metal] = comboClone;
+            }
+        });
+        return clone;
+    }
+
+    hasRemaining(remaining) {
+        return Object.values(remaining).some((combos) => Object.values(combos).some((value) => (Number(value) || 0) > 0));
+    }
+
+    selectBestVariant(remaining) {
+        let best = null;
+
+        this.variants.forEach((variant) => {
+            let coverage = 0;
+            let oversupply = 0;
+
+            Object.entries(variant.composition).forEach(([metal, combos]) => {
+                const remainingCombos = remaining[metal] || {};
+                Object.entries(combos || {}).forEach(([multiplier, providedCount]) => {
+                    const provided = Number(providedCount) || 0;
+                    const required = Number(remainingCombos[Number(multiplier)]) || 0;
+                    coverage += Math.min(required, provided);
+                    oversupply += Math.max(0, provided - required);
+                });
+            });
+
+            if (coverage <= 0) {
+                return;
+            }
+
+            const price = typeof variant.product.price === 'number' ? Math.max(variant.product.price, 1) : 1;
+            const score = coverage / price;
+
+            if (!best || score > best.score || (score === best.score && (coverage > best.coverage || (coverage === best.coverage && oversupply < best.oversupply)))) {
+                best = { variant, coverage, oversupply, score };
+            }
+        });
+
+        return best;
+    }
+
+    applyVariant(remaining, variant) {
+        Object.entries(variant.composition).forEach(([metal, combos]) => {
+            if (!remaining[metal]) {
+                remaining[metal] = {};
+            }
+            Object.entries(combos || {}).forEach(([multiplier, providedCount]) => {
+                const key = Number(multiplier);
+                const provided = Number(providedCount) || 0;
+                const current = Number(remaining[metal][key]) || 0;
+                const updated = current - provided;
+                remaining[metal][key] = updated > 0 ? updated : 0;
+            });
+        });
+    }
+
+    computeProvidedTotals(solution) {
+        const totals = {};
+        solution.forEach((entry) => {
+            const { variant, quantity } = entry;
+            const factor = Number(quantity) || 0;
+            Object.entries(variant.composition).forEach(([metal, combos]) => {
+                if (!totals[metal]) {
+                    totals[metal] = {};
+                }
+                Object.entries(combos || {}).forEach(([multiplier, count]) => {
+                    const key = Number(multiplier);
+                    const qty = Number(count) || 0;
+                    totals[metal][key] = (totals[metal][key] || 0) + qty * factor;
+                });
+            });
+        });
+        return totals;
+    }
+
+    buildCoverageDetails(requirements, provided) {
+        const metals = new Set([
+            ...Object.keys(requirements || {}),
+            ...Object.keys(provided || {})
+        ]);
+
+        return Array.from(metals).sort((a, b) => {
+            return this.metalOrder.indexOf(a) - this.metalOrder.indexOf(b);
+        }).map((metal) => {
+            const reqCombos = requirements[metal] || {};
+            const provCombos = provided[metal] || {};
+            const multipliers = new Set([
+                ...Object.keys(reqCombos),
+                ...Object.keys(provCombos)
+            ]);
+            const detail = Array.from(multipliers).sort((a, b) => Number(a) - Number(b)).map((multiplier) => {
+                return {
+                    multiplier: Number(multiplier),
+                    required: Number(reqCombos[multiplier]) || 0,
+                    provided: Number(provCombos[multiplier]) || 0
+                };
+            });
+            const totals = detail.reduce((acc, item) => {
+                acc.required += item.required;
+                acc.provided += item.provided;
+                return acc;
+            }, { required: 0, provided: 0 });
+            return { metal, detail, totals };
+        }).filter((item) => item.detail.some((row) => row.required > 0 || row.provided > 0));
+    }
+
+    renderSolution(requirements, solution) {
+        if (!this.container) {
+            return;
+        }
+
+        const totalLots = solution.solution.reduce((acc, entry) => acc + (Number(entry.quantity) || 0), 0);
+        const lotLabel = this.getLotLabel(totalLots);
+        const priceTotal = solution.solution.reduce((acc, entry) => {
+            const price = typeof entry.variant.product.price === 'number' ? entry.variant.product.price : 0;
+            return acc + price * entry.quantity;
+        }, 0);
+        const priceLine = priceTotal > 0 ? `<p class="text-sm text-gray-400">${this.escapeHtml(this.texts.priceLabel)} : <span class="text-indigo-200 font-medium">${this.formatCurrency(priceTotal)}</span></p>` : '';
+        const warningBlock = solution.covered ? `<p class="text-xs text-emerald-300">${this.escapeHtml(this.texts.coverageOk)}</p>` : this.renderShortage(solution.remaining);
+        const listItems = solution.solution.map((entry) => this.renderSolutionItem(entry)).join('');
+        const coverageDetails = this.renderCoverageDetails(requirements, solution.provided);
+
+        this.container.innerHTML = `
+      <div class="space-y-4">
+        ${warningBlock}
+        <div class="space-y-1">
+          <p class="text-sm text-gray-300">${this.escapeHtml(this.texts.combinationLabel)} : <span class="font-semibold text-indigo-200">${this.escapeHtml(lotLabel)}</span></p>
+          ${priceLine}
+        </div>
+        <div>
+          <h5 class="text-sm font-semibold text-gray-200 uppercase tracking-wide">${this.escapeHtml(this.texts.solutionIntro)}</h5>
+          <ul class="mt-2 space-y-3">${listItems}</ul>
+        </div>
+        ${coverageDetails}
+      </div>
+    `;
+    }
+
+    renderSolutionItem(entry) {
+        const { variant, quantity } = entry;
+        const product = variant.product || {};
+        const productName = this.escapeHtml(this.getProductName(product));
+        const multiplierLabel = this.escapeHtml(this.getVariantLabel(variant));
+        const quantityLabel = this.formatNumber(quantity);
+        const coinsPerLot = this.escapeHtml(this.getCoinsPerLotText(variant.totalCoins));
+        const totalCoins = this.escapeHtml(this.getTotalCoinsText(variant.totalCoins * quantity));
+        const url = this.escapeAttribute(product.url || '#');
+        const linkLabel = this.escapeHtml(this.texts.linkLabel);
+
+        return `
+      <li class="bg-gray-900/60 border border-gray-700/50 rounded-xl p-4 shadow-sm">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-base font-semibold text-gray-100">${productName}</p>
+            <p class="text-xs text-gray-400">${multiplierLabel} · ${coinsPerLot}</p>
+            <p class="text-xs text-gray-500 mt-1">${this.escapeHtml(this.texts.coinsSuppliedLabel)} : <span class="text-gray-200 font-medium">${totalCoins}</span></p>
+          </div>
+          <div class="text-right space-y-2">
+            <p class="text-xl font-bold text-indigo-200">${quantityLabel}×</p>
+            <a href="${url}" class="text-xs text-indigo-300 hover:text-indigo-100 underline">${linkLabel}</a>
+          </div>
+        </div>
+      </li>
+    `;
+    }
+
+    renderCoverageDetails(requirements, provided) {
+        const details = this.buildCoverageDetails(requirements, provided);
+        if (details.length === 0) {
+            return '';
+        }
+
+        const cards = details.map((detail) => {
+            const info = this.metalInfo[detail.metal] || { emoji: '', fr: detail.metal, en: detail.metal };
+            const label = this.escapeHtml(this.lang === 'en' ? (info.en || detail.metal) : (info.fr || detail.metal));
+            const emoji = info.emoji ? `${info.emoji} ` : '';
+            const totalText = `${this.formatNumber(detail.totals.required)} → ${this.formatNumber(detail.totals.provided)}`;
+            const rows = detail.detail.map((row) => {
+                const statusClass = row.provided >= row.required && row.required > 0 ? 'text-emerald-300' : (row.provided < row.required ? 'text-amber-300' : 'text-gray-300');
+                return `<li class="flex justify-between"><span class="text-gray-400">×${this.formatNumber(row.multiplier)}</span><span class="${statusClass} font-medium">${this.formatNumber(row.required)} → ${this.formatNumber(row.provided)}</span></li>`;
+            }).join('');
+            return `
+        <div class="bg-gray-900/60 border border-gray-700/40 rounded-lg p-4">
+          <h6 class="text-sm font-semibold text-gray-100 mb-2">${emoji}${label}</h6>
+          <p class="text-xs text-gray-400 mb-3">${this.escapeHtml(this.texts.requiredLabel)} → ${this.escapeHtml(this.texts.providedLabel)} : <span class="text-indigo-200 font-medium">${totalText}</span></p>
+          <ul class="space-y-1 text-xs">${rows}</ul>
+        </div>
+      `;
+        }).join('');
+
+        return `
+      <div class="space-y-3">
+        <h5 class="text-sm font-semibold text-gray-200 uppercase tracking-wide">${this.escapeHtml(this.texts.coverageTitle)}</h5>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">${cards}</div>
+      </div>
+    `;
+    }
+
+    renderShortage(remaining) {
+        const entries = [];
+        Object.entries(remaining).forEach(([metal, combos]) => {
+            const total = Object.values(combos || {}).reduce((acc, value) => acc + (Number(value) || 0), 0);
+            if (total <= 0) {
+                return;
+            }
+            const info = this.metalInfo[metal] || { emoji: '', fr: metal, en: metal };
+            const label = this.escapeHtml(this.lang === 'en' ? (info.en || metal) : (info.fr || metal));
+            const emoji = info.emoji ? `${info.emoji} ` : '';
+            const details = Object.entries(combos || {}).filter(([, value]) => (Number(value) || 0) > 0).map(([multiplier, value]) => {
+                return `×${this.formatNumber(Number(multiplier))}: ${this.formatNumber(Number(value) || 0)}`;
+            }).join(', ');
+            entries.push(`<li>${emoji}${label} — ${this.escapeHtml(details)}</li>`);
+        });
+
+        if (entries.length === 0) {
+            return `<p class="text-xs text-emerald-300">${this.escapeHtml(this.texts.coverageOk)}</p>`;
+        }
+
+        return `
+      <div class="bg-amber-900/30 border border-amber-700/40 text-amber-200 text-xs rounded-lg p-3 space-y-2">
+        <p>${this.escapeHtml(this.texts.partialCoverage)}</p>
+        <ul class="space-y-1 list-disc list-inside">${entries.join('')}</ul>
+      </div>
+    `;
+    }
+
+    getLotLabel(count) {
+        const label = count > 1 ? this.texts.lotPlural : this.texts.lotSingular;
+        return `${this.formatNumber(count)} ${label}`;
+    }
+
+    getVariantLabel(variant) {
+        if (variant.type === 'singleMultiplier' && typeof variant.multiplier === 'number') {
+            return `${this.texts.variantSinglePrefix}${this.formatNumber(variant.multiplier)}`;
+        }
+        return this.texts.variantAll;
+    }
+
+    getCoinsPerLotText(totalCoins) {
+        const label = totalCoins > 1 ? this.texts.coinsPlural : this.texts.coinsSingular;
+        return `${this.formatNumber(totalCoins)} ${label} ${this.texts.perLotSuffix}`;
+    }
+
+    getTotalCoinsText(totalCoins) {
+        const label = totalCoins > 1 ? this.texts.coinsPlural : this.texts.coinsSingular;
+        return `${this.formatNumber(totalCoins)} ${label}`;
+    }
+
+    getProductName(product) {
+        if (!product || typeof product !== 'object') {
+            return '';
+        }
+
+        const names = typeof product.name === 'object' && product.name !== null ? product.name : {};
+
+        if (this.lang === 'en') {
+            return names.en || names.fr || (typeof product.name === 'string' ? product.name : '');
+        }
+
+        return names.fr || names.en || (typeof product.name === 'string' ? product.name : '');
+    }
+
+    formatNumber(value) {
+        return this.numberFormatter.format(Number(value) || 0);
+    }
+
+    formatCurrency(value) {
+        return this.currencyFormatter.format(Number(value) || 0);
+    }
+
+    escapeHtml(value) {
+        if (value === null || value === undefined) {
+            return '';
+        }
+        return String(value).replace(/[&<>"']/g, (char) => {
+            switch (char) {
+            case '&':
+                return '&amp;';
+            case '<':
+                return '&lt;';
+            case '>':
+                return '&gt;';
+            case '"':
+                return '&quot;';
+            case '\'':
+                return '&#039;';
+            default:
+                return char;
+            }
+        });
+    }
+
+    escapeAttribute(value) {
+        return this.escapeHtml(value).replace(/"/g, '&quot;');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const metadataElement = document.getElementById('coin-bundle-metadata');
+    let products = [];
+
+    if (metadataElement) {
+        try {
+            products = JSON.parse(metadataElement.textContent || '[]');
+        } catch (error) {
+            console.error('Impossible d\'analyser les métadonnées des lots de pièces :', error);
+        }
+    }
+
+    const advisor = new CoinBundleAdvisor({ products });
+    advisor.init();
+});
 </script>
 <script src="/js/hero-videos.js"></script>
 <script src="/js/boutique-premium.js"></script>

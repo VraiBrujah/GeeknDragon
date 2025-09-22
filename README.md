@@ -19,6 +19,45 @@ The corresponding product identifiers are `lot10`, `lot25`, `lot50-essence` and 
 
 Need more than 50 pieces or a custom assortment? Request a personalized chest through the [quote form](contact.php).
 
+### Coin bundle metadata
+
+The `data/products.json` file now exposes a `coinBundles` object for every physical coin bundle. It provides a structured view of the coins delivered by each product so that client-side tools (such as the help page converter) can compute optimal bundle combinations.
+
+Each entry follows one of the following shapes:
+
+```json
+"coinBundles": {
+  "type": "singleMultiplier",
+  "perMetal": {
+    "copper": 2,
+    "silver": 2,
+    "electrum": 2,
+    "gold": 2,
+    "platinum": 2
+  },
+  "multipliers": [1, 10, 100, 1000, 10000]
+}
+```
+
+- `type: "singleMultiplier"` indicates that the customer chooses a single multiplier when ordering (e.g. lots `lot10` and `lot50-tresorerie`). The `perMetal` map lists how many coins of each metal are included for the selected multiplier. The `multipliers` array enumerates the available multiplier options.
+
+```json
+"coinBundles": {
+  "type": "fullSpectrum",
+  "perMetal": {
+    "copper": {"1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1},
+    "silver": {"1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1},
+    "electrum": {"1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1},
+    "gold": {"1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1},
+    "platinum": {"1": 1, "10": 1, "100": 1, "1000": 1, "10000": 1}
+  }
+}
+```
+
+- `type: "fullSpectrum"` describes assortments delivering every multiplier for each metal (lots `lot25` and `lot50-essence`). For this type the inner map stores explicit counts per multiplier for each metal.
+
+When a new bundle is introduced, reuse one of these structures so that the front-end helper can continue to infer optimal purchase recommendations.
+
 ### Adding product images
 
 Place product photos under `images/Piece/pro/`. Each item typically uses a full‑resolution image and a 300 px thumbnail (e.g. `lot10Piece.png` and `lot10Piece-300.png`).
