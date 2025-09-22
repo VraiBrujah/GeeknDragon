@@ -22,6 +22,14 @@
   
   --gd-shadow:        0 4px 6px -1px rgba(0, 0, 0, 0.3);
   --gd-shadow-lg:     0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  
+  /* Variables Snipcart pour inputs */
+  --color-input: #ffffff;
+  --bgColor-input: #1e293b;
+  --color-inputPlaceholder: #94a3b8;
+  
+  /* Force color-scheme pour inputs */
+  color-scheme: dark;
 }
 
 /* =================================================================== */

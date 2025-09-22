@@ -41,7 +41,8 @@
       "Bash(md5sum:*)",
       "Bash(tree:*)",
       "Bash(git log:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "WebSearch"
     ],
     "deny": [],
     "ask": []
