@@ -84,7 +84,15 @@ class CurrencyConverterPremium {
         e.target.value = e.target.value.replace(/[^0-9]/g, '');
         debouncedUpdateSources();
       } else if (e.target.matches('.multiplier-input')) {
-        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        const sanitized = e.target.value.replace(/[^0-9]/g, '');
+        e.target.value = sanitized;
+
+        if (sanitized && Number.parseInt(sanitized, 10) > 0) {
+          e.target.dataset.userEdited = 'true';
+        } else {
+          delete e.target.dataset.userEdited;
+        }
+
         debouncedUpdateMultipliers();
       }
     }, { passive: true });
@@ -113,6 +121,7 @@ class CurrencyConverterPremium {
       const multiplier = parseInt(input.dataset.multiplier);
       const value = Math.floor(baseValue / (this.rates[currency] * multiplier));
       input.value = value > 0 ? this.nf.format(value) : '';
+      delete input.dataset.userEdited;
     });
     
     this.updateMetalCards(baseValue);
