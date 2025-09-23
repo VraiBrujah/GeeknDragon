@@ -1042,7 +1042,8 @@ echo $snipcartInit;
             <div class="text-center">
               <div class="text-2xl mb-2">📝</div>
               <p class="text-gray-300 text-sm">
-                <strong>Notes :</strong> Annotez au crayon les modifications temporaires
+                <strong>Notes :</strong> Annotez au crayon les modifications temporaires<br>
+                <em>Conseil pro : Utilisez des crayons Staedtler 8B ou 9B pour un marquage optimal</em>
               </p>
             </div>
           </div>
