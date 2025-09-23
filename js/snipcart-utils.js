@@ -94,10 +94,20 @@ class SnipcartUtils {
      * Ajoute plusieurs produits au panier en lot
      */
     static addMultipleToCart(products, onProgress = null) {
+        if (!products || products.length === 0) {
+            if (onProgress) onProgress(0, 0);
+            return;
+        }
+
         let added = 0;
         
-        products.forEach((productData, index) => {
-            setTimeout(() => {
+        // Fonction récursive pour ajouter un produit à la fois avec délai adaptatif
+        const addNext = (index) => {
+            if (index >= products.length) return;
+            
+            const productData = products[index];
+            
+            try {
                 this.addToCart(productData.product, {
                     quantity: productData.quantity,
                     customFields: productData.customFields || {}
@@ -107,8 +117,19 @@ class SnipcartUtils {
                 if (onProgress) {
                     onProgress(added, products.length);
                 }
-            }, index * 200); // Délai entre chaque ajout pour éviter les conflits
-        });
+                
+                // Délai plus long pour être sûr que Snipcart a traité l'ajout
+                setTimeout(() => addNext(index + 1), 500);
+                
+            } catch (error) {
+                console.error('Erreur ajout produit au panier:', error, productData);
+                // Continuer avec le suivant même en cas d'erreur
+                setTimeout(() => addNext(index + 1), 500);
+            }
+        };
+        
+        // Commencer l'ajout séquentiel
+        addNext(0);
     }
 
     /**
