@@ -1749,11 +1749,13 @@ function confirmDownload() {
 </script>
 <script src="/js/hero-videos.js"></script>
 <script src="/js/boutique-premium.js"></script>
+<script src="/js/snipcart-utils.js"></script>
+<script src="/js/coin-lot-analyzer.js"></script>
 <script src="/js/dynamic-coin-recommender.js"></script>
 <script src="/js/currency-converter.js"></script>
 
 <script>
-// Gestionnaire pour le bouton d'ajout au panier (utilise le même système que la boutique)
+// Gestionnaire pour le bouton d'ajout au panier (utilise les utilitaires réutilisables)
 document.addEventListener('DOMContentLoaded', function() {
   const addToCartButton = document.getElementById('add-all-lots-to-cart');
   
@@ -1762,92 +1764,70 @@ document.addEventListener('DOMContentLoaded', function() {
       const lotsData = JSON.parse(this.dataset.lotsData || '[]');
       
       if (lotsData.length === 0) {
-        alert('Aucun lot à ajouter au panier.');
+        const lang = document.documentElement.lang || 'fr';
+        const message = lang === 'en' ? 'No lots to add to cart.' : 'Aucun lot à ajouter au panier.';
+        alert(message);
         return;
       }
       
-      // Créer des boutons Snipcart virtuels et les cliquer (même système que la boutique)
-      lotsData.forEach((lot, index) => {
-        // L'ID reste le même (pas de multiplicateur dans l'ID)
-        const productId = lot.productId;
+      // Convertir les données en format SnipcartUtils
+      const productsToAdd = lotsData.map(lot => {
+        const product = window.products?.[lot.productId];
         
-        // Utiliser le displayName s'il existe, sinon obtenir le nom du produit dynamiquement
-        let productName = lot.displayName;
-        if (!productName) {
-          const getProductName = (id) => {
-            const recommender = window.dynamicRecommender;
-            if (recommender && recommender.products && recommender.products[id]) {
-              return recommender.products[id].name;
-            }
-            // Fallback minimal si pas encore chargé
-            return id.replace(/^coin-/, "").replace(/-/g, " ");
-          };
-          productName = getProductName(lot.productId);
-        }
-        
-        // Créer un bouton temporaire invisible avec les mêmes attributs que la boutique
-        const tempButton = document.createElement('button');
-        tempButton.className = 'snipcart-add-item';
-        tempButton.style.display = 'none';
-        tempButton.setAttribute('data-item-id', productId);
-        tempButton.setAttribute('data-item-name', productName);
-        tempButton.setAttribute('data-item-name-fr', productName);
-        tempButton.setAttribute('data-item-name-en', productName);
-        tempButton.setAttribute('data-item-description', `Lot de pièces D&D - ${productName}`);
-        tempButton.setAttribute('data-item-price', (lot.price / lot.quantity).toFixed(2));
-        tempButton.setAttribute('data-item-url', window.location.href);
-        tempButton.setAttribute('data-item-quantity', lot.quantity.toString());
-        
-        // Pour les produits personnalisables avec métal spécifique
-        const product = window.products ? window.products[lot.productId] : null;
-        if (product && product.customizable && lot.customMetal) {
-          // Traduire le métal en français pour Snipcart
-          const metalTranslation = {
-            copper: 'cuivre',
-            silver: 'argent',
-            electrum: 'électrum', 
-            gold: 'or',
-            platinum: 'platine'
-          };
-          
-          const metalFR = metalTranslation[lot.customMetal] || lot.customMetal;
-          const multiplier = lot.customMultiplier || 1;
-          
-          // Champ pour la matière (index 1) - métal spécifique
-          tempButton.setAttribute('data-item-custom1-name', 'Métal');
-          tempButton.setAttribute('data-item-custom1-type', 'dropdown');
-          tempButton.setAttribute('data-item-custom1-options', 'cuivre|argent|électrum|or|platine');
-          tempButton.setAttribute('data-item-custom1-value', metalFR);
-          
-          // Champ pour le multiplicateur (index 2) - multiplicateur spécifique
-          tempButton.setAttribute('data-item-custom2-name', 'Multiplicateur');
-          tempButton.setAttribute('data-item-custom2-type', 'dropdown');
-          tempButton.setAttribute('data-item-custom2-options', '1|10|100|1000|10000');
-          tempButton.setAttribute('data-item-custom2-value', multiplier.toString());
-        } else if (product && product.customizable) {
-          // Fallback pour les produits personnalisables sans spécification
-          tempButton.setAttribute('data-item-custom1-name', 'Métal');
-          tempButton.setAttribute('data-item-custom1-type', 'dropdown');
-          tempButton.setAttribute('data-item-custom1-options', 'cuivre|argent|électrum|or|platine');
-          tempButton.setAttribute('data-item-custom1-value', 'cuivre');
-          
-          tempButton.setAttribute('data-item-custom2-name', 'Multiplicateur');
-          tempButton.setAttribute('data-item-custom2-type', 'dropdown');
-          tempButton.setAttribute('data-item-custom2-options', '1|10|100|1000|10000');
-          tempButton.setAttribute('data-item-custom2-value', '1');
-        }
-        
-        // Ajouter temporairement au DOM et cliquer
-        document.body.appendChild(tempButton);
-        tempButton.click();
-        
-        // Nettoyer après un délai court
-        setTimeout(() => {
-          if (tempButton.parentNode) {
-            tempButton.parentNode.removeChild(tempButton);
-          }
-        }, 100);
+        return {
+          product: {
+            id: lot.productId,
+            name: lot.displayName || product?.name || lot.productId,
+            summary: product?.summary || `Lot de pièces D&D - ${lot.displayName || product?.name || lot.productId}`,
+            price: lot.price,
+            url: `product.php?id=${encodeURIComponent(lot.productId)}`
+          },
+          quantity: lot.quantity,
+          customFields: lot.customFields || {}
+        };
       });
+      
+      // Utiliser les utilitaires Snipcart pour ajouter au panier
+      if (window.SnipcartUtils) {
+        window.SnipcartUtils.addMultipleToCart(productsToAdd, (added, total) => {
+          if (added === total) {
+            const lang = document.documentElement.lang || 'fr';
+            const message = lang === 'en' ? 
+              `${total} product(s) added to cart successfully!` : 
+              `${total} produit(s) ajouté(s) au panier avec succès !`;
+            
+            // Afficher un message de succès plus élégant
+            const successDiv = document.createElement('div');
+            successDiv.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+            successDiv.innerHTML = `
+              <div class="flex items-center gap-2">
+                <span class="text-xl">✅</span>
+                <span>${message}</span>
+              </div>
+            `;
+            
+            document.body.appendChild(successDiv);
+            
+            // Animation d'entrée
+            setTimeout(() => {
+              successDiv.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Animation de sortie et suppression
+            setTimeout(() => {
+              successDiv.style.transform = 'translateX(full)';
+              setTimeout(() => {
+                if (successDiv.parentNode) {
+                  successDiv.parentNode.removeChild(successDiv);
+                }
+              }, 300);
+            }, 3000);
+          }
+        });
+      } else {
+        console.error('SnipcartUtils non disponible');
+        alert('Erreur : impossible d\'ajouter au panier');
+      }
     });
   }
 });

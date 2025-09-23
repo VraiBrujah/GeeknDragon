@@ -323,72 +323,130 @@ class CurrencyConverterPremium {
   getOptimalBreakdown(value) {
     if (value <= 0) return '';
     
-    // Trouver la combinaison avec le minimum de pièces physiques
-    let bestOption = null;
-    let minPieces = Infinity;
+    // Métaheuristique : Algorithme glouton avec recherche locale limitée
+    const bestSolution = this.findMinimalCoins(value);
     
-    // Tester chaque devise comme devise principale
-    const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
-    
-    currencies.forEach(primaryCurrency => {
-      const rate = this.rates[primaryCurrency];
-      const maxUnits = Math.floor(value / rate);
-      
-      if (maxUnits > 0) {
-        // Calculer le nombre minimal de pièces pour cette devise
-        const breakdown = this.getMinimalCoinsBreakdown(maxUnits);
-        const piecesCount = breakdown.reduce((sum, item) => sum + item.quantity, 0);
-        
-        // Calculer le reste
-        const remainderValue = value - (maxUnits * rate);
-        let remainderPieces = 0;
-        if (remainderValue > 0) {
-          remainderPieces = this.calculateRemainderPieces(remainderValue);
-        }
-        
-        const totalPieces = piecesCount + remainderPieces;
-        
-        if (totalPieces < minPieces) {
-          minPieces = totalPieces;
-          bestOption = {
-            primary: primaryCurrency,
-            primaryBreakdown: breakdown,
-            remainder: remainderValue
-          };
-        }
-      }
-    });
-    
-    if (!bestOption) return '';
+    if (!bestSolution || bestSolution.length === 0) return '';
     
     // Formater l'affichage
-    const result = [];
-    const primaryData = this.currencyData[bestOption.primary];
-    
-    // Ajouter les pièces principales avec multiplicateurs
-    bestOption.primaryBreakdown.forEach(item => {
+    const formatted = bestSolution.map(item => {
+      const data = this.currencyData[item.currency];
       if (item.multiplier === 1) {
-        result.push(`${this.nf.format(item.quantity)} ${primaryData.emoji} ${this.getCurrencyName(bestOption.primary).toLowerCase()}`);
+        return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}`;
       } else {
-        result.push(`${this.nf.format(item.quantity)} ${primaryData.emoji} ${this.getCurrencyName(bestOption.primary).toLowerCase()}(×${this.nf.format(item.multiplier)})`);
+        return `${this.nf.format(item.quantity)} ${data.emoji} ${this.getCurrencyName(item.currency).toLowerCase()}(×${this.nf.format(item.multiplier)})`;
       }
     });
     
-    // Ajouter le reste
-    if (bestOption.remainder > 0) {
-      const remainderText = this.getRemainderBreakdown(bestOption.remainder);
-      if (remainderText) {
-        result.push(remainderText);
+    // Joindre avec "et"
+    if (formatted.length > 1) {
+      const last = formatted.pop();
+      return formatted.join(', ') + ` ${this.getTranslation('shop.converter.and', 'et')} ` + last;
+    }
+    
+    return formatted.join('');
+  }
+  
+  findMinimalCoins(targetValue) {
+    // Créer toutes les dénominations possibles
+    const denoms = [];
+    ['platinum', 'gold', 'electrum', 'silver', 'copper'].forEach(currency => {
+      this.multipliers.forEach(multiplier => {
+        denoms.push({
+          currency,
+          multiplier,
+          value: this.rates[currency] * multiplier
+        });
+      });
+    });
+    
+    // Trier par valeur décroissante
+    denoms.sort((a, b) => b.value - a.value);
+    
+    let bestSolution = null;
+    let minPieces = Infinity;
+    
+    // Essayer plusieurs stratégies gloutonnes
+    for (let strategy = 0; strategy < 3; strategy++) {
+      const solution = this.greedyStrategy(targetValue, denoms, strategy);
+      const pieces = solution.reduce((sum, item) => sum + item.quantity, 0);
+      
+      if (pieces < minPieces) {
+        minPieces = pieces;
+        bestSolution = solution;
       }
     }
     
-    // Joindre avec "et"
-    if (result.length > 1) {
-      const last = result.pop();
-      return result.join(', ') + ` ${this.getTranslation('shop.converter.and', 'et')} ` + last;
+    return bestSolution;
+  }
+  
+  greedyStrategy(targetValue, denoms, strategy) {
+    const result = [];
+    let remaining = targetValue;
+    
+    switch (strategy) {
+      case 0: // Standard greedy : plus grosse valeur d'abord
+        denoms.forEach(denom => {
+          if (remaining >= denom.value) {
+            const qty = Math.floor(remaining / denom.value);
+            if (qty > 0) {
+              result.push({ ...denom, quantity: qty });
+              remaining -= qty * denom.value;
+            }
+          }
+        });
+        break;
+        
+      case 1: // Greedy modifié : éviter les gros multiplicateurs si possible
+        denoms.forEach(denom => {
+          if (remaining >= denom.value && denom.multiplier <= 100) {
+            const qty = Math.floor(remaining / denom.value);
+            if (qty > 0) {
+              result.push({ ...denom, quantity: qty });
+              remaining -= qty * denom.value;
+            }
+          }
+        });
+        // Compléter avec les gros multiplicateurs si nécessaire
+        denoms.forEach(denom => {
+          if (remaining >= denom.value) {
+            const qty = Math.floor(remaining / denom.value);
+            if (qty > 0) {
+              result.push({ ...denom, quantity: qty });
+              remaining -= qty * denom.value;
+            }
+          }
+        });
+        break;
+        
+      case 2: // Greedy par devise : une seule pièce par devise si possible
+        ['platinum', 'gold', 'electrum', 'silver', 'copper'].forEach(currency => {
+          const currencyDenoms = denoms.filter(d => d.currency === currency);
+          for (const denom of currencyDenoms) {
+            if (remaining >= denom.value) {
+              const qty = Math.min(1, Math.floor(remaining / denom.value));
+              if (qty > 0) {
+                result.push({ ...denom, quantity: qty });
+                remaining -= qty * denom.value;
+                break; // Une seule pièce de cette devise
+              }
+            }
+          }
+        });
+        // Compléter avec l'algorithme standard
+        denoms.forEach(denom => {
+          if (remaining >= denom.value) {
+            const qty = Math.floor(remaining / denom.value);
+            if (qty > 0) {
+              result.push({ ...denom, quantity: qty });
+              remaining -= qty * denom.value;
+            }
+          }
+        });
+        break;
     }
     
-    return result.join('');
+    return result;
   }
   
   calculateRemainderPieces(remainderValue) {
@@ -476,27 +534,14 @@ class CurrencyConverterPremium {
   }
   
   calculateTotalPieces(baseValue) {
-    // Calculer le nombre minimal de pièces en utilisant tous les multiplicateurs
-    let minimalPieces = 0;
-    let remaining = baseValue;
+    if (baseValue <= 0) return 0;
     
-    // Utiliser les plus gros multiplicateurs d'abord pour minimiser le nombre de pièces
-    const currencies = ['platinum', 'gold', 'electrum', 'silver', 'copper'];
+    // Utiliser la même métaheuristique que getOptimalBreakdown
+    const bestSolution = this.findMinimalCoins(baseValue);
     
-    currencies.forEach(currency => {
-      const rate = this.rates[currency];
-      const totalUnitsForThisCurrency = Math.floor(remaining / rate);
-      
-      if (totalUnitsForThisCurrency > 0) {
-        // Calculer le nombre minimal de pièces pour cette devise avec multiplicateurs
-        const breakdown = this.getMinimalCoinsBreakdown(totalUnitsForThisCurrency);
-        const piecesForThisCurrency = breakdown.reduce((sum, item) => sum + item.quantity, 0);
-        minimalPieces += piecesForThisCurrency;
-        remaining -= totalUnitsForThisCurrency * rate;
-      }
-    });
+    if (!bestSolution || bestSolution.length === 0) return 0;
     
-    return minimalPieces;
+    return bestSolution.reduce((sum, item) => sum + item.quantity, 0);
   }
   
 
@@ -523,10 +568,29 @@ class CurrencyConverterPremium {
     // Utilisation non-bloquante avec setTimeout pour performances
     setTimeout(() => {
       let recommendations = [];
-      if (window.convertCoinsToLots) {
+      
+      // Utiliser le nouvel analyseur si disponible
+      if (window.CoinLotAnalyzer && window.products) {
+        try {
+          const analyzer = new window.CoinLotAnalyzer(window.products);
+          const optimalLots = analyzer.getRecommendations(copper, silver, electrum, gold, platinum);
+          
+          // Convertir en format attendu
+          recommendations = optimalLots.map(lot => ({
+            productId: lot.productId,
+            quantity: lot.quantity,
+            price: lot.price,
+            displayName: lot.displayName,
+            customFields: lot.customFields
+          }));
+        } catch (error) {
+          console.error('Erreur dans CoinLotAnalyzer:', error);
+        }
+      }
+      
+      // Fallback vers l'ancienne méthode si nécessaire
+      if (recommendations.length === 0 && window.convertCoinsToLots) {
         recommendations = window.convertCoinsToLots(copper, silver, electrum, gold, platinum);
-      } else {
-        console.warn('window.convertCoinsToLots non disponible');
       }
       
       if (recommendations && recommendations.length > 0) {
@@ -545,6 +609,7 @@ class CurrencyConverterPremium {
     
     if (!recommendationsContent) return;
     
+    const lang = this.getCurrentLang();
     let html = '<div class="space-y-4">';
     let totalPrice = 0;
     
@@ -556,7 +621,30 @@ class CurrencyConverterPremium {
       let productName = item.displayName;
       if (!productName) {
         const product = window.products ? window.products[item.productId] : null;
-        productName = product ? (product.name || item.productId) : item.productId;
+        if (product) {
+          productName = lang === 'en' ? (product.name_en || product.name) : product.name;
+        } else {
+          productName = item.productId;
+        }
+      }
+      
+      // Afficher les variations si présentes
+      let variationsDisplay = '';
+      if (item.customFields) {
+        const variations = [];
+        Object.values(item.customFields).forEach(field => {
+          if (field.role === 'metal') {
+            const translatedMetal = window.SnipcartUtils ? 
+              window.SnipcartUtils.translateMetal(field.value, lang) : field.value;
+            variations.push(this.getTranslation('product.metal', 'Métal') + ': ' + translatedMetal);
+          } else if (field.role === 'multiplier') {
+            variations.push(this.getTranslation('product.multiplier', 'Multiplicateur') + ': ×' + field.value);
+          }
+        });
+        
+        if (variations.length > 0) {
+          variationsDisplay = `<p class="text-xs text-gray-500">${variations.join(', ')}</p>`;
+        }
       }
       
       // Afficher avec le nom traduit
@@ -565,11 +653,12 @@ class CurrencyConverterPremium {
           <div class="flex justify-between items-center">
             <div>
               <h6 class="font-medium text-gray-200">${productName}</h6>
-              <p class="text-sm text-gray-400">Quantité: ${item.quantity}</p>
+              ${variationsDisplay}
+              <p class="text-sm text-gray-400">${this.getTranslation('product.quantity', 'Quantité')}: ${item.quantity}</p>
             </div>
             <div class="text-right">
               <p class="font-bold text-green-400">$${totalItemPrice.toFixed(2)}</p>
-              <p class="text-xs text-gray-400">$${item.price.toFixed(2)} / unité</p>
+              <p class="text-xs text-gray-400">$${item.price.toFixed(2)} / ${this.getTranslation('product.unit', 'unité')}</p>
             </div>
           </div>
         </div>
@@ -579,7 +668,7 @@ class CurrencyConverterPremium {
     html += `
       <div class="border-t border-gray-600/30 pt-4">
         <div class="flex justify-between items-center text-lg font-bold">
-          <span class="text-gray-200">Total:</span>
+          <span class="text-gray-200">${this.getTranslation('shop.converter.total', 'Total')}:</span>
           <span class="text-green-400">$${totalPrice.toFixed(2)}</span>
         </div>
       </div>
@@ -590,6 +679,10 @@ class CurrencyConverterPremium {
     if (addToCartButton) {
       addToCartButton.style.display = 'block';
       addToCartButton.dataset.lotsData = JSON.stringify(recommendations);
+      
+      // Mettre à jour le texte du bouton
+      const buttonText = this.getTranslation('shop.addAllLotsToCart', 'Ajouter tous les lots au panier');
+      addToCartButton.textContent = buttonText;
     }
   }
 
