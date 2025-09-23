@@ -27,21 +27,24 @@ class CoinLotsRecommender {
    */
   convertGlobalProducts(globalProducts) {
     const convertedProducts = {};
-    
+
     Object.keys(globalProducts).forEach(id => {
       const product = globalProducts[id];
-      
+
       // Ne traiter que les lots de pièces et pièces personnalisées
       if (id.startsWith('lot') || id.startsWith('piece') || id.includes('essence') || id.includes('tresorerie')) {
         convertedProducts[id] = {
           name: product.name || product.name_fr || id,
           price: product.price || 0,
           multipliers: product.multipliers || [],
-          coinLots: product.coin_lots || {}
+          coinLots: product.coin_lots || {},
+          customizable: product.customizable || false,
+          metals: product.metals || [],
+          metals_en: product.metals_en || []
         };
       }
     });
-    
+
     return convertedProducts;
   }
 
@@ -50,6 +53,15 @@ class CoinLotsRecommender {
    */
   getDefaultProducts() {
     return {
+      'piece-personnalisee': {
+        name: "Pièce Personnalisée",
+        price: 15,
+        multipliers: [1, 10, 100, 1000, 10000],
+        coinLots: { copper: 1, silver: 1, electrum: 1, gold: 1, platinum: 1 },
+        customizable: true,
+        metals: ["cuivre", "argent", "électrum", "or", "platine"],
+        metals_en: ["copper", "silver", "electrum", "gold", "platinum"]
+      },
       'lot10': {
         name: "Offrande du Voyageur",
         price: 60,
@@ -57,7 +69,7 @@ class CoinLotsRecommender {
         coinLots: { copper: 2, silver: 2, electrum: 2, gold: 2, platinum: 2 }
       },
       'lot25': {
-        name: "La Monnaie des Cinq Royaumes", 
+        name: "La Monnaie des Cinq Royaumes",
         price: 145,
         multipliers: [],
         coinLots: {
@@ -133,243 +145,184 @@ class CoinLotsRecommender {
   }
 
   /**
-   * Calcule les lots minimaux nécessaires - ALGORITHME OPTIMISÉ PAR COÛT
-   * Teste toutes les combinaisons possibles et retourne la moins chère
+   * Calcule les lots minimaux nécessaires - ALGORITHME SIMPLIFIÉ ET OPTIMISÉ
+   * Génère toutes les solutions possibles et retourne la moins chère
    */
   calculateMinimalLots(coinsBreakdown) {
     if (!coinsBreakdown || Object.keys(coinsBreakdown).length === 0) {
       return [];
     }
 
-    const allSolutions = [];
-    
-    // Générer toutes les combinaisons possibles de lots
-    this.generateAllCombinations(coinsBreakdown, allSolutions);
-    
+    const solutions = [];
+
+    // Solution 1: Pièces personnalisées uniquement
+    this.addCustomCoinsSolution(coinsBreakdown, solutions);
+
+    // Solution 2-N: Chaque lot possible + compléments optimaux
+    Object.keys(this.products).forEach(productId => {
+      if (productId !== 'piece-personnalisee') {
+        this.addLotBasedSolutions(coinsBreakdown, productId, solutions);
+      }
+    });
+
     // Retourner la solution la moins chère
-    if (allSolutions.length === 0) return [];
-    
-    const bestSolution = allSolutions.reduce((best, current) => 
+    if (solutions.length === 0) return [];
+
+    return solutions.reduce((best, current) =>
       current.totalPrice < best.totalPrice ? current : best
-    );
-    
-    return bestSolution.lots;
+    ).lots;
   }
 
   /**
-   * Génère toutes les combinaisons possibles de lots pour couvrir les besoins
+   * Ajoute la solution "pièces personnalisées uniquement"
    */
-  generateAllCombinations(coinsBreakdown, solutions) {
-    // Option 1: Utiliser des lots complets (qui contiennent tous les multiplicateurs)
-    this.tryCompleteLots(coinsBreakdown, solutions);
-    
-    // Option 2: Utiliser des lots à multiplicateur unique
-    this.tryMultiplierSpecificLots(coinsBreakdown, solutions);
-    
-    // Option 3: Combinaisons mixtes (lot complet + lots spécifiques pour compléter)
-    this.tryMixedCombinations(coinsBreakdown, solutions);
-    
-    // Option 4: Utiliser des pièces personnalisées pour de petites quantités
-    this.tryCustomCoins(coinsBreakdown, solutions);
-  }
+  addCustomCoinsSolution(coinsBreakdown, solutions) {
+    const customCoin = this.products['piece-personnalisee'];
+    if (!customCoin || !customCoin.customizable) return;
 
-  /**
-   * Teste les lots complets qui contiennent tous les multiplicateurs
-   */
-  tryCompleteLots(coinsBreakdown, solutions) {
-    const completeLots = ['lot25', 'lot50-essence'];
-    
-    completeLots.forEach(lotId => {
-      const remainingNeeds = this.calculateRemainingNeeds(coinsBreakdown, lotId, 1);
-      
-      if (this.areNeedsEmpty(remainingNeeds)) {
-        // Un seul lot suffit
-        solutions.push({
-          lots: [{
-            productId: lotId,
-            name: this.products[lotId].name,
-            quantity: 1,
-            price: this.products[lotId].price,
-            multiplier: null
-          }],
-          totalPrice: this.products[lotId].price
-        });
-      } else {
-        // Essayer de compléter avec d'autres lots
-        this.tryCompleteWithOtherLots(remainingNeeds, solutions, [{
-          productId: lotId,
-          name: this.products[lotId].name,
-          quantity: 1,
-          price: this.products[lotId].price,
-          multiplier: null
-        }], this.products[lotId].price);
-      }
-    });
-  }
+    const lots = [];
+    let totalPrice = 0;
 
-  /**
-   * Teste les lots à multiplicateur spécifique
-   * Essaie de couvrir TOUS les multiplicateurs avec des combinaisons de lots
-   */
-  tryMultiplierSpecificLots(coinsBreakdown, solutions) {
-    const multiplierLots = ['lot10', 'lot50-tresorerie'];
-    const neededMultipliers = this.getNeededMultipliers(coinsBreakdown);
-    
-    // Générer toutes les combinaisons possibles de lots pour chaque multiplicateur
-    this.generateMultiplierCombinations(coinsBreakdown, neededMultipliers, multiplierLots, solutions);
-  }
-
-  /**
-   * Génère les combinaisons de lots pour couvrir tous les multiplicateurs
-   */
-  generateMultiplierCombinations(coinsBreakdown, neededMultipliers, multiplierLots, solutions) {
-    // Pour chaque multiplicateur, calculer les options possibles
-    const multiplierOptions = {};
-    
-    neededMultipliers.forEach(multiplier => {
-      multiplierOptions[multiplier] = [];
-      
-      multiplierLots.forEach(lotId => {
-        const lot = this.products[lotId];
-        if (!lot.multipliers.includes(parseInt(multiplier))) return;
-        
-        const maxNeeded = this.getMaxQuantityNeededForMultiplier(coinsBreakdown, multiplier);
-        const providedPerLot = this.getProvidedQuantityPerLot(lotId, multiplier);
-        const lotsNeeded = Math.ceil(maxNeeded / providedPerLot);
-        
-        if (lotsNeeded > 0) {
-          multiplierOptions[multiplier].push({
-            lotId: lotId,
-            quantity: lotsNeeded,
-            cost: lotsNeeded * lot.price,
-            multiplier: parseInt(multiplier)
+    Object.keys(coinsBreakdown).forEach(currency => {
+      Object.keys(coinsBreakdown[currency]).forEach(multiplier => {
+        const quantity = coinsBreakdown[currency][multiplier];
+        if (quantity > 0) {
+          lots.push({
+            productId: 'piece-personnalisee',
+            name: `Pièce Personnalisée en ${this.getMetalDisplayName(currency)}`,
+            quantity: quantity,
+            price: customCoin.price * quantity,
+            multiplier: parseInt(multiplier),
+            metal: currency
           });
+          totalPrice += customCoin.price * quantity;
         }
       });
     });
-    
-    // Générer toutes les combinaisons possibles
-    const combinations = this.generateCombinations(multiplierOptions);
-    
-    // Tester chaque combinaison
-    combinations.forEach(combination => {
-      const lotsList = [];
-      let totalCost = 0;
-      
-      combination.forEach(option => {
-        const lot = this.products[option.lotId];
-        for (let i = 0; i < option.quantity; i++) {
-          lotsList.push({
-            productId: option.lotId,
-            name: lot.name,
-            quantity: 1,
-            price: lot.price,
-            multiplier: option.multiplier
-          });
-        }
-        totalCost += option.cost;
-      });
-      
-      // Vérifier si cette combinaison couvre tous les besoins
-      const remainingNeeds = this.calculateRemainingNeedsForLotsList(coinsBreakdown, lotsList);
-      if (this.areNeedsEmpty(remainingNeeds)) {
-        solutions.push({
-          lots: lotsList,
-          totalPrice: totalCost
-        });
-      }
-    });
+
+    if (lots.length > 0) {
+      solutions.push({ lots, totalPrice });
+    }
   }
 
   /**
-   * Génère toutes les combinaisons possibles à partir des options par multiplicateur
+   * Ajoute toutes les solutions basées sur un lot spécifique + compléments optimaux
    */
-  generateCombinations(multiplierOptions) {
-    const multipliers = Object.keys(multiplierOptions);
-    if (multipliers.length === 0) return [];
-    
-    const combinations = [];
-    
-    function generateRecursive(index, currentCombination) {
-      if (index >= multipliers.length) {
-        combinations.push([...currentCombination]);
-        return;
-      }
-      
-      const multiplier = multipliers[index];
-      const options = multiplierOptions[multiplier];
-      
-      options.forEach(option => {
-        currentCombination.push(option);
-        generateRecursive(index + 1, currentCombination);
-        currentCombination.pop();
+  addLotBasedSolutions(coinsBreakdown, baseLotId, solutions) {
+    const baseLot = this.products[baseLotId];
+    if (!baseLot) return;
+
+    // Pour chaque multiplicateur disponible dans ce lot
+    const availableMultipliers = baseLot.multipliers || [];
+
+    if (availableMultipliers.length === 0) {
+      // Lot complet (contient tous les multiplicateurs)
+      this.tryCompleteLotWithComplements(coinsBreakdown, baseLotId, solutions);
+    } else {
+      // Lot à multiplicateur spécifique
+      availableMultipliers.forEach(multiplier => {
+        this.tryMultiplierLotWithComplements(coinsBreakdown, baseLotId, multiplier, solutions);
       });
     }
-    
-    generateRecursive(0, []);
-    return combinations;
   }
 
   /**
-   * Teste les combinaisons mixtes (lot complet + compléments)
+   * Teste un lot complet + compléments optimaux
    */
-  tryMixedCombinations(coinsBreakdown, solutions) {
-    const completeLots = ['lot25', 'lot50-essence'];
-    const multiplierLots = ['lot10', 'lot50-tresorerie'];
-    
-    completeLots.forEach(completeLotId => {
-      const remainingNeeds = this.calculateRemainingNeeds(coinsBreakdown, completeLotId, 1);
-      
-      if (!this.areNeedsEmpty(remainingNeeds)) {
-        // Essayer de compléter avec des lots à multiplicateur
-        const neededMultipliers = this.getNeededMultipliers(remainingNeeds);
-        
-        neededMultipliers.forEach(multiplier => {
-          multiplierLots.forEach(multiplierLotId => {
-            const lot = this.products[multiplierLotId];
-            if (!lot.multipliers.includes(parseInt(multiplier))) return;
-            
-            const maxNeeded = this.getMaxQuantityNeededForMultiplier(remainingNeeds, multiplier);
-            const providedPerLot = this.getProvidedQuantityPerLot(multiplierLotId, multiplier);
-            const lotsNeeded = Math.ceil(maxNeeded / providedPerLot);
-            
-            if (lotsNeeded > 0) {
-              const baseLot = {
-                productId: completeLotId,
-                name: this.products[completeLotId].name,
-                quantity: 1,
-                price: this.products[completeLotId].price,
-                multiplier: null
-              };
-              
-              const complementLots = [];
-              for (let i = 0; i < lotsNeeded; i++) {
-                complementLots.push({
-                  productId: multiplierLotId,
-                  name: lot.name,
-                  quantity: 1,
-                  price: lot.price,
-                  multiplier: parseInt(multiplier)
-                });
-              }
-              
-              const allLots = [baseLot, ...complementLots];
-              const totalCost = allLots.reduce((sum, lot) => sum + lot.price, 0);
-              
-              // Vérifier si cette combinaison couvre tous les besoins
-              const finalRemaining = this.calculateRemainingNeedsForLotsList(coinsBreakdown, allLots);
-              if (this.areNeedsEmpty(finalRemaining)) {
-                solutions.push({
-                  lots: allLots,
-                  totalPrice: totalCost
-                });
-              }
-            }
-          });
-        });
-      }
-    });
+  tryCompleteLotWithComplements(coinsBreakdown, lotId, solutions) {
+    const lot = this.products[lotId];
+    const remaining = this.calculateRemainingNeeds(coinsBreakdown, lotId, 1);
+
+    const baseLots = [{
+      productId: lotId,
+      name: lot.name,
+      quantity: 1,
+      price: lot.price,
+      multiplier: null
+    }];
+
+    const complements = this.getOptimalComplements(remaining);
+    const allLots = [...baseLots, ...complements];
+    const totalPrice = allLots.reduce((sum, l) => sum + l.price, 0);
+
+    solutions.push({ lots: allLots, totalPrice });
   }
+
+  /**
+   * Teste un lot à multiplicateur spécifique + compléments optimaux
+   */
+  tryMultiplierLotWithComplements(coinsBreakdown, lotId, multiplier, solutions) {
+    const lot = this.products[lotId];
+    const maxNeeded = this.getMaxQuantityNeededForMultiplier(coinsBreakdown, multiplier.toString());
+
+    if (maxNeeded === 0) return;
+
+    const providedPerLot = this.getProvidedQuantityPerLot(lotId, multiplier.toString());
+    const lotsNeeded = Math.ceil(maxNeeded / providedPerLot);
+
+    const baseLots = [];
+    for (let i = 0; i < lotsNeeded; i++) {
+      baseLots.push({
+        productId: lotId,
+        name: lot.name,
+        quantity: 1,
+        price: lot.price,
+        multiplier: multiplier
+      });
+    }
+
+    const remaining = this.calculateRemainingNeedsForLotsList(coinsBreakdown, baseLots);
+    const complements = this.getOptimalComplements(remaining);
+    const allLots = [...baseLots, ...complements];
+    const totalPrice = allLots.reduce((sum, l) => sum + l.price, 0);
+
+    solutions.push({ lots: allLots, totalPrice });
+  }
+
+  /**
+   * Obtient les compléments optimaux pour des besoins restants
+   */
+  getOptimalComplements(remaining) {
+    if (this.areNeedsEmpty(remaining)) return [];
+
+    // Utiliser des pièces personnalisées pour compléter (solution optimale)
+    const customCoin = this.products['piece-personnalisee'];
+    if (!customCoin) return [];
+
+    const complements = [];
+    Object.keys(remaining).forEach(currency => {
+      Object.keys(remaining[currency]).forEach(multiplier => {
+        const quantity = remaining[currency][multiplier];
+        if (quantity > 0) {
+          complements.push({
+            productId: 'piece-personnalisee',
+            name: `Pièce Personnalisée en ${this.getMetalDisplayName(currency)}`,
+            quantity: quantity,
+            price: customCoin.price * quantity,
+            multiplier: parseInt(multiplier),
+            metal: currency
+          });
+        }
+      });
+    });
+
+    return complements;
+  }
+
+  /**
+   * Obtient le nom d'affichage d'un métal
+   */
+  getMetalDisplayName(currency) {
+    const metalNames = {
+      copper: 'cuivre',
+      silver: 'argent',
+      electrum: 'électrum',
+      gold: 'or',
+      platinum: 'platine'
+    };
+    return metalNames[currency] || currency;
+  }
+
 
   /**
    * Calcule les besoins restants après avoir utilisé un lot spécifique
@@ -483,19 +436,11 @@ class CoinLotsRecommender {
   }
 
   /**
-   * Essaie de compléter avec d'autres lots (méthode utilitaire)
-   */
-  tryCompleteWithOtherLots(remainingNeeds, solutions, baseLots, baseCost) {
-    // Implémentation simplifiée - pour l'instant ne fait rien
-    // Cette méthode peut être étendue pour des combinaisons plus complexes
-  }
-  
-  /**
    * Récupère tous les multiplicateurs nécessaires
    */
   getNeededMultipliers(coinsBreakdown) {
     const multipliers = new Set();
-    
+
     Object.keys(coinsBreakdown).forEach(currency => {
       const currencyData = coinsBreakdown[currency];
       if (currencyData && typeof currencyData === 'object') {
@@ -507,57 +452,8 @@ class CoinLotsRecommender {
         });
       }
     });
-    
+
     return Array.from(multipliers).sort((a, b) => parseInt(a) - parseInt(b));
-  }
-
-
-  /**
-   * Essaie de couvrir les besoins avec des pièces personnalisées
-   */
-  tryCustomCoins(coinsBreakdown, solutions) {
-    const customCoinProducts = Object.keys(this.products).filter(id => 
-      id.startsWith('piece') && this.products[id].customizable
-    );
-    
-    if (customCoinProducts.length === 0) return;
-    
-    customCoinProducts.forEach(productId => {
-      const customCoin = this.products[productId];
-      const lots = [];
-      let totalCost = 0;
-      
-      // Pour chaque combinaison métal/multiplicateur nécessaire
-      Object.keys(coinsBreakdown).forEach(currency => {
-        const currencyNeeds = coinsBreakdown[currency];
-        
-        Object.keys(currencyNeeds).forEach(multiplier => {
-          const quantity = currencyNeeds[multiplier];
-          
-          if (quantity > 0) {
-            // Ajouter une pièce personnalisée pour chaque pièce nécessaire
-            for (let i = 0; i < quantity; i++) {
-              lots.push({
-                productId: productId,
-                name: customCoin.name,
-                quantity: 1,
-                price: customCoin.price,
-                multiplier: parseInt(multiplier),
-                metal: currency
-              });
-              totalCost += customCoin.price;
-            }
-          }
-        });
-      });
-      
-      if (lots.length > 0) {
-        solutions.push({
-          lots: lots,
-          totalPrice: totalCost
-        });
-      }
-    });
   }
 
   /**
@@ -578,29 +474,47 @@ class CoinLotsRecommender {
       const name = lot.name || "Offrande du Voyageur";
       const multiplier = lot.multiplier;
       const metal = lot.metal;
-      
+
+      // Formatage spécial pour les pièces personnalisées
+      let displayName = name;
       let detailsText = '';
-      if (multiplier !== null && multiplier !== undefined) {
-        detailsText += ` <span class="text-sm text-gray-400">(×${this.nf.format(multiplier)}</span>`;
+
+      if (lot.productId && lot.productId.startsWith('piece') && metal && multiplier) {
+        // Pour les pièces personnalisées, formater le nom proprement
+        const metalNames = {
+          copper: 'cuivre',
+          silver: 'argent',
+          electrum: 'électrum',
+          gold: 'or',
+          platinum: 'platine'
+        };
+        const metalDisplay = metalNames[metal] || metal;
+        displayName = `Pièce Personnalisée en ${metalDisplay}`;
+        detailsText = ` <span class="text-sm text-gray-400">(×${this.nf.format(multiplier)})</span>`;
+      } else {
+        // Pour les autres produits, utiliser l'ancien formatage
+        if (multiplier !== null && multiplier !== undefined) {
+          detailsText += ` <span class="text-sm text-gray-400">(×${this.nf.format(multiplier)}</span>`;
+        }
+        if (metal && !lot.productId?.startsWith('piece')) {
+          detailsText += detailsText ? `, ${metal})` : ` <span class="text-sm text-gray-400">(${metal})</span>`;
+        } else if (detailsText) {
+          detailsText += ')';
+        }
       }
-      if (metal) {
-        detailsText += detailsText ? `, ${metal})` : ` <span class="text-sm text-gray-400">(${metal})</span>`;
-      } else if (detailsText) {
-        detailsText += ')';
-      }
-        
+
       html += `
         <div class="flex items-center justify-between bg-gray-800/50 rounded-lg p-3 border border-gray-700">
           <div class="flex-1">
-            <span class="font-medium text-gray-200">${quantity}× ${name}</span>
+            <span class="font-medium text-gray-200">${quantity}× ${displayName}</span>
             ${detailsText}
           </div>
           <div class="text-right">
-            <span class="text-green-400 font-medium">$${this.nf.format(price * quantity)}</span>
+            <span class="text-green-400 font-medium">$${this.nf.format(price)}</span>
           </div>
         </div>
       `;
-      totalPrice += price * quantity;
+      totalPrice += price;
     });
 
     html += `
@@ -624,7 +538,9 @@ class CoinLotsRecommender {
       quantity: lot.quantity || 1,
       multiplier: lot.multiplier,
       metal: lot.metal,
-      price: (lot.price || 60) * (lot.quantity || 1)
+      price: lot.price || ((lot.price || 60) * (lot.quantity || 1)),
+      customizable: lot.productId && lot.productId.startsWith('piece'),
+      isCustomCoin: lot.productId && lot.productId.startsWith('piece-personnalisee')
     }));
   }
 }

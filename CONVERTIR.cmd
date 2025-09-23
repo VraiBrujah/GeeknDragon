@@ -1,0 +1,1 @@
+php -r "require 'includes/csv-products-manager.php'; $m=new CsvProductsManager(); $r=$m->convertCsvToJson('data/products.csv','data/products.json'); echo $r['message'].PHP_EOL; $d=json_decode(file_get_contents('data/products.json'),true); echo 'Prix mis a jour: '.$d['piece-personnalisee']['price'].' euros'.PHP_EOL;" & pause

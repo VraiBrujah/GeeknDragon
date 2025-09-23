@@ -42,7 +42,9 @@
       "Bash(tree:*)",
       "Bash(git log:*)",
       "Bash(node:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(timeout:*)",
+      "Bash(cmd /c:*)"
     ],
     "deny": [],
     "ask": []

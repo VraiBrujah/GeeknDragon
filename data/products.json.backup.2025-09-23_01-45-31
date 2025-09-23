@@ -2,7 +2,7 @@
     "piece-personnalisee": {
         "name": "Pièce Personnalisée",
         "name_en": "Custom Coin",
-        "price": 10,
+        "price": 15,
         "description": "### Pièce unique à votre choix\nChoisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.\n\n*Parfait pour compléter une collection ou remplacer une pièce perdue.*",
         "description_en": "### Single coin of your choice\nSelect **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.\n\n*Perfect for completing a collection or replacing a lost coin.*",
         "summary": "Pièce métallique personnalisable avec choix du métal et du multiplicateur.",

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Recommandations Pièces</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: white; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background-color: #0f5132; border: 1px solid #198754; }
+        .error { background-color: #721c24; border: 1px solid #dc3545; }
+        .info { background-color: #055160; border: 1px solid #0dcaf0; }
+        button { background: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin: 5px; cursor: pointer; }
+        button:hover { background: #5a6268; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test du Système de Recommandations</h1>
+        <div id="results"></div>
+        <button onclick="runTest()">🚀 Lancer le Test</button>
+        <button onclick="clearResults()">🗑️ Effacer</button>
+    </div>
+
+    <script>
+        // Mock données
+        window.products = {
+            "piece-personnalisee": {
+                "name": "Pièce Personnalisée",
+                "price": 15,
+                "multipliers": [1, 10, 100, 1000, 10000],
+                "coin_lots": { "copper": 1, "silver": 1, "electrum": 1, "gold": 1, "platinum": 1 },
+                "customizable": true,
+                "metals": ["cuivre", "argent", "électrum", "or", "platine"]
+            },
+            "lot10": {
+                "name": "Offrande du Voyageur",
+                "price": 60,
+                "multipliers": [1, 10, 100, 1000, 10000],
+                "coin_lots": { "copper": 2, "silver": 2, "electrum": 2, "gold": 2, "platinum": 2 }
+            }
+        };
+
+        function addResult(message, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `test-result ${type}`;
+            div.innerHTML = `<strong>${new Date().toLocaleTimeString()}</strong>: ${message}`;
+            results.appendChild(div);
+        }
+
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        function runTest() {
+            clearResults();
+            addResult('🔄 Démarrage des tests...', 'info');
+
+            try {
+                // Test 1: Chargement
+                const recommender = new CoinLotsRecommender();
+                addResult(`✅ Recommandeur créé, ${Object.keys(recommender.products).length} produits`, 'success');
+
+                // Test 2: Détection pièces personnalisées
+                const customCoins = Object.keys(recommender.products).filter(id =>
+                    id.startsWith('piece') && recommender.products[id].customizable
+                );
+                addResult(`✅ Pièces personnalisées: ${customCoins.join(', ')}`, 'success');
+
+                // Test 3: Recommandation simple (correspond à l'exemple du problème)
+                const coinsBreakdown = {
+                    platinum: { "1": 1 },
+                    gold: { "1": 2 },
+                    electrum: { "1": 1 },
+                    silver: { "1": 1 },
+                    copper: { "1": 1 }
+                };
+                addResult(`📊 Test avec: 1 platine, 2 or, 1 électrum, 1 argent, 1 cuivre (tous ×1)`, 'info');
+
+                const recommendations = recommender.calculateMinimalLots(coinsBreakdown);
+                
+                if (recommendations && recommendations.length > 0) {
+                    addResult(`✅ ${recommendations.length} recommandation(s) trouvée(s)`, 'success');
+                    recommendations.forEach((rec, i) => {
+                        const metal = rec.metal ? ` (${rec.metal} ×${rec.multiplier})` : '';
+                        addResult(`🛒 ${i+1}. ${rec.quantity}× ${rec.name}${metal} - ${rec.price}$`, 'info');
+                    });
+
+                    // Vérifier si on a des pièces personnalisées
+                    const hasCustomCoins = recommendations.some(rec => 
+                        rec.productId && rec.productId.startsWith('piece')
+                    );
+                    
+                    if (hasCustomCoins) {
+                        addResult('🎯 SUCCÈS: Pièces personnalisées recommandées!', 'success');
+                    } else {
+                        addResult('⚠️ Aucune pièce personnalisée dans les recommandations', 'error');
+                    }
+                } else {
+                    addResult('❌ Aucune recommandation générée', 'error');
+                }
+
+            } catch (error) {
+                addResult(`❌ Erreur: ${error.message}`, 'error');
+                console.error('Détails:', error);
+            }
+        }
+    </script>
+
+    <script src="js/coin-lots-recommender.js"></script>
+</body>
+</html>
