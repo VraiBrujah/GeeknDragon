@@ -546,6 +546,7 @@ class CurrencyConverterPremium {
   
 
   updateCoinLotsRecommendations(baseValue) {
+    // Logique déplacée vers CoinLotOptimizer pour séparation des responsabilités
     const recommendationsContainer = document.getElementById('coin-lots-recommendations');
     if (!recommendationsContainer) return;
     
@@ -556,282 +557,43 @@ class CurrencyConverterPremium {
       return;
     }
     
-    // Afficher l'indicateur de calcul avec boulier
-    this.showCalculatingIndicator();
-    
-    // Utilisation non-bloquante avec timeout de sécurité
-    setTimeout(() => {
-      try {
-        // Utiliser la métaheuristique pour trouver les lots optimaux
-        const optimalSolution = this.findMinimalCoins(baseValue);
-        const recommendations = this.convertSolutionToLots(optimalSolution);
-        
-        if (recommendations && recommendations.length > 0) {
-          this.displayRecommendations(recommendations);
-        } else {
+    // Déléguer à CoinLotOptimizer si disponible
+    if (window.CoinLotOptimizer) {
+      this.showCalculatingIndicator();
+      
+      setTimeout(() => {
+        try {
+          // Convertir la solution de conversion en besoins
+          const optimalSolution = this.findMinimalCoins(baseValue);
+          const needs = {};
+          optimalSolution.forEach(item => {
+            const key = `${item.currency}_${item.multiplier}`;
+            needs[key] = (needs[key] || 0) + item.quantity;
+          });
+          
+          // Utiliser CoinLotOptimizer pour trouver les lots optimaux
+          const optimizer = new window.CoinLotOptimizer();
+          const recommendations = optimizer.findOptimalProductCombination(needs);
+          
+          if (recommendations && recommendations.length > 0) {
+            this.displayRecommendations(recommendations);
+          } else {
+            this.displayNoRecommendationsMessage();
+          }
+        } catch (error) {
+          console.error('Erreur calcul recommandations:', error);
           this.displayNoRecommendationsMessage();
+        } finally {
+          this.hideCalculatingIndicator();
         }
-      } catch (error) {
-        console.error('Erreur calcul recommandations:', error);
-        this.displayNoRecommendationsMessage();
-      } finally {
-        this.hideCalculatingIndicator();
-      }
-    }, 100);
-  }
-  
-  convertSolutionToLots(solution) {
-    if (!solution || !window.products) return [];
-    
-    // Convertir la solution en besoins pour le nouvel algorithme
-    const needs = {};
-    solution.forEach(item => {
-      const key = `${item.currency}_${item.multiplier}`;
-      needs[key] = (needs[key] || 0) + item.quantity;
-    });
-    
-    // Essayer d'abord le nouvel algorithme de lots optimisés
-    if (window.CoinLotRecommender) {
-      try {
-        const recommender = new window.CoinLotRecommender();
-        recommender.debugMode = true; // Activer debug
-        console.log('🔍 Test nouvel algorithme avec besoins:', needs);
-        
-        const lotRecommendations = recommender.findOptimalLotCombination(needs);
-        console.log('🎯 Résultat nouvel algorithme:', lotRecommendations);
-        
-        // Si le nouvel algorithme trouve une solution, l'utiliser
-        if (lotRecommendations && lotRecommendations.length > 0) {
-          console.log('✅ Utilisation nouvel algorithme');
-          return lotRecommendations;
-        } else {
-          console.log('❌ Nouvel algorithme n\'a pas trouvé de solution, fallback vers ancien');
-        }
-      } catch (error) {
-        console.warn('🚨 Erreur nouvel algorithme, fallback vers ancien:', error);
-      }
+      }, 100);
     } else {
-      console.log('⚠️ CoinLotRecommender non disponible');
-    }
-    
-    // Fallback vers l'ancien algorithme (pièce par pièce)
-    const recommendations = [];
-    solution.forEach(item => {
-      const bestOption = this.findCheapestProductForCoin(item.currency, item.multiplier, item.quantity);
-      if (bestOption) {
-        recommendations.push(bestOption);
-      }
-    });
-    
-    return recommendations;
-  }
-  
-  findCheapestProductForCoin(currency, multiplier, quantity) {
-    if (!window.products) return null;
-    
-    // Mappage simple des noms de devises FR vers EN pour compatibilité
-    const currencyMapping = {
-      'cuivre': 'copper',
-      'argent': 'silver', 
-      'électrum': 'electrum',
-      'or': 'gold',
-      'platine': 'platinum',
-      'copper': 'copper',
-      'silver': 'silver',
-      'electrum': 'electrum', 
-      'gold': 'gold',
-      'platinum': 'platinum'
-    };
-    
-    const metalName = currencyMapping[currency] || currency;
-    const metalNameFr = {
-      'copper': 'cuivre',
-      'silver': 'argent',
-      'electrum': 'électrum', 
-      'gold': 'or',
-      'platinum': 'platine'
-    }[metalName] || metalName;
-    
-    // Option 1: Pièce personnalisée (toujours disponible, prix fixe 10$)
-    const customCoinPrice = quantity * 10; // 10$ par pièce
-    
-    let bestOption = {
-      productId: 'coin-custom-single',
-      quantity: quantity,
-      price: window.products['coin-custom-single']?.price || 10,
-      totalCost: customCoinPrice,
-      displayName: `Pièce Personnalisée (${metalNameFr} ×${multiplier})`,
-      customFields: {
-        custom1: {
-          name: 'Metal',
-          type: 'dropdown', 
-          value: metalNameFr,
-          options: 'cuivre|argent|électrum|or|platine',
-          role: 'metal'
-        },
-        custom2: {
-          name: 'Multiplicateur',
-          type: 'dropdown',
-          value: multiplier.toString(),
-          options: '1|10|100|1000|10000',
-          role: 'multiplier'
-        }
-      }
-    };
-    
-    // Option 2: Rechercher des lots plus avantageux
-    Object.entries(window.products).forEach(([id, product]) => {
-      if (!id.startsWith('coin-') || !product.coin_lots) return;
-      
-      const lotForCurrency = product.coin_lots[metalName];
-      if (!lotForCurrency) return;
-      
-      let coinsPerProduct = 0;
-      let canProvide = false;
-      
-      if (product.customizable) {
-        // Produit personnalisable : vérifier si métal et multiplicateur disponibles
-        if (product.metals?.includes(metalNameFr) && product.multipliers?.includes(multiplier)) {
-          coinsPerProduct = lotForCurrency * multiplier;
-          canProvide = true;
-        }
-      } else {
-        // Produit fixe : vérifier structure exacte
-        if (typeof lotForCurrency === 'number') {
-          // Format simple: coin_lots.copper = 5 (avec multiplicateur séparé)
-          if (product.multipliers?.includes(multiplier)) {
-            coinsPerProduct = lotForCurrency * multiplier;
-            canProvide = true;
-          }
-        } else if (typeof lotForCurrency === 'object') {
-          // Format détaillé: coin_lots.copper.1 = 5
-          const exactLot = lotForCurrency[multiplier];
-          if (exactLot) {
-            coinsPerProduct = exactLot;
-            canProvide = true;
-          }
-        }
-      }
-      
-      if (canProvide && coinsPerProduct > 0) {
-        const productsNeeded = Math.ceil(quantity / coinsPerProduct);
-        const totalCost = productsNeeded * product.price;
-        
-        // Si c'est moins cher que l'option actuelle
-        if (totalCost < bestOption.totalCost) {
-          bestOption = {
-            productId: id,
-            quantity: productsNeeded,
-            price: product.price,
-            totalCost: totalCost,
-            displayName: product.customizable 
-              ? `${product.name} (${metalNameFr} ×${multiplier})`
-              : product.name,
-            customFields: product.customizable ? {
-              custom1: {
-                name: 'Metal',
-                type: 'dropdown',
-                value: metalNameFr,
-                options: 'cuivre|argent|électrum|or|platine',
-                role: 'metal'
-              },
-              custom2: {
-                name: 'Multiplicateur', 
-                type: 'dropdown',
-                value: multiplier.toString(),
-                options: '1|10|100|1000|10000',
-                role: 'multiplier'
-              }
-            } : {}
-          };
-        }
-      }
-    });
-    
-    return bestOption;
-  }
-  
-  
-  generateDisplayNameForProduct(product, coinItem) {
-    const lang = this.getCurrentLang();
-    const baseName = lang === 'en' ? (product.name_en || product.name) : product.name;
-    
-    // Pour les produits personnalisables, ne pas inclure les variations dans le nom
-    return baseName;
-  }
-  
-  displayRecommendations(recommendations) {
-    const recommendationsContent = document.getElementById('coin-lots-content');
-    const addToCartButton = document.getElementById('add-all-lots-to-cart');
-    
-    if (!recommendationsContent) return;
-    
-    const lang = this.getCurrentLang();
-    let html = '<div class="space-y-4">';
-    let totalPrice = 0;
-    
-    recommendations.forEach((item, index) => {
-      const totalItemPrice = item.totalCost || (item.price * item.quantity);
-      totalPrice += totalItemPrice;
-      
-      // Nom du produit (déjà avec variations si nécessaire)
-      let productName = item.displayName;
-      
-      // Afficher les variations de façon claire
-      let variationsDisplay = '';
-      if (item.customFields && Object.keys(item.customFields).length > 0) {
-        const variations = [];
-        Object.values(item.customFields).forEach(field => {
-          if (field.role === 'metal') {
-            variations.push(`Métal: ${field.value}`);
-          } else if (field.role === 'multiplier') {
-            variations.push(`Multiplicateur: ×${field.value}`);
-          }
-        });
-        
-        if (variations.length > 0) {
-          variationsDisplay = `<p class="text-xs text-gray-400">${variations.join(' • ')}</p>`;
-        }
-      }
-      
-      html += `
-        <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30">
-          <div class="flex justify-between items-center">
-            <div class="flex-1">
-              <h6 class="font-medium text-gray-200">${productName}</h6>
-              ${variationsDisplay}
-              <p class="text-sm text-gray-400">${this.getTranslation('product.quantity', 'Quantité')}: ${item.quantity}</p>
-            </div>
-            <div class="text-right">
-              <p class="font-bold text-green-400">$${totalItemPrice.toFixed(2)}</p>
-              <p class="text-xs text-gray-400">$${item.price.toFixed(2)} / ${this.getTranslation('product.unit', 'unité')}</p>
-            </div>
-          </div>
-        </div>
-      `;
-    });
-    
-    html += `
-      <div class="border-t border-gray-600/30 pt-4">
-        <div class="flex justify-between items-center text-lg font-bold">
-          <span class="text-gray-200">${this.getTranslation('shop.converter.total', 'Total')}:</span>
-          <span class="text-green-400">$${totalPrice.toFixed(2)}</span>
-        </div>
-      </div>
-    </div>`;
-    
-    recommendationsContent.innerHTML = html;
-    
-    if (addToCartButton) {
-      addToCartButton.style.display = 'block';
-      addToCartButton.dataset.lotsData = JSON.stringify(recommendations);
-      
-      // Mettre à jour le texte du bouton
-      const buttonText = this.getTranslation('shop.addAllLotsToCart', 'Ajouter tous les lots au panier');
-      addToCartButton.textContent = buttonText;
+      console.warn('CoinLotOptimizer non disponible');
+      this.displayNoRecommendationsMessage();
     }
   }
-
+  
+  // Méthodes d'affichage délégués vers CoinLotOptimizer
   showCalculatingIndicator() {
     const recommendationsContent = document.getElementById('coin-lots-content');
     if (!recommendationsContent) return;
@@ -893,10 +655,59 @@ class CurrencyConverterPremium {
       addToCartButton.style.display = 'none';
     }
   }
+
+  displayRecommendations(recommendations) {
+    // Logique d'affichage déléguée vers un module dédié ou CoinLotOptimizer
+    // Pour l'instant, affichage simple
+    const recommendationsContent = document.getElementById('coin-lots-content');
+    const addToCartButton = document.getElementById('add-all-lots-to-cart');
+    
+    if (!recommendationsContent) return;
+    
+    const lang = this.getCurrentLang();
+    let html = '<div class="space-y-4">';
+    let totalPrice = 0;
+    
+    recommendations.forEach((item, index) => {
+      const totalItemPrice = item.totalCost || (item.price * item.quantity);
+      totalPrice += totalItemPrice;
+      
+      html += `
+        <div class="bg-gray-800/50 rounded-lg p-4 border border-gray-600/30">
+          <div class="flex justify-between items-center">
+            <div class="flex-1">
+              <h6 class="font-medium text-gray-200">${item.displayName}</h6>
+              <p class="text-sm text-gray-400">Quantité: ${item.quantity}</p>
+            </div>
+            <div class="text-right">
+              <p class="font-bold text-green-400">$${totalItemPrice.toFixed(2)}</p>
+              <p class="text-xs text-gray-400">$${item.price.toFixed(2)} / unité</p>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+    
+    html += `
+      <div class="border-t border-gray-600/30 pt-4">
+        <div class="flex justify-between items-center text-lg font-bold">
+          <span class="text-gray-200">Total:</span>
+          <span class="text-green-400">$${totalPrice.toFixed(2)}</span>
+        </div>
+      </div>
+    </div>`;
+    
+    recommendationsContent.innerHTML = html;
+    
+    if (addToCartButton) {
+      addToCartButton.style.display = 'block';
+      addToCartButton.dataset.lotsData = JSON.stringify(recommendations);
+      addToCartButton.textContent = 'Ajouter tous les lots au panier';
+    }
+  }
   
   hideCalculatingIndicator() {
     // L'indicateur sera remplacé par displayRecommendations()
-    // Pas besoin de le cacher explicitement
   }
 
 

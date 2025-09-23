@@ -79,15 +79,23 @@ const multipliers = [1, 10, 100, 1000, 10000]; // Multiplicateurs physiques
 
 #### Composants JavaScript Critiques
 
-##### CurrencyConverterPremium (`js/currency-converter.js`) - **UNIFIÉ & OPTIMISÉ**
-- **Métaheuristique multi-stratégies** pour optimisation globale
-- Convertisseur temps réel avec calcul optimal des pièces physiques
-- **Recommandations de lots intégrées** avec parsing dynamique de products.json
-- Gestion intelligente des produits personnalisables et fixes
-- Calcul d'efficacité prix/pièce pour sélection optimale des lots
+##### CurrencyConverterPremium (`js/currency-converter.js`) - **CONVERSION PURE**
+- **Métaheuristique multi-stratégies** pour optimisation globale des pièces physiques
+- Convertisseur temps réel avec calcul optimal minimal de pièces
+- Algorithmes gloutons avancés (3 stratégies) pour répartition optimale
 - Animation boulier multilingue pour feedback utilisateur
 - Gestion états, callbacks, internationalisation
 - Interface utilisateur riche (cartes, animations, traductions)
+- **RESPONSABILITÉ** : Conversion uniquement, pas de recommandations de lots
+
+##### CoinLotOptimizer (`js/coin-lot-optimizer.js`) - **SAC À DOS OPTIMAL**  
+- **Algorithme de sac à dos** pour optimisation de coût des lots
+- Expansion complète des variations produits (25 pour pièces/trio/septuple, 5 pour quintessence)
+- Parsing dynamique intelligent de products.json avec détection par productId
+- Combinaisons optimales avec surplus autorisé, déficit interdit
+- Calcul prix minimum pour couverture exacte des besoins
+- Support produits personnalisables ET fixes
+- **RESPONSABILITÉ** : Recommandations de lots optimaux uniquement
 
 ##### SnipcartUtils (`js/snipcart-utils.js`) - **RÉUTILISABLE**
 - Utilitaires cohérents pour l'ajout au panier (boutique + aide-jeux)
@@ -203,11 +211,25 @@ addMultipleToCart(products, onProgress) {
 }
 ```
 
-### Intégration Convertisseur ↔ Recommandations
+### Intégration Convertisseur ↔ Optimiseur ↔ Snipcart
 
-1. **Convertisseur** calcule valeurs optimales par métal/multiplicateur avec métaheuristiques
-2. **Algorithme** trouve les lots les moins chers via parsing dynamique
-3. **SnipcartUtils** ajoute au panier avec attributs corrects
+1. **CurrencyConverterPremium** calcule valeurs optimales par métal/multiplicateur avec métaheuristiques
+2. **CoinLotOptimizer** reçoit les besoins exacts et génère toutes les variations produits possibles
+3. **Algorithme sac à dos** trouve la combinaison de lots la moins chère (surplus OK, déficit interdit)
+4. **SnipcartUtils** formate et ajoute la solution optimale au panier avec attributs corrects
+
+#### Pipeline de Traitement
+```javascript
+// 1. Conversion (currency-converter.js)
+const needs = {"copper_1": 1, "platinum_10": 1, "gold_1": 1, ...};
+
+// 2. Optimisation (coin-lot-optimizer.js)
+const optimizer = new CoinLotOptimizer();
+const optimalSolution = optimizer.findOptimalProductCombination(needs);
+
+// 3. Ajout panier (snipcart-utils.js)
+SnipcartUtils.addMultipleToCart(optimalSolution);
+```
 
 ### 🧪 Système de Tests Intégré
 

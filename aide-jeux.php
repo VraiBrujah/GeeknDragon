@@ -1783,7 +1783,7 @@ function confirmDownload() {
 <script src="/js/hero-videos.js"></script>
 <script src="/js/boutique-premium.js"></script>
 <script src="/js/snipcart-utils.js"></script>
-<script src="/js/coin-lot-recommender.js"></script>
+<script src="/js/coin-lot-optimizer.js"></script>
 <script src="/js/currency-converter.js"></script>
 <script src="/js/currency-converter-tests.js"></script>
 

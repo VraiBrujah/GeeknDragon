@@ -51,7 +51,8 @@
       "Bash(CONVERTIR.cmd)",
       "Bash(awk:*)",
       "Bash(jq:*)",
-      "WebFetch(domain:localhost)"
+      "WebFetch(domain:localhost)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
