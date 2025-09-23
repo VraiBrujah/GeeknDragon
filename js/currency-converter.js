@@ -583,9 +583,30 @@ class CurrencyConverterPremium {
   convertSolutionToLots(solution) {
     if (!solution || !window.products) return [];
     
-    const recommendations = [];
+    // Convertir la solution en besoins pour le nouvel algorithme
+    const needs = {};
+    solution.forEach(item => {
+      const key = `${item.currency}_${item.multiplier}`;
+      needs[key] = (needs[key] || 0) + item.quantity;
+    });
     
-    // Pour chaque pièce nécessaire, trouver la solution la moins chère
+    // Essayer d'abord le nouvel algorithme de lots optimisés
+    if (window.CoinLotRecommender) {
+      try {
+        const recommender = new window.CoinLotRecommender();
+        const lotRecommendations = recommender.findOptimalLotCombination(needs);
+        
+        // Si le nouvel algorithme trouve une solution, l'utiliser
+        if (lotRecommendations && lotRecommendations.length > 0) {
+          return lotRecommendations;
+        }
+      } catch (error) {
+        console.warn('Erreur nouvel algorithme, fallback vers ancien:', error);
+      }
+    }
+    
+    // Fallback vers l'ancien algorithme (pièce par pièce)
+    const recommendations = [];
     solution.forEach(item => {
       const bestOption = this.findCheapestProductForCoin(item.currency, item.multiplier, item.quantity);
       if (bestOption) {
