@@ -1,172 +1,14 @@
-﻿Column1;Column2;Column3;Column4;Column5;Column6;Column7;Column8;Column9;Column10;Column11;Column12;Column13;Column14;Column15;Column16;Column17
 id;name_fr;name_en;price;description_fr;description_en;summary_fr;summary_en;images;multipliers;metals_fr;metals_en;coin_lots;languages;customizable;triptych_options;triptych_type
-piece-personnalisee;Pièce Personnalisée;Custom Coin;10;"### Pièce unique à votre choix
-Choisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.
-
-*Parfait pour compléter une collection ou remplacer une pièce perdue.*";"### Single coin of your choice
-Select **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.
-
-*Perfect for completing a collection or replacing a lost coin.*";Pièce métallique personnalisable avec choix du métal et du multiplicateur.;Customizable metal coin with choice of metal and multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":1,""silver"":1,""electrum"":1,""gold"":1,""platinum"":1}";;VRAI;;
-lot3-pieces;Trio de Pièces;Trio of Coins;25;"### Trois pièces personnalisables
-**3 pièces métalliques** au choix avec métal et multiplicateur personnalisables. Idéal pour compléter une collection ou créer un petit trésor sur mesure.
-
-**Contenu :**
-- **3 pièces identiques** avec votre choix de métal
-- **Multiplicateur unique** pour toutes les pièces
-- **Finition soignée** selon le multiplicateur choisi
-
-*Parfait pour débuter ou compléter votre collection de pièces !*";"### Three customizable coins
-**3 metal coins** of your choice with customizable metal and multiplier. Perfect for completing a collection or creating a small custom treasure.
-
-**Contents:**
-- **3 identical coins** with your choice of metal
-- **Single multiplier** for all coins
-- **Quality finish** according to chosen multiplier
-
-*Perfect for starting or completing your coin collection!*";Lot de trois pièces personnalisables avec choix du métal et multiplicateur unique.;Set of three customizable coins with choice of metal and single multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":3,""silver"":3,""electrum"":3,""gold"":3,""platinum"":3}";;VRAI;;
-lot5-metaux;Quintessence Métallique;Metal Quintessence;35;"### Cinq métaux, un multiplicateur
-**5 pièces de métaux différents** appliquant le même multiplicateur choisi : une de chaque métal (cuivre, argent, électrum, or, platine) avec finition uniforme.
-
-**Contenu :**
-- **1 pièce de chaque métal** (cuivre, argent, électrum, or, platine)
-- **Multiplicateur identique** pour toutes les pièces
-- **Collection complète** des 5 métaux essentiels
-
-*Découvrez la diversité des métaux avec une valeur cohérente !*";"### Five metals, one multiplier
-**5 coins of different metals** applying the same chosen multiplier: one of each metal (copper, silver, electrum, gold, platinum) with uniform finish.
-
-**Contents:**
-- **1 coin of each metal** (copper, silver, electrum, gold, platinum)
-- **Identical multiplier** for all coins
-- **Complete collection** of the 5 essential metals
-
-*Discover the diversity of metals with consistent value!*";Collection de cinq pièces avec un de chaque métal et multiplicateur uniforme.;Collection of five coins with one of each metal and uniform multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;;;"{""copper"":1,""silver"":1,""electrum"":1,""gold"":1,""platinum"":1}";;VRAI;;
-lot7-pieces-libre;Septuple Libre;Free Septuple;50;"### Sept pièces entièrement personnalisables
-**7 pièces métalliques** avec choix libre du métal et du multiplicateur pour chaque pièce. Créez votre propre assortiment selon vos besoins précis.
-
-**Contenu :**
-- **7 pièces au total** avec choix individuel
-- **Métal personnalisable** pour chaque pièce
-- **Multiplicateur personnalisable** pour chaque pièce
-- **Flexibilité maximale** dans la composition
-
-*Composez votre trésor exact selon vos besoins de jeu !*";"### Seven fully customizable coins
-**7 metal coins** with free choice of metal and multiplier for each coin. Create your own assortment according to your precise needs.
-
-**Contents:**
-- **7 coins total** with individual choice
-- **Customizable metal** for each coin
-- **Customizable multiplier** for each coin
-- **Maximum flexibility** in composition
-
-*Compose your exact treasure according to your game needs!*";Lot de sept pièces avec choix libre du métal et multiplicateur pour chaque pièce.;Set of seven coins with free choice of metal and multiplier for each coin.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":7,""silver"":7,""electrum"":7,""gold"":7,""platinum"":7}";;VRAI;;
-lot10;Offrande du Voyageur;The Traveler Offering;60;"### Trésor de départ immersif
-**10 pièces en métal** : **2 de chaque métal** (cuivre, argent, électrum, or, platine). Vous choisissez **un seul multiplicateur** pour tout le lot : *unitaire* par défaut (brillant, sans gravure) ou **x10 / x100 / x1 000 / x10 000** (gravure nette, finition légèrement mate).
-
-*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*";"### Immersive starter hoard
-**10 metal coins** : **2 of each metal** (copper, silver, electrum, gold, platinum). Choose **one multiplier** for the whole set: *unit* by default (shiny, no engraving) or **x10 / x100 / x1,000 / x10,000** (crisp engraving, slightly matte).
-
-*Use multipliers to speed up counting without breaking immersion.*";Ensemble de 10 pièces métalliques assorties avec multiplicateur unique pour accélérer les comptes.;Set of 10 assorted metal coins with a single multiplier to speed up tallying.;/media/products/bundles/Vagabon.webp|/media/products/bundles/VagabonPlast.webp|/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/ef.webp|/media/products/coins/of.webp|/media/products/coins/pf.webp|/media/products/coins/x1f2.webp|/media/products/coins/x100f3.webp;1|10|100|1000|10000;;;"{""copper"":2,""silver"":2,""electrum"":2,""gold"":2,""platinum"":2}";;FAUX;;
-lot25;La Monnaie des Cinq Royaumes;Currency of the Five Realms;145;"### 25 pièces, zéro doublon
-**5 métaux × 5 multiplicateurs** = **25 modèles uniques**. Chaque métal existe en *unitaire* (brillant) et **x10 / x100 / x1 000 / x10 000** (gravure mate).
-
-*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*";"### 25 coins, no duplicates
-**5 metals × 5 multipliers** = **25 unique designs**. Each metal comes in *unit* (shiny) and **x10 / x100 / x1,000 / x10,000** (matte engraving). **Everything included** — no selection needed.
-
-*Use multipliers to speed up counting without breaking immersion.*";Collection de 25 pièces uniques couvrant les cinq métaux et tous les multiplicateurs pour la table.;Collection of 25 unique coins covering five metals and every multiplier for the table.;/media/products/bundles/Seignieur.webp|/media/products/bundles/Seignieurplast.webp|/media/products/coins/x1f2.webp|/media/products/coins/x1p2.webp|/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;;;;"{""copper"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1},""silver"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1},""electrum"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1},""gold"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1},""platinum"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1}}";;FAUX;;
-lot50-essence;Essence du Marchand;Essence of the Merchant;275;"### 50 pièces, double variété
-**2 exemplaires** de chacun des **25 modèles** de la *Monnaie des Cinq Royaumes* : total **50 pièces**. Unitaire (brillant) et x10/x100/x1 000/x10 000 (gravure mate).
-
-*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*";"### 50 coins, double the variety
-**2 copies** of each of the **25 designs** from the *Currency of the Five Realms* — total **50 coins**. Unit (shiny) and x10/x100/x1,000/x10,000 (matte engraving). **Everything included** — no selection needed.
-
-*Use multipliers to speed up counting without breaking immersion.*";Double exemplaire de chaque modèle pour 50 pièces prêtes à l'emploi avec tous les multiplicateurs.;Two copies of every design for 50 ready-to-play coins including every multiplier.;/media/products/bundles/Royaume.webp|/media/products/bundles/RoyaumePlast.webp|/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp|/media/products/coins/x1f2.webp|/media/products/coins/x1p2.webp;;;;"{""copper"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2},""silver"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2},""electrum"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2},""gold"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2},""platinum"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2}}";;FAUX;;
-lot50-tresorerie;La Trésorerie du Seigneur;The Lord's Treasury;275;"### 50 pièces pour l'opulence
-**10 pièces de chaque métal** (cuivre, argent, électrum, or, platine) appliquant **le même multiplicateur** choisi à l'achat : *unitaire* par défaut (brillant) ou **x10 / x100 / x1 000 / x10 000** (gravure mate).
-
-*Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*";"### 50 coins for opulence
-**10 coins of each metal** (copper, silver, electrum, gold, platinum) using the **same multiplier** selected at checkout: *unit* by default (shiny) or **x10 / x100 / x1,000 / x10,000** (matte engraving).
-
-*Use multipliers to speed up counting without breaking immersion.*";Sélection de 50 pièces d'un même multiplicateur pour assurer une trésorerie abondante et cohérente.;Selection of 50 coins sharing one multiplier to deliver a plentiful, consistent treasury.;/media/products/bundles/Essence.webp|/media/products/bundles/EssencePlast.webp|/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp|/media/products/coins/x1f2.webp|/media/products/coins/x1p2.webp;1|10|100|1000|10000;;;"{""copper"":10,""silver"":10,""electrum"":10,""gold"":10,""platinum"":10}";;FAUX;;
-pack-182-arsenal-aventurier;Arsenal de l'Aventurier;Adventurer's Arsenal;50;"### Armes • Armures • Équipement
-Un lot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées.
-
-**Contenu :**
-- **Armes** : mêlée & distance
-- **Armures & boucliers** : légères, intermédiaires et lourdes
-- **Équipement** : cordes, torches, rations, outils de terrain
-
-*Idéal pour la table : pioche, pose, échange — fini la fouille dans le manuel.*";"### Weapons • Armor • Equipment
-A massive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards.
-
-**Contents:**
-- **Weapons**: melee & ranged
-- **Armor & shields**: light, medium, and heavy
-- **Equipment**: ropes, torches, rations, field tools
-
-*Perfect at the table: draw, place, trade — no more digging through the rulebook.*";Boîte de cartes illustrées couvrant armes, armures et équipement pour équiper immédiatement un groupe.;Box of illustrated cards covering weapons, armor, and gear to outfit a party instantly.;/media/products/cards/arme-recto.webp|/media/products/cards/arme-verso.webp|/media/products/cards/greatclub-recto.webp|/media/products/cards/armure-recto.webp;;;;;FR|EN;FAUX;;
-pack-182-butins-ingenieries;Butins & Ingénieries;Loot & Engineering;40;"### Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils
-Pour des campagnes qui osent : trésors variés, matériel instable, techno-reliques et les indispensables de l'artisan.
-
-**Contenu :**
-- **Butin** : gemmes, objets curieux, artefacts mineurs, reliques
-- **Explosifs & armes modernes/futuristes** : grenades, charges, armes à feu & à énergie
-- **Marchandises** : denrées, tissus, minerais
-- **Outils** : artisanats, crochetage, alchimie légère, kits spéciaux
-
-*Injecte de la variété et des choix tactiques — du troc de marché au braquage high-fantasy.*";"### Loot • Explosives & Modern/Futuristic Weapons • Trade Goods • Tools
-For campaigns that push the envelope: varied treasures, volatile hardware, techno-relics, and every crafter's staple.
-
-**Contents:**
-- **Loot**: gems, curios, minor artifacts, relics
-- **Explosives & modern/futur weapons**: grenades, charges, firearms & energy weapons
-- **Trade goods**: foodstuffs, fabrics, ores
-- **Tools**: crafts, lockpicks, light alchemy, specialty kits
-
-*Add variety and tactical choices — from market bartering to high-fantasy heists.*";Cartes de butin et matériel exotique mêlant trésors, explosifs et outils pour campagnes audacieuses.;Cards of loot and exotic gear mixing treasures, explosives, and tools for daring campaigns.;/media/products/cards/alexandrite-recto.webp|/media/products/cards/bombe-recto.webp|/media/products/cards/chaevre-recto.webp|/media/products/cards/mataerield-alchimiste-recto.webp;;;;;FR|EN;FAUX;;
-pack-182-routes-services;Routes & Services;Roads & Services;35;"### Paquetages • Services • Véhicules • Poisons
-Tout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque avec des cartes claires et pratiques.
-
-**Contenu :**
-- **Paquetages** : *artiste, cambrioleur, diplomate, ecclésiastique, érudit, explorateur, exploration souterraine*
-- **Services** : hébergements, soins, transport, passeurs, mercenaires
-- **Véhicules** : terrestres, marins, animaux de bât
-- **Poisons** : effets et rareté
-
-*Parfait pour les campagnes orientées exploration, voyage et intrigue.*";"### Packs • Services • Vehicles • Poisons
-Everything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards.
-
-**Contents:**
-- **Packs**: *artist, burglar, diplomat, acolyte/cleric, scholar, explorer, underdark exploration*
-- **Services**: lodging, healing, transport, smugglers, mercenaries
-- **Vehicles**: land, sea, beasts of burden
-- **Poisons**: effects & rarity
-
-*Perfect for exploration-, travel- and intrigue-heavy campaigns.*";Sélection de cartes dédiées aux voyages, services, véhicules et poisons pour dynamiser l'exploration.;Selection of cards focused on travel, services, vehicles, and poisons to energize exploration.;/media/products/cards/sac-aa-dos-recto.webp|/media/products/cards/biaere-chope-recto.webp|/media/products/cards/vaisseau-aaerien-recto.webp|/media/products/cards/sang-d-assassin-recto.webp;;;;;FR|EN;FAUX;;
-triptyque-aleatoire;Triptyques Mystères;Mystery Triptychs;60;"### Trois triptyques, un héros clé en main
-Tire au sort **1 Classe**, **1 Espèce** et **1 Historique** pour forger une origine unique, puis joue immédiatement avec :
-
-**Inclus :**
-- **Cartes d'équipement assorties** correspondant au paquetage
-- **Pièces de départ**
-- **Compatibilité 5e 2024**
-
-Un bundle idéal pour des *one-shots*, des tables débutantes ou pour surprendre des joueurs vétérans.
-
-*Fini la fouille dans le manuel.*";"### Three triptychs, a plug-and-play hero
-Draw at random **1 Class**, **1 Species** and **1 Background** to forge a unique origin, then play right away with:
-
-**Included:**
-- **Matching equipment cards** based on the linked pack
-- **Starting coins**
-- **5e 2024 compatible**
-
-Perfect for one-shots, new tables, or to surprise veteran players.
-
-*No more digging through the rulebook.*";Lot de triptyques aléatoires pour créer un héros complet avec équipement assorti et pièces de départ.;Bundle of random triptychs to build a complete hero with matching gear and starting coins.;/media/game/triptychs/examples/race-aasimar-recto.webp|/media/game/triptychs/examples/classe-barbare-recto.webp|/media/game/triptychs/examples/historique-acolyte-recto.webp|/media/game/triptychs/examples/race-aasimar-verso.webp;;;;;;FAUX;;
+piece-personnalisee;Pièce Personnalisée;Custom Coin;10;### Pièce unique à votre choix Choisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure. *Parfait pour compléter une collection ou remplacer une pièce perdue.*;### Single coin of your choice Select **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin. *Perfect for completing a collection or replacing a lost coin.*;Pièce métallique personnalisable avec choix du métal et du multiplicateur.;Customizable metal coin with choice of metal and multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":1,""silver"":1,""electrum"":1,""gold"":1,""platinum"":1}";;VRAI;;
+lot3-pieces;Trio de Pièces;Trio of Coins;25;### Trois pièces personnalisables **3 pièces métalliques** au choix avec métal et multiplicateur personnalisables. Idéal pour compléter une collection ou créer un petit trésor sur mesure. **Contenu :** *Parfait pour débuter ou compléter votre collection de pièces !*;### Three customizable coins **3 metal coins** of your choice with customizable metal and multiplier. Perfect for completing a collection or creating a small custom treasure. **Contents:** *Perfect for starting or completing your coin collection!*;Lot de trois pièces personnalisables avec choix du métal et multiplicateur unique.;Set of three customizable coins with choice of metal and single multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":3,""silver"":3,""electrum"":3,""gold"":3,""platinum"":3}";;VRAI;;
+lot5-metaux;Quintessence Métallique;Metal Quintessence;35;### Cinq métaux, un multiplicateur **5 pièces de métaux différents** appliquant le même multiplicateur choisi : une de chaque métal (cuivre, argent, électrum, or, platine) avec finition uniforme. **Contenu :** *Découvrez la diversité des métaux avec une valeur cohérente !*;### Five metals, one multiplier **5 coins of different metals** applying the same chosen multiplier: one of each metal (copper, silver, electrum, gold, platinum) with uniform finish. **Contents:** *Discover the diversity of metals with consistent value!*;Collection de cinq pièces avec un de chaque métal et multiplicateur uniforme.;Collection of five coins with one of each metal and uniform multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;;;"{""copper"":1,""silver"":1,""electrum"":1,""gold"":1,""platinum"":1}";;VRAI;;
+lot7-pieces-libre;Septuple Libre;Free Septuple;50;### Sept pièces entièrement personnalisables **7 pièces métalliques** avec choix libre du métal et du multiplicateur pour chaque pièce. Créez votre propre assortiment selon vos besoins précis. **Contenu :** *Composez votre trésor exact selon vos besoins de jeu !*;### Seven fully customizable coins **7 metal coins** with free choice of metal and multiplier for each coin. Create your own assortment according to your precise needs. **Contents:** *Compose your exact treasure according to your game needs!*;Lot de sept pièces avec choix libre du métal et multiplicateur pour chaque pièce.;Set of seven coins with free choice of metal and multiplier for each coin.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":7,""silver"":7,""electrum"":7,""gold"":7,""platinum"":7}";;VRAI;;
+lot10;Offrande du Voyageur;The Traveler Offering;60;### Trésor de départ immersif **10 pièces en métal** : **2 de chaque métal** (cuivre, argent, électrum, or, platine). Vous choisissez **un seul multiplicateur** pour tout le lot : *unitaire* par défaut (brillant, sans gravure) ou **x10 / x100 / x1 000 / x10 000** (gravure nette, finition légèrement mate). *Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*;### Immersive starter hoard **10 metal coins** : **2 of each metal** (copper, silver, electrum, gold, platinum). Choose **one multiplier** for the whole set: *unit* by default (shiny, no engraving) or **x10 / x100 / x1,000 / x10,000** (crisp engraving, slightly matte). *Use multipliers to speed up counting without breaking immersion.*;Ensemble de 10 pièces métalliques assorties avec multiplicateur unique pour accélérer les comptes.;Set of 10 assorted metal coins with a single multiplier to speed up tallying.;/media/products/bundles/Vagabon.webp|/media/products/bundles/VagabonPlast.webp|/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/ef.webp|/media/products/coins/of.webp|/media/products/coins/pf.webp|/media/products/coins/x1f2.webp|/media/products/coins/x100f3.webp;1|10|100|1000|10000;;;"{""copper"":2,""silver"":2,""electrum"":2,""gold"":2,""platinum"":2}";;FAUX;;
+lot25;La Monnaie des Cinq Royaumes;Currency of the Five Realms;145;### 25 pièces, zéro doublon **5 métaux × 5 multiplicateurs** = **25 modèles uniques**. Chaque métal existe en *unitaire* (brillant) et **x10 / x100 / x1 000 / x10 000** (gravure mate). *Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*;### 25 coins, no duplicates **5 metals × 5 multipliers** = **25 unique designs**. Each metal comes in *unit* (shiny) and **x10 / x100 / x1,000 / x10,000** (matte engraving). **Everything included** — no selection needed. *Use multipliers to speed up counting without breaking immersion.*;Collection de 25 pièces uniques couvrant les cinq métaux et tous les multiplicateurs pour la table.;Collection of 25 unique coins covering five metals and every multiplier for the table.;/media/products/bundles/Seignieur.webp|/media/products/bundles/Seignieurplast.webp|/media/products/coins/x1f2.webp|/media/products/coins/x1p2.webp|/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;;;;"{""copper"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1},""silver"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1},""electrum"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1},""gold"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1},""platinum"":{""1"":1,""10"":1,""100"":1,""1000"":1,""10000"":1}}";;FAUX;;
+lot50-essence;Essence du Marchand;Essence of the Merchant;275;### 50 pièces, double variété **2 exemplaires** de chacun des **25 modèles** de la *Monnaie des Cinq Royaumes* : total **50 pièces**. Unitaire (brillant) et x10/x100/x1 000/x10 000 (gravure mate). *Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*;### 50 coins, double the variety **2 copies** of each of the **25 designs** from the *Currency of the Five Realms* — total **50 coins**. Unit (shiny) and x10/x100/x1,000/x10,000 (matte engraving). **Everything included** — no selection needed. *Use multipliers to speed up counting without breaking immersion.*;Double exemplaire de chaque modèle pour 50 pièces prêtes à l'emploi avec tous les multiplicateurs.;Two copies of every design for 50 ready-to-play coins including every multiplier.;/media/products/bundles/Royaume.webp|/media/products/bundles/RoyaumePlast.webp|/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp|/media/products/coins/x1f2.webp|/media/products/coins/x1p2.webp;;;;"{""copper"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2},""silver"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2},""electrum"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2},""gold"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2},""platinum"":{""1"":2,""10"":2,""100"":2,""1000"":2,""10000"":2}}";;FAUX;;
+lot50-tresorerie;La Trésorerie du Seigneur;The Lord's Treasury;275;### 50 pièces pour l'opulence **10 pièces de chaque métal** (cuivre, argent, électrum, or, platine) appliquant **le même multiplicateur** choisi à l'achat : *unitaire* par défaut (brillant) ou **x10 / x100 / x1 000 / x10 000** (gravure mate). *Utilisez les multiplicateurs pour accélérer les comptes sans perdre l'immersion.*;### 50 coins for opulence **10 coins of each metal** (copper, silver, electrum, gold, platinum) using the **same multiplier** selected at checkout: *unit* by default (shiny) or **x10 / x100 / x1,000 / x10,000** (matte engraving). *Use multipliers to speed up counting without breaking immersion.*;Sélection de 50 pièces d'un même multiplicateur pour assurer une trésorerie abondante et cohérente.;Selection of 50 coins sharing one multiplier to deliver a plentiful, consistent treasury.;/media/products/bundles/Essence.webp|/media/products/bundles/EssencePlast.webp|/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp|/media/products/coins/x1f2.webp|/media/products/coins/x1p2.webp;1|10|100|1000|10000;;;"{""copper"":10,""silver"":10,""electrum"":10,""gold"":10,""platinum"":10}";;FAUX;;
 pack-10-cartes-aleatoires;10 Cartes Surprise;10 Random Cards;10;"### Découverte aléatoire
 **10 cartes tirées au sort** dans nos collections. Choisissez simplement votre catégorie préférée et laissez-vous surprendre !
-
 **Catégories disponibles :**
 - **Totalement aléatoire** : mélange de toutes nos cartes
 - **Armes** : mêlée & distance
@@ -177,10 +19,8 @@ pack-10-cartes-aleatoires;10 Cartes Surprise;10 Random Cards;10;"### Découverte
 - **Explosifs** : matériel moderne
 - **Véhicules** : moyens de transport
 - **Poisons** : substances dangereuses
-
 *Parfait pour découvrir nos cartes ou compléter une collection !*";"### Random discovery
 **10 randomly drawn cards** from our collections. Simply choose your preferred category and let yourself be surprised!
-
 **Available categories:**
 - **Totally random**: mix of all our cards
 - **Weapons**: melee & ranged
@@ -191,94 +31,54 @@ pack-10-cartes-aleatoires;10 Cartes Surprise;10 Random Cards;10;"### Découverte
 - **Explosives**: modern gear
 - **Vehicles**: means of transport
 - **Poisons**: dangerous substances
-
 *Perfect for discovering our cards or completing a collection!*";Paquet de dix cartes surprises selon la catégorie choisie pour découvrir ou compléter la collection.;Pack of ten surprise cards in the chosen category to discover or round out the collection.;/media/products/cards/arme-recto.webp|/media/products/cards/alexandrite-recto.webp|/media/products/cards/sac-aa-dos-recto.webp|/media/products/cards/bombe-recto.webp;;;;;FR|EN;FAUX;;
-triptyque-espece;Triptyque d'Espèce;Species Triptych;10;"### Collection complète d'espèces pour D&D 5e 2024
-Un **triptyque personnalisable** contenant toutes les espèces disponibles de D&D 5e 2024. Chaque carte présente les caractéristiques, traits raciaux et particularités de chaque espèce.
-
+pack-57-armes-armures;Armes & Armures;Weapons & Armor;19.95;"### Combat complet - 57 cartes
+Collection parfaite des **44 armes** et **13 armures** : tout l'équipement nécessaire pour équiper et protéger votre groupe au combat.
 **Contenu :**
-- **Toutes les espèces** de D&D 5e 2024
-- **Cartes haute qualité** avec illustrations détaillées
-- **Informations complètes** : traits, bonus, capacités spéciales
-- **Compatible 5e 2024**
-
-**Options de personnalisation :**
-- Sélection d'espèces spécifiques selon vos besoins
-- Format triptyque pour présentation élégante
-
-*Créez votre personnage en un instant avec toutes les informations à portée de main !*";"### Complete collection of species for D&D 5e 2024
-A **customizable triptych** containing all available species from D&D 5e 2024. Each card presents the characteristics, racial traits, and particularities of each species.
-
+- **44 armes complètes** : mêlée, distance, exotiques
+- **13 armures** : légères, intermédiaires, lourdes
+- **Protection totale** pour tous les styles de combat
+- **Arsenal complet** sans superflu
+*L'essentiel du combat en un seul paquet !*";"### Complete combat - 57 cards
+Perfect collection of **44 weapons** and **13 armors**: all the equipment needed to arm and protect your party in combat.
 **Contents:**
-- **All species** from D&D 5e 2024
-- **High-quality cards** with detailed illustrations
-- **Complete information**: traits, bonuses, special abilities
-- **5e 2024 Compatible**
-
-**Customization options:**
-- Selection of specific species according to your needs
-- Triptych format for elegant presentation
-
-*Create your character instantly with all information at your fingertips!*";Triptyque personnalisable avec toutes les espèces de D&D 5e 2024 pour création rapide de personnage.;Customizable triptych with all D&D 5e 2024 species for quick character creation.;/media/game/triptychs/examples/race-aasimar-recto.webp|/media/game/triptychs/examples/race-aasimar-verso.webp;;;;;;VRAI;Aasimar|Drakéide d'Airain|Drakéide d'Argent|Drakéide Blanc|Drakéide Bleu|Drakéide de Bronze|Drakéide de Cuivre|Drakéide Noir|Drakéide d'Or|Drakéide Rouge|Drakéide Vert|Elfe - Drows|Elfe - Elfe sylvestre|Elfe - Haut-elfe|Gnome des forêts|Gnome des roches|Goliath - Géants du feu|Goliath - Géants des pierres|Goliath - Géants du givre|Goliath - Géants des collines|Goliath - Géants des nuages|Goliath - Géants des tempêtes|Halfelin|Humain - Bagarreur de tavernes|Humain - Chanceux|Humain - Doué|Humain - Façonneur|Humain - Guérisseur|Humain - Initié à la magie|Humain - Musicien|Humain - Robuste|Humain - à la Sauvagerie Martiale|Humain - Vigilant|Nain|Orc|Tieffelin - Abyssal|Tieffelin - Chthonien|Tieffelin - Infernal;espece
-triptyque-classe;Triptyque de Classe;Class Triptych;30;"### Collection complète de classes et sous-classes pour D&D 5e 2024
-Un **triptyque personnalisable** contenant toutes les classes et leurs sous-classes de D&D 5e 2024. Chaque carte détaille les capacités, progressions et spécialisations de chaque classe.
-
-**Inclus :**
-- **Toutes les classes** de D&D 5e 2024
-- **Toutes les sous-classes** disponibles
-- **Cartes d'équipement assorties** correspondant au paquetage de classe
-- **Pièces de départ** selon la classe choisie
-- **Compatible 5e 2024**
-
-**Options de personnalisation :**
-- Sélection de classes spécifiques
-- Choix des sous-classes préférées
-- Format triptyque organisé par thème
-
-*Maîtrisez votre classe avec tout l'équipement nécessaire !*";"### Complete collection of classes and subclasses for D&D 5e 2024
-A **customizable triptych** containing all classes and their subclasses from D&D 5e 2024. Each card details the abilities, progressions, and specializations of each class.
-
-**Included:**
-- **All classes** from D&D 5e 2024
-- **All available subclasses**
-- **Matching equipment cards** corresponding to class package
-- **Starting coins** according to chosen class
-- **5e 2024 Compatible**
-
-**Customization options:**
-- Selection of specific classes
-- Choice of preferred subclasses
-- Triptych format organized by theme
-
-*Master your class with all necessary equipment!*";Triptyque personnalisable avec toutes les classes et sous-classes de D&D 5e 2024.;Customizable triptych with all D&D 5e 2024 classes and subclasses.;/media/game/triptychs/examples/classe-barbare-recto.webp|/media/game/triptychs/examples/classe-barbare-verso.webp;;;;;;VRAI;Barbare - Voie de l'Arbre-Monde|Barbare - Voie du Berserker|Barbare - Voie du Cœur sauvage|Barbare - Voie du Zélateur|Barde - Collège de la Danse|Barde - Collège du Savoir|Barde - Collège de la Séduction|Barde - Collège de la Vaillance|Clerc - Domaine de la Guerre|Clerc - Domaine de la Lumière|Clerc - Domaine de la Ruse|Clerc - Domaine de la Vie|Druide - Cercle des Astres|Druide - Cercle de la Lune|Druide - Cercle des Mers|Druide - Cercle de la Terre|Ensorceleur - Sorcellerie aberrante|Ensorceleur - Sorcellerie draconique|Ensorceleur - Sorcellerie mécanique|Ensorceleur - Sorcellerie sauvage|Guerrier - Champion|Guerrier - Chevalier occulte|Guerrier - Maître de guerre|Guerrier - Soldat psi|Magicien - Abjurateur|Magicien - Devin|Magicien - Évocateur|Magicien - Illusionniste|Moine - Credo des Éléments|Moine - Credo de la Miséricorde|Moine - Credo de l'Ombre|Moine - Credo de la Paume|Occultiste - Protecteur Archifée|Occultiste - Protecteur Céleste|Occultiste - Protecteur Fiélon|Occultiste - Protecteur Grand Ancien|Paladin - Serment des Anciens|Paladin - Serment de Dévotion|Paladin - Serment de Gloire|Paladin - Serment de Vengeance|Rôdeur - Belluaire|Rôdeur - Chasseur|Rôdeur - Traqueur des ténèbres|Rôdeur - Vagabond féerique|Roublard - Âme acérée|Roublard - Arnaqueur arcanique|Roublard - Assassin|Roublard - Voleur;classe
-triptyque-historique;Triptyque d'Historique;Background Triptych;30;"### Collection complète d'historiques pour D&D 5e 2024
-Un **triptyque personnalisable** contenant tous les historiques disponibles de D&D 5e 2024. Chaque carte présente les compétences, équipements et traits spéciaux de chaque historique.
-
-**Inclus :**
-- **Tous les historiques** de D&D 5e 2024
-- **Cartes informatives** avec détails complets
-- **Cartes d'équipement assorties** correspondant au paquetage d'historique
-- **Pièces de départ** selon l'historique choisi
-- **Compatible 5e 2024**
-
-**Options de personnalisation :**
-- Sélection d'historiques par thème
-- Groupement par type d'aventure
-- Format triptyque pour consultation facile
-
-*Donnez vie au passé de votre personnage avec équipement et richesses inclus !*";"### Complete collection of backgrounds for D&D 5e 2024
-A **customizable triptych** containing all available backgrounds from D&D 5e 2024. Each card presents the skills, equipment, and special traits of each background.
-
-**Included:**
-- **All backgrounds** from D&D 5e 2024
-- **Informative cards** with complete details
-- **Matching equipment cards** corresponding to background package
-- **Starting coins** according to chosen background
-- **5e 2024 Compatible**
-
-**Customization options:**
-- Selection of backgrounds by theme
-- Grouping by adventure type
-- Triptych format for easy consultation
-
-*Bring your character's past to life with equipment and wealth included!*";Triptyque personnalisable avec tous les historiques de D&D 5e 2024 pour enrichir votre personnage.;Customizable triptych with all D&D 5e 2024 backgrounds to enrich your character.;/media/game/triptychs/examples/historique-acolyte-recto.webp|/media/game/triptychs/examples/historique-acolyte-verso.webp;;;;;;VRAI;Acolyte|Artisan|Artiste|Charlatan|Criminel|Ermite|Fermier|Garde|Guide|Marchand|Marin|Noble|Sage|Scribe|Soldat|Voyageur;historique
+- **44 complete weapons**: melee, ranged, exotic
+- **13 armors**: light, medium, heavy
+- **Total protection** for every fighting style
+- **Complete arsenal** without excess
+*Combat essentials in one package!*";Collection de 57 cartes d'armes et armures pour équiper complètement un groupe.;Collection of 57 weapon and armor cards to fully equip a party.;/media/products/cards/arme-recto.webp|/media/products/cards/armure-recto.webp;;;;;FR|EN;FAUX;;
+pack-65-paquetages;Paquetages d'Aventure;Adventure Packs;22.75;"### Équipement par background - 65 cartes
+Collection complète des **65 paquetages** spécialisés selon les backgrounds : artiste, cambrioleur, diplomate, érudit, explorateur et plus.
+**Contenu :**
+- **7 paquetages complets** pour tous les backgrounds
+- **Équipement spécialisé** selon le profil du personnage
+- **Matériel de survie** adapté aux missions spécifiques
+- **Immersion totale** dans le rôle choisi
+*Équipez votre personnage selon son histoire !*";"### Equipment by background - 65 cards
+Complete collection of **65 specialized packs** according to backgrounds: artist, burglar, diplomat, scholar, explorer, and more.
+**Contents:**
+- **7 complete packs** for every background
+- **Specialized equipment** according to character profile
+- **Survival gear** adapted to specific missions
+- **Total immersion** in the chosen role
+*Equip your character according to their story!*";Collection de 65 cartes de paquetages spécialisés pour équiper selon le background.;Collection of 65 specialized pack cards to equip according to background.;/media/products/cards/sac-aa-dos-recto.webp;;;;;FR|EN;FAUX;;
+pack-70-explosifs-outils;Explosifs & Outils;Explosives & Tools;24.50;"### Arsenal spécialisé - 70 cartes
+Collection tactique de **70 cartes** : explosifs modernes, outils d'artisan et poisons pour campagnes qui sortent de l'ordinaire.
+**Contenu :**
+- **20 explosifs** : grenades, bombes, charges explosives
+- **37 outils spécialisés** : artisanat, crochetage, alchimie
+- **13 poisons** : effets variés et substances dangereuses
+- **Matériel moderne** pour campagnes avancées
+*Pour des aventures qui repoussent les limites !*";"### Specialized arsenal - 70 cards
+Tactical collection of **70 cards**: modern explosives, craftsman tools, and poisons for campaigns that break the mold.
+**Contents:**
+- **20 explosives**: grenades, bombs, explosive charges
+- **37 specialized tools**: crafting, lockpicking, alchemy
+- **13 poisons**: varied effects and dangerous substances
+- **Modern equipment** for advanced campaigns
+*For adventures that push the boundaries!*";Collection de 70 cartes d'explosifs, outils et poisons pour campagnes avancées.;Collection of 70 explosive, tool, and poison cards for advanced campaigns.;/media/products/cards/bombe-recto.webp|/media/products/cards/mataerield-alchimiste-recto.webp|/media/products/cards/sang-d-assassin-recto.webp;;;;;FR|EN;FAUX;;
+pack-145-services-vehicules;Services & Véhicules;Services & Vehicles;50.75;### Voyage et logistique - 145 cartes Collection étendue de **145 cartes** pour organiser voyages et missions : services d'auberge, transport et tous types de véhicules. **Contenu :**\n- **63 services** : auberges, soins, mercenaires, passeurs\n- **54 véhicules** : terrestres, marins, aériens\n- **28 cartes de règles** : pour maîtriser voyages et logistique *Tout pour voyager et s'organiser en campagne !*;### Travel and logistics - 117 cards Extended collection of **117 cards** to organize travels and missions: inn services, transport, and all types of vehicles. **Contents:** *Everything to travel and organize in campaigns!*;Collection de 145 cartes de services et véhicules pour organiser voyages et missions.;Collection of 117 service and vehicle cards to organize travels and missions.;/media/products/cards/biaere-chope-recto.webp|/media/products/cards/vaisseau-aaerien-recto.webp;;;;;FR|EN;FAUX;;
+pack-316-butins-ingenieries;Butins & Ingénieries;Loot & Engineering;110.60;### Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils - 316 cartes Pour des campagnes qui osent : trésors variés, matériel instable, techno-reliques et les indispensables de l'artisan. **Contenu :**\n- **204 butins** : trésors, gemmes, artefacts\n- **27 marchandises** : biens de commerce\n- **20 explosifs** : grenades, bombes, charges\n- **37 outils** : artisanat, crochetage, alchimie\n- **28 cartes de règles** : pour maîtriser ces équipements *Injecte de la variété et des choix tactiques — du troc de marché au braquage high-fantasy.*;### Loot • Explosives & Modern/Futuristic Weapons • Trade Goods • Tools For campaigns that push the envelope: varied treasures, volatile hardware, techno-relics, and every crafter's staple. **Contents:** *Add variety and tactical choices — from market bartering to high-fantasy heists.*;Cartes de butin et matériel exotique mêlant trésors, explosifs et outils pour campagnes audacieuses.;Cards of loot and exotic gear mixing treasures, explosives, and tools for daring campaigns.;/media/products/cards/alexandrite-recto.webp|/media/products/cards/bombe-recto.webp|/media/products/cards/chaevre-recto.webp|/media/products/cards/mataerield-alchimiste-recto.webp;;;;;FR|EN;FAUX;;
+pack-223-routes-services;Routes & Services;Roads & Services;78.05;### Paquetages • Services • Véhicules • Poisons - 223 cartes Tout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque avec des cartes claires et pratiques. **Contenu :**\n- **65 paquetages** : 7 types selon les backgrounds\n- **63 services** : auberges, soins, mercenaires\n- **54 véhicules** : terrestres, marins, aériens\n- **13 poisons** : substances dangereuses\n- **28 cartes de règles** : pour maîtriser voyages et services *Parfait pour les campagnes orientées exploration, voyage et intrigue.*;### Packs • Services • Vehicles • Poisons Everything to set your world in motion: ready your PCs, travel, bargain, and take risks with clean, table-friendly cards. **Contents:** *Perfect for exploration-, travel- and intrigue-heavy campaigns.*;Sélection de cartes dédiées aux voyages, services, véhicules et poisons pour dynamiser l'exploration.;Selection of cards focused on travel, services, vehicles, and poisons to energize exploration.;/media/products/cards/sac-aa-dos-recto.webp|/media/products/cards/biaere-chope-recto.webp|/media/products/cards/vaisseau-aaerien-recto.webp|/media/products/cards/sang-d-assassin-recto.webp;;;;;FR|EN;FAUX;;
+pack-226-arsenal-aventurier;Arsenal de l'Aventurier;Adventurer's Arsenal;79.10;### Armes • Armures • Équipement - 226 cartes Un lot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées. **Contenu :**\n- **44 armes complètes** : mêlée, distance, exotiques\n- **13 armures** : légères, intermédiaires, lourdes\n- **141 équipements** : outils d'aventure essentiels\n- **28 cartes de règles** : pour maîtriser votre équipement *Idéal pour la table : pioche, pose, échange — fini la fouille dans le manuel.*;### Weapons • Armor • Equipment A massive, ready-to-play bundle to outfit an entire party: classic and exotic weapons, protection for every build, and all the adventuring essentials as illustrated cards. **Contents:** *Perfect at the table: draw, place, trade — no more digging through the rulebook.*;Boîte de cartes illustrées couvrant armes, armures et équipement pour équiper immédiatement un groupe.;Box of illustrated cards covering weapons, armor, and gear to outfit a party instantly.;/media/products/cards/arme-recto.webp|/media/products/cards/arme-verso.webp|/media/products/cards/greatclub-recto.webp|/media/products/cards/armure-recto.webp;;;;;FR|EN;FAUX;;
+triptyque-aleatoire;Triptyques Mystères;Mystery Triptychs;60;### Trois triptyques, un héros clé en main Tire au sort **1 Classe**, **1 Espèce** et **1 Historique** pour forger une origine unique, puis joue immédiatement avec : **Inclus :** Un bundle idéal pour des *one-shots*, des tables débutantes ou pour surprendre des joueurs vétérans. *Fini la fouille dans le manuel.*;### Three triptychs, a plug-and-play hero Draw at random **1 Class**, **1 Species** and **1 Background** to forge a unique origin, then play right away with: **Included:** Perfect for one-shots, new tables, or to surprise veteran players. *No more digging through the rulebook.*;Lot de triptyques aléatoires pour créer un héros complet avec équipement assorti et pièces de départ.;Bundle of random triptychs to build a complete hero with matching gear and starting coins.;/media/game/triptychs/examples/race-aasimar-recto.webp|/media/game/triptychs/examples/classe-barbare-recto.webp|/media/game/triptychs/examples/historique-acolyte-recto.webp|/media/game/triptychs/examples/race-aasimar-verso.webp;;;;;;FAUX;;
