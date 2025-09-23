@@ -1808,8 +1808,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return {
           product: {
             id: lot.productId,
-            name: lot.displayName || product?.name || lot.productId,
-            summary: product?.summary || `Lot de pièces D&D - ${lot.displayName || product?.name || lot.productId}`,
+            name: product?.name || lot.productId, // Utiliser le nom de base du produit
+            summary: product?.summary || `Lot de pièces D&D - ${product?.name || lot.productId}`,
             price: lot.price,
             url: `product.php?id=${encodeURIComponent(lot.productId)}`
           },

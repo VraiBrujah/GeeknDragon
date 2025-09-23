@@ -636,12 +636,14 @@ class CurrencyConverterPremium {
           name: 'Metal',
           type: 'dropdown', 
           value: metalNameFr,
+          options: 'cuivre|argent|électrum|or|platine',
           role: 'metal'
         },
         custom2: {
           name: 'Multiplicateur',
           type: 'dropdown',
           value: multiplier.toString(),
+          options: '1|10|100|1000|10000',
           role: 'multiplier'
         }
       }
@@ -700,12 +702,14 @@ class CurrencyConverterPremium {
                 name: 'Metal',
                 type: 'dropdown',
                 value: metalNameFr,
+                options: 'cuivre|argent|électrum|or|platine',
                 role: 'metal'
               },
               custom2: {
                 name: 'Multiplicateur', 
                 type: 'dropdown',
                 value: multiplier.toString(),
+                options: '1|10|100|1000|10000',
                 role: 'multiplier'
               }
             } : {}
