@@ -594,15 +594,24 @@ class CurrencyConverterPremium {
     if (window.CoinLotRecommender) {
       try {
         const recommender = new window.CoinLotRecommender();
+        recommender.debugMode = true; // Activer debug
+        console.log('🔍 Test nouvel algorithme avec besoins:', needs);
+        
         const lotRecommendations = recommender.findOptimalLotCombination(needs);
+        console.log('🎯 Résultat nouvel algorithme:', lotRecommendations);
         
         // Si le nouvel algorithme trouve une solution, l'utiliser
         if (lotRecommendations && lotRecommendations.length > 0) {
+          console.log('✅ Utilisation nouvel algorithme');
           return lotRecommendations;
+        } else {
+          console.log('❌ Nouvel algorithme n\'a pas trouvé de solution, fallback vers ancien');
         }
       } catch (error) {
-        console.warn('Erreur nouvel algorithme, fallback vers ancien:', error);
+        console.warn('🚨 Erreur nouvel algorithme, fallback vers ancien:', error);
       }
+    } else {
+      console.log('⚠️ CoinLotRecommender non disponible');
     }
     
     // Fallback vers l'ancien algorithme (pièce par pièce)

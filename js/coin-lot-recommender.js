@@ -1,12 +1,11 @@
 /**
- * Algorithme de recommandation de lots de pièces
- * Séparé du convertisseur de monnaie pour éviter les interférences
- * IMPORTANT: Doit générer exactement le même format que l'ancien algorithme
+ * Algorithme de recommandation de lots de pièces optimisé
+ * Trouve les combinaisons au coût total minimum via analyse dynamique de products.json
  */
 class CoinLotRecommender {
   
   constructor() {
-    // Aucune dépendance externe
+    this.debugMode = false;
   }
   
   /**
@@ -19,152 +18,281 @@ class CoinLotRecommender {
       return [];
     }
     
-    // 1. Analyser tous les lots disponibles
-    const availableLots = this.getAllAvailableLots();
+    // Convertir le format needs en format standardisé
+    const standardNeeds = this.standardizeNeeds(needs);
+    if (this.debugMode) {
+      console.log('Besoins standardisés:', standardNeeds);
+    }
     
-    // 2. Trouver la meilleure combinaison
-    const bestCombination = this.findBestCombination(needs, availableLots);
+    // Trouver la solution optimale
+    const optimalSolution = this.findMinimalCostSolution(standardNeeds);
     
-    // 3. Formater exactement comme l'ancien algorithme
-    return this.formatRecommendations(bestCombination, needs);
+    if (!optimalSolution) {
+      return null; // Pas de solution trouvée
+    }
+    
+    // Formater pour l'ancien algorithme
+    return this.formatRecommendations(optimalSolution);
   }
   
   /**
-   * Analyse tous les produits avec coin_lots
+   * Standardise les besoins en format uniforme
+   * @param {Object} needs - Format {currency_multiplier: quantity}
+   * @returns {Object} - Format {metal: {multiplier: quantity}}
    */
-  getAllAvailableLots() {
-    const lots = [];
+  standardizeNeeds(needs) {
+    const standard = {};
     
-    Object.entries(window.products).forEach(([productId, product]) => {
-      if (product.coin_lots && typeof product.coin_lots === 'object') {
-        // Pour chaque multiplicateur disponible
-        const multipliers = product.customizable && product.multipliers ? product.multipliers : [1];
+    Object.entries(needs).forEach(([key, quantity]) => {
+      if (quantity > 0) {
+        const [metal, multiplier] = key.split('_');
+        const mult = parseInt(multiplier) || 1;
         
-        multipliers.forEach(multiplier => {
-          const provides = {};
-          Object.entries(product.coin_lots).forEach(([metal, quantity]) => {
-            if (quantity > 0) {
-              const key = `${metal}_${multiplier}`;
-              provides[key] = quantity;
-            }
-          });
-          
-          if (Object.keys(provides).length > 0) {
-            lots.push({
-              productId,
-              product,
-              multiplier,
-              provides,
-              price: product.price,
-              isCustom: false
-            });
+        if (!standard[metal]) {
+          standard[metal] = {};
+        }
+        standard[metal][mult] = quantity;
+      }
+    });
+    
+    return standard;
+  }
+  
+  /**
+   * Trouve la solution au coût minimum en analysant tous les lots disponibles
+   */
+  findMinimalCostSolution(standardNeeds) {
+    const allCombinations = this.generateAllPossibleCombinations(standardNeeds);
+    
+    if (allCombinations.length === 0) {
+      return null;
+    }
+    
+    // Trier par prix total croissant
+    allCombinations.sort((a, b) => a.totalCost - b.totalCost);
+    
+    if (this.debugMode) {
+      console.log('Meilleures combinaisons:', allCombinations.slice(0, 3));
+    }
+    
+    return allCombinations[0];
+  }
+  
+  /**
+   * Génère toutes les combinaisons possibles de lots pour satisfaire les besoins
+   */
+  generateAllPossibleCombinations(standardNeeds) {
+    const combinations = [];
+    
+    // 1. Analyser chaque produit qui a des coin_lots
+    Object.entries(window.products).forEach(([productId, product]) => {
+      if (!product.coin_lots || typeof product.coin_lots !== 'object') {
+        return;
+      }
+      
+      const multipliers = product.customizable && product.multipliers ? product.multipliers : [1];
+      
+      // Tester chaque multiplicateur disponible
+      multipliers.forEach(multiplier => {
+        const solution = this.testProductForNeeds(productId, product, multiplier, standardNeeds);
+        if (solution) {
+          combinations.push(solution);
+        }
+      });
+    });
+    
+    // Note: Les pièces personnalisées sont maintenant traitées comme tous les autres produits
+    
+    return combinations;
+  }
+  
+  /**
+   * Teste si un produit peut satisfaire les besoins avec un multiplicateur donné
+   */
+  testProductForNeeds(productId, product, multiplier, standardNeeds) {
+    if (this.debugMode) {
+      console.log(`🔍 Test produit ${productId} avec multiplicateur ${multiplier}`);
+    }
+    
+    // Vérifier si ce produit peut satisfaire TOUS les besoins du même multiplicateur
+    const metalGroups = {};
+    
+    // Regrouper tous les besoins par multiplicateur
+    for (const [metal, multiplierNeeds] of Object.entries(standardNeeds)) {
+      if (multiplierNeeds[multiplier] && multiplierNeeds[multiplier] > 0) {
+        if (product.coin_lots[metal] && product.coin_lots[metal] > 0) {
+          metalGroups[metal] = multiplierNeeds[multiplier];
+        } else {
+          // Ce produit ne fournit pas ce métal
+          if (this.debugMode) {
+            console.log(`  ❌ ${metal}: produit ne fournit pas ce métal`);
           }
+          return null;
+        }
+      }
+    }
+    
+    
+    // Si aucun besoin pour ce multiplicateur, ignorer
+    if (Object.keys(metalGroups).length === 0) {
+      return null;
+    }
+    
+    // CORRECTION CRITIQUE: Calculer le coût réel selon le type de produit
+    let totalCost = 0;
+    let totalQuantity = 0;
+    
+    if (productId === 'coin-custom-single' || productId === 'coin-trio-customizable') {
+      // Pièces personnalisables = 1 produit par métal différent nécessaire
+      const metalCount = Object.keys(metalGroups).length;
+      const maxQuantityPerMetal = Math.max(...Object.values(metalGroups));
+      
+      if (metalCount > 1) {
+        // Plusieurs métaux = impossible à satisfaire avec un seul produit
+        return null;
+      }
+      
+      // Un seul métal
+      const [metal, quantity] = Object.entries(metalGroups)[0];
+      const coinsPerProduct = productId === 'coin-custom-single' ? 1 : 3;
+      totalQuantity = Math.ceil(quantity / coinsPerProduct);
+      totalCost = product.price * totalQuantity;
+      
+      if (this.debugMode) {
+        console.log(`  📊 ${product.name}: ${quantity} ${metal} nécessaires, ${coinsPerProduct} par produit = ${totalQuantity} produit(s) × ${product.price}$ = ${totalCost}$`);
+      }
+    } else {
+      // Produit lot (ex: Quintessence) = 1 exemplaire pour couvrir tous les métaux
+      let maxQuantityNeeded = 0;
+      for (const [metal, neededQty] of Object.entries(metalGroups)) {
+        const providedQty = product.coin_lots[metal];
+        const requiredInstances = Math.ceil(neededQty / providedQty);
+        maxQuantityNeeded = Math.max(maxQuantityNeeded, requiredInstances);
+      }
+      totalQuantity = maxQuantityNeeded;
+      totalCost = product.price * maxQuantityNeeded;
+      
+      if (this.debugMode) {
+        console.log(`  📊 Produit lot: ${maxQuantityNeeded} exemplaire(s) × ${product.price}$ = ${totalCost}$`);
+      }
+    }
+    
+    const solution = {
+      type: 'product_solution',
+      lots: [{
+        productId,
+        product,
+        multiplier,
+        quantity: totalQuantity,
+        covers: metalGroups,
+        isCustomCoin: productId === 'coin-custom-single'
+      }],
+      totalCost,
+      description: `${product.name} (×${multiplier}) - ${totalQuantity} pièce(s)`
+    };
+    
+    if (this.debugMode) {
+      console.log(`  🎯 Solution trouvée: ${solution.description} = ${totalCost}$`);
+    }
+    
+    return solution;
+  }
+  
+  
+  /**
+   * Formate les recommandations selon le format attendu par l'ancien algorithme
+   * UNIFIÉ : même logique pour tous les types de produits
+   */
+  formatRecommendations(solution) {
+    if (!solution || !solution.lots || solution.lots.length === 0) {
+      return null;
+    }
+    
+    const recommendations = [];
+    
+    // TRAITEMENT UNIFIÉ pour tous les types de produits
+    solution.lots.forEach(lot => {
+      if (lot.isCustomCoin || lot.productId === 'coin-trio-customizable') {
+        // Pièces personnalisables : une recommandation par métal nécessaire
+        Object.keys(lot.covers).forEach(metal => {
+          const metalName = this.getMetalDisplayName(metal);
+          
+          const recommendation = {
+            productId: lot.productId,
+            quantity: lot.quantity,
+            price: lot.product.price,
+            totalCost: lot.product.price * lot.quantity,
+            displayName: `${lot.product.name} (${metalName} ×${lot.multiplier})`,
+            customFields: {
+              custom1: {
+                name: 'Métal',
+                type: 'dropdown',
+                value: metal,
+                options: 'copper|silver|electrum|gold|platinum',
+                role: 'metal'
+              }
+            }
+          };
+          
+          if (lot.multiplier !== 1) {
+            recommendation.customFields.custom2 = {
+              name: 'Multiplicateur',
+              type: 'dropdown',
+              value: lot.multiplier.toString(),
+              options: '1|10|100|1000|10000',
+              role: 'multiplier'
+            };
+          }
+          
+          recommendations.push(recommendation);
         });
-      }
-    });
-    
-    return lots;
-  }
-  
-  /**
-   * Trouve la meilleure combinaison de lots
-   */
-  findBestCombination(needs, availableLots) {
-    let bestCombination = null;
-    let bestTotalCost = Infinity;
-    
-    // 1. Essayer chaque lot individuel
-    for (const lot of availableLots) {
-      if (this.lotCoversNeeds(lot.provides, needs)) {
-        if (lot.price < bestTotalCost) {
-          bestTotalCost = lot.price;
-          bestCombination = [lot];
-        }
-      }
-    }
-    
-    // 2. Si aucun lot unique ne marche, essayer les combinaisons de 2
-    if (!bestCombination) {
-      for (let i = 0; i < availableLots.length; i++) {
-        for (let j = i + 1; j < availableLots.length; j++) {
-          const combination = [availableLots[i], availableLots[j]];
-          const combinedProvides = this.combineLotProvides(combination);
-          
-          if (this.lotCoversNeeds(combinedProvides, needs)) {
-            const totalCost = combination.reduce((sum, lot) => sum + lot.price, 0);
-            if (totalCost < bestTotalCost) {
-              bestTotalCost = totalCost;
-              bestCombination = combination;
-            }
-          }
-        }
-      }
-    }
-    
-    // 3. Fallback : utiliser l'ancien algorithme (pièce par pièce)
-    if (!bestCombination) {
-      return null; // Indique qu'il faut utiliser l'ancien algorithme
-    }
-    
-    return bestCombination;
-  }
-  
-  /**
-   * Vérifie si un lot couvre tous les besoins
-   */
-  lotCoversNeeds(provides, needs) {
-    for (const [key, neededQty] of Object.entries(needs)) {
-      if (neededQty > 0 && (!provides[key] || provides[key] < neededQty)) {
-        return false;
-      }
-    }
-    return true;
-  }
-  
-  /**
-   * Combine les capacités de plusieurs lots
-   */
-  combineLotProvides(lots) {
-    const combined = {};
-    for (const lot of lots) {
-      for (const [key, qty] of Object.entries(lot.provides)) {
-        combined[key] = (combined[key] || 0) + qty;
-      }
-    }
-    return combined;
-  }
-  
-  /**
-   * Formate les recommandations exactement comme l'ancien algorithme
-   */
-  formatRecommendations(lots, needs) {
-    if (!lots || lots.length === 0) {
-      return null; // Indique qu'il faut utiliser l'ancien algorithme
-    }
-    
-    return lots.map(lot => {
-      const recommendation = {
-        productId: lot.productId,
-        quantity: 1,
-        price: lot.price,
-        totalCost: lot.price,
-        displayName: lot.product.name,
-        customFields: {}
-      };
-      
-      // Ajouter les champs personnalisés si nécessaire (multiplicateur pour lots)
-      if (lot.product.customizable && lot.multiplier !== 1) {
-        recommendation.customFields.custom2 = {
-          name: 'Multiplicateur',
-          type: 'dropdown',
-          value: lot.multiplier.toString(),
-          options: '1|10|100|1000|10000',
-          role: 'multiplier'
+        
+      } else {
+        // Produits lots (ex: Quintessence Métallique)
+        const recommendation = {
+          productId: lot.productId,
+          quantity: lot.quantity,
+          price: lot.product.price,
+          totalCost: lot.product.price * lot.quantity,
+          displayName: lot.product.name,
+          customFields: {}
         };
+        
+        // CORRECTION: Toujours ajouter multiplicateur pour produits customizable
+        if (lot.product.customizable) {
+          recommendation.customFields.custom2 = {
+            name: 'Multiplicateur',
+            type: 'dropdown',
+            value: lot.multiplier.toString(),
+            options: '1|10|100|1000|10000',
+            role: 'multiplier'
+          };
+        }
+        
+        recommendations.push(recommendation);
       }
-      
-      return recommendation;
     });
+    
+    if (this.debugMode) {
+      console.log('Recommandations formatées:', recommendations);
+      console.log('Coût total solution:', solution.totalCost);
+    }
+    
+    return recommendations;
+  }
+  
+  /**
+   * Traduit le nom du métal pour l'affichage
+   */
+  getMetalDisplayName(metal) {
+    const metalNames = {
+      copper: 'cuivre',
+      silver: 'argent',
+      electrum: 'électrum',
+      gold: 'or',
+      platinum: 'platine'
+    };
+    return metalNames[metal] || metal;
   }
 }
 
