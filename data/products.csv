@@ -1,12 +1,13 @@
+﻿Column1;Column2;Column3;Column4;Column5;Column6;Column7;Column8;Column9;Column10;Column11;Column12;Column13;Column14;Column15;Column16;Column17
 id;name_fr;name_en;price;description_fr;description_en;summary_fr;summary_en;images;multipliers;metals_fr;metals_en;coin_lots;languages;customizable;triptych_options;triptych_type
-piece-personnalisee;Pièce Personnalisée;Custom Coin;15;"### Pièce unique à votre choix
+piece-personnalisee;Pièce Personnalisée;Custom Coin;10;"### Pièce unique à votre choix
 Choisissez **le métal** (cuivre, argent, électrum, or, platine) et **le multiplicateur** (unitaire, ×10, ×100, ×1000, ×10000) pour créer votre pièce sur mesure.
 
 *Parfait pour compléter une collection ou remplacer une pièce perdue.*";"### Single coin of your choice
 Select **the metal** (copper, silver, electrum, gold, platinum) and **multiplier** (unit, ×10, ×100, ×1000, ×10000) to create your custom coin.
 
 *Perfect for completing a collection or replacing a lost coin.*";Pièce métallique personnalisable avec choix du métal et du multiplicateur.;Customizable metal coin with choice of metal and multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;cuivre|argent|électrum|or|platine;copper|silver|electrum|gold|platinum;"{""copper"":1,""silver"":1,""electrum"":1,""gold"":1,""platinum"":1}";;VRAI;;
-lot3-pieces;Trio de Pièces;Trio of Coins;24;"### Trois pièces personnalisables
+lot3-pieces;Trio de Pièces;Trio of Coins;25;"### Trois pièces personnalisables
 **3 pièces métalliques** au choix avec métal et multiplicateur personnalisables. Idéal pour compléter une collection ou créer un petit trésor sur mesure.
 
 **Contenu :**
@@ -40,7 +41,7 @@ lot5-metaux;Quintessence Métallique;Metal Quintessence;35;"### Cinq métaux, un
 - **Complete collection** of the 5 essential metals
 
 *Discover the diversity of metals with consistent value!*";Collection de cinq pièces avec un de chaque métal et multiplicateur uniforme.;Collection of five coins with one of each metal and uniform multiplier.;/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp;1|10|100|1000|10000;;;"{""copper"":1,""silver"":1,""electrum"":1,""gold"":1,""platinum"":1}";;VRAI;;
-lot7-pieces-libre;Septuple Libre;Free Septuple;49;"### Sept pièces entièrement personnalisables
+lot7-pieces-libre;Septuple Libre;Free Septuple;50;"### Sept pièces entièrement personnalisables
 **7 pièces métalliques** avec choix libre du métal et du multiplicateur pour chaque pièce. Créez votre propre assortiment selon vos besoins précis.
 
 **Contenu :**
@@ -87,7 +88,7 @@ lot50-tresorerie;La Trésorerie du Seigneur;The Lord's Treasury;275;"### 50 piè
 **10 coins of each metal** (copper, silver, electrum, gold, platinum) using the **same multiplier** selected at checkout: *unit* by default (shiny) or **x10 / x100 / x1,000 / x10,000** (matte engraving).
 
 *Use multipliers to speed up counting without breaking immersion.*";Sélection de 50 pièces d'un même multiplicateur pour assurer une trésorerie abondante et cohérente.;Selection of 50 coins sharing one multiplier to deliver a plentiful, consistent treasury.;/media/products/bundles/Essence.webp|/media/products/bundles/EssencePlast.webp|/media/products/coins/coin-copper-1.webp|/media/products/coins/coin-silver-1.webp|/media/products/coins/coin-electrum-1.webp|/media/products/coins/coin-gold-1.webp|/media/products/coins/coin-platinum-1.webp|/media/products/coins/x1f2.webp|/media/products/coins/x1p2.webp;1|10|100|1000|10000;;;"{""copper"":10,""silver"":10,""electrum"":10,""gold"":10,""platinum"":10}";;FAUX;;
-pack-182-arsenal-aventurier;Arsenal de l'Aventurier;Adventurer's Arsenal;49.99;"### Armes • Armures • Équipement
+pack-182-arsenal-aventurier;Arsenal de l'Aventurier;Adventurer's Arsenal;50;"### Armes • Armures • Équipement
 Un lot massif et prêt-à-jouer pour équiper tout un groupe : armes classiques et exotiques, protections pour chaque style, et l'essentiel d'aventure en cartes illustrées.
 
 **Contenu :**
@@ -104,7 +105,7 @@ A massive, ready-to-play bundle to outfit an entire party: classic and exotic we
 - **Equipment**: ropes, torches, rations, field tools
 
 *Perfect at the table: draw, place, trade — no more digging through the rulebook.*";Boîte de cartes illustrées couvrant armes, armures et équipement pour équiper immédiatement un groupe.;Box of illustrated cards covering weapons, armor, and gear to outfit a party instantly.;/media/products/cards/arme-recto.webp|/media/products/cards/arme-verso.webp|/media/products/cards/greatclub-recto.webp|/media/products/cards/armure-recto.webp;;;;;FR|EN;FAUX;;
-pack-182-butins-ingenieries;Butins & Ingénieries;Loot & Engineering;36.99;"### Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils
+pack-182-butins-ingenieries;Butins & Ingénieries;Loot & Engineering;40;"### Butin • Explosifs & armes modernes/futuristes • Marchandises • Outils
 Pour des campagnes qui osent : trésors variés, matériel instable, techno-reliques et les indispensables de l'artisan.
 
 **Contenu :**
@@ -123,7 +124,7 @@ For campaigns that push the envelope: varied treasures, volatile hardware, techn
 - **Tools**: crafts, lockpicks, light alchemy, specialty kits
 
 *Add variety and tactical choices — from market bartering to high-fantasy heists.*";Cartes de butin et matériel exotique mêlant trésors, explosifs et outils pour campagnes audacieuses.;Cards of loot and exotic gear mixing treasures, explosives, and tools for daring campaigns.;/media/products/cards/alexandrite-recto.webp|/media/products/cards/bombe-recto.webp|/media/products/cards/chaevre-recto.webp|/media/products/cards/mataerield-alchimiste-recto.webp;;;;;FR|EN;FAUX;;
-pack-182-routes-services;Routes & Services;Roads & Services;34.99;"### Paquetages • Services • Véhicules • Poisons
+pack-182-routes-services;Routes & Services;Roads & Services;35;"### Paquetages • Services • Véhicules • Poisons
 Tout pour mettre le monde en mouvement : prépare tes PJ, voyage, négocie, et risque avec des cartes claires et pratiques.
 
 **Contenu :**
@@ -142,7 +143,7 @@ Everything to set your world in motion: ready your PCs, travel, bargain, and tak
 - **Poisons**: effects & rarity
 
 *Perfect for exploration-, travel- and intrigue-heavy campaigns.*";Sélection de cartes dédiées aux voyages, services, véhicules et poisons pour dynamiser l'exploration.;Selection of cards focused on travel, services, vehicles, and poisons to energize exploration.;/media/products/cards/sac-aa-dos-recto.webp|/media/products/cards/biaere-chope-recto.webp|/media/products/cards/vaisseau-aaerien-recto.webp|/media/products/cards/sang-d-assassin-recto.webp;;;;;FR|EN;FAUX;;
-triptyque-aleatoire;Triptyques Mystères;Mystery Triptychs;59.99;"### Trois triptyques, un héros clé en main
+triptyque-aleatoire;Triptyques Mystères;Mystery Triptychs;60;"### Trois triptyques, un héros clé en main
 Tire au sort **1 Classe**, **1 Espèce** et **1 Historique** pour forger une origine unique, puis joue immédiatement avec :
 
 **Inclus :**
@@ -192,7 +193,7 @@ pack-10-cartes-aleatoires;10 Cartes Surprise;10 Random Cards;10;"### Découverte
 - **Poisons**: dangerous substances
 
 *Perfect for discovering our cards or completing a collection!*";Paquet de dix cartes surprises selon la catégorie choisie pour découvrir ou compléter la collection.;Pack of ten surprise cards in the chosen category to discover or round out the collection.;/media/products/cards/arme-recto.webp|/media/products/cards/alexandrite-recto.webp|/media/products/cards/sac-aa-dos-recto.webp|/media/products/cards/bombe-recto.webp;;;;;FR|EN;FAUX;;
-triptyque-espece;Triptyque d'Espèce;Species Triptych;9.99;"### Collection complète d'espèces pour D&D 5e 2024
+triptyque-espece;Triptyque d'Espèce;Species Triptych;10;"### Collection complète d'espèces pour D&D 5e 2024
 Un **triptyque personnalisable** contenant toutes les espèces disponibles de D&D 5e 2024. Chaque carte présente les caractéristiques, traits raciaux et particularités de chaque espèce.
 
 **Contenu :**
@@ -219,7 +220,7 @@ A **customizable triptych** containing all available species from D&D 5e 2024. E
 - Triptych format for elegant presentation
 
 *Create your character instantly with all information at your fingertips!*";Triptyque personnalisable avec toutes les espèces de D&D 5e 2024 pour création rapide de personnage.;Customizable triptych with all D&D 5e 2024 species for quick character creation.;/media/game/triptychs/examples/race-aasimar-recto.webp|/media/game/triptychs/examples/race-aasimar-verso.webp;;;;;;VRAI;Aasimar|Drakéide d'Airain|Drakéide d'Argent|Drakéide Blanc|Drakéide Bleu|Drakéide de Bronze|Drakéide de Cuivre|Drakéide Noir|Drakéide d'Or|Drakéide Rouge|Drakéide Vert|Elfe - Drows|Elfe - Elfe sylvestre|Elfe - Haut-elfe|Gnome des forêts|Gnome des roches|Goliath - Géants du feu|Goliath - Géants des pierres|Goliath - Géants du givre|Goliath - Géants des collines|Goliath - Géants des nuages|Goliath - Géants des tempêtes|Halfelin|Humain - Bagarreur de tavernes|Humain - Chanceux|Humain - Doué|Humain - Façonneur|Humain - Guérisseur|Humain - Initié à la magie|Humain - Musicien|Humain - Robuste|Humain - à la Sauvagerie Martiale|Humain - Vigilant|Nain|Orc|Tieffelin - Abyssal|Tieffelin - Chthonien|Tieffelin - Infernal;espece
-triptyque-classe;Triptyque de Classe;Class Triptych;29.99;"### Collection complète de classes et sous-classes pour D&D 5e 2024
+triptyque-classe;Triptyque de Classe;Class Triptych;30;"### Collection complète de classes et sous-classes pour D&D 5e 2024
 Un **triptyque personnalisable** contenant toutes les classes et leurs sous-classes de D&D 5e 2024. Chaque carte détaille les capacités, progressions et spécialisations de chaque classe.
 
 **Inclus :**
@@ -250,7 +251,7 @@ A **customizable triptych** containing all classes and their subclasses from D&D
 - Triptych format organized by theme
 
 *Master your class with all necessary equipment!*";Triptyque personnalisable avec toutes les classes et sous-classes de D&D 5e 2024.;Customizable triptych with all D&D 5e 2024 classes and subclasses.;/media/game/triptychs/examples/classe-barbare-recto.webp|/media/game/triptychs/examples/classe-barbare-verso.webp;;;;;;VRAI;Barbare - Voie de l'Arbre-Monde|Barbare - Voie du Berserker|Barbare - Voie du Cœur sauvage|Barbare - Voie du Zélateur|Barde - Collège de la Danse|Barde - Collège du Savoir|Barde - Collège de la Séduction|Barde - Collège de la Vaillance|Clerc - Domaine de la Guerre|Clerc - Domaine de la Lumière|Clerc - Domaine de la Ruse|Clerc - Domaine de la Vie|Druide - Cercle des Astres|Druide - Cercle de la Lune|Druide - Cercle des Mers|Druide - Cercle de la Terre|Ensorceleur - Sorcellerie aberrante|Ensorceleur - Sorcellerie draconique|Ensorceleur - Sorcellerie mécanique|Ensorceleur - Sorcellerie sauvage|Guerrier - Champion|Guerrier - Chevalier occulte|Guerrier - Maître de guerre|Guerrier - Soldat psi|Magicien - Abjurateur|Magicien - Devin|Magicien - Évocateur|Magicien - Illusionniste|Moine - Credo des Éléments|Moine - Credo de la Miséricorde|Moine - Credo de l'Ombre|Moine - Credo de la Paume|Occultiste - Protecteur Archifée|Occultiste - Protecteur Céleste|Occultiste - Protecteur Fiélon|Occultiste - Protecteur Grand Ancien|Paladin - Serment des Anciens|Paladin - Serment de Dévotion|Paladin - Serment de Gloire|Paladin - Serment de Vengeance|Rôdeur - Belluaire|Rôdeur - Chasseur|Rôdeur - Traqueur des ténèbres|Rôdeur - Vagabond féerique|Roublard - Âme acérée|Roublard - Arnaqueur arcanique|Roublard - Assassin|Roublard - Voleur;classe
-triptyque-historique;Triptyque d'Historique;Background Triptych;29.99;"### Collection complète d'historiques pour D&D 5e 2024
+triptyque-historique;Triptyque d'Historique;Background Triptych;30;"### Collection complète d'historiques pour D&D 5e 2024
 Un **triptyque personnalisable** contenant tous les historiques disponibles de D&D 5e 2024. Chaque carte présente les compétences, équipements et traits spéciaux de chaque historique.
 
 **Inclus :**
